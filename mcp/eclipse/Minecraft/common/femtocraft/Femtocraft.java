@@ -28,7 +28,7 @@ import femtocraft.ore.oreTitanium;
 import femtocraft.proxy.CommonProxyFemtocraft;
 
 @Mod(modid = Femtocraft.ID, version = Femtocraft.VERSION)
-@NetworkMod(channels = { Femtocraft.ID }, clientSideRequired = true, serverSideRequired = false)
+@NetworkMod(channels = { Femtocraft.ID }, packetHandler = FemtocraftPacketHandler.class, clientSideRequired = true, serverSideRequired = false)
 public class Femtocraft {
 	public static final String ID = "Femtocraft";
 	public static final String VERSION = "0.1.0";
