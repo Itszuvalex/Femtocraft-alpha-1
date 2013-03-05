@@ -164,25 +164,26 @@ pip-log.txt
 
 
 #Minecraft stuff
-/bin/*
-/conf/*
-/docs/*
-/eclipse/*
-/forge/*
-/jars/*
-/lib/*
-/logs/*
-/modsrc/*
-/reobf/*
-/runtime/*
-/temp/*
+mcp/bin/*
+mcp/conf/*
+mcp/docs/*
+mcp/eclipse/*
+mcp/forge/*
+mcp/jars/*
+mcp/lib/*
+mcp/logs/*
+mcp/modsrc/*
+mcp/reobf/*
+mcp/runtime/*
+mcp/temp/*
 
-/src/minecraft/*
-/src/minecraft_server/*
-/src/common/*
-!/src/common/dries007/
-!/src/common/mcmod.info
-!/src/common/SP.png
+mcp/src/minecraft/*
+mcp/src/minecraft_server/*
+mcp/src/common/*
+!mcp/src/common/dries007/
+!mcp/eclipse/Minecraft/common/*
+!mcp/src/common/mcmod.info
+!mcp/src/common/SP.png
 
 *.bat
 *.sh
