@@ -1,6 +1,4 @@
-package femtocraft;
-
-import java.util.Random;
+package femtocraft.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -8,8 +6,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-public class nanoStone extends Block {
-	public nanoStone(int id, int texture) {
+public class femtoStone extends Block {
+	public femtoStone(int id, int texture) {
 		super(id, texture, Material.iron);
 		setCreativeTab(CreativeTabs.tabBlock);
 	}
