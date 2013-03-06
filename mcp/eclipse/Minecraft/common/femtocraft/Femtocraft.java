@@ -46,6 +46,10 @@ public class Femtocraft {
 	public static Block orePlatinum;
 	public static Block oreThorium;
 	public static Block oreFarenite;
+	public static Block nanoStone;
+	public static Block quantumStone;
+	public static Block femtoStone;
+	public static Block unidentifiedAlloy;
 	
 	//items
 	public static Item ingotTitanium;
@@ -97,6 +101,22 @@ public class Femtocraft {
 		 GameRegistry.registerBlock(oreFarenite, "oreFarenite");
 		 LanguageRegistry.addName(oreFarenite, "Farenite Ore");
 		 OreDictionary.registerOre("oreFarenite", new ItemStack(oreFarenite));
+		 
+		 nanoStone = new nanoStone(Configs.nanoStoneID, 4).setBlockName("nanoStone").setHardness(6.0f).setStepSound(Block.soundMetalFootstep).setResistance(9f);
+		 GameRegistry.registerBlock(nanoStone, "nanoStone");
+		 LanguageRegistry.addName(nanoStone,  "Nanostone");
+		 
+		 quantumStone = new quantumStone(Configs.quantumStoneID, 5).setBlockName("quantumStone").setHardness(7.0f).setStepSound(Block.soundMetalFootstep).setResistance(12f);
+		 GameRegistry.registerBlock(quantumStone, "quantumStone");
+		 LanguageRegistry.addName(quantumStone, "Quantumstone");
+		 
+		 femtoStone = new femtoStone(Configs.femtoStoneID, 6).setBlockName("femtoStone").setHardness(8.0f).setStepSound(Block.soundMetalFootstep).setResistance(15f);
+		 GameRegistry.registerBlock(femtoStone, "femtoStone");
+		 LanguageRegistry.addName(femtoStone, "Femtostone");
+		 
+		 unidentifiedAlloy = new unidentifiedAlloy(Configs.unidentifiedAlloyID, 7).setBlockName("unidentifiedAlloy").setBlockUnbreakable().setStepSound(Block.soundMetalFootstep).setResistance(20f);
+		 GameRegistry.registerBlock(unidentifiedAlloy, "unidentifiedAlloy");
+		 LanguageRegistry.addName(unidentifiedAlloy, "Unidentified Alloy");
 		 
 		 //items
 		 

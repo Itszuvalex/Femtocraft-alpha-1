@@ -25,6 +25,10 @@ public class Configs {
 	public static @CfgId(block=true) int orePlatinumID = 351;
 	public static @CfgId(block=true) int oreThoriumID = 352;
 	public static @CfgId(block=true) int oreFareniteID = 353;
+	public static @CfgId(block=true) int nanoStoneID = 354;
+	public static @CfgId(block=true) int quantumStoneID = 355;
+	public static @CfgId(block=true) int femtoStoneID = 356;
+	public static @CfgId(block=true) int unidentifiedAlloyID = 357;
 	
 	//items
 	public static @CfgId int ingotTitaniumID = 12000;
