@@ -22,8 +22,8 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import femtocraft.blocks.femtoStone;
+import femtocraft.blocks.microStone;
 import femtocraft.blocks.nanoStone;
-import femtocraft.blocks.quantumStone;
 import femtocraft.blocks.unidentifiedAlloy;
 import femtocraft.items.ingotFarenite;
 import femtocraft.items.ingotPlatinum;
@@ -54,8 +54,8 @@ public class Femtocraft {
 	public static Block orePlatinum;
 	public static Block oreThorium;
 	public static Block oreFarenite;
+	public static Block microStone;
 	public static Block nanoStone;
-	public static Block quantumStone;
 	public static Block femtoStone;
 	public static Block unidentifiedAlloy;
 	
@@ -110,13 +110,13 @@ public class Femtocraft {
 		 LanguageRegistry.addName(oreFarenite, "Farenite Ore");
 		 OreDictionary.registerOre("oreFarenite", new ItemStack(oreFarenite));
 		 
-		 nanoStone = new nanoStone(Configs.nanoStoneID, 4).setBlockName("nanoStone").setHardness(6.0f).setStepSound(Block.soundMetalFootstep).setResistance(9f);
-		 GameRegistry.registerBlock(nanoStone, "nanoStone");
-		 LanguageRegistry.addName(nanoStone,  "Nanostone");
+		 microStone = new microStone(Configs.microStoneID, 5).setBlockName("microStone").setHardness(6.0f).setStepSound(Block.soundMetalFootstep).setResistance(9f);
+		 GameRegistry.registerBlock(microStone, "microStone");
+		 LanguageRegistry.addName(microStone,  "Microstone");
 		 
-		 quantumStone = new quantumStone(Configs.quantumStoneID, 5).setBlockName("quantumStone").setHardness(7.0f).setStepSound(Block.soundMetalFootstep).setResistance(12f);
-		 GameRegistry.registerBlock(quantumStone, "quantumStone");
-		 LanguageRegistry.addName(quantumStone, "Quantumstone");
+		 nanoStone = new microStone(Configs.nanoStoneID, 4).setBlockName("nanoStone").setHardness(7.0f).setStepSound(Block.soundMetalFootstep).setResistance(12f);
+		 GameRegistry.registerBlock(nanoStone, "nanoStone");
+		 LanguageRegistry.addName(nanoStone, "Nanostone");
 		 
 		 femtoStone = new femtoStone(Configs.femtoStoneID, 6).setBlockName("femtoStone").setHardness(8.0f).setStepSound(Block.soundMetalFootstep).setResistance(15f);
 		 GameRegistry.registerBlock(femtoStone, "femtoStone");
