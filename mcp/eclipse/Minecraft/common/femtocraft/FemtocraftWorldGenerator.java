@@ -32,43 +32,56 @@ public class FemtocraftWorldGenerator implements IWorldGenerator {
 	}
 
 	private void generateSurface(World world, Random random, int i, int j) {
-		//Titanium
-		for(int k =0; k < 7; k++) {
-			int Xcoord = i + random.nextInt(16);
-			int Ycoord = random.nextInt(40);
-			int Zcoord = j + random.nextInt(16);
-			
-			(new WorldGenMinable(Femtocraft.oreTitanium.blockID, 6)).generate(world, random, Xcoord,  Ycoord,  Zcoord);
-			
+		
+		if(Configs.titaniumGen) {
+			//Titanium
+			for(int k =0; k < 7; k++) {
+				int Xcoord = i + random.nextInt(16);
+				int Ycoord = random.nextInt(40);
+				int Zcoord = j + random.nextInt(16);
+				
+				(new WorldGenMinable(Femtocraft.oreTitanium.blockID, 6))
+						.generate(world, random, Xcoord,  Ycoord,  Zcoord);
+				
+			}
 		}
 		
 		//Platinum
-		for(int k =0; k < 5; k++) {
-			int Xcoord = i + random.nextInt(16);
-			int Ycoord = random.nextInt(30);
-			int Zcoord = j + random.nextInt(16);
-			
-			(new WorldGenMinable(Femtocraft.orePlatinum.blockID, 5)).generate(world, random, Xcoord,  Ycoord,  Zcoord);
+		if (Configs.platinumGen) {
+			for (int k = 0; k < 5; k++) {
+				int Xcoord = i + random.nextInt(16);
+				int Ycoord = random.nextInt(30);
+				int Zcoord = j + random.nextInt(16);
+
+				(new WorldGenMinable(Femtocraft.orePlatinum.blockID, 5))
+						.generate(world, random, Xcoord, Ycoord, Zcoord);
+			}
 		}
 		
-		//Thorium
-		for(int k =0; k < 8; k++) {
-			int Xcoord = i + random.nextInt(16);
-			int Ycoord = random.nextInt(50);
-			int Zcoord = j + random.nextInt(16);
-			
-			(new WorldGenMinable(Femtocraft.oreThorium.blockID, 6)).generate(world, random, Xcoord,  Ycoord,  Zcoord);
-			
+		if (Configs.thoriumGen) {
+			//Thorium
+			for (int k = 0; k < 8; k++) {
+				int Xcoord = i + random.nextInt(16);
+				int Ycoord = random.nextInt(50);
+				int Zcoord = j + random.nextInt(16);
+
+				(new WorldGenMinable(Femtocraft.oreThorium.blockID, 6))
+						.generate(world, random, Xcoord, Ycoord, Zcoord);
+
+			}
 		}
 		
-		//Farenite
-		for(int k =0; k < 10; k++) {
-			int Xcoord = i + random.nextInt(16);
-			int Ycoord = random.nextInt(40);
-			int Zcoord = j + random.nextInt(16);
-			
-			(new WorldGenMinable(Femtocraft.oreFarenite.blockID, 6)).generate(world, random, Xcoord,  Ycoord,  Zcoord);
-			
+		if (Configs.fareniteGen) {
+			//Farenite
+			for (int k = 0; k < 10; k++) {
+				int Xcoord = i + random.nextInt(16);
+				int Ycoord = random.nextInt(40);
+				int Zcoord = j + random.nextInt(16);
+
+				(new WorldGenMinable(Femtocraft.oreFarenite.blockID, 6))
+						.generate(world, random, Xcoord, Ycoord, Zcoord);
+
+			}
 		}
 	}
 

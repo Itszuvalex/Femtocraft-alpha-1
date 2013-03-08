@@ -38,6 +38,12 @@ public class Configs {
 	
 	//bool
 	public static @CfgBool boolean worldGen = true;
+	public static @CfgBool boolean titaniumGen = true;
+	public static @CfgBool boolean platinumGen = true;
+	public static @CfgBool boolean thoriumGen = true;
+	public static @CfgBool boolean fareniteGen = true;
+	
+	public static @CfgBool boolean alloyGen = true;
 
 	public static void  load(Configuration config) {
 		try {
