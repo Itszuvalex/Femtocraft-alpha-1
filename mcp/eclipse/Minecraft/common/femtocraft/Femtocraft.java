@@ -140,7 +140,7 @@ public class Femtocraft {
 		 LanguageRegistry.addName(ingotThorium, "Thorium Ingot");
 		 OreDictionary.registerOre("ingotThorium", new ItemStack(ingotThorium));
 		 
-		 ingotFarenite = new ingotFarenite(Configs.ingotFareniteID).setUnlocalizedName("Farenite");
+		 ingotFarenite = new ingotFarenite(Configs.ingotFareniteID).setUnlocalizedName("ingotFarenite");
 		 LanguageRegistry.addName(ingotFarenite, "Farenite");
 		 OreDictionary.registerOre("ingotFarenite", new ItemStack(ingotFarenite));
 		 
