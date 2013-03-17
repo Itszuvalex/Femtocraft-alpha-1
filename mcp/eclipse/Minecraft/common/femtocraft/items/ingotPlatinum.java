@@ -9,8 +9,4 @@ public class ingotPlatinum  extends Item{
 		setMaxStackSize(64);
 		setCreativeTab(CreativeTabs.tabMisc);
 	}
-	
-	public String getTextureFile() {
-		return "/femtocraft/femtocraft_items.png";
-	}
 }
