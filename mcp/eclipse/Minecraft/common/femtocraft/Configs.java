@@ -71,7 +71,8 @@ public class Configs {
 		} catch(Exception e) {
 			//failed to load configs log
 		} finally {
-			config.save();
+			if(config.hasChanged())
+				config.save();
 		}
 	}
 
