@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public class unidentifiedAlloy extends Block {
 	public unidentifiedAlloy(int id, int texture) {
-		super(id, texture, Material.iron);
+		super(id, Material.iron);
 		setCreativeTab(CreativeTabs.tabBlock);
 	}
 	

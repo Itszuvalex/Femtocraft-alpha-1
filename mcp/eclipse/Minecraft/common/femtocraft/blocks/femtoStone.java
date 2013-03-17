@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public class femtoStone extends Block {
 	public femtoStone(int id, int texture) {
-		super(id, texture, Material.iron);
+		super(id, Material.iron);
 		setCreativeTab(CreativeTabs.tabBlock);
 	}
 	

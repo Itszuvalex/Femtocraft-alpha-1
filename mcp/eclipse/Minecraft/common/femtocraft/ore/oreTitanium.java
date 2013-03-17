@@ -6,7 +6,7 @@ import net.minecraft.creativetab.CreativeTabs;
 public class oreTitanium extends BlockOre{
 
 	public oreTitanium(int id, int texture) {
-		super(id, texture);
+		super(id);
 		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 	

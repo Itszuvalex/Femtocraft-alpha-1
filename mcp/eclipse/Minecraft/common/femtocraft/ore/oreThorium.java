@@ -6,7 +6,7 @@ import net.minecraft.creativetab.CreativeTabs;
 public class oreThorium extends BlockOre{
 
 	public oreThorium(int id, int texture) {
-		super(id, texture);
+		super(id);
 		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 	

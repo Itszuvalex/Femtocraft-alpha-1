@@ -86,61 +86,61 @@ public class Femtocraft {
 
 		//blocks
 		
-		oreTitanium = new oreTitanium(Configs.oreTitaniumID, 0).setBlockName("oreTitanium").setHardness(3.0f).setStepSound(Block.soundStoneFootstep).setResistance(1f);
+		oreTitanium = new oreTitanium(Configs.oreTitaniumID, 0).setHardness(3.0f).setStepSound(Block.soundStoneFootstep).setResistance(1f);
 		 MinecraftForge.setBlockHarvestLevel(oreTitanium, "pickaxe", 2);
 		 GameRegistry.registerBlock(oreTitanium, "oreTitanium");
 		 LanguageRegistry.addName(oreTitanium, "Titanium Ore");
 		 OreDictionary.registerOre("oreTitanium", new ItemStack(oreTitanium));
 		 
-		 orePlatinum = new orePlatinum(Configs.orePlatinumID, 1).setBlockName("orePlatinum").setHardness(3.0f).setStepSound(Block.soundStoneFootstep).setResistance(1f);
+		 orePlatinum = new orePlatinum(Configs.orePlatinumID, 1).setHardness(3.0f).setStepSound(Block.soundStoneFootstep).setResistance(1f);
 		 MinecraftForge.setBlockHarvestLevel(orePlatinum, "pickaxe", 2);
 		 GameRegistry.registerBlock(orePlatinum, "orePlatinum");
 		 LanguageRegistry.addName(orePlatinum, "Platinum Ore");
 		 OreDictionary.registerOre("orePlatinum", new ItemStack(orePlatinum));
 		 
-		 oreThorium = new oreThorium(Configs.oreThoriumID, 2).setBlockName("oreThorium").setHardness(3.0f).setStepSound(Block.soundStoneFootstep).setResistance(1f);
+		 oreThorium = new oreThorium(Configs.oreThoriumID, 2).setHardness(3.0f).setStepSound(Block.soundStoneFootstep).setResistance(1f);
 		 MinecraftForge.setBlockHarvestLevel(oreThorium, "pickaxe", 2);
 		 GameRegistry.registerBlock(oreThorium, "oreThorium");
 		 LanguageRegistry.addName(oreThorium, "Thorium Ore");
 		 OreDictionary.registerOre("oreThorium", new ItemStack(oreThorium));
 		 
-		 oreFarenite = new oreFarenite(Configs.oreFareniteID, 3).setBlockName("oreFarenite").setHardness(3.0f).setStepSound(Block.soundStoneFootstep).setResistance(1f);
+		 oreFarenite = new oreFarenite(Configs.oreFareniteID, 3).setHardness(3.0f).setStepSound(Block.soundStoneFootstep).setResistance(1f);
 		 MinecraftForge.setBlockHarvestLevel(oreFarenite, "pickaxe", 2);
 		 GameRegistry.registerBlock(oreFarenite, "oreFarenite");
 		 LanguageRegistry.addName(oreFarenite, "Farenite Ore");
 		 OreDictionary.registerOre("oreFarenite", new ItemStack(oreFarenite));
 		 
-		 microStone = new microStone(Configs.microStoneID, 5).setBlockName("microStone").setHardness(6.0f).setStepSound(Block.soundMetalFootstep).setResistance(9f);
+		 microStone = new microStone(Configs.microStoneID, 5).setHardness(6.0f).setStepSound(Block.soundMetalFootstep).setResistance(9f);
 		 GameRegistry.registerBlock(microStone, "microStone");
 		 LanguageRegistry.addName(microStone,  "Microstone");
 		 
-		 nanoStone = new microStone(Configs.nanoStoneID, 4).setBlockName("nanoStone").setHardness(7.0f).setStepSound(Block.soundMetalFootstep).setResistance(12f);
+		 nanoStone = new microStone(Configs.nanoStoneID, 4).setHardness(7.0f).setStepSound(Block.soundMetalFootstep).setResistance(12f);
 		 GameRegistry.registerBlock(nanoStone, "nanoStone");
 		 LanguageRegistry.addName(nanoStone, "Nanostone");
 		 
-		 femtoStone = new femtoStone(Configs.femtoStoneID, 6).setBlockName("femtoStone").setHardness(8.0f).setStepSound(Block.soundMetalFootstep).setResistance(15f);
+		 femtoStone = new femtoStone(Configs.femtoStoneID, 6).setHardness(8.0f).setStepSound(Block.soundMetalFootstep).setResistance(15f);
 		 GameRegistry.registerBlock(femtoStone, "femtoStone");
 		 LanguageRegistry.addName(femtoStone, "Femtostone");
 		 
-		 unidentifiedAlloy = new unidentifiedAlloy(Configs.unidentifiedAlloyID, 7).setBlockName("unidentifiedAlloy").setBlockUnbreakable().setStepSound(Block.soundMetalFootstep).setResistance(20f);
+		 unidentifiedAlloy = new unidentifiedAlloy(Configs.unidentifiedAlloyID, 7).setBlockUnbreakable().setStepSound(Block.soundMetalFootstep).setResistance(20f);
 		 GameRegistry.registerBlock(unidentifiedAlloy, "unidentifiedAlloy");
 		 LanguageRegistry.addName(unidentifiedAlloy, "Unidentified Alloy");
 		 
 		 //items
 		 
-		 ingotTitanium = new ingotTitanium(Configs.ingotTitaniumID).setIconIndex(0).setItemName("ingotTitanium");
+		 ingotTitanium = new ingotTitanium(Configs.ingotTitaniumID);
 		 LanguageRegistry.addName(ingotTitanium, "Titanium Ingot");
 		 OreDictionary.registerOre("ingotTitanium", new ItemStack(ingotTitanium));
 		
-		 ingotPlatinum = new ingotPlatinum(Configs.ingotPlatinumID).setIconIndex(1).setItemName("ingotPlatinum");
+		 ingotPlatinum = new ingotPlatinum(Configs.ingotPlatinumID);
 		 LanguageRegistry.addName(ingotPlatinum, "Platinum Ingot");
 		 OreDictionary.registerOre("ingotPlatinum", new ItemStack(ingotPlatinum));
 		 
-		 ingotThorium = new ingotThorium(Configs.ingotThoriumID).setIconIndex(2).setItemName("ingotThorium");
+		 ingotThorium = new ingotThorium(Configs.ingotThoriumID);
 		 LanguageRegistry.addName(ingotThorium, "Thorium Ingot");
 		 OreDictionary.registerOre("ingotThorium", new ItemStack(ingotThorium));
 		 
-		 ingotFarenite = new ingotFarenite(Configs.ingotFareniteID).setIconIndex(3).setItemName("Farenite");
+		 ingotFarenite = new ingotFarenite(Configs.ingotFareniteID);
 		 LanguageRegistry.addName(ingotFarenite, "Farenite");
 		 OreDictionary.registerOre("ingotFarenite", new ItemStack(ingotFarenite));
 		 

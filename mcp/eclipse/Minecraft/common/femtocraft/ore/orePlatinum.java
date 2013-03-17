@@ -7,7 +7,7 @@ import net.minecraft.creativetab.CreativeTabs;
 public class orePlatinum extends BlockOre{
 
 	public orePlatinum(int id, int texture) {
-		super(id, texture);
+		super(id);
 		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 	

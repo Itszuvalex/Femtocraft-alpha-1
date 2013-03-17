@@ -10,7 +10,7 @@ import net.minecraft.creativetab.CreativeTabs;
 public class oreFarenite extends BlockOre{
 
 	public oreFarenite(int id, int texture) {
-		super(id, texture);
+		super(id);
 		setCreativeTab(CreativeTabs.tabBlock);
 	}
 	

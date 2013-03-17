@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 public class microStone extends Block {
 	public microStone(int id, int texture) {
-		super(id, texture, Material.iron);
+		super(id, Material.iron);
 		setCreativeTab(CreativeTabs.tabBlock);
 	}
 	
