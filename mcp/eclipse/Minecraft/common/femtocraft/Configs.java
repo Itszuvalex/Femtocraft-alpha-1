@@ -29,6 +29,8 @@ public class Configs {
 	public static @CfgId(block=true) int nanoStoneID = 355;
 	public static @CfgId(block=true) int femtoStoneID = 356;
 	public static @CfgId(block=true) int unidentifiedAlloyID = 357;
+	public static @CfgId(block=true) int FemtopowerCableID = 358;
+	public static @CfgId(block=true) int FemtopowerGeneratorID = 359;
 	
 	//items
 	public static @CfgId int ingotTitaniumID = 12000;

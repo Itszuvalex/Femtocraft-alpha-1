@@ -3,6 +3,7 @@ package femtocraft;
 import java.util.logging.Logger;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
@@ -23,7 +24,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import femtocraft.blocks.femtoStone;
 import femtocraft.blocks.microStone;
-import femtocraft.blocks.nanoStone;
 import femtocraft.blocks.unidentifiedAlloy;
 import femtocraft.items.ingotFarenite;
 import femtocraft.items.ingotPlatinum;
@@ -33,6 +33,10 @@ import femtocraft.ore.oreFarenite;
 import femtocraft.ore.orePlatinum;
 import femtocraft.ore.oreThorium;
 import femtocraft.ore.oreTitanium;
+import femtocraft.power.FemtopowerCable;
+import femtocraft.power.FemtopowerGenerator;
+import femtocraft.power.TileEntity.FemtopowerProducer;
+import femtocraft.power.TileEntity.FemtopowerTile;
 import femtocraft.proxy.CommonProxyFemtocraft;
 
 @Mod(modid = Femtocraft.ID, version = Femtocraft.VERSION)
@@ -58,6 +62,8 @@ public class Femtocraft {
 	public static Block nanoStone;
 	public static Block femtoStone;
 	public static Block unidentifiedAlloy;
+	public static Block FemtopowerCable;
+	public static Block FemtopowerGenerator;
 	
 	//items
 	public static Item ingotTitanium;
@@ -126,6 +132,14 @@ public class Femtocraft {
 		 GameRegistry.registerBlock(unidentifiedAlloy, "unidentifiedAlloy");
 		 LanguageRegistry.addName(unidentifiedAlloy, "Unidentified Alloy");
 		 
+		 FemtopowerCable = new FemtopowerCable(Configs.FemtopowerCableID, Material.rock).setUnlocalizedName("FemtopowerCable").setStepSound(Block.soundStoneFootstep);
+		 GameRegistry.registerBlock(FemtopowerCable, "FemtopowerCable");
+		 LanguageRegistry.addName(FemtopowerCable, "Femtopower Cable");
+		 
+		 FemtopowerGenerator = new FemtopowerGenerator(Configs.FemtopowerGeneratorID, Material.rock).setUnlocalizedName("FemtopowerGenerator").setStepSound(Block.soundStoneFootstep);
+		 GameRegistry.registerBlock(FemtopowerGenerator, "FemtopowerGenerator");
+		 LanguageRegistry.addName(FemtopowerGenerator, "Femtopower Generator");
+		 
 		 //items
 		 
 		 ingotTitanium = new ingotTitanium(Configs.ingotTitaniumID).setUnlocalizedName("ingotTitanium");
@@ -145,6 +159,10 @@ public class Femtocraft {
 		 OreDictionary.registerOre("ingotFarenite", new ItemStack(ingotFarenite));
 		 
 		 registerRecipes();
+		 
+		 //Tile Entities
+		 GameRegistry.registerTileEntity(FemtopowerTile.class, "FemtopowerTile");
+		 GameRegistry.registerTileEntity(FemtopowerProducer.class, "FemtopowerProducer");
 		 
 		// GameRegistry.registerTileEntity(TileEntity.class, "myTile");
 

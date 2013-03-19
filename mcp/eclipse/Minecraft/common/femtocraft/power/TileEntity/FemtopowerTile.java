@@ -1,4 +1,4 @@
-package femtocraft.power;
+package femtocraft.power.TileEntity;
 
 import java.util.Arrays;
 
@@ -70,7 +70,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
        int numToFill = 6;
        float[] percentFilled = new float[6];
        Arrays.fill(percentFilled, 1.0f);
-       float maxSpreadThisTick = (float)currentStorage * maxPowerPerTick;
+       int maxSpreadThisTick = (int)((float)currentStorage * maxPowerPerTick);
        
        //Get rid of easy knockouts - afterwards we can now safely assume casts to IFemtopowerContainer
        //from all nearby tileentities that remain true in willCharge
@@ -160,10 +160,13 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 		   int locy = this.yCoord + offset.offsetY;
 		   int locz = this.zCoord + offset.offsetZ;
 		   
+		   int amountToFill = (int)((float)currentStorage * maxSizePackets);
+		   amountToFill = amountToFill < maxSpreadThisTick ? amountToFill : maxSpreadThisTick;
+		   
 		   //Having passed initial check, and due to this now being this block's
 		   //update function, can safely assume adjacent blocks remain the same (unless it does simultaneous updates)
 		   IFemtopowerContainer container = (IFemtopowerContainer)this.worldObj.getBlockTileEntity(locx, locy, locz);
-		   maxPowerPerTick -= container.charge(offset.getOpposite(), (int)((float)currentStorage * maxSizePackets));
+		   maxPowerPerTick -= container.charge(offset.getOpposite(), amountToFill);
        }
 		   
     }
@@ -184,5 +187,5 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
        par1NBTTagCompound.setInteger("currentStorage", currentStorage);
        par1NBTTagCompound.setInteger("maxStorage", maxStorage);
     }
-
+    
 }
