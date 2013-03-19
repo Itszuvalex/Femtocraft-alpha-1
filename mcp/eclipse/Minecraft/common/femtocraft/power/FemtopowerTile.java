@@ -69,6 +69,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
        Arrays.fill(willCharge, Boolean.TRUE);
        int numToFill = 6;
        float[] percentFilled = new float[6];
+       Arrays.fill(percentFilled, 1.0f);
        float maxSpreadThisTick = (float)currentStorage * maxPowerPerTick;
        
        //Get rid of easy knockouts - afterwards we can now safely assume casts to IFemtopowerContainer
