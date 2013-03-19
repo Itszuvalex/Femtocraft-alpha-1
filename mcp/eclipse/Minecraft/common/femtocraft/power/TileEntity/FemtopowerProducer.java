@@ -3,6 +3,18 @@ package femtocraft.power.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
 public class FemtopowerProducer extends FemtopowerTile {
+	@Override
+	public float getFillPercentageForCharging(ForgeDirection from) {
+		// TODO Auto-generated method stub
+		return 1.f;
+	}
+
+	@Override
+	public boolean canCharge(ForgeDirection from) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	private int amountPerTick;
 	
 	
