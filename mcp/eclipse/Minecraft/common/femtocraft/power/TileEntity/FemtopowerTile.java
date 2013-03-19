@@ -176,7 +176,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
  		   
  		   TileEntity checkTile = this.worldObj.getBlockTileEntity(locx, locy, locz);
  		   
- 		   if(checkTile != null && checkTile instanceof FemtopowerTile) {
+ 		   if(checkTile != null && checkTile instanceof IFemtopowerContainer) {
  			   connections[j] = true;
  		   }
  	   }
