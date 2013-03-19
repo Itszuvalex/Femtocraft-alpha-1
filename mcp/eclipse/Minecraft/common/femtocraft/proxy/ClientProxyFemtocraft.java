@@ -9,8 +9,5 @@ public class ClientProxyFemtocraft extends CommonProxyFemtocraft {
 		// MinecraftForgeClient.preloadTexture(texture);
 		// RenderingRegistry.registerEntityRenderingHandler(entityClass, renderer);
 		// registerBlockHandler
-		
-		MinecraftForgeClient.preloadTexture("/femtocraft/femtocraft_terrain.png");
-		MinecraftForgeClient.preloadTexture("/femtocraft/femtocraft_items.png");
 	}
 }
