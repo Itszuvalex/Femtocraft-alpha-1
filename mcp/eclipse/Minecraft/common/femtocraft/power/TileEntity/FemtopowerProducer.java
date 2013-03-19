@@ -13,7 +13,8 @@ public class FemtopowerProducer extends FemtopowerTile {
 
 	@Override
 	 public void updateEntity() {
-		charge(ForgeDirection.UNKNOWN, amountPerTick);
+		if(!this.worldObj.isRemote)
+			charge(ForgeDirection.UNKNOWN, amountPerTick);
 		super.updateEntity();
 	}
 	

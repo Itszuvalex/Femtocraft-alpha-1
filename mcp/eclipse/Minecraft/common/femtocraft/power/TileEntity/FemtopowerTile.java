@@ -2,9 +2,7 @@ package femtocraft.power.TileEntity;
 
 import java.util.Arrays;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import femtocraft.api.IFemtopowerContainer;
@@ -20,8 +18,8 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 	public FemtopowerTile(int storage) {
 		currentStorage = 0;
 		maxStorage = storage;
-		maxPowerPerTick = .5f;
-		maxSizePackets = .5f;   //Yes this is the same as maxpertick, this is for testing purposes only
+		maxPowerPerTick = .05f;
+		maxSizePackets = .05f;   //Yes this is the same as maxpertick, this is for testing purposes only
 		distributionBuffer = .01f;
 		connections = new boolean[6];
 		Arrays.fill(connections, false);
@@ -64,13 +62,15 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 	 public void updateEntity()
     {
 		//Don't do anything for empty containers
-		if(currentStorage <= 0) {
+		if(currentStorage <= 0 || this.worldObj.isRemote) {
 			return;
 		}
 		
-       boolean[] willCharge = Arrays.copyOf(connections, 6);
-       int numToFill = 0;
-       for(int i = 0; i < 6; i++) {if(willCharge[i]) numToFill++;}
+     //  boolean[] willCharge = Arrays.copyOf(connections, 6);
+		boolean[] willCharge = new boolean[6];
+		Arrays.fill(willCharge, true);
+       int numToFill = 6;
+       //for(int i = 0; i < 6; i++) {if(willCharge[i]) numToFill++;}
        float[] percentFilled = new float[6];
        Arrays.fill(percentFilled, 1.0f);
        int maxSpreadThisTick = (int)((float)currentStorage * maxPowerPerTick);
@@ -88,6 +88,16 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 			   int locy = this.yCoord + offset.offsetY;
 			   int locz = this.zCoord + offset.offsetZ;
 			   
+	 		   TileEntity checkTile = this.worldObj.getBlockTileEntity(locx, locy, locz);
+	 		   
+	 		   if(checkTile == null || ! (checkTile instanceof IFemtopowerContainer)) {
+				   willCharge[j] = false;
+				   numToFill--;
+				   percentFilled[j] = 1.f;
+				   continue;
+	 		   }
+	 			   
+			   
 			   //Having passed initial check, and due to this now being this block's
 			   //update function, can safely assume adjacent blocks remain the same (unless it does simultaneous updates)
 			   IFemtopowerContainer container = (IFemtopowerContainer)this.worldObj.getBlockTileEntity(locx, locy, locz);
@@ -100,7 +110,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 				   if((this.getFillPercentage() - percentFilled[j]) < distributionBuffer) {
 					   willCharge[j] = false;
 					   numToFill--;
-					   percentFilled[j] = 1f;
+					   percentFilled[j] = 1.f;
 					   continue;
 				   }
 			   }
@@ -108,17 +118,17 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 				   //Update as we fill
 				   willCharge[j] = false;
 				   numToFill--;
-				   percentFilled[j] = 1f;
+				   percentFilled[j] = 1.f;
 				   continue;
 			   }
 		   }
 		   
 		   //Find lowest % filled from
 		   int lowest = 0;
-		   float lowestAmt = 1f;
+		   float lowestAmt = 1.f;
 		   
 		   for(int i = 0; i < 6; i++) {
-			   if(percentFilled[i] < lowestAmt) {
+			   if(willCharge[i] && percentFilled[i] < lowestAmt) {
 				   lowestAmt = percentFilled[i];
 				   lowest = i;
 			   }
@@ -166,9 +176,6 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
     
     public void checkConnections() {
     	for(int j = 0; j < 6; j++) {
- 		   //Once it won't accept power, nothing will happen this tick,
- 		   //Inside this update, that could make it accept power again
- 		   
  		   ForgeDirection offset = ForgeDirection.getOrientation(j);
  		   int locx = this.xCoord + offset.offsetX;
  		   int locy = this.yCoord + offset.offsetY;
