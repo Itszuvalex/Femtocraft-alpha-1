@@ -24,6 +24,8 @@ public interface IFemtopowerContainer {
 	//I.E. return getFillPercentage() < .25f ?  getFillPercentage() : .25f;
 	public float getFillPercentageForCharging(ForgeDirection from);
 	
+	public float getFillPercentageForOutput(ForgeDirection to);
+	
 	//Returns true if container has room and can accept charging from given direction, false otherwise
 	public boolean canCharge(ForgeDirection from);
 	

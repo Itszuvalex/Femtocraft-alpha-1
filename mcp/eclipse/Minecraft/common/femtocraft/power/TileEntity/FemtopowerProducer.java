@@ -20,9 +20,14 @@ public class FemtopowerProducer extends FemtopowerTile {
 	
 	@Override
 	public float getFillPercentageForCharging(ForgeDirection from) {
-		return 1.f;
+		return 1.0f;
 	}
 
+	@Override
+	public float getFillPercentageForOutput(ForgeDirection to) {
+		return 1.0f;
+	}
+	
 	@Override
 	public boolean canCharge(ForgeDirection from) {
 		return false;

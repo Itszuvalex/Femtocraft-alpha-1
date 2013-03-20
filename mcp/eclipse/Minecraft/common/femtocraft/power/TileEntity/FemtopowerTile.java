@@ -44,6 +44,11 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 	public float getFillPercentageForCharging(ForgeDirection from) {
 		return getFillPercentage();
 	}
+	
+	@Override
+	public float getFillPercentageForOutput(ForgeDirection to) {
+		return getFillPercentage();
+	}
 
 	@Override
 	public boolean canCharge(ForgeDirection from) {
@@ -61,21 +66,23 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 	@Override
 	 public void updateEntity()
     {
+		checkConnections();
+		
 		//Don't do anything for empty containers
 		if(currentStorage <= 0 || this.worldObj.isRemote) {
 			return;
 		}
 		
-     //  boolean[] willCharge = Arrays.copyOf(connections, 6);
-		boolean[] willCharge = new boolean[6];
-		Arrays.fill(willCharge, true);
-       int numToFill = 6;
-       //for(int i = 0; i < 6; i++) {if(willCharge[i]) numToFill++;}
+        boolean[] willCharge = Arrays.copyOf(connections, 6);
+		//boolean[] willCharge = new boolean[6];
+		//Arrays.fill(willCharge, true);
+       int numToFill = 0;
+       for(int i = 0; i < 6; i++) {if(willCharge[i]) numToFill++;}
        float[] percentFilled = new float[6];
        Arrays.fill(percentFilled, 1.0f);
-    //   int maxSpreadThisTick = (int)((float)currentStorage * maxPowerPerTick);
+       int maxSpreadThisTick = (int)(((float)currentStorage) * maxPowerPerTick);
        
-       while(/*maxSpreadThisTick >0 &&*/ numToFill > 0) {
+       while(maxSpreadThisTick >0 && numToFill > 0) {
 		   for(int j = 0; j < 6; j++) {
 			   //Once it won't accept power, nothing will happen this tick,
 			   //Inside this update, that could make it accept power again
@@ -107,7 +114,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 				   //So it will never attempt to fill that pipe again
 				   percentFilled[j] = container.getFillPercentageForCharging(offset.getOpposite());
 				   
-				   if((this.getFillPercentage() - percentFilled[j]) < distributionBuffer) {
+				   if((this.getFillPercentageForOutput(offset) - percentFilled[j]) < distributionBuffer) {
 					   willCharge[j] = false;
 					   numToFill--;
 					   percentFilled[j] = 1.f;
@@ -140,18 +147,17 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 		   int locz = this.zCoord + offset.offsetZ;
 		   
 		   int amountToFill = (int)((float)currentStorage * maxSizePackets);
-		//   amountToFill = amountToFill < maxSpreadThisTick ? amountToFill : maxSpreadThisTick;
-		   amountToFill = 10;
+		   amountToFill = amountToFill < maxSpreadThisTick ? amountToFill : maxSpreadThisTick;
+		   amountToFill = amountToFill < currentStorage ? amountToFill : currentStorage;
 		   //Having passed initial check, and due to this now being this block's
 		   //update function, can safely assume adjacent blocks remain the same (unless it does simultaneous updates)
 		   IFemtopowerContainer container = (IFemtopowerContainer)this.worldObj.getBlockTileEntity(locx, locy, locz);
-		   
 		   
 		   int powerconsumed = 0;
 		   if(container != null)
 			   powerconsumed = container.charge(offset.getOpposite(), amountToFill);
 			   this.currentStorage -= powerconsumed;
-			   maxPowerPerTick -= powerconsumed;
+			   maxSpreadThisTick -= powerconsumed;
        }
 		   
     }
