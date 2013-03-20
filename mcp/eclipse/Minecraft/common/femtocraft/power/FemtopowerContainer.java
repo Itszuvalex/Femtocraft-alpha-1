@@ -24,7 +24,7 @@ public class FemtopowerContainer extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new FemtopowerTile(0);
+		return new FemtopowerTile();
 	}
 	
 	/* (non-Javadoc)

@@ -6,9 +6,9 @@ public class FemtopowerProducer extends FemtopowerTile {
 	private int amountPerTick;
 	
 	
-	public FemtopowerProducer(int storage, int perTick) {
-		super(storage);
-		amountPerTick = perTick;
+	public FemtopowerProducer() {
+		super();
+		amountPerTick = 10;
 	}
 
 	@Override

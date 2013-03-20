@@ -10,4 +10,11 @@ public class ClientProxyFemtocraft extends CommonProxyFemtocraft {
 		// RenderingRegistry.registerEntityRenderingHandler(entityClass, renderer);
 		// registerBlockHandler
 	}
+	
+	@Override
+	public void registerTileEntities() {
+		super.registerTileEntities();
+	}
+	
+	
 }

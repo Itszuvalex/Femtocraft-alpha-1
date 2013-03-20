@@ -17,7 +17,7 @@ public class FemtopowerGenerator extends FemtopowerContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new FemtopowerProducer(1000, 10);
+		return new FemtopowerProducer();
 	}
 	
 	@Override

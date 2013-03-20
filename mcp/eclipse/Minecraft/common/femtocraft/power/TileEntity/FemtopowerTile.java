@@ -15,9 +15,9 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 	private float distributionBuffer;
 	private boolean[] connections;
 	
-	public FemtopowerTile(int storage) {
+	public FemtopowerTile() {
 		currentStorage = 0;
-		maxStorage = storage;
+		maxStorage = 1000;
 		maxPowerPerTick = .05f;
 		maxSizePackets = .05f;   //Yes this is the same as maxpertick, this is for testing purposes only
 		distributionBuffer = .01f;
@@ -165,8 +165,8 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 	 public void readFromNBT(NBTTagCompound par1NBTTagCompound)
     {
        super.readFromNBT(par1NBTTagCompound);
-       this.currentStorage = par1NBTTagCompound.getInteger("currentStorage");
-       this.maxStorage = par1NBTTagCompound.getInteger("maxStorage");
+       currentStorage = par1NBTTagCompound.getInteger("currentStorage");
+       maxStorage = par1NBTTagCompound.getInteger("maxStorage");
     }
 
     /**

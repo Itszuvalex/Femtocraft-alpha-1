@@ -17,7 +17,7 @@ public class FemtopowerCable extends FemtopowerContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new FemtopowerTile(1000);
+		return new FemtopowerTile();
 	}
 	
 	@Override

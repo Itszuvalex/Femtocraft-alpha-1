@@ -79,6 +79,8 @@ public class Femtocraft {
 		Configuration config = new Configuration(
 				event.getSuggestedConfigurationFile());
 		Configs.load(config);
+		
+		Femtocraft.proxy.registerTileEntities();
 	}
 	
 	@Init
@@ -159,10 +161,6 @@ public class Femtocraft {
 		 OreDictionary.registerOre("ingotFarenite", new ItemStack(ingotFarenite));
 		 
 		 registerRecipes();
-		 
-		 //Tile Entities
-		 GameRegistry.registerTileEntity(FemtopowerTile.class, "FemtopowerTile");
-		 GameRegistry.registerTileEntity(FemtopowerProducer.class, "FemtopowerProducer");
 		 
 		// GameRegistry.registerTileEntity(TileEntity.class, "myTile");
 
