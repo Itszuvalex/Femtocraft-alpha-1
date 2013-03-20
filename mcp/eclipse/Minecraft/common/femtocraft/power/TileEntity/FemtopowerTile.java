@@ -73,9 +73,9 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
        //for(int i = 0; i < 6; i++) {if(willCharge[i]) numToFill++;}
        float[] percentFilled = new float[6];
        Arrays.fill(percentFilled, 1.0f);
-       int maxSpreadThisTick = (int)((float)currentStorage * maxPowerPerTick);
+    //   int maxSpreadThisTick = (int)((float)currentStorage * maxPowerPerTick);
        
-       while(maxSpreadThisTick >0 && numToFill > 0) {
+       while(/*maxSpreadThisTick >0 &&*/ numToFill > 0) {
 		   for(int j = 0; j < 6; j++) {
 			   //Once it won't accept power, nothing will happen this tick,
 			   //Inside this update, that could make it accept power again
@@ -102,7 +102,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 			   //update function, can safely assume adjacent blocks remain the same (unless it does simultaneous updates)
 			   IFemtopowerContainer container = (IFemtopowerContainer)this.worldObj.getBlockTileEntity(locx, locy, locz);
 			   
-			   if(container != null && container.canCharge(ForgeDirection.getOrientation(j).getOpposite())) {
+			   if(container != null && container.canCharge(offset.getOpposite())) {
 				   //Check for within buffer range - if so, this pipe will only get less filled from here on out
 				   //So it will never attempt to fill that pipe again
 				   percentFilled[j] = container.getFillPercentageForCharging(offset.getOpposite());
@@ -140,8 +140,8 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 		   int locz = this.zCoord + offset.offsetZ;
 		   
 		   int amountToFill = (int)((float)currentStorage * maxSizePackets);
-		   amountToFill = amountToFill < maxSpreadThisTick ? amountToFill : maxSpreadThisTick;
-		   
+		//   amountToFill = amountToFill < maxSpreadThisTick ? amountToFill : maxSpreadThisTick;
+		   amountToFill = 10;
 		   //Having passed initial check, and due to this now being this block's
 		   //update function, can safely assume adjacent blocks remain the same (unless it does simultaneous updates)
 		   IFemtopowerContainer container = (IFemtopowerContainer)this.worldObj.getBlockTileEntity(locx, locy, locz);
