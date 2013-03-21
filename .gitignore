@@ -183,6 +183,7 @@ mcp/src/common/*
 !mcp/eclipse/Minecraft/common/femtocraft/*
 !mcp/src/common/mcmod.info
 !mcp/src/common/SP.png
+!mcp/src/minecraft/mods/Femtocraft/textures/*
 
 *.bat
 *.sh

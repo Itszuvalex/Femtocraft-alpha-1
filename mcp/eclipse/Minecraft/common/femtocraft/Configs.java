@@ -38,6 +38,11 @@ public class Configs {
 	public static @CfgId int ingotThoriumID = 12002;
 	public static @CfgId int ingotFareniteID = 12003;
 	
+	//Produce
+	public static @CfgId int tomatoSeedID = 12070;
+	public static @CfgId int tomatoID = 12071;
+	
+	
 	//bool
 	public static @CfgBool boolean worldGen = true;
 	public static @CfgBool boolean titaniumGen = true;

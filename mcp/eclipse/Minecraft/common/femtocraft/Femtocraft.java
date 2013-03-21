@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
@@ -29,6 +30,8 @@ import femtocraft.items.ingotFarenite;
 import femtocraft.items.ingotPlatinum;
 import femtocraft.items.ingotThorium;
 import femtocraft.items.ingotTitanium;
+import femtocraft.farming.produce.Tomato;
+import femtocraft.farming.seeds.tomatoSeed;
 import femtocraft.ore.oreFarenite;
 import femtocraft.ore.orePlatinum;
 import femtocraft.ore.oreThorium;
@@ -51,6 +54,8 @@ public class Femtocraft {
 	@SidedProxy(clientSide = "femtocraft.proxy.ClientProxyFemtocraft", serverSide = "femtocraft.proxy.CommonProxyFemtocraft")
 	public static CommonProxyFemtocraft proxy;
 
+	public static CreativeTabs femtocraftTab = new FemtocraftCreativeTab("Femtocraft");
+	
 	public static Logger logger;
 
 	//blocks
@@ -71,6 +76,10 @@ public class Femtocraft {
 	public static Item ingotThorium;
 	public static Item ingotFarenite;
 	
+	//Produce
+	public static Item tomatoSeed;
+	public static Item tomato;
+	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
 		logger = Logger.getLogger(ID);
@@ -90,6 +99,10 @@ public class Femtocraft {
 		if(Configs.worldGen) {
 			GameRegistry.registerWorldGenerator(new FemtocraftWorldGenerator());
 		}
+		
+		//Change the creative tab name
+		LanguageRegistry.instance().addStringLocalization("itemGroup.Femtocraft", "en_US", "Femtocraft");
+		
 		// item = new Item(Configs.itemId);
 
 		//blocks
@@ -159,6 +172,16 @@ public class Femtocraft {
 		 ingotFarenite = new ingotFarenite(Configs.ingotFareniteID).setUnlocalizedName("ingotFarenite");
 		 LanguageRegistry.addName(ingotFarenite, "Farenite");
 		 OreDictionary.registerOre("ingotFarenite", new ItemStack(ingotFarenite));
+		 
+		 //Produce
+		 tomatoSeed = new tomatoSeed(Configs.tomatoSeedID).setUnlocalizedName("tomatoSeed");
+		 LanguageRegistry.addName(tomatoSeed, "Tomato Seeds");
+		 GameRegistry.registerItem(tomatoSeed, "Tomato Seeds");
+		 
+		 tomato = new Tomato(Configs.tomatoID).setUnlocalizedName("tomato");
+		 LanguageRegistry.addName(tomato, "Tomato");
+		 GameRegistry.registerItem(tomato, "Tomato");
+		 
 		 
 		 registerRecipes();
 		 
