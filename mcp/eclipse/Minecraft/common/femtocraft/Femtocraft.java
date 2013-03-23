@@ -25,21 +25,20 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import femtocraft.blocks.femtoStone;
 import femtocraft.blocks.microStone;
+import femtocraft.blocks.nanoStone;
 import femtocraft.blocks.unidentifiedAlloy;
+import femtocraft.farming.produce.Tomato;
+import femtocraft.farming.seeds.tomatoSeed;
 import femtocraft.items.ingotFarenite;
 import femtocraft.items.ingotPlatinum;
 import femtocraft.items.ingotThorium;
 import femtocraft.items.ingotTitanium;
-import femtocraft.farming.produce.Tomato;
-import femtocraft.farming.seeds.tomatoSeed;
 import femtocraft.ore.oreFarenite;
 import femtocraft.ore.orePlatinum;
 import femtocraft.ore.oreThorium;
 import femtocraft.ore.oreTitanium;
 import femtocraft.power.FemtopowerCable;
 import femtocraft.power.FemtopowerGenerator;
-import femtocraft.power.TileEntity.FemtopowerProducer;
-import femtocraft.power.TileEntity.FemtopowerTile;
 import femtocraft.proxy.CommonProxyFemtocraft;
 
 @Mod(modid = Femtocraft.ID, version = Femtocraft.VERSION)
@@ -135,7 +134,7 @@ public class Femtocraft {
 		 GameRegistry.registerBlock(microStone, "microStone");
 		 LanguageRegistry.addName(microStone,  "Microstone");
 		 
-		 nanoStone = new microStone(Configs.nanoStoneID, 4).setUnlocalizedName("nanoStone").setHardness(7.0f).setStepSound(Block.soundMetalFootstep).setResistance(12f);
+		 nanoStone = new nanoStone(Configs.nanoStoneID, 4).setUnlocalizedName("nanoStone").setHardness(7.0f).setStepSound(Block.soundMetalFootstep).setResistance(12f);
 		 GameRegistry.registerBlock(nanoStone, "nanoStone");
 		 LanguageRegistry.addName(nanoStone, "Nanostone");
 		 
