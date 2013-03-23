@@ -4,6 +4,7 @@ import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.Femtocraft;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -15,7 +16,7 @@ import net.minecraft.world.World;
 public class microStone extends Block {
 	public microStone(int id, int texture) {
 		super(id, Material.iron);
-		setCreativeTab(CreativeTabs.tabBlock);
+		setCreativeTab(Femtocraft.femtocraftTab);
 	}
 	
 	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {

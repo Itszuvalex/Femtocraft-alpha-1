@@ -1,5 +1,6 @@
 package femtocraft.items;
 
+import femtocraft.Femtocraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -8,7 +9,7 @@ public class ingotTitanium  extends Item{
 	public ingotTitanium(int id) {
 		super(id);
 		setMaxStackSize(64);
-		setCreativeTab(CreativeTabs.tabMisc);
+		setCreativeTab(Femtocraft.femtocraftTab);
 	}
 	
 	public void func_94581_a(IconRegister par1IconRegister)

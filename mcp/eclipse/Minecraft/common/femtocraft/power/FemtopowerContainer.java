@@ -19,7 +19,6 @@ public class FemtopowerContainer extends BlockContainer {
 
 	public FemtopowerContainer(int par1, Material par2Material) {
 		super(par1, par2Material);
-		setCreativeTab(CreativeTabs.tabBlock);
 	}
 
 	@Override

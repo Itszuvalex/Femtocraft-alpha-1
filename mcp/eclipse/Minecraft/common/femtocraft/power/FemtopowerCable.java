@@ -6,13 +6,14 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import femtocraft.Femtocraft;
 import femtocraft.power.TileEntity.FemtopowerTile;
 
 public class FemtopowerCable extends FemtopowerContainer {
 
 	public FemtopowerCable(int par1, Material par2Material) {
 		super(par1, par2Material);
-		setCreativeTab(CreativeTabs.tabBlock);
+		setCreativeTab(Femtocraft.femtocraftTab);
 	}
 
 	@Override
