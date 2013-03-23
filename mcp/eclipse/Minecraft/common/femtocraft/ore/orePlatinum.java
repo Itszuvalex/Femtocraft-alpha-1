@@ -2,6 +2,7 @@ package femtocraft.ore;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.Femtocraft;
 import net.minecraft.block.BlockOre;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -11,7 +12,7 @@ public class orePlatinum extends BlockOre{
 
 	public orePlatinum(int id, int texture) {
 		super(id);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(Femtocraft.femtocraftTab);
 	}
 	
 	@SideOnly(Side.CLIENT)

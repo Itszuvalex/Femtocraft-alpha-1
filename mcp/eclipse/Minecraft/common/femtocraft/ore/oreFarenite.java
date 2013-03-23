@@ -2,20 +2,17 @@ package femtocraft.ore;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import femtocraft.Femtocraft;
-
 import net.minecraft.block.BlockOre;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.Femtocraft;
 
 public class oreFarenite extends BlockOre{
 
 	public oreFarenite(int id, int texture) {
 		super(id);
-		setCreativeTab(CreativeTabs.tabBlock);
+		setCreativeTab(Femtocraft.femtocraftTab);
 	}
 	
 	@SideOnly(Side.CLIENT)
