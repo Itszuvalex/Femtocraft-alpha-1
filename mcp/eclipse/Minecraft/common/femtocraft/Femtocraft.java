@@ -132,13 +132,13 @@ public class Femtocraft {
 		 LanguageRegistry.addName(oreFarenite, "Farenite Ore");
 		 OreDictionary.registerOre("oreFarenite", new ItemStack(oreFarenite));
 		 
-		 microStone = new microStone(Configs.microStoneID, 5).setUnlocalizedName("microStone").setHardness(6.0f).setStepSound(Block.soundMetalFootstep).setResistance(9f);
-		 GameRegistry.registerBlock(microStone, "microStone");
-		 LanguageRegistry.addName(microStone,  "Microstone");
-		 
 		 nanoStone = new nanoStone(Configs.nanoStoneID, 4).setUnlocalizedName("nanoStone").setHardness(7.0f).setStepSound(Block.soundMetalFootstep).setResistance(12f);
 		 GameRegistry.registerBlock(nanoStone, "nanoStone");
 		 LanguageRegistry.addName(nanoStone, "Nanostone");
+		 
+		 microStone = new microStone(Configs.microStoneID, 5).setUnlocalizedName("microStone").setHardness(6.0f).setStepSound(Block.soundMetalFootstep).setResistance(9f);
+		 GameRegistry.registerBlock(microStone, "microStone");
+		 LanguageRegistry.addName(microStone,  "Microstone");
 		 
 		 femtoStone = new femtoStone(Configs.femtoStoneID, 6).setUnlocalizedName("femtoStone").setHardness(8.0f).setStepSound(Block.soundMetalFootstep).setResistance(15f);
 		 GameRegistry.registerBlock(femtoStone, "femtoStone");
