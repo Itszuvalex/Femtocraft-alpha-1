@@ -19,7 +19,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 		currentStorage = 0;
 		maxStorage = 1000;
 		maxPowerPerTick = .05f;
-		maxSizePackets = .05f;   //Yes this is the same as maxpertick, this is for testing purposes only
+		maxSizePackets = .05f;   //Yes this is the same as maxpertick, this breaks if it isn't, for some reason  TODO
 		distributionBuffer = .01f;
 		connections = new boolean[6];
 		Arrays.fill(connections, false);
@@ -52,6 +52,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 
 	@Override
 	public boolean canCharge(ForgeDirection from) {
+		if(getFillPercentage()>=1.0f) return false;
 		return true;
 	}
 
@@ -61,6 +62,15 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 		amount = room < amount ? room : amount;
 		currentStorage += amount;
 		return amount;
+	}
+	
+	@Override
+	public boolean consume(int amount) {
+		if(amount > currentStorage) 
+			return false;
+		
+		currentStorage -= amount;
+		return true;
 	}
 	
 	@Override
@@ -153,11 +163,11 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 		   //update function, can safely assume adjacent blocks remain the same (unless it does simultaneous updates)
 		   IFemtopowerContainer container = (IFemtopowerContainer)this.worldObj.getBlockTileEntity(locx, locy, locz);
 		   
-		   int powerconsumed = 0;
-		   if(container != null)
-			   powerconsumed = container.charge(offset.getOpposite(), amountToFill);
+		   if(container != null) {
+			   int powerconsumed = container.charge(offset.getOpposite(), amountToFill);
 			   this.currentStorage -= powerconsumed;
 			   maxSpreadThisTick -= powerconsumed;
+		   }
        }
 		   
     }

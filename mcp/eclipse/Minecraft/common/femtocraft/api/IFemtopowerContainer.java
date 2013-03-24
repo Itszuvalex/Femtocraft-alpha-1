@@ -33,4 +33,8 @@ public interface IFemtopowerContainer {
 	//Returns total amount used to charge
 	public int charge(ForgeDirection from, int amount);
 	
+	//Decreases internal storage by up to amount
+	//Returns true if power was consumed, false otherwise
+	public boolean consume(int amount);
+	
 }

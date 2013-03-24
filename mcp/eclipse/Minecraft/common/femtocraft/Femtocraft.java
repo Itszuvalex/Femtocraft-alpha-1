@@ -38,6 +38,7 @@ import femtocraft.ore.orePlatinum;
 import femtocraft.ore.oreThorium;
 import femtocraft.ore.oreTitanium;
 import femtocraft.power.FemtopowerCable;
+import femtocraft.power.FemtopowerConsumerBlock;
 import femtocraft.power.FemtopowerGenerator;
 import femtocraft.proxy.CommonProxyFemtocraft;
 
@@ -68,6 +69,7 @@ public class Femtocraft {
 	public static Block unidentifiedAlloy;
 	public static Block FemtopowerCable;
 	public static Block FemtopowerGenerator;
+	public static Block FemtopowerConsumer;
 	
 	//items
 	public static Item ingotTitanium;
@@ -153,6 +155,10 @@ public class Femtocraft {
 		 FemtopowerGenerator = new FemtopowerGenerator(Configs.FemtopowerGeneratorID, Material.rock).setUnlocalizedName("FemtopowerGenerator").setStepSound(Block.soundStoneFootstep);
 		 GameRegistry.registerBlock(FemtopowerGenerator, "FemtopowerGenerator");
 		 LanguageRegistry.addName(FemtopowerGenerator, "Femtopower Generator");
+		 
+		 FemtopowerConsumer = new FemtopowerConsumerBlock(Configs.FemtopowerConsumerBlockID, Material.rock).setUnlocalizedName("FemtopowerConsumer").setStepSound(Block.soundStoneFootstep);
+		 GameRegistry.registerBlock(FemtopowerConsumer, "FemtopowerConsumer");
+		 LanguageRegistry.addName(FemtopowerConsumer, "Femtopower Consumer");
 		 
 		 //items
 		 

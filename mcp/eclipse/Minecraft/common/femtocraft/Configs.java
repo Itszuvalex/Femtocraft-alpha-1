@@ -31,6 +31,7 @@ public class Configs {
 	public static @CfgId(block=true) int unidentifiedAlloyID = 357;
 	public static @CfgId(block=true) int FemtopowerCableID = 358;
 	public static @CfgId(block=true) int FemtopowerGeneratorID = 359;
+	public static @CfgId(block=true) int FemtopowerConsumerBlockID = 360;
 	
 	//items
 	public static @CfgId int ingotTitaniumID = 12000;

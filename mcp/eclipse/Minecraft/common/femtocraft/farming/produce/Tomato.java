@@ -7,7 +7,7 @@ import femtocraft.Femtocraft;
 
 public class Tomato extends ItemFood{
 	public Tomato(int id) {
-		super(id);
+		super(id,2,.2f,false);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
 	}
