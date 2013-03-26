@@ -20,8 +20,8 @@ public class SuctionTubeTile extends TileEntity implements ITankContainer {
 	 */
 	SuctionTubeTile() {
 		tank = new LiquidTank(null, 200, this);
-		int[] pressure = new int[6];
-		Arrays.fill(pressure, 0);
+		int[] neighborPressure = new int[6];
+		Arrays.fill(neighborPressure, 0);
 	}
 	
 	@Override
