@@ -134,7 +134,7 @@ public class SuctionTubeTile extends TileEntity implements ITankContainer {
 	private void distributeLiquid() {
 		int distributeCount = 0;
 		int ratioMax = 0;
-		float[] ratio = new float[6];
+		int[] ratio = new int[6];
 		
 		for(int i=0; i < 6; i++) {
 			ratio[i] = this.tank.getTankPressure() - neighborPressure[i];
@@ -143,7 +143,6 @@ public class SuctionTubeTile extends TileEntity implements ITankContainer {
 		
 		for(int i=0; i < 6; i++) {
 			if(ratio[i] <=0) ratio[i] = 0;
-			else ratio[i] = ratio[i]/(float)ratioMax;
 			
 			ForgeDirection dir = ForgeDirection.getOrientation(i);
 			
@@ -152,7 +151,7 @@ public class SuctionTubeTile extends TileEntity implements ITankContainer {
 			int locz = this.zCoord + dir.offsetZ;
 			
 			ITankContainer tankTile = (ITankContainer)this.worldObj.getBlockTileEntity(locx, locy, locz);
-	 		tankTile.getTank(dir.getOpposite(), this.tank.getLiquid()).fill(this.tank.drain((int)((float)this.tank.getLiquid().amount * ratio[i]), true), true);
+	 		tankTile.getTank(dir.getOpposite(), this.tank.getLiquid()).fill(this.tank.drain((this.tank.getLiquid().amount * ratio[i])/ratioMax, true), true);
 		}
 	}
 }
