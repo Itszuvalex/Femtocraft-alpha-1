@@ -151,7 +151,8 @@ public class SuctionTubeTile extends TileEntity implements ITankContainer {
 			int locz = this.zCoord + dir.offsetZ;
 			
 			ITankContainer tankTile = (ITankContainer)this.worldObj.getBlockTileEntity(locx, locy, locz);
-	 		tankTile.getTank(dir.getOpposite(), this.tank.getLiquid()).fill(this.tank.drain((this.tank.getLiquid().amount * ratio[i])/ratioMax, true), true);
-		}
+			
+	 		this.tank.getLiquid().amount -= tankTile.getTank(dir.getOpposite(), this.tank.getLiquid()).fill(this.tank.getLiquid(), true);
+	 		}
 	}
 }
