@@ -134,6 +134,7 @@ public class SuctionTubeTile extends TileEntity implements ITankContainer {
 	private void distributeLiquid() {
 		int distributeCount = 0;
 		int ratioMax = 0;
+		int amountToRemove = 0;
 		int[] ratio = new int[6];
 		
 		for(int i=0; i < 6; i++) {
@@ -156,7 +157,9 @@ public class SuctionTubeTile extends TileEntity implements ITankContainer {
 			fillStack.amount = (fillStack.amount * ratio[i])/ratioMax;
 			
 			if(tankTile != null)
-				this.tank.getLiquid().amount -= tankTile.getTank(dir.getOpposite(), this.tank.getLiquid()).fill(fillStack, true);
+				amountToRemove += tankTile.getTank(dir.getOpposite(), this.tank.getLiquid()).fill(fillStack, true);
 	 	}
+		
+		this.tank.getLiquid().amount -= amountToRemove;
 	}
 }
