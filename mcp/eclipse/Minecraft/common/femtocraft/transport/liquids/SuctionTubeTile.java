@@ -19,7 +19,7 @@ public class SuctionTubeTile extends TileEntity implements ITankContainer {
 	 * @see net.minecraftforge.liquids.ITankContainer#fill(net.minecraftforge.common.ForgeDirection, net.minecraftforge.liquids.LiquidStack, boolean)
 	 */
 	SuctionTubeTile() {
-		tank = new LiquidTank(null, 200, this);
+		tank = new LiquidTank(null, 2000, this);
 		int[] neighborPressure = new int[6];
 		Arrays.fill(neighborPressure, 0);
 	}
