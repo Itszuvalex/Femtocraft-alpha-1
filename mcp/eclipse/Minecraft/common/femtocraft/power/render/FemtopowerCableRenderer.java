@@ -52,9 +52,6 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 	private boolean renderCable(Block block, int x, int y, int z, RenderBlocks renderer) {
 		FemtopowerCable cable = (FemtopowerCable)block;
 		if(block == null) return false;
-		
-		tes.startDrawingQuads();
-		
 		drawCore(cable, x, y, z, renderer);
 		
 		
@@ -65,28 +62,34 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		//Draw Bottom
 		renderer.setRenderBounds(4.0F/16.0F, 4.0F/16.0F, 4.0F/16.0F, 12.0F/16.0F, 12.0F/16.0F, 12.0F/16.0F);
 		
+		tes.startDrawingQuads();
 		tes.setNormal(0.0F, -1.0F, 0.0F);
-		renderer.renderBottomFace(cable, 0.0, 0.0, 0.0, cable.core);
+		renderer.renderBottomFace(cable, 0.0, 0.0, 0.0, cable.coreBorder);
 		tes.draw();
 		//Draw Top
+		tes.startDrawingQuads();
 		tes.setNormal(0.0F, 1.0F, 0.0F);
-		renderer.renderTopFace(cable, 0.0, 0.0, 0.0, cable.core);
+		renderer.renderTopFace(cable, 0.0, 0.0, 0.0, cable.coreBorder);
 		tes.draw();
 		//Draw East
+		tes.startDrawingQuads();
 		tes.setNormal(0.0F, 0.0F, -1.0F);
-		renderer.renderEastFace(cable, 0.0, 0.0, 0.0, cable.core);
+		renderer.renderEastFace(cable, 0.0, 0.0, 0.0, cable.coreBorder);
 		tes.draw();
 		//Draw West
+		tes.startDrawingQuads();
 		tes.setNormal(0.0F, 0.0F, 1.0F);
-		renderer.renderWestFace(cable, 0.0, 0.0, 0.0, cable.core);
+		renderer.renderWestFace(cable, 0.0, 0.0, 0.0, cable.coreBorder);
 		tes.draw();
 		//Draw North
+		tes.startDrawingQuads();
 		tes.setNormal(-1.0F, 0.0F, 0.0F);
-		renderer.renderNorthFace(cable, 0.0, 0.0, 0.0, cable.core);
+		renderer.renderNorthFace(cable, 0.0, 0.0, 0.0, cable.coreBorder);
 		tes.draw();
 		//Draw South
+		tes.startDrawingQuads();
 		tes.setNormal(1.0F, 0.0F, 0.0F);
-		renderer.renderSouthFace(cable, 0.0, 0.0, 0.0, cable.core);
+		renderer.renderSouthFace(cable, 0.0, 0.0, 0.0, cable.coreBorder);
 		tes.draw();
 	}
 

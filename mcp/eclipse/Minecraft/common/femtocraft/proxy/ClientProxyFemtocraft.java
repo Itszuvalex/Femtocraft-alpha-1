@@ -1,9 +1,7 @@
 package femtocraft.proxy;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
+import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import femtocraft.Femtocraft;
-import femtocraft.power.TileEntity.FemtopowerCableTile;
 import femtocraft.power.render.FemtopowerCableRenderer;
 
 public class ClientProxyFemtocraft extends CommonProxyFemtocraft {
@@ -11,6 +9,7 @@ public class ClientProxyFemtocraft extends CommonProxyFemtocraft {
 	
 	@Override
 	public void registerRendering() {
+		super.registerRendering();
 		// MinecraftForgeClient.preloadTexture(texture);
 		// RenderingRegistry.registerEntityRenderingHandler(entityClass, renderer);
 		// registerBlockHandler
@@ -23,6 +22,7 @@ public class ClientProxyFemtocraft extends CommonProxyFemtocraft {
 	
 	@Override
 	public void registerBlockRenderers() {
+		super.registerBlockRenderers();
 		FemtopowerCableRenderID = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(FemtopowerCableRenderID, new FemtopowerCableRenderer());
 	}
