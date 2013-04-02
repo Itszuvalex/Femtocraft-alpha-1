@@ -12,7 +12,7 @@ import femtocraft.power.TileEntity.FemtopowerCableTile;
 
 public class FemtopowerCable extends FemtopowerContainer {
 	protected int renderType;
-	public Icon core;
+//	public Icon core;
 	public Icon coreBorder;
 	public Icon connector;
 	public Icon coil;
@@ -53,7 +53,7 @@ public class FemtopowerCable extends FemtopowerContainer {
     public void func_94332_a(IconRegister par1IconRegister)
     {
      //   this.field_94336_cN = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCable");
-		this.core = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCableCore");
+	//	this.core = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCableCore");
 		this.coreBorder = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCableCoreBorder");
 		this.connector = par1IconRegister.func_94245_a("Femtocraft:FemtopowerConnector");
 		this.coil = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCoil");
