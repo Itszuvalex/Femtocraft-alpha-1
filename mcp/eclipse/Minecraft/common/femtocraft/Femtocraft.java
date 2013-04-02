@@ -68,7 +68,7 @@ public class Femtocraft {
 	public static Block nanoStone;
 	public static Block femtoStone;
 	public static Block unidentifiedAlloy;
-	public static Block FemtopowerCable;
+	public static FemtopowerCable FemtopowerCable;
 	public static Block FemtopowerGenerator;
 	public static Block FemtopowerConsumer;
 	
@@ -95,6 +95,8 @@ public class Femtocraft {
 		Configs.load(config);
 		
 		Femtocraft.proxy.registerTileEntities();
+		Femtocraft.proxy.registerRendering();
+		Femtocraft.proxy.registerBlockRenderers();
 	}
 	
 	@Init
@@ -152,7 +154,7 @@ public class Femtocraft {
 		 GameRegistry.registerBlock(unidentifiedAlloy, "unidentifiedAlloy");
 		 LanguageRegistry.addName(unidentifiedAlloy, "Unidentified Alloy");
 		 
-		 FemtopowerCable = new FemtopowerCable(Configs.FemtopowerCableID, Material.rock).setUnlocalizedName("FemtopowerCable").setStepSound(Block.soundStoneFootstep);
+		 FemtopowerCable = (FemtopowerCable) new FemtopowerCable(Configs.FemtopowerCableID, Material.rock).setUnlocalizedName("FemtopowerCable").setStepSound(Block.soundStoneFootstep);
 		 GameRegistry.registerBlock(FemtopowerCable, "FemtopowerCable");
 		 LanguageRegistry.addName(FemtopowerCable, "Femtopower Cable");
 		 

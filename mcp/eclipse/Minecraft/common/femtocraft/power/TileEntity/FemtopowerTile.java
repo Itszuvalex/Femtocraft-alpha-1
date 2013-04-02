@@ -13,7 +13,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 	private float maxPowerPerTick;
 	private float maxSizePackets;
 	private float distributionBuffer;
-	private boolean[] connections;
+	public boolean[] connections;
 	
 	public FemtopowerTile() {
 		currentStorage = 0;
@@ -24,7 +24,11 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 		connections = new boolean[6];
 		Arrays.fill(connections, false);
 	}
-
+	
+	public boolean isConnected(int i) {
+		return connections[i];
+	}
+	
 	@Override
 	public int getCurrentPower() {
 		return currentStorage;

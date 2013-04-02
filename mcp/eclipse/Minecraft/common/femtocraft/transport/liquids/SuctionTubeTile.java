@@ -143,7 +143,10 @@ public class SuctionTubeTile extends TileEntity implements ITankContainer {
 		}
 		
 		for(int i=0; i < 6; i++) {
-			if(ratio[i] <=0) ratio[i] = 0;
+			if(ratio[i] <=0) {
+				ratio[i] = 0;
+				continue;
+			}
 			
 			ForgeDirection dir = ForgeDirection.getOrientation(i);
 			
