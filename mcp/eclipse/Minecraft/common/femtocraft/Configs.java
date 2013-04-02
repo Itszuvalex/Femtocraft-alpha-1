@@ -44,7 +44,7 @@ public class Configs {
 	public static @CfgId int tomatoID = 12071;
 	
 	//Cooking 12150 - 12300 items and 370-375
-	public static @CfgId int cuttingBoardID = 370;
+	public static @CfgId(block=true) int cuttingBoardID = 370;
 	
 	//bool
 	public static @CfgBool boolean worldGen = true;
