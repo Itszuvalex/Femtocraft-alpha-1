@@ -39,10 +39,12 @@ public class Configs {
 	public static @CfgId int ingotThoriumID = 12002;
 	public static @CfgId int ingotFareniteID = 12003;
 	
-	//Produce
+	//Produce  12070 - 12150
 	public static @CfgId int tomatoSeedID = 12070;
 	public static @CfgId int tomatoID = 12071;
 	
+	//Cooking 12150 - 12300 items and 370-375
+	public static @CfgId int cuttingBoardID = 370;
 	
 	//bool
 	public static @CfgBool boolean worldGen = true;

@@ -29,6 +29,7 @@ import femtocraft.blocks.nanoStone;
 import femtocraft.blocks.unidentifiedAlloy;
 import femtocraft.farming.produce.Tomato;
 import femtocraft.farming.seeds.tomatoSeed;
+import femtocraft.cooking.blocks.cuttingBoard;
 import femtocraft.items.ingotFarenite;
 import femtocraft.items.ingotPlatinum;
 import femtocraft.items.ingotThorium;
@@ -80,6 +81,9 @@ public class Femtocraft {
 	//Produce
 	public static Item tomatoSeed;
 	public static Item tomato;
+	
+	//Cooking
+	public static Block cuttingBoard;
 	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
@@ -186,6 +190,11 @@ public class Femtocraft {
 		 tomato = new Tomato(Configs.tomatoID).setUnlocalizedName("tomato");
 		 LanguageRegistry.addName(tomato, "Tomato");
 		 GameRegistry.registerItem(tomato, "Tomato");
+		 
+		 //Cooking
+		 cuttingBoard = new cuttingBoard(Configs.cuttingBoardID).setUnlocalizedName("cuttingBoard");
+		 LanguageRegistry.addName(cuttingBoard, "Cutting Board");
+		 GameRegistry.registerBlock(cuttingBoard, "Cutting Board");
 		 
 		 
 		 registerRecipes();
