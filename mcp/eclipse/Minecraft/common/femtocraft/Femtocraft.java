@@ -41,6 +41,7 @@ import femtocraft.ore.oreTitanium;
 import femtocraft.power.FemtopowerCable;
 import femtocraft.power.FemtopowerConsumerBlock;
 import femtocraft.power.FemtopowerGenerator;
+import femtocraft.proxy.ClientProxyFemtocraft;
 import femtocraft.proxy.CommonProxyFemtocraft;
 
 @Mod(modid = Femtocraft.ID, version = Femtocraft.VERSION)
@@ -200,6 +201,8 @@ public class Femtocraft {
 		 
 		 
 		 registerRecipes();
+		 
+		 ClientProxyFemtocraft.setCustomRenderers();
 		 
 		// GameRegistry.registerTileEntity(TileEntity.class, "myTile");
 
