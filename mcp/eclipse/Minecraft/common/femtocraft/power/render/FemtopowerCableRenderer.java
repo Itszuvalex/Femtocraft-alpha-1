@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import femtocraft.cooking.blocks.cuttingBoard;
 import femtocraft.power.FemtopowerCable;
 import femtocraft.proxy.ClientProxyFemtocraft;
 
@@ -80,7 +81,30 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 //		renderer.renderSouthFace(cable, 0.0, 0.0, 0.0, cable.coreBorder);
 //		tes.draw();
 		
-		
+    	//Draw Top Side
+    	renderer.setRenderBounds(4.0D/16.0D, 12.0D/16.0D, 4.0D/16.0D, 12.0D/16.0D, 12.0D/16.0D, 12.0D/16.00D);
+    	renderer.renderTopFace(cable, x, y, z, cable.coil);
+    	
+    	//Draw Bottom Side
+    	renderer.setRenderBounds(4.0D/16.0D, 4.0D/16.0D, 4.0D/16.0D, 12.0D/16.0D, 4.0D/16.0D, 12.0D/16.00D);
+    	renderer.renderBottomFace(cable, x, y, z, cable.coil);
+    	
+    	//Draw North side
+    	renderer.setRenderBounds(4.0D/16.0D, 4.0D/16.0D, 4.0D/16.0D, 4.0D/16.0D, 12.0D/16.0D, 12.0D/16.0D);
+    	renderer.renderNorthFace(cable, x, y, z, cable.coil);
+    	
+    	//Draw East side
+    	renderer.setRenderBounds(4.0D/16.0D,4.0D/16.0D,4.0D/16.0D, 12.0D/16.0D, 12.0D/16.0D, 4.0D/16.0D);
+    	renderer.renderEastFace(cable, x, y, z, cable.coil);
+    	
+    	//Draw South side
+    	renderer.setRenderBounds(12.0D/16.0D, 4.0D/16.0D, 4.0D/16.0D, 12.0D/16.0D, 12.0D/16.0D, 12.0D/16.0D);
+    	renderer.renderSouthFace(cable, x, y, z, cable.coil);
+    	
+    	//Draw West side
+    	renderer.setRenderBounds(4.0D/16.0D,4.0D/16.0D,12.0D/16.0D, 12.0D/16.0D, 12.0D/16.0D, 12.0D/16.0D);
+    	renderer.renderWestFace(cable, x, y, z, cable.coil);
+    	
 	}
 
 }

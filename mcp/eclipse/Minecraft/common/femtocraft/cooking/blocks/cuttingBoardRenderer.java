@@ -83,7 +83,7 @@ public class cuttingBoardRenderer implements ISimpleBlockRenderingHandler{
             double d2 = (double)j1 * Math.PI * 2.0D / 3.0D + (Math.PI / 2D);
             double d3 = (double)icon.func_94214_a(8.0D);
             double d4 = (double)icon.func_94212_f();
-
+0
             double d5 = (double)x + 0.5D;
             double d6 = (double)x + 0.5D + Math.sin(d2) * 8.0D / 16.0D;
             double d7 = (double)z + 0.5D;
