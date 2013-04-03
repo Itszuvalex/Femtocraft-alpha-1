@@ -26,17 +26,13 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
 			Block block, int modelId, RenderBlocks renderer) {
-		if(modelId == ClientProxyFemtocraft.FemtopowerCableRenderID)
 			return renderCable(block, x, y, z, renderer);
-		else
-			return false;
+
 	}
 
 	@Override

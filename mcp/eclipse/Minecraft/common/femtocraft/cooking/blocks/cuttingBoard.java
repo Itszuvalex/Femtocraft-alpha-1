@@ -17,6 +17,9 @@ public class cuttingBoard extends Block {
 	private Icon cuttingBoardTop;
 	@SideOnly(Side.CLIENT)
 	private Icon cuttingBoardBottom;
+	@SideOnly(Side.CLIENT)
+	public static Icon cuttingBoardSide;
+	
 	
 	public cuttingBoard(int id) {
 		super(id, Material.cake);
@@ -123,6 +126,7 @@ public class cuttingBoard extends Block {
     public void func_94332_a(IconRegister par1IconRegister)
     {
         this.field_94336_cN = par1IconRegister.func_94245_a("Femtocraft:cuttingBoard");
+        this.cuttingBoardSide = par1IconRegister.func_94245_a("Femtocraft:cuttingBoard_Side");
     }
 	
 }

@@ -20,7 +20,30 @@ public class cuttingBoardRenderer implements ISimpleBlockRenderingHandler{
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
                     Block block, int modelId, RenderBlocks renderer)
     {
-    	DrawCuttingBoard(block, x, y, z);
+    	//DrawCuttingBoard(block, x, y, z);
+    	
+    	//Draw cutting board top/bottom
+    	renderer.setRenderBounds(0, 0, 0, 1, 1.0D/16.0D, 1);
+    	renderer.renderStandardBlock(block, x, y, z);
+    	
+    	//Draw sides
+    	
+    	//Draw North side
+    	renderer.setRenderBounds(1.0D/16.0D, 0, 0, 1.0D/16.0D, 1, 1);
+    	renderer.renderNorthFace(block, x, y, z, cuttingBoard.cuttingBoardSide);
+    	
+    	//Draw East side
+    	renderer.setRenderBounds(0,0,1.0D/16.0D, 1, 1, 1.0D/16.0D);
+    	renderer.renderEastFace(block, x, y, z, cuttingBoard.cuttingBoardSide);
+    	
+    	//Draw South side
+    	renderer.setRenderBounds(15.0D/16.0D,0,0, 15.0D/16.0D, 1, 1);
+    	renderer.renderSouthFace(block, x, y, z, cuttingBoard.cuttingBoardSide);
+    	
+    	//Draw West side
+    	renderer.setRenderBounds(0,0,15.0D/16.0D, 1, 1, 15.0D/16.0D);
+    	renderer.renderWestFace(block, x, y, z, cuttingBoard.cuttingBoardSide);
+    	
     	return true;
     }
    
