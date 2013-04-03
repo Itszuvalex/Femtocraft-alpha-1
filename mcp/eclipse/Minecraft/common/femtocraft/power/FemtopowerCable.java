@@ -9,10 +9,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.power.TileEntity.FemtopowerCableTile;
+import femtocraft.proxy.ClientProxyFemtocraft;
 
 public class FemtopowerCable extends FemtopowerContainer {
-	protected int renderType;
-//	public Icon core;
 	public Icon coreBorder;
 	public Icon connector;
 	public Icon coil;
@@ -33,11 +32,6 @@ public class FemtopowerCable extends FemtopowerContainer {
 	public boolean isOpaqueCube() {
 		return false;
 	}
-
-	public FemtopowerCable setRenderType(int id) {
-		this.renderType = id;
-		return this;
-	}
 	
 	@Override
 	public boolean renderAsNormalBlock() {
@@ -46,7 +40,7 @@ public class FemtopowerCable extends FemtopowerContainer {
 	
 	@Override
 	public int getRenderType() {
-		return renderType;
+		return ClientProxyFemtocraft.FemtopowerCableRenderID;
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -55,9 +49,9 @@ public class FemtopowerCable extends FemtopowerContainer {
      //   this.field_94336_cN = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCable");
 	//	this.core = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCableCore");
 		this.coreBorder = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCableCoreBorder");
-		this.connector = par1IconRegister.func_94245_a("Femtocraft:FemtopowerConnector");
-		this.coil = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCoil");
-		this.coilEdge = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCoilEdge");
-		this.border = par1IconRegister.func_94245_a("Femtocraft:FemtopowerBorder");
+		this.connector = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCableConnector");
+		this.coil = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCableCoil");
+		this.coilEdge = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCableCoilEdge");
+		this.border = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCableBorder");
     }
 }
