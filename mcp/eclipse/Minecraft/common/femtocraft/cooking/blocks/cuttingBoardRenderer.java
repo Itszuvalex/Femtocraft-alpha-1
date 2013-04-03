@@ -74,28 +74,28 @@ public class cuttingBoardRenderer implements ISimpleBlockRenderingHandler{
        
         //set the texture
         Icon icon = Block.blockDiamond.getBlockTextureFromSideAndMetadata(0, 0);
-        
-        double d0 = (double)icon.func_94206_g();
-        double d1 = (double)icon.func_94210_h();
-
-        for (int j1 = 0; j1 < 3; ++j1)
-        {
-            double d2 = (double)j1 * Math.PI * 2.0D / 3.0D + (Math.PI / 2D);
-            double d3 = (double)icon.func_94214_a(8.0D);
-            double d4 = (double)icon.func_94212_f();
-0
-            double d5 = (double)x + 0.5D;
-            double d6 = (double)x + 0.5D + Math.sin(d2) * 8.0D / 16.0D;
-            double d7 = (double)z + 0.5D;
-            double d8 = (double)z + 0.5D + Math.cos(d2) * 8.0D / 16.0D;
-            tessellator.addVertexWithUV(d5, (double)(par3 + 1), d7, d3, d0);
-            tessellator.addVertexWithUV(d5, (double)(par3 + 0), d7, d3, d1);
-            tessellator.addVertexWithUV(d6, (double)(par3 + 0), d8, d4, d1);
-            tessellator.addVertexWithUV(d6, (double)(par3 + 1), d8, d4, d0);
-            tessellator.addVertexWithUV(d6, (double)(par3 + 1), d8, d4, d0);
-            tessellator.addVertexWithUV(d6, (double)(par3 + 0), d8, d4, d1);
-            tessellator.addVertexWithUV(d5, (double)(par3 + 0), d7, d3, d1);
-            tessellator.addVertexWithUV(d5, (double)(par3 + 1), d7, d3, d0);
-        }
+//        
+//        double d0 = (double)icon.func_94206_g();
+//        double d1 = (double)icon.func_94210_h();
+//
+//        for (int j1 = 0; j1 < 3; ++j1)
+//        {
+//            double d2 = (double)j1 * Math.PI * 2.0D / 3.0D + (Math.PI / 2D);
+//            double d3 = (double)icon.func_94214_a(8.0D);
+//            double d4 = (double)icon.func_94212_f();
+//0
+//            double d5 = (double)x + 0.5D;
+//            double d6 = (double)x + 0.5D + Math.sin(d2) * 8.0D / 16.0D;
+//            double d7 = (double)z + 0.5D;
+//            double d8 = (double)z + 0.5D + Math.cos(d2) * 8.0D / 16.0D;
+//            tessellator.addVertexWithUV(d5, (double)(par3 + 1), d7, d3, d0);
+//            tessellator.addVertexWithUV(d5, (double)(par3 + 0), d7, d3, d1);
+//            tessellator.addVertexWithUV(d6, (double)(par3 + 0), d8, d4, d1);
+//            tessellator.addVertexWithUV(d6, (double)(par3 + 1), d8, d4, d0);
+//            tessellator.addVertexWithUV(d6, (double)(par3 + 1), d8, d4, d0);
+//            tessellator.addVertexWithUV(d6, (double)(par3 + 0), d8, d4, d1);
+//            tessellator.addVertexWithUV(d5, (double)(par3 + 0), d7, d3, d1);
+//            tessellator.addVertexWithUV(d5, (double)(par3 + 1), d7, d3, d0);
+//        }
     }
 }

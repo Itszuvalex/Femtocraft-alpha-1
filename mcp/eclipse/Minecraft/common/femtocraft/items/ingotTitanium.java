@@ -12,8 +12,8 @@ public class ingotTitanium  extends Item{
 		setCreativeTab(Femtocraft.femtocraftTab);
 	}
 	
-	public void func_94581_a(IconRegister par1IconRegister)
+	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.func_94245_a("Femtocraft:ingotTitanium");
+        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:ingotTitanium");
     }
 }

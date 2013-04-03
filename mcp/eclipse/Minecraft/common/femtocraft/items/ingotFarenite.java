@@ -12,8 +12,8 @@ public class ingotFarenite extends Item{
 		setCreativeTab(Femtocraft.femtocraftTab);
 	}
 	
-	public void func_94581_a(IconRegister par1IconRegister)
+	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.func_94245_a("Femtocraft:ingotFarenite");
+        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:ingotFarenite");
     }
 }

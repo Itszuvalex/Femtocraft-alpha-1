@@ -44,14 +44,14 @@ public class FemtopowerCable extends FemtopowerContainer {
 	}
 	
 	@SideOnly(Side.CLIENT)
-    public void func_94332_a(IconRegister par1IconRegister)
+    public void registerIcons(IconRegister par1IconRegister)
     {
      //   this.field_94336_cN = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCable");
 	//	this.core = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCableCore");
-		this.coreBorder = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCableCoreBorder");
-		this.connector = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCableConnector");
-		this.coil = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCableCoil");
-		this.coilEdge = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCableCoilEdge");
-		this.border = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCableBorder");
+		this.coreBorder = par1IconRegister.registerIcon("Femtocraft:FemtopowerCableCoreBorder");
+		this.connector = par1IconRegister.registerIcon("Femtocraft:FemtopowerCableConnector");
+		this.coil = par1IconRegister.registerIcon("Femtocraft:FemtopowerCableCoil");
+		this.coilEdge = par1IconRegister.registerIcon("Femtocraft:FemtopowerCableCoilEdge");
+		this.border = par1IconRegister.registerIcon("Femtocraft:FemtopowerCableBorder");
     }
 }

@@ -16,9 +16,9 @@ public class oreFarenite extends BlockOre{
 	}
 	
 	@SideOnly(Side.CLIENT)
-    public void func_94332_a(IconRegister par1IconRegister)
+    public void registerIcons(IconRegister par1IconRegister)
     {
-        this.field_94336_cN = par1IconRegister.func_94245_a("Femtocraft:oreFarenite");
+        this.blockIcon = par1IconRegister.registerIcon("Femtocraft:oreFarenite");
     }
 	
 	public int idDropped(int par1, Random random, int par2) {
