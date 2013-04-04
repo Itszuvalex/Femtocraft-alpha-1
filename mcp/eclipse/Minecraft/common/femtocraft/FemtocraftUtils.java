@@ -60,27 +60,27 @@ public class FemtocraftUtils {
 		tes.addTranslation(-x, -y, -z);
 	}
 	
-	public static float rotateXonZAxis(float x, float y, float rot) {
-		return (float) (x*Math.cos(rot) - y*Math.sin(rot));
+	public static float rotateXonZAxis(float x, float y, float rot, float  xrotoffset, float yrotoffset) {
+		return (float) ((x - xrotoffset)*Math.cos(rot) - (y - yrotoffset)*Math.sin(rot)) + xrotoffset;
 	}
 	
-	public static float rotateYonZAxis(float x, float y, float rot) {
-		return (float) (x*Math.sin(rot) + y*Math.cos(rot));
+	public static float rotateYonZAxis(float x, float y, float rot, float xrotoffset, float yrotoffset) {
+		return (float) ((x - xrotoffset)*Math.sin(rot) + (y - yrotoffset)*Math.cos(rot)) + yrotoffset;
 	}
 	
-	public static float rotateXonYAxis(float x, float z, float rot) {
-		return (float) (z*Math.cos(rot) - x*Math.sin(rot));
+	public static float rotateXonYAxis(float x, float z, float rot, float xrotoffset, float zrotoffset) {
+		return (float) ((z - zrotoffset)*Math.cos(rot) - (x - xrotoffset)*Math.sin(rot)) + xrotoffset;
 	}
 	
-	public static float rotateZonYAxis(float x, float z, float rot) {
-		return (float) (z*Math.sin(rot) + x*Math.cos(rot));
+	public static float rotateZonYAxis(float x, float z, float rot, float xrotoffset, float zrotoffset) {
+		return (float) ((z -zrotoffset)*Math.sin(rot) + (x - xrotoffset)*Math.cos(rot)) + zrotoffset;
 	}
 	
-	public static float rotateYonXAxis(float y, float z, float rot) {
-		return (float) (y*Math.cos(rot) - z*Math.sin(rot));
+	public static float rotateYonXAxis(float y, float z, float rot, float yrotoffset, float zrotoffset) {
+		return (float) ((y - yrotoffset)*Math.cos(rot) - (z - zrotoffset)*Math.sin(rot)) + yrotoffset;
 	}
 	
-	public static float rotateZonXAxis(float y, float z, float rot) {
-		return (float) (y*Math.sin(rot) + z*Math.cos(rot));
+	public static float rotateZonXAxis(float y, float z, float rot, float yrotoffset, float zrotoffset) {
+		return (float) ((y - yrotoffset)*Math.sin(rot) + (z - zrotoffset)*Math.cos(rot)) + zrotoffset;
 	}
 }
