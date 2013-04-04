@@ -30,19 +30,19 @@ public class cuttingBoardRenderer implements ISimpleBlockRenderingHandler{
     	
     	//Draw North side
     	renderer.setRenderBounds(1.0D/16.0D, 0, 0, 1.0D/16.0D, 1, 1);
-    	renderer.renderNorthFace(block, x, y, z, cuttingBoard.cuttingBoardSide);
+    	renderer.renderNorthFace(block, x, y, z, ((cuttingBoard)block).cuttingBoardSide);
     	
     	//Draw East side
     	renderer.setRenderBounds(0,0,1.0D/16.0D, 1, 1, 1.0D/16.0D);
-    	renderer.renderEastFace(block, x, y, z, cuttingBoard.cuttingBoardSide);
+    	renderer.renderEastFace(block, x, y, z, ((cuttingBoard)block).cuttingBoardSide);
     	
     	//Draw South side
     	renderer.setRenderBounds(15.0D/16.0D,0,0, 15.0D/16.0D, 1, 1);
-    	renderer.renderSouthFace(block, x, y, z, cuttingBoard.cuttingBoardSide);
+    	renderer.renderSouthFace(block, x, y, z, ((cuttingBoard)block).cuttingBoardSide);
     	
     	//Draw West side
     	renderer.setRenderBounds(0,0,15.0D/16.0D, 1, 1, 15.0D/16.0D);
-    	renderer.renderWestFace(block, x, y, z, cuttingBoard.cuttingBoardSide);
+    	renderer.renderWestFace(block, x, y, z, ((cuttingBoard)block).cuttingBoardSide);
     	
     	return true;
     }

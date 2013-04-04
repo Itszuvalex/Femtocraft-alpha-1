@@ -18,7 +18,7 @@ public class cuttingBoard extends Block {
 	@SideOnly(Side.CLIENT)
 	private Icon cuttingBoardBottom;
 	@SideOnly(Side.CLIENT)
-	public static Icon cuttingBoardSide;
+	public Icon cuttingBoardSide;
 	
 	
 	public cuttingBoard(int id) {
@@ -122,10 +122,17 @@ public class cuttingBoard extends Block {
 //        return par5 == 1 ? true : super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5);
 //    }
 	
+//	@Override
+//	@SideOnly(Side.CLIENT)
+//	public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
+//		if(par1 == 0 || par1 == 1) return this.cuttingBoardTop;
+//		else return this.cuttingBoardSide;
+//	}
+
 	@SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister)
     {
-        this.blockIcon = par1IconRegister.registerIcon("Femtocraft:cuttingBoard");
+        this.blockIcon = this.cuttingBoardTop = par1IconRegister.registerIcon("Femtocraft:cuttingBoard");
         this.cuttingBoardSide = par1IconRegister.registerIcon("Femtocraft:cuttingBoard_Side");
     }
 	

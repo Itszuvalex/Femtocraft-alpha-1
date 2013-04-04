@@ -5,8 +5,8 @@ package femtocraft.power.render;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import femtocraft.FemtocraftRenderUtils;
 import femtocraft.power.FemtopowerCable;
@@ -55,105 +55,53 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 	private void drawCore(FemtopowerCable cable, int x, int y, int z, RenderBlocks renderer) {
 		FemtocraftRenderUtils.renderCube(x, y, z, 5.0f/16.0f, 5.0f/16.0f, 5.0f/16.0f, 11.0f/16.0f, 11.0f/16.0f, 11.0f/16.0f, cable.coil);
 		FemtocraftRenderUtils.renderCube(x, y, z, 4.0f/16.0f, 4.0f/16.0f, 4.0f/16.0f, 12.0f/16.0f, 12.0f/16.0f, 12.0f/16.0f, cable.coreBorder);
-//		
-//		Tessellator tes = Tessellator.instance;
-//		
-//		tes.addTranslation(x, y, z);
-//	
-//		//Draw core
-//		
-//		float minU = cable.coil.getMinU();
-//		float minV = cable.coil.getMinV();
-//		float maxU = cable.coil.getMaxU();
-//		float maxV = cable.coil.getMaxV();
-//		
-//		double min = 5.0D/16.0D;
-//		double max = 11.0D/16.0D;
-////		
-////		//Draw top face
-////		tes.addVertexWithUV(min, max, min, minU, maxV);
-////		tes.addVertexWithUV(min, max, max, minU, minV);
-////		tes.addVertexWithUV(max, max, max, maxU, minV);
-////		tes.addVertexWithUV(max, max, min, maxU, maxV);
-////		
-////		//Draw bottom face
-////		tes.addVertexWithUV(min, min, min, minU, maxV);
-////		tes.addVertexWithUV(max, min, min, minU, minV);
-////		tes.addVertexWithUV(max, min, max, maxU, minV);
-////		tes.addVertexWithUV(min, min, max, maxU, maxV);
-////		
-////		//Draw north face
-////		tes.addVertexWithUV(min, min, min, minU, maxV);
-////		tes.addVertexWithUV(min, max, min, minU, minV);
-////		tes.addVertexWithUV(max, max, min, maxU, minV);
-////		tes.addVertexWithUV(max, min, min, maxU, maxV);
-////		
-////		//Draw east face
-////		tes.addVertexWithUV(max, min, min, minU, maxV);
-////		tes.addVertexWithUV(max, max, min, minU, minV);
-////		tes.addVertexWithUV(max, max, max, maxU, minV);
-////		tes.addVertexWithUV(max, min, max, maxU, maxV);
-////		
-////		//Draw south face
-////		tes.addVertexWithUV(min, min, max, minU, maxV);
-////		tes.addVertexWithUV(max, min, max, minU, minV);
-////		tes.addVertexWithUV(max, max, max, maxU, minV);
-////		tes.addVertexWithUV(min, max, max, maxU, maxV);
-////		
-////		//Draw west face
-////		tes.addVertexWithUV(min, min, min, minU, maxV);
-////		tes.addVertexWithUV(min, min, max, minU, minV);
-////		tes.addVertexWithUV(min, max, max, maxU, minV);
-////		tes.addVertexWithUV(min, max, min, maxU, maxV);
-////		
-//		//Draw core border
-//		//Draw core
-//	
-//		minU = cable.coreBorder.getMinU();
-//		minV = cable.coreBorder.getMinV();
-//		maxU = cable.coreBorder.getMaxU();
-//		maxV = cable.coreBorder.getMaxV();
-//		
-//		min = 4.0D/16.0D;
-//		max = 12.0D/16.0D;
-//		
-//		//Draw top face
-//		tes.addVertexWithUV(min, max, min, minU, maxV);
-//		tes.addVertexWithUV(min, max, max, minU, minV);
-//		tes.addVertexWithUV(max, max, max, maxU, minV);
-//		tes.addVertexWithUV(max, max, min, maxU, maxV);
-//		
-//		//Draw bottom face
-//		tes.addVertexWithUV(min, min, min, minU, maxV);
-//		tes.addVertexWithUV(max, min, min, minU, minV);
-//		tes.addVertexWithUV(max, min, max, maxU, minV);
-//		tes.addVertexWithUV(min, min, max, maxU, maxV);
-//		
-//		//Draw north face
-//		tes.addVertexWithUV(min, min, min, minU, maxV);
-//		tes.addVertexWithUV(min, max, min, minU, minV);
-//		tes.addVertexWithUV(max, max, min, maxU, minV);
-//		tes.addVertexWithUV(max, min, min, maxU, maxV);
-//		
-//		//Draw east face
-//		tes.addVertexWithUV(max, min, min, minU, maxV);
-//		tes.addVertexWithUV(max, max, min, minU, minV);
-//		tes.addVertexWithUV(max, max, max, maxU, minV);
-//		tes.addVertexWithUV(max, min, max, maxU, maxV);
-//		
-//		//Draw south face
-//		tes.addVertexWithUV(min, min, max, minU, maxV);
-//		tes.addVertexWithUV(max, min, max, minU, minV);
-//		tes.addVertexWithUV(max, max, max, maxU, minV);
-//		tes.addVertexWithUV(min, max, max, maxU, maxV);
-//		
-//		//Draw west face
-//		tes.addVertexWithUV(min, min, min, minU, maxV);
-//		tes.addVertexWithUV(min, min, max, minU, minV);
-//		tes.addVertexWithUV(min, max, max, maxU, minV);
-//		tes.addVertexWithUV(min, max, min, maxU, maxV);
-//		
-//		tes.addTranslation(-x, -y, -z);
+		
+		//Draw Northern connector 'cap'
+		drawCoreConnectors(cable, x, y, z, renderer, ForgeDirection.UP);
+		drawCoreConnectors(cable, x, y, z, renderer, ForgeDirection.DOWN);
+		drawCoreConnectors(cable, x, y, z, renderer, ForgeDirection.NORTH);
+		drawCoreConnectors(cable, x, y, z, renderer, ForgeDirection.EAST);
+		drawCoreConnectors(cable, x, y, z, renderer, ForgeDirection.SOUTH);
+		drawCoreConnectors(cable, x, y, z, renderer, ForgeDirection.WEST);
+	}
+	
+	private void drawCoreConnectors(FemtopowerCable cable, int x, int y, int z, RenderBlocks renderer, ForgeDirection direction) {
+			switch(direction) {
+				case UP:
+					FemtocraftRenderUtils.drawTopFace(x, y, z, 7.0F/16.0F, 9.0F/16.0F, 7.0F/16.0F, 9.0F/16.0F, 12.0F/16.0F, 
+							cable.connector, cable.connector.getMinU(), cable.connector.getMaxU(), cable.connector.getMinV(), cable.connector.getMaxV());
+					FemtocraftRenderUtils.drawNorthFace(x, y, z, 7.0F/16.0F, 9.0F/16.0F, 11.0F/16.0F, 12.0F/16.0F, 7.0F/16.0F, 
+							cable.connector, cable.connector.getMinU(), cable.connector.getMaxU() - (cable.connector.getMaxU() - cable.connector.getMinU())/2, cable.connector.getMinV(), cable.connector.getMaxV() - (cable.connector.getMaxV() - cable.connector.getMinV())/2);
+					FemtocraftRenderUtils.drawEastFace(x, y, z, 11.0F/16.0F, 12.0F/16.0F, 7.0F/16.0F, 9.0F/16.0F, 9.0F/16.0F, 
+							cable.connector, cable.connector.getMinU(), cable.connector.getMaxU() - (cable.connector.getMaxU() - cable.connector.getMinU())/2, cable.connector.getMinV(), cable.connector.getMaxV() - (cable.connector.getMaxV() - cable.connector.getMinV())/2);
+					FemtocraftRenderUtils.drawSouthFace(x, y, z, 7.0F/16.0F, 9.0F/16.0F, 11.0F/16.0F, 12.0F/16.0F, 9.0F/16.0F, 
+							cable.connector, cable.connector.getMinU(), cable.connector.getMaxU() - (cable.connector.getMaxU() - cable.connector.getMinU())/2, cable.connector.getMinV(), cable.connector.getMaxV() - (cable.connector.getMaxV() - cable.connector.getMinV())/2);
+					FemtocraftRenderUtils.drawWestFace(x, y, z, 11.0F/16.0F, 12.0F/16.0F, 7.0F/16.0F, 9.0F/16.0F, 7.0F/16.0F, 
+							cable.connector, cable.connector.getMinU(), cable.connector.getMaxU() - (cable.connector.getMaxU() - cable.connector.getMinU())/2, cable.connector.getMinV(), cable.connector.getMaxV() - (cable.connector.getMaxV() - cable.connector.getMinV())/2);
+					break;
+				case DOWN:
+					FemtocraftRenderUtils.drawBottomFace(x, y, z, 7.0F/16.0F, 9.0F/16.0F, 7.0F/16.0F, 9.0F/16.0F, 4.0F/16.0F, 
+							cable.connector, cable.connector.getMinU(), cable.connector.getMaxU(), cable.connector.getMinV(), cable.connector.getMaxV());
+					FemtocraftRenderUtils.drawNorthFace(x, y, z, 7.0F/16.0F, 9.0F/16.0F, 4.0F/16.0F, 5.0F/16.0F, 7.0F/16.0F, 
+							cable.connector, cable.connector.getMinU(), cable.connector.getMaxU() - (cable.connector.getMaxU() - cable.connector.getMinU())/2, cable.connector.getMinV(), cable.connector.getMaxV() - (cable.connector.getMaxV() - cable.connector.getMinV())/2);
+					FemtocraftRenderUtils.drawEastFace(x, y, z, 4.0F/16.0F, 5.0F/16.0F, 7.0F/16.0F, 9.0F/16.0F, 9.0F/16.0F, 
+							cable.connector, cable.connector.getMinU(), cable.connector.getMaxU() - (cable.connector.getMaxU() - cable.connector.getMinU())/2, cable.connector.getMinV(), cable.connector.getMaxV() - (cable.connector.getMaxV() - cable.connector.getMinV())/2);
+					FemtocraftRenderUtils.drawSouthFace(x, y, z, 7.0F/16.0F, 9.0F/16.0F, 4.0F/16.0F, 5.0F/16.0F, 9.0F/16.0F, 
+							cable.connector, cable.connector.getMinU(), cable.connector.getMaxU() - (cable.connector.getMaxU() - cable.connector.getMinU())/2, cable.connector.getMinV(), cable.connector.getMaxV() - (cable.connector.getMaxV() - cable.connector.getMinV())/2);
+					FemtocraftRenderUtils.drawWestFace(x, y, z, 4.0F/16.0F, 5.0F/16.0F, 7.0F/16.0F, 9.0F/16.0F, 7.0F/16.0F, 
+							cable.connector, cable.connector.getMinU(), cable.connector.getMaxU() - (cable.connector.getMaxU() - cable.connector.getMinU())/2, cable.connector.getMinV(), cable.connector.getMaxV() - (cable.connector.getMaxV() - cable.connector.getMinV())/2);
+					break;
+				case NORTH:
+					break;
+				case EAST:
+					break;
+				case SOUTH:
+					break;
+				case WEST:
+					break;
+			default:
+				break;
+			}
 	}
 
 }
