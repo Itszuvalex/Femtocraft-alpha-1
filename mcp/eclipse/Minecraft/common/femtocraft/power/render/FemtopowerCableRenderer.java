@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import femtocraft.FemtocraftUtils;
+import femtocraft.FemtocraftRenderUtils;
 import femtocraft.power.FemtopowerCable;
 import femtocraft.proxy.ClientProxyFemtocraft;
 
@@ -53,8 +53,8 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 	}
 	
 	private void drawCore(FemtopowerCable cable, int x, int y, int z, RenderBlocks renderer) {
-		FemtocraftUtils.renderCube(x, y, z, 5.0f/16.0f, 5.0f/16.0f, 5.0f/16.0f, 11.0f/16.0f, 11.0f/16.0f, 11.0f/16.0f, cable.coil);
-		FemtocraftUtils.renderCube(x, y, z, 4.0f/16.0f, 4.0f/16.0f, 4.0f/16.0f, 12.0f/16.0f, 12.0f/16.0f, 12.0f/16.0f, cable.coreBorder);
+		FemtocraftRenderUtils.renderCube(x, y, z, 5.0f/16.0f, 5.0f/16.0f, 5.0f/16.0f, 11.0f/16.0f, 11.0f/16.0f, 11.0f/16.0f, cable.coil);
+		FemtocraftRenderUtils.renderCube(x, y, z, 4.0f/16.0f, 4.0f/16.0f, 4.0f/16.0f, 12.0f/16.0f, 12.0f/16.0f, 12.0f/16.0f, cable.coreBorder);
 //		
 //		Tessellator tes = Tessellator.instance;
 //		
