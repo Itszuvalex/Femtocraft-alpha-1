@@ -1,9 +1,9 @@
 package femtocraft;
 
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Icon;
+import net.minecraftforge.common.ForgeDirection;
 
 public class FemtocraftRenderUtils {
 
@@ -116,6 +116,33 @@ public class FemtocraftRenderUtils {
 		
 		tes.addTranslation(-x, -y, -z);
 	}
+	
+	public static void drawArbitraryFace(float x, float y, float z, 
+										float xmin, float xmax, float ymin, float ymax, float zmin, float zmax, ForgeDirection normal,
+										Icon texture, float minU, float maxU, float minV, float maxV) {
+		switch(normal) {
+		case UP:
+			FemtocraftRenderUtils.drawTopFace(x, y, z, xmin, xmax, zmin, zmax, ymax, texture, minU, maxU, minV, maxV);
+			break;
+		case DOWN:
+			FemtocraftRenderUtils.drawBottomFace(x, y, z, xmin, xmax, zmin, zmax, ymin, texture, minU, maxU, minV, maxV);
+			break;
+		case NORTH:
+			FemtocraftRenderUtils.drawNorthFace(x, y, z, xmin, xmax, ymin, ymax, zmin, texture, minU, maxU, minV, maxV);
+			break;
+		case EAST:
+			FemtocraftRenderUtils.drawEastFace(x, y, z, ymin, ymax, zmin, zmax, xmax, texture, minU, maxU, minV, maxV);
+			break;
+		case SOUTH:
+			FemtocraftRenderUtils.drawSouthFace(x, y, z, xmin, xmax, ymin, ymax, zmax, texture, minU, maxU, minV, maxV);
+			break;
+		case WEST:
+			FemtocraftRenderUtils.drawWestFace(x, y, z, ymin, ymax, zmin, zmax, xmin, texture, minU, maxU, minV, maxV);
+			break;
+		default:
+			break;
+		}
+}
 	
 	public static float rotateXonZAxis(float x, float y, float rot, float  xrotoffset, float yrotoffset) {
 		return (float) ((x - xrotoffset)*Math.cos(rot) - (y - yrotoffset)*Math.sin(rot)) + xrotoffset;
