@@ -54,57 +54,49 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 	}
 	
 	private void drawCore(FemtopowerCable cable, int x, int y, int z, RenderBlocks renderer) {
-//		//Draw Bottom
-//		renderer.setRenderBounds(4.0F/16.0F, 4.0F/16.0F, 4.0F/16.0F, 12.0F/16.0F, 12.0F/16.0F, 12.0F/16.0F);
-//		
-//		tes.setNormal(0.0F, -1.0F, 0.0F);
-//		renderer.renderBottomFace(cable, 0.0, 0.0, 0.0, cable.coreBorder);
-//		tes.draw();
-//		//Draw Top
-//		tes.setNormal(0.0F, 1.0F, 0.0F);
-//		renderer.renderTopFace(cable, 0.0, 0.0, 0.0, cable.coreBorder);
-//		tes.draw();
-//		//Draw East
-//		tes.setNormal(0.0F, 0.0F, -1.0F);
-//		renderer.renderEastFace(cable, 0.0, 0.0, 0.0, cable.coreBorder);
-//		tes.draw();
-//		//Draw West
-//		tes.setNormal(0.0F, 0.0F, 1.0F);
-//		renderer.renderWestFace(cable, 0.0, 0.0, 0.0, cable.coreBorder);
-//		tes.draw();
-//		//Draw North
-//		tes.setNormal(-1.0F, 0.0F, 0.0F);
-//		renderer.renderNorthFace(cable, 0.0, 0.0, 0.0, cable.coreBorder);
-//		tes.draw();
-//		//Draw South
-//		tes.setNormal(1.0F, 0.0F, 0.0F);
-//		renderer.renderSouthFace(cable, 0.0, 0.0, 0.0, cable.coreBorder);
-//		tes.draw();
+		float minU = cable.coil.getMinU();
+		float minV = cable.coil.getMinV();
+		float maxU = cable.coil.getMaxU();
+		float maxV = cable.coil.getMaxV();
 		
-    	//Draw Top Side
-    	renderer.setRenderBounds(4.0D/16.0D, 12.0D/16.0D, 4.0D/16.0D, 12.0D/16.0D, 12.0D/16.0D, 12.0D/16.00D);
-    	renderer.renderTopFace(cable, x, y, z, cable.coil);
-    	
-    	//Draw Bottom Side
-    	renderer.setRenderBounds(4.0D/16.0D, 4.0D/16.0D, 4.0D/16.0D, 12.0D/16.0D, 4.0D/16.0D, 12.0D/16.00D);
-    	renderer.renderBottomFace(cable, x, y, z, cable.coil);
-    	
-    	//Draw North side
-    	renderer.setRenderBounds(4.0D/16.0D, 4.0D/16.0D, 4.0D/16.0D, 4.0D/16.0D, 12.0D/16.0D, 12.0D/16.0D);
-    	renderer.renderNorthFace(cable, x, y, z, cable.coil);
-    	
-    	//Draw East side
-    	renderer.setRenderBounds(4.0D/16.0D,4.0D/16.0D,4.0D/16.0D, 12.0D/16.0D, 12.0D/16.0D, 4.0D/16.0D);
-    	renderer.renderEastFace(cable, x, y, z, cable.coil);
-    	
-    	//Draw South side
-    	renderer.setRenderBounds(12.0D/16.0D, 4.0D/16.0D, 4.0D/16.0D, 12.0D/16.0D, 12.0D/16.0D, 12.0D/16.0D);
-    	renderer.renderSouthFace(cable, x, y, z, cable.coil);
-    	
-    	//Draw West side
-    	renderer.setRenderBounds(4.0D/16.0D,4.0D/16.0D,12.0D/16.0D, 12.0D/16.0D, 12.0D/16.0D, 12.0D/16.0D);
-    	renderer.renderWestFace(cable, x, y, z, cable.coil);
-    	
+		double min = 5.0D/16.0D;
+		double max = 11.0D/16.0D;
+		
+		//Draw top face
+		tes.addVertexWithUV(x + min, y + max, z + min, minU, maxV);
+		tes.addVertexWithUV(x + min, y + max, z + max, minU, minV);
+		tes.addVertexWithUV(x + max, y + max, z + max, maxU, minV);
+		tes.addVertexWithUV(x + max, y + max, z + min, maxU, maxV);
+		
+		//Draw bottom face
+		tes.addVertexWithUV(x + min, y + min, z + min, minU, maxV);
+		tes.addVertexWithUV(x + max, y + min, z + min, minU, minV);
+		tes.addVertexWithUV(x + max, y + min, z + max, maxU, minV);
+		tes.addVertexWithUV(x + min, y + min, z + max, maxU, maxV);
+		
+		//Draw north face
+		tes.addVertexWithUV(x + min, y + min, z + min, minU, maxV);
+		tes.addVertexWithUV(x + min, y + max, z + min, minU, minV);
+		tes.addVertexWithUV(x + max, y + max, z + min, maxU, minV);
+		tes.addVertexWithUV(x + max, y + min, z + min, maxU, maxV);
+		
+		//Draw east face
+		tes.addVertexWithUV(x + max, y + min, z + min, minU, maxV);
+		tes.addVertexWithUV(x + max, y + max, z + min, minU, minV);
+		tes.addVertexWithUV(x + max, y + max, z + max, maxU, minV);
+		tes.addVertexWithUV(x + max, y + min, z + max, maxU, maxV);
+		
+		//Draw south face
+		tes.addVertexWithUV(x + min, y + min, z + max, minU, maxV);
+		tes.addVertexWithUV(x + max, y + min, z + max, minU, minV);
+		tes.addVertexWithUV(x + max, y + max, z + max, maxU, minV);
+		tes.addVertexWithUV(x + min, y + max, z + max, maxU, maxV);
+		
+		//Draw west face
+		tes.addVertexWithUV(x + min, y + min, z + min, minU, maxV);
+		tes.addVertexWithUV(x + min, y + min, z + max, minU, minV);
+		tes.addVertexWithUV(x + min, y + max, z + max, maxU, minV);
+		tes.addVertexWithUV(x + min, y + max, z + min, maxU, maxV);
 	}
 
 }
