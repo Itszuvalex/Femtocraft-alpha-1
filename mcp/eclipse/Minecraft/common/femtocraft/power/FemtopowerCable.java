@@ -48,6 +48,7 @@ public class FemtopowerCable extends FemtopowerContainer {
     {
      //   this.field_94336_cN = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCable");
 	//	this.core = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCableCore");
+		this.blockIcon = par1IconRegister.registerIcon("Femtocraft:FemtopowerCableCoil");
 		this.coreBorder = par1IconRegister.registerIcon("Femtocraft:FemtopowerCableCoreBorder");
 		this.connector = par1IconRegister.registerIcon("Femtocraft:FemtopowerCableConnector");
 		this.coil = par1IconRegister.registerIcon("Femtocraft:FemtopowerCableCoil");
