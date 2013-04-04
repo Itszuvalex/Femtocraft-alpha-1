@@ -18,9 +18,32 @@ public class cuttingBoard extends Block {
 	@SideOnly(Side.CLIENT)
 	private Icon cuttingBoardBottom;
 	@SideOnly(Side.CLIENT)
-	public Icon cuttingBoardSide;
+	public Icon cuttingBoardSideNS;
+	@SideOnly(Side.CLIENT)
+	public Icon cuttingBoardSideW;
+	@SideOnly(Side.CLIENT)
+	public Icon cuttingBoardSideE;
 	
-	
+	public Icon getCuttingBoardTop() {
+		return cuttingBoardTop;
+	}
+
+	public Icon getCuttingBoardBottom() {
+		return cuttingBoardBottom;
+	}
+
+	public Icon getCuttingBoardSideNS() {
+		return cuttingBoardSideNS;
+	}
+
+	public Icon getCuttingBoardSideW() {
+		return cuttingBoardSideW;
+	}
+
+	public Icon getCuttingBoardSideE() {
+		return cuttingBoardSideE;
+	}
+
 	public cuttingBoard(int id) {
 		super(id, Material.cake);
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
@@ -132,8 +155,11 @@ public class cuttingBoard extends Block {
 	@SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister)
     {
-        this.blockIcon = this.cuttingBoardTop = par1IconRegister.registerIcon("Femtocraft:cuttingBoard");
-        this.cuttingBoardSide = par1IconRegister.registerIcon("Femtocraft:cuttingBoard_Side");
+        this.blockIcon = par1IconRegister.registerIcon("Femtocraft:cuttingBoard");
+        this.cuttingBoardTop = par1IconRegister.registerIcon("Femtocraft:cuttingBoard");
+        this.cuttingBoardSideNS = par1IconRegister.registerIcon("Femtocraft:cuttingBoard_NorthSouth");
+        this.cuttingBoardSideE = par1IconRegister.registerIcon("Femtocraft:cuttingBoard_Left");
+        this.cuttingBoardSideW = par1IconRegister.registerIcon("Femtocraft:cuttingBoard_Right");
     }
 	
 }
