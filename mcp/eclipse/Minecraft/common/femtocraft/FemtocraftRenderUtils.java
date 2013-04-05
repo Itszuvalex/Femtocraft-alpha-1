@@ -142,31 +142,18 @@ public class FemtocraftRenderUtils {
 		default:
 			break;
 		}
-}
+	}	
 	
-	public static float rotateXonZAxis(float x, float y, float rot, float  xrotoffset, float yrotoffset) {
-		return (float) ((x - xrotoffset)*Math.cos(rot) - (y - yrotoffset)*Math.sin(rot)) + xrotoffset;
+	public static void drawFaceByPoints(float x, float y, float z, Point A, Point B, Point C, Point D, Icon texture, float minU, float maxU, float minV, float maxV) {
+		Tessellator tes = Tessellator.instance;
+		
+		tes.addTranslation(x, y, z);
+		
+		tes.addVertexWithUV(A.x, A.y, A.z, minU, maxV);
+		tes.addVertexWithUV(B.x, B.y, B.z, minU, minV);
+		tes.addVertexWithUV(C.x, C.y, C.z, maxU, minV);
+		tes.addVertexWithUV(D.x, D.y, D.z, maxU, maxV);
+		
+		tes.addTranslation(-x, -y, -z);
 	}
-	
-	public static float rotateYonZAxis(float x, float y, float rot, float xrotoffset, float yrotoffset) {
-		return (float) ((x - xrotoffset)*Math.sin(rot) + (y - yrotoffset)*Math.cos(rot)) + yrotoffset;
-	}
-	
-	public static float rotateXonYAxis(float x, float z, float rot, float xrotoffset, float zrotoffset) {
-		return (float) ((z - zrotoffset)*Math.cos(rot) - (x - xrotoffset)*Math.sin(rot)) + xrotoffset;
-	}
-	
-	public static float rotateZonYAxis(float x, float z, float rot, float xrotoffset, float zrotoffset) {
-		return (float) ((z -zrotoffset)*Math.sin(rot) + (x - xrotoffset)*Math.cos(rot)) + zrotoffset;
-	}
-	
-	public static float rotateYonXAxis(float y, float z, float rot, float yrotoffset, float zrotoffset) {
-		return (float) ((y - yrotoffset)*Math.cos(rot) - (z - zrotoffset)*Math.sin(rot)) + yrotoffset;
-	}
-	
-	public static float rotateZonXAxis(float y, float z, float rot, float yrotoffset, float zrotoffset) {
-		return (float) ((y - yrotoffset)*Math.sin(rot) + (z - zrotoffset)*Math.cos(rot)) + zrotoffset;
-	}
-	
-	
 }

@@ -3,6 +3,7 @@ package femtocraft.power;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -21,6 +22,12 @@ public class FemtopowerCable extends FemtopowerContainer {
 	public FemtopowerCable(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setCreativeTab(Femtocraft.femtocraftTab);
+		setBlockBounds();
+	}
+	
+	public void setBlockBounds() {
+		this.minX = this.minY = this.minZ = 4.0D/16.0D;
+		this.maxX = this.maxY = this.maxZ = 12.0D/16.0D;
 	}
 
 	@Override

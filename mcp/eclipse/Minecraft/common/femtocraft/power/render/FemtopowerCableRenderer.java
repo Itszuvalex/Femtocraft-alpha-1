@@ -3,12 +3,14 @@
  */
 package femtocraft.power.render;
 
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import femtocraft.FemtocraftRenderUtils;
+import femtocraft.Point;
 import femtocraft.power.FemtopowerCable;
 import femtocraft.power.TileEntity.FemtopowerCableTile;
 import femtocraft.proxy.ClientProxyFemtocraft;
@@ -47,7 +49,25 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 	private boolean renderCable(Block block, int x, int y, int z, RenderBlocks renderer) {
 		FemtopowerCable cable = (FemtopowerCable)block;
 		if(block == null) return false;
-		drawCore(cable, x, y, z, renderer);
+		
+		//Render border
+		renderer.setOverrideBlockTexture(cable.coreBorder);
+		block.setBlockBounds(4.F/16.0F, 4.F/16.0F, 4.F/16.0F, 12.F/16.0F, 12.F/16.0F, 12.F/16.F);
+		renderer.setRenderBoundsFromBlock(block);
+		renderer.renderStandardBlock(block, x, y, z);
+		renderer.clearOverrideBlockTexture();
+		
+		block.setBlockBounds(5.F/16.0F, 5.F/16.0F, 5.F/16.0F, 11.F/16.0F, 11.F/16.0F, 11.F/16.F);
+		renderer.setRenderBoundsFromBlock(block);
+		renderer.renderStandardBlock(block, x, y, z);
+		
+		renderer.clearOverrideBlockTexture();
+		
+		cable.setBlockBounds();
+		
+		//Render core
+		
+//		drawCore(cable, x, y, z, renderer);
 		
 		
 		return true;
@@ -148,6 +168,8 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		float xoffset = 0;
 		float yoffset = 0;
 		float zoffset = 0;
+		double yrot = Math.PI/2.0D;
+		double xrot = 0;
 		
 		switch(direction) {
 			case UP:
@@ -155,12 +177,14 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 				xoffset = .5F;
 				yoffset = .5F + offset;
 				zoffset = .5F;
+				xrot += Math.PI/2.0D;
 				break;
 			case DOWN:
 				rotaxi = ForgeDirection.WEST;
 				xoffset = .5F;
 				yoffset = .5F - offset;
 				zoffset = .5F;
+				xrot -= Math.PI/2.0D;
 				break;
 			case NORTH:
 				xoffset = .5F;
@@ -173,18 +197,21 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 				yoffset = .5F;
 				zoffset = .5F;
 				rotaxi = ForgeDirection.DOWN;
+				yrot += Math.PI/2.0D;
 				break;
 			case SOUTH:
 				xoffset = .5F;
 				yoffset = .5F;
 				zoffset = .5F + offset;
 				rotaxi = ForgeDirection.DOWN;
+				yrot += Math.PI;
 				break;
 			case WEST:
 				xoffset = .5F - offset;
 				yoffset = .5F;
 				zoffset = .5F;
 				rotaxi = ForgeDirection.UP;
+				yrot -= Math.PI/2.0D;
 				break;
 		default:
 			break;
@@ -198,14 +225,37 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		drawConnector(cable, x, y, z, 7.0F/16.0F, renderer, direction, true);
 		drawConnector(cable, x, y, z, 5.0F/16.0F, renderer, direction, false);
 		
-		FemtocraftRenderUtils.drawArbitraryFace(x, y, z, -4.0F/16.0F + xoffset, 4.0F/16.0F + xoffset, -4.0F/16.0F + yoffset, 4.0F/16.0F + yoffset, -4.0F/16.0F + zoffset, 4.0F/16.0F + zoffset, 
-				face1, cable.border, cable.border.getMinU(), cable.border.getMaxU(), cable.border.getMinV(), cable.border.getMaxV());
-		FemtocraftRenderUtils.drawArbitraryFace(x, y, z, -4.0F/16.0F + xoffset, 4.0F/16.0F + xoffset, -4.0F/16.0F + yoffset, 4.0F/16.0F + yoffset, -4.0F/16.0F + zoffset, 4.0F/16.0F + zoffset, 
-				face2, cable.border, cable.border.getMinU(), cable.border.getMaxU(), cable.border.getMinV(), cable.border.getMaxV());
-		FemtocraftRenderUtils.drawArbitraryFace(x, y, z, -4.0F/16.0F + xoffset, 4.0F/16.0F + xoffset, -4.0F/16.0F + yoffset, 4.0F/16.0F + yoffset, -4.0F/16.0F + zoffset, 4.0F/16.0F + zoffset, 
-				face3, cable.border, cable.border.getMinU(), cable.border.getMaxU(), cable.border.getMinV(), cable.border.getMaxV());
-		FemtocraftRenderUtils.drawArbitraryFace(x, y, z, -4.0F/16.0F + xoffset, 4.0F/16.0F + xoffset, -4.0F/16.0F + yoffset, 4.0F/16.0F + yoffset, -4.0F/16.0F + zoffset, 4.0F/16.0F + zoffset, 
-				face4, cable.border, cable.border.getMinU(), cable.border.getMaxU(), cable.border.getMinV(), cable.border.getMaxV());	
+		//West-face, AA - top left, AB - bot left, AC - bot right, AD - top right
+		Point AA = new Point(4.0F/16.0F, 12.0F/16.0F, 0.0F/16.0F);
+		Point AB = new Point(4.0F/16.0F, 4.0F/16.0F, 0.0F/16.0F);
+		Point AC = new Point(4.0F/16.0F, 4.0F/16.0F, 4.0F/16.0F);
+		Point AD = new Point(4.0F/16.0F, 12.0F/16.0F, 4.0F/16.0F);
+		//East-face, BA - top left, BB - bottom left, BC - bottom right, BD - top right
+		Point BA = new Point(12.0F/16.0F, 12.0F/16.0F, 4.0F/16.0F);
+		Point BB = new Point(12.0F/16.0F, 4.0F/16.0F, 4.0F/16.0F);
+		Point BC = new Point(12.0F/16.0F, 4.0F/16.0F, 0.0F/16.0F);
+		Point BD = new Point(12.0F/16.0F, 12.0F/16.0F, 0.0F/16.0F);
+		
+		//West-face, AA - top left, AB - bot left, AC - bot right, AD - top right
+		Point rotAA = AA.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
+		Point rotAB = AB.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
+		Point rotAC = AC.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
+		Point rotAD = AD.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
+		//East-face, BA - top left, BB - bottom left, BC - bottom right, BD - top right
+		Point rotBA = BA.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
+		Point rotBB = BB.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
+		Point rotBC = BC.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
+		Point rotBD = BD.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
+		
+		//West
+		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotAA, rotAB, rotAC, rotAD, cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
+		//East
+		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotBA, rotBB, rotBC, rotBD, cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
+		
+		//Top
+		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotBD, rotAA, rotAD, rotBD, cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
+		//Bottom
+		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotBB, rotAC, rotAB, rotBC, cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
 	}
 
 }
