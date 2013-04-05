@@ -29,6 +29,12 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 		return connections[i];
 	}
 	
+	public int numConnections() {
+		int count = 0;
+		for(int i =0; i < 6; i++) if(connections[i]) ++count;
+		return count;
+	}
+	
 	@Override
 	public int getCurrentPower() {
 		return currentStorage;
@@ -181,6 +187,10 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
        super.readFromNBT(par1NBTTagCompound);
        currentStorage = par1NBTTagCompound.getInteger("currentStorage");
        maxStorage = par1NBTTagCompound.getInteger("maxStorage");
+       
+       for(int i = 0; i < 6; i++) {
+    	  connections[i] = par1NBTTagCompound.getBoolean(String.format("connection%d", i));
+       }
     }
 
     /**
@@ -191,11 +201,16 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
        super.writeToNBT(par1NBTTagCompound);
        par1NBTTagCompound.setInteger("currentStorage", currentStorage);
        par1NBTTagCompound.setInteger("maxStorage", maxStorage);
+
+       for(int i = 0; i < 6; i++) {
+    	   par1NBTTagCompound.setBoolean(String.format("connection%d", i), connections[i]);
+       }
     }
     
     
     public void checkConnections() {
     	for(int j = 0; j < 6; j++) {
+    		connections[j] = false;
  		   ForgeDirection offset = ForgeDirection.getOrientation(j);
  		   int locx = this.xCoord + offset.offsetX;
  		   int locy = this.yCoord + offset.offsetY;
