@@ -201,11 +201,11 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		FemtocraftRenderUtils.drawArbitraryFace(x, y, z, -4.0F/16.0F + xoffset, 4.0F/16.0F + xoffset, -4.0F/16.0F + yoffset, 4.0F/16.0F + yoffset, -4.0F/16.0F + zoffset, 4.0F/16.0F + zoffset, 
 				face1, cable.border, cable.border.getMinU(), cable.border.getMaxU(), cable.border.getMinV(), cable.border.getMaxV());
 		FemtocraftRenderUtils.drawArbitraryFace(x, y, z, -4.0F/16.0F + xoffset, 4.0F/16.0F + xoffset, -4.0F/16.0F + yoffset, 4.0F/16.0F + yoffset, -4.0F/16.0F + zoffset, 4.0F/16.0F + zoffset, 
-				face2, cable.border, cable.border.getMinU(), cable.border.getMaxU(), cable.border.getMaxV(), cable.border.getMinV());
+				face2, cable.border, cable.border.getMinU(), cable.border.getMaxU(), cable.border.getMinV(), cable.border.getMaxV());
 		FemtocraftRenderUtils.drawArbitraryFace(x, y, z, -4.0F/16.0F + xoffset, 4.0F/16.0F + xoffset, -4.0F/16.0F + yoffset, 4.0F/16.0F + yoffset, -4.0F/16.0F + zoffset, 4.0F/16.0F + zoffset, 
-				face3, cable.border, cable.border.getMaxU(), cable.border.getMinU(), cable.border.getMaxV(), cable.border.getMinV());
+				face3, cable.border, cable.border.getMinU(), cable.border.getMaxU(), cable.border.getMinV(), cable.border.getMaxV());
 		FemtocraftRenderUtils.drawArbitraryFace(x, y, z, -4.0F/16.0F + xoffset, 4.0F/16.0F + xoffset, -4.0F/16.0F + yoffset, 4.0F/16.0F + yoffset, -4.0F/16.0F + zoffset, 4.0F/16.0F + zoffset, 
-				face4, cable.border, cable.border.getMaxU(), cable.border.getMinU(), cable.border.getMinV(), cable.border.getMaxV());	
+				face4, cable.border, cable.border.getMinU(), cable.border.getMaxU(), cable.border.getMinV(), cable.border.getMaxV());	
 	}
 
 }
