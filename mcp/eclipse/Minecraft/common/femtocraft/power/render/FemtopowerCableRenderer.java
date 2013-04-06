@@ -27,11 +27,6 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
-		if(modelID == ClientProxyFemtocraft.FemtopowerCableRenderID) {
-			block.setBlockBoundsForItemRender();
-			
-			drawCore((FemtopowerCable)block, -.5F, -.5F, -.5F, renderer, new boolean[] {false, false, false, false, false, false});
-		}
 	}
 
 	@Override
@@ -43,7 +38,7 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public boolean shouldRender3DInInventory() {
-		return true;
+		return false;
 	}
 
 	@Override
@@ -85,7 +80,37 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 	}
 	
 	private void drawCore(FemtopowerCable cable, float x, float y, float z, RenderBlocks renderer, boolean[] connections) {
+		FemtopowerCableTile tile = (FemtopowerCableTile)renderer.blockAccess.getBlockTileEntity((int)x, (int)y, (int)z);
+		if(tile == null) return;
 		
+		if(!tile.connectedAcross())
+			drawCoreBlock(cable, x, y, z, renderer, connections);
+		else {
+			if(connections[0]) {
+				drawCoil(cable, x, y, z, 2.0F/16.0F, renderer, ForgeDirection.getOrientation(0));
+				drawCoil(cable, x, y, z, 2.0F/16.0F, renderer, ForgeDirection.getOrientation(0).getOpposite());
+			}
+			else if (connections [2]) {
+				drawCoil(cable, x, y, z, 2.0F/16.0F, renderer, ForgeDirection.getOrientation(2));
+				drawCoil(cable, x, y, z, 2.0F/16.0F, renderer, ForgeDirection.getOrientation(2).getOpposite());
+			}
+			else if (connections [4]) {
+				drawCoil(cable, x, y, z, 2.0F/16.0F, renderer, ForgeDirection.getOrientation(4));
+				drawCoil(cable, x, y, z, 2.0F/16.0F, renderer, ForgeDirection.getOrientation(4).getOpposite());
+			}
+		}
+		
+		//Draw connecting tubes
+		for(int i = 0; i < 6; i++) {
+			if(connections[i]) {
+				//Draw coil and connectors
+				drawCoil(cable, x, y, z, 6.0F/16.0F, renderer, ForgeDirection.getOrientation(i));
+			}
+		}
+	}
+
+	private void drawCoreBlock(FemtopowerCable cable, float x, float y,
+			float z, RenderBlocks renderer, boolean[] connections) {
 		FemtocraftRenderUtils.renderCube(x, y, z, 5.0f/16.0f, 5.0f/16.0f, 5.0f/16.0f, 11.0f/16.0f, 11.0f/16.0f, 11.0f/16.0f, cable.coil);
 		FemtocraftRenderUtils.renderCube(x, y, z, 4.0f/16.0f, 4.0f/16.0f, 4.0f/16.0f, 12.0f/16.0f, 12.0f/16.0f, 12.0f/16.0f, cable.coreBorder);
 
@@ -96,14 +121,6 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		drawConnector(cable, x, y, z, 3.0F/16.0F, renderer, ForgeDirection.EAST, !connections[5]);
 		drawConnector(cable, x, y, z, 3.0F/16.0F, renderer, ForgeDirection.SOUTH, !connections[3]);
 		drawConnector(cable, x, y, z, 3.0F/16.0F, renderer, ForgeDirection.WEST, !connections[4]);
-		
-		//Draw connecting tubes
-		for(int i = 0; i < 6; i++) {
-			if(connections[i]) {
-				//Draw coil and connectors
-				drawCoil(cable, x, y, z, 6.0F/16.0F, renderer, ForgeDirection.getOrientation(i));
-			}
-		}
 	}
 	
 	private void drawConnector(FemtopowerCable cable, float x, float y, float z, float offset, RenderBlocks renderer, ForgeDirection direction, boolean drawCap) {
@@ -176,51 +193,30 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 	
 	private void drawCoil(FemtopowerCable cable, float x, float y, float z, float offset, RenderBlocks renderer, ForgeDirection direction) {
 		ForgeDirection rotaxi = ForgeDirection.UNKNOWN;
-		float xoffset = 0;
-		float yoffset = 0;
-		float zoffset = 0;
 		double yrot = Math.PI/2.0D;
 		double xrot = 0;
 		
 		switch(direction) {
 			case UP:
 				rotaxi = ForgeDirection.EAST;
-				xoffset = .5F;
-				yoffset = .5F + offset;
-				zoffset = .5F;
 				xrot += Math.PI/2.0D;
 				break;
 			case DOWN:
 				rotaxi = ForgeDirection.WEST;
-				xoffset = .5F;
-				yoffset = .5F - offset;
-				zoffset = .5F;
 				xrot -= Math.PI/2.0D;
 				break;
 			case NORTH:
-				xoffset = .5F;
-				yoffset = .5F;
-				zoffset = .5F - offset;
 				rotaxi = ForgeDirection.UP;
 				break;
 			case EAST:
-				xoffset = .5F + offset;
-				yoffset = .5F;
-				zoffset = .5F;
 				rotaxi = ForgeDirection.DOWN;
 				yrot += Math.PI/2.0D;
 				break;
 			case SOUTH:
-				xoffset = .5F;
-				yoffset = .5F;
-				zoffset = .5F + offset;
 				rotaxi = ForgeDirection.DOWN;
 				yrot += Math.PI;
 				break;
 			case WEST:
-				xoffset = .5F - offset;
-				yoffset = .5F;
-				zoffset = .5F;
 				rotaxi = ForgeDirection.UP;
 				yrot -= Math.PI/2.0D;
 				break;
@@ -233,19 +229,21 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		face3 = face2.getRotation(direction);
 		face4 = face3.getRotation(direction);
 
-		drawConnector(cable, x, y, z, 7.0F/16.0F, renderer, direction, true);
-		drawConnector(cable, x, y, z, 5.0F/16.0F, renderer, direction, false);
+		drawConnector(cable, x, y, z, 1.0F/16.0F + offset, renderer, direction, true);
+		drawConnector(cable, x, y, z, -1.0F/16.0F + offset, renderer, direction, false);
+		
+		offset = .5F - offset;
 		
 		//West-face, AA - top left, AB - bot left, AC - bot right, AD - top right
-		Point AA = new Point(4.0F/16.0F, 12.0F/16.0F, 0.0F/16.0F);
-		Point AB = new Point(4.0F/16.0F, 4.0F/16.0F, 0.0F/16.0F);
-		Point AC = new Point(4.0F/16.0F, 4.0F/16.0F, 4.0F/16.0F);
-		Point AD = new Point(4.0F/16.0F, 12.0F/16.0F, 4.0F/16.0F);
+		Point AA = new Point(4.0F/16.0F, 12.0F/16.0F, -2.0F/16.0F + offset);
+		Point AB = new Point(4.0F/16.0F, 4.0F/16.0F, -2.0F/16.0F + offset);
+		Point AC = new Point(4.0F/16.0F, 4.0F/16.0F, 2.0F/16.0F + offset);
+		Point AD = new Point(4.0F/16.0F, 12.0F/16.0F, 2.0F/16.0F + offset);
 		//East-face, BA - top left, BB - bottom left, BC - bottom right, BD - top right
-		Point BA = new Point(12.0F/16.0F, 12.0F/16.0F, 4.0F/16.0F);
-		Point BB = new Point(12.0F/16.0F, 4.0F/16.0F, 4.0F/16.0F);
-		Point BC = new Point(12.0F/16.0F, 4.0F/16.0F, 0.0F/16.0F);
-		Point BD = new Point(12.0F/16.0F, 12.0F/16.0F, 0.0F/16.0F);
+		Point BA = new Point(12.0F/16.0F, 12.0F/16.0F, 2.0F/16.0F + offset);
+		Point BB = new Point(12.0F/16.0F, 4.0F/16.0F, 2.0F/16.0F + offset);
+		Point BC = new Point(12.0F/16.0F, 4.0F/16.0F, -2.0F/16.0F + offset);
+		Point BD = new Point(12.0F/16.0F, 12.0F/16.0F, -2.0F/16.0F + offset);
 		
 		//West-face, AA - top left, AB - bot left, AC - bot right, AD - top right
 		Point rotAA = AA.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
@@ -272,15 +270,15 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		//Draw coil
 		
 		//West-face, AA - top left, AB - bot left, AC - bot right, AD - top right
-		AA = new Point(5.0F/16.0F, 11.0F/16.0F, 1.0F/16.0F);
-		AB = new Point(5.0F/16.0F, 5.0F/16.0F, 1.0F/16.0F);
-		AC = new Point(5.0F/16.0F, 5.0F/16.0F, 3.0F/16.0F);
-		AD = new Point(5.0F/16.0F, 11.0F/16.0F, 3.0F/16.0F);
+		AA = new Point(5.0F/16.0F, 11.0F/16.0F, -1.0F/16.0F + offset);
+		AB = new Point(5.0F/16.0F, 5.0F/16.0F, -1.0F/16.0F + offset);
+		AC = new Point(5.0F/16.0F, 5.0F/16.0F, 1.0F/16.0F + offset);
+		AD = new Point(5.0F/16.0F, 11.0F/16.0F, 1.0F/16.0F + offset);
 		//East-face, BA - top left, BB - bottom left, BC - bottom right, BD - top right
-		BA = new Point(11.0F/16.0F, 11.0F/16.0F, 3.0F/16.0F);
-		BB = new Point(11.0F/16.0F, 5.0F/16.0F, 3.0F/16.0F);
-		BC = new Point(11.0F/16.0F, 5.0F/16.0F, 1.0F/16.0F);
-		BD = new Point(11.0F/16.0F, 11.0F/16.0F, 1.0F/16.0F);
+		BA = new Point(11.0F/16.0F, 11.0F/16.0F, 1.0F/16.0F + offset);
+		BB = new Point(11.0F/16.0F, 5.0F/16.0F, 1.0F/16.0F + offset);
+		BC = new Point(11.0F/16.0F, 5.0F/16.0F, -1.0F/16.0F + offset);
+		BD = new Point(11.0F/16.0F, 11.0F/16.0F, -1.0F/16.0F + offset);
 		
 		//West-face, AA - top left, AB - bot left, AC - bot right, AD - top right
 		rotAA = AA.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
