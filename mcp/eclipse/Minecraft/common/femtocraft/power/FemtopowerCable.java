@@ -40,6 +40,14 @@ public class FemtopowerCable extends FemtopowerContainer {
 		return false;
 	}
 	
+	/* (non-Javadoc)
+	 * @see net.minecraft.block.Block#getLightOpacity(net.minecraft.world.World, int, int, int)
+	 */
+	@Override
+	public int getLightOpacity(World world, int x, int y, int z) {
+		return 0;
+	}
+
 	@Override
 	public boolean renderAsNormalBlock() {
 		return false;

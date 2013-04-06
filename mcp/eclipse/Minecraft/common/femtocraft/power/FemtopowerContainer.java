@@ -6,9 +6,12 @@ package femtocraft.power;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 import femtocraft.power.TileEntity.FemtopowerTile;
 
 /**
@@ -33,10 +36,44 @@ public class FemtopowerContainer extends BlockContainer {
 	public void onNeighborBlockChange(World par1World, int par2, int par3,
 			int par4, int par5) {
 		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
-		//FemtopowerTile container = (FemtopowerTile)par1World.getBlockTileEntity(par2, par3, par4);
-		//
-		//if(container != null)
-		//	container.checkConnections();
+		FemtopowerTile container = (FemtopowerTile)par1World.getBlockTileEntity(par2, par3, par4);
+		
+		if(container != null)
+			container.checkConnections();
+	}
+
+	/* (non-Javadoc)
+	 * @see net.minecraft.block.Block#onBlockPlacedBy(net.minecraft.world.World, int, int, int, net.minecraft.entity.EntityLiving, net.minecraft.item.ItemStack)
+	 */
+	@Override
+	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
+			EntityLiving par5EntityLiving, ItemStack par6ItemStack) {
+		// TODO Auto-generated method stub
+		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLiving,
+				par6ItemStack);
+
+		
+		FemtopowerTile container = (FemtopowerTile)par1World.getBlockTileEntity(par2, par3, par4);
+		
+		if(container != null)
+			container.checkConnections();
+	}
+
+	/* (non-Javadoc)
+	 * @see net.minecraft.block.Block#onPostBlockPlaced(net.minecraft.world.World, int, int, int, int)
+	 */
+	@Override
+	public void onPostBlockPlaced(World par1World, int par2, int par3,
+			int par4, int par5) {
+		// TODO Auto-generated method stub
+		super.onPostBlockPlaced(par1World, par2, par3, par4, par5);
+		
+		par1World.notifyBlocksOfNeighborChange(par2, par3, par4, par1World.getBlockId(par2, par3, par4));
+		
+		FemtopowerTile container = (FemtopowerTile)par1World.getBlockTileEntity(par2, par3, par4);
+		
+		if(container != null)
+			container.checkConnections();
 	}
 
 	/* (non-Javadoc)
@@ -48,12 +85,12 @@ public class FemtopowerContainer extends BlockContainer {
 		// TODO Auto-generated method stub
 		int val = super.onBlockPlaced(par1World, par2, par3, par4, par5, par6, par7, par8,
 				par9);
-	//	FemtopowerTile container = (FemtopowerTile)par1World.getBlockTileEntity(par2, par3, par4);
+		FemtopowerTile container = (FemtopowerTile)par1World.getBlockTileEntity(par2, par3, par4);
 		
-		//if(container != null)
-		//	container.checkConnections();
+		if(container != null)
+			container.checkConnections();
 		
-		//par1World.notifyBlocksOfNeighborChange(par2, par3, par4, par1World.getBlockId(par2, par3, par4));
+		par1World.notifyBlocksOfNeighborChange(par2, par3, par4, par1World.getBlockId(par2, par3, par4));
 		
 		return val;
 	}
