@@ -6,6 +6,7 @@ package femtocraft.power.render;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -50,24 +51,28 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		FemtopowerCable cable = (FemtopowerCable)block;
 		if(block == null) return false;
 		
-		//Render border
-		renderer.setOverrideBlockTexture(cable.coreBorder);
-		block.setBlockBounds(4.F/16.0F, 4.F/16.0F, 4.F/16.0F, 12.F/16.0F, 12.F/16.0F, 12.F/16.F);
-		renderer.setRenderBoundsFromBlock(block);
-		renderer.renderStandardBlock(block, x, y, z);
-		renderer.clearOverrideBlockTexture();
-		
-		block.setBlockBounds(5.F/16.0F, 5.F/16.0F, 5.F/16.0F, 11.F/16.0F, 11.F/16.0F, 11.F/16.F);
-		renderer.setRenderBoundsFromBlock(block);
-		renderer.renderStandardBlock(block, x, y, z);
-		
-		renderer.clearOverrideBlockTexture();
-		
-		cable.setBlockBounds();
+//		//Render border
+//		renderer.setOverrideBlockTexture(cable.coreBorder);
+//		block.setBlockBounds(4.F/16.0F, 4.F/16.0F, 4.F/16.0F, 12.F/16.0F, 12.F/16.0F, 12.F/16.F);
+//		renderer.setRenderBoundsFromBlock(block);
+//		renderer.renderStandardBlock(block, x, y, z);
+//		renderer.clearOverrideBlockTexture();
+//		
+//		block.setBlockBounds(5.F/16.0F, 5.F/16.0F, 5.F/16.0F, 11.F/16.0F, 11.F/16.0F, 11.F/16.F);
+//		renderer.setRenderBoundsFromBlock(block);
+//		renderer.renderStandardBlock(block, x, y, z);
+//		
+//		renderer.clearOverrideBlockTexture();
+//		
+//		renderer.
+//		
+//		cable.setBlockBounds();
 		
 		//Render core
+		Tessellator tessellator = Tessellator.instance;
+		tessellator.setBrightness(block.getMixedBrightnessForBlock(renderer.blockAccess, x, y, z));
 		
-//		drawCore(cable, x, y, z, renderer);
+		drawCore(cable, x, y, z, renderer);
 		
 		
 		return true;
@@ -248,14 +253,14 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		Point rotBD = BD.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
 		
 		//West
-		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotAA, rotAB, rotAC, rotAD, cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
+		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotAD, rotAC, rotAB, rotAA, cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
 		//East
-		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotBA, rotBB, rotBC, rotBD, cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
+		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotBD, rotBC, rotBB, rotBA, cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
 		
 		//Top
-		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotBD, rotAA, rotAD, rotBD, cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
+		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotBA, rotAD, rotAA, rotBD, cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
 		//Bottom
-		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotBB, rotAC, rotAB, rotBC, cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
+		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotBC, rotAB, rotAC, rotBB, cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
 	}
 
 }
