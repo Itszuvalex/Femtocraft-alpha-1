@@ -45,7 +45,7 @@ public class FemtopowerCable extends FemtopowerContainer {
 	 */
 	@Override
 	public int getLightOpacity(World world, int x, int y, int z) {
-		return 0;
+		return 1;
 	}
 
 	@Override

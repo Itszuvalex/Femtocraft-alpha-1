@@ -86,6 +86,8 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 	@Override
 	 public void updateEntity()
     {
+		checkConnections();
+		
 		//Don't do anything for empty containers
 		if(currentStorage <= 0 || this.worldObj.isRemote) {
 			return;
@@ -186,9 +188,9 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
        currentStorage = par1NBTTagCompound.getInteger("currentStorage");
        maxStorage = par1NBTTagCompound.getInteger("maxStorage");
        
-       for(int i = 0; i < 6; i++) {
-    	  connections[i] = par1NBTTagCompound.getBoolean(String.format("connection%d", i));
-       }
+//       for(int i = 0; i < 6; i++) {
+//    	  connections[i] = par1NBTTagCompound.getBoolean(String.format("connection%d", i));
+//       }
     }
 
     /**
@@ -200,9 +202,9 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
        par1NBTTagCompound.setInteger("currentStorage", currentStorage);
        par1NBTTagCompound.setInteger("maxStorage", maxStorage);
 
-       for(int i = 0; i < 6; i++) {
-    	   par1NBTTagCompound.setBoolean(String.format("connection%d", i), connections[i]);
-       }
+//       for(int i = 0; i < 6; i++) {
+//    	   par1NBTTagCompound.setBoolean(String.format("connection%d", i), connections[i]);
+//       }
     }
     
     
@@ -220,5 +222,5 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
  			   connections[j] = true;
  		   }
  	   }
-    }
+      }
 }
