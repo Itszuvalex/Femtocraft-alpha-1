@@ -1,36 +1,40 @@
 package femtocraft.cooking.blocks;
 
+import java.util.Random;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.proxy.ClientProxyFemtocraft;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.IconFlipped;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class cuttingBoard extends Block {
-	@SideOnly(Side.CLIENT)
-	private Icon cuttingBoardTop;
-	@SideOnly(Side.CLIENT)
-	private Icon cuttingBoardBottom;
+public class CuttingBoard extends Block {
+	
+	 /**
+     * Is the random generator used by furnace to drop the inventory contents in random directions.
+     */
+    private final Random furnaceRand = new Random();
+	
 	@SideOnly(Side.CLIENT)
 	public Icon cuttingBoardSideNS;
 	@SideOnly(Side.CLIENT)
 	public Icon cuttingBoardSideW;
 	@SideOnly(Side.CLIENT)
 	public Icon cuttingBoardSideE;
-	
-	public Icon getCuttingBoardTop() {
-		return cuttingBoardTop;
-	}
-
-	public Icon getCuttingBoardBottom() {
-		return cuttingBoardBottom;
-	}
 
 	public Icon getCuttingBoardSideNS() {
 		return cuttingBoardSideNS;
@@ -44,11 +48,13 @@ public class cuttingBoard extends Block {
 		return cuttingBoardSideE;
 	}
 
-	public cuttingBoard(int id) {
+	private static final float MIN_DIST = 1.0f / 16.0f; 
+	private static final float MAX_DIST = 15.0f / 16.0f;
+	
+	public CuttingBoard(int id) {
 		super(id, Material.cake);
-		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
+		this.setBlockBounds(MIN_DIST, 0.0F, MIN_DIST, MAX_DIST, MIN_DIST, MAX_DIST);
 		setCreativeTab(Femtocraft.femtocraftTab);
-//		this.func_96478_d(0);
 	}
 
 	@Override
@@ -86,80 +92,115 @@ public class cuttingBoard extends Block {
 	{
 		return 1;
 	}
-  
-	
-//    /**
-//     * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
-//     * cleared to be reused)
-//     */
-//    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
-//    {
-//        int l = par1World.getBlockMetadata(par2, par3, par4) & 7;
-//        float f = 0.125F;
-//        return AxisAlignedBB.getAABBPool().getAABB((double)par2 + this.minX, (double)par3 + this.minY, (double)par4 + this.minZ, (double)par2 + this.maxX, (double)((float)par3 + (float)l * f), (double)par4 + this.maxZ);
-//    }
-//    
-//    /**
-//     * Sets the block's bounds for rendering it as an item
-//     */
-//    public void setBlockBoundsForItemRender()
-//    {
-//        this.func_96478_d(0);
-//    }
-//
-//    /**
-//     * Updates the blocks bounds based on its current state. Args: world, x, y, z
-//     */
-//    public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
-//    {
-//        this.func_96478_d(par1IBlockAccess.getBlockMetadata(par2, par3, par4));
-//    }
-//	
-//    protected void func_96478_d(int par1)
-//    {
-//        int j = par1 & 7;
-//        float f = (float)(2 * (1 + j)) / 16.0F;
-//        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, f, 1.0F);
-//    }
-//    
-//	/**
-//     * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
-//     */
-//    public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
-//    {
-//        int l = par1World.getBlockId(par2, par3 - 1, par4);        
-//        Block block = Block.blocksList[l];
-//        if (block == null) return false;
-//        if (block == this && (par1World.getBlockMetadata(par2, par3 - 1, par4) & 7) == 7) return true;
-//        if (block.isLeaves(par1World, par2, par3 - 1, par4) && Block.blocksList[l].isOpaqueCube()) return false;
-//        return par1World.getBlockMaterial(par2, par3 - 1, par4).blocksMovement();
-//    }
-//	
-//    @SideOnly(Side.CLIENT)
-//    /**
-//     * Returns true if the given side of this block type should be rendered, if the adjacent block is at the given
-//     * coordinates.  Args: blockAccess, x, y, z, side
-//     */
-//    public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
-//    {
-//        return par5 == 1 ? true : super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5);
-//    }
-	
-//	@Override
-//	@SideOnly(Side.CLIENT)
-//	public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
-//		if(par1 == 0 || par1 == 1) return this.cuttingBoardTop;
-//		else return this.cuttingBoardSide;
-//	}
 
 	@SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister)
+    public void registerIcons(IconRegister iconRegister)
     {
-        this.blockIcon = par1IconRegister.registerIcon("Femtocraft:cuttingBoard");
-        this.cuttingBoardTop = par1IconRegister.registerIcon("Femtocraft:cuttingBoard");
-        this.cuttingBoardSideNS = par1IconRegister.registerIcon("Femtocraft:cuttingBoard_NorthSouth");
-        this.cuttingBoardSideE = par1IconRegister.registerIcon("Femtocraft:cuttingBoard_Left");
-        this.cuttingBoardSideW = par1IconRegister.registerIcon("Femtocraft:cuttingBoard_Right");
+        this.blockIcon = iconRegister.registerIcon("Femtocraft:cuttingBoard"); //top
+        this.cuttingBoardSideNS = iconRegister.registerIcon("Femtocraft:cuttingBoard_NorthSouth");
+        this.cuttingBoardSideNS = new IconFlipped(this.cuttingBoardSideNS, true, false);
+        this.cuttingBoardSideE = iconRegister.registerIcon("Femtocraft:cuttingBoard_Left");
+        this.cuttingBoardSideW = iconRegister.registerIcon("Femtocraft:cuttingBoard_Right");
     }
 	
+	/**
+     * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
+     * their own) Args: x, y, z, neighbor blockID
+     */
+	public void onNeighborBlockChange(World par1World, int x, int y, int z, int neighborBlockID)
+    {
+        if (!par1World.doesBlockHaveSolidTopSurface(x, y - 1, z))
+        {
+            this.dropBlockAsItem(par1World, x, y, z, par1World.getBlockMetadata(x, y, z), 0);
+            par1World.setBlockToAir(x, y, z);
+        }
+    }
+	
+	/**
+     * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
+     */
+    public boolean canPlaceBlockAt(World par1World, int x, int y, int z)
+    {
+        return par1World.doesBlockHaveSolidTopSurface(x, y - 1, z);
+    }
+
+    /**
+     * Returns the mobility information of the block, 0 = free, 1 = can't push but can move over, 2 = total immobility
+     * and stop pistons
+     */
+    public int getMobilityFlag()
+    {
+        return 1;
+    }
+    
+    /**
+     * Called upon block activation (right click on the block.)
+     */
+    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
+    {
+        if (par1World.isRemote)
+        {
+            return true;
+        }
+        else
+        {
+        	TileEntityFurnace tileentityfurnace = (TileEntityFurnace)par1World.getBlockTileEntity(par2, par3, par4);
+
+            if (tileentityfurnace != null)
+            {
+                par5EntityPlayer.displayGUIFurnace(tileentityfurnace);
+            }
+
+            return true;
+        }
+    }
+    
+    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
+    {
+        TileEntityFurnace tileentityfurnace = (TileEntityFurnace)par1World.getBlockTileEntity(par2, par3, par4);
+
+        if (tileentityfurnace != null)
+        {
+            for (int j1 = 0; j1 < tileentityfurnace.getSizeInventory(); ++j1)
+            {
+                ItemStack itemstack = tileentityfurnace.getStackInSlot(j1);
+
+                if (itemstack != null)
+                {
+                    float f = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+                    float f1 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+                    float f2 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+
+                    while (itemstack.stackSize > 0)
+                    {
+                        int k1 = this.furnaceRand.nextInt(21) + 10;
+
+                        if (k1 > itemstack.stackSize)
+                        {
+                            k1 = itemstack.stackSize;
+                        }
+
+                        itemstack.stackSize -= k1;
+                        EntityItem entityitem = new EntityItem(par1World, (double)((float)par2 + f), (double)((float)par3 + f1), (double)((float)par4 + f2), new ItemStack(itemstack.itemID, k1, itemstack.getItemDamage()));
+
+                        if (itemstack.hasTagCompound())
+                        {
+                            entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
+                        }
+
+                        float f3 = 0.05F;
+                        entityitem.motionX = (double)((float)this.furnaceRand.nextGaussian() * f3);
+                        entityitem.motionY = (double)((float)this.furnaceRand.nextGaussian() * f3 + 0.2F);
+                        entityitem.motionZ = (double)((float)this.furnaceRand.nextGaussian() * f3);
+                        par1World.spawnEntityInWorld(entityitem);
+                    }
+                }
+            }
+
+            par1World.func_96440_m(par2, par3, par4, par5);
+        }
+
+        super.breakBlock(par1World, par2, par3, par4, par5, par6);
+    }
+    
 }
