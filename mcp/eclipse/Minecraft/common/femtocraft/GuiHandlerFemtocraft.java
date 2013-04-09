@@ -10,6 +10,9 @@ import femtocraft.industry.gui.GuiMicroFurnace;
 
 public class GuiHandlerFemtocraft implements IGuiHandler {
 
+	//Can switch on type of tile entity, or can alternatively switch on type ID.
+	//However, going to have to pull tile entity anyways, so might as well just use that.
+	
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {

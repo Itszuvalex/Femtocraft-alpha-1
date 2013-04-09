@@ -129,7 +129,7 @@ public class MicroFurnaceTile  extends FemtopowerTile implements ISidedInventory
      */
     public String getInvName()
     {
-        return this.isInvNameLocalized() ? this.field_94130_e : "container.MicroFurnace";
+        return this.isInvNameLocalized() ? this.field_94130_e : "MicroFurnace";
     }
 
     /**
