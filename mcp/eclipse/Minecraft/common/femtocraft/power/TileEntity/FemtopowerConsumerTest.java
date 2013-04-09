@@ -2,10 +2,20 @@ package femtocraft.power.TileEntity;
 
 import net.minecraftforge.common.ForgeDirection;
 
-public class FemtopowerConsumer extends FemtopowerTile {
+public class FemtopowerConsumerTest extends FemtopowerConsumer {
+	private int amountPerTick;
 	
-	public FemtopowerConsumer() {
+	
+	public FemtopowerConsumerTest() {
 		super();
+		amountPerTick = 10;
+	}
+
+	@Override
+	 public void updateEntity() {
+		if(!this.worldObj.isRemote)
+			consume(amountPerTick);
+		super.updateEntity();
 	}
 	
 	@Override

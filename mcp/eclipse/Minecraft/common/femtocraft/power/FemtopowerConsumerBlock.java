@@ -4,7 +4,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import femtocraft.Femtocraft;
-import femtocraft.power.TileEntity.FemtopowerConsumer;
+import femtocraft.power.TileEntity.FemtopowerConsumerTest;
 
 public class FemtopowerConsumerBlock extends FemtopowerContainer {
 
@@ -15,7 +15,7 @@ public class FemtopowerConsumerBlock extends FemtopowerContainer {
 	
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new FemtopowerConsumer();
+		return new FemtopowerConsumerTest();
 	}
 	
 	@Override

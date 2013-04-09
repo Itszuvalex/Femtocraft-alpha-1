@@ -21,6 +21,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import femtocraft.blocks.femtoStone;
@@ -30,6 +31,7 @@ import femtocraft.blocks.unidentifiedAlloy;
 import femtocraft.farming.produce.Tomato;
 import femtocraft.farming.seeds.tomatoSeed;
 import femtocraft.cooking.blocks.CuttingBoard;
+import femtocraft.industry.blocks.BlockMicroFurnace;
 import femtocraft.items.ingotFarenite;
 import femtocraft.items.ingotPlatinum;
 import femtocraft.items.ingotThorium;
@@ -70,8 +72,9 @@ public class Femtocraft {
 	public static Block femtoStone;
 	public static Block unidentifiedAlloy;
 	public static FemtopowerCable FemtopowerCable;
-	public static Block FemtopowerGenerator;
-	public static Block FemtopowerConsumer;
+	public static Block FemtopowerGeneratorTest;
+	public static Block FemtopowerConsumerTest;
+	public static Block FemtocraftMicroFurnace;
 	
 	//items
 	public static Item ingotTitanium;
@@ -98,6 +101,8 @@ public class Femtocraft {
 		Femtocraft.proxy.registerTileEntities();
 		Femtocraft.proxy.registerRendering();
 		Femtocraft.proxy.registerBlockRenderers();
+		
+		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandlerFemtocraft());
 	}
 	
 	@Init
@@ -159,13 +164,17 @@ public class Femtocraft {
 		 GameRegistry.registerBlock(FemtopowerCable, "FemtopowerCable");
 		 LanguageRegistry.addName(FemtopowerCable, "Femtopower Cable");
 		 
-		 FemtopowerGenerator = new FemtopowerGenerator(Configs.FemtopowerGeneratorID, Material.rock).setUnlocalizedName("FemtopowerGenerator").setStepSound(Block.soundStoneFootstep);
-		 GameRegistry.registerBlock(FemtopowerGenerator, "FemtopowerGenerator");
-		 LanguageRegistry.addName(FemtopowerGenerator, "Femtopower Generator");
+		 FemtopowerGeneratorTest = new FemtopowerGenerator(Configs.FemtopowerGeneratorTestID, Material.rock).setUnlocalizedName("FemtopowerGenerator").setStepSound(Block.soundStoneFootstep);
+		 GameRegistry.registerBlock(FemtopowerGeneratorTest, "FemtopowerGenerator");
+		 LanguageRegistry.addName(FemtopowerGeneratorTest, "Femtopower Generator");
 		 
-		 FemtopowerConsumer = new FemtopowerConsumerBlock(Configs.FemtopowerConsumerBlockID, Material.rock).setUnlocalizedName("FemtopowerConsumer").setStepSound(Block.soundStoneFootstep);
-		 GameRegistry.registerBlock(FemtopowerConsumer, "FemtopowerConsumer");
-		 LanguageRegistry.addName(FemtopowerConsumer, "Femtopower Consumer");
+		 FemtopowerConsumerTest = new FemtopowerConsumerBlock(Configs.FemtopowerConsumerTestBlockID, Material.rock).setUnlocalizedName("FemtopowerConsumer").setStepSound(Block.soundStoneFootstep);
+		 GameRegistry.registerBlock(FemtopowerConsumerTest, "FemtopowerConsumer");
+		 LanguageRegistry.addName(FemtopowerConsumerTest, "Femtopower Consumer");
+		 
+		 FemtocraftMicroFurnace = new BlockMicroFurnace(Configs.FemtocraftMicroFurnaceID, false).setUnlocalizedName("FemtocraftMicroFurnace").setStepSound(Block.soundStoneFootstep);
+		 GameRegistry.registerBlock(FemtocraftMicroFurnace, "FemtocraftMicroFurnace");
+		 LanguageRegistry.addName(FemtocraftMicroFurnace, "Micro-Furnace");
 		 
 		 //items
 		 

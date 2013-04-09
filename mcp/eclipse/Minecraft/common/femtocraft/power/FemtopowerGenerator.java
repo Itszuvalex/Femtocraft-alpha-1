@@ -7,7 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import femtocraft.Femtocraft;
-import femtocraft.power.TileEntity.FemtopowerProducer;
+import femtocraft.power.TileEntity.FemtopowerProducerTest;
 
 public class FemtopowerGenerator extends FemtopowerContainer {
 	
@@ -18,7 +18,7 @@ public class FemtopowerGenerator extends FemtopowerContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new FemtopowerProducer();
+		return new FemtopowerProducerTest();
 	}
 	
 	@Override

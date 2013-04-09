@@ -30,8 +30,9 @@ public class Configs {
 	public static @CfgId(block=true) int femtoStoneID = 356;
 	public static @CfgId(block=true) int unidentifiedAlloyID = 357;
 	public static @CfgId(block=true) int FemtopowerCableID = 358;
-	public static @CfgId(block=true) int FemtopowerGeneratorID = 359;
-	public static @CfgId(block=true) int FemtopowerConsumerBlockID = 360;
+	public static @CfgId(block=true) int FemtopowerGeneratorTestID = 359;
+	public static @CfgId(block=true) int FemtopowerConsumerTestBlockID = 360;
+	public static @CfgId(block=true) int FemtocraftMicroFurnaceID = 361;
 	
 	//items
 	public static @CfgId int ingotTitaniumID = 12000;

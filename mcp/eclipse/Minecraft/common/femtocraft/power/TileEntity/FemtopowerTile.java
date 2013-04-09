@@ -25,6 +25,10 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 		Arrays.fill(connections, false);
 	}
 	
+	public void setMaxStorage(int maxStorage_) {
+		maxStorage = maxStorage_;
+	}
+	
 	public boolean isConnected(int i) {
 		return connections[i];
 	}

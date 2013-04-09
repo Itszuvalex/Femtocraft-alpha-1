@@ -2,12 +2,22 @@ package femtocraft.power.TileEntity;
 
 import net.minecraftforge.common.ForgeDirection;
 
-public class FemtopowerProducer extends FemtopowerTile {
+public class FemtopowerProducerTest extends FemtopowerProducer {
+	private int amountPerTick;
 	
-	public FemtopowerProducer() {
+	
+	public FemtopowerProducerTest() {
 		super();
+		amountPerTick = 10;
 	}
 
+	@Override
+	 public void updateEntity() {
+		if(!this.worldObj.isRemote)
+			charge(ForgeDirection.UNKNOWN, amountPerTick);
+		super.updateEntity();
+	}
+	
 	@Override
 	public float getFillPercentageForCharging(ForgeDirection from) {
 		float val = getFillPercentage();
@@ -19,4 +29,3 @@ public class FemtopowerProducer extends FemtopowerTile {
 		return 1.0f;
 	}
 }
-

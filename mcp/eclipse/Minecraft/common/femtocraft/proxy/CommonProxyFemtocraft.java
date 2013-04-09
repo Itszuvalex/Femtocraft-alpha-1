@@ -1,9 +1,10 @@
 package femtocraft.proxy;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import femtocraft.industry.TileEntity.MicroFurnaceTile;
 import femtocraft.power.TileEntity.FemtopowerCableTile;
-import femtocraft.power.TileEntity.FemtopowerConsumer;
-import femtocraft.power.TileEntity.FemtopowerProducer;
+import femtocraft.power.TileEntity.FemtopowerConsumerTest;
+import femtocraft.power.TileEntity.FemtopowerProducerTest;
 
 public class CommonProxyFemtocraft {
 	public void registerRendering() {
@@ -13,8 +14,9 @@ public class CommonProxyFemtocraft {
 	public void registerTileEntities() {
 		 //Tile Entities
 //		 GameRegistry.registerTileEntity(FemtopowerTile.class, "FemtopowerTile");
-		 GameRegistry.registerTileEntity(FemtopowerProducer.class, "FemtopowerProducer");
-		 GameRegistry.registerTileEntity(FemtopowerConsumer.class, "FemtopowerConsumer");
+		 GameRegistry.registerTileEntity(FemtopowerProducerTest.class, "FemtopowerProducerTest");
+		 GameRegistry.registerTileEntity(FemtopowerConsumerTest.class, "FemtopowerConsumerTest");
+		 GameRegistry.registerTileEntity(MicroFurnaceTile.class, "FemtocraftMicroFurnace");
 		 GameRegistry.registerTileEntity(FemtopowerCableTile.class, "FemtopowerCable");
 	}
 	

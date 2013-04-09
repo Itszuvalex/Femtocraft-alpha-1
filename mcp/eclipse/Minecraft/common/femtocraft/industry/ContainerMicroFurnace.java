@@ -17,17 +17,16 @@ public class ContainerMicroFurnace extends Container
 {
     private MicroFurnaceTile furnace;
     private int lastCookTime = 0;
-    private int lastBurnTime = 0;
-    private int lastItemBurnTime = 0;
+    private int lastPower = 0;
 
     public ContainerMicroFurnace(InventoryPlayer par1InventoryPlayer, MicroFurnaceTile par2TileEntityFurnace)
     {
         this.furnace = par2TileEntityFurnace;
-        this.addSlotToContainer(new Slot(par2TileEntityFurnace, 0, 56, 17));
-        this.addSlotToContainer(new Slot(par2TileEntityFurnace, 1, 56, 53));
-        this.addSlotToContainer(new SlotFurnace(par1InventoryPlayer.player, par2TileEntityFurnace, 2, 116, 35));
+        this.addSlotToContainer(new Slot(par2TileEntityFurnace, 0, 56, 35));
+        this.addSlotToContainer(new SlotFurnace(par1InventoryPlayer.player, par2TileEntityFurnace, 1, 116, 35));
         int i;
 
+        //Bind player inventory
         for (i = 0; i < 3; ++i)
         {
             for (int j = 0; j < 9; ++j)
@@ -35,7 +34,7 @@ public class ContainerMicroFurnace extends Container
                 this.addSlotToContainer(new Slot(par1InventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
-
+        //Bind player actionbar
         for (i = 0; i < 9; ++i)
         {
             this.addSlotToContainer(new Slot(par1InventoryPlayer, i, 8 + i * 18, 142));
@@ -46,8 +45,7 @@ public class ContainerMicroFurnace extends Container
     {
         super.addCraftingToCrafters(par1ICrafting);
         par1ICrafting.sendProgressBarUpdate(this, 0, this.furnace.furnaceCookTime);
-        par1ICrafting.sendProgressBarUpdate(this, 1, this.furnace.furnaceBurnTime);
-        par1ICrafting.sendProgressBarUpdate(this, 2, this.furnace.currentItemBurnTime);
+        par1ICrafting.sendProgressBarUpdate(this, 1, this.furnace.getCurrentPower());
     }
 
     /**
@@ -65,21 +63,13 @@ public class ContainerMicroFurnace extends Container
             {
                 icrafting.sendProgressBarUpdate(this, 0, this.furnace.furnaceCookTime);
             }
-
-            if (this.lastBurnTime != this.furnace.furnaceBurnTime)
-            {
-                icrafting.sendProgressBarUpdate(this, 1, this.furnace.furnaceBurnTime);
-            }
-
-            if (this.lastItemBurnTime != this.furnace.currentItemBurnTime)
-            {
-                icrafting.sendProgressBarUpdate(this, 2, this.furnace.currentItemBurnTime);
+            if(this.lastPower != this.furnace.getCurrentPower()) {
+            	icrafting.sendProgressBarUpdate(this, 1, this.furnace.getCurrentPower());
             }
         }
 
         this.lastCookTime = this.furnace.furnaceCookTime;
-        this.lastBurnTime = this.furnace.furnaceBurnTime;
-        this.lastItemBurnTime = this.furnace.currentItemBurnTime;
+        this.lastPower = this.furnace.getCurrentPower();
     }
 
     @SideOnly(Side.CLIENT)
@@ -89,15 +79,9 @@ public class ContainerMicroFurnace extends Container
         {
             this.furnace.furnaceCookTime = par2;
         }
-
-        if (par1 == 1)
+        if(par1 == 1)
         {
-            this.furnace.furnaceBurnTime = par2;
-        }
-
-        if (par1 == 2)
-        {
-            this.furnace.currentItemBurnTime = par2;
+        	this.furnace.currentPower = par2;
         }
     }
 
@@ -119,16 +103,16 @@ public class ContainerMicroFurnace extends Container
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (par2 == 2)
+            if (par2 == 1)
             {
-                if (!this.mergeItemStack(itemstack1, 3, 39, true))
+                if (!this.mergeItemStack(itemstack1, 2, 38, true))
                 {
                     return null;
                 }
 
                 slot.onSlotChange(itemstack1, itemstack);
             }
-            else if (par2 != 1 && par2 != 0)
+            else if ( par2 != 0)
             {
                 if (FurnaceRecipes.smelting().getSmeltingResult(itemstack1) != null)
                 {
@@ -137,26 +121,19 @@ public class ContainerMicroFurnace extends Container
                         return null;
                     }
                 }
-                else if (TileEntityFurnace.isItemFuel(itemstack1))
+                else if (par2 >= 2 && par2 < 29)
                 {
-                    if (!this.mergeItemStack(itemstack1, 1, 2, false))
+                    if (!this.mergeItemStack(itemstack1, 29, 38, false))
                     {
                         return null;
                     }
                 }
-                else if (par2 >= 3 && par2 < 30)
-                {
-                    if (!this.mergeItemStack(itemstack1, 30, 39, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (par2 >= 30 && par2 < 39 && !this.mergeItemStack(itemstack1, 3, 30, false))
+                else if (par2 >= 29 && par2 < 38 && !this.mergeItemStack(itemstack1, 2, 29, false))
                 {
                     return null;
                 }
             }
-            else if (!this.mergeItemStack(itemstack1, 3, 39, false))
+            else if (!this.mergeItemStack(itemstack1, 2, 38, false))
             {
                 return null;
             }
