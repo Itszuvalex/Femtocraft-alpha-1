@@ -247,6 +247,8 @@ public class MicroFurnaceTile  extends FemtopowerTile implements ISidedInventory
      */
     public void updateEntity()
     {
+    	super.updateEntity();
+    	
         boolean flag1 = false;
 
         if(smeltingStack != null) {

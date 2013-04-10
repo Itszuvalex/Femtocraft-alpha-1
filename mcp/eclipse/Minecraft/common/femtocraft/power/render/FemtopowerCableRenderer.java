@@ -27,18 +27,30 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
+		FemtopowerCable cable = (FemtopowerCable)block;
+		if(block == null) return;
+		
+		renderCable(cable, -.5F, -.5F, -.5F, renderer, new boolean[]{false, false, true, false, false, true});
 	}
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
 			Block block, int modelId, RenderBlocks renderer) {
-			return renderCable(block, x, y, z, renderer);
-
+		FemtopowerCable cable = (FemtopowerCable)block;
+		if(block == null) return false;
+		
+		FemtopowerCableTile cableTile = (FemtopowerCableTile)renderer.blockAccess.getBlockTileEntity(x, y, z);
+		if(cableTile == null) return false;
+		
+		Tessellator tessellator = Tessellator.instance;
+		tessellator.setBrightness(cable.getMixedBrightnessForBlock(renderer.blockAccess, x, y, z));
+		
+		return renderCable(cable, x, y, z, renderer, cableTile.connections);
 	}
 
 	@Override
 	public boolean shouldRender3DInInventory() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -46,9 +58,7 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		return ClientProxyFemtocraft.FemtopowerCableRenderID;
 	}
 	
-	private boolean renderCable(Block block, int x, int y, int z, RenderBlocks renderer) {
-		FemtopowerCable cable = (FemtopowerCable)block;
-		if(block == null) return false;
+	private boolean renderCable(FemtopowerCable cable, float x, float y, float z, RenderBlocks renderer, boolean[] connections) {
 		
 //		//Render border
 //		renderer.setOverrideBlockTexture(cable.coreBorder);
@@ -67,23 +77,16 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 //		
 //		cable.setBlockBounds();
 		
-		//Render core
-		FemtopowerCableTile cableTile = (FemtopowerCableTile)renderer.blockAccess.getBlockTileEntity(x, y, z);
-		if(cableTile == null) return false;
+
+		//tessellator.setBrightness((int) (renderer.blockAccess.getLightBrightness(x, y, z) * 100));
 		
-		Tessellator tessellator = Tessellator.instance;
-		tessellator.setBrightness(block.getMixedBrightnessForBlock(renderer.blockAccess, x, y, z));
-		
-		drawCore(cable, x, y, z, renderer, cableTile.connections);
+		drawCore(cable, x, y, z, renderer, connections);
 		
 		return true;
 	}
 	
 	private void drawCore(FemtopowerCable cable, float x, float y, float z, RenderBlocks renderer, boolean[] connections) {
-		FemtopowerCableTile tile = (FemtopowerCableTile)renderer.blockAccess.getBlockTileEntity((int)x, (int)y, (int)z);
-		if(tile == null) return;
-		
-		if(!tile.connectedAcross())
+		if(!connectedAcross(connections))
 			drawCoreBlock(cable, x, y, z, renderer, connections);
 		else {
 			if(connections[0]) {
@@ -306,4 +309,19 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotAA, rotAB, rotBC, rotBD, cable.coil, cable.coil.getMinU(), cable.coil.getMaxU(), cable.coil.getMinV(), cable.coil.getMaxV());
 	}
 
+	
+	private boolean connectedAcross(boolean[] connections) {
+		if(numConnections(connections) == 2) {
+			if(connections[0] == true && connections[1] == true) return true;
+			if(connections[2] == true && connections[3] == true) return true;
+			if(connections[4] == true && connections[5] == true) return true;
+		}
+		return false;
+	}
+	
+	private int numConnections(boolean[] connections) {
+		int count = 0;
+		for(int i =0; i < 6; i++) if(connections[i]) ++count;
+		return count;
+	}
 }
