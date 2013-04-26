@@ -40,14 +40,16 @@ public class BlockMicroFurnace extends BlockContainer
      */
     private static boolean keepFurnaceInventory = false;
     @SideOnly(Side.CLIENT)
-    private Icon field_94458_cO;
+    private Icon frontUnlit;
     @SideOnly(Side.CLIENT)
-    private Icon field_94459_cP;
+    private Icon frontLit;
 
     public BlockMicroFurnace(int par1, boolean par2)
     {
         super(par1, Material.rock);
-        this.setCreativeTab(Femtocraft.femtocraftTab);
+        if(par2) {
+        	this.setCreativeTab(Femtocraft.femtocraftTab);
+        }
         this.isActive = par2;
     }
 
@@ -112,7 +114,20 @@ public class BlockMicroFurnace extends BlockContainer
      */
     public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
     {
-        return par1 == 1 ? this.field_94458_cO : (par1 == 0 ? this.field_94458_cO : (par1 != par2 ? this.blockIcon : this.field_94459_cP));
+    	//                Top                                 Bottom                                Sides             Front
+        //return /*par1 == 1 ? this.field_94458_cO :*/ /*(par1 == 0 ? this.field_94458_cO :*/ (par1 != par2 ? this.blockIcon : this.field_94459_cP));
+    	if(par1 != par2) 
+    	{
+    		return this.blockIcon;
+    	}
+    	else {
+    		if(isActive) {
+    			return this.frontLit;
+    		}
+    		else {
+    			return this.frontUnlit;
+    		}
+    	}
     }
 
     @SideOnly(Side.CLIENT)
@@ -123,7 +138,9 @@ public class BlockMicroFurnace extends BlockContainer
      */
     public void registerIcons(IconRegister par1IconRegister)
     {
-        this.blockIcon = par1IconRegister.registerIcon("Femtocraft:MicroFurnace");
+        this.blockIcon = par1IconRegister.registerIcon("Femtocraft:MicroMachineBlock_side");
+        this.frontLit = par1IconRegister.registerIcon("Femtocraft:MicroFurnace_front_lit");
+        this.frontUnlit = par1IconRegister.registerIcon("Femtocraft:MicroFurnace_Front_unlit");
     }
 
     /**
@@ -145,6 +162,31 @@ public class BlockMicroFurnace extends BlockContainer
             }
 
             return true;
+        }
+    }
+    
+    public static void updateFurnaceBlockState(boolean par0, World par1World, int par2, int par3, int par4)
+    {
+        int l = par1World.getBlockMetadata(par2, par3, par4);
+        TileEntity tileentity = par1World.getBlockTileEntity(par2, par3, par4);
+        keepFurnaceInventory = true;
+
+        if (par0)
+        {
+            par1World.setBlock(par2, par3, par4, Femtocraft.FemtocraftMicroFurnaceLit.blockID);
+        }
+        else
+        {
+            par1World.setBlock(par2, par3, par4, Femtocraft.FemtocraftMicroFurnaceUnlit.blockID);
+        }
+
+        keepFurnaceInventory = false;
+        par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
+
+        if (tileentity != null)
+        {
+            tileentity.validate();
+            par1World.setBlockTileEntity(par2, par3, par4, tileentity);
         }
     }
 
@@ -233,6 +275,8 @@ public class BlockMicroFurnace extends BlockContainer
      */
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
     {
+    	if(!keepFurnaceInventory) {
+    	
             MicroFurnaceTile tileentityfurnace = (MicroFurnaceTile)par1World.getBlockTileEntity(par2, par3, par4);
 
             if (tileentityfurnace != null)
@@ -275,7 +319,7 @@ public class BlockMicroFurnace extends BlockContainer
 
                 par1World.func_96440_m(par2, par3, par4, par5);
             }
-
+    	}
 
         super.breakBlock(par1World, par2, par3, par4, par5, par6);
     }

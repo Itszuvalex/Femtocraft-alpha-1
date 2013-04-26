@@ -74,7 +74,8 @@ public class Femtocraft {
 	public static FemtopowerCable FemtopowerCable;
 	public static Block FemtopowerGeneratorTest;
 	public static Block FemtopowerConsumerTest;
-	public static Block FemtocraftMicroFurnace;
+	public static Block FemtocraftMicroFurnaceUnlit;
+	public static Block FemtocraftMicroFurnaceLit;
 	
 	//items
 	public static Item ingotTitanium;
@@ -172,9 +173,11 @@ public class Femtocraft {
 		 GameRegistry.registerBlock(FemtopowerConsumerTest, "FemtopowerConsumer");
 		 LanguageRegistry.addName(FemtopowerConsumerTest, "Femtopower Consumer");
 		 
-		 FemtocraftMicroFurnace = new BlockMicroFurnace(Configs.FemtocraftMicroFurnaceID, false).setUnlocalizedName("FemtocraftMicroFurnace").setStepSound(Block.soundStoneFootstep);
-		 GameRegistry.registerBlock(FemtocraftMicroFurnace, "FemtocraftMicroFurnace");
-		 LanguageRegistry.addName(FemtocraftMicroFurnace, "Micro-Furnace");
+		 FemtocraftMicroFurnaceUnlit = new BlockMicroFurnace(Configs.FemtocraftMicroFurnaceUnlitID, false).setUnlocalizedName("FemtocraftMicroFurnace").setStepSound(Block.soundStoneFootstep).setCreativeTab(femtocraftTab);
+		 GameRegistry.registerBlock(FemtocraftMicroFurnaceUnlit, "FemtocraftMicroFurnace");
+		 LanguageRegistry.addName(FemtocraftMicroFurnaceUnlit, "Micro-Furnace");
+		 
+		 FemtocraftMicroFurnaceLit = new BlockMicroFurnace(Configs.FemtocraftMicroFurnaceLitID, true).setLightValue(0.875F).setUnlocalizedName("FemtocraftMicroFurnace").setStepSound(Block.soundStoneFootstep);
 		 
 		 //items
 		 

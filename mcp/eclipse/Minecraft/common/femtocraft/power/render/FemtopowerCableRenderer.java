@@ -43,7 +43,8 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		if(cableTile == null) return false;
 		
 		Tessellator tessellator = Tessellator.instance;
-		tessellator.setBrightness(cable.getMixedBrightnessForBlock(renderer.blockAccess, x, y, z));
+		//TODO : Find some actually working light function
+		tessellator.setBrightness((int) (cable.getBlockBrightness(renderer.blockAccess, x, y, z) * 1600.));
 		
 		return renderCable(cable, x, y, z, renderer, cableTile.connections);
 	}

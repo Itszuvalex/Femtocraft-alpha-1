@@ -19,6 +19,7 @@ import net.minecraftforge.common.ForgeDummyContainer;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.industry.blocks.BlockMicroFurnace;
 import femtocraft.power.TileEntity.FemtopowerTile;
 
 public class MicroFurnaceTile  extends FemtopowerTile implements ISidedInventory, net.minecraftforge.common.ISidedInventory
@@ -316,6 +317,7 @@ public class MicroFurnaceTile  extends FemtopowerTile implements ISidedInventory
         }
 		
         this.consume(powerToCook);
+        BlockMicroFurnace.updateFurnaceBlockState(true, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
     }
     
     public void endSmelt() {
@@ -333,10 +335,15 @@ public class MicroFurnaceTile  extends FemtopowerTile implements ISidedInventory
 	        }
 	        
 	        smeltingStack = null;
+	        BlockMicroFurnace.updateFurnaceBlockState(false, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
         }
     }
 
  
+    public boolean isSmelting() {
+    	return smeltingStack != null;
+    }
+    
     /**
      * Do not make give this method the name canInteractWith because it clashes with Container
      */

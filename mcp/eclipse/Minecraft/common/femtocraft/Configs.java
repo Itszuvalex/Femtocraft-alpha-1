@@ -32,7 +32,8 @@ public class Configs {
 	public static @CfgId(block=true) int FemtopowerCableID = 358;
 	public static @CfgId(block=true) int FemtopowerGeneratorTestID = 359;
 	public static @CfgId(block=true) int FemtopowerConsumerTestBlockID = 360;
-	public static @CfgId(block=true) int FemtocraftMicroFurnaceID = 361;
+	public static @CfgId(block=true) int FemtocraftMicroFurnaceUnlitID = 361;
+	public static @CfgId(block=true) int FemtocraftMicroFurnaceLitID = 362;
 	
 	//items
 	public static @CfgId int ingotTitaniumID = 12000;
