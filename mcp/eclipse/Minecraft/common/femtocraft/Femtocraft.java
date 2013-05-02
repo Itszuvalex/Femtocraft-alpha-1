@@ -161,23 +161,23 @@ public class Femtocraft {
 		 GameRegistry.registerBlock(unidentifiedAlloy, "unidentifiedAlloy");
 		 LanguageRegistry.addName(unidentifiedAlloy, "Unidentified Alloy");
 		 
-		 FemtopowerCable = (FemtopowerCable) new FemtopowerCable(Configs.FemtopowerCableID, Material.rock).setUnlocalizedName("FemtopowerCable").setStepSound(Block.soundStoneFootstep);
+		 FemtopowerCable = (FemtopowerCable) new FemtopowerCable(Configs.FemtopowerCableID, Material.rock).setUnlocalizedName("FemtopowerCable").setHardness(1.0f).setStepSound(Block.soundStoneFootstep);
 		 GameRegistry.registerBlock(FemtopowerCable, "FemtopowerCable");
 		 LanguageRegistry.addName(FemtopowerCable, "Femtopower Cable");
 		 
-		 FemtopowerGeneratorTest = new FemtopowerGenerator(Configs.FemtopowerGeneratorTestID, Material.rock).setUnlocalizedName("FemtopowerGenerator").setStepSound(Block.soundStoneFootstep);
+		 FemtopowerGeneratorTest = new FemtopowerGenerator(Configs.FemtopowerGeneratorTestID, Material.rock).setUnlocalizedName("FemtopowerGenerator").setHardness(3.5f).setStepSound(Block.soundStoneFootstep);
 		 GameRegistry.registerBlock(FemtopowerGeneratorTest, "FemtopowerGenerator");
 		 LanguageRegistry.addName(FemtopowerGeneratorTest, "Femtopower Generator");
 		 
-		 FemtopowerConsumerTest = new FemtopowerConsumerBlock(Configs.FemtopowerConsumerTestBlockID, Material.rock).setUnlocalizedName("FemtopowerConsumer").setStepSound(Block.soundStoneFootstep);
+		 FemtopowerConsumerTest = new FemtopowerConsumerBlock(Configs.FemtopowerConsumerTestBlockID, Material.rock).setUnlocalizedName("FemtopowerConsumer").setHardness(3.5f).setStepSound(Block.soundStoneFootstep);
 		 GameRegistry.registerBlock(FemtopowerConsumerTest, "FemtopowerConsumer");
 		 LanguageRegistry.addName(FemtopowerConsumerTest, "Femtopower Consumer");
 		 
-		 FemtocraftMicroFurnaceUnlit = new BlockMicroFurnace(Configs.FemtocraftMicroFurnaceUnlitID, false).setUnlocalizedName("FemtocraftMicroFurnace").setStepSound(Block.soundStoneFootstep).setCreativeTab(femtocraftTab);
+		 FemtocraftMicroFurnaceUnlit = new BlockMicroFurnace(Configs.FemtocraftMicroFurnaceUnlitID, false).setUnlocalizedName("FemtocraftMicroFurnace").setHardness(3.5f).setStepSound(Block.soundStoneFootstep).setCreativeTab(femtocraftTab);
 		 GameRegistry.registerBlock(FemtocraftMicroFurnaceUnlit, "FemtocraftMicroFurnace");
 		 LanguageRegistry.addName(FemtocraftMicroFurnaceUnlit, "Micro-Furnace");
 		 
-		 FemtocraftMicroFurnaceLit = new BlockMicroFurnace(Configs.FemtocraftMicroFurnaceLitID, true).setLightValue(0.875F).setUnlocalizedName("FemtocraftMicroFurnace").setStepSound(Block.soundStoneFootstep);
+		 FemtocraftMicroFurnaceLit = new BlockMicroFurnace(Configs.FemtocraftMicroFurnaceLitID, true).setLightValue(0.875F).setUnlocalizedName("FemtocraftMicroFurnace").setHardness(3.5f).setStepSound(Block.soundStoneFootstep);
 		 
 		 //items
 		 

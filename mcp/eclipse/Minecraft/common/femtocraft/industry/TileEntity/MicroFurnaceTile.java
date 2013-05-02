@@ -42,7 +42,7 @@ public class MicroFurnaceTile  extends FemtopowerTile implements ISidedInventory
     public int furnaceCookTime = 0;
     public int currentPower = 0;
     private String field_94130_e;
-    private ItemStack smeltingStack = null;
+    public ItemStack smeltingStack = null;
     
     /**
      * Returns the number of slots in the inventory.
@@ -170,7 +170,7 @@ public class MicroFurnaceTile  extends FemtopowerTile implements ISidedInventory
         
         NBTTagCompound nbttagcompoundsmelt = (NBTTagCompound)nbttaglist.tagAt(nbttaglist.tagCount()-1);
         if(nbttagcompoundsmelt.getBoolean("isSmelting")) {
-        	this.smeltingStack.loadItemStackFromNBT(nbttagcompoundsmelt);
+        	this.smeltingStack = ItemStack.loadItemStackFromNBT(nbttagcompoundsmelt);
         }
         else {
         	this.smeltingStack = null;
@@ -206,8 +206,8 @@ public class MicroFurnaceTile  extends FemtopowerTile implements ISidedInventory
         }
         
         NBTTagCompound nbttagcompoundsmelt = new NBTTagCompound();
-        nbttagcompoundsmelt.setBoolean("isSmelting", smeltingStack != null);
-        if(smeltingStack != null) {
+        nbttagcompoundsmelt.setBoolean("isSmelting", isSmelting());
+        if(isSmelting()) {
         	this.smeltingStack.writeToNBT(nbttagcompoundsmelt);
         }
     	nbttaglist.appendTag(nbttagcompoundsmelt);

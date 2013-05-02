@@ -40,16 +40,11 @@ public class BlockMicroFurnace extends BlockContainer
      */
     private static boolean keepFurnaceInventory = false;
     @SideOnly(Side.CLIENT)
-    private Icon frontUnlit;
-    @SideOnly(Side.CLIENT)
-    private Icon frontLit;
+    private Icon frontIcon;
 
     public BlockMicroFurnace(int par1, boolean par2)
     {
         super(par1, Material.rock);
-        if(par2) {
-        	this.setCreativeTab(Femtocraft.femtocraftTab);
-        }
         this.isActive = par2;
     }
 
@@ -58,7 +53,7 @@ public class BlockMicroFurnace extends BlockContainer
      */
     public int idDropped(int par1, Random par2Random, int par3)
     {
-        return Block.furnaceIdle.blockID;
+        return Femtocraft.FemtocraftMicroFurnaceUnlit.blockID;
     }
 
     /**
@@ -121,12 +116,7 @@ public class BlockMicroFurnace extends BlockContainer
     		return this.blockIcon;
     	}
     	else {
-    		if(isActive) {
-    			return this.frontLit;
-    		}
-    		else {
-    			return this.frontUnlit;
-    		}
+    		return this.frontIcon;
     	}
     }
 
@@ -139,8 +129,7 @@ public class BlockMicroFurnace extends BlockContainer
     public void registerIcons(IconRegister par1IconRegister)
     {
         this.blockIcon = par1IconRegister.registerIcon("Femtocraft:MicroMachineBlock_side");
-        this.frontLit = par1IconRegister.registerIcon("Femtocraft:MicroFurnace_front_lit");
-        this.frontUnlit = par1IconRegister.registerIcon("Femtocraft:MicroFurnace_Front_unlit");
+        this.frontIcon = par1IconRegister.registerIcon(this.isActive ? "Femtocraft:MicroFurnace_front_lit" : "Femtocraft:MicroFurnace_Front_unlit");
     }
 
     /**
@@ -275,15 +264,50 @@ public class BlockMicroFurnace extends BlockContainer
      */
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
     {
-    	if(!keepFurnaceInventory) {
-    	
-            MicroFurnaceTile tileentityfurnace = (MicroFurnaceTile)par1World.getBlockTileEntity(par2, par3, par4);
+    	if(!keepFurnaceInventory)
+    	{
+    	    MicroFurnaceTile tileentityfurnace = (MicroFurnaceTile)par1World.getBlockTileEntity(par2, par3, par4);
 
             if (tileentityfurnace != null)
             {
                 for (int j1 = 0; j1 < tileentityfurnace.getSizeInventory(); ++j1)
                 {
                     ItemStack itemstack = tileentityfurnace.getStackInSlot(j1);
+
+                    if (itemstack != null)
+                    {
+                        float f = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+                        float f1 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+                        float f2 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+
+                        while (itemstack.stackSize > 0)
+                        {
+                            int k1 = this.furnaceRand.nextInt(21) + 10;
+
+                            if (k1 > itemstack.stackSize)
+                            {
+                                k1 = itemstack.stackSize;
+                            }
+
+                            itemstack.stackSize -= k1;
+                            EntityItem entityitem = new EntityItem(par1World, (double)((float)par2 + f), (double)((float)par3 + f1), (double)((float)par4 + f2), new ItemStack(itemstack.itemID, k1, itemstack.getItemDamage()));
+
+                            if (itemstack.hasTagCompound())
+                            {
+                                entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
+                            }
+
+                            float f3 = 0.05F;
+                            entityitem.motionX = (double)((float)this.furnaceRand.nextGaussian() * f3);
+                            entityitem.motionY = (double)((float)this.furnaceRand.nextGaussian() * f3 + 0.2F);
+                            entityitem.motionZ = (double)((float)this.furnaceRand.nextGaussian() * f3);
+                            par1World.spawnEntityInWorld(entityitem);
+                        }
+                    }
+                }
+                
+                if(tileentityfurnace.isSmelting()) {
+                	ItemStack itemstack = tileentityfurnace.smeltingStack;
 
                     if (itemstack != null)
                     {
