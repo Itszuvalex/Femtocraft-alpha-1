@@ -175,12 +175,16 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 		   amountToFill = amountToFill < currentStorage ? amountToFill : currentStorage;
 		   //Having passed initial check, and due to this now being this block's
 		   //update function, can safely assume adjacent blocks remain the same (unless it does simultaneous updates)
-		   IFemtopowerContainer container = (IFemtopowerContainer)this.worldObj.getBlockTileEntity(locx, locy, locz);
-		   
-		   if(container != null) {
-			   int powerconsumed = container.charge(offset.getOpposite(), amountToFill);
-			   this.currentStorage -= powerconsumed;
-			   maxSpreadThisTick -= powerconsumed;
+		   TileEntity TE = this.worldObj.getBlockTileEntity(locx, locy, locz);
+		   if(TE instanceof IFemtopowerContainer) 
+		   {
+			   IFemtopowerContainer container = (IFemtopowerContainer)TE;
+			   
+			   if(container != null) {
+				   int powerconsumed = container.charge(offset.getOpposite(), amountToFill);
+				   this.currentStorage -= powerconsumed;
+				   maxSpreadThisTick -= powerconsumed;
+			   }
 		   }
        }
 		   

@@ -35,5 +35,6 @@ public class ClientProxyFemtocraft extends CommonProxyFemtocraft {
 		super.registerBlockRenderers();
 		FemtopowerCableRenderID = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(FemtopowerCableRenderID, new FemtopowerCableRenderer());
+		
 	}
 }

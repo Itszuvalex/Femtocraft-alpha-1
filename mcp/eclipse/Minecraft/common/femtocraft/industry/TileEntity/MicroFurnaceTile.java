@@ -322,16 +322,16 @@ public class MicroFurnaceTile  extends FemtopowerTile implements ISidedInventory
     
     public void endSmelt() {
         ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.smeltingStack);
-        itemstack.stackSize = smeltingStack.stackSize;
         
         if(itemstack != null) {
 	        if (this.furnaceItemStacks[1] == null)
 	        {
 	            this.furnaceItemStacks[1] = itemstack.copy();
+	            this.furnaceItemStacks[1].stackSize = smeltingStack.stackSize;
 	        }
 	        else if (this.furnaceItemStacks[1].isItemEqual(itemstack))
 	        {
-	            furnaceItemStacks[1].stackSize += itemstack.stackSize;
+	            furnaceItemStacks[1].stackSize += smeltingStack.stackSize;
 	        }
 	        
 	        smeltingStack = null;
@@ -361,7 +361,7 @@ public class MicroFurnaceTile  extends FemtopowerTile implements ISidedInventory
      */
     public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack)
     {
-        return par1 == 1 ? false : true;
+        return par1 != 1;
     }
 
     /**
@@ -369,7 +369,8 @@ public class MicroFurnaceTile  extends FemtopowerTile implements ISidedInventory
      */
     public int[] getSizeInventorySide(int par1)
     {
-        return new int[]{1, 1, 1, 1, 1, 1};
+        if(par1 == 1) return new int[]{0};
+        else return new int[]{1};
     }
 
     public boolean func_102007_a(int par1, ItemStack par2ItemStack, int par3)
@@ -408,13 +409,8 @@ public class MicroFurnaceTile  extends FemtopowerTile implements ISidedInventory
     @Override
     public int getStartInventorySide(ForgeDirection side)
     {
-       if(side == ForgeDirection.UP) return 0;
-       if(side == ForgeDirection.NORTH) return 0;
-       if(side == ForgeDirection.WEST) return 0;
-       if(side == ForgeDirection.EAST) return 1;
-       if(side == ForgeDirection.SOUTH) return 1;
-       if(side == ForgeDirection.DOWN) return 1;
-       else return 0;
+         if (side == ForgeDirection.UP) return 0;
+         return 1;
     }
 
     @Override
