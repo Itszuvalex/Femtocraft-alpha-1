@@ -252,6 +252,8 @@ public class MicroFurnaceTile  extends FemtopowerTile implements ISidedInventory
     	
         boolean flag1 = false;
 
+        if(this.worldObj.isRemote) return;
+        
         if(smeltingStack != null) {
 	        if (this.furnaceCookTime == ticksToCook)
 	        {
@@ -261,7 +263,7 @@ public class MicroFurnaceTile  extends FemtopowerTile implements ISidedInventory
 	        }
 	        
 	
-	        	++this.furnaceCookTime;
+	        ++this.furnaceCookTime;
         }
         else if (this.canSmelt())
         {
