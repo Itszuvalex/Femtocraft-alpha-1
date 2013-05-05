@@ -382,7 +382,7 @@ public class MicroFurnaceTile  extends FemtopowerTile implements ISidedInventory
 
     public boolean func_102008_b(int par1, ItemStack par2ItemStack, int par3)
     {
-        return par3 != 0 || par1 != 1 || par2ItemStack.itemID == Item.bucketEmpty.itemID;
+        return true;
     }
 
     /***********************************************************************************
