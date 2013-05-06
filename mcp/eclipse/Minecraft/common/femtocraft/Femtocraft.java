@@ -29,6 +29,30 @@ import femtocraft.blocks.microStone;
 import femtocraft.blocks.nanoStone;
 import femtocraft.blocks.unidentifiedAlloy;
 import femtocraft.cooking.blocks.CuttingBoard;
+import femtocraft.core.items.ConductiveAlloy;
+import femtocraft.core.items.Crystallite;
+import femtocraft.core.items.Cubit;
+import femtocraft.core.items.Electrite;
+import femtocraft.core.items.Faunite;
+import femtocraft.core.items.FibrousStrand;
+import femtocraft.core.items.Florite;
+import femtocraft.core.items.FungalSpores;
+import femtocraft.core.items.HardenedBulb;
+import femtocraft.core.items.IonicChunk;
+import femtocraft.core.items.MetalComposite;
+import femtocraft.core.items.Metallite;
+import femtocraft.core.items.MicroCrystal;
+import femtocraft.core.items.MineralLattice;
+import femtocraft.core.items.Mineralite;
+import femtocraft.core.items.MorphicChannel;
+import femtocraft.core.items.NerveCluster;
+import femtocraft.core.items.OrganometallicPlate;
+import femtocraft.core.items.Planeoid;
+import femtocraft.core.items.ProteinChain;
+import femtocraft.core.items.Rectangulon;
+import femtocraft.core.items.ReplicatingMaterial;
+import femtocraft.core.items.SpinyFilament;
+import femtocraft.core.items.SynthesizedFiber;
 import femtocraft.core.items.ingotFarenite;
 import femtocraft.core.items.ingotPlatinum;
 import femtocraft.core.items.ingotThorium;
@@ -82,6 +106,35 @@ public class Femtocraft {
 	public static Item ingotPlatinum;
 	public static Item ingotThorium;
 	public static Item ingotFarenite;
+	
+	//Decomp items
+	//Femto
+	public static Item Cubit;
+	public static Item Rectangulon;
+	public static Item Planeoid;
+	//Nano
+	public static Item Crystallite;
+	public static Item Mineralite;
+	public static Item Metallite;
+	public static Item Faunite;
+	public static Item Electrite;
+	public static Item Florite;
+	//Micro
+	public static Item MicroCrystal;
+	public static Item ProteinChain;
+	public static Item NerveCluster;
+	public static Item ConductiveAlloy;
+	public static Item MetalComposite;
+	public static Item FibrousStrand;
+	public static Item MineralLattice;
+	public static Item FungalSpores;
+	public static Item IonicChunk;
+	public static Item ReplicatingMaterial;
+	public static Item SpinyFilament;
+	public static Item HardenedBulb;
+	public static Item MorphicChannel;
+	public static Item SynthesizedFiber;
+	public static Item OrganometallicPlate;
 	
 	//Produce
 	public static Item tomatoSeed;
@@ -196,6 +249,108 @@ public class Femtocraft {
 		 ingotFarenite = new ingotFarenite(Configs.ingotFareniteID).setUnlocalizedName("ingotFarenite");
 		 LanguageRegistry.addName(ingotFarenite, "Farenite");
 		 OreDictionary.registerOre("ingotFarenite", new ItemStack(ingotFarenite));
+		 
+		 //Decomp
+		 //Femto
+		 Cubit = new Cubit(Configs.CubitID).setUnlocalizedName("Cubit");
+		 LanguageRegistry.addName(Cubit, "Cubit");
+		 GameRegistry.registerItem(Cubit, "Cubit");
+		 
+		 Rectangulon = new Rectangulon(Configs.RectangulonID).setUnlocalizedName("Rectangulon");
+		 LanguageRegistry.addName(Rectangulon, "Rectangulon");
+		 GameRegistry.registerItem(Rectangulon, "Rectangulon");
+		 
+		 Planeoid = new Planeoid(Configs.PlaneoidID).setUnlocalizedName("Planeoid");
+		 LanguageRegistry.addName(Planeoid, "Planeoid");
+		 GameRegistry.registerItem(Planeoid, "Planeoid");
+		 
+		 //Nano
+		 Crystallite = new Crystallite(Configs.CrystalliteID).setUnlocalizedName("Crystallite");
+		 LanguageRegistry.addName(Crystallite, "Crystallite");
+		 GameRegistry.registerItem(Crystallite, "Crystallite");
+		 
+		 Mineralite = new Mineralite(Configs.MineraliteID).setUnlocalizedName("Mineralite");
+		 LanguageRegistry.addName(Mineralite, "Mineralite");
+		 GameRegistry.registerItem(Mineralite, "Mineralite");
+		 
+		 Metallite = new Metallite(Configs.MetalliteID).setUnlocalizedName("Metallite");
+		 LanguageRegistry.addName(Metallite, "Metallite");
+		 GameRegistry.registerItem(Metallite, "Metallite");
+		 
+		 Faunite = new Faunite(Configs.FauniteID).setUnlocalizedName("Faunite");
+		 LanguageRegistry.addName(Faunite, "Faunite");
+		 GameRegistry.registerItem(Faunite, "Faunite");
+		 
+		 Electrite = new Electrite(Configs.ElectriteID).setUnlocalizedName("Electrite");
+		 LanguageRegistry.addName(Electrite, "Electrite");
+		 GameRegistry.registerItem(Electrite, "Electrite");
+		 
+		 Florite = new Florite(Configs.FloriteID).setUnlocalizedName("Florite");
+		 LanguageRegistry.addName(Florite, "Florite");
+		 GameRegistry.registerItem(Florite, "Florite");
+		 
+		 //Micro
+		 MicroCrystal = new MicroCrystal(Configs.MicroCrystalID).setUnlocalizedName("MicroCrystal");
+		 LanguageRegistry.addName(MicroCrystal, "Micro Crystal");
+		 GameRegistry.registerItem(MicroCrystal, "Micro Crystal");
+
+		 ProteinChain = new ProteinChain(Configs.ProteinChainID).setUnlocalizedName("ProteinChain");
+		 LanguageRegistry.addName(ProteinChain, "Protein Chain");
+		 GameRegistry.registerItem(ProteinChain, "Protein Chain");
+		 
+		 NerveCluster = new NerveCluster(Configs.NerveClusterID).setUnlocalizedName("NerveCluster");
+		 LanguageRegistry.addName(NerveCluster, "Nerve Cluster");
+		 GameRegistry.registerItem(NerveCluster, "Nerve Cluster");
+		 
+		 ConductiveAlloy = new ConductiveAlloy(Configs.ConductiveAlloyID).setUnlocalizedName("ConductiveAlloy");
+		 LanguageRegistry.addName(ConductiveAlloy, "Conductive Alloy");
+		 GameRegistry.registerItem(ConductiveAlloy, "Conductive Alloy");
+		 
+		 MetalComposite = new MetalComposite(Configs.MetalCompositeID).setUnlocalizedName("MetalComposite");
+		 LanguageRegistry.addName(MetalComposite, "Metal Composite");
+		 GameRegistry.registerItem(MetalComposite, "Metal Composite");
+		 
+		 FibrousStrand = new FibrousStrand(Configs.FibrousStrandID).setUnlocalizedName("FibrousStrand");
+		 LanguageRegistry.addName(FibrousStrand, "Fibrous Strand");
+		 GameRegistry.registerItem(FibrousStrand, "Fibrous Strand");
+		 
+		 MineralLattice = new MineralLattice(Configs.MineralLatticeID).setUnlocalizedName("MineralLattice");
+		 LanguageRegistry.addName(MineralLattice, "Mineral Lattice");
+		 GameRegistry.registerItem(MineralLattice, "Mineral Lattice");
+		 
+		 FungalSpores = new FungalSpores(Configs.FungalSporesID).setUnlocalizedName("FungalSpores");
+		 LanguageRegistry.addName(FungalSpores, "Fungal Spores");
+		 GameRegistry.registerItem(FungalSpores, "Fungal Spores");
+		 
+		 IonicChunk = new IonicChunk(Configs.IonicChunkID).setUnlocalizedName("IonicChunk");
+		 LanguageRegistry.addName(IonicChunk, "Ionic Chunk");
+		 GameRegistry.registerItem(IonicChunk, "Ionic Chunk");
+		 
+		 ReplicatingMaterial = new ReplicatingMaterial(Configs.ReplicatingMaterialID).setUnlocalizedName("ReplicatingMaterial");
+		 LanguageRegistry.addName(ReplicatingMaterial, "Replicating Material");
+		 GameRegistry.registerItem(ReplicatingMaterial, "Replicating Material");
+		 
+		 SpinyFilament = new SpinyFilament(Configs.SpinyFilamentID).setUnlocalizedName("SpinyFilament");
+		 LanguageRegistry.addName(SpinyFilament, "Spiny Filament");
+		 GameRegistry.registerItem(SpinyFilament, "Spiny Filament");
+		 
+		 HardenedBulb = new HardenedBulb(Configs.HardenedBulbID).setUnlocalizedName("HardenedBulb");
+		 LanguageRegistry.addName(HardenedBulb, "Hardened Bulb");
+		 GameRegistry.registerItem(HardenedBulb, "Hardened Bulb");
+		 
+		 MorphicChannel = new MorphicChannel(Configs.MorphicChannelID).setUnlocalizedName("MorphicChannel");
+		 LanguageRegistry.addName(MorphicChannel, "Morphic Channel");
+		 GameRegistry.registerItem(MorphicChannel, "Morphic Channel");
+		 
+		 SynthesizedFiber = new SynthesizedFiber(Configs.SynthesizedFiberID).setUnlocalizedName("SynthesizedFiber");
+		 LanguageRegistry.addName(SynthesizedFiber, "Synthesized Fiber");
+		 GameRegistry.registerItem(SynthesizedFiber, "Synthesized Fiber");
+		 
+		 OrganometallicPlate = new OrganometallicPlate(Configs.OrganometallicPlateID).setUnlocalizedName("OrganometallicPlate");
+		 LanguageRegistry.addName(OrganometallicPlate, "Organometallic Plate");
+		 GameRegistry.registerItem(OrganometallicPlate, "Organometallic Plate");
+		 
+		 
 		 
 		 //Produce
 		 tomatoSeed = new tomatoSeed(Configs.tomatoSeedID).setUnlocalizedName("tomatoSeed");

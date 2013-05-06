@@ -35,7 +35,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 	
 	public int numConnections() {
 		int count = 0;
-		for(int i =0; i < 6; i++) if(connections[i]) ++count;
+		for(int i =0; i < 6; ++i) if(connections[i]) ++count;
 		return count;
 	}
 	
@@ -101,13 +101,13 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 		//boolean[] willCharge = new boolean[6];
 		//Arrays.fill(willCharge, true);
        int numToFill = 0;
-       for(int i = 0; i < 6; i++) {if(willCharge[i]) numToFill++;}
+       for(int i = 0; i < 6; ++i) {if(willCharge[i]) ++numToFill;}
        float[] percentFilled = new float[6];
        Arrays.fill(percentFilled, 1.0f);
        int maxSpreadThisTick = (int)(((float)currentStorage) * maxPowerPerTick);
        
        while(maxSpreadThisTick >0 && numToFill > 0) {
-		   for(int j = 0; j < 6; j++) {
+		   for(int j = 0; j < 6; ++j) {
 			   //Once it won't accept power, nothing will happen this tick,
 			   //Inside this update, that could make it accept power again
 			   if(!willCharge[j]) {
@@ -123,7 +123,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 	 		   
 	 		   if(checkTile == null || ! (checkTile instanceof IFemtopowerContainer)) {
 				   willCharge[j] = false;
-				   numToFill--;
+				   --numToFill;
 				   percentFilled[j] = 1.f;
 				   continue;
 	 		   }
@@ -176,7 +176,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 		   //Having passed initial check, and due to this now being this block's
 		   //update function, can safely assume adjacent blocks remain the same (unless it does simultaneous updates)
 		   TileEntity TE = this.worldObj.getBlockTileEntity(locx, locy, locz);
-		   if(TE instanceof IFemtopowerContainer) 
+		   if(TE != null && TE instanceof IFemtopowerContainer) 
 		   {
 			   IFemtopowerContainer container = (IFemtopowerContainer)TE;
 			   
@@ -217,8 +217,8 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
     
     
     public void checkConnections() {
-    	for(int j = 0; j < 6; j++) {
-    		connections[j] = false;
+    	for(int j = 0; j < 6; ++j) {
+    	   connections[j] = false;
  		   ForgeDirection offset = ForgeDirection.getOrientation(j);
  		   int locx = this.xCoord + offset.offsetX;
  		   int locy = this.yCoord + offset.offsetY;

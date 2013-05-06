@@ -20,9 +20,10 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.industry.blocks.BlockMicroFurnace;
+import femtocraft.power.TileEntity.FemtopowerConsumer;
 import femtocraft.power.TileEntity.FemtopowerTile;
 
-public class MicroFurnaceTile  extends FemtopowerTile implements ISidedInventory, net.minecraftforge.common.ISidedInventory
+public class MicroFurnaceTile  extends FemtopowerConsumer implements ISidedInventory, net.minecraftforge.common.ISidedInventory
 {
 	public MicroFurnaceTile() {
 		super();
