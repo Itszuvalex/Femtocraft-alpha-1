@@ -1,4 +1,4 @@
-package femtocraft.ore;
+package femtocraft.core.ore;
 
 import java.util.Random;
 

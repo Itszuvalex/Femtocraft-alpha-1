@@ -1,4 +1,4 @@
-package femtocraft.items;
+package femtocraft.core.items;
 
 import femtocraft.Femtocraft;
 import net.minecraft.client.renderer.texture.IconRegister;

@@ -1,4 +1,4 @@
-package femtocraft.ore;
+package femtocraft.core.ore;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

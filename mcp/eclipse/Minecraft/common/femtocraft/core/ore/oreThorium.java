@@ -1,4 +1,4 @@
-package femtocraft.ore;
+package femtocraft.core.ore;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -7,9 +7,9 @@ import net.minecraft.block.BlockOre;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 
-public class oreTitanium extends BlockOre{
+public class oreThorium extends BlockOre{
 
-	public oreTitanium(int id, int texture) {
+	public oreThorium(int id, int texture) {
 		super(id);
 		this.setCreativeTab(Femtocraft.femtocraftTab);
 	}
@@ -17,6 +17,6 @@ public class oreTitanium extends BlockOre{
 	@SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister)
     {
-        this.blockIcon = par1IconRegister.registerIcon("Femtocraft:oreTitanium");
+        this.blockIcon = par1IconRegister.registerIcon("Femtocraft:oreThorium");
     }
 }

@@ -1,12 +1,12 @@
-package femtocraft.items;
+package femtocraft.core.items;
 
 import femtocraft.Femtocraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class ingotThorium  extends Item{
-	public ingotThorium(int id) {
+public class ingotTitanium  extends Item{
+	public ingotTitanium(int id) {
 		super(id);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
@@ -14,6 +14,6 @@ public class ingotThorium  extends Item{
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:ingotThorium");
+        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:ingotTitanium");
     }
 }
