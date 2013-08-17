@@ -14,6 +14,6 @@ public class Florite extends Item{
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:Florite");
+        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:Florite");
     }
 }

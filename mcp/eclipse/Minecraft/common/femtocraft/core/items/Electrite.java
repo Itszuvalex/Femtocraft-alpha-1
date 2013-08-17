@@ -14,6 +14,6 @@ public class Electrite extends Item{
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:Electrite");
+        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:Electrite");
     }
 }

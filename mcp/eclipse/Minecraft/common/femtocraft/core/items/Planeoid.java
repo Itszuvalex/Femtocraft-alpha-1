@@ -14,6 +14,6 @@ public class Planeoid extends Item{
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:Planeoid");
+        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:Planeoid");
     }
 }

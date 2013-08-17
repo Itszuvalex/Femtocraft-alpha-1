@@ -14,6 +14,6 @@ public class HardenedBulb extends Item{
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:HardenedBulb");
+        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:HardenedBulb");
     }
 }

@@ -14,6 +14,6 @@ public class SpinyFilament extends Item{
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:SpinyFilament");
+        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:SpinyFilament");
     }
 }

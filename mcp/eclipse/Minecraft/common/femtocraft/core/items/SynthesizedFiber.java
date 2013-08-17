@@ -14,6 +14,6 @@ public class SynthesizedFiber extends Item{
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:SynthesizedFiber");
+        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:SynthesizedFiber");
     }
 }

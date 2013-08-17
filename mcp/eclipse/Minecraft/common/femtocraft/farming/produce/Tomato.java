@@ -42,7 +42,7 @@ public class Tomato extends ItemFood{
 
 	public void updateIcons(IconRegister iconRegister)
 	{
-		this.iconIndex = iconRegister.registerIcon("Femtocraft:tomato");
+		this.itemIcon = iconRegister.registerIcon("Femtocraft:tomato");
 	}
 
 }

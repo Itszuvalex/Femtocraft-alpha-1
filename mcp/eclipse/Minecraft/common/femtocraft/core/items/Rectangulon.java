@@ -14,6 +14,6 @@ public class Rectangulon extends Item{
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:Rectangulon");
+        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:Rectangulon");
     }
 }

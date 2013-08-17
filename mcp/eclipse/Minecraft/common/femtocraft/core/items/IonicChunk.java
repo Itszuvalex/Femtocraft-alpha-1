@@ -14,6 +14,6 @@ public class IonicChunk extends Item{
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:IonicChunk");
+        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:IonicChunk");
     }
 }

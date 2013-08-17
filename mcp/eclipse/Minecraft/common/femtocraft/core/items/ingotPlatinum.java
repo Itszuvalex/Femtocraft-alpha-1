@@ -14,6 +14,6 @@ public class ingotPlatinum  extends Item{
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:ingotPlatinum");
+        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:ingotPlatinum");
     }
 }

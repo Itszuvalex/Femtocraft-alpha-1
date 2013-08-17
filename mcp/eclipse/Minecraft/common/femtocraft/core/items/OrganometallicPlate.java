@@ -14,6 +14,6 @@ public class OrganometallicPlate extends Item{
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:OrganometallicPlate");
+        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:OrganometallicPlate");
     }
 }

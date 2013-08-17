@@ -14,6 +14,6 @@ public class Faunite extends Item{
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:Faunite");
+        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:Faunite");
     }
 }

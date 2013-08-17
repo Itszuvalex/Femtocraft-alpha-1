@@ -14,6 +14,6 @@ public class MetalComposite extends Item{
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:MetalComposite");
+        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:MetalComposite");
     }
 }

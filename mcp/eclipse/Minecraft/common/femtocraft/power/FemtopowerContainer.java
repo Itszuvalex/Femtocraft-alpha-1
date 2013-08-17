@@ -7,6 +7,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -42,16 +43,12 @@ public class FemtopowerContainer extends BlockContainer {
 			container.checkConnections();
 	}
 
-	/* (non-Javadoc)
-	 * @see net.minecraft.block.Block#onBlockPlacedBy(net.minecraft.world.World, int, int, int, net.minecraft.entity.EntityLiving, net.minecraft.item.ItemStack)
-	 */
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
-			EntityLiving par5EntityLiving, ItemStack par6ItemStack) {
+			EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
 		// TODO Auto-generated method stub
-		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLiving,
+		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLivingBase,
 				par6ItemStack);
-
 		
 		FemtopowerTile container = (FemtopowerTile)par1World.getBlockTileEntity(par2, par3, par4);
 		

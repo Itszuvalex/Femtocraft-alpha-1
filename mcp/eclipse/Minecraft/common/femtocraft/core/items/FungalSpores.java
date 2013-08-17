@@ -14,6 +14,6 @@ public class FungalSpores extends Item{
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:FungalSpores");
+        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:FungalSpores");
     }
 }

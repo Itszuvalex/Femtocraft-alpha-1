@@ -14,6 +14,6 @@ public class ingotThorium  extends Item{
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:ingotThorium");
+        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:ingotThorium");
     }
 }

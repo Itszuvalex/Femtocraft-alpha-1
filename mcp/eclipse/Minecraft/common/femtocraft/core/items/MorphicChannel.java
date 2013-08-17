@@ -14,6 +14,6 @@ public class MorphicChannel extends Item{
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:MorphicChannel");
+        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:MorphicChannel");
     }
 }

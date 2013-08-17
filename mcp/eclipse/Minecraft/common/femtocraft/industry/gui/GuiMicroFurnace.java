@@ -1,20 +1,23 @@
 package femtocraft.industry.gui;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ContainerFurnace;
-import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.Femtocraft;
 import femtocraft.industry.ContainerMicroFurnace;
 import femtocraft.industry.TileEntity.MicroFurnaceTile;
 
 @SideOnly(Side.CLIENT)
 public class GuiMicroFurnace extends GuiContainer
 {
+	public static final ResourceLocation texture = new ResourceLocation(Femtocraft.ID, "/gui/MicroFurnace.png");
     private MicroFurnaceTile furnaceInventory;
 
     public GuiMicroFurnace(InventoryPlayer par1InventoryPlayer, MicroFurnaceTile par2TileEntityFurnace)
@@ -39,7 +42,7 @@ public class GuiMicroFurnace extends GuiContainer
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture("/gui/MicroFurnace.png");
+        Minecraft.getMinecraft().func_110434_K().func_110577_a(texture);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);

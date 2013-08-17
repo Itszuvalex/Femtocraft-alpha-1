@@ -14,6 +14,6 @@ public class MineralLattice extends Item{
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:MineralLattice");
+        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:MineralLattice");
     }
 }

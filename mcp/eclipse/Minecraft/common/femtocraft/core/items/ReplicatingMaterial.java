@@ -14,6 +14,6 @@ public class ReplicatingMaterial extends Item{
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:ReplicatingMaterial");
+        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:ReplicatingMaterial");
     }
 }

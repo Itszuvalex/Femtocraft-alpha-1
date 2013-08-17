@@ -14,6 +14,6 @@ public class Mineralite extends Item{
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:Mineralite");
+        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:Mineralite");
     }
 }

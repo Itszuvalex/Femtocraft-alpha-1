@@ -23,7 +23,7 @@ import femtocraft.industry.blocks.BlockMicroFurnace;
 import femtocraft.power.TileEntity.FemtopowerConsumer;
 import femtocraft.power.TileEntity.FemtopowerTile;
 
-public class MicroFurnaceTile  extends FemtopowerConsumer implements ISidedInventory, net.minecraftforge.common.ISidedInventory
+public class MicroFurnaceTile  extends FemtopowerConsumer implements ISidedInventory
 {
 	public MicroFurnaceTile() {
 		super();
@@ -409,17 +409,28 @@ public class MicroFurnaceTile  extends FemtopowerConsumer implements ISidedInven
      * standard.
      */
 
-    @Override
-    public int getStartInventorySide(ForgeDirection side)
-    {
-         if (side == ForgeDirection.UP) return 0;
-         return 1;
-    }
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
-    @Override
-    public int getSizeInventorySide(ForgeDirection side)
-    {
-        return 1;
-    }
+	@Override
+	public int[] getAccessibleSlotsFromSide(int var1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
 

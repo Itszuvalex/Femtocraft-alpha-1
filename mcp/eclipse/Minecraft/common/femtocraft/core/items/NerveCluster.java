@@ -14,6 +14,6 @@ public class NerveCluster extends Item{
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("Femtocraft:NerveCluster");
+        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:NerveCluster");
     }
 }
