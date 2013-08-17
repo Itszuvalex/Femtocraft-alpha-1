@@ -105,6 +105,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
        float[] percentFilled = new float[6];
        Arrays.fill(percentFilled, 1.0f);
        int maxSpreadThisTick = (int)(((float)currentStorage) * maxPowerPerTick);
+       float totalAmtMissing = 0.f;
        
        while(maxSpreadThisTick >0 && numToFill > 0) {
 		   for(int j = 0; j < 6; ++j) {
@@ -137,6 +138,8 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 				   //Check for within buffer range - if so, this pipe will only get less filled from here on out
 				   //So it will never attempt to fill that pipe again
 				   percentFilled[j] = container.getFillPercentageForCharging(offset.getOpposite());
+				   float percentMissing =  1.f - percentFilled[j];
+				   totalAmtMissing += percentMissing > 0 ? percentMissing : 0;
 				   
 				   if((this.getFillPercentageForOutput(offset) - percentFilled[j]) < distributionBuffer) {
 					   willCharge[j] = false;
@@ -153,37 +156,37 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 				   continue;
 			   }
 		   }
-		   
-		   //Find lowest % filled from
-		   int lowest = 0;
-		   float lowestAmt = 1.f;
-		   
-		   for(int i = 0; i < 6; i++) {
-			   if(willCharge[i] && percentFilled[i] < lowestAmt) {
-				   lowestAmt = percentFilled[i];
-				   lowest = i;
-			   }
-		   }
-		   
-		   ForgeDirection offset = ForgeDirection.getOrientation(lowest);
-		   int locx = this.xCoord + offset.offsetX;
-		   int locy = this.yCoord + offset.offsetY;
-		   int locz = this.zCoord + offset.offsetZ;
-		   
+
 		   int amountToFill = (int)((float)currentStorage * maxSizePackets);
 		   amountToFill = amountToFill < maxSpreadThisTick ? amountToFill : maxSpreadThisTick;
 		   amountToFill = amountToFill < currentStorage ? amountToFill : currentStorage;
-		   //Having passed initial check, and due to this now being this block's
-		   //update function, can safely assume adjacent blocks remain the same (unless it does simultaneous updates)
-		   TileEntity TE = this.worldObj.getBlockTileEntity(locx, locy, locz);
-		   if(TE != null && TE instanceof IFemtopowerContainer) 
-		   {
-			   IFemtopowerContainer container = (IFemtopowerContainer)TE;
+		   
+		   for(int i = 0; i < 6; ++i) {
+			   if(!willCharge[i]) continue;
 			   
-			   if(container != null) {
-				   int powerconsumed = container.charge(offset.getOpposite(), amountToFill);
-				   this.currentStorage -= powerconsumed;
-				   maxSpreadThisTick -= powerconsumed;
+			   ForgeDirection offset = ForgeDirection.getOrientation(i);
+			   int locx = this.xCoord + offset.offsetX;
+			   int locy = this.yCoord + offset.offsetY;
+			   int locz = this.zCoord + offset.offsetZ;
+			   
+			   int amountToFillForSide;
+			   if(totalAmtMissing == 0 || percentFilled[i] >= 1.f)
+				   amountToFillForSide = 0;
+			   else
+				   amountToFillForSide = (int) (amountToFill * ((1.f - percentFilled[i]) / totalAmtMissing));
+			   
+			   //Having passed initial check, and due to this now being this block's
+			   //update function, can safely assume adjacent blocks remain the same (unless it does simultaneous updates)
+			   TileEntity TE = this.worldObj.getBlockTileEntity(locx, locy, locz);
+			   if(TE != null && TE instanceof IFemtopowerContainer) 
+			   {
+				   IFemtopowerContainer container = (IFemtopowerContainer)TE;
+				   
+				   if(container != null) {
+					   int powerconsumed = container.charge(offset.getOpposite(), amountToFillForSide);
+					   this.currentStorage -= powerconsumed;
+					   maxSpreadThisTick -= powerconsumed;
+				   }
 			   }
 		   }
        }
