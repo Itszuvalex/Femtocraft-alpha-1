@@ -179,6 +179,7 @@ mcp/temp/*
 mcp/src/minecraft/*
 mcp/src/minecraft_server/*
 mcp/src/common/*
+mcp/eclipse/.metadata/*
 !mcp/src/common/dries007/
 !mcp/eclipse/Minecraft/common/femtocraft/*
 !mcp/src/common/mcmod.info
