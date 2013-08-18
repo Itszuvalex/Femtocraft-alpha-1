@@ -1,0 +1,68 @@
+2013-08-16 21:03:14 [CLIENT] [INFO] Setting user: Player997
+2013-08-16 21:03:14 [CLIENT] [INFO] (Session ID is null)
+2013-08-16 21:03:14 [CLIENT] [INFO] LWJGL Version: 2.9.0
+2013-08-16 21:03:15 [CLIENT] [INFO] Reloading ResourceManager: Default
+2013-08-16 21:03:18 [CLIENT] [INFO] Reloading ResourceManager: Default
+2013-08-16 21:03:19 [CLIENT] [INFO] Reloading ResourceManager: Default
+2013-08-16 21:03:20 [CLIENT] [SEVERE] Realms: Invalid session id
+2013-08-16 21:03:48 [CLIENT] [INFO] Stopping!
+2013-08-16 23:35:02 [CLIENT] [INFO] Setting user: Player984
+2013-08-16 23:35:02 [CLIENT] [INFO] (Session ID is null)
+2013-08-16 23:35:02 [CLIENT] [INFO] LWJGL Version: 2.9.0
+2013-08-16 23:35:03 [CLIENT] [INFO] Reloading ResourceManager: Default
+2013-08-16 23:35:06 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Femtocraft
+2013-08-16 23:35:07 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Femtocraft
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12318_FungalSpores.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12320_ReplicatingMaterial.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12308_Faunite.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12323_MorphicChannel.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12315_MetalComposite.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12256_ingotTitanium.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12319_IonicChunk.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12257_ingotPlatinum.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12313_NerveCluster.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12307_Metallite.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12259_ingotFarenite.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12321_SpinyFilament.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12326_tomatoSeed.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12309_Electrite.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12322_HardenedBulb.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12327_tomato.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12304_Planeoid.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12317_MineralLattice.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12305_Crystallite.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12311_MicroCrystal.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12324_SynthesizedFiber.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12312_ProteinChain.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12325_OrganometallicPlate.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12258_ingotThorium.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12310_Florite.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12303_Rectangulon.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12316_FibrousStrand.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12302_Cubit.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12314_ConductiveAlloy.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/items/MISSING_ICON_ITEM_12306_Mineralite.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/FemtopowerCableConnector.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/cuttingBoard_Left.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/oreFarenite.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/FemtopowerCableCoreBorder.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/unidentifiedAlloy.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/MicroFurnace_Front_unlit.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/cuttingBoard.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/FemtopowerCableCoilEdge.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4085_FemtopowerConsumer.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/orePlatinum.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/cuttingBoard_Right.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4086_FemtopowerGenerator.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/oreThorium.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/microStone.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/cuttingBoard_NorthSouth.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/MicroMachineBlock_side.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/nanoStone.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/FemtopowerCableCoil.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/MicroFurnace_front_lit.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/oreTitanium.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/FemtopowerCableBorder.png
+2013-08-16 23:35:07 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/femtoStone.png
+2013-08-16 23:35:08 [CLIENT] [SEVERE] Realms: Invalid session id
+2013-08-16 23:53:43 [CLIENT] [INFO] Stopping!
