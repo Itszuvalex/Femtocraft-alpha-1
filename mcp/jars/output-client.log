@@ -854,3 +854,13 @@ java.io.FileNotFoundException: Femtocraft:/gui/MicroFurnace.png
 2013-08-18 18:31:09 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4086_FemtopowerGenerator.png
 2013-08-18 18:31:09 [CLIENT] [SEVERE] Realms: Invalid session id
 2013-08-18 18:31:28 [CLIENT] [INFO] Stopping!
+2013-08-18 18:36:01 [CLIENT] [INFO] Setting user: Player941
+2013-08-18 18:36:01 [CLIENT] [INFO] (Session ID is null)
+2013-08-18 18:36:01 [CLIENT] [INFO] LWJGL Version: 2.9.0
+2013-08-18 18:36:02 [CLIENT] [INFO] Reloading ResourceManager: Default
+2013-08-18 18:36:05 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Femtocraft
+2013-08-18 18:36:06 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Femtocraft
+2013-08-18 18:36:06 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4085_FemtopowerConsumer.png
+2013-08-18 18:36:06 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4086_FemtopowerGenerator.png
+2013-08-18 18:36:07 [CLIENT] [SEVERE] Realms: Invalid session id
+2013-08-18 18:38:47 [CLIENT] [INFO] Stopping!
