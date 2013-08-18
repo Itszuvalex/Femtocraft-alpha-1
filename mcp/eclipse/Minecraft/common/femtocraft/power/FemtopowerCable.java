@@ -23,6 +23,12 @@ public class FemtopowerCable extends FemtopowerContainer {
 		super(par1, par2Material);
 		setCreativeTab(Femtocraft.femtocraftTab);
 		setBlockBounds();
+		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoil");
+		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoreBorder");
+		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableConnector");
+		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoil");
+		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoilEdge");
+		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableBorder");
 	}
 	
 	public void setBlockBounds() {
@@ -55,11 +61,11 @@ public class FemtopowerCable extends FemtopowerContainer {
     {
      //   this.field_94336_cN = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCable");
 	//	this.core = par1IconRegister.func_94245_a("Femtocraft:FemtopowerCableCore");
-		this.blockIcon = par1IconRegister.registerIcon("Femtocraft:FemtopowerCableCoil");
-		this.coreBorder = par1IconRegister.registerIcon("Femtocraft:FemtopowerCableCoreBorder");
-		this.connector = par1IconRegister.registerIcon("Femtocraft:FemtopowerCableConnector");
-		this.coil = par1IconRegister.registerIcon("Femtocraft:FemtopowerCableCoil");
-		this.coilEdge = par1IconRegister.registerIcon("Femtocraft:FemtopowerCableCoilEdge");
-		this.border = par1IconRegister.registerIcon("Femtocraft:FemtopowerCableBorder");
+		this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoil");
+		this.coreBorder = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoreBorder");
+		this.connector = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableConnector");
+		this.coil = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoil");
+		this.coilEdge = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoilEdge");
+		this.border = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableBorder");
     }
 }

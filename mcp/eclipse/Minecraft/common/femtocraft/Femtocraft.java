@@ -12,6 +12,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -70,7 +71,8 @@ import femtocraft.power.FemtopowerGenerator;
 import femtocraft.proxy.ClientProxyFemtocraft;
 import femtocraft.proxy.CommonProxyFemtocraft;
 
-@Mod(modid = Femtocraft.ID, version = Femtocraft.VERSION)
+@Mod(modid = Femtocraft.ID, name = "Femtocraft", version = Femtocraft.VERSION)
+
 @NetworkMod(channels = { Femtocraft.ID }, packetHandler = FemtocraftPacketHandler.class, clientSideRequired = true, serverSideRequired = false)
 public class Femtocraft {
 	public static final String ID = "Femtocraft";
@@ -143,7 +145,7 @@ public class Femtocraft {
 	//Cooking
 	public static Block cuttingBoard;
 	
-	@PreInit
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		logger = Logger.getLogger(ID);
 		logger.setParent(FMLLog.getLogger());
@@ -159,8 +161,8 @@ public class Femtocraft {
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandlerFemtocraft());
 	}
 	
-	@Init
-	public void init(FMLInitializationEvent event) {
+	@EventHandler
+	public void load(FMLInitializationEvent event) {
 		proxy.registerRendering();
 		
 		if(Configs.worldGen) {
@@ -378,7 +380,7 @@ public class Femtocraft {
 		// EntityRegistry.registerModEntity(entity.class, "myEntity", 0, this, 32, 10, true)
 	}
 
-	@PostInit
+	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 
 	}

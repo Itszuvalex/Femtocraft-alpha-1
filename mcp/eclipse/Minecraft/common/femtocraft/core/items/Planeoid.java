@@ -10,10 +10,11 @@ public class Planeoid extends Item{
 		super(id);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
+		func_111206_d(Femtocraft.ID.toLowerCase() +":" + "Planeoid");
 	}
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:Planeoid");
+        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "Planeoid");
     }
 }

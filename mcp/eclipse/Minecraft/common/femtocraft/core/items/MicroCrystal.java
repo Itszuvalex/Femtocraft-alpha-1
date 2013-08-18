@@ -10,10 +10,11 @@ public class MicroCrystal extends Item{
 		super(id);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
+		func_111206_d(Femtocraft.ID.toLowerCase() +":" + "MicroCrystal");
 	}
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:MicroCrystal");
+        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "MicroCrystal");
     }
 }

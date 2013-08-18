@@ -46,6 +46,15 @@ public class BlockMicroFurnace extends BlockContainer
     {
         super(par1, Material.rock);
         this.isActive = par2;
+		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "MicroMachineBlock_side");
+        if(par2)
+        {
+    		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "MicroFurnace_front_lit");
+        }
+        else 
+        {
+        	func_111022_d(Femtocraft.ID.toLowerCase() +":" + "MicroFurnace_front_unlit");
+        }
     }
 
     /**
@@ -102,15 +111,14 @@ public class BlockMicroFurnace extends BlockContainer
         }
     }
 
+    
     @SideOnly(Side.CLIENT)
 
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
-    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
+    public Icon getIcon(int par1, int par2)
     {
-    	//                Top                                 Bottom                                Sides             Front
-        //return /*par1 == 1 ? this.field_94458_cO :*/ /*(par1 == 0 ? this.field_94458_cO :*/ (par1 != par2 ? this.blockIcon : this.field_94459_cP));
     	if(par1 != par2) 
     	{
     		return this.blockIcon;
@@ -128,8 +136,8 @@ public class BlockMicroFurnace extends BlockContainer
      */
     public void registerIcons(IconRegister par1IconRegister)
     {
-        this.blockIcon = par1IconRegister.registerIcon("Femtocraft:MicroMachineBlock_side");
-        this.frontIcon = par1IconRegister.registerIcon(this.isActive ? "Femtocraft:MicroFurnace_front_lit" : "Femtocraft:MicroFurnace_Front_unlit");
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "MicroMachineBlock_side");
+        this.frontIcon = par1IconRegister.registerIcon(this.isActive ? Femtocraft.ID.toLowerCase() +":" + "MicroFurnace_front_lit" : Femtocraft.ID.toLowerCase() +":" + "MicroFurnace_front_unlit");
     }
 
     /**

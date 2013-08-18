@@ -12,11 +12,12 @@ public class oreThorium extends BlockOre{
 	public oreThorium(int id, int texture) {
 		super(id);
 		this.setCreativeTab(Femtocraft.femtocraftTab);
+		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "oreThorium");
 	}
 	
 	@SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister)
     {
-        this.blockIcon = par1IconRegister.registerIcon("Femtocraft:oreThorium");
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "oreThorium");
     }
 }

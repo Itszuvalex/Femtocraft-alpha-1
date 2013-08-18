@@ -10,10 +10,11 @@ public class ProteinChain extends Item{
 		super(id);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
+		func_111206_d(Femtocraft.ID.toLowerCase() +":" + "ProteinChain");
 	}
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:ProteinChain");
+        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "ProteinChain");
     }
 }

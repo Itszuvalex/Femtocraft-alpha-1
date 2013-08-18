@@ -13,11 +13,12 @@ public class orePlatinum extends BlockOre{
 	public orePlatinum(int id, int texture) {
 		super(id);
 		this.setCreativeTab(Femtocraft.femtocraftTab);
+		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "orePlatinum");
 	}
 	
 	@SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister)
     {
-        this.blockIcon = par1IconRegister.registerIcon("Femtocraft:orePlatinum");
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "orePlatinum");
     }
 }

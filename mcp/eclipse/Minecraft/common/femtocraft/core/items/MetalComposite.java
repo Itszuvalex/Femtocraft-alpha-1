@@ -10,10 +10,11 @@ public class MetalComposite extends Item{
 		super(id);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
+		func_111206_d(Femtocraft.ID.toLowerCase() +":" + "MetalComposite");
 	}
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:MetalComposite");
+        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "MetalComposite");
     }
 }

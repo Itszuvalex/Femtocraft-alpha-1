@@ -55,6 +55,10 @@ public class CuttingBoard extends Block {
 		super(id, Material.cake);
 		this.setBlockBounds(MIN_DIST, 0.0F, MIN_DIST, MAX_DIST, MIN_DIST, MAX_DIST);
 		setCreativeTab(Femtocraft.femtocraftTab);
+		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "cuttingBoard"); //top
+		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "cuttingBoard_NorthSouth");
+		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "cuttingBoard_Left");
+		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "cuttingBoard_Right");
 	}
 
 	@Override
@@ -96,11 +100,11 @@ public class CuttingBoard extends Block {
 	@SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister)
     {
-        this.blockIcon = iconRegister.registerIcon("Femtocraft:cuttingBoard"); //top
-        this.cuttingBoardSideNS = iconRegister.registerIcon("Femtocraft:cuttingBoard_NorthSouth");
+        this.blockIcon = iconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "cuttingBoard"); //top
+        this.cuttingBoardSideNS = iconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "cuttingBoard_NorthSouth");
         this.cuttingBoardSideNS = new IconFlipped(this.cuttingBoardSideNS, true, false);
-        this.cuttingBoardSideE = iconRegister.registerIcon("Femtocraft:cuttingBoard_Left");
-        this.cuttingBoardSideW = iconRegister.registerIcon("Femtocraft:cuttingBoard_Right");
+        this.cuttingBoardSideE = iconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "cuttingBoard_Left");
+        this.cuttingBoardSideW = iconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "cuttingBoard_Right");
     }
 	
 	/**

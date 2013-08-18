@@ -10,10 +10,11 @@ public class ingotFarenite extends Item{
 		super(id);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
+		func_111206_d(Femtocraft.ID.toLowerCase() +":" + "ingotFarenite");
 	}
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.itemIcon = par1IconRegister.registerIcon("Femtocraft:ingotFarenite");
+        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "ingotFarenite");
     }
 }

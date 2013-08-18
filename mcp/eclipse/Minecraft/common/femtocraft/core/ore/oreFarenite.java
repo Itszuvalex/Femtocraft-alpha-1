@@ -13,12 +13,13 @@ public class oreFarenite extends BlockOre{
 	public oreFarenite(int id, int texture) {
 		super(id);
 		setCreativeTab(Femtocraft.femtocraftTab);
+		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "oreFarenite");
 	}
 	
 	@SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister)
     {
-        this.blockIcon = par1IconRegister.registerIcon("Femtocraft:oreFarenite");
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "oreFarenite");
     }
 	
 	public int idDropped(int par1, Random random, int par2) {
