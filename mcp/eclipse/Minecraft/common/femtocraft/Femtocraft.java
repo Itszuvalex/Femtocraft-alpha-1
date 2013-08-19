@@ -65,6 +65,7 @@ import femtocraft.core.ore.oreTitanium;
 import femtocraft.farming.produce.Tomato;
 import femtocraft.farming.seeds.tomatoSeed;
 import femtocraft.industry.blocks.BlockMicroFurnace;
+import femtocraft.managers.FemtocraftRecipeManager;
 import femtocraft.power.FemtopowerCable;
 import femtocraft.power.FemtopowerConsumerBlock;
 import femtocraft.power.FemtopowerGenerator;
@@ -87,6 +88,8 @@ public class Femtocraft {
 	public static CreativeTabs femtocraftTab = new FemtocraftCreativeTab("Femtocraft");
 	
 	public static Logger logger;
+	
+	public static FemtocraftRecipeManager recipeManager = new FemtocraftRecipeManager();
 
 	//blocks
 	public static Block oreTitanium;
