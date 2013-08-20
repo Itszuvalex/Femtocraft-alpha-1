@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.item.ItemStack;
+import femtocraft.Femtocraft;
 import femtocraft.FemtocraftAssemblerRecipe;
 
 public class FemtocraftAssemblerRecipeManager {
@@ -20,7 +21,15 @@ public class FemtocraftAssemblerRecipeManager {
 	
 	private void registerRecipes()
 	{
+		//Femto-tier components
+		addRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Planeoid), new ItemStack(Femtocraft.Rectangulon), null, null, null}, 3, new ItemStack(Femtocraft.Crystallite), FemtocraftAssemblerRecipe.TechLevel.FEMTO));	//Crystallite
+		addRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Cubit), new ItemStack(Femtocraft.Planeoid), new ItemStack(Femtocraft.Cubit), null, null, null}, 3, new ItemStack(Femtocraft.Mineralite), FemtocraftAssemblerRecipe.TechLevel.FEMTO));	//Mineralite
+		addRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Cubit), new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Cubit), null, null, null}, 3, new ItemStack(Femtocraft.Metallite), FemtocraftAssemblerRecipe.TechLevel.FEMTO));	//Metallite
+		addRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Cubit), new ItemStack(Femtocraft.Rectangulon), null, null, null}, 3, new ItemStack(Femtocraft.Faunite), FemtocraftAssemblerRecipe.TechLevel.FEMTO));	//Faunite
+		addRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Planeoid), new ItemStack(Femtocraft.Cubit), new ItemStack(Femtocraft.Planeoid), null, null, null}, 3, new ItemStack(Femtocraft.Electrite), FemtocraftAssemblerRecipe.TechLevel.FEMTO));	//Electrite
+		addRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Planeoid), new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Planeoid), null, null, null}, 3, new ItemStack(Femtocraft.Florite), FemtocraftAssemblerRecipe.TechLevel.FEMTO));	//Florite
 		
+		//Micro-tier components
 	}
 	
 	public void addRecipe(FemtocraftAssemblerRecipe recipe)
