@@ -46,14 +46,14 @@ public class BlockMicroFurnace extends BlockContainer
     {
         super(par1, Material.rock);
         this.isActive = par2;
-		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "MicroMachineBlock_side");
+        setTextureName(Femtocraft.ID.toLowerCase() +":" + "MicroMachineBlock_side");
         if(par2)
         {
-    		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "MicroFurnace_front_lit");
+        	setTextureName(Femtocraft.ID.toLowerCase() +":" + "MicroFurnace_front_lit");
         }
         else 
         {
-        	func_111022_d(Femtocraft.ID.toLowerCase() +":" + "MicroFurnace_front_unlit");
+        	setTextureName(Femtocraft.ID.toLowerCase() +":" + "MicroFurnace_front_unlit");
         }
     }
 

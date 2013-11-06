@@ -10,7 +10,7 @@ public class SpinyFilament extends Item{
 		super(id);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		func_111206_d(Femtocraft.ID.toLowerCase() +":" + "SpinyFilament");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "SpinyFilament");
 	}
 	
 	public void updateIcons(IconRegister par1IconRegister)

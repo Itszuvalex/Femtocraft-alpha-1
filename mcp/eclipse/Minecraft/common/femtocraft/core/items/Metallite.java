@@ -10,7 +10,7 @@ public class Metallite extends Item{
 		super(id);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		func_111206_d(Femtocraft.ID.toLowerCase() +":" + "Metallite");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "Metallite");
 	}
 	
 	public void updateIcons(IconRegister par1IconRegister)

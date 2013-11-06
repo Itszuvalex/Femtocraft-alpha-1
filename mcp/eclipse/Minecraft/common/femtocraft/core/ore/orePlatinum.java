@@ -13,7 +13,7 @@ public class orePlatinum extends BlockOre{
 	public orePlatinum(int id, int texture) {
 		super(id);
 		this.setCreativeTab(Femtocraft.femtocraftTab);
-		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "orePlatinum");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "orePlatinum");
 	}
 	
 	@SideOnly(Side.CLIENT)

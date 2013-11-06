@@ -11,7 +11,7 @@ public class Tomato extends ItemFood{
 		super(id, 2, 0.6f, false);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		func_111206_d(Femtocraft.ID.toLowerCase() +":" + "tomato");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "tomato");
 	}
 	
 	/* (non-Javadoc)

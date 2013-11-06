@@ -55,10 +55,11 @@ public class CuttingBoard extends Block {
 		super(id, Material.cake);
 		this.setBlockBounds(MIN_DIST, 0.0F, MIN_DIST, MAX_DIST, MIN_DIST, MAX_DIST);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "cuttingBoard"); //top
-		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "cuttingBoard_NorthSouth");
-		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "cuttingBoard_Left");
-		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "cuttingBoard_Right");
+		
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "cuttingBoard"); //top
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "cuttingBoard_NorthSouth");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "cuttingBoard_Left");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "cuttingBoard_Right");
 	}
 
 	@Override

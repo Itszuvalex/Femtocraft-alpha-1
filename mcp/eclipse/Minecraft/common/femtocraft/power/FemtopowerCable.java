@@ -23,12 +23,12 @@ public class FemtopowerCable extends FemtopowerContainer {
 		super(par1, par2Material);
 		setCreativeTab(Femtocraft.femtocraftTab);
 		setBlockBounds();
-		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoil");
-		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoreBorder");
-		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableConnector");
-		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoil");
-		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoilEdge");
-		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableBorder");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoil");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoreBorder");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableConnector");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoil");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoilEdge");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableBorder");
 	}
 	
 	public void setBlockBounds() {

@@ -10,7 +10,7 @@ public class Rectangulon extends Item{
 		super(id);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		func_111206_d(Femtocraft.ID.toLowerCase() +":" + "Rectangulon");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "Rectangulon");
 	}
 	
 	public void updateIcons(IconRegister par1IconRegister)

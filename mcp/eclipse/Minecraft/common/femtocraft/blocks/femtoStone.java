@@ -13,7 +13,7 @@ public class femtoStone extends Block {
 	public femtoStone(int id, int texture) {
 		super(id, Material.iron);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "femtoStone");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "femtoStone");
 	}
 	
 	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {

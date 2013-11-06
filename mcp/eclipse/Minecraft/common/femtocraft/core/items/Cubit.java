@@ -10,7 +10,7 @@ public class Cubit extends Item{
 		super(id);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		func_111206_d(Femtocraft.ID.toLowerCase() +":" + "Cubit");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "Cubit");
 	}
 	
 	public void updateIcons(IconRegister par1IconRegister)

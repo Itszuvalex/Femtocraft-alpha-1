@@ -10,7 +10,7 @@ public class HardenedBulb extends Item{
 		super(id);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		func_111206_d(Femtocraft.ID.toLowerCase() +":" + "HardenedBulb");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "HardenedBulb");
 	}
 	
 	public void updateIcons(IconRegister par1IconRegister)

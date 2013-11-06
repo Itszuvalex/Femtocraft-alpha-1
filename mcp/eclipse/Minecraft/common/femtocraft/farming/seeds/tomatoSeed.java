@@ -11,7 +11,7 @@ public class tomatoSeed extends Item{
 		super(id);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		func_111206_d(Femtocraft.ID.toLowerCase() +":" + "tomatoSeed");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "tomatoSeed");
 	}
 	
 	public void updateIcons(IconRegister par1IconRegister)

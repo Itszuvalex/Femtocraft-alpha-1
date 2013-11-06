@@ -12,7 +12,7 @@ public class oreTitanium extends BlockOre{
 	public oreTitanium(int id, int texture) {
 		super(id);
 		this.setCreativeTab(Femtocraft.femtocraftTab);
-		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "oreTitanium");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "oreTitanium");
 	}
 	
 	@SideOnly(Side.CLIENT)

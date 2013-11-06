@@ -10,7 +10,7 @@ public class FibrousStrand extends Item{
 		super(id);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		func_111206_d(Femtocraft.ID.toLowerCase() +":" + "FibrousStrand");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "FibrousStrand");
 	}
 	
 	public void updateIcons(IconRegister par1IconRegister)

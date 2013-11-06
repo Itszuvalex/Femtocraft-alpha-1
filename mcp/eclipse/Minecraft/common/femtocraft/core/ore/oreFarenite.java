@@ -13,7 +13,7 @@ public class oreFarenite extends BlockOre{
 	public oreFarenite(int id, int texture) {
 		super(id);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		func_111022_d(Femtocraft.ID.toLowerCase() +":" + "oreFarenite");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "oreFarenite");
 	}
 	
 	@SideOnly(Side.CLIENT)

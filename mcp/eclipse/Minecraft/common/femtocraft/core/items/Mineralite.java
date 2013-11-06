@@ -10,7 +10,7 @@ public class Mineralite extends Item{
 		super(id);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		func_111206_d(Femtocraft.ID.toLowerCase() +":" + "Mineralite");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "Mineralite");
 	}
 	
 	public void updateIcons(IconRegister par1IconRegister)

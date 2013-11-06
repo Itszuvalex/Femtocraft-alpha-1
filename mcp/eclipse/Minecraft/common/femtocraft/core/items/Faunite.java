@@ -10,7 +10,7 @@ public class Faunite extends Item{
 		super(id);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		func_111206_d(Femtocraft.ID.toLowerCase() +":" + "Faunite");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "Faunite");
 	}
 	
 	public void updateIcons(IconRegister par1IconRegister)

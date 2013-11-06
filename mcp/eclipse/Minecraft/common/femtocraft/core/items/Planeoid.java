@@ -10,7 +10,7 @@ public class Planeoid extends Item{
 		super(id);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		func_111206_d(Femtocraft.ID.toLowerCase() +":" + "Planeoid");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "Planeoid");
 	}
 	
 	public void updateIcons(IconRegister par1IconRegister)
