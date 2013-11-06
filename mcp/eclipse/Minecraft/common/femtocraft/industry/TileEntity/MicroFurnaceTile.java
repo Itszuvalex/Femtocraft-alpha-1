@@ -411,26 +411,46 @@ public class MicroFurnaceTile  extends FemtopowerConsumer implements ISidedInven
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
-		return false;
+		switch(i)
+		{
+		case(1):
+			return false;
+		default:
+			return true;
+		}
 	}
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {
-		// TODO Auto-generated method stub
-		return null;
+		switch(var1)
+		{
+			case(1):
+				return new int[]{0};
+			case(0):
+			case(2):
+			case(3):
+			case(4):
+			case(5):
+				return new int[]{1};
+			default:
+				return new int[]{};
+		}
 	}
 
 	@Override
 	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
-		// TODO Auto-generated method stub
-		return false;
+		switch(i)
+		{
+		case(1): 
+			return false;
+		default:
+			return true;
+		}
 	}
 
 	@Override
 	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 }
 

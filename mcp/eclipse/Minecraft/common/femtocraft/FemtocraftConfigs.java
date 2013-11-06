@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
 
 import net.minecraftforge.common.Configuration;
 
-public class Configs {
+public class FemtocraftConfigs {
 	@Retention(RetentionPolicy.RUNTIME)
 	private static @interface CfgId {
 		public boolean block() default false;
@@ -90,7 +90,7 @@ public class Configs {
 	public static void  load(Configuration config) {
 		try {
 			config.load();
-			Field[] fields = Configs.class.getFields();
+			Field[] fields = FemtocraftConfigs.class.getFields();
 			for(Field field : fields) {
 				CfgId annotation = field.getAnnotation(CfgId.class);
 				if(annotation != null) {

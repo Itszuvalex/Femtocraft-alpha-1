@@ -33,7 +33,7 @@ public class FemtocraftWorldGenerator implements IWorldGenerator {
 
 	private void generateSurface(World world, Random random, int i, int j) {
 		
-		if(Configs.titaniumGen) {
+		if(FemtocraftConfigs.titaniumGen) {
 			//Titanium
 			for(int k =0; k < 7; k++) {
 				int Xcoord = i + random.nextInt(16);
@@ -47,7 +47,7 @@ public class FemtocraftWorldGenerator implements IWorldGenerator {
 		}
 		
 		//Platinum
-		if (Configs.platinumGen) {
+		if (FemtocraftConfigs.platinumGen) {
 			for (int k = 0; k < 5; k++) {
 				int Xcoord = i + random.nextInt(16);
 				int Ycoord = random.nextInt(30);
@@ -58,7 +58,7 @@ public class FemtocraftWorldGenerator implements IWorldGenerator {
 			}
 		}
 		
-		if (Configs.thoriumGen) {
+		if (FemtocraftConfigs.thoriumGen) {
 			//Thorium
 			for (int k = 0; k < 8; k++) {
 				int Xcoord = i + random.nextInt(16);
@@ -71,7 +71,7 @@ public class FemtocraftWorldGenerator implements IWorldGenerator {
 			}
 		}
 		
-		if (Configs.fareniteGen) {
+		if (FemtocraftConfigs.fareniteGen) {
 			//Farenite
 			for (int k = 0; k < 10; k++) {
 				int Xcoord = i + random.nextInt(16);
