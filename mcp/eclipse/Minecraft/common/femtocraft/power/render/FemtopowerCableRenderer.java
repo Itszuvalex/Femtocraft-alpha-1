@@ -4,6 +4,8 @@
 package femtocraft.power.render;
 
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -30,7 +32,15 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		FemtopowerCable cable = (FemtopowerCable)block;
 		if(block == null) return;
 		
-		renderCable(cable, -.5F, -.5F, -.5F, renderer, new boolean[]{false, false, true, false, false, true});
+		Tessellator tessellator = Tessellator.instance;
+		
+		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+		
+		tessellator.startDrawingQuads();
+		renderCable(cable, 0, 0, 0, renderer, new boolean[]{false, false, false, false, false, false});
+		tessellator.draw();
+		
+		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 	}
 
 	@Override
