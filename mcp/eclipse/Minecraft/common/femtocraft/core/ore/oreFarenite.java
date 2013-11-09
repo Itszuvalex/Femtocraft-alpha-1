@@ -2,6 +2,7 @@ package femtocraft.core.ore;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
 import net.minecraft.client.renderer.texture.IconRegister;
 import cpw.mods.fml.relauncher.Side;
@@ -10,10 +11,14 @@ import femtocraft.Femtocraft;
 
 public class oreFarenite extends BlockOre{
 
-	public oreFarenite(int id, int texture) {
+	public oreFarenite(int id) {
 		super(id);
 		setCreativeTab(Femtocraft.femtocraftTab);
 		setTextureName(Femtocraft.ID.toLowerCase() +":" + "oreFarenite");
+		setUnlocalizedName("oreFarenite");
+		setHardness(3.0f);
+		setStepSound(Block.soundStoneFootstep);
+		setResistance(1f);
 	}
 	
 	@SideOnly(Side.CLIENT)

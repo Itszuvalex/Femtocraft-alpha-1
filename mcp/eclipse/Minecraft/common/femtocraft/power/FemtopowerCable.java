@@ -1,5 +1,6 @@
 package femtocraft.power;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
@@ -22,6 +23,9 @@ public class FemtopowerCable extends FemtopowerContainer {
 	public FemtopowerCable(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setCreativeTab(Femtocraft.femtocraftTab);
+		setUnlocalizedName("FemtopowerCable");
+		setHardness(1.0f);
+		setStepSound(Block.soundStoneFootstep);
 		setBlockBounds();
 		setTextureName(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoil");
 		setTextureName(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoreBorder");

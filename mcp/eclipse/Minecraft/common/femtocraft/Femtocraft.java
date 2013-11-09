@@ -9,14 +9,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PostInit;
-import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -58,6 +57,7 @@ import femtocraft.core.items.ingotFarenite;
 import femtocraft.core.items.ingotPlatinum;
 import femtocraft.core.items.ingotThorium;
 import femtocraft.core.items.ingotTitanium;
+import femtocraft.core.liquids.Mass;
 import femtocraft.core.ore.oreFarenite;
 import femtocraft.core.ore.orePlatinum;
 import femtocraft.core.ore.oreThorium;
@@ -105,6 +105,9 @@ public class Femtocraft {
 	public static Block FemtopowerConsumerTest;
 	public static Block FemtocraftMicroFurnaceUnlit;
 	public static Block FemtocraftMicroFurnaceLit;
+	
+	//liquids
+	public static Fluid mass;
 	
 	//items
 	public static Item ingotTitanium;
@@ -162,6 +165,7 @@ public class Femtocraft {
 		Femtocraft.proxy.registerBlockRenderers();
 		
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandlerFemtocraft());
+		MinecraftForge.EVENT_BUS.register(new FemtocraftEventHookContainer());
 	}
 	
 	@EventHandler
@@ -179,47 +183,47 @@ public class Femtocraft {
 
 		//blocks
 		
-		oreTitanium = new oreTitanium(FemtocraftConfigs.oreTitaniumID, 0).setUnlocalizedName("oreTitanium").setHardness(3.0f).setStepSound(Block.soundStoneFootstep).setResistance(1f);
+		oreTitanium = new oreTitanium(FemtocraftConfigs.oreTitaniumID);
 		 MinecraftForge.setBlockHarvestLevel(oreTitanium, "pickaxe", 2);
 		 GameRegistry.registerBlock(oreTitanium, "oreTitanium");
 		 LanguageRegistry.addName(oreTitanium, "Titanium Ore");
 		 OreDictionary.registerOre("oreTitanium", new ItemStack(oreTitanium));
 		 
-		 orePlatinum = new orePlatinum(FemtocraftConfigs.orePlatinumID, 1).setUnlocalizedName("orePlatinum").setHardness(3.0f).setStepSound(Block.soundStoneFootstep).setResistance(1f);
+		 orePlatinum = new orePlatinum(FemtocraftConfigs.orePlatinumID);
 		 MinecraftForge.setBlockHarvestLevel(orePlatinum, "pickaxe", 2);
 		 GameRegistry.registerBlock(orePlatinum, "orePlatinum");
 		 LanguageRegistry.addName(orePlatinum, "Platinum Ore");
 		 OreDictionary.registerOre("orePlatinum", new ItemStack(orePlatinum));
 		 
-		 oreThorium = new oreThorium(FemtocraftConfigs.oreThoriumID, 2).setUnlocalizedName("oreThorium").setHardness(3.0f).setStepSound(Block.soundStoneFootstep).setResistance(1f);
+		 oreThorium = new oreThorium(FemtocraftConfigs.oreThoriumID);
 		 MinecraftForge.setBlockHarvestLevel(oreThorium, "pickaxe", 2);
 		 GameRegistry.registerBlock(oreThorium, "oreThorium");
 		 LanguageRegistry.addName(oreThorium, "Thorium Ore");
 		 OreDictionary.registerOre("oreThorium", new ItemStack(oreThorium));
 		 
-		 oreFarenite = new oreFarenite(FemtocraftConfigs.oreFareniteID, 3).setUnlocalizedName("oreFarenite").setHardness(3.0f).setStepSound(Block.soundStoneFootstep).setResistance(1f);
+		 oreFarenite = new oreFarenite(FemtocraftConfigs.oreFareniteID);
 		 MinecraftForge.setBlockHarvestLevel(oreFarenite, "pickaxe", 2);
 		 GameRegistry.registerBlock(oreFarenite, "oreFarenite");
 		 LanguageRegistry.addName(oreFarenite, "Farenite Ore");
 		 OreDictionary.registerOre("oreFarenite", new ItemStack(oreFarenite));
 		 
-		 nanoStone = new nanoStone(FemtocraftConfigs.nanoStoneID, 4).setUnlocalizedName("nanoStone").setHardness(7.0f).setStepSound(Block.soundMetalFootstep).setResistance(12f);
+		 nanoStone = new nanoStone(FemtocraftConfigs.nanoStoneID);
 		 GameRegistry.registerBlock(nanoStone, "nanoStone");
 		 LanguageRegistry.addName(nanoStone, "Nanostone");
 		 
-		 microStone = new microStone(FemtocraftConfigs.microStoneID, 5).setUnlocalizedName("microStone").setHardness(6.0f).setStepSound(Block.soundMetalFootstep).setResistance(9f);
+		 microStone = new microStone(FemtocraftConfigs.microStoneID);
 		 GameRegistry.registerBlock(microStone, "microStone");
 		 LanguageRegistry.addName(microStone,  "Microstone");
 		 
-		 femtoStone = new femtoStone(FemtocraftConfigs.femtoStoneID, 6).setUnlocalizedName("femtoStone").setHardness(8.0f).setStepSound(Block.soundMetalFootstep).setResistance(15f);
+		 femtoStone = new femtoStone(FemtocraftConfigs.femtoStoneID);
 		 GameRegistry.registerBlock(femtoStone, "femtoStone");
 		 LanguageRegistry.addName(femtoStone, "Femtostone");
 		 
-		 unidentifiedAlloy = new unidentifiedAlloy(FemtocraftConfigs.unidentifiedAlloyID, 7).setUnlocalizedName("unidentifiedAlloy").setBlockUnbreakable().setStepSound(Block.soundMetalFootstep).setResistance(20f);
+		 unidentifiedAlloy = new unidentifiedAlloy(FemtocraftConfigs.unidentifiedAlloyID);
 		 GameRegistry.registerBlock(unidentifiedAlloy, "unidentifiedAlloy");
 		 LanguageRegistry.addName(unidentifiedAlloy, "Unidentified Alloy");
 		 
-		 FemtopowerCable = (FemtopowerCable) new FemtopowerCable(FemtocraftConfigs.FemtopowerCableID, Material.rock).setUnlocalizedName("FemtopowerCable").setHardness(1.0f).setStepSound(Block.soundStoneFootstep);
+		 FemtopowerCable = (FemtopowerCable) new FemtopowerCable(FemtocraftConfigs.FemtopowerCableID, Material.rock);
 		 GameRegistry.registerBlock(FemtopowerCable, "FemtopowerCable");
 		 LanguageRegistry.addName(FemtopowerCable, "Femtopower Cable");
 		 
@@ -231,11 +235,15 @@ public class Femtocraft {
 		 GameRegistry.registerBlock(FemtopowerConsumerTest, "FemtopowerConsumer");
 		 LanguageRegistry.addName(FemtopowerConsumerTest, "Femtopower Consumer");
 		 
-		 FemtocraftMicroFurnaceUnlit = new BlockMicroFurnace(FemtocraftConfigs.FemtocraftMicroFurnaceUnlitID, false).setUnlocalizedName("FemtocraftMicroFurnace").setHardness(3.5f).setStepSound(Block.soundStoneFootstep).setCreativeTab(femtocraftTab);
+		 FemtocraftMicroFurnaceUnlit = new BlockMicroFurnace(FemtocraftConfigs.FemtocraftMicroFurnaceUnlitID, false);
 		 GameRegistry.registerBlock(FemtocraftMicroFurnaceUnlit, "FemtocraftMicroFurnace");
 		 LanguageRegistry.addName(FemtocraftMicroFurnaceUnlit, "Micro-Furnace");
 		 
-		 FemtocraftMicroFurnaceLit = new BlockMicroFurnace(FemtocraftConfigs.FemtocraftMicroFurnaceLitID, true).setLightValue(0.875F).setUnlocalizedName("FemtocraftMicroFurnace").setHardness(3.5f).setStepSound(Block.soundStoneFootstep);
+		 FemtocraftMicroFurnaceLit = new BlockMicroFurnace(FemtocraftConfigs.FemtocraftMicroFurnaceLitID, true);
+		 
+		 //Liquids
+		 mass = new Mass();
+		 FluidRegistry.registerFluid(mass);
 		 
 		 //items
 		 

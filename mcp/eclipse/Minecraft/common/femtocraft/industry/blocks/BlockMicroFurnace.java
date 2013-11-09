@@ -46,9 +46,14 @@ public class BlockMicroFurnace extends BlockContainer
     {
         super(par1, Material.rock);
         this.isActive = par2;
+        setUnlocalizedName("FemtocraftMicroFurnace");
+        setHardness(3.5f);
+        setStepSound(Block.soundStoneFootstep);
+        setCreativeTab(Femtocraft.femtocraftTab);
         setTextureName(Femtocraft.ID.toLowerCase() +":" + "MicroMachineBlock_side");
         if(par2)
         {
+        	setLightValue(0.875F);
         	setTextureName(Femtocraft.ID.toLowerCase() +":" + "MicroFurnace_front_lit");
         }
         else 
