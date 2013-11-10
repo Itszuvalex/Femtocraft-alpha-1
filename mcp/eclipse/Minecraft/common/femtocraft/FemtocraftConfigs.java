@@ -35,6 +35,8 @@ public class FemtocraftConfigs {
 	public static @CfgId(block=true) int FemtocraftMicroFurnaceUnlitID = 361;
 	public static @CfgId(block=true) int FemtocraftMicroFurnaceLitID = 362;
 	
+	public static @CfgId(block=true) int FemtocraftMassBlock = 400;
+	
 	//items
 	public static @CfgId int ingotTitaniumID = 12000;
 	public static @CfgId int ingotPlatinumID = 12001;

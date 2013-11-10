@@ -58,6 +58,7 @@ import femtocraft.core.items.ingotPlatinum;
 import femtocraft.core.items.ingotThorium;
 import femtocraft.core.items.ingotTitanium;
 import femtocraft.core.liquids.Mass;
+import femtocraft.core.liquids.MassBlock;
 import femtocraft.core.ore.oreFarenite;
 import femtocraft.core.ore.orePlatinum;
 import femtocraft.core.ore.oreThorium;
@@ -108,6 +109,7 @@ public class Femtocraft {
 	
 	//liquids
 	public static Fluid mass;
+	public static MassBlock mass_block;
 	
 	//items
 	public static Item ingotTitanium;
@@ -244,6 +246,10 @@ public class Femtocraft {
 		 //Liquids
 		 mass = new Mass();
 		 FluidRegistry.registerFluid(mass);
+		 
+		 mass_block = new MassBlock(FemtocraftConfigs.FemtocraftMassBlock);
+//		 GameRegistry.registerBlock(mass_block, "Mass");
+		 LanguageRegistry.addName(mass_block, "Mass");
 		 
 		 //items
 		 
