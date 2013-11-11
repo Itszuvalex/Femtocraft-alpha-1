@@ -1,6 +1,7 @@
 package femtocraft.managers;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -42,13 +43,17 @@ public class FemtocraftCraftingManager
 //        this.addShapelessRecipe(new ItemStack(Item.writableBook, 1), new Object[] {Item.book, new ItemStack(Item.dyePowder, 1, 0), Item.feather});
     	FemtocraftRecipeSorter defaultSorter = new FemtocraftRecipeSorter(this);
     	
-    	Set<ArrayList> recipeList = recipeListMap.entrySet();
-    	
-    	//Sort all arrayLists
-    	for(ArrayList recipes : recipeList)
-    	{
-    		Collections.sort(recipes, defaultSorter);
-    	}
+    	Collection recipeList = recipeListMap.values();
+ 	
+	   	//Sort all arrayLists
+	   	for(Object obj : recipeList.toArray())
+	   	{
+	   		if(obj instanceof ArrayList)
+	   		{
+	   			ArrayList recipes = (ArrayList)obj;
+	   			Collections.sort(recipes, defaultSorter);
+	   		}
+	   	}
     }
 
     public ShapedRecipes addRecipe(ItemStack par1ItemStack, Object ... par2ArrayOfObj)
