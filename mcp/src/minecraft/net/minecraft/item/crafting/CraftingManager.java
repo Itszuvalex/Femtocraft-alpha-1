@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import femtocraft.managers.FemtocraftRecipeSorter;
+
 import net.minecraft.block.Block;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -14,10 +19,11 @@ public class CraftingManager
 {
     /** The static instance of this class */
     private static final CraftingManager instance = new CraftingManager();
+    
+    public static final String DefaultMinecraftRecipeString = "minecraft";
 
     /** A list of all the recipes added */
-    private List recipes = new ArrayList();
-
+    private Map recipeListMap = new HashMap<String, List>();
     /**
      * Returns the static instance of this class
      */
@@ -35,10 +41,10 @@ public class CraftingManager
         (new RecipesCrafting()).addRecipes(this);
         (new RecipesArmor()).addRecipes(this);
         (new RecipesDyes()).addRecipes(this);
-        this.recipes.add(new RecipesArmorDyes());
-        this.recipes.add(new RecipesMapCloning());
-        this.recipes.add(new RecipesMapExtending());
-        this.recipes.add(new RecipeFireworks());
+        ((List) this.recipeListMap.get(DefaultMinecraftRecipeString)).add(new RecipesArmorDyes());
+        ((List) this.recipeListMap.get(DefaultMinecraftRecipeString)).add(new RecipesMapCloning());
+        ((List) this.recipeListMap.get(DefaultMinecraftRecipeString)).add(new RecipesMapExtending());
+        ((List) this.recipeListMap.get(DefaultMinecraftRecipeString)).add(new RecipeFireworks());
         this.addRecipe(new ItemStack(Item.paper, 3), new Object[] {"###", '#', Item.reed});
         this.addShapelessRecipe(new ItemStack(Item.book, 1), new Object[] {Item.paper, Item.paper, Item.paper, Item.leather});
         this.addShapelessRecipe(new ItemStack(Item.writableBook, 1), new Object[] {Item.book, new ItemStack(Item.dyePowder, 1, 0), Item.feather});
@@ -147,10 +153,23 @@ public class CraftingManager
         this.addShapelessRecipe(new ItemStack(Item.fireballCharge, 3), new Object[] {Item.gunpowder, Item.blazePowder, new ItemStack(Item.coal, 1, 1)});
         this.addRecipe(new ItemStack(Block.daylightSensor), new Object[] {"GGG", "QQQ", "WWW", 'G', Block.glass, 'Q', Item.netherQuartz, 'W', Block.woodSingleSlab});
         this.addRecipe(new ItemStack(Block.hopperBlock), new Object[] {"I I", "ICI", " I ", 'I', Item.ingotIron, 'C', Block.chest});
-        Collections.sort(this.recipes, new RecipeSorter(this));
+        RecipeSorter defaultSorter = new RecipeSorter(this);
+    	
+    	Set<List> recipeList = (Set<List>) recipeListMap.values();
+    	
+    	//Sort all arrayLists
+    	for(List recipes : recipeList)
+    	{
+    		Collections.sort(recipes, defaultSorter);
+    	}
     }
 
     public ShapedRecipes addRecipe(ItemStack par1ItemStack, Object ... par2ArrayOfObj)
+    {
+    	return addRecipe(par1ItemStack, DefaultMinecraftRecipeString, par2ArrayOfObj);
+    }
+    	
+    public ShapedRecipes addRecipe(ItemStack par1ItemStack, String recipeListKey, Object ... par2ArrayOfObj)
     {
         String s = "";
         int i = 0;
@@ -220,11 +239,21 @@ public class CraftingManager
         }
 
         ShapedRecipes shapedrecipes = new ShapedRecipes(j, k, aitemstack, par1ItemStack);
-        this.recipes.add(shapedrecipes);
+        
+        if(!recipeListMap.containsKey(recipeListKey))
+        {
+        	recipeListMap.put(recipeListKey, new ArrayList());
+        }
+        ((ArrayList) this.recipeListMap.get(recipeListKey)).add(shapedrecipes);
         return shapedrecipes;
     }
 
     public void addShapelessRecipe(ItemStack par1ItemStack, Object ... par2ArrayOfObj)
+    {
+    	addShapelessRecipe(par1ItemStack, DefaultMinecraftRecipeString, par2ArrayOfObj);
+    }
+    
+    public void addShapelessRecipe(ItemStack par1ItemStack, String recipeListKey, Object ... par2ArrayOfObj)
     {
         ArrayList arraylist = new ArrayList();
         Object[] aobject = par2ArrayOfObj;
@@ -253,10 +282,21 @@ public class CraftingManager
             }
         }
 
-        this.recipes.add(new ShapelessRecipes(par1ItemStack, arraylist));
+       ShapelessRecipes recipe = new ShapelessRecipes(par1ItemStack, arraylist);
+        
+        if(!recipeListMap.containsKey(recipeListKey))
+        {
+        	recipeListMap.put(recipeListKey, new ArrayList());
+        }
+        ((ArrayList) this.recipeListMap.get(recipeListKey)).add(recipe);
     }
 
     public ItemStack findMatchingRecipe(InventoryCrafting par1InventoryCrafting, World par2World)
+    {
+    	return findMatchingRecipe(par1InventoryCrafting, par2World, DefaultMinecraftRecipeString);
+    }
+    
+    public ItemStack findMatchingRecipe(InventoryCrafting par1InventoryCrafting, World par2World, String recipeListKey)
     {
         int i = 0;
         ItemStack itemstack = null;
@@ -300,9 +340,9 @@ public class CraftingManager
         }
         else
         {
-            for (j = 0; j < this.recipes.size(); ++j)
+            for (j = 0; j < ((ArrayList) this.recipeListMap.get(recipeListKey)).size(); ++j)
             {
-                IRecipe irecipe = (IRecipe)this.recipes.get(j);
+                IRecipe irecipe = (IRecipe)((ArrayList) this.recipeListMap.get(recipeListKey)).get(j);
 
                 if (irecipe.matches(par1InventoryCrafting, par2World))
                 {
@@ -319,6 +359,11 @@ public class CraftingManager
      */
     public List getRecipeList()
     {
-        return this.recipes;
+    	return getRecipeList(DefaultMinecraftRecipeString);
+    }
+    	
+    public List getRecipeList(String recipeListKey)
+    {
+        return (List) this.recipeListMap.get(recipeListKey);
     }
 }
