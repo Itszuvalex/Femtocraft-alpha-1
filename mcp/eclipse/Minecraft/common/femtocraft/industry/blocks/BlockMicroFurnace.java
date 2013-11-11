@@ -39,7 +39,7 @@ public class BlockMicroFurnace extends BlockContainer
      * This flag is used to prevent the furnace inventory to be dropped upon block removal, is used internally when the
      * furnace block changes from idle to active and vice-versa.
      */
-    private static boolean keepFurnaceInventory = false;
+    private static boolean keepFurnaceInventory;
     @SideOnly(Side.CLIENT)
     private Icon frontIcon;
     
