@@ -1,6 +1,7 @@
 package net.minecraft.item.crafting;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -155,12 +156,16 @@ public class CraftingManager
         this.addRecipe(new ItemStack(Block.hopperBlock), new Object[] {"I I", "ICI", " I ", 'I', Item.ingotIron, 'C', Block.chest});
         RecipeSorter defaultSorter = new RecipeSorter(this);
     	
-    	Set<List> recipeList = (Set<List>) recipeListMap.values();
+    	 Collection recipeList = recipeListMap.values();
     	
     	//Sort all arrayLists
-    	for(List recipes : recipeList)
+    	for(Object obj : recipeList.toArray())
     	{
-    		Collections.sort(recipes, defaultSorter);
+    		if(obj instanceof ArrayList)
+    		{
+    			ArrayList recipes = (ArrayList)obj;
+    			Collections.sort(recipes, defaultSorter);
+    		}
     	}
     }
 
@@ -364,6 +369,6 @@ public class CraftingManager
     	
     public List getRecipeList(String recipeListKey)
     {
-        return (List) this.recipeListMap.get(recipeListKey);
+        return (ArrayList) this.recipeListMap.get(recipeListKey);
     }
 }
