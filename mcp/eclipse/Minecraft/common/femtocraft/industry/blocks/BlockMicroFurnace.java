@@ -12,6 +12,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -41,24 +42,21 @@ public class BlockMicroFurnace extends BlockContainer
     private static boolean keepFurnaceInventory = false;
     @SideOnly(Side.CLIENT)
     private Icon frontIcon;
+    
+    @SideOnly(Side.CLIENT)
+    private Icon sideIcon;
 
     public BlockMicroFurnace(int par1, boolean par2)
     {
-        super(par1, Material.rock);
+        super(par1, Material.iron);
         this.isActive = par2;
         setUnlocalizedName("FemtocraftMicroFurnace");
         setHardness(3.5f);
         setStepSound(Block.soundStoneFootstep);
         setCreativeTab(Femtocraft.femtocraftTab);
-        setTextureName(Femtocraft.ID.toLowerCase() +":" + "MicroMachineBlock_side");
         if(par2)
         {
         	setLightValue(0.875F);
-        	setTextureName(Femtocraft.ID.toLowerCase() +":" + "MicroFurnace_front_lit");
-        }
-        else 
-        {
-        	setTextureName(Femtocraft.ID.toLowerCase() +":" + "MicroFurnace_front_unlit");
         }
     }
 
@@ -126,10 +124,10 @@ public class BlockMicroFurnace extends BlockContainer
     {
     	if(par1 != par2) 
     	{
-    		return this.blockIcon;
+    		return sideIcon;
     	}
     	else {
-    		return this.frontIcon;
+    		return frontIcon;
     	}
     }
 
@@ -141,8 +139,8 @@ public class BlockMicroFurnace extends BlockContainer
      */
     public void registerIcons(IconRegister par1IconRegister)
     {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "MicroMachineBlock_side");
-        this.frontIcon = par1IconRegister.registerIcon(this.isActive ? Femtocraft.ID.toLowerCase() +":" + "MicroFurnace_front_lit" : Femtocraft.ID.toLowerCase() +":" + "MicroFurnace_front_unlit");
+        sideIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "MicroMachineBlock_side");
+        frontIcon = par1IconRegister.registerIcon(this.isActive ? Femtocraft.ID.toLowerCase() +":" + "MicroFurnace_front_lit" : Femtocraft.ID.toLowerCase() +":" + "MicroFurnace_front_unlit");
     }
 
     /**
@@ -242,9 +240,9 @@ public class BlockMicroFurnace extends BlockContainer
     /**
      * Called when the block is placed in the world.
      */
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,  EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
     {
-        int l = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+        int l = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
         if (l == 0)
         {
@@ -377,5 +375,15 @@ public class BlockMicroFurnace extends BlockContainer
     public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5)
     {
         return Container.calcRedstoneFromInventory((IInventory)par1World.getBlockTileEntity(par2, par3, par4));
+    }
+    
+    @SideOnly(Side.CLIENT)
+
+    /**
+     * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
+     */
+    public int idPicked(World par1World, int par2, int par3, int par4)
+    {
+        return Femtocraft.FemtocraftMicroFurnaceUnlit.blockID;
     }
 }
