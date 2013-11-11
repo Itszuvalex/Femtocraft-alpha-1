@@ -176,7 +176,7 @@ mcp/reobf/*
 mcp/runtime/*
 mcp/temp/*
 
-mcp/src/minecraft/*
+!mcp/src/minecraft/*
 mcp/src/minecraft_server/*
 mcp/src/common/*
 mcp/eclipse/.metadata/*
