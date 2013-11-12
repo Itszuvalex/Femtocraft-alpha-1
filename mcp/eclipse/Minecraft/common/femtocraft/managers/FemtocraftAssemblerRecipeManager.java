@@ -32,11 +32,11 @@ public class FemtocraftAssemblerRecipeManager {
 		//Micro-tier components
 	}
 	
-	public void addRecipe(FemtocraftAssemblerRecipe recipe)
+	public void addRecipe(FemtocraftAssemblerRecipe recipe) throws IllegalArgumentException
 	{
 		if(recipe.input.length != 9)
 		{
-			throw new RuntimeException("FemtocraftAssemblerRecipe - Invalid Input Array Length!  Must be 9!");
+			throw new IllegalArgumentException("FemtocraftAssemblerRecipe - Invalid Input Array Length!  Must be 9!");
 		}
 		
 		inputToRecipeMap.put(recipe.input, recipe);
