@@ -176,7 +176,7 @@ mcp/reobf/*
 mcp/runtime/*
 mcp/temp/*
 
-!mcp/src/minecraft/*
+mcp/src/minecraft/*
 mcp/src/minecraft_server/*
 mcp/src/common/*
 mcp/eclipse/.metadata/*
@@ -188,6 +188,9 @@ mcp/eclipse/.metadata/*
 !mcp/src/minecraft/mods/Femtocraft
 !mcp/src/minecraft/mods/Femtocraft/textures/blocks/*
 !mcp/src/minecraft/mods/Femtocraft/textures/items/*
+!mcp/src/minecraft/assets
+!mcp/src/minecraft/assets/femtocraft
+!mcp/src/minecraft/assets/femtocraft/*
 
 *.bat
 *.sh
