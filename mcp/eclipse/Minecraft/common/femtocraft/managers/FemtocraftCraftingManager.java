@@ -23,9 +23,9 @@ public class FemtocraftCraftingManager
     /** The static instance of this class */
     private static final FemtocraftCraftingManager instance = new FemtocraftCraftingManager();
     
-    public static final String DefaultMinecraftRecipeString = "minecraft";
+    public static final String DefaultMinecraftRecipeKey = "minecraft";
 
-    /** A list of all the recipes added */
+    /** A map containing all lists of all the recipes added */
     private Map recipeListMap = new HashMap<String, List>();
 
     /**
@@ -43,25 +43,19 @@ public class FemtocraftCraftingManager
 //        this.addShapelessRecipe(new ItemStack(Item.writableBook, 1), new Object[] {Item.book, new ItemStack(Item.dyePowder, 1, 0), Item.feather});
     	FemtocraftRecipeSorter defaultSorter = new FemtocraftRecipeSorter(this);
     	
-    	Collection recipeList = recipeListMap.values();
- 	
-	   	//Sort all arrayLists
-	   	for(Object obj : recipeList.toArray())
+	   	//Sort all recipe lists
+	   	for(Object obj : recipeListMap.values())
 	   	{
-	   		if(obj instanceof ArrayList)
-	   		{
-	   			ArrayList recipes = (ArrayList)obj;
-	   			Collections.sort(recipes, defaultSorter);
-	   		}
+	   		Collections.sort((List) obj, defaultSorter);
 	   	}
     }
 
     public ShapedRecipes addRecipe(ItemStack par1ItemStack, Object ... par2ArrayOfObj)
     {
-    	return addRecipe(par1ItemStack, DefaultMinecraftRecipeString, par2ArrayOfObj);
+    	return addRecipe(DefaultMinecraftRecipeKey, par1ItemStack, par2ArrayOfObj);
     }
     	
-    public ShapedRecipes addRecipe(ItemStack par1ItemStack, String recipeListKey, Object ... par2ArrayOfObj)
+    public ShapedRecipes addRecipe(String recipeListKey, ItemStack par1ItemStack, Object ... par2ArrayOfObj)
     {
         String s = "";
         int i = 0;
@@ -132,20 +126,21 @@ public class FemtocraftCraftingManager
 
         ShapedRecipes shapedrecipes = new ShapedRecipes(j, k, aitemstack, par1ItemStack);
         
-        if(!recipeListMap.containsKey(recipeListKey))
-        {
-        	recipeListMap.put(recipeListKey, new ArrayList());
-        }
-        ((ArrayList) this.recipeListMap.get(recipeListKey)).add(shapedrecipes);
+        ArrayList list = (ArrayList) recipeListMap.get(recipeListKey);
+        if(list == null)
+        	list = (ArrayList) recipeListMap.put(recipeListKey, new ArrayList());
+        
+        list.add(shapedrecipes);
+
         return shapedrecipes;
     }
 
     public void addShapelessRecipe(ItemStack par1ItemStack, Object ... par2ArrayOfObj)
     {
-    	addShapelessRecipe(par1ItemStack, DefaultMinecraftRecipeString, par2ArrayOfObj);
+    	addShapelessRecipe(DefaultMinecraftRecipeKey, par1ItemStack, par2ArrayOfObj);
     }
     
-    public void addShapelessRecipe(ItemStack par1ItemStack, String recipeListKey, Object ... par2ArrayOfObj)
+    public void addShapelessRecipe(String recipeListKey, ItemStack par1ItemStack, Object ... par2ArrayOfObj)
     {
         ArrayList arraylist = new ArrayList();
         Object[] aobject = par2ArrayOfObj;
@@ -176,19 +171,19 @@ public class FemtocraftCraftingManager
 
        ShapelessRecipes recipe = new ShapelessRecipes(par1ItemStack, arraylist);
         
-        if(!recipeListMap.containsKey(recipeListKey))
-        {
-        	recipeListMap.put(recipeListKey, new ArrayList());
-        }
-        ((ArrayList) this.recipeListMap.get(recipeListKey)).add(recipe);
+       ArrayList list = (ArrayList) recipeListMap.get(recipeListKey);
+       if(list == null)
+    	   list = (ArrayList) recipeListMap.put(recipeListKey, new ArrayList());
+       
+       list.add(recipe);
     }
 
     public ItemStack findMatchingRecipe(InventoryCrafting par1InventoryCrafting, World par2World)
     {
-    	return findMatchingRecipe(par1InventoryCrafting, par2World, DefaultMinecraftRecipeString);
+    	return findMatchingRecipe(DefaultMinecraftRecipeKey, par1InventoryCrafting, par2World);
     }
     
-    public ItemStack findMatchingRecipe(InventoryCrafting par1InventoryCrafting, World par2World, String recipeListKey)
+    public ItemStack findMatchingRecipe(String recipeListKey, InventoryCrafting par1InventoryCrafting, World par2World)
     {
         int i = 0;
         ItemStack itemstack = null;
@@ -251,7 +246,7 @@ public class FemtocraftCraftingManager
      */
     public List getRecipeList()
     {
-    	return getRecipeList(DefaultMinecraftRecipeString);
+    	return getRecipeList(DefaultMinecraftRecipeKey);
     }
     	
     public List getRecipeList(String recipeListKey)
