@@ -90,7 +90,7 @@ public class Femtocraft {
 	
 	public static Logger logger;
 	
-	public static FemtocraftRecipeManager recipeManager = new FemtocraftRecipeManager();
+	public static FemtocraftRecipeManager recipeManager;
 
 	//blocks
 	public static Block oreTitanium;
@@ -395,6 +395,10 @@ public class Femtocraft {
 		// GameRegistry.addRecipe(new ItemStack(itemId), new Object[] {});
 
 		// EntityRegistry.registerModEntity(entity.class, "myEntity", 0, this, 32, 10, true)
+		 
+		 
+		 //HURP....DURP
+		 recipeManager = new FemtocraftRecipeManager();
 	}
 
 	@EventHandler
