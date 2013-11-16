@@ -27,7 +27,7 @@ public class MicroFurnaceTile  extends FemtopowerConsumer implements ISidedInven
 {
 	public MicroFurnaceTile() {
 		super();
-		setMaxStorage(4000);
+		setMaxStorage(800);
 	}
 	
 	

@@ -27,12 +27,6 @@ public class FemtopowerCable extends FemtopowerContainer {
 		setHardness(1.0f);
 		setStepSound(Block.soundStoneFootstep);
 		setBlockBounds();
-		setTextureName(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoil");
-		setTextureName(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoreBorder");
-		setTextureName(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableConnector");
-		setTextureName(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoil");
-		setTextureName(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableCoilEdge");
-		setTextureName(Femtocraft.ID.toLowerCase() +":" + "FemtopowerCableBorder");
 	}
 	
 	public void setBlockBounds() {

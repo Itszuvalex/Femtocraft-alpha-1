@@ -1,12 +1,13 @@
 package femtocraft.proxy;
 
-import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import femtocraft.cooking.blocks.cuttingBoardRenderer;
 import femtocraft.power.render.FemtopowerCableRenderer;
+import femtocraft.power.render.FemtopowerMicroCubeRenderer;
 
 public class ClientProxyFemtocraft extends CommonProxyFemtocraft {
 	public static int FemtopowerCableRenderID;
+	public static int FemtopowerMicroCubeRenderID;
 	
 	public static int CuttingBoardRenderPass;
 	public static int cuttingBoardRenderType;
@@ -35,6 +36,9 @@ public class ClientProxyFemtocraft extends CommonProxyFemtocraft {
 		super.registerBlockRenderers();
 		FemtopowerCableRenderID = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(FemtopowerCableRenderID, new FemtopowerCableRenderer());
+		
+		FemtopowerMicroCubeRenderID = RenderingRegistry.getNextAvailableRenderId();
+		RenderingRegistry.registerBlockHandler(FemtopowerMicroCubeRenderID, new FemtopowerMicroCubeRenderer());
 		
 	}
 }

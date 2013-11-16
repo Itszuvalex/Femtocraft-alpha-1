@@ -17,7 +17,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 	
 	public FemtopowerTile() {
 		currentStorage = 0;
-		maxStorage = 1000;
+		maxStorage = 250;
 		maxPowerPerTick = .05f;
 		maxSizePackets = .05f;   //Yes this is the same as maxpertick, this breaks if it isn't, for some reason  TODO
 		distributionBuffer = .01f;

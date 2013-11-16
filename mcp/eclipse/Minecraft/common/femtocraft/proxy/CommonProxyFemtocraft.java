@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import femtocraft.industry.TileEntity.MicroFurnaceTile;
 import femtocraft.power.TileEntity.FemtopowerCableTile;
 import femtocraft.power.TileEntity.FemtopowerConsumerTest;
+import femtocraft.power.TileEntity.FemtopowerMicroCubeTile;
 import femtocraft.power.TileEntity.FemtopowerProducerTest;
 
 public class CommonProxyFemtocraft {
@@ -18,6 +19,7 @@ public class CommonProxyFemtocraft {
 		 GameRegistry.registerTileEntity(FemtopowerConsumerTest.class, "FemtopowerConsumerTest");
 		 GameRegistry.registerTileEntity(MicroFurnaceTile.class, "FemtocraftMicroFurnace");
 		 GameRegistry.registerTileEntity(FemtopowerCableTile.class, "FemtopowerCable");
+		 GameRegistry.registerTileEntity(FemtopowerMicroCubeTile.class, "FemtocraftMicroCube");
 	}
 	
 	public void registerBlockRenderers() {

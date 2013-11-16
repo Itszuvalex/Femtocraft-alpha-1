@@ -70,6 +70,7 @@ import femtocraft.managers.FemtocraftRecipeManager;
 import femtocraft.power.FemtopowerCable;
 import femtocraft.power.FemtopowerConsumerBlock;
 import femtocraft.power.FemtopowerGenerator;
+import femtocraft.power.FemtopowerMicroCube;
 import femtocraft.proxy.ClientProxyFemtocraft;
 import femtocraft.proxy.CommonProxyFemtocraft;
 
@@ -106,6 +107,7 @@ public class Femtocraft {
 	public static Block FemtopowerConsumerTest;
 	public static Block FemtocraftMicroFurnaceUnlit;
 	public static Block FemtocraftMicroFurnaceLit;
+	public static Block FemtopowerMicroCube;
 	
 	//liquids
 	public static Fluid mass;
@@ -242,6 +244,10 @@ public class Femtocraft {
 		 LanguageRegistry.addName(FemtocraftMicroFurnaceUnlit, "Micro-Furnace");
 		 
 		 FemtocraftMicroFurnaceLit = new BlockMicroFurnace(FemtocraftConfigs.FemtocraftMicroFurnaceLitID, true);
+		 
+		 FemtopowerMicroCube = new FemtopowerMicroCube(FemtocraftConfigs.FemtopowerMicroCubeID);
+		 GameRegistry.registerBlock(FemtopowerMicroCube, "FemtopowerMicroCube");
+		 LanguageRegistry.addName(FemtopowerMicroCube, "Micro-Cube");
 		 
 		 //Liquids
 		 mass = new Mass();

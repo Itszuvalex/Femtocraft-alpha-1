@@ -34,6 +34,7 @@ public class FemtocraftConfigs {
 	public static @CfgId(block=true) int FemtopowerConsumerTestBlockID = 360;
 	public static @CfgId(block=true) int FemtocraftMicroFurnaceUnlitID = 361;
 	public static @CfgId(block=true) int FemtocraftMicroFurnaceLitID = 362;
+	public static @CfgId(block=true) int FemtopowerMicroCubeID = 363;
 	
 	public static @CfgId(block=true) int FemtocraftMassBlock = 400;
 	
