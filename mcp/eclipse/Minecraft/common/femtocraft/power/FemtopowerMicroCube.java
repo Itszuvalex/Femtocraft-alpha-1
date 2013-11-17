@@ -17,6 +17,7 @@ import femtocraft.proxy.ClientProxyFemtocraft;
 public class FemtopowerMicroCube extends FemtopowerContainer {
 	public Icon outputSide;
 	public Icon inputSide;
+	public Icon side;
 
 	public FemtopowerMicroCube(int par1) {
 		super(par1, Material.iron);
@@ -53,9 +54,9 @@ public class FemtopowerMicroCube extends FemtopowerContainer {
 		FemtopowerMicroCubeTile tile = (FemtopowerMicroCubeTile)par1World.getBlockTileEntity(par2, par3, par4);
 		if(tile != null)
 		{
-			tile.onSideActivate(ForgeDirection.getOrientation(par6));
+			tile.onSideActivate(ForgeDirection.getOrientation(par6), par5EntityPlayer);
+			par1World.markBlockForRenderUpdate(par2, par3, par4);
 		}
-		
 		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer,
 				par6, par7, par8, par9);
 	}
@@ -65,5 +66,6 @@ public class FemtopowerMicroCube extends FemtopowerContainer {
 	public void registerIcons(IconRegister par1IconRegister) {
 		inputSide = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()+":" + "MicroCube_input");
 		outputSide = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()+":" + "MicroCube_output");
+		side = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "MicroCube_side");
 	}
 }

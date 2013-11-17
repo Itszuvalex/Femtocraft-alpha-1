@@ -218,6 +218,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
     
     public void checkConnections() {
     	for(int j = 0; j < 6; ++j) {
+    		boolean prev = connections[j];
     	   connections[j] = false;
  		   ForgeDirection offset = ForgeDirection.getOrientation(j);
  		   int locx = this.xCoord + offset.offsetX;
@@ -228,6 +229,10 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
  		   
  		   if(checkTile != null && checkTile instanceof IFemtopowerContainer) {
  			   connections[j] = true;
+ 			   if(prev != connections[j])
+ 			   {
+ 				  this.worldObj.markBlockForRenderUpdate(this.xCoord, this.yCoord, this.zCoord);
+ 			   }
  		   }
  	   }
       }

@@ -1,42 +1,59 @@
 package femtocraft.power.TileEntity;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.util.Arrays;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+
+import femtocraft.Femtocraft;
+import femtocraft.FemtocraftPacketHandler;
+import femtocraft.FemtocraftUtils;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.ForgeDirection;
 
 public class FemtopowerMicroCubeTile extends FemtopowerTile {
-	Boolean[] outputs = new Boolean[6];
+	public boolean[] outputs;
 	
 	public FemtopowerMicroCubeTile() {
 		super();
 		setMaxStorage(10000);
+		outputs = new boolean[6];
+		Arrays.fill(outputs, false);
 	}
 
-	public void onSideActivate(ForgeDirection side)
+	public void onSideActivate(ForgeDirection side, EntityPlayer playerEntity)
 	{
-		int i = Arrays.asList(ForgeDirection.VALID_DIRECTIONS).indexOf(side);
+		int i = FemtocraftUtils.indexOfForgeDirection(side);
 		outputs[i] = !outputs[i];
 	}
 
 	@Override
 	public float getFillPercentageForCharging(ForgeDirection from) {
-		return outputs[Arrays.asList(ForgeDirection.VALID_DIRECTIONS).indexOf(from)] ? 0.f : 1.f;
+		return outputs[FemtocraftUtils.indexOfForgeDirection(from)] ? 1.f : 0.f;
 	}
 
 	@Override
 	public float getFillPercentageForOutput(ForgeDirection to) {
-		return outputs[Arrays.asList(ForgeDirection.VALID_DIRECTIONS).indexOf(to)] ? 1.f : 0.f;
+		return outputs[FemtocraftUtils.indexOfForgeDirection(to)] ? 1.f : 0.f;
 	}
 
 	@Override
 	public boolean canCharge(ForgeDirection from) {
-		return (outputs[Arrays.asList(ForgeDirection.VALID_DIRECTIONS).indexOf(from)] ? false : true) && super.canCharge(from);
+		return !outputs[FemtocraftUtils.indexOfForgeDirection(from)] && super.canCharge(from);
 	}
 
 	@Override
 	public int charge(ForgeDirection from, int amount) {
-		if(outputs[Arrays.asList(ForgeDirection.VALID_DIRECTIONS).indexOf(from)])
+		if(!outputs[FemtocraftUtils.indexOfForgeDirection(from)])
 		{
 			return super.charge(from, amount);
 		}
@@ -60,6 +77,4 @@ public class FemtopowerMicroCubeTile extends FemtopowerTile {
 			par1nbtTagCompound.setBoolean(String.format("output%d", i), outputs[i]);
 		}
 	}
-
-	
 }
