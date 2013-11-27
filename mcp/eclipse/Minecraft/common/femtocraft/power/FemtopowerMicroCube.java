@@ -52,10 +52,10 @@ public class FemtopowerMicroCube extends FemtopowerContainer {
 			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
 			float par8, float par9) {
 		FemtopowerMicroCubeTile tile = (FemtopowerMicroCubeTile)par1World.getBlockTileEntity(par2, par3, par4);
-		if(tile != null)
+		if(tile != null && !par1World.isRemote)
 		{
 			tile.onSideActivate(ForgeDirection.getOrientation(par6), par5EntityPlayer);
-			par1World.markBlockForRenderUpdate(par2, par3, par4);
+			par1World.markBlockForUpdate(par2, par3, par4);
 		}
 		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer,
 				par6, par7, par8, par9);

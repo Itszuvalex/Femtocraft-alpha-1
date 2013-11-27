@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.util.Arrays;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftPacketHandler;
@@ -15,6 +16,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.server.MinecraftServer;
@@ -22,6 +24,7 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class FemtopowerMicroCubeTile extends FemtopowerTile {
 	public boolean[] outputs;
+	public static final String packetChannel = Femtocraft.ID + ".MCube";
 	
 	public FemtopowerMicroCubeTile() {
 		super();
@@ -32,8 +35,79 @@ public class FemtopowerMicroCubeTile extends FemtopowerTile {
 
 	public void onSideActivate(ForgeDirection side, EntityPlayer playerEntity)
 	{
+		if(playerEntity.worldObj.isRemote) return;
+		
 		int i = FemtocraftUtils.indexOfForgeDirection(side);
 		outputs[i] = !outputs[i];
+	}
+	
+	private void sendSideStateToClients(ForgeDirection side)
+	{
+		
+	}
+	
+
+	@Override
+	public Packet getDescriptionPacket() {
+		return generatePacket();
+	}
+	
+	private Packet250CustomPayload generatePacket()
+	{
+	    ByteArrayOutputStream bos = new ByteArrayOutputStream(13);
+	    DataOutputStream outputStream = new DataOutputStream(bos);
+	    try {
+	        outputStream.writeInt(xCoord);
+	        outputStream.writeInt(yCoord);
+	        outputStream.writeInt(zCoord);
+	        //write the relevant information here... exemple:
+	       outputStream.writeByte(generateOutputMask()); 
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    }
+	               
+	    Packet250CustomPayload packet = new Packet250CustomPayload();
+	    packet.channel = packetChannel;
+	    packet.data = bos.toByteArray();
+	    packet.length = bos.size();
+	    
+	    return packet;
+	}
+	
+	public byte generateOutputMask()
+	{
+		byte output = 0;
+		
+		for(int i = 0; i < 6; i++)
+		{
+			if(outputs[i])
+				output += 1 << i;
+		}
+//		if(outputs[0])
+//			output += 1;
+//		if(outputs[1])
+//			output+= 1<<1;
+//		if(outputs[2])
+//			output+= 1<<2;
+//		if(outputs[3])
+//			output+= 1<<3;
+//		if(outputs[4])
+//			output+= 1<<4;
+//		if(outputs[5])
+//			output+= 1<<5;
+//		
+		return output;
+	}
+	
+	public void parseOutputMask(byte mask)
+	{
+		byte temp;
+
+		for(int i = 0; i < 6; i++)
+		{
+			temp = mask;
+			outputs[i] = (((temp >> i) & 1) == 1) ? true : false;
+		}
 	}
 
 	@Override
@@ -65,7 +139,7 @@ public class FemtopowerMicroCubeTile extends FemtopowerTile {
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
 		for(int i = 0; i < 6; i++) {
-			outputs[i] = par1nbtTagCompound.getBoolean(String.format("output%d", i));
+			outputs[i] = par1nbtTagCompound.getBoolean("output" + i);
 		}
 	}
 
@@ -74,7 +148,8 @@ public class FemtopowerMicroCubeTile extends FemtopowerTile {
 		super.writeToNBT(par1nbtTagCompound);
 		
 		for(int i = 0; i < 6; i++) {
-			par1nbtTagCompound.setBoolean(String.format("output%d", i), outputs[i]);
+			par1nbtTagCompound.setBoolean("output" + i, outputs[i]);
 		}
 	}
+
 }

@@ -71,12 +71,15 @@ import femtocraft.power.FemtopowerCable;
 import femtocraft.power.FemtopowerConsumerBlock;
 import femtocraft.power.FemtopowerGenerator;
 import femtocraft.power.FemtopowerMicroCube;
+import femtocraft.power.TileEntity.FemtopowerMicroCubeTile;
 import femtocraft.proxy.ClientProxyFemtocraft;
 import femtocraft.proxy.CommonProxyFemtocraft;
 
 @Mod(modid = Femtocraft.ID, name = "Femtocraft", version = Femtocraft.VERSION)
 
-@NetworkMod(channels = { Femtocraft.ID }, packetHandler = FemtocraftPacketHandler.class, clientSideRequired = true, serverSideRequired = false)
+@NetworkMod(channels = { Femtocraft.ID, 
+						FemtopowerMicroCubeTile.packetChannel}, 
+						packetHandler = FemtocraftPacketHandler.class, clientSideRequired = true, serverSideRequired = false)
 public class Femtocraft {
 	public static final String ID = "Femtocraft";
 	public static final String VERSION = "0.1.0";
