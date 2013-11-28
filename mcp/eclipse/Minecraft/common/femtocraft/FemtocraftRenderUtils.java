@@ -19,6 +19,30 @@ public class FemtocraftRenderUtils {
 		FemtocraftRenderUtils.drawWestFace(x, y, z, starty, endy, startz, endz, startx, texture,  texture.getMinU(), texture.getMaxU(), texture.getMinV(), texture.getMaxV());
 	}
 	
+	public static void renderDoubleSidedCube(float x, float y, float z,
+											float startx, float starty, float startz,
+											float endx, float endy, float endz,
+											Icon texture)
+	{
+		FemtocraftRenderUtils.drawTopFace(x, y, z, startx, endx, startz, endz, endy, texture, texture.getMinU(), texture.getMaxU(), texture.getMinV(), texture.getMaxV());
+		FemtocraftRenderUtils.drawBottomFace(x, y, z, startx, endx, startz, endz, endy, texture, texture.getMinU(), texture.getMaxU(), texture.getMinV(), texture.getMaxV());
+		
+		FemtocraftRenderUtils.drawBottomFace(x, y, z, startx, endx, startz, endz, starty, texture,  texture.getMinU(), texture.getMaxU(), texture.getMinV(), texture.getMaxV());
+		FemtocraftRenderUtils.drawTopFace(x, y, z, startx, endx, startz, endz, starty, texture,  texture.getMinU(), texture.getMaxU(), texture.getMinV(), texture.getMaxV());
+		
+		FemtocraftRenderUtils.drawNorthFace(x, y, z, startx, endx, starty, endy, startz, texture,  texture.getMinU(), texture.getMaxU(), texture.getMinV(), texture.getMaxV());
+		FemtocraftRenderUtils.drawSouthFace(x, y, z, startx, endx, starty, endy, startz, texture,  texture.getMinU(), texture.getMaxU(), texture.getMinV(), texture.getMaxV());
+		
+		FemtocraftRenderUtils.drawEastFace(x, y, z, starty, endy, startz, endz, endx, texture,  texture.getMinU(), texture.getMaxU(), texture.getMinV(), texture.getMaxV());
+		FemtocraftRenderUtils.drawWestFace(x, y, z, starty, endy, startz, endz, endx, texture,  texture.getMinU(), texture.getMaxU(), texture.getMinV(), texture.getMaxV());
+		
+		FemtocraftRenderUtils.drawSouthFace(x, y, z, startx, endx, starty, endy, endz, texture,  texture.getMinU(), texture.getMaxU(), texture.getMinV(), texture.getMaxV());
+		FemtocraftRenderUtils.drawNorthFace(x, y, z, startx, endx, starty, endy, endz, texture,  texture.getMinU(), texture.getMaxU(), texture.getMinV(), texture.getMaxV());
+		
+		FemtocraftRenderUtils.drawWestFace(x, y, z, starty, endy, startz, endz, startx, texture,  texture.getMinU(), texture.getMaxU(), texture.getMinV(), texture.getMaxV());
+		FemtocraftRenderUtils.drawEastFace(x, y, z, starty, endy, startz, endz, startx, texture,  texture.getMinU(), texture.getMaxU(), texture.getMinV(), texture.getMaxV());
+		}
+	
 	public static void drawTopFace(float x, float y, float z, 
 								float xmin, float xmax, float zmin, float zmax, 
 								float yoffset, Icon texture, 

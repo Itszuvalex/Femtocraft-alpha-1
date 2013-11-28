@@ -33,10 +33,8 @@ public class FemtopowerMicroCubeTile extends FemtopowerTile {
 		Arrays.fill(outputs, false);
 	}
 
-	public void onSideActivate(ForgeDirection side, EntityPlayer playerEntity)
+	public void onSideActivate(ForgeDirection side)
 	{
-		if(playerEntity.worldObj.isRemote) return;
-		
 		int i = FemtocraftUtils.indexOfForgeDirection(side);
 		outputs[i] = !outputs[i];
 	}
