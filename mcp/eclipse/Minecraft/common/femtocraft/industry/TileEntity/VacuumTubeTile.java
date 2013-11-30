@@ -157,12 +157,14 @@ public class VacuumTubeTile extends TileEntity {
 		TileEntity tile = worldObj.getBlockTileEntity(xCoord + test.offsetX, yCoord + test.offsetY, zCoord + test.offsetZ);
 		if(tile == null) return false;
 		if(tile == this) return false;
+		boolean out = missingOutput();
 		if(tile instanceof ISidedInventory)
 		{
 			inputSidedInv = (ISidedInventory)tile;
 			inputInv = null;
 			inputTube = null;
 			inputDir = test;
+			if(out) outputDir = test.getOpposite();
 			return true;
 		}
 		
@@ -176,6 +178,7 @@ public class VacuumTubeTile extends TileEntity {
 			inputSidedInv = null;
 			inputInv = null;
 			setupReceiveFromTube(inputTube, test);
+			if(out) outputDir = test.getOpposite();
 			return true;
 		}
 		
@@ -185,6 +188,7 @@ public class VacuumTubeTile extends TileEntity {
 			inputDir = test;
 			inputSidedInv = null;
 			inputInv = (IInventory)tile;
+			if(out) outputDir = test.getOpposite();
 			return true;
 		}
 		
@@ -198,12 +202,14 @@ public class VacuumTubeTile extends TileEntity {
 		TileEntity tile = worldObj.getBlockTileEntity(xCoord + test.offsetX, yCoord + test.offsetY, zCoord + test.offsetZ);
 		if(tile == null) return false;
 		if(tile == this) return false;
+		boolean in = missingInput();
 		if(tile instanceof ISidedInventory)
 		{
 			outputSidedInv = (ISidedInventory)tile;
 			outputInv = null;
 			outputTube = null;
 			outputDir = test;
+			if(in) inputDir = test.getOpposite();
 			return true;
 		}
 		
@@ -217,6 +223,7 @@ public class VacuumTubeTile extends TileEntity {
 			outputSidedInv = null;
 			outputInv = null;
 			setupSendToTube(outputTube, test);
+			if(in) inputDir = test.getOpposite();
 			return true;
 		}
 		
@@ -226,6 +233,7 @@ public class VacuumTubeTile extends TileEntity {
 			outputDir = test;
 			outputSidedInv = null;
 			outputInv = (IInventory)tile;
+			if(in) inputDir = test.getOpposite();
 			return true;
 		}
 		
