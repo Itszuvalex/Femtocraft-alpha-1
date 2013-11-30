@@ -14,9 +14,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 public class VacuumTube extends BlockContainer {
+	public Icon indicatorIcon;
+	public Icon straightIcon;
+	public Icon turnIcon;
 
 	public VacuumTube(int id) {
 		super(id, Material.iron);
@@ -169,7 +173,9 @@ public class VacuumTube extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		
+		indicatorIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "VacuumTube_indicator");
+        straightIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "VacuumTube_side_straight");
+        turnIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "VacuumTube_side_curved");
 	}
 
 }
