@@ -11,10 +11,10 @@ import net.minecraftforge.common.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import femtocraft.FemtocraftRenderUtils;
 import femtocraft.power.FemtopowerMicroCube;
 import femtocraft.power.TileEntity.FemtopowerMicroCubeTile;
 import femtocraft.proxy.ClientProxyFemtocraft;
+import femtocraft.render.FemtocraftRenderUtils;
 
 public class FemtopowerMicroCubeRenderer implements ISimpleBlockRenderingHandler {
 
@@ -96,37 +96,37 @@ public class FemtopowerMicroCubeRenderer implements ISimpleBlockRenderingHandler
 			case UP:
 			{
 				FemtocraftRenderUtils.drawTopFace(x, y, z, 0, 1, 0, 1, 1, frame, minU, maxU, minV, maxV);
-				FemtocraftRenderUtils.drawBottomFace(x, y, z, 0, 1, 0, 1, (13.f/16.f), frame, minU, maxU, minV, maxV);
+				FemtocraftRenderUtils.drawBottomFace(x, y, z, 0, 1, 0, 1, (13.01f/16.f), frame, minU, maxU, minV, maxV);
 				break;
 			}
 			case DOWN:
 			{
 				FemtocraftRenderUtils.drawBottomFace(x, y, z, 0, 1, 0, 1, 0, frame, minU, maxU, minV, maxV);
-				FemtocraftRenderUtils.drawTopFace(x, y, z, 0, 1, 0, 1, (3.f/16.f), frame, minU, maxU, minV, maxV);
+				FemtocraftRenderUtils.drawTopFace(x, y, z, 0, 1, 0, 1, (2.99f/16.f), frame, minU, maxU, minV, maxV);
 				break;
 			}
 			case NORTH:
 			{
 				FemtocraftRenderUtils.drawNorthFace(x, y, z, 0, 1, 0, 1, 0, frame, minU, maxU, minV, maxV);
-				FemtocraftRenderUtils.drawSouthFace(x, y, z, 0, 1, 0, 1, 3.f/16.f, frame, minU, maxU, minV, maxV);
+				FemtocraftRenderUtils.drawSouthFace(x, y, z, 0, 1, 0, 1, 2.99f/16.f, frame, minU, maxU, minV, maxV);
 				break;
 			}
 			case EAST:
 			{
 				FemtocraftRenderUtils.drawEastFace(x, y, z, 0, 1, 0, 1, 1, frame, minU, maxU, minV, maxV);
-				FemtocraftRenderUtils.drawWestFace(x, y, z, 0, 1, 0, 1, 13.f/16.f, frame, minU, maxU, minV, maxV);
+				FemtocraftRenderUtils.drawWestFace(x, y, z, 0, 1, 0, 1, 13.01f/16.f, frame, minU, maxU, minV, maxV);
 				break;
 			}
 			case SOUTH:
 			{
 				FemtocraftRenderUtils.drawSouthFace(x, y, z, 0, 1, 0, 1, 1, frame, minU, maxU, minV, maxV);
-				FemtocraftRenderUtils.drawNorthFace(x, y, z, 0, 1, 0, 1, 13.f/16.f, frame, minU, maxU, minV, maxV);
+				FemtocraftRenderUtils.drawNorthFace(x, y, z, 0, 1, 0, 1, 13.01f/16.f, frame, minU, maxU, minV, maxV);
 				break;
 			}
 			case WEST:
 			{
 				FemtocraftRenderUtils.drawWestFace(x, y, z, 0, 1, 0, 1, 0, frame, minU, maxU, minV, maxV);
-				FemtocraftRenderUtils.drawEastFace(x, y, z, 0, 1, 0, 1, 3.f/16.f, frame, minU, maxU, minV, maxV);
+				FemtocraftRenderUtils.drawEastFace(x, y, z, 0, 1, 0, 1, 2.99f/16.f, frame, minU, maxU, minV, maxV);
 				break;
 			}
 		default:
@@ -146,53 +146,59 @@ public class FemtopowerMicroCubeRenderer implements ISimpleBlockRenderingHandler
 		float minV = port.getMinV();
 		float maxV = port.getMaxV();
 		
-		float bandU = minU + (maxU - minU)/8.f;
-		float bandV = minV + (maxV - minV)/8.f;
+		float outBandU = minU + (maxU - minU)/8.f;
+		float outBandV = minV + (maxV - minV)/8.f;
+		float inBandU = minU + (maxU - minU) * 7.f/8.f;
+		float inBandV = minU + (maxU - minU) * 7.f/8.f;
 		
 		switch(dir)
 		{
 			case UP:
 			{
 				FemtocraftRenderUtils.drawTopFace(x, y, z, min, max, min, max, 1, port, minU, maxU, minV, maxV);
-				FemtocraftRenderUtils.drawBottomFace(x, y, z, min, max, min, max, 15.f/16.f, port, minU, maxU, minV, maxV);
-				FemtocraftRenderUtils.drawNorthFace(x, y, z, min, max, 15.f/16.f, 1, min, port, minU, maxU, minV, bandV);
-				FemtocraftRenderUtils.drawSouthFace(x, y, z, min, max, 15.f/16.f, 1, max, port, minU, bandU, minV, maxV);
-				FemtocraftRenderUtils.drawEastFace(x, y, z, 15.f/16.f, 1, min, max, max, port, minU, maxU, minV, bandV);
-				FemtocraftRenderUtils.drawWestFace(x, y, z, 15.f/16.f, 1, min, max, min, port, minU, bandU, minV, maxV);
+				FemtocraftRenderUtils.drawBottomFace(x, y, z, min, max, min, max, 15.01f/16.f, port, minU, maxU, minV, maxV);
+				
+				//Outside Border
+				FemtocraftRenderUtils.drawNorthFace(x, y, z, min, max, 15.f/16.f, 1, min, port, minU, maxU, minV, outBandV);
+				FemtocraftRenderUtils.drawSouthFace(x, y, z, min, max, 15.f/16.f, 1, max, port, minU, outBandU, minV, maxV);
+				FemtocraftRenderUtils.drawEastFace(x, y, z, 15.f/16.f, 1, min, max, max, port, minU, maxU, minV, outBandV);
+				FemtocraftRenderUtils.drawWestFace(x, y, z, 15.f/16.f, 1, min, max, min, port, minU, outBandU, minV, maxV);
+				//Inside border
+				FemtocraftRenderUtils.drawNorthFace(x, y, z, min + 1.f/16.f, max- 1.f/16.f, 1.f/16.f, 1, min + 1.f/16.f, port, outBandU, inBandU, outBandV, outBandV);
 				break;
 			}
 			case DOWN:
 			{
-				FemtocraftRenderUtils.drawTopFace(x, y, z, min, max, min, max, 1.f/16.f, port, minU, maxU, minV, maxV);
+				FemtocraftRenderUtils.drawTopFace(x, y, z, min, max, min, max, .99f/16.f, port, minU, maxU, minV, maxV);
 				FemtocraftRenderUtils.drawBottomFace(x, y, z, min, max, min, max, 0, port, minU, maxU, minV, maxV);
-				FemtocraftRenderUtils.drawNorthFace(x, y, z, min, max, 0, 1.f/16.f, min, port, minU, maxU, minV, bandV);
-				FemtocraftRenderUtils.drawSouthFace(x, y, z, min, max, 0, 1.f/16.f, max, port, minU, bandU, minV, maxV);
-				FemtocraftRenderUtils.drawEastFace(x, y, z, 0, 1.f/16.f, min, max, max, port, minU, maxU, minV, bandV);
-				FemtocraftRenderUtils.drawWestFace(x, y, z, 0, 1.f/16.f, min, max, min, port, minU, bandU, minV, maxV);
+				FemtocraftRenderUtils.drawNorthFace(x, y, z, min, max, 0, 1.f/16.f, min, port, minU, maxU, minV, outBandV);
+				FemtocraftRenderUtils.drawSouthFace(x, y, z, min, max, 0, 1.f/16.f, max, port, minU, outBandU, minV, maxV);
+				FemtocraftRenderUtils.drawEastFace(x, y, z, 0, 1.f/16.f, min, max, max, port, minU, maxU, minV, outBandV);
+				FemtocraftRenderUtils.drawWestFace(x, y, z, 0, 1.f/16.f, min, max, min, port, minU, outBandU, minV, maxV);
 				break;
 			}
 			case NORTH:
 			{
 				FemtocraftRenderUtils.drawNorthFace(x, y, z, min, max, min, max, 0, port, minU, maxU, minV, maxV);
-				FemtocraftRenderUtils.drawSouthFace(x, y, z, min, max, min, max, 1.f/16.f, port, minU, maxU, minV, maxV);
+				FemtocraftRenderUtils.drawSouthFace(x, y, z, min, max, min, max, .99f/16.f, port, minU, maxU, minV, maxV);
 				break;
 			}
 			case EAST:
 			{
 				FemtocraftRenderUtils.drawEastFace(x, y, z, min, max, min, max, 1, port, minU, maxU, minV, maxV);
-				FemtocraftRenderUtils.drawWestFace(x, y, z, min, max, min, max, 15.f/16.f, port, minU, maxU, minV, maxV);
+				FemtocraftRenderUtils.drawWestFace(x, y, z, min, max, min, max, 15.01f/16.f, port, minU, maxU, minV, maxV);
 				break;
 			}
 			case SOUTH:
 			{
 				FemtocraftRenderUtils.drawSouthFace(x, y, z, min, max, min, max, 1, port, minU, maxU, minV, maxV);
-				FemtocraftRenderUtils.drawNorthFace(x, y, z, min, max, min, max, 15.f/16.f, port, minU, maxU, minV, maxV);
+				FemtocraftRenderUtils.drawNorthFace(x, y, z, min, max, min, max, 15.01f/16.f, port, minU, maxU, minV, maxV);
 				break;
 			}
 			case WEST:
 			{
 				FemtocraftRenderUtils.drawWestFace(x, y, z, min, max, min, max, 0, port, minU, maxU, minV, maxV);
-				FemtocraftRenderUtils.drawEastFace(x, y, z, min, max, min, max, 1.f/16.f, port, minU, maxU, minV, maxV);
+				FemtocraftRenderUtils.drawEastFace(x, y, z, min, max, min, max, .99f/16.f, port, minU, maxU, minV, maxV);
 				break;
 			}
 		default:

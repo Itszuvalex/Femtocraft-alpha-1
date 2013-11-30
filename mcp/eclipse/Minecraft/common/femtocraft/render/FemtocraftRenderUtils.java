@@ -1,4 +1,4 @@
-package femtocraft;
+package femtocraft.render;
 
 
 import net.minecraft.client.renderer.Tessellator;

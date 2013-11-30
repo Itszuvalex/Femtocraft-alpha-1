@@ -9,14 +9,15 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import femtocraft.FemtocraftRenderUtils;
-import femtocraft.Point;
 import femtocraft.power.FemtopowerCable;
 import femtocraft.power.TileEntity.FemtopowerCableTile;
 import femtocraft.proxy.ClientProxyFemtocraft;
+import femtocraft.render.FemtocraftRenderUtils;
+import femtocraft.render.Point;
 
 /**
  * @author Chris
@@ -37,7 +38,7 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		
 		tessellator.startDrawingQuads();
-		renderCable(cable, 0, 0, 0, renderer, new boolean[]{true, true, false, false, false, false});
+		renderCable(cable, 0, 0, 0, renderer, new boolean[]{false, false, true, true, false, false});
 		tessellator.draw();
 		
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
@@ -49,11 +50,11 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		FemtopowerCable cable = (FemtopowerCable)block;
 		if(block == null) return false;
 		
-		FemtopowerCableTile cableTile = (FemtopowerCableTile)renderer.blockAccess.getBlockTileEntity(x, y, z);
-		if(cableTile == null) return false;
-		
+		TileEntity tile = renderer.blockAccess.getBlockTileEntity(x, y, z);
+		if(tile == null) return false;
+		if(!(tile instanceof FemtopowerCableTile)) return false;
+		FemtopowerCableTile cableTile = (FemtopowerCableTile)tile;
 		Tessellator tessellator = Tessellator.instance;
-		//TODO : Find some actually working light function
 		tessellator.setBrightness(block.getMixedBrightnessForBlock(renderer.blockAccess, x, y, z));
 		tessellator.setColorOpaque_F(1, 1, 1);
 		//tessellator.setBrightness((int) (cable.getBlockBrightness(renderer.blockAccess, x, y, z) * 3200.));
