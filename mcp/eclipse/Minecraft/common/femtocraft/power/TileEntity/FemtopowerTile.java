@@ -217,6 +217,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
     
     
     public void checkConnections() {
+    	boolean changed = false;
     	for(int j = 0; j < 6; ++j) {
     		boolean prev = connections[j];
     	   connections[j] = false;
@@ -231,9 +232,10 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
  			   connections[j] = true;
  			   if(prev != connections[j])
  			   {
- 				  this.worldObj.markBlockForRenderUpdate(this.xCoord, this.yCoord, this.zCoord);
+ 				  changed = true;
  			   }
  		   }
- 	   }
+ 	   	}
+    	if(changed) this.worldObj.markBlockForRenderUpdate(this.xCoord, this.yCoord, this.zCoord);
       }
 }

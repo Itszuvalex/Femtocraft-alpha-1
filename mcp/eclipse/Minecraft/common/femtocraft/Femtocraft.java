@@ -65,7 +65,9 @@ import femtocraft.core.ore.oreThorium;
 import femtocraft.core.ore.oreTitanium;
 import femtocraft.farming.produce.Tomato;
 import femtocraft.farming.seeds.tomatoSeed;
+import femtocraft.industry.TileEntity.VacuumTubeTile;
 import femtocraft.industry.blocks.BlockMicroFurnace;
+import femtocraft.industry.blocks.VacuumTube;
 import femtocraft.managers.FemtocraftRecipeManager;
 import femtocraft.power.FemtopowerCable;
 import femtocraft.power.FemtopowerConsumerBlock;
@@ -78,7 +80,8 @@ import femtocraft.proxy.CommonProxyFemtocraft;
 @Mod(modid = Femtocraft.ID, name = "Femtocraft", version = Femtocraft.VERSION)
 
 @NetworkMod(channels = { Femtocraft.ID, 
-						FemtopowerMicroCubeTile.packetChannel}, 
+						FemtopowerMicroCubeTile.packetChannel,
+						VacuumTubeTile.packetChannel}, 
 						packetHandler = FemtocraftPacketHandler.class, clientSideRequired = true, serverSideRequired = false)
 public class Femtocraft {
 	public static final String ID = "Femtocraft";
@@ -111,6 +114,7 @@ public class Femtocraft {
 	public static Block FemtocraftMicroFurnaceUnlit;
 	public static Block FemtocraftMicroFurnaceLit;
 	public static Block FemtopowerMicroCube;
+	public static Block FemtocraftVacuumTube;
 	
 	//liquids
 	public static Fluid mass;
@@ -251,6 +255,10 @@ public class Femtocraft {
 		 FemtopowerMicroCube = new FemtopowerMicroCube(FemtocraftConfigs.FemtopowerMicroCubeID);
 		 GameRegistry.registerBlock(FemtopowerMicroCube, "FemtopowerMicroCube");
 		 LanguageRegistry.addName(FemtopowerMicroCube, "Micro-Cube");
+		 
+		 FemtocraftVacuumTube = new VacuumTube(FemtocraftConfigs.FemtocraftVacuumTubeID);
+		 GameRegistry.registerBlock(FemtocraftVacuumTube, "FemtocraftVacuumTube");
+		 LanguageRegistry.addName(FemtocraftVacuumTube, "Vacuum Tube");
 		 
 		 //Liquids
 		 mass = new Mass();

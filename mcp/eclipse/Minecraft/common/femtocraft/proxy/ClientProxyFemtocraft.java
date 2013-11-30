@@ -8,6 +8,7 @@ import femtocraft.power.render.FemtopowerMicroCubeRenderer;
 public class ClientProxyFemtocraft extends CommonProxyFemtocraft {
 	public static int FemtopowerCableRenderID;
 	public static int FemtopowerMicroCubeRenderID;
+	public static int FemtocraftVacuumTubeRenderID;
 	
 	public static int CuttingBoardRenderPass;
 	public static int cuttingBoardRenderType;
@@ -40,5 +41,7 @@ public class ClientProxyFemtocraft extends CommonProxyFemtocraft {
 		FemtopowerMicroCubeRenderID = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(FemtopowerMicroCubeRenderID, new FemtopowerMicroCubeRenderer());
 		
+		FemtocraftVacuumTubeRenderID = RenderingRegistry.getNextAvailableRenderId();
+//		RenderingRegistry.registerBlockHandler(FemtocraftVacuumTubeRenderID, new FemtocraftVacuumTubeRenderer());	
 	}
 }
