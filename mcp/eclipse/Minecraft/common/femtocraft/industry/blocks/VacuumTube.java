@@ -20,7 +20,11 @@ import net.minecraft.world.World;
 public class VacuumTube extends BlockContainer {
 	public Icon indicatorIcon;
 	public Icon straightIcon;
+	public Icon straightInsetIcon;
 	public Icon turnIcon;
+	public Icon turnInsetIcon;
+	public Icon endIcon;
+	public Icon endInsetIcon;
 
 	public VacuumTube(int id) {
 		super(id, Material.iron);
@@ -175,7 +179,11 @@ public class VacuumTube extends BlockContainer {
 	public void registerIcons(IconRegister par1IconRegister) {
 		indicatorIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "VacuumTube_indicator");
         straightIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "VacuumTube_side_straight");
+        straightInsetIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "VacuumTube_side_straight_inset");
         turnIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "VacuumTube_side_curved");
+        turnInsetIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "VacuumTube_side_curved_inset");
+        endIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "VacuumTube_end");
+        endInsetIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "VacuumTube_end_inset");
 	}
 
 }

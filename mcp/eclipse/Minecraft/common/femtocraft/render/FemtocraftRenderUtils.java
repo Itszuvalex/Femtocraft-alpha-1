@@ -59,6 +59,22 @@ public class FemtocraftRenderUtils {
 		tes.addTranslation(-x, -y, -z);
 	}
 	
+	public static Quad makeTopFace(float xmin, float xmax, float zmin, float zmax, float yoffset, Icon texture, float minU, float maxU, float minV, float maxV)
+	{
+		Point a = new Point();
+		Point b = new Point();
+		Point c = new Point();
+		Point d = new Point();
+		
+		a.y = b.y = c.y = d.y = yoffset;
+		a.x = b.x = xmin;
+		c.x = d.x = xmax;
+		a.z = d.z = zmin;
+		b.z = c.z = zmax;
+		
+		return new Quad(a,b,c,d,texture,minU,maxU,minV,maxV);
+	}
+	
 	public static void drawBottomFace(float x, float y, float z, 
 								float xmin, float xmax, float zmin, float zmax, 
 								float yoffset, Icon texture,
@@ -75,6 +91,22 @@ public class FemtocraftRenderUtils {
 		tes.addTranslation(-x, -y, -z);
 	}
 	
+	public static Quad makeBottomFace(float xmin, float xmax, float zmin, float zmax, float yoffset, Icon texture, float minU, float maxU, float minV, float maxV)
+	{
+		Point a = new Point();
+		Point b = new Point();
+		Point c = new Point();
+		Point d = new Point();
+		
+		a.y = b.y = c.y = d.y = yoffset;
+		a.x = d.x = xmin;
+		b.x = c.x = xmax;
+		a.z = b.z = zmin;
+		c.z = d.z = zmax;
+		
+		return new Quad(a,b,c,d,texture,minU,maxU,minV,maxV);
+	}
+	
 	public static void drawNorthFace(float x, float y, float z, 
 			float xmin, float xmax, float ymin, float ymax, 
 			float zoffset, Icon texture,
@@ -89,6 +121,22 @@ public class FemtocraftRenderUtils {
 		tes.addVertexWithUV(xmax, ymin, zoffset, maxU, maxV);
 		
 		tes.addTranslation(-x, -y, -z);
+	}
+	
+	public static Quad makeNorthFace(float xmin, float xmax, float ymin, float ymax, float zoffset, Icon texture, float minU, float maxU, float minV, float maxV)
+	{
+		Point a = new Point();
+		Point b = new Point();
+		Point c = new Point();
+		Point d = new Point();
+		
+		a.z = b.z = c.z = d.z = zoffset;
+		a.x = b.x = xmin;
+		c.x = d.x = xmax;
+		a.y = d.y = ymin;
+		b.y = c.y = ymax;
+		
+		return new Quad(a,b,c,d,texture,minU,maxU,minV,maxV);
 	}
 	
 	public static void drawEastFace(float x, float y, float z, 
@@ -108,6 +156,22 @@ public class FemtocraftRenderUtils {
 		tes.addTranslation(-x, -y, -z);
 	}
 	
+	public static Quad makeEastFace(float ymin, float ymax, float zmin, float zmax, float xoffset, Icon texture, float minU, float maxU, float minV, float maxV)
+	{
+		Point a = new Point();
+		Point b = new Point();
+		Point c = new Point();
+		Point d = new Point();
+		
+		a.x = b.x = c.x = d.x = xoffset;
+		a.y = d.y = ymin;
+		b.y = c.y = ymax;
+		a.z = b.z = zmin;
+		c.z = d.z = zmax;
+		
+		return new Quad(a,b,c,d,texture,minU,maxU,minV,maxV);
+	}
+	
 	public static void drawSouthFace(float x, float y, float z, 
 			float xmin, float xmax, float ymin, float ymax, 
 			float zoffset, Icon texture,
@@ -122,6 +186,22 @@ public class FemtocraftRenderUtils {
 		tes.addVertexWithUV(xmin, ymax, zoffset, maxU, maxV);
 		
 		tes.addTranslation(-x, -y, -z);
+	}
+	
+	public static Quad makeSouthFace(float xmin, float xmax, float ymin, float ymax, float zoffset, Icon texture, float minU, float maxU, float minV, float maxV)
+	{
+		Point a = new Point();
+		Point b = new Point();
+		Point c = new Point();
+		Point d = new Point();
+		
+		a.z = b.z = c.z = d.z = zoffset;
+		a.x = d.x = xmin;
+		b.x = c.x = xmax;
+		a.y = b.y = ymin;
+		c.y = d.y = ymax;
+		
+		return new Quad(a,b,c,d,texture,minU,maxU,minV,maxV);
 	}
 	
 	public static void drawWestFace(float x, float y, float z, 
@@ -139,6 +219,22 @@ public class FemtocraftRenderUtils {
 		tes.addVertexWithUV(xoffset, ymax, zmin, maxU, maxV);
 		
 		tes.addTranslation(-x, -y, -z);
+	}
+	
+	public static Quad makeWestFace(float ymin, float ymax, float zmin, float zmax, float xoffset, Icon texture, float minU, float maxU, float minV, float maxV)
+	{
+		Point a = new Point();
+		Point b = new Point();
+		Point c = new Point();
+		Point d = new Point();
+		
+		a.x = b.x = c.x = d.x = xoffset;
+		a.y = b.y = ymin;
+		c.y = d.y = ymax;
+		a.z = d.z = zmin;
+		b.z = c.z = zmax;
+		
+		return new Quad(a,b,c,d,texture,minU,maxU,minV,maxV);
 	}
 	
 	public static void drawArbitraryFace(float x, float y, float z, 

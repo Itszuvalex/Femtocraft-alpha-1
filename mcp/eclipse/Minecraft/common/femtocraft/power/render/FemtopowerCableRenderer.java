@@ -49,7 +49,7 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
 		FemtopowerCable cable = (FemtopowerCable)block;
-		if(block == null) return;
+		if(cable == null) return;
 		
 		Tessellator tessellator = Tessellator.instance;
 		
