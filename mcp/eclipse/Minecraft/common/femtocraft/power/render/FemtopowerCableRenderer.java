@@ -17,13 +17,31 @@ import femtocraft.power.FemtopowerCable;
 import femtocraft.power.TileEntity.FemtopowerCableTile;
 import femtocraft.proxy.ClientProxyFemtocraft;
 import femtocraft.render.FemtocraftRenderUtils;
+import femtocraft.render.Model;
 import femtocraft.render.Point;
+import femtocraft.render.Quad;
 
 /**
  * @author Chris
  *
  */
 public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
+	private Model Coil_North;
+	private Model Coil_South;
+	private Model Coil_East;
+	private Model Coil_West;
+	private Model Coil_Up;
+	private Model Coil_Down;
+	
+	private Model Coil_North_Close;
+	private Model Coil_South_Close;
+	private Model Coil_East_Close;
+	private Model Coil_West_Close;
+	private Model Coil_Up_Close;
+	private Model Coil_Down_Close;
+	
+	private boolean CoilInitialized = false;
+	
 	public FemtopowerCableRenderer() {
 	}
 
@@ -100,20 +118,31 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 	}
 	
 	private void drawCore(FemtopowerCable cable, float x, float y, float z, RenderBlocks renderer, boolean[] connections) {
+		if(!CoilInitialized)
+			initializeCoils(cable);
+		
+		Point loc = new Point(x,y,z);
+		
 		if(!connectedAcross(connections))
 			drawCoreBlock(cable, x, y, z, renderer, connections);
 		else {
 			if(connections[0]) {
-				drawCoil(cable, x, y, z, 2.0F/16.0F, renderer, ForgeDirection.getOrientation(0));
-				drawCoil(cable, x, y, z, 2.0F/16.0F, renderer, ForgeDirection.getOrientation(0).getOpposite());
+				drawCoilClose(cable, ForgeDirection.UP, loc);
+				drawCoilClose(cable, ForgeDirection.DOWN, loc);
+//				drawCoil(cable, x, y, z, 2.0F/16.0F, renderer, ForgeDirection.getOrientation(0));
+//				drawCoil(cable, x, y, z, 2.0F/16.0F, renderer, ForgeDirection.getOrientation(0).getOpposite());
 			}
 			else if (connections [2]) {
-				drawCoil(cable, x, y, z, 2.0F/16.0F, renderer, ForgeDirection.getOrientation(2));
-				drawCoil(cable, x, y, z, 2.0F/16.0F, renderer, ForgeDirection.getOrientation(2).getOpposite());
+				drawCoilClose(cable, ForgeDirection.NORTH, loc);
+				drawCoilClose(cable, ForgeDirection.SOUTH, loc);
+//				drawCoil(cable, x, y, z, 2.0F/16.0F, renderer, ForgeDirection.getOrientation(2));
+//				drawCoil(cable, x, y, z, 2.0F/16.0F, renderer, ForgeDirection.getOrientation(2).getOpposite());
 			}
 			else if (connections [4]) {
-				drawCoil(cable, x, y, z, 2.0F/16.0F, renderer, ForgeDirection.getOrientation(4));
-				drawCoil(cable, x, y, z, 2.0F/16.0F, renderer, ForgeDirection.getOrientation(4).getOpposite());
+				drawCoilClose(cable, ForgeDirection.EAST, loc);
+				drawCoilClose(cable, ForgeDirection.WEST, loc);
+//				drawCoil(cable, x, y, z, 2.0F/16.0F, renderer, ForgeDirection.getOrientation(4));
+//				drawCoil(cable, x, y, z, 2.0F/16.0F, renderer, ForgeDirection.getOrientation(4).getOpposite());
 			}
 		}
 		
@@ -121,7 +150,7 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		for(int i = 0; i < 6; i++) {
 			if(connections[i]) {
 				//Draw coil and connectors
-				drawCoil(cable, x, y, z, 6.0F/16.0F, renderer, ForgeDirection.getOrientation(i));
+				drawCoilFar(cable, ForgeDirection.getOrientation(i), loc);
 			}
 		}
 	}
@@ -208,124 +237,46 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 				face4, cable.connector, cable.connector.getMinU(), cable.connector.getMaxU(), cable.connector.getMinV(), cable.connector.getMaxV());	
 	}
 	
-	private void drawCoil(FemtopowerCable cable, float x, float y, float z, float offset, RenderBlocks renderer, ForgeDirection direction) {
-		ForgeDirection rotaxi = ForgeDirection.UNKNOWN;
-		double yrot = Math.PI/2.0D;
-		double xrot = 0;
-		
-		switch(direction) {
-			case UP:
-				rotaxi = ForgeDirection.EAST;
-				xrot += Math.PI/2.0D;
-				break;
-			case DOWN:
-				rotaxi = ForgeDirection.WEST;
-				xrot -= Math.PI/2.0D;
-				break;
-			case NORTH:
-				rotaxi = ForgeDirection.UP;
-				break;
-			case EAST:
-				rotaxi = ForgeDirection.DOWN;
-				yrot += Math.PI/2.0D;
-				break;
-			case SOUTH:
-				rotaxi = ForgeDirection.DOWN;
-				yrot += Math.PI;
-				break;
-			case WEST:
-				rotaxi = ForgeDirection.UP;
-				yrot -= Math.PI/2.0D;
-				break;
-		default:
-			break;
-		}
-		ForgeDirection face1, face2, face3, face4;
-		face1 = direction.getRotation(rotaxi);
-		face2 = face1.getRotation(direction);
-		face3 = face2.getRotation(direction);
-		face4 = face3.getRotation(direction);
-
-		drawConnector(cable, x, y, z, 1.0F/16.0F + offset, renderer, direction, true);
-		drawConnector(cable, x, y, z, -1.0F/16.0F + offset, renderer, direction, false);
-		
-		offset = .5F - offset;
-		
-		//West-face, AA - top left, AB - bot left, AC - bot right, AD - top right
-		Point AA = new Point(4.0F/16.0F, 12.0F/16.0F, -2.0F/16.0F + offset);
-		Point AB = new Point(4.0F/16.0F, 4.0F/16.0F, -2.0F/16.0F + offset);
-		Point AC = new Point(4.0F/16.0F, 4.0F/16.0F, 2.0F/16.0F + offset);
-		Point AD = new Point(4.0F/16.0F, 12.0F/16.0F, 2.0F/16.0F + offset);
-		//East-face, BA - top left, BB - bottom left, BC - bottom right, BD - top right
-		Point BA = new Point(12.0F/16.0F, 12.0F/16.0F, 2.0F/16.0F + offset);
-		Point BB = new Point(12.0F/16.0F, 4.0F/16.0F, 2.0F/16.0F + offset);
-		Point BC = new Point(12.0F/16.0F, 4.0F/16.0F, -2.0F/16.0F + offset);
-		Point BD = new Point(12.0F/16.0F, 12.0F/16.0F, -2.0F/16.0F + offset);
-		
-		//West-face, AA - top left, AB - bot left, AC - bot right, AD - top right
-		Point rotAA = AA.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
-		Point rotAB = AB.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
-		Point rotAC = AC.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
-		Point rotAD = AD.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
-		//East-face, BA - top left, BB - bottom left, BC - bottom right, BD - top right
-		Point rotBA = BA.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
-		Point rotBB = BB.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
-		Point rotBC = BC.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
-		Point rotBD = BD.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
-		
-		//Draw borders
-		
-		//West
-		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotAD, rotAC, rotAB, rotAA, cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
-		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotAA, rotAB, rotAC, rotAD, cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
-		//East
-		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotBD, rotBC, rotBB, rotBA, cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
-		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotBA, rotBB, rotBC, rotBD, cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
-		//Top
-		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotBA, rotAD, rotAA, rotBD, cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
-		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotBD, rotAA, rotAD, rotBA, cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
-		//Bottom
-		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotBC, rotAB, rotAC, rotBB, cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
-		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotBB, rotAC, rotAB, rotBC, cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
-		
-		//Draw coil
-		
-		//West-face, AA - top left, AB - bot left, AC - bot right, AD - top right
-		AA = new Point(5.0F/16.0F, 11.0F/16.0F, -1.0F/16.0F + offset);
-		AB = new Point(5.0F/16.0F, 5.0F/16.0F, -1.0F/16.0F + offset);
-		AC = new Point(5.0F/16.0F, 5.0F/16.0F, 1.0F/16.0F + offset);
-		AD = new Point(5.0F/16.0F, 11.0F/16.0F, 1.0F/16.0F + offset);
-		//East-face, BA - top left, BB - bottom left, BC - bottom right, BD - top right
-		BA = new Point(11.0F/16.0F, 11.0F/16.0F, 1.0F/16.0F + offset);
-		BB = new Point(11.0F/16.0F, 5.0F/16.0F, 1.0F/16.0F + offset);
-		BC = new Point(11.0F/16.0F, 5.0F/16.0F, -1.0F/16.0F + offset);
-		BD = new Point(11.0F/16.0F, 11.0F/16.0F, -1.0F/16.0F + offset);
-		
-		//West-face, AA - top left, AB - bot left, AC - bot right, AD - top right
-		rotAA = AA.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
-		rotAB = AB.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
-		rotAC = AC.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
-		rotAD = AD.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
-		//East-face, BA - top left, BB - bottom left, BC - bottom right, BD - top right
-		rotBA = BA.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
-		rotBB = BB.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
-		rotBC = BC.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
-		rotBD = BD.rotateOnYAxis(yrot, .5F, .5F).rotateOnXAxis(xrot, .5F, .5F);
-		
-		//West
-		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotAD, rotAC, rotAB, rotAA, cable.coilEdge, cable.coilEdge.getMinU(), cable.coilEdge.getMaxU() - 2.0F *(cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())/3.0F, cable.coilEdge.getMinV(), cable.coilEdge.getMaxV());
-		//East
-		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotBD, rotBC, rotBB, rotBA, cable.coilEdge, cable.coilEdge.getMinU(), cable.coilEdge.getMaxU() - 2.0F *(cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())/3.0F, cable.coilEdge.getMinV(), cable.coilEdge.getMaxV());
-		//Top
-		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotBA, rotAD, rotAA, rotBD, cable.coilEdge, cable.coilEdge.getMinU(), cable.coilEdge.getMaxU() - 2.0F *(cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())/3.0F, cable.coilEdge.getMinV(), cable.coilEdge.getMaxV());
-		//Bottom
-		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotBC, rotAB, rotAC, rotBB, cable.coilEdge, cable.coilEdge.getMinU(), cable.coilEdge.getMaxU() - 2.0F *(cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())/3.0F, cable.coilEdge.getMinV(), cable.coilEdge.getMaxV());
-		
-		//North
-		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotBB, rotAC, rotAD, rotBA, cable.coil, cable.coil.getMinU(), cable.coil.getMaxU(), cable.coil.getMinV(), cable.coil.getMaxV());
-		//South
-		FemtocraftRenderUtils.drawFaceByPoints(x, y, z, rotAA, rotAB, rotBC, rotBD, cable.coil, cable.coil.getMinU(), cable.coil.getMaxU(), cable.coil.getMinV(), cable.coil.getMaxV());
-	}
+//	private void drawCoil(FemtopowerCable cable, float x, float y, float z, float offset, RenderBlocks renderer, ForgeDirection direction) {
+//		
+//		drawConnector(cable, x, y, z, 1.0F/16.0F + offset, renderer, direction, true);
+//		drawConnector(cable, x, y, z, -1.0F/16.0F + offset, renderer, direction, false);
+//		
+//		if(!CoilInitialized)
+//			initializeCoils(cable);
+//		
+//		double yrot = Math.PI/2.0D;
+//		double xrot = 0;
+// 		
+//		switch(direction) {
+//			case UP:
+//				xrot += Math.PI/2.0D;
+//				break;
+//			case DOWN:
+//				xrot -= Math.PI/2.0D;
+//				break;
+//			case NORTH:
+//				break;
+//			case EAST:
+//				yrot += Math.PI/2.0D;
+//				break;
+//			case SOUTH:
+//				yrot += Math.PI;
+//				break;
+//			case WEST:
+//				yrot -= Math.PI/2.0D;
+//				break;
+//		default:
+//			break;
+//		}
+//		
+//		Model t = Coil.copy();
+//		t.location.x = x+.5f;
+//		t.location.y = y+.5f;
+//		t.location.z = z+.5f;
+//		t.rotateOnYAxis(yrot).rotateOnXAxis(xrot);
+//		t.draw();
+//	}
 
 	
 	private boolean connectedAcross(boolean[] connections) {
@@ -341,5 +292,162 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		int count = 0;
 		for(int i =0; i < 6; i++) if(connections[i]) ++count;
 		return count;
+	}
+	
+	private void initializeCoils(FemtopowerCable cable)
+	{
+		Coil_North = createCoil(cable, 6.f/16.f).rotateOnYAxis(Math.PI/2.d);
+		Coil_South = Coil_North.rotatedOnXAxis(Math.PI);
+		Coil_Up = createCoil(cable, 6.f/16.f).rotateOnYAxis(Math.PI/2.d).rotateOnXAxis(Math.PI/2.d);
+		Coil_Down = createCoil(cable, 6.f/16.f).rotateOnYAxis(Math.PI/2.d).rotateOnXAxis(-Math.PI/2.d);
+		Coil_East = createCoil(cable, 6.f/16.f).rotateOnYAxis(Math.PI/2.d).rotateOnXAxis(Math.PI/2.d).rotateOnZAxis(-Math.PI/2.d);
+		Coil_West = createCoil(cable, 6.f/16.f).rotateOnYAxis(Math.PI/2.d).rotateOnXAxis(Math.PI/2.d).rotateOnZAxis(Math.PI/2.d);
+		
+		Coil_North_Close = createCoil(cable, 2.f/16.f).rotateOnYAxis(Math.PI/2.d);
+		Coil_South_Close = Coil_North_Close.rotatedOnXAxis(Math.PI);
+		Coil_Up_Close = createCoil(cable, 2.f/16.f).rotateOnYAxis(Math.PI/2.d).rotateOnXAxis(Math.PI/2.d);
+		Coil_Down_Close = createCoil(cable, 2.f/16.f).rotateOnYAxis(Math.PI/2.d).rotateOnXAxis(-Math.PI/2.d);
+		Coil_East_Close = createCoil(cable, 2.f/16.f).rotateOnYAxis(Math.PI/2.d).rotateOnXAxis(Math.PI/2.d).rotateOnZAxis(-Math.PI/2.d);
+		Coil_West_Close = createCoil(cable, 2.f/16.f).rotateOnYAxis(Math.PI/2.d).rotateOnXAxis(Math.PI/2.d).rotateOnZAxis(Math.PI/2.d);
+		
+		CoilInitialized = true;
+	}
+	
+	private void drawCoilFar(FemtopowerCable cable, ForgeDirection dir, Point loc)
+	{
+		drawConnector(cable, loc.x, loc.y, loc.z, 7.0F/16.0f, null, dir, true);
+		drawConnector(cable, loc.x, loc.y, loc.z, 5.0F/16.0F, null, dir, false);
+		
+		switch(dir)
+		{
+		case UP:
+			Coil_Up.location = loc;
+			Coil_Up.draw();
+			break;
+		case DOWN:
+			Coil_Down.location = loc;
+			Coil_Down.draw();
+			break;
+		case NORTH:
+			Coil_North.location = loc;
+			Coil_North.draw();
+			break;
+		case EAST:
+			Coil_East.location = loc;
+			Coil_East.draw();
+			break;
+		case SOUTH:
+			Coil_South.location = loc;
+			Coil_South.draw();
+			break;
+		case WEST:
+			Coil_West.location = loc;
+			Coil_West.draw();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	private void drawCoilClose(FemtopowerCable cable, ForgeDirection dir, Point loc)
+	{
+		drawConnector(cable, loc.x, loc.y, loc.z, 3.0F/16.0f, null, dir, true);
+		drawConnector(cable, loc.x, loc.y, loc.z, 1.F/16.0F, null, dir, false);
+		
+		switch(dir)
+		{
+		case UP:
+			Coil_Up_Close.location = loc;
+			Coil_Up_Close.draw();
+			break;
+		case DOWN:
+			Coil_Down_Close.location = loc;
+			Coil_Down_Close.draw();
+			break;
+		case NORTH:
+			Coil_North_Close.location = loc;
+			Coil_North_Close.draw();
+			break;
+		case EAST:
+			Coil_East_Close.location = loc;
+			Coil_East_Close.draw();
+			break;
+		case SOUTH:
+			Coil_South_Close.location = loc;
+			Coil_South_Close.draw();
+			break;
+		case WEST:
+			Coil_West_Close.location = loc;
+			Coil_West_Close.draw();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	private Model createCoil(FemtopowerCable cable, float offset)
+	{	
+		Model Coil = new Model(new Point(0,0,0), new Point(.5f, .5f, .5f));
+		
+		offset = .5F - offset;
+		
+		//West-face, AA - top left, AB - bot left, AC - bot right, AD - top right
+		Point AA = new Point(4.0F/16.0F, 12.0F/16.0F, -2.0F/16.0F + offset);
+		Point AB = new Point(4.0F/16.0F, 4.0F/16.0F, -2.0F/16.0F + offset);
+		Point AC = new Point(4.0F/16.0F, 4.0F/16.0F, 2.0F/16.0F + offset);
+		Point AD = new Point(4.0F/16.0F, 12.0F/16.0F, 2.0F/16.0F + offset);
+		//East-face, BA - top left, BB - bottom left, BC - bottom right, BD - top right
+		Point BA = new Point(12.0F/16.0F, 12.0F/16.0F, 2.0F/16.0F + offset);
+		Point BB = new Point(12.0F/16.0F, 4.0F/16.0F, 2.0F/16.0F + offset);
+		Point BC = new Point(12.0F/16.0F, 4.0F/16.0F, -2.0F/16.0F + offset);
+		Point BD = new Point(12.0F/16.0F, 12.0F/16.0F, -2.0F/16.0F + offset);
+
+		Quad a = new Quad(AD.copy(), AC.copy(), AB.copy(), AA.copy(), cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
+		Quad ar = new Quad(AA.copy(), AB.copy(), AC.copy(), AD.copy(), cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
+		Quad b = new Quad(BD.copy(), BC.copy(), BB.copy(), BA.copy(), cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
+		Quad br = new Quad(BA.copy(), BB.copy(), BC.copy(), BD.copy(), cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
+		Quad c = new Quad(BA.copy(), AD.copy(), AA.copy(), BD.copy(), cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
+		Quad cr = new Quad(BD.copy(), AA.copy(), AD.copy(), BA.copy(), cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
+		Quad d = new Quad(BC.copy(), AB.copy(), AC.copy(), BB.copy(), cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
+		Quad dr = new Quad(BB.copy(), AC.copy(), AB.copy(), BC.copy(), cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
+		
+		Coil.addQuad(a);
+		Coil.addQuad(ar);
+		Coil.addQuad(b);
+		Coil.addQuad(br);
+		Coil.addQuad(c);
+		Coil.addQuad(cr);
+		Coil.addQuad(d);
+		Coil.addQuad(dr);
+		
+		//Draw coil
+		
+		//West-face, AA - top left, AB - bot left, AC - bot right, AD - top right
+		AA = new Point(5.0F/16.0F, 11.0F/16.0F, -1.0F/16.0F + offset);
+		AB = new Point(5.0F/16.0F, 5.0F/16.0F, -1.0F/16.0F + offset);
+		AC = new Point(5.0F/16.0F, 5.0F/16.0F, 1.0F/16.0F + offset);
+		AD = new Point(5.0F/16.0F, 11.0F/16.0F, 1.0F/16.0F + offset);
+		//East-face, BA - top left, BB - bottom left, BC - bottom right, BD - top right
+		BA = new Point(11.0F/16.0F, 11.0F/16.0F, 1.0F/16.0F + offset);
+		BB = new Point(11.0F/16.0F, 5.0F/16.0F, 1.0F/16.0F + offset);
+		BC = new Point(11.0F/16.0F, 5.0F/16.0F, -1.0F/16.0F + offset);
+		BD = new Point(11.0F/16.0F, 11.0F/16.0F, -1.0F/16.0F + offset);
+
+		Quad e = new Quad(AD.copy(), AC.copy(), AB.copy(), AA.copy(), cable.coilEdge, cable.coilEdge.getMinU(), cable.coilEdge.getMaxU() - 2.0F *(cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())/3.0F, cable.coilEdge.getMinV(), cable.coilEdge.getMaxV());
+		Quad f = new Quad(BD.copy(), BC.copy(), BB.copy(), BA.copy(), cable.coilEdge, cable.coilEdge.getMinU(), cable.coilEdge.getMaxU() - 2.0F *(cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())/3.0F, cable.coilEdge.getMinV(), cable.coilEdge.getMaxV());
+		Quad g = new Quad(BA.copy(), AD.copy(), AA.copy(), BD.copy(), cable.coilEdge, cable.coilEdge.getMinU(), cable.coilEdge.getMaxU() - 2.0F *(cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())/3.0F, cable.coilEdge.getMinV(), cable.coilEdge.getMaxV());
+		Quad h = new Quad(BC.copy(), AB.copy(), AC.copy(), BB.copy(), cable.coilEdge, cable.coilEdge.getMinU(), cable.coilEdge.getMaxU() - 2.0F *(cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())/3.0F, cable.coilEdge.getMinV(), cable.coilEdge.getMaxV());
+		
+		Coil.addQuad(e);
+		Coil.addQuad(f);
+		Coil.addQuad(g);
+		Coil.addQuad(h);
+		
+		Quad i = new Quad(BB.copy(), AC.copy(), AD.copy(), BA.copy(), cable.coil, cable.coil.getMinU(), cable.coil.getMaxU(), cable.coil.getMinV(), cable.coil.getMaxV());
+		Quad j = new Quad(AA.copy(), AB.copy(), BC.copy(), BD.copy(), cable.coil, cable.coil.getMinU(), cable.coil.getMaxU(), cable.coil.getMinV(), cable.coil.getMaxV());
+		Coil.addQuad(i);
+		Coil.addQuad(j);
+		
+		return Coil;
 	}
 }

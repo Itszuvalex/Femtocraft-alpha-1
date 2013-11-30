@@ -39,7 +39,7 @@ public class Quad {
 	
 	public Quad copy()
 	{
-		return new Quad(a,b,c,d,icon,minU,maxU,minV,maxV);
+		return new Quad(a.copy(),b.copy(),c.copy(),d.copy(),icon,minU,maxU,minV,maxV);
 	}
 
 	public Quad rotateOnXAxis(double rot, float yrotoffset, float zrotoffset) {

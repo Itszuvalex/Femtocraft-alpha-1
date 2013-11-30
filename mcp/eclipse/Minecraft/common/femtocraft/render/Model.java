@@ -11,6 +11,10 @@ public class Model {
 	public Point center;
 	public Point location;
 
+	public Model() {
+		this(new Point(0,0,0));
+	}
+	
 	public Model(Point location) {
 		this(location, new Point(0,0,0));
 	}
@@ -21,10 +25,10 @@ public class Model {
 		this.location = location;
 		faces = new ArrayList<Quad>();
 	}
-	
+
 	public Model copy()
 	{
-		Model ret = new Model(center, location);
+		Model ret = new Model(center.copy(), location.copy());
 		for(Quad quad : faces)
 		{
 			ret.addQuad(quad.copy());
@@ -123,171 +127,172 @@ public class Model {
 	{
 		return this.copy().rotateOnXAxis(x).rotateOnYAxis(y).rotateOnZAxis(z);
 	}
-	
-	public Model rotateFromTo(ForgeDirection from, ForgeDirection to)
-	{
-		if(from == to) return this;
-		
-		double xrot, yrot, zrot;
-		xrot = yrot = zrot = 0;
-		
-		switch(from)
-		{
-		case UP:
-			switch(to)
-			{
-			case UP:
-				break;
-			case DOWN:
-				xrot = Math.PI;
-				break;
-			case NORTH:
-				xrot = -Math.PI/2.d;
-				break;
-			case SOUTH:
-				xrot = Math.PI/2.d;
-				break;
-			case EAST:
-				zrot = -Math.PI/2.d;
-				break;
-			case WEST:
-				zrot = Math.PI/2.d;
-				break;
-			default:
-				break;
-			}
-			break;
-		case DOWN:
-			switch(to)
-			{
-			case UP:
-				xrot = Math.PI;
-				break;
-			case DOWN:
-				break;
-			case NORTH:
-				xrot = Math.PI/2.d;
-				break;
-			case SOUTH:
-				xrot = -Math.PI/2.d;
-				break;
-			case EAST:
-				zrot = Math.PI/2.d;
-				break;
-			case WEST:
-				zrot = -Math.PI/2.d;
-				break;
-			default:
-				break;
-			}
-			break;
-		case NORTH:
-			switch(to)
-			{
-			case UP:
-				xrot = Math.PI/2.d;
-				break;
-			case DOWN:
-				xrot = -Math.PI/2.d;
-				break;
-			case NORTH:
-				break;
-			case SOUTH:
-				yrot = Math.PI;
-				break;
-			case EAST:
-				yrot = Math.PI/2.d;
-				break;
-			case WEST:
-				yrot = -Math.PI/2.d;
-				break;
-			default:
-				break;
-			}
-			break;
-		case SOUTH:
-			switch(to)
-			{
-			case UP:
-				xrot = -Math.PI/2.d;
-				break;
-			case DOWN:
-				xrot = Math.PI/2.d;
-				break;
-			case NORTH:
-				yrot = Math.PI;
-				break;
-			case SOUTH:
-				break;
-			case EAST:
-				yrot = -Math.PI/2.d;
-				break;
-			case WEST:
-				yrot = Math.PI/2.d;
-				break;
-			default:
-				break;
-			}
-			break;
-		case EAST:
-			switch(to)
-			{
-			case UP:
-				zrot = Math.PI/2.d;
-				break;
-			case DOWN:
-				zrot = -Math.PI/2.d;
-				break;
-			case NORTH:
-				yrot = -Math.PI/2d;
-				break;
-			case SOUTH:
-				yrot = Math.PI/2.d;
-				break;
-			case EAST:
-				break;
-			case WEST:
-				yrot = Math.PI;
-				break;
-			default:
-				break;
-			}
-			break;
-		case WEST:
-			switch(to)
-			{
-			case UP:
-				zrot = -Math.PI/2.d;
-				break;
-			case DOWN:
-				zrot = Math.PI/2.d;
-				break;
-			case NORTH:
-				yrot = Math.PI/2.d;
-				break;
-			case SOUTH:
-				yrot = -Math.PI/2.d;
-				break;
-			case EAST:
-				yrot = Math.PI;
-				break;
-			case WEST:
-				break;
-			default:
-				break;
-			}
-			break;
-		default:
-			break;
-		}
-		
-		return rotateOnXAxis(xrot).rotateOnYAxis(yrot).rotateOnZAxis(zrot);
-	}
-	
-	public Model rotatedFromTo(ForgeDirection from, ForgeDirection to)
-	{
-		return copy().rotateFromTo(from, to);
-	}
+//	
+//	public Model rotateFromTo(ForgeDirection from, ForgeDirection to)
+//	{
+//		if(from == to) return this;
+//		
+//		double xrot, yrot, zrot;
+//		xrot = zrot = 0;
+//		yrot = Math.PI/2.d;
+//		
+//		switch(from)
+//		{
+//		case UP:
+//			switch(to)
+//			{
+//			case UP:
+//				break;
+//			case DOWN:
+//				xrot += Math.PI;
+//				break;
+//			case NORTH:
+//				xrot += -Math.PI/2.d;
+//				break;
+//			case SOUTH:
+//				xrot += Math.PI/2.d;
+//				break;
+//			case EAST:
+//				zrot += -Math.PI/2.d;
+//				break;
+//			case WEST:
+//				zrot += Math.PI/2.d;
+//				break;
+//			default:
+//				break;
+//			}
+//			break;
+//		case DOWN:
+//			switch(to)
+//			{
+//			case UP:
+//				xrot += Math.PI;
+//				break;
+//			case DOWN:
+//				break;
+//			case NORTH:
+//				xrot += Math.PI/2.d;
+//				break;
+//			case SOUTH:
+//				xrot += -Math.PI/2.d;
+//				break;
+//			case EAST:
+//				zrot += Math.PI/2.d;
+//				break;
+//			case WEST:
+//				zrot += -Math.PI/2.d;
+//				break;
+//			default:
+//				break;
+//			}
+//			break;
+//		case NORTH:
+//			switch(to)
+//			{
+//			case UP:
+//				xrot += Math.PI/2.d;
+//				break;
+//			case DOWN:
+//				xrot += -Math.PI/2.d;
+//				break;
+//			case NORTH:
+//				break;
+//			case SOUTH:
+//				yrot += Math.PI;
+//				break;
+//			case EAST:
+//				yrot += Math.PI/2.d;
+//				break;
+//			case WEST:
+//				yrot += -Math.PI/2.d;
+//				break;
+//			default:
+//				break;
+//			}
+//			break;
+//		case SOUTH:
+//			switch(to)
+//			{
+//			case UP:
+//				xrot += -Math.PI/2.d;
+//				break;
+//			case DOWN:
+//				xrot += Math.PI/2.d;
+//				break;
+//			case NORTH:
+//				yrot += Math.PI;
+//				break;
+//			case SOUTH:
+//				break;
+//			case EAST:
+//				yrot += -Math.PI/2.d;
+//				break;
+//			case WEST:
+//				yrot += Math.PI/2.d;
+//				break;
+//			default:
+//				break;
+//			}
+//			break;
+//		case EAST:
+//			switch(to)
+//			{
+//			case UP:
+//				zrot += Math.PI/2.d;
+//				break;
+//			case DOWN:
+//				zrot += -Math.PI/2.d;
+//				break;
+//			case NORTH:
+//				yrot += -Math.PI/2d;
+//				break;
+//			case SOUTH:
+//				yrot += Math.PI/2.d;
+//				break;
+//			case EAST:
+//				break;
+//			case WEST:
+//				yrot += Math.PI;
+//				break;
+//			default:
+//				break;
+//			}
+//			break;
+//		case WEST:
+//			switch(to)
+//			{
+//			case UP:
+//				zrot += -Math.PI/2.d;
+//				break;
+//			case DOWN:
+//				zrot += Math.PI/2.d;
+//				break;
+//			case NORTH:
+//				yrot += Math.PI/2.d;
+//				break;
+//			case SOUTH:
+//				yrot += -Math.PI/2.d;
+//				break;
+//			case EAST:
+//				yrot += Math.PI;
+//				break;
+//			case WEST:
+//				break;
+//			default:
+//				break;
+//			}
+//			break;
+//		default:
+//			break;
+//		}
+//		
+//		return rotateOnXAxis(xrot).rotateOnYAxis(yrot).rotateOnZAxis(zrot);
+//	}
+//	
+//	public Model rotatedFromTo(ForgeDirection from, ForgeDirection to)
+//	{
+//		return copy().rotateFromTo(from, to);
+//	}
 	
 	public void draw()
 	{
