@@ -113,7 +113,14 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		if(!initialized)
 			initializeModels(tube);
 		
-
+		inWest.location = new Point(x,y,z);
+		inWest.draw();
+		
+		outNorth.location = new Point(x,y,z);
+		outNorth.draw();
+		
+		centerCurvedWestToNorth.location = new Point(x,y,z);
+		centerCurvedWestToNorth.draw();
 		
 //		renderIn(x,y,z,in,hasItem,isOverflowing);
 //		renderOut(x,y,z,out,hasItem);
@@ -801,12 +808,16 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		float sideMinV = tube.straightIcon.getInterpolatedV(4.f);
 		float sideMaxV = tube.straightIcon.getInterpolatedV(12.f);
 		
-		Quad top = FemtocraftRenderUtils.makeTopFace(min, max, min, max, max, tube.turnIcon, minU, maxU, minV, maxV);
-		Quad bot = FemtocraftRenderUtils.makeBottomFace(min, max, min, max, min, tube.turnIcon, maxU, minU, minV, maxV);
-		Quad east = FemtocraftRenderUtils.makeEastFace(min, max, min, max, max, tube.straightIcon, sideMinU, sideMaxU, sideMinV, sideMaxV);
-		Quad east_r = FemtocraftRenderUtils.makeWestFace(min, max, min, max, max-3.f/16.f, tube.straightIcon, sideMinU, sideMaxU, sideMinV, sideMaxV);
+		Quad top = FemtocraftRenderUtils.makeTopFace(min, max, min, max, max, tube.turnIcon, minU, maxU, minV, maxV).rotateOnYAxis(-Math.PI/2.d, .5f, .5f);
+		Quad top_r = FemtocraftRenderUtils.makeBottomFace(min, max, min, max, max-3.f/16.f, tube.turnIcon, minU, maxU, minV, maxV).rotateOnYAxis(Math.PI/2.d, .5f, .5f);
 		
-		Quad south = FemtocraftRenderUtils.makeSouthFace(min, max, min, max, max, tube.straightIcon, sideMinU, sideMaxU, sideMinV, sideMaxV);
+		Quad bot = FemtocraftRenderUtils.makeBottomFace(min, max, min, max, min, tube.turnIcon, minU, maxU, minV, maxV).rotateOnYAxis(Math.PI/2.d, .5f, .5f);
+		Quad bot_r = FemtocraftRenderUtils.makeTopFace(min, max, min, max, min + 3.f/16.f, tube.turnIcon, minU, maxU, minV, maxV).rotateOnYAxis(-Math.PI/2.d, .5f, .5f);
+		
+		Quad east = FemtocraftRenderUtils.makeEastFace(min, max, min, max, max, tube.straightIcon, sideMinU, sideMaxU, sideMinV, sideMaxV);
+		Quad east_r = FemtocraftRenderUtils.makeWestFace(min, max, min, max, max-3.f/16.f, tube.straightIcon, sideMinU, sideMaxU, sideMinV, sideMaxV).rotateOnXAxis(Math.PI/2.d, .5f, .5f);
+		
+		Quad south = FemtocraftRenderUtils.makeSouthFace(min, max, min, max, max, tube.straightIcon, sideMinU, sideMaxU, sideMinV, sideMaxV).rotateOnZAxis(Math.PI/2.d, .5f, .5f);
 		Quad south_r = FemtocraftRenderUtils.makeNorthFace(min, max, min, max, max-3.f/16.f, tube.straightIcon, sideMinU, sideMaxU, sideMinV, sideMaxV);
 		
 		minU = tube.turnInsetIcon.getInterpolatedU(4.f);
@@ -819,25 +830,27 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		sideMinV = tube.straightInsetIcon.getInterpolatedV(4.f);
 		sideMaxV = tube.straightInsetIcon.getInterpolatedV(12.f);
 		
-		Quad top_inset =  FemtocraftRenderUtils.makeTopFace(min, max, min, max, max-1.f/16.f, tube.turnInsetIcon, minU, maxU, minV, maxV);
-		Quad bot_inset = FemtocraftRenderUtils.makeBottomFace(min, max, min, max, min+1.f/16.f, tube.turnInsetIcon, maxU, minU, minV, maxV);
-		Quad east_inset = FemtocraftRenderUtils.makeEastFace(min, max, min, max, max - 1.f/16.f, tube.straightInsetIcon, sideMinU, sideMaxU, sideMinV, sideMaxV);
-		Quad south_inset = FemtocraftRenderUtils.makeSouthFace(min, max, min, max, max - 1.f/16.f, tube.straightInsetIcon, sideMinU, sideMaxU, sideMinV, sideMaxV);
+		Quad top_inset =  FemtocraftRenderUtils.makeTopFace(min, max, min, max, max-1.f/16.f, tube.turnInsetIcon, minU, maxU, maxV, minV).rotateOnYAxis(0, .5f, .5f);
+		Quad bot_inset = FemtocraftRenderUtils.makeBottomFace(min, max, min, max, min+1.f/16.f, tube.turnInsetIcon, minU, maxU, minV, maxV).rotatedOnYAxis(Math.PI/2.d, .5f, .5f);
+		Quad east_inset = FemtocraftRenderUtils.makeEastFace(min, max, min, max, max - 1.f/16.f, tube.straightInsetIcon, sideMaxU, sideMinU, sideMinV, sideMaxV);
+		Quad south_inset = FemtocraftRenderUtils.makeSouthFace(min, max, min, max, max - 1.f/16.f, tube.straightInsetIcon, sideMaxU, sideMinU, sideMinV, sideMaxV).rotateOnZAxis(Math.PI/2.d, .5f, .5f);
 		
 		minU = tube.straightIcon.getInterpolatedU(4.f);
 		maxU = tube.straightIcon.getInterpolatedU(7.f);
 		minV = tube.straightIcon.getInterpolatedV(4.f);
 		maxV = tube.straightIcon.getInterpolatedV(12.f);
 		
-		Quad west_inset = FemtocraftRenderUtils.makeSouthFace(min, max, min, 7.f/16.f, min+3.f/16.f, tube.straightIcon, minU, maxU, minV, maxV);
+		Quad west_inset = FemtocraftRenderUtils.makeSouthFace(min, max, min, 7.f/16.f, min+3.f/16.f, tube.straightIcon, minU, maxU, minV, maxV).rotateOnZAxis(-Math.PI/2.d, .5f, .5f);
 		
 		minU = tube.straightIcon.getInterpolatedU(9.f);
 		maxU = tube.straightIcon.getInterpolatedU(12.f);
 		
-		Quad north_inset = FemtocraftRenderUtils.makeEastFace(min, max, min, max -3.f/16.f, max, tube.straightIcon, minU, maxU, minV, maxV);
+		Quad north_inset = FemtocraftRenderUtils.makeEastFace(min, max, min, min + 3.f/16.f, 7.f/16.f, tube.straightIcon, minU, maxU, minV, maxV);
 		
 		ret.addQuad(top);
+		ret.addQuad(top_r);
 		ret.addQuad(bot);
+		ret.addQuad(bot_r);
 		ret.addQuad(east);
 		ret.addQuad(east_r);
 		ret.addQuad(south);
