@@ -42,6 +42,24 @@ public class Quad {
 		return new Quad(a.copy(),b.copy(),c.copy(),d.copy(),icon,minU,maxU,minV,maxV);
 	}
 
+	public Quad reverse()
+	{
+		Point temp = a;
+		a = d;
+		d = temp;
+		
+		temp = c;
+		c = b;
+		b = temp;
+		
+		return this;
+	}
+	
+	public Quad reversed()
+	{
+		return new Quad(d.copy(), c.copy(), b.copy(), a.copy(), icon, minU, maxU, minV, maxV);
+	}
+	
 	public Quad rotateOnXAxis(double rot, float yrotoffset, float zrotoffset) {
 		a.rotateOnXAxis(rot, yrotoffset, zrotoffset);
 		b.rotateOnXAxis(rot, yrotoffset, zrotoffset);

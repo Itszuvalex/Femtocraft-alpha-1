@@ -296,19 +296,19 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 	
 	private void initializeCoils(FemtopowerCable cable)
 	{
-		Coil_North = createCoil(cable, 6.f/16.f).rotateOnYAxis(Math.PI/2.d);
+		Coil_North = createCoil(cable, 6.f/16.f).rotateOnZAxis(Math.PI);
 		Coil_South = Coil_North.rotatedOnXAxis(Math.PI);
-		Coil_Up = createCoil(cable, 6.f/16.f).rotateOnYAxis(Math.PI/2.d).rotateOnXAxis(Math.PI/2.d);
-		Coil_Down = createCoil(cable, 6.f/16.f).rotateOnYAxis(Math.PI/2.d).rotateOnXAxis(-Math.PI/2.d);
-		Coil_East = createCoil(cable, 6.f/16.f).rotateOnYAxis(Math.PI/2.d).rotateOnXAxis(Math.PI/2.d).rotateOnZAxis(-Math.PI/2.d);
-		Coil_West = createCoil(cable, 6.f/16.f).rotateOnYAxis(Math.PI/2.d).rotateOnXAxis(Math.PI/2.d).rotateOnZAxis(Math.PI/2.d);
+		Coil_Up = Coil_North.rotatedOnXAxis(Math.PI/2.d);
+		Coil_Down = Coil_North.rotatedOnXAxis(-Math.PI/2.d);
+		Coil_East = Coil_North.rotatedOnYAxis(-Math.PI/2.d);
+		Coil_West = Coil_North.rotatedOnYAxis(Math.PI/2.d);
 		
-		Coil_North_Close = createCoil(cable, 2.f/16.f).rotateOnYAxis(Math.PI/2.d);
+		Coil_North_Close = createCoil(cable, 2.f/16.f);
 		Coil_South_Close = Coil_North_Close.rotatedOnXAxis(Math.PI);
-		Coil_Up_Close = createCoil(cable, 2.f/16.f).rotateOnYAxis(Math.PI/2.d).rotateOnXAxis(Math.PI/2.d);
-		Coil_Down_Close = createCoil(cable, 2.f/16.f).rotateOnYAxis(Math.PI/2.d).rotateOnXAxis(-Math.PI/2.d);
-		Coil_East_Close = createCoil(cable, 2.f/16.f).rotateOnYAxis(Math.PI/2.d).rotateOnXAxis(Math.PI/2.d).rotateOnZAxis(-Math.PI/2.d);
-		Coil_West_Close = createCoil(cable, 2.f/16.f).rotateOnYAxis(Math.PI/2.d).rotateOnXAxis(Math.PI/2.d).rotateOnZAxis(Math.PI/2.d);
+		Coil_Up_Close = Coil_North_Close.rotatedOnXAxis(Math.PI/2.d);
+		Coil_Down_Close = Coil_North_Close.rotatedOnXAxis(-Math.PI/2.d);
+		Coil_East_Close = Coil_North_Close.rotatedOnYAxis(-Math.PI/2.d);
+		Coil_West_Close = Coil_North_Close.rotatedOnYAxis(Math.PI/2.d);
 		
 		CoilInitialized = true;
 	}
@@ -438,15 +438,15 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		Quad g = new Quad(BA.copy(), AD.copy(), AA.copy(), BD.copy(), cable.coilEdge, cable.coilEdge.getMinU(), cable.coilEdge.getMaxU() - 2.0F *(cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())/3.0F, cable.coilEdge.getMinV(), cable.coilEdge.getMaxV());
 		Quad h = new Quad(BC.copy(), AB.copy(), AC.copy(), BB.copy(), cable.coilEdge, cable.coilEdge.getMinU(), cable.coilEdge.getMaxU() - 2.0F *(cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())/3.0F, cable.coilEdge.getMinV(), cable.coilEdge.getMaxV());
 		
-		Coil.addQuad(e);
-		Coil.addQuad(f);
-		Coil.addQuad(g);
-		Coil.addQuad(h);
+		Coil.addQuad(e.reverse());
+		Coil.addQuad(f.reverse());
+		Coil.addQuad(g.reverse());
+		Coil.addQuad(h.reverse());
 		
 		Quad i = new Quad(BB.copy(), AC.copy(), AD.copy(), BA.copy(), cable.coil, cable.coil.getMinU(), cable.coil.getMaxU(), cable.coil.getMinV(), cable.coil.getMaxV());
 		Quad j = new Quad(AA.copy(), AB.copy(), BC.copy(), BD.copy(), cable.coil, cable.coil.getMinU(), cable.coil.getMaxU(), cable.coil.getMinV(), cable.coil.getMaxV());
-		Coil.addQuad(i);
-		Coil.addQuad(j);
+		Coil.addQuad(i.reverse());
+		Coil.addQuad(j.reverse());
 		
 		return Coil;
 	}
