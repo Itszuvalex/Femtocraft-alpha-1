@@ -78,7 +78,7 @@ public class VacuumTubeTile extends TileEntity {
 				((outputTube != null && outputTube.queuedItem != null) ||
 				((outputInv != null || outputSidedInv != null) && !canFillInv)) &&
 				hasItem[0] && hasItem[1] && hasItem[2] && hasItem[3] && 
-				((inputTube != null && queuedItem != null) || (inputInv != null || inputSidedInv != null)));
+				((inputTube == null || queuedItem != null)));
 	}
 	
 	public ForgeDirection getInputDir()
@@ -463,12 +463,12 @@ public class VacuumTubeTile extends TileEntity {
 		
 		if(worldObj.isRemote)
 		{
-			if(overflowing) return;
-			
-			for(int i = hasItem.length-2; i >= 0; i--)
-			{
-				if(hasItem[i+1] = hasItem[i]) worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-			}
+//			if(overflowing) return;
+//			
+//			for(int i = hasItem.length-2; i >= 0; i--)
+//			{
+//				if(hasItem[i+1] = hasItem[i]) worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+//			}
 			return;
 		}
 		
