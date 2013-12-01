@@ -312,11 +312,11 @@ public class Model {
 		switch(dir)
 		{
 		case SOUTH:
-			return rotatedOnYAxis(Math.PI);
+			return rotatedOnXAxis(Math.PI);
 		case EAST:
-			return rotatedOnYAxis(Math.PI/2.d);
+			return rotatedOnYAxis(Math.PI);
 		case WEST:
-			return rotatedOnYAxis(-Math.PI/2.d);
+			return rotatedOnYAxis(Math.PI/2.d);
 		case UP:
 			return rotatedOnXAxis(Math.PI/2.d);
 		case DOWN:

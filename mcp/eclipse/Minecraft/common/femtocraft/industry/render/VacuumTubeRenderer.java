@@ -88,6 +88,9 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		if(tile == null) return false;
 		if(!(tile instanceof VacuumTubeTile)) return false;
 		VacuumTubeTile tube = (VacuumTubeTile)tile;
+		Tessellator tessellator = Tessellator.instance;
+		tessellator.setBrightness(block.getMixedBrightnessForBlock(renderer.blockAccess, x, y, z));
+		tessellator.setColorOpaque_F(1, 1, 1);
 		
 		renderTube((VacuumTube)block, x,y,z,tube.hasItem, tube.isOverflowing(), tube.getInputDir(), tube.getOutputDir(), !tube.missingInput(), !tube.missingOutput());
 		
@@ -115,16 +118,16 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		
 //		centerStraightNorthToSouth.location = new Point(x,y,z);
 //		centerStraightNorthToSouth.draw();
-//		
+		
 //		centerStraightUpToDown.location = new Point(x,y,z);
 //		centerStraightUpToDown.draw();
-//		
+		
 //		centerStraightDownToUp.location = new Point(x,y,z);
 //		centerStraightDownToUp.draw();
-//		
+		
 //		centerStraightWestToEast.location = new Point(x,y,z);
 //		centerStraightWestToEast.draw();
-//		
+		
 //		centerStraightEastToWest.location = new Point(x,y,z);
 //		centerStraightEastToWest.draw();
 		
@@ -804,15 +807,15 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		float min = 4.f/16.f;
 		float max = 12.f/16.f;
 		
-		float minU = tube.turnIcon.getMinU() + (tube.turnIcon.getMaxU() - tube.turnIcon.getMinU())*min;
-		float maxU = tube.turnIcon.getMinU() + (tube.turnIcon.getMaxU() - tube.turnIcon.getMinU())*max;
-		float minV = tube.turnIcon.getMinV() + (tube.turnIcon.getMaxV() - tube.turnIcon.getMinV())*min;
-		float maxV = tube.turnIcon.getMinV() + (tube.turnIcon.getMaxV() - tube.turnIcon.getMinV())*max;
+		float minU = tube.turnIcon.getInterpolatedU(4.f);
+		float maxU = tube.turnIcon.getInterpolatedU(12.f);
+		float minV = tube.turnIcon.getInterpolatedV(4.f);
+		float maxV = tube.turnIcon.getInterpolatedV(12.f);
 		
-		float sideMinU = tube.straightIcon.getMinU() + (tube.straightIcon.getMaxU() - tube.straightIcon.getMinU())*min;
-		float sideMaxU = tube.straightIcon.getMinU() + (tube.straightIcon.getMaxU() - tube.straightIcon.getMinU())*max;
-		float sideMinV = tube.straightIcon.getMinV() + (tube.straightIcon.getMaxV() - tube.straightIcon.getMinV())*min;
-		float sideMaxV = tube.straightIcon.getMinV() + (tube.straightIcon.getMaxV() - tube.straightIcon.getMinV())*max;
+		float sideMinU = tube.straightIcon.getInterpolatedU(4.f);
+		float sideMaxU = tube.straightIcon.getInterpolatedU(12.f);
+		float sideMinV = tube.straightIcon.getInterpolatedV(4.f);
+		float sideMaxV = tube.straightIcon.getInterpolatedV(12.f);
 		
 		Quad top = FemtocraftRenderUtils.makeTopFace(min, max, min, max, max, tube.turnIcon, minU, maxU, minV, maxV);
 		Quad bot = FemtocraftRenderUtils.makeBottomFace(min, max, min, max, min, tube.turnIcon, maxU, minU, minV, maxV);
@@ -822,30 +825,30 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		Quad south = FemtocraftRenderUtils.makeSouthFace(min, max, min, max, max, tube.straightIcon, sideMinU, sideMaxU, sideMinV, sideMaxV);
 		Quad south_r = FemtocraftRenderUtils.makeNorthFace(min, max, min, max, max-3.f/16.f, tube.straightIcon, sideMinU, sideMaxU, sideMinV, sideMaxV);
 		
-		minU = tube.turnInsetIcon.getMinU() + (tube.turnInsetIcon.getMaxU() - tube.turnInsetIcon.getMinU())*min;
-		maxU = tube.turnInsetIcon.getMinU() + (tube.turnInsetIcon.getMaxU() - tube.turnInsetIcon.getMinU())*max;
-		minV = tube.turnInsetIcon.getMinV() + (tube.turnInsetIcon.getMaxV() - tube.turnInsetIcon.getMinV())*min;
-		maxV = tube.turnInsetIcon.getMinV() + (tube.turnInsetIcon.getMaxV() - tube.turnInsetIcon.getMinV())*max;
+		minU = tube.turnInsetIcon.getInterpolatedU(4.f);
+		maxU = tube.turnInsetIcon.getInterpolatedU(12.f);
+		minV = tube.turnInsetIcon.getInterpolatedV(4.f);
+		maxV = tube.turnInsetIcon.getInterpolatedV(12.f);
 		
-		sideMinU = tube.straightInsetIcon.getMinU() + (tube.straightInsetIcon.getMaxU() - tube.straightInsetIcon.getMinU())*min;
-		sideMaxU = tube.straightInsetIcon.getMinU() + (tube.straightInsetIcon.getMaxU() - tube.straightInsetIcon.getMinU())*max;
-		sideMinV = tube.straightInsetIcon.getMinV() + (tube.straightInsetIcon.getMaxV() - tube.straightInsetIcon.getMinV())*min;
-		sideMaxV = tube.straightInsetIcon.getMinV() + (tube.straightInsetIcon.getMaxV() - tube.straightInsetIcon.getMinV())*max;
+		sideMinU = tube.straightInsetIcon.getInterpolatedU(4.f);
+		sideMaxU = tube.straightInsetIcon.getInterpolatedU(12.f);
+		sideMinV = tube.straightInsetIcon.getInterpolatedV(4.f);
+		sideMaxV = tube.straightInsetIcon.getInterpolatedV(12.f);
 		
 		Quad top_inset =  FemtocraftRenderUtils.makeTopFace(min, max, min, max, max-1.f/16.f, tube.turnInsetIcon, minU, maxU, minV, maxV);
 		Quad bot_inset = FemtocraftRenderUtils.makeBottomFace(min, max, min, max, min+1.f/16.f, tube.turnInsetIcon, maxU, minU, minV, maxV);
 		Quad east_inset = FemtocraftRenderUtils.makeEastFace(min, max, min, max, max - 1.f/16.f, tube.straightInsetIcon, sideMinU, sideMaxU, sideMinV, sideMaxV);
 		Quad south_inset = FemtocraftRenderUtils.makeSouthFace(min, max, min, max, max - 1.f/16.f, tube.straightInsetIcon, sideMinU, sideMaxU, sideMinV, sideMaxV);
 		
-		minU = tube.straightIcon.getMinU() + (tube.straightIcon.getMaxU() - tube.straightIcon.getMinU())*min;
-		maxU = tube.straightIcon.getMinU() + (tube.straightIcon.getMaxU() - tube.straightIcon.getMinU())*7.f/16.f;
-		minV = tube.straightIcon.getMinV() + (tube.straightIcon.getMaxV() - tube.straightIcon.getMinV())*min;
-		maxV = tube.straightIcon.getMinV() + (tube.straightIcon.getMaxV() - tube.straightIcon.getMinV())*max;
+		minU = tube.straightIcon.getInterpolatedU(4.f);
+		maxU = tube.straightIcon.getInterpolatedU(7.f);
+		minV = tube.straightIcon.getInterpolatedV(4.f);
+		maxV = tube.straightIcon.getInterpolatedV(12.f);
 		
 		Quad west_inset = FemtocraftRenderUtils.makeSouthFace(min, max, min, 7.f/16.f, min+3.f/16.f, tube.straightIcon, minU, maxU, minV, maxV);
 		
-		minU = tube.straightIcon.getMinU() + (tube.straightIcon.getMaxU() - tube.straightIcon.getMinU())*9.f/16.f;
-		maxU = tube.straightIcon.getMinU() + (tube.straightIcon.getMaxU() - tube.straightIcon.getMinU())*max;
+		minU = tube.straightIcon.getInterpolatedU(9.f);
+		maxU = tube.straightIcon.getInterpolatedU(12.f);
 		
 		Quad north_inset = FemtocraftRenderUtils.makeEastFace(min, max, min, max -3.f/16.f, max, tube.straightIcon, minU, maxU, minV, maxV);
 		
@@ -874,33 +877,33 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		float min = 4.f/16.f;
 		float max = 12.0f/16.f;
 		
-		float minU = tube.straightIcon.getMinU() + (tube.straightIcon.getMaxU() - tube.straightIcon.getMinU())*min;
-		float maxU = tube.straightIcon.getMinU() + (tube.straightIcon.getMaxU() - tube.straightIcon.getMinU())*max;
-		float minV = tube.straightIcon.getMinV() + (tube.straightIcon.getMaxV() - tube.straightIcon.getMinV())*min;
-		float maxV = tube.straightIcon.getMinV() + (tube.straightIcon.getMaxV() - tube.straightIcon.getMinV())*max;
+		float minU = tube.straightIcon.getInterpolatedU(4.f);
+		float maxU = tube.straightIcon.getInterpolatedU(12.f);
+		float minV = tube.straightIcon.getInterpolatedV(4.f);
+		float maxV = tube.straightIcon.getInterpolatedV(12.f);
 		
-		Quad top = FemtocraftRenderUtils.makeTopFace(min, max, min, max, max, tube.straightIcon, minU, maxU, minV, maxV);
+		Quad top = FemtocraftRenderUtils.makeTopFace(min, max, min, max, max, tube.straightIcon, minU, maxU, minV, maxV).rotateOnYAxis(Math.PI/2.d, .5f, .5f);
 		Quad top_r = FemtocraftRenderUtils.makeBottomFace(min, max, min, max, max-3.f/16.f, tube.straightIcon, minU, maxU, minV, maxV);
 		
 		Quad bot = FemtocraftRenderUtils.makeBottomFace(min, max, min, max, min, tube.straightIcon, minU, maxU, minV, maxV);
-		Quad bot_r = FemtocraftRenderUtils.makeTopFace(min, max, min, max, min + 3.f/16.f, tube.straightIcon, minU, maxU, minV, maxV);
+		Quad bot_r = FemtocraftRenderUtils.makeTopFace(min, max, min, max, min + 3.f/16.f, tube.straightIcon, minU, maxU, minV, maxV).rotateOnYAxis(Math.PI/2.d, .5f, .5f);
 		
 		Quad east = FemtocraftRenderUtils.makeEastFace(min, max, min, max, max, tube.straightIcon, minU, maxU, minV, maxV);
-		Quad east_r = FemtocraftRenderUtils.makeWestFace(min, max, min, max, max - 3.f/16.f, tube.straightIcon, minU, maxU, minV, maxV);
+		Quad east_r = FemtocraftRenderUtils.makeWestFace(min, max, min, max, max - 3.f/16.f, tube.straightIcon, minU, maxU, minV, maxV).rotateOnXAxis(Math.PI/2.d, .5f, .5f);
 		
-		Quad west = FemtocraftRenderUtils.makeWestFace(min, max, min, max, min, tube.straightIcon, minU, maxU, minV, maxV);
+		Quad west = FemtocraftRenderUtils.makeWestFace(min, max, min, max, min, tube.straightIcon, minU, maxU, minV, maxV).rotateOnXAxis(Math.PI/2.d, .5f, .5f);
 		Quad west_r = FemtocraftRenderUtils.makeEastFace(min, max, min, max, min + 3.f/16.f, tube.straightIcon, minU, maxU, minV, maxV);
 		
 		
-		minU = tube.straightInsetIcon.getMinU() + (tube.straightInsetIcon.getMaxU() - tube.straightInsetIcon.getMinU())*min;
-		maxU = tube.straightInsetIcon.getMinU() + (tube.straightInsetIcon.getMaxU() - tube.straightInsetIcon.getMinU())*max;
-		minV = tube.straightInsetIcon.getMinV() + (tube.straightInsetIcon.getMaxV() - tube.straightInsetIcon.getMinV())*min;
-		maxV = tube.straightInsetIcon.getMinV() + (tube.straightInsetIcon.getMaxV() - tube.straightInsetIcon.getMinV())*max;
+		minU = tube.straightInsetIcon.getInterpolatedU(12.f);
+		maxU = tube.straightInsetIcon.getInterpolatedU(4.f);
+		minV = tube.straightInsetIcon.getInterpolatedV(4.f);
+		maxV = tube.straightInsetIcon.getInterpolatedV(12.f);
 		
-		Quad top_inset = FemtocraftRenderUtils.makeTopFace(min, max, min, max, max-1.f/16.f, tube.straightInsetIcon, minU, maxU, minV, maxV);
+		Quad top_inset = FemtocraftRenderUtils.makeTopFace(min, max, min, max, max-1.f/16.f, tube.straightInsetIcon, maxU, minU, minV, maxV).rotateOnYAxis(Math.PI/2.d, .5f, .5f);
 		Quad bot_inset = FemtocraftRenderUtils.makeBottomFace(min, max, min, max, min+1.f/16.f, tube.straightInsetIcon, minU, maxU, minV, maxV);
 		Quad east_inset = FemtocraftRenderUtils.makeEastFace(min, max, min, max, max-1.f/16.f, tube.straightInsetIcon, minU, maxU, minV, maxV);
-		Quad west_inset = FemtocraftRenderUtils.makeWestFace(min, max, min, max, min+1.f/16.f, tube.straightInsetIcon, minU, maxU, minV, maxV);
+		Quad west_inset = FemtocraftRenderUtils.makeWestFace(min, max, min, max, min+1.f/16.f, tube.straightInsetIcon, minU, maxU, minV, maxV).rotateOnXAxis(Math.PI/2.d, .5f, .5f);
 		
 		ret.addQuad(top);
 		ret.addQuad(top_r);
@@ -1002,23 +1005,23 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		
 		if(overflow)
 		{
-			minU = tube.indicatorIcon.getMinU() + (tube.indicatorIcon.getMaxU() - tube.indicatorIcon.getMinU())*.5f;
+			minU = tube.indicatorIcon.getInterpolatedU(5.f);
 			maxU = tube.indicatorIcon.getMaxU();
 			minV = tube.indicatorIcon.getMinV();
-			maxV = tube.indicatorIcon.getMinU() + (tube.indicatorIcon.getMaxV() - tube.indicatorIcon.getMinV())*.5f;
+			maxV = tube.indicatorIcon.getInterpolatedV(5.f);
 		}
 		else if(hasItem)
 		{
-			minU = tube.indicatorIcon.getMinU() + (tube.indicatorIcon.getMaxU() - tube.indicatorIcon.getMinU())*.5f;
+			minU = tube.indicatorIcon.getInterpolatedU(5.f);
 			maxU = tube.indicatorIcon.getMaxU();
-			minV = tube.indicatorIcon.getMinU() + (tube.indicatorIcon.getMaxV() - tube.indicatorIcon.getMinV())*.5f;
+			minV = tube.indicatorIcon.getInterpolatedV(5.f);
 			maxV = tube.indicatorIcon.getMaxV();
 		}
 		else
 		{
 			minU = tube.indicatorIcon.getMinU();
-			maxU = tube.indicatorIcon.getMinU() + (tube.indicatorIcon.getMaxU() - tube.indicatorIcon.getMinU())*.5f;
-			minV = tube.indicatorIcon.getMinU() + (tube.indicatorIcon.getMaxV() - tube.indicatorIcon.getMinV())*.5f;
+			maxU = tube.indicatorIcon.getInterpolatedU(5.f);
+			minV = tube.indicatorIcon.getInterpolatedV(5.f);
 			maxV = tube.indicatorIcon.getMaxV();
 		}
 		
@@ -1065,9 +1068,9 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		float min = 4.f/16.f;
 		float max = 12.f/16.f;
 		float minU = tube.straightIcon.getMinU();
-		float maxU = tube.straightIcon.getMinU() + (tube.straightIcon.getMaxU() - tube.straightIcon.getMinU()) * min;
-		float minV = tube.straightIcon.getMinV() + (tube.straightIcon.getMaxV() - tube.straightIcon.getMinV())* min;
-		float maxV = tube.straightIcon.getMinV() + (tube.straightIcon.getMaxV() - tube.straightIcon.getMinV()) * max;
+		float maxU = tube.straightIcon.getInterpolatedU(4.f);
+		float minV = tube.straightIcon.getInterpolatedV(4.f);
+		float maxV = tube.straightIcon.getInterpolatedV(12.f);
 		
 		
 		//Outsides
@@ -1084,9 +1087,9 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		Quad west_r = FemtocraftRenderUtils.makeEastFace(min, max, min, max, max - 3.f/16.f, tube.straightIcon, minU, maxU, minV, maxV);
 		
 		minU = tube.straightInsetIcon.getMinU();
-		maxU = tube.straightInsetIcon.getMinU() + (tube.straightInsetIcon.getMaxU() - tube.straightInsetIcon.getMinU()) * min;
-		minV = tube.straightInsetIcon.getMinV() + (tube.straightInsetIcon.getMaxV() - tube.straightInsetIcon.getMinV())* min;
-		maxV = tube.straightInsetIcon.getMinV() + (tube.straightInsetIcon.getMaxV() - tube.straightInsetIcon.getMinV()) * max;
+		maxU = tube.straightInsetIcon.getInterpolatedU(4.f);
+		minV = tube.straightInsetIcon.getInterpolatedV(4.f);
+		maxV = tube.straightInsetIcon.getInterpolatedV(12.f);
 		
 		if(!in)
 		{
@@ -1135,13 +1138,13 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		float min = 4.f/16.f;
 		float max = 12.f/16.f;
 		
-		float minU = tube.endIcon.getMinU() + (tube.endIcon.getMaxU() - tube.endIcon.getMinU())* min;
-		float maxU = tube.endIcon.getMinU() + (tube.endIcon.getMaxU() - tube.endIcon.getMinU())* max;
-		float minV = tube.endIcon.getMinV() + (tube.endIcon.getMaxV() - tube.endIcon.getMinV())* min;
-		float maxV = tube.endIcon.getMinV() + (tube.endIcon.getMaxV() - tube.endIcon.getMinV())* max;
+		float minU = tube.endIcon.getInterpolatedU(4.f);
+		float maxU = tube.endIcon.getInterpolatedU(12.f);
+		float minV = tube.endIcon.getInterpolatedV(4.f);
+		float maxV = tube.endIcon.getInterpolatedV(12.f);
 		
 		Quad end = FemtocraftRenderUtils.makeNorthFace(min, max, min, max, 4.f/16.f, tube.endIcon, minU, maxU, minV, maxV);
-		Quad inset = FemtocraftRenderUtils.makeNorthFace(min, max, min, max, 5.f/16.f, tube.endInsetIcon, minU, maxU, minV, maxV);
+		Quad inset = FemtocraftRenderUtils.makeNorthFace(min, max, min, max, 4.f/16.f, tube.endInsetIcon, minU, maxU, minV, maxV);
 		
 		ret.addQuad(end);
 		ret.addQuad(inset);

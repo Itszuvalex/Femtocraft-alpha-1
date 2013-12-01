@@ -25,30 +25,30 @@ public class Point {
 	public Point rotateOnXAxis(double rot, float yrotoffset, float zrotoffset) {
 		if(rot == 0) return this;
 		
-		float y = this.y;
-		float z = this.z;
-		this.y = (float) ((y - yrotoffset)*Math.cos(rot) - (z - zrotoffset)*Math.sin(rot)) + yrotoffset;
-		this.z = (float) ((y - yrotoffset)*Math.sin(rot) + (z - zrotoffset)*Math.cos(rot)) + zrotoffset;
+		float ym = this.y;
+		float zm = this.z;
+		this.y = (float) ((ym - yrotoffset)*Math.cos(rot) - (zm - zrotoffset)*Math.sin(rot)) + yrotoffset;
+		this.z = (float) ((ym - yrotoffset)*Math.sin(rot) + (zm - zrotoffset)*Math.cos(rot)) + zrotoffset;
 		return this;
 	}
 	
 	public Point rotateOnYAxis(double rot, float xrotoffset, float zrotoffset ) {
 		if(rot == 0) return this;
 		
-		float x = this.x;
-		float z = this.z;
-		this.x = (float) ((z - zrotoffset)*Math.cos(rot) - (x - xrotoffset)*Math.sin(rot)) + xrotoffset;
-		this.z = (float) ((z - zrotoffset)*Math.sin(rot) + (x - xrotoffset)*Math.cos(rot)) + zrotoffset;
+		float xm = this.x;
+		float zm = this.z;
+		this.z = (float) ((zm - zrotoffset)*Math.cos(rot) - (xm - xrotoffset)*Math.sin(rot)) + xrotoffset;
+		this.x = (float) ((zm - zrotoffset)*Math.sin(rot) + (xm - xrotoffset)*Math.cos(rot)) + zrotoffset;
 		return this;
 	}
 	
 	public Point rotateOnZAxis(double rot, float xrotoffset, float yrotoffset) {
 		if(rot == 0) return this;
 		
-		float x = this.x;
-		float y = this.y;
-		this.x =  (float) (((x - xrotoffset)*Math.cos(rot) - (y - yrotoffset)*Math.sin(rot)) + xrotoffset);
-		this.y = (float) (((x - xrotoffset)*Math.sin(rot) + (y - yrotoffset)*Math.cos(rot)) + yrotoffset);
+		float xm = this.x;
+		float ym = this.y;
+		this.x =  (float) (((xm - xrotoffset)*Math.cos(rot) - (ym - yrotoffset)*Math.sin(rot)) + xrotoffset);
+		this.y = (float) (((xm - xrotoffset)*Math.sin(rot) + (ym - yrotoffset)*Math.cos(rot)) + yrotoffset);
 		return this;
 	}
 	
