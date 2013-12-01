@@ -159,7 +159,7 @@ public class VacuumTube extends BlockContainer {
 			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
 			float par8, float par9) {
 		
-		if(par1World.isRemote) return true;
+		if(par1World.isRemote) return false;
 		
 		TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
 		if(tile != null)
@@ -169,7 +169,7 @@ public class VacuumTube extends BlockContainer {
 				VacuumTubeTile tube = (VacuumTubeTile)tile;
 				
 				((VacuumTubeTile) tile).searchForConnection();
-				return true;
+				return false;
 			}
 		}
 		

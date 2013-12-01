@@ -113,18 +113,9 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		if(!initialized)
 			initializeModels(tube);
 		
-		inWest.location = new Point(x,y,z);
-		inWest.draw();
-		
-		outNorth.location = new Point(x,y,z);
-		outNorth.draw();
-		
-		centerCurvedWestToNorth.location = new Point(x,y,z);
-		centerCurvedWestToNorth.draw();
-		
-//		renderIn(x,y,z,in,hasItem,isOverflowing);
-//		renderOut(x,y,z,out,hasItem);
-//		renderCenter(x,y,z,in,out,hasItem, hasInput, hasOutput);
+		renderIn(x,y,z,in,hasItem,isOverflowing);
+		renderOut(x,y,z,out,hasItem);
+		renderCenter(x,y,z,in,out,hasItem, hasInput, hasOutput);
 	}
 
 	private void renderIn(int x, int y, int z, ForgeDirection in,
@@ -1142,8 +1133,13 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		float minV = tube.endIcon.getInterpolatedV(4.f);
 		float maxV = tube.endIcon.getInterpolatedV(12.f);
 		
+		float insetMinU = tube.endInsetIcon.getInterpolatedU(4.f);
+		float insetMaxU = tube.endInsetIcon.getInterpolatedU(12.f);
+		float insetMinV = tube.endInsetIcon.getInterpolatedV(4.f);
+		float insetMaxV = tube.endInsetIcon.getInterpolatedV(12.f);
+		
 		Quad end = FemtocraftRenderUtils.makeNorthFace(min, max, min, max, 4.f/16.f, tube.endIcon, minU, maxU, minV, maxV);
-		Quad inset = FemtocraftRenderUtils.makeNorthFace(min, max, min, max, 4.f/16.f, tube.endInsetIcon, minU, maxU, minV, maxV);
+		Quad inset = FemtocraftRenderUtils.makeNorthFace(min, max, min, max, 4.f/16.f, tube.endInsetIcon, insetMinU, insetMaxU, insetMinV, insetMaxV);
 		
 		ret.addQuad(end);
 		ret.addQuad(inset);

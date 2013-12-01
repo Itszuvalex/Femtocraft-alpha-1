@@ -113,12 +113,13 @@ public class VacuumTubeTile extends TileEntity {
 	
 	public boolean searchForInput()
 	{
+		if(lastInputOrientation >= 6) lastInputOrientation = 0;
 		int begin = lastInputOrientation;
 		
 		do
 		{
+			if(lastInputOrientation >= 6) lastInputOrientation = 0;
 			if(checkOutput(lastInputOrientation++)) return true;
-			if(lastInputOrientation == 6) lastInputOrientation = 0;
 			
 		}while(begin != lastInputOrientation);
 		
@@ -127,12 +128,13 @@ public class VacuumTubeTile extends TileEntity {
 	
 	public boolean searchForOutput()
 	{
+		if(lastOutputOrientation >= 6) lastOutputOrientation = 0;
 		int begin = lastOutputOrientation;
 		
 		do
 		{
+			if(lastOutputOrientation >= 6) lastOutputOrientation = 0;
 			if(checkOutput(lastOutputOrientation++)) return true;
-			if(lastOutputOrientation == 6) lastOutputOrientation = 0;
 			
 		}while(begin != lastOutputOrientation);
 		
@@ -253,13 +255,13 @@ public class VacuumTubeTile extends TileEntity {
 	{
 		lastOutputOrientation+=1;
 		removeLastOutput();
-		if(lastOutputOrientation == 6)
+		if(lastOutputOrientation >= 6)
 		{
 			lastOutputOrientation = 0;
 			
 			lastInputOrientation+=1;
 			removeLastInput();
-			if(lastInputOrientation == 6)
+			if(lastInputOrientation >= 6)
 			{
 				lastInputOrientation = 0;
 			}
