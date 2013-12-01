@@ -72,7 +72,7 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		
 		tessellator.startDrawingQuads();
-		renderTube(tube, 0, 0, 0, new boolean[]{false, false, false, false}, false, ForgeDirection.EAST, ForgeDirection.WEST, true, true);
+		renderTube(tube, 0, 0, 0, new boolean[]{false, false, false, false}, false, ForgeDirection.NORTH, ForgeDirection.SOUTH, true, true);
 		tessellator.draw();
 		
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);

@@ -54,7 +54,7 @@ public class FemtocraftPacketHandler  implements IPacketHandler {
 			if(tile == null) return;		
 			if(!(tile instanceof VacuumTubeTile)) return;
 			VacuumTubeTile tube = (VacuumTubeTile)tile;
-			tube.parseIteMMask(items);
+			tube.parseItemMask(items);
 			tube.parseConnectionMask(connections);
 			cp.worldObj.markBlockForRenderUpdate(x, y, z);
    		}

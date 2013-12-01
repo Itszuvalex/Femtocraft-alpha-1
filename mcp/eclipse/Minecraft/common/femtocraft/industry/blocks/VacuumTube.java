@@ -11,6 +11,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -37,7 +38,6 @@ public class VacuumTube extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		// TODO Auto-generated method stub
 		return new VacuumTubeTile();
 	}
 
@@ -60,7 +60,8 @@ public class VacuumTube extends BlockContainer {
 			{
 				VacuumTubeTile tube = (VacuumTubeTile)tile;
 				
-				((VacuumTubeTile) tile).searchForMissingConnection();
+				tube.validateConnections();
+				tube.searchForMissingConnection();
 			}
 		}
 		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
@@ -76,7 +77,7 @@ public class VacuumTube extends BlockContainer {
 			{
 				VacuumTubeTile tube = (VacuumTubeTile)tile;
 				
-				((VacuumTubeTile) tile).searchForMissingConnection();
+				tube.searchForMissingConnection();
 			}
 		}
 		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLivingBase,
@@ -109,7 +110,8 @@ public class VacuumTube extends BlockContainer {
 			{
 				VacuumTubeTile tube = (VacuumTubeTile)tile;
 				
-				((VacuumTubeTile) tile).searchForMissingConnection();
+				tube.validateConnections();
+				tube.searchForMissingConnection();
 			}
 		}
 		super.onNeighborTileChange(world, x, y, z, tileX, tileY, tileZ);
@@ -127,7 +129,7 @@ public class VacuumTube extends BlockContainer {
 			{
 				VacuumTubeTile tube = (VacuumTubeTile)tile;
 				
-				((VacuumTubeTile) tile).onBlockBreak();
+				tube.onBlockBreak();
 			}
 		}
 		
@@ -159,7 +161,7 @@ public class VacuumTube extends BlockContainer {
 			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
 			float par8, float par9) {
 		
-		if(par1World.isRemote) return false;
+		if(par1World.isRemote) return true;
 		
 		TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
 		if(tile != null)
@@ -168,12 +170,13 @@ public class VacuumTube extends BlockContainer {
 			{
 				VacuumTubeTile tube = (VacuumTubeTile)tile;
 				
-				((VacuumTubeTile) tile).searchForConnection();
-				return false;
+				tube.searchForConnection();
+				return true;
 			}
 		}
 		
 		par1World.markBlockForUpdate(par2, par3, par4);
+		par1World.markBlockForRenderUpdate(par2, par3, par4);
 		
 		return false;
 	}
@@ -181,7 +184,14 @@ public class VacuumTube extends BlockContainer {
 	@Override
 	public void onEntityCollidedWithBlock(World par1World, int par2, int par3,
 			int par4, Entity par5Entity) {
-		super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
+		if(par5Entity instanceof EntityItem)
+		{
+			TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
+			if(tile == null) return;
+			if(!(tile instanceof VacuumTubeTile)) return;
+			VacuumTubeTile tube = (VacuumTubeTile)tile;
+			tube.OnItemEntityCollision((EntityItem)par5Entity);
+		}
 	}
 
 	@Override
