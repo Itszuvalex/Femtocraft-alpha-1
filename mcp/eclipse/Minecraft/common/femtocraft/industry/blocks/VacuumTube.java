@@ -133,6 +133,11 @@ public class VacuumTube extends BlockContainer {
 		super.breakBlock(par1World, par2, par3, par4, par5, par6);
 	}
 
+	public void setBlockBounds() {
+		this.minX = this.minY = this.minZ = 4.0D/16.0D;
+		this.maxX = this.maxY = this.maxZ = 12.0D/16.0D;
+	}
+	
 	@Override
 	public boolean renderAsNormalBlock() {
 		return false;
@@ -153,6 +158,8 @@ public class VacuumTube extends BlockContainer {
 			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
 			float par8, float par9) {
 		
+		if(par1World.isRemote) return true;
+		
 		TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
 		if(tile != null)
 		{
@@ -164,6 +171,8 @@ public class VacuumTube extends BlockContainer {
 				return true;
 			}
 		}
+		
+		par1World.markBlockForUpdate(par2, par3, par4);
 		
 		return false;
 	}

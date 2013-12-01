@@ -11,6 +11,7 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
+import femtocraft.industry.TileEntity.VacuumTubeTile;
 import femtocraft.power.TileEntity.FemtopowerMicroCubeTile;
 
 public class FemtocraftPacketHandler  implements IPacketHandler {
@@ -28,9 +29,43 @@ public class FemtocraftPacketHandler  implements IPacketHandler {
        	{
        		handleMicroCube(inputStream, playerEntity);
        	}
+       	else if(packet.channel.equalsIgnoreCase(VacuumTubeTile.packetChannel))
+       	{
+       		handleVacuumTube(inputStream, playerEntity);
+       	}
     }
     
-    private void handleMicroCube(DataInputStream stream, Player player)
+    private void handleVacuumTube(DataInputStream stream,
+			Player player) {
+    	try
+   		{
+   			int x = stream.readInt();
+   			int y = stream.readInt();
+   			int z = stream.readInt();
+   			
+   			byte items = stream.readByte();
+   			byte connections = stream.readByte();
+   			
+   			if(!(player instanceof EntityClientPlayerMP)) return;
+   			
+			EntityClientPlayerMP cp = (EntityClientPlayerMP)player;
+			
+			TileEntity tile = cp.worldObj.getBlockTileEntity(x, y, z);
+			if(tile == null) return;		
+			if(!(tile instanceof VacuumTubeTile)) return;
+			VacuumTubeTile tube = (VacuumTubeTile)tile;
+			tube.parseIteMMask(items);
+			tube.parseConnectionMask(connections);
+			cp.worldObj.markBlockForRenderUpdate(x, y, z);
+   		}
+   		catch(IOException e)
+   		{
+   			e.printStackTrace();
+   			return;
+   		}	
+	}
+
+	private void handleMicroCube(DataInputStream stream, Player player)
     {
    		try
    		{
