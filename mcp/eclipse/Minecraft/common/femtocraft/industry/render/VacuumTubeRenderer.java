@@ -113,6 +113,21 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		centerStraightSouthToNorth.location = new Point(x,y,z);
 		centerStraightSouthToNorth.draw();
 		
+//		centerStraightNorthToSouth.location = new Point(x,y,z);
+//		centerStraightNorthToSouth.draw();
+//		
+//		centerStraightUpToDown.location = new Point(x,y,z);
+//		centerStraightUpToDown.draw();
+//		
+//		centerStraightDownToUp.location = new Point(x,y,z);
+//		centerStraightDownToUp.draw();
+//		
+//		centerStraightWestToEast.location = new Point(x,y,z);
+//		centerStraightWestToEast.draw();
+//		
+//		centerStraightEastToWest.location = new Point(x,y,z);
+//		centerStraightEastToWest.draw();
+		
 //		renderIn(x,y,z,in,hasItem,isOverflowing);
 //		renderOut(x,y,z,out,hasItem);
 //		renderCenter(x,y,z,in,out,hasItem, hasInput, hasOutput);
@@ -857,7 +872,7 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		Model ret = new Model(new Point(0,0,0), new Point(.5f,.5f,.5f));
 		
 		float min = 4.f/16.f;
-		float max = 1.2f/16.f;
+		float max = 12.0f/16.f;
 		
 		float minU = tube.straightIcon.getMinU() + (tube.straightIcon.getMaxU() - tube.straightIcon.getMinU())*min;
 		float maxU = tube.straightIcon.getMinU() + (tube.straightIcon.getMaxU() - tube.straightIcon.getMinU())*max;
