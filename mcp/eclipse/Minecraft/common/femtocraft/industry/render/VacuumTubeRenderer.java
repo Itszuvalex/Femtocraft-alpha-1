@@ -110,9 +110,12 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		if(!initialized)
 			initializeModels(tube);
 		
-		renderIn(x,y,z,in,hasItem,isOverflowing);
-		renderOut(x,y,z,out,hasItem);
-		renderCenter(x,y,z,in,out,hasItem, hasInput, hasOutput);
+		centerStraightSouthToNorth.location = new Point(x,y,z);
+		centerStraightSouthToNorth.draw();
+		
+//		renderIn(x,y,z,in,hasItem,isOverflowing);
+//		renderOut(x,y,z,out,hasItem);
+//		renderCenter(x,y,z,in,out,hasItem, hasInput, hasOutput);
 	}
 
 	private void renderIn(int x, int y, int z, ForgeDirection in,

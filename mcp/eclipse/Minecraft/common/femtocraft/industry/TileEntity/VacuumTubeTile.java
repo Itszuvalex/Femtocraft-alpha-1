@@ -43,14 +43,8 @@ public class VacuumTubeTile extends TileEntity {
 	
 	public ItemStack queuedItem = null;
 	
-	private enum SearchMode
-	{
-		INPUT,
-		OUTPUT
-	};
-	
-	private SearchMode lastMode = SearchMode.INPUT;
-	private int lastOrientation = 0;
+	private int lastOutputOrientation = 0;
+	private int lastInputOrientation = 0;
 	
 	
 	public VacuumTubeTile() {
@@ -119,51 +113,48 @@ public class VacuumTubeTile extends TileEntity {
 	
 	public boolean searchForInput()
 	{
-		lastMode = SearchMode.INPUT;
-		lastOrientation = 0;
-		return searchForConnection();
+		int begin = lastInputOrientation;
+		
+		do
+		{
+			if(checkOutput(lastInputOrientation++)) return true;
+			if(lastInputOrientation == 6) lastInputOrientation = 0;
+			
+		}while(begin != lastInputOrientation);
+		
+		return false;
 	}
 	
 	public boolean searchForOutput()
 	{
-		lastMode = SearchMode.OUTPUT;
-		lastOrientation = 0;
-		return searchForConnection();
+		int begin = lastOutputOrientation;
+		
+		do
+		{
+			if(checkOutput(lastOutputOrientation++)) return true;
+			if(lastOutputOrientation == 6) lastOutputOrientation = 0;
+			
+		}while(begin != lastOutputOrientation);
+		
+		return false;
 	}
 	
 	public boolean searchForConnection()
 	{
-		int orient = lastOrientation;
-		SearchMode mode = lastMode;
+		int beginInputOrient = lastInputOrientation;
+		int beginOutputOrient = lastOutputOrientation;
 		
 		//Do a full loop around.  If no other settings are available, stop once there.
 		do
 		{
 			cycleSearch();
 			
-			switch(lastMode)
-			{
-			case INPUT:
-			{
-				if(checkInput(lastOrientation)) return true;
-				break;
-			}
-			case OUTPUT:
-			{
-				if(checkOutput(lastOrientation)) return true;
-				break;
-			}
-			//SHOULD NEVER HAPPEN
-			default:
-				inputSidedInv = null;
-				inputTube = null;
-				inputDir = ForgeDirection.UNKNOWN;
-				outputSidedInv = null;
-				outputTube = null;
-				outputDir = ForgeDirection.UNKNOWN;
-				break;
-			}
-		} while (orient != lastOrientation && mode != lastMode);
+			boolean input = checkInput(lastInputOrientation);
+			boolean output = checkOutput(lastOutputOrientation);
+			
+			if(input && output) return true;
+			
+		} while (beginInputOrient != lastInputOrientation && beginOutputOrient != lastOutputOrientation);
 		
 		return false;
 	}
@@ -260,25 +251,19 @@ public class VacuumTubeTile extends TileEntity {
 	
 	private void cycleSearch()
 	{
-		boolean inputSearch = lastMode == SearchMode.INPUT;
-		if(inputSearch)
+		lastOutputOrientation+=1;
+		removeLastOutput();
+		if(lastOutputOrientation == 6)
 		{
+			lastOutputOrientation = 0;
+			
+			lastInputOrientation+=1;
 			removeLastInput();
+			if(lastInputOrientation == 6)
+			{
+				lastInputOrientation = 0;
+			}
 		}
-		if(!inputSearch)
-		{
-			removeLastOutput();
-		}
-		
-		lastOrientation +=1;
-		if(lastOrientation == 6) 
-		{	
-			if(inputSearch) lastMode = SearchMode.OUTPUT;
-			else lastMode = SearchMode.INPUT;
-			lastOrientation = 0;
-		}
-		
-
 	}
 	
 	private void removeLastInput()

@@ -32,6 +32,7 @@ public class VacuumTube extends BlockContainer {
         setHardness(3.5f);
         setStepSound(Block.soundMetalFootstep);
         setCreativeTab(Femtocraft.femtocraftTab);
+        setBlockBounds();
 	}
 
 	@Override
