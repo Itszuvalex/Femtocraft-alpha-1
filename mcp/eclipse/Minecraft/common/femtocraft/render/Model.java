@@ -306,5 +306,24 @@ public class Model {
 		
 		tes.addTranslation(-location.x, -location.y, -location.z);
 	}
+	
+	public Model rotatedToDirection(ForgeDirection dir)
+	{
+		switch(dir)
+		{
+		case SOUTH:
+			return rotatedOnYAxis(Math.PI);
+		case EAST:
+			return rotatedOnYAxis(Math.PI/2.d);
+		case WEST:
+			return rotatedOnYAxis(-Math.PI/2.d);
+		case UP:
+			return rotatedOnXAxis(Math.PI/2.d);
+		case DOWN:
+			return rotatedOnXAxis(-Math.PI/2.d);
+		default:
+			return this.copy();
+		}
+	}
 
 }

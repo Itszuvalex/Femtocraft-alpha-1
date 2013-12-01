@@ -27,7 +27,7 @@ public class VacuumTubeTile extends TileEntity {
 	//Player has no need to know WHAT is in the pipes, anyways
 	public static final String packetChannel = Femtocraft.ID + ".VTube";
 	
-	private boolean[] hasItem = new boolean[4];
+	public boolean[] hasItem = new boolean[4];
 	
 	private ItemStack[] items = new ItemStack[4];
 
@@ -72,6 +72,24 @@ public class VacuumTubeTile extends TileEntity {
 	public boolean missingOutput()
 	{
 		return (outputSidedInv == null) && (outputTube == null) && (outputInv == null);
+	}
+	
+	public boolean isOverflowing()
+	{
+		return outputTube != null &&
+				outputTube.queuedItem != null &&
+				hasItem[0] && hasItem[1] && hasItem[2] && hasItem[3] && 
+				queuedItem != null;
+	}
+	
+	public ForgeDirection getInputDir()
+	{
+		return inputDir;
+	}
+	
+	public ForgeDirection getOutputDir()
+	{
+		return outputDir;
 	}
 	
 	public void onBlockBreak()
