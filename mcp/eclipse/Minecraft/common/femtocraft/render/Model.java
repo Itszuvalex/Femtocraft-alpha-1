@@ -314,7 +314,7 @@ public class Model {
 		case SOUTH:
 			return rotatedOnXAxis(Math.PI);
 		case EAST:
-			return rotatedOnYAxis(Math.PI);
+			return rotatedOnYAxis(-Math.PI/2.d);
 		case WEST:
 			return rotatedOnYAxis(Math.PI/2.d);
 		case UP:
