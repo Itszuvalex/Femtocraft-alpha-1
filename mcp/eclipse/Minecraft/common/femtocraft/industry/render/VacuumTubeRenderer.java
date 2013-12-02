@@ -72,7 +72,8 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		
 		tessellator.startDrawingQuads();
-		renderTube(tube, 0, 0, 0, new boolean[]{false, false, false, false}, false, ForgeDirection.NORTH, ForgeDirection.SOUTH, true, true);
+		tessellator.setColorOpaque_F(1, 1, 1);
+		renderTube(tube, 0, 0, 0, new boolean[]{false, false, false, false}, false, ForgeDirection.NORTH, ForgeDirection.SOUTH, false, false);
 		tessellator.draw();
 		
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
@@ -113,134 +114,112 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		if(!initialized)
 			initializeModels(tube);
 		
-		renderIn(x,y,z,in,hasItem,isOverflowing);
-		renderOut(x,y,z,out,hasItem);
+		renderIn(x,y,z,in,hasItem, hasInput, isOverflowing);
+		renderOut(x,y,z,out,hasItem, hasOutput);
 		renderCenter(x,y,z,in,out,hasItem, hasInput, hasOutput);
 	}
 
 	private void renderIn(int x, int y, int z, ForgeDirection in,
-			boolean[] hasItem, boolean isOverflowing) {
+			boolean[] hasItem, boolean hasInput, boolean isOverflowing) {
+		Model end = null;
+		Model indicator = null;
 		switch(in)
 		{
 		case NORTH:
-			inNorth.location = new Point(x,y,z);
-			inNorth.draw();
+			end = inNorth;
 			
 			if(isOverflowing)
 			{
-				inNorthFarOverflow.location = new Point(x,y,z);
-				inNorthFarOverflow.draw();
+				indicator = inNorthFarOverflow;
 			}
 			else if(hasItem[0])
 			{
-				inNorthFarOn.location = new Point(x,y,z);
-				inNorthFarOn.draw();
+				indicator = inNorthFarOn;
 			}
 			else
 			{
-				inNorthFarOff.location = new Point(x,y,z);
-				inNorthFarOff.draw();
+				indicator = inNorthFarOff;
 			}
 			
 			break;
 		case SOUTH:
-			inSouth.location = new Point(x,y,z);
-			inSouth.draw();
+			end = inSouth;
 			
 			if(isOverflowing)
 			{
-				inSouthFarOverflow.location = new Point(x,y,z);
-				inSouthFarOverflow.draw();
+				indicator = inSouthFarOverflow;
 			}
 			else if(hasItem[0])
 			{
-				inSouthFarOn.location = new Point(x,y,z);
-				inSouthFarOn.draw();
+				indicator = inSouthFarOn;
 			}
 			else
 			{
-				inSouthFarOff.location = new Point(x,y,z);
-				inSouthFarOff.draw();
+				indicator = inSouthFarOff;
 			}
 			break;
 		case EAST:
-			inEast.location = new Point(x,y,z);
-			inEast.draw();
+			end = inEast;
 			
 			if(isOverflowing)
 			{
-				inEastFarOverflow.location = new Point(x,y,z);
-				inEastFarOverflow.draw();
+				indicator = inEastFarOverflow;
 			}
 			else if(hasItem[0])
 			{
-				inEastFarOn.location = new Point(x,y,z);
-				inEastFarOn.draw();
+				indicator = inEastFarOn;
 			}
 			else
 			{
-				inEastFarOff.location = new Point(x,y,z);
-				inEastFarOff.draw();
+				indicator = inEastFarOff;
 			}
 			break;
 		case WEST:
-			inWest.location = new Point(x,y,z);
-			inWest.draw();
+			end = inWest;
 			
 			if(isOverflowing)
 			{
-				inWestFarOverflow.location = new Point(x,y,z);
-				inWestFarOverflow.draw();
+				indicator = inWestFarOverflow;
 			}
 			else if(hasItem[0])
 			{
-				inWestFarOn.location = new Point(x,y,z);
-				inWestFarOn.draw();
+				indicator = inWestFarOn;
 			}
 			else
 			{
-				inWestFarOff.location = new Point(x,y,z);
-				inWestFarOff.draw();
+				indicator = inWestFarOff;
 			}
 			break;
 		case UP:
-			inUp.location = new Point(x,y,z);
-			inUp.draw();
+			end = inUp;
 
 			if(isOverflowing)
 			{
-				inUpFarOverflow.location = new Point(x,y,z);
-				inUpFarOverflow.draw();
+				indicator = inUpFarOverflow;
 			}
 			else if(hasItem[0])
 			{
-				inUpFarOn.location = new Point(x,y,z);
-				inUpFarOn.draw();
+				indicator = inUpFarOn;
 			}
 			else
 			{
-				inUpFarOff.location = new Point(x,y,z);
-				inUpFarOff.draw();
+				indicator = inUpFarOff;
 			}
 			break;
 		case DOWN:
-			inDown.location = new Point(x,y,z);
-			inDown.draw();
+			end = inDown;
 
 			if(isOverflowing)
 			{
-				inDownFarOverflow.location = new Point(x,y,z);
-				inDownFarOverflow.draw();
+				indicator = inDownFarOverflow;
 			}
 			else if(hasItem[0])
 			{
-				inDownFarOn.location = new Point(x,y,z);
-				inDownFarOn.draw();
+				indicator = inDownFarOn;
 			}
 			else
 			{
-				inDownFarOff.location = new Point(x,y,z);
-				inDownFarOff.draw();
+				indicator = inDownFarOff;
 			}
 			break;
 		case UNKNOWN:
@@ -248,101 +227,113 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		default:
 			break;
 		}
+		
+		if(hasInput)
+		{
+			if(end != null)
+			{
+				end.location = new Point(x,y,z);
+				end.draw();
+			}
+			if(indicator != null)
+			{
+				indicator.location = new Point(x,y,z);
+				indicator.draw();
+			}
+		}
 	}
 
 	private void renderOut(int x, int y, int z, ForgeDirection out,
-			boolean[] hasItem) {
+			boolean[] hasItem, boolean hasOutput) {
+		Model end = null;
+		Model indicator = null;
 		switch(out)
 		{
 		case NORTH:
-			outNorth.location = new Point(x,y,z);
-			outNorth.draw();
+			end = outNorth;
 
 			if(hasItem[3])
 			{
-				outNorthFarOn.location = new Point(x,y,z);
-				outNorthFarOn.draw();
+				indicator = outNorthFarOn;
 			}
 			else {
-				outNorthFarOff.location = new Point(x,y,z);
-				outNorthFarOff.draw();
+				indicator = outNorthFarOff;
 			}
 			
 			break;
 		case SOUTH:
-			outSouth.location = new Point(x,y,z);
-			outSouth.draw();
+			end = outSouth;
 
 			if(hasItem[3])
 			{
-				outSouthFarOn.location = new Point(x,y,z);
-				outSouthFarOn.draw();
+				indicator = outSouthFarOn;
 			}
 			else {
-				outSouthFarOff.location = new Point(x,y,z);
-				outSouthFarOff.draw();
+				indicator = outSouthFarOff;
 			}
 			break;
 		case EAST:
-			outEast.location = new Point(x,y,z);
-			outEast.draw();
+			end = outEast;
 			
 			if(hasItem[3])
 			{
-				outEastFarOn.location = new Point(x,y,z);
-				outEastFarOn.draw();
+				indicator = outEastFarOn;
 			}
 			else {
-				outEastFarOff.location = new Point(x,y,z);
-				outEastFarOff.draw();
+				indicator = outEastFarOff;
 			}
 			break;
 		case WEST:
-			outWest.location = new Point(x,y,z);
-			outWest.draw();
+			end = outWest;
 
 			if(hasItem[3])
 			{
-				outWestFarOn.location = new Point(x,y,z);
-				outWestFarOn.draw();
+				indicator = outWestFarOn;
 			}
 			else {
-				outWestFarOff.location = new Point(x,y,z);
-				outWestFarOff.draw();
+				indicator = outWestFarOff;
 			}
 			break;
 		case UP:
-			outUp.location = new Point(x,y,z);
-			outUp.draw();
+			end = outUp;
 
 			if(hasItem[3])
 			{
-				outUpFarOn.location = new Point(x,y,z);
-				outUpFarOn.draw();
+				indicator = outUpFarOn;
 			}
 			else {
-				outUpFarOff.location = new Point(x,y,z);
-				outUpFarOff.draw();
+				indicator = outUpFarOff;
 			}
 			break;
 		case DOWN:
-			outDown.location = new Point(x,y,z);
-			outDown.draw();
+			end = outDown;
 
 			if(hasItem[3])
 			{
-				outDownFarOn.location = new Point(x,y,z);
-				outDownFarOn.draw();
+				indicator = outDownFarOn;
 			}
 			else {
-				outDownFarOff.location = new Point(x,y,z);
-				outDownFarOff.draw();
+				indicator = outDownFarOff;
 			}
 			break;
 		case UNKNOWN:
 			break;
 		default:
 			break;
+		}
+		
+		if(hasOutput)
+		{
+			if(end != null)
+			{
+				end.location = new Point(x,y,z);
+				end.draw();
+			}
+			if(indicator != null)
+			{
+				indicator.location = new Point(x,y,z);
+				indicator.draw();
+			}
 		}
 	}
 	
@@ -756,29 +747,29 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		centerCurvedWestToDown = centerCurvedWestToNorth.rotatedOnXAxis(-Math.PI/2.d);
 		
 		centerCurvedEastToNorth = centerCurvedWestToNorth.rotatedOnZAxis(Math.PI);
-		centerCurvedEastToSouth = centerCurvedEastToNorth.rotatedOnXAxis(Math.PI);
-		centerCurvedEastToUp = centerCurvedEastToNorth.rotatedOnXAxis(-Math.PI/2.d);
-		centerCurvedEastToDown = centerCurvedEastToNorth.rotatedOnXAxis(Math.PI/2.d);
+		centerCurvedEastToSouth = centerCurvedWestToNorth.rotatedOnZAxis(Math.PI).rotatedOnXAxis(Math.PI);
+		centerCurvedEastToUp = centerCurvedWestToNorth.rotatedOnZAxis(Math.PI).rotatedOnXAxis(Math.PI/2.d);
+		centerCurvedEastToDown = centerCurvedWestToNorth.rotatedOnZAxis(Math.PI).rotatedOnXAxis(-Math.PI/2.d);
 		
-		centerCurvedNorthToEast = centerCurvedWestToNorth.rotatedOnYAxis(Math.PI/2.d);
-		centerCurvedNorthToWest = centerCurvedNorthToEast.rotatedOnZAxis(Math.PI);
-		centerCurvedNorthToUp = centerCurvedNorthToEast.rotatedOnZAxis(Math.PI/2.d);
-		centerCurvedNorthToDown = centerCurvedNorthToEast.rotatedOnZAxis(-Math.PI/2.d);
+		centerCurvedNorthToEast = centerCurvedWestToNorth.rotatedOnYAxis(-Math.PI/2.d);
+		centerCurvedNorthToWest = centerCurvedWestToNorth.rotatedOnYAxis(Math.PI/2.d).rotateOnXAxis(Math.PI);
+		centerCurvedNorthToUp = centerCurvedWestToNorth.rotatedOnYAxis(-Math.PI/2.d).rotatedOnZAxis(Math.PI/2.d);
+		centerCurvedNorthToDown = centerCurvedWestToNorth.rotatedOnYAxis(-Math.PI/2.d).rotatedOnZAxis(-Math.PI/2.d);
 		
-		centerCurvedSouthToEast = centerCurvedEastToNorth.rotatedOnYAxis(Math.PI/2.d);
-		centerCurvedSouthToWest = centerCurvedSouthToEast.rotatedOnZAxis(Math.PI);
-		centerCurvedSouthToUp = centerCurvedSouthToEast.rotatedOnZAxis(Math.PI/2.d);
-		centerCurvedSouthToDown = centerCurvedSouthToEast.rotatedOnZAxis(-Math.PI/2.d);
+		centerCurvedSouthToEast = centerCurvedWestToNorth.rotatedOnZAxis(Math.PI).rotatedOnYAxis(-Math.PI/2.d);
+		centerCurvedSouthToWest = centerCurvedWestToNorth.rotatedOnYAxis(Math.PI/2.d);
+		centerCurvedSouthToUp = centerCurvedWestToNorth.rotatedOnYAxis(Math.PI/2.d).rotatedOnZAxis(-Math.PI/2.d);
+		centerCurvedSouthToDown = centerCurvedWestToNorth.rotatedOnYAxis(Math.PI/2.d).rotatedOnZAxis(Math.PI/2.d);
 		
-		centerCurvedUpToNorth = centerCurvedWestToNorth.rotatedOnZAxis(Math.PI/2.d);
-		centerCurvedUpToSouth = centerCurvedUpToNorth.rotatedOnYAxis(Math.PI);
-		centerCurvedUpToEast = centerCurvedUpToNorth.rotatedOnYAxis(Math.PI/2.d);
-		centerCurvedUpToWest = centerCurvedUpToNorth.rotatedOnYAxis(-Math.PI/2.d);
+		centerCurvedUpToNorth = centerCurvedWestToNorth.rotatedOnZAxis(-Math.PI/2.d);
+		centerCurvedUpToSouth = centerCurvedWestToNorth.rotatedOnZAxis(Math.PI/2.d).rotatedOnXAxis(Math.PI);
+		centerCurvedUpToEast = centerCurvedWestToNorth.rotatedOnZAxis(-Math.PI/2.d).rotatedOnYAxis(-Math.PI/2.d);
+		centerCurvedUpToWest = centerCurvedWestToNorth.rotatedOnZAxis(-Math.PI/2.d).rotatedOnYAxis(Math.PI/2.d);
 		
-		centerCurvedDownToNorth = centerCurvedWestToNorth.rotatedOnZAxis(-Math.PI/2.d);
-		centerCurvedDownToSouth= centerCurvedDownToNorth.rotatedOnYAxis(Math.PI);
-		centerCurvedDownToEast = centerCurvedDownToNorth.rotatedOnYAxis(Math.PI/2.d);
-		centerCurvedDownToWest = centerCurvedDownToNorth.rotatedOnYAxis(-Math.PI/2.d);
+		centerCurvedDownToNorth = centerCurvedWestToNorth.rotatedOnZAxis(Math.PI/2.d);
+		centerCurvedDownToSouth= centerCurvedWestToNorth.rotatedOnZAxis(Math.PI/2.d).rotatedOnYAxis(Math.PI);
+		centerCurvedDownToEast = centerCurvedWestToNorth.rotatedOnZAxis(Math.PI/2.d).rotatedOnYAxis(-Math.PI/2.d);
+		centerCurvedDownToWest = centerCurvedWestToNorth.rotatedOnZAxis(Math.PI/2.d).rotatedOnYAxis(Math.PI/2.d);
 	}
 	
 	private Model createCurvedCenter(VacuumTube tube)

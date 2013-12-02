@@ -28,7 +28,7 @@ public class Model {
 
 	public Model copy()
 	{
-		Model ret = new Model(center.copy(), location.copy());
+		Model ret = new Model(location.copy(), center.copy());
 		for(Quad quad : faces)
 		{
 			ret.addQuad(quad.copy());

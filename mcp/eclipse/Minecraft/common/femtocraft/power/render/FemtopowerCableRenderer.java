@@ -56,6 +56,7 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		
 		tessellator.startDrawingQuads();
+		tessellator.setColorOpaque_F(1, 1, 1);
 		renderCable(cable, 0, 0, 0, renderer, new boolean[]{false, false, true, true, false, false});
 		tessellator.draw();
 		

@@ -33,6 +33,7 @@ public class FemtopowerMicroCubeRenderer implements ISimpleBlockRenderingHandler
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		
 		tessellator.startDrawingQuads();
+		tessellator.setColorOpaque_F(1, 1, 1);
 		renderCube(cube, 0, 0, 0, renderer, new boolean[]{false, false, false, false, false, false});
 		tessellator.draw();
 		
