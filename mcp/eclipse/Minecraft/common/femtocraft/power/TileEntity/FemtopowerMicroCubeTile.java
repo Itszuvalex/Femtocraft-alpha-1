@@ -4,27 +4,16 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.util.Arrays;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.PacketDispatcher;
-
-import femtocraft.Femtocraft;
-import femtocraft.FemtocraftPacketHandler;
-import femtocraft.FemtocraftUtils;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.ForgeDirection;
+import femtocraft.Femtocraft;
+import femtocraft.FemtocraftUtils;
 
 public class FemtopowerMicroCubeTile extends FemtopowerTile {
 	public boolean[] outputs;
-	public static final String packetChannel = Femtocraft.ID + ".MCube";
+	static final public String packetChannel = Femtocraft.ID + ".MCube";
 	
 	public FemtopowerMicroCubeTile() {
 		super();

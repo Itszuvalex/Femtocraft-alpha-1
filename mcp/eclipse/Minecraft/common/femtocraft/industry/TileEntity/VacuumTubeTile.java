@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -17,17 +16,15 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
-import femtocraft.render.Point;
 
 public class VacuumTubeTile extends TileEntity {
 	//hasItem array for client-side rendering only
 	//Server will update this array and this alone to save bytes
 	//Player has no need to know WHAT is in the pipes, anyways
-	public static final String packetChannel = Femtocraft.ID + ".VTube";
+	static final public String packetChannel = Femtocraft.ID + ".VTube";
 	
 	public boolean[] hasItem = new boolean[4];
 	
