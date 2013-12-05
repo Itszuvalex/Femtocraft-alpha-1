@@ -755,20 +755,23 @@ public class VacuumTubeTile extends TileEntity {
 	public byte generateConnectionMask()
 	{
 		byte output = 0;
-		output += FemtocraftUtils.indexOfForgeDirection(inputDir);
-		output += FemtocraftUtils.indexOfForgeDirection(outputDir) << 4;
+		output += (FemtocraftUtils.indexOfForgeDirection(inputDir) & 7);
+		output += missingInput() ? 0 : 1 << 3;
+		output += (FemtocraftUtils.indexOfForgeDirection(outputDir) & 7) << 4;
+		output += missingOutput() ? 0 : 1 << 7;
 		return output;
 	}
 	
 	public void parseConnectionMask(byte mask)
 	{
-		byte temp = mask;
-		int input = mask & 15;
-		int output = (temp >> 4) & 15;
+		int input = mask & 7;
+		int output = (mask >> 4) & 7;
 		inputDir = ForgeDirection.getOrientation(input);
 		outputDir = ForgeDirection.getOrientation(output);
-		checkInput(input);
-		checkOutput(output);
+		boolean hasInput = ((mask >> 3) & 1) == 1 ? true : false;
+		boolean hasOutput = ((mask >> 7) & 1) == 1 ? true : false;
+		if(hasInput) checkInput(input);
+		if(hasOutput) checkOutput(output);
 	}
 	
 	public byte generateItemMask()
