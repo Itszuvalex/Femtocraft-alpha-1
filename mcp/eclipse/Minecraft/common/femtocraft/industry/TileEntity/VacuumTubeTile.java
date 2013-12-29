@@ -48,6 +48,9 @@ public class VacuumTubeTile extends TileEntity {
 	private boolean overflowing = false;
 	private boolean canFillInv = true;
 	
+	private boolean needsCheckInput = false;
+	private boolean needsCheckOutput = false;
+	
 	public VacuumTubeTile() {
 		super();
 		Arrays.fill(hasItem, false);
@@ -115,8 +118,9 @@ public class VacuumTubeTile extends TileEntity {
 	
 	public boolean searchForInput()
 	{
-//		List<Integer> check = new ArrayList<Integer>();
+		List<Integer> check = new ArrayList<Integer>();
 		
+		//Search for VacuumTube connections first
 		for(int i = 0; i < 6; i++)
 		{
 			ForgeDirection dir = ForgeDirection.getOrientation(i);
@@ -131,25 +135,26 @@ public class VacuumTubeTile extends TileEntity {
 				}
 			}
 			
-//			check.add(i);
+			check.add(i);
 		}
 		
-//		for(Integer i : check)
-//		{
-//			ForgeDirection dir = ForgeDirection.getOrientation(i);
-//			TileEntity tile = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-//			if(tile == null) continue;
-//			
-//			if(checkInput(i)) return true;
-//		}
-//		
+		for(Integer i : check)
+		{
+			ForgeDirection dir = ForgeDirection.getOrientation(i);
+			TileEntity tile = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+			if(tile == null) continue;
+			
+			if(hookInput(i)) return true;
+		}
+		
 		return false;
 	}
 	
 	public boolean searchForOutput()
 	{
-//		List<Integer> check = new ArrayList<Integer>();
+		List<Integer> check = new ArrayList<Integer>();
 		
+		//Check for VacuumTubeTiles first
 		for(int i = 0; i < 6; i++)
 		{
 			ForgeDirection dir = ForgeDirection.getOrientation(i);
@@ -164,17 +169,17 @@ public class VacuumTubeTile extends TileEntity {
 				}
 			}
 			
-//			check.add(i);
+			check.add(i);
 		}
 		
-//		for(Integer i : check)
-//		{
-//			ForgeDirection dir = ForgeDirection.getOrientation(i);
-//			TileEntity tile = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-//			if(tile == null) continue;
-//			
-//			if(checkOutput(i)) return true;
-//		}
+		for(Integer i : check)
+		{
+			ForgeDirection dir = ForgeDirection.getOrientation(i);
+			TileEntity tile = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+			if(tile == null) continue;
+			
+			if(hookOutput(i)) return true;
+		}
 		
 		return false;
 	}
@@ -329,6 +334,8 @@ public class VacuumTubeTile extends TileEntity {
 	private void setupReceiveFromTube(VacuumTubeTile tube, ForgeDirection dir)
 	{
 		tube.outputTube = this;
+		tube.outputInv = null;
+		tube.outputSidedInv = null;
 		tube.outputDir = dir.getOpposite();
 		tube.worldObj.markBlockForUpdate(tube.xCoord, tube.yCoord, tube.zCoord);
 		tube.worldObj.markBlockForRenderUpdate(tube.xCoord, tube.yCoord, tube.zCoord);
@@ -337,6 +344,8 @@ public class VacuumTubeTile extends TileEntity {
 	private void setupSendToTube(VacuumTubeTile tube, ForgeDirection dir)
 	{
 		tube.inputTube = this;
+		tube.inputInv = null;
+		tube.inputSidedInv = null;
 		tube.inputDir = dir.getOpposite();
 		tube.worldObj.markBlockForUpdate(tube.xCoord, tube.yCoord, tube.zCoord);
 		tube.worldObj.markBlockForRenderUpdate(tube.xCoord, tube.yCoord, tube.zCoord);
@@ -485,12 +494,14 @@ public class VacuumTubeTile extends TileEntity {
 			return;
 		}
 		
-		if(inputDir != ForgeDirection.UNKNOWN && missingInput())
+		if(needsCheckInput || inputDir != ForgeDirection.UNKNOWN && missingInput())
 		{
+			needsCheckInput = false;
 			hookInput(FemtocraftUtils.indexOfForgeDirection(inputDir));
 		}
-		if(outputDir != ForgeDirection.UNKNOWN && missingOutput())
+		if(needsCheckOutput || outputDir != ForgeDirection.UNKNOWN && missingOutput())
 		{
+			needsCheckOutput = false;
 			hookOutput(FemtocraftUtils.indexOfForgeDirection(outputDir));
 		}
 		
@@ -619,7 +630,7 @@ public class VacuumTubeTile extends TileEntity {
 					worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 				}
 			}
-			else
+			else if(missingOutput())
 			{
 				ejectItem(3);
 			}
@@ -786,8 +797,8 @@ public class VacuumTubeTile extends TileEntity {
 		outputDir = ForgeDirection.getOrientation(output);
 		boolean hasInput = ((mask >> 3) & 1) == 1 ? true : false;
 		boolean hasOutput = ((mask >> 7) & 1) == 1 ? true : false;
-		if(hasInput) hookInput(input);
-		if(hasOutput) hookOutput(output);
+		if(hasInput) needsCheckInput = true;
+		if(hasOutput) needsCheckOutput = true;
 	}
 	
 	public byte generateItemMask()
