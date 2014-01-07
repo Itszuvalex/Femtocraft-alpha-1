@@ -70,16 +70,16 @@ public class VacuumTube extends BlockContainer {
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
 			EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
-		TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
-		if(tile != null)
-		{
-			if(tile instanceof VacuumTubeTile)
-			{
-				VacuumTubeTile tube = (VacuumTubeTile)tile;
-				
-				tube.searchForMissingConnection();
-			}
-		}
+//		TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
+//		if(tile != null)
+//		{
+//			if(tile instanceof VacuumTubeTile)
+//			{
+//				VacuumTubeTile tube = (VacuumTubeTile)tile;
+//				
+//				tube.searchForMissingConnection();
+//			}
+//		}
 		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLivingBase,
 				par6ItemStack);
 	}
@@ -174,10 +174,6 @@ public class VacuumTube extends BlockContainer {
 				return true;
 			}
 		}
-		
-		par1World.markBlockForUpdate(par2, par3, par4);
-		par1World.markBlockForRenderUpdate(par2, par3, par4);
-		
 		return false;
 	}
 

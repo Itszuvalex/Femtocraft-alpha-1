@@ -256,16 +256,18 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 		int beginOutputOrient = lastOutputOrientation;
 		
 		//Do a full loop around.  If no other settings are available, stop once there.
-		do
-		{
-			cycleSearch();
-			
-			boolean input = setInput(ForgeDirection.getOrientation(lastInputOrientation));
-			boolean output = setOutput(ForgeDirection.getOrientation(lastOutputOrientation));
-			
-			if(input && output) return true;
-			
-		} while (beginInputOrient != lastInputOrientation && beginOutputOrient != lastOutputOrientation);
+//		do
+//		{
+//			cycleSearch();
+//			
+//			boolean input = setInput(ForgeDirection.getOrientation(lastInputOrientation));
+//			boolean output = setOutput(ForgeDirection.getOrientation(lastOutputOrientation));
+//			
+//			if(input && output) return true;
+//			
+//		} while (beginInputOrient != lastInputOrientation && beginOutputOrient != lastOutputOrientation);
+//		
+		cycleSearch();
 		
 		return false;
 	}
@@ -286,6 +288,7 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 			inputTube = null;
 			inputDir = dir;
 			if(out) outputDir = ForgeDirection.UNKNOWN;
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
 		}
@@ -301,6 +304,7 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 			inputInv = null;
 			inputTube.setOutput(dir.getOpposite());
 			if(out) outputDir = ForgeDirection.UNKNOWN;
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
 		}
@@ -312,6 +316,7 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 			inputSidedInv = null;
 			inputInv = (IInventory)tile;
 			if(out) outputDir = ForgeDirection.UNKNOWN;
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
 		}
@@ -335,6 +340,7 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 			outputTube = null;
 			outputDir = dir;
 			if(in) inputDir = ForgeDirection.UNKNOWN;
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
 		}
@@ -350,6 +356,7 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 			outputInv = null;
 			outputTube.setInput(dir.getOpposite());
 			if(in) inputDir = ForgeDirection.UNKNOWN;
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
 		}
@@ -361,6 +368,7 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 			outputSidedInv = null;
 			outputInv = (IInventory)tile;
 			if(in) inputDir = ForgeDirection.UNKNOWN;
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
 		}
@@ -370,19 +378,33 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 	
 	private void cycleSearch()
 	{
-		lastOutputOrientation+=1;
-		removeLastOutput();
-		if(lastOutputOrientation >= 6)
+		int i = 0;
+		
+		do
 		{
-			lastOutputOrientation = 0;
-			
-			lastInputOrientation+=1;
-			removeLastInput();
-			if(lastInputOrientation >= 6)
+			lastOutputOrientation+=1;
+			removeLastOutput();
+			if(lastOutputOrientation >= 6)
 			{
-				lastInputOrientation = 0;
+				int j = 0;
+				
+				lastOutputOrientation = 0;
+				do
+				{
+					lastInputOrientation+=1;
+					removeLastInput();
+					if(lastInputOrientation >= 6)
+					{
+						lastInputOrientation = 0;
+					}
+					++j;
+
+				}while((!setInput(ForgeDirection.getOrientation(lastInputOrientation)) && (j < 6)));
 			}
-		}
+			
+			++i;
+			
+		}while((!setOutput(ForgeDirection.getOrientation(lastOutputOrientation)) && (i < 6)));
 	}
 	
 	private void removeLastInput()
