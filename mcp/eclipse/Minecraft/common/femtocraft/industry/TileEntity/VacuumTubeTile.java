@@ -218,7 +218,7 @@ public class VacuumTubeTile extends TileEntity {
 			inputInv = null;
 			inputTube = null;
 			inputDir = test;
-			if(out) outputDir = test.getOpposite();
+			if(out) outputDir = ForgeDirection.UNKNOWN;
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
 		}
@@ -233,7 +233,7 @@ public class VacuumTubeTile extends TileEntity {
 			inputSidedInv = null;
 			inputInv = null;
 			setupReceiveFromTube(inputTube, test);
-			if(out) outputDir = test.getOpposite();
+			if(out) outputDir = ForgeDirection.UNKNOWN;
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
 		}
@@ -244,7 +244,7 @@ public class VacuumTubeTile extends TileEntity {
 			inputDir = test;
 			inputSidedInv = null;
 			inputInv = (IInventory)tile;
-			if(out) outputDir = test.getOpposite();
+			if(out) outputDir = ForgeDirection.UNKNOWN;
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
 		}
@@ -266,7 +266,7 @@ public class VacuumTubeTile extends TileEntity {
 			outputInv = null;
 			outputTube = null;
 			outputDir = test;
-			if(in) inputDir = test.getOpposite();
+			if(in) inputDir = ForgeDirection.UNKNOWN;
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
 		}
@@ -281,7 +281,7 @@ public class VacuumTubeTile extends TileEntity {
 			outputSidedInv = null;
 			outputInv = null;
 			setupSendToTube(outputTube, test);
-			if(in) inputDir = test.getOpposite();
+			if(in) inputDir = ForgeDirection.UNKNOWN;
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
 		}
@@ -292,7 +292,7 @@ public class VacuumTubeTile extends TileEntity {
 			outputDir = test;
 			outputSidedInv = null;
 			outputInv = (IInventory)tile;
-			if(in) inputDir = test.getOpposite();
+			if(in) inputDir = ForgeDirection.UNKNOWN;
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
 		}
