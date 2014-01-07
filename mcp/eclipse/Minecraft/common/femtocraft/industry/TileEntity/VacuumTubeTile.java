@@ -19,8 +19,9 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
+import femtocraft.api.IVacuumTube;
 
-public class VacuumTubeTile extends TileEntity {
+public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 	//hasItem array for client-side rendering only
 	//Server will update this array and this alone to save bytes
 	//Player has no need to know WHAT is in the pipes, anyways
@@ -37,8 +38,8 @@ public class VacuumTubeTile extends TileEntity {
 	private ISidedInventory outputSidedInv = null;
 	private IInventory inputInv = null;
 	private IInventory outputInv = null;
-	private VacuumTubeTile inputTube = null;
-	private VacuumTubeTile outputTube = null;
+	private IVacuumTube inputTube = null;
+	private IVacuumTube outputTube = null;
 	
 	public ItemStack queuedItem = null;
 	
@@ -72,29 +73,94 @@ public class VacuumTubeTile extends TileEntity {
 		return (outputSidedInv == null) && (outputTube == null) && (outputInv == null);
 	}
 	
+	@Override
 	public boolean isOverflowing()
 	{
 		return (worldObj.isRemote && overflowing) || (
-				((outputTube != null && outputTube.queuedItem != null) ||
+				((outputTube != null && outputTube.canInsertItem(null) == false) ||
 				((outputInv != null || outputSidedInv != null) && !canFillInv)) &&
 				hasItem[0] && hasItem[1] && hasItem[2] && hasItem[3] && 
 				((inputTube == null || queuedItem != null)));
 	}
 	
-	public ForgeDirection getInputDir()
+	public boolean canInsertItem(ItemStack item)
+	{
+		return queuedItem == null;
+	}
+	
+	@Override
+	public boolean insertItem(ItemStack item) {
+		if(isOverflowing()) return false;
+		if(queuedItem == null)
+		{
+			queuedItem = item.copy();
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+			return true;
+		}
+		
+		return false;
+	}
+
+	
+	@Override
+	public boolean hasInput() {
+		return !missingInput();
+	}
+
+	@Override
+	public boolean hasOutput() {
+		return !missingOutput();
+	}
+
+	@Override
+	public void clearInput() {
+		inputInv = null;
+		inputSidedInv = null;
+		if(inputTube != null)
+		{
+			//To prevent Recursion
+			IVacuumTube tube = inputTube;
+			inputTube = null;
+			tube.clearOutput();
+		}
+		
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+	}
+
+	@Override
+	public void clearOutput() {
+		outputInv = null;
+		outputSidedInv = null;
+		if(outputTube != null)
+		{
+			//To prevent Recursion
+			IVacuumTube tube = outputTube;
+			outputTube = null;
+			tube.clearInput();
+		}
+		
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+	}
+	
+	@Override
+	public ForgeDirection getInput()
 	{
 		return inputDir;
 	}
 	
-	public ForgeDirection getOutputDir()
+	@Override
+	public ForgeDirection getOutput()
 	{
 		return outputDir;
 	}
 	
 	public void onBlockBreak()
 	{
-		if(inputTube != null) removeReceiveFromTube(inputTube);
-		if(outputTube != null) removeSendToTube(outputTube);
+		clearInput();
+		clearOutput();
 		
 		for(int i = 0; i < items.length; i++)
 		{
@@ -131,7 +197,7 @@ public class VacuumTubeTile extends TileEntity {
 				VacuumTubeTile tube = (VacuumTubeTile)tile;
 				if(tube.missingOutput())
 				{
-					if(hookInput(i)) return true;
+					if(setInput(dir)) return true;
 				}
 			}
 			
@@ -144,7 +210,7 @@ public class VacuumTubeTile extends TileEntity {
 			TileEntity tile = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 			if(tile == null) continue;
 			
-			if(hookInput(i)) return true;
+			if(setInput(dir)) return true;
 		}
 		
 		return false;
@@ -165,7 +231,7 @@ public class VacuumTubeTile extends TileEntity {
 				VacuumTubeTile tube = (VacuumTubeTile)tile;
 				if(tube.missingInput())
 				{
-					if(hookOutput(i)) return true;
+					if(setOutput(dir)) return true;
 				}
 			}
 			
@@ -178,7 +244,7 @@ public class VacuumTubeTile extends TileEntity {
 			TileEntity tile = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 			if(tile == null) continue;
 			
-			if(hookOutput(i)) return true;
+			if(setOutput(dir)) return true;
 		}
 		
 		return false;
@@ -194,8 +260,8 @@ public class VacuumTubeTile extends TileEntity {
 		{
 			cycleSearch();
 			
-			boolean input = hookInput(lastInputOrientation);
-			boolean output = hookOutput(lastOutputOrientation);
+			boolean input = setInput(ForgeDirection.getOrientation(lastInputOrientation));
+			boolean output = setOutput(ForgeDirection.getOrientation(lastOutputOrientation));
 			
 			if(input && output) return true;
 			
@@ -204,11 +270,12 @@ public class VacuumTubeTile extends TileEntity {
 		return false;
 	}
 
-	private boolean hookInput(int dir) {
-		ForgeDirection test = ForgeDirection.getOrientation(dir);
+	@Override
+	public boolean setInput(ForgeDirection dir) {
 		if(worldObj == null) return false;
-		if(test == outputDir) return false;
-		TileEntity tile = worldObj.getBlockTileEntity(xCoord + test.offsetX, yCoord + test.offsetY, zCoord + test.offsetZ);
+		if(dir == outputDir) return false;
+		if((inputInv != null || inputSidedInv != null || inputTube != null) && (dir == inputDir)) return false;
+		TileEntity tile = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 		if(tile == null) return false;
 		if(tile == this) return false;
 		boolean out = missingOutput();
@@ -217,22 +284,22 @@ public class VacuumTubeTile extends TileEntity {
 			inputSidedInv = (ISidedInventory)tile;
 			inputInv = null;
 			inputTube = null;
-			inputDir = test;
+			inputDir = dir;
 			if(out) outputDir = ForgeDirection.UNKNOWN;
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
 		}
 		
-		if(tile instanceof VacuumTubeTile)
+		if(tile instanceof IVacuumTube)
 		{
-			VacuumTubeTile tube = (VacuumTubeTile)tile;
-			if(!tube.missingOutput()) return false;
+			IVacuumTube tube = (IVacuumTube)tile;
+//			if(tube.hasOutput()) return false;
 			
 			inputTube = tube;
-			inputDir = test;
+			inputDir = dir;
 			inputSidedInv = null;
 			inputInv = null;
-			setupReceiveFromTube(inputTube, test);
+			inputTube.setOutput(dir.getOpposite());
 			if(out) outputDir = ForgeDirection.UNKNOWN;
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
@@ -241,7 +308,7 @@ public class VacuumTubeTile extends TileEntity {
 		if(tile instanceof IInventory)
 		{
 			inputTube = null;
-			inputDir = test;
+			inputDir = dir;
 			inputSidedInv = null;
 			inputInv = (IInventory)tile;
 			if(out) outputDir = ForgeDirection.UNKNOWN;
@@ -252,11 +319,12 @@ public class VacuumTubeTile extends TileEntity {
 		return false;
 	}
 
-	private boolean hookOutput(int dir) {
-		ForgeDirection test = ForgeDirection.getOrientation(dir);
+	@Override
+	public boolean setOutput(ForgeDirection dir) {
 		if(worldObj == null) return false;
-		if(test == inputDir) return false;
-		TileEntity tile = worldObj.getBlockTileEntity(xCoord + test.offsetX, yCoord + test.offsetY, zCoord + test.offsetZ);
+		if(dir == inputDir) return false;
+		if((outputInv != null || outputSidedInv != null || outputTube != null) && (dir == outputDir)) return false;
+		TileEntity tile = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 		if(tile == null) return false;
 		if(tile == this) return false;
 		boolean in = missingInput();
@@ -265,22 +333,22 @@ public class VacuumTubeTile extends TileEntity {
 			outputSidedInv = (ISidedInventory)tile;
 			outputInv = null;
 			outputTube = null;
-			outputDir = test;
+			outputDir = dir;
 			if(in) inputDir = ForgeDirection.UNKNOWN;
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
 		}
 		
-		if(tile instanceof VacuumTubeTile)
+		if(tile instanceof IVacuumTube)
 		{
-			VacuumTubeTile tube = (VacuumTubeTile)tile;
-			if(!tube.missingInput()) return false;
+			IVacuumTube tube = (IVacuumTube)tile;
+//			if(tube.hasInput()) return false;
 			
 			outputTube = tube;
-			outputDir = test;
+			outputDir = dir;
 			outputSidedInv = null;
 			outputInv = null;
-			setupSendToTube(outputTube, test);
+			outputTube.setInput(dir.getOpposite());
 			if(in) inputDir = ForgeDirection.UNKNOWN;
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
@@ -289,7 +357,7 @@ public class VacuumTubeTile extends TileEntity {
 		if(tile instanceof IInventory)
 		{
 			outputTube = null;
-			outputDir = test;
+			outputDir = dir;
 			outputSidedInv = null;
 			outputInv = (IInventory)tile;
 			if(in) inputDir = ForgeDirection.UNKNOWN;
@@ -320,14 +388,14 @@ public class VacuumTubeTile extends TileEntity {
 	private void removeLastInput()
 	{
 		if(inputTube == null) return;
-		removeReceiveFromTube(inputTube);
+		clearInput();
 		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 	}
 	
 	private void removeLastOutput()
 	{
 		if(outputTube == null) return;
-		removeSendToTube(outputTube);
+		clearOutput();
 		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 	}
 	
@@ -386,7 +454,7 @@ public class VacuumTubeTile extends TileEntity {
 			}
 			else
 			{
-				hookInput(FemtocraftUtils.indexOfForgeDirection(inputDir));
+				setInput(inputDir);
 			}
 		}
 		if(outputDir != ForgeDirection.UNKNOWN)
@@ -402,7 +470,7 @@ public class VacuumTubeTile extends TileEntity {
 			}
 			else
 			{
-				hookOutput(FemtocraftUtils.indexOfForgeDirection(outputDir));
+				setOutput(outputDir);
 			}
 		}
 	}
@@ -497,12 +565,12 @@ public class VacuumTubeTile extends TileEntity {
 		if(needsCheckInput || inputDir != ForgeDirection.UNKNOWN && missingInput())
 		{
 			needsCheckInput = false;
-			hookInput(FemtocraftUtils.indexOfForgeDirection(inputDir));
+			setInput(inputDir);
 		}
 		if(needsCheckOutput || outputDir != ForgeDirection.UNKNOWN && missingOutput())
 		{
 			needsCheckOutput = false;
-			hookOutput(FemtocraftUtils.indexOfForgeDirection(outputDir));
+			setOutput(outputDir);
 		}
 		
 		if(items[3] != null)
@@ -510,16 +578,12 @@ public class VacuumTubeTile extends TileEntity {
 			//If next tube has a slot
 			if(outputTube != null)
 			{
-				if(outputTube.queuedItem == null)
+				if(outputTube.insertItem(items[3]))
 				{
-					//enque item, if there is one
-					outputTube.queuedItem = items[3].copy();
 					items[3] = null;
 					hasItem[3] = false;
 					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 					worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-					worldObj.markBlockForUpdate(xCoord+outputDir.offsetX, yCoord + outputDir.offsetY, zCoord + outputDir.offsetZ);
-					worldObj.markBlockForRenderUpdate(xCoord+outputDir.offsetX, yCoord + outputDir.offsetY, zCoord + outputDir.offsetZ);
 				}
 			}
 			else if(outputSidedInv != null)
@@ -807,7 +871,7 @@ public class VacuumTubeTile extends TileEntity {
 		}
 		else
 		{
-			hookInput(FemtocraftUtils.indexOfForgeDirection(inputDir));
+			setInput(inputDir);
 		}
 			
 		TileEntity outputTile = worldObj.getBlockTileEntity(xCoord + outputDir.offsetX, yCoord + outputDir.offsetY, zCoord + outputDir.offsetZ);
@@ -817,7 +881,7 @@ public class VacuumTubeTile extends TileEntity {
 		}
 		else
 		{
-			hookOutput(FemtocraftUtils.indexOfForgeDirection(outputDir));
+			setOutput(outputDir);
 		}
 	}
 	
@@ -852,5 +916,6 @@ public class VacuumTubeTile extends TileEntity {
 		temp = mask;
 		overflowing = (((temp >> hasItem.length) & 1) == 1) ? true : false;
 	}
+
 
 }

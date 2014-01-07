@@ -93,7 +93,7 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		tessellator.setBrightness(block.getMixedBrightnessForBlock(renderer.blockAccess, x, y, z));
 		tessellator.setColorOpaque_F(1, 1, 1);
 		
-		renderTube((VacuumTube)block, x,y,z,tube.hasItem, tube.isOverflowing(), tube.getInputDir(), tube.getOutputDir(), !tube.missingInput(), !tube.missingOutput());
+		renderTube((VacuumTube)block, x,y,z,tube.hasItem, tube.isOverflowing(), tube.getInput(), tube.getOutput(), !tube.missingInput(), !tube.missingOutput());
 		
 		return true;
 	}
