@@ -797,8 +797,28 @@ public class VacuumTubeTile extends TileEntity {
 		outputDir = ForgeDirection.getOrientation(output);
 		boolean hasInput = ((mask >> 3) & 1) == 1 ? true : false;
 		boolean hasOutput = ((mask >> 7) & 1) == 1 ? true : false;
-		if(hasInput) needsCheckInput = true;
-		if(hasOutput) needsCheckOutput = true;
+		
+		if(worldObj == null) return;
+		
+		TileEntity inputTile = worldObj.getBlockTileEntity(xCoord + inputDir.offsetX, yCoord + inputDir.offsetY, zCoord + inputDir.offsetZ);
+		if(inputTile == null)
+		{
+			if(hasInput) {needsCheckInput = true;}
+		}
+		else
+		{
+			hookInput(FemtocraftUtils.indexOfForgeDirection(inputDir));
+		}
+			
+		TileEntity outputTile = worldObj.getBlockTileEntity(xCoord + outputDir.offsetX, yCoord + outputDir.offsetY, zCoord + outputDir.offsetZ);
+		if(outputTile == null)
+		{
+			if(hasOutput) {needsCheckOutput = true;}
+		}
+		else
+		{
+			hookOutput(FemtocraftUtils.indexOfForgeDirection(outputDir));
+		}
 	}
 	
 	public byte generateItemMask()

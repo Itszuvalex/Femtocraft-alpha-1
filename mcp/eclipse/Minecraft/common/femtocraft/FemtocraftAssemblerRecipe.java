@@ -9,10 +9,12 @@ public class FemtocraftAssemblerRecipe {
 	
 	public enum TechLevel
 	{
-		MACRO,
-		MICRO,
-		NANO,
-		FEMTO
+		MACRO, 			//Vanilla level
+		MICRO, 			//1st Tier
+		NANO,  			//2nd Tier
+		FEMTO, 			//3rd Tier
+		TEMPORAL,		//Specialty Tier 1
+		DIMENSIONAL		//Specialty Tier 2
 	}
 	
 	public FemtocraftAssemblerRecipe(ItemStack[] input_, Integer mass_, ItemStack output_, TechLevel tech)
