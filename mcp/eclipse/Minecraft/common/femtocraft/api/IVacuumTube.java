@@ -3,6 +3,10 @@ package femtocraft.api;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
 
+/**
+ * @author Itszuvalex
+ *
+ */
 public interface IVacuumTube {
 	
 	public boolean isOverflowing();
@@ -21,6 +25,5 @@ public interface IVacuumTube {
 	public void clearOutput();
 	
 	public boolean setInput(ForgeDirection input);
-	
 	public boolean setOutput(ForgeDirection output);
 }

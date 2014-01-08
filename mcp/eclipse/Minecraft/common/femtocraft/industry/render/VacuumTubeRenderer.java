@@ -377,6 +377,8 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 				break;
 			default:
 				c = centerStraightNorthToSouth;
+				centerEndSouth.location = new Point(x,y,z);
+				centerEndSouth.draw();
 				break;
 			}
 			break;
@@ -414,6 +416,8 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 				break;
 			default:
 				c = centerStraightSouthToNorth;
+				centerEndNorth.location = new Point(x,y,z);
+				centerEndNorth.draw();
 				break;
 			}
 			break;
@@ -451,6 +455,8 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 				break;
 			default:
 				c = centerStraightEastToWest;
+				centerEndWest.location = new Point(x,y,z);
+				centerEndWest.draw();
 				break;
 			}
 			break;
@@ -488,6 +494,8 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 				break;
 			default:
 				c = centerStraightWestToEast;
+				centerEndEast.location = new Point(x,y,z);
+				centerEndEast.draw();
 				break;
 			}
 			break;
@@ -525,6 +533,8 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 				break;
 			default:
 				c = centerStraightUpToDown;
+				centerEndDown.location = new Point(x,y,z);
+				centerEndDown.draw();
 				break;
 			}
 			break;
@@ -562,6 +572,8 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 				break;
 			default:
 				c = centerStraightDownToUp;
+				centerEndUp.location = new Point(x,y,z);
+				centerEndUp.draw();
 				break;
 			}
 			break;
@@ -570,24 +582,38 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 			{
 			case NORTH:
 				c = centerStraightSouthToNorth;
+				centerEndSouth.location = new Point(x,y,z);
+				centerEndSouth.draw();
 				break;
 			case SOUTH:
 				c = centerStraightNorthToSouth;
+				centerEndNorth.location = new Point(x,y,z);
+				centerEndNorth.draw();
 				break;
 			case EAST:
 				c = centerStraightWestToEast;
+				centerEndWest.location = new Point(x,y,z);
+				centerEndWest.draw();
 				break;
 			case WEST:
 				c = centerStraightEastToWest;
+				centerEndEast.location = new Point(x,y,z);
+				centerEndEast.draw();
 				break;
 			case UP:
 				c = centerStraightDownToUp;
+				centerEndUp.location = new Point(x,y,z);
+				centerEndUp.draw();
 				break;
 			case DOWN:
 				c = centerStraightUpToDown;
+				centerEndDown.location = new Point(x,y,z);
+				centerEndDown.draw();
 				break;
 			default:
 				c = centerStraightSouthToNorth;
+				centerEndSouth.location = new Point(x,y,z);
+				centerEndSouth.draw();
 				break;
 			}
 			break;

@@ -31,8 +31,8 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 	
 	private ItemStack[] items = new ItemStack[4];
 
-	ForgeDirection inputDir = ForgeDirection.NORTH;
-	ForgeDirection outputDir = ForgeDirection.SOUTH;
+	ForgeDirection inputDir = ForgeDirection.UNKNOWN;
+	ForgeDirection outputDir = ForgeDirection.UNKNOWN;
 	
 	private ISidedInventory inputSidedInv = null;
 	private ISidedInventory outputSidedInv = null;
@@ -123,6 +123,7 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 			IVacuumTube tube = inputTube;
 			inputTube = null;
 			tube.clearOutput();
+			inputDir = ForgeDirection.UNKNOWN;
 		}
 		
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -139,6 +140,7 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 			IVacuumTube tube = outputTube;
 			outputTube = null;
 			tube.clearInput();
+			outputDir = ForgeDirection.UNKNOWN;
 		}
 		
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -280,14 +282,12 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 		TileEntity tile = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 		if(tile == null) return false;
 		if(tile == this) return false;
-		boolean out = missingOutput();
 		if(tile instanceof ISidedInventory)
 		{
 			inputSidedInv = (ISidedInventory)tile;
 			inputInv = null;
 			inputTube = null;
 			inputDir = dir;
-			if(out) outputDir = ForgeDirection.UNKNOWN;
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
@@ -296,14 +296,12 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 		if(tile instanceof IVacuumTube)
 		{
 			IVacuumTube tube = (IVacuumTube)tile;
-//			if(tube.hasOutput()) return false;
 			
 			inputTube = tube;
 			inputDir = dir;
 			inputSidedInv = null;
 			inputInv = null;
 			inputTube.setOutput(dir.getOpposite());
-			if(out) outputDir = ForgeDirection.UNKNOWN;
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
@@ -315,7 +313,6 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 			inputDir = dir;
 			inputSidedInv = null;
 			inputInv = (IInventory)tile;
-			if(out) outputDir = ForgeDirection.UNKNOWN;
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
@@ -332,14 +329,12 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 		TileEntity tile = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 		if(tile == null) return false;
 		if(tile == this) return false;
-		boolean in = missingInput();
 		if(tile instanceof ISidedInventory)
 		{
 			outputSidedInv = (ISidedInventory)tile;
 			outputInv = null;
 			outputTube = null;
 			outputDir = dir;
-			if(in) inputDir = ForgeDirection.UNKNOWN;
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
@@ -348,14 +343,12 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 		if(tile instanceof IVacuumTube)
 		{
 			IVacuumTube tube = (IVacuumTube)tile;
-//			if(tube.hasInput()) return false;
 			
 			outputTube = tube;
 			outputDir = dir;
 			outputSidedInv = null;
 			outputInv = null;
 			outputTube.setInput(dir.getOpposite());
-			if(in) inputDir = ForgeDirection.UNKNOWN;
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
@@ -367,7 +360,6 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 			outputDir = dir;
 			outputSidedInv = null;
 			outputInv = (IInventory)tile;
-			if(in) inputDir = ForgeDirection.UNKNOWN;
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			return true;
@@ -830,10 +822,15 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 		
 		//Throw the item out into the world!
 		EntityItem entityitem = new EntityItem(worldObj, xCoord + .5, yCoord + .5, zCoord+ .5, dropItem.copy());
+		ForgeDirection dir = outputDir;
+		if(dir == ForgeDirection.UNKNOWN)
+		{
+			dir = inputDir.getOpposite();
+		}
 
-		entityitem.motionX = outputDir.offsetX;
-		entityitem.motionY = outputDir.offsetY;
-		entityitem.motionZ = outputDir.offsetZ;
+		entityitem.motionX = dir.offsetX;
+		entityitem.motionY = dir.offsetY;
+		entityitem.motionZ = dir.offsetZ;
 		worldObj.spawnEntityInWorld(entityitem);
 	}
 
