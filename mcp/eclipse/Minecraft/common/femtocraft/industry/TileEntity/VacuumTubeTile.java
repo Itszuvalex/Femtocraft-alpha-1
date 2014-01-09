@@ -794,9 +794,23 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 		//Suck them in, only if room
 		else if(missingInput())
 		{
-			float x = xCoord + inputDir.offsetX;
-			float y = yCoord + inputDir.offsetY;
-			float z = zCoord + inputDir.offsetZ;
+			ForgeDirection dir = inputDir;
+			
+			if(inputDir == ForgeDirection.UNKNOWN)
+			{
+				if(outputDir == ForgeDirection.UNKNOWN)
+				{
+					dir = ForgeDirection.SOUTH;
+				}
+				else
+				{
+					dir = outputDir.getOpposite();
+				}
+			}
+			
+			float x = xCoord + dir.offsetX;
+			float y = yCoord + dir.offsetY;
+			float z = zCoord + dir.offsetZ;
 			
 			List<EntityItem> items = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getAABBPool().getAABB(x,y,z,x+1.f, y+1.f, z+1.f));
 			for(EntityItem item : items)
@@ -825,7 +839,14 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 		ForgeDirection dir = outputDir;
 		if(dir == ForgeDirection.UNKNOWN)
 		{
-			dir = inputDir.getOpposite();
+			if(inputDir == ForgeDirection.UNKNOWN)
+			{
+				dir = ForgeDirection.NORTH;
+			}
+			else
+			{
+				dir = inputDir.getOpposite();
+			}
 		}
 
 		entityitem.motionX = dir.offsetX;
