@@ -254,21 +254,6 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 	
 	public boolean searchForConnection()
 	{
-		int beginInputOrient = lastInputOrientation;
-		int beginOutputOrient = lastOutputOrientation;
-		
-		//Do a full loop around.  If no other settings are available, stop once there.
-//		do
-//		{
-//			cycleSearch();
-//			
-//			boolean input = setInput(ForgeDirection.getOrientation(lastInputOrientation));
-//			boolean output = setOutput(ForgeDirection.getOrientation(lastOutputOrientation));
-//			
-//			if(input && output) return true;
-//			
-//		} while (beginInputOrient != lastInputOrientation && beginOutputOrient != lastOutputOrientation);
-//		
 		cycleSearch();
 		
 		return false;
@@ -278,10 +263,16 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 	public boolean setInput(ForgeDirection dir) {
 		if(worldObj == null) return false;
 		if(dir == outputDir) return false;
-		if((inputInv != null || inputSidedInv != null || inputTube != null) && (dir == inputDir)) return false;
+		if((inputInv != null || inputSidedInv != null || inputTube != null) && (dir == inputDir)) return true;
 		TileEntity tile = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 		if(tile == null) return false;
 		if(tile == this) return false;
+		
+		if(inputDir != ForgeDirection.UNKNOWN)
+		{
+			clearInput();
+		}
+		
 		if(tile instanceof ISidedInventory)
 		{
 			inputSidedInv = (ISidedInventory)tile;
@@ -325,10 +316,16 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 	public boolean setOutput(ForgeDirection dir) {
 		if(worldObj == null) return false;
 		if(dir == inputDir) return false;
-		if((outputInv != null || outputSidedInv != null || outputTube != null) && (dir == outputDir)) return false;
+		if((outputInv != null || outputSidedInv != null || outputTube != null) && (dir == outputDir)) return true;
 		TileEntity tile = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 		if(tile == null) return false;
 		if(tile == this) return false;
+		
+		if(outputDir != ForgeDirection.UNKNOWN)
+		{
+			clearOutput();
+		}
+		
 		if(tile instanceof ISidedInventory)
 		{
 			outputSidedInv = (ISidedInventory)tile;
@@ -372,10 +369,13 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 	{
 		int i = 0;
 		
+		lastOutputOrientation = FemtocraftUtils.indexOfForgeDirection(outputDir);
+		lastInputOrientation = FemtocraftUtils.indexOfForgeDirection(inputDir);
+		
 		do
 		{
 			lastOutputOrientation+=1;
-			removeLastOutput();
+			clearOutput();
 			if(lastOutputOrientation >= 6)
 			{
 				int j = 0;
@@ -384,7 +384,7 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 				do
 				{
 					lastInputOrientation+=1;
-					removeLastInput();
+					clearInput();
 					if(lastInputOrientation >= 6)
 					{
 						lastInputOrientation = 0;
