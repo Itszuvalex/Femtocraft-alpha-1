@@ -350,7 +350,7 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 				centerEndNorth.draw();
 			}
 			
-			if(hasItem[2])
+			if(hasItem[1])
 			{
 				inNorthCloseOn.location = new Point(x,y,z);
 				inNorthCloseOn.draw();
@@ -375,10 +375,22 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 			case DOWN:
 				c = centerCurvedNorthToDown;
 				break;
-			default:
-				c = centerStraightNorthToSouth;
+			case UNKNOWN:
 				centerEndSouth.location = new Point(x,y,z);
 				centerEndSouth.draw();
+				
+				if(hasItem[2])
+				{
+					outSouthCloseOn.location = new Point(x,y,z);
+					outSouthCloseOn.draw();
+				}
+				else 
+				{
+					outSouthCloseOff.location = new Point(x,y,z);
+					outSouthCloseOff.draw();
+				}
+			default:
+				c = centerStraightNorthToSouth;
 				break;
 			}
 			break;
@@ -389,7 +401,7 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 				centerEndSouth.draw();
 			}
 			
-			if(hasItem[2])
+			if(hasItem[1])
 			{
 				inSouthCloseOn.location = new Point(x,y,z);
 				inSouthCloseOn.draw();
@@ -414,10 +426,23 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 			case DOWN:
 				c = centerCurvedSouthToDown;
 				break;
-			default:
-				c = centerStraightSouthToNorth;
+			case UNKNOWN:
 				centerEndNorth.location = new Point(x,y,z);
 				centerEndNorth.draw();
+				
+				if(hasItem[2])
+				{
+					outNorthCloseOn.location = new Point(x,y,z);
+					outNorthCloseOn.draw();
+				}
+				else 
+				{
+					outNorthCloseOff.location = new Point(x,y,z);
+					outNorthCloseOff.draw();
+				}
+				
+			default:
+				c = centerStraightSouthToNorth;
 				break;
 			}
 			break;
@@ -428,7 +453,7 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 				centerEndEast.draw();
 			}
 			
-			if(hasItem[2])
+			if(hasItem[1])
 			{
 				inEastCloseOn.location = new Point(x,y,z);
 				inEastCloseOn.draw();
@@ -453,10 +478,22 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 			case DOWN:
 				c = centerCurvedEastToDown;
 				break;
-			default:
-				c = centerStraightEastToWest;
+			case UNKNOWN:
 				centerEndWest.location = new Point(x,y,z);
 				centerEndWest.draw();
+				
+				if(hasItem[2])
+				{
+					outWestCloseOn.location = new Point(x,y,z);
+					outWestCloseOn.draw();
+				}
+				else 
+				{
+					outWestCloseOff.location = new Point(x,y,z);
+					outWestCloseOff.draw();
+				}
+			default:
+				c = centerStraightEastToWest;
 				break;
 			}
 			break;
@@ -467,7 +504,7 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 				centerEndWest.draw();
 			}
 			
-			if(hasItem[2])
+			if(hasItem[1])
 			{
 				inWestCloseOn.location = new Point(x,y,z);
 				inWestCloseOn.draw();
@@ -492,10 +529,22 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 			case DOWN:
 				c = centerCurvedWestToDown;
 				break;
-			default:
-				c = centerStraightWestToEast;
+			case UNKNOWN:
 				centerEndEast.location = new Point(x,y,z);
 				centerEndEast.draw();
+				
+				if(hasItem[2])
+				{
+					outEastCloseOn.location = new Point(x,y,z);
+					outEastCloseOn.draw();
+				}
+				else 
+				{
+					outEastCloseOff.location = new Point(x,y,z);
+					outEastCloseOff.draw();
+				}
+			default:
+				c = centerStraightWestToEast;
 				break;
 			}
 			break;
@@ -506,7 +555,7 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 				centerEndUp.draw();
 			}
 			
-			if(hasItem[2])
+			if(hasItem[1])
 			{
 				inUpCloseOn.location = new Point(x,y,z);
 				inUpCloseOn.draw();
@@ -531,10 +580,22 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 			case WEST:
 				c = centerCurvedUpToWest;
 				break;
-			default:
-				c = centerStraightUpToDown;
+			case UNKNOWN:
 				centerEndDown.location = new Point(x,y,z);
 				centerEndDown.draw();
+				
+				if(hasItem[2])
+				{
+					outDownCloseOn.location = new Point(x,y,z);
+					outDownCloseOn.draw();
+				}
+				else 
+				{
+					outDownCloseOff.location = new Point(x,y,z);
+					outDownCloseOff.draw();
+				}
+			default:
+				c = centerStraightUpToDown;
 				break;
 			}
 			break;
@@ -545,7 +606,7 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 				centerEndDown.draw();
 			}
 			
-			if(hasItem[2])
+			if(hasItem[1])
 			{
 				inDownCloseOn.location = new Point(x,y,z);
 				inDownCloseOn.draw();
@@ -570,50 +631,153 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 			case WEST:
 				c = centerCurvedDownToWest;
 				break;
-			default:
-				c = centerStraightDownToUp;
+			case UNKNOWN:
 				centerEndUp.location = new Point(x,y,z);
 				centerEndUp.draw();
+				
+				if(hasItem[2])
+				{
+					outUpCloseOn.location = new Point(x,y,z);
+					outUpCloseOn.draw();
+				}
+				else 
+				{
+					outUpCloseOff.location = new Point(x,y,z);
+					outUpCloseOff.draw();
+				}
+			default:
+				c = centerStraightDownToUp;
 				break;
 			}
 			break;
-		default:
+		default:			
 			switch(out)
 			{
 			case NORTH:
+				if(hasItem[1])
+				{
+					inSouthCloseOn.location = new Point(x,y,z);
+					inSouthCloseOn.draw();
+				}
+				else 
+				{
+					inSouthCloseOff.location = new Point(x,y,z);
+					inSouthCloseOff.draw();
+				}
+				
 				c = centerStraightSouthToNorth;
 				centerEndSouth.location = new Point(x,y,z);
 				centerEndSouth.draw();
 				break;
 			case SOUTH:
+				
+				if(hasItem[1])
+				{
+					inNorthCloseOn.location = new Point(x,y,z);
+					inNorthCloseOn.draw();
+				}
+				else 
+				{
+					inNorthCloseOff.location = new Point(x,y,z);
+					inNorthCloseOff.draw();
+				}
+				
 				c = centerStraightNorthToSouth;
 				centerEndNorth.location = new Point(x,y,z);
 				centerEndNorth.draw();
 				break;
 			case EAST:
+				if(hasItem[1])
+				{
+					inWestCloseOn.location = new Point(x,y,z);
+					inWestCloseOn.draw();
+				}
+				else 
+				{
+					inWestCloseOff.location = new Point(x,y,z);
+					inWestCloseOff.draw();
+				}
 				c = centerStraightWestToEast;
 				centerEndWest.location = new Point(x,y,z);
 				centerEndWest.draw();
 				break;
 			case WEST:
+				if(hasItem[1])
+				{
+					inEastCloseOn.location = new Point(x,y,z);
+					inEastCloseOn.draw();
+				}
+				else 
+				{
+					inEastCloseOff.location = new Point(x,y,z);
+					inEastCloseOff.draw();
+				}
+				
 				c = centerStraightEastToWest;
 				centerEndEast.location = new Point(x,y,z);
 				centerEndEast.draw();
 				break;
 			case UP:
+				if(hasItem[1])
+				{
+					inDownCloseOn.location = new Point(x,y,z);
+					inDownCloseOn.draw();
+				}
+				else 
+				{
+					inDownCloseOff.location = new Point(x,y,z);
+					inDownCloseOff.draw();
+				}
+				
 				c = centerStraightDownToUp;
 				centerEndUp.location = new Point(x,y,z);
 				centerEndUp.draw();
 				break;
 			case DOWN:
+				if(hasItem[1])
+				{
+					inUpCloseOn.location = new Point(x,y,z);
+					inUpCloseOn.draw();
+				}
+				else 
+				{
+					inUpCloseOff.location = new Point(x,y,z);
+					inUpCloseOff.draw();
+				}
+				
 				c = centerStraightUpToDown;
 				centerEndDown.location = new Point(x,y,z);
 				centerEndDown.draw();
 				break;
+			case UNKNOWN:
+				if(hasItem[1])
+				{
+					inSouthCloseOn.location = new Point(x,y,z);
+					inSouthCloseOn.draw();
+				}
+				else 
+				{
+					inSouthCloseOff.location = new Point(x,y,z);
+					inSouthCloseOff.draw();
+				}
+				
+				centerEndNorth.location = new Point(x,y,z);
+				centerEndNorth.draw();
 			default:
 				c = centerStraightSouthToNorth;
 				centerEndSouth.location = new Point(x,y,z);
 				centerEndSouth.draw();
+
+				if(hasItem[2])
+				{
+					outNorthCloseOn.location = new Point(x,y,z);
+					outNorthCloseOn.draw();
+				}
+				else 
+				{
+					outNorthCloseOff.location = new Point(x,y,z);
+					outNorthCloseOff.draw();
+				}
 				break;
 			}
 			break;

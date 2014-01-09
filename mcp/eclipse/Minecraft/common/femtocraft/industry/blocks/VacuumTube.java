@@ -53,17 +53,17 @@ public class VacuumTube extends BlockContainer {
 	@Override
 	public void onNeighborBlockChange(World par1World, int par2, int par3,
 			int par4, int par5) {
-		TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
-		if(tile != null)
-		{
-			if(tile instanceof VacuumTubeTile)
-			{
-				VacuumTubeTile tube = (VacuumTubeTile)tile;
-				
-				tube.validateConnections();
-				tube.searchForMissingConnection();
-			}
-		}
+//		TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
+//		if(tile != null)
+//		{
+//			if(tile instanceof VacuumTubeTile)
+//			{
+//				VacuumTubeTile tube = (VacuumTubeTile)tile;
+//				
+//				tube.validateConnections();
+//				tube.searchForMissingConnection();
+//			}
+//		}
 		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
 	}
 
@@ -103,17 +103,17 @@ public class VacuumTube extends BlockContainer {
 	@Override
 	public void onNeighborTileChange(World world, int x, int y, int z,
 			int tileX, int tileY, int tileZ) {
-		TileEntity tile = world.getBlockTileEntity(x, y, z);
-		if(tile != null)
-		{
-			if(tile instanceof VacuumTubeTile)
-			{
-				VacuumTubeTile tube = (VacuumTubeTile)tile;
-				
-				tube.validateConnections();
-				tube.searchForMissingConnection();
-			}
-		}
+//		TileEntity tile = world.getBlockTileEntity(x, y, z);
+//		if(tile != null)
+//		{
+//			if(tile instanceof VacuumTubeTile)
+//			{
+//				VacuumTubeTile tube = (VacuumTubeTile)tile;
+//				
+//				tube.validateConnections();
+//				tube.searchForMissingConnection();
+//			}
+//		}
 		super.onNeighborTileChange(world, x, y, z, tileX, tileY, tileZ);
 	}
 
