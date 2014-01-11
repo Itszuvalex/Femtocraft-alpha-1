@@ -43,10 +43,11 @@ public class FemtocraftAssemblerRecipeManager {
 		outputToRecipeMap.put(normalizedOutput(recipe), recipe);
 	}
 	
-	public void removeRecipe(FemtocraftAssemblerRecipe recipe)
+	public boolean removeRecipe(FemtocraftAssemblerRecipe recipe)
 	{
-		inputToRecipeMap.remove(normalizedInput(recipe));
-		outputToRecipeMap.remove(normalizedOutput(recipe));
+		if(inputToRecipeMap.remove(normalizedInput(recipe)) == null) return false;
+		if(outputToRecipeMap.remove(normalizedOutput(recipe)) == null) return false;
+		return true;
 	}
 	
 	public FemtocraftAssemblerRecipe getRecipe(ItemStack[] input, String username)
