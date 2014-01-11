@@ -83,6 +83,8 @@ public class FemtocraftConfigs {
 	public static @CfgId(block=true) int cuttingBoardID = 370;
 	
 	//bool
+	public static @CfgBool boolean requirePlayersOnlineForTileEntityTicks = false;
+	
 	public static @CfgBool boolean worldGen = true;
 	public static @CfgBool boolean titaniumGen = true;
 	public static @CfgBool boolean platinumGen = true;

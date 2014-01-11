@@ -89,7 +89,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 	
 	@Override
 	 public void updateEntity()
-    {
+    {	
 		checkConnections();
 		
 		//Don't do anything for empty containers

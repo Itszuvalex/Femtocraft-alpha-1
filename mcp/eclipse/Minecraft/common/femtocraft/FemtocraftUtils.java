@@ -2,6 +2,9 @@ package femtocraft;
 
 import java.util.Arrays;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.ForgeDirection;
 
 public class FemtocraftUtils {
@@ -26,5 +29,10 @@ public class FemtocraftUtils {
 //		default:
 //			return -1;
 //		}
+	}
+	
+	public static boolean isPlayerOnline(String username)
+	{
+		return Arrays.asList(MinecraftServer.getServer().getAllUsernames()).contains(username);
 	}
 }

@@ -39,23 +39,52 @@ public class FemtocraftAssemblerRecipeManager {
 			throw new IllegalArgumentException("FemtocraftAssemblerRecipe - Invalid Input Array Length!  Must be 9!");
 		}
 		
-		inputToRecipeMap.put(recipe.input, recipe);
-		outputToRecipeMap.put(recipe.output, recipe);
+		inputToRecipeMap.put(normalizedInput(recipe), recipe);
+		outputToRecipeMap.put(normalizedOutput(recipe), recipe);
 	}
 	
 	public void removeRecipe(FemtocraftAssemblerRecipe recipe)
 	{
-		inputToRecipeMap.remove(recipe.input);
-		outputToRecipeMap.remove(recipe.output);
+		inputToRecipeMap.remove(normalizedInput(recipe));
+		outputToRecipeMap.remove(normalizedOutput(recipe));
 	}
 	
-	public FemtocraftAssemblerRecipe getRecipe(ItemStack[] input)
+	public FemtocraftAssemblerRecipe getRecipe(ItemStack[] input, String username)
 	{
-		return inputToRecipeMap.get(input);
+		return inputToRecipeMap.get(normalizedInput(input));
 	}
 	
-	public FemtocraftAssemblerRecipe getRecipe(ItemStack output)
+	public FemtocraftAssemblerRecipe getRecipe(ItemStack output, String username)
 	{
-		return outputToRecipeMap.get(output);
+		return outputToRecipeMap.get(normalizedItem(output));
+	}
+	
+	private ItemStack normalizedOutput(FemtocraftAssemblerRecipe recipe)
+	{
+		return normalizedItem(recipe.output);
+	}
+	
+	private ItemStack[] normalizedInput(FemtocraftAssemblerRecipe recipe)
+	{
+		return normalizedInput(recipe.input);
+	}
+	
+	private ItemStack[] normalizedInput(ItemStack[] input)
+	{
+		if(input.length != 9) return null;
+		
+		ItemStack[] ret = new ItemStack[9];
+		
+		for(int i = 0; i < 9; i++)
+		{
+			ret[i] = normalizedItem(input[i]);
+		}
+		return ret;
+	}
+	
+	private ItemStack normalizedItem(ItemStack original)
+	{
+		if(original == null) return null;
+		return new ItemStack(original.itemID, 1, original.getItemDamage());
 	}
 }
