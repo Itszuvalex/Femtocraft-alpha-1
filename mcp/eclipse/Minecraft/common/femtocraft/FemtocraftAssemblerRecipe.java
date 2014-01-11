@@ -6,6 +6,7 @@ public class FemtocraftAssemblerRecipe {
 	public ItemStack[] input;
 	public Integer mass;
 	public ItemStack output;
+	public TechLevel tech;
 	
 	public enum TechLevel
 	{
@@ -17,10 +18,11 @@ public class FemtocraftAssemblerRecipe {
 		DIMENSIONAL		//Specialty Tier 2
 	}
 	
-	public FemtocraftAssemblerRecipe(ItemStack[] input_, Integer mass_, ItemStack output_, TechLevel tech)
+	public FemtocraftAssemblerRecipe(ItemStack[] input_, Integer mass_, ItemStack output_, TechLevel tech_)
 	{
 		input = input_;
 		mass = mass_;
-		output_ = output;
+		output = output_;
+		tech = tech_;
 	}
 }
