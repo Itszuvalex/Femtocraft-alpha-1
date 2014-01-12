@@ -70,6 +70,34 @@ public class FemtocraftResearchManager {
 	
 	//--------------------------------------------------
 	
+	public boolean playerHasDiscoveredTechnology(String username, Technology tech)
+	{
+		return playerHasDiscoveredTechnology(username, tech.name);
+	}
+	
+	public boolean playerHasDiscoveredTechnology(String username, String tech)
+	{
+		PlayerResearch pr = playerData.get(username);
+		if(pr == null) return false;
+		return pr.hasDiscoveredTechnology(tech);
+	}
+	
+	//--------------------------------------------------
+	
+	public boolean playerHasResearchedTechnology(String username, Technology tech)
+	{
+		return playerHasResearchedTechnology(username, tech.name);
+	}
+	
+	public boolean playerHasResearchedTechnology(String username, String tech)
+	{
+		PlayerResearch pr = playerData.get(username);
+		if(pr == null) return false;
+		return pr.hasResearchedTechnology(tech);
+	}
+	
+	//--------------------------------------------------
+	
 	private void addFreeResearches(PlayerResearch research)
 	{
 		for(Technology t : technologies.values())

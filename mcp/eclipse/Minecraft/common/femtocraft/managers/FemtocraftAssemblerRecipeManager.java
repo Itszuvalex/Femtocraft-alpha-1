@@ -84,14 +84,19 @@ public class FemtocraftAssemblerRecipeManager {
 		return (outputToRecipeMap.remove(normalizedOutput(recipe)) != null);
 	}
 	
-	public FemtocraftAssemblerRecipe getRecipe(ItemStack[] input, String username)
+	public FemtocraftAssemblerRecipe getRecipe(ItemStack[] input)
 	{
 		return inputToRecipeMap.get(normalizedInput(input));
 	}
 	
-	public FemtocraftAssemblerRecipe getRecipe(ItemStack output, String username)
+	public FemtocraftAssemblerRecipe getRecipe(ItemStack output)
 	{
 		return outputToRecipeMap.get(normalizedItem(output));
+	}
+	
+	public boolean hasResearchedRecipe(FemtocraftAssemblerRecipe recipe, String username)
+	{
+		return Femtocraft.researchManager.playerHasResearchedTechnology(username, recipe.tech);
 	}
 	
 	private ItemStack normalizedOutput(FemtocraftAssemblerRecipe recipe)

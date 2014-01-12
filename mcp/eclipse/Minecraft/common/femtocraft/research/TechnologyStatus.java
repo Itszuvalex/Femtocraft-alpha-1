@@ -4,7 +4,6 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TechnologyStatus {
 	public String tech;
-	public boolean discovered;
 	public boolean researched;
 	
 	public TechnologyStatus(String tech, boolean researched)

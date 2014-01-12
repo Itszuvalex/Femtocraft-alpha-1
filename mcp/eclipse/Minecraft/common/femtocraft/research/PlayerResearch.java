@@ -46,6 +46,29 @@ public class PlayerResearch {
 		return true;
 	}
 	
+	public boolean hasDiscoveredTechnology(Technology tech)
+	{
+		return hasDiscoveredTechnology(tech.name);
+	}
+	
+	public boolean hasDiscoveredTechnology(String tech)
+	{
+		TechnologyStatus ts = techStatus.get(tech);
+		if(ts == null) return false;
+		return true;
+	}
+	
+	public boolean hasResearchedTechnology(Technology tech)
+	{
+		return hasResearchedTechnology(tech.name);
+	}
+	
+	public boolean hasResearchedTechnology(String tech) {
+		TechnologyStatus ts = techStatus.get(tech);
+		if(ts == null) return false;
+		return ts.researched;
+	}
+
 	//---------------------------------------------------------
 	
 	public void saveToNBTTagCompound(NBTTagCompound compound)

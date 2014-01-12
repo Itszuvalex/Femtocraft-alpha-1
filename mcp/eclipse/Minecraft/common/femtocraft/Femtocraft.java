@@ -69,6 +69,7 @@ import femtocraft.industry.TileEntity.VacuumTubeTile;
 import femtocraft.industry.blocks.BlockMicroFurnace;
 import femtocraft.industry.blocks.VacuumTube;
 import femtocraft.managers.FemtocraftRecipeManager;
+import femtocraft.managers.FemtocraftResearchManager;
 import femtocraft.power.FemtopowerCable;
 import femtocraft.power.FemtopowerConsumerBlock;
 import femtocraft.power.FemtopowerGenerator;
@@ -98,6 +99,7 @@ public class Femtocraft {
 	public static Logger logger;
 	
 	public static FemtocraftRecipeManager recipeManager;
+	public static FemtocraftResearchManager researchManager;
 
 	//blocks
 	public static Block oreTitanium;
@@ -177,6 +179,9 @@ public class Femtocraft {
 		
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandlerFemtocraft());
 		MinecraftForge.EVENT_BUS.register(new FemtocraftEventHookContainer());
+		
+		//This uses a file.load(), figured it would be better in preInit
+		 researchManager = new FemtocraftResearchManager();
 	}
 	
 	@EventHandler
