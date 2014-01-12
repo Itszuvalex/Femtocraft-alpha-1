@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -176,12 +177,10 @@ public class Femtocraft {
 		Femtocraft.proxy.registerTileEntities();
 		Femtocraft.proxy.registerRendering();
 		Femtocraft.proxy.registerBlockRenderers();
+		Femtocraft.proxy.registerTickHandlers();
 		
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandlerFemtocraft());
 		MinecraftForge.EVENT_BUS.register(new FemtocraftEventHookContainer());
-		
-		//This uses a file.load(), figured it would be better in preInit
-		 researchManager = new FemtocraftResearchManager();
 	}
 	
 	@EventHandler
@@ -421,11 +420,12 @@ public class Femtocraft {
 		 
 		 //HURP....DURP
 		 recipeManager = new FemtocraftRecipeManager();
+		 researchManager = new FemtocraftResearchManager();
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-
+		
 	}
 	
 	private void registerRecipes() {

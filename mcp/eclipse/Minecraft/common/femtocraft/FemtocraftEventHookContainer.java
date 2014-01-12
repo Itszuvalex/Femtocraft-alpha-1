@@ -1,18 +1,21 @@
 package femtocraft;
 
-import net.minecraft.util.Icon;
-import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.world.WorldEvent;
 
 public class FemtocraftEventHookContainer {
 	@ForgeSubscribe
-	public void preStitch(TextureStitchEvent.Pre event)
+	public void load(WorldEvent.Load event)
 	{
+		if(event.world.isRemote) return;
+		Femtocraft.researchManager.load(event.world);
 	}
-	
-	@ForgeSubscribe
-	public void postStitch(TextureStitchEvent.Post event)
-	{
 
+	@ForgeSubscribe
+	public void save(WorldEvent.Save event)
+	{
+		if(event.world.isRemote) return;
+		Femtocraft.researchManager.save(event.world);
 	}
 }

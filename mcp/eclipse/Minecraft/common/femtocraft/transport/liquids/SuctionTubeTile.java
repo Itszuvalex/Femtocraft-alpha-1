@@ -95,29 +95,29 @@ public class SuctionTubeTile extends TileEntity implements IFluidHandler {
 		Arrays.fill(neighborCapacity, 0);
 		Arrays.fill(connections, false);
 		
-		for(int i=0; i < 6; i++) {
-			ForgeDirection dir = ForgeDirection.getOrientation(i);
-			
-			int locx = this.xCoord + dir.offsetX;
-			int locy = this.yCoord + dir.offsetY;
-			int locz = this.zCoord + dir.offsetZ;
-			
-			TileEntity checkTile = this.worldObj.getBlockTileEntity(locx, locy, locz);
-	 		   
-	 		if(checkTile != null && (checkTile instanceof IFluidHandler)) {
-	 			connections[i] = true;
-	 			
-	 			IFluidHandler fluidTank = (IFluidHandler)checkTile;
-	 			fluidTank.d
-	 			
-	 			FluidTankInfo[] tanks = fluidTank.getTankInfo(dir.getOpposite());
-	 			
-	 			for(FluidTankInfo info : tanks)
-	 			{
-	 				if
-	 			}
-	 		}
-		}
+//		for(int i=0; i < 6; i++) {
+//			ForgeDirection dir = ForgeDirection.getOrientation(i);
+//			
+//			int locx = this.xCoord + dir.offsetX;
+//			int locy = this.yCoord + dir.offsetY;
+//			int locz = this.zCoord + dir.offsetZ;
+//			
+//			TileEntity checkTile = this.worldObj.getBlockTileEntity(locx, locy, locz);
+//	 		   
+//	 		if(checkTile != null && (checkTile instanceof IFluidHandler)) {
+//	 			connections[i] = true;
+//	 			
+//	 			IFluidHandler fluidTank = (IFluidHandler)checkTile;
+//	 			fluidTank.d
+//	 			
+//	 			FluidTankInfo[] tanks = fluidTank.getTankInfo(dir.getOpposite());
+//	 			
+//	 			for(FluidTankInfo info : tanks)
+//	 			{
+//	 				if
+//	 			}
+//	 		}
+//		}
 	}
 	
 	private void distributeLiquid() {
@@ -126,32 +126,32 @@ public class SuctionTubeTile extends TileEntity implements IFluidHandler {
 		int amountToRemove = 0;
 		int[] ratio = new int[6];
 		
-		for(int i=0; i < 6; i++) {
-			ratio[i] = this.tank.getFluidAmount() - neighborPressure[i];
-			ratioMax += ratio[i];
-		}
-		
-		for(int i=0; i < 6; i++) {
-			if(ratio[i] <=0) {
-				ratio[i] = 0;
-				continue;
-			}
-			
-			ForgeDirection dir = ForgeDirection.getOrientation(i);
-			
-			int locx = this.xCoord + dir.offsetX;
-			int locy = this.yCoord + dir.offsetY;
-			int locz = this.zCoord + dir.offsetZ;
-			
-			IFluidHandler tankTile = (IFluidHandler)this.worldObj.getBlockTileEntity(locx, locy, locz);
-			
-			FluidStack fillStack = this.tank.getFluid();
-			fillStack.amount = (fillStack.amount * ratio[i])/ratioMax;
-			
-			if(tankTile != null)
-				amountToRemove += tankTile.fill(dir, fillStack, true);
-	 	}
-		
+//		for(int i=0; i < 6; i++) {
+//			ratio[i] = this.tank.getFluidAmount() - neighborPressure[i];
+//			ratioMax += ratio[i];
+//		}
+//		
+//		for(int i=0; i < 6; i++) {
+//			if(ratio[i] <=0) {
+//				ratio[i] = 0;
+//				continue;
+//			}
+//			
+//			ForgeDirection dir = ForgeDirection.getOrientation(i);
+//			
+//			int locx = this.xCoord + dir.offsetX;
+//			int locy = this.yCoord + dir.offsetY;
+//			int locz = this.zCoord + dir.offsetZ;
+//			
+//			IFluidHandler tankTile = (IFluidHandler)this.worldObj.getBlockTileEntity(locx, locy, locz);
+//			
+//			FluidStack fillStack = this.tank.getFluid();
+//			fillStack.amount = (fillStack.amount * ratio[i])/ratioMax;
+//			
+//			if(tankTile != null)
+//				amountToRemove += tankTile.fill(dir, fillStack, true);
+//	 	}
+//		
 		this.tank.getFluid().amount -= amountToRemove;
 	}
 

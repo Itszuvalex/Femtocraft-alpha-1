@@ -1,6 +1,9 @@
 package femtocraft.proxy;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
+import femtocraft.Femtocraft;
 import femtocraft.industry.TileEntity.MicroFurnaceTile;
 import femtocraft.industry.TileEntity.VacuumTubeTile;
 import femtocraft.power.TileEntity.FemtopowerCableTile;
@@ -13,7 +16,8 @@ public class CommonProxyFemtocraft {
 		
 	}
 	
-	public void registerTileEntities() {
+	public void registerTileEntities() 
+	{
 		 //Tile Entities
 //		 GameRegistry.registerTileEntity(FemtopowerTile.class, "FemtopowerTile");
 		 GameRegistry.registerTileEntity(FemtopowerProducerTest.class, "FemtopowerProducerTest");
@@ -24,6 +28,11 @@ public class CommonProxyFemtocraft {
 		 GameRegistry.registerTileEntity(VacuumTubeTile.class,  "VacuumTube");
 	}
 	
-	public void registerBlockRenderers() {
+	public void registerBlockRenderers() 
+	{
+	}
+	
+	public void registerTickHandlers()
+	{
 	}
 }
