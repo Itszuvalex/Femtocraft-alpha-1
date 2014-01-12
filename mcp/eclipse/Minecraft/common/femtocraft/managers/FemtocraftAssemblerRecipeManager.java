@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftAssemblerRecipe;
 import femtocraft.research.TechLevel;
@@ -82,6 +83,40 @@ public class FemtocraftAssemblerRecipeManager {
 	public boolean removeRecompositionRecipe(FemtocraftAssemblerRecipe recipe)
 	{
 		return (outputToRecipeMap.remove(normalizedOutput(recipe)) != null);
+	}
+	
+	public boolean canCraft(ItemStack[] input)
+	{
+		if(input.length != 9) return false;
+		FemtocraftAssemblerRecipe recipe = getRecipe(input);
+		if(recipe == null) return false;
+		
+		for(int i = 0; i < 9; ++i)
+		{
+			ItemStack rec = recipe.input[i];
+			if(input[i] == null || rec == null) continue;
+			
+			if(input[i].stackSize < input[i].stackSize) return false;
+			if(!itemMatches(rec, input[i])) return false;
+		}
+		
+		return true;
+	}
+	
+	public boolean canCraft(ItemStack input)
+	{
+		FemtocraftAssemblerRecipe recipe = getRecipe(input);
+		if(recipe == null) return false;
+		
+		if(input.stackSize < recipe.output.stackSize) return false;
+		if(!itemMatches(recipe.output, input)) return false;
+		
+		return true;
+	}
+	
+	private boolean itemMatches(ItemStack original, ItemStack compare)
+	{
+		return (original.isItemEqual(compare) || ((original.itemID == compare.itemID) && (original.getItemDamage() == OreDictionary.WILDCARD_VALUE)));
 	}
 	
 	public FemtocraftAssemblerRecipe getRecipe(ItemStack[] input)
