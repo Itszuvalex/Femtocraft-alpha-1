@@ -23,17 +23,17 @@ public class FemtocraftAssemblerRecipeManager {
 	private void registerRecipes()
 	{
 		//Femto-tier components
-		addRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Planeoid), new ItemStack(Femtocraft.Rectangulon), null, null, null}, 3, new ItemStack(Femtocraft.Crystallite), TechLevel.FEMTO, null));	//Crystallite
-		addRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Cubit), new ItemStack(Femtocraft.Planeoid), new ItemStack(Femtocraft.Cubit), null, null, null}, 3, new ItemStack(Femtocraft.Mineralite), TechLevel.FEMTO, null));	//Mineralite
-		addRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Cubit), new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Cubit), null, null, null}, 3, new ItemStack(Femtocraft.Metallite), TechLevel.FEMTO, null));	//Metallite
-		addRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Cubit), new ItemStack(Femtocraft.Rectangulon), null, null, null}, 3, new ItemStack(Femtocraft.Faunite), TechLevel.FEMTO, null));	//Faunite
-		addRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Planeoid), new ItemStack(Femtocraft.Cubit), new ItemStack(Femtocraft.Planeoid), null, null, null}, 3, new ItemStack(Femtocraft.Electrite), TechLevel.FEMTO, null));	//Electrite
-		addRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Planeoid), new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Planeoid), null, null, null}, 3, new ItemStack(Femtocraft.Florite), TechLevel.FEMTO, null));	//Florite
+		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Planeoid), new ItemStack(Femtocraft.Rectangulon), null, null, null}, 3, new ItemStack(Femtocraft.Crystallite), TechLevel.FEMTO, null));	//Crystallite
+		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Cubit), new ItemStack(Femtocraft.Planeoid), new ItemStack(Femtocraft.Cubit), null, null, null}, 3, new ItemStack(Femtocraft.Mineralite), TechLevel.FEMTO, null));	//Mineralite
+		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Cubit), new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Cubit), null, null, null}, 3, new ItemStack(Femtocraft.Metallite), TechLevel.FEMTO, null));	//Metallite
+		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Cubit), new ItemStack(Femtocraft.Rectangulon), null, null, null}, 3, new ItemStack(Femtocraft.Faunite), TechLevel.FEMTO, null));	//Faunite
+		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Planeoid), new ItemStack(Femtocraft.Cubit), new ItemStack(Femtocraft.Planeoid), null, null, null}, 3, new ItemStack(Femtocraft.Electrite), TechLevel.FEMTO, null));	//Electrite
+		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Planeoid), new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Planeoid), null, null, null}, 3, new ItemStack(Femtocraft.Florite), TechLevel.FEMTO, null));	//Florite
 		
 		//Micro-tier components
 	}
 	
-	public void addRecipe(FemtocraftAssemblerRecipe recipe) throws IllegalArgumentException
+	public void addReversableRecipe(FemtocraftAssemblerRecipe recipe) throws IllegalArgumentException
 	{
 		if(recipe.input.length != 9)
 		{
@@ -44,11 +44,39 @@ public class FemtocraftAssemblerRecipeManager {
 		outputToRecipeMap.put(normalizedOutput(recipe), recipe);
 	}
 	
-	public boolean removeRecipe(FemtocraftAssemblerRecipe recipe)
+	public void addDecompositionRecipe(FemtocraftAssemblerRecipe recipe) throws IllegalArgumentException
 	{
-		if(inputToRecipeMap.remove(normalizedInput(recipe)) == null) return false;
-		if(outputToRecipeMap.remove(normalizedOutput(recipe)) == null) return false;
-		return true;
+		if(recipe.input.length != 9)
+		{
+			throw new IllegalArgumentException("FemtocraftAssemblerRecipe - Invalid Input Array Length!  Must be 9!");
+		}
+		
+		inputToRecipeMap.put(normalizedInput(recipe), recipe);
+	}
+	
+	public void addRecompositionRecipe(FemtocraftAssemblerRecipe recipe) throws IllegalArgumentException
+	{
+		if(recipe.input.length != 9)
+		{
+			throw new IllegalArgumentException("FemtocraftAssemblerRecipe - Invalid Input Array Length!  Must be 9!");
+		}
+		
+		outputToRecipeMap.put(normalizedOutput(recipe), recipe);
+	}
+	
+	public boolean removeReversableRecipe(FemtocraftAssemblerRecipe recipe)
+	{
+		return removeDecompositionRecipe(recipe) && removeRecompositionRecipe(recipe);
+	}
+	
+	public boolean removeDecompositionRecipe(FemtocraftAssemblerRecipe recipe)
+	{
+		return (inputToRecipeMap.remove(normalizedInput(recipe)) != null);
+	}
+	
+	public boolean removeRecompositionRecipe(FemtocraftAssemblerRecipe recipe)
+	{
+		return (outputToRecipeMap.remove(normalizedOutput(recipe)) != null);
 	}
 	
 	public FemtocraftAssemblerRecipe getRecipe(ItemStack[] input, String username)
