@@ -181,8 +181,9 @@ public class FemtocraftResearchManager {
 	
 	public boolean load(World world)
 	{
-		if(lastWorldLoaded == world.getWorldInfo().getWorldName()) return false;
-		lastWorldLoaded = world.getWorldInfo().getWorldName();
+		String worldname = world.getWorldInfo().getWorldName();
+		if(lastWorldLoaded == worldname) return false;
+		lastWorldLoaded = worldname;
 		
 		try
 		{

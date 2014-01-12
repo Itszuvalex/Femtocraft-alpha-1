@@ -78,7 +78,7 @@ public class PlayerResearch {
 		for(TechnologyStatus status : techStatus.values())
 		{
 			NBTTagCompound cs = new NBTTagCompound();
-			cs.setString("username", username);
+			cs.setString("techname", status.tech);
 			
 			NBTTagCompound data = new NBTTagCompound();
 			status.saveToNBTTagCompound(data);
@@ -97,10 +97,10 @@ public class PlayerResearch {
 		for(int i = 0; i < list.tagCount(); ++i)
 		{
 			NBTTagCompound cs = (NBTTagCompound) list.tagAt(i);
-			String username = cs.getString("username");
+			String techname = cs.getString("techname");
 			
 			NBTTagCompound data = (NBTTagCompound) cs.getTag("data");
-			TechnologyStatus status = new TechnologyStatus(username);
+			TechnologyStatus status = new TechnologyStatus(techname);
 			status.loadFromNBTTagCompound(data);
 			
 			techStatus.put(username, status);
