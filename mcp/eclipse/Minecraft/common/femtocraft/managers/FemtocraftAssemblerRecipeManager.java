@@ -50,8 +50,6 @@ public class FemtocraftAssemblerRecipeManager {
 		
 		test = getRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Planeoid), null, null, null});
 		Femtocraft.logger.log(Level.WARNING, "Recipe " + (test != null ? "found" : "not found") + ".");
-	
-	
 	}
 	
 	public void addReversableRecipe(FemtocraftAssemblerRecipe recipe) throws IllegalArgumentException
