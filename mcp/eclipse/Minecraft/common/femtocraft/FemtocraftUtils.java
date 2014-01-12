@@ -35,4 +35,9 @@ public class FemtocraftUtils {
 	{
 		return Arrays.asList(MinecraftServer.getServer().getAllUsernames()).contains(username);
 	}
+	
+	public static EntityPlayer getPlayer(String username)
+	{
+		return Minecraft.getMinecraft().theWorld.getPlayerEntityByName(username);
+	}
 }

@@ -64,6 +64,11 @@ public class FemtocraftAssemblerRecipeManager {
 		outputToRecipeMap.put(normalizedOutput(recipe), recipe);
 	}
 	
+	public boolean removeAnyRecipe(FemtocraftAssemblerRecipe recipe)
+	{
+		return removeDecompositionRecipe(recipe) || removeRecompositionRecipe(recipe);
+	}
+	
 	public boolean removeReversableRecipe(FemtocraftAssemblerRecipe recipe)
 	{
 		return removeDecompositionRecipe(recipe) && removeRecompositionRecipe(recipe);
