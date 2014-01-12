@@ -1,22 +1,26 @@
 package femtocraft.managers;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.logging.Level;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftAssemblerRecipe;
+import femtocraft.FemtocraftUtils;
+import femtocraft.research.AssemblerInputWrapper;
+import femtocraft.research.AssemblerOutputWrapper;
 import femtocraft.research.TechLevel;
 
 public class FemtocraftAssemblerRecipeManager {
-	private Map<ItemStack[], FemtocraftAssemblerRecipe> inputToRecipeMap;
-	private Map<ItemStack, FemtocraftAssemblerRecipe> outputToRecipeMap;
+	private SortedMap<AssemblerInputWrapper, FemtocraftAssemblerRecipe> inputToRecipeMap;
+	private SortedMap<AssemblerOutputWrapper, FemtocraftAssemblerRecipe> outputToRecipeMap;
 	
 	public FemtocraftAssemblerRecipeManager()
 	{
-		inputToRecipeMap = new HashMap<ItemStack[], FemtocraftAssemblerRecipe>();
-		outputToRecipeMap = new HashMap<ItemStack, FemtocraftAssemblerRecipe>();
+		inputToRecipeMap = new TreeMap<AssemblerInputWrapper, FemtocraftAssemblerRecipe>();
+		outputToRecipeMap = new TreeMap<AssemblerOutputWrapper, FemtocraftAssemblerRecipe>();
 		
 		registerRecipes();
 	}
@@ -32,6 +36,22 @@ public class FemtocraftAssemblerRecipeManager {
 		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Planeoid), new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Planeoid), null, null, null}, 3, new ItemStack(Femtocraft.Florite), TechLevel.FEMTO, null));	//Florite
 		
 		//Micro-tier components
+		
+		
+//		testRecipes();
+	}
+	
+	private void testRecipes()
+	{
+		FemtocraftAssemblerRecipe test = getRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Planeoid), new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Planeoid), null, null, null});
+		Femtocraft.logger.log(Level.WARNING, "Recipe " + (test != null ? "found" : "not found") + ".");
+		if(test != null)
+			Femtocraft.logger.log(Level.WARNING, "Output " + (test.output.isItemEqual(new ItemStack(Femtocraft.Florite)) ? "matches" : "does not match") + ".");
+		
+		test = getRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Planeoid), null, null, null});
+		Femtocraft.logger.log(Level.WARNING, "Recipe " + (test != null ? "found" : "not found") + ".");
+	
+	
 	}
 	
 	public void addReversableRecipe(FemtocraftAssemblerRecipe recipe) throws IllegalArgumentException
@@ -40,9 +60,10 @@ public class FemtocraftAssemblerRecipeManager {
 		{
 			throw new IllegalArgumentException("FemtocraftAssemblerRecipe - Invalid Input Array Length!  Must be 9!");
 		}
-		
-		inputToRecipeMap.put(normalizedInput(recipe), recipe);
-		outputToRecipeMap.put(normalizedOutput(recipe), recipe);
+		ItemStack[] normal = normalizedInput(recipe);
+		if(normal == null) return;
+		inputToRecipeMap.put(new AssemblerInputWrapper(normal, recipe), recipe);
+		outputToRecipeMap.put(new AssemblerOutputWrapper(normalizedOutput(recipe), recipe), recipe);
 	}
 	
 	public void addDecompositionRecipe(FemtocraftAssemblerRecipe recipe) throws IllegalArgumentException
@@ -52,7 +73,9 @@ public class FemtocraftAssemblerRecipeManager {
 			throw new IllegalArgumentException("FemtocraftAssemblerRecipe - Invalid Input Array Length!  Must be 9!");
 		}
 		
-		inputToRecipeMap.put(normalizedInput(recipe), recipe);
+		ItemStack[] normal = normalizedInput(recipe);
+		if(normal == null) return;
+		inputToRecipeMap.put(new AssemblerInputWrapper(normal, recipe), recipe);
 	}
 	
 	public void addRecompositionRecipe(FemtocraftAssemblerRecipe recipe) throws IllegalArgumentException
@@ -62,7 +85,7 @@ public class FemtocraftAssemblerRecipeManager {
 			throw new IllegalArgumentException("FemtocraftAssemblerRecipe - Invalid Input Array Length!  Must be 9!");
 		}
 		
-		outputToRecipeMap.put(normalizedOutput(recipe), recipe);
+		outputToRecipeMap.put(new AssemblerOutputWrapper(normalizedOutput(recipe), recipe), recipe);
 	}
 	
 	public boolean removeAnyRecipe(FemtocraftAssemblerRecipe recipe)
@@ -77,12 +100,14 @@ public class FemtocraftAssemblerRecipeManager {
 	
 	public boolean removeDecompositionRecipe(FemtocraftAssemblerRecipe recipe)
 	{
-		return (inputToRecipeMap.remove(normalizedInput(recipe)) != null);
+		ItemStack[] normal = normalizedInput(recipe);
+		if(normal == null) return false;
+		return (inputToRecipeMap.remove(new AssemblerInputWrapper(normal, null)) != null);
 	}
 	
 	public boolean removeRecompositionRecipe(FemtocraftAssemblerRecipe recipe)
 	{
-		return (outputToRecipeMap.remove(normalizedOutput(recipe)) != null);
+		return (outputToRecipeMap.remove(new AssemblerOutputWrapper(normalizedOutput(recipe), null)) != null);
 	}
 	
 	public boolean canCraft(ItemStack[] input)
@@ -97,7 +122,7 @@ public class FemtocraftAssemblerRecipeManager {
 			if(input[i] == null || rec == null) continue;
 			
 			if(input[i].stackSize < input[i].stackSize) return false;
-			if(!itemMatches(rec, input[i])) return false;
+			if(FemtocraftUtils.compareItem(rec, input[i]) != 0) return false;
 		}
 		
 		return true;
@@ -109,24 +134,21 @@ public class FemtocraftAssemblerRecipeManager {
 		if(recipe == null) return false;
 		
 		if(input.stackSize < recipe.output.stackSize) return false;
-		if(!itemMatches(recipe.output, input)) return false;
+		if(FemtocraftUtils.compareItem(recipe.output, input) != 0) return false;
 		
 		return true;
 	}
 	
-	private boolean itemMatches(ItemStack original, ItemStack compare)
-	{
-		return (original.isItemEqual(compare) || ((original.itemID == compare.itemID) && (original.getItemDamage() == OreDictionary.WILDCARD_VALUE)));
-	}
-	
 	public FemtocraftAssemblerRecipe getRecipe(ItemStack[] input)
 	{
-		return inputToRecipeMap.get(normalizedInput(input));
+		ItemStack[] normal = normalizedInput(input);
+		if(normal == null) return null;
+		return inputToRecipeMap.get(new AssemblerInputWrapper(normal, null));
 	}
 	
 	public FemtocraftAssemblerRecipe getRecipe(ItemStack output)
 	{
-		return outputToRecipeMap.get(normalizedItem(output));
+		return outputToRecipeMap.get(new AssemblerOutputWrapper(normalizedItem(output), null));
 	}
 	
 	public boolean hasResearchedRecipe(FemtocraftAssemblerRecipe recipe, String username)

@@ -101,7 +101,7 @@ public class Femtocraft {
 	
 	public static FemtocraftRecipeManager recipeManager;
 	public static FemtocraftResearchManager researchManager;
-
+	
 	//blocks
 	public static Block oreTitanium;
 	public static Block orePlatinum;

@@ -4,8 +4,10 @@ import java.util.Arrays;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class FemtocraftUtils {
 
@@ -39,5 +41,25 @@ public class FemtocraftUtils {
 	public static EntityPlayer getPlayer(String username)
 	{
 		return Minecraft.getMinecraft().theWorld.getPlayerEntityByName(username);
+	}
+	
+	public static int compareItem(ItemStack cur, ItemStack in)
+	{
+		if(cur == null && in != null) return -1;
+		if(cur != null && in == null) return 1;
+		if(cur == null && in == null) return 0;
+		
+		if(cur.itemID < in.itemID) return -1;
+		if(cur.itemID > in.itemID) return 1;
+		
+		int damage = cur.getItemDamage();
+		int indamage = in.getItemDamage();
+		if((damage != OreDictionary.WILDCARD_VALUE) || (indamage != OreDictionary.WILDCARD_VALUE))
+		{
+			if(damage < indamage) return -1;
+			if(damage > indamage) return 1;
+		}
+		
+		return 0;
 	}
 }
