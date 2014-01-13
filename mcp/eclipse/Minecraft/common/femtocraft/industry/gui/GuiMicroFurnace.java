@@ -11,8 +11,8 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
-import femtocraft.industry.ContainerMicroFurnace;
 import femtocraft.industry.TileEntity.MicroFurnaceTile;
+import femtocraft.industry.containers.ContainerMicroFurnace;
 
 @SideOnly(Side.CLIENT)
 public class GuiMicroFurnace extends GuiContainer

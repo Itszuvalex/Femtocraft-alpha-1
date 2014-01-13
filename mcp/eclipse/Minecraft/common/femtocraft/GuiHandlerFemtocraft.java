@@ -4,8 +4,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
-import femtocraft.industry.ContainerMicroFurnace;
 import femtocraft.industry.TileEntity.MicroFurnaceTile;
+import femtocraft.industry.containers.ContainerMicroFurnace;
 import femtocraft.industry.gui.GuiMicroFurnace;
 
 public class GuiHandlerFemtocraft implements IGuiHandler {

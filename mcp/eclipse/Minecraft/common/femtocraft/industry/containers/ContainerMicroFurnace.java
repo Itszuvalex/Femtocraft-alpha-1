@@ -1,4 +1,4 @@
-package femtocraft.industry;
+package femtocraft.industry.containers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
