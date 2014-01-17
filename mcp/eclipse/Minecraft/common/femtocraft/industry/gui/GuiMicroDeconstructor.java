@@ -71,12 +71,14 @@ public class GuiMicroDeconstructor extends GuiContainer
         if(fluid != null)
         {
         	Icon image = fluid.getFluid().getStillIcon();
-        	Femtocraft.logger.log(Level.INFO, image.getIconName());
 //        	Icon image = BlockFluid.getFluidIcon("water_still");
 //        	image = Femtocraft.mass_block.stillIcon;
        
         	i1 = (this.deconstructorInventory.getMassAmount() * 60)/this.deconstructorInventory.getMassCapacity();
         	FemtocraftRenderUtils.renderLiquidInGUI(this, this.zLevel, image, k + 150, l + 8 + (60 - i1), 16, i1);
+        	
+        	//Rebind texture
+        	Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
         }
         
         //Draw Tank Lines

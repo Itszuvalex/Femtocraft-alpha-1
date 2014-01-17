@@ -1,8 +1,10 @@
 package femtocraft.render;
 
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.Icon;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -280,19 +282,21 @@ public class FemtocraftRenderUtils {
 	
 	public static void renderLiquidInGUI(GuiContainer container, float zheight, Icon icon, int x, int y, int width, int height)
 	{
+		TextureManager man = Minecraft.getMinecraft().getTextureManager();
+		//terrain.png
+		man.bindTexture(man.getResourceLocation(0));
 		renderLiquidInGUI_height(container, zheight, icon, x, y, width, height);
 	}
 	
 	private static void renderLiquidInGUI_height(GuiContainer container, float zheight, Icon icon, int x, int y, int width, int height)
 	{
 		int i = 0;
-		int remaining = height - i*width;
+		int remaining = height;
 		if((height - width) > 0)
 		{
-			for(i = 0; width < remaining; i+= width)
+			for(i = 0; width < remaining; i += width, remaining-= width)
 			{
-				drawTexturedModalSquareFromIcon(zheight, x, y+1, width, icon);
-				remaining = height - i*width;
+				drawTexturedModalSquareFromIcon(zheight, x, y+i, width, icon);
 			}
 		}
 		
