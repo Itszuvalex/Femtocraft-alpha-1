@@ -306,15 +306,15 @@ public class FemtocraftRenderUtils {
 	private static void renderLiquidInGUI_width(GuiContainer container, float zheight, Icon icon, int x, int y, int width, int height)
 	{
 		int i = 0;
+		int remaining = width;
 		if((width - height) > 0)
 		{
-			for(i = 0; i < (width-height); i += height)
+			for(i = 0; height < remaining; i += height, remaining -= height)
 			{
 				drawTexturedModalSquareFromIcon(zheight, x+i, y, height, icon);
 			}
 		}
 		
-		int remaining = width - i*height;
 		drawTexturedModalRectFromIcon(zheight, x + i, y, remaining, height, icon.getMinU(), icon.getInterpolatedV(((remaining*16.f)/height)), icon.getMinV(), icon.getMaxV());
 	}
 	

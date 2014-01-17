@@ -314,6 +314,7 @@ public class MicroDeconstructorTile  extends FemtopowerConsumer implements ISide
         	FemtocraftAssemblerRecipe recipe = FemtocraftRecipeManager.assemblyRecipes.getRecipe(this.deconstructorItemStacks[0]);
             if (recipe == null) return false;
             if((tank.getCapacity() - tank.getFluidAmount()) < recipe.mass) return false;
+            if(deconstructorItemStacks[0].stackSize < recipe.output.stackSize) return false;
             if(!roomForItems(recipe.input)) return false;
             return true;
         }
@@ -339,7 +340,9 @@ public class MicroDeconstructorTile  extends FemtopowerConsumer implements ISide
 		deconstructingStack = deconstructorItemStacks[0].copy();
 		deconstructingStack.stackSize = 1;
 		
-		--deconstructorItemStacks[0].stackSize;
+		FemtocraftAssemblerRecipe recipe = FemtocraftRecipeManager.assemblyRecipes.getRecipe(this.deconstructorItemStacks[0]);
+		
+		deconstructorItemStacks[0].stackSize -= recipe.output.stackSize;
 
         if (deconstructorItemStacks[0].stackSize <= 0)
         {
