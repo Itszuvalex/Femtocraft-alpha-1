@@ -289,9 +289,9 @@ public class FemtocraftRenderUtils {
 		int remaining = height - i*width;
 		if((height - width) > 0)
 		{
-			for(i = 0; height < remaining; i+= width)
+			for(i = 0; width < remaining; i+= width)
 			{
-				drawTexturedModalRectFromIcon(zheight, x, y + i, width, height, icon.getMinU(), icon.getMaxU(), icon.getMinV(), icon.getMaxV());
+				drawTexturedModalSquareFromIcon(zheight, x, y+1, width, icon);
 				remaining = height - i*width;
 			}
 		}
@@ -306,7 +306,7 @@ public class FemtocraftRenderUtils {
 		{
 			for(i = 0; i < (width-height); i += height)
 			{
-				drawTexturedModalRectFromIcon(zheight, x + i, y, height, height, icon.getMinU(), icon.getMaxU(), icon.getMinV(), icon.getMaxV());
+				drawTexturedModalSquareFromIcon(zheight, x+i, y, height, icon);
 			}
 		}
 		
@@ -314,14 +314,19 @@ public class FemtocraftRenderUtils {
 		drawTexturedModalRectFromIcon(zheight, x + i, y, remaining, height, icon.getMinU(), icon.getInterpolatedV(((remaining*16.f)/height)), icon.getMinV(), icon.getMaxV());
 	}
 	
-	private static void drawTexturedModalRectFromIcon(float height, int par1, int par2, int par4, int par5, float minU, float maxU, float minV, float maxV)
+	private static void drawTexturedModalSquareFromIcon(float zheight, int x, int y, int size, Icon icon)
+	{
+		drawTexturedModalRectFromIcon(zheight, x, y, size, size, icon.getMinU(), icon.getMaxU(), icon.getMinV(), icon.getMaxV());
+	}
+	
+	private static void drawTexturedModalRectFromIcon(float zheight, int x, int y, int width, int height, float minU, float maxU, float minV, float maxV)
 	{
 		Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV((double)(par1 + 0), (double)(par2 + par5), (double)height, (double)minU, (double)maxV);
-        tessellator.addVertexWithUV((double)(par1 + par4), (double)(par2 + par5), (double)height, (double)maxU, (double)maxV);
-        tessellator.addVertexWithUV((double)(par1 + par4), (double)(par2 + 0), (double)height, (double)maxU, (double)minV);
-        tessellator.addVertexWithUV((double)(par1 + 0), (double)(par2 + 0), (double)height, (double)minU, (double)minV);
+        tessellator.addVertexWithUV((double)(x + 0), (double)(y + height), (double)zheight, (double)minU, (double)maxV);
+        tessellator.addVertexWithUV((double)(x + width), (double)(y + height), (double)zheight, (double)maxU, (double)maxV);
+        tessellator.addVertexWithUV((double)(x + width), (double)(y + 0), (double)zheight, (double)maxU, (double)minV);
+        tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), (double)zheight, (double)minU, (double)minV);
         tessellator.draw();
 	}
 }

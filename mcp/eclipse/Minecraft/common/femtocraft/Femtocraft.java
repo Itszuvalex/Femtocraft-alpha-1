@@ -274,7 +274,7 @@ public class Femtocraft {
 		 FluidRegistry.registerFluid(mass);
 		 
 		 mass_block = new MassBlock(FemtocraftConfigs.FemtocraftMassBlock);
-//		 GameRegistry.registerBlock(mass_block, "Mass");
+		 GameRegistry.registerBlock(mass_block, "Mass");
 		 LanguageRegistry.addName(mass_block, "Mass");
 		 
 		 //items

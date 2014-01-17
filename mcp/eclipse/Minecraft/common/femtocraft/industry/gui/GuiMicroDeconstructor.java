@@ -1,5 +1,8 @@
 package femtocraft.industry.gui;
 
+import java.util.logging.Level;
+
+import net.minecraft.block.BlockFluid;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -63,11 +66,14 @@ public class GuiMicroDeconstructor extends GuiContainer
         this.drawTexturedModalRect(k + 61, l + 37, 176, 14, i1 + 1, 16);
         i1 = (this.deconstructorInventory.currentPower  * 60)/ this.deconstructorInventory.getMaxPower();
         this.drawTexturedModalRect(k + 10, l + 8 + (60 - i1), 176, 31 + (60 - i1), 16, i1);
-        
+
         FluidStack fluid = this.deconstructorInventory.getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
         if(fluid != null)
         {
         	Icon image = fluid.getFluid().getStillIcon();
+        	Femtocraft.logger.log(Level.INFO, image.getIconName());
+//        	Icon image = BlockFluid.getFluidIcon("water_still");
+//        	image = Femtocraft.mass_block.stillIcon;
        
         	i1 = (this.deconstructorInventory.getMassAmount() * 60)/this.deconstructorInventory.getMassCapacity();
         	FemtocraftRenderUtils.renderLiquidInGUI(this, this.zLevel, image, k + 150, l + 8 + (60 - i1), 16, i1);
