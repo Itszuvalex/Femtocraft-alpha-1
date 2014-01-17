@@ -3,7 +3,6 @@ package femtocraft.managers;
 import java.util.HashMap;
 import java.util.Map;
 
-import femtocraft.FemtocraftAssemblerRecipe;
 import net.minecraft.item.ItemStack;
 
 public class FemtocraftRecipeManager {

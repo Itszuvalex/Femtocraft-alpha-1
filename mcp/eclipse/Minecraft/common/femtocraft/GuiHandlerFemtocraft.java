@@ -4,8 +4,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
+import femtocraft.industry.TileEntity.MicroDeconstructorTile;
 import femtocraft.industry.TileEntity.MicroFurnaceTile;
+import femtocraft.industry.containers.ContainerMicroDeconstructor;
 import femtocraft.industry.containers.ContainerMicroFurnace;
+import femtocraft.industry.gui.GuiMicroDeconstructor;
 import femtocraft.industry.gui.GuiMicroFurnace;
 
 public class GuiHandlerFemtocraft implements IGuiHandler {
@@ -21,7 +24,10 @@ public class GuiHandlerFemtocraft implements IGuiHandler {
 		if(tileEntity instanceof MicroFurnaceTile) {
 			return new ContainerMicroFurnace(player.inventory, (MicroFurnaceTile)tileEntity);
 		}
-		
+		else if(tileEntity instanceof MicroDeconstructorTile)
+		{
+			return new ContainerMicroDeconstructor(player.inventory, (MicroDeconstructorTile)tileEntity);
+		}
 		
 		return null;
 	}
@@ -34,7 +40,10 @@ TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 		if(tileEntity instanceof MicroFurnaceTile) {
 			return new GuiMicroFurnace(player.inventory, (MicroFurnaceTile)tileEntity);
 		}
-		
+		else if(tileEntity instanceof MicroDeconstructorTile)
+		{
+			return new GuiMicroDeconstructor(player.inventory, (MicroDeconstructorTile)tileEntity);
+		}
 		
 		return null;
 	}

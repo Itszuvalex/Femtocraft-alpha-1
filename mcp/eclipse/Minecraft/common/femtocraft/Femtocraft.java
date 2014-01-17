@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -67,6 +66,7 @@ import femtocraft.core.ore.oreTitanium;
 import femtocraft.farming.produce.Tomato;
 import femtocraft.farming.seeds.tomatoSeed;
 import femtocraft.industry.TileEntity.VacuumTubeTile;
+import femtocraft.industry.blocks.BlockMicroDeconstructor;
 import femtocraft.industry.blocks.BlockMicroFurnace;
 import femtocraft.industry.blocks.VacuumTube;
 import femtocraft.managers.FemtocraftRecipeManager;
@@ -116,6 +116,7 @@ public class Femtocraft {
 	public static Block FemtopowerConsumerTest;
 	public static Block FemtocraftMicroFurnaceUnlit;
 	public static Block FemtocraftMicroFurnaceLit;
+	public static Block FemtocraftMicroDeconstructor;
 	public static Block FemtopowerMicroCube;
 	public static Block FemtocraftVacuumTube;
 	
@@ -255,6 +256,10 @@ public class Femtocraft {
 		 LanguageRegistry.addName(FemtocraftMicroFurnaceUnlit, "Micro-Furnace");
 		 
 		 FemtocraftMicroFurnaceLit = new BlockMicroFurnace(FemtocraftConfigs.FemtocraftMicroFurnaceLitID, true);
+		 
+		 FemtocraftMicroDeconstructor = new BlockMicroDeconstructor(FemtocraftConfigs.FemtocraftMicroDeconstructorID);
+		 GameRegistry.registerBlock(FemtocraftMicroDeconstructor, "FemtocraftMicroDeconstructor");
+		 LanguageRegistry.addName(FemtocraftMicroDeconstructor, "Microtech Deconstructor");
 		 
 		 FemtopowerMicroCube = new FemtopowerMicroCube(FemtocraftConfigs.FemtopowerMicroCubeID);
 		 GameRegistry.registerBlock(FemtopowerMicroCube, "FemtopowerMicroCube");

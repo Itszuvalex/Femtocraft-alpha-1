@@ -1,5 +1,6 @@
 package femtocraft;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import net.minecraft.client.Minecraft;
@@ -62,4 +63,65 @@ public class FemtocraftUtils {
 		
 		return 0;
 	}
+	
+	public static boolean placeItem(ItemStack item, ItemStack[] slots, int[] restrictions)
+    {
+    	if(item == null) return true;
+    	//Attempt to combine, first
+    	int amount = item.stackSize;
+
+    	for(int i = 0; i < slots.length; ++i)
+    	{
+    		boolean restricted = false;
+    		for(int r : restrictions)
+    		{
+    			if(i == r) 
+    			{
+    				restricted = true;
+    				break;
+    			}
+    		}
+    		if(restricted) continue;
+    		
+    		if(slots[i] != null && slots[i].isItemEqual(item))
+    		{
+    			ItemStack slot = slots[i];
+    			int room = (slot.getMaxStackSize() - slot.stackSize);
+    			if(room < amount)
+    			{
+    				slot.stackSize += room;
+    				amount -= room;
+    			}
+    			else
+    			{
+    				slot.stackSize += amount;
+    				return true;
+    			}
+    		}
+    	}
+    	
+    	//Place into null locations
+    	for(int i = 0; i < slots.length; ++i)
+    	{
+    		boolean restricted = false;
+    		for(int r : restrictions)
+    		{
+    			if(i == r) 
+    			{
+    				restricted = true;
+    				break;
+    			}
+    		}
+    		if(restricted) continue;
+    		
+    		if(slots[i] == null)
+    		{
+    			slots[i] = item.copy();
+    			slots[i].stackSize = amount;
+    			return true;
+    		}
+    	}
+    	
+    	return false;
+    }
 }

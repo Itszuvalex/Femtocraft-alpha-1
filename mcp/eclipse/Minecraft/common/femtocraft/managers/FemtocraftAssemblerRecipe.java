@@ -1,7 +1,8 @@
-package femtocraft;
+package femtocraft.managers;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+import femtocraft.FemtocraftUtils;
 import femtocraft.research.TechLevel;
 import femtocraft.research.Technology;
 

@@ -6,7 +6,6 @@ import java.util.logging.Level;
 
 import net.minecraft.item.ItemStack;
 import femtocraft.Femtocraft;
-import femtocraft.FemtocraftAssemblerRecipe;
 import femtocraft.FemtocraftUtils;
 import femtocraft.research.AssemblerInputComparator;
 import femtocraft.research.AssemblerOutputComparator;
