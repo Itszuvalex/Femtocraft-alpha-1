@@ -17,6 +17,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.industry.TileEntity.MicroDeconstructorTile;
 import femtocraft.industry.containers.ContainerMicroDeconstructor;
+import femtocraft.render.FemtocraftRenderUtils;
 
 @SideOnly(Side.CLIENT)
 public class GuiMicroDeconstructor extends GuiContainer
@@ -61,14 +62,15 @@ public class GuiMicroDeconstructor extends GuiContainer
         i1 = this.deconstructorInventory.getCookProgressScaled(24);
         this.drawTexturedModalRect(k + 61, l + 37, 176, 14, i1 + 1, 16);
         i1 = (this.deconstructorInventory.currentPower  * 60)/ this.deconstructorInventory.getMaxPower();
-        this.drawTexturedModalRect(k + 10, l + 8 + (60 - i1), 176, 31 + (60 - i1), 16 + (60 - i1), i1);
+        this.drawTexturedModalRect(k + 10, l + 8 + (60 - i1), 176, 31 + (60 - i1), 16, i1);
         
         FluidStack fluid = this.deconstructorInventory.getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
         if(fluid != null)
         {
-        	Icon image = fluid.getFluid().getIcon();
-        	
-        	
+        	Icon image = fluid.getFluid().getStillIcon();
+       
+        	i1 = (this.deconstructorInventory.getMassAmount() * 60)/this.deconstructorInventory.getMassCapacity();
+        	FemtocraftRenderUtils.renderLiquidInGUI(this, this.zLevel, image, k + 150, l + 8 + (60 - i1), 16, i1);
         }
         
         //Draw Tank Lines

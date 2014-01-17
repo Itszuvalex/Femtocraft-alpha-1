@@ -10,7 +10,7 @@ public class Mass extends Fluid {
 
 	public Mass() {
 		super("Mass");
-		setUnlocalizedName("mass");
+		setUnlocalizedName("Mass");
 		setLuminosity(1);
 		setDensity(5000);
 		setTemperature(600);
