@@ -138,9 +138,9 @@ public class ContainerMicroDeconstructor extends Container
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (par2 == 1)
+            if (par2 >0 && par2 < 10)
             {
-                if (!this.mergeItemStack(itemstack1, 2, 38, true))
+                if (!this.mergeItemStack(itemstack1, 10, 46, true))
                 {
                     return null;
                 }
@@ -156,19 +156,19 @@ public class ContainerMicroDeconstructor extends Container
                         return null;
                     }
                 }
-                else if (par2 >= 2 && par2 < 29)
+                else if (par2 >= 10 && par2 < 37)
                 {
-                    if (!this.mergeItemStack(itemstack1, 29, 38, false))
+                    if (!this.mergeItemStack(itemstack1, 37, 46, false))
                     {
                         return null;
                     }
                 }
-                else if (par2 >= 29 && par2 < 38 && !this.mergeItemStack(itemstack1, 2, 29, false))
+                else if (par2 >= 37 && par2 < 46 && !this.mergeItemStack(itemstack1, 10, 37, false))
                 {
                     return null;
                 }
             }
-            else if (!this.mergeItemStack(itemstack1, 2, 38, false))
+            else if (!this.mergeItemStack(itemstack1, 10, 46, false))
             {
                 return null;
             }

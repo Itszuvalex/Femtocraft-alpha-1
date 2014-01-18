@@ -1,4 +1,4 @@
-package femtocraft.research;
+package femtocraft.managers;
 
 import java.util.Comparator;
 

@@ -7,8 +7,6 @@ import java.util.logging.Level;
 import net.minecraft.item.ItemStack;
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
-import femtocraft.research.AssemblerInputComparator;
-import femtocraft.research.AssemblerOutputComparator;
 import femtocraft.research.TechLevel;
 
 public class FemtocraftAssemblerRecipeManager {
@@ -26,17 +24,45 @@ public class FemtocraftAssemblerRecipeManager {
 	private void registerRecipes()
 	{
 		//Femto-tier components
+		registerFemtoDecompositionRecipes();
+		
+		registerNanoDecompositionRecipes();
+		
+		//Micro-tier components
+		
+//		testRecipes();
+	}
+	
+	private void registerFemtoDecompositionRecipes()
+	{
 		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Planeoid), new ItemStack(Femtocraft.Rectangulon), null, null, null}, 3, new ItemStack(Femtocraft.Crystallite), TechLevel.FEMTO, null));	//Crystallite
 		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Cubit), new ItemStack(Femtocraft.Planeoid), new ItemStack(Femtocraft.Cubit), null, null, null}, 3, new ItemStack(Femtocraft.Mineralite), TechLevel.FEMTO, null));	//Mineralite
 		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Cubit), new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Cubit), null, null, null}, 3, new ItemStack(Femtocraft.Metallite), TechLevel.FEMTO, null));	//Metallite
 		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Cubit), new ItemStack(Femtocraft.Rectangulon), null, null, null}, 3, new ItemStack(Femtocraft.Faunite), TechLevel.FEMTO, null));	//Faunite
 		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Planeoid), new ItemStack(Femtocraft.Cubit), new ItemStack(Femtocraft.Planeoid), null, null, null}, 3, new ItemStack(Femtocraft.Electrite), TechLevel.FEMTO, null));	//Electrite
 		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.Planeoid), new ItemStack(Femtocraft.Rectangulon), new ItemStack(Femtocraft.Planeoid), null, null, null}, 3, new ItemStack(Femtocraft.Florite), TechLevel.FEMTO, null));	//Florite
-		
-		//Micro-tier components
-		
-		
-//		testRecipes();
+	}
+	
+	private void registerNanoDecompositionRecipes()
+	{
+		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{	new ItemStack(Femtocraft.Crystallite, 2), new ItemStack(Femtocraft.Electrite, 2), new ItemStack(Femtocraft.Crystallite, 2), 
+																			new ItemStack(Femtocraft.Electrite, 2), new ItemStack(Femtocraft.Crystallite, 2), new ItemStack(Femtocraft.Electrite, 2), 
+																			new ItemStack(Femtocraft.Crystallite, 2), new ItemStack(Femtocraft.Electrite, 2), new ItemStack(Femtocraft.Crystallite, 2)}, 
+																			2, new ItemStack(Femtocraft.MicroCrystal), TechLevel.NANO, null));	//MicroCrystal
+		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,new ItemStack(Femtocraft.Faunite), new ItemStack(Femtocraft.Mineralite),new ItemStack(Femtocraft.Faunite),null,null,null}, 2, new ItemStack(Femtocraft.ProteinChain), TechLevel.NANO, null));	//ProteinChain
+		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,new ItemStack(Femtocraft.Faunite), new ItemStack(Femtocraft.Electrite),new ItemStack(Femtocraft.Faunite),null,null,null}, 2, new ItemStack(Femtocraft.NerveCluster), TechLevel.NANO, null));	//NerveCluster
+		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,new ItemStack(Femtocraft.Metallite),null,new ItemStack(Femtocraft.Electrite), new ItemStack(Femtocraft.Electrite),new ItemStack(Femtocraft.Electrite),null,new ItemStack(Femtocraft.Metallite),null}, 2, new ItemStack(Femtocraft.ConductiveAlloy), TechLevel.NANO, null));	//ConductiveAlloy
+		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,new ItemStack(Femtocraft.Mineralite),null,new ItemStack(Femtocraft.Metallite), new ItemStack(Femtocraft.Metallite),new ItemStack(Femtocraft.Metallite),null,new ItemStack(Femtocraft.Mineralite),null}, 2, new ItemStack(Femtocraft.MetalComposite), TechLevel.NANO, null));	//MetalComposite
+		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,new ItemStack(Femtocraft.Florite),null, new ItemStack(Femtocraft.Mineralite),null,null,null}, 2, new ItemStack(Femtocraft.FibrousStrand), TechLevel.NANO, null));	//FibrousStrand
+		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,new ItemStack(Femtocraft.Mineralite),null, new ItemStack(Femtocraft.Crystallite),null,null,null}, 2, new ItemStack(Femtocraft.MineralLattice), TechLevel.NANO, null));	//MineralLattice
+		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,new ItemStack(Femtocraft.Florite), new ItemStack(Femtocraft.Crystallite),new ItemStack(Femtocraft.Florite),null,null,null}, 2, new ItemStack(Femtocraft.FungalSpores), TechLevel.NANO, null));	//FungalSpores
+		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,new ItemStack(Femtocraft.Electrite), new ItemStack(Femtocraft.Mineralite),new ItemStack(Femtocraft.Electrite),null,null,null}, 2, new ItemStack(Femtocraft.IonicChunk), TechLevel.NANO, null));	//IonicChunk
+		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,new ItemStack(Femtocraft.Florite), new ItemStack(Femtocraft.Faunite),new ItemStack(Femtocraft.Florite),null,null,null}, 2, new ItemStack(Femtocraft.ReplicatingMaterial), TechLevel.NANO, null));	//ReplicatingMaterial
+		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,new ItemStack(Femtocraft.Crystallite), new ItemStack(Femtocraft.Faunite),new ItemStack(Femtocraft.Crystallite),null,null,null}, 2, new ItemStack(Femtocraft.SpinyFilament), TechLevel.NANO, null));	//SpinyFilament
+		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,new ItemStack(Femtocraft.Crystallite), new ItemStack(Femtocraft.Metallite),new ItemStack(Femtocraft.Crystallite),null,null,null}, 2, new ItemStack(Femtocraft.HardenedBulb), TechLevel.NANO, null));	//HardenedBulb
+		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,new ItemStack(Femtocraft.Electrite), new ItemStack(Femtocraft.Florite),new ItemStack(Femtocraft.Electrite),null,null,null}, 2, new ItemStack(Femtocraft.MorphicChannel), TechLevel.NANO, null));	//MorphicChannel
+		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,new ItemStack(Femtocraft.Florite), new ItemStack(Femtocraft.Metallite),new ItemStack(Femtocraft.Florite),null,null,null}, 2, new ItemStack(Femtocraft.SynthesizedFiber), TechLevel.NANO, null));	//SynthesizedFiber
+		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,new ItemStack(Femtocraft.Metallite),null,new ItemStack(Femtocraft.Faunite), new ItemStack(Femtocraft.Faunite),new ItemStack(Femtocraft.Faunite),null,new ItemStack(Femtocraft.Metallite),null}, 2, new ItemStack(Femtocraft.OrganometallicPlate), TechLevel.NANO, null));	//OrganometallicPlate
 	}
 	
 	private void testRecipes()
