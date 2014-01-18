@@ -214,19 +214,19 @@ public class Femtocraft {
 		 MinecraftForge.setBlockHarvestLevel(oreTitanium, "pickaxe", 2);
 		 GameRegistry.registerBlock(oreTitanium, "oreTitanium");
 		 LanguageRegistry.addName(oreTitanium, "Titanium Ore");
-		 OreDictionary.registerOre("oreTitanium", new ItemStack(oreTitanium));
+		 if(FemtocraftConfigs.registerTitaniumOreInOreDictionary) OreDictionary.registerOre("oreTitanium", new ItemStack(oreTitanium));
 		 
 		 orePlatinum = new orePlatinum(FemtocraftConfigs.orePlatinumID);
 		 MinecraftForge.setBlockHarvestLevel(orePlatinum, "pickaxe", 2);
 		 GameRegistry.registerBlock(orePlatinum, "orePlatinum");
 		 LanguageRegistry.addName(orePlatinum, "Platinum Ore");
-		 OreDictionary.registerOre("orePlatinum", new ItemStack(orePlatinum));
+		 if(FemtocraftConfigs.registerPlatinumOreInOreDictionary) OreDictionary.registerOre("orePlatinum", new ItemStack(orePlatinum));
 		 
 		 oreThorium = new oreThorium(FemtocraftConfigs.oreThoriumID);
 		 MinecraftForge.setBlockHarvestLevel(oreThorium, "pickaxe", 2);
 		 GameRegistry.registerBlock(oreThorium, "oreThorium");
 		 LanguageRegistry.addName(oreThorium, "Thorium Ore");
-		 OreDictionary.registerOre("oreThorium", new ItemStack(oreThorium));
+		 if(FemtocraftConfigs.registerThoriumOreInOreDictionary) OreDictionary.registerOre("oreThorium", new ItemStack(oreThorium));
 		 
 		 oreFarenite = new oreFarenite(FemtocraftConfigs.oreFareniteID);
 		 MinecraftForge.setBlockHarvestLevel(oreFarenite, "pickaxe", 2);
@@ -292,15 +292,15 @@ public class Femtocraft {
 		 
 		 ingotTitanium = new ingotTitanium(FemtocraftConfigs.ingotTitaniumID).setUnlocalizedName("ingotTitanium");
 		 LanguageRegistry.addName(ingotTitanium, "Titanium Ingot");
-		 OreDictionary.registerOre("ingotTitanium", new ItemStack(ingotTitanium));
+		 if(FemtocraftConfigs.registerTitaniumIngotInOreDictionary) OreDictionary.registerOre("ingotTitanium", new ItemStack(ingotTitanium));
 		
 		 ingotPlatinum = new ingotPlatinum(FemtocraftConfigs.ingotPlatinumID).setUnlocalizedName("ingotPlatinum");
 		 LanguageRegistry.addName(ingotPlatinum, "Platinum Ingot");
-		 OreDictionary.registerOre("ingotPlatinum", new ItemStack(ingotPlatinum));
+		 if(FemtocraftConfigs.registerPlatinumIngotInOreDictionary) OreDictionary.registerOre("ingotPlatinum", new ItemStack(ingotPlatinum));
 		 
 		 ingotThorium = new ingotThorium(FemtocraftConfigs.ingotThoriumID).setUnlocalizedName("ingotThorium");
 		 LanguageRegistry.addName(ingotThorium, "Thorium Ingot");
-		 OreDictionary.registerOre("ingotThorium", new ItemStack(ingotThorium));
+		 if(FemtocraftConfigs.registerThoriumIngotInOreDictionary) OreDictionary.registerOre("ingotThorium", new ItemStack(ingotThorium));
 		 
 		 ingotFarenite = new ingotFarenite(FemtocraftConfigs.ingotFareniteID).setUnlocalizedName("ingotFarenite");
 		 LanguageRegistry.addName(ingotFarenite, "Farenite");
@@ -316,15 +316,15 @@ public class Femtocraft {
 		 
 		 deconstructedTitanium = new DeconstructedTitanium(FemtocraftConfigs.deconstructedTitaniumID).setUnlocalizedName("deconstructedTitanium");
 		 LanguageRegistry.addName(deconstructedTitanium, "Deconstructed Titanium");
-		 OreDictionary.registerOre("dustTitanium", new ItemStack(deconstructedTitanium));
+		 if(FemtocraftConfigs.registerTitaniumDustInOreDictionary) OreDictionary.registerOre("dustTitanium", new ItemStack(deconstructedTitanium));
 		 
 		 deconstructedThorium = new DeconstructedThorium(FemtocraftConfigs.deconstructedThoriumID).setUnlocalizedName("deconstructedThorium");
 		 LanguageRegistry.addName(deconstructedThorium, "Deconstructed Thorium");
-		 OreDictionary.registerOre("dustThorium", new ItemStack(deconstructedThorium));
+		 if(FemtocraftConfigs.registerThoriumDustInOreDictionary) OreDictionary.registerOre("dustThorium", new ItemStack(deconstructedThorium));
 		 
 		 deconstructedPlatinum = new DeconstructedPlatinum(FemtocraftConfigs.deconstructedPlatinumID).setUnlocalizedName("deconstructedPlatinum");
 		 LanguageRegistry.addName(deconstructedPlatinum, "Deconstructed Platinum");
-		 OreDictionary.registerOre("dustPlatinum", new ItemStack(deconstructedPlatinum));
+		 if(FemtocraftConfigs.registerPlatinumDustInOreDictionary) OreDictionary.registerOre("dustPlatinum", new ItemStack(deconstructedPlatinum));
 		 
 		 //Decomp
 		 //Femto

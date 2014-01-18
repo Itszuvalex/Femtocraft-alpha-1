@@ -133,6 +133,16 @@ public class FemtocraftConfigs {
 	public static @CfgBool boolean recipeTitaniumOre = true;
 	public static @CfgBool boolean recipeThoriumOre = true;
 	public static @CfgBool boolean recipePlatinumOre = true;
+	
+	public static @CfgBool boolean registerTitaniumOreInOreDictionary = true;
+	public static @CfgBool boolean registerThoriumOreInOreDictionary = true;
+	public static @CfgBool boolean registerPlatinumOreInOreDictionary = true;
+	public static @CfgBool boolean registerTitaniumDustInOreDictionary = true;
+	public static @CfgBool boolean registerThoriumDustInOreDictionary = true;
+	public static @CfgBool boolean registerPlatinumDustInOreDictionary = true;
+	public static @CfgBool boolean registerTitaniumIngotInOreDictionary = true;
+	public static @CfgBool boolean registerThoriumIngotInOreDictionary = true;
+	public static @CfgBool boolean registerPlatinumIngotInOreDictionary = true;
 
 	public static void  load(Configuration config) {
 		try {
