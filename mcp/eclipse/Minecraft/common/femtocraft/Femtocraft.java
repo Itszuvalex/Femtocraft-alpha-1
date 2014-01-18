@@ -32,6 +32,11 @@ import femtocraft.cooking.blocks.CuttingBoard;
 import femtocraft.core.items.ConductiveAlloy;
 import femtocraft.core.items.Crystallite;
 import femtocraft.core.items.Cubit;
+import femtocraft.core.items.DeconstructedGold;
+import femtocraft.core.items.DeconstructedIron;
+import femtocraft.core.items.DeconstructedPlatinum;
+import femtocraft.core.items.DeconstructedThorium;
+import femtocraft.core.items.DeconstructedTitanium;
 import femtocraft.core.items.Electrite;
 import femtocraft.core.items.Faunite;
 import femtocraft.core.items.FibrousStrand;
@@ -129,6 +134,12 @@ public class Femtocraft {
 	public static Item ingotPlatinum;
 	public static Item ingotThorium;
 	public static Item ingotFarenite;
+	
+	public static Item deconstructedIron;
+	public static Item deconstructedGold;
+	public static Item deconstructedTitanium;
+	public static Item deconstructedThorium;
+	public static Item deconstructedPlatinum;
 	
 	//Decomp items
 	//Femto
@@ -295,6 +306,26 @@ public class Femtocraft {
 		 LanguageRegistry.addName(ingotFarenite, "Farenite");
 		 OreDictionary.registerOre("ingotFarenite", new ItemStack(ingotFarenite));
 		 
+		 deconstructedIron = new DeconstructedIron(FemtocraftConfigs.deconstructedIronID).setUnlocalizedName("deconstructedIron");
+		 LanguageRegistry.addName(deconstructedIron, "Deconstructed Iron");
+		 OreDictionary.registerOre("dustIron", new ItemStack(deconstructedIron));
+		 
+		 deconstructedGold = new DeconstructedGold(FemtocraftConfigs.deconstructedGoldID).setUnlocalizedName("deconstructedGold");
+		 LanguageRegistry.addName(deconstructedGold, "Deconstructed Gold");
+		 OreDictionary.registerOre("dustGold", new ItemStack(deconstructedGold));
+		 
+		 deconstructedTitanium = new DeconstructedTitanium(FemtocraftConfigs.deconstructedTitaniumID).setUnlocalizedName("deconstructedTitanium");
+		 LanguageRegistry.addName(deconstructedTitanium, "Deconstructed Titanium");
+		 OreDictionary.registerOre("dustTitanium", new ItemStack(deconstructedTitanium));
+		 
+		 deconstructedThorium = new DeconstructedThorium(FemtocraftConfigs.deconstructedThoriumID).setUnlocalizedName("deconstructedThorium");
+		 LanguageRegistry.addName(deconstructedThorium, "Deconstructed Thorium");
+		 OreDictionary.registerOre("dustThorium", new ItemStack(deconstructedThorium));
+		 
+		 deconstructedPlatinum = new DeconstructedPlatinum(FemtocraftConfigs.deconstructedPlatinumID).setUnlocalizedName("deconstructedPlatinum");
+		 LanguageRegistry.addName(deconstructedPlatinum, "Deconstructed Platinum");
+		 OreDictionary.registerOre("dustPlatinum", new ItemStack(deconstructedPlatinum));
+		 
 		 //Decomp
 		 //Femto
 		 Cubit = new Cubit(FemtocraftConfigs.CubitID).setUnlocalizedName("Cubit");
@@ -437,6 +468,11 @@ public class Femtocraft {
 		GameRegistry.addSmelting(oreTitanium.blockID, new ItemStack(ingotTitanium), 0.1f);
 		GameRegistry.addSmelting(orePlatinum.blockID, new ItemStack(ingotPlatinum), 0.1f);
 		GameRegistry.addSmelting(oreThorium.blockID, new ItemStack(ingotThorium), 0.1f);
+		GameRegistry.addSmelting(deconstructedIron.itemID, new ItemStack(Item.ingotIron), 0.1f);
+		GameRegistry.addSmelting(deconstructedGold.itemID, new ItemStack(Item.ingotGold), 0.1f);
+		GameRegistry.addSmelting(deconstructedTitanium.itemID, new ItemStack(ingotTitanium), 0.1f);
+		GameRegistry.addSmelting(deconstructedThorium.itemID, new ItemStack(ingotThorium), 0.1f);
+		GameRegistry.addSmelting(deconstructedPlatinum.itemID, new ItemStack(ingotPlatinum), 0.1f);
 	}
 
 }

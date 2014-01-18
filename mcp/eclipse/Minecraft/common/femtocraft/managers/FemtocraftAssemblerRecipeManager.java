@@ -5,6 +5,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.logging.Level;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftConfigs;
@@ -39,6 +41,8 @@ public class FemtocraftAssemblerRecipeManager {
 		registerNanoDecompositionRecipes();
 		registerMicroDecompositionRecipes();
 		registerMacroDecompositionRecipes();
+		
+		registerFemtocraftAssemblerRecipes();
 	}
 	
 	private void registerFemtoDecompositionRecipes()
@@ -99,6 +103,23 @@ public class FemtocraftAssemblerRecipeManager {
 	private void registerMacroDecompositionRecipes()
 	{
 		
+	}
+	
+	private void registerFemtocraftAssemblerRecipes()
+	{
+		try
+		{
+			if(configRegisterRecipe("IronOre"))		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,null,new ItemStack(Femtocraft.deconstructedIron,2),null,null,null,null}, 0, new ItemStack(Block.oreIron), TechLevel.MACRO, null));
+			if(configRegisterRecipe("GoldOre"))		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,null,new ItemStack(Femtocraft.deconstructedGold,2),null,null,null,null}, 0, new ItemStack(Block.oreGold), TechLevel.MACRO, null));
+			if(configRegisterRecipe("TitaniumOre"))	addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,null,new ItemStack(Femtocraft.deconstructedTitanium,2),null,null,null,null}, 0, new ItemStack(Femtocraft.oreTitanium), TechLevel.MACRO, null));
+			if(configRegisterRecipe("ThoriumOre"))	addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,null,new ItemStack(Femtocraft.deconstructedThorium,2),null,null,null,null}, 0, new ItemStack(Femtocraft.oreThorium), TechLevel.MACRO, null));
+			if(configRegisterRecipe("PlatinumOre"))	addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,null,new ItemStack(Femtocraft.deconstructedPlatinum,2),null,null,null,null}, 0, new ItemStack(Femtocraft.orePlatinum), TechLevel.MACRO, null));
+		}
+		catch(AssemblerRecipeFoundException e)
+		{
+			Femtocraft.logger.log(Level.SEVERE, e.errMsg);
+			Femtocraft.logger.log(Level.SEVERE, "Femtocraft failed to load Femtocraft Assembler Recipes!");
+		}
 	}
 	
 	private boolean configRegisterRecipe(String name)

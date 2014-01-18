@@ -46,6 +46,12 @@ public class FemtocraftConfigs {
 	public static @CfgId int ingotThoriumID = 12002;
 	public static @CfgId int ingotFareniteID = 12003;
 	
+	public static @CfgId int deconstructedIronID = 12004;
+	public static @CfgId int deconstructedGoldID = 12005;
+	public static @CfgId int deconstructedTitaniumID = 12006;
+	public static @CfgId int deconstructedThoriumID = 12007;
+	public static @CfgId int deconstructedPlatinumID = 12008;
+	
 	//Decomp items    12046 - 12069
 	//Femto
 	public static @CfgId int CubitID = 12046;
@@ -119,6 +125,14 @@ public class FemtocraftConfigs {
 	public static @CfgBool boolean recipeMorphicChannel = true;
 	public static @CfgBool boolean recipeSynthesizedFiber = true;
 	public static @CfgBool boolean recipeOrganometallicPlate = true;
+	
+	
+	
+	public static @CfgBool boolean recipeIronOre = true;
+	public static @CfgBool boolean recipeGoldOre = true;
+	public static @CfgBool boolean recipeTitaniumOre = true;
+	public static @CfgBool boolean recipeThoriumOre = true;
+	public static @CfgBool boolean recipePlatinumOre = true;
 
 	public static void  load(Configuration config) {
 		try {
