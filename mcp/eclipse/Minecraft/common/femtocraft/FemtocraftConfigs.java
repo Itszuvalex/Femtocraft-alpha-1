@@ -93,6 +93,32 @@ public class FemtocraftConfigs {
 	public static @CfgBool boolean fareniteGen = true;
 	
 	public static @CfgBool boolean alloyGen = true;
+	
+	//Recipes
+	public static @CfgBool boolean silentRecipeLoadAlerts = false;
+	
+	public static @CfgBool boolean recipeCrystallite = true;
+	public static @CfgBool boolean recipeMineralite = true;
+	public static @CfgBool boolean recipeMetallite = true;
+	public static @CfgBool boolean recipeFaunite = true;
+	public static @CfgBool boolean recipeElectrite = true;
+	public static @CfgBool boolean recipeFlorite = true;
+	
+	public static @CfgBool boolean recipeMicroCrystal = true;
+	public static @CfgBool boolean recipeProteinChain = true;
+	public static @CfgBool boolean recipeNerveCluster = true;
+	public static @CfgBool boolean recipeConductiveAlloy = true;
+	public static @CfgBool boolean recipeMetalComposite = true;
+	public static @CfgBool boolean recipeFibrousStrand = true;
+	public static @CfgBool boolean recipeMineralLattice = true;
+	public static @CfgBool boolean recipeFungalSpores = true;
+	public static @CfgBool boolean recipeIonicChunk = true;
+	public static @CfgBool boolean recipeReplicatingMaterial = true;
+	public static @CfgBool boolean recipeSpinyFilament = true;
+	public static @CfgBool boolean recipeHardenedBulb = true;
+	public static @CfgBool boolean recipeMorphicChannel = true;
+	public static @CfgBool boolean recipeSynthesizedFiber = true;
+	public static @CfgBool boolean recipeOrganometallicPlate = true;
 
 	public static void  load(Configuration config) {
 		try {
