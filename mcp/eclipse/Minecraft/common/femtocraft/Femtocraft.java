@@ -73,6 +73,7 @@ import femtocraft.farming.seeds.tomatoSeed;
 import femtocraft.industry.TileEntity.VacuumTubeTile;
 import femtocraft.industry.blocks.BlockMicroDeconstructor;
 import femtocraft.industry.blocks.BlockMicroFurnace;
+import femtocraft.industry.blocks.BlockMicroReconstructor;
 import femtocraft.industry.blocks.VacuumTube;
 import femtocraft.managers.FemtocraftRecipeManager;
 import femtocraft.managers.FemtocraftResearchManager;
@@ -122,6 +123,7 @@ public class Femtocraft {
 	public static Block FemtocraftMicroFurnaceUnlit;
 	public static Block FemtocraftMicroFurnaceLit;
 	public static Block FemtocraftMicroDeconstructor;
+	public static Block FemtocraftMicroReconstructor;
 	public static Block FemtopowerMicroCube;
 	public static Block FemtocraftVacuumTube;
 	
@@ -271,6 +273,10 @@ public class Femtocraft {
 		 FemtocraftMicroDeconstructor = new BlockMicroDeconstructor(FemtocraftConfigs.FemtocraftMicroDeconstructorID);
 		 GameRegistry.registerBlock(FemtocraftMicroDeconstructor, "FemtocraftMicroDeconstructor");
 		 LanguageRegistry.addName(FemtocraftMicroDeconstructor, "Microtech Deconstructor");
+		 
+		 FemtocraftMicroReconstructor = new BlockMicroReconstructor(FemtocraftConfigs.FemtocraftMicroReconstructorID);
+		 GameRegistry.registerBlock(FemtocraftMicroReconstructor, "FemtocraftMicroReconstructor");
+		 LanguageRegistry.addName(FemtocraftMicroReconstructor, "Microtech Reconstructor");
 		 
 		 FemtopowerMicroCube = new FemtopowerMicroCube(FemtocraftConfigs.FemtopowerMicroCubeID);
 		 GameRegistry.registerBlock(FemtopowerMicroCube, "FemtopowerMicroCube");

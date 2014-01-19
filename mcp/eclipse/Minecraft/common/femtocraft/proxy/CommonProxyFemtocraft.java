@@ -3,6 +3,7 @@ package femtocraft.proxy;
 import cpw.mods.fml.common.registry.GameRegistry;
 import femtocraft.industry.TileEntity.MicroDeconstructorTile;
 import femtocraft.industry.TileEntity.MicroFurnaceTile;
+import femtocraft.industry.TileEntity.MicroReconstructorTile;
 import femtocraft.industry.TileEntity.VacuumTubeTile;
 import femtocraft.power.TileEntity.FemtopowerCableTile;
 import femtocraft.power.TileEntity.FemtopowerConsumerTest;
@@ -21,7 +22,8 @@ public class CommonProxyFemtocraft {
 		 GameRegistry.registerTileEntity(FemtopowerProducerTest.class, "FemtopowerProducerTest");
 		 GameRegistry.registerTileEntity(FemtopowerConsumerTest.class, "FemtopowerConsumerTest");
 		 GameRegistry.registerTileEntity(MicroFurnaceTile.class, "FemtocraftMicroFurnace");
-		 GameRegistry.registerTileEntity(MicroDeconstructorTile.class, "FemtopowerMicroDeconstructor");
+		 GameRegistry.registerTileEntity(MicroDeconstructorTile.class, "FemtocraftMicroDeconstructor");
+		 GameRegistry.registerTileEntity(MicroReconstructorTile.class, "FemtocraftMicroReconstructor");
 		 GameRegistry.registerTileEntity(FemtopowerCableTile.class, "FemtopowerCable");
 		 GameRegistry.registerTileEntity(FemtopowerMicroCubeTile.class, "FemtocraftMicroCube");
 		 GameRegistry.registerTileEntity(VacuumTubeTile.class,  "VacuumTube");

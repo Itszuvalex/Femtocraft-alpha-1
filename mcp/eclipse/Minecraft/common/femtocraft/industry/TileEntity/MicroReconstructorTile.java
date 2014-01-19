@@ -64,7 +64,9 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
 	{
 		ItemStack is = reconstructorItemStacks[10];
 		if (is == null) return null;
-		return (IAssemblerSchematic) is.getItem();
+		if(is.getItem() instanceof IAssemblerSchematic) return (IAssemblerSchematic) is.getItem();
+		
+		return null;
 	}
     
 	@Override
