@@ -1,5 +1,7 @@
 package femtocraft.industry.TileEntity;
 
+import java.util.Arrays;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -19,11 +21,11 @@ import femtocraft.managers.FemtocraftAssemblerRecipe;
 import femtocraft.managers.FemtocraftRecipeManager;
 import femtocraft.power.TileEntity.FemtopowerConsumer;
 
-public class MicroDeconstructorTile  extends FemtopowerConsumer implements ISidedInventory, IFluidHandler
+public class MicroReconstructorTile  extends FemtopowerConsumer implements ISidedInventory, IFluidHandler
 {
 	private FluidTank tank;
 	
-	public MicroDeconstructorTile() {
+	public MicroReconstructorTile() {
 		super();
 		setMaxStorage(800);
 		tank = new FluidTank(600);
@@ -36,13 +38,19 @@ public class MicroDeconstructorTile  extends FemtopowerConsumer implements ISide
     /**
      * The ItemStacks that hold the items currently being used in the furnace
      */
-    private ItemStack[] deconstructorItemStacks = new ItemStack[10];
+	/**
+	 * Slots 0-8 are for recipe area - these are dummy items, and should never be touched except when setting for display purposes
+	 * Slot 9 is for output
+	 * Slot 10 is for schematic card
+	 * Slots 11-28 are internal inventory, to pull from when building
+	 */
+    private ItemStack[] reconstructorItemStacks = new ItemStack[29];
 
     /** The number of ticks that the current item has been cooking for */
     public int cookTime = 0;
     public int currentPower = 0;
     private String field_94130_e;
-    public ItemStack deconstructingStack = null;
+    public ItemStack[] reconstructingStacks = null;
     
     public int getMassAmount()
     {
@@ -58,7 +66,7 @@ public class MicroDeconstructorTile  extends FemtopowerConsumer implements ISide
      */
     public int getSizeInventory()
     {
-        return this.deconstructorItemStacks.length;
+        return this.reconstructorItemStacks.length;
     }
 
     /**
@@ -66,7 +74,8 @@ public class MicroDeconstructorTile  extends FemtopowerConsumer implements ISide
      */
     public ItemStack getStackInSlot(int par1)
     {
-        return this.deconstructorItemStacks[par1];
+    	if(par1 < 9) return null;
+        return this.reconstructorItemStacks[par1];
     }
 
     /**
@@ -75,23 +84,25 @@ public class MicroDeconstructorTile  extends FemtopowerConsumer implements ISide
      */
     public ItemStack decrStackSize(int par1, int par2)
     {
-        if (this.deconstructorItemStacks[par1] != null)
+    	if(par1 < 9) return null;
+    	
+        if (this.reconstructorItemStacks[par1] != null)
         {
             ItemStack itemstack;
 
-            if (this.deconstructorItemStacks[par1].stackSize <= par2)
+            if (this.reconstructorItemStacks[par1].stackSize <= par2)
             {
-                itemstack = this.deconstructorItemStacks[par1];
-                this.deconstructorItemStacks[par1] = null;
+                itemstack = this.reconstructorItemStacks[par1];
+                this.reconstructorItemStacks[par1] = null;
                 return itemstack;
             }
             else
             {
-                itemstack = this.deconstructorItemStacks[par1].splitStack(par2);
+                itemstack = this.reconstructorItemStacks[par1].splitStack(par2);
 
-                if (this.deconstructorItemStacks[par1].stackSize == 0)
+                if (this.reconstructorItemStacks[par1].stackSize == 0)
                 {
-                    this.deconstructorItemStacks[par1] = null;
+                    this.reconstructorItemStacks[par1] = null;
                 }
 
                 return itemstack;
@@ -109,10 +120,12 @@ public class MicroDeconstructorTile  extends FemtopowerConsumer implements ISide
      */
     public ItemStack getStackInSlotOnClosing(int par1)
     {
-        if (this.deconstructorItemStacks[par1] != null)
+    	if(par1 < 9) return null;
+    	
+        if (this.reconstructorItemStacks[par1] != null)
         {
-            ItemStack itemstack = this.deconstructorItemStacks[par1];
-            this.deconstructorItemStacks[par1] = null;
+            ItemStack itemstack = this.reconstructorItemStacks[par1];
+            this.reconstructorItemStacks[par1] = null;
             return itemstack;
         }
         else
@@ -126,7 +139,7 @@ public class MicroDeconstructorTile  extends FemtopowerConsumer implements ISide
      */
     public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
     {
-        this.deconstructorItemStacks[par1] = par2ItemStack;
+        this.reconstructorItemStacks[par1] = par2ItemStack;
 
         if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit())
         {
@@ -139,7 +152,7 @@ public class MicroDeconstructorTile  extends FemtopowerConsumer implements ISide
      */
     public String getInvName()
     {
-        return this.isInvNameLocalized() ? this.field_94130_e : "Microtech Deconstructor";
+        return this.isInvNameLocalized() ? this.field_94130_e : "Microtech Reconstructor";
     }
 
     /**
@@ -164,25 +177,31 @@ public class MicroDeconstructorTile  extends FemtopowerConsumer implements ISide
         super.readFromNBT(par1NBTTagCompound);
         
         NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
-        this.deconstructorItemStacks = new ItemStack[this.getSizeInventory()];
+        this.reconstructorItemStacks = new ItemStack[this.getSizeInventory()];
 
         for (int i = 0; i < nbttaglist.tagCount()-1; ++i)
         {
             NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
             byte b0 = nbttagcompound1.getByte("Slot");
 
-            if (b0 >= 0 && b0 < this.deconstructorItemStacks.length)
+            if (b0 >= 0 && b0 < this.reconstructorItemStacks.length)
             {
-                this.deconstructorItemStacks[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+                this.reconstructorItemStacks[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
             }
         }
         
         NBTTagCompound nbttagcompoundsmelt = (NBTTagCompound)nbttaglist.tagAt(nbttaglist.tagCount()-1);
-        if(nbttagcompoundsmelt.getBoolean("isDeconstructing")) {
-        	this.deconstructingStack = ItemStack.loadItemStackFromNBT(nbttagcompoundsmelt);
+        if(nbttagcompoundsmelt.getBoolean("isReconstructing")) {
+        	NBTTagList smeltList = nbttagcompoundsmelt.getTagList("input");
+        	for(int i = 0; i < nbttaglist.tagCount(); ++i)
+        	{
+        		NBTTagCompound ss = (NBTTagCompound) smeltList.tagAt(i);
+        		byte slot = ss.getByte("Slot");
+        		this.reconstructingStacks[slot] = ItemStack.loadItemStackFromNBT(ss);
+        	}
         }
         else {
-        	this.deconstructingStack = null;
+        	this.reconstructingStacks = null;
         }
         
         
@@ -205,21 +224,34 @@ public class MicroDeconstructorTile  extends FemtopowerConsumer implements ISide
         par1NBTTagCompound.setShort("CookTime", (short)this.cookTime);
         NBTTagList nbttaglist = new NBTTagList();
 
-        for (int i = 0; i < this.deconstructorItemStacks.length; ++i)
+        for (int i = 0; i < this.reconstructorItemStacks.length; ++i)
         {
-            if (this.deconstructorItemStacks[i] != null)
+            if (this.reconstructorItemStacks[i] != null)
             {
                 NBTTagCompound nbttagcompound1 = new NBTTagCompound();
                 nbttagcompound1.setByte("Slot", (byte)i);
-                this.deconstructorItemStacks[i].writeToNBT(nbttagcompound1);
+                this.reconstructorItemStacks[i].writeToNBT(nbttagcompound1);
                 nbttaglist.appendTag(nbttagcompound1);
             }
         }
         
         NBTTagCompound nbttagcompoundsmelt = new NBTTagCompound();
-        nbttagcompoundsmelt.setBoolean("isDeconstructing", isDeconstructing());
-        if(isDeconstructing()) {
-        	this.deconstructingStack.writeToNBT(nbttagcompoundsmelt);
+        nbttagcompoundsmelt.setBoolean("isReconstructing", isReconstructing());
+        if(isReconstructing()) {
+        	NBTTagList smeltList = new NBTTagList();
+        	
+        	for(int i = 0; i < 9; ++i)
+        	{
+        		if(reconstructingStacks[i] != null)
+        		{
+        			NBTTagCompound ss = new NBTTagCompound();
+        			ss.setByte("Slot", (byte)i);
+        			reconstructingStacks[i].writeToNBT(ss);
+        			smeltList.appendTag(ss);
+        		}
+        	}
+
+        	nbttagcompoundsmelt.setTag("input", smeltList);
         }
     	nbttaglist.appendTag(nbttagcompoundsmelt);
         
@@ -267,7 +299,7 @@ public class MicroDeconstructorTile  extends FemtopowerConsumer implements ISide
 
         if(worldObj.isRemote) return;
         
-        if(deconstructingStack != null) {
+        if(reconstructingStacks != null) {
 	        if (cookTime == ticksToCook)
 	        {
 	            cookTime = 0;
@@ -299,11 +331,13 @@ public class MicroDeconstructorTile  extends FemtopowerConsumer implements ISide
      */
     private boolean canWork()
     {
-        if (this.deconstructorItemStacks[0] == null)
+        if (reconstructorItemStacks[0] == null && reconstructorItemStacks[1] == null && reconstructorItemStacks[2] == null &&
+        		reconstructorItemStacks[3] == null && reconstructorItemStacks[4] == null && reconstructorItemStacks[5] == null && 
+        		reconstructorItemStacks[6] == null && reconstructorItemStacks[7] == null && reconstructorItemStacks[8] == null)
         {
             return false;
         }
-        if(deconstructingStack != null) {
+        if(reconstructingStacks != null) {
         	return false;
         }
         else if(this.getCurrentPower() < this.powerToCook) {
@@ -311,72 +345,84 @@ public class MicroDeconstructorTile  extends FemtopowerConsumer implements ISide
         }
         else
         {
-        	FemtocraftAssemblerRecipe recipe = FemtocraftRecipeManager.assemblyRecipes.getRecipe(this.deconstructorItemStacks[0]);
+        	ItemStack[] fake = new ItemStack[reconstructorItemStacks.length];
+        	for(int i = 0; i < fake.length; ++i)
+        	{
+        		ItemStack it = reconstructorItemStacks[i];
+        		fake[i] = it == null ? null : it.copy();
+        	};
+        	
+        	FemtocraftAssemblerRecipe recipe = FemtocraftRecipeManager.assemblyRecipes.getRecipe(fake);
             if (recipe == null) return false;
-            if((tank.getCapacity() - tank.getFluidAmount()) < recipe.mass) return false;
-            if(deconstructorItemStacks[0].stackSize < recipe.output.stackSize) return false;
-            if(!roomForItems(recipe.input)) return false;
+            if(tank.getFluidAmount() < recipe.mass) return false;
+            if(!roomForItem(recipe.output)) return false;
+            if(!hasItems(recipe.input)) return false;
             return true;
         }
     }
     
-    private boolean roomForItems(ItemStack[] items)
+    private boolean roomForItem(ItemStack item)
     {
-    	ItemStack[] fake = new ItemStack[deconstructorItemStacks.length];
-    	for(int i = 0; i < fake.length; ++i)
+    	ItemStack[] fake = new ItemStack[1];
+    	fake[0] = reconstructorItemStacks[9].copy();
+    	return FemtocraftUtils.placeItem(item, fake, new int[]{});
+    }
+    
+    private boolean hasItems(ItemStack[] items)
+    {
+    	int offset = 11;
+    	int size = reconstructorItemStacks.length;
+    	ItemStack[] inv = new ItemStack[size-offset];
+    	for(int i = offset; i < size-1; ++i)
     	{
-    		ItemStack it = deconstructorItemStacks[i];
-    		fake[i] = it == null ? null : it.copy();
-    	};
+    		ItemStack it = reconstructorItemStacks[i];
+    		inv[i - offset] = it==null ? null : it.copy();
+    	}
+    	
     	for(int i = 0; i < items.length; ++i)
     	{
-    		if(!FemtocraftUtils.placeItem(items[i] == null ? null : items[i].copy(), fake, new int[]{})) return false;
+    		if(!FemtocraftUtils.removeItem(items[i], inv, new int[]{})) return false;
     	}
     	
     	return true;
     }
     
     public void startWork() {
-		deconstructingStack = deconstructorItemStacks[0].copy();
+    	reconstructingStacks = new ItemStack[9];
+    	
+    	for(int i = 0; i < 9; ++i)
+    	{
+    		ItemStack s = reconstructorItemStacks[i];
+    		reconstructingStacks[i] = s == null ? null : s.copy();
+    	}
 		
-		FemtocraftAssemblerRecipe recipe = FemtocraftRecipeManager.assemblyRecipes.getRecipe(this.deconstructorItemStacks[0]);
-		deconstructingStack.stackSize = recipe.output.stackSize;
+		FemtocraftAssemblerRecipe recipe = FemtocraftRecipeManager.assemblyRecipes.getRecipe(reconstructingStacks);
 		
-		deconstructorItemStacks[0].stackSize -= recipe.output.stackSize;
-
-        if (deconstructorItemStacks[0].stackSize <= 0)
-        {
-            deconstructorItemStacks[0] = null;
-        }
+		for(int i = 0; i < recipe.input.length; ++i)
+		{
+			if(recipe.input[i] == null) continue;
+			
+			reconstructorItemStacks[i].stackSize -= recipe.input[i].stackSize;
+			reconstructingStacks[i].stackSize = recipe.input[i].stackSize;
+			FemtocraftUtils.removeItem(reconstructingStacks[i], reconstructorItemStacks, new int[]{0,1,2,3,4,5,6,7,8,9,10});
+		}
 		
+        tank.getFluid().amount -= recipe.mass;
         this.consume(powerToCook);
     }
     
     public void endWork() {
-    	FemtocraftAssemblerRecipe recipe = FemtocraftRecipeManager.assemblyRecipes.getRecipe(deconstructingStack);
+    	FemtocraftAssemblerRecipe recipe = FemtocraftRecipeManager.assemblyRecipes.getRecipe(reconstructingStacks);
         
         if(recipe != null) {
-	        for(ItemStack item : recipe.input)
-	        {
-	        	FemtocraftUtils.placeItem(item, deconstructorItemStacks, new int[]{0});
-	        }
-//	        tank.fill(new FluidStack(Femtocraft.mass, recipe.mass), true);
-	        if(tank.getFluid() == null)
-	        {
-	        	tank.setFluid(new FluidStack(Femtocraft.mass, recipe.mass));
-	        }
-	        else
-	        {
-	        	tank.getFluid().amount += recipe.mass;
-	        }
-	        
-	        deconstructingStack = null;
+	        FemtocraftUtils.placeItem(recipe.output.copy(), reconstructorItemStacks, new int[]{0,1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28});
+	        reconstructingStacks = null;
         }
     }
 
  
-    public boolean isDeconstructing() {
-    	return deconstructingStack != null;
+    public boolean isReconstructing() {
+    	return reconstructingStacks != null;
     }
     
     /**
@@ -396,7 +442,7 @@ public class MicroDeconstructorTile  extends FemtopowerConsumer implements ISide
      */
     public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack)
     {
-        return par1 == 0;
+        return par1 > 10;
     }
 
     /**
@@ -404,8 +450,10 @@ public class MicroDeconstructorTile  extends FemtopowerConsumer implements ISide
      */
     public int[] getSizeInventorySide(int par1)
     {
-        if(par1 == 1) return new int[]{0};
-        else return new int[]{1,2,3,4,5,6,7,8,9};
+    	//Regular inventory
+        if(par1 == 1) return new int[]{11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28};
+        //Output
+        else return new int[]{9};
     }
 
     public boolean func_102007_a(int par1, ItemStack par2ItemStack, int par3)

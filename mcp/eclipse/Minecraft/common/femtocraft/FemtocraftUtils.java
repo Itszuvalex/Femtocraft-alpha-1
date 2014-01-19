@@ -124,4 +124,42 @@ public class FemtocraftUtils {
     	
     	return false;
     }
+	
+	public static boolean removeItem(ItemStack item, ItemStack[] slots, int[] restrictions)
+    {
+    	if(item == null) return true;
+    	//Attempt to combine, first
+    	int amountLeftToRemove = item.stackSize;
+
+    	for(int i = 0; i < slots.length; ++i)
+    	{
+    		boolean restricted = false;
+    		for(int r : restrictions)
+    		{
+    			if(i == r) 
+    			{
+    				restricted = true;
+    				break;
+    			}
+    		}
+    		if(restricted) continue;
+    		
+    		if(slots[i] != null && slots[i].isItemEqual(item))
+    		{
+    			ItemStack slot = slots[i];
+    			int amount = slot.stackSize;
+    			if(amount < amountLeftToRemove)
+    			{
+    				slots[i] = null;
+    				amountLeftToRemove-=amount;
+    			}
+    			else
+    			{
+    				slot.stackSize -= amountLeftToRemove;
+    				return true;
+    			}
+    		}
+    	}
+    	return false;
+    }
 }
