@@ -1,7 +1,5 @@
 package femtocraft.industry.TileEntity;
 
-import java.util.Arrays;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -17,6 +15,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
+import femtocraft.api.IAssemblerSchematic;
 import femtocraft.managers.FemtocraftAssemblerRecipe;
 import femtocraft.managers.FemtocraftRecipeManager;
 import femtocraft.power.TileEntity.FemtopowerConsumer;
@@ -61,6 +60,24 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
 		return tank.getCapacity();
 	}
     
+	@Override
+	public void onInventoryChanged() {
+		super.onInventoryChanged();
+		
+		if(reconstructorItemStacks[10] != null && reconstructorItemStacks[10].getItem() instanceof IAssemblerSchematic)
+		{
+			IAssemblerSchematic as = (IAssemblerSchematic) reconstructorItemStacks[10].getItem();
+			
+			for(int i = 0; i < as.getRecipe().input.length; ++i)
+			{
+				ItemStack is = as.getRecipe().input[i];
+				reconstructorItemStacks[i] = is == null ? null : is.copy();
+			}
+		}
+	}
+
+
+	
     /**
      * Returns the number of slots in the inventory.
      */
@@ -337,6 +354,10 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
         {
             return false;
         }
+        if(reconstructorItemStacks[10] == null)
+        {
+        	return false;
+        }
         if(reconstructingStacks != null) {
         	return false;
         }
@@ -409,6 +430,13 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
 		
         tank.getFluid().amount -= recipe.mass;
         this.consume(powerToCook);
+        
+        IAssemblerSchematic as = (IAssemblerSchematic) reconstructorItemStacks[10].getItem();
+        if(!as.onAssemble(reconstructorItemStacks[10]))
+        {
+        	reconstructorItemStacks[10] = as.resultOfBreakdown();
+        }
+        
     }
     
     public void endWork() {
@@ -442,7 +470,7 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
      */
     public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack)
     {
-        return par1 > 10;
+        return par1 > 10 || (par1 == 10 && par2ItemStack.getItem() instanceof IAssemblerSchematic);
     }
 
     /**
@@ -491,7 +519,7 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return i == 0;
+		return i > 10 || (i == 10 && itemstack.getItem() instanceof IAssemblerSchematic);
 	}
 
 	@Override
@@ -499,13 +527,13 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
 		switch(var1)
 		{
 			case(1):
-				return new int[]{0};
+				return new int[]{11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28};
 			case(0):
 			case(2):
 			case(3):
 			case(4):
 			case(5):
-				return new int[]{1,2,3,4,5,6,7,8,9};
+				return new int[]{9};
 			default:
 				return new int[]{};
 		}
@@ -513,12 +541,12 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
 
 	@Override
 	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
-		return i == 0;
+		return i > 10;
 	}
 
 	@Override
 	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
-		return true;
+		return i == 9 || i > 10;
 	}
 
 	
@@ -526,9 +554,7 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
 	
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		//We don't want to be able to put mass into this from anywhere, only withdraw
-		//Otherwise, we'd also have to worry about mass being pumped in while a decomposition is happening, which would result in an overflow of mass
-		return 0;
+		return tank.fill(resource, doFill);
 	}
 
 	@Override
@@ -548,7 +574,7 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
 
 	@Override
 	public boolean canFill(ForgeDirection from, Fluid fluid) {
-		return false;
+		return fluid == Femtocraft.mass;
 	}
 
 	@Override
