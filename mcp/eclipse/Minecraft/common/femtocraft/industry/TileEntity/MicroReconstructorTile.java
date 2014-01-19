@@ -59,19 +59,32 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
 	public int getMassCapacity() {
 		return tank.getCapacity();
 	}
+	
+	private IAssemblerSchematic getSchematic()
+	{
+		ItemStack is = reconstructorItemStacks[10];
+		if (is == null) return null;
+		return (IAssemblerSchematic) is.getItem();
+	}
     
 	@Override
 	public void onInventoryChanged() {
 		super.onInventoryChanged();
 		
-		if(reconstructorItemStacks[10] != null && reconstructorItemStacks[10].getItem() instanceof IAssemblerSchematic)
+		IAssemblerSchematic as = getSchematic();
+		if(as != null)
 		{
-			IAssemblerSchematic as = (IAssemblerSchematic) reconstructorItemStacks[10].getItem();
-			
 			for(int i = 0; i < as.getRecipe().input.length; ++i)
 			{
 				ItemStack is = as.getRecipe().input[i];
 				reconstructorItemStacks[i] = is == null ? null : is.copy();
+			}
+		}
+		else
+		{
+			for(int i = 0; i < 9; i++)
+			{
+				reconstructorItemStacks[i] = null;
 			}
 		}
 	}
@@ -354,7 +367,7 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
         {
             return false;
         }
-        if(reconstructorItemStacks[10] == null)
+        if(getSchematic() == null)
         {
         	return false;
         }
@@ -366,14 +379,7 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
         }
         else
         {
-        	ItemStack[] fake = new ItemStack[reconstructorItemStacks.length];
-        	for(int i = 0; i < fake.length; ++i)
-        	{
-        		ItemStack it = reconstructorItemStacks[i];
-        		fake[i] = it == null ? null : it.copy();
-        	};
-        	
-        	FemtocraftAssemblerRecipe recipe = FemtocraftRecipeManager.assemblyRecipes.getRecipe(fake);
+        	FemtocraftAssemblerRecipe recipe = getSchematic().getRecipe();
             if (recipe == null) return false;
             if(tank.getFluidAmount() < recipe.mass) return false;
             if(!roomForItem(recipe.output)) return false;
@@ -416,22 +422,18 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
     		ItemStack s = reconstructorItemStacks[i];
     		reconstructingStacks[i] = s == null ? null : s.copy();
     	}
-		
-		FemtocraftAssemblerRecipe recipe = FemtocraftRecipeManager.assemblyRecipes.getRecipe(reconstructingStacks);
+    	IAssemblerSchematic as = getSchematic();
+		FemtocraftAssemblerRecipe recipe = as.getRecipe();
 		
 		for(int i = 0; i < recipe.input.length; ++i)
 		{
 			if(recipe.input[i] == null) continue;
-			
-			reconstructorItemStacks[i].stackSize -= recipe.input[i].stackSize;
-			reconstructingStacks[i].stackSize = recipe.input[i].stackSize;
 			FemtocraftUtils.removeItem(reconstructingStacks[i], reconstructorItemStacks, new int[]{0,1,2,3,4,5,6,7,8,9,10});
 		}
 		
         tank.getFluid().amount -= recipe.mass;
         this.consume(powerToCook);
-        
-        IAssemblerSchematic as = (IAssemblerSchematic) reconstructorItemStacks[10].getItem();
+
         if(!as.onAssemble(reconstructorItemStacks[10]))
         {
         	reconstructorItemStacks[10] = as.resultOfBreakdown();
@@ -440,6 +442,7 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
     }
     
     public void endWork() {
+    	//Cannot look off schematic, cause schematic can change mid-build
     	FemtocraftAssemblerRecipe recipe = FemtocraftRecipeManager.assemblyRecipes.getRecipe(reconstructingStacks);
         
         if(recipe != null) {
