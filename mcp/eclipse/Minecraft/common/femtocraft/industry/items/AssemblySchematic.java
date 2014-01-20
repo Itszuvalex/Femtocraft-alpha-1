@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.Icon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
@@ -15,13 +16,14 @@ import femtocraft.managers.FemtocraftAssemblerRecipe;
 import femtocraft.research.Technology;
 
 public class AssemblySchematic extends Item implements IAssemblerSchematic {
+	public static Icon placeholderIcon;
 	
 	public AssemblySchematic(int itemID) {
 		super(itemID);
 		setCreativeTab(Femtocraft.femtocraftTab);
 		setMaxStackSize(64);
 	}
-
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack par1ItemStack,

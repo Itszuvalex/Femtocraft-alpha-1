@@ -6,12 +6,16 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.Femtocraft;
 import femtocraft.api.IAssemblerSchematic;
 import femtocraft.common.gui.DisplaySlot;
 import femtocraft.common.gui.OutputSlot;
 import femtocraft.industry.TileEntity.MicroReconstructorTile;
+import femtocraft.industry.items.AssemblySchematic;
 
 public class ContainerMicroReconstructor extends Container
 {
@@ -24,12 +28,25 @@ public class ContainerMicroReconstructor extends Container
     {
         this.reconstructor = reconstructor;
         this.addSlotToContainer(new OutputSlot(reconstructor, 9, 122, 23));
-        this.addSlotToContainer(new Slot(reconstructor, 10, 94, 54));
+        Slot schematic = new Slot(reconstructor, 10, 94, 54) {
+			        	public boolean isItemValid(ItemStack par1ItemStack)
+			            {
+			                return par1ItemStack.getItem() instanceof IAssemblerSchematic;
+			            }
+        		};
+        schematic.setBackgroundIcon(AssemblySchematic.placeholderIcon);
+        this.addSlotToContainer(schematic);
         for(int y = 0; y < 3; ++y)
         {
         	for(int x = 0; x < 3; ++x)
         	{
-        		this.addSlotToContainer(new DisplaySlot(reconstructor, x + y*3, 32 + x*18, 18 + y*18));
+        		this.addSlotToContainer(new DisplaySlot(reconstructor, x + y*3, 32 + x*18, 18 + y*18){
+        			@Override
+        			@SideOnly(Side.CLIENT)
+        			public Icon getBackgroundIconIndex() {
+        				return ((MicroReconstructorTile)this.inventory).getStackInSlot(10) != null ? null : DisplaySlot.noPlaceDisplayIcon;
+        			}
+        		});
         	}
         }
         
@@ -152,7 +169,7 @@ public class ContainerMicroReconstructor extends Container
 
             if (par2 >= 9 && par2 <= 10)
             {
-                if (!this.mergeItemStack(itemstack1, 10, 46, true))
+                if (!this.mergeItemStack(itemstack1, 11, 28, true))
                 {
                     return null;
                 }
