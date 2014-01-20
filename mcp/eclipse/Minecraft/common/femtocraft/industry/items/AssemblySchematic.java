@@ -116,6 +116,8 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 
 	@Override
 	public int getItemStackLimit(ItemStack stack) {
+		NBTTagCompound stacks = stack.stackTagCompound;
+		if(stacks == null) return this.maxStackSize;
 		return stack.stackTagCompound.hasNoTags() ? this.maxStackSize : 1;
 	}
 
@@ -159,6 +161,7 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 
 	private FemtocraftAssemblerRecipe getRecipeFromNBT(NBTTagCompound compound)
 	{
+		if(compound == null) return null;
 		if(!compound.hasKey("recipe")) return null;
 		return FemtocraftAssemblerRecipe.loadFromNBTTagCompound((NBTTagCompound) compound.getTag("recipe"));
 	}

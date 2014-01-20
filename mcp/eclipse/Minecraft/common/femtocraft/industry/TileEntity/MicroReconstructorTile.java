@@ -76,10 +76,21 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
 		IAssemblerSchematic as = getSchematic();
 		if(as != null)
 		{
-			for(int i = 0; i < as.getRecipe(reconstructorItemStacks[10]).input.length; ++i)
+			FemtocraftAssemblerRecipe recipe =  as.getRecipe(reconstructorItemStacks[10]);
+			if(recipe == null)
 			{
-				ItemStack is = as.getRecipe(reconstructorItemStacks[10]).input[i];
-				reconstructorItemStacks[i] = is == null ? null : is.copy();
+				for(int i = 0; i < 9; i++)
+				{
+					reconstructorItemStacks[i] = null;
+				}
+			}
+			else
+			{
+				for(int i = 0; i <recipe.input.length; ++i)
+				{
+					ItemStack is = as.getRecipe(reconstructorItemStacks[10]).input[i];
+					reconstructorItemStacks[i] = is == null ? null : is.copy();
+				}
 			}
 		}
 		else

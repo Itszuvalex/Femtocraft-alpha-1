@@ -75,6 +75,7 @@ import femtocraft.industry.blocks.BlockMicroDeconstructor;
 import femtocraft.industry.blocks.BlockMicroFurnace;
 import femtocraft.industry.blocks.BlockMicroReconstructor;
 import femtocraft.industry.blocks.VacuumTube;
+import femtocraft.industry.items.PaperSchematic;
 import femtocraft.managers.FemtocraftRecipeManager;
 import femtocraft.managers.FemtocraftResearchManager;
 import femtocraft.power.FemtopowerCable;
@@ -142,6 +143,8 @@ public class Femtocraft {
 	public static Item deconstructedTitanium;
 	public static Item deconstructedThorium;
 	public static Item deconstructedPlatinum;
+	
+	public static Item paperSchematic;
 	
 	//Decomp items
 	//Femto
@@ -332,6 +335,11 @@ public class Femtocraft {
 		 LanguageRegistry.addName(deconstructedPlatinum, "Deconstructed Platinum");
 		 if(FemtocraftConfigs.registerPlatinumDustInOreDictionary) OreDictionary.registerOre("dustPlatinum", new ItemStack(deconstructedPlatinum));
 		 
+		 //Schematics
+		 
+		 paperSchematic = new PaperSchematic(FemtocraftConfigs.paperSchematicID);
+		 LanguageRegistry.addName(paperSchematic, "Paper Schematic");
+		 
 		 //Decomp
 		 //Femto
 		 Cubit = new Cubit(FemtocraftConfigs.CubitID).setUnlocalizedName("Cubit");
@@ -480,7 +488,7 @@ public class Femtocraft {
 		GameRegistry.addSmelting(deconstructedThorium.itemID, new ItemStack(ingotThorium), 0.1f);
 		GameRegistry.addSmelting(deconstructedPlatinum.itemID, new ItemStack(ingotPlatinum), 0.1f);
 		
-//		GameRegistry.addShapedRecipe(new ItemStack(Femtocraft., 9),new Object[] {"###", '###', '###', Item.paper});
+//		GameRegistry.addShapedRecipe(new ItemStack(Femtocraft., 3),new Object[] {"###", '###', '###', Item.paper});
 	}
 
 }

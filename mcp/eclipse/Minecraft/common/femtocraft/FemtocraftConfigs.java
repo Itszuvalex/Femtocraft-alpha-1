@@ -66,6 +66,10 @@ public class FemtocraftConfigs {
 	public static @CfgId int deconstructedThoriumID = 12007;
 	public static @CfgId int deconstructedPlatinumID = 12008;
 	
+	public static @CfgId int paperSchematicID = 12009;
+	public static @CfgId int metalSchematicID = 12010;
+	public static @CfgId int advMetalSchematicID = 12011;
+	
 	//Decomp items    12046 - 12069
 	//Femto
 	public static @CfgId int CubitID = 12046;
