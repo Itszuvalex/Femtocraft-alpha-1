@@ -3,6 +3,11 @@ package femtocraft.api;
 import net.minecraft.item.ItemStack;
 import femtocraft.managers.FemtocraftAssemblerRecipe;
 
+/**
+ * 
+ * @author Itszuvalex
+ *
+ */
 public interface IAssemblerSchematic {
 	
 	/**
@@ -28,6 +33,13 @@ public interface IAssemblerSchematic {
 	
 	/**
 	 * 
+	 * @param recipe Recipe that will be imprinted upon this Schematic
+	 * @return Amount of mass required to create this recipe, in mB.
+	 */
+	int massRequired(FemtocraftAssemblerRecipe recipe);
+	
+	/**
+	 * 
 	 * @param stack - ItemStack of this schematic.
 	 * @return True if this schematic is still valid, false if schematic is no longer valid (i.e. damage).
 	 */
@@ -35,7 +47,7 @@ public interface IAssemblerSchematic {
 	
 	/**
 	 * @param stack ItemStack that is breaking down
-	 * @return ItemStack that takes the place @stack, if onAssemble() returns false;
+	 * @return ItemStack that takes the place of @stack, if onAssemble() returns false;
 	 */
 	ItemStack resultOfBreakdown(ItemStack stack);
 

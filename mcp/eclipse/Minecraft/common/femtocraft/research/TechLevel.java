@@ -1,18 +1,20 @@
 package femtocraft.research;
 
 public enum TechLevel {
-		MACRO("macro"), 			//Vanilla level
-		MICRO("micro"), 			//1st Tier
-		NANO("nano"),  			//2nd Tier
-		FEMTO("femto"), 			//3rd Tier
-		TEMPORAL("temporal"),		//Specialty Tier 1
-		DIMENSIONAL("dimensional");	//Specialty Tier 2
+		MACRO("macro", 0), 			//Vanilla level
+		MICRO("micro", 1), 			//1st Tier
+		NANO("nano", 2),  			//2nd Tier
+		FEMTO("femto", 3), 			//3rd Tier
+		TEMPORAL("temporal", 4),		//Specialty Tier 1
+		DIMENSIONAL("dimensional", 4);	//Specialty Tier 2
 		
 		public String key;
+		public int tier;
 		
-		TechLevel(String key)
+		TechLevel(String key, int tier)
 		{
 			this.key = key;
+			this.tier = tier;
 		}
 		
 		public static TechLevel getTech(String key)

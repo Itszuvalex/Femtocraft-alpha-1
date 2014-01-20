@@ -11,17 +11,37 @@ import net.minecraft.util.Icon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
+import femtocraft.FemtocraftConfigs;
 import femtocraft.api.IAssemblerSchematic;
 import femtocraft.managers.FemtocraftAssemblerRecipe;
 import femtocraft.research.Technology;
 
+/**
+ * 
+ * @author Itszuvalex
+ *
+ * @placeholderIcon <i>static</i> -  Icon for use in display slots when no schematic is there to draw reference from.
+ * @infiniteUseMassMultipler <i>static</i> - Multiplier to use instead of use count when calculating mass requirements.
+ * @keyedIcon Icon to use instead of itemIcon, when the itemStack has a recipe associated with it.
+ *
+ * @Info
+ * This is a base class for Schematics with most of the hard work already done.  
+ * This includes tooltip parsing, damage behaviors, support for infinite use schematics and support for a separate Icon for keyed Schematics.
+ */
 public class AssemblySchematic extends Item implements IAssemblerSchematic {
 	public static Icon placeholderIcon;
+	public static float infiniteUseMassMultiplier = FemtocraftConfigs.schematicInfiniteUseMultiplier;
+	public Icon keyedIcon;
 	
 	public AssemblySchematic(int itemID) {
 		super(itemID);
 		setCreativeTab(Femtocraft.femtocraftTab);
 		setMaxStackSize(64);
+	}
+	
+	@Override
+	public Icon getIcon(ItemStack stack, int pass) {
+		return hasRecipe(stack) ? keyedIcon : this.itemIcon;
 	}
 	
 	@Override
@@ -113,6 +133,12 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 	public boolean isRepairable() {
 		return false;
 	}
+	
+	public boolean hasRecipe(ItemStack stack)
+	{
+		if(stack.stackTagCompound == null) return false;
+		return stack.stackTagCompound.hasKey("recipe");
+	}
 
 	@Override
 	public FemtocraftAssemblerRecipe getRecipe(ItemStack stack) {
@@ -163,5 +189,12 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 	@Override
 	public ItemStack resultOfBreakdown(ItemStack stack) {
 		return new ItemStack(this, 1);
+	}
+
+	@Override
+	public int massRequired(FemtocraftAssemblerRecipe recipe) {
+		float amount = getMaxDamage();
+		amount = amount==-1 ? infiniteUseMassMultiplier : amount;
+		return (int) (recipe.techLevel.tier * amount);
 	}
 }

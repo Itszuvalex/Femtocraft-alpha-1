@@ -13,6 +13,24 @@ import femtocraft.FemtocraftConfigs;
 import femtocraft.FemtocraftUtils;
 import femtocraft.research.TechLevel;
 
+/**
+ * 
+ * @author chris
+ *
+ * @category Manager
+ * 
+ * @info
+ * This manager is responsible for all Femtocraft AssemblerRecipes.  All Assembler/Dissassemblers look to this manager for recipe lookup.
+ * Recipes can be specified to only be disassemble-able, or only reassemble-able.  Dissassemblers simply break down items, Reassembles must use
+ * schematics to specify the recipe to follow.
+ * <br>
+ * All recipes are ordered according to their signature in the inventory.  The entire 9 slots are used for the input signature.  ItemStack stackSize
+ * does not matter for ordering.  Exceptions will be thrown when attempting to add recipes when their signature is already associated with a recipe (no check
+ * is performed to see if the recipes are actually equal or not.)  When reconstructing, items must conform to the input signature, and all 9 slots are important.
+ * Slots that are null in the recipe must not contain any items, and vice versa.  This will be separately enforced in the schematic-creating TileEntities, but it
+ * it is also stated here for reference.
+ * 
+ */
 public class FemtocraftAssemblerRecipeManager {
 	public static class AssemblerRecipeFoundException extends Exception
 	{

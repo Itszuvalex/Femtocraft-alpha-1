@@ -5,6 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
 
+import femtocraft.industry.items.AssemblySchematic;
+
 import net.minecraftforge.common.Configuration;
 
 public class FemtocraftConfigs {
@@ -14,7 +16,18 @@ public class FemtocraftConfigs {
 	}
 	@Retention(RetentionPolicy.RUNTIME)
 	private static @interface CfgBool {}
+	
+	@Retention(RetentionPolicy.RUNTIME)
+	private static @interface CfgCat {
+		public String category() default Configuration.CATEGORY_GENERAL;
+	}
 
+	public static final String CATEGORY_GENERATION = "Generation";
+	public static final String CATEGORY_MULTIPLAYER = "Multiplayer";
+	public static final String CATEGORY_DEBUG = "Debug";
+	public static final String CATEGORY_RECIPE_CONFIGURATION = "Recipe Configuration";
+	public static final String CATEGORY_ORE_CONFIGURATION = "Ore Configuration";
+	
 	//example use
 	//public static @CfgId int itemId = 12000;
 	//public static @CfgId(block=true) int blockId = 350;
@@ -91,62 +104,67 @@ public class FemtocraftConfigs {
 	public static @CfgId(block=true) int cuttingBoardID = 370;
 	
 	//bool
-	public static @CfgBool boolean requirePlayersOnlineForTileEntityTicks = false;
+	public static @CfgBool @CfgCat(category = CATEGORY_MULTIPLAYER) boolean requirePlayersOnlineForTileEntityTicks = false;
 	
-	public static @CfgBool boolean worldGen = true;
-	public static @CfgBool boolean titaniumGen = true;
-	public static @CfgBool boolean platinumGen = true;
-	public static @CfgBool boolean thoriumGen = true;
-	public static @CfgBool boolean fareniteGen = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_GENERATION) boolean worldGen = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_GENERATION) boolean titaniumGen = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_GENERATION) boolean platinumGen = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_GENERATION) boolean thoriumGen = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_GENERATION) boolean fareniteGen = true;
 	
-	public static @CfgBool boolean alloyGen = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_GENERATION) boolean alloyGen = true;
 	
 	//Recipes
-	public static @CfgBool boolean silentRecipeLoadAlerts = false;
+	public static @CfgBool @CfgCat(category = CATEGORY_DEBUG) boolean silentRecipeLoadAlerts = false;
 	
-	public static @CfgBool boolean recipeCrystallite = true;
-	public static @CfgBool boolean recipeMineralite = true;
-	public static @CfgBool boolean recipeMetallite = true;
-	public static @CfgBool boolean recipeFaunite = true;
-	public static @CfgBool boolean recipeElectrite = true;
-	public static @CfgBool boolean recipeFlorite = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeCrystallite = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeMineralite = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeMetallite = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeFaunite = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeElectrite = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeFlorite = true;
 	
-	public static @CfgBool boolean recipeMicroCrystal = true;
-	public static @CfgBool boolean recipeProteinChain = true;
-	public static @CfgBool boolean recipeNerveCluster = true;
-	public static @CfgBool boolean recipeConductiveAlloy = true;
-	public static @CfgBool boolean recipeMetalComposite = true;
-	public static @CfgBool boolean recipeFibrousStrand = true;
-	public static @CfgBool boolean recipeMineralLattice = true;
-	public static @CfgBool boolean recipeFungalSpores = true;
-	public static @CfgBool boolean recipeIonicChunk = true;
-	public static @CfgBool boolean recipeReplicatingMaterial = true;
-	public static @CfgBool boolean recipeSpinyFilament = true;
-	public static @CfgBool boolean recipeHardenedBulb = true;
-	public static @CfgBool boolean recipeMorphicChannel = true;
-	public static @CfgBool boolean recipeSynthesizedFiber = true;
-	public static @CfgBool boolean recipeOrganometallicPlate = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeMicroCrystal = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeProteinChain = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeNerveCluster = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeConductiveAlloy = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeMetalComposite = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeFibrousStrand = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeMineralLattice = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeFungalSpores = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeIonicChunk = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeReplicatingMaterial = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeSpinyFilament = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeHardenedBulb = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeMorphicChannel = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeSynthesizedFiber = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeOrganometallicPlate = true;
 	
 	
 	
-	public static @CfgBool boolean recipeIronOre = true;
-	public static @CfgBool boolean recipeGoldOre = true;
-	public static @CfgBool boolean recipeTitaniumOre = true;
-	public static @CfgBool boolean recipeThoriumOre = true;
-	public static @CfgBool boolean recipePlatinumOre = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeIronOre = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeGoldOre = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeTitaniumOre = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeThoriumOre = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipePlatinumOre = true;
 	
-	public static @CfgBool boolean registerTitaniumOreInOreDictionary = true;
-	public static @CfgBool boolean registerThoriumOreInOreDictionary = true;
-	public static @CfgBool boolean registerPlatinumOreInOreDictionary = true;
-	public static @CfgBool boolean registerTitaniumDustInOreDictionary = true;
-	public static @CfgBool boolean registerThoriumDustInOreDictionary = true;
-	public static @CfgBool boolean registerPlatinumDustInOreDictionary = true;
-	public static @CfgBool boolean registerTitaniumIngotInOreDictionary = true;
-	public static @CfgBool boolean registerThoriumIngotInOreDictionary = true;
-	public static @CfgBool boolean registerPlatinumIngotInOreDictionary = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_ORE_CONFIGURATION) boolean registerTitaniumOreInOreDictionary = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_ORE_CONFIGURATION) boolean registerThoriumOreInOreDictionary = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_ORE_CONFIGURATION) boolean registerPlatinumOreInOreDictionary = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_ORE_CONFIGURATION) boolean registerTitaniumDustInOreDictionary = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_ORE_CONFIGURATION) boolean registerThoriumDustInOreDictionary = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_ORE_CONFIGURATION) boolean registerPlatinumDustInOreDictionary = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_ORE_CONFIGURATION) boolean registerTitaniumIngotInOreDictionary = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_ORE_CONFIGURATION) boolean registerThoriumIngotInOreDictionary = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_ORE_CONFIGURATION) boolean registerPlatinumIngotInOreDictionary = true;
+	
+	public static float schematicInfiniteUseMultiplier = 200.f;
 
 	public static void  load(Configuration config) {
 		try {
+			
+			//Mass Loading
+			
 			config.load();
 			Field[] fields = FemtocraftConfigs.class.getFields();
 			for(Field field : fields) {
@@ -161,13 +179,30 @@ public class FemtocraftConfigs {
 					field.setInt(null, id);
 				} else {
 					if(field.isAnnotationPresent(CfgBool.class)){
+						CfgCat cat = field.getAnnotation(CfgCat.class);
+						String category;
+						if(cat == null)
+						{
+							category = Configuration.CATEGORY_GENERAL;
+						}
+						else
+						{
+							category = cat.category();
+						}
+						
 						boolean bool = field.getBoolean(null);
-						bool = config.get(Configuration.CATEGORY_GENERAL,
+						bool = config.get(category,
 								field.getName(), bool).getBoolean(bool);
 						field.setBoolean(null, bool);
 					}
 				}
 			}
+			
+			//Specific loads
+			schematicInfiniteUseMultiplier = (float) config.get("Item Constants", "SchematicInfiniteUseMultiplier", 200.f, "When AssemblerSchematics have infinite uses, this number will be used instead of the # of uses the schematic would be good for, when calculating the mass required to key the schematic to a recipe.").getDouble(200.f);
+			AssemblySchematic.infiniteUseMassMultiplier = schematicInfiniteUseMultiplier;
+			
+			
 		} catch(Exception e) {
 			//failed to load configs log
 		} finally {
