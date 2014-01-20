@@ -479,6 +479,8 @@ public class Femtocraft {
 		GameRegistry.addSmelting(deconstructedTitanium.itemID, new ItemStack(ingotTitanium), 0.1f);
 		GameRegistry.addSmelting(deconstructedThorium.itemID, new ItemStack(ingotThorium), 0.1f);
 		GameRegistry.addSmelting(deconstructedPlatinum.itemID, new ItemStack(ingotPlatinum), 0.1f);
+		
+//		GameRegistry.addShapedRecipe(new ItemStack(Femtocraft., 9),new Object[] {"###", '###', '###', Item.paper});
 	}
 
 }
