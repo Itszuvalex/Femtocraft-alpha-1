@@ -46,6 +46,12 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
+	public Icon getIconIndex(ItemStack par1ItemStack) {
+		return hasRecipe(par1ItemStack) ? keyedIcon : this.itemIcon;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 		//This is called when displaying the tooltip for an item.  par4 is whether it's extended or not, I believe.
@@ -78,7 +84,7 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 		par3List.add(outputLine);
 		
 		//End short
-		if(!par4) return;
+//		if(!par4) return;
 		//Begin long
 		par3List.add("");
 		
@@ -103,8 +109,8 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 		String massLine = String.format("Mass: %d", recipe.mass);
 		par3List.add(massLine);
 		
-		String techLevelLine = String.format("TechLevel: %s", recipe.techLevel.key);
-		par3List.add(techLevelLine);
+//		String techLevelLine = String.format("TechLevel: %s", recipe.techLevel.key);
+//		par3List.add(techLevelLine);
 		
 		Technology tech = recipe.tech;
 		String techString;
@@ -163,7 +169,8 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 	@Override
 	public boolean onAssemble(ItemStack stack) {
 		if(usesRemaining(stack) == -1) return true;
-		return !stack.attemptDamageItem(1, new Random());
+		stack.attemptDamageItem(1, new Random());
+		return !(usesRemaining(stack) == 0);
 	}
 
 	private FemtocraftAssemblerRecipe getRecipeFromNBT(NBTTagCompound compound)

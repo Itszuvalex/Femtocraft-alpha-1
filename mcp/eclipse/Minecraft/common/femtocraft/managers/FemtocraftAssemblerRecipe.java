@@ -71,7 +71,7 @@ public class FemtocraftAssemblerRecipe implements Comparable {
 		NBTTagCompound outputCompound = new NBTTagCompound();
 		output.writeToNBT(outputCompound);
 		
-		compound.setTag("output", outputCompound);
+		compound.setCompoundTag("output", outputCompound);
 		
 		//TechLevel
 		compound.setString("techLevel", techLevel.key);
@@ -86,6 +86,7 @@ public class FemtocraftAssemblerRecipe implements Comparable {
 	public static FemtocraftAssemblerRecipe loadFromNBTTagCompound(NBTTagCompound compound)
 	{
 		FemtocraftAssemblerRecipe recipe = new FemtocraftAssemblerRecipe();
+		recipe.input = new ItemStack[9];
 		
 		//Input
 		NBTTagList inputList = compound.getTagList("input");

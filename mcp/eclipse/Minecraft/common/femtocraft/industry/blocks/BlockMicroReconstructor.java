@@ -240,7 +240,7 @@ public class BlockMicroReconstructor extends BlockContainer
         {
             for (int j1 = 0; j1 < tileEntity.getSizeInventory(); ++j1)
             {
-                ItemStack itemstack = tileEntity.getStackInSlot(j1);
+                ItemStack itemstack = tileEntity.getStackInSlotOnClosing(j1);
 
                 if (itemstack != null)
                 {

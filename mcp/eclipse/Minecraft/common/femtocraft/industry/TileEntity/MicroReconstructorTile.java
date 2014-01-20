@@ -16,6 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
 import femtocraft.api.IAssemblerSchematic;
+import femtocraft.industry.items.AssemblySchematic;
 import femtocraft.managers.FemtocraftAssemblerRecipe;
 import femtocraft.managers.FemtocraftRecipeManager;
 import femtocraft.power.TileEntity.FemtopowerConsumer;
@@ -28,6 +29,15 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
 		super();
 		setMaxStorage(800);
 		tank = new FluidTank(600);
+		
+		
+		
+		
+//		setFluidAmount(600);
+//		
+//		ItemStack sch = new ItemStack(Femtocraft.paperSchematic);
+//		reconstructorItemStacks[15] = sch;
+//		((AssemblySchematic)sch.getItem()).setRecipe(sch, Femtocraft.recipeManager.assemblyRecipes.getRecipe(new ItemStack(Femtocraft.ProteinChain)));
 	}
 	
 	
@@ -71,8 +81,6 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
     
 	@Override
 	public void onInventoryChanged() {
-		super.onInventoryChanged();
-		
 		IAssemblerSchematic as = getSchematic();
 		if(as != null)
 		{
@@ -86,10 +94,10 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
 			}
 			else
 			{
-				for(int i = 0; i <recipe.input.length; ++i)
+				for(int i = 0; i < recipe.input.length; ++i)
 				{
-					ItemStack is = as.getRecipe(reconstructorItemStacks[10]).input[i];
-					reconstructorItemStacks[i] = is == null ? null : is.copy();
+					ItemStack is = recipe.input[i];
+					reconstructorItemStacks[i] = (is == null) ? null : is.copy();
 				}
 			}
 		}
@@ -100,6 +108,8 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
 				reconstructorItemStacks[i] = null;
 			}
 		}
+		
+		super.onInventoryChanged();
 	}
 
 
@@ -117,7 +127,6 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
      */
     public ItemStack getStackInSlot(int par1)
     {
-    	if(par1 < 9) return null;
         return this.reconstructorItemStacks[par1];
     }
 
@@ -404,7 +413,8 @@ public class MicroReconstructorTile  extends FemtopowerConsumer implements ISide
     private boolean roomForItem(ItemStack item)
     {
     	ItemStack[] fake = new ItemStack[1];
-    	fake[0] = reconstructorItemStacks[9].copy();
+    	ItemStack output = reconstructorItemStacks[9];
+    	fake[0] = output == null ? null : output.copy();
     	return FemtocraftUtils.placeItem(item, fake, new int[]{});
     }
     

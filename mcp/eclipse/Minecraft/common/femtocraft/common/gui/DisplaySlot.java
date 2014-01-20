@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 
 public class DisplaySlot extends Slot {
+
 	public static Icon noPlaceDisplayIcon;
 
 	public DisplaySlot(IInventory par1iInventory, int par2, int par3, int par4) {
@@ -17,7 +18,6 @@ public class DisplaySlot extends Slot {
 	
 	@Override
 	public boolean isItemValid(ItemStack par1ItemStack) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -26,4 +26,8 @@ public class DisplaySlot extends Slot {
 		return false;
 	}
 
+	@Override
+	public void putStack(ItemStack par1ItemStack) {
+	}
+	
 }
