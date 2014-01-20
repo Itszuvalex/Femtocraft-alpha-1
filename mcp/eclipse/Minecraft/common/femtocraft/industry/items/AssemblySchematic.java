@@ -49,11 +49,6 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 	public void addInformation(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 		//This is called when displaying the tooltip for an item.  par4 is whether it's extended or not, I believe.
-		NBTTagCompound itemCompound = par1ItemStack.stackTagCompound;
-		if(itemCompound == null) return;
-		if(!itemCompound.hasKey("recipe")) return;
-		FemtocraftAssemblerRecipe recipe = FemtocraftAssemblerRecipe.loadFromNBTTagCompound((NBTTagCompound)itemCompound.getTag("recipe"));
-		
 		int uses = usesRemaining(par1ItemStack);
 		String useString;
 		if(uses == -1)
@@ -64,6 +59,18 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 		{
 			useString = String.valueOf(uses);
 		}
+		
+		
+		NBTTagCompound itemCompound = par1ItemStack.stackTagCompound;
+		if(itemCompound == null || !itemCompound.hasKey("recipe"))
+		{
+			par3List.add(String.format("Uses good for: %s.", useString));
+			return;
+		}
+		
+		FemtocraftAssemblerRecipe recipe = FemtocraftAssemblerRecipe.loadFromNBTTagCompound((NBTTagCompound)itemCompound.getTag("recipe"));
+		
+		
 		String useLine = String.format("%s %s", "Uses Remaining:", useString);
 		par3List.add(useLine);
 		

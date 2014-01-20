@@ -176,35 +176,28 @@ public class ContainerMicroReconstructor extends Container
 
                 slot.onSlotChange(itemstack1, itemstack);
             }
-            else if(par2 > 10 && par2 < 28)
+            else if(par2 > 10 && par2 < 29)
             {
-            	if(!this.mergeItemStack(itemstack1, 28, 64, true))
+            	if(!this.mergeItemStack(itemstack1, 29, 64, true))
             	{
             		return null;
             	}
             }
-            else if ( par2 > 28)
+            else if ( par2 >= 29)
             {
-                if (itemstack1.getItem() instanceof IAssemblerSchematic)
-                {
-                    if (!this.mergeItemStack(itemstack1, 10, 11, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (par2 >= 28 && par2 < 55)
+                if (par2 >= 29 && par2 < 55)
                 {
                     if (!this.mergeItemStack(itemstack1, 55, 64, false))
                     {
                         return null;
                     }
                 }
-                else if (par2 >= 55 && par2 < 64 && !this.mergeItemStack(itemstack1, 28, 55, false))
+                else if (par2 >= 55 && par2 < 64 && !this.mergeItemStack(itemstack1, 29, 55, false))
                 {
                     return null;
                 }
             }
-            else if (!this.mergeItemStack(itemstack1, 28, 64, false))
+            else if (!this.mergeItemStack(itemstack1, 29, 64, false))
             {
                 return null;
             }

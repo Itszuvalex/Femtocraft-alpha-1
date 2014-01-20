@@ -132,6 +132,9 @@ public class FemtocraftAssemblerRecipeManager {
 			if(configRegisterRecipe("TitaniumOre"))	addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,null,new ItemStack(Femtocraft.deconstructedTitanium,2),null,null,null,null}, 0, new ItemStack(Femtocraft.oreTitanium), TechLevel.MACRO, null));
 			if(configRegisterRecipe("ThoriumOre"))	addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,null,new ItemStack(Femtocraft.deconstructedThorium,2),null,null,null,null}, 0, new ItemStack(Femtocraft.oreThorium), TechLevel.MACRO, null));
 			if(configRegisterRecipe("PlatinumOre"))	addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,null,new ItemStack(Femtocraft.deconstructedPlatinum,2),null,null,null,null}, 0, new ItemStack(Femtocraft.orePlatinum), TechLevel.MACRO, null));
+		
+			addDecompositionRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{new ItemStack(Item.paper, 3),null,null,null,null,null,null,null,null}, 0, new ItemStack(Femtocraft.paperSchematic), TechLevel.MACRO, null));
+			
 		}
 		catch(AssemblerRecipeFoundException e)
 		{
@@ -205,26 +208,11 @@ public class FemtocraftAssemblerRecipeManager {
 		
 		ItemStack normal = normalizedOutput(recipe);
 		
-		checkDecomposition(normalArray, recipe);
-		checkRecomposition(normal, recipe);
+		checkDecomposition(normal, recipe);
+		checkRecomposition(normalArray, recipe);
 		
 		inputToRecipeMap.put(normalArray, recipe);
 		outputToRecipeMap.put(normal, recipe);
-	}
-	
-	public void addDecompositionRecipe(FemtocraftAssemblerRecipe recipe) throws IllegalArgumentException, AssemblerRecipeFoundException
-	{
-		if(recipe.input.length != 9)
-		{
-			throw new IllegalArgumentException("FemtocraftAssemblerRecipe - Invalid Input Array Length!  Must be 9!");
-		}
-		
-		ItemStack[] normal = normalizedInput(recipe);
-		if(normal == null) return;
-		
-		checkDecomposition(normal, recipe);
-		
-		inputToRecipeMap.put(normal, recipe);
 	}
 	
 	public void addRecompositionRecipe(FemtocraftAssemblerRecipe recipe) throws IllegalArgumentException, AssemblerRecipeFoundException
@@ -234,24 +222,39 @@ public class FemtocraftAssemblerRecipeManager {
 			throw new IllegalArgumentException("FemtocraftAssemblerRecipe - Invalid Input Array Length!  Must be 9!");
 		}
 		
-		ItemStack normal = normalizedOutput(recipe);
+		ItemStack[] normal = normalizedInput(recipe);
+		if(normal == null) return;
 		
 		checkRecomposition(normal, recipe);
+		
+		inputToRecipeMap.put(normal, recipe);
+	}
+	
+	public void addDecompositionRecipe(FemtocraftAssemblerRecipe recipe) throws IllegalArgumentException, AssemblerRecipeFoundException
+	{
+		if(recipe.input.length != 9)
+		{
+			throw new IllegalArgumentException("FemtocraftAssemblerRecipe - Invalid Input Array Length!  Must be 9!");
+		}
+		
+		ItemStack normal = normalizedOutput(recipe);
+		
+		checkDecomposition(normal, recipe);
 		
 		outputToRecipeMap.put(normal, recipe);
 	}
 	
-	private void checkDecomposition(ItemStack[] normal, FemtocraftAssemblerRecipe recipe) throws AssemblerRecipeFoundException
+	private void checkDecomposition(ItemStack normal, FemtocraftAssemblerRecipe recipe) throws AssemblerRecipeFoundException
 	{
-		if(inputToRecipeMap.containsKey(normal)) 
+		if(outputToRecipeMap.containsKey(normal)) 
 		{
 			throw new AssemblerRecipeFoundException("AssemblerRecipe found for Decomposition of item - " + recipe.output.getDisplayName() + ".");
 		}
 	}
 	
-	private void checkRecomposition(ItemStack normal, FemtocraftAssemblerRecipe recipe) throws AssemblerRecipeFoundException
+	private void checkRecomposition(ItemStack[] normal, FemtocraftAssemblerRecipe recipe) throws AssemblerRecipeFoundException
 	{
-		if(outputToRecipeMap.containsKey(normal)) 
+		if(inputToRecipeMap.containsKey(normal)) 
 		{
 			throw new AssemblerRecipeFoundException("AssemblerRecipe found for Recomposition of item - " + recipe.output.getDisplayName() + ".");
 		}
@@ -267,14 +270,14 @@ public class FemtocraftAssemblerRecipeManager {
 		return removeDecompositionRecipe(recipe) && removeRecompositionRecipe(recipe);
 	}
 	
-	public boolean removeDecompositionRecipe(FemtocraftAssemblerRecipe recipe)
+	public boolean removeRecompositionRecipe(FemtocraftAssemblerRecipe recipe)
 	{
 		ItemStack[] normal = normalizedInput(recipe);
 		if(normal == null) return false;
 		return (inputToRecipeMap.remove(normal) != null);
 	}
 	
-	public boolean removeRecompositionRecipe(FemtocraftAssemblerRecipe recipe)
+	public boolean removeDecompositionRecipe(FemtocraftAssemblerRecipe recipe)
 	{
 		return (outputToRecipeMap.remove(normalizedOutput(recipe)) != null);
 	}
