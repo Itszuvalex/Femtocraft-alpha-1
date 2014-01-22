@@ -19,27 +19,27 @@ public enum TechLevel {
 		
 		public static TechLevel getTech(String key)
 		{
-			if(key == "macro")
+			if(key.equals("macro"))
 			{
 				return MACRO;
 			}
-			else if (key == "micro")
+			else if (key.equals("micro"))
 			{
 				return MICRO;
 			}
-			else if (key == "nano")
+			else if (key.equals("nano"))
 			{
 				return NANO;
 			}
-			else if(key == "femto")
+			else if(key.equals("femto"))
 			{
 				return FEMTO;
 			}
-			else if(key == "temporal")
+			else if(key.equals("temporal"))
 			{
 				return TEMPORAL;
 			}
-			else if (key == "dimensional")
+			else if (key.equals("dimensional"))
 			{
 				return DIMENSIONAL;
 			}

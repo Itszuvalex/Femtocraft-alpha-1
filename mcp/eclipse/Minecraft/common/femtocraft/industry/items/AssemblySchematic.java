@@ -12,6 +12,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftConfigs;
+import femtocraft.FemtocraftUtils;
 import femtocraft.api.IAssemblerSchematic;
 import femtocraft.managers.FemtocraftAssemblerRecipe;
 import femtocraft.research.Technology;
@@ -109,8 +110,8 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 		String massLine = String.format("Mass: %d", recipe.mass);
 		par3List.add(massLine);
 		
-//		String techLevelLine = String.format("TechLevel: %s", recipe.techLevel.key);
-//		par3List.add(techLevelLine);
+		String techLevelLine = String.format("TechLevel: %s", FemtocraftUtils.capitalize(recipe.techLevel.key));
+		par3List.add(techLevelLine);
 		
 		Technology tech = recipe.tech;
 		String techString;
@@ -120,7 +121,7 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 		}
 		else
 		{
-			techString = tech.name;
+			techString = FemtocraftUtils.capitalize(tech.name);
 		}
 		
 		String techLine = String.format("Technology Required: %s", techString);

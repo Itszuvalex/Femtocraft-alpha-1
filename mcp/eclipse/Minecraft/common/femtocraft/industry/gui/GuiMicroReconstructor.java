@@ -15,6 +15,7 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
+import femtocraft.FemtocraftUtils;
 import femtocraft.industry.TileEntity.MicroReconstructorTile;
 import femtocraft.industry.containers.ContainerMicroDeconstructor;
 import femtocraft.industry.containers.ContainerMicroReconstructor;
@@ -107,10 +108,17 @@ public class GuiMicroReconstructor extends GuiContainer
 			int massMax = this.reconstructorInventory.getMassCapacity();
 			
 			FluidStack fluid = this.reconstructorInventory.getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
-			String name =  fluid == null ? "" : (" " + FluidRegistry.getFluidName(fluid));
+			String name =  fluid == null ? "" : (" " + FemtocraftUtils.capitalize(FluidRegistry.getFluidName(fluid)));
 			String text = String.valueOf(massCurrent) + '/' + String.valueOf(massMax) + " mB" + name;
 	
 			this.drawCreativeTabHoveringText(text, par1, par2);
+		}
+		else if(this.isPointInRegion(94, 54, 16, 16, par1, par2))
+		{
+			if(reconstructorInventory.getStackInSlot(10) == null)
+			{
+				this.drawCreativeTabHoveringText("Assembly Schematic", par1, par2);
+			}
 		}
 	}
 }
