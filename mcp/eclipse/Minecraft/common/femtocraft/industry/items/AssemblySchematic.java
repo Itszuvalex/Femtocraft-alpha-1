@@ -76,6 +76,11 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 		}
 		
 		FemtocraftAssemblerRecipe recipe = getRecipe(par1ItemStack);
+		if(recipe == null)
+		{
+			par3List.add("Invalid Recipe");
+			return;
+		}
 		
 		
 		String useLine = String.format("%s %s", "Uses Remaining:", useString);
@@ -85,7 +90,7 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 		par3List.add(outputLine);
 		
 		//End short
-//		if(!par4) return;
+		if(!par4) return;
 		//Begin long
 		par3List.add("");
 		
