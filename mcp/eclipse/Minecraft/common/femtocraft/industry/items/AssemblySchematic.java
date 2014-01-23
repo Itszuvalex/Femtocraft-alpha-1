@@ -75,7 +75,7 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 			return;
 		}
 		
-		FemtocraftAssemblerRecipe recipe = FemtocraftAssemblerRecipe.loadFromNBTTagCompound((NBTTagCompound)itemCompound.getTag("recipe"));
+		FemtocraftAssemblerRecipe recipe = getRecipe(par1ItemStack);
 		
 		
 		String useLine = String.format("%s %s", "Uses Remaining:", useString);
@@ -178,7 +178,7 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 	{
 		if(compound == null) return null;
 		if(!compound.hasKey("recipe")) return null;
-		return FemtocraftAssemblerRecipe.loadFromNBTTagCompound((NBTTagCompound) compound.getTag("recipe"));
+		return Femtocraft.recipeManager.assemblyRecipes.getRecipe(ItemStack.loadItemStackFromNBT(compound.getCompoundTag("recipe")));
 	}
 	
 	private boolean addRecipeToNBT(ItemStack stack, FemtocraftAssemblerRecipe recipe)
@@ -193,7 +193,7 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 		}
 		
 		NBTTagCompound recipeCompound = new NBTTagCompound();
-		recipe.saveToNBTTagCompound(recipeCompound);
+		recipe.output.writeToNBT(recipeCompound);
 		stack.stackTagCompound.setTag("recipe", recipeCompound);
 		
 		return true;
