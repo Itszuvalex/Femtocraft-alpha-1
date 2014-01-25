@@ -1,20 +1,20 @@
-package femtocraft.core.items;
+package femtocraft.core.items.decomposition;
 
 import femtocraft.Femtocraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class SpinyFilament extends Item{
-	public SpinyFilament(int id) {
+public class IonicChunk extends Item{
+	public IonicChunk(int id) {
 		super(id);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		setTextureName(Femtocraft.ID.toLowerCase() +":" + "SpinyFilament");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "IonicChunk");
 	}
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "SpinyFilament");
+        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "IonicChunk");
     }
 }

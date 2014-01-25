@@ -1,20 +1,20 @@
-package femtocraft.core.items;
+package femtocraft.core.items.decomposition;
 
 import femtocraft.Femtocraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class MicroCrystal extends Item{
-	public MicroCrystal(int id) {
+public class Mineralite extends Item{
+	public Mineralite(int id) {
 		super(id);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		setTextureName(Femtocraft.ID.toLowerCase() +":" + "MicroCrystal");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "Mineralite");
 	}
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "MicroCrystal");
+        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "Mineralite");
     }
 }

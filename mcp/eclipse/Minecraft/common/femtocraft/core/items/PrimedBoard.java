@@ -2,19 +2,19 @@ package femtocraft.core.items;
 
 import femtocraft.Femtocraft;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class Planeoid extends Item{
-	public Planeoid(int id) {
-		super(id);
+public class PrimedBoard extends Item {
+
+	public PrimedBoard(int par1) {
+		super(par1);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		setTextureName(Femtocraft.ID.toLowerCase() +":" + "Planeoid");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "PrimedBoard");
 	}
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "Planeoid");
+        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "PrimedBoard");
     }
 }

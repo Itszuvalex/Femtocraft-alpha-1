@@ -66,6 +66,12 @@ public class FemtocraftConfigs {
 	public static @CfgId int deconstructedThoriumID = 12007;
 	public static @CfgId int deconstructedPlatinumID = 12008;
 	
+	public static @CfgId int conductivePowderID = 12012;
+	public static @CfgId int boardID = 12013;
+	public static @CfgId int primedBoardID = 12014;
+	public static @CfgId int dopedBoardID = 12015;
+	public static @CfgId int microCircuitID = 12016;
+	
 	public static @CfgId int paperSchematicID = 12009;
 	public static @CfgId int metalSchematicID = 12010;
 	public static @CfgId int advMetalSchematicID = 12011;

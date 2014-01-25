@@ -2,19 +2,20 @@ package femtocraft.core.items;
 
 import femtocraft.Femtocraft;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class Electrite extends Item{
-	public Electrite(int id) {
-		super(id);
+public class ConductivePowder extends Item{
+
+	public ConductivePowder(int par1) {
+		super(par1);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		setTextureName(Femtocraft.ID.toLowerCase() +":" + "Electrite");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "ConductivePowder");
 	}
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "Electrite");
+        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "ConductivePowder");
     }
+
 }

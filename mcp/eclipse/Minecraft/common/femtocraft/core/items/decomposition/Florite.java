@@ -1,20 +1,20 @@
-package femtocraft.core.items;
+package femtocraft.core.items.decomposition;
 
 import femtocraft.Femtocraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class ReplicatingMaterial extends Item{
-	public ReplicatingMaterial(int id) {
+public class Florite extends Item{
+	public Florite(int id) {
 		super(id);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		setTextureName(Femtocraft.ID.toLowerCase() +":" + "ReplicatingMaterial");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "Florite");
 	}
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "ReplicatingMaterial");
+        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "Florite");
     }
 }

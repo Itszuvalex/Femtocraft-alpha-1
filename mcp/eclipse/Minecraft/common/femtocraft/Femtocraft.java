@@ -29,39 +29,44 @@ import femtocraft.blocks.microStone;
 import femtocraft.blocks.nanoStone;
 import femtocraft.blocks.unidentifiedAlloy;
 import femtocraft.cooking.blocks.CuttingBoard;
-import femtocraft.core.items.ConductiveAlloy;
-import femtocraft.core.items.Crystallite;
-import femtocraft.core.items.Cubit;
+import femtocraft.core.items.Board;
+import femtocraft.core.items.ConductivePowder;
 import femtocraft.core.items.DeconstructedGold;
 import femtocraft.core.items.DeconstructedIron;
 import femtocraft.core.items.DeconstructedPlatinum;
 import femtocraft.core.items.DeconstructedThorium;
 import femtocraft.core.items.DeconstructedTitanium;
-import femtocraft.core.items.Electrite;
-import femtocraft.core.items.Faunite;
-import femtocraft.core.items.FibrousStrand;
-import femtocraft.core.items.Florite;
-import femtocraft.core.items.FungalSpores;
-import femtocraft.core.items.HardenedBulb;
-import femtocraft.core.items.IonicChunk;
-import femtocraft.core.items.MetalComposite;
-import femtocraft.core.items.Metallite;
-import femtocraft.core.items.MicroCrystal;
-import femtocraft.core.items.MineralLattice;
-import femtocraft.core.items.Mineralite;
-import femtocraft.core.items.MorphicChannel;
-import femtocraft.core.items.NerveCluster;
-import femtocraft.core.items.OrganometallicPlate;
-import femtocraft.core.items.Planeoid;
-import femtocraft.core.items.ProteinChain;
-import femtocraft.core.items.Rectangulon;
-import femtocraft.core.items.ReplicatingMaterial;
-import femtocraft.core.items.SpinyFilament;
-import femtocraft.core.items.SynthesizedFiber;
+import femtocraft.core.items.DopedBoard;
+import femtocraft.core.items.MicroCircuitBoard;
+import femtocraft.core.items.PrimedBoard;
 import femtocraft.core.items.ingotFarenite;
 import femtocraft.core.items.ingotPlatinum;
 import femtocraft.core.items.ingotThorium;
 import femtocraft.core.items.ingotTitanium;
+import femtocraft.core.items.decomposition.ConductiveAlloy;
+import femtocraft.core.items.decomposition.Crystallite;
+import femtocraft.core.items.decomposition.Cubit;
+import femtocraft.core.items.decomposition.Electrite;
+import femtocraft.core.items.decomposition.Faunite;
+import femtocraft.core.items.decomposition.FibrousStrand;
+import femtocraft.core.items.decomposition.Florite;
+import femtocraft.core.items.decomposition.FungalSpores;
+import femtocraft.core.items.decomposition.HardenedBulb;
+import femtocraft.core.items.decomposition.IonicChunk;
+import femtocraft.core.items.decomposition.MetalComposite;
+import femtocraft.core.items.decomposition.Metallite;
+import femtocraft.core.items.decomposition.MicroCrystal;
+import femtocraft.core.items.decomposition.MineralLattice;
+import femtocraft.core.items.decomposition.Mineralite;
+import femtocraft.core.items.decomposition.MorphicChannel;
+import femtocraft.core.items.decomposition.NerveCluster;
+import femtocraft.core.items.decomposition.OrganometallicPlate;
+import femtocraft.core.items.decomposition.Planeoid;
+import femtocraft.core.items.decomposition.ProteinChain;
+import femtocraft.core.items.decomposition.Rectangulon;
+import femtocraft.core.items.decomposition.ReplicatingMaterial;
+import femtocraft.core.items.decomposition.SpinyFilament;
+import femtocraft.core.items.decomposition.SynthesizedFiber;
 import femtocraft.core.liquids.Mass;
 import femtocraft.core.liquids.MassBlock;
 import femtocraft.core.ore.oreFarenite;
@@ -143,6 +148,12 @@ public class Femtocraft {
 	public static Item deconstructedTitanium;
 	public static Item deconstructedThorium;
 	public static Item deconstructedPlatinum;
+	
+	public static Item conductivePowder;
+	public static Item board;
+	public static Item primedBoard;
+	public static Item dopedBoard;
+	public static Item microCircuitBoard;
 	
 	public static Item paperSchematic;
 	
@@ -335,6 +346,23 @@ public class Femtocraft {
 		 LanguageRegistry.addName(deconstructedPlatinum, "Deconstructed Platinum");
 		 if(FemtocraftConfigs.registerPlatinumDustInOreDictionary) OreDictionary.registerOre("dustPlatinum", new ItemStack(deconstructedPlatinum));
 		 
+		 //
+		 
+		 conductivePowder = new ConductivePowder(FemtocraftConfigs.conductivePowderID).setUnlocalizedName("conductivePowder");
+		 LanguageRegistry.addName(conductivePowder, "Conductive Powder");
+		 
+		 board = new Board(FemtocraftConfigs.boardID).setUnlocalizedName("board");
+		 LanguageRegistry.addName(board, "Board");
+		 
+		 primedBoard = new PrimedBoard(FemtocraftConfigs.primedBoardID).setUnlocalizedName("primedBoard");
+		 LanguageRegistry.addName(primedBoard, "Primed Board");
+		 
+		 dopedBoard = new DopedBoard(FemtocraftConfigs.dopedBoardID).setUnlocalizedName("dopedBoard");
+		 LanguageRegistry.addName(dopedBoard, "Doped Board");
+		 
+		 microCircuitBoard = new MicroCircuitBoard(FemtocraftConfigs.microCircuitID).setUnlocalizedName("microCircuitBoard");
+		 LanguageRegistry.addName(microCircuitBoard, "Micro Circuit Board");
+		 
 		 //Schematics
 		 
 		 paperSchematic = new PaperSchematic(FemtocraftConfigs.paperSchematicID);
@@ -488,7 +516,14 @@ public class Femtocraft {
 		GameRegistry.addSmelting(deconstructedThorium.itemID, new ItemStack(ingotThorium), 0.1f);
 		GameRegistry.addSmelting(deconstructedPlatinum.itemID, new ItemStack(ingotPlatinum), 0.1f);
 		
+		GameRegistry.addSmelting(primedBoard.itemID, new ItemStack(dopedBoard), 0.1f);
+
+		GameRegistry.addShapedRecipe(new ItemStack(primedBoard), new Object[]{"#", "$", '#', conductivePowder, '$', board});
 		GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.paperSchematic, 3),new Object[] {"###", "###", "###", '#', Item.paper});
+		GameRegistry.addShapedRecipe(new ItemStack(board), new Object[]{"###", '#', Item.stick});
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(conductivePowder, 2), new Object[]{new ItemStack(ingotFarenite), new ItemStack(Item.dyePowder, 1, 4)});
+
 	}
 
 }

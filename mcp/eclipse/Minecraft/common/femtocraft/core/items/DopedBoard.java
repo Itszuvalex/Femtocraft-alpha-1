@@ -2,19 +2,19 @@ package femtocraft.core.items;
 
 import femtocraft.Femtocraft;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class Florite extends Item{
-	public Florite(int id) {
-		super(id);
+public class DopedBoard extends Item {
+
+	public DopedBoard(int par1) {
+		super(par1);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		setTextureName(Femtocraft.ID.toLowerCase() +":" + "Florite");
+		setTextureName(Femtocraft.ID.toLowerCase() +":" + "DopedBoard");
 	}
 	
 	public void updateIcons(IconRegister par1IconRegister)
     {
-        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "Florite");
+        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "DopedBoard");
     }
 }
