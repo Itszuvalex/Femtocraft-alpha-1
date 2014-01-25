@@ -138,18 +138,18 @@ public class FemtopowerCable extends FemtopowerContainer {
 			int x, int y, int z) {
 		AxisAlignedBB box = AxisAlignedBB.getAABBPool().getAABB((double)x + 4.f/16.f, (double)y + 4.f/16.f, (double)z + 4.f/16.f, (double)x + 12.f/16.f, (double)y + 12.f/16.f, (double)z + 12.f/16.f);
 		
-		
-		TileEntity tile = par1World.getBlockTileEntity(x, y, z);
-		if(tile == null) return box;
-		if(!(tile instanceof FemtopowerCableTile)) return box;
-		FemtopowerCableTile cable = (FemtopowerCableTile)tile;
-		
-		for(int i = 0; i < 6; ++i)
-		{
-			if(!cable.connections[i]) continue;
-			box = box.func_111270_a(boundingBoxForDirection(ForgeDirection.getOrientation(i), x, y, z));
-		}
-		
+//		
+//		TileEntity tile = par1World.getBlockTileEntity(x, y, z);
+//		if(tile == null) return box;
+//		if(!(tile instanceof FemtopowerCableTile)) return box;
+//		FemtopowerCableTile cable = (FemtopowerCableTile)tile;
+//		
+//		for(int i = 0; i < 6; ++i)
+//		{
+//			if(!cable.connections[i]) continue;
+//			box = box.func_111270_a(boundingBoxForDirection(ForgeDirection.getOrientation(i), x, y, z));
+//		}
+//		
 		return box;
 	}
 
@@ -175,32 +175,62 @@ public class FemtopowerCable extends FemtopowerContainer {
 	}
 
 	//TODO:  Get this working.  This needs to be enabled in order to actually have mouse-over working
-//	@Override
-//	public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess,
-//			int x, int y, int z) {
-//		AxisAlignedBB box = AxisAlignedBB.getAABBPool().getAABB((double)x + 4.d/16.d, (double)y + 4.d/16.d, (double)z + 4.d/16.d, (double)x + 12.d/16.d, (double)y + 12.d/16.d, (double)z + 12.d/16.d);
-//		
-//		
-//		TileEntity tile = par1iBlockAccess.getBlockTileEntity(x, y, z);
-//		if(tile == null)
-//		{
-//			setBlockBounds((float)box.minX, (float)box.minY, (float)box.minZ, (float)box.maxX, (float)box.maxY, (float)box.maxZ);
-//			return;
-//		}
-//		if(!(tile instanceof FemtopowerCableTile))
-//		{
-//			setBlockBounds((float)box.minX, (float)box.minY, (float)box.minZ, (float)box.maxX, (float)box.maxY, (float)box.maxZ);
-//			return;
-//		}
-//		FemtopowerCableTile cable = (FemtopowerCableTile)tile;
-//		
-//		for(int i = 0; i < 6; ++i)
-//		{
-//			if(!cable.connections[i]) continue;
-//			box = box.func_111270_a(boundingBoxForDirection(ForgeDirection.getOrientation(i), x, y, z));
-//		}
-//		
-//		setBlockBounds((float)box.minX, (float)box.minY, (float)box.minZ, (float)box.maxX, (float)box.maxY, (float)box.maxZ);
-//	}
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess,
+			int x, int y, int z) {
+		AxisAlignedBB box = AxisAlignedBB.getAABBPool().getAABB((double)x + 4.d/16.d, (double)y + 4.d/16.d, (double)z + 4.d/16.d, (double)x + 12.d/16.d, (double)y + 12.d/16.d, (double)z + 12.d/16.d);
+		
+		
+		TileEntity tile = par1iBlockAccess.getBlockTileEntity(x, y, z);
+		if(tile == null)
+		{
+			setBlockBounds((float)box.minX, (float)box.minY, (float)box.minZ, (float)box.maxX, (float)box.maxY, (float)box.maxZ);
+			return;
+		}
+		if(!(tile instanceof FemtopowerCableTile))
+		{
+			setBlockBounds((float)box.minX, (float)box.minY, (float)box.minZ, (float)box.maxX, (float)box.maxY, (float)box.maxZ);
+			return;
+		}
+		
+		double minX = 4.d/16.d;
+		double minY = 4.d/16.d;
+		double minZ = 4.d/16.d;
+		double maxX = 12.d/16.d;
+		double maxY = 12.d/16.d;
+		double maxZ = 12.d/16.d;
+		FemtopowerCableTile cable = (FemtopowerCableTile)tile;
+		
+		for(int i = 0; i < 6; ++i)
+		{
+			if(!cable.connections[i]) continue;
+			ForgeDirection dir = ForgeDirection.getOrientation(i);
+			switch(dir)
+			{
+			case UP:
+				maxY = 1;
+				break;
+			case DOWN:
+				minY = 0;
+				break;
+			case NORTH:
+				minZ = 0;
+				break;
+			case SOUTH:
+				maxZ = 1;
+				break;
+			case EAST:
+				maxX = 1;
+				break;
+			case WEST:
+				minX = 0;
+				break;
+			default:
+				break;
+			}
+		}
+		
+		setBlockBounds((float)minX, (float)minY, (float)minZ, (float)maxX, (float)maxY, (float)maxZ);
+	}
 	
 }

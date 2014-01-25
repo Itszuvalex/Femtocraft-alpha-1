@@ -281,6 +281,13 @@ public class VacuumTube extends BlockContainer {
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
 			int x, int y, int z) {
+		return AxisAlignedBB.getAABBPool().getAABB((double)x + 4.d/16.d, (double)y + 4.d/16.d, (double)z + 4.d/16.d, (double)x + 12.d/16.d, (double)y + 12.d/16.d, (double)z + 12.d/16.d);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World,
+			int x, int y, int z) {
 		AxisAlignedBB box = AxisAlignedBB.getAABBPool().getAABB((double)x + getBlockBoundsMinX(), (double)y + getBlockBoundsMinY(), (double)z + getBlockBoundsMinZ(), (double)x + getBlockBoundsMaxX(), (double)y + getBlockBoundsMaxY(), (double)z + getBlockBoundsMaxZ());
 		
 		
@@ -292,14 +299,7 @@ public class VacuumTube extends BlockContainer {
 		AxisAlignedBB inputBB = boundingBoxForDirection(tube.getInput(), x, y, z);
 		AxisAlignedBB outputBB = boundingBoxForDirection(tube.getOutput(), x, y, z);
 		
-		return box.func_111270_a(inputBB.func_111270_a(outputBB));
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World,
-			int par2, int par3, int par4) {
-		return getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
+		return box.func_111270_a(inputBB).func_111270_a(outputBB);
 	}
 	
 	@Override
@@ -316,8 +316,61 @@ public class VacuumTube extends BlockContainer {
 		AxisAlignedBB inputBB = boundingBoxForDirection(tube.getInput(), x, y, z);
 		AxisAlignedBB outputBB = boundingBoxForDirection(tube.getOutput(), x, y, z);
 		
-		box = box.func_111270_a(inputBB.func_111270_a(outputBB));
+		double minX = 4.d/16.d;
+		double minY = 4.d/16.d;
+		double minZ = 4.d/16.d;
+		double maxX = 12.d/16.d;
+		double maxY = 12.d/16.d;
+		double maxZ = 12.d/16.d;
 		
-		setBlockBounds((float)box.minX, (float)box.minY, (float)box.minZ, (float)box.maxX, (float)box.maxY, (float)box.maxZ);
+		switch(tube.getInput())
+		{
+		case UP:
+			maxY = 1;
+			break;
+		case DOWN:
+			minY = 0;
+			break;
+		case NORTH:
+			minZ = 0;
+			break;
+		case SOUTH:
+			maxZ = 1;
+			break;
+		case EAST:
+			maxX = 1;
+			break;
+		case WEST:
+			minX = 0;
+			break;
+		default:
+			break;
+		}
+		
+		switch(tube.getOutput())
+		{
+		case UP:
+			maxY = 1;
+			break;
+		case DOWN:
+			minY = 0;
+			break;
+		case NORTH:
+			minZ = 0;
+			break;
+		case SOUTH:
+			maxZ = 1;
+			break;
+		case EAST:
+			maxX = 1;
+			break;
+		case WEST:
+			minX = 0;
+			break;
+		default:
+			break;
+		}
+		
+		setBlockBounds((float)minX, (float)minY, (float)minZ, (float)maxX, (float)maxY, (float)maxZ);
 	}
 }
