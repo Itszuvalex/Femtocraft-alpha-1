@@ -76,6 +76,10 @@ public class FemtocraftConfigs {
 	public static @CfgId int metalSchematicID = 12010;
 	public static @CfgId int advMetalSchematicID = 12011;
 	
+	public static @CfgId int microInterfaceDeviceID = 12043;
+	public static @CfgId int nanoInterfaceDeviceID = 12044;
+	public static @CfgId int femtoInterfaceDeviceID = 12045;
+	
 	//Decomp items    12046 - 12069
 	//Femto
 	public static @CfgId int CubitID = 12046;

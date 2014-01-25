@@ -37,7 +37,10 @@ import femtocraft.core.items.DeconstructedPlatinum;
 import femtocraft.core.items.DeconstructedThorium;
 import femtocraft.core.items.DeconstructedTitanium;
 import femtocraft.core.items.DopedBoard;
+import femtocraft.core.items.FemtoInterfaceDevice;
 import femtocraft.core.items.MicroCircuitBoard;
+import femtocraft.core.items.MicroInterfaceDevice;
+import femtocraft.core.items.NanoInterfaceDevice;
 import femtocraft.core.items.PrimedBoard;
 import femtocraft.core.items.ingotFarenite;
 import femtocraft.core.items.ingotPlatinum;
@@ -156,6 +159,10 @@ public class Femtocraft {
 	public static Item microCircuitBoard;
 	
 	public static Item paperSchematic;
+	
+	public static Item microInterfaceDevice;
+	public static Item nanoInterfaceDevice;
+	public static Item femtoInterfaceDevice;
 	
 	//Decomp items
 	//Femto
@@ -367,6 +374,15 @@ public class Femtocraft {
 		 
 		 paperSchematic = new PaperSchematic(FemtocraftConfigs.paperSchematicID);
 		 LanguageRegistry.addName(paperSchematic, "Paper Schematic");
+		 
+		 microInterfaceDevice = new MicroInterfaceDevice(FemtocraftConfigs.microInterfaceDeviceID).setUnlocalizedName("microInterfaceDevice");
+		 LanguageRegistry.addName(microInterfaceDevice, "MicroInterface Device");
+		 
+		 nanoInterfaceDevice = new NanoInterfaceDevice(FemtocraftConfigs.nanoInterfaceDeviceID).setUnlocalizedName("nanoInterfaceDevice");
+		 LanguageRegistry.addName(nanoInterfaceDevice, "NanoInterface Device");
+		 
+		 femtoInterfaceDevice = new FemtoInterfaceDevice(FemtocraftConfigs.femtoInterfaceDeviceID).setUnlocalizedName("femtoInterfaceDevice");
+		 LanguageRegistry.addName(femtoInterfaceDevice, "FemtoInterface Device");
 		 
 		 //Decomp
 		 //Femto

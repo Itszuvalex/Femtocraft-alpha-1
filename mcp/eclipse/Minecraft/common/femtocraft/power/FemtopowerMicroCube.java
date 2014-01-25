@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
@@ -33,20 +34,33 @@ public class FemtopowerMicroCube extends FemtopowerContainer {
 	}
 	
 	@Override
-	public boolean isOpaqueCube() {
-		return false;
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTexture(IBlockAccess access, int x,
+			int y, int z, int side) {
+		TileEntity te = access.getBlockTileEntity(x, y, z);
+		
+		if(te == null) return this.blockIcon;
+		FemtopowerMicroCubeTile cube = (FemtopowerMicroCubeTile)te;
+		if(cube == null) return this.blockIcon;
+		return cube.outputs[side] ? outputSide : inputSide;
 	}
 
-	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
 	
-	@Override
-	public int getRenderType() {
-		return ClientProxyFemtocraft.FemtopowerMicroCubeRenderID;
-	}
-	
+//	@Override
+//	public boolean isOpaqueCube() {
+//		return false;
+//	}
+
+//	@Override
+//	public boolean renderAsNormalBlock() {
+//		return false;
+//	}
+//	
+//	@Override
+//	public int getRenderType() {
+//		return ClientProxyFemtocraft.FemtopowerMicroCubeRenderID;
+//	}
+//	
 	@Override
 	public boolean onBlockActivated(World par1World, int par2, int par3,
 			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
@@ -64,8 +78,9 @@ public class FemtopowerMicroCube extends FemtopowerContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		inputSide = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()+":" + "MicroCube_input");
-		outputSide = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()+":" + "MicroCube_output");
-		side = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "MicroCube_side");
+		inputSide = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()+":" + "MicroMachineBlock_unpowered_side");
+		outputSide = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()+":" + "MicroMachineBlock_side");
+//		side = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "MicroCube_side");
 	}
+
 }
