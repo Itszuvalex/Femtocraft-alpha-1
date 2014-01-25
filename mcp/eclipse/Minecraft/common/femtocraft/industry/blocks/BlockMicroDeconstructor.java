@@ -22,6 +22,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.industry.TileEntity.MicroDeconstructorTile;
 import femtocraft.industry.TileEntity.MicroFurnaceTile;
+import femtocraft.proxy.ClientProxyFemtocraft;
+import femtocraft.render.SimpleMachineRenderer;
 
 public class BlockMicroDeconstructor extends BlockContainer
 {
@@ -32,9 +34,6 @@ public class BlockMicroDeconstructor extends BlockContainer
 
     @SideOnly(Side.CLIENT)
     private Icon frontIcon;
-    
-    @SideOnly(Side.CLIENT)
-    private Icon sideIcon;
 
     public BlockMicroDeconstructor(int par1)
     {
@@ -44,6 +43,17 @@ public class BlockMicroDeconstructor extends BlockContainer
         setStepSound(Block.soundStoneFootstep);
         setCreativeTab(Femtocraft.femtocraftTab);
     }
+    
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
+	
+	@Override
+	public int getRenderType() {
+		return SimpleMachineRenderer.renderID;
+	}
+    
 
     /**
      * Returns the ID of the items to drop on destruction.
@@ -107,12 +117,12 @@ public class BlockMicroDeconstructor extends BlockContainer
      */
     public Icon getIcon(int par1, int par2)
     {
-    	if(par1 != par2) 
+    	if(par1 == par2) 
     	{
-    		return sideIcon;
+    		return frontIcon;
     	}
     	else {
-    		return frontIcon;
+    		return blockIcon;
     	}
     }
 
@@ -124,7 +134,7 @@ public class BlockMicroDeconstructor extends BlockContainer
      */
     public void registerIcons(IconRegister par1IconRegister)
     {
-        sideIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "MicroMachineBlock_side");
+        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "MicroMachineBlock_side");
         frontIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "MicroDeconstructor_front");
     }
 

@@ -6,6 +6,7 @@ import java.util.Random;
 
 import femtocraft.Femtocraft;
 import femtocraft.industry.TileEntity.MicroFurnaceTile;
+import femtocraft.render.SimpleMachineRenderer;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -23,6 +24,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockMicroFurnace extends BlockContainer
@@ -42,9 +44,6 @@ public class BlockMicroFurnace extends BlockContainer
     private static boolean keepFurnaceInventory;
     @SideOnly(Side.CLIENT)
     private Icon frontIcon;
-    
-    @SideOnly(Side.CLIENT)
-    private Icon sideIcon;
 
     public BlockMicroFurnace(int par1, boolean par2)
     {
@@ -59,6 +58,16 @@ public class BlockMicroFurnace extends BlockContainer
         	setLightValue(0.875F);
         }
     }
+    
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
+	
+	@Override
+	public int getRenderType() {
+		return SimpleMachineRenderer.renderID;
+	}
 
     /**
      * Returns the ID of the items to drop on destruction.
@@ -122,12 +131,12 @@ public class BlockMicroFurnace extends BlockContainer
      */
     public Icon getIcon(int par1, int par2)
     {
-    	if(par1 != par2) 
+    	if(par1 == par2) 
     	{
-    		return sideIcon;
+    		return frontIcon;
     	}
     	else {
-    		return frontIcon;
+    		return blockIcon;
     	}
     }
 
@@ -139,7 +148,7 @@ public class BlockMicroFurnace extends BlockContainer
      */
     public void registerIcons(IconRegister par1IconRegister)
     {
-        sideIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "MicroMachineBlock_side");
+        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "MicroMachineBlock_side");
         frontIcon = par1IconRegister.registerIcon(this.isActive ? Femtocraft.ID.toLowerCase() +":" + "MicroFurnace_front_lit" : Femtocraft.ID.toLowerCase() +":" + "MicroFurnace_front_unlit");
     }
 
