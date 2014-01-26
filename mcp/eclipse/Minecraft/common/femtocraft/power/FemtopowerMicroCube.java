@@ -18,8 +18,7 @@ import femtocraft.proxy.ClientProxyFemtocraft;
 public class FemtopowerMicroCube extends FemtopowerContainer {
 	public Icon outputSide;
 	public Icon inputSide;
-	public Icon side;
-
+	
 	public FemtopowerMicroCube(int par1) {
 		super(par1, Material.iron);
 		setCreativeTab(Femtocraft.femtocraftTab);
@@ -40,8 +39,8 @@ public class FemtopowerMicroCube extends FemtopowerContainer {
 		TileEntity te = access.getBlockTileEntity(x, y, z);
 		
 		if(te == null) return this.blockIcon;
+		if(!(te instanceof FemtopowerMicroCubeTile)) return this.blockIcon;
 		FemtopowerMicroCubeTile cube = (FemtopowerMicroCubeTile)te;
-		if(cube == null) return this.blockIcon;
 		return cube.outputs[side] ? outputSide : inputSide;
 	}
 
@@ -78,8 +77,8 @@ public class FemtopowerMicroCube extends FemtopowerContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		inputSide = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()+":" + "MicroMachineBlock_unpowered_side");
-		outputSide = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()+":" + "MicroMachineBlock_side");
+		this.blockIcon = inputSide = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()+":" + "MicroCube_input");
+		outputSide = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()+":" + "MicroCube_output");
 //		side = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "MicroCube_side");
 	}
 
