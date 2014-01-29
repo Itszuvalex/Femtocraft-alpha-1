@@ -1,4 +1,4 @@
-package femtocraft.power;
+package femtocraft.power.blocks;
 
 import java.util.List;
 

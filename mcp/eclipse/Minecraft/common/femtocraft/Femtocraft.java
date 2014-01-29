@@ -86,11 +86,12 @@ import femtocraft.industry.blocks.VacuumTube;
 import femtocraft.industry.items.PaperSchematic;
 import femtocraft.managers.FemtocraftRecipeManager;
 import femtocraft.managers.FemtocraftResearchManager;
-import femtocraft.power.FemtopowerCable;
-import femtocraft.power.FemtopowerConsumerBlock;
-import femtocraft.power.FemtopowerGenerator;
-import femtocraft.power.FemtopowerMicroCube;
 import femtocraft.power.TileEntity.FemtopowerMicroCubeTile;
+import femtocraft.power.blocks.FemtopowerCable;
+import femtocraft.power.blocks.FemtopowerConsumerBlock;
+import femtocraft.power.blocks.FemtopowerGenerator;
+import femtocraft.power.blocks.FemtopowerMicroCube;
+import femtocraft.power.blocks.MicroChargingBase;
 import femtocraft.proxy.ClientProxyFemtocraft;
 import femtocraft.proxy.CommonProxyFemtocraft;
 
@@ -135,6 +136,7 @@ public class Femtocraft {
 	public static Block FemtocraftMicroReconstructor;
 	public static Block FemtopowerMicroCube;
 	public static Block FemtocraftVacuumTube;
+	public static Block FemtopowerMicroChargingBase;
 	
 	//liquids
 	public static Fluid mass;
@@ -306,6 +308,10 @@ public class Femtocraft {
 		 FemtocraftVacuumTube = new VacuumTube(FemtocraftConfigs.FemtocraftVacuumTubeID);
 		 GameRegistry.registerBlock(FemtocraftVacuumTube, "FemtocraftVacuumTube");
 		 LanguageRegistry.addName(FemtocraftVacuumTube, "Vacuum Tube");
+		 
+		 FemtopowerMicroChargingBase = new MicroChargingBase(FemtocraftConfigs.FemtopowerMicroChargingBaseID);
+		 GameRegistry.registerBlock(FemtopowerMicroChargingBase, "FemtopowerMicroChargingBase");
+		 LanguageRegistry.addName(FemtopowerMicroChargingBase, "Electrostatic Charging Base");
 		 
 		 //Liquids
 		 mass = new Mass();

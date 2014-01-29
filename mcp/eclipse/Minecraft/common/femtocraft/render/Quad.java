@@ -14,7 +14,8 @@ public class Quad {
 	public float minV;
 	public float maxV;
 
-	public Quad(Point a, Point b, Point c, Point d) 
+	//This will cause crashes, cause I'm stupid
+	private Quad(Point a, Point b, Point c, Point d) 
 	{
 		this(a, b, c, d, null);
 	}

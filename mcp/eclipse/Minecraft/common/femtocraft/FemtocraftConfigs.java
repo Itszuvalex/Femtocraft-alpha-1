@@ -51,6 +51,7 @@ public class FemtocraftConfigs {
 	public static @CfgId(block=true) int FemtocraftMicroReconstructorID = 364;
 	public static @CfgId(block=true) int FemtopowerMicroCubeID = 365;
 	public static @CfgId(block=true) int FemtocraftVacuumTubeID = 366;
+	public static @CfgId(block=true) int FemtopowerMicroChargingBaseID = 367;
 	
 	public static @CfgId(block=true) int FemtocraftMassBlock = 400;
 	

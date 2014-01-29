@@ -1,9 +1,10 @@
-package femtocraft.power;
+package femtocraft.power.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
@@ -12,8 +13,8 @@ import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
+import femtocraft.api.IInterfaceDevice;
 import femtocraft.power.TileEntity.FemtopowerMicroCubeTile;
-import femtocraft.proxy.ClientProxyFemtocraft;
 
 public class FemtopowerMicroCube extends FemtopowerContainer {
 	public Icon outputSide;
@@ -64,11 +65,19 @@ public class FemtopowerMicroCube extends FemtopowerContainer {
 	public boolean onBlockActivated(World par1World, int par2, int par3,
 			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
 			float par8, float par9) {
-		FemtopowerMicroCubeTile tile = (FemtopowerMicroCubeTile)par1World.getBlockTileEntity(par2, par3, par4);
-		if(tile != null && !par1World.isRemote)
+		
+		if(par1World.isRemote) return true;
+		ItemStack item = par5EntityPlayer.getCurrentEquippedItem();
+		if(item != null && item.getItem() instanceof IInterfaceDevice)
 		{
-			tile.onSideActivate(ForgeDirection.getOrientation(par6));
-			par1World.markBlockForUpdate(par2, par3, par4);
+		
+			FemtopowerMicroCubeTile tile = (FemtopowerMicroCubeTile)par1World.getBlockTileEntity(par2, par3, par4);
+			if(tile != null && !par1World.isRemote)
+			{
+				tile.onSideActivate(ForgeDirection.getOrientation(par6));
+				par1World.markBlockForUpdate(par2, par3, par4);
+			}
+			return true;
 		}
 		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer,
 				par6, par7, par8, par9);

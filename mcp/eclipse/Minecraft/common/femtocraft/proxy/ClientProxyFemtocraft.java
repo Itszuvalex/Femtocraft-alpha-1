@@ -4,12 +4,14 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import femtocraft.cooking.blocks.cuttingBoardRenderer;
 import femtocraft.industry.render.VacuumTubeRenderer;
 import femtocraft.power.render.FemtopowerCableRenderer;
+import femtocraft.power.render.FemtopowerChargingBaseRenderer;
 import femtocraft.render.SimpleMachineRenderer;
 
 public class ClientProxyFemtocraft extends CommonProxyFemtocraft {
 	public static int FemtopowerCableRenderID;
 	public static int FemtopowerMicroCubeRenderID;
 	public static int FemtocraftVacuumTubeRenderID;
+	public static int FemtocraftChargingBaseRenderID;
 	
 	public static int CuttingBoardRenderPass;
 	public static int cuttingBoardRenderType;
@@ -36,6 +38,12 @@ public class ClientProxyFemtocraft extends CommonProxyFemtocraft {
 	@Override
 	public void registerBlockRenderers() {
 		super.registerBlockRenderers();
+		
+		SimpleMachineRenderer.renderID = RenderingRegistry.getNextAvailableRenderId();
+		RenderingRegistry.registerBlockHandler(SimpleMachineRenderer.renderID, new SimpleMachineRenderer());
+		
+		
+		
 		FemtopowerCableRenderID = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(FemtopowerCableRenderID, new FemtopowerCableRenderer());
 		
@@ -45,8 +53,8 @@ public class ClientProxyFemtocraft extends CommonProxyFemtocraft {
 		FemtocraftVacuumTubeRenderID = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(FemtocraftVacuumTubeRenderID, new VacuumTubeRenderer());	
 		
-		SimpleMachineRenderer.renderID = RenderingRegistry.getNextAvailableRenderId();
-		RenderingRegistry.registerBlockHandler(SimpleMachineRenderer.renderID, new SimpleMachineRenderer());
+		FemtocraftChargingBaseRenderID = RenderingRegistry.getNextAvailableRenderId();
+		RenderingRegistry.registerBlockHandler(FemtocraftChargingBaseRenderID, new FemtopowerChargingBaseRenderer());
 		
 	}
 }

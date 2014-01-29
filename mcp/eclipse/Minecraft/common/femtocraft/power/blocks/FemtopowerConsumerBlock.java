@@ -1,4 +1,4 @@
-package femtocraft.power;
+package femtocraft.power.blocks;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
