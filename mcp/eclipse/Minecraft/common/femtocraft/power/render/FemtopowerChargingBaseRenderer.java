@@ -95,6 +95,21 @@ public class FemtopowerChargingBaseRenderer implements ISimpleBlockRenderingHand
 		base_model.addQuad(side_top);
 		base_model.addQuad(side_bot);
 		
+		//Top Pillars
+		
+		Quad pillar_top = new Quad(new Point(0,1,0), new Point(0,1,1), new Point(1,1,1), new Point(1,1,0), base.top_pillar_top);
+		
+		Quad pillar_north = new Quad(new Point(12.f/16.f,13.f/16.f,4.f/16.f), new Point(4.f/16.f,13.f/16.f,4.f/16.f), new Point(4.f/16.f,1,4.f/16.f), new Point(12.f/16.f,1,4.f/16.f), base.top_pillar_side, base.top_pillar_side.getMinU(), base.top_pillar_side.getInterpolatedU(6), base.top_pillar_side.getMinV(), base.top_pillar_side.getMaxV());
+		Quad pillar_south = new Quad(new Point(4.f/16.f,13.f/16.f,12.f/16.f), new Point(12.f/16.f,13.f/16.f,12.f/16.f), new Point(12.f/16.f,1,12.f/16.f), new Point(4.f/16.f,1,12.f/16.f), base.top_pillar_side, base.top_pillar_side.getMinU(), base.top_pillar_side.getInterpolatedU(6), base.top_pillar_side.getMinV(), base.top_pillar_side.getMaxV());
+		Quad pillar_east = new Quad(new Point(12.f/16.f,13.f/16.f,12.f/16.f), new Point(12.f/16.f,13.f/16.f,4.f/16.f), new Point(12.f/16.f,1,4.f/16.f), new Point(12.f/16.f,1,12.f/16.f), base.top_pillar_side, base.top_pillar_side.getMinU(), base.top_pillar_side.getInterpolatedU(6), base.top_pillar_side.getMinV(), base.top_pillar_side.getMaxV());
+		Quad pillar_west = new Quad(new Point(4.f/16.f,13.f/16.f,4.f/16.f), new Point(4.f/16.f,13.f/16.f,12.f/16.f), new Point(4.f/16.f,1,12.f/16.f), new Point(4.f/16.f,1,4.f/16.f), base.top_pillar_side, base.top_pillar_side.getMinU(), base.top_pillar_side.getInterpolatedU(6), base.top_pillar_side.getMinV(), base.top_pillar_side.getMaxV());
+		
+		base_model.addQuad(pillar_top);
+		base_model.addQuad(pillar_north);
+		base_model.addQuad(pillar_south);
+		base_model.addQuad(pillar_east);
+		base_model.addQuad(pillar_west);
+		
 		//Side insets
 		Quad side_inset_north = new Quad(new Point(0,0,3.f/16.f), new Point(0,1,3.f/16.f), new Point(1,1,3.f/16.f), new Point(1,0,3.f/16f), base.side_inset);
 		Quad side_inset_south = new Quad(new Point(1,0,13.f/16.f), new Point(1,1,13.f/16.f), new Point(0,1,13.f/16.f), new Point(0,0,13.f/16.f), base.side_inset);
@@ -150,31 +165,6 @@ public class FemtopowerChargingBaseRenderer implements ISimpleBlockRenderingHand
 		base_model.addQuad(coil_top_inset_bot_1);
 		base_model.addQuad(coil_top_inset_bot_2);
 		base_model.addQuad(coil_top_inset_bot_3);
-		
-//		//Coil insets
-//		FemtocraftRenderUtils.drawNorthFace(x, y, z, 0, 1, 0, 1, 1.f/16.f, base.coil_inset, base.coil_inset.getMinU(), base.coil_inset.getMaxU(), base.coil_inset.getMinV(), base.coil_inset.getMaxV());
-//		FemtocraftRenderUtils.drawSouthFace(x, y, z, 0, 1, 0, 1, 15.f/16.f, base.coil_inset, base.coil_inset.getMinU(), base.coil_inset.getMaxU(), base.coil_inset.getMinV(), base.coil_inset.getMaxV());
-//		FemtocraftRenderUtils.drawEastFace(x, y, z, 0, 1, 0, 1, 15.f/16.f, base.coil_inset, base.coil_inset.getMinU(), base.coil_inset.getMaxU(), base.coil_inset.getMinV(), base.coil_inset.getMaxV());
-//		FemtocraftRenderUtils.drawWestFace(x, y, z, 0, 1, 0, 1, 1.f/16.f, base.coil_inset, base.coil_inset.getMinU(), base.coil_inset.getMaxU(), base.coil_inset.getMinV(), base.coil_inset.getMaxV());
-//		
-//		//Coil column insets
-//		FemtocraftRenderUtils.drawNorthFace(x, y, z, 0, 1, 0, 1, 5.f/16.f, base.coil_column_inset, base.coil_column_inset.getMinU(), base.coil_column_inset.getMaxU(), base.coil_column_inset.getMinV(), base.coil_column_inset.getMaxV());
-//		FemtocraftRenderUtils.drawSouthFace(x, y, z, 0, 1, 0, 1, 11.f/16.f, base.coil_column_inset, base.coil_column_inset.getMinU(), base.coil_column_inset.getMaxU(), base.coil_column_inset.getMinV(), base.coil_column_inset.getMaxV());
-//		FemtocraftRenderUtils.drawEastFace(x, y, z, 0, 1, 0, 1, 11.f/16.f, base.coil_column_inset, base.coil_column_inset.getMinU(), base.coil_column_inset.getMaxU(), base.coil_column_inset.getMinV(), base.coil_column_inset.getMaxV());
-//		FemtocraftRenderUtils.drawWestFace(x, y, z, 0, 1, 0, 1, 5.f/16.f, base.coil_column_inset, base.coil_column_inset.getMinU(), base.coil_column_inset.getMaxU(), base.coil_column_inset.getMinV(), base.coil_column_inset.getMaxV());
-//		
-//		//Side Top Insets
-//		FemtocraftRenderUtils.drawTopFace(x, y, z, 0, 1, 0, 1, 2.f/16.f, base.top_inset, base.top_inset.getMinU(), base.top_inset.getMaxU(), base.top_inset.getMinV(), base.top_inset.getMaxV());
-//		FemtocraftRenderUtils.drawBottomFace(x, y, z, 0, 1, 0, 1, 12.f/16.f, base.top_inset, base.top_inset.getMinU(), base.top_inset.getMaxU(), base.top_inset.getMinV(), base.top_inset.getMaxV());
-//		
-//		//Coil top Insets
-//		FemtocraftRenderUtils.drawTopFace(x, y, z, 0, 1, 0, 1, 5.f/16.f, base.coil_top_inset,  base.coil_top_inset.getMinU(),  base.coil_top_inset.getMaxU(),  base.coil_top_inset.getMinV(),  base.coil_top_inset.getMaxV());
-//		FemtocraftRenderUtils.drawTopFace(x, y, z, 0, 1, 0, 1, 8.f/16.f, base.coil_top_inset,  base.coil_top_inset.getMinU(),  base.coil_top_inset.getMaxU(),  base.coil_top_inset.getMinV(),  base.coil_top_inset.getMaxV());
-//		FemtocraftRenderUtils.drawTopFace(x, y, z, 0, 1, 0, 1, 11.f/16.f, base.coil_top_inset,  base.coil_top_inset.getMinU(),  base.coil_top_inset.getMaxU(),  base.coil_top_inset.getMinV(),  base.coil_top_inset.getMaxV());
-//		FemtocraftRenderUtils.drawBottomFace(x, y, z, 0, 1, 0, 1, 4.f/16.f, base.coil_top_inset,  base.coil_top_inset.getMinU(),  base.coil_top_inset.getMaxU(),  base.coil_top_inset.getMinV(),  base.coil_top_inset.getMaxV());
-//		FemtocraftRenderUtils.drawBottomFace(x, y, z, 0, 1, 0, 1, 7.f/16.f, base.coil_top_inset,  base.coil_top_inset.getMinU(),  base.coil_top_inset.getMaxU(),  base.coil_top_inset.getMinV(),  base.coil_top_inset.getMaxV());
-//		FemtocraftRenderUtils.drawBottomFace(x, y, z, 0, 1, 0, 1, 10.f/16.f, base.coil_top_inset,  base.coil_top_inset.getMinU(),  base.coil_top_inset.getMaxU(),  base.coil_top_inset.getMinV(),  base.coil_top_inset.getMaxV());
-		
 	}
 
 }
