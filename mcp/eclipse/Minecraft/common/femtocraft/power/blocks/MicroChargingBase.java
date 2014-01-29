@@ -7,9 +7,11 @@ import net.minecraft.util.Icon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
+import femtocraft.api.IChargingBase;
 import femtocraft.proxy.ClientProxyFemtocraft;
+import femtocraft.research.TechLevel;
 
-public class MicroChargingBase extends FemtopowerContainer {
+public class MicroChargingBase extends FemtopowerContainer implements IChargingBase {
 	public Icon side;
 	public Icon top;
 	public Icon bottom;
@@ -53,6 +55,16 @@ public class MicroChargingBase extends FemtopowerContainer {
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
+	}
+
+	@Override
+	public int maxCoilsSupported() {
+		return 10;
+	}
+
+	@Override
+	public TechLevel maxTechSupported() {
+		return TechLevel.MICRO;
 	}
 
 }
