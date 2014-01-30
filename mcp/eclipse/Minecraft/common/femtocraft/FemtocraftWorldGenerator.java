@@ -16,6 +16,7 @@ public class FemtocraftWorldGenerator implements IWorldGenerator {
 		case -1:
 			generateNether(world, random, chunkX * 16, chunkZ * 16);
 			break;
+		default:
 		case 0:
 			generateSurface(world, random, chunkX * 16, chunkZ * 16);
 			break;
