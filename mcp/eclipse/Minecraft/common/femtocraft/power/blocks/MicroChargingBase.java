@@ -4,14 +4,16 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
+import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.api.IChargingBase;
+import femtocraft.api.IChargingCoil;
 import femtocraft.proxy.ClientProxyFemtocraft;
 import femtocraft.research.TechLevel;
 
-public class MicroChargingBase extends FemtopowerContainer/* implements IChargingBase*/ {
+public class MicroChargingBase extends FemtopowerContainer implements IChargingBase {
 	public Icon side;
 	public Icon top;
 	public Icon bottom;
@@ -57,14 +59,19 @@ public class MicroChargingBase extends FemtopowerContainer/* implements IChargin
 		return false;
 	}
 
-//	@Override
-//	public int maxCoilsSupported() {
-//		return 10;
-//	}
-//
-//	@Override
-//	public TechLevel maxTechSupported() {
-//		return TechLevel.MICRO;
-//	}
+	@Override
+	public int maxCoilsSupported(World world, int x, int y, int z) {
+		return 10;
+	}
 
+	@Override
+	public TechLevel maxTechSupported(World world, int x, int y, int z) {
+		return TechLevel.MICRO;
+	}
+
+	@Override
+	public boolean addCoil(IChargingCoil coil, World world, int x, int y, int z) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
