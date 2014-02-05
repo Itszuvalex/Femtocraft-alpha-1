@@ -191,7 +191,7 @@ public class FemtocraftAssemblerRecipeManager {
 			}
 			ShapedRecipes sr = (ShapedRecipes)recipe;
 			
-			Femtocraft.logger.log(Level.SEVERE, "Attempting to register shaped assembler recipe for " + sr.getRecipeOutput().getDisplayName() + ".");
+			Femtocraft.logger.log(Level.CONFIG, "Attempting to register shaped assembler recipe for " + sr.getRecipeOutput().getDisplayName() + ".");
 			
 			int xoffset = 0;
 			int yoffset = 0;
@@ -243,7 +243,7 @@ public class FemtocraftAssemblerRecipeManager {
 				continue;
 			}
 			
-			Femtocraft.logger.log(Level.SEVERE, "Attempting to register shapeless assembler recipe for " + recipe.getRecipeOutput().getDisplayName() + ".");
+			Femtocraft.logger.log(Level.CONFIG, "Attempting to register shapeless assembler recipe for " + recipe.getRecipeOutput().getDisplayName() + ".");
 			
 			boolean valid = false;
 			int[] slots = new int[recipe.recipeItems.size()];
