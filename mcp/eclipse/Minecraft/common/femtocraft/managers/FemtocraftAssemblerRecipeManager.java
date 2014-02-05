@@ -1,6 +1,9 @@
 package femtocraft.managers;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.logging.Level;
@@ -8,6 +11,10 @@ import java.util.logging.Level;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraft.item.crafting.ShapelessRecipes;
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftConfigs;
 import femtocraft.FemtocraftUtils;
@@ -61,6 +68,8 @@ public class FemtocraftAssemblerRecipeManager {
 		registerMacroDecompositionRecipes();
 		
 		registerFemtocraftAssemblerRecipes();
+		
+		registerDefaultRecipes();
 	}
 	
 	private void registerFemtoDecompositionRecipes()
@@ -115,12 +124,220 @@ public class FemtocraftAssemblerRecipeManager {
 	
 	private void registerMicroDecompositionRecipes()
 	{
-		
+		try
+		{
+			if(configRegisterRecipe("Stone"))		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.MineralLattice),null,null,null,null,null,null,null,null}, 1, new ItemStack(Block.stone), TechLevel.MICRO, null));	
+			if(configRegisterRecipe("Grass"))		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.FibrousStrand),null,null,null,null,null,null,null,null}, 1, new ItemStack(Block.grass), TechLevel.MICRO, null));
+			if(configRegisterRecipe("Dirt"))		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, new ItemStack(Femtocraft.MineralLattice),null,null,null,null,null,null}, 1, new ItemStack(Block.dirt), TechLevel.MICRO, null));	
+			if(configRegisterRecipe("Cobblestone"))	addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, new ItemStack(Femtocraft.MineralLattice),null,null,null,null,null,null,null}, 1, new ItemStack(Block.cobblestone), TechLevel.MICRO, null));	
+			if(configRegisterRecipe("WoodPlank"))	addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.FibrousStrand),new ItemStack(Femtocraft.FibrousStrand),null,null,null,null,null,null,null}, 1, new ItemStack(Block.planks), TechLevel.MICRO, null));
+			if(configRegisterRecipe("Sapling"))		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.FibrousStrand),null,null,new ItemStack(Femtocraft.FibrousStrand),null,null,new ItemStack(Femtocraft.FibrousStrand),null,null}, 1, new ItemStack(Block.sapling), TechLevel.MICRO, null));
+			if(configRegisterRecipe("Sand"))		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.MicroCrystal),null,null,null,null,null,null,null,null}, 1, new ItemStack(Block.sand), TechLevel.MICRO, null));
+			if(configRegisterRecipe("Leaves"))		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, new ItemStack(Femtocraft.FibrousStrand),null,null,null,null,null,null,null}, 1, new ItemStack(Block.leaves), TechLevel.MICRO, null));	
+			if(configRegisterRecipe("Cobweb"))		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.SpinyFilament),null,null,null,null,null,null,null,null}, 1, new ItemStack(Block.web), TechLevel.MICRO, null));	
+			if(configRegisterRecipe("DeadBush"))	addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, new ItemStack(Femtocraft.FibrousStrand),null,null,null,null,null,null}, 1, new ItemStack(Block.deadBush), TechLevel.MICRO, null));	
+			if(configRegisterRecipe("Dandelion"))	addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.FibrousStrand),null,null,new ItemStack(Femtocraft.MorphicChannel),null,null,null,null,null}, 1, new ItemStack(Block.plantYellow), TechLevel.MICRO, null));	
+			if(configRegisterRecipe("Rose"))		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, new ItemStack(Femtocraft.FibrousStrand),null,null,new ItemStack(Femtocraft.MorphicChannel),null,null,null,null}, 1, new ItemStack(Block.plantRed), TechLevel.MICRO, null));	
+			if(configRegisterRecipe("MushroomBrown"))	addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.FungalSpores),null,null,null,null,null,null,null,null}, 1, new ItemStack(Block.mushroomCapBrown), TechLevel.MICRO, null));
+			if(configRegisterRecipe("MushroomRed"))	addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, new ItemStack(Femtocraft.FungalSpores),null,null,null,null,null,null,null}, 1, new ItemStack(Block.mushroomRed), TechLevel.MICRO, null));	
+			if(configRegisterRecipe("MossStone"))	addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.MineralLattice),new ItemStack(Femtocraft.FungalSpores),null,null,null,null,null,null,null}, 1, new ItemStack(Block.cobblestoneMossy), TechLevel.MICRO, null));	
+			if(configRegisterRecipe("Obsidian"))	addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.HardenedBulb),null,null,null,null,null,null,null,null}, 1, new ItemStack(Block.obsidian), TechLevel.MICRO, null));	
+			if(configRegisterRecipe("Ice"))			addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, new ItemStack(Femtocraft.MicroCrystal),null,null,null,null,null,null,null}, 1, new ItemStack(Block.ice), TechLevel.MICRO, null));	
+			if(configRegisterRecipe("Cactus"))		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.SpinyFilament),null,null,new ItemStack(Femtocraft.FibrousStrand),null,null,null,null,null}, 1, new ItemStack(Block.cactus), TechLevel.MICRO, null));	
+			if(configRegisterRecipe("Pumpkin"))		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.FibrousStrand),new ItemStack(Femtocraft.MorphicChannel),null,null,null,null,null,null,null}, 1, new ItemStack(Block.pumpkin), TechLevel.MICRO, null));	
+			if(configRegisterRecipe("Netherrack"))	addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,new ItemStack(Femtocraft.MineralLattice),null,null,null,null,null}, 1, new ItemStack(Block.netherrack), TechLevel.MICRO, null));	
+			if(configRegisterRecipe("SoulSand"))	addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.MicroCrystal),new ItemStack(Femtocraft.IonicChunk),null,null,null,null,null,null,null}, 1, new ItemStack(Block.slowSand), TechLevel.MICRO, null));	
+			if(configRegisterRecipe("Glowstone"))	addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.MineralLattice),null,null,null,null,null,null,null,null}, 1, new ItemStack(Block.stone), TechLevel.MICRO, null));	
+		}
+		catch(AssemblerRecipeFoundException e)
+		{
+			Femtocraft.logger.log(Level.SEVERE, e.errMsg);
+			Femtocraft.logger.log(Level.SEVERE, "Femtocraft failed to load Nano-tier Assembler Recipes!");
+		}
 	}
 	
 	private void registerMacroDecompositionRecipes()
 	{
 		
+	}
+	
+	public void registerDefaultRecipes()
+	{
+		Femtocraft.logger.log(Level.CONFIG, "Registering assembler recipes from Vanilla Minecraft's Crafting Manager.\t This may take awhile ._.");
+		
+		List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
+		List<ShapelessRecipes> shapelessRecipes = new ArrayList<ShapelessRecipes>();
+		
+		Femtocraft.logger.log(Level.CONFIG, "Registering shaped recipes from Vanilla Minecraft's Crafting Manager.");
+		for(IRecipe recipe : recipes)
+		{
+			if(getRecipe(recipe.getRecipeOutput()) != null)
+			{
+				Femtocraft.logger.log(Level.CONFIG, "Assembler recipe already found for " + recipe.getRecipeOutput().getDisplayName() + ".");
+				continue;
+			}
+			
+			if(recipe instanceof ShapelessRecipes)
+			{
+				shapelessRecipes.add((ShapelessRecipes)recipe);
+				continue;
+			}
+			
+			if(!(recipe instanceof ShapedRecipes))
+			{
+				//When I figure out how to do the other recipes...WITHOUT iterating through every conceivable combination of items and damages in the scope of minecraft
+				//It will go here.
+				continue;
+			}
+			ShapedRecipes sr = (ShapedRecipes)recipe;
+			
+			Femtocraft.logger.log(Level.SEVERE, "Attempting to register shaped assembler recipe for " + sr.getRecipeOutput().getDisplayName() + ".");
+			
+			int xoffset = 0;
+			int yoffset = 0;
+			boolean valid = false;
+			
+			while((!valid) && ((xoffset + sr.recipeWidth) <= 3) && ((yoffset + sr.recipeHeight) <= 3))
+			{
+				ItemStack[] input = new ItemStack[9];
+				
+				for(int i = 0; (i < sr.recipeItems.length) && (i < 9); i++)
+				{
+					ItemStack item = sr.recipeItems[i];
+					input[i + xoffset + 3*yoffset] = item == null ? null : item.copy();
+				}
+				
+				try
+				{
+					addReversableRecipe(new FemtocraftAssemblerRecipe(input, 0, sr.getRecipeOutput().copy(), TechLevel.MACRO, null));
+					valid = true;
+				}
+				catch(AssemblerRecipeFoundException e)
+				{
+					//Attempt to offset, while staying inside crafting grid
+					if((++xoffset + sr.recipeWidth) > 3)
+					{
+						xoffset = 0;
+						++yoffset;
+					}
+					valid = false;
+				}
+			}
+			
+			if(!valid)
+			{
+				Femtocraft.logger.log(Level.WARNING, "Failed to register shaped assembler recipe for " + sr.getRecipeOutput().getDisplayName()+"!");
+			}
+			else
+			{
+				Femtocraft.logger.log(Level.CONFIG, "Loaded Vanilla Minecraft shaped recipe as assembler recipe for " + sr.getRecipeOutput().getDisplayName()+".");
+			}
+		}
+		
+		Femtocraft.logger.log(Level.CONFIG, "Registering shapeless recipes from Vanilla Minecraft's Crafting Manager.");
+		for(ShapelessRecipes recipe : shapelessRecipes)
+		{
+			if(getRecipe(recipe.getRecipeOutput()) != null)
+			{
+				Femtocraft.logger.log(Level.CONFIG, "Assembler recipe already found for " + recipe.getRecipeOutput().getDisplayName() + ".");
+				continue;
+			}
+			
+			Femtocraft.logger.log(Level.SEVERE, "Attempting to register shapeless assembler recipe for " + recipe.getRecipeOutput().getDisplayName() + ".");
+			
+			boolean valid = false;
+			int[] slots = new int[recipe.recipeItems.size()];
+			
+			//Exhaustively find a configuration that works - this should NEVER have to go the full distance
+			//but I don't want to half-ass the attempt in case there are MANY collisions
+			int offset = 0;
+			while(!valid && ((offset + recipe.recipeItems.size()) < 9))
+			{
+				for(int i = 0; i < slots.length; ++i)
+				{
+					slots[i] = i;
+				}
+				
+				while(!valid)
+				{
+					ItemStack[] input = new ItemStack[9];
+					Arrays.fill(input, null);
+					
+					for(int i = 0; (i < slots.length) && (i < 9); ++i)
+					{
+						ItemStack item = (ItemStack)recipe.recipeItems.get(i);
+						input[i + offset] = item == null ? null : item.copy();
+					}
+					
+					try
+					{
+						addReversableRecipe(new FemtocraftAssemblerRecipe(input, 0, recipe.getRecipeOutput().copy(), TechLevel.MACRO, null));
+						valid = true;
+					}
+					catch(AssemblerRecipeFoundException e)
+					{
+						//Permute the slots
+						slots = permute(slots);
+						
+						
+						valid = false;
+					}
+				}
+				
+				if(!valid)
+				{
+					Femtocraft.logger.log(Level.WARNING, "Failed to register shapeless assembler recipe for " + recipe.getRecipeOutput().getDisplayName()+"!");
+					Femtocraft.logger.log(Level.WARNING, "I have no clue how this would happen...as the search space is literally thousands of configurations.  Sorry for the wait.");
+				}
+				else
+				{
+					Femtocraft.logger.log(Level.CONFIG, "Loaded Vanilla Minecraft shapeless recipe as assembler recipe for + " + recipe.getRecipeOutput().getDisplayName()+".");
+				}
+			}
+		}
+	}
+	
+	private int[] permute(int[] slots)
+	{
+		int k = findHighestK(slots);
+		int i = findHigherI(slots, k);
+		
+		//Switch k and i
+		int prev = slots[k];
+		slots[k] = slots[i];
+		slots[i] = prev;
+		
+		//Reverse ordering of k+1 to end
+		int remaining = (int) Math.ceil((slots.length - k + 1)/2.);
+		for(int r = k + 1, n = 0; (r < slots.length) && (n < remaining); ++r, ++n)
+		{
+			int pr = slots[r];
+			slots[r] = slots[slots.length - n - 1];
+			slots[slots.length - n - 1] = pr;
+		}
+		
+		return slots;
+	}
+	
+	private int findHighestK(int[] slots)
+	{
+		int ret = 0;
+		for(int i = 0; i < slots.length - 1; ++i)
+		{
+			if((slots[i] < slots[i + 1]) && (ret < i)) ret = i;
+		}
+		return ret;
+	}
+	
+	private int findHigherI(int[] slots, int k)
+	{
+		int ret = 0;
+		
+		for(int i = 0; i < slots.length; ++i)
+		{
+			if((slots[k] < slots[i]) && (ret < i)) ret = i;
+		}
+		return ret;
 	}
 	
 	private void registerFemtocraftAssemblerRecipes()
