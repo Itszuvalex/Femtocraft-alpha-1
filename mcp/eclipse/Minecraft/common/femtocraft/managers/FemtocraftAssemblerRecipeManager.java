@@ -15,6 +15,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import femtocraft.Femtocraft;
@@ -316,10 +317,16 @@ public class FemtocraftAssemblerRecipeManager {
 					
 				}
 			}
-
+			
+			ItemStack output = recipeOutput.copy();
+			if(output.getItemDamage() == OreDictionary.WILDCARD_VALUE)
+			{
+				output.setItemDamage(0);
+			}
+			
 			try
 			{
-				addReversableRecipe(new FemtocraftAssemblerRecipe(input, 0, recipeOutput.copy(), TechLevel.MACRO, null));
+				addReversableRecipe(new FemtocraftAssemblerRecipe(input, 0, output, TechLevel.MACRO, null));
 				done = true;
 			}
 			catch(AssemblerRecipeFoundException e)
@@ -409,9 +416,15 @@ public class FemtocraftAssemblerRecipeManager {
 					input[slots[i] + offset] = item == null ? null : item.copy();
 				}
 				
+				ItemStack output = recipeOutput.copy();
+				if(output.getItemDamage() == OreDictionary.WILDCARD_VALUE)
+				{
+					output.setItemDamage(0);
+				}
+				
 				try
 				{
-					addReversableRecipe(new FemtocraftAssemblerRecipe(input, 0, recipeOutput.copy(), TechLevel.MACRO, null));
+					addReversableRecipe(new FemtocraftAssemblerRecipe(input, 0, output, TechLevel.MACRO, null));
 					valid = true;
 				}
 				catch(AssemblerRecipeFoundException e)
