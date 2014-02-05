@@ -15,6 +15,8 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftConfigs;
 import femtocraft.FemtocraftUtils;
@@ -168,6 +170,8 @@ public class FemtocraftAssemblerRecipeManager {
 		
 		List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
 		List<ShapelessRecipes> shapelessRecipes = new ArrayList<ShapelessRecipes>();
+		List<ShapedOreRecipe> shapedOre = new ArrayList<ShapedOreRecipe>();
+		List<ShapelessOreRecipe> shapelessOre = new ArrayList<ShapelessOreRecipe>();
 		
 		Femtocraft.logger.log(Level.WARNING, "Registering shaped recipes from Vanilla Minecraft's Crafting Manager.");
 		for(IRecipe recipe : recipes)
@@ -184,6 +188,16 @@ public class FemtocraftAssemblerRecipeManager {
 				continue;
 			}
 			
+			if(recipe instanceof ShapedOreRecipe)
+			{
+				shapedOre.add((ShapedOreRecipe) recipe);
+			}
+			
+			if(recipe instanceof ShapelessOreRecipe)
+			{
+				shapelessOre.add((ShapelessOreRecipe) recipe);
+			}
+			
 			if(!(recipe instanceof ShapedRecipes))
 			{
 				//When I figure out how to do the other recipes...WITHOUT iterating through every conceivable combination of items and damages in the scope of minecraft
@@ -193,38 +207,7 @@ public class FemtocraftAssemblerRecipeManager {
 			ShapedRecipes sr = (ShapedRecipes)recipe;
 			
 			Femtocraft.logger.log(Level.CONFIG, "Attempting to register shaped assembler recipe for " + sr.getRecipeOutput().getDisplayName() + ".");
-			
-			int xoffset = 0;
-			int yoffset = 0;
-			boolean valid = false;
-			
-			while((!valid) && ((xoffset + sr.recipeWidth) <= 3) && ((yoffset + sr.recipeHeight) <= 3))
-			{
-				ItemStack[] input = new ItemStack[9];
-				Arrays.fill(input, null);
-				for(int i = 0; (i < sr.recipeItems.length) && (i < 9); i++)
-				{
-					ItemStack item = sr.recipeItems[i];
-					input[i + xoffset + 3*yoffset] = item == null ? null : item.copy();
-				}
-				
-				try
-				{
-					addReversableRecipe(new FemtocraftAssemblerRecipe(input, 0, sr.getRecipeOutput().copy(), TechLevel.MACRO, null));
-					valid = true;
-				}
-				catch(AssemblerRecipeFoundException e)
-				{
-					//Attempt to offset, while staying inside crafting grid
-					if((++xoffset + sr.recipeWidth) > 3)
-					{
-						xoffset = 0;
-						++yoffset;
-					}
-					valid = false;
-				}
-			}
-			
+			boolean valid = registerShapedRecipe(sr.recipeItems, sr.getRecipeOutput(), sr.recipeWidth, sr.recipeHeight);
 			if(!valid)
 			{
 				Femtocraft.logger.log(Level.WARNING, "Failed to register shaped assembler recipe for " + sr.getRecipeOutput().getDisplayName()+"!");
@@ -232,6 +215,21 @@ public class FemtocraftAssemblerRecipeManager {
 			else
 			{
 				Femtocraft.logger.log(Level.CONFIG, "Loaded Vanilla Minecraft shaped recipe as assembler recipe for " + sr.getRecipeOutput().getDisplayName()+".");
+			}
+		}
+		
+		Femtocraft.logger.log(Level.WARNING, "Registering shaped ore recipes from Forge.");
+		for(ShapedOreRecipe orecipe : shapedOre)
+		{
+			Femtocraft.logger.log(Level.CONFIG, "Attempting to register shaped assembler recipe for " + orecipe.getRecipeOutput().getDisplayName() + ".");
+			boolean valid = registerShapedOreRecipe(orecipe.getInput(), orecipe.getRecipeOutput());
+			if(!valid)
+			{
+				Femtocraft.logger.log(Level.WARNING, "Failed to register shaped assembler recipe for " + orecipe.getRecipeOutput().getDisplayName()+"!");
+			}
+			else
+			{
+				Femtocraft.logger.log(Level.CONFIG, "LoadedForge shaped ore recipe as assembler recipe for " + orecipe.getRecipeOutput().getDisplayName()+".");
 			}
 		}
 		
@@ -246,56 +244,231 @@ public class FemtocraftAssemblerRecipeManager {
 			
 			Femtocraft.logger.log(Level.CONFIG, "Attempting to register shapeless assembler recipe for " + recipe.getRecipeOutput().getDisplayName() + ".");
 			
-			boolean valid = false;
-			int[] slots = new int[recipe.recipeItems.size()];
+			boolean valid = registerShapelessRecipe(recipe.recipeItems, recipe.getRecipeOutput());
 			
-			//Exhaustively find a configuration that works - this should NEVER have to go the full distance
-			//but I don't want to half-ass the attempt in case there are MANY collisions
-			int offset = 0;
-			while(!valid && ((offset + recipe.recipeItems.size()) <= 9))
+			if(!valid)
 			{
-				for(int i = 0; i < slots.length; ++i)
+				Femtocraft.logger.log(Level.WARNING, "Failed to register shapeless assembler recipe for " + recipe.getRecipeOutput().getDisplayName()+"!");
+				Femtocraft.logger.log(Level.WARNING, "I have no clue how this would happen...as the search space is literally thousands of configurations.  Sorry for the wait.");
+			}
+			else
+			{
+				Femtocraft.logger.log(Level.CONFIG, "Loaded Vanilla Minecraft shapeless recipe as assembler recipe for + " + recipe.getRecipeOutput().getDisplayName()+".");
+			}
+		}
+		
+		Femtocraft.logger.log(Level.WARNING, "Registering shapeless ore recipes from Forge.");
+		for(ShapelessOreRecipe recipe : shapelessOre)
+		{
+			if(getRecipe(recipe.getRecipeOutput()) != null)
+			{
+				Femtocraft.logger.log(Level.CONFIG, "Assembler recipe already found for " + recipe.getRecipeOutput().getDisplayName() + ".");
+				continue;
+			}
+			
+			Femtocraft.logger.log(Level.CONFIG, "Attempting to register shapeless assembler recipe for " + recipe.getRecipeOutput().getDisplayName() + ".");
+			
+			boolean valid = registerShapelessOreRecipe(recipe.getInput(), recipe.getRecipeOutput());
+			
+			if(!valid)
+			{
+				Femtocraft.logger.log(Level.WARNING, "Failed to register shapeless ore assembler recipe for " + recipe.getRecipeOutput().getDisplayName()+"!");
+				Femtocraft.logger.log(Level.WARNING, "I have no clue how this would happen...as the search space is literally thousands of configurations.  Sorry for the wait.");
+			}
+			else
+			{
+				Femtocraft.logger.log(Level.CONFIG, "Loaded Forge shapeless ore recipe as assembler recipe for + " + recipe.getRecipeOutput().getDisplayName()+".");
+			}
+		}
+	}
+	
+	private boolean registerShapedOreRecipe(Object[] recipeInput, ItemStack recipeOutput) {
+		boolean done = false;
+		int xoffset = 0;
+		int yoffset = 0;
+		while((!done) && (xoffset <= 3) && (yoffset<= 3))
+		{
+			ItemStack[] input = new ItemStack[9];
+			Arrays.fill(input, null);
+			for(int i = 0; (i < recipeInput.length) && (i < 9); i++)
+			{
+				try{
+					ItemStack item;
+					Object obj = recipeInput[i];
+					
+					if(obj instanceof ArrayList<?>)
+					{
+						item = ((ArrayList<ItemStack>)obj).get(0);
+					}
+					else
+					{
+						item = (ItemStack) obj;
+					}
+					input[i + xoffset + 3*yoffset] = item == null ? null : item.copy();
+				}
+				catch(ArrayIndexOutOfBoundsException e)
 				{
-					slots[i] = i;
+					if(++xoffset > 3)
+					{
+						xoffset = 0;
+						++yoffset;
+					}
+					
+				}
+			}
+
+			try
+			{
+				addReversableRecipe(new FemtocraftAssemblerRecipe(input, 0, recipeOutput.copy(), TechLevel.MACRO, null));
+				done = true;
+			}
+			catch(AssemblerRecipeFoundException e)
+			{
+				//Attempt to offset, while staying inside crafting grid
+				if((++xoffset) > 3)
+				{
+					xoffset = 0;
+					++yoffset;
+				}
+				done = false;
+			}
+		}
+		
+		return done;
+	}
+
+	private boolean registerShapedRecipe(ItemStack[] recipeItems, ItemStack recipeOutput, int recipeWidth, int recipeHeight)
+	{
+		boolean done = false;
+		int xoffset = 0;
+		int yoffset = 0;
+		while((!done) && ((xoffset + recipeWidth) <= 3) && ((yoffset + recipeHeight) <= 3))
+		{
+			ItemStack[] input = new ItemStack[9];
+			Arrays.fill(input, null);
+			for(int i = 0; (i < recipeItems.length) && (i < 9); i++)
+			{
+				ItemStack item = recipeItems[i];
+				input[i + xoffset + 3*yoffset] = item == null ? null : item.copy();
+			}
+			
+			try
+			{
+				addReversableRecipe(new FemtocraftAssemblerRecipe(input, 0, recipeOutput.copy(), TechLevel.MACRO, null));
+				done = true;
+			}
+			catch(AssemblerRecipeFoundException e)
+			{
+				//Attempt to offset, while staying inside crafting grid
+				if((++xoffset + recipeWidth) > 3)
+				{
+					xoffset = 0;
+					++yoffset;
+				}
+				done = false;
+			}
+		}
+		
+		return done;
+	}
+	
+	private boolean registerShapelessOreRecipe(List recipeItems, ItemStack recipeOutput)
+	{
+		boolean valid = false;
+		int[] slots = new int[recipeItems.size()];
+		
+		//Exhaustively find a configuration that works - this should NEVER have to go the full distance
+		//but I don't want to half-ass the attempt in case there are MANY collisions
+		int offset = 0;
+		while(!valid && ((offset + recipeItems.size()) <= 9))
+		{
+			for(int i = 0; i < slots.length; ++i)
+			{
+				slots[i] = i;
+			}
+			
+			while(!valid)
+			{
+				ItemStack[] input = new ItemStack[9];
+				Arrays.fill(input, null);
+				
+				for(int i = 0; (i < slots.length) && (i < 9); ++i)
+				{
+					ItemStack item;
+					Object obj = recipeItems.get(i);
+					
+					if(obj instanceof ArrayList<?>)
+					{
+						item = ((ArrayList<ItemStack>)obj).get(0);
+					}
+					else
+					{
+						item = (ItemStack) obj;
+					}
+					
+					input[slots[i] + offset] = item == null ? null : item.copy();
 				}
 				
-				while(!valid)
+				try
 				{
-					ItemStack[] input = new ItemStack[9];
-					Arrays.fill(input, null);
-					
-					for(int i = 0; (i < slots.length) && (i < 9); ++i)
-					{
-						ItemStack item = (ItemStack)recipe.recipeItems.get(i);
-						input[slots[i] + offset] = item == null ? null : item.copy();
-					}
-					
-					try
-					{
-						addReversableRecipe(new FemtocraftAssemblerRecipe(input, 0, recipe.getRecipeOutput().copy(), TechLevel.MACRO, null));
-						valid = true;
-					}
-					catch(AssemblerRecipeFoundException e)
-					{
-						//Permute the slots
-						slots = permute(slots);
-						
-						
-						valid = false;
-					}
+					addReversableRecipe(new FemtocraftAssemblerRecipe(input, 0, recipeOutput.copy(), TechLevel.MACRO, null));
+					valid = true;
 				}
-				
-				if(!valid)
+				catch(AssemblerRecipeFoundException e)
 				{
-					Femtocraft.logger.log(Level.WARNING, "Failed to register shapeless assembler recipe for " + recipe.getRecipeOutput().getDisplayName()+"!");
-					Femtocraft.logger.log(Level.WARNING, "I have no clue how this would happen...as the search space is literally thousands of configurations.  Sorry for the wait.");
-				}
-				else
-				{
-					Femtocraft.logger.log(Level.CONFIG, "Loaded Vanilla Minecraft shapeless recipe as assembler recipe for + " + recipe.getRecipeOutput().getDisplayName()+".");
+					//Permute the slots
+					slots = permute(slots);
+					
+					valid = false;
 				}
 			}
 		}
+		
+		return valid;
+	}
+	
+	private boolean registerShapelessRecipe(List recipeItems, ItemStack recipeOutput)
+	{
+		boolean valid = false;
+		int[] slots = new int[recipeItems.size()];
+		
+		//Exhaustively find a configuration that works - this should NEVER have to go the full distance
+		//but I don't want to half-ass the attempt in case there are MANY collisions
+		int offset = 0;
+		while(!valid && ((offset + recipeItems.size()) <= 9))
+		{
+			for(int i = 0; i < slots.length; ++i)
+			{
+				slots[i] = i;
+			}
+			
+			while(!valid)
+			{
+				ItemStack[] input = new ItemStack[9];
+				Arrays.fill(input, null);
+				
+				for(int i = 0; (i < slots.length) && (i < 9); ++i)
+				{
+					ItemStack item = (ItemStack)recipeItems.get(i);
+					input[slots[i] + offset] = item == null ? null : item.copy();
+				}
+				
+				try
+				{
+					addReversableRecipe(new FemtocraftAssemblerRecipe(input, 0, recipeOutput.copy(), TechLevel.MACRO, null));
+					valid = true;
+				}
+				catch(AssemblerRecipeFoundException e)
+				{
+					//Permute the slots
+					slots = permute(slots);
+					
+					valid = false;
+				}
+			}
+		}
+		
+		return valid;
 	}
 	
 	private int[] permute(int[] slots)
