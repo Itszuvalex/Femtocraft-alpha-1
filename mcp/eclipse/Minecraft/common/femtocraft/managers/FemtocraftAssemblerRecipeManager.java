@@ -68,8 +68,6 @@ public class FemtocraftAssemblerRecipeManager {
 		registerMacroDecompositionRecipes();
 		
 		registerFemtocraftAssemblerRecipes();
-		
-		registerDefaultRecipes();
 	}
 	
 	private void registerFemtoDecompositionRecipes()
@@ -163,12 +161,15 @@ public class FemtocraftAssemblerRecipeManager {
 	
 	public void registerDefaultRecipes()
 	{
-		Femtocraft.logger.log(Level.CONFIG, "Registering assembler recipes from Vanilla Minecraft's Crafting Manager.\t This may take awhile ._.");
+		//Does not use Ore Dictionary values - this is why things like crafting tables don't work.
+		
+		
+		Femtocraft.logger.log(Level.WARNING, "Registering assembler recipes from Vanilla Minecraft's Crafting Manager.\t This may take awhile ._.");
 		
 		List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
 		List<ShapelessRecipes> shapelessRecipes = new ArrayList<ShapelessRecipes>();
 		
-		Femtocraft.logger.log(Level.CONFIG, "Registering shaped recipes from Vanilla Minecraft's Crafting Manager.");
+		Femtocraft.logger.log(Level.WARNING, "Registering shaped recipes from Vanilla Minecraft's Crafting Manager.");
 		for(IRecipe recipe : recipes)
 		{
 			if(getRecipe(recipe.getRecipeOutput()) != null)
@@ -200,7 +201,7 @@ public class FemtocraftAssemblerRecipeManager {
 			while((!valid) && ((xoffset + sr.recipeWidth) <= 3) && ((yoffset + sr.recipeHeight) <= 3))
 			{
 				ItemStack[] input = new ItemStack[9];
-				
+				Arrays.fill(input, null);
 				for(int i = 0; (i < sr.recipeItems.length) && (i < 9); i++)
 				{
 					ItemStack item = sr.recipeItems[i];
@@ -234,7 +235,7 @@ public class FemtocraftAssemblerRecipeManager {
 			}
 		}
 		
-		Femtocraft.logger.log(Level.CONFIG, "Registering shapeless recipes from Vanilla Minecraft's Crafting Manager.");
+		Femtocraft.logger.log(Level.WARNING, "Registering shapeless recipes from Vanilla Minecraft's Crafting Manager.");
 		for(ShapelessRecipes recipe : shapelessRecipes)
 		{
 			if(getRecipe(recipe.getRecipeOutput()) != null)
@@ -266,7 +267,7 @@ public class FemtocraftAssemblerRecipeManager {
 					for(int i = 0; (i < slots.length) && (i < 9); ++i)
 					{
 						ItemStack item = (ItemStack)recipe.recipeItems.get(i);
-						input[i + offset] = item == null ? null : item.copy();
+						input[slots[i] + offset] = item == null ? null : item.copy();
 					}
 					
 					try
