@@ -324,6 +324,16 @@ public class FemtocraftAssemblerRecipeManager {
 				output.setItemDamage(0);
 			}
 			
+			for(ItemStack i : input)
+			{
+				if(i == null) continue;
+				
+				if(i.getItemDamage() == OreDictionary.WILDCARD_VALUE)
+				{
+					i.setItemDamage(0);
+				}
+			}
+			
 			try
 			{
 				addReversableRecipe(new FemtocraftAssemblerRecipe(input, 0, output, TechLevel.MACRO, null));
@@ -420,6 +430,16 @@ public class FemtocraftAssemblerRecipeManager {
 				if(output.getItemDamage() == OreDictionary.WILDCARD_VALUE)
 				{
 					output.setItemDamage(0);
+				}
+				
+				for(ItemStack i : input)
+				{
+					if(i == null) continue;
+					
+					if(i.getItemDamage() == OreDictionary.WILDCARD_VALUE)
+					{
+						i.setItemDamage(0);
+					}
 				}
 				
 				try
