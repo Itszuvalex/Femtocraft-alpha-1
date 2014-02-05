@@ -252,7 +252,7 @@ public class FemtocraftAssemblerRecipeManager {
 			//Exhaustively find a configuration that works - this should NEVER have to go the full distance
 			//but I don't want to half-ass the attempt in case there are MANY collisions
 			int offset = 0;
-			while(!valid && ((offset + recipe.recipeItems.size()) < 9))
+			while(!valid && ((offset + recipe.recipeItems.size()) <= 9))
 			{
 				for(int i = 0; i < slots.length; ++i)
 				{
