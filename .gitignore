@@ -181,10 +181,14 @@ mcp/src/minecraft/*
 mcp/src/minecraft_server/*
 mcp/src/common/*
 mcp/eclipse/.metadata/*
-!mcp/src/common/dries007/
+!mcp/src/common/femtocraft
 !mcp/eclipse/Minecraft/common/femtocraft/*
+!mcp/src/common/itszuvalex
+!mcp/src/common/itszuvalex/
 !mcp/src/common/mcmod.info
 !mcp/src/common/SP.png
+!mcp/src/minecraft/femtocraft
+!mcp/src/minecraft/femtocraft/*
 !mcp/src/minecraft/mods
 !mcp/src/minecraft/mods/Femtocraft
 !mcp/src/minecraft/mods/Femtocraft/textures/blocks/*
