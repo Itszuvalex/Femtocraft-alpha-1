@@ -38,20 +38,26 @@ public class FemtocraftConfigs {
 	public static @CfgId(block=true) int orePlatinumID = 351;
 	public static @CfgId(block=true) int oreThoriumID = 352;
 	public static @CfgId(block=true) int oreFareniteID = 353;
-	public static @CfgId(block=true) int microStoneID = 354;
-	public static @CfgId(block=true) int nanoStoneID = 355;
-	public static @CfgId(block=true) int femtoStoneID = 356;
-	public static @CfgId(block=true) int unidentifiedAlloyID = 357;
-	public static @CfgId(block=true) int FemtopowerCableID = 358;
-	public static @CfgId(block=true) int FemtopowerGeneratorTestID = 359;
-	public static @CfgId(block=true) int FemtopowerConsumerTestBlockID = 360;
-	public static @CfgId(block=true) int FemtocraftMicroFurnaceUnlitID = 361;
-	public static @CfgId(block=true) int FemtocraftMicroFurnaceLitID = 362;
-	public static @CfgId(block=true) int FemtocraftMicroDeconstructorID = 363;
-	public static @CfgId(block=true) int FemtocraftMicroReconstructorID = 364;
-	public static @CfgId(block=true) int FemtopowerMicroCubeID = 365;
-	public static @CfgId(block=true) int FemtocraftVacuumTubeID = 366;
-	public static @CfgId(block=true) int FemtopowerMicroChargingBaseID = 367;
+	public static @CfgId(block=true) int oreMaleniteID = 354;
+	
+	
+	public static @CfgId(block=true) int microStoneID = 360;
+	public static @CfgId(block=true) int nanoStoneID = 361;
+	public static @CfgId(block=true) int femtoStoneID = 362;
+	public static @CfgId(block=true) int unidentifiedAlloyID = 363;
+	
+	
+	public static @CfgId(block=true) int FemtopowerCableID = 370;
+	public static @CfgId(block=true) int FemtopowerGeneratorTestID = 371;
+	public static @CfgId(block=true) int FemtopowerConsumerTestBlockID = 372;
+	public static @CfgId(block=true) int FemtocraftMicroFurnaceUnlitID = 373;
+	public static @CfgId(block=true) int FemtocraftMicroFurnaceLitID = 374;
+	public static @CfgId(block=true) int FemtocraftMicroDeconstructorID = 375;
+	public static @CfgId(block=true) int FemtocraftMicroReconstructorID = 376;
+	public static @CfgId(block=true) int FemtocraftVacuumTubeID = 380;
+	
+	public static @CfgId(block=true) int FemtopowerMicroCubeID = 390;
+	public static @CfgId(block=true) int FemtopowerMicroChargingBaseID = 391;
 	
 	public static @CfgId(block=true) int FemtocraftMassBlock = 400;
 	
@@ -60,22 +66,25 @@ public class FemtocraftConfigs {
 	public static @CfgId int ingotPlatinumID = 12001;
 	public static @CfgId int ingotThoriumID = 12002;
 	public static @CfgId int ingotFareniteID = 12003;
+	public static @CfgId int ingotMaleniteID = 12004;
 	
-	public static @CfgId int deconstructedIronID = 12004;
-	public static @CfgId int deconstructedGoldID = 12005;
-	public static @CfgId int deconstructedTitaniumID = 12006;
-	public static @CfgId int deconstructedThoriumID = 12007;
-	public static @CfgId int deconstructedPlatinumID = 12008;
+	public static @CfgId int deconstructedIronID = 12010;
+	public static @CfgId int deconstructedGoldID = 12011;
+	public static @CfgId int deconstructedTitaniumID = 12012;
+	public static @CfgId int deconstructedThoriumID = 12013;
+	public static @CfgId int deconstructedPlatinumID = 12014;
 	
-	public static @CfgId int conductivePowderID = 12012;
-	public static @CfgId int boardID = 12013;
-	public static @CfgId int primedBoardID = 12014;
-	public static @CfgId int dopedBoardID = 12015;
-	public static @CfgId int microCircuitID = 12016;
+	public static @CfgId int conductivePowderID = 12020;
 	
-	public static @CfgId int paperSchematicID = 12009;
-	public static @CfgId int metalSchematicID = 12010;
-	public static @CfgId int advMetalSchematicID = 12011;
+	
+	public static @CfgId int boardID = 12030;
+	public static @CfgId int primedBoardID = 12031;
+	public static @CfgId int dopedBoardID = 12032;
+	public static @CfgId int microCircuitID = 12033;
+	
+	public static @CfgId int paperSchematicID = 12040;
+	public static @CfgId int metalSchematicID = 12041;
+	public static @CfgId int advMetalSchematicID = 12042;
 	
 	public static @CfgId int microInterfaceDeviceID = 12043;
 	public static @CfgId int nanoInterfaceDeviceID = 12044;
@@ -116,7 +125,7 @@ public class FemtocraftConfigs {
 	public static @CfgId int tomatoID = 12071;
 	
 	//Cooking 12150 - 12300 items and 370-375
-	public static @CfgId(block=true) int cuttingBoardID = 370;
+	public static @CfgId(block=true) int cuttingBoardID = 450;
 	
 	//bool
 	public static @CfgBool @CfgCat(category = CATEGORY_MULTIPLAYER) boolean requirePlayersOnlineForTileEntityTicks = false;
@@ -126,6 +135,7 @@ public class FemtocraftConfigs {
 	public static @CfgBool @CfgCat(category = CATEGORY_GENERATION) boolean platinumGen = true;
 	public static @CfgBool @CfgCat(category = CATEGORY_GENERATION) boolean thoriumGen = true;
 	public static @CfgBool @CfgCat(category = CATEGORY_GENERATION) boolean fareniteGen = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_GENERATION) boolean maleniteGen = true;
 	
 	public static @CfgBool @CfgCat(category = CATEGORY_GENERATION) boolean alloyGen = true;
 	

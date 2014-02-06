@@ -43,6 +43,7 @@ import femtocraft.core.items.MicroInterfaceDevice;
 import femtocraft.core.items.NanoInterfaceDevice;
 import femtocraft.core.items.PrimedBoard;
 import femtocraft.core.items.ingotFarenite;
+import femtocraft.core.items.ingotMalenite;
 import femtocraft.core.items.ingotPlatinum;
 import femtocraft.core.items.ingotThorium;
 import femtocraft.core.items.ingotTitanium;
@@ -73,6 +74,7 @@ import femtocraft.core.items.decomposition.SynthesizedFiber;
 import femtocraft.core.liquids.Mass;
 import femtocraft.core.liquids.MassBlock;
 import femtocraft.core.ore.oreFarenite;
+import femtocraft.core.ore.oreMalenite;
 import femtocraft.core.ore.orePlatinum;
 import femtocraft.core.ore.oreThorium;
 import femtocraft.core.ore.oreTitanium;
@@ -123,6 +125,7 @@ public class Femtocraft {
 	public static Block orePlatinum;
 	public static Block oreThorium;
 	public static Block oreFarenite;
+	public static Block oreMalenite;
 	public static Block microStone;
 	public static Block nanoStone;
 	public static Block femtoStone;
@@ -147,6 +150,7 @@ public class Femtocraft {
 	public static Item ingotPlatinum;
 	public static Item ingotThorium;
 	public static Item ingotFarenite;
+	public static Item ingotMalenite;
 	
 	public static Item deconstructedIron;
 	public static Item deconstructedGold;
@@ -259,6 +263,12 @@ public class Femtocraft {
 		 LanguageRegistry.addName(oreFarenite, "Farenite Ore");
 		 OreDictionary.registerOre("oreFarenite", new ItemStack(oreFarenite));
 		 
+		 oreMalenite = new oreMalenite(FemtocraftConfigs.oreMaleniteID);
+		 MinecraftForge.setBlockHarvestLevel(oreFarenite,  "pickaxe",  3);
+		 GameRegistry.registerBlock(oreMalenite, "oreMalenite");
+		 LanguageRegistry.addName(oreMalenite,  "Malenite Ore");
+		 OreDictionary.registerOre("oreMalenite", new ItemStack(oreMalenite));
+		 
 		 nanoStone = new nanoStone(FemtocraftConfigs.nanoStoneID);
 		 GameRegistry.registerBlock(nanoStone, "nanoStone");
 		 LanguageRegistry.addName(nanoStone, "Nanostone");
@@ -338,6 +348,10 @@ public class Femtocraft {
 		 ingotFarenite = new ingotFarenite(FemtocraftConfigs.ingotFareniteID).setUnlocalizedName("ingotFarenite");
 		 LanguageRegistry.addName(ingotFarenite, "Farenite");
 		 OreDictionary.registerOre("ingotFarenite", new ItemStack(ingotFarenite));
+		 
+		 ingotMalenite = new ingotMalenite(FemtocraftConfigs.ingotMaleniteID).setUnlocalizedName("ingotMalenite");
+		 LanguageRegistry.addName(ingotMalenite, "Malenite");
+		 OreDictionary.registerOre("ingotMalenite", new ItemStack(ingotMalenite));
 		 
 		 deconstructedIron = new DeconstructedIron(FemtocraftConfigs.deconstructedIronID).setUnlocalizedName("deconstructedIron");
 		 LanguageRegistry.addName(deconstructedIron, "Deconstructed Iron");

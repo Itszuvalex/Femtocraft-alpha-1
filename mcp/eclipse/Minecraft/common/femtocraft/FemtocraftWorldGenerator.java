@@ -2,6 +2,7 @@ package femtocraft;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -87,7 +88,19 @@ public class FemtocraftWorldGenerator implements IWorldGenerator {
 	}
 
 	private void generateNether(World world, Random random, int i, int j) {
-		// TODO Auto-generated method stub
+		if(FemtocraftConfigs.maleniteGen)
+		{
+			//Due to spread over all of Nether's height
+			for(int k = 0; k < 14; ++k)
+			{
+				int Xcoord = i + random.nextInt(16);
+				int Ycoord = random.nextInt(108) + 10;
+				int Zcoord = j + random.nextInt(16);
+				
+				(new WorldGenMinable(Femtocraft.oreMalenite.blockID, 10, Block.netherrack.blockID))
+					.generate(world, random, Xcoord, Ycoord, Zcoord);
+			}
+		}
 		
 	}
 
