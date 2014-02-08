@@ -167,7 +167,28 @@ public class FemtocraftConfigs {
 	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeSynthesizedFiber = true;
 	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeOrganometallicPlate = true;
 	
-	
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeStone = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeGrass = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeDirt = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeCobblestone = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeWoodPlank = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeSapling = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeSand = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeLeaves = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeCobweb = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeDeadBush = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeDandelion = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeRose = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeMushroomBrown = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeMushroomRed = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeMossStone = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeObsidian = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeIce = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeCactus = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipePumpkin = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeNetherrack = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeSoulSand = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeGlowstone = true;
 	
 	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeIronOre = true;
 	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeGoldOre = true;
