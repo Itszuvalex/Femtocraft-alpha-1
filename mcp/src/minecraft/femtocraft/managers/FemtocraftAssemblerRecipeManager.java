@@ -198,6 +198,8 @@ public class FemtocraftAssemblerRecipeManager {
 			if(configRegisterRecipe("Potato"))		addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null, null, null, new ItemStack(Femtocraft.ReplicatingMaterial),new ItemStack(Femtocraft.FibrousStrand),null,null,null,null}, 1, new ItemStack(Item.potato), TechLevel.MICRO, null));	
 			if(configRegisterRecipe("BakedPotato"))	addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,null,null, null,new ItemStack(Femtocraft.FibrousStrand),null,null}, 1, new ItemStack(Item.bakedPotato), TechLevel.MICRO, null));
 			if(configRegisterRecipe("PoisonPotato"))addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{null,null,null,new ItemStack(Femtocraft.SynthesizedFiber),null,null,null,null,null}, 1, new ItemStack(Item.poisonousPotato), TechLevel.MICRO, null));	
+			if(configRegisterRecipe("Cake"))		addDecompositionRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{new ItemStack(Item.egg),new ItemStack(Item.sugar, 2),new ItemStack(Item.wheat, 3),null,null,null,null,null,null}, 1, new ItemStack(Item.cake), TechLevel.MICRO, null));	
+			
 			
 			if(configRegisterRecipe("NetherStar"))	addReversableRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.HardenedBulb, 64),new ItemStack(Femtocraft.OrganometallicPlate, 64),new ItemStack(Femtocraft.HardenedBulb, 64),new ItemStack(Femtocraft.OrganometallicPlate, 64),new ItemStack(Item.diamond, 64),new ItemStack(Femtocraft.OrganometallicPlate, 64),new ItemStack(Femtocraft.HardenedBulb, 64),new ItemStack(Femtocraft.OrganometallicPlate, 64),new ItemStack(Femtocraft.HardenedBulb, 64)}, 1, new ItemStack(Item.netherStar), TechLevel.MICRO, null));	
 		}

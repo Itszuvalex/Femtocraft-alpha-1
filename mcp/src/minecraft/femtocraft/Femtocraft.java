@@ -88,6 +88,7 @@ import femtocraft.industry.blocks.VacuumTube;
 import femtocraft.industry.items.PaperSchematic;
 import femtocraft.managers.FemtocraftRecipeManager;
 import femtocraft.managers.FemtocraftResearchManager;
+import femtocraft.player.FemtocraftNaniteProperties;
 import femtocraft.power.TileEntity.FemtopowerMicroCubeTile;
 import femtocraft.power.blocks.FemtopowerCable;
 import femtocraft.power.blocks.FemtopowerConsumerBlock;
@@ -101,9 +102,11 @@ import femtocraft.proxy.CommonProxyFemtocraft;
 @Mod(modid = Femtocraft.ID, name = "Femtocraft", version = Femtocraft.VERSION)
 
 @NetworkMod(channels = { Femtocraft.ID, 
+						FemtocraftNaniteProperties.PACKET_CHANNEL,
 						FemtopowerMicroCubeTile.packetChannel,
-						VacuumTubeTile.packetChannel}, 
-						packetHandler = FemtocraftPacketHandler.class, clientSideRequired = true, serverSideRequired = false)
+						VacuumTubeTile.packetChannel
+						}, 
+						packetHandler = FemtocraftPacketHandler.class, clientSideRequired = true, serverSideRequired = true)
 public class Femtocraft {
 	public static final String ID = "Femtocraft";
 	public static final String VERSION = "0.1.0";

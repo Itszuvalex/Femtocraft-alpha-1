@@ -6,12 +6,14 @@ import java.io.IOException;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 import femtocraft.industry.TileEntity.VacuumTubeTile;
+import femtocraft.player.FemtocraftNaniteProperties;
 import femtocraft.power.TileEntity.FemtopowerMicroCubeTile;
 
 public class FemtocraftPacketHandler  implements IPacketHandler {
@@ -19,6 +21,14 @@ public class FemtocraftPacketHandler  implements IPacketHandler {
     @Override
     public void onPacketData(INetworkManager manager,
                     Packet250CustomPayload packet, Player playerEntity) {
+    	if(packet.channel.equalsIgnoreCase(FemtocraftNaniteProperties.PACKET_CHANNEL))
+    	{
+    		FemtocraftNaniteProperties.get((EntityPlayer) playerEntity).handlePacket(packet);
+    		return;
+    	}
+    	
+    	
+    	
     	DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
     	
        	if(packet.channel.equalsIgnoreCase(Femtocraft.ID))

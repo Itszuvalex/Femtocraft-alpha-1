@@ -237,6 +237,7 @@ public class FemtocraftConfigs {
 	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipePotato = true;
 	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeBakedPotato = true;
 	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipePoisonPotato = true;
+	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeCake = true;
 	
 	public static @CfgBool @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION) boolean recipeNetherStar = true;
 	
