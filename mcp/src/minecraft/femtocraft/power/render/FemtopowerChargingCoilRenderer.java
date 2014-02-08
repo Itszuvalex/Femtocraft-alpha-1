@@ -72,6 +72,8 @@ public class FemtopowerChargingCoilRenderer implements ISimpleBlockRenderingHand
 		
 		segment.location = new Point(x, y, z);
 		segment.draw();
+		segment.location = new Point(x, y + 8.f/16.f, z);
+		segment.draw();
 	}
 	
 	private void createSegment(MicroChargingCoil coil)
@@ -94,8 +96,8 @@ public class FemtopowerChargingCoilRenderer implements ISimpleBlockRenderingHand
 		segment.addQuad(connectorWest);
 		
 		
-		Quad top = new Quad(new Point(0,1,0), new Point(0,1,1), new Point(1,1,1), new Point(1,1,0), coil.coilConnectorTop);
-		Quad bot = new Quad(new Point(1,0,0), new Point(1,0,1), new Point(0,0,1), new Point(0,0,0), coil.coilConnectorTop);
+		Quad top = new Quad(new Point(0,maxY,0), new Point(0,maxY,1), new Point(1,maxY,1), new Point(1,maxY,0), coil.coilConnectorTop);
+		Quad bot = new Quad(new Point(1,minY,0), new Point(1,minY,1), new Point(0,minY,1), new Point(0,minY,0), coil.coilConnectorTop);
 		
 		segment.addQuad(top);
 		segment.addQuad(bot);

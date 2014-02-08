@@ -24,6 +24,7 @@ public class MicroChargingCoil extends Block implements IChargingCoil {
 		setUnlocalizedName("MicroChargingCoil");
 		setHardness(1.0f);
 		setStepSound(Block.soundMetalFootstep);
+		setBlockBounds(4.f/16.f, 0, 4.f/16.f, 12.f/16.f, 1, 12.f/16.f);
 	}
 
 	@Override
