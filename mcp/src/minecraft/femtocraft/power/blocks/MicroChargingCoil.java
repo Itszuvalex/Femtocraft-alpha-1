@@ -15,8 +15,6 @@ import femtocraft.proxy.ClientProxyFemtocraft;
 import femtocraft.research.TechLevel;
 
 public class MicroChargingCoil extends Block implements IChargingCoil {
-	public Icon coilEdge;
-	public Icon coilTop;
 	public Icon coilConnector;
 	public Icon coilConnectorTop;
 
@@ -61,8 +59,6 @@ public class MicroChargingCoil extends Block implements IChargingCoil {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		coilEdge = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "MicroChargingCoil_coilEdge");
-		coilTop  = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "MicroChargingCoil_coilTop");
 		coilConnector  = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "MicroChargingCoil_connector");
 		coilConnectorTop  = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "MicroChargingCoil_coilConnectorTop");
 	}

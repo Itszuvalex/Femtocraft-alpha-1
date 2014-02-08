@@ -15,8 +15,7 @@ import femtocraft.render.Point;
 import femtocraft.render.Quad;
 
 public class FemtopowerChargingCoilRenderer implements ISimpleBlockRenderingHandler{
-	Model m_coil;
-	Model ends;
+	Model segment;
 
 	public FemtopowerChargingCoilRenderer() {
 		
@@ -66,74 +65,39 @@ public class FemtopowerChargingCoilRenderer implements ISimpleBlockRenderingHand
 	
 	private void renderCoil(MicroChargingCoil coil, int x, int y, int z)
 	{
-		if(m_coil == null)
+		if(segment == null)
 		{
-			createCoil(coil);
-		}
-		if(ends == null)
-		{
-			createEnds(coil);
+			createSegment(coil);
 		}
 		
-		m_coil.location = new Point(x, y, z);
-		m_coil.draw();
-		m_coil.location = new Point(x, y + 8.f/16.f, z);
-		m_coil.draw();
-		
-		ends.location = new Point(x, y, z);
-		ends.draw();
+		segment.location = new Point(x, y, z);
+		segment.draw();
 	}
 	
-	private void createCoil(MicroChargingCoil coil)
+	private void createSegment(MicroChargingCoil coil)
 	{
-		m_coil = new Model();
-		
-		Quad coilTop = new Quad(new Point(0,6.f/16.f,0), new Point(0,6.f/16.f,1), new Point(1,6.f/16.f,1), new Point(1,6.f/16.f,0), coil.coilTop);
-		Quad coilBot = new Quad(new Point(1,2.f/16.f,0), new Point(1,2.f/16.f,1), new Point(0,2.f/16.f,1), new Point(0,2.f/16.f,0), coil.coilTop);
+		segment = new Model();
 
-		float minY = 2.f/16.f;
-		float maxY = 6.f/16.f;
-		float min = 0.f/16.f;
-		float max = 16.f/16.f;
+		float minY = 0;
+		float maxY = 8.f/16.f;
+		float min = 4.f/16.f;
+		float max = 12.f/16.f;
 		
-		Quad coilSideNorth = new Quad(new Point(max,minY,min), new Point(min,minY,min), new Point(min,maxY,min), new Point(max,maxY,min), coil.coilEdge, coil.coilEdge.getMinU(), coil.coilEdge.getInterpolatedU(4.f), coil.coilEdge.getInterpolatedV(0.f), coil.coilEdge.getInterpolatedV(16.f));
-		Quad coilSideSouth = new Quad(new Point(min,minY,max), new Point(max,minY,max), new Point(max,maxY,max), new Point(min,maxY,max), coil.coilEdge, coil.coilEdge.getMinU(), coil.coilEdge.getInterpolatedU(4.f), coil.coilEdge.getInterpolatedV(0.f), coil.coilEdge.getInterpolatedV(16.f));
-		Quad coilSideEast = new Quad(new Point(max,minY,max), new Point(max,minY,min), new Point(max,maxY,min), new Point(max,maxY,max), coil.coilEdge, coil.coilEdge.getMinU(), coil.coilEdge.getInterpolatedU(4.f), coil.coilEdge.getInterpolatedV(0.f), coil.coilEdge.getInterpolatedV(16.f));
-		Quad coilSideWest = new Quad(new Point(min,minY,min), new Point(min,minY,max), new Point(min,maxY,max), new Point(min,maxY,min), coil.coilEdge, coil.coilEdge.getMinU(), coil.coilEdge.getInterpolatedU(4.f), coil.coilEdge.getInterpolatedV(0.f), coil.coilEdge.getInterpolatedV(16.f));
+		Quad connectorNorth = new Quad(new Point(min,minY,min), new Point(min,maxY,min), new Point(max,maxY,min), new Point(max,minY,min), coil.coilConnector);
+		Quad connectorSouth = new Quad(new Point(max,minY,max), new Point(max,maxY,max), new Point(min,maxY,max), new Point(min,minY,max), coil.coilConnector);
+		Quad connectorEast = new Quad(new Point(max,minY,min), new Point(max,maxY,min), new Point(max,maxY,max), new Point(max,minY,max), coil.coilConnector);
+		Quad connectorWest = new Quad(new Point(min,minY,max), new Point(min,maxY,max), new Point(min,maxY,min), new Point(min,minY,min), coil.coilConnector);
 		
-		m_coil.addQuad(coilTop);
-		m_coil.addQuad(coilBot);
+		segment.addQuad(connectorNorth);
+		segment.addQuad(connectorSouth);
+		segment.addQuad(connectorEast);
+		segment.addQuad(connectorWest);
 		
-		m_coil.addQuad(coilSideNorth);
-		m_coil.addQuad(coilSideSouth);
-		m_coil.addQuad(coilSideEast);
-		m_coil.addQuad(coilSideWest);
-		
-		minY = 0;
-		maxY = 8.f/16.f;
-		min = 4.f/16.f;
-		max = 12.f/16.f;
-		
-		Quad connectorNorth = new Quad(new Point(max,minY,min), new Point(min,minY,min), new Point(min,maxY,min), new Point(max,maxY,min), coil.coilConnector);
-		Quad connectorSouth = new Quad(new Point(min,minY,max), new Point(max,minY,max), new Point(max,maxY,max), new Point(min,maxY,max), coil.coilConnector);
-		Quad connectorEast = new Quad(new Point(max,minY,max), new Point(max,minY,min), new Point(max,maxY,min), new Point(max,maxY,max), coil.coilConnector);
-		Quad connectorWest = new Quad(new Point(min,minY,min), new Point(min,minY,max), new Point(min,maxY,max), new Point(min,maxY,min), coil.coilConnector);
-		
-		m_coil.addQuad(connectorNorth);
-		m_coil.addQuad(connectorSouth);
-		m_coil.addQuad(connectorEast);
-		m_coil.addQuad(connectorWest);
-	}
-	
-	private void createEnds(MicroChargingCoil coil)
-	{
-		ends = new Model();
 		
 		Quad top = new Quad(new Point(0,1,0), new Point(0,1,1), new Point(1,1,1), new Point(1,1,0), coil.coilConnectorTop);
 		Quad bot = new Quad(new Point(1,0,0), new Point(1,0,1), new Point(0,0,1), new Point(0,0,0), coil.coilConnectorTop);
 		
-		ends.addQuad(top);
-		ends.addQuad(bot);
+		segment.addQuad(top);
+		segment.addQuad(bot);
 	}
-
 }
