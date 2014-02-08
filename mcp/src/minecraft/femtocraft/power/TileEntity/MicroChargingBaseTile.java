@@ -5,6 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 import femtocraft.api.IChargingBase;
 import femtocraft.api.IChargingCoil;
+import femtocraft.research.TechLevel;
 
 public class MicroChargingBaseTile extends FemtopowerProducer {
 	public int numCoils;
@@ -13,6 +14,7 @@ public class MicroChargingBaseTile extends FemtopowerProducer {
 
 	public MicroChargingBaseTile() {
 		powerPerTick = 0;
+		setTechLevel(TechLevel.MICRO);
 	}
 
 	@Override
@@ -61,6 +63,11 @@ public class MicroChargingBaseTile extends FemtopowerProducer {
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeToNBT(par1nbtTagCompound);
 		par1nbtTagCompound.setFloat("powerIncrement", storedPowerIncrement);
+	}
+
+	@Override
+	public boolean canConnect(ForgeDirection from) {
+		return !(from == ForgeDirection.UP);
 	}
 
 }

@@ -4,6 +4,7 @@
 package femtocraft.api;
 
 import net.minecraftforge.common.ForgeDirection;
+import femtocraft.research.TechLevel;
 
 /**
  * @author Itszuvalex
@@ -11,6 +12,21 @@ import net.minecraftforge.common.ForgeDirection;
  */
 public interface IFemtopowerContainer {
 
+	/**
+	 * 
+	 * @param level TechLevel of power
+	 * @param from Direction power will be coming from
+	 * @return True if can accept power of that level from the given direciton
+	 */
+	public boolean canAcceptPowerOfLevel(TechLevel level, ForgeDirection from);
+	
+	/**
+	 * 
+	 * @param to Direction from this Container 
+	 * @return TechLevel of power this machine will give to the given direciton
+	 */
+	public TechLevel getTechLevel(ForgeDirection to);
+	
 	/**
 	 * 
 	 * @return Current storage amount of container
@@ -51,6 +67,13 @@ public interface IFemtopowerContainer {
 	 * @return True if container has room and can accept charging from direction @from, false otherwise
 	 */
 	public boolean canCharge(ForgeDirection from);
+	
+	/**
+	 * 
+	 * @param from Direction attempting to 
+	 * @return True if container can be connected to from a given direction
+	 */
+	public boolean canConnect(ForgeDirection from);
 
 	/**
 	 * 

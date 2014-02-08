@@ -2,11 +2,11 @@ package femtocraft.power.TileEntity;
 
 import java.util.Arrays;
 
-import femtocraft.api.IFemtopowerContainer;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
+import femtocraft.api.IFemtopowerContainer;
+import femtocraft.research.TechLevel;
 
 public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 	private int currentStorage;
@@ -15,6 +15,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 	private float maxSizePackets;
 	private float distributionBuffer;
 	public boolean[] connections;
+	private TechLevel level;
 	
 	public FemtopowerTile() {
 		currentStorage = 0;
@@ -28,6 +29,11 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 	
 	public void setMaxStorage(int maxStorage_) {
 		maxStorage = maxStorage_;
+	}
+	
+	public void setTechLevel(TechLevel level)
+	{
+		this.level = level;
 	}
 	
 	public boolean isConnected(int i) {
@@ -230,6 +236,9 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
  		   TileEntity checkTile = this.worldObj.getBlockTileEntity(locx, locy, locz);
  		   
  		   if(checkTile != null && checkTile instanceof IFemtopowerContainer) {
+ 			   IFemtopowerContainer fc = (IFemtopowerContainer) checkTile;
+ 			   if(!fc.canConnect(offset.getOpposite())) continue;
+ 			   
  			   connections[j] = true;
  			   if(prev != connections[j])
  			   {
@@ -239,4 +248,19 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
  	   	}
     	if(changed) this.worldObj.markBlockForRenderUpdate(this.xCoord, this.yCoord, this.zCoord);
       }
+
+	@Override
+	public boolean canAcceptPowerOfLevel(TechLevel level, ForgeDirection from) {
+		return level == this.level;
+	}
+
+	@Override
+	public TechLevel getTechLevel(ForgeDirection to) {
+		return level;
+	}
+
+	@Override
+	public boolean canConnect(ForgeDirection from) {
+		return true;
+	}
 }
