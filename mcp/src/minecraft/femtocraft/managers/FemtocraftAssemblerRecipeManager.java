@@ -802,7 +802,7 @@ public class FemtocraftAssemblerRecipeManager {
 	
 	public boolean hasResearchedRecipe(FemtocraftAssemblerRecipe recipe, String username)
 	{
-		return Femtocraft.researchManager.playerHasResearchedTechnology(username, recipe.tech);
+		return Femtocraft.researchManager.hasPlayerResearchedTechnology(username, recipe.tech);
 	}
 	
 	private ItemStack normalizedOutput(FemtocraftAssemblerRecipe recipe)

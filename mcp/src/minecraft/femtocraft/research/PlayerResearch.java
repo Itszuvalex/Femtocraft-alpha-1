@@ -4,10 +4,25 @@ import java.util.HashMap;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.MinecraftForge;
+import femtocraft.Femtocraft;
+import femtocraft.research.TechnologyEvent.TechnologyDiscoveredEvent;
+import femtocraft.research.TechnologyEvent.TechnologyResearchedEvent;
 
 public class PlayerResearch {
-	public String username;
-	private HashMap<String, TechnologyStatus> techStatus;
+	public final String username;
+	private final HashMap<String, TechnologyStatus> techStatus;
+	
+	public static class TechnologyNotFoundException extends Exception
+	{
+		public String errMsg;
+		
+		public TechnologyNotFoundException(String message)
+		{
+			errMsg = message;
+		}
+	}
+	
 	
 	public PlayerResearch(String username)
 	{
@@ -17,9 +32,42 @@ public class PlayerResearch {
 	
 	//---------------------------------------------------------
 	
-	public TechnologyStatus addTechnology(String name)
+	/**
+	 * 
+	 * @param name Name of technology to mark as researched
+	 * @param force Pass true if you want the named technology to be added if it isn't already discovered.  This will bypass discover checks.  This will not post an event.
+	 * @return True if technology successfully marked as researched.  False otherwise.
+	 */
+	public boolean researchTechnology(String name, boolean force)
 	{
-		return techStatus.put(name, new TechnologyStatus(name));
+		TechnologyStatus tech = techStatus.get(name);
+		if(tech == null && !force) return false;
+		
+		if(tech == null && force == true)
+		{
+			TechnologyStatus status = techStatus.put(name,  new TechnologyStatus(name));
+			if(status == null) return false;
+			status.researched = true;
+			return true;
+		}
+		
+		TechnologyResearchedEvent event = new TechnologyResearchedEvent(username, Femtocraft.researchManager.getTechnology(name));
+		if(!MinecraftForge.EVENT_BUS.post(event))
+		{
+			tech.researched = true;
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean discoverTechnology(String name)
+	{
+		TechnologyDiscoveredEvent event = new TechnologyDiscoveredEvent(username, Femtocraft.researchManager.getTechnology(name));
+		if(!MinecraftForge.EVENT_BUS.post(event))
+		{
+			return techStatus.put(name, new TechnologyStatus(name)) != null;
+		}
+		return false;
 	}
 	
 	public TechnologyStatus getTechnology(String name)
@@ -32,7 +80,7 @@ public class PlayerResearch {
 		return techStatus.remove(name);
 	}
 	
-	public boolean canAddTechnology(Technology tech)
+	public boolean canDiscoverTechnology(Technology tech)
 	{
 		if(tech.prerequisites == null) return true;
 		
@@ -60,10 +108,13 @@ public class PlayerResearch {
 	
 	public boolean hasResearchedTechnology(Technology tech)
 	{
+		if(tech == null) return true;
 		return hasResearchedTechnology(tech.name);
 	}
 	
 	public boolean hasResearchedTechnology(String tech) {
+		if(tech == null || tech.equals("")) return true;
+		
 		TechnologyStatus ts = techStatus.get(tech);
 		if(ts == null) return false;
 		return ts.researched;

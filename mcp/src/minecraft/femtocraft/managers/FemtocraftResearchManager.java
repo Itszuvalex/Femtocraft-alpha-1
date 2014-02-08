@@ -3,7 +3,6 @@ package femtocraft.managers;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.logging.Level;
 
@@ -12,11 +11,11 @@ import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.TickType;
+import net.minecraftforge.common.MinecraftForge;
 import femtocraft.Femtocraft;
 import femtocraft.research.PlayerResearch;
 import femtocraft.research.Technology;
+import femtocraft.research.TechnologyEvent.TechnologyAddedEvent;
 
 public class FemtocraftResearchManager {
 	private HashMap<String, Technology> technologies;
@@ -34,9 +33,14 @@ public class FemtocraftResearchManager {
 	
 	//--------------------------------------------------
 	
-	public Technology addTechnology(Technology tech)
+	public boolean addTechnology(Technology tech)
 	{
-		return technologies.put(tech.name, tech);
+		TechnologyAddedEvent event = new TechnologyAddedEvent(tech);
+		if(!MinecraftForge.EVENT_BUS.post(event))
+		{
+			return technologies.put(tech.name, tech) != null;
+		}
+		return false;
 	}
 	
 	public boolean removeTechnology(Technology tech)
@@ -75,12 +79,12 @@ public class FemtocraftResearchManager {
 	
 	//--------------------------------------------------
 	
-	public boolean playerHasDiscoveredTechnology(String username, Technology tech)
+	public boolean hasPlayerDiscoveredTechnology(String username, Technology tech)
 	{
-		return playerHasDiscoveredTechnology(username, tech.name);
+		return hasPlayerDiscoveredTechnology(username, tech.name);
 	}
 	
-	public boolean playerHasDiscoveredTechnology(String username, String tech)
+	public boolean hasPlayerDiscoveredTechnology(String username, String tech)
 	{
 		PlayerResearch pr = playerData.get(username);
 		if(pr == null) return false;
@@ -89,12 +93,12 @@ public class FemtocraftResearchManager {
 	
 	//--------------------------------------------------
 	
-	public boolean playerHasResearchedTechnology(String username, Technology tech)
+	public boolean hasPlayerResearchedTechnology(String username, Technology tech)
 	{
-		return playerHasResearchedTechnology(username, tech.name);
+		return hasPlayerResearchedTechnology(username, tech.name);
 	}
 	
-	public boolean playerHasResearchedTechnology(String username, String tech)
+	public boolean hasPlayerResearchedTechnology(String username, String tech)
 	{
 		PlayerResearch pr = playerData.get(username);
 		if(pr == null) return false;
@@ -109,7 +113,7 @@ public class FemtocraftResearchManager {
 		{
 			if(t.prerequisites == null)
 			{
-				research.addTechnology(t.name);
+				research.discoverTechnology(t.name);
 			}
 		}
 	}
