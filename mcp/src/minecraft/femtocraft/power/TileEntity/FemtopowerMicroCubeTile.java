@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
-import femtocraft.research.TechLevel;
+import femtocraft.managers.research.TechLevel;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;

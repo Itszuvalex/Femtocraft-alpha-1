@@ -1,6 +1,6 @@
 package femtocraft.api;
 
-import femtocraft.research.TechLevel;
+import femtocraft.managers.research.TechLevel;
 import net.minecraft.world.World;
 
 public interface IChargingCoil {

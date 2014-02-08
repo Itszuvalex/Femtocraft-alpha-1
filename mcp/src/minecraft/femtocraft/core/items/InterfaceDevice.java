@@ -1,7 +1,7 @@
 package femtocraft.core.items;
 
 import femtocraft.api.IInterfaceDevice;
-import femtocraft.research.TechLevel;
+import femtocraft.managers.research.TechLevel;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 

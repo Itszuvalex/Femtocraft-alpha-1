@@ -87,7 +87,7 @@ import femtocraft.industry.blocks.BlockMicroReconstructor;
 import femtocraft.industry.blocks.VacuumTube;
 import femtocraft.industry.items.PaperSchematic;
 import femtocraft.managers.FemtocraftRecipeManager;
-import femtocraft.managers.FemtocraftResearchManager;
+import femtocraft.managers.research.FemtocraftResearchManager;
 import femtocraft.player.FemtocraftNaniteProperties;
 import femtocraft.power.TileEntity.FemtopowerMicroCubeTile;
 import femtocraft.power.blocks.FemtopowerCable;

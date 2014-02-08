@@ -1,4 +1,4 @@
-package femtocraft.research;
+package femtocraft.managers.research;
 
 import java.util.ArrayList;
 

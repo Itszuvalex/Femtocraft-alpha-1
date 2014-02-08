@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
-import femtocraft.research.TechLevel;
+import femtocraft.managers.research.TechLevel;
 
 public class NanoInterfaceDevice extends InterfaceDevice {
 

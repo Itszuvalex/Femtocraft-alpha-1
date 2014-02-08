@@ -15,8 +15,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
-import femtocraft.managers.FemtocraftAssemblerRecipe;
 import femtocraft.managers.FemtocraftRecipeManager;
+import femtocraft.managers.assembler.FemtocraftAssemblerRecipe;
 import femtocraft.power.TileEntity.FemtopowerConsumer;
 
 public class MicroDeconstructorTile  extends FemtopowerConsumer implements ISidedInventory, IFluidHandler

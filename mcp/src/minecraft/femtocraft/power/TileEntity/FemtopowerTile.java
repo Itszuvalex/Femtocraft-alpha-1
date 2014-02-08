@@ -6,7 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import femtocraft.api.IFemtopowerContainer;
-import femtocraft.research.TechLevel;
+import femtocraft.managers.research.TechLevel;
 
 public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 	private int currentStorage;

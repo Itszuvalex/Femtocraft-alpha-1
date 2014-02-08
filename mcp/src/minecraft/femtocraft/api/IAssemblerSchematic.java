@@ -1,6 +1,6 @@
 package femtocraft.api;
 
-import femtocraft.managers.FemtocraftAssemblerRecipe;
+import femtocraft.managers.assembler.FemtocraftAssemblerRecipe;
 import net.minecraft.item.ItemStack;
 
 /**

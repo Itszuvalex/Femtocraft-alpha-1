@@ -10,9 +10,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.api.IChargingBase;
+import femtocraft.managers.research.TechLevel;
 import femtocraft.power.TileEntity.MicroChargingBaseTile;
 import femtocraft.proxy.ClientProxyFemtocraft;
-import femtocraft.research.TechLevel;
 
 public class MicroChargingBase extends FemtopowerContainer implements IChargingBase {
 	public Icon side;

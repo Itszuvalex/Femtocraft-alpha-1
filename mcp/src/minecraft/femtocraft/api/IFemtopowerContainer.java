@@ -4,7 +4,7 @@
 package femtocraft.api;
 
 import net.minecraftforge.common.ForgeDirection;
-import femtocraft.research.TechLevel;
+import femtocraft.managers.research.TechLevel;
 
 /**
  * @author Itszuvalex

@@ -1,4 +1,4 @@
-package femtocraft.managers;
+package femtocraft.managers.research;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,9 +13,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import femtocraft.Femtocraft;
-import femtocraft.research.PlayerResearch;
-import femtocraft.research.Technology;
-import femtocraft.research.TechnologyEvent.TechnologyAddedEvent;
+import femtocraft.managers.research.TechnologyEvent.TechnologyAddedEvent;
 
 public class FemtocraftResearchManager {
 	private HashMap<String, Technology> technologies;

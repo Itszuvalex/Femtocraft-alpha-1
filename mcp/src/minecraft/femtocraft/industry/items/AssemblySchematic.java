@@ -14,8 +14,8 @@ import femtocraft.Femtocraft;
 import femtocraft.FemtocraftConfigs;
 import femtocraft.FemtocraftUtils;
 import femtocraft.api.IAssemblerSchematic;
-import femtocraft.managers.FemtocraftAssemblerRecipe;
-import femtocraft.research.Technology;
+import femtocraft.managers.assembler.FemtocraftAssemblerRecipe;
+import femtocraft.managers.research.Technology;
 
 /**
  * 

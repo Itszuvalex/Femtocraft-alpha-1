@@ -1,4 +1,4 @@
-package femtocraft.research;
+package femtocraft.managers.research;
 
 public enum TechLevel {
 		MACRO("macro", 0), 			//Vanilla level

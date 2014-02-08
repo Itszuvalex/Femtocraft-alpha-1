@@ -1,4 +1,4 @@
-package femtocraft.managers;
+package femtocraft.managers.assembler;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -8,11 +8,6 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.logging.Level;
 
-import femtocraft.Femtocraft;
-import femtocraft.FemtocraftConfigs;
-import femtocraft.FemtocraftUtils;
-import femtocraft.research.TechLevel;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -20,9 +15,16 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import femtocraft.Femtocraft;
+import femtocraft.FemtocraftConfigs;
+import femtocraft.FemtocraftUtils;
+import femtocraft.managers.assembler.AssemblerRegisterEvent.AssemblerDecompositionRegisterEvent;
+import femtocraft.managers.assembler.AssemblerRegisterEvent.AssemblerRecompositionRegisterEvent;
+import femtocraft.managers.research.TechLevel;
 
 /**
  * 
@@ -674,25 +676,27 @@ public class FemtocraftAssemblerRecipeManager {
 		Femtocraft.logger.log(Level.WARNING, "Recipe " + (test != null ? "found" : "not found") + ".");
 	}
 	
-	public void addReversableRecipe(FemtocraftAssemblerRecipe recipe) throws IllegalArgumentException, AssemblerRecipeFoundException
+	public boolean addReversableRecipe(FemtocraftAssemblerRecipe recipe) throws IllegalArgumentException, AssemblerRecipeFoundException
 	{
 		if(recipe.input.length != 9)
 		{
 			throw new IllegalArgumentException("FemtocraftAssemblerRecipe - Invalid Input Array Length!  Must be 9!");
 		}
 		ItemStack[] normalArray = normalizedInput(recipe);
-		if(normalArray == null) return;
+		if(normalArray == null) return false;
 		
 		ItemStack normal = normalizedOutput(recipe);
 		
 		checkDecomposition(normal, recipe);
 		checkRecomposition(normalArray, recipe);
 		
-		inputToRecipeMap.put(normalArray, recipe);
-		outputToRecipeMap.put(normal, recipe);
+		
+		boolean result = registerRecomposition(normalArray, recipe) && registerDecomposition(normal, recipe);
+		
+		return result;
 	}
 	
-	public void addRecompositionRecipe(FemtocraftAssemblerRecipe recipe) throws IllegalArgumentException, AssemblerRecipeFoundException
+	public boolean addRecompositionRecipe(FemtocraftAssemblerRecipe recipe) throws IllegalArgumentException, AssemblerRecipeFoundException
 	{
 		if(recipe.input.length != 9)
 		{
@@ -700,14 +704,14 @@ public class FemtocraftAssemblerRecipeManager {
 		}
 		
 		ItemStack[] normal = normalizedInput(recipe);
-		if(normal == null) return;
+		if(normal == null) return false;
 		
 		checkRecomposition(normal, recipe);
 		
-		inputToRecipeMap.put(normal, recipe);
+		return registerRecomposition(normal, recipe);
 	}
 	
-	public void addDecompositionRecipe(FemtocraftAssemblerRecipe recipe) throws IllegalArgumentException, AssemblerRecipeFoundException
+	public boolean addDecompositionRecipe(FemtocraftAssemblerRecipe recipe) throws IllegalArgumentException, AssemblerRecipeFoundException
 	{
 		if(recipe.input.length != 9)
 		{
@@ -718,7 +722,29 @@ public class FemtocraftAssemblerRecipeManager {
 		
 		checkDecomposition(normal, recipe);
 		
-		outputToRecipeMap.put(normal, recipe);
+		return registerDecomposition(normal, recipe);
+	}
+	
+	private boolean registerRecomposition(ItemStack[] normal, FemtocraftAssemblerRecipe recipe)
+	{
+		AssemblerRecompositionRegisterEvent event = new AssemblerRecompositionRegisterEvent(recipe);
+		if(!MinecraftForge.EVENT_BUS.post(event))
+		{
+			inputToRecipeMap.put(normal, recipe);
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean registerDecomposition(ItemStack normal, FemtocraftAssemblerRecipe recipe)
+	{
+		AssemblerDecompositionRegisterEvent event = new AssemblerDecompositionRegisterEvent(recipe);
+		if(!MinecraftForge.EVENT_BUS.post(event))
+		{
+			outputToRecipeMap.put(normal, recipe);
+			return true;
+		}
+		return false;
 	}
 	
 	private void checkDecomposition(ItemStack normal, FemtocraftAssemblerRecipe recipe) throws AssemblerRecipeFoundException

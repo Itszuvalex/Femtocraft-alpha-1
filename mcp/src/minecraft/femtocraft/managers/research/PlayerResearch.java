@@ -1,4 +1,4 @@
-package femtocraft.research;
+package femtocraft.managers.research;
 
 import java.util.HashMap;
 
@@ -6,8 +6,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.MinecraftForge;
 import femtocraft.Femtocraft;
-import femtocraft.research.TechnologyEvent.TechnologyDiscoveredEvent;
-import femtocraft.research.TechnologyEvent.TechnologyResearchedEvent;
+import femtocraft.managers.research.TechnologyEvent.TechnologyDiscoveredEvent;
+import femtocraft.managers.research.TechnologyEvent.TechnologyResearchedEvent;
 
 public class PlayerResearch {
 	public final String username;

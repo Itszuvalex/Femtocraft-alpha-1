@@ -1,4 +1,4 @@
-package femtocraft.research;
+package femtocraft.managers.research;
 
 import net.minecraftforge.event.Cancelable;
 import net.minecraftforge.event.Event;

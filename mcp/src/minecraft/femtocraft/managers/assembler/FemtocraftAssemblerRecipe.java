@@ -1,11 +1,11 @@
-package femtocraft.managers;
+package femtocraft.managers.assembler;
 
 import java.util.logging.Level;
 
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
-import femtocraft.research.TechLevel;
-import femtocraft.research.Technology;
+import femtocraft.managers.research.TechLevel;
+import femtocraft.managers.research.Technology;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

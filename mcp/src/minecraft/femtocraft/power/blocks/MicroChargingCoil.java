@@ -11,8 +11,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.api.IChargingBase;
 import femtocraft.api.IChargingCoil;
+import femtocraft.managers.research.TechLevel;
 import femtocraft.proxy.ClientProxyFemtocraft;
-import femtocraft.research.TechLevel;
 
 public class MicroChargingCoil extends Block implements IChargingCoil {
 	public Icon coilConnector;
