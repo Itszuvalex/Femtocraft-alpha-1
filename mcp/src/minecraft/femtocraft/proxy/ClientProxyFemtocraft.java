@@ -5,6 +5,7 @@ import femtocraft.cooking.blocks.cuttingBoardRenderer;
 import femtocraft.industry.render.VacuumTubeRenderer;
 import femtocraft.power.render.FemtopowerCableRenderer;
 import femtocraft.power.render.FemtopowerChargingBaseRenderer;
+import femtocraft.power.render.FemtopowerChargingCoilRenderer;
 import femtocraft.render.SimpleMachineRenderer;
 
 public class ClientProxyFemtocraft extends CommonProxyFemtocraft {
@@ -12,6 +13,7 @@ public class ClientProxyFemtocraft extends CommonProxyFemtocraft {
 	public static int FemtopowerMicroCubeRenderID;
 	public static int FemtocraftVacuumTubeRenderID;
 	public static int FemtocraftChargingBaseRenderID;
+	public static int FemtocraftChargingCoilRenderID;
 	
 	public static int CuttingBoardRenderPass;
 	public static int cuttingBoardRenderType;
@@ -55,6 +57,9 @@ public class ClientProxyFemtocraft extends CommonProxyFemtocraft {
 		
 		FemtocraftChargingBaseRenderID = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(FemtocraftChargingBaseRenderID, new FemtopowerChargingBaseRenderer());
+		
+		FemtocraftChargingCoilRenderID = RenderingRegistry.getNextAvailableRenderId();
+		RenderingRegistry.registerBlockHandler(FemtocraftChargingCoilRenderID, new FemtopowerChargingCoilRenderer());
 		
 	}
 }

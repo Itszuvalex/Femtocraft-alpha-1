@@ -94,6 +94,7 @@ import femtocraft.power.blocks.FemtopowerConsumerBlock;
 import femtocraft.power.blocks.FemtopowerGenerator;
 import femtocraft.power.blocks.FemtopowerMicroCube;
 import femtocraft.power.blocks.MicroChargingBase;
+import femtocraft.power.blocks.MicroChargingCoil;
 import femtocraft.proxy.ClientProxyFemtocraft;
 import femtocraft.proxy.CommonProxyFemtocraft;
 
@@ -140,6 +141,7 @@ public class Femtocraft {
 	public static Block FemtopowerMicroCube;
 	public static Block FemtocraftVacuumTube;
 	public static Block FemtopowerMicroChargingBase;
+	public static Block FemtopowerMicroChargingCoil;
 	
 	//liquids
 	public static Fluid mass;
@@ -322,6 +324,10 @@ public class Femtocraft {
 		 FemtopowerMicroChargingBase = new MicroChargingBase(FemtocraftConfigs.FemtopowerMicroChargingBaseID);
 		 GameRegistry.registerBlock(FemtopowerMicroChargingBase, "FemtopowerMicroChargingBase");
 		 LanguageRegistry.addName(FemtopowerMicroChargingBase, "Electrostatic Charging Base");
+		 
+		 FemtopowerMicroChargingCoil = new MicroChargingCoil(FemtocraftConfigs.FemtopowerMicroChargingCoilID);
+		 GameRegistry.registerBlock(FemtopowerMicroChargingCoil, "FemtopowerMicroChargingCoil");
+		 LanguageRegistry.addName(FemtopowerMicroChargingCoil, "Electrostatic Charging Coil");
 		 
 		 //Liquids
 		 mass = new Mass();

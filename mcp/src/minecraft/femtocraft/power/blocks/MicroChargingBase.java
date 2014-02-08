@@ -3,13 +3,14 @@ package femtocraft.power.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.api.IChargingBase;
-import femtocraft.api.IChargingCoil;
+import femtocraft.power.TileEntity.MicroChargingBaseTile;
 import femtocraft.proxy.ClientProxyFemtocraft;
 import femtocraft.research.TechLevel;
 
@@ -34,8 +35,35 @@ public class MicroChargingBase extends FemtopowerContainer implements IChargingB
 	}
 
 	@Override
+	public TileEntity createNewTileEntity(World world) {
+		return new MicroChargingBaseTile();
+	}
+	
+	@Override
 	public int getRenderType() {
 		return ClientProxyFemtocraft.FemtocraftChargingBaseRenderID;
+	}
+	
+	@Override
+	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
+		return canBlockStay(par1World, par2, par3, par4);
+	}
+
+	@Override
+	public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
+		Block block = Block.blocksList[par1World.getBlockId(par2 - 1, par3, par4)];
+		if(block != null && block instanceof IChargingBase) return false;
+		
+		block = Block.blocksList[par1World.getBlockId(par2 + 1, par3, par4)];
+		if(block != null && block instanceof IChargingBase) return false;
+		
+		block = Block.blocksList[par1World.getBlockId(par2, par3, par4 - 1)];
+		if(block != null && block instanceof IChargingBase) return false;
+		
+		block = Block.blocksList[par1World.getBlockId(par2, par3, par4 + 1)];
+		if(block != null && block instanceof IChargingBase) return false;
+
+		return true;
 	}
 	
 	@Override
@@ -69,9 +97,4 @@ public class MicroChargingBase extends FemtopowerContainer implements IChargingB
 		return TechLevel.MICRO;
 	}
 
-	@Override
-	public boolean addCoil(IChargingCoil coil, World world, int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }

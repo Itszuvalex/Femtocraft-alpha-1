@@ -9,6 +9,8 @@ import femtocraft.power.TileEntity.FemtopowerCableTile;
 import femtocraft.power.TileEntity.FemtopowerConsumerTest;
 import femtocraft.power.TileEntity.FemtopowerMicroCubeTile;
 import femtocraft.power.TileEntity.FemtopowerProducerTest;
+import femtocraft.power.TileEntity.FemtopowerTile;
+import femtocraft.power.TileEntity.MicroChargingBaseTile;
 
 public class CommonProxyFemtocraft {
 	public void registerRendering() {
@@ -18,7 +20,7 @@ public class CommonProxyFemtocraft {
 	public void registerTileEntities() 
 	{
 		 //Tile Entities
-//		 GameRegistry.registerTileEntity(FemtopowerTile.class, "FemtopowerTile");
+		 GameRegistry.registerTileEntity(FemtopowerTile.class, "FemtopowerTile");
 		 GameRegistry.registerTileEntity(FemtopowerProducerTest.class, "FemtopowerProducerTest");
 		 GameRegistry.registerTileEntity(FemtopowerConsumerTest.class, "FemtopowerConsumerTest");
 		 GameRegistry.registerTileEntity(MicroFurnaceTile.class, "FemtocraftMicroFurnace");
@@ -27,6 +29,7 @@ public class CommonProxyFemtocraft {
 		 GameRegistry.registerTileEntity(FemtopowerCableTile.class, "FemtopowerCable");
 		 GameRegistry.registerTileEntity(FemtopowerMicroCubeTile.class, "FemtocraftMicroCube");
 		 GameRegistry.registerTileEntity(VacuumTubeTile.class,  "VacuumTube");
+		 GameRegistry.registerTileEntity(MicroChargingBaseTile.class, "MicroChargingBase");
 	}
 	
 	public void registerBlockRenderers() 
