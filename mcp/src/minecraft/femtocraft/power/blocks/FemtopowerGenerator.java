@@ -9,7 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class FemtopowerGenerator extends FemtopowerContainer {
+public class FemtopowerGenerator extends FemtopowerTileContainer {
 	
 	public FemtopowerGenerator(int par1, Material par2Material) {
 		super(par1, par2Material);

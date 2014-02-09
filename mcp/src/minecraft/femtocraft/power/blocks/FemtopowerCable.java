@@ -18,7 +18,7 @@ import femtocraft.Femtocraft;
 import femtocraft.power.TileEntity.FemtopowerCableTile;
 import femtocraft.proxy.ClientProxyFemtocraft;
 
-public class FemtopowerCable extends FemtopowerContainer {
+public class FemtopowerCable extends FemtopowerTileContainer {
 	public Icon coreBorder;
 	public Icon connector;
 	public Icon coil;

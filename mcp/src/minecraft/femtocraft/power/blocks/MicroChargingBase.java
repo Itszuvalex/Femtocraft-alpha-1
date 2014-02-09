@@ -14,7 +14,7 @@ import femtocraft.managers.research.TechLevel;
 import femtocraft.power.TileEntity.MicroChargingBaseTile;
 import femtocraft.proxy.ClientProxyFemtocraft;
 
-public class MicroChargingBase extends FemtopowerContainer implements IChargingBase {
+public class MicroChargingBase extends FemtopowerTileContainer implements IChargingBase {
 	public Icon side;
 	public Icon top;
 	public Icon bottom;

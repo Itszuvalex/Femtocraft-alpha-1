@@ -6,7 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class FemtopowerConsumerBlock extends FemtopowerContainer {
+public class FemtopowerConsumerBlock extends FemtopowerTileContainer {
 
 	public FemtopowerConsumerBlock(int par1, Material par2Material) {
 		super(par1, par2Material);

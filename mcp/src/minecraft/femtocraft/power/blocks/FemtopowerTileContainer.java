@@ -19,9 +19,9 @@ import net.minecraftforge.common.ForgeDirection;
  * @author Chris
  *
  */
-public class FemtopowerContainer extends BlockContainer {
+public class FemtopowerTileContainer extends BlockContainer {
 
-	public FemtopowerContainer(int par1, Material par2Material) {
+	public FemtopowerTileContainer(int par1, Material par2Material) {
 		super(par1, par2Material);
 	}
 

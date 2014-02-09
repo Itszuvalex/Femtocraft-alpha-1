@@ -1,27 +1,31 @@
+/**
+ * 
+ */
 package femtocraft.api;
 
+import net.minecraftforge.common.ForgeDirection;
 import femtocraft.managers.research.TechLevel;
 
 /**
- * 
  * @author Itszuvalex
  *
  */
-public interface IFemtopowerContainer {
+public interface IFemtopowerBlockContainer {
 
 	/**
 	 * 
 	 * @param level TechLevel of power
-	 * @return True if can accept power of that level 
+	 * @param from Direction power will be coming from
+	 * @return True if can accept power of that level from the given direciton
 	 */
-	public boolean canAcceptPowerOfLevel(TechLevel level);
+	public boolean canAcceptPowerOfLevel(TechLevel level, ForgeDirection from);
 	
 	/**
 	 * 
 	 * @param to Direction from this Container 
 	 * @return TechLevel of power this machine will give to the given direciton
 	 */
-	public TechLevel getTechLevel();
+	public TechLevel getTechLevel(ForgeDirection to);
 	
 	/**
 	 * 
@@ -47,7 +51,7 @@ public interface IFemtopowerContainer {
 	 * @return Fill percentage for purposes of charging - allows tanks and whatnot to trick pipes into filling them
 	 *  I.E. return getFillPercentage() < .25f ?  getFillPercentage() : .25f;
 	 */
-	public float getFillPercentageForCharging();
+	public float getFillPercentageForCharging(ForgeDirection from);
 	
 	/**
 	 * 
@@ -55,15 +59,21 @@ public interface IFemtopowerContainer {
 	 * @return Fill percentage for purposes of output - allows tanks and other TileEntities to trick pipes into not
 	 * pulling all of their power.
 	 */
-	public float getFillPercentageForOutput();
+	public float getFillPercentageForOutput(ForgeDirection to);
 	
 	/**
 	 * 
 	 * @param from Direction attempting to input power from
 	 * @return True if container has room and can accept charging from direction @from, false otherwise
 	 */
-	public boolean canCharge();
-
+	public boolean canCharge(ForgeDirection from);
+	
+	/**
+	 * 
+	 * @param from Direction attempting to 
+	 * @return True if container can be connected to from a given direction
+	 */
+	public boolean canConnect(ForgeDirection from);
 
 	/**
 	 * 
@@ -71,7 +81,7 @@ public interface IFemtopowerContainer {
 	 * @param amount Amount attempting to charge.
 	 * @return Total amount of @amount used to fill internal tank.
 	 */
-	public int charge(int amount);
+	public int charge(ForgeDirection from, int amount);
 	
 	/**
 	 * 

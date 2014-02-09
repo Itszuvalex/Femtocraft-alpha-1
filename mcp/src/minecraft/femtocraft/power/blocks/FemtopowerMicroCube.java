@@ -1,10 +1,15 @@
 package femtocraft.power.blocks;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
@@ -13,10 +18,11 @@ import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
+import femtocraft.api.FemtopowerContainer;
 import femtocraft.api.IInterfaceDevice;
 import femtocraft.power.TileEntity.FemtopowerMicroCubeTile;
 
-public class FemtopowerMicroCube extends FemtopowerContainer {
+public class FemtopowerMicroCube extends FemtopowerTileContainer {
 	public Icon outputSide;
 	public Icon inputSide;
 	
@@ -96,6 +102,87 @@ public class FemtopowerMicroCube extends FemtopowerContainer {
 		this.blockIcon = inputSide = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()+":" + "MicroCube_input");
 		outputSide = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()+":" + "MicroCube_output");
 //		side = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "MicroCube_side");
+	}
+
+	@Override
+	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
+			EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
+		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLivingBase,
+				par6ItemStack);
+		
+		
+		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+		if(te == null) return;
+		if(!(te instanceof FemtopowerMicroCubeTile)) return;
+		
+		FemtopowerMicroCubeTile cube = (FemtopowerMicroCubeTile) te;
+		
+		NBTTagCompound nbt = par6ItemStack.stackTagCompound;
+		if(nbt == null) return;
+		
+		NBTTagCompound power = (NBTTagCompound) par6ItemStack.stackTagCompound.getTag("power");
+		if(power == null) return;
+		
+		FemtopowerContainer cont = FemtopowerContainer.createFromNBT(power);
+		
+		cube.setCurrentStorage(cont.getCurrentPower());
+	}
+
+	@Override
+	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x,
+			int y, int z) {
+		
+		// TODO Add check for owner / assistant / op
+		if(!world.isRemote)
+		{
+			
+		}
+
+		return super.removeBlockByPlayer(world, player, x, y, z);
+	}
+
+	@Override
+	public void breakBlock(World par1World, int par2, int par3, int par4,
+			int par5, int par6) {
+		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+		if(te != null && te instanceof FemtopowerMicroCubeTile)
+		{
+			FemtopowerMicroCubeTile cube = (FemtopowerMicroCubeTile) te;
+			
+			ItemStack stack = new ItemStack(Block.blocksList[par5]);
+			if(!stack.hasTagCompound())
+			{
+				stack.stackTagCompound = new NBTTagCompound();
+			}
+			
+			FemtopowerContainer cont = new FemtopowerContainer(cube.getTechLevel(ForgeDirection.UNKNOWN), cube.getMaxPower());
+			cont.setCurrentPower(cube.getCurrentPower());
+			
+			NBTTagCompound power = new NBTTagCompound();
+			cont.saveToNBT(power);
+			
+			stack.stackTagCompound.setTag("power", power);
+			
+			par1World.spawnEntityInWorld(new EntityItem(par1World, par2 + .5d, par3 + .5d, par4 + .5d, stack));
+		}
+		super.breakBlock(par1World, par2, par3, par4, par5, par6);
+	}
+
+	@Override
+	public int quantityDropped(Random par1Random) {
+		return 0;
+	}
+	
+	private void addPowerToNBT(NBTTagCompound nbt, FemtopowerMicroCubeTile cube)
+	{
+		nbt.setInteger("maxPower", cube.getMaxPower());
+		nbt.setInteger("currentPower", cube.getCurrentPower());
+	}
+	
+	private void readPowerFromNBT(NBTTagCompound nbt, FemtopowerMicroCubeTile cube)
+	{
+		cube.setMaxStorage(nbt.getInteger("maxPower"));
+		cube.setCurrentStorage(nbt.getInteger("currentPower"));
 	}
 
 }

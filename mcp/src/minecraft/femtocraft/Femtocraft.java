@@ -96,6 +96,7 @@ import femtocraft.power.blocks.FemtopowerGenerator;
 import femtocraft.power.blocks.FemtopowerMicroCube;
 import femtocraft.power.blocks.MicroChargingBase;
 import femtocraft.power.blocks.MicroChargingCoil;
+import femtocraft.power.items.FemtopowerMicroCubeItem;
 import femtocraft.proxy.ClientProxyFemtocraft;
 import femtocraft.proxy.CommonProxyFemtocraft;
 
@@ -317,7 +318,7 @@ public class Femtocraft {
 		 LanguageRegistry.addName(FemtocraftMicroReconstructor, "Microtech Reconstructor");
 		 
 		 FemtopowerMicroCube = new FemtopowerMicroCube(FemtocraftConfigs.FemtopowerMicroCubeID);
-		 GameRegistry.registerBlock(FemtopowerMicroCube, "FemtopowerMicroCube");
+		 GameRegistry.registerBlock(FemtopowerMicroCube, FemtopowerMicroCubeItem.class, "FemtopowerMicroCube");
 		 LanguageRegistry.addName(FemtopowerMicroCube, "Micro-Cube");
 		 
 		 FemtocraftVacuumTube = new VacuumTube(FemtocraftConfigs.FemtocraftVacuumTubeID);

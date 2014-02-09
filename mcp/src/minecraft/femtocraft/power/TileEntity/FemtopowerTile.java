@@ -5,10 +5,10 @@ import java.util.Arrays;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-import femtocraft.api.IFemtopowerContainer;
+import femtocraft.api.IFemtopowerBlockContainer;
 import femtocraft.managers.research.TechLevel;
 
-public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
+public class FemtopowerTile extends TileEntity implements IFemtopowerBlockContainer {
 	private int currentStorage;
 	private int maxStorage;
 	private float maxPowerPerTick;
@@ -29,6 +29,11 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 	
 	public void setMaxStorage(int maxStorage_) {
 		maxStorage = maxStorage_;
+	}
+	
+	public void setCurrentStorage(int currentStorage)
+	{
+		this.currentStorage = currentStorage;
 	}
 	
 	public void setTechLevel(TechLevel level)
@@ -128,7 +133,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 			   
 	 		   TileEntity checkTile = this.worldObj.getBlockTileEntity(locx, locy, locz);
 	 		   
-	 		   if(checkTile == null || ! (checkTile instanceof IFemtopowerContainer)) {
+	 		   if(checkTile == null || ! (checkTile instanceof IFemtopowerBlockContainer)) {
 				   willCharge[j] = false;
 				   --numToFill;
 				   percentFilled[j] = 1.f;
@@ -138,7 +143,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 			   
 			   //Having passed initial check, and due to this now being this block's
 			   //update function, can safely assume adjacent blocks remain the same (unless it does simultaneous updates)
-			   IFemtopowerContainer container = (IFemtopowerContainer)this.worldObj.getBlockTileEntity(locx, locy, locz);
+			   IFemtopowerBlockContainer container = (IFemtopowerBlockContainer)this.worldObj.getBlockTileEntity(locx, locy, locz);
 			   
 			   if(container != null && container.canCharge(offset.getOpposite())) {
 				   //Check for within buffer range - if so, this pipe will only get less filled from here on out
@@ -183,9 +188,9 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
 		   //Having passed initial check, and due to this now being this block's
 		   //update function, can safely assume adjacent blocks remain the same (unless it does simultaneous updates)
 		   TileEntity TE = this.worldObj.getBlockTileEntity(locx, locy, locz);
-		   if(TE != null && TE instanceof IFemtopowerContainer) 
+		   if(TE != null && TE instanceof IFemtopowerBlockContainer) 
 		   {
-			   IFemtopowerContainer container = (IFemtopowerContainer)TE;
+			   IFemtopowerBlockContainer container = (IFemtopowerBlockContainer)TE;
 			   
 			   if(container != null) {
 				   int powerconsumed = container.charge(offset.getOpposite(), amountToFill);
@@ -235,8 +240,8 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerContainer {
  		   
  		   TileEntity checkTile = this.worldObj.getBlockTileEntity(locx, locy, locz);
  		   
- 		   if(checkTile != null && checkTile instanceof IFemtopowerContainer) {
- 			   IFemtopowerContainer fc = (IFemtopowerContainer) checkTile;
+ 		   if(checkTile != null && checkTile instanceof IFemtopowerBlockContainer) {
+ 			   IFemtopowerBlockContainer fc = (IFemtopowerBlockContainer) checkTile;
  			   if(!fc.canConnect(offset.getOpposite())) continue;
  			   
  			   connections[j] = true;
