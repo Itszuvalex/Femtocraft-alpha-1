@@ -7,11 +7,13 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -42,6 +44,7 @@ import femtocraft.core.items.MicroCircuitBoard;
 import femtocraft.core.items.MicroInterfaceDevice;
 import femtocraft.core.items.NanoInterfaceDevice;
 import femtocraft.core.items.PrimedBoard;
+import femtocraft.core.items.Spool;
 import femtocraft.core.items.ingotFarenite;
 import femtocraft.core.items.ingotMalenite;
 import femtocraft.core.items.ingotPlatinum;
@@ -97,6 +100,7 @@ import femtocraft.power.blocks.FemtopowerMicroCube;
 import femtocraft.power.blocks.MicroChargingBase;
 import femtocraft.power.blocks.MicroChargingCoil;
 import femtocraft.power.items.FemtopowerMicroCubeItem;
+import femtocraft.power.items.SpoolGold;
 import femtocraft.proxy.ClientProxyFemtocraft;
 import femtocraft.proxy.CommonProxyFemtocraft;
 
@@ -169,6 +173,9 @@ public class Femtocraft {
 	public static Item primedBoard;
 	public static Item dopedBoard;
 	public static Item microCircuitBoard;
+	
+	public static Item spool;
+	public static Item spoolGold;
 	
 	public static Item paperSchematic;
 	
@@ -400,6 +407,12 @@ public class Femtocraft {
 		 microCircuitBoard = new MicroCircuitBoard(FemtocraftConfigs.microCircuitID).setUnlocalizedName("microCircuitBoard");
 		 LanguageRegistry.addName(microCircuitBoard, "Micro Circuit Board");
 		 
+		 spool = new Spool(FemtocraftConfigs.spoolID).setUnlocalizedName("spool");
+		 LanguageRegistry.addName(spool, "Spool");
+		 
+		 spoolGold = new SpoolGold(FemtocraftConfigs.spoolGoldID).setUnlocalizedName("spoolGold");
+		 LanguageRegistry.addName(spoolGold, "Gold Wire Spool");
+		 
 		 //Schematics
 		 
 		 paperSchematic = new PaperSchematic(FemtocraftConfigs.paperSchematicID);
@@ -565,8 +578,13 @@ public class Femtocraft {
 		GameRegistry.addSmelting(primedBoard.itemID, new ItemStack(dopedBoard), 0.1f);
 
 		GameRegistry.addShapedRecipe(new ItemStack(primedBoard), new Object[]{"#", "$", '#', conductivePowder, '$', board});
-		GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.paperSchematic, 3),new Object[] {"###", "###", "###", '#', Item.paper});
+		GameRegistry.addShapedRecipe(new ItemStack(paperSchematic, 3),new Object[] {"###", "###", "###", '#', Item.paper});
 		GameRegistry.addShapedRecipe(new ItemStack(board), new Object[]{"###", '#', Item.stick});
+		GameRegistry.addShapedRecipe(new ItemStack(microCircuitBoard), new Object[]{"#", "$", '#', spoolGold, '$', dopedBoard});
+		
+		CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(spool), new Object[]{"# #", "#-#", "# #", '#', "plankWood", '-', "stickWood"}));
+		
+		GameRegistry.addShapedRecipe(new ItemStack(spoolGold, 8), new Object[]{"###", "#-#", "###", '#', Item.ingotGold, '-', Femtocraft.spool});
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(conductivePowder, 2), new Object[]{new ItemStack(ingotFarenite), new ItemStack(Item.dyePowder, 1, 4)});
 

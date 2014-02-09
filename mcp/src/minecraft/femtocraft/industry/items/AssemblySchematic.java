@@ -72,7 +72,7 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 		NBTTagCompound itemCompound = par1ItemStack.stackTagCompound;
 		if(itemCompound == null || !itemCompound.hasKey("recipe"))
 		{
-			par3List.add(String.format(EnumChatFormatting.RED + "Uses good for:" + EnumChatFormatting.RESET + " %s.", useString));
+			par3List.add(String.format(EnumChatFormatting.YELLOW + "Uses good for:" + EnumChatFormatting.RESET + " %s.", useString));
 			return;
 		}
 		
@@ -83,10 +83,10 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 			return;
 		}
 		
-		String useLine = String.format(EnumChatFormatting.RED + "%s"+ EnumChatFormatting.RESET + " %s", "Uses Remaining:", useString);
+		String useLine = String.format(EnumChatFormatting.YELLOW + "%s"+ EnumChatFormatting.RESET + " %s", "Uses Remaining:", useString);
 		par3List.add(useLine);
 		
-		String outputLine = String.format(EnumChatFormatting.GRAY + "Output:"+EnumChatFormatting.RESET+" %dx%s", recipe.output.stackSize, recipe.output.getDisplayName());
+		String outputLine = String.format(EnumChatFormatting.YELLOW + "Output:"+EnumChatFormatting.RESET+" %dx%s", recipe.output.stackSize, recipe.output.getDisplayName());
 		par3List.add(outputLine);
 		
 		//End short
@@ -106,16 +106,16 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 			{
 				inputString = String.format("%dx%s", item.stackSize, item.getDisplayName());
 			}
-			String inputLine = String.format("Input %d: %s", i, inputString);
+			String inputLine = String.format(EnumChatFormatting.YELLOW + "Input %d:"+EnumChatFormatting.RESET+" %s", i, inputString);
 			par3List.add(inputLine);
 		}
 		
 		par3List.add("");
 		
-		String massLine = String.format(EnumChatFormatting.DARK_PURPLE+"Mass:"+EnumChatFormatting.RESET+" %d", recipe.mass);
+		String massLine = String.format(EnumChatFormatting.YELLOW+"Mass:"+EnumChatFormatting.RESET+" %d", recipe.mass);
 		par3List.add(massLine);
 		
-		String techLevelLine = String.format("TechLevel: %s", FemtocraftUtils.capitalize(recipe.techLevel.key));
+		String techLevelLine = String.format(EnumChatFormatting.YELLOW + "TechLevel:"+EnumChatFormatting.RESET+" %s", FemtocraftUtils.capitalize(recipe.techLevel.key));
 		par3List.add(techLevelLine);
 		
 		Technology tech = recipe.tech;
@@ -129,7 +129,7 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 			techString = FemtocraftUtils.capitalize(tech.name);
 		}
 		
-		String techLine = String.format("Technology Required: %s", techString);
+		String techLine = String.format(EnumChatFormatting.YELLOW + "Technology Required:"+EnumChatFormatting.RESET+" %s", techString);
 		par3List.add(techLine);
 	}
 

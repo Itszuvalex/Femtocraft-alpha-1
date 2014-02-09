@@ -84,6 +84,9 @@ public class FemtocraftConfigs {
 	public static @CfgId int dopedBoardID = 12032;
 	public static @CfgId int microCircuitID = 12033;
 	
+	public static @CfgId int spoolID = 12034;
+	public static @CfgId int spoolGoldID = 12035;
+	
 	public static @CfgId int paperSchematicID = 12040;
 	public static @CfgId int metalSchematicID = 12041;
 	public static @CfgId int advMetalSchematicID = 12042;
