@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -71,7 +72,7 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 		NBTTagCompound itemCompound = par1ItemStack.stackTagCompound;
 		if(itemCompound == null || !itemCompound.hasKey("recipe"))
 		{
-			par3List.add(String.format("Uses good for: %s.", useString));
+			par3List.add(String.format(EnumChatFormatting.RED + "Uses good for:" + EnumChatFormatting.RESET + " %s.", useString));
 			return;
 		}
 		
@@ -82,10 +83,10 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 			return;
 		}
 		
-		String useLine = String.format("%s %s", "Uses Remaining:", useString);
+		String useLine = String.format(EnumChatFormatting.RED + "%s"+ EnumChatFormatting.RESET + " %s", "Uses Remaining:", useString);
 		par3List.add(useLine);
 		
-		String outputLine = String.format("Output: %dx%s", recipe.output.stackSize, recipe.output.getDisplayName());
+		String outputLine = String.format(EnumChatFormatting.GRAY + "Output:"+EnumChatFormatting.RESET+" %dx%s", recipe.output.stackSize, recipe.output.getDisplayName());
 		par3List.add(outputLine);
 		
 		//End short
@@ -111,7 +112,7 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 		
 		par3List.add("");
 		
-		String massLine = String.format("Mass: %d", recipe.mass);
+		String massLine = String.format(EnumChatFormatting.DARK_PURPLE+"Mass:"+EnumChatFormatting.RESET+" %d", recipe.mass);
 		par3List.add(massLine);
 		
 		String techLevelLine = String.format("TechLevel: %s", FemtocraftUtils.capitalize(recipe.techLevel.key));

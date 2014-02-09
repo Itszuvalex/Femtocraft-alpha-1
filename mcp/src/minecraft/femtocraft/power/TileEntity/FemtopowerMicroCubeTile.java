@@ -16,13 +16,16 @@ import net.minecraftforge.common.ForgeDirection;
 public class FemtopowerMicroCubeTile extends FemtopowerTile {
 	public boolean[] outputs;
 	static final public String packetChannel = Femtocraft.ID + ".MCube";
+	public static final int maxStorage = 10000;
+	public static final TechLevel techLevel = TechLevel.MICRO;
 	
 	public FemtopowerMicroCubeTile() {
 		super();
-		setMaxStorage(10000);
+		setMaxStorage(maxStorage);
+		setTechLevel(TechLevel.MICRO);
 		outputs = new boolean[6];
 		Arrays.fill(outputs, false);
-		setTechLevel(TechLevel.MICRO);
+		setTechLevel(techLevel);
 	}
 
 	public void onSideActivate(ForgeDirection side)
@@ -35,7 +38,6 @@ public class FemtopowerMicroCubeTile extends FemtopowerTile {
 	{
 		
 	}
-	
 
 	@Override
 	public Packet getDescriptionPacket() {

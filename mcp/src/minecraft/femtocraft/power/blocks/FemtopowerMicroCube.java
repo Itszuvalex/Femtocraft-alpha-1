@@ -172,17 +172,4 @@ public class FemtopowerMicroCube extends FemtopowerTileContainer {
 	public int quantityDropped(Random par1Random) {
 		return 0;
 	}
-	
-	private void addPowerToNBT(NBTTagCompound nbt, FemtopowerMicroCubeTile cube)
-	{
-		nbt.setInteger("maxPower", cube.getMaxPower());
-		nbt.setInteger("currentPower", cube.getCurrentPower());
-	}
-	
-	private void readPowerFromNBT(NBTTagCompound nbt, FemtopowerMicroCubeTile cube)
-	{
-		cube.setMaxStorage(nbt.getInteger("maxPower"));
-		cube.setCurrentStorage(nbt.getInteger("currentPower"));
-	}
-
 }

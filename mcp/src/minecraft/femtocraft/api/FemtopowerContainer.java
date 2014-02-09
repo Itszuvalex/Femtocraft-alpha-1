@@ -1,6 +1,9 @@
 package femtocraft.api;
 
+import java.util.List;
+
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
 import femtocraft.managers.research.TechLevel;
 
 public class FemtopowerContainer implements IFemtopowerContainer {
@@ -108,6 +111,12 @@ public class FemtopowerContainer implements IFemtopowerContainer {
 		FemtopowerContainer cont = new FemtopowerContainer();
 		cont.loadFromNBT(nbt);
 		return cont;
+	}
+	
+	public void addInformationToTooltip(List tooltip)
+	{
+		String value =  level.getTooltipEnum() + "Power: " + EnumChatFormatting.RESET + currentPower + "/" + maxPower;
+		tooltip.add(value);
 	}
 
 }

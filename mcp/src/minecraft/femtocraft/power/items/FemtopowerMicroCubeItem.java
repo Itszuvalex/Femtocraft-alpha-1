@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.api.FemtopowerContainer;
+import femtocraft.power.TileEntity.FemtopowerMicroCubeTile;
 
 public class FemtopowerMicroCubeItem extends ItemBlock {
 
@@ -33,21 +34,29 @@ public class FemtopowerMicroCubeItem extends ItemBlock {
 			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 		super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
 
-		FemtopowerContainer container = getContainer(par1ItemStack.getTagCompound());
-		if(container == null) return;
+		NBTTagCompound nbt = par1ItemStack.getTagCompound();
+		if(nbt == null)
+		{
+			nbt = par1ItemStack.stackTagCompound = new NBTTagCompound();
+		}
 		
-		String value =  EnumChatFormatting.BLUE + "Power: " + EnumChatFormatting.RESET + container.getCurrentPower() + "/" + container.getMaxPower() +".";
-		par3List.add(value);
-	}
-	
-	private FemtopowerContainer getContainer(NBTTagCompound nbt)
-	{
-		if(nbt == null) return null;
-		
-		NBTTagCompound power = nbt.getCompoundTag("power");
-		if(power == null) return null;
-		
-		return FemtopowerContainer.createFromNBT(power);
-	}
+		FemtopowerContainer container;
+		boolean init = nbt.hasKey("power");
 
+		NBTTagCompound power = nbt.getCompoundTag("power");
+
+		
+		if(!init)
+		{
+			container = new FemtopowerContainer(FemtopowerMicroCubeTile.techLevel, FemtopowerMicroCubeTile.maxStorage);
+			container.saveToNBT(power);
+			nbt.setTag("power", power);
+		}
+		else
+		{
+			container =  FemtopowerContainer.createFromNBT(power);
+		}
+		
+		container.addInformationToTooltip(par3List);
+	}
 }

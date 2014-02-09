@@ -5,21 +5,19 @@ import java.util.Arrays;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
+import femtocraft.api.FemtopowerContainer;
 import femtocraft.api.IFemtopowerBlockContainer;
 import femtocraft.managers.research.TechLevel;
 
 public class FemtopowerTile extends TileEntity implements IFemtopowerBlockContainer {
-	private int currentStorage;
-	private int maxStorage;
+	private FemtopowerContainer container;
 	private float maxPowerPerTick;
 	private float maxSizePackets;
 	private float distributionBuffer;
 	public boolean[] connections;
-	private TechLevel level;
 	
 	public FemtopowerTile() {
-		currentStorage = 0;
-		maxStorage = 250;
+		container = new FemtopowerContainer(TechLevel.MACRO, 250);
 		maxPowerPerTick = .05f;
 		maxSizePackets = .05f;   //Yes this is the same as maxpertick, this breaks if it isn't, for some reason  TODO
 		distributionBuffer = .01f;
@@ -28,17 +26,17 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerBlockContai
 	}
 	
 	public void setMaxStorage(int maxStorage_) {
-		maxStorage = maxStorage_;
+		container.setMaxPower(maxStorage_);
 	}
 	
 	public void setCurrentStorage(int currentStorage)
 	{
-		this.currentStorage = currentStorage;
+		container.setCurrentPower(currentStorage);
 	}
 	
 	public void setTechLevel(TechLevel level)
 	{
-		this.level = level;
+		container.setTechLevel(level);
 	}
 	
 	public boolean isConnected(int i) {
@@ -53,17 +51,17 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerBlockContai
 	
 	@Override
 	public int getCurrentPower() {
-		return currentStorage;
+		return container.getCurrentPower();
 	}
 
 	@Override
 	public int getMaxPower() {
-		return maxStorage;
+		return container.getMaxPower();
 	}
 
 	@Override
 	public float getFillPercentage() {
-		return (float)currentStorage/(float)maxStorage;
+		return container.getFillPercentage();
 	}
 
 	@Override
@@ -84,19 +82,12 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerBlockContai
 
 	@Override
 	public int charge(ForgeDirection from, int amount) {
-		int room = maxStorage - currentStorage;
-		amount = room < amount ? room : amount;
-		currentStorage += amount;
-		return amount;
+		return container.charge(amount);
 	}
 	
 	@Override
 	public boolean consume(int amount) {
-		if(amount > currentStorage) 
-			return false;
-		
-		currentStorage -= amount;
-		return true;
+		return container.consume(amount);
 	}
 	
 	@Override
@@ -105,7 +96,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerBlockContai
 		checkConnections();
 		
 		//Don't do anything for empty containers
-		if(currentStorage <= 0 || this.worldObj.isRemote) {
+		if(container.getCurrentPower() <= 0 || this.worldObj.isRemote) {
 			return;
 		}
 		
@@ -116,7 +107,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerBlockContai
        for(int i = 0; i < 6; ++i) {if(willCharge[i]) ++numToFill;}
        float[] percentFilled = new float[6];
        Arrays.fill(percentFilled, 1.0f);
-       int maxSpreadThisTick = (int)(((float)currentStorage) * maxPowerPerTick);
+       int maxSpreadThisTick = (int)(((float)container.getCurrentPower()) * maxPowerPerTick);
        
        while(maxSpreadThisTick >0 && numToFill > 0) {
 		   for(int j = 0; j < 6; ++j) {
@@ -182,9 +173,9 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerBlockContai
 		   int locy = this.yCoord + offset.offsetY;
 		   int locz = this.zCoord + offset.offsetZ;
 		   
-		   int amountToFill = (int)((float)currentStorage * maxSizePackets);
+		   int amountToFill = (int)((float)container.getCurrentPower() * maxSizePackets);
 		   amountToFill = amountToFill < maxSpreadThisTick ? amountToFill : maxSpreadThisTick;
-		   amountToFill = amountToFill < currentStorage ? amountToFill : currentStorage;
+		   amountToFill = amountToFill < container.getCurrentPower() ? amountToFill : container.getCurrentPower();
 		   //Having passed initial check, and due to this now being this block's
 		   //update function, can safely assume adjacent blocks remain the same (unless it does simultaneous updates)
 		   TileEntity TE = this.worldObj.getBlockTileEntity(locx, locy, locz);
@@ -194,7 +185,7 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerBlockContai
 			   
 			   if(container != null) {
 				   int powerconsumed = container.charge(offset.getOpposite(), amountToFill);
-				   this.currentStorage -= powerconsumed;
+				   this.container.setCurrentPower(this.container.getCurrentPower() - powerconsumed);
 				   maxSpreadThisTick -= powerconsumed;
 			   }
 		   }
@@ -205,9 +196,8 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerBlockContai
 	 public void readFromNBT(NBTTagCompound par1NBTTagCompound)
     {
        super.readFromNBT(par1NBTTagCompound);
-       currentStorage = par1NBTTagCompound.getInteger("currentStorage");
-       maxStorage = par1NBTTagCompound.getInteger("maxStorage");
-       
+       container = FemtopowerContainer.createFromNBT(par1NBTTagCompound.getCompoundTag("power"));
+
 //       for(int i = 0; i < 6; i++) {
 //    	  connections[i] = par1NBTTagCompound.getBoolean(String.format("connection%d", i));
 //       }
@@ -219,8 +209,9 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerBlockContai
     public void writeToNBT(NBTTagCompound par1NBTTagCompound)
     {
        super.writeToNBT(par1NBTTagCompound);
-       par1NBTTagCompound.setInteger("currentStorage", currentStorage);
-       par1NBTTagCompound.setInteger("maxStorage", maxStorage);
+       NBTTagCompound power = new NBTTagCompound();
+       container.saveToNBT(power);
+       par1NBTTagCompound.setTag("power", power);
 
 //       for(int i = 0; i < 6; i++) {
 //    	   par1NBTTagCompound.setBoolean(String.format("connection%d", i), connections[i]);
@@ -256,12 +247,12 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerBlockContai
 
 	@Override
 	public boolean canAcceptPowerOfLevel(TechLevel level, ForgeDirection from) {
-		return level == this.level;
+		return container.canAcceptPowerOfLevel(level);
 	}
 
 	@Override
 	public TechLevel getTechLevel(ForgeDirection to) {
-		return level;
+		return container.getTechLevel();
 	}
 
 	@Override

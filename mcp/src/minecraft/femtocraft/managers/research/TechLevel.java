@@ -1,5 +1,7 @@
 package femtocraft.managers.research;
 
+import net.minecraft.util.EnumChatFormatting;
+
 public enum TechLevel {
 		MACRO("macro", 0), 			//Vanilla level
 		MICRO("micro", 1), 			//1st Tier
@@ -49,4 +51,24 @@ public enum TechLevel {
 			}
 		}
 		
+		public EnumChatFormatting getTooltipEnum()
+		{
+			switch(this)
+			{
+			case MACRO:
+				return EnumChatFormatting.RED;
+			case MICRO:
+				return EnumChatFormatting.BLUE;
+			case NANO:
+				return EnumChatFormatting.GREEN;
+			case FEMTO:
+				return EnumChatFormatting.GOLD;
+			case TEMPORAL:
+				return EnumChatFormatting.WHITE;
+			case DIMENSIONAL:
+				return EnumChatFormatting.DARK_PURPLE;
+			default:
+				return EnumChatFormatting.RESET;
+			}
+		}
 }

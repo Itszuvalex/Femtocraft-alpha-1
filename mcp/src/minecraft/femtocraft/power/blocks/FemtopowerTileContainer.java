@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 /**
- * @author Chris
+ * @author Itszuvalex
  *
  */
 public class FemtopowerTileContainer extends BlockContainer {
