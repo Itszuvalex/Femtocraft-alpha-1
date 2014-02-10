@@ -37,14 +37,12 @@ public class SuctionTubeTile extends TileEntity implements IFluidHandler {
 
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		// TODO Auto-generated method stub
 		return tank.fill(resource, doFill);
 	}
 
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource,
 			boolean doDrain) {
-		// TODO Auto-generated method stub
         if (resource == null || !resource.isFluidEqual(tank.getFluid()))
         {
             return null;
@@ -54,25 +52,21 @@ public class SuctionTubeTile extends TileEntity implements IFluidHandler {
 
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		// TODO Auto-generated method stub
 		return tank.drain(maxDrain, doDrain);
 	}
 
 	@Override
 	public boolean canFill(ForgeDirection from, Fluid fluid) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean canDrain(ForgeDirection from, Fluid fluid) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-		// TODO Auto-generated method stub
 		return new FluidTankInfo[]{tank.getInfo()};
 	}
 	
@@ -81,7 +75,6 @@ public class SuctionTubeTile extends TileEntity implements IFluidHandler {
 	 */
 	@Override
 	public void updateEntity() {		
-		// TODO Auto-generated method stub
 		super.updateEntity();
 		
 		if(this.worldObj.isRemote) return;

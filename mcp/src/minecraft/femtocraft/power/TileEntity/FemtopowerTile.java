@@ -7,11 +7,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import femtocraft.api.FemtopowerContainer;
 import femtocraft.api.IFemtopowerBlockContainer;
+import femtocraft.core.tiles.FemtocraftTile;
 import femtocraft.managers.research.TechLevel;
 
-public class FemtopowerTile extends TileEntity implements IFemtopowerBlockContainer {
+public class FemtopowerTile extends FemtocraftTile implements IFemtopowerBlockContainer {
 	private FemtopowerContainer container;
-	private String owner;
 	private float maxPowerPerTick;
 	private float maxSizePackets;
 	private float distributionBuffer;
@@ -24,7 +24,6 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerBlockContai
 		distributionBuffer = .01f;
 		connections = new boolean[6];
 		Arrays.fill(connections, false);
-		owner = "";
 	}
 	
 	public void setMaxStorage(int maxStorage_) {
@@ -49,16 +48,6 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerBlockContai
 		int count = 0;
 		for(int i =0; i < 6; ++i) if(connections[i]) ++count;
 		return count;
-	}
-	
-	public String getOwner()
-	{
-		return owner;
-	}
-	
-	public void setOwner(String owner)
-	{
-		this.owner = owner;
 	}
 	
 	@Override
@@ -209,7 +198,6 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerBlockContai
     {
        super.readFromNBT(par1NBTTagCompound);
        container = FemtopowerContainer.createFromNBT(par1NBTTagCompound.getCompoundTag("power"));
-       owner = par1NBTTagCompound.getString("owner");
 
 //       for(int i = 0; i < 6; i++) {
 //    	  connections[i] = par1NBTTagCompound.getBoolean(String.format("connection%d", i));
@@ -225,7 +213,6 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerBlockContai
        NBTTagCompound power = new NBTTagCompound();
        container.saveToNBT(power);
        par1NBTTagCompound.setTag("power", power);
-       par1NBTTagCompound.setString("owner", owner);
 
 //       for(int i = 0; i < 6; i++) {
 //    	   par1NBTTagCompound.setBoolean(String.format("connection%d", i), connections[i]);
@@ -272,5 +259,19 @@ public class FemtopowerTile extends TileEntity implements IFemtopowerBlockContai
 	@Override
 	public boolean canConnect(ForgeDirection from) {
 		return true;
+	}
+
+	@Override
+	public void loadInfoFromItemNBT(NBTTagCompound compound) {
+		super.loadInfoFromItemNBT(compound);
+		container = FemtopowerContainer.createFromNBT(compound.getCompoundTag("power"));
+	}
+
+	@Override
+	public void saveInfoToItemNBT(NBTTagCompound compound) {
+		super.saveInfoToItemNBT(compound);
+       NBTTagCompound power = new NBTTagCompound();
+       container.saveToNBT(power);
+       compound.setTag("power", power);
 	}
 }

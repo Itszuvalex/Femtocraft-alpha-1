@@ -59,6 +59,9 @@ public class FemtopowerMicroCubeTile extends FemtopowerTile {
 	    }
 	               
 	    Packet250CustomPayload packet = new Packet250CustomPayload();
+	    
+	    
+	    
 	    packet.channel = packetChannel;
 	    packet.data = bos.toByteArray();
 	    packet.length = bos.size();

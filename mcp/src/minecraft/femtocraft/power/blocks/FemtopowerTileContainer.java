@@ -3,23 +3,20 @@
  */
 package femtocraft.power.blocks;
 
-import femtocraft.power.TileEntity.FemtopowerTile;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import femtocraft.blocks.FemtocraftTileContainer;
+import femtocraft.power.TileEntity.FemtopowerTile;
 
 /**
  * @author Itszuvalex
  *
  */
-public class FemtopowerTileContainer extends BlockContainer {
+public class FemtopowerTileContainer extends FemtocraftTileContainer {
 
 	public FemtopowerTileContainer(int par1, Material par2Material) {
 		super(par1, par2Material);

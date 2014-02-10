@@ -168,7 +168,8 @@ public class BlockMicroFurnace extends BlockContainer
 
             if (tileentityfurnace != null)
             {
-                par5EntityPlayer.openGui(Femtocraft.instance, 0, par1World, par2, par3, par4);
+            	if(tileentityfurnace.isUseableByPlayer(par5EntityPlayer))
+            		par5EntityPlayer.openGui(Femtocraft.instance, 0, par1World, par2, par3, par4);
             }
 
             return true;

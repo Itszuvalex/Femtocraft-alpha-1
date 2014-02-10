@@ -614,6 +614,8 @@ public class FemtocraftAssemblerRecipeManager {
 		
 			addDecompositionRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{new ItemStack(Item.paper, 3),null,null,null,null,null,null,null,null}, 0, new ItemStack(Femtocraft.paperSchematic), TechLevel.MACRO, null));
 			
+			addRecompositionRecipe(new FemtocraftAssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.spoolGold), new ItemStack(Femtocraft.spoolGold), new ItemStack(Femtocraft.spoolGold), new ItemStack(Femtocraft.conductivePowder), new ItemStack(Femtocraft.conductivePowder), new ItemStack(Femtocraft.conductivePowder), new ItemStack(Block.planks, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Block.planks, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Block.planks, 1, OreDictionary.WILDCARD_VALUE)}, 0, new ItemStack(Femtocraft.microCircuitBoard, 6), TechLevel.MACRO, null));
+			
 		}
 		catch(AssemblerRecipeFoundException e)
 		{
