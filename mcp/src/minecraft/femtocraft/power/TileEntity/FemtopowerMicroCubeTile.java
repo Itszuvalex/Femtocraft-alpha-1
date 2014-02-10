@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
+import femtocraft.api.FemtopowerContainer;
 import femtocraft.managers.research.TechLevel;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -22,12 +23,17 @@ public class FemtopowerMicroCubeTile extends FemtopowerTile {
 	public FemtopowerMicroCubeTile() {
 		super();
 		setMaxStorage(maxStorage);
-		setTechLevel(TechLevel.MICRO);
+		setTechLevel(techLevel);
 		outputs = new boolean[6];
 		Arrays.fill(outputs, false);
 		setTechLevel(techLevel);
 	}
 
+	public static FemtopowerContainer getDefaultContainer()
+	{
+		return new FemtopowerContainer(techLevel, maxStorage);
+	}
+	
 	public void onSideActivate(ForgeDirection side)
 	{
 		int i = FemtocraftUtils.indexOfForgeDirection(side);

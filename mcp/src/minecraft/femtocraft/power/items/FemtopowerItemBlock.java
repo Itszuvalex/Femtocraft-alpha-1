@@ -11,7 +11,7 @@ import femtocraft.api.FemtopowerContainer;
 import femtocraft.core.items.FemtocraftItemBlock;
 import femtocraft.power.TileEntity.FemtopowerMicroCubeTile;
 
-public class FemtopowerItemBlock extends FemtocraftItemBlock {
+public abstract class FemtopowerItemBlock extends FemtocraftItemBlock {
 
 	public FemtopowerItemBlock(int par1) {
 		super(par1);
@@ -46,7 +46,7 @@ public class FemtopowerItemBlock extends FemtocraftItemBlock {
 		
 		if(!init)
 		{
-			container = new FemtopowerContainer(FemtopowerMicroCubeTile.techLevel, FemtopowerMicroCubeTile.maxStorage);
+			container = getDefaultContainer();
 			container.saveToNBT(power);
 			nbt.setTag("power", power);
 		}
@@ -57,4 +57,6 @@ public class FemtopowerItemBlock extends FemtocraftItemBlock {
 		
 		container.addInformationToTooltip(par3List);
 	}
+	
+	public abstract FemtopowerContainer getDefaultContainer();
 }
