@@ -95,9 +95,14 @@ public class FemtopowerTile extends FemtocraftTile implements IFemtopowerBlockCo
 	 public void updateEntity()
     {	
 		checkConnections();
-		
+		super.updateEntity();
+    }
+	
+	@Override
+	public void femtocraftServerUpdate()
+	{
 		//Don't do anything for empty containers
-		if(container.getCurrentPower() <= 0 || this.worldObj.isRemote) {
+		if(container.getCurrentPower() <= 0) {
 			return;
 		}
 		
@@ -191,8 +196,7 @@ public class FemtopowerTile extends FemtocraftTile implements IFemtopowerBlockCo
 			   }
 		   }
        }
-		   
-    }
+	}
 	
 	 public void readFromNBT(NBTTagCompound par1NBTTagCompound)
     {

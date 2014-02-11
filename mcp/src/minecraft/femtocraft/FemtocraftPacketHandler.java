@@ -36,15 +36,15 @@ public class FemtocraftPacketHandler  implements IPacketHandler {
     	
     	DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
     	
-       	if(packet.channel.equalsIgnoreCase(Femtocraft.ID))
-        {
-       		
-        }
-       	else if(packet.channel.equalsIgnoreCase(FemtopowerMicroCubeTile.packetChannel))
-       	{
-       		handleMicroCube(inputStream, playerEntity);
-       	}
-       	else if(packet.channel.equalsIgnoreCase(VacuumTubeTile.packetChannel))
+//       	if(packet.channel.equalsIgnoreCase(Femtocraft.ID))
+//        {
+//       		
+//        }
+//       	else if(packet.channel.equalsIgnoreCase(FemtopowerMicroCubeTile.packetChannel))
+//       	{
+//       		handleMicroCube(inputStream, playerEntity);
+//       	}
+       	if(packet.channel.equalsIgnoreCase(VacuumTubeTile.packetChannel))
        	{
        		handleVacuumTube(inputStream, playerEntity);
        	}
@@ -120,12 +120,12 @@ public class FemtocraftPacketHandler  implements IPacketHandler {
    			int x = stream.readInt();
    			int y = stream.readInt();
    			int z = stream.readInt();
-
-   			if(!(player instanceof EntityClientPlayerMP)) return;
-   			
-   			
-			EntityClientPlayerMP cp = (EntityClientPlayerMP)player;
-			
+//
+//   			if(!(player instanceof EntityClientPlayerMP)) return;
+//   			
+//   			
+//			EntityClientPlayerMP cp = (EntityClientPlayerMP)player;
+//			
 			TileEntity te = DimensionManager.getWorld(world).getBlockTileEntity(x, y, z);
 			if(te == null) return;		
 			if(!(te instanceof FemtocraftTile)) return;

@@ -9,7 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import femtocraft.blocks.FemtocraftTileContainer;
+import femtocraft.core.blocks.FemtocraftTileContainer;
 import femtocraft.power.TileEntity.FemtopowerTile;
 
 /**

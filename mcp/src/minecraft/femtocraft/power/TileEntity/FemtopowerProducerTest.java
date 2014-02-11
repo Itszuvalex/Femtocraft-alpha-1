@@ -14,10 +14,10 @@ public class FemtopowerProducerTest extends FemtopowerProducer {
 	}
 
 	@Override
-	 public void updateEntity() {
-		if(!this.worldObj.isRemote)
-			charge(ForgeDirection.UNKNOWN, amountPerTick);
-		super.updateEntity();
+	public void femtocraftServerUpdate()
+	{
+		super.femtocraftServerUpdate();
+		charge(ForgeDirection.UNKNOWN, amountPerTick);
 	}
 	
 	@Override

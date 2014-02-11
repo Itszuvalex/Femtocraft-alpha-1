@@ -2,6 +2,8 @@ package femtocraft.transport.liquids;
 
 import java.util.Arrays;
 
+import femtocraft.api.ISuctionPipe;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,7 +18,7 @@ import net.minecraftforge.liquids.ILiquidTank;
 import net.minecraftforge.liquids.ITankContainer;
 import net.minecraftforge.liquids.LiquidStack;
 
-public class SuctionTubeTile extends TileEntity implements IFluidHandler {
+public class SuctionPipeTile extends TileEntity implements ISuctionPipe {
 	private FluidTank tank;
 	public boolean[] connections;
 	private int[] neighborCapacity;
@@ -26,7 +28,7 @@ public class SuctionTubeTile extends TileEntity implements IFluidHandler {
 	/* (non-Javadoc)
 	 * @see net.minecraftforge.liquids.ITankContainer#fill(net.minecraftforge.common.ForgeDirection, net.minecraftforge.liquids.LiquidStack, boolean)
 	 */
-	SuctionTubeTile() {
+	SuctionPipeTile() {
 		tank = new FluidTank(2000);
 		neighborCapacity = new int[6];
 		Arrays.fill(neighborCapacity, 0);
@@ -164,5 +166,11 @@ public class SuctionTubeTile extends TileEntity implements IFluidHandler {
 		super.writeToNBT(par1nbtTagCompound);
 		tank.writeToNBT(par1nbtTagCompound);
 		par1nbtTagCompound.setBoolean("output", output);
+	}
+
+
+	@Override
+	public float getPressure() {
+		return pressure;
 	}
 }

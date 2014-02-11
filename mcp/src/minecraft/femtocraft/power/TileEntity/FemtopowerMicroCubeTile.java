@@ -38,43 +38,27 @@ public class FemtopowerMicroCubeTile extends FemtopowerTile {
 	{
 		int i = FemtocraftUtils.indexOfForgeDirection(side);
 		outputs[i] = !outputs[i];
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 	}
+
+//	@Override
+//	public String getPacketChannel() {
+//		return packetChannel;
+//	}
 	
-	private void sendSideStateToClients(ForgeDirection side)
-	{
-		
+	@Override
+	public void handleDescriptionNBT(NBTTagCompound compound) {
+		super.handleDescriptionNBT(compound);
+		parseOutputMask(compound.getByte("output"));
 	}
 
 	@Override
-	public Packet getDescriptionPacket() {
-		return generatePacket();
+	public void saveToDescriptionCompound(NBTTagCompound compound) {
+		super.saveToDescriptionCompound(compound);
+		compound.setByte("output", generateOutputMask());
 	}
-	
-	private Packet250CustomPayload generatePacket()
-	{
-	    ByteArrayOutputStream bos = new ByteArrayOutputStream(13);
-	    DataOutputStream outputStream = new DataOutputStream(bos);
-	    try {
-	        outputStream.writeInt(xCoord);
-	        outputStream.writeInt(yCoord);
-	        outputStream.writeInt(zCoord);
-	        //write the relevant information here... exemple:
-	       outputStream.writeByte(generateOutputMask()); 
-	    } catch (Exception ex) {
-	        ex.printStackTrace();
-	    }
-	               
-	    Packet250CustomPayload packet = new Packet250CustomPayload();
-	    
-	    
-	    
-	    packet.channel = packetChannel;
-	    packet.data = bos.toByteArray();
-	    packet.length = bos.size();
-	    
-	    return packet;
-	}
-	
+
 	public byte generateOutputMask()
 	{
 		byte output = 0;
@@ -139,18 +123,13 @@ public class FemtopowerMicroCubeTile extends FemtopowerTile {
 	@Override
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
-		for(int i = 0; i < 6; i++) {
-			outputs[i] = par1nbtTagCompound.getBoolean("output" + i);
-		}
+		parseOutputMask(par1nbtTagCompound.getByte("output"));
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeToNBT(par1nbtTagCompound);
-		
-		for(int i = 0; i < 6; i++) {
-			par1nbtTagCompound.setBoolean("output" + i, outputs[i]);
-		}
+		par1nbtTagCompound.setByte("output", generateOutputMask());
 	}
 
 }

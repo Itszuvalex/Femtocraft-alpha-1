@@ -1,12 +1,7 @@
-package femtocraft.blocks;
+package femtocraft.core.blocks;
 
 import java.util.Random;
 
-import femtocraft.Femtocraft;
-import femtocraft.api.FemtopowerContainer;
-import femtocraft.core.tiles.FemtocraftTile;
-import femtocraft.power.TileEntity.FemtopowerMicroCubeTile;
-import femtocraft.power.TileEntity.FemtopowerTile;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -17,9 +12,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import femtocraft.Femtocraft;
+import femtocraft.core.tiles.FemtocraftTile;
+import femtocraft.power.TileEntity.FemtopowerTile;
 
 public class FemtocraftTileContainer extends BlockContainer {
 
@@ -115,14 +113,18 @@ public class FemtocraftTileContainer extends BlockContainer {
 			int y, int z) {
 		TileEntity te = world.getBlockTileEntity(x, y, z);
 		if(!(te instanceof FemtocraftTile)) return false;
-		if(!canPlayerRemove(player, (FemtocraftTile) te)) return false;
+		if(!canPlayerRemove(player, (FemtocraftTile) te))
+		{ 
+			player.addChatMessage("You do not own this block.");
+			return false;
+		}
 		return super.removeBlockByPlayer(world, player, x, y, z);
 	}
 
 	private boolean canPlayerRemove(EntityPlayer player, FemtocraftTile tile)
 	{
 		if(player == null) return false;
-		return tile.getOwner().equals(player.username);
+		return tile.getOwner().equals(player.username) || MinecraftServer.getServer().getConfigurationManager().isPlayerOpped(player.username) || player.capabilities.isCreativeMode;
 	}
 	
 	@Override

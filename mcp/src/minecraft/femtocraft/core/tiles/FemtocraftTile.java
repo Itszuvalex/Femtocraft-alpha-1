@@ -14,6 +14,8 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import femtocraft.Femtocraft;
+import femtocraft.FemtocraftConfigs;
+import femtocraft.FemtocraftUtils;
 
 public class FemtocraftTile extends TileEntity {
 	private String owner;
@@ -39,6 +41,31 @@ public class FemtocraftTile extends TileEntity {
         boolean isowner = owner.isEmpty() || (owner.equals(par1EntityPlayer.username));
         return inrange && isowner;
     }
+	 
+	@Override
+	public void updateEntity() {
+		super.updateEntity();
+		
+		if(worldObj.isRemote) return;
+		if(!shouldTick()) return;
+		
+		femtocraftServerUpdate();
+	}
+
+	public boolean shouldTick()
+	{
+		if(FemtocraftConfigs.requirePlayersOnlineForTileEntityTicks)
+			return FemtocraftUtils.isPlayerOnline(owner);
+		
+		return true;
+	}
+	
+	/**
+	 *  Gated update call.  This will only be called on the server, and only if the tile's {@link #shouldTick()} returns true.
+	 *  This should be used instead of updateEntity() for heavy computation, unless the tile absolutely needs to update.
+	 */
+	public void femtocraftServerUpdate()
+	{}
 	
 	@Override
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
@@ -68,7 +95,7 @@ public class FemtocraftTile extends TileEntity {
 	        outputStream.writeInt(xCoord);
 	        outputStream.writeInt(yCoord);
 	        outputStream.writeInt(zCoord);
-			CompressedStreamTools.writeCompressed(compound, bos);
+			CompressedStreamTools.writeCompressed(compound, outputStream);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -92,6 +119,7 @@ public class FemtocraftTile extends TileEntity {
 	
 	public void loadInfoFromItemNBT(NBTTagCompound compound)
 	{
+		if(compound == null) return;
 		owner = compound.getString(NBT_TAG);
 	}
 	

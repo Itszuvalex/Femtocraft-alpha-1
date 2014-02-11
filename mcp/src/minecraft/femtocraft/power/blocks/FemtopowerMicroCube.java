@@ -88,7 +88,6 @@ public class FemtopowerMicroCube extends FemtopowerTileContainer {
 				}
 				
 				tile.onSideActivate(dir);
-				par1World.markBlockForUpdate(par2, par3, par4);
 			}
 			return true;
 		}

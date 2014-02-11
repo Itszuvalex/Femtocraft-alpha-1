@@ -14,10 +14,9 @@ public class FemtopowerConsumerTest extends FemtopowerConsumer {
 	}
 
 	@Override
-	 public void updateEntity() {
-		if(!this.worldObj.isRemote)
-			consume(amountPerTick);
-		super.updateEntity();
+	public void femtocraftServerUpdate() {
+		super.femtocraftServerUpdate();
+		consume(amountPerTick);
 	}
 	
 	@Override
