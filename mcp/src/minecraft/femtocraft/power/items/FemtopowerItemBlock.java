@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.api.FemtopowerContainer;
@@ -59,4 +60,19 @@ public abstract class FemtopowerItemBlock extends FemtocraftItemBlock {
 	}
 	
 	public abstract FemtopowerContainer getDefaultContainer();
+
+	@Override
+	public void onCreated(ItemStack par1ItemStack, World par2World,
+			EntityPlayer par3EntityPlayer) {
+		super.onCreated(par1ItemStack, par2World, par3EntityPlayer);
+		
+		NBTTagCompound nbt = par1ItemStack.getTagCompound();
+		if(nbt == null)
+		{
+			nbt = par1ItemStack.stackTagCompound = new NBTTagCompound();
+		}
+		NBTTagCompound power = new NBTTagCompound();
+		getDefaultContainer().saveToNBT(power);
+		nbt.setTag("power", power);
+	}
 }
