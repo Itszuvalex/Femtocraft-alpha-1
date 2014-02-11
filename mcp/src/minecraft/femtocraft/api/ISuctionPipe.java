@@ -13,5 +13,5 @@ public interface ISuctionPipe extends IFluidHandler {
 	 * 
 	 * @return Pressure of this pipe.  Liquids will flow from high pressure to low pressure pipes.
 	 */
-	public float getPressure();
+	public int getPressure();
 }

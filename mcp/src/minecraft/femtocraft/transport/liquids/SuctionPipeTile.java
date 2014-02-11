@@ -20,7 +20,8 @@ import net.minecraftforge.liquids.LiquidStack;
 
 public class SuctionPipeTile extends TileEntity implements ISuctionPipe {
 	private FluidTank tank;
-	public boolean[] connections;
+	public boolean[] tankconnections;
+	private boolean[] pipeconnections;
 	private int[] neighborCapacity;
 	private boolean output;
 	private int pressure;
@@ -32,8 +33,10 @@ public class SuctionPipeTile extends TileEntity implements ISuctionPipe {
 		tank = new FluidTank(2000);
 		neighborCapacity = new int[6];
 		Arrays.fill(neighborCapacity, 0);
-		Arrays.fill(connections, false);
-		output = false;
+		Arrays.fill(tankconnections, false);
+		Arrays.fill(pipeconnections, false);
+		output = true;
+		pressure = 0;
 	}
 	
 
@@ -82,37 +85,82 @@ public class SuctionPipeTile extends TileEntity implements ISuctionPipe {
 		if(this.worldObj.isRemote) return;
 
 		checkConnections();
-		
+		calculatePressure();
 		distributeLiquid();
 	}
-	
+
 	private void checkConnections() {
 		Arrays.fill(neighborCapacity, 0);
-		Arrays.fill(connections, false);
+		Arrays.fill(tankconnections, false);
+		Arrays.fill(pipeconnections, false);
 		
-//		for(int i=0; i < 6; i++) {
-//			ForgeDirection dir = ForgeDirection.getOrientation(i);
-//			
-//			int locx = this.xCoord + dir.offsetX;
-//			int locy = this.yCoord + dir.offsetY;
-//			int locz = this.zCoord + dir.offsetZ;
-//			
-//			TileEntity checkTile = this.worldObj.getBlockTileEntity(locx, locy, locz);
-//	 		   
-//	 		if(checkTile != null && (checkTile instanceof IFluidHandler)) {
-//	 			connections[i] = true;
-//	 			
-//	 			IFluidHandler fluidTank = (IFluidHandler)checkTile;
-//	 			fluidTank.d
-//	 			
-//	 			FluidTankInfo[] tanks = fluidTank.getTankInfo(dir.getOpposite());
-//	 			
-//	 			for(FluidTankInfo info : tanks)
-//	 			{
-//	 				if
-//	 			}
-//	 		}
-//		}
+		for(int i=0; i < 6; i++) {
+			ForgeDirection dir = ForgeDirection.getOrientation(i);
+			
+			int locx = this.xCoord + dir.offsetX;
+			int locy = this.yCoord + dir.offsetY;
+			int locz = this.zCoord + dir.offsetZ;
+			
+			TileEntity checkTile = this.worldObj.getBlockTileEntity(locx, locy, locz);
+	 		   
+	 		if(checkTile != null)
+	 		{
+	 			if(checkTile instanceof ISuctionPipe)
+	 			{
+	 				pipeconnections[i] = true;
+	 			}
+	 			else if(checkTile instanceof IFluidHandler)
+	 			{
+	 				tankconnections[i] = true;
+
+	 			}
+	 		}
+		}
+	}
+	
+	
+	private void calculatePressure() {
+		pressure = 0;
+		int totalPressure = 0;
+		int pipeCount = 0;
+		for(int i = 0; i < 6; ++i)
+		{
+			//If connected to a tank
+			//If outputting, negative pressure equal to remaining space
+			//If inputting, positive pressure equal to amount of fluid in the tank
+			if(tankconnections[i])
+			{
+				ForgeDirection dir = ForgeDirection.getOrientation(i);
+				IFluidHandler tank = (IFluidHandler) worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+				FluidTankInfo[] info = tank.getTankInfo(dir.getOpposite());
+				++pipeCount;
+				totalPressure += getTankPressure(info[0], output);
+			}
+			
+			//Otherwise, ask pipe for its pressure
+			if(pipeconnections[i])
+			{
+				ForgeDirection dir = ForgeDirection.getOrientation(i);
+				ISuctionPipe pipe = (ISuctionPipe) worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+				
+				++pipeCount;
+				totalPressure += pipe.getPressure();
+			}
+		}
+		
+		pressure = totalPressure/pipeCount;
+	}
+
+	/**
+	 * 
+	 * @param tank
+	 * @param output
+	 * @return Negative if outputting into tank, equal to space remaining in tank.  
+	 * If input, positive pressure equal to amount of fluid remaining in tank.
+	 */
+	private int getTankPressure(FluidTankInfo tank, boolean output)
+	{
+		return output ? -(tank.capacity - tank.fluid.amount) : tank.fluid.amount;
 	}
 	
 	private void distributeLiquid() {
@@ -170,7 +218,7 @@ public class SuctionPipeTile extends TileEntity implements ISuctionPipe {
 
 
 	@Override
-	public float getPressure() {
+	public int getPressure() {
 		return pressure;
 	}
 }
