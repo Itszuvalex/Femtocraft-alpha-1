@@ -19,7 +19,6 @@ import net.minecraft.world.World;
 import femtocraft.Femtocraft;
 import femtocraft.core.items.FemtocraftItemBlock;
 import femtocraft.core.tiles.FemtocraftTile;
-import femtocraft.power.TileEntity.FemtopowerTile;
 
 public class FemtocraftTileContainer extends BlockContainer {
 
@@ -98,9 +97,9 @@ public class FemtocraftTileContainer extends BlockContainer {
 	public void breakBlock(World par1World, int par2, int par3, int par4,
 			int par5, int par6) {
 		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
-		if(te != null && te instanceof FemtopowerTile)
+		if(te != null && te instanceof FemtocraftTile)
 		{
-			FemtopowerTile tile = (FemtopowerTile) te;
+			FemtocraftTile tile = (FemtocraftTile) te;
 			
 			ItemStack stack = new ItemStack(Block.blocksList[par5]);
 			Item item = stack.getItem();
