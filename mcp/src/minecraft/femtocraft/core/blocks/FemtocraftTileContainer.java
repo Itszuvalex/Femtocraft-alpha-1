@@ -10,12 +10,14 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import femtocraft.Femtocraft;
+import femtocraft.core.items.FemtocraftItemBlock;
 import femtocraft.core.tiles.FemtocraftTile;
 import femtocraft.power.TileEntity.FemtopowerTile;
 
@@ -76,10 +78,14 @@ public class FemtocraftTileContainer extends BlockContainer {
 				if(par5EntityLivingBase == null) return;
 				if(par5EntityLivingBase instanceof EntityPlayerMP)
 				{
-					((FemtocraftTile) te).loadInfoFromItemNBT(par6ItemStack.stackTagCompound);
-					if(((FemtocraftTile) te).getOwner().isEmpty())
+					Item item = par6ItemStack.getItem();
+					if((item instanceof FemtocraftItemBlock) && (((FemtocraftItemBlock)item).hasItemNBT()))
 					{
-						((FemtocraftTile) te).setOwner(((EntityPlayerMP) par5EntityLivingBase).username);
+						((FemtocraftTile) te).loadInfoFromItemNBT(par6ItemStack.stackTagCompound);
+						if(((FemtocraftTile) te).getOwner().isEmpty())
+						{
+							((FemtocraftTile) te).setOwner(((EntityPlayerMP) par5EntityLivingBase).username);
+						}
 					}
 				}
 			}
@@ -97,17 +103,22 @@ public class FemtocraftTileContainer extends BlockContainer {
 			FemtopowerTile tile = (FemtopowerTile) te;
 			
 			ItemStack stack = new ItemStack(Block.blocksList[par5]);
-			if(!stack.hasTagCompound())
+			Item item = stack.getItem();
+			if((item instanceof FemtocraftItemBlock) && (((FemtocraftItemBlock)item).hasItemNBT()))
 			{
-				stack.stackTagCompound = new NBTTagCompound();
-			}
+				if(!stack.hasTagCompound())
+				{
+					stack.stackTagCompound = new NBTTagCompound();
+				}
 			
-			tile.saveInfoToItemNBT(stack.stackTagCompound);
+				tile.saveInfoToItemNBT(stack.stackTagCompound);
+			}
 			
 			par1World.spawnEntityInWorld(new EntityItem(par1World, par2 + .5d, par3 + .5d, par4 + .5d, stack));
 		}
 		super.breakBlock(par1World, par2, par3, par4, par5, par6);
 	}
+	
 	@Override
 	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x,
 			int y, int z) {

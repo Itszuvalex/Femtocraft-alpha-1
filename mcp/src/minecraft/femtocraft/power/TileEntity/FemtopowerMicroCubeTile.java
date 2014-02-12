@@ -3,6 +3,7 @@ package femtocraft.power.TileEntity;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.util.Arrays;
+import java.util.logging.Level;
 
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
@@ -39,7 +40,6 @@ public class FemtopowerMicroCubeTile extends FemtopowerTile {
 		int i = FemtocraftUtils.indexOfForgeDirection(side);
 		outputs[i] = !outputs[i];
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 	}
 
 //	@Override
@@ -93,6 +93,9 @@ public class FemtopowerMicroCubeTile extends FemtopowerTile {
 			temp = mask;
 			outputs[i] = (((temp >> i) & 1) == 1) ? true : false;
 		}
+		
+		if(worldObj != null)
+			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override

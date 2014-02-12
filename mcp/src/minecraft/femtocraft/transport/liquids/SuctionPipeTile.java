@@ -134,6 +134,8 @@ public class SuctionPipeTile extends TileEntity implements ISuctionPipe {
 				IFluidHandler tank = (IFluidHandler) worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 				FluidTankInfo[] info = tank.getTankInfo(dir.getOpposite());
 				++pipeCount;
+				
+				//TODO: smarter tank selection
 				totalPressure += getTankPressure(info[0], output);
 			}
 			

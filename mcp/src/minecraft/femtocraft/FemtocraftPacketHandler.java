@@ -4,16 +4,15 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 import femtocraft.core.tiles.FemtocraftTile;
@@ -120,17 +119,22 @@ public class FemtocraftPacketHandler  implements IPacketHandler {
    			int x = stream.readInt();
    			int y = stream.readInt();
    			int z = stream.readInt();
-//
+
+   			NBTTagCompound compound = CompressedStreamTools.readCompressed(stream);
+   			
+   			
 //   			if(!(player instanceof EntityClientPlayerMP)) return;
 //   			
 //   			
 //			EntityClientPlayerMP cp = (EntityClientPlayerMP)player;
 //			
-			TileEntity te = DimensionManager.getWorld(world).getBlockTileEntity(x, y, z);
+   			World worldObj =  DimensionManager.getWorld(world);
+			TileEntity te = worldObj.getBlockTileEntity(x, y, z);
 			if(te == null) return;		
 			if(!(te instanceof FemtocraftTile)) return;
 			FemtocraftTile tile = (FemtocraftTile)te;
-			tile.handleDescriptionNBT(CompressedStreamTools.readCompressed(stream));
+			tile.handleDescriptionNBT(compound);
+			worldObj.markBlockForRenderUpdate(x, y, z);
    		}
    		catch(IOException e)
    		{

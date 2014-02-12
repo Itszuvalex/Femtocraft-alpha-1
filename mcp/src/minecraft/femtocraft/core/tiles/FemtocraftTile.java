@@ -80,8 +80,15 @@ public class FemtocraftTile extends TileEntity {
 		par1nbtTagCompound.setString(NBT_TAG, owner);
 	}
 
+	public boolean hasDescription()
+	{
+		return true;
+	}
+	
 	@Override
 	public Packet getDescriptionPacket() {
+		if(!hasDescription()) return null;
+		
 		Packet250CustomPayload packet = new Packet250CustomPayload();
 		
 		NBTTagCompound compound = new NBTTagCompound();
@@ -107,6 +114,11 @@ public class FemtocraftTile extends TileEntity {
 		return packet;
 	}
 	
+	public String getPacketChannel()
+	{
+		return Femtocraft.ID;
+	}
+	
 	public void handleDescriptionNBT(NBTTagCompound compound)
 	{
 		owner = compound.getString(NBT_TAG);
@@ -116,7 +128,7 @@ public class FemtocraftTile extends TileEntity {
 	{
 		compound.setString(NBT_TAG, owner);
 	}
-	
+
 	public void loadInfoFromItemNBT(NBTTagCompound compound)
 	{
 		if(compound == null) return;
@@ -127,10 +139,6 @@ public class FemtocraftTile extends TileEntity {
 	{
 		compound.setString(NBT_TAG, owner);
 	}
-	
-	public String getPacketChannel()
-	{
-		return Femtocraft.ID;
-	}
+
 
 }

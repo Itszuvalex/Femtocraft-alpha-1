@@ -403,14 +403,14 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		Point BC = new Point(12.0F/16.0F, 4.0F/16.0F, -2.0F/16.0F + offset);
 		Point BD = new Point(12.0F/16.0F, 12.0F/16.0F, -2.0F/16.0F + offset);
 
-		Quad a = new Quad(AD.copy(), AC.copy(), AB.copy(), AA.copy(), cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
-		Quad ar = new Quad(AA.copy(), AB.copy(), AC.copy(), AD.copy(), cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
-		Quad b = new Quad(BD.copy(), BC.copy(), BB.copy(), BA.copy(), cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
-		Quad br = new Quad(BA.copy(), BB.copy(), BC.copy(), BD.copy(), cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
-		Quad c = new Quad(BA.copy(), AD.copy(), AA.copy(), BD.copy(), cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
-		Quad cr = new Quad(BD.copy(), AA.copy(), AD.copy(), BA.copy(), cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
-		Quad d = new Quad(BC.copy(), AB.copy(), AC.copy(), BB.copy(), cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
-		Quad dr = new Quad(BB.copy(), AC.copy(), AB.copy(), BC.copy(), cable.border, cable.border.getMinU(), cable.border.getMaxU() - 2.0F *(cable.border.getMaxU() - cable.border.getMinU())/3.0F, cable.border.getMinV(), cable.border.getMaxV());
+		Quad a = new Quad(AD.copy(), AC.copy(), AB.copy(), AA.copy(), cable.border, cable.border.getMinU(), cable.border.getInterpolatedU(8.f), cable.border.getMinV(), cable.border.getMaxV());
+		Quad ar = new Quad(AA.copy(), AB.copy(), AC.copy(), AD.copy(), cable.border, cable.border.getMinU(), cable.border.getInterpolatedU(8.f), cable.border.getMinV(), cable.border.getMaxV());
+		Quad b = new Quad(BD.copy(), BC.copy(), BB.copy(), BA.copy(), cable.border, cable.border.getMinU(), cable.border.getInterpolatedU(8.f), cable.border.getMinV(), cable.border.getMaxV());
+		Quad br = new Quad(BA.copy(), BB.copy(), BC.copy(), BD.copy(), cable.border, cable.border.getMinU(), cable.border.getInterpolatedU(8.f), cable.border.getMinV(), cable.border.getMaxV());
+		Quad c = new Quad(BA.copy(), AD.copy(), AA.copy(), BD.copy(), cable.border, cable.border.getMinU(), cable.border.getInterpolatedU(8.f), cable.border.getMinV(), cable.border.getMaxV());
+		Quad cr = new Quad(BD.copy(), AA.copy(), AD.copy(), BA.copy(), cable.border, cable.border.getMinU(), cable.border.getInterpolatedU(8.f), cable.border.getMinV(), cable.border.getMaxV());
+		Quad d = new Quad(BC.copy(), AB.copy(), AC.copy(), BB.copy(), cable.border, cable.border.getMinU(), cable.border.getInterpolatedU(8.f), cable.border.getMinV(), cable.border.getMaxV());
+		Quad dr = new Quad(BB.copy(), AC.copy(), AB.copy(), BC.copy(), cable.border, cable.border.getMinU(), cable.border.getInterpolatedU(8.f), cable.border.getMinV(), cable.border.getMaxV());
 		
 		Coil.addQuad(a);
 		Coil.addQuad(ar);

@@ -24,32 +24,46 @@ public class FemtocraftItemBlock extends ItemBlock {
 	}
 
 	
+	/**
+	 * 
+	 * @return true if this block, when in item form, should have NBTData.  If you want this block to be stackable in item form, this must return false.
+	 * 	Otherwise, Femtocraft will add NBT data automatically.
+	 */
+	public boolean hasItemNBT()
+	{
+		return true;
+	}
+	
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 		super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
 
-		NBTTagCompound nbt = par1ItemStack.getTagCompound();
-		if(nbt == null)
+		if(hasItemNBT())
 		{
-			nbt = par1ItemStack.stackTagCompound = new NBTTagCompound();
+			NBTTagCompound nbt = par1ItemStack.getTagCompound();
+			if(nbt == null)
+			{
+				nbt = par1ItemStack.stackTagCompound = new NBTTagCompound();
+			}
+			
+			String owner = nbt.getString("owner");
+	
+			String ownerLabelString = EnumChatFormatting.GRAY + "Owner:" + EnumChatFormatting.RESET;
+			String ownerString;
+			if(owner.isEmpty())
+			{
+				ownerString = EnumChatFormatting.ITALIC + "unassigned" + EnumChatFormatting.RESET;
+			}
+			else
+			{
+				ownerString = owner;
+			}
+			
+			par3List.add(new String().format("%s %s", ownerLabelString, ownerString));
 		}
-		
-		String owner = nbt.getString("owner");
-
-		String ownerLabelString = EnumChatFormatting.GRAY + "Owner:" + EnumChatFormatting.RESET;
-		String ownerString;
-		if(owner.isEmpty())
-		{
-			ownerString = EnumChatFormatting.ITALIC + "unassigned" + EnumChatFormatting.RESET;
-		}
-		else
-		{
-			ownerString = owner;
-		}
-		
-		par3List.add(new String().format("%s %s", ownerLabelString, ownerString));
 	}
 
 
