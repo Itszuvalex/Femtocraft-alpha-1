@@ -22,6 +22,7 @@ public class FemtocraftTile extends TileEntity {
 	private final String NBT_TAG = "owner";
 	
 	public FemtocraftTile() {
+		super();
 		owner = "";
 	}
 
@@ -35,7 +36,7 @@ public class FemtocraftTile extends TileEntity {
 		this.owner = owner;
 	}
 	
-	 public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
     {
         boolean inrange =  this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : par1EntityPlayer.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
         boolean isowner = owner.isEmpty() || (owner.equals(par1EntityPlayer.username));
@@ -139,6 +140,4 @@ public class FemtocraftTile extends TileEntity {
 	{
 		compound.setString(NBT_TAG, owner);
 	}
-
-
 }

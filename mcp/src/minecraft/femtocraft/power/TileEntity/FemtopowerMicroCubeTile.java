@@ -68,19 +68,6 @@ public class FemtopowerMicroCubeTile extends FemtopowerTile {
 			if(outputs[i])
 				output += 1 << i;
 		}
-//		if(outputs[0])
-//			output += 1;
-//		if(outputs[1])
-//			output+= 1<<1;
-//		if(outputs[2])
-//			output+= 1<<2;
-//		if(outputs[3])
-//			output+= 1<<3;
-//		if(outputs[4])
-//			output+= 1<<4;
-//		if(outputs[5])
-//			output+= 1<<5;
-//		
 		return output;
 	}
 	

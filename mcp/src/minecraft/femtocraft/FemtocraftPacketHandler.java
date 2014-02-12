@@ -134,7 +134,6 @@ public class FemtocraftPacketHandler  implements IPacketHandler {
 			if(!(te instanceof FemtocraftTile)) return;
 			FemtocraftTile tile = (FemtocraftTile)te;
 			tile.handleDescriptionNBT(compound);
-			worldObj.markBlockForRenderUpdate(x, y, z);
    		}
    		catch(IOException e)
    		{

@@ -18,6 +18,7 @@ public class FemtopowerTile extends FemtocraftTile implements IFemtopowerBlockCo
 	public boolean[] connections;
 	
 	public FemtopowerTile() {
+		super();
 		container = new FemtopowerContainer(TechLevel.MACRO, 250);
 		maxPowerPerTick = .05f;
 		maxSizePackets = .05f;   //Yes this is the same as maxpertick, this breaks if it isn't, for some reason  TODO

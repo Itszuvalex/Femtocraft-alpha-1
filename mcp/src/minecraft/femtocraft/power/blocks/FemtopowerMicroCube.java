@@ -1,5 +1,6 @@
 package femtocraft.power.blocks;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -50,7 +51,6 @@ public class FemtopowerMicroCube extends FemtopowerTileContainer {
 		FemtopowerMicroCubeTile cube = (FemtopowerMicroCubeTile)te;
 		return cube.outputs[side] ? outputSide : inputSide;
 	}
-
 	
 //	@Override
 //	public boolean isOpaqueCube() {
@@ -101,5 +101,12 @@ public class FemtopowerMicroCube extends FemtopowerTileContainer {
 		this.blockIcon = inputSide = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()+":" + "MicroCube_input");
 		outputSide = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()+":" + "MicroCube_output");
 //		side = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "MicroCube_side");
+	}
+
+	@Override
+	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y,
+			int z, int metadata, int fortune) {
+		// TODO Auto-generated method stub
+		return super.getBlockDropped(world, x, y, z, metadata, fortune);
 	}
 }
