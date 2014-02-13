@@ -1439,10 +1439,8 @@ public class FemtocraftAssemblerRecipeManager {
 
 	public boolean removeRecompositionRecipe(FemtocraftAssemblerRecipe recipe) {
 		ItemStack[] normal = normalizedInput(recipe);
-		if (normal == null)
-			return false;
-		return (inputToRecipeMap.remove(normal) != null);
-	}
+        return normal != null && (inputToRecipeMap.remove(normal) != null);
+    }
 
 	public boolean removeDecompositionRecipe(FemtocraftAssemblerRecipe recipe) {
 		return (outputToRecipeMap.remove(normalizedOutput(recipe)) != null);

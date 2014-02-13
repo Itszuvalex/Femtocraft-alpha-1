@@ -32,11 +32,8 @@ public class FemtocraftResearchManager {
 
 	public boolean addTechnology(Technology tech) {
 		TechnologyAddedEvent event = new TechnologyAddedEvent(tech);
-		if (!MinecraftForge.EVENT_BUS.post(event)) {
-			return technologies.put(tech.name, tech) != null;
-		}
-		return false;
-	}
+        return !MinecraftForge.EVENT_BUS.post(event) && technologies.put(tech.name, tech) != null;
+    }
 
 	public boolean removeTechnology(Technology tech) {
 		return technologies.remove(tech.name) != null;
@@ -77,10 +74,8 @@ public class FemtocraftResearchManager {
 
 	public boolean hasPlayerDiscoveredTechnology(String username, String tech) {
 		PlayerResearch pr = playerData.get(username);
-		if (pr == null)
-			return false;
-		return pr.hasDiscoveredTechnology(tech);
-	}
+        return pr != null && pr.hasDiscoveredTechnology(tech);
+    }
 
 	// --------------------------------------------------
 
@@ -91,10 +86,8 @@ public class FemtocraftResearchManager {
 
 	public boolean hasPlayerResearchedTechnology(String username, String tech) {
 		PlayerResearch pr = playerData.get(username);
-		if (pr == null)
-			return false;
-		return pr.hasResearchedTechnology(tech);
-	}
+        return pr != null && pr.hasResearchedTechnology(tech);
+    }
 
 	// --------------------------------------------------
 

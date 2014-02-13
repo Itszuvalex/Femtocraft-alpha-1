@@ -126,13 +126,8 @@ public class FemtocraftTileContainer extends BlockContainer {
 	}
 
 	private boolean canPlayerRemove(EntityPlayer player, FemtocraftTile tile) {
-		if (player == null)
-			return false;
-		return tile.getOwner().equals(player.username)
-				|| MinecraftServer.getServer().getConfigurationManager()
-						.isPlayerOpped(player.username)
-				|| player.capabilities.isCreativeMode;
-	}
+        return player != null && (tile.getOwner().equals(player.username) || MinecraftServer.getServer().getConfigurationManager().isPlayerOpped(player.username) || player.capabilities.isCreativeMode);
+    }
 
 	@Override
 	public boolean canEntityDestroy(World world, int x, int y, int z,
@@ -142,10 +137,8 @@ public class FemtocraftTileContainer extends BlockContainer {
 			return false;
 		if (!(entity instanceof EntityPlayer))
 			return false;
-		if (!canPlayerRemove((EntityPlayer) entity, (FemtocraftTile) te))
-			return false;
-		return super.canEntityDestroy(world, x, y, z, entity);
-	}
+        return canPlayerRemove((EntityPlayer) entity, (FemtocraftTile) te) && super.canEntityDestroy(world, x, y, z, entity);
+    }
 
 	@Override
 	public int quantityDropped(Random par1Random) {

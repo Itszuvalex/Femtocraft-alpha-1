@@ -44,10 +44,7 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 
 	public ItemStack queuedItem = null;
 
-	private int lastOutputOrientation = 0;
-	private int lastInputOrientation = 0;
-
-	private boolean overflowing = false;
+    private boolean overflowing = false;
 	private boolean canFillInv = true;
 
 	private boolean needsCheckInput = false;
@@ -371,9 +368,9 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 	private void cycleSearch() {
 		int i = 0;
 
-		lastOutputOrientation = FemtocraftUtils
-				.indexOfForgeDirection(outputDir);
-		lastInputOrientation = FemtocraftUtils.indexOfForgeDirection(inputDir);
+        int lastOutputOrientation = FemtocraftUtils
+                .indexOfForgeDirection(outputDir);
+        int lastInputOrientation = FemtocraftUtils.indexOfForgeDirection(inputDir);
 
 		do {
 			lastOutputOrientation += 1;

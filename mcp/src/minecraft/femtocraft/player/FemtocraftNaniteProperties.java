@@ -30,12 +30,12 @@ public class FemtocraftNaniteProperties implements IExtendedEntityProperties {
 		this.player = player;
 	}
 
-	public static final void register(EntityPlayer player) {
+	public static void register(EntityPlayer player) {
 		player.registerExtendedProperties(PROP_TAG,
 				new FemtocraftNaniteProperties(player));
 	}
 
-	public static final FemtocraftNaniteProperties get(EntityPlayer player) {
+	public static FemtocraftNaniteProperties get(EntityPlayer player) {
 		return (FemtocraftNaniteProperties) player
 				.getExtendedProperties(PROP_TAG);
 	}

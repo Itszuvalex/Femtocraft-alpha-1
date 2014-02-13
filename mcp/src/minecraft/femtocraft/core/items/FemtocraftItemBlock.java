@@ -68,21 +68,15 @@ public class FemtocraftItemBlock extends ItemBlock {
 	public boolean canPlaceItemBlockOnSide(World par1World, int par2, int par3,
 			int par4, int par5, EntityPlayer par6EntityPlayer,
 			ItemStack par7ItemStack) {
-		if (!canPlayerPlace(par6EntityPlayer))
-			return false;
-		return super.canPlaceItemBlockOnSide(par1World, par2, par3, par4, par5,
-				par6EntityPlayer, par7ItemStack);
-	}
+        return canPlayerPlace(par6EntityPlayer) && super.canPlaceItemBlockOnSide(par1World, par2, par3, par4, par5, par6EntityPlayer, par7ItemStack);
+    }
 
 	@Override
 	public boolean placeBlockAt(ItemStack stack, EntityPlayer player,
 			World world, int x, int y, int z, int side, float hitX, float hitY,
 			float hitZ, int metadata) {
-		if (!canPlayerPlace(player))
-			return false;
-		return super.placeBlockAt(stack, player, world, x, y, z, side, hitX,
-				hitY, hitZ, metadata);
-	}
+        return canPlayerPlace(player) && super.placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY, hitZ, metadata);
+    }
 
 	private boolean canPlayerPlace(EntityPlayer player) {
 		if (player == null)

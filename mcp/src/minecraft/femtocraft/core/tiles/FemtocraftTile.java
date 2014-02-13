@@ -58,11 +58,9 @@ public class FemtocraftTile extends TileEntity {
 	}
 
 	public boolean shouldTick() {
-		if (FemtocraftConfigs.requirePlayersOnlineForTileEntityTicks)
-			return FemtocraftUtils.isPlayerOnline(owner);
+        return !FemtocraftConfigs.requirePlayersOnlineForTileEntityTicks || FemtocraftUtils.isPlayerOnline(owner);
 
-		return true;
-	}
+    }
 
 	/**
 	 * Gated update call. This will only be called on the server, and only if

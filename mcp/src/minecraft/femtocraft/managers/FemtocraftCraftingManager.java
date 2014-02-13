@@ -29,7 +29,7 @@ public class FemtocraftCraftingManager {
 	/**
 	 * Returns the static instance of this class
 	 */
-	public static final FemtocraftCraftingManager getInstance() {
+	public static FemtocraftCraftingManager getInstance() {
 		return instance;
 	}
 

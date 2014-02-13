@@ -166,10 +166,8 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 	}
 
 	public boolean hasRecipe(ItemStack stack) {
-		if (stack.stackTagCompound == null)
-			return false;
-		return stack.stackTagCompound.hasKey("recipe");
-	}
+        return stack.stackTagCompound != null && stack.stackTagCompound.hasKey("recipe");
+    }
 
 	@Override
 	public FemtocraftAssemblerRecipe getRecipe(ItemStack stack) {

@@ -65,11 +65,8 @@ public class PlayerResearch {
 	public boolean discoverTechnology(String name) {
 		TechnologyDiscoveredEvent event = new TechnologyDiscoveredEvent(
 				username, Femtocraft.researchManager.getTechnology(name));
-		if (!MinecraftForge.EVENT_BUS.post(event)) {
-			return techStatus.put(name, new TechnologyStatus(name)) != null;
-		}
-		return false;
-	}
+        return !MinecraftForge.EVENT_BUS.post(event) && techStatus.put(name, new TechnologyStatus(name)) != null;
+    }
 
 	public TechnologyStatus getTechnology(String name) {
 		return techStatus.get(name);
@@ -106,20 +103,16 @@ public class PlayerResearch {
 	}
 
 	public boolean hasResearchedTechnology(Technology tech) {
-		if (tech == null)
-			return true;
-		return hasResearchedTechnology(tech.name);
-	}
+        return tech == null || hasResearchedTechnology(tech.name);
+    }
 
 	public boolean hasResearchedTechnology(String tech) {
 		if (tech == null || tech.equals(""))
 			return true;
 
 		TechnologyStatus ts = techStatus.get(tech);
-		if (ts == null)
-			return false;
-		return ts.researched;
-	}
+        return ts != null && ts.researched;
+    }
 
 	// ---------------------------------------------------------
 
