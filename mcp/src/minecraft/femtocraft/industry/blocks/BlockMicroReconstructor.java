@@ -1,7 +1,10 @@
 package femtocraft.industry.blocks;
 
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.Femtocraft;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
+import femtocraft.render.RenderSimpleMachine;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -17,11 +20,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import femtocraft.Femtocraft;
-import femtocraft.industry.TileEntity.MicroReconstructorTile;
-import femtocraft.render.SimpleMachineRenderer;
+
+import java.util.Random;
 
 public class BlockMicroReconstructor extends BlockContainer {
 	/**
@@ -48,7 +48,7 @@ public class BlockMicroReconstructor extends BlockContainer {
 
 	@Override
 	public int getRenderType() {
-		return SimpleMachineRenderer.renderID;
+		return RenderSimpleMachine.renderID;
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class BlockMicroReconstructor extends BlockContainer {
 		if (par1World.isRemote) {
 			return true;
 		} else {
-			MicroReconstructorTile tileentityfurnace = (MicroReconstructorTile) par1World
+			TileEntityBaseEntityMicroReconstructor tileentityfurnace = (TileEntityBaseEntityMicroReconstructor) par1World
 					.getBlockTileEntity(par2, par3, par4);
 
 			if (tileentityfurnace != null) {
@@ -195,7 +195,7 @@ public class BlockMicroReconstructor extends BlockContainer {
 	 * the block.
 	 */
 	public TileEntity createNewTileEntity(World par1World) {
-		return new MicroReconstructorTile();
+		return new TileEntityBaseEntityMicroReconstructor();
 	}
 
 	/**
@@ -224,7 +224,7 @@ public class BlockMicroReconstructor extends BlockContainer {
 
 		// if (par6ItemStack.hasDisplayName())
 		// {
-		// ((MicroDeconstructorTile)par1World.getBlockTileEntity(par2, par3,
+		// ((TileEntityBaseEntityMicroDeconstructor)par1World.getBlockTileEntity(par2, par3,
 		// par4)).setGuiDisplayName(par6ItemStack.getDisplayName());
 		// }
 	}
@@ -235,7 +235,7 @@ public class BlockMicroReconstructor extends BlockContainer {
 	 */
 	public void breakBlock(World par1World, int par2, int par3, int par4,
 			int par5, int par6) {
-		MicroReconstructorTile tileEntity = (MicroReconstructorTile) par1World
+		TileEntityBaseEntityMicroReconstructor tileEntity = (TileEntityBaseEntityMicroReconstructor) par1World
 				.getBlockTileEntity(par2, par3, par4);
 
 		if (tileEntity != null) {

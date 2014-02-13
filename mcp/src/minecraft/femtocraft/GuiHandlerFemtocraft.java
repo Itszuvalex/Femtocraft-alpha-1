@@ -1,18 +1,18 @@
 package femtocraft;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
-import femtocraft.industry.TileEntity.MicroDeconstructorTile;
-import femtocraft.industry.TileEntity.MicroFurnaceTile;
-import femtocraft.industry.TileEntity.MicroReconstructorTile;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
 import femtocraft.industry.containers.ContainerMicroDeconstructor;
 import femtocraft.industry.containers.ContainerMicroFurnace;
 import femtocraft.industry.containers.ContainerMicroReconstructor;
 import femtocraft.industry.gui.GuiMicroDeconstructor;
 import femtocraft.industry.gui.GuiMicroFurnace;
 import femtocraft.industry.gui.GuiMicroReconstructor;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class GuiHandlerFemtocraft implements IGuiHandler {
 
@@ -26,15 +26,15 @@ public class GuiHandlerFemtocraft implements IGuiHandler {
 			int x, int y, int z) {
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
-		if (tileEntity instanceof MicroFurnaceTile) {
+		if (tileEntity instanceof TileEntityBaseEntityMicroFurnace) {
 			return new ContainerMicroFurnace(player.inventory,
-					(MicroFurnaceTile) tileEntity);
-		} else if (tileEntity instanceof MicroDeconstructorTile) {
+					(TileEntityBaseEntityMicroFurnace) tileEntity);
+		} else if (tileEntity instanceof TileEntityBaseEntityMicroDeconstructor) {
 			return new ContainerMicroDeconstructor(player.inventory,
-					(MicroDeconstructorTile) tileEntity);
-		} else if (tileEntity instanceof MicroReconstructorTile) {
+					(TileEntityBaseEntityMicroDeconstructor) tileEntity);
+		} else if (tileEntity instanceof TileEntityBaseEntityMicroReconstructor) {
 			return new ContainerMicroReconstructor(player.inventory,
-					(MicroReconstructorTile) tileEntity);
+					(TileEntityBaseEntityMicroReconstructor) tileEntity);
 		}
 
 		return null;
@@ -45,15 +45,15 @@ public class GuiHandlerFemtocraft implements IGuiHandler {
 			int x, int y, int z) {
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
-		if (tileEntity instanceof MicroFurnaceTile) {
+		if (tileEntity instanceof TileEntityBaseEntityMicroFurnace) {
 			return new GuiMicroFurnace(player.inventory,
-					(MicroFurnaceTile) tileEntity);
-		} else if (tileEntity instanceof MicroDeconstructorTile) {
+					(TileEntityBaseEntityMicroFurnace) tileEntity);
+		} else if (tileEntity instanceof TileEntityBaseEntityMicroDeconstructor) {
 			return new GuiMicroDeconstructor(player.inventory,
-					(MicroDeconstructorTile) tileEntity);
-		} else if (tileEntity instanceof MicroReconstructorTile) {
+					(TileEntityBaseEntityMicroDeconstructor) tileEntity);
+		} else if (tileEntity instanceof TileEntityBaseEntityMicroReconstructor) {
 			return new GuiMicroReconstructor(player.inventory,
-					(MicroReconstructorTile) tileEntity);
+					(TileEntityBaseEntityMicroReconstructor) tileEntity);
 		}
 
 		return null;

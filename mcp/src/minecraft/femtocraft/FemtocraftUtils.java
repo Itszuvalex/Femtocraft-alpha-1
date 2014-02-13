@@ -1,14 +1,13 @@
 package femtocraft;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.Arrays;
 
 public class FemtocraftUtils {
 

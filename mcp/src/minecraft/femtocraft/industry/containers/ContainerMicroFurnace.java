@@ -1,5 +1,8 @@
 package femtocraft.industry.containers;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -8,18 +11,14 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.tileentity.TileEntityFurnace;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import femtocraft.industry.TileEntity.MicroFurnaceTile;
 
 public class ContainerMicroFurnace extends Container {
-	private MicroFurnaceTile furnace;
+	private TileEntityBaseEntityMicroFurnace furnace;
 	private int lastCookTime = 0;
 	private int lastPower = 0;
 
 	public ContainerMicroFurnace(InventoryPlayer par1InventoryPlayer,
-			MicroFurnaceTile par2TileEntityFurnace) {
+			TileEntityBaseEntityMicroFurnace par2TileEntityFurnace) {
 		this.furnace = par2TileEntityFurnace;
 		this.addSlotToContainer(new Slot(par2TileEntityFurnace, 0, 56, 35));
 		this.addSlotToContainer(new SlotFurnace(par1InventoryPlayer.player,
@@ -54,18 +53,18 @@ public class ContainerMicroFurnace extends Container {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < this.crafters.size(); ++i) {
-			ICrafting icrafting = (ICrafting) this.crafters.get(i);
+        for (Object crafter : this.crafters) {
+            ICrafting icrafting = (ICrafting) crafter;
 
-			if (this.lastCookTime != this.furnace.furnaceCookTime) {
-				icrafting.sendProgressBarUpdate(this, 0,
-						this.furnace.furnaceCookTime);
-			}
-			if (this.lastPower != this.furnace.getCurrentPower()) {
-				icrafting.sendProgressBarUpdate(this, 1,
-						this.furnace.getCurrentPower());
-			}
-		}
+            if (this.lastCookTime != this.furnace.furnaceCookTime) {
+                icrafting.sendProgressBarUpdate(this, 0,
+                        this.furnace.furnaceCookTime);
+            }
+            if (this.lastPower != this.furnace.getCurrentPower()) {
+                icrafting.sendProgressBarUpdate(this, 1,
+                        this.furnace.getCurrentPower());
+            }
+        }
 
 		this.lastCookTime = this.furnace.furnaceCookTime;
 		this.lastPower = this.furnace.getCurrentPower();
@@ -121,7 +120,7 @@ public class ContainerMicroFurnace extends Container {
 			}
 
 			if (itemstack1.stackSize == 0) {
-				slot.putStack((ItemStack) null);
+				slot.putStack(null);
 			} else {
 				slot.onSlotChanged();
 			}

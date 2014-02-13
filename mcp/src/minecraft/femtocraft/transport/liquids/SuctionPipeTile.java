@@ -1,22 +1,12 @@
 package femtocraft.transport.liquids;
 
-import java.util.Arrays;
-
 import femtocraft.api.ISuctionPipe;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
-import net.minecraftforge.liquids.ILiquidTank;
-import net.minecraftforge.liquids.ITankContainer;
-import net.minecraftforge.liquids.LiquidStack;
+import net.minecraftforge.fluids.*;
+
+import java.util.Arrays;
 
 public class SuctionPipeTile extends TileEntity implements ISuctionPipe {
 	private FluidTank tank;
@@ -80,7 +70,7 @@ public class SuctionPipeTile extends TileEntity implements ISuctionPipe {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see net.minecraft.tileentity.TileEntity#updateEntity()
+	 * @see net.minecraft.tileentity.tiles#updateEntity()
 	 */
 	@Override
 	public void updateEntity() {

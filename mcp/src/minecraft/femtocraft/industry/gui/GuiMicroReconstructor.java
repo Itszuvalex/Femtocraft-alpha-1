@@ -1,5 +1,12 @@
 package femtocraft.industry.gui;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.Femtocraft;
+import femtocraft.FemtocraftUtils;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
+import femtocraft.industry.containers.ContainerMicroReconstructor;
+import femtocraft.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -9,26 +16,16 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import femtocraft.Femtocraft;
-import femtocraft.FemtocraftUtils;
-import femtocraft.industry.TileEntity.MicroReconstructorTile;
-import femtocraft.industry.containers.ContainerMicroDeconstructor;
-import femtocraft.industry.containers.ContainerMicroReconstructor;
-import femtocraft.render.FemtocraftRenderUtils;
 
 @SideOnly(Side.CLIENT)
 public class GuiMicroReconstructor extends GuiContainer {
 	public static final ResourceLocation texture = new ResourceLocation(
 			Femtocraft.ID.toLowerCase(), "textures/guis/Reassembler.png");
-	private MicroReconstructorTile reconstructorInventory;
+	private TileEntityBaseEntityMicroReconstructor reconstructorInventory;
 
 	public GuiMicroReconstructor(InventoryPlayer par1InventoryPlayer,
-			MicroReconstructorTile tileEntity) {
+			TileEntityBaseEntityMicroReconstructor tileEntity) {
 		super(new ContainerMicroReconstructor(par1InventoryPlayer, tileEntity));
 		this.ySize = 204;
 		this.reconstructorInventory = tileEntity;
@@ -84,8 +81,8 @@ public class GuiMicroReconstructor extends GuiContainer {
 
 			i1 = (this.reconstructorInventory.getMassAmount() * 60)
 					/ this.reconstructorInventory.getMassCapacity();
-			FemtocraftRenderUtils.renderLiquidInGUI(this, this.zLevel, image,
-					k + 150, l + 8 + (60 - i1), 16, i1);
+			RenderUtils.renderLiquidInGUI(this, this.zLevel, image,
+                    k + 150, l + 8 + (60 - i1), 16, i1);
 
 			// Rebind texture
 			Minecraft.getMinecraft().getTextureManager().bindTexture(texture);

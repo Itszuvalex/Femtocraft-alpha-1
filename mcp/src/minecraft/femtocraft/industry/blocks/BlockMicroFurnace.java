@@ -2,17 +2,13 @@ package femtocraft.industry.blocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.Random;
-
 import femtocraft.Femtocraft;
-import femtocraft.industry.TileEntity.MicroFurnaceTile;
-import femtocraft.render.SimpleMachineRenderer;
-
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
+import femtocraft.render.RenderSimpleMachine;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,8 +20,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockMicroFurnace extends BlockContainer {
 	/**
@@ -65,7 +62,7 @@ public class BlockMicroFurnace extends BlockContainer {
 
 	@Override
 	public int getRenderType() {
-		return SimpleMachineRenderer.renderID;
+		return RenderSimpleMachine.renderID;
 	}
 
 	/**
@@ -149,7 +146,7 @@ public class BlockMicroFurnace extends BlockContainer {
 		if (par1World.isRemote) {
 			return true;
 		} else {
-			MicroFurnaceTile tileentityfurnace = (MicroFurnaceTile) par1World
+			TileEntityBaseEntityMicroFurnace tileentityfurnace = (TileEntityBaseEntityMicroFurnace) par1World
 					.getBlockTileEntity(par2, par3, par4);
 
 			if (tileentityfurnace != null) {
@@ -229,7 +226,7 @@ public class BlockMicroFurnace extends BlockContainer {
 	 * the block.
 	 */
 	public TileEntity createNewTileEntity(World par1World) {
-		return new MicroFurnaceTile();
+		return new TileEntityBaseEntityMicroFurnace();
 	}
 
 	/**
@@ -269,7 +266,7 @@ public class BlockMicroFurnace extends BlockContainer {
 	public void breakBlock(World par1World, int par2, int par3, int par4,
 			int par5, int par6) {
 		if (!keepFurnaceInventory) {
-			MicroFurnaceTile tileentityfurnace = (MicroFurnaceTile) par1World
+			TileEntityBaseEntityMicroFurnace tileentityfurnace = (TileEntityBaseEntityMicroFurnace) par1World
 					.getBlockTileEntity(par2, par3, par4);
 
 			if (tileentityfurnace != null) {

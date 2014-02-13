@@ -1,27 +1,25 @@
 package femtocraft.industry.gui;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.Femtocraft;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
+import femtocraft.industry.containers.ContainerMicroFurnace;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import femtocraft.Femtocraft;
-import femtocraft.industry.TileEntity.MicroFurnaceTile;
-import femtocraft.industry.containers.ContainerMicroFurnace;
 
 @SideOnly(Side.CLIENT)
 public class GuiMicroFurnace extends GuiContainer {
 	public static final ResourceLocation texture = new ResourceLocation(
 			Femtocraft.ID.toLowerCase(), "textures/guis/MicroFurnace.png");
-	private MicroFurnaceTile furnaceInventory;
+	private TileEntityBaseEntityMicroFurnace furnaceInventory;
 
 	public GuiMicroFurnace(InventoryPlayer par1InventoryPlayer,
-			MicroFurnaceTile par2TileEntityFurnace) {
+			TileEntityBaseEntityMicroFurnace par2TileEntityFurnace) {
 		super(new ContainerMicroFurnace(par1InventoryPlayer,
 				par2TileEntityFurnace));
 		this.furnaceInventory = par2TileEntityFurnace;

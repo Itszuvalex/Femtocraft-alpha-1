@@ -1,5 +1,12 @@
 package femtocraft.industry.containers;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.api.IAssemblerSchematic;
+import femtocraft.common.gui.DisplaySlot;
+import femtocraft.common.gui.OutputSlot;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
+import femtocraft.industry.items.ItemAssemblySchematic;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -7,24 +14,15 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
-import net.minecraft.util.ResourceLocation;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import femtocraft.Femtocraft;
-import femtocraft.api.IAssemblerSchematic;
-import femtocraft.common.gui.DisplaySlot;
-import femtocraft.common.gui.OutputSlot;
-import femtocraft.industry.TileEntity.MicroReconstructorTile;
-import femtocraft.industry.items.AssemblySchematic;
 
 public class ContainerMicroReconstructor extends Container {
-	private MicroReconstructorTile reconstructor;
+	private TileEntityBaseEntityMicroReconstructor reconstructor;
 	private int lastCookTime = 0;
 	private int lastPower = 0;
 	private int lastMass = 0;
 
 	public ContainerMicroReconstructor(InventoryPlayer par1InventoryPlayer,
-			MicroReconstructorTile reconstructor) {
+			TileEntityBaseEntityMicroReconstructor reconstructor) {
 		this.reconstructor = reconstructor;
 		this.addSlotToContainer(new OutputSlot(reconstructor, 9, 122, 23));
 		Slot schematic = new Slot(reconstructor, 10, 94, 54) {
@@ -32,7 +30,7 @@ public class ContainerMicroReconstructor extends Container {
 				return par1ItemStack.getItem() instanceof IAssemblerSchematic;
 			}
 		};
-		schematic.setBackgroundIcon(AssemblySchematic.placeholderIcon);
+		schematic.setBackgroundIcon(ItemAssemblySchematic.placeholderIcon);
 		this.addSlotToContainer(schematic);
 		for (int y = 0; y < 3; ++y) {
 			for (int x = 0; x < 3; ++x) {
@@ -41,7 +39,7 @@ public class ContainerMicroReconstructor extends Container {
 					@Override
 					@SideOnly(Side.CLIENT)
 					public Icon getBackgroundIconIndex() {
-						return ((MicroReconstructorTile) this.inventory)
+						return this.inventory
 								.getStackInSlot(10) != null ? null
 								: DisplaySlot.noPlaceDisplayIcon;
 					}
@@ -88,22 +86,22 @@ public class ContainerMicroReconstructor extends Container {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < this.crafters.size(); ++i) {
-			ICrafting icrafting = (ICrafting) this.crafters.get(i);
+        for (Object crafter : this.crafters) {
+            ICrafting icrafting = (ICrafting) crafter;
 
-			if (this.lastCookTime != this.reconstructor.cookTime) {
-				icrafting.sendProgressBarUpdate(this, 0,
-						this.reconstructor.cookTime);
-			}
-			if (this.lastPower != this.reconstructor.getCurrentPower()) {
-				icrafting.sendProgressBarUpdate(this, 1,
-						this.reconstructor.getCurrentPower());
-			}
-			if (this.lastMass != this.reconstructor.getMassAmount()) {
-				icrafting.sendProgressBarUpdate(this, 2,
-						this.reconstructor.getMassAmount());
-			}
-		}
+            if (this.lastCookTime != this.reconstructor.cookTime) {
+                icrafting.sendProgressBarUpdate(this, 0,
+                        this.reconstructor.cookTime);
+            }
+            if (this.lastPower != this.reconstructor.getCurrentPower()) {
+                icrafting.sendProgressBarUpdate(this, 1,
+                        this.reconstructor.getCurrentPower());
+            }
+            if (this.lastMass != this.reconstructor.getMassAmount()) {
+                icrafting.sendProgressBarUpdate(this, 2,
+                        this.reconstructor.getMassAmount());
+            }
+        }
 
 		this.lastCookTime = this.reconstructor.cookTime;
 		this.lastPower = this.reconstructor.getCurrentPower();
@@ -127,8 +125,7 @@ public class ContainerMicroReconstructor extends Container {
 			}
 			break;
 		default:
-			return;
-		}
+        }
 		// if (par1 == 0)
 		// {
 		// this.deconstructor.cookTime = par2;
@@ -182,7 +179,7 @@ public class ContainerMicroReconstructor extends Container {
 			}
 
 			if (itemstack1.stackSize == 0) {
-				slot.putStack((ItemStack) null);
+				slot.putStack(null);
 			} else {
 				slot.onSlotChanged();
 			}

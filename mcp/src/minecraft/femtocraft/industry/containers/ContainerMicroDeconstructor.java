@@ -1,25 +1,25 @@
 package femtocraft.industry.containers;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.common.gui.OutputSlot;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
+import femtocraft.managers.ManagerRecipe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import femtocraft.common.gui.OutputSlot;
-import femtocraft.industry.TileEntity.MicroDeconstructorTile;
-import femtocraft.managers.FemtocraftRecipeManager;
 
 public class ContainerMicroDeconstructor extends Container {
-	private MicroDeconstructorTile deconstructor;
+	private TileEntityBaseEntityMicroDeconstructor deconstructor;
 	private int lastCookTime = 0;
 	private int lastPower = 0;
 	private int lastMass = 0;
 
 	public ContainerMicroDeconstructor(InventoryPlayer par1InventoryPlayer,
-			MicroDeconstructorTile deconstructor) {
+			TileEntityBaseEntityMicroDeconstructor deconstructor) {
 		this.deconstructor = deconstructor;
 		this.addSlotToContainer(new Slot(deconstructor, 0, 38, 37));
 		for (int y = 0; y < 3; ++y) {
@@ -61,22 +61,22 @@ public class ContainerMicroDeconstructor extends Container {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < this.crafters.size(); ++i) {
-			ICrafting icrafting = (ICrafting) this.crafters.get(i);
+        for (Object crafter : this.crafters) {
+            ICrafting icrafting = (ICrafting) crafter;
 
-			if (this.lastCookTime != this.deconstructor.cookTime) {
-				icrafting.sendProgressBarUpdate(this, 0,
-						this.deconstructor.cookTime);
-			}
-			if (this.lastPower != this.deconstructor.getCurrentPower()) {
-				icrafting.sendProgressBarUpdate(this, 1,
-						this.deconstructor.getCurrentPower());
-			}
-			if (this.lastMass != this.deconstructor.getMassAmount()) {
-				icrafting.sendProgressBarUpdate(this, 2,
-						this.deconstructor.getMassAmount());
-			}
-		}
+            if (this.lastCookTime != this.deconstructor.cookTime) {
+                icrafting.sendProgressBarUpdate(this, 0,
+                        this.deconstructor.cookTime);
+            }
+            if (this.lastPower != this.deconstructor.getCurrentPower()) {
+                icrafting.sendProgressBarUpdate(this, 1,
+                        this.deconstructor.getCurrentPower());
+            }
+            if (this.lastMass != this.deconstructor.getMassAmount()) {
+                icrafting.sendProgressBarUpdate(this, 2,
+                        this.deconstructor.getMassAmount());
+            }
+        }
 
 		this.lastCookTime = this.deconstructor.cookTime;
 		this.lastPower = this.deconstructor.getCurrentPower();
@@ -100,8 +100,7 @@ public class ContainerMicroDeconstructor extends Container {
 			}
 			break;
 		default:
-			return;
-		}
+        }
 		// if (par1 == 0)
 		// {
 		// this.deconstructor.cookTime = par2;
@@ -135,7 +134,7 @@ public class ContainerMicroDeconstructor extends Container {
 
 				slot.onSlotChange(itemstack1, itemstack);
 			} else if (par2 != 0) {
-				if (FemtocraftRecipeManager.assemblyRecipes
+				if (ManagerRecipe.assemblyRecipes
 						.canCraft(itemstack1)) {
 					if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
 						return null;
@@ -153,7 +152,7 @@ public class ContainerMicroDeconstructor extends Container {
 			}
 
 			if (itemstack1.stackSize == 0) {
-				slot.putStack((ItemStack) null);
+				slot.putStack(null);
 			} else {
 				slot.onSlotChanged();
 			}
