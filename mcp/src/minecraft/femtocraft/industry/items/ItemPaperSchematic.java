@@ -19,7 +19,7 @@ public class ItemPaperSchematic extends ItemAssemblySchematic {
 		this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
 				.toLowerCase() + ":" + "ItemPaperSchematic");
 		this.keyedIcon = par1IconRegister.registerIcon(Femtocraft.ID
-				.toLowerCase() + ":" + "PaperSchematicKeyed");
+				.toLowerCase() + ":" + "ItemPaperSchematicKeyed");
 	}
 
 }

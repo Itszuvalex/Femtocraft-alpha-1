@@ -11,7 +11,7 @@ public class ItemTomato extends ItemFood {
 		super(id, 2, 0.6f, false);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		setTextureName(Femtocraft.ID.toLowerCase() + ":" + "tomato");
+		setTextureName(Femtocraft.ID.toLowerCase() + ":" + "ItemTomato");
 	}
 
 	/*
@@ -51,7 +51,7 @@ public class ItemTomato extends ItemFood {
 
 	public void updateIcons(IconRegister iconRegister) {
 		this.itemIcon = iconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-				+ ":" + "tomato");
+				+ ":" + "ItemTomato");
 	}
 
 }
