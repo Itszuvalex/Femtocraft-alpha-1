@@ -4,7 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.power.tiles.TileEntityBaseEntityCable;
-import femtocraft.proxy.ClientProxyFemtocraft;
+import femtocraft.proxy.ProxyClient;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -56,7 +56,7 @@ public class BlockCable extends TileContainerPower {
 
 	@Override
 	public int getRenderType() {
-		return ClientProxyFemtocraft.FemtopowerCableRenderID;
+		return ProxyClient.FemtopowerCableRenderID;
 	}
 
 	@SideOnly(Side.CLIENT)

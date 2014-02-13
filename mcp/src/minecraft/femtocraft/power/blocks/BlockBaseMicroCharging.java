@@ -6,7 +6,7 @@ import femtocraft.Femtocraft;
 import femtocraft.api.IChargingBase;
 import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.power.tiles.TileEntityPowerMicroChargingBase;
-import femtocraft.proxy.ClientProxyFemtocraft;
+import femtocraft.proxy.ProxyClient;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -42,7 +42,7 @@ public class BlockBaseMicroCharging extends TileContainerPower implements
 
 	@Override
 	public int getRenderType() {
-		return ClientProxyFemtocraft.FemtocraftChargingBaseRenderID;
+		return ProxyClient.FemtocraftChargingBaseRenderID;
 	}
 
 	@Override

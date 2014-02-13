@@ -6,7 +6,7 @@ import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
 import femtocraft.industry.containers.ContainerMicroReconstructor;
-import femtocraft.render.FemtocraftRenderUtils;
+import femtocraft.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -81,8 +81,8 @@ public class GuiMicroReconstructor extends GuiContainer {
 
 			i1 = (this.reconstructorInventory.getMassAmount() * 60)
 					/ this.reconstructorInventory.getMassCapacity();
-			FemtocraftRenderUtils.renderLiquidInGUI(this, this.zLevel, image,
-					k + 150, l + 8 + (60 - i1), 16, i1);
+			RenderUtils.renderLiquidInGUI(this, this.zLevel, image,
+                    k + 150, l + 8 + (60 - i1), 16, i1);
 
 			// Rebind texture
 			Minecraft.getMinecraft().getTextureManager().bindTexture(texture);

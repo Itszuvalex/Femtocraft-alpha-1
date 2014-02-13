@@ -59,7 +59,7 @@ public class BlockMicroCube extends TileContainerPower {
 	//
 	// @Override
 	// public int getRenderType() {
-	// return ClientProxyFemtocraft.FemtopowerMicroCubeRenderID;
+	// return ProxyClient.FemtopowerMicroCubeRenderID;
 	// }
 	//
 	@Override

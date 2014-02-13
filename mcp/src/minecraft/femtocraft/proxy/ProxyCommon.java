@@ -7,7 +7,7 @@ import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
 import femtocraft.industry.tiles.TileEntityVacuumTube;
 import femtocraft.power.tiles.*;
 
-public class CommonProxyFemtocraft {
+public class ProxyCommon {
 	public void registerRendering() {
 
 	}

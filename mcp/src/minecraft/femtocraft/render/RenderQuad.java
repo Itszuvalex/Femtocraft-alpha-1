@@ -3,11 +3,11 @@ package femtocraft.render;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Icon;
 
-public class Quad {
-	public Point a;
-	public Point b;
-	public Point c;
-	public Point d;
+public class RenderQuad {
+	public RenderPoint a;
+	public RenderPoint b;
+	public RenderPoint c;
+	public RenderPoint d;
 	public Icon icon;
 	public float minU;
 	public float maxU;
@@ -15,17 +15,17 @@ public class Quad {
 	public float maxV;
 
 	// This will cause crashes, cause I'm stupid
-	private Quad(Point a, Point b, Point c, Point d) {
+	private RenderQuad(RenderPoint a, RenderPoint b, RenderPoint c, RenderPoint d) {
 		this(a, b, c, d, null);
 	}
 
-	public Quad(Point a, Point b, Point c, Point d, Icon icon) {
+	public RenderQuad(RenderPoint a, RenderPoint b, RenderPoint c, RenderPoint d, Icon icon) {
 		this(a, b, c, d, icon, icon.getMinU(), icon.getMaxU(), icon.getMinV(),
 				icon.getMaxV());
 	}
 
-	public Quad(Point a, Point b, Point c, Point d, Icon icon, float minU,
-			float maxU, float minV, float maxV) {
+	public RenderQuad(RenderPoint a, RenderPoint b, RenderPoint c, RenderPoint d, Icon icon, float minU,
+                      float maxU, float minV, float maxV) {
 		this.a = a;
 		this.b = b;
 		this.c = c;
@@ -37,13 +37,13 @@ public class Quad {
 		this.maxV = maxV;
 	}
 
-	public Quad copy() {
-		return new Quad(a.copy(), b.copy(), c.copy(), d.copy(), icon, minU,
+	public RenderQuad copy() {
+		return new RenderQuad(a.copy(), b.copy(), c.copy(), d.copy(), icon, minU,
 				maxU, minV, maxV);
 	}
 
-	public Quad reverse() {
-		Point temp = a;
+	public RenderQuad reverse() {
+		RenderPoint temp = a;
 		a = d;
 		d = temp;
 
@@ -54,12 +54,12 @@ public class Quad {
 		return this;
 	}
 
-	public Quad reversed() {
-		return new Quad(d.copy(), c.copy(), b.copy(), a.copy(), icon, minU,
+	public RenderQuad reversed() {
+		return new RenderQuad(d.copy(), c.copy(), b.copy(), a.copy(), icon, minU,
 				maxU, minV, maxV);
 	}
 
-	public Quad rotateOnXAxis(double rot, float yrotoffset, float zrotoffset) {
+	public RenderQuad rotateOnXAxis(double rot, float yrotoffset, float zrotoffset) {
 		a.rotateOnXAxis(rot, yrotoffset, zrotoffset);
 		b.rotateOnXAxis(rot, yrotoffset, zrotoffset);
 		c.rotateOnXAxis(rot, yrotoffset, zrotoffset);
@@ -67,7 +67,7 @@ public class Quad {
 		return this;
 	}
 
-	public Quad rotateOnYAxis(double rot, float xrotoffset, float zrotoffset) {
+	public RenderQuad rotateOnYAxis(double rot, float xrotoffset, float zrotoffset) {
 		a.rotateOnYAxis(rot, xrotoffset, zrotoffset);
 		b.rotateOnYAxis(rot, xrotoffset, zrotoffset);
 		c.rotateOnYAxis(rot, xrotoffset, zrotoffset);
@@ -75,7 +75,7 @@ public class Quad {
 		return this;
 	}
 
-	public Quad rotateOnZAxis(double rot, float xrotoffset, float yrotoffset) {
+	public RenderQuad rotateOnZAxis(double rot, float xrotoffset, float yrotoffset) {
 		a.rotateOnZAxis(rot, xrotoffset, yrotoffset);
 		b.rotateOnZAxis(rot, xrotoffset, yrotoffset);
 		c.rotateOnZAxis(rot, xrotoffset, yrotoffset);
@@ -83,15 +83,15 @@ public class Quad {
 		return this;
 	}
 
-	public Quad rotatedOnXAxis(double rot, float yrotoffset, float zrotoffset) {
+	public RenderQuad rotatedOnXAxis(double rot, float yrotoffset, float zrotoffset) {
 		return copy().rotateOnXAxis(rot, yrotoffset, zrotoffset);
 	}
 
-	public Quad rotatedOnYAxis(double rot, float xrotoffset, float zrotoffset) {
+	public RenderQuad rotatedOnYAxis(double rot, float xrotoffset, float zrotoffset) {
 		return copy().rotateOnYAxis(rot, xrotoffset, zrotoffset);
 	}
 
-	public Quad rotatedOnZAxis(double rot, float xrotoffset, float yrotoffset) {
+	public RenderQuad rotatedOnZAxis(double rot, float xrotoffset, float yrotoffset) {
 		return copy().rotateOnZAxis(rot, xrotoffset, yrotoffset);
 	}
 

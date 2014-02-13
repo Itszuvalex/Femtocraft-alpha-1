@@ -1,12 +1,12 @@
-package femtocraft.farming.produce;
+package femtocraft.farming.items;
 
 import femtocraft.Femtocraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 
-public class Tomato extends ItemFood {
-	public Tomato(int id) {
+public class ItemTomato extends ItemFood {
+	public ItemTomato(int id) {
 
 		super(id, 2, 0.6f, false);
 		setMaxStackSize(64);

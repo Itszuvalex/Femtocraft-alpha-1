@@ -16,14 +16,14 @@ import femtocraft.blocks.BlockFemtoStone;
 import femtocraft.blocks.BlockMicroStone;
 import femtocraft.blocks.BlockNanoStone;
 import femtocraft.blocks.BlockUnidentifiedAlloy;
-import femtocraft.cooking.blocks.CuttingBoard;
+import femtocraft.cooking.blocks.BlockCuttingBoard;
 import femtocraft.core.items.*;
 import femtocraft.core.items.decomposition.*;
 import femtocraft.core.liquids.BlockFluidMass;
 import femtocraft.core.liquids.FluidMass;
 import femtocraft.core.ore.*;
-import femtocraft.farming.produce.Tomato;
-import femtocraft.farming.seeds.tomatoSeed;
+import femtocraft.farming.items.ItemTomato;
+import femtocraft.farming.items.ItemSeedTomato;
 import femtocraft.industry.tiles.TileEntityVacuumTube;
 import femtocraft.industry.blocks.BlockMicroDeconstructor;
 import femtocraft.industry.blocks.BlockMicroFurnace;
@@ -36,8 +36,8 @@ import femtocraft.player.PropertiesNanite;
 import femtocraft.power.blocks.*;
 import femtocraft.power.items.ItemBlockMicroCube;
 import femtocraft.power.items.ItemBlockSpoolGold;
-import femtocraft.proxy.ClientProxyFemtocraft;
-import femtocraft.proxy.CommonProxyFemtocraft;
+import femtocraft.proxy.ProxyClient;
+import femtocraft.proxy.ProxyCommon;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -63,8 +63,8 @@ public class Femtocraft {
 	@Instance(ID)
 	public static Femtocraft instance;
 
-	@SidedProxy(clientSide = "femtocraft.proxy.ClientProxyFemtocraft", serverSide = "femtocraft.proxy.CommonProxyFemtocraft")
-	public static CommonProxyFemtocraft proxy;
+	@SidedProxy(clientSide = "femtocraft.proxy.ProxyClient", serverSide = "femtocraft.proxy.ProxyCommon")
+	public static ProxyCommon proxy;
 
 	public static CreativeTabs femtocraftTab = new FemtocraftCreativeTab(
 			"Femtocraft");
@@ -584,25 +584,25 @@ public class Femtocraft {
 		GameRegistry.registerItem(OrganometallicPlate, "Organometallic Plate");
 
 		// Produce
-		tomatoSeed = new tomatoSeed(FemtocraftConfigs.tomatoSeedID)
-				.setUnlocalizedName("tomatoSeed");
-		LanguageRegistry.addName(tomatoSeed, "Tomato Seeds");
-		GameRegistry.registerItem(tomatoSeed, "Tomato Seeds");
+		tomatoSeed = new ItemSeedTomato(FemtocraftConfigs.tomatoSeedID)
+				.setUnlocalizedName("ItemSeedTomato");
+		LanguageRegistry.addName(tomatoSeed, "ItemTomato Seeds");
+		GameRegistry.registerItem(tomatoSeed, "ItemTomato Seeds");
 
-		tomato = new Tomato(FemtocraftConfigs.tomatoID)
+		tomato = new ItemTomato(FemtocraftConfigs.tomatoID)
 				.setUnlocalizedName("tomato");
-		LanguageRegistry.addName(tomato, "Tomato");
-		GameRegistry.registerItem(tomato, "Tomato");
+		LanguageRegistry.addName(tomato, "ItemTomato");
+		GameRegistry.registerItem(tomato, "ItemTomato");
 
 		// Cooking
-		cuttingBoard = new CuttingBoard(FemtocraftConfigs.cuttingBoardID)
+		cuttingBoard = new BlockCuttingBoard(FemtocraftConfigs.cuttingBoardID)
 				.setUnlocalizedName("cuttingBoard");
 		LanguageRegistry.addName(cuttingBoard, "Cutting ItemBoard");
 		GameRegistry.registerBlock(cuttingBoard, "Cutting ItemBoard");
 
 		registerRecipes();
 
-		ClientProxyFemtocraft.setCustomRenderers();
+		ProxyClient.setCustomRenderers();
 
 		// GameRegistry.registerTileEntity(tiles.class, "myTile");
 

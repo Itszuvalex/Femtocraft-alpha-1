@@ -3,7 +3,7 @@ package femtocraft.cooking.blocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
-import femtocraft.proxy.ClientProxyFemtocraft;
+import femtocraft.proxy.ProxyClient;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.IconFlipped;
@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class CuttingBoard extends Block {
+public class BlockCuttingBoard extends Block {
 
 	/**
 	 * Is the random generator used by furnace to drop the inventory contents in
@@ -48,7 +48,7 @@ public class CuttingBoard extends Block {
 	private static final float MIN_DIST = 1.0f / 16.0f;
 	private static final float MAX_DIST = 15.0f / 16.0f;
 
-	public CuttingBoard(int id) {
+	public BlockCuttingBoard(int id) {
 		super(id, Material.cake);
 		this.setBlockBounds(MIN_DIST, 0.0F, MIN_DIST, MAX_DIST, MIN_DIST,
 				MAX_DIST);
@@ -78,13 +78,13 @@ public class CuttingBoard extends Block {
 
 	@Override
 	public int getRenderType() {
-		return ClientProxyFemtocraft.cuttingBoardRenderType;
+		return ProxyClient.cuttingBoardRenderType;
 	}
 
 	@Override
 	public boolean canRenderInPass(int pass) {
 		// For now the block can always be rendered
-		ClientProxyFemtocraft.CuttingBoardRenderPass = pass;
+		ProxyClient.CuttingBoardRenderPass = pass;
 		return true;
 	}
 

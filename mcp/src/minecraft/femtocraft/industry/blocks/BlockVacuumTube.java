@@ -5,7 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.api.IInterfaceDevice;
 import femtocraft.industry.tiles.TileEntityVacuumTube;
-import femtocraft.proxy.ClientProxyFemtocraft;
+import femtocraft.proxy.ProxyClient;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -147,7 +147,7 @@ public class BlockVacuumTube extends BlockContainer {
 
 	@Override
 	public int getRenderType() {
-		return ClientProxyFemtocraft.FemtocraftVacuumTubeRenderID;
+		return ProxyClient.FemtocraftVacuumTubeRenderID;
 	}
 
 	@Override

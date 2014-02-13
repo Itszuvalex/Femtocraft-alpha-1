@@ -1,12 +1,12 @@
 package femtocraft.cooking.blocks;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import femtocraft.proxy.ClientProxyFemtocraft;
+import femtocraft.proxy.ProxyClient;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 
-public class cuttingBoardRenderer implements ISimpleBlockRenderingHandler {
+public class RenderCuttingBoard implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
@@ -21,24 +21,24 @@ public class cuttingBoardRenderer implements ISimpleBlockRenderingHandler {
 		renderer.setRenderBounds(0, 0, 0, 1, 1.0D / 16.0D, 1);
 		renderer.renderStandardBlock(block, x, y, z);
 
-		CuttingBoard cuttingBoard = (CuttingBoard) block;
+		BlockCuttingBoard blockCuttingBoard = (BlockCuttingBoard) block;
 
 		// Draw sides
 		// Draw North side
 		renderer.setRenderBounds(1.0D / 16.0D, 0, 0, 1.0D / 16.0D, 1, 1);
-		renderer.renderFaceZNeg(block, x, y, z, cuttingBoard.cuttingBoardSideE);
+		renderer.renderFaceZNeg(block, x, y, z, blockCuttingBoard.cuttingBoardSideE);
 
 		// Draw East side
 		renderer.setRenderBounds(0, 0, 1.0D / 16.0D, 1, 1, 1.0D / 16.0D);
-		renderer.renderFaceXPos(block, x, y, z, cuttingBoard.cuttingBoardSideNS);
+		renderer.renderFaceXPos(block, x, y, z, blockCuttingBoard.cuttingBoardSideNS);
 
 		// Draw South side
 		renderer.setRenderBounds(15.0D / 16.0D, 0, 0, 15.0D / 16.0D, 1, 1);
-		renderer.renderFaceZPos(block, x, y, z, cuttingBoard.cuttingBoardSideW);
+		renderer.renderFaceZPos(block, x, y, z, blockCuttingBoard.cuttingBoardSideW);
 
 		// Draw West side
 		renderer.setRenderBounds(0, 0, 15.0D / 16.0D, 1, 1, 15.0D / 16.0D);
-		renderer.renderFaceXNeg(block, x, y, z, cuttingBoard.cuttingBoardSideNS);
+		renderer.renderFaceXNeg(block, x, y, z, blockCuttingBoard.cuttingBoardSideNS);
 
 		return true;
 	}
@@ -50,7 +50,7 @@ public class cuttingBoardRenderer implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public int getRenderId() {
-		return ClientProxyFemtocraft.cuttingBoardRenderType;
+		return ProxyClient.cuttingBoardRenderType;
 	}
 
 }

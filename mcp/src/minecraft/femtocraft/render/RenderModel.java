@@ -6,108 +6,108 @@ import net.minecraftforge.common.ForgeDirection;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Model {
-	public List<Quad> faces;
-	public Point center;
-	public Point location;
+public class RenderModel {
+	public List<RenderQuad> faces;
+	public RenderPoint center;
+	public RenderPoint location;
 
-	public Model() {
-		this(new Point(0, 0, 0));
+	public RenderModel() {
+		this(new RenderPoint(0, 0, 0));
 	}
 
-	public Model(Point location) {
-		this(location, new Point(0, 0, 0));
+	public RenderModel(RenderPoint location) {
+		this(location, new RenderPoint(0, 0, 0));
 	}
 
-	public Model(Point location, Point center) {
+	public RenderModel(RenderPoint location, RenderPoint center) {
 		this.center = center;
 		this.location = location;
-		faces = new ArrayList<Quad>();
+		faces = new ArrayList<RenderQuad>();
 	}
 
-	public Model copy() {
-		Model ret = new Model(location.copy(), center.copy());
-		for (Quad quad : faces) {
+	public RenderModel copy() {
+		RenderModel ret = new RenderModel(location.copy(), center.copy());
+		for (RenderQuad quad : faces) {
 			ret.addQuad(quad.copy());
 		}
 		return ret;
 	}
 
-	public void addQuad(Quad quad) {
+	public void addQuad(RenderQuad quad) {
 		faces.add(quad);
 	}
 
-	public void removeQuad(Quad quad) {
+	public void removeQuad(RenderQuad quad) {
 		faces.remove(quad);
 	}
 
-	public Model rotateOnXAxis(double rot) {
+	public RenderModel rotateOnXAxis(double rot) {
 		return rotateOnXAxis(rot, center.y, center.z);
 	}
 
-	public Model rotateOnXAxis(double rot, float yrotoffset, float zrotoffset) {
-		for (Quad quad : faces) {
+	public RenderModel rotateOnXAxis(double rot, float yrotoffset, float zrotoffset) {
+		for (RenderQuad quad : faces) {
 			quad.rotateOnXAxis(rot, yrotoffset, zrotoffset);
 		}
 		return this;
 	}
 
-	public Model rotateOnYAxis(double rot) {
+	public RenderModel rotateOnYAxis(double rot) {
 		return rotateOnYAxis(rot, center.x, center.z);
 	}
 
-	public Model rotateOnYAxis(double rot, float xrotoffset, float zrotoffset) {
-		for (Quad quad : faces) {
+	public RenderModel rotateOnYAxis(double rot, float xrotoffset, float zrotoffset) {
+		for (RenderQuad quad : faces) {
 			quad.rotateOnYAxis(rot, xrotoffset, zrotoffset);
 		}
 		return this;
 	}
 
-	public Model rotateOnZAxis(double rot) {
+	public RenderModel rotateOnZAxis(double rot) {
 		return rotateOnZAxis(rot, center.x, center.y);
 	}
 
-	public Model rotateOnZAxis(double rot, float xrotoffset, float yrotoffset) {
-		for (Quad quad : faces) {
+	public RenderModel rotateOnZAxis(double rot, float xrotoffset, float yrotoffset) {
+		for (RenderQuad quad : faces) {
 			quad.rotateOnZAxis(rot, xrotoffset, yrotoffset);
 		}
 		return this;
 	}
 
-	public Model rotatedOnXAxis(double rot) {
+	public RenderModel rotatedOnXAxis(double rot) {
 		return rotatedOnXAxis(rot, center.y, center.z);
 	}
 
-	public Model rotatedOnXAxis(double rot, float yrotoffset, float zrotoffset) {
+	public RenderModel rotatedOnXAxis(double rot, float yrotoffset, float zrotoffset) {
 		return copy().rotateOnXAxis(rot, yrotoffset, zrotoffset);
 	}
 
-	public Model rotatedOnYAxis(double rot) {
+	public RenderModel rotatedOnYAxis(double rot) {
 		return rotatedOnYAxis(rot, center.x, center.z);
 	}
 
-	public Model rotatedOnYAxis(double rot, float xrotoffset, float zrotoffset) {
+	public RenderModel rotatedOnYAxis(double rot, float xrotoffset, float zrotoffset) {
 		return copy().rotateOnYAxis(rot, xrotoffset, zrotoffset);
 	}
 
-	public Model rotatedOnZAxis(double rot) {
+	public RenderModel rotatedOnZAxis(double rot) {
 		return rotatedOnZAxis(rot, center.x, center.y);
 	}
 
-	public Model rotatedOnZAxis(double rot, float xrotoffset, float yrotoffset) {
+	public RenderModel rotatedOnZAxis(double rot, float xrotoffset, float yrotoffset) {
 		return copy().rotateOnZAxis(rot, xrotoffset, yrotoffset);
 	}
 
-	public Model rotate(double x, double y, double z) {
+	public RenderModel rotate(double x, double y, double z) {
 		return rotateOnXAxis(x).rotateOnYAxis(y).rotateOnZAxis(z);
 	}
 
-	public Model rotated(double x, double y, double z) {
+	public RenderModel rotated(double x, double y, double z) {
 		return this.copy().rotateOnXAxis(x).rotateOnYAxis(y).rotateOnZAxis(z);
 	}
 
 	//
-	// public Model rotateFromTo(ForgeDirection from, ForgeDirection to)
+	// public RenderModel rotateFromTo(ForgeDirection from, ForgeDirection to)
 	// {
 	// if(from == to) return this;
 	//
@@ -268,7 +268,7 @@ public class Model {
 	// return rotateOnXAxis(xrot).rotateOnYAxis(yrot).rotateOnZAxis(zrot);
 	// }
 	//
-	// public Model rotatedFromTo(ForgeDirection from, ForgeDirection to)
+	// public RenderModel rotatedFromTo(ForgeDirection from, ForgeDirection to)
 	// {
 	// return copy().rotateFromTo(from, to);
 	// }
@@ -277,14 +277,14 @@ public class Model {
 		Tessellator tes = Tessellator.instance;
 		tes.addTranslation(location.x, location.y, location.z);
 
-		for (Quad quad : faces) {
+		for (RenderQuad quad : faces) {
 			quad.draw();
 		}
 
 		tes.addTranslation(-location.x, -location.y, -location.z);
 	}
 
-	public Model rotatedToDirection(ForgeDirection dir) {
+	public RenderModel rotatedToDirection(ForgeDirection dir) {
 		switch (dir) {
 		case SOUTH:
 			return rotatedOnXAxis(Math.PI);

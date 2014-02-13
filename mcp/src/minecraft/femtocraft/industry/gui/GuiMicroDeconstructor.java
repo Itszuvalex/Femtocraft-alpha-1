@@ -5,7 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
 import femtocraft.industry.containers.ContainerMicroDeconstructor;
-import femtocraft.render.FemtocraftRenderUtils;
+import femtocraft.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -79,8 +79,8 @@ public class GuiMicroDeconstructor extends GuiContainer {
 
 			i1 = (this.deconstructorInventory.getMassAmount() * 60)
 					/ this.deconstructorInventory.getMassCapacity();
-			FemtocraftRenderUtils.renderLiquidInGUI(this, this.zLevel, image,
-					k + 150, l + 8 + (60 - i1), 16, i1);
+			RenderUtils.renderLiquidInGUI(this, this.zLevel, image,
+                    k + 150, l + 8 + (60 - i1), 16, i1);
 
 			// Rebind texture
 			Minecraft.getMinecraft().getTextureManager().bindTexture(texture);

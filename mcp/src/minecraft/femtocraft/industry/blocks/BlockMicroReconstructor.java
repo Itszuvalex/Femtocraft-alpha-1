@@ -4,7 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
-import femtocraft.render.SimpleMachineRenderer;
+import femtocraft.render.RenderSimpleMachine;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -48,7 +48,7 @@ public class BlockMicroReconstructor extends BlockContainer {
 
 	@Override
 	public int getRenderType() {
-		return SimpleMachineRenderer.renderID;
+		return RenderSimpleMachine.renderID;
 	}
 
 	/**

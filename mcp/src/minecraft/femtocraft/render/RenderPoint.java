@@ -1,27 +1,27 @@
 package femtocraft.render;
 
-public class Point {
+public class RenderPoint {
 	public float x;
 	public float y;
 	public float z;
 
-	public Point() {
+	public RenderPoint() {
 		x = 0;
 		y = 0;
 		z = 0;
 	}
 
-	public Point(float x_, float y_, float z_) {
+	public RenderPoint(float x_, float y_, float z_) {
 		x = x_;
 		y = y_;
 		z = z_;
 	}
 
-	public Point copy() {
-		return new Point(x, y, z);
+	public RenderPoint copy() {
+		return new RenderPoint(x, y, z);
 	}
 
-	public Point rotateOnXAxis(double rot, float yrotoffset, float zrotoffset) {
+	public RenderPoint rotateOnXAxis(double rot, float yrotoffset, float zrotoffset) {
 		if (rot == 0)
 			return this;
 
@@ -36,7 +36,7 @@ public class Point {
 		return this;
 	}
 
-	public Point rotateOnYAxis(double rot, float xrotoffset, float zrotoffset) {
+	public RenderPoint rotateOnYAxis(double rot, float xrotoffset, float zrotoffset) {
 		if (rot == 0)
 			return this;
 
@@ -51,7 +51,7 @@ public class Point {
 		return this;
 	}
 
-	public Point rotateOnZAxis(double rot, float xrotoffset, float yrotoffset) {
+	public RenderPoint rotateOnZAxis(double rot, float xrotoffset, float yrotoffset) {
 		if (rot == 0)
 			return this;
 
@@ -64,15 +64,15 @@ public class Point {
 		return this;
 	}
 
-	public Point rotatedOnXAxis(double rot, float yrotoffset, float zrotoffset) {
+	public RenderPoint rotatedOnXAxis(double rot, float yrotoffset, float zrotoffset) {
 		return copy().rotateOnXAxis(rot, yrotoffset, zrotoffset);
 	}
 
-	public Point rotatedOnYAxis(double rot, float xrotoffset, float zrotoffset) {
+	public RenderPoint rotatedOnYAxis(double rot, float xrotoffset, float zrotoffset) {
 		return copy().rotateOnYAxis(rot, xrotoffset, zrotoffset);
 	}
 
-	public Point rotatedOnZAxis(double rot, float xrotoffset, float yrotoffset) {
+	public RenderPoint rotatedOnZAxis(double rot, float xrotoffset, float yrotoffset) {
 		return copy().rotateOnZAxis(rot, xrotoffset, yrotoffset);
 	}
 }

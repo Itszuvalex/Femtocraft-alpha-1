@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
-public class SimpleMachineRenderer implements ISimpleBlockRenderingHandler {
+public class RenderSimpleMachine implements ISimpleBlockRenderingHandler {
 	public static int renderID;
 
 	@Override

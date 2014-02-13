@@ -7,75 +7,75 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.Icon;
 import net.minecraftforge.common.ForgeDirection;
 
-public class FemtocraftRenderUtils {
+public class RenderUtils {
 
 	public static void renderCube(float x, float y, float z, float startx,
 			float starty, float startz, float endx, float endy, float endz,
 			Icon texture) {
-		FemtocraftRenderUtils.drawTopFace(x, y, z, startx, endx, startz, endz,
-				endy, texture, texture.getMinU(), texture.getMaxU(),
-				texture.getMinV(), texture.getMaxV());
-		FemtocraftRenderUtils.drawBottomFace(x, y, z, startx, endx, startz,
-				endz, starty, texture, texture.getMinU(), texture.getMaxU(),
-				texture.getMinV(), texture.getMaxV());
-		FemtocraftRenderUtils.drawNorthFace(x, y, z, startx, endx, starty,
-				endy, startz, texture, texture.getMinU(), texture.getMaxU(),
-				texture.getMinV(), texture.getMaxV());
-		FemtocraftRenderUtils.drawEastFace(x, y, z, starty, endy, startz, endz,
-				endx, texture, texture.getMinU(), texture.getMaxU(),
-				texture.getMinV(), texture.getMaxV());
-		FemtocraftRenderUtils.drawSouthFace(x, y, z, startx, endx, starty,
-				endy, endz, texture, texture.getMinU(), texture.getMaxU(),
-				texture.getMinV(), texture.getMaxV());
-		FemtocraftRenderUtils.drawWestFace(x, y, z, starty, endy, startz, endz,
-				startx, texture, texture.getMinU(), texture.getMaxU(),
-				texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawTopFace(x, y, z, startx, endx, startz, endz,
+                endy, texture, texture.getMinU(), texture.getMaxU(),
+                texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawBottomFace(x, y, z, startx, endx, startz,
+                endz, starty, texture, texture.getMinU(), texture.getMaxU(),
+                texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawNorthFace(x, y, z, startx, endx, starty,
+                endy, startz, texture, texture.getMinU(), texture.getMaxU(),
+                texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawEastFace(x, y, z, starty, endy, startz, endz,
+                endx, texture, texture.getMinU(), texture.getMaxU(),
+                texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawSouthFace(x, y, z, startx, endx, starty,
+                endy, endz, texture, texture.getMinU(), texture.getMaxU(),
+                texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawWestFace(x, y, z, starty, endy, startz, endz,
+                startx, texture, texture.getMinU(), texture.getMaxU(),
+                texture.getMinV(), texture.getMaxV());
 	}
 
 	public static void renderDoubleSidedCube(float x, float y, float z,
 			float startx, float starty, float startz, float endx, float endy,
 			float endz, Icon texture) {
-		FemtocraftRenderUtils.drawTopFace(x, y, z, startx, endx, startz, endz,
-				endy, texture, texture.getMinU(), texture.getMaxU(),
-				texture.getMinV(), texture.getMaxV());
-		FemtocraftRenderUtils.drawBottomFace(x, y, z, startx, endx, startz,
-				endz, endy, texture, texture.getMinU(), texture.getMaxU(),
-				texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawTopFace(x, y, z, startx, endx, startz, endz,
+                endy, texture, texture.getMinU(), texture.getMaxU(),
+                texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawBottomFace(x, y, z, startx, endx, startz,
+                endz, endy, texture, texture.getMinU(), texture.getMaxU(),
+                texture.getMinV(), texture.getMaxV());
 
-		FemtocraftRenderUtils.drawBottomFace(x, y, z, startx, endx, startz,
-				endz, starty, texture, texture.getMinU(), texture.getMaxU(),
-				texture.getMinV(), texture.getMaxV());
-		FemtocraftRenderUtils.drawTopFace(x, y, z, startx, endx, startz, endz,
-				starty, texture, texture.getMinU(), texture.getMaxU(),
-				texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawBottomFace(x, y, z, startx, endx, startz,
+                endz, starty, texture, texture.getMinU(), texture.getMaxU(),
+                texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawTopFace(x, y, z, startx, endx, startz, endz,
+                starty, texture, texture.getMinU(), texture.getMaxU(),
+                texture.getMinV(), texture.getMaxV());
 
-		FemtocraftRenderUtils.drawNorthFace(x, y, z, startx, endx, starty,
-				endy, startz, texture, texture.getMinU(), texture.getMaxU(),
-				texture.getMinV(), texture.getMaxV());
-		FemtocraftRenderUtils.drawSouthFace(x, y, z, startx, endx, starty,
-				endy, startz, texture, texture.getMinU(), texture.getMaxU(),
-				texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawNorthFace(x, y, z, startx, endx, starty,
+                endy, startz, texture, texture.getMinU(), texture.getMaxU(),
+                texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawSouthFace(x, y, z, startx, endx, starty,
+                endy, startz, texture, texture.getMinU(), texture.getMaxU(),
+                texture.getMinV(), texture.getMaxV());
 
-		FemtocraftRenderUtils.drawEastFace(x, y, z, starty, endy, startz, endz,
-				endx, texture, texture.getMinU(), texture.getMaxU(),
-				texture.getMinV(), texture.getMaxV());
-		FemtocraftRenderUtils.drawWestFace(x, y, z, starty, endy, startz, endz,
-				endx, texture, texture.getMinU(), texture.getMaxU(),
-				texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawEastFace(x, y, z, starty, endy, startz, endz,
+                endx, texture, texture.getMinU(), texture.getMaxU(),
+                texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawWestFace(x, y, z, starty, endy, startz, endz,
+                endx, texture, texture.getMinU(), texture.getMaxU(),
+                texture.getMinV(), texture.getMaxV());
 
-		FemtocraftRenderUtils.drawSouthFace(x, y, z, startx, endx, starty,
-				endy, endz, texture, texture.getMinU(), texture.getMaxU(),
-				texture.getMinV(), texture.getMaxV());
-		FemtocraftRenderUtils.drawNorthFace(x, y, z, startx, endx, starty,
-				endy, endz, texture, texture.getMinU(), texture.getMaxU(),
-				texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawSouthFace(x, y, z, startx, endx, starty,
+                endy, endz, texture, texture.getMinU(), texture.getMaxU(),
+                texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawNorthFace(x, y, z, startx, endx, starty,
+                endy, endz, texture, texture.getMinU(), texture.getMaxU(),
+                texture.getMinV(), texture.getMaxV());
 
-		FemtocraftRenderUtils.drawWestFace(x, y, z, starty, endy, startz, endz,
-				startx, texture, texture.getMinU(), texture.getMaxU(),
-				texture.getMinV(), texture.getMaxV());
-		FemtocraftRenderUtils.drawEastFace(x, y, z, starty, endy, startz, endz,
-				startx, texture, texture.getMinU(), texture.getMaxU(),
-				texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawWestFace(x, y, z, starty, endy, startz, endz,
+                startx, texture, texture.getMinU(), texture.getMaxU(),
+                texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawEastFace(x, y, z, starty, endy, startz, endz,
+                startx, texture, texture.getMinU(), texture.getMaxU(),
+                texture.getMinV(), texture.getMaxV());
 	}
 
 	public static void drawTopFace(float x, float y, float z, float xmin,
@@ -93,13 +93,13 @@ public class FemtocraftRenderUtils {
 		tes.addTranslation(-x, -y, -z);
 	}
 
-	public static Quad makeTopFace(float xmin, float xmax, float zmin,
+	public static RenderQuad makeTopFace(float xmin, float xmax, float zmin,
 			float zmax, float yoffset, Icon texture, float minU, float maxU,
 			float minV, float maxV) {
-		Point a = new Point();
-		Point b = new Point();
-		Point c = new Point();
-		Point d = new Point();
+		RenderPoint a = new RenderPoint();
+		RenderPoint b = new RenderPoint();
+		RenderPoint c = new RenderPoint();
+		RenderPoint d = new RenderPoint();
 
 		a.y = b.y = c.y = d.y = yoffset;
 		a.x = b.x = xmin;
@@ -107,7 +107,7 @@ public class FemtocraftRenderUtils {
 		a.z = d.z = zmin;
 		b.z = c.z = zmax;
 
-		return new Quad(a, b, c, d, texture, minU, maxU, minV, maxV);
+		return new RenderQuad(a, b, c, d, texture, minU, maxU, minV, maxV);
 	}
 
 	public static void drawBottomFace(float x, float y, float z, float xmin,
@@ -125,13 +125,13 @@ public class FemtocraftRenderUtils {
 		tes.addTranslation(-x, -y, -z);
 	}
 
-	public static Quad makeBottomFace(float xmin, float xmax, float zmin,
+	public static RenderQuad makeBottomFace(float xmin, float xmax, float zmin,
 			float zmax, float yoffset, Icon texture, float minU, float maxU,
 			float minV, float maxV) {
-		Point a = new Point();
-		Point b = new Point();
-		Point c = new Point();
-		Point d = new Point();
+		RenderPoint a = new RenderPoint();
+		RenderPoint b = new RenderPoint();
+		RenderPoint c = new RenderPoint();
+		RenderPoint d = new RenderPoint();
 
 		a.y = b.y = c.y = d.y = yoffset;
 		a.x = d.x = xmin;
@@ -139,7 +139,7 @@ public class FemtocraftRenderUtils {
 		a.z = b.z = zmin;
 		c.z = d.z = zmax;
 
-		return new Quad(a, b, c, d, texture, minU, maxU, minV, maxV);
+		return new RenderQuad(a, b, c, d, texture, minU, maxU, minV, maxV);
 	}
 
 	public static void drawNorthFace(float x, float y, float z, float xmin,
@@ -157,13 +157,13 @@ public class FemtocraftRenderUtils {
 		tes.addTranslation(-x, -y, -z);
 	}
 
-	public static Quad makeNorthFace(float xmin, float xmax, float ymin,
+	public static RenderQuad makeNorthFace(float xmin, float xmax, float ymin,
 			float ymax, float zoffset, Icon texture, float minU, float maxU,
 			float minV, float maxV) {
-		Point a = new Point();
-		Point b = new Point();
-		Point c = new Point();
-		Point d = new Point();
+		RenderPoint a = new RenderPoint();
+		RenderPoint b = new RenderPoint();
+		RenderPoint c = new RenderPoint();
+		RenderPoint d = new RenderPoint();
 
 		a.z = b.z = c.z = d.z = zoffset;
 		a.x = b.x = xmin;
@@ -171,7 +171,7 @@ public class FemtocraftRenderUtils {
 		a.y = d.y = ymin;
 		b.y = c.y = ymax;
 
-		return new Quad(a, b, c, d, texture, minU, maxU, minV, maxV);
+		return new RenderQuad(a, b, c, d, texture, minU, maxU, minV, maxV);
 	}
 
 	public static void drawEastFace(float x, float y, float z, float ymin,
@@ -190,13 +190,13 @@ public class FemtocraftRenderUtils {
 		tes.addTranslation(-x, -y, -z);
 	}
 
-	public static Quad makeEastFace(float ymin, float ymax, float zmin,
+	public static RenderQuad makeEastFace(float ymin, float ymax, float zmin,
 			float zmax, float xoffset, Icon texture, float minU, float maxU,
 			float minV, float maxV) {
-		Point a = new Point();
-		Point b = new Point();
-		Point c = new Point();
-		Point d = new Point();
+		RenderPoint a = new RenderPoint();
+		RenderPoint b = new RenderPoint();
+		RenderPoint c = new RenderPoint();
+		RenderPoint d = new RenderPoint();
 
 		a.x = b.x = c.x = d.x = xoffset;
 		a.y = d.y = ymin;
@@ -204,7 +204,7 @@ public class FemtocraftRenderUtils {
 		a.z = b.z = zmin;
 		c.z = d.z = zmax;
 
-		return new Quad(a, b, c, d, texture, minU, maxU, minV, maxV);
+		return new RenderQuad(a, b, c, d, texture, minU, maxU, minV, maxV);
 	}
 
 	public static void drawSouthFace(float x, float y, float z, float xmin,
@@ -222,13 +222,13 @@ public class FemtocraftRenderUtils {
 		tes.addTranslation(-x, -y, -z);
 	}
 
-	public static Quad makeSouthFace(float xmin, float xmax, float ymin,
+	public static RenderQuad makeSouthFace(float xmin, float xmax, float ymin,
 			float ymax, float zoffset, Icon texture, float minU, float maxU,
 			float minV, float maxV) {
-		Point a = new Point();
-		Point b = new Point();
-		Point c = new Point();
-		Point d = new Point();
+		RenderPoint a = new RenderPoint();
+		RenderPoint b = new RenderPoint();
+		RenderPoint c = new RenderPoint();
+		RenderPoint d = new RenderPoint();
 
 		a.z = b.z = c.z = d.z = zoffset;
 		a.x = d.x = xmin;
@@ -236,7 +236,7 @@ public class FemtocraftRenderUtils {
 		a.y = b.y = ymin;
 		c.y = d.y = ymax;
 
-		return new Quad(a, b, c, d, texture, minU, maxU, minV, maxV);
+		return new RenderQuad(a, b, c, d, texture, minU, maxU, minV, maxV);
 	}
 
 	public static void drawWestFace(float x, float y, float z, float ymin,
@@ -255,13 +255,13 @@ public class FemtocraftRenderUtils {
 		tes.addTranslation(-x, -y, -z);
 	}
 
-	public static Quad makeWestFace(float ymin, float ymax, float zmin,
+	public static RenderQuad makeWestFace(float ymin, float ymax, float zmin,
 			float zmax, float xoffset, Icon texture, float minU, float maxU,
 			float minV, float maxV) {
-		Point a = new Point();
-		Point b = new Point();
-		Point c = new Point();
-		Point d = new Point();
+		RenderPoint a = new RenderPoint();
+		RenderPoint b = new RenderPoint();
+		RenderPoint c = new RenderPoint();
+		RenderPoint d = new RenderPoint();
 
 		a.x = b.x = c.x = d.x = xoffset;
 		a.y = b.y = ymin;
@@ -269,7 +269,7 @@ public class FemtocraftRenderUtils {
 		a.z = d.z = zmin;
 		b.z = c.z = zmax;
 
-		return new Quad(a, b, c, d, texture, minU, maxU, minV, maxV);
+		return new RenderQuad(a, b, c, d, texture, minU, maxU, minV, maxV);
 	}
 
 	public static void drawArbitraryFace(float x, float y, float z, float xmin,
@@ -278,36 +278,36 @@ public class FemtocraftRenderUtils {
 			float minV, float maxV) {
 		switch (normal) {
 		case UP:
-			FemtocraftRenderUtils.drawTopFace(x, y, z, xmin, xmax, zmin, zmax,
-					ymax, texture, minU, maxU, minV, maxV);
+			RenderUtils.drawTopFace(x, y, z, xmin, xmax, zmin, zmax,
+                    ymax, texture, minU, maxU, minV, maxV);
 			break;
 		case DOWN:
-			FemtocraftRenderUtils.drawBottomFace(x, y, z, xmin, xmax, zmin,
-					zmax, ymin, texture, minU, maxU, minV, maxV);
+			RenderUtils.drawBottomFace(x, y, z, xmin, xmax, zmin,
+                    zmax, ymin, texture, minU, maxU, minV, maxV);
 			break;
 		case NORTH:
-			FemtocraftRenderUtils.drawNorthFace(x, y, z, xmin, xmax, ymin,
-					ymax, zmin, texture, minU, maxU, minV, maxV);
+			RenderUtils.drawNorthFace(x, y, z, xmin, xmax, ymin,
+                    ymax, zmin, texture, minU, maxU, minV, maxV);
 			break;
 		case EAST:
-			FemtocraftRenderUtils.drawEastFace(x, y, z, ymin, ymax, zmin, zmax,
-					xmax, texture, minU, maxU, minV, maxV);
+			RenderUtils.drawEastFace(x, y, z, ymin, ymax, zmin, zmax,
+                    xmax, texture, minU, maxU, minV, maxV);
 			break;
 		case SOUTH:
-			FemtocraftRenderUtils.drawSouthFace(x, y, z, xmin, xmax, ymin,
-					ymax, zmax, texture, minU, maxU, minV, maxV);
+			RenderUtils.drawSouthFace(x, y, z, xmin, xmax, ymin,
+                    ymax, zmax, texture, minU, maxU, minV, maxV);
 			break;
 		case WEST:
-			FemtocraftRenderUtils.drawWestFace(x, y, z, ymin, ymax, zmin, zmax,
-					xmin, texture, minU, maxU, minV, maxV);
+			RenderUtils.drawWestFace(x, y, z, ymin, ymax, zmin, zmax,
+                    xmin, texture, minU, maxU, minV, maxV);
 			break;
 		default:
 			break;
 		}
 	}
 
-	public static void drawFaceByPoints(float x, float y, float z, Point A,
-			Point B, Point C, Point D, Icon texture, float minU, float maxU,
+	public static void drawFaceByPoints(float x, float y, float z, RenderPoint A,
+			RenderPoint B, RenderPoint C, RenderPoint D, Icon texture, float minU, float maxU,
 			float minV, float maxV) {
 		Tessellator tes = Tessellator.instance;
 

@@ -2,10 +2,10 @@ package femtocraft.power.render;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import femtocraft.power.blocks.BlockCoilMicroCharging;
-import femtocraft.proxy.ClientProxyFemtocraft;
-import femtocraft.render.Model;
-import femtocraft.render.Point;
-import femtocraft.render.Quad;
+import femtocraft.proxy.ProxyClient;
+import femtocraft.render.RenderModel;
+import femtocraft.render.RenderPoint;
+import femtocraft.render.RenderQuad;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -14,7 +14,7 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderChargingCoil implements
 		ISimpleBlockRenderingHandler {
-	Model segment;
+	RenderModel segment;
 
 	public RenderChargingCoil() {
 
@@ -62,7 +62,7 @@ public class RenderChargingCoil implements
 
 	@Override
 	public int getRenderId() {
-		return ClientProxyFemtocraft.FemtocraftChargingCoilRenderID;
+		return ProxyClient.FemtocraftChargingCoilRenderID;
 	}
 
 	private void renderCoil(BlockCoilMicroCharging coil, int x, int y, int z) {
@@ -70,43 +70,43 @@ public class RenderChargingCoil implements
 			createSegment(coil);
 		}
 
-		segment.location = new Point(x, y, z);
+		segment.location = new RenderPoint(x, y, z);
 		segment.draw();
-		segment.location = new Point(x, y + 8.f / 16.f, z);
+		segment.location = new RenderPoint(x, y + 8.f / 16.f, z);
 		segment.draw();
 	}
 
 	private void createSegment(BlockCoilMicroCharging coil) {
-		segment = new Model();
+		segment = new RenderModel();
 
 		float minY = 0;
 		float maxY = 8.f / 16.f;
 		float min = 4.f / 16.f;
 		float max = 12.f / 16.f;
 
-		Quad connectorNorth = new Quad(new Point(min, minY, min), new Point(
-				min, maxY, min), new Point(max, maxY, min), new Point(max,
+		RenderQuad connectorNorth = new RenderQuad(new RenderPoint(min, minY, min), new RenderPoint(
+				min, maxY, min), new RenderPoint(max, maxY, min), new RenderPoint(max,
 				minY, min), coil.coilConnector);
-		Quad connectorSouth = new Quad(new Point(max, minY, max), new Point(
-				max, maxY, max), new Point(min, maxY, max), new Point(min,
+		RenderQuad connectorSouth = new RenderQuad(new RenderPoint(max, minY, max), new RenderPoint(
+				max, maxY, max), new RenderPoint(min, maxY, max), new RenderPoint(min,
 				minY, max), coil.coilConnector);
-		Quad connectorEast = new Quad(new Point(max, minY, min), new Point(max,
-				maxY, min), new Point(max, maxY, max),
-				new Point(max, minY, max), coil.coilConnector);
-		Quad connectorWest = new Quad(new Point(min, minY, max), new Point(min,
-				maxY, max), new Point(min, maxY, min),
-				new Point(min, minY, min), coil.coilConnector);
+		RenderQuad connectorEast = new RenderQuad(new RenderPoint(max, minY, min), new RenderPoint(max,
+				maxY, min), new RenderPoint(max, maxY, max),
+				new RenderPoint(max, minY, max), coil.coilConnector);
+		RenderQuad connectorWest = new RenderQuad(new RenderPoint(min, minY, max), new RenderPoint(min,
+				maxY, max), new RenderPoint(min, maxY, min),
+				new RenderPoint(min, minY, min), coil.coilConnector);
 
 		segment.addQuad(connectorNorth);
 		segment.addQuad(connectorSouth);
 		segment.addQuad(connectorEast);
 		segment.addQuad(connectorWest);
 
-		Quad top = new Quad(new Point(0, maxY, 0), new Point(0, maxY, 1),
-				new Point(1, maxY, 1), new Point(1, maxY, 0),
+		RenderQuad top = new RenderQuad(new RenderPoint(0, maxY, 0), new RenderPoint(0, maxY, 1),
+				new RenderPoint(1, maxY, 1), new RenderPoint(1, maxY, 0),
 				coil.coilConnectorTop);
-		Quad bot = new Quad(new Point(1, minY, 0), new Point(1, minY, 1),
-				new Point(0, minY, 1), new Point(0, minY, 0),
+		RenderQuad bot = new RenderQuad(new RenderPoint(1, minY, 0), new RenderPoint(1, minY, 1),
+				new RenderPoint(0, minY, 1), new RenderPoint(0, minY, 0),
 				coil.coilConnectorTop);
 
 		segment.addQuad(top);
