@@ -642,29 +642,27 @@ public class Femtocraft {
 		GameRegistry.addSmelting(primedBoard.itemID, new ItemStack(dopedBoard),
 				0.1f);
 
-		GameRegistry.addShapedRecipe(new ItemStack(primedBoard), new Object[] {
-				"#", "$", '#', conductivePowder, '$', board });
+		GameRegistry.addShapedRecipe(new ItemStack(primedBoard), "#", "$", '#', conductivePowder, '$', board);
 		GameRegistry.addShapedRecipe(new ItemStack(paperSchematic, 3),
-				new Object[] { "###", "###", "###", '#', Item.paper });
-		GameRegistry.addShapedRecipe(new ItemStack(board), new Object[] {
-				"###", '#', Item.stick });
+                "###", "###", "###", '#', Item.paper);
+		GameRegistry.addShapedRecipe(new ItemStack(board), "###", '#', Item.stick);
 		GameRegistry.addShapedRecipe(new ItemStack(microCircuitBoard),
-				new Object[] { "#", "$", '#', spoolGold, '$', dopedBoard });
+                "#", "$", '#', spoolGold, '$', dopedBoard);
 
 		CraftingManager
 				.getInstance()
 				.getRecipeList()
 				.add(new ShapedOreRecipe(new ItemStack(spool),
-						new Object[] { "# #", "#-#", "# #", '#', "plankWood",
-								'-', "stickWood" }));
+                        "# #", "#-#", "# #", '#', "plankWood",
+                        '-', "stickWood"));
 
 		GameRegistry.addShapedRecipe(new ItemStack(spoolGold, 8),
-				new Object[] { "###", "#-#", "###", '#', Item.ingotGold, '-',
-						Femtocraft.spool });
+                "###", "#-#", "###", '#', Item.ingotGold, '-',
+                Femtocraft.spool);
 
 		GameRegistry.addShapelessRecipe(new ItemStack(conductivePowder, 2),
-				new Object[] { new ItemStack(ingotFarenite),
-						new ItemStack(Item.dyePowder, 1, 4) });
+                new ItemStack(ingotFarenite),
+                new ItemStack(Item.dyePowder, 1, 4));
 
 	}
 
