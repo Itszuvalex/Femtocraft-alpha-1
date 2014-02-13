@@ -1,7 +1,7 @@
 package femtocraft.power.tiles;
 
-import femtocraft.api.FemtopowerContainer;
-import femtocraft.api.IFemtopowerBlockContainer;
+import femtocraft.api.PowerContainer;
+import femtocraft.api.IPowerBlockContainer;
 import femtocraft.core.tiles.TileEntityBase;
 import femtocraft.managers.research.EnumTechLevel;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,8 +11,8 @@ import net.minecraftforge.common.ForgeDirection;
 import java.util.Arrays;
 
 public class TileEntityPowerBase extends TileEntityBase implements
-		IFemtopowerBlockContainer {
-	private FemtopowerContainer container;
+        IPowerBlockContainer {
+	private PowerContainer container;
 	private float maxPowerPerTick;
 	private float maxSizePackets;
 	private float distributionBuffer;
@@ -20,7 +20,7 @@ public class TileEntityPowerBase extends TileEntityBase implements
 
 	public TileEntityPowerBase() {
 		super();
-		container = new FemtopowerContainer(EnumTechLevel.MACRO, 250);
+		container = new PowerContainer(EnumTechLevel.MACRO, 250);
 		maxPowerPerTick = .05f;
 		maxSizePackets = .05f; // Yes this is the same as maxpertick, this
 								// breaks if it isn't, for some reason TODO
@@ -135,7 +135,7 @@ public class TileEntityPowerBase extends TileEntityBase implements
 						locy, locz);
 
 				if (checkTile == null
-						|| !(checkTile instanceof IFemtopowerBlockContainer)) {
+						|| !(checkTile instanceof IPowerBlockContainer)) {
 					willCharge[j] = false;
 					--numToFill;
 					percentFilled[j] = 1.f;
@@ -146,7 +146,7 @@ public class TileEntityPowerBase extends TileEntityBase implements
 				// block's
 				// update function, can safely assume adjacent blocks remain the
 				// same (unless it does simultaneous updates)
-				IFemtopowerBlockContainer container = (IFemtopowerBlockContainer) this.worldObj
+				IPowerBlockContainer container = (IPowerBlockContainer) this.worldObj
 						.getBlockTileEntity(locx, locy, locz);
 
 				if (container != null
@@ -196,8 +196,8 @@ public class TileEntityPowerBase extends TileEntityBase implements
 			// update function, can safely assume adjacent blocks remain the
 			// same (unless it does simultaneous updates)
 			TileEntity TE = this.worldObj.getBlockTileEntity(locx, locy, locz);
-			if (TE != null && TE instanceof IFemtopowerBlockContainer) {
-				IFemtopowerBlockContainer container = (IFemtopowerBlockContainer) TE;
+			if (TE != null && TE instanceof IPowerBlockContainer) {
+				IPowerBlockContainer container = (IPowerBlockContainer) TE;
 
 				if (container != null) {
 					int powerconsumed = container.charge(offset.getOpposite(),
@@ -212,8 +212,8 @@ public class TileEntityPowerBase extends TileEntityBase implements
 
 	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
 		super.readFromNBT(par1NBTTagCompound);
-		container = FemtopowerContainer.createFromNBT(par1NBTTagCompound
-				.getCompoundTag("power"));
+		container = PowerContainer.createFromNBT(par1NBTTagCompound
+                .getCompoundTag("power"));
 
 		// for(int i = 0; i < 6; i++) {
 		// connections[i] =
@@ -250,8 +250,8 @@ public class TileEntityPowerBase extends TileEntityBase implements
 					locz);
 
 			if (checkTile != null
-					&& checkTile instanceof IFemtopowerBlockContainer) {
-				IFemtopowerBlockContainer fc = (IFemtopowerBlockContainer) checkTile;
+					&& checkTile instanceof IPowerBlockContainer) {
+				IPowerBlockContainer fc = (IPowerBlockContainer) checkTile;
 				if (!fc.canConnect(offset.getOpposite()))
 					continue;
 
@@ -284,8 +284,8 @@ public class TileEntityPowerBase extends TileEntityBase implements
 	@Override
 	public void loadInfoFromItemNBT(NBTTagCompound compound) {
 		super.loadInfoFromItemNBT(compound);
-		container = FemtopowerContainer.createFromNBT(compound
-				.getCompoundTag("power"));
+		container = PowerContainer.createFromNBT(compound
+                .getCompoundTag("power"));
 	}
 
 	@Override

@@ -2,7 +2,7 @@ package femtocraft.power.items;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import femtocraft.api.FemtopowerContainer;
+import femtocraft.api.PowerContainer;
 import femtocraft.core.items.CoreItemBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -38,7 +38,7 @@ public abstract class ItemBlockPower extends CoreItemBlock {
 			nbt = par1ItemStack.stackTagCompound = new NBTTagCompound();
 		}
 
-		FemtopowerContainer container;
+		PowerContainer container;
 		boolean init = nbt.hasKey("power");
 
 		NBTTagCompound power = nbt.getCompoundTag("power");
@@ -48,13 +48,13 @@ public abstract class ItemBlockPower extends CoreItemBlock {
 			container.saveToNBT(power);
 			nbt.setTag("power", power);
 		} else {
-			container = FemtopowerContainer.createFromNBT(power);
+			container = PowerContainer.createFromNBT(power);
 		}
 
 		container.addInformationToTooltip(par3List);
 	}
 
-	public abstract FemtopowerContainer getDefaultContainer();
+	public abstract PowerContainer getDefaultContainer();
 
 	@Override
 	public void onCreated(ItemStack par1ItemStack, World par2World,

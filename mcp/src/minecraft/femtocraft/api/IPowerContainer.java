@@ -7,7 +7,7 @@ import femtocraft.managers.research.EnumTechLevel;
  * @author Itszuvalex
  * 
  */
-public interface IFemtopowerContainer {
+public interface IPowerContainer {
 
 	/**
 	 * 

@@ -1,6 +1,6 @@
 package femtocraft.power.items;
 
-import femtocraft.api.FemtopowerContainer;
+import femtocraft.api.PowerContainer;
 import femtocraft.power.tiles.TileEntityPowerMicroCube;
 
 public class ItemBlockMicroCube extends ItemBlockPower {
@@ -10,7 +10,7 @@ public class ItemBlockMicroCube extends ItemBlockPower {
 	}
 
 	@Override
-	public FemtopowerContainer getDefaultContainer() {
+	public PowerContainer getDefaultContainer() {
 		return TileEntityPowerMicroCube.getDefaultContainer();
 	}
 }

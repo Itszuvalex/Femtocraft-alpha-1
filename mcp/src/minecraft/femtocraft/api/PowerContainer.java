@@ -6,12 +6,12 @@ import net.minecraft.util.EnumChatFormatting;
 
 import java.util.List;
 
-public class FemtopowerContainer implements IFemtopowerContainer {
+public class PowerContainer implements IPowerContainer {
 	private EnumTechLevel level;
 	private int maxPower;
 	private int currentPower;
 
-	public FemtopowerContainer(EnumTechLevel level, int maxPower) {
+	public PowerContainer(EnumTechLevel level, int maxPower) {
 		this.level = level;
 		this.maxPower = maxPower;
 		this.currentPower = 0;
@@ -29,7 +29,7 @@ public class FemtopowerContainer implements IFemtopowerContainer {
 		this.level = level;
 	}
 
-	private FemtopowerContainer() {
+	private PowerContainer() {
 	}
 
     @Override
@@ -101,8 +101,8 @@ public class FemtopowerContainer implements IFemtopowerContainer {
 		level = EnumTechLevel.getTech(nbt.getString("enumTechLevel"));
 	}
 
-	public static FemtopowerContainer createFromNBT(NBTTagCompound nbt) {
-		FemtopowerContainer cont = new FemtopowerContainer();
+	public static PowerContainer createFromNBT(NBTTagCompound nbt) {
+		PowerContainer cont = new PowerContainer();
 		cont.loadFromNBT(nbt);
 		return cont;
 	}

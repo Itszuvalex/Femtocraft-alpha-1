@@ -2,7 +2,7 @@ package femtocraft.power.tiles;
 
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
-import femtocraft.api.FemtopowerContainer;
+import femtocraft.api.PowerContainer;
 import femtocraft.managers.research.EnumTechLevel;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
@@ -24,8 +24,8 @@ public class TileEntityPowerMicroCube extends TileEntityPowerBase {
 		setTechLevel(ENUM_TECH_LEVEL);
 	}
 
-	public static FemtopowerContainer getDefaultContainer() {
-		return new FemtopowerContainer(ENUM_TECH_LEVEL, maxStorage);
+	public static PowerContainer getDefaultContainer() {
+		return new PowerContainer(ENUM_TECH_LEVEL, maxStorage);
 	}
 
 	public void onSideActivate(ForgeDirection side) {

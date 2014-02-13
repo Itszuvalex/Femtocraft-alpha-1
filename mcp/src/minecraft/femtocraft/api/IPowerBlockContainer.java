@@ -10,7 +10,7 @@ import net.minecraftforge.common.ForgeDirection;
  * @author Itszuvalex
  * 
  */
-public interface IFemtopowerBlockContainer {
+public interface IPowerBlockContainer {
 
 	/**
 	 * 
