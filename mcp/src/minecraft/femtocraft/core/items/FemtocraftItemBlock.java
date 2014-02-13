@@ -58,8 +58,8 @@ public class FemtocraftItemBlock extends ItemBlock {
 				ownerString = owner;
 			}
 
-			par3List.add(new String().format("%s %s", ownerLabelString,
-					ownerString));
+			par3List.add(String.format("%s %s", ownerLabelString,
+                    ownerString));
 		}
 	}
 

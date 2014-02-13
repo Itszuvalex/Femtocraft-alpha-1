@@ -670,7 +670,7 @@ public class Femtocraft {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		recipeManager.assemblyRecipes.registerDefaultRecipes();
+		FemtocraftRecipeManager.assemblyRecipes.registerDefaultRecipes();
 	}
 
 	private void registerRecipes() {
