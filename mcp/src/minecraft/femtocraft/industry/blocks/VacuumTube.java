@@ -22,7 +22,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.api.IInterfaceDevice;
 import femtocraft.industry.TileEntity.VacuumTubeTile;
-import femtocraft.power.TileEntity.FemtopowerCableTile;
 import femtocraft.proxy.ClientProxyFemtocraft;
 
 public class VacuumTube extends BlockContainer {

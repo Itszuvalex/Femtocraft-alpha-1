@@ -1,7 +1,6 @@
 package femtocraft.power.TileEntity;
 
 import femtocraft.managers.research.TechLevel;
-import net.minecraft.nbt.NBTTagCompound;
 
 public class FemtopowerCableTile extends FemtopowerTile {
 

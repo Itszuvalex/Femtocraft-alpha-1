@@ -6,19 +6,13 @@ import java.io.IOException;
 
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import net.minecraftforge.common.DimensionManager;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
-import femtocraft.core.tiles.FemtocraftTile;
 import femtocraft.industry.TileEntity.VacuumTubeTile;
 import femtocraft.player.FemtocraftNaniteProperties;
-import femtocraft.power.TileEntity.FemtopowerMicroCubeTile;
 
 public class FemtocraftPacketHandler implements IPacketHandler {
 

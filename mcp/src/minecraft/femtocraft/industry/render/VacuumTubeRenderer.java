@@ -11,7 +11,6 @@ import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import femtocraft.industry.TileEntity.VacuumTubeTile;
 import femtocraft.industry.blocks.VacuumTube;
-import femtocraft.power.blocks.FemtopowerCable;
 import femtocraft.proxy.ClientProxyFemtocraft;
 import femtocraft.render.FemtocraftRenderUtils;
 import femtocraft.render.Model;

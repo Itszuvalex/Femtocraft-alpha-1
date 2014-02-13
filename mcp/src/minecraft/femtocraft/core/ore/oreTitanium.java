@@ -6,7 +6,6 @@ import femtocraft.Femtocraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 
 public class oreTitanium extends BlockOre {
 

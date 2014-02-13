@@ -21,8 +21,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.industry.TileEntity.MicroDeconstructorTile;
-import femtocraft.industry.TileEntity.MicroFurnaceTile;
-import femtocraft.proxy.ClientProxyFemtocraft;
 import femtocraft.render.SimpleMachineRenderer;
 
 public class BlockMicroDeconstructor extends BlockContainer {

@@ -1,27 +1,15 @@
 package femtocraft.industry.TileEntity;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockFurnace;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.common.ForgeDummyContainer;
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.industry.blocks.BlockMicroFurnace;
 import femtocraft.power.TileEntity.FemtopowerConsumer;
-import femtocraft.power.TileEntity.FemtopowerTile;
 
 public class MicroFurnaceTile extends FemtopowerConsumer implements
 		ISidedInventory {

@@ -17,7 +17,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
 import femtocraft.industry.TileEntity.MicroReconstructorTile;
-import femtocraft.industry.containers.ContainerMicroDeconstructor;
 import femtocraft.industry.containers.ContainerMicroReconstructor;
 import femtocraft.render.FemtocraftRenderUtils;
 

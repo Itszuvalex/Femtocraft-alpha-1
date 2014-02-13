@@ -2,10 +2,7 @@ package femtocraft.power.blocks;
 
 import femtocraft.Femtocraft;
 import femtocraft.power.TileEntity.FemtopowerProducerTest;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 

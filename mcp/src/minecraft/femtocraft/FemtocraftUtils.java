@@ -1,6 +1,5 @@
 package femtocraft;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import net.minecraft.client.Minecraft;

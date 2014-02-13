@@ -10,7 +10,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.api.FemtopowerContainer;
 import femtocraft.core.items.FemtocraftItemBlock;
-import femtocraft.power.TileEntity.FemtopowerMicroCubeTile;
 
 public abstract class FemtopowerItemBlock extends FemtocraftItemBlock {
 

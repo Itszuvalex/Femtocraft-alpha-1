@@ -1,7 +1,6 @@
 package femtocraft.core.liquids;
 
 import femtocraft.Femtocraft;
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.util.Icon;
 import net.minecraftforge.fluids.Fluid;

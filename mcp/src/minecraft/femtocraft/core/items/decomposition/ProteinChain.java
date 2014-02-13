@@ -2,7 +2,6 @@ package femtocraft.core.items.decomposition;
 
 import femtocraft.Femtocraft;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
 public class ProteinChain extends Item {
