@@ -1,7 +1,10 @@
 package femtocraft.industry.blocks;
 
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.Femtocraft;
+import femtocraft.industry.TileEntity.MicroReconstructorTile;
+import femtocraft.render.SimpleMachineRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -17,11 +20,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import femtocraft.Femtocraft;
-import femtocraft.industry.TileEntity.MicroReconstructorTile;
-import femtocraft.render.SimpleMachineRenderer;
+
+import java.util.Random;
 
 public class BlockMicroReconstructor extends BlockContainer {
 	/**

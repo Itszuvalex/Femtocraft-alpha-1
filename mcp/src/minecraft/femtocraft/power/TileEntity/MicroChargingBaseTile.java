@@ -1,11 +1,11 @@
 package femtocraft.power.TileEntity;
 
-import net.minecraft.block.Block;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
 import femtocraft.api.IChargingBase;
 import femtocraft.api.IChargingCoil;
 import femtocraft.managers.research.TechLevel;
+import net.minecraft.block.Block;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.ForgeDirection;
 
 public class MicroChargingBaseTile extends FemtopowerProducer {
 	public int numCoils;

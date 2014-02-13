@@ -1,19 +1,19 @@
 package femtocraft.managers.research;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.HashMap;
-import java.util.logging.Level;
-
+import femtocraft.Femtocraft;
+import femtocraft.managers.research.TechnologyEvent.TechnologyAddedEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import femtocraft.Femtocraft;
-import femtocraft.managers.research.TechnologyEvent.TechnologyAddedEvent;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.HashMap;
+import java.util.logging.Level;
 
 public class FemtocraftResearchManager {
 	private HashMap<String, Technology> technologies;

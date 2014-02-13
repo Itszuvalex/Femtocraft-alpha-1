@@ -1,10 +1,9 @@
 package femtocraft.managers.assembler;
 
-import java.util.Comparator;
-
 import femtocraft.FemtocraftUtils;
-
 import net.minecraft.item.ItemStack;
+
+import java.util.Comparator;
 
 public class AssemblerInputComparator implements Comparator<ItemStack[]> {
 

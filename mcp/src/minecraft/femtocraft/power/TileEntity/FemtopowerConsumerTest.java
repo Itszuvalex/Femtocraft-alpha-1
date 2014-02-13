@@ -1,7 +1,7 @@
 package femtocraft.power.TileEntity;
 
-import net.minecraftforge.common.ForgeDirection;
 import femtocraft.managers.research.TechLevel;
+import net.minecraftforge.common.ForgeDirection;
 
 public class FemtopowerConsumerTest extends FemtopowerConsumer {
 	private int amountPerTick;

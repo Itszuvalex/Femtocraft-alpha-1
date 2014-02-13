@@ -1,10 +1,10 @@
 package femtocraft.render;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraftforge.common.ForgeDirection;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Model {
 	public List<Quad> faces;

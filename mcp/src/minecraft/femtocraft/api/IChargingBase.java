@@ -1,7 +1,7 @@
 package femtocraft.api;
 
-import net.minecraft.world.World;
 import femtocraft.managers.research.TechLevel;
+import net.minecraft.world.World;
 
 public interface IChargingBase {
 

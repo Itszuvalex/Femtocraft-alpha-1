@@ -1,10 +1,10 @@
 package femtocraft.cooking.blocks;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import femtocraft.proxy.ClientProxyFemtocraft;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import femtocraft.proxy.ClientProxyFemtocraft;
 
 public class cuttingBoardRenderer implements ISimpleBlockRenderingHandler {
 

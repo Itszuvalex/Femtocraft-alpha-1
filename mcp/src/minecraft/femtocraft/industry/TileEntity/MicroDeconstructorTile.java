@@ -1,16 +1,5 @@
 package femtocraft.industry.TileEntity;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
@@ -18,6 +7,13 @@ import femtocraft.FemtocraftUtils;
 import femtocraft.managers.FemtocraftRecipeManager;
 import femtocraft.managers.assembler.FemtocraftAssemblerRecipe;
 import femtocraft.power.TileEntity.FemtopowerConsumer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.fluids.*;
 
 public class MicroDeconstructorTile extends FemtopowerConsumer implements
 		ISidedInventory, IFluidHandler {

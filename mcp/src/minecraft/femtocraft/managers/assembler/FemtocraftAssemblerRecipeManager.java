@@ -1,13 +1,11 @@
 package femtocraft.managers.assembler;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.SortedMap;
-import java.util.TreeMap;
-import java.util.logging.Level;
-
+import femtocraft.Femtocraft;
+import femtocraft.FemtocraftConfigs;
+import femtocraft.FemtocraftUtils;
+import femtocraft.managers.assembler.AssemblerRegisterEvent.AssemblerDecompositionRegisterEvent;
+import femtocraft.managers.assembler.AssemblerRegisterEvent.AssemblerRecompositionRegisterEvent;
+import femtocraft.managers.research.TechLevel;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,12 +17,10 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-import femtocraft.Femtocraft;
-import femtocraft.FemtocraftConfigs;
-import femtocraft.FemtocraftUtils;
-import femtocraft.managers.assembler.AssemblerRegisterEvent.AssemblerDecompositionRegisterEvent;
-import femtocraft.managers.assembler.AssemblerRegisterEvent.AssemblerRecompositionRegisterEvent;
-import femtocraft.managers.research.TechLevel;
+
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.logging.Level;
 
 /**
  * 

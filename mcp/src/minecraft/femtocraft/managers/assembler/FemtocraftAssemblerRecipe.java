@@ -1,15 +1,14 @@
 package femtocraft.managers.assembler;
 
-import java.util.logging.Level;
-
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
 import femtocraft.managers.research.TechLevel;
 import femtocraft.managers.research.Technology;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+
+import java.util.logging.Level;
 
 public class FemtocraftAssemblerRecipe implements Comparable {
 	public ItemStack[] input;

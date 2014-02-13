@@ -1,5 +1,12 @@
 package femtocraft.industry.gui;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.Femtocraft;
+import femtocraft.FemtocraftUtils;
+import femtocraft.industry.TileEntity.MicroReconstructorTile;
+import femtocraft.industry.containers.ContainerMicroReconstructor;
+import femtocraft.render.FemtocraftRenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -9,16 +16,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import femtocraft.Femtocraft;
-import femtocraft.FemtocraftUtils;
-import femtocraft.industry.TileEntity.MicroReconstructorTile;
-import femtocraft.industry.containers.ContainerMicroReconstructor;
-import femtocraft.render.FemtocraftRenderUtils;
 
 @SideOnly(Side.CLIENT)
 public class GuiMicroReconstructor extends GuiContainer {

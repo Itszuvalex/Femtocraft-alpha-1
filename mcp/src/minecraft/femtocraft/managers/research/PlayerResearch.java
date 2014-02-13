@@ -1,13 +1,13 @@
 package femtocraft.managers.research;
 
-import java.util.HashMap;
-
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.MinecraftForge;
 import femtocraft.Femtocraft;
 import femtocraft.managers.research.TechnologyEvent.TechnologyDiscoveredEvent;
 import femtocraft.managers.research.TechnologyEvent.TechnologyResearchedEvent;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.MinecraftForge;
+
+import java.util.HashMap;
 
 public class PlayerResearch {
 	public final String username;

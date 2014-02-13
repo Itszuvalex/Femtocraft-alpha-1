@@ -32,12 +32,7 @@ public class ClientProxyFemtocraft extends CommonProxyFemtocraft {
 		// registerBlockHandler
 	}
 
-	@Override
-	public void registerTileEntities() {
-		super.registerTileEntities();
-	}
-
-	@Override
+    @Override
 	public void registerBlockRenderers() {
 		super.registerBlockRenderers();
 

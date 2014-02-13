@@ -1,12 +1,11 @@
 package femtocraft.render;
 
-import org.lwjgl.opengl.GL11;
-
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import org.lwjgl.opengl.GL11;
 
 public class SimpleMachineRenderer implements ISimpleBlockRenderingHandler {
 	public static int renderID;

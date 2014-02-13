@@ -1,18 +1,18 @@
 package femtocraft;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
-
+import cpw.mods.fml.common.network.IPacketHandler;
+import cpw.mods.fml.common.network.Player;
+import femtocraft.industry.TileEntity.VacuumTubeTile;
+import femtocraft.player.FemtocraftNaniteProperties;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
-import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.Player;
-import femtocraft.industry.TileEntity.VacuumTubeTile;
-import femtocraft.player.FemtocraftNaniteProperties;
+
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
 
 public class FemtocraftPacketHandler implements IPacketHandler {
 

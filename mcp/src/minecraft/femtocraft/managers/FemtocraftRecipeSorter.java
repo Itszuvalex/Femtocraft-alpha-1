@@ -1,10 +1,10 @@
 package femtocraft.managers;
 
-import java.util.Comparator;
-
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
+
+import java.util.Comparator;
 
 public class FemtocraftRecipeSorter implements Comparator {
 	final FemtocraftCraftingManager craftingManager;

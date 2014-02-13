@@ -1,5 +1,8 @@
 package femtocraft.core.blocks;
 
+import femtocraft.Femtocraft;
+import femtocraft.core.items.FemtocraftItemBlock;
+import femtocraft.core.tiles.FemtocraftTile;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -14,9 +17,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import femtocraft.Femtocraft;
-import femtocraft.core.items.FemtocraftItemBlock;
-import femtocraft.core.tiles.FemtocraftTile;
 
 import java.util.Random;
 

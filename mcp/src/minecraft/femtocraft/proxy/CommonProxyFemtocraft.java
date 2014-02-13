@@ -5,12 +5,7 @@ import femtocraft.industry.TileEntity.MicroDeconstructorTile;
 import femtocraft.industry.TileEntity.MicroFurnaceTile;
 import femtocraft.industry.TileEntity.MicroReconstructorTile;
 import femtocraft.industry.TileEntity.VacuumTubeTile;
-import femtocraft.power.TileEntity.FemtopowerCableTile;
-import femtocraft.power.TileEntity.FemtopowerConsumerTest;
-import femtocraft.power.TileEntity.FemtopowerMicroCubeTile;
-import femtocraft.power.TileEntity.FemtopowerProducerTest;
-import femtocraft.power.TileEntity.FemtopowerTile;
-import femtocraft.power.TileEntity.MicroChargingBaseTile;
+import femtocraft.power.TileEntity.*;
 
 public class CommonProxyFemtocraft {
 	public void registerRendering() {

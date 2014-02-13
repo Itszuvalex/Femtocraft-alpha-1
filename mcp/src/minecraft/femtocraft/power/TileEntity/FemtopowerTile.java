@@ -1,14 +1,14 @@
 package femtocraft.power.TileEntity;
 
-import java.util.Arrays;
-
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
 import femtocraft.api.FemtopowerContainer;
 import femtocraft.api.IFemtopowerBlockContainer;
 import femtocraft.core.tiles.FemtocraftTile;
 import femtocraft.managers.research.TechLevel;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.ForgeDirection;
+
+import java.util.Arrays;
 
 public class FemtopowerTile extends FemtocraftTile implements
 		IFemtopowerBlockContainer {

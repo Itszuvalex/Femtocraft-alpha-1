@@ -1,10 +1,10 @@
 package femtocraft.api;
 
-import java.util.List;
-
+import femtocraft.managers.research.TechLevel;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
-import femtocraft.managers.research.TechLevel;
+
+import java.util.List;
 
 public class FemtopowerContainer implements IFemtopowerContainer {
 	private TechLevel level;

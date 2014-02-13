@@ -1,15 +1,15 @@
 package femtocraft.industry.TileEntity;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.industry.blocks.BlockMicroFurnace;
+import femtocraft.power.TileEntity.FemtopowerConsumer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import femtocraft.industry.blocks.BlockMicroFurnace;
-import femtocraft.power.TileEntity.FemtopowerConsumer;
 
 public class MicroFurnaceTile extends FemtopowerConsumer implements
 		ISidedInventory {

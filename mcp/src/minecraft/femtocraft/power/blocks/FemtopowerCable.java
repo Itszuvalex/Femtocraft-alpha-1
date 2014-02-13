@@ -1,7 +1,10 @@
 package femtocraft.power.blocks;
 
-import java.util.List;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.Femtocraft;
+import femtocraft.power.TileEntity.FemtopowerCableTile;
+import femtocraft.proxy.ClientProxyFemtocraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -12,11 +15,8 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import femtocraft.Femtocraft;
-import femtocraft.power.TileEntity.FemtopowerCableTile;
-import femtocraft.proxy.ClientProxyFemtocraft;
+
+import java.util.List;
 
 public class FemtopowerCable extends FemtopowerTileContainer {
 	public Icon coreBorder;

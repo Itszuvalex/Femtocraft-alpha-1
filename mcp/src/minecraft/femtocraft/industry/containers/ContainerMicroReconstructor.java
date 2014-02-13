@@ -1,12 +1,5 @@
 package femtocraft.industry.containers;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.api.IAssemblerSchematic;
@@ -14,6 +7,13 @@ import femtocraft.common.gui.DisplaySlot;
 import femtocraft.common.gui.OutputSlot;
 import femtocraft.industry.TileEntity.MicroReconstructorTile;
 import femtocraft.industry.items.AssemblySchematic;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 
 public class ContainerMicroReconstructor extends Container {
 	private MicroReconstructorTile reconstructor;

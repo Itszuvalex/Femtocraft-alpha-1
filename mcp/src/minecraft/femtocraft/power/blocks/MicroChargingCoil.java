@@ -1,11 +1,5 @@
 package femtocraft.power.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.util.Icon;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
@@ -13,6 +7,12 @@ import femtocraft.api.IChargingBase;
 import femtocraft.api.IChargingCoil;
 import femtocraft.managers.research.TechLevel;
 import femtocraft.proxy.ClientProxyFemtocraft;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class MicroChargingCoil extends Block implements IChargingCoil {
 	public Icon coilConnector;

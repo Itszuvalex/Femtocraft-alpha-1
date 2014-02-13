@@ -1,18 +1,16 @@
 package femtocraft.power.render;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.world.IBlockAccess;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import femtocraft.power.blocks.MicroChargingCoil;
 import femtocraft.proxy.ClientProxyFemtocraft;
 import femtocraft.render.Model;
 import femtocraft.render.Point;
 import femtocraft.render.Quad;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.world.IBlockAccess;
+import org.lwjgl.opengl.GL11;
 
 public class FemtopowerChargingCoilRenderer implements
 		ISimpleBlockRenderingHandler {

@@ -1,13 +1,5 @@
 package femtocraft.industry.render;
 
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import femtocraft.industry.TileEntity.VacuumTubeTile;
 import femtocraft.industry.blocks.VacuumTube;
@@ -16,6 +8,13 @@ import femtocraft.render.FemtocraftRenderUtils;
 import femtocraft.render.Model;
 import femtocraft.render.Point;
 import femtocraft.render.Quad;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.common.ForgeDirection;
+import org.lwjgl.opengl.GL11;
 
 public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 	// Full Outside Models

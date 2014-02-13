@@ -2,12 +2,9 @@ package femtocraft.industry.blocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.Random;
-
 import femtocraft.Femtocraft;
 import femtocraft.industry.TileEntity.MicroFurnaceTile;
 import femtocraft.render.SimpleMachineRenderer;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -24,6 +21,8 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockMicroFurnace extends BlockContainer {
 	/**

@@ -1,12 +1,11 @@
 package femtocraft;
 
+import femtocraft.industry.items.AssemblySchematic;
+import net.minecraftforge.common.Configuration;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
-
-import femtocraft.industry.items.AssemblySchematic;
-
-import net.minecraftforge.common.Configuration;
 
 public class FemtocraftConfigs {
 	@Retention(RetentionPolicy.RUNTIME)

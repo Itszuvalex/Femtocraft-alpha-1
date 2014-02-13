@@ -1,14 +1,5 @@
 package femtocraft.industry.items;
 
-import java.util.List;
-import java.util.Random;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.Icon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
@@ -17,6 +8,15 @@ import femtocraft.FemtocraftUtils;
 import femtocraft.api.IAssemblerSchematic;
 import femtocraft.managers.assembler.FemtocraftAssemblerRecipe;
 import femtocraft.managers.research.Technology;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.Icon;
+
+import java.util.List;
+import java.util.Random;
 
 /**
  * 

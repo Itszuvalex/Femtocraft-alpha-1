@@ -3,8 +3,8 @@
  */
 package femtocraft.api;
 
-import net.minecraftforge.common.ForgeDirection;
 import femtocraft.managers.research.TechLevel;
+import net.minecraftforge.common.ForgeDirection;
 
 /**
  * @author Itszuvalex

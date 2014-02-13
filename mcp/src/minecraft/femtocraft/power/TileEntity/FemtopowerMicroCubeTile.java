@@ -1,13 +1,13 @@
 package femtocraft.power.TileEntity;
 
-import java.util.Arrays;
-
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
 import femtocraft.api.FemtopowerContainer;
 import femtocraft.managers.research.TechLevel;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.ForgeDirection;
+
+import java.util.Arrays;
 
 public class FemtopowerMicroCubeTile extends FemtopowerTile {
 	public boolean[] outputs;
