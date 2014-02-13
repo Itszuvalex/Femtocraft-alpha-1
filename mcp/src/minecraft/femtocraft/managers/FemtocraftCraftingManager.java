@@ -127,21 +127,19 @@ public class FemtocraftCraftingManager {
 		ArrayList arraylist = new ArrayList();
 		int i = par2ArrayOfObj.length;
 
-		for (int j = 0; j < i; ++j) {
-			Object object1 = par2ArrayOfObj[j];
+        for (Object object1 : par2ArrayOfObj) {
+            if (object1 instanceof ItemStack) {
+                arraylist.add(((ItemStack) object1).copy());
+            } else if (object1 instanceof Item) {
+                arraylist.add(new ItemStack((Item) object1));
+            } else {
+                if (!(object1 instanceof Block)) {
+                    throw new RuntimeException("Invalid shapeless recipy!");
+                }
 
-			if (object1 instanceof ItemStack) {
-				arraylist.add(((ItemStack) object1).copy());
-			} else if (object1 instanceof Item) {
-				arraylist.add(new ItemStack((Item) object1));
-			} else {
-				if (!(object1 instanceof Block)) {
-					throw new RuntimeException("Invalid shapeless recipy!");
-				}
-
-				arraylist.add(new ItemStack((Block) object1));
-			}
-		}
+                arraylist.add(new ItemStack((Block) object1));
+            }
+        }
 
 		ShapelessRecipes recipe = new ShapelessRecipes(par1ItemStack, arraylist);
 
