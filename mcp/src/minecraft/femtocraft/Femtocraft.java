@@ -19,8 +19,8 @@ import femtocraft.blocks.BlockUnidentifiedAlloy;
 import femtocraft.cooking.blocks.CuttingBoard;
 import femtocraft.core.items.*;
 import femtocraft.core.items.decomposition.*;
-import femtocraft.core.liquids.Mass;
-import femtocraft.core.liquids.MassBlock;
+import femtocraft.core.liquids.BlockFluidMass;
+import femtocraft.core.liquids.FluidMass;
 import femtocraft.core.ore.*;
 import femtocraft.farming.produce.Tomato;
 import femtocraft.farming.seeds.tomatoSeed;
@@ -98,7 +98,7 @@ public class Femtocraft {
 
 	// liquids
 	public static Fluid mass;
-	public static MassBlock mass_block;
+	public static BlockFluidMass mass_block;
 
 	// items
 	public static Item ingotTitanium;
@@ -199,40 +199,40 @@ public class Femtocraft {
 
 		// blocks
 
-		oreTitanium = new oreTitanium(FemtocraftConfigs.oreTitaniumID);
+		oreTitanium = new BlockOreTitanium(FemtocraftConfigs.oreTitaniumID);
 		MinecraftForge.setBlockHarvestLevel(oreTitanium, "pickaxe", 2);
-		GameRegistry.registerBlock(oreTitanium, "oreTitanium");
+		GameRegistry.registerBlock(oreTitanium, "BlockOreTitanium");
 		LanguageRegistry.addName(oreTitanium, "Titanium Ore");
 		if (FemtocraftConfigs.registerTitaniumOreInOreDictionary)
 			OreDictionary
-					.registerOre("oreTitanium", new ItemStack(oreTitanium));
+					.registerOre("BlockOreTitanium", new ItemStack(oreTitanium));
 
-		orePlatinum = new orePlatinum(FemtocraftConfigs.orePlatinumID);
+		orePlatinum = new BlockOrePlatinum(FemtocraftConfigs.orePlatinumID);
 		MinecraftForge.setBlockHarvestLevel(orePlatinum, "pickaxe", 2);
-		GameRegistry.registerBlock(orePlatinum, "orePlatinum");
+		GameRegistry.registerBlock(orePlatinum, "BlockOrePlatinum");
 		LanguageRegistry.addName(orePlatinum, "Platinum Ore");
 		if (FemtocraftConfigs.registerPlatinumOreInOreDictionary)
 			OreDictionary
-					.registerOre("orePlatinum", new ItemStack(orePlatinum));
+					.registerOre("BlockOrePlatinum", new ItemStack(orePlatinum));
 
-		oreThorium = new oreThorium(FemtocraftConfigs.oreThoriumID);
+		oreThorium = new BlockOreThorium(FemtocraftConfigs.oreThoriumID);
 		MinecraftForge.setBlockHarvestLevel(oreThorium, "pickaxe", 2);
-		GameRegistry.registerBlock(oreThorium, "oreThorium");
+		GameRegistry.registerBlock(oreThorium, "BlockOreThorium");
 		LanguageRegistry.addName(oreThorium, "Thorium Ore");
 		if (FemtocraftConfigs.registerThoriumOreInOreDictionary)
-			OreDictionary.registerOre("oreThorium", new ItemStack(oreThorium));
+			OreDictionary.registerOre("BlockOreThorium", new ItemStack(oreThorium));
 
-		oreFarenite = new oreFarenite(FemtocraftConfigs.oreFareniteID);
+		oreFarenite = new BlockOreFarenite(FemtocraftConfigs.oreFareniteID);
 		MinecraftForge.setBlockHarvestLevel(oreFarenite, "pickaxe", 2);
-		GameRegistry.registerBlock(oreFarenite, "oreFarenite");
+		GameRegistry.registerBlock(oreFarenite, "BlockOreFarenite");
 		LanguageRegistry.addName(oreFarenite, "Farenite Ore");
-		OreDictionary.registerOre("oreFarenite", new ItemStack(oreFarenite));
+		OreDictionary.registerOre("BlockOreFarenite", new ItemStack(oreFarenite));
 
-		oreMalenite = new oreMalenite(FemtocraftConfigs.oreMaleniteID);
+		oreMalenite = new BlockOreMalenite(FemtocraftConfigs.oreMaleniteID);
 		MinecraftForge.setBlockHarvestLevel(oreFarenite, "pickaxe", 3);
-		GameRegistry.registerBlock(oreMalenite, "oreMalenite");
+		GameRegistry.registerBlock(oreMalenite, "BlockOreMalenite");
 		LanguageRegistry.addName(oreMalenite, "Malenite Ore");
-		OreDictionary.registerOre("oreMalenite", new ItemStack(oreMalenite));
+		OreDictionary.registerOre("BlockOreMalenite", new ItemStack(oreMalenite));
 
 		nanoStone = new BlockNanoStone(FemtocraftConfigs.nanoStoneID);
 		GameRegistry.registerBlock(nanoStone, "BlockNanoStone");
@@ -323,12 +323,12 @@ public class Femtocraft {
 				"Electrostatic Charging Coil");
 
 		// Liquids
-		mass = new Mass();
+		mass = new FluidMass();
 		FluidRegistry.registerFluid(mass);
 
-		mass_block = new MassBlock(FemtocraftConfigs.FemtocraftMassBlock);
-		GameRegistry.registerBlock(mass_block, "Mass");
-		LanguageRegistry.addName(mass_block, "Mass");
+		mass_block = new BlockFluidMass(FemtocraftConfigs.FemtocraftMassBlock);
+		GameRegistry.registerBlock(mass_block, "FluidMass");
+		LanguageRegistry.addName(mass_block, "FluidMass");
 
 		// items
 

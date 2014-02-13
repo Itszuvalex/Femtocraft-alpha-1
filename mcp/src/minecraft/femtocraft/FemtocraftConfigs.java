@@ -563,7 +563,7 @@ public class FemtocraftConfigs {
 	public static void load(Configuration config) {
 		try {
 
-			// Mass Loading
+			// FluidMass Loading
 
 			config.load();
 			Field[] fields = FemtocraftConfigs.class.getFields();

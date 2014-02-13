@@ -5,11 +5,11 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.util.Icon;
 import net.minecraftforge.fluids.Fluid;
 
-public class Mass extends Fluid {
+public class FluidMass extends Fluid {
 
-	public Mass() {
-		super("Mass");
-		setUnlocalizedName("Mass");
+	public FluidMass() {
+		super("FluidMass");
+		setUnlocalizedName("FluidMass");
 		setLuminosity(1);
 		setDensity(5000);
 		setTemperature(600);

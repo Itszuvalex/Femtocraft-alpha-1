@@ -65,7 +65,7 @@ public class FemtocraftAssemblerRecipe implements Comparable {
 		}
 		compound.setTag("input", inputList);
 
-		// Mass
+		// FluidMass
 		compound.setInteger("mass", mass);
 
 		// Output
@@ -105,7 +105,7 @@ public class FemtocraftAssemblerRecipe implements Comparable {
 			}
 		}
 
-		// Mass
+		// FluidMass
 		recipe.mass = compound.getInteger("mass");
 
 		// Output

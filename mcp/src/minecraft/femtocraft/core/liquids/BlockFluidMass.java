@@ -8,13 +8,13 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
-public class MassBlock extends BlockFluidClassic {
+public class BlockFluidMass extends BlockFluidClassic {
 	@SideOnly(Side.CLIENT)
 	public Icon stillIcon;
 	@SideOnly(Side.CLIENT)
 	public Icon flowingIcon;
 
-	public MassBlock(int id) {
+	public BlockFluidMass(int id) {
 		super(id, Femtocraft.mass, Material.water);
 		setUnlocalizedName("mass");
 		setCreativeTab(Femtocraft.femtocraftTab);

@@ -7,13 +7,15 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
 import net.minecraft.client.renderer.texture.IconRegister;
 
-public class orePlatinum extends BlockOre {
+import java.util.Random;
 
-	public orePlatinum(int id) {
+public class BlockOreMalenite extends BlockOre {
+
+	public BlockOreMalenite(int id) {
 		super(id);
-		this.setCreativeTab(Femtocraft.femtocraftTab);
-		setTextureName(Femtocraft.ID.toLowerCase() + ":" + "orePlatinum");
-		setUnlocalizedName("orePlatinum");
+		setCreativeTab(Femtocraft.femtocraftTab);
+		setTextureName(Femtocraft.ID.toLowerCase() + ":" + "BlockOreMalenite");
+		setUnlocalizedName("BlockOreMalenite");
 		setHardness(3.0f);
 		setStepSound(Block.soundStoneFootstep);
 		setResistance(1f);
@@ -22,6 +24,15 @@ public class orePlatinum extends BlockOre {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
-				.toLowerCase() + ":" + "orePlatinum");
+				.toLowerCase() + ":" + "BlockOreMalenite");
+	}
+
+	public int idDropped(int par1, Random random, int par2) {
+		return Femtocraft.ingotMalenite.itemID;
+	}
+
+	public int quantityDropped(Random random) {
+		// 2-4
+		return random.nextInt(3) + 2;
 	}
 }

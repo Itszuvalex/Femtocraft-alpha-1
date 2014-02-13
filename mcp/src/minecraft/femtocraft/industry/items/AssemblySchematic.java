@@ -119,7 +119,7 @@ public class AssemblySchematic extends Item implements IAssemblerSchematic {
 
 		par3List.add("");
 
-		String massLine = String.format(EnumChatFormatting.YELLOW + "Mass:"
+		String massLine = String.format(EnumChatFormatting.YELLOW + "FluidMass:"
 				+ EnumChatFormatting.RESET + " %d", recipe.mass);
 		par3List.add(massLine);
 

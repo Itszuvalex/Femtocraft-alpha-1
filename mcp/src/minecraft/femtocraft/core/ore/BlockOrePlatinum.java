@@ -7,13 +7,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
 import net.minecraft.client.renderer.texture.IconRegister;
 
-public class oreTitanium extends BlockOre {
+public class BlockOrePlatinum extends BlockOre {
 
-	public oreTitanium(int id) {
+	public BlockOrePlatinum(int id) {
 		super(id);
 		this.setCreativeTab(Femtocraft.femtocraftTab);
-		setTextureName(Femtocraft.ID.toLowerCase() + ":" + "oreTitanium");
-		setUnlocalizedName("oreTitanium");
+		setTextureName(Femtocraft.ID.toLowerCase() + ":" + "BlockOrePlatinum");
+		setUnlocalizedName("BlockOrePlatinum");
 		setHardness(3.0f);
 		setStepSound(Block.soundStoneFootstep);
 		setResistance(1f);
@@ -22,6 +22,6 @@ public class oreTitanium extends BlockOre {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
-				.toLowerCase() + ":" + "oreTitanium");
+				.toLowerCase() + ":" + "BlockOrePlatinum");
 	}
 }
