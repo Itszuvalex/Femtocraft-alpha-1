@@ -73,7 +73,7 @@ public interface IFemtopowerBlockContainer {
 	 * @param from
 	 *            Direction attempting to input power from
 	 * @return True if container has room and can accept charging from direction
-	 *         @from, false otherwise
+	 *         @from false otherwise
 	 */
 	public boolean canCharge(ForgeDirection from);
 

@@ -19,8 +19,6 @@ public interface IFemtopowerContainer {
 
 	/**
 	 * 
-	 * @param to
-	 *            Direction from this Container
 	 * @return TechLevel of power this machine will give to the given direciton
 	 */
 	public TechLevel getTechLevel();
@@ -46,8 +44,6 @@ public interface IFemtopowerContainer {
 
 	/**
 	 * 
-	 * @param from
-	 *            Direction attempting to charge from.
 	 * @return Fill percentage for purposes of charging - allows tanks and
 	 *         whatnot to trick pipes into filling them I.E. return
 	 *         getFillPercentage() < .25f ? getFillPercentage() : .25f;
@@ -56,8 +52,6 @@ public interface IFemtopowerContainer {
 
 	/**
 	 * 
-	 * @param to
-	 *            Direction attempting to output to
 	 * @return Fill percentage for purposes of output - allows tanks and other
 	 *         TileEntities to trick pipes into not pulling all of their power.
 	 */
@@ -65,17 +59,13 @@ public interface IFemtopowerContainer {
 
 	/**
 	 * 
-	 * @param from
-	 *            Direction attempting to input power from
 	 * @return True if container has room and can accept charging from direction
-	 *         @from, false otherwise
+	 *         @from false otherwise
 	 */
 	public boolean canCharge();
 
 	/**
 	 * 
-	 * @param from
-	 *            Direction charge is coming from.
 	 * @param amount
 	 *            Amount attempting to charge.
 	 * @return Total amount of @amount used to fill internal tank.
