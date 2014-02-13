@@ -1,9 +1,9 @@
 package femtocraft;
 
 import cpw.mods.fml.common.network.IGuiHandler;
-import femtocraft.industry.tiles.TileEntityMicroDeconstructor;
-import femtocraft.industry.tiles.TileEntityMicroFurnace;
-import femtocraft.industry.tiles.TileEntityMicroReconstructor;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
 import femtocraft.industry.containers.ContainerMicroDeconstructor;
 import femtocraft.industry.containers.ContainerMicroFurnace;
 import femtocraft.industry.containers.ContainerMicroReconstructor;
@@ -26,15 +26,15 @@ public class GuiHandlerFemtocraft implements IGuiHandler {
 			int x, int y, int z) {
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
-		if (tileEntity instanceof TileEntityMicroFurnace) {
+		if (tileEntity instanceof TileEntityBaseEntityMicroFurnace) {
 			return new ContainerMicroFurnace(player.inventory,
-					(TileEntityMicroFurnace) tileEntity);
-		} else if (tileEntity instanceof TileEntityMicroDeconstructor) {
+					(TileEntityBaseEntityMicroFurnace) tileEntity);
+		} else if (tileEntity instanceof TileEntityBaseEntityMicroDeconstructor) {
 			return new ContainerMicroDeconstructor(player.inventory,
-					(TileEntityMicroDeconstructor) tileEntity);
-		} else if (tileEntity instanceof TileEntityMicroReconstructor) {
+					(TileEntityBaseEntityMicroDeconstructor) tileEntity);
+		} else if (tileEntity instanceof TileEntityBaseEntityMicroReconstructor) {
 			return new ContainerMicroReconstructor(player.inventory,
-					(TileEntityMicroReconstructor) tileEntity);
+					(TileEntityBaseEntityMicroReconstructor) tileEntity);
 		}
 
 		return null;
@@ -45,15 +45,15 @@ public class GuiHandlerFemtocraft implements IGuiHandler {
 			int x, int y, int z) {
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
-		if (tileEntity instanceof TileEntityMicroFurnace) {
+		if (tileEntity instanceof TileEntityBaseEntityMicroFurnace) {
 			return new GuiMicroFurnace(player.inventory,
-					(TileEntityMicroFurnace) tileEntity);
-		} else if (tileEntity instanceof TileEntityMicroDeconstructor) {
+					(TileEntityBaseEntityMicroFurnace) tileEntity);
+		} else if (tileEntity instanceof TileEntityBaseEntityMicroDeconstructor) {
 			return new GuiMicroDeconstructor(player.inventory,
-					(TileEntityMicroDeconstructor) tileEntity);
-		} else if (tileEntity instanceof TileEntityMicroReconstructor) {
+					(TileEntityBaseEntityMicroDeconstructor) tileEntity);
+		} else if (tileEntity instanceof TileEntityBaseEntityMicroReconstructor) {
 			return new GuiMicroReconstructor(player.inventory,
-					(TileEntityMicroReconstructor) tileEntity);
+					(TileEntityBaseEntityMicroReconstructor) tileEntity);
 		}
 
 		return null;

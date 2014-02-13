@@ -2,7 +2,7 @@ package femtocraft.core.blocks;
 
 import femtocraft.Femtocraft;
 import femtocraft.core.items.CoreItemBlock;
-import femtocraft.core.tiles.FemtocraftTile;
+import femtocraft.core.tiles.TileEntityBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -28,7 +28,7 @@ public class TileContainer extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new FemtocraftTile();
+		return new TileEntityBase();
 	}
 
 	@Override
@@ -36,8 +36,8 @@ public class TileContainer extends BlockContainer {
 			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
 			float par8, float par9) {
 		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
-		if (te instanceof FemtocraftTile) {
-			FemtocraftTile tile = (FemtocraftTile) te;
+		if (te instanceof TileEntityBase) {
+			TileEntityBase tile = (TileEntityBase) te;
 
 			if (hasGui() && tile.isUseableByPlayer(par5EntityPlayer)) {
 				par5EntityPlayer.openGui(getMod(), getGuiID(), par1World, par2,
@@ -66,17 +66,17 @@ public class TileContainer extends BlockContainer {
 
 		if (!par1World.isRemote) {
 			TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
-			if (te instanceof FemtocraftTile) {
+			if (te instanceof TileEntityBase) {
                 if (par5EntityLivingBase == null)
 					return;
 				if (par5EntityLivingBase instanceof EntityPlayerMP) {
 					Item item = par6ItemStack.getItem();
 					if ((item instanceof CoreItemBlock)
 							&& (((CoreItemBlock) item).hasItemNBT())) {
-						((FemtocraftTile) te)
+						((TileEntityBase) te)
 								.loadInfoFromItemNBT(par6ItemStack.stackTagCompound);
-						if (((FemtocraftTile) te).getOwner().isEmpty()) {
-							((FemtocraftTile) te)
+						if (((TileEntityBase) te).getOwner().isEmpty()) {
+							((TileEntityBase) te)
 									.setOwner(((EntityPlayerMP) par5EntityLivingBase).username);
 						}
 					}
@@ -91,8 +91,8 @@ public class TileContainer extends BlockContainer {
 	public void breakBlock(World par1World, int par2, int par3, int par4,
 			int par5, int par6) {
 		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
-		if (te != null && te instanceof FemtocraftTile) {
-			FemtocraftTile tile = (FemtocraftTile) te;
+		if (te != null && te instanceof TileEntityBase) {
+			TileEntityBase tile = (TileEntityBase) te;
 
 			ItemStack stack = new ItemStack(Block.blocksList[par5]);
 			Item item = stack.getItem();
@@ -115,16 +115,16 @@ public class TileContainer extends BlockContainer {
 	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x,
 			int y, int z) {
 		TileEntity te = world.getBlockTileEntity(x, y, z);
-		if (!(te instanceof FemtocraftTile))
+		if (!(te instanceof TileEntityBase))
 			return false;
-		if (!canPlayerRemove(player, (FemtocraftTile) te)) {
+		if (!canPlayerRemove(player, (TileEntityBase) te)) {
 			player.addChatMessage("You do not own this block.");
 			return false;
 		}
 		return super.removeBlockByPlayer(world, player, x, y, z);
 	}
 
-    private boolean canPlayerRemove(EntityPlayer player, FemtocraftTile tile) {
+    private boolean canPlayerRemove(EntityPlayer player, TileEntityBase tile) {
         return player != null && (tile.getOwner().equals(player.username) || MinecraftServer.getServer().getConfigurationManager().isPlayerOpped(player.username) || player.capabilities.isCreativeMode);
     }
 
@@ -132,7 +132,7 @@ public class TileContainer extends BlockContainer {
 	public boolean canEntityDestroy(World world, int x, int y, int z,
 			Entity entity) {
 		TileEntity te = world.getBlockTileEntity(x, y, z);
-        return te instanceof FemtocraftTile && entity instanceof EntityPlayer && canPlayerRemove((EntityPlayer) entity, (FemtocraftTile) te) && super.canEntityDestroy(world, x, y, z, entity);
+        return te instanceof TileEntityBase && entity instanceof EntityPlayer && canPlayerRemove((EntityPlayer) entity, (TileEntityBase) te) && super.canEntityDestroy(world, x, y, z, entity);
     }
 
 	@Override

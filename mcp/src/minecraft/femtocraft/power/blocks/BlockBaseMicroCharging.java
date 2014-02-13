@@ -5,7 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.api.IChargingBase;
 import femtocraft.managers.research.EnumTechLevel;
-import femtocraft.power.TileEntity.MicroChargingBaseTile;
+import femtocraft.power.tiles.TileEntityPowerMicroChargingBase;
 import femtocraft.proxy.ClientProxyFemtocraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -14,7 +14,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class MicroChargingBase extends FemtopowerTileContainer implements
+public class BlockBaseMicroCharging extends TileContainerPower implements
 		IChargingBase {
 	public Icon side;
 	public Icon top;
@@ -27,17 +27,17 @@ public class MicroChargingBase extends FemtopowerTileContainer implements
 	public Icon top_pillar_top;
 	public Icon top_pillar_side;
 
-	public MicroChargingBase(int par1) {
+	public BlockBaseMicroCharging(int par1) {
 		super(par1, Material.iron);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		setUnlocalizedName("MicroChargingBase");
+		setUnlocalizedName("BlockBaseMicroCharging");
 		setHardness(2.0f);
 		setStepSound(Block.soundMetalFootstep);
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new MicroChargingBaseTile();
+		return new TileEntityPowerMicroChargingBase();
 	}
 
 	@Override

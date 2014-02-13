@@ -1,4 +1,4 @@
-package femtocraft.power.TileEntity;
+package femtocraft.power.tiles;
 
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
@@ -9,13 +9,13 @@ import net.minecraftforge.common.ForgeDirection;
 
 import java.util.Arrays;
 
-public class FemtopowerMicroCubeTile extends FemtopowerTile {
+public class TileEntityPowerMicroCube extends TileEntityPowerBase {
 	public boolean[] outputs;
 	static final public String packetChannel = Femtocraft.ID + ".MCube";
 	public static final int maxStorage = 10000;
 	public static final EnumTechLevel ENUM_TECH_LEVEL = EnumTechLevel.MICRO;
 
-	public FemtopowerMicroCubeTile() {
+	public TileEntityPowerMicroCube() {
 		super();
 		setMaxStorage(maxStorage);
 		setTechLevel(ENUM_TECH_LEVEL);

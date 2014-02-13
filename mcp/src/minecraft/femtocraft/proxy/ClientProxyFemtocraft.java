@@ -3,9 +3,9 @@ package femtocraft.proxy;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import femtocraft.cooking.blocks.cuttingBoardRenderer;
 import femtocraft.industry.render.RenderVacuumTube;
-import femtocraft.power.render.FemtopowerCableRenderer;
-import femtocraft.power.render.FemtopowerChargingBaseRenderer;
-import femtocraft.power.render.FemtopowerChargingCoilRenderer;
+import femtocraft.power.render.RenderCable;
+import femtocraft.power.render.RenderChargingBase;
+import femtocraft.power.render.RenderChargingCoil;
 import femtocraft.render.SimpleMachineRenderer;
 
 public class ClientProxyFemtocraft extends CommonProxyFemtocraft {
@@ -43,7 +43,7 @@ public class ClientProxyFemtocraft extends CommonProxyFemtocraft {
 
 		FemtopowerCableRenderID = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(FemtopowerCableRenderID,
-				new FemtopowerCableRenderer());
+				new RenderCable());
 
 		// FemtopowerMicroCubeRenderID =
 		// RenderingRegistry.getNextAvailableRenderId();
@@ -58,12 +58,12 @@ public class ClientProxyFemtocraft extends CommonProxyFemtocraft {
 		FemtocraftChargingBaseRenderID = RenderingRegistry
 				.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(FemtocraftChargingBaseRenderID,
-				new FemtopowerChargingBaseRenderer());
+				new RenderChargingBase());
 
 		FemtocraftChargingCoilRenderID = RenderingRegistry
 				.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(FemtocraftChargingCoilRenderID,
-				new FemtopowerChargingCoilRenderer());
+				new RenderChargingCoil());
 
 	}
 }

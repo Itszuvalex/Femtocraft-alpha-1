@@ -4,7 +4,7 @@
 package femtocraft.power.blocks;
 
 import femtocraft.core.blocks.TileContainer;
-import femtocraft.power.TileEntity.FemtopowerTile;
+import femtocraft.power.tiles.TileEntityPowerBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,15 +16,15 @@ import net.minecraft.world.World;
  * @author Itszuvalex
  * 
  */
-public class FemtopowerTileContainer extends TileContainer {
+public class TileContainerPower extends TileContainer {
 
-	public FemtopowerTileContainer(int par1, Material par2Material) {
+	public TileContainerPower(int par1, Material par2Material) {
 		super(par1, par2Material);
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new FemtopowerTile();
+		return new TileEntityPowerBase();
 	}
 
 	/*
@@ -38,7 +38,7 @@ public class FemtopowerTileContainer extends TileContainer {
 	public void onNeighborBlockChange(World par1World, int par2, int par3,
 			int par4, int par5) {
 		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
-		FemtopowerTile container = (FemtopowerTile) par1World
+		TileEntityPowerBase container = (TileEntityPowerBase) par1World
 				.getBlockTileEntity(par2, par3, par4);
 
 		if (container != null)
@@ -52,7 +52,7 @@ public class FemtopowerTileContainer extends TileContainer {
 		super.onBlockPlacedBy(par1World, par2, par3, par4,
 				par5EntityLivingBase, par6ItemStack);
 
-		FemtopowerTile container = (FemtopowerTile) par1World
+		TileEntityPowerBase container = (TileEntityPowerBase) par1World
 				.getBlockTileEntity(par2, par3, par4);
 
 		if (container != null)
@@ -75,7 +75,7 @@ public class FemtopowerTileContainer extends TileContainer {
 		par1World.notifyBlocksOfNeighborChange(par2, par3, par4,
 				par1World.getBlockId(par2, par3, par4));
 
-		FemtopowerTile container = (FemtopowerTile) par1World
+		TileEntityPowerBase container = (TileEntityPowerBase) par1World
 				.getBlockTileEntity(par2, par3, par4);
 
 		if (container != null)
@@ -94,7 +94,7 @@ public class FemtopowerTileContainer extends TileContainer {
 		// TODO Auto-generated method stub
 		int val = super.onBlockPlaced(par1World, par2, par3, par4, par5, par6,
 				par7, par8, par9);
-		FemtopowerTile container = (FemtopowerTile) par1World
+		TileEntityPowerBase container = (TileEntityPowerBase) par1World
 				.getBlockTileEntity(par2, par3, par4);
 
 		if (container != null)
@@ -119,7 +119,7 @@ public class FemtopowerTileContainer extends TileContainer {
 			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
 			float par8, float par9) {
 
-		FemtopowerTile container = (FemtopowerTile) par1World
+		TileEntityPowerBase container = (TileEntityPowerBase) par1World
 				.getBlockTileEntity(par2, par3, par4);
 
 		if (container != null)

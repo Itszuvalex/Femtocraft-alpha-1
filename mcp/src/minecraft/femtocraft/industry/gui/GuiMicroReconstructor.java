@@ -4,7 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
-import femtocraft.industry.tiles.TileEntityMicroReconstructor;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
 import femtocraft.industry.containers.ContainerMicroReconstructor;
 import femtocraft.render.FemtocraftRenderUtils;
 import net.minecraft.client.Minecraft;
@@ -22,10 +22,10 @@ import org.lwjgl.opengl.GL11;
 public class GuiMicroReconstructor extends GuiContainer {
 	public static final ResourceLocation texture = new ResourceLocation(
 			Femtocraft.ID.toLowerCase(), "textures/guis/Reassembler.png");
-	private TileEntityMicroReconstructor reconstructorInventory;
+	private TileEntityBaseEntityMicroReconstructor reconstructorInventory;
 
 	public GuiMicroReconstructor(InventoryPlayer par1InventoryPlayer,
-			TileEntityMicroReconstructor tileEntity) {
+			TileEntityBaseEntityMicroReconstructor tileEntity) {
 		super(new ContainerMicroReconstructor(par1InventoryPlayer, tileEntity));
 		this.ySize = 204;
 		this.reconstructorInventory = tileEntity;

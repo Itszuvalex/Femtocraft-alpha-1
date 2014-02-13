@@ -3,7 +3,7 @@ package femtocraft.industry.gui;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
-import femtocraft.industry.tiles.TileEntityMicroDeconstructor;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
 import femtocraft.industry.containers.ContainerMicroDeconstructor;
 import femtocraft.render.FemtocraftRenderUtils;
 import net.minecraft.client.Minecraft;
@@ -21,10 +21,10 @@ import org.lwjgl.opengl.GL11;
 public class GuiMicroDeconstructor extends GuiContainer {
 	public static final ResourceLocation texture = new ResourceLocation(
 			Femtocraft.ID.toLowerCase(), "textures/guis/Disassembler.png");
-	private TileEntityMicroDeconstructor deconstructorInventory;
+	private TileEntityBaseEntityMicroDeconstructor deconstructorInventory;
 
 	public GuiMicroDeconstructor(InventoryPlayer par1InventoryPlayer,
-			TileEntityMicroDeconstructor tileEntity) {
+			TileEntityBaseEntityMicroDeconstructor tileEntity) {
 		super(new ContainerMicroDeconstructor(par1InventoryPlayer, tileEntity));
 		this.deconstructorInventory = tileEntity;
 	}

@@ -6,9 +6,9 @@ import femtocraft.Femtocraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 
-public class SpoolGold extends Item {
+public class ItemBlockSpoolGold extends Item {
 
-	public SpoolGold(int par1) {
+	public ItemBlockSpoolGold(int par1) {
 		super(par1);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);

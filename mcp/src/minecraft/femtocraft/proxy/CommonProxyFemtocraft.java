@@ -1,11 +1,11 @@
 package femtocraft.proxy;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import femtocraft.industry.tiles.TileEntityMicroDeconstructor;
-import femtocraft.industry.tiles.TileEntityMicroFurnace;
-import femtocraft.industry.tiles.TileEntityMicroReconstructor;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
 import femtocraft.industry.tiles.TileEntityVacuumTube;
-import femtocraft.power.TileEntity.*;
+import femtocraft.power.tiles.*;
 
 public class CommonProxyFemtocraft {
 	public void registerRendering() {
@@ -14,24 +14,24 @@ public class CommonProxyFemtocraft {
 
 	public void registerTileEntities() {
 		// Tile Entities
-		GameRegistry.registerTileEntity(FemtopowerTile.class, "FemtopowerTile");
-		GameRegistry.registerTileEntity(FemtopowerProducerTest.class,
-				"FemtopowerProducerTest");
-		GameRegistry.registerTileEntity(FemtopowerConsumerTest.class,
-				"FemtopowerConsumerTest");
-		GameRegistry.registerTileEntity(TileEntityMicroFurnace.class,
+		GameRegistry.registerTileEntity(TileEntityPowerBase.class, "TileEntityPowerBase");
+		GameRegistry.registerTileEntity(TileEntityPowerProducerTest.class,
+				"TileEntityPowerProducerTest");
+		GameRegistry.registerTileEntity(TileEntityPowerConsumerTest.class,
+				"TileEntityPowerConsumerTest");
+		GameRegistry.registerTileEntity(TileEntityBaseEntityMicroFurnace.class,
 				"FemtocraftMicroFurnace");
-		GameRegistry.registerTileEntity(TileEntityMicroDeconstructor.class,
+		GameRegistry.registerTileEntity(TileEntityBaseEntityMicroDeconstructor.class,
 				"FemtocraftMicroDeconstructor");
-		GameRegistry.registerTileEntity(TileEntityMicroReconstructor.class,
+		GameRegistry.registerTileEntity(TileEntityBaseEntityMicroReconstructor.class,
 				"FemtocraftMicroReconstructor");
-		GameRegistry.registerTileEntity(FemtopowerCableTile.class,
-				"FemtopowerCable");
-		GameRegistry.registerTileEntity(FemtopowerMicroCubeTile.class,
+		GameRegistry.registerTileEntity(TileEntityBaseEntityCable.class,
+				"BlockCable");
+		GameRegistry.registerTileEntity(TileEntityPowerMicroCube.class,
 				"FemtocraftMicroCube");
 		GameRegistry.registerTileEntity(TileEntityVacuumTube.class, "BlockVacuumTube");
-		GameRegistry.registerTileEntity(MicroChargingBaseTile.class,
-				"MicroChargingBase");
+		GameRegistry.registerTileEntity(TileEntityPowerMicroChargingBase.class,
+				"BlockBaseMicroCharging");
 	}
 
 	public void registerBlockRenderers() {

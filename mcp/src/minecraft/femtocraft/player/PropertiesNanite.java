@@ -13,7 +13,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 
 import java.io.*;
 
-public class FemtocraftNaniteProperties implements IExtendedEntityProperties {
+public class PropertiesNanite implements IExtendedEntityProperties {
 	public final static String PROP_TAG = "femtocraft.nanite.properties";
 	public final static String PACKET_CHANNEL = Femtocraft.ID + "." + "NProp";
 
@@ -21,18 +21,18 @@ public class FemtocraftNaniteProperties implements IExtendedEntityProperties {
 
 	private int currentGoo, maxGoo;
 
-	public FemtocraftNaniteProperties(EntityPlayer player) {
+	public PropertiesNanite(EntityPlayer player) {
 		currentGoo = maxGoo = 0;
 		this.player = player;
 	}
 
 	public static void register(EntityPlayer player) {
 		player.registerExtendedProperties(PROP_TAG,
-				new FemtocraftNaniteProperties(player));
+				new PropertiesNanite(player));
 	}
 
-	public static FemtocraftNaniteProperties get(EntityPlayer player) {
-		return (FemtocraftNaniteProperties) player
+	public static PropertiesNanite get(EntityPlayer player) {
+		return (PropertiesNanite) player
 				.getExtendedProperties(PROP_TAG);
 	}
 

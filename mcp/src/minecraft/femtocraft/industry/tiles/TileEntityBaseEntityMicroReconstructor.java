@@ -7,7 +7,7 @@ import femtocraft.FemtocraftUtils;
 import femtocraft.api.IAssemblerSchematic;
 import femtocraft.managers.ManagerRecipe;
 import femtocraft.managers.assembler.AssemblerRecipe;
-import femtocraft.power.TileEntity.FemtopowerConsumer;
+import femtocraft.power.tiles.TileEntityPowerConsumer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -16,11 +16,11 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
-public class TileEntityMicroReconstructor extends FemtopowerConsumer implements
+public class TileEntityBaseEntityMicroReconstructor extends TileEntityPowerConsumer implements
         ISidedInventory, IFluidHandler {
     private FluidTank tank;
 
-    public TileEntityMicroReconstructor() {
+    public TileEntityBaseEntityMicroReconstructor() {
         super();
         setMaxStorage(800);
         tank = new FluidTank(600);

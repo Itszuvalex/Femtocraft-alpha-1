@@ -3,7 +3,7 @@ package femtocraft;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 import femtocraft.industry.tiles.TileEntityVacuumTube;
-import femtocraft.player.FemtocraftNaniteProperties;
+import femtocraft.player.PropertiesNanite;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
@@ -20,8 +20,8 @@ public class FemtocraftPacketHandler implements IPacketHandler {
     public void onPacketData(INetworkManager manager,
                              Packet250CustomPayload packet, Player playerEntity) {
         if (packet.channel
-                .equalsIgnoreCase(FemtocraftNaniteProperties.PACKET_CHANNEL)) {
-            FemtocraftNaniteProperties.get((EntityPlayer) playerEntity)
+                .equalsIgnoreCase(PropertiesNanite.PACKET_CHANNEL)) {
+            PropertiesNanite.get((EntityPlayer) playerEntity)
                     .handlePacket(packet);
             return;
         }

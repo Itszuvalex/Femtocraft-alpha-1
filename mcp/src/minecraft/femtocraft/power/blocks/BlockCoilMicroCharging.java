@@ -14,14 +14,14 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class MicroChargingCoil extends Block implements IChargingCoil {
+public class BlockCoilMicroCharging extends Block implements IChargingCoil {
 	public Icon coilConnector;
 	public Icon coilConnectorTop;
 
-	public MicroChargingCoil(int par1) {
+	public BlockCoilMicroCharging(int par1) {
 		super(par1, Material.iron);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		setUnlocalizedName("MicroChargingCoil");
+		setUnlocalizedName("BlockCoilMicroCharging");
 		setHardness(1.0f);
 		setStepSound(Block.soundMetalFootstep);
 		setBlockBounds(4.f / 16.f, 0, 4.f / 16.f, 12.f / 16.f, 1, 12.f / 16.f);

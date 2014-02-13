@@ -10,11 +10,11 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 
-public class FemtocraftTile extends TileEntity {
+public class TileEntityBase extends TileEntity {
     private String owner;
     private final String NBT_TAG = "owner";
 
-    public FemtocraftTile() {
+    public TileEntityBase() {
         super();
         owner = "";
     }

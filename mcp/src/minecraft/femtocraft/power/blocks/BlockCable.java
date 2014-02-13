@@ -3,7 +3,7 @@ package femtocraft.power.blocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
-import femtocraft.power.TileEntity.FemtopowerCableTile;
+import femtocraft.power.tiles.TileEntityBaseEntityCable;
 import femtocraft.proxy.ClientProxyFemtocraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -18,17 +18,17 @@ import net.minecraftforge.common.ForgeDirection;
 
 import java.util.List;
 
-public class FemtopowerCable extends FemtopowerTileContainer {
+public class BlockCable extends TileContainerPower {
 	public Icon coreBorder;
 	public Icon connector;
 	public Icon coil;
 	public Icon coilEdge;
 	public Icon border;
 
-	public FemtopowerCable(int par1, Material par2Material) {
+	public BlockCable(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		setUnlocalizedName("FemtopowerCable");
+		setUnlocalizedName("BlockCable");
 		setHardness(1.0f);
 		setStepSound(Block.soundStoneFootstep);
 		setBlockBounds();
@@ -41,7 +41,7 @@ public class FemtopowerCable extends FemtopowerTileContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new FemtopowerCableTile();
+		return new TileEntityBaseEntityCable();
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class FemtopowerCable extends FemtopowerTileContainer {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
 		// this.field_94336_cN =
-		// par1IconRegister.func_94245_a("Femtocraft:FemtopowerCable");
+		// par1IconRegister.func_94245_a("Femtocraft:BlockCable");
 		// this.core =
 		// par1IconRegister.func_94245_a("Femtocraft:FemtopowerCableCore");
 		this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
@@ -89,9 +89,9 @@ public class FemtopowerCable extends FemtopowerTileContainer {
 		TileEntity tile = par1World.getBlockTileEntity(x, y, z);
 		if (tile == null)
 			return;
-		if (!(tile instanceof FemtopowerCableTile))
+		if (!(tile instanceof TileEntityBaseEntityCable))
 			return;
-		FemtopowerCableTile cable = (FemtopowerCableTile) tile;
+		TileEntityBaseEntityCable cable = (TileEntityBaseEntityCable) tile;
 
 		for (int i = 0; i < 6; ++i) {
 			if (!cable.connections[i])
@@ -163,9 +163,9 @@ public class FemtopowerCable extends FemtopowerTileContainer {
 		TileEntity tile = par1World.getBlockTileEntity(x, y, z);
 		if (tile == null)
 			return box;
-		if (!(tile instanceof FemtopowerCableTile))
+		if (!(tile instanceof TileEntityBaseEntityCable))
 			return box;
-		FemtopowerCableTile cable = (FemtopowerCableTile) tile;
+		TileEntityBaseEntityCable cable = (TileEntityBaseEntityCable) tile;
 
 		for (int i = 0; i < 6; ++i) {
 			if (!cable.connections[i])
@@ -194,7 +194,7 @@ public class FemtopowerCable extends FemtopowerTileContainer {
 					(float) box.maxZ);
 			return;
 		}
-		if (!(tile instanceof FemtopowerCableTile)) {
+		if (!(tile instanceof TileEntityBaseEntityCable)) {
 			setBlockBounds((float) box.minX, (float) box.minY,
 					(float) box.minZ, (float) box.maxX, (float) box.maxY,
 					(float) box.maxZ);
@@ -207,7 +207,7 @@ public class FemtopowerCable extends FemtopowerTileContainer {
 		double maxX = 12.d / 16.d;
 		double maxY = 12.d / 16.d;
 		double maxZ = 12.d / 16.d;
-		FemtopowerCableTile cable = (FemtopowerCableTile) tile;
+		TileEntityBaseEntityCable cable = (TileEntityBaseEntityCable) tile;
 
 		for (int i = 0; i < 6; ++i) {
 			if (!cable.connections[i])

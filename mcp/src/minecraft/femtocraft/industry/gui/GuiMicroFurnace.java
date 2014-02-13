@@ -3,7 +3,7 @@ package femtocraft.industry.gui;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
-import femtocraft.industry.tiles.TileEntityMicroFurnace;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
 import femtocraft.industry.containers.ContainerMicroFurnace;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -16,10 +16,10 @@ import org.lwjgl.opengl.GL11;
 public class GuiMicroFurnace extends GuiContainer {
 	public static final ResourceLocation texture = new ResourceLocation(
 			Femtocraft.ID.toLowerCase(), "textures/guis/MicroFurnace.png");
-	private TileEntityMicroFurnace furnaceInventory;
+	private TileEntityBaseEntityMicroFurnace furnaceInventory;
 
 	public GuiMicroFurnace(InventoryPlayer par1InventoryPlayer,
-			TileEntityMicroFurnace par2TileEntityFurnace) {
+			TileEntityBaseEntityMicroFurnace par2TileEntityFurnace) {
 		super(new ContainerMicroFurnace(par1InventoryPlayer,
 				par2TileEntityFurnace));
 		this.furnaceInventory = par2TileEntityFurnace;

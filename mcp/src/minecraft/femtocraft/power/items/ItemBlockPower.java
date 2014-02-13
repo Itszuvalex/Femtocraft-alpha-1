@@ -11,9 +11,9 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public abstract class FemtopowerItemBlock extends CoreItemBlock {
+public abstract class ItemBlockPower extends CoreItemBlock {
 
-	public FemtopowerItemBlock(int par1) {
+	public ItemBlockPower(int par1) {
 		super(par1);
 	}
 

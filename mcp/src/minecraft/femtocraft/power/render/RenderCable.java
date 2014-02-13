@@ -4,8 +4,8 @@
 package femtocraft.power.render;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import femtocraft.power.TileEntity.FemtopowerCableTile;
-import femtocraft.power.blocks.FemtopowerCable;
+import femtocraft.power.tiles.TileEntityBaseEntityCable;
+import femtocraft.power.blocks.BlockCable;
 import femtocraft.proxy.ClientProxyFemtocraft;
 import femtocraft.render.FemtocraftRenderUtils;
 import femtocraft.render.Model;
@@ -23,7 +23,7 @@ import org.lwjgl.opengl.GL11;
  * @author Chris
  * 
  */
-public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
+public class RenderCable implements ISimpleBlockRenderingHandler {
 	private Model Coil_North;
 	private Model Coil_South;
 	private Model Coil_East;
@@ -40,13 +40,13 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 
 	private boolean CoilInitialized = false;
 
-	public FemtopowerCableRenderer() {
+	public RenderCable() {
 	}
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
-		FemtopowerCable cable = (FemtopowerCable) block;
+		BlockCable cable = (BlockCable) block;
 		if (cable == null)
 			return;
 
@@ -66,16 +66,16 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
 			Block block, int modelId, RenderBlocks renderer) {
-		FemtopowerCable cable = (FemtopowerCable) block;
+		BlockCable cable = (BlockCable) block;
 		if (block == null)
 			return false;
 
 		TileEntity tile = renderer.blockAccess.getBlockTileEntity(x, y, z);
 		if (tile == null)
 			return false;
-		if (!(tile instanceof FemtopowerCableTile))
+		if (!(tile instanceof TileEntityBaseEntityCable))
 			return false;
-		FemtopowerCableTile cableTile = (FemtopowerCableTile) tile;
+		TileEntityBaseEntityCable cableTile = (TileEntityBaseEntityCable) tile;
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.setBrightness(block.getMixedBrightnessForBlock(
 				renderer.blockAccess, x, y, z));
@@ -96,7 +96,7 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		return ClientProxyFemtocraft.FemtopowerCableRenderID;
 	}
 
-	private boolean renderCable(FemtopowerCable cable, float x, float y,
+	private boolean renderCable(BlockCable cable, float x, float y,
 			float z, RenderBlocks renderer, boolean[] connections) {
 
 		// //Render border
@@ -126,7 +126,7 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		return true;
 	}
 
-	private void drawCore(FemtopowerCable cable, float x, float y, float z,
+	private void drawCore(BlockCable cable, float x, float y, float z,
 			RenderBlocks renderer, boolean[] connections) {
 		if (!CoilInitialized)
 			initializeCoils(cable);
@@ -169,7 +169,7 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		}
 	}
 
-	private void drawCoreBlock(FemtopowerCable cable, float x, float y,
+	private void drawCoreBlock(BlockCable cable, float x, float y,
 			float z, RenderBlocks renderer, boolean[] connections) {
 		FemtocraftRenderUtils.renderCube(x, y, z, 5.0f / 16.0f, 5.0f / 16.0f,
 				5.0f / 16.0f, 11.0f / 16.0f, 11.0f / 16.0f, 11.0f / 16.0f,
@@ -193,7 +193,7 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 				ForgeDirection.WEST, !connections[4]);
 	}
 
-	private void drawConnector(FemtopowerCable cable, float x, float y,
+	private void drawConnector(BlockCable cable, float x, float y,
 			float z, float offset, RenderBlocks renderer,
 			ForgeDirection direction, boolean drawCap) {
 		ForgeDirection rotaxi = ForgeDirection.UNKNOWN;
@@ -282,7 +282,7 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 				cable.connector.getMinV(), cable.connector.getMaxV());
 	}
 
-	// private void drawCoil(FemtopowerCable cable, float x, float y, float z,
+	// private void drawCoil(BlockCable cable, float x, float y, float z,
 	// float offset, RenderBlocks renderer, ForgeDirection direction) {
 	//
 	// drawConnector(cable, x, y, z, 1.0F/16.0F + offset, renderer, direction,
@@ -346,7 +346,7 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		return count;
 	}
 
-	private void initializeCoils(FemtopowerCable cable) {
+	private void initializeCoils(BlockCable cable) {
 		Coil_North = createCoil(cable, 6.f / 16.f).rotateOnZAxis(Math.PI);
 		Coil_South = Coil_North.rotatedOnXAxis(Math.PI);
 		Coil_Up = Coil_North.rotatedOnXAxis(Math.PI / 2.d);
@@ -364,7 +364,7 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		CoilInitialized = true;
 	}
 
-	private void drawCoilFar(FemtopowerCable cable, ForgeDirection dir,
+	private void drawCoilFar(BlockCable cable, ForgeDirection dir,
 			Point loc) {
 		drawConnector(cable, loc.x, loc.y, loc.z, 7.0F / 16.0f, null, dir, true);
 		drawConnector(cable, loc.x, loc.y, loc.z, 5.0F / 16.0F, null, dir,
@@ -400,7 +400,7 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		}
 	}
 
-	private void drawCoilClose(FemtopowerCable cable, ForgeDirection dir,
+	private void drawCoilClose(BlockCable cable, ForgeDirection dir,
 			Point loc) {
 		drawConnector(cable, loc.x, loc.y, loc.z, 3.0F / 16.0f, null, dir, true);
 		drawConnector(cable, loc.x, loc.y, loc.z, 1.F / 16.0F, null, dir, false);
@@ -435,7 +435,7 @@ public class FemtopowerCableRenderer implements ISimpleBlockRenderingHandler {
 		}
 	}
 
-	private Model createCoil(FemtopowerCable cable, float offset) {
+	private Model createCoil(BlockCable cable, float offset) {
 		Model Coil = new Model(new Point(0, 0, 0), new Point(.5f, .5f, .5f));
 
 		offset = .5F - offset;

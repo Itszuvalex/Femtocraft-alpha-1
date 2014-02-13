@@ -1,8 +1,8 @@
-package femtocraft.power.TileEntity;
+package femtocraft.power.tiles;
 
 import femtocraft.api.FemtopowerContainer;
 import femtocraft.api.IFemtopowerBlockContainer;
-import femtocraft.core.tiles.FemtocraftTile;
+import femtocraft.core.tiles.TileEntityBase;
 import femtocraft.managers.research.EnumTechLevel;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -10,7 +10,7 @@ import net.minecraftforge.common.ForgeDirection;
 
 import java.util.Arrays;
 
-public class FemtopowerTile extends FemtocraftTile implements
+public class TileEntityPowerBase extends TileEntityBase implements
 		IFemtopowerBlockContainer {
 	private FemtopowerContainer container;
 	private float maxPowerPerTick;
@@ -18,7 +18,7 @@ public class FemtopowerTile extends FemtocraftTile implements
 	private float distributionBuffer;
 	public boolean[] connections;
 
-	public FemtopowerTile() {
+	public TileEntityPowerBase() {
 		super();
 		container = new FemtopowerContainer(EnumTechLevel.MACRO, 250);
 		maxPowerPerTick = .05f;

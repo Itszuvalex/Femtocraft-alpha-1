@@ -32,10 +32,10 @@ import femtocraft.industry.blocks.BlockVacuumTube;
 import femtocraft.industry.items.ItemPaperSchematic;
 import femtocraft.managers.ManagerRecipe;
 import femtocraft.managers.research.ManagerResearch;
-import femtocraft.player.FemtocraftNaniteProperties;
+import femtocraft.player.PropertiesNanite;
 import femtocraft.power.blocks.*;
-import femtocraft.power.items.FemtopowerMicroCubeItemBlock;
-import femtocraft.power.items.SpoolGold;
+import femtocraft.power.items.ItemBlockMicroCube;
+import femtocraft.power.items.ItemBlockSpoolGold;
 import femtocraft.proxy.ClientProxyFemtocraft;
 import femtocraft.proxy.CommonProxyFemtocraft;
 import net.minecraft.block.Block;
@@ -55,7 +55,7 @@ import java.util.logging.Logger;
 
 @Mod(modid = Femtocraft.ID, name = "Femtocraft", version = Femtocraft.VERSION)
 @NetworkMod(channels = { Femtocraft.ID,
-		FemtocraftNaniteProperties.PACKET_CHANNEL, TileEntityVacuumTube.packetChannel }, packetHandler = FemtocraftPacketHandler.class, clientSideRequired = true, serverSideRequired = true)
+		PropertiesNanite.PACKET_CHANNEL, TileEntityVacuumTube.packetChannel }, packetHandler = FemtocraftPacketHandler.class, clientSideRequired = true, serverSideRequired = true)
 public class Femtocraft {
 	public static final String ID = "Femtocraft";
 	public static final String VERSION = "0.1.0";
@@ -84,7 +84,7 @@ public class Femtocraft {
 	public static Block nanoStone;
 	public static Block femtoStone;
 	public static Block unidentifiedAlloy;
-	public static FemtopowerCable FemtopowerCable;
+	public static BlockCable BlockCable;
 	public static Block FemtopowerGeneratorTest;
 	public static Block FemtopowerConsumerTest;
 	public static Block FemtocraftMicroFurnaceUnlit;
@@ -251,26 +251,26 @@ public class Femtocraft {
 		GameRegistry.registerBlock(unidentifiedAlloy, "BlockUnidentifiedAlloy");
 		LanguageRegistry.addName(unidentifiedAlloy, "Unidentified Alloy");
 
-		FemtopowerCable = new FemtopowerCable(
+		BlockCable = new BlockCable(
 				FemtocraftConfigs.FemtopowerCableID, Material.rock);
-		GameRegistry.registerBlock(FemtopowerCable, "FemtopowerCable");
-		LanguageRegistry.addName(FemtopowerCable, "Femtopower Cable");
+		GameRegistry.registerBlock(BlockCable, "BlockCable");
+		LanguageRegistry.addName(BlockCable, "Femtopower Cable");
 
-		FemtopowerGeneratorTest = new FemtopowerGenerator(
+		FemtopowerGeneratorTest = new BlockGenerator(
 				FemtocraftConfigs.FemtopowerGeneratorTestID, Material.rock)
-				.setUnlocalizedName("FemtopowerGenerator").setHardness(3.5f)
+				.setUnlocalizedName("BlockGenerator").setHardness(3.5f)
 				.setStepSound(Block.soundStoneFootstep);
 		GameRegistry.registerBlock(FemtopowerGeneratorTest,
-				"FemtopowerGenerator");
+				"BlockGenerator");
 		LanguageRegistry.addName(FemtopowerGeneratorTest,
 				"Femtopower Generator");
 
-		FemtopowerConsumerTest = new FemtopowerConsumerBlock(
+		FemtopowerConsumerTest = new BlockConsumer(
 				FemtocraftConfigs.FemtopowerConsumerTestBlockID, Material.rock)
-				.setUnlocalizedName("FemtopowerConsumer").setHardness(3.5f)
+				.setUnlocalizedName("TileEntityPowerConsumer").setHardness(3.5f)
 				.setStepSound(Block.soundStoneFootstep);
 		GameRegistry
-				.registerBlock(FemtopowerConsumerTest, "FemtopowerConsumer");
+				.registerBlock(FemtopowerConsumerTest, "TileEntityPowerConsumer");
 		LanguageRegistry.addName(FemtopowerConsumerTest, "Femtopower Consumer");
 
 		FemtocraftMicroFurnaceUnlit = new BlockMicroFurnace(
@@ -296,10 +296,10 @@ public class Femtocraft {
 		LanguageRegistry.addName(FemtocraftMicroReconstructor,
 				"Microtech Reconstructor");
 
-		FemtopowerMicroCube = new FemtopowerMicroCube(
+		FemtopowerMicroCube = new BlockMicroCube(
 				FemtocraftConfigs.FemtopowerMicroCubeID);
 		GameRegistry.registerBlock(FemtopowerMicroCube,
-				FemtopowerMicroCubeItemBlock.class, "FemtopowerMicroCube");
+				ItemBlockMicroCube.class, "BlockMicroCube");
 		LanguageRegistry.addName(FemtopowerMicroCube, "Micro-Cube");
 
 		FemtocraftVacuumTube = new BlockVacuumTube(
@@ -308,14 +308,14 @@ public class Femtocraft {
 				.registerBlock(FemtocraftVacuumTube, "FemtocraftVacuumTube");
 		LanguageRegistry.addName(FemtocraftVacuumTube, "Vacuum Tube");
 
-		FemtopowerMicroChargingBase = new MicroChargingBase(
+		FemtopowerMicroChargingBase = new BlockBaseMicroCharging(
 				FemtocraftConfigs.FemtopowerMicroChargingBaseID);
 		GameRegistry.registerBlock(FemtopowerMicroChargingBase,
 				"FemtopowerMicroChargingBase");
 		LanguageRegistry.addName(FemtopowerMicroChargingBase,
 				"Electrostatic Charging Base");
 
-		FemtopowerMicroChargingCoil = new MicroChargingCoil(
+		FemtopowerMicroChargingCoil = new BlockCoilMicroCharging(
 				FemtocraftConfigs.FemtopowerMicroChargingCoilID);
 		GameRegistry.registerBlock(FemtopowerMicroChargingCoil,
 				"FemtopowerMicroChargingCoil");
@@ -431,7 +431,7 @@ public class Femtocraft {
 				.setUnlocalizedName("spool");
 		LanguageRegistry.addName(spool, "ItemSpool");
 
-		spoolGold = new SpoolGold(FemtocraftConfigs.spoolGoldID)
+		spoolGold = new ItemBlockSpoolGold(FemtocraftConfigs.spoolGoldID)
 				.setUnlocalizedName("spoolGold");
 		LanguageRegistry.addName(spoolGold, "Gold Wire ItemSpool");
 

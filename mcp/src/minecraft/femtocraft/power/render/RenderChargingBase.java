@@ -1,7 +1,7 @@
 package femtocraft.power.render;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import femtocraft.power.blocks.MicroChargingBase;
+import femtocraft.power.blocks.BlockBaseMicroCharging;
 import femtocraft.proxy.ClientProxyFemtocraft;
 import femtocraft.render.Model;
 import femtocraft.render.Point;
@@ -12,17 +12,17 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
-public class FemtopowerChargingBaseRenderer implements
+public class RenderChargingBase implements
 		ISimpleBlockRenderingHandler {
 	Model base_model;
 
-	public FemtopowerChargingBaseRenderer() {
+	public RenderChargingBase() {
 	}
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
-		MicroChargingBase base = (MicroChargingBase) block;
+		BlockBaseMicroCharging base = (BlockBaseMicroCharging) block;
 		if (base == null)
 			return;
 
@@ -42,7 +42,7 @@ public class FemtopowerChargingBaseRenderer implements
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
 			Block block, int modelId, RenderBlocks renderer) {
-		MicroChargingBase base = (MicroChargingBase) block;
+		BlockBaseMicroCharging base = (BlockBaseMicroCharging) block;
 		if (base == null)
 			return false;
 
@@ -65,7 +65,7 @@ public class FemtopowerChargingBaseRenderer implements
 		return ClientProxyFemtocraft.FemtocraftChargingBaseRenderID;
 	}
 
-	void renderBase(MicroChargingBase base, int x, int y, int z) {
+	void renderBase(BlockBaseMicroCharging base, int x, int y, int z) {
 		if (base_model == null) {
 			createBase(base);
 		}
@@ -74,7 +74,7 @@ public class FemtopowerChargingBaseRenderer implements
 		base_model.draw();
 	}
 
-	void createBase(MicroChargingBase base) {
+	void createBase(BlockBaseMicroCharging base) {
 		base_model = new Model();
 
 		// Normal faces

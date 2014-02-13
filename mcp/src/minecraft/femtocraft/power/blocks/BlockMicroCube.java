@@ -4,7 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.api.IInterfaceDevice;
-import femtocraft.power.TileEntity.FemtopowerMicroCubeTile;
+import femtocraft.power.tiles.TileEntityPowerMicroCube;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -16,11 +16,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public class FemtopowerMicroCube extends FemtopowerTileContainer {
+public class BlockMicroCube extends TileContainerPower {
 	public Icon outputSide;
 	public Icon inputSide;
 
-	public FemtopowerMicroCube(int par1) {
+	public BlockMicroCube(int par1) {
 		super(par1, Material.iron);
 		setCreativeTab(Femtocraft.femtocraftTab);
 		setUnlocalizedName("microCube");
@@ -30,7 +30,7 @@ public class FemtopowerMicroCube extends FemtopowerTileContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new FemtopowerMicroCubeTile();
+		return new TileEntityPowerMicroCube();
 	}
 
 	@Override
@@ -41,9 +41,9 @@ public class FemtopowerMicroCube extends FemtopowerTileContainer {
 
 		if (te == null)
 			return this.blockIcon;
-		if (!(te instanceof FemtopowerMicroCubeTile))
+		if (!(te instanceof TileEntityPowerMicroCube))
 			return this.blockIcon;
-		FemtopowerMicroCubeTile cube = (FemtopowerMicroCubeTile) te;
+		TileEntityPowerMicroCube cube = (TileEntityPowerMicroCube) te;
 		return cube.outputs[side] ? outputSide : inputSide;
 	}
 
@@ -70,7 +70,7 @@ public class FemtopowerMicroCube extends FemtopowerTileContainer {
 		ItemStack item = par5EntityPlayer.getCurrentEquippedItem();
 		if (item != null && item.getItem() instanceof IInterfaceDevice) {
 
-			FemtopowerMicroCubeTile tile = (FemtopowerMicroCubeTile) par1World
+			TileEntityPowerMicroCube tile = (TileEntityPowerMicroCube) par1World
 					.getBlockTileEntity(par2, par3, par4);
 			if (tile != null && !par1World.isRemote) {
 				ForgeDirection dir = ForgeDirection.getOrientation(par6);

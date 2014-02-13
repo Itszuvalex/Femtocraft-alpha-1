@@ -3,7 +3,7 @@ package femtocraft.industry.containers;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.common.gui.OutputSlot;
-import femtocraft.industry.tiles.TileEntityMicroDeconstructor;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
 import femtocraft.managers.ManagerRecipe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -13,13 +13,13 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerMicroDeconstructor extends Container {
-	private TileEntityMicroDeconstructor deconstructor;
+	private TileEntityBaseEntityMicroDeconstructor deconstructor;
 	private int lastCookTime = 0;
 	private int lastPower = 0;
 	private int lastMass = 0;
 
 	public ContainerMicroDeconstructor(InventoryPlayer par1InventoryPlayer,
-			TileEntityMicroDeconstructor deconstructor) {
+			TileEntityBaseEntityMicroDeconstructor deconstructor) {
 		this.deconstructor = deconstructor;
 		this.addSlotToContainer(new Slot(deconstructor, 0, 38, 37));
 		for (int y = 0; y < 3; ++y) {

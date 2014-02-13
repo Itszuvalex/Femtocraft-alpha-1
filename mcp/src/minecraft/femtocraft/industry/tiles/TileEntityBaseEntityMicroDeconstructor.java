@@ -2,20 +2,27 @@ package femtocraft.industry.tiles;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import femtocraft.industry.blocks.BlockMicroFurnace;
-import femtocraft.power.TileEntity.FemtopowerConsumer;
+import femtocraft.Femtocraft;
+import femtocraft.FemtocraftUtils;
+import femtocraft.managers.ManagerRecipe;
+import femtocraft.managers.assembler.AssemblerRecipe;
+import femtocraft.power.tiles.TileEntityPowerConsumer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.fluids.*;
 
-public class TileEntityMicroFurnace extends FemtopowerConsumer implements
-		ISidedInventory {
-	public TileEntityMicroFurnace() {
+public class TileEntityBaseEntityMicroDeconstructor extends TileEntityPowerConsumer implements
+		ISidedInventory, IFluidHandler {
+	private FluidTank tank;
+
+	public TileEntityBaseEntityMicroDeconstructor() {
 		super();
 		setMaxStorage(800);
+		tank = new FluidTank(600);
 	}
 
 	private int powerToCook = 40;
@@ -24,48 +31,53 @@ public class TileEntityMicroFurnace extends FemtopowerConsumer implements
 	/**
 	 * The ItemStacks that hold the items currently being used in the furnace
 	 */
-	private ItemStack[] furnaceItemStacks = new ItemStack[2];
+	private ItemStack[] deconstructorItemStacks = new ItemStack[10];
 
 	/** The number of ticks that the current item has been cooking for */
-	public int furnaceCookTime = 0;
+	public int cookTime = 0;
 	public int currentPower = 0;
 	private String field_94130_e;
-	public ItemStack smeltingStack = null;
+	public ItemStack deconstructingStack = null;
+
+	public int getMassAmount() {
+		return tank.getFluidAmount();
+	}
+
+	public int getMassCapacity() {
+		return tank.getCapacity();
+	}
 
 	/**
 	 * Returns the number of slots in the inventory.
 	 */
-	@Override
 	public int getSizeInventory() {
-		return this.furnaceItemStacks.length;
+		return this.deconstructorItemStacks.length;
 	}
 
 	/**
 	 * Returns the stack in slot i
 	 */
-	@Override
 	public ItemStack getStackInSlot(int par1) {
-		return this.furnaceItemStacks[par1];
+		return this.deconstructorItemStacks[par1];
 	}
 
 	/**
 	 * Removes from an inventory slot (first arg) up to a specified number
 	 * (second arg) of items and returns them in a new stack.
 	 */
-	@Override
 	public ItemStack decrStackSize(int par1, int par2) {
-		if (this.furnaceItemStacks[par1] != null) {
+		if (this.deconstructorItemStacks[par1] != null) {
 			ItemStack itemstack;
 
-			if (this.furnaceItemStacks[par1].stackSize <= par2) {
-				itemstack = this.furnaceItemStacks[par1];
-				this.furnaceItemStacks[par1] = null;
+			if (this.deconstructorItemStacks[par1].stackSize <= par2) {
+				itemstack = this.deconstructorItemStacks[par1];
+				this.deconstructorItemStacks[par1] = null;
 				return itemstack;
 			} else {
-				itemstack = this.furnaceItemStacks[par1].splitStack(par2);
+				itemstack = this.deconstructorItemStacks[par1].splitStack(par2);
 
-				if (this.furnaceItemStacks[par1].stackSize == 0) {
-					this.furnaceItemStacks[par1] = null;
+				if (this.deconstructorItemStacks[par1].stackSize == 0) {
+					this.deconstructorItemStacks[par1] = null;
 				}
 
 				return itemstack;
@@ -80,11 +92,10 @@ public class TileEntityMicroFurnace extends FemtopowerConsumer implements
 	 * whatever it returns as an EntityItem - like when you close a workbench
 	 * GUI.
 	 */
-	@Override
 	public ItemStack getStackInSlotOnClosing(int par1) {
-		if (this.furnaceItemStacks[par1] != null) {
-			ItemStack itemstack = this.furnaceItemStacks[par1];
-			this.furnaceItemStacks[par1] = null;
+		if (this.deconstructorItemStacks[par1] != null) {
+			ItemStack itemstack = this.deconstructorItemStacks[par1];
+			this.deconstructorItemStacks[par1] = null;
 			return itemstack;
 		} else {
 			return null;
@@ -95,9 +106,8 @@ public class TileEntityMicroFurnace extends FemtopowerConsumer implements
 	 * Sets the given item stack to the specified slot in the inventory (can be
 	 * crafting or armor sections).
 	 */
-	@Override
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
-		this.furnaceItemStacks[par1] = par2ItemStack;
+		this.deconstructorItemStacks[par1] = par2ItemStack;
 
 		if (par2ItemStack != null
 				&& par2ItemStack.stackSize > this.getInventoryStackLimit()) {
@@ -108,9 +118,9 @@ public class TileEntityMicroFurnace extends FemtopowerConsumer implements
 	/**
 	 * Returns the name of the inventory.
 	 */
-	@Override
 	public String getInvName() {
-		return this.isInvNameLocalized() ? this.field_94130_e : "MicroFurnace";
+		return this.isInvNameLocalized() ? this.field_94130_e
+				: "Microtech Deconstructor";
 	}
 
 	/**
@@ -118,7 +128,6 @@ public class TileEntityMicroFurnace extends FemtopowerConsumer implements
 	 * name, and translated into the player's language. Otherwise it will be
 	 * used directly.
 	 */
-	@Override
 	public boolean isInvNameLocalized() {
 		return this.field_94130_e != null && this.field_94130_e.length() > 0;
 	}
@@ -130,62 +139,62 @@ public class TileEntityMicroFurnace extends FemtopowerConsumer implements
 	/**
 	 * Reads a tile entity from NBT.
 	 */
-	@Override
 	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
 		super.readFromNBT(par1NBTTagCompound);
 
 		NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
-		this.furnaceItemStacks = new ItemStack[this.getSizeInventory()];
+		this.deconstructorItemStacks = new ItemStack[this.getSizeInventory()];
 
 		for (int i = 0; i < nbttaglist.tagCount() - 1; ++i) {
 			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
 					.tagAt(i);
 			byte b0 = nbttagcompound1.getByte("Slot");
 
-			if (b0 >= 0 && b0 < this.furnaceItemStacks.length) {
-				this.furnaceItemStacks[b0] = ItemStack
+			if (b0 >= 0 && b0 < this.deconstructorItemStacks.length) {
+				this.deconstructorItemStacks[b0] = ItemStack
 						.loadItemStackFromNBT(nbttagcompound1);
 			}
 		}
 
 		NBTTagCompound nbttagcompoundsmelt = (NBTTagCompound) nbttaglist
 				.tagAt(nbttaglist.tagCount() - 1);
-		if (nbttagcompoundsmelt.getBoolean("isSmelting")) {
-			this.smeltingStack = ItemStack
+		if (nbttagcompoundsmelt.getBoolean("isDeconstructing")) {
+			this.deconstructingStack = ItemStack
 					.loadItemStackFromNBT(nbttagcompoundsmelt);
 		} else {
-			this.smeltingStack = null;
+			this.deconstructingStack = null;
 		}
 
-		this.furnaceCookTime = par1NBTTagCompound.getShort("CookTime");
+		this.cookTime = par1NBTTagCompound.getShort("CookTime");
 
 		if (par1NBTTagCompound.hasKey("CustomName")) {
 			this.field_94130_e = par1NBTTagCompound.getString("CustomName");
 		}
+
+		tank.readFromNBT(par1NBTTagCompound);
 	}
 
 	/**
 	 * Writes a tile entity to NBT.
 	 */
-	@Override
 	public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setShort("CookTime", (short) this.furnaceCookTime);
+		par1NBTTagCompound.setShort("CookTime", (short) this.cookTime);
 		NBTTagList nbttaglist = new NBTTagList();
 
-		for (int i = 0; i < this.furnaceItemStacks.length; ++i) {
-			if (this.furnaceItemStacks[i] != null) {
+		for (int i = 0; i < this.deconstructorItemStacks.length; ++i) {
+			if (this.deconstructorItemStacks[i] != null) {
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte) i);
-				this.furnaceItemStacks[i].writeToNBT(nbttagcompound1);
+				this.deconstructorItemStacks[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
 		}
 
 		NBTTagCompound nbttagcompoundsmelt = new NBTTagCompound();
-		nbttagcompoundsmelt.setBoolean("isSmelting", isSmelting());
-		if (isSmelting()) {
-			this.smeltingStack.writeToNBT(nbttagcompoundsmelt);
+		nbttagcompoundsmelt.setBoolean("isDeconstructing", isDeconstructing());
+		if (isDeconstructing()) {
+			this.deconstructingStack.writeToNBT(nbttagcompoundsmelt);
 		}
 		nbttaglist.appendTag(nbttagcompoundsmelt);
 
@@ -194,13 +203,14 @@ public class TileEntityMicroFurnace extends FemtopowerConsumer implements
 		if (this.isInvNameLocalized()) {
 			par1NBTTagCompound.setString("CustomName", this.field_94130_e);
 		}
+
+		tank.writeToNBT(par1NBTTagCompound);
 	}
 
 	/**
 	 * Returns the maximum stack size for a inventory slot. Seems to always be
 	 * 64, possibly will be extended. *Isn't this more of a set than a get?*
 	 */
-	@Override
 	public int getInventoryStackLimit() {
 		return 64;
 	}
@@ -211,40 +221,39 @@ public class TileEntityMicroFurnace extends FemtopowerConsumer implements
 	 * cooked
 	 */
 	public int getCookProgressScaled(int par1) {
-		return this.furnaceCookTime * par1 / ticksToCook;
+		return this.cookTime * par1 / ticksToCook;
 	}
 
+	@SideOnly(Side.CLIENT)
 	/**
-	 * Allows the entity to update its state. Overridden in most subclasses,
-	 * e.g. the mob spawner uses this to count ticks and creates a new spawn
-	 * inside its implementation.
+	 * Allows the entity to update its state. Overridden in most subclasses, e.g. the mob spawner uses this to count
+	 * ticks and creates a new spawn inside its implementation.
 	 */
-	@Override
 	public void updateEntity() {
 		super.updateEntity();
 
 		boolean flag1 = false;
 
-		if (this.worldObj.isRemote)
+		if (worldObj.isRemote)
 			return;
 
-		if (smeltingStack != null) {
-			if (this.furnaceCookTime == ticksToCook) {
-				this.furnaceCookTime = 0;
-				this.endSmelt();
+		if (deconstructingStack != null) {
+			if (cookTime == ticksToCook) {
+				cookTime = 0;
+				endWork();
 				flag1 = true;
 			}
 
-			++this.furnaceCookTime;
-		} else if (this.canSmelt()) {
-			this.startSmelt();
+			++this.cookTime;
+		} else if (this.canWork()) {
+			startWork();
 			flag1 = true;
 		} else {
-			this.furnaceCookTime = 0;
+			cookTime = 0;
 		}
 
 		if (flag1) {
-			this.onInventoryChanged();
+			onInventoryChanged();
 		}
 	}
 
@@ -252,71 +261,76 @@ public class TileEntityMicroFurnace extends FemtopowerConsumer implements
 	 * Returns true if the furnace can smelt an item, i.e. has a source item,
 	 * destination stack isn't full, etc.
 	 */
-	private boolean canSmelt() {
-		if (this.furnaceItemStacks[0] == null) {
-			return false;
+	private boolean canWork() {
+        if (this.deconstructorItemStacks[0] == null || deconstructingStack != null || this.getCurrentPower() < this.powerToCook) {
+            return false;
+        } else {
+            AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
+                    .getRecipe(this.deconstructorItemStacks[0]);
+            return recipe != null && (tank.getCapacity() - tank.getFluidAmount()) >= recipe.mass && deconstructorItemStacks[0].stackSize >= recipe.output.stackSize && roomForItems(recipe.input);
+        }
+    }
+
+	private boolean roomForItems(ItemStack[] items) {
+		ItemStack[] fake = new ItemStack[deconstructorItemStacks.length];
+		for (int i = 0; i < fake.length; ++i) {
+			ItemStack it = deconstructorItemStacks[i];
+			fake[i] = it == null ? null : it.copy();
 		}
-		if (smeltingStack != null) {
-			return false;
-		} else if (this.getCurrentPower() < this.powerToCook) {
-			return false;
-		} else {
-			ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(
-					this.furnaceItemStacks[0]);
-			if (itemstack == null)
-				return false;
-			if (this.furnaceItemStacks[1] == null)
-				return true;
-			if (!this.furnaceItemStacks[1].isItemEqual(itemstack))
-				return false;
-			int result = furnaceItemStacks[1].stackSize + itemstack.stackSize;
-			return (result <= getInventoryStackLimit() && result <= itemstack
-					.getMaxStackSize());
-		}
+        for (ItemStack item : items) {
+            if (!FemtocraftUtils.placeItem(
+                    item == null ? null : item.copy(), fake,
+                    new int[]{}))
+                return false;
+        }
+
+		return true;
 	}
 
-	public void startSmelt() {
-		this.smeltingStack = this.furnaceItemStacks[0].copy();
-		this.smeltingStack.stackSize = 1;
+	public void startWork() {
+		deconstructingStack = deconstructorItemStacks[0].copy();
 
-		--this.furnaceItemStacks[0].stackSize;
+		AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
+				.getRecipe(this.deconstructorItemStacks[0]);
+		deconstructingStack.stackSize = recipe.output.stackSize;
 
-		if (this.furnaceItemStacks[0].stackSize <= 0) {
-			this.furnaceItemStacks[0] = null;
+		deconstructorItemStacks[0].stackSize -= recipe.output.stackSize;
+
+		if (deconstructorItemStacks[0].stackSize <= 0) {
+			deconstructorItemStacks[0] = null;
 		}
 
 		this.consume(powerToCook);
-		BlockMicroFurnace.updateFurnaceBlockState(true, this.worldObj,
-				this.xCoord, this.yCoord, this.zCoord);
 	}
 
-	public void endSmelt() {
-		ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(
-				this.smeltingStack);
+	public void endWork() {
+		AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
+				.getRecipe(deconstructingStack);
 
-		if (itemstack != null) {
-			if (this.furnaceItemStacks[1] == null) {
-				this.furnaceItemStacks[1] = itemstack.copy();
-				this.furnaceItemStacks[1].stackSize = smeltingStack.stackSize;
-			} else if (this.furnaceItemStacks[1].isItemEqual(itemstack)) {
-				furnaceItemStacks[1].stackSize += smeltingStack.stackSize;
+		if (recipe != null) {
+			for (ItemStack item : recipe.input) {
+				FemtocraftUtils.placeItem(item, deconstructorItemStacks,
+						new int[] { 0 });
+			}
+			// tank.fill(new FluidStack(Femtocraft.mass, recipe.mass), true);
+			if (tank.getFluid() == null) {
+				tank.setFluid(new FluidStack(Femtocraft.mass, recipe.mass));
+			} else {
+				tank.getFluid().amount += recipe.mass;
 			}
 
-			smeltingStack = null;
-			BlockMicroFurnace.updateFurnaceBlockState(false, this.worldObj,
-					this.xCoord, this.yCoord, this.zCoord);
+			deconstructingStack = null;
 		}
 	}
 
-	public boolean isSmelting() {
-		return smeltingStack != null;
+	public boolean isDeconstructing() {
+		return deconstructingStack != null;
 	}
 
 	/**
 	 * Do not make give this method the name canInteractWith because it clashes
 	 * with Container
 	 */
-	@Override
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
 		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord,
                 this.zCoord) == this && par1EntityPlayer.getDistanceSq(
@@ -324,11 +338,9 @@ public class TileEntityMicroFurnace extends FemtopowerConsumer implements
                 (double) this.zCoord + 0.5D) <= 64.0D;
 	}
 
-	@Override
 	public void openChest() {
 	}
 
-	@Override
 	public void closeChest() {
 	}
 
@@ -337,7 +349,7 @@ public class TileEntityMicroFurnace extends FemtopowerConsumer implements
 	 * stack size) into the given slot.
 	 */
 	public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack) {
-		return par1 != 1;
+		return par1 == 0;
 	}
 
 	/**
@@ -347,7 +359,7 @@ public class TileEntityMicroFurnace extends FemtopowerConsumer implements
 		if (par1 == 1)
 			return new int[] { 0 };
 		else
-			return new int[] { 1 };
+			return new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 	}
 
 	public boolean func_102007_a(int par1, ItemStack par2ItemStack, int par3) {
@@ -379,12 +391,7 @@ public class TileEntityMicroFurnace extends FemtopowerConsumer implements
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		switch (i) {
-		case (1):
-			return false;
-		default:
-			return true;
-		}
+		return i == 0;
 	}
 
 	@Override
@@ -397,7 +404,7 @@ public class TileEntityMicroFurnace extends FemtopowerConsumer implements
 		case (3):
 		case (4):
 		case (5):
-			return new int[] { 1 };
+			return new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 		default:
 			return new int[] {};
 		}
@@ -405,16 +412,63 @@ public class TileEntityMicroFurnace extends FemtopowerConsumer implements
 
 	@Override
 	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
-		switch (i) {
-		case (1):
-			return false;
-		default:
-			return true;
-		}
+		return i == 0;
 	}
 
 	@Override
 	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
 		return true;
+	}
+
+	// IFluidHandler
+
+	@Override
+	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+		// We don't want to be able to put mass into this from anywhere, only
+		// withdraw
+		// Otherwise, we'd also have to worry about mass being pumped in while a
+		// decomposition is happening, which would result in an overflow of mass
+		return 0;
+	}
+
+	@Override
+	public FluidStack drain(ForgeDirection from, FluidStack resource,
+			boolean doDrain) {
+		if (resource == null || !resource.isFluidEqual(tank.getFluid())) {
+			return null;
+		}
+		return tank.drain(resource.amount, doDrain);
+	}
+
+	@Override
+	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+		return tank.drain(maxDrain, doDrain);
+	}
+
+	@Override
+	public boolean canFill(ForgeDirection from, Fluid fluid) {
+		return false;
+	}
+
+	@Override
+	public boolean canDrain(ForgeDirection from, Fluid fluid) {
+		return true;
+	}
+
+	@Override
+	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+		return new FluidTankInfo[] { tank.getInfo() };
+	}
+
+	public void setFluidAmount(int amount) {
+		if (tank.getFluid() != null) {
+			tank.setFluid(new FluidStack(tank.getFluid().fluidID, amount));
+		} else {
+			tank.setFluid(new FluidStack(Femtocraft.mass, amount));
+		}
+	}
+
+	public void clearFluid() {
+		tank.setFluid(null);
 	}
 }

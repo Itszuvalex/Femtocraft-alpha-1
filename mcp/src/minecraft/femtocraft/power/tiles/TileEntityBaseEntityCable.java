@@ -1,10 +1,10 @@
-package femtocraft.power.TileEntity;
+package femtocraft.power.tiles;
 
 import femtocraft.managers.research.EnumTechLevel;
 
-public class FemtopowerCableTile extends FemtopowerTile {
+public class TileEntityBaseEntityCable extends TileEntityPowerBase {
 
-	public FemtopowerCableTile() {
+	public TileEntityBaseEntityCable() {
 		setTechLevel(EnumTechLevel.MICRO);
 	}
 

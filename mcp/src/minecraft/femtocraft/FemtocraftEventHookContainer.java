@@ -2,7 +2,7 @@ package femtocraft;
 
 import femtocraft.common.gui.DisplaySlot;
 import femtocraft.industry.items.ItemAssemblySchematic;
-import femtocraft.player.FemtocraftNaniteProperties;
+import femtocraft.player.PropertiesNanite;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -42,8 +42,8 @@ public class FemtocraftEventHookContainer {
 	public void onEntityConstructing(EntityConstructing event) {
 		if (event.entity instanceof EntityPlayer
 				&& event.entity
-						.getExtendedProperties(FemtocraftNaniteProperties.PROP_TAG) == null) {
-			FemtocraftNaniteProperties.register((EntityPlayer) event.entity);
+						.getExtendedProperties(PropertiesNanite.PROP_TAG) == null) {
+			PropertiesNanite.register((EntityPlayer) event.entity);
 		}
 	}
 
@@ -51,7 +51,7 @@ public class FemtocraftEventHookContainer {
 	public void onEntityJoinWorld(EntityJoinWorldEvent event) {
 		if (!event.entity.worldObj.isRemote
 				&& event.entity instanceof EntityPlayer) {
-			FemtocraftNaniteProperties.get((EntityPlayer) event.entity).sync();
+			PropertiesNanite.get((EntityPlayer) event.entity).sync();
 		}
 	}
 }

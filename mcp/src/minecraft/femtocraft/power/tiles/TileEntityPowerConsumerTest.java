@@ -1,12 +1,12 @@
-package femtocraft.power.TileEntity;
+package femtocraft.power.tiles;
 
 import femtocraft.managers.research.EnumTechLevel;
 import net.minecraftforge.common.ForgeDirection;
 
-public class FemtopowerProducerTest extends FemtopowerProducer {
+public class TileEntityPowerConsumerTest extends TileEntityPowerConsumer {
 	private int amountPerTick;
 
-	public FemtopowerProducerTest() {
+	public TileEntityPowerConsumerTest() {
 		super();
 		amountPerTick = 10;
 		setTechLevel(EnumTechLevel.MICRO);
@@ -15,17 +15,18 @@ public class FemtopowerProducerTest extends FemtopowerProducer {
 	@Override
 	public void femtocraftServerUpdate() {
 		super.femtocraftServerUpdate();
-		charge(ForgeDirection.UNKNOWN, amountPerTick);
+		consume(amountPerTick);
 	}
 
 	@Override
 	public float getFillPercentageForCharging(ForgeDirection from) {
 		float val = getFillPercentage();
-		return val > .75f ? val : .25f;
+		return val < .25f ? val : .25f;
 	}
 
 	@Override
 	public float getFillPercentageForOutput(ForgeDirection to) {
-		return 1.0f;
+		float val = getFillPercentage();
+		return val < .25f ? val : .25f;
 	}
 }
