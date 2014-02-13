@@ -31,7 +31,7 @@ public class MicroReconstructorTile extends FemtopowerConsumer implements
         // reconstructorItemStacks[15] = sch;
         // ((AssemblySchematic)sch.getItem()).setRecipe(sch,
         // Femtocraft.recipeManager.assemblyRecipes.getRecipe(new
-        // ItemStack(Femtocraft.ProteinChain)));
+        // ItemStack(Femtocraft.ItemProteinChain)));
     }
 
     private int powerToCook = 40;

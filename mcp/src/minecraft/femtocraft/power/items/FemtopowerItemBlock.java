@@ -3,7 +3,7 @@ package femtocraft.power.items;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.api.FemtopowerContainer;
-import femtocraft.core.items.FemtocraftItemBlock;
+import femtocraft.core.items.CoreItemBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public abstract class FemtopowerItemBlock extends FemtocraftItemBlock {
+public abstract class FemtopowerItemBlock extends CoreItemBlock {
 
 	public FemtopowerItemBlock(int par1) {
 		super(par1);

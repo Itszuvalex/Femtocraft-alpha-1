@@ -3,7 +3,7 @@
  */
 package femtocraft.power.blocks;
 
-import femtocraft.core.blocks.FemtocraftTileContainer;
+import femtocraft.core.blocks.TileContainer;
 import femtocraft.power.TileEntity.FemtopowerTile;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,7 +16,7 @@ import net.minecraft.world.World;
  * @author Itszuvalex
  * 
  */
-public class FemtopowerTileContainer extends FemtocraftTileContainer {
+public class FemtopowerTileContainer extends TileContainer {
 
 	public FemtopowerTileContainer(int par1, Material par2Material) {
 		super(par1, par2Material);
