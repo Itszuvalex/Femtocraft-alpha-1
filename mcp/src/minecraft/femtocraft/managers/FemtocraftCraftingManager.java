@@ -125,8 +125,6 @@ public class FemtocraftCraftingManager {
 	public void addShapelessRecipe(String recipeListKey,
 			ItemStack par1ItemStack, Object... par2ArrayOfObj) {
 		ArrayList arraylist = new ArrayList();
-		int i = par2ArrayOfObj.length;
-
         for (Object object1 : par2ArrayOfObj) {
             if (object1 instanceof ItemStack) {
                 arraylist.add(((ItemStack) object1).copy());
