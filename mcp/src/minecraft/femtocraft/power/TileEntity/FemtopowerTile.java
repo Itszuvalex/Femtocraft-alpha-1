@@ -80,10 +80,8 @@ public class FemtopowerTile extends FemtocraftTile implements
 
 	@Override
 	public boolean canCharge(ForgeDirection from) {
-		if (getFillPercentage() >= 1.0f)
-			return false;
-		return true;
-	}
+        return getFillPercentage() < 1.0f;
+    }
 
 	@Override
 	public int charge(ForgeDirection from, int amount) {
@@ -163,15 +161,13 @@ public class FemtopowerTile extends FemtocraftTile implements
 						willCharge[j] = false;
 						numToFill--;
 						percentFilled[j] = 1.f;
-						continue;
-					}
+                    }
 				} else {
 					// Update as we fill
 					willCharge[j] = false;
 					numToFill--;
 					percentFilled[j] = 1.f;
-					continue;
-				}
+                }
 			}
 
 			// Find lowest % filled from

@@ -100,8 +100,7 @@ public class ContainerMicroDeconstructor extends Container {
 			}
 			break;
 		default:
-			return;
-		}
+        }
 		// if (par1 == 0)
 		// {
 		// this.deconstructor.cookTime = par2;

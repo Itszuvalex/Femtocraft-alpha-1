@@ -367,10 +367,8 @@ public class MicroReconstructorTile extends FemtopowerConsumer implements
 				return false;
 			if (!roomForItem(recipe.output))
 				return false;
-			if (!hasItems(recipe.input))
-				return false;
-			return true;
-		}
+            return hasItems(recipe.input);
+        }
 	}
 
 	private boolean roomForItem(ItemStack item) {
@@ -450,9 +448,9 @@ public class MicroReconstructorTile extends FemtopowerConsumer implements
 	 */
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
 		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord,
-				this.zCoord) != this ? false : par1EntityPlayer.getDistanceSq(
-				(double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
-				(double) this.zCoord + 0.5D) <= 64.0D;
+                this.zCoord) == this && par1EntityPlayer.getDistanceSq(
+                (double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
+                (double) this.zCoord + 0.5D) <= 64.0D;
 	}
 
 	public void openChest() {

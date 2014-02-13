@@ -30,9 +30,9 @@ public class FemtopowerContainer implements IFemtopowerContainer {
 	}
 
 	private FemtopowerContainer() {
-	};
+	}
 
-	@Override
+    @Override
 	public boolean canAcceptPowerOfLevel(TechLevel level) {
 		return this.level == level;
 	}

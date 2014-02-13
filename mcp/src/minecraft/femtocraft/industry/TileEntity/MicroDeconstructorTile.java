@@ -282,10 +282,8 @@ public class MicroDeconstructorTile extends FemtopowerConsumer implements
 				return false;
 			if (deconstructorItemStacks[0].stackSize < recipe.output.stackSize)
 				return false;
-			if (!roomForItems(recipe.input))
-				return false;
-			return true;
-		}
+            return roomForItems(recipe.input);
+        }
 	}
 
 	private boolean roomForItems(ItemStack[] items) {
@@ -294,8 +292,7 @@ public class MicroDeconstructorTile extends FemtopowerConsumer implements
 			ItemStack it = deconstructorItemStacks[i];
 			fake[i] = it == null ? null : it.copy();
 		}
-		;
-		for (int i = 0; i < items.length; ++i) {
+        for (int i = 0; i < items.length; ++i) {
 			if (!FemtocraftUtils.placeItem(
 					items[i] == null ? null : items[i].copy(), fake,
 					new int[] {}))
@@ -351,9 +348,9 @@ public class MicroDeconstructorTile extends FemtopowerConsumer implements
 	 */
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
 		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord,
-				this.zCoord) != this ? false : par1EntityPlayer.getDistanceSq(
-				(double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
-				(double) this.zCoord + 0.5D) <= 64.0D;
+                this.zCoord) == this && par1EntityPlayer.getDistanceSq(
+                (double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
+                (double) this.zCoord + 0.5D) <= 64.0D;
 	}
 
 	public void openChest() {

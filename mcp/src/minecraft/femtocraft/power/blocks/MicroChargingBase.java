@@ -66,11 +66,9 @@ public class MicroChargingBase extends FemtopowerTileContainer implements
 			return false;
 
 		block = Block.blocksList[par1World.getBlockId(par2, par3, par4 + 1)];
-		if (block != null && block instanceof IChargingBase)
-			return false;
+        return !(block != null && block instanceof IChargingBase);
 
-		return true;
-	}
+    }
 
 	@Override
 	@SideOnly(Side.CLIENT)

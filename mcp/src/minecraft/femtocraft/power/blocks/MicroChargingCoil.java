@@ -57,11 +57,9 @@ public class MicroChargingCoil extends Block implements IChargingCoil {
 			return false;
 		if (!par1World.isAirBlock(par2, par3, par4 - 1))
 			return false;
-		if (!par1World.isAirBlock(par2, par3, par4 + 1))
-			return false;
+        return par1World.isAirBlock(par2, par3, par4 + 1);
 
-		return true;
-	}
+    }
 
 	@Override
 	@SideOnly(Side.CLIENT)

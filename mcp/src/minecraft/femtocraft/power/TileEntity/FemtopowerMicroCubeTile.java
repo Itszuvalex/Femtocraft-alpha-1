@@ -66,7 +66,7 @@ public class FemtopowerMicroCubeTile extends FemtopowerTile {
 
 		for (int i = 0; i < 6; i++) {
 			temp = mask;
-			outputs[i] = (((temp >> i) & 1) == 1) ? true : false;
+			outputs[i] = (((temp >> i) & 1) == 1);
 		}
 
 		if (worldObj != null)

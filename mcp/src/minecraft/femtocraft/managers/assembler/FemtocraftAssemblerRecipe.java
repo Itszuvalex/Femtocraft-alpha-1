@@ -28,9 +28,9 @@ public class FemtocraftAssemblerRecipe implements Comparable {
 	}
 
 	private FemtocraftAssemblerRecipe() {
-	};
+	}
 
-	@Override
+    @Override
 	public int compareTo(Object o) {
 		FemtocraftAssemblerRecipe ir = (FemtocraftAssemblerRecipe) o;
 		for (int i = 0; i < 9; i++) {

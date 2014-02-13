@@ -1474,11 +1474,9 @@ public class FemtocraftAssemblerRecipeManager {
 
 		if (input.stackSize < recipe.output.stackSize)
 			return false;
-		if (FemtocraftUtils.compareItem(recipe.output, input) != 0)
-			return false;
+        return FemtocraftUtils.compareItem(recipe.output, input) == 0;
 
-		return true;
-	}
+    }
 
 	public FemtocraftAssemblerRecipe getRecipe(ItemStack[] input) {
 		ItemStack[] normal = normalizedInput(input);

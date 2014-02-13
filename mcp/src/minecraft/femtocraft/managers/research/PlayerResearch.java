@@ -44,7 +44,7 @@ public class PlayerResearch {
 		if (tech == null && !force)
 			return false;
 
-		if (tech == null && force == true) {
+		if (tech == null && force) {
 			TechnologyStatus status = techStatus.put(name,
 					new TechnologyStatus(name));
 			if (status == null)
@@ -84,7 +84,7 @@ public class PlayerResearch {
 			TechnologyStatus ts = techStatus.get(prereq.name);
 			if (ts == null)
 				return false;
-			if (ts.researched == false)
+			if (!ts.researched)
 				return false;
 		}
 
@@ -97,10 +97,8 @@ public class PlayerResearch {
 
 	public boolean hasDiscoveredTechnology(String tech) {
 		TechnologyStatus ts = techStatus.get(tech);
-		if (ts == null)
-			return false;
-		return true;
-	}
+        return ts != null;
+    }
 
 	public boolean hasResearchedTechnology(Technology tech) {
         return tech == null || hasResearchedTechnology(tech.name);

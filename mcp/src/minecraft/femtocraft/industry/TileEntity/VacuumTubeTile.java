@@ -73,7 +73,7 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 	@Override
 	public boolean isOverflowing() {
 		return (worldObj.isRemote && overflowing)
-				|| (((outputTube != null && outputTube.canInsertItem(null) == false) || ((outputInv != null || outputSidedInv != null) && !canFillInv))
+				|| (((outputTube != null && !outputTube.canInsertItem(null)) || ((outputInv != null || outputSidedInv != null) && !canFillInv))
 						&& hasItem[0] && hasItem[1] && hasItem[2] && hasItem[3] && ((inputTube == null || queuedItem != null)));
 	}
 
@@ -872,8 +872,8 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 		int output = (mask >> 4) & 7;
 		inputDir = ForgeDirection.getOrientation(input);
 		outputDir = ForgeDirection.getOrientation(output);
-		boolean hasInput = ((mask >> 3) & 1) == 1 ? true : false;
-		boolean hasOutput = ((mask >> 7) & 1) == 1 ? true : false;
+		boolean hasInput = ((mask >> 3) & 1) == 1;
+		boolean hasOutput = ((mask >> 7) & 1) == 1;
 
 		if (worldObj == null)
 			return;
@@ -921,11 +921,11 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 
 		for (int i = 0; i < hasItem.length; i++) {
 			temp = mask;
-			hasItem[i] = (((temp >> i) & 1) == 1) ? true : false;
+			hasItem[i] = (((temp >> i) & 1) == 1);
 		}
 
 		temp = mask;
-		overflowing = (((temp >> hasItem.length) & 1) == 1) ? true : false;
+		overflowing = (((temp >> hasItem.length) & 1) == 1);
 	}
 
 }

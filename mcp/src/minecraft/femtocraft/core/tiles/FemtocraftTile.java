@@ -36,10 +36,10 @@ public class FemtocraftTile extends TileEntity {
 
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
 		boolean inrange = this.worldObj.getBlockTileEntity(this.xCoord,
-				this.yCoord, this.zCoord) != this ? false : par1EntityPlayer
-				.getDistanceSq((double) this.xCoord + 0.5D,
-						(double) this.yCoord + 0.5D,
-						(double) this.zCoord + 0.5D) <= 64.0D;
+                this.yCoord, this.zCoord) == this && par1EntityPlayer
+                .getDistanceSq((double) this.xCoord + 0.5D,
+                        (double) this.yCoord + 0.5D,
+                        (double) this.zCoord + 0.5D) <= 64.0D;
 		boolean isowner = owner.isEmpty()
 				|| (owner.equals(par1EntityPlayer.username));
 		return inrange && isowner;

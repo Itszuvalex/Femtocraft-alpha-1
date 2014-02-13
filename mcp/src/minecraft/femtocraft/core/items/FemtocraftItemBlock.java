@@ -79,9 +79,7 @@ public class FemtocraftItemBlock extends ItemBlock {
     }
 
 	private boolean canPlayerPlace(EntityPlayer player) {
-		if (player == null)
-			return false;
+        return player != null;
 
-		return true;
-	}
+    }
 }

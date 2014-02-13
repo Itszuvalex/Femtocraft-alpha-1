@@ -76,7 +76,6 @@ public class FemtocraftPacketHandler implements IPacketHandler {
 			cp.worldObj.markBlockForRenderUpdate(x, y, z);
 		} catch (IOException e) {
 			e.printStackTrace();
-			return;
-		}
+        }
 	}
 }
