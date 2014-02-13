@@ -16,60 +16,49 @@ import java.io.IOException;
 
 public class FemtocraftPacketHandler implements IPacketHandler {
 
-	@Override
-	public void onPacketData(INetworkManager manager,
-			Packet250CustomPayload packet, Player playerEntity) {
-		if (packet.channel
-				.equalsIgnoreCase(FemtocraftNaniteProperties.PACKET_CHANNEL)) {
-			FemtocraftNaniteProperties.get((EntityPlayer) playerEntity)
-					.handlePacket(packet);
-			return;
-		}
-
-		DataInputStream inputStream = new DataInputStream(
-				new ByteArrayInputStream(packet.data));
-
-		// if(packet.channel.equalsIgnoreCase(Femtocraft.ID))
-		// {
-		//
-		// }
-		// else
-		// if(packet.channel.equalsIgnoreCase(FemtopowerMicroCubeTile.packetChannel))
-		// {
-		// handleMicroCube(inputStream, playerEntity);
-		// }
-		if (packet.channel.equalsIgnoreCase(VacuumTubeTile.packetChannel)) {
-			handleVacuumTube(inputStream, playerEntity);
-		} else {
-			// handleDefault(inputStream, playerEntity);
-		}
-	}
-
-	private void handleVacuumTube(DataInputStream stream, Player player) {
-		try {
-			int x = stream.readInt();
-			int y = stream.readInt();
-			int z = stream.readInt();
-
-			byte items = stream.readByte();
-			byte connections = stream.readByte();
-
-			if (!(player instanceof EntityClientPlayerMP))
-				return;
-
-			EntityClientPlayerMP cp = (EntityClientPlayerMP) player;
-
-			TileEntity tile = cp.worldObj.getBlockTileEntity(x, y, z);
-			if (tile == null)
-				return;
-			if (!(tile instanceof VacuumTubeTile))
-				return;
-			VacuumTubeTile tube = (VacuumTubeTile) tile;
-			tube.parseItemMask(items);
-			tube.parseConnectionMask(connections);
-			cp.worldObj.markBlockForRenderUpdate(x, y, z);
-		} catch (IOException e) {
-			e.printStackTrace();
+    @Override
+    public void onPacketData(INetworkManager manager,
+                             Packet250CustomPayload packet, Player playerEntity) {
+        if (packet.channel
+                .equalsIgnoreCase(FemtocraftNaniteProperties.PACKET_CHANNEL)) {
+            FemtocraftNaniteProperties.get((EntityPlayer) playerEntity)
+                    .handlePacket(packet);
+            return;
         }
-	}
+
+        DataInputStream inputStream = new DataInputStream(
+                new ByteArrayInputStream(packet.data));
+
+        if (packet.channel.equalsIgnoreCase(VacuumTubeTile.packetChannel)) {
+            handleVacuumTube(inputStream, playerEntity);
+        }
+    }
+
+    private void handleVacuumTube(DataInputStream stream, Player player) {
+        try {
+            int x = stream.readInt();
+            int y = stream.readInt();
+            int z = stream.readInt();
+
+            byte items = stream.readByte();
+            byte connections = stream.readByte();
+
+            if (!(player instanceof EntityClientPlayerMP))
+                return;
+
+            EntityClientPlayerMP cp = (EntityClientPlayerMP) player;
+
+            TileEntity tile = cp.worldObj.getBlockTileEntity(x, y, z);
+            if (tile == null)
+                return;
+            if (!(tile instanceof VacuumTubeTile))
+                return;
+            VacuumTubeTile tube = (VacuumTubeTile) tile;
+            tube.parseItemMask(items);
+            tube.parseConnectionMask(connections);
+            cp.worldObj.markBlockForRenderUpdate(x, y, z);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
