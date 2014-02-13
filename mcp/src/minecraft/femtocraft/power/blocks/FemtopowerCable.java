@@ -145,26 +145,10 @@ public class FemtopowerCable extends FemtopowerTileContainer {
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
 			int x, int y, int z) {
-		AxisAlignedBB box = AxisAlignedBB.getAABBPool().getAABB(
+        return AxisAlignedBB.getAABBPool().getAABB(
 				(double) x + 4.f / 16.f, (double) y + 4.f / 16.f,
 				(double) z + 4.f / 16.f, (double) x + 12.f / 16.f,
 				(double) y + 12.f / 16.f, (double) z + 12.f / 16.f);
-
-		//
-		// TileEntity tile = par1World.getBlockTileEntity(x, y, z);
-		// if(tile == null) return box;
-		// if(!(tile instanceof FemtopowerCableTile)) return box;
-		// FemtopowerCableTile cable = (FemtopowerCableTile)tile;
-		//
-		// for(int i = 0; i < 6; ++i)
-		// {
-		// if(!cable.connections[i]) continue;
-		// box =
-		// box.func_111270_a(boundingBoxForDirection(ForgeDirection.getOrientation(i),
-		// x, y, z));
-		// }
-		//
-		return box;
 	}
 
 	@Override

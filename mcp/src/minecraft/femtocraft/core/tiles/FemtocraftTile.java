@@ -18,133 +18,114 @@ import femtocraft.FemtocraftConfigs;
 import femtocraft.FemtocraftUtils;
 
 public class FemtocraftTile extends TileEntity {
-	private String owner;
-	private final String NBT_TAG = "owner";
+    private String owner;
+    private final String NBT_TAG = "owner";
 
-	public FemtocraftTile() {
-		super();
-		owner = "";
-	}
+    public FemtocraftTile() {
+        super();
+        owner = "";
+    }
 
-	public String getOwner() {
-		return owner;
-	}
+    public String getOwner() {
+        return owner;
+    }
 
-	public void setOwner(String owner) {
-		this.owner = owner;
-	}
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
 
-	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
-		boolean inrange = this.worldObj.getBlockTileEntity(this.xCoord,
+    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
+        boolean inrange = this.worldObj.getBlockTileEntity(this.xCoord,
                 this.yCoord, this.zCoord) == this && par1EntityPlayer
                 .getDistanceSq((double) this.xCoord + 0.5D,
                         (double) this.yCoord + 0.5D,
                         (double) this.zCoord + 0.5D) <= 64.0D;
-		boolean isowner = owner.isEmpty()
-				|| (owner.equals(par1EntityPlayer.username));
-		return inrange && isowner;
-	}
+        boolean isowner = owner.isEmpty()
+                || (owner.equals(par1EntityPlayer.username));
+        return inrange && isowner;
+    }
 
-	@Override
-	public void updateEntity() {
-		super.updateEntity();
+    @Override
+    public void updateEntity() {
+        super.updateEntity();
 
-		if (worldObj.isRemote)
-			return;
-		if (!shouldTick())
-			return;
+        if (worldObj.isRemote)
+            return;
+        if (!shouldTick())
+            return;
 
-		femtocraftServerUpdate();
-	}
+        femtocraftServerUpdate();
+    }
 
-	public boolean shouldTick() {
+    public boolean shouldTick() {
         return !FemtocraftConfigs.requirePlayersOnlineForTileEntityTicks || FemtocraftUtils.isPlayerOnline(owner);
 
     }
 
-	/**
-	 * Gated update call. This will only be called on the server, and only if
-	 * the tile's {@link #shouldTick()} returns true. This should be used
-	 * instead of updateEntity() for heavy computation, unless the tile
-	 * absolutely needs to update.
-	 */
-	public void femtocraftServerUpdate() {
-	}
+    /**
+     * Gated update call. This will only be called on the server, and only if
+     * the tile's {@link #shouldTick()} returns true. This should be used
+     * instead of updateEntity() for heavy computation, unless the tile
+     * absolutely needs to update.
+     */
+    public void femtocraftServerUpdate() {
+    }
 
-	@Override
-	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-		super.readFromNBT(par1nbtTagCompound);
+    @Override
+    public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
+        super.readFromNBT(par1nbtTagCompound);
 
-		owner = par1nbtTagCompound.getString(NBT_TAG);
-	}
+        owner = par1nbtTagCompound.getString(NBT_TAG);
+    }
 
-	@Override
-	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-		super.writeToNBT(par1nbtTagCompound);
-		par1nbtTagCompound.setString(NBT_TAG, owner);
-	}
+    @Override
+    public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
+        super.writeToNBT(par1nbtTagCompound);
+        par1nbtTagCompound.setString(NBT_TAG, owner);
+    }
 
-	public boolean hasDescription() {
-		return true;
-	}
+    public boolean hasDescription() {
+        return true;
+    }
 
-	@Override
-	public Packet getDescriptionPacket() {
-		if (!hasDescription())
-			return null;
+    @Override
+    public Packet getDescriptionPacket() {
+        if (!hasDescription())
+            return null;
 
-		NBTTagCompound compound = new NBTTagCompound();
-		saveToDescriptionCompound(compound);
-		Packet132TileEntityData packet = new Packet132TileEntityData(xCoord,
-				yCoord, zCoord, 1, compound);
-		//
-		//
-		// ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		// DataOutputStream outputStream = new DataOutputStream(bos);
-		// try {
-		// outputStream.writeInt(worldObj.provider.dimensionId);
-		// outputStream.writeInt(xCoord);
-		// outputStream.writeInt(yCoord);
-		// outputStream.writeInt(zCoord);
-		// CompressedStreamTools.writeCompressed(compound, outputStream);
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
-		//
-		// packet.channel = getPacketChannel();
-		// packet.data = bos.toByteArray();
-		// packet.length = bos.size();
-		//
-		return packet;
-	}
+        NBTTagCompound compound = new NBTTagCompound();
+        saveToDescriptionCompound(compound);
+        return new Packet132TileEntityData(xCoord,
+                yCoord, zCoord, 1, compound);
+    }
 
-	@Override
-	public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
-		super.onDataPacket(net, pkt);
+    @Override
+    public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
+        super.onDataPacket(net, pkt);
 
-		handleDescriptionNBT(pkt.data);
-	}
+        handleDescriptionNBT(pkt.data);
+    }
 
-	public String getPacketChannel() {
-		return Femtocraft.ID;
-	}
+    public String getPacketChannel() {
+        return Femtocraft.ID;
+    }
 
-	public void handleDescriptionNBT(NBTTagCompound compound) {
-		owner = compound.getString(NBT_TAG);
-	}
+    public void handleDescriptionNBT(NBTTagCompound compound) {
+        owner = compound.getString(NBT_TAG);
+    }
 
-	public void saveToDescriptionCompound(NBTTagCompound compound) {
-		compound.setString(NBT_TAG, owner);
-	}
+    public void saveToDescriptionCompound(NBTTagCompound compound) {
+        compound.setString(NBT_TAG, owner);
+    }
 
-	public void loadInfoFromItemNBT(NBTTagCompound compound) {
-		if (compound == null)
-			return;
-		owner = compound.getString(NBT_TAG);
-	}
+    public void loadInfoFromItemNBT(NBTTagCompound compound) {
+        if (compound == null)
+            return;
+        owner = compound.getString(NBT_TAG);
+    }
 
-	public void saveInfoToItemNBT(NBTTagCompound compound) {
-		compound.setString(NBT_TAG, owner);
-	}
+    public void saveInfoToItemNBT(NBTTagCompound compound) {
+        compound.setString(NBT_TAG, owner);
+    }
 
 }

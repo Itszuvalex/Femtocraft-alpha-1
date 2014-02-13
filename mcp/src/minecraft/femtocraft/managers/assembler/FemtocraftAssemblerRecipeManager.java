@@ -1349,10 +1349,8 @@ public class FemtocraftAssemblerRecipeManager {
 		checkDecomposition(normal, recipe);
 		checkRecomposition(normalArray, recipe);
 
-		boolean result = registerRecomposition(normalArray, recipe)
-				&& registerDecomposition(normal, recipe);
-
-		return result;
+        return registerRecomposition(normalArray, recipe)
+                && registerDecomposition(normal, recipe);
 	}
 
 	public boolean addRecompositionRecipe(FemtocraftAssemblerRecipe recipe)

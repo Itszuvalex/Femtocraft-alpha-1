@@ -284,9 +284,8 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 		}
 
 		if (tile instanceof IVacuumTube) {
-			IVacuumTube tube = (IVacuumTube) tile;
 
-			inputTube = tube;
+            inputTube = (IVacuumTube) tile;
 			inputDir = dir;
 			inputSidedInv = null;
 			inputInv = null;
@@ -340,9 +339,8 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 		}
 
 		if (tile instanceof IVacuumTube) {
-			IVacuumTube tube = (IVacuumTube) tile;
 
-			outputTube = tube;
+            outputTube = (IVacuumTube) tile;
 			outputDir = dir;
 			outputSidedInv = null;
 			outputInv = null;
@@ -490,8 +488,7 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 		if (!missingInput())
 			return;
 
-		ItemStack stack = ItemStack.copyItemStack(item.getEntityItem());
-		queuedItem = stack;
+        queuedItem = ItemStack.copyItemStack(item.getEntityItem());
 		worldObj.removeEntity(item);
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
