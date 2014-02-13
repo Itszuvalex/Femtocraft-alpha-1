@@ -16,177 +16,179 @@ import java.util.HashMap;
 import java.util.logging.Level;
 
 public class FemtocraftResearchManager {
-	private HashMap<String, Technology> technologies;
-	private HashMap<String, PlayerResearch> playerData;
+    private HashMap<String, Technology> technologies;
+    private HashMap<String, PlayerResearch> playerData;
 
-	private final String FILENAME = "FemtocraftResearch.dat";
+    private final String FILENAME = "FemtocraftResearch.dat";
 
-	private String lastWorldLoaded = "";
+    private String lastWorldLoaded = "";
 
-	public FemtocraftResearchManager() {
-		technologies = new HashMap<String, Technology>();
-		playerData = new HashMap<String, PlayerResearch>();
-	}
+    public FemtocraftResearchManager() {
+        technologies = new HashMap<String, Technology>();
+        playerData = new HashMap<String, PlayerResearch>();
+    }
 
-	// --------------------------------------------------
+    // --------------------------------------------------
 
-	public boolean addTechnology(Technology tech) {
-		TechnologyAddedEvent event = new TechnologyAddedEvent(tech);
+    public boolean addTechnology(Technology tech) {
+        TechnologyAddedEvent event = new TechnologyAddedEvent(tech);
         return !MinecraftForge.EVENT_BUS.post(event) && technologies.put(tech.name, tech) != null;
     }
 
-	public boolean removeTechnology(Technology tech) {
-		return technologies.remove(tech.name) != null;
-	}
+    public boolean removeTechnology(Technology tech) {
+        return technologies.remove(tech.name) != null;
+    }
 
-	public Technology getTechnology(String name) {
-		return technologies.get(name);
-	}
+    public Technology getTechnology(String name) {
+        return technologies.get(name);
+    }
 
-	// --------------------------------------------------
+    // --------------------------------------------------
 
-	public PlayerResearch addPlayerResearch(String username) {
-		// Return false if playerData already exists
-		if (playerData.containsKey(username))
-			return null;
-		PlayerResearch r = new PlayerResearch(username);
+    public PlayerResearch addPlayerResearch(String username) {
+        // Return false if playerData already exists
+        if (playerData.containsKey(username))
+            return null;
+        PlayerResearch r = new PlayerResearch(username);
 
-		addFreeResearches(r);
+        addFreeResearches(r);
 
-		playerData.put(username, r);
-		return r;
-	}
+        playerData.put(username, r);
+        return r;
+    }
 
-	public boolean removePlayerResearch(String username) {
-		return playerData.remove(username) != null;
-	}
+    public boolean removePlayerResearch(String username) {
+        return playerData.remove(username) != null;
+    }
 
-	public PlayerResearch getPlayerResearch(String username) {
-		return playerData.get(username);
-	}
+    public PlayerResearch getPlayerResearch(String username) {
+        return playerData.get(username);
+    }
 
-	// --------------------------------------------------
+    // --------------------------------------------------
 
-	public boolean hasPlayerDiscoveredTechnology(String username,
-			Technology tech) {
-		return hasPlayerDiscoveredTechnology(username, tech.name);
-	}
+    public boolean hasPlayerDiscoveredTechnology(String username,
+                                                 Technology tech) {
+        return hasPlayerDiscoveredTechnology(username, tech.name);
+    }
 
-	public boolean hasPlayerDiscoveredTechnology(String username, String tech) {
-		PlayerResearch pr = playerData.get(username);
+    public boolean hasPlayerDiscoveredTechnology(String username, String tech) {
+        PlayerResearch pr = playerData.get(username);
         return pr != null && pr.hasDiscoveredTechnology(tech);
     }
 
-	// --------------------------------------------------
+    // --------------------------------------------------
 
-	public boolean hasPlayerResearchedTechnology(String username,
-			Technology tech) {
-		return hasPlayerResearchedTechnology(username, tech.name);
-	}
+    public boolean hasPlayerResearchedTechnology(String username,
+                                                 Technology tech) {
+        return hasPlayerResearchedTechnology(username, tech.name);
+    }
 
-	public boolean hasPlayerResearchedTechnology(String username, String tech) {
-		PlayerResearch pr = playerData.get(username);
+    public boolean hasPlayerResearchedTechnology(String username, String tech) {
+        PlayerResearch pr = playerData.get(username);
         return pr != null && pr.hasResearchedTechnology(tech);
     }
 
-	// --------------------------------------------------
+    // --------------------------------------------------
 
-	private void addFreeResearches(PlayerResearch research) {
-		for (Technology t : technologies.values()) {
-			if (t.prerequisites == null) {
-				research.discoverTechnology(t.name);
-			}
-		}
-	}
+    private void addFreeResearches(PlayerResearch research) {
+        for (Technology t : technologies.values()) {
+            if (t.prerequisites == null) {
+                research.discoverTechnology(t.name);
+            }
+        }
+    }
 
-	// --------------------------------------------------
+    // --------------------------------------------------
 
-	public void saveToNBTTagCompound(NBTTagCompound compound) {
-		NBTTagList list = new NBTTagList();
+    public void saveToNBTTagCompound(NBTTagCompound compound) {
+        NBTTagList list = new NBTTagList();
 
-		for (PlayerResearch status : playerData.values()) {
-			NBTTagCompound cs = new NBTTagCompound();
-			cs.setString("username", status.username);
+        for (PlayerResearch status : playerData.values()) {
+            NBTTagCompound cs = new NBTTagCompound();
+            cs.setString("username", status.username);
 
-			NBTTagCompound data = new NBTTagCompound();
-			status.saveToNBTTagCompound(data);
+            NBTTagCompound data = new NBTTagCompound();
+            status.saveToNBTTagCompound(data);
 
-			compound.setTag("data", data);
-			list.appendTag(cs);
-		}
+            compound.setTag("data", data);
+            list.appendTag(cs);
+        }
 
-		compound.setTag("playerData", list);
-	}
+        compound.setTag("playerData", list);
+    }
 
-	public void loadFromNBTTagCompound(NBTTagCompound compound) {
-		NBTTagList list = compound.getTagList("playerData");
+    public void loadFromNBTTagCompound(NBTTagCompound compound) {
+        NBTTagList list = compound.getTagList("playerData");
 
-		for (int i = 0; i < list.tagCount(); ++i) {
-			NBTTagCompound cs = (NBTTagCompound) list.tagAt(i);
-			String username = cs.getString("username");
+        for (int i = 0; i < list.tagCount(); ++i) {
+            NBTTagCompound cs = (NBTTagCompound) list.tagAt(i);
+            String username = cs.getString("username");
 
-			NBTTagCompound data = (NBTTagCompound) cs.getTag("data");
-			PlayerResearch status = new PlayerResearch(username);
-			status.loadFromNBTTagCompound(data);
+            NBTTagCompound data = (NBTTagCompound) cs.getTag("data");
+            PlayerResearch status = new PlayerResearch(username);
+            status.loadFromNBTTagCompound(data);
 
-			playerData.put(username, status);
-		}
-	}
+            playerData.put(username, status);
+        }
+    }
 
-	public boolean save(World world) {
-		try {
-			File file = new File(savePath(world), FILENAME);
-			if (!file.exists()) {
-				file.createNewFile();
-			}
+    public boolean save(World world) {
+        try {
+            File file = new File(savePath(world), FILENAME);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
 
-			FileOutputStream fileoutputstream = new FileOutputStream(file);
-			NBTTagCompound data = new NBTTagCompound();
-			saveToNBTTagCompound(data);
-			CompressedStreamTools.writeCompressed(data, fileoutputstream);
-			fileoutputstream.close();
-		} catch (Exception exception) {
-			Femtocraft.logger.log(Level.SEVERE, "Failed to save data from "
-					+ FILENAME + " in world - " + savePath(world) + ".");
-			exception.printStackTrace();
-			return false;
-		}
+            FileOutputStream fileoutputstream = new FileOutputStream(file);
+            NBTTagCompound data = new NBTTagCompound();
+            saveToNBTTagCompound(data);
+            CompressedStreamTools.writeCompressed(data, fileoutputstream);
+            fileoutputstream.close();
+        } catch (Exception exception) {
+            Femtocraft.logger.log(Level.SEVERE, "Failed to save data from "
+                    + FILENAME + " in world - " + savePath(world) + ".");
+            exception.printStackTrace();
+            return false;
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	public boolean load(World world) {
-		String worldname = world.getWorldInfo().getWorldName();
-		if (lastWorldLoaded == worldname)
-			return false;
-		lastWorldLoaded = worldname;
+    public boolean load(World world) {
+        String worldName = world.getWorldInfo().getWorldName();
+        if (lastWorldLoaded.equals(worldName)) {
+            return false;
+        }
 
-		try {
-			File file = new File(savePath(world), FILENAME);
-			if (!file.exists()) {
-				Femtocraft.logger.log(Level.WARNING, "No " + FILENAME
-						+ " file found for world - " + savePath(world) + ".");
-				return false;
-			}
+        lastWorldLoaded = worldName;
 
-			FileInputStream fileinputstream = new FileInputStream(file);
-			NBTTagCompound data = CompressedStreamTools
-					.readCompressed(fileinputstream);
-			// NBTTagCompound data = CompressedStreamTools.read(file);
-			loadFromNBTTagCompound(data);
-			fileinputstream.close();
-		} catch (Exception exception) {
-			Femtocraft.logger.log(Level.SEVERE, "Failed to load data from "
-					+ FILENAME + " in world - " + savePath(world) + ".");
-			exception.printStackTrace();
-			return false;
-		}
+        try {
+            File file = new File(savePath(world), FILENAME);
+            if (!file.exists()) {
+                Femtocraft.logger.log(Level.WARNING, "No " + FILENAME
+                        + " file found for world - " + savePath(world) + ".");
+                return false;
+            }
 
-		return true;
-	}
+            FileInputStream fileinputstream = new FileInputStream(file);
+            NBTTagCompound data = CompressedStreamTools
+                    .readCompressed(fileinputstream);
+            // NBTTagCompound data = CompressedStreamTools.read(file);
+            loadFromNBTTagCompound(data);
+            fileinputstream.close();
+        } catch (Exception exception) {
+            Femtocraft.logger.log(Level.SEVERE, "Failed to load data from "
+                    + FILENAME + " in world - " + savePath(world) + ".");
+            exception.printStackTrace();
+            return false;
+        }
 
-	private String savePath(World world) {
-		return Minecraft.getMinecraft().mcDataDir + "/saves/"
-				+ world.getSaveHandler().getWorldDirectoryName();
-	}
+        return true;
+    }
+
+    private String savePath(World world) {
+        return Minecraft.getMinecraft().mcDataDir + "/saves/"
+                + world.getSaveHandler().getWorldDirectoryName();
+    }
 }
