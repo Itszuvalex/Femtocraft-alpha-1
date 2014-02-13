@@ -953,9 +953,9 @@ public class FemtocraftAssemblerRecipeManager {
 	private boolean registerShapedOreRecipe(Object[] recipeInput,
 			ItemStack recipeOutput) {
 		boolean done = false;
-		int xoffset = 0;
-		int yoffset = 0;
-		while ((!done) && (xoffset <= 3) && (yoffset <= 3)) {
+		int xOffset = 0;
+		int yOffset = 0;
+		while ((!done) && (xOffset <= 3) && (yOffset <= 3)) {
 			ItemStack[] input = new ItemStack[9];
 			Arrays.fill(input, null);
 			for (int i = 0; (i < recipeInput.length) && (i < 9); i++) {
@@ -968,12 +968,12 @@ public class FemtocraftAssemblerRecipeManager {
 					} else {
 						item = (ItemStack) obj;
 					}
-					input[i + xoffset + 3 * yoffset] = item == null ? null
+					input[i + xOffset + 3 * yOffset] = item == null ? null
 							: item.copy();
 				} catch (ArrayIndexOutOfBoundsException e) {
-					if (++xoffset > 3) {
-						xoffset = 0;
-						++yoffset;
+					if (++xOffset > 3) {
+						xOffset = 0;
+						++yOffset;
 					}
 
 				}
@@ -999,9 +999,9 @@ public class FemtocraftAssemblerRecipeManager {
 				done = true;
 			} catch (AssemblerRecipeFoundException e) {
 				// Attempt to offset, while staying inside crafting grid
-				if ((++xoffset) > 3) {
-					xoffset = 0;
-					++yoffset;
+				if ((++xOffset) > 3) {
+					xOffset = 0;
+					++yOffset;
 				}
 				done = false;
 			}
