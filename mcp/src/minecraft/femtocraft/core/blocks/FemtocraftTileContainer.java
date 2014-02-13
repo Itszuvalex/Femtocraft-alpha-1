@@ -67,8 +67,7 @@ public class FemtocraftTileContainer extends BlockContainer {
 		if (!par1World.isRemote) {
 			TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
 			if (te instanceof FemtocraftTile) {
-				FemtocraftTile tile = (FemtocraftTile) te;
-				if (par5EntityLivingBase == null)
+                if (par5EntityLivingBase == null)
 					return;
 				if (par5EntityLivingBase instanceof EntityPlayerMP) {
 					Item item = par6ItemStack.getItem();
@@ -126,21 +125,14 @@ public class FemtocraftTileContainer extends BlockContainer {
 	}
 
     private boolean canPlayerRemove(EntityPlayer player, FemtocraftTile tile) {
-        if (player == null)
-            return false;
-        return tile.getOwner().equals(player.username)
-                || MinecraftServer.getServer().getConfigurationManager()
-                .isPlayerOpped(player.username)
-                || player.capabilities.isCreativeMode;
+        return player != null && (tile.getOwner().equals(player.username) || MinecraftServer.getServer().getConfigurationManager().isPlayerOpped(player.username) || player.capabilities.isCreativeMode);
     }
 
 	@Override
 	public boolean canEntityDestroy(World world, int x, int y, int z,
 			Entity entity) {
 		TileEntity te = world.getBlockTileEntity(x, y, z);
-		if (!(te instanceof FemtocraftTile))
-			return false;
-        return entity instanceof EntityPlayer && canPlayerRemove((EntityPlayer) entity, (FemtocraftTile) te) && super.canEntityDestroy(world, x, y, z, entity);
+        return te instanceof FemtocraftTile && entity instanceof EntityPlayer && canPlayerRemove((EntityPlayer) entity, (FemtocraftTile) te) && super.canEntityDestroy(world, x, y, z, entity);
     }
 
 	@Override

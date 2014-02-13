@@ -1131,10 +1131,10 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		float min = 7.f / 16.f;
 		float max = 9.f / 16.f;
 
-		float minU = 0;
-		float maxU = 0;
-		float minV = 0;
-		float maxV = 0;
+		float minU;
+		float maxU;
+		float minV;
+		float maxV;
 
 		if (overflow) {
 			minU = tube.indicatorIcon.getInterpolatedU(8.f);

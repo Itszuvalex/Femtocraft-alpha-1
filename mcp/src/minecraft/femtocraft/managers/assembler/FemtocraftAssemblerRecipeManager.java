@@ -1463,13 +1463,7 @@ public class FemtocraftAssemblerRecipeManager {
 
 	public boolean canCraft(ItemStack input) {
 		FemtocraftAssemblerRecipe recipe = getRecipe(input);
-		if (recipe == null)
-			return false;
-
-		if (input.stackSize < recipe.output.stackSize)
-			return false;
-        return FemtocraftUtils.compareItem(recipe.output, input) == 0;
-
+        return recipe != null && input.stackSize >= recipe.output.stackSize && FemtocraftUtils.compareItem(recipe.output, input) == 0;
     }
 
 	public FemtocraftAssemblerRecipe getRecipe(ItemStack[] input) {

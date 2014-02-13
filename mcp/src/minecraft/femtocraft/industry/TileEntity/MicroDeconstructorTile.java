@@ -262,25 +262,14 @@ public class MicroDeconstructorTile extends FemtopowerConsumer implements
 	 * destination stack isn't full, etc.
 	 */
 	private boolean canWork() {
-		if (this.deconstructorItemStacks[0] == null) {
-			return false;
-		}
-		if (deconstructingStack != null) {
-			return false;
-		} else if (this.getCurrentPower() < this.powerToCook) {
-			return false;
-		} else {
-			FemtocraftAssemblerRecipe recipe = FemtocraftRecipeManager.assemblyRecipes
-					.getRecipe(this.deconstructorItemStacks[0]);
-			if (recipe == null)
-				return false;
-			if ((tank.getCapacity() - tank.getFluidAmount()) < recipe.mass)
-				return false;
-			if (deconstructorItemStacks[0].stackSize < recipe.output.stackSize)
-				return false;
-            return roomForItems(recipe.input);
+        if (this.deconstructorItemStacks[0] == null || deconstructingStack != null || this.getCurrentPower() < this.powerToCook) {
+            return false;
+        } else {
+            FemtocraftAssemblerRecipe recipe = FemtocraftRecipeManager.assemblyRecipes
+                    .getRecipe(this.deconstructorItemStacks[0]);
+            return recipe != null && (tank.getCapacity() - tank.getFluidAmount()) >= recipe.mass && deconstructorItemStacks[0].stackSize >= recipe.output.stackSize && roomForItems(recipe.input);
         }
-	}
+    }
 
 	private boolean roomForItems(ItemStack[] items) {
 		ItemStack[] fake = new ItemStack[deconstructorItemStacks.length];
