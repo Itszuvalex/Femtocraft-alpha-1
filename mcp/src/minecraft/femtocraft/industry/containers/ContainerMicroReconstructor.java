@@ -39,7 +39,7 @@ public class ContainerMicroReconstructor extends Container {
 					@Override
 					@SideOnly(Side.CLIENT)
 					public Icon getBackgroundIconIndex() {
-						return ((MicroReconstructorTile) this.inventory)
+						return this.inventory
 								.getStackInSlot(10) != null ? null
 								: DisplaySlot.noPlaceDisplayIcon;
 					}
@@ -179,7 +179,7 @@ public class ContainerMicroReconstructor extends Container {
 			}
 
 			if (itemstack1.stackSize == 0) {
-				slot.putStack((ItemStack) null);
+				slot.putStack(null);
 			} else {
 				slot.onSlotChanged();
 			}

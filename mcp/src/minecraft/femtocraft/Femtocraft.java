@@ -251,7 +251,7 @@ public class Femtocraft {
 		GameRegistry.registerBlock(unidentifiedAlloy, "unidentifiedAlloy");
 		LanguageRegistry.addName(unidentifiedAlloy, "Unidentified Alloy");
 
-		FemtopowerCable = (FemtopowerCable) new FemtopowerCable(
+		FemtopowerCable = new FemtopowerCable(
 				FemtocraftConfigs.FemtopowerCableID, Material.rock);
 		GameRegistry.registerBlock(FemtopowerCable, "FemtopowerCable");
 		LanguageRegistry.addName(FemtopowerCable, "Femtopower Cable");

@@ -93,7 +93,7 @@ public class FemtocraftAssemblerRecipe implements Comparable {
 		for (int i = 0; i < inputList.tagCount(); ++i) {
 			NBTTagCompound itemCompound = (NBTTagCompound) inputList.tagAt(i);
 			byte slot = itemCompound.getByte("Slot");
-			if ((byte) slot != (byte) i) {
+			if (slot != (byte) i) {
 				Femtocraft.logger
 						.log(Level.WARNING,
 								"Slot mismatch occurred while loading AssemblerRecipe.");

@@ -56,7 +56,7 @@ public class FemtocraftCraftingManager {
 		int k = 0;
 
 		if (par2ArrayOfObj[i] instanceof String[]) {
-			String[] astring = (String[]) ((String[]) par2ArrayOfObj[i++]);
+			String[] astring = (String[]) par2ArrayOfObj[i++];
 
             for (String s1 : astring) {
                 ++k;
