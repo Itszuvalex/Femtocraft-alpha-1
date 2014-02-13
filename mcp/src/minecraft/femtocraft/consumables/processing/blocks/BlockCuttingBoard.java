@@ -1,4 +1,4 @@
-package femtocraft.cooking.blocks;
+package femtocraft.consumables.processing.blocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

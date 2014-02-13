@@ -6,9 +6,9 @@ import femtocraft.Femtocraft;
 import femtocraft.managers.research.EnumTechLevel;
 import net.minecraft.client.renderer.texture.IconRegister;
 
-public class CoreInterfaceDevice extends InterfaceDevice {
+public class ItemFemtoInterfaceDevice extends InterfaceDevice {
 
-	public CoreInterfaceDevice(int par1) {
+	public ItemFemtoInterfaceDevice(int par1) {
 		super(par1, EnumTechLevel.FEMTO);
 		setMaxStackSize(1);
 		setCreativeTab(Femtocraft.femtocraftTab);
@@ -18,7 +18,7 @@ public class CoreInterfaceDevice extends InterfaceDevice {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
 		this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
-				.toLowerCase() + ":" + "CoreInterfaceDevice");
+				.toLowerCase() + ":" + "ItemFemtoInterfaceDevice");
 	}
 
 }

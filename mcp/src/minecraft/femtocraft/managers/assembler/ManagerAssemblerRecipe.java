@@ -268,7 +268,7 @@ public class ManagerAssemblerRecipe {
 								new ItemStack(Femtocraft.Faunite),
 								new ItemStack(Femtocraft.Faunite), null,
 								new ItemStack(Femtocraft.Metallite), null }, 2,
-						new ItemStack(Femtocraft.OrganometallicPlate),
+						new ItemStack(Femtocraft.organometallicPlate),
 						EnumTechLevel.NANO, null)); // ItemOrganometallicPlate
 		} catch (AssemblerRecipeFoundException e) {
 			Femtocraft.logger.log(Level.SEVERE, e.errMsg);
@@ -687,7 +687,7 @@ public class ManagerAssemblerRecipe {
 						new ItemStack[] { null,
 								new ItemStack(Femtocraft.IonicChunk), null,
 								new ItemStack(Femtocraft.IonicChunk),
-								new ItemStack(Femtocraft.OrganometallicPlate),
+								new ItemStack(Femtocraft.organometallicPlate),
 								new ItemStack(Femtocraft.IonicChunk), null,
 								new ItemStack(Femtocraft.IonicChunk), null },
 						1, new ItemStack(Item.enderPearl), EnumTechLevel.MICRO,
@@ -711,7 +711,7 @@ public class ManagerAssemblerRecipe {
 				addReversableRecipe(new AssemblerRecipe(
 						new ItemStack[] {
 								new ItemStack(Femtocraft.NerveCluster),
-								new ItemStack(Femtocraft.OrganometallicPlate),
+								new ItemStack(Femtocraft.organometallicPlate),
 								null, null, null, null, null, null, null }, 1,
 						new ItemStack(Item.spiderEye), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("BlazePowder"))
@@ -767,16 +767,16 @@ public class ManagerAssemblerRecipe {
 				addReversableRecipe(new AssemblerRecipe(
 						new ItemStack[] {
 								new ItemStack(Femtocraft.HardenedBulb, 64),
-								new ItemStack(Femtocraft.OrganometallicPlate,
+								new ItemStack(Femtocraft.organometallicPlate,
 										64),
 								new ItemStack(Femtocraft.HardenedBulb, 64),
-								new ItemStack(Femtocraft.OrganometallicPlate,
+								new ItemStack(Femtocraft.organometallicPlate,
 										64),
 								new ItemStack(Item.diamond, 64),
-								new ItemStack(Femtocraft.OrganometallicPlate,
+								new ItemStack(Femtocraft.organometallicPlate,
 										64),
 								new ItemStack(Femtocraft.HardenedBulb, 64),
-								new ItemStack(Femtocraft.OrganometallicPlate,
+								new ItemStack(Femtocraft.organometallicPlate,
 										64),
 								new ItemStack(Femtocraft.HardenedBulb, 64) },
 						1, new ItemStack(Item.netherStar), EnumTechLevel.MICRO,

@@ -1,4 +1,4 @@
-package femtocraft.cooking.blocks;
+package femtocraft.consumables.processing.blocks;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import femtocraft.proxy.ProxyClient;

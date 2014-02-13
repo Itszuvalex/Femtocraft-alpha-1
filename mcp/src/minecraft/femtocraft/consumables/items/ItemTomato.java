@@ -1,4 +1,4 @@
-package femtocraft.farming.items;
+package femtocraft.consumables.items;
 
 import femtocraft.Femtocraft;
 import net.minecraft.client.renderer.texture.IconRegister;

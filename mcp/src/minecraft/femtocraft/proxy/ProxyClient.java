@@ -1,7 +1,7 @@
 package femtocraft.proxy;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import femtocraft.cooking.blocks.RenderCuttingBoard;
+import femtocraft.consumables.processing.blocks.RenderCuttingBoard;
 import femtocraft.industry.render.RenderVacuumTube;
 import femtocraft.power.render.RenderCable;
 import femtocraft.power.render.RenderChargingBase;
