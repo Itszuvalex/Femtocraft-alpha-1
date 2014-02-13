@@ -4,7 +4,7 @@
 package femtocraft.power.render;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import femtocraft.power.tiles.TileEntityBaseEntityCable;
+import femtocraft.power.tiles.TileEntityMicroCable;
 import femtocraft.power.blocks.BlockCable;
 import femtocraft.proxy.ProxyClient;
 import femtocraft.render.RenderModel;
@@ -73,9 +73,9 @@ public class RenderCable implements ISimpleBlockRenderingHandler {
 		TileEntity tile = renderer.blockAccess.getBlockTileEntity(x, y, z);
 		if (tile == null)
 			return false;
-		if (!(tile instanceof TileEntityBaseEntityCable))
+		if (!(tile instanceof TileEntityMicroCable))
 			return false;
-		TileEntityBaseEntityCable cableTile = (TileEntityBaseEntityCable) tile;
+		TileEntityMicroCable cableTile = (TileEntityMicroCable) tile;
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.setBrightness(block.getMixedBrightnessForBlock(
 				renderer.blockAccess, x, y, z));

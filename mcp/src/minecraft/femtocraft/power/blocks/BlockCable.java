@@ -3,7 +3,7 @@ package femtocraft.power.blocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
-import femtocraft.power.tiles.TileEntityBaseEntityCable;
+import femtocraft.power.tiles.TileEntityMicroCable;
 import femtocraft.proxy.ProxyClient;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -41,7 +41,7 @@ public class BlockCable extends TileContainerPower {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityBaseEntityCable();
+		return new TileEntityMicroCable();
 	}
 
 	@Override
@@ -89,9 +89,9 @@ public class BlockCable extends TileContainerPower {
 		TileEntity tile = par1World.getBlockTileEntity(x, y, z);
 		if (tile == null)
 			return;
-		if (!(tile instanceof TileEntityBaseEntityCable))
+		if (!(tile instanceof TileEntityMicroCable))
 			return;
-		TileEntityBaseEntityCable cable = (TileEntityBaseEntityCable) tile;
+		TileEntityMicroCable cable = (TileEntityMicroCable) tile;
 
 		for (int i = 0; i < 6; ++i) {
 			if (!cable.connections[i])
@@ -163,9 +163,9 @@ public class BlockCable extends TileContainerPower {
 		TileEntity tile = par1World.getBlockTileEntity(x, y, z);
 		if (tile == null)
 			return box;
-		if (!(tile instanceof TileEntityBaseEntityCable))
+		if (!(tile instanceof TileEntityMicroCable))
 			return box;
-		TileEntityBaseEntityCable cable = (TileEntityBaseEntityCable) tile;
+		TileEntityMicroCable cable = (TileEntityMicroCable) tile;
 
 		for (int i = 0; i < 6; ++i) {
 			if (!cable.connections[i])
@@ -194,7 +194,7 @@ public class BlockCable extends TileContainerPower {
 					(float) box.maxZ);
 			return;
 		}
-		if (!(tile instanceof TileEntityBaseEntityCable)) {
+		if (!(tile instanceof TileEntityMicroCable)) {
 			setBlockBounds((float) box.minX, (float) box.minY,
 					(float) box.minZ, (float) box.maxX, (float) box.maxY,
 					(float) box.maxZ);
@@ -207,7 +207,7 @@ public class BlockCable extends TileContainerPower {
 		double maxX = 12.d / 16.d;
 		double maxY = 12.d / 16.d;
 		double maxZ = 12.d / 16.d;
-		TileEntityBaseEntityCable cable = (TileEntityBaseEntityCable) tile;
+		TileEntityMicroCable cable = (TileEntityMicroCable) tile;
 
 		for (int i = 0; i < 6; ++i) {
 			if (!cable.connections[i])

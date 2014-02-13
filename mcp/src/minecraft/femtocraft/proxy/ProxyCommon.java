@@ -34,7 +34,7 @@ public class ProxyCommon {
 		GameRegistry.registerTileEntity(
 				TileEntityBaseEntityMicroReconstructor.class,
 				"microReconstructor");
-		GameRegistry.registerTileEntity(TileEntityBaseEntityCable.class,
+		GameRegistry.registerTileEntity(TileEntityMicroCable.class,
 				"blockCable");
 		GameRegistry.registerTileEntity(TileEntityPowerMicroCube.class,
 				"FemtocraftMicroCube");
