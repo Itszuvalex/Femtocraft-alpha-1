@@ -24,12 +24,12 @@ import femtocraft.core.liquids.FluidMass;
 import femtocraft.core.ore.*;
 import femtocraft.farming.produce.Tomato;
 import femtocraft.farming.seeds.tomatoSeed;
-import femtocraft.industry.TileEntity.VacuumTubeTile;
+import femtocraft.industry.tiles.TileEntityVacuumTube;
 import femtocraft.industry.blocks.BlockMicroDeconstructor;
 import femtocraft.industry.blocks.BlockMicroFurnace;
 import femtocraft.industry.blocks.BlockMicroReconstructor;
-import femtocraft.industry.blocks.VacuumTube;
-import femtocraft.industry.items.PaperSchematic;
+import femtocraft.industry.blocks.BlockVacuumTube;
+import femtocraft.industry.items.ItemPaperSchematic;
 import femtocraft.managers.FemtocraftRecipeManager;
 import femtocraft.managers.research.FemtocraftResearchManager;
 import femtocraft.player.FemtocraftNaniteProperties;
@@ -55,7 +55,7 @@ import java.util.logging.Logger;
 
 @Mod(modid = Femtocraft.ID, name = "Femtocraft", version = Femtocraft.VERSION)
 @NetworkMod(channels = { Femtocraft.ID,
-		FemtocraftNaniteProperties.PACKET_CHANNEL, VacuumTubeTile.packetChannel }, packetHandler = FemtocraftPacketHandler.class, clientSideRequired = true, serverSideRequired = true)
+		FemtocraftNaniteProperties.PACKET_CHANNEL, TileEntityVacuumTube.packetChannel }, packetHandler = FemtocraftPacketHandler.class, clientSideRequired = true, serverSideRequired = true)
 public class Femtocraft {
 	public static final String ID = "Femtocraft";
 	public static final String VERSION = "0.1.0";
@@ -302,7 +302,7 @@ public class Femtocraft {
 				FemtopowerMicroCubeItemBlock.class, "FemtopowerMicroCube");
 		LanguageRegistry.addName(FemtopowerMicroCube, "Micro-Cube");
 
-		FemtocraftVacuumTube = new VacuumTube(
+		FemtocraftVacuumTube = new BlockVacuumTube(
 				FemtocraftConfigs.FemtocraftVacuumTubeID);
 		GameRegistry
 				.registerBlock(FemtocraftVacuumTube, "FemtocraftVacuumTube");
@@ -437,7 +437,7 @@ public class Femtocraft {
 
 		// Schematics
 
-		paperSchematic = new PaperSchematic(FemtocraftConfigs.paperSchematicID);
+		paperSchematic = new ItemPaperSchematic(FemtocraftConfigs.paperSchematicID);
 		LanguageRegistry.addName(paperSchematic, "Paper Schematic");
 
 		microInterfaceDevice = new ItemMicroInterfaceDevice(
@@ -604,7 +604,7 @@ public class Femtocraft {
 
 		ClientProxyFemtocraft.setCustomRenderers();
 
-		// GameRegistry.registerTileEntity(TileEntity.class, "myTile");
+		// GameRegistry.registerTileEntity(tiles.class, "myTile");
 
 		// GameRegistry.addRecipe(new ItemStack(itemId), new Object[] {});
 

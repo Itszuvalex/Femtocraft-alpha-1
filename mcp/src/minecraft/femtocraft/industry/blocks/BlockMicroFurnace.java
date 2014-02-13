@@ -3,7 +3,7 @@ package femtocraft.industry.blocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
-import femtocraft.industry.TileEntity.MicroFurnaceTile;
+import femtocraft.industry.tiles.TileEntityMicroFurnace;
 import femtocraft.render.SimpleMachineRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -146,7 +146,7 @@ public class BlockMicroFurnace extends BlockContainer {
 		if (par1World.isRemote) {
 			return true;
 		} else {
-			MicroFurnaceTile tileentityfurnace = (MicroFurnaceTile) par1World
+			TileEntityMicroFurnace tileentityfurnace = (TileEntityMicroFurnace) par1World
 					.getBlockTileEntity(par2, par3, par4);
 
 			if (tileentityfurnace != null) {
@@ -226,7 +226,7 @@ public class BlockMicroFurnace extends BlockContainer {
 	 * the block.
 	 */
 	public TileEntity createNewTileEntity(World par1World) {
-		return new MicroFurnaceTile();
+		return new TileEntityMicroFurnace();
 	}
 
 	/**
@@ -266,7 +266,7 @@ public class BlockMicroFurnace extends BlockContainer {
 	public void breakBlock(World par1World, int par2, int par3, int par4,
 			int par5, int par6) {
 		if (!keepFurnaceInventory) {
-			MicroFurnaceTile tileentityfurnace = (MicroFurnaceTile) par1World
+			TileEntityMicroFurnace tileentityfurnace = (TileEntityMicroFurnace) par1World
 					.getBlockTileEntity(par2, par3, par4);
 
 			if (tileentityfurnace != null) {

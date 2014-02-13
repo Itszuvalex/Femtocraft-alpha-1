@@ -2,7 +2,7 @@ package femtocraft;
 
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
-import femtocraft.industry.TileEntity.VacuumTubeTile;
+import femtocraft.industry.tiles.TileEntityVacuumTube;
 import femtocraft.player.FemtocraftNaniteProperties;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,7 +29,7 @@ public class FemtocraftPacketHandler implements IPacketHandler {
         DataInputStream inputStream = new DataInputStream(
                 new ByteArrayInputStream(packet.data));
 
-        if (packet.channel.equalsIgnoreCase(VacuumTubeTile.packetChannel)) {
+        if (packet.channel.equalsIgnoreCase(TileEntityVacuumTube.packetChannel)) {
             handleVacuumTube(inputStream, playerEntity);
         }
     }
@@ -51,9 +51,9 @@ public class FemtocraftPacketHandler implements IPacketHandler {
             TileEntity tile = cp.worldObj.getBlockTileEntity(x, y, z);
             if (tile == null)
                 return;
-            if (!(tile instanceof VacuumTubeTile))
+            if (!(tile instanceof TileEntityVacuumTube))
                 return;
-            VacuumTubeTile tube = (VacuumTubeTile) tile;
+            TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
             tube.parseItemMask(items);
             tube.parseConnectionMask(connections);
             cp.worldObj.markBlockForRenderUpdate(x, y, z);

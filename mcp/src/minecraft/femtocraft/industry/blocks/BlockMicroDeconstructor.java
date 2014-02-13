@@ -3,7 +3,7 @@ package femtocraft.industry.blocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
-import femtocraft.industry.TileEntity.MicroDeconstructorTile;
+import femtocraft.industry.tiles.TileEntityMicroDeconstructor;
 import femtocraft.render.SimpleMachineRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -131,7 +131,7 @@ public class BlockMicroDeconstructor extends BlockContainer {
 		if (par1World.isRemote) {
 			return true;
 		} else {
-			MicroDeconstructorTile tileentityfurnace = (MicroDeconstructorTile) par1World
+			TileEntityMicroDeconstructor tileentityfurnace = (TileEntityMicroDeconstructor) par1World
 					.getBlockTileEntity(par2, par3, par4);
 
 			if (tileentityfurnace != null) {
@@ -195,7 +195,7 @@ public class BlockMicroDeconstructor extends BlockContainer {
 	 * the block.
 	 */
 	public TileEntity createNewTileEntity(World par1World) {
-		return new MicroDeconstructorTile();
+		return new TileEntityMicroDeconstructor();
 	}
 
 	/**
@@ -224,7 +224,7 @@ public class BlockMicroDeconstructor extends BlockContainer {
 
 		// if (par6ItemStack.hasDisplayName())
 		// {
-		// ((MicroDeconstructorTile)par1World.getBlockTileEntity(par2, par3,
+		// ((TileEntityMicroDeconstructor)par1World.getBlockTileEntity(par2, par3,
 		// par4)).setGuiDisplayName(par6ItemStack.getDisplayName());
 		// }
 	}
@@ -235,7 +235,7 @@ public class BlockMicroDeconstructor extends BlockContainer {
 	 */
 	public void breakBlock(World par1World, int par2, int par3, int par4,
 			int par5, int par6) {
-		MicroDeconstructorTile tileEntity = (MicroDeconstructorTile) par1World
+		TileEntityMicroDeconstructor tileEntity = (TileEntityMicroDeconstructor) par1World
 				.getBlockTileEntity(par2, par3, par4);
 
 		if (tileEntity != null) {

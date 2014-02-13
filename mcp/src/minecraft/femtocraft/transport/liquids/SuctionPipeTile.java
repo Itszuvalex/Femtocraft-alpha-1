@@ -70,7 +70,7 @@ public class SuctionPipeTile extends TileEntity implements ISuctionPipe {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see net.minecraft.tileentity.TileEntity#updateEntity()
+	 * @see net.minecraft.tileentity.tiles#updateEntity()
 	 */
 	@Override
 	public void updateEntity() {

@@ -1,9 +1,9 @@
 package femtocraft;
 
 import cpw.mods.fml.common.network.IGuiHandler;
-import femtocraft.industry.TileEntity.MicroDeconstructorTile;
-import femtocraft.industry.TileEntity.MicroFurnaceTile;
-import femtocraft.industry.TileEntity.MicroReconstructorTile;
+import femtocraft.industry.tiles.TileEntityMicroDeconstructor;
+import femtocraft.industry.tiles.TileEntityMicroFurnace;
+import femtocraft.industry.tiles.TileEntityMicroReconstructor;
 import femtocraft.industry.containers.ContainerMicroDeconstructor;
 import femtocraft.industry.containers.ContainerMicroFurnace;
 import femtocraft.industry.containers.ContainerMicroReconstructor;
@@ -26,15 +26,15 @@ public class GuiHandlerFemtocraft implements IGuiHandler {
 			int x, int y, int z) {
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
-		if (tileEntity instanceof MicroFurnaceTile) {
+		if (tileEntity instanceof TileEntityMicroFurnace) {
 			return new ContainerMicroFurnace(player.inventory,
-					(MicroFurnaceTile) tileEntity);
-		} else if (tileEntity instanceof MicroDeconstructorTile) {
+					(TileEntityMicroFurnace) tileEntity);
+		} else if (tileEntity instanceof TileEntityMicroDeconstructor) {
 			return new ContainerMicroDeconstructor(player.inventory,
-					(MicroDeconstructorTile) tileEntity);
-		} else if (tileEntity instanceof MicroReconstructorTile) {
+					(TileEntityMicroDeconstructor) tileEntity);
+		} else if (tileEntity instanceof TileEntityMicroReconstructor) {
 			return new ContainerMicroReconstructor(player.inventory,
-					(MicroReconstructorTile) tileEntity);
+					(TileEntityMicroReconstructor) tileEntity);
 		}
 
 		return null;
@@ -45,15 +45,15 @@ public class GuiHandlerFemtocraft implements IGuiHandler {
 			int x, int y, int z) {
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
-		if (tileEntity instanceof MicroFurnaceTile) {
+		if (tileEntity instanceof TileEntityMicroFurnace) {
 			return new GuiMicroFurnace(player.inventory,
-					(MicroFurnaceTile) tileEntity);
-		} else if (tileEntity instanceof MicroDeconstructorTile) {
+					(TileEntityMicroFurnace) tileEntity);
+		} else if (tileEntity instanceof TileEntityMicroDeconstructor) {
 			return new GuiMicroDeconstructor(player.inventory,
-					(MicroDeconstructorTile) tileEntity);
-		} else if (tileEntity instanceof MicroReconstructorTile) {
+					(TileEntityMicroDeconstructor) tileEntity);
+		} else if (tileEntity instanceof TileEntityMicroReconstructor) {
 			return new GuiMicroReconstructor(player.inventory,
-					(MicroReconstructorTile) tileEntity);
+					(TileEntityMicroReconstructor) tileEntity);
 		}
 
 		return null;

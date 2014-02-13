@@ -34,12 +34,12 @@ import java.util.Random;
  *       infinite use schematics and support for a separate Icon for keyed
  *       Schematics.
  */
-public class AssemblySchematic extends Item implements IAssemblerSchematic {
+public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
 	public static Icon placeholderIcon;
 	public static float infiniteUseMassMultiplier = FemtocraftConfigs.schematicInfiniteUseMultiplier;
 	public Icon keyedIcon;
 
-	public AssemblySchematic(int itemID) {
+	public ItemAssemblySchematic(int itemID) {
 		super(itemID);
 		setCreativeTab(Femtocraft.femtocraftTab);
 		setMaxStackSize(64);

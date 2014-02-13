@@ -2,7 +2,7 @@ package femtocraft.proxy;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import femtocraft.cooking.blocks.cuttingBoardRenderer;
-import femtocraft.industry.render.VacuumTubeRenderer;
+import femtocraft.industry.render.RenderVacuumTube;
 import femtocraft.power.render.FemtopowerCableRenderer;
 import femtocraft.power.render.FemtopowerChargingBaseRenderer;
 import femtocraft.power.render.FemtopowerChargingCoilRenderer;
@@ -53,7 +53,7 @@ public class ClientProxyFemtocraft extends CommonProxyFemtocraft {
 		FemtocraftVacuumTubeRenderID = RenderingRegistry
 				.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(FemtocraftVacuumTubeRenderID,
-				new VacuumTubeRenderer());
+				new RenderVacuumTube());
 
 		FemtocraftChargingBaseRenderID = RenderingRegistry
 				.getNextAvailableRenderId();

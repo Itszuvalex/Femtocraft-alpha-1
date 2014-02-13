@@ -5,7 +5,7 @@ package femtocraft.power.render;
 //import net.minecraft.block.Block;
 //import net.minecraft.client.renderer.RenderBlocks;
 //import net.minecraft.client.renderer.Tessellator;
-//import net.minecraft.tileentity.TileEntity;
+//import net.minecraft.tileentity.tiles;
 //import net.minecraft.util.Icon;
 //import net.minecraft.world.IBlockAccess;
 //import net.minecraftforge.common.ForgeDirection;
@@ -14,7 +14,7 @@ package femtocraft.power.render;
 //
 //import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 //import femtocraft.power.FemtopowerMicroCube;
-//import femtocraft.power.TileEntity.FemtopowerMicroCubeTile;
+//import femtocraft.power.tiles.FemtopowerMicroCubeTile;
 //import femtocraft.proxy.ClientProxyFemtocraft;
 //import femtocraft.render.FemtocraftRenderUtils;
 //
@@ -49,7 +49,7 @@ package femtocraft.power.render;
 //		FemtopowerMicroCube cube = (FemtopowerMicroCube)block;
 //		if(cube == null) return false;
 //		
-//		TileEntity tile = world.getBlockTileEntity(x, y, z);
+//		tiles tile = world.getBlockTileEntity(x, y, z);
 //		if(tile == null) return false;
 //		if(!(tile instanceof FemtopowerMicroCubeTile)) return false;
 //		FemtopowerMicroCubeTile cubeTile = (FemtopowerMicroCubeTile)tile;

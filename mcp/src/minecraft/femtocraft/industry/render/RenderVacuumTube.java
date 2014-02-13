@@ -1,8 +1,8 @@
 package femtocraft.industry.render;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import femtocraft.industry.TileEntity.VacuumTubeTile;
-import femtocraft.industry.blocks.VacuumTube;
+import femtocraft.industry.tiles.TileEntityVacuumTube;
+import femtocraft.industry.blocks.BlockVacuumTube;
 import femtocraft.proxy.ClientProxyFemtocraft;
 import femtocraft.render.FemtocraftRenderUtils;
 import femtocraft.render.Model;
@@ -16,7 +16,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
-public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
+public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
 	// Full Outside Models
 	private Model outNorth, inNorth;
 	private Model outSouth, inSouth;
@@ -70,14 +70,14 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 
 	boolean initialized = false;
 
-	public VacuumTubeRenderer() {
+	public RenderVacuumTube() {
 
 	}
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
-		VacuumTube tube = (VacuumTube) block;
+		BlockVacuumTube tube = (BlockVacuumTube) block;
 		if (tube == null)
 			return;
 
@@ -99,20 +99,20 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
 			Block block, int modelId, RenderBlocks renderer) {
 
-		if (!(block instanceof VacuumTube))
+		if (!(block instanceof BlockVacuumTube))
 			return false;
 		TileEntity tile = world.getBlockTileEntity(x, y, z);
 		if (tile == null)
 			return false;
-		if (!(tile instanceof VacuumTubeTile))
+		if (!(tile instanceof TileEntityVacuumTube))
 			return false;
-		VacuumTubeTile tube = (VacuumTubeTile) tile;
+		TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.setBrightness(block.getMixedBrightnessForBlock(
 				renderer.blockAccess, x, y, z));
 		tessellator.setColorOpaque_F(1, 1, 1);
 
-		renderTube((VacuumTube) block, x, y, z, tube.hasItem,
+		renderTube((BlockVacuumTube) block, x, y, z, tube.hasItem,
 				tube.isOverflowing(), tube.getInput(), tube.getOutput(),
 				!tube.missingInput(), !tube.missingOutput());
 
@@ -129,7 +129,7 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		return ClientProxyFemtocraft.FemtocraftVacuumTubeRenderID;
 	}
 
-	private void renderTube(VacuumTube tube, int x, int y, int z,
+	private void renderTube(BlockVacuumTube tube, int x, int y, int z,
 			boolean[] hasItem, boolean isOverflowing, ForgeDirection in,
 			ForgeDirection out, boolean hasInput, boolean hasOutput) {
 		if (!initialized)
@@ -785,7 +785,7 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		}
 	}
 
-	private void initializeModels(VacuumTube tube) {
+	private void initializeModels(BlockVacuumTube tube) {
 		createCenters(tube);
 		createIndicators(tube);
 		createEnds(tube);
@@ -793,7 +793,7 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		initialized = true;
 	}
 
-	private void createCenters(VacuumTube tube) {
+	private void createCenters(BlockVacuumTube tube) {
 		// Straight
 		centerStraightSouthToNorth = createStraightCenter(tube);
 		centerStraightNorthToSouth = centerStraightSouthToNorth
@@ -862,7 +862,7 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 				Math.PI / 2.d).rotatedOnYAxis(Math.PI / 2.d);
 	}
 
-	private Model createCurvedCenter(VacuumTube tube) {
+	private Model createCurvedCenter(BlockVacuumTube tube) {
 		// This will return a WestToNorth Curve
 		Model ret = new Model(new Point(0, 0, 0), new Point(.5f, .5f, .5f));
 
@@ -966,7 +966,7 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		return ret;
 	}
 
-	private Model createStraightCenter(VacuumTube tube) {
+	private Model createStraightCenter(BlockVacuumTube tube) {
 		Model ret = new Model(new Point(0, 0, 0), new Point(.5f, .5f, .5f));
 
 		float min = 4.f / 16.f;
@@ -1036,7 +1036,7 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		return ret;
 	}
 
-	private void createIndicators(VacuumTube tube) {
+	private void createIndicators(BlockVacuumTube tube) {
 		// North
 		inNorthFarOn = createIndicator(tube, 6.f / 16.f, true, false, true);
 		inNorthFarOff = createIndicator(tube, 6.f / 16.f, false, false, true);
@@ -1124,7 +1124,7 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 				.rotatedToDirection(ForgeDirection.DOWN);
 	}
 
-	private Model createIndicator(VacuumTube tube, float offset,
+	private Model createIndicator(BlockVacuumTube tube, float offset,
 			boolean hasItem, boolean overflow, boolean in) {
 		Model ret = new Model(new Point(0, 0, 0), new Point(.5f, .5f, .5f));
 
@@ -1180,7 +1180,7 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		return ret;
 	}
 
-	private void createEnds(VacuumTube tube) {
+	private void createEnds(BlockVacuumTube tube) {
 		inNorth = createEnd(tube, true);
 		outNorth = createEnd(tube, false);
 		inSouth = inNorth.rotatedToDirection(ForgeDirection.SOUTH);
@@ -1195,7 +1195,7 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		outDown = outNorth.rotatedToDirection(ForgeDirection.DOWN);
 	}
 
-	private Model createEnd(VacuumTube tube, boolean in) {
+	private Model createEnd(BlockVacuumTube tube, boolean in) {
 		Model ret = new Model(new Point(0, 0, 0), new Point(0.5f, 0.5f, 0.5f));
 
 		float min = 4.f / 16.f;
@@ -1276,7 +1276,7 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		return ret;
 	}
 
-	private void createCenterEnds(VacuumTube tube) {
+	private void createCenterEnds(BlockVacuumTube tube) {
 		centerEndNorth = createCenterEnd(tube);
 		centerEndSouth = centerEndNorth
 				.rotatedToDirection(ForgeDirection.SOUTH);
@@ -1286,7 +1286,7 @@ public class VacuumTubeRenderer implements ISimpleBlockRenderingHandler {
 		centerEndEast = centerEndNorth.rotatedToDirection(ForgeDirection.EAST);
 	}
 
-	private Model createCenterEnd(VacuumTube tube) {
+	private Model createCenterEnd(BlockVacuumTube tube) {
 		Model ret = new Model(new Point(0, 0, 0), new Point(0.5f, 0.5f, 0.5f));
 
 		float min = 4.f / 16.f;

@@ -5,8 +5,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.api.IAssemblerSchematic;
 import femtocraft.common.gui.DisplaySlot;
 import femtocraft.common.gui.OutputSlot;
-import femtocraft.industry.TileEntity.MicroReconstructorTile;
-import femtocraft.industry.items.AssemblySchematic;
+import femtocraft.industry.tiles.TileEntityMicroReconstructor;
+import femtocraft.industry.items.ItemAssemblySchematic;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -16,13 +16,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 
 public class ContainerMicroReconstructor extends Container {
-	private MicroReconstructorTile reconstructor;
+	private TileEntityMicroReconstructor reconstructor;
 	private int lastCookTime = 0;
 	private int lastPower = 0;
 	private int lastMass = 0;
 
 	public ContainerMicroReconstructor(InventoryPlayer par1InventoryPlayer,
-			MicroReconstructorTile reconstructor) {
+			TileEntityMicroReconstructor reconstructor) {
 		this.reconstructor = reconstructor;
 		this.addSlotToContainer(new OutputSlot(reconstructor, 9, 122, 23));
 		Slot schematic = new Slot(reconstructor, 10, 94, 54) {
@@ -30,7 +30,7 @@ public class ContainerMicroReconstructor extends Container {
 				return par1ItemStack.getItem() instanceof IAssemblerSchematic;
 			}
 		};
-		schematic.setBackgroundIcon(AssemblySchematic.placeholderIcon);
+		schematic.setBackgroundIcon(ItemAssemblySchematic.placeholderIcon);
 		this.addSlotToContainer(schematic);
 		for (int y = 0; y < 3; ++y) {
 			for (int x = 0; x < 3; ++x) {

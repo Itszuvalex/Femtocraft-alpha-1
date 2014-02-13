@@ -1,4 +1,4 @@
-package femtocraft.industry.TileEntity;
+package femtocraft.industry.tiles;
 
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class VacuumTubeTile extends TileEntity implements IVacuumTube {
+public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 	// hasItem array for client-side rendering only
 	// Server will update this array and this alone to save bytes
 	// Player has no need to know WHAT is in the pipes, anyways
@@ -49,7 +49,7 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 	private boolean needsCheckInput = false;
 	private boolean needsCheckOutput = false;
 
-	public VacuumTubeTile() {
+	public TileEntityVacuumTube() {
 		super();
 		Arrays.fill(hasItem, false);
 		Arrays.fill(items, null);
@@ -179,15 +179,15 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 	public boolean searchForInput() {
 		List<Integer> check = new ArrayList<Integer>();
 
-		// Search for VacuumTube connections first
+		// Search for BlockVacuumTube connections first
 		for (int i = 0; i < 6; i++) {
 			ForgeDirection dir = ForgeDirection.getOrientation(i);
 			TileEntity tile = worldObj.getBlockTileEntity(xCoord + dir.offsetX,
 					yCoord + dir.offsetY, zCoord + dir.offsetZ);
 			if (tile == null)
 				continue;
-			if (tile instanceof VacuumTubeTile) {
-				VacuumTubeTile tube = (VacuumTubeTile) tile;
+			if (tile instanceof TileEntityVacuumTube) {
+				TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
 				if (tube.missingOutput()) {
 					if (setInput(dir))
 						return true;
@@ -221,8 +221,8 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 					yCoord + dir.offsetY, zCoord + dir.offsetZ);
 			if (tile == null)
 				continue;
-			if (tile instanceof VacuumTubeTile) {
-				VacuumTubeTile tube = (VacuumTubeTile) tile;
+			if (tile instanceof TileEntityVacuumTube) {
+				TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
 				if (tube.missingInput()) {
 					if (setOutput(dir))
 						return true;
@@ -408,7 +408,7 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 	}
 
-	private void setupReceiveFromTube(VacuumTubeTile tube, ForgeDirection dir) {
+	private void setupReceiveFromTube(TileEntityVacuumTube tube, ForgeDirection dir) {
 		tube.outputTube = this;
 		tube.outputInv = null;
 		tube.outputSidedInv = null;
@@ -418,7 +418,7 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 				tube.zCoord);
 	}
 
-	private void setupSendToTube(VacuumTubeTile tube, ForgeDirection dir) {
+	private void setupSendToTube(TileEntityVacuumTube tube, ForgeDirection dir) {
 		tube.inputTube = this;
 		tube.inputInv = null;
 		tube.inputSidedInv = null;
@@ -428,7 +428,7 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 				tube.zCoord);
 	}
 
-	private void removeReceiveFromTube(VacuumTubeTile tube) {
+	private void removeReceiveFromTube(TileEntityVacuumTube tube) {
 		if (tube.outputTube != this)
 			return;
 
@@ -439,7 +439,7 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 				tube.zCoord);
 	}
 
-	private void removeSendToTube(VacuumTubeTile tube) {
+	private void removeSendToTube(TileEntityVacuumTube tube) {
 		if (tube.inputTube != this)
 			return;
 
@@ -725,7 +725,7 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 			return;
 		}
 
-		// If being loaded by another VacuumTube
+		// If being loaded by another BlockVacuumTube
 		if (queuedItem != null) {
 			items[0] = queuedItem;
 			hasItem[0] = true;

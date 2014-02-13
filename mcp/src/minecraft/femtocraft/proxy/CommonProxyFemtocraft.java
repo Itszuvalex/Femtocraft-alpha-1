@@ -1,10 +1,10 @@
 package femtocraft.proxy;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import femtocraft.industry.TileEntity.MicroDeconstructorTile;
-import femtocraft.industry.TileEntity.MicroFurnaceTile;
-import femtocraft.industry.TileEntity.MicroReconstructorTile;
-import femtocraft.industry.TileEntity.VacuumTubeTile;
+import femtocraft.industry.tiles.TileEntityMicroDeconstructor;
+import femtocraft.industry.tiles.TileEntityMicroFurnace;
+import femtocraft.industry.tiles.TileEntityMicroReconstructor;
+import femtocraft.industry.tiles.TileEntityVacuumTube;
 import femtocraft.power.TileEntity.*;
 
 public class CommonProxyFemtocraft {
@@ -19,17 +19,17 @@ public class CommonProxyFemtocraft {
 				"FemtopowerProducerTest");
 		GameRegistry.registerTileEntity(FemtopowerConsumerTest.class,
 				"FemtopowerConsumerTest");
-		GameRegistry.registerTileEntity(MicroFurnaceTile.class,
+		GameRegistry.registerTileEntity(TileEntityMicroFurnace.class,
 				"FemtocraftMicroFurnace");
-		GameRegistry.registerTileEntity(MicroDeconstructorTile.class,
+		GameRegistry.registerTileEntity(TileEntityMicroDeconstructor.class,
 				"FemtocraftMicroDeconstructor");
-		GameRegistry.registerTileEntity(MicroReconstructorTile.class,
+		GameRegistry.registerTileEntity(TileEntityMicroReconstructor.class,
 				"FemtocraftMicroReconstructor");
 		GameRegistry.registerTileEntity(FemtopowerCableTile.class,
 				"FemtopowerCable");
 		GameRegistry.registerTileEntity(FemtopowerMicroCubeTile.class,
 				"FemtocraftMicroCube");
-		GameRegistry.registerTileEntity(VacuumTubeTile.class, "VacuumTube");
+		GameRegistry.registerTileEntity(TileEntityVacuumTube.class, "BlockVacuumTube");
 		GameRegistry.registerTileEntity(MicroChargingBaseTile.class,
 				"MicroChargingBase");
 	}

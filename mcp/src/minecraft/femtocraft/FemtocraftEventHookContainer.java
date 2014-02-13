@@ -1,7 +1,7 @@
 package femtocraft;
 
 import femtocraft.common.gui.DisplaySlot;
-import femtocraft.industry.items.AssemblySchematic;
+import femtocraft.industry.items.ItemAssemblySchematic;
 import femtocraft.player.FemtocraftNaniteProperties;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -31,9 +31,9 @@ public class FemtocraftEventHookContainer {
 		if (event.map.textureType == 0)
 			return;
 		// Want items
-		AssemblySchematic.placeholderIcon = event.map
+		ItemAssemblySchematic.placeholderIcon = event.map
 				.registerIcon(Femtocraft.ID.toLowerCase() + ":"
-						+ "AssemblySchematic");
+						+ "ItemAssemblySchematic");
 		DisplaySlot.noPlaceDisplayIcon = event.map.registerIcon(Femtocraft.ID
 				.toLowerCase() + ":" + "NoPlaceSlot");
 	}

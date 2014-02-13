@@ -1,6 +1,6 @@
 package femtocraft;
 
-import femtocraft.industry.items.AssemblySchematic;
+import femtocraft.industry.items.ItemAssemblySchematic;
 import net.minecraftforge.common.Configuration;
 
 import java.lang.annotation.Retention;
@@ -602,7 +602,7 @@ public class FemtocraftConfigs {
 							200.f,
 							"When AssemblerSchematics have infinite uses, this number will be used instead of the # of uses the schematic would be good for, when calculating the mass required to key the schematic to a recipe.")
 					.getDouble(200.f);
-			AssemblySchematic.infiniteUseMassMultiplier = schematicInfiniteUseMultiplier;
+			ItemAssemblySchematic.infiniteUseMassMultiplier = schematicInfiniteUseMultiplier;
 
 		} catch (Exception e) {
 			// failed to load configs log

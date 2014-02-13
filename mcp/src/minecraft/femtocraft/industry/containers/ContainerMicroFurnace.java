@@ -2,7 +2,7 @@ package femtocraft.industry.containers;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import femtocraft.industry.TileEntity.MicroFurnaceTile;
+import femtocraft.industry.tiles.TileEntityMicroFurnace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -13,12 +13,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 
 public class ContainerMicroFurnace extends Container {
-	private MicroFurnaceTile furnace;
+	private TileEntityMicroFurnace furnace;
 	private int lastCookTime = 0;
 	private int lastPower = 0;
 
 	public ContainerMicroFurnace(InventoryPlayer par1InventoryPlayer,
-			MicroFurnaceTile par2TileEntityFurnace) {
+			TileEntityMicroFurnace par2TileEntityFurnace) {
 		this.furnace = par2TileEntityFurnace;
 		this.addSlotToContainer(new Slot(par2TileEntityFurnace, 0, 56, 35));
 		this.addSlotToContainer(new SlotFurnace(par1InventoryPlayer.player,

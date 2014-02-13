@@ -1,4 +1,4 @@
-package femtocraft.industry.TileEntity;
+package femtocraft.industry.tiles;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -16,11 +16,11 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
-public class MicroReconstructorTile extends FemtopowerConsumer implements
+public class TileEntityMicroReconstructor extends FemtopowerConsumer implements
         ISidedInventory, IFluidHandler {
     private FluidTank tank;
 
-    public MicroReconstructorTile() {
+    public TileEntityMicroReconstructor() {
         super();
         setMaxStorage(800);
         tank = new FluidTank(600);
@@ -29,7 +29,7 @@ public class MicroReconstructorTile extends FemtopowerConsumer implements
         //
         // ItemStack sch = new ItemStack(Femtocraft.paperSchematic);
         // reconstructorItemStacks[15] = sch;
-        // ((AssemblySchematic)sch.getItem()).setRecipe(sch,
+        // ((ItemAssemblySchematic)sch.getItem()).setRecipe(sch,
         // Femtocraft.recipeManager.assemblyRecipes.getRecipe(new
         // ItemStack(Femtocraft.ItemProteinChain)));
     }
