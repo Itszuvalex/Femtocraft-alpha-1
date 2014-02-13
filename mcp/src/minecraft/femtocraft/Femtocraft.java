@@ -35,7 +35,7 @@ import femtocraft.managers.research.ManagerResearch;
 import femtocraft.player.PropertiesNanite;
 import femtocraft.power.blocks.*;
 import femtocraft.power.items.ItemBlockMicroCube;
-import femtocraft.power.items.ItemBlockSpoolGold;
+import femtocraft.power.items.ItemSpoolGold;
 import femtocraft.proxy.ProxyClient;
 import femtocraft.proxy.ProxyCommon;
 import net.minecraft.block.Block;
@@ -430,7 +430,7 @@ public class Femtocraft {
                 .setUnlocalizedName("spool");
         LanguageRegistry.addName(spool, "Spool");
 
-        spoolGold = new ItemBlockSpoolGold(FemtocraftConfigs.spoolGoldID)
+        spoolGold = new ItemSpoolGold(FemtocraftConfigs.spoolGoldID)
                 .setUnlocalizedName("spoolGold");
         LanguageRegistry.addName(spoolGold, "Gold Wire Spool");
 

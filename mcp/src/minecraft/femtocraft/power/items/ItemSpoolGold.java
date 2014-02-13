@@ -6,9 +6,9 @@ import femtocraft.Femtocraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 
-public class ItemBlockSpoolGold extends Item {
+public class ItemSpoolGold extends Item {
 
-	public ItemBlockSpoolGold(int par1) {
+	public ItemSpoolGold(int par1) {
 		super(par1);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
@@ -18,7 +18,7 @@ public class ItemBlockSpoolGold extends Item {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
 		itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-				+ ":" + "GoldSpool");
+				+ ":" + "ItemSpoolGold");
 	}
 
 }
