@@ -5,8 +5,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
 import femtocraft.api.IAssemblerSchematic;
-import femtocraft.managers.FemtocraftRecipeManager;
-import femtocraft.managers.assembler.FemtocraftAssemblerRecipe;
+import femtocraft.managers.ManagerRecipe;
+import femtocraft.managers.assembler.AssemblerRecipe;
 import femtocraft.power.TileEntity.FemtopowerConsumer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -78,7 +78,7 @@ public class TileEntityMicroReconstructor extends FemtopowerConsumer implements
     public void onInventoryChanged() {
         IAssemblerSchematic as = getSchematic();
         if (as != null) {
-            FemtocraftAssemblerRecipe recipe = as
+            AssemblerRecipe recipe = as
                     .getRecipe(reconstructorItemStacks[10]);
             if (recipe == null) {
                 for (int i = 0; i < 9; i++) {
@@ -349,7 +349,7 @@ public class TileEntityMicroReconstructor extends FemtopowerConsumer implements
                 && reconstructorItemStacks[8] == null || getSchematic() == null || reconstructingStacks != null || this.getCurrentPower() < this.powerToCook) {
             return false;
         } else {
-            FemtocraftAssemblerRecipe recipe = getSchematic().getRecipe(
+            AssemblerRecipe recipe = getSchematic().getRecipe(
                     reconstructorItemStacks[10]);
             return recipe != null && tank.getFluidAmount() >= recipe.mass && roomForItem(recipe.output) && hasItems(recipe.input);
         }
@@ -387,7 +387,7 @@ public class TileEntityMicroReconstructor extends FemtopowerConsumer implements
             reconstructingStacks[i] = s == null ? null : s.copy();
         }
         IAssemblerSchematic as = getSchematic();
-        FemtocraftAssemblerRecipe recipe = as
+        AssemblerRecipe recipe = as
                 .getRecipe(reconstructorItemStacks[10]);
 
         for (int i = 0; i < recipe.input.length; ++i) {
@@ -410,7 +410,7 @@ public class TileEntityMicroReconstructor extends FemtopowerConsumer implements
 
     public void endWork() {
         // Cannot look off schematic, cause schematic can change mid-build
-        FemtocraftAssemblerRecipe recipe = FemtocraftRecipeManager.assemblyRecipes
+        AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
                 .getRecipe(reconstructingStacks);
 
         if (recipe != null) {

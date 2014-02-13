@@ -2,20 +2,20 @@ package femtocraft.managers.research;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TechnologyStatus {
+public class ResearchTechnologyStatus {
 	public String tech;
 	public boolean researched;
 
-	public TechnologyStatus(String tech, boolean researched) {
+	public ResearchTechnologyStatus(String tech, boolean researched) {
 		this.tech = tech;
 		this.researched = researched;
 	}
 
-	public TechnologyStatus(String name) {
+	public ResearchTechnologyStatus(String name) {
 		this(name, false);
 	}
 
-	private TechnologyStatus() {
+	private ResearchTechnologyStatus() {
 	}
 
 	public void saveToNBTTagCompound(NBTTagCompound compound) {

@@ -3,7 +3,7 @@ package femtocraft.power.TileEntity;
 import femtocraft.api.FemtopowerContainer;
 import femtocraft.api.IFemtopowerBlockContainer;
 import femtocraft.core.tiles.FemtocraftTile;
-import femtocraft.managers.research.TechLevel;
+import femtocraft.managers.research.EnumTechLevel;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
@@ -20,7 +20,7 @@ public class FemtopowerTile extends FemtocraftTile implements
 
 	public FemtopowerTile() {
 		super();
-		container = new FemtopowerContainer(TechLevel.MACRO, 250);
+		container = new FemtopowerContainer(EnumTechLevel.MACRO, 250);
 		maxPowerPerTick = .05f;
 		maxSizePackets = .05f; // Yes this is the same as maxpertick, this
 								// breaks if it isn't, for some reason TODO
@@ -37,7 +37,7 @@ public class FemtopowerTile extends FemtocraftTile implements
 		container.setCurrentPower(currentStorage);
 	}
 
-	public void setTechLevel(TechLevel level) {
+	public void setTechLevel(EnumTechLevel level) {
 		container.setTechLevel(level);
 	}
 
@@ -267,12 +267,12 @@ public class FemtopowerTile extends FemtocraftTile implements
 	}
 
 	@Override
-	public boolean canAcceptPowerOfLevel(TechLevel level, ForgeDirection from) {
+	public boolean canAcceptPowerOfLevel(EnumTechLevel level, ForgeDirection from) {
 		return container.canAcceptPowerOfLevel(level);
 	}
 
 	@Override
-	public TechLevel getTechLevel(ForgeDirection to) {
+	public EnumTechLevel getTechLevel(ForgeDirection to) {
 		return container.getTechLevel();
 	}
 

@@ -4,28 +4,28 @@ import net.minecraftforge.event.Cancelable;
 import net.minecraftforge.event.Event;
 
 @Cancelable
-public class AssemblerRegisterEvent extends Event {
+public class EventAssemblerRegister extends Event {
 
-	public final FemtocraftAssemblerRecipe recipe;
+	public final AssemblerRecipe recipe;
 
-	public AssemblerRegisterEvent(FemtocraftAssemblerRecipe recipe) {
+	public EventAssemblerRegister(AssemblerRecipe recipe) {
 		this.recipe = recipe;
 	}
 
 	@Cancelable
 	public static class AssemblerDecompositionRegisterEvent extends
-			AssemblerRegisterEvent {
+            EventAssemblerRegister {
 		public AssemblerDecompositionRegisterEvent(
-				FemtocraftAssemblerRecipe recipe) {
+				AssemblerRecipe recipe) {
 			super(recipe);
 		}
 	}
 
 	@Cancelable
 	public static class AssemblerRecompositionRegisterEvent extends
-			AssemblerRegisterEvent {
+            EventAssemblerRegister {
 		public AssemblerRecompositionRegisterEvent(
-				FemtocraftAssemblerRecipe recipe) {
+				AssemblerRecipe recipe) {
 			super(recipe);
 		}
 	}

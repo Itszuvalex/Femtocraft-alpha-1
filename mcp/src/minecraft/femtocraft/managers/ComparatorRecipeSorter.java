@@ -6,10 +6,10 @@ import net.minecraft.item.crafting.ShapelessRecipes;
 
 import java.util.Comparator;
 
-public class FemtocraftRecipeSorter implements Comparator {
-	final FemtocraftCraftingManager craftingManager;
+public class ComparatorRecipeSorter implements Comparator {
+	final ManagerCrafting craftingManager;
 
-	FemtocraftRecipeSorter(FemtocraftCraftingManager par1CraftingManager) {
+	ComparatorRecipeSorter(ManagerCrafting par1CraftingManager) {
 		this.craftingManager = par1CraftingManager;
 	}
 

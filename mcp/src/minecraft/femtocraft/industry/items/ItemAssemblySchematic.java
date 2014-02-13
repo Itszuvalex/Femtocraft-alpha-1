@@ -6,8 +6,8 @@ import femtocraft.Femtocraft;
 import femtocraft.FemtocraftConfigs;
 import femtocraft.FemtocraftUtils;
 import femtocraft.api.IAssemblerSchematic;
-import femtocraft.managers.assembler.FemtocraftAssemblerRecipe;
-import femtocraft.managers.research.Technology;
+import femtocraft.managers.assembler.AssemblerRecipe;
+import femtocraft.managers.research.ResearchTechnology;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -78,9 +78,9 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
 			return;
 		}
 
-		FemtocraftAssemblerRecipe recipe = FemtocraftAssemblerRecipe
+		AssemblerRecipe recipe = AssemblerRecipe
 				.loadFromNBTTagCompound((NBTTagCompound) itemCompound
-						.getTag("recipe"));
+                        .getTag("recipe"));
 		if (recipe == null) {
 			par3List.add("Invalid Recipe");
 			return;
@@ -124,11 +124,11 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
 		par3List.add(massLine);
 
 		String techLevelLine = String.format(EnumChatFormatting.YELLOW
-				+ "TechLevel:" + EnumChatFormatting.RESET + " %s",
-				FemtocraftUtils.capitalize(recipe.techLevel.key));
+				+ "EnumTechLevel:" + EnumChatFormatting.RESET + " %s",
+				FemtocraftUtils.capitalize(recipe.enumTechLevel.key));
 		par3List.add(techLevelLine);
 
-		Technology tech = recipe.tech;
+		ResearchTechnology tech = recipe.tech;
 		String techString;
 		if (tech == null) {
 			techString = "none";
@@ -137,7 +137,7 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
 		}
 
 		String techLine = String.format(EnumChatFormatting.YELLOW
-				+ "Technology Required:" + EnumChatFormatting.RESET + " %s",
+				+ "ResearchTechnology Required:" + EnumChatFormatting.RESET + " %s",
 				techString);
 		par3List.add(techLine);
 	}
@@ -170,12 +170,12 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
     }
 
 	@Override
-	public FemtocraftAssemblerRecipe getRecipe(ItemStack stack) {
+	public AssemblerRecipe getRecipe(ItemStack stack) {
 		return getRecipeFromNBT(stack.stackTagCompound);
 	}
 
 	@Override
-	public boolean setRecipe(ItemStack stack, FemtocraftAssemblerRecipe recipe) {
+	public boolean setRecipe(ItemStack stack, AssemblerRecipe recipe) {
 		return addRecipeToNBT(stack, recipe);
 	}
 
@@ -187,18 +187,18 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
 		return !(usesRemaining(stack) == 0);
 	}
 
-	private FemtocraftAssemblerRecipe getRecipeFromNBT(NBTTagCompound compound) {
+	private AssemblerRecipe getRecipeFromNBT(NBTTagCompound compound) {
 		if (compound == null)
 			return null;
 		if (!compound.hasKey("recipe"))
 			return null;
-		return FemtocraftAssemblerRecipe
+		return AssemblerRecipe
 				.loadFromNBTTagCompound((NBTTagCompound) compound
-						.getTag("recipe"));
+                        .getTag("recipe"));
 	}
 
 	private boolean addRecipeToNBT(ItemStack stack,
-			FemtocraftAssemblerRecipe recipe) {
+			AssemblerRecipe recipe) {
 		if (stack.stackTagCompound == null) {
 			stack.stackTagCompound = new NBTTagCompound();
 		} else if (stack.stackTagCompound.hasKey("recipe")) {
@@ -223,9 +223,9 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
 	}
 
 	@Override
-	public int massRequired(FemtocraftAssemblerRecipe recipe) {
+	public int massRequired(AssemblerRecipe recipe) {
 		float amount = getMaxDamage();
 		amount = amount == -1 ? infiniteUseMassMultiplier : amount;
-		return (int) (recipe.techLevel.tier * amount);
+		return (int) (recipe.enumTechLevel.tier * amount);
 	}
 }

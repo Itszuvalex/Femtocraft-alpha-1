@@ -2,36 +2,36 @@ package femtocraft.managers.assembler;
 
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
-import femtocraft.managers.research.TechLevel;
-import femtocraft.managers.research.Technology;
+import femtocraft.managers.research.EnumTechLevel;
+import femtocraft.managers.research.ResearchTechnology;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
 import java.util.logging.Level;
 
-public class FemtocraftAssemblerRecipe implements Comparable {
+public class AssemblerRecipe implements Comparable {
 	public ItemStack[] input;
 	public Integer mass;
 	public ItemStack output;
-	public TechLevel techLevel;
-	public Technology tech;
+	public EnumTechLevel enumTechLevel;
+	public ResearchTechnology tech;
 
-	public FemtocraftAssemblerRecipe(ItemStack[] input, Integer mass,
-			ItemStack output, TechLevel techLevel, Technology tech) {
+	public AssemblerRecipe(ItemStack[] input, Integer mass,
+                           ItemStack output, EnumTechLevel enumTechLevel, ResearchTechnology tech) {
 		this.input = input;
 		this.mass = mass;
 		this.output = output;
-		this.techLevel = techLevel;
+		this.enumTechLevel = enumTechLevel;
 		this.tech = tech;
 	}
 
-	private FemtocraftAssemblerRecipe() {
+	private AssemblerRecipe() {
 	}
 
     @Override
 	public int compareTo(Object o) {
-		FemtocraftAssemblerRecipe ir = (FemtocraftAssemblerRecipe) o;
+		AssemblerRecipe ir = (AssemblerRecipe) o;
 		for (int i = 0; i < 9; i++) {
 			int comp = FemtocraftUtils.compareItem(input[i], ir.input[i]);
 			if (comp != 0)
@@ -74,18 +74,18 @@ public class FemtocraftAssemblerRecipe implements Comparable {
 
 		compound.setCompoundTag("output", outputCompound);
 
-		// TechLevel
-		compound.setString("techLevel", techLevel.key);
+		// EnumTechLevel
+		compound.setString("enumTechLevel", enumTechLevel.key);
 
-		// Technology
+		// ResearchTechnology
 		if (tech != null) {
-			compound.setString("technology", tech.name);
+			compound.setString("researchTechnology", tech.name);
 		}
 	}
 
-	public static FemtocraftAssemblerRecipe loadFromNBTTagCompound(
+	public static AssemblerRecipe loadFromNBTTagCompound(
 			NBTTagCompound compound) {
-		FemtocraftAssemblerRecipe recipe = new FemtocraftAssemblerRecipe();
+		AssemblerRecipe recipe = new AssemblerRecipe();
 		recipe.input = new ItemStack[9];
 
 		// Input
@@ -113,13 +113,13 @@ public class FemtocraftAssemblerRecipe implements Comparable {
 				.loadItemStackFromNBT((NBTTagCompound) compound
 						.getTag("output"));
 
-		// TechLevel
-		recipe.techLevel = TechLevel.getTech(compound.getString("techLevel"));
+		// EnumTechLevel
+		recipe.enumTechLevel = EnumTechLevel.getTech(compound.getString("enumTechLevel"));
 
-		// Technology
-		if (compound.hasKey("technology")) {
+		// ResearchTechnology
+		if (compound.hasKey("researchTechnology")) {
 			recipe.tech = Femtocraft.researchManager.getTechnology(compound
-					.getString("technology"));
+					.getString("researchTechnology"));
 		}
 
 		return recipe;

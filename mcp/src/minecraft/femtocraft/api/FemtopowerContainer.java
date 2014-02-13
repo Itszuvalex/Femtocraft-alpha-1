@@ -1,17 +1,17 @@
 package femtocraft.api;
 
-import femtocraft.managers.research.TechLevel;
+import femtocraft.managers.research.EnumTechLevel;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 
 import java.util.List;
 
 public class FemtopowerContainer implements IFemtopowerContainer {
-	private TechLevel level;
+	private EnumTechLevel level;
 	private int maxPower;
 	private int currentPower;
 
-	public FemtopowerContainer(TechLevel level, int maxPower) {
+	public FemtopowerContainer(EnumTechLevel level, int maxPower) {
 		this.level = level;
 		this.maxPower = maxPower;
 		this.currentPower = 0;
@@ -25,7 +25,7 @@ public class FemtopowerContainer implements IFemtopowerContainer {
 		this.currentPower = currentPower;
 	}
 
-	public void setTechLevel(TechLevel level) {
+	public void setTechLevel(EnumTechLevel level) {
 		this.level = level;
 	}
 
@@ -33,12 +33,12 @@ public class FemtopowerContainer implements IFemtopowerContainer {
 	}
 
     @Override
-	public boolean canAcceptPowerOfLevel(TechLevel level) {
+	public boolean canAcceptPowerOfLevel(EnumTechLevel level) {
 		return this.level == level;
 	}
 
 	@Override
-	public TechLevel getTechLevel() {
+	public EnumTechLevel getTechLevel() {
 		return level;
 	}
 
@@ -92,13 +92,13 @@ public class FemtopowerContainer implements IFemtopowerContainer {
 	public void saveToNBT(NBTTagCompound nbt) {
 		nbt.setInteger("maxPower", maxPower);
 		nbt.setInteger("currentPower", currentPower);
-		nbt.setString("techLevel", level.key);
+		nbt.setString("enumTechLevel", level.key);
 	}
 
 	public void loadFromNBT(NBTTagCompound nbt) {
 		maxPower = nbt.getInteger("maxPower");
 		currentPower = nbt.getInteger("currentPower");
-		level = TechLevel.getTech(nbt.getString("techLevel"));
+		level = EnumTechLevel.getTech(nbt.getString("enumTechLevel"));
 	}
 
 	public static FemtopowerContainer createFromNBT(NBTTagCompound nbt) {

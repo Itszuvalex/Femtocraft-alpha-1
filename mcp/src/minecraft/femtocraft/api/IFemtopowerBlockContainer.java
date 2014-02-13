@@ -3,7 +3,7 @@
  */
 package femtocraft.api;
 
-import femtocraft.managers.research.TechLevel;
+import femtocraft.managers.research.EnumTechLevel;
 import net.minecraftforge.common.ForgeDirection;
 
 /**
@@ -15,20 +15,20 @@ public interface IFemtopowerBlockContainer {
 	/**
 	 * 
 	 * @param level
-	 *            TechLevel of power
+	 *            EnumTechLevel of power
 	 * @param from
 	 *            Direction power will be coming from
 	 * @return True if can accept power of that level from the given direciton
 	 */
-	public boolean canAcceptPowerOfLevel(TechLevel level, ForgeDirection from);
+	public boolean canAcceptPowerOfLevel(EnumTechLevel level, ForgeDirection from);
 
 	/**
 	 * 
 	 * @param to
 	 *            Direction from this Container
-	 * @return TechLevel of power this machine will give to the given direciton
+	 * @return EnumTechLevel of power this machine will give to the given direciton
 	 */
-	public TechLevel getTechLevel(ForgeDirection to);
+	public EnumTechLevel getTechLevel(ForgeDirection to);
 
 	/**
 	 * 

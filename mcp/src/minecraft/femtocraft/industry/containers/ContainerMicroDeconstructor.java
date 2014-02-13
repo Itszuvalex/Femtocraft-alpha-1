@@ -4,7 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.common.gui.OutputSlot;
 import femtocraft.industry.tiles.TileEntityMicroDeconstructor;
-import femtocraft.managers.FemtocraftRecipeManager;
+import femtocraft.managers.ManagerRecipe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -134,7 +134,7 @@ public class ContainerMicroDeconstructor extends Container {
 
 				slot.onSlotChange(itemstack1, itemstack);
 			} else if (par2 != 0) {
-				if (FemtocraftRecipeManager.assemblyRecipes
+				if (ManagerRecipe.assemblyRecipes
 						.canCraft(itemstack1)) {
 					if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
 						return null;

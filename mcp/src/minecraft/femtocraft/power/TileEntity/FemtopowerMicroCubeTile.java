@@ -3,7 +3,7 @@ package femtocraft.power.TileEntity;
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
 import femtocraft.api.FemtopowerContainer;
-import femtocraft.managers.research.TechLevel;
+import femtocraft.managers.research.EnumTechLevel;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -13,19 +13,19 @@ public class FemtopowerMicroCubeTile extends FemtopowerTile {
 	public boolean[] outputs;
 	static final public String packetChannel = Femtocraft.ID + ".MCube";
 	public static final int maxStorage = 10000;
-	public static final TechLevel techLevel = TechLevel.MICRO;
+	public static final EnumTechLevel ENUM_TECH_LEVEL = EnumTechLevel.MICRO;
 
 	public FemtopowerMicroCubeTile() {
 		super();
 		setMaxStorage(maxStorage);
-		setTechLevel(techLevel);
+		setTechLevel(ENUM_TECH_LEVEL);
 		outputs = new boolean[6];
 		Arrays.fill(outputs, false);
-		setTechLevel(techLevel);
+		setTechLevel(ENUM_TECH_LEVEL);
 	}
 
 	public static FemtopowerContainer getDefaultContainer() {
-		return new FemtopowerContainer(techLevel, maxStorage);
+		return new FemtopowerContainer(ENUM_TECH_LEVEL, maxStorage);
 	}
 
 	public void onSideActivate(ForgeDirection side) {

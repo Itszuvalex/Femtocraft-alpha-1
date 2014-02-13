@@ -1,6 +1,6 @@
 package femtocraft.api;
 
-import femtocraft.managers.assembler.FemtocraftAssemblerRecipe;
+import femtocraft.managers.assembler.AssemblerRecipe;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -13,9 +13,9 @@ public interface IAssemblerSchematic {
 	/**
 	 * @param stack
 	 *            The IAssemblerSchematic stack
-	 * @return The FemtocraftAssemblerRecipe represented with this Schematic
+	 * @return The AssemblerRecipe represented with this Schematic
 	 */
-	FemtocraftAssemblerRecipe getRecipe(ItemStack stack);
+	AssemblerRecipe getRecipe(ItemStack stack);
 
 	/**
 	 * 
@@ -26,7 +26,7 @@ public interface IAssemblerSchematic {
 	 * @return True if recipe successfully encoded, false for any other reason
 	 *         (itemStack already has recipe?, failed to read NBT, etc.)
 	 */
-	boolean setRecipe(ItemStack stack, FemtocraftAssemblerRecipe recipe);
+	boolean setRecipe(ItemStack stack, AssemblerRecipe recipe);
 
 	/**
 	 * 
@@ -43,7 +43,7 @@ public interface IAssemblerSchematic {
 	 *            Recipe that will be imprinted upon this Schematic
 	 * @return Amount of mass required to create this recipe, in mB.
 	 */
-	int massRequired(FemtocraftAssemblerRecipe recipe);
+	int massRequired(AssemblerRecipe recipe);
 
 	/**
 	 * 

@@ -5,7 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.api.IChargingBase;
 import femtocraft.api.IChargingCoil;
-import femtocraft.managers.research.TechLevel;
+import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.proxy.ClientProxyFemtocraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -75,8 +75,8 @@ public class MicroChargingCoil extends Block implements IChargingCoil {
 	}
 
 	@Override
-	public TechLevel techLevel(World world, int x, int y, int z) {
-		return TechLevel.MICRO;
+	public EnumTechLevel techLevel(World world, int x, int y, int z) {
+		return EnumTechLevel.MICRO;
 	}
 
 	@Override

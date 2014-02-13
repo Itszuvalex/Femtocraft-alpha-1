@@ -4,8 +4,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
-import femtocraft.managers.FemtocraftRecipeManager;
-import femtocraft.managers.assembler.FemtocraftAssemblerRecipe;
+import femtocraft.managers.ManagerRecipe;
+import femtocraft.managers.assembler.AssemblerRecipe;
 import femtocraft.power.TileEntity.FemtopowerConsumer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -265,7 +265,7 @@ public class TileEntityMicroDeconstructor extends FemtopowerConsumer implements
         if (this.deconstructorItemStacks[0] == null || deconstructingStack != null || this.getCurrentPower() < this.powerToCook) {
             return false;
         } else {
-            FemtocraftAssemblerRecipe recipe = FemtocraftRecipeManager.assemblyRecipes
+            AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
                     .getRecipe(this.deconstructorItemStacks[0]);
             return recipe != null && (tank.getCapacity() - tank.getFluidAmount()) >= recipe.mass && deconstructorItemStacks[0].stackSize >= recipe.output.stackSize && roomForItems(recipe.input);
         }
@@ -290,7 +290,7 @@ public class TileEntityMicroDeconstructor extends FemtopowerConsumer implements
 	public void startWork() {
 		deconstructingStack = deconstructorItemStacks[0].copy();
 
-		FemtocraftAssemblerRecipe recipe = FemtocraftRecipeManager.assemblyRecipes
+		AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
 				.getRecipe(this.deconstructorItemStacks[0]);
 		deconstructingStack.stackSize = recipe.output.stackSize;
 
@@ -304,7 +304,7 @@ public class TileEntityMicroDeconstructor extends FemtopowerConsumer implements
 	}
 
 	public void endWork() {
-		FemtocraftAssemblerRecipe recipe = FemtocraftRecipeManager.assemblyRecipes
+		AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
 				.getRecipe(deconstructingStack);
 
 		if (recipe != null) {

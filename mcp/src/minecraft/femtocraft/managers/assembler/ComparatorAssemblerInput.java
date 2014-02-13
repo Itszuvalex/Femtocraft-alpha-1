@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 
 import java.util.Comparator;
 
-public class AssemblerInputComparator implements Comparator<ItemStack[]> {
+public class ComparatorAssemblerInput implements Comparator<ItemStack[]> {
 
 	@Override
 	public int compare(ItemStack[] o1, ItemStack[] o2) {

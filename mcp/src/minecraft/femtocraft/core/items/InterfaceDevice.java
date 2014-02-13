@@ -1,20 +1,20 @@
 package femtocraft.core.items;
 
 import femtocraft.api.IInterfaceDevice;
-import femtocraft.managers.research.TechLevel;
+import femtocraft.managers.research.EnumTechLevel;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 public class InterfaceDevice extends Item implements IInterfaceDevice {
-	private TechLevel level;
+	private EnumTechLevel level;
 
-	public InterfaceDevice(int par1, TechLevel level) {
+	public InterfaceDevice(int par1, EnumTechLevel level) {
 		super(par1);
 		this.level = level;
 	}
 
 	@Override
-	public TechLevel getInterfaceLevel() {
+	public EnumTechLevel getInterfaceLevel() {
 		return level;
 	}
 

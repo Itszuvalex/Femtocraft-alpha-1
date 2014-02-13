@@ -3,13 +3,13 @@ package femtocraft.core.items;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
-import femtocraft.managers.research.TechLevel;
+import femtocraft.managers.research.EnumTechLevel;
 import net.minecraft.client.renderer.texture.IconRegister;
 
 public class ItemMicroInterfaceDevice extends InterfaceDevice {
 
 	public ItemMicroInterfaceDevice(int par1) {
-		super(par1, TechLevel.MICRO);
+		super(par1, EnumTechLevel.MICRO);
 		setMaxStackSize(1);
 		setCreativeTab(Femtocraft.femtocraftTab);
 	}

@@ -1,6 +1,6 @@
 package femtocraft.api;
 
-import femtocraft.managers.research.TechLevel;
+import femtocraft.managers.research.EnumTechLevel;
 
 /**
  * 
@@ -12,16 +12,16 @@ public interface IFemtopowerContainer {
 	/**
 	 * 
 	 * @param level
-	 *            TechLevel of power
+	 *            EnumTechLevel of power
 	 * @return True if can accept power of that level
 	 */
-	public boolean canAcceptPowerOfLevel(TechLevel level);
+	public boolean canAcceptPowerOfLevel(EnumTechLevel level);
 
 	/**
 	 * 
-	 * @return TechLevel of power this machine will give to the given direciton
+	 * @return EnumTechLevel of power this machine will give to the given direciton
 	 */
-	public TechLevel getTechLevel();
+	public EnumTechLevel getTechLevel();
 
 	/**
 	 * 

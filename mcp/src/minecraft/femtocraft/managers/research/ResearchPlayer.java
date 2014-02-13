@@ -1,17 +1,17 @@
 package femtocraft.managers.research;
 
 import femtocraft.Femtocraft;
-import femtocraft.managers.research.TechnologyEvent.TechnologyDiscoveredEvent;
-import femtocraft.managers.research.TechnologyEvent.TechnologyResearchedEvent;
+import femtocraft.managers.research.EventTechnology.TechnologyDiscoveredEvent;
+import femtocraft.managers.research.EventTechnology.TechnologyResearchedEvent;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.MinecraftForge;
 
 import java.util.HashMap;
 
-public class PlayerResearch {
+public class ResearchPlayer {
 	public final String username;
-	private final HashMap<String, TechnologyStatus> techStatus;
+	private final HashMap<String, ResearchTechnologyStatus> techStatus;
 
 	public static class TechnologyNotFoundException extends Exception {
 		public String errMsg;
@@ -21,9 +21,9 @@ public class PlayerResearch {
 		}
 	}
 
-	public PlayerResearch(String username) {
+	public ResearchPlayer(String username) {
 		this.username = username;
-		techStatus = new HashMap<String, TechnologyStatus>();
+		techStatus = new HashMap<String, ResearchTechnologyStatus>();
 	}
 
 	// ---------------------------------------------------------
@@ -31,22 +31,22 @@ public class PlayerResearch {
 	/**
 	 * 
 	 * @param name
-	 *            Name of technology to mark as researched
+	 *            Name of researchTechnology to mark as researched
 	 * @param force
-	 *            Pass true if you want the named technology to be added if it
+	 *            Pass true if you want the named researchTechnology to be added if it
 	 *            isn't already discovered. This will bypass discover checks.
 	 *            This will not post an event.
-	 * @return True if technology successfully marked as researched. False
+	 * @return True if researchTechnology successfully marked as researched. False
 	 *         otherwise.
 	 */
 	public boolean researchTechnology(String name, boolean force) {
-		TechnologyStatus tech = techStatus.get(name);
+		ResearchTechnologyStatus tech = techStatus.get(name);
 		if (tech == null && !force)
 			return false;
 
 		if (tech == null && force) {
-			TechnologyStatus status = techStatus.put(name,
-					new TechnologyStatus(name));
+			ResearchTechnologyStatus status = techStatus.put(name,
+					new ResearchTechnologyStatus(name));
 			if (status == null)
 				return false;
 			status.researched = true;
@@ -65,23 +65,23 @@ public class PlayerResearch {
 	public boolean discoverTechnology(String name) {
 		TechnologyDiscoveredEvent event = new TechnologyDiscoveredEvent(
 				username, Femtocraft.researchManager.getTechnology(name));
-        return !MinecraftForge.EVENT_BUS.post(event) && techStatus.put(name, new TechnologyStatus(name)) != null;
+        return !MinecraftForge.EVENT_BUS.post(event) && techStatus.put(name, new ResearchTechnologyStatus(name)) != null;
     }
 
-	public TechnologyStatus getTechnology(String name) {
+	public ResearchTechnologyStatus getTechnology(String name) {
 		return techStatus.get(name);
 	}
 
-	public TechnologyStatus removeTechnology(String name) {
+	public ResearchTechnologyStatus removeTechnology(String name) {
 		return techStatus.remove(name);
 	}
 
-	public boolean canDiscoverTechnology(Technology tech) {
+	public boolean canDiscoverTechnology(ResearchTechnology tech) {
 		if (tech.prerequisites == null)
 			return true;
 
-		for (Technology prereq : tech.prerequisites) {
-			TechnologyStatus ts = techStatus.get(prereq.name);
+		for (ResearchTechnology prereq : tech.prerequisites) {
+			ResearchTechnologyStatus ts = techStatus.get(prereq.name);
 			if (ts == null)
 				return false;
 			if (!ts.researched)
@@ -91,16 +91,16 @@ public class PlayerResearch {
 		return true;
 	}
 
-	public boolean hasDiscoveredTechnology(Technology tech) {
+	public boolean hasDiscoveredTechnology(ResearchTechnology tech) {
 		return hasDiscoveredTechnology(tech.name);
 	}
 
 	public boolean hasDiscoveredTechnology(String tech) {
-		TechnologyStatus ts = techStatus.get(tech);
+		ResearchTechnologyStatus ts = techStatus.get(tech);
         return ts != null;
     }
 
-	public boolean hasResearchedTechnology(Technology tech) {
+	public boolean hasResearchedTechnology(ResearchTechnology tech) {
         return tech == null || hasResearchedTechnology(tech.name);
     }
 
@@ -108,7 +108,7 @@ public class PlayerResearch {
 		if (tech == null || tech.equals(""))
 			return true;
 
-		TechnologyStatus ts = techStatus.get(tech);
+		ResearchTechnologyStatus ts = techStatus.get(tech);
         return ts != null && ts.researched;
     }
 
@@ -117,7 +117,7 @@ public class PlayerResearch {
 	public void saveToNBTTagCompound(NBTTagCompound compound) {
 		NBTTagList list = new NBTTagList();
 
-		for (TechnologyStatus status : techStatus.values()) {
+		for (ResearchTechnologyStatus status : techStatus.values()) {
 			NBTTagCompound cs = new NBTTagCompound();
 			cs.setString("techname", status.tech);
 
@@ -139,7 +139,7 @@ public class PlayerResearch {
 			String techname = cs.getString("techname");
 
 			NBTTagCompound data = (NBTTagCompound) cs.getTag("data");
-			TechnologyStatus status = new TechnologyStatus(techname);
+			ResearchTechnologyStatus status = new ResearchTechnologyStatus(techname);
 			status.loadFromNBTTagCompound(data);
 
 			techStatus.put(username, status);

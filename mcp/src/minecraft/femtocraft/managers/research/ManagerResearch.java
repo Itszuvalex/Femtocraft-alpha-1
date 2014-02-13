@@ -1,7 +1,7 @@
 package femtocraft.managers.research;
 
 import femtocraft.Femtocraft;
-import femtocraft.managers.research.TechnologyEvent.TechnologyAddedEvent;
+import femtocraft.managers.research.EventTechnology.TechnologyAddedEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,41 +15,41 @@ import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.logging.Level;
 
-public class FemtocraftResearchManager {
-    private HashMap<String, Technology> technologies;
-    private HashMap<String, PlayerResearch> playerData;
+public class ManagerResearch {
+    private HashMap<String, ResearchTechnology> technologies;
+    private HashMap<String, ResearchPlayer> playerData;
 
     private final String FILENAME = "FemtocraftResearch.dat";
 
     private String lastWorldLoaded = "";
 
-    public FemtocraftResearchManager() {
-        technologies = new HashMap<String, Technology>();
-        playerData = new HashMap<String, PlayerResearch>();
+    public ManagerResearch() {
+        technologies = new HashMap<String, ResearchTechnology>();
+        playerData = new HashMap<String, ResearchPlayer>();
     }
 
     // --------------------------------------------------
 
-    public boolean addTechnology(Technology tech) {
+    public boolean addTechnology(ResearchTechnology tech) {
         TechnologyAddedEvent event = new TechnologyAddedEvent(tech);
         return !MinecraftForge.EVENT_BUS.post(event) && technologies.put(tech.name, tech) != null;
     }
 
-    public boolean removeTechnology(Technology tech) {
+    public boolean removeTechnology(ResearchTechnology tech) {
         return technologies.remove(tech.name) != null;
     }
 
-    public Technology getTechnology(String name) {
+    public ResearchTechnology getTechnology(String name) {
         return technologies.get(name);
     }
 
     // --------------------------------------------------
 
-    public PlayerResearch addPlayerResearch(String username) {
+    public ResearchPlayer addPlayerResearch(String username) {
         // Return false if playerData already exists
         if (playerData.containsKey(username))
             return null;
-        PlayerResearch r = new PlayerResearch(username);
+        ResearchPlayer r = new ResearchPlayer(username);
 
         addFreeResearches(r);
 
@@ -61,38 +61,38 @@ public class FemtocraftResearchManager {
         return playerData.remove(username) != null;
     }
 
-    public PlayerResearch getPlayerResearch(String username) {
+    public ResearchPlayer getPlayerResearch(String username) {
         return playerData.get(username);
     }
 
     // --------------------------------------------------
 
     public boolean hasPlayerDiscoveredTechnology(String username,
-                                                 Technology tech) {
+                                                 ResearchTechnology tech) {
         return hasPlayerDiscoveredTechnology(username, tech.name);
     }
 
     public boolean hasPlayerDiscoveredTechnology(String username, String tech) {
-        PlayerResearch pr = playerData.get(username);
+        ResearchPlayer pr = playerData.get(username);
         return pr != null && pr.hasDiscoveredTechnology(tech);
     }
 
     // --------------------------------------------------
 
     public boolean hasPlayerResearchedTechnology(String username,
-                                                 Technology tech) {
+                                                 ResearchTechnology tech) {
         return hasPlayerResearchedTechnology(username, tech.name);
     }
 
     public boolean hasPlayerResearchedTechnology(String username, String tech) {
-        PlayerResearch pr = playerData.get(username);
+        ResearchPlayer pr = playerData.get(username);
         return pr != null && pr.hasResearchedTechnology(tech);
     }
 
     // --------------------------------------------------
 
-    private void addFreeResearches(PlayerResearch research) {
-        for (Technology t : technologies.values()) {
+    private void addFreeResearches(ResearchPlayer research) {
+        for (ResearchTechnology t : technologies.values()) {
             if (t.prerequisites == null) {
                 research.discoverTechnology(t.name);
             }
@@ -104,7 +104,7 @@ public class FemtocraftResearchManager {
     public void saveToNBTTagCompound(NBTTagCompound compound) {
         NBTTagList list = new NBTTagList();
 
-        for (PlayerResearch status : playerData.values()) {
+        for (ResearchPlayer status : playerData.values()) {
             NBTTagCompound cs = new NBTTagCompound();
             cs.setString("username", status.username);
 
@@ -126,7 +126,7 @@ public class FemtocraftResearchManager {
             String username = cs.getString("username");
 
             NBTTagCompound data = (NBTTagCompound) cs.getTag("data");
-            PlayerResearch status = new PlayerResearch(username);
+            ResearchPlayer status = new ResearchPlayer(username);
             status.loadFromNBTTagCompound(data);
 
             playerData.put(username, status);

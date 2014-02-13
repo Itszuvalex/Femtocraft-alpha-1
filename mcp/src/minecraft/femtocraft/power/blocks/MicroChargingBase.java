@@ -4,7 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.api.IChargingBase;
-import femtocraft.managers.research.TechLevel;
+import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.power.TileEntity.MicroChargingBaseTile;
 import femtocraft.proxy.ClientProxyFemtocraft;
 import net.minecraft.block.Block;
@@ -108,8 +108,8 @@ public class MicroChargingBase extends FemtopowerTileContainer implements
 	}
 
 	@Override
-	public TechLevel maxTechSupported(World world, int x, int y, int z) {
-		return TechLevel.MICRO;
+	public EnumTechLevel maxTechSupported(World world, int x, int y, int z) {
+		return EnumTechLevel.MICRO;
 	}
 
 }

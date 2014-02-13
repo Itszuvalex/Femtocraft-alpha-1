@@ -30,8 +30,8 @@ import femtocraft.industry.blocks.BlockMicroFurnace;
 import femtocraft.industry.blocks.BlockMicroReconstructor;
 import femtocraft.industry.blocks.BlockVacuumTube;
 import femtocraft.industry.items.ItemPaperSchematic;
-import femtocraft.managers.FemtocraftRecipeManager;
-import femtocraft.managers.research.FemtocraftResearchManager;
+import femtocraft.managers.ManagerRecipe;
+import femtocraft.managers.research.ManagerResearch;
 import femtocraft.player.FemtocraftNaniteProperties;
 import femtocraft.power.blocks.*;
 import femtocraft.power.items.FemtopowerMicroCubeItemBlock;
@@ -71,8 +71,8 @@ public class Femtocraft {
 
 	public static Logger logger;
 
-	public static FemtocraftRecipeManager recipeManager;
-	public static FemtocraftResearchManager researchManager;
+	public static ManagerRecipe recipeManager;
+	public static ManagerResearch researchManager;
 
 	// blocks
 	public static Block oreTitanium;
@@ -612,13 +612,13 @@ public class Femtocraft {
 		// 32, 10, true)
 
 		// HURP....DURP
-		recipeManager = new FemtocraftRecipeManager();
-		researchManager = new FemtocraftResearchManager();
+		recipeManager = new ManagerRecipe();
+		researchManager = new ManagerResearch();
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		FemtocraftRecipeManager.assemblyRecipes.registerDefaultRecipes();
+		ManagerRecipe.assemblyRecipes.registerDefaultRecipes();
 	}
 
 	private void registerRecipes() {

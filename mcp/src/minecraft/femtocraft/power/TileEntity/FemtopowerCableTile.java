@@ -1,11 +1,11 @@
 package femtocraft.power.TileEntity;
 
-import femtocraft.managers.research.TechLevel;
+import femtocraft.managers.research.EnumTechLevel;
 
 public class FemtopowerCableTile extends FemtopowerTile {
 
 	public FemtopowerCableTile() {
-		setTechLevel(TechLevel.MICRO);
+		setTechLevel(EnumTechLevel.MICRO);
 	}
 
 	public boolean connectedAcross() {

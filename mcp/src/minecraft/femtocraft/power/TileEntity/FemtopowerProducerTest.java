@@ -1,6 +1,6 @@
 package femtocraft.power.TileEntity;
 
-import femtocraft.managers.research.TechLevel;
+import femtocraft.managers.research.EnumTechLevel;
 import net.minecraftforge.common.ForgeDirection;
 
 public class FemtopowerProducerTest extends FemtopowerProducer {
@@ -9,7 +9,7 @@ public class FemtopowerProducerTest extends FemtopowerProducer {
 	public FemtopowerProducerTest() {
 		super();
 		amountPerTick = 10;
-		setTechLevel(TechLevel.MICRO);
+		setTechLevel(EnumTechLevel.MICRO);
 	}
 
 	@Override

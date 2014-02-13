@@ -11,9 +11,9 @@ import net.minecraft.world.World;
 
 import java.util.*;
 
-public class FemtocraftCraftingManager {
+public class ManagerCrafting {
 	/** The static instance of this class */
-	private static final FemtocraftCraftingManager instance = new FemtocraftCraftingManager();
+	private static final ManagerCrafting instance = new ManagerCrafting();
 
 	public static final String DefaultMinecraftRecipeKey = "minecraft";
 
@@ -23,18 +23,18 @@ public class FemtocraftCraftingManager {
 	/**
 	 * Returns the static instance of this class
 	 */
-	public static FemtocraftCraftingManager getInstance() {
+	public static ManagerCrafting getInstance() {
 		return instance;
 	}
 
-	private FemtocraftCraftingManager() {
+	private ManagerCrafting() {
 
 		// this.addShapelessRecipe(new ItemStack(Item.book, 1), new Object[]
 		// {Item.paper, Item.paper, Item.paper, Item.leather});
 		// this.addShapelessRecipe(new ItemStack(Item.writableBook, 1), new
 		// Object[] {Item.book, new ItemStack(Item.dyePowder, 1, 0),
 		// Item.feather});
-		FemtocraftRecipeSorter defaultSorter = new FemtocraftRecipeSorter(this);
+		ComparatorRecipeSorter defaultSorter = new ComparatorRecipeSorter(this);
 
 		// Sort all recipe lists
 		for (Object obj : recipeListMap.values()) {

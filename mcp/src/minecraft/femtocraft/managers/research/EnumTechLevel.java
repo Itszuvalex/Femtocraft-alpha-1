@@ -2,7 +2,7 @@ package femtocraft.managers.research;
 
 import net.minecraft.util.EnumChatFormatting;
 
-public enum TechLevel {
+public enum EnumTechLevel {
 	MACRO("macro", 0), // Vanilla level
 	MICRO("micro", 1), // 1st Tier
 	NANO("nano", 2), // 2nd Tier
@@ -13,12 +13,12 @@ public enum TechLevel {
 	public String key;
 	public int tier;
 
-	TechLevel(String key, int tier) {
+	EnumTechLevel(String key, int tier) {
 		this.key = key;
 		this.tier = tier;
 	}
 
-	public static TechLevel getTech(String key) {
+	public static EnumTechLevel getTech(String key) {
 		if (key.equals("macro")) {
 			return MACRO;
 		} else if (key.equals("micro")) {

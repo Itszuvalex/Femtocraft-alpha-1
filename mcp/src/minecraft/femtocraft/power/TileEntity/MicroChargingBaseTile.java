@@ -2,7 +2,7 @@ package femtocraft.power.TileEntity;
 
 import femtocraft.api.IChargingBase;
 import femtocraft.api.IChargingCoil;
-import femtocraft.managers.research.TechLevel;
+import femtocraft.managers.research.EnumTechLevel;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
@@ -14,7 +14,7 @@ public class MicroChargingBaseTile extends FemtopowerProducer {
 
 	public MicroChargingBaseTile() {
 		powerPerTick = 0;
-		setTechLevel(TechLevel.MICRO);
+		setTechLevel(EnumTechLevel.MICRO);
 	}
 
 	@Override
