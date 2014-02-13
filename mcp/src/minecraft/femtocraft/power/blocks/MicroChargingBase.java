@@ -14,7 +14,8 @@ import femtocraft.managers.research.TechLevel;
 import femtocraft.power.TileEntity.MicroChargingBaseTile;
 import femtocraft.proxy.ClientProxyFemtocraft;
 
-public class MicroChargingBase extends FemtopowerTileContainer implements IChargingBase {
+public class MicroChargingBase extends FemtopowerTileContainer implements
+		IChargingBase {
 	public Icon side;
 	public Icon top;
 	public Icon bottom;
@@ -38,12 +39,12 @@ public class MicroChargingBase extends FemtopowerTileContainer implements ICharg
 	public TileEntity createNewTileEntity(World world) {
 		return new MicroChargingBaseTile();
 	}
-	
+
 	@Override
 	public int getRenderType() {
 		return ClientProxyFemtocraft.FemtocraftChargingBaseRenderID;
 	}
-	
+
 	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
 		return canBlockStay(par1World, par2, par3, par4);
@@ -51,35 +52,51 @@ public class MicroChargingBase extends FemtopowerTileContainer implements ICharg
 
 	@Override
 	public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
-		Block block = Block.blocksList[par1World.getBlockId(par2 - 1, par3, par4)];
-		if(block != null && block instanceof IChargingBase) return false;
-		
+		Block block = Block.blocksList[par1World.getBlockId(par2 - 1, par3,
+				par4)];
+		if (block != null && block instanceof IChargingBase)
+			return false;
+
 		block = Block.blocksList[par1World.getBlockId(par2 + 1, par3, par4)];
-		if(block != null && block instanceof IChargingBase) return false;
-		
+		if (block != null && block instanceof IChargingBase)
+			return false;
+
 		block = Block.blocksList[par1World.getBlockId(par2, par3, par4 - 1)];
-		if(block != null && block instanceof IChargingBase) return false;
-		
+		if (block != null && block instanceof IChargingBase)
+			return false;
+
 		block = Block.blocksList[par1World.getBlockId(par2, par3, par4 + 1)];
-		if(block != null && block instanceof IChargingBase) return false;
+		if (block != null && block instanceof IChargingBase)
+			return false;
 
 		return true;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		side = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "ChargingBase_side");
-		top = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "ChargingBase_top");
-//		bottom = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "ChargingBase_bottom");
-		bottom = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "MicroMachineBlock_side");
-		side_inset = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "ChargingBase_side_inset");
-		coil_inset = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "ChargingBase_coil_inset");
-		coil_column_inset = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "ChargingBase_coil_column_inset");
-		top_inset = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "ChargingBase_top_inset");
-		coil_top_inset = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "ChargingBase_coil_top_inset");
-		top_pillar_top = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "ChargingBase_top_pillar_top");
-		top_pillar_side = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "ChargingBase_top_pillar_side");
+		side = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":"
+				+ "ChargingBase_side");
+		top = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":"
+				+ "ChargingBase_top");
+		// bottom = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +
+		// ":" + "ChargingBase_bottom");
+		bottom = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+				+ ":" + "MicroMachineBlock_side");
+		side_inset = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+				+ ":" + "ChargingBase_side_inset");
+		coil_inset = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+				+ ":" + "ChargingBase_coil_inset");
+		coil_column_inset = par1IconRegister.registerIcon(Femtocraft.ID
+				.toLowerCase() + ":" + "ChargingBase_coil_column_inset");
+		top_inset = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+				+ ":" + "ChargingBase_top_inset");
+		coil_top_inset = par1IconRegister.registerIcon(Femtocraft.ID
+				.toLowerCase() + ":" + "ChargingBase_coil_top_inset");
+		top_pillar_top = par1IconRegister.registerIcon(Femtocraft.ID
+				.toLowerCase() + ":" + "ChargingBase_top_pillar_top");
+		top_pillar_side = par1IconRegister.registerIcon(Femtocraft.ID
+				.toLowerCase() + ":" + "ChargingBase_top_pillar_side");
 	}
 
 	@Override

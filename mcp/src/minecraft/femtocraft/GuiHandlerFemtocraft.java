@@ -16,46 +16,46 @@ import femtocraft.industry.gui.GuiMicroReconstructor;
 
 public class GuiHandlerFemtocraft implements IGuiHandler {
 
-	//Can switch on type of tile entity, or can alternatively switch on type ID.
-	//However, going to have to pull tile entity anyways, so might as well just use that.
-	
+	// Can switch on type of tile entity, or can alternatively switch on type
+	// ID.
+	// However, going to have to pull tile entity anyways, so might as well just
+	// use that.
+
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-		
-		if(tileEntity instanceof MicroFurnaceTile) {
-			return new ContainerMicroFurnace(player.inventory, (MicroFurnaceTile)tileEntity);
+
+		if (tileEntity instanceof MicroFurnaceTile) {
+			return new ContainerMicroFurnace(player.inventory,
+					(MicroFurnaceTile) tileEntity);
+		} else if (tileEntity instanceof MicroDeconstructorTile) {
+			return new ContainerMicroDeconstructor(player.inventory,
+					(MicroDeconstructorTile) tileEntity);
+		} else if (tileEntity instanceof MicroReconstructorTile) {
+			return new ContainerMicroReconstructor(player.inventory,
+					(MicroReconstructorTile) tileEntity);
 		}
-		else if(tileEntity instanceof MicroDeconstructorTile)
-		{
-			return new ContainerMicroDeconstructor(player.inventory, (MicroDeconstructorTile)tileEntity);
-		}
-		else if(tileEntity instanceof MicroReconstructorTile)
-		{
-			return new ContainerMicroReconstructor(player.inventory, (MicroReconstructorTile)tileEntity);
-		}
-		
+
 		return null;
 	}
 
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
-TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-		
-		if(tileEntity instanceof MicroFurnaceTile) {
-			return new GuiMicroFurnace(player.inventory, (MicroFurnaceTile)tileEntity);
+		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+
+		if (tileEntity instanceof MicroFurnaceTile) {
+			return new GuiMicroFurnace(player.inventory,
+					(MicroFurnaceTile) tileEntity);
+		} else if (tileEntity instanceof MicroDeconstructorTile) {
+			return new GuiMicroDeconstructor(player.inventory,
+					(MicroDeconstructorTile) tileEntity);
+		} else if (tileEntity instanceof MicroReconstructorTile) {
+			return new GuiMicroReconstructor(player.inventory,
+					(MicroReconstructorTile) tileEntity);
 		}
-		else if(tileEntity instanceof MicroDeconstructorTile)
-		{
-			return new GuiMicroDeconstructor(player.inventory, (MicroDeconstructorTile)tileEntity);
-		}
-		else if(tileEntity instanceof MicroReconstructorTile)
-		{
-			return new GuiMicroReconstructor(player.inventory, (MicroReconstructorTile)tileEntity);
-		}
-		
+
 		return null;
 	}
 

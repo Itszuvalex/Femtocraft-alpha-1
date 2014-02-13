@@ -20,45 +20,41 @@ import femtocraft.Femtocraft;
 public class FemtocraftNaniteProperties implements IExtendedEntityProperties {
 	public final static String PROP_TAG = "femtocraft.nanite.properties";
 	public final static String PACKET_CHANNEL = Femtocraft.ID + "." + "NProp";
-	
+
 	private final EntityPlayer player;
-	
+
 	private int currentGoo, maxGoo;
-	
+
 	public FemtocraftNaniteProperties(EntityPlayer player) {
 		currentGoo = maxGoo = 0;
 		this.player = player;
 	}
-	
-	public static final void register(EntityPlayer player)
-	{
-		player.registerExtendedProperties(PROP_TAG, new FemtocraftNaniteProperties(player));
+
+	public static final void register(EntityPlayer player) {
+		player.registerExtendedProperties(PROP_TAG,
+				new FemtocraftNaniteProperties(player));
 	}
-	
-	public static final FemtocraftNaniteProperties get(EntityPlayer player)
-	{
-		return (FemtocraftNaniteProperties) player.getExtendedProperties(PROP_TAG);
+
+	public static final FemtocraftNaniteProperties get(EntityPlayer player) {
+		return (FemtocraftNaniteProperties) player
+				.getExtendedProperties(PROP_TAG);
 	}
-	
-	public void setCurrentGoo(int amount)
-	{
+
+	public void setCurrentGoo(int amount) {
 		currentGoo = amount;
 		sync();
 	}
-	
-	public int getCurrentGoo()
-	{
+
+	public int getCurrentGoo() {
 		return currentGoo;
 	}
-	
-	public void setMaxGoo(int amount)
-	{
+
+	public void setMaxGoo(int amount) {
 		maxGoo = amount;
 		sync();
 	}
-	
-	public int getMaxGoo()
-	{
+
+	public int getMaxGoo() {
 		return maxGoo;
 	}
 
@@ -67,9 +63,7 @@ public class FemtocraftNaniteProperties implements IExtendedEntityProperties {
 		NBTTagCompound properties = new NBTTagCompound();
 		properties.setInteger("maxGoo", maxGoo);
 		properties.setInteger("currentGoo", currentGoo);
-		
-		
-		
+
 		compound.setTag(PROP_TAG, properties);
 	}
 
@@ -78,44 +72,37 @@ public class FemtocraftNaniteProperties implements IExtendedEntityProperties {
 		NBTTagCompound properties = compound.getCompoundTag(PROP_TAG);
 		currentGoo = properties.getInteger("currentGoo");
 		maxGoo = properties.getInteger("maxGoo");
-		
-		
-		
+
 	}
-	
-	public void sync()
-	{
-		if(FMLCommonHandler.instance().getEffectiveSide().isClient()) return;
-		
+
+	public void sync() {
+		if (FMLCommonHandler.instance().getEffectiveSide().isClient())
+			return;
+
 		int size = 8;
 		ByteArrayOutputStream bos = new ByteArrayOutputStream(size);
 		DataOutputStream dos = new DataOutputStream(bos);
-		
-		try
-		{
+
+		try {
 			dos.writeInt(maxGoo);
 			dos.writeInt(currentGoo);
-		}
-		catch(Exception ex)
-		{
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		
-		Packet250CustomPayload packet = new Packet250CustomPayload(PACKET_CHANNEL, bos.toByteArray());
+
+		Packet250CustomPayload packet = new Packet250CustomPayload(
+				PACKET_CHANNEL, bos.toByteArray());
 		PacketDispatcher.sendPacketToPlayer(packet, (Player) player);
 	}
-	
-	public void handlePacket(Packet250CustomPayload packet)
-	{
-		DataInputStream dis = new DataInputStream(new ByteArrayInputStream(packet.data));
-		
-		try
-		{
+
+	public void handlePacket(Packet250CustomPayload packet) {
+		DataInputStream dis = new DataInputStream(new ByteArrayInputStream(
+				packet.data));
+
+		try {
 			maxGoo = dis.readInt();
 			currentGoo = dis.readInt();
-		}
-		catch (IOException e)
-		{
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

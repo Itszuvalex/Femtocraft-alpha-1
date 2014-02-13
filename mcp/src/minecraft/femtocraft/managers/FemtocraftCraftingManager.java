@@ -17,240 +17,216 @@ import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.world.World;
 
+public class FemtocraftCraftingManager {
+	/** The static instance of this class */
+	private static final FemtocraftCraftingManager instance = new FemtocraftCraftingManager();
 
-public class FemtocraftCraftingManager
-{
-    /** The static instance of this class */
-    private static final FemtocraftCraftingManager instance = new FemtocraftCraftingManager();
-    
-    public static final String DefaultMinecraftRecipeKey = "minecraft";
+	public static final String DefaultMinecraftRecipeKey = "minecraft";
 
-    /** A map containing all lists of all the recipes added */
-    private Map recipeListMap = new HashMap<String, List>();
+	/** A map containing all lists of all the recipes added */
+	private Map recipeListMap = new HashMap<String, List>();
 
-    /**
-     * Returns the static instance of this class
-     */
-    public static final FemtocraftCraftingManager getInstance()
-    {
-        return instance;
-    }
+	/**
+	 * Returns the static instance of this class
+	 */
+	public static final FemtocraftCraftingManager getInstance() {
+		return instance;
+	}
 
-    private FemtocraftCraftingManager()
-    {
+	private FemtocraftCraftingManager() {
 
-//        this.addShapelessRecipe(new ItemStack(Item.book, 1), new Object[] {Item.paper, Item.paper, Item.paper, Item.leather});
-//        this.addShapelessRecipe(new ItemStack(Item.writableBook, 1), new Object[] {Item.book, new ItemStack(Item.dyePowder, 1, 0), Item.feather});
-    	FemtocraftRecipeSorter defaultSorter = new FemtocraftRecipeSorter(this);
-    	
-	   	//Sort all recipe lists
-	   	for(Object obj : recipeListMap.values())
-	   	{
-	   		Collections.sort((List) obj, defaultSorter);
-	   	}
-    }
+		// this.addShapelessRecipe(new ItemStack(Item.book, 1), new Object[]
+		// {Item.paper, Item.paper, Item.paper, Item.leather});
+		// this.addShapelessRecipe(new ItemStack(Item.writableBook, 1), new
+		// Object[] {Item.book, new ItemStack(Item.dyePowder, 1, 0),
+		// Item.feather});
+		FemtocraftRecipeSorter defaultSorter = new FemtocraftRecipeSorter(this);
 
-    public ShapedRecipes addRecipe(ItemStack par1ItemStack, Object ... par2ArrayOfObj)
-    {
-    	return addRecipe(DefaultMinecraftRecipeKey, par1ItemStack, par2ArrayOfObj);
-    }
-    	
-    public ShapedRecipes addRecipe(String recipeListKey, ItemStack par1ItemStack, Object ... par2ArrayOfObj)
-    {
-        String s = "";
-        int i = 0;
-        int j = 0;
-        int k = 0;
+		// Sort all recipe lists
+		for (Object obj : recipeListMap.values()) {
+			Collections.sort((List) obj, defaultSorter);
+		}
+	}
 
-        if (par2ArrayOfObj[i] instanceof String[])
-        {
-            String[] astring = (String[])((String[])par2ArrayOfObj[i++]);
+	public ShapedRecipes addRecipe(ItemStack par1ItemStack,
+			Object... par2ArrayOfObj) {
+		return addRecipe(DefaultMinecraftRecipeKey, par1ItemStack,
+				par2ArrayOfObj);
+	}
 
-            for (int l = 0; l < astring.length; ++l)
-            {
-                String s1 = astring[l];
-                ++k;
-                j = s1.length();
-                s = s + s1;
-            }
-        }
-        else
-        {
-            while (par2ArrayOfObj[i] instanceof String)
-            {
-                String s2 = (String)par2ArrayOfObj[i++];
-                ++k;
-                j = s2.length();
-                s = s + s2;
-            }
-        }
+	public ShapedRecipes addRecipe(String recipeListKey,
+			ItemStack par1ItemStack, Object... par2ArrayOfObj) {
+		String s = "";
+		int i = 0;
+		int j = 0;
+		int k = 0;
 
-        HashMap hashmap;
+		if (par2ArrayOfObj[i] instanceof String[]) {
+			String[] astring = (String[]) ((String[]) par2ArrayOfObj[i++]);
 
-        for (hashmap = new HashMap(); i < par2ArrayOfObj.length; i += 2)
-        {
-            Character character = (Character)par2ArrayOfObj[i];
-            ItemStack itemstack1 = null;
+			for (int l = 0; l < astring.length; ++l) {
+				String s1 = astring[l];
+				++k;
+				j = s1.length();
+				s = s + s1;
+			}
+		} else {
+			while (par2ArrayOfObj[i] instanceof String) {
+				String s2 = (String) par2ArrayOfObj[i++];
+				++k;
+				j = s2.length();
+				s = s + s2;
+			}
+		}
 
-            if (par2ArrayOfObj[i + 1] instanceof Item)
-            {
-                itemstack1 = new ItemStack((Item)par2ArrayOfObj[i + 1]);
-            }
-            else if (par2ArrayOfObj[i + 1] instanceof Block)
-            {
-                itemstack1 = new ItemStack((Block)par2ArrayOfObj[i + 1], 1, 32767);
-            }
-            else if (par2ArrayOfObj[i + 1] instanceof ItemStack)
-            {
-                itemstack1 = (ItemStack)par2ArrayOfObj[i + 1];
-            }
+		HashMap hashmap;
 
-            hashmap.put(character, itemstack1);
-        }
+		for (hashmap = new HashMap(); i < par2ArrayOfObj.length; i += 2) {
+			Character character = (Character) par2ArrayOfObj[i];
+			ItemStack itemstack1 = null;
 
-        ItemStack[] aitemstack = new ItemStack[j * k];
+			if (par2ArrayOfObj[i + 1] instanceof Item) {
+				itemstack1 = new ItemStack((Item) par2ArrayOfObj[i + 1]);
+			} else if (par2ArrayOfObj[i + 1] instanceof Block) {
+				itemstack1 = new ItemStack((Block) par2ArrayOfObj[i + 1], 1,
+						32767);
+			} else if (par2ArrayOfObj[i + 1] instanceof ItemStack) {
+				itemstack1 = (ItemStack) par2ArrayOfObj[i + 1];
+			}
 
-        for (int i1 = 0; i1 < j * k; ++i1)
-        {
-            char c0 = s.charAt(i1);
+			hashmap.put(character, itemstack1);
+		}
 
-            if (hashmap.containsKey(Character.valueOf(c0)))
-            {
-                aitemstack[i1] = ((ItemStack)hashmap.get(Character.valueOf(c0))).copy();
-            }
-            else
-            {
-                aitemstack[i1] = null;
-            }
-        }
+		ItemStack[] aitemstack = new ItemStack[j * k];
 
-        ShapedRecipes shapedrecipes = new ShapedRecipes(j, k, aitemstack, par1ItemStack);
-        
-        ArrayList list = (ArrayList) recipeListMap.get(recipeListKey);
-        if(list == null)
-        	list = (ArrayList) recipeListMap.put(recipeListKey, new ArrayList());
-        
-        list.add(shapedrecipes);
+		for (int i1 = 0; i1 < j * k; ++i1) {
+			char c0 = s.charAt(i1);
 
-        return shapedrecipes;
-    }
+			if (hashmap.containsKey(Character.valueOf(c0))) {
+				aitemstack[i1] = ((ItemStack) hashmap
+						.get(Character.valueOf(c0))).copy();
+			} else {
+				aitemstack[i1] = null;
+			}
+		}
 
-    public void addShapelessRecipe(ItemStack par1ItemStack, Object ... par2ArrayOfObj)
-    {
-    	addShapelessRecipe(DefaultMinecraftRecipeKey, par1ItemStack, par2ArrayOfObj);
-    }
-    
-    public void addShapelessRecipe(String recipeListKey, ItemStack par1ItemStack, Object ... par2ArrayOfObj)
-    {
-        ArrayList arraylist = new ArrayList();
-        Object[] aobject = par2ArrayOfObj;
-        int i = par2ArrayOfObj.length;
+		ShapedRecipes shapedrecipes = new ShapedRecipes(j, k, aitemstack,
+				par1ItemStack);
 
-        for (int j = 0; j < i; ++j)
-        {
-            Object object1 = aobject[j];
+		ArrayList list = (ArrayList) recipeListMap.get(recipeListKey);
+		if (list == null)
+			list = (ArrayList) recipeListMap
+					.put(recipeListKey, new ArrayList());
 
-            if (object1 instanceof ItemStack)
-            {
-                arraylist.add(((ItemStack)object1).copy());
-            }
-            else if (object1 instanceof Item)
-            {
-                arraylist.add(new ItemStack((Item)object1));
-            }
-            else
-            {
-                if (!(object1 instanceof Block))
-                {
-                    throw new RuntimeException("Invalid shapeless recipy!");
-                }
+		list.add(shapedrecipes);
 
-                arraylist.add(new ItemStack((Block)object1));
-            }
-        }
+		return shapedrecipes;
+	}
 
-       ShapelessRecipes recipe = new ShapelessRecipes(par1ItemStack, arraylist);
-        
-       ArrayList list = (ArrayList) recipeListMap.get(recipeListKey);
-       if(list == null)
-    	   list = (ArrayList) recipeListMap.put(recipeListKey, new ArrayList());
-       
-       list.add(recipe);
-    }
+	public void addShapelessRecipe(ItemStack par1ItemStack,
+			Object... par2ArrayOfObj) {
+		addShapelessRecipe(DefaultMinecraftRecipeKey, par1ItemStack,
+				par2ArrayOfObj);
+	}
 
-    public ItemStack findMatchingRecipe(InventoryCrafting par1InventoryCrafting, World par2World)
-    {
-    	return findMatchingRecipe(DefaultMinecraftRecipeKey, par1InventoryCrafting, par2World);
-    }
-    
-    public ItemStack findMatchingRecipe(String recipeListKey, InventoryCrafting par1InventoryCrafting, World par2World)
-    {
-        int i = 0;
-        ItemStack itemstack = null;
-        ItemStack itemstack1 = null;
-        int j;
+	public void addShapelessRecipe(String recipeListKey,
+			ItemStack par1ItemStack, Object... par2ArrayOfObj) {
+		ArrayList arraylist = new ArrayList();
+		Object[] aobject = par2ArrayOfObj;
+		int i = par2ArrayOfObj.length;
 
-        for (j = 0; j < par1InventoryCrafting.getSizeInventory(); ++j)
-        {
-            ItemStack itemstack2 = par1InventoryCrafting.getStackInSlot(j);
+		for (int j = 0; j < i; ++j) {
+			Object object1 = aobject[j];
 
-            if (itemstack2 != null)
-            {
-                if (i == 0)
-                {
-                    itemstack = itemstack2;
-                }
+			if (object1 instanceof ItemStack) {
+				arraylist.add(((ItemStack) object1).copy());
+			} else if (object1 instanceof Item) {
+				arraylist.add(new ItemStack((Item) object1));
+			} else {
+				if (!(object1 instanceof Block)) {
+					throw new RuntimeException("Invalid shapeless recipy!");
+				}
 
-                if (i == 1)
-                {
-                    itemstack1 = itemstack2;
-                }
+				arraylist.add(new ItemStack((Block) object1));
+			}
+		}
 
-                ++i;
-            }
-        }
+		ShapelessRecipes recipe = new ShapelessRecipes(par1ItemStack, arraylist);
 
-        if (i == 2 && itemstack.itemID == itemstack1.itemID && itemstack.stackSize == 1 && itemstack1.stackSize == 1 && Item.itemsList[itemstack.itemID].isRepairable())
-        {
-            Item item = Item.itemsList[itemstack.itemID];
-            int k = item.getMaxDamage() - itemstack.getItemDamageForDisplay();
-            int l = item.getMaxDamage() - itemstack1.getItemDamageForDisplay();
-            int i1 = k + l + item.getMaxDamage() * 5 / 100;
-            int j1 = item.getMaxDamage() - i1;
+		ArrayList list = (ArrayList) recipeListMap.get(recipeListKey);
+		if (list == null)
+			list = (ArrayList) recipeListMap
+					.put(recipeListKey, new ArrayList());
 
-            if (j1 < 0)
-            {
-                j1 = 0;
-            }
+		list.add(recipe);
+	}
 
-            return new ItemStack(itemstack.itemID, 1, j1);
-        }
-        else
-        {
-            for (j = 0; j < ((ArrayList) this.recipeListMap.get(recipeListKey)).size(); ++j)
-            {
-                IRecipe irecipe = (IRecipe)((ArrayList) this.recipeListMap.get(recipeListKey)).get(j);
+	public ItemStack findMatchingRecipe(
+			InventoryCrafting par1InventoryCrafting, World par2World) {
+		return findMatchingRecipe(DefaultMinecraftRecipeKey,
+				par1InventoryCrafting, par2World);
+	}
 
-                if (irecipe.matches(par1InventoryCrafting, par2World))
-                {
-                    return irecipe.getCraftingResult(par1InventoryCrafting);
-                }
-            }
+	public ItemStack findMatchingRecipe(String recipeListKey,
+			InventoryCrafting par1InventoryCrafting, World par2World) {
+		int i = 0;
+		ItemStack itemstack = null;
+		ItemStack itemstack1 = null;
+		int j;
 
-            return null;
-        }
-    }
+		for (j = 0; j < par1InventoryCrafting.getSizeInventory(); ++j) {
+			ItemStack itemstack2 = par1InventoryCrafting.getStackInSlot(j);
 
-    /**
-     * returns the List<> of all recipes
-     */
-    public List getRecipeList()
-    {
-    	return getRecipeList(DefaultMinecraftRecipeKey);
-    }
-    	
-    public List getRecipeList(String recipeListKey)
-    {
-        return (List) this.recipeListMap.get(recipeListKey);
-    }
+			if (itemstack2 != null) {
+				if (i == 0) {
+					itemstack = itemstack2;
+				}
+
+				if (i == 1) {
+					itemstack1 = itemstack2;
+				}
+
+				++i;
+			}
+		}
+
+		if (i == 2 && itemstack.itemID == itemstack1.itemID
+				&& itemstack.stackSize == 1 && itemstack1.stackSize == 1
+				&& Item.itemsList[itemstack.itemID].isRepairable()) {
+			Item item = Item.itemsList[itemstack.itemID];
+			int k = item.getMaxDamage() - itemstack.getItemDamageForDisplay();
+			int l = item.getMaxDamage() - itemstack1.getItemDamageForDisplay();
+			int i1 = k + l + item.getMaxDamage() * 5 / 100;
+			int j1 = item.getMaxDamage() - i1;
+
+			if (j1 < 0) {
+				j1 = 0;
+			}
+
+			return new ItemStack(itemstack.itemID, 1, j1);
+		} else {
+			for (j = 0; j < ((ArrayList) this.recipeListMap.get(recipeListKey))
+					.size(); ++j) {
+				IRecipe irecipe = (IRecipe) ((ArrayList) this.recipeListMap
+						.get(recipeListKey)).get(j);
+
+				if (irecipe.matches(par1InventoryCrafting, par2World)) {
+					return irecipe.getCraftingResult(par1InventoryCrafting);
+				}
+			}
+
+			return null;
+		}
+	}
+
+	/**
+	 * returns the List<> of all recipes
+	 */
+	public List getRecipeList() {
+		return getRecipeList(DefaultMinecraftRecipeKey);
+	}
+
+	public List getRecipeList(String recipeListKey) {
+		return (List) this.recipeListMap.get(recipeListKey);
+	}
 }

@@ -17,7 +17,8 @@ public class NanoInterfaceDevice extends InterfaceDevice {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "NanoInterfaceDevice");
+		this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
+				.toLowerCase() + ":" + "NanoInterfaceDevice");
 	}
 
 }

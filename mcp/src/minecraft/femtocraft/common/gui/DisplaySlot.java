@@ -15,7 +15,7 @@ public class DisplaySlot extends Slot {
 	public DisplaySlot(IInventory par1iInventory, int par2, int par3, int par4) {
 		super(par1iInventory, par2, par3, par4);
 	}
-	
+
 	@Override
 	public boolean isItemValid(ItemStack par1ItemStack) {
 		return false;
@@ -29,5 +29,5 @@ public class DisplaySlot extends Slot {
 	@Override
 	public void putStack(ItemStack par1ItemStack) {
 	}
-	
+
 }

@@ -10,12 +10,13 @@ public class DeconstructedThorium extends Item {
 		super(par1);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		setTextureName(Femtocraft.ID.toLowerCase() +":" + "DeconstructedThorium");
+		setTextureName(Femtocraft.ID.toLowerCase() + ":"
+				+ "DeconstructedThorium");
 	}
-	
-	public void updateIcons(IconRegister par1IconRegister)
-    {
-        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "DeconstructedThorium");
-    }
+
+	public void updateIcons(IconRegister par1IconRegister) {
+		this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
+				.toLowerCase() + ":" + "DeconstructedThorium");
+	}
 
 }

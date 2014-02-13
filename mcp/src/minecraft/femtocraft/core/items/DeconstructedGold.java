@@ -10,12 +10,12 @@ public class DeconstructedGold extends Item {
 		super(par1);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		setTextureName(Femtocraft.ID.toLowerCase() +":" + "DeconstructedGold");
+		setTextureName(Femtocraft.ID.toLowerCase() + ":" + "DeconstructedGold");
 	}
-	
-	public void updateIcons(IconRegister par1IconRegister)
-    {
-        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "DeconstructedGold");
-    }
+
+	public void updateIcons(IconRegister par1IconRegister) {
+		this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
+				.toLowerCase() + ":" + "DeconstructedGold");
+	}
 
 }

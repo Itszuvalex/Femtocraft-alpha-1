@@ -10,7 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class FemtopowerGenerator extends FemtopowerTileContainer {
-	
+
 	public FemtopowerGenerator(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setCreativeTab(Femtocraft.femtocraftTab);
@@ -20,7 +20,7 @@ public class FemtopowerGenerator extends FemtopowerTileContainer {
 	public TileEntity createNewTileEntity(World world) {
 		return new FemtopowerProducerTest();
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube() {
 		return false;

@@ -5,8 +5,7 @@ import femtocraft.managers.research.TechLevel;
 
 public class FemtopowerConsumerTest extends FemtopowerConsumer {
 	private int amountPerTick;
-	
-	
+
 	public FemtopowerConsumerTest() {
 		super();
 		amountPerTick = 10;
@@ -18,7 +17,7 @@ public class FemtopowerConsumerTest extends FemtopowerConsumer {
 		super.femtocraftServerUpdate();
 		consume(amountPerTick);
 	}
-	
+
 	@Override
 	public float getFillPercentageForCharging(ForgeDirection from) {
 		float val = getFillPercentage();

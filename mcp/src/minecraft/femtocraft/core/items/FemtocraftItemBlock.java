@@ -23,74 +23,71 @@ public class FemtocraftItemBlock extends ItemBlock {
 		setCreativeTab(Femtocraft.femtocraftTab);
 	}
 
-	
 	/**
 	 * 
-	 * @return true if this block, when in item form, should have NBTData.  If you want this block to be stackable in item form, this must return false.
-	 * 	Otherwise, Femtocraft will add NBT data automatically.
+	 * @return true if this block, when in item form, should have NBTData. If
+	 *         you want this block to be stackable in item form, this must
+	 *         return false. Otherwise, Femtocraft will add NBT data
+	 *         automatically.
 	 */
-	public boolean hasItemNBT()
-	{
+	public boolean hasItemNBT() {
 		return true;
 	}
-	
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 		super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
 
-		if(hasItemNBT())
-		{
+		if (hasItemNBT()) {
 			NBTTagCompound nbt = par1ItemStack.getTagCompound();
-			if(nbt == null)
-			{
+			if (nbt == null) {
 				nbt = par1ItemStack.stackTagCompound = new NBTTagCompound();
 			}
-			
+
 			String owner = nbt.getString("owner");
-	
-			String ownerLabelString = EnumChatFormatting.GRAY + "Owner:" + EnumChatFormatting.RESET;
+
+			String ownerLabelString = EnumChatFormatting.GRAY + "Owner:"
+					+ EnumChatFormatting.RESET;
 			String ownerString;
-			if(owner.isEmpty())
-			{
-				ownerString = EnumChatFormatting.ITALIC + "unassigned" + EnumChatFormatting.RESET;
-			}
-			else
-			{
+			if (owner.isEmpty()) {
+				ownerString = EnumChatFormatting.ITALIC + "unassigned"
+						+ EnumChatFormatting.RESET;
+			} else {
 				ownerString = owner;
 			}
-			
-			par3List.add(new String().format("%s %s", ownerLabelString, ownerString));
+
+			par3List.add(new String().format("%s %s", ownerLabelString,
+					ownerString));
 		}
 	}
-
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean canPlaceItemBlockOnSide(World par1World, int par2, int par3,
 			int par4, int par5, EntityPlayer par6EntityPlayer,
 			ItemStack par7ItemStack) {
-		if(!canPlayerPlace(par6EntityPlayer)) return false;
+		if (!canPlayerPlace(par6EntityPlayer))
+			return false;
 		return super.canPlaceItemBlockOnSide(par1World, par2, par3, par4, par5,
 				par6EntityPlayer, par7ItemStack);
 	}
-
 
 	@Override
 	public boolean placeBlockAt(ItemStack stack, EntityPlayer player,
 			World world, int x, int y, int z, int side, float hitX, float hitY,
 			float hitZ, int metadata) {
-		if(!canPlayerPlace(player)) return false;
-		return super.placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY,
-				hitZ, metadata);
+		if (!canPlayerPlace(player))
+			return false;
+		return super.placeBlockAt(stack, player, world, x, y, z, side, hitX,
+				hitY, hitZ, metadata);
 	}
-	
-	private boolean canPlayerPlace(EntityPlayer player)
-	{
-		if(player == null) return false;
-		
+
+	private boolean canPlayerPlace(EntityPlayer player) {
+		if (player == null)
+			return false;
+
 		return true;
 	}
 }

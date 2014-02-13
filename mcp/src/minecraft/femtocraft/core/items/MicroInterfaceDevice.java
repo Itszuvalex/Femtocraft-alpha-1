@@ -17,7 +17,8 @@ public class MicroInterfaceDevice extends InterfaceDevice {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "MicroInterfaceDevice");
+		this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
+				.toLowerCase() + ":" + "MicroInterfaceDevice");
 	}
 
 }

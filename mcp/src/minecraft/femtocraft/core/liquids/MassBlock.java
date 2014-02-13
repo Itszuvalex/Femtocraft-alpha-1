@@ -20,7 +20,7 @@ public class MassBlock extends BlockFluidClassic {
 		setCreativeTab(Femtocraft.femtocraftTab);
 		Femtocraft.mass.setBlockID(id);
 	}
-	
+
 	@Override
 	public Icon getIcon(int side, int meta) {
 		return (side == 0 || side == 1) ? stillIcon : flowingIcon;
@@ -29,8 +29,10 @@ public class MassBlock extends BlockFluidClassic {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		stillIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "mass_still");
-		flowingIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "mass_flow");
+		stillIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+				+ ":" + "mass_still");
+		flowingIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+				+ ":" + "mass_flow");
 	}
 
 }

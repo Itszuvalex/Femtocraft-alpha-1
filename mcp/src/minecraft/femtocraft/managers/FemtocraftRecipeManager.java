@@ -9,8 +9,7 @@ import net.minecraft.item.ItemStack;
 
 public class FemtocraftRecipeManager {
 	public static FemtocraftAssemblerRecipeManager assemblyRecipes = new FemtocraftAssemblerRecipeManager();
-	
-	public FemtocraftRecipeManager()
-	{
+
+	public FemtocraftRecipeManager() {
 	}
 }

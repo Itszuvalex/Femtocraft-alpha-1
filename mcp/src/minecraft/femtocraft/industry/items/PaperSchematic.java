@@ -16,8 +16,10 @@ public class PaperSchematic extends AssemblySchematic {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "PaperSchematic");
-		this.keyedIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "PaperSchematicKeyed");
+		this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
+				.toLowerCase() + ":" + "PaperSchematic");
+		this.keyedIcon = par1IconRegister.registerIcon(Femtocraft.ID
+				.toLowerCase() + ":" + "PaperSchematicKeyed");
 	}
 
 }

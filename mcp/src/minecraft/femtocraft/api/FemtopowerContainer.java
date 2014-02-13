@@ -10,30 +10,27 @@ public class FemtopowerContainer implements IFemtopowerContainer {
 	private TechLevel level;
 	private int maxPower;
 	private int currentPower;
-	
-	public FemtopowerContainer(TechLevel level, int maxPower)
-	{
+
+	public FemtopowerContainer(TechLevel level, int maxPower) {
 		this.level = level;
 		this.maxPower = maxPower;
 		this.currentPower = 0;
 	}
-	
-	public void setMaxPower(int maxPower)
-	{
+
+	public void setMaxPower(int maxPower) {
 		this.maxPower = maxPower;
 	}
-	
-	public void setCurrentPower(int currentPower)
-	{
+
+	public void setCurrentPower(int currentPower) {
 		this.currentPower = currentPower;
 	}
-	
-	public void setTechLevel(TechLevel level)
-	{
+
+	public void setTechLevel(TechLevel level) {
 		this.level = level;
 	}
-	
-	private FemtopowerContainer(){};
+
+	private FemtopowerContainer() {
+	};
 
 	@Override
 	public boolean canAcceptPowerOfLevel(TechLevel level) {
@@ -57,7 +54,7 @@ public class FemtopowerContainer implements IFemtopowerContainer {
 
 	@Override
 	public float getFillPercentage() {
-		return ((float)currentPower)/((float)maxPower);
+		return ((float) currentPower) / ((float) maxPower);
 	}
 
 	@Override
@@ -85,37 +82,34 @@ public class FemtopowerContainer implements IFemtopowerContainer {
 
 	@Override
 	public boolean consume(int amount) {
-		if(amount > currentPower) 
+		if (amount > currentPower)
 			return false;
-		
+
 		currentPower -= amount;
 		return true;
 	}
-	
-	public void saveToNBT(NBTTagCompound nbt)
-	{
+
+	public void saveToNBT(NBTTagCompound nbt) {
 		nbt.setInteger("maxPower", maxPower);
 		nbt.setInteger("currentPower", currentPower);
 		nbt.setString("techLevel", level.key);
 	}
-	
-	public void loadFromNBT(NBTTagCompound nbt)
-	{
+
+	public void loadFromNBT(NBTTagCompound nbt) {
 		maxPower = nbt.getInteger("maxPower");
 		currentPower = nbt.getInteger("currentPower");
 		level = TechLevel.getTech(nbt.getString("techLevel"));
 	}
-	
-	public static FemtopowerContainer createFromNBT(NBTTagCompound nbt)
-	{
+
+	public static FemtopowerContainer createFromNBT(NBTTagCompound nbt) {
 		FemtopowerContainer cont = new FemtopowerContainer();
 		cont.loadFromNBT(nbt);
 		return cont;
 	}
-	
-	public void addInformationToTooltip(List tooltip)
-	{
-		String value =  level.getTooltipEnum() + "Power: " + EnumChatFormatting.RESET + currentPower + "/" + maxPower;
+
+	public void addInformationToTooltip(List tooltip) {
+		String value = level.getTooltipEnum() + "Power: "
+				+ EnumChatFormatting.RESET + currentPower + "/" + maxPower;
 		tooltip.add(value);
 	}
 

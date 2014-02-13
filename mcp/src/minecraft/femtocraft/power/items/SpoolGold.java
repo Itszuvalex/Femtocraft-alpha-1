@@ -17,7 +17,8 @@ public class SpoolGold extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "GoldSpool");
+		itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+				+ ":" + "GoldSpool");
 	}
 
 }

@@ -10,29 +10,28 @@ public class TechnologyEvent extends Event {
 	public TechnologyEvent(Technology tech) {
 		this.technology = tech;
 	}
-	
+
 	@Cancelable
-	public static class TechnologyAddedEvent extends TechnologyEvent
-	{
+	public static class TechnologyAddedEvent extends TechnologyEvent {
 		public TechnologyAddedEvent(Technology tech) {
 			super(tech);
 		}
 	}
-	
+
 	@Cancelable
-	public static class TechnologyDiscoveredEvent extends TechnologyEvent
-	{
+	public static class TechnologyDiscoveredEvent extends TechnologyEvent {
 		public final String username;
+
 		public TechnologyDiscoveredEvent(String username, Technology tech) {
 			super(tech);
 			this.username = username;
 		}
 	}
-	
+
 	@Cancelable
-	public static class TechnologyResearchedEvent extends TechnologyEvent
-	{
+	public static class TechnologyResearchedEvent extends TechnologyEvent {
 		public final String username;
+
 		public TechnologyResearchedEvent(String username, Technology tech) {
 			super(tech);
 			this.username = username;

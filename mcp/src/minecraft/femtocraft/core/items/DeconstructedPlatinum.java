@@ -10,12 +10,13 @@ public class DeconstructedPlatinum extends Item {
 		super(par1);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		setTextureName(Femtocraft.ID.toLowerCase() +":" + "DeconstructedPlatinum");
+		setTextureName(Femtocraft.ID.toLowerCase() + ":"
+				+ "DeconstructedPlatinum");
 	}
-	
-	public void updateIcons(IconRegister par1IconRegister)
-    {
-        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "DeconstructedPlatinum");
-    }
+
+	public void updateIcons(IconRegister par1IconRegister) {
+		this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
+				.toLowerCase() + ":" + "DeconstructedPlatinum");
+	}
 
 }

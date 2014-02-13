@@ -1,26 +1,20 @@
 package femtocraft.power.TileEntity;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.util.Arrays;
-import java.util.logging.Level;
 
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.ForgeDirection;
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
 import femtocraft.api.FemtopowerContainer;
 import femtocraft.managers.research.TechLevel;
-
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraftforge.common.ForgeDirection;
 
 public class FemtopowerMicroCubeTile extends FemtopowerTile {
 	public boolean[] outputs;
 	static final public String packetChannel = Femtocraft.ID + ".MCube";
 	public static final int maxStorage = 10000;
 	public static final TechLevel techLevel = TechLevel.MICRO;
-	
+
 	public FemtopowerMicroCubeTile() {
 		super();
 		setMaxStorage(maxStorage);
@@ -30,23 +24,21 @@ public class FemtopowerMicroCubeTile extends FemtopowerTile {
 		setTechLevel(techLevel);
 	}
 
-	public static FemtopowerContainer getDefaultContainer()
-	{
+	public static FemtopowerContainer getDefaultContainer() {
 		return new FemtopowerContainer(techLevel, maxStorage);
 	}
-	
-	public void onSideActivate(ForgeDirection side)
-	{
+
+	public void onSideActivate(ForgeDirection side) {
 		int i = FemtocraftUtils.indexOfForgeDirection(side);
 		outputs[i] = !outputs[i];
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
-//	@Override
-//	public String getPacketChannel() {
-//		return packetChannel;
-//	}
-	
+	// @Override
+	// public String getPacketChannel() {
+	// return packetChannel;
+	// }
+
 	@Override
 	public void handleDescriptionNBT(NBTTagCompound compound) {
 		super.handleDescriptionNBT(compound);
@@ -59,29 +51,25 @@ public class FemtopowerMicroCubeTile extends FemtopowerTile {
 		compound.setByte("output", generateOutputMask());
 	}
 
-	public byte generateOutputMask()
-	{
+	public byte generateOutputMask() {
 		byte output = 0;
-		
-		for(int i = 0; i < 6; i++)
-		{
-			if(outputs[i])
+
+		for (int i = 0; i < 6; i++) {
+			if (outputs[i])
 				output += 1 << i;
 		}
 		return output;
 	}
-	
-	public void parseOutputMask(byte mask)
-	{
+
+	public void parseOutputMask(byte mask) {
 		byte temp;
 
-		for(int i = 0; i < 6; i++)
-		{
+		for (int i = 0; i < 6; i++) {
 			temp = mask;
 			outputs[i] = (((temp >> i) & 1) == 1) ? true : false;
 		}
-		
-		if(worldObj != null)
+
+		if (worldObj != null)
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 	}
 
@@ -97,16 +85,16 @@ public class FemtopowerMicroCubeTile extends FemtopowerTile {
 
 	@Override
 	public boolean canCharge(ForgeDirection from) {
-		return !outputs[FemtocraftUtils.indexOfForgeDirection(from)] && super.canCharge(from);
+		return !outputs[FemtocraftUtils.indexOfForgeDirection(from)]
+				&& super.canCharge(from);
 	}
 
 	@Override
 	public int charge(ForgeDirection from, int amount) {
-		if(!outputs[FemtocraftUtils.indexOfForgeDirection(from)])
-		{
+		if (!outputs[FemtocraftUtils.indexOfForgeDirection(from)]) {
 			return super.charge(from, amount);
 		}
-		
+
 		return 0;
 	}
 

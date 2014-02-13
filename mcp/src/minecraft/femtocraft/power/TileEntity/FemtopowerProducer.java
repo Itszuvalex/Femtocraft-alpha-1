@@ -3,7 +3,7 @@ package femtocraft.power.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
 public class FemtopowerProducer extends FemtopowerTile {
-	
+
 	public FemtopowerProducer() {
 		super();
 	}
@@ -19,4 +19,3 @@ public class FemtopowerProducer extends FemtopowerTile {
 		return 1.0f;
 	}
 }
-

@@ -14,29 +14,34 @@ import femtocraft.power.TileEntity.MicroChargingBaseTile;
 
 public class CommonProxyFemtocraft {
 	public void registerRendering() {
-		
+
 	}
-	
-	public void registerTileEntities() 
-	{
-		 //Tile Entities
-		 GameRegistry.registerTileEntity(FemtopowerTile.class, "FemtopowerTile");
-		 GameRegistry.registerTileEntity(FemtopowerProducerTest.class, "FemtopowerProducerTest");
-		 GameRegistry.registerTileEntity(FemtopowerConsumerTest.class, "FemtopowerConsumerTest");
-		 GameRegistry.registerTileEntity(MicroFurnaceTile.class, "FemtocraftMicroFurnace");
-		 GameRegistry.registerTileEntity(MicroDeconstructorTile.class, "FemtocraftMicroDeconstructor");
-		 GameRegistry.registerTileEntity(MicroReconstructorTile.class, "FemtocraftMicroReconstructor");
-		 GameRegistry.registerTileEntity(FemtopowerCableTile.class, "FemtopowerCable");
-		 GameRegistry.registerTileEntity(FemtopowerMicroCubeTile.class, "FemtocraftMicroCube");
-		 GameRegistry.registerTileEntity(VacuumTubeTile.class,  "VacuumTube");
-		 GameRegistry.registerTileEntity(MicroChargingBaseTile.class, "MicroChargingBase");
+
+	public void registerTileEntities() {
+		// Tile Entities
+		GameRegistry.registerTileEntity(FemtopowerTile.class, "FemtopowerTile");
+		GameRegistry.registerTileEntity(FemtopowerProducerTest.class,
+				"FemtopowerProducerTest");
+		GameRegistry.registerTileEntity(FemtopowerConsumerTest.class,
+				"FemtopowerConsumerTest");
+		GameRegistry.registerTileEntity(MicroFurnaceTile.class,
+				"FemtocraftMicroFurnace");
+		GameRegistry.registerTileEntity(MicroDeconstructorTile.class,
+				"FemtocraftMicroDeconstructor");
+		GameRegistry.registerTileEntity(MicroReconstructorTile.class,
+				"FemtocraftMicroReconstructor");
+		GameRegistry.registerTileEntity(FemtopowerCableTile.class,
+				"FemtopowerCable");
+		GameRegistry.registerTileEntity(FemtopowerMicroCubeTile.class,
+				"FemtocraftMicroCube");
+		GameRegistry.registerTileEntity(VacuumTubeTile.class, "VacuumTube");
+		GameRegistry.registerTileEntity(MicroChargingBaseTile.class,
+				"MicroChargingBase");
 	}
-	
-	public void registerBlockRenderers() 
-	{
+
+	public void registerBlockRenderers() {
 	}
-	
-	public void registerTickHandlers()
-	{
+
+	public void registerTickHandlers() {
 	}
 }

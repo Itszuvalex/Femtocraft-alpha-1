@@ -12,12 +12,12 @@ public class FemtopowerConsumerBlock extends FemtopowerTileContainer {
 		super(par1, par2Material);
 		setCreativeTab(Femtocraft.femtocraftTab);
 	}
-	
+
 	@Override
 	public TileEntity createNewTileEntity(World world) {
 		return new FemtopowerConsumerTest();
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube() {
 		return false;

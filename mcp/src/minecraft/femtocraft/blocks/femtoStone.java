@@ -13,20 +13,22 @@ public class femtoStone extends Block {
 	public femtoStone(int id) {
 		super(id, Material.iron);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		setTextureName(Femtocraft.ID.toLowerCase() +":" + "femtoStone");
+		setTextureName(Femtocraft.ID.toLowerCase() + ":" + "femtoStone");
 		setUnlocalizedName("femtoStone");
 		setHardness(8.0f);
 		setStepSound(Block.soundMetalFootstep);
 		setResistance(15f);
 	}
-	
-	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
-		return false;	
+
+	public boolean onBlockActivated(World par1World, int par2, int par3,
+			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
+			float par8, float par9) {
+		return false;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister)
-    {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "femtoStone");
-    }
+	public void registerIcons(IconRegister par1IconRegister) {
+		this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
+				.toLowerCase() + ":" + "femtoStone");
+	}
 }

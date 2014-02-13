@@ -36,114 +36,114 @@ public class FemtocraftTileContainer extends BlockContainer {
 			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
 			float par8, float par9) {
 		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
-		if(te instanceof FemtocraftTile)
-		{
+		if (te instanceof FemtocraftTile) {
 			FemtocraftTile tile = (FemtocraftTile) te;
-			
-			if(hasGui() && tile.isUseableByPlayer(par5EntityPlayer))
-			{
-				par5EntityPlayer.openGui(getMod(), getGuiID(), par1World, par2, par3, par4);
+
+			if (hasGui() && tile.isUseableByPlayer(par5EntityPlayer)) {
+				par5EntityPlayer.openGui(getMod(), getGuiID(), par1World, par2,
+						par3, par4);
 			}
 		}
-		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer,
-				par6, par7, par8, par9);
+		return super.onBlockActivated(par1World, par2, par3, par4,
+				par5EntityPlayer, par6, par7, par8, par9);
 	}
-	
-	public boolean hasGui()
-	{
+
+	public boolean hasGui() {
 		return false;
 	}
-	
-	public int getGuiID()
-	{
+
+	public int getGuiID() {
 		return -1;
 	}
-	
-	public Object getMod()
-	{
+
+	public Object getMod() {
 		return Femtocraft.instance;
 	}
-	
+
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
 			EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
-		
-		if(!par1World.isRemote)
-		{
+
+		if (!par1World.isRemote) {
 			TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
-			if(te instanceof FemtocraftTile)
-			{
+			if (te instanceof FemtocraftTile) {
 				FemtocraftTile tile = (FemtocraftTile) te;
-				if(par5EntityLivingBase == null) return;
-				if(par5EntityLivingBase instanceof EntityPlayerMP)
-				{
+				if (par5EntityLivingBase == null)
+					return;
+				if (par5EntityLivingBase instanceof EntityPlayerMP) {
 					Item item = par6ItemStack.getItem();
-					if((item instanceof FemtocraftItemBlock) && (((FemtocraftItemBlock)item).hasItemNBT()))
-					{
-						((FemtocraftTile) te).loadInfoFromItemNBT(par6ItemStack.stackTagCompound);
-						if(((FemtocraftTile) te).getOwner().isEmpty())
-						{
-							((FemtocraftTile) te).setOwner(((EntityPlayerMP) par5EntityLivingBase).username);
+					if ((item instanceof FemtocraftItemBlock)
+							&& (((FemtocraftItemBlock) item).hasItemNBT())) {
+						((FemtocraftTile) te)
+								.loadInfoFromItemNBT(par6ItemStack.stackTagCompound);
+						if (((FemtocraftTile) te).getOwner().isEmpty()) {
+							((FemtocraftTile) te)
+									.setOwner(((EntityPlayerMP) par5EntityLivingBase).username);
 						}
 					}
 				}
 			}
 		}
-		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLivingBase,
-				par6ItemStack);
+		super.onBlockPlacedBy(par1World, par2, par3, par4,
+				par5EntityLivingBase, par6ItemStack);
 	}
-	
+
 	@Override
 	public void breakBlock(World par1World, int par2, int par3, int par4,
 			int par5, int par6) {
 		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
-		if(te != null && te instanceof FemtocraftTile)
-		{
+		if (te != null && te instanceof FemtocraftTile) {
 			FemtocraftTile tile = (FemtocraftTile) te;
-			
+
 			ItemStack stack = new ItemStack(Block.blocksList[par5]);
 			Item item = stack.getItem();
-			if((item instanceof FemtocraftItemBlock) && (((FemtocraftItemBlock)item).hasItemNBT()))
-			{
-				if(!stack.hasTagCompound())
-				{
+			if ((item instanceof FemtocraftItemBlock)
+					&& (((FemtocraftItemBlock) item).hasItemNBT())) {
+				if (!stack.hasTagCompound()) {
 					stack.stackTagCompound = new NBTTagCompound();
 				}
-			
+
 				tile.saveInfoToItemNBT(stack.stackTagCompound);
 			}
-			
-			par1World.spawnEntityInWorld(new EntityItem(par1World, par2 + .5d, par3 + .5d, par4 + .5d, stack));
+
+			par1World.spawnEntityInWorld(new EntityItem(par1World, par2 + .5d,
+					par3 + .5d, par4 + .5d, stack));
 		}
 		super.breakBlock(par1World, par2, par3, par4, par5, par6);
 	}
-	
+
 	@Override
 	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x,
 			int y, int z) {
 		TileEntity te = world.getBlockTileEntity(x, y, z);
-		if(!(te instanceof FemtocraftTile)) return false;
-		if(!canPlayerRemove(player, (FemtocraftTile) te))
-		{ 
+		if (!(te instanceof FemtocraftTile))
+			return false;
+		if (!canPlayerRemove(player, (FemtocraftTile) te)) {
 			player.addChatMessage("You do not own this block.");
 			return false;
 		}
 		return super.removeBlockByPlayer(world, player, x, y, z);
 	}
 
-	private boolean canPlayerRemove(EntityPlayer player, FemtocraftTile tile)
-	{
-		if(player == null) return false;
-		return tile.getOwner().equals(player.username) || MinecraftServer.getServer().getConfigurationManager().isPlayerOpped(player.username) || player.capabilities.isCreativeMode;
+	private boolean canPlayerRemove(EntityPlayer player, FemtocraftTile tile) {
+		if (player == null)
+			return false;
+		return tile.getOwner().equals(player.username)
+				|| MinecraftServer.getServer().getConfigurationManager()
+						.isPlayerOpped(player.username)
+				|| player.capabilities.isCreativeMode;
 	}
-	
+
 	@Override
 	public boolean canEntityDestroy(World world, int x, int y, int z,
 			Entity entity) {
 		TileEntity te = world.getBlockTileEntity(x, y, z);
-		if(!(te instanceof FemtocraftTile)) return false;
-		if(!(entity instanceof EntityPlayer)) return false;
-		if(!canPlayerRemove((EntityPlayer) entity,  (FemtocraftTile)te)) return false;
+		if (!(te instanceof FemtocraftTile))
+			return false;
+		if (!(entity instanceof EntityPlayer))
+			return false;
+		if (!canPlayerRemove((EntityPlayer) entity, (FemtocraftTile) te))
+			return false;
 		return super.canEntityDestroy(world, x, y, z, entity);
 	}
 

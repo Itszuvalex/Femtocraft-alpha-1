@@ -17,9 +17,9 @@ public class FemtocraftAssemblerRecipe implements Comparable {
 	public ItemStack output;
 	public TechLevel techLevel;
 	public Technology tech;
-	
-	public FemtocraftAssemblerRecipe(ItemStack[] input, Integer mass, ItemStack output, TechLevel techLevel, Technology tech)
-	{
+
+	public FemtocraftAssemblerRecipe(ItemStack[] input, Integer mass,
+			ItemStack output, TechLevel techLevel, Technology tech) {
 		this.input = input;
 		this.mass = mass;
 		this.output = output;
@@ -27,36 +27,37 @@ public class FemtocraftAssemblerRecipe implements Comparable {
 		this.tech = tech;
 	}
 
-	private FemtocraftAssemblerRecipe(){};
-	
+	private FemtocraftAssemblerRecipe() {
+	};
+
 	@Override
 	public int compareTo(Object o) {
 		FemtocraftAssemblerRecipe ir = (FemtocraftAssemblerRecipe) o;
-		for(int i = 0; i < 9; i++)
-		{
+		for (int i = 0; i < 9; i++) {
 			int comp = FemtocraftUtils.compareItem(input[i], ir.input[i]);
-			if(comp != 0) return comp;
+			if (comp != 0)
+				return comp;
 		}
-		
-		if(mass < ir.mass) return -1;
-		if(mass > ir.mass) return 1;
-		
+
+		if (mass < ir.mass)
+			return -1;
+		if (mass > ir.mass)
+			return 1;
+
 		int comp = FemtocraftUtils.compareItem(output, ir.output);
-		if(comp != 0) return comp;
-		
+		if (comp != 0)
+			return comp;
+
 		return 0;
 	}
-	
-	public void saveToNBTTagCompound(NBTTagCompound compound)
-	{
-		//Input
+
+	public void saveToNBTTagCompound(NBTTagCompound compound) {
+		// Input
 		NBTTagList inputList = new NBTTagList();
-		for(int i = 0; i < input.length; ++i)
-		{
+		for (int i = 0; i < input.length; ++i) {
 			NBTTagCompound itemCompound = new NBTTagCompound();
-			itemCompound.setByte("Slot", (byte)i);
-			if(input[i] != null)
-			{
+			itemCompound.setByte("Slot", (byte) i);
+			if (input[i] != null) {
 				NBTTagCompound item = new NBTTagCompound();
 				input[i].writeToNBT(item);
 				itemCompound.setTag("item", item);
@@ -64,62 +65,64 @@ public class FemtocraftAssemblerRecipe implements Comparable {
 			inputList.appendTag(itemCompound);
 		}
 		compound.setTag("input", inputList);
-		
-		//Mass
+
+		// Mass
 		compound.setInteger("mass", mass);
-		
-		//Output
+
+		// Output
 		NBTTagCompound outputCompound = new NBTTagCompound();
 		output.writeToNBT(outputCompound);
-		
+
 		compound.setCompoundTag("output", outputCompound);
-		
-		//TechLevel
+
+		// TechLevel
 		compound.setString("techLevel", techLevel.key);
-		
-		//Technology
-		if(tech != null)
-		{
+
+		// Technology
+		if (tech != null) {
 			compound.setString("technology", tech.name);
 		}
 	}
-	
-	public static FemtocraftAssemblerRecipe loadFromNBTTagCompound(NBTTagCompound compound)
-	{
+
+	public static FemtocraftAssemblerRecipe loadFromNBTTagCompound(
+			NBTTagCompound compound) {
 		FemtocraftAssemblerRecipe recipe = new FemtocraftAssemblerRecipe();
 		recipe.input = new ItemStack[9];
-		
-		//Input
+
+		// Input
 		NBTTagList inputList = compound.getTagList("input");
-		for(int i = 0; i < inputList.tagCount(); ++i)
-		{
+		for (int i = 0; i < inputList.tagCount(); ++i) {
 			NBTTagCompound itemCompound = (NBTTagCompound) inputList.tagAt(i);
 			byte slot = itemCompound.getByte("Slot");
-			if((byte)slot != (byte)i)
-			{
-				Femtocraft.logger.log(Level.WARNING, "Slot mismatch occurred while loading AssemblerRecipe.");
+			if ((byte) slot != (byte) i) {
+				Femtocraft.logger
+						.log(Level.WARNING,
+								"Slot mismatch occurred while loading AssemblerRecipe.");
 			}
-			if(itemCompound.hasKey("item"))
-			{
-				recipe.input[i] = ItemStack.loadItemStackFromNBT((NBTTagCompound) itemCompound.getTag("item"));
+			if (itemCompound.hasKey("item")) {
+				recipe.input[i] = ItemStack
+						.loadItemStackFromNBT((NBTTagCompound) itemCompound
+								.getTag("item"));
 			}
 		}
-		
-		//Mass
-		recipe.mass = compound.getInteger("mass");
-		
-		//Output
-		recipe.output = ItemStack.loadItemStackFromNBT((NBTTagCompound) compound.getTag("output"));
 
-		//TechLevel
+		// Mass
+		recipe.mass = compound.getInteger("mass");
+
+		// Output
+		recipe.output = ItemStack
+				.loadItemStackFromNBT((NBTTagCompound) compound
+						.getTag("output"));
+
+		// TechLevel
 		recipe.techLevel = TechLevel.getTech(compound.getString("techLevel"));
-		
-		//Technology
-		if(compound.hasKey("technology"))
-		{
-			recipe.tech = Femtocraft.researchManager.getTechnology(compound.getString("technology"));
+
+		// Technology
+		if (compound.hasKey("technology")) {
+			recipe.tech = Femtocraft.researchManager.getTechnology(compound
+					.getString("technology"));
 		}
-		
+
 		return recipe;
 	}
 }

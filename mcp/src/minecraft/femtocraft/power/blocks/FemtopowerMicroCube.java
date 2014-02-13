@@ -26,7 +26,7 @@ import femtocraft.power.TileEntity.FemtopowerMicroCubeTile;
 public class FemtopowerMicroCube extends FemtopowerTileContainer {
 	public Icon outputSide;
 	public Icon inputSide;
-	
+
 	public FemtopowerMicroCube(int par1) {
 		super(par1, Material.iron);
 		setCreativeTab(Femtocraft.femtocraftTab);
@@ -39,67 +39,70 @@ public class FemtopowerMicroCube extends FemtopowerTileContainer {
 	public TileEntity createNewTileEntity(World world) {
 		return new FemtopowerMicroCubeTile();
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTexture(IBlockAccess access, int x,
-			int y, int z, int side) {
+	public Icon getBlockTexture(IBlockAccess access, int x, int y, int z,
+			int side) {
 		TileEntity te = access.getBlockTileEntity(x, y, z);
-		
-		if(te == null) return this.blockIcon;
-		if(!(te instanceof FemtopowerMicroCubeTile)) return this.blockIcon;
-		FemtopowerMicroCubeTile cube = (FemtopowerMicroCubeTile)te;
+
+		if (te == null)
+			return this.blockIcon;
+		if (!(te instanceof FemtopowerMicroCubeTile))
+			return this.blockIcon;
+		FemtopowerMicroCubeTile cube = (FemtopowerMicroCubeTile) te;
 		return cube.outputs[side] ? outputSide : inputSide;
 	}
-	
-//	@Override
-//	public boolean isOpaqueCube() {
-//		return false;
-//	}
 
-//	@Override
-//	public boolean renderAsNormalBlock() {
-//		return false;
-//	}
-//	
-//	@Override
-//	public int getRenderType() {
-//		return ClientProxyFemtocraft.FemtopowerMicroCubeRenderID;
-//	}
-//	
+	// @Override
+	// public boolean isOpaqueCube() {
+	// return false;
+	// }
+
+	// @Override
+	// public boolean renderAsNormalBlock() {
+	// return false;
+	// }
+	//
+	// @Override
+	// public int getRenderType() {
+	// return ClientProxyFemtocraft.FemtopowerMicroCubeRenderID;
+	// }
+	//
 	@Override
 	public boolean onBlockActivated(World par1World, int par2, int par3,
 			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
 			float par8, float par9) {
-		
-		if(par1World.isRemote) return true;
+
 		ItemStack item = par5EntityPlayer.getCurrentEquippedItem();
-		if(item != null && item.getItem() instanceof IInterfaceDevice)
-		{
-		
-			FemtopowerMicroCubeTile tile = (FemtopowerMicroCubeTile)par1World.getBlockTileEntity(par2, par3, par4);
-			if(tile != null && !par1World.isRemote)
-			{
+		if (item != null && item.getItem() instanceof IInterfaceDevice) {
+
+			FemtopowerMicroCubeTile tile = (FemtopowerMicroCubeTile) par1World
+					.getBlockTileEntity(par2, par3, par4);
+			if (tile != null && !par1World.isRemote) {
 				ForgeDirection dir = ForgeDirection.getOrientation(par6);
-				
-				if(par5EntityPlayer.isSneaking())
-				{
+
+				if (par5EntityPlayer.isSneaking()) {
 					dir = dir.getOpposite();
 				}
-				
+
 				tile.onSideActivate(dir);
 			}
 			return true;
 		}
-		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer,
-				par6, par7, par8, par9);
+		return super.onBlockActivated(par1World, par2, par3, par4,
+				par5EntityPlayer, par6, par7, par8, par9);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		this.blockIcon = inputSide = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()+":" + "MicroCube_input");
-		outputSide = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()+":" + "MicroCube_output");
-//		side = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "MicroCube_side");
+		this.blockIcon = inputSide = par1IconRegister
+				.registerIcon(Femtocraft.ID.toLowerCase() + ":"
+						+ "MicroCube_input");
+		outputSide = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+				+ ":" + "MicroCube_output");
+		// side = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +
+		// ":" + "MicroCube_side");
 	}
 }

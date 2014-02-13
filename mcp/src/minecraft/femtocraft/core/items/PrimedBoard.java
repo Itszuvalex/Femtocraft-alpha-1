@@ -10,11 +10,11 @@ public class PrimedBoard extends Item {
 		super(par1);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		setTextureName(Femtocraft.ID.toLowerCase() +":" + "PrimedBoard");
+		setTextureName(Femtocraft.ID.toLowerCase() + ":" + "PrimedBoard");
 	}
-	
-	public void updateIcons(IconRegister par1IconRegister)
-    {
-        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "PrimedBoard");
-    }
+
+	public void updateIcons(IconRegister par1IconRegister) {
+		this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
+				.toLowerCase() + ":" + "PrimedBoard");
+	}
 }

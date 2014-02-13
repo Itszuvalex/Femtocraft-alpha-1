@@ -17,7 +17,8 @@ public class FemtoInterfaceDevice extends InterfaceDevice {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "FemtoInterfaceDevice");
+		this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
+				.toLowerCase() + ":" + "FemtoInterfaceDevice");
 	}
 
 }

@@ -8,21 +8,21 @@ import net.minecraft.block.BlockOre;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 
-public class oreThorium extends BlockOre{
+public class oreThorium extends BlockOre {
 
 	public oreThorium(int id) {
 		super(id);
 		this.setCreativeTab(Femtocraft.femtocraftTab);
-		setTextureName(Femtocraft.ID.toLowerCase() +":" + "oreThorium");
+		setTextureName(Femtocraft.ID.toLowerCase() + ":" + "oreThorium");
 		setUnlocalizedName("oreThorium");
 		setHardness(3.0f);
 		setStepSound(Block.soundStoneFootstep);
 		setResistance(1f);
 	}
-	
+
 	@SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister)
-    {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "oreThorium");
-    }
+	public void registerIcons(IconRegister par1IconRegister) {
+		this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
+				.toLowerCase() + ":" + "oreThorium");
+	}
 }

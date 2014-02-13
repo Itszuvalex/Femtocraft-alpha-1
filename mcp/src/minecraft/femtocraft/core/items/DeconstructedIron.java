@@ -10,12 +10,12 @@ public class DeconstructedIron extends Item {
 		super(par1);
 		setMaxStackSize(64);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		setTextureName(Femtocraft.ID.toLowerCase() +":" + "DeconstructedIron");
+		setTextureName(Femtocraft.ID.toLowerCase() + ":" + "DeconstructedIron");
 	}
-	
-	public void updateIcons(IconRegister par1IconRegister)
-    {
-        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +":" + "DeconstructedIron");
-    }
+
+	public void updateIcons(IconRegister par1IconRegister) {
+		this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
+				.toLowerCase() + ":" + "DeconstructedIron");
+	}
 
 }

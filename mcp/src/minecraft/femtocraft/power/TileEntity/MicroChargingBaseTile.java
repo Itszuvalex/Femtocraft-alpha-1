@@ -20,34 +20,35 @@ public class MicroChargingBaseTile extends FemtopowerProducer {
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
-		
-		if(!worldObj.isRemote)
-		{
+
+		if (!worldObj.isRemote) {
 			numCoils = 0;
 			powerPerTick = 0;
-	
-			Block base = Block.blocksList[worldObj.getBlockId(xCoord, yCoord, zCoord)];
-			
+
+			Block base = Block.blocksList[worldObj.getBlockId(xCoord, yCoord,
+					zCoord)];
+
 			boolean searching = true;
-			for(int i = 0; searching && (i < ((IChargingBase)base).maxCoilsSupported(worldObj, xCoord, yCoord, zCoord)); ++i)
-			{
-				Block block = Block.blocksList[worldObj.getBlockId(xCoord, yCoord + i + 1, zCoord)];
-				
-				if((block == null) || (!(block instanceof IChargingCoil)))
-				{
+			for (int i = 0; searching
+					&& (i < ((IChargingBase) base).maxCoilsSupported(worldObj,
+							xCoord, yCoord, zCoord)); ++i) {
+				Block block = Block.blocksList[worldObj.getBlockId(xCoord,
+						yCoord + i + 1, zCoord)];
+
+				if ((block == null) || (!(block instanceof IChargingCoil))) {
 					searching = false;
 					continue;
 				}
-			
-				IChargingCoil coil = (IChargingCoil)block;
-				powerPerTick += coil.powerPerTick(worldObj, xCoord, yCoord + i + 1, zCoord);
+
+				IChargingCoil coil = (IChargingCoil) block;
+				powerPerTick += coil.powerPerTick(worldObj, xCoord, yCoord + i
+						+ 1, zCoord);
 				numCoils++;
 			}
-			
+
 			storedPowerIncrement += powerPerTick;
-			while(storedPowerIncrement > 1.0f)
-			{
-				storedPowerIncrement-=1.0f;
+			while (storedPowerIncrement > 1.0f) {
+				storedPowerIncrement -= 1.0f;
 				charge(ForgeDirection.UNKNOWN, 1);
 			}
 		}
