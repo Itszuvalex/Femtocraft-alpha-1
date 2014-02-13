@@ -53,18 +53,18 @@ public class ContainerMicroFurnace extends Container {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < this.crafters.size(); ++i) {
-			ICrafting icrafting = (ICrafting) this.crafters.get(i);
+        for (Object crafter : this.crafters) {
+            ICrafting icrafting = (ICrafting) crafter;
 
-			if (this.lastCookTime != this.furnace.furnaceCookTime) {
-				icrafting.sendProgressBarUpdate(this, 0,
-						this.furnace.furnaceCookTime);
-			}
-			if (this.lastPower != this.furnace.getCurrentPower()) {
-				icrafting.sendProgressBarUpdate(this, 1,
-						this.furnace.getCurrentPower());
-			}
-		}
+            if (this.lastCookTime != this.furnace.furnaceCookTime) {
+                icrafting.sendProgressBarUpdate(this, 0,
+                        this.furnace.furnaceCookTime);
+            }
+            if (this.lastPower != this.furnace.getCurrentPower()) {
+                icrafting.sendProgressBarUpdate(this, 1,
+                        this.furnace.getCurrentPower());
+            }
+        }
 
 		this.lastCookTime = this.furnace.furnaceCookTime;
 		this.lastPower = this.furnace.getCurrentPower();

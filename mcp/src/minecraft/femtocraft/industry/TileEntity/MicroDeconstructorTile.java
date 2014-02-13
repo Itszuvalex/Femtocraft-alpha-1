@@ -292,12 +292,12 @@ public class MicroDeconstructorTile extends FemtopowerConsumer implements
 			ItemStack it = deconstructorItemStacks[i];
 			fake[i] = it == null ? null : it.copy();
 		}
-        for (int i = 0; i < items.length; ++i) {
-			if (!FemtocraftUtils.placeItem(
-					items[i] == null ? null : items[i].copy(), fake,
-					new int[] {}))
-				return false;
-		}
+        for (ItemStack item : items) {
+            if (!FemtocraftUtils.placeItem(
+                    item == null ? null : item.copy(), fake,
+                    new int[]{}))
+                return false;
+        }
 
 		return true;
 	}

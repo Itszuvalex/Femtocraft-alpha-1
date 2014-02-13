@@ -61,22 +61,22 @@ public class ContainerMicroDeconstructor extends Container {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < this.crafters.size(); ++i) {
-			ICrafting icrafting = (ICrafting) this.crafters.get(i);
+        for (Object crafter : this.crafters) {
+            ICrafting icrafting = (ICrafting) crafter;
 
-			if (this.lastCookTime != this.deconstructor.cookTime) {
-				icrafting.sendProgressBarUpdate(this, 0,
-						this.deconstructor.cookTime);
-			}
-			if (this.lastPower != this.deconstructor.getCurrentPower()) {
-				icrafting.sendProgressBarUpdate(this, 1,
-						this.deconstructor.getCurrentPower());
-			}
-			if (this.lastMass != this.deconstructor.getMassAmount()) {
-				icrafting.sendProgressBarUpdate(this, 2,
-						this.deconstructor.getMassAmount());
-			}
-		}
+            if (this.lastCookTime != this.deconstructor.cookTime) {
+                icrafting.sendProgressBarUpdate(this, 0,
+                        this.deconstructor.cookTime);
+            }
+            if (this.lastPower != this.deconstructor.getCurrentPower()) {
+                icrafting.sendProgressBarUpdate(this, 1,
+                        this.deconstructor.getCurrentPower());
+            }
+            if (this.lastMass != this.deconstructor.getMassAmount()) {
+                icrafting.sendProgressBarUpdate(this, 2,
+                        this.deconstructor.getMassAmount());
+            }
+        }
 
 		this.lastCookTime = this.deconstructor.cookTime;
 		this.lastPower = this.deconstructor.getCurrentPower();

@@ -1,7 +1,5 @@
 package femtocraft.core.blocks;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -19,6 +17,8 @@ import net.minecraft.world.World;
 import femtocraft.Femtocraft;
 import femtocraft.core.items.FemtocraftItemBlock;
 import femtocraft.core.tiles.FemtocraftTile;
+
+import java.util.Random;
 
 public class FemtocraftTileContainer extends BlockContainer {
 
@@ -125,8 +125,13 @@ public class FemtocraftTileContainer extends BlockContainer {
 		return super.removeBlockByPlayer(world, player, x, y, z);
 	}
 
-	private boolean canPlayerRemove(EntityPlayer player, FemtocraftTile tile) {
-        return player != null && (tile.getOwner().equals(player.username) || MinecraftServer.getServer().getConfigurationManager().isPlayerOpped(player.username) || player.capabilities.isCreativeMode);
+    private boolean canPlayerRemove(EntityPlayer player, FemtocraftTile tile) {
+        if (player == null)
+            return false;
+        return tile.getOwner().equals(player.username)
+                || MinecraftServer.getServer().getConfigurationManager()
+                .isPlayerOpped(player.username)
+                || player.capabilities.isCreativeMode;
     }
 
 	@Override
@@ -135,9 +140,7 @@ public class FemtocraftTileContainer extends BlockContainer {
 		TileEntity te = world.getBlockTileEntity(x, y, z);
 		if (!(te instanceof FemtocraftTile))
 			return false;
-		if (!(entity instanceof EntityPlayer))
-			return false;
-        return canPlayerRemove((EntityPlayer) entity, (FemtocraftTile) te) && super.canEntityDestroy(world, x, y, z, entity);
+        return entity instanceof EntityPlayer && canPlayerRemove((EntityPlayer) entity, (FemtocraftTile) te) && super.canEntityDestroy(world, x, y, z, entity);
     }
 
 	@Override

@@ -62,12 +62,11 @@ public class FemtocraftCraftingManager {
 		if (par2ArrayOfObj[i] instanceof String[]) {
 			String[] astring = (String[]) ((String[]) par2ArrayOfObj[i++]);
 
-			for (int l = 0; l < astring.length; ++l) {
-				String s1 = astring[l];
-				++k;
-				j = s1.length();
-				s = s + s1;
-			}
+            for (String s1 : astring) {
+                ++k;
+                j = s1.length();
+                s = s + s1;
+            }
 		} else {
 			while (par2ArrayOfObj[i] instanceof String) {
 				String s2 = (String) par2ArrayOfObj[i++];

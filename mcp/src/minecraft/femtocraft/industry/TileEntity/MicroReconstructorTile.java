@@ -386,10 +386,10 @@ public class MicroReconstructorTile extends FemtopowerConsumer implements
 			inv[i - offset] = it == null ? null : it.copy();
 		}
 
-		for (int i = 0; i < items.length; ++i) {
-			if (!FemtocraftUtils.removeItem(items[i], inv, new int[] {}))
-				return false;
-		}
+        for (ItemStack item : items) {
+            if (!FemtocraftUtils.removeItem(item, inv, new int[]{}))
+                return false;
+        }
 
 		return true;
 	}

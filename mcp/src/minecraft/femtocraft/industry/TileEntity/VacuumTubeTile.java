@@ -739,20 +739,20 @@ public class VacuumTubeTile extends TileEntity implements IVacuumTube {
 			int side = FemtocraftUtils.indexOfForgeDirection(inputDir
 					.getOpposite());
 			int[] slots = inputSidedInv.getAccessibleSlotsFromSide(side);
-			for (int i = 0; i < slots.length; i++) {
-				ItemStack stack = inputSidedInv.getStackInSlot(slots[i]);
-				if (stack != null) {
-					if (!inputSidedInv.canExtractItem(slots[i], stack, side))
-						continue;
+            for (int slot : slots) {
+                ItemStack stack = inputSidedInv.getStackInSlot(slot);
+                if (stack != null) {
+                    if (!inputSidedInv.canExtractItem(slot, stack, side))
+                        continue;
 
-					items[0] = inputSidedInv.decrStackSize(slots[i], 64);
-					hasItem[0] = true;
-					inputSidedInv.onInventoryChanged();
-					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-					worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-					return;
-				}
-			}
+                    items[0] = inputSidedInv.decrStackSize(slot, 64);
+                    hasItem[0] = true;
+                    inputSidedInv.onInventoryChanged();
+                    worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                    worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+                    return;
+                }
+            }
 
 		} else if (inputInv != null) {
 			int size = inputInv.getSizeInventory();

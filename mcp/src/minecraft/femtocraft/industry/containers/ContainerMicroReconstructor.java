@@ -86,22 +86,22 @@ public class ContainerMicroReconstructor extends Container {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < this.crafters.size(); ++i) {
-			ICrafting icrafting = (ICrafting) this.crafters.get(i);
+        for (Object crafter : this.crafters) {
+            ICrafting icrafting = (ICrafting) crafter;
 
-			if (this.lastCookTime != this.reconstructor.cookTime) {
-				icrafting.sendProgressBarUpdate(this, 0,
-						this.reconstructor.cookTime);
-			}
-			if (this.lastPower != this.reconstructor.getCurrentPower()) {
-				icrafting.sendProgressBarUpdate(this, 1,
-						this.reconstructor.getCurrentPower());
-			}
-			if (this.lastMass != this.reconstructor.getMassAmount()) {
-				icrafting.sendProgressBarUpdate(this, 2,
-						this.reconstructor.getMassAmount());
-			}
-		}
+            if (this.lastCookTime != this.reconstructor.cookTime) {
+                icrafting.sendProgressBarUpdate(this, 0,
+                        this.reconstructor.cookTime);
+            }
+            if (this.lastPower != this.reconstructor.getCurrentPower()) {
+                icrafting.sendProgressBarUpdate(this, 1,
+                        this.reconstructor.getCurrentPower());
+            }
+            if (this.lastMass != this.reconstructor.getMassAmount()) {
+                icrafting.sendProgressBarUpdate(this, 2,
+                        this.reconstructor.getMassAmount());
+            }
+        }
 
 		this.lastCookTime = this.reconstructor.cookTime;
 		this.lastPower = this.reconstructor.getCurrentPower();
