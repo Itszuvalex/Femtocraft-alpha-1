@@ -371,14 +371,14 @@ public class FemtocraftRenderUtils {
 			float maxV) {
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV((double) (x + 0), (double) (y + height),
+		tessellator.addVertexWithUV((double) (x), (double) (y + height),
 				(double) zheight, (double) minU, (double) maxV);
 		tessellator.addVertexWithUV((double) (x + width),
 				(double) (y + height), (double) zheight, (double) maxU,
 				(double) maxV);
-		tessellator.addVertexWithUV((double) (x + width), (double) (y + 0),
+		tessellator.addVertexWithUV((double) (x + width), (double) (y),
 				(double) zheight, (double) maxU, (double) minV);
-		tessellator.addVertexWithUV((double) (x + 0), (double) (y + 0),
+		tessellator.addVertexWithUV((double) (x), (double) (y),
 				(double) zheight, (double) minU, (double) minV);
 		tessellator.draw();
 	}

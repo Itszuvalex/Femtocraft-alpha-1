@@ -52,7 +52,6 @@ public class FemtocraftTile extends TileEntity {
 
     public boolean shouldTick() {
         return !FemtocraftConfigs.requirePlayersOnlineForTileEntityTicks || FemtocraftUtils.isPlayerOnline(owner);
-
     }
 
     /**
