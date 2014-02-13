@@ -35,7 +35,7 @@ public class BlockMicroReconstructor extends BlockContainer {
 
 	public BlockMicroReconstructor(int par1) {
 		super(par1, Material.iron);
-		setUnlocalizedName("FemtocraftMicroReconstructor");
+		setUnlocalizedName("microReconstructor");
 		setHardness(3.5f);
 		setStepSound(Block.soundStoneFootstep);
 		setCreativeTab(Femtocraft.femtocraftTab);
@@ -55,7 +55,7 @@ public class BlockMicroReconstructor extends BlockContainer {
 	 * Returns the ID of the items to drop on destruction.
 	 */
 	public int idDropped(int par1, Random par2Random, int par3) {
-		return Femtocraft.FemtocraftMicroReconstructor.blockID;
+		return Femtocraft.microReconstructor.blockID;
 	}
 
 	/**
@@ -356,6 +356,6 @@ public class BlockMicroReconstructor extends BlockContainer {
 	 * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
 	 */
 	public int idPicked(World par1World, int par2, int par3, int par4) {
-		return Femtocraft.FemtocraftMicroReconstructor.blockID;
+		return Femtocraft.microReconstructor.blockID;
 	}
 }

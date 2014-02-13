@@ -69,7 +69,7 @@ public class BlockMicroFurnace extends BlockContainer {
 	 * Returns the ID of the items to drop on destruction.
 	 */
 	public int idDropped(int par1, Random par2Random, int par3) {
-		return Femtocraft.FemtocraftMicroFurnaceUnlit.blockID;
+		return Femtocraft.microFurnaceUnlit.blockID;
 	}
 
 	/**
@@ -167,10 +167,10 @@ public class BlockMicroFurnace extends BlockContainer {
 
 		if (par0) {
 			par1World.setBlock(par2, par3, par4,
-					Femtocraft.FemtocraftMicroFurnaceLit.blockID);
+					Femtocraft.microFurnaceLit.blockID);
 		} else {
 			par1World.setBlock(par2, par3, par4,
-					Femtocraft.FemtocraftMicroFurnaceUnlit.blockID);
+					Femtocraft.microFurnaceUnlit.blockID);
 		}
 
 		keepFurnaceInventory = false;
@@ -384,6 +384,6 @@ public class BlockMicroFurnace extends BlockContainer {
 	 * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
 	 */
 	public int idPicked(World par1World, int par2, int par3, int par4) {
-		return Femtocraft.FemtocraftMicroFurnaceUnlit.blockID;
+		return Femtocraft.microFurnaceUnlit.blockID;
 	}
 }

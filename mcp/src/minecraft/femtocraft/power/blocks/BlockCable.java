@@ -28,7 +28,7 @@ public class BlockCable extends TileContainerPower {
 	public BlockCable(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		setUnlocalizedName("BlockCable");
+		setUnlocalizedName("blockCable");
 		setHardness(1.0f);
 		setStepSound(Block.soundStoneFootstep);
 		setBlockBounds();
@@ -62,7 +62,7 @@ public class BlockCable extends TileContainerPower {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
 		// this.field_94336_cN =
-		// par1IconRegister.func_94245_a("Femtocraft:BlockCable");
+		// par1IconRegister.func_94245_a("Femtocraft:blockCable");
 		// this.core =
 		// par1IconRegister.func_94245_a("Femtocraft:FemtopowerCableCore");
 		this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID

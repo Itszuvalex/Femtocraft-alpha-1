@@ -22,11 +22,11 @@ public class ProxyCommon {
 		GameRegistry.registerTileEntity(TileEntityBaseEntityMicroFurnace.class,
 				"FemtocraftMicroFurnace");
 		GameRegistry.registerTileEntity(TileEntityBaseEntityMicroDeconstructor.class,
-				"FemtocraftMicroDeconstructor");
+				"microDeconstructor");
 		GameRegistry.registerTileEntity(TileEntityBaseEntityMicroReconstructor.class,
-				"FemtocraftMicroReconstructor");
+				"microReconstructor");
 		GameRegistry.registerTileEntity(TileEntityBaseEntityCable.class,
-				"BlockCable");
+				"blockCable");
 		GameRegistry.registerTileEntity(TileEntityPowerMicroCube.class,
 				"FemtocraftMicroCube");
 		GameRegistry.registerTileEntity(TileEntityVacuumTube.class, "BlockVacuumTube");

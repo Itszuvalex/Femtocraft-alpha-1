@@ -35,7 +35,7 @@ public class BlockVacuumTube extends BlockContainer {
 
 	public BlockVacuumTube(int id) {
 		super(id, Material.iron);
-		setUnlocalizedName("FemtocraftVacuumTube");
+		setUnlocalizedName("vacuumTube");
 		setHardness(3.5f);
 		setStepSound(Block.soundMetalFootstep);
 		setCreativeTab(Femtocraft.femtocraftTab);
