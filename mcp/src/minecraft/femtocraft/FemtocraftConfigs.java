@@ -233,68 +233,68 @@ public class FemtocraftConfigs {
 
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-	boolean recipeCrystallite = true;
+	boolean recipeItemCrystallite = true;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-	boolean recipeMineralite = true;
+	boolean recipeItemMineralite = true;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-	boolean recipeMetallite = true;
+	boolean recipeItemMetallite = true;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-	boolean recipeFaunite = true;
+	boolean recipeItemFaunite = true;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-	boolean recipeElectrite = true;
+	boolean recipeItemElectrite = true;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-	boolean recipeFlorite = true;
+	boolean recipeItemFlorite = true;
 
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-	boolean recipeMicroCrystal = true;
+	boolean recipeItemMicroCrystal = true;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-	boolean recipeProteinChain = true;
+	boolean recipeItemProteinChain = true;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-	boolean recipeNerveCluster = true;
+	boolean recipeItemNerveCluster = true;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-	boolean recipeConductiveAlloy = true;
+	boolean recipeItemConductiveAlloy = true;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-	boolean recipeMetalComposite = true;
+	boolean recipeItemMetalComposite = true;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-	boolean recipeFibrousStrand = true;
+	boolean recipeItemFibrousStrand = true;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-	boolean recipeMineralLattice = true;
+	boolean recipeItemMineralLattice = true;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-	boolean recipeFungalSpores = true;
+	boolean recipeItemFungalSpores = true;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-	boolean recipeIonicChunk = true;
+	boolean recipeItemIonicChunk = true;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-	boolean recipeReplicatingMaterial = true;
+	boolean recipeItemReplicatingMaterial = true;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-	boolean recipeSpinyFilament = true;
+	boolean recipeItemSpinyFilament = true;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-	boolean recipeHardenedBulb = true;
+	boolean recipeItemHardenedBulb = true;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-	boolean recipeMorphicChannel = true;
+	boolean recipeItemMorphicChannel = true;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-	boolean recipeSynthesizedFiber = true;
+	boolean recipeItemSynthesizedFiber = true;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-	boolean recipeOrganometallicPlate = true;
+	boolean recipeItemOrganometallicPlate = true;
 
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)

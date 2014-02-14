@@ -8,7 +8,7 @@ import net.minecraftforge.fluids.Fluid;
 public class FluidMass extends Fluid {
 
 	public FluidMass() {
-		super("FluidMass");
+		super("Mass");
 		setUnlocalizedName("FluidMass");
 		setLuminosity(1);
 		setDensity(5000);
