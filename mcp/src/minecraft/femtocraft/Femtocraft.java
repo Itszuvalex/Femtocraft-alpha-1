@@ -300,10 +300,20 @@ public class Femtocraft {
 		GameRegistry.registerBlock(unidentifiedAlloy, "unidentifiedAlloy");
 		LanguageRegistry.addName(unidentifiedAlloy, "Unidentified Alloy");
 
-		blockMicroCable = new BlockMicroCable(FemtocraftConfigs.FemtopowerCableID,
+		blockMicroCable = new BlockMicroCable(FemtocraftConfigs.microCableID,
 				Material.rock);
-		GameRegistry.registerBlock(blockMicroCable, "FemtopowerCable");
-		LanguageRegistry.addName(blockMicroCable, "Femtopower Cable");
+		GameRegistry.registerBlock(blockMicroCable, "microCable");
+		LanguageRegistry.addName(blockMicroCable, "Micro-Cable");
+
+		blockNanoCable = new BlockNanoCable(FemtocraftConfigs.nanoCableID,
+				Material.rock);
+		GameRegistry.registerBlock(blockNanoCable, "nanoCable");
+		LanguageRegistry.addName(blockNanoCable, "Nano-Cable");
+
+		blockFemtoCable = new BlockFemtoCable(FemtocraftConfigs.femtoCableID,
+				Material.rock);
+		GameRegistry.registerBlock(blockFemtoCable, "femtoCable");
+		LanguageRegistry.addName(blockFemtoCable, "Femto-Cable");
 
 		generatorTest = new BlockGenerator(
 				FemtocraftConfigs.FemtopowerGeneratorTestID, Material.rock)
