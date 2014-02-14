@@ -77,8 +77,7 @@ public class BlockMicroCable extends BlockPowerContainer {
 		super.addCollisionBoxesToList(par1World, x, y, z, par5AxisAlignedBB, par6List, par7Entity);
 
 		TileEntity tile = par1World.getBlockTileEntity(x, y, z);
-		if (tile == null) return;
-		if (!(tile instanceof TileEntityMicroCable)) return;
+		if (tile == null || !(tile instanceof TileEntityMicroCable)) return;
 		TileEntityMicroCable cable = (TileEntityMicroCable) tile;
 
 		for (int i = 0; i < 6; ++i) {
@@ -90,7 +89,7 @@ public class BlockMicroCable extends BlockPowerContainer {
 		}
 	}
 
-	private AxisAlignedBB boundingBoxForDirection(ForgeDirection dir, int x, int y, int z) {
+	protected AxisAlignedBB boundingBoxForDirection(ForgeDirection dir, int x, int y, int z) {
 		double minX = 4.f / 16.d;
 		double minY = 4.f / 16.d;
 		double minZ = 4.f / 16.d;
