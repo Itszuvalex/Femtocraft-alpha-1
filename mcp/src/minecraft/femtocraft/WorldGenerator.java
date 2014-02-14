@@ -8,7 +8,7 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 
 import java.util.Random;
 
-public class FemtocraftWorldGenerator implements IWorldGenerator {
+public class WorldGenerator implements IWorldGenerator {
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,
@@ -30,7 +30,6 @@ public class FemtocraftWorldGenerator implements IWorldGenerator {
 
 	private void generateEnd(World world, Random random, int i, int j) {
 		// TODO Auto-generated method stub
-
 	}
 
 	private void generateSurface(World world, Random random, int i, int j) {
@@ -38,12 +37,12 @@ public class FemtocraftWorldGenerator implements IWorldGenerator {
 		if (FemtocraftConfigs.titaniumGen) {
 			// Titanium
 			for (int k = 0; k < 7; k++) {
-				int Xcoord = i + random.nextInt(16);
-				int Ycoord = random.nextInt(40);
-				int Zcoord = j + random.nextInt(16);
+				int xCoord = i + random.nextInt(16);
+				int yCoord = random.nextInt(40);
+				int zCoord = j + random.nextInt(16);
 
 				(new WorldGenMinable(Femtocraft.oreTitanium.blockID, 6))
-						.generate(world, random, Xcoord, Ycoord, Zcoord);
+						.generate(world, random, xCoord, yCoord, zCoord);
 
 			}
 		}
@@ -51,24 +50,24 @@ public class FemtocraftWorldGenerator implements IWorldGenerator {
 		// Platinum
 		if (FemtocraftConfigs.platinumGen) {
 			for (int k = 0; k < 5; k++) {
-				int Xcoord = i + random.nextInt(16);
-				int Ycoord = random.nextInt(30);
-				int Zcoord = j + random.nextInt(16);
+				int xCoord = i + random.nextInt(16);
+				int yCoord = random.nextInt(30);
+				int zCoord = j + random.nextInt(16);
 
 				(new WorldGenMinable(Femtocraft.orePlatinum.blockID, 5))
-						.generate(world, random, Xcoord, Ycoord, Zcoord);
+						.generate(world, random, xCoord, yCoord, zCoord);
 			}
 		}
 
 		if (FemtocraftConfigs.thoriumGen) {
 			// Thorium
 			for (int k = 0; k < 8; k++) {
-				int Xcoord = i + random.nextInt(16);
-				int Ycoord = random.nextInt(50);
-				int Zcoord = j + random.nextInt(16);
+				int xCoord = i + random.nextInt(16);
+				int yCoord = random.nextInt(50);
+				int zCoord = j + random.nextInt(16);
 
 				(new WorldGenMinable(Femtocraft.oreThorium.blockID, 6))
-						.generate(world, random, Xcoord, Ycoord, Zcoord);
+						.generate(world, random, xCoord, yCoord, zCoord);
 
 			}
 		}
@@ -76,12 +75,12 @@ public class FemtocraftWorldGenerator implements IWorldGenerator {
 		if (FemtocraftConfigs.fareniteGen) {
 			// Farenite
 			for (int k = 0; k < 10; k++) {
-				int Xcoord = i + random.nextInt(16);
-				int Ycoord = random.nextInt(40);
-				int Zcoord = j + random.nextInt(16);
+				int xCoord = i + random.nextInt(16);
+				int yCoord = random.nextInt(40);
+				int zCoord = j + random.nextInt(16);
 
 				(new WorldGenMinable(Femtocraft.oreFarenite.blockID, 6))
-						.generate(world, random, Xcoord, Ycoord, Zcoord);
+						.generate(world, random, xCoord, yCoord, zCoord);
 
 			}
 		}
@@ -91,13 +90,13 @@ public class FemtocraftWorldGenerator implements IWorldGenerator {
 		if (FemtocraftConfigs.maleniteGen) {
 			// Due to spread over all of Nether's height
 			for (int k = 0; k < 14; ++k) {
-				int Xcoord = i + random.nextInt(16);
-				int Ycoord = random.nextInt(108) + 10;
-				int Zcoord = j + random.nextInt(16);
+				int xCoord = i + random.nextInt(16);
+				int yCoord = random.nextInt(108) + 10;
+				int zCoord = j + random.nextInt(16);
 
 				(new WorldGenMinable(Femtocraft.oreMalenite.blockID, 10,
 						Block.netherrack.blockID)).generate(world, random,
-						Xcoord, Ycoord, Zcoord);
+						xCoord, yCoord, zCoord);
 			}
 		}
 

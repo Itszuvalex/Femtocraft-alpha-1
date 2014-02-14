@@ -237,7 +237,7 @@ public class Femtocraft {
 		proxy.registerRendering();
 
 		if (FemtocraftConfigs.worldGen) {
-			GameRegistry.registerWorldGenerator(new FemtocraftWorldGenerator());
+			GameRegistry.registerWorldGenerator(new WorldGenerator());
 		}
 
 		// Change the creative tab name
