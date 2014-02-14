@@ -1,13 +1,16 @@
 package femtocraft.power.tiles;
 
-import femtocraft.Femtocraft;
-import femtocraft.FemtocraftUtils;
-import femtocraft.api.PowerContainer;
-import femtocraft.managers.research.EnumTechLevel;
+import java.util.Arrays;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
-
-import java.util.Arrays;
+import femtocraft.Femtocraft;
+import femtocraft.FemtocraftUtils;
+import femtocraft.api.IInterfaceDevice;
+import femtocraft.api.PowerContainer;
+import femtocraft.managers.research.EnumTechLevel;
 
 public class TileEntityPowerMicroCube extends TileEntityPowerBase {
 	public boolean[] outputs;
@@ -28,10 +31,23 @@ public class TileEntityPowerMicroCube extends TileEntityPowerBase {
 		return new PowerContainer(ENUM_TECH_LEVEL, maxStorage);
 	}
 
-	public void onSideActivate(ForgeDirection side) {
-		int i = FemtocraftUtils.indexOfForgeDirection(side);
-		outputs[i] = !outputs[i];
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	@Override
+	public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
+		ItemStack item = par5EntityPlayer.getCurrentEquippedItem();
+		if (item != null && (item.getItem() instanceof IInterfaceDevice)) {
+			ForgeDirection dir = ForgeDirection.getOrientation(side);
+			if (par5EntityPlayer.isSneaking()) {
+				dir = dir.getOpposite();
+			}
+
+			int s = FemtocraftUtils.indexOfForgeDirection(dir);
+			outputs[s] = !outputs[s];
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+
+			return true;
+		}
+
+		return super.onSideActivate(par5EntityPlayer, side);
 	}
 
 	// @Override

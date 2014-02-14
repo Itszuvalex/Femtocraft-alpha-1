@@ -62,30 +62,6 @@ public class BlockMicroCube extends TileContainerPower {
 	// return ProxyClient.FemtopowerMicroCubeRenderID;
 	// }
 	//
-	@Override
-	public boolean onBlockActivated(World par1World, int par2, int par3,
-			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
-			float par8, float par9) {
-
-		ItemStack item = par5EntityPlayer.getCurrentEquippedItem();
-		if (item != null && item.getItem() instanceof IInterfaceDevice) {
-
-			TileEntityPowerMicroCube tile = (TileEntityPowerMicroCube) par1World
-					.getBlockTileEntity(par2, par3, par4);
-			if (tile != null && !par1World.isRemote) {
-				ForgeDirection dir = ForgeDirection.getOrientation(par6);
-
-				if (par5EntityPlayer.isSneaking()) {
-					dir = dir.getOpposite();
-				}
-
-				tile.onSideActivate(dir);
-			}
-			return true;
-		}
-		return super.onBlockActivated(par1World, par2, par3, par4,
-				par5EntityPlayer, par6, par7, par8, par9);
-	}
 
 	@Override
 	@SideOnly(Side.CLIENT)

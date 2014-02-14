@@ -1,8 +1,7 @@
 package femtocraft.core.blocks;
 
-import femtocraft.Femtocraft;
-import femtocraft.core.items.CoreItemBlock;
-import femtocraft.core.tiles.TileEntityBase;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -17,8 +16,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
-import java.util.Random;
+import femtocraft.core.items.CoreItemBlock;
+import femtocraft.core.tiles.TileEntityBase;
 
 public class TileContainer extends BlockContainer {
 
@@ -39,25 +38,10 @@ public class TileContainer extends BlockContainer {
 		if (te instanceof TileEntityBase) {
 			TileEntityBase tile = (TileEntityBase) te;
 
-			if (hasGui() && tile.isUseableByPlayer(par5EntityPlayer)) {
-				par5EntityPlayer.openGui(getMod(), getGuiID(), par1World, par2,
-						par3, par4);
-			}
+			return tile.onSideActivate(par5EntityPlayer, par6);
 		}
 		return super.onBlockActivated(par1World, par2, par3, par4,
 				par5EntityPlayer, par6, par7, par8, par9);
-	}
-
-	public boolean hasGui() {
-		return false;
-	}
-
-	public int getGuiID() {
-		return -1;
-	}
-
-	public Object getMod() {
-		return Femtocraft.instance;
 	}
 
 	@Override
@@ -67,7 +51,7 @@ public class TileContainer extends BlockContainer {
 		if (!par1World.isRemote) {
 			TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
 			if (te instanceof TileEntityBase) {
-                if (par5EntityLivingBase == null)
+				if (par5EntityLivingBase == null)
 					return;
 				if (par5EntityLivingBase instanceof EntityPlayerMP) {
 					Item item = par6ItemStack.getItem();
@@ -124,16 +108,22 @@ public class TileContainer extends BlockContainer {
 		return super.removeBlockByPlayer(world, player, x, y, z);
 	}
 
-    private boolean canPlayerRemove(EntityPlayer player, TileEntityBase tile) {
-        return player != null && (tile.getOwner().equals(player.username) || MinecraftServer.getServer().getConfigurationManager().isPlayerOpped(player.username) || player.capabilities.isCreativeMode);
-    }
+	private boolean canPlayerRemove(EntityPlayer player, TileEntityBase tile) {
+		return player != null
+				&& (tile.getOwner().equals(player.username)
+						|| MinecraftServer.getServer()
+								.getConfigurationManager()
+								.isPlayerOpped(player.username) || player.capabilities.isCreativeMode);
+	}
 
 	@Override
 	public boolean canEntityDestroy(World world, int x, int y, int z,
 			Entity entity) {
 		TileEntity te = world.getBlockTileEntity(x, y, z);
-        return te instanceof TileEntityBase && entity instanceof EntityPlayer && canPlayerRemove((EntityPlayer) entity, (TileEntityBase) te) && super.canEntityDestroy(world, x, y, z, entity);
-    }
+		return te instanceof TileEntityBase && entity instanceof EntityPlayer
+				&& canPlayerRemove((EntityPlayer) entity, (TileEntityBase) te)
+				&& super.canEntityDestroy(world, x, y, z, entity);
+	}
 
 	@Override
 	public int quantityDropped(Random par1Random) {

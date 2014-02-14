@@ -1,6 +1,7 @@
 package femtocraft.transport.liquids.tiles;
 
 import femtocraft.api.ISuctionPipe;
+import femtocraft.core.tiles.TileEntityBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
@@ -8,7 +9,8 @@ import net.minecraftforge.fluids.*;
 
 import java.util.Arrays;
 
-public class TileEntitySuctionPipe extends TileEntity implements ISuctionPipe {
+public class TileEntitySuctionPipe extends TileEntityBase implements
+		ISuctionPipe {
 	private FluidTank tank;
 	public boolean[] tankconnections;
 	public boolean[] pipeconnections;
@@ -23,7 +25,7 @@ public class TileEntitySuctionPipe extends TileEntity implements ISuctionPipe {
 	 * net.minecraftforge.liquids.ITankContainer#fill(net.minecraftforge.common
 	 * .ForgeDirection, net.minecraftforge.liquids.LiquidStack, boolean)
 	 */
-	TileEntitySuctionPipe() {
+	public TileEntitySuctionPipe() {
 		tank = new FluidTank(2000);
 		neighborCapacity = new int[6];
 		Arrays.fill(neighborCapacity, 0);
@@ -80,17 +82,11 @@ public class TileEntitySuctionPipe extends TileEntity implements ISuctionPipe {
 		return new FluidTankInfo[] { tank.getInfo() };
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see net.minecraft.tileentity.tiles#updateEntity()
-	 */
 	@Override
-	public void updateEntity() {
-		super.updateEntity();
+	public void femtocraftServerUpdate() {
+		super.femtocraftServerUpdate();
 
-		if (this.worldObj.isRemote)
-			return;
+		FluidStack pre = tank.getFluid();
 
 		int[] pressures = new int[6];
 		Arrays.fill(pressures, 0);
@@ -103,6 +99,17 @@ public class TileEntitySuctionPipe extends TileEntity implements ISuctionPipe {
 		distributeLiquid(pressures, neighbors);
 		if (!output)
 			requestLiquid(pressures, neighbors);
+
+		FluidStack post = tank.getFluid();
+
+		// Pass description packet to clients - fluid has either emptied, or
+		// filled
+		if(pre == null && post == null) return;
+		
+		if (((pre == null && post != null) || (pre != null && post == null))
+				|| ((pre.amount == 0 && post.amount > 0) || (pre.amount > 0 && post.amount == 0))) {
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
 	}
 
 	private void checkConnections(IFluidHandler[] neighbors) {
@@ -259,7 +266,7 @@ public class TileEntitySuctionPipe extends TileEntity implements ISuctionPipe {
 		}
 	}
 
-	FluidTankInfo chooseTank(FluidTankInfo[] infoArray) {
+	private FluidTankInfo chooseTank(FluidTankInfo[] infoArray) {
 		if (infoArray.length == 0)
 			return null;
 
@@ -292,5 +299,22 @@ public class TileEntitySuctionPipe extends TileEntity implements ISuctionPipe {
 	@Override
 	public int getPressure() {
 		return pressure;
+	}
+
+	@Override
+	public void handleDescriptionNBT(NBTTagCompound compound) {
+		super.handleDescriptionNBT(compound);
+		tank.setFluid(FluidStack.loadFluidStackFromNBT(compound
+				.getCompoundTag("fluid")));
+		if (worldObj != null)
+			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+	}
+
+	@Override
+	public void saveToDescriptionCompound(NBTTagCompound compound) {
+		super.saveToDescriptionCompound(compound);
+		NBTTagCompound fluid = new NBTTagCompound();
+		tank.getFluid().writeToNBT(fluid);
+		compound.setTag("fluid", fluid);
 	}
 }
