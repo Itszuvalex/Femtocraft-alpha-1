@@ -2,8 +2,8 @@ package femtocraft;
 
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
-import femtocraft.industry.tiles.TileEntityVacuumTube;
 import femtocraft.player.PropertiesNanite;
+import femtocraft.transport.items.tiles.TileEntityVacuumTube;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;

@@ -4,8 +4,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
-import femtocraft.industry.tiles.TileEntityVacuumTube;
 import femtocraft.power.tiles.*;
+import femtocraft.transport.items.tiles.TileEntityVacuumTube;
 
 public class ProxyCommon {
 	public void registerRendering() {

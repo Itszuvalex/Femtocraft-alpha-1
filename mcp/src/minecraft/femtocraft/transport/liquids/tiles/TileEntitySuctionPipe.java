@@ -1,4 +1,4 @@
-package femtocraft.transport.liquids;
+package femtocraft.transport.liquids.tiles;
 
 import femtocraft.api.ISuctionPipe;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class TileEntitySuctionPipe extends TileEntity implements ISuctionPipe {
 	private FluidTank tank;
 	public boolean[] tankconnections;
-	private boolean[] pipeconnections;
+	public boolean[] pipeconnections;
 	private int[] neighborCapacity;
 	private boolean output;
 	private int pressure;

@@ -1,13 +1,13 @@
-package femtocraft.industry.render;
+package femtocraft.transport.items.render;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import femtocraft.industry.tiles.TileEntityVacuumTube;
-import femtocraft.industry.blocks.BlockVacuumTube;
 import femtocraft.proxy.ProxyClient;
 import femtocraft.render.RenderModel;
 import femtocraft.render.RenderPoint;
 import femtocraft.render.RenderQuad;
 import femtocraft.render.RenderUtils;
+import femtocraft.transport.items.blocks.BlockVacuumTube;
+import femtocraft.transport.items.tiles.TileEntityVacuumTube;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;

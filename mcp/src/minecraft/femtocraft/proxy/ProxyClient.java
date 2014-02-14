@@ -2,11 +2,11 @@ package femtocraft.proxy;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import femtocraft.consumables.processing.blocks.RenderCuttingBoard;
-import femtocraft.industry.render.RenderVacuumTube;
 import femtocraft.power.render.RenderCable;
 import femtocraft.power.render.RenderChargingBase;
 import femtocraft.power.render.RenderChargingCoil;
 import femtocraft.render.RenderSimpleMachine;
+import femtocraft.transport.items.render.RenderVacuumTube;
 
 public class ProxyClient extends ProxyCommon {
 	public static int FemtopowerCableRenderID;

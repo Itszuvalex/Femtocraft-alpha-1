@@ -24,11 +24,9 @@ import femtocraft.core.liquids.FluidMass;
 import femtocraft.core.ore.*;
 import femtocraft.consumables.items.ItemTomato;
 import femtocraft.consumables.farming.items.ItemSeedTomato;
-import femtocraft.industry.tiles.TileEntityVacuumTube;
 import femtocraft.industry.blocks.BlockMicroDeconstructor;
 import femtocraft.industry.blocks.BlockMicroFurnace;
 import femtocraft.industry.blocks.BlockMicroReconstructor;
-import femtocraft.industry.blocks.BlockVacuumTube;
 import femtocraft.industry.items.ItemPaperSchematic;
 import femtocraft.managers.ManagerRecipe;
 import femtocraft.managers.research.ManagerResearch;
@@ -38,6 +36,8 @@ import femtocraft.power.items.ItemBlockMicroCube;
 import femtocraft.power.items.ItemSpoolGold;
 import femtocraft.proxy.ProxyClient;
 import femtocraft.proxy.ProxyCommon;
+import femtocraft.transport.items.blocks.BlockVacuumTube;
+import femtocraft.transport.items.tiles.TileEntityVacuumTube;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -179,7 +179,7 @@ public class Femtocraft {
         Femtocraft.proxy.registerTickHandlers();
 
         NetworkRegistry.instance().registerGuiHandler(this,
-                new GuiHandlerFemtocraft());
+                new FemtocraftGuiHandler());
         MinecraftForge.EVENT_BUS.register(new FemtocraftEventHookContainer());
     }
 

@@ -1,11 +1,11 @@
-package femtocraft.industry.blocks;
+package femtocraft.transport.items.blocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.api.IInterfaceDevice;
-import femtocraft.industry.tiles.TileEntityVacuumTube;
 import femtocraft.proxy.ProxyClient;
+import femtocraft.transport.items.tiles.TileEntityVacuumTube;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;

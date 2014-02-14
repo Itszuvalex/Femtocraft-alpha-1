@@ -14,7 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class GuiHandlerFemtocraft implements IGuiHandler {
+public class FemtocraftGuiHandler implements IGuiHandler {
 
 	// Can switch on type of tile entity, or can alternatively switch on type
 	// ID.
