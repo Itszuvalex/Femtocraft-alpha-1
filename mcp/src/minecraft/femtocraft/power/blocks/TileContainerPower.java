@@ -48,7 +48,6 @@ public class TileContainerPower extends TileContainer {
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
 			EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
-		// TODO Auto-generated method stub
 		super.onBlockPlacedBy(par1World, par2, par3, par4,
 				par5EntityLivingBase, par6ItemStack);
 
@@ -69,7 +68,6 @@ public class TileContainerPower extends TileContainer {
 	@Override
 	public void onPostBlockPlaced(World par1World, int par2, int par3,
 			int par4, int par5) {
-		// TODO Auto-generated method stub
 		super.onPostBlockPlaced(par1World, par2, par3, par4, par5);
 
 		par1World.notifyBlocksOfNeighborChange(par2, par3, par4,
@@ -91,7 +89,6 @@ public class TileContainerPower extends TileContainer {
 	@Override
 	public int onBlockPlaced(World par1World, int par2, int par3, int par4,
 			int par5, float par6, float par7, float par8, int par9) {
-		// TODO Auto-generated method stub
 		int val = super.onBlockPlaced(par1World, par2, par3, par4, par5, par6,
 				par7, par8, par9);
 		TileEntityPowerBase container = (TileEntityPowerBase) par1World

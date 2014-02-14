@@ -23,7 +23,6 @@ public class ItemTomato extends ItemFood {
 	 */
 	@Override
 	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
-		// TODO Auto-generated method stub
 		return super.getMaxItemUseDuration(par1ItemStack);
 	}
 
@@ -34,7 +33,6 @@ public class ItemTomato extends ItemFood {
 	 */
 	@Override
 	public int getHealAmount() {
-		// TODO Auto-generated method stub
 		return super.getHealAmount();
 	}
 
@@ -45,7 +43,6 @@ public class ItemTomato extends ItemFood {
 	 */
 	@Override
 	public float getSaturationModifier() {
-		// TODO Auto-generated method stub
 		return super.getSaturationModifier();
 	}
 
