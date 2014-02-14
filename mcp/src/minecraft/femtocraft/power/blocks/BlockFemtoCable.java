@@ -27,18 +27,23 @@ public class BlockFemtoCable extends BlockMicroCable {
 	}
 
 	@Override
+	public int getRenderType() {
+		return ProxyClient.femtoCableRenderID;
+	}
+
+	@Override
 	public TileEntity createNewTileEntity(World world) {
 		return new TileEntityFemtoCable();
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "FemtopowerCableCoil");
+		this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "femtoCableCoil");
 		this.coreBorder = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" +
-				"FemtopowerCableCoreBorder");
-		this.connector = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "FemtopowerCableConnector");
-		this.coil = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "FemtopowerCableCoil");
-		this.coilEdge = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "FemtopowerCableCoilEdge");
-		this.border = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "FemtopowerCableBorder");
+				"femtoCableCoreBorder");
+		this.connector = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "femtoCableConnector");
+		this.coil = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "femtoCableCoil");
+		this.coilEdge = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "femtoCableCoilEdge");
+		this.border = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "femtoCableBorder");
 	}
 }

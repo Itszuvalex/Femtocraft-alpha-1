@@ -56,7 +56,7 @@ public class BlockMicroCable extends BlockPowerContainer {
 
 	@Override
 	public int getRenderType() {
-		return ProxyClient.FemtopowerCableRenderID;
+		return ProxyClient.microCableRenderID;
 	}
 
 	@SideOnly(Side.CLIENT)
