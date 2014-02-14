@@ -2,6 +2,7 @@ package femtocraft;
 
 import java.util.logging.Logger;
 
+import femtocraft.power.blocks.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -88,12 +89,6 @@ import femtocraft.industry.items.ItemPaperSchematic;
 import femtocraft.managers.ManagerRecipe;
 import femtocraft.managers.research.ManagerResearch;
 import femtocraft.player.PropertiesNanite;
-import femtocraft.power.blocks.BlockBaseMicroCharging;
-import femtocraft.power.blocks.BlockCable;
-import femtocraft.power.blocks.BlockCoilMicroCharging;
-import femtocraft.power.blocks.BlockConsumer;
-import femtocraft.power.blocks.BlockGenerator;
-import femtocraft.power.blocks.BlockMicroCube;
 import femtocraft.power.items.ItemBlockMicroCube;
 import femtocraft.power.items.ItemSpoolGold;
 import femtocraft.proxy.ProxyClient;
@@ -133,7 +128,6 @@ public class Femtocraft {
 	public static Block nanoStone;
 	public static Block femtoStone;
 	public static Block unidentifiedAlloy;
-	public static BlockCable blockCable;
 	public static Block generatorTest;
 	public static Block consumerTest;
 	public static Block microFurnaceUnlit;
@@ -145,6 +139,11 @@ public class Femtocraft {
 	public static Block suctionPipe;
 	public static Block microChargingBase;
 	public static Block microChargingCoil;
+
+	// cables
+	public static Block blockMicroCable;
+	public static Block blockNanoCable;
+	public static Block blockFemtoCable;
 
 	// liquids
 	public static Fluid mass;
@@ -301,10 +300,10 @@ public class Femtocraft {
 		GameRegistry.registerBlock(unidentifiedAlloy, "unidentifiedAlloy");
 		LanguageRegistry.addName(unidentifiedAlloy, "Unidentified Alloy");
 
-		blockCable = new BlockCable(FemtocraftConfigs.FemtopowerCableID,
+		blockMicroCable = new BlockMicroCable(FemtocraftConfigs.FemtopowerCableID,
 				Material.rock);
-		GameRegistry.registerBlock(blockCable, "FemtopowerCable");
-		LanguageRegistry.addName(blockCable, "Femtopower Cable");
+		GameRegistry.registerBlock(blockMicroCable, "FemtopowerCable");
+		LanguageRegistry.addName(blockMicroCable, "Femtopower Cable");
 
 		generatorTest = new BlockGenerator(
 				FemtocraftConfigs.FemtopowerGeneratorTestID, Material.rock)
