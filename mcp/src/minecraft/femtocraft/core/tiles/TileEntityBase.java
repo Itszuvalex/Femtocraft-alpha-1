@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -36,7 +37,7 @@ public class TileEntityBase extends TileEntity {
 						(double) this.zCoord + 0.5D) <= 64.0D;
 		boolean isowner = owner.isEmpty()
 				|| (owner.equals(par1EntityPlayer.username));
-		return inrange && isowner;
+		return inrange && (isowner || (MinecraftServer.getServer().getConfigurationManager().isPlayerOpped(par1EntityPlayer.username) || par1EntityPlayer.capabilities.isCreativeMode));
 	}
 
 	@Override

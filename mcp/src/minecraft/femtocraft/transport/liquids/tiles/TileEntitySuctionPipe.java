@@ -1,13 +1,20 @@
 package femtocraft.transport.liquids.tiles;
 
-import femtocraft.api.ISuctionPipe;
-import femtocraft.core.tiles.TileEntityBase;
+import java.util.Arrays;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.*;
-
-import java.util.Arrays;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidHandler;
+import femtocraft.api.IInterfaceDevice;
+import femtocraft.api.ISuctionPipe;
+import femtocraft.core.tiles.TileEntityBase;
 
 public class TileEntitySuctionPipe extends TileEntityBase implements
 		ISuctionPipe {
@@ -104,8 +111,9 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 
 		// Pass description packet to clients - fluid has either emptied, or
 		// filled
-		if(pre == null && post == null) return;
-		
+		if (pre == null && post == null)
+			return;
+
 		if (((pre == null && post != null) || (pre != null && post == null))
 				|| ((pre.amount == 0 && post.amount > 0) || (pre.amount > 0 && post.amount == 0))) {
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -306,6 +314,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 		super.handleDescriptionNBT(compound);
 		tank.setFluid(FluidStack.loadFluidStackFromNBT(compound
 				.getCompoundTag("fluid")));
+		output = compound.getBoolean("output");
 		if (worldObj != null)
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 	}
@@ -316,5 +325,20 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 		NBTTagCompound fluid = new NBTTagCompound();
 		tank.getFluid().writeToNBT(fluid);
 		compound.setTag("fluid", fluid);
+		compound.setBoolean("output", output);
+	}
+
+	@Override
+	public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
+		if (!super.onSideActivate(par5EntityPlayer, side))
+			return false;
+
+		ItemStack item = par5EntityPlayer.getHeldItem();
+		if (item != null && item.getItem() instanceof IInterfaceDevice) {
+			output = !output;
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			return true;
+		}
+		return false;
 	}
 }

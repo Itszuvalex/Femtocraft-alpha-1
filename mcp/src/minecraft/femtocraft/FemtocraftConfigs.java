@@ -1,11 +1,11 @@
 package femtocraft;
 
-import femtocraft.industry.items.ItemAssemblySchematic;
-import net.minecraftforge.common.Configuration;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
+
+import net.minecraftforge.common.Configuration;
+import femtocraft.industry.items.ItemAssemblySchematic;
 
 public class FemtocraftConfigs {
 	@Retention(RetentionPolicy.RUNTIME)
@@ -70,6 +70,8 @@ public class FemtocraftConfigs {
 	int FemtocraftMicroReconstructorID = 376;
 	public static @CfgId(block = true)
 	int FemtocraftVacuumTubeID = 380;
+	public static @CfgId(block = true)
+	int FemtocraftSuctionPipeID = 381;
 
 	public static @CfgId(block = true)
 	int FemtopowerMicroCubeID = 390;

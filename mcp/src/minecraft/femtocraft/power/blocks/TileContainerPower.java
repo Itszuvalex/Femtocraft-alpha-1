@@ -126,6 +126,6 @@ public class TileContainerPower extends TileContainer {
 			par5EntityPlayer.addChatMessage(String.valueOf(container
 					.getCurrentPower()));
 
-		return true;
+		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
 	}
 }

@@ -1,11 +1,14 @@
 package femtocraft.power.tiles;
 
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.ForgeDirection;
 import femtocraft.api.IChargingBase;
 import femtocraft.api.IChargingCoil;
 import femtocraft.managers.research.EnumTechLevel;
-import net.minecraft.block.Block;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityPowerMicroChargingBase extends TileEntityPowerProducer {
 	public int numCoils;
@@ -69,6 +72,21 @@ public class TileEntityPowerMicroChargingBase extends TileEntityPowerProducer {
 	@Override
 	public boolean canConnect(ForgeDirection from) {
 		return !(from == ForgeDirection.UP);
+	}
+
+	@Override
+	public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
+		if (!isUseableByPlayer(par5EntityPlayer))
+			return false;
+
+		ItemStack item = par5EntityPlayer.getHeldItem();
+		if (item != null
+				&& (item.getItem() instanceof ItemBlock)
+				&& Block.blocksList[((ItemBlock) item.getItem()).getBlockID()] instanceof IChargingCoil) {
+			return true;
+		}
+
+		return super.onSideActivate(par5EntityPlayer, side);
 	}
 
 }

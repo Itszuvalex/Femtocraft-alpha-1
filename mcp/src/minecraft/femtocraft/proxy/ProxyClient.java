@@ -7,6 +7,7 @@ import femtocraft.power.render.RenderChargingBase;
 import femtocraft.power.render.RenderChargingCoil;
 import femtocraft.render.RenderSimpleMachine;
 import femtocraft.transport.items.render.RenderVacuumTube;
+import femtocraft.transport.liquids.render.RenderSuctionPipe;
 
 public class ProxyClient extends ProxyCommon {
 	public static int FemtopowerCableRenderID;
@@ -14,6 +15,7 @@ public class ProxyClient extends ProxyCommon {
 	public static int FemtocraftVacuumTubeRenderID;
 	public static int FemtocraftChargingBaseRenderID;
 	public static int FemtocraftChargingCoilRenderID;
+	public static int FemtocraftSuctionPipeRenderID;
 
 	public static int CuttingBoardRenderPass;
 	public static int cuttingBoardRenderType;
@@ -32,7 +34,7 @@ public class ProxyClient extends ProxyCommon {
 		// registerBlockHandler
 	}
 
-    @Override
+	@Override
 	public void registerBlockRenderers() {
 		super.registerBlockRenderers();
 
@@ -64,6 +66,11 @@ public class ProxyClient extends ProxyCommon {
 				.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(FemtocraftChargingCoilRenderID,
 				new RenderChargingCoil());
+
+		FemtocraftSuctionPipeRenderID = RenderingRegistry
+				.getNextAvailableRenderId();
+		RenderingRegistry.registerBlockHandler(FemtocraftSuctionPipeRenderID,
+				new RenderSuctionPipe());
 
 	}
 }

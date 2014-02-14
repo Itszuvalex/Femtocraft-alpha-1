@@ -46,8 +46,13 @@ public class BlockCoilMicroCharging extends Block implements IChargingCoil {
 	public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
 		Block block = Block.blocksList[par1World.getBlockId(par2, par3 - 1,
 				par4)];
-        return block != null && ((block instanceof IChargingCoil) || (block instanceof IChargingBase)) && par1World.isAirBlock(par2 - 1, par3, par4) && par1World.isAirBlock(par2 + 1, par3, par4) && par1World.isAirBlock(par2, par3, par4 - 1) && par1World.isAirBlock(par2, par3, par4 + 1);
-    }
+		return block != null
+				&& ((block instanceof IChargingCoil) || (block instanceof IChargingBase))
+				&& par1World.isAirBlock(par2 - 1, par3, par4)
+				&& par1World.isAirBlock(par2 + 1, par3, par4)
+				&& par1World.isAirBlock(par2, par3, par4 - 1)
+				&& par1World.isAirBlock(par2, par3, par4 + 1);
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)

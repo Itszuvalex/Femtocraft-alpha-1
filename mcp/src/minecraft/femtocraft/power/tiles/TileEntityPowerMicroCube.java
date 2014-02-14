@@ -33,8 +33,12 @@ public class TileEntityPowerMicroCube extends TileEntityPowerBase {
 
 	@Override
 	public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
+		
+		
 		ItemStack item = par5EntityPlayer.getCurrentEquippedItem();
 		if (item != null && (item.getItem() instanceof IInterfaceDevice)) {
+			if(!isUseableByPlayer(par5EntityPlayer)) return false;
+			
 			ForgeDirection dir = ForgeDirection.getOrientation(side);
 			if (par5EntityPlayer.isSneaking()) {
 				dir = dir.getOpposite();
