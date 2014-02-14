@@ -1,13 +1,16 @@
 package femtocraft.transport.liquids.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.core.blocks.TileContainer;
 import femtocraft.proxy.ProxyClient;
+import femtocraft.transport.liquids.tiles.TileEntitySuctionPipe;
 
 public class BlockSuctionPipe extends TileContainer {
 	public Icon center;
@@ -44,6 +47,11 @@ public class BlockSuctionPipe extends TileContainer {
 				+ ":" + "BlockSuctionPipe_connector");
 		connector_tank = par1IconRegister.registerIcon(Femtocraft.ID
 				.toLowerCase() + ":" + "BlockSuctionPipe_connector_tank");
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World world) {
+		return new TileEntitySuctionPipe();
 	}
 
 }

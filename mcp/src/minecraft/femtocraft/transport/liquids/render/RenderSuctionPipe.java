@@ -63,8 +63,7 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
 			return false;
 		if (!(tile instanceof TileEntitySuctionPipe))
 			return false;
-		
-		
+
 		TileEntitySuctionPipe pipe = (TileEntitySuctionPipe) tile;
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.setBrightness(block.getMixedBrightnessForBlock(
@@ -73,7 +72,6 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
 
 		renderPipe((BlockSuctionPipe) block, x, y, z, pipe.pipeconnections,
 				pipe.tankconnections);
-		tessellator.draw();
 
 		return true;
 	}
@@ -96,22 +94,22 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
 
 		RenderQuad top = RenderUtils.makeTopFace(min, max, min, max, max,
 				pipe.center, pipe.center.getMinU(), pipe.center.getMaxU(),
-				pipe.center.getMinV(), pipe.center.getMaxU());
+				pipe.center.getMinV(), pipe.center.getMaxV());
 		RenderQuad bot = RenderUtils.makeBottomFace(min, max, min, max, min,
 				pipe.center, pipe.center.getMinU(), pipe.center.getMaxU(),
-				pipe.center.getMinV(), pipe.center.getMaxU());
+				pipe.center.getMinV(), pipe.center.getMaxV());
 		RenderQuad north = RenderUtils.makeNorthFace(min, max, min, max, min,
 				pipe.center, pipe.center.getMinU(), pipe.center.getMaxU(),
-				pipe.center.getMinV(), pipe.center.getMaxU());
+				pipe.center.getMinV(), pipe.center.getMaxV());
 		RenderQuad south = RenderUtils.makeSouthFace(min, max, min, max, max,
 				pipe.center, pipe.center.getMinU(), pipe.center.getMaxU(),
-				pipe.center.getMinV(), pipe.center.getMaxU());
+				pipe.center.getMinV(), pipe.center.getMaxV());
 		RenderQuad east = RenderUtils.makeEastFace(min, max, min, max, max,
 				pipe.center, pipe.center.getMinU(), pipe.center.getMaxU(),
-				pipe.center.getMinV(), pipe.center.getMaxU());
+				pipe.center.getMinV(), pipe.center.getMaxV());
 		RenderQuad west = RenderUtils.makeWestFace(min, max, min, max, min,
 				pipe.center, pipe.center.getMinU(), pipe.center.getMaxU(),
-				pipe.center.getMinV(), pipe.center.getMaxU());
+				pipe.center.getMinV(), pipe.center.getMaxV());
 
 		center.addQuad(top);
 		center.addQuad(bot);

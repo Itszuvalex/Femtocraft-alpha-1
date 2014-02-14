@@ -35,6 +35,8 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 	public TileEntitySuctionPipe() {
 		tank = new FluidTank(2000);
 		neighborCapacity = new int[6];
+		tankconnections = new boolean[6];
+		pipeconnections = new boolean[6];
 		Arrays.fill(neighborCapacity, 0);
 		Arrays.fill(tankconnections, false);
 		Arrays.fill(pipeconnections, false);
@@ -192,8 +194,8 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 	 *         remaining in tank.
 	 */
 	private int getTankPressure(FluidTankInfo tank, boolean output) {
-		return output ? -(tank.capacity - tank.fluid.amount)
-				: tank.fluid.amount;
+		int amount = tank.fluid == null ? 0 : tank.fluid.amount;
+		return output ? -(tank.capacity - amount) : amount;
 	}
 
 	private void distributeLiquid(int[] pressures, IFluidHandler[] neighbors) {
@@ -323,7 +325,8 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 	public void saveToDescriptionCompound(NBTTagCompound compound) {
 		super.saveToDescriptionCompound(compound);
 		NBTTagCompound fluid = new NBTTagCompound();
-		tank.getFluid().writeToNBT(fluid);
+		if (tank.getFluid() != null)
+			tank.getFluid().writeToNBT(fluid);
 		compound.setTag("fluid", fluid);
 		compound.setBoolean("output", output);
 	}
