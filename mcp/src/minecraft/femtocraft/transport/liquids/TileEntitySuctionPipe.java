@@ -8,7 +8,7 @@ import net.minecraftforge.fluids.*;
 
 import java.util.Arrays;
 
-public class SuctionPipeTile extends TileEntity implements ISuctionPipe {
+public class TileEntitySuctionPipe extends TileEntity implements ISuctionPipe {
 	private FluidTank tank;
 	public boolean[] tankconnections;
 	private boolean[] pipeconnections;
@@ -23,7 +23,7 @@ public class SuctionPipeTile extends TileEntity implements ISuctionPipe {
 	 * net.minecraftforge.liquids.ITankContainer#fill(net.minecraftforge.common
 	 * .ForgeDirection, net.minecraftforge.liquids.LiquidStack, boolean)
 	 */
-	SuctionPipeTile() {
+	TileEntitySuctionPipe() {
 		tank = new FluidTank(2000);
 		neighborCapacity = new int[6];
 		Arrays.fill(neighborCapacity, 0);

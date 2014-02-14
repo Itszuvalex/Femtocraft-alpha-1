@@ -2,7 +2,7 @@ package femtocraft.core.multiblock;
 
 /**
  * 
- * @author Chris
+ * @author Itszuvalex
  * @description Interface for MultiBlock components for easy implementation.
  */
 public interface IMultiBlockComponent {
@@ -20,7 +20,7 @@ public interface IMultiBlockComponent {
 	 * @return True if correctly forms, given controller block at x,y,z.
 	 */
 	boolean formMultiBlock(int x, int y, int z);
-	
+
 	/**
 	 * 
 	 * @param x
