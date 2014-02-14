@@ -24,6 +24,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 	private int[] neighborCapacity;
 	private boolean output;
 	private int pressure;
+	private final float TRANSFER_RATIO = .1f;
 
 	/*
 	 * (non-Javadoc)
@@ -150,7 +151,6 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 	}
 
 	private void calculatePressure(int[] pressures, IFluidHandler[] neighbors) {
-		pressure = 0;
 		int totalPressure = 0;
 		int pipeCount = 0;
 		for (int i = 0; i < 6; ++i) {
@@ -227,13 +227,15 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 			}
 		}
 
+		int amount = (int) (tank.getFluidAmount() * TRANSFER_RATIO);
+
 		for (int i = 0; i < 6; ++i) {
 			if (neighbors[i] == null)
 				continue;
 
 			ForgeDirection dir = ForgeDirection.getOrientation(i);
 
-			int rationedAmount = (int) (tank.getFluidAmount() * (((float) Math
+			int rationedAmount = (int) (amount * (((float) Math
 					.abs(pressures[i] - pressure)) / ((float) ratioMax)));
 			amountToRemove += neighbors[i].fill(dir.getOpposite(),
 					new FluidStack(tank.getFluid().getFluid(), rationedAmount),
@@ -270,7 +272,10 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 			if (info == null)
 				continue;
 
-			int rationedAmount = (int) (space * (((float) info.fluid.amount) / ((float) ratioMax)));
+			int amount = (int) (info.fluid == null ? 0 : info.fluid.amount
+					* TRANSFER_RATIO);
+
+			int rationedAmount = (int) (space * (((float) amount) / ((float) ratioMax)));
 			tank.fill(neighbors[i].drain(ForgeDirection.getOrientation(i)
 					.getOpposite(), rationedAmount, true), true);
 		}
@@ -282,6 +287,12 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 
 		for (FluidTankInfo info : infoArray) {
 			if (tank.getFluid() == null)
+				return info;
+
+			if (tank.getFluid() == null)
+				return info;
+
+			if (info.fluid == null)
 				return info;
 
 			if (info.fluid.getFluid() == tank.getFluid().getFluid()) {
@@ -333,7 +344,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 
 	@Override
 	public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
-		if (!super.onSideActivate(par5EntityPlayer, side))
+		if (!isUseableByPlayer(par5EntityPlayer))
 			return false;
 
 		ItemStack item = par5EntityPlayer.getHeldItem();
@@ -342,6 +353,6 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			return true;
 		}
-		return false;
+		return super.onSideActivate(par5EntityPlayer, side);
 	}
 }
