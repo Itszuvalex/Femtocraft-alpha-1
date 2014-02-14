@@ -18,17 +18,17 @@ import net.minecraftforge.common.ForgeDirection;
 
 import java.util.List;
 
-public class BlockCable extends TileContainerPower {
+public class BlockMicroCable extends TileContainerPower {
 	public Icon coreBorder;
 	public Icon connector;
 	public Icon coil;
 	public Icon coilEdge;
 	public Icon border;
 
-	public BlockCable(int par1, Material par2Material) {
+	public BlockMicroCable(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setCreativeTab(Femtocraft.femtocraftTab);
-		setUnlocalizedName("blockCable");
+		setUnlocalizedName("blockMicroCable");
 		setHardness(1.0f);
 		setStepSound(Block.soundStoneFootstep);
 		setBlockBounds();
@@ -62,7 +62,7 @@ public class BlockCable extends TileContainerPower {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
 		// this.field_94336_cN =
-		// par1IconRegister.func_94245_a("Femtocraft:blockCable");
+		// par1IconRegister.func_94245_a("Femtocraft:blockMicroCable");
 		// this.core =
 		// par1IconRegister.func_94245_a("Femtocraft:FemtopowerCableCore");
 		this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID

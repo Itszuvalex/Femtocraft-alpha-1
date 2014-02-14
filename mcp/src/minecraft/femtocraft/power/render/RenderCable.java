@@ -4,8 +4,8 @@
 package femtocraft.power.render;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import femtocraft.power.blocks.BlockMicroCable;
 import femtocraft.power.tiles.TileEntityMicroCable;
-import femtocraft.power.blocks.BlockCable;
 import femtocraft.proxy.ProxyClient;
 import femtocraft.render.RenderModel;
 import femtocraft.render.RenderPoint;
@@ -46,7 +46,7 @@ public class RenderCable implements ISimpleBlockRenderingHandler {
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
-		BlockCable cable = (BlockCable) block;
+		BlockMicroCable cable = (BlockMicroCable) block;
 		if (cable == null)
 			return;
 
@@ -66,7 +66,7 @@ public class RenderCable implements ISimpleBlockRenderingHandler {
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
 			Block block, int modelId, RenderBlocks renderer) {
-		BlockCable cable = (BlockCable) block;
+		BlockMicroCable cable = (BlockMicroCable) block;
 		if (block == null)
 			return false;
 
@@ -81,7 +81,7 @@ public class RenderCable implements ISimpleBlockRenderingHandler {
 				renderer.blockAccess, x, y, z));
 		tessellator.setColorOpaque_F(1, 1, 1);
 		// tessellator.setBrightness((int)
-		// (blockCable.getBlockBrightness(renderer.blockAccess, x, y, z) * 3200.));
+		// (blockMicroCable.getBlockBrightness(renderer.blockAccess, x, y, z) * 3200.));
 
 		return renderCable(cable, x, y, z, renderer, cableTile.connections);
 	}
@@ -96,11 +96,11 @@ public class RenderCable implements ISimpleBlockRenderingHandler {
 		return ProxyClient.FemtopowerCableRenderID;
 	}
 
-	private boolean renderCable(BlockCable cable, float x, float y,
+	private boolean renderCable(BlockMicroCable cable, float x, float y,
 			float z, RenderBlocks renderer, boolean[] connections) {
 
 		// //Render border
-		// renderer.setOverrideBlockTexture(blockCable.coreBorder);
+		// renderer.setOverrideBlockTexture(blockMicroCable.coreBorder);
 		// block.setBlockBounds(4.F/16.0F, 4.F/16.0F, 4.F/16.0F, 12.F/16.0F,
 		// 12.F/16.0F, 12.F/16.F);
 		// renderer.setRenderBoundsFromBlock(block);
@@ -116,7 +116,7 @@ public class RenderCable implements ISimpleBlockRenderingHandler {
 		//
 		// renderer.
 		//
-		// blockCable.setBlockBounds();
+		// blockMicroCable.setBlockBounds();
 
 		// tessellator.setBrightness((int)
 		// (renderer.blockAccess.getLightBrightness(x, y, z) * 100));
@@ -126,7 +126,7 @@ public class RenderCable implements ISimpleBlockRenderingHandler {
 		return true;
 	}
 
-	private void drawCore(BlockCable cable, float x, float y, float z,
+	private void drawCore(BlockMicroCable cable, float x, float y, float z,
 			RenderBlocks renderer, boolean[] connections) {
 		if (!CoilInitialized)
 			initializeCoils(cable);
@@ -139,23 +139,23 @@ public class RenderCable implements ISimpleBlockRenderingHandler {
 			if (connections[0]) {
 				drawCoilClose(cable, ForgeDirection.UP, loc);
 				drawCoilClose(cable, ForgeDirection.DOWN, loc);
-				// drawCoil(blockCable, x, y, z, 2.0F/16.0F, renderer,
+				// drawCoil(blockMicroCable, x, y, z, 2.0F/16.0F, renderer,
 				// ForgeDirection.getOrientation(0));
-				// drawCoil(blockCable, x, y, z, 2.0F/16.0F, renderer,
+				// drawCoil(blockMicroCable, x, y, z, 2.0F/16.0F, renderer,
 				// ForgeDirection.getOrientation(0).getOpposite());
 			} else if (connections[2]) {
 				drawCoilClose(cable, ForgeDirection.NORTH, loc);
 				drawCoilClose(cable, ForgeDirection.SOUTH, loc);
-				// drawCoil(blockCable, x, y, z, 2.0F/16.0F, renderer,
+				// drawCoil(blockMicroCable, x, y, z, 2.0F/16.0F, renderer,
 				// ForgeDirection.getOrientation(2));
-				// drawCoil(blockCable, x, y, z, 2.0F/16.0F, renderer,
+				// drawCoil(blockMicroCable, x, y, z, 2.0F/16.0F, renderer,
 				// ForgeDirection.getOrientation(2).getOpposite());
 			} else if (connections[4]) {
 				drawCoilClose(cable, ForgeDirection.EAST, loc);
 				drawCoilClose(cable, ForgeDirection.WEST, loc);
-				// drawCoil(blockCable, x, y, z, 2.0F/16.0F, renderer,
+				// drawCoil(blockMicroCable, x, y, z, 2.0F/16.0F, renderer,
 				// ForgeDirection.getOrientation(4));
-				// drawCoil(blockCable, x, y, z, 2.0F/16.0F, renderer,
+				// drawCoil(blockMicroCable, x, y, z, 2.0F/16.0F, renderer,
 				// ForgeDirection.getOrientation(4).getOpposite());
 			}
 		}
@@ -169,7 +169,7 @@ public class RenderCable implements ISimpleBlockRenderingHandler {
 		}
 	}
 
-	private void drawCoreBlock(BlockCable cable, float x, float y,
+	private void drawCoreBlock(BlockMicroCable cable, float x, float y,
 			float z, RenderBlocks renderer, boolean[] connections) {
 		RenderUtils.renderCube(x, y, z, 5.0f / 16.0f, 5.0f / 16.0f,
                 5.0f / 16.0f, 11.0f / 16.0f, 11.0f / 16.0f, 11.0f / 16.0f,
@@ -193,7 +193,7 @@ public class RenderCable implements ISimpleBlockRenderingHandler {
 				ForgeDirection.WEST, !connections[4]);
 	}
 
-	private void drawConnector(BlockCable cable, float x, float y,
+	private void drawConnector(BlockMicroCable cable, float x, float y,
 			float z, float offset, RenderBlocks renderer,
 			ForgeDirection direction, boolean drawCap) {
 		ForgeDirection rotaxi = ForgeDirection.UNKNOWN;
@@ -282,16 +282,16 @@ public class RenderCable implements ISimpleBlockRenderingHandler {
                 cable.connector.getMinV(), cable.connector.getMaxV());
 	}
 
-	// private void drawCoil(blockCable blockCable, float x, float y, float z,
+	// private void drawCoil(blockMicroCable blockMicroCable, float x, float y, float z,
 	// float offset, RenderBlocks renderer, ForgeDirection direction) {
 	//
-	// drawConnector(blockCable, x, y, z, 1.0F/16.0F + offset, renderer, direction,
+	// drawConnector(blockMicroCable, x, y, z, 1.0F/16.0F + offset, renderer, direction,
 	// true);
-	// drawConnector(blockCable, x, y, z, -1.0F/16.0F + offset, renderer, direction,
+	// drawConnector(blockMicroCable, x, y, z, -1.0F/16.0F + offset, renderer, direction,
 	// false);
 	//
 	// if(!CoilInitialized)
-	// initializeCoils(blockCable);
+	// initializeCoils(blockMicroCable);
 	//
 	// double yrot = Math.PI/2.0D;
 	// double xrot = 0;
@@ -346,7 +346,7 @@ public class RenderCable implements ISimpleBlockRenderingHandler {
 		return count;
 	}
 
-	private void initializeCoils(BlockCable cable) {
+	private void initializeCoils(BlockMicroCable cable) {
 		Coil_North = createCoil(cable, 6.f / 16.f).rotateOnZAxis(Math.PI);
 		Coil_South = Coil_North.rotatedOnXAxis(Math.PI);
 		Coil_Up = Coil_North.rotatedOnXAxis(Math.PI / 2.d);
@@ -364,7 +364,7 @@ public class RenderCable implements ISimpleBlockRenderingHandler {
 		CoilInitialized = true;
 	}
 
-	private void drawCoilFar(BlockCable cable, ForgeDirection dir,
+	private void drawCoilFar(BlockMicroCable cable, ForgeDirection dir,
 			RenderPoint loc) {
 		drawConnector(cable, loc.x, loc.y, loc.z, 7.0F / 16.0f, null, dir, true);
 		drawConnector(cable, loc.x, loc.y, loc.z, 5.0F / 16.0F, null, dir,
@@ -400,7 +400,7 @@ public class RenderCable implements ISimpleBlockRenderingHandler {
 		}
 	}
 
-	private void drawCoilClose(BlockCable cable, ForgeDirection dir,
+	private void drawCoilClose(BlockMicroCable cable, ForgeDirection dir,
 			RenderPoint loc) {
 		drawConnector(cable, loc.x, loc.y, loc.z, 3.0F / 16.0f, null, dir, true);
 		drawConnector(cable, loc.x, loc.y, loc.z, 1.F / 16.0F, null, dir, false);
@@ -435,7 +435,7 @@ public class RenderCable implements ISimpleBlockRenderingHandler {
 		}
 	}
 
-	private RenderModel createCoil(BlockCable cable, float offset) {
+	private RenderModel createCoil(BlockMicroCable cable, float offset) {
 		RenderModel Coil = new RenderModel(new RenderPoint(0, 0, 0), new RenderPoint(.5f, .5f, .5f));
 
 		offset = .5F - offset;
