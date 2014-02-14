@@ -2,15 +2,16 @@ package femtocraft.proxy;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import femtocraft.consumables.processing.blocks.RenderCuttingBoard;
-import femtocraft.power.render.RenderCable;
-import femtocraft.power.render.RenderChargingBase;
-import femtocraft.power.render.RenderChargingCoil;
+import femtocraft.power.render.*;
 import femtocraft.render.RenderSimpleMachine;
 import femtocraft.transport.items.render.RenderVacuumTube;
 import femtocraft.transport.liquids.render.RenderSuctionPipe;
 
 public class ProxyClient extends ProxyCommon {
-	public static int FemtopowerCableRenderID;
+	public static int microCableRenderID;
+	public static int nanoCableRenderID;
+	public static int femtoCableRenderID;
+
 	public static int FemtopowerMicroCubeRenderID;
 	public static int FemtocraftVacuumTubeRenderID;
 	public static int FemtocraftChargingBaseRenderID;
@@ -38,39 +39,34 @@ public class ProxyClient extends ProxyCommon {
 	public void registerBlockRenderers() {
 		super.registerBlockRenderers();
 
-		RenderSimpleMachine.renderID = RenderingRegistry
-				.getNextAvailableRenderId();
-		RenderingRegistry.registerBlockHandler(RenderSimpleMachine.renderID,
-				new RenderSimpleMachine());
+		RenderSimpleMachine.renderID = RenderingRegistry.getNextAvailableRenderId();
+		RenderingRegistry.registerBlockHandler(RenderSimpleMachine.renderID, new RenderSimpleMachine());
 
-		FemtopowerCableRenderID = RenderingRegistry.getNextAvailableRenderId();
-		RenderingRegistry.registerBlockHandler(FemtopowerCableRenderID,
-				new RenderCable());
+		microCableRenderID = RenderingRegistry.getNextAvailableRenderId();
+		RenderingRegistry.registerBlockHandler(microCableRenderID, new RenderMicroCable());
+
+		nanoCableRenderID = RenderingRegistry.getNextAvailableRenderId();
+		RenderingRegistry.registerBlockHandler(nanoCableRenderID, new RenderNanoCable());
+
+		femtoCableRenderID = RenderingRegistry.getNextAvailableRenderId();
+		RenderingRegistry.registerBlockHandler(femtoCableRenderID, new RenderFemtoCable());
 
 		// FemtopowerMicroCubeRenderID =
 		// RenderingRegistry.getNextAvailableRenderId();
 		// RenderingRegistry.registerBlockHandler(FemtopowerMicroCubeRenderID,
 		// new FemtopowerMicroCubeRenderer());
 
-		FemtocraftVacuumTubeRenderID = RenderingRegistry
-				.getNextAvailableRenderId();
-		RenderingRegistry.registerBlockHandler(FemtocraftVacuumTubeRenderID,
-				new RenderVacuumTube());
+		FemtocraftVacuumTubeRenderID = RenderingRegistry.getNextAvailableRenderId();
+		RenderingRegistry.registerBlockHandler(FemtocraftVacuumTubeRenderID, new RenderVacuumTube());
 
-		FemtocraftChargingBaseRenderID = RenderingRegistry
-				.getNextAvailableRenderId();
-		RenderingRegistry.registerBlockHandler(FemtocraftChargingBaseRenderID,
-				new RenderChargingBase());
+		FemtocraftChargingBaseRenderID = RenderingRegistry.getNextAvailableRenderId();
+		RenderingRegistry.registerBlockHandler(FemtocraftChargingBaseRenderID, new RenderChargingBase());
 
-		FemtocraftChargingCoilRenderID = RenderingRegistry
-				.getNextAvailableRenderId();
-		RenderingRegistry.registerBlockHandler(FemtocraftChargingCoilRenderID,
-				new RenderChargingCoil());
+		FemtocraftChargingCoilRenderID = RenderingRegistry.getNextAvailableRenderId();
+		RenderingRegistry.registerBlockHandler(FemtocraftChargingCoilRenderID, new RenderChargingCoil());
 
-		FemtocraftSuctionPipeRenderID = RenderingRegistry
-				.getNextAvailableRenderId();
-		RenderingRegistry.registerBlockHandler(FemtocraftSuctionPipeRenderID,
-				new RenderSuctionPipe());
+		FemtocraftSuctionPipeRenderID = RenderingRegistry.getNextAvailableRenderId();
+		RenderingRegistry.registerBlockHandler(FemtocraftSuctionPipeRenderID, new RenderSuctionPipe());
 
 	}
 }
