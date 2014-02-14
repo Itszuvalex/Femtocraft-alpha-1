@@ -16,9 +16,9 @@ import net.minecraft.world.World;
  * @author Itszuvalex
  * 
  */
-public class TileContainerPower extends TileContainer {
+public class BlockPowerContainer extends TileContainer {
 
-	public TileContainerPower(int par1, Material par2Material) {
+	public BlockPowerContainer(int par1, Material par2Material) {
 		super(par1, par2Material);
 	}
 

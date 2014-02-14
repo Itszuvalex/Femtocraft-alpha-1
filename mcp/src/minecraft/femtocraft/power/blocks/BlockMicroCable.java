@@ -18,7 +18,7 @@ import net.minecraftforge.common.ForgeDirection;
 
 import java.util.List;
 
-public class BlockMicroCable extends TileContainerPower {
+public class BlockMicroCable extends BlockPowerContainer {
 	public Icon coreBorder;
 	public Icon connector;
 	public Icon coil;

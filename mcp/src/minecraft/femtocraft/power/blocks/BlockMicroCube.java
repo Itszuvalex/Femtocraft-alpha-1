@@ -3,20 +3,16 @@ package femtocraft.power.blocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
-import femtocraft.api.IInterfaceDevice;
 import femtocraft.power.tiles.TileEntityPowerMicroCube;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
 
-public class BlockMicroCube extends TileContainerPower {
+public class BlockMicroCube extends BlockPowerContainer {
 	public Icon outputSide;
 	public Icon inputSide;
 

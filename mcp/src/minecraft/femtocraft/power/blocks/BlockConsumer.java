@@ -6,7 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockConsumer extends TileContainerPower {
+public class BlockConsumer extends BlockPowerContainer {
 
 	public BlockConsumer(int par1, Material par2Material) {
 		super(par1, par2Material);

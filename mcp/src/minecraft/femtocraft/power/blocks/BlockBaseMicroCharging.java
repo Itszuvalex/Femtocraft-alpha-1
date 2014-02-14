@@ -14,7 +14,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class BlockBaseMicroCharging extends TileContainerPower implements
+public class BlockBaseMicroCharging extends BlockPowerContainer implements
 		IChargingBase {
 	public Icon side;
 	public Icon top;
