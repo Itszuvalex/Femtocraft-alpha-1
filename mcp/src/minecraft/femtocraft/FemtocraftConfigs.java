@@ -88,6 +88,10 @@ public class FemtocraftConfigs {
 	int nanoCableID = 501;
 	public static @CfgId(block = true)
 	int femtoCableID = 502;
+	public static @CfgId(block = true)
+	int orbitalEqualizerID = 505;
+	public static @CfgId(block = true)
+	int nullEqualizerID = 506;
 
 	// items
 	public static @CfgId
