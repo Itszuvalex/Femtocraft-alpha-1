@@ -1,16 +1,18 @@
 package femtocraft.proxy;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
 import femtocraft.power.tiles.*;
+import femtocraft.render.RenderTest;
 import femtocraft.transport.items.tiles.TileEntityVacuumTube;
 import femtocraft.transport.liquids.tiles.TileEntitySuctionPipe;
 
 public class ProxyCommon {
 	public void registerRendering() {
-
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPowerTest.class, new RenderTest());
 	}
 
 	public void registerTileEntities() {
@@ -21,6 +23,8 @@ public class ProxyCommon {
 				"TileEntityPowerProducerTest");
 		GameRegistry.registerTileEntity(TileEntityPowerConsumerTest.class,
 				"TileEntityPowerConsumerTest");
+		GameRegistry.registerTileEntity(TileEntityPowerTest.class,
+				"TileEntityPowerTest");
 		GameRegistry.registerTileEntity(TileEntityBaseEntityMicroFurnace.class,
 				"FemtocraftMicroFurnace");
 		GameRegistry.registerTileEntity(

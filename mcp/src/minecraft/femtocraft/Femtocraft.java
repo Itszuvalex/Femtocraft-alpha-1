@@ -145,6 +145,9 @@ public class Femtocraft {
 	public static Block blockNanoCable;
 	public static Block blockFemtoCable;
 
+	// test
+	public static Block blockTest;
+
 	// liquids
 	public static Fluid mass;
 	public static BlockFluidMass mass_block;
@@ -328,6 +331,12 @@ public class Femtocraft {
 				.setStepSound(Block.soundStoneFootstep);
 		GameRegistry.registerBlock(consumerTest, "BlockConsumer");
 		LanguageRegistry.addName(consumerTest, "Consumer");
+
+		// Test
+		blockTest = new BlockTest(FemtocraftConfigs.testID).setUnlocalizedName("blockTest").setHardness(3.5f)
+				.setStepSound(Block.soundStoneFootstep);
+		GameRegistry.registerBlock(blockTest, "BlockTest");
+		LanguageRegistry.addName(blockTest, "Test");
 
 		microFurnaceUnlit = new BlockMicroFurnace(
 				FemtocraftConfigs.FemtocraftMicroFurnaceUnlitID, false);
