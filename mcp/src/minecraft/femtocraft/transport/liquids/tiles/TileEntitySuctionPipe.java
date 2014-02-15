@@ -167,7 +167,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 								.getOpposite());
 				++pipeCount;
 
-				FluidTankInfo info = chooseTank(infoArray);
+				FluidTankInfo info = chooseTank(infoArray, output);
 				if (info == null)
 					continue;
 				pressures[i] = getTankPressure(info, output);
@@ -182,7 +182,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 			}
 		}
 
-		pressure = totalPressure / pipeCount;
+		pressure = pipeCount == 0 ? 0 : totalPressure / pipeCount;
 	}
 
 	/**
@@ -268,7 +268,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 			FluidTankInfo[] infoArray = neighbors[i].getTankInfo(ForgeDirection
 					.getOrientation(i).getOpposite());
 
-			FluidTankInfo info = chooseTank(infoArray);
+			FluidTankInfo info = chooseTank(infoArray, output);
 			if (info == null)
 				continue;
 
@@ -281,21 +281,21 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 		}
 	}
 
-	private FluidTankInfo chooseTank(FluidTankInfo[] infoArray) {
+	private FluidTankInfo chooseTank(FluidTankInfo[] infoArray, boolean output) {
 		if (infoArray.length == 0)
 			return null;
 
 		for (FluidTankInfo info : infoArray) {
-			if (tank.getFluid() == null)
+			if (tank.getFluid() == null && output)
+				return null;
+
+			if (info.fluid == null && !output)
+				continue;
+
+			if (info.fluid == null & output)
 				return info;
 
-			if (tank.getFluid() == null)
-				return info;
-
-			if (info.fluid == null)
-				return info;
-
-			if (info.fluid.getFluid() == tank.getFluid().getFluid()) {
+			if (info.fluid.isFluidEqual(tank.getFluid())) {
 				return info;
 			}
 		}
