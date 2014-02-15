@@ -6,6 +6,7 @@ import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
 import femtocraft.managers.ManagerRecipe;
 import femtocraft.managers.assembler.AssemblerRecipe;
+import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.power.tiles.TileEntityPowerConsumer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -15,14 +16,15 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
-public class TileEntityBaseEntityMicroDeconstructor extends TileEntityPowerConsumer implements
-		ISidedInventory, IFluidHandler {
+public class TileEntityBaseEntityMicroDeconstructor extends
+		TileEntityPowerConsumer implements ISidedInventory, IFluidHandler {
 	private FluidTank tank;
 
 	public TileEntityBaseEntityMicroDeconstructor() {
 		super();
 		setMaxStorage(800);
 		tank = new FluidTank(600);
+		setTechLevel(EnumTechLevel.MICRO);
 	}
 
 	private int powerToCook = 40;
@@ -262,14 +264,19 @@ public class TileEntityBaseEntityMicroDeconstructor extends TileEntityPowerConsu
 	 * destination stack isn't full, etc.
 	 */
 	private boolean canWork() {
-        if (this.deconstructorItemStacks[0] == null || deconstructingStack != null || this.getCurrentPower() < this.powerToCook) {
-            return false;
-        } else {
-            AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
-                    .getRecipe(this.deconstructorItemStacks[0]);
-            return recipe != null && (tank.getCapacity() - tank.getFluidAmount()) >= recipe.mass && deconstructorItemStacks[0].stackSize >= recipe.output.stackSize && roomForItems(recipe.input);
-        }
-    }
+		if (this.deconstructorItemStacks[0] == null
+				|| deconstructingStack != null
+				|| this.getCurrentPower() < this.powerToCook) {
+			return false;
+		} else {
+			AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
+					.getRecipe(this.deconstructorItemStacks[0]);
+			return recipe != null
+					&& (tank.getCapacity() - tank.getFluidAmount()) >= recipe.mass
+					&& deconstructorItemStacks[0].stackSize >= recipe.output.stackSize
+					&& roomForItems(recipe.input);
+		}
+	}
 
 	private boolean roomForItems(ItemStack[] items) {
 		ItemStack[] fake = new ItemStack[deconstructorItemStacks.length];
@@ -277,12 +284,11 @@ public class TileEntityBaseEntityMicroDeconstructor extends TileEntityPowerConsu
 			ItemStack it = deconstructorItemStacks[i];
 			fake[i] = it == null ? null : it.copy();
 		}
-        for (ItemStack item : items) {
-            if (!FemtocraftUtils.placeItem(
-                    item == null ? null : item.copy(), fake,
-                    new int[]{}))
-                return false;
-        }
+		for (ItemStack item : items) {
+			if (!FemtocraftUtils.placeItem(item == null ? null : item.copy(),
+					fake, new int[] {}))
+				return false;
+		}
 
 		return true;
 	}
@@ -333,9 +339,10 @@ public class TileEntityBaseEntityMicroDeconstructor extends TileEntityPowerConsu
 	 */
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
 		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord,
-                this.zCoord) == this && par1EntityPlayer.getDistanceSq(
-                (double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
-                (double) this.zCoord + 0.5D) <= 64.0D;
+				this.zCoord) == this
+				&& par1EntityPlayer.getDistanceSq((double) this.xCoord + 0.5D,
+						(double) this.yCoord + 0.5D,
+						(double) this.zCoord + 0.5D) <= 64.0D;
 	}
 
 	public void openChest() {

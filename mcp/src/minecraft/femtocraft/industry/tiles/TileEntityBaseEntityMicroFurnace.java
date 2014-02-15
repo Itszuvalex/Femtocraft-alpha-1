@@ -3,6 +3,7 @@ package femtocraft.industry.tiles;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.industry.blocks.BlockMicroFurnace;
+import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.power.tiles.TileEntityPowerConsumer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -11,11 +12,12 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-public class TileEntityBaseEntityMicroFurnace extends TileEntityPowerConsumer implements
-		ISidedInventory {
+public class TileEntityBaseEntityMicroFurnace extends TileEntityPowerConsumer
+		implements ISidedInventory {
 	public TileEntityBaseEntityMicroFurnace() {
 		super();
 		setMaxStorage(800);
+		setTechLevel(EnumTechLevel.MICRO);
 	}
 
 	private int powerToCook = 40;
@@ -319,9 +321,10 @@ public class TileEntityBaseEntityMicroFurnace extends TileEntityPowerConsumer im
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
 		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord,
-                this.zCoord) == this && par1EntityPlayer.getDistanceSq(
-                (double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
-                (double) this.zCoord + 0.5D) <= 64.0D;
+				this.zCoord) == this
+				&& par1EntityPlayer.getDistanceSq((double) this.xCoord + 0.5D,
+						(double) this.yCoord + 0.5D,
+						(double) this.zCoord + 0.5D) <= 64.0D;
 	}
 
 	@Override
