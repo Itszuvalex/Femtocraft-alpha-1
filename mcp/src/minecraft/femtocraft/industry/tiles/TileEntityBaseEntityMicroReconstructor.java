@@ -568,7 +568,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
 
 	public void setFluidAmount(int amount) {
 		if (tank.getFluid() != null) {
-			tank.setFluid(new FluidStack(tank.getFluid().fluidID, amount));
+			tank.setFluid(new FluidStack(tank.getFluid().getFluid(), amount));
 		} else {
 			tank.setFluid(new FluidStack(Femtocraft.mass, amount));
 		}

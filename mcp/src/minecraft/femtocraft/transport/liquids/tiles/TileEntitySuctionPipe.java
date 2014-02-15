@@ -227,7 +227,8 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 			}
 		}
 
-		int amount = (int) (tank.getFluidAmount() * TRANSFER_RATIO);
+		int amount = (int) (Math.min(tank.getFluidAmount(), tank.getCapacity()
+				* TRANSFER_RATIO));
 
 		for (int i = 0; i < 6; ++i) {
 			if (neighbors[i] == null)
@@ -272,12 +273,20 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 			if (info == null)
 				continue;
 
-			int amount = (int) (info.fluid == null ? 0 : info.fluid.amount
-					* TRANSFER_RATIO);
+			int amount = (int) (info.fluid == null ? 0 : (info.fluid.amount));
 
 			int rationedAmount = (int) (space * (((float) amount) / ((float) ratioMax)));
-			tank.fill(neighbors[i].drain(ForgeDirection.getOrientation(i)
-					.getOpposite(), rationedAmount, true), true);
+
+			rationedAmount = rationedAmount > space ? space : rationedAmount;
+
+			if (tank.getFluid() == null) {
+				tank.fill(neighbors[i].drain(ForgeDirection.getOrientation(i)
+						.getOpposite(), rationedAmount, true), true);
+			} else {
+				tank.fill(neighbors[i].drain(ForgeDirection.getOrientation(i)
+						.getOpposite(), new FluidStack(tank.getFluid()
+						.getFluid(), rationedAmount), true), true);
+			}
 		}
 	}
 
@@ -347,6 +356,9 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 		if (!isUseableByPlayer(par5EntityPlayer))
 			return false;
 
+		par5EntityPlayer.addChatMessage("Pressure = " + pressure
+				+ "; Amount = " + tank.getFluidAmount());
+		
 		ItemStack item = par5EntityPlayer.getHeldItem();
 		if (item != null && item.getItem() instanceof IInterfaceDevice) {
 			output = !output;
