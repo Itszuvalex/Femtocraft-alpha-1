@@ -21,7 +21,6 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 	private FluidTank tank;
 	public boolean[] tankconnections;
 	public boolean[] pipeconnections;
-	private int[] neighborCapacity;
 	private boolean output;
 	private int pressure;
 	private final float TRANSFER_RATIO = .1f;
@@ -35,10 +34,8 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 	 */
 	public TileEntitySuctionPipe() {
 		tank = new FluidTank(2000);
-		neighborCapacity = new int[6];
 		tankconnections = new boolean[6];
 		pipeconnections = new boolean[6];
-		Arrays.fill(neighborCapacity, 0);
 		Arrays.fill(tankconnections, false);
 		Arrays.fill(pipeconnections, false);
 		output = true;
@@ -124,7 +121,6 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 	}
 
 	private void checkConnections(IFluidHandler[] neighbors) {
-		Arrays.fill(neighborCapacity, 0);
 		Arrays.fill(tankconnections, false);
 		Arrays.fill(pipeconnections, false);
 
@@ -236,7 +232,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 
 			ForgeDirection dir = ForgeDirection.getOrientation(i);
 
-			int rationedAmount = (int) (amount * (((float) Math
+			int rationedAmount = (int) (((float) amount) * (((float) Math
 					.abs(pressures[i] - pressure)) / ((float) ratioMax)));
 			amountToRemove += neighbors[i].fill(dir.getOpposite(),
 					new FluidStack(tank.getFluid().getFluid(), rationedAmount),
@@ -277,7 +273,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 
 			int rationedAmount = (int) (space * (((float) (pressures[i] - pressure)) / ((float) ratioMax)));
 
-			rationedAmount = rationedAmount > space ? space : rationedAmount;
+			rationedAmount = rationedAmount > amount ? amount : rationedAmount;
 
 			if (tank.getFluid() == null) {
 				tank.fill(neighbors[i].drain(ForgeDirection.getOrientation(i)
