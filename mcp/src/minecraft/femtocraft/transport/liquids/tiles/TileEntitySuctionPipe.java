@@ -182,7 +182,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 			}
 		}
 
-		pressure = pipeCount == 0 ? 0 : totalPressure / pipeCount;
+		pressure = pipeCount == 0 ? 0 : (totalPressure / pipeCount);
 	}
 
 	/**
@@ -195,7 +195,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 	 */
 	private int getTankPressure(FluidTankInfo tank, boolean output) {
 		int amount = tank.fluid == null ? 0 : tank.fluid.amount;
-		return output ? -(tank.capacity - amount) : amount;
+		return output ? (-(tank.capacity - amount)) : amount;
 	}
 
 	private void distributeLiquid(int[] pressures, IFluidHandler[] neighbors) {
@@ -275,7 +275,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 
 			int amount = (int) (info.fluid == null ? 0 : (info.fluid.amount));
 
-			int rationedAmount = (int) (space * (((float) amount) / ((float) ratioMax)));
+			int rationedAmount = (int) (space * (((float) (pressures[i] - pressure)) / ((float) ratioMax)));
 
 			rationedAmount = rationedAmount > space ? space : rationedAmount;
 
@@ -296,7 +296,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 
 		for (FluidTankInfo info : infoArray) {
 			if (tank.getFluid() == null && output)
-				return null;
+				return info;
 
 			if (info.fluid == null && !output)
 				continue;
@@ -356,9 +356,13 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 		if (!isUseableByPlayer(par5EntityPlayer))
 			return false;
 
-		par5EntityPlayer.addChatMessage("Pressure = " + pressure
-				+ "; Amount = " + tank.getFluidAmount());
-		
+		par5EntityPlayer.addChatMessage((worldObj.isRemote ? "Client:"
+				: "Server:")
+				+ " Pressure = "
+				+ pressure
+				+ "; Amount = "
+				+ tank.getFluidAmount());
+
 		ItemStack item = par5EntityPlayer.getHeldItem();
 		if (item != null && item.getItem() instanceof IInterfaceDevice) {
 			output = !output;
