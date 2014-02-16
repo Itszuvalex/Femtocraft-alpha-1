@@ -6,13 +6,13 @@ import femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
 import femtocraft.power.tiles.*;
-import femtocraft.render.RenderTest;
+import femtocraft.render.RenderOrbitalEqualizer;
 import femtocraft.transport.items.tiles.TileEntityVacuumTube;
 import femtocraft.transport.liquids.tiles.TileEntitySuctionPipe;
 
 public class ProxyCommon {
 	public void registerRendering() {
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPowerTest.class, new RenderTest());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPowerTest.class, new RenderOrbitalEqualizer());
 	}
 
 	public void registerTileEntities() {

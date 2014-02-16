@@ -7,10 +7,10 @@ import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
 @SideOnly(Side.CLIENT)
-public class OrbitalModel extends ModelBase {
+public class ModelOrbitalEqualizer extends ModelBase {
 	private IModelCustom test;
 
-	public OrbitalModel() {
+	public ModelOrbitalEqualizer() {
 		test = AdvancedModelLoader.loadModel("/assets/femtocraft/models/orbitalEqualizer.obj");
 	}
 
