@@ -1,7 +1,6 @@
 package femtocraft.power.blocks;
 
 import femtocraft.Femtocraft;
-import femtocraft.power.tiles.TileEntityMicroCable;
 import femtocraft.power.tiles.TileEntityOrbitalEqualizer;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -23,11 +22,15 @@ public class BlockOrbitalEqualizer extends BlockPowerContainer {
 	}
 
 	@Override
+	public int getRenderType() {
+		return -1;
+	}
+
+	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
 
-	@Override
 	public boolean renderAsNormalBlock() {
 		return false;
 	}

@@ -1,4 +1,4 @@
-package femtocraft.render;
+package femtocraft.models;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

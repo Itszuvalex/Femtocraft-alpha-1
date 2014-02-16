@@ -1,6 +1,7 @@
-package femtocraft.render;
+package femtocraft.power.render;
 
 import femtocraft.Femtocraft;
+import femtocraft.models.ModelOrbitalEqualizer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
