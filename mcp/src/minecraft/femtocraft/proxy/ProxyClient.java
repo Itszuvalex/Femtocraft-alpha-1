@@ -35,6 +35,8 @@ public class ProxyClient extends ProxyCommon {
 		// registerBlockHandler
 	}
 
+
+
 	@Override
 	public void registerBlockRenderers() {
 		super.registerBlockRenderers();
@@ -50,6 +52,8 @@ public class ProxyClient extends ProxyCommon {
 
 		femtoCableRenderID = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(femtoCableRenderID, new RenderFemtoCable());
+
+
 
 		// FemtopowerMicroCubeRenderID =
 		// RenderingRegistry.getNextAvailableRenderId();

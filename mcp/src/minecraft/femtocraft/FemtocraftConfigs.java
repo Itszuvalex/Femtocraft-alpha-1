@@ -56,6 +56,8 @@ public class FemtocraftConfigs {
 
 	// TODO: moved microcable to something else - need to fill id 370
 	public static @CfgId(block = true)
+	int testID = 370;
+	public static @CfgId(block = true)
 	int FemtopowerGeneratorTestID = 371;
 	public static @CfgId(block = true)
 	int FemtopowerConsumerTestBlockID = 372;
