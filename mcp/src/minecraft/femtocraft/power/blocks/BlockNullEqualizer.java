@@ -22,11 +22,15 @@ public class BlockNullEqualizer extends BlockPowerContainer {
 	}
 
 	@Override
+	public int getRenderType() {
+		return -1;
+	}
+
+	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
 
-	@Override
 	public boolean renderAsNormalBlock() {
 		return false;
 	}
