@@ -21,9 +21,14 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 	private FluidTank tank;
 	public boolean[] tankconnections;
 	public boolean[] pipeconnections;
+	public IFluidHandler[] neighbors;
 	private boolean output;
 	private int pressure;
 	private final float TRANSFER_RATIO = .1f;
+
+	private FluidStack renderFluid;
+	private int renderTick;
+	static final int renderLength = 10;
 
 	/*
 	 * (non-Javadoc)
@@ -36,10 +41,13 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 		tank = new FluidTank(2000);
 		tankconnections = new boolean[6];
 		pipeconnections = new boolean[6];
+		neighbors = new IFluidHandler[6];
 		Arrays.fill(tankconnections, false);
 		Arrays.fill(pipeconnections, false);
 		output = true;
 		pressure = 0;
+		renderFluid = null;
+		renderTick = 0;
 	}
 
 	/**
@@ -53,6 +61,10 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 	 */
 	public boolean isOutput() {
 		return output;
+	}
+
+	public FluidStack getRenderFluid() {
+		return renderFluid;
 	}
 
 	@Override
@@ -90,6 +102,23 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 	}
 
 	@Override
+	public void updateEntity() {
+		Arrays.fill(neighbors, null);
+		checkConnections(neighbors);
+
+		if (renderFluid != null && tank.getFluid() == null) {
+			if (renderTick++ >= renderLength) {
+				renderFluid = null;
+				worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+			}
+		} else {
+			renderTick = 0;
+		}
+
+		super.updateEntity();
+	}
+
+	@Override
 	public void femtocraftServerUpdate() {
 		super.femtocraftServerUpdate();
 
@@ -98,10 +127,6 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 		int[] pressures = new int[6];
 		Arrays.fill(pressures, 0);
 
-		IFluidHandler[] neighbors = new IFluidHandler[6];
-		Arrays.fill(neighbors, null);
-
-		checkConnections(neighbors);
 		calculatePressure(pressures, neighbors);
 		distributeLiquid(pressures, neighbors);
 		if (!output)
@@ -121,6 +146,10 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 	}
 
 	private void checkConnections(IFluidHandler[] neighbors) {
+		boolean[] oldpipes = tankconnections.clone();
+		boolean[] oldtanks = pipeconnections.clone();
+		boolean changed = false;
+
 		Arrays.fill(tankconnections, false);
 		Arrays.fill(pipeconnections, false);
 
@@ -137,12 +166,24 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 			if (checkTile != null) {
 				if (checkTile instanceof ISuctionPipe) {
 					pipeconnections[i] = true;
+					if (!oldpipes[i])
+						changed = true;
 					neighbors[i] = (IFluidHandler) checkTile;
 				} else if (checkTile instanceof IFluidHandler) {
 					tankconnections[i] = true;
+					if (!oldtanks[i])
+						changed = true;
 					neighbors[i] = (IFluidHandler) checkTile;
 				}
+
+				if (oldpipes[i] || oldtanks[i]) {
+					changed = true;
+				}
 			}
+		}
+
+		if (changed) {
+			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 		}
 	}
 
@@ -223,6 +264,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 			}
 		}
 
+		// TODO: get it to transmit miniscule amounts
 		int amount = (int) (Math.min(tank.getFluidAmount(), tank.getCapacity()
 				* TRANSFER_RATIO));
 
@@ -262,9 +304,10 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 		}
 
 		for (int i = 0; i < 6; ++i) {
-			if (!(tankconnections[i] && (tank.getFluid() == null || neighbors[i]
-					.canDrain(ForgeDirection.getOrientation(i).getOpposite(),
-							tank.getFluid().getFluid()))))
+			if (!(tankconnections[i] && pressure < pressures[i] && (tank
+					.getFluid() == null || neighbors[i].canDrain(ForgeDirection
+					.getOrientation(i).getOpposite(), tank.getFluid()
+					.getFluid()))))
 				continue;
 			FluidTankInfo[] infoArray = neighbors[i].getTankInfo(ForgeDirection
 					.getOrientation(i).getOpposite());
@@ -273,28 +316,19 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 			if (info == null)
 				continue;
 
-			if (pressure < pressures[i]
-					&& (tank.getFluid() == null || neighbors[i].canDrain(
-							ForgeDirection.getOrientation(i).getOpposite(),
-							tank.getFluid().getFluid()))) {
-				int amount = (int) (info.fluid == null ? 0
-						: (info.fluid.amount));
+			int amount = (int) (info.fluid == null ? 0 : (info.fluid.amount));
 
-				int rationedAmount = (int) (space * (((float) (pressures[i] - pressure)) / ((float) ratioMax)));
+			int rationedAmount = (int) (space * (((float) (pressures[i] - pressure)) / ((float) ratioMax)));
 
-				rationedAmount = rationedAmount > amount ? amount
-						: rationedAmount;
+			rationedAmount = rationedAmount > amount ? amount : rationedAmount;
 
-				if (tank.getFluid() == null) {
-					tank.fill(neighbors[i].drain(
-							ForgeDirection.getOrientation(i).getOpposite(),
-							rationedAmount, true), true);
-				} else {
-					tank.fill(neighbors[i].drain(
-							ForgeDirection.getOrientation(i).getOpposite(),
-							new FluidStack(tank.getFluid().getFluid(),
-									rationedAmount), true), true);
-				}
+			if (tank.getFluid() == null) {
+				tank.fill(neighbors[i].drain(ForgeDirection.getOrientation(i)
+						.getOpposite(), rationedAmount, true), true);
+			} else {
+				tank.fill(neighbors[i].drain(ForgeDirection.getOrientation(i)
+						.getOpposite(), new FluidStack(tank.getFluid()
+						.getFluid(), rationedAmount), true), true);
 			}
 		}
 	}
@@ -325,6 +359,9 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
 		tank.readFromNBT(par1nbtTagCompound);
+		if (tank.getFluid() != null) {
+			renderFluid = tank.getFluid();
+		}
 		output = par1nbtTagCompound.getBoolean("output");
 	}
 
@@ -344,8 +381,11 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 	public void handleDescriptionNBT(NBTTagCompound compound) {
 		super.handleDescriptionNBT(compound);
 
-		tank.setFluid(compound.hasKey("fluid") ? FluidStack
-				.loadFluidStackFromNBT(compound.getCompoundTag("fluid")) : null);
+		FluidStack fluid = compound.hasKey("fluid") ? FluidStack
+				.loadFluidStackFromNBT(compound.getCompoundTag("fluid")) : null;
+		tank.setFluid(fluid);
+		if (fluid != null)
+			renderFluid = fluid;
 		output = compound.getBoolean("output");
 		if (worldObj != null)
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
