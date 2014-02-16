@@ -22,7 +22,6 @@ import femtocraft.transport.liquids.tiles.TileEntitySuctionPipe;
 
 public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
 	private boolean initialized;
-	private RenderModel center;
 	private RenderModel center_liquid;
 
 	private RenderModel[] pipes;
@@ -95,30 +94,10 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
 	}
 
 	private void createPipe(BlockSuctionPipe pipe) {
-		center = new RenderModel();
 		center_liquid = new RenderModel();
 
 		float min = 6.f / 16.f;
 		float max = 10.f / 16.f;
-
-		center.addQuad(RenderUtils.makeTopFace(min, max, min, max, max,
-				pipe.center, pipe.center.getMinU(), pipe.center.getMaxU(),
-				pipe.center.getMinV(), pipe.center.getMaxV()));
-		center.addQuad(RenderUtils.makeBottomFace(min, max, min, max, min,
-				pipe.center, pipe.center.getMinU(), pipe.center.getMaxU(),
-				pipe.center.getMinV(), pipe.center.getMaxV()));
-		center.addQuad(RenderUtils.makeNorthFace(min, max, min, max, min,
-				pipe.center, pipe.center.getMinU(), pipe.center.getMaxU(),
-				pipe.center.getMinV(), pipe.center.getMaxV()));
-		center.addQuad(RenderUtils.makeSouthFace(min, max, min, max, max,
-				pipe.center, pipe.center.getMinU(), pipe.center.getMaxU(),
-				pipe.center.getMinV(), pipe.center.getMaxV()));
-		center.addQuad(RenderUtils.makeEastFace(min, max, min, max, max,
-				pipe.center, pipe.center.getMinU(), pipe.center.getMaxU(),
-				pipe.center.getMinV(), pipe.center.getMaxV()));
-		center.addQuad(RenderUtils.makeWestFace(min, max, min, max, min,
-				pipe.center, pipe.center.getMinU(), pipe.center.getMaxU(),
-				pipe.center.getMinV(), pipe.center.getMaxV()));
 
 		center_liquid.addQuad(RenderUtils.makeTopFace(min, max, min, max,
 				max - .01f, pipe.center, 0, 0, 0, 0));
@@ -300,8 +279,7 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
 		if (!initialized)
 			createPipe(pipe);
 
-		center.location = new RenderPoint(x, y, z);
-		center.draw();
+		RenderUtils.renderDoubleSidedCube(x, y, z, 6.f/16.f, 10.f/16.f, 6.f/16.f, 10.f/16.f, 6.f/16.f, 10.f/16.f, pipe.center);
 
 		if (fluid != null) {
 			center_liquid.location = new RenderPoint(x, y, z);
