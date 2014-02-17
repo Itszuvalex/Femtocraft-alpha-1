@@ -150,8 +150,6 @@ public class BlockMicroCable extends BlockPowerContainer {
 		return box;
 	}
 
-	// TODO: Get this working. This needs to be enabled in order to actually
-	// have mouse-over working
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess, int x, int y, int z) {
 		AxisAlignedBB box = AxisAlignedBB.getAABBPool().getAABB((double) x + 4.d / 16.d, (double) y + 4.d / 16.d,

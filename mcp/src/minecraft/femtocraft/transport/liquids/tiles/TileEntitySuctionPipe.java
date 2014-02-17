@@ -44,6 +44,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 		neighbors = new IFluidHandler[6];
 		Arrays.fill(tankconnections, false);
 		Arrays.fill(pipeconnections, false);
+		Arrays.fill(neighbors, null);
 		output = true;
 		pressure = 0;
 		renderFluid = null;
