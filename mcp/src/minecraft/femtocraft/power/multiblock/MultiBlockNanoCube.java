@@ -167,9 +167,8 @@ public class MultiBlockNanoCube implements IMultiBlock {
 							result = false;
 						}
 					} else {
-						result = result
-								&& ((IMultiBlockComponent) te).formMultiBlock(
-										world, x, y, z);
+						result = ((IMultiBlockComponent) te).formMultiBlock(
+										world, x, y, z) && result;
 					}
 				}
 			}
@@ -209,9 +208,8 @@ public class MultiBlockNanoCube implements IMultiBlock {
 							result = false;
 						}
 					} else {
-						result = result
-								&& ((IMultiBlockComponent) te).breakMultiBlock(
-										world, x, y, z);
+						result = ((IMultiBlockComponent) te).breakMultiBlock(
+										world, x, y, z) && result;
 					}
 				}
 			}

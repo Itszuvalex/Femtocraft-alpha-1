@@ -9,10 +9,12 @@ import femtocraft.managers.research.EnumTechLevel;
 public class TileEntityNanoCubePort extends TileEntityPowerBase implements
 		IMultiBlockComponent {
 	private MultiBlockInfo info;
+	public boolean output;
 
 	public TileEntityNanoCubePort() {
 		info = new MultiBlockInfo();
 		setTechLevel(EnumTechLevel.NANO);
+		output = false;
 	}
 
 	/*
@@ -26,6 +28,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
 		info.loadFromNBT(par1nbtTagCompound.getCompoundTag("info"));
+		output = par1nbtTagCompound.getBoolean("output");
 	}
 
 	/*
@@ -42,6 +45,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
 		NBTTagCompound infoC = new NBTTagCompound();
 		info.saveToNBT(infoC);
 		par1nbtTagCompound.setTag("info", infoC);
+		par1nbtTagCompound.setBoolean("output", output);
 	}
 
 	/*
@@ -56,6 +60,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
 		super.handleDescriptionNBT(compound);
 		info.loadFromNBT(compound.getCompoundTag("info"));
 		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+		output = compound.getBoolean("output");
 	}
 
 	/*
@@ -71,6 +76,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
 		NBTTagCompound infoC = new NBTTagCompound();
 		info.saveToNBT(infoC);
 		compound.setTag("info", infoC);
+		compound.setBoolean("output", output);
 	}
 
 	@Override

@@ -4,13 +4,16 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.core.blocks.TileContainer;
 import femtocraft.core.multiblock.MultiBlockInfo;
 import femtocraft.power.multiblock.MultiBlockNanoCube;
+import femtocraft.power.tiles.TileEntityNanoCubeFrame;
 import femtocraft.power.tiles.TileEntityNanoCubePort;
 
 public class BlockNanoCubePort extends TileContainer {
@@ -23,6 +26,18 @@ public class BlockNanoCubePort extends TileContainer {
 		setUnlocalizedName("BlockNanoCubePort");
 	}
 
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int par2,
+			int par3, int par4, int par5) {
+		TileEntity te = par1iBlockAccess.getBlockTileEntity(par2, par3, par4);
+		if (te != null && te instanceof TileEntityNanoCubePort) {
+			TileEntityNanoCubePort port = (TileEntityNanoCubePort) te;
+			return port.output ? portOutput : portInput;
+		}
+		return super.getBlockTexture(par1iBlockAccess, par2, par3, par4, par5);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -33,7 +48,7 @@ public class BlockNanoCubePort extends TileContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		portInput = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+		this.blockIcon = portInput = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
 				+ ":" + "BlockNanoCubePort_input");
 		portOutput = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
 				+ ":" + "BlockNanoCubePort_output");
@@ -81,7 +96,7 @@ public class BlockNanoCubePort extends TileContainer {
 			MultiBlockInfo info = ((TileEntityNanoCubePort) te).getInfo();
 			MultiBlockNanoCube.instance.breakMultiBlock(par1World, info.x(),
 					info.y(), info.z());
-			
+
 		}
 		super.breakBlock(par1World, par2, par3, par4, par5, par6);
 	}
