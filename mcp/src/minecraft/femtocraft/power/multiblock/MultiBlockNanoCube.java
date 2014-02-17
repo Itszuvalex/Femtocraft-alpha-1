@@ -162,7 +162,7 @@ public class MultiBlockNanoCube implements IMultiBlock {
 					TileEntity te = world.getBlockTileEntity(x + i, y + k, z
 							+ j);
 					if (te == null || !(te instanceof IMultiBlockComponent)) {
-						if (i == 0 && j == 0 & k == 1) {
+						if (i == 0 && j == 0 && k == 1) {
 						} else {
 							result = false;
 						}
