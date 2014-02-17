@@ -53,17 +53,17 @@ public class BlockNanoCubeFrame extends TileContainer {
 
 		switch (dir) {
 		case UP:
-			return iconFromGrid(xdif, zdif);
+			return iconFromGrid(xdif, -zdif);
 		case DOWN:
-			return iconFromGrid(-xdif, zdif);
+			return iconFromGrid(-xdif, -zdif);
 		case NORTH:
 			return iconFromGrid(-xdif, ydif);
 		case SOUTH:
 			return iconFromGrid(xdif, ydif);
 		case EAST:
-			return iconFromGrid(zdif, ydif);
-		case WEST:
 			return iconFromGrid(-zdif, ydif);
+		case WEST:
+			return iconFromGrid(zdif, ydif);
 		default:
 			return this.blockIcon;
 		}
@@ -75,7 +75,7 @@ public class BlockNanoCubeFrame extends TileContainer {
 				return formedCorners[2];
 			}
 			if (ydif == 0) {
-				return formedSides[1];
+				return formedSides[3];
 			}
 			if (ydif == 1) {
 				return formedCorners[0];
@@ -83,10 +83,10 @@ public class BlockNanoCubeFrame extends TileContainer {
 		}
 		if (xdif == 0) {
 			if (ydif == -1) {
-				return formedSides[3];
+				return formedSides[1];
 			}
 			if (ydif == 1) {
-				return formedSides[2];
+				return formedSides[0];
 			}
 		}
 		if (xdif == 1) {
@@ -94,7 +94,7 @@ public class BlockNanoCubeFrame extends TileContainer {
 				return formedCorners[3];
 			}
 			if (ydif == 0) {
-				return formedSides[0];
+				return formedSides[2];
 			}
 			if (ydif == 1) {
 				return formedCorners[1];
@@ -124,9 +124,9 @@ public class BlockNanoCubeFrame extends TileContainer {
 		formedSides[1] = par1IconRegister.registerIcon(Femtocraft.ID
 				.toLowerCase() + ":" + "BlockNanoCubeFrame_bot");
 		formedSides[2] = par1IconRegister.registerIcon(Femtocraft.ID
-				.toLowerCase() + ":" + "BlockNanoCubeFrame_east");
+				.toLowerCase() + ":" + "BlockNanoCubeFrame_right");
 		formedSides[3] = par1IconRegister.registerIcon(Femtocraft.ID
-				.toLowerCase() + ":" + "BlockNanoCubeFrame_west");
+				.toLowerCase() + ":" + "BlockNanoCubeFrame_left");
 	}
 
 	@Override
