@@ -174,7 +174,6 @@ public class MultiBlockNanoCube implements IMultiBlock {
 				}
 			}
 		}
-
 		return result;
 	}
 
@@ -205,7 +204,10 @@ public class MultiBlockNanoCube implements IMultiBlock {
 					TileEntity te = world.getBlockTileEntity(x + i, y + k, z
 							+ j);
 					if (te == null || !(te instanceof IMultiBlockComponent)) {
-						result = false;
+						if (i == 0 && j == 0 && k == 1) {
+						} else {
+							result = false;
+						}
 					} else {
 						result = result
 								&& ((IMultiBlockComponent) te).breakMultiBlock(
@@ -214,7 +216,6 @@ public class MultiBlockNanoCube implements IMultiBlock {
 				}
 			}
 		}
-
 		return result;
 	}
 }

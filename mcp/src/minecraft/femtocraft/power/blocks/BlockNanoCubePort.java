@@ -1,14 +1,12 @@
 package femtocraft.power.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.core.blocks.TileContainer;
 import femtocraft.core.multiblock.MultiBlockInfo;
@@ -83,6 +81,7 @@ public class BlockNanoCubePort extends TileContainer {
 			MultiBlockInfo info = ((TileEntityNanoCubePort) te).getInfo();
 			MultiBlockNanoCube.instance.breakMultiBlock(par1World, info.x(),
 					info.y(), info.z());
+			
 		}
 		super.breakBlock(par1World, par2, par3, par4, par5, par6);
 	}

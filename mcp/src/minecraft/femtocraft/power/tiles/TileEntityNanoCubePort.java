@@ -85,14 +85,16 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
 
 	@Override
 	public boolean formMultiBlock(World world, int x, int y, int z) {
+		boolean result = info.formMultiBlock(world, x, y, z);
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		return info.formMultiBlock(world, x, y, z);
+		return result;
 	}
 
 	@Override
 	public boolean breakMultiBlock(World world, int x, int y, int z) {
+		boolean result = info.breakMultiBlock(world, x, y, z);
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		return info.breakMultiBlock(world, x, y, z);
+		return result;
 	}
 
 	@Override
