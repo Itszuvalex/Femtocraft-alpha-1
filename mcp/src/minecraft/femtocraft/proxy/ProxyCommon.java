@@ -13,28 +13,51 @@ import femtocraft.transport.liquids.tiles.TileEntitySuctionPipe;
 
 public class ProxyCommon {
 	public void registerRendering() {
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOrbitalEqualizer.class, new RenderOrbitalEqualizer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityNullEqualizer.class, new RenderNullEqualizer());
+		ClientRegistry.bindTileEntitySpecialRenderer(
+				TileEntityOrbitalEqualizer.class, new RenderOrbitalEqualizer());
+		ClientRegistry.bindTileEntitySpecialRenderer(
+				TileEntityNullEqualizer.class, new RenderNullEqualizer());
 	}
 
 	public void registerTileEntities() {
 		// Tile Entities
-		GameRegistry.registerTileEntity(TileEntityPowerBase.class, "TileEntityPowerBase");
-		GameRegistry.registerTileEntity(TileEntityPowerProducerTest.class, "TileEntityPowerProducerTest");
-		GameRegistry.registerTileEntity(TileEntityPowerConsumerTest.class, "TileEntityPowerConsumerTest");
-		GameRegistry.registerTileEntity(TileEntityBaseEntityMicroFurnace.class, "FemtocraftMicroFurnace");
-		GameRegistry.registerTileEntity(TileEntityBaseEntityMicroDeconstructor.class, "microDeconstructor");
-		GameRegistry.registerTileEntity(TileEntityBaseEntityMicroReconstructor.class, "microReconstructor");
-		GameRegistry.registerTileEntity(TileEntityMicroCable.class, "blockMicroCable");
-		GameRegistry.registerTileEntity(TileEntityNanoCable.class, "blockNanoCable");
-		GameRegistry.registerTileEntity(TileEntityFemtoCable.class, "blockFemtoCable");
-		GameRegistry.registerTileEntity(TileEntityPowerMicroCube.class, "FemtocraftMicroCube");
-		GameRegistry.registerTileEntity(TileEntityVacuumTube.class, "BlockVacuumTube");
-		GameRegistry.registerTileEntity(TileEntityPowerMicroChargingBase.class, "BlockBaseMicroCharging");
-		GameRegistry.registerTileEntity(TileEntitySuctionPipe.class, "TileEntitySuctionPipe");
+		GameRegistry.registerTileEntity(TileEntityPowerBase.class,
+				"TileEntityPowerBase");
+		GameRegistry.registerTileEntity(TileEntityPowerProducerTest.class,
+				"TileEntityPowerProducerTest");
+		GameRegistry.registerTileEntity(TileEntityPowerConsumerTest.class,
+				"TileEntityPowerConsumerTest");
+		GameRegistry.registerTileEntity(TileEntityBaseEntityMicroFurnace.class,
+				"FemtocraftMicroFurnace");
+		GameRegistry.registerTileEntity(
+				TileEntityBaseEntityMicroDeconstructor.class,
+				"microDeconstructor");
+		GameRegistry.registerTileEntity(
+				TileEntityBaseEntityMicroReconstructor.class,
+				"microReconstructor");
+		GameRegistry.registerTileEntity(TileEntityMicroCable.class,
+				"blockMicroCable");
+		GameRegistry.registerTileEntity(TileEntityNanoCable.class,
+				"blockNanoCable");
+		GameRegistry.registerTileEntity(TileEntityFemtoCable.class,
+				"blockFemtoCable");
+		GameRegistry.registerTileEntity(TileEntityPowerMicroCube.class,
+				"FemtocraftMicroCube");
+		GameRegistry.registerTileEntity(TileEntityNanoCubeFrame.class,
+				"TileEntityNanoCubeFrame");
+		GameRegistry.registerTileEntity(TileEntityNanoCubePort.class,
+				"TileEntityNanoCubePort");
+		GameRegistry.registerTileEntity(TileEntityVacuumTube.class,
+				"BlockVacuumTube");
+		GameRegistry.registerTileEntity(TileEntityPowerMicroChargingBase.class,
+				"BlockBaseMicroCharging");
+		GameRegistry.registerTileEntity(TileEntitySuctionPipe.class,
+				"TileEntitySuctionPipe");
 
-		GameRegistry.registerTileEntity(TileEntityOrbitalEqualizer.class, "blockOrbitalEqualizer");
-		GameRegistry.registerTileEntity(TileEntityNullEqualizer.class, "blockNullEqualizer");
+		GameRegistry.registerTileEntity(TileEntityOrbitalEqualizer.class,
+				"blockOrbitalEqualizer");
+		GameRegistry.registerTileEntity(TileEntityNullEqualizer.class,
+				"blockNullEqualizer");
 	}
 
 	public void registerBlockRenderers() {

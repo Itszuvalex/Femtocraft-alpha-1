@@ -40,6 +40,21 @@ public interface IMultiBlock {
 	 * @param x
 	 * @param y
 	 * @param z
+	 * @param c_x
+	 * @param c_y
+	 * @param c_z
+	 * @return True if the block at x, y, z is in the MultiBlock with the
+	 *         controller at c_x, c_y, c_z
+	 */
+	boolean isBlockInMultiBlock(World world, int x, int y, int z, int c_x,
+			int c_y, int c_z);
+
+	/**
+	 * 
+	 * @param world
+	 * @param x
+	 * @param y
+	 * @param z
 	 * @return True if this MultiBlock correctly forms in the given world, with
 	 *         the block at x,y,z as the controller block.
 	 */

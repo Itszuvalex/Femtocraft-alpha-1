@@ -114,6 +114,19 @@ public class MultiBlockNanoCube implements IMultiBlock {
 	}
 
 	@Override
+	public boolean isBlockInMultiBlock(World world, int x, int y, int z,
+			int c_x, int c_y, int c_z) {
+		if (y < c_y || y > (c_y + 2))
+			return false;
+		if (x < (c_x - 1) || x > (c_x + 1))
+			return false;
+		if (z < (c_z - 1) || z > (c_z + 1))
+			return false;
+
+		return true;
+	}
+
+	@Override
 	public boolean formMultiBlock(World world, int x, int y, int z) {
 		boolean result = true;
 
