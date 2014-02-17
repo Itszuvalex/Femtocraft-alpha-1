@@ -42,7 +42,7 @@ public class BlockNanoCubeFrame extends TileContainer {
 				return iconForSide(info, dir, par2, par3, par4);
 			}
 		}
-		return this.blockIcon;
+		return super.getBlockTexture(par1iBlockAccess, par2, par3, par4, par5);
 	}
 
 	private Icon iconForSide(MultiBlockInfo info, ForgeDirection dir, int x,
@@ -147,31 +147,6 @@ public class BlockNanoCubeFrame extends TileContainer {
 		MultiBlockNanoCube.instance.formMultiBlockWithBlock(par1World, par2,
 				par3, par4);
 		super.onPostBlockPlaced(par1World, par2, par3, par4, par5);
-	}
-
-	@Override
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
-			EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
-		MultiBlockNanoCube.instance.formMultiBlockWithBlock(par1World, par2,
-				par3, par4);
-		super.onBlockPlacedBy(par1World, par2, par3, par4,
-				par5EntityLivingBase, par6ItemStack);
-	}
-
-	@Override
-	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
-		MultiBlockNanoCube.instance.formMultiBlockWithBlock(par1World, par2,
-				par3, par4);
-		super.onBlockAdded(par1World, par2, par3, par4);
-	}
-
-	@Override
-	public int onBlockPlaced(World par1World, int par2, int par3, int par4,
-			int par5, float par6, float par7, float par8, int par9) {
-		MultiBlockNanoCube.instance.formMultiBlockWithBlock(par1World, par2,
-				par3, par4);
-		return super.onBlockPlaced(par1World, par2, par3, par4, par5, par6,
-				par7, par8, par9);
 	}
 
 	@Override

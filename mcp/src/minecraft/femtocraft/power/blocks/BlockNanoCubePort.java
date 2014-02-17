@@ -72,23 +72,6 @@ public class BlockNanoCubePort extends TileContainer {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * femtocraft.core.blocks.TileContainer#onBlockPlacedBy(net.minecraft.world
-	 * .World, int, int, int, net.minecraft.entity.EntityLivingBase,
-	 * net.minecraft.item.ItemStack)
-	 */
-	@Override
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
-			EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
-		MultiBlockNanoCube.instance.formMultiBlockWithBlock(par1World, par2,
-				par3, par4);
-		super.onBlockPlacedBy(par1World, par2, par3, par4,
-				par5EntityLivingBase, par6ItemStack);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
 	 * femtocraft.core.blocks.TileContainer#breakBlock(net.minecraft.world.World
 	 * , int, int, int, int, int)
 	 */
@@ -103,19 +86,4 @@ public class BlockNanoCubePort extends TileContainer {
 		}
 		super.breakBlock(par1World, par2, par3, par4, par5, par6);
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * net.minecraft.block.BlockContainer#onBlockAdded(net.minecraft.world.World
-	 * , int, int, int)
-	 */
-	@Override
-	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
-		MultiBlockNanoCube.instance.formMultiBlockWithBlock(par1World, par2,
-				par3, par4);
-		super.onBlockAdded(par1World, par2, par3, par4);
-	}
-
 }

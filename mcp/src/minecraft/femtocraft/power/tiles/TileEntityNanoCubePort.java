@@ -44,6 +44,40 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
 		par1nbtTagCompound.setTag("info", infoC);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * femtocraft.core.tiles.TileEntityBase#handleDescriptionNBT(net.minecraft
+	 * .nbt.NBTTagCompound)
+	 */
+	@Override
+	public void handleDescriptionNBT(NBTTagCompound compound) {
+		super.handleDescriptionNBT(compound);
+		info.loadFromNBT(compound.getCompoundTag("info"));
+		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * femtocraft.core.tiles.TileEntityBase#saveToDescriptionCompound(net.minecraft
+	 * .nbt.NBTTagCompound)
+	 */
+	@Override
+	public void saveToDescriptionCompound(NBTTagCompound compound) {
+		super.saveToDescriptionCompound(compound);
+		NBTTagCompound infoC = new NBTTagCompound();
+		info.saveToNBT(infoC);
+		compound.setTag("info", infoC);
+	}
+
+	@Override
+	public boolean hasGUI() {
+		return info.isValidMultiBlock();
+	}
+
 	@Override
 	public boolean isValidMultiBlock() {
 		return info.isValidMultiBlock();
@@ -51,11 +85,13 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
 
 	@Override
 	public boolean formMultiBlock(World world, int x, int y, int z) {
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		return info.formMultiBlock(world, x, y, z);
 	}
 
 	@Override
 	public boolean breakMultiBlock(World world, int x, int y, int z) {
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		return info.breakMultiBlock(world, x, y, z);
 	}
 

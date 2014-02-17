@@ -1,7 +1,10 @@
 package femtocraft.power.multiblock;
 
+import java.util.logging.Level;
+
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import femtocraft.Femtocraft;
 import femtocraft.FemtocraftConfigs;
 import femtocraft.core.multiblock.IMultiBlock;
 import femtocraft.core.multiblock.IMultiBlockComponent;
@@ -38,20 +41,27 @@ public class MultiBlockNanoCube implements IMultiBlock {
 
 		for (int i = -1; i <= 1; ++i) {
 			for (int j = -1; j <= 1; ++j) {
-				if (i == 0 && j == 0)
-					if (world.getBlockId(x + i, y, z + j) != FemtocraftConfigs.FemtopowerNanoCubePortID)
-						return false;
-
-				if (world.getBlockId(x + i, y, z + j) != FemtocraftConfigs.FemtopowerNanoCubeFrameID)
+				if (!isBlockInMultiBlock(world, x + i, y, z + j, x, y, z))
 					return false;
+
+				if (i == 0 && j == 0) {
+					if (world.getBlockId(x + i, y, z + j) != FemtocraftConfigs.FemtopowerNanoCubePortID) {
+						return false;
+					}
+				} else {
+					if (world.getBlockId(x + i, y, z + j) != FemtocraftConfigs.FemtopowerNanoCubeFrameID) {
+						return false;
+					}
+				}
 
 				if (strict) {
 					IMultiBlockComponent mbc = (IMultiBlockComponent) world
 							.getBlockTileEntity(x + i, y, z + j);
 					if (mbc == null)
 						return false;
-					if (mbc.isValidMultiBlock())
+					if (mbc.isValidMultiBlock()) {
 						return false;
+					}
 				}
 			}
 		}
@@ -60,19 +70,26 @@ public class MultiBlockNanoCube implements IMultiBlock {
 
 	private boolean checkMidLevel(World world, int x, int y, int z,
 			boolean strict) {
-		if (world.getBlockId(x, y + 1, z) != FemtocraftConfigs.FemtopowerMicroCubeID)
+		if (world.getBlockId(x, y + 1, z) != FemtocraftConfigs.FemtopowerMicroCubeID) {
 			return false;
+		}
 
 		for (int i = -1; i <= 1; ++i) {
 			for (int j = -1; j <= 1; ++j) {
+				if (!isBlockInMultiBlock(world, x + i, y + 1, z + j, x, y, z))
+					return false;
+
 				if (i == 0 && j == 0)
 					continue;
 				if (i == 0 || j == 0) {
 					if (world.getBlockId(x + i, y + 1, z + j) != FemtocraftConfigs.FemtopowerNanoCubePortID)
-						return false;
+						if (world.getBlockId(x + i, y, z + j) != FemtocraftConfigs.FemtopowerNanoCubePortID) {
+							return false;
+						}
 				} else {
-					if (world.getBlockId(x + i, y + 1, z + j) != FemtocraftConfigs.FemtopowerNanoCubeFrameID)
+					if (world.getBlockId(x + i, y + 1, z + j) != FemtocraftConfigs.FemtopowerNanoCubeFrameID) {
 						return false;
+					}
 				}
 
 				if (strict) {
@@ -80,8 +97,9 @@ public class MultiBlockNanoCube implements IMultiBlock {
 							.getBlockTileEntity(x + i, y + 1, z + j);
 					if (mbc == null)
 						return false;
-					if (mbc.isValidMultiBlock())
+					if (mbc.isValidMultiBlock()) {
 						return false;
+					}
 				}
 			}
 		}
@@ -93,21 +111,29 @@ public class MultiBlockNanoCube implements IMultiBlock {
 
 		for (int i = -1; i <= 1; ++i) {
 			for (int j = -1; j <= 1; ++j) {
-				if (i == 0 && j == 0)
-					if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.FemtopowerNanoCubePortID)
-						return false;
-
-				if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.FemtopowerNanoCubeFrameID)
+				if (!isBlockInMultiBlock(world, x + i, y + 2, z + j, x, y, z))
 					return false;
+
+				if (i == 0 && j == 0) {
+					if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.FemtopowerNanoCubePortID) {
+						return false;
+					}
+				} else {
+					if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.FemtopowerNanoCubeFrameID) {
+						return false;
+					}
+				}
 
 				if (strict) {
 					IMultiBlockComponent mbc = (IMultiBlockComponent) world
 							.getBlockTileEntity(x + i, y + 2, z + j);
 					if (mbc == null)
 						return false;
-					if (mbc.isValidMultiBlock())
+					if (mbc.isValidMultiBlock()) {
 						return false;
+					}
 				}
+
 			}
 		}
 		return true;
@@ -136,7 +162,10 @@ public class MultiBlockNanoCube implements IMultiBlock {
 					TileEntity te = world.getBlockTileEntity(x + i, y + k, z
 							+ j);
 					if (te == null || !(te instanceof IMultiBlockComponent)) {
-						result = false;
+						if (i == 0 && j == 0 & k == 1) {
+						} else {
+							result = false;
+						}
 					} else {
 						result = result
 								&& ((IMultiBlockComponent) te).formMultiBlock(
@@ -152,11 +181,11 @@ public class MultiBlockNanoCube implements IMultiBlock {
 	@Override
 	public boolean formMultiBlockWithBlock(World world, int x, int y, int z) {
 		// x
-		for (int i = -2; i <= 2; i++) {
+		for (int i = -1; i <= 1; ++i) {
 			// z
-			for (int j = -2; j <= 2; j++) {
+			for (int j = -1; j <= 1; ++j) {
 				// y
-				for (int k = -2; k <= 0; k++) {
+				for (int k = -2; k <= 0; ++k) {
 					if (canFormStrict(world, x + i, y + k, z + j)) {
 						return formMultiBlock(world, x + i, y + k, z + j);
 					}
