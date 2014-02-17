@@ -31,4 +31,10 @@ public interface IMultiBlockComponent {
 	 * @return True if breaks without errors, given controller block at x,y,z.
 	 */
 	boolean breakMultiBlock(World world, int x, int y, int z);
+
+	/**
+	 * 
+	 * @return MultiBlockInfo associated with this MultiBlockComponent
+	 */
+	MultiBlockInfo getInfo();
 }

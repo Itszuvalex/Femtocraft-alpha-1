@@ -7,39 +7,59 @@ import femtocraft.core.multiblock.IMultiBlock;
 import femtocraft.core.multiblock.IMultiBlockComponent;
 
 public class MultiBlockNanoCube implements IMultiBlock {
+	public static MultiBlockNanoCube instance = new MultiBlockNanoCube();
 
-	public MultiBlockNanoCube() {
+	private MultiBlockNanoCube() {
 	}
 
 	@Override
 	public boolean canForm(World world, int x, int y, int z) {
-		if (!checkGroundLevel(world, x, y, z))
+		return this.canForm(world, x, y, z, false);
+	}
+
+	@Override
+	public boolean canFormStrict(World world, int x, int y, int z) {
+		return this.canForm(world, x, y, z, true);
+	}
+
+	private boolean canForm(World world, int x, int y, int z, boolean strict) {
+		if (!checkGroundLevel(world, x, y, z, strict))
 			return false;
-		if (!checkMidLevel(world, x, y, z))
+		if (!checkMidLevel(world, x, y, z, strict))
 			return false;
-		if (!checkTopLevel(world, x, y, z))
+		if (!checkTopLevel(world, x, y, z, strict))
 			return false;
 
 		return true;
 	}
 
-	private boolean checkGroundLevel(World world, int x, int y, int z) {
-		if (world.getBlockId(x, y, z) != FemtocraftConfigs.FemtopowerNanoCubePortID)
-			return false;
+	private boolean checkGroundLevel(World world, int x, int y, int z,
+			boolean strict) {
 
 		for (int i = -1; i <= 1; ++i) {
 			for (int j = -1; j <= 1; ++j) {
 				if (i == 0 && j == 0)
-					continue;
+					if (world.getBlockId(x + i, y, z + j) != FemtocraftConfigs.FemtopowerNanoCubePortID)
+						return false;
 
 				if (world.getBlockId(x + i, y, z + j) != FemtocraftConfigs.FemtopowerNanoCubeFrameID)
 					return false;
+
+				if (strict) {
+					IMultiBlockComponent mbc = (IMultiBlockComponent) world
+							.getBlockTileEntity(x + i, y, z + j);
+					if (mbc == null)
+						return false;
+					if (mbc.isValidMultiBlock())
+						return false;
+				}
 			}
 		}
 		return true;
 	}
 
-	private boolean checkMidLevel(World world, int x, int y, int z) {
+	private boolean checkMidLevel(World world, int x, int y, int z,
+			boolean strict) {
 		if (world.getBlockId(x, y + 1, z) != FemtocraftConfigs.FemtopowerMicroCubeID)
 			return false;
 
@@ -54,21 +74,40 @@ public class MultiBlockNanoCube implements IMultiBlock {
 					if (world.getBlockId(x + i, y + 1, z + j) != FemtocraftConfigs.FemtopowerNanoCubeFrameID)
 						return false;
 				}
+
+				if (strict) {
+					IMultiBlockComponent mbc = (IMultiBlockComponent) world
+							.getBlockTileEntity(x + i, y + 1, z + j);
+					if (mbc == null)
+						return false;
+					if (mbc.isValidMultiBlock())
+						return false;
+				}
 			}
 		}
 		return true;
 	}
 
-	private boolean checkTopLevel(World world, int x, int y, int z) {
-		if (world.getBlockId(x, y + 2, z) != FemtocraftConfigs.FemtopowerNanoCubePortID)
-			return false;
+	private boolean checkTopLevel(World world, int x, int y, int z,
+			boolean strict) {
+
 		for (int i = -1; i <= 1; ++i) {
 			for (int j = -1; j <= 1; ++j) {
 				if (i == 0 && j == 0)
-					continue;
+					if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.FemtopowerNanoCubePortID)
+						return false;
 
 				if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.FemtopowerNanoCubeFrameID)
 					return false;
+
+				if (strict) {
+					IMultiBlockComponent mbc = (IMultiBlockComponent) world
+							.getBlockTileEntity(x + i, y + 2, z + j);
+					if (mbc == null)
+						return false;
+					if (mbc.isValidMultiBlock())
+						return false;
+				}
 			}
 		}
 		return true;
@@ -98,6 +137,23 @@ public class MultiBlockNanoCube implements IMultiBlock {
 	}
 
 	@Override
+	public boolean formMultiBlockWithBlock(World world, int x, int y, int z) {
+		// x
+		for (int i = -2; i <= 2; i++) {
+			// z
+			for (int j = -2; j <= 2; j++) {
+				// y
+				for (int k = -2; k <= 0; k++) {
+					if (canFormStrict(world, x + i, y + k, z + j)) {
+						return formMultiBlock(world, x + i, y + k, z + j);
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
 	public boolean breakMultiBlock(World world, int x, int y, int z) {
 		boolean result = true;
 
@@ -119,5 +175,4 @@ public class MultiBlockNanoCube implements IMultiBlock {
 
 		return result;
 	}
-
 }
