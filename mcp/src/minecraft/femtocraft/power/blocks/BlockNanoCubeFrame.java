@@ -48,7 +48,7 @@ public class BlockNanoCubeFrame extends TileContainer {
 	private Icon iconForSide(MultiBlockInfo info, ForgeDirection dir, int x,
 			int y, int z) {
 		int xdif = x - info.x();
-		int ydif = y - info.y() + 1;
+		int ydif = y - info.y() -1;
 		int zdif = z - info.z();
 
 		switch (dir) {
