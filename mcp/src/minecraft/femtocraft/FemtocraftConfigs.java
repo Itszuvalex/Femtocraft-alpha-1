@@ -80,6 +80,10 @@ public class FemtocraftConfigs {
 	int FemtopowerMicroChargingBaseID = 391;
 	public static @CfgId(block = true)
 	int FemtopowerMicroChargingCoilID = 392;
+	public static @CfgId(block = true)
+	int FemtopowerNanoCubeFrameID = 395;
+	public static @CfgId(block = true)
+	int FemtopowerNanoCubePortID = 396;
 
 	public static @CfgId(block = true)
 	int FemtocraftMassBlock = 400;
