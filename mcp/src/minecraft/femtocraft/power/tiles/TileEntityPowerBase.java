@@ -102,7 +102,7 @@ public class TileEntityPowerBase extends TileEntityBase implements
 	@Override
 	public void femtocraftServerUpdate() {
 		// Don't do anything for empty containers
-		if (container.getCurrentPower() <= 0) {
+		if (getCurrentPower() <= 0) {
 			return;
 		}
 
@@ -116,7 +116,7 @@ public class TileEntityPowerBase extends TileEntityBase implements
 		}
 		float[] percentFilled = new float[6];
 		Arrays.fill(percentFilled, 1.0f);
-		int maxSpreadThisTick = (int) (((float) container.getCurrentPower()) * maxPowerPerTick);
+		int maxSpreadThisTick = (int) (((float) getCurrentPower()) * maxPowerPerTick);
 
 		while (maxSpreadThisTick > 0 && numToFill > 0) {
 			for (int j = 0; j < 6; ++j) {
@@ -186,11 +186,11 @@ public class TileEntityPowerBase extends TileEntityBase implements
 			int locy = this.yCoord + offset.offsetY;
 			int locz = this.zCoord + offset.offsetZ;
 
-			int amountToFill = (int) ((float) container.getCurrentPower() * maxSizePackets);
+			int amountToFill = (int) ((float) getCurrentPower() * maxSizePackets);
 			amountToFill = amountToFill < maxSpreadThisTick ? amountToFill
 					: maxSpreadThisTick;
-			amountToFill = amountToFill < container.getCurrentPower() ? amountToFill
-					: container.getCurrentPower();
+			amountToFill = amountToFill < getCurrentPower() ? amountToFill
+					: getCurrentPower();
 			// Having passed initial check, and due to this now being this
 			// block's
 			// update function, can safely assume adjacent blocks remain the
@@ -202,8 +202,7 @@ public class TileEntityPowerBase extends TileEntityBase implements
 				if (container != null) {
 					int powerconsumed = container.charge(offset.getOpposite(),
 							amountToFill);
-					this.container.setCurrentPower(this.container
-							.getCurrentPower() - powerconsumed);
+					consume(powerconsumed);
 					maxSpreadThisTick -= powerconsumed;
 				}
 			}
@@ -253,7 +252,7 @@ public class TileEntityPowerBase extends TileEntityBase implements
 				IPowerBlockContainer fc = (IPowerBlockContainer) checkTile;
 				if (!fc.canConnect(offset.getOpposite()))
 					continue;
-				if (!fc.canAcceptPowerOfLevel(container.getTechLevel(),
+				if (!fc.canAcceptPowerOfLevel(getTechLevel(offset.getOpposite()),
 						offset.getOpposite()))
 					continue;
 

@@ -90,6 +90,8 @@ public class TileEntityNanoCubeFrame extends TileEntityBase implements
 	public boolean formMultiBlock(World world, int x, int y, int z) {
 		boolean result = info.formMultiBlock(world, x, y, z);
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord,
+				worldObj.getBlockId(xCoord, yCoord, zCoord));
 		return result;
 	}
 
@@ -97,6 +99,8 @@ public class TileEntityNanoCubeFrame extends TileEntityBase implements
 	public boolean breakMultiBlock(World world, int x, int y, int z) {
 		boolean result = info.breakMultiBlock(world, x, y, z);
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord,
+				worldObj.getBlockId(xCoord, yCoord, zCoord));
 		return result;
 	}
 
