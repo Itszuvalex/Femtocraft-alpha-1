@@ -12,70 +12,70 @@ public class RenderUtils {
 	public static void renderCube(float x, float y, float z, float startx,
 			float starty, float startz, float endx, float endy, float endz,
 			Icon texture) {
-		RenderUtils.drawTopFace(x, y, z, startx, endx, startz, endz,
-                endy, texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
-		RenderUtils.drawBottomFace(x, y, z, startx, endx, startz,
-                endz, starty, texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
-		RenderUtils.drawNorthFace(x, y, z, startx, endx, starty,
-                endy, startz, texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
-		RenderUtils.drawEastFace(x, y, z, starty, endy, startz, endz,
-                endx, texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
-		RenderUtils.drawSouthFace(x, y, z, startx, endx, starty,
-                endy, endz, texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
-		RenderUtils.drawWestFace(x, y, z, starty, endy, startz, endz,
-                startx, texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawTopFace(x, y, z, startx, endx, startz, endz, endy,
+				texture, texture.getMinU(), texture.getMaxU(),
+				texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawBottomFace(x, y, z, startx, endx, startz, endz, starty,
+				texture, texture.getMinU(), texture.getMaxU(),
+				texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawNorthFace(x, y, z, startx, endx, starty, endy, startz,
+				texture, texture.getMinU(), texture.getMaxU(),
+				texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawEastFace(x, y, z, starty, endy, startz, endz, endx,
+				texture, texture.getMinU(), texture.getMaxU(),
+				texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawSouthFace(x, y, z, startx, endx, starty, endy, endz,
+				texture, texture.getMinU(), texture.getMaxU(),
+				texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawWestFace(x, y, z, starty, endy, startz, endz, startx,
+				texture, texture.getMinU(), texture.getMaxU(),
+				texture.getMinV(), texture.getMaxV());
 	}
 
 	public static void renderDoubleSidedCube(float x, float y, float z,
 			float startx, float starty, float startz, float endx, float endy,
 			float endz, Icon texture) {
-		RenderUtils.drawTopFace(x, y, z, startx, endx, startz, endz,
-                endy, texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
-		RenderUtils.drawBottomFace(x, y, z, startx, endx, startz,
-                endz, endy, texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawTopFace(x, y, z, startx, endx, startz, endz, endy,
+				texture, texture.getMinU(), texture.getMaxU(),
+				texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawBottomFace(x, y, z, startx, endx, startz, endz, endy,
+				texture, texture.getMinU(), texture.getMaxU(),
+				texture.getMinV(), texture.getMaxV());
 
-		RenderUtils.drawBottomFace(x, y, z, startx, endx, startz,
-                endz, starty, texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
-		RenderUtils.drawTopFace(x, y, z, startx, endx, startz, endz,
-                starty, texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawBottomFace(x, y, z, startx, endx, startz, endz, starty,
+				texture, texture.getMinU(), texture.getMaxU(),
+				texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawTopFace(x, y, z, startx, endx, startz, endz, starty,
+				texture, texture.getMinU(), texture.getMaxU(),
+				texture.getMinV(), texture.getMaxV());
 
-		RenderUtils.drawNorthFace(x, y, z, startx, endx, starty,
-                endy, startz, texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
-		RenderUtils.drawSouthFace(x, y, z, startx, endx, starty,
-                endy, startz, texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawNorthFace(x, y, z, startx, endx, starty, endy, startz,
+				texture, texture.getMinU(), texture.getMaxU(),
+				texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawSouthFace(x, y, z, startx, endx, starty, endy, startz,
+				texture, texture.getMinU(), texture.getMaxU(),
+				texture.getMinV(), texture.getMaxV());
 
-		RenderUtils.drawEastFace(x, y, z, starty, endy, startz, endz,
-                endx, texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
-		RenderUtils.drawWestFace(x, y, z, starty, endy, startz, endz,
-                endx, texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawEastFace(x, y, z, starty, endy, startz, endz, endx,
+				texture, texture.getMinU(), texture.getMaxU(),
+				texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawWestFace(x, y, z, starty, endy, startz, endz, endx,
+				texture, texture.getMinU(), texture.getMaxU(),
+				texture.getMinV(), texture.getMaxV());
 
-		RenderUtils.drawSouthFace(x, y, z, startx, endx, starty,
-                endy, endz, texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
-		RenderUtils.drawNorthFace(x, y, z, startx, endx, starty,
-                endy, endz, texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawSouthFace(x, y, z, startx, endx, starty, endy, endz,
+				texture, texture.getMinU(), texture.getMaxU(),
+				texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawNorthFace(x, y, z, startx, endx, starty, endy, endz,
+				texture, texture.getMinU(), texture.getMaxU(),
+				texture.getMinV(), texture.getMaxV());
 
-		RenderUtils.drawWestFace(x, y, z, starty, endy, startz, endz,
-                startx, texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
-		RenderUtils.drawEastFace(x, y, z, starty, endy, startz, endz,
-                startx, texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawWestFace(x, y, z, starty, endy, startz, endz, startx,
+				texture, texture.getMinU(), texture.getMaxU(),
+				texture.getMinV(), texture.getMaxV());
+		RenderUtils.drawEastFace(x, y, z, starty, endy, startz, endz, startx,
+				texture, texture.getMinU(), texture.getMaxU(),
+				texture.getMinV(), texture.getMaxV());
 	}
 
 	public static void drawTopFace(float x, float y, float z, float xmin,
@@ -160,18 +160,10 @@ public class RenderUtils {
 	public static RenderQuad makeNorthFace(float xmin, float xmax, float ymin,
 			float ymax, float zoffset, Icon texture, float minU, float maxU,
 			float minV, float maxV) {
-		RenderPoint a = new RenderPoint();
-		RenderPoint b = new RenderPoint();
-		RenderPoint c = new RenderPoint();
-		RenderPoint d = new RenderPoint();
-
-		a.z = b.z = c.z = d.z = zoffset;
-		a.x = b.x = xmin;
-		c.x = d.x = xmax;
-		a.y = d.y = ymin;
-		b.y = c.y = ymax;
-
-		return new RenderQuad(a, b, c, d, texture, minU, maxU, minV, maxV);
+		return new RenderQuad(new RenderPoint(xmax, ymax, zoffset),
+				new RenderPoint(xmax, ymin, zoffset), new RenderPoint(xmin,
+						ymin, zoffset), new RenderPoint(xmin, ymax, zoffset),
+				texture, minU, maxU, minV, maxV);
 	}
 
 	public static void drawEastFace(float x, float y, float z, float ymin,
@@ -193,18 +185,10 @@ public class RenderUtils {
 	public static RenderQuad makeEastFace(float ymin, float ymax, float zmin,
 			float zmax, float xoffset, Icon texture, float minU, float maxU,
 			float minV, float maxV) {
-		RenderPoint a = new RenderPoint();
-		RenderPoint b = new RenderPoint();
-		RenderPoint c = new RenderPoint();
-		RenderPoint d = new RenderPoint();
-
-		a.x = b.x = c.x = d.x = xoffset;
-		a.y = d.y = ymin;
-		b.y = c.y = ymax;
-		a.z = b.z = zmin;
-		c.z = d.z = zmax;
-
-		return new RenderQuad(a, b, c, d, texture, minU, maxU, minV, maxV);
+		return new RenderQuad(new RenderPoint(xoffset, ymax, zmax),
+				new RenderPoint(xoffset, ymin, zmax), new RenderPoint(xoffset,
+						ymin, zmin), new RenderPoint(xoffset, ymax, zmin),
+				texture, minU, maxU, minV, maxV);
 	}
 
 	public static void drawSouthFace(float x, float y, float z, float xmin,
@@ -225,18 +209,10 @@ public class RenderUtils {
 	public static RenderQuad makeSouthFace(float xmin, float xmax, float ymin,
 			float ymax, float zoffset, Icon texture, float minU, float maxU,
 			float minV, float maxV) {
-		RenderPoint a = new RenderPoint();
-		RenderPoint b = new RenderPoint();
-		RenderPoint c = new RenderPoint();
-		RenderPoint d = new RenderPoint();
-
-		a.z = b.z = c.z = d.z = zoffset;
-		a.x = d.x = xmin;
-		b.x = c.x = xmax;
-		a.y = b.y = ymin;
-		c.y = d.y = ymax;
-
-		return new RenderQuad(a, b, c, d, texture, minU, maxU, minV, maxV);
+		return new RenderQuad(new RenderPoint(xmin, ymax, zoffset),
+				new RenderPoint(xmin, ymin, zoffset), new RenderPoint(xmax,
+						ymin, zoffset), new RenderPoint(xmax, ymax, zoffset),
+				texture, minU, maxU, minV, maxV);
 	}
 
 	public static void drawWestFace(float x, float y, float z, float ymin,
@@ -258,18 +234,10 @@ public class RenderUtils {
 	public static RenderQuad makeWestFace(float ymin, float ymax, float zmin,
 			float zmax, float xoffset, Icon texture, float minU, float maxU,
 			float minV, float maxV) {
-		RenderPoint a = new RenderPoint();
-		RenderPoint b = new RenderPoint();
-		RenderPoint c = new RenderPoint();
-		RenderPoint d = new RenderPoint();
-
-		a.x = b.x = c.x = d.x = xoffset;
-		a.y = b.y = ymin;
-		c.y = d.y = ymax;
-		a.z = d.z = zmin;
-		b.z = c.z = zmax;
-
-		return new RenderQuad(a, b, c, d, texture, minU, maxU, minV, maxV);
+		return new RenderQuad(new RenderPoint(xoffset, ymax, zmin),
+				new RenderPoint(xoffset, ymin, zmin), new RenderPoint(xoffset,
+						ymin, zmax), new RenderPoint(xoffset, ymax, zmax),
+				texture, minU, maxU, minV, maxV);
 	}
 
 	public static void drawArbitraryFace(float x, float y, float z, float xmin,
@@ -278,37 +246,37 @@ public class RenderUtils {
 			float minV, float maxV) {
 		switch (normal) {
 		case UP:
-			RenderUtils.drawTopFace(x, y, z, xmin, xmax, zmin, zmax,
-                    ymax, texture, minU, maxU, minV, maxV);
+			RenderUtils.drawTopFace(x, y, z, xmin, xmax, zmin, zmax, ymax,
+					texture, minU, maxU, minV, maxV);
 			break;
 		case DOWN:
-			RenderUtils.drawBottomFace(x, y, z, xmin, xmax, zmin,
-                    zmax, ymin, texture, minU, maxU, minV, maxV);
+			RenderUtils.drawBottomFace(x, y, z, xmin, xmax, zmin, zmax, ymin,
+					texture, minU, maxU, minV, maxV);
 			break;
 		case NORTH:
-			RenderUtils.drawNorthFace(x, y, z, xmin, xmax, ymin,
-                    ymax, zmin, texture, minU, maxU, minV, maxV);
+			RenderUtils.drawNorthFace(x, y, z, xmin, xmax, ymin, ymax, zmin,
+					texture, minU, maxU, minV, maxV);
 			break;
 		case EAST:
-			RenderUtils.drawEastFace(x, y, z, ymin, ymax, zmin, zmax,
-                    xmax, texture, minU, maxU, minV, maxV);
+			RenderUtils.drawEastFace(x, y, z, ymin, ymax, zmin, zmax, xmax,
+					texture, minU, maxU, minV, maxV);
 			break;
 		case SOUTH:
-			RenderUtils.drawSouthFace(x, y, z, xmin, xmax, ymin,
-                    ymax, zmax, texture, minU, maxU, minV, maxV);
+			RenderUtils.drawSouthFace(x, y, z, xmin, xmax, ymin, ymax, zmax,
+					texture, minU, maxU, minV, maxV);
 			break;
 		case WEST:
-			RenderUtils.drawWestFace(x, y, z, ymin, ymax, zmin, zmax,
-                    xmin, texture, minU, maxU, minV, maxV);
+			RenderUtils.drawWestFace(x, y, z, ymin, ymax, zmin, zmax, xmin,
+					texture, minU, maxU, minV, maxV);
 			break;
 		default:
 			break;
 		}
 	}
 
-	public static void drawFaceByPoints(float x, float y, float z, RenderPoint A,
-			RenderPoint B, RenderPoint C, RenderPoint D, Icon texture, float minU, float maxU,
-			float minV, float maxV) {
+	public static void drawFaceByPoints(float x, float y, float z,
+			RenderPoint A, RenderPoint B, RenderPoint C, RenderPoint D,
+			Icon texture, float minU, float maxU, float minV, float maxV) {
 		Tessellator tes = Tessellator.instance;
 
 		tes.addTranslation(x, y, z);

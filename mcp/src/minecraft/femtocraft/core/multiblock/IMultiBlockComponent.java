@@ -1,5 +1,7 @@
 package femtocraft.core.multiblock;
 
+import net.minecraft.world.World;
+
 /**
  * 
  * @author Itszuvalex
@@ -19,7 +21,7 @@ public interface IMultiBlockComponent {
 	 * @param z
 	 * @return True if correctly forms, given controller block at x,y,z.
 	 */
-	boolean formMultiBlock(int x, int y, int z);
+	boolean formMultiBlock(World world, int x, int y, int z);
 
 	/**
 	 * 
@@ -28,5 +30,11 @@ public interface IMultiBlockComponent {
 	 * @param z
 	 * @return True if breaks without errors, given controller block at x,y,z.
 	 */
-	boolean breakMultiBlock(int x, int y, int z);
+	boolean breakMultiBlock(World world, int x, int y, int z);
+
+	/**
+	 * 
+	 * @return MultiBlockInfo associated with this MultiBlockComponent
+	 */
+	MultiBlockInfo getInfo();
 }

@@ -11,7 +11,7 @@ import net.minecraftforge.common.ForgeDirection;
 import java.util.Arrays;
 
 public class TileEntityPowerBase extends TileEntityBase implements
-        IPowerBlockContainer {
+		IPowerBlockContainer {
 	private PowerContainer container;
 	private float maxPowerPerTick;
 	private float maxSizePackets;
@@ -80,8 +80,8 @@ public class TileEntityPowerBase extends TileEntityBase implements
 
 	@Override
 	public boolean canCharge(ForgeDirection from) {
-        return getFillPercentage() < 1.0f;
-    }
+		return getFillPercentage() < 1.0f;
+	}
 
 	@Override
 	public int charge(ForgeDirection from, int amount) {
@@ -102,7 +102,7 @@ public class TileEntityPowerBase extends TileEntityBase implements
 	@Override
 	public void femtocraftServerUpdate() {
 		// Don't do anything for empty containers
-		if (container.getCurrentPower() <= 0) {
+		if (getCurrentPower() <= 0) {
 			return;
 		}
 
@@ -116,7 +116,7 @@ public class TileEntityPowerBase extends TileEntityBase implements
 		}
 		float[] percentFilled = new float[6];
 		Arrays.fill(percentFilled, 1.0f);
-		int maxSpreadThisTick = (int) (((float) container.getCurrentPower()) * maxPowerPerTick);
+		int maxSpreadThisTick = (int) (((float) getCurrentPower()) * maxPowerPerTick);
 
 		while (maxSpreadThisTick > 0 && numToFill > 0) {
 			for (int j = 0; j < 6; ++j) {
@@ -161,13 +161,13 @@ public class TileEntityPowerBase extends TileEntityBase implements
 						willCharge[j] = false;
 						numToFill--;
 						percentFilled[j] = 1.f;
-                    }
+					}
 				} else {
 					// Update as we fill
 					willCharge[j] = false;
 					numToFill--;
 					percentFilled[j] = 1.f;
-                }
+				}
 			}
 
 			// Find lowest % filled from
@@ -186,11 +186,11 @@ public class TileEntityPowerBase extends TileEntityBase implements
 			int locy = this.yCoord + offset.offsetY;
 			int locz = this.zCoord + offset.offsetZ;
 
-			int amountToFill = (int) ((float) container.getCurrentPower() * maxSizePackets);
+			int amountToFill = (int) ((float) getCurrentPower() * maxSizePackets);
 			amountToFill = amountToFill < maxSpreadThisTick ? amountToFill
 					: maxSpreadThisTick;
-			amountToFill = amountToFill < container.getCurrentPower() ? amountToFill
-					: container.getCurrentPower();
+			amountToFill = amountToFill < getCurrentPower() ? amountToFill
+					: getCurrentPower();
 			// Having passed initial check, and due to this now being this
 			// block's
 			// update function, can safely assume adjacent blocks remain the
@@ -202,8 +202,7 @@ public class TileEntityPowerBase extends TileEntityBase implements
 				if (container != null) {
 					int powerconsumed = container.charge(offset.getOpposite(),
 							amountToFill);
-					this.container.setCurrentPower(this.container
-							.getCurrentPower() - powerconsumed);
+					consume(powerconsumed);
 					maxSpreadThisTick -= powerconsumed;
 				}
 			}
@@ -213,7 +212,7 @@ public class TileEntityPowerBase extends TileEntityBase implements
 	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
 		super.readFromNBT(par1NBTTagCompound);
 		container = PowerContainer.createFromNBT(par1NBTTagCompound
-                .getCompoundTag("power"));
+				.getCompoundTag("power"));
 
 		// for(int i = 0; i < 6; i++) {
 		// connections[i] =
@@ -249,10 +248,12 @@ public class TileEntityPowerBase extends TileEntityBase implements
 			TileEntity checkTile = this.worldObj.getBlockTileEntity(locx, locy,
 					locz);
 
-			if (checkTile != null
-					&& checkTile instanceof IPowerBlockContainer) {
+			if (checkTile != null && checkTile instanceof IPowerBlockContainer) {
 				IPowerBlockContainer fc = (IPowerBlockContainer) checkTile;
 				if (!fc.canConnect(offset.getOpposite()))
+					continue;
+				if (!fc.canAcceptPowerOfLevel(getTechLevel(offset.getOpposite()),
+						offset.getOpposite()))
 					continue;
 
 				connections[j] = true;
@@ -267,7 +268,8 @@ public class TileEntityPowerBase extends TileEntityBase implements
 	}
 
 	@Override
-	public boolean canAcceptPowerOfLevel(EnumTechLevel level, ForgeDirection from) {
+	public boolean canAcceptPowerOfLevel(EnumTechLevel level,
+			ForgeDirection from) {
 		return container.canAcceptPowerOfLevel(level);
 	}
 
@@ -285,7 +287,7 @@ public class TileEntityPowerBase extends TileEntityBase implements
 	public void loadInfoFromItemNBT(NBTTagCompound compound) {
 		super.loadInfoFromItemNBT(compound);
 		container = PowerContainer.createFromNBT(compound
-                .getCompoundTag("power"));
+				.getCompoundTag("power"));
 	}
 
 	@Override

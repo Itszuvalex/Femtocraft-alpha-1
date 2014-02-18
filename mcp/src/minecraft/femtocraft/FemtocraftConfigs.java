@@ -56,6 +56,8 @@ public class FemtocraftConfigs {
 
 	// TODO: moved microcable to something else - need to fill id 370
 	public static @CfgId(block = true)
+	int testID = 370;
+	public static @CfgId(block = true)
 	int FemtopowerGeneratorTestID = 371;
 	public static @CfgId(block = true)
 	int FemtopowerConsumerTestBlockID = 372;
@@ -78,6 +80,10 @@ public class FemtocraftConfigs {
 	int FemtopowerMicroChargingBaseID = 391;
 	public static @CfgId(block = true)
 	int FemtopowerMicroChargingCoilID = 392;
+	public static @CfgId(block = true)
+	int FemtopowerNanoCubeFrameID = 395;
+	public static @CfgId(block = true)
+	int FemtopowerNanoCubePortID = 396;
 
 	public static @CfgId(block = true)
 	int FemtocraftMassBlock = 400;
@@ -88,6 +94,10 @@ public class FemtocraftConfigs {
 	int nanoCableID = 501;
 	public static @CfgId(block = true)
 	int femtoCableID = 502;
+	public static @CfgId(block = true)
+	int orbitalEqualizerID = 505;
+	public static @CfgId(block = true)
+	int nullEqualizerID = 506;
 
 	// items
 	public static @CfgId

@@ -2,7 +2,6 @@ package femtocraft;
 
 import java.util.logging.Logger;
 
-import femtocraft.power.blocks.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -89,6 +88,18 @@ import femtocraft.industry.items.ItemPaperSchematic;
 import femtocraft.managers.ManagerRecipe;
 import femtocraft.managers.research.ManagerResearch;
 import femtocraft.player.PropertiesNanite;
+import femtocraft.power.blocks.BlockBaseMicroCharging;
+import femtocraft.power.blocks.BlockCoilMicroCharging;
+import femtocraft.power.blocks.BlockConsumer;
+import femtocraft.power.blocks.BlockFemtoCable;
+import femtocraft.power.blocks.BlockGenerator;
+import femtocraft.power.blocks.BlockMicroCable;
+import femtocraft.power.blocks.BlockMicroCube;
+import femtocraft.power.blocks.BlockNanoCable;
+import femtocraft.power.blocks.BlockNanoCubeFrame;
+import femtocraft.power.blocks.BlockNanoCubePort;
+import femtocraft.power.blocks.BlockNullEqualizer;
+import femtocraft.power.blocks.BlockOrbitalEqualizer;
 import femtocraft.power.items.ItemBlockMicroCube;
 import femtocraft.power.items.ItemSpoolGold;
 import femtocraft.proxy.ProxyClient;
@@ -135,10 +146,14 @@ public class Femtocraft {
 	public static Block microDeconstructor;
 	public static Block microReconstructor;
 	public static Block microCube;
+	public static Block nanoCubeFrame;
+	public static Block nanoCubePort;
 	public static Block vacuumTube;
 	public static Block suctionPipe;
 	public static Block microChargingBase;
 	public static Block microChargingCoil;
+	public static Block orbitalEqualizer;
+	public static Block nullEqualizer;
 
 	// cables
 	public static Block blockMicroCable;
@@ -354,6 +369,16 @@ public class Femtocraft {
 				"BlockMicroCube");
 		LanguageRegistry.addName(microCube, "Micro-Cube");
 
+		nanoCubeFrame = new BlockNanoCubeFrame(
+				FemtocraftConfigs.FemtopowerNanoCubeFrameID);
+		GameRegistry.registerBlock(nanoCubeFrame, "BlockNanoCubeFrame");
+		LanguageRegistry.addName(nanoCubeFrame, "Nano-Cube Frame");
+
+		nanoCubePort = new BlockNanoCubePort(
+				FemtocraftConfigs.FemtopowerNanoCubePortID);
+		GameRegistry.registerBlock(nanoCubePort, "BlockNanoCubePort");
+		LanguageRegistry.addName(nanoCubePort, "Nano-Cube Port");
+
 		vacuumTube = new BlockVacuumTube(
 				FemtocraftConfigs.FemtocraftVacuumTubeID);
 		GameRegistry.registerBlock(vacuumTube, "BlockVacuumTube");
@@ -375,6 +400,16 @@ public class Femtocraft {
 		GameRegistry.registerBlock(microChargingCoil, "BlockCoilMicroCharging");
 		LanguageRegistry.addName(microChargingCoil,
 				"Electrostatic Charging Coil");
+
+		orbitalEqualizer = new BlockOrbitalEqualizer(
+				FemtocraftConfigs.orbitalEqualizerID);
+		GameRegistry.registerBlock(orbitalEqualizer, "BlockOrbitalEqualizer");
+		LanguageRegistry.addName(orbitalEqualizer, "Orbital Equalizer");
+
+		nullEqualizer = new BlockNullEqualizer(
+				FemtocraftConfigs.nullEqualizerID);
+		GameRegistry.registerBlock(nullEqualizer, "BlockNullEqualizer");
+		LanguageRegistry.addName(nullEqualizer, "Null-Energy Equalizer");
 
 		// Liquids
 		mass = new FluidMass();
@@ -489,7 +524,6 @@ public class Femtocraft {
 		LanguageRegistry.addName(spoolGold, "Gold Wire Spool");
 
 		// Schematics
-
 		paperSchematic = new ItemPaperSchematic(
 				FemtocraftConfigs.paperSchematicID);
 		LanguageRegistry.addName(paperSchematic, "Paper Schematic");

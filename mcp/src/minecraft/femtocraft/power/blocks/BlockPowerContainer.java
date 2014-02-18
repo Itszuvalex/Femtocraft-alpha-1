@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package femtocraft.power.blocks;
 
@@ -14,7 +14,6 @@ import net.minecraft.world.World;
 
 /**
  * @author Itszuvalex
- * 
  */
 public class BlockPowerContainer extends TileContainer {
 
@@ -35,27 +34,21 @@ public class BlockPowerContainer extends TileContainer {
 	 * , int, int, int, int)
 	 */
 	@Override
-	public void onNeighborBlockChange(World par1World, int par2, int par3,
-			int par4, int par5) {
+	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
 		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
-		TileEntityPowerBase container = (TileEntityPowerBase) par1World
-				.getBlockTileEntity(par2, par3, par4);
+		TileEntityPowerBase container = (TileEntityPowerBase) par1World.getBlockTileEntity(par2, par3, par4);
 
-		if (container != null)
-			container.checkConnections();
+		if (container != null) container.checkConnections();
 	}
 
 	@Override
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
-			EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
-		super.onBlockPlacedBy(par1World, par2, par3, par4,
-				par5EntityLivingBase, par6ItemStack);
+	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase,
+								ItemStack par6ItemStack) {
+		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLivingBase, par6ItemStack);
 
-		TileEntityPowerBase container = (TileEntityPowerBase) par1World
-				.getBlockTileEntity(par2, par3, par4);
+		TileEntityPowerBase container = (TileEntityPowerBase) par1World.getBlockTileEntity(par2, par3, par4);
 
-		if (container != null)
-			container.checkConnections();
+		if (container != null) container.checkConnections();
 	}
 
 	/*
@@ -66,18 +59,14 @@ public class BlockPowerContainer extends TileContainer {
 	 * int, int, int, int)
 	 */
 	@Override
-	public void onPostBlockPlaced(World par1World, int par2, int par3,
-			int par4, int par5) {
+	public void onPostBlockPlaced(World par1World, int par2, int par3, int par4, int par5) {
 		super.onPostBlockPlaced(par1World, par2, par3, par4, par5);
 
-		par1World.notifyBlocksOfNeighborChange(par2, par3, par4,
-				par1World.getBlockId(par2, par3, par4));
+		par1World.notifyBlocksOfNeighborChange(par2, par3, par4, par1World.getBlockId(par2, par3, par4));
 
-		TileEntityPowerBase container = (TileEntityPowerBase) par1World
-				.getBlockTileEntity(par2, par3, par4);
+		TileEntityPowerBase container = (TileEntityPowerBase) par1World.getBlockTileEntity(par2, par3, par4);
 
-		if (container != null)
-			container.checkConnections();
+		if (container != null) container.checkConnections();
 	}
 
 	/*
@@ -87,18 +76,14 @@ public class BlockPowerContainer extends TileContainer {
 	 * int, int, int, int, float, float, float, int)
 	 */
 	@Override
-	public int onBlockPlaced(World par1World, int par2, int par3, int par4,
-			int par5, float par6, float par7, float par8, int par9) {
-		int val = super.onBlockPlaced(par1World, par2, par3, par4, par5, par6,
-				par7, par8, par9);
-		TileEntityPowerBase container = (TileEntityPowerBase) par1World
-				.getBlockTileEntity(par2, par3, par4);
+	public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7,
+							 float par8, int par9) {
+		int val = super.onBlockPlaced(par1World, par2, par3, par4, par5, par6, par7, par8, par9);
+		TileEntityPowerBase container = (TileEntityPowerBase) par1World.getBlockTileEntity(par2, par3, par4);
 
-		if (container != null)
-			container.checkConnections();
+		if (container != null) container.checkConnections();
 
-		par1World.notifyBlocksOfNeighborChange(par2, par3, par4,
-				par1World.getBlockId(par2, par3, par4));
+		par1World.notifyBlocksOfNeighborChange(par2, par3, par4, par1World.getBlockId(par2, par3, par4));
 
 		return val;
 	}
@@ -112,16 +97,15 @@ public class BlockPowerContainer extends TileContainer {
 	 * float, float)
 	 */
 	@Override
-	public boolean onBlockActivated(World par1World, int par2, int par3,
-			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
-			float par8, float par9) {
+	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer,
+									int par6, float par7, float par8, float par9) {
 
-		TileEntityPowerBase container = (TileEntityPowerBase) par1World
-				.getBlockTileEntity(par2, par3, par4);
+		TileEntityPowerBase container = (TileEntityPowerBase) par1World.getBlockTileEntity(par2, par3, par4);
 
-		if (container != null)
-			par5EntityPlayer.addChatMessage(String.valueOf(container
-					.getCurrentPower()));
+		if (container != null) {
+			par5EntityPlayer.addChatMessage(String.valueOf(container.getCurrentPower()) + "/" + String.valueOf
+					(container.getMaxPower()));
+		}
 
 		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
 	}
