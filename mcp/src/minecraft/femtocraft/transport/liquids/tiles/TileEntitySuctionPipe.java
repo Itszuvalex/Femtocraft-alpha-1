@@ -123,6 +123,8 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 	public void femtocraftServerUpdate() {
 		super.femtocraftServerUpdate();
 
+		renderFluid = null;
+
 		FluidStack pre = tank.getFluid();
 
 		int[] pressures = new int[6];
@@ -243,6 +245,8 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 
 		if (tank.getFluid() == null)
 			return;
+
+		renderFluid = tank.getFluid();
 
 		// Sum pressure differences for tanks with less pressure than us
 		for (int i = 0; i < 6; ++i) {
@@ -385,8 +389,11 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 		FluidStack fluid = compound.hasKey("fluid") ? FluidStack
 				.loadFluidStackFromNBT(compound.getCompoundTag("fluid")) : null;
 		tank.setFluid(fluid);
-		if (fluid != null)
-			renderFluid = fluid;
+
+		renderFluid = compound.hasKey("renderfluid") ? FluidStack
+				.loadFluidStackFromNBT(compound.getCompoundTag("renderfluid"))
+				: renderFluid;
+
 		output = compound.getBoolean("output");
 		if (worldObj != null)
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
@@ -396,9 +403,17 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 	public void saveToDescriptionCompound(NBTTagCompound compound) {
 		super.saveToDescriptionCompound(compound);
 		NBTTagCompound fluid = new NBTTagCompound();
-		if (tank.getFluid() != null)
+		if (tank.getFluid() != null) {
 			tank.getFluid().writeToNBT(fluid);
-		compound.setTag("fluid", fluid);
+			compound.setTag("fluid", fluid);
+		}
+
+		NBTTagCompound renderfluid = new NBTTagCompound();
+		if (renderFluid != null) {
+			renderFluid.writeToNBT(renderfluid);
+			compound.setTag("renderfluid", renderfluid);
+		}
+
 		compound.setBoolean("output", output);
 	}
 
