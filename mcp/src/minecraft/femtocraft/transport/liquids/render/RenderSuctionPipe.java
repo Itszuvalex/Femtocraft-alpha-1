@@ -126,8 +126,8 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
 
 		float minU = pipe.connector.getMinU();
 		float maxU = pipe.connector.getInterpolatedU(8.f);
-		float minV = pipe.connector.getInterpolatedV(4.f);
-		float maxV = pipe.connector.getMaxV();
+		float minV = pipe.connector.getInterpolatedV(2.f);
+		float maxV = pipe.connector.getInterpolatedV(14.f);
 
 		pipes_Up = new RenderModel();
 		pipes_Up.center = new RenderPoint(.5f, .5f, .5f);
@@ -214,7 +214,7 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
 		float minU = pipe.connector.getMinU();
 		float maxU = pipe.connector.getInterpolatedU(8.f);
 		float minV = pipe.connector.getInterpolatedV(10.f);
-		float maxV = pipe.connector.getMaxV();
+		float maxV = pipe.connector.getInterpolatedV(16.f);
 
 		float minUtip = pipe.connector_tank.getMinU();
 		float maxUtip = pipe.connector_tank.getInterpolatedU(4.f);
@@ -253,6 +253,10 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
 
 			// Tank cap
 			tanks_Up.addQuad(RenderUtils.makeTopFace(min, max, min, max,
+					height, pipe.center, pipe.center.getMinU(),
+					pipe.center.getMaxU(), pipe.center.getMinV(),
+					pipe.center.getMaxV()));
+			tanks_Up.addQuad(RenderUtils.makeBottomFace(min, max, min, max,
 					height, pipe.center, pipe.center.getMinU(),
 					pipe.center.getMaxU(), pipe.center.getMinV(),
 					pipe.center.getMaxV()));
