@@ -55,8 +55,8 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
 
 		tessellator.startDrawingQuads();
 		tessellator.setColorOpaque_F(1, 1, 1);
-		renderPipe(pipe, 0, 0, 0, new boolean[] { false, false, false, false,
-				false, false }, new boolean[] { false, false, false, false,
+		renderPipe(pipe, 0, 0, 0, new boolean[] { false, false, true, false,
+				false, false }, new boolean[] { false, false, false, true,
 				false, false }, false, null);
 		tessellator.draw();
 
