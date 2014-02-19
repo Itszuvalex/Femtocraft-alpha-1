@@ -128,7 +128,7 @@ public class BlockNanoCubeFrame extends TileContainer {
 		formedSides[3] = par1IconRegister.registerIcon(Femtocraft.ID
 				.toLowerCase() + ":" + "BlockNanoCubeFrame_left");
 	}
-
+	
 	@Override
 	public TileEntity createNewTileEntity(World world) {
 		return new TileEntityNanoCubeFrame();

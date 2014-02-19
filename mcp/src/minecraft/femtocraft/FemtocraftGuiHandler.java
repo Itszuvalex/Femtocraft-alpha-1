@@ -1,18 +1,21 @@
 package femtocraft;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
-import femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
-import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
-import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
 import femtocraft.industry.containers.ContainerMicroDeconstructor;
 import femtocraft.industry.containers.ContainerMicroFurnace;
 import femtocraft.industry.containers.ContainerMicroReconstructor;
 import femtocraft.industry.gui.GuiMicroDeconstructor;
 import femtocraft.industry.gui.GuiMicroFurnace;
 import femtocraft.industry.gui.GuiMicroReconstructor;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
+import femtocraft.power.containers.ContainerNanoCube;
+import femtocraft.power.gui.GuiNanoCube;
+import femtocraft.power.tiles.TileEntityNanoCubePort;
 
 public class FemtocraftGuiHandler implements IGuiHandler {
 
@@ -35,6 +38,8 @@ public class FemtocraftGuiHandler implements IGuiHandler {
 		} else if (tileEntity instanceof TileEntityBaseEntityMicroReconstructor) {
 			return new ContainerMicroReconstructor(player.inventory,
 					(TileEntityBaseEntityMicroReconstructor) tileEntity);
+		} else if (tileEntity instanceof TileEntityNanoCubePort) {
+			return new ContainerNanoCube((TileEntityNanoCubePort) tileEntity);
 		}
 
 		return null;
@@ -54,6 +59,8 @@ public class FemtocraftGuiHandler implements IGuiHandler {
 		} else if (tileEntity instanceof TileEntityBaseEntityMicroReconstructor) {
 			return new GuiMicroReconstructor(player.inventory,
 					(TileEntityBaseEntityMicroReconstructor) tileEntity);
+		} else if (tileEntity instanceof TileEntityNanoCubePort) {
+			return new GuiNanoCube((TileEntityNanoCubePort) tileEntity);
 		}
 
 		return null;
