@@ -224,8 +224,6 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				return true;
 			}
-
-			return false;
 		}
 		return super.onSideActivate(par5EntityPlayer, side);
 	}
