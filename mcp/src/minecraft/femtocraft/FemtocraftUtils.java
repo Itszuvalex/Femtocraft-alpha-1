@@ -157,4 +157,13 @@ public class FemtocraftUtils {
 	public static String capitalize(String input) {
 		return input.substring(0, 1).toUpperCase() + input.substring(1);
 	}
+
+	public static int colorFromARGB(int a, int r, int g, int b) {
+		int r1 = 0;
+		r1 += (a & 255) << 24;
+		r1 += (r & 255) << 16;
+		r1 += (g & 255) << 8;
+		r1 += b & 255;
+		return r1;
+	}
 }

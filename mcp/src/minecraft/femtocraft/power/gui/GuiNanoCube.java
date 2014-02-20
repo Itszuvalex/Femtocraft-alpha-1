@@ -10,6 +10,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import femtocraft.Femtocraft;
+import femtocraft.FemtocraftUtils;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
 import femtocraft.power.containers.ContainerNanoCube;
 import femtocraft.power.tiles.TileEntityNanoCubePort;
@@ -30,13 +31,14 @@ public class GuiNanoCube extends GuiContainer {
 		String s = "Nano-Cube";
 		this.fontRenderer.drawString(s,
 				this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
-				4210752);
+				FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
 
 		String power = controller.getCurrentPower() + "/"
 				+ controller.getMaxPower();
 		this.fontRenderer.drawString(power,
 				this.xSize / 2 - this.fontRenderer.getStringWidth(power) / 2,
-				this.ySize * 4 / 5, 4210752);
+				this.ySize * 4 / 5,
+				FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
 	}
 
 	@Override

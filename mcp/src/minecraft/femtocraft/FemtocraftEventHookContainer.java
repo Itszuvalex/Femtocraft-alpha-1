@@ -1,5 +1,6 @@
 package femtocraft;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
 import femtocraft.common.gui.DisplaySlot;
 import femtocraft.industry.items.ItemAssemblySchematic;
 import femtocraft.player.PropertiesNanite;

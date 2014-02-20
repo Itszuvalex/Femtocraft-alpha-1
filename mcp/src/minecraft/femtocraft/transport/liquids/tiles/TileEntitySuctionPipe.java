@@ -235,7 +235,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 	 */
 	private int getTankPressure(FluidTankInfo tank, boolean output) {
 		int amount = tank.fluid == null ? 0 : tank.fluid.amount;
-		return output ? (-(tank.capacity - amount)) : amount;
+		return output ? (-(tank.capacity - amount) - 10) : amount + 10;
 	}
 
 	private void distributeLiquid(int[] pressures, IFluidHandler[] neighbors) {

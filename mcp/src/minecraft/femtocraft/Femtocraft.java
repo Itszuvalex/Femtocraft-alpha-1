@@ -110,7 +110,7 @@ import femtocraft.transport.liquids.blocks.BlockSuctionPipe;
 
 @Mod(modid = Femtocraft.ID, name = "Femtocraft", version = Femtocraft.VERSION)
 @NetworkMod(channels = { Femtocraft.ID, PropertiesNanite.PACKET_CHANNEL,
-		TileEntityVacuumTube.packetChannel }, packetHandler = FemtocraftPacketHandler.class, clientSideRequired = true, serverSideRequired = true)
+		ManagerResearch.RESEARCH_CHANNEL, TileEntityVacuumTube.packetChannel }, packetHandler = FemtocraftPacketHandler.class, clientSideRequired = true, serverSideRequired = true)
 public class Femtocraft {
 	public static final String ID = "Femtocraft";
 	public static final String VERSION = "0.1.0";
@@ -244,6 +244,8 @@ public class Femtocraft {
 
 		NetworkRegistry.instance().registerGuiHandler(this,
 				new FemtocraftGuiHandler());
+		NetworkRegistry.instance().registerConnectionHandler(
+				new FemtocraftConnectionHandler());
 		MinecraftForge.EVENT_BUS.register(new FemtocraftEventHookContainer());
 	}
 
