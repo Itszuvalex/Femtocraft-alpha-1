@@ -62,8 +62,10 @@ import femtocraft.core.items.decomposition.ItemFlorite;
 import femtocraft.core.items.decomposition.ItemFungalSpores;
 import femtocraft.core.items.decomposition.ItemHardenedBulb;
 import femtocraft.core.items.decomposition.ItemIonicChunk;
+import femtocraft.core.items.decomposition.ItemMetalComposite;
 import femtocraft.core.items.decomposition.ItemMetallite;
 import femtocraft.core.items.decomposition.ItemMicroCrystal;
+import femtocraft.core.items.decomposition.ItemMineralLattice;
 import femtocraft.core.items.decomposition.ItemMineralite;
 import femtocraft.core.items.decomposition.ItemMorphicChannel;
 import femtocraft.core.items.decomposition.ItemNerveCluster;
@@ -618,7 +620,7 @@ public class Femtocraft {
 		LanguageRegistry.addName(itemConductiveAlloy, "Conductive Alloy");
 		GameRegistry.registerItem(itemConductiveAlloy, "Conductive Alloy");
 
-		itemMetalComposite = new ItemMorphicChannel(
+		itemMetalComposite = new ItemMetalComposite(
 				FemtocraftConfigs.MetalCompositeID)
 				.setUnlocalizedName("itemMetalComposite");
 		LanguageRegistry.addName(itemMetalComposite, "Metal Composite");
@@ -630,7 +632,7 @@ public class Femtocraft {
 		LanguageRegistry.addName(itemFibrousStrand, "Fibrous Strand");
 		GameRegistry.registerItem(itemFibrousStrand, "Fibrous Strand");
 
-		itemMineralLattice = new ItemMorphicChannel(
+		itemMineralLattice = new ItemMineralLattice(
 				FemtocraftConfigs.MineralLatticeID)
 				.setUnlocalizedName("itemMineralLattice");
 		LanguageRegistry.addName(itemMineralLattice, "Mineral Lattice");
