@@ -3,6 +3,7 @@ package femtocraft.industry.gui;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
+import femtocraft.FemtocraftUtils;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
 import femtocraft.industry.containers.ContainerMicroDeconstructor;
 import femtocraft.render.RenderUtils;
@@ -34,13 +35,14 @@ public class GuiMicroDeconstructor extends GuiContainer {
 	 * the items)
 	 */
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		String s = "Microtech Deconstructor";
+		String s = "Micro Deconstructor";
 		this.fontRenderer.drawString(s,
 				this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
-				4210752);
+				FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
 		this.fontRenderer.drawString(
 				StatCollector.translateToLocal("container.inventory"), 8,
-				this.ySize - 96 + 2, 4210752);
+				this.ySize - 96 + 2,
+				FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
 	}
 
 	/**
@@ -63,12 +65,12 @@ public class GuiMicroDeconstructor extends GuiContainer {
 		// 14, i1 + 2);
 		// }
 
-		i1 = this.deconstructorInventory.getCookProgressScaled(24);
-		this.drawTexturedModalRect(k + 61, l + 37, 176, 14, i1 + 1, 16);
+		i1 = this.deconstructorInventory.getCookProgressScaled(26);
+		this.drawTexturedModalRect(k + 60, l + 24, 176, 0, i1 + 1, 40);
 		i1 = (this.deconstructorInventory.currentPower * 60)
 				/ this.deconstructorInventory.getMaxPower();
 		this.drawTexturedModalRect(k + 10, l + 8 + (60 - i1), 176,
-				31 + (60 - i1), 16, i1);
+				40 + (60 - i1), 16, i1);
 
 		FluidStack fluid = this.deconstructorInventory
 				.getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
@@ -79,15 +81,15 @@ public class GuiMicroDeconstructor extends GuiContainer {
 
 			i1 = (this.deconstructorInventory.getMassAmount() * 60)
 					/ this.deconstructorInventory.getMassCapacity();
-			RenderUtils.renderLiquidInGUI(this, this.zLevel, image,
-                    k + 150, l + 8 + (60 - i1), 16, i1);
+			RenderUtils.renderLiquidInGUI(this, this.zLevel, image, k + 150, l
+					+ 8 + (60 - i1), 16, i1);
 
 			// Rebind texture
 			Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 		}
 
 		// Draw Tank Lines
-		this.drawTexturedModalRect(k + 150, l + 8, 176, 91, 16, 60);
+		this.drawTexturedModalRect(k + 150, l + 8, 176, 100, 16, 60);
 	}
 
 	/*

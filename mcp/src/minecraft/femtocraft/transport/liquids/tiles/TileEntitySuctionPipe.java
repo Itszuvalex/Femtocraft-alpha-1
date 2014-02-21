@@ -123,9 +123,8 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 	public void femtocraftServerUpdate() {
 		super.femtocraftServerUpdate();
 
+		FluidStack pre = renderFluid;
 		renderFluid = null;
-
-		FluidStack pre = tank.getFluid();
 
 		int[] pressures = new int[6];
 		Arrays.fill(pressures, 0);
@@ -135,7 +134,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 		if (!output)
 			requestLiquid(pressures, neighbors);
 
-		FluidStack post = tank.getFluid();
+		FluidStack post = renderFluid;
 
 		// Pass description packet to clients - fluid has either emptied, or
 		// filled
@@ -258,7 +257,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 			if (tankconnections[i]
 					&& pressures[i] < pressure
 					&& neighbors[i].canFill(dir.getOpposite(), tank.getFluid()
-							.getFluid())) {
+							.getFluid()) && output) {
 				ratioMax += pressure - pressures[i];
 			}
 			if (pipeconnections[i]
@@ -275,6 +274,9 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 
 		for (int i = 0; i < 6; ++i) {
 			if (neighbors[i] == null)
+				continue;
+
+			if (tankconnections[i] && !output)
 				continue;
 
 			if (pressures[i] < pressure
@@ -335,6 +337,10 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 						.getOpposite(), new FluidStack(tank.getFluid()
 						.getFluid(), rationedAmount), true), true);
 			}
+		}
+
+		if (tank.getFluid() != null) {
+			renderFluid = tank.getFluid();
 		}
 	}
 

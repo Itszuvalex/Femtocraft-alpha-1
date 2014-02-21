@@ -433,6 +433,21 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
 					break;
 				}
 
+				for (RenderQuad quad : tank_m.faces) {
+					if (quad.icon == pipe.connector_tank) {
+						if (output) {
+							quad.minU = pipe.connector_tank.getMinU();
+							quad.maxU = pipe.connector_tank
+									.getInterpolatedU(4.f);
+						} else {
+							quad.minU = pipe.connector_tank
+									.getInterpolatedU(8.f);
+							quad.maxU = pipe.connector_tank
+									.getInterpolatedU(12.f);
+						}
+					}
+				}
+
 				tank_m.location = new RenderPoint(x, y, z);
 				tank_m.draw();
 

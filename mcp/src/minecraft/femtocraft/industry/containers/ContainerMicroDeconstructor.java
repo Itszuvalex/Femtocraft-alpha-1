@@ -21,7 +21,7 @@ public class ContainerMicroDeconstructor extends Container {
 	public ContainerMicroDeconstructor(InventoryPlayer par1InventoryPlayer,
 			TileEntityBaseEntityMicroDeconstructor deconstructor) {
 		this.deconstructor = deconstructor;
-		this.addSlotToContainer(new Slot(deconstructor, 0, 38, 37));
+		this.addSlotToContainer(new Slot(deconstructor, 0, 38, 36));
 		for (int y = 0; y < 3; ++y) {
 			for (int x = 0; x < 3; ++x) {
 				this.addSlotToContainer(new OutputSlot(deconstructor, x + y * 3
