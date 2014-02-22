@@ -14,8 +14,6 @@ public class ResearchTechnology {
 	public ItemStack displayItem;
 	public int xDisplay;
 	public int yDisplay;
-	public int widthDisplay;
-	public int heightDisplay;
 	public boolean isKeystone;
 	public ArrayList<ItemStack> researchMaterials;
 
@@ -28,10 +26,8 @@ public class ResearchTechnology {
 		displayItem = null;
 		xDisplay = 0;
 		yDisplay = 0;
-		widthDisplay = 0;
-		heightDisplay = 0;
 		isKeystone = false;
-		researchMaterials = new ArrayList<ItemStack>();
+		researchMaterials = null;
 	}
 
 	public ResearchTechnology(String name, EnumTechLevel level) {

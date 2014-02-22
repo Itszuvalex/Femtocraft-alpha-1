@@ -18,6 +18,14 @@ public class FemtocraftConfigs {
 	}
 
 	@Retention(RetentionPolicy.RUNTIME)
+	private static @interface CfgInt {
+	}
+
+	@Retention(RetentionPolicy.RUNTIME)
+	private static @interface CfgFloat {
+	}
+
+	@Retention(RetentionPolicy.RUNTIME)
 	private static @interface CfgCat {
 		public String category() default Configuration.CATEGORY_GENERAL;
 	}
@@ -54,6 +62,9 @@ public class FemtocraftConfigs {
 	public static @CfgId(block = true)
 	int unidentifiedAlloyID = 363;
 
+	public static @CfgId(block = true)
+	int FemtocraftSuperComputerID = 365;
+	
 	// TODO: moved microcable to something else - need to fill id 370
 	public static @CfgId(block = true)
 	int testID = 370;
@@ -70,23 +81,51 @@ public class FemtocraftConfigs {
 	public static @CfgId(block = true)
 	int FemtocraftMicroReconstructorID = 376;
 	public static @CfgId(block = true)
-	int FemtocraftVacuumTubeID = 380;
+	int FemtocraftMicroEncoderID = 377;
 	public static @CfgId(block = true)
-	int FemtocraftSuctionPipeID = 381;
+	int FemtocraftNanoInnervatorID = 378;
+	public static @CfgId(block = true)
+	int FemtocraftNanoDismantlerID = 379;
+	public static @CfgId(block = true)
+	int FemtocraftNanoFabricatorID = 380;
+	public static @CfgId(block = true)
+	int FemtocraftNanoEnmesherID = 381;
+	public static @CfgId(block = true)
+	int FemtocraftNanoHorologeID = 382;
+	public static @CfgId(block = true)
+	int FemtocraftFemtoImpulserID = 383;
+	public static @CfgId(block = true)
+	int FemtocraftFemtoRepurposerID = 384;
+	public static @CfgId(block = true)
+	int FemtocraftFemtoCoagulatorID = 385;
+	public static @CfgId(block = true)
+	int FemtocraftFemtoEntanglerID = 386;
+	public static @CfgId(block = true)
+	int FemtocraftFemtoChronoshifterID = 387;
+	public static @CfgId(block = true)
+	int FemtocraftVacuumTubeID = 390;
+	public static @CfgId(block = true)
+	int FemtocraftSuctionPipeID = 391;
 
 	public static @CfgId(block = true)
-	int FemtopowerMicroCubeID = 390;
+	int FemtopowerMicroCubeID = 400;
 	public static @CfgId(block = true)
-	int FemtopowerMicroChargingBaseID = 391;
+	int FemtopowerMicroChargingBaseID = 401;
 	public static @CfgId(block = true)
-	int FemtopowerMicroChargingCoilID = 392;
+	int FemtopowerMicroChargingCoilID = 402;
 	public static @CfgId(block = true)
-	int FemtopowerNanoCubeFrameID = 395;
+	int FemtopowerNanoCubeFrameID = 405;
 	public static @CfgId(block = true)
-	int FemtopowerNanoCubePortID = 396;
+	int FemtopowerNanoCubePortID = 406;
+	public static @CfgId(block = true)
+	int FemtopowerFemtoCubeFrameID = 407;
+	public static @CfgId(block = true)
+	int FemtopowerFemtoCubeChassisId = 408;
+	public static @CfgId(block = true)
+	int FemtopowerFemtoCubePort = 409;
 
 	public static @CfgId(block = true)
-	int FemtocraftMassBlock = 400;
+	int FemtocraftMassBlock = 450;
 
 	public static @CfgId(block = true)
 	int microCableID = 500;
@@ -551,12 +590,78 @@ public class FemtocraftConfigs {
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
 	boolean registerTitaniumOreInOreDictionary = true;
+	public static @CfgInt
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	int titaniumOreVeinsPerChunkCount = 7;
+	public static @CfgInt
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	int titaniumOreBlockPerVeinCount = 6;
+	public static @CfgInt
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	int titaniumOreYHeightMax = 40;
+	public static @CfgInt
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	int titaniumOreYHeightMin = 0;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
 	boolean registerThoriumOreInOreDictionary = true;
+	public static @CfgInt
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	int thoriumOreVeinsPerChunkCount = 8;
+	public static @CfgInt
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	int thoriumOreBlockPerVeinCount = 6;
+	public static @CfgInt
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	int thoriumOreYHeightMax = 50;
+	public static @CfgInt
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	int thoriumOreYHeightMin = 0;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
 	boolean registerPlatinumOreInOreDictionary = true;
+	public static @CfgInt
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	int platinumOreVeinsPerChunkCount = 5;
+	public static @CfgInt
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	int platinumOreBlockPerVeinCount = 5;
+	public static @CfgInt
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	int platinumOreYHeightMax = 30;
+	public static @CfgInt
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	int platinumOreYHeightMin = 0;
+	public static @CfgBool
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	boolean registerFareniteOreInOreDictionary = true;
+	public static @CfgInt
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	int fareniteOreVeinsPerChunkCount = 10;
+	public static @CfgInt
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	int fareniteOreBlockPerVeinCount = 6;
+	public static @CfgInt
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	int fareniteOreYHeightMax = 40;
+	public static @CfgInt
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	int fareniteOreYHeightMin = 0;
+	public static @CfgBool
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	boolean registerMaleniteOreInOreDictionary = true;
+	public static @CfgInt
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	int maleniteOreVeinsPerChunkCount = 14;
+	public static @CfgInt
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	int maleniteOreBlockPerVeinCount = 10;
+	public static @CfgInt
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	int maleniteOreYHeightMax = 118;
+	public static @CfgInt
+	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+	int maleniteOreYHeightMin = 10;
 	public static @CfgBool
 	@CfgCat(category = CATEGORY_ORE_CONFIGURATION)
 	boolean registerTitaniumDustInOreDictionary = true;
@@ -595,21 +700,47 @@ public class FemtocraftConfigs {
 						id = config.getItem(field.getName(), id).getInt();
 					}
 					field.setInt(null, id);
-				} else {
-					if (field.isAnnotationPresent(CfgBool.class)) {
-						CfgCat cat = field.getAnnotation(CfgCat.class);
-						String category;
-						if (cat == null) {
-							category = Configuration.CATEGORY_GENERAL;
-						} else {
-							category = cat.category();
-						}
-
-						boolean bool = field.getBoolean(null);
-						bool = config.get(category, field.getName(), bool)
-								.getBoolean(bool);
-						field.setBoolean(null, bool);
+				} else if (field.isAnnotationPresent(CfgBool.class)) {
+					CfgCat cat = field.getAnnotation(CfgCat.class);
+					String category;
+					if (cat == null) {
+						category = Configuration.CATEGORY_GENERAL;
+					} else {
+						category = cat.category();
 					}
+
+					boolean bool = field.getBoolean(null);
+					bool = config.get(category, field.getName(), bool)
+							.getBoolean(bool);
+					field.setBoolean(null, bool);
+				} else if (field.isAnnotationPresent(CfgInt.class)) {
+					CfgCat cat = field.getAnnotation(CfgCat.class);
+					String category;
+					if (cat == null) {
+						category = Configuration.CATEGORY_GENERAL;
+					} else {
+						category = cat.category();
+					}
+
+					int cint = field.getInt(null);
+					cint = config.get(category, field.getName(), cint).getInt(
+							cint);
+					field.setInt(null, cint);
+				} else if (field.isAnnotationPresent(CfgFloat.class)) {
+					CfgCat cat = field.getAnnotation(CfgCat.class);
+					String category;
+					if (cat == null) {
+						category = Configuration.CATEGORY_GENERAL;
+					} else {
+						category = cat.category();
+					}
+
+					float cint = field.getFloat(null);
+					cint = (float) config.get(category, field.getName(), cint)
+							.getDouble(cint);
+					field.setFloat(null, cint);
+				} else {
+
 				}
 			}
 

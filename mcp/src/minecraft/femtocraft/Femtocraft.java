@@ -294,13 +294,17 @@ public class Femtocraft {
 		MinecraftForge.setBlockHarvestLevel(oreFarenite, "pickaxe", 2);
 		GameRegistry.registerBlock(oreFarenite, "oreFarenite");
 		LanguageRegistry.addName(oreFarenite, "Farenite Ore");
-		OreDictionary.registerOre("oreFarenite", new ItemStack(oreFarenite));
+		if (FemtocraftConfigs.registerFareniteOreInOreDictionary)
+			OreDictionary
+					.registerOre("oreFarenite", new ItemStack(oreFarenite));
 
 		oreMalenite = new BlockOreMalenite(FemtocraftConfigs.oreMaleniteID);
 		MinecraftForge.setBlockHarvestLevel(oreFarenite, "pickaxe", 3);
 		GameRegistry.registerBlock(oreMalenite, "oreMalenite");
 		LanguageRegistry.addName(oreMalenite, "Malenite Ore");
-		OreDictionary.registerOre("oreMalenite", new ItemStack(oreMalenite));
+		if (FemtocraftConfigs.registerMaleniteOreInOreDictionary)
+			OreDictionary
+					.registerOre("oreMalenite", new ItemStack(oreMalenite));
 
 		nanoStone = new BlockNanoStone(FemtocraftConfigs.nanoStoneID);
 		GameRegistry.registerBlock(nanoStone, "nanoStone");

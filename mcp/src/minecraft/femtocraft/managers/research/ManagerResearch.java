@@ -15,6 +15,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import femtocraft.Femtocraft;
 import femtocraft.managers.research.EventTechnology.TechnologyAddedEvent;
+import femtocraft.research.technology.TechnologyBasicCircuits;
+import femtocraft.research.technology.TechnologyMetallurgy;
+import femtocraft.research.technology.TechnologyStructureOfTheWorld;
 
 //TODO:  Separate players out into their own files
 public class ManagerResearch {
@@ -29,6 +32,14 @@ public class ManagerResearch {
 	public ManagerResearch() {
 		technologies = new HashMap<String, ResearchTechnology>();
 		playerData = new HashMap<String, ResearchPlayer>();
+
+		loadTechnologies();
+	}
+
+	private void loadTechnologies() {
+		addTechnology(new TechnologyBasicCircuits());
+		addTechnology(new TechnologyMetallurgy());
+		addTechnology(new TechnologyStructureOfTheWorld());
 	}
 
 	public Collection<ResearchTechnology> getTechnologies() {
