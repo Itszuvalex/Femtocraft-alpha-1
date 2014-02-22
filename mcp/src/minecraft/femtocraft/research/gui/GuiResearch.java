@@ -38,8 +38,8 @@ import femtocraft.managers.research.ResearchTechnologyStatus;
 
 @SideOnly(Side.CLIENT)
 public class GuiResearch extends GuiScreen {
-	private static final int minDisplayColumn = 0;
-	private static final int maxDisplayColumn = 20;
+	private static final int minDisplayColumn = -10;
+	private static final int maxDisplayColumn = 10;
 	private static final int minDisplayRow = 0;
 	private static final int maxDisplayRow = 20;
 
@@ -93,7 +93,7 @@ public class GuiResearch extends GuiScreen {
 		short short2 = 141;
 		this.field_74117_m = this.guiMapX = this.field_74124_q = (double) (((maxDisplayColumn + minDisplayColumn) / 2)
 				* 24 - short1 / 2 - 12);
-		this.field_74115_n = this.guiMapY = this.field_74123_r = (double) (((maxDisplayRow + minDisplayRow) / 2) * 24 - short2 / 2);
+		this.field_74115_n = this.guiMapY = this.field_74123_r = (double) ((1) * 24 - short2 / 2);
 	}
 
 	/**
@@ -301,14 +301,14 @@ public class GuiResearch extends GuiScreen {
 				if (j3 <= 37 && j2 + i3 != 35) {
 					if (j3 == 22) {
 						if (random.nextInt(2) == 0) {
-							icon = Block.oreDiamond.getIcon(0, 0);
+							icon = Femtocraft.orePlatinum.getIcon(0, 0);
 						} else {
-							icon = Block.oreRedstone.getIcon(0, 0);
+							icon = Femtocraft.oreFarenite.getIcon(0, 0);
 						}
 					} else if (j3 == 10) {
-						icon = Block.oreIron.getIcon(0, 0);
+						icon = Femtocraft.oreTitanium.getIcon(0, 0);
 					} else if (j3 == 8) {
-						icon = Block.oreCoal.getIcon(0, 0);
+						icon = Femtocraft.oreThorium.getIcon(0, 0);
 					} else if (j3 > 4) {
 						icon = Block.stone.getIcon(0, 0);
 					} else if (j3 > 0) {
@@ -318,7 +318,7 @@ public class GuiResearch extends GuiScreen {
 					icon = Block.bedrock.getIcon(0, 0);
 				}
 
-				this.mc.getTextureManager().bindTexture(
+				Minecraft.getMinecraft().getTextureManager().bindTexture(
 						TextureMap.locationBlocksTexture);
 				this.drawTexturedModelRectFromIcon(k1 + k3 * 16 - k2, l1 + i3
 						* 16 - l2, icon, 16, 16);
@@ -327,15 +327,14 @@ public class GuiResearch extends GuiScreen {
 
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glDepthFunc(GL11.GL_LEQUAL);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
+//		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		int l3;
 		int i4;
 		int j4;
 
-		for (ResearchTechnologyStatus rs : researchStatus.getTechnologies()) {
-			ResearchTechnology tech = Femtocraft.researchManager
-					.getTechnology(rs.tech);
-			if (tech == null)
+		for (ResearchTechnology tech : Femtocraft.researchManager.getTechnologies()) {
+			ResearchTechnologyStatus rs = researchStatus.getTechnology(tech.name);
+			if (rs == null)
 				continue;
 			if (tech.prerequisites != null) {
 				for (ResearchTechnology pr : tech.prerequisites) {
@@ -371,10 +370,9 @@ public class GuiResearch extends GuiScreen {
 		int l4;
 		int i5;
 
-		for (ResearchTechnologyStatus ts : researchStatus.getTechnologies()) {
-			ResearchTechnology tech = Femtocraft.researchManager
-					.getTechnology(ts.tech);
-			if (tech == null)
+		for (ResearchTechnology tech : Femtocraft.researchManager.getTechnologies()) {
+			ResearchTechnologyStatus ts = researchStatus.getTechnology(tech.name);
+			if (ts == null)
 				continue;
 			j4 = tech.xDisplay * 24 - k;
 			l3 = tech.yDisplay * 24 - l;
@@ -395,7 +393,7 @@ public class GuiResearch extends GuiScreen {
 				// GL11.glColor4f(f2, f2, f2, 1.0F);
 				// }
 
-				this.mc.getTextureManager().bindTexture(achievementTextures);
+				Minecraft.getMinecraft().getTextureManager().bindTexture(achievementTextures);
 				i5 = k1 + j4;
 				l4 = l1 + l3;
 
@@ -414,8 +412,8 @@ public class GuiResearch extends GuiScreen {
 
 				GL11.glEnable(GL11.GL_LIGHTING);
 				GL11.glEnable(GL11.GL_CULL_FACE);
-				renderitem.renderItemAndEffectIntoGUI(this.mc.fontRenderer,
-						this.mc.getTextureManager(), tech.displayItem, i5 + 3,
+				renderitem.renderItemAndEffectIntoGUI(Minecraft.getMinecraft().fontRenderer,
+						Minecraft.getMinecraft().getTextureManager(), tech.displayItem, i5 + 3,
 						l4 + 3);
 				GL11.glDisable(GL11.GL_LIGHTING);
 
@@ -437,7 +435,7 @@ public class GuiResearch extends GuiScreen {
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.getTextureManager().bindTexture(achievementTextures);
+		Minecraft.getMinecraft().getTextureManager().bindTexture(achievementTextures);
 		this.drawTexturedModalRect(i1, j1, 0, 0, this.researchPaneWidth,
 				this.researchPaneHeight);
 		GL11.glPopMatrix();
@@ -447,6 +445,7 @@ public class GuiResearch extends GuiScreen {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		super.drawScreen(par1, par2, par3);
 
+		
 		if (tooltipTech != null) {
 
 			ResearchTechnologyStatus status = researchStatus
@@ -475,6 +474,9 @@ public class GuiResearch extends GuiScreen {
 									+ 4, -7302913);
 				}
 			}
+			
+			//Keep Commented
+			
 			// else {
 			// i5 = Math.max(this.fontRenderer.getStringWidth(s), 120);
 			// String s2 = I18n.getStringParams("achievement.requires",
@@ -492,6 +494,7 @@ public class GuiResearch extends GuiScreen {
 					status.researched ? (tooltipTech.isKeystone ? -128 : -1)
 							: (tooltipTech.isKeystone ? -8355776 : -8355712));
 		}
+		
 
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glEnable(GL11.GL_LIGHTING);

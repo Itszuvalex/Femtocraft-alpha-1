@@ -7,10 +7,10 @@ import femtocraft.managers.research.ResearchTechnology;
 
 public class TechnologyMetallurgy extends ResearchTechnology {
 
-	public TechnologyMetallurgy() {
+	public TechnologyMetallurgy(int xDisplay, int yDisplay) {
 		super("Metallurgy", EnumTechLevel.MACRO, null);
 		displayItem = new ItemStack(Femtocraft.ingotThorium);
-		xDisplay = 10;
-		yDisplay = 0;
+		this.xDisplay = xDisplay;
+		this.yDisplay = yDisplay;
 	}
 }

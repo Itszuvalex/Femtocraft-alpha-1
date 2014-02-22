@@ -7,10 +7,10 @@ import femtocraft.managers.research.ResearchTechnology;
 
 public class TechnologyStructureOfTheWorld extends ResearchTechnology {
 
-	public TechnologyStructureOfTheWorld() {
+	public TechnologyStructureOfTheWorld(int xDisplay, int yDisplay) {
 		super("Structure of the World", EnumTechLevel.MACRO, null);
 		displayItem = new ItemStack(Femtocraft.itemMineralLattice);
-		xDisplay = 8;
-		yDisplay = 0;
+		this.xDisplay = xDisplay;
+		this.yDisplay = yDisplay;
 	}
 }

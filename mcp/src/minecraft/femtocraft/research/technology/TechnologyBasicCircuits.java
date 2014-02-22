@@ -7,10 +7,10 @@ import femtocraft.managers.research.ResearchTechnology;
 
 public class TechnologyBasicCircuits extends ResearchTechnology {
 
-	public TechnologyBasicCircuits() {
+	public TechnologyBasicCircuits(int xDisplay, int yDisplay) {
 		super("Basic Circuits", EnumTechLevel.MACRO, null);
 		displayItem = new ItemStack(Femtocraft.microCircuitBoard);
-		xDisplay = 12;
-		yDisplay = 0;
+		this.xDisplay = xDisplay;
+		this.yDisplay = yDisplay;
 	}
 }

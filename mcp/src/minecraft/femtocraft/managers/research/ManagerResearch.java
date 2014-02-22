@@ -37,9 +37,9 @@ public class ManagerResearch {
 	}
 
 	private void loadTechnologies() {
-		addTechnology(new TechnologyBasicCircuits());
-		addTechnology(new TechnologyMetallurgy());
-		addTechnology(new TechnologyStructureOfTheWorld());
+		addTechnology(new TechnologyBasicCircuits(0, 1));
+		addTechnology(new TechnologyMetallurgy(-2, 1));
+		addTechnology(new TechnologyStructureOfTheWorld(2, 1));
 	}
 
 	public Collection<ResearchTechnology> getTechnologies() {
@@ -50,8 +50,11 @@ public class ManagerResearch {
 
 	public boolean addTechnology(ResearchTechnology tech) {
 		TechnologyAddedEvent event = new TechnologyAddedEvent(tech);
-		return !MinecraftForge.EVENT_BUS.post(event)
-				&& technologies.put(tech.name, tech) != null;
+		if(!MinecraftForge.EVENT_BUS.post(event))
+		{
+		 return technologies.put(tech.name, tech) != null;
+		}
+		return false;
 	}
 
 	public boolean removeTechnology(ResearchTechnology tech) {
