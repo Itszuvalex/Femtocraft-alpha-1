@@ -136,11 +136,11 @@ public class ResearchPlayer {
 	// ---------------------------------------------------------
 
 	private void broadcastPacket(Packet packet, String username) {
-//		EntityPlayerMP player = MinecraftServer.getServer()
-//				.getConfigurationManager().getPlayerForUsername(username);
-//		if (player == null)
-//			return;
-//		PacketDispatcher.sendPacketToPlayer(packet, (Player) player);
+		// EntityPlayerMP player = MinecraftServer.getServer()
+		// .getConfigurationManager().getPlayerForUsername(username);
+		// if (player == null)
+		// return;
+		// PacketDispatcher.sendPacketToPlayer(packet, (Player) player);
 	}
 
 	// ---------------------------------------------------------
@@ -174,7 +174,7 @@ public class ResearchPlayer {
 					techname);
 			status.loadFromNBTTagCompound(data);
 
-			techStatus.put(username, status);
+			techStatus.put(techname, status);
 		}
 	}
 }
