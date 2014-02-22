@@ -3,11 +3,15 @@ package femtocraft.managers.research;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.logging.Level;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -15,9 +19,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import femtocraft.Femtocraft;
 import femtocraft.managers.research.EventTechnology.TechnologyAddedEvent;
-import femtocraft.research.technology.TechnologyBasicCircuits;
-import femtocraft.research.technology.TechnologyMetallurgy;
-import femtocraft.research.technology.TechnologyStructureOfTheWorld;
 
 //TODO:  Separate players out into their own files
 public class ManagerResearch {
@@ -29,6 +30,22 @@ public class ManagerResearch {
 
 	private String lastWorldLoaded = "";
 
+	public static ResearchTechnology technologyBasicCircuits = new ResearchTechnology(
+			"Basic Circuits", "", EnumTechLevel.MACRO, null, new ItemStack(
+					Femtocraft.microCircuitBoard), 2, 1, false, null);
+	public static ResearchTechnology technologyMetallurgy = new ResearchTechnology(
+			"Metallurgy", "", EnumTechLevel.MACRO, null, new ItemStack(
+					Femtocraft.ingotThorium), -2, 1, false, null);
+	public static ResearchTechnology technologyWorldStructure = new ResearchTechnology(
+			"Structure of the World", "", EnumTechLevel.MACRO, null,
+			new ItemStack(Femtocraft.itemMineralLattice), 0, 1, true, null);
+	//TODO: replace maching icon with micro machine chassis item
+	public static ResearchTechnology technologyMachining = new ResearchTechnology(
+			"Machining", "", EnumTechLevel.MICRO,
+			new ArrayList<ResearchTechnology>(Arrays.asList(
+					technologyMetallurgy, technologyBasicCircuits)),
+			new ItemStack(Femtocraft.microStone), 0, 3, false, null);
+
 	public ManagerResearch() {
 		technologies = new HashMap<String, ResearchTechnology>();
 		playerData = new HashMap<String, ResearchPlayer>();
@@ -37,9 +54,18 @@ public class ManagerResearch {
 	}
 
 	private void loadTechnologies() {
-		addTechnology(new TechnologyBasicCircuits(0, 1));
-		addTechnology(new TechnologyMetallurgy(-2, 1));
-		addTechnology(new TechnologyStructureOfTheWorld(2, 1));
+		Field[] fields = ManagerResearch.class.getFields();
+		for (Field field : fields) {
+			if (field.getName().startsWith("technology")) {
+				try {
+					addTechnology((ResearchTechnology) field.get(null));
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	public Collection<ResearchTechnology> getTechnologies() {
@@ -50,9 +76,8 @@ public class ManagerResearch {
 
 	public boolean addTechnology(ResearchTechnology tech) {
 		TechnologyAddedEvent event = new TechnologyAddedEvent(tech);
-		if(!MinecraftForge.EVENT_BUS.post(event))
-		{
-		 return technologies.put(tech.name, tech) != null;
+		if (!MinecraftForge.EVENT_BUS.post(event)) {
+			return technologies.put(tech.name, tech) != null;
 		}
 		return false;
 	}
@@ -117,7 +142,8 @@ public class ManagerResearch {
 	private void addFreeResearches(ResearchPlayer research) {
 		for (ResearchTechnology t : technologies.values()) {
 			if (t.prerequisites == null) {
-				research.discoverTechnology(t.name);
+				research.researchTechnology(t.name, true);
+				// research.discoverTechnology(t.name);
 			}
 		}
 	}

@@ -32,15 +32,16 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
+import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.managers.research.ResearchPlayer;
 import femtocraft.managers.research.ResearchTechnology;
 import femtocraft.managers.research.ResearchTechnologyStatus;
 
 @SideOnly(Side.CLIENT)
 public class GuiResearch extends GuiScreen {
-	private static final int minDisplayColumn = -10;
-	private static final int maxDisplayColumn = 10;
-	private static final int minDisplayRow = 0;
+	private static final int minDisplayColumn = -8;
+	private static final int maxDisplayColumn = 8;
+	private static final int minDisplayRow = -5;
 	private static final int maxDisplayRow = 20;
 
 	/** The top x coordinate of the achievement map */
@@ -93,7 +94,7 @@ public class GuiResearch extends GuiScreen {
 		short short2 = 141;
 		this.field_74117_m = this.guiMapX = this.field_74124_q = (double) (((maxDisplayColumn + minDisplayColumn) / 2)
 				* 24 - short1 / 2 - 12);
-		this.field_74115_n = this.guiMapY = this.field_74123_r = (double) ((1) * 24 - short2 / 2);
+		this.field_74115_n = this.guiMapY = this.field_74123_r = (double) (((maxDisplayRow + minDisplayRow) / 2) * 24 - short2 / 2);
 	}
 
 	/**
@@ -235,7 +236,7 @@ public class GuiResearch extends GuiScreen {
 		int i = (this.width - this.researchPaneWidth) / 2;
 		int j = (this.height - this.researchPaneHeight) / 2;
 		this.fontRenderer.drawString("Research", i + 15, j + 5,
-				FemtocraftUtils.colorFromARGB(0, 125, 125, 125));
+				FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
 	}
 
 	protected void genAchievementBackground(int par1, int par2, float par3) {
@@ -347,16 +348,18 @@ public class GuiResearch extends GuiScreen {
 					boolean flag6 = !rs.researched;
 					i4 = Math.sin((double) (Minecraft.getSystemTime() % 600L)
 							/ 600.0D * Math.PI * 2.0D) > 0.6D ? 255 : 130;
-					int k4 = -16777216;
-
-					if (flag5) {
-						k4 = -9408400;
-					} else if (flag6) {
-						k4 = 65280 + (i4 << 24);
+					int color = tech.level.getColor();
+					if(flag6)
+					{
+						color += (i4 << 24);
+					}
+					else
+					{
+						color += (255 << 24);
 					}
 
-					this.drawHorizontalLine(k3, j4, j3, k4);
-					this.drawVerticalLine(j4, j3, l3, k4);
+					this.drawHorizontalLine(k3, j4, j3, color);
+					this.drawVerticalLine(j4, j3, l3, color);
 				}
 			}
 		}
@@ -470,7 +473,7 @@ public class GuiResearch extends GuiScreen {
 
 				if (status.researched) {
 					this.fontRenderer.drawStringWithShadow(
-							I18n.getString("achievement.taken"), j4, l3 + l4
+							"Researched!", j4, l3 + l4
 									+ 4, -7302913);
 				}
 			}

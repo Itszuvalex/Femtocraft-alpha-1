@@ -57,12 +57,31 @@ public class ResearchPlayer {
 			return false;
 
 		if (tech == null && force) {
-			ResearchTechnologyStatus status = techStatus.put(name,
-					new ResearchTechnologyStatus(name));
-			if (status == null)
-				return false;
-			status.researched = true;
-			broadcastPacket(status.toPacket(), username);
+			techStatus.put(name,
+					new ResearchTechnologyStatus(name, true));
+			// broadcastPacket(status.toPacket(), username);
+
+			for (ResearchTechnology t : Femtocraft.researchManager
+					.getTechnologies()) {
+				if (t.prerequisites != null) {
+					boolean hasPrereqs = true;
+					for (ResearchTechnology pt : t.prerequisites) {
+						ResearchTechnologyStatus rts = techStatus.get(pt.name);
+						if (rts == null) {
+							hasPrereqs = false;
+							continue;
+						}
+						if (!rts.researched) {
+							hasPrereqs = false;
+						}
+					}
+
+					if (hasPrereqs) {
+						discoverTechnology(t.name);
+					}
+				}
+			}
+
 			return true;
 		}
 
@@ -70,6 +89,27 @@ public class ResearchPlayer {
 				username, Femtocraft.researchManager.getTechnology(name));
 		if (!MinecraftForge.EVENT_BUS.post(event)) {
 			tech.researched = true;
+			
+			for (ResearchTechnology t : Femtocraft.researchManager
+					.getTechnologies()) {
+				if (t.prerequisites != null) {
+					boolean hasPrereqs = true;
+					for (ResearchTechnology pt : t.prerequisites) {
+						ResearchTechnologyStatus rts = techStatus.get(pt.name);
+						if (rts == null) {
+							hasPrereqs = false;
+						}
+						if (!rts.researched) {
+							hasPrereqs = false;
+						}
+					}
+
+					if (hasPrereqs) {
+						discoverTechnology(t.name);
+					}
+				}
+			}
+			
 			return true;
 		}
 		return false;
@@ -79,11 +119,9 @@ public class ResearchPlayer {
 		TechnologyDiscoveredEvent event = new TechnologyDiscoveredEvent(
 				username, Femtocraft.researchManager.getTechnology(name));
 		if (!MinecraftForge.EVENT_BUS.post(event)) {
-			ResearchTechnologyStatus ts = techStatus.put(name,
+			techStatus.put(name,
 					new ResearchTechnologyStatus(name));
-			if (ts == null)
-				return false;
-			broadcastPacket(ts.toPacket(), username);
+			// broadcastPacket(ts.toPacket(), username);
 			return true;
 		}
 		return false;
@@ -155,7 +193,7 @@ public class ResearchPlayer {
 			NBTTagCompound data = new NBTTagCompound();
 			status.saveToNBTTagCompound(data);
 
-			compound.setTag("data", data);
+			cs.setCompoundTag("data", data);
 			list.appendTag(cs);
 		}
 

@@ -34,36 +34,36 @@ public class ResearchTechnologyStatus {
 		researched = compound.getBoolean("researched");
 	}
 
-	public Packet250CustomPayload toPacket() {
-		Packet250CustomPayload techPacket = new Packet250CustomPayload();
-		techPacket.channel = ManagerResearch.RESEARCH_CHANNEL;
-
-		ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
-		DataOutputStream outputStream = new DataOutputStream(bos);
-		try {
-			outputStream.writeUTF(tech);
-			outputStream.writeBoolean(researched);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-		techPacket.data = bos.toByteArray();
-		techPacket.length = bos.size();
-
-		return techPacket;
-	}
-
-	public static ResearchTechnologyStatus fromStream(DataInputStream stream) {
-		String tech = null;
-		boolean researched = false;
-		try {
-			tech = stream.readUTF();
-			researched = stream.readBoolean();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
-
-		return new ResearchTechnologyStatus(tech, researched);
-	}
+//	public Packet250CustomPayload toPacket() {
+//		Packet250CustomPayload techPacket = new Packet250CustomPayload();
+//		techPacket.channel = ManagerResearch.RESEARCH_CHANNEL;
+//
+//		ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
+//		DataOutputStream outputStream = new DataOutputStream(bos);
+//		try {
+//			outputStream.writeUTF(tech);
+//			outputStream.writeBoolean(researched);
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//		}
+//
+//		techPacket.data = bos.toByteArray();
+//		techPacket.length = bos.size();
+//
+//		return techPacket;
+//	}
+//
+//	public static ResearchTechnologyStatus fromStream(DataInputStream stream) {
+//		String tech = null;
+//		boolean researched = false;
+//		try {
+//			tech = stream.readUTF();
+//			researched = stream.readBoolean();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//
+//		return new ResearchTechnologyStatus(tech, researched);
+//	}
 }

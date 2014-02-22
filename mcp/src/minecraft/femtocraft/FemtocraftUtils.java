@@ -166,4 +166,19 @@ public class FemtocraftUtils {
 		r1 += b & 255;
 		return r1;
 	}
+	
+	public static int blueColor()
+	{
+		return colorFromARGB(0, 0, 0, 255);
+	}
+	
+	public static int greenColor()
+	{
+		return colorFromARGB(0, 0, 255, 0);
+	}
+	
+	public static int orangeColor()
+	{
+		return colorFromARGB(0, 255, 140, 0);
+	}
 }

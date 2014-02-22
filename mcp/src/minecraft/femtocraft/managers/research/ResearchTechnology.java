@@ -17,21 +17,19 @@ public class ResearchTechnology {
 	public boolean isKeystone;
 	public ArrayList<ItemStack> researchMaterials;
 
-	public ResearchTechnology(String name, EnumTechLevel level,
-			ArrayList<ResearchTechnology> prerequisites) {
+	public ResearchTechnology(String name, String description,
+			EnumTechLevel level, ArrayList<ResearchTechnology> prerequisites,
+			ItemStack displayItem, int xDisplay, int yDisplay,
+			boolean isKeystone, ArrayList<ItemStack> researchMaterials) {
 		this.name = name;
-		this.description = "";
+		this.description = description;
 		this.level = level;
 		this.prerequisites = prerequisites;
-		displayItem = null;
-		xDisplay = 0;
-		yDisplay = 0;
-		isKeystone = false;
-		researchMaterials = null;
-	}
-
-	public ResearchTechnology(String name, EnumTechLevel level) {
-		this(name, level, null);
+		this.displayItem = displayItem;
+		this.xDisplay = xDisplay;
+		this.yDisplay = yDisplay;
+		this.isKeystone = isKeystone;
+		this.researchMaterials = researchMaterials;
 	}
 
 	// --------------------------------------------------

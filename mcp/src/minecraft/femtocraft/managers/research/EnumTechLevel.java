@@ -1,5 +1,6 @@
 package femtocraft.managers.research;
 
+import femtocraft.FemtocraftUtils;
 import net.minecraft.util.EnumChatFormatting;
 
 public enum EnumTechLevel {
@@ -52,6 +53,25 @@ public enum EnumTechLevel {
 			return EnumChatFormatting.DARK_PURPLE;
 		default:
 			return EnumChatFormatting.RESET;
+		}
+	}
+
+	public int getColor() {
+		switch (this) {
+		case MACRO:
+			return FemtocraftUtils.colorFromARGB(0, 255, 0, 0);
+		case MICRO:
+			return FemtocraftUtils.blueColor();
+		case NANO:
+			return FemtocraftUtils.greenColor();
+		case FEMTO:
+			return FemtocraftUtils.orangeColor();
+		case TEMPORAL:
+			return FemtocraftUtils.colorFromARGB(0, 255, 255, 255);
+		case DIMENSIONAL:
+			return FemtocraftUtils.colorFromARGB(0, 148, 0, 211);
+		default:
+			return FemtocraftUtils.colorFromARGB(0, 255, 255, 255);
 		}
 	}
 }
