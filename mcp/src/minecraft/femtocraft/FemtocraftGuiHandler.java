@@ -16,6 +16,8 @@ import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
 import femtocraft.power.containers.ContainerNanoCube;
 import femtocraft.power.gui.GuiNanoCube;
 import femtocraft.power.tiles.TileEntityNanoCubePort;
+import femtocraft.research.gui.GuiResearch;
+import femtocraft.research.tiles.TileEntityResearchComputer;
 
 public class FemtocraftGuiHandler implements IGuiHandler {
 
@@ -61,6 +63,9 @@ public class FemtocraftGuiHandler implements IGuiHandler {
 					(TileEntityBaseEntityMicroReconstructor) tileEntity);
 		} else if (tileEntity instanceof TileEntityNanoCubePort) {
 			return new GuiNanoCube((TileEntityNanoCubePort) tileEntity);
+		} else if (tileEntity instanceof TileEntityResearchComputer)
+		{
+			return new GuiResearch(player.username);
 		}
 
 		return null;

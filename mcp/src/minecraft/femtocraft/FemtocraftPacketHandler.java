@@ -1,22 +1,23 @@
 package femtocraft;
 
-import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.Player;
-import femtocraft.managers.research.ManagerResearch;
-import femtocraft.managers.research.ResearchPlayer;
-import femtocraft.managers.research.ResearchTechnologyStatus;
-import femtocraft.player.PropertiesNanite;
-import femtocraft.transport.items.tiles.TileEntityVacuumTube;
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraft.tileentity.TileEntity;
-
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.logging.Level;
+
+import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.tileentity.TileEntity;
+import cpw.mods.fml.common.network.IPacketHandler;
+import cpw.mods.fml.common.network.Player;
+import femtocraft.managers.research.ManagerResearch;
+import femtocraft.managers.research.ResearchPlayer;
+import femtocraft.player.PropertiesNanite;
+import femtocraft.transport.items.tiles.TileEntityVacuumTube;
 
 public class FemtocraftPacketHandler implements IPacketHandler {
 
@@ -29,6 +30,10 @@ public class FemtocraftPacketHandler implements IPacketHandler {
 			return;
 		}
 
+		if (packet.channel.equalsIgnoreCase(ManagerResearch.RESEARCH_CHANNEL)) {
+			handleResearchPacket(packet, playerEntity);
+		}
+
 		DataInputStream inputStream = new DataInputStream(
 				new ByteArrayInputStream(packet.data));
 
@@ -36,31 +41,30 @@ public class FemtocraftPacketHandler implements IPacketHandler {
 			handleVacuumTube(inputStream, playerEntity);
 		}
 
-		if (packet.channel.equalsIgnoreCase(ManagerResearch.RESEARCH_CHANNEL)) {
-			handleResearchPacket(inputStream, playerEntity);
-		}
 	}
 
-	private void handleResearchPacket(DataInputStream inputStream, Player player) {
-		if (!(player instanceof EntityClientPlayerMP))
+	private void handleResearchPacket(Packet250CustomPayload packet,
+			Player player) {
+		if (!(player instanceof EntityPlayer))
 			return;
 
-		EntityClientPlayerMP cp = (EntityClientPlayerMP) player;
-
-		ResearchPlayer playerResearch = Femtocraft.researchManager
-				.addPlayerResearch(cp.username);
-		ResearchTechnologyStatus ts = ResearchTechnologyStatus
-				.fromStream(inputStream);
-		if (ts == null) {
-			Femtocraft.logger.log(Level.SEVERE, "Faulty Research Packet");
+		EntityPlayer cp = (EntityPlayer) player;
+		NBTTagCompound data;
+		try {
+			data = CompressedStreamTools.decompress(packet.data);
+		} catch (IOException e) {
+			e.printStackTrace();
+			Femtocraft.logger
+					.log(Level.SEVERE,
+							"Error decompressing PlayerResearch data from packet.  This client will not be able to detect its research.");
 			return;
 		}
+		ResearchPlayer rp = new ResearchPlayer(cp.username);
+		rp.loadFromNBTTagCompound(data);
 
-		if (ts.researched) {
-			playerResearch.researchTechnology(ts.tech, true);
-		} else {
-			playerResearch.discoverTechnology(ts.tech);
-		}
+		Femtocraft.logger.log(Level.INFO,
+				"Received PlayerResearch data packet update.");
+		Femtocraft.researchManager.syncResearch(rp);
 	}
 
 	private void handleVacuumTube(DataInputStream stream, Player player) {

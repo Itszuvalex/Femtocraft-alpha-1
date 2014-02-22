@@ -145,7 +145,7 @@ public class ManagerResearch {
 			NBTTagCompound cs = (NBTTagCompound) list.tagAt(i);
 			String username = cs.getString("username");
 
-			NBTTagCompound data = (NBTTagCompound) cs.getTag("data");
+			NBTTagCompound data = cs.getCompoundTag("data");
 			ResearchPlayer status = new ResearchPlayer(username);
 			status.loadFromNBTTagCompound(data);
 
@@ -210,5 +210,9 @@ public class ManagerResearch {
 	private String savePath(World world) {
 		return Minecraft.getMinecraft().mcDataDir + "/saves/"
 				+ world.getSaveHandler().getWorldDirectoryName();
+	}
+
+	public void syncResearch(ResearchPlayer rp) {
+		playerData.put(rp.username, rp);
 	}
 }

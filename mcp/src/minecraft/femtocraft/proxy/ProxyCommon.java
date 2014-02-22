@@ -6,8 +6,20 @@ import femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
 import femtocraft.power.render.RenderNullEqualizer;
-import femtocraft.power.tiles.*;
 import femtocraft.power.render.RenderOrbitalEqualizer;
+import femtocraft.power.tiles.TileEntityFemtoCable;
+import femtocraft.power.tiles.TileEntityMicroCable;
+import femtocraft.power.tiles.TileEntityNanoCable;
+import femtocraft.power.tiles.TileEntityNanoCubeFrame;
+import femtocraft.power.tiles.TileEntityNanoCubePort;
+import femtocraft.power.tiles.TileEntityNullEqualizer;
+import femtocraft.power.tiles.TileEntityOrbitalEqualizer;
+import femtocraft.power.tiles.TileEntityPowerBase;
+import femtocraft.power.tiles.TileEntityPowerConsumerTest;
+import femtocraft.power.tiles.TileEntityPowerMicroChargingBase;
+import femtocraft.power.tiles.TileEntityPowerMicroCube;
+import femtocraft.power.tiles.TileEntityPowerProducerTest;
+import femtocraft.research.tiles.TileEntityResearchComputer;
 import femtocraft.transport.items.tiles.TileEntityVacuumTube;
 import femtocraft.transport.liquids.tiles.TileEntitySuctionPipe;
 
@@ -21,6 +33,8 @@ public class ProxyCommon {
 
 	public void registerTileEntities() {
 		// Tile Entities
+		GameRegistry.registerTileEntity(TileEntityResearchComputer.class,
+				"TileEntityResearchComputer");
 		GameRegistry.registerTileEntity(TileEntityPowerBase.class,
 				"TileEntityPowerBase");
 		GameRegistry.registerTileEntity(TileEntityPowerProducerTest.class,

@@ -57,7 +57,7 @@ public class GuiResearch extends GuiScreen {
 
 	private static final ResourceLocation achievementTextures = new ResourceLocation(
 			Femtocraft.ID.toLowerCase(),
-			"textures/guis/research/research_background.png");
+			"textures/guis/research_background.png");
 	protected int researchPaneWidth = 256;
 	protected int researchPaneHeight = 202;
 
@@ -235,7 +235,7 @@ public class GuiResearch extends GuiScreen {
 		int i = (this.width - this.researchPaneWidth) / 2;
 		int j = (this.height - this.researchPaneHeight) / 2;
 		this.fontRenderer.drawString("Research", i + 15, j + 5,
-				FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
+				FemtocraftUtils.colorFromARGB(0, 125, 125, 125));
 	}
 
 	protected void genAchievementBackground(int par1, int par2, float par3) {
@@ -287,43 +287,43 @@ public class GuiResearch extends GuiScreen {
 		int k3;
 
 		// Make background
-		//
-		// for (i3 = 0; i3 * 16 - l2 < 155; ++i3) {
-		// float f1 = 0.6F - (float) (j2 + i3) / 25.0F * 0.3F;
-		// GL11.glColor4f(f1, f1, f1, 1.0F);
-		//
-		// for (k3 = 0; k3 * 16 - k2 < 224; ++k3) {
-		// random.setSeed((long) (1234 + i2 + k3));
-		// random.nextInt();
-		// j3 = random.nextInt(1 + j2 + i3) + (j2 + i3) / 2;
-		// Icon icon = Block.sand.getIcon(0, 0);
-		//
-		// if (j3 <= 37 && j2 + i3 != 35) {
-		// if (j3 == 22) {
-		// if (random.nextInt(2) == 0) {
-		// icon = Block.oreDiamond.getIcon(0, 0);
-		// } else {
-		// icon = Block.oreRedstone.getIcon(0, 0);
-		// }
-		// } else if (j3 == 10) {
-		// icon = Block.oreIron.getIcon(0, 0);
-		// } else if (j3 == 8) {
-		// icon = Block.oreCoal.getIcon(0, 0);
-		// } else if (j3 > 4) {
-		// icon = Block.stone.getIcon(0, 0);
-		// } else if (j3 > 0) {
-		// icon = Block.dirt.getIcon(0, 0);
-		// }
-		// } else {
-		// icon = Block.bedrock.getIcon(0, 0);
-		// }
-		//
-		// this.mc.getTextureManager().bindTexture(
-		// TextureMap.locationBlocksTexture);
-		// this.drawTexturedModelRectFromIcon(k1 + k3 * 16 - k2, l1 + i3
-		// * 16 - l2, icon, 16, 16);
-		// }
-		// }
+
+		for (i3 = 0; i3 * 16 - l2 < 155; ++i3) {
+			float f1 = 0.6F - (float) (j2 + i3) / 25.0F * 0.3F;
+			GL11.glColor4f(f1, f1, f1, 1.0F);
+
+			for (k3 = 0; k3 * 16 - k2 < 224; ++k3) {
+				random.setSeed((long) (1234 + i2 + k3));
+				random.nextInt();
+				j3 = random.nextInt(1 + j2 + i3) + (j2 + i3) / 2;
+				Icon icon = Block.sand.getIcon(0, 0);
+
+				if (j3 <= 37 && j2 + i3 != 35) {
+					if (j3 == 22) {
+						if (random.nextInt(2) == 0) {
+							icon = Block.oreDiamond.getIcon(0, 0);
+						} else {
+							icon = Block.oreRedstone.getIcon(0, 0);
+						}
+					} else if (j3 == 10) {
+						icon = Block.oreIron.getIcon(0, 0);
+					} else if (j3 == 8) {
+						icon = Block.oreCoal.getIcon(0, 0);
+					} else if (j3 > 4) {
+						icon = Block.stone.getIcon(0, 0);
+					} else if (j3 > 0) {
+						icon = Block.dirt.getIcon(0, 0);
+					}
+				} else {
+					icon = Block.bedrock.getIcon(0, 0);
+				}
+
+				this.mc.getTextureManager().bindTexture(
+						TextureMap.locationBlocksTexture);
+				this.drawTexturedModelRectFromIcon(k1 + k3 * 16 - k2, l1 + i3
+						* 16 - l2, icon, 16, 16);
+			}
+		}
 
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glDepthFunc(GL11.GL_LEQUAL);
