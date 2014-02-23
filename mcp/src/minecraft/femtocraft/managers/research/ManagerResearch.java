@@ -37,7 +37,7 @@ public class ManagerResearch {
 			"Metallurgy", "Titanium, Thorium, Platinum", EnumTechLevel.MACRO, null, new ItemStack(
 					Femtocraft.ingotThorium), -2, -3, false, null);
 	public static ResearchTechnology technologyWorldStructure = new ResearchTechnology(
-			"Structure of the World", "Decomposition", EnumTechLevel.MACRO, null,
+			"Basic Chemistry", "Composition of Matter", EnumTechLevel.MACRO, null,
 			new ItemStack(Femtocraft.itemMineralLattice), 0, -3, true, null);
 	//TODO: replace maching icon with micro machine chassis item
 	public static ResearchTechnology technologyMachining = new ResearchTechnology(

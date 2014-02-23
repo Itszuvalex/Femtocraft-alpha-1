@@ -158,6 +158,7 @@ public class GuiResearch extends GuiScreen {
 						Minecraft.getMinecraft().sndManager.playSoundFX(
 								"random.click", 1.0F, 1.0F);
 						Minecraft.getMinecraft().displayGuiScreen(rt.getGui(this, ts));
+						this.isMouseButtonDown = 0;
 					}
 				}
 			}
