@@ -136,6 +136,7 @@ public class GuiTechnology extends GuiScreen {
 						+ (backButtonHeight - this.fontRenderer.FONT_HEIGHT)
 						/ 2, FemtocraftUtils.colorFromARGB(255, 255, 255, 255));
 
+		int color = FemtocraftUtils.colorFromARGB(60, 45, 0, 110);
 		if (displayPage > 1) {
 			if ((par1 >= (k + pageLeftButtonX))
 					&& (par1 <= (k + pageLeftButtonX + pageLeftButtonWidth))
@@ -144,8 +145,7 @@ public class GuiTechnology extends GuiScreen {
 				this.drawGradientRect(k + pageLeftButtonX, l + pageLeftButtonY,
 						k + pageLeftButtonX + pageLeftButtonWidth, l
 								+ pageLeftButtonY + pageLeftButtonHeight,
-						FemtocraftUtils.colorFromARGB(60, 45, 0, 110),
-						FemtocraftUtils.colorFromARGB(60, 45, 0, 110));
+						color, color);
 			}
 
 			this.fontRenderer
@@ -159,8 +159,14 @@ public class GuiTechnology extends GuiScreen {
 									+ (pageLeftButtonHeight - this.fontRenderer.FONT_HEIGHT)
 									/ 2 + 1,
 							FemtocraftUtils.colorFromARGB(255, 255, 255, 255));
+		} else {
+			color = FemtocraftUtils.colorFromARGB(60, 0, 0, 0);
+			this.drawGradientRect(k + pageLeftButtonX, l + pageLeftButtonY, k
+					+ pageLeftButtonX + pageLeftButtonWidth, l
+					+ pageLeftButtonY + pageLeftButtonHeight, color, color);
 		}
 
+		color = FemtocraftUtils.colorFromARGB(60, 45, 0, 110);
 		if (displayPage < getNumPages()) {
 			if ((par1 >= (k + pageRightButtonX))
 					&& (par1 <= (k + pageRightButtonX + pageRightButtonWidth))
@@ -169,9 +175,7 @@ public class GuiTechnology extends GuiScreen {
 				this.drawGradientRect(k + pageRightButtonX, l
 						+ pageRightButtonY, k + pageRightButtonX
 						+ pageRightButtonWidth, l + pageRightButtonY
-						+ pageRightButtonHeight,
-						FemtocraftUtils.colorFromARGB(60, 45, 0, 110),
-						FemtocraftUtils.colorFromARGB(60, 45, 0, 110));
+						+ pageRightButtonHeight, color, color);
 			}
 
 			this.fontRenderer
@@ -185,7 +189,13 @@ public class GuiTechnology extends GuiScreen {
 									+ (pageRightButtonHeight - this.fontRenderer.FONT_HEIGHT)
 									/ 2 + 1,
 							FemtocraftUtils.colorFromARGB(255, 255, 255, 255));
+		} else {
+			color = FemtocraftUtils.colorFromARGB(60, 0, 0, 0);
+			this.drawGradientRect(k + pageRightButtonX, l + pageRightButtonY, k
+					+ pageRightButtonX + pageRightButtonWidth, l
+					+ pageRightButtonY + pageRightButtonHeight, color, color);
 		}
+
 		String pageString = String.format("Page %s/%s", displayPage,
 				getNumPages());
 		this.fontRenderer.drawString(pageString, k + pageLeftButtonX
