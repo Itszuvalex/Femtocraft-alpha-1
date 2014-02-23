@@ -52,7 +52,7 @@ public class GuiNanoCube extends GuiContainer {
 		int power = controller.getCurrentPower() * 82;
 		int max = controller.getMaxPower();
 		int i1 = (int) (((power > 0) && (max > 0)) ? power / max : 0);
-		this.drawTexturedModalRect(k + 48, l + 33 + (82 - i1), 176, 82 - i1,
+		this.drawTexturedModalRect(k + 52, l + 33 + (82 - i1), 176, 82 - i1,
 				70, i1);
 	}
 

@@ -1,9 +1,13 @@
 package femtocraft.managers.research;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import femtocraft.Femtocraft;
+import femtocraft.research.gui.GuiResearch;
+import femtocraft.research.gui.GuiTechnology;
 
 public class ResearchTechnology {
 	public String name;
@@ -17,10 +21,21 @@ public class ResearchTechnology {
 	public boolean isKeystone;
 	public ArrayList<ItemStack> researchMaterials;
 
+	public Class<? extends GuiTechnology> guiClass;
+
 	public ResearchTechnology(String name, String description,
 			EnumTechLevel level, ArrayList<ResearchTechnology> prerequisites,
 			ItemStack displayItem, int xDisplay, int yDisplay,
 			boolean isKeystone, ArrayList<ItemStack> researchMaterials) {
+		this(name, description, level, prerequisites, displayItem, xDisplay,
+				yDisplay, isKeystone, researchMaterials, GuiTechnology.class);
+	}
+
+	public ResearchTechnology(String name, String description,
+			EnumTechLevel level, ArrayList<ResearchTechnology> prerequisites,
+			ItemStack displayItem, int xDisplay, int yDisplay,
+			boolean isKeystone, ArrayList<ItemStack> researchMaterials,
+			Class<? extends GuiTechnology> guiClass) {
 		this.name = name;
 		this.description = description;
 		this.level = level;
@@ -30,6 +45,7 @@ public class ResearchTechnology {
 		this.yDisplay = yDisplay;
 		this.isKeystone = isKeystone;
 		this.researchMaterials = researchMaterials;
+		this.guiClass = guiClass;
 	}
 
 	// --------------------------------------------------
@@ -47,6 +63,32 @@ public class ResearchTechnology {
 	}
 
 	// --------------------------------------------------
+
+	public GuiTechnology getGui(GuiResearch research,
+			ResearchTechnologyStatus status) {
+		try {
+			return guiClass.getConstructor(GuiResearch.class,
+					ResearchTechnologyStatus.class).newInstance(research,
+					status);
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			Femtocraft.logger
+					.log(Level.SEVERE,
+							"Technologies must return a GuiTechnology class that supports the constructor(GuiResearch, ResearchTechnologyStatus)");
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 
 	private ResearchTechnology() {
 	}
