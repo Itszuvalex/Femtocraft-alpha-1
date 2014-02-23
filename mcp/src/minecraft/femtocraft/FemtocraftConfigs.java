@@ -63,7 +63,9 @@ public class FemtocraftConfigs {
 	int unidentifiedAlloyID = 363;
 
 	public static @CfgId(block = true)
-	int FemtocraftSuperComputerID = 365;
+	int FemtocraftResearchComputerID = 365;
+	public static @CfgId(block = true)
+	int FemtocraftResearchConsoleID = 366;
 
 	// TODO: moved microcable to something else - need to fill id 370
 	public static @CfgId(block = true)

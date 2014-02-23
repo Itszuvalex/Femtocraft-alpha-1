@@ -331,7 +331,7 @@ public class Femtocraft {
 		LanguageRegistry.addName(unidentifiedAlloy, "Unidentified Alloy");
 
 		researchComputer = new BlockResearchComputer(
-				FemtocraftConfigs.FemtocraftSuperComputerID);
+				FemtocraftConfigs.FemtocraftResearchComputerID);
 		GameRegistry.registerBlock(researchComputer, "researchComputer");
 		LanguageRegistry.addName(researchComputer, "Research Computer");
 

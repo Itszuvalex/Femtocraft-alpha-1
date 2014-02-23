@@ -19,6 +19,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import femtocraft.Femtocraft;
 import femtocraft.managers.research.EventTechnology.TechnologyAddedEvent;
+import femtocraft.research.gui.technology.GuiBasicCircuits;
 
 //TODO:  Separate players out into their own files
 public class ManagerResearch {
@@ -33,7 +34,7 @@ public class ManagerResearch {
 	public static ResearchTechnology technologyBasicCircuits = new ResearchTechnology(
 			"Basic Circuits", "Farenite, Circuit Boards", EnumTechLevel.MACRO,
 			null, new ItemStack(Femtocraft.microCircuitBoard), 2, -3, false,
-			null);
+			null, GuiBasicCircuits.class);
 	public static ResearchTechnology technologyMetallurgy = new ResearchTechnology(
 			"Metallurgy", "Titanium, Thorium, Platinum", EnumTechLevel.MACRO,
 			null, new ItemStack(Femtocraft.ingotThorium), -2, -3, false, null);

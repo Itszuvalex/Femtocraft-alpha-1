@@ -546,7 +546,6 @@ public class GuiResearch extends GuiScreen {
 
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glEnable(GL11.GL_LIGHTING);
-		RenderHelper.disableStandardItemLighting();
 	}
 
 	/**
