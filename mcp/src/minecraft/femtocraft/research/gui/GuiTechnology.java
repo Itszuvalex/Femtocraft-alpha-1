@@ -270,7 +270,7 @@ public class GuiTechnology extends GuiScreen {
 	 * 
 	 */
 	protected void renderCraftingGrid(int x, int y, ItemStack[] items) {
-
+		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 		drawTexturedModalRect(x, y, 194, 11, 54, 54);
 
 		RenderItem renderitem = new RenderItem();
@@ -282,6 +282,7 @@ public class GuiTechnology extends GuiScreen {
 							.getMinecraft().getTextureManager(), items[i], x
 							+ 1 + 18 * (i % 3), y + 1 + 18 * (i / 3));
 		}
+		RenderHelper.disableStandardItemLighting();
 	}
 
 }
