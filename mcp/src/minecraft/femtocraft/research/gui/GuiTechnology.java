@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -97,6 +98,21 @@ public class GuiTechnology extends GuiScreen {
 		renderitem.renderItemAndEffectIntoGUI(
 				Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft()
 						.getTextureManager(), tech.displayItem, k + 66, l + 12);
+
+		if (tech.researchMaterials != null) {
+			int i = 0;
+			for (ItemStack item : tech.researchMaterials) {
+				if (i >= 3)
+					break;
+				renderitem.renderItemAndEffectIntoGUI(
+						Minecraft.getMinecraft().fontRenderer, Minecraft
+								.getMinecraft().getTextureManager(), item, k
+								+ 102 + 18 * i, l + 33);
+				i++;
+			}
+			;
+		}
+
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
 

@@ -64,7 +64,7 @@ public class FemtocraftConfigs {
 
 	public static @CfgId(block = true)
 	int FemtocraftSuperComputerID = 365;
-	
+
 	// TODO: moved microcable to something else - need to fill id 370
 	public static @CfgId(block = true)
 	int testID = 370;
@@ -177,6 +177,15 @@ public class FemtocraftConfigs {
 	int spoolID = 12034;
 	public static @CfgId
 	int spoolGoldID = 12035;
+
+	public static @CfgId
+	int itemMicroTechnologyID = 12036;
+	public static @CfgId
+	int itemNanoTechnologyID = 12037;
+	public static @CfgId
+	int itemFemtoTechnologyID = 12038;
+	public static @CfgId
+	int itemAdvancedTechnologyID = 12039;
 
 	public static @CfgId
 	int paperSchematicID = 12040;

@@ -31,20 +31,25 @@ public class ManagerResearch {
 	private String lastWorldLoaded = "";
 
 	public static ResearchTechnology technologyBasicCircuits = new ResearchTechnology(
-			"Basic Circuits", "Farenite, Circuit Boards", EnumTechLevel.MACRO, null, new ItemStack(
-					Femtocraft.microCircuitBoard), 2, -3, false, null);
+			"Basic Circuits", "Farenite, Circuit Boards", EnumTechLevel.MACRO,
+			null, new ItemStack(Femtocraft.microCircuitBoard), 2, -3, false,
+			null);
 	public static ResearchTechnology technologyMetallurgy = new ResearchTechnology(
-			"Metallurgy", "Titanium, Thorium, Platinum", EnumTechLevel.MACRO, null, new ItemStack(
-					Femtocraft.ingotThorium), -2, -3, false, null);
+			"Metallurgy", "Titanium, Thorium, Platinum", EnumTechLevel.MACRO,
+			null, new ItemStack(Femtocraft.ingotThorium), -2, -3, false, null);
 	public static ResearchTechnology technologyWorldStructure = new ResearchTechnology(
-			"Basic Chemistry", "Composition of Matter", EnumTechLevel.MACRO, null,
-			new ItemStack(Femtocraft.itemMineralLattice), 0, -3, true, null);
-	//TODO: replace maching icon with micro machine chassis item
+			"Basic Chemistry", "Composition of Matter", EnumTechLevel.MACRO,
+			null, new ItemStack(Femtocraft.itemMineralLattice), 0, -3, true,
+			null);
+	// TODO: replace maching icon with micro machine chassis item
 	public static ResearchTechnology technologyMachining = new ResearchTechnology(
 			"Machining", "Start your industry!", EnumTechLevel.MICRO,
 			new ArrayList<ResearchTechnology>(Arrays.asList(
 					technologyMetallurgy, technologyBasicCircuits)),
-			new ItemStack(Femtocraft.microStone), 0, -1, false, null);
+			new ItemStack(Femtocraft.microStone), 0, -1, false,
+			new ArrayList<ItemStack>(Arrays.asList(new ItemStack(
+					Femtocraft.ingotTitanium), new ItemStack(
+					Femtocraft.microCircuitBoard))));
 
 	public ManagerResearch() {
 		technologies = new HashMap<String, ResearchTechnology>();

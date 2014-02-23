@@ -107,6 +107,8 @@ import femtocraft.power.items.ItemSpoolGold;
 import femtocraft.proxy.ProxyClient;
 import femtocraft.proxy.ProxyCommon;
 import femtocraft.research.blocks.BlockResearchComputer;
+import femtocraft.research.items.ItemMicroTechnology;
+import femtocraft.research.items.ItemNanoTechnology;
 import femtocraft.transport.items.blocks.BlockVacuumTube;
 import femtocraft.transport.items.tiles.TileEntityVacuumTube;
 import femtocraft.transport.liquids.blocks.BlockSuctionPipe;
@@ -189,6 +191,9 @@ public class Femtocraft {
 
 	public static Item spool;
 	public static Item spoolGold;
+	
+	public static Item itemMicroTechnology;
+	public static Item itemNanoTechnology;
 
 	public static Item paperSchematic;
 
@@ -537,6 +542,12 @@ public class Femtocraft {
 		spoolGold = new ItemSpoolGold(FemtocraftConfigs.spoolGoldID)
 				.setUnlocalizedName("spoolGold");
 		LanguageRegistry.addName(spoolGold, "Gold Wire Spool");
+		
+		itemMicroTechnology = new ItemMicroTechnology(FemtocraftConfigs.itemMicroTechnologyID);
+		LanguageRegistry.addName(itemMicroTechnology, "Micro Technology");
+		
+		itemNanoTechnology = new ItemNanoTechnology(FemtocraftConfigs.itemNanoTechnologyID);
+		LanguageRegistry.addName(itemNanoTechnology, "Nano Technology");
 
 		// Schematics
 		paperSchematic = new ItemPaperSchematic(
