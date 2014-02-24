@@ -45,6 +45,7 @@ import femtocraft.core.items.ItemFemtoInterfaceDevice;
 import femtocraft.core.items.ItemIngotFarenite;
 import femtocraft.core.items.ItemIngotMalenite;
 import femtocraft.core.items.ItemIngotPlatinum;
+import femtocraft.core.items.ItemIngotTemperedTitanium;
 import femtocraft.core.items.ItemIngotThorium;
 import femtocraft.core.items.ItemIngotTitanium;
 import femtocraft.core.items.ItemMicroCircuitBoard;
@@ -176,6 +177,7 @@ public class Femtocraft {
 	public static Item ingotThorium;
 	public static Item ingotFarenite;
 	public static Item ingotMalenite;
+	public static Item ingotTemperedTitanium;
 
 	public static Item deconstructedIron;
 	public static Item deconstructedGold;
@@ -191,7 +193,7 @@ public class Femtocraft {
 
 	public static Item spool;
 	public static Item spoolGold;
-	
+
 	public static Item itemMicroTechnology;
 	public static Item itemNanoTechnology;
 
@@ -463,15 +465,22 @@ public class Femtocraft {
 
 		ingotFarenite = new ItemIngotFarenite(FemtocraftConfigs.ingotFareniteID)
 				.setUnlocalizedName("ingotFarenite");
-		LanguageRegistry.addName(ingotFarenite, "Farenite Ingot");
+		LanguageRegistry.addName(ingotFarenite, "Farenite");
 		OreDictionary
 				.registerOre("ingotFarenite", new ItemStack(ingotFarenite));
 
 		ingotMalenite = new ItemIngotMalenite(FemtocraftConfigs.ingotMaleniteID)
 				.setUnlocalizedName("ingotMalenite");
-		LanguageRegistry.addName(ingotMalenite, "Malenite Ingot");
+		LanguageRegistry.addName(ingotMalenite, "Malenite");
 		OreDictionary
 				.registerOre("ingotMalenite", new ItemStack(ingotMalenite));
+
+		ingotTemperedTitanium = new ItemIngotTemperedTitanium(
+				FemtocraftConfigs.ingotTemperedTitaniumID);
+		LanguageRegistry.addName(ingotTemperedTitanium,
+				"Tempered Titanium Ingot");
+		OreDictionary.registerOre("ingotTemperedTitanium", new ItemStack(
+				ingotTemperedTitanium));
 
 		deconstructedIron = new ItemDeconstructedIron(
 				FemtocraftConfigs.deconstructedIronID)
@@ -542,11 +551,13 @@ public class Femtocraft {
 		spoolGold = new ItemSpoolGold(FemtocraftConfigs.spoolGoldID)
 				.setUnlocalizedName("spoolGold");
 		LanguageRegistry.addName(spoolGold, "Gold Wire Spool");
-		
-		itemMicroTechnology = new ItemMicroTechnology(FemtocraftConfigs.itemMicroTechnologyID);
+
+		itemMicroTechnology = new ItemMicroTechnology(
+				FemtocraftConfigs.itemMicroTechnologyID);
 		LanguageRegistry.addName(itemMicroTechnology, "Micro Technology");
-		
-		itemNanoTechnology = new ItemNanoTechnology(FemtocraftConfigs.itemNanoTechnologyID);
+
+		itemNanoTechnology = new ItemNanoTechnology(
+				FemtocraftConfigs.itemNanoTechnologyID);
 		LanguageRegistry.addName(itemNanoTechnology, "Nano Technology");
 
 		// Schematics
@@ -760,6 +771,8 @@ public class Femtocraft {
 				ingotThorium), 0.1f);
 		GameRegistry.addSmelting(deconstructedPlatinum.itemID, new ItemStack(
 				ingotPlatinum), 0.1f);
+		GameRegistry.addSmelting(ingotTitanium.itemID, new ItemStack(
+				ingotTemperedTitanium), 0.1f);
 
 		GameRegistry.addSmelting(primedBoard.itemID, new ItemStack(dopedBoard),
 				0.1f);

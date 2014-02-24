@@ -24,8 +24,8 @@ public class ContainerMicroReconstructor extends Container {
 	public ContainerMicroReconstructor(InventoryPlayer par1InventoryPlayer,
 			TileEntityBaseEntityMicroReconstructor reconstructor) {
 		this.reconstructor = reconstructor;
-		this.addSlotToContainer(new OutputSlot(reconstructor, 9, 122, 23));
-		Slot schematic = new Slot(reconstructor, 10, 94, 54) {
+		this.addSlotToContainer(new OutputSlot(reconstructor, 9, 122, 18));
+		Slot schematic = new Slot(reconstructor, 10, 93, 54) {
 			public boolean isItemValid(ItemStack par1ItemStack) {
 				return par1ItemStack.getItem() instanceof IAssemblerSchematic;
 			}

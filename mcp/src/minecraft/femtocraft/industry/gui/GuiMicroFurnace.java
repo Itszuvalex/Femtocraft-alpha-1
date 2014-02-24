@@ -59,8 +59,8 @@ public class GuiMicroFurnace extends GuiContainer {
 		// 14, i1 + 2);
 		// }
 
-		i1 = this.furnaceInventory.getCookProgressScaled(24);
-		this.drawTexturedModalRect(k + 79, l + 34, 176, 14, i1, 16);
+		i1 = this.furnaceInventory.getCookProgressScaled(38);
+		this.drawTexturedModalRect(k + 73, l + 34, 176, 13, i1, 18);
 		i1 = (this.furnaceInventory.currentPower * 60)
 				/ this.furnaceInventory.getMaxPower();
 		this.drawTexturedModalRect(k + 18, l + 12 + (60 - i1), 176,

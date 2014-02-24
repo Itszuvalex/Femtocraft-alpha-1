@@ -36,13 +36,14 @@ public class GuiMicroReconstructor extends GuiContainer {
 	 * the items)
 	 */
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		String s = "Microtech Reconstructor";
+		String s = "Micro Reconstructor";
 		this.fontRenderer.drawString(s,
-				this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
-				4210752);
+				this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 5,
+				FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
 		this.fontRenderer.drawString(
 				StatCollector.translateToLocal("container.inventory"), 8,
-				this.ySize - 96 + 2, 4210752);
+				this.ySize - 96 + 4,
+				FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
 	}
 
 	/**
@@ -65,8 +66,8 @@ public class GuiMicroReconstructor extends GuiContainer {
 		// 14, i1 + 2);
 		// }
 
-		i1 = this.reconstructorInventory.getCookProgressScaled(24);
-		this.drawTexturedModalRect(k + 88, l + 22, 176, 14, i1 + 1, 16);
+		i1 = this.reconstructorInventory.getCookProgressScaled(30);
+		this.drawTexturedModalRect(k + 86, l + 21, 176, 0, i1 + 1, 31);
 		i1 = (this.reconstructorInventory.currentPower * 60)
 				/ this.reconstructorInventory.getMaxPower();
 		this.drawTexturedModalRect(k + 10, l + 8 + (60 - i1), 176,
@@ -81,8 +82,8 @@ public class GuiMicroReconstructor extends GuiContainer {
 
 			i1 = (this.reconstructorInventory.getMassAmount() * 60)
 					/ this.reconstructorInventory.getMassCapacity();
-			RenderUtils.renderLiquidInGUI(this, this.zLevel, image,
-                    k + 150, l + 8 + (60 - i1), 16, i1);
+			RenderUtils.renderLiquidInGUI(this, this.zLevel, image, k + 150, l
+					+ 8 + (60 - i1), 16, i1);
 
 			// Rebind texture
 			Minecraft.getMinecraft().getTextureManager().bindTexture(texture);

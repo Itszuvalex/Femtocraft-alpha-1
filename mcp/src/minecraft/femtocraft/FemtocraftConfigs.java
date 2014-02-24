@@ -151,6 +151,8 @@ public class FemtocraftConfigs {
 	int ingotFareniteID = 12003;
 	public static @CfgId
 	int ingotMaleniteID = 12004;
+	public static @CfgId
+	int ingotTemperedTitaniumID = 12005;
 
 	public static @CfgId
 	int deconstructedIronID = 12010;

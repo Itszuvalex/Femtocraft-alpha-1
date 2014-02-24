@@ -1,5 +1,7 @@
 package femtocraft.research.gui.technology;
 
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,7 +19,8 @@ public class GuiBasicCircuits extends GuiTechnology {
 
 	@Override
 	protected void renderInformation(int x, int y, int width, int height,
-			int displayPage, boolean isResearched) {
+			int displayPage, int mouseX, int mouseY, List tooltip,
+			boolean isResearched) {
 		switch (displayPage) {
 		case 1:
 			renderCraftingGridWithInfo(
@@ -28,6 +31,9 @@ public class GuiBasicCircuits extends GuiTechnology {
 					new ItemStack[] { new ItemStack(Item.stick),
 							new ItemStack(Item.stick),
 							new ItemStack(Item.stick) },
+					mouseX,
+					mouseY,
+					tooltip,
 					"Combining small pieces of wood, it is possible to create a simple container to support the fragile requirements of a circuit board.");
 			renderCraftingGridWithInfo(
 					x,
@@ -36,6 +42,9 @@ public class GuiBasicCircuits extends GuiTechnology {
 					height / 2,
 					new ItemStack[] { new ItemStack(Femtocraft.ingotFarenite),
 							new ItemStack(Item.dyePowder, 1, 4) },
+					mouseX,
+					mouseY,
+					tooltip,
 					"Farenite is an extremely conductive powder, orders of magnitude stronger than Redstone.  By diluting it with Lapis, you find it can both store and transmit power.");
 			break;
 		case 2:
@@ -51,6 +60,9 @@ public class GuiBasicCircuits extends GuiTechnology {
 							new ItemStack(Block.planks),
 							new ItemStack(Block.planks), null,
 							new ItemStack(Block.planks) },
+					mouseX,
+					mouseY,
+					tooltip,
 					"Spools allow for easy storage and retrieval of long threads of thin metal.  Perfect for holding wires.");
 			renderCraftingGridWithInfo(
 					x,
@@ -66,6 +78,9 @@ public class GuiBasicCircuits extends GuiTechnology {
 							new ItemStack(Item.ingotGold),
 							new ItemStack(Item.ingotGold),
 							new ItemStack(Item.ingotGold) },
+					mouseX,
+					mouseY,
+					tooltip,
 					"Gold makes for an excellent conductor, making it the perfect choice for wiring circuits.");
 			break;
 		case 3:
@@ -77,10 +92,14 @@ public class GuiBasicCircuits extends GuiTechnology {
 					new ItemStack[] {
 							new ItemStack(Femtocraft.conductivePowder), null,
 							null, new ItemStack(Femtocraft.board) },
+					mouseX,
+					mouseY,
+					tooltip,
 					"Filling a board with conductive powder, then running it through an oven, produces a board suitable for wiring.");
 			renderCraftingGridWithInfo(x, y + height / 2, width, height / 2,
 					new ItemStack[] { new ItemStack(Femtocraft.spoolGold),
 							null, null, new ItemStack(Femtocraft.dopedBoard) },
+					mouseX, mouseY, tooltip,
 					"Simply wire the connections using gold wiring to produce the needed circuit.");
 			break;
 		}

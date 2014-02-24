@@ -1,6 +1,11 @@
 package femtocraft.research.gui;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -109,8 +114,9 @@ public class GuiTechnology extends GuiScreen {
 
 		super.drawScreen(par1, par2, par3);
 
-		renderInformation(k + 9, l + 76, 237, 116, displayPage,
-				status.researched);
+		List tooltip = new ArrayList();
+		renderInformation(k + 9, l + 76, 237, 116, displayPage, par1, par2,
+				tooltip, status.researched);
 
 		String s = status.tech;
 		this.fontRenderer.drawString(s,
@@ -231,18 +237,31 @@ public class GuiTechnology extends GuiScreen {
 			}
 			;
 		}
+		
+		this.drawHoveringText(tooltip, par1, par2, this.fontRenderer);
 
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
-
 	}
 
 	protected int getNumPages() {
 		return 1;
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param pageNum
+	 * @param mouseX
+	 * @param mouseY
+	 * @param isResearched
+	 */
 	protected void renderInformation(int x, int y, int width, int height,
-			int pageNum, boolean isResearched) {
+			int pageNum, int mouseX, int mouseY, List tooltip,
+			boolean isResearched) {
 
 	}
 
@@ -258,9 +277,10 @@ public class GuiTechnology extends GuiScreen {
 	 * @param info
 	 */
 	protected void renderCraftingGridWithInfo(int x, int y, int width,
-			int height, ItemStack[] items, String info) {
+			int height, ItemStack[] items, int mouseX, int mouseY,
+			List tooltip, String info) {
 		int padding = 2;
-		renderCraftingGrid(x, y, items);
+		renderCraftingGrid(x, y, items, mouseX, mouseY, tooltip);
 		info = String.format("%s%s%s", EnumChatFormatting.WHITE, info,
 				EnumChatFormatting.RESET);
 		this.fontRenderer.drawSplitString(info, x + 54 + padding, y + padding,
@@ -279,7 +299,8 @@ public class GuiTechnology extends GuiScreen {
 	 * 
 	 * 
 	 */
-	protected void renderCraftingGrid(int x, int y, ItemStack[] items) {
+	protected void renderCraftingGrid(int x, int y, ItemStack[] items,
+			int mouseX, int mouseY, List tooltip) {
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 		drawTexturedModalRect(x, y, 194, 11, 54, 54);
 
@@ -293,6 +314,79 @@ public class GuiTechnology extends GuiScreen {
 							+ 1 + 18 * (i % 3), y + 1 + 18 * (i / 3));
 		}
 		RenderHelper.disableStandardItemLighting();
+
+		for (int i = 0; (i < 9) && (i < items.length); ++i) {
+			if ((mouseX >= (x + 1 + 18 * (i % 3))
+					&& (mouseX <= (x + 16 + 18 * (i % 3))) && ((mouseY >= (y + 1 + 18 * (i / 3))) && (mouseY <= y
+					+ 16 + 18 * (i / 3))))) {
+				if (items[i] != null) {
+					tooltip.add(items[i].getDisplayName());
+				}
+			}
+		}
+	}
+
+	protected void drawHoveringText(List par1List, int par2, int par3,
+			FontRenderer font) {
+		if (!par1List.isEmpty()) {
+			int k = 0;
+			Iterator iterator = par1List.iterator();
+
+			while (iterator.hasNext()) {
+				String s = (String) iterator.next();
+				int l = font.getStringWidth(s);
+
+				if (l > k) {
+					k = l;
+				}
+			}
+
+			int i1 = par2 + 12;
+			int j1 = par3 - 12;
+			int k1 = 8;
+
+			if (par1List.size() > 1) {
+				k1 += 2 + (par1List.size() - 1) * 10;
+			}
+
+			if (i1 + k > this.width) {
+				i1 -= 28 + k;
+			}
+
+			if (j1 + k1 + 6 > this.height) {
+				j1 = this.height - k1 - 6;
+			}
+
+			int l1 = -267386864;
+			this.drawGradientRect(i1 - 3, j1 - 4, i1 + k + 3, j1 - 3, l1, l1);
+			this.drawGradientRect(i1 - 3, j1 + k1 + 3, i1 + k + 3, j1 + k1 + 4,
+					l1, l1);
+			this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 + k1 + 3, l1,
+					l1);
+			this.drawGradientRect(i1 - 4, j1 - 3, i1 - 3, j1 + k1 + 3, l1, l1);
+			this.drawGradientRect(i1 + k + 3, j1 - 3, i1 + k + 4, j1 + k1 + 3,
+					l1, l1);
+			int i2 = 1347420415;
+			int j2 = (i2 & 16711422) >> 1 | i2 & -16777216;
+			this.drawGradientRect(i1 - 3, j1 - 3 + 1, i1 - 3 + 1, j1 + k1 + 3
+					- 1, i2, j2);
+			this.drawGradientRect(i1 + k + 2, j1 - 3 + 1, i1 + k + 3, j1 + k1
+					+ 3 - 1, i2, j2);
+			this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 - 3 + 1, i2,
+					i2);
+			this.drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + k + 3, j1 + k1 + 3,
+					j2, j2);
+
+			for (int k2 = 0; k2 < par1List.size(); ++k2) {
+				String s1 = (String) par1List.get(k2);
+				font.drawStringWithShadow(s1, i1, j1, -1);
+				if (k2 == 0) {
+					j1 += 2;
+				}
+
+				j1 += 10;
+			}
+		}
 	}
 
 }
