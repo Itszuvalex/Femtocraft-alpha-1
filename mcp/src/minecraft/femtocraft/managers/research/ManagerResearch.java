@@ -37,7 +37,8 @@ public class ManagerResearch {
 			null, GuiBasicCircuits.class);
 	public static ResearchTechnology technologyMetallurgy = new ResearchTechnology(
 			"Metallurgy", "Titanium, Thorium, Platinum", EnumTechLevel.MACRO,
-			null, new ItemStack(Femtocraft.ingotThorium), -2, -3, false, null);
+			null, new ItemStack(Femtocraft.ingotTemperedTitanium), -2, -3,
+			false, null);
 	public static ResearchTechnology technologyWorldStructure = new ResearchTechnology(
 			"Basic Chemistry", "Composition of Matter", EnumTechLevel.MACRO,
 			null, new ItemStack(Femtocraft.itemMineralLattice), 0, -3, true,
@@ -47,10 +48,17 @@ public class ManagerResearch {
 			"Machining", "Start your industry!", EnumTechLevel.MICRO,
 			new ArrayList<ResearchTechnology>(Arrays.asList(
 					technologyMetallurgy, technologyBasicCircuits)),
-			new ItemStack(Femtocraft.microStone), 0, -1, false,
+			new ItemStack(Femtocraft.itemMicroPlating), 0, -1, false,
 			new ArrayList<ItemStack>(Arrays.asList(new ItemStack(
-					Femtocraft.ingotTitanium), new ItemStack(
-					Femtocraft.microCircuitBoard))));
+					Femtocraft.ingotTemperedTitanium), new ItemStack(
+					Femtocraft.microCircuitBoard), new ItemStack(
+					Femtocraft.ingotTemperedTitanium), new ItemStack(
+					Femtocraft.microCircuitBoard), new ItemStack(
+					Femtocraft.conductivePowder), new ItemStack(
+					Femtocraft.microCircuitBoard), new ItemStack(
+					Femtocraft.ingotTemperedTitanium), new ItemStack(
+					Femtocraft.microCircuitBoard), new ItemStack(
+					Femtocraft.ingotTemperedTitanium))));
 
 	public ManagerResearch() {
 		technologies = new HashMap<String, ResearchTechnology>();

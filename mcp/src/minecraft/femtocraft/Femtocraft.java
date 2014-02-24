@@ -50,6 +50,7 @@ import femtocraft.core.items.ItemIngotThorium;
 import femtocraft.core.items.ItemIngotTitanium;
 import femtocraft.core.items.ItemMicroCircuitBoard;
 import femtocraft.core.items.ItemMicroInterfaceDevice;
+import femtocraft.core.items.ItemMicroPlating;
 import femtocraft.core.items.ItemNanoInterfaceDevice;
 import femtocraft.core.items.ItemPrimedBoard;
 import femtocraft.core.items.ItemSpool;
@@ -231,6 +232,8 @@ public class Femtocraft {
 	public static Item itemMorphicChannel;
 	public static Item itemSynthesizedFiber;
 	public static Item itemOrganometallicPlate;
+
+	public static Item itemMicroPlating;
 
 	// Produce
 	public static Item tomatoSeed;
@@ -722,6 +725,11 @@ public class Femtocraft {
 		GameRegistry.registerItem(itemOrganometallicPlate,
 				"Organometallic Plate");
 
+		itemMicroPlating = new ItemMicroPlating(
+				FemtocraftConfigs.microPlatingID);
+		LanguageRegistry.addName(itemMicroPlating, "Micro Plating");
+		GameRegistry.registerItem(itemMicroPlating, "Micro Plating");
+
 		// Produce
 		tomatoSeed = new ItemSeedTomato(FemtocraftConfigs.tomatoSeedID)
 				.setUnlocalizedName("tomatoSeed");
@@ -739,7 +747,6 @@ public class Femtocraft {
 		LanguageRegistry.addName(cuttingBoard, "Cutting Board");
 		GameRegistry.registerBlock(cuttingBoard, "Cutting Board");
 
-		registerRecipes();
 		ProxyClient.setCustomRenderers();
 		// GameRegistry.registerTileEntity(TileEntity.class, "myTile");
 		// GameRegistry.addRecipe(new ItemStack(itemId), new Object[] {});
@@ -753,52 +760,4 @@ public class Femtocraft {
 	public void postInit(FMLPostInitializationEvent event) {
 		ManagerRecipe.assemblyRecipes.registerDefaultRecipes();
 	}
-
-	private void registerRecipes() {
-		GameRegistry.addSmelting(oreTitanium.blockID, new ItemStack(
-				ingotTitanium), 0.1f);
-		GameRegistry.addSmelting(orePlatinum.blockID, new ItemStack(
-				ingotPlatinum), 0.1f);
-		GameRegistry.addSmelting(oreThorium.blockID,
-				new ItemStack(ingotThorium), 0.1f);
-		GameRegistry.addSmelting(deconstructedIron.itemID, new ItemStack(
-				Item.ingotIron), 0.1f);
-		GameRegistry.addSmelting(deconstructedGold.itemID, new ItemStack(
-				Item.ingotGold), 0.1f);
-		GameRegistry.addSmelting(deconstructedTitanium.itemID, new ItemStack(
-				ingotTitanium), 0.1f);
-		GameRegistry.addSmelting(deconstructedThorium.itemID, new ItemStack(
-				ingotThorium), 0.1f);
-		GameRegistry.addSmelting(deconstructedPlatinum.itemID, new ItemStack(
-				ingotPlatinum), 0.1f);
-		GameRegistry.addSmelting(ingotTitanium.itemID, new ItemStack(
-				ingotTemperedTitanium), 0.1f);
-
-		GameRegistry.addSmelting(primedBoard.itemID, new ItemStack(dopedBoard),
-				0.1f);
-
-		GameRegistry.addShapedRecipe(new ItemStack(primedBoard), "#", "$", '#',
-				conductivePowder, '$', board);
-		GameRegistry.addShapedRecipe(new ItemStack(paperSchematic, 3), "###",
-				"###", "###", '#', Item.paper);
-		GameRegistry.addShapedRecipe(new ItemStack(board), "###", '#',
-				Item.stick);
-		GameRegistry.addShapedRecipe(new ItemStack(microCircuitBoard), "#",
-				"$", '#', spoolGold, '$', dopedBoard);
-
-		CraftingManager
-				.getInstance()
-				.getRecipeList()
-				.add(new ShapedOreRecipe(new ItemStack(spool), "# #", "#-#",
-						"# #", '#', "plankWood", '-', "stickWood"));
-
-		GameRegistry.addShapedRecipe(new ItemStack(spoolGold, 8), "###", "#-#",
-				"###", '#', Item.ingotGold, '-', Femtocraft.spool);
-
-		GameRegistry.addShapelessRecipe(new ItemStack(conductivePowder, 2),
-				new ItemStack(ingotFarenite), new ItemStack(Item.dyePowder, 1,
-						4));
-
-	}
-
 }

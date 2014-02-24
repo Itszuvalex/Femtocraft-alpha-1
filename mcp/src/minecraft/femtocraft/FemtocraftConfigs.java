@@ -257,12 +257,15 @@ public class FemtocraftConfigs {
 	int SynthesizedFiberID = 12068;
 	public static @CfgId
 	int OrganometallicPlateID = 12069;
+	
+	public static @CfgId
+	int microPlatingID = 12100;
 
 	// Produce 12070 - 12150
 	public static @CfgId
-	int tomatoSeedID = 12070;
+	int tomatoSeedID = 12200;
 	public static @CfgId
-	int tomatoID = 12071;
+	int tomatoID = 122001;
 
 	// Cooking 12150 - 12300 items and 370-375
 	public static @CfgId(block = true)
