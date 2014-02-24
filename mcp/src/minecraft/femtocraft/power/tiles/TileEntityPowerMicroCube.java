@@ -33,12 +33,12 @@ public class TileEntityPowerMicroCube extends TileEntityPowerBase {
 
 	@Override
 	public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
-		
-		
+
 		ItemStack item = par5EntityPlayer.getCurrentEquippedItem();
 		if (item != null && (item.getItem() instanceof IInterfaceDevice)) {
-			if(!isUseableByPlayer(par5EntityPlayer)) return false;
-			
+			if (!isUseableByPlayer(par5EntityPlayer))
+				return false;
+
 			ForgeDirection dir = ForgeDirection.getOrientation(side);
 			if (par5EntityPlayer.isSneaking()) {
 				dir = dir.getOpposite();
@@ -128,6 +128,11 @@ public class TileEntityPowerMicroCube extends TileEntityPowerBase {
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeToNBT(par1nbtTagCompound);
 		par1nbtTagCompound.setByte("output", generateOutputMask());
+	}
+
+	@Override
+	public boolean hasGUI() {
+		return true;
 	}
 
 }
