@@ -265,7 +265,7 @@ public class FemtocraftConfigs {
 	public static @CfgId
 	int tomatoSeedID = 12200;
 	public static @CfgId
-	int tomatoID = 122001;
+	int tomatoID = 12001;
 
 	// Cooking 12150 - 12300 items and 370-375
 	public static @CfgId(block = true)
