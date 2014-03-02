@@ -12,22 +12,30 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+import femtocraft.FemtocraftDataUtils.Saveable;
 import femtocraft.api.IInterfaceDevice;
 import femtocraft.api.ISuctionPipe;
 import femtocraft.core.tiles.TileEntityBase;
 
 public class TileEntitySuctionPipe extends TileEntityBase implements
 		ISuctionPipe {
-	private FluidTank tank;
-	public boolean[] tankconnections;
-	public boolean[] pipeconnections;
+	private @Saveable
+	FluidTank tank;
+	public @Saveable
+	boolean[] tankconnections;
+	public @Saveable
+	boolean[] pipeconnections;
 	public IFluidHandler[] neighbors;
-	private boolean output;
-	private int pressure;
+	private @Saveable(desc = true)
+	boolean output;
+	private @Saveable
+	int pressure;
 	private final float TRANSFER_RATIO = .1f;
 
+	// Not @Saveable due to special rendering requirements
 	private FluidStack renderFluid;
-	private int renderTick;
+	private @Saveable
+	int renderTick;
 	static final int renderLength = 10;
 
 	/*
@@ -392,15 +400,15 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 	public void handleDescriptionNBT(NBTTagCompound compound) {
 		super.handleDescriptionNBT(compound);
 
-		FluidStack fluid = compound.hasKey("fluid") ? FluidStack
-				.loadFluidStackFromNBT(compound.getCompoundTag("fluid")) : null;
-		tank.setFluid(fluid);
+		// FluidStack fluid = compound.hasKey("fluid") ? FluidStack
+		// .loadFluidStackFromNBT(compound.getCompoundTag("fluid")) : null;
+		// tank.setFluid(fluid);
 
 		renderFluid = compound.hasKey("renderfluid") ? FluidStack
 				.loadFluidStackFromNBT(compound.getCompoundTag("renderfluid"))
 				: renderFluid;
 
-		output = compound.getBoolean("output");
+		// output = compound.getBoolean("output");
 		if (worldObj != null)
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 	}
@@ -408,11 +416,11 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 	@Override
 	public void saveToDescriptionCompound(NBTTagCompound compound) {
 		super.saveToDescriptionCompound(compound);
-		NBTTagCompound fluid = new NBTTagCompound();
-		if (tank.getFluid() != null) {
-			tank.getFluid().writeToNBT(fluid);
-			compound.setTag("fluid", fluid);
-		}
+		// NBTTagCompound fluid = new NBTTagCompound();
+		// if (tank.getFluid() != null) {
+		// tank.getFluid().writeToNBT(fluid);
+		// compound.setTag("fluid", fluid);
+		// }
 
 		NBTTagCompound renderfluid = new NBTTagCompound();
 		if (renderFluid != null) {
@@ -420,7 +428,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 			compound.setTag("renderfluid", renderfluid);
 		}
 
-		compound.setBoolean("output", output);
+		// compound.setBoolean("output", output);
 	}
 
 	@Override

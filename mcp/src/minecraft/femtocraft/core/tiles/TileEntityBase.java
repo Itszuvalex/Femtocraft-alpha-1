@@ -109,23 +109,19 @@ public class TileEntityBase extends TileEntity {
 
 	public void handleDescriptionNBT(NBTTagCompound compound) {
 		FemtocraftDataUtils.loadObjectFromNBT(compound, this, EnumSaveType.DESCRIPTION);
-//		owner = compound.getString(NBT_TAG);
 	}
 
 	public void saveToDescriptionCompound(NBTTagCompound compound) {
-//		compound.setString(NBT_TAG, owner);
 		FemtocraftDataUtils.saveObjectToNBT(compound, this, EnumSaveType.DESCRIPTION);
 	}
 
 	public void loadInfoFromItemNBT(NBTTagCompound compound) {
 		if (compound == null)
 			return;
-//		owner = compound.getString(NBT_TAG);
 		FemtocraftDataUtils.loadObjectFromNBT(compound, this, EnumSaveType.ITEM);
 	}
 
 	public void saveInfoToItemNBT(NBTTagCompound compound) {
-//		compound.setString(NBT_TAG, owner);
 		FemtocraftDataUtils.saveObjectToNBT(compound, this, EnumSaveType.ITEM);
 	}
 

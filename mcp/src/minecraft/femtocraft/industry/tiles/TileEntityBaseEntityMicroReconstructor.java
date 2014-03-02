@@ -1,25 +1,31 @@
 package femtocraft.industry.tiles;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import femtocraft.Femtocraft;
-import femtocraft.FemtocraftUtils;
-import femtocraft.api.IAssemblerSchematic;
-import femtocraft.managers.ManagerRecipe;
-import femtocraft.managers.assembler.AssemblerRecipe;
-import femtocraft.managers.research.EnumTechLevel;
-import femtocraft.power.tiles.TileEntityPowerConsumer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.*;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.Femtocraft;
+import femtocraft.FemtocraftDataUtils.Saveable;
+import femtocraft.FemtocraftUtils;
+import femtocraft.api.IAssemblerSchematic;
+import femtocraft.managers.ManagerRecipe;
+import femtocraft.managers.assembler.AssemblerRecipe;
+import femtocraft.managers.research.EnumTechLevel;
+import femtocraft.power.tiles.TileEntityPowerConsumer;
 
 public class TileEntityBaseEntityMicroReconstructor extends
 		TileEntityPowerConsumer implements ISidedInventory, IFluidHandler {
-	private FluidTank tank;
+	private @Saveable
+	FluidTank tank;
 
 	public TileEntityBaseEntityMicroReconstructor() {
 		super();
@@ -48,15 +54,20 @@ public class TileEntityBaseEntityMicroReconstructor extends
 	 * Slot 10 is for schematic card Slots 11-28 are internal inventory, to pull
 	 * from when building
 	 */
-	private ItemStack[] reconstructorItemStacks = new ItemStack[29];
+	private @Saveable
+	ItemStack[] reconstructorItemStacks = new ItemStack[29];
 
 	/**
 	 * The number of ticks that the current item has been cooking for
 	 */
-	public int cookTime = 0;
-	public int currentPower = 0;
-	private String field_94130_e;
-	public ItemStack[] reconstructingStacks = null;
+	public @Saveable
+	int cookTime = 0;
+	public @Saveable
+	int currentPower = 0;
+	private @Saveable
+	String field_94130_e;
+	public @Saveable
+	ItemStack[] reconstructingStacks = null;
 
 	public int getMassAmount() {
 		return tank.getFluidAmount();
@@ -201,42 +212,43 @@ public class TileEntityBaseEntityMicroReconstructor extends
 	 */
 	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
 		super.readFromNBT(par1NBTTagCompound);
-
-		NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
-		this.reconstructorItemStacks = new ItemStack[this.getSizeInventory()];
-
-		for (int i = 0; i < nbttaglist.tagCount() - 1; ++i) {
-			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
-			byte b0 = nbttagcompound1.getByte("Slot");
-
-			if (b0 >= 0 && b0 < this.reconstructorItemStacks.length) {
-				this.reconstructorItemStacks[b0] = ItemStack
-						.loadItemStackFromNBT(nbttagcompound1);
-			}
-		}
-
-		NBTTagCompound nbttagcompoundsmelt = (NBTTagCompound) nbttaglist
-				.tagAt(nbttaglist.tagCount() - 1);
-		if (nbttagcompoundsmelt.getBoolean("isReconstructing")) {
-			NBTTagList smeltList = nbttagcompoundsmelt.getTagList("input");
-			for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-				NBTTagCompound ss = (NBTTagCompound) smeltList.tagAt(i);
-				byte slot = ss.getByte("Slot");
-				this.reconstructingStacks[slot] = ItemStack
-						.loadItemStackFromNBT(ss);
-			}
-		} else {
-			this.reconstructingStacks = null;
-		}
-
-		this.cookTime = par1NBTTagCompound.getShort("CookTime");
-
-		if (par1NBTTagCompound.hasKey("CustomName")) {
-			this.field_94130_e = par1NBTTagCompound.getString("CustomName");
-		}
-
-		tank.readFromNBT(par1NBTTagCompound);
+		//
+		// NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
+		// this.reconstructorItemStacks = new
+		// ItemStack[this.getSizeInventory()];
+		//
+		// for (int i = 0; i < nbttaglist.tagCount() - 1; ++i) {
+		// NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+		// .tagAt(i);
+		// byte b0 = nbttagcompound1.getByte("Slot");
+		//
+		// if (b0 >= 0 && b0 < this.reconstructorItemStacks.length) {
+		// this.reconstructorItemStacks[b0] = ItemStack
+		// .loadItemStackFromNBT(nbttagcompound1);
+		// }
+		// }
+		//
+		// NBTTagCompound nbttagcompoundsmelt = (NBTTagCompound) nbttaglist
+		// .tagAt(nbttaglist.tagCount() - 1);
+		// if (nbttagcompoundsmelt.getBoolean("isReconstructing")) {
+		// NBTTagList smeltList = nbttagcompoundsmelt.getTagList("input");
+		// for (int i = 0; i < nbttaglist.tagCount(); ++i) {
+		// NBTTagCompound ss = (NBTTagCompound) smeltList.tagAt(i);
+		// byte slot = ss.getByte("Slot");
+		// this.reconstructingStacks[slot] = ItemStack
+		// .loadItemStackFromNBT(ss);
+		// }
+		// } else {
+		// this.reconstructingStacks = null;
+		// }
+		//
+		// this.cookTime = par1NBTTagCompound.getShort("CookTime");
+		//
+		// if (par1NBTTagCompound.hasKey("CustomName")) {
+		// this.field_94130_e = par1NBTTagCompound.getString("CustomName");
+		// }
+		//
+		// tank.readFromNBT(par1NBTTagCompound);
 	}
 
 	/**
@@ -244,43 +256,44 @@ public class TileEntityBaseEntityMicroReconstructor extends
 	 */
 	public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setShort("CookTime", (short) this.cookTime);
-		NBTTagList nbttaglist = new NBTTagList();
-
-		for (int i = 0; i < this.reconstructorItemStacks.length; ++i) {
-			if (this.reconstructorItemStacks[i] != null) {
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte) i);
-				this.reconstructorItemStacks[i].writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-		}
-
-		NBTTagCompound nbttagcompoundsmelt = new NBTTagCompound();
-		nbttagcompoundsmelt.setBoolean("isReconstructing", isReconstructing());
-		if (isReconstructing()) {
-			NBTTagList smeltList = new NBTTagList();
-
-			for (int i = 0; i < 9; ++i) {
-				if (reconstructingStacks[i] != null) {
-					NBTTagCompound ss = new NBTTagCompound();
-					ss.setByte("Slot", (byte) i);
-					reconstructingStacks[i].writeToNBT(ss);
-					smeltList.appendTag(ss);
-				}
-			}
-
-			nbttagcompoundsmelt.setTag("input", smeltList);
-		}
-		nbttaglist.appendTag(nbttagcompoundsmelt);
-
-		par1NBTTagCompound.setTag("Items", nbttaglist);
-
-		if (this.isInvNameLocalized()) {
-			par1NBTTagCompound.setString("CustomName", this.field_94130_e);
-		}
-
-		tank.writeToNBT(par1NBTTagCompound);
+		// par1NBTTagCompound.setShort("CookTime", (short) this.cookTime);
+		// NBTTagList nbttaglist = new NBTTagList();
+		//
+		// for (int i = 0; i < this.reconstructorItemStacks.length; ++i) {
+		// if (this.reconstructorItemStacks[i] != null) {
+		// NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+		// nbttagcompound1.setByte("Slot", (byte) i);
+		// this.reconstructorItemStacks[i].writeToNBT(nbttagcompound1);
+		// nbttaglist.appendTag(nbttagcompound1);
+		// }
+		// }
+		//
+		// NBTTagCompound nbttagcompoundsmelt = new NBTTagCompound();
+		// nbttagcompoundsmelt.setBoolean("isReconstructing",
+		// isReconstructing());
+		// if (isReconstructing()) {
+		// NBTTagList smeltList = new NBTTagList();
+		//
+		// for (int i = 0; i < 9; ++i) {
+		// if (reconstructingStacks[i] != null) {
+		// NBTTagCompound ss = new NBTTagCompound();
+		// ss.setByte("Slot", (byte) i);
+		// reconstructingStacks[i].writeToNBT(ss);
+		// smeltList.appendTag(ss);
+		// }
+		// }
+		//
+		// nbttagcompoundsmelt.setTag("input", smeltList);
+		// }
+		// nbttaglist.appendTag(nbttagcompoundsmelt);
+		//
+		// par1NBTTagCompound.setTag("Items", nbttaglist);
+		//
+		// if (this.isInvNameLocalized()) {
+		// par1NBTTagCompound.setString("CustomName", this.field_94130_e);
+		// }
+		//
+		// tank.writeToNBT(par1NBTTagCompound);
 	}
 
 	/**

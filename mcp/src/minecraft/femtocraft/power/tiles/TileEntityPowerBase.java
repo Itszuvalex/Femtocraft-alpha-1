@@ -1,31 +1,27 @@
 package femtocraft.power.tiles;
 
-import femtocraft.api.PowerContainer;
-import femtocraft.api.IPowerBlockContainer;
-import femtocraft.core.tiles.TileEntityBase;
-import femtocraft.managers.research.EnumTechLevel;
+import java.util.Arrays;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-
-import java.util.Arrays;
+import femtocraft.FemtocraftDataUtils.Saveable;
+import femtocraft.api.IPowerBlockContainer;
+import femtocraft.api.PowerContainer;
+import femtocraft.core.tiles.TileEntityBase;
+import femtocraft.managers.research.EnumTechLevel;
 
 public class TileEntityPowerBase extends TileEntityBase implements
 		IPowerBlockContainer {
-	private PowerContainer container;
-	private float maxPowerPerTick;
-	private float maxSizePackets;
-	private float distributionBuffer;
-	public boolean[] connections;
+	private @Saveable(item = true)
+	PowerContainer container = new PowerContainer(EnumTechLevel.MACRO, 250);
+	private float maxPowerPerTick = .05f;
+	private float maxSizePackets = .05f;
+	private float distributionBuffer = .01f;
+	public boolean[] connections = new boolean[6];;
 
 	public TileEntityPowerBase() {
 		super();
-		container = new PowerContainer(EnumTechLevel.MACRO, 250);
-		maxPowerPerTick = .05f;
-		maxSizePackets = .05f; // Yes this is the same as maxpertick, this
-								// breaks if it isn't, for some reason TODO
-		distributionBuffer = .01f;
-		connections = new boolean[6];
 		Arrays.fill(connections, false);
 	}
 
@@ -211,8 +207,8 @@ public class TileEntityPowerBase extends TileEntityBase implements
 
 	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
 		super.readFromNBT(par1NBTTagCompound);
-		container = PowerContainer.createFromNBT(par1NBTTagCompound
-				.getCompoundTag("power"));
+		// container = PowerContainer.createFromNBT(par1NBTTagCompound
+		// .getCompoundTag("power"));
 
 		// for(int i = 0; i < 6; i++) {
 		// connections[i] =
@@ -225,9 +221,9 @@ public class TileEntityPowerBase extends TileEntityBase implements
 	 */
 	public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeToNBT(par1NBTTagCompound);
-		NBTTagCompound power = new NBTTagCompound();
-		container.saveToNBT(power);
-		par1NBTTagCompound.setTag("power", power);
+		// NBTTagCompound power = new NBTTagCompound();
+		// container.saveToNBT(power);
+		// par1NBTTagCompound.setTag("power", power);
 
 		// for(int i = 0; i < 6; i++) {
 		// par1NBTTagCompound.setBoolean(String.format("connection%d", i),
@@ -252,7 +248,8 @@ public class TileEntityPowerBase extends TileEntityBase implements
 				IPowerBlockContainer fc = (IPowerBlockContainer) checkTile;
 				if (!fc.canConnect(offset.getOpposite()))
 					continue;
-				if (!fc.canAcceptPowerOfLevel(getTechLevel(offset.getOpposite()),
+				if (!fc.canAcceptPowerOfLevel(
+						getTechLevel(offset.getOpposite()),
 						offset.getOpposite()))
 					continue;
 
@@ -286,15 +283,15 @@ public class TileEntityPowerBase extends TileEntityBase implements
 	@Override
 	public void loadInfoFromItemNBT(NBTTagCompound compound) {
 		super.loadInfoFromItemNBT(compound);
-		container = PowerContainer.createFromNBT(compound
-				.getCompoundTag("power"));
+		// container = PowerContainer.createFromNBT(compound
+		// .getCompoundTag("power"));
 	}
 
 	@Override
 	public void saveInfoToItemNBT(NBTTagCompound compound) {
 		super.saveInfoToItemNBT(compound);
-		NBTTagCompound power = new NBTTagCompound();
-		container.saveToNBT(power);
-		compound.setTag("power", power);
+		// NBTTagCompound power = new NBTTagCompound();
+		// container.saveToNBT(power);
+		// compound.setTag("power", power);
 	}
 }

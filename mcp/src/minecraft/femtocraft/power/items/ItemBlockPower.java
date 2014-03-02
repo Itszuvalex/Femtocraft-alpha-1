@@ -4,11 +4,13 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.api.PowerContainer;
 import femtocraft.core.items.CoreItemBlock;
+import femtocraft.power.tiles.TileEntityPowerBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 public abstract class ItemBlockPower extends CoreItemBlock {
@@ -38,15 +40,16 @@ public abstract class ItemBlockPower extends CoreItemBlock {
 			nbt = par1ItemStack.stackTagCompound = new NBTTagCompound();
 		}
 
+		String fieldName = getFieldName();
 		PowerContainer container;
-		boolean init = nbt.hasKey("power");
+		boolean init = nbt.hasKey(fieldName);
 
-		NBTTagCompound power = nbt.getCompoundTag("power");
+		NBTTagCompound power = nbt.getCompoundTag(fieldName);
 
 		if (!init) {
 			container = getDefaultContainer();
 			container.saveToNBT(power);
-			nbt.setTag("power", power);
+			nbt.setTag(fieldName, power);
 		} else {
 			container = PowerContainer.createFromNBT(power);
 		}
@@ -67,6 +70,24 @@ public abstract class ItemBlockPower extends CoreItemBlock {
 		}
 		NBTTagCompound power = new NBTTagCompound();
 		getDefaultContainer().saveToNBT(power);
-		nbt.setTag("power", power);
+		nbt.setTag(getFieldName(), power);
+	}
+
+	private String getFieldName() {
+		Field[] fields = TileEntityPowerBase.class.getDeclaredFields();
+		String fieldName = "power";
+		for (Field field : fields) {
+			if (field.getType() == PowerContainer.class) {
+				String ret;
+				boolean access = field.isAccessible();
+				if (!access)
+					field.setAccessible(true);
+				ret = field.getName();
+				if (!access)
+					field.setAccessible(false);
+				return ret;
+			}
+		}
+		return fieldName;
 	}
 }

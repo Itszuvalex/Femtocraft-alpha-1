@@ -5,6 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import femtocraft.FemtocraftDataUtils.Saveable;
 import femtocraft.api.IInterfaceDevice;
 import femtocraft.api.IPowerBlockContainer;
 import femtocraft.core.multiblock.IMultiBlockComponent;
@@ -14,8 +15,10 @@ import femtocraft.managers.research.EnumTechLevel;
 public class TileEntityNanoCubePort extends TileEntityPowerBase implements
 		IMultiBlockComponent {
 	private static int storage = 500000;
-	private MultiBlockInfo info;
-	public boolean output;
+	private @Saveable(desc = true)
+	MultiBlockInfo info;
+	public @Saveable(desc = true)
+	boolean output;
 
 	public TileEntityNanoCubePort() {
 		super();
@@ -242,8 +245,8 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
 	@Override
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
-		info.loadFromNBT(par1nbtTagCompound.getCompoundTag("info"));
-		output = par1nbtTagCompound.getBoolean("output");
+		// info.loadFromNBT(par1nbtTagCompound.getCompoundTag("info"));
+		// output = par1nbtTagCompound.getBoolean("output");
 	}
 
 	/*
@@ -256,11 +259,11 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
 	@Override
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeToNBT(par1nbtTagCompound);
-
-		NBTTagCompound infoC = new NBTTagCompound();
-		info.saveToNBT(infoC);
-		par1nbtTagCompound.setTag("info", infoC);
-		par1nbtTagCompound.setBoolean("output", output);
+		//
+		// NBTTagCompound infoC = new NBTTagCompound();
+		// info.saveToNBT(infoC);
+		// par1nbtTagCompound.setTag("info", infoC);
+		// par1nbtTagCompound.setBoolean("output", output);
 	}
 
 	/*
@@ -273,8 +276,8 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
 	@Override
 	public void handleDescriptionNBT(NBTTagCompound compound) {
 		super.handleDescriptionNBT(compound);
-		info.loadFromNBT(compound.getCompoundTag("info"));
-		output = compound.getBoolean("output");
+		// info.loadFromNBT(compound.getCompoundTag("info"));
+		// output = compound.getBoolean("output");
 
 		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 	}
@@ -289,10 +292,10 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
 	@Override
 	public void saveToDescriptionCompound(NBTTagCompound compound) {
 		super.saveToDescriptionCompound(compound);
-		NBTTagCompound infoC = new NBTTagCompound();
-		info.saveToNBT(infoC);
-		compound.setTag("info", infoC);
-		compound.setBoolean("output", output);
+		// NBTTagCompound infoC = new NBTTagCompound();
+		// info.saveToNBT(infoC);
+		// compound.setTag("info", infoC);
+		// compound.setBoolean("output", output);
 	}
 
 	@Override

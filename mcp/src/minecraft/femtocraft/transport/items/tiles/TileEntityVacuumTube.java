@@ -1,8 +1,11 @@
 package femtocraft.transport.items.tiles;
 
-import femtocraft.Femtocraft;
-import femtocraft.FemtocraftUtils;
-import femtocraft.api.IVacuumTube;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -14,12 +17,10 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
-
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import femtocraft.Femtocraft;
+import femtocraft.FemtocraftDataUtils.Saveable;
+import femtocraft.FemtocraftUtils;
+import femtocraft.api.IVacuumTube;
 
 public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 	// hasItem array for client-side rendering only
@@ -29,7 +30,8 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 
 	public boolean[] hasItem = new boolean[4];
 
-	private ItemStack[] items = new ItemStack[4];
+	private @Saveable
+	ItemStack[] items = new ItemStack[4];
 
 	ForgeDirection inputDir = ForgeDirection.UNKNOWN;
 	ForgeDirection outputDir = ForgeDirection.UNKNOWN;
@@ -41,9 +43,10 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 	private IVacuumTube inputTube = null;
 	private IVacuumTube outputTube = null;
 
-	public ItemStack queuedItem = null;
+	public @Saveable
+	ItemStack queuedItem = null;
 
-    private boolean overflowing = false;
+	private boolean overflowing = false;
 	private boolean canFillInv = true;
 
 	private boolean needsCheckInput = false;
@@ -284,7 +287,7 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 
 		if (tile instanceof IVacuumTube) {
 
-            inputTube = (IVacuumTube) tile;
+			inputTube = (IVacuumTube) tile;
 			inputDir = dir;
 			inputSidedInv = null;
 			inputInv = null;
@@ -339,7 +342,7 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 
 		if (tile instanceof IVacuumTube) {
 
-            outputTube = (IVacuumTube) tile;
+			outputTube = (IVacuumTube) tile;
 			outputDir = dir;
 			outputSidedInv = null;
 			outputInv = null;
@@ -365,9 +368,10 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 	private void cycleSearch() {
 		int i = 0;
 
-        int lastOutputOrientation = FemtocraftUtils
-                .indexOfForgeDirection(outputDir);
-        int lastInputOrientation = FemtocraftUtils.indexOfForgeDirection(inputDir);
+		int lastOutputOrientation = FemtocraftUtils
+				.indexOfForgeDirection(outputDir);
+		int lastInputOrientation = FemtocraftUtils
+				.indexOfForgeDirection(inputDir);
 
 		do {
 			lastOutputOrientation += 1;
@@ -408,7 +412,8 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 	}
 
-	private void setupReceiveFromTube(TileEntityVacuumTube tube, ForgeDirection dir) {
+	private void setupReceiveFromTube(TileEntityVacuumTube tube,
+			ForgeDirection dir) {
 		tube.outputTube = this;
 		tube.outputInv = null;
 		tube.outputSidedInv = null;
@@ -487,7 +492,7 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 		if (!missingInput())
 			return;
 
-        queuedItem = ItemStack.copyItemStack(item.getEntityItem());
+		queuedItem = ItemStack.copyItemStack(item.getEntityItem());
 		worldObj.removeEntity(item);
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
@@ -497,30 +502,30 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
 
-		NBTTagList nbttaglist = par1nbtTagCompound.getTagList("Items");
-		items = new ItemStack[items.length];
-		hasItem = new boolean[hasItem.length];
-		Arrays.fill(items, null);
-		Arrays.fill(hasItem, false);
-
-		for (int i = 0; i < nbttaglist.tagCount() - 1; ++i) {
-			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
-			byte b0 = nbttagcompound1.getByte("Slot");
-
-			if (b0 >= 0 && b0 < items.length) {
-				items[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-				hasItem[b0] = true;
-			}
-		}
-
-		NBTTagCompound nbttagcompoundsmelt = (NBTTagCompound) nbttaglist
-				.tagAt(nbttaglist.tagCount() - 1);
-		if (nbttagcompoundsmelt.getBoolean("Queued")) {
-			queuedItem = ItemStack.loadItemStackFromNBT(nbttagcompoundsmelt);
-		} else {
-			queuedItem = null;
-		}
+		// NBTTagList nbttaglist = par1nbtTagCompound.getTagList("Items");
+		// items = new ItemStack[items.length];
+		// hasItem = new boolean[hasItem.length];
+		// Arrays.fill(items, null);
+		// Arrays.fill(hasItem, false);
+		//
+		// for (int i = 0; i < nbttaglist.tagCount() - 1; ++i) {
+		// NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+		// .tagAt(i);
+		// byte b0 = nbttagcompound1.getByte("Slot");
+		//
+		// if (b0 >= 0 && b0 < items.length) {
+		// items[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+		// hasItem[b0] = true;
+		// }
+		// }
+		//
+		// NBTTagCompound nbttagcompoundsmelt = (NBTTagCompound) nbttaglist
+		// .tagAt(nbttaglist.tagCount() - 1);
+		// if (nbttagcompoundsmelt.getBoolean("Queued")) {
+		// queuedItem = ItemStack.loadItemStackFromNBT(nbttagcompoundsmelt);
+		// } else {
+		// queuedItem = null;
+		// }
 
 		byte connections = par1nbtTagCompound.getByte("Connections");
 		parseConnectionMask(connections);
@@ -530,24 +535,24 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeToNBT(par1nbtTagCompound);
 
-		NBTTagList taglist = new NBTTagList();
-		for (int i = 0; i < items.length; ++i) {
-			if (items[i] != null) {
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte) i);
-				this.items[i].writeToNBT(nbttagcompound1);
-				taglist.appendTag(nbttagcompound1);
-			}
-		}
+		// NBTTagList taglist = new NBTTagList();
+		// for (int i = 0; i < items.length; ++i) {
+		// if (items[i] != null) {
+		// NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+		// nbttagcompound1.setByte("Slot", (byte) i);
+		// this.items[i].writeToNBT(nbttagcompound1);
+		// taglist.appendTag(nbttagcompound1);
+		// }
+		// }
 
-		NBTTagCompound queueCompound = new NBTTagCompound();
-		boolean queued = queuedItem != null;
-		queueCompound.setBoolean("Queued", queued);
-		if (queued)
-			queuedItem.writeToNBT(queueCompound);
-		taglist.appendTag(queueCompound);
-
-		par1nbtTagCompound.setTag("Items", taglist);
+		// NBTTagCompound queueCompound = new NBTTagCompound();
+		// boolean queued = queuedItem != null;
+		// queueCompound.setBoolean("Queued", queued);
+		// if (queued)
+		// queuedItem.writeToNBT(queueCompound);
+		// taglist.appendTag(queueCompound);
+		//
+		// par1nbtTagCompound.setTag("Items", taglist);
 
 		par1nbtTagCompound.setByte("Connections", generateConnectionMask());
 	}
@@ -738,20 +743,20 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 			int side = FemtocraftUtils.indexOfForgeDirection(inputDir
 					.getOpposite());
 			int[] slots = inputSidedInv.getAccessibleSlotsFromSide(side);
-            for (int slot : slots) {
-                ItemStack stack = inputSidedInv.getStackInSlot(slot);
-                if (stack != null) {
-                    if (!inputSidedInv.canExtractItem(slot, stack, side))
-                        continue;
+			for (int slot : slots) {
+				ItemStack stack = inputSidedInv.getStackInSlot(slot);
+				if (stack != null) {
+					if (!inputSidedInv.canExtractItem(slot, stack, side))
+						continue;
 
-                    items[0] = inputSidedInv.decrStackSize(slot, 64);
-                    hasItem[0] = true;
-                    inputSidedInv.onInventoryChanged();
-                    worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-                    worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-                    return;
-                }
-            }
+					items[0] = inputSidedInv.decrStackSize(slot, 64);
+					hasItem[0] = true;
+					inputSidedInv.onInventoryChanged();
+					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+					worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+					return;
+				}
+			}
 
 		} else if (inputInv != null) {
 			int size = inputInv.getSizeInventory();

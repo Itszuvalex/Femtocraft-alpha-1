@@ -6,6 +6,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
+import femtocraft.FemtocraftDataUtils.Saveable;
 import femtocraft.api.IChargingBase;
 import femtocraft.api.IChargingCoil;
 import femtocraft.managers.research.EnumTechLevel;
@@ -13,9 +14,11 @@ import femtocraft.managers.research.EnumTechLevel;
 public class TileEntityPowerMicroChargingBase extends TileEntityPowerProducer {
 	public int numCoils;
 	public float powerPerTick;
-	public float storedPowerIncrement;
+	public @Saveable
+	float storedPowerIncrement;
 
 	public TileEntityPowerMicroChargingBase() {
+		super();
 		powerPerTick = 0;
 		setTechLevel(EnumTechLevel.MICRO);
 	}
@@ -60,13 +63,13 @@ public class TileEntityPowerMicroChargingBase extends TileEntityPowerProducer {
 	@Override
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
-		par1nbtTagCompound.getFloat("powerIncrement");
+		// par1nbtTagCompound.getFloat("powerIncrement");
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeToNBT(par1nbtTagCompound);
-		par1nbtTagCompound.setFloat("powerIncrement", storedPowerIncrement);
+		// par1nbtTagCompound.setFloat("powerIncrement", storedPowerIncrement);
 	}
 
 	@Override

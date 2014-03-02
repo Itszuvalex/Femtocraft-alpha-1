@@ -2,6 +2,7 @@ package femtocraft.industry.tiles;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.FemtocraftDataUtils.Saveable;
 import femtocraft.industry.blocks.BlockMicroFurnace;
 import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.power.tiles.TileEntityPowerConsumer;
@@ -26,13 +27,18 @@ public class TileEntityBaseEntityMicroFurnace extends TileEntityPowerConsumer
 	/**
 	 * The ItemStacks that hold the items currently being used in the furnace
 	 */
-	private ItemStack[] furnaceItemStacks = new ItemStack[2];
+	private @Saveable
+	ItemStack[] furnaceItemStacks = new ItemStack[2];
 
 	/** The number of ticks that the current item has been cooking for */
-	public int furnaceCookTime = 0;
-	public int currentPower = 0;
-	private String field_94130_e;
-	public ItemStack smeltingStack = null;
+	public @Saveable
+	int furnaceCookTime = 0;
+	public @Saveable
+	int currentPower = 0;
+	private @Saveable
+	String field_94130_e;
+	public @Saveable
+	ItemStack smeltingStack = null;
 
 	/**
 	 * Returns the number of slots in the inventory.
@@ -135,35 +141,35 @@ public class TileEntityBaseEntityMicroFurnace extends TileEntityPowerConsumer
 	@Override
 	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
 		super.readFromNBT(par1NBTTagCompound);
-
-		NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
-		this.furnaceItemStacks = new ItemStack[this.getSizeInventory()];
-
-		for (int i = 0; i < nbttaglist.tagCount() - 1; ++i) {
-			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
-			byte b0 = nbttagcompound1.getByte("Slot");
-
-			if (b0 >= 0 && b0 < this.furnaceItemStacks.length) {
-				this.furnaceItemStacks[b0] = ItemStack
-						.loadItemStackFromNBT(nbttagcompound1);
-			}
-		}
-
-		NBTTagCompound nbttagcompoundsmelt = (NBTTagCompound) nbttaglist
-				.tagAt(nbttaglist.tagCount() - 1);
-		if (nbttagcompoundsmelt.getBoolean("isSmelting")) {
-			this.smeltingStack = ItemStack
-					.loadItemStackFromNBT(nbttagcompoundsmelt);
-		} else {
-			this.smeltingStack = null;
-		}
-
-		this.furnaceCookTime = par1NBTTagCompound.getShort("CookTime");
-
-		if (par1NBTTagCompound.hasKey("CustomName")) {
-			this.field_94130_e = par1NBTTagCompound.getString("CustomName");
-		}
+		//
+		// NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
+		// this.furnaceItemStacks = new ItemStack[this.getSizeInventory()];
+		//
+		// for (int i = 0; i < nbttaglist.tagCount() - 1; ++i) {
+		// NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+		// .tagAt(i);
+		// byte b0 = nbttagcompound1.getByte("Slot");
+		//
+		// if (b0 >= 0 && b0 < this.furnaceItemStacks.length) {
+		// this.furnaceItemStacks[b0] = ItemStack
+		// .loadItemStackFromNBT(nbttagcompound1);
+		// }
+		// }
+		//
+		// NBTTagCompound nbttagcompoundsmelt = (NBTTagCompound) nbttaglist
+		// .tagAt(nbttaglist.tagCount() - 1);
+		// if (nbttagcompoundsmelt.getBoolean("isSmelting")) {
+		// this.smeltingStack = ItemStack
+		// .loadItemStackFromNBT(nbttagcompoundsmelt);
+		// } else {
+		// this.smeltingStack = null;
+		// }
+		//
+		// this.furnaceCookTime = par1NBTTagCompound.getShort("CookTime");
+		//
+		// if (par1NBTTagCompound.hasKey("CustomName")) {
+		// this.field_94130_e = par1NBTTagCompound.getString("CustomName");
+		// }
 	}
 
 	/**
@@ -172,30 +178,31 @@ public class TileEntityBaseEntityMicroFurnace extends TileEntityPowerConsumer
 	@Override
 	public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setShort("CookTime", (short) this.furnaceCookTime);
-		NBTTagList nbttaglist = new NBTTagList();
-
-		for (int i = 0; i < this.furnaceItemStacks.length; ++i) {
-			if (this.furnaceItemStacks[i] != null) {
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte) i);
-				this.furnaceItemStacks[i].writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-		}
-
-		NBTTagCompound nbttagcompoundsmelt = new NBTTagCompound();
-		nbttagcompoundsmelt.setBoolean("isSmelting", isSmelting());
-		if (isSmelting()) {
-			this.smeltingStack.writeToNBT(nbttagcompoundsmelt);
-		}
-		nbttaglist.appendTag(nbttagcompoundsmelt);
-
-		par1NBTTagCompound.setTag("Items", nbttaglist);
-
-		if (this.isInvNameLocalized()) {
-			par1NBTTagCompound.setString("CustomName", this.field_94130_e);
-		}
+		// par1NBTTagCompound.setShort("CookTime", (short)
+		// this.furnaceCookTime);
+		// NBTTagList nbttaglist = new NBTTagList();
+		//
+		// for (int i = 0; i < this.furnaceItemStacks.length; ++i) {
+		// if (this.furnaceItemStacks[i] != null) {
+		// NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+		// nbttagcompound1.setByte("Slot", (byte) i);
+		// this.furnaceItemStacks[i].writeToNBT(nbttagcompound1);
+		// nbttaglist.appendTag(nbttagcompound1);
+		// }
+		// }
+		//
+		// NBTTagCompound nbttagcompoundsmelt = new NBTTagCompound();
+		// nbttagcompoundsmelt.setBoolean("isSmelting", isSmelting());
+		// if (isSmelting()) {
+		// this.smeltingStack.writeToNBT(nbttagcompoundsmelt);
+		// }
+		// nbttaglist.appendTag(nbttagcompoundsmelt);
+		//
+		// par1NBTTagCompound.setTag("Items", nbttaglist);
+		//
+		// if (this.isInvNameLocalized()) {
+		// par1NBTTagCompound.setString("CustomName", this.field_94130_e);
+		// }
 	}
 
 	/**

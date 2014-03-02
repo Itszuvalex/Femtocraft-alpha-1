@@ -5,15 +5,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet132TileEntityData;
-import femtocraft.Femtocraft;
+import femtocraft.FemtocraftDataUtils.Saveable;
 import femtocraft.core.tiles.TileEntityBase;
 
 public class TileResearchConsole extends TileEntityBase implements IInventory {
-	private String displayTech;
-	private String researchingTech;
-	private int progress;
-	private int progressMax;
-	private ItemStack[] inventory;
+	private @Saveable(desc = true)
+	String displayTech;
+	private @Saveable(desc = true)
+	String researchingTech;
+	private @Saveable
+	int progress;
+	private @Saveable
+	int progressMax;
+	private @Saveable
+	ItemStack[] inventory;
 
 	public TileResearchConsole() {
 		super();
@@ -75,33 +80,33 @@ public class TileResearchConsole extends TileEntityBase implements IInventory {
 	@Override
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
-		displayTech = par1nbtTagCompound.getString("displayTech");
-		researchingTech = par1nbtTagCompound.getString("researchingTech");
-		progress = par1nbtTagCompound.getInteger("progress");
-		progressMax = par1nbtTagCompound.getInteger("progressMax");
-		
+		// displayTech = par1nbtTagCompound.getString("displayTech");
+		// researchingTech = par1nbtTagCompound.getString("researchingTech");
+		// progress = par1nbtTagCompound.getInteger("progress");
+		// progressMax = par1nbtTagCompound.getInteger("progressMax");
+
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeToNBT(par1nbtTagCompound);
-		par1nbtTagCompound.setString("displayTech", displayTech);
-		par1nbtTagCompound.setString("research", researchingTech);
-		par1nbtTagCompound.setInteger("progress", progress);
-		par1nbtTagCompound.setInteger("progressMax", progressMax);
-		
+		// par1nbtTagCompound.setString("displayTech", displayTech);
+		// par1nbtTagCompound.setString("research", researchingTech);
+		// par1nbtTagCompound.setInteger("progress", progress);
+		// par1nbtTagCompound.setInteger("progressMax", progressMax);
+
 	}
 
 	@Override
 	public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
 		super.onDataPacket(net, pkt);
-		researchingTech = pkt.data.getString("research");
+		// researchingTech = pkt.data.getString("research");
 	}
 
 	@Override
 	public void saveToDescriptionCompound(NBTTagCompound compound) {
 		super.saveToDescriptionCompound(compound);
-		compound.setString("research", researchingTech);
+		// compound.setString("research", researchingTech);
 	}
 
 	@Override

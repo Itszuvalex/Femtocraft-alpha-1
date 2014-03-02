@@ -13,7 +13,7 @@ import femtocraft.api.PowerContainer;
 import femtocraft.managers.research.EnumTechLevel;
 
 public class TileEntityPowerMicroCube extends TileEntityPowerBase {
-	public boolean[] outputs;
+	public boolean[] outputs = new boolean[6]; // Not @Saveable due to bit masking
 	static final public String packetChannel = Femtocraft.ID + ".MCube";
 	public static final int maxStorage = 10000;
 	public static final EnumTechLevel ENUM_TECH_LEVEL = EnumTechLevel.MICRO;
@@ -22,7 +22,6 @@ public class TileEntityPowerMicroCube extends TileEntityPowerBase {
 		super();
 		setMaxStorage(maxStorage);
 		setTechLevel(ENUM_TECH_LEVEL);
-		outputs = new boolean[6];
 		Arrays.fill(outputs, false);
 		setTechLevel(ENUM_TECH_LEVEL);
 	}
@@ -62,13 +61,13 @@ public class TileEntityPowerMicroCube extends TileEntityPowerBase {
 	@Override
 	public void handleDescriptionNBT(NBTTagCompound compound) {
 		super.handleDescriptionNBT(compound);
-		parseOutputMask(compound.getByte("output"));
+		parseOutputMask(compound.getByte("outputs"));
 	}
 
 	@Override
 	public void saveToDescriptionCompound(NBTTagCompound compound) {
 		super.saveToDescriptionCompound(compound);
-		compound.setByte("output", generateOutputMask());
+		compound.setByte("outputs", generateOutputMask());
 	}
 
 	public byte generateOutputMask() {
@@ -121,13 +120,13 @@ public class TileEntityPowerMicroCube extends TileEntityPowerBase {
 	@Override
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
-		parseOutputMask(par1nbtTagCompound.getByte("output"));
+		parseOutputMask(par1nbtTagCompound.getByte("outputs"));
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeToNBT(par1nbtTagCompound);
-		par1nbtTagCompound.setByte("output", generateOutputMask());
+		par1nbtTagCompound.setByte("outputs", generateOutputMask());
 	}
 
 	@Override
