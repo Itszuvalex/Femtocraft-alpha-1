@@ -7,13 +7,11 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -109,6 +107,7 @@ import femtocraft.power.items.ItemSpoolGold;
 import femtocraft.proxy.ProxyClient;
 import femtocraft.proxy.ProxyCommon;
 import femtocraft.research.blocks.BlockResearchComputer;
+import femtocraft.research.items.ItemFemtoTechnology;
 import femtocraft.research.items.ItemMicroTechnology;
 import femtocraft.research.items.ItemNanoTechnology;
 import femtocraft.transport.items.blocks.BlockVacuumTube;
@@ -197,6 +196,7 @@ public class Femtocraft {
 
 	public static Item itemMicroTechnology;
 	public static Item itemNanoTechnology;
+	public static Item itemFemtoTechnology;
 
 	public static Item paperSchematic;
 
@@ -562,6 +562,10 @@ public class Femtocraft {
 		itemNanoTechnology = new ItemNanoTechnology(
 				FemtocraftConfigs.itemNanoTechnologyID);
 		LanguageRegistry.addName(itemNanoTechnology, "Nano Technology");
+
+		itemFemtoTechnology = new ItemFemtoTechnology(
+				FemtocraftConfigs.itemFemtoTechnologyID);
+		LanguageRegistry.addName(itemFemtoTechnology, "Femto Technology");
 
 		// Schematics
 		paperSchematic = new ItemPaperSchematic(
