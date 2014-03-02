@@ -1,11 +1,11 @@
 package femtocraft;
 
-import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -24,12 +24,13 @@ public class FemtocraftDataUtils {
 	public static enum EnumSaveType {
 		WORLD, DESCRIPTION, ITEM
 	}
-
+	
 	public static void saveObjectToNBT(NBTTagCompound compound, Object obj,
 			EnumSaveType type) {
 		ArrayList<Field> fields = new ArrayList<Field>();
 
 		Class objclass = obj.getClass();
+
 		while (objclass != null) {
 			fields.addAll(Arrays.asList(objclass.getDeclaredFields()));
 			objclass = objclass.getSuperclass();
@@ -66,22 +67,24 @@ public class FemtocraftDataUtils {
 			break;
 		}
 
+		Class<?> clazz = saveable.getType();
+		
 		try {
-			if (saveable.getType() == int.class) {
+			if (clazz == int.class) {
 				compound.setInteger(saveable.getName(), saveable.getInt(obj));
 				return;
 			}
-			if (saveable.getType() == int[].class) {
+			if (clazz == int[].class) {
 				compound.setIntArray(saveable.getName(),
 						(int[]) saveable.get(obj));
 				return;
 			}
-			if (saveable.getType() == boolean.class) {
+			if (clazz == boolean.class) {
 				compound.setBoolean(saveable.getName(),
 						saveable.getBoolean(obj));
 				return;
 			}
-			if (saveable.getType() == boolean[].class) {
+			if (clazz == boolean[].class) {
 				NBTTagCompound array = new NBTTagCompound();
 				boolean[] barr = (boolean[]) saveable.get(obj);
 				array.setInteger("size", barr.length);
@@ -91,11 +94,11 @@ public class FemtocraftDataUtils {
 				}
 				compound.setCompoundTag(saveable.getName(), array);
 			}
-			if (saveable.getType() == float.class) {
+			if (clazz == float.class) {
 				compound.setFloat(saveable.getName(), saveable.getFloat(obj));
 				return;
 			}
-			if (saveable.getType() == float[].class) {
+			if (clazz == float[].class) {
 				NBTTagCompound array = new NBTTagCompound();
 				float[] farr = (float[]) saveable.get(obj);
 				array.setInteger("size", farr.length);
@@ -105,11 +108,11 @@ public class FemtocraftDataUtils {
 				}
 				compound.setCompoundTag(saveable.getName(), array);
 			}
-			if (saveable.getType() == double.class) {
+			if (clazz == double.class) {
 				compound.setDouble(saveable.getName(), saveable.getDouble(obj));
 				return;
 			}
-			if (saveable.getType() == double[].class) {
+			if (clazz == double[].class) {
 				NBTTagCompound array = new NBTTagCompound();
 				double[] darr = (double[]) saveable.get(obj);
 				array.setInteger("size", darr.length);
@@ -119,12 +122,12 @@ public class FemtocraftDataUtils {
 				}
 				compound.setCompoundTag(saveable.getName(), array);
 			}
-			if (saveable.getType() == String.class) {
+			if (clazz == String.class) {
 				compound.setString(saveable.getName(),
 						(String) saveable.get(obj));
 				return;
 			}
-			if (saveable.getType() == String[].class) {
+			if (clazz == String[].class) {
 				NBTTagCompound array = new NBTTagCompound();
 				String[] darr = (String[]) saveable.get(obj);
 				array.setInteger("size", darr.length);
@@ -134,11 +137,11 @@ public class FemtocraftDataUtils {
 				}
 				compound.setCompoundTag(saveable.getName(), array);
 			}
-			if (saveable.getType() == short.class) {
+			if (clazz == short.class) {
 				compound.setShort(saveable.getName(), saveable.getShort(obj));
 				return;
 			}
-			if (saveable.getType() == short[].class) {
+			if (clazz == short[].class) {
 				NBTTagCompound array = new NBTTagCompound();
 				short[] darr = (short[]) saveable.get(obj);
 				array.setInteger("size", darr.length);
@@ -148,11 +151,11 @@ public class FemtocraftDataUtils {
 				}
 				compound.setCompoundTag(saveable.getName(), array);
 			}
-			if (saveable.getType() == long.class) {
+			if (clazz == long.class) {
 				compound.setLong(saveable.getName(), saveable.getLong(obj));
 				return;
 			}
-			if (saveable.getType() == long[].class) {
+			if (clazz == long[].class) {
 				NBTTagCompound array = new NBTTagCompound();
 				long[] darr = (long[]) saveable.get(obj);
 				array.setInteger("size", darr.length);
@@ -162,32 +165,32 @@ public class FemtocraftDataUtils {
 				}
 				compound.setCompoundTag(saveable.getName(), array);
 			}
-			if (saveable.getType() == byte.class) {
+			if (clazz == byte.class) {
 				compound.setByte(saveable.getName(), saveable.getByte(obj));
 			}
-			if (saveable.getType() == byte[].class) {
+			if (clazz == byte[].class) {
 				compound.setByteArray(saveable.getName(),
 						(byte[]) saveable.get(obj));
 				return;
 			}
-			if (saveable.getType() == NBTTagCompound.class) {
+			if (clazz == NBTTagCompound.class) {
 				compound.setCompoundTag(saveable.getName(),
 						(NBTTagCompound) saveable.get(obj));
 				return;
 			}
-			if (saveable.getType() == NBTTagList.class) {
+			if (clazz == NBTTagList.class) {
 				compound.setTag(saveable.getName(),
 						(NBTTagList) saveable.get(obj));
 				return;
 			}
-			if (saveable.getType() == ItemStack.class) {
+			if (clazz == ItemStack.class) {
 				NBTTagCompound item = new NBTTagCompound();
 				ItemStack stack = (ItemStack) saveable.get(obj);
 				stack.writeToNBT(item);
 				compound.setCompoundTag(saveable.getName(), item);
 				return;
 			}
-			if (saveable.getType() == ItemStack[].class) {
+			if (clazz == ItemStack[].class) {
 				NBTTagCompound array = new NBTTagCompound();
 				NBTTagList list = new NBTTagList();
 				ItemStack[] isarr = (ItemStack[]) saveable.get(obj);
@@ -208,6 +211,8 @@ public class FemtocraftDataUtils {
 				return;
 			}
 
+			
+			Femtocraft.logger.log(Level.SEVERE, "Field " + saveable.getName() + " marked as Saveable is of unsupported class - " + clazz.getName() + ".");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -253,22 +258,24 @@ public class FemtocraftDataUtils {
 				return;
 			break;
 		}
+		
+		Class<?> clazz = saveable.getType();
 
 		try {
-			if (saveable.getType() == int.class) {
+			if (clazz == int.class) {
 				saveable.setInt(obj, compound.getInteger(saveable.getName()));
 				return;
 			}
-			if (saveable.getType() == int[].class) {
+			if (clazz == int[].class) {
 				saveable.set(obj, compound.getIntArray(saveable.getName()));
 				return;
 			}
-			if (saveable.getType() == boolean.class) {
+			if (clazz == boolean.class) {
 				saveable.setBoolean(obj,
 						compound.getBoolean(saveable.getName()));
 				return;
 			}
-			if (saveable.getType() == boolean[].class) {
+			if (clazz == boolean[].class) {
 				NBTTagCompound array = compound.getCompoundTag(saveable
 						.getName());
 				boolean[] ret = new boolean[array.getInteger("size")];
@@ -278,11 +285,11 @@ public class FemtocraftDataUtils {
 				saveable.set(obj, ret);
 				return;
 			}
-			if (saveable.getType() == float.class) {
+			if (clazz == float.class) {
 				saveable.setFloat(obj, compound.getFloat(saveable.getName()));
 				return;
 			}
-			if (saveable.getType() == float[].class) {
+			if (clazz == float[].class) {
 				NBTTagCompound array = compound.getCompoundTag(saveable
 						.getName());
 				float[] ret = new float[array.getInteger("size")];
@@ -292,11 +299,11 @@ public class FemtocraftDataUtils {
 				saveable.set(obj, ret);
 				return;
 			}
-			if (saveable.getType() == double.class) {
+			if (clazz == double.class) {
 				saveable.setDouble(obj, compound.getDouble(saveable.getName()));
 				return;
 			}
-			if (saveable.getType() == double[].class) {
+			if (clazz == double[].class) {
 				NBTTagCompound array = compound.getCompoundTag(saveable
 						.getName());
 				double[] ret = new double[array.getInteger("size")];
@@ -306,11 +313,11 @@ public class FemtocraftDataUtils {
 				saveable.set(obj, ret);
 				return;
 			}
-			if (saveable.getType() == String.class) {
+			if (clazz == String.class) {
 				saveable.set(obj, compound.getString(saveable.getName()));
 				return;
 			}
-			if (saveable.getType() == String[].class) {
+			if (clazz == String[].class) {
 				NBTTagCompound array = compound.getCompoundTag(saveable
 						.getName());
 				String[] ret = new String[array.getInteger("size")];
@@ -320,11 +327,11 @@ public class FemtocraftDataUtils {
 				saveable.set(obj, ret);
 				return;
 			}
-			if (saveable.getType() == short.class) {
+			if (clazz == short.class) {
 				saveable.setShort(obj, compound.getShort(saveable.getName()));
 				return;
 			}
-			if (saveable.getType() == short[].class) {
+			if (clazz == short[].class) {
 				NBTTagCompound array = compound.getCompoundTag(saveable
 						.getName());
 				short[] ret = new short[array.getInteger("size")];
@@ -334,11 +341,11 @@ public class FemtocraftDataUtils {
 				saveable.set(obj, ret);
 				return;
 			}
-			if (saveable.getType() == long.class) {
+			if (clazz == long.class) {
 				saveable.setLong(obj, compound.getLong(saveable.getName()));
 				return;
 			}
-			if (saveable.getType() == long[].class) {
+			if (clazz == long[].class) {
 				NBTTagCompound array = compound.getCompoundTag(saveable
 						.getName());
 				long[] ret = new long[array.getInteger("size")];
@@ -348,29 +355,29 @@ public class FemtocraftDataUtils {
 				saveable.set(obj, ret);
 				return;
 			}
-			if (saveable.getType() == byte.class) {
+			if (clazz == byte.class) {
 				saveable.setByte(obj, compound.getByte(saveable.getName()));
 				return;
 			}
-			if (saveable.getType() == byte[].class) {
+			if (clazz == byte[].class) {
 				saveable.set(obj, compound.getByteArray(saveable.getName()));
 				return;
 			}
-			if (saveable.getType() == NBTTagCompound.class) {
+			if (clazz == NBTTagCompound.class) {
 				saveable.set(obj, compound.getCompoundTag(saveable.getName()));
 				return;
 			}
-			if (saveable.getType() == NBTTagList.class) {
+			if (clazz == NBTTagList.class) {
 				saveable.set(obj, compound.getTagList(saveable.getName()));
 				return;
 			}
-			if (saveable.getType() == ItemStack.class) {
+			if (clazz == ItemStack.class) {
 				NBTTagCompound item = compound.getCompoundTag(saveable
 						.getName());
 				saveable.set(obj, ItemStack.loadItemStackFromNBT(item));
 				return;
 			}
-			if (saveable.getType() == ItemStack[].class) {
+			if (clazz == ItemStack[].class) {
 				NBTTagCompound array = compound.getCompoundTag(saveable
 						.getName());
 				NBTTagList list = array.getTagList("items");
@@ -384,7 +391,8 @@ public class FemtocraftDataUtils {
 				saveable.set(obj, retarray);
 				return;
 			}
-
+			
+			Femtocraft.logger.log(Level.SEVERE, "Field " + saveable.getName() + " marked as Saveable is of unsupported class - " + clazz.getName() + ".");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
