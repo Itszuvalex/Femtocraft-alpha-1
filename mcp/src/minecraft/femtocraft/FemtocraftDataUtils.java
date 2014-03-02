@@ -4,6 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import net.minecraft.item.ItemStack;
@@ -26,9 +27,21 @@ public class FemtocraftDataUtils {
 
 	public static void saveObjectToNBT(NBTTagCompound compound, Object obj,
 			EnumSaveType type) {
-		Field[] fields = obj.getClass().getFields();
+		ArrayList<Field> fields = new ArrayList<Field>();
+
+		Class objclass = obj.getClass();
+		while (objclass != null) {
+			fields.addAll(Arrays.asList(objclass.getDeclaredFields()));
+			objclass = objclass.getSuperclass();
+		}
+
 		for (Field field : fields) {
+			boolean flag = field.isAccessible();
+			if (!flag)
+				field.setAccessible(true);
 			saveToNBT(compound, field, obj, type);
+			if (!flag)
+				field.setAccessible(false);
 		}
 	}
 
@@ -38,12 +51,20 @@ public class FemtocraftDataUtils {
 		if (asave == null)
 			return;
 
-		if (!(asave.world() && type == EnumSaveType.WORLD))
-			return;
-		if (!(asave.desc() && type == EnumSaveType.DESCRIPTION))
-			return;
-		if (!(asave.item() && type == EnumSaveType.ITEM))
-			return;
+		switch (type) {
+		case WORLD:
+			if (!asave.world())
+				return;
+			break;
+		case DESCRIPTION:
+			if (!asave.desc())
+				return;
+			break;
+		case ITEM:
+			if (!asave.item())
+				return;
+			break;
+		}
 
 		try {
 			if (saveable.getType() == int.class) {
@@ -194,9 +215,21 @@ public class FemtocraftDataUtils {
 
 	public static void loadObjectFromNBT(NBTTagCompound compound, Object obj,
 			EnumSaveType type) {
-		Field[] fields = obj.getClass().getFields();
+		ArrayList<Field> fields = new ArrayList<Field>();
+
+		Class objclass = obj.getClass();
+		while (objclass != null) {
+			fields.addAll(Arrays.asList(objclass.getDeclaredFields()));
+			objclass = objclass.getSuperclass();
+		}
+
 		for (Field field : fields) {
+			boolean flag = field.isAccessible();
+			if (!flag)
+				field.setAccessible(true);
 			loadFromNBT(compound, field, obj, type);
+			if (!flag)
+				field.setAccessible(false);
 		}
 	}
 
@@ -206,12 +239,20 @@ public class FemtocraftDataUtils {
 		if (asave == null)
 			return;
 
-		if (!(asave.world() && type == EnumSaveType.WORLD))
-			return;
-		if (!(asave.desc() && type == EnumSaveType.DESCRIPTION))
-			return;
-		if (!(asave.item() && type == EnumSaveType.ITEM))
-			return;
+		switch (type) {
+		case WORLD:
+			if (!asave.world())
+				return;
+			break;
+		case DESCRIPTION:
+			if (!asave.desc())
+				return;
+			break;
+		case ITEM:
+			if (!asave.item())
+				return;
+			break;
+		}
 
 		try {
 			if (saveable.getType() == int.class) {
