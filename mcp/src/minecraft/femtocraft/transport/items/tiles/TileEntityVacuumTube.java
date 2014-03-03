@@ -23,11 +23,15 @@ import femtocraft.FemtocraftUtils;
 import femtocraft.api.IVacuumTube;
 
 public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
+	// NOT A FEMTOCRAFTTILEENTITY AT THIS POINT IN TIME, @SAVEABLE DOESN"T WORK.
+	// DURP
+
 	// hasItem array for client-side rendering only
 	// Server will update this array and this alone to save bytes
 	// Player has no need to know WHAT is in the pipes, anyways
 	static final public String packetChannel = Femtocraft.ID + ".VTube";
 
+	// Will not be @Saveable due to bit masking
 	public boolean[] hasItem = new boolean[4];
 
 	private @Saveable
@@ -502,30 +506,30 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
 
-		// NBTTagList nbttaglist = par1nbtTagCompound.getTagList("Items");
-		// items = new ItemStack[items.length];
-		// hasItem = new boolean[hasItem.length];
-		// Arrays.fill(items, null);
-		// Arrays.fill(hasItem, false);
-		//
-		// for (int i = 0; i < nbttaglist.tagCount() - 1; ++i) {
-		// NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-		// .tagAt(i);
-		// byte b0 = nbttagcompound1.getByte("Slot");
-		//
-		// if (b0 >= 0 && b0 < items.length) {
-		// items[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-		// hasItem[b0] = true;
-		// }
-		// }
-		//
-		// NBTTagCompound nbttagcompoundsmelt = (NBTTagCompound) nbttaglist
-		// .tagAt(nbttaglist.tagCount() - 1);
-		// if (nbttagcompoundsmelt.getBoolean("Queued")) {
-		// queuedItem = ItemStack.loadItemStackFromNBT(nbttagcompoundsmelt);
-		// } else {
-		// queuedItem = null;
-		// }
+		NBTTagList nbttaglist = par1nbtTagCompound.getTagList("Items");
+		items = new ItemStack[items.length];
+		hasItem = new boolean[hasItem.length];
+		Arrays.fill(items, null);
+		Arrays.fill(hasItem, false);
+
+		for (int i = 0; i < nbttaglist.tagCount() - 1; ++i) {
+			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+					.tagAt(i);
+			byte b0 = nbttagcompound1.getByte("Slot");
+
+			if (b0 >= 0 && b0 < items.length) {
+				items[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+				hasItem[b0] = true;
+			}
+		}
+
+		NBTTagCompound nbttagcompoundsmelt = (NBTTagCompound) nbttaglist
+				.tagAt(nbttaglist.tagCount() - 1);
+		if (nbttagcompoundsmelt.getBoolean("Queued")) {
+			queuedItem = ItemStack.loadItemStackFromNBT(nbttagcompoundsmelt);
+		} else {
+			queuedItem = null;
+		}
 
 		byte connections = par1nbtTagCompound.getByte("Connections");
 		parseConnectionMask(connections);
@@ -535,24 +539,24 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeToNBT(par1nbtTagCompound);
 
-		// NBTTagList taglist = new NBTTagList();
-		// for (int i = 0; i < items.length; ++i) {
-		// if (items[i] != null) {
-		// NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-		// nbttagcompound1.setByte("Slot", (byte) i);
-		// this.items[i].writeToNBT(nbttagcompound1);
-		// taglist.appendTag(nbttagcompound1);
-		// }
-		// }
+		NBTTagList taglist = new NBTTagList();
+		for (int i = 0; i < items.length; ++i) {
+			if (items[i] != null) {
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte) i);
+				this.items[i].writeToNBT(nbttagcompound1);
+				taglist.appendTag(nbttagcompound1);
+			}
+		}
 
-		// NBTTagCompound queueCompound = new NBTTagCompound();
-		// boolean queued = queuedItem != null;
-		// queueCompound.setBoolean("Queued", queued);
-		// if (queued)
-		// queuedItem.writeToNBT(queueCompound);
-		// taglist.appendTag(queueCompound);
-		//
-		// par1nbtTagCompound.setTag("Items", taglist);
+		NBTTagCompound queueCompound = new NBTTagCompound();
+		boolean queued = queuedItem != null;
+		queueCompound.setBoolean("Queued", queued);
+		if (queued)
+			queuedItem.writeToNBT(queueCompound);
+		taglist.appendTag(queueCompound);
+
+		par1nbtTagCompound.setTag("Items", taglist);
 
 		par1nbtTagCompound.setByte("Connections", generateConnectionMask());
 	}
