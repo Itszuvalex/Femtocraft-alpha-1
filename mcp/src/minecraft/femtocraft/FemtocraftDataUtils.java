@@ -18,6 +18,20 @@ import femtocraft.core.multiblock.MultiBlockInfo;
 public class FemtocraftDataUtils {
 	private static HashMap<Class<?>, SaveManager> managerMap = new HashMap<Class<?>, SaveManager>();
 
+	/**
+	 * 
+	 * @author Itszuvalex
+	 * @param world
+	 *            True by default. Field will be saved/loaded when the world
+	 *            saves/loads.
+	 * @param desc
+	 *            False by default. If true, Field will be sent to client when
+	 *            description packets are sent, and loaded on client.
+	 * @param item
+	 *            False by default. If true, Field will be saved to dropped
+	 *            ItemStack 's NBTTagCompound.
+	 * 
+	 */
 	@Retention(RetentionPolicy.RUNTIME)
 	public static @interface Saveable {
 		public boolean world() default true;
