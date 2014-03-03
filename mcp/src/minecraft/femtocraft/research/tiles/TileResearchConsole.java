@@ -1,32 +1,35 @@
 package femtocraft.research.tiles;
 
+import java.util.logging.Level;
+
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet132TileEntityData;
+import femtocraft.Femtocraft;
 import femtocraft.FemtocraftDataUtils.Saveable;
+import femtocraft.api.ITechnologyCarrier;
 import femtocraft.core.tiles.TileEntityBase;
+import femtocraft.managers.research.ResearchTechnology;
 
 public class TileResearchConsole extends TileEntityBase implements IInventory {
+	public @Saveable(desc = true)
+	String displayTech = null;
 	private @Saveable(desc = true)
-	String displayTech;
-	private @Saveable(desc = true)
-	String researchingTech;
+	String researchingTech = null;
 	private @Saveable
-	int progress;
+	int progress = 0;
 	private @Saveable
-	int progressMax;
+	int progressMax = 0;
 	private @Saveable
-	ItemStack[] inventory;
+	ItemStack[] inventory = new ItemStack[10];
+
+	private static final int ticksToResearch = 400;
 
 	public TileResearchConsole() {
 		super();
-		progress = 0;
-		progressMax = 0;
-		inventory = new ItemStack[10];
-		displayTech = null;
-		researchingTech = null;
 	}
 
 	/*
@@ -46,8 +49,33 @@ public class TileResearchConsole extends TileEntityBase implements IInventory {
 	}
 
 	private void checkForTechnology() {
+		if (worldObj == null)
+			return;
+		if (worldObj.isRemote)
+			return;
+
+		boolean hadTech = displayTech != null;
 		displayTech = null;
 
+		for (ResearchTechnology tech : Femtocraft.researchManager
+				.getTechnologies()) {
+			if (Femtocraft.researchManager.hasPlayerDiscoveredTechnology(
+					getOwner(), tech)) {
+				if (matchesTechnology(tech)) {
+					Femtocraft.logger.log(Level.SEVERE,
+							"Found matching technology - " + tech.name);
+					displayTech = tech.name;
+					if (worldObj != null)
+						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+					return;
+				}
+			}
+		}
+
+		if (hadTech && displayTech == null) {
+			if (worldObj != null)
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
 	}
 
 	public void setResearchProgress(int progress) {
@@ -64,6 +92,10 @@ public class TileResearchConsole extends TileEntityBase implements IInventory {
 		return (progress * scale) / progressMax;
 	}
 
+	public boolean isResearching() {
+		return researchingTech != null;
+	}
+
 	public void setResearchMax(int progressMax) {
 		this.progressMax = progressMax;
 	}
@@ -78,35 +110,125 @@ public class TileResearchConsole extends TileEntityBase implements IInventory {
 	}
 
 	@Override
+	public void femtocraftServerUpdate() {
+		super.femtocraftServerUpdate();
+		if (researchingTech != null) {
+			if (progress++ >= progressMax) {
+				finishWork();
+			}
+		}
+	}
+
+	public void startWork() {
+		if (!canWork())
+			return;
+
+		researchingTech = displayTech;
+		progressMax = ticksToResearch;
+		progress = 0;
+
+		ResearchTechnology tech = Femtocraft.researchManager
+				.getTechnology(displayTech);
+
+		for (int i = 0; i < 9; ++i) {
+			decrStackSize(i, tech.researchMaterials.get(i).stackSize);
+		}
+	}
+
+	private boolean canWork() {
+		if (displayTech == null || displayTech.isEmpty())
+			return false;
+		ResearchTechnology tech = Femtocraft.researchManager
+				.getTechnology(displayTech);
+
+		return matchesTechnology(tech);
+	}
+
+	private boolean matchesTechnology(ResearchTechnology tech) {
+		if (tech == null)
+			return false;
+		if (tech.researchMaterials == null)
+			return false;
+		for (int i = 0; i < 9; ++i) {
+			if (!compareItemStack(tech.researchMaterials.get(i), inventory[i]))
+				return false;
+		}
+
+		return true;
+	}
+
+	private boolean compareItemStack(ItemStack tech, ItemStack inv) {
+		if (tech == null && inv == null)
+			return true;
+		if (tech == null && inv != null)
+			return false;
+		if (tech != null && inv == null)
+			return false;
+
+		if (tech.itemID != inv.itemID)
+			return false;
+		if (tech.getItemDamage() != inv.getItemDamage())
+			return false;
+		if (tech.stackSize > inv.stackSize)
+			return false;
+
+		return true;
+	}
+
+	private void finishWork() {
+		progress = 0;
+		progressMax = 0;
+
+		ResearchTechnology tech = Femtocraft.researchManager
+				.getTechnology(researchingTech);
+		if (tech == null) {
+			researchingTech = null;
+			return;
+		}
+
+		Item techItem = null;
+		switch (tech.level) {
+		case MACRO:
+		case MICRO:
+			techItem = Femtocraft.itemMicroTechnology;
+			break;
+		case NANO:
+			techItem = Femtocraft.itemNanoTechnology;
+			break;
+		case DIMENSIONAL:
+		case TEMPORAL:
+		case FEMTO:
+			techItem = Femtocraft.itemFemtoTechnology;
+			break;
+		}
+		ItemStack techstack = new ItemStack(techItem, 1);
+		((ITechnologyCarrier) techItem).setTechnology(techstack,
+				researchingTech);
+		researchingTech = null;
+		inventory[inventory.length - 1] = techstack;
+		onInventoryChanged();
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+
+	@Override
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
-		// displayTech = par1nbtTagCompound.getString("displayTech");
-		// researchingTech = par1nbtTagCompound.getString("researchingTech");
-		// progress = par1nbtTagCompound.getInteger("progress");
-		// progressMax = par1nbtTagCompound.getInteger("progressMax");
-
+		checkForTechnology();
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeToNBT(par1nbtTagCompound);
-		// par1nbtTagCompound.setString("displayTech", displayTech);
-		// par1nbtTagCompound.setString("research", researchingTech);
-		// par1nbtTagCompound.setInteger("progress", progress);
-		// par1nbtTagCompound.setInteger("progressMax", progressMax);
-
 	}
 
 	@Override
 	public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
 		super.onDataPacket(net, pkt);
-		// researchingTech = pkt.data.getString("research");
 	}
 
 	@Override
 	public void saveToDescriptionCompound(NBTTagCompound compound) {
 		super.saveToDescriptionCompound(compound);
-		// compound.setString("research", researchingTech);
 	}
 
 	@Override

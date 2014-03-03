@@ -107,6 +107,7 @@ import femtocraft.power.items.ItemSpoolGold;
 import femtocraft.proxy.ProxyClient;
 import femtocraft.proxy.ProxyCommon;
 import femtocraft.research.blocks.BlockResearchComputer;
+import femtocraft.research.blocks.BlockResearchConsole;
 import femtocraft.research.items.ItemFemtoTechnology;
 import femtocraft.research.items.ItemMicroTechnology;
 import femtocraft.research.items.ItemNanoTechnology;
@@ -146,6 +147,7 @@ public class Femtocraft {
 	public static Block femtoStone;
 	public static Block unidentifiedAlloy;
 	public static Block researchComputer;
+	public static Block researchConsole;
 	public static Block generatorTest;
 	public static Block consumerTest;
 	public static Block microFurnaceUnlit;
@@ -339,6 +341,11 @@ public class Femtocraft {
 				FemtocraftConfigs.FemtocraftResearchComputerID);
 		GameRegistry.registerBlock(researchComputer, "researchComputer");
 		LanguageRegistry.addName(researchComputer, "Research Computer");
+
+		researchConsole = new BlockResearchConsole(
+				FemtocraftConfigs.FemtocraftResearchConsoleID);
+		GameRegistry.registerBlock(researchConsole, "researchConsole");
+		LanguageRegistry.addName(researchConsole, "Research Console");
 
 		blockMicroCable = new BlockMicroCable(FemtocraftConfigs.microCableID,
 				Material.rock);

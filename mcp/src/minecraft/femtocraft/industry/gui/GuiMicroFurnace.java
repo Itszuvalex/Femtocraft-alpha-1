@@ -3,6 +3,7 @@ package femtocraft.industry.gui;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
+import femtocraft.FemtocraftUtils;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
 import femtocraft.industry.containers.ContainerMicroFurnace;
 import net.minecraft.client.Minecraft;
@@ -33,10 +34,11 @@ public class GuiMicroFurnace extends GuiContainer {
 		String s = "Micro-Furnace";
 		this.fontRenderer.drawString(s,
 				this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
-				4210752);
+				FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
 		this.fontRenderer.drawString(
 				StatCollector.translateToLocal("container.inventory"), 8,
-				this.ySize - 96 + 2, 4210752);
+				this.ySize - 96 + 2,
+				FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
 	}
 
 	/**

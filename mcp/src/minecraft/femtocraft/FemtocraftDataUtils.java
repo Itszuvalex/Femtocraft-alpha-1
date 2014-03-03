@@ -401,8 +401,10 @@ public class FemtocraftDataUtils {
 			public void readFromNBT(NBTTagCompound compound, Field saveable,
 					Object obj) throws IllegalArgumentException,
 					IllegalAccessException {
-				if (!compound.hasKey(saveable.getName()))
+				if (!compound.hasKey(saveable.getName())) {
 					saveable.set(obj, null);
+					return;
+				}
 				saveable.set(obj, compound.getString(saveable.getName()));
 			}
 		});

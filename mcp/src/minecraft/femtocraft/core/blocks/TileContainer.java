@@ -59,10 +59,11 @@ public class TileContainer extends BlockContainer {
 							&& (((CoreItemBlock) item).hasItemNBT())) {
 						((TileEntityBase) te)
 								.loadInfoFromItemNBT(par6ItemStack.stackTagCompound);
-						if (((TileEntityBase) te).getOwner().isEmpty()) {
-							((TileEntityBase) te)
-									.setOwner(((EntityPlayerMP) par5EntityLivingBase).username);
-						}
+					}
+					if (((TileEntityBase) te).getOwner() == null
+							|| ((TileEntityBase) te).getOwner().isEmpty()) {
+						((TileEntityBase) te)
+								.setOwner(((EntityPlayerMP) par5EntityLivingBase).username);
 					}
 				}
 			}
@@ -110,7 +111,8 @@ public class TileContainer extends BlockContainer {
 
 	private boolean canPlayerRemove(EntityPlayer player, TileEntityBase tile) {
 		return player != null
-				&& (tile.getOwner().equals(player.username)
+				&& (tile.getOwner() == null
+						|| tile.getOwner().equals(player.username)
 						|| MinecraftServer.getServer()
 								.getConfigurationManager()
 								.isPlayerOpped(player.username) || player.capabilities.isCreativeMode);
