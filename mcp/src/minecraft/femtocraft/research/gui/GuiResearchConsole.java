@@ -2,6 +2,7 @@ package femtocraft.research.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -59,10 +60,7 @@ public class GuiResearchConsole extends GuiContainer {
 			ResearchTechnology tech = Femtocraft.researchManager
 					.getTechnology(console.displayTech);
 			if (tech != null) {
-				RenderItem render = new RenderItem();
-				render.renderItemAndEffectIntoGUI(fontRenderer, Minecraft
-						.getMinecraft().getTextureManager(), tech.displayItem,
-						k + 110, l + 33);
+
 				String s = tech.name;
 				this.fontRenderer.drawString(s, k + 71
 						+ (165 - 71 - this.fontRenderer.getStringWidth(s)) / 2,
@@ -85,6 +83,12 @@ public class GuiResearchConsole extends GuiContainer {
 									/ 2,
 							FemtocraftUtils.colorFromARGB(255, 255, 255, 255));
 				}
+
+				RenderItem render = new RenderItem();
+				RenderHelper.enableGUIStandardItemLighting();
+				render.renderItemAndEffectIntoGUI(fontRenderer, Minecraft
+						.getMinecraft().getTextureManager(), tech.displayItem,
+						k + 110, l + 33);
 			}
 
 		}
