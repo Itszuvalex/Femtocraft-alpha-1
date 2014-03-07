@@ -15,6 +15,8 @@ import femtocraft.core.tiles.TileEntityBase;
 import femtocraft.managers.research.ResearchTechnology;
 
 public class TileResearchConsole extends TileEntityBase implements IInventory {
+	public static final String PACKET_CHANNEL = Femtocraft.ID +"." + "rcon";
+	
 	public @Saveable(desc = true)
 	String displayTech = null;
 	private @Saveable(desc = true)
@@ -104,6 +106,10 @@ public class TileResearchConsole extends TileEntityBase implements IInventory {
 		return progressMax;
 	}
 
+	public String getResearchingName() {
+		return researchingTech;
+	}
+
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
@@ -133,10 +139,14 @@ public class TileResearchConsole extends TileEntityBase implements IInventory {
 		for (int i = 0; i < 9; ++i) {
 			decrStackSize(i, tech.researchMaterials.get(i).stackSize);
 		}
+		
+		this.onInventoryChanged();
 	}
 
 	private boolean canWork() {
 		if (displayTech == null || displayTech.isEmpty())
+			return false;
+		if (researchingTech != null && !researchingTech.isEmpty())
 			return false;
 		ResearchTechnology tech = Femtocraft.researchManager
 				.getTechnology(displayTech);

@@ -28,26 +28,7 @@ public class FemtocraftConnectionHandler implements IConnectionHandler {
 			INetworkManager manager) {
 		ResearchPlayer pr = Femtocraft.researchManager
 				.addPlayerResearch(((EntityPlayer) player).username);
-		NBTTagCompound data = new NBTTagCompound();
-		pr.saveToNBTTagCompound(data);
-
-		Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = ManagerResearch.RESEARCH_CHANNEL;
-		try {
-			packet.data = CompressedStreamTools.compress(data);
-		} catch (IOException e) {
-			e.printStackTrace();
-			Femtocraft.logger
-					.log(Level.SEVERE,
-							"Error writing "
-									+ pr.username
-									+ "'s PlayerResearch to packet data.  It will fail to sync to his client.");
-			return;
-		}
-		packet.length = packet.data.length;
-		Femtocraft.logger.log(Level.INFO, "Detecting " + pr.username
-				+ " joining.  Sending PlayerResearch data packet.");
-		PacketDispatcher.sendPacketToPlayer(packet, player);
+		pr.sync(player);
 	}
 
 	@Override

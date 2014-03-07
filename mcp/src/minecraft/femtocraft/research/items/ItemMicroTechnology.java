@@ -8,53 +8,20 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.api.ITechnologyCarrier;
 import femtocraft.managers.research.EnumTechLevel;
+import femtocraft.managers.research.ResearchPlayer;
 
-public class ItemMicroTechnology extends Item implements ITechnologyCarrier {
+public class ItemMicroTechnology extends ItemTechnologyCarrier {
 
 	public ItemMicroTechnology(int par1) {
 		super(par1);
 		setCreativeTab(Femtocraft.femtocraftTab);
 		setUnlocalizedName("itemMicroTechnology");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack par1ItemStack,
-			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-		super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
-		NBTTagCompound compound = par1ItemStack.stackTagCompound;
-		if (compound != null) {
-			par3List.add(EnumTechLevel.MICRO.getColor()
-					+ compound.getString("techName") + EnumChatFormatting.RESET);
-		} else {
-			par3List.add("This is only valid if made via");
-			par3List.add("Femtocraft Research Console.");
-		}
-	}
-
-	@Override
-	public void setTechnology(ItemStack itemStack, String name) {
-		NBTTagCompound compound = itemStack.stackTagCompound;
-		if (compound == null) {
-			compound = itemStack.stackTagCompound = new NBTTagCompound();
-		}
-
-		compound.setString("techName", name);
-	}
-
-	@Override
-	public String getTechnology(ItemStack itemStack) {
-		NBTTagCompound compound = itemStack.stackTagCompound;
-		if (compound == null) {
-			return null;
-		}
-
-		return compound.getString("techName");
 	}
 
 	@Override

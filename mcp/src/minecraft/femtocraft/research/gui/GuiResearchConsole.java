@@ -1,14 +1,20 @@
 package femtocraft.research.gui;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
@@ -22,12 +28,80 @@ public class GuiResearchConsole extends GuiContainer {
 	private static final int xSize = 176;
 	private static final int ySize = 166;
 
+	private final int researchButtonX = 63;
+	private final int researchButtonWidth = 106 - researchButtonX;
+	private final int researchButtonY = 35;
+	private final int researchButtonHeight = 53 - researchButtonY;
+
 	private final TileResearchConsole console;
 
 	public GuiResearchConsole(InventoryPlayer par1InventoryPlayer,
 			TileResearchConsole console) {
 		super(new ContainerResearchConsole(par1InventoryPlayer, console));
 		this.console = console;
+	}
+
+	private void onResearchClick() {
+		Packet250CustomPayload packet = new Packet250CustomPayload();
+		packet.channel = TileResearchConsole.PACKET_CHANNEL;
+
+		ByteArrayOutputStream bos = new ByteArrayOutputStream(14);
+		DataOutputStream outputStream = new DataOutputStream(bos);
+		try {
+			outputStream.writeInt(console.xCoord);
+			outputStream.writeInt(console.yCoord);
+			outputStream.writeInt(console.zCoord);
+			outputStream.writeInt(console.worldObj.provider.dimensionId);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		packet.data = bos.toByteArray();
+		packet.length = bos.size();
+
+		PacketDispatcher.sendPacketToServer(packet);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see net.minecraft.client.gui.inventory.GuiContainer#drawScreen(int, int,
+	 * float)
+	 */
+	@Override
+	public void drawScreen(int par1, int par2, float par3) {
+		super.drawScreen(par1, par2, par3);
+		int k = (this.width - this.xSize) / 2;
+		int l = (this.height - this.ySize) / 2;
+
+		if ((par1 >= (k + researchButtonX))
+				&& (par1 <= (k + researchButtonX + researchButtonWidth))
+				&& (par2 >= (l + researchButtonY))
+				&& (par2 <= (l + researchButtonY + researchButtonHeight))) {
+			this.drawGradientRect(k + researchButtonX, l + researchButtonY, k
+					+ researchButtonWidth + researchButtonX, l
+					+ researchButtonY + researchButtonHeight,
+					FemtocraftUtils.colorFromARGB(60, 45, 0, 110),
+					FemtocraftUtils.colorFromARGB(60, 45, 0, 110));
+		}
+	}
+
+	@Override
+	protected void mouseClicked(int par1, int par2, int par3) {
+		if (par3 == 0) {
+			int k = (this.width - this.xSize) / 2;
+			int l = (this.height - this.ySize) / 2;
+
+			if ((par1 >= (k + researchButtonX))
+					&& (par1 <= (k + researchButtonX + researchButtonWidth))
+					&& (par2 >= (l + researchButtonY))
+					&& (par2 <= (l + researchButtonY + researchButtonHeight))) {
+				Minecraft.getMinecraft().sndManager.playSoundFX("random.click",
+						1.0F, 1.0F);
+				onResearchClick();
+			}
+		}
+		super.mouseClicked(par1, par2, par3);
 	}
 
 	/**
@@ -56,9 +130,18 @@ public class GuiResearchConsole extends GuiContainer {
 		int progress = console.getResearchProgressScaled(78);
 		this.drawTexturedModalRect(k + 64, l + 65, 0, 166, progress, 6);
 
-		if (console.displayTech != null) {
+		if (console.displayTech != null || console.isResearching()) {
+
+			String name = null;
+
+			if (console.isResearching()) {
+				name = console.getResearchingName();
+			} else {
+				name = console.displayTech;
+			}
+
 			ResearchTechnology tech = Femtocraft.researchManager
-					.getTechnology(console.displayTech);
+					.getTechnology(name);
 			if (tech != null) {
 
 				String s = tech.name;

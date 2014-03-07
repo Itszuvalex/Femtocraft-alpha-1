@@ -1,16 +1,21 @@
 package femtocraft.managers.research;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.logging.Level;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 
 import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
 import femtocraft.Femtocraft;
@@ -57,8 +62,7 @@ public class ResearchPlayer {
 			return false;
 
 		if (tech == null && force) {
-			techStatus.put(name,
-					new ResearchTechnologyStatus(name, true));
+			techStatus.put(name, new ResearchTechnologyStatus(name, true));
 			// broadcastPacket(status.toPacket(), username);
 
 			for (ResearchTechnology t : Femtocraft.researchManager
@@ -81,7 +85,7 @@ public class ResearchPlayer {
 					}
 				}
 			}
-
+			sync();
 			return true;
 		}
 
@@ -89,7 +93,7 @@ public class ResearchPlayer {
 				username, Femtocraft.researchManager.getTechnology(name));
 		if (!MinecraftForge.EVENT_BUS.post(event)) {
 			tech.researched = true;
-			
+
 			for (ResearchTechnology t : Femtocraft.researchManager
 					.getTechnologies()) {
 				if (t.prerequisites != null) {
@@ -109,6 +113,8 @@ public class ResearchPlayer {
 					}
 				}
 			}
+
+			sync();
 			
 			return true;
 		}
@@ -119,9 +125,8 @@ public class ResearchPlayer {
 		TechnologyDiscoveredEvent event = new TechnologyDiscoveredEvent(
 				username, Femtocraft.researchManager.getTechnology(name));
 		if (!MinecraftForge.EVENT_BUS.post(event)) {
-			techStatus.put(name,
-					new ResearchTechnologyStatus(name));
-			// broadcastPacket(ts.toPacket(), username);
+			techStatus.put(name, new ResearchTechnologyStatus(name));
+			sync();
 			return true;
 		}
 		return false;
@@ -173,12 +178,34 @@ public class ResearchPlayer {
 
 	// ---------------------------------------------------------
 
-	private void broadcastPacket(Packet packet, String username) {
-		// EntityPlayerMP player = MinecraftServer.getServer()
-		// .getConfigurationManager().getPlayerForUsername(username);
-		// if (player == null)
-		// return;
-		// PacketDispatcher.sendPacketToPlayer(packet, (Player) player);
+	public void sync() {
+		EntityPlayerMP player = MinecraftServer.getServer()
+				.getConfigurationManager().getPlayerForUsername(username);
+		if (player == null)
+			return;
+
+		sync((Player) player);
+	}
+
+	public void sync(Player player) {
+		NBTTagCompound data = new NBTTagCompound();
+		saveToNBTTagCompound(data);
+
+		Packet250CustomPayload packet = new Packet250CustomPayload();
+		packet.channel = ManagerResearch.RESEARCH_CHANNEL;
+		try {
+			packet.data = CompressedStreamTools.compress(data);
+		} catch (IOException e) {
+			e.printStackTrace();
+			Femtocraft.logger
+					.log(Level.SEVERE,
+							"Error writing "
+									+ username
+									+ "'s PlayerResearch to packet data.  It will fail to sync to his client.");
+			return;
+		}
+		packet.length = packet.data.length;
+		PacketDispatcher.sendPacketToPlayer(packet, player);
 	}
 
 	// ---------------------------------------------------------

@@ -111,13 +111,15 @@ import femtocraft.research.blocks.BlockResearchConsole;
 import femtocraft.research.items.ItemFemtoTechnology;
 import femtocraft.research.items.ItemMicroTechnology;
 import femtocraft.research.items.ItemNanoTechnology;
+import femtocraft.research.tiles.TileResearchConsole;
 import femtocraft.transport.items.blocks.BlockVacuumTube;
 import femtocraft.transport.items.tiles.TileEntityVacuumTube;
 import femtocraft.transport.liquids.blocks.BlockSuctionPipe;
 
 @Mod(modid = Femtocraft.ID, name = "Femtocraft", version = Femtocraft.VERSION)
 @NetworkMod(channels = { Femtocraft.ID, PropertiesNanite.PACKET_CHANNEL,
-		ManagerResearch.RESEARCH_CHANNEL, TileEntityVacuumTube.packetChannel }, packetHandler = FemtocraftPacketHandler.class, clientSideRequired = true, serverSideRequired = true)
+		ManagerResearch.RESEARCH_CHANNEL, TileResearchConsole.PACKET_CHANNEL,
+		TileEntityVacuumTube.packetChannel }, packetHandler = FemtocraftPacketHandler.class, clientSideRequired = true, serverSideRequired = true)
 public class Femtocraft {
 	public static final String ID = "Femtocraft";
 	public static final String VERSION = "0.1.0";

@@ -15,8 +15,13 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 public class ContainerResearchConsole extends Container {
 	private final TileResearchConsole console;
 	private int lastProgress = 0;
+	private int lastProgressMax = 0;
 
-	public ContainerResearchConsole(InventoryPlayer par1InventoryPlayer, TileResearchConsole console) {
+	private static final int progressID = 0;
+	private static final int progressMaxID = 1;
+
+	public ContainerResearchConsole(InventoryPlayer par1InventoryPlayer,
+			TileResearchConsole console) {
 		this.console = console;
 
 		this.addSlotToContainer(new OutputSlot(console, 9, 147, 60));
@@ -25,7 +30,7 @@ public class ContainerResearchConsole extends Container {
 			this.addSlotToContainer(new Slot(console, i, 8 + 18 * (i % 3),
 					16 + 18 * (i / 3)));
 		}
-		
+
 		int i;
 
 		// Bind player inventory
@@ -52,8 +57,13 @@ public class ContainerResearchConsole extends Container {
 	public void updateProgressBar(int par1, int par2) {
 		super.updateProgressBar(par1, par2);
 
-		if (par1 == 0) {
+		switch (par1) {
+		case progressID:
 			console.setResearchProgress(par2);
+			break;
+		case progressMaxID:
+			console.setResearchMax(par2);
+			break;
 		}
 	}
 
@@ -65,19 +75,26 @@ public class ContainerResearchConsole extends Container {
 			ICrafting icrafting = (ICrafting) crafter;
 
 			if (this.lastProgress != this.console.getResearchProgress()) {
-				icrafting.sendProgressBarUpdate(this, 1,
+				icrafting.sendProgressBarUpdate(this, progressID,
 						this.console.getResearchProgress());
+			}
+			if (this.lastProgressMax != this.console.getResearchMax()) {
+				icrafting.sendProgressBarUpdate(this, progressMaxID,
+						this.console.getResearchMax());
 			}
 		}
 
 		this.lastProgress = this.console.getResearchProgress();
+		this.lastProgressMax = this.console.getResearchMax();
 	}
 
 	@Override
 	public void addCraftingToCrafters(ICrafting par1iCrafting) {
 		super.addCraftingToCrafters(par1iCrafting);
-		par1iCrafting.sendProgressBarUpdate(this, 0,
+		par1iCrafting.sendProgressBarUpdate(this, progressID,
 				console.getResearchProgress());
+		par1iCrafting.sendProgressBarUpdate(this, progressMaxID,
+				console.getResearchMax());
 	}
 
 	/**

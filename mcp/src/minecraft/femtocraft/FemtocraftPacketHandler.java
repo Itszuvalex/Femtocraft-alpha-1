@@ -5,18 +5,24 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 import femtocraft.managers.research.ManagerResearch;
 import femtocraft.managers.research.ResearchPlayer;
 import femtocraft.player.PropertiesNanite;
+import femtocraft.research.tiles.TileResearchConsole;
 import femtocraft.transport.items.tiles.TileEntityVacuumTube;
 
 public class FemtocraftPacketHandler implements IPacketHandler {
@@ -32,6 +38,7 @@ public class FemtocraftPacketHandler implements IPacketHandler {
 
 		if (packet.channel.equalsIgnoreCase(ManagerResearch.RESEARCH_CHANNEL)) {
 			handleResearchPacket(packet, playerEntity);
+			return;
 		}
 
 		DataInputStream inputStream = new DataInputStream(
@@ -39,8 +46,37 @@ public class FemtocraftPacketHandler implements IPacketHandler {
 
 		if (packet.channel.equalsIgnoreCase(TileEntityVacuumTube.packetChannel)) {
 			handleVacuumTube(inputStream, playerEntity);
+			return;
+		}
+		if (packet.channel.equalsIgnoreCase(TileResearchConsole.PACKET_CHANNEL)) {
+			handleResearchConsole(inputStream, playerEntity);
 		}
 
+	}
+
+	private void handleResearchConsole(DataInputStream inputStream,
+			Player playerEntity) {
+		int x = 0, y = 0, z = 0, dim = 0;
+
+		try {
+			x = inputStream.readInt();
+			y = inputStream.readInt();
+			z = inputStream.readInt();
+			dim = inputStream.readInt();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		WorldServer world = DimensionManager.getWorld(dim);
+		if (world == null) {
+			Femtocraft.logger.log(Level.SEVERE,
+					"Received ResearchConsole Packet for nonexistent World");
+		} else {
+			TileEntity te = world.getBlockTileEntity(x, y, z);
+			if (te instanceof TileResearchConsole) {
+				((TileResearchConsole) te).startWork();
+			}
+		}
 	}
 
 	private void handleResearchPacket(Packet250CustomPayload packet,
@@ -61,9 +97,6 @@ public class FemtocraftPacketHandler implements IPacketHandler {
 		}
 		ResearchPlayer rp = new ResearchPlayer(cp.username);
 		rp.loadFromNBTTagCompound(data);
-
-		Femtocraft.logger.log(Level.INFO,
-				"Received PlayerResearch data packet update.");
 		Femtocraft.researchManager.syncResearch(rp);
 	}
 
