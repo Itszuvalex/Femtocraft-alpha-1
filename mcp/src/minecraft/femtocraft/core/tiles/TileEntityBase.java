@@ -1,11 +1,5 @@
 package femtocraft.core.tiles;
 
-import femtocraft.Femtocraft;
-import femtocraft.FemtocraftConfigs;
-import femtocraft.FemtocraftDataUtils;
-import femtocraft.FemtocraftDataUtils.EnumSaveType;
-import femtocraft.FemtocraftDataUtils.Saveable;
-import femtocraft.FemtocraftUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
@@ -13,7 +7,12 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import femtocraft.Femtocraft;
+import femtocraft.FemtocraftConfigs;
+import femtocraft.FemtocraftDataUtils;
+import femtocraft.FemtocraftDataUtils.EnumSaveType;
+import femtocraft.FemtocraftDataUtils.Saveable;
+import femtocraft.FemtocraftUtils;
 
 public class TileEntityBase extends TileEntity {
 	private @Saveable(item = true)

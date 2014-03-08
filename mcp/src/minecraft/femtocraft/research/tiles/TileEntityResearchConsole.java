@@ -14,7 +14,7 @@ import femtocraft.api.ITechnologyCarrier;
 import femtocraft.core.tiles.TileEntityBase;
 import femtocraft.managers.research.ResearchTechnology;
 
-public class TileResearchConsole extends TileEntityBase implements IInventory {
+public class TileEntityResearchConsole extends TileEntityBase implements IInventory {
 	public static final String PACKET_CHANNEL = Femtocraft.ID +"." + "rcon";
 	
 	public @Saveable(desc = true)
@@ -30,7 +30,7 @@ public class TileResearchConsole extends TileEntityBase implements IInventory {
 
 	private static final int ticksToResearch = 400;
 
-	public TileResearchConsole() {
+	public TileEntityResearchConsole() {
 		super();
 	}
 
@@ -64,8 +64,6 @@ public class TileResearchConsole extends TileEntityBase implements IInventory {
 			if (Femtocraft.researchManager.hasPlayerDiscoveredTechnology(
 					getOwner(), tech)) {
 				if (matchesTechnology(tech)) {
-					Femtocraft.logger.log(Level.SEVERE,
-							"Found matching technology - " + tech.name);
 					displayTech = tech.name;
 					if (worldObj != null)
 						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);

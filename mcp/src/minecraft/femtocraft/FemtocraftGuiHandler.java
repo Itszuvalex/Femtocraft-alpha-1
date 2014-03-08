@@ -23,7 +23,7 @@ import femtocraft.research.containers.ContainerResearchConsole;
 import femtocraft.research.gui.GuiResearch;
 import femtocraft.research.gui.GuiResearchConsole;
 import femtocraft.research.tiles.TileEntityResearchComputer;
-import femtocraft.research.tiles.TileResearchConsole;
+import femtocraft.research.tiles.TileEntityResearchConsole;
 
 public class FemtocraftGuiHandler implements IGuiHandler {
 
@@ -50,9 +50,9 @@ public class FemtocraftGuiHandler implements IGuiHandler {
 			return new ContainerNanoCube((TileEntityNanoCubePort) tileEntity);
 		} else if (tileEntity instanceof TileEntityPowerMicroCube) {
 			return new ContainerMicroCube((TileEntityPowerMicroCube) tileEntity);
-		} else if (tileEntity instanceof TileResearchConsole) {
+		} else if (tileEntity instanceof TileEntityResearchConsole) {
 			return new ContainerResearchConsole(player.inventory,
-					(TileResearchConsole) tileEntity);
+					(TileEntityResearchConsole) tileEntity);
 		}
 
 		return null;
@@ -78,9 +78,9 @@ public class FemtocraftGuiHandler implements IGuiHandler {
 			return new GuiResearch(player.username);
 		} else if (tileEntity instanceof TileEntityPowerMicroCube) {
 			return new GuiMicroCube((TileEntityPowerMicroCube) tileEntity);
-		} else if (tileEntity instanceof TileResearchConsole) {
+		} else if (tileEntity instanceof TileEntityResearchConsole) {
 			return new GuiResearchConsole(player.inventory,
-					(TileResearchConsole) tileEntity);
+					(TileEntityResearchConsole) tileEntity);
 		}
 
 		return null;

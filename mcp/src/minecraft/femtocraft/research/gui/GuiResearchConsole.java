@@ -20,7 +20,7 @@ import femtocraft.Femtocraft;
 import femtocraft.FemtocraftUtils;
 import femtocraft.managers.research.ResearchTechnology;
 import femtocraft.research.containers.ContainerResearchConsole;
-import femtocraft.research.tiles.TileResearchConsole;
+import femtocraft.research.tiles.TileEntityResearchConsole;
 
 public class GuiResearchConsole extends GuiContainer {
 	private static final ResourceLocation texture = new ResourceLocation(
@@ -33,17 +33,17 @@ public class GuiResearchConsole extends GuiContainer {
 	private final int researchButtonY = 35;
 	private final int researchButtonHeight = 53 - researchButtonY;
 
-	private final TileResearchConsole console;
+	private final TileEntityResearchConsole console;
 
 	public GuiResearchConsole(InventoryPlayer par1InventoryPlayer,
-			TileResearchConsole console) {
+			TileEntityResearchConsole console) {
 		super(new ContainerResearchConsole(par1InventoryPlayer, console));
 		this.console = console;
 	}
 
 	private void onResearchClick() {
 		Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = TileResearchConsole.PACKET_CHANNEL;
+		packet.channel = TileEntityResearchConsole.PACKET_CHANNEL;
 
 		ByteArrayOutputStream bos = new ByteArrayOutputStream(14);
 		DataOutputStream outputStream = new DataOutputStream(bos);

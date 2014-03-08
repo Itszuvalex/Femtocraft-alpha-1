@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
@@ -52,7 +53,7 @@ public class ManagerResearch {
 			"Machining", "Start your industry!", EnumTechLevel.MICRO,
 			new ArrayList<ResearchTechnology>(Arrays.asList(
 					technologyMetallurgy, technologyBasicCircuits)),
-			new ItemStack(Femtocraft.itemMicroPlating), 0, -1, false,
+			new ItemStack(Femtocraft.itemMicroPlating), -1, -2, false,
 			new ArrayList<ItemStack>(Arrays.asList(new ItemStack(
 					Femtocraft.ingotTemperedTitanium), new ItemStack(
 					Femtocraft.microCircuitBoard), new ItemStack(
@@ -63,6 +64,16 @@ public class ManagerResearch {
 					Femtocraft.ingotTemperedTitanium), new ItemStack(
 					Femtocraft.microCircuitBoard), new ItemStack(
 					Femtocraft.ingotTemperedTitanium))));
+	public static ResearchTechnology technologyPaperSchematic = new ResearchTechnology(
+			"Paper Schematic", "Like IKEA for reality!", EnumTechLevel.MICRO,
+			new ArrayList<ResearchTechnology>(Arrays.asList(
+					technologyWorldStructure, technologyMachining)),
+			new ItemStack(Femtocraft.paperSchematic), 1, -1, false,
+			new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Item.paper),
+					new ItemStack(Item.paper), new ItemStack(Item.paper),
+					new ItemStack(Item.paper), new ItemStack(Item.paper),
+					new ItemStack(Item.paper), new ItemStack(Item.paper),
+					new ItemStack(Item.paper), new ItemStack(Item.paper))));
 
 	public ManagerResearch() {
 		technologies = new HashMap<String, ResearchTechnology>();

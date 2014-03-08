@@ -22,7 +22,7 @@ import cpw.mods.fml.common.network.Player;
 import femtocraft.managers.research.ManagerResearch;
 import femtocraft.managers.research.ResearchPlayer;
 import femtocraft.player.PropertiesNanite;
-import femtocraft.research.tiles.TileResearchConsole;
+import femtocraft.research.tiles.TileEntityResearchConsole;
 import femtocraft.transport.items.tiles.TileEntityVacuumTube;
 
 public class FemtocraftPacketHandler implements IPacketHandler {
@@ -48,7 +48,7 @@ public class FemtocraftPacketHandler implements IPacketHandler {
 			handleVacuumTube(inputStream, playerEntity);
 			return;
 		}
-		if (packet.channel.equalsIgnoreCase(TileResearchConsole.PACKET_CHANNEL)) {
+		if (packet.channel.equalsIgnoreCase(TileEntityResearchConsole.PACKET_CHANNEL)) {
 			handleResearchConsole(inputStream, playerEntity);
 		}
 
@@ -73,8 +73,8 @@ public class FemtocraftPacketHandler implements IPacketHandler {
 					"Received ResearchConsole Packet for nonexistent World");
 		} else {
 			TileEntity te = world.getBlockTileEntity(x, y, z);
-			if (te instanceof TileResearchConsole) {
-				((TileResearchConsole) te).startWork();
+			if (te instanceof TileEntityResearchConsole) {
+				((TileEntityResearchConsole) te).startWork();
 			}
 		}
 	}

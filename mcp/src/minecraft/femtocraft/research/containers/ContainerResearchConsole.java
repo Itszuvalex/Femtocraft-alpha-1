@@ -3,7 +3,7 @@ package femtocraft.research.containers;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.common.gui.OutputSlot;
-import femtocraft.research.tiles.TileResearchConsole;
+import femtocraft.research.tiles.TileEntityResearchConsole;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 
 public class ContainerResearchConsole extends Container {
-	private final TileResearchConsole console;
+	private final TileEntityResearchConsole console;
 	private int lastProgress = 0;
 	private int lastProgressMax = 0;
 
@@ -21,7 +21,7 @@ public class ContainerResearchConsole extends Container {
 	private static final int progressMaxID = 1;
 
 	public ContainerResearchConsole(InventoryPlayer par1InventoryPlayer,
-			TileResearchConsole console) {
+			TileEntityResearchConsole console) {
 		this.console = console;
 
 		this.addSlotToContainer(new OutputSlot(console, 9, 147, 60));

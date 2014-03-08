@@ -15,7 +15,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.core.blocks.TileContainer;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
-import femtocraft.research.tiles.TileResearchConsole;
+import femtocraft.research.tiles.TileEntityResearchConsole;
 
 public class BlockResearchConsole extends TileContainer {
 
@@ -23,7 +23,7 @@ public class BlockResearchConsole extends TileContainer {
 	public void breakBlock(World par1World, int par2, int par3, int par4,
 			int par5, int par6) {
 
-		TileResearchConsole console = (TileResearchConsole) par1World
+		TileEntityResearchConsole console = (TileEntityResearchConsole) par1World
 				.getBlockTileEntity(par2, par3, par4);
 
 		Random random = new Random();
@@ -90,7 +90,7 @@ public class BlockResearchConsole extends TileContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileResearchConsole();
+		return new TileEntityResearchConsole();
 	}
 
 	@Override

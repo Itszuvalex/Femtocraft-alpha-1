@@ -20,7 +20,7 @@ import femtocraft.power.tiles.TileEntityPowerMicroChargingBase;
 import femtocraft.power.tiles.TileEntityPowerMicroCube;
 import femtocraft.power.tiles.TileEntityPowerProducerTest;
 import femtocraft.research.tiles.TileEntityResearchComputer;
-import femtocraft.research.tiles.TileResearchConsole;
+import femtocraft.research.tiles.TileEntityResearchConsole;
 import femtocraft.transport.items.tiles.TileEntityVacuumTube;
 import femtocraft.transport.liquids.tiles.TileEntitySuctionPipe;
 
@@ -36,7 +36,7 @@ public class ProxyCommon {
 		// Tile Entities
 		GameRegistry.registerTileEntity(TileEntityResearchComputer.class,
 				"TileEntityResearchComputer");
-		GameRegistry.registerTileEntity(TileResearchConsole.class,
+		GameRegistry.registerTileEntity(TileEntityResearchConsole.class,
 				"TileEntityResearchConsole");
 		GameRegistry.registerTileEntity(TileEntityPowerBase.class,
 				"TileEntityPowerBase");
