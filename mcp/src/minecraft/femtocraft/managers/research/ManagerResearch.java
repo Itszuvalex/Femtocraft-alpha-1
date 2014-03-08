@@ -23,6 +23,10 @@ import femtocraft.research.gui.technology.GuiBasicCircuits;
 
 //TODO:  Separate players out into their own files
 public class ManagerResearch {
+	private static final String playerDataKey = "playerData";
+	private static final String dataKey = "data";
+	private static final String userKey = "username";
+
 	public static final String RESEARCH_CHANNEL = Femtocraft.ID + ".rman";
 	private HashMap<String, ResearchTechnology> technologies;
 	private HashMap<String, ResearchPlayer> playerData;
@@ -169,26 +173,26 @@ public class ManagerResearch {
 
 		for (ResearchPlayer status : playerData.values()) {
 			NBTTagCompound cs = new NBTTagCompound();
-			cs.setString("username", status.username);
+			cs.setString(userKey, status.username);
 
 			NBTTagCompound data = new NBTTagCompound();
 			status.saveToNBTTagCompound(data);
 
-			cs.setCompoundTag("data", data);
+			cs.setCompoundTag(dataKey, data);
 			list.appendTag(cs);
 		}
 
-		compound.setTag("playerData", list);
+		compound.setTag(playerDataKey, list);
 	}
 
 	public void loadFromNBTTagCompound(NBTTagCompound compound) {
-		NBTTagList list = compound.getTagList("playerData");
+		NBTTagList list = compound.getTagList(playerDataKey);
 
 		for (int i = 0; i < list.tagCount(); ++i) {
 			NBTTagCompound cs = (NBTTagCompound) list.tagAt(i);
-			String username = cs.getString("username");
+			String username = cs.getString(userKey);
 
-			NBTTagCompound data = cs.getCompoundTag("data");
+			NBTTagCompound data = cs.getCompoundTag(dataKey);
 			ResearchPlayer status = new ResearchPlayer(username);
 			status.loadFromNBTTagCompound(data);
 
