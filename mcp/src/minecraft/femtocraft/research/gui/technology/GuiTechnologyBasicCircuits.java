@@ -10,9 +10,9 @@ import femtocraft.managers.research.ResearchTechnologyStatus;
 import femtocraft.research.gui.GuiResearch;
 import femtocraft.research.gui.GuiTechnology;
 
-public class GuiBasicCircuits extends GuiTechnology {
+public class GuiTechnologyBasicCircuits extends GuiTechnology {
 
-	public GuiBasicCircuits(GuiResearch guiResearch,
+	public GuiTechnologyBasicCircuits(GuiResearch guiResearch,
 			ResearchTechnologyStatus status) {
 		super(guiResearch, status);
 	}
@@ -106,7 +106,7 @@ public class GuiBasicCircuits extends GuiTechnology {
 	}
 
 	@Override
-	protected int getNumPages() {
+	protected int getNumPages(boolean researched) {
 		return 3;
 	}
 }

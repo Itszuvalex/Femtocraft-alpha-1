@@ -14,9 +14,10 @@ import femtocraft.api.ITechnologyCarrier;
 import femtocraft.core.tiles.TileEntityBase;
 import femtocraft.managers.research.ResearchTechnology;
 
-public class TileEntityResearchConsole extends TileEntityBase implements IInventory {
-	public static final String PACKET_CHANNEL = Femtocraft.ID +"." + "rcon";
-	
+public class TileEntityResearchConsole extends TileEntityBase implements
+		IInventory {
+	public static final String PACKET_CHANNEL = Femtocraft.ID + "." + "rcon";
+
 	public @Saveable(desc = true)
 	String displayTech = null;
 	private @Saveable(desc = true)
@@ -134,10 +135,12 @@ public class TileEntityResearchConsole extends TileEntityBase implements IInvent
 		ResearchTechnology tech = Femtocraft.researchManager
 				.getTechnology(displayTech);
 
-		for (int i = 0; i < 9; ++i) {
+		for (int i = 0; i < 9 && i < tech.researchMaterials.size(); ++i) {
+			if (tech.researchMaterials.get(i) == null)
+				continue;
 			decrStackSize(i, tech.researchMaterials.get(i).stackSize);
 		}
-		
+
 		this.onInventoryChanged();
 	}
 
@@ -157,7 +160,7 @@ public class TileEntityResearchConsole extends TileEntityBase implements IInvent
 			return false;
 		if (tech.researchMaterials == null)
 			return false;
-		for (int i = 0; i < 9; ++i) {
+		for (int i = 0; i < 9 && i < tech.researchMaterials.size(); ++i) {
 			if (!compareItemStack(tech.researchMaterials.get(i), inventory[i]))
 				return false;
 		}

@@ -2,18 +2,18 @@ package femtocraft.research.items;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.api.ITechnologyCarrier;
-import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.managers.research.ResearchPlayer;
+import femtocraft.managers.research.ResearchTechnology;
 
 public abstract class ItemTechnologyCarrier extends Item implements
 		ITechnologyCarrier {
@@ -40,6 +40,12 @@ public abstract class ItemTechnologyCarrier extends Item implements
 			if (!(tech == null || tech.isEmpty())) {
 				if (!par2World.isRemote) {
 					if (pr.researchTechnology(tech, false)) {
+						ResearchTechnology rt = Femtocraft.researchManager
+								.getTechnology(tech);
+						if (rt != null && rt.discoverItem != null) {
+							return rt.discoverItem.copy();
+						}
+
 						par1ItemStack.stackSize = 0;
 					}
 				}

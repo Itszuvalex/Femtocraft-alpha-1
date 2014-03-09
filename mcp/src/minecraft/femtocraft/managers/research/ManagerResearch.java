@@ -20,7 +20,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import femtocraft.Femtocraft;
 import femtocraft.managers.research.EventTechnology.TechnologyAddedEvent;
-import femtocraft.research.gui.technology.GuiBasicCircuits;
+import femtocraft.research.gui.technology.GuiTechnologyBasicCircuits;
+import femtocraft.research.gui.technology.GuiTechnologyMachining;
+import femtocraft.research.gui.technology.GuiTechnologyPaperSchematic;
 
 //TODO:  Separate players out into their own files
 public class ManagerResearch {
@@ -39,7 +41,7 @@ public class ManagerResearch {
 	public static ResearchTechnology technologyBasicCircuits = new ResearchTechnology(
 			"Basic Circuits", "Farenite, Circuit Boards", EnumTechLevel.MACRO,
 			null, new ItemStack(Femtocraft.microCircuitBoard), 2, -3, false,
-			null, GuiBasicCircuits.class);
+			null, GuiTechnologyBasicCircuits.class, null);
 	public static ResearchTechnology technologyMetallurgy = new ResearchTechnology(
 			"Metallurgy", "Titanium, Thorium, Platinum", EnumTechLevel.MACRO,
 			null, new ItemStack(Femtocraft.ingotTemperedTitanium), -2, -3,
@@ -63,17 +65,17 @@ public class ManagerResearch {
 					Femtocraft.microCircuitBoard), new ItemStack(
 					Femtocraft.ingotTemperedTitanium), new ItemStack(
 					Femtocraft.microCircuitBoard), new ItemStack(
-					Femtocraft.ingotTemperedTitanium))));
+					Femtocraft.ingotTemperedTitanium))), GuiTechnologyMachining.class,
+			new ItemStack(Femtocraft.itemMicroPlating));
 	public static ResearchTechnology technologyPaperSchematic = new ResearchTechnology(
 			"Paper Schematic", "Like IKEA for reality!", EnumTechLevel.MICRO,
 			new ArrayList<ResearchTechnology>(Arrays.asList(
 					technologyWorldStructure, technologyMachining)),
 			new ItemStack(Femtocraft.paperSchematic), 1, -1, false,
 			new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Item.paper),
-					new ItemStack(Item.paper), new ItemStack(Item.paper),
-					new ItemStack(Item.paper), new ItemStack(Item.paper),
-					new ItemStack(Item.paper), new ItemStack(Item.paper),
-					new ItemStack(Item.paper), new ItemStack(Item.paper))));
+					new ItemStack(Item.paper), new ItemStack(Item.paper))),
+			GuiTechnologyPaperSchematic.class,
+			new ItemStack(Femtocraft.paperSchematic, 1));
 
 	public ManagerResearch() {
 		technologies = new HashMap<String, ResearchTechnology>();

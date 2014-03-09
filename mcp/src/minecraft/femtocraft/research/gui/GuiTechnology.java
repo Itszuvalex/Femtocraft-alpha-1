@@ -89,7 +89,7 @@ public class GuiTechnology extends GuiScreen {
 				displayPage--;
 			}
 
-			if ((displayPage < getNumPages())
+			if ((displayPage < getNumPages(status.researched))
 					&& (par1 >= (k + pageRightButtonX))
 					&& (par1 <= (k + pageRightButtonX + pageRightButtonWidth))
 					&& (par2 >= (l + pageRightButtonY))
@@ -173,7 +173,7 @@ public class GuiTechnology extends GuiScreen {
 		}
 
 		color = FemtocraftUtils.colorFromARGB(60, 45, 0, 110);
-		if (displayPage < getNumPages()) {
+		if (displayPage < getNumPages(status.researched)) {
 			if ((par1 >= (k + pageRightButtonX))
 					&& (par1 <= (k + pageRightButtonX + pageRightButtonWidth))
 					&& (par2 >= (l + pageRightButtonY))
@@ -203,7 +203,7 @@ public class GuiTechnology extends GuiScreen {
 		}
 
 		String pageString = String.format("Page %s/%s", displayPage,
-				getNumPages());
+				getNumPages(status.researched));
 		this.fontRenderer.drawString(pageString, k + pageLeftButtonX
 				+ (pageLeftButtonWidth + pageRightButtonX - pageLeftButtonX)
 				/ 2 - this.fontRenderer.getStringWidth(pageString) / 2, l
@@ -224,27 +224,35 @@ public class GuiTechnology extends GuiScreen {
 				Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft()
 						.getTextureManager(), tech.displayItem, k + 66, l + 12);
 
+		ItemStack[] materials = null;
 		if (tech.researchMaterials != null) {
-			int i = 0;
-			for (ItemStack item : tech.researchMaterials) {
-				if (i >= 9)
-					break;
-				renderitem.renderItemAndEffectIntoGUI(
-						Minecraft.getMinecraft().fontRenderer, Minecraft
-								.getMinecraft().getTextureManager(), item, k
-								+ 195 + 18 * (i % 3), l + 12 + 18 * (i / 3));
-				i++;
-			}
-			;
+			materials = new ItemStack[9];
+			tech.researchMaterials.toArray(materials);
 		}
-		
+
+		this.renderCraftingGrid(k + 194, l + 11, materials, par1, par2, tooltip);
+
+		// if (tech.researchMaterials != null) {
+		// int i = 0;
+		// for (ItemStack item : tech.researchMaterials) {
+		// if (i >= 9)
+		// break;
+		// renderitem.renderItemAndEffectIntoGUI(
+		// Minecraft.getMinecraft().fontRenderer, Minecraft
+		// .getMinecraft().getTextureManager(), item, k
+		// + 195 + 18 * (i % 3), l + 12 + 18 * (i / 3));
+		// i++;
+		// }
+		// ;
+		// }
+
 		this.drawHoveringText(tooltip, par1, par2, this.fontRenderer);
 
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
 	}
 
-	protected int getNumPages() {
+	protected int getNumPages(boolean researched) {
 		return 1;
 	}
 
@@ -307,7 +315,12 @@ public class GuiTechnology extends GuiScreen {
 		RenderItem renderitem = new RenderItem();
 		RenderHelper.enableGUIStandardItemLighting();
 
+		if (items == null)
+			return;
+
 		for (int i = 0; (i < 9) && (i < items.length); ++i) {
+			if (items[i] == null)
+				continue;
 			renderitem.renderItemAndEffectIntoGUI(
 					Minecraft.getMinecraft().fontRenderer, Minecraft
 							.getMinecraft().getTextureManager(), items[i], x

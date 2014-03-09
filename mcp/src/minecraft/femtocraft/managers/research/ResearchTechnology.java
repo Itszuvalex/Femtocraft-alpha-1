@@ -21,6 +21,8 @@ public class ResearchTechnology {
 	public boolean isKeystone;
 	public ArrayList<ItemStack> researchMaterials;
 
+	public ItemStack discoverItem;
+
 	public Class<? extends GuiTechnology> guiClass;
 
 	public ResearchTechnology(String name, String description,
@@ -28,14 +30,15 @@ public class ResearchTechnology {
 			ItemStack displayItem, int xDisplay, int yDisplay,
 			boolean isKeystone, ArrayList<ItemStack> researchMaterials) {
 		this(name, description, level, prerequisites, displayItem, xDisplay,
-				yDisplay, isKeystone, researchMaterials, GuiTechnology.class);
+				yDisplay, isKeystone, researchMaterials, GuiTechnology.class,
+				null);
 	}
 
 	public ResearchTechnology(String name, String description,
 			EnumTechLevel level, ArrayList<ResearchTechnology> prerequisites,
 			ItemStack displayItem, int xDisplay, int yDisplay,
 			boolean isKeystone, ArrayList<ItemStack> researchMaterials,
-			Class<? extends GuiTechnology> guiClass) {
+			Class<? extends GuiTechnology> guiClass, ItemStack discoverItem) {
 		this.name = name;
 		this.description = description;
 		this.level = level;
@@ -46,6 +49,7 @@ public class ResearchTechnology {
 		this.isKeystone = isKeystone;
 		this.researchMaterials = researchMaterials;
 		this.guiClass = guiClass;
+		this.discoverItem = discoverItem;
 	}
 
 	// --------------------------------------------------
