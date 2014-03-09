@@ -91,26 +91,26 @@ public class BlockVacuumTube extends BlockContainer {
 	public void onPostBlockPlaced(World par1World, int par2, int par3,
 			int par4, int par5) {
 		TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
-		if (tile != null) if (tile instanceof TileEntityVacuumTube) {
-            ((TileEntityVacuumTube) tile).searchForFullConnections();
-        }
+		if (tile != null)
+			if (tile instanceof TileEntityVacuumTube) {
+				((TileEntityVacuumTube) tile).searchForFullConnections();
+			}
 		super.onPostBlockPlaced(par1World, par2, par3, par4, par5);
 	}
 
 	@Override
 	public void onNeighborTileChange(World world, int x, int y, int z,
 			int tileX, int tileY, int tileZ) {
-		// tiles tile = world.getBlockTileEntity(x, y, z);
-		// if(tile != null)
-		// {
-		// if(tile instanceof TileEntityVacuumTube)
-		// {
-		// TileEntityVacuumTube tube = (TileEntityVacuumTube)tile;
-		//
-		// tube.validateConnections();
-		// tube.searchForMissingConnection();
-		// }
-		// }
+		TileEntity tile = world.getBlockTileEntity(x, y, z);
+		if (tile != null) {
+			if (tile instanceof TileEntityVacuumTube) {
+				TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
+
+				// tube.validateConnections();
+				// tube.searchForMissingConnection();
+				tube.onNeighborTileChange();
+			}
+		}
 		super.onNeighborTileChange(world, x, y, z, tileX, tileY, tileZ);
 	}
 
@@ -156,17 +156,18 @@ public class BlockVacuumTube extends BlockContainer {
 			float par8, float par9) {
 
 		if (par1World.isRemote) {
-            return true;
-        }
+			return true;
+		}
 
 		ItemStack item = par5EntityPlayer.getCurrentEquippedItem();
 		if (item != null && item.getItem() instanceof IInterfaceDevice) {
 			TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
-			if (tile != null) if (tile instanceof TileEntityVacuumTube) {
-                TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
-                tube.searchForConnection();
-                return true;
-            }
+			if (tile != null)
+				if (tile instanceof TileEntityVacuumTube) {
+					TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
+					tube.searchForConnection();
+					return true;
+				}
 		}
 		return false;
 	}
@@ -176,8 +177,9 @@ public class BlockVacuumTube extends BlockContainer {
 			int par4, Entity par5Entity) {
 		if (par5Entity instanceof EntityItem) {
 			TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
-            if (tile == null || !(tile instanceof TileEntityVacuumTube)) return;
-            TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
+			if (tile == null || !(tile instanceof TileEntityVacuumTube))
+				return;
+			TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
 			tube.OnItemEntityCollision((EntityItem) par5Entity);
 		}
 	}
@@ -209,8 +211,9 @@ public class BlockVacuumTube extends BlockContainer {
 				par6List, par7Entity);
 
 		TileEntity tile = par1World.getBlockTileEntity(x, y, z);
-        if (tile == null || !(tile instanceof TileEntityVacuumTube)) return;
-        TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
+		if (tile == null || !(tile instanceof TileEntityVacuumTube))
+			return;
+		TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
 
 		AxisAlignedBB inputBB = boundingBoxForDirection(tube.getInput(), x, y,
 				z);
@@ -286,8 +289,9 @@ public class BlockVacuumTube extends BlockContainer {
 				(double) z + getBlockBoundsMaxZ());
 
 		TileEntity tile = par1World.getBlockTileEntity(x, y, z);
-        if (tile == null || !(tile instanceof TileEntityVacuumTube)) return box;
-        TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
+		if (tile == null || !(tile instanceof TileEntityVacuumTube))
+			return box;
+		TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
 
 		AxisAlignedBB inputBB = boundingBoxForDirection(tube.getInput(), x, y,
 				z);
@@ -300,19 +304,18 @@ public class BlockVacuumTube extends BlockContainer {
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess,
 			int x, int y, int z) {
-        AxisAlignedBB.getAABBPool().getAABB(
-                (double) x + 4.f / 16.f, (double) y + 4.f / 16.f,
-                (double) z + 4.f / 16.f, (double) x + 12.f / 16.f,
-                (double) y + 12.f / 16.f, (double) z + 12.f / 16.f);
+		AxisAlignedBB.getAABBPool().getAABB((double) x + 4.f / 16.f,
+				(double) y + 4.f / 16.f, (double) z + 4.f / 16.f,
+				(double) x + 12.f / 16.f, (double) y + 12.f / 16.f,
+				(double) z + 12.f / 16.f);
 
 		TileEntity tile = par1iBlockAccess.getBlockTileEntity(x, y, z);
-        if (tile == null || !(tile instanceof TileEntityVacuumTube)) return;
-        TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
+		if (tile == null || !(tile instanceof TileEntityVacuumTube))
+			return;
+		TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
 
-        boundingBoxForDirection(tube.getInput(), x, y,
-                z);
-        boundingBoxForDirection(tube.getOutput(), x,
-                y, z);
+		boundingBoxForDirection(tube.getInput(), x, y, z);
+		boundingBoxForDirection(tube.getOutput(), x, y, z);
 
 		double minX = 4.d / 16.d;
 		double minY = 4.d / 16.d;

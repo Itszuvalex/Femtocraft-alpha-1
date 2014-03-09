@@ -52,6 +52,7 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 
 	private boolean overflowing = false;
 	private boolean canFillInv = true;
+	private boolean canExtractInv = true;
 
 	private boolean needsCheckInput = false;
 	private boolean needsCheckOutput = false;
@@ -102,6 +103,8 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 				hasItem[0] = true;
 			}
 
+			worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
+
 			return true;
 		}
 
@@ -132,6 +135,8 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+
+		worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
 	}
 
 	@Override
@@ -148,6 +153,8 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+
+		worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
 	}
 
 	@Override
@@ -286,6 +293,7 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 			inputDir = dir;
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+			worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
 			return true;
 		}
 
@@ -298,6 +306,7 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 			inputTube.setOutput(dir.getOpposite());
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+			worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
 			return true;
 		}
 
@@ -308,6 +317,7 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 			inputInv = (IInventory) tile;
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+			worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
 			return true;
 		}
 
@@ -341,6 +351,7 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 			outputDir = dir;
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+			worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
 			return true;
 		}
 
@@ -353,6 +364,7 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 			outputTube.setInput(dir.getOpposite());
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+			worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
 			return true;
 		}
 
@@ -363,6 +375,7 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 			outputInv = (IInventory) tile;
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+			worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
 			return true;
 		}
 
@@ -425,6 +438,7 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 		tube.worldObj.markBlockForUpdate(tube.xCoord, tube.yCoord, tube.zCoord);
 		tube.worldObj.markBlockForRenderUpdate(tube.xCoord, tube.yCoord,
 				tube.zCoord);
+		worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
 	}
 
 	private void setupSendToTube(TileEntityVacuumTube tube, ForgeDirection dir) {
@@ -435,6 +449,7 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 		tube.worldObj.markBlockForUpdate(tube.xCoord, tube.yCoord, tube.zCoord);
 		tube.worldObj.markBlockForRenderUpdate(tube.xCoord, tube.yCoord,
 				tube.zCoord);
+		worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
 	}
 
 	private void removeReceiveFromTube(TileEntityVacuumTube tube) {
@@ -446,6 +461,7 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 		tube.worldObj.markBlockForUpdate(tube.xCoord, tube.yCoord, tube.zCoord);
 		tube.worldObj.markBlockForRenderUpdate(tube.xCoord, tube.yCoord,
 				tube.zCoord);
+		worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
 	}
 
 	private void removeSendToTube(TileEntityVacuumTube tube) {
@@ -457,6 +473,7 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 		tube.worldObj.markBlockForUpdate(tube.xCoord, tube.yCoord, tube.zCoord);
 		tube.worldObj.markBlockForRenderUpdate(tube.xCoord, tube.yCoord,
 				tube.zCoord);
+		worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
 	}
 
 	public void validateConnections() {
@@ -470,6 +487,8 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 				inputSidedInv = null;
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+				worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord,
+						this);
 			} else {
 				setInput(inputDir);
 			}
@@ -484,6 +503,8 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 				outputSidedInv = null;
 				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+				worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord,
+						this);
 			} else {
 				setOutput(outputDir);
 			}
@@ -496,7 +517,7 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 		if (!missingInput())
 			return;
 
-		queuedItem = ItemStack.copyItemStack(item.getEntityItem());
+		insertItem(ItemStack.copyItemStack(item.getEntityItem()));
 		worldObj.removeEntity(item);
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
@@ -561,6 +582,11 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 		par1nbtTagCompound.setByte("Connections", generateConnectionMask());
 	}
 
+	public void onNeighborTileChange() {
+		canFillInv = true;
+		canExtractInv = true;
+	}
+
 	@Override
 	public void updateEntity() {
 
@@ -594,31 +620,99 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 					hasItem[3] = false;
 					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 					worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+					worldObj.markTileEntityChunkModified(xCoord, yCoord,
+							zCoord, this);
 				}
 			} else if (outputSidedInv != null) {
-				canFillInv = true;
-				int side = FemtocraftUtils.indexOfForgeDirection(outputDir
-						.getOpposite());
-				int[] slots = outputSidedInv.getAccessibleSlotsFromSide(side);
-				int invMax = outputSidedInv.getInventoryStackLimit();
-				for (int i = 0; i < slots.length && items[3] != null; i++) {
-					if (outputSidedInv.canInsertItem(slots[i], items[3], side)) {
-						if (outputSidedInv.isItemValidForSlot(slots[i],
-								items[3])) {
-							ItemStack slotStack = outputSidedInv
-									.getStackInSlot(slots[i]);
+				if (canFillInv) {
+					int side = FemtocraftUtils.indexOfForgeDirection(outputDir
+							.getOpposite());
+					int[] slots = outputSidedInv
+							.getAccessibleSlotsFromSide(side);
+					int invMax = outputSidedInv.getInventoryStackLimit();
+					for (int i = 0; i < slots.length && items[3] != null; i++) {
+						if (outputSidedInv.canInsertItem(slots[i], items[3],
+								side)) {
+							if (outputSidedInv.isItemValidForSlot(slots[i],
+									items[3])) {
+								ItemStack slotStack = outputSidedInv
+										.getStackInSlot(slots[i]);
+
+								// If no items in that slot
+								if (slotStack == null) {
+									outputSidedInv.setInventorySlotContents(
+											slots[i], items[3].copy());
+									items[3] = null;
+									hasItem[3] = false;
+									worldObj.markBlockForUpdate(xCoord, yCoord,
+											zCoord);
+									worldObj.markBlockForRenderUpdate(xCoord,
+											yCoord, zCoord);
+									worldObj.markTileEntityChunkModified(
+											xCoord, yCoord, zCoord, this);
+									outputSidedInv.onInventoryChanged();
+								}
+								// Combine items
+								else {
+									// Account for possible mismatch
+									if (items[3].itemID != slotStack.itemID)
+										continue;
+									if (!items[3].isStackable())
+										continue;
+
+									int itemMax = slotStack.getMaxStackSize();
+									int max = invMax > itemMax ? itemMax
+											: invMax;
+									int room = max - slotStack.stackSize;
+									int amount = room > items[3].stackSize ? items[3].stackSize
+											: room;
+									slotStack.stackSize += amount;
+									items[3].stackSize -= amount;
+									if (items[3].stackSize <= 0) {
+										items[3] = null;
+										hasItem[3] = false;
+										worldObj.markBlockForUpdate(xCoord,
+												yCoord, zCoord);
+										worldObj.markBlockForRenderUpdate(
+												xCoord, yCoord, zCoord);
+									}
+									worldObj.markTileEntityChunkModified(
+											xCoord, yCoord, zCoord, this);
+									outputSidedInv.onInventoryChanged();
+								}
+							}
+						}
+					}
+					if (items[3] != null) {
+						canFillInv = false;
+						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+						worldObj.markBlockForRenderUpdate(xCoord, yCoord,
+								zCoord);
+						worldObj.markTileEntityChunkModified(xCoord, yCoord,
+								zCoord, this);
+					}
+				}
+			} else if (outputInv != null) {
+				if (canFillInv) {
+					int size = outputInv.getSizeInventory();
+					int invMax = outputInv.getInventoryStackLimit();
+					for (int i = 0; i < size && items[3] != null; i++) {
+						if (outputInv.isItemValidForSlot(i, items[3])) {
+							ItemStack slotStack = outputInv.getStackInSlot(i);
 
 							// If no items in that slot
 							if (slotStack == null) {
-								outputSidedInv.setInventorySlotContents(
-										slots[i], items[3].copy());
+								outputInv.setInventorySlotContents(i,
+										items[3].copy());
 								items[3] = null;
 								hasItem[3] = false;
 								worldObj.markBlockForUpdate(xCoord, yCoord,
 										zCoord);
 								worldObj.markBlockForRenderUpdate(xCoord,
 										yCoord, zCoord);
-								outputSidedInv.onInventoryChanged();
+								worldObj.markTileEntityChunkModified(xCoord,
+										yCoord, zCoord, this);
+								outputInv.onInventoryChanged();
 							}
 							// Combine items
 							else {
@@ -643,66 +737,19 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 									worldObj.markBlockForRenderUpdate(xCoord,
 											yCoord, zCoord);
 								}
-								outputSidedInv.onInventoryChanged();
+								worldObj.markTileEntityChunkModified(xCoord,
+										yCoord, zCoord, this);
+								outputInv.onInventoryChanged();
 							}
 						}
-					}
-				}
-				if (items[3] != null) {
-					canFillInv = false;
-					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-					worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-				}
-			} else if (outputInv != null) {
-				canFillInv = true;
-				int size = outputInv.getSizeInventory();
-				int invMax = outputInv.getInventoryStackLimit();
-				for (int i = 0; i < size && items[3] != null; i++) {
-					if (outputInv.isItemValidForSlot(i, items[3])) {
-						ItemStack slotStack = outputInv.getStackInSlot(i);
 
-						// If no items in that slot
-						if (slotStack == null) {
-							outputInv.setInventorySlotContents(i,
-									items[3].copy());
-							items[3] = null;
-							hasItem[3] = false;
-							worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-							worldObj.markBlockForRenderUpdate(xCoord, yCoord,
-									zCoord);
-							outputInv.onInventoryChanged();
-						}
-						// Combine items
-						else {
-							// Account for possible mismatch
-							if (items[3].itemID != slotStack.itemID)
-								continue;
-							if (!items[3].isStackable())
-								continue;
-
-							int itemMax = slotStack.getMaxStackSize();
-							int max = invMax > itemMax ? itemMax : invMax;
-							int room = max - slotStack.stackSize;
-							int amount = room > items[3].stackSize ? items[3].stackSize
-									: room;
-							slotStack.stackSize += amount;
-							items[3].stackSize -= amount;
-							if (items[3].stackSize <= 0) {
-								items[3] = null;
-								hasItem[3] = false;
-								worldObj.markBlockForUpdate(xCoord, yCoord,
-										zCoord);
-								worldObj.markBlockForRenderUpdate(xCoord,
-										yCoord, zCoord);
-							}
-							outputInv.onInventoryChanged();
-						}
 					}
-				}
-				if (items[3] != null) {
-					canFillInv = false;
-					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-					worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+					if (items[3] != null) {
+						canFillInv = false;
+						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+						worldObj.markBlockForRenderUpdate(xCoord, yCoord,
+								zCoord);
+					}
 				}
 			} else if (missingOutput()) {
 				ejectItem(3);
@@ -716,6 +763,8 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 				if (hasItem[i]) {
 					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 					worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+					worldObj.markTileEntityChunkModified(xCoord, yCoord,
+							zCoord, this);
 				}
 
 				hasItem[i + 1] = hasItem[i];
@@ -741,39 +790,56 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 			queuedItem = null;
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+			worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
 		}
 		// Pull from inventory
 		else if (inputSidedInv != null) {
-			int side = FemtocraftUtils.indexOfForgeDirection(inputDir
-					.getOpposite());
-			int[] slots = inputSidedInv.getAccessibleSlotsFromSide(side);
-			for (int slot : slots) {
-				ItemStack stack = inputSidedInv.getStackInSlot(slot);
-				if (stack != null) {
-					if (!inputSidedInv.canExtractItem(slot, stack, side))
-						continue;
-
-					items[0] = inputSidedInv.decrStackSize(slot, 64);
-					hasItem[0] = true;
-					inputSidedInv.onInventoryChanged();
-					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-					worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-					return;
+			if (canExtractInv) {
+				boolean extracted = false;
+				int side = FemtocraftUtils.indexOfForgeDirection(inputDir
+						.getOpposite());
+				int[] slots = inputSidedInv.getAccessibleSlotsFromSide(side);
+				for (int slot : slots) {
+					ItemStack stack = inputSidedInv.getStackInSlot(slot);
+					if (stack != null) {
+						if (!inputSidedInv.canExtractItem(slot, stack, side))
+							continue;
+						extracted = true;
+						items[0] = inputSidedInv.decrStackSize(slot, 64);
+						hasItem[0] = true;
+						inputSidedInv.onInventoryChanged();
+						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+						worldObj.markBlockForRenderUpdate(xCoord, yCoord,
+								zCoord);
+						worldObj.markTileEntityChunkModified(xCoord, yCoord,
+								zCoord, this);
+						return;
+					}
 				}
+				if (!extracted)
+					canExtractInv = false;
 			}
-
 		} else if (inputInv != null) {
-			int size = inputInv.getSizeInventory();
-			for (int i = 0; i < size; i++) {
-				ItemStack stack = inputInv.getStackInSlot(i);
-				if (stack != null) {
-					items[0] = inputInv.decrStackSize(i, 64);
-					hasItem[0] = true;
-					inputInv.onInventoryChanged();
-					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-					worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-					return;
+			if (canExtractInv) {
+				boolean extracted = false;
+				int size = inputInv.getSizeInventory();
+				for (int i = 0; i < size; i++) {
+					ItemStack stack = inputInv.getStackInSlot(i);
+					if (stack != null) {
+						extracted = true;
+						items[0] = inputInv.decrStackSize(i, 64);
+						hasItem[0] = true;
+						inputInv.onInventoryChanged();
+						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+						worldObj.markBlockForRenderUpdate(xCoord, yCoord,
+								zCoord);
+						worldObj.markTileEntityChunkModified(xCoord, yCoord,
+								zCoord, this);
+						return;
+					}
 				}
+				if (!extracted)
+					canExtractInv = false;
 			}
 		}
 		// Suck them in, only if room
@@ -810,6 +876,7 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 		hasItem[slot] = false;
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+		worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
 	}
 
 	private void ejectItemStack(ItemStack dropItem) {
