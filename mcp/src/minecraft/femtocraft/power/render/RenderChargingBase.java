@@ -1,7 +1,7 @@
 package femtocraft.power.render;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import femtocraft.power.blocks.BlockBaseMicroCharging;
+import femtocraft.power.blocks.BlockMicroChargingBase;
 import femtocraft.proxy.ProxyClient;
 import femtocraft.render.RenderModel;
 import femtocraft.render.RenderPoint;
@@ -22,7 +22,7 @@ public class RenderChargingBase implements
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
-		BlockBaseMicroCharging base = (BlockBaseMicroCharging) block;
+		BlockMicroChargingBase base = (BlockMicroChargingBase) block;
 		if (base == null)
 			return;
 
@@ -42,7 +42,7 @@ public class RenderChargingBase implements
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
 			Block block, int modelId, RenderBlocks renderer) {
-		BlockBaseMicroCharging base = (BlockBaseMicroCharging) block;
+		BlockMicroChargingBase base = (BlockMicroChargingBase) block;
 		if (base == null)
 			return false;
 
@@ -65,7 +65,7 @@ public class RenderChargingBase implements
 		return ProxyClient.FemtocraftChargingBaseRenderID;
 	}
 
-	void renderBase(BlockBaseMicroCharging base, int x, int y, int z) {
+	void renderBase(BlockMicroChargingBase base, int x, int y, int z) {
 		if (base_model == null) {
 			createBase(base);
 		}
@@ -74,7 +74,7 @@ public class RenderChargingBase implements
 		base_model.draw();
 	}
 
-	void createBase(BlockBaseMicroCharging base) {
+	void createBase(BlockMicroChargingBase base) {
 		base_model = new RenderModel();
 
 		// Normal faces

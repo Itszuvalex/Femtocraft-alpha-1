@@ -14,11 +14,11 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockCoilMicroCharging extends Block implements IChargingCoil {
+public class BlockMicroChargingCoil extends Block implements IChargingCoil {
 	public Icon coilConnector;
 	public Icon coilConnectorTop;
 
-	public BlockCoilMicroCharging(int par1) {
+	public BlockMicroChargingCoil(int par1) {
 		super(par1, Material.iron);
 		setCreativeTab(Femtocraft.femtocraftTab);
 		setUnlocalizedName("BlockCoilMicroCharging");

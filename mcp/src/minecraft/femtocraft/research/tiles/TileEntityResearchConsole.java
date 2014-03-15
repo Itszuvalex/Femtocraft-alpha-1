@@ -16,7 +16,7 @@ import femtocraft.managers.research.ResearchTechnology;
 
 public class TileEntityResearchConsole extends TileEntityBase implements
 		IInventory {
-	public static final String PACKET_CHANNEL = Femtocraft.ID + "." + "rcon";
+	public static final String PACKET_CHANNEL = "Femtocraft" + "." + "rcon";
 
 	public @Saveable(desc = true)
 	String displayTech = null;

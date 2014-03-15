@@ -14,7 +14,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class BlockBaseMicroCharging extends BlockPowerContainer implements
+public class BlockMicroChargingBase extends BlockPowerContainer implements
 		IChargingBase {
 	public Icon side;
 	public Icon top;
@@ -27,7 +27,7 @@ public class BlockBaseMicroCharging extends BlockPowerContainer implements
 	public Icon top_pillar_top;
 	public Icon top_pillar_side;
 
-	public BlockBaseMicroCharging(int par1) {
+	public BlockMicroChargingBase(int par1) {
 		super(par1, Material.iron);
 		setCreativeTab(Femtocraft.femtocraftTab);
 		setUnlocalizedName("BlockBaseMicroCharging");

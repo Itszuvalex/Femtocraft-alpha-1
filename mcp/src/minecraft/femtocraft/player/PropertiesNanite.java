@@ -15,7 +15,7 @@ import java.io.*;
 
 public class PropertiesNanite implements IExtendedEntityProperties {
 	public final static String PROP_TAG = "femtocraft.nanite.properties";
-	public final static String PACKET_CHANNEL = Femtocraft.ID + "." + "NProp";
+	public final static String PACKET_CHANNEL = "Femtocraft" + "." + "NProp";
 
 	private final EntityPlayer player;
 
@@ -32,8 +32,7 @@ public class PropertiesNanite implements IExtendedEntityProperties {
 	}
 
 	public static PropertiesNanite get(EntityPlayer player) {
-		return (PropertiesNanite) player
-				.getExtendedProperties(PROP_TAG);
+		return (PropertiesNanite) player.getExtendedProperties(PROP_TAG);
 	}
 
 	public void setCurrentGoo(int amount) {

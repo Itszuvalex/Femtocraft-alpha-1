@@ -17,7 +17,6 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
-import femtocraft.Femtocraft;
 import femtocraft.FemtocraftDataUtils.Saveable;
 import femtocraft.FemtocraftUtils;
 import femtocraft.api.IVacuumTube;
@@ -29,7 +28,7 @@ public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 	// hasItem array for client-side rendering only
 	// Server will update this array and this alone to save bytes
 	// Player has no need to know WHAT is in the pipes, anyways
-	static final public String packetChannel = Femtocraft.ID + ".VTube";
+	static final public String packetChannel = "Femtocraft" + ".VTube";
 
 	// Will not be @Saveable due to bit masking
 	public boolean[] hasItem = new boolean[4];

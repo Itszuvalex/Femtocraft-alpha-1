@@ -1,7 +1,7 @@
 package femtocraft.power.render;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import femtocraft.power.blocks.BlockCoilMicroCharging;
+import femtocraft.power.blocks.BlockMicroChargingCoil;
 import femtocraft.proxy.ProxyClient;
 import femtocraft.render.RenderModel;
 import femtocraft.render.RenderPoint;
@@ -23,7 +23,7 @@ public class RenderChargingCoil implements
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
-		BlockCoilMicroCharging coil = (BlockCoilMicroCharging) block;
+		BlockMicroChargingCoil coil = (BlockMicroChargingCoil) block;
 		if (coil == null)
 			return;
 
@@ -42,7 +42,7 @@ public class RenderChargingCoil implements
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
 			Block block, int modelId, RenderBlocks renderer) {
-		BlockCoilMicroCharging coil = (BlockCoilMicroCharging) block;
+		BlockMicroChargingCoil coil = (BlockMicroChargingCoil) block;
 		if (coil == null)
 			return false;
 
@@ -65,7 +65,7 @@ public class RenderChargingCoil implements
 		return ProxyClient.FemtocraftChargingCoilRenderID;
 	}
 
-	private void renderCoil(BlockCoilMicroCharging coil, int x, int y, int z) {
+	private void renderCoil(BlockMicroChargingCoil coil, int x, int y, int z) {
 		if (segment == null) {
 			createSegment(coil);
 		}
@@ -76,7 +76,7 @@ public class RenderChargingCoil implements
 		segment.draw();
 	}
 
-	private void createSegment(BlockCoilMicroCharging coil) {
+	private void createSegment(BlockMicroChargingCoil coil) {
 		segment = new RenderModel();
 
 		float minY = 0;

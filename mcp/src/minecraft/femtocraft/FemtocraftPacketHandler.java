@@ -5,18 +5,15 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 import femtocraft.managers.research.ManagerResearch;
@@ -48,7 +45,8 @@ public class FemtocraftPacketHandler implements IPacketHandler {
 			handleVacuumTube(inputStream, playerEntity);
 			return;
 		}
-		if (packet.channel.equalsIgnoreCase(TileEntityResearchConsole.PACKET_CHANNEL)) {
+		if (packet.channel
+				.equalsIgnoreCase(TileEntityResearchConsole.PACKET_CHANNEL)) {
 			handleResearchConsole(inputStream, playerEntity);
 		}
 

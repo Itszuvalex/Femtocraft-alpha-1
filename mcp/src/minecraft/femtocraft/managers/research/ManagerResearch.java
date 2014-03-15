@@ -30,7 +30,7 @@ public class ManagerResearch {
 	private static final String dataKey = "data";
 	private static final String userKey = "username";
 
-	public static final String RESEARCH_CHANNEL = Femtocraft.ID + ".rman";
+	public static final String RESEARCH_CHANNEL = "Femtocraft" + ".rman";
 	private HashMap<String, ResearchTechnology> technologies;
 	private HashMap<String, ResearchPlayer> playerData;
 
@@ -65,8 +65,9 @@ public class ManagerResearch {
 					Femtocraft.microCircuitBoard), new ItemStack(
 					Femtocraft.ingotTemperedTitanium), new ItemStack(
 					Femtocraft.microCircuitBoard), new ItemStack(
-					Femtocraft.ingotTemperedTitanium))), GuiTechnologyMachining.class,
-			new ItemStack(Femtocraft.itemMicroPlating));
+					Femtocraft.ingotTemperedTitanium))),
+			GuiTechnologyMachining.class, new ItemStack(
+					Femtocraft.itemMicroPlating));
 	public static ResearchTechnology technologyPaperSchematic = new ResearchTechnology(
 			"Paper Schematic", "Like IKEA for reality!", EnumTechLevel.MICRO,
 			new ArrayList<ResearchTechnology>(Arrays.asList(
@@ -74,8 +75,8 @@ public class ManagerResearch {
 			new ItemStack(Femtocraft.paperSchematic), 1, -1, false,
 			new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Item.paper),
 					new ItemStack(Item.paper), new ItemStack(Item.paper))),
-			GuiTechnologyPaperSchematic.class,
-			new ItemStack(Femtocraft.paperSchematic, 1));
+			GuiTechnologyPaperSchematic.class, new ItemStack(
+					Femtocraft.paperSchematic, 1));
 
 	public ManagerResearch() {
 		technologies = new HashMap<String, ResearchTechnology>();

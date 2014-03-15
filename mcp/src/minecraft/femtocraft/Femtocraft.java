@@ -90,8 +90,8 @@ import femtocraft.industry.items.ItemPaperSchematic;
 import femtocraft.managers.ManagerRecipe;
 import femtocraft.managers.research.ManagerResearch;
 import femtocraft.player.PropertiesNanite;
-import femtocraft.power.blocks.BlockBaseMicroCharging;
-import femtocraft.power.blocks.BlockCoilMicroCharging;
+import femtocraft.power.blocks.BlockMicroChargingBase;
+import femtocraft.power.blocks.BlockMicroChargingCoil;
 import femtocraft.power.blocks.BlockConsumer;
 import femtocraft.power.blocks.BlockFemtoCable;
 import femtocraft.power.blocks.BlockGenerator;
@@ -118,7 +118,8 @@ import femtocraft.transport.liquids.blocks.BlockSuctionPipe;
 
 @Mod(modid = Femtocraft.ID, name = "Femtocraft", version = Femtocraft.VERSION)
 @NetworkMod(channels = { Femtocraft.ID, PropertiesNanite.PACKET_CHANNEL,
-		ManagerResearch.RESEARCH_CHANNEL, TileEntityResearchConsole.PACKET_CHANNEL,
+		ManagerResearch.RESEARCH_CHANNEL,
+		TileEntityResearchConsole.PACKET_CHANNEL,
 		TileEntityVacuumTube.packetChannel }, packetHandler = FemtocraftPacketHandler.class, clientSideRequired = true, serverSideRequired = true)
 public class Femtocraft {
 	public static final String ID = "Femtocraft";
@@ -423,13 +424,13 @@ public class Femtocraft {
 		GameRegistry.registerBlock(suctionPipe, "BlockSuctionPipe");
 		LanguageRegistry.addName(suctionPipe, "Suction Pipe");
 
-		microChargingBase = new BlockBaseMicroCharging(
+		microChargingBase = new BlockMicroChargingBase(
 				FemtocraftConfigs.FemtopowerMicroChargingBaseID);
 		GameRegistry.registerBlock(microChargingBase, "BlockBaseMicroCharging");
 		LanguageRegistry.addName(microChargingBase,
 				"Electrostatic Charging Base");
 
-		microChargingCoil = new BlockCoilMicroCharging(
+		microChargingCoil = new BlockMicroChargingCoil(
 				FemtocraftConfigs.FemtopowerMicroChargingCoilID);
 		GameRegistry.registerBlock(microChargingCoil, "BlockCoilMicroCharging");
 		LanguageRegistry.addName(microChargingCoil,
