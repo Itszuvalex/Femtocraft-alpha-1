@@ -82,10 +82,9 @@ public class MultiBlockNanoCube implements IMultiBlock {
 				if (i == 0 && j == 0)
 					continue;
 				if (i == 0 || j == 0) {
-					if (world.getBlockId(x + i, y + 1, z + j) != FemtocraftConfigs.FemtopowerNanoCubePortID)
-						if (world.getBlockId(x + i, y, z + j) != FemtocraftConfigs.FemtopowerNanoCubePortID) {
-							return false;
-						}
+					if (world.getBlockId(x + i, y + 1, z + j) != FemtocraftConfigs.FemtopowerNanoCubePortID) {
+						return false;
+					}
 				} else {
 					if (world.getBlockId(x + i, y + 1, z + j) != FemtocraftConfigs.FemtopowerNanoCubeFrameID) {
 						return false;
@@ -162,13 +161,12 @@ public class MultiBlockNanoCube implements IMultiBlock {
 					TileEntity te = world.getBlockTileEntity(x + i, y + k, z
 							+ j);
 					if (te == null || !(te instanceof IMultiBlockComponent)) {
-						if (i == 0 && j == 0 && k == 1) {
-						} else {
+						if (!(i == 0 && j == 0 && k == 1)) {
 							result = false;
 						}
 					} else {
 						result = ((IMultiBlockComponent) te).formMultiBlock(
-										world, x, y, z) && result;
+								world, x, y, z) && result;
 					}
 				}
 			}
@@ -203,13 +201,12 @@ public class MultiBlockNanoCube implements IMultiBlock {
 					TileEntity te = world.getBlockTileEntity(x + i, y + k, z
 							+ j);
 					if (te == null || !(te instanceof IMultiBlockComponent)) {
-						if (i == 0 && j == 0 && k == 1) {
-						} else {
+						if (!(i == 0 && j == 0 && k == 1)) {
 							result = false;
 						}
 					} else {
 						result = ((IMultiBlockComponent) te).breakMultiBlock(
-										world, x, y, z) && result;
+								world, x, y, z) && result;
 					}
 				}
 			}

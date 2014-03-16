@@ -85,29 +85,41 @@ public class FemtocraftConfigs {
 	public static @CfgId(block = true)
 	int FemtocraftMicroEncoderID = 377;
 	public static @CfgId(block = true)
-	int FemtocraftNanoInnervatorID = 378;
+	int FemtocraftMicroCrystallizerPlatformID = 378;
 	public static @CfgId(block = true)
-	int FemtocraftNanoDismantlerID = 379;
+	int FemtocraftMicroCrystallizerShieldingID = 379;
 	public static @CfgId(block = true)
-	int FemtocraftNanoFabricatorID = 380;
+	int FemtocraftNanoInnervatorID = 380;
 	public static @CfgId(block = true)
-	int FemtocraftNanoEnmesherID = 381;
+	int FemtocraftNanoDismantlerID = 381;
 	public static @CfgId(block = true)
-	int FemtocraftNanoHorologeID = 382;
+	int FemtocraftNanoFabricatorID = 382;
 	public static @CfgId(block = true)
-	int FemtocraftFemtoImpulserID = 383;
+	int FemtocraftNanoEnmesherID = 383;
 	public static @CfgId(block = true)
-	int FemtocraftFemtoRepurposerID = 384;
+	int FemtocraftNanoHorologeID = 384;
 	public static @CfgId(block = true)
-	int FemtocraftFemtoCoagulatorID = 385;
+	int FemtocraftNanoEfflorescerPlatformID = 385;
 	public static @CfgId(block = true)
-	int FemtocraftFemtoEntanglerID = 386;
+	int FemtocraftNanoEfflorescerPShieldingID = 386;
 	public static @CfgId(block = true)
-	int FemtocraftFemtoChronoshifterID = 387;
+	int FemtocraftFemtoImpulserID = 387;
 	public static @CfgId(block = true)
-	int FemtocraftVacuumTubeID = 390;
+	int FemtocraftFemtoRepurposerID = 388;
 	public static @CfgId(block = true)
-	int FemtocraftSuctionPipeID = 391;
+	int FemtocraftFemtoCoagulatorID = 389;
+	public static @CfgId(block = true)
+	int FemtocraftFemtoEntanglerID = 390;
+	public static @CfgId(block = true)
+	int FemtocraftFemtoChronoshifterID = 391;
+	public static @CfgId(block = true)
+	int FemtocraftFemtoQuantumUnravelerPlatformID = 392;
+	public static @CfgId(block = true)
+	int FemtocraftFemtoQuantumUnravelerShieldingID = 393;
+	public static @CfgId(block = true)
+	int FemtocraftVacuumTubeID = 394;
+	public static @CfgId(block = true)
+	int FemtocraftSuctionPipeID = 395;
 
 	public static @CfgId(block = true)
 	int FemtopowerMicroCubeID = 400;
@@ -120,14 +132,26 @@ public class FemtocraftConfigs {
 	public static @CfgId(block = true)
 	int FemtopowerNanoCubePortID = 406;
 	public static @CfgId(block = true)
-	int FemtopowerFemtoCubeFrameID = 407;
+	int FemtopowerNanoFissionReactorHousingID = 407;
 	public static @CfgId(block = true)
-	int FemtopowerFemtoCubeChassisId = 408;
+	int FemtopowerNanoFissionReactorCoreID = 408;
 	public static @CfgId(block = true)
-	int FemtopowerFemtoCubePort = 409;
+	int FemtopowerFemtoCubeFrameID = 409;
+	public static @CfgId(block = true)
+	int FemtopowerFemtoCubeChassisID = 410;
+	public static @CfgId(block = true)
+	int FemtopowerFemtoCubePortID = 411;
+	public static @CfgId(block = true)
+	int FemtopowerFemtoStelleratorCoreID = 412;
+	public static @CfgId(block = true)
+	int FemtopowerFemtoStelleratorFocusID = 413;
+	public static @CfgId(block = true)
+	int FemtopowerFemtoStellaratorHousingID = 414;
+	public static @CfgId(block = true)
+	int FemtopowerFemtoStellaratorOpticalMaserID = 415;
 
 	public static @CfgId(block = true)
-	int FemtocraftMassBlock = 450;
+	int FemtocraftMassBlockID = 450;
 
 	public static @CfgId(block = true)
 	int microCableID = 500;
@@ -257,7 +281,7 @@ public class FemtocraftConfigs {
 	int SynthesizedFiberID = 12068;
 	public static @CfgId
 	int OrganometallicPlateID = 12069;
-	
+
 	public static @CfgId
 	int microPlatingID = 12100;
 
