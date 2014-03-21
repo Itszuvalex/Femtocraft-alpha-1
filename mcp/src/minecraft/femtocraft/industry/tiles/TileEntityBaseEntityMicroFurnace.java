@@ -1,20 +1,18 @@
 package femtocraft.industry.tiles;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import femtocraft.FemtocraftDataUtils.Saveable;
-import femtocraft.industry.blocks.BlockMicroFurnace;
-import femtocraft.managers.research.EnumTechLevel;
-import femtocraft.power.tiles.TileEntityPowerConsumer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.FemtocraftDataUtils.Saveable;
+import femtocraft.industry.blocks.BlockMicroFurnace;
+import femtocraft.managers.research.EnumTechLevel;
 
-public class TileEntityBaseEntityMicroFurnace extends TileEntityPowerConsumer
-		implements ISidedInventory {
+public class TileEntityBaseEntityMicroFurnace extends
+		TileEntityBaseEntityIndustry implements ISidedInventory {
 	public TileEntityBaseEntityMicroFurnace() {
 		super();
 		setMaxStorage(800);
@@ -223,45 +221,12 @@ public class TileEntityBaseEntityMicroFurnace extends TileEntityPowerConsumer
 		return this.furnaceCookTime * par1 / ticksToCook;
 	}
 
-	/**
-	 * Allows the entity to update its state. Overridden in most subclasses,
-	 * e.g. the mob spawner uses this to count ticks and creates a new spawn
-	 * inside its implementation.
-	 */
 	@Override
-	public void updateEntity() {
-		super.updateEntity();
-
-		boolean flag1 = false;
-
-		if (this.worldObj.isRemote)
-			return;
-
-		if (smeltingStack != null) {
-			if (this.furnaceCookTime == ticksToCook) {
-				this.furnaceCookTime = 0;
-				this.endSmelt();
-				flag1 = true;
-			}
-
-			++this.furnaceCookTime;
-		} else if (this.canSmelt()) {
-			this.startSmelt();
-			flag1 = true;
-		} else {
-			this.furnaceCookTime = 0;
-		}
-
-		if (flag1) {
-			this.onInventoryChanged();
-		}
+	public boolean isWorking() {
+		return smeltingStack != null;
 	}
 
-	/**
-	 * Returns true if the furnace can smelt an item, i.e. has a source item,
-	 * destination stack isn't full, etc.
-	 */
-	private boolean canSmelt() {
+	protected boolean canStartWork() {
 		if (this.furnaceItemStacks[0] == null) {
 			return false;
 		}
@@ -284,7 +249,7 @@ public class TileEntityBaseEntityMicroFurnace extends TileEntityPowerConsumer
 		}
 	}
 
-	public void startSmelt() {
+	protected void startWork() {
 		this.smeltingStack = this.furnaceItemStacks[0].copy();
 		this.smeltingStack.stackSize = 1;
 
@@ -297,9 +262,19 @@ public class TileEntityBaseEntityMicroFurnace extends TileEntityPowerConsumer
 		this.consume(powerToCook);
 		BlockMicroFurnace.updateFurnaceBlockState(true, this.worldObj,
 				this.xCoord, this.yCoord, this.zCoord);
+
+		this.onInventoryChanged();
 	}
 
-	public void endSmelt() {
+	protected void continueWork() {
+		++furnaceCookTime;
+	}
+
+	protected boolean canFinishWork() {
+		return furnaceCookTime == ticksToCook;
+	}
+
+	protected void finishWork() {
 		ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(
 				this.smeltingStack);
 
@@ -314,11 +289,10 @@ public class TileEntityBaseEntityMicroFurnace extends TileEntityPowerConsumer
 			smeltingStack = null;
 			BlockMicroFurnace.updateFurnaceBlockState(false, this.worldObj,
 					this.xCoord, this.yCoord, this.zCoord);
+			this.onInventoryChanged();
 		}
-	}
 
-	public boolean isSmelting() {
-		return smeltingStack != null;
+		furnaceCookTime = 0;
 	}
 
 	/**

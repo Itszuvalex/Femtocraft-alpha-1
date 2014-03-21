@@ -311,7 +311,7 @@ public class BlockMicroFurnace extends BlockContainer {
 					}
 				}
 
-				if (tileentityfurnace.isSmelting()) {
+				if (tileentityfurnace.isWorking()) {
 					ItemStack itemstack = tileentityfurnace.smeltingStack;
 
 					if (itemstack != null) {
