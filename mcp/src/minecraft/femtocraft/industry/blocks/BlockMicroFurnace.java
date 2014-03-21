@@ -1,17 +1,12 @@
 package femtocraft.industry.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import femtocraft.Femtocraft;
-import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
-import femtocraft.render.RenderSimpleMachine;
+import java.util.Random;
+
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -21,10 +16,14 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.Femtocraft;
+import femtocraft.core.blocks.TileContainer;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
+import femtocraft.render.RenderSimpleMachine;
 
-import java.util.Random;
-
-public class BlockMicroFurnace extends BlockContainer {
+public class BlockMicroFurnace extends TileContainer {
 	/**
 	 * Is the random generator used by furnace to drop the inventory contents in
 	 * random directions.
@@ -137,34 +136,12 @@ public class BlockMicroFurnace extends BlockContainer {
 				.toLowerCase() + ":" + "MicroFurnace_front_unlit");
 	}
 
-	/**
-	 * Called upon block activation (right click on the block.)
-	 */
-	public boolean onBlockActivated(World par1World, int par2, int par3,
-			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
-			float par8, float par9) {
-		if (par1World.isRemote) {
-			return true;
-		} else {
-			TileEntityBaseEntityMicroFurnace tileentityfurnace = (TileEntityBaseEntityMicroFurnace) par1World
-					.getBlockTileEntity(par2, par3, par4);
-
-			if (tileentityfurnace != null) {
-				if (tileentityfurnace.isUseableByPlayer(par5EntityPlayer))
-					par5EntityPlayer.openGui(Femtocraft.instance, 0, par1World,
-							par2, par3, par4);
-			}
-
-			return true;
-		}
-	}
-
 	public static void updateFurnaceBlockState(boolean par0, World par1World,
 			int par2, int par3, int par4) {
 		int l = par1World.getBlockMetadata(par2, par3, par4);
 		TileEntity tileentity = par1World.getBlockTileEntity(par2, par3, par4);
 		keepFurnaceInventory = true;
-
+		shouldDrop = false;
 		if (par0) {
 			par1World.setBlock(par2, par3, par4,
 					Femtocraft.microFurnaceLit.blockID);
@@ -172,7 +149,7 @@ public class BlockMicroFurnace extends BlockContainer {
 			par1World.setBlock(par2, par3, par4,
 					Femtocraft.microFurnaceUnlit.blockID);
 		}
-
+		shouldDrop = true;
 		keepFurnaceInventory = false;
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
 
@@ -234,6 +211,8 @@ public class BlockMicroFurnace extends BlockContainer {
 	 */
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
 			EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
+		super.onBlockPlacedBy(par1World, par2, par3, par4,
+				par5EntityLivingBase, par6ItemStack);
 		int l = MathHelper
 				.floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 

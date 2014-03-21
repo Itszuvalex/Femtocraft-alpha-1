@@ -143,7 +143,7 @@ public class BlockNanoInnervator extends TileContainer {
 		int l = par1World.getBlockMetadata(par2, par3, par4);
 		TileEntity tileentity = par1World.getBlockTileEntity(par2, par3, par4);
 		keepFurnaceInventory = true;
-
+		shouldDrop = false;
 		if (par0) {
 			par1World.setBlock(par2, par3, par4,
 					Femtocraft.nanoInnervatorLit.blockID);
@@ -151,7 +151,7 @@ public class BlockNanoInnervator extends TileContainer {
 			par1World.setBlock(par2, par3, par4,
 					Femtocraft.nanoInnervatorUnlit.blockID);
 		}
-
+		shouldDrop = true;
 		keepFurnaceInventory = false;
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
 

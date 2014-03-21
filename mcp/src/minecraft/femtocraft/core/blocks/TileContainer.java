@@ -20,6 +20,7 @@ import femtocraft.core.items.CoreItemBlock;
 import femtocraft.core.tiles.TileEntityBase;
 
 public class TileContainer extends BlockContainer {
+	protected static boolean shouldDrop = true;
 
 	public TileContainer(int par1, Material par2Material) {
 		super(par1, par2Material);
@@ -75,23 +76,24 @@ public class TileContainer extends BlockContainer {
 	@Override
 	public void breakBlock(World par1World, int par2, int par3, int par4,
 			int par5, int par6) {
-		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
-		if (te != null && te instanceof TileEntityBase) {
-			TileEntityBase tile = (TileEntityBase) te;
+		if (shouldDrop) {
+			TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+			if (te != null && te instanceof TileEntityBase) {
+				TileEntityBase tile = (TileEntityBase) te;
 
-			ItemStack stack = new ItemStack(Block.blocksList[par5]);
-			Item item = stack.getItem();
-			if ((item instanceof CoreItemBlock)
-					&& (((CoreItemBlock) item).hasItemNBT())) {
-				if (!stack.hasTagCompound()) {
+				ItemStack stack = new ItemStack(Block.blocksList[par5]);
+				Item item = stack.getItem();
+				if ((item instanceof CoreItemBlock)
+						&& (((CoreItemBlock) item).hasItemNBT())) {
 					stack.stackTagCompound = new NBTTagCompound();
+					tile.saveInfoToItemNBT(stack.stackTagCompound);
 				}
 
-				tile.saveInfoToItemNBT(stack.stackTagCompound);
+				EntityItem spawn = new EntityItem(par1World, par2 + .5d,
+						par3 + .5d, par4 + .5d, stack);
+				spawn.delayBeforeCanPickup = 10;
+				par1World.spawnEntityInWorld(spawn);
 			}
-
-			par1World.spawnEntityInWorld(new EntityItem(par1World, par2 + .5d,
-					par3 + .5d, par4 + .5d, stack));
 		}
 		super.breakBlock(par1World, par2, par3, par4, par5, par6);
 	}
