@@ -19,13 +19,12 @@ public class TileEntityBaseEntityMicroFurnace extends
 		setTechLevel(EnumTechLevel.MICRO);
 	}
 
-	private int powerToCook = 40;
-	private int ticksToCook = 100;
+	protected int powerToCook = 40;
 
 	/**
 	 * The ItemStacks that hold the items currently being used in the furnace
 	 */
-	private @Saveable
+	protected @Saveable
 	ItemStack[] furnaceItemStacks = new ItemStack[2];
 
 	/** The number of ticks that the current item has been cooking for */
@@ -37,6 +36,14 @@ public class TileEntityBaseEntityMicroFurnace extends
 	String field_94130_e;
 	public @Saveable
 	ItemStack smeltingStack = null;
+
+	protected int getMaxSimultaneousSmelt() {
+		return 1;
+	}
+
+	protected int getTicksToCook() {
+		return 100;
+	}
 
 	/**
 	 * Returns the number of slots in the inventory.
@@ -134,76 +141,6 @@ public class TileEntityBaseEntityMicroFurnace extends
 	}
 
 	/**
-	 * Reads a tile entity from NBT.
-	 */
-	@Override
-	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
-		super.readFromNBT(par1NBTTagCompound);
-		//
-		// NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
-		// this.furnaceItemStacks = new ItemStack[this.getSizeInventory()];
-		//
-		// for (int i = 0; i < nbttaglist.tagCount() - 1; ++i) {
-		// NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-		// .tagAt(i);
-		// byte b0 = nbttagcompound1.getByte("Slot");
-		//
-		// if (b0 >= 0 && b0 < this.furnaceItemStacks.length) {
-		// this.furnaceItemStacks[b0] = ItemStack
-		// .loadItemStackFromNBT(nbttagcompound1);
-		// }
-		// }
-		//
-		// NBTTagCompound nbttagcompoundsmelt = (NBTTagCompound) nbttaglist
-		// .tagAt(nbttaglist.tagCount() - 1);
-		// if (nbttagcompoundsmelt.getBoolean("isSmelting")) {
-		// this.smeltingStack = ItemStack
-		// .loadItemStackFromNBT(nbttagcompoundsmelt);
-		// } else {
-		// this.smeltingStack = null;
-		// }
-		//
-		// this.furnaceCookTime = par1NBTTagCompound.getShort("CookTime");
-		//
-		// if (par1NBTTagCompound.hasKey("CustomName")) {
-		// this.field_94130_e = par1NBTTagCompound.getString("CustomName");
-		// }
-	}
-
-	/**
-	 * Writes a tile entity to NBT.
-	 */
-	@Override
-	public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
-		super.writeToNBT(par1NBTTagCompound);
-		// par1NBTTagCompound.setShort("CookTime", (short)
-		// this.furnaceCookTime);
-		// NBTTagList nbttaglist = new NBTTagList();
-		//
-		// for (int i = 0; i < this.furnaceItemStacks.length; ++i) {
-		// if (this.furnaceItemStacks[i] != null) {
-		// NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-		// nbttagcompound1.setByte("Slot", (byte) i);
-		// this.furnaceItemStacks[i].writeToNBT(nbttagcompound1);
-		// nbttaglist.appendTag(nbttagcompound1);
-		// }
-		// }
-		//
-		// NBTTagCompound nbttagcompoundsmelt = new NBTTagCompound();
-		// nbttagcompoundsmelt.setBoolean("isSmelting", isSmelting());
-		// if (isSmelting()) {
-		// this.smeltingStack.writeToNBT(nbttagcompoundsmelt);
-		// }
-		// nbttaglist.appendTag(nbttagcompoundsmelt);
-		//
-		// par1NBTTagCompound.setTag("Items", nbttaglist);
-		//
-		// if (this.isInvNameLocalized()) {
-		// par1NBTTagCompound.setString("CustomName", this.field_94130_e);
-		// }
-	}
-
-	/**
 	 * Returns the maximum stack size for a inventory slot. Seems to always be
 	 * 64, possibly will be extended. *Isn't this more of a set than a get?*
 	 */
@@ -218,7 +155,9 @@ public class TileEntityBaseEntityMicroFurnace extends
 	 * cooked
 	 */
 	public int getCookProgressScaled(int par1) {
-		return this.furnaceCookTime * par1 / ticksToCook;
+		if (getTicksToCook() == 0)
+			return 0;
+		return this.furnaceCookTime * par1 / getTicksToCook();
 	}
 
 	@Override
@@ -226,6 +165,7 @@ public class TileEntityBaseEntityMicroFurnace extends
 		return smeltingStack != null;
 	}
 
+	@Override
 	protected boolean canStartWork() {
 		if (this.furnaceItemStacks[0] == null) {
 			return false;
@@ -249,31 +189,54 @@ public class TileEntityBaseEntityMicroFurnace extends
 		}
 	}
 
+	@Override
 	protected void startWork() {
 		this.smeltingStack = this.furnaceItemStacks[0].copy();
-		this.smeltingStack.stackSize = 1;
+		this.smeltingStack.stackSize = 0;
 
-		--this.furnaceItemStacks[0].stackSize;
+		int i = 0;
+		do {
 
-		if (this.furnaceItemStacks[0].stackSize <= 0) {
-			this.furnaceItemStacks[0] = null;
-		}
+			if (furnaceItemStacks[1] != null
+					&& ((smeltingStack.stackSize + i) > furnaceItemStacks[1]
+							.getMaxStackSize())) {
+				break;
+			}
 
-		this.consume(powerToCook);
+			if (furnaceItemStacks[0] == null)
+				break;
+
+			if (!consume(powerToCook))
+				break;
+
+			++smeltingStack.stackSize;
+			--this.furnaceItemStacks[0].stackSize;
+
+			if (this.furnaceItemStacks[0].stackSize <= 0) {
+				this.furnaceItemStacks[0] = null;
+			}
+
+			++i;
+
+		} while (i < getMaxSimultaneousSmelt());
+
 		BlockMicroFurnace.updateFurnaceBlockState(true, this.worldObj,
 				this.xCoord, this.yCoord, this.zCoord);
 
 		this.onInventoryChanged();
 	}
 
+	@Override
 	protected void continueWork() {
 		++furnaceCookTime;
 	}
 
+	@Override
 	protected boolean canFinishWork() {
-		return furnaceCookTime == ticksToCook;
+		return furnaceCookTime == getTicksToCook();
 	}
 
+	@Override
 	protected void finishWork() {
 		ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(
 				this.smeltingStack);

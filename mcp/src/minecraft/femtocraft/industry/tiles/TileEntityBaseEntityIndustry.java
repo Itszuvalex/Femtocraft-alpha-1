@@ -14,9 +14,10 @@ public class TileEntityBaseEntityIndustry extends TileEntityPowerConsumer {
 			}
 		} else {
 			continueWork();
-			if (canFinishWork()) {
-				finishWork();
-			}
+		}
+
+		if (isWorking() && canFinishWork()) {
+			finishWork();
 		}
 	}
 
