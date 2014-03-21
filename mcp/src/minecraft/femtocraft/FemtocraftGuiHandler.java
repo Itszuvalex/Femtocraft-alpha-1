@@ -7,12 +7,15 @@ import cpw.mods.fml.common.network.IGuiHandler;
 import femtocraft.industry.containers.ContainerMicroDeconstructor;
 import femtocraft.industry.containers.ContainerMicroFurnace;
 import femtocraft.industry.containers.ContainerMicroReconstructor;
+import femtocraft.industry.containers.ContainerNanoInnervator;
 import femtocraft.industry.gui.GuiMicroDeconstructor;
 import femtocraft.industry.gui.GuiMicroFurnace;
 import femtocraft.industry.gui.GuiMicroReconstructor;
+import femtocraft.industry.gui.GuiNanoInnervator;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
+import femtocraft.industry.tiles.TileEntityNanoInnervator;
 import femtocraft.power.containers.ContainerMicroCube;
 import femtocraft.power.containers.ContainerNanoCube;
 import femtocraft.power.gui.GuiMicroCube;
@@ -37,7 +40,10 @@ public class FemtocraftGuiHandler implements IGuiHandler {
 			int x, int y, int z) {
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
-		if (tileEntity instanceof TileEntityBaseEntityMicroFurnace) {
+		if (tileEntity instanceof TileEntityNanoInnervator) {
+			return new ContainerNanoInnervator(player.inventory,
+					(TileEntityNanoInnervator) tileEntity);
+		} else if (tileEntity instanceof TileEntityBaseEntityMicroFurnace) {
 			return new ContainerMicroFurnace(player.inventory,
 					(TileEntityBaseEntityMicroFurnace) tileEntity);
 		} else if (tileEntity instanceof TileEntityBaseEntityMicroDeconstructor) {
@@ -63,7 +69,10 @@ public class FemtocraftGuiHandler implements IGuiHandler {
 			int x, int y, int z) {
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
-		if (tileEntity instanceof TileEntityBaseEntityMicroFurnace) {
+		if (tileEntity instanceof TileEntityNanoInnervator) {
+			return new GuiNanoInnervator(player.inventory,
+					(TileEntityNanoInnervator) tileEntity);
+		} else if (tileEntity instanceof TileEntityBaseEntityMicroFurnace) {
 			return new GuiMicroFurnace(player.inventory,
 					(TileEntityBaseEntityMicroFurnace) tileEntity);
 		} else if (tileEntity instanceof TileEntityBaseEntityMicroDeconstructor) {

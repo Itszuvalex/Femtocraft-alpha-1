@@ -5,6 +5,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
+import femtocraft.industry.tiles.TileEntityNanoInnervator;
 import femtocraft.power.render.RenderNullEqualizer;
 import femtocraft.power.render.RenderOrbitalEqualizer;
 import femtocraft.power.tiles.TileEntityFemtoCable;
@@ -52,6 +53,8 @@ public class ProxyCommon {
 		GameRegistry.registerTileEntity(
 				TileEntityBaseEntityMicroReconstructor.class,
 				"microReconstructor");
+		GameRegistry.registerTileEntity(TileEntityNanoInnervator.class,
+				"TileEntityNanoInnervator");
 		GameRegistry.registerTileEntity(TileEntityMicroCable.class,
 				"blockMicroCable");
 		GameRegistry.registerTileEntity(TileEntityNanoCable.class,

@@ -19,8 +19,6 @@ public class TileEntityBaseEntityMicroFurnace extends
 		setTechLevel(EnumTechLevel.MICRO);
 	}
 
-	protected int powerToCook = 40;
-
 	/**
 	 * The ItemStacks that hold the items currently being used in the furnace
 	 */
@@ -43,6 +41,10 @@ public class TileEntityBaseEntityMicroFurnace extends
 
 	protected int getTicksToCook() {
 		return 100;
+	}
+
+	protected int getPowerToCook() {
+		return 40;
 	}
 
 	/**
@@ -172,7 +174,7 @@ public class TileEntityBaseEntityMicroFurnace extends
 		}
 		if (smeltingStack != null) {
 			return false;
-		} else if (this.getCurrentPower() < this.powerToCook) {
+		} else if (getCurrentPower() < getPowerToCook()) {
 			return false;
 		} else {
 			ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(
@@ -206,7 +208,7 @@ public class TileEntityBaseEntityMicroFurnace extends
 			if (furnaceItemStacks[0] == null)
 				break;
 
-			if (!consume(powerToCook))
+			if (!consume(getPowerToCook()))
 				break;
 
 			++smeltingStack.stackSize;
@@ -220,8 +222,7 @@ public class TileEntityBaseEntityMicroFurnace extends
 
 		} while (i < getMaxSimultaneousSmelt());
 
-		BlockMicroFurnace.updateFurnaceBlockState(true, this.worldObj,
-				this.xCoord, this.yCoord, this.zCoord);
+		updateBlockState(true);
 
 		this.onInventoryChanged();
 	}
@@ -250,25 +251,21 @@ public class TileEntityBaseEntityMicroFurnace extends
 			}
 
 			smeltingStack = null;
-			BlockMicroFurnace.updateFurnaceBlockState(false, this.worldObj,
-					this.xCoord, this.yCoord, this.zCoord);
+			updateBlockState(false);
 			this.onInventoryChanged();
 		}
 
 		furnaceCookTime = 0;
 	}
 
-	/**
-	 * Do not make give this method the name canInteractWith because it clashes
-	 * with Container
-	 */
+	protected void updateBlockState(boolean working) {
+		BlockMicroFurnace.updateFurnaceBlockState(working, this.worldObj,
+				this.xCoord, this.yCoord, this.zCoord);
+	}
+
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
-		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord,
-				this.zCoord) == this
-				&& par1EntityPlayer.getDistanceSq((double) this.xCoord + 0.5D,
-						(double) this.yCoord + 0.5D,
-						(double) this.zCoord + 0.5D) <= 64.0D;
+	public boolean hasGUI() {
+		return true;
 	}
 
 	@Override

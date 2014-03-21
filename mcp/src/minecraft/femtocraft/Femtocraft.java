@@ -86,16 +86,17 @@ import femtocraft.core.ore.BlockOreTitanium;
 import femtocraft.industry.blocks.BlockMicroDeconstructor;
 import femtocraft.industry.blocks.BlockMicroFurnace;
 import femtocraft.industry.blocks.BlockMicroReconstructor;
+import femtocraft.industry.blocks.BlockNanoInnervator;
 import femtocraft.industry.items.ItemPaperSchematic;
 import femtocraft.managers.ManagerRecipe;
 import femtocraft.managers.research.ManagerResearch;
 import femtocraft.player.PropertiesNanite;
-import femtocraft.power.blocks.BlockMicroChargingBase;
-import femtocraft.power.blocks.BlockMicroChargingCoil;
 import femtocraft.power.blocks.BlockConsumer;
 import femtocraft.power.blocks.BlockFemtoCable;
 import femtocraft.power.blocks.BlockGenerator;
 import femtocraft.power.blocks.BlockMicroCable;
+import femtocraft.power.blocks.BlockMicroChargingBase;
+import femtocraft.power.blocks.BlockMicroChargingCoil;
 import femtocraft.power.blocks.BlockMicroCube;
 import femtocraft.power.blocks.BlockNanoCable;
 import femtocraft.power.blocks.BlockNanoCubeFrame;
@@ -157,6 +158,10 @@ public class Femtocraft {
 	public static Block microFurnaceLit;
 	public static Block microDeconstructor;
 	public static Block microReconstructor;
+	public static Block nanoInnervatorUnlit;
+	public static Block nanoInnervatorLit;
+	public static Block femtoImpulserLit;
+	public static Block femtoImpulserUnlit;
 	public static Block microCube;
 	public static Block nanoCubeFrame;
 	public static Block nanoCubePort;
@@ -398,6 +403,14 @@ public class Femtocraft {
 		GameRegistry.registerBlock(microReconstructor,
 				"BlockMicroReconstructor");
 		LanguageRegistry.addName(microReconstructor, "Microtech Reconstructor");
+
+		nanoInnervatorUnlit = new BlockNanoInnervator(
+				FemtocraftConfigs.FemtocraftNanoInnervatorUnlitID, false);
+		GameRegistry.registerBlock(nanoInnervatorUnlit, "BlockNanoInnervator");
+		LanguageRegistry.addName(nanoInnervatorUnlit, "Nano Innervator");
+
+		nanoInnervatorLit = new BlockNanoInnervator(
+				FemtocraftConfigs.FemtocraftNanoInnervatorLitID, true);
 
 		microCube = new BlockMicroCube(FemtocraftConfigs.FemtopowerMicroCubeID);
 		GameRegistry.registerBlock(microCube, ItemBlockMicroCube.class,
