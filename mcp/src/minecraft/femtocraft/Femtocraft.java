@@ -83,6 +83,7 @@ import femtocraft.core.ore.BlockOreMalenite;
 import femtocraft.core.ore.BlockOrePlatinum;
 import femtocraft.core.ore.BlockOreThorium;
 import femtocraft.core.ore.BlockOreTitanium;
+import femtocraft.industry.blocks.BlockEncoder;
 import femtocraft.industry.blocks.BlockMicroDeconstructor;
 import femtocraft.industry.blocks.BlockMicroFurnace;
 import femtocraft.industry.blocks.BlockMicroReconstructor;
@@ -158,6 +159,7 @@ public class Femtocraft {
 	public static Block microFurnaceLit;
 	public static Block microDeconstructor;
 	public static Block microReconstructor;
+	public static Block encoder;
 	public static Block nanoInnervatorUnlit;
 	public static Block nanoInnervatorLit;
 	public static Block femtoImpulserLit;
@@ -403,6 +405,10 @@ public class Femtocraft {
 		GameRegistry.registerBlock(microReconstructor,
 				"BlockMicroReconstructor");
 		LanguageRegistry.addName(microReconstructor, "Microtech Reconstructor");
+
+		encoder = new BlockEncoder(FemtocraftConfigs.FemtocraftMicroEncoderID);
+		GameRegistry.registerBlock(encoder, "BlockEncoder");
+		LanguageRegistry.addName(encoder, "Schematic Encoder");
 
 		nanoInnervatorUnlit = new BlockNanoInnervator(
 				FemtocraftConfigs.FemtocraftNanoInnervatorUnlitID, false);
