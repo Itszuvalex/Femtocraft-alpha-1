@@ -1,6 +1,6 @@
 package femtocraft.managers.research;
 
-import femtocraft.FemtocraftUtils;
+import femtocraft.utils.FemtocraftUtils;
 import net.minecraft.util.EnumChatFormatting;
 
 public enum EnumTechLevel {

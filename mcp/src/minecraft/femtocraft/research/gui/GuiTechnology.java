@@ -17,9 +17,9 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import femtocraft.Femtocraft;
-import femtocraft.FemtocraftUtils;
 import femtocraft.managers.research.ResearchTechnology;
 import femtocraft.managers.research.ResearchTechnologyStatus;
+import femtocraft.utils.FemtocraftUtils;
 
 public class GuiTechnology extends GuiScreen {
 	private final GuiResearch guiResearch;

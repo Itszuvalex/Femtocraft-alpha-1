@@ -4,10 +4,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import femtocraft.FemtocraftDataUtils.Saveable;
 import femtocraft.core.multiblock.IMultiBlockComponent;
 import femtocraft.core.multiblock.MultiBlockInfo;
 import femtocraft.core.tiles.TileEntityBase;
+import femtocraft.utils.FemtocraftDataUtils.Saveable;
 
 public class TileEntityNanoCubeFrame extends TileEntityBase implements
 		IMultiBlockComponent {

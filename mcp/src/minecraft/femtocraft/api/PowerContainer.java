@@ -1,12 +1,13 @@
 package femtocraft.api;
 
-import femtocraft.managers.research.EnumTechLevel;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
-
 import java.util.List;
 
-public class PowerContainer implements IPowerContainer {
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
+import femtocraft.managers.research.EnumTechLevel;
+import femtocraft.utils.ISaveable;
+
+public class PowerContainer implements IPowerContainer, ISaveable {
 	private EnumTechLevel level;
 	private int maxPower;
 	private int currentPower;
@@ -29,10 +30,13 @@ public class PowerContainer implements IPowerContainer {
 		this.level = level;
 	}
 
-	private PowerContainer() {
+	public PowerContainer() {
+		level = EnumTechLevel.MACRO;
+		maxPower = 0;
+		currentPower = 0;
 	}
 
-    @Override
+	@Override
 	public boolean canAcceptPowerOfLevel(EnumTechLevel level) {
 		return this.level == level;
 	}
@@ -89,12 +93,14 @@ public class PowerContainer implements IPowerContainer {
 		return true;
 	}
 
+	@Override
 	public void saveToNBT(NBTTagCompound nbt) {
 		nbt.setInteger("maxPower", maxPower);
 		nbt.setInteger("currentPower", currentPower);
 		nbt.setString("enumTechLevel", level.key);
 	}
 
+	@Override
 	public void loadFromNBT(NBTTagCompound nbt) {
 		maxPower = nbt.getInteger("maxPower");
 		currentPower = nbt.getInteger("currentPower");

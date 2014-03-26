@@ -17,9 +17,9 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
-import femtocraft.FemtocraftDataUtils.Saveable;
-import femtocraft.FemtocraftUtils;
 import femtocraft.api.IVacuumTube;
+import femtocraft.utils.FemtocraftUtils;
+import femtocraft.utils.FemtocraftDataUtils.Saveable;
 
 public class TileEntityVacuumTube extends TileEntity implements IVacuumTube {
 	// NOT A FEMTOCRAFTTILEENTITY AT THIS POINT IN TIME, @SAVEABLE DOESN"T WORK.

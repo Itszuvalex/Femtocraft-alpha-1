@@ -2,8 +2,9 @@ package femtocraft.core.multiblock;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import femtocraft.utils.ISaveable;
 
-public class MultiBlockInfo implements IMultiBlockComponent {
+public class MultiBlockInfo implements IMultiBlockComponent, ISaveable {
 	private boolean isMultiBlock;
 	private int controller_x;
 	private int controller_y;
@@ -56,6 +57,7 @@ public class MultiBlockInfo implements IMultiBlockComponent {
 		return true;
 	}
 
+	@Override
 	public void saveToNBT(NBTTagCompound compound) {
 		compound.setBoolean("isFormed", isMultiBlock);
 		compound.setInteger("c_x", controller_x);
@@ -63,6 +65,7 @@ public class MultiBlockInfo implements IMultiBlockComponent {
 		compound.setInteger("c_z", controller_z);
 	}
 
+	@Override
 	public void loadFromNBT(NBTTagCompound compound) {
 		isMultiBlock = compound.getBoolean("isFormed");
 		controller_x = compound.getInteger("c_x");

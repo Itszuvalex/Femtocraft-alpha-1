@@ -17,10 +17,10 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
 import femtocraft.Femtocraft;
-import femtocraft.FemtocraftUtils;
 import femtocraft.managers.research.ResearchTechnology;
 import femtocraft.research.containers.ContainerResearchConsole;
 import femtocraft.research.tiles.TileEntityResearchConsole;
+import femtocraft.utils.FemtocraftUtils;
 
 public class GuiResearchConsole extends GuiContainer {
 	private static final ResourceLocation texture = new ResourceLocation(

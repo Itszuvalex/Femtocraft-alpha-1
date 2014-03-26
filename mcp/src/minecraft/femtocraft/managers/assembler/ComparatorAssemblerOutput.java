@@ -1,6 +1,6 @@
 package femtocraft.managers.assembler;
 
-import femtocraft.FemtocraftUtils;
+import femtocraft.utils.FemtocraftUtils;
 import net.minecraft.item.ItemStack;
 
 import java.util.Comparator;

@@ -10,13 +10,13 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import femtocraft.Femtocraft;
-import femtocraft.FemtocraftUtils;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
 import femtocraft.power.containers.ContainerMicroCube;
 import femtocraft.power.containers.ContainerNanoCube;
 import femtocraft.power.tiles.TileEntityNanoCubePort;
 import femtocraft.power.tiles.TileEntityPowerMicroCube;
 import femtocraft.render.RenderUtils;
+import femtocraft.utils.FemtocraftUtils;
 
 public class GuiMicroCube extends GuiContainer {
 	public static final ResourceLocation texture = new ResourceLocation(

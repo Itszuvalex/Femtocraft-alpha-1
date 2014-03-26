@@ -7,9 +7,9 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import femtocraft.FemtocraftDataUtils.Saveable;
 import femtocraft.industry.blocks.BlockMicroFurnace;
 import femtocraft.managers.research.EnumTechLevel;
+import femtocraft.utils.FemtocraftDataUtils.Saveable;
 
 public class TileEntityBaseEntityMicroFurnace extends
 		TileEntityBaseEntityIndustry implements ISidedInventory {

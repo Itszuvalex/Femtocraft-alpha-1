@@ -2,10 +2,10 @@ package femtocraft.managers.assembler;
 
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftConfigs;
-import femtocraft.FemtocraftUtils;
 import femtocraft.managers.assembler.EventAssemblerRegister.AssemblerDecompositionRegisterEvent;
 import femtocraft.managers.assembler.EventAssemblerRegister.AssemblerRecompositionRegisterEvent;
 import femtocraft.managers.research.EnumTechLevel;
+import femtocraft.utils.FemtocraftUtils;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

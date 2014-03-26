@@ -5,23 +5,28 @@ import java.util.Arrays;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-import femtocraft.FemtocraftDataUtils.Saveable;
 import femtocraft.api.IPowerBlockContainer;
 import femtocraft.api.PowerContainer;
 import femtocraft.core.tiles.TileEntityBase;
 import femtocraft.managers.research.EnumTechLevel;
+import femtocraft.utils.FemtocraftDataUtils.Saveable;
 
 public class TileEntityPowerBase extends TileEntityBase implements
 		IPowerBlockContainer {
 	private @Saveable(item = true)
-	PowerContainer container = new PowerContainer(EnumTechLevel.MACRO, 250);
-	private float maxPowerPerTick = .05f;
-	private float maxSizePackets = .05f;
-	private float distributionBuffer = .01f;
-	public boolean[] connections = new boolean[6];;
+	PowerContainer container;
+	private float maxPowerPerTick;
+	private float maxSizePackets;
+	private float distributionBuffer;
+	public boolean[] connections;
 
 	public TileEntityPowerBase() {
 		super();
+		container = new PowerContainer(EnumTechLevel.MACRO, 250);
+		maxPowerPerTick = .05f;
+		maxSizePackets = .05f;
+		distributionBuffer = .01f;
+		connections = new boolean[6];
 		Arrays.fill(connections, false);
 	}
 

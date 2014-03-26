@@ -1,4 +1,4 @@
-package femtocraft;
+package femtocraft.utils;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;

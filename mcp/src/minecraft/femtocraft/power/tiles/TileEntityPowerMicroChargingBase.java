@@ -6,10 +6,10 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
-import femtocraft.FemtocraftDataUtils.Saveable;
 import femtocraft.api.IChargingBase;
 import femtocraft.api.IChargingCoil;
 import femtocraft.managers.research.EnumTechLevel;
+import femtocraft.utils.FemtocraftDataUtils.Saveable;
 
 public class TileEntityPowerMicroChargingBase extends TileEntityPowerProducer {
 	public int numCoils;

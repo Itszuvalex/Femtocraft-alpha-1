@@ -31,11 +31,11 @@ import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
-import femtocraft.FemtocraftUtils;
 import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.managers.research.ResearchPlayer;
 import femtocraft.managers.research.ResearchTechnology;
 import femtocraft.managers.research.ResearchTechnologyStatus;
+import femtocraft.utils.FemtocraftUtils;
 
 @SideOnly(Side.CLIENT)
 public class GuiResearch extends GuiScreen {

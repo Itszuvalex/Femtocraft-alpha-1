@@ -1,9 +1,9 @@
 package femtocraft.managers.assembler;
 
 import femtocraft.Femtocraft;
-import femtocraft.FemtocraftUtils;
 import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.managers.research.ResearchTechnology;
+import femtocraft.utils.FemtocraftUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;

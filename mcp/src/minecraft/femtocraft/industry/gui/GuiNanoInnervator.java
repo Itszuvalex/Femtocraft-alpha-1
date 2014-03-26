@@ -11,9 +11,9 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
-import femtocraft.FemtocraftUtils;
 import femtocraft.industry.containers.ContainerNanoInnervator;
 import femtocraft.industry.tiles.TileEntityNanoInnervator;
+import femtocraft.utils.FemtocraftUtils;
 
 @SideOnly(Side.CLIENT)
 public class GuiNanoInnervator extends GuiContainer {

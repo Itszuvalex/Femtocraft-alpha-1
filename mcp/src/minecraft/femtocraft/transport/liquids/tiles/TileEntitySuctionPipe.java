@@ -12,10 +12,10 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import femtocraft.FemtocraftDataUtils.Saveable;
 import femtocraft.api.IInterfaceDevice;
 import femtocraft.api.ISuctionPipe;
 import femtocraft.core.tiles.TileEntityBase;
+import femtocraft.utils.FemtocraftDataUtils.Saveable;
 
 public class TileEntitySuctionPipe extends TileEntityBase implements
 		ISuctionPipe {

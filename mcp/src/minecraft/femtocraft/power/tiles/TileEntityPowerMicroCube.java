@@ -7,10 +7,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 import femtocraft.Femtocraft;
-import femtocraft.FemtocraftUtils;
 import femtocraft.api.IInterfaceDevice;
 import femtocraft.api.PowerContainer;
 import femtocraft.managers.research.EnumTechLevel;
+import femtocraft.utils.FemtocraftUtils;
 
 public class TileEntityPowerMicroCube extends TileEntityPowerBase {
 	public boolean[] outputs = new boolean[6]; // Not @Saveable due to bit masking

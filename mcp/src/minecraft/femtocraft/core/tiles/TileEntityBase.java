@@ -9,10 +9,10 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import femtocraft.Femtocraft;
 import femtocraft.FemtocraftConfigs;
-import femtocraft.FemtocraftDataUtils;
-import femtocraft.FemtocraftDataUtils.EnumSaveType;
-import femtocraft.FemtocraftDataUtils.Saveable;
-import femtocraft.FemtocraftUtils;
+import femtocraft.utils.FemtocraftDataUtils;
+import femtocraft.utils.FemtocraftUtils;
+import femtocraft.utils.FemtocraftDataUtils.EnumSaveType;
+import femtocraft.utils.FemtocraftDataUtils.Saveable;
 
 public class TileEntityBase extends TileEntity {
 	private @Saveable(item = true)

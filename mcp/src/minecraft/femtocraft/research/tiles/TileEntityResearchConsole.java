@@ -9,10 +9,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import femtocraft.Femtocraft;
-import femtocraft.FemtocraftDataUtils.Saveable;
 import femtocraft.api.ITechnologyCarrier;
 import femtocraft.core.tiles.TileEntityBase;
 import femtocraft.managers.research.ResearchTechnology;
+import femtocraft.utils.FemtocraftDataUtils.Saveable;
 
 public class TileEntityResearchConsole extends TileEntityBase implements
 		IInventory {

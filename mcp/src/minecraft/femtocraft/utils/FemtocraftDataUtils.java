@@ -1,7 +1,8 @@
-package femtocraft;
+package femtocraft.utils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,8 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.fluids.FluidTank;
-import femtocraft.api.PowerContainer;
-import femtocraft.core.multiblock.MultiBlockInfo;
+import femtocraft.Femtocraft;
 
 public class FemtocraftDataUtils {
 	private static HashMap<Class<?>, SaveManager> managerMap = new HashMap<Class<?>, SaveManager>();
@@ -561,33 +561,33 @@ public class FemtocraftDataUtils {
 			}
 		});
 
-		// PowerContainer
-		registerSaveManager(PowerContainer.class, new SaveManager() {
-
-			@Override
-			public void saveToNBT(NBTTagCompound compound, Field saveable,
-					Object obj) throws IllegalArgumentException,
-					IllegalAccessException {
-				PowerContainer pow = (PowerContainer) saveable.get(obj);
-				if (pow == null)
-					return;
-				NBTTagCompound container = new NBTTagCompound();
-				pow.saveToNBT(container);
-				compound.setCompoundTag(saveable.getName(), container);
-			}
-
-			@Override
-			public void readFromNBT(NBTTagCompound compound, Field saveable,
-					Object obj) throws IllegalArgumentException,
-					IllegalAccessException {
-				if (!compound.hasKey(saveable.getName())) {
-					saveable.set(obj, null);
-					return;
-				}
-				saveable.set(obj, PowerContainer.createFromNBT(compound
-						.getCompoundTag(saveable.getName())));
-			}
-		});
+		// // PowerContainer
+		// registerSaveManager(PowerContainer.class, new SaveManager() {
+		//
+		// @Override
+		// public void saveToNBT(NBTTagCompound compound, Field saveable,
+		// Object obj) throws IllegalArgumentException,
+		// IllegalAccessException {
+		// PowerContainer pow = (PowerContainer) saveable.get(obj);
+		// if (pow == null)
+		// return;
+		// NBTTagCompound container = new NBTTagCompound();
+		// pow.saveToNBT(container);
+		// compound.setCompoundTag(saveable.getName(), container);
+		// }
+		//
+		// @Override
+		// public void readFromNBT(NBTTagCompound compound, Field saveable,
+		// Object obj) throws IllegalArgumentException,
+		// IllegalAccessException {
+		// if (!compound.hasKey(saveable.getName())) {
+		// saveable.set(obj, null);
+		// return;
+		// }
+		// saveable.set(obj, PowerContainer.createFromNBT(compound
+		// .getCompoundTag(saveable.getName())));
+		// }
+		// });
 
 		// FluidTank
 		registerSaveManager(FluidTank.class, new SaveManager() {
@@ -613,32 +613,63 @@ public class FemtocraftDataUtils {
 				saveable.set(obj, tank.readFromNBT(container));
 			}
 		});
+		//
+		// // MultiBlockInfo
+		// registerSaveManager(MultiBlockInfo.class, new SaveManager() {
+		//
+		// @Override
+		// public void saveToNBT(NBTTagCompound compound, Field saveable,
+		// Object obj) throws IllegalArgumentException,
+		// IllegalAccessException {
+		// NBTTagCompound info = new NBTTagCompound();
+		// MultiBlockInfo mbi = (MultiBlockInfo) saveable.get(obj);
+		// mbi.saveToNBT(info);
+		// compound.setCompoundTag(saveable.getName(), info);
+		// }
+		//
+		// @Override
+		// public void readFromNBT(NBTTagCompound compound, Field saveable,
+		// Object obj) throws IllegalArgumentException,
+		// IllegalAccessException {
+		// NBTTagCompound container = compound.getCompoundTag(saveable
+		// .getName());
+		// MultiBlockInfo info = new MultiBlockInfo();
+		// info.loadFromNBT(container);
+		// saveable.set(obj, info);
+		// }
+		// });
 
-		// MultiBlockInfo
-		registerSaveManager(MultiBlockInfo.class, new SaveManager() {
-
-			@Override
-			public void saveToNBT(NBTTagCompound compound, Field saveable,
-					Object obj) throws IllegalArgumentException,
-					IllegalAccessException {
-				NBTTagCompound info = new NBTTagCompound();
-				MultiBlockInfo mbi = (MultiBlockInfo) saveable.get(obj);
-				mbi.saveToNBT(info);
-				compound.setCompoundTag(saveable.getName(), info);
-			}
-
-			@Override
-			public void readFromNBT(NBTTagCompound compound, Field saveable,
-					Object obj) throws IllegalArgumentException,
-					IllegalAccessException {
-				NBTTagCompound container = compound.getCompoundTag(saveable
-						.getName());
-				MultiBlockInfo info = new MultiBlockInfo();
-				info.loadFromNBT(container);
-				saveable.set(obj, info);
-			}
-		});
 	}
+
+	private static SaveManager iSaveableSaveManager = new SaveManager() {
+		@Override
+		public void saveToNBT(NBTTagCompound compound, Field saveable,
+				Object obj) throws IllegalArgumentException,
+				IllegalAccessException {
+			ISaveable sobj = (ISaveable) saveable.get(obj);
+			if (sobj == null)
+				return;
+			NBTTagCompound info = new NBTTagCompound();
+			sobj.saveToNBT(info);
+			compound.setCompoundTag(saveable.getName(), info);
+		}
+
+		@Override
+		public void readFromNBT(NBTTagCompound compound, Field saveable,
+				Object obj) throws IllegalArgumentException,
+				IllegalAccessException {
+			if (!compound.hasKey(saveable.getName())) {
+				saveable.set(obj, null);
+				return;
+			}
+
+			NBTTagCompound container = compound.getCompoundTag(saveable
+					.getName());
+			ISaveable info = (ISaveable) saveable.get(obj);
+			info.loadFromNBT(container);
+//			saveable.set(obj, info);
+		}
+	};
 
 	public static void saveObjectToNBT(NBTTagCompound compound, Object obj,
 			EnumSaveType type) {
@@ -688,13 +719,16 @@ public class FemtocraftDataUtils {
 			SaveManager man = managerMap.get(clazz);
 			if (man != null) {
 				man.saveToNBT(compound, saveable, obj);
+			} else if (ISaveable.class.isAssignableFrom(clazz)) {
+				iSaveableSaveManager.saveToNBT(compound, saveable, obj);
 			} else {
 				Femtocraft.logger
 						.log(Level.SEVERE,
 								"Field "
 										+ saveable.getName()
 										+ " in Class "
-										+ saveable.getClass().getName()
+										+ saveable.getDeclaringClass()
+												.getName()
 										+ " marked as Saveable is of unsupported class - "
 										+ clazz.getName() + ".");
 			}
@@ -750,13 +784,28 @@ public class FemtocraftDataUtils {
 			SaveManager man = managerMap.get(clazz);
 			if (man != null) {
 				man.readFromNBT(compound, saveable, obj);
+			} else if (ISaveable.class.isAssignableFrom(clazz)) {
+				Object os = saveable.get(obj);
+				if (os == null) {
+					Femtocraft.logger
+							.log(Level.SEVERE,
+									"Field "
+											+ saveable.getName()
+											+ " in Class "
+											+ saveable.getDeclaringClass()
+													.getName()
+											+ " must not be null to be loaded from NBT.");
+				} else {
+					iSaveableSaveManager.readFromNBT(compound, saveable, obj);
+				}
 			} else {
 				Femtocraft.logger
 						.log(Level.SEVERE,
 								"Field "
 										+ saveable.getName()
 										+ " in Class "
-										+ saveable.getClass().getName()
+										+ saveable.getDeclaringClass()
+												.getName()
 										+ " marked as Saveable is of unsupported class - "
 										+ clazz.getName() + ".");
 			}
