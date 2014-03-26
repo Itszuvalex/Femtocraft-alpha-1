@@ -55,7 +55,7 @@ public class BlockNanoCubeFrame extends TileContainer {
 		case UP:
 			return iconFromGrid(xdif, -zdif);
 		case DOWN:
-			return iconFromGrid(-xdif, -zdif);
+			return iconFromGrid(xdif, -zdif);
 		case NORTH:
 			return iconFromGrid(-xdif, ydif);
 		case SOUTH:
