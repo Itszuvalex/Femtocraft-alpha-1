@@ -3,6 +3,7 @@ package femtocraft.managers.research;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,7 +35,7 @@ public class ManagerResearch {
 	private HashMap<String, ResearchTechnology> technologies;
 	private HashMap<String, ResearchPlayer> playerData;
 
-	private final String FILENAME = "FemtocraftResearch.dat";
+	private final String FILENAME = "FemtocraftResearch";
 
 	private String lastWorldLoaded = "";
 
@@ -216,20 +217,38 @@ public class ManagerResearch {
 
 	public boolean save(World world) {
 		try {
-			File file = new File(savePath(world), FILENAME);
-			if (!file.exists()) {
-				file.createNewFile();
+			File folder = new File(savePath(world), FILENAME);
+			if (!folder.exists()) {
+				folder.mkdir();
 			}
 
-			FileOutputStream fileoutputstream = new FileOutputStream(file);
-			NBTTagCompound data = new NBTTagCompound();
-			saveToNBTTagCompound(data);
-			CompressedStreamTools.writeCompressed(data, fileoutputstream);
-			fileoutputstream.close();
-		} catch (Exception exception) {
-			Femtocraft.logger.log(Level.SEVERE, "Failed to save data from "
-					+ FILENAME + " in world - " + savePath(world) + ".");
-			exception.printStackTrace();
+			for (ResearchPlayer pdata : playerData.values()) {
+				try {
+					File file = new File(folder, pdata.username + ".dat");
+					if (!file.exists()) {
+						file.createNewFile();
+					}
+
+					FileOutputStream fileoutputstream = new FileOutputStream(
+							file);
+					NBTTagCompound data = new NBTTagCompound();
+					pdata.saveToNBTTagCompound(data);
+					CompressedStreamTools.writeCompressed(data,
+							fileoutputstream);
+					fileoutputstream.close();
+				} catch (Exception exception) {
+					Femtocraft.logger.log(Level.SEVERE,
+							"Failed to save data for player " + pdata.username
+									+ " in world - " + savePath(world) + ".");
+					exception.printStackTrace();
+					continue;
+				}
+			}
+
+		} catch (Exception e) {
+			Femtocraft.logger.log(Level.SEVERE, "Failed to create folder "
+					+ savePath(world) + File.pathSeparator + FILENAME + ".");
+			e.printStackTrace();
 			return false;
 		}
 
@@ -243,24 +262,45 @@ public class ManagerResearch {
 		}
 
 		lastWorldLoaded = worldName;
+		playerData.clear();
 
 		try {
-			File file = new File(savePath(world), FILENAME);
-			if (!file.exists()) {
+			File folder = new File(savePath(world), FILENAME);
+			if (!folder.exists()) {
 				Femtocraft.logger.log(Level.WARNING, "No " + FILENAME
-						+ " file found for world - " + savePath(world) + ".");
+						+ " folder found for world - " + savePath(world) + ".");
 				return false;
 			}
 
-			FileInputStream fileinputstream = new FileInputStream(file);
-			NBTTagCompound data = CompressedStreamTools
-					.readCompressed(fileinputstream);
-			// NBTTagCompound data = CompressedStreamTools.read(file);
-			loadFromNBTTagCompound(data);
-			fileinputstream.close();
+			for (File pdata : folder.listFiles(new FilenameFilter() {
+				public boolean accept(File dir, String name) {
+					return name.endsWith(".dat");
+				}
+			})) {
+				try {
+					FileInputStream fileinputstream = new FileInputStream(pdata);
+					NBTTagCompound data = CompressedStreamTools
+							.readCompressed(fileinputstream);
+					String username = pdata.getName().substring(0,
+							pdata.getName().length() - 4);
+					// NBTTagCompound data = CompressedStreamTools.read(file);
+					ResearchPlayer file = new ResearchPlayer(username);
+					file.loadFromNBTTagCompound(data);
+					fileinputstream.close();
+					playerData.put(username, file);
+				} catch (Exception e) {
+					Femtocraft.logger.log(Level.SEVERE,
+							"Failed to load data from file " + pdata.getName()
+									+ " in world - " + savePath(world) + ".");
+					e.printStackTrace();
+					return false;
+				}
+			}
+
 		} catch (Exception exception) {
-			Femtocraft.logger.log(Level.SEVERE, "Failed to load data from "
-					+ FILENAME + " in world - " + savePath(world) + ".");
+			Femtocraft.logger.log(Level.SEVERE,
+					"Failed to load data from folder " + FILENAME
+							+ " in world - " + savePath(world) + ".");
 			exception.printStackTrace();
 			return false;
 		}
