@@ -206,7 +206,7 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
 		}
 
 		NBTTagCompound recipeCompound = new NBTTagCompound();
-		recipe.saveToNBTTagCompound(recipeCompound);
+		recipe.saveToNBT(recipeCompound);
 		stack.stackTagCompound.setTag("recipe", recipeCompound);
 
 		return true;

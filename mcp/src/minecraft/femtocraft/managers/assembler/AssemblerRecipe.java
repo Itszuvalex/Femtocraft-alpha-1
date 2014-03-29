@@ -1,24 +1,25 @@
 package femtocraft.managers.assembler;
 
+import java.util.logging.Level;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import femtocraft.Femtocraft;
 import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.managers.research.ResearchTechnology;
 import femtocraft.utils.FemtocraftUtils;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import femtocraft.utils.ISaveable;
 
-import java.util.logging.Level;
-
-public class AssemblerRecipe implements Comparable {
+public class AssemblerRecipe implements Comparable, ISaveable {
 	public ItemStack[] input;
 	public Integer mass;
 	public ItemStack output;
 	public EnumTechLevel enumTechLevel;
 	public ResearchTechnology tech;
 
-	public AssemblerRecipe(ItemStack[] input, Integer mass,
-                           ItemStack output, EnumTechLevel enumTechLevel, ResearchTechnology tech) {
+	public AssemblerRecipe(ItemStack[] input, Integer mass, ItemStack output,
+			EnumTechLevel enumTechLevel, ResearchTechnology tech) {
 		this.input = input;
 		this.mass = mass;
 		this.output = output;
@@ -26,10 +27,13 @@ public class AssemblerRecipe implements Comparable {
 		this.tech = tech;
 	}
 
-	private AssemblerRecipe() {
+	/**
+	 * DO NOT USE, must be public for ISaveable
+	 */
+	public AssemblerRecipe() {
 	}
 
-    @Override
+	@Override
 	public int compareTo(Object o) {
 		AssemblerRecipe ir = (AssemblerRecipe) o;
 		for (int i = 0; i < 9; i++) {
@@ -50,7 +54,8 @@ public class AssemblerRecipe implements Comparable {
 		return 0;
 	}
 
-	public void saveToNBTTagCompound(NBTTagCompound compound) {
+	@Override
+	public void saveToNBT(NBTTagCompound compound) {
 		// Input
 		NBTTagList inputList = new NBTTagList();
 		for (int i = 0; i < input.length; ++i) {
@@ -83,10 +88,9 @@ public class AssemblerRecipe implements Comparable {
 		}
 	}
 
-	public static AssemblerRecipe loadFromNBTTagCompound(
-			NBTTagCompound compound) {
-		AssemblerRecipe recipe = new AssemblerRecipe();
-		recipe.input = new ItemStack[9];
+	@Override
+	public void loadFromNBT(NBTTagCompound compound) {
+		input = new ItemStack[9];
 
 		// Input
 		NBTTagList inputList = compound.getTagList("input");
@@ -99,29 +103,33 @@ public class AssemblerRecipe implements Comparable {
 								"Slot mismatch occurred while loading AssemblerRecipe.");
 			}
 			if (itemCompound.hasKey("item")) {
-				recipe.input[i] = ItemStack
+				input[i] = ItemStack
 						.loadItemStackFromNBT((NBTTagCompound) itemCompound
 								.getTag("item"));
 			}
 		}
 
 		// FluidMass
-		recipe.mass = compound.getInteger("mass");
+		mass = compound.getInteger("mass");
 
 		// Output
-		recipe.output = ItemStack
-				.loadItemStackFromNBT((NBTTagCompound) compound
-						.getTag("output"));
+		output = ItemStack.loadItemStackFromNBT((NBTTagCompound) compound
+				.getTag("output"));
 
 		// EnumTechLevel
-		recipe.enumTechLevel = EnumTechLevel.getTech(compound.getString("enumTechLevel"));
+		enumTechLevel = EnumTechLevel.getTech(compound
+				.getString("enumTechLevel"));
 
 		// ResearchTechnology
 		if (compound.hasKey("researchTechnology")) {
-			recipe.tech = Femtocraft.researchManager.getTechnology(compound
+			tech = Femtocraft.researchManager.getTechnology(compound
 					.getString("researchTechnology"));
 		}
+	}
 
+	public static AssemblerRecipe loadFromNBTTagCompound(NBTTagCompound compound) {
+		AssemblerRecipe recipe = new AssemblerRecipe();
+		recipe.loadFromNBT(compound);
 		return recipe;
 	}
 }

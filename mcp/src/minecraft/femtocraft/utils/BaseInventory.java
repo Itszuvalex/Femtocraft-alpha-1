@@ -8,8 +8,8 @@ import femtocraft.utils.FemtocraftDataUtils.EnumSaveType;
 import femtocraft.utils.FemtocraftDataUtils.Saveable;
 
 public class BaseInventory implements IInventory, ISaveable {
-	private @Saveable
-	ItemStack[] inventory;
+	@Saveable
+	protected ItemStack[] inventory;
 
 	public BaseInventory(int size) {
 		inventory = new ItemStack[size];
@@ -17,6 +17,15 @@ public class BaseInventory implements IInventory, ISaveable {
 
 	private BaseInventory() {
 
+	}
+
+	/**
+	 * 
+	 * @return ItemStack[] that backs this inventory class. Modifications to it
+	 *         modify this.
+	 */
+	public ItemStack[] getInventory() {
+		return inventory;
 	}
 
 	@Override
