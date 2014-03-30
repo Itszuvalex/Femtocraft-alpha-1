@@ -4,6 +4,9 @@ import femtocraft.industry.blocks.BlockNanoInnervator;
 import femtocraft.managers.research.EnumTechLevel;
 
 public class TileEntityNanoInnervator extends TileEntityBaseEntityMicroFurnace {
+	public static int maxSmelt_default = 8;
+	public static int ticksToCook_default = 60;
+	public static int powerToCook_default = 80;
 
 	public TileEntityNanoInnervator() {
 		super();
@@ -16,21 +19,21 @@ public class TileEntityNanoInnervator extends TileEntityBaseEntityMicroFurnace {
 	protected int getMaxSimultaneousSmelt() {
 		// TODO: Check for modifying researches
 		// TODO: Pull number from configs
-		return 8;
+		return maxSmelt_default;
 	}
 
 	@Override
 	protected int getTicksToCook() {
 		// TODO: Check for modifying researches
 		// TODO: Pull number from configs
-		return 60;
+		return ticksToCook_default;
 	}
 
 	@Override
 	protected int getPowerToCook() {
 		// TODO: Check for modifying researches
 		// TODO: Pull number from configs
-		return 80;
+		return powerToCook_default;
 	}
 
 	@Override

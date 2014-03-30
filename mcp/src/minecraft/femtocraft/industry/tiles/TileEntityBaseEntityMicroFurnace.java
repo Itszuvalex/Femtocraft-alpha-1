@@ -19,9 +19,9 @@ public class TileEntityBaseEntityMicroFurnace extends
 		setTechLevel(EnumTechLevel.MICRO);
 	}
 
-	private static int powerToCook = 40;
-	private static int ticksToCook = 100;
-	private static int maxSmelt = 1;
+	public static int powerToCook = 40;
+	public static int ticksToCook = 100;
+	public static int maxSmelt = 1;
 
 	/**
 	 * The ItemStacks that hold the items currently being used in the furnace
