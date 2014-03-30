@@ -1,42 +1,41 @@
 package femtocraft.industry.tiles;
 
+import java.util.ArrayList;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.managers.ManagerRecipe;
 import femtocraft.managers.assembler.AssemblerRecipe;
 import femtocraft.managers.research.EnumTechLevel;
-import femtocraft.power.tiles.TileEntityPowerConsumer;
-import femtocraft.utils.FemtocraftUtils;
+import femtocraft.utils.BaseInventory;
 import femtocraft.utils.FemtocraftDataUtils.Saveable;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.*;
+import femtocraft.utils.FemtocraftUtils;
 
 public class TileEntityBaseEntityMicroDeconstructor extends
-		TileEntityPowerConsumer implements ISidedInventory, IFluidHandler {
+		TileEntityBaseEntityIndustry implements ISidedInventory, IFluidHandler {
 	private @Saveable
 	FluidTank tank;
 
-	public TileEntityBaseEntityMicroDeconstructor() {
-		super();
-		setMaxStorage(800);
-		tank = new FluidTank(600);
-		setTechLevel(EnumTechLevel.MICRO);
-	}
-
-	private int powerToCook = 40;
-	private int ticksToCook = 100;
+	private static int powerToCook = 40;
+	private static int ticksToCook = 100;
+	private static int maxSmelt = 1;
 
 	/**
 	 * The ItemStacks that hold the items currently being used in the furnace
 	 */
 	private @Saveable
-	ItemStack[] deconstructorItemStacks = new ItemStack[10];
+	BaseInventory deconstructorInventory;
+	// ItemStack[] deconstructorItemStacks = new ItemStack[10];
 
 	/** The number of ticks that the current item has been cooking for */
 	public @Saveable
@@ -48,6 +47,14 @@ public class TileEntityBaseEntityMicroDeconstructor extends
 	public @Saveable
 	ItemStack deconstructingStack = null;
 
+	public TileEntityBaseEntityMicroDeconstructor() {
+		super();
+		setMaxStorage(800);
+		tank = new FluidTank(600);
+		setTechLevel(EnumTechLevel.MICRO);
+		deconstructorInventory = new BaseInventory(10);
+	}
+
 	public int getMassAmount() {
 		return tank.getFluidAmount();
 	}
@@ -56,18 +63,32 @@ public class TileEntityBaseEntityMicroDeconstructor extends
 		return tank.getCapacity();
 	}
 
+	protected int getMaxSimultaneousSmelt() {
+		return maxSmelt;
+	}
+
+	protected int getTicksToCook() {
+		// TODO: Load from configs
+		return ticksToCook;
+	}
+
+	protected int getPowerToCook() {
+		// TODO: Load from configs
+		return powerToCook;
+	}
+
 	/**
 	 * Returns the number of slots in the inventory.
 	 */
 	public int getSizeInventory() {
-		return this.deconstructorItemStacks.length;
+		return deconstructorInventory.getSizeInventory();
 	}
 
 	/**
 	 * Returns the stack in slot i
 	 */
 	public ItemStack getStackInSlot(int par1) {
-		return this.deconstructorItemStacks[par1];
+		return deconstructorInventory.getStackInSlot(par1);
 	}
 
 	/**
@@ -75,25 +96,9 @@ public class TileEntityBaseEntityMicroDeconstructor extends
 	 * (second arg) of items and returns them in a new stack.
 	 */
 	public ItemStack decrStackSize(int par1, int par2) {
-		if (this.deconstructorItemStacks[par1] != null) {
-			ItemStack itemstack;
-
-			if (this.deconstructorItemStacks[par1].stackSize <= par2) {
-				itemstack = this.deconstructorItemStacks[par1];
-				this.deconstructorItemStacks[par1] = null;
-				return itemstack;
-			} else {
-				itemstack = this.deconstructorItemStacks[par1].splitStack(par2);
-
-				if (this.deconstructorItemStacks[par1].stackSize == 0) {
-					this.deconstructorItemStacks[par1] = null;
-				}
-
-				return itemstack;
-			}
-		} else {
-			return null;
-		}
+		ItemStack ret = deconstructorInventory.decrStackSize(par1, par2);
+		this.onInventoryChanged();
+		return ret;
 	}
 
 	/**
@@ -102,9 +107,9 @@ public class TileEntityBaseEntityMicroDeconstructor extends
 	 * GUI.
 	 */
 	public ItemStack getStackInSlotOnClosing(int par1) {
-		if (this.deconstructorItemStacks[par1] != null) {
-			ItemStack itemstack = this.deconstructorItemStacks[par1];
-			this.deconstructorItemStacks[par1] = null;
+		if (deconstructorInventory.getInventory()[par1] != null) {
+			ItemStack itemstack = deconstructorInventory.getInventory()[par1];
+			deconstructorInventory.getInventory()[par1] = null;
 			return itemstack;
 		} else {
 			return null;
@@ -116,12 +121,8 @@ public class TileEntityBaseEntityMicroDeconstructor extends
 	 * crafting or armor sections).
 	 */
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
-		this.deconstructorItemStacks[par1] = par2ItemStack;
-
-		if (par2ItemStack != null
-				&& par2ItemStack.stackSize > this.getInventoryStackLimit()) {
-			par2ItemStack.stackSize = this.getInventoryStackLimit();
-		}
+		deconstructorInventory.setInventorySlotContents(par1, par2ItemStack);
+		this.onInventoryChanged();
 	}
 
 	/**
@@ -146,84 +147,11 @@ public class TileEntityBaseEntityMicroDeconstructor extends
 	}
 
 	/**
-	 * Reads a tile entity from NBT.
-	 */
-	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
-		super.readFromNBT(par1NBTTagCompound);
-		//
-		// NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
-		// this.deconstructorItemStacks = new
-		// ItemStack[this.getSizeInventory()];
-		//
-		// for (int i = 0; i < nbttaglist.tagCount() - 1; ++i) {
-		// NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-		// .tagAt(i);
-		// byte b0 = nbttagcompound1.getByte("Slot");
-		//
-		// if (b0 >= 0 && b0 < this.deconstructorItemStacks.length) {
-		// this.deconstructorItemStacks[b0] = ItemStack
-		// .loadItemStackFromNBT(nbttagcompound1);
-		// }
-		// }
-		//
-		// NBTTagCompound nbttagcompoundsmelt = (NBTTagCompound) nbttaglist
-		// .tagAt(nbttaglist.tagCount() - 1);
-		// if (nbttagcompoundsmelt.getBoolean("isDeconstructing")) {
-		// this.deconstructingStack = ItemStack
-		// .loadItemStackFromNBT(nbttagcompoundsmelt);
-		// } else {
-		// this.deconstructingStack = null;
-		// }
-		//
-		// this.cookTime = par1NBTTagCompound.getShort("CookTime");
-		//
-		// if (par1NBTTagCompound.hasKey("CustomName")) {
-		// this.field_94130_e = par1NBTTagCompound.getString("CustomName");
-		// }
-		//
-		// tank.readFromNBT(par1NBTTagCompound);
-	}
-
-	/**
-	 * Writes a tile entity to NBT.
-	 */
-	public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
-		super.writeToNBT(par1NBTTagCompound);
-		// par1NBTTagCompound.setShort("CookTime", (short) this.cookTime);
-		// NBTTagList nbttaglist = new NBTTagList();
-		//
-		// for (int i = 0; i < this.deconstructorItemStacks.length; ++i) {
-		// if (this.deconstructorItemStacks[i] != null) {
-		// NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-		// nbttagcompound1.setByte("Slot", (byte) i);
-		// this.deconstructorItemStacks[i].writeToNBT(nbttagcompound1);
-		// nbttaglist.appendTag(nbttagcompound1);
-		// }
-		// }
-		//
-		// NBTTagCompound nbttagcompoundsmelt = new NBTTagCompound();
-		// nbttagcompoundsmelt.setBoolean("isDeconstructing",
-		// isDeconstructing());
-		// if (isDeconstructing()) {
-		// this.deconstructingStack.writeToNBT(nbttagcompoundsmelt);
-		// }
-		// nbttaglist.appendTag(nbttagcompoundsmelt);
-		//
-		// par1NBTTagCompound.setTag("Items", nbttaglist);
-		//
-		// if (this.isInvNameLocalized()) {
-		// par1NBTTagCompound.setString("CustomName", this.field_94130_e);
-		// }
-		//
-		// tank.writeToNBT(par1NBTTagCompound);
-	}
-
-	/**
 	 * Returns the maximum stack size for a inventory slot. Seems to always be
 	 * 64, possibly will be extended. *Isn't this more of a set than a get?*
 	 */
 	public int getInventoryStackLimit() {
-		return 64;
+		return deconstructorInventory.getInventoryStackLimit();
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -235,62 +163,135 @@ public class TileEntityBaseEntityMicroDeconstructor extends
 		return this.cookTime * par1 / ticksToCook;
 	}
 
-	@SideOnly(Side.CLIENT)
-	/**
-	 * Allows the entity to update its state. Overridden in most subclasses, e.g. the mob spawner uses this to count
-	 * ticks and creates a new spawn inside its implementation.
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see femtocraft.industry.tiles.TileEntityBaseEntityIndustry#isWorking()
 	 */
-	public void updateEntity() {
-		super.updateEntity();
-
-		boolean flag1 = false;
-
-		if (worldObj.isRemote)
-			return;
-
-		if (deconstructingStack != null) {
-			if (cookTime == ticksToCook) {
-				cookTime = 0;
-				endWork();
-				flag1 = true;
-			}
-
-			++this.cookTime;
-		} else if (this.canWork()) {
-			startWork();
-			flag1 = true;
-		} else {
-			cookTime = 0;
-		}
-
-		if (flag1) {
-			onInventoryChanged();
-		}
+	@Override
+	public boolean isWorking() {
+		return deconstructingStack != null;
 	}
 
-	/**
-	 * Returns true if the furnace can smelt an item, i.e. has a source item,
-	 * destination stack isn't full, etc.
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * femtocraft.industry.tiles.TileEntityBaseEntityIndustry#canStartWork()
 	 */
-	private boolean canWork() {
-		if (this.deconstructorItemStacks[0] == null
-				|| deconstructingStack != null
-				|| this.getCurrentPower() < this.powerToCook) {
+	@Override
+	protected boolean canStartWork() {
+		if (getStackInSlot(0) == null || deconstructingStack != null
+				|| this.getCurrentPower() < getPowerToCook()) {
 			return false;
 		} else {
 			AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
-					.getRecipe(this.deconstructorItemStacks[0]);
+					.getRecipe(deconstructorInventory.getStackInSlot(0));
 			return recipe != null
 					&& (tank.getCapacity() - tank.getFluidAmount()) >= recipe.mass
-					&& deconstructorItemStacks[0].stackSize >= recipe.output.stackSize
+					&& getStackInSlot(0).stackSize >= recipe.output.stackSize
 					&& roomForItems(recipe.input);
 		}
 	}
 
+	@Override
+	protected void startWork() {
+		deconstructingStack = getStackInSlot(0).copy();
+		AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
+				.getRecipe(getStackInSlot(0));
+		deconstructingStack.stackSize = 0;
+
+		int massReq = 0;
+		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+
+		int i = 0;
+		do {
+			if (deconstructingStack.stackSize >= this.getInventoryStackLimit())
+				break;
+			if (getStackInSlot(0) == null)
+				break;
+
+			for (ItemStack stack : recipe.input) {
+				items.add(stack);
+			}
+
+			ItemStack[] ita = new ItemStack[items.size()];
+			items.toArray(ita);
+			if (!roomForItems(ita))
+				break;
+
+			if ((massReq += recipe.mass) > (tank.getCapacity() - tank
+					.getFluidAmount()))
+				break;
+
+			if (!consume(getPowerToCook()))
+				break;
+
+			deconstructingStack.stackSize += recipe.output.stackSize;
+			decrStackSize(0, recipe.output.stackSize);
+		} while (++i < getMaxSimultaneousSmelt());
+		cookTime = 0;
+		onInventoryChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * femtocraft.industry.tiles.TileEntityBaseEntityIndustry#continueWork()
+	 */
+	@Override
+	protected void continueWork() {
+		++cookTime;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * femtocraft.industry.tiles.TileEntityBaseEntityIndustry#canFinishWork()
+	 */
+	@Override
+	protected boolean canFinishWork() {
+		return cookTime >= ticksToCook;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see femtocraft.industry.tiles.TileEntityBaseEntityIndustry#finishWork()
+	 */
+	@Override
+	protected void finishWork() {
+		AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
+				.getRecipe(deconstructingStack);
+		for (int i = 0; i < deconstructingStack.stackSize; i += recipe.output.stackSize) {
+			if (recipe != null) {
+				for (ItemStack item : recipe.input) {
+					FemtocraftUtils.placeItem(item,
+							deconstructorInventory.getInventory(),
+							new int[] { 0 });
+				}
+				// tank.fill(new FluidStack(Femtocraft.mass, recipe.mass),
+				// true);
+				if (tank.getFluid() == null) {
+					tank.setFluid(new FluidStack(Femtocraft.mass, recipe.mass));
+				} else {
+					tank.getFluid().amount += recipe.mass;
+				}
+				// deconstructingStack = null;
+			}
+		}
+
+		deconstructingStack = null;
+		cookTime = 0;
+	}
+
 	private boolean roomForItems(ItemStack[] items) {
-		ItemStack[] fake = new ItemStack[deconstructorItemStacks.length];
+		ItemStack[] fake = new ItemStack[deconstructorInventory
+				.getSizeInventory()];
 		for (int i = 0; i < fake.length; ++i) {
-			ItemStack it = deconstructorItemStacks[i];
+			ItemStack it = deconstructorInventory.getStackInSlot(i);
 			fake[i] = it == null ? null : it.copy();
 		}
 		for (ItemStack item : items) {
@@ -300,46 +301,6 @@ public class TileEntityBaseEntityMicroDeconstructor extends
 		}
 
 		return true;
-	}
-
-	public void startWork() {
-		deconstructingStack = deconstructorItemStacks[0].copy();
-
-		AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
-				.getRecipe(this.deconstructorItemStacks[0]);
-		deconstructingStack.stackSize = recipe.output.stackSize;
-
-		deconstructorItemStacks[0].stackSize -= recipe.output.stackSize;
-
-		if (deconstructorItemStacks[0].stackSize <= 0) {
-			deconstructorItemStacks[0] = null;
-		}
-
-		this.consume(powerToCook);
-	}
-
-	public void endWork() {
-		AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
-				.getRecipe(deconstructingStack);
-
-		if (recipe != null) {
-			for (ItemStack item : recipe.input) {
-				FemtocraftUtils.placeItem(item, deconstructorItemStacks,
-						new int[] { 0 });
-			}
-			// tank.fill(new FluidStack(Femtocraft.mass, recipe.mass), true);
-			if (tank.getFluid() == null) {
-				tank.setFluid(new FluidStack(Femtocraft.mass, recipe.mass));
-			} else {
-				tank.getFluid().amount += recipe.mass;
-			}
-
-			deconstructingStack = null;
-		}
-	}
-
-	public boolean isDeconstructing() {
-		return deconstructingStack != null;
 	}
 
 	/**

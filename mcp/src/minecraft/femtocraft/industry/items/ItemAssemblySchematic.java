@@ -80,7 +80,7 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
 
 		AssemblerRecipe recipe = AssemblerRecipe
 				.loadFromNBTTagCompound((NBTTagCompound) itemCompound
-                        .getTag("recipe"));
+						.getTag("recipe"));
 		if (recipe == null) {
 			par3List.add("Invalid Recipe");
 			return;
@@ -92,7 +92,9 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
 		par3List.add(useLine);
 
 		String outputLine = String.format(EnumChatFormatting.YELLOW + "Output:"
-				+ EnumChatFormatting.RESET + " %dx%s", recipe.output.stackSize,
+				+ recipe.enumTechLevel.getTooltipEnum() + " %d"
+				+ EnumChatFormatting.GRAY + "x" + EnumChatFormatting.RESET
+				+ "%s" + EnumChatFormatting.RESET, recipe.output.stackSize,
 				recipe.output.getDisplayName());
 		par3List.add(outputLine);
 
@@ -108,8 +110,9 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
 			if (item == null) {
 				inputString = "empty";
 			} else {
-				inputString = String.format("%dx%s", item.stackSize,
-						item.getDisplayName());
+				inputString = String.format("%d" + EnumChatFormatting.GRAY
+						+ "x" + EnumChatFormatting.RESET + "%s",
+						item.stackSize, item.getDisplayName());
 			}
 			String inputLine = String.format(EnumChatFormatting.YELLOW
 					+ "Input %d:" + EnumChatFormatting.RESET + " %s", i,
@@ -119,26 +122,31 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
 
 		par3List.add("");
 
-		String massLine = String.format(EnumChatFormatting.YELLOW + "FluidMass:"
-				+ EnumChatFormatting.RESET + " %d", recipe.mass);
+		String massLine = String.format(EnumChatFormatting.YELLOW + "Mass:"
+				+ EnumChatFormatting.DARK_PURPLE + " %d"
+				+ EnumChatFormatting.RESET, recipe.mass);
 		par3List.add(massLine);
 
 		String techLevelLine = String.format(EnumChatFormatting.YELLOW
-				+ "EnumTechLevel:" + EnumChatFormatting.RESET + " %s",
+				+ "TechLevel:" + recipe.enumTechLevel.getTooltipEnum() + " %s"
+				+ EnumChatFormatting.RESET,
 				FemtocraftUtils.capitalize(recipe.enumTechLevel.key));
 		par3List.add(techLevelLine);
 
 		ResearchTechnology tech = recipe.tech;
+		EnumChatFormatting formatting;
 		String techString;
 		if (tech == null) {
+			formatting = EnumChatFormatting.BLACK;
 			techString = "none";
 		} else {
+			formatting = recipe.tech.level.getTooltipEnum();
 			techString = FemtocraftUtils.capitalize(tech.name);
 		}
 
 		String techLine = String.format(EnumChatFormatting.YELLOW
-				+ "ResearchTechnology Required:" + EnumChatFormatting.RESET + " %s",
-				techString);
+				+ "Technology Required:" + formatting + " %s"
+				+ EnumChatFormatting.RESET, techString);
 		par3List.add(techLine);
 	}
 
@@ -166,8 +174,9 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
 	}
 
 	public boolean hasRecipe(ItemStack stack) {
-        return stack.stackTagCompound != null && stack.stackTagCompound.hasKey("recipe");
-    }
+		return stack.stackTagCompound != null
+				&& stack.stackTagCompound.hasKey("recipe");
+	}
 
 	@Override
 	public AssemblerRecipe getRecipe(ItemStack stack) {
@@ -192,13 +201,11 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
 			return null;
 		if (!compound.hasKey("recipe"))
 			return null;
-		return AssemblerRecipe
-				.loadFromNBTTagCompound((NBTTagCompound) compound
-                        .getTag("recipe"));
+		return AssemblerRecipe.loadFromNBTTagCompound((NBTTagCompound) compound
+				.getTag("recipe"));
 	}
 
-	private boolean addRecipeToNBT(ItemStack stack,
-			AssemblerRecipe recipe) {
+	private boolean addRecipeToNBT(ItemStack stack, AssemblerRecipe recipe) {
 		if (stack.stackTagCompound == null) {
 			stack.stackTagCompound = new NBTTagCompound();
 		} else if (stack.stackTagCompound.hasKey("recipe")) {

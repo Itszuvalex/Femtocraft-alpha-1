@@ -19,6 +19,10 @@ public class TileEntityBaseEntityMicroFurnace extends
 		setTechLevel(EnumTechLevel.MICRO);
 	}
 
+	private static int powerToCook = 40;
+	private static int ticksToCook = 100;
+	private static int maxSmelt = 1;
+
 	/**
 	 * The ItemStacks that hold the items currently being used in the furnace
 	 */
@@ -36,15 +40,17 @@ public class TileEntityBaseEntityMicroFurnace extends
 	ItemStack smeltingStack = null;
 
 	protected int getMaxSimultaneousSmelt() {
-		return 1;
+		return maxSmelt;
 	}
 
 	protected int getTicksToCook() {
-		return 100;
+		// TODO: Load from configs
+		return ticksToCook;
 	}
 
 	protected int getPowerToCook() {
-		return 40;
+		// TODO: Load from configs
+		return powerToCook;
 	}
 
 	/**
@@ -217,14 +223,12 @@ public class TileEntityBaseEntityMicroFurnace extends
 			if (this.furnaceItemStacks[0].stackSize <= 0) {
 				this.furnaceItemStacks[0] = null;
 			}
-
-			++i;
-
-		} while (i < getMaxSimultaneousSmelt());
+		} while (++i < getMaxSimultaneousSmelt());
 
 		updateBlockState(true);
 
 		this.onInventoryChanged();
+		furnaceCookTime = 0;
 	}
 
 	@Override

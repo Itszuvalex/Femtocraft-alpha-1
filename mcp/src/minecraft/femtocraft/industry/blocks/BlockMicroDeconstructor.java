@@ -280,7 +280,7 @@ public class BlockMicroDeconstructor extends BlockContainer {
 				}
 			}
 
-			if (tileEntity.isDeconstructing()) {
+			if (tileEntity.isWorking()) {
 				ItemStack itemstack = tileEntity.deconstructingStack;
 
 				if (itemstack != null) {

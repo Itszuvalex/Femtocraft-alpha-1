@@ -4,10 +4,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.Arrays;
+
+import femtocraft.managers.research.EnumTechLevel;
 
 public class FemtocraftUtils {
 
@@ -166,19 +169,31 @@ public class FemtocraftUtils {
 		r1 += b & 255;
 		return r1;
 	}
-	
-	public static int blueColor()
-	{
+
+	public static int blueColor() {
 		return colorFromARGB(0, 0, 0, 255);
 	}
-	
-	public static int greenColor()
-	{
+
+	public static int greenColor() {
 		return colorFromARGB(0, 0, 255, 0);
 	}
-	
-	public static int orangeColor()
-	{
+
+	public static int orangeColor() {
 		return colorFromARGB(0, 255, 140, 0);
+	}
+
+	public static String blueify(String name) {
+		return EnumTechLevel.MICRO.getTooltipEnum() + name
+				+ EnumChatFormatting.RESET;
+	}
+
+	public static String greenify(String name) {
+		return EnumTechLevel.NANO.getTooltipEnum() + name
+				+ EnumChatFormatting.RESET;
+	}
+
+	public static String orangeify(String name) {
+		return EnumTechLevel.FEMTO.getTooltipEnum() + name
+				+ EnumChatFormatting.RESET;
 	}
 }
