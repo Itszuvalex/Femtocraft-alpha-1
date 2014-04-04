@@ -1,8 +1,8 @@
 package femtocraft.power.tiles;
 
-public class TileEntityFemtoCubeBody {
+public class TileEntityFemtoCubeChassis {
 
-	public TileEntityFemtoCubeBody() {
+	public TileEntityFemtoCubeChassis() {
 		// TODO Auto-generated constructor stub
 	}
 

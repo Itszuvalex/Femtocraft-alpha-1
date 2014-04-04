@@ -7,7 +7,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
@@ -95,6 +94,8 @@ import femtocraft.managers.research.ManagerResearch;
 import femtocraft.player.PropertiesNanite;
 import femtocraft.power.blocks.BlockConsumer;
 import femtocraft.power.blocks.BlockFemtoCable;
+import femtocraft.power.blocks.BlockFemtoCubeFrame;
+import femtocraft.power.blocks.BlockFemtoCubePort;
 import femtocraft.power.blocks.BlockGenerator;
 import femtocraft.power.blocks.BlockMicroCable;
 import femtocraft.power.blocks.BlockMicroChargingBase;
@@ -169,6 +170,9 @@ public class Femtocraft {
 	public static Block microCube;
 	public static Block nanoCubeFrame;
 	public static Block nanoCubePort;
+	public static Block femtoCubePort;
+	public static Block femtoCubeFrame;
+	public static Block femtoCubeChassis;
 	public static Block vacuumTube;
 	public static Block suctionPipe;
 	public static Block microChargingBase;
@@ -434,6 +438,21 @@ public class Femtocraft {
 				FemtocraftConfigs.FemtopowerNanoCubePortID);
 		GameRegistry.registerBlock(nanoCubePort, "BlockNanoCubePort");
 		LanguageRegistry.addName(nanoCubePort, "Nano-Cube Port");
+
+		femtoCubePort = new BlockFemtoCubePort(
+				FemtocraftConfigs.FemtopowerFemtoCubePortID);
+		GameRegistry.registerBlock(femtoCubePort, "BlockFemtoCubePort");
+		LanguageRegistry.addName(femtoCubePort, "Femto-Cube Port");
+
+		femtoCubeFrame = new BlockFemtoCubeFrame(
+				FemtocraftConfigs.FemtopowerFemtoCubeFrameID);
+		GameRegistry.registerBlock(femtoCubeFrame, "BlockFemtoCubeFrame");
+		LanguageRegistry.addName(femtoCubeFrame, "Femto-Cube Frame");
+
+		femtoCubeChassis = new BlockFemtoCubeChassis(
+				FemtocraftConfigs.FemtocpowerFemtoCubeChassisID);
+		GameRegistry.registerBlock(femtoCubeChassis, "BlockFemtoCubeChassis");
+		LanguageREgistry.addName(femtoCubeChassis, "Femto-Cube Chassis");
 
 		vacuumTube = new BlockVacuumTube(
 				FemtocraftConfigs.FemtocraftVacuumTubeID);
@@ -780,13 +799,12 @@ public class Femtocraft {
 				FemtocraftUtils.blueify("Organometallic Plate"));
 		GameRegistry.registerItem(itemOrganometallicPlate,
 				"Organometallic Plate");
-		
-		//End Decomp
+
+		// End Decomp
 
 		itemMicroPlating = new ItemMicroPlating(
 				FemtocraftConfigs.microPlatingID);
-		LanguageRegistry.addName(itemMicroPlating,
-				"Micro Plating");
+		LanguageRegistry.addName(itemMicroPlating, "Micro Plating");
 		GameRegistry.registerItem(itemMicroPlating, "Micro Plating");
 
 		// Produce
