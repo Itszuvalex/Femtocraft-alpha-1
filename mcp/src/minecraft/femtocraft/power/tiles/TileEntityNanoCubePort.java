@@ -239,37 +239,6 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * femtocraft.power.tiles.TileEntityPowerBase#readFromNBT(net.minecraft.
-	 * nbt.NBTTagCompound)
-	 */
-	@Override
-	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-		super.readFromNBT(par1nbtTagCompound);
-		// info.loadFromNBT(par1nbtTagCompound.getCompoundTag("info"));
-		// output = par1nbtTagCompound.getBoolean("output");
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * femtocraft.power.tiles.TileEntityPowerBase#writeToNBT(net.minecraft.nbt
-	 * .NBTTagCompound)
-	 */
-	@Override
-	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-		super.writeToNBT(par1nbtTagCompound);
-		//
-		// NBTTagCompound infoC = new NBTTagCompound();
-		// info.saveToNBT(infoC);
-		// par1nbtTagCompound.setTag("info", infoC);
-		// par1nbtTagCompound.setBoolean("output", output);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
 	 * femtocraft.core.tiles.TileEntityBase#handleDescriptionNBT(net.minecraft
 	 * .nbt.NBTTagCompound)
 	 */
@@ -280,22 +249,6 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
 		// output = compound.getBoolean("output");
 
 		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * femtocraft.core.tiles.TileEntityBase#saveToDescriptionCompound(net.minecraft
-	 * .nbt.NBTTagCompound)
-	 */
-	@Override
-	public void saveToDescriptionCompound(NBTTagCompound compound) {
-		super.saveToDescriptionCompound(compound);
-		// NBTTagCompound infoC = new NBTTagCompound();
-		// info.saveToNBT(infoC);
-		// compound.setTag("info", infoC);
-		// compound.setBoolean("output", output);
 	}
 
 	@Override

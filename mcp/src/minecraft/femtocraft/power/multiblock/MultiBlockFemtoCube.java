@@ -44,17 +44,17 @@ public class MultiBlockFemtoCube implements IMultiBlock {
 
 	private boolean checkBotTopLayer(World world, int x, int y, int z,
 			int yoffset, boolean strict) {
-		for (int i = 0; i < 5; ++i) {
-			for (int j = 0; j < 5; ++j) {
+		for (int i = -2; i <= 2; ++i) {
+			for (int j = -2; j <= 2; ++j) {
 				if (!isBlockInMultiBlock(world, x + i, y + yoffset, z + j, x,
 						y, z))
 					return false;
 
-				if (i == 0 || j == 0) {
+				if (i == -2 || j == -2 || i == 2 || j == 2) {
 					if (world.getBlockId(x + i, y + yoffset, z + j) != FemtocraftConfigs.FemtopowerFemtoCubeFrameID) {
 						return false;
 					}
-				} else if (i == 2 && j == 2) {
+				} else if (i == 0 && j == 0) {
 					if (world.getBlockId(x + i, y + yoffset, z + j) != FemtocraftConfigs.FemtopowerFemtoCubePortID) {
 						return false;
 					}
@@ -82,25 +82,29 @@ public class MultiBlockFemtoCube implements IMultiBlock {
 
 	private boolean checkMiddleLayer(World world, int x, int y, int z,
 			boolean strict) {
-		for (int i = 0; i < 5; ++i) {
-			for (int j = 0; j < 5; ++j) {
+		for (int i = -2; i <= 2; ++i) {
+			for (int j = -2; j <= 2; ++j) {
 				if (!isBlockInMultiBlock(world, x + i, y + 2, z + j, x, y, z))
 					return false;
 
-				if (i > 0 && i < 4 && j > 0 && j < 4) {
+				if (i > -2 && i < 2 && j > -2 && j < 2) {
 					continue;
 				}
 
-				if (i == 0 || j == 0) {
-					if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.FemtopowerFemtoCubeFrameID) {
-						return false;
-					}
-				} else if (i == 2 || j == 2) {
-					if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.FemtopowerFemtoCubePortID) {
-						return false;
+				if (((i == -2 || i == 2) && (j > -2 && j < 2))
+						|| (j == -2 || j == 2) && (i > -2 && i < 2)) {
+					if ((i == 0) || (j == 0)) {
+						if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.FemtopowerFemtoCubePortID) {
+							return false;
+						}
+					} else {
+						if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.FemtopowerFemtoCubeChassisID) {
+							return false;
+						}
 					}
 				} else {
-					if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.FemtopowerFemtoCubeChassisID) {
+
+					if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.FemtopowerFemtoCubeFrameID) {
 						return false;
 					}
 				}
@@ -123,22 +127,23 @@ public class MultiBlockFemtoCube implements IMultiBlock {
 
 	private boolean checkBetweenLayer(World world, int x, int y, int z,
 			int yoffset, boolean strict) {
-		for (int i = 0; i < 5; ++i) {
-			for (int j = 0; j < 5; ++j) {
+		for (int i = -2; i <= 2; ++i) {
+			for (int j = -2; j <= 2; ++j) {
 				if (!isBlockInMultiBlock(world, x + i, y + yoffset, z + j, x,
 						y, z))
 					return false;
 
-				if (i > 0 && i < 4 && j > 0 && j < 4) {
+				if (i > -2 && i < 2 && j > -2 && j < 2) {
 					continue;
 				}
 
-				if (i == 0 || j == 0) {
-					if (world.getBlockId(x + i, y + yoffset, z + j) != FemtocraftConfigs.FemtopowerFemtoCubeFrameID) {
+				if (((i == -2 || i == 2) && (j > -2 && j < 2))
+						|| (j == -2 || j == 2) && (i > -2 && i < 2)) {
+					if (world.getBlockId(x + i, y + yoffset, z + j) != FemtocraftConfigs.FemtopowerFemtoCubeChassisID) {
 						return false;
 					}
 				} else {
-					if (world.getBlockId(x + i, y + yoffset, z + j) != FemtocraftConfigs.FemtopowerFemtoCubeChassisID) {
+					if (world.getBlockId(x + i, y + yoffset, z + j) != FemtocraftConfigs.FemtopowerFemtoCubeFrameID) {
 						return false;
 					}
 				}

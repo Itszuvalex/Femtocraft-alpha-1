@@ -94,6 +94,7 @@ import femtocraft.managers.research.ManagerResearch;
 import femtocraft.player.PropertiesNanite;
 import femtocraft.power.blocks.BlockConsumer;
 import femtocraft.power.blocks.BlockFemtoCable;
+import femtocraft.power.blocks.BlockFemtoCubeChassis;
 import femtocraft.power.blocks.BlockFemtoCubeFrame;
 import femtocraft.power.blocks.BlockFemtoCubePort;
 import femtocraft.power.blocks.BlockGenerator;
@@ -450,9 +451,9 @@ public class Femtocraft {
 		LanguageRegistry.addName(femtoCubeFrame, "Femto-Cube Frame");
 
 		femtoCubeChassis = new BlockFemtoCubeChassis(
-				FemtocraftConfigs.FemtocpowerFemtoCubeChassisID);
+				FemtocraftConfigs.FemtopowerFemtoCubeChassisID);
 		GameRegistry.registerBlock(femtoCubeChassis, "BlockFemtoCubeChassis");
-		LanguageREgistry.addName(femtoCubeChassis, "Femto-Cube Chassis");
+		LanguageRegistry.addName(femtoCubeChassis, "Femto-Cube Chassis");
 
 		vacuumTube = new BlockVacuumTube(
 				FemtocraftConfigs.FemtocraftVacuumTubeID);

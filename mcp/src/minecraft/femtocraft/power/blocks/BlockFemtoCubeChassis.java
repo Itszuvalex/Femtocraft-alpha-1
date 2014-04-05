@@ -21,6 +21,7 @@ public class BlockFemtoCubeChassis extends TileContainer {
 	public BlockFemtoCubeChassis(int par1) {
 		super(par1, Material.iron);
 		setCreativeTab(Femtocraft.femtocraftTab);
+		setUnlocalizedName("BlockFemtoCubeChassis");
 
 		icons = new Icon[3][];
 		for (int i = 0; i < icons.length; ++i) {
@@ -47,7 +48,7 @@ public class BlockFemtoCubeChassis extends TileContainer {
 	private Icon iconForSide(MultiBlockInfo info, ForgeDirection dir, int x,
 			int y, int z) {
 		int xdif = x - info.x();
-		int ydif = y - info.y() - 1;
+		int ydif = y - info.y() - 2;
 		int zdif = z - info.z();
 
 		switch (dir) {
@@ -69,7 +70,11 @@ public class BlockFemtoCubeChassis extends TileContainer {
 	}
 
 	private Icon iconFromGrid(int xdif, int ydif) {
-		return icons[xdif + 1][ydif + 1];
+		// int i = (Math.abs(xdif +1)) % icons.length;
+		// int k = (Math.abs(ydif +1)) % icons[i].length;
+		int i = xdif + 1;
+		int k = ydif + 1;
+		return icons[k][i];
 	}
 
 	@Override
@@ -78,18 +83,19 @@ public class BlockFemtoCubeChassis extends TileContainer {
 		blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
 				+ ":" + "BlockFemtoCubeChassis_unformed");
 
-		for (int i = 0; i < icons.length; ++i) {
-			for (int j = 0; j < icons[i].length; ++j) {
-				if (i == 1 && j == 1) {
+		for (int x = 0; x < icons.length; ++x) {
+			for (int y = 0; y < icons[x].length; ++y) {
+				if (x > 0 && x < icons.length - 1 && y > 0
+						&& y < icons[x].length - 1) {
 					continue;
 				}
 
-				icons[i][j] = par1IconRegister.registerIcon(Femtocraft.ID
+				icons[x][y] = par1IconRegister.registerIcon(Femtocraft.ID
 						.toLowerCase()
 						+ ":"
 						+ "BlockFemtoCubeChassis_"
-						+ i
-						+ "_" + j);
+						+ x
+						+ "_" + y);
 			}
 		}
 	}

@@ -10,6 +10,9 @@ import femtocraft.industry.tiles.TileEntityNanoInnervator;
 import femtocraft.power.render.RenderNullEqualizer;
 import femtocraft.power.render.RenderOrbitalEqualizer;
 import femtocraft.power.tiles.TileEntityFemtoCable;
+import femtocraft.power.tiles.TileEntityFemtoCubeChassis;
+import femtocraft.power.tiles.TileEntityFemtoCubeFrame;
+import femtocraft.power.tiles.TileEntityFemtoCubePort;
 import femtocraft.power.tiles.TileEntityMicroCable;
 import femtocraft.power.tiles.TileEntityNanoCable;
 import femtocraft.power.tiles.TileEntityNanoCubeFrame;
@@ -70,6 +73,12 @@ public class ProxyCommon {
 				"TileEntityNanoCubeFrame");
 		GameRegistry.registerTileEntity(TileEntityNanoCubePort.class,
 				"TileEntityNanoCubePort");
+		GameRegistry.registerTileEntity(TileEntityFemtoCubeFrame.class,
+				"TileEntityFemtoCubeFrame");
+		GameRegistry.registerTileEntity(TileEntityFemtoCubeChassis.class,
+				"TileEntityFemtoCubeChassis");
+		GameRegistry.registerTileEntity(TileEntityFemtoCubePort.class,
+				"TileEntityFemtoCubePort");
 		GameRegistry.registerTileEntity(TileEntityVacuumTube.class,
 				"BlockVacuumTube");
 		GameRegistry.registerTileEntity(TileEntityPowerMicroChargingBase.class,

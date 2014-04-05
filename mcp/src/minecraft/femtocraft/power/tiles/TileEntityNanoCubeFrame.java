@@ -18,49 +18,6 @@ public class TileEntityNanoCubeFrame extends TileEntityBase implements
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-		super.readFromNBT(par1nbtTagCompound);
-//		info.loadFromNBT(par1nbtTagCompound.getCompoundTag("info"));
-	}
-
-	@Override
-	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-		super.writeToNBT(par1nbtTagCompound);
-//		NBTTagCompound infoC = new NBTTagCompound();
-//		info.saveToNBT(infoC);
-//		par1nbtTagCompound.setTag("info", infoC);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * femtocraft.core.tiles.TileEntityBase#handleDescriptionNBT(net.minecraft
-	 * .nbt.NBTTagCompound)
-	 */
-	@Override
-	public void handleDescriptionNBT(NBTTagCompound compound) {
-		super.handleDescriptionNBT(compound);
-//		info.loadFromNBT(compound.getCompoundTag("info"));
-//		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * femtocraft.core.tiles.TileEntityBase#saveToDescriptionCompound(net.minecraft
-	 * .nbt.NBTTagCompound)
-	 */
-	@Override
-	public void saveToDescriptionCompound(NBTTagCompound compound) {
-		super.saveToDescriptionCompound(compound);
-//		NBTTagCompound infoC = new NBTTagCompound();
-//		info.saveToNBT(infoC);
-//		compound.setTag("info", infoC);
-	}
-
-	@Override
 	public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
 		if (isValidMultiBlock()) {
 			TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(),
