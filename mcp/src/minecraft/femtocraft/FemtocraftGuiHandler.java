@@ -19,10 +19,13 @@ import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
 import femtocraft.industry.tiles.TileEntityEncoder;
 import femtocraft.industry.tiles.TileEntityNanoInnervator;
+import femtocraft.power.containers.ContainerFemtoCube;
 import femtocraft.power.containers.ContainerMicroCube;
 import femtocraft.power.containers.ContainerNanoCube;
+import femtocraft.power.gui.GuiFemtoCube;
 import femtocraft.power.gui.GuiMicroCube;
 import femtocraft.power.gui.GuiNanoCube;
+import femtocraft.power.tiles.TileEntityFemtoCubePort;
 import femtocraft.power.tiles.TileEntityNanoCubePort;
 import femtocraft.power.tiles.TileEntityPowerMicroCube;
 import femtocraft.research.containers.ContainerResearchConsole;
@@ -58,6 +61,8 @@ public class FemtocraftGuiHandler implements IGuiHandler {
 		} else if (tileEntity instanceof TileEntityEncoder) {
 			return new ContainerEncoder(player.inventory,
 					(TileEntityEncoder) tileEntity);
+		} else if (tileEntity instanceof TileEntityFemtoCubePort) {
+			return new ContainerFemtoCube((TileEntityFemtoCubePort) tileEntity);
 		} else if (tileEntity instanceof TileEntityNanoCubePort) {
 			return new ContainerNanoCube((TileEntityNanoCubePort) tileEntity);
 		} else if (tileEntity instanceof TileEntityPowerMicroCube) {
@@ -90,6 +95,8 @@ public class FemtocraftGuiHandler implements IGuiHandler {
 		} else if (tileEntity instanceof TileEntityEncoder) {
 			return new GuiEncoder(player.inventory,
 					(TileEntityEncoder) tileEntity);
+		} else if (tileEntity instanceof TileEntityFemtoCubePort) {
+			return new GuiFemtoCube((TileEntityFemtoCubePort) tileEntity);
 		} else if (tileEntity instanceof TileEntityNanoCubePort) {
 			return new GuiNanoCube((TileEntityNanoCubePort) tileEntity);
 		} else if (tileEntity instanceof TileEntityResearchComputer) {

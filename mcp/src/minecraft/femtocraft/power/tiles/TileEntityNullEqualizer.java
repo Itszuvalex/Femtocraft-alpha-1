@@ -1,7 +1,7 @@
 package femtocraft.power.tiles;
 
-import femtocraft.managers.research.EnumTechLevel;
 import net.minecraftforge.common.ForgeDirection;
+import femtocraft.managers.research.EnumTechLevel;
 
 public class TileEntityNullEqualizer extends TileEntityPowerBase {
 	public TileEntityNullEqualizer() {
@@ -11,7 +11,8 @@ public class TileEntityNullEqualizer extends TileEntityPowerBase {
 	}
 
 	@Override
-	public boolean canAcceptPowerOfLevel(EnumTechLevel level, ForgeDirection from) {
-		return (level.tier == EnumTechLevel.NANO.tier || level.tier == EnumTechLevel.FEMTO.tier);
+	public boolean canAcceptPowerOfLevel(EnumTechLevel level,
+			ForgeDirection from) {
+		return (level == EnumTechLevel.NANO || level == EnumTechLevel.FEMTO);
 	}
 }

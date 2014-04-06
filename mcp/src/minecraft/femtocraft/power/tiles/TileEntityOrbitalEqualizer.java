@@ -1,7 +1,7 @@
 package femtocraft.power.tiles;
 
-import femtocraft.managers.research.EnumTechLevel;
 import net.minecraftforge.common.ForgeDirection;
+import femtocraft.managers.research.EnumTechLevel;
 
 public class TileEntityOrbitalEqualizer extends TileEntityPowerBase {
 	public TileEntityOrbitalEqualizer() {
@@ -11,7 +11,8 @@ public class TileEntityOrbitalEqualizer extends TileEntityPowerBase {
 	}
 
 	@Override
-	public boolean canAcceptPowerOfLevel(EnumTechLevel level, ForgeDirection from) {
-		return (level.tier == EnumTechLevel.MICRO.tier || level.tier == EnumTechLevel.NANO.tier);
+	public boolean canAcceptPowerOfLevel(EnumTechLevel level,
+			ForgeDirection from) {
+		return (level == EnumTechLevel.MICRO || level == EnumTechLevel.NANO);
 	}
 }
