@@ -995,7 +995,7 @@ public class ManagerAssemblerRecipe {
 				done = true;
 			} catch (AssemblerRecipeFoundException e) {
 				// Attempt to offset, while staying inside crafting grid
-				if ((++xOffset) > 3) {
+				if ((++xOffset) >= 3) {
 					xOffset = 0;
 					++yOffset;
 				}
@@ -1011,7 +1011,7 @@ public class ManagerAssemblerRecipe {
 		boolean done = false;
 		int xoffset = 0;
 		int yoffset = 0;
-		while ((!done) && ((xoffset + recipeWidth) < 3)
+		while ((!done) && ((xoffset + recipeWidth) <= 3)
 				&& ((yoffset + recipeHeight) <= 3)) {
 			ItemStack[] input = new ItemStack[9];
 			Arrays.fill(input, null);
@@ -1027,7 +1027,7 @@ public class ManagerAssemblerRecipe {
 				done = true;
 			} catch (AssemblerRecipeFoundException e) {
 				// Attempt to offset, while staying inside crafting grid
-				if ((++xoffset + recipeWidth) >= 3) {
+				if ((++xoffset + recipeWidth) > 3) {
 					xoffset = 0;
 					++yoffset;
 				}
