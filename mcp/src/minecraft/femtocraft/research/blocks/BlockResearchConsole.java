@@ -10,14 +10,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.core.blocks.TileContainer;
-import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
 import femtocraft.research.tiles.TileEntityResearchConsole;
 
 public class BlockResearchConsole extends TileContainer {
+	public Icon side;
+	public Icon top;
+	public Icon bot;
 
 	@Override
 	public void breakBlock(World par1World, int par2, int par3, int par4,
@@ -85,7 +88,14 @@ public class BlockResearchConsole extends TileContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int par1, int par2) {
-		return super.getIcon(par1, par2);
+		switch (ForgeDirection.getOrientation(par1)) {
+		case UP:
+			return top;
+		case DOWN:
+			return bot;
+		default:
+			return side;
+		}
 	}
 
 	@Override
@@ -96,7 +106,12 @@ public class BlockResearchConsole extends TileContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		super.registerIcons(par1IconRegister);
+		blockIcon = side = par1IconRegister.registerIcon(Femtocraft.ID
+				.toLowerCase() + ":" + "BlockResearchConsole_side");
+		top = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":"
+				+ "BlockResearchConsole_top");
+		bot = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":"
+				+ "BlockResearchConsole_bot");
 	}
 
 }
