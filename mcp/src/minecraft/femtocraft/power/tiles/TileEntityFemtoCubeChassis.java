@@ -16,6 +16,11 @@ public class TileEntityFemtoCubeChassis extends TileEntityBase implements
 	public TileEntityFemtoCubeChassis() {
 		info = new MultiBlockInfo();
 	}
+	
+	@Override
+	public boolean canUpdate() {
+		return false;
+	}
 
 	@Override
 	public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {

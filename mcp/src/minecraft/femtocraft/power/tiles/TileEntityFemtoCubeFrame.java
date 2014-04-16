@@ -16,6 +16,11 @@ public class TileEntityFemtoCubeFrame extends TileEntityBase implements
 	public TileEntityFemtoCubeFrame() {
 		info = new MultiBlockInfo();
 	}
+	
+	@Override
+	public boolean canUpdate() {
+		return false;
+	}
 
 	@Override
 	public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {

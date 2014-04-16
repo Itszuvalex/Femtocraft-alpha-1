@@ -1,17 +1,12 @@
 package femtocraft.industry.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import femtocraft.Femtocraft;
-import femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
-import femtocraft.render.RenderSimpleMachine;
+import java.util.Random;
+
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -20,10 +15,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.Femtocraft;
+import femtocraft.core.blocks.TileContainer;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
+import femtocraft.render.RenderSimpleMachine;
 
-import java.util.Random;
-
-public class BlockMicroDeconstructor extends BlockContainer {
+public class BlockMicroDeconstructor extends TileContainer {
 	/**
 	 * Is the random generator used by furnace to drop the inventory contents in
 	 * random directions.
@@ -35,7 +34,7 @@ public class BlockMicroDeconstructor extends BlockContainer {
 
 	public BlockMicroDeconstructor(int par1) {
 		super(par1, Material.iron);
-		setUnlocalizedName("microDeconstructor");
+		setUnlocalizedName("BlockMicroDeconstructor");
 		setHardness(3.5f);
 		setStepSound(Block.soundStoneFootstep);
 		setCreativeTab(Femtocraft.femtocraftTab);
@@ -49,13 +48,6 @@ public class BlockMicroDeconstructor extends BlockContainer {
 	@Override
 	public int getRenderType() {
 		return RenderSimpleMachine.renderID;
-	}
-
-	/**
-	 * Returns the ID of the items to drop on destruction.
-	 */
-	public int idDropped(int par1, Random par2Random, int par3) {
-		return Femtocraft.microDeconstructor.blockID;
 	}
 
 	/**
@@ -123,74 +115,6 @@ public class BlockMicroDeconstructor extends BlockContainer {
 	}
 
 	/**
-	 * Called upon block activation (right click on the block.)
-	 */
-	public boolean onBlockActivated(World par1World, int par2, int par3,
-			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
-			float par8, float par9) {
-		if (par1World.isRemote) {
-			return true;
-		} else {
-			TileEntityBaseEntityMicroDeconstructor tileentityfurnace = (TileEntityBaseEntityMicroDeconstructor) par1World
-					.getBlockTileEntity(par2, par3, par4);
-
-			if (tileentityfurnace != null) {
-				par5EntityPlayer.openGui(Femtocraft.instance, 0, par1World,
-						par2, par3, par4);
-			}
-
-			return true;
-		}
-	}
-
-	@SideOnly(Side.CLIENT)
-	/**
-	 * A randomly called display update to be able to add particles or other items for display
-	 */
-	public void randomDisplayTick(World par1World, int par2, int par3,
-			int par4, Random par5Random) {
-		// if (this.isActive)
-		// {
-		// int l = par1World.getBlockMetadata(par2, par3, par4);
-		// float f = (float)par2 + 0.5F;
-		// float f1 = (float)par3 + 0.0F + par5Random.nextFloat() * 6.0F /
-		// 16.0F;
-		// float f2 = (float)par4 + 0.5F;
-		// float f3 = 0.52F;
-		// float f4 = par5Random.nextFloat() * 0.6F - 0.3F;
-		//
-		// if (l == 4)
-		// {
-		// par1World.spawnParticle("smoke", (double)(f - f3), (double)f1,
-		// (double)(f2 + f4), 0.0D, 0.0D, 0.0D);
-		// par1World.spawnParticle("flame", (double)(f - f3), (double)f1,
-		// (double)(f2 + f4), 0.0D, 0.0D, 0.0D);
-		// }
-		// else if (l == 5)
-		// {
-		// par1World.spawnParticle("smoke", (double)(f + f3), (double)f1,
-		// (double)(f2 + f4), 0.0D, 0.0D, 0.0D);
-		// par1World.spawnParticle("flame", (double)(f + f3), (double)f1,
-		// (double)(f2 + f4), 0.0D, 0.0D, 0.0D);
-		// }
-		// else if (l == 2)
-		// {
-		// par1World.spawnParticle("smoke", (double)(f + f4), (double)f1,
-		// (double)(f2 - f3), 0.0D, 0.0D, 0.0D);
-		// par1World.spawnParticle("flame", (double)(f + f4), (double)f1,
-		// (double)(f2 - f3), 0.0D, 0.0D, 0.0D);
-		// }
-		// else if (l == 3)
-		// {
-		// par1World.spawnParticle("smoke", (double)(f + f4), (double)f1,
-		// (double)(f2 + f3), 0.0D, 0.0D, 0.0D);
-		// par1World.spawnParticle("flame", (double)(f + f4), (double)f1,
-		// (double)(f2 + f3), 0.0D, 0.0D, 0.0D);
-		// }
-		// }
-	}
-
-	/**
 	 * Returns a new instance of a block's tile entity class. Called on placing
 	 * the block.
 	 */
@@ -224,7 +148,8 @@ public class BlockMicroDeconstructor extends BlockContainer {
 
 		// if (par6ItemStack.hasDisplayName())
 		// {
-		// ((TileEntityBaseEntityMicroDeconstructor)par1World.getBlockTileEntity(par2, par3,
+		// ((TileEntityBaseEntityMicroDeconstructor)par1World.getBlockTileEntity(par2,
+		// par3,
 		// par4)).setGuiDisplayName(par6ItemStack.getDisplayName());
 		// }
 	}
@@ -345,13 +270,5 @@ public class BlockMicroDeconstructor extends BlockContainer {
 			int par4, int par5) {
 		return Container.calcRedstoneFromInventory((IInventory) par1World
 				.getBlockTileEntity(par2, par3, par4));
-	}
-
-	@SideOnly(Side.CLIENT)
-	/**
-	 * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
-	 */
-	public int idPicked(World par1World, int par2, int par3, int par4) {
-		return Femtocraft.microDeconstructor.blockID;
 	}
 }

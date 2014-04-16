@@ -6,6 +6,9 @@ import femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
 import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
 import femtocraft.industry.tiles.TileEntityEncoder;
+import femtocraft.industry.tiles.TileEntityFemtoImpulser;
+import femtocraft.industry.tiles.TileEntityFemtoRepurposer;
+import femtocraft.industry.tiles.TileEntityNanoDismantler;
 import femtocraft.industry.tiles.TileEntityNanoInnervator;
 import femtocraft.power.render.RenderNullEqualizer;
 import femtocraft.power.render.RenderOrbitalEqualizer;
@@ -61,6 +64,12 @@ public class ProxyCommon {
 				"TileEntityEncoder");
 		GameRegistry.registerTileEntity(TileEntityNanoInnervator.class,
 				"TileEntityNanoInnervator");
+		GameRegistry.registerTileEntity(TileEntityNanoDismantler.class,
+				"TileEntityNanoDeconstructor");
+		GameRegistry.registerTileEntity(TileEntityFemtoImpulser.class,
+				"TileEntityFemtoImpulser");
+		GameRegistry.registerTileEntity(TileEntityFemtoRepurposer.class,
+				"TileEntityFemtoRepurposer");
 		GameRegistry.registerTileEntity(TileEntityMicroCable.class,
 				"blockMicroCable");
 		GameRegistry.registerTileEntity(TileEntityNanoCable.class,

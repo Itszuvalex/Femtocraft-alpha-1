@@ -1,7 +1,6 @@
 package femtocraft.power.tiles;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import femtocraft.core.multiblock.IMultiBlockComponent;
@@ -11,7 +10,8 @@ import femtocraft.utils.FemtocraftDataUtils.Saveable;
 
 public class TileEntityNanoCubeFrame extends TileEntityBase implements
 		IMultiBlockComponent {
-	private @Saveable(desc = true) MultiBlockInfo info;
+	private @Saveable(desc = true)
+	MultiBlockInfo info;
 
 	public TileEntityNanoCubeFrame() {
 		info = new MultiBlockInfo();
@@ -31,6 +31,11 @@ public class TileEntityNanoCubeFrame extends TileEntityBase implements
 					info.y(), info.z());
 			return true;
 		}
+		return false;
+	}
+
+	@Override
+	public boolean canUpdate() {
 		return false;
 	}
 

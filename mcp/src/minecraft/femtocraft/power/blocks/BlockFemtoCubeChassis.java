@@ -72,9 +72,13 @@ public class BlockFemtoCubeChassis extends TileContainer {
 	private Icon iconFromGrid(int xdif, int ydif) {
 		// int i = (Math.abs(xdif +1)) % icons.length;
 		// int k = (Math.abs(ydif +1)) % icons[i].length;
-		int i = xdif + 1;
-		int k = ydif + 1;
-		return icons[k][i];
+		try {
+			int i = xdif + 1;
+			int k = ydif + 1;
+			return icons[k][i];
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return this.blockIcon;
+		}
 	}
 
 	@Override

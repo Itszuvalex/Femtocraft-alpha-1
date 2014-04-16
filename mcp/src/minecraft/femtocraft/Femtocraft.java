@@ -84,9 +84,12 @@ import femtocraft.core.ore.BlockOrePlatinum;
 import femtocraft.core.ore.BlockOreThorium;
 import femtocraft.core.ore.BlockOreTitanium;
 import femtocraft.industry.blocks.BlockEncoder;
+import femtocraft.industry.blocks.BlockFemtoImpulser;
+import femtocraft.industry.blocks.BlockFemtoRepurposer;
 import femtocraft.industry.blocks.BlockMicroDeconstructor;
 import femtocraft.industry.blocks.BlockMicroFurnace;
 import femtocraft.industry.blocks.BlockMicroReconstructor;
+import femtocraft.industry.blocks.BlockNanoDismantler;
 import femtocraft.industry.blocks.BlockNanoInnervator;
 import femtocraft.industry.items.ItemPaperSchematic;
 import femtocraft.managers.ManagerRecipe;
@@ -166,8 +169,10 @@ public class Femtocraft {
 	public static Block encoder;
 	public static Block nanoInnervatorUnlit;
 	public static Block nanoInnervatorLit;
+	public static Block nanoDismantler;
 	public static Block femtoImpulserLit;
 	public static Block femtoImpulserUnlit;
+	public static Block femtoRepurposer;
 	public static Block microCube;
 	public static Block nanoCubeFrame;
 	public static Block nanoCubePort;
@@ -424,6 +429,24 @@ public class Femtocraft {
 
 		nanoInnervatorLit = new BlockNanoInnervator(
 				FemtocraftConfigs.FemtocraftNanoInnervatorLitID, true);
+
+		nanoDismantler = new BlockNanoDismantler(
+				FemtocraftConfigs.FemtocraftNanoDismantlerID);
+		GameRegistry.registerBlock(nanoDismantler, "BlockNanoDismantler");
+		LanguageRegistry.addName(nanoDismantler, "Nano Dismantler");
+
+		femtoImpulserUnlit = new BlockFemtoImpulser(
+				FemtocraftConfigs.FemtocraftFemtoImpulserUnlitID, false);
+		GameRegistry.registerBlock(femtoImpulserUnlit, "BlockFemtoImpulser");
+		LanguageRegistry.addName(femtoImpulserUnlit, "Femto Impulser");
+
+		femtoImpulserLit = new BlockFemtoImpulser(
+				FemtocraftConfigs.FemtocraftFemtoImpulserLitID, true);
+
+		femtoRepurposer = new BlockFemtoRepurposer(
+				FemtocraftConfigs.FemtocraftFemtoRepurposerID);
+		GameRegistry.registerBlock(femtoRepurposer, "BlockFemtoRepurposer");
+		LanguageRegistry.addName(femtoRepurposer, "Femto Repurposer");
 
 		microCube = new BlockMicroCube(FemtocraftConfigs.FemtopowerMicroCubeID);
 		GameRegistry.registerBlock(microCube, ItemBlockMicroCube.class,

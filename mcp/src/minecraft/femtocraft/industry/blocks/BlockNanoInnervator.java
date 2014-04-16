@@ -12,7 +12,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -20,7 +19,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.core.blocks.TileContainer;
-import femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
 import femtocraft.industry.tiles.TileEntityNanoInnervator;
 import femtocraft.render.RenderSimpleMachine;
 
@@ -243,7 +241,7 @@ public class BlockNanoInnervator extends TileContainer {
 	public void breakBlock(World par1World, int par2, int par3, int par4,
 			int par5, int par6) {
 		if (!keepFurnaceInventory) {
-			TileEntityBaseEntityMicroFurnace tileentityfurnace = (TileEntityBaseEntityMicroFurnace) par1World
+			TileEntityNanoInnervator tileentityfurnace = (TileEntityNanoInnervator) par1World
 					.getBlockTileEntity(par2, par3, par4);
 
 			if (tileentityfurnace != null) {

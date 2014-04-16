@@ -315,6 +315,11 @@ public class TileEntityBaseEntityMicroDeconstructor extends
 						(double) this.zCoord + 0.5D) <= 64.0D;
 	}
 
+	@Override
+	public boolean hasGUI() {
+		return true;
+	}
+
 	public void openChest() {
 	}
 

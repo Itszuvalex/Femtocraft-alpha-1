@@ -1,12 +1,8 @@
 package femtocraft.industry.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import femtocraft.Femtocraft;
-import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
-import femtocraft.render.RenderSimpleMachine;
+import java.util.Random;
+
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,10 +16,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.Femtocraft;
+import femtocraft.core.blocks.TileContainer;
+import femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
+import femtocraft.render.RenderSimpleMachine;
 
-import java.util.Random;
-
-public class BlockMicroReconstructor extends BlockContainer {
+public class BlockMicroReconstructor extends TileContainer {
 	/**
 	 * Is the random generator used by furnace to drop the inventory contents in
 	 * random directions.
@@ -224,7 +224,8 @@ public class BlockMicroReconstructor extends BlockContainer {
 
 		// if (par6ItemStack.hasDisplayName())
 		// {
-		// ((TileEntityBaseEntityMicroDeconstructor)par1World.getBlockTileEntity(par2, par3,
+		// ((TileEntityBaseEntityMicroDeconstructor)par1World.getBlockTileEntity(par2,
+		// par3,
 		// par4)).setGuiDisplayName(par6ItemStack.getDisplayName());
 		// }
 	}
