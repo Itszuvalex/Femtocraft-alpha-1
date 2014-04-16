@@ -281,7 +281,7 @@ public class BlockMicroReconstructor extends TileContainer {
 				}
 			}
 
-			if (tileEntity.isReconstructing()) {
+			if (tileEntity.isWorking()) {
 				ItemStack[] itemstacks = tileEntity.reconstructingStacks;
 
 				if (itemstacks != null) {
