@@ -24,6 +24,8 @@ public class TileEntityBaseEntityMicroReconstructor extends
 	private @Saveable
 	FluidTank tank;
 
+	private boolean hasItems = true;
+
 	public TileEntityBaseEntityMicroReconstructor() {
 		super();
 		setMaxStorage(800);
@@ -31,8 +33,8 @@ public class TileEntityBaseEntityMicroReconstructor extends
 		setTechLevel(EnumTechLevel.MICRO);
 	}
 
-	private static int powerToCook = 40;
-	private static int ticksToCook = 100;
+	public static int powerToCook = 40;
+	public static int ticksToCook = 100;
 	public static int maxSmelt = 1;
 
 	/**
@@ -112,6 +114,8 @@ public class TileEntityBaseEntityMicroReconstructor extends
 				reconstructorItemStacks[i] = null;
 			}
 		}
+
+		hasItems = true;
 
 		super.onInventoryChanged();
 	}
@@ -245,44 +249,64 @@ public class TileEntityBaseEntityMicroReconstructor extends
 						&& reconstructorItemStacks[6] == null
 						&& reconstructorItemStacks[7] == null && reconstructorItemStacks[8] == null)
 				|| getSchematic() == null
-				|| this.getCurrentPower() < this.powerToCook) {
+				|| this.getCurrentPower() < this.powerToCook && cookTime != 0) {
 			return false;
 		} else {
+			if (!hasItems)
+				return false;
 			AssemblerRecipe recipe = getSchematic().getRecipe(
 					reconstructorItemStacks[10]);
-			return recipe != null && tank.getFluidAmount() >= recipe.mass
-					&& roomForItem(recipe.output) && hasItems(recipe.input);
+			if (recipe == null)
+				return false;
+			if (hasItems(recipe.input)) {
+				hasItems = false;
+				return false;
+			}
+			return tank.getFluidAmount() >= recipe.mass
+					&& roomForItem(recipe.output);
 		}
 	}
 
 	protected void startWork() {
-		reconstructingStacks = new ItemStack[9];
-		for (int i = 0; i < getMaxSimultaneousSmelt(); ++i) {
+		IAssemblerSchematic as = getSchematic();
+		AssemblerRecipe recipe = as.getRecipe(reconstructorItemStacks[10]);
 
-			for (int j = 0; j < 9; ++j) {
-				ItemStack s = reconstructorItemStacks[j];
-				reconstructingStacks[j] = s == null ? null : s.copy();
-			}
-			IAssemblerSchematic as = getSchematic();
-			AssemblerRecipe recipe = as.getRecipe(reconstructorItemStacks[10]);
+		if (recipe == null)
+			return;
 
-			for (int j = 0; j < recipe.input.length; ++j) {
-				if (recipe.input[j] == null)
-					continue;
-				FemtocraftUtils.removeItem(reconstructingStacks[j],
-						reconstructorItemStacks, new int[] { 0, 1, 2, 3, 4, 5,
-								6, 7, 8, 9, 10 });
-			}
-
-			tank.getFluid().amount -= recipe.mass;
-			this.consume(powerToCook);
-
-			if (!as.onAssemble(reconstructorItemStacks[10])) {
-				reconstructorItemStacks[10] = as
-						.resultOfBreakdown(reconstructorItemStacks[10]);
-			}
+		ItemStack ocopy = recipe.output.copy();
+		ItemStack[] icopy = new ItemStack[9];
+		for (int i = 0; i < recipe.input.length; ++i) {
+			icopy[i] = recipe.input[i] == null ? null : recipe.input[i].copy();
 		}
-
+		reconstructingStacks = new ItemStack[9];
+		
+		int i = 0;
+		do {
+//			if (deconstructingStack.stackSize >= this.getInventoryStackLimit())
+//				break;
+//			if (getStackInSlot(0) == null)
+//				break;
+//
+//			for (ItemStack stack : recipe.input) {
+//				items.add(stack);
+//			}
+//
+//			ItemStack[] ita = new ItemStack[items.size()];
+//			items.toArray(ita);
+//			if (!roomForItems(ita))
+//				break;
+//
+//			if ((massReq += recipe.mass) > (tank.getCapacity() - tank
+//					.getFluidAmount()))
+//				break;
+//
+//			if (!consume(getPowerToCook()))
+//				break;
+//
+//			deconstructingStack.stackSize += recipe.output.stackSize;
+//			decrStackSize(0, recipe.output.stackSize);
+		} while (++i < getMaxSimultaneousSmelt());
 	}
 
 	@Override

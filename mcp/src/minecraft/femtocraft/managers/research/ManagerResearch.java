@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,7 +14,6 @@ import java.util.HashMap;
 import java.util.logging.Level;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,7 +24,6 @@ import femtocraft.Femtocraft;
 import femtocraft.managers.research.EventTechnology.TechnologyAddedEvent;
 import femtocraft.research.gui.technology.GuiTechnologyBasicCircuits;
 import femtocraft.research.gui.technology.GuiTechnologyMachining;
-import femtocraft.research.gui.technology.GuiTechnologyPaperSchematic;
 
 //TODO:  Separate players out into their own files
 public class ManagerResearch {
@@ -39,19 +39,27 @@ public class ManagerResearch {
 
 	private String lastWorldLoaded = "";
 
-	public static ResearchTechnology technologyBasicCircuits = new ResearchTechnology(
-			"Basic Circuits", "Farenite, Circuit Boards", EnumTechLevel.MACRO,
-			null, new ItemStack(Femtocraft.microCircuitBoard), 2, -3, false,
-			null, GuiTechnologyBasicCircuits.class, null);
+	@Retention(RetentionPolicy.RUNTIME)
+	public @interface Technology {
+	};
+
+	@Technology
 	public static ResearchTechnology technologyMetallurgy = new ResearchTechnology(
 			"Metallurgy", "Titanium, Thorium, Platinum", EnumTechLevel.MACRO,
 			null, new ItemStack(Femtocraft.ingotTemperedTitanium), -2, -3,
 			false, null);
+	@Technology
+	public static ResearchTechnology technologyBasicCircuits = new ResearchTechnology(
+			"Basic Circuits", "Farenite, Circuit Boards", EnumTechLevel.MACRO,
+			null, new ItemStack(Femtocraft.microCircuitBoard), 2, -3, false,
+			null, GuiTechnologyBasicCircuits.class, null);
+	@Technology
 	public static ResearchTechnology technologyWorldStructure = new ResearchTechnology(
 			"Basic Chemistry", "Composition of Matter", EnumTechLevel.MACRO,
 			null, new ItemStack(Femtocraft.itemMineralLattice), 0, -3, true,
 			null);
-	// TODO: replace maching icon with micro machine chassis item
+	@Technology
+	// TODO: replace machining icon with micro machine chassis item
 	public static ResearchTechnology technologyMachining = new ResearchTechnology(
 			"Machining", "Start your industry!", EnumTechLevel.MICRO,
 			new ArrayList<ResearchTechnology>(Arrays.asList(
@@ -69,15 +77,54 @@ public class ManagerResearch {
 					Femtocraft.ingotTemperedTitanium))),
 			GuiTechnologyMachining.class, new ItemStack(
 					Femtocraft.itemMicroPlating));
-	public static ResearchTechnology technologyPaperSchematic = new ResearchTechnology(
-			"Paper Schematic", "Like IKEA for reality!", EnumTechLevel.MICRO,
+	@Technology
+	// TODO: replace icon with micro coil
+	public static ResearchTechnology technologyPotentiality = new ResearchTechnology(
+			"Potentiality", "", EnumTechLevel.MICRO,
 			new ArrayList<ResearchTechnology>(Arrays.asList(
-					technologyWorldStructure, technologyMachining)),
-			new ItemStack(Femtocraft.paperSchematic), 1, -1, false,
-			new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Item.paper),
-					new ItemStack(Item.paper), new ItemStack(Item.paper))),
-			GuiTechnologyPaperSchematic.class, new ItemStack(
-					Femtocraft.paperSchematic, 1));
+					technologyBasicCircuits, technologyBasicCircuits)),
+			new ItemStack(Femtocraft.blockMicroCable), 0, 0, false,
+			new ArrayList<ItemStack>());
+	@Technology
+	public static ResearchTechnology technologyAlgorithms = new ResearchTechnology(
+			"Algorithms", "", EnumTechLevel.MICRO,
+			new ArrayList<ResearchTechnology>(Arrays
+					.asList(technologyMachining)), new ItemStack(
+					Femtocraft.encoder), 0, 0, false,
+			new ArrayList<ItemStack>());
+	@Technology
+	public static ResearchTechnology technologyMechanicalPrecision = new ResearchTechnology(
+			"Mechanical Precision", "", EnumTechLevel.MICRO,
+			new ArrayList<ResearchTechnology>(Arrays
+					.asList(technologyMachining)), new ItemStack(
+					Femtocraft.microFurnaceUnlit), 0, 0, false,
+			new ArrayList<ItemStack>());
+	@Technology
+	// TODO: replace with Capacitor
+	public static ResearchTechnology technologyPotentialityStorage = new ResearchTechnology(
+			"Potentiality Storage", "", EnumTechLevel.MICRO,
+			new ArrayList<ResearchTechnology>(Arrays.asList(
+					technologyPotentiality, technologyMachining)),
+			new ItemStack(Femtocraft.microCube), 0, 0, false,
+			new ArrayList<ItemStack>());
+	@Technology
+	public static ResearchTechnology technologyPotentialityHarnessing = new ResearchTechnology(
+			"Potentiality Harnessint", "", EnumTechLevel.MICRO,
+			new ArrayList<ResearchTechnology>(Arrays
+					.asList(technologyPotentiality)), new ItemStack(
+					Femtocraft.microChargingBase), 0, 0, false,
+			new ArrayList<ItemStack>());
+
+	// public static ResearchTechnology technologyPaperSchematic = new
+	// ResearchTechnology(
+	// "Paper Schematic", "Like IKEA for reality!", EnumTechLevel.MICRO,
+	// new ArrayList<ResearchTechnology>(Arrays.asList(
+	// technologyWorldStructure, technologyMachining)),
+	// new ItemStack(Femtocraft.paperSchematic), 1, -1, false,
+	// new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Item.paper),
+	// new ItemStack(Item.paper), new ItemStack(Item.paper))),
+	// GuiTechnologyPaperSchematic.class, new ItemStack(
+	// Femtocraft.paperSchematic, 1));
 
 	public ManagerResearch() {
 		technologies = new HashMap<String, ResearchTechnology>();
@@ -89,7 +136,7 @@ public class ManagerResearch {
 	private void loadTechnologies() {
 		Field[] fields = ManagerResearch.class.getFields();
 		for (Field field : fields) {
-			if (field.getName().startsWith("technology")) {
+			if (field.getAnnotation(Technology.class) != null) {
 				try {
 					addTechnology((ResearchTechnology) field.get(null));
 				} catch (IllegalArgumentException e) {
