@@ -340,7 +340,6 @@ public class ManagerResearch {
 							"Failed to load data from file " + pdata.getName()
 									+ " in world - " + savePath(world) + ".");
 					e.printStackTrace();
-					return false;
 				}
 			}
 
