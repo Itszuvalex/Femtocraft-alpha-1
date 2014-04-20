@@ -22,6 +22,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import femtocraft.Femtocraft;
 import femtocraft.managers.research.EventTechnology.TechnologyAddedEvent;
+import femtocraft.research.gui.graph.TechnologyGraph;
 import femtocraft.research.gui.technology.GuiTechnologyBasicCircuits;
 import femtocraft.research.gui.technology.GuiTechnologyMachining;
 
@@ -82,7 +83,7 @@ public class ManagerResearch {
 	public static ResearchTechnology technologyPotentiality = new ResearchTechnology(
 			"Potentiality", "", EnumTechLevel.MICRO,
 			new ArrayList<ResearchTechnology>(Arrays.asList(
-					technologyBasicCircuits, technologyBasicCircuits)),
+					technologyBasicCircuits, technologyWorldStructure)),
 			new ItemStack(Femtocraft.blockMicroCable), 0, 0, false,
 			new ArrayList<ItemStack>());
 	@Technology
@@ -146,6 +147,14 @@ public class ManagerResearch {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Create and calculate the DAG for technologies.
+	 */
+	public void calculateGraph() {
+		TechnologyGraph graph = new TechnologyGraph(technologies);
+		graph.computePlacements();
 	}
 
 	public Collection<ResearchTechnology> getTechnologies() {

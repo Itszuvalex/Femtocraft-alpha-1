@@ -12,14 +12,14 @@ public interface IPowerContainer {
 	/**
 	 * 
 	 * @param level
-	 *            EnumTechLevel of power
+	 *            EnumTechLevel of power of container
 	 * @return True if can accept power of that level
 	 */
 	public boolean canAcceptPowerOfLevel(EnumTechLevel level);
 
 	/**
 	 * 
-	 * @return EnumTechLevel of power this machine will give to the given direciton
+	 * @return EnumTechLevel of container
 	 */
 	public EnumTechLevel getTechLevel();
 
@@ -60,7 +60,7 @@ public interface IPowerContainer {
 	/**
 	 * 
 	 * @return True if container has room and can accept charging from direction
-	 *         @from false otherwise
+	 * @from false otherwise
 	 */
 	public boolean canCharge();
 

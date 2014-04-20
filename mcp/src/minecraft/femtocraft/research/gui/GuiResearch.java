@@ -1,8 +1,5 @@
 package femtocraft.research.gui;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -13,28 +10,21 @@ import net.minecraft.client.gui.GuiSmallButton;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.stats.Achievement;
-import net.minecraft.stats.AchievementList;
-import net.minecraft.stats.StatFileWriter;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.AchievementPage;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
-import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.managers.research.ResearchPlayer;
 import femtocraft.managers.research.ResearchTechnology;
 import femtocraft.managers.research.ResearchTechnologyStatus;
+import femtocraft.render.RenderUtils;
 import femtocraft.utils.FemtocraftUtils;
 
 @SideOnly(Side.CLIENT)
@@ -157,7 +147,8 @@ public class GuiResearch extends GuiScreen {
 						// Open GUIS
 						Minecraft.getMinecraft().sndManager.playSoundFX(
 								"random.click", 1.0F, 1.0F);
-						Minecraft.getMinecraft().displayGuiScreen(rt.getGui(this, ts));
+						Minecraft.getMinecraft().displayGuiScreen(
+								rt.getGui(this, ts));
 						this.isMouseButtonDown = 0;
 					}
 				}
@@ -401,8 +392,9 @@ public class GuiResearch extends GuiScreen {
 						color += (255 << 24);
 					}
 
-					this.drawHorizontalLine(k3, j4, j3, color);
-					this.drawVerticalLine(j4, j3, l3, color);
+					// this.drawHorizontalLine(k3, j4, j3, color);
+					// this.drawVerticalLine(j4, j3, l3, color);
+					RenderUtils.drawLine(k3, j4, j3, l3, 1, color);
 				}
 			}
 		}

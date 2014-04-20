@@ -7,6 +7,8 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.Icon;
 import net.minecraftforge.common.ForgeDirection;
 
+import org.lwjgl.opengl.GL11;
+
 public class RenderUtils {
 
 	public static void renderCube(float x, float y, float z, float startx,
@@ -349,5 +351,39 @@ public class RenderUtils {
 		tessellator.addVertexWithUV((double) (x), (double) (y),
 				(double) zheight, (double) minU, (double) minV);
 		tessellator.draw();
+	}
+
+	public static void drawLine(int x1, int x2, int y1, int y2, int width,
+			int color) {
+
+		float difX = x2 - x1;
+		float difY = y2 - y1;
+		float length = (float) Math.sqrt(Math.pow(difX, 2) + Math.pow(difY, 2));
+		float xS = (width * difY / length) / 2.f;
+		float yS = (width * difX / length) / 2.f;
+
+		float alpha = (float) (color >> 24 & 255) / 255.0F;
+		float red = (float) (color >> 16 & 255) / 255.0F;
+		float green = (float) (color >> 8 & 255) / 255.0F;
+		float blue = (float) (color & 255) / 255.0F;
+		Tessellator tessellator = Tessellator.instance;
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glColor4f(red, green, blue, alpha);
+		tessellator.startDrawingQuads();
+		// Counterclockwise...WHICH IS APPARENTLY WRONG CAUSE SCREW YOU
+		// MINECRAFT
+		// tessellator.addVertex((double) x1 - xS, (double) y1 + yS, 0.0D);
+		// tessellator.addVertex((double) x1 + xS, (double) y1 - yS, 0.0D);
+		// tessellator.addVertex((double) x2 + xS, (double) y2 - yS, 0.0D);
+		// tessellator.addVertex((double) x2 - xS, (double) y2 + yS, 0.0D);
+		tessellator.addVertex((double) x2 - xS, (double) y2 + yS, 0.0D);
+		tessellator.addVertex((double) x2 + xS, (double) y2 - yS, 0.0D);
+		tessellator.addVertex((double) x1 + xS, (double) y1 - yS, 0.0D);
+		tessellator.addVertex((double) x1 - xS, (double) y1 + yS, 0.0D);
+		tessellator.draw();
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glDisable(GL11.GL_BLEND);
 	}
 }

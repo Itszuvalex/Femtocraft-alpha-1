@@ -860,5 +860,6 @@ public class Femtocraft {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		ManagerRecipe.assemblyRecipes.registerDefaultRecipes();
+		researchManager.calculateGraph();
 	}
 }
