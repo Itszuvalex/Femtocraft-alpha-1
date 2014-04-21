@@ -29,22 +29,22 @@ import femtocraft.utils.FemtocraftUtils;
 
 @SideOnly(Side.CLIENT)
 public class GuiResearch extends GuiScreen {
-	private static final int minDisplayColumn = 0;
-	private static final int maxDisplayColumn = 20;
-	private static final int minDisplayRow = 0;
-	private static final int maxDisplayRow = 40;
+	private static int minDisplayColumn = 0;
+	private static int maxDisplayColumn = 20;
+	private static int minDisplayRow = 0;
+	private static int maxDisplayRow = 40;
 
 	/** The top x coordinate of the achievement map */
-	private static final int guiMapTop = minDisplayColumn * 24 - 112;
+	private static int guiMapTop = minDisplayColumn * 24 - 112;
 
 	/** The left y coordinate of the achievement map */
-	private static final int guiMapLeft = minDisplayRow * 24 - 112;
+	private static int guiMapLeft = minDisplayRow * 24 - 112;
 
 	/** The bottom x coordinate of the achievement map */
-	private static final int guiMapBottom = maxDisplayColumn * 24 - 77;
+	private static int guiMapBottom = maxDisplayColumn * 24 + 112;
 
 	/** The right y coordinate of the achievement map */
-	private static final int guiMapRight = maxDisplayRow * 24 - 77;
+	private static int guiMapRight = maxDisplayRow * 24 + 112;
 
 	private static final ResourceLocation achievementTextures = new ResourceLocation(
 			Femtocraft.ID.toLowerCase(),
@@ -85,6 +85,13 @@ public class GuiResearch extends GuiScreen {
 		this.field_74117_m = this.guiMapX = this.field_74124_q = (double) ((Femtocraft.researchManager.technologyWorldStructure.xDisplay - 1)
 				* 24 - short1 / 2 - 12);
 		this.field_74115_n = this.guiMapY = this.field_74123_r = (double) (Femtocraft.researchManager.technologyWorldStructure.yDisplay * 24 - short2 / 2);
+	}
+
+	public static void setSize(int rows, int columns) {
+		maxDisplayColumn = columns;
+		maxDisplayRow = rows;
+		guiMapBottom = maxDisplayColumn * 24 + 112;
+		guiMapRight = maxDisplayRow * 24 + 112;
 	}
 
 	/**
@@ -363,7 +370,7 @@ public class GuiResearch extends GuiScreen {
 
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glDepthFunc(GL11.GL_LEQUAL);
-		// GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		int l3;
 		int i4;
 		int j4;
@@ -453,10 +460,12 @@ public class GuiResearch extends GuiScreen {
 
 				GL11.glEnable(GL11.GL_LIGHTING);
 				GL11.glEnable(GL11.GL_CULL_FACE);
+				GL11.glPushMatrix();
 				renderitem.renderItemAndEffectIntoGUI(
 						Minecraft.getMinecraft().fontRenderer, Minecraft
 								.getMinecraft().getTextureManager(),
 						tech.displayItem, i5 + 3, l4 + 3);
+				GL11.glPopMatrix();
 				GL11.glDisable(GL11.GL_LIGHTING);
 
 				// if (!this.statFileWriter.canUnlockAchievement(achievement2))
