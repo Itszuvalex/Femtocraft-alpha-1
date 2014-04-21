@@ -29,10 +29,10 @@ import femtocraft.utils.FemtocraftUtils;
 
 @SideOnly(Side.CLIENT)
 public class GuiResearch extends GuiScreen {
-	private static final int minDisplayColumn = -8;
-	private static final int maxDisplayColumn = 8;
-	private static final int minDisplayRow = -5;
-	private static final int maxDisplayRow = 20;
+	private static final int minDisplayColumn = 0;
+	private static final int maxDisplayColumn = 20;
+	private static final int minDisplayRow = 0;
+	private static final int maxDisplayRow = 40;
 
 	/** The top x coordinate of the achievement map */
 	private static final int guiMapTop = minDisplayColumn * 24 - 112;

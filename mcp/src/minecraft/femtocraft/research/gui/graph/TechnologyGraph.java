@@ -11,6 +11,7 @@ import femtocraft.managers.research.ResearchTechnology;
 public class TechnologyGraph {
 	private final HashMap<String, ResearchTechnology> technologies;
 	private final HashMap<String, GraphNode> nodes;
+	private final ArrayList<DummyTechnology> dummies;
 
 	private static final int maxHeight = 20;
 	private static final int maxWidth = 20;
@@ -19,6 +20,7 @@ public class TechnologyGraph {
 		Femtocraft.logger.log(Level.INFO, "Creating Graph of Technologies.");
 		this.technologies = technologies;
 		nodes = new HashMap<String, GraphNode>();
+		dummies = new ArrayList<DummyTechnology>();
 
 		Femtocraft.logger.log(Level.INFO, "Transfering Technologies to Nodes.");
 		// Fill nodes dictionary.
@@ -78,8 +80,17 @@ public class TechnologyGraph {
 
 	private void minimizeCrossings(ArrayList<GraphNode>[] rows) {
 		Femtocraft.logger.log(Level.INFO, "Minimizing edge crossings.");
-
+//		for (int i = 0; i < rows.length - 1; ++i) {
+//			int numCrossings = 0;
+//
+//		}
 	}
+
+//	private int crossingCount(ArrayList<GraphNode> row1,
+//			ArrayList<GraphNode> row2) {
+//		int connections = 0;
+//		for(int a = 0; a < )
+//	}
 
 	private void reduceRows(ArrayList<GraphNode>[] rows) {
 		Femtocraft.logger.log(Level.INFO, "Reducing row widths.");
@@ -119,5 +130,9 @@ public class TechnologyGraph {
 			greatestHeight = Math.max(greatestHeight, node.getY());
 		}
 		return greatestHeight;
+	}
+
+	public ArrayList<DummyTechnology> getDummyTechs() {
+		return dummies;
 	}
 }
