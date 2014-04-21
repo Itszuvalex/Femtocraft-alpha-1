@@ -40,6 +40,10 @@ public class GraphNode {
 		return (int) (technology.yDisplay / padding);
 	}
 
+	public int getDisplayY() {
+		return (int) (getY() * padding);
+	}
+
 	public void setY(int y) {
 		technology.yDisplay = (int) (y * padding);
 	}
@@ -48,19 +52,23 @@ public class GraphNode {
 		return (int) (technology.xDisplay / padding);
 	}
 
+	public int getDisplayX() {
+		return (int) (getX() * padding);
+	}
+
 	public void setX(int x) {
 		technology.xDisplay = (int) (x * padding);
 	}
 
-	ArrayList<GraphNode> getParents() {
+	public ArrayList<GraphNode> getParents() {
 		return parents;
 	}
 
-	ArrayList<GraphNode> getChildren() {
+	public ArrayList<GraphNode> getChildren() {
 		return children;
 	}
 
-	ResearchTechnology getTech() {
+	public ResearchTechnology getTech() {
 		return technology;
 	}
 

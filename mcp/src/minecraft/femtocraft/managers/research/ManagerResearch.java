@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import femtocraft.Femtocraft;
 import femtocraft.managers.research.EventTechnology.TechnologyAddedEvent;
+import femtocraft.research.gui.graph.GraphNode;
 import femtocraft.research.gui.graph.TechnologyGraph;
 import femtocraft.research.gui.technology.GuiTechnologyBasicCircuits;
 import femtocraft.research.gui.technology.GuiTechnologyMachining;
@@ -798,5 +799,9 @@ public class ManagerResearch {
 
 	public void syncResearch(ResearchPlayer rp) {
 		playerData.put(rp.username, rp);
+	}
+
+	public GraphNode getNode(ResearchTechnology pr) {
+		return graph.getNode(pr.name);
 	}
 }

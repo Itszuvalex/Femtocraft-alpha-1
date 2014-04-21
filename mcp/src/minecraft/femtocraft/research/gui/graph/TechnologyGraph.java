@@ -3,6 +3,7 @@ package femtocraft.research.gui.graph;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.logging.Level;
 
 import femtocraft.Femtocraft;
@@ -16,6 +17,7 @@ public class TechnologyGraph {
 
 	private static final int maxHeight = 20;
 	private static final int maxWidth = 20;
+	private static final int MAX_HILLCLIMB_ITERATIONS = 1000;
 
 	public TechnologyGraph(HashMap<String, ResearchTechnology> technologies) {
 		Femtocraft.logger.log(Level.INFO, "Creating Graph of Technologies.");
@@ -114,6 +116,7 @@ public class TechnologyGraph {
 							dummy.addChild(prev);
 							prev = dummy;
 						}
+						add.add(prev);
 					}
 				}
 				for (GraphNode child : add) {
@@ -130,29 +133,99 @@ public class TechnologyGraph {
 	}
 
 	private void minimizeCrossings(ArrayList<GraphNode>[] rows) {
-		Femtocraft.logger.log(Level.INFO, "Minimizing edge crossings.");
-		// Random permute for now
-		// for (int i = 0; i < rows.length - 1; ++i) {
-		// int numCrossings = 0;
-		// Random random = new Random();
-		// int rand = random.nextInt(6);
-		// for (int j = 0; j < rand; ++j) {
-		// int iA = random.nextInt(rows[i].size());
-		// int iB = random.nextInt(rows[i].size());
-		// GraphNode nodeA = rows[i].get(iA);
-		// GraphNode nodeB = rows[i].get(iB);
-		// int x = nodeA.getX();
-		// nodeA.setX(nodeB.getX());
-		// nodeB.setX(x);
-		// }
-		// }
+		Femtocraft.logger.log(Level.INFO, "Minimizing edge crossings for "
+				+ rows.length + " rows.");
+		for (int i = 0; i < rows.length - 1; ++i) {
+			Femtocraft.logger.log(Level.INFO,
+					"Minimizing " + i + "(" + rows[i].size() + ")" + "->"
+							+ (i + 1) + "(" + rows[i + 1].size() + ")" + ".");
+			hillClimb(rows[i], rows[i + 1]);
+		}
 	}
 
-	// private int crossingCount(ArrayList<GraphNode> row1,
-	// ArrayList<GraphNode> row2) {
-	// int connections = 0;
-	// for(int a = 0; a < )
-	// }
+	private void hillClimb(ArrayList<GraphNode> row1, ArrayList<GraphNode> row2) {
+		Random rand = new Random();
+		int crossings = crossingCount(row1, row2);
+		float distance = edgeDistance(row1, row2);
+		for (int i = 0; i < MAX_HILLCLIMB_ITERATIONS; ++i) {
+
+			if (row2.size() < 2)
+				return;
+
+			int i1 = rand.nextInt(row2.size());
+			int i2;
+			// Find different index
+			while ((i2 = rand.nextInt(row2.size())) == i1)
+				;
+
+			// Switch x
+			switch_x_pos(row2.get(i1), row2.get(i2));
+
+			// If not better, undo
+			int new_cross_count = crossingCount(row1, row2);
+			float new_distance = edgeDistance(row1, row2);
+			if (new_cross_count < crossings) {
+				crossings = new_cross_count;
+				distance = new_distance;
+			} else if (new_cross_count == crossings) {
+				if (new_distance < distance) {
+					distance = new_distance;
+				} else {
+					switch_x_pos(row2.get(i1), row2.get(i2));
+				}
+			} else {
+				switch_x_pos(row2.get(i1), row2.get(i2));
+			}
+		}
+	}
+
+	private void switch_x_pos(GraphNode node1, GraphNode node2) {
+		int prev = node1.getX();
+		node1.setX(node2.getX());
+		node2.setX(prev);
+	}
+
+	private int crossingCount(ArrayList<GraphNode> row1,
+			ArrayList<GraphNode> row2) {
+		int connections = 0;
+
+		ArrayList<Integer> x_top = new ArrayList<Integer>();
+		ArrayList<Integer> x_bot = new ArrayList<Integer>();
+
+		for (GraphNode node : row1) {
+			for (GraphNode child : node.getChildren()) {
+				x_top.add(node.getX());
+				x_bot.add(child.getX());
+			}
+		}
+
+		for (int a = 0; a < x_top.size(); ++a) {
+			for (int b = a + 1; b < x_bot.size(); ++b) {
+				if (isCrossing(x_top.get(a), x_bot.get(a), x_top.get(b),
+						x_bot.get(b)))
+					++connections;
+			}
+		}
+		return connections;
+	}
+
+	boolean isCrossing(int a1, int a2, int b1, int b2) {
+		return ((a2 < b1 && a2 > b2) || (a1 > b1 && a2 < b2));
+	}
+
+	private float edgeDistance(ArrayList<GraphNode> row1,
+			ArrayList<GraphNode> row2) {
+		// We assume dummy nodes have been made, thus all childs of nodes in
+		// row1 are in row2.
+		float distance = 0;
+		for (GraphNode node : row1) {
+			for (GraphNode child : node.getChildren()) {
+				distance += Math.sqrt(Math.pow(child.getX() - node.getX(), 2)
+						+ Math.pow(child.getY() - node.getY(), 2));
+			}
+		}
+		return distance;
+	}
 
 	private void reduceRows(ArrayList<GraphNode>[] rows) {
 		Femtocraft.logger.log(Level.INFO, "Reducing row widths.");
@@ -204,5 +277,9 @@ public class TechnologyGraph {
 
 	public ArrayList<DummyTechnology> getDummyTechs() {
 		return dummies;
+	}
+
+	public GraphNode getNode(String name) {
+		return nodes.get(name);
 	}
 }

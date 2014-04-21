@@ -25,6 +25,8 @@ import femtocraft.managers.research.ResearchPlayer;
 import femtocraft.managers.research.ResearchTechnology;
 import femtocraft.managers.research.ResearchTechnologyStatus;
 import femtocraft.render.RenderUtils;
+import femtocraft.research.gui.graph.DummyNode;
+import femtocraft.research.gui.graph.GraphNode;
 import femtocraft.utils.FemtocraftUtils;
 
 @SideOnly(Side.CLIENT)
@@ -383,25 +385,59 @@ public class GuiResearch extends GuiScreen {
 				continue;
 			if (tech.prerequisites != null) {
 				for (ResearchTechnology pr : tech.prerequisites) {
+					GraphNode node = Femtocraft.researchManager.getNode(tech);
 
-					k3 = tech.xDisplay * 24 - k + 11 + k1;
-					j3 = tech.yDisplay * 24 - l + 11 + l1;
-					j4 = pr.xDisplay * 24 - k + 11 + k1;
-					l3 = pr.yDisplay * 24 - l + 11 + l1;
-					boolean flag5 = rs.researched;
-					boolean flag6 = !rs.researched;
-					i4 = Math.sin((double) (Minecraft.getSystemTime() % 600L)
-							/ 600.0D * Math.PI * 2.0D) > 0.6D ? 255 : 130;
-					int color = tech.level.getColor();
-					if (flag6) {
-						color += (i4 << 24);
-					} else {
-						color += (255 << 24);
+					for (GraphNode parent : node.getParents()) {
+						GraphNode next = parent;
+						GraphNode prev = node;
+						while (next instanceof DummyNode) {
+							k3 = prev.getDisplayX() * 24 - k + 11 + k1;
+							j3 = prev.getDisplayY() * 24 - l + 11 + l1;
+							j4 = next.getDisplayX() * 24 - k + 11 + k1;
+							l3 = next.getDisplayY() * 24 - l + 11 + l1;
+							boolean flag5 = rs.researched;
+							boolean flag6 = !rs.researched;
+							i4 = Math
+									.sin((double) (Minecraft.getSystemTime() % 600L)
+											/ 600.0D * Math.PI * 2.0D) > 0.6D ? 255
+									: 130;
+							int color = tech.level.getColor();
+							if (flag6) {
+								color += (i4 << 24);
+							} else {
+								color += (255 << 24);
+							}
+
+							// this.drawHorizontalLine(k3, j4, j3, color);
+							// this.drawVerticalLine(j4, j3, l3, color);
+							RenderUtils.drawLine(k3, j4, j3, l3, 1, color);
+
+							// Dummy nodes should only have 1 parent
+							prev = next;
+							next = next.getParents().get(0);
+						}
+
+						k3 = prev.getDisplayX() * 24 - k + 11 + k1;
+						j3 = prev.getDisplayY() * 24 - l + 11 + l1;
+						j4 = next.getDisplayX() * 24 - k + 11 + k1;
+						l3 = next.getDisplayY() * 24 - l + 11 + l1;
+						boolean flag5 = rs.researched;
+						boolean flag6 = !rs.researched;
+						i4 = Math
+								.sin((double) (Minecraft.getSystemTime() % 600L)
+										/ 600.0D * Math.PI * 2.0D) > 0.6D ? 255
+								: 130;
+						int color = tech.level.getColor();
+						if (flag6) {
+							color += (i4 << 24);
+						} else {
+							color += (255 << 24);
+						}
+
+						// this.drawHorizontalLine(k3, j4, j3, color);
+						// this.drawVerticalLine(j4, j3, l3, color);
+						RenderUtils.drawLine(k3, j4, j3, l3, 1, color);
 					}
-
-					// this.drawHorizontalLine(k3, j4, j3, color);
-					// this.drawVerticalLine(j4, j3, l3, color);
-					RenderUtils.drawLine(k3, j4, j3, l3, 1, color);
 				}
 			}
 		}
