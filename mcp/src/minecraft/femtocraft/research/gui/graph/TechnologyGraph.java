@@ -20,6 +20,7 @@ public class TechnologyGraph {
 	private static final int MAX_HILLCLIMB_ITERATIONS = 5000;
 	private static final int MAX_CHILD_X_DIST = 3;
 	protected static final float PADDING = 2.0f;
+	private static final float EMPTY_PADDING_MULTIPLER = 1.25f;
 
 	public TechnologyGraph(HashMap<String, ResearchTechnology> technologies) {
 		Femtocraft.logger.log(Level.INFO, "Creating Graph of Technologies.");
@@ -57,8 +58,9 @@ public class TechnologyGraph {
 	 * Technologies.
 	 */
 	public void computePlacements() {
-		Femtocraft.logger.log(Level.INFO,
-				"Computing Placements of Technologies.");
+		Femtocraft.logger
+				.log(Level.INFO,
+						"Computing Placements of Technologies. This process may take a while on slower computers.");
 		computeHeights();
 
 		// Prepare row count for crossing minimization
@@ -87,6 +89,9 @@ public class TechnologyGraph {
 
 		GuiResearch.setSize((int) (greatestHeight() * PADDING),
 				(int) (greatestWidth() * PADDING));
+
+		Femtocraft.logger.log(Level.INFO,
+				"Enjoy your custom built tech-tree, made just for you!");
 	}
 
 	private void addDummyNodes(ArrayList<GraphNode>[] rows) {
@@ -134,15 +139,18 @@ public class TechnologyGraph {
 		}
 
 		Random random = new Random();
-		int width = greatestWidth() * 2;
-		for (int y = 0; y < rows.length; ++y) {
+		int width = (int) (greatestWidth() * EMPTY_PADDING_MULTIPLER);
+		for (int y = 1; y < rows.length; ++y) {
 			ArrayList<GraphNode> row = rows[y];
 			row.ensureCapacity(width);
 			for (int x = row.size(); x < width; ++x) {
 				DummyNode dummy = new DummyNode();
-				dummy.setX(x);
 				dummy.setY(y);
 				row.add(random.nextInt(row.size()), dummy);
+			}
+
+			for (int k = 0; k < row.size(); ++k) {
+				row.get(k).setX(k);
 			}
 		}
 	}
