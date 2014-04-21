@@ -272,7 +272,7 @@ public class ManagerResearch {
 			new ArrayList<ItemStack>());
 	@Technology
 	public static ResearchTechnology technologyHarnessedNuclearDecay = new ResearchTechnology(
-			"HarnessedNuclearDecay", "", EnumTechLevel.NANO,
+			"Harnessed Nuclear Decay", "", EnumTechLevel.NANO,
 			new ArrayList<ResearchTechnology>(Arrays.asList(
 					technologyThoriumFissibility,
 					technologyResourceOptimization,
@@ -356,7 +356,7 @@ public class ManagerResearch {
 			"Dimensional Transformation", "", EnumTechLevel.FEMTO,
 			new ArrayList<ResearchTechnology>(Arrays
 					.asList(technologyDimensionalBraiding)),
-			new ItemStack(Femtocraft.ingotFarenite), 0, 0, false,
+			new ItemStack(Femtocraft.ingotMalenite), 0, 0, false,
 			new ArrayList<ItemStack>());
 	@Technology
 	public static ResearchTechnology technologyAppliedParticlePhysics = new ResearchTechnology(
