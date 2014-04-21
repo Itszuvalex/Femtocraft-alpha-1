@@ -17,7 +17,9 @@ public class TechnologyGraph {
 
 	private static final int maxHeight = 20;
 	private static final int maxWidth = 20;
-	private static final int MAX_HILLCLIMB_ITERATIONS = 1000;
+	private static final int MAX_HILLCLIMB_ITERATIONS = 5000;
+	private static final int MAX_CHILD_X_DIST = 3;
+	protected static final float PADDING = 2.0f;
 
 	public TechnologyGraph(HashMap<String, ResearchTechnology> technologies) {
 		Femtocraft.logger.log(Level.INFO, "Creating Graph of Technologies.");
@@ -83,8 +85,8 @@ public class TechnologyGraph {
 		// reduceRows(rows);
 		minimizeCrossings(rows);
 
-		GuiResearch.setSize((int) (greatestHeight() * GraphNode.padding),
-				(int) (greatestWidth() * GraphNode.padding));
+		GuiResearch.setSize((int) (greatestHeight() * PADDING),
+				(int) (greatestWidth() * PADDING));
 	}
 
 	private void addDummyNodes(ArrayList<GraphNode>[] rows) {
@@ -130,6 +132,19 @@ public class TechnologyGraph {
 				node.getChildren().removeAll(remove);
 			}
 		}
+
+		Random random = new Random();
+		int width = greatestWidth() * 2;
+		for (int y = 0; y < rows.length; ++y) {
+			ArrayList<GraphNode> row = rows[y];
+			row.ensureCapacity(width);
+			for (int x = row.size(); x < width; ++x) {
+				DummyNode dummy = new DummyNode();
+				dummy.setX(x);
+				dummy.setY(y);
+				row.add(random.nextInt(row.size()), dummy);
+			}
+		}
 	}
 
 	private void minimizeCrossings(ArrayList<GraphNode>[] rows) {
@@ -164,19 +179,31 @@ public class TechnologyGraph {
 			// If not better, undo
 			int new_cross_count = crossingCount(row1, row2);
 			float new_distance = edgeDistance(row1, row2);
-			if (new_cross_count < crossings) {
-				crossings = new_cross_count;
-				distance = new_distance;
-			} else if (new_cross_count == crossings) {
-				if (new_distance < distance) {
+
+			if (!heuristics(row2.get(i1), row2.get(i2))) {
+				switch_x_pos(row2.get(i1), row2.get(i2));
+			} else {
+				if (new_cross_count < crossings) {
+					crossings = new_cross_count;
 					distance = new_distance;
+				} else if (new_cross_count == crossings) {
+					if (new_distance < distance) {
+						distance = new_distance;
+					} else {
+						switch_x_pos(row2.get(i1), row2.get(i2));
+					}
 				} else {
 					switch_x_pos(row2.get(i1), row2.get(i2));
 				}
-			} else {
-				switch_x_pos(row2.get(i1), row2.get(i2));
 			}
 		}
+	}
+
+	private boolean heuristics(GraphNode node1, GraphNode node2) {
+		if (Math.abs(node1.getX() - node2.getX()) > MAX_CHILD_X_DIST)
+			return false;
+
+		return true;
 	}
 
 	private void switch_x_pos(GraphNode node1, GraphNode node2) {

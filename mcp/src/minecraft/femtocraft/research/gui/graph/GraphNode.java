@@ -10,7 +10,6 @@ public class GraphNode {
 	private ArrayList<GraphNode> children;
 
 	private static int UNINITIALIZED = -99999;
-	protected static float padding = 2.0f;
 
 	public GraphNode(ResearchTechnology technology) {
 		this.technology = technology;
@@ -37,27 +36,27 @@ public class GraphNode {
 	}
 
 	public int getY() {
-		return (int) (technology.yDisplay / padding);
+		return (int) (technology.yDisplay / TechnologyGraph.PADDING);
 	}
 
 	public int getDisplayY() {
-		return (int) (getY() * padding);
+		return (int) (getY() * TechnologyGraph.PADDING);
 	}
 
 	public void setY(int y) {
-		technology.yDisplay = (int) (y * padding);
+		technology.yDisplay = (int) (y * TechnologyGraph.PADDING);
 	}
 
 	public int getX() {
-		return (int) (technology.xDisplay / padding);
+		return (int) (technology.xDisplay / TechnologyGraph.PADDING);
 	}
 
 	public int getDisplayX() {
-		return (int) (getX() * padding);
+		return (int) (getX() * TechnologyGraph.PADDING);
 	}
 
 	public void setX(int x) {
-		technology.xDisplay = (int) (x * padding);
+		technology.xDisplay = (int) (x * TechnologyGraph.PADDING);
 	}
 
 	public ArrayList<GraphNode> getParents() {
