@@ -7,6 +7,7 @@ import java.util.logging.Level;
 
 import femtocraft.Femtocraft;
 import femtocraft.managers.research.ResearchTechnology;
+import femtocraft.research.gui.GuiResearch;
 
 public class TechnologyGraph {
 	private final HashMap<String, ResearchTechnology> technologies;
@@ -74,23 +75,84 @@ public class TechnologyGraph {
 			}
 		}
 
-		reduceRows(rows);
+		addDummyNodes(rows);
+		// This isn't needed as we can simply expand to be the size of the
+		// largest row
+		// reduceRows(rows);
 		minimizeCrossings(rows);
+
+		GuiResearch.setSize((int) (greatestHeight() * GraphNode.padding),
+				(int) (greatestWidth() * GraphNode.padding));
+	}
+
+	private void addDummyNodes(ArrayList<GraphNode>[] rows) {
+		for (int i = 0; i < rows.length; ++i) {
+			for (GraphNode node : rows[i]) {
+				ArrayList<GraphNode> remove = new ArrayList<GraphNode>();
+				ArrayList<GraphNode> add = new ArrayList<GraphNode>();
+				for (GraphNode child : node.getChildren()) {
+					int levelDif = Math.abs(node.getY() - child.getY());
+					if (levelDif > 1) {
+						remove.add(child);
+						GraphNode prev = child;
+						for (int j = child.getY() - 1; j > node.getY(); --j) {
+							GraphNode dummy = new DummyNode();
+							int depth = j;
+							dummy.setY(depth);
+							int x = prev.getX();
+							if (x >= rows[j].size()) {
+								rows[j].add(dummy);
+							} else {
+								rows[j].add(x, dummy);
+							}
+
+							for (int k = 0; k < rows[j].size(); ++k) {
+								rows[j].get(k).setX(k);
+							}
+
+							prev.addParent(dummy);
+							dummy.addChild(prev);
+							prev = dummy;
+						}
+					}
+				}
+				for (GraphNode child : add) {
+					child.addParent(node);
+				}
+				node.getChildren().addAll(add);
+
+				for (GraphNode child : remove) {
+					child.getParents().remove(node);
+				}
+				node.getChildren().removeAll(remove);
+			}
+		}
 	}
 
 	private void minimizeCrossings(ArrayList<GraphNode>[] rows) {
 		Femtocraft.logger.log(Level.INFO, "Minimizing edge crossings.");
-//		for (int i = 0; i < rows.length - 1; ++i) {
-//			int numCrossings = 0;
-//
-//		}
+		// Random permute for now
+		// for (int i = 0; i < rows.length - 1; ++i) {
+		// int numCrossings = 0;
+		// Random random = new Random();
+		// int rand = random.nextInt(6);
+		// for (int j = 0; j < rand; ++j) {
+		// int iA = random.nextInt(rows[i].size());
+		// int iB = random.nextInt(rows[i].size());
+		// GraphNode nodeA = rows[i].get(iA);
+		// GraphNode nodeB = rows[i].get(iB);
+		// int x = nodeA.getX();
+		// nodeA.setX(nodeB.getX());
+		// nodeB.setX(x);
+		// }
+		// }
 	}
 
-//	private int crossingCount(ArrayList<GraphNode> row1,
-//			ArrayList<GraphNode> row2) {
-//		int connections = 0;
-//		for(int a = 0; a < )
-//	}
+	// private int crossingCount(ArrayList<GraphNode> row1,
+	// ArrayList<GraphNode> row2) {
+	// int connections = 0;
+	// for(int a = 0; a < )
+	// }
 
 	private void reduceRows(ArrayList<GraphNode>[] rows) {
 		Femtocraft.logger.log(Level.INFO, "Reducing row widths.");
@@ -130,6 +192,14 @@ public class TechnologyGraph {
 			greatestHeight = Math.max(greatestHeight, node.getY());
 		}
 		return greatestHeight;
+	}
+
+	private int greatestWidth() {
+		int greatestWidth = -1;
+		for (GraphNode node : nodes.values()) {
+			greatestWidth = Math.max(greatestWidth, node.getX());
+		}
+		return greatestWidth;
 	}
 
 	public ArrayList<DummyTechnology> getDummyTechs() {

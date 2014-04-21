@@ -10,7 +10,7 @@ public class GraphNode {
 	private ArrayList<GraphNode> children;
 
 	private static int UNINITIALIZED = -99999;
-	private static float padding = 2.0f;
+	protected static float padding = 2.0f;
 
 	public GraphNode(ResearchTechnology technology) {
 		this.technology = technology;

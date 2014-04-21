@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
@@ -526,8 +527,8 @@ public class ManagerResearch {
 			EnumTechLevel.FEMTO, new ArrayList<ResearchTechnology>(
 					Arrays.asList(technologyStellarMimicry,
 							technologyCorruptionStabilization,
-							technologyParticleManipulation)), null, 0, 0,
-			false, new ArrayList<ItemStack>());
+							technologyParticleManipulation)), new ItemStack(
+					Item.netherStar), 0, 0, false, new ArrayList<ItemStack>());
 
 	// public static ResearchTechnology technologyPaperSchematic = new
 	// ResearchTechnology(
