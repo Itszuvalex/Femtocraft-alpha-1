@@ -15,7 +15,7 @@ public class DummyNode extends GraphNode {
 	 */
 	@Override
 	public int getY() {
-		return (int) (y / TechnologyGraph.PADDING);
+		return (int) (y / TechnologyGraph.X_PADDING);
 	}
 
 	/*
@@ -25,7 +25,7 @@ public class DummyNode extends GraphNode {
 	 */
 	@Override
 	public void setY(int y) {
-		this.y = (int) (y * TechnologyGraph.PADDING);
+		this.y = (int) (y * TechnologyGraph.X_PADDING);
 	}
 
 	/*
@@ -35,7 +35,7 @@ public class DummyNode extends GraphNode {
 	 */
 	@Override
 	public int getX() {
-		return (int) (x / TechnologyGraph.PADDING);
+		return (int) (x / TechnologyGraph.X_PADDING);
 	}
 
 	/*
@@ -45,7 +45,7 @@ public class DummyNode extends GraphNode {
 	 */
 	@Override
 	public void setX(int x) {
-		this.x = (int) (x * TechnologyGraph.PADDING);
+		this.x = (int) (x * TechnologyGraph.X_PADDING);
 	}
 
 }

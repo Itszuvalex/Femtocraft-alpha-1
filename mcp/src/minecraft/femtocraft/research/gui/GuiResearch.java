@@ -392,9 +392,9 @@ public class GuiResearch extends GuiScreen {
 						GraphNode prev = node;
 						while (next instanceof DummyNode) {
 							k3 = prev.getDisplayX() * 24 - k + 11 + k1;
-							j3 = prev.getDisplayY() * 24 - l + 11 + l1;
+							j3 = prev.getDisplayY() * 24 - l + 11 + l1 - 11;
 							j4 = next.getDisplayX() * 24 - k + 11 + k1;
-							l3 = next.getDisplayY() * 24 - l + 11 + l1;
+							l3 = next.getDisplayY() * 24 - l + 11 + l1 + 11;
 							boolean flag5 = rs.researched;
 							boolean flag6 = !rs.researched;
 							i4 = Math
@@ -411,6 +411,7 @@ public class GuiResearch extends GuiScreen {
 							// this.drawHorizontalLine(k3, j4, j3, color);
 							// this.drawVerticalLine(j4, j3, l3, color);
 							RenderUtils.drawLine(k3, j4, j3, l3, 1, color);
+							RenderUtils.drawLine(j4, j4, l3 - 22, l3, 1, color);
 
 							// Dummy nodes should only have 1 parent
 							prev = next;
@@ -418,9 +419,9 @@ public class GuiResearch extends GuiScreen {
 						}
 
 						k3 = prev.getDisplayX() * 24 - k + 11 + k1;
-						j3 = prev.getDisplayY() * 24 - l + 11 + l1;
+						j3 = prev.getDisplayY() * 24 - l + 11 + l1 - 11;
 						j4 = next.getDisplayX() * 24 - k + 11 + k1;
-						l3 = next.getDisplayY() * 24 - l + 11 + l1;
+						l3 = next.getDisplayY() * 24 - l + 11 + l1 + 11;
 						boolean flag5 = rs.researched;
 						boolean flag6 = !rs.researched;
 						i4 = Math

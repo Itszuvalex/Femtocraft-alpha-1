@@ -36,27 +36,27 @@ public class GraphNode {
 	}
 
 	public int getY() {
-		return (int) (technology.yDisplay / TechnologyGraph.PADDING);
+		return (int) (technology.yDisplay / TechnologyGraph.Y_PADDING);
 	}
 
 	public int getDisplayY() {
-		return (int) (getY() * TechnologyGraph.PADDING);
+		return (int) (getY() * TechnologyGraph.Y_PADDING);
 	}
 
 	public void setY(int y) {
-		technology.yDisplay = (int) (y * TechnologyGraph.PADDING);
+		technology.yDisplay = (int) (y * TechnologyGraph.Y_PADDING);
 	}
 
 	public int getX() {
-		return (int) (technology.xDisplay / TechnologyGraph.PADDING);
+		return (int) (technology.xDisplay / TechnologyGraph.X_PADDING);
 	}
 
 	public int getDisplayX() {
-		return (int) (getX() * TechnologyGraph.PADDING);
+		return (int) (getX() * TechnologyGraph.X_PADDING);
 	}
 
 	public void setX(int x) {
-		technology.xDisplay = (int) (x * TechnologyGraph.PADDING);
+		technology.xDisplay = (int) (x * TechnologyGraph.X_PADDING);
 	}
 
 	public ArrayList<GraphNode> getParents() {
