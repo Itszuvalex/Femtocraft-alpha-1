@@ -114,4 +114,34 @@ public class GraphNode {
 		}
 		setY(minHeight == Integer.MAX_VALUE ? getY() : minHeight - 1);
 	}
+
+	public void pruneParents() {
+		ArrayList<GraphNode> nodes = new ArrayList<GraphNode>();
+
+		for (GraphNode parent : parents) {
+			for (GraphNode alt : parents) {
+				if (parent == alt)
+					continue;
+
+				if (alt.hasParentTechRecursive(parent.technology)) {
+					nodes.add(parent);
+				}
+			}
+		}
+
+		for (GraphNode parent : nodes) {
+			parent.children.remove(this);
+		}
+		parents.removeAll(nodes);
+	}
+
+	private boolean hasParentTechRecursive(ResearchTechnology tech) {
+		boolean contains = tech == getTech();
+		if (contains)
+			return true;
+		for (GraphNode parent : parents) {
+			contains = parent.hasParentTechRecursive(tech) || contains;
+		}
+		return contains;
+	}
 }

@@ -53,6 +53,10 @@ public class TechnologyGraph {
 				node.addParent(parent);
 			}
 		}
+
+		for (GraphNode node : nodes.values()) {
+			node.pruneParents();
+		}
 	}
 
 	/**
