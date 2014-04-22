@@ -1,11 +1,14 @@
 package femtocraft.managers.assembler;
 
-import femtocraft.Femtocraft;
-import femtocraft.FemtocraftConfigs;
-import femtocraft.managers.assembler.EventAssemblerRegister.AssemblerDecompositionRegisterEvent;
-import femtocraft.managers.assembler.EventAssemblerRegister.AssemblerRecompositionRegisterEvent;
-import femtocraft.managers.research.EnumTechLevel;
-import femtocraft.utils.FemtocraftUtils;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.logging.Level;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,10 +20,13 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-
-import java.lang.reflect.Field;
-import java.util.*;
-import java.util.logging.Level;
+import femtocraft.Femtocraft;
+import femtocraft.FemtocraftConfigs;
+import femtocraft.managers.assembler.EventAssemblerRegister.AssemblerDecompositionRegisterEvent;
+import femtocraft.managers.assembler.EventAssemblerRegister.AssemblerRecompositionRegisterEvent;
+import femtocraft.managers.research.EnumTechLevel;
+import femtocraft.managers.research.ResearchTechnology;
+import femtocraft.utils.FemtocraftUtils;
 
 /**
  * 
@@ -56,12 +62,16 @@ public class ManagerAssemblerRecipe {
 
 	private SortedMap<ItemStack[], AssemblerRecipe> inputToRecipeMap;
 	private SortedMap<ItemStack, AssemblerRecipe> outputToRecipeMap;
+	private HashMap<EnumTechLevel, ArrayList<AssemblerRecipe>> techLevelToRecipeMap;
+	private HashMap<ResearchTechnology, ArrayList<AssemblerRecipe>> technologyToRecipeMap;
 
 	public ManagerAssemblerRecipe() {
 		inputToRecipeMap = new TreeMap<ItemStack[], AssemblerRecipe>(
 				new ComparatorAssemblerInput());
 		outputToRecipeMap = new TreeMap<ItemStack, AssemblerRecipe>(
 				new ComparatorAssemblerOutput());
+		techLevelToRecipeMap = new HashMap<EnumTechLevel, ArrayList<AssemblerRecipe>>();
+		technologyToRecipeMap = new HashMap<ResearchTechnology, ArrayList<AssemblerRecipe>>();
 
 		registerRecipes();
 	}
@@ -78,53 +88,50 @@ public class ManagerAssemblerRecipe {
 	private void registerFemtoDecompositionRecipes() {
 		try {
 			if (configRegisterRecipe("ItemCrystallite"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null, null,
-								new ItemStack(Femtocraft.itemRectangulon),
-								new ItemStack(Femtocraft.itemPlaneoid),
-								new ItemStack(Femtocraft.itemRectangulon), null,
-								null, null }, 3, new ItemStack(
-								Femtocraft.itemCrystallite), EnumTechLevel.FEMTO, null)); // ItemCrystallite
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null, new ItemStack(Femtocraft.itemRectangulon),
+						new ItemStack(Femtocraft.itemPlaneoid),
+						new ItemStack(Femtocraft.itemRectangulon), null, null,
+						null }, 3, new ItemStack(Femtocraft.itemCrystallite),
+						EnumTechLevel.FEMTO, null)); // ItemCrystallite
 			if (configRegisterRecipe("ItemMineralite"))
 				addReversableRecipe(new AssemblerRecipe(
 						new ItemStack[] { null, null, null,
 								new ItemStack(Femtocraft.itemCubit),
 								new ItemStack(Femtocraft.itemPlaneoid),
-								new ItemStack(Femtocraft.itemCubit), null, null,
-								null }, 3,
-						new ItemStack(Femtocraft.itemMineralite), EnumTechLevel.FEMTO,
-						null)); // ItemMineralite
+								new ItemStack(Femtocraft.itemCubit), null,
+								null, null }, 3, new ItemStack(
+								Femtocraft.itemMineralite),
+						EnumTechLevel.FEMTO, null)); // ItemMineralite
 			if (configRegisterRecipe("ItemMetallite"))
 				addReversableRecipe(new AssemblerRecipe(
 						new ItemStack[] { null, null, null,
 								new ItemStack(Femtocraft.itemCubit),
 								new ItemStack(Femtocraft.itemRectangulon),
-								new ItemStack(Femtocraft.itemCubit), null, null,
-								null }, 3, new ItemStack(Femtocraft.itemMetallite),
-						EnumTechLevel.FEMTO, null)); // ItemMetallite
-			if (configRegisterRecipe("ItemFaunite"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null, null,
-								new ItemStack(Femtocraft.itemRectangulon),
-								new ItemStack(Femtocraft.itemCubit),
-								new ItemStack(Femtocraft.itemRectangulon), null,
+								new ItemStack(Femtocraft.itemCubit), null,
 								null, null }, 3, new ItemStack(
-								Femtocraft.itemFaunite), EnumTechLevel.FEMTO, null)); // ItemFaunite
+								Femtocraft.itemMetallite), EnumTechLevel.FEMTO,
+						null)); // ItemMetallite
+			if (configRegisterRecipe("ItemFaunite"))
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null, new ItemStack(Femtocraft.itemRectangulon),
+						new ItemStack(Femtocraft.itemCubit),
+						new ItemStack(Femtocraft.itemRectangulon), null, null,
+						null }, 3, new ItemStack(Femtocraft.itemFaunite),
+						EnumTechLevel.FEMTO, null)); // ItemFaunite
 			if (configRegisterRecipe("ItemElectrite"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null, null,
-								new ItemStack(Femtocraft.itemPlaneoid),
-								new ItemStack(Femtocraft.itemCubit),
-								new ItemStack(Femtocraft.itemPlaneoid), null, null,
-								null }, 3, new ItemStack(Femtocraft.itemElectrite),
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null, new ItemStack(Femtocraft.itemPlaneoid),
+						new ItemStack(Femtocraft.itemCubit),
+						new ItemStack(Femtocraft.itemPlaneoid), null, null,
+						null }, 3, new ItemStack(Femtocraft.itemElectrite),
 						EnumTechLevel.FEMTO, null)); // ItemElectrite
 			if (configRegisterRecipe("ItemFlorite"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null, null,
-								new ItemStack(Femtocraft.itemPlaneoid),
-								new ItemStack(Femtocraft.itemRectangulon),
-								new ItemStack(Femtocraft.itemPlaneoid), null, null,
-								null }, 3, new ItemStack(Femtocraft.itemFlorite),
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null, new ItemStack(Femtocraft.itemPlaneoid),
+						new ItemStack(Femtocraft.itemRectangulon),
+						new ItemStack(Femtocraft.itemPlaneoid), null, null,
+						null }, 3, new ItemStack(Femtocraft.itemFlorite),
 						EnumTechLevel.FEMTO, null)); // ItemFlorite
 		} catch (AssemblerRecipeFoundException e) {
 			Femtocraft.logger.log(Level.SEVERE, e.errMsg);
@@ -136,138 +143,131 @@ public class ManagerAssemblerRecipe {
 	private void registerNanoDecompositionRecipes() {
 		try {
 			if (configRegisterRecipe("ItemMicroCrystal"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemCrystallite, 2),
-								new ItemStack(Femtocraft.itemElectrite, 2),
-								new ItemStack(Femtocraft.itemCrystallite, 2),
-								new ItemStack(Femtocraft.itemElectrite, 2),
-								new ItemStack(Femtocraft.itemCrystallite, 2),
-								new ItemStack(Femtocraft.itemElectrite, 2),
-								new ItemStack(Femtocraft.itemCrystallite, 2),
-								new ItemStack(Femtocraft.itemElectrite, 2),
-								new ItemStack(Femtocraft.itemCrystallite, 2) }, 2,
-						new ItemStack(Femtocraft.itemMicroCrystal), EnumTechLevel.NANO,
-						null)); // ItemMicroCrystal
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemCrystallite, 2),
+						new ItemStack(Femtocraft.itemElectrite, 2),
+						new ItemStack(Femtocraft.itemCrystallite, 2),
+						new ItemStack(Femtocraft.itemElectrite, 2),
+						new ItemStack(Femtocraft.itemCrystallite, 2),
+						new ItemStack(Femtocraft.itemElectrite, 2),
+						new ItemStack(Femtocraft.itemCrystallite, 2),
+						new ItemStack(Femtocraft.itemElectrite, 2),
+						new ItemStack(Femtocraft.itemCrystallite, 2) }, 2,
+						new ItemStack(Femtocraft.itemMicroCrystal),
+						EnumTechLevel.NANO, null)); // ItemMicroCrystal
 
 			if (configRegisterRecipe("ItemProteinChain"))
 				addReversableRecipe(new AssemblerRecipe(
 						new ItemStack[] { null, null, null,
 								new ItemStack(Femtocraft.itemFaunite),
 								new ItemStack(Femtocraft.itemMineralite),
-								new ItemStack(Femtocraft.itemFaunite), null, null,
-								null }, 2, new ItemStack(
-								Femtocraft.itemProteinChain), EnumTechLevel.NANO, null)); // ItemProteinChain
+								new ItemStack(Femtocraft.itemFaunite), null,
+								null, null }, 2, new ItemStack(
+								Femtocraft.itemProteinChain),
+						EnumTechLevel.NANO, null)); // ItemProteinChain
 			if (configRegisterRecipe("ItemNerveCluster"))
 				addReversableRecipe(new AssemblerRecipe(
 						new ItemStack[] { null, null, null,
 								new ItemStack(Femtocraft.itemFaunite),
 								new ItemStack(Femtocraft.itemElectrite),
-								new ItemStack(Femtocraft.itemFaunite), null, null,
-								null }, 2, new ItemStack(
-								Femtocraft.itemNerveCluster), EnumTechLevel.NANO, null)); // ItemNerveCluster
+								new ItemStack(Femtocraft.itemFaunite), null,
+								null, null }, 2, new ItemStack(
+								Femtocraft.itemNerveCluster),
+						EnumTechLevel.NANO, null)); // ItemNerveCluster
 			if (configRegisterRecipe("ItemConductiveAlloy"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null,
-								new ItemStack(Femtocraft.itemMetallite), null,
-								new ItemStack(Femtocraft.itemElectrite),
-								new ItemStack(Femtocraft.itemElectrite),
-								new ItemStack(Femtocraft.itemElectrite), null,
-								new ItemStack(Femtocraft.itemMetallite), null }, 2,
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						new ItemStack(Femtocraft.itemMetallite), null,
+						new ItemStack(Femtocraft.itemElectrite),
+						new ItemStack(Femtocraft.itemElectrite),
+						new ItemStack(Femtocraft.itemElectrite), null,
+						new ItemStack(Femtocraft.itemMetallite), null }, 2,
 						new ItemStack(Femtocraft.itemConductiveAlloy),
 						EnumTechLevel.NANO, null)); // ItemConductiveAlloy
 			if (configRegisterRecipe("ItemMetalComposite"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null,
-								new ItemStack(Femtocraft.itemMineralite), null,
-								new ItemStack(Femtocraft.itemMetallite),
-								new ItemStack(Femtocraft.itemMetallite),
-								new ItemStack(Femtocraft.itemMetallite), null,
-								new ItemStack(Femtocraft.itemMineralite), null },
-						2, new ItemStack(Femtocraft.itemMetalComposite),
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						new ItemStack(Femtocraft.itemMineralite), null,
+						new ItemStack(Femtocraft.itemMetallite),
+						new ItemStack(Femtocraft.itemMetallite),
+						new ItemStack(Femtocraft.itemMetallite), null,
+						new ItemStack(Femtocraft.itemMineralite), null }, 2,
+						new ItemStack(Femtocraft.itemMetalComposite),
 						EnumTechLevel.NANO, null)); // ItemMetalComposite
 			if (configRegisterRecipe("ItemFibrousStrand"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null, null,
-								new ItemStack(Femtocraft.itemFlorite), null,
-								new ItemStack(Femtocraft.itemMineralite), null,
-								null, null }, 2, new ItemStack(
-								Femtocraft.itemFibrousStrand), EnumTechLevel.NANO, null)); // ItemFibrousStrand
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null, new ItemStack(Femtocraft.itemFlorite),
+						null, new ItemStack(Femtocraft.itemMineralite), null,
+						null, null }, 2, new ItemStack(
+						Femtocraft.itemFibrousStrand), EnumTechLevel.NANO, null)); // ItemFibrousStrand
 			if (configRegisterRecipe("ItemMineralLattice"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null, null,
-								new ItemStack(Femtocraft.itemMineralite), null,
-								new ItemStack(Femtocraft.itemCrystallite), null,
-								null, null }, 2, new ItemStack(
-								Femtocraft.itemMineralLattice), EnumTechLevel.NANO,
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null, new ItemStack(Femtocraft.itemMineralite),
+						null, new ItemStack(Femtocraft.itemCrystallite), null,
+						null, null }, 2, new ItemStack(
+						Femtocraft.itemMineralLattice), EnumTechLevel.NANO,
 						null)); // ItemMineralLattice
 			if (configRegisterRecipe("ItemFungalSpores"))
 				addReversableRecipe(new AssemblerRecipe(
 						new ItemStack[] { null, null, null,
 								new ItemStack(Femtocraft.itemFlorite),
 								new ItemStack(Femtocraft.itemCrystallite),
-								new ItemStack(Femtocraft.itemFlorite), null, null,
-								null }, 2, new ItemStack(
-								Femtocraft.itemFungalSpores), EnumTechLevel.NANO, null)); // ItemFungalSpores
-			if (configRegisterRecipe("ItemIonicChunk"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null, null,
-								new ItemStack(Femtocraft.itemElectrite),
-								new ItemStack(Femtocraft.itemMineralite),
-								new ItemStack(Femtocraft.itemElectrite), null,
+								new ItemStack(Femtocraft.itemFlorite), null,
 								null, null }, 2, new ItemStack(
-								Femtocraft.itemIonicChunk), EnumTechLevel.NANO, null)); // ItemIonicChunk
+								Femtocraft.itemFungalSpores),
+						EnumTechLevel.NANO, null)); // ItemFungalSpores
+			if (configRegisterRecipe("ItemIonicChunk"))
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null, new ItemStack(Femtocraft.itemElectrite),
+						new ItemStack(Femtocraft.itemMineralite),
+						new ItemStack(Femtocraft.itemElectrite), null, null,
+						null }, 2, new ItemStack(Femtocraft.itemIonicChunk),
+						EnumTechLevel.NANO, null)); // ItemIonicChunk
 			if (configRegisterRecipe("ItemReplicatingMaterial"))
 				addReversableRecipe(new AssemblerRecipe(
 						new ItemStack[] { null, null, null,
 								new ItemStack(Femtocraft.itemFlorite),
 								new ItemStack(Femtocraft.itemFaunite),
-								new ItemStack(Femtocraft.itemFlorite), null, null,
-								null }, 2, new ItemStack(
+								new ItemStack(Femtocraft.itemFlorite), null,
+								null, null }, 2, new ItemStack(
 								Femtocraft.itemReplicatingMaterial),
 						EnumTechLevel.NANO, null)); // ItemReplicatingMaterial
 			if (configRegisterRecipe("ItemSpinyFilament"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null, null,
-								new ItemStack(Femtocraft.itemCrystallite),
-								new ItemStack(Femtocraft.itemFaunite),
-								new ItemStack(Femtocraft.itemCrystallite), null,
-								null, null }, 2, new ItemStack(
-								Femtocraft.itemSpinyFilament), EnumTechLevel.NANO, null)); // ItemSpinyFilament
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null, new ItemStack(Femtocraft.itemCrystallite),
+						new ItemStack(Femtocraft.itemFaunite),
+						new ItemStack(Femtocraft.itemCrystallite), null, null,
+						null }, 2, new ItemStack(Femtocraft.itemSpinyFilament),
+						EnumTechLevel.NANO, null)); // ItemSpinyFilament
 			if (configRegisterRecipe("ItemHardenedBulb"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null, null,
-								new ItemStack(Femtocraft.itemCrystallite),
-								new ItemStack(Femtocraft.itemMetallite),
-								new ItemStack(Femtocraft.itemCrystallite), null,
-								null, null }, 2, new ItemStack(
-								Femtocraft.itemHardenedBulb), EnumTechLevel.NANO, null)); // ItemHardenedBulb
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null, new ItemStack(Femtocraft.itemCrystallite),
+						new ItemStack(Femtocraft.itemMetallite),
+						new ItemStack(Femtocraft.itemCrystallite), null, null,
+						null }, 2, new ItemStack(Femtocraft.itemHardenedBulb),
+						EnumTechLevel.NANO, null)); // ItemHardenedBulb
 			if (configRegisterRecipe("ItemMorphicChannel"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null, null,
-								new ItemStack(Femtocraft.itemElectrite),
-								new ItemStack(Femtocraft.itemFlorite),
-								new ItemStack(Femtocraft.itemElectrite), null,
-								null, null }, 2, new ItemStack(
-								Femtocraft.itemMorphicChannel), EnumTechLevel.NANO,
-						null)); // ItemMorphicChannel
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null, new ItemStack(Femtocraft.itemElectrite),
+						new ItemStack(Femtocraft.itemFlorite),
+						new ItemStack(Femtocraft.itemElectrite), null, null,
+						null }, 2,
+						new ItemStack(Femtocraft.itemMorphicChannel),
+						EnumTechLevel.NANO, null)); // ItemMorphicChannel
 			if (configRegisterRecipe("ItemSynthesizedFiber"))
 				addReversableRecipe(new AssemblerRecipe(
 						new ItemStack[] { null, null, null,
 								new ItemStack(Femtocraft.itemFlorite),
 								new ItemStack(Femtocraft.itemMetallite),
-								new ItemStack(Femtocraft.itemFlorite), null, null,
-								null }, 2, new ItemStack(
-								Femtocraft.itemSynthesizedFiber), EnumTechLevel.NANO,
-						null)); // ItemSynthesizedFiber
+								new ItemStack(Femtocraft.itemFlorite), null,
+								null, null }, 2, new ItemStack(
+								Femtocraft.itemSynthesizedFiber),
+						EnumTechLevel.NANO, null)); // ItemSynthesizedFiber
 			if (configRegisterRecipe("ItemOrganometallicPlate"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null,
-								new ItemStack(Femtocraft.itemMetallite), null,
-								new ItemStack(Femtocraft.itemFaunite),
-								new ItemStack(Femtocraft.itemFaunite),
-								new ItemStack(Femtocraft.itemFaunite), null,
-								new ItemStack(Femtocraft.itemMetallite), null }, 2,
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						new ItemStack(Femtocraft.itemMetallite), null,
+						new ItemStack(Femtocraft.itemFaunite),
+						new ItemStack(Femtocraft.itemFaunite),
+						new ItemStack(Femtocraft.itemFaunite), null,
+						new ItemStack(Femtocraft.itemMetallite), null }, 2,
 						new ItemStack(Femtocraft.itemOrganometallicPlate),
 						EnumTechLevel.NANO, null)); // ItemOrganometallicPlate
 		} catch (AssemblerRecipeFoundException e) {
@@ -280,506 +280,440 @@ public class ManagerAssemblerRecipe {
 	private void registerMicroDecompositionRecipes() {
 		try {
 			if (configRegisterRecipe("Stone"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemMineralLattice), null,
-								null, null, null, null, null, null, null }, 1,
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemMineralLattice), null,
+						null, null, null, null, null, null, null }, 1,
 						new ItemStack(Block.stone), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Grass"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemFibrousStrand), null,
-								null, null, null, null, null, null, null }, 1,
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemFibrousStrand), null,
+						null, null, null, null, null, null, null }, 1,
 						new ItemStack(Block.grass), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Dirt"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null,
-								new ItemStack(Femtocraft.itemMineralLattice), null,
-								null, null, null, null, null }, 1,
-						new ItemStack(Block.dirt), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, new ItemStack(Femtocraft.itemMineralLattice),
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Block.dirt), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Cobblestone"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null,
-								new ItemStack(Femtocraft.itemMineralLattice), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Block.cobblestone), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						new ItemStack(Femtocraft.itemMineralLattice), null,
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Block.cobblestone), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("WoodPlank"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemFibrousStrand),
-								new ItemStack(Femtocraft.itemFibrousStrand), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Block.planks), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemFibrousStrand),
+						new ItemStack(Femtocraft.itemFibrousStrand), null,
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Block.planks), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Sapling"))
 				addReversableRecipe(new AssemblerRecipe(
 						new ItemStack[] {
-								new ItemStack(Femtocraft.itemFibrousStrand), null,
-								null, new ItemStack(Femtocraft.itemFibrousStrand),
+								new ItemStack(Femtocraft.itemFibrousStrand),
 								null, null,
-								new ItemStack(Femtocraft.itemFibrousStrand), null,
-								null }, 1, new ItemStack(Block.sapling),
+								new ItemStack(Femtocraft.itemFibrousStrand),
+								null, null,
+								new ItemStack(Femtocraft.itemFibrousStrand),
+								null, null }, 1, new ItemStack(Block.sapling),
 						EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Sand"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemMicroCrystal), null,
-								null, null, null, null, null, null, null }, 1,
-						new ItemStack(Block.sand), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemMicroCrystal), null, null,
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Block.sand), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Leaves"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null,
-								new ItemStack(Femtocraft.itemFibrousStrand), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Block.leaves), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						new ItemStack(Femtocraft.itemFibrousStrand), null,
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Block.leaves), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Cobweb"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemSpinyFilament), null,
-								null, null, null, null, null, null, null }, 1,
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemSpinyFilament), null,
+						null, null, null, null, null, null, null }, 1,
 						new ItemStack(Block.web), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("DeadBush"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null,
-								new ItemStack(Femtocraft.itemFibrousStrand), null,
-								null, null, null, null, null }, 1,
-						new ItemStack(Block.deadBush), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, new ItemStack(Femtocraft.itemFibrousStrand),
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Block.deadBush), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Dandelion"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemFibrousStrand), null,
-								null, new ItemStack(Femtocraft.itemMorphicChannel),
-								null, null, null, null, null }, 1,
-						new ItemStack(Block.plantYellow), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemFibrousStrand), null,
+						null, new ItemStack(Femtocraft.itemMorphicChannel),
+						null, null, null, null, null }, 1, new ItemStack(
+						Block.plantYellow), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Rose"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null,
-								new ItemStack(Femtocraft.itemFibrousStrand), null,
-								null, new ItemStack(Femtocraft.itemMorphicChannel),
-								null, null, null, null }, 1, new ItemStack(
-								Block.plantRed), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						new ItemStack(Femtocraft.itemFibrousStrand), null,
+						null, new ItemStack(Femtocraft.itemMorphicChannel),
+						null, null, null, null }, 1, new ItemStack(
+						Block.plantRed), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("MushroomBrown"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemFungalSpores), null,
-								null, null, null, null, null, null, null }, 1,
-						new ItemStack(Block.mushroomCapBrown), EnumTechLevel.MICRO,
-						null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemFungalSpores), null, null,
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Block.mushroomCapBrown), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("MushroomRed"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null,
-								new ItemStack(Femtocraft.itemFungalSpores), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Block.mushroomRed), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						new ItemStack(Femtocraft.itemFungalSpores), null, null,
+						null, null, null, null, null }, 1, new ItemStack(
+						Block.mushroomRed), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("MossStone"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemMineralLattice),
-								new ItemStack(Femtocraft.itemFungalSpores), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Block.cobblestoneMossy), EnumTechLevel.MICRO,
-						null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemMineralLattice),
+						new ItemStack(Femtocraft.itemFungalSpores), null, null,
+						null, null, null, null, null }, 1, new ItemStack(
+						Block.cobblestoneMossy), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Obsidian"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemHardenedBulb), null,
-								null, null, null, null, null, null, null }, 1,
-						new ItemStack(Block.obsidian), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemHardenedBulb), null, null,
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Block.obsidian), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Ice"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null,
-								new ItemStack(Femtocraft.itemMicroCrystal), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Block.ice), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						new ItemStack(Femtocraft.itemMicroCrystal), null, null,
+						null, null, null, null, null }, 1, new ItemStack(
+						Block.ice), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Cactus"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemSpinyFilament), null,
-								null, new ItemStack(Femtocraft.itemFibrousStrand),
-								null, null, null, null, null }, 1,
-						new ItemStack(Block.cactus), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemSpinyFilament), null,
+						null, new ItemStack(Femtocraft.itemFibrousStrand),
+						null, null, null, null, null }, 1, new ItemStack(
+						Block.cactus), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Pumpkin"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemFibrousStrand),
-								new ItemStack(Femtocraft.itemMorphicChannel), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Block.pumpkin), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemFibrousStrand),
+						new ItemStack(Femtocraft.itemMorphicChannel), null,
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Block.pumpkin), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Netherrack"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null, null,
-								new ItemStack(Femtocraft.itemMineralLattice), null,
-								null, null, null, null }, 1, new ItemStack(
-								Block.netherrack), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null,
+						new ItemStack(Femtocraft.itemMineralLattice), null,
+						null, null, null, null }, 1, new ItemStack(
+						Block.netherrack), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("SoulSand"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemMicroCrystal),
-								new ItemStack(Femtocraft.itemIonicChunk), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Block.slowSand), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemMicroCrystal),
+						new ItemStack(Femtocraft.itemIonicChunk), null, null,
+						null, null, null, null, null }, 1, new ItemStack(
+						Block.slowSand), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Glowstone"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemConductiveAlloy),
-								new ItemStack(Femtocraft.itemIonicChunk), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Item.glowstone), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemConductiveAlloy),
+						new ItemStack(Femtocraft.itemIonicChunk), null, null,
+						null, null, null, null, null }, 1, new ItemStack(
+						Item.glowstone), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Melon"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemMorphicChannel),
-								new ItemStack(Femtocraft.itemFibrousStrand), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Block.melon), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemMorphicChannel),
+						new ItemStack(Femtocraft.itemFibrousStrand), null,
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Block.melon), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Vine"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null, null,
-								new ItemStack(Femtocraft.itemFibrousStrand), null,
-								null, null, null, null }, 1, new ItemStack(
-								Block.vine), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null,
+						new ItemStack(Femtocraft.itemFibrousStrand), null,
+						null, null, null, null }, 1, new ItemStack(Block.vine),
+						EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Mycelium"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemFungalSpores),
-								new ItemStack(Femtocraft.itemMineralLattice), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Block.mycelium), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemFungalSpores),
+						new ItemStack(Femtocraft.itemMineralLattice), null,
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Block.mycelium), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("LilyPad"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null, null, null,
-								new ItemStack(Femtocraft.itemFibrousStrand), null,
-								null, null, null }, 1, new ItemStack(
-								Block.waterlily), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null, null,
+						new ItemStack(Femtocraft.itemFibrousStrand), null,
+						null, null, null }, 1, new ItemStack(Block.waterlily),
+						EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("EnderStone"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemConductiveAlloy),
-								new ItemStack(Femtocraft.itemMineralLattice), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Block.whiteStone), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemConductiveAlloy),
+						new ItemStack(Femtocraft.itemMineralLattice), null,
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Block.whiteStone), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Cocoa"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemMorphicChannel), null,
-								null, null, null, null, null, null, null }, 1,
-						new ItemStack(Block.cocoaPlant), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemMorphicChannel), null,
+						null, null, null, null, null, null, null }, 1,
+						new ItemStack(Block.cocoaPlant), EnumTechLevel.MICRO,
+						null));
 			if (configRegisterRecipe("Apple"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemFibrousStrand), null,
-								new ItemStack(Femtocraft.itemMorphicChannel), null,
-								null, null, null, null, null }, 1,
-						new ItemStack(Item.appleRed), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemFibrousStrand), null,
+						new ItemStack(Femtocraft.itemMorphicChannel), null,
+						null, null, null, null, null }, 1, new ItemStack(
+						Item.appleRed), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Coal"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemMineralLattice),
-								new ItemStack(Femtocraft.itemIonicChunk), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Item.coal), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemMineralLattice),
+						new ItemStack(Femtocraft.itemIonicChunk), null, null,
+						null, null, null, null, null }, 1, new ItemStack(
+						Item.coal), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Diamond"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemMicroCrystal, 8),
-								new ItemStack(Femtocraft.itemIonicChunk, 8),
-								new ItemStack(Femtocraft.itemMicroCrystal, 8),
-								new ItemStack(Femtocraft.itemIonicChunk, 8),
-								new ItemStack(Femtocraft.itemMicroCrystal, 8),
-								new ItemStack(Femtocraft.itemIonicChunk, 8),
-								new ItemStack(Femtocraft.itemMicroCrystal, 8),
-								new ItemStack(Femtocraft.itemIonicChunk, 8),
-								new ItemStack(Femtocraft.itemMicroCrystal, 8) }, 1,
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemMicroCrystal, 8),
+						new ItemStack(Femtocraft.itemIonicChunk, 8),
+						new ItemStack(Femtocraft.itemMicroCrystal, 8),
+						new ItemStack(Femtocraft.itemIonicChunk, 8),
+						new ItemStack(Femtocraft.itemMicroCrystal, 8),
+						new ItemStack(Femtocraft.itemIonicChunk, 8),
+						new ItemStack(Femtocraft.itemMicroCrystal, 8),
+						new ItemStack(Femtocraft.itemIonicChunk, 8),
+						new ItemStack(Femtocraft.itemMicroCrystal, 8) }, 1,
 						new ItemStack(Item.diamond), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("IronIngot"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemMetalComposite), null,
-								null, null, null, null, null, null, null }, 1,
-						new ItemStack(Item.ingotIron), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemMetalComposite), null,
+						null, null, null, null, null, null, null }, 1,
+						new ItemStack(Item.ingotIron), EnumTechLevel.MICRO,
+						null));
 			if (configRegisterRecipe("GoldIngot"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemMetalComposite),
-								new ItemStack(Femtocraft.itemHardenedBulb), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Item.ingotGold), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemMetalComposite),
+						new ItemStack(Femtocraft.itemHardenedBulb), null, null,
+						null, null, null, null, null }, 1, new ItemStack(
+						Item.ingotGold), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Stick"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null, null, null, null,
-								new ItemStack(Femtocraft.itemFibrousStrand), null,
-								null, null }, 1, new ItemStack(Item.stick),
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null, null, null,
+						new ItemStack(Femtocraft.itemFibrousStrand), null,
+						null, null }, 1, new ItemStack(Item.stick),
 						EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("String"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemReplicatingMaterial),
-								null, null, null, null, null, null, null, null },
-						1, new ItemStack(Item.silk), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemReplicatingMaterial),
+						null, null, null, null, null, null, null, null }, 1,
+						new ItemStack(Item.silk), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Feather"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null,
-								new ItemStack(Femtocraft.itemSpinyFilament), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Item.feather), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						new ItemStack(Femtocraft.itemSpinyFilament), null,
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Item.feather), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Gunpowder"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { new ItemStack(Femtocraft.itemIonicChunk),
-								new ItemStack(Femtocraft.itemNerveCluster), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Item.gunpowder), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemIonicChunk),
+						new ItemStack(Femtocraft.itemNerveCluster), null, null,
+						null, null, null, null, null }, 1, new ItemStack(
+						Item.gunpowder), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Seeds"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null,
-								new ItemStack(Femtocraft.itemReplicatingMaterial),
-								null, null, null, null, null, null, null }, 1,
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						new ItemStack(Femtocraft.itemReplicatingMaterial),
+						null, null, null, null, null, null, null }, 1,
 						new ItemStack(Item.seeds), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Wheat"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemReplicatingMaterial),
-								new ItemStack(Femtocraft.itemFibrousStrand), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Item.wheat), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemReplicatingMaterial),
+						new ItemStack(Femtocraft.itemFibrousStrand), null,
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Item.wheat), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Flint"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null,
-								new ItemStack(Femtocraft.itemHardenedBulb), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Item.flint), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						new ItemStack(Femtocraft.itemHardenedBulb), null, null,
+						null, null, null, null, null }, 1, new ItemStack(
+						Item.flint), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("RawPorkchop"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemReplicatingMaterial),
-								new ItemStack(Femtocraft.itemNerveCluster), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Item.porkRaw), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemReplicatingMaterial),
+						new ItemStack(Femtocraft.itemNerveCluster), null, null,
+						null, null, null, null, null }, 1, new ItemStack(
+						Item.porkRaw), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Porkchop"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemProteinChain), null,
-								null, null, null, null, null, null, null }, 1,
-						new ItemStack(Item.porkCooked), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemProteinChain), null, null,
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Item.porkCooked), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Redstone"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { new ItemStack(Femtocraft.itemIonicChunk),
-								new ItemStack(Femtocraft.itemMineralLattice), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Item.redstone), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemIonicChunk),
+						new ItemStack(Femtocraft.itemMineralLattice), null,
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Item.redstone), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Snowball"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null, null, null, null, null,
-								null, null,
-								new ItemStack(Femtocraft.itemMineralLattice) }, 1,
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null, null, null, null, null, null,
+						new ItemStack(Femtocraft.itemMineralLattice) }, 1,
 						new ItemStack(Item.snowball), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Leather"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemProteinChain),
-								new ItemStack(Femtocraft.itemSynthesizedFiber),
-								null, null, null, null, null, null, null }, 1,
-						new ItemStack(Item.leather), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemProteinChain),
+						new ItemStack(Femtocraft.itemSynthesizedFiber), null,
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Item.leather), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Clay"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { new ItemStack(Femtocraft.itemIonicChunk),
-								null, null, null, null, null, null, null, null },
-						1, new ItemStack(Item.clay), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemIonicChunk), null, null,
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Item.clay), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("SugarCane"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null,
-								new ItemStack(Femtocraft.itemSynthesizedFiber),
-								null, null, null, null, null, null, null }, 1,
-						new ItemStack(Block.reed), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						new ItemStack(Femtocraft.itemSynthesizedFiber), null,
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Block.reed), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Slimeball"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemNerveCluster), null,
-								null, null, null, null, null, null, null }, 1,
-						new ItemStack(Item.slimeBall), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemNerveCluster), null, null,
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Item.slimeBall), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Egg"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemNerveCluster),
-								new ItemStack(Femtocraft.itemReplicatingMaterial),
-								null, null, null, null, null, null, null }, 1,
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemNerveCluster),
+						new ItemStack(Femtocraft.itemReplicatingMaterial),
+						null, null, null, null, null, null, null }, 1,
 						new ItemStack(Item.egg), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("RawFish"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemReplicatingMaterial),
-								null, null,
-								new ItemStack(Femtocraft.itemNerveCluster), null,
-								null, null, null, null }, 1, new ItemStack(
-								Item.fishRaw), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemReplicatingMaterial),
+						null, null, new ItemStack(Femtocraft.itemNerveCluster),
+						null, null, null, null, null }, 1, new ItemStack(
+						Item.fishRaw), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("CookedFish"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemProteinChain),
-								new ItemStack(Femtocraft.itemSpinyFilament), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Item.fishCooked), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemProteinChain),
+						new ItemStack(Femtocraft.itemSpinyFilament), null,
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Item.fishCooked), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Dye"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemReplicatingMaterial),
-								new ItemStack(Femtocraft.itemSynthesizedFiber),
-								null, null, null, null, null, null, null }, 1,
-						new ItemStack(Item.dyePowder, 1,
-								OreDictionary.WILDCARD_VALUE), EnumTechLevel.MICRO,
-						null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemReplicatingMaterial),
+						new ItemStack(Femtocraft.itemSynthesizedFiber), null,
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Item.dyePowder, 1, OreDictionary.WILDCARD_VALUE),
+						EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Bone"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemReplicatingMaterial),
-								new ItemStack(Femtocraft.itemHardenedBulb), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Item.bone), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemReplicatingMaterial),
+						new ItemStack(Femtocraft.itemHardenedBulb), null, null,
+						null, null, null, null, null }, 1, new ItemStack(
+						Item.bone), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("PumpkinSeeds"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemHardenedBulb),
-								new ItemStack(Femtocraft.itemReplicatingMaterial),
-								null, null, null, null, null, null, null }, 1,
-						new ItemStack(Item.pumpkinSeeds), EnumTechLevel.MICRO, null));
-			if (configRegisterRecipe("MelonSeeds"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null,
-								new ItemStack(Femtocraft.itemHardenedBulb),
-								new ItemStack(Femtocraft.itemReplicatingMaterial),
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Item.melonSeeds), EnumTechLevel.MICRO, null));
-			if (configRegisterRecipe("RawBeef"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null,
-								new ItemStack(Femtocraft.itemNerveCluster),
-								new ItemStack(Femtocraft.itemReplicatingMaterial),
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Item.beefRaw), EnumTechLevel.MICRO, null));
-			if (configRegisterRecipe("CookedBeef"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null,
-								new ItemStack(Femtocraft.itemProteinChain), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Item.beefCooked), EnumTechLevel.MICRO, null));
-			if (configRegisterRecipe("RawChicken"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemNerveCluster), null,
-								null,
-								new ItemStack(Femtocraft.itemReplicatingMaterial),
-								null, null, null, null, null }, 1,
-						new ItemStack(Item.chickenRaw), EnumTechLevel.MICRO, null));
-			if (configRegisterRecipe("CookedChicken"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null,
-								new ItemStack(Femtocraft.itemProteinChain), null,
-								null, null, null, null, null }, 1,
-						new ItemStack(Item.chickenCooked), EnumTechLevel.MICRO,
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemHardenedBulb),
+						new ItemStack(Femtocraft.itemReplicatingMaterial),
+						null, null, null, null, null, null, null }, 1,
+						new ItemStack(Item.pumpkinSeeds), EnumTechLevel.MICRO,
 						null));
+			if (configRegisterRecipe("MelonSeeds"))
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						new ItemStack(Femtocraft.itemHardenedBulb),
+						new ItemStack(Femtocraft.itemReplicatingMaterial),
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Item.melonSeeds), EnumTechLevel.MICRO, null));
+			if (configRegisterRecipe("RawBeef"))
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						new ItemStack(Femtocraft.itemNerveCluster),
+						new ItemStack(Femtocraft.itemReplicatingMaterial),
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Item.beefRaw), EnumTechLevel.MICRO, null));
+			if (configRegisterRecipe("CookedBeef"))
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						new ItemStack(Femtocraft.itemProteinChain), null, null,
+						null, null, null, null, null }, 1, new ItemStack(
+						Item.beefCooked), EnumTechLevel.MICRO, null));
+			if (configRegisterRecipe("RawChicken"))
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemNerveCluster), null, null,
+						new ItemStack(Femtocraft.itemReplicatingMaterial),
+						null, null, null, null, null }, 1, new ItemStack(
+						Item.chickenRaw), EnumTechLevel.MICRO, null));
+			if (configRegisterRecipe("CookedChicken"))
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, new ItemStack(Femtocraft.itemProteinChain), null,
+						null, null, null, null, null }, 1, new ItemStack(
+						Item.chickenCooked), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("RottenFlesh"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemSpinyFilament),
-								new ItemStack(Femtocraft.itemNerveCluster), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Item.rottenFlesh), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemSpinyFilament),
+						new ItemStack(Femtocraft.itemNerveCluster), null, null,
+						null, null, null, null, null }, 1, new ItemStack(
+						Item.rottenFlesh), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("EnderPearl"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null,
-								new ItemStack(Femtocraft.itemIonicChunk), null,
-								new ItemStack(Femtocraft.itemIonicChunk),
-								new ItemStack(Femtocraft.itemOrganometallicPlate),
-								new ItemStack(Femtocraft.itemIonicChunk), null,
-								new ItemStack(Femtocraft.itemIonicChunk), null },
-						1, new ItemStack(Item.enderPearl), EnumTechLevel.MICRO,
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						new ItemStack(Femtocraft.itemIonicChunk), null,
+						new ItemStack(Femtocraft.itemIonicChunk),
+						new ItemStack(Femtocraft.itemOrganometallicPlate),
+						new ItemStack(Femtocraft.itemIonicChunk), null,
+						new ItemStack(Femtocraft.itemIonicChunk), null }, 1,
+						new ItemStack(Item.enderPearl), EnumTechLevel.MICRO,
 						null));
 			if (configRegisterRecipe("GhastTear"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemNerveCluster),
-								new ItemStack(Femtocraft.itemIonicChunk), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Item.ghastTear), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemNerveCluster),
+						new ItemStack(Femtocraft.itemIonicChunk), null, null,
+						null, null, null, null, null }, 1, new ItemStack(
+						Item.ghastTear), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("NetherWart"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemFungalSpores),
-								new ItemStack(Femtocraft.itemReplicatingMaterial),
-								null, null, null, null, null, null, null }, 1,
-						new ItemStack(Item.netherStalkSeeds), EnumTechLevel.MICRO,
-						null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemFungalSpores),
+						new ItemStack(Femtocraft.itemReplicatingMaterial),
+						null, null, null, null, null, null, null }, 1,
+						new ItemStack(Item.netherStalkSeeds),
+						EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("SpiderEye"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemNerveCluster),
-								new ItemStack(Femtocraft.itemOrganometallicPlate),
-								null, null, null, null, null, null, null }, 1,
-						new ItemStack(Item.spiderEye), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemNerveCluster),
+						new ItemStack(Femtocraft.itemOrganometallicPlate),
+						null, null, null, null, null, null, null }, 1,
+						new ItemStack(Item.spiderEye), EnumTechLevel.MICRO,
+						null));
 			if (configRegisterRecipe("BlazePowder"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemMorphicChannel),
-								new ItemStack(Femtocraft.itemMicroCrystal), null,
-								null, null, null, null, null, null }, 1,
-						new ItemStack(Item.blazePowder), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemMorphicChannel),
+						new ItemStack(Femtocraft.itemMicroCrystal), null, null,
+						null, null, null, null, null }, 1, new ItemStack(
+						Item.blazePowder), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Emerald"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemMetalComposite),
-								new ItemStack(Femtocraft.itemConductiveAlloy),
-								null, null, null, null, null, null, null }, 1,
-						new ItemStack(Item.emerald), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemMetalComposite),
+						new ItemStack(Femtocraft.itemConductiveAlloy), null,
+						null, null, null, null, null, null }, 1, new ItemStack(
+						Item.emerald), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Carrot"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null,
-								new ItemStack(Femtocraft.itemReplicatingMaterial),
-								new ItemStack(Femtocraft.itemFibrousStrand), null,
-								null, null, null, null, null }, 1,
-						new ItemStack(Item.carrot), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						new ItemStack(Femtocraft.itemReplicatingMaterial),
+						new ItemStack(Femtocraft.itemFibrousStrand), null,
+						null, null, null, null, null }, 1, new ItemStack(
+						Item.carrot), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Potato"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null, null,
-								new ItemStack(Femtocraft.itemReplicatingMaterial),
-								new ItemStack(Femtocraft.itemFibrousStrand), null,
-								null, null, null }, 1, new ItemStack(
-								Item.potato), EnumTechLevel.MICRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null,
+						new ItemStack(Femtocraft.itemReplicatingMaterial),
+						new ItemStack(Femtocraft.itemFibrousStrand), null,
+						null, null, null }, 1, new ItemStack(Item.potato),
+						EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("BakedPotato"))
 				addReversableRecipe(new AssemblerRecipe(
 						new ItemStack[] { null, null, null, null, null, null,
-								new ItemStack(Femtocraft.itemFibrousStrand), null,
-								null }, 1, new ItemStack(Item.bakedPotato),
-						EnumTechLevel.MICRO, null));
-			if (configRegisterRecipe("PoisonPotato"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null, null,
-								new ItemStack(Femtocraft.itemSynthesizedFiber),
-								null, null, null, null, null }, 1,
-						new ItemStack(Item.poisonousPotato), EnumTechLevel.MICRO,
+								new ItemStack(Femtocraft.itemFibrousStrand),
+								null, null }, 1,
+						new ItemStack(Item.bakedPotato), EnumTechLevel.MICRO,
 						null));
+			if (configRegisterRecipe("PoisonPotato"))
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null,
+						new ItemStack(Femtocraft.itemSynthesizedFiber), null,
+						null, null, null, null }, 1, new ItemStack(
+						Item.poisonousPotato), EnumTechLevel.MICRO, null));
 			if (configRegisterRecipe("Cake"))
-				addDecompositionRecipe(new AssemblerRecipe(
-						new ItemStack[] { new ItemStack(Item.egg),
-								new ItemStack(Item.sugar, 2),
-								new ItemStack(Item.wheat, 3), null, null, null,
-								null, null, null }, 1,
-						new ItemStack(Item.cake), EnumTechLevel.MICRO, null));
+				addDecompositionRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Item.egg), new ItemStack(Item.sugar, 2),
+						new ItemStack(Item.wheat, 3), null, null, null, null,
+						null, null }, 1, new ItemStack(Item.cake),
+						EnumTechLevel.MACRO, null));
 
 			if (configRegisterRecipe("NetherStar"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								new ItemStack(Femtocraft.itemHardenedBulb, 64),
-								new ItemStack(Femtocraft.itemOrganometallicPlate,
-										64),
-								new ItemStack(Femtocraft.itemHardenedBulb, 64),
-								new ItemStack(Femtocraft.itemOrganometallicPlate,
-										64),
-								new ItemStack(Item.diamond, 64),
-								new ItemStack(Femtocraft.itemOrganometallicPlate,
-										64),
-								new ItemStack(Femtocraft.itemHardenedBulb, 64),
-								new ItemStack(Femtocraft.itemOrganometallicPlate,
-										64),
-								new ItemStack(Femtocraft.itemHardenedBulb, 64) },
-						1, new ItemStack(Item.netherStar), EnumTechLevel.MICRO,
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] {
+						new ItemStack(Femtocraft.itemHardenedBulb, 64),
+						new ItemStack(Femtocraft.itemOrganometallicPlate, 64),
+						new ItemStack(Femtocraft.itemHardenedBulb, 64),
+						new ItemStack(Femtocraft.itemOrganometallicPlate, 64),
+						new ItemStack(Item.diamond, 64),
+						new ItemStack(Femtocraft.itemOrganometallicPlate, 64),
+						new ItemStack(Femtocraft.itemHardenedBulb, 64),
+						new ItemStack(Femtocraft.itemOrganometallicPlate, 64),
+						new ItemStack(Femtocraft.itemHardenedBulb, 64) }, 1,
+						new ItemStack(Item.netherStar), EnumTechLevel.MICRO,
 						null));
 		} catch (AssemblerRecipeFoundException e) {
 			Femtocraft.logger.log(Level.SEVERE, e.errMsg);
@@ -990,8 +924,8 @@ public class ManagerAssemblerRecipe {
 			}
 
 			try {
-				addReversableRecipe(new AssemblerRecipe(input, 0,
-						output, EnumTechLevel.MACRO, null));
+				addReversableRecipe(new AssemblerRecipe(input, 0, output,
+						EnumTechLevel.MACRO, null));
 				done = true;
 			} catch (AssemblerRecipeFoundException e) {
 				// Attempt to offset, while staying inside crafting grid
@@ -1086,8 +1020,8 @@ public class ManagerAssemblerRecipe {
 				}
 
 				try {
-					addReversableRecipe(new AssemblerRecipe(input, 0,
-							output, EnumTechLevel.MACRO, null));
+					addReversableRecipe(new AssemblerRecipe(input, 0, output,
+							EnumTechLevel.MACRO, null));
 					valid = true;
 				} catch (AssemblerRecipeFoundException e) {
 					// Permute the slots
@@ -1184,56 +1118,40 @@ public class ManagerAssemblerRecipe {
 	private void registerFemtocraftAssemblerRecipes() {
 		try {
 			if (configRegisterRecipe("IronOre"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null, null, null,
-								new ItemStack(Femtocraft.deconstructedIron, 2),
-								null, null, null, null }, 0, new ItemStack(
-								Block.oreIron), EnumTechLevel.MACRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null, null,
+						new ItemStack(Femtocraft.deconstructedIron, 2), null,
+						null, null, null }, 0, new ItemStack(Block.oreIron),
+						EnumTechLevel.MACRO, null));
 			if (configRegisterRecipe("GoldOre"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] { null, null, null, null,
-								new ItemStack(Femtocraft.deconstructedGold, 2),
-								null, null, null, null }, 0, new ItemStack(
-								Block.oreGold), EnumTechLevel.MACRO, null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null, null,
+						new ItemStack(Femtocraft.deconstructedGold, 2), null,
+						null, null, null }, 0, new ItemStack(Block.oreGold),
+						EnumTechLevel.MACRO, null));
 			if (configRegisterRecipe("TitaniumOre"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								null,
-								null,
-								null,
-								null,
-								new ItemStack(Femtocraft.deconstructedTitanium,
-										2), null, null, null, null }, 0,
-						new ItemStack(Femtocraft.oreTitanium), EnumTechLevel.MACRO,
-						null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null, null,
+						new ItemStack(Femtocraft.deconstructedTitanium, 2),
+						null, null, null, null }, 0, new ItemStack(
+						Femtocraft.oreTitanium), EnumTechLevel.MACRO, null));
 			if (configRegisterRecipe("ThoriumOre"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								null,
-								null,
-								null,
-								null,
-								new ItemStack(Femtocraft.deconstructedThorium,
-										2), null, null, null, null }, 0,
-						new ItemStack(Femtocraft.oreThorium), EnumTechLevel.MACRO,
-						null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null, null,
+						new ItemStack(Femtocraft.deconstructedThorium, 2),
+						null, null, null, null }, 0, new ItemStack(
+						Femtocraft.oreThorium), EnumTechLevel.MACRO, null));
 			if (configRegisterRecipe("PlatinumOre"))
-				addReversableRecipe(new AssemblerRecipe(
-						new ItemStack[] {
-								null,
-								null,
-								null,
-								null,
-								new ItemStack(Femtocraft.deconstructedPlatinum,
-										2), null, null, null, null }, 0,
-						new ItemStack(Femtocraft.orePlatinum), EnumTechLevel.MACRO,
-						null));
+				addReversableRecipe(new AssemblerRecipe(new ItemStack[] { null,
+						null, null, null,
+						new ItemStack(Femtocraft.deconstructedPlatinum, 2),
+						null, null, null, null }, 0, new ItemStack(
+						Femtocraft.orePlatinum), EnumTechLevel.MACRO, null));
 
-			addDecompositionRecipe(new AssemblerRecipe(
-					new ItemStack[] { new ItemStack(Item.paper, 3), null, null,
-							null, null, null, null, null, null }, 0,
-					new ItemStack(Femtocraft.paperSchematic), EnumTechLevel.MACRO,
-					null));
+			addDecompositionRecipe(new AssemblerRecipe(new ItemStack[] {
+					new ItemStack(Item.paper, 3), null, null, null, null, null,
+					null, null, null }, 0, new ItemStack(
+					Femtocraft.paperSchematic), EnumTechLevel.MACRO, null));
 
 			addRecompositionRecipe(new AssemblerRecipe(
 					new ItemStack[] {
@@ -1304,8 +1222,8 @@ public class ManagerAssemblerRecipe {
 	}
 
 	private void testRecipes() {
-		AssemblerRecipe test = getRecipe(new ItemStack[] { null,
-				null, null, new ItemStack(Femtocraft.itemPlaneoid),
+		AssemblerRecipe test = getRecipe(new ItemStack[] { null, null, null,
+				new ItemStack(Femtocraft.itemPlaneoid),
 				new ItemStack(Femtocraft.itemRectangulon),
 				new ItemStack(Femtocraft.itemPlaneoid), null, null, null });
 		Femtocraft.logger.log(Level.WARNING, "Recipe "
@@ -1345,8 +1263,8 @@ public class ManagerAssemblerRecipe {
 		checkDecomposition(normal, recipe);
 		checkRecomposition(normalArray, recipe);
 
-        return registerRecomposition(normalArray, recipe)
-                && registerDecomposition(normal, recipe);
+		return registerRecomposition(normalArray, recipe)
+				&& registerDecomposition(normal, recipe);
 	}
 
 	public boolean addRecompositionRecipe(AssemblerRecipe recipe)
@@ -1385,6 +1303,8 @@ public class ManagerAssemblerRecipe {
 				recipe);
 		if (!MinecraftForge.EVENT_BUS.post(event)) {
 			inputToRecipeMap.put(normal, recipe);
+			addRecipeToTechLevelMap(recipe);
+			addRecipeToTechnologyMap(recipe);
 			return true;
 		}
 		return false;
@@ -1396,13 +1316,36 @@ public class ManagerAssemblerRecipe {
 				recipe);
 		if (!MinecraftForge.EVENT_BUS.post(event)) {
 			outputToRecipeMap.put(normal, recipe);
+			addRecipeToTechLevelMap(recipe);
+			addRecipeToTechnologyMap(recipe);
 			return true;
 		}
 		return false;
 	}
 
-	private void checkDecomposition(ItemStack normal,
-			AssemblerRecipe recipe)
+	private void addRecipeToTechLevelMap(AssemblerRecipe recipe) {
+		ArrayList<AssemblerRecipe> array = techLevelToRecipeMap
+				.get(recipe.enumTechLevel);
+		if (array == null) {
+			array = new ArrayList<AssemblerRecipe>();
+			techLevelToRecipeMap.put(recipe.enumTechLevel, array);
+		}
+		if (!array.contains(recipe))
+			array.add(recipe);
+	}
+
+	private void addRecipeToTechnologyMap(AssemblerRecipe recipe) {
+		ArrayList<AssemblerRecipe> array = technologyToRecipeMap
+				.get(recipe.tech);
+		if (array == null) {
+			array = new ArrayList<AssemblerRecipe>();
+			technologyToRecipeMap.put(recipe.tech, array);
+		}
+		if (!array.contains(recipe))
+			array.add(recipe);
+	}
+
+	private void checkDecomposition(ItemStack normal, AssemblerRecipe recipe)
 			throws AssemblerRecipeFoundException {
 		if (outputToRecipeMap.containsKey(normal)) {
 			throw new AssemblerRecipeFoundException(
@@ -1411,8 +1354,7 @@ public class ManagerAssemblerRecipe {
 		}
 	}
 
-	private void checkRecomposition(ItemStack[] normal,
-			AssemblerRecipe recipe)
+	private void checkRecomposition(ItemStack[] normal, AssemblerRecipe recipe)
 			throws AssemblerRecipeFoundException {
 		if (inputToRecipeMap.containsKey(normal)) {
 			throw new AssemblerRecipeFoundException(
@@ -1433,8 +1375,8 @@ public class ManagerAssemblerRecipe {
 
 	public boolean removeRecompositionRecipe(AssemblerRecipe recipe) {
 		ItemStack[] normal = normalizedInput(recipe);
-        return normal != null && (inputToRecipeMap.remove(normal) != null);
-    }
+		return normal != null && (inputToRecipeMap.remove(normal) != null);
+	}
 
 	public boolean removeDecompositionRecipe(AssemblerRecipe recipe) {
 		return (outputToRecipeMap.remove(normalizedOutput(recipe)) != null);
@@ -1463,8 +1405,9 @@ public class ManagerAssemblerRecipe {
 
 	public boolean canCraft(ItemStack input) {
 		AssemblerRecipe recipe = getRecipe(input);
-        return recipe != null && input.stackSize >= recipe.output.stackSize && FemtocraftUtils.compareItem(recipe.output, input) == 0;
-    }
+		return recipe != null && input.stackSize >= recipe.output.stackSize
+				&& FemtocraftUtils.compareItem(recipe.output, input) == 0;
+	}
 
 	public AssemblerRecipe getRecipe(ItemStack[] input) {
 		ItemStack[] normal = normalizedInput(input);
@@ -1477,8 +1420,16 @@ public class ManagerAssemblerRecipe {
 		return outputToRecipeMap.get(normalizedItem(output));
 	}
 
-	public boolean hasResearchedRecipe(AssemblerRecipe recipe,
-			String username) {
+	public ArrayList<AssemblerRecipe> getRecipesForTechLevel(EnumTechLevel level) {
+		return techLevelToRecipeMap.get(level);
+	}
+
+	public ArrayList<AssemblerRecipe> getRecipesForTechnology(
+			ResearchTechnology tech) {
+		return technologyToRecipeMap.get(tech);
+	}
+
+	public boolean hasResearchedRecipe(AssemblerRecipe recipe, String username) {
 		return Femtocraft.researchManager.hasPlayerResearchedTechnology(
 				username, recipe.tech);
 	}

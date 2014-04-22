@@ -84,9 +84,9 @@ public class GuiResearch extends GuiScreen {
 		researchStatus = Femtocraft.researchManager.getPlayerResearch(username);
 		short short1 = 141;
 		short short2 = 141;
-		this.field_74117_m = this.guiMapX = this.field_74124_q = (double) ((Femtocraft.researchManager.technologyWorldStructure.xDisplay - 1)
+		this.field_74117_m = this.guiMapX = this.field_74124_q = (double) ((Femtocraft.researchManager.technologyBasicChemistry.xDisplay - 1)
 				* 24 - short1 / 2 - 12);
-		this.field_74115_n = this.guiMapY = this.field_74123_r = (double) (Femtocraft.researchManager.technologyWorldStructure.yDisplay * 24 - short2 / 2);
+		this.field_74115_n = this.guiMapY = this.field_74123_r = (double) (Femtocraft.researchManager.technologyBasicChemistry.yDisplay * 24 - short2 / 2);
 	}
 
 	public static void setSize(int rows, int columns) {

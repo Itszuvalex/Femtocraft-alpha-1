@@ -25,8 +25,12 @@ import femtocraft.Femtocraft;
 import femtocraft.managers.research.EventTechnology.TechnologyAddedEvent;
 import femtocraft.research.gui.graph.GraphNode;
 import femtocraft.research.gui.graph.TechnologyGraph;
+import femtocraft.research.gui.technology.GuiTechnologyAdvancedChemistry;
+import femtocraft.research.gui.technology.GuiTechnologyAppliedParticlePhysics;
+import femtocraft.research.gui.technology.GuiTechnologyBasicChemistry;
 import femtocraft.research.gui.technology.GuiTechnologyBasicCircuits;
 import femtocraft.research.gui.technology.GuiTechnologyMachining;
+import femtocraft.research.gui.technology.GuiTechnologyMacroscopicStructure;
 
 //TODO:  Separate players out into their own files
 public class ManagerResearch {
@@ -64,10 +68,15 @@ public class ManagerResearch {
 			null, new ItemStack(Femtocraft.microCircuitBoard), 2, -3, true,
 			null, GuiTechnologyBasicCircuits.class, null);
 	@Technology
-	public static ResearchTechnology technologyWorldStructure = new ResearchTechnology(
+	public static ResearchTechnology technologyBasicChemistry = new ResearchTechnology(
 			"Basic Chemistry", "Composition of Matter", EnumTechLevel.MACRO,
 			null, new ItemStack(Femtocraft.itemMineralLattice), 0, -3, true,
-			null);
+			null, GuiTechnologyBasicChemistry.class, null);
+	@Technology
+	public static ResearchTechnology technologyMacroscopicStructure = new ResearchTechnology(
+			"Macroscopic Structures", "The patterns everything take.",
+			EnumTechLevel.MACRO, null, new ItemStack(Item.pickaxeIron), 0, -3,
+			true, null, GuiTechnologyMacroscopicStructure.class, null);
 
 	// MICRO
 
@@ -95,7 +104,7 @@ public class ManagerResearch {
 	public static ResearchTechnology technologyPotentiality = new ResearchTechnology(
 			"Potentiality", "", EnumTechLevel.MICRO,
 			new ArrayList<ResearchTechnology>(Arrays.asList(
-					technologyBasicCircuits, technologyWorldStructure)),
+					technologyBasicCircuits, technologyBasicChemistry)),
 			new ItemStack(Femtocraft.blockMicroCable), 0, 0, false,
 			new ArrayList<ItemStack>());
 	@Technology
@@ -132,7 +141,7 @@ public class ManagerResearch {
 			"Molecular Manipulation", "", EnumTechLevel.MICRO,
 			new ArrayList<ResearchTechnology>(Arrays.asList(
 					technologyAlgorithms, technologyMechanicalPrecision,
-					technologyWorldStructure)), new ItemStack(
+					technologyBasicChemistry)), new ItemStack(
 					Femtocraft.microDeconstructor), 0, 0, false,
 			new ArrayList<ItemStack>());
 	@Technology
@@ -194,9 +203,10 @@ public class ManagerResearch {
 	public static ResearchTechnology technologyAdvancedChemistry = new ResearchTechnology(
 			"Advanced Chemistry", "", EnumTechLevel.NANO,
 			new ArrayList<ResearchTechnology>(Arrays.asList(
-					technologyPotentialityGeneration, technologyWorldStructure,
+					technologyPotentialityGeneration, technologyBasicChemistry,
 					technologyOreRefining)), null, 0, 0, true,
-			new ArrayList<ItemStack>());
+			new ArrayList<ItemStack>(), GuiTechnologyAdvancedChemistry.class,
+			null);
 	@Technology
 	public static ResearchTechnology technologyThoriumFissibility = new ResearchTechnology(
 			"Thorium Fissibility",
@@ -362,11 +372,12 @@ public class ManagerResearch {
 			new ArrayList<ItemStack>());
 	@Technology
 	public static ResearchTechnology technologyAppliedParticlePhysics = new ResearchTechnology(
-			"Applied Partical Physics", "Like theoretical particle physics.",
+			"Applied Particle Physics", "Like theoretical particle physics.",
 			EnumTechLevel.FEMTO, new ArrayList<ResearchTechnology>(
 					Arrays.asList(technologyHarnessedNuclearDecay,
 							technologyAdvancedChemistry)), null, 0, 0, true,
-			new ArrayList<ItemStack>());
+			new ArrayList<ItemStack>(),
+			GuiTechnologyAppliedParticlePhysics.class, null);
 	@Technology
 	public static ResearchTechnology technologyQuantumInteractivity = new ResearchTechnology(
 			"Quantum Interactivity", "", EnumTechLevel.FEMTO,
