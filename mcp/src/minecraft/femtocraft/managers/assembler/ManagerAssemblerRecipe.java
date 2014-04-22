@@ -795,8 +795,44 @@ public class ManagerAssemblerRecipe {
 			Femtocraft.logger.log(Level.CONFIG,
 					"Attempting to register shaped assembler recipe for "
 							+ orecipe.getRecipeOutput().getDisplayName() + ".");
+			// Hacky hacky hacky
+			// They should at least have accessors for goodness sake
+			int width = 0, height = 0;
+			try {
+				// Width
+				{
+					Field width_field = ShapedOreRecipe.class
+							.getDeclaredField("width");
+					boolean prev = width_field.isAccessible();
+					if (!prev)
+						width_field.setAccessible(true);
+					width = width_field.getInt(orecipe);
+					if (!prev)
+						width_field.setAccessible(prev);
+				}
+				// Height
+				{
+					Field height_field = ShapedOreRecipe.class
+							.getDeclaredField("height");
+					boolean prev = height_field.isAccessible();
+					if (!prev)
+						height_field.setAccessible(true);
+					height = height_field.getInt(orecipe);
+					if (!prev)
+						height_field.setAccessible(prev);
+				}
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (NoSuchFieldException e) {
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+
 			boolean valid = registerShapedOreRecipe(orecipe.getInput(),
-					orecipe.getRecipeOutput());
+					orecipe.getRecipeOutput(), width, height);
 			if (!valid) {
 				Femtocraft.logger.log(Level.WARNING,
 						"Failed to register shaped assembler recipe for "
@@ -881,7 +917,7 @@ public class ManagerAssemblerRecipe {
 	}
 
 	private boolean registerShapedOreRecipe(Object[] recipeInput,
-			ItemStack recipeOutput) {
+			ItemStack recipeOutput, int width, int height) {
 		boolean done = false;
 		int xOffset = 0;
 		int yOffset = 0;
@@ -898,7 +934,8 @@ public class ManagerAssemblerRecipe {
 					} else {
 						item = (ItemStack) obj;
 					}
-					input[i + xOffset + 3 * yOffset] = item == null ? null
+					input[((i + xOffset) % width) + 3
+							* (yOffset + ((i + xOffset) / width))] = item == null ? null
 							: item.copy();
 				} catch (ArrayIndexOutOfBoundsException e) {
 					if (++xOffset >= 3) {
@@ -951,8 +988,9 @@ public class ManagerAssemblerRecipe {
 			Arrays.fill(input, null);
 			for (int i = 0; (i < recipeItems.length) && (i < 9); i++) {
 				ItemStack item = recipeItems[i];
-				input[i + xoffset + 3 * yoffset] = item == null ? null : item
-						.copy();
+				input[((i + xoffset) % recipeWidth) + 3
+						* (yoffset + ((i + xoffset) / recipeWidth))] = item == null ? null
+						: item.copy();
 			}
 
 			try {
