@@ -3,7 +3,6 @@ package femtocraft.research.gui.graph;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Random;
 import java.util.logging.Level;
 
 import femtocraft.Femtocraft;
@@ -144,7 +143,6 @@ public class TechnologyGraph {
 			}
 		}
 
-		Random random = new Random();
 		int width = (int) (greatestWidth() * EMPTY_PADDING_MULTIPLER);
 		for (int y = 1; y < rows.length; ++y) {
 			ArrayList<GraphNode> row = rows[y];
@@ -152,7 +150,7 @@ public class TechnologyGraph {
 			for (int x = row.size(); x < width; ++x) {
 				DummyNode dummy = new DummyNode();
 				dummy.setY(y);
-				row.add(random.nextInt(row.size()), dummy);
+				row.add(0, dummy);
 			}
 
 			for (int k = 0; k < row.size(); ++k) {
@@ -176,7 +174,6 @@ public class TechnologyGraph {
 
 	private void hillClimb(ArrayList<GraphNode>[] rows,
 			ArrayList<GraphNode> row1, ArrayList<GraphNode> row2) {
-		Random rand = new Random();
 		int crossings = totalCrossingCount(rows);
 		float distance = totalDistance(rows);
 		// for (int i = 0; i < MAX_HILLCLIMB_ITERATIONS; ++i) {
