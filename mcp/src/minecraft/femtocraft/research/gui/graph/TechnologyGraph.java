@@ -144,7 +144,7 @@ public class TechnologyGraph {
 		}
 
 		int width = (int) (greatestWidth() * EMPTY_PADDING_MULTIPLER);
-		for (int y = 1; y < rows.length; ++y) {
+		for (int y = 0; y < rows.length; ++y) {
 			ArrayList<GraphNode> row = rows[y];
 			row.ensureCapacity(width);
 			for (int x = row.size(); x < width; ++x) {
@@ -185,6 +185,8 @@ public class TechnologyGraph {
 			for (int i2 = 0; i2 < row2.size(); ++i2) {
 				if (i1 == i2)
 					continue;
+
+				boolean h = heuristics(row2.get(i1), row2.get(i2));
 				// Switch x
 				switch_x_pos(row2.get(i1), row2.get(i2));
 
@@ -195,7 +197,7 @@ public class TechnologyGraph {
 				if (!heuristics(row2.get(i1), row2.get(i2))) {
 					switch_x_pos(row2.get(i1), row2.get(i2));
 				} else {
-					if (new_cross_count < crossings) {
+					if (new_cross_count < crossings || !h) {
 						crossings = new_cross_count;
 						distance = new_distance;
 					} else if (new_cross_count == crossings) {
@@ -214,8 +216,16 @@ public class TechnologyGraph {
 	}
 
 	private boolean heuristics(GraphNode node1, GraphNode node2) {
-		if (Math.abs(node1.getX() - node2.getX()) > MAX_CHILD_X_DIST)
-			return false;
+//		for (GraphNode child : node1.getChildren()) {
+//			if (Math.abs(node1.getX() - child.getX()) > Math.floor(node1
+//					.getChildren().size() / 2.f))
+//				return false;
+//		}
+//		for (GraphNode child : node2.getChildren()) {
+//			if (Math.abs(node2.getX() - child.getX()) > Math.floor(node2
+//					.getChildren().size() / 2.f))
+//				return false;
+//		}
 
 		return true;
 	}

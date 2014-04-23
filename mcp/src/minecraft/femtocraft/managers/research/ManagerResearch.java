@@ -49,7 +49,7 @@ public class ManagerResearch {
 	private String lastWorldLoaded = "";
 
 	// TODO: REMOVE ME
-	private static boolean debug = false;
+	private static boolean debug = true;
 
 	@Retention(RetentionPolicy.RUNTIME)
 	public @interface Technology {
