@@ -214,8 +214,8 @@ public class TechnologyGraph {
 	}
 
 	private boolean heuristics(GraphNode node1, GraphNode node2) {
-		// if (Math.abs(node1.getX() - node2.getX()) > MAX_CHILD_X_DIST)
-		// return false;
+		if (Math.abs(node1.getX() - node2.getX()) > MAX_CHILD_X_DIST)
+			return false;
 
 		return true;
 	}
@@ -259,7 +259,7 @@ public class TechnologyGraph {
 		return connections;
 	}
 
-	boolean isCrossing(int x_top_1, int x_connection_1, int x_top_2,
+	private boolean isCrossing(int x_top_1, int x_connection_1, int x_top_2,
 			int x_connection_2) {
 		return ((x_top_1 < x_top_2 && x_connection_1 > x_connection_2) || (x_top_1 > x_top_2 && x_connection_1 < x_connection_2));
 	}
@@ -279,8 +279,8 @@ public class TechnologyGraph {
 		float distance = 0;
 		for (GraphNode node : row1) {
 			for (GraphNode child : node.getChildren()) {
-				distance += Math
-						.sqrt(Math.pow(child.getX() - node.getX(), 2) + 1);
+				distance += Math.sqrt(Math.pow(child.getX() - node.getX(), 2)
+						+ Math.pow(child.getY() - node.getY(), 2));
 			}
 		}
 		return distance;
