@@ -5,20 +5,16 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.logging.Level;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
-
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.common.network.Player;
 import femtocraft.Femtocraft;
 import femtocraft.managers.research.EventTechnology.TechnologyDiscoveredEvent;
 import femtocraft.managers.research.EventTechnology.TechnologyResearchedEvent;
@@ -62,19 +58,21 @@ public class ResearchPlayer {
 	 *         False otherwise.
 	 */
 	public boolean researchTechnology(String name, boolean force) {
+		ResearchTechnology rtech = Femtocraft.researchManager
+				.getTechnology(name);
 		ResearchTechnologyStatus tech = techStatus.get(name);
 		if (tech == null && !force)
 			return false;
 
 		if (tech == null && force) {
 			techStatus.put(name, new ResearchTechnologyStatus(name, true));
-			discoverNewTechs(false);
+			discoverNewTechs(rtech, false);
 			sync();
 			return true;
 		}
 
 		TechnologyResearchedEvent event = new TechnologyResearchedEvent(
-				username, Femtocraft.researchManager.getTechnology(name));
+				username, rtech);
 		if (!MinecraftForge.EVENT_BUS.post(event)) {
 			tech.researched = true;
 			EntityPlayerMP player = MinecraftServer.getServer()
@@ -88,7 +86,7 @@ public class ResearchPlayer {
 							+ " successfully researched.");
 				}
 			}
-			discoverNewTechs(true);
+			discoverNewTechs(rtech, true);
 			sync();
 
 			return true;
@@ -96,7 +94,7 @@ public class ResearchPlayer {
 		return false;
 	}
 
-	private void discoverNewTechs(boolean notify) {
+	private void discoverNewTechs(ResearchTechnology discoverer, boolean notify) {
 		for (ResearchTechnology t : Femtocraft.researchManager
 				.getTechnologies()) {
 			if (t.prerequisites != null) {
@@ -104,8 +102,12 @@ public class ResearchPlayer {
 				if (ts != null && ts.researched)
 					continue;
 
+				boolean discovererPrereq = false;
 				boolean shouldDiscover = true;
 				for (ResearchTechnology pt : t.prerequisites) {
+					if (pt == discoverer) {
+						discovererPrereq = true;
+					}
 					ResearchTechnologyStatus rts = techStatus.get(pt.name);
 					if (rts == null) {
 						shouldDiscover = false;
@@ -117,7 +119,7 @@ public class ResearchPlayer {
 					}
 				}
 
-				if (shouldDiscover) {
+				if (shouldDiscover && discovererPrereq) {
 					discoverTechnology(t.name);
 					if (notify) {
 						EntityPlayerMP player = MinecraftServer.getServer()
