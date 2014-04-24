@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="JUtils v1.0.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../mcp/jars/libraries/net/java/jutils/jutils/1.0.0/jutils-1.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../mcp/jars/libraries/net/java/jutils/jutils/1.0.0/jutils-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

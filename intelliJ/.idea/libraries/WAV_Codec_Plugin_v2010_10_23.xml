@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="WAV Codec Plugin v2010.10.23">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../mcp/jars/libraries/com/paulscode/codecwav/20101023/codecwav-20101023.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

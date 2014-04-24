@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Minecraft Launcher Wrapper v1.8">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../mcp/jars/libraries/net/minecraft/launchwrapper/1.8/launchwrapper-1.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

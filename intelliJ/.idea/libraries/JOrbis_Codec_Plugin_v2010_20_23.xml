@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="JOrbis Codec Plugin v2010.20.23">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../mcp/jars/libraries/com/paulscode/codecjorbis/20101023/codecjorbis-20101023.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
