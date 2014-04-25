@@ -34,7 +34,7 @@ public class BlockNanoCubeFrame extends TileContainer {
 	public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int par2,
 			int par3, int par4, int par5) {
 		TileEntity te = par1iBlockAccess.getBlockTileEntity(par2, par3, par4);
-		if (te != null && te instanceof TileEntityNanoCubeFrame) {
+		if (te instanceof TileEntityNanoCubeFrame) {
 			TileEntityNanoCubeFrame frame = (TileEntityNanoCubeFrame) te;
 			if (frame.isValidMultiBlock()) {
 				MultiBlockInfo info = frame.getInfo();
@@ -153,7 +153,7 @@ public class BlockNanoCubeFrame extends TileContainer {
 	public void breakBlock(World par1World, int par2, int par3, int par4,
 			int par5, int par6) {
 		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
-		if (te != null && te instanceof TileEntityNanoCubeFrame) {
+		if (te instanceof TileEntityNanoCubeFrame) {
 			MultiBlockInfo info = ((TileEntityNanoCubeFrame) te).getInfo();
 			MultiBlockNanoCube.instance.breakMultiBlock(par1World, info.x(),
 					info.y(), info.z());

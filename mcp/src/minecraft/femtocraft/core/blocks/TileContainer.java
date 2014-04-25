@@ -78,7 +78,7 @@ public class TileContainer extends BlockContainer {
 			int par5, int par6) {
 		if (shouldDrop) {
 			TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
-			if (te != null && te instanceof TileEntityBase) {
+			if (te instanceof TileEntityBase) {
 				TileEntityBase tile = (TileEntityBase) te;
 
 				ItemStack stack = new ItemStack(Block.blocksList[par5]);

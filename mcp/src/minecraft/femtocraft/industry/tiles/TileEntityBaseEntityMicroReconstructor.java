@@ -21,25 +21,28 @@ import femtocraft.utils.FemtocraftUtils;
 
 public class TileEntityBaseEntityMicroReconstructor extends
 		TileEntityBaseEntityIndustry implements ISidedInventory, IFluidHandler {
-	private @Saveable
-	FluidTank tank;
-
-	private boolean hasItems = true;
-
-	public TileEntityBaseEntityMicroReconstructor() {
-		super();
-		setMaxStorage(800);
-		tank = new FluidTank(600);
-		setTechLevel(EnumTechLevel.MICRO);
-	}
-
+	// TODO: Load from configs
 	public static int powerToCook = 40;
+	// TODO: Load from configs
 	public static int ticksToCook = 100;
+	// TODO: Load from configs
 	public static int maxSmelt = 1;
+	/**
+	 * The number of ticks that the current item has been cooking for
+	 */
+	public @Saveable
+	int cookTime = 0;
+	public @Saveable
+	int currentPower = 0;
+	public @Saveable
+	ItemStack[] reconstructingStacks = null;
 
 	/**
 	 * The ItemStacks that hold the items currently being used in the furnace
 	 */
+	private @Saveable
+	FluidTank tank;
+	private boolean hasItems = true;
 	/**
 	 * Slots 0-8 are for recipe area - these are dummy items, and should never
 	 * be touched except when setting for display purposes Slot 9 is for output
@@ -48,30 +51,24 @@ public class TileEntityBaseEntityMicroReconstructor extends
 	 */
 	private @Saveable
 	ItemStack[] reconstructorItemStacks = new ItemStack[29];
-
-	/**
-	 * The number of ticks that the current item has been cooking for
-	 */
-	public @Saveable
-	int cookTime = 0;
-	public @Saveable
-	int currentPower = 0;
 	private @Saveable
 	String field_94130_e;
-	public @Saveable
-	ItemStack[] reconstructingStacks = null;
+	public TileEntityBaseEntityMicroReconstructor() {
+		super();
+		setMaxStorage(800);
+		tank = new FluidTank(600);
+		setTechLevel(EnumTechLevel.MICRO);
+	}
 
 	protected int getMaxSimultaneousSmelt() {
 		return maxSmelt;
 	}
 
 	protected int getTicksToCook() {
-		// TODO: Load from configs
 		return ticksToCook;
 	}
 
 	protected int getPowerToCook() {
-		// TODO: Load from configs
 		return powerToCook;
 	}
 
@@ -148,6 +145,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
 			if (this.reconstructorItemStacks[par1].stackSize <= par2) {
 				itemstack = this.reconstructorItemStacks[par1];
 				this.reconstructorItemStacks[par1] = null;
+				this.onInventoryChanged();
 				return itemstack;
 			} else {
 				itemstack = this.reconstructorItemStacks[par1].splitStack(par2);
@@ -156,6 +154,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
 					this.reconstructorItemStacks[par1] = null;
 				}
 
+				this.onInventoryChanged();
 				return itemstack;
 			}
 		} else {
@@ -274,38 +273,40 @@ public class TileEntityBaseEntityMicroReconstructor extends
 		if (recipe == null)
 			return;
 
+		cookTime = 0;
 		ItemStack ocopy = recipe.output.copy();
 		ItemStack[] icopy = new ItemStack[9];
 		for (int i = 0; i < recipe.input.length; ++i) {
 			icopy[i] = recipe.input[i] == null ? null : recipe.input[i].copy();
 		}
 		reconstructingStacks = new ItemStack[9];
-		
+
 		int i = 0;
 		do {
-//			if (deconstructingStack.stackSize >= this.getInventoryStackLimit())
-//				break;
-//			if (getStackInSlot(0) == null)
-//				break;
-//
-//			for (ItemStack stack : recipe.input) {
-//				items.add(stack);
-//			}
-//
-//			ItemStack[] ita = new ItemStack[items.size()];
-//			items.toArray(ita);
-//			if (!roomForItems(ita))
-//				break;
-//
-//			if ((massReq += recipe.mass) > (tank.getCapacity() - tank
-//					.getFluidAmount()))
-//				break;
-//
-//			if (!consume(getPowerToCook()))
-//				break;
-//
-//			deconstructingStack.stackSize += recipe.output.stackSize;
-//			decrStackSize(0, recipe.output.stackSize);
+			// if (deconstructingStack.stackSize >= O
+			// this.getInventoryStackLimit())
+			// break;
+			// if (getStackInSlot(0) == null)
+			// break;
+			//
+			// for (ItemStack stack : recipe.input) {
+			// items.add(stack);
+			// }
+			//
+			// ItemStack[] ita = new ItemStack[items.size()];
+			// items.toArray(ita);
+			// if (!roomForItems(ita))
+			// break;
+			//
+			// if ((massReq += recipe.mass) > (tank.getCapacity() - tank
+			// .getFluidAmount()))
+			// break;
+			//
+			// if (!consume(getPowerToCook()))
+			// break;
+			//
+			// deconstructingStack.stackSize += recipe.output.stackSize;
+			// decrStackSize(0, recipe.output.stackSize);
 		} while (++i < getMaxSimultaneousSmelt());
 	}
 
@@ -316,7 +317,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
 
 	@Override
 	protected boolean canFinishWork() {
-		return cookTime == ticksToCook;
+		return cookTime >= ticksToCook;
 	}
 
 	@Override

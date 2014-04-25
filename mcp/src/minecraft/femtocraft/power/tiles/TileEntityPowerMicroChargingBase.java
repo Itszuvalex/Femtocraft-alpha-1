@@ -41,7 +41,7 @@ public class TileEntityPowerMicroChargingBase extends TileEntityPowerProducer {
 				Block block = Block.blocksList[worldObj.getBlockId(xCoord,
 						yCoord + i + 1, zCoord)];
 
-				if ((block == null) || (!(block instanceof IChargingCoil))) {
+				if ((!(block instanceof IChargingCoil))) {
 					searching = false;
 					continue;
 				}

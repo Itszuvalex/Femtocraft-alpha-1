@@ -34,7 +34,7 @@ public class BlockFemtoCubeChassis extends TileContainer {
 	public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int par2,
 			int par3, int par4, int par5) {
 		TileEntity te = par1iBlockAccess.getBlockTileEntity(par2, par3, par4);
-		if (te != null && te instanceof TileEntityFemtoCubeChassis) {
+		if (te instanceof TileEntityFemtoCubeChassis) {
 			TileEntityFemtoCubeChassis chassis = (TileEntityFemtoCubeChassis) te;
 			if (chassis.isValidMultiBlock()) {
 				MultiBlockInfo info = chassis.getInfo();
@@ -128,7 +128,7 @@ public class BlockFemtoCubeChassis extends TileContainer {
 	public void breakBlock(World par1World, int par2, int par3, int par4,
 			int par5, int par6) {
 		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
-		if (te != null && te instanceof TileEntityFemtoCubeChassis) {
+		if (te instanceof TileEntityFemtoCubeChassis) {
 			MultiBlockInfo info = ((TileEntityFemtoCubeChassis) te).getInfo();
 			MultiBlockFemtoCube.instance.breakMultiBlock(par1World, info.x(),
 					info.y(), info.z());

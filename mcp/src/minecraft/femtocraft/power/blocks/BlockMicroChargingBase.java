@@ -54,19 +54,19 @@ public class BlockMicroChargingBase extends BlockPowerContainer implements
 	public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
 		Block block = Block.blocksList[par1World.getBlockId(par2 - 1, par3,
 				par4)];
-		if (block != null && block instanceof IChargingBase)
+		if (block instanceof IChargingBase)
 			return false;
 
 		block = Block.blocksList[par1World.getBlockId(par2 + 1, par3, par4)];
-		if (block != null && block instanceof IChargingBase)
+		if (block instanceof IChargingBase)
 			return false;
 
 		block = Block.blocksList[par1World.getBlockId(par2, par3, par4 - 1)];
-		if (block != null && block instanceof IChargingBase)
+		if (block instanceof IChargingBase)
 			return false;
 
 		block = Block.blocksList[par1World.getBlockId(par2, par3, par4 + 1)];
-        return !(block != null && block instanceof IChargingBase);
+        return !(block instanceof IChargingBase);
 
     }
 

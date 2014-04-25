@@ -141,7 +141,7 @@ public class MultiBlockMicroCrystallizer implements IMultiBlock {
 				for (int k = 0; k <= 2; ++k) {
 					TileEntity te = world.getBlockTileEntity(x + i, y + k, z
 							+ j);
-					if (te == null || !(te instanceof IMultiBlockComponent)) {
+					if (!(te instanceof IMultiBlockComponent)) {
 						if (!((i == 0 && j == 0 && k == 1) && (world
 								.isAirBlock(x + i, y + k, z + j)))) {
 							result = false;
@@ -182,7 +182,7 @@ public class MultiBlockMicroCrystallizer implements IMultiBlock {
 				for (int k = 0; k <= 2; ++k) {
 					TileEntity te = world.getBlockTileEntity(x + i, y + k, z
 							+ j);
-					if (te == null || !(te instanceof IMultiBlockComponent)) {
+					if (!(te instanceof IMultiBlockComponent)) {
 						if (!((i == 0 && j == 0 && k == 1) && (world
 								.isAirBlock(x + i, y + k, z + j)))) {
 							result = false;

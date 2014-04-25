@@ -83,7 +83,7 @@ public class BlockMicroCable extends BlockPowerContainer {
 				par6List, par7Entity);
 
 		TileEntity tile = par1World.getBlockTileEntity(x, y, z);
-		if (tile == null || !(tile instanceof TileEntityMicroCable))
+		if (!(tile instanceof TileEntityMicroCable))
 			return;
 		TileEntityMicroCable cable = (TileEntityMicroCable) tile;
 

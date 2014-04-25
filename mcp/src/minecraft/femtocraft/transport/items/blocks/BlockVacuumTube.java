@@ -177,7 +177,7 @@ public class BlockVacuumTube extends BlockContainer {
 			int par4, Entity par5Entity) {
 		if (par5Entity instanceof EntityItem) {
 			TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
-			if (tile == null || !(tile instanceof TileEntityVacuumTube))
+			if (!(tile instanceof TileEntityVacuumTube))
 				return;
 			TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
 			tube.OnItemEntityCollision((EntityItem) par5Entity);
@@ -211,7 +211,7 @@ public class BlockVacuumTube extends BlockContainer {
 				par6List, par7Entity);
 
 		TileEntity tile = par1World.getBlockTileEntity(x, y, z);
-		if (tile == null || !(tile instanceof TileEntityVacuumTube))
+		if (!(tile instanceof TileEntityVacuumTube))
 			return;
 		TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
 
@@ -289,7 +289,7 @@ public class BlockVacuumTube extends BlockContainer {
 				(double) z + getBlockBoundsMaxZ());
 
 		TileEntity tile = par1World.getBlockTileEntity(x, y, z);
-		if (tile == null || !(tile instanceof TileEntityVacuumTube))
+		if (!(tile instanceof TileEntityVacuumTube))
 			return box;
 		TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
 
@@ -310,7 +310,7 @@ public class BlockVacuumTube extends BlockContainer {
 				(double) z + 12.f / 16.f);
 
 		TileEntity tile = par1iBlockAccess.getBlockTileEntity(x, y, z);
-		if (tile == null || !(tile instanceof TileEntityVacuumTube))
+		if (!(tile instanceof TileEntityVacuumTube))
 			return;
 		TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
 

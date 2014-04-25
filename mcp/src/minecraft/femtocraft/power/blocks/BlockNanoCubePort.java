@@ -31,7 +31,7 @@ public class BlockNanoCubePort extends TileContainer {
 	public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int par2,
 			int par3, int par4, int par5) {
 		TileEntity te = par1iBlockAccess.getBlockTileEntity(par2, par3, par4);
-		if (te != null && te instanceof TileEntityNanoCubePort) {
+		if (te instanceof TileEntityNanoCubePort) {
 			TileEntityNanoCubePort port = (TileEntityNanoCubePort) te;
 			return port.output ? portOutput : portInput;
 		}
@@ -92,7 +92,7 @@ public class BlockNanoCubePort extends TileContainer {
 	public void breakBlock(World par1World, int par2, int par3, int par4,
 			int par5, int par6) {
 		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
-		if (te != null && te instanceof TileEntityNanoCubePort) {
+		if (te instanceof TileEntityNanoCubePort) {
 			MultiBlockInfo info = ((TileEntityNanoCubePort) te).getInfo();
 			MultiBlockNanoCube.instance.breakMultiBlock(par1World, info.x(),
 					info.y(), info.z());

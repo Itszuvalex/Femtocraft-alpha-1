@@ -68,7 +68,7 @@ public class BlockSuctionPipe extends TileContainer {
 				par6List, par7Entity);
 
 		TileEntity tile = par1World.getBlockTileEntity(x, y, z);
-		if (tile == null || !(tile instanceof TileEntitySuctionPipe))
+		if (!(tile instanceof TileEntitySuctionPipe))
 			return;
 		TileEntitySuctionPipe pipe = (TileEntitySuctionPipe) tile;
 

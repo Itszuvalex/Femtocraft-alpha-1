@@ -29,7 +29,7 @@ public class BlockFemtoCubePort extends TileContainer {
 	public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int par2,
 			int par3, int par4, int par5) {
 		TileEntity te = par1iBlockAccess.getBlockTileEntity(par2, par3, par4);
-		if (te != null && te instanceof TileEntityFemtoCubePort) {
+		if (te instanceof TileEntityFemtoCubePort) {
 			TileEntityFemtoCubePort port = (TileEntityFemtoCubePort) te;
 			return port.output ? portOutput : portInput;
 		}
@@ -91,7 +91,7 @@ public class BlockFemtoCubePort extends TileContainer {
 	public void breakBlock(World par1World, int par2, int par3, int par4,
 			int par5, int par6) {
 		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
-		if (te != null && te instanceof TileEntityFemtoCubePort) {
+		if (te instanceof TileEntityFemtoCubePort) {
 			MultiBlockInfo info = ((TileEntityFemtoCubePort) te).getInfo();
 			MultiBlockFemtoCube.instance.breakMultiBlock(par1World, info.x(),
 					info.y(), info.z());
