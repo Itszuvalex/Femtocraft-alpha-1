@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Argo 2.25">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../mcp/jars/libraries/argo/argo/2.25_fixed/argo-2.25_fixed.jar!/" />
+      <root url="jar://$MCP_LOC$/jars/libraries/argo/argo/2.25_fixed/argo-2.25_fixed.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../mcp/jars/libraries/net/sourceforge/argo/argo/2.25/argo-2.25-sources.jar!/" />
+      <root url="jar://$MCP_LOC$/jars/libraries/net/sourceforge/argo/argo/2.25/argo-2.25-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

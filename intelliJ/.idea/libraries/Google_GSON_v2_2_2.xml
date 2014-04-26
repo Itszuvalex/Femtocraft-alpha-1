@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Google GSON v2.2.2">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../mcp/jars/libraries/com/google/code/gson/gson/2.2.2/gson-2.2.2.jar!/" />
+      <root url="jar://$MCP_LOC$/jars/libraries/com/google/code/gson/gson/2.2.2/gson-2.2.2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../mcp/jars/libraries/com/google/code/gson/gson/2.2.2/gson-2.2.2-sources.jar!/" />
+      <root url="jar://$MCP_LOC$/jars/libraries/com/google/code/gson/gson/2.2.2/gson-2.2.2-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

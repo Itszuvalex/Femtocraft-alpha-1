@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="library" name="Minecraft 1.6.4" level="project" />
+    <orderEntry type="library" name="Argo 2.25" level="project" />
+    <orderEntry type="library" name="ASM v4.1" level="project" />
+    <orderEntry type="library" name="Bouncy Castle Cryptography API v1.47" level="project" />
+    <orderEntry type="library" name="JOrbis Codec Plugin v2010.20.23" level="project" />
+    <orderEntry type="library" name="WAV Codec Plugin v2010.10.23" level="project" />
+    <orderEntry type="library" name="Apache Commons IO v2.4" level="project" />
+    <orderEntry type="library" name="Apache Commons Lang v3.1" level="project" />
+    <orderEntry type="library" name="Google GSON v2.2.2" level="project" />
+    <orderEntry type="library" name="Google Guava v14.0" level="project" />
+    <orderEntry type="library" name="JInput v.2.0.5" level="project" />
+    <orderEntry type="library" name="JOpt Simple v4.5" level="project" />
+    <orderEntry type="library" name="JUtils v1.0.0" level="project" />
+    <orderEntry type="library" name="Minecraft Launcher Wrapper v1.8" level="project" />
+    <orderEntry type="library" name="JavaSound Library Plugin v2010.11.23" level="project" />
+    <orderEntry type="library" name="LWJGL OpenAL Library Plugin v2010.08.24" level="project" />
+    <orderEntry type="library" name="LWJGL v2.9.0" level="project" />
+    <orderEntry type="library" name="LWJGL Utilities v2.9.0" level="project" />
+    <orderEntry type="library" name="LZMA Compression v0.0.1" level="project" />
+    <orderEntry type="library" name="3d Sound System v2012.01.07" level="project" />
+    <orderEntry type="module" module-name="Minecraft" />
+  </component>
+</module>
+

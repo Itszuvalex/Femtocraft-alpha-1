@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="true">
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MCP_LOC$/eclipse/Minecraft/bin" />
+    <output-test url="file://$MODULE_DIR$/out/test/ForgeDev" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../mcp">
-      <sourceFolder url="file://$MODULE_DIR$/../mcp/src/minecraft" isTestSource="false" />
-      <excludeFolder url="file://$MODULE_DIR$/../mcp/bin" />
-      <excludeFolder url="file://$MODULE_DIR$/../mcp/conf" />
-      <excludeFolder url="file://$MODULE_DIR$/../mcp/docs" />
-      <excludeFolder url="file://$MODULE_DIR$/../mcp/eclipse" />
-      <excludeFolder url="file://$MODULE_DIR$/../mcp/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/../mcp/lib" />
-      <excludeFolder url="file://$MODULE_DIR$/../mcp/logs" />
-      <excludeFolder url="file://$MODULE_DIR$/../mcp/modsrc" />
-      <excludeFolder url="file://$MODULE_DIR$/../mcp/reobf" />
-      <excludeFolder url="file://$MODULE_DIR$/../mcp/runtime" />
-      <excludeFolder url="file://$MODULE_DIR$/../mcp/temp" />
+    <content url="file://$MCP_LOC$">
+      <sourceFolder url="file://$MCP_LOC$/src/minecraft" isTestSource="false" />
+      <excludeFolder url="file://$MCP_LOC$/bin" />
+      <excludeFolder url="file://$MCP_LOC$/conf" />
+      <excludeFolder url="file://$MCP_LOC$/docs" />
+      <excludeFolder url="file://$MCP_LOC$/eclipse" />
+      <excludeFolder url="file://$MCP_LOC$/jars" />
+      <excludeFolder url="file://$MCP_LOC$/lib" />
+      <excludeFolder url="file://$MCP_LOC$/logs" />
+      <excludeFolder url="file://$MCP_LOC$/modsrc" />
+      <excludeFolder url="file://$MCP_LOC$/reobf" />
+      <excludeFolder url="file://$MCP_LOC$/runtime" />
+      <excludeFolder url="file://$MCP_LOC$/temp" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />

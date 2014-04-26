@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="ASM v4.1">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../mcp/jars/libraries/org/ow2/asm/asm-debug-all/4.1/asm-debug-all-4.1.jar!/" />
+      <root url="jar://$MCP_LOC$/jars/libraries/org/ow2/asm/asm-debug-all/4.1/asm-debug-all-4.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../mcp/jars/libraries/org/ow2/asm/asm-debug-all/4.1/asm-debug-all-4.1-sources.jar!/" />
+      <root url="jar://$MCP_LOC$/jars/libraries/org/ow2/asm/asm-debug-all/4.1/asm-debug-all-4.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

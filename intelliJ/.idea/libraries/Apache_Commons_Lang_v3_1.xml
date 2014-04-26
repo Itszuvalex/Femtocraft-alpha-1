@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Apache Commons Lang v3.1">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../mcp/jars/libraries/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar!/" />
+      <root url="jar://$MCP_LOC$/jars/libraries/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../mcp/jars/libraries/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1-sources.jar!/" />
+      <root url="jar://$MCP_LOC$/jars/libraries/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
