@@ -20,7 +20,6 @@
 package femtocraft.graph;
 
 import femtocraft.Femtocraft;
-import femtocraft.research.gui.graph.DummyTechNode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -79,63 +78,73 @@ public abstract class Graph {
     }
 
     private void addDummyNodes(ArrayList<IGraphNode>[] rows) {
-        for (int i = 0; i < rows.length; ++i) {
-            for (IGraphNode node : rows[i]) {
-                ArrayList<IGraphNode> remove = new ArrayList<IGraphNode>();
-                ArrayList<IGraphNode> add = new ArrayList<IGraphNode>();
-                for (IGraphNode child : node.getChildren()) {
-                    int levelDif = Math.abs(node.getY() - child.getY());
-                    if (levelDif > 1) {
-                        remove.add(child);
-                        IGraphNode prev = child;
-                        for (int j = child.getY() - 1; j > node.getY(); --j) {
-                            IGraphNode dummy = new DummyTechNode();
-                            int depth = j;
-                            dummy.setY(depth);
-                            int x = prev.getX();
-                            if (x >= rows[j].size()) {
-                                rows[j].add(dummy);
-                            }
-                            else {
-                                rows[j].add(x, dummy);
-                            }
+        try {
+            for (int i = 0; i < rows.length; ++i) {
+                for (IGraphNode node : rows[i]) {
+                    ArrayList<IGraphNode> remove = new ArrayList<IGraphNode>();
+                    ArrayList<IGraphNode> add = new ArrayList<IGraphNode>();
+                    for (IGraphNode child : node.getChildren()) {
+                        int levelDif = Math.abs(node.getY() - child.getY());
+                        if (levelDif > 1) {
+                            remove.add(child);
+                            IGraphNode prev = child;
+                            for (int j = child.getY() - 1; j > node.getY(); --j) {
+                                IGraphNode dummy =
+                                        (IGraphNode) getDummyNodeClass()
+                                                .newInstance();
+                                int depth = j;
+                                dummy.setY(depth);
+                                int x = prev.getX();
+                                if (x >= rows[j].size()) {
+                                    rows[j].add(dummy);
+                                }
+                                else {
+                                    rows[j].add(x, dummy);
+                                }
 
-                            for (int k = 0; k < rows[j].size(); ++k) {
-                                rows[j].get(k).setX(k);
-                            }
+                                for (int k = 0; k < rows[j].size(); ++k) {
+                                    rows[j].get(k).setX(k);
+                                }
 
-                            prev.addParent(dummy);
-                            dummy.addChild(prev);
-                            prev = dummy;
+                                prev.addParent(dummy);
+                                dummy.addChild(prev);
+                                prev = dummy;
+                            }
+                            add.add(prev);
                         }
-                        add.add(prev);
                     }
-                }
-                for (IGraphNode child : add) {
-                    child.addParent(node);
-                }
-                node.getChildren().addAll(add);
+                    for (IGraphNode child : add) {
+                        child.addParent(node);
+                    }
+                    node.getChildren().addAll(add);
 
-                for (IGraphNode child : remove) {
-                    child.getParents().remove(node);
+                    for (IGraphNode child : remove) {
+                        child.getParents().remove(node);
+                    }
+                    node.getChildren().removeAll(remove);
                 }
-                node.getChildren().removeAll(remove);
-            }
-        }
-
-        int width = (int) (greatestWidth() * EMPTY_PADDING_MULTIPLER);
-        for (int y = 0; y < rows.length; ++y) {
-            ArrayList<IGraphNode> row = rows[y];
-            row.ensureCapacity(width);
-            for (int x = row.size(); x < width; ++x) {
-                IGraphNode dummy = new DummyTechNode();
-                dummy.setY(y);
-                row.add(0, dummy);
             }
 
-            for (int k = 0; k < row.size(); ++k) {
-                row.get(k).setX(k);
+            int width = (int) (greatestWidth() * EMPTY_PADDING_MULTIPLER);
+            for (int y = 0; y < rows.length; ++y) {
+                ArrayList<IGraphNode> row = rows[y];
+                row.ensureCapacity(width);
+                for (int x = row.size(); x < width; ++x) {
+                    IGraphNode dummy = (IGraphNode) getDummyNodeClass()
+                            .newInstance();
+                    dummy.setY(y);
+                    row.add(0, dummy);
+                }
+
+                for (int k = 0; k < row.size(); ++k) {
+                    row.get(k).setX(k);
+                }
             }
+        } catch (InstantiationException e) {
+            Femtocraft.logger.log(Level.SEVERE, "Invalid DummyNode class", e);
+        } catch (IllegalAccessException e) {
+            Femtocraft.logger.log(Level.SEVERE, "Error creating DummyNode " +
+                    "instance", e);
         }
     }
 
@@ -143,6 +152,7 @@ public abstract class Graph {
         Femtocraft.logger.log(Level.INFO, "Minimizing edge crossings for "
                 + rows.length + " rows.");
         for (int pass = 0; pass < MAX_MINIMIZE_PASSES; ++pass) {
+            Femtocraft.logger.log(Level.INFO, "Minimize Pass " + pass + ".");
             for (int i = 0; i < rows.length - 1; ++i) {
                 Femtocraft.logger.log(Level.INFO, "Minimizing " + i + "("
                         + rows[i].size() + ")" + "->" + (i + 1) + "("
@@ -329,4 +339,6 @@ public abstract class Graph {
         }
         return greatestWidth;
     }
+
+    protected abstract Class getDummyNodeClass();
 }
