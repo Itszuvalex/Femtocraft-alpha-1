@@ -1,7 +1,318 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="4" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="06103d49-82d3-4f86-b2c6-3e25d1b1d98e" name="Default" comment="" />
+    <list default="true" id="06103d49-82d3-4f86-b2c6-3e25d1b1d98e" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/managers/assembler/AssemblerRecipe.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/managers/assembler/AssemblerRecipe.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/utils/BaseInventory.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/utils/BaseInventory.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockConsumer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockConsumer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/consumables/processing/blocks/BlockCuttingBoard.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/consumables/processing/blocks/BlockCuttingBoard.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockDepletedStone.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockDepletedStone.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockDisaggregatedStone.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockDisaggregatedStone.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockEncoder.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockEncoder.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockFemtoCable.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockFemtoCable.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockFemtoChronoshifter.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockFemtoChronoshifter.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockFemtoCoagulator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockFemtoCoagulator.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockFemtoCubeChassis.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockFemtoCubeChassis.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockFemtoCubeFrame.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockFemtoCubeFrame.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockFemtoCubePort.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockFemtoCubePort.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockFemtoEntangler.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockFemtoEntangler.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockFemtoImpulser.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockFemtoImpulser.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockFemtoQuantumUnravelerPlatform.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockFemtoQuantumUnravelerPlatform.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockFemtoQuantumUnravelerShielding.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockFemtoQuantumUnravelerShielding.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockFemtoRepurposer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockFemtoRepurposer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockFemtoStellaratorCore.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockFemtoStellaratorCore.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockFemtoStellaratorFocus.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockFemtoStellaratorFocus.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockFemtoStellaratorHousing.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockFemtoStellaratorHousing.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockFemtoStellaratorOpticalMaser.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockFemtoStellaratorOpticalMaser.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/blocks/BlockFemtoStone.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/blocks/BlockFemtoStone.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/liquids/BlockFluidMass.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/liquids/BlockFluidMass.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockGenerator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockGenerator.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockMicroCable.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockMicroCable.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockMicroChargingBase.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockMicroChargingBase.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockMicroChargingCapacitor.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockMicroChargingCapacitor.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockMicroChargingCoil.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockMicroChargingCoil.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockMicroCrystallizerPlatform.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockMicroCrystallizerPlatform.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockMicroCrystallizerShielding.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockMicroCrystallizerShielding.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockMicroCube.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockMicroCube.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockMicroDeconstructor.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockMicroDeconstructor.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockMicroEngine.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockMicroEngine.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockMicroFurnace.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockMicroFurnace.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockMicroReconstructor.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockMicroReconstructor.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/blocks/BlockMicroStone.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/blocks/BlockMicroStone.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockNanoCable.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockNanoCable.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockNanoCubeFrame.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockNanoCubeFrame.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockNanoCubePort.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockNanoCubePort.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockNanoDismantler.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockNanoDismantler.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockNanoEfflorescerPlatform.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockNanoEfflorescerPlatform.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockNanoEfflorescerShielding.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockNanoEfflorescerShielding.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockNanoEnmesher.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockNanoEnmesher.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockNanoFabricator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockNanoFabricator.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockNanoFissionReactorCore.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockNanoFissionReactorCore.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockNanoFissionReactorHousing.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockNanoFissionReactorHousing.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockNanoHorologe.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockNanoHorologe.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockNanoInnervator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockNanoInnervator.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/blocks/BlockNanoStone.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/blocks/BlockNanoStone.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockNullEqualizer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockNullEqualizer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockOrbitalEqualizer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockOrbitalEqualizer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/ore/BlockOreFarenite.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/ore/BlockOreFarenite.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/ore/BlockOreMalenite.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/ore/BlockOreMalenite.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/ore/BlockOrePlatinum.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/ore/BlockOrePlatinum.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/ore/BlockOreThorium.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/ore/BlockOreThorium.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/ore/BlockOreTitanium.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/ore/BlockOreTitanium.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockPowerContainer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockPowerContainer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/blocks/BlockResearchComputer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/blocks/BlockResearchComputer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/blocks/BlockResearchConsole.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/blocks/BlockResearchConsole.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/transport/liquids/blocks/BlockSuctionPipe.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/transport/liquids/blocks/BlockSuctionPipe.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/blocks/BlockUnidentifiedAlloy.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/blocks/BlockUnidentifiedAlloy.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockUnravelledStone.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockUnravelledStone.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/transport/items/blocks/BlockVacuumTube.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/transport/items/blocks/BlockVacuumTube.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/managers/assembler/ComparatorAssemblerInput.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/managers/assembler/ComparatorAssemblerInput.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/managers/assembler/ComparatorAssemblerOutput.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/managers/assembler/ComparatorAssemblerOutput.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/managers/ComparatorRecipeSorter.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/managers/ComparatorRecipeSorter.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerEncoder.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerEncoder.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerFemtoChronoshifter.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerFemtoChronoshifter.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerFemtoCoagulator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerFemtoCoagulator.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/containers/ContainerFemtoCube.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/containers/ContainerFemtoCube.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerFemtoEntangler.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerFemtoEntangler.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerFemtoImpulser.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerFemtoImpulser.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerFemtoQuantumUnraveler.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerFemtoQuantumUnraveler.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerFemtoRepurposer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerFemtoRepurposer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/containers/ContainerFemtoStellarator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/containers/ContainerFemtoStellarator.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/containers/ContainerMicroAtmosphericCharger.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/containers/ContainerMicroAtmosphericCharger.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerMicroCrystallizer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerMicroCrystallizer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/containers/ContainerMicroCube.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/containers/ContainerMicroCube.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerMicroDeconstructor.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerMicroDeconstructor.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/containers/ContainerMicroEngine.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/containers/ContainerMicroEngine.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerMicroFurnace.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerMicroFurnace.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerMicroReconstructor.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerMicroReconstructor.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/containers/ContainerNanoCube.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/containers/ContainerNanoCube.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerNanoDismantler.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerNanoDismantler.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerNanoEfflorescer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerNanoEfflorescer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerNanoEnmesher.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerNanoEnmesher.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerNanoFabricator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerNanoFabricator.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/containers/ContainerNanoFissionReactor.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/containers/ContainerNanoFissionReactor.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerNanoHorologe.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerNanoHorologe.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerNanoInnervator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerNanoInnervator.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/containers/ContainerResearchConsole.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/containers/ContainerResearchConsole.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/CoreItemBlock.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/CoreItemBlock.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/common/gui/DisplaySlot.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/common/gui/DisplaySlot.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/graph/DummyTechNode.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/graph/DummyTechNode.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/graph/DummyTechnology.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/graph/DummyTechnology.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/entities/fx/EntityFxAntiGravity.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/entities/fx/EntityFxAntiGravity.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/managers/research/EnumTechLevel.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/managers/research/EnumTechLevel.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/managers/assembler/EventAssemblerRegister.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/managers/assembler/EventAssemblerRegister.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/managers/research/EventTechnology.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/managers/research/EventTechnology.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/Femtocraft.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/Femtocraft.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftConfigs.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftConfigs.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftConnectionHandler.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftConnectionHandler.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftCreativeTab.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftCreativeTab.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/utils/FemtocraftDataUtils.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/utils/FemtocraftDataUtils.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftEventHookContainer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftEventHookContainer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftGuiHandler.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftGuiHandler.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftPacketHandler.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftPacketHandler.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/utils/FemtocraftUtils.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/utils/FemtocraftUtils.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/liquids/FluidMass.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/liquids/FluidMass.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/graph/Graph.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/graph/Graph.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/graph/GraphNode.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/graph/GraphNode.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiEncoder.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiEncoder.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiFemtoChronoshifter.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiFemtoChronoshifter.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiFemtoCoagulator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiFemtoCoagulator.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/gui/GuiFemtoCube.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/gui/GuiFemtoCube.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiFemtoEntangler.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiFemtoEntangler.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiFemtoImpulser.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiFemtoImpulser.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiFemtoQuantumUnraveler.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiFemtoQuantumUnraveler.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiFemtoRepurposer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiFemtoRepurposer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/gui/GuiFemtoStellarator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/gui/GuiFemtoStellarator.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/gui/GuiMicroAtmosphericCharger.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/gui/GuiMicroAtmosphericCharger.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiMicroCrystallizer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiMicroCrystallizer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/gui/GuiMicroCube.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/gui/GuiMicroCube.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiMicroDeconstructor.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiMicroDeconstructor.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/gui/GuiMicroEngine.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/gui/GuiMicroEngine.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiMicroFurnace.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiMicroFurnace.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiMicroReconstructor.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiMicroReconstructor.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/gui/GuiNanoCube.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/gui/GuiNanoCube.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiNanoDismantler.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiNanoDismantler.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiNanoEfflorescer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiNanoEfflorescer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiNanoEnmesher.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiNanoEnmesher.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiNanoFabricator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiNanoFabricator.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/gui/GuiNanoFissionReactor.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/gui/GuiNanoFissionReactor.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiNanoHorologe.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiNanoHorologe.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiNanoInnervator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiNanoInnervator.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/GuiResearch.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/GuiResearch.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/GuiResearchConsole.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/GuiResearchConsole.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/GuiTechnology.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/GuiTechnology.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/technology/GuiTechnologyAdvancedChemistry.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/technology/GuiTechnologyAdvancedChemistry.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/technology/GuiTechnologyAppliedParticlePhysics.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/technology/GuiTechnologyAppliedParticlePhysics.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/technology/GuiTechnologyBasicChemistry.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/technology/GuiTechnologyBasicChemistry.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/technology/GuiTechnologyBasicCircuits.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/technology/GuiTechnologyBasicCircuits.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/technology/GuiTechnologyMachining.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/technology/GuiTechnologyMachining.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/technology/GuiTechnologyMacroscopicStructure.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/technology/GuiTechnologyMacroscopicStructure.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/technology/GuiTechnologyPaperSchematic.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/technology/GuiTechnologyPaperSchematic.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/api/IAssemblerSchematic.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/api/IAssemblerSchematic.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/api/IChargingBase.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/api/IChargingBase.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/api/IChargingCoil.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/api/IChargingCoil.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/graph/IGraphNode.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/graph/IGraphNode.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/api/IInterfaceDevice.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/api/IInterfaceDevice.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/multiblock/IMultiBlock.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/multiblock/IMultiBlock.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/multiblock/IMultiBlockComponent.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/multiblock/IMultiBlockComponent.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/api/IPowerBlockContainer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/api/IPowerBlockContainer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/api/IPowerContainer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/api/IPowerContainer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/utils/ISaveable.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/utils/ISaveable.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/api/ISuctionPipe.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/api/ISuctionPipe.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/api/ITechnologyCarrier.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/api/ITechnologyCarrier.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/api/IVacuumTube.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/api/IVacuumTube.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/InterfaceDevice.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/InterfaceDevice.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/items/ItemAssemblySchematic.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/items/ItemAssemblySchematic.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/items/ItemBlockMicroCube.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/items/ItemBlockMicroCube.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/items/ItemBlockPower.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/items/ItemBlockPower.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemBoard.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemBoard.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemConductiveAlloy.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemConductiveAlloy.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemConductivePowder.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemConductivePowder.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemCrystallite.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemCrystallite.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemCubit.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemCubit.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemDeconstructedGold.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemDeconstructedGold.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemDeconstructedIron.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemDeconstructedIron.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemDeconstructedPlatinum.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemDeconstructedPlatinum.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemDeconstructedThorium.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemDeconstructedThorium.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemDeconstructedTitanium.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemDeconstructedTitanium.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemDopedBoard.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemDopedBoard.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemElectrite.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemElectrite.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemFaunite.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemFaunite.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemFemtoInterfaceDevice.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemFemtoInterfaceDevice.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/items/ItemFemtoTechnology.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/items/ItemFemtoTechnology.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemFibrousStrand.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemFibrousStrand.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemFlorite.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemFlorite.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemFungalSpores.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemFungalSpores.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemHardenedBulb.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemHardenedBulb.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemIngotFarenite.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemIngotFarenite.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemIngotMalenite.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemIngotMalenite.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemIngotPlatinum.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemIngotPlatinum.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemIngotTemperedTitanium.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemIngotTemperedTitanium.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemIngotThorium.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemIngotThorium.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemIngotTitanium.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemIngotTitanium.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemIonicChunk.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemIonicChunk.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemMetalComposite.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemMetalComposite.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemMetallite.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemMetallite.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemMicroCircuitBoard.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemMicroCircuitBoard.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemMicroCrystal.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemMicroCrystal.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemMicroInterfaceDevice.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemMicroInterfaceDevice.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemMicroPlating.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemMicroPlating.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/items/ItemMicroTechnology.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/items/ItemMicroTechnology.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemMineralLattice.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemMineralLattice.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemMineralite.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemMineralite.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemMorphicChannel.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemMorphicChannel.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemNanoInterfaceDevice.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemNanoInterfaceDevice.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/items/ItemNanoTechnology.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/items/ItemNanoTechnology.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemNerveCluster.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemNerveCluster.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemOrganometallicPlate.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemOrganometallicPlate.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/items/ItemPaperSchematic.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/items/ItemPaperSchematic.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemPlaneoid.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemPlaneoid.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemPrimedBoard.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemPrimedBoard.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemProteinChain.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemProteinChain.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemRectangulon.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemRectangulon.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemReplicatingMaterial.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemReplicatingMaterial.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/consumables/farming/items/ItemSeedTomato.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/consumables/farming/items/ItemSeedTomato.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemSpinyFilament.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemSpinyFilament.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemSpool.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/ItemSpool.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/items/ItemSpoolGold.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/items/ItemSpoolGold.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemSynthesizedFiber.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemSynthesizedFiber.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/items/ItemTechnologyCarrier.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/items/ItemTechnologyCarrier.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/consumables/items/ItemTomato.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/consumables/items/ItemTomato.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/managers/assembler/ManagerAssemblerRecipe.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/managers/assembler/ManagerAssemblerRecipe.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/managers/ManagerCrafting.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/managers/ManagerCrafting.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/managers/ManagerRecipe.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/managers/ManagerRecipe.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/managers/research/ManagerResearch.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/managers/research/ManagerResearch.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/graph/MapGraph.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/graph/MapGraph.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/models/ModelOrbitalEqualizer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/models/ModelOrbitalEqualizer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/multiblock/MultiBlockFemtoCube.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/multiblock/MultiBlockFemtoCube.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/multiblock/MultiBlockFemtoQuantumUnraveler.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/multiblock/MultiBlockFemtoQuantumUnraveler.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/multiblock/MultiBlockInfo.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/multiblock/MultiBlockInfo.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/multiblock/MultiBlockMicroCrystallizer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/multiblock/MultiBlockMicroCrystallizer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/multiblock/MultiBlockNanoCube.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/multiblock/MultiBlockNanoCube.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/multiblock/MultiBlockNanoEfflorescer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/multiblock/MultiBlockNanoEfflorescer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/common/gui/OutputSlot.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/common/gui/OutputSlot.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/api/PowerContainer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/api/PowerContainer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/player/PropertiesNanite.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/player/PropertiesNanite.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/proxy/ProxyClient.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/proxy/ProxyClient.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/proxy/ProxyCommon.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/proxy/ProxyCommon.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/render/RenderChargingBase.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/render/RenderChargingBase.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/render/RenderChargingCoil.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/render/RenderChargingCoil.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/consumables/processing/blocks/RenderCuttingBoard.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/consumables/processing/blocks/RenderCuttingBoard.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/render/RenderFemtoCable.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/render/RenderFemtoCable.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/render/RenderMicroCable.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/render/RenderMicroCable.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/render/RenderModel.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/render/RenderModel.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/render/RenderNanoCable.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/render/RenderNanoCable.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/render/RenderNullEqualizer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/render/RenderNullEqualizer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/render/RenderOrbitalEqualizer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/render/RenderOrbitalEqualizer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/render/RenderPoint.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/render/RenderPoint.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/render/RenderQuad.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/render/RenderQuad.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/render/RenderSimpleMachine.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/render/RenderSimpleMachine.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/transport/liquids/render/RenderSuctionPipe.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/transport/liquids/render/RenderSuctionPipe.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/render/RenderUtils.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/render/RenderUtils.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/transport/items/render/RenderVacuumTube.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/transport/items/render/RenderVacuumTube.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/managers/research/ResearchPlayer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/managers/research/ResearchPlayer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/managers/research/ResearchTechnology.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/managers/research/ResearchTechnology.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/managers/research/ResearchTechnologyStatus.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/managers/research/ResearchTechnologyStatus.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/graph/TechNode.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/graph/TechNode.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/graph/TechnologyGraph.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/graph/TechnologyGraph.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/render/TestModel.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/render/TestModel.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/blocks/TileContainer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/blocks/TileContainer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/tiles/TileEntityBase.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/tiles/TileEntityBase.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityBaseEntityIndustry.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityBaseEntityIndustry.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityBaseEntityMicroDeconstructor.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityBaseEntityMicroDeconstructor.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityBaseEntityMicroFurnace.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityBaseEntityMicroFurnace.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityBaseEntityMicroReconstructor.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityBaseEntityMicroReconstructor.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityBaseEntityNanoEnmesher.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityBaseEntityNanoEnmesher.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityBaseEntityNanoHorologe.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityBaseEntityNanoHorologe.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityEncoder.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityEncoder.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityFemtoCable.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityFemtoCable.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoChronoshifter.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoChronoshifter.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoCoagulator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoCoagulator.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityFemtoCubeChassis.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityFemtoCubeChassis.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityFemtoCubeFrame.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityFemtoCubeFrame.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityFemtoCubePort.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityFemtoCubePort.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoEntangler.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoEntangler.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoImpulser.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoImpulser.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoQuantumUnravelerPlatform.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoQuantumUnravelerPlatform.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoQuantumUnravelerShielding.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoQuantumUnravelerShielding.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoRepurposer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoRepurposer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityFemtoStellaratorHousing.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityFemtoStellaratorHousing.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityFemtoStellaratorOpticalMaser.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityFemtoStellaratorOpticalMaser.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityMicroCable.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityMicroCable.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityMicroCrystallizerPlatform.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityMicroCrystallizerPlatform.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityMicroCrystallizerShielding.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityMicroCrystallizerShielding.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityMicroEngine.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityMicroEngine.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityNanoCable.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityNanoCable.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityNanoCubeFrame.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityNanoCubeFrame.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityNanoCubePort.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityNanoCubePort.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityNanoDismantler.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityNanoDismantler.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityNanoEfflorescerPlatform.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityNanoEfflorescerPlatform.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityNanoEfflorescerShielding.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityNanoEfflorescerShielding.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityNanoFabricator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityNanoFabricator.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityNanoFissionReactorHousing.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityNanoFissionReactorHousing.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityNanoInnervator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityNanoInnervator.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityNullEqualizer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityNullEqualizer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityOrbitalEqualizer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityOrbitalEqualizer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityPowerBase.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityPowerBase.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityPowerConsumer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityPowerConsumer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityPowerConsumerTest.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityPowerConsumerTest.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityPowerMicroChargingBase.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityPowerMicroChargingBase.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityPowerMicroCube.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityPowerMicroCube.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityPowerProducer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityPowerProducer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityPowerProducerTest.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/tiles/TileEntityPowerProducerTest.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/tiles/TileEntityResearchComputer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/tiles/TileEntityResearchComputer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/tiles/TileEntityResearchConsole.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/tiles/TileEntityResearchConsole.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/transport/liquids/tiles/TileEntitySuctionPipe.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/transport/liquids/tiles/TileEntitySuctionPipe.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/transport/items/tiles/TileEntityVacuumTube.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/transport/items/tiles/TileEntityVacuumTube.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/WorldGenerator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/WorldGenerator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="Femtocraft.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -62,33 +373,59 @@
     <favorites_list name="Femtocraft" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="TileEntityBaseEntityMicroReconstructor.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityBaseEntityMicroReconstructor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.57" vertical-offset="6535" max-vertical-offset="7350">
-              <caret line="390" column="29" selection-start-line="390" selection-start-column="29" selection-end-line="390" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
       <setting name="OPEN_NEW_TAB" value="true" />
     </FindUsagesManager>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
         <option value="$MCP_LOC$/src/minecraft/femtocraft/power/containers/ContainerNanoCube.java" />
-        <option value="$MCP_LOC$/src/minecraft/femtocraft/Femtocraft.java" />
-        <option value="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftConfigs.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/utils/FemtocraftUtils.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityBaseEntityMicroDeconstructor.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityBaseEntityMicroReconstructor.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/core/tiles/TileEntityBase.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/graph/Graph.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/power/items/ItemThoriumFuelRod.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/Femtocraft.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftConfigs.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftConnectionHandler.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftCreativeTab.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftEventHookContainer.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftGuiHandler.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftPacketHandler.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/WorldGenerator.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/api/IAssemblerSchematic.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/api/IChargingBase.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/api/IChargingCoil.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/api/IInterfaceDevice.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/api/IPowerBlockContainer.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/api/IPowerContainer.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/api/ISuctionPipe.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/api/ITechnologyCarrier.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/api/IVacuumTube.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/api/PowerContainer.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/blocks/BlockFemtoStone.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/blocks/BlockMicroStone.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/blocks/BlockNanoStone.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/blocks/BlockUnidentifiedAlloy.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/common/gui/DisplaySlot.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/common/gui/OutputSlot.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/core/blocks/TileContainer.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemConductiveAlloy.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemCrystallite.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemCubit.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemElectrite.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemFaunite.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemFibrousStrand.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemFlorite.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemFungalSpores.java" />
       </list>
     </option>
   </component>
@@ -113,7 +450,7 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -177,7 +514,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -210,48 +546,9 @@
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ForgeDev" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="femtocraft" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="industry" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tiles" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ForgeDev" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="femtocraft" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="industry" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -269,7 +566,7 @@
     <property name="restartRequiresConfirmation" value="true" />
     <property name="dynamic.classpath" value="false" />
     <property name="FullScreen" value="false" />
-    <property name="options.lastSelected" value="project.propCompiler" />
+    <property name="options.lastSelected" value="copyright.profiles" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
@@ -470,13 +767,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32776618" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -488,11 +786,10 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15763889" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3279503" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14782609" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
@@ -524,6 +821,28 @@
         </breakpoint>
       </default-breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="ForgeDev" />
+        <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="mcp" />
+        <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="ForgeDev" />
+        <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="Femtocraft" />
+        <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+      </PATH_ELEMENT>
+    </PATH>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -587,42 +906,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/Femtocraft.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.7719297" vertical-offset="4434" max-vertical-offset="12210">
-          <caret line="64" column="13" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/FemtocraftConfigs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.84" vertical-offset="14800" max-vertical-offset="15630">
-          <caret line="292" column="0" selection-start-line="292" selection-start-column="0" selection-end-line="292" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/utils/FemtocraftUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.058479533" vertical-offset="0" max-vertical-offset="3075">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/core/tiles/TileEntityBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.332" vertical-offset="104" max-vertical-offset="2175">
-          <caret line="34" column="19" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityBaseEntityMicroDeconstructor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="4020" max-vertical-offset="6045">
@@ -633,9 +916,387 @@
     </entry>
     <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityBaseEntityMicroReconstructor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.57" vertical-offset="6535" max-vertical-offset="7350">
-          <caret line="390" column="29" selection-start-line="390" selection-start-column="29" selection-end-line="390" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7350">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/utils/FemtocraftUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3075">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/core/tiles/TileEntityBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2175">
+          <caret line="43" column="32" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/graph/Graph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4785">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3080#3092#0" expanded="true" />
+            <element signature="e#3153#3165#0" expanded="true" />
+            <element signature="e#8737#8746#0" expanded="true" />
+            <element signature="e#8798#8807#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/FemtocraftConfigs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44186047" vertical-offset="0" max-vertical-offset="15960">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/FemtocraftConnectionHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="990">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/FemtocraftCreativeTab.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="658">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/FemtocraftEventHookContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="1155">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/FemtocraftGuiHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="1860">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/FemtocraftPacketHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44186047" vertical-offset="0" max-vertical-offset="2070">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/WorldGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="2160">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/api/IAssemblerSchematic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="1140">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/api/IChargingBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="658">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/api/IChargingCoil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="658">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/api/IInterfaceDevice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="658">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/api/IPowerBlockContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41033435" vertical-offset="0" max-vertical-offset="1590">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/api/IPowerContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="1410">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/api/ISuctionPipe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="658">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/api/ITechnologyCarrier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="658">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/api/IVacuumTube.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="1425">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/api/PowerContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="1905">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/blocks/BlockFemtoStone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="735">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/blocks/BlockMicroStone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="750">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/blocks/BlockNanoStone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="735">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/blocks/BlockUnidentifiedAlloy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="735">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/common/gui/DisplaySlot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="720">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/common/gui/OutputSlot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="658">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/core/blocks/TileContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="2160">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemConductiveAlloy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="658">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemCrystallite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="658">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemCubit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="658">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemElectrite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="658">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemFaunite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="658">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemFibrousStrand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="658">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemFlorite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.387538" vertical-offset="0" max-vertical-offset="658">
+          <caret line="17" column="80" selection-start-line="17" selection-start-column="80" selection-end-line="17" selection-end-column="80" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemHardenedBulb.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13677812" vertical-offset="0" max-vertical-offset="658">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemFungalSpores.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8206687" vertical-offset="0" max-vertical-offset="658">
+          <caret line="38" column="45" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/managers/ManagerCrafting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13677812" vertical-offset="0" max-vertical-offset="3420">
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/Femtocraft.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.9302325" vertical-offset="0" max-vertical-offset="12495">
+          <caret line="83" column="13" selection-start-line="83" selection-start-column="13" selection-end-line="83" selection-end-column="13" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -649,6 +1310,18 @@
             <option name="proportions">
               <list>
                 <option value="0.22132097" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="Copyright.UI">
+        <settings>
+          <last-edited>GPL v2.0</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
               </list>
             </option>
           </splitter-proportions>
@@ -712,6 +1385,21 @@
               </list>
             </option>
           </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <last-edited>Femtocraft</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+          <order>
+            <scope name="Femtocraft" />
+          </order>
         </settings>
       </state>
     </states>
