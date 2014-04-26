@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import femtocraft.Femtocraft;
 import femtocraft.managers.research.EventTechnology.TechnologyAddedEvent;
-import femtocraft.research.gui.graph.GraphNode;
+import femtocraft.research.gui.graph.TechNode;
 import femtocraft.research.gui.graph.TechnologyGraph;
 import femtocraft.research.gui.technology.GuiTechnologyAdvancedChemistry;
 import femtocraft.research.gui.technology.GuiTechnologyAppliedParticlePhysics;
@@ -812,7 +812,7 @@ public class ManagerResearch {
 		playerData.put(rp.username, rp);
 	}
 
-	public GraphNode getNode(ResearchTechnology pr) {
-		return graph.getNode(pr.name);
+	public TechNode getNode(ResearchTechnology pr) {
+		return (TechNode) graph.getNode(pr.name);
 	}
 }

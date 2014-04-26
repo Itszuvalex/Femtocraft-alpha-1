@@ -21,12 +21,13 @@ import org.lwjgl.opengl.GL12;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
+import femtocraft.graph.IGraphNode;
 import femtocraft.managers.research.ResearchPlayer;
 import femtocraft.managers.research.ResearchTechnology;
 import femtocraft.managers.research.ResearchTechnologyStatus;
 import femtocraft.render.RenderUtils;
 import femtocraft.research.gui.graph.DummyNode;
-import femtocraft.research.gui.graph.GraphNode;
+import femtocraft.research.gui.graph.TechNode;
 import femtocraft.utils.FemtocraftUtils;
 
 @SideOnly(Side.CLIENT)
@@ -385,11 +386,11 @@ public class GuiResearch extends GuiScreen {
 				continue;
 			if (tech.prerequisites != null) {
 				for (ResearchTechnology pr : tech.prerequisites) {
-					GraphNode node = Femtocraft.researchManager.getNode(tech);
+					TechNode node = Femtocraft.researchManager.getNode(tech);
 
-					for (GraphNode parent : node.getParents()) {
-						GraphNode next = parent;
-						GraphNode prev = node;
+					for (IGraphNode parent : node.getParents()) {
+						IGraphNode next = parent;
+						IGraphNode prev = node;
 						while (next instanceof DummyNode) {
 							k3 = prev.getDisplayX() * 24 - k + 11 + k1;
 							j3 = prev.getDisplayY() * 24 - l + 11 + l1 - 11;

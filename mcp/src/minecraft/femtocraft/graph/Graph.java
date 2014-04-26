@@ -288,7 +288,7 @@ public abstract class Graph {
 		}
 	}
 
-	private int greatestHeight() {
+	protected int greatestHeight() {
 		int greatestHeight = -1;
 		for (IGraphNode node : getNodes()) {
 			greatestHeight = Math.max(greatestHeight, node.getY());
@@ -296,7 +296,7 @@ public abstract class Graph {
 		return greatestHeight;
 	}
 
-	private int greatestWidth() {
+	protected int greatestWidth() {
 		int greatestWidth = -1;
 		for (IGraphNode node : getNodes()) {
 			greatestWidth = Math.max(greatestWidth, node.getX());
