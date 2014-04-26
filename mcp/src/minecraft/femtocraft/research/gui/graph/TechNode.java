@@ -12,36 +12,40 @@ public class TechNode extends GraphNode {
 	public TechNode(ResearchTechnology technology) {
 		super();
 		this.technology = technology;
+		setX(UNINITIALIZED);
+		setY(UNINITIALIZED);
 	}
 
 	@Override
 	public int getY() {
-		return (int) (technology.yDisplay / getYPadding());
-	}
-
-	@Override
-	public int getDisplayY() {
-		return (int) (getY() * getYPadding());
+		if (technology == null)
+			return super.getY();
+		else
+			return (int) (technology.yDisplay / getYPadding());
 	}
 
 	@Override
 	public void setY(int y) {
-		technology.yDisplay = (int) (y * getYPadding());
+		if (technology == null)
+			super.setY(y);
+		else
+			technology.yDisplay = (int) (y * getYPadding());
 	}
 
 	@Override
 	public int getX() {
-		return (int) (technology.xDisplay / getXPadding());
-	}
-
-	@Override
-	public int getDisplayX() {
-		return (int) (getX() * getXPadding());
+		if (technology == null)
+			return super.getX();
+		else
+			return (int) (technology.xDisplay / getXPadding());
 	}
 
 	@Override
 	public void setX(int x) {
-		technology.xDisplay = (int) (x * getXPadding());
+		if (technology == null)
+			super.setX(x);
+		else
+			technology.xDisplay = (int) (x * getXPadding());
 	}
 
 	public ResearchTechnology getTech() {

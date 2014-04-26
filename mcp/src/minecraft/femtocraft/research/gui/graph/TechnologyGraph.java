@@ -1,6 +1,5 @@
 package femtocraft.research.gui.graph;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 
@@ -14,14 +13,12 @@ public class TechnologyGraph extends MapGraph<String> {
 	public static final int X_PADDING = 1;
 	public static final int Y_PADDING = 2;
 	private final HashMap<String, ResearchTechnology> technologies;
-	private final ArrayList<DummyTechnology> dummies;
 
 	public TechnologyGraph(HashMap<String, ResearchTechnology> technologies) {
 		super();
 		Femtocraft.logger.log(Level.INFO, "Creating Graph of Technologies.");
 		this.technologies = technologies;
 		HashMap<String, IGraphNode> nodes = new HashMap<String, IGraphNode>();
-		dummies = new ArrayList<DummyTechnology>();
 
 		Femtocraft.logger.log(Level.INFO, "Transfering Technologies to Nodes.");
 		// Fill nodes dictionary.
@@ -51,13 +48,16 @@ public class TechnologyGraph extends MapGraph<String> {
 			((TechNode) node).pruneParents();
 		}
 
+		setNodes(nodes);
+
 		GuiResearch.setSize(greatestWidth() * X_PADDING, greatestHeight()
 				* Y_PADDING);
-
-		setNodes(nodes);
 	}
 
-	public ArrayList<DummyTechnology> getDummyTechs() {
-		return dummies;
+	@Override
+	public void computePlacements() {
+		super.computePlacements();
+		GuiResearch.setSize(greatestWidth() * X_PADDING, greatestHeight()
+				* Y_PADDING);
 	}
 }

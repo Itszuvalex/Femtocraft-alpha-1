@@ -2,20 +2,47 @@ package femtocraft.graph;
 
 import java.util.ArrayList;
 
-import femtocraft.managers.research.ResearchTechnology;
-import femtocraft.research.gui.graph.TechNode;
-import femtocraft.research.gui.graph.TechnologyGraph;
-
 public abstract class GraphNode implements IGraphNode {
-
 	private ArrayList<IGraphNode> parents;
 	private ArrayList<IGraphNode> children;
+	private int x;
+	private int y;
 
 	public GraphNode() {
 		parents = new ArrayList<IGraphNode>();
 		children = new ArrayList<IGraphNode>();
 		setX(UNINITIALIZED);
 		setY(UNINITIALIZED);
+	}
+
+	@Override
+	public int getY() {
+		return (int) (y / getYPadding());
+	}
+
+	@Override
+	public int getDisplayY() {
+		return (int) (getY() * getYPadding());
+	}
+
+	@Override
+	public void setY(int y) {
+		this.y = (int) (y * getYPadding());
+	}
+
+	@Override
+	public int getX() {
+		return (int) (x / getXPadding());
+	}
+
+	@Override
+	public int getDisplayX() {
+		return (int) (getX() * getXPadding());
+	}
+
+	@Override
+	public void setX(int x) {
+		this.x = (int) (x * getXPadding());
 	}
 
 	@Override
@@ -55,8 +82,8 @@ public abstract class GraphNode implements IGraphNode {
 	@Override
 	public void findHeight() {
 		// Prevent unnecessary recomputation
-		if (getY() != UNINITIALIZED)
-			return;
+		// if (getY() <= UNINITIALIZED)
+		// return;
 
 		int maxHeight = -1;
 		for (IGraphNode node : parents) {
@@ -72,8 +99,8 @@ public abstract class GraphNode implements IGraphNode {
 	@Override
 	public void findHeightRecursive() {
 		// Prevent unnecessary recomputation
-		if (getY() != UNINITIALIZED)
-			return;
+		// if (getY() <= UNINITIALIZED)
+		// return;
 
 		for (IGraphNode node : parents) {
 			node.findHeightRecursive();

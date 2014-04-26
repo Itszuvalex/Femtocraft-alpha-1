@@ -26,7 +26,7 @@ import femtocraft.managers.research.ResearchPlayer;
 import femtocraft.managers.research.ResearchTechnology;
 import femtocraft.managers.research.ResearchTechnologyStatus;
 import femtocraft.render.RenderUtils;
-import femtocraft.research.gui.graph.DummyNode;
+import femtocraft.research.gui.graph.DummyTechNode;
 import femtocraft.research.gui.graph.TechNode;
 import femtocraft.utils.FemtocraftUtils;
 
@@ -91,8 +91,9 @@ public class GuiResearch extends GuiScreen {
 	}
 
 	public static void setSize(int rows, int columns) {
-		maxDisplayColumn = columns;
-		maxDisplayRow = rows;
+		// Achievement screen grew from left to right, need to swap rows/columns
+		maxDisplayColumn = rows;
+		maxDisplayRow = columns;
 		guiMapBottom = maxDisplayColumn * 24 + 112;
 		guiMapRight = maxDisplayRow * 24 + 112;
 	}
@@ -391,7 +392,7 @@ public class GuiResearch extends GuiScreen {
 					for (IGraphNode parent : node.getParents()) {
 						IGraphNode next = parent;
 						IGraphNode prev = node;
-						while (next instanceof DummyNode) {
+						while (next instanceof DummyTechNode) {
 							k3 = prev.getDisplayX() * 24 - k + 11 + k1;
 							j3 = prev.getDisplayY() * 24 - l + 11 + l1 - 11;
 							j4 = next.getDisplayX() * 24 - k + 11 + k1;
