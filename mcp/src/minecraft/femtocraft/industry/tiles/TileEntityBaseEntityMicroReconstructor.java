@@ -9,7 +9,6 @@ import femtocraft.managers.assembler.AssemblerRecipe;
 import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.utils.FemtocraftDataUtils.Saveable;
 import femtocraft.utils.FemtocraftUtils;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
@@ -260,7 +259,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
                 && reconstructorItemStacks[6] == null
                 && reconstructorItemStacks[7] == null && reconstructorItemStacks[8] == null)
                 || getSchematic() == null
-                || this.getCurrentPower() < this.powerToCook && cookTime != 0) {
+                || this.getCurrentPower() < powerToCook && cookTime != 0) {
             return false;
         }
         else {
@@ -281,6 +280,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
         }
     }
 
+    @Override
     protected void startWork() {
         IAssemblerSchematic as = getSchematic();
         AssemblerRecipe recipe = as.getRecipe(reconstructorItemStacks[10]);
@@ -339,6 +339,9 @@ public class TileEntityBaseEntityMicroReconstructor extends
     @Override
     protected void finishWork() {
         boolean empty = false;
+        int[] placeSlots = new int[]{0, 1, 2, 3, 4, 5, 6,
+                7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                21, 22, 23, 24, 25, 26, 27, 28};
         while (reconstructingStacks != null && !empty) {
             // Cannot look off schematic, cause schematic can change mid-build
             AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
@@ -359,9 +362,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
             }
 
             FemtocraftUtils.placeItem(recipe.output.copy(),
-                                      reconstructorItemStacks, new int[]{0, 1, 2, 3, 4, 5, 6,
-                            7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-                            21, 22, 23, 24, 25, 26, 27, 28}
+                                      reconstructorItemStacks, placeSlots
             );
 
         }
@@ -386,7 +387,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
         }
 
         for (ItemStack item : items) {
-            if (!FemtocraftUtils.removeItem(item, inv, new int[]{})) {
+            if (!FemtocraftUtils.removeItem(item, inv, null)) {
                 return false;
             }
         }
@@ -394,16 +395,9 @@ public class TileEntityBaseEntityMicroReconstructor extends
         return true;
     }
 
-    /**
-     * Do not make give this method the name canInteractWith because it clashes
-     * with Container
-     */
-    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
-        return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord,
-                                                this.zCoord) == this
-                && par1EntityPlayer.getDistanceSq((double) this.xCoord + 0.5D,
-                                                  (double) this.yCoord + 0.5D,
-                                                  (double) this.zCoord + 0.5D) <= 64.0D;
+    @Override
+    public boolean hasGUI() {
+        return true;
     }
 
     public void openChest() {

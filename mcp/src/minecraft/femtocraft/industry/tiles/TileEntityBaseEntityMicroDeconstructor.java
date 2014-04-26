@@ -9,13 +9,13 @@ import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.utils.BaseInventory;
 import femtocraft.utils.FemtocraftDataUtils.Saveable;
 import femtocraft.utils.FemtocraftUtils;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TileEntityBaseEntityMicroDeconstructor extends
                                                     TileEntityBaseEntityIndustry implements ISidedInventory, IFluidHandler {
@@ -216,9 +216,7 @@ public class TileEntityBaseEntityMicroDeconstructor extends
                 break;
             }
 
-            for (ItemStack stack : recipe.input) {
-                items.add(stack);
-            }
+            items.addAll(Arrays.asList(recipe.input));
 
             ItemStack[] ita = new ItemStack[items.size()];
             items.toArray(ita);
@@ -305,24 +303,12 @@ public class TileEntityBaseEntityMicroDeconstructor extends
         }
         for (ItemStack item : items) {
             if (!FemtocraftUtils.placeItem(item == null ? null : item.copy(),
-                                           fake, new int[]{})) {
+                                           fake, null)) {
                 return false;
             }
         }
 
         return true;
-    }
-
-    /**
-     * Do not make give this method the name canInteractWith because it clashes
-     * with Container
-     */
-    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
-        return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord,
-                                                this.zCoord) == this
-                && par1EntityPlayer.getDistanceSq((double) this.xCoord + 0.5D,
-                                                  (double) this.yCoord + 0.5D,
-                                                  (double) this.zCoord + 0.5D) <= 64.0D;
     }
 
     @Override

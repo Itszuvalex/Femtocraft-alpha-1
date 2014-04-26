@@ -86,15 +86,17 @@ public class FemtocraftUtils {
         int amount = item.stackSize;
 
         for (int i = 0; i < slots.length; ++i) {
-            boolean restricted = false;
-            for (int r : restrictions) {
-                if (i == r) {
-                    restricted = true;
-                    break;
+            if (restrictions != null) {
+                boolean restricted = false;
+                for (int r : restrictions) {
+                    if (i == r) {
+                        restricted = true;
+                        break;
+                    }
                 }
-            }
-            if (restricted) {
-                continue;
+                if (restricted) {
+                    continue;
+                }
             }
 
             if (slots[i] != null && slots[i].isItemEqual(item)) {
@@ -143,15 +145,17 @@ public class FemtocraftUtils {
         int amountLeftToRemove = item.stackSize;
 
         for (int i = 0; i < slots.length; ++i) {
-            boolean restricted = false;
-            for (int r : restrictions) {
-                if (i == r) {
-                    restricted = true;
-                    break;
+            if (restrictions != null) {
+                boolean restricted = false;
+                for (int r : restrictions) {
+                    if (i == r) {
+                        restricted = true;
+                        break;
+                    }
                 }
-            }
-            if (restricted) {
-                continue;
+                if (restricted) {
+                    continue;
+                }
             }
 
             if (slots[i] != null && slots[i].isItemEqual(item)) {
