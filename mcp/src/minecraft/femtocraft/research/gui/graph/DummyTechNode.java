@@ -1,10 +1,10 @@
 package femtocraft.research.gui.graph;
 
-public class DummyNode extends GraphNode {
+public class DummyTechNode extends TechNode {
 	private int x;
 	private int y;
 
-	public DummyNode() {
+	public DummyTechNode() {
 		super(null);
 	}
 
@@ -15,7 +15,7 @@ public class DummyNode extends GraphNode {
 	 */
 	@Override
 	public int getY() {
-		return (int) (y / TechnologyGraph.X_PADDING);
+		return (int) (y / getYPadding());
 	}
 
 	/*
@@ -25,7 +25,7 @@ public class DummyNode extends GraphNode {
 	 */
 	@Override
 	public void setY(int y) {
-		this.y = (int) (y * TechnologyGraph.X_PADDING);
+		this.y = (int) (y * getYPadding());
 	}
 
 	/*
@@ -35,7 +35,7 @@ public class DummyNode extends GraphNode {
 	 */
 	@Override
 	public int getX() {
-		return (int) (x / TechnologyGraph.X_PADDING);
+		return (int) (x / getXPadding());
 	}
 
 	/*
@@ -45,7 +45,7 @@ public class DummyNode extends GraphNode {
 	 */
 	@Override
 	public void setX(int x) {
-		this.x = (int) (x * TechnologyGraph.X_PADDING);
+		this.x = (int) (x * getXPadding());
 	}
 
 }
