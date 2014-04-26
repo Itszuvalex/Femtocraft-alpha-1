@@ -42,8 +42,8 @@ public class TileEntityBase extends TileEntity {
                 || (owner.equals(par1EntityPlayer.username));
         return inrange
                 && (isowner || (MinecraftServer.getServer()
-                                                     .getConfigurationManager()
-                                                     .isPlayerOpped(par1EntityPlayer.username) || par1EntityPlayer.capabilities.isCreativeMode));
+                                               .getConfigurationManager()
+                                               .isPlayerOpped(par1EntityPlayer.username) || par1EntityPlayer.capabilities.isCreativeMode));
     }
 
     @Override

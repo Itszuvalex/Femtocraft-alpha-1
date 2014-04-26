@@ -1,135 +1,139 @@
 package femtocraft.managers.assembler;
 
-import java.util.logging.Level;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import femtocraft.Femtocraft;
 import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.managers.research.ResearchTechnology;
 import femtocraft.utils.FemtocraftUtils;
 import femtocraft.utils.ISaveable;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+
+import java.util.logging.Level;
 
 public class AssemblerRecipe implements Comparable, ISaveable {
-	public ItemStack[] input;
-	public Integer mass;
-	public ItemStack output;
-	public EnumTechLevel enumTechLevel;
-	public ResearchTechnology tech;
+    public ItemStack[] input;
+    public Integer mass;
+    public ItemStack output;
+    public EnumTechLevel enumTechLevel;
+    public ResearchTechnology tech;
 
-	public AssemblerRecipe(ItemStack[] input, Integer mass, ItemStack output,
-			EnumTechLevel enumTechLevel, ResearchTechnology tech) {
-		this.input = input;
-		this.mass = mass;
-		this.output = output;
-		this.enumTechLevel = enumTechLevel;
-		this.tech = tech;
-	}
+    public AssemblerRecipe(ItemStack[] input, Integer mass, ItemStack output,
+                           EnumTechLevel enumTechLevel, ResearchTechnology tech) {
+        this.input = input;
+        this.mass = mass;
+        this.output = output;
+        this.enumTechLevel = enumTechLevel;
+        this.tech = tech;
+    }
 
-	/**
-	 * DO NOT USE, must be public for ISaveable
-	 */
-	public AssemblerRecipe() {
-	}
+    /**
+     * DO NOT USE, must be public for ISaveable
+     */
+    public AssemblerRecipe() {
+    }
 
-	@Override
-	public int compareTo(Object o) {
-		AssemblerRecipe ir = (AssemblerRecipe) o;
-		for (int i = 0; i < 9; i++) {
-			int comp = FemtocraftUtils.compareItem(input[i], ir.input[i]);
-			if (comp != 0)
-				return comp;
-		}
+    public static AssemblerRecipe loadFromNBTTagCompound(NBTTagCompound compound) {
+        AssemblerRecipe recipe = new AssemblerRecipe();
+        recipe.loadFromNBT(compound);
+        return recipe;
+    }
 
-		if (mass < ir.mass)
-			return -1;
-		if (mass > ir.mass)
-			return 1;
+    @Override
+    public int compareTo(Object o) {
+        AssemblerRecipe ir = (AssemblerRecipe) o;
+        for (int i = 0; i < 9; i++) {
+            int comp = FemtocraftUtils.compareItem(input[i], ir.input[i]);
+            if (comp != 0) {
+                return comp;
+            }
+        }
 
-		int comp = FemtocraftUtils.compareItem(output, ir.output);
-		if (comp != 0)
-			return comp;
+        if (mass < ir.mass) {
+            return -1;
+        }
+        if (mass > ir.mass) {
+            return 1;
+        }
 
-		return 0;
-	}
+        int comp = FemtocraftUtils.compareItem(output, ir.output);
+        if (comp != 0) {
+            return comp;
+        }
 
-	@Override
-	public void saveToNBT(NBTTagCompound compound) {
-		// Input
-		NBTTagList inputList = new NBTTagList();
-		for (int i = 0; i < input.length; ++i) {
-			NBTTagCompound itemCompound = new NBTTagCompound();
-			itemCompound.setByte("Slot", (byte) i);
-			if (input[i] != null) {
-				NBTTagCompound item = new NBTTagCompound();
-				input[i].writeToNBT(item);
-				itemCompound.setTag("item", item);
-			}
-			inputList.appendTag(itemCompound);
-		}
-		compound.setTag("input", inputList);
+        return 0;
+    }
 
-		// FluidMass
-		compound.setInteger("mass", mass);
+    @Override
+    public void saveToNBT(NBTTagCompound compound) {
+        // Input
+        NBTTagList inputList = new NBTTagList();
+        for (int i = 0; i < input.length; ++i) {
+            NBTTagCompound itemCompound = new NBTTagCompound();
+            itemCompound.setByte("Slot", (byte) i);
+            if (input[i] != null) {
+                NBTTagCompound item = new NBTTagCompound();
+                input[i].writeToNBT(item);
+                itemCompound.setTag("item", item);
+            }
+            inputList.appendTag(itemCompound);
+        }
+        compound.setTag("input", inputList);
 
-		// Output
-		NBTTagCompound outputCompound = new NBTTagCompound();
-		output.writeToNBT(outputCompound);
+        // FluidMass
+        compound.setInteger("mass", mass);
 
-		compound.setCompoundTag("output", outputCompound);
+        // Output
+        NBTTagCompound outputCompound = new NBTTagCompound();
+        output.writeToNBT(outputCompound);
 
-		// EnumTechLevel
-		compound.setString("enumTechLevel", enumTechLevel.key);
+        compound.setCompoundTag("output", outputCompound);
 
-		// ResearchTechnology
-		if (tech != null) {
-			compound.setString("researchTechnology", tech.name);
-		}
-	}
+        // EnumTechLevel
+        compound.setString("enumTechLevel", enumTechLevel.key);
 
-	@Override
-	public void loadFromNBT(NBTTagCompound compound) {
-		input = new ItemStack[9];
+        // ResearchTechnology
+        if (tech != null) {
+            compound.setString("researchTechnology", tech.name);
+        }
+    }
 
-		// Input
-		NBTTagList inputList = compound.getTagList("input");
-		for (int i = 0; i < inputList.tagCount(); ++i) {
-			NBTTagCompound itemCompound = (NBTTagCompound) inputList.tagAt(i);
-			byte slot = itemCompound.getByte("Slot");
-			if (slot != (byte) i) {
-				Femtocraft.logger
-						.log(Level.WARNING,
-								"Slot mismatch occurred while loading AssemblerRecipe.");
-			}
-			if (itemCompound.hasKey("item")) {
-				input[i] = ItemStack
-						.loadItemStackFromNBT((NBTTagCompound) itemCompound
-								.getTag("item"));
-			}
-		}
+    @Override
+    public void loadFromNBT(NBTTagCompound compound) {
+        input = new ItemStack[9];
 
-		// FluidMass
-		mass = compound.getInteger("mass");
+        // Input
+        NBTTagList inputList = compound.getTagList("input");
+        for (int i = 0; i < inputList.tagCount(); ++i) {
+            NBTTagCompound itemCompound = (NBTTagCompound) inputList.tagAt(i);
+            byte slot = itemCompound.getByte("Slot");
+            if (slot != (byte) i) {
+                Femtocraft.logger
+                        .log(Level.WARNING,
+                             "Slot mismatch occurred while loading AssemblerRecipe.");
+            }
+            if (itemCompound.hasKey("item")) {
+                input[i] = ItemStack
+                        .loadItemStackFromNBT((NBTTagCompound) itemCompound
+                                .getTag("item"));
+            }
+        }
 
-		// Output
-		output = ItemStack.loadItemStackFromNBT((NBTTagCompound) compound
-				.getTag("output"));
+        // FluidMass
+        mass = compound.getInteger("mass");
 
-		// EnumTechLevel
-		enumTechLevel = EnumTechLevel.getTech(compound
-				.getString("enumTechLevel"));
+        // Output
+        output = ItemStack.loadItemStackFromNBT((NBTTagCompound) compound
+                .getTag("output"));
 
-		// ResearchTechnology
-		if (compound.hasKey("researchTechnology")) {
-			tech = Femtocraft.researchManager.getTechnology(compound
-					.getString("researchTechnology"));
-		}
-	}
+        // EnumTechLevel
+        enumTechLevel = EnumTechLevel.getTech(compound
+                                                      .getString("enumTechLevel"));
 
-	public static AssemblerRecipe loadFromNBTTagCompound(NBTTagCompound compound) {
-		AssemblerRecipe recipe = new AssemblerRecipe();
-		recipe.loadFromNBT(compound);
-		return recipe;
-	}
+        // ResearchTechnology
+        if (compound.hasKey("researchTechnology")) {
+            tech = Femtocraft.researchManager.getTechnology(compound
+                                                                    .getString("researchTechnology"));
+        }
+    }
 }

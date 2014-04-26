@@ -16,6 +16,7 @@
       <excludeFolder url="file://$MCP_LOC$/modsrc" />
       <excludeFolder url="file://$MCP_LOC$/reobf" />
       <excludeFolder url="file://$MCP_LOC$/runtime" />
+      <excludeFolder url="file://$MCP_LOC$/src/minecraft/femtocraft" />
       <excludeFolder url="file://$MCP_LOC$/temp" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />

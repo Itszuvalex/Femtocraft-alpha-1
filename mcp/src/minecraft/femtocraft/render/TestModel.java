@@ -12,131 +12,131 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class TestModel extends ModelBase {
-	//fields
-	ModelRenderer blockBase;
-	ModelRenderer blockLeft;
-	ModelRenderer blockRight;
-	ModelRenderer blockTop;
-	ModelRenderer coil8;
-	ModelRenderer coil3;
-	ModelRenderer coil2;
-	ModelRenderer coil1;
-	ModelRenderer coil4;
-	ModelRenderer blockInner;
-	ModelRenderer coil6;
-	ModelRenderer coil7;
-	ModelRenderer coil5;
+    //fields
+    ModelRenderer blockBase;
+    ModelRenderer blockLeft;
+    ModelRenderer blockRight;
+    ModelRenderer blockTop;
+    ModelRenderer coil8;
+    ModelRenderer coil3;
+    ModelRenderer coil2;
+    ModelRenderer coil1;
+    ModelRenderer coil4;
+    ModelRenderer blockInner;
+    ModelRenderer coil6;
+    ModelRenderer coil7;
+    ModelRenderer coil5;
 
-	public TestModel() {
-		textureWidth = 64;
-		textureHeight = 32;
+    public TestModel() {
+        textureWidth = 64;
+        textureHeight = 32;
 
-		blockBase = new ModelRenderer(this, 0, 0);
-		blockBase.addBox(-8F, 0F, -8F, 16, 2, 16);
-		blockBase.setRotationPoint(0F, 22F, 0F);
-		blockBase.setTextureSize(64, 32);
-		blockBase.mirror = true;
-		setRotation(blockBase, 0F, 0F, 0F);
-		blockLeft = new ModelRenderer(this, 0, 0);
-		blockLeft.addBox(0F, 0F, -2F, 1, 6, 4);
-		blockLeft.setRotationPoint(7F, 16F, 0F);
-		blockLeft.setTextureSize(64, 32);
-		blockLeft.mirror = true;
-		setRotation(blockLeft, 0F, 0F, 0F);
-		blockRight = new ModelRenderer(this, 0, 0);
-		blockRight.addBox(0F, 0F, -2F, 1, 6, 4);
-		blockRight.setRotationPoint(-8F, 16F, 0F);
-		blockRight.setTextureSize(64, 32);
-		blockRight.mirror = true;
-		setRotation(blockRight, 0F, 0F, 0F);
-		blockTop = new ModelRenderer(this, 0, 0);
-		blockTop.addBox(-8F, 0F, -2F, 16, 2, 4);
-		blockTop.setRotationPoint(0F, 15F, 0F);
-		blockTop.setTextureSize(64, 32);
-		blockTop.mirror = true;
-		setRotation(blockTop, 0F, 0F, 0F);
-		coil8 = new ModelRenderer(this, 0, 0);
-		coil8.addBox(-1F, 0F, -7F, 1, 6, 14);
-		coil8.setRotationPoint(-6F, 16F, 0F);
-		coil8.setTextureSize(64, 32);
-		coil8.mirror = true;
-		setRotation(coil8, 0F, 0F, 0F);
-		coil3 = new ModelRenderer(this, 0, 0);
-		coil3.addBox(-1F, 0F, -7F, 1, 6, 14);
-		coil3.setRotationPoint(4F, 16F, 0F);
-		coil3.setTextureSize(64, 32);
-		coil3.mirror = true;
-		setRotation(coil3, 0F, 0F, 0F);
-		coil2 = new ModelRenderer(this, 0, 0);
-		coil2.addBox(-1F, 0F, -7F, 1, 6, 14);
-		coil2.setRotationPoint(5.5F, 16F, 0F);
-		coil2.setTextureSize(64, 32);
-		coil2.mirror = true;
-		setRotation(coil2, 0F, 0F, 0F);
-		coil1 = new ModelRenderer(this, 0, 0);
-		coil1.addBox(-1F, 0F, -7F, 1, 6, 14);
-		coil1.setRotationPoint(7F, 16F, 0F);
-		coil1.setTextureSize(64, 32);
-		coil1.mirror = true;
-		setRotation(coil1, 0F, 0F, 0F);
-		coil4 = new ModelRenderer(this, 0, 0);
-		coil4.addBox(-1F, 0F, -7F, 1, 6, 14);
-		coil4.setRotationPoint(2.466667F, 16F, 0F);
-		coil4.setTextureSize(64, 32);
-		coil4.mirror = true;
-		setRotation(coil4, 0F, 0F, 0F);
-		blockInner = new ModelRenderer(this, 28, 15);
-		blockInner.addBox(-6F, 0F, -4F, 12, 5, 12);
-		blockInner.setRotationPoint(0F, 17F, -2F);
-		blockInner.setTextureSize(64, 32);
-		blockInner.mirror = true;
-		setRotation(blockInner, 0F, 0F, 0F);
-		coil6 = new ModelRenderer(this, 0, 0);
-		coil6.addBox(-1F, 0F, -7F, 1, 6, 14);
-		coil6.setRotationPoint(-3F, 16F, 0F);
-		coil6.setTextureSize(64, 32);
-		coil6.mirror = true;
-		setRotation(coil6, 0F, 0F, 0F);
-		coil7 = new ModelRenderer(this, 0, 0);
-		coil7.addBox(-1F, 0F, -7F, 1, 6, 14);
-		coil7.setRotationPoint(-4.5F, 16F, 0F);
-		coil7.setTextureSize(64, 32);
-		coil7.mirror = true;
-		setRotation(coil7, 0F, 0F, 0F);
-		coil5 = new ModelRenderer(this, 0, 0);
-		coil5.addBox(-1F, 0F, -7F, 1, 6, 14);
-		coil5.setRotationPoint(-1.5F, 16F, 0F);
-		coil5.setTextureSize(64, 32);
-		coil5.mirror = true;
-		setRotation(coil5, 0F, 0F, 0F);
-	}
+        blockBase = new ModelRenderer(this, 0, 0);
+        blockBase.addBox(-8F, 0F, -8F, 16, 2, 16);
+        blockBase.setRotationPoint(0F, 22F, 0F);
+        blockBase.setTextureSize(64, 32);
+        blockBase.mirror = true;
+        setRotation(blockBase, 0F, 0F, 0F);
+        blockLeft = new ModelRenderer(this, 0, 0);
+        blockLeft.addBox(0F, 0F, -2F, 1, 6, 4);
+        blockLeft.setRotationPoint(7F, 16F, 0F);
+        blockLeft.setTextureSize(64, 32);
+        blockLeft.mirror = true;
+        setRotation(blockLeft, 0F, 0F, 0F);
+        blockRight = new ModelRenderer(this, 0, 0);
+        blockRight.addBox(0F, 0F, -2F, 1, 6, 4);
+        blockRight.setRotationPoint(-8F, 16F, 0F);
+        blockRight.setTextureSize(64, 32);
+        blockRight.mirror = true;
+        setRotation(blockRight, 0F, 0F, 0F);
+        blockTop = new ModelRenderer(this, 0, 0);
+        blockTop.addBox(-8F, 0F, -2F, 16, 2, 4);
+        blockTop.setRotationPoint(0F, 15F, 0F);
+        blockTop.setTextureSize(64, 32);
+        blockTop.mirror = true;
+        setRotation(blockTop, 0F, 0F, 0F);
+        coil8 = new ModelRenderer(this, 0, 0);
+        coil8.addBox(-1F, 0F, -7F, 1, 6, 14);
+        coil8.setRotationPoint(-6F, 16F, 0F);
+        coil8.setTextureSize(64, 32);
+        coil8.mirror = true;
+        setRotation(coil8, 0F, 0F, 0F);
+        coil3 = new ModelRenderer(this, 0, 0);
+        coil3.addBox(-1F, 0F, -7F, 1, 6, 14);
+        coil3.setRotationPoint(4F, 16F, 0F);
+        coil3.setTextureSize(64, 32);
+        coil3.mirror = true;
+        setRotation(coil3, 0F, 0F, 0F);
+        coil2 = new ModelRenderer(this, 0, 0);
+        coil2.addBox(-1F, 0F, -7F, 1, 6, 14);
+        coil2.setRotationPoint(5.5F, 16F, 0F);
+        coil2.setTextureSize(64, 32);
+        coil2.mirror = true;
+        setRotation(coil2, 0F, 0F, 0F);
+        coil1 = new ModelRenderer(this, 0, 0);
+        coil1.addBox(-1F, 0F, -7F, 1, 6, 14);
+        coil1.setRotationPoint(7F, 16F, 0F);
+        coil1.setTextureSize(64, 32);
+        coil1.mirror = true;
+        setRotation(coil1, 0F, 0F, 0F);
+        coil4 = new ModelRenderer(this, 0, 0);
+        coil4.addBox(-1F, 0F, -7F, 1, 6, 14);
+        coil4.setRotationPoint(2.466667F, 16F, 0F);
+        coil4.setTextureSize(64, 32);
+        coil4.mirror = true;
+        setRotation(coil4, 0F, 0F, 0F);
+        blockInner = new ModelRenderer(this, 28, 15);
+        blockInner.addBox(-6F, 0F, -4F, 12, 5, 12);
+        blockInner.setRotationPoint(0F, 17F, -2F);
+        blockInner.setTextureSize(64, 32);
+        blockInner.mirror = true;
+        setRotation(blockInner, 0F, 0F, 0F);
+        coil6 = new ModelRenderer(this, 0, 0);
+        coil6.addBox(-1F, 0F, -7F, 1, 6, 14);
+        coil6.setRotationPoint(-3F, 16F, 0F);
+        coil6.setTextureSize(64, 32);
+        coil6.mirror = true;
+        setRotation(coil6, 0F, 0F, 0F);
+        coil7 = new ModelRenderer(this, 0, 0);
+        coil7.addBox(-1F, 0F, -7F, 1, 6, 14);
+        coil7.setRotationPoint(-4.5F, 16F, 0F);
+        coil7.setTextureSize(64, 32);
+        coil7.mirror = true;
+        setRotation(coil7, 0F, 0F, 0F);
+        coil5 = new ModelRenderer(this, 0, 0);
+        coil5.addBox(-1F, 0F, -7F, 1, 6, 14);
+        coil5.setRotationPoint(-1.5F, 16F, 0F);
+        coil5.setTextureSize(64, 32);
+        coil5.mirror = true;
+        setRotation(coil5, 0F, 0F, 0F);
+    }
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		blockBase.render(f5);
-		blockLeft.render(f5);
-		blockRight.render(f5);
-		blockTop.render(f5);
-		coil8.render(f5);
-		coil3.render(f5);
-		coil2.render(f5);
-		coil1.render(f5);
-		coil4.render(f5);
-		blockInner.render(f5);
-		coil6.render(f5);
-		coil7.render(f5);
-		coil5.render(f5);
-	}
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        super.render(entity, f, f1, f2, f3, f4, f5);
+        setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+        blockBase.render(f5);
+        blockLeft.render(f5);
+        blockRight.render(f5);
+        blockTop.render(f5);
+        coil8.render(f5);
+        coil3.render(f5);
+        coil2.render(f5);
+        coil1.render(f5);
+        coil4.render(f5);
+        blockInner.render(f5);
+        coil6.render(f5);
+        coil7.render(f5);
+        coil5.render(f5);
+    }
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
-	}
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
+        model.rotateAngleX = x;
+        model.rotateAngleY = y;
+        model.rotateAngleZ = z;
+    }
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-	}
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+        super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+    }
 
 }

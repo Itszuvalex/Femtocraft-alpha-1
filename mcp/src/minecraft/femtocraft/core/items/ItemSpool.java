@@ -8,17 +8,17 @@ import net.minecraft.item.Item;
 
 public class ItemSpool extends Item {
 
-	public ItemSpool(int par1) {
-		super(par1);
-		setCreativeTab(Femtocraft.femtocraftTab);
-		setMaxStackSize(64);
-	}
+    public ItemSpool(int par1) {
+        super(par1);
+        setCreativeTab(Femtocraft.femtocraftTab);
+        setMaxStackSize(64);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
-		itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-				+ ":" + "ItemSpool");
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IconRegister par1IconRegister) {
+        itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+                                                         + ":" + "ItemSpool");
+    }
 
 }

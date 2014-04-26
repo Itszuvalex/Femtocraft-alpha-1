@@ -6,15 +6,15 @@ import net.minecraft.item.Item;
 
 public class ItemBoard extends Item {
 
-	public ItemBoard(int par1) {
-		super(par1);
-		setMaxStackSize(64);
-		setCreativeTab(Femtocraft.femtocraftTab);
-		setTextureName(Femtocraft.ID.toLowerCase() + ":" + "ItemBoard");
-	}
+    public ItemBoard(int par1) {
+        super(par1);
+        setMaxStackSize(64);
+        setCreativeTab(Femtocraft.femtocraftTab);
+        setTextureName(Femtocraft.ID.toLowerCase() + ":" + "ItemBoard");
+    }
 
-	public void updateIcons(IconRegister par1IconRegister) {
-		this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
-				.toLowerCase() + ":" + "ItemBoard");
-	}
+    public void updateIcons(IconRegister par1IconRegister) {
+        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
+                                                              .toLowerCase() + ":" + "ItemBoard");
+    }
 }

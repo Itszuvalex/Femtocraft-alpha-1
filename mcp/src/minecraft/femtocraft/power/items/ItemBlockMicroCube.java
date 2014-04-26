@@ -5,12 +5,12 @@ import femtocraft.power.tiles.TileEntityPowerMicroCube;
 
 public class ItemBlockMicroCube extends ItemBlockPower {
 
-	public ItemBlockMicroCube(int par1) {
-		super(par1);
-	}
+    public ItemBlockMicroCube(int par1) {
+        super(par1);
+    }
 
-	@Override
-	public PowerContainer getDefaultContainer() {
-		return TileEntityPowerMicroCube.getDefaultContainer();
-	}
+    @Override
+    public PowerContainer getDefaultContainer() {
+        return TileEntityPowerMicroCube.getDefaultContainer();
+    }
 }

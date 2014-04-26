@@ -10,25 +10,25 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 public class BlockMicroStone extends Block {
-	public BlockMicroStone(int id) {
-		super(id, Material.iron);
-		setCreativeTab(Femtocraft.femtocraftTab);
-		setTextureName(Femtocraft.ID.toLowerCase() + ":" + "BlockMicroStone");
-		setUnlocalizedName("BlockMicroStone");
-		setHardness(6.0f);
-		setStepSound(Block.soundMetalFootstep);
-		setResistance(9f);
-	}
+    public BlockMicroStone(int id) {
+        super(id, Material.iron);
+        setCreativeTab(Femtocraft.femtocraftTab);
+        setTextureName(Femtocraft.ID.toLowerCase() + ":" + "BlockMicroStone");
+        setUnlocalizedName("BlockMicroStone");
+        setHardness(6.0f);
+        setStepSound(Block.soundMetalFootstep);
+        setResistance(9f);
+    }
 
-	public boolean onBlockActivated(World par1World, int par2, int par3,
-			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
-			float par8, float par9) {
-		return false;
-	}
+    public boolean onBlockActivated(World par1World, int par2, int par3,
+                                    int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
+                                    float par8, float par9) {
+        return false;
+    }
 
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
-		this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
-				.toLowerCase() + ":" + "BlockMicroStone");
-	}
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IconRegister par1IconRegister) {
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
+                                                               .toLowerCase() + ":" + "BlockMicroStone");
+    }
 }

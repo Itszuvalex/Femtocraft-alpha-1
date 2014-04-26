@@ -6,16 +6,16 @@ import net.minecraft.item.Item;
 
 public class ItemDeconstructedIron extends Item {
 
-	public ItemDeconstructedIron(int par1) {
-		super(par1);
-		setMaxStackSize(64);
-		setCreativeTab(Femtocraft.femtocraftTab);
-		setTextureName(Femtocraft.ID.toLowerCase() + ":" + "ItemDeconstructedIron");
-	}
+    public ItemDeconstructedIron(int par1) {
+        super(par1);
+        setMaxStackSize(64);
+        setCreativeTab(Femtocraft.femtocraftTab);
+        setTextureName(Femtocraft.ID.toLowerCase() + ":" + "ItemDeconstructedIron");
+    }
 
-	public void updateIcons(IconRegister par1IconRegister) {
-		this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
-				.toLowerCase() + ":" + "ItemDeconstructedIron");
-	}
+    public void updateIcons(IconRegister par1IconRegister) {
+        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
+                                                              .toLowerCase() + ":" + "ItemDeconstructedIron");
+    }
 
 }

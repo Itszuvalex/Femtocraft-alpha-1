@@ -9,19 +9,19 @@ import net.minecraft.client.renderer.texture.IconRegister;
 
 public class BlockOreThorium extends BlockOre {
 
-	public BlockOreThorium(int id) {
-		super(id);
-		this.setCreativeTab(Femtocraft.femtocraftTab);
-		setTextureName(Femtocraft.ID.toLowerCase() + ":" + "BlockOreThorium");
-		setUnlocalizedName("BlockOreThorium");
-		setHardness(3.0f);
-		setStepSound(Block.soundStoneFootstep);
-		setResistance(1f);
-	}
+    public BlockOreThorium(int id) {
+        super(id);
+        this.setCreativeTab(Femtocraft.femtocraftTab);
+        setTextureName(Femtocraft.ID.toLowerCase() + ":" + "BlockOreThorium");
+        setUnlocalizedName("BlockOreThorium");
+        setHardness(3.0f);
+        setStepSound(Block.soundStoneFootstep);
+        setResistance(1f);
+    }
 
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
-		this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
-				.toLowerCase() + ":" + "BlockOreThorium");
-	}
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IconRegister par1IconRegister) {
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
+                                                               .toLowerCase() + ":" + "BlockOreThorium");
+    }
 }

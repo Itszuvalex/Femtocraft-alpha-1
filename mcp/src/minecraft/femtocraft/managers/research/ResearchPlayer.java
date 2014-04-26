@@ -1,10 +1,10 @@
 package femtocraft.managers.research;
 
-import java.io.IOException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.logging.Level;
-
+import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.common.network.Player;
+import femtocraft.Femtocraft;
+import femtocraft.managers.research.EventTechnology.TechnologyDiscoveredEvent;
+import femtocraft.managers.research.EventTechnology.TechnologyResearchedEvent;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,253 +13,258 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
-import femtocraft.Femtocraft;
-import femtocraft.managers.research.EventTechnology.TechnologyDiscoveredEvent;
-import femtocraft.managers.research.EventTechnology.TechnologyResearchedEvent;
+
+import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.logging.Level;
 
 public class ResearchPlayer {
-	private final static String mapKey = "techMap";
-	private final static String techNameKey = "techname";
-	private final static String dataKey = "data";
+    private final static String mapKey = "techMap";
+    private final static String techNameKey = "techname";
+    private final static String dataKey = "data";
 
-	public final String username;
-	private final HashMap<String, ResearchTechnologyStatus> techStatus;
+    public final String username;
+    private final HashMap<String, ResearchTechnologyStatus> techStatus;
 
-	public static class TechnologyNotFoundException extends Exception {
-		public String errMsg;
+    public ResearchPlayer(String username) {
+        this.username = username;
+        techStatus = new HashMap<String, ResearchTechnologyStatus>();
+    }
 
-		public TechnologyNotFoundException(String message) {
-			errMsg = message;
-		}
-	}
+    public Collection<ResearchTechnologyStatus> getTechnologies() {
+        return techStatus.values();
+    }
 
-	public ResearchPlayer(String username) {
-		this.username = username;
-		techStatus = new HashMap<String, ResearchTechnologyStatus>();
-	}
+    /**
+     * @param name  Name of researchTechnology to mark as researched
+     * @param force Pass true if you want the named researchTechnology to be added
+     *              if it isn't already discovered. This will bypass discover
+     *              checks. This will not post an event.
+     * @return True if researchTechnology successfully marked as researched.
+     * False otherwise.
+     */
+    public boolean researchTechnology(String name, boolean force) {
+        ResearchTechnology rtech = Femtocraft.researchManager
+                .getTechnology(name);
+        ResearchTechnologyStatus tech = techStatus.get(name);
+        if (tech == null && !force) {
+            return false;
+        }
 
-	public Collection<ResearchTechnologyStatus> getTechnologies() {
-		return techStatus.values();
-	}
+        if (tech == null && force) {
+            techStatus.put(name, new ResearchTechnologyStatus(name, true));
+            discoverNewTechs(rtech, false);
+            sync();
+            return true;
+        }
 
-	// ---------------------------------------------------------
+        TechnologyResearchedEvent event = new TechnologyResearchedEvent(
+                username, rtech);
+        if (!MinecraftForge.EVENT_BUS.post(event)) {
+            tech.researched = true;
+            EntityPlayerMP player = MinecraftServer.getServer()
+                                                   .getConfigurationManager().getPlayerForUsername(username);
+            if (player != null) {
+                ResearchTechnology techno = Femtocraft.researchManager
+                        .getTechnology(name);
+                if (techno != null) {
+                    player.addChatMessage(techno.level.getTooltipEnum() + name
+                                                  + EnumChatFormatting.RESET
+                                                  + " successfully researched.");
+                }
+            }
+            discoverNewTechs(rtech, true);
+            sync();
 
-	/**
-	 * 
-	 * @param name
-	 *            Name of researchTechnology to mark as researched
-	 * @param force
-	 *            Pass true if you want the named researchTechnology to be added
-	 *            if it isn't already discovered. This will bypass discover
-	 *            checks. This will not post an event.
-	 * @return True if researchTechnology successfully marked as researched.
-	 *         False otherwise.
-	 */
-	public boolean researchTechnology(String name, boolean force) {
-		ResearchTechnology rtech = Femtocraft.researchManager
-				.getTechnology(name);
-		ResearchTechnologyStatus tech = techStatus.get(name);
-		if (tech == null && !force)
-			return false;
+            return true;
+        }
+        return false;
+    }
 
-		if (tech == null && force) {
-			techStatus.put(name, new ResearchTechnologyStatus(name, true));
-			discoverNewTechs(rtech, false);
-			sync();
-			return true;
-		}
+    // ---------------------------------------------------------
 
-		TechnologyResearchedEvent event = new TechnologyResearchedEvent(
-				username, rtech);
-		if (!MinecraftForge.EVENT_BUS.post(event)) {
-			tech.researched = true;
-			EntityPlayerMP player = MinecraftServer.getServer()
-					.getConfigurationManager().getPlayerForUsername(username);
-			if (player != null) {
-				ResearchTechnology techno = Femtocraft.researchManager
-						.getTechnology(name);
-				if (techno != null) {
-					player.addChatMessage(techno.level.getTooltipEnum() + name
-							+ EnumChatFormatting.RESET
-							+ " successfully researched.");
-				}
-			}
-			discoverNewTechs(rtech, true);
-			sync();
+    private void discoverNewTechs(ResearchTechnology discoverer, boolean notify) {
+        for (ResearchTechnology t : Femtocraft.researchManager
+                .getTechnologies()) {
+            if (t.prerequisites != null) {
+                ResearchTechnologyStatus ts = techStatus.get(t.name);
+                if (ts != null && ts.researched) {
+                    continue;
+                }
 
-			return true;
-		}
-		return false;
-	}
+                boolean discovererPrereq = false;
+                boolean shouldDiscover = true;
+                for (ResearchTechnology pt : t.prerequisites) {
+                    if (pt == discoverer) {
+                        discovererPrereq = true;
+                    }
+                    ResearchTechnologyStatus rts = techStatus.get(pt.name);
+                    if (rts == null) {
+                        shouldDiscover = false;
+                        break;
+                    }
+                    if (!rts.researched) {
+                        shouldDiscover = false;
+                        break;
+                    }
+                }
 
-	private void discoverNewTechs(ResearchTechnology discoverer, boolean notify) {
-		for (ResearchTechnology t : Femtocraft.researchManager
-				.getTechnologies()) {
-			if (t.prerequisites != null) {
-				ResearchTechnologyStatus ts = techStatus.get(t.name);
-				if (ts != null && ts.researched)
-					continue;
+                if (shouldDiscover && discovererPrereq) {
+                    discoverTechnology(t.name);
+                    if (notify) {
+                        EntityPlayerMP player = MinecraftServer.getServer()
+                                                               .getConfigurationManager()
+                                                               .getPlayerForUsername(username);
+                        if (player != null) {
+                            ResearchTechnology techno = Femtocraft.researchManager
+                                    .getTechnology(t.name);
+                            if (techno != null) {
+                                player.addChatMessage("New technology "
+                                                              + techno.level.getTooltipEnum()
+                                                              + t.name + EnumChatFormatting.RESET
+                                                              + " discovered.");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-				boolean discovererPrereq = false;
-				boolean shouldDiscover = true;
-				for (ResearchTechnology pt : t.prerequisites) {
-					if (pt == discoverer) {
-						discovererPrereq = true;
-					}
-					ResearchTechnologyStatus rts = techStatus.get(pt.name);
-					if (rts == null) {
-						shouldDiscover = false;
-						break;
-					}
-					if (!rts.researched) {
-						shouldDiscover = false;
-						break;
-					}
-				}
+    public boolean discoverTechnology(String name) {
+        TechnologyDiscoveredEvent event = new TechnologyDiscoveredEvent(
+                username, Femtocraft.researchManager.getTechnology(name));
+        if (!MinecraftForge.EVENT_BUS.post(event)) {
+            techStatus.put(name, new ResearchTechnologyStatus(name));
+            sync();
+            return true;
+        }
+        return false;
+    }
 
-				if (shouldDiscover && discovererPrereq) {
-					discoverTechnology(t.name);
-					if (notify) {
-						EntityPlayerMP player = MinecraftServer.getServer()
-								.getConfigurationManager()
-								.getPlayerForUsername(username);
-						if (player != null) {
-							ResearchTechnology techno = Femtocraft.researchManager
-									.getTechnology(t.name);
-							if (techno != null) {
-								player.addChatMessage("New technology "
-										+ techno.level.getTooltipEnum()
-										+ t.name + EnumChatFormatting.RESET
-										+ " discovered.");
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+    public ResearchTechnologyStatus getTechnology(String name) {
+        return techStatus.get(name);
+    }
 
-	public boolean discoverTechnology(String name) {
-		TechnologyDiscoveredEvent event = new TechnologyDiscoveredEvent(
-				username, Femtocraft.researchManager.getTechnology(name));
-		if (!MinecraftForge.EVENT_BUS.post(event)) {
-			techStatus.put(name, new ResearchTechnologyStatus(name));
-			sync();
-			return true;
-		}
-		return false;
-	}
+    public ResearchTechnologyStatus removeTechnology(String name) {
+        return techStatus.remove(name);
+    }
 
-	public ResearchTechnologyStatus getTechnology(String name) {
-		return techStatus.get(name);
-	}
+    public boolean canDiscoverTechnology(ResearchTechnology tech) {
+        if (tech.prerequisites == null) {
+            return true;
+        }
 
-	public ResearchTechnologyStatus removeTechnology(String name) {
-		return techStatus.remove(name);
-	}
+        for (ResearchTechnology prereq : tech.prerequisites) {
+            ResearchTechnologyStatus ts = techStatus.get(prereq.name);
+            if (ts == null) {
+                return false;
+            }
+            if (!ts.researched) {
+                return false;
+            }
+        }
 
-	public boolean canDiscoverTechnology(ResearchTechnology tech) {
-		if (tech.prerequisites == null)
-			return true;
+        return true;
+    }
 
-		for (ResearchTechnology prereq : tech.prerequisites) {
-			ResearchTechnologyStatus ts = techStatus.get(prereq.name);
-			if (ts == null)
-				return false;
-			if (!ts.researched)
-				return false;
-		}
+    public boolean hasDiscoveredTechnology(ResearchTechnology tech) {
+        return hasDiscoveredTechnology(tech.name);
+    }
 
-		return true;
-	}
+    public boolean hasDiscoveredTechnology(String tech) {
+        ResearchTechnologyStatus ts = techStatus.get(tech);
+        return ts != null;
+    }
 
-	public boolean hasDiscoveredTechnology(ResearchTechnology tech) {
-		return hasDiscoveredTechnology(tech.name);
-	}
+    public boolean hasResearchedTechnology(ResearchTechnology tech) {
+        return tech == null || hasResearchedTechnology(tech.name);
+    }
 
-	public boolean hasDiscoveredTechnology(String tech) {
-		ResearchTechnologyStatus ts = techStatus.get(tech);
-		return ts != null;
-	}
+    public boolean hasResearchedTechnology(String tech) {
+        if (tech == null || tech.equals("")) {
+            return true;
+        }
 
-	public boolean hasResearchedTechnology(ResearchTechnology tech) {
-		return tech == null || hasResearchedTechnology(tech.name);
-	}
+        ResearchTechnologyStatus ts = techStatus.get(tech);
+        return ts != null && ts.researched;
+    }
 
-	public boolean hasResearchedTechnology(String tech) {
-		if (tech == null || tech.equals(""))
-			return true;
+    public void sync() {
+        EntityPlayerMP player = MinecraftServer.getServer()
+                                               .getConfigurationManager().getPlayerForUsername(username);
+        if (player == null) {
+            return;
+        }
 
-		ResearchTechnologyStatus ts = techStatus.get(tech);
-		return ts != null && ts.researched;
-	}
+        sync((Player) player);
+    }
 
-	// ---------------------------------------------------------
+    // ---------------------------------------------------------
 
-	public void sync() {
-		EntityPlayerMP player = MinecraftServer.getServer()
-				.getConfigurationManager().getPlayerForUsername(username);
-		if (player == null)
-			return;
+    public void sync(Player player) {
+        NBTTagCompound data = new NBTTagCompound();
+        saveToNBTTagCompound(data);
 
-		sync((Player) player);
-	}
+        Packet250CustomPayload packet = new Packet250CustomPayload();
+        packet.channel = ManagerResearch.RESEARCH_CHANNEL;
+        try {
+            packet.data = CompressedStreamTools.compress(data);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Femtocraft.logger
+                    .log(Level.SEVERE,
+                         "Error writing "
+                                 + username
+                                 + "'s PlayerResearch to packet data.  It will fail to sync to his client."
+                    );
+            return;
+        }
+        packet.length = packet.data.length;
+        PacketDispatcher.sendPacketToPlayer(packet, player);
+    }
 
-	public void sync(Player player) {
-		NBTTagCompound data = new NBTTagCompound();
-		saveToNBTTagCompound(data);
+    public void saveToNBTTagCompound(NBTTagCompound compound) {
+        NBTTagList list = new NBTTagList();
 
-		Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = ManagerResearch.RESEARCH_CHANNEL;
-		try {
-			packet.data = CompressedStreamTools.compress(data);
-		} catch (IOException e) {
-			e.printStackTrace();
-			Femtocraft.logger
-					.log(Level.SEVERE,
-							"Error writing "
-									+ username
-									+ "'s PlayerResearch to packet data.  It will fail to sync to his client.");
-			return;
-		}
-		packet.length = packet.data.length;
-		PacketDispatcher.sendPacketToPlayer(packet, player);
-	}
+        for (ResearchTechnologyStatus status : techStatus.values()) {
+            NBTTagCompound cs = new NBTTagCompound();
+            cs.setString(techNameKey, status.tech);
 
-	// ---------------------------------------------------------
+            NBTTagCompound data = new NBTTagCompound();
+            status.saveToNBTTagCompound(data);
 
-	public void saveToNBTTagCompound(NBTTagCompound compound) {
-		NBTTagList list = new NBTTagList();
+            cs.setCompoundTag(dataKey, data);
+            list.appendTag(cs);
+        }
 
-		for (ResearchTechnologyStatus status : techStatus.values()) {
-			NBTTagCompound cs = new NBTTagCompound();
-			cs.setString(techNameKey, status.tech);
+        compound.setTag(mapKey, list);
+    }
 
-			NBTTagCompound data = new NBTTagCompound();
-			status.saveToNBTTagCompound(data);
+    // ---------------------------------------------------------
 
-			cs.setCompoundTag(dataKey, data);
-			list.appendTag(cs);
-		}
+    public void loadFromNBTTagCompound(NBTTagCompound compound) {
+        NBTTagList list = compound.getTagList(mapKey);
 
-		compound.setTag(mapKey, list);
-	}
+        for (int i = 0; i < list.tagCount(); ++i) {
+            NBTTagCompound cs = (NBTTagCompound) list.tagAt(i);
+            String techname = cs.getString(techNameKey);
 
-	public void loadFromNBTTagCompound(NBTTagCompound compound) {
-		NBTTagList list = compound.getTagList(mapKey);
+            NBTTagCompound data = cs.getCompoundTag(dataKey);
+            ResearchTechnologyStatus status = new ResearchTechnologyStatus(
+                    techname);
+            status.loadFromNBTTagCompound(data);
 
-		for (int i = 0; i < list.tagCount(); ++i) {
-			NBTTagCompound cs = (NBTTagCompound) list.tagAt(i);
-			String techname = cs.getString(techNameKey);
+            techStatus.put(techname, status);
+        }
+    }
 
-			NBTTagCompound data = cs.getCompoundTag(dataKey);
-			ResearchTechnologyStatus status = new ResearchTechnologyStatus(
-					techname);
-			status.loadFromNBTTagCompound(data);
+    public static class TechnologyNotFoundException extends Exception {
+        public String errMsg;
 
-			techStatus.put(techname, status);
-		}
-	}
+        public TechnologyNotFoundException(String message) {
+            errMsg = message;
+        }
+    }
 }

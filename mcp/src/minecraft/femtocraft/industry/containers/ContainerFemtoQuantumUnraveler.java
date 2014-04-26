@@ -2,8 +2,8 @@ package femtocraft.industry.containers;
 
 public class ContainerFemtoQuantumUnraveler {
 
-	public ContainerFemtoQuantumUnraveler() {
-		// TODO Auto-generated constructor stub
-	}
+    public ContainerFemtoQuantumUnraveler() {
+        // TODO Auto-generated constructor stub
+    }
 
 }

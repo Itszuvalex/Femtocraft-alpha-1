@@ -1,368 +1,385 @@
 package femtocraft.industry.tiles;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.nbt.NBTTagCompound;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.industry.blocks.BlockMicroFurnace;
 import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.utils.FemtocraftDataUtils.Saveable;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 
 public class TileEntityBaseEntityMicroFurnace extends
-		TileEntityBaseEntityIndustry implements ISidedInventory {
-	public TileEntityBaseEntityMicroFurnace() {
-		super();
-		setMaxStorage(800);
-		setTechLevel(EnumTechLevel.MICRO);
-	}
+                                              TileEntityBaseEntityIndustry implements ISidedInventory {
+    public static int powerToCook = 40;
+    public static int ticksToCook = 100;
+    public static int maxSmelt = 1;
+    /**
+     * The number of ticks that the current item has been cooking for
+     */
+    public
+    @Saveable
+    int furnaceCookTime = 0;
+    public
+    @Saveable
+    int currentPower = 0;
+    public
+    @Saveable
+    ItemStack smeltingStack = null;
+    /**
+     * The ItemStacks that hold the items currently being used in the furnace
+     */
+    protected
+    @Saveable
+    ItemStack[] furnaceItemStacks = new ItemStack[2];
+    private
+    @Saveable
+    String field_94130_e;
+    public TileEntityBaseEntityMicroFurnace() {
+        super();
+        setMaxStorage(800);
+        setTechLevel(EnumTechLevel.MICRO);
+    }
 
-	public static int powerToCook = 40;
-	public static int ticksToCook = 100;
-	public static int maxSmelt = 1;
+    protected int getMaxSimultaneousSmelt() {
+        return maxSmelt;
+    }
 
-	/**
-	 * The ItemStacks that hold the items currently being used in the furnace
-	 */
-	protected @Saveable
-	ItemStack[] furnaceItemStacks = new ItemStack[2];
+    protected int getTicksToCook() {
+        // TODO: Load from configs
+        return ticksToCook;
+    }
 
-	/** The number of ticks that the current item has been cooking for */
-	public @Saveable
-	int furnaceCookTime = 0;
-	public @Saveable
-	int currentPower = 0;
-	private @Saveable
-	String field_94130_e;
-	public @Saveable
-	ItemStack smeltingStack = null;
+    protected int getPowerToCook() {
+        // TODO: Load from configs
+        return powerToCook;
+    }
 
-	protected int getMaxSimultaneousSmelt() {
-		return maxSmelt;
-	}
+    /**
+     * Returns the number of slots in the inventory.
+     */
+    @Override
+    public int getSizeInventory() {
+        return this.furnaceItemStacks.length;
+    }
 
-	protected int getTicksToCook() {
-		// TODO: Load from configs
-		return ticksToCook;
-	}
+    /**
+     * Returns the stack in slot i
+     */
+    @Override
+    public ItemStack getStackInSlot(int par1) {
+        return this.furnaceItemStacks[par1];
+    }
 
-	protected int getPowerToCook() {
-		// TODO: Load from configs
-		return powerToCook;
-	}
+    /**
+     * Removes from an inventory slot (first arg) up to a specified number
+     * (second arg) of items and returns them in a new stack.
+     */
+    @Override
+    public ItemStack decrStackSize(int par1, int par2) {
+        if (this.furnaceItemStacks[par1] != null) {
+            ItemStack itemstack;
 
-	/**
-	 * Returns the number of slots in the inventory.
-	 */
-	@Override
-	public int getSizeInventory() {
-		return this.furnaceItemStacks.length;
-	}
+            if (this.furnaceItemStacks[par1].stackSize <= par2) {
+                itemstack = this.furnaceItemStacks[par1];
+                this.furnaceItemStacks[par1] = null;
+                return itemstack;
+            }
+            else {
+                itemstack = this.furnaceItemStacks[par1].splitStack(par2);
 
-	/**
-	 * Returns the stack in slot i
-	 */
-	@Override
-	public ItemStack getStackInSlot(int par1) {
-		return this.furnaceItemStacks[par1];
-	}
+                if (this.furnaceItemStacks[par1].stackSize == 0) {
+                    this.furnaceItemStacks[par1] = null;
+                }
 
-	/**
-	 * Removes from an inventory slot (first arg) up to a specified number
-	 * (second arg) of items and returns them in a new stack.
-	 */
-	@Override
-	public ItemStack decrStackSize(int par1, int par2) {
-		if (this.furnaceItemStacks[par1] != null) {
-			ItemStack itemstack;
+                return itemstack;
+            }
+        }
+        else {
+            return null;
+        }
+    }
 
-			if (this.furnaceItemStacks[par1].stackSize <= par2) {
-				itemstack = this.furnaceItemStacks[par1];
-				this.furnaceItemStacks[par1] = null;
-				return itemstack;
-			} else {
-				itemstack = this.furnaceItemStacks[par1].splitStack(par2);
+    /**
+     * When some containers are closed they call this on each slot, then drop
+     * whatever it returns as an EntityItem - like when you close a workbench
+     * GUI.
+     */
+    @Override
+    public ItemStack getStackInSlotOnClosing(int par1) {
+        if (this.furnaceItemStacks[par1] != null) {
+            ItemStack itemstack = this.furnaceItemStacks[par1];
+            this.furnaceItemStacks[par1] = null;
+            return itemstack;
+        }
+        else {
+            return null;
+        }
+    }
 
-				if (this.furnaceItemStacks[par1].stackSize == 0) {
-					this.furnaceItemStacks[par1] = null;
-				}
+    /**
+     * Sets the given item stack to the specified slot in the inventory (can be
+     * crafting or armor sections).
+     */
+    @Override
+    public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
+        this.furnaceItemStacks[par1] = par2ItemStack;
 
-				return itemstack;
-			}
-		} else {
-			return null;
-		}
-	}
+        if (par2ItemStack != null
+                && par2ItemStack.stackSize > this.getInventoryStackLimit()) {
+            par2ItemStack.stackSize = this.getInventoryStackLimit();
+        }
+    }
 
-	/**
-	 * When some containers are closed they call this on each slot, then drop
-	 * whatever it returns as an EntityItem - like when you close a workbench
-	 * GUI.
-	 */
-	@Override
-	public ItemStack getStackInSlotOnClosing(int par1) {
-		if (this.furnaceItemStacks[par1] != null) {
-			ItemStack itemstack = this.furnaceItemStacks[par1];
-			this.furnaceItemStacks[par1] = null;
-			return itemstack;
-		} else {
-			return null;
-		}
-	}
+    /**
+     * Returns the name of the inventory.
+     */
+    @Override
+    public String getInvName() {
+        return this.isInvNameLocalized() ? this.field_94130_e : "MicroFurnace";
+    }
 
-	/**
-	 * Sets the given item stack to the specified slot in the inventory (can be
-	 * crafting or armor sections).
-	 */
-	@Override
-	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
-		this.furnaceItemStacks[par1] = par2ItemStack;
+    /**
+     * If this returns false, the inventory name will be used as an unlocalized
+     * name, and translated into the player's language. Otherwise it will be
+     * used directly.
+     */
+    @Override
+    public boolean isInvNameLocalized() {
+        return this.field_94130_e != null && this.field_94130_e.length() > 0;
+    }
 
-		if (par2ItemStack != null
-				&& par2ItemStack.stackSize > this.getInventoryStackLimit()) {
-			par2ItemStack.stackSize = this.getInventoryStackLimit();
-		}
-	}
+    public void func_94129_a(String par1Str) {
+        this.field_94130_e = par1Str;
+    }
 
-	/**
-	 * Returns the name of the inventory.
-	 */
-	@Override
-	public String getInvName() {
-		return this.isInvNameLocalized() ? this.field_94130_e : "MicroFurnace";
-	}
+    /**
+     * Returns the maximum stack size for a inventory slot. Seems to always be
+     * 64, possibly will be extended. *Isn't this more of a set than a get?*
+     */
+    @Override
+    public int getInventoryStackLimit() {
+        return 64;
+    }
 
-	/**
-	 * If this returns false, the inventory name will be used as an unlocalized
-	 * name, and translated into the player's language. Otherwise it will be
-	 * used directly.
-	 */
-	@Override
-	public boolean isInvNameLocalized() {
-		return this.field_94130_e != null && this.field_94130_e.length() > 0;
-	}
+    @SideOnly(Side.CLIENT)
+    /**
+     * Returns an integer between 0 and the passed value representing how close the current item is to being completely
+     * cooked
+     */
+    public int getCookProgressScaled(int par1) {
+        if (getTicksToCook() == 0) {
+            return 0;
+        }
+        return this.furnaceCookTime * par1 / getTicksToCook();
+    }
 
-	public void func_94129_a(String par1Str) {
-		this.field_94130_e = par1Str;
-	}
+    @Override
+    public boolean isWorking() {
+        return smeltingStack != null;
+    }
 
-	/**
-	 * Returns the maximum stack size for a inventory slot. Seems to always be
-	 * 64, possibly will be extended. *Isn't this more of a set than a get?*
-	 */
-	@Override
-	public int getInventoryStackLimit() {
-		return 64;
-	}
+    @Override
+    protected boolean canStartWork() {
+        if (this.furnaceItemStacks[0] == null) {
+            return false;
+        }
+        if (smeltingStack != null) {
+            return false;
+        }
+        else if (getCurrentPower() < getPowerToCook()) {
+            return false;
+        }
+        else {
+            ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(
+                    this.furnaceItemStacks[0]);
+            if (itemstack == null) {
+                return false;
+            }
+            if (this.furnaceItemStacks[1] == null) {
+                return true;
+            }
+            if (!this.furnaceItemStacks[1].isItemEqual(itemstack)) {
+                return false;
+            }
+            int result = furnaceItemStacks[1].stackSize + itemstack.stackSize;
+            return (result <= getInventoryStackLimit() && result <= itemstack
+                    .getMaxStackSize());
+        }
+    }
 
-	@SideOnly(Side.CLIENT)
-	/**
-	 * Returns an integer between 0 and the passed value representing how close the current item is to being completely
-	 * cooked
-	 */
-	public int getCookProgressScaled(int par1) {
-		if (getTicksToCook() == 0)
-			return 0;
-		return this.furnaceCookTime * par1 / getTicksToCook();
-	}
+    @Override
+    protected void startWork() {
+        this.smeltingStack = this.furnaceItemStacks[0].copy();
+        this.smeltingStack.stackSize = 0;
 
-	@Override
-	public boolean isWorking() {
-		return smeltingStack != null;
-	}
+        int i = 0;
+        do {
 
-	@Override
-	protected boolean canStartWork() {
-		if (this.furnaceItemStacks[0] == null) {
-			return false;
-		}
-		if (smeltingStack != null) {
-			return false;
-		} else if (getCurrentPower() < getPowerToCook()) {
-			return false;
-		} else {
-			ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(
-					this.furnaceItemStacks[0]);
-			if (itemstack == null)
-				return false;
-			if (this.furnaceItemStacks[1] == null)
-				return true;
-			if (!this.furnaceItemStacks[1].isItemEqual(itemstack))
-				return false;
-			int result = furnaceItemStacks[1].stackSize + itemstack.stackSize;
-			return (result <= getInventoryStackLimit() && result <= itemstack
-					.getMaxStackSize());
-		}
-	}
+            if (furnaceItemStacks[1] != null
+                    && ((smeltingStack.stackSize + i) > furnaceItemStacks[1]
+                    .getMaxStackSize())) {
+                break;
+            }
 
-	@Override
-	protected void startWork() {
-		this.smeltingStack = this.furnaceItemStacks[0].copy();
-		this.smeltingStack.stackSize = 0;
+            if (furnaceItemStacks[0] == null) {
+                break;
+            }
 
-		int i = 0;
-		do {
+            if (!consume(getPowerToCook())) {
+                break;
+            }
 
-			if (furnaceItemStacks[1] != null
-					&& ((smeltingStack.stackSize + i) > furnaceItemStacks[1]
-							.getMaxStackSize())) {
-				break;
-			}
+            ++smeltingStack.stackSize;
+            --this.furnaceItemStacks[0].stackSize;
 
-			if (furnaceItemStacks[0] == null)
-				break;
+            if (this.furnaceItemStacks[0].stackSize <= 0) {
+                this.furnaceItemStacks[0] = null;
+            }
+        } while (++i < getMaxSimultaneousSmelt());
 
-			if (!consume(getPowerToCook()))
-				break;
+        updateBlockState(true);
 
-			++smeltingStack.stackSize;
-			--this.furnaceItemStacks[0].stackSize;
+        this.onInventoryChanged();
+        furnaceCookTime = 0;
+    }
 
-			if (this.furnaceItemStacks[0].stackSize <= 0) {
-				this.furnaceItemStacks[0] = null;
-			}
-		} while (++i < getMaxSimultaneousSmelt());
+    @Override
+    protected void continueWork() {
+        ++furnaceCookTime;
+    }
 
-		updateBlockState(true);
+    @Override
+    protected boolean canFinishWork() {
+        return furnaceCookTime == getTicksToCook();
+    }
 
-		this.onInventoryChanged();
-		furnaceCookTime = 0;
-	}
+    @Override
+    protected void finishWork() {
+        ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(
+                this.smeltingStack);
 
-	@Override
-	protected void continueWork() {
-		++furnaceCookTime;
-	}
+        if (itemstack != null) {
+            if (this.furnaceItemStacks[1] == null) {
+                this.furnaceItemStacks[1] = itemstack.copy();
+                this.furnaceItemStacks[1].stackSize = smeltingStack.stackSize;
+            }
+            else if (this.furnaceItemStacks[1].isItemEqual(itemstack)) {
+                furnaceItemStacks[1].stackSize += smeltingStack.stackSize;
+            }
 
-	@Override
-	protected boolean canFinishWork() {
-		return furnaceCookTime == getTicksToCook();
-	}
+            smeltingStack = null;
+            updateBlockState(false);
+            this.onInventoryChanged();
+        }
 
-	@Override
-	protected void finishWork() {
-		ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(
-				this.smeltingStack);
+        furnaceCookTime = 0;
+    }
 
-		if (itemstack != null) {
-			if (this.furnaceItemStacks[1] == null) {
-				this.furnaceItemStacks[1] = itemstack.copy();
-				this.furnaceItemStacks[1].stackSize = smeltingStack.stackSize;
-			} else if (this.furnaceItemStacks[1].isItemEqual(itemstack)) {
-				furnaceItemStacks[1].stackSize += smeltingStack.stackSize;
-			}
+    protected void updateBlockState(boolean working) {
+        BlockMicroFurnace.updateFurnaceBlockState(working, this.worldObj,
+                                                  this.xCoord, this.yCoord, this.zCoord);
+    }
 
-			smeltingStack = null;
-			updateBlockState(false);
-			this.onInventoryChanged();
-		}
+    @Override
+    public boolean hasGUI() {
+        return true;
+    }
 
-		furnaceCookTime = 0;
-	}
+    @Override
+    public void openChest() {
+    }
 
-	protected void updateBlockState(boolean working) {
-		BlockMicroFurnace.updateFurnaceBlockState(working, this.worldObj,
-				this.xCoord, this.yCoord, this.zCoord);
-	}
+    @Override
+    public void closeChest() {
+    }
 
-	@Override
-	public boolean hasGUI() {
-		return true;
-	}
+    /**
+     * Returns true if automation is allowed to insert the given stack (ignoring
+     * stack size) into the given slot.
+     */
+    public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack) {
+        return par1 != 1;
+    }
 
-	@Override
-	public void openChest() {
-	}
+    /**
+     * Get the size of the side inventory.
+     */
+    public int[] getSizeInventorySide(int par1) {
+        if (par1 == 1) {
+            return new int[]{0};
+        }
+        else {
+            return new int[]{1};
+        }
+    }
 
-	@Override
-	public void closeChest() {
-	}
+    public boolean func_102007_a(int par1, ItemStack par2ItemStack, int par3) {
+        return this.isStackValidForSlot(par1, par2ItemStack);
+    }
 
-	/**
-	 * Returns true if automation is allowed to insert the given stack (ignoring
-	 * stack size) into the given slot.
-	 */
-	public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack) {
-		return par1 != 1;
-	}
+    public boolean func_102008_b(int par1, ItemStack par2ItemStack, int par3) {
+        return true;
+    }
 
-	/**
-	 * Get the size of the side inventory.
-	 */
-	public int[] getSizeInventorySide(int par1) {
-		if (par1 == 1)
-			return new int[] { 0 };
-		else
-			return new int[] { 1 };
-	}
+    /**
+     * ********************************************************************************
+     * This function is here for compatibilities sake, Modders should Check for
+     * Sided before ContainerWorldly, Vanilla Minecraft does not follow the
+     * sided standard that Modding has for a while.
+     * <p/>
+     * In vanilla:
+     * <p/>
+     * Top: Ores Sides: Fuel Bottom: Output
+     * <p/>
+     * Standard Modding: Top: Ores Sides: Output Bottom: Fuel
+     * <p/>
+     * The Modding one is designed after the GUI, the vanilla one is designed
+     * because its intended use is for the hopper, which logically would take
+     * things in from the top.
+     * <p/>
+     * This will possibly be removed in future updates, and make vanilla the
+     * definitive standard.
+     */
 
-	public boolean func_102007_a(int par1, ItemStack par2ItemStack, int par3) {
-		return this.isStackValidForSlot(par1, par2ItemStack);
-	}
+    @Override
+    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+        switch (i) {
+            case (1):
+                return false;
+            default:
+                return true;
+        }
+    }
 
-	public boolean func_102008_b(int par1, ItemStack par2ItemStack, int par3) {
-		return true;
-	}
+    @Override
+    public int[] getAccessibleSlotsFromSide(int var1) {
+        switch (var1) {
+            case (1):
+                return new int[]{0};
+            case (0):
+            case (2):
+            case (3):
+            case (4):
+            case (5):
+                return new int[]{1};
+            default:
+                return new int[]{};
+        }
+    }
 
-	/***********************************************************************************
-	 * This function is here for compatibilities sake, Modders should Check for
-	 * Sided before ContainerWorldly, Vanilla Minecraft does not follow the
-	 * sided standard that Modding has for a while.
-	 * 
-	 * In vanilla:
-	 * 
-	 * Top: Ores Sides: Fuel Bottom: Output
-	 * 
-	 * Standard Modding: Top: Ores Sides: Output Bottom: Fuel
-	 * 
-	 * The Modding one is designed after the GUI, the vanilla one is designed
-	 * because its intended use is for the hopper, which logically would take
-	 * things in from the top.
-	 * 
-	 * This will possibly be removed in future updates, and make vanilla the
-	 * definitive standard.
-	 */
+    @Override
+    public boolean canInsertItem(int i, ItemStack itemstack, int j) {
+        switch (i) {
+            case (1):
+                return false;
+            default:
+                return true;
+        }
+    }
 
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		switch (i) {
-		case (1):
-			return false;
-		default:
-			return true;
-		}
-	}
-
-	@Override
-	public int[] getAccessibleSlotsFromSide(int var1) {
-		switch (var1) {
-		case (1):
-			return new int[] { 0 };
-		case (0):
-		case (2):
-		case (3):
-		case (4):
-		case (5):
-			return new int[] { 1 };
-		default:
-			return new int[] {};
-		}
-	}
-
-	@Override
-	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
-		switch (i) {
-		case (1):
-			return false;
-		default:
-			return true;
-		}
-	}
-
-	@Override
-	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
-		return true;
-	}
+    @Override
+    public boolean canExtractItem(int i, ItemStack itemstack, int j) {
+        return true;
+    }
 }

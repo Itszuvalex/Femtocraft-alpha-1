@@ -1,322 +1,343 @@
 package femtocraft.research.tiles;
 
-import java.util.logging.Level;
-
+import femtocraft.Femtocraft;
+import femtocraft.api.ITechnologyCarrier;
+import femtocraft.core.tiles.TileEntityBase;
+import femtocraft.managers.research.ResearchTechnology;
+import femtocraft.utils.FemtocraftDataUtils.Saveable;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet132TileEntityData;
-import femtocraft.Femtocraft;
-import femtocraft.api.ITechnologyCarrier;
-import femtocraft.core.tiles.TileEntityBase;
-import femtocraft.managers.research.ResearchTechnology;
-import femtocraft.utils.FemtocraftDataUtils.Saveable;
 
 public class TileEntityResearchConsole extends TileEntityBase implements
-		IInventory {
-	public static final String PACKET_CHANNEL = "Femtocraft" + "." + "rcon";
+                                                              IInventory {
+    public static final String PACKET_CHANNEL = "Femtocraft" + "." + "rcon";
+    private static final int ticksToResearch = 400;
+    public
+    @Saveable(desc = true)
+    String displayTech = null;
+    private
+    @Saveable(desc = true)
+    String researchingTech = null;
+    private
+    @Saveable
+    int progress = 0;
+    private
+    @Saveable
+    int progressMax = 0;
+    private
+    @Saveable
+    ItemStack[] inventory = new ItemStack[10];
 
-	public @Saveable(desc = true)
-	String displayTech = null;
-	private @Saveable(desc = true)
-	String researchingTech = null;
-	private @Saveable
-	int progress = 0;
-	private @Saveable
-	int progressMax = 0;
-	private @Saveable
-	ItemStack[] inventory = new ItemStack[10];
+    public TileEntityResearchConsole() {
+        super();
+    }
 
-	private static final int ticksToResearch = 400;
+    /*
+     * (non-Javadoc)
+     *
+     * @see femtocraft.core.tiles.TileEntityBase#hasGUI()
+     */
+    @Override
+    public boolean hasGUI() {
+        return true;
+    }
 
-	public TileEntityResearchConsole() {
-		super();
-	}
+    @Override
+    public void onInventoryChanged() {
+        super.onInventoryChanged();
+        checkForTechnology();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see femtocraft.core.tiles.TileEntityBase#hasGUI()
-	 */
-	@Override
-	public boolean hasGUI() {
-		return true;
-	}
+    private void checkForTechnology() {
+        if (worldObj == null) {
+            return;
+        }
+        if (worldObj.isRemote) {
+            return;
+        }
 
-	@Override
-	public void onInventoryChanged() {
-		super.onInventoryChanged();
-		checkForTechnology();
-	}
+        boolean hadTech = displayTech != null;
+        displayTech = null;
 
-	private void checkForTechnology() {
-		if (worldObj == null)
-			return;
-		if (worldObj.isRemote)
-			return;
+        for (ResearchTechnology tech : Femtocraft.researchManager
+                .getTechnologies()) {
+            if (Femtocraft.researchManager.hasPlayerDiscoveredTechnology(
+                    getOwner(), tech)) {
+                if (matchesTechnology(tech)) {
+                    displayTech = tech.name;
+                    if (worldObj != null) {
+                        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                    }
+                    return;
+                }
+            }
+        }
 
-		boolean hadTech = displayTech != null;
-		displayTech = null;
+        if (hadTech && displayTech == null) {
+            if (worldObj != null) {
+                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+            }
+        }
+    }
 
-		for (ResearchTechnology tech : Femtocraft.researchManager
-				.getTechnologies()) {
-			if (Femtocraft.researchManager.hasPlayerDiscoveredTechnology(
-					getOwner(), tech)) {
-				if (matchesTechnology(tech)) {
-					displayTech = tech.name;
-					if (worldObj != null)
-						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-					return;
-				}
-			}
-		}
+    public int getResearchProgress() {
+        return progress;
+    }
 
-		if (hadTech && displayTech == null) {
-			if (worldObj != null)
-				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		}
-	}
+    public void setResearchProgress(int progress) {
+        this.progress = progress;
+    }
 
-	public void setResearchProgress(int progress) {
-		this.progress = progress;
-	}
+    public int getResearchProgressScaled(int scale) {
+        if (progressMax == 0) {
+            return 0;
+        }
+        return (progress * scale) / progressMax;
+    }
 
-	public int getResearchProgress() {
-		return progress;
-	}
+    public boolean isResearching() {
+        return researchingTech != null;
+    }
 
-	public int getResearchProgressScaled(int scale) {
-		if (progressMax == 0)
-			return 0;
-		return (progress * scale) / progressMax;
-	}
+    public int getResearchMax() {
+        return progressMax;
+    }
 
-	public boolean isResearching() {
-		return researchingTech != null;
-	}
+    public void setResearchMax(int progressMax) {
+        this.progressMax = progressMax;
+    }
 
-	public void setResearchMax(int progressMax) {
-		this.progressMax = progressMax;
-	}
+    public String getResearchingName() {
+        return researchingTech;
+    }
 
-	public int getResearchMax() {
-		return progressMax;
-	}
+    @Override
+    public void updateEntity() {
+        super.updateEntity();
+    }
 
-	public String getResearchingName() {
-		return researchingTech;
-	}
+    @Override
+    public void femtocraftServerUpdate() {
+        super.femtocraftServerUpdate();
+        if (researchingTech != null) {
+            if (progress++ >= progressMax) {
+                finishWork();
+            }
+        }
+    }
 
-	@Override
-	public void updateEntity() {
-		super.updateEntity();
-	}
+    public void startWork() {
+        if (!canWork()) {
+            return;
+        }
 
-	@Override
-	public void femtocraftServerUpdate() {
-		super.femtocraftServerUpdate();
-		if (researchingTech != null) {
-			if (progress++ >= progressMax) {
-				finishWork();
-			}
-		}
-	}
+        researchingTech = displayTech;
+        progressMax = ticksToResearch;
+        progress = 0;
 
-	public void startWork() {
-		if (!canWork())
-			return;
+        ResearchTechnology tech = Femtocraft.researchManager
+                .getTechnology(displayTech);
 
-		researchingTech = displayTech;
-		progressMax = ticksToResearch;
-		progress = 0;
+        for (int i = 0; i < 9 && i < tech.researchMaterials.size(); ++i) {
+            if (tech.researchMaterials.get(i) == null) {
+                continue;
+            }
+            decrStackSize(i, tech.researchMaterials.get(i).stackSize);
+        }
 
-		ResearchTechnology tech = Femtocraft.researchManager
-				.getTechnology(displayTech);
+        this.onInventoryChanged();
+    }
 
-		for (int i = 0; i < 9 && i < tech.researchMaterials.size(); ++i) {
-			if (tech.researchMaterials.get(i) == null)
-				continue;
-			decrStackSize(i, tech.researchMaterials.get(i).stackSize);
-		}
+    private boolean canWork() {
+        if (displayTech == null || displayTech.isEmpty()) {
+            return false;
+        }
+        if (researchingTech != null && !researchingTech.isEmpty()) {
+            return false;
+        }
+        ResearchTechnology tech = Femtocraft.researchManager
+                .getTechnology(displayTech);
 
-		this.onInventoryChanged();
-	}
+        return matchesTechnology(tech);
+    }
 
-	private boolean canWork() {
-		if (displayTech == null || displayTech.isEmpty())
-			return false;
-		if (researchingTech != null && !researchingTech.isEmpty())
-			return false;
-		ResearchTechnology tech = Femtocraft.researchManager
-				.getTechnology(displayTech);
+    private boolean matchesTechnology(ResearchTechnology tech) {
+        if (tech == null) {
+            return false;
+        }
+        if (tech.researchMaterials == null) {
+            return false;
+        }
+        for (int i = 0; i < 9 && i < tech.researchMaterials.size(); ++i) {
+            if (!compareItemStack(tech.researchMaterials.get(i), inventory[i])) {
+                return false;
+            }
+        }
 
-		return matchesTechnology(tech);
-	}
+        return true;
+    }
 
-	private boolean matchesTechnology(ResearchTechnology tech) {
-		if (tech == null)
-			return false;
-		if (tech.researchMaterials == null)
-			return false;
-		for (int i = 0; i < 9 && i < tech.researchMaterials.size(); ++i) {
-			if (!compareItemStack(tech.researchMaterials.get(i), inventory[i]))
-				return false;
-		}
+    private boolean compareItemStack(ItemStack tech, ItemStack inv) {
+        if (tech == null && inv == null) {
+            return true;
+        }
+        if (tech == null && inv != null) {
+            return false;
+        }
+        if (tech != null && inv == null) {
+            return false;
+        }
 
-		return true;
-	}
+        if (tech.itemID != inv.itemID) {
+            return false;
+        }
+        if (tech.getItemDamage() != inv.getItemDamage()) {
+            return false;
+        }
+        if (tech.stackSize > inv.stackSize) {
+            return false;
+        }
 
-	private boolean compareItemStack(ItemStack tech, ItemStack inv) {
-		if (tech == null && inv == null)
-			return true;
-		if (tech == null && inv != null)
-			return false;
-		if (tech != null && inv == null)
-			return false;
+        return true;
+    }
 
-		if (tech.itemID != inv.itemID)
-			return false;
-		if (tech.getItemDamage() != inv.getItemDamage())
-			return false;
-		if (tech.stackSize > inv.stackSize)
-			return false;
+    private void finishWork() {
+        progress = 0;
+        progressMax = 0;
 
-		return true;
-	}
+        ResearchTechnology tech = Femtocraft.researchManager
+                .getTechnology(researchingTech);
+        if (tech == null) {
+            researchingTech = null;
+            return;
+        }
 
-	private void finishWork() {
-		progress = 0;
-		progressMax = 0;
+        Item techItem = null;
+        switch (tech.level) {
+            case MACRO:
+            case MICRO:
+                techItem = Femtocraft.itemMicroTechnology;
+                break;
+            case NANO:
+                techItem = Femtocraft.itemNanoTechnology;
+                break;
+            case DIMENSIONAL:
+            case TEMPORAL:
+            case FEMTO:
+                techItem = Femtocraft.itemFemtoTechnology;
+                break;
+        }
+        ItemStack techstack = new ItemStack(techItem, 1);
+        ((ITechnologyCarrier) techItem).setTechnology(techstack,
+                                                      researchingTech);
+        researchingTech = null;
+        inventory[inventory.length - 1] = techstack;
+        onInventoryChanged();
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+    }
 
-		ResearchTechnology tech = Femtocraft.researchManager
-				.getTechnology(researchingTech);
-		if (tech == null) {
-			researchingTech = null;
-			return;
-		}
+    @Override
+    public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
+        super.readFromNBT(par1nbtTagCompound);
+        checkForTechnology();
+    }
 
-		Item techItem = null;
-		switch (tech.level) {
-		case MACRO:
-		case MICRO:
-			techItem = Femtocraft.itemMicroTechnology;
-			break;
-		case NANO:
-			techItem = Femtocraft.itemNanoTechnology;
-			break;
-		case DIMENSIONAL:
-		case TEMPORAL:
-		case FEMTO:
-			techItem = Femtocraft.itemFemtoTechnology;
-			break;
-		}
-		ItemStack techstack = new ItemStack(techItem, 1);
-		((ITechnologyCarrier) techItem).setTechnology(techstack,
-				researchingTech);
-		researchingTech = null;
-		inventory[inventory.length - 1] = techstack;
-		onInventoryChanged();
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-	}
+    @Override
+    public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
+        super.writeToNBT(par1nbtTagCompound);
+    }
 
-	@Override
-	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-		super.readFromNBT(par1nbtTagCompound);
-		checkForTechnology();
-	}
+    @Override
+    public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
+        super.onDataPacket(net, pkt);
+    }
 
-	@Override
-	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-		super.writeToNBT(par1nbtTagCompound);
-	}
+    @Override
+    public void saveToDescriptionCompound(NBTTagCompound compound) {
+        super.saveToDescriptionCompound(compound);
+    }
 
-	@Override
-	public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
-		super.onDataPacket(net, pkt);
-	}
+    @Override
+    public int getSizeInventory() {
+        return inventory.length;
+    }
 
-	@Override
-	public void saveToDescriptionCompound(NBTTagCompound compound) {
-		super.saveToDescriptionCompound(compound);
-	}
+    @Override
+    public ItemStack getStackInSlot(int i) {
+        return inventory[i];
+    }
 
-	@Override
-	public int getSizeInventory() {
-		return inventory.length;
-	}
+    @Override
+    public ItemStack decrStackSize(int i, int j) {
+        if (this.inventory[i] != null) {
+            ItemStack itemstack;
 
-	@Override
-	public ItemStack getStackInSlot(int i) {
-		return inventory[i];
-	}
+            if (this.inventory[i].stackSize <= j) {
+                itemstack = this.inventory[i];
+                this.inventory[i] = null;
+                return itemstack;
+            }
+            else {
+                itemstack = this.inventory[i].splitStack(j);
 
-	@Override
-	public ItemStack decrStackSize(int i, int j) {
-		if (this.inventory[i] != null) {
-			ItemStack itemstack;
+                if (this.inventory[i].stackSize == 0) {
+                    this.inventory[i] = null;
+                }
 
-			if (this.inventory[i].stackSize <= j) {
-				itemstack = this.inventory[i];
-				this.inventory[i] = null;
-				return itemstack;
-			} else {
-				itemstack = this.inventory[i].splitStack(j);
+                return itemstack;
+            }
+        }
+        else {
+            return null;
+        }
+    }
 
-				if (this.inventory[i].stackSize == 0) {
-					this.inventory[i] = null;
-				}
+    @Override
+    public ItemStack getStackInSlotOnClosing(int i) {
+        return inventory[i];
+    }
 
-				return itemstack;
-			}
-		} else {
-			return null;
-		}
-	}
+    @Override
+    public void setInventorySlotContents(int i, ItemStack itemstack) {
+        inventory[i] = itemstack;
 
-	@Override
-	public ItemStack getStackInSlotOnClosing(int i) {
-		return inventory[i];
-	}
+    }
 
-	@Override
-	public void setInventorySlotContents(int i, ItemStack itemstack) {
-		inventory[i] = itemstack;
+    @Override
+    public String getInvName() {
+        return "Research Console";
+    }
 
-	}
+    @Override
+    public boolean isInvNameLocalized() {
+        return false;
+    }
 
-	@Override
-	public String getInvName() {
-		return "Research Console";
-	}
+    @Override
+    public int getInventoryStackLimit() {
+        return 64;
+    }
 
-	@Override
-	public boolean isInvNameLocalized() {
-		return false;
-	}
+    @Override
+    public void openChest() {
+    }
 
-	@Override
-	public int getInventoryStackLimit() {
-		return 64;
-	}
+    @Override
+    public void closeChest() {
+    }
 
-	@Override
-	public void openChest() {
-	}
-
-	@Override
-	public void closeChest() {
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		switch (i) {
-		case 9:
-			return false;
-		default:
-			return true;
-		}
-	}
+    @Override
+    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+        switch (i) {
+            case 9:
+                return false;
+            default:
+                return true;
+        }
+    }
 
 }

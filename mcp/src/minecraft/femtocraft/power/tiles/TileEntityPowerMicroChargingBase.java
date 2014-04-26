@@ -1,95 +1,97 @@
 package femtocraft.power.tiles;
 
+import femtocraft.api.IChargingBase;
+import femtocraft.api.IChargingCoil;
+import femtocraft.managers.research.EnumTechLevel;
+import femtocraft.utils.FemtocraftDataUtils.Saveable;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
-import femtocraft.api.IChargingBase;
-import femtocraft.api.IChargingCoil;
-import femtocraft.managers.research.EnumTechLevel;
-import femtocraft.utils.FemtocraftDataUtils.Saveable;
 
 public class TileEntityPowerMicroChargingBase extends TileEntityPowerProducer {
-	public int numCoils;
-	public float powerPerTick;
-	public @Saveable
-	float storedPowerIncrement;
+    public int numCoils;
+    public float powerPerTick;
+    public
+    @Saveable
+    float storedPowerIncrement;
 
-	public TileEntityPowerMicroChargingBase() {
-		super();
-		powerPerTick = 0;
-		setTechLevel(EnumTechLevel.MICRO);
-	}
+    public TileEntityPowerMicroChargingBase() {
+        super();
+        powerPerTick = 0;
+        setTechLevel(EnumTechLevel.MICRO);
+    }
 
-	@Override
-	public void updateEntity() {
-		super.updateEntity();
+    @Override
+    public void updateEntity() {
+        super.updateEntity();
 
-		if (!worldObj.isRemote) {
-			numCoils = 0;
-			powerPerTick = 0;
+        if (!worldObj.isRemote) {
+            numCoils = 0;
+            powerPerTick = 0;
 
-			Block base = Block.blocksList[worldObj.getBlockId(xCoord, yCoord,
-					zCoord)];
+            Block base = Block.blocksList[worldObj.getBlockId(xCoord, yCoord,
+                                                              zCoord)];
 
-			boolean searching = true;
-			for (int i = 0; searching
-					&& (i < ((IChargingBase) base).maxCoilsSupported(worldObj,
-							xCoord, yCoord, zCoord)); ++i) {
-				Block block = Block.blocksList[worldObj.getBlockId(xCoord,
-						yCoord + i + 1, zCoord)];
+            boolean searching = true;
+            for (int i = 0; searching
+                    && (i < ((IChargingBase) base).maxCoilsSupported(worldObj,
+                                                                     xCoord, yCoord, zCoord)); ++i) {
+                Block block = Block.blocksList[worldObj.getBlockId(xCoord,
+                                                                   yCoord + i + 1, zCoord)];
 
-				if ((!(block instanceof IChargingCoil))) {
-					searching = false;
-					continue;
-				}
+                if ((!(block instanceof IChargingCoil))) {
+                    searching = false;
+                    continue;
+                }
 
-				IChargingCoil coil = (IChargingCoil) block;
-				powerPerTick += coil.powerPerTick(worldObj, xCoord, yCoord + i
-						+ 1, zCoord);
-				numCoils++;
-			}
+                IChargingCoil coil = (IChargingCoil) block;
+                powerPerTick += coil.powerPerTick(worldObj, xCoord, yCoord + i
+                        + 1, zCoord);
+                numCoils++;
+            }
 
-			storedPowerIncrement += powerPerTick;
-			while (storedPowerIncrement > 1.0f) {
-				storedPowerIncrement -= 1.0f;
-				charge(ForgeDirection.UNKNOWN, 1);
-			}
-		}
-	}
+            storedPowerIncrement += powerPerTick;
+            while (storedPowerIncrement > 1.0f) {
+                storedPowerIncrement -= 1.0f;
+                charge(ForgeDirection.UNKNOWN, 1);
+            }
+        }
+    }
 
-	@Override
-	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-		super.readFromNBT(par1nbtTagCompound);
-		// par1nbtTagCompound.getFloat("powerIncrement");
-	}
+    @Override
+    public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
+        super.readFromNBT(par1nbtTagCompound);
+        // par1nbtTagCompound.getFloat("powerIncrement");
+    }
 
-	@Override
-	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-		super.writeToNBT(par1nbtTagCompound);
-		// par1nbtTagCompound.setFloat("powerIncrement", storedPowerIncrement);
-	}
+    @Override
+    public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
+        super.writeToNBT(par1nbtTagCompound);
+        // par1nbtTagCompound.setFloat("powerIncrement", storedPowerIncrement);
+    }
 
-	@Override
-	public boolean canConnect(ForgeDirection from) {
-		return !(from == ForgeDirection.UP);
-	}
+    @Override
+    public boolean canConnect(ForgeDirection from) {
+        return !(from == ForgeDirection.UP);
+    }
 
-	@Override
-	public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
-		if (!isUseableByPlayer(par5EntityPlayer))
-			return false;
+    @Override
+    public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
+        if (!isUseableByPlayer(par5EntityPlayer)) {
+            return false;
+        }
 
-		ItemStack item = par5EntityPlayer.getHeldItem();
-		if (item != null
-				&& (item.getItem() instanceof ItemBlock)
-				&& Block.blocksList[((ItemBlock) item.getItem()).getBlockID()] instanceof IChargingCoil) {
-			return true;
-		}
+        ItemStack item = par5EntityPlayer.getHeldItem();
+        if (item != null
+                && (item.getItem() instanceof ItemBlock)
+                && Block.blocksList[((ItemBlock) item.getItem()).getBlockID()] instanceof IChargingCoil) {
+            return true;
+        }
 
-		return super.onSideActivate(par5EntityPlayer, side);
-	}
+        return super.onSideActivate(par5EntityPlayer, side);
+    }
 
 }

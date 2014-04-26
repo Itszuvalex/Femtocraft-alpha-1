@@ -7,24 +7,24 @@ import net.minecraftforge.fluids.Fluid;
 
 public class FluidMass extends Fluid {
 
-	public FluidMass() {
-		super("Mass");
-		setUnlocalizedName("FluidMass");
-		setLuminosity(1);
-		setDensity(5000);
-		setTemperature(600);
-		setViscosity(3000);
-		setGaseous(false);
-		setRarity(EnumRarity.rare);
-	}
+    public FluidMass() {
+        super("Mass");
+        setUnlocalizedName("FluidMass");
+        setLuminosity(1);
+        setDensity(5000);
+        setTemperature(600);
+        setViscosity(3000);
+        setGaseous(false);
+        setRarity(EnumRarity.rare);
+    }
 
-	@Override
-	public Icon getStillIcon() {
-		return Femtocraft.mass_block.stillIcon;
-	}
+    @Override
+    public Icon getStillIcon() {
+        return Femtocraft.mass_block.stillIcon;
+    }
 
-	@Override
-	public Icon getFlowingIcon() {
-		return Femtocraft.mass_block.flowingIcon;
-	}
+    @Override
+    public Icon getFlowingIcon() {
+        return Femtocraft.mass_block.flowingIcon;
+    }
 }

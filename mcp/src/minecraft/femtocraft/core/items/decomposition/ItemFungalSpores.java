@@ -5,15 +5,15 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 
 public class ItemFungalSpores extends Item {
-	public ItemFungalSpores(int id) {
-		super(id);
-		setMaxStackSize(64);
-		setCreativeTab(Femtocraft.femtocraftTab);
-		setTextureName(Femtocraft.ID.toLowerCase() + ":" + "ItemFungalSpores");
-	}
+    public ItemFungalSpores(int id) {
+        super(id);
+        setMaxStackSize(64);
+        setCreativeTab(Femtocraft.femtocraftTab);
+        setTextureName(Femtocraft.ID.toLowerCase() + ":" + "ItemFungalSpores");
+    }
 
-	public void updateIcons(IconRegister par1IconRegister) {
-		this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
-				.toLowerCase() + ":" + "ItemFungalSpores");
-	}
+    public void updateIcons(IconRegister par1IconRegister) {
+        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
+                                                              .toLowerCase() + ":" + "ItemFungalSpores");
+    }
 }

@@ -4,8 +4,9 @@
     <output url="file://$MCP_LOC$/eclipse/Minecraft/bin" />
     <output-test url="file://$MODULE_DIR$/out/test/Femtocraft" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$/Femtocraft">
-      <sourceFolder url="file://$MODULE_DIR$/Femtocraft/src" isTestSource="false" />
+    <content url="file://$MODULE_DIR$/Femtocraft/src" />
+    <content url="file://$MCP_LOC$/src/minecraft/femtocraft">
+      <sourceFolder url="file://$MCP_LOC$/src/minecraft/femtocraft" isTestSource="false" packagePrefix="femtocraft" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />

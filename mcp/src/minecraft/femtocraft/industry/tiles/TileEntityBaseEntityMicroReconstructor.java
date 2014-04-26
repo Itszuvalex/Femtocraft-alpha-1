@@ -1,14 +1,5 @@
 package femtocraft.industry.tiles;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
@@ -18,509 +9,540 @@ import femtocraft.managers.assembler.AssemblerRecipe;
 import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.utils.FemtocraftDataUtils.Saveable;
 import femtocraft.utils.FemtocraftUtils;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.fluids.*;
 
 public class TileEntityBaseEntityMicroReconstructor extends
-		TileEntityBaseEntityIndustry implements ISidedInventory, IFluidHandler {
-	// TODO: Load from configs
-	public static int powerToCook = 40;
-	// TODO: Load from configs
-	public static int ticksToCook = 100;
-	// TODO: Load from configs
-	public static int maxSmelt = 1;
-	/**
-	 * The number of ticks that the current item has been cooking for
-	 */
-	public @Saveable
-	int cookTime = 0;
-	public @Saveable
-	int currentPower = 0;
-	public @Saveable
-	ItemStack[] reconstructingStacks = null;
+                                                    TileEntityBaseEntityIndustry implements ISidedInventory, IFluidHandler {
+    // TODO: Load from configs
+    public static int powerToCook = 40;
+    // TODO: Load from configs
+    public static int ticksToCook = 100;
+    // TODO: Load from configs
+    public static int maxSmelt = 1;
+    /**
+     * The number of ticks that the current item has been cooking for
+     */
+    public
+    @Saveable
+    int cookTime = 0;
+    public
+    @Saveable
+    int currentPower = 0;
+    public
+    @Saveable
+    ItemStack[] reconstructingStacks = null;
 
-	/**
-	 * The ItemStacks that hold the items currently being used in the furnace
-	 */
-	private @Saveable
-	FluidTank tank;
-	private boolean hasItems = true;
-	/**
-	 * Slots 0-8 are for recipe area - these are dummy items, and should never
-	 * be touched except when setting for display purposes Slot 9 is for output
-	 * Slot 10 is for schematic card Slots 11-28 are internal inventory, to pull
-	 * from when building
-	 */
-	private @Saveable
-	ItemStack[] reconstructorItemStacks = new ItemStack[29];
-	private @Saveable
-	String field_94130_e;
-	public TileEntityBaseEntityMicroReconstructor() {
-		super();
-		setMaxStorage(800);
-		tank = new FluidTank(600);
-		setTechLevel(EnumTechLevel.MICRO);
-	}
+    /**
+     * The ItemStacks that hold the items currently being used in the furnace
+     */
+    private
+    @Saveable
+    FluidTank tank;
+    private boolean hasItems = true;
+    /**
+     * Slots 0-8 are for recipe area - these are dummy items, and should never
+     * be touched except when setting for display purposes Slot 9 is for output
+     * Slot 10 is for schematic card Slots 11-28 are internal inventory, to pull
+     * from when building
+     */
+    private
+    @Saveable
+    ItemStack[] reconstructorItemStacks = new ItemStack[29];
+    private
+    @Saveable
+    String field_94130_e;
 
-	protected int getMaxSimultaneousSmelt() {
-		return maxSmelt;
-	}
+    public TileEntityBaseEntityMicroReconstructor() {
+        super();
+        setMaxStorage(800);
+        tank = new FluidTank(600);
+        setTechLevel(EnumTechLevel.MICRO);
+    }
 
-	protected int getTicksToCook() {
-		return ticksToCook;
-	}
+    protected int getMaxSimultaneousSmelt() {
+        return maxSmelt;
+    }
 
-	protected int getPowerToCook() {
-		return powerToCook;
-	}
+    protected int getTicksToCook() {
+        return ticksToCook;
+    }
 
-	public int getMassAmount() {
-		return tank.getFluidAmount();
-	}
+    protected int getPowerToCook() {
+        return powerToCook;
+    }
 
-	public int getMassCapacity() {
-		return tank.getCapacity();
-	}
+    public int getMassAmount() {
+        return tank.getFluidAmount();
+    }
 
-	private IAssemblerSchematic getSchematic() {
-		ItemStack is = reconstructorItemStacks[10];
-		if (is == null)
-			return null;
-		if (is.getItem() instanceof IAssemblerSchematic)
-			return (IAssemblerSchematic) is.getItem();
+    public int getMassCapacity() {
+        return tank.getCapacity();
+    }
 
-		return null;
-	}
+    private IAssemblerSchematic getSchematic() {
+        ItemStack is = reconstructorItemStacks[10];
+        if (is == null) {
+            return null;
+        }
+        if (is.getItem() instanceof IAssemblerSchematic) {
+            return (IAssemblerSchematic) is.getItem();
+        }
 
-	@Override
-	public void onInventoryChanged() {
-		IAssemblerSchematic as = getSchematic();
-		if (as != null) {
-			AssemblerRecipe recipe = as.getRecipe(reconstructorItemStacks[10]);
-			if (recipe == null) {
-				for (int i = 0; i < 9; i++) {
-					reconstructorItemStacks[i] = null;
-				}
-			} else {
-				for (int i = 0; i < recipe.input.length; ++i) {
-					ItemStack is = recipe.input[i];
-					reconstructorItemStacks[i] = (is == null) ? null : is
-							.copy();
-				}
-			}
-		} else {
-			for (int i = 0; i < 9; i++) {
-				reconstructorItemStacks[i] = null;
-			}
-		}
+        return null;
+    }
 
-		hasItems = true;
+    @Override
+    public void onInventoryChanged() {
+        IAssemblerSchematic as = getSchematic();
+        if (as != null) {
+            AssemblerRecipe recipe = as.getRecipe(reconstructorItemStacks[10]);
+            if (recipe == null) {
+                for (int i = 0; i < 9; i++) {
+                    reconstructorItemStacks[i] = null;
+                }
+            }
+            else {
+                for (int i = 0; i < recipe.input.length; ++i) {
+                    ItemStack is = recipe.input[i];
+                    reconstructorItemStacks[i] = (is == null) ? null : is
+                            .copy();
+                }
+            }
+        }
+        else {
+            for (int i = 0; i < 9; i++) {
+                reconstructorItemStacks[i] = null;
+            }
+        }
 
-		super.onInventoryChanged();
-	}
+        hasItems = true;
 
-	/**
-	 * Returns the number of slots in the inventory.
-	 */
-	public int getSizeInventory() {
-		return this.reconstructorItemStacks.length;
-	}
+        super.onInventoryChanged();
+    }
 
-	/**
-	 * Returns the stack in slot i
-	 */
-	public ItemStack getStackInSlot(int par1) {
-		return this.reconstructorItemStacks[par1];
-	}
+    /**
+     * Returns the number of slots in the inventory.
+     */
+    public int getSizeInventory() {
+        return this.reconstructorItemStacks.length;
+    }
 
-	/**
-	 * Removes from an inventory slot (first arg) up to a specified number
-	 * (second arg) of items and returns them in a new stack.
-	 */
-	public ItemStack decrStackSize(int par1, int par2) {
-		if (par1 < 9)
-			return null;
+    /**
+     * Returns the stack in slot i
+     */
+    public ItemStack getStackInSlot(int par1) {
+        return this.reconstructorItemStacks[par1];
+    }
 
-		if (this.reconstructorItemStacks[par1] != null) {
-			ItemStack itemstack;
+    /**
+     * Removes from an inventory slot (first arg) up to a specified number
+     * (second arg) of items and returns them in a new stack.
+     */
+    public ItemStack decrStackSize(int par1, int par2) {
+        if (par1 < 9) {
+            return null;
+        }
 
-			if (this.reconstructorItemStacks[par1].stackSize <= par2) {
-				itemstack = this.reconstructorItemStacks[par1];
-				this.reconstructorItemStacks[par1] = null;
-				this.onInventoryChanged();
-				return itemstack;
-			} else {
-				itemstack = this.reconstructorItemStacks[par1].splitStack(par2);
+        if (this.reconstructorItemStacks[par1] != null) {
+            ItemStack itemstack;
 
-				if (this.reconstructorItemStacks[par1].stackSize == 0) {
-					this.reconstructorItemStacks[par1] = null;
-				}
+            if (this.reconstructorItemStacks[par1].stackSize <= par2) {
+                itemstack = this.reconstructorItemStacks[par1];
+                this.reconstructorItemStacks[par1] = null;
+                this.onInventoryChanged();
+                return itemstack;
+            }
+            else {
+                itemstack = this.reconstructorItemStacks[par1].splitStack(par2);
 
-				this.onInventoryChanged();
-				return itemstack;
-			}
-		} else {
-			return null;
-		}
-	}
+                if (this.reconstructorItemStacks[par1].stackSize == 0) {
+                    this.reconstructorItemStacks[par1] = null;
+                }
 
-	/**
-	 * When some containers are closed they call this on each slot, then drop
-	 * whatever it returns as an EntityItem - like when you close a workbench
-	 * GUI.
-	 */
-	public ItemStack getStackInSlotOnClosing(int par1) {
-		if (par1 < 9)
-			return null;
+                this.onInventoryChanged();
+                return itemstack;
+            }
+        }
+        else {
+            return null;
+        }
+    }
 
-		if (this.reconstructorItemStacks[par1] != null) {
-			ItemStack itemstack = this.reconstructorItemStacks[par1];
-			this.reconstructorItemStacks[par1] = null;
-			return itemstack;
-		} else {
-			return null;
-		}
-	}
+    /**
+     * When some containers are closed they call this on each slot, then drop
+     * whatever it returns as an EntityItem - like when you close a workbench
+     * GUI.
+     */
+    public ItemStack getStackInSlotOnClosing(int par1) {
+        if (par1 < 9) {
+            return null;
+        }
 
-	/**
-	 * Sets the given item stack to the specified slot in the inventory (can be
-	 * crafting or armor sections).
-	 */
-	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
-		this.reconstructorItemStacks[par1] = par2ItemStack;
+        if (this.reconstructorItemStacks[par1] != null) {
+            ItemStack itemstack = this.reconstructorItemStacks[par1];
+            this.reconstructorItemStacks[par1] = null;
+            return itemstack;
+        }
+        else {
+            return null;
+        }
+    }
 
-		if (par2ItemStack != null
-				&& par2ItemStack.stackSize > this.getInventoryStackLimit()) {
-			par2ItemStack.stackSize = this.getInventoryStackLimit();
-		}
-	}
+    /**
+     * Sets the given item stack to the specified slot in the inventory (can be
+     * crafting or armor sections).
+     */
+    public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
+        this.reconstructorItemStacks[par1] = par2ItemStack;
 
-	/**
-	 * Returns the name of the inventory.
-	 */
-	public String getInvName() {
-		return this.isInvNameLocalized() ? this.field_94130_e
-				: "Microtech Reconstructor";
-	}
+        if (par2ItemStack != null
+                && par2ItemStack.stackSize > this.getInventoryStackLimit()) {
+            par2ItemStack.stackSize = this.getInventoryStackLimit();
+        }
+    }
 
-	/**
-	 * If this returns false, the inventory name will be used as an unlocalized
-	 * name, and translated into the player's language. Otherwise it will be
-	 * used directly.
-	 */
-	public boolean isInvNameLocalized() {
-		return this.field_94130_e != null && this.field_94130_e.length() > 0;
-	}
+    /**
+     * Returns the name of the inventory.
+     */
+    public String getInvName() {
+        return this.isInvNameLocalized() ? this.field_94130_e
+                : "Microtech Reconstructor";
+    }
 
-	public void func_94129_a(String par1Str) {
-		this.field_94130_e = par1Str;
-	}
+    /**
+     * If this returns false, the inventory name will be used as an unlocalized
+     * name, and translated into the player's language. Otherwise it will be
+     * used directly.
+     */
+    public boolean isInvNameLocalized() {
+        return this.field_94130_e != null && this.field_94130_e.length() > 0;
+    }
 
-	/**
-	 * Returns the maximum stack size for a inventory slot. Seems to always be
-	 * 64, possibly will be extended. *Isn't this more of a set than a get?*
-	 */
-	public int getInventoryStackLimit() {
-		return 64;
-	}
+    public void func_94129_a(String par1Str) {
+        this.field_94130_e = par1Str;
+    }
 
-	@SideOnly(Side.CLIENT)
-	/**
-	 * Returns an integer between 0 and the passed value representing how close the current item is to being completely
-	 * cooked
-	 */
-	public int getCookProgressScaled(int par1) {
-		return this.cookTime * par1 / ticksToCook;
-	}
+    /**
+     * Returns the maximum stack size for a inventory slot. Seems to always be
+     * 64, possibly will be extended. *Isn't this more of a set than a get?*
+     */
+    public int getInventoryStackLimit() {
+        return 64;
+    }
 
-	@Override
-	public boolean isWorking() {
-		return reconstructingStacks != null;
-	}
+    @SideOnly(Side.CLIENT)
+    /**
+     * Returns an integer between 0 and the passed value representing how close the current item is to being completely
+     * cooked
+     */
+    public int getCookProgressScaled(int par1) {
+        return this.cookTime * par1 / ticksToCook;
+    }
 
-	@Override
-	protected boolean canStartWork() {
-		if (reconstructingStacks != null
-				|| (reconstructorItemStacks[0] == null
-						&& reconstructorItemStacks[1] == null
-						&& reconstructorItemStacks[2] == null
-						&& reconstructorItemStacks[3] == null
-						&& reconstructorItemStacks[4] == null
-						&& reconstructorItemStacks[5] == null
-						&& reconstructorItemStacks[6] == null
-						&& reconstructorItemStacks[7] == null && reconstructorItemStacks[8] == null)
-				|| getSchematic() == null
-				|| this.getCurrentPower() < this.powerToCook && cookTime != 0) {
-			return false;
-		} else {
-			if (!hasItems)
-				return false;
-			AssemblerRecipe recipe = getSchematic().getRecipe(
-					reconstructorItemStacks[10]);
-			if (recipe == null)
-				return false;
-			if (hasItems(recipe.input)) {
-				hasItems = false;
-				return false;
-			}
-			return tank.getFluidAmount() >= recipe.mass
-					&& roomForItem(recipe.output);
-		}
-	}
+    @Override
+    public boolean isWorking() {
+        return reconstructingStacks != null;
+    }
 
-	protected void startWork() {
-		IAssemblerSchematic as = getSchematic();
-		AssemblerRecipe recipe = as.getRecipe(reconstructorItemStacks[10]);
+    @Override
+    protected boolean canStartWork() {
+        if (reconstructingStacks != null
+                || (reconstructorItemStacks[0] == null
+                && reconstructorItemStacks[1] == null
+                && reconstructorItemStacks[2] == null
+                && reconstructorItemStacks[3] == null
+                && reconstructorItemStacks[4] == null
+                && reconstructorItemStacks[5] == null
+                && reconstructorItemStacks[6] == null
+                && reconstructorItemStacks[7] == null && reconstructorItemStacks[8] == null)
+                || getSchematic() == null
+                || this.getCurrentPower() < this.powerToCook && cookTime != 0) {
+            return false;
+        }
+        else {
+            if (!hasItems) {
+                return false;
+            }
+            AssemblerRecipe recipe = getSchematic().getRecipe(
+                    reconstructorItemStacks[10]);
+            if (recipe == null) {
+                return false;
+            }
+            if (hasItems(recipe.input)) {
+                hasItems = false;
+                return false;
+            }
+            return tank.getFluidAmount() >= recipe.mass
+                    && roomForItem(recipe.output);
+        }
+    }
 
-		if (recipe == null)
-			return;
+    protected void startWork() {
+        IAssemblerSchematic as = getSchematic();
+        AssemblerRecipe recipe = as.getRecipe(reconstructorItemStacks[10]);
 
-		cookTime = 0;
-		ItemStack ocopy = recipe.output.copy();
-		ItemStack[] icopy = new ItemStack[9];
-		for (int i = 0; i < recipe.input.length; ++i) {
-			icopy[i] = recipe.input[i] == null ? null : recipe.input[i].copy();
-		}
-		reconstructingStacks = new ItemStack[9];
+        if (recipe == null) {
+            return;
+        }
 
-		int i = 0;
-		do {
-			// if (deconstructingStack.stackSize >= O
-			// this.getInventoryStackLimit())
-			// break;
-			// if (getStackInSlot(0) == null)
-			// break;
-			//
-			// for (ItemStack stack : recipe.input) {
-			// items.add(stack);
-			// }
-			//
-			// ItemStack[] ita = new ItemStack[items.size()];
-			// items.toArray(ita);
-			// if (!roomForItems(ita))
-			// break;
-			//
-			// if ((massReq += recipe.mass) > (tank.getCapacity() - tank
-			// .getFluidAmount()))
-			// break;
-			//
-			// if (!consume(getPowerToCook()))
-			// break;
-			//
-			// deconstructingStack.stackSize += recipe.output.stackSize;
-			// decrStackSize(0, recipe.output.stackSize);
-		} while (++i < getMaxSimultaneousSmelt());
-	}
+        cookTime = 0;
+        ItemStack ocopy = recipe.output.copy();
+        ItemStack[] icopy = new ItemStack[9];
+        for (int i = 0; i < recipe.input.length; ++i) {
+            icopy[i] = recipe.input[i] == null ? null : recipe.input[i].copy();
+        }
+        reconstructingStacks = new ItemStack[9];
 
-	@Override
-	protected void continueWork() {
-		++cookTime;
-	}
+        int i = 0;
+        do {
+            // if (deconstructingStack.stackSize >= O
+            // this.getInventoryStackLimit())
+            // break;
+            // if (getStackInSlot(0) == null)
+            // break;
+            //
+            // for (ItemStack stack : recipe.input) {
+            // items.add(stack);
+            // }
+            //
+            // ItemStack[] ita = new ItemStack[items.size()];
+            // items.toArray(ita);
+            // if (!roomForItems(ita))
+            // break;
+            //
+            // if ((massReq += recipe.mass) > (tank.getCapacity() - tank
+            // .getFluidAmount()))
+            // break;
+            //
+            // if (!consume(getPowerToCook()))
+            // break;
+            //
+            // deconstructingStack.stackSize += recipe.output.stackSize;
+            // decrStackSize(0, recipe.output.stackSize);
+        } while (++i < getMaxSimultaneousSmelt());
+    }
 
-	@Override
-	protected boolean canFinishWork() {
-		return cookTime >= ticksToCook;
-	}
+    @Override
+    protected void continueWork() {
+        ++cookTime;
+    }
 
-	@Override
-	protected void finishWork() {
-		boolean empty = false;
-		while (reconstructingStacks != null && !empty) {
-			// Cannot look off schematic, cause schematic can change mid-build
-			AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
-					.getRecipe(reconstructingStacks);
-			if (recipe == null) {
-				break;
-			}
-			empty = true;
-			for (int i = 0; i < 9; ++i) {
-				if (reconstructingStacks[i] != null) {
-					if ((reconstructingStacks[i].stackSize -= recipe.input[i].stackSize) <= 0) {
-						reconstructingStacks[i] = null;
-					} else {
-						empty = false;
-					}
-				}
-			}
+    @Override
+    protected boolean canFinishWork() {
+        return cookTime >= ticksToCook;
+    }
 
-			FemtocraftUtils.placeItem(recipe.output.copy(),
-					reconstructorItemStacks, new int[] { 0, 1, 2, 3, 4, 5, 6,
-							7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-							21, 22, 23, 24, 25, 26, 27, 28 });
+    @Override
+    protected void finishWork() {
+        boolean empty = false;
+        while (reconstructingStacks != null && !empty) {
+            // Cannot look off schematic, cause schematic can change mid-build
+            AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
+                    .getRecipe(reconstructingStacks);
+            if (recipe == null) {
+                break;
+            }
+            empty = true;
+            for (int i = 0; i < 9; ++i) {
+                if (reconstructingStacks[i] != null) {
+                    if ((reconstructingStacks[i].stackSize -= recipe.input[i].stackSize) <= 0) {
+                        reconstructingStacks[i] = null;
+                    }
+                    else {
+                        empty = false;
+                    }
+                }
+            }
 
-		}
-		reconstructingStacks = null;
-		cookTime = 0;
-	}
+            FemtocraftUtils.placeItem(recipe.output.copy(),
+                                      reconstructorItemStacks, new int[]{0, 1, 2, 3, 4, 5, 6,
+                            7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                            21, 22, 23, 24, 25, 26, 27, 28}
+            );
 
-	private boolean roomForItem(ItemStack item) {
-		ItemStack[] fake = new ItemStack[1];
-		ItemStack output = reconstructorItemStacks[9];
-		fake[0] = output == null ? null : output.copy();
-		return FemtocraftUtils.placeItem(item, fake, new int[] {});
-	}
+        }
+        reconstructingStacks = null;
+        cookTime = 0;
+    }
 
-	private boolean hasItems(ItemStack[] items) {
-		int offset = 11;
-		int size = reconstructorItemStacks.length;
-		ItemStack[] inv = new ItemStack[size - offset];
-		for (int i = offset; i < size - 1; ++i) {
-			ItemStack it = reconstructorItemStacks[i];
-			inv[i - offset] = it == null ? null : it.copy();
-		}
+    private boolean roomForItem(ItemStack item) {
+        ItemStack[] fake = new ItemStack[1];
+        ItemStack output = reconstructorItemStacks[9];
+        fake[0] = output == null ? null : output.copy();
+        return FemtocraftUtils.placeItem(item, fake, new int[]{});
+    }
 
-		for (ItemStack item : items) {
-			if (!FemtocraftUtils.removeItem(item, inv, new int[] {}))
-				return false;
-		}
+    private boolean hasItems(ItemStack[] items) {
+        int offset = 11;
+        int size = reconstructorItemStacks.length;
+        ItemStack[] inv = new ItemStack[size - offset];
+        for (int i = offset; i < size - 1; ++i) {
+            ItemStack it = reconstructorItemStacks[i];
+            inv[i - offset] = it == null ? null : it.copy();
+        }
 
-		return true;
-	}
+        for (ItemStack item : items) {
+            if (!FemtocraftUtils.removeItem(item, inv, new int[]{})) {
+                return false;
+            }
+        }
 
-	/**
-	 * Do not make give this method the name canInteractWith because it clashes
-	 * with Container
-	 */
-	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
-		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord,
-				this.zCoord) == this
-				&& par1EntityPlayer.getDistanceSq((double) this.xCoord + 0.5D,
-						(double) this.yCoord + 0.5D,
-						(double) this.zCoord + 0.5D) <= 64.0D;
-	}
+        return true;
+    }
 
-	public void openChest() {
-	}
+    /**
+     * Do not make give this method the name canInteractWith because it clashes
+     * with Container
+     */
+    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
+        return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord,
+                                                this.zCoord) == this
+                && par1EntityPlayer.getDistanceSq((double) this.xCoord + 0.5D,
+                                                  (double) this.yCoord + 0.5D,
+                                                  (double) this.zCoord + 0.5D) <= 64.0D;
+    }
 
-	public void closeChest() {
-	}
+    public void openChest() {
+    }
 
-	/**
-	 * Returns true if automation is allowed to insert the given stack (ignoring
-	 * stack size) into the given slot.
-	 */
-	public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack) {
-		return par1 > 10
-				|| (par1 == 10 && par2ItemStack.getItem() instanceof IAssemblerSchematic);
-	}
+    public void closeChest() {
+    }
 
-	/**
-	 * Get the size of the side inventory.
-	 */
-	public int[] getSizeInventorySide(int par1) {
-		// Regular inventory
-		if (par1 == 1)
-			return new int[] { 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-					23, 24, 25, 26, 27, 28 };
-		// Output
-		else
-			return new int[] { 9 };
-	}
+    /**
+     * Returns true if automation is allowed to insert the given stack (ignoring
+     * stack size) into the given slot.
+     */
+    public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack) {
+        return par1 > 10
+                || (par1 == 10 && par2ItemStack.getItem() instanceof IAssemblerSchematic);
+    }
 
-	public boolean func_102007_a(int par1, ItemStack par2ItemStack, int par3) {
-		return this.isStackValidForSlot(par1, par2ItemStack);
-	}
+    /**
+     * Get the size of the side inventory.
+     */
+    public int[] getSizeInventorySide(int par1) {
+        // Regular inventory
+        if (par1 == 1) {
+            return new int[]{11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                    23, 24, 25, 26, 27, 28};
+        }
+        // Output
+        else {
+            return new int[]{9};
+        }
+    }
 
-	public boolean func_102008_b(int par1, ItemStack par2ItemStack, int par3) {
-		return true;
-	}
+    public boolean func_102007_a(int par1, ItemStack par2ItemStack, int par3) {
+        return this.isStackValidForSlot(par1, par2ItemStack);
+    }
 
-	/**
-	 * *************************************************************************
-	 * ******* This function is here for compatibilities sake, Modders should
-	 * Check for Sided before ContainerWorldly, Vanilla Minecraft does not
-	 * follow the sided standard that Modding has for a while.
-	 * <p/>
-	 * In vanilla:
-	 * <p/>
-	 * Top: Ores Sides: Fuel Bottom: Output
-	 * <p/>
-	 * Standard Modding: Top: Ores Sides: Output Bottom: Fuel
-	 * <p/>
-	 * The Modding one is designed after the GUI, the vanilla one is designed
-	 * because its intended use is for the hopper, which logically would take
-	 * things in from the top.
-	 * <p/>
-	 * This will possibly be removed in future updates, and make vanilla the
-	 * definitive standard.
-	 */
+    public boolean func_102008_b(int par1, ItemStack par2ItemStack, int par3) {
+        return true;
+    }
 
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return i > 10
-				|| (i == 10 && itemstack.getItem() instanceof IAssemblerSchematic);
-	}
+    /**
+     * *************************************************************************
+     * ******* This function is here for compatibilities sake, Modders should
+     * Check for Sided before ContainerWorldly, Vanilla Minecraft does not
+     * follow the sided standard that Modding has for a while.
+     * <p/>
+     * In vanilla:
+     * <p/>
+     * Top: Ores Sides: Fuel Bottom: Output
+     * <p/>
+     * Standard Modding: Top: Ores Sides: Output Bottom: Fuel
+     * <p/>
+     * The Modding one is designed after the GUI, the vanilla one is designed
+     * because its intended use is for the hopper, which logically would take
+     * things in from the top.
+     * <p/>
+     * This will possibly be removed in future updates, and make vanilla the
+     * definitive standard.
+     */
 
-	@Override
-	public int[] getAccessibleSlotsFromSide(int var1) {
-		switch (var1) {
-		case (1):
-			return new int[] { 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-					23, 24, 25, 26, 27, 28 };
-		case (0):
-		case (2):
-		case (3):
-		case (4):
-		case (5):
-			return new int[] { 9 };
-		default:
-			return new int[] {};
-		}
-	}
+    @Override
+    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+        return i > 10
+                || (i == 10 && itemstack.getItem() instanceof IAssemblerSchematic);
+    }
 
-	@Override
-	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
-		return i > 10;
-	}
+    @Override
+    public int[] getAccessibleSlotsFromSide(int var1) {
+        switch (var1) {
+            case (1):
+                return new int[]{11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                        23, 24, 25, 26, 27, 28};
+            case (0):
+            case (2):
+            case (3):
+            case (4):
+            case (5):
+                return new int[]{9};
+            default:
+                return new int[]{};
+        }
+    }
 
-	@Override
-	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
-		return i == 9 || i > 10;
-	}
+    @Override
+    public boolean canInsertItem(int i, ItemStack itemstack, int j) {
+        return i > 10;
+    }
 
-	// IFluidHandler
+    @Override
+    public boolean canExtractItem(int i, ItemStack itemstack, int j) {
+        return i == 9 || i > 10;
+    }
 
-	@Override
-	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		return tank.fill(resource, doFill);
-	}
+    // IFluidHandler
 
-	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource,
-			boolean doDrain) {
-		if (resource == null || !resource.isFluidEqual(tank.getFluid())) {
-			return null;
-		}
-		return tank.drain(resource.amount, doDrain);
-	}
+    @Override
+    public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+        return tank.fill(resource, doFill);
+    }
 
-	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		return tank.drain(maxDrain, doDrain);
-	}
+    @Override
+    public FluidStack drain(ForgeDirection from, FluidStack resource,
+                            boolean doDrain) {
+        if (resource == null || !resource.isFluidEqual(tank.getFluid())) {
+            return null;
+        }
+        return tank.drain(resource.amount, doDrain);
+    }
 
-	@Override
-	public boolean canFill(ForgeDirection from, Fluid fluid) {
-		return fluid == Femtocraft.mass;
-	}
+    @Override
+    public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+        return tank.drain(maxDrain, doDrain);
+    }
 
-	@Override
-	public boolean canDrain(ForgeDirection from, Fluid fluid) {
-		return true;
-	}
+    @Override
+    public boolean canFill(ForgeDirection from, Fluid fluid) {
+        return fluid == Femtocraft.mass;
+    }
 
-	@Override
-	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-		return new FluidTankInfo[] { tank.getInfo() };
-	}
+    @Override
+    public boolean canDrain(ForgeDirection from, Fluid fluid) {
+        return true;
+    }
 
-	public void setFluidAmount(int amount) {
-		if (tank.getFluid() != null) {
-			tank.setFluid(new FluidStack(tank.getFluid().getFluid(), amount));
-		} else {
-			tank.setFluid(new FluidStack(Femtocraft.mass, amount));
-		}
-	}
+    @Override
+    public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+        return new FluidTankInfo[]{tank.getInfo()};
+    }
 
-	public void clearFluid() {
-		tank.setFluid(null);
-	}
+    public void setFluidAmount(int amount) {
+        if (tank.getFluid() != null) {
+            tank.setFluid(new FluidStack(tank.getFluid().getFluid(), amount));
+        }
+        else {
+            tank.setFluid(new FluidStack(Femtocraft.mass, amount));
+        }
+    }
+
+    public void clearFluid() {
+        tank.setFluid(null);
+    }
 }

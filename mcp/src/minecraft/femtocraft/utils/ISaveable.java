@@ -4,7 +4,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public interface ISaveable {
 
-	public void saveToNBT(NBTTagCompound compound);
+    public void saveToNBT(NBTTagCompound compound);
 
-	public void loadFromNBT(NBTTagCompound compound);
+    public void loadFromNBT(NBTTagCompound compound);
 }

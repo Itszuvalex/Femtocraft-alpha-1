@@ -5,7 +5,7 @@ import net.minecraft.world.World;
 
 public interface IChargingBase {
 
-	int maxCoilsSupported(World world, int x, int y, int z);
+    int maxCoilsSupported(World world, int x, int y, int z);
 
-	EnumTechLevel maxTechSupported(World world, int x, int y, int z);
+    EnumTechLevel maxTechSupported(World world, int x, int y, int z);
 }
