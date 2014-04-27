@@ -61,9 +61,27 @@ public class FemtocraftGuiHandler implements IGuiHandler {
             return new ContainerMicroFurnace(player.inventory,
                                              (TileEntityBaseEntityMicroFurnace) tileEntity);
         }
+        else if (tileEntity instanceof TileEntityNanoDismantler) {
+            return new ContainerNanoDismantler(player.inventory, (TileEntityNanoDismantler) tileEntity);
+        }
+        else if (tileEntity instanceof TileEntityFemtoRepurposer) {
+            return new ContainerFemtoRepurposer(player.inventory, (TileEntityFemtoRepurposer) tileEntity);
+        }
         else if (tileEntity instanceof TileEntityBaseEntityMicroDeconstructor) {
             return new ContainerMicroDeconstructor(player.inventory,
                                                    (TileEntityBaseEntityMicroDeconstructor) tileEntity);
+        }
+        else if (tileEntity instanceof TileEntityFemtoCoagulator) {
+            return new ContainerFemtoCoagulator(player.inventory,
+                                                (TileEntityFemtoCoagulator)
+                                                        tileEntity
+            );
+        }
+        else if (tileEntity instanceof TileEntityNanoFabricator) {
+            return new ContainerNanoFabricator(player.inventory,
+                                               (TileEntityNanoFabricator)
+                                                       tileEntity
+            );
         }
         else if (tileEntity instanceof TileEntityBaseEntityMicroReconstructor) {
             return new ContainerMicroReconstructor(player.inventory,
@@ -103,9 +121,22 @@ public class FemtocraftGuiHandler implements IGuiHandler {
             return new GuiMicroFurnace(player.inventory,
                                        (TileEntityBaseEntityMicroFurnace) tileEntity);
         }
+        else if (tileEntity instanceof TileEntityFemtoRepurposer) {
+            return new GuiFemtoRepurposer(player.inventory, (TileEntityFemtoRepurposer) tileEntity);
+        }
+        else if (tileEntity instanceof TileEntityNanoDismantler) {
+            return new GuiNanoDismantler(player.inventory, (TileEntityNanoDismantler) tileEntity);
+        }
         else if (tileEntity instanceof TileEntityBaseEntityMicroDeconstructor) {
             return new GuiMicroDeconstructor(player.inventory,
                                              (TileEntityBaseEntityMicroDeconstructor) tileEntity);
+        }
+        else if (tileEntity instanceof TileEntityFemtoCoagulator) {
+            return new GuiFemtoCoagulator(player.inventory, (TileEntityFemtoCoagulator) tileEntity);
+        }
+        else if (tileEntity instanceof TileEntityNanoFabricator) {
+            return new GuiNanoFabricator(player.inventory,
+                                         (TileEntityNanoFabricator) tileEntity);
         }
         else if (tileEntity instanceof TileEntityBaseEntityMicroReconstructor) {
             return new GuiMicroReconstructor(player.inventory,

@@ -19,10 +19,134 @@
 
 package femtocraft.industry.gui;
 
-public class GuiNanoFabricator {
+import femtocraft.Femtocraft;
+import femtocraft.industry.containers.ContainerNanoFabricator;
+import femtocraft.industry.tiles.TileEntityNanoFabricator;
+import femtocraft.render.RenderUtils;
+import femtocraft.utils.FemtocraftUtils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import org.lwjgl.opengl.GL11;
 
-    public GuiNanoFabricator() {
-        // TODO Auto-generated constructor stub
+public class GuiNanoFabricator extends GuiContainer {
+    public static final ResourceLocation texture = new ResourceLocation(
+            Femtocraft.ID.toLowerCase(), "textures/guis/NanoFabricator.png");
+    private TileEntityNanoFabricator fabricatorInventory;
+
+    public GuiNanoFabricator(InventoryPlayer par1InventoryPlayer,
+                             TileEntityNanoFabricator tileEntity) {
+        super(new ContainerNanoFabricator(par1InventoryPlayer, tileEntity));
+        this.ySize = 204;
+        this.fabricatorInventory = tileEntity;
     }
 
+    /**
+     * Draw the foreground layer for the GuiContainer (everything in front of
+     * the items)
+     */
+    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+        String s = "Nano Fabricator";
+        this.fontRenderer.drawString(s,
+                                     this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 5,
+                                     FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
+        this.fontRenderer.drawString(
+                StatCollector.translateToLocal("container.inventory"), 8,
+                this.ySize - 96 + 4,
+                FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
+    }
+
+    /**
+     * Draw the background layer for the GuiContainer (everything behind the
+     * items)
+     */
+    protected void drawGuiContainerBackgroundLayer(float par1, int par2,
+                                                   int par3) {
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
+        int k = (this.width - this.xSize) / 2;
+        int l = (this.height - this.ySize) / 2;
+        this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
+        int i1;
+
+        // if (this.furnaceInventory.isBurning())
+        // {
+        // i1 = this.furnaceInventory.getBurnTimeRemainingScaled(12);
+        // this.drawTexturedModalRect(k + 56, l + 36 + 12 - i1, 176, 12 - i1,
+        // 14, i1 + 2);
+        // }
+
+        i1 = this.fabricatorInventory.getCookProgressScaled(30);
+        this.drawTexturedModalRect(k + 86, l + 21, 176, 0, i1 + 1, 31);
+        i1 = (this.fabricatorInventory.currentPower * 60)
+                / this.fabricatorInventory.getMaxPower();
+        this.drawTexturedModalRect(k + 10, l + 8 + (60 - i1), 176,
+                                   31 + (60 - i1), 16, i1);
+
+        FluidStack fluid = this.fabricatorInventory
+                .getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
+        if (fluid != null) {
+            Icon image = fluid.getFluid().getStillIcon();
+            // Icon image = BlockFluid.getFluidIcon("water_still");
+            // image = Femtocraft.mass_block.stillIcon;
+
+            i1 = (this.fabricatorInventory.getMassAmount() * 60)
+                    / this.fabricatorInventory.getMassCapacity();
+            RenderUtils.renderLiquidInGUI(this, this.zLevel, image, k + 150, l
+                    + 8 + (60 - i1), 16, i1);
+
+            // Rebind texture
+            Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
+        }
+
+        // Draw Tank Lines
+        this.drawTexturedModalRect(k + 150, l + 8, 176, 91, 16, 60);
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see net.minecraft.client.gui.inventory.GuiContainer#drawScreen(int, int,
+     * float)
+     */
+    @Override
+    public void drawScreen(int par1, int par2, float par3) {
+        super.drawScreen(par1, par2, par3);
+
+        if (this.isPointInRegion(10, 8, 16, 60, par1, par2)) {
+
+            int furnaceCurrent = this.fabricatorInventory.currentPower;
+            int furnaceMax = this.fabricatorInventory.getMaxPower();
+
+            // String text = String.format("%i/%i", furnaceCurrent, furnaceMax);
+            String text = String.valueOf(furnaceCurrent) + '/'
+                    + String.valueOf(furnaceMax);
+            this.drawCreativeTabHoveringText(text, par1, par2);
+        }
+        else if (this.isPointInRegion(150, 8, 16, 60, par1, par2)) {
+            int massCurrent = this.fabricatorInventory.getMassAmount();
+            int massMax = this.fabricatorInventory.getMassCapacity();
+
+            FluidStack fluid = this.fabricatorInventory
+                    .getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
+            String name = fluid == null ? "" : (" " + FemtocraftUtils
+                    .capitalize(FluidRegistry.getFluidName(fluid)));
+            String text = String.valueOf(massCurrent) + '/'
+                    + String.valueOf(massMax) + " mB" + name;
+
+            this.drawCreativeTabHoveringText(text, par1, par2);
+        }
+        else if (this.isPointInRegion(94, 54, 16, 16, par1, par2)) {
+            if (fabricatorInventory.getStackInSlot(10) == null) {
+                this.drawCreativeTabHoveringText("Assembly Schematic", par1,
+                                                 par2);
+            }
+        }
+    }
 }

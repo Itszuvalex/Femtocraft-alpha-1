@@ -5,17 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="06103d49-82d3-4f86-b2c6-3e25d1b1d98e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockFemtoCoagulator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockFemtoCoagulator.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockMicroReconstructor.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockMicroReconstructor.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockNanoFabricator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockNanoFabricator.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/Femtocraft.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/Femtocraft.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftConfigs.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftConfigs.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/proxy/ProxyCommon.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/proxy/ProxyCommon.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityBaseEntityMicroDeconstructor.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityBaseEntityMicroDeconstructor.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityBaseEntityMicroReconstructor.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityBaseEntityMicroReconstructor.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoCoagulator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoCoagulator.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityNanoFabricator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityNanoFabricator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerFemtoCoagulator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerFemtoCoagulator.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerFemtoRepurposer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerFemtoRepurposer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerNanoDismantler.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerNanoDismantler.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerNanoFabricator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerNanoFabricator.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftGuiHandler.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftGuiHandler.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiFemtoCoagulator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiFemtoCoagulator.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiFemtoRepurposer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiFemtoRepurposer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiNanoDismantler.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiNanoDismantler.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiNanoFabricator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiNanoFabricator.java" />
     </list>
     <ignored path="Femtocraft.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -78,71 +76,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ProxyCommon.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/proxy/ProxyCommon.java">
+      <file leaf-file-name="FemtocraftGuiHandler.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/FemtocraftGuiHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="1365">
-              <caret line="67" column="67" selection-start-line="67" selection-start-column="67" selection-end-line="67" selection-end-column="67" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Femtocraft.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/Femtocraft.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4695" max-vertical-offset="11595">
-              <caret line="416" column="70" selection-start-line="416" selection-start-column="70" selection-end-line="416" selection-end-column="70" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FemtocraftConfigs.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/FemtocraftConfigs.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="990" max-vertical-offset="15630">
-              <caret line="119" column="51" selection-start-line="119" selection-start-column="17" selection-end-line="119" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TileEntityFemtoCoagulator.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoCoagulator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
-              <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TileEntityNanoInnervator.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityNanoInnervator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="765">
-              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="33" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TileEntityNanoFabricator.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityNanoFabricator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.35433072" vertical-offset="0" max-vertical-offset="635">
-              <caret line="32" column="34" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TileEntityFemtoImpulser.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoImpulser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4" max-vertical-offset="750">
-              <caret line="31" column="1" selection-start-line="31" selection-start-column="1" selection-end-line="33" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.7158055" vertical-offset="1044" max-vertical-offset="2070">
+              <caret line="138" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -161,15 +99,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftCreativeTab.java" />
-        <option value="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftEventHookContainer.java" />
-        <option value="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftGuiHandler.java" />
-        <option value="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftPacketHandler.java" />
-        <option value="$MCP_LOC$/src/minecraft/femtocraft/WorldGenerator.java" />
-        <option value="$MCP_LOC$/src/minecraft/femtocraft/api/IAssemblerSchematic.java" />
-        <option value="$MCP_LOC$/src/minecraft/femtocraft/api/IChargingBase.java" />
-        <option value="$MCP_LOC$/src/minecraft/femtocraft/api/IChargingCoil.java" />
-        <option value="$MCP_LOC$/src/minecraft/femtocraft/api/IInterfaceDevice.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/api/IPowerBlockContainer.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/api/IPowerContainer.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/api/ISuctionPipe.java" />
@@ -212,6 +141,15 @@
         <option value="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftConfigs.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoCoagulator.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityNanoFabricator.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiNanoDismantler.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerNanoDismantler.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerFemtoRepurposer.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiNanoFabricator.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiFemtoCoagulator.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerNanoFabricator.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerFemtoCoagulator.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiFemtoRepurposer.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/FemtocraftGuiHandler.java" />
       </list>
     </option>
   </component>
@@ -329,6 +267,68 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="femtocraft" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ForgeDev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="femtocraft" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="industry" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ForgeDev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="femtocraft" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="industry" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gui" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ForgeDev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="femtocraft" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="industry" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="containers" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -560,13 +560,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919255" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32670808" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14782609" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -578,11 +579,10 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14782609" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -645,104 +645,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/blocks/BlockUnidentifiedAlloy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="735">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/common/gui/DisplaySlot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="720">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/common/gui/OutputSlot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="658">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemConductiveAlloy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="658">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemCrystallite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="658">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemCubit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="658">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemElectrite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="658">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemFaunite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="658">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemFibrousStrand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4331307" vertical-offset="0" max-vertical-offset="658">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemFlorite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.387538" vertical-offset="0" max-vertical-offset="658">
-          <caret line="17" column="80" selection-start-line="17" selection-start-column="80" selection-end-line="17" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemHardenedBulb.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13677812" vertical-offset="0" max-vertical-offset="658">
-          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/core/items/decomposition/ItemFungalSpores.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8206687" vertical-offset="0" max-vertical-offset="658">
-          <caret line="38" column="45" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/managers/ManagerCrafting.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13677812" vertical-offset="0" max-vertical-offset="3420">
-          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/graph/MapGraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
-          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/research/gui/graph/TechnologyGraph.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1095">
@@ -763,7 +665,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1570" max-vertical-offset="2220">
           <caret line="140" column="33" selection-start-line="140" selection-start-column="33" selection-end-line="140" selection-end-column="33" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1024,14 +926,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoImpulser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4" max-vertical-offset="750">
-          <caret line="31" column="1" selection-start-line="31" selection-start-column="1" selection-end-line="33" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoCoagulator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
@@ -1050,8 +944,145 @@
     </entry>
     <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityNanoFabricator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35433072" vertical-offset="0" max-vertical-offset="635">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
           <caret line="32" column="34" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/tiles/TileEntityFemtoImpulser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36474165" vertical-offset="0" max-vertical-offset="750">
+          <caret line="34" column="53" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiNanoInnervator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15957446" vertical-offset="0" max-vertical-offset="1350">
+          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiMicroDeconstructor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.84042555" vertical-offset="1157" max-vertical-offset="1815">
+          <caret line="147" column="8" selection-start-line="40" selection-start-column="35" selection-end-line="147" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiNanoDismantler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="32" max-vertical-offset="1995">
+          <caret line="144" column="6" selection-start-line="37" selection-start-column="31" selection-end-line="144" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerNanoDismantler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="5.654297" vertical-offset="0" max-vertical-offset="2985">
+          <caret line="193" column="10" selection-start-line="33" selection-start-column="37" selection-end-line="193" selection-end-column="1" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerFemtoRepurposer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.64453125" vertical-offset="0" max-vertical-offset="2730">
+          <caret line="39" column="35" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerMicroDeconstructor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.8339844" vertical-offset="527" max-vertical-offset="2595">
+          <caret line="193" column="8" selection-start-line="33" selection-start-column="41" selection-end-line="193" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiMicroReconstructor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1920">
+          <caret line="154" column="4" selection-start-line="40" selection-start-column="35" selection-end-line="154" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiNanoFabricator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="2100">
+          <caret line="46" column="38" selection-start-line="46" selection-start-column="38" selection-end-line="46" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiFemtoCoagulator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.029239766" vertical-offset="465" max-vertical-offset="2115">
+          <caret line="49" column="58" selection-start-line="49" selection-start-column="7" selection-end-line="49" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerMicroReconstructor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2457" max-vertical-offset="2970">
+          <caret line="221" column="2" selection-start-line="36" selection-start-column="41" selection-end-line="221" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerFemtoCoagulator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.76023394" vertical-offset="0" max-vertical-offset="3165">
+          <caret line="43" column="61" selection-start-line="43" selection-start-column="61" selection-end-line="43" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/containers/ContainerNanoFabricator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7017544" vertical-offset="30" max-vertical-offset="3165">
+          <caret line="43" column="63" selection-start-line="43" selection-start-column="63" selection-end-line="43" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/industry/gui/GuiFemtoRepurposer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9544073" vertical-offset="977" max-vertical-offset="2010">
+          <caret line="124" column="52" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/FemtocraftGuiHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7158055" vertical-offset="1044" max-vertical-offset="2070">
+          <caret line="138" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
           <folding />
         </state>
       </provider>
