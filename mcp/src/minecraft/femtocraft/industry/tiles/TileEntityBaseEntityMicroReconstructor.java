@@ -33,8 +33,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
-import java.util.Arrays;
-
 public class TileEntityBaseEntityMicroReconstructor extends
                                                     TileEntityBaseEntityIndustry implements ISidedInventory, IFluidHandler {
     // TODO: Load from configs
@@ -121,7 +119,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
         if (as != null) {
             AssemblerRecipe recipe = as.getRecipe(reconstructorItemStacks[10]);
             if (recipe == null) {
-                for (int i = 0; i < 9; i++) {
+                for (int i = 0; i < 9; ++i) {
                     reconstructorItemStacks[i] = null;
                 }
             }
@@ -134,7 +132,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
             }
         }
         else {
-            for (int i = 0; i < 9; i++) {
+            for (int i = 0; i < 9; ++i) {
                 reconstructorItemStacks[i] = null;
             }
         }
@@ -290,7 +288,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
                 && reconstructorItemStacks[8] == null)
                 || getSchematic() == null
                 || this.getCurrentPower() < powerToCook
-                && cookTime > 0) {
+                || cookTime > 0) {
             return false;
         }
         else {
@@ -320,16 +318,12 @@ public class TileEntityBaseEntityMicroReconstructor extends
             return;
         }
 
-        cookTime = 0;
         ItemStack[] icopy = new ItemStack[9];
         for (int i = 0; i < recipe.input.length; ++i) {
             icopy[i] = recipe.input[i] == null ? null : recipe.input[i].copy();
         }
-        reconstructingStacks = new ItemStack[9];
-        Arrays.fill(reconstructingStacks, null);
 
-
-        int maxSimul = (reconstructorItemStacks[9] == null ? 0 :
+        int maxSimul = (reconstructorItemStacks[9] == null ? recipe.output.getMaxStackSize() :
                 reconstructorItemStacks[9]
                         .stackSize) / recipe.output
                 .stackSize;
@@ -342,7 +336,10 @@ public class TileEntityBaseEntityMicroReconstructor extends
             maxSimul = Math.min(iter, maxSimul);
         }
 
+        reconstructingStacks = null;
+
         int i = 0;
+        int[] exclusions = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         do {
             //Can do?
             as = getSchematic();
@@ -382,7 +379,6 @@ public class TileEntityBaseEntityMicroReconstructor extends
                 }
             }
 
-            int[] exclusions = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
             for (ItemStack item : recipe.input) {
                 FemtocraftUtils.removeItem(item, reconstructorItemStacks,
                                            exclusions);
@@ -400,6 +396,10 @@ public class TileEntityBaseEntityMicroReconstructor extends
 
             ++i;
         } while (i < getMaxSimultaneousSmelt() && i < maxSimul);
+
+        if (reconstructingStacks != null) {
+            cookTime = 0;
+        }
     }
 
     @Override
@@ -415,7 +415,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
     @Override
     protected void finishWork() {
         boolean empty = false;
-        int[] placeSlots = new int[]{0, 1, 2, 3, 4, 5, 6,
+        int[] placeRestrictions = new int[]{0, 1, 2, 3, 4, 5, 6,
                 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
                 21, 22, 23, 24, 25, 26, 27, 28};
         while (reconstructingStacks != null && !empty) {
@@ -426,21 +426,21 @@ public class TileEntityBaseEntityMicroReconstructor extends
                 break;
             }
             empty = true;
-            for (int i = 0; i < 9; ++i) {
-                if (reconstructingStacks[i] != null) {
-                    if ((reconstructingStacks[i].stackSize -= recipe.input[i].stackSize) <= 0) {
-                        reconstructingStacks[i] = null;
-                    }
-                    else {
-                        empty = false;
-                    }
+            for (int i = 0; i < 9 && i < recipe.input.length; ++i) {
+                if (reconstructingStacks[i] == null) continue;
+
+                if ((reconstructingStacks[i].stackSize -= recipe.input[i].stackSize) <= 0) {
+                    reconstructingStacks[i] = null;
                 }
+                else {
+                    empty = false;
+                }
+
             }
 
-            FemtocraftUtils.placeItem(recipe.output.copy(),
-                                      reconstructorItemStacks, placeSlots
+            FemtocraftUtils.placeItem(recipe.output,
+                                      reconstructorItemStacks, placeRestrictions
             );
-
         }
         reconstructingStacks = null;
         cookTime = 0;
@@ -450,14 +450,14 @@ public class TileEntityBaseEntityMicroReconstructor extends
         ItemStack[] fake = new ItemStack[1];
         ItemStack output = reconstructorItemStacks[9];
         fake[0] = output == null ? null : output.copy();
-        return FemtocraftUtils.placeItem(item, fake, new int[]{});
+        return FemtocraftUtils.placeItem(item, fake, null);
     }
 
     private boolean hasItems(ItemStack[] items) {
-        int offset = 11;
+        int offset = 10;
         int size = reconstructorItemStacks.length;
         ItemStack[] inv = new ItemStack[size - offset];
-        for (int i = offset; i < size - 1; ++i) {
+        for (int i = offset; i < size; ++i) {
             ItemStack it = reconstructorItemStacks[i];
             inv[i - offset] = it == null ? null : it.copy();
         }

@@ -104,19 +104,14 @@ public class FemtocraftUtils {
         }
         // Attempt to combine, first
         int amount = item.stackSize;
+        if (restrictions != null) {
+            Arrays.sort(restrictions);
+        }
 
         for (int i = 0; i < slots.length; ++i) {
-            if (restrictions != null) {
-                boolean restricted = false;
-                for (int r : restrictions) {
-                    if (i == r) {
-                        restricted = true;
-                        break;
-                    }
-                }
-                if (restricted) {
-                    continue;
-                }
+            if (restrictions != null && Arrays.binarySearch(restrictions,
+                                                            i) >= 0) {
+                continue;
             }
 
             if (slots[i] != null && slots[i].isItemEqual(item)) {
@@ -135,17 +130,9 @@ public class FemtocraftUtils {
 
         // Place into null locations
         for (int i = 0; i < slots.length; ++i) {
-            boolean restricted = false;
-            if (restrictions != null) {
-                for (int r : restrictions) {
-                    if (i == r) {
-                        restricted = true;
-                        break;
-                    }
-                }
-                if (restricted) {
-                    continue;
-                }
+            if (restrictions != null && Arrays.binarySearch(restrictions,
+                                                            i) >= 0) {
+                continue;
             }
 
             if (slots[i] == null) {
@@ -165,27 +152,25 @@ public class FemtocraftUtils {
         }
         // Attempt to combine, first
         int amountLeftToRemove = item.stackSize;
+        if (restrictions != null) {
+            Arrays.sort(restrictions);
+        }
 
         for (int i = 0; i < slots.length; ++i) {
-            if (restrictions != null) {
-                boolean restricted = false;
-                for (int r : restrictions) {
-                    if (i == r) {
-                        restricted = true;
-                        break;
-                    }
-                }
-                if (restricted) {
-                    continue;
-                }
+            if (restrictions != null && Arrays.binarySearch(restrictions,
+                                                            i) >= 0) {
+                continue;
             }
 
             if (slots[i] != null && slots[i].isItemEqual(item)) {
                 ItemStack slot = slots[i];
                 int amount = slot.stackSize;
-                if (amount < amountLeftToRemove) {
+                if (amount <= amountLeftToRemove) {
                     slots[i] = null;
                     amountLeftToRemove -= amount;
+                    if (amountLeftToRemove <= 0) {
+                        return true;
+                    }
                 }
                 else {
                     slot.stackSize -= amountLeftToRemove;
