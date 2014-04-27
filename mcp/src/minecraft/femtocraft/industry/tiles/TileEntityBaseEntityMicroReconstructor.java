@@ -41,6 +41,8 @@ public class TileEntityBaseEntityMicroReconstructor extends
     public static int ticksToCook = 100;
     // TODO: Load from configs
     public static int maxSmelt = 1;
+    // TODO: Load from configs
+    public static EnumTechLevel assemblerTech = EnumTechLevel.MICRO;
     /**
      * The number of ticks that the current item has been cooking for
      */
@@ -91,6 +93,10 @@ public class TileEntityBaseEntityMicroReconstructor extends
 
     protected int getPowerToCook() {
         return powerToCook;
+    }
+
+    protected EnumTechLevel getAssemblerTech() {
+        return assemblerTech;
     }
 
     public int getMassAmount() {
@@ -304,6 +310,11 @@ public class TileEntityBaseEntityMicroReconstructor extends
                 hasItems = false;
                 return false;
             }
+
+            if (recipe.enumTechLevel.tier > getAssemblerTech().tier) {
+                return false;
+            }
+
             return tank.getFluidAmount() >= recipe.mass
                     && roomForItem(recipe.output);
         }

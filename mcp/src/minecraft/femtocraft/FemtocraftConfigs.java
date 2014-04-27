@@ -125,7 +125,7 @@ public class FemtocraftConfigs {
     int FemtocraftNanoEfflorescerPlatformID = 386;
     public static
     @CfgId(block = true)
-    int FemtocraftNanoEfflorescerPShieldingID = 387;
+    int FemtocraftNanoEfflorescerShieldingID = 387;
     public static
     @CfgId(block = true)
     int FemtocraftFemtoImpulserUnlitID = 388;

@@ -121,9 +121,11 @@ public class Femtocraft {
     public static Block nanoInnervatorUnlit;
     public static Block nanoInnervatorLit;
     public static Block nanoDismantler;
+    public static Block nanoFabricator;
     public static Block femtoImpulserLit;
     public static Block femtoImpulserUnlit;
     public static Block femtoRepurposer;
+    public static Block femtoCoagulator;
     public static Block microCube;
     public static Block nanoCubeFrame;
     public static Block nanoCubePort;
@@ -391,6 +393,11 @@ public class Femtocraft {
         GameRegistry.registerBlock(nanoDismantler, "BlockNanoDismantler");
         LanguageRegistry.addName(nanoDismantler, "Nano Dismantler");
 
+        nanoFabricator = new BlockNanoFabricator(FemtocraftConfigs
+                                                         .FemtocraftNanoFabricatorID);
+        GameRegistry.registerBlock(nanoFabricator, "BlockNanoFabricator");
+        LanguageRegistry.addName(nanoFabricator, "Nano Fabricator");
+
         femtoImpulserUnlit = new BlockFemtoImpulser(
                 FemtocraftConfigs.FemtocraftFemtoImpulserUnlitID, false);
         GameRegistry.registerBlock(femtoImpulserUnlit, "BlockFemtoImpulser");
@@ -403,6 +410,11 @@ public class Femtocraft {
                 FemtocraftConfigs.FemtocraftFemtoRepurposerID);
         GameRegistry.registerBlock(femtoRepurposer, "BlockFemtoRepurposer");
         LanguageRegistry.addName(femtoRepurposer, "Femto Repurposer");
+
+        femtoCoagulator = new BlockFemtoCoagulator(FemtocraftConfigs
+                                                           .FemtocraftFemtoCoagulatorID);
+        GameRegistry.registerBlock(femtoCoagulator, "BlockFemtoCoagulator");
+        LanguageRegistry.addName(femtoCoagulator, "Femto Coagulator");
 
         microCube = new BlockMicroCube(FemtocraftConfigs.FemtopowerMicroCubeID);
         GameRegistry.registerBlock(microCube, ItemBlockMicroCube.class,

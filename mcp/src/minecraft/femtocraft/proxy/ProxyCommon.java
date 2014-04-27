@@ -64,10 +64,14 @@ public class ProxyCommon {
                                         "TileEntityNanoInnervator");
         GameRegistry.registerTileEntity(TileEntityNanoDismantler.class,
                                         "TileEntityNanoDeconstructor");
+        GameRegistry.registerTileEntity(TileEntityNanoFabricator.class,
+                                        "TileEntityNanoFabricator");
         GameRegistry.registerTileEntity(TileEntityFemtoImpulser.class,
                                         "TileEntityFemtoImpulser");
         GameRegistry.registerTileEntity(TileEntityFemtoRepurposer.class,
                                         "TileEntityFemtoRepurposer");
+        GameRegistry.registerTileEntity(TileEntityFemtoCoagulator.class,
+                                        "TileEntityFemtoCoagulator");
         GameRegistry.registerTileEntity(TileEntityMicroCable.class,
                                         "blockMicroCable");
         GameRegistry.registerTileEntity(TileEntityNanoCable.class,

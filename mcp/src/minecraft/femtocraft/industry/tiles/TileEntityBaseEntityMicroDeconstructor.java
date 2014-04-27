@@ -97,9 +97,14 @@ public class TileEntityBaseEntityMicroDeconstructor extends
         return powerToCook;
     }
 
+    protected EnumTechLevel getAssemblerTech() {
+        return EnumTechLevel.MICRO;
+    }
+
     /**
      * Returns the number of slots in the inventory.
      */
+
     public int getSizeInventory() {
         return deconstructorInventory.getSizeInventory();
     }
@@ -209,8 +214,14 @@ public class TileEntityBaseEntityMicroDeconstructor extends
         else {
             AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
                     .getRecipe(deconstructorInventory.getStackInSlot(0));
-            return recipe != null
-                    && (tank.getCapacity() - tank.getFluidAmount()) >= recipe.mass
+            return recipe != null &&
+                    recipe.enumTechLevel.tier <= getAssemblerTech().tier &&
+                    (tank
+                            .getCapacity() -
+                            tank
+                                    .getFluidAmount())
+                            >=
+                            recipe.mass
                     && getStackInSlot(0).stackSize >= recipe.output.stackSize
                     && roomForItems(recipe.input);
         }

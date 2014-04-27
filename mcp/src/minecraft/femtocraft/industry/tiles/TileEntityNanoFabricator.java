@@ -19,10 +19,37 @@
 
 package femtocraft.industry.tiles;
 
-public class TileEntityNanoFabricator {
+import femtocraft.managers.research.EnumTechLevel;
+
+public class TileEntityNanoFabricator extends TileEntityBaseEntityMicroReconstructor {
+    public static int maxSmelt_default = 8;
+    public static int ticksToCook_default = 60;
+    public static int powerToCook_default = 80;
 
     public TileEntityNanoFabricator() {
-        // TODO Auto-generated constructor stub
+        super();
+        this.setTechLevel(EnumTechLevel.NANO);
+        // TODO: Pull number from configs
+        this.setMaxStorage(10000);
     }
 
+    @Override
+    protected int getPowerToCook() {
+        return powerToCook_default;
+    }
+
+    @Override
+    protected int getMaxSimultaneousSmelt() {
+        return maxSmelt_default;
+    }
+
+    @Override
+    protected int getTicksToCook() {
+        return ticksToCook_default;
+    }
+
+    @Override
+    protected EnumTechLevel getAssemblerTech() {
+        return EnumTechLevel.NANO;
+    }
 }
