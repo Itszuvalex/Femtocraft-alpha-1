@@ -54,7 +54,7 @@ public class BlockMicroReconstructor extends TileContainer {
 
     public BlockMicroReconstructor(int par1) {
         super(par1, Material.iron);
-        setUnlocalizedName("microReconstructor");
+        setUnlocalizedName("BlockMicroReconstructor");
         setHardness(3.5f);
         setStepSound(Block.soundStoneFootstep);
         setCreativeTab(Femtocraft.femtocraftTab);

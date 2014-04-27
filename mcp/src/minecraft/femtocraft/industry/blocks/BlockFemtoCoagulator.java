@@ -54,7 +54,7 @@ public class BlockFemtoCoagulator extends TileContainer {
 
     public BlockFemtoCoagulator(int par1) {
         super(par1, Material.iron);
-        setUnlocalizedName("femtoCoagulator");
+        setUnlocalizedName("BlockFemtoCoagulator");
         setHardness(3.5f);
         setStepSound(Block.soundStoneFootstep);
         setCreativeTab(Femtocraft.femtocraftTab);

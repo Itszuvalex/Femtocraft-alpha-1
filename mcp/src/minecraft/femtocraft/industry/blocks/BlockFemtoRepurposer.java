@@ -53,7 +53,7 @@ public class BlockFemtoRepurposer extends TileContainer {
 
     public BlockFemtoRepurposer(int par1) {
         super(par1, Material.iron);
-        setUnlocalizedName("BlockNanoDismantler");
+        setUnlocalizedName("BlockFemtoRepurposer");
         setHardness(3.5f);
         setStepSound(Block.soundStoneFootstep);
         setCreativeTab(Femtocraft.femtocraftTab);

@@ -63,7 +63,7 @@ public class BlockFemtoImpulser extends TileContainer {
     public BlockFemtoImpulser(int par1, boolean par2) {
         super(par1, Material.iron);
         this.isActive = par2;
-        setUnlocalizedName("FemtocraftFemtoImpulser");
+        setUnlocalizedName("BlockFemtoImpulser");
         setHardness(3.5f);
         setStepSound(Block.soundStoneFootstep);
         setCreativeTab(Femtocraft.femtocraftTab);

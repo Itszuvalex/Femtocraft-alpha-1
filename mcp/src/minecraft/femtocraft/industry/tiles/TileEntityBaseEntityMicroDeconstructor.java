@@ -186,7 +186,10 @@ public class TileEntityBaseEntityMicroDeconstructor extends
      * cooked
      */
     public int getCookProgressScaled(int par1) {
-        return this.cookTime * par1 / ticksToCook;
+        if (getTicksToCook() == 0) {
+            return 0;
+        }
+        return this.cookTime * par1 / getTicksToCook();
     }
 
     /*

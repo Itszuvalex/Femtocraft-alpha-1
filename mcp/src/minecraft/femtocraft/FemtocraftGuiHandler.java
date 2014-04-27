@@ -53,7 +53,10 @@ public class FemtocraftGuiHandler implements IGuiHandler {
                                       int x, int y, int z) {
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
-        if (tileEntity instanceof TileEntityNanoInnervator) {
+        if (tileEntity instanceof TileEntityFemtoImpulser) {
+            return new ContainerFemtoImpulser(player.inventory, (TileEntityFemtoImpulser) tileEntity);
+        }
+        else if (tileEntity instanceof TileEntityNanoInnervator) {
             return new ContainerNanoInnervator(player.inventory,
                                                (TileEntityNanoInnervator) tileEntity);
         }
@@ -113,7 +116,10 @@ public class FemtocraftGuiHandler implements IGuiHandler {
                                       int x, int y, int z) {
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
-        if (tileEntity instanceof TileEntityNanoInnervator) {
+        if (tileEntity instanceof TileEntityFemtoImpulser) {
+            return new GuiFemtoImpulser(player.inventory, (TileEntityFemtoImpulser) tileEntity);
+        }
+        else if (tileEntity instanceof TileEntityNanoInnervator) {
             return new GuiNanoInnervator(player.inventory,
                                          (TileEntityNanoInnervator) tileEntity);
         }
