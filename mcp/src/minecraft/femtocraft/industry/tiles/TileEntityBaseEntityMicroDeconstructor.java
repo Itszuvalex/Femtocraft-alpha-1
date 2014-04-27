@@ -278,7 +278,7 @@ public class TileEntityBaseEntityMicroDeconstructor extends
      */
     @Override
     protected boolean canFinishWork() {
-        return cookTime >= ticksToCook;
+        return cookTime >= getTicksToCook();
     }
 
     /*
@@ -290,12 +290,13 @@ public class TileEntityBaseEntityMicroDeconstructor extends
     protected void finishWork() {
         AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
                 .getRecipe(deconstructingStack);
+        int[] placementRestrictionArray = new int[]{0};
         for (int i = 0; i < deconstructingStack.stackSize; i += recipe.output.stackSize) {
             if (recipe != null) {
                 for (ItemStack item : recipe.input) {
                     FemtocraftUtils.placeItem(item,
                                               deconstructorInventory.getInventory(),
-                                              new int[]{0});
+                                              placementRestrictionArray);
                 }
                 // tank.fill(new FluidStack(Femtocraft.mass, recipe.mass),
                 // true);

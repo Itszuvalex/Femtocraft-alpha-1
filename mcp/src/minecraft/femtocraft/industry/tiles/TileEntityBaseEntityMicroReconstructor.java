@@ -33,6 +33,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
+import java.util.Arrays;
+
 public class TileEntityBaseEntityMicroReconstructor extends
                                                     TileEntityBaseEntityIndustry implements ISidedInventory, IFluidHandler {
     // TODO: Load from configs
@@ -145,6 +147,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
     /**
      * Returns the number of slots in the inventory.
      */
+    @Override
     public int getSizeInventory() {
         return this.reconstructorItemStacks.length;
     }
@@ -152,6 +155,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
     /**
      * Returns the stack in slot i
      */
+    @Override
     public ItemStack getStackInSlot(int par1) {
         return this.reconstructorItemStacks[par1];
     }
@@ -160,6 +164,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
      * Removes from an inventory slot (first arg) up to a specified number
      * (second arg) of items and returns them in a new stack.
      */
+    @Override
     public ItemStack decrStackSize(int par1, int par2) {
         if (par1 < 9) {
             return null;
@@ -195,6 +200,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
      * whatever it returns as an EntityItem - like when you close a workbench
      * GUI.
      */
+    @Override
     public ItemStack getStackInSlotOnClosing(int par1) {
         if (par1 < 9) {
             return null;
@@ -214,6 +220,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
      * Sets the given item stack to the specified slot in the inventory (can be
      * crafting or armor sections).
      */
+    @Override
     public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
         this.reconstructorItemStacks[par1] = par2ItemStack;
 
@@ -226,6 +233,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
     /**
      * Returns the name of the inventory.
      */
+    @Override
     public String getInvName() {
         return this.isInvNameLocalized() ? this.field_94130_e
                 : "Microtech Reconstructor";
@@ -236,6 +244,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
      * name, and translated into the player's language. Otherwise it will be
      * used directly.
      */
+    @Override
     public boolean isInvNameLocalized() {
         return this.field_94130_e != null && this.field_94130_e.length() > 0;
     }
@@ -248,6 +257,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
      * Returns the maximum stack size for a inventory slot. Seems to always be
      * 64, possibly will be extended. *Isn't this more of a set than a get?*
      */
+    @Override
     public int getInventoryStackLimit() {
         return 64;
     }
@@ -276,9 +286,11 @@ public class TileEntityBaseEntityMicroReconstructor extends
                 && reconstructorItemStacks[4] == null
                 && reconstructorItemStacks[5] == null
                 && reconstructorItemStacks[6] == null
-                && reconstructorItemStacks[7] == null && reconstructorItemStacks[8] == null)
+                && reconstructorItemStacks[7] == null
+                && reconstructorItemStacks[8] == null)
                 || getSchematic() == null
-                || this.getCurrentPower() < powerToCook && cookTime != 0) {
+                || this.getCurrentPower() < powerToCook
+                && cookTime > 0) {
             return false;
         }
         else {
@@ -290,7 +302,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
             if (recipe == null) {
                 return false;
             }
-            if (hasItems(recipe.input)) {
+            if (!hasItems(recipe.input)) {
                 hasItems = false;
                 return false;
             }
@@ -309,40 +321,85 @@ public class TileEntityBaseEntityMicroReconstructor extends
         }
 
         cookTime = 0;
-        ItemStack ocopy = recipe.output.copy();
         ItemStack[] icopy = new ItemStack[9];
         for (int i = 0; i < recipe.input.length; ++i) {
             icopy[i] = recipe.input[i] == null ? null : recipe.input[i].copy();
         }
         reconstructingStacks = new ItemStack[9];
+        Arrays.fill(reconstructingStacks, null);
+
+
+        int maxSimul = (reconstructorItemStacks[9] == null ? 0 :
+                reconstructorItemStacks[9]
+                        .stackSize) / recipe.output
+                .stackSize;
+
+        for (int i = 0; i < icopy.length; ++i) {
+            ItemStack is = icopy[i];
+            if (is == null) continue;
+
+            int iter = is.getMaxStackSize() / is.stackSize;
+            maxSimul = Math.min(iter, maxSimul);
+        }
 
         int i = 0;
         do {
-            // if (deconstructingStack.stackSize >= O
-            // this.getInventoryStackLimit())
-            // break;
-            // if (getStackInSlot(0) == null)
-            // break;
-            //
-            // for (ItemStack stack : recipe.input) {
-            // items.add(stack);
-            // }
-            //
-            // ItemStack[] ita = new ItemStack[items.size()];
-            // items.toArray(ita);
-            // if (!roomForItems(ita))
-            // break;
-            //
-            // if ((massReq += recipe.mass) > (tank.getCapacity() - tank
-            // .getFluidAmount()))
-            // break;
-            //
-            // if (!consume(getPowerToCook()))
-            // break;
-            //
-            // deconstructingStack.stackSize += recipe.output.stackSize;
-            // decrStackSize(0, recipe.output.stackSize);
-        } while (++i < getMaxSimultaneousSmelt());
+            //Can do?
+            as = getSchematic();
+            if (as == null) {
+                break;
+            }
+            recipe = as.getRecipe(reconstructorItemStacks[10]);
+            if (recipe == null) {
+                break;
+            }
+
+            if (as.usesRemaining(reconstructorItemStacks[10]) == 0) {
+                break;
+            }
+
+            if (getCurrentPower() < getPowerToCook()) {
+                break;
+            }
+            if (getMassAmount() < recipe.mass) {
+                break;
+            }
+
+            if (!hasItems(recipe.input)) {
+                break;
+            }
+
+            //Do
+
+            if (i == 0) {
+                reconstructingStacks = icopy;
+            }
+            else {
+                for (int j = 0; j < recipe.input.length; ++j) {
+                    if (recipe.input[j] == null) continue;
+                    reconstructingStacks[j].stackSize += recipe.input[j]
+                            .stackSize;
+                }
+            }
+
+            int[] exclusions = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+            for (ItemStack item : recipe.input) {
+                FemtocraftUtils.removeItem(item, reconstructorItemStacks,
+                                           exclusions);
+                onInventoryChanged();
+            }
+
+            consume(getPowerToCook());
+            tank.drain(recipe.mass, true);
+
+            if (!as.onAssemble(reconstructorItemStacks[10])) {
+                reconstructorItemStacks[10] = as.resultOfBreakdown
+                        (reconstructorItemStacks[10]);
+                onInventoryChanged();
+            }
+
+            ++i;
+        } while (i < getMaxSimultaneousSmelt() && i < maxSimul);
     }
 
     @Override
@@ -352,7 +409,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
 
     @Override
     protected boolean canFinishWork() {
-        return cookTime >= ticksToCook;
+        return cookTime >= getTicksToCook();
     }
 
     @Override

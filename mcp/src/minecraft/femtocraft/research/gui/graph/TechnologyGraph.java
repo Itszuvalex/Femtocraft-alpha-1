@@ -57,7 +57,7 @@ public class TechnologyGraph extends MapGraph<String> {
                 continue;
             }
             for (ResearchTechnology prerequisite : tech.prerequisites) {
-                IGraphNode parent = (IGraphNode) nodes.get(prerequisite.name);
+                IGraphNode parent = nodes.get(prerequisite.name);
                 if (parent == null) {
                     continue;
                 }

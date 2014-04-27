@@ -46,16 +46,16 @@ public class ResearchTechnology {
 
     public ResearchTechnology(String name, String description,
                               EnumTechLevel level, ArrayList<ResearchTechnology> prerequisites,
-                              ItemStack displayItem, int xDisplay, int yDisplay,
+                              ItemStack displayItem,
                               boolean isKeystone, ArrayList<ItemStack> researchMaterials) {
-        this(name, description, level, prerequisites, displayItem, xDisplay,
-             yDisplay, isKeystone, researchMaterials, GuiTechnology.class,
+        this(name, description, level, prerequisites, displayItem,
+             isKeystone, researchMaterials, GuiTechnology.class,
              null);
     }
 
     public ResearchTechnology(String name, String description,
                               EnumTechLevel level, ArrayList<ResearchTechnology> prerequisites,
-                              ItemStack displayItem, int xDisplay, int yDisplay,
+                              ItemStack displayItem,
                               boolean isKeystone, ArrayList<ItemStack> researchMaterials,
                               Class<? extends GuiTechnology> guiClass, ItemStack discoverItem) {
         this.name = name;
@@ -63,8 +63,8 @@ public class ResearchTechnology {
         this.level = level;
         this.prerequisites = prerequisites;
         this.displayItem = displayItem;
-        this.xDisplay = xDisplay;
-        this.yDisplay = yDisplay;
+        this.xDisplay = 0;
+        this.yDisplay = 0;
         this.isKeystone = isKeystone;
         this.researchMaterials = researchMaterials;
         this.guiClass = guiClass;

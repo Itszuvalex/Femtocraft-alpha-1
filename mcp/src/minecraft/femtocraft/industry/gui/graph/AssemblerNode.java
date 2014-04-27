@@ -17,19 +17,34 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  ******************************************************************************/
 
-package femtocraft.research.gui.graph;
+package femtocraft.industry.gui.graph;
 
-import femtocraft.managers.research.EnumTechLevel;
-import femtocraft.managers.research.ResearchTechnology;
+import femtocraft.graph.GraphNode;
+import net.minecraft.item.ItemStack;
 
-import java.util.ArrayList;
+/**
+ * Created by Christopher Harris (Itszuvalex) on 4/26/14.
+ */
+public class AssemblerNode extends GraphNode {
+    private final ItemStack item;
 
-public class DummyTechnology extends ResearchTechnology {
+    public AssemblerNode(ItemStack item) {
+        super();
+        this.item = item;
+    }
 
-    public DummyTechnology(EnumTechLevel level,
-                           ArrayList<ResearchTechnology> prerequisites) {
-        super("Dummy", "I am a dummy and you shouldn't see me", level,
-              prerequisites, null, 0, 0, false, null);
+    public ItemStack getItemStack() {
+        return item;
+    }
+
+    @Override
+    public int getXPadding() {
+        return 0;
+    }
+
+    @Override
+    public int getYPadding() {
+        return 0;
     }
 
 }

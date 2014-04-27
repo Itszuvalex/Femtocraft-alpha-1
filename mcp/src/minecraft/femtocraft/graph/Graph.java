@@ -172,8 +172,8 @@ public abstract class Graph {
             return;
         }
 
-        for (int i1 = 0; i1 < row2.size(); ++i1) {
-            for (int i2 = 0; i2 < row2.size(); ++i2) {
+        for (int i1 = 0; i1 < row2.size() - 1; ++i1) {
+            for (int i2 = i1 + 1; i2 < row2.size(); ++i2) {
                 if (i1 == i2) {
                     continue;
                 }

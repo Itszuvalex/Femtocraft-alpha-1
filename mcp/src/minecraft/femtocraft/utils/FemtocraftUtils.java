@@ -53,6 +53,7 @@ public class FemtocraftUtils {
         // }
     }
 
+
     public static boolean isPlayerOnline(String username) {
         return Arrays.asList(MinecraftServer.getServer().getAllUsernames())
                      .contains(username);
@@ -135,14 +136,16 @@ public class FemtocraftUtils {
         // Place into null locations
         for (int i = 0; i < slots.length; ++i) {
             boolean restricted = false;
-            for (int r : restrictions) {
-                if (i == r) {
-                    restricted = true;
-                    break;
+            if (restrictions != null) {
+                for (int r : restrictions) {
+                    if (i == r) {
+                        restricted = true;
+                        break;
+                    }
                 }
-            }
-            if (restricted) {
-                continue;
+                if (restricted) {
+                    continue;
+                }
             }
 
             if (slots[i] == null) {
