@@ -66,7 +66,7 @@ public class BlockMicroFurnace extends TileContainer {
         this.isActive = par2;
         setUnlocalizedName("FemtocraftMicroFurnace");
         setHardness(3.5f);
-        setStepSound(Block.soundStoneFootstep);
+        setStepSound(Block.soundMetalFootstep);
         setCreativeTab(Femtocraft.femtocraftTab);
         if (par2) {
             setLightValue(0.875F);

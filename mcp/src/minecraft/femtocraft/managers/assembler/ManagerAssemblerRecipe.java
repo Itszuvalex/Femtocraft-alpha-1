@@ -68,9 +68,9 @@ public class ManagerAssemblerRecipe {
     private HashMap<ResearchTechnology, ArrayList<AssemblerRecipe>> technologyToRecipeMap;
     public ManagerAssemblerRecipe() {
         inputToRecipeMap = new TreeMap<ItemStack[], AssemblerRecipe>(
-                new ComparatorAssemblerInput());
+                new ComparatorItemStackArray());
         outputToRecipeMap = new TreeMap<ItemStack, AssemblerRecipe>(
-                new ComparatorAssemblerOutput());
+                new ComparatorItemStack());
         techLevelToRecipeMap = new HashMap<EnumTechLevel, ArrayList<AssemblerRecipe>>();
         technologyToRecipeMap = new HashMap<ResearchTechnology, ArrayList<AssemblerRecipe>>();
 

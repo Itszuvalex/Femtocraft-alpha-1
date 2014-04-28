@@ -296,7 +296,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
                 && reconstructorItemStacks[7] == null
                 && reconstructorItemStacks[8] == null)
                 || getSchematic() == null
-                || this.getCurrentPower() < powerToCook
+                || this.getCurrentPower() < getPowerToCook()
                 || cookTime > 0) {
             return false;
         }

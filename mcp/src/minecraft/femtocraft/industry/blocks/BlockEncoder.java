@@ -24,6 +24,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.core.blocks.TileContainer;
 import femtocraft.industry.tiles.TileEntityEncoder;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
@@ -38,6 +39,8 @@ public class BlockEncoder extends TileContainer {
     public BlockEncoder(int par1) {
         super(par1, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
+        setHardness(3.5f);
+        setStepSound(Block.soundMetalFootstep);
     }
 
     @Override

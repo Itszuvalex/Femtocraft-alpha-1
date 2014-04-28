@@ -56,7 +56,7 @@ public class BlockNanoFabricator extends TileContainer {
         super(par1, Material.iron);
         setUnlocalizedName("BlockNanoFabricator");
         setHardness(3.5f);
-        setStepSound(Block.soundStoneFootstep);
+        setStepSound(Block.soundMetalFootstep);
         setCreativeTab(Femtocraft.femtocraftTab);
     }
 

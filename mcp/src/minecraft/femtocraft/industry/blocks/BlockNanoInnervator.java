@@ -65,7 +65,7 @@ public class BlockNanoInnervator extends TileContainer {
         this.isActive = par2;
         setUnlocalizedName("BlockNanoInnervator");
         setHardness(3.5f);
-        setStepSound(Block.soundStoneFootstep);
+        setStepSound(Block.soundMetalFootstep);
         setCreativeTab(Femtocraft.femtocraftTab);
         if (par2) {
             setLightValue(0.875F);

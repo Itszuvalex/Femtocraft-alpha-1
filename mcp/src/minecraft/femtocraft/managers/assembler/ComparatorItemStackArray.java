@@ -24,7 +24,7 @@ import net.minecraft.item.ItemStack;
 
 import java.util.Comparator;
 
-public class ComparatorAssemblerInput implements Comparator<ItemStack[]> {
+public class ComparatorItemStackArray implements Comparator<ItemStack[]> {
 
     @Override
     public int compare(ItemStack[] o1, ItemStack[] o2) {

@@ -57,8 +57,12 @@ public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
     }
 
     private AssemblerRecipe getRecipe() {
-        return Femtocraft.recipeManager.assemblyRecipes.getRecipe(Arrays
-                                                                          .copyOfRange(inventory.getInventory(), 0, 9));
+        AssemblerRecipe recipe = Femtocraft.recipeManager.assemblyRecipes
+                .getRecipe(Arrays.copyOfRange(inventory.getInventory(), 0, 9));
+        if (recipe == null) return null;
+        boolean researched = Femtocraft.researchManager
+                .hasPlayerResearchedTechnology(getOwner(), recipe.tech);
+        return researched ? recipe : null;
     }
 
     /*

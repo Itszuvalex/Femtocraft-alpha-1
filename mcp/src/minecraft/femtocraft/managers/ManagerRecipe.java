@@ -22,6 +22,8 @@ package femtocraft.managers;
 import cpw.mods.fml.common.registry.GameRegistry;
 import femtocraft.Femtocraft;
 import femtocraft.managers.assembler.ManagerAssemblerRecipe;
+import femtocraft.managers.dimensional.ManagerDimensionalRecipe;
+import femtocraft.managers.temporal.ManagerTemporalRecipe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
@@ -29,6 +31,10 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ManagerRecipe {
     public static ManagerAssemblerRecipe assemblyRecipes = new ManagerAssemblerRecipe();
+    public static ManagerTemporalRecipe temporalRecipes = new
+            ManagerTemporalRecipe();
+    public static ManagerDimensionalRecipe dimensionalRecipes = new
+            ManagerDimensionalRecipe();
 
     public ManagerRecipe() {
         registerRecipes();

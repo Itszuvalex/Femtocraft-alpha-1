@@ -22,9 +22,12 @@ package femtocraft.utils;
 import femtocraft.utils.FemtocraftDataUtils.EnumSaveType;
 import femtocraft.utils.FemtocraftDataUtils.Saveable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+
+import java.util.Arrays;
 
 public class BaseInventory implements IInventory, ISaveable {
     @Saveable
@@ -32,10 +35,6 @@ public class BaseInventory implements IInventory, ISaveable {
 
     public BaseInventory(int size) {
         inventory = new ItemStack[size];
-    }
-
-    private BaseInventory() {
-
     }
 
     /**
@@ -139,5 +138,19 @@ public class BaseInventory implements IInventory, ISaveable {
     public void loadFromNBT(NBTTagCompound compound) {
         FemtocraftDataUtils.loadObjectFromNBT(compound, this,
                                               EnumSaveType.WORLD);
+    }
+
+    /**
+     * Changes size of the inventory to be equal to size.  Keeps current
+     * inventory from slots 0 -> (size-1), and will drop extra itemstacks.
+     *
+     * @param size new size of inventory
+     */
+    public void setInventorySize(int size) {
+        inventory = Arrays.copyOfRange(inventory, 0, size);
+    }
+
+    public int getComparatorInputOverride() {
+        return Container.calcRedstoneFromInventory(this);
     }
 }
