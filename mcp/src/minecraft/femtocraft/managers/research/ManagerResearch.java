@@ -377,7 +377,7 @@ public class ManagerResearch {
             EnumTechLevel.DIMENSIONAL, new ArrayList<ResearchTechnology>(
             Arrays.asList(technologyArtificialMaterials,
                           technologySpacetimeManipulation)
-    ), null,
+    ), new ItemStack(Femtocraft.nanoEnmesher),
             false, new ArrayList<ItemStack>()
     );
     @Technology
@@ -409,7 +409,7 @@ public class ManagerResearch {
             EnumTechLevel.TEMPORAL, new ArrayList<ResearchTechnology>(
             Arrays.asList(technologyArtificialMaterials,
                           technologySpacetimeManipulation)
-    ), null,
+    ), new ItemStack(Femtocraft.nanoHorologe),
             false, new ArrayList<ItemStack>()
     );
     @Technology
@@ -450,7 +450,7 @@ public class ManagerResearch {
             EnumTechLevel.DIMENSIONAL, new ArrayList<ResearchTechnology>(
             Arrays.asList(technologySpacetimeExploitation,
                           technologyElementManufacturing)
-    ), null,
+    ), new ItemStack(Femtocraft.femtoEntangler),
             false, new ArrayList<ItemStack>()
     );
     @Technology
@@ -468,7 +468,7 @@ public class ManagerResearch {
             EnumTechLevel.TEMPORAL, new ArrayList<ResearchTechnology>(
             Arrays.asList(technologySpacetimeExploitation,
                           technologyElementManufacturing)
-    ), null,
+    ), new ItemStack(Femtocraft.femtoChronoshifter),
             false, new ArrayList<ItemStack>()
     );
     @Technology

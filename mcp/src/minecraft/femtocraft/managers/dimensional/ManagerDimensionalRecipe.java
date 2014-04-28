@@ -81,12 +81,31 @@ public class ManagerDimensionalRecipe {
     }
 
     public DimensionalRecipe getRecipe(ItemStack input, ItemStack[] configurators) {
-        return recipes.get(new DimensionalKey(input, configurators));
+        return recipes.get(getDimensionalKey(input, configurators));
     }
 
     public void addRecipe(DimensionalRecipe recipe) {
-        recipes.put(new DimensionalKey(recipe.input, recipe.configurators),
+        recipes.put(getDimensionalKey(recipe.input, recipe.configurators),
                     recipe);
+    }
+
+    private DimensionalKey getDimensionalKey(ItemStack input,
+                                             ItemStack[] configurators) {
+        ItemStack ninput = input.copy();
+        input.stackSize = 1;
+
+        ItemStack[] configs = new ItemStack[configurators.length];
+        if (configs != null) {
+            for (int i = 0; i < configs.length; ++i) {
+                if (configurators[i] == null) {
+                    continue;
+                }
+                configs[i] = configurators[i].copy();
+                configs[i].stackSize = 1;
+            }
+        }
+
+        return new DimensionalKey(ninput, configs);
     }
 
 }

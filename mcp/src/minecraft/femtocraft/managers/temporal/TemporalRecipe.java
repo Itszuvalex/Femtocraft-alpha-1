@@ -19,7 +19,9 @@
 
 package femtocraft.managers.temporal;
 
+import femtocraft.Femtocraft;
 import femtocraft.managers.research.EnumTechLevel;
+import femtocraft.managers.research.ResearchTechnology;
 import femtocraft.utils.FemtocraftDataUtils;
 import femtocraft.utils.FemtocraftUtils;
 import femtocraft.utils.ISaveable;
@@ -40,14 +42,28 @@ public class TemporalRecipe implements Comparable, ISaveable {
     public int ticks;
     @FemtocraftDataUtils.Saveable
     public EnumTechLevel techLevel;
+    @FemtocraftDataUtils.Saveable
+    public String tech;
 
     public TemporalRecipe(ItemStack input, ItemStack[] configurators,
-                          ItemStack output, int ticks, EnumTechLevel level) {
+                          ItemStack output, int ticks,
+                          EnumTechLevel level, ResearchTechnology tech) {
+        this(input, configurators, output, ticks, level, tech.name);
+    }
+
+    public TemporalRecipe(ItemStack input, ItemStack[] configurators,
+                          ItemStack output, int ticks,
+                          EnumTechLevel level, String tech) {
         this.input = input;
         this.configurators = configurators;
         this.output = output;
         this.ticks = ticks;
         this.techLevel = level;
+        this.tech = tech;
+    }
+
+    public ResearchTechnology getTechnology() {
+        return Femtocraft.researchManager.getTechnology(tech);
     }
 
     @Override

@@ -455,6 +455,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
             FemtocraftUtils.placeItem(recipe.output,
                                       reconstructorItemStacks, placeRestrictions
             );
+            onInventoryChanged();
         }
         reconstructingStacks = null;
         cookTime = 0;

@@ -19,10 +19,39 @@
 
 package femtocraft.industry.tiles;
 
-public class TileEntityFemtoChronoshifter {
+import femtocraft.managers.research.EnumTechLevel;
+
+public class TileEntityFemtoChronoshifter extends TileEntityBaseEntityNanoHorologe {
+    public static int powerToCook_default = 160;
+    public static float tickMultiplier_default = .5f;
+
+    public static final int outputSlot = 7;
+    public static final int inventorySize = 8;
 
     public TileEntityFemtoChronoshifter() {
-        // TODO Auto-generated constructor stub
+        super();
+        setTechLevel(EnumTechLevel.FEMTO);
+        setMaxStorage(10000);
+        inventory.setInventorySize(inventorySize);
     }
 
+    @Override
+    protected float getTickMultiplier() {
+        return tickMultiplier_default;
+    }
+
+    @Override
+    protected int getPowerToCook() {
+        return powerToCook_default;
+    }
+
+    @Override
+    protected EnumTechLevel getTechLevel() {
+        return EnumTechLevel.FEMTO;
+    }
+
+    @Override
+    protected int getOutputSlotIndex() {
+        return outputSlot;
+    }
 }

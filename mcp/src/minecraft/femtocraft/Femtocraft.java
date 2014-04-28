@@ -122,10 +122,14 @@ public class Femtocraft {
     public static Block nanoInnervatorLit;
     public static Block nanoDismantler;
     public static Block nanoFabricator;
+    public static Block nanoEnmesher;
+    public static Block nanoHorologe;
     public static Block femtoImpulserLit;
     public static Block femtoImpulserUnlit;
     public static Block femtoRepurposer;
     public static Block femtoCoagulator;
+    public static Block femtoEntangler;
+    public static Block femtoChronoshifter;
     public static Block microCube;
     public static Block nanoCubeFrame;
     public static Block nanoCubePort;
@@ -398,6 +402,16 @@ public class Femtocraft {
         GameRegistry.registerBlock(nanoFabricator, "BlockNanoFabricator");
         LanguageRegistry.addName(nanoFabricator, "Nano Fabricator");
 
+        nanoEnmesher = new BlockNanoEnmesher(FemtocraftConfigs
+                                                     .FemtocraftNanoEnmesherID);
+        GameRegistry.registerBlock(nanoEnmesher, "BlockNanoEnmesher");
+        LanguageRegistry.addName(nanoEnmesher, "Nano Enmesher");
+
+        nanoHorologe = new BlockNanoHorologe(FemtocraftConfigs
+                                                     .FemtocraftNanoHorologeID);
+        GameRegistry.registerBlock(nanoHorologe, "BlockNanoHorologe");
+        LanguageRegistry.addName(nanoHorologe, "Nano Horologe");
+
         femtoImpulserUnlit = new BlockFemtoImpulser(
                 FemtocraftConfigs.FemtocraftFemtoImpulserUnlitID, false);
         GameRegistry.registerBlock(femtoImpulserUnlit, "BlockFemtoImpulser");
@@ -415,6 +429,16 @@ public class Femtocraft {
                                                            .FemtocraftFemtoCoagulatorID);
         GameRegistry.registerBlock(femtoCoagulator, "BlockFemtoCoagulator");
         LanguageRegistry.addName(femtoCoagulator, "Femto Coagulator");
+
+        femtoEntangler = new BlockFemtoEntangler(FemtocraftConfigs
+                                                         .FemtocraftFemtoEntanglerID);
+        GameRegistry.registerBlock(femtoEntangler, "BlockFemtoEntangler");
+        LanguageRegistry.addName(femtoEntangler, "Femto Entangler");
+
+        femtoChronoshifter = new BlockFemtoChronoshifter(FemtocraftConfigs
+                                                                 .FemtocraftFemtoChronoshifterID);
+        GameRegistry.registerBlock(femtoChronoshifter, "BlockFemtoChronoshifter");
+        LanguageRegistry.addName(femtoChronoshifter, "Femto Chronoshifter");
 
         microCube = new BlockMicroCube(FemtocraftConfigs.FemtopowerMicroCubeID);
         GameRegistry.registerBlock(microCube, ItemBlockMicroCube.class,

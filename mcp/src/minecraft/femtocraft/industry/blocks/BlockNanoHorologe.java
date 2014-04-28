@@ -30,7 +30,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -138,30 +137,6 @@ public class BlockNanoHorologe extends TileContainer {
     }
 
     /**
-     * Called upon block activation (right click on the block.)
-     */
-    public boolean onBlockActivated(World par1World, int par2, int par3,
-                                    int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
-                                    float par8, float par9) {
-        if (par1World.isRemote) {
-            return true;
-        }
-        else {
-            TileEntityBaseEntityNanoHorologe tileentityfurnace =
-                    (TileEntityBaseEntityNanoHorologe)
-                            par1World
-                                    .getBlockTileEntity(par2, par3, par4);
-
-            if (tileentityfurnace != null) {
-                par5EntityPlayer.openGui(Femtocraft.instance, 0, par1World,
-                                         par2, par3, par4);
-            }
-
-            return true;
-        }
-    }
-
-    /**
      * Returns a new instance of a block's tile entity class. Called on placing
      * the block.
      */
@@ -174,6 +149,9 @@ public class BlockNanoHorologe extends TileContainer {
      */
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
                                 EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
+        super.onBlockPlacedBy(par1World, par2, par3, par4,
+                              par5EntityLivingBase, par6ItemStack);
+
         int l = MathHelper
                 .floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
@@ -257,50 +235,45 @@ public class BlockNanoHorologe extends TileContainer {
             }
 
             if (tileEntity.isWorking()) {
-                ItemStack[] itemstacks = tileEntity.chronoStacks;
+                ItemStack itemstack = tileEntity.chronoStack;
 
-                if (itemstacks != null) {
+                if (itemstack != null) {
                     float f = this.rand.nextFloat() * 0.8F + 0.1F;
                     float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
                     float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
-                    for (ItemStack itemstack : itemstacks) {
-                        if (itemstack == null) {
-                            continue;
+                    while (itemstack.stackSize > 0) {
+                        int k1 = this.rand.nextInt(21) + 10;
+
+                        if (k1 > itemstack.stackSize) {
+                            k1 = itemstack.stackSize;
                         }
 
-                        while (itemstack.stackSize > 0) {
-                            int k1 = this.rand.nextInt(21) + 10;
+                        itemstack.stackSize -= k1;
+                        EntityItem entityitem = new EntityItem(par1World,
+                                                               (double) ((float) par2 + f),
+                                                               (double) ((float) par3 + f1),
+                                                               (double) ((float) par4 + f2),
+                                                               new ItemStack(itemstack.itemID, k1,
+                                                                             itemstack.getItemDamage())
+                        );
 
-                            if (k1 > itemstack.stackSize) {
-                                k1 = itemstack.stackSize;
-                            }
-
-                            itemstack.stackSize -= k1;
-                            EntityItem entityitem = new EntityItem(par1World,
-                                                                   (double) ((float) par2 + f),
-                                                                   (double) ((float) par3 + f1),
-                                                                   (double) ((float) par4 + f2),
-                                                                   new ItemStack(itemstack.itemID, k1,
-                                                                                 itemstack.getItemDamage())
+                        if (itemstack.hasTagCompound()) {
+                            entityitem.getEntityItem().setTagCompound(
+                                    (NBTTagCompound) itemstack
+                                            .getTagCompound().copy()
                             );
-
-                            if (itemstack.hasTagCompound()) {
-                                entityitem.getEntityItem().setTagCompound(
-                                        (NBTTagCompound) itemstack
-                                                .getTagCompound().copy()
-                                );
-                            }
-
-                            float f3 = 0.05F;
-                            entityitem.motionX = (double) ((float) this.rand
-                                    .nextGaussian() * f3);
-                            entityitem.motionY = (double) ((float) this.rand
-                                    .nextGaussian() * f3 + 0.2F);
-                            entityitem.motionZ = (double) ((float) this.rand
-                                    .nextGaussian() * f3);
-                            par1World.spawnEntityInWorld(entityitem);
                         }
+
+                        float f3 = 0.05F;
+                        entityitem.motionX = (double) ((float) this.rand
+                                .nextGaussian() * f3);
+                        entityitem.motionY = (double) ((float) this.rand
+                                .nextGaussian() * f3 + 0.2F);
+                        entityitem.motionZ = (double) ((float) this.rand
+                                .nextGaussian() * f3);
+                        par1World.spawnEntityInWorld(entityitem);
                     }
+
                 }
             }
 

@@ -326,6 +326,7 @@ public class TileEntityBaseEntityMicroDeconstructor extends
 
         deconstructingStack = null;
         cookTime = 0;
+        onInventoryChanged();
     }
 
     private boolean roomForItems(ItemStack[] items) {

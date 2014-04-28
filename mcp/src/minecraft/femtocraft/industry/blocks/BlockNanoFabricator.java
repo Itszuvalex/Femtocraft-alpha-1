@@ -30,7 +30,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -137,27 +136,6 @@ public class BlockNanoFabricator extends TileContainer {
                                                           "NanoFabricator_front");
     }
 
-    /**
-     * Called upon block activation (right click on the block.)
-     */
-    public boolean onBlockActivated(World par1World, int par2, int par3,
-                                    int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
-                                    float par8, float par9) {
-        if (par1World.isRemote) {
-            return true;
-        }
-        else {
-            TileEntityNanoFabricator tileentityfurnace = (TileEntityNanoFabricator) par1World
-                    .getBlockTileEntity(par2, par3, par4);
-
-            if (tileentityfurnace != null) {
-                par5EntityPlayer.openGui(Femtocraft.instance, 0, par1World,
-                                         par2, par3, par4);
-            }
-
-            return true;
-        }
-    }
 
     /**
      * Returns a new instance of a block's tile entity class. Called on placing
@@ -172,6 +150,9 @@ public class BlockNanoFabricator extends TileContainer {
      */
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
                                 EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
+        super.onBlockPlacedBy(par1World, par2, par3, par4,
+                              par5EntityLivingBase, par6ItemStack);
+
         int l = MathHelper
                 .floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
