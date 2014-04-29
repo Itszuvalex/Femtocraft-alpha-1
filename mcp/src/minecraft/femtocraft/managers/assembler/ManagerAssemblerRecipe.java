@@ -66,6 +66,7 @@ public class ManagerAssemblerRecipe {
     private SortedMap<ItemStack, AssemblerRecipe> outputToRecipeMap;
     private HashMap<EnumTechLevel, ArrayList<AssemblerRecipe>> techLevelToRecipeMap;
     private HashMap<ResearchTechnology, ArrayList<AssemblerRecipe>> technologyToRecipeMap;
+
     public ManagerAssemblerRecipe() {
         inputToRecipeMap = new TreeMap<ItemStack[], AssemblerRecipe>(
                 new ComparatorItemStackArray());
@@ -1097,7 +1098,8 @@ public class ManagerAssemblerRecipe {
                     }
                     input[((i + xOffset) % width) + 3
                             * (yOffset + ((i + xOffset) / width))] = item == null ? null
-                            : item.copy();
+//                            : item.copy();
+                            : new ItemStack(item.itemID, 1, item.getItemDamage());
                 } catch (ArrayIndexOutOfBoundsException e) {
                     if (++xOffset >= 3) {
                         xOffset = 0;
@@ -1152,7 +1154,8 @@ public class ManagerAssemblerRecipe {
                 ItemStack item = recipeItems[i];
                 input[((i + xoffset) % recipeWidth) + 3
                         * (yoffset + ((i + xoffset) / recipeWidth))] = item == null ? null
-                        : item.copy();
+//                        : item.copy();
+                        : new ItemStack(item.itemID, 1, item.getItemDamage());
             }
 
             try {

@@ -543,14 +543,21 @@ public class GuiResearch extends GuiScreen {
 
                 GL11.glEnable(GL11.GL_LIGHTING);
                 GL11.glEnable(GL11.GL_CULL_FACE);
+                GL11.glEnable(GL12.GL_RESCALE_NORMAL);
                 GL11.glPushMatrix();
                 renderitem.renderItemAndEffectIntoGUI(
                         Minecraft.getMinecraft().fontRenderer, Minecraft
                                 .getMinecraft().getTextureManager(),
                         tech.displayItem, i5 + 3, l4 + 3
                 );
+                renderitem.renderItemOverlayIntoGUI(Minecraft.getMinecraft()
+                                                            .fontRenderer,
+                                                    Minecraft.getMinecraft()
+                                                             .getTextureManager(), tech.discoverItem, i5 + 3, l4 + 3
+                );
                 GL11.glPopMatrix();
                 GL11.glDisable(GL11.GL_LIGHTING);
+                GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 
                 // if (!this.statFileWriter.canUnlockAchievement(achievement2))
                 // {
@@ -570,6 +577,7 @@ public class GuiResearch extends GuiScreen {
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ADD);
         Minecraft.getMinecraft().getTextureManager()
                  .bindTexture(achievementTextures);
         this.drawTexturedModalRect(i1, j1, 0, 0, this.researchPaneWidth,

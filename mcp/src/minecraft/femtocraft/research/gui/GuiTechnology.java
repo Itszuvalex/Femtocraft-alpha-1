@@ -20,6 +20,7 @@
 package femtocraft.research.gui;
 
 import femtocraft.Femtocraft;
+import femtocraft.managers.assembler.AssemblerRecipe;
 import femtocraft.managers.research.ResearchTechnology;
 import femtocraft.managers.research.ResearchTechnologyStatus;
 import femtocraft.utils.FemtocraftUtils;
@@ -318,6 +319,45 @@ public class GuiTechnology extends GuiScreen {
                                           width - 54 - 2 * padding, height - 2 * padding);
     }
 
+    protected void renderAssemblerRecipeWithInfo(int x, int y, int width,
+                                                 int height,
+                                                 AssemblerRecipe recipe,
+                                                 int mouseX, int mouseY,
+                                                 List tooltip, String info) {
+        int padding = 2;
+        renderAssemblerRecipe(x, y, width, height, recipe, mouseX, mouseY, tooltip);
+        info = String.format("%s%s%s", EnumChatFormatting.WHITE, info,
+                             EnumChatFormatting.RESET);
+        fontRenderer.drawSplitString(info, x + 54 + fontRenderer
+                                             .getStringWidth("<->") + 18 + 2 * padding, y + 2 * padding,
+                                     width - 2 * padding, height - 2 * padding
+        );
+    }
+
+
+    protected void renderAssemblerRecipe(int x, int y, int width, int height,
+                                         AssemblerRecipe recipe, int mouseX,
+                                         int mouseY, List tooltip)
+
+    {
+        String recipeDir = EnumChatFormatting.WHITE + "<->" +
+                EnumChatFormatting.RESET;
+        renderCraftingGrid(x, y, recipe.input, mouseX,
+                           mouseY, tooltip);
+        GL11.glColor4f(1.f, 1.f, 1.f, 1.f);
+        fontRenderer.drawSplitString(recipeDir, x + 54 + 1,
+                                     y + (54 - fontRenderer
+                                             .FONT_HEIGHT)
+                                             / 2, fontRenderer.getStringWidth
+                        (recipeDir) + 2,
+                                     fontRenderer.FONT_HEIGHT
+        );
+        renderItemSlot(x + 54 + fontRenderer.getStringWidth(recipeDir) + 2,
+                       y + 18, recipe.output, new RenderItem(), mouseX, mouseY,
+                       tooltip);
+
+    }
+
     /**
      * 54 width and height
      *
@@ -327,14 +367,28 @@ public class GuiTechnology extends GuiScreen {
      */
     protected void renderCraftingGrid(int x, int y, ItemStack[] items,
                                       int mouseX, int mouseY, List tooltip) {
+        ItemStack[] ir = items != null ? items : new ItemStack[9];
+        RenderItem renderitem = new RenderItem();
+        for (int i = 0; (i < 9) && (i < ir.length); ++i) {
+            int xr = x
+                    + 18 * (i % 3);
+            int yr = y + 18 * (i / 3);
+            renderItemSlot(xr, yr, ir[i], renderitem, mouseX, mouseY,
+                           tooltip);
+        }
+    }
+
+    protected void renderItemSlot(int x, int y, ItemStack item,
+                                  RenderItem renderitem, int mouseX,
+                                  int mouseY, List tooltip) {
+
         GL11.glColor4f(1.f, 1.f, 1.f, 1.f);
         Minecraft.getMinecraft().renderEngine.bindTexture(texture);
-        drawTexturedModalRect(x, y, 194, 11, 54, 54);
+        drawTexturedModalRect(x, y, 194, 11, 18, 18);
 
-        RenderItem renderitem = new RenderItem();
         RenderHelper.enableGUIStandardItemLighting();
 
-        if (items == null) {
+        if (item == null) {
             RenderHelper.disableStandardItemLighting();
             return;
         }
@@ -344,29 +398,35 @@ public class GuiTechnology extends GuiScreen {
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 
-        for (int i = 0; (i < 9) && (i < items.length); ++i) {
-            if (items[i] == null) {
-                continue;
-            }
-            renderitem.renderItemIntoGUI(
-                    Minecraft.getMinecraft().fontRenderer, Minecraft
-                            .getMinecraft().getTextureManager(), items[i], x
-                            + 1 + 18 * (i % 3), y + 1 + 18 * (i / 3), true
-            );
-        }
+
+        int xr = x
+                + 1;
+        int yr = y + 1;
+        renderitem.renderItemIntoGUI(
+                Minecraft.getMinecraft().fontRenderer, Minecraft
+                        .getMinecraft().getTextureManager(), item, xr,
+                yr, true
+        );
+        renderitem.renderItemOverlayIntoGUI(Minecraft.getMinecraft()
+                                                    .fontRenderer,
+                                            Minecraft.getMinecraft()
+                                                     .getTextureManager()
+                , item, xr, yr
+        );
+
+
         RenderHelper.disableStandardItemLighting();
 
-        for (int i = 0; (i < 9) && (i < items.length); ++i) {
-            if (mouseX >= (x + 1 + 18 * (i % 3))
-                    && (mouseX <= (x + 16 + 18 * (i % 3))) && (mouseY >= (y + 1 + 18 * (i / 3))) && (mouseY <= y
-                    + 16 + 18 * (i / 3))) {
-                if (items[i] != null) {
-                    tooltip.add(items[i].getDisplayName());
-                }
-            }
+        if (mouseX > x + 1 && mouseX < x + 18 && mouseY > y + 1 && mouseY <
+                y + 18)
+
+        {
+            tooltip.add(item.getDisplayName());
         }
+
         GL11.glDisable(GL11.GL_LIGHTING);
     }
+
 
     protected void drawHoveringText(List par1List, int par2, int par3,
                                     FontRenderer font) {

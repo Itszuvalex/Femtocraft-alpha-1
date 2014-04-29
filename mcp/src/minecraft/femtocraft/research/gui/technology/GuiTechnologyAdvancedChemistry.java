@@ -47,13 +47,14 @@ public class GuiTechnologyAdvancedChemistry extends GuiTechnology {
             int index = (displayPage - 1) * 2;
             AssemblerRecipe recipe = recipes.get(index);
 
-            renderCraftingGridWithInfo(x, y, width, height / 2, recipe.input,
-                                       mouseX, mouseY, tooltip, recipe.output.getDisplayName());
+            renderAssemblerRecipeWithInfo(x, y, width, height / 2, recipe,
+                                          mouseX, mouseY, tooltip, recipe.output.getDisplayName());
             if (++index < recipes.size()) {
                 AssemblerRecipe recipe1 = recipes.get(index);
-                renderCraftingGridWithInfo(x, y + (height / 2), width, height / 2,
-                                           recipe1.input, mouseX, mouseY, tooltip,
-                                           recipe1.output.getDisplayName());
+                renderAssemblerRecipeWithInfo(x, y + (height / 2), width,
+                                              height / 2,
+                                              recipe1, mouseX, mouseY, tooltip,
+                                              recipe1.output.getDisplayName());
             }
         }
         else {
