@@ -327,6 +327,7 @@ public class GuiTechnology extends GuiScreen {
      */
     protected void renderCraftingGrid(int x, int y, ItemStack[] items,
                                       int mouseX, int mouseY, List tooltip) {
+        GL11.glColor4f(1.f, 1.f, 1.f, 1.f);
         Minecraft.getMinecraft().renderEngine.bindTexture(texture);
         drawTexturedModalRect(x, y, 194, 11, 54, 54);
 
@@ -334,6 +335,7 @@ public class GuiTechnology extends GuiScreen {
         RenderHelper.enableGUIStandardItemLighting();
 
         if (items == null) {
+            RenderHelper.disableStandardItemLighting();
             return;
         }
 
@@ -341,18 +343,18 @@ public class GuiTechnology extends GuiScreen {
             if (items[i] == null) {
                 continue;
             }
-            renderitem.renderItemAndEffectIntoGUI(
+            renderitem.renderItemIntoGUI(
                     Minecraft.getMinecraft().fontRenderer, Minecraft
                             .getMinecraft().getTextureManager(), items[i], x
-                            + 1 + 18 * (i % 3), y + 1 + 18 * (i / 3)
+                            + 1 + 18 * (i % 3), y + 1 + 18 * (i / 3), true
             );
         }
         RenderHelper.disableStandardItemLighting();
 
         for (int i = 0; (i < 9) && (i < items.length); ++i) {
-            if ((mouseX >= (x + 1 + 18 * (i % 3))
-                    && (mouseX <= (x + 16 + 18 * (i % 3))) && ((mouseY >= (y + 1 + 18 * (i / 3))) && (mouseY <= y
-                    + 16 + 18 * (i / 3))))) {
+            if (mouseX >= (x + 1 + 18 * (i % 3))
+                    && (mouseX <= (x + 16 + 18 * (i % 3))) && (mouseY >= (y + 1 + 18 * (i / 3))) && (mouseY <= y
+                    + 16 + 18 * (i / 3))) {
                 if (items[i] != null) {
                     tooltip.add(items[i].getDisplayName());
                 }

@@ -43,21 +43,26 @@ public class GuiTechnologyMacroscopicStructure extends GuiTechnology {
     protected void renderInformation(int x, int y, int width, int height,
                                      int displayPage, int mouseX, int mouseY, List tooltip,
                                      boolean isResearched) {
-        int index = (displayPage - 1) * 2;
-        AssemblerRecipe recipe = recipes.get(index);
+        if (isResearched) {
+            int index = (displayPage - 1) * 2;
+            AssemblerRecipe recipe = recipes.get(index);
 
-        renderCraftingGridWithInfo(x, y, width, height / 2, recipe.input,
-                                   mouseX, mouseY, tooltip, recipe.output.getDisplayName());
-        if (++index < recipes.size()) {
-            AssemblerRecipe recipe1 = recipes.get(index);
-            renderCraftingGridWithInfo(x, y + (height / 2), width, height / 2,
-                                       recipe1.input, mouseX, mouseY, tooltip,
-                                       recipe1.output.getDisplayName());
+            renderCraftingGridWithInfo(x, y, width, height / 2, recipe.input,
+                                       mouseX, mouseY, tooltip, recipe.output.getDisplayName());
+            if (++index < recipes.size()) {
+                AssemblerRecipe recipe1 = recipes.get(index);
+                renderCraftingGridWithInfo(x, y + (height / 2), width, height / 2,
+                                           recipe1.input, mouseX, mouseY, tooltip,
+                                           recipe1.output.getDisplayName());
+            }
+        }
+        else {
+
         }
     }
 
     @Override
     protected int getNumPages(boolean researched) {
-        return (int) Math.ceil(recipes.size() / 2.f);
+        return researched ? (int) Math.ceil(recipes.size() / 2.f) : 1;
     }
 }
