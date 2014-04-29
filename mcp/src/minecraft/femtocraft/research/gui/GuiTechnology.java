@@ -339,6 +339,11 @@ public class GuiTechnology extends GuiScreen {
             return;
         }
 
+        GL11.glEnable(GL11.GL_LIGHTING);
+        GL11.glEnable(GL11.GL_CULL_FACE);
+        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+        GL11.glEnable(GL11.GL_COLOR_MATERIAL);
+
         for (int i = 0; (i < 9) && (i < items.length); ++i) {
             if (items[i] == null) {
                 continue;
@@ -360,6 +365,7 @@ public class GuiTechnology extends GuiScreen {
                 }
             }
         }
+        GL11.glDisable(GL11.GL_LIGHTING);
     }
 
     protected void drawHoveringText(List par1List, int par2, int par3,
