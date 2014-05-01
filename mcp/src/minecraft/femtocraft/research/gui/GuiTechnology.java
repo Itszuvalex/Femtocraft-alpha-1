@@ -395,11 +395,12 @@ public class GuiTechnology extends GuiScreen {
                                       int mouseX, int mouseY, List tooltip) {
         ItemStack[] ir = items != null ? items : new ItemStack[9];
         RenderItem renderitem = new RenderItem();
-        for (int i = 0; (i < 9) && (i < ir.length); ++i) {
+        for (int i = 0; (i < 9); ++i) {
+            ItemStack item = i >= ir.length ? null : ir[i];
             int xr = x
                     + 18 * (i % 3);
             int yr = y + 18 * (i / 3);
-            renderItemSlot(xr, yr, ir[i], renderitem, mouseX, mouseY,
+            renderItemSlot(xr, yr, item, renderitem, mouseX, mouseY,
                     tooltip);
         }
     }
@@ -443,8 +444,8 @@ public class GuiTechnology extends GuiScreen {
 
         RenderHelper.disableStandardItemLighting();
 
-        if (mouseX > x + 1 && mouseX < x + 18 && mouseY > y + 1 && mouseY <
-                y + 18)
+        if (mouseX > x && mouseX < x + 17 && mouseY > y && mouseY <
+                y + 17)
 
         {
             tooltip.add(item.getDisplayName());
