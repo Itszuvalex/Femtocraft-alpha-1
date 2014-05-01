@@ -76,8 +76,7 @@ public class GuiTechnology extends GuiScreen {
     protected void keyTyped(char par1, int par2) {
         if (par2 == this.mc.gameSettings.keyBindInventory.keyCode) {
             this.mc.displayGuiScreen(guiResearch);
-        }
-        else {
+        } else {
             super.keyTyped(par1, par2);
         }
     }
@@ -93,7 +92,7 @@ public class GuiTechnology extends GuiScreen {
                     && (par2 >= (l + backButtonY))
                     && (par2 <= (l + backButtonY + backButtonHeight))) {
                 Minecraft.getMinecraft().sndManager.playSoundFX("random.click",
-                                                                1.0F, 1.0F);
+                        1.0F, 1.0F);
                 this.mc.displayGuiScreen(guiResearch);
             }
 
@@ -102,7 +101,7 @@ public class GuiTechnology extends GuiScreen {
                     && (par2 >= (l + pageLeftButtonY))
                     && (par2 <= (l + pageLeftButtonY + pageLeftButtonHeight))) {
                 Minecraft.getMinecraft().sndManager.playSoundFX("random.click",
-                                                                1.0F, 1.0F);
+                        1.0F, 1.0F);
                 displayPage--;
             }
 
@@ -112,7 +111,7 @@ public class GuiTechnology extends GuiScreen {
                     && (par2 >= (l + pageRightButtonY))
                     && (par2 <= (l + pageRightButtonY + pageRightButtonHeight))) {
                 Minecraft.getMinecraft().sndManager.playSoundFX("random.click",
-                                                                1.0F, 1.0F);
+                        1.0F, 1.0F);
                 displayPage++;
             }
         }
@@ -133,22 +132,22 @@ public class GuiTechnology extends GuiScreen {
 
         List tooltip = new ArrayList();
         renderInformation(k + 9, l + 76, 237, 116, displayPage, par1, par2,
-                          tooltip, status.researched);
+                tooltip, status.researched);
 
         String s = status.tech;
         this.fontRenderer.drawString(s,
-                                     k + this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2,
-                                     l + 17, FemtocraftUtils.colorFromARGB(255, 255, 255, 255));
+                k + this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2,
+                l + 17, FemtocraftUtils.colorFromARGB(255, 255, 255, 255));
 
         if ((par1 >= (k + backButtonX))
                 && (par1 <= (k + backButtonX + backButtonWidth))
                 && (par2 >= (l + backButtonY))
                 && (par2 <= (l + backButtonY + backButtonHeight))) {
             this.drawGradientRect(k + backButtonX, l + backButtonY, k
-                                          + backButtonWidth + backButtonX, l + backButtonY
-                                          + backButtonHeight,
-                                  FemtocraftUtils.colorFromARGB(60, 45, 0, 110),
-                                  FemtocraftUtils.colorFromARGB(60, 45, 0, 110)
+                            + backButtonWidth + backButtonX, l + backButtonY
+                            + backButtonHeight,
+                    FemtocraftUtils.colorFromARGB(60, 45, 0, 110),
+                    FemtocraftUtils.colorFromARGB(60, 45, 0, 110)
             );
         }
 
@@ -168,9 +167,9 @@ public class GuiTechnology extends GuiScreen {
                     && (par2 >= (l + pageLeftButtonY))
                     && (par2 <= (l + pageLeftButtonY + pageLeftButtonHeight))) {
                 this.drawGradientRect(k + pageLeftButtonX, l + pageLeftButtonY,
-                                      k + pageLeftButtonX + pageLeftButtonWidth, l
+                        k + pageLeftButtonX + pageLeftButtonWidth, l
                                 + pageLeftButtonY + pageLeftButtonHeight,
-                                      color, color
+                        color, color
                 );
             }
 
@@ -186,12 +185,11 @@ public class GuiTechnology extends GuiScreen {
                                     / 2 + 1,
                             FemtocraftUtils.colorFromARGB(255, 255, 255, 255)
                     );
-        }
-        else {
+        } else {
             color = FemtocraftUtils.colorFromARGB(60, 0, 0, 0);
             this.drawGradientRect(k + pageLeftButtonX, l + pageLeftButtonY, k
                     + pageLeftButtonX + pageLeftButtonWidth, l
-                                          + pageLeftButtonY + pageLeftButtonHeight, color, color);
+                    + pageLeftButtonY + pageLeftButtonHeight, color, color);
         }
 
         color = FemtocraftUtils.colorFromARGB(60, 45, 0, 110);
@@ -202,8 +200,8 @@ public class GuiTechnology extends GuiScreen {
                     && (par2 <= (l + pageRightButtonY + pageRightButtonHeight))) {
                 this.drawGradientRect(k + pageRightButtonX, l
                         + pageRightButtonY, k + pageRightButtonX
-                                              + pageRightButtonWidth, l + pageRightButtonY
-                                              + pageRightButtonHeight, color, color);
+                        + pageRightButtonWidth, l + pageRightButtonY
+                        + pageRightButtonHeight, color, color);
             }
 
             this.fontRenderer
@@ -218,22 +216,21 @@ public class GuiTechnology extends GuiScreen {
                                     / 2 + 1,
                             FemtocraftUtils.colorFromARGB(255, 255, 255, 255)
                     );
-        }
-        else {
+        } else {
             color = FemtocraftUtils.colorFromARGB(60, 0, 0, 0);
             this.drawGradientRect(k + pageRightButtonX, l + pageRightButtonY, k
                     + pageRightButtonX + pageRightButtonWidth, l
-                                          + pageRightButtonY + pageRightButtonHeight, color, color);
+                    + pageRightButtonY + pageRightButtonHeight, color, color);
         }
 
         String pageString = String.format("Page %s/%s", displayPage,
-                                          getNumPages(status.researched));
+                getNumPages(status.researched));
         this.fontRenderer.drawString(pageString, k + pageLeftButtonX
                 + (pageLeftButtonWidth + pageRightButtonX - pageLeftButtonX)
                 / 2 - this.fontRenderer.getStringWidth(pageString) / 2, l
-                                             + pageLeftButtonY
-                                             + (pageLeftButtonHeight - this.fontRenderer.FONT_HEIGHT) / 2
-                                             + 1, FemtocraftUtils.colorFromARGB(255, 255, 255, 255));
+                + pageLeftButtonY
+                + (pageLeftButtonHeight - this.fontRenderer.FONT_HEIGHT) / 2
+                + 1, FemtocraftUtils.colorFromARGB(255, 255, 255, 255));
 
         GL11.glPushMatrix();
         RenderItem renderitem = new RenderItem();
@@ -246,7 +243,7 @@ public class GuiTechnology extends GuiScreen {
         GL11.glEnable(GL11.GL_CULL_FACE);
         renderitem.renderItemAndEffectIntoGUI(
                 Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft()
-                                                                .getTextureManager(), tech.displayItem, k + 66, l + 12
+                        .getTextureManager(), tech.displayItem, k + 66, l + 12
         );
 
         ItemStack[] materials = null;
@@ -314,9 +311,9 @@ public class GuiTechnology extends GuiScreen {
         int padding = 2;
         renderCraftingGrid(x, y, items, mouseX, mouseY, tooltip);
         info = String.format("%s%s%s", EnumChatFormatting.WHITE, info,
-                             EnumChatFormatting.RESET);
+                EnumChatFormatting.RESET);
         this.fontRenderer.drawSplitString(info, x + 54 + padding, y + padding,
-                                          width - 54 - 2 * padding, height - 2 * padding);
+                width - 54 - 2 * padding, height - 2 * padding);
     }
 
     protected void renderAssemblerRecipeWithInfo(int x, int y, int width,
@@ -327,10 +324,39 @@ public class GuiTechnology extends GuiScreen {
         int padding = 2;
         renderAssemblerRecipe(x, y, width, height, recipe, mouseX, mouseY, tooltip);
         info = String.format("%s%s%s", EnumChatFormatting.WHITE, info,
-                             EnumChatFormatting.RESET);
+                EnumChatFormatting.RESET);
         fontRenderer.drawSplitString(info, x + 54 + fontRenderer
-                                             .getStringWidth("<->") + 18 + 2 * padding, y + 2 * padding,
-                                     width - 2 * padding, height - 2 * padding
+                        .getStringWidth("<->") + 18 + 2 * padding, y + 2 * padding,
+                width - 2 * padding, height - 2 * padding
+        );
+    }
+
+    protected void renderCraftingRecipe(int x, int y, int width, int height, ItemStack[] input, ItemStack output, int mouseX, int mouseY, List tooltip) {
+        String recipeDir = EnumChatFormatting.WHITE + "->" +
+                EnumChatFormatting.RESET;
+        renderCraftingGrid(x, y, input, mouseX,
+                mouseY, tooltip);
+        GL11.glColor4f(1.f, 1.f, 1.f, 1.f);
+        fontRenderer.drawSplitString(recipeDir, x + 54 + 1,
+                y + (54 - fontRenderer
+                        .FONT_HEIGHT)
+                        / 2, fontRenderer.getStringWidth
+                        (recipeDir) + 2,
+                fontRenderer.FONT_HEIGHT
+        );
+        renderItemSlot(x + 54 + fontRenderer.getStringWidth(recipeDir) + 2,
+                y + 18, output, new RenderItem(), mouseX, mouseY,
+                tooltip);
+    }
+
+    protected void renderCraftingRecipeWithInfo(int x, int y, int width, int height, ItemStack[] input, ItemStack output, int mouseX, int mouseY, List tooltip, String info) {
+        int padding = 2;
+        renderCraftingRecipe(x, y, width, height, input, output, mouseX, mouseY, tooltip);
+        info = String.format("%s%s%s", EnumChatFormatting.WHITE, info,
+                EnumChatFormatting.RESET);
+        fontRenderer.drawSplitString(info, x + 54 + fontRenderer
+                        .getStringWidth("<->") + 18 + 2 * padding, y + 2 * padding,
+                width - 2 * padding, height - 2 * padding
         );
     }
 
@@ -343,18 +369,18 @@ public class GuiTechnology extends GuiScreen {
         String recipeDir = EnumChatFormatting.WHITE + "<->" +
                 EnumChatFormatting.RESET;
         renderCraftingGrid(x, y, recipe.input, mouseX,
-                           mouseY, tooltip);
+                mouseY, tooltip);
         GL11.glColor4f(1.f, 1.f, 1.f, 1.f);
         fontRenderer.drawSplitString(recipeDir, x + 54 + 1,
-                                     y + (54 - fontRenderer
-                                             .FONT_HEIGHT)
-                                             / 2, fontRenderer.getStringWidth
+                y + (54 - fontRenderer
+                        .FONT_HEIGHT)
+                        / 2, fontRenderer.getStringWidth
                         (recipeDir) + 2,
-                                     fontRenderer.FONT_HEIGHT
+                fontRenderer.FONT_HEIGHT
         );
         renderItemSlot(x + 54 + fontRenderer.getStringWidth(recipeDir) + 2,
-                       y + 18, recipe.output, new RenderItem(), mouseX, mouseY,
-                       tooltip);
+                y + 18, recipe.output, new RenderItem(), mouseX, mouseY,
+                tooltip);
 
     }
 
@@ -374,7 +400,7 @@ public class GuiTechnology extends GuiScreen {
                     + 18 * (i % 3);
             int yr = y + 18 * (i / 3);
             renderItemSlot(xr, yr, ir[i], renderitem, mouseX, mouseY,
-                           tooltip);
+                    tooltip);
         }
     }
 
@@ -408,9 +434,9 @@ public class GuiTechnology extends GuiScreen {
                 yr, true
         );
         renderitem.renderItemOverlayIntoGUI(Minecraft.getMinecraft()
-                                                    .fontRenderer,
-                                            Minecraft.getMinecraft()
-                                                     .getTextureManager()
+                        .fontRenderer,
+                Minecraft.getMinecraft()
+                        .getTextureManager()
                 , item, xr, yr
         );
 
@@ -462,12 +488,12 @@ public class GuiTechnology extends GuiScreen {
             int l1 = -267386864;
             this.drawGradientRect(i1 - 3, j1 - 4, i1 + k + 3, j1 - 3, l1, l1);
             this.drawGradientRect(i1 - 3, j1 + k1 + 3, i1 + k + 3, j1 + k1 + 4,
-                                  l1, l1);
+                    l1, l1);
             this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 + k1 + 3, l1,
-                                  l1);
+                    l1);
             this.drawGradientRect(i1 - 4, j1 - 3, i1 - 3, j1 + k1 + 3, l1, l1);
             this.drawGradientRect(i1 + k + 3, j1 - 3, i1 + k + 4, j1 + k1 + 3,
-                                  l1, l1);
+                    l1, l1);
             int i2 = 1347420415;
             int j2 = (i2 & 16711422) >> 1 | i2 & -16777216;
             this.drawGradientRect(i1 - 3, j1 - 3 + 1, i1 - 3 + 1, j1 + k1 + 3
@@ -475,9 +501,9 @@ public class GuiTechnology extends GuiScreen {
             this.drawGradientRect(i1 + k + 2, j1 - 3 + 1, i1 + k + 3, j1 + k1
                     + 3 - 1, i2, j2);
             this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 - 3 + 1, i2,
-                                  i2);
+                    i2);
             this.drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + k + 3, j1 + k1 + 3,
-                                  j2, j2);
+                    j2, j2);
 
             for (int k2 = 0; k2 < par1List.size(); ++k2) {
                 String s1 = (String) par1List.get(k2);

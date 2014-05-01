@@ -42,7 +42,7 @@ public class GuiTechnologyBasicCircuits extends GuiTechnology {
                                      boolean isResearched) {
         switch (displayPage) {
             case 1:
-                renderCraftingGridWithInfo(
+                renderCraftingRecipeWithInfo(
                         x,
                         y,
                         width,
@@ -50,18 +50,20 @@ public class GuiTechnologyBasicCircuits extends GuiTechnology {
                         new ItemStack[]{new ItemStack(Item.stick),
                                 new ItemStack(Item.stick),
                                 new ItemStack(Item.stick)},
+                        new ItemStack(Femtocraft.board),
                         mouseX,
                         mouseY,
                         tooltip,
                         "Combining small pieces of wood, it is possible to create a simple container to support the fragile requirements of a circuit board."
                 );
-                renderCraftingGridWithInfo(
+                renderCraftingRecipeWithInfo(
                         x,
                         y + height / 2,
                         width,
                         height / 2,
                         new ItemStack[]{new ItemStack(Femtocraft.ingotFarenite),
                                 new ItemStack(Item.dyePowder, 1, 4)},
+                        new ItemStack(Femtocraft.conductivePowder, 2),
                         mouseX,
                         mouseY,
                         tooltip,
@@ -69,7 +71,7 @@ public class GuiTechnologyBasicCircuits extends GuiTechnology {
                 );
                 break;
             case 2:
-                renderCraftingGridWithInfo(
+                renderCraftingRecipeWithInfo(
                         x,
                         y,
                         width,
@@ -81,12 +83,13 @@ public class GuiTechnologyBasicCircuits extends GuiTechnology {
                                 new ItemStack(Block.planks),
                                 new ItemStack(Block.planks), null,
                                 new ItemStack(Block.planks)},
+                        new ItemStack(Femtocraft.spool),
                         mouseX,
                         mouseY,
                         tooltip,
                         "Spools allow for easy storage and retrieval of long threads of thin metal.  Perfect for holding wires."
                 );
-                renderCraftingGridWithInfo(
+                renderCraftingRecipeWithInfo(
                         x,
                         y + height / 2,
                         width,
@@ -100,6 +103,7 @@ public class GuiTechnologyBasicCircuits extends GuiTechnology {
                                 new ItemStack(Item.ingotGold),
                                 new ItemStack(Item.ingotGold),
                                 new ItemStack(Item.ingotGold)},
+                        new ItemStack(Femtocraft.spoolGold),
                         mouseX,
                         mouseY,
                         tooltip,
@@ -107,7 +111,7 @@ public class GuiTechnologyBasicCircuits extends GuiTechnology {
                 );
                 break;
             case 3:
-                renderCraftingGridWithInfo(
+                renderCraftingRecipeWithInfo(
                         x,
                         y,
                         width,
@@ -115,16 +119,18 @@ public class GuiTechnologyBasicCircuits extends GuiTechnology {
                         new ItemStack[]{
                                 new ItemStack(Femtocraft.conductivePowder), null,
                                 null, new ItemStack(Femtocraft.board)},
+                        new ItemStack(Femtocraft.primedBoard),
                         mouseX,
                         mouseY,
                         tooltip,
                         "Filling a board with conductive powder, then running it through an oven, produces a board suitable for wiring."
                 );
-                renderCraftingGridWithInfo(x, y + height / 2, width, height / 2,
-                                           new ItemStack[]{new ItemStack(Femtocraft.spoolGold),
-                                                   null, null, new ItemStack(Femtocraft.dopedBoard)},
-                                           mouseX, mouseY, tooltip,
-                                           "Simply wire the connections using gold wiring to produce the needed circuit."
+                renderCraftingRecipeWithInfo(x, y + height / 2, width, height / 2,
+                        new ItemStack[]{new ItemStack(Femtocraft.spoolGold),
+                                null, null, new ItemStack(Femtocraft.dopedBoard)},
+                        new ItemStack(Femtocraft.microCircuitBoard),
+                        mouseX, mouseY, tooltip,
+                        "Simply wire the connections using gold wiring to produce the needed circuit."
                 );
                 break;
         }

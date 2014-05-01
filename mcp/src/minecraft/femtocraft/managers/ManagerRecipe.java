@@ -48,29 +48,29 @@ public class ManagerRecipe {
         GameRegistry.addSmelting(Femtocraft.oreThorium.blockID, new ItemStack(
                 Femtocraft.ingotThorium), 0.1f);
         GameRegistry.addSmelting(Femtocraft.deconstructedIron.itemID,
-                                 new ItemStack(Item.ingotIron), 0.1f);
+                new ItemStack(Item.ingotIron), 0.1f);
         GameRegistry.addSmelting(Femtocraft.deconstructedGold.itemID,
-                                 new ItemStack(Item.ingotGold), 0.1f);
+                new ItemStack(Item.ingotGold), 0.1f);
         GameRegistry.addSmelting(Femtocraft.deconstructedTitanium.itemID,
-                                 new ItemStack(Femtocraft.ingotTitanium), 0.1f);
+                new ItemStack(Femtocraft.ingotTitanium), 0.1f);
         GameRegistry.addSmelting(Femtocraft.deconstructedThorium.itemID,
-                                 new ItemStack(Femtocraft.ingotThorium), 0.1f);
+                new ItemStack(Femtocraft.ingotThorium), 0.1f);
         GameRegistry.addSmelting(Femtocraft.deconstructedPlatinum.itemID,
-                                 new ItemStack(Femtocraft.ingotPlatinum), 0.1f);
+                new ItemStack(Femtocraft.ingotPlatinum), 0.1f);
         GameRegistry.addSmelting(Femtocraft.ingotTitanium.itemID,
-                                 new ItemStack(Femtocraft.ingotTemperedTitanium), 0.1f);
+                new ItemStack(Femtocraft.ingotTemperedTitanium), 0.1f);
 
         GameRegistry.addSmelting(Femtocraft.primedBoard.itemID, new ItemStack(
                 Femtocraft.dopedBoard), 0.1f);
 
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.primedBoard),
-                                     "#", "$", '#', Femtocraft.conductivePowder, '$',
-                                     Femtocraft.board);
+                "#", "$", '#', Femtocraft.conductivePowder, '$',
+                Femtocraft.board);
         GameRegistry.addShapedRecipe(
                 new ItemStack(Femtocraft.paperSchematic, 3), "###", "###",
                 "###", '#', Item.paper);
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.board), "###",
-                                     '#', Item.stick);
+                '#', Item.stick);
         GameRegistry.addShapedRecipe(
                 new ItemStack(Femtocraft.microCircuitBoard), "#", "$", '#',
                 Femtocraft.spoolGold, '$', Femtocraft.dopedBoard);
@@ -79,12 +79,23 @@ public class ManagerRecipe {
                 .getInstance()
                 .getRecipeList()
                 .add(new ShapedOreRecipe(new ItemStack(Femtocraft.spool),
-                                         "# #", "#-#", "# #", '#', "plankWood", '-', "stickWood"));
+                        "# #", "#-#", "# #", '#', "plankWood", '-', "stickWood"));
 
         GameRegistry
                 .addShapedRecipe(new ItemStack(Femtocraft.spoolGold, 8), "###",
-                                 "#-#", "###", '#', Item.ingotGold, '-',
-                                 Femtocraft.spool);
+                        "#-#", "###", '#', Item.ingotGold, '-',
+                        Femtocraft.spool);
+
+        GameRegistry
+                .addShapedRecipe(new ItemStack(Femtocraft.spoolPlatinum, 8), "###",
+                        "#-#", "###", '#', Femtocraft.ingotPlatinum, '-',
+                        Femtocraft.spool);
+
+        GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemMicroLogicCore), "TGT", "GBG", "TTT", 'T', Femtocraft.ingotTemperedTitanium, 'G', Femtocraft.spoolGold, 'B', Femtocraft.microCircuitBoard);
+
+        GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemHeatingCoil), " P ", "G G", "TBT", 'P', Femtocraft.spoolPlatinum, 'G', Femtocraft.spoolGold, 'T', Femtocraft.ingotTemperedTitanium, 'B', Femtocraft.microCircuitBoard);
+
+        GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.microFurnaceUnlit), "TMT", "MHM", "TLT", 'T', Femtocraft.ingotTemperedTitanium, 'M', Femtocraft.itemMicroPlating, 'H', Femtocraft.itemHeatingCoil, 'L', Femtocraft.itemMicroLogicCore);
 
         GameRegistry.addShapelessRecipe(new ItemStack(
                 Femtocraft.conductivePowder, 2), new ItemStack(

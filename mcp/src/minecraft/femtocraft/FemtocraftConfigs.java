@@ -273,110 +273,122 @@ public class FemtocraftConfigs {
     int spoolGoldID = 12035;
     public static
     @CfgId
-    int itemMicroTechnologyID = 12036;
+    int spoolPlatinumID = 12036;
     public static
     @CfgId
-    int itemNanoTechnologyID = 12037;
+    int itemMicroLogicCoreID = 12037;
     public static
     @CfgId
-    int itemFemtoTechnologyID = 12038;
+    int itemHeatingCoilID = 12038;
     public static
     @CfgId
-    int itemAdvancedTechnologyID = 12039;
+    int itemMicroCoilID = 12039;
     public static
     @CfgId
-    int paperSchematicID = 12040;
+    int itemMicroTechnologyID = 12040;
     public static
     @CfgId
-    int metalSchematicID = 12041;
+    int itemNanoTechnologyID = 12041;
     public static
     @CfgId
-    int advMetalSchematicID = 12042;
+    int itemFemtoTechnologyID = 12042;
     public static
     @CfgId
-    int microInterfaceDeviceID = 12043;
+    int itemAdvancedTechnologyID = 12043;
     public static
     @CfgId
-    int nanoInterfaceDeviceID = 12044;
+    int paperSchematicID = 12044;
     public static
     @CfgId
-    int femtoInterfaceDeviceID = 12045;
+    int metalSchematicID = 12045;
+    public static
+    @CfgId
+    int advMetalSchematicID = 12046;
+    public static
+    @CfgId
+    int microInterfaceDeviceID = 12047;
+    public static
+    @CfgId
+    int nanoInterfaceDeviceID = 12048;
+    public static
+    @CfgId
+    int femtoInterfaceDeviceID = 12049;
     // Decomp items 12046 - 12069
     // Femto
     public static
     @CfgId
-    int CubitID = 12046;
+    int CubitID = 12050;
     public static
     @CfgId
-    int RectangulonID = 12047;
+    int RectangulonID = 12051;
     public static
     @CfgId
-    int PlaneoidID = 12048;
+    int PlaneoidID = 12052;
     // Nano
     public static
     @CfgId
-    int CrystalliteID = 12049;
+    int CrystalliteID = 12053;
     public static
     @CfgId
-    int MineraliteID = 12050;
+    int MineraliteID = 12054;
     public static
     @CfgId
-    int MetalliteID = 12051;
+    int MetalliteID = 12055;
     public static
     @CfgId
-    int FauniteID = 12052;
+    int FauniteID = 12056;
     public static
     @CfgId
-    int ElectriteID = 12053;
+    int ElectriteID = 12057;
     public static
     @CfgId
-    int FloriteID = 12054;
+    int FloriteID = 12058;
     // Micro
     public static
     @CfgId
-    int MicroCrystalID = 12055;
+    int MicroCrystalID = 12059;
     public static
     @CfgId
-    int ProteinChainID = 12056;
+    int ProteinChainID = 12060;
     public static
     @CfgId
-    int NerveClusterID = 12057;
+    int NerveClusterID = 12061;
     public static
     @CfgId
-    int ConductiveAlloyID = 12058;
+    int ConductiveAlloyID = 12062;
     public static
     @CfgId
-    int MetalCompositeID = 12059;
+    int MetalCompositeID = 12063;
     public static
     @CfgId
-    int FibrousStrandID = 12060;
+    int FibrousStrandID = 12064;
     public static
     @CfgId
-    int MineralLatticeID = 12061;
+    int MineralLatticeID = 12065;
     public static
     @CfgId
-    int FungalSporesID = 12062;
+    int FungalSporesID = 12066;
     public static
     @CfgId
-    int IonicChunkID = 12063;
+    int IonicChunkID = 12067;
     public static
     @CfgId
-    int ReplicatingMaterialID = 12064;
+    int ReplicatingMaterialID = 12068;
     public static
     @CfgId
-    int SpinyFilamentID = 12065;
+    int SpinyFilamentID = 12069;
     public static
     @CfgId
-    int HardenedBulbID = 12066;
+    int HardenedBulbID = 12070;
     public static
     @CfgId
-    int MorphicChannelID = 12067;
+    int MorphicChannelID = 12071;
     public static
     @CfgId
-    int SynthesizedFiberID = 12068;
+    int SynthesizedFiberID = 12072;
     public static
     @CfgId
-    int OrganometallicPlateID = 12069;
+    int OrganometallicPlateID = 12073;
     public static
     @CfgId
     int microPlatingID = 12100;
@@ -960,34 +972,29 @@ public class FemtocraftConfigs {
                     int id = field.getInt(null);
                     if (annotation.block()) {
                         id = config.getBlock(field.getName(), id).getInt();
-                    }
-                    else {
+                    } else {
                         id = config.getItem(field.getName(), id).getInt();
                     }
                     field.setInt(null, id);
-                }
-                else if (field.isAnnotationPresent(CfgBool.class)) {
+                } else if (field.isAnnotationPresent(CfgBool.class)) {
                     CfgCat cat = field.getAnnotation(CfgCat.class);
                     String category;
                     if (cat == null) {
                         category = Configuration.CATEGORY_GENERAL;
-                    }
-                    else {
+                    } else {
                         category = cat.category();
                     }
 
                     boolean bool = field.getBoolean(null);
                     bool = config.get(category, field.getName(), bool)
-                                 .getBoolean(bool);
+                            .getBoolean(bool);
                     field.setBoolean(null, bool);
-                }
-                else if (field.isAnnotationPresent(CfgInt.class)) {
+                } else if (field.isAnnotationPresent(CfgInt.class)) {
                     CfgCat cat = field.getAnnotation(CfgCat.class);
                     String category;
                     if (cat == null) {
                         category = Configuration.CATEGORY_GENERAL;
-                    }
-                    else {
+                    } else {
                         category = cat.category();
                     }
 
@@ -995,23 +1002,20 @@ public class FemtocraftConfigs {
                     cint = config.get(category, field.getName(), cint).getInt(
                             cint);
                     field.setInt(null, cint);
-                }
-                else if (field.isAnnotationPresent(CfgFloat.class)) {
+                } else if (field.isAnnotationPresent(CfgFloat.class)) {
                     CfgCat cat = field.getAnnotation(CfgCat.class);
                     String category;
                     if (cat == null) {
                         category = Configuration.CATEGORY_GENERAL;
-                    }
-                    else {
+                    } else {
                         category = cat.category();
                     }
 
                     float cint = field.getFloat(null);
                     cint = (float) config.get(category, field.getName(), cint)
-                                         .getDouble(cint);
+                            .getDouble(cint);
                     field.setFloat(null, cint);
-                }
-                else {
+                } else {
 
                 }
             }
@@ -1019,9 +1023,9 @@ public class FemtocraftConfigs {
             // Specific loads
             schematicInfiniteUseMultiplier = (float) config
                     .get("Item Constants",
-                         "SchematicInfiniteUseMultiplier",
-                         200.f,
-                         "When AssemblerSchematics have infinite uses, this number will be used instead of the # of uses the schematic would be good for, when calculating the mass required to key the schematic to a recipe.")
+                            "SchematicInfiniteUseMultiplier",
+                            200.f,
+                            "When AssemblerSchematics have infinite uses, this number will be used instead of the # of uses the schematic would be good for, when calculating the mass required to key the schematic to a recipe.")
                     .getDouble(200.f);
             ItemAssemblySchematic.infiniteUseMassMultiplier = schematicInfiniteUseMultiplier;
 
