@@ -33,27 +33,23 @@ import net.minecraftforge.common.ForgeDirection;
 import java.util.Arrays;
 
 public class TileEntityBaseEntityNanoHorologe extends
-                                              TileEntityBaseEntityIndustry
+        TileEntityBaseEntityIndustry
         implements IInventory, ISidedInventory {
-    public static int powerToCook_default = 80;
-    public static float tickMultiplier_default = 1.f;
-
-    @FemtocraftDataUtils.Saveable
-    protected BaseInventory inventory;
-
     public static final int inputSlot = 0;
     public static final int outputSlot = 4;
     public static final int inventorySize = 5;
-
-    @FemtocraftDataUtils.Saveable
-    private int cookTime = 0;
-    @FemtocraftDataUtils.Saveable
-    private int ticksToCook;
-
+    public static int powerToCook_default = 80;
+    public static float tickMultiplier_default = 1.f;
     @FemtocraftDataUtils.Saveable
     public ItemStack[] chronoConfigStacks = null;
     @FemtocraftDataUtils.Saveable
     public ItemStack chronoStack = null;
+    @FemtocraftDataUtils.Saveable
+    protected BaseInventory inventory;
+    @FemtocraftDataUtils.Saveable
+    private int cookTime = 0;
+    @FemtocraftDataUtils.Saveable
+    private int ticksToCook;
 
     public TileEntityBaseEntityNanoHorologe() {
         super();
@@ -85,7 +81,7 @@ public class TileEntityBaseEntityNanoHorologe extends
 
     protected ItemStack[] getConfigurators() {
         return Arrays.copyOfRange(inventory.getInventory(),
-                                  inputSlot + 1, getOutputSlotIndex() - 1);
+                inputSlot + 1, getOutputSlotIndex() - 1);
     }
 
     public int getCookProgressScaled(int i) {
@@ -110,7 +106,7 @@ public class TileEntityBaseEntityNanoHorologe extends
 
         TemporalRecipe tr = Femtocraft.recipeManager.temporalRecipes
                 .getRecipe(inventory.getStackInSlot(inputSlot),
-                           getConfigurators()
+                        getConfigurators()
                 );
         if (tr == null) {
             return false;
@@ -120,7 +116,7 @@ public class TileEntityBaseEntityNanoHorologe extends
         }
         if (
                 !Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner(),
-                                                                          tr.getTechnology())) {
+                        tr.getTechnology())) {
             return false;
         }
 
@@ -146,8 +142,8 @@ public class TileEntityBaseEntityNanoHorologe extends
     protected void startWork() {
         TemporalRecipe tr = Femtocraft.recipeManager.temporalRecipes
                 .getRecipe(inventory.getStackInSlot(inputSlot),
-                           Arrays.copyOfRange(inventory.getInventory(),
-                                              inputSlot + 1, getOutputSlotIndex() - 1)
+                        Arrays.copyOfRange(inventory.getInventory(),
+                                inputSlot + 1, getOutputSlotIndex() - 1)
                 );
 
         chronoStack = inventory.decrStackSize(inputSlot, tr.input.stackSize);
@@ -184,7 +180,7 @@ public class TileEntityBaseEntityNanoHorologe extends
             }
 
             FemtocraftUtils.placeItem(tr.output, inventory.getInventory(),
-                                      placeRestrictions);
+                    placeRestrictions);
             onInventoryChanged();
         }
         cookTime = 0;
@@ -262,5 +258,13 @@ public class TileEntityBaseEntityNanoHorologe extends
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
         return i != getOutputSlotIndex();
+    }
+
+    public int getProgress() {
+        return cookTime;
+    }
+
+    public void setProgress(int progress) {
+        cookTime = progress;
     }
 }
