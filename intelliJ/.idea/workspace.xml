@@ -5,17 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="06103d49-82d3-4f86-b2c6-3e25d1b1d98e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockFemtoImpulser.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockFemtoImpulser.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockMicroFurnace.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockMicroFurnace.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockNanoInnervator.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/industry/blocks/BlockNanoInnervator.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/core/items/CoreItemBlock.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/core/items/CoreItemBlock.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/GuiResearch.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/GuiResearch.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/api/IAtmosphericChargingAddon.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/api/IAtmosphericChargingAddon.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/api/IAtmosphericChargingBase.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/api/IAtmosphericChargingBase.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/api/IPowerContainer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/api/IPowerContainer.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/api/ITechnologyCarrier.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/api/ITechnologyCarrier.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/api/IVacuumTube.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/api/IVacuumTube.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/managers/assembler/ManagerAssemblerRecipe.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/managers/assembler/ManagerAssemblerRecipe.java" />
       <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/transport/items/tiles/TileEntityVacuumTube.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/transport/items/tiles/TileEntityVacuumTube.java" />
     </list>
     <ignored path="Femtocraft.iws" />
@@ -92,15 +81,25 @@
       <file leaf-file-name="TileEntityVacuumTube.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/transport/items/tiles/TileEntityVacuumTube.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.79134464" vertical-offset="15043" max-vertical-offset="15690">
-              <caret line="1081" column="25" selection-start-line="1081" selection-start-column="25" selection-end-line="1081" selection-end-column="25" />
+            <state vertical-scroll-proportion="-3.1731067" vertical-offset="14623" max-vertical-offset="15270">
+              <caret line="880" column="46" selection-start-line="880" selection-start-column="0" selection-end-line="880" selection-end-column="0" />
               <folding>
-                <element signature="e#4684#4685#0" expanded="true" />
-                <element signature="e#4722#4723#0" expanded="true" />
-                <element signature="e#40529#40530#0" expanded="true" />
-                <element signature="e#40560#40561#0" expanded="true" />
-                <element signature="e#40601#40602#0" expanded="true" />
-                <element signature="e#40633#40634#0" expanded="true" />
+                <element signature="e#3201#3202#0" expanded="true" />
+                <element signature="e#3228#3229#0" expanded="true" />
+                <element signature="e#17553#17554#0" expanded="true" />
+                <element signature="e#17580#17581#0" expanded="true" />
+                <element signature="e#17634#17635#0" expanded="true" />
+                <element signature="e#17670#17671#0" expanded="true" />
+                <element signature="e#19212#19213#0" expanded="true" />
+                <element signature="e#19250#19251#0" expanded="true" />
+                <element signature="e#24195#24196#0" expanded="true" />
+                <element signature="e#24222#24223#0" expanded="true" />
+                <element signature="e#36118#36119#0" expanded="true" />
+                <element signature="e#36157#36158#0" expanded="true" />
+                <element signature="e#39291#39292#0" expanded="true" />
+                <element signature="e#39322#39323#0" expanded="true" />
+                <element signature="e#39363#39364#0" expanded="true" />
+                <element signature="e#39395#39396#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -618,7 +617,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -633,7 +632,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32670808" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11875" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" x="854" y="109" width="360" height="541" />
+      <window_info id="Structure" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11875" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" x="854" y="109" width="360" height="541" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1092,15 +1091,25 @@
     </entry>
     <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/transport/items/tiles/TileEntityVacuumTube.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.79134464" vertical-offset="15043" max-vertical-offset="15690">
-          <caret line="1081" column="25" selection-start-line="1081" selection-start-column="25" selection-end-line="1081" selection-end-column="25" />
+        <state vertical-scroll-proportion="-3.1731067" vertical-offset="14623" max-vertical-offset="15270">
+          <caret line="880" column="46" selection-start-line="880" selection-start-column="0" selection-end-line="880" selection-end-column="0" />
           <folding>
-            <element signature="e#4684#4685#0" expanded="true" />
-            <element signature="e#4722#4723#0" expanded="true" />
-            <element signature="e#40529#40530#0" expanded="true" />
-            <element signature="e#40560#40561#0" expanded="true" />
-            <element signature="e#40601#40602#0" expanded="true" />
-            <element signature="e#40633#40634#0" expanded="true" />
+            <element signature="e#3201#3202#0" expanded="true" />
+            <element signature="e#3228#3229#0" expanded="true" />
+            <element signature="e#17553#17554#0" expanded="true" />
+            <element signature="e#17580#17581#0" expanded="true" />
+            <element signature="e#17634#17635#0" expanded="true" />
+            <element signature="e#17670#17671#0" expanded="true" />
+            <element signature="e#19212#19213#0" expanded="true" />
+            <element signature="e#19250#19251#0" expanded="true" />
+            <element signature="e#24195#24196#0" expanded="true" />
+            <element signature="e#24222#24223#0" expanded="true" />
+            <element signature="e#36118#36119#0" expanded="true" />
+            <element signature="e#36157#36158#0" expanded="true" />
+            <element signature="e#39291#39292#0" expanded="true" />
+            <element signature="e#39322#39323#0" expanded="true" />
+            <element signature="e#39363#39364#0" expanded="true" />
+            <element signature="e#39395#39396#0" expanded="true" />
           </folding>
         </state>
       </provider>
