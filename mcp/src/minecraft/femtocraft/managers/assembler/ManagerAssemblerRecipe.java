@@ -53,7 +53,7 @@ import java.util.logging.Level;
  * All recipes are ordered according to their signature in the inventory.
  * The entire 9 slots are used for the input signature. ItemStack
  * stackSize does not matter for ordering. Exceptions will be thrown when
- * attempting to add recipes when their signature is already associated
+ * attempting to addInput recipes when their signature is already associated
  * with a recipe (no check is performed to see if the recipes are actually
  * equal or not.) When reconstructing, items must conform to the input
  * signature, and all 9 slots are important. Slots that are null in the

@@ -67,8 +67,8 @@ public interface IPowerContainer {
     public float getFillPercentageForOutput();
 
     /**
-     * @return True if container has room and can accept charging from direction
-     * @from false otherwise
+     * @return True if container has room and can accept charging
+     * false otherwise
      */
     public boolean canCharge();
 

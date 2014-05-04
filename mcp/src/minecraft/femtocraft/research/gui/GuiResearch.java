@@ -131,9 +131,9 @@ public class GuiResearch extends GuiScreen {
      */
     public void initGui() {
         // this.buttonList.clear();
-        // this.buttonList.add(new GuiSmallButton(1, this.width / 2 + 24,
+        // this.buttonList.addInput(new GuiSmallButton(1, this.width / 2 + 24,
         // this.height / 2 + 74, 80, 20, I18n.getString("gui.done")));
-        // this.buttonList.add(button = new GuiSmallButton(2,
+        // this.buttonList.addInput(button = new GuiSmallButton(2,
         // (width - researchPaneWidth) / 2 + 24, height / 2 + 74, 125,
         // 20, AchievementPage.getTitle(currentPage)));
     }

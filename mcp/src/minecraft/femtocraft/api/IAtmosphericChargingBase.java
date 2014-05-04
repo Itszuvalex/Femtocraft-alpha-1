@@ -24,7 +24,25 @@ import net.minecraft.world.World;
 
 public interface IAtmosphericChargingBase {
 
+    /**
+     * Maximum number of addons supported by this charging base.
+     *
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     */
     int maxAddonsSupported(World world, int x, int y, int z);
 
+    /**
+     * Maximum techLevel of addons supportable by this charging base.
+     *
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     */
     EnumTechLevel maxTechSupported(World world, int x, int y, int z);
 }

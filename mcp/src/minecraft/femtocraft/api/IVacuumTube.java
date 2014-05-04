@@ -55,36 +55,31 @@ public interface IVacuumTube {
     public boolean hasOutput();
 
     /**
-     * @return Direction of Input.
+     * @return True if given ForgeDirection is an input.  This allows
+     * multiple connections, compared to simply returning "input direction",
+     * causing lockout.
      */
-    public ForgeDirection getInput();
+    public boolean isInput(ForgeDirection dir);
 
     /**
      * @return Direction of Output;
      */
-    public ForgeDirection getOutput();
+    public boolean isOutput(ForgeDirection dir);
 
     /**
-     * Clears this tube's Input, and clear appropriate flags (and tell other
-     * tubes to disconnect as well, if needed)
+     * Clears connections to this tube from the given side.
      */
-    public void clearInput();
-
-    /**
-     * Clears this tube's Output, and clear appropriate flags (and tell other
-     * tubes to disconnect as well, if needed)
-     */
-    public void clearOutput();
+    public void disconnect(ForgeDirection dir);
 
     /**
      * @param input Direction tube will now accept input from.
      * @return True if input successfully set.
      */
-    public boolean setInput(ForgeDirection input);
+    public boolean addInput(ForgeDirection input);
 
     /**
      * @param output Direction tube will now send output to.
      * @return True if input successfully set.
      */
-    public boolean setOutput(ForgeDirection output);
+    public boolean addOutput(ForgeDirection output);
 }

@@ -41,7 +41,7 @@ public class CoreItemBlock extends ItemBlock {
     /**
      * @return true if this block, when in item form, should have NBTData. If
      * you want this block to be stackable in item form, this must
-     * return false. Otherwise, Femtocraft will add NBT data
+     * return false. Otherwise, Femtocraft will addInput NBT data
      * automatically.
      */
     public boolean hasItemNBT() {

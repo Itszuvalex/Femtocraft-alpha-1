@@ -24,7 +24,25 @@ import net.minecraft.world.World;
 
 public interface IAtmosphericChargingAddon {
 
+    /**
+     * Returns the amount of power generated this tick from this block.
+     *
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     */
     float powerPerTick(World world, int x, int y, int z);
 
+    /**
+     * What techlevel this addon is.
+     *
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     */
     EnumTechLevel techLevel(World world, int x, int y, int z);
 }

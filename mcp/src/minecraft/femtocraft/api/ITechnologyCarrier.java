@@ -22,6 +22,11 @@ package femtocraft.api;
 import femtocraft.managers.research.EnumTechLevel;
 import net.minecraft.item.ItemStack;
 
+/**
+ * @author Itszuvalex (Christopher Harris)
+ *         <p/>
+ *         Interface for an Item that carries a Femtocraft Technology.
+ */
 public interface ITechnologyCarrier {
 
     void setTechnology(ItemStack stack, String name);

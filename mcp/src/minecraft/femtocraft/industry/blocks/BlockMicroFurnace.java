@@ -182,7 +182,7 @@ public class BlockMicroFurnace extends TileContainer {
 
     @SideOnly(Side.CLIENT)
     /**
-     * A randomly called display update to be able to add particles or other items for display
+     * A randomly called display update to be able to addInput particles or other items for display
      */
     public void randomDisplayTick(World par1World, int par2, int par3,
                                   int par4, Random par5Random) {
