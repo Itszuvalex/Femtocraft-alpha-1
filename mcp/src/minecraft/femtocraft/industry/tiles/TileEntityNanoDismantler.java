@@ -35,6 +35,11 @@ public class TileEntityNanoDismantler extends
     }
 
     @Override
+    protected EnumTechLevel getAssemblerTech() {
+        return EnumTechLevel.NANO;
+    }
+
+    @Override
     protected int getMaxSimultaneousSmelt() {
         // TODO: Check for modifying researches
         // TODO: Pull number from configs

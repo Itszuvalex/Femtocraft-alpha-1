@@ -54,4 +54,9 @@ public class TileEntityFemtoRepurposer extends
         // TODO: Pull number from configs
         return powerToCook_default;
     }
+
+    @Override
+    protected EnumTechLevel getAssemblerTech() {
+        return EnumTechLevel.FEMTO;
+    }
 }
