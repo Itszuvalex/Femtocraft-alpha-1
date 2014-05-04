@@ -62,7 +62,9 @@ public interface IVacuumTube {
     public boolean isInput(ForgeDirection dir);
 
     /**
-     * @return Direction of Output;
+     * @return True if given ForgeDirection is an output.  This allows
+     * multiple connections, compared to simply returning "output direction",
+     * causing lockout.
      */
     public boolean isOutput(ForgeDirection dir);
 

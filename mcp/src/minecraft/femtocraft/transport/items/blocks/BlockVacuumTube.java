@@ -23,10 +23,10 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
 import femtocraft.api.IInterfaceDevice;
+import femtocraft.core.blocks.TileContainer;
 import femtocraft.proxy.ProxyClient;
 import femtocraft.transport.items.tiles.TileEntityVacuumTube;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
@@ -43,7 +43,7 @@ import net.minecraftforge.common.ForgeDirection;
 
 import java.util.List;
 
-public class BlockVacuumTube extends BlockContainer {
+public class BlockVacuumTube extends TileContainer {
     public Icon indicatorIcon;
     public Icon straightIcon;
     public Icon straightInsetIcon;
