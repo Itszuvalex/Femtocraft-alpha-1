@@ -19,9 +19,9 @@
 
 package femtocraft.power.blocks;
 
-public class BlockMicroChargingCapacitor {
+public class BlockAtmosphericChargingCapacitor {
 
-    public BlockMicroChargingCapacitor() {
+    public BlockAtmosphericChargingCapacitor() {
         // TODO Auto-generated constructor stub
     }
 

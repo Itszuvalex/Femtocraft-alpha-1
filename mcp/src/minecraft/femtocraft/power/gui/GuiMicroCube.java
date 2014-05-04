@@ -21,7 +21,7 @@ package femtocraft.power.gui;
 
 import femtocraft.Femtocraft;
 import femtocraft.power.containers.ContainerMicroCube;
-import femtocraft.power.tiles.TileEntityPowerMicroCube;
+import femtocraft.power.tiles.TileEntityMicroCube;
 import femtocraft.utils.FemtocraftUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -31,9 +31,9 @@ import org.lwjgl.opengl.GL11;
 public class GuiMicroCube extends GuiContainer {
     public static final ResourceLocation texture = new ResourceLocation(
             Femtocraft.ID.toLowerCase(), "textures/guis/MicroCube.png");
-    private final TileEntityPowerMicroCube cube;
+    private final TileEntityMicroCube cube;
 
-    public GuiMicroCube(TileEntityPowerMicroCube cube) {
+    public GuiMicroCube(TileEntityMicroCube cube) {
         super(new ContainerMicroCube(cube));
         this.cube = cube;
     }

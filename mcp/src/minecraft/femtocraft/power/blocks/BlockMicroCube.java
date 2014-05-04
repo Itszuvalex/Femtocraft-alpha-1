@@ -22,7 +22,7 @@ package femtocraft.power.blocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
-import femtocraft.power.tiles.TileEntityPowerMicroCube;
+import femtocraft.power.tiles.TileEntityMicroCube;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -45,7 +45,7 @@ public class BlockMicroCube extends BlockPowerContainer {
 
     @Override
     public TileEntity createNewTileEntity(World world) {
-        return new TileEntityPowerMicroCube();
+        return new TileEntityMicroCube();
     }
 
     @Override
@@ -57,10 +57,10 @@ public class BlockMicroCube extends BlockPowerContainer {
         if (te == null) {
             return this.blockIcon;
         }
-        if (!(te instanceof TileEntityPowerMicroCube)) {
+        if (!(te instanceof TileEntityMicroCube)) {
             return this.blockIcon;
         }
-        TileEntityPowerMicroCube cube = (TileEntityPowerMicroCube) te;
+        TileEntityMicroCube cube = (TileEntityMicroCube) te;
         return cube.outputs[side] ? outputSide : inputSide;
     }
 

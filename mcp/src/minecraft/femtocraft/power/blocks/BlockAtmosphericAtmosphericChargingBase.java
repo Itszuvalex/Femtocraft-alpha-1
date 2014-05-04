@@ -22,9 +22,9 @@ package femtocraft.power.blocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
-import femtocraft.api.IChargingBase;
+import femtocraft.api.IAtmosphericChargingBase;
 import femtocraft.managers.research.EnumTechLevel;
-import femtocraft.power.tiles.TileEntityPowerMicroChargingBase;
+import femtocraft.power.tiles.TileEntityAtmosphericChargingBase;
 import femtocraft.proxy.ProxyClient;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -33,8 +33,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class BlockMicroChargingBase extends BlockPowerContainer implements
-                                                                IChargingBase {
+public class BlockAtmosphericAtmosphericChargingBase extends BlockPowerContainer implements
+                                                                                 IAtmosphericChargingBase {
     public Icon side;
     public Icon top;
     public Icon bottom;
@@ -46,7 +46,7 @@ public class BlockMicroChargingBase extends BlockPowerContainer implements
     public Icon top_pillar_top;
     public Icon top_pillar_side;
 
-    public BlockMicroChargingBase(int par1) {
+    public BlockAtmosphericAtmosphericChargingBase(int par1) {
         super(par1, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
         setUnlocalizedName("BlockBaseMicroCharging");
@@ -56,7 +56,7 @@ public class BlockMicroChargingBase extends BlockPowerContainer implements
 
     @Override
     public TileEntity createNewTileEntity(World world) {
-        return new TileEntityPowerMicroChargingBase();
+        return new TileEntityAtmosphericChargingBase();
     }
 
     @Override
@@ -73,22 +73,22 @@ public class BlockMicroChargingBase extends BlockPowerContainer implements
     public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
         Block block = Block.blocksList[par1World.getBlockId(par2 - 1, par3,
                                                             par4)];
-        if (block instanceof IChargingBase) {
+        if (block instanceof IAtmosphericChargingBase) {
             return false;
         }
 
         block = Block.blocksList[par1World.getBlockId(par2 + 1, par3, par4)];
-        if (block instanceof IChargingBase) {
+        if (block instanceof IAtmosphericChargingBase) {
             return false;
         }
 
         block = Block.blocksList[par1World.getBlockId(par2, par3, par4 - 1)];
-        if (block instanceof IChargingBase) {
+        if (block instanceof IAtmosphericChargingBase) {
             return false;
         }
 
         block = Block.blocksList[par1World.getBlockId(par2, par3, par4 + 1)];
-        return !(block instanceof IChargingBase);
+        return !(block instanceof IAtmosphericChargingBase);
 
     }
 
@@ -125,7 +125,7 @@ public class BlockMicroChargingBase extends BlockPowerContainer implements
     }
 
     @Override
-    public int maxCoilsSupported(World world, int x, int y, int z) {
+    public int maxAddonsSupported(World world, int x, int y, int z) {
         return 10;
     }
 

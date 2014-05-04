@@ -19,11 +19,8 @@
 
 package femtocraft.proxy;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import femtocraft.industry.tiles.*;
-import femtocraft.power.render.RenderNullEqualizer;
-import femtocraft.power.render.RenderOrbitalEqualizer;
 import femtocraft.power.tiles.*;
 import femtocraft.research.tiles.TileEntityResearchComputer;
 import femtocraft.research.tiles.TileEntityResearchConsole;
@@ -32,10 +29,6 @@ import femtocraft.transport.liquids.tiles.TileEntitySuctionPipe;
 
 public class ProxyCommon {
     public void registerRendering() {
-        ClientRegistry.bindTileEntitySpecialRenderer(
-                TileEntityOrbitalEqualizer.class, new RenderOrbitalEqualizer());
-        ClientRegistry.bindTileEntitySpecialRenderer(
-                TileEntityNullEqualizer.class, new RenderNullEqualizer());
     }
 
     public void registerTileEntities() {
@@ -54,10 +47,10 @@ public class ProxyCommon {
                                         "FemtocraftMicroFurnace");
         GameRegistry.registerTileEntity(
                 TileEntityBaseEntityMicroDeconstructor.class,
-                "microDeconstructor");
+                "TileEntityMicroDeconstructor");
         GameRegistry.registerTileEntity(
                 TileEntityBaseEntityMicroReconstructor.class,
-                "microReconstructor");
+                "TileEntityMicroReconstructor");
         GameRegistry.registerTileEntity(TileEntityEncoder.class,
                                         "TileEntityEncoder");
         GameRegistry.registerTileEntity(TileEntityNanoInnervator.class,
@@ -85,13 +78,13 @@ public class ProxyCommon {
         GameRegistry.registerTileEntity(TileEntityFemtoChronoshifter.class,
                                         "TileEntityFemtoChronoshifter");
         GameRegistry.registerTileEntity(TileEntityMicroCable.class,
-                                        "blockMicroCable");
+                                        "TileEntityMicroCable");
         GameRegistry.registerTileEntity(TileEntityNanoCable.class,
-                                        "blockNanoCable");
+                                        "TileEntityNanoCable");
         GameRegistry.registerTileEntity(TileEntityFemtoCable.class,
-                                        "blockFemtoCable");
-        GameRegistry.registerTileEntity(TileEntityPowerMicroCube.class,
-                                        "FemtocraftMicroCube");
+                                        "TileEntityFemtoCable");
+        GameRegistry.registerTileEntity(TileEntityMicroCube.class,
+                                        "TileEntityMicroCube");
         GameRegistry.registerTileEntity(TileEntityNanoCubeFrame.class,
                                         "TileEntityNanoCubeFrame");
         GameRegistry.registerTileEntity(TileEntityNanoCubePort.class,
@@ -103,9 +96,9 @@ public class ProxyCommon {
         GameRegistry.registerTileEntity(TileEntityFemtoCubePort.class,
                                         "TileEntityFemtoCubePort");
         GameRegistry.registerTileEntity(TileEntityVacuumTube.class,
-                                        "BlockVacuumTube");
-        GameRegistry.registerTileEntity(TileEntityPowerMicroChargingBase.class,
-                                        "BlockBaseMicroCharging");
+                                        "TileEntityVacuumTube");
+        GameRegistry.registerTileEntity(TileEntityAtmosphericChargingBase.class,
+                                        "TileEntityAtmosphericChargingBase");
         GameRegistry.registerTileEntity(TileEntitySuctionPipe.class,
                                         "TileEntitySuctionPipe");
 

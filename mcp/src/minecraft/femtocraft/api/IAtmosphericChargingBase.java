@@ -22,9 +22,9 @@ package femtocraft.api;
 import femtocraft.managers.research.EnumTechLevel;
 import net.minecraft.world.World;
 
-public interface IChargingCoil {
+public interface IAtmosphericChargingBase {
 
-    float powerPerTick(World world, int x, int y, int z);
+    int maxAddonsSupported(World world, int x, int y, int z);
 
-    EnumTechLevel techLevel(World world, int x, int y, int z);
+    EnumTechLevel maxTechSupported(World world, int x, int y, int z);
 }

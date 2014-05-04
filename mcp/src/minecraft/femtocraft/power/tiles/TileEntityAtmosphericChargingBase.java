@@ -19,8 +19,8 @@
 
 package femtocraft.power.tiles;
 
-import femtocraft.api.IChargingBase;
-import femtocraft.api.IChargingCoil;
+import femtocraft.api.IAtmosphericChargingAddon;
+import femtocraft.api.IAtmosphericChargingBase;
 import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.utils.FemtocraftDataUtils.Saveable;
 import net.minecraft.block.Block;
@@ -30,53 +30,49 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityPowerMicroChargingBase extends TileEntityPowerProducer {
+public class TileEntityAtmosphericChargingBase extends TileEntityPowerProducer {
     public int numCoils;
     public float powerPerTick;
     public
     @Saveable
     float storedPowerIncrement;
 
-    public TileEntityPowerMicroChargingBase() {
+    public TileEntityAtmosphericChargingBase() {
         super();
         powerPerTick = 0;
         setTechLevel(EnumTechLevel.MICRO);
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void femtocraftServerUpdate() {
+        numCoils = 0;
+        powerPerTick = 0;
 
-        if (!worldObj.isRemote) {
-            numCoils = 0;
-            powerPerTick = 0;
+        Block base = Block.blocksList[worldObj.getBlockId(xCoord, yCoord,
+                                                          zCoord)];
 
-            Block base = Block.blocksList[worldObj.getBlockId(xCoord, yCoord,
-                                                              zCoord)];
+        boolean searching = true;
+        for (int i = 0; searching
+                && (i < ((IAtmosphericChargingBase) base).maxAddonsSupported(worldObj,
+                                                                             xCoord, yCoord, zCoord)); ++i) {
+            Block block = Block.blocksList[worldObj.getBlockId(xCoord,
+                                                               yCoord + i + 1, zCoord)];
 
-            boolean searching = true;
-            for (int i = 0; searching
-                    && (i < ((IChargingBase) base).maxCoilsSupported(worldObj,
-                                                                     xCoord, yCoord, zCoord)); ++i) {
-                Block block = Block.blocksList[worldObj.getBlockId(xCoord,
-                                                                   yCoord + i + 1, zCoord)];
-
-                if ((!(block instanceof IChargingCoil))) {
-                    searching = false;
-                    continue;
-                }
-
-                IChargingCoil coil = (IChargingCoil) block;
-                powerPerTick += coil.powerPerTick(worldObj, xCoord, yCoord + i
-                        + 1, zCoord);
-                numCoils++;
+            if ((!(block instanceof IAtmosphericChargingAddon))) {
+                searching = false;
+                continue;
             }
 
-            storedPowerIncrement += powerPerTick;
-            while (storedPowerIncrement > 1.0f) {
-                storedPowerIncrement -= 1.0f;
-                charge(ForgeDirection.UNKNOWN, 1);
-            }
+            IAtmosphericChargingAddon addon = (IAtmosphericChargingAddon) block;
+            powerPerTick += addon.powerPerTick(worldObj, xCoord, yCoord + i
+                    + 1, zCoord);
+            numCoils++;
+        }
+
+        storedPowerIncrement += powerPerTick;
+        while (storedPowerIncrement > 1.0f) {
+            storedPowerIncrement -= 1.0f;
+            charge(ForgeDirection.UNKNOWN, 1);
         }
     }
 
@@ -106,7 +102,7 @@ public class TileEntityPowerMicroChargingBase extends TileEntityPowerProducer {
         ItemStack item = par5EntityPlayer.getHeldItem();
         if (item != null
                 && (item.getItem() instanceof ItemBlock)
-                && Block.blocksList[((ItemBlock) item.getItem()).getBlockID()] instanceof IChargingCoil) {
+                && Block.blocksList[((ItemBlock) item.getItem()).getBlockID()] instanceof IAtmosphericChargingAddon) {
             return true;
         }
 

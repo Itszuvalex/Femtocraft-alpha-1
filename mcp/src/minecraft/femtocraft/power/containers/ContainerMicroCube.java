@@ -21,16 +21,16 @@ package femtocraft.power.containers;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import femtocraft.power.tiles.TileEntityPowerMicroCube;
+import femtocraft.power.tiles.TileEntityMicroCube;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 
 public class ContainerMicroCube extends Container {
-    private final TileEntityPowerMicroCube cube;
+    private final TileEntityMicroCube cube;
     private int lastPower = 0;
 
-    public ContainerMicroCube(TileEntityPowerMicroCube cube) {
+    public ContainerMicroCube(TileEntityMicroCube cube) {
         this.cube = cube;
     }
 

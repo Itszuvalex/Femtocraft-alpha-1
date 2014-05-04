@@ -490,13 +490,13 @@ public class Femtocraft {
         GameRegistry.registerBlock(suctionPipe, "BlockSuctionPipe");
         LanguageRegistry.addName(suctionPipe, "Suction Pipe");
 
-        microChargingBase = new BlockMicroChargingBase(
+        microChargingBase = new BlockAtmosphericAtmosphericChargingBase(
                 FemtocraftConfigs.FemtopowerMicroChargingBaseID);
         GameRegistry.registerBlock(microChargingBase, "BlockBaseMicroCharging");
         LanguageRegistry.addName(microChargingBase,
                                  "Electrostatic Charging Base");
 
-        microChargingCoil = new BlockMicroChargingCoil(
+        microChargingCoil = new BlockAtmosphericAtmosphericChargingAddon(
                 FemtocraftConfigs.FemtopowerMicroChargingCoilID);
         GameRegistry.registerBlock(microChargingCoil, "BlockCoilMicroCharging");
         LanguageRegistry.addName(microChargingCoil,

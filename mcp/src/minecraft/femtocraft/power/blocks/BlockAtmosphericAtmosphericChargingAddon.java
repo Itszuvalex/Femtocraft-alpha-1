@@ -22,8 +22,8 @@ package femtocraft.power.blocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
-import femtocraft.api.IChargingBase;
-import femtocraft.api.IChargingCoil;
+import femtocraft.api.IAtmosphericChargingBase;
+import femtocraft.api.IAtmosphericChargingAddon;
 import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.proxy.ProxyClient;
 import net.minecraft.block.Block;
@@ -33,11 +33,11 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockMicroChargingCoil extends Block implements IChargingCoil {
+public class BlockAtmosphericAtmosphericChargingAddon extends Block implements IAtmosphericChargingAddon {
     public Icon coilConnector;
     public Icon coilConnectorTop;
 
-    public BlockMicroChargingCoil(int par1) {
+    public BlockAtmosphericAtmosphericChargingAddon(int par1) {
         super(par1, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
         setUnlocalizedName("BlockCoilMicroCharging");
@@ -66,7 +66,7 @@ public class BlockMicroChargingCoil extends Block implements IChargingCoil {
         Block block = Block.blocksList[par1World.getBlockId(par2, par3 - 1,
                                                             par4)];
         return block != null
-                && ((block instanceof IChargingCoil) || (block instanceof IChargingBase))
+                && ((block instanceof IAtmosphericChargingAddon) || (block instanceof IAtmosphericChargingBase))
                 && par1World.isAirBlock(par2 - 1, par3, par4)
                 && par1World.isAirBlock(par2 + 1, par3, par4)
                 && par1World.isAirBlock(par2, par3, par4 - 1)

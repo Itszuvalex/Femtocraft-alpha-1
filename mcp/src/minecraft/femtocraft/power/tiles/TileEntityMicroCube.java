@@ -31,13 +31,13 @@ import net.minecraftforge.common.ForgeDirection;
 
 import java.util.Arrays;
 
-public class TileEntityPowerMicroCube extends TileEntityPowerBase {
+public class TileEntityMicroCube extends TileEntityPowerBase {
     static final public String packetChannel = Femtocraft.ID + ".MCube";
     public static final int maxStorage = 10000;
     public static final EnumTechLevel ENUM_TECH_LEVEL = EnumTechLevel.MICRO;
     public boolean[] outputs = new boolean[6]; // Not @Saveable due to bit masking
 
-    public TileEntityPowerMicroCube() {
+    public TileEntityMicroCube() {
         super();
         setMaxStorage(maxStorage);
         setTechLevel(ENUM_TECH_LEVEL);

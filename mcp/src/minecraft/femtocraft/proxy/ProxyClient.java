@@ -19,9 +19,12 @@
 
 package femtocraft.proxy;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import femtocraft.consumables.processing.blocks.RenderCuttingBoard;
 import femtocraft.power.render.*;
+import femtocraft.power.tiles.TileEntityNullEqualizer;
+import femtocraft.power.tiles.TileEntityOrbitalEqualizer;
 import femtocraft.render.RenderSimpleMachine;
 import femtocraft.transport.items.render.RenderVacuumTube;
 import femtocraft.transport.liquids.render.RenderSuctionPipe;
@@ -58,6 +61,11 @@ public class ProxyClient extends ProxyCommon {
     @Override
     public void registerBlockRenderers() {
         super.registerBlockRenderers();
+
+        ClientRegistry.bindTileEntitySpecialRenderer(
+                TileEntityOrbitalEqualizer.class, new RenderOrbitalEqualizer());
+        ClientRegistry.bindTileEntitySpecialRenderer(
+                TileEntityNullEqualizer.class, new RenderNullEqualizer());
 
         RenderSimpleMachine.renderID = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(RenderSimpleMachine.renderID, new RenderSimpleMachine());

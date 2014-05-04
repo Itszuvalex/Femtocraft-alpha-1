@@ -19,8 +19,6 @@
 
 package femtocraft.power.plasma;
 
-import com.sun.xml.internal.bind.v2.TODO;
-
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/2/14.
  */
@@ -28,6 +26,10 @@ public class PlasmaWave {
     private int frequency;
     private int charge;
     private int temperature;
+
+    public PlasmaWave() {
+
+    }
 
     /*TODO:  Some clever system that supports different levels of Fusion
      Reactor Laser generation, some reason for a Plasma Vent,
@@ -37,18 +39,15 @@ public class PlasmaWave {
     /**
      * @return Frequency of the particles this packet of plasma is composed of
      */
-    int getFrequency()
-    {
-
+    int getFrequency() {
+        return 0;
     }
 
-    int getCharge()
-    {
-
+    int getCharge() {
+        return 0;
     }
 
-    void merge(PlasmaWave alt)
-    {
+    void merge(PlasmaWave alt) {
 
     }
 }
