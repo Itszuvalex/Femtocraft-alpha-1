@@ -22,8 +22,8 @@ package femtocraft.core.multiblock;
 import net.minecraft.world.World;
 
 /**
- * @author Itszuvalex Helper
- * @explanation interface for better structure of MultiBlock behavior classes
+ * @author Itszuvalex
+ *         Helper interface for better structure of MultiBlock behavior classes
  */
 public interface IMultiBlock {
 

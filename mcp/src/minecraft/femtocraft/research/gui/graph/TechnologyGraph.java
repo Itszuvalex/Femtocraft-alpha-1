@@ -71,9 +71,6 @@ public class TechnologyGraph extends MapGraph<String> {
         }
 
         setNodes(nodes);
-
-        GuiResearch.setSize(greatestWidth() * X_PADDING, greatestHeight()
-                * Y_PADDING);
     }
 
     @Override
