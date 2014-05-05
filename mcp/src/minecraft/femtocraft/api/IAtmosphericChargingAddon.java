@@ -22,6 +22,9 @@ package femtocraft.api;
 import femtocraft.managers.research.EnumTechLevel;
 import net.minecraft.world.World;
 
+/**
+ * Implemented by the Block class, not the TileEntity.
+ */
 public interface IAtmosphericChargingAddon {
 
     /**
@@ -45,4 +48,13 @@ public interface IAtmosphericChargingAddon {
      * @return
      */
     EnumTechLevel techLevel(World world, int x, int y, int z);
+
+    /**
+     * Returns true if this can support addon, false otherwise.
+     *
+     * @param addon
+     * @return
+     */
+    boolean canSupportAddon(IAtmosphericChargingAddon addon, World world,
+                            int x, int y, int z);
 }

@@ -38,6 +38,7 @@ public class ProxyClient extends ProxyCommon {
     public static int FemtocraftVacuumTubeRenderID;
     public static int FemtocraftChargingBaseRenderID;
     public static int FemtocraftChargingCoilRenderID;
+    public static int FemtocraftChargingCapacitorRenderID;
     public static int FemtocraftSuctionPipeRenderID;
 
     public static int CuttingBoardRenderPass;
@@ -93,6 +94,12 @@ public class ProxyClient extends ProxyCommon {
 
         FemtocraftChargingCoilRenderID = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(FemtocraftChargingCoilRenderID, new RenderChargingCoil());
+
+        FemtocraftChargingCapacitorRenderID = RenderingRegistry
+                .getNextAvailableRenderId();
+        RenderingRegistry.registerBlockHandler
+                (FemtocraftChargingCapacitorRenderID,
+                 new RenderChargingCapacitor());
 
         FemtocraftSuctionPipeRenderID = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(FemtocraftSuctionPipeRenderID, new RenderSuctionPipe());

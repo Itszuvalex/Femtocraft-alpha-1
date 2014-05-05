@@ -20,7 +20,7 @@
 package femtocraft.power.render;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import femtocraft.power.blocks.BlockAtmosphericAtmosphericChargingBase;
+import femtocraft.power.blocks.BlockAtmosphericChargingBase;
 import femtocraft.proxy.ProxyClient;
 import femtocraft.render.RenderModel;
 import femtocraft.render.RenderPoint;
@@ -41,7 +41,7 @@ public class RenderChargingBase implements
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID,
                                      RenderBlocks renderer) {
-        BlockAtmosphericAtmosphericChargingBase base = (BlockAtmosphericAtmosphericChargingBase) block;
+        BlockAtmosphericChargingBase base = (BlockAtmosphericChargingBase) block;
         if (base == null) {
             return;
         }
@@ -62,7 +62,7 @@ public class RenderChargingBase implements
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
                                     Block block, int modelId, RenderBlocks renderer) {
-        BlockAtmosphericAtmosphericChargingBase base = (BlockAtmosphericAtmosphericChargingBase) block;
+        BlockAtmosphericChargingBase base = (BlockAtmosphericChargingBase) block;
         if (base == null) {
             return false;
         }
@@ -86,7 +86,7 @@ public class RenderChargingBase implements
         return ProxyClient.FemtocraftChargingBaseRenderID;
     }
 
-    void renderBase(BlockAtmosphericAtmosphericChargingBase base, int x, int y, int z) {
+    void renderBase(BlockAtmosphericChargingBase base, int x, int y, int z) {
         if (base_model == null) {
             createBase(base);
         }
@@ -95,7 +95,7 @@ public class RenderChargingBase implements
         base_model.draw();
     }
 
-    void createBase(BlockAtmosphericAtmosphericChargingBase base) {
+    void createBase(BlockAtmosphericChargingBase base) {
         base_model = new RenderModel();
 
         // Normal faces

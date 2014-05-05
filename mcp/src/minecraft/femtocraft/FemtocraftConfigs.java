@@ -167,6 +167,9 @@ public class FemtocraftConfigs {
     int FemtopowerMicroChargingCoilID = 402;
     public static
     @CfgId(block = true)
+    int FemtopowerMicroChargingCapacitorID = 403;
+    public static
+    @CfgId(block = true)
     int FemtopowerNanoCubeFrameID = 405;
     public static
     @CfgId(block = true)
@@ -972,29 +975,34 @@ public class FemtocraftConfigs {
                     int id = field.getInt(null);
                     if (annotation.block()) {
                         id = config.getBlock(field.getName(), id).getInt();
-                    } else {
+                    }
+                    else {
                         id = config.getItem(field.getName(), id).getInt();
                     }
                     field.setInt(null, id);
-                } else if (field.isAnnotationPresent(CfgBool.class)) {
+                }
+                else if (field.isAnnotationPresent(CfgBool.class)) {
                     CfgCat cat = field.getAnnotation(CfgCat.class);
                     String category;
                     if (cat == null) {
                         category = Configuration.CATEGORY_GENERAL;
-                    } else {
+                    }
+                    else {
                         category = cat.category();
                     }
 
                     boolean bool = field.getBoolean(null);
                     bool = config.get(category, field.getName(), bool)
-                            .getBoolean(bool);
+                                 .getBoolean(bool);
                     field.setBoolean(null, bool);
-                } else if (field.isAnnotationPresent(CfgInt.class)) {
+                }
+                else if (field.isAnnotationPresent(CfgInt.class)) {
                     CfgCat cat = field.getAnnotation(CfgCat.class);
                     String category;
                     if (cat == null) {
                         category = Configuration.CATEGORY_GENERAL;
-                    } else {
+                    }
+                    else {
                         category = cat.category();
                     }
 
@@ -1002,20 +1010,23 @@ public class FemtocraftConfigs {
                     cint = config.get(category, field.getName(), cint).getInt(
                             cint);
                     field.setInt(null, cint);
-                } else if (field.isAnnotationPresent(CfgFloat.class)) {
+                }
+                else if (field.isAnnotationPresent(CfgFloat.class)) {
                     CfgCat cat = field.getAnnotation(CfgCat.class);
                     String category;
                     if (cat == null) {
                         category = Configuration.CATEGORY_GENERAL;
-                    } else {
+                    }
+                    else {
                         category = cat.category();
                     }
 
                     float cint = field.getFloat(null);
                     cint = (float) config.get(category, field.getName(), cint)
-                            .getDouble(cint);
+                                         .getDouble(cint);
                     field.setFloat(null, cint);
-                } else {
+                }
+                else {
 
                 }
             }
@@ -1023,9 +1034,9 @@ public class FemtocraftConfigs {
             // Specific loads
             schematicInfiniteUseMultiplier = (float) config
                     .get("Item Constants",
-                            "SchematicInfiniteUseMultiplier",
-                            200.f,
-                            "When AssemblerSchematics have infinite uses, this number will be used instead of the # of uses the schematic would be good for, when calculating the mass required to key the schematic to a recipe.")
+                         "SchematicInfiniteUseMultiplier",
+                         200.f,
+                         "When AssemblerSchematics have infinite uses, this number will be used instead of the # of uses the schematic would be good for, when calculating the mass required to key the schematic to a recipe.")
                     .getDouble(200.f);
             ItemAssemblySchematic.infiniteUseMassMultiplier = schematicInfiniteUseMultiplier;
 

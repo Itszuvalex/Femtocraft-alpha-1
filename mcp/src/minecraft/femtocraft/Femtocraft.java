@@ -144,6 +144,7 @@ public class Femtocraft {
     public static Block suctionPipe;
     public static Block microChargingBase;
     public static Block microChargingCoil;
+    public static Block microChargingCapacitor;
     public static Block orbitalEqualizer;
     public static Block nullEqualizer;
 
@@ -490,17 +491,24 @@ public class Femtocraft {
         GameRegistry.registerBlock(suctionPipe, "BlockSuctionPipe");
         LanguageRegistry.addName(suctionPipe, "Suction Pipe");
 
-        microChargingBase = new BlockAtmosphericAtmosphericChargingBase(
+        microChargingBase = new BlockAtmosphericChargingBase(
                 FemtocraftConfigs.FemtopowerMicroChargingBaseID);
         GameRegistry.registerBlock(microChargingBase, "BlockBaseMicroCharging");
         LanguageRegistry.addName(microChargingBase,
                                  "Electrostatic Charging Base");
 
-        microChargingCoil = new BlockAtmosphericAtmosphericChargingAddon(
+        microChargingCoil = new BlockAtmosphericChargingCoil(
                 FemtocraftConfigs.FemtopowerMicroChargingCoilID);
         GameRegistry.registerBlock(microChargingCoil, "BlockCoilMicroCharging");
         LanguageRegistry.addName(microChargingCoil,
                                  "Electrostatic Charging Coil");
+
+        microChargingCapacitor = new BlockAtmosphericChargingCapacitor
+                (FemtocraftConfigs.FemtopowerMicroChargingCapacitorID);
+        GameRegistry.registerBlock(microChargingCapacitor,
+                                   "BlockAtmosphericChargingCapacitor");
+        LanguageRegistry.addName(microChargingCapacitor,
+                                 "Electrostatic Charging Capacitor");
 
         orbitalEqualizer = new BlockOrbitalEqualizer(
                 FemtocraftConfigs.orbitalEqualizerID);

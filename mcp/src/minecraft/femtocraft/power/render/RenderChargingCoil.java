@@ -20,7 +20,7 @@
 package femtocraft.power.render;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import femtocraft.power.blocks.BlockAtmosphericAtmosphericChargingAddon;
+import femtocraft.power.blocks.BlockAtmosphericChargingCoil;
 import femtocraft.proxy.ProxyClient;
 import femtocraft.render.RenderModel;
 import femtocraft.render.RenderPoint;
@@ -42,7 +42,7 @@ public class RenderChargingCoil implements
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID,
                                      RenderBlocks renderer) {
-        BlockAtmosphericAtmosphericChargingAddon coil = (BlockAtmosphericAtmosphericChargingAddon) block;
+        BlockAtmosphericChargingCoil coil = (BlockAtmosphericChargingCoil) block;
         if (coil == null) {
             return;
         }
@@ -62,7 +62,7 @@ public class RenderChargingCoil implements
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
                                     Block block, int modelId, RenderBlocks renderer) {
-        BlockAtmosphericAtmosphericChargingAddon coil = (BlockAtmosphericAtmosphericChargingAddon) block;
+        BlockAtmosphericChargingCoil coil = (BlockAtmosphericChargingCoil) block;
         if (coil == null) {
             return false;
         }
@@ -86,7 +86,7 @@ public class RenderChargingCoil implements
         return ProxyClient.FemtocraftChargingCoilRenderID;
     }
 
-    private void renderCoil(BlockAtmosphericAtmosphericChargingAddon coil, int x, int y, int z) {
+    private void renderCoil(BlockAtmosphericChargingCoil coil, int x, int y, int z) {
         if (segment == null) {
             createSegment(coil);
         }
@@ -97,7 +97,7 @@ public class RenderChargingCoil implements
         segment.draw();
     }
 
-    private void createSegment(BlockAtmosphericAtmosphericChargingAddon coil) {
+    private void createSegment(BlockAtmosphericChargingCoil coil) {
         segment = new RenderModel();
 
         float minY = 0;

@@ -33,8 +33,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class BlockAtmosphericAtmosphericChargingBase extends BlockPowerContainer implements
-                                                                                 IAtmosphericChargingBase {
+public class BlockAtmosphericChargingBase extends BlockPowerContainer implements
+                                                                      IAtmosphericChargingBase {
     public Icon side;
     public Icon top;
     public Icon bottom;
@@ -46,10 +46,10 @@ public class BlockAtmosphericAtmosphericChargingBase extends BlockPowerContainer
     public Icon top_pillar_top;
     public Icon top_pillar_side;
 
-    public BlockAtmosphericAtmosphericChargingBase(int par1) {
+    public BlockAtmosphericChargingBase(int par1) {
         super(par1, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
-        setUnlocalizedName("BlockBaseMicroCharging");
+        setUnlocalizedName("BlockAtmosphericChargingBase");
         setHardness(2.0f);
         setStepSound(Block.soundMetalFootstep);
     }

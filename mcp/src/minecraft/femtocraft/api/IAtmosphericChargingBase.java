@@ -22,6 +22,9 @@ package femtocraft.api;
 import femtocraft.managers.research.EnumTechLevel;
 import net.minecraft.world.World;
 
+/**
+ * Implemented by the Block class, not the TileEntity
+ */
 public interface IAtmosphericChargingBase {
 
     /**

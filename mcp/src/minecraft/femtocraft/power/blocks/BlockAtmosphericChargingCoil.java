@@ -22,8 +22,8 @@ package femtocraft.power.blocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
-import femtocraft.api.IAtmosphericChargingBase;
 import femtocraft.api.IAtmosphericChargingAddon;
+import femtocraft.api.IAtmosphericChargingBase;
 import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.proxy.ProxyClient;
 import net.minecraft.block.Block;
@@ -33,14 +33,14 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockAtmosphericAtmosphericChargingAddon extends Block implements IAtmosphericChargingAddon {
+public class BlockAtmosphericChargingCoil extends Block implements IAtmosphericChargingAddon {
     public Icon coilConnector;
     public Icon coilConnectorTop;
 
-    public BlockAtmosphericAtmosphericChargingAddon(int par1) {
+    public BlockAtmosphericChargingCoil(int par1) {
         super(par1, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
-        setUnlocalizedName("BlockCoilMicroCharging");
+        setUnlocalizedName("BlockAtmosphericChargingCoil");
         setHardness(1.0f);
         setStepSound(Block.soundMetalFootstep);
         setBlockBounds(4.f / 16.f, 0, 4.f / 16.f, 12.f / 16.f, 1, 12.f / 16.f);
@@ -66,7 +66,14 @@ public class BlockAtmosphericAtmosphericChargingAddon extends Block implements I
         Block block = Block.blocksList[par1World.getBlockId(par2, par3 - 1,
                                                             par4)];
         return block != null
-                && ((block instanceof IAtmosphericChargingAddon) || (block instanceof IAtmosphericChargingBase))
+                && (block instanceof IAtmosphericChargingAddon &&
+                ((IAtmosphericChargingAddon) block).canSupportAddon(this,
+                                                                    par1World,
+                                                                    par2,
+                                                                    par3,
+                                                                    par4) ||
+                (block
+                        instanceof IAtmosphericChargingBase))
                 && par1World.isAirBlock(par2 - 1, par3, par4)
                 && par1World.isAirBlock(par2 + 1, par3, par4)
                 && par1World.isAirBlock(par2, par3, par4 - 1)
@@ -101,6 +108,11 @@ public class BlockAtmosphericAtmosphericChargingAddon extends Block implements I
     @Override
     public EnumTechLevel techLevel(World world, int x, int y, int z) {
         return EnumTechLevel.MICRO;
+    }
+
+    @Override
+    public boolean canSupportAddon(IAtmosphericChargingAddon addon, World world, int x, int y, int z) {
+        return true;
     }
 
     @Override
