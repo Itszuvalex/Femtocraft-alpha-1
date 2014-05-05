@@ -27,7 +27,6 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityAtmosphericChargingBase extends TileEntityPowerProducer {
@@ -45,6 +44,8 @@ public class TileEntityAtmosphericChargingBase extends TileEntityPowerProducer {
 
     @Override
     public void femtocraftServerUpdate() {
+        super.femtocraftServerUpdate();
+
         numCoils = 0;
         powerPerTick = 0;
 
@@ -74,18 +75,6 @@ public class TileEntityAtmosphericChargingBase extends TileEntityPowerProducer {
             storedPowerIncrement -= 1.0f;
             charge(ForgeDirection.UNKNOWN, 1);
         }
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-        super.readFromNBT(par1nbtTagCompound);
-        // par1nbtTagCompound.getFloat("powerIncrement");
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-        super.writeToNBT(par1nbtTagCompound);
-        // par1nbtTagCompound.setFloat("powerIncrement", storedPowerIncrement);
     }
 
     @Override

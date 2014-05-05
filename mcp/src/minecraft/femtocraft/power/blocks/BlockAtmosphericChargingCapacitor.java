@@ -127,20 +127,23 @@ public class BlockAtmosphericChargingCapacitor extends Block implements IAtmosph
     public float powerPerTick(World world, int x, int y, int z) {
         float power = 0;
         int offset = 0;
-        boolean baseFound = false;
+        boolean searchEnded = false;
         Block b;
         do {
             --offset;
             b = Block.blocksList[world.getBlockId(x, y - offset, z)];
             if (b instanceof IAtmosphericChargingBase) {
-                baseFound = true;
+                searchEnded = true;
             }
             else if (b instanceof IAtmosphericChargingAddon) {
                 IAtmosphericChargingAddon addon = (IAtmosphericChargingAddon) b;
                 power += addon.powerPerTick(world, x, y - offset, z);
             }
+            else {
+                searchEnded = true;
+            }
         }
-        while (!baseFound);
+        while (!searchEnded);
 
         if (world.isThundering()) {
             power *= powerMultiplierStorm;
