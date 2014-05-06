@@ -20,34 +20,32 @@
 package femtocraft.power.plasma;
 
 /**
- * Created by Christopher Harris (Itszuvalex) on 5/2/14.
+ * Created by Christopher Harris (Itszuvalex) on 5/6/14.
  */
-public class PlasmaWave {
-    private int frequency;
-    private int charge;
-    private int temperature;
-
-    public PlasmaWave() {
-
-    }
-
-    /*TODO:  Some clever system that supports different levels of Fusion
-     Reactor Laser generation, some reason for a Plasma Vent,
-     some other reason to form a complete loop back to the reactor...
-    */
+public interface IFusionReactorComponent extends IPlasmaContainer {
+    /**
+     * Called once a volatility event has resolved.  This could be used to
+     * prevent meltdowns, normalize PlasmaFlows, etc.
+     *
+     * @param event The event that just
+     *              resolved
+     * @param core  The core
+     */
+    void onPostVolatilityEvent(IVolatilityEvent event,
+                               IFusionReactorCore core);
 
     /**
-     * @return Frequency of the particles this packet of plasma is composed of
+     * Called when the ignition process begins.  Likely started by a player.
+     *
+     * @param core Core this is a component of.
      */
-    int getFrequency() {
-        return 0;
-    }
+    void beginIgnitionProcess(IFusionReactorCore core);
 
-    int getCharge() {
-        return 0;
-    }
+    /**
+     * Called when the ignition process ends, whether it was successful or not.
+     *
+     * @param core Core this is a component of.
+     */
+    void endIgnitionProcess(IFusionReactorCore core);
 
-    void merge(PlasmaWave alt) {
-
-    }
 }

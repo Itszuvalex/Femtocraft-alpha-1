@@ -19,10 +19,80 @@
 
 package femtocraft.power.plasma;
 
+import net.minecraftforge.common.ForgeDirection;
+
+import java.util.Collection;
+
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/2/14.
+ * <p/>
+ * Interface for TileEntities that wish to be able to handle PlasmaFlows.
+ * <p/>
+ * These TileEntities will be expected to handle these flows in a fair
+ * manner, and except for great reason, apply volatility events fairly.
  */
 public interface IPlasmaContainer {
+    /**
+     * @return Plasma travels in a circuit.  This can return NULL,
+     * i.e. while the player is placing conduits.  If this returns NULL while
+     * in use, expect Volatility Events.
+     */
+    IPlasmaContainer getInput();
 
+    /**
+     * @return Plasma travels in a circuit.  This can return NULL,
+     * i.e. while the player is placing conduits.  If this returns NULL while
+     * in use, expect Volatility Events.
+     */
+    IPlasmaContainer getOutput();
+
+    /**
+     * @return Direction of input, or UNKNOWN if NULL.  Helper function for
+     * rendering, basically.
+     */
+    ForgeDirection getInputDir();
+
+    /**
+     * @return Direction of output, or UNKNOWN if NULL.  Helper function for
+     * rendering, basically.
+     */
+    ForgeDirection getOutputDir();
+
+    /**
+     * @param flow
+     * @return True if flow successfully added, false otherwise.  Expect
+     * Volatility Events if this returns false.
+     */
+    boolean addFlow(IPlasmaFlow flow);
+
+    /**
+     * @return All the flows being contained.
+     */
+    Collection<IPlasmaFlow> getFlows();
+
+    /**
+     * @return Maximum number of flows this can contain.
+     */
+    int getMaxFlows();
+
+    /**
+     * @param event Called when a volatility event occurs.
+     */
+    void onVolatilityEvent(IVolatilityEvent event);
+
+    /**
+     * @return A measurement of how high a temperature this can handle.
+     */
+    int getTemperatureRating();
+
+    /**
+     * @return A measurement of what level of instability this can handle.
+     */
+    int getStabilityRating();
+
+    /**
+     * @param flow Flow to update.
+     */
+    void updateFlow(IPlasmaFlow flow);
 
 }
