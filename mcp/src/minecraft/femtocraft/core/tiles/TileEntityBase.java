@@ -170,7 +170,7 @@ public class TileEntityBase extends TileEntity {
      * @return GuiID, if GUI handler uses ids and not checking instanceof
      */
     public int getGuiID() {
-        return 0;
+        return -1;
     }
 
     public Object getMod() {

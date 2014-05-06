@@ -19,6 +19,7 @@
 
 package femtocraft.industry.tiles;
 
+import femtocraft.FemtocraftGuiHandler;
 import femtocraft.managers.research.EnumTechLevel;
 
 public class TileEntityFemtoCoagulator extends TileEntityBaseEntityMicroReconstructor {
@@ -31,6 +32,11 @@ public class TileEntityFemtoCoagulator extends TileEntityBaseEntityMicroReconstr
         this.setTechLevel(EnumTechLevel.FEMTO);
         // TODO: Pull number from configs
         this.setMaxStorage(100000);
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.FemtoCoagulatorGuiID;
     }
 
     @Override

@@ -35,13 +35,101 @@ import femtocraft.power.tiles.TileEntityNanoCubePort;
 import femtocraft.research.containers.ContainerResearchConsole;
 import femtocraft.research.gui.GuiResearch;
 import femtocraft.research.gui.GuiResearchConsole;
-import femtocraft.research.tiles.TileEntityResearchComputer;
 import femtocraft.research.tiles.TileEntityResearchConsole;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class FemtocraftGuiHandler implements IGuiHandler {
+    //Research
+    public static final int ResearchComputerGuiID = 0;
+    public static final int ResearchConsoleGuiID = 1;
+
+    //Industry
+    public static final int EncoderGuiID = 4;
+    public static final int MicroFurnaceGuiID = 5;
+    public static final int MicroDeconstructorGuiID = 6;
+    public static final int MicroReconstructorGuiID = 7;
+    public static final int NanoInnervatorGuiID = 8;
+    public static final int NanoDismantlerGuiID = 9;
+    public static final int NanoFabricatorGuiID = 10;
+    public static final int NanoHorologeGuiID = 11;
+    public static final int NanoEnmesherGuiID = 12;
+    public static final int FemtoImpulserGuiID = 13;
+    public static final int FemtoRepurposerGuiID = 14;
+    public static final int FemtoCoagulatorGuiID = 15;
+    public static final int FemtoChronoshifterGuiID = 16;
+    public static final int FemtoEntanglerGuiID = 17;
+
+    //Power
+    public static final int MicroCubeGuiID = 30;
+    public static final int MicroEngineGuiID = 31;
+    public static final int NanoCubeGuiID = 35;
+    public static final int FemtoCubeGuiID = 40;
+
+
+    @Override
+    public Object getServerGuiElement(int ID, EntityPlayer player, World world,
+                                      int x, int y, int z) {
+        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+
+        switch (ID) {
+            case ResearchConsoleGuiID:
+                return new ContainerResearchConsole(player.inventory,
+                                                    (TileEntityResearchConsole) tileEntity);
+            case EncoderGuiID:
+                return new ContainerEncoder(player.inventory,
+                                            (TileEntityEncoder) tileEntity);
+            case MicroFurnaceGuiID:
+                return new ContainerMicroFurnace(player.inventory,
+                                                 (TileEntityBaseEntityMicroFurnace) tileEntity);
+            case MicroDeconstructorGuiID:
+                return new ContainerMicroDeconstructor(player.inventory,
+                                                       (TileEntityBaseEntityMicroDeconstructor) tileEntity);
+            case MicroReconstructorGuiID:
+                return new ContainerMicroReconstructor(player.inventory,
+                                                       (TileEntityBaseEntityMicroReconstructor) tileEntity);
+            case NanoInnervatorGuiID:
+                return new ContainerNanoInnervator(player.inventory,
+                                                   (TileEntityNanoInnervator) tileEntity);
+            case NanoDismantlerGuiID:
+                return new ContainerNanoDismantler(player.inventory, (TileEntityNanoDismantler) tileEntity);
+            case NanoFabricatorGuiID:
+                return new ContainerNanoFabricator(player.inventory,
+                                                   (TileEntityNanoFabricator)
+                                                           tileEntity
+                );
+            case NanoHorologeGuiID:
+                break;          //TODO
+            case NanoEnmesherGuiID:
+                break;                //TODO
+            case FemtoImpulserGuiID:
+                return new ContainerFemtoImpulser(player.inventory, (TileEntityFemtoImpulser) tileEntity);
+            case FemtoRepurposerGuiID:
+                return new ContainerFemtoRepurposer(player.inventory, (TileEntityFemtoRepurposer) tileEntity);
+            case FemtoCoagulatorGuiID:
+                return new ContainerFemtoCoagulator(player.inventory,
+                                                    (TileEntityFemtoCoagulator)
+                                                            tileEntity
+                );
+            case FemtoChronoshifterGuiID:
+                break;       //TODO
+            case FemtoEntanglerGuiID:
+                break;             //TODO
+            case MicroCubeGuiID:
+                return new ContainerMicroCube((TileEntityMicroCube) tileEntity);
+            case MicroEngineGuiID:
+            case NanoCubeGuiID:
+                return new ContainerNanoCube((TileEntityNanoCubePort) tileEntity);
+            case FemtoCubeGuiID:
+                return new ContainerFemtoCube((TileEntityFemtoCubePort) tileEntity);
+            default:
+                return null;
+        }
+
+        return null;
+    }
+
 
     // Can switch on type of tile entity, or can alternatively switch on type
     // ID.
@@ -49,127 +137,62 @@ public class FemtocraftGuiHandler implements IGuiHandler {
     // use that.
 
     @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world,
-                                      int x, int y, int z) {
-        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-
-        if (tileEntity instanceof TileEntityFemtoImpulser) {
-            return new ContainerFemtoImpulser(player.inventory, (TileEntityFemtoImpulser) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityNanoInnervator) {
-            return new ContainerNanoInnervator(player.inventory,
-                                               (TileEntityNanoInnervator) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityBaseEntityMicroFurnace) {
-            return new ContainerMicroFurnace(player.inventory,
-                                             (TileEntityBaseEntityMicroFurnace) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityNanoDismantler) {
-            return new ContainerNanoDismantler(player.inventory, (TileEntityNanoDismantler) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityFemtoRepurposer) {
-            return new ContainerFemtoRepurposer(player.inventory, (TileEntityFemtoRepurposer) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityBaseEntityMicroDeconstructor) {
-            return new ContainerMicroDeconstructor(player.inventory,
-                                                   (TileEntityBaseEntityMicroDeconstructor) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityFemtoCoagulator) {
-            return new ContainerFemtoCoagulator(player.inventory,
-                                                (TileEntityFemtoCoagulator)
-                                                        tileEntity
-            );
-        }
-        else if (tileEntity instanceof TileEntityNanoFabricator) {
-            return new ContainerNanoFabricator(player.inventory,
-                                               (TileEntityNanoFabricator)
-                                                       tileEntity
-            );
-        }
-        else if (tileEntity instanceof TileEntityBaseEntityMicroReconstructor) {
-            return new ContainerMicroReconstructor(player.inventory,
-                                                   (TileEntityBaseEntityMicroReconstructor) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityEncoder) {
-            return new ContainerEncoder(player.inventory,
-                                        (TileEntityEncoder) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityFemtoCubePort) {
-            return new ContainerFemtoCube((TileEntityFemtoCubePort) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityNanoCubePort) {
-            return new ContainerNanoCube((TileEntityNanoCubePort) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityMicroCube) {
-            return new ContainerMicroCube((TileEntityMicroCube) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityResearchConsole) {
-            return new ContainerResearchConsole(player.inventory,
-                                                (TileEntityResearchConsole) tileEntity);
-        }
-
-        return null;
-    }
-
-    @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world,
                                       int x, int y, int z) {
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
-        if (tileEntity instanceof TileEntityFemtoImpulser) {
-            return new GuiFemtoImpulser(player.inventory, (TileEntityFemtoImpulser) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityNanoInnervator) {
-            return new GuiNanoInnervator(player.inventory,
-                                         (TileEntityNanoInnervator) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityBaseEntityMicroFurnace) {
-            return new GuiMicroFurnace(player.inventory,
-                                       (TileEntityBaseEntityMicroFurnace) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityFemtoRepurposer) {
-            return new GuiFemtoRepurposer(player.inventory, (TileEntityFemtoRepurposer) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityNanoDismantler) {
-            return new GuiNanoDismantler(player.inventory, (TileEntityNanoDismantler) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityBaseEntityMicroDeconstructor) {
-            return new GuiMicroDeconstructor(player.inventory,
-                                             (TileEntityBaseEntityMicroDeconstructor) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityFemtoCoagulator) {
-            return new GuiFemtoCoagulator(player.inventory, (TileEntityFemtoCoagulator) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityNanoFabricator) {
-            return new GuiNanoFabricator(player.inventory,
-                                         (TileEntityNanoFabricator) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityBaseEntityMicroReconstructor) {
-            return new GuiMicroReconstructor(player.inventory,
-                                             (TileEntityBaseEntityMicroReconstructor) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityEncoder) {
-            return new GuiEncoder(player.inventory,
-                                  (TileEntityEncoder) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityFemtoCubePort) {
-            return new GuiFemtoCube((TileEntityFemtoCubePort) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityNanoCubePort) {
-            return new GuiNanoCube((TileEntityNanoCubePort) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityResearchComputer) {
-            return new GuiResearch(player.username);
-        }
-        else if (tileEntity instanceof TileEntityMicroCube) {
-            return new GuiMicroCube((TileEntityMicroCube) tileEntity);
-        }
-        else if (tileEntity instanceof TileEntityResearchConsole) {
-            return new GuiResearchConsole(player.inventory,
-                                          (TileEntityResearchConsole) tileEntity);
+        switch (ID) {
+            case ResearchComputerGuiID:
+                return new GuiResearch(player.username);
+            case ResearchConsoleGuiID:
+                return new GuiResearchConsole(player.inventory,
+                                              (TileEntityResearchConsole) tileEntity);
+            case EncoderGuiID:
+                return new GuiEncoder(player.inventory,
+                                      (TileEntityEncoder) tileEntity);
+            case MicroFurnaceGuiID:
+                return new GuiMicroFurnace(player.inventory,
+                                           (TileEntityBaseEntityMicroFurnace) tileEntity);
+            case MicroDeconstructorGuiID:
+                return new GuiMicroDeconstructor(player.inventory,
+                                                 (TileEntityBaseEntityMicroDeconstructor) tileEntity);
+            case MicroReconstructorGuiID:
+                return new GuiMicroReconstructor(player.inventory,
+                                                 (TileEntityBaseEntityMicroReconstructor) tileEntity);
+            case NanoInnervatorGuiID:
+                return new GuiNanoInnervator(player.inventory,
+                                             (TileEntityNanoInnervator) tileEntity);
+            case NanoDismantlerGuiID:
+                return new GuiNanoDismantler(player.inventory, (TileEntityNanoDismantler) tileEntity);
+            case NanoFabricatorGuiID:
+                return new GuiNanoFabricator(player.inventory,
+                                             (TileEntityNanoFabricator) tileEntity);
+            case NanoHorologeGuiID:
+                break; //TODO
+            case NanoEnmesherGuiID:
+                break; //TODO
+            case FemtoImpulserGuiID:
+                return new GuiFemtoImpulser(player.inventory, (TileEntityFemtoImpulser) tileEntity);
+            case FemtoRepurposerGuiID:
+                return new GuiFemtoRepurposer(player.inventory, (TileEntityFemtoRepurposer) tileEntity);
+            case FemtoCoagulatorGuiID:
+                return new GuiFemtoCoagulator(player.inventory, (TileEntityFemtoCoagulator) tileEntity);
+            case FemtoChronoshifterGuiID:
+                break;         //TODO
+            case FemtoEntanglerGuiID:
+                break;               //TODO
+            case MicroCubeGuiID:
+                return new GuiMicroCube((TileEntityMicroCube) tileEntity);
+            case MicroEngineGuiID:
+                break;//TODO
+            case NanoCubeGuiID:
+                return new GuiNanoCube((TileEntityNanoCubePort) tileEntity);
+            case FemtoCubeGuiID:
+                return new GuiFemtoCube((TileEntityFemtoCubePort) tileEntity);
+            default:
+                return null;
         }
 
         return null;
     }
-
 }

@@ -22,6 +22,7 @@ package femtocraft.industry.tiles;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
+import femtocraft.FemtocraftGuiHandler;
 import femtocraft.managers.ManagerRecipe;
 import femtocraft.managers.assembler.AssemblerRecipe;
 import femtocraft.managers.research.EnumTechLevel;
@@ -73,6 +74,11 @@ public class TileEntityBaseEntityMicroDeconstructor extends
         tank = new FluidTank(600);
         setTechLevel(EnumTechLevel.MICRO);
         deconstructorInventory = new BaseInventory(10);
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.MicroDeconstructorGuiID;
     }
 
     public int getMassAmount() {

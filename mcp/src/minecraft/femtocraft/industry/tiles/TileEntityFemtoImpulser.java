@@ -19,6 +19,7 @@
 
 package femtocraft.industry.tiles;
 
+import femtocraft.FemtocraftGuiHandler;
 import femtocraft.industry.blocks.BlockFemtoImpulser;
 import femtocraft.managers.research.EnumTechLevel;
 
@@ -32,6 +33,11 @@ public class TileEntityFemtoImpulser extends TileEntityBaseEntityMicroFurnace {
         this.setTechLevel(EnumTechLevel.FEMTO);
         // TODO: Pull number from configs
         this.setMaxStorage(100000);
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.FemtoImpulserGuiID;
     }
 
     @Override

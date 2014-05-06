@@ -19,6 +19,7 @@
 
 package femtocraft.industry.tiles;
 
+import femtocraft.FemtocraftGuiHandler;
 import femtocraft.managers.research.EnumTechLevel;
 
 public class TileEntityFemtoRepurposer extends
@@ -32,6 +33,11 @@ public class TileEntityFemtoRepurposer extends
         this.setTechLevel(EnumTechLevel.FEMTO);
         // TODO: Pull number from configs
         this.setMaxStorage(100000);
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.FemtoRepurposerGuiID;
     }
 
     @Override

@@ -19,6 +19,7 @@
 
 package femtocraft.power.tiles;
 
+import femtocraft.FemtocraftGuiHandler;
 import femtocraft.api.IInterfaceDevice;
 import femtocraft.api.IPowerBlockContainer;
 import femtocraft.core.multiblock.IMultiBlockComponent;
@@ -263,6 +264,11 @@ public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
             }
         }
         return false;
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.FemtoCubeGuiID;
     }
 
     /*

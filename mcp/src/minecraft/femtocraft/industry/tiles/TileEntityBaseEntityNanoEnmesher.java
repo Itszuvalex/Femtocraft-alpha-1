@@ -20,6 +20,7 @@
 package femtocraft.industry.tiles;
 
 import femtocraft.Femtocraft;
+import femtocraft.FemtocraftGuiHandler;
 import femtocraft.managers.dimensional.DimensionalRecipe;
 import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.utils.BaseInventory;
@@ -35,31 +36,32 @@ import java.util.Arrays;
 public class TileEntityBaseEntityNanoEnmesher extends
                                               TileEntityBaseEntityIndustry
         implements IInventory, ISidedInventory {
-    public static int powerToCook_default = 80;
-    public static float tickMultiplier_default = 1.f;
-
-    @FemtocraftDataUtils.Saveable
-    protected BaseInventory inventory;
-
     public static final int inputSlot = 0;
     public static final int outputSlot = 5;
     public static final int inventorySize = 6;
-
-    @FemtocraftDataUtils.Saveable
-    private int cookTime = 0;
-    @FemtocraftDataUtils.Saveable
-    private int ticksToCook;
-
+    public static int powerToCook_default = 80;
+    public static float tickMultiplier_default = 1.f;
     @FemtocraftDataUtils.Saveable
     public ItemStack[] meshConfigStacks = null;
     @FemtocraftDataUtils.Saveable
     public ItemStack meshStack = null;
+    @FemtocraftDataUtils.Saveable
+    protected BaseInventory inventory;
+    @FemtocraftDataUtils.Saveable
+    private int cookTime = 0;
+    @FemtocraftDataUtils.Saveable
+    private int ticksToCook;
 
     public TileEntityBaseEntityNanoEnmesher() {
         super();
         inventory = new BaseInventory(inventorySize);
         setTechLevel(EnumTechLevel.NANO);
         setMaxStorage(10000);
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.NanoEnmesherGuiID;
     }
 
     @Override

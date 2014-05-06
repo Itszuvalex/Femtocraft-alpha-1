@@ -62,6 +62,7 @@ import femtocraft.research.blocks.BlockResearchConsole;
 import femtocraft.research.items.ItemFemtoTechnology;
 import femtocraft.research.items.ItemMicroTechnology;
 import femtocraft.research.items.ItemNanoTechnology;
+import femtocraft.research.items.ItemPortableResearchComputer;
 import femtocraft.research.tiles.TileEntityResearchConsole;
 import femtocraft.transport.items.blocks.BlockVacuumTube;
 import femtocraft.transport.items.tiles.TileEntityVacuumTube;
@@ -186,6 +187,8 @@ public class Femtocraft {
     public static Item itemMicroLogicCore;
     public static Item itemHeatingCoil;
 
+    public static Item itemPortableResearchComputer;
+
     public static Item itemMicroTechnology;
     public static Item itemNanoTechnology;
     public static Item itemFemtoTechnology;
@@ -260,7 +263,7 @@ public class Femtocraft {
         proxy.registerRendering();
 
         if (FemtocraftConfigs.worldGen) {
-            GameRegistry.registerWorldGenerator(new WorldGenerator());
+            GameRegistry.registerWorldGenerator(new WorldGeneratorOre());
         }
 
         // Change the creative tab name
@@ -656,6 +659,11 @@ public class Femtocraft {
 
         itemHeatingCoil = new ItemHeatingCoil(FemtocraftConfigs.itemHeatingCoilID).setUnlocalizedName("itemHeatingCoil");
         LanguageRegistry.addName(itemHeatingCoil, "Heating Coil");
+
+        itemPortableResearchComputer = new ItemPortableResearchComputer
+                (FemtocraftConfigs.itemPortableResearchComputerID);
+        LanguageRegistry.addName(itemPortableResearchComputer,
+                                 "Portable Research Computer");
 
         itemMicroTechnology = new ItemMicroTechnology(
                 FemtocraftConfigs.itemMicroTechnologyID);

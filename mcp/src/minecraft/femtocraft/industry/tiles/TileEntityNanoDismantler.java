@@ -19,6 +19,7 @@
 
 package femtocraft.industry.tiles;
 
+import femtocraft.FemtocraftGuiHandler;
 import femtocraft.managers.research.EnumTechLevel;
 
 public class TileEntityNanoDismantler extends
@@ -32,6 +33,11 @@ public class TileEntityNanoDismantler extends
         this.setTechLevel(EnumTechLevel.NANO);
         // TODO: Pull number from configs
         this.setMaxStorage(10000);
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.NanoDismantlerGuiID;
     }
 
     @Override

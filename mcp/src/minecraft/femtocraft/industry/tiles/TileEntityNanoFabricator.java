@@ -19,6 +19,7 @@
 
 package femtocraft.industry.tiles;
 
+import femtocraft.FemtocraftGuiHandler;
 import femtocraft.managers.research.EnumTechLevel;
 
 public class TileEntityNanoFabricator extends TileEntityBaseEntityMicroReconstructor {
@@ -31,6 +32,11 @@ public class TileEntityNanoFabricator extends TileEntityBaseEntityMicroReconstru
         this.setTechLevel(EnumTechLevel.NANO);
         // TODO: Pull number from configs
         this.setMaxStorage(10000);
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.NanoFabricatorGuiID;
     }
 
     @Override

@@ -19,6 +19,7 @@
 
 package femtocraft.industry.tiles;
 
+import femtocraft.FemtocraftGuiHandler;
 import femtocraft.industry.blocks.BlockNanoInnervator;
 import femtocraft.managers.research.EnumTechLevel;
 
@@ -32,6 +33,11 @@ public class TileEntityNanoInnervator extends TileEntityBaseEntityMicroFurnace {
         this.setTechLevel(EnumTechLevel.NANO);
         // TODO: Pull number from configs
         this.setMaxStorage(10000);
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.NanoInnervatorGuiID;
     }
 
     @Override

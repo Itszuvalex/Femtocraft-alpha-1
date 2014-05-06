@@ -20,6 +20,7 @@
 package femtocraft.power.tiles;
 
 import femtocraft.Femtocraft;
+import femtocraft.FemtocraftGuiHandler;
 import femtocraft.api.IInterfaceDevice;
 import femtocraft.api.PowerContainer;
 import femtocraft.managers.research.EnumTechLevel;
@@ -71,6 +72,11 @@ public class TileEntityMicroCube extends TileEntityPowerBase {
         }
 
         return super.onSideActivate(par5EntityPlayer, side);
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.MicroCubeGuiID;
     }
 
     // @Override

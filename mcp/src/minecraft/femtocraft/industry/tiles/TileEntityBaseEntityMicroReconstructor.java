@@ -22,6 +22,7 @@ package femtocraft.industry.tiles;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import femtocraft.Femtocraft;
+import femtocraft.FemtocraftGuiHandler;
 import femtocraft.api.IAssemblerSchematic;
 import femtocraft.managers.ManagerRecipe;
 import femtocraft.managers.assembler.AssemblerRecipe;
@@ -81,6 +82,11 @@ public class TileEntityBaseEntityMicroReconstructor extends
         setMaxStorage(800);
         tank = new FluidTank(600);
         setTechLevel(EnumTechLevel.MICRO);
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.MicroReconstructorGuiID;
     }
 
     protected int getMaxSimultaneousSmelt() {

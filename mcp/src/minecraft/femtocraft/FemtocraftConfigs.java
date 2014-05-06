@@ -258,34 +258,37 @@ public class FemtocraftConfigs {
     int conductivePowderID = 12020;
     public static
     @CfgId
-    int boardID = 12030;
+    int boardID = 12029;
     public static
     @CfgId
-    int primedBoardID = 12031;
+    int primedBoardID = 12030;
     public static
     @CfgId
-    int dopedBoardID = 12032;
+    int dopedBoardID = 12031;
     public static
     @CfgId
-    int microCircuitID = 12033;
+    int microCircuitID = 12032;
     public static
     @CfgId
-    int spoolID = 12034;
+    int spoolID = 12033;
     public static
     @CfgId
-    int spoolGoldID = 12035;
+    int spoolGoldID = 12034;
     public static
     @CfgId
-    int spoolPlatinumID = 12036;
+    int spoolPlatinumID = 12035;
     public static
     @CfgId
-    int itemMicroLogicCoreID = 12037;
+    int itemMicroLogicCoreID = 12036;
     public static
     @CfgId
-    int itemHeatingCoilID = 12038;
+    int itemHeatingCoilID = 12037;
     public static
     @CfgId
-    int itemMicroCoilID = 12039;
+    int itemMicroCoilID = 12038;
+    public static
+    @CfgId
+    int itemPortableResearchComputerID = 12039;
     public static
     @CfgId
     int itemMicroTechnologyID = 12040;

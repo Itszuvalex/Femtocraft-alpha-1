@@ -21,6 +21,7 @@ package femtocraft.industry.tiles;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import femtocraft.FemtocraftGuiHandler;
 import femtocraft.industry.blocks.BlockMicroFurnace;
 import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.utils.FemtocraftDataUtils.Saveable;
@@ -59,6 +60,11 @@ public class TileEntityBaseEntityMicroFurnace extends
         super();
         setMaxStorage(800);
         setTechLevel(EnumTechLevel.MICRO);
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.MicroFurnaceGuiID;
     }
 
     protected int getMaxSimultaneousSmelt() {

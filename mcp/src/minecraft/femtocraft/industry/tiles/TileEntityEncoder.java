@@ -20,6 +20,7 @@
 package femtocraft.industry.tiles;
 
 import femtocraft.Femtocraft;
+import femtocraft.FemtocraftGuiHandler;
 import femtocraft.api.IAssemblerSchematic;
 import femtocraft.managers.assembler.AssemblerRecipe;
 import femtocraft.managers.research.EnumTechLevel;
@@ -54,6 +55,11 @@ public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
 
         setTechLevel(EnumTechLevel.MICRO);
         setMaxStorage(1200);
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.EncoderGuiID;
     }
 
     private AssemblerRecipe getRecipe() {

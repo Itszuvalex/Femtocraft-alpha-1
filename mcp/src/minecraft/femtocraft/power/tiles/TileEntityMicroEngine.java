@@ -20,6 +20,7 @@
 package femtocraft.power.tiles;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import femtocraft.FemtocraftGuiHandler;
 import femtocraft.industry.tiles.TileEntityBaseEntityIndustry;
 import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.utils.BaseInventory;
@@ -47,6 +48,11 @@ public class TileEntityMicroEngine extends TileEntityBaseEntityIndustry
         setTechLevel(EnumTechLevel.MICRO);
         setMaxStorage(1000);
         inventory = new BaseInventory(1);
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.MicroEngineGuiID;
     }
 
     @java.lang.Override
