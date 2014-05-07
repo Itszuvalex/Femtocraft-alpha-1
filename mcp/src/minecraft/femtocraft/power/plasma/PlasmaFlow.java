@@ -19,6 +19,8 @@
 
 package femtocraft.power.plasma;
 
+import femtocraft.power.plasma.volatility.VolatilityEventMagneticFluctuation;
+import femtocraft.power.plasma.volatility.VolatilityEventPlasmaLeak;
 import femtocraft.power.plasma.volatility.VolatilityEventTemperatureSpike;
 import femtocraft.utils.FemtocraftDataUtils;
 import femtocraft.utils.ISaveable;
@@ -54,6 +56,8 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
     private int volatility;
     @FemtocraftDataUtils.Saveable
     private int freqPos;
+
+    private IPlasmaContainer owner;
 
     PlasmaFlow() {
         //To be used only for loading from NBT
@@ -126,6 +130,16 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
         updateFreqAndVolatility(prev);
     }
 
+    @Override
+    public IPlasmaContainer getContainer() {
+        return owner;
+    }
+
+    @Override
+    public void setContainer(IPlasmaContainer container) {
+        owner = container;
+    }
+
     private void updateFreqAndVolatility(int temperaturePrev) {
         frequency *= temperature / temperaturePrev;
 
@@ -194,12 +208,12 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
 
     @Override
     public IVolatilityEvent onPlasmaOverflow(IPlasmaContainer container) {
-        return null;
+        return new VolatilityEventPlasmaLeak(this, volatility, getVolatilityEventTemperature());
     }
 
     @Override
     public IVolatilityEvent onIncompleteCircuit(IPlasmaContainer container) {
-        return null;
+        return new VolatilityEventPlasmaLeak(this, volatility, getVolatilityEventTemperature());
     }
 
     @Override
@@ -211,7 +225,7 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
 
     @Override
     public IVolatilityEvent onRecharge(IPlasmaContainer container) {
-        return null;
+        return new VolatilityEventMagneticFluctuation(this, volatility, getVolatilityEventTemperature());
     }
 
     @Override

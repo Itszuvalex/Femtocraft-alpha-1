@@ -48,6 +48,16 @@ public interface IPlasmaFlow {
     void onUpdate(IPlasmaContainer container);
 
     /**
+     * @return Container currently holding this plasma flow
+     */
+    IPlasmaContainer getContainer();
+
+    /**
+     * @param container Container to set as owner of this plasma flow
+     */
+    void setContainer(IPlasmaContainer container);
+
+    /**
      * @return How many ticks needed before the flow moves down the circuit.
      */
     int getFrequency();

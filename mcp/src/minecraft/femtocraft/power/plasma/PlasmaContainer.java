@@ -81,6 +81,7 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
         }
         else {
             flows.add(flow);
+            flow.setContainer(this);
             return true;
         }
     }
@@ -161,7 +162,7 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
         for (int i = 0; i < list.tagCount(); ++i) {
             PlasmaFlow flow = new PlasmaFlow();
             flow.loadFromNBT((NBTTagCompound) list.tagAt(i));
-            flows.add(flow);
+            addFlow(flow);
         }
     }
 }
