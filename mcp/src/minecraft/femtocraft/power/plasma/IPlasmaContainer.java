@@ -71,6 +71,12 @@ public interface IPlasmaContainer {
     Collection<IPlasmaFlow> getFlows();
 
     /**
+     * @param flow Flow to add
+     * @return True if flow contained in the container.
+     */
+    boolean removeFlow(IPlasmaFlow flow);
+
+    /**
      * @return Maximum number of flows this can contain.
      */
     int getMaxFlows();
@@ -91,8 +97,8 @@ public interface IPlasmaContainer {
     int getStabilityRating();
 
     /**
-     * @param flow Flow to update.
+     * Update all contained flows
      */
-    void updateFlow(IPlasmaFlow flow);
+    void updateFlows();
 
 }

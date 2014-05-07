@@ -19,6 +19,8 @@
 
 package femtocraft.power.plasma;
 
+import net.minecraft.world.World;
+
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/5/14.
  * <p/>
@@ -29,6 +31,11 @@ package femtocraft.power.plasma;
  * what it contains.  This is more to simulate how the plasma containers
  * exist simply to guide and contain the immense energies being released.
  * They cannot hope to do much more than that.
+ * <p/>
+ * There is no class registry for implementors of IPlasmaFlow.  This is due
+ * to laziness on my part.  If someone is interested in creating custom
+ * implementers of IPlasmaFlow and wants them usable in reactors other than
+ * those they themselves write, shoot me an email and I'll whip something up.
  */
 public interface IPlasmaFlow {
 
@@ -51,6 +58,12 @@ public interface IPlasmaFlow {
     int getTemperature();
 
     /**
+     * @param temperature To set temperature of the flow to.  For use by
+     *                    other flows / Plasma prewarmers / Cores
+     */
+    void setTemperature(int temperature);
+
+    /**
      * @return Volatility of the flow.  Bad things happen if this exceeds the
      * stability rating of the container.
      */
@@ -68,6 +81,22 @@ public interface IPlasmaFlow {
      * @param core The core doing the recharging.
      */
     void recharge(IFusionReactorCore core);
+
+    /**
+     * Called when the PlasmaFlow is purged from the system,
+     * either through a volatility event, Plasma Vent, etc.
+     *
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     */
+    void onPurge(World world, int x, int y, int z);
+
+    /**
+     * @param event Event occurring on this plasma flow.
+     */
+    void onVolatilityEvent(IVolatilityEvent event);
 
     /**
      * @param container Container containing this flow.
