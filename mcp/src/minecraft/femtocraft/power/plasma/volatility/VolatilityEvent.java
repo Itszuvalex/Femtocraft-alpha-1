@@ -34,6 +34,9 @@ public class VolatilityEvent implements IVolatilityEvent {
         this.creator = creator;
         this.volatilityLevel = volatilityLevel;
         this.volatilityEnergy = volatilityEnergy;
+        creator.setTemperature(creator.getTemperature() -
+                                       volatilityEnergy / IPlasmaFlow
+                                               .temperatureToEnergy);
     }
 
     @Override

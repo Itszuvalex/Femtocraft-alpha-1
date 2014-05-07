@@ -39,9 +39,8 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
      * Kelvin
      */
     public static final int energyRequirementMin = 50000;
-    public static final int getEnergyRequirementMax = 100000;
-    public static final int temperatureToEnergy = 10000;
     public static final int temperatureMin = energyRequirementMin / temperatureToEnergy;
+    public static final int getEnergyRequirementMax = 100000;
     public static final int temperatureMax = getEnergyRequirementMax /
             temperatureToEnergy;
     private static final int volatilityMin = 100;
@@ -139,6 +138,11 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
         volatility = volatility < volatilityMin ? volatilityMin : volatility;
     }
 
+    private int getVolatilityEventTemperature() {
+        return (int) (temperature * (
+                (random.nextFloat() * .5f) + .5f) * temperatureToEnergy);
+    }
+
     /**
      * @return Frequency of the particles this packet of plasma is composed of
      */
@@ -201,7 +205,8 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
     @Override
     public IVolatilityEvent onOverheat(IPlasmaContainer container) {
         return new VolatilityEventTemperatureSpike(this, volatility,
-                                                   temperature * temperatureToEnergy);
+                                                   getVolatilityEventTemperature()
+        );
     }
 
     @Override

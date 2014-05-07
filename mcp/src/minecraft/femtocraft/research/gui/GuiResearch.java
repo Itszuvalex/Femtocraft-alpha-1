@@ -577,7 +577,6 @@ public class GuiResearch extends GuiScreen {
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ADD);
         Minecraft.getMinecraft().getTextureManager()
                  .bindTexture(achievementTextures);
         this.drawTexturedModalRect(i1, j1, 0, 0, this.researchPaneWidth,

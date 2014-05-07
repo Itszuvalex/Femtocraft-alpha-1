@@ -5,17 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="06103d49-82d3-4f86-b2c6-3e25d1b1d98e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/BlockPlasma.java" />
-      <change type="NEW" beforePath="" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/VolatilityEvent.java" />
-      <change type="NEW" beforePath="" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/VolatilityEventMagneticFluctuation.java" />
-      <change type="NEW" beforePath="" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/VolatilityEventPlasmaLeak.java" />
-      <change type="NEW" beforePath="" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/VolatilityEventTemperatureSpike.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IFusionReactorCore.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IFusionReactorCore.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaContainer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaContainer.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/GuiResearch.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/research/gui/GuiResearch.java" />
       <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaFlow.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaFlow.java" />
-      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaContainer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaContainer.java" />
       <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaFlow.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaFlow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/VolatilityEvent.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/VolatilityEvent.java" />
     </list>
     <ignored path="Femtocraft.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -81,19 +74,29 @@
       <file leaf-file-name="PlasmaFlow.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaFlow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2540" max-vertical-offset="3255">
-              <caret line="203" column="86" selection-start-line="203" selection-start-column="86" selection-end-line="203" selection-end-column="86" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2690" max-vertical-offset="3330">
+              <caret line="209" column="72" selection-start-line="209" selection-start-column="5" selection-end-line="209" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5437#5438#0" expanded="true" />
-                <element signature="e#5469#5470#0" expanded="true" />
-                <element signature="e#5518#5519#0" expanded="true" />
-                <element signature="e#5552#5553#0" expanded="true" />
-                <element signature="e#6000#6001#0" expanded="true" />
-                <element signature="e#6033#6034#0" expanded="true" />
-                <element signature="e#6086#6087#0" expanded="true" />
-                <element signature="e#6113#6114#0" expanded="true" />
+                <element signature="e#5549#5550#0" expanded="true" />
+                <element signature="e#5581#5582#0" expanded="true" />
+                <element signature="e#5630#5631#0" expanded="true" />
+                <element signature="e#5664#5665#0" expanded="true" />
+                <element signature="e#6112#6113#0" expanded="true" />
+                <element signature="e#6145#6146#0" expanded="true" />
+                <element signature="e#6198#6199#0" expanded="true" />
+                <element signature="e#6225#6226#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GuiResearch.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/research/gui/GuiResearch.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.47738692" vertical-offset="7740" max-vertical-offset="9180">
+              <caret line="578" column="47" selection-start-line="578" selection-start-column="47" selection-end-line="578" selection-end-column="47" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -121,28 +124,18 @@
       <file leaf-file-name="VolatilityEvent.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/VolatilityEvent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="930">
-              <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="975">
+              <caret line="38" column="69" selection-start-line="38" selection-start-column="69" selection-end-line="38" selection-end-column="69" />
               <folding>
-                <element signature="e#1592#1593#0" expanded="true" />
-                <element signature="e#1622#1623#0" expanded="true" />
-                <element signature="e#1672#1673#0" expanded="true" />
-                <element signature="e#1710#1711#0" expanded="true" />
-                <element signature="e#1761#1762#0" expanded="true" />
-                <element signature="e#1800#1801#0" expanded="true" />
-                <element signature="e#2216#2217#0" expanded="true" />
-                <element signature="e#2260#2261#0" expanded="true" />
+                <element signature="e#1790#1791#0" expanded="true" />
+                <element signature="e#1820#1821#0" expanded="true" />
+                <element signature="e#1870#1871#0" expanded="true" />
+                <element signature="e#1908#1909#0" expanded="true" />
+                <element signature="e#1959#1960#0" expanded="true" />
+                <element signature="e#1998#1999#0" expanded="true" />
+                <element signature="e#2414#2415#0" expanded="true" />
+                <element signature="e#2458#2459#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VolatilityEventTemperatureSpike.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/VolatilityEventTemperatureSpike.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
-              <caret line="29" column="4" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -172,17 +165,17 @@
       <file leaf-file-name="IPlasmaFlow.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaFlow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1280" max-vertical-offset="1890">
-              <caret line="120" column="60" selection-start-line="120" selection-start-column="60" selection-end-line="120" selection-end-column="60" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="960" max-vertical-offset="1905">
+              <caret line="40" column="56" selection-start-line="40" selection-start-column="56" selection-end-line="40" selection-end-column="56" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IFusionReactorCore.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="IFusionReactorCore.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IFusionReactorCore.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43442622" vertical-offset="335" max-vertical-offset="1245">
+            <state vertical-scroll-proportion="0.0" vertical-offset="470" max-vertical-offset="1245">
               <caret line="57" column="72" selection-start-line="57" selection-start-column="72" selection-end-line="57" selection-end-column="72" />
               <folding />
             </state>
@@ -242,7 +235,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockAtmosphericAtmosphericChargingCoil.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/api/IAtmosphericChargingAddon.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/api/IAtmosphericChargingBase.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/power/blocks/BlockAtmosphericChargingCoil.java" />
@@ -287,12 +279,13 @@
         <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/Test.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/VolatilityEventTemperatureSpike.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/VolatilityEventMagneticFluctuation.java" />
-        <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaFlow.java" />
-        <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaFlow.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/VolatilityEventPlasmaLeak.java" />
-        <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/VolatilityEvent.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaContainer.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IFusionReactorCore.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaFlow.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/VolatilityEvent.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaFlow.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/research/gui/GuiResearch.java" />
       </list>
     </option>
   </component>
@@ -390,6 +383,46 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="utils" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ForgeDev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="femtocraft" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="research" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ForgeDev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="femtocraft" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="research" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gui" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -903,14 +936,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/research/blocks/BlockResearchComputer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14754099" vertical-offset="0" max-vertical-offset="990">
-          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/research/tiles/TileEntityResearchComputer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14754099" vertical-offset="0" max-vertical-offset="610">
@@ -1296,23 +1321,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/VolatilityEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="930">
-          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-          <folding>
-            <element signature="e#1592#1593#0" expanded="true" />
-            <element signature="e#1622#1623#0" expanded="true" />
-            <element signature="e#1672#1673#0" expanded="true" />
-            <element signature="e#1710#1711#0" expanded="true" />
-            <element signature="e#1761#1762#0" expanded="true" />
-            <element signature="e#1800#1801#0" expanded="true" />
-            <element signature="e#2216#2217#0" expanded="true" />
-            <element signature="e#2260#2261#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/VolatilityEventMagneticFluctuation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
@@ -1341,36 +1349,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaFlow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1235" max-vertical-offset="1890">
-          <caret line="120" column="60" selection-start-line="120" selection-start-column="60" selection-end-line="120" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaFlow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2540" max-vertical-offset="3255">
-          <caret line="203" column="86" selection-start-line="203" selection-start-column="86" selection-end-line="203" selection-end-column="86" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5437#5438#0" expanded="true" />
-            <element signature="e#5469#5470#0" expanded="true" />
-            <element signature="e#5518#5519#0" expanded="true" />
-            <element signature="e#5552#5553#0" expanded="true" />
-            <element signature="e#6000#6001#0" expanded="true" />
-            <element signature="e#6033#6034#0" expanded="true" />
-            <element signature="e#6086#6087#0" expanded="true" />
-            <element signature="e#6113#6114#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IFusionReactorComponent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5409836" vertical-offset="0" max-vertical-offset="610">
           <caret line="39" column="47" selection-start-line="39" selection-start-column="47" selection-end-line="39" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IFusionReactorCore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="470" max-vertical-offset="1245">
+          <caret line="57" column="72" selection-start-line="57" selection-start-column="72" selection-end-line="57" selection-end-column="72" />
           <folding />
         </state>
       </provider>
@@ -1401,6 +1391,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/VolatilityEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="975">
+          <caret line="38" column="69" selection-start-line="38" selection-start-column="69" selection-end-line="38" selection-end-column="69" />
+          <folding>
+            <element signature="e#1790#1791#0" expanded="true" />
+            <element signature="e#1820#1821#0" expanded="true" />
+            <element signature="e#1870#1871#0" expanded="true" />
+            <element signature="e#1908#1909#0" expanded="true" />
+            <element signature="e#1959#1960#0" expanded="true" />
+            <element signature="e#1998#1999#0" expanded="true" />
+            <element signature="e#2414#2415#0" expanded="true" />
+            <element signature="e#2458#2459#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaContainer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="785" max-vertical-offset="1395">
@@ -1411,10 +1418,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IFusionReactorCore.java">
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaFlow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43442622" vertical-offset="335" max-vertical-offset="1245">
-          <caret line="57" column="72" selection-start-line="57" selection-start-column="72" selection-end-line="57" selection-end-column="72" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1905">
+          <caret line="40" column="56" selection-start-line="40" selection-start-column="56" selection-end-line="40" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaFlow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2690" max-vertical-offset="3330">
+          <caret line="209" column="72" selection-start-line="209" selection-start-column="5" selection-end-line="209" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5549#5550#0" expanded="true" />
+            <element signature="e#5581#5582#0" expanded="true" />
+            <element signature="e#5630#5631#0" expanded="true" />
+            <element signature="e#5664#5665#0" expanded="true" />
+            <element signature="e#6112#6113#0" expanded="true" />
+            <element signature="e#6145#6146#0" expanded="true" />
+            <element signature="e#6198#6199#0" expanded="true" />
+            <element signature="e#6225#6226#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/research/gui/GuiResearch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47738692" vertical-offset="7740" max-vertical-offset="9180">
+          <caret line="578" column="47" selection-start-line="578" selection-start-column="47" selection-end-line="578" selection-end-column="47" />
           <folding />
         </state>
       </provider>
