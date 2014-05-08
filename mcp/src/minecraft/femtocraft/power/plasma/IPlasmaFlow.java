@@ -20,7 +20,6 @@
 package femtocraft.power.plasma;
 
 import femtocraft.power.plasma.volatility.IVolatilityEvent;
-import net.minecraft.world.World;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/5/14.
@@ -93,17 +92,6 @@ public interface IPlasmaFlow {
      * @param core The core doing the recharging.
      */
     void recharge(IFusionReactorCore core);
-
-    /**
-     * Called when the PlasmaFlow is purged from the system,
-     * either through a volatility event, Plasma Vent, etc.
-     *
-     * @param world
-     * @param x
-     * @param y
-     * @param z
-     */
-    void onPurge(World world, int x, int y, int z);
 
     /**
      * @param event Event occurring on this plasma flow.

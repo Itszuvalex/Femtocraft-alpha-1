@@ -26,7 +26,6 @@ import femtocraft.power.plasma.volatility.VolatilityEventTemperatureSpike;
 import femtocraft.utils.FemtocraftDataUtils;
 import femtocraft.utils.ISaveable;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
 
 import java.util.Random;
 
@@ -225,11 +224,6 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
     }
 
     @Override
-    public void onPurge(World world, int x, int y, int z) {
-        //TODO: Bad things
-    }
-
-    @Override
     public void onVolatilityEvent(IVolatilityEvent event) {
 
     }
@@ -296,7 +290,9 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
         }
 
         for (IPlasmaFlow flow : container.getFlows()) {
+            flow.onVolatilityEvent(event);
             event.interact(flow);
+            flow.onPostVolatilityEvent(event);
         }
 
         container.onPostVolatilityEvent(event);
