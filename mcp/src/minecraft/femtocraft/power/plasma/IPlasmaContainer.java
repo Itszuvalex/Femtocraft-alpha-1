@@ -19,6 +19,7 @@
 
 package femtocraft.power.plasma;
 
+import femtocraft.power.plasma.volatility.IVolatilityEvent;
 import net.minecraftforge.common.ForgeDirection;
 
 import java.util.Collection;
@@ -45,6 +46,20 @@ public interface IPlasmaContainer {
      * in use, expect Volatility Events.
      */
     IPlasmaContainer getOutput();
+
+    /**
+     * @param container Container to set as input to this container.
+     * @param dir       Direction of input.
+     * @return True if input successfully set.
+     */
+    boolean setInput(IPlasmaContainer container, ForgeDirection dir);
+
+    /**
+     * @param container Container to set as output to this container.
+     * @param dir       Direction of output.
+     * @return True if output successfully set.
+     */
+    boolean setOutput(IPlasmaContainer container, ForgeDirection dir);
 
     /**
      * @return Direction of input, or UNKNOWN if NULL.  Helper function for
@@ -85,6 +100,15 @@ public interface IPlasmaContainer {
      * @param event Called when a volatility event occurs.
      */
     void onVolatilityEvent(IVolatilityEvent event);
+
+    /**
+     * Called once a volatility event has resolved.  This could be used to
+     * prevent meltdowns, normalize PlasmaFlows, etc.
+     *
+     * @param event The event that just
+     *              resolved
+     */
+    void onPostVolatilityEvent(IVolatilityEvent event);
 
     /**
      * @return A measurement of how high a temperature this can handle.

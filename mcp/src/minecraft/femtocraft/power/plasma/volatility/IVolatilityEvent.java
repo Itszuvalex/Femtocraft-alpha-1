@@ -17,7 +17,12 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  ******************************************************************************/
 
-package femtocraft.power.plasma;
+package femtocraft.power.plasma.volatility;
+
+import femtocraft.power.plasma.IFusionReactorComponent;
+import femtocraft.power.plasma.IFusionReactorCore;
+import femtocraft.power.plasma.IPlasmaContainer;
+import femtocraft.power.plasma.IPlasmaFlow;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/5/14.

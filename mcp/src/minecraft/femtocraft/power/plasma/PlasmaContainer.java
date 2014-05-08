@@ -19,6 +19,7 @@
 
 package femtocraft.power.plasma;
 
+import femtocraft.power.plasma.volatility.IVolatilityEvent;
 import femtocraft.utils.FemtocraftDataUtils;
 import femtocraft.utils.ISaveable;
 import net.minecraft.nbt.NBTTagCompound;
@@ -32,8 +33,7 @@ import java.util.Collection;
  * Created by Christopher Harris (Itszuvalex) on 5/2/14.
  * <p/>
  * Class intended for internal use by a TileEntity implementing
- * IPlasmaContainer.  This takes control of the nitty gritty bits,
- * without worrying about input or output.
+ * IPlasmaContainer.
  */
 public class PlasmaContainer implements IPlasmaContainer, ISaveable {
     private static final String flowListKey = "Flows";
@@ -45,6 +45,10 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
     private int temperatureRating;
     private ArrayList<IPlasmaFlow> flows;
     private ArrayList<IPlasmaFlow> pendingRemove;
+    private IPlasmaContainer input;
+    private IPlasmaContainer output;
+    private ForgeDirection inputDir;
+    private ForgeDirection outputDir;
 
     public PlasmaContainer(int capacity, int stability, int temperature) {
         maxCapacity = capacity;
@@ -56,22 +60,38 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
 
     @Override
     public IPlasmaContainer getInput() {
-        return null;
+        return input;
     }
 
     @Override
     public IPlasmaContainer getOutput() {
-        return null;
+        return output;
+    }
+
+    @Override
+    public boolean setInput(IPlasmaContainer container, ForgeDirection dir) {
+        if (container == this) return false;
+        input = container;
+        inputDir = dir;
+        return true;
+    }
+
+    @Override
+    public boolean setOutput(IPlasmaContainer container, ForgeDirection dir) {
+        if (container == this) return false;
+        output = container;
+        outputDir = dir;
+        return true;
     }
 
     @Override
     public ForgeDirection getInputDir() {
-        return null;
+        return inputDir;
     }
 
     @Override
     public ForgeDirection getOutputDir() {
-        return null;
+        return outputDir;
     }
 
     @Override
@@ -95,6 +115,9 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
     public boolean removeFlow(IPlasmaFlow flow) {
         if (flows.contains(flow)) {
             pendingRemove.add(flow);
+            if (flow.getContainer() == this) {
+                flow.setContainer(null);
+            }
             return true;
         }
         return false;
@@ -108,7 +131,14 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
     @Override
     public void onVolatilityEvent(IVolatilityEvent event) {
         for (IPlasmaFlow flow : flows) {
-            flow.onUpdate(this);
+            flow.onVolatilityEvent(event);
+        }
+    }
+
+    @Override
+    public void onPostVolatilityEvent(IVolatilityEvent event) {
+        for (IPlasmaFlow flow : flows) {
+            flow.onPostVolatilityEvent(event);
         }
     }
 

@@ -19,6 +19,7 @@
 
 package femtocraft.power.plasma;
 
+import femtocraft.power.plasma.volatility.IVolatilityEvent;
 import net.minecraft.world.World;
 
 /**
@@ -108,6 +109,11 @@ public interface IPlasmaFlow {
      * @param event Event occurring on this plasma flow.
      */
     void onVolatilityEvent(IVolatilityEvent event);
+
+    /**
+     * @param event Event that just resolved on this plasma flow.
+     */
+    void onPostVolatilityEvent(IVolatilityEvent event);
 
     /**
      * @param container Container containing this flow.
