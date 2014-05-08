@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="06103d49-82d3-4f86-b2c6-3e25d1b1d98e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/FusionReactorCore.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/FusionReactorCore.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/FusionReactorCore.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaContainer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaContainer.java" />
       <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaFlow.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaFlow.java" />
+      <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaContainer.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaContainer.java" />
       <change type="MODIFICATION" beforePath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaFlow.java" afterPath="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaFlow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Femtocraft.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,22 +75,22 @@
       <file leaf-file-name="PlasmaFlow.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaFlow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="4350">
-              <caret line="223" column="5" selection-start-line="223" selection-start-column="5" selection-end-line="223" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1205" max-vertical-offset="4365">
+              <caret line="136" column="38" selection-start-line="136" selection-start-column="38" selection-end-line="136" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5259#5260#0" expanded="true" />
-                <element signature="e#5287#5288#0" expanded="true" />
-                <element signature="e#5361#5362#0" expanded="true" />
-                <element signature="e#5394#5395#0" expanded="true" />
-                <element signature="e#6186#6187#0" expanded="true" />
-                <element signature="e#6218#6219#0" expanded="true" />
-                <element signature="e#6267#6268#0" expanded="true" />
-                <element signature="e#6301#6302#0" expanded="true" />
-                <element signature="e#6749#6750#0" expanded="true" />
-                <element signature="e#6782#6783#0" expanded="true" />
-                <element signature="e#6835#6836#0" expanded="true" />
-                <element signature="e#6862#6863#0" expanded="true" />
+                <element signature="e#5325#5326#0" expanded="true" />
+                <element signature="e#5353#5354#0" expanded="true" />
+                <element signature="e#5427#5428#0" expanded="true" />
+                <element signature="e#5460#5461#0" expanded="true" />
+                <element signature="e#6252#6253#0" expanded="true" />
+                <element signature="e#6284#6285#0" expanded="true" />
+                <element signature="e#6333#6334#0" expanded="true" />
+                <element signature="e#6367#6368#0" expanded="true" />
+                <element signature="e#6815#6816#0" expanded="true" />
+                <element signature="e#6848#6849#0" expanded="true" />
+                <element signature="e#6901#6902#0" expanded="true" />
+                <element signature="e#6928#6929#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -139,59 +140,43 @@
       <file leaf-file-name="FusionReactorCore.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/FusionReactorCore.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="5.655738" vertical-offset="0" max-vertical-offset="3585">
-              <caret line="247" column="46" selection-start-line="247" selection-start-column="46" selection-end-line="247" selection-end-column="46" />
+            <state vertical-scroll-proportion="4.045226" vertical-offset="150" max-vertical-offset="3915">
+              <caret line="188" column="32" selection-start-line="188" selection-start-column="32" selection-end-line="188" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2410#2411#0" expanded="true" />
-                <element signature="e#2447#2448#0" expanded="true" />
-                <element signature="e#2496#2497#0" expanded="true" />
-                <element signature="e#2527#2528#0" expanded="true" />
-                <element signature="e#2586#2587#0" expanded="true" />
-                <element signature="e#2630#2631#0" expanded="true" />
-                <element signature="e#2685#2686#0" expanded="true" />
-                <element signature="e#2725#2726#0" expanded="true" />
-                <element signature="e#2780#2781#0" expanded="true" />
-                <element signature="e#2804#2805#0" expanded="true" />
-                <element signature="e#2861#2862#0" expanded="true" />
-                <element signature="e#2885#2886#0" expanded="true" />
-                <element signature="e#2940#2941#0" expanded="true" />
-                <element signature="e#2983#2984#0" expanded="true" />
-                <element signature="e#3031#3032#0" expanded="true" />
-                <element signature="e#3086#3087#0" expanded="true" />
-                <element signature="e#3598#3599#0" expanded="true" />
-                <element signature="e#3625#3626#0" expanded="true" />
-                <element signature="e#3681#3682#0" expanded="true" />
-                <element signature="e#3708#3709#0" expanded="true" />
-                <element signature="e#3765#3766#0" expanded="true" />
-                <element signature="e#3792#3793#0" expanded="true" />
-                <element signature="e#4092#4093#0" expanded="true" />
-                <element signature="e#4119#4120#0" expanded="true" />
-                <element signature="e#4177#4178#0" expanded="true" />
-                <element signature="e#4204#4205#0" expanded="true" />
-                <element signature="e#4596#4597#0" expanded="true" />
-                <element signature="e#4648#4649#0" expanded="true" />
-                <element signature="e#5193#5194#0" expanded="true" />
-                <element signature="e#5238#5239#0" expanded="true" />
-                <element signature="e#5542#5543#0" expanded="true" />
-                <element signature="e#5597#5598#0" expanded="true" />
-                <element signature="e#5643#5644#0" expanded="true" />
-                <element signature="e#5694#5695#0" expanded="true" />
-                <element signature="e#6115#6116#0" expanded="true" />
-                <element signature="e#6164#6165#0" expanded="true" />
-                <element signature="e#6215#6216#0" expanded="true" />
-                <element signature="e#6267#6268#0" expanded="true" />
+                <element signature="e#2966#2967#0" expanded="true" />
+                <element signature="e#3003#3004#0" expanded="true" />
+                <element signature="e#3052#3053#0" expanded="true" />
+                <element signature="e#3083#3084#0" expanded="true" />
+                <element signature="e#3142#3143#0" expanded="true" />
+                <element signature="e#3186#3187#0" expanded="true" />
+                <element signature="e#3241#3242#0" expanded="true" />
+                <element signature="e#3281#3282#0" expanded="true" />
+                <element signature="e#3336#3337#0" expanded="true" />
+                <element signature="e#3367#3368#0" expanded="true" />
+                <element signature="e#3424#3425#0" expanded="true" />
+                <element signature="e#3461#3462#0" expanded="true" />
+                <element signature="e#3516#3517#0" expanded="true" />
+                <element signature="e#3559#3560#0" expanded="true" />
+                <element signature="e#3607#3608#0" expanded="true" />
+                <element signature="e#3662#3663#0" expanded="true" />
+                <element signature="e#4174#4175#0" expanded="true" />
+                <element signature="e#4201#4202#0" expanded="true" />
+                <element signature="e#4257#4258#0" expanded="true" />
+                <element signature="e#4306#4307#0" expanded="true" />
+                <element signature="e#4363#4364#0" expanded="true" />
+                <element signature="e#4413#4414#0" expanded="true" />
+                <element signature="e#5339#5340#0" expanded="true" />
+                <element signature="e#5391#5392#0" expanded="true" />
+                <element signature="e#6354#6355#0" expanded="true" />
+                <element signature="e#6409#6410#0" expanded="true" />
+                <element signature="e#6455#6456#0" expanded="true" />
+                <element signature="e#6506#6507#0" expanded="true" />
+                <element signature="e#6927#6928#0" expanded="true" />
+                <element signature="e#6976#6977#0" expanded="true" />
+                <element signature="e#7027#7028#0" expanded="true" />
+                <element signature="e#7079#7080#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PowerContainer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/api/PowerContainer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="202" max-vertical-offset="1650">
-              <caret line="49" column="5" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -199,9 +184,11 @@
       <file leaf-file-name="IPlasmaFlow.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaFlow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="990" max-vertical-offset="1965">
-              <caret line="93" column="43" selection-start-line="93" selection-start-column="43" selection-end-line="93" selection-end-column="43" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="260" max-vertical-offset="1980">
+              <caret line="48" column="76" selection-start-line="48" selection-start-column="76" selection-end-line="48" selection-end-column="76" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -209,8 +196,8 @@
       <file leaf-file-name="IFusionReactorCore.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IFusionReactorCore.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="470" max-vertical-offset="1245">
-              <caret line="57" column="72" selection-start-line="57" selection-start-column="72" selection-end-line="57" selection-end-column="72" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="620" max-vertical-offset="1245">
+              <caret line="69" column="33" selection-start-line="69" selection-start-column="33" selection-end-line="69" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -229,8 +216,8 @@
       <file leaf-file-name="IPlasmaContainer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaContainer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="975" max-vertical-offset="1755">
-              <caret line="108" column="28" selection-start-line="108" selection-start-column="28" selection-end-line="108" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1220" max-vertical-offset="1830">
+              <caret line="131" column="29" selection-start-line="131" selection-start-column="29" selection-end-line="131" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -241,26 +228,26 @@
       <file leaf-file-name="PlasmaContainer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaContainer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="2805">
-              <caret line="140" column="46" selection-start-line="140" selection-start-column="46" selection-end-line="140" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1565" max-vertical-offset="2835">
+              <caret line="134" column="23" selection-start-line="134" selection-start-column="23" selection-end-line="134" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2401#2402#0" expanded="true" />
-                <element signature="e#2429#2430#0" expanded="true" />
-                <element signature="e#2486#2487#0" expanded="true" />
-                <element signature="e#2515#2516#0" expanded="true" />
-                <element signature="e#3007#3008#0" expanded="true" />
-                <element signature="e#3038#3039#0" expanded="true" />
-                <element signature="e#3096#3097#0" expanded="true" />
-                <element signature="e#3128#3129#0" expanded="true" />
-                <element signature="e#3454#3455#0" expanded="true" />
-                <element signature="e#3482#3483#0" expanded="true" />
-                <element signature="e#3831#3832#0" expanded="true" />
+                <element signature="e#2435#2436#0" expanded="true" />
+                <element signature="e#2463#2464#0" expanded="true" />
+                <element signature="e#2520#2521#0" expanded="true" />
+                <element signature="e#2549#2550#0" expanded="true" />
+                <element signature="e#3041#3042#0" expanded="true" />
+                <element signature="e#3072#3073#0" expanded="true" />
+                <element signature="e#3130#3131#0" expanded="true" />
+                <element signature="e#3162#3163#0" expanded="true" />
+                <element signature="e#3488#3489#0" expanded="true" />
+                <element signature="e#3516#3517#0" expanded="true" />
                 <element signature="e#3865#3866#0" expanded="true" />
-                <element signature="e#4278#4279#0" expanded="true" />
-                <element signature="e#4318#4319#0" expanded="true" />
-                <element signature="e#4371#4372#0" expanded="true" />
-                <element signature="e#4403#4404#0" expanded="true" />
+                <element signature="e#3899#3900#0" expanded="true" />
+                <element signature="e#4619#4620#0" expanded="true" />
+                <element signature="e#4659#4660#0" expanded="true" />
+                <element signature="e#4712#4713#0" expanded="true" />
+                <element signature="e#4744#4745#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -320,15 +307,15 @@
         <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/VolatilityEventTemperatureSpike.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/VolatilityEventMagneticFluctuation.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/VolatilityEventPlasmaLeak.java" />
-        <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IFusionReactorCore.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/VolatilityEvent.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/research/gui/GuiResearch.java" />
-        <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaContainer.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IFusionReactorComponent.java" />
-        <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaContainer.java" />
-        <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaFlow.java" />
-        <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaFlow.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/api/PowerContainer.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IFusionReactorCore.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaFlow.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaContainer.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaContainer.java" />
+        <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaFlow.java" />
         <option value="$MCP_LOC$/src/minecraft/femtocraft/power/plasma/FusionReactorCore.java" />
       </list>
     </option>
@@ -945,6 +932,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3279503" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32670808" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17888199" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -957,10 +945,9 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18055555" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17888199" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17888199" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3279503" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1362,14 +1349,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IFusionReactorCore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="470" max-vertical-offset="1245">
-          <caret line="57" column="72" selection-start-line="57" selection-start-column="72" selection-end-line="57" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/volatility/VolatilityEvent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="975">
@@ -1435,14 +1414,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaFlow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="990" max-vertical-offset="1965">
-          <caret line="93" column="43" selection-start-line="93" selection-start-column="43" selection-end-line="93" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/BlockPlasma.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="305" max-vertical-offset="2145">
@@ -1463,10 +1434,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaFlow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="260" max-vertical-offset="1980">
+          <caret line="48" column="76" selection-start-line="48" selection-start-column="76" selection-end-line="48" selection-end-column="76" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IPlasmaContainer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="975" max-vertical-offset="1755">
-          <caret line="108" column="28" selection-start-line="108" selection-start-column="28" selection-end-line="108" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1220" max-vertical-offset="1830">
+          <caret line="131" column="29" selection-start-line="131" selection-start-column="29" selection-end-line="131" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1475,55 +1456,63 @@
     </entry>
     <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaContainer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1205" max-vertical-offset="2805">
-          <caret line="140" column="46" selection-start-line="140" selection-start-column="46" selection-end-line="140" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1565" max-vertical-offset="2835">
+          <caret line="134" column="23" selection-start-line="134" selection-start-column="23" selection-end-line="134" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2401#2402#0" expanded="true" />
-            <element signature="e#2429#2430#0" expanded="true" />
-            <element signature="e#2486#2487#0" expanded="true" />
-            <element signature="e#2515#2516#0" expanded="true" />
-            <element signature="e#3007#3008#0" expanded="true" />
-            <element signature="e#3038#3039#0" expanded="true" />
-            <element signature="e#3096#3097#0" expanded="true" />
-            <element signature="e#3128#3129#0" expanded="true" />
-            <element signature="e#3454#3455#0" expanded="true" />
-            <element signature="e#3482#3483#0" expanded="true" />
-            <element signature="e#3831#3832#0" expanded="true" />
+            <element signature="e#2435#2436#0" expanded="true" />
+            <element signature="e#2463#2464#0" expanded="true" />
+            <element signature="e#2520#2521#0" expanded="true" />
+            <element signature="e#2549#2550#0" expanded="true" />
+            <element signature="e#3041#3042#0" expanded="true" />
+            <element signature="e#3072#3073#0" expanded="true" />
+            <element signature="e#3130#3131#0" expanded="true" />
+            <element signature="e#3162#3163#0" expanded="true" />
+            <element signature="e#3488#3489#0" expanded="true" />
+            <element signature="e#3516#3517#0" expanded="true" />
             <element signature="e#3865#3866#0" expanded="true" />
-            <element signature="e#4278#4279#0" expanded="true" />
-            <element signature="e#4318#4319#0" expanded="true" />
-            <element signature="e#4371#4372#0" expanded="true" />
-            <element signature="e#4403#4404#0" expanded="true" />
+            <element signature="e#3899#3900#0" expanded="true" />
+            <element signature="e#4619#4620#0" expanded="true" />
+            <element signature="e#4659#4660#0" expanded="true" />
+            <element signature="e#4712#4713#0" expanded="true" />
+            <element signature="e#4744#4745#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/IFusionReactorCore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="620" max-vertical-offset="1245">
+          <caret line="69" column="33" selection-start-line="69" selection-start-column="33" selection-end-line="69" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/PlasmaFlow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2885" max-vertical-offset="4350">
-          <caret line="223" column="5" selection-start-line="223" selection-start-column="5" selection-end-line="223" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1205" max-vertical-offset="4365">
+          <caret line="136" column="38" selection-start-line="136" selection-start-column="38" selection-end-line="136" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5259#5260#0" expanded="true" />
-            <element signature="e#5287#5288#0" expanded="true" />
-            <element signature="e#5361#5362#0" expanded="true" />
-            <element signature="e#5394#5395#0" expanded="true" />
-            <element signature="e#6186#6187#0" expanded="true" />
-            <element signature="e#6218#6219#0" expanded="true" />
-            <element signature="e#6267#6268#0" expanded="true" />
-            <element signature="e#6301#6302#0" expanded="true" />
-            <element signature="e#6749#6750#0" expanded="true" />
-            <element signature="e#6782#6783#0" expanded="true" />
-            <element signature="e#6835#6836#0" expanded="true" />
-            <element signature="e#6862#6863#0" expanded="true" />
+            <element signature="e#5325#5326#0" expanded="true" />
+            <element signature="e#5353#5354#0" expanded="true" />
+            <element signature="e#5427#5428#0" expanded="true" />
+            <element signature="e#5460#5461#0" expanded="true" />
+            <element signature="e#6252#6253#0" expanded="true" />
+            <element signature="e#6284#6285#0" expanded="true" />
+            <element signature="e#6333#6334#0" expanded="true" />
+            <element signature="e#6367#6368#0" expanded="true" />
+            <element signature="e#6815#6816#0" expanded="true" />
+            <element signature="e#6848#6849#0" expanded="true" />
+            <element signature="e#6901#6902#0" expanded="true" />
+            <element signature="e#6928#6929#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/api/PowerContainer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="202" max-vertical-offset="1650">
+        <state vertical-scroll-proportion="0.6639344" vertical-offset="0" max-vertical-offset="1650">
           <caret line="49" column="5" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
           <folding />
         </state>
@@ -1531,48 +1520,42 @@
     </entry>
     <entry file="file://$MCP_LOC$/src/minecraft/femtocraft/power/plasma/FusionReactorCore.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="5.655738" vertical-offset="0" max-vertical-offset="3585">
-          <caret line="247" column="46" selection-start-line="247" selection-start-column="46" selection-end-line="247" selection-end-column="46" />
+        <state vertical-scroll-proportion="4.045226" vertical-offset="150" max-vertical-offset="3915">
+          <caret line="188" column="32" selection-start-line="188" selection-start-column="32" selection-end-line="188" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2410#2411#0" expanded="true" />
-            <element signature="e#2447#2448#0" expanded="true" />
-            <element signature="e#2496#2497#0" expanded="true" />
-            <element signature="e#2527#2528#0" expanded="true" />
-            <element signature="e#2586#2587#0" expanded="true" />
-            <element signature="e#2630#2631#0" expanded="true" />
-            <element signature="e#2685#2686#0" expanded="true" />
-            <element signature="e#2725#2726#0" expanded="true" />
-            <element signature="e#2780#2781#0" expanded="true" />
-            <element signature="e#2804#2805#0" expanded="true" />
-            <element signature="e#2861#2862#0" expanded="true" />
-            <element signature="e#2885#2886#0" expanded="true" />
-            <element signature="e#2940#2941#0" expanded="true" />
-            <element signature="e#2983#2984#0" expanded="true" />
-            <element signature="e#3031#3032#0" expanded="true" />
-            <element signature="e#3086#3087#0" expanded="true" />
-            <element signature="e#3598#3599#0" expanded="true" />
-            <element signature="e#3625#3626#0" expanded="true" />
-            <element signature="e#3681#3682#0" expanded="true" />
-            <element signature="e#3708#3709#0" expanded="true" />
-            <element signature="e#3765#3766#0" expanded="true" />
-            <element signature="e#3792#3793#0" expanded="true" />
-            <element signature="e#4092#4093#0" expanded="true" />
-            <element signature="e#4119#4120#0" expanded="true" />
-            <element signature="e#4177#4178#0" expanded="true" />
-            <element signature="e#4204#4205#0" expanded="true" />
-            <element signature="e#4596#4597#0" expanded="true" />
-            <element signature="e#4648#4649#0" expanded="true" />
-            <element signature="e#5193#5194#0" expanded="true" />
-            <element signature="e#5238#5239#0" expanded="true" />
-            <element signature="e#5542#5543#0" expanded="true" />
-            <element signature="e#5597#5598#0" expanded="true" />
-            <element signature="e#5643#5644#0" expanded="true" />
-            <element signature="e#5694#5695#0" expanded="true" />
-            <element signature="e#6115#6116#0" expanded="true" />
-            <element signature="e#6164#6165#0" expanded="true" />
-            <element signature="e#6215#6216#0" expanded="true" />
-            <element signature="e#6267#6268#0" expanded="true" />
+            <element signature="e#2966#2967#0" expanded="true" />
+            <element signature="e#3003#3004#0" expanded="true" />
+            <element signature="e#3052#3053#0" expanded="true" />
+            <element signature="e#3083#3084#0" expanded="true" />
+            <element signature="e#3142#3143#0" expanded="true" />
+            <element signature="e#3186#3187#0" expanded="true" />
+            <element signature="e#3241#3242#0" expanded="true" />
+            <element signature="e#3281#3282#0" expanded="true" />
+            <element signature="e#3336#3337#0" expanded="true" />
+            <element signature="e#3367#3368#0" expanded="true" />
+            <element signature="e#3424#3425#0" expanded="true" />
+            <element signature="e#3461#3462#0" expanded="true" />
+            <element signature="e#3516#3517#0" expanded="true" />
+            <element signature="e#3559#3560#0" expanded="true" />
+            <element signature="e#3607#3608#0" expanded="true" />
+            <element signature="e#3662#3663#0" expanded="true" />
+            <element signature="e#4174#4175#0" expanded="true" />
+            <element signature="e#4201#4202#0" expanded="true" />
+            <element signature="e#4257#4258#0" expanded="true" />
+            <element signature="e#4306#4307#0" expanded="true" />
+            <element signature="e#4363#4364#0" expanded="true" />
+            <element signature="e#4413#4414#0" expanded="true" />
+            <element signature="e#5339#5340#0" expanded="true" />
+            <element signature="e#5391#5392#0" expanded="true" />
+            <element signature="e#6354#6355#0" expanded="true" />
+            <element signature="e#6409#6410#0" expanded="true" />
+            <element signature="e#6455#6456#0" expanded="true" />
+            <element signature="e#6506#6507#0" expanded="true" />
+            <element signature="e#6927#6928#0" expanded="true" />
+            <element signature="e#6976#6977#0" expanded="true" />
+            <element signature="e#7027#7028#0" expanded="true" />
+            <element signature="e#7079#7080#0" expanded="true" />
           </folding>
         </state>
       </provider>

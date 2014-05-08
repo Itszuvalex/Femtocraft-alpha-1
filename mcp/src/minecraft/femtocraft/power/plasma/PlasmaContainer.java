@@ -24,6 +24,7 @@ import femtocraft.utils.FemtocraftDataUtils;
 import femtocraft.utils.ISaveable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 import java.util.ArrayList;
@@ -129,6 +130,17 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
     }
 
     @Override
+    public void update(World world, int x, int y, int z) {
+        for (IPlasmaFlow flow : flows) {
+            flow.update(this, world, x, y, z);
+        }
+        if (pendingRemove.size() > 0) {
+            flows.removeAll(pendingRemove);
+            pendingRemove.clear();
+        }
+    }
+
+    @Override
     public void onVolatilityEvent(IVolatilityEvent event) {
         for (IPlasmaFlow flow : flows) {
             flow.onVolatilityEvent(event);
@@ -152,16 +164,6 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
         return stability;
     }
 
-    @Override
-    public void updateFlows() {
-        for (IPlasmaFlow flow : flows) {
-            flow.onUpdate(this);
-        }
-        if (pendingRemove.size() > 0) {
-            flows.removeAll(pendingRemove);
-            pendingRemove.clear();
-        }
-    }
 
     @Override
     public void saveToNBT(NBTTagCompound compound) {

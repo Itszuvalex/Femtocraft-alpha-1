@@ -20,6 +20,7 @@
 package femtocraft.power.plasma;
 
 import femtocraft.power.plasma.volatility.IVolatilityEvent;
+import net.minecraft.world.World;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/5/14.
@@ -45,7 +46,7 @@ public interface IPlasmaFlow {
      *
      * @param container Container currently containing the plasma.
      */
-    void onUpdate(IPlasmaContainer container);
+    void update(IPlasmaContainer container, World world, int x, int y, int z);
 
     /**
      * @return Container currently holding this plasma flow

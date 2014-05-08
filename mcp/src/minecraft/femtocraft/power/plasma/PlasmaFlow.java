@@ -26,6 +26,7 @@ import femtocraft.power.plasma.volatility.VolatilityEventTemperatureSpike;
 import femtocraft.utils.FemtocraftDataUtils;
 import femtocraft.utils.ISaveable;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 import java.util.Random;
 
@@ -100,7 +101,7 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
     }
 
     @Override
-    public void onUpdate(IPlasmaContainer container) {
+    public void update(IPlasmaContainer container, World world, int x, int y, int z) {
         if (container.getStabilityRating() < getVolatility()) {
             applyEventToContainer(container, onSpontaneousEvent(container));
         }

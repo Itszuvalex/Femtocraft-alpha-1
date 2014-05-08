@@ -24,6 +24,9 @@ import femtocraft.api.PowerContainer;
 import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.power.plasma.volatility.IVolatilityEvent;
 import femtocraft.utils.FemtocraftDataUtils;
+import femtocraft.utils.ISaveable;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 import java.util.Collection;
@@ -31,13 +34,14 @@ import java.util.Collection;
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/7/14.
  */
-public class FusionReactorCore implements IFusionReactorCore, IPowerContainer {
-    public static int corePowerMax = 25000000;
-    public static int ignitionThreshold = 15000000;
-    public static int maxContainedFlows = 10;
-    public static int stability = 8000;
-    public static int temperatureRating = 8500;
-    public static int ignitionProcessWindow = 20 * 10;
+public class FusionReactorCore implements IFusionReactorCore,
+                                          IPowerContainer, ISaveable {
+//    public static int corePowerMax = 25000000;
+//    public static int ignitionThreshold = 15000000;
+//    public static int maxContainedFlows = 10;
+//    public static int stability = 8000;
+//    public static int temperatureRating = 8500;
+//    public static int ignitionProcessWindow = 20 * 10;
 
     @FemtocraftDataUtils.Saveable
     private boolean selfSustaining;
@@ -48,8 +52,14 @@ public class FusionReactorCore implements IFusionReactorCore, IPowerContainer {
     private PlasmaContainer plasmaContainer;
     @FemtocraftDataUtils.Saveable
     private PowerContainer powerContainer;
+    @FemtocraftDataUtils.Saveable
+    private int ignitionProcessWindow;
+    @FemtocraftDataUtils.Saveable
+    private int ignitionThreshold;
 
-    public FusionReactorCore() {
+    public FusionReactorCore(int maxContainedFlows, int stability, int temperatureRating, int corePowerMax, int ignitionProcessWindow, int ignitionThreshold) {
+        this.ignitionProcessWindow = ignitionProcessWindow;
+        this.ignitionThreshold = ignitionThreshold;
         plasmaContainer = new PlasmaContainer(maxContainedFlows, stability,
                                               temperatureRating);
         powerContainer = new PowerContainer(EnumTechLevel.FEMTO, corePowerMax);
@@ -80,12 +90,12 @@ public class FusionReactorCore implements IFusionReactorCore, IPowerContainer {
 
     @Override
     public int getReactionStability() {
-        return 0;
+        return 0; //TODO
     }
 
     @Override
     public int getReactionTemperature() {
-        return 0;
+        return 0;       //TODO
     }
 
     @Override
@@ -125,32 +135,32 @@ public class FusionReactorCore implements IFusionReactorCore, IPowerContainer {
 
     @Override
     public IPlasmaContainer getInput() {
-        return null;
+        return plasmaContainer.getInput();
     }
 
     @Override
     public IPlasmaContainer getOutput() {
-        return null;
+        return plasmaContainer.getOutput();
     }
 
     @Override
     public boolean setInput(IPlasmaContainer container, ForgeDirection dir) {
-        return false;
+        return plasmaContainer.setInput(container, dir);
     }
 
     @Override
     public boolean setOutput(IPlasmaContainer container, ForgeDirection dir) {
-        return false;
+        return plasmaContainer.setOutput(container, dir);
     }
 
     @Override
     public ForgeDirection getInputDir() {
-        return null;
+        return plasmaContainer.getInputDir();
     }
 
     @Override
     public ForgeDirection getOutputDir() {
-        return null;
+        return plasmaContainer.getOutputDir();
     }
 
     @Override
@@ -174,6 +184,12 @@ public class FusionReactorCore implements IFusionReactorCore, IPowerContainer {
     }
 
     @Override
+    public void update(World world, int x, int y, int z) {
+        plasmaContainer.update(world, x, y, z);
+        //TODO Reactor reactions
+    }
+
+    @Override
     public void onVolatilityEvent(IVolatilityEvent event) {
         plasmaContainer.onVolatilityEvent(event);
     }
@@ -191,11 +207,6 @@ public class FusionReactorCore implements IFusionReactorCore, IPowerContainer {
     @Override
     public int getStabilityRating() {
         return plasmaContainer.getStabilityRating();
-    }
-
-    @Override
-    public void updateFlows() {
-        plasmaContainer.updateFlows();
     }
 
     @Override
@@ -246,5 +257,16 @@ public class FusionReactorCore implements IFusionReactorCore, IPowerContainer {
     @Override
     public boolean consume(int amount) {
         return powerContainer.consume(amount);
+    }
+
+    @Override
+    public void saveToNBT(NBTTagCompound compound) {
+        FemtocraftDataUtils.saveObjectToNBT(compound, this,
+                                            FemtocraftDataUtils.EnumSaveType.WORLD);
+    }
+
+    @Override
+    public void loadFromNBT(NBTTagCompound compound) {
+        FemtocraftDataUtils.loadObjectFromNBT(compound, this, FemtocraftDataUtils.EnumSaveType.WORLD);
     }
 }

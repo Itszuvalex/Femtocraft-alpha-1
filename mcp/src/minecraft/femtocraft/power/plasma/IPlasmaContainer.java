@@ -20,6 +20,7 @@
 package femtocraft.power.plasma;
 
 import femtocraft.power.plasma.volatility.IVolatilityEvent;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 import java.util.Collection;
@@ -97,6 +98,16 @@ public interface IPlasmaContainer {
     int getMaxFlows();
 
     /**
+     * Update, which by proxy updates everything inside of it
+     *
+     * @param world World containing the core
+     * @param x     x coordinate of the core
+     * @param y     y coordinate of the core
+     * @param z     z coordinate of the core
+     */
+    void update(World world, int x, int y, int z);
+
+    /**
      * @param event Called when a volatility event occurs.
      */
     void onVolatilityEvent(IVolatilityEvent event);
@@ -119,10 +130,4 @@ public interface IPlasmaContainer {
      * @return A measurement of what level of instability this can handle.
      */
     int getStabilityRating();
-
-    /**
-     * Update all contained flows
-     */
-    void updateFlows();
-
 }
