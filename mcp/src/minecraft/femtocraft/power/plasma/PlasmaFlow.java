@@ -19,6 +19,7 @@
 
 package femtocraft.power.plasma;
 
+import femtocraft.power.plasma.volatility.IVolatilityEvent;
 import femtocraft.power.plasma.volatility.VolatilityEventMagneticFluctuation;
 import femtocraft.power.plasma.volatility.VolatilityEventPlasmaLeak;
 import femtocraft.power.plasma.volatility.VolatilityEventTemperatureSpike;
@@ -81,7 +82,7 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
 
         core.consumeCoreEnergy(energy);
 
-        temperature = energy / 10000;
+        temperature = energy / IPlasmaFlow.temperatureToEnergy;
 
         //Initialize frequency and volatility
         double ratio = random.nextDouble();
@@ -93,15 +94,19 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
 
         //Flow is at random location in the wave
         freqPos = random.nextInt(frequency + 1);
+
+        if (unstableFlow) {
+            applyEventToContainer(core, onSpontaneousEvent(core));
+        }
     }
 
     @Override
-    public void onUpdate(IPlasmaContainer container) {
+    public void update(IPlasmaContainer container, World world, int x, int y, int z) {
         if (container.getStabilityRating() < getVolatility()) {
-            container.onVolatilityEvent(onSpontaneousEvent(container));
+            applyEventToContainer(container, onSpontaneousEvent(container));
         }
         if (container.getTemperatureRating() < getTemperature()) {
-            container.onVolatilityEvent(onOverheat(container));
+            applyEventToContainer(container, onOverheat(container));
         }
 
         if (freqPos-- <= 0) {
@@ -110,11 +115,13 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
             freqPos = getFrequency();
 
             if (container.getOutput() == null) {
-                container.onVolatilityEvent(onIncompleteCircuit(container));
+                applyEventToContainer(container,
+                                      onIncompleteCircuit(container));
             }
             else {
                 if (!container.getOutput().addFlow(this)) {
-                    container.onVolatilityEvent(onPlasmaOverflow(container));
+                    applyEventToContainer(container,
+                                          onPlasmaOverflow(container));
                 }
                 else {
                     container.removeFlow(this);
@@ -193,16 +200,37 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
 
     @Override
     public void recharge(IFusionReactorCore core) {
+        boolean unstableFlow = false;
+        int energy = random.nextInt(getEnergyRequirementMax -
+                                            energyRequirementMin) +
+                energyRequirementMin;
+        energy -= getTemperature() * IPlasmaFlow.temperatureToEnergy;
 
-    }
+        if (energy > core.getCoreEnergy()) {
+            energy = core.getCoreEnergy();
+            unstableFlow = true;
+        }
 
-    @Override
-    public void onPurge(World world, int x, int y, int z) {
-        //TODO: Bad things
+        core.consumeCoreEnergy(energy);
+
+        int prev = temperature;
+        temperature = energy / IPlasmaFlow.temperatureToEnergy;
+
+        updateFreqAndVolatility(prev);
+
+
+        if (unstableFlow) {
+            applyEventToContainer(core, onSpontaneousEvent(core));
+        }
     }
 
     @Override
     public void onVolatilityEvent(IVolatilityEvent event) {
+
+    }
+
+    @Override
+    public void onPostVolatilityEvent(IVolatilityEvent event) {
 
     }
 
@@ -244,4 +272,31 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
         FemtocraftDataUtils.loadObjectFromNBT(compound, this,
                                               FemtocraftDataUtils.EnumSaveType.WORLD);
     }
+
+    protected final void applyEventToContainer(IPlasmaContainer container,
+                                               IVolatilityEvent event) {
+        if (event == null) return;
+        if (container == null) return;
+
+        container.onVolatilityEvent(event);
+
+        if (container instanceof IFusionReactorCore) {
+            event.interact((IFusionReactorCore) container);
+        }
+        else if (container instanceof IFusionReactorComponent) {
+            event.interact((IFusionReactorComponent) container);
+        }
+        else {
+            event.interact(container);
+        }
+
+        for (IPlasmaFlow flow : container.getFlows()) {
+            flow.onVolatilityEvent(event);
+            event.interact(flow);
+            flow.onPostVolatilityEvent(event);
+        }
+
+        container.onPostVolatilityEvent(event);
+    }
+
 }

@@ -23,16 +23,6 @@ package femtocraft.power.plasma;
  * Created by Christopher Harris (Itszuvalex) on 5/6/14.
  */
 public interface IFusionReactorComponent extends IPlasmaContainer {
-    /**
-     * Called once a volatility event has resolved.  This could be used to
-     * prevent meltdowns, normalize PlasmaFlows, etc.
-     *
-     * @param event The event that just
-     *              resolved
-     * @param core  The core
-     */
-    void onPostVolatilityEvent(IVolatilityEvent event,
-                               IFusionReactorCore core);
 
     /**
      * Called when the ignition process begins.  Likely started by a player.
@@ -47,5 +37,10 @@ public interface IFusionReactorComponent extends IPlasmaContainer {
      * @param core Core this is a component of.
      */
     void endIgnitionProcess(IFusionReactorCore core);
+
+    /**
+     * @return Core this is a component of
+     */
+    IFusionReactorCore getCore();
 
 }

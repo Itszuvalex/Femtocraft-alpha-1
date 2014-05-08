@@ -19,6 +19,8 @@
 
 package femtocraft.power.plasma;
 
+import femtocraft.power.plasma.volatility.IVolatilityEvent;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 import java.util.Collection;
@@ -45,6 +47,20 @@ public interface IPlasmaContainer {
      * in use, expect Volatility Events.
      */
     IPlasmaContainer getOutput();
+
+    /**
+     * @param container Container to set as input to this container.
+     * @param dir       Direction of input.
+     * @return True if input successfully set.
+     */
+    boolean setInput(IPlasmaContainer container, ForgeDirection dir);
+
+    /**
+     * @param container Container to set as output to this container.
+     * @param dir       Direction of output.
+     * @return True if output successfully set.
+     */
+    boolean setOutput(IPlasmaContainer container, ForgeDirection dir);
 
     /**
      * @return Direction of input, or UNKNOWN if NULL.  Helper function for
@@ -82,9 +98,28 @@ public interface IPlasmaContainer {
     int getMaxFlows();
 
     /**
+     * Update, which by proxy updates everything inside of it
+     *
+     * @param world World containing the core
+     * @param x     x coordinate of the core
+     * @param y     y coordinate of the core
+     * @param z     z coordinate of the core
+     */
+    void update(World world, int x, int y, int z);
+
+    /**
      * @param event Called when a volatility event occurs.
      */
     void onVolatilityEvent(IVolatilityEvent event);
+
+    /**
+     * Called once a volatility event has resolved.  This could be used to
+     * prevent meltdowns, normalize PlasmaFlows, etc.
+     *
+     * @param event The event that just
+     *              resolved
+     */
+    void onPostVolatilityEvent(IVolatilityEvent event);
 
     /**
      * @return A measurement of how high a temperature this can handle.
@@ -95,10 +130,4 @@ public interface IPlasmaContainer {
      * @return A measurement of what level of instability this can handle.
      */
     int getStabilityRating();
-
-    /**
-     * Update all contained flows
-     */
-    void updateFlows();
-
 }

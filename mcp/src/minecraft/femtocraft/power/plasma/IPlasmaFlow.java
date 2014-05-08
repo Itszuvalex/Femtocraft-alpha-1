@@ -19,6 +19,7 @@
 
 package femtocraft.power.plasma;
 
+import femtocraft.power.plasma.volatility.IVolatilityEvent;
 import net.minecraft.world.World;
 
 /**
@@ -45,7 +46,7 @@ public interface IPlasmaFlow {
      *
      * @param container Container currently containing the plasma.
      */
-    void onUpdate(IPlasmaContainer container);
+    void update(IPlasmaContainer container, World world, int x, int y, int z);
 
     /**
      * @return Container currently holding this plasma flow
@@ -94,20 +95,14 @@ public interface IPlasmaFlow {
     void recharge(IFusionReactorCore core);
 
     /**
-     * Called when the PlasmaFlow is purged from the system,
-     * either through a volatility event, Plasma Vent, etc.
-     *
-     * @param world
-     * @param x
-     * @param y
-     * @param z
-     */
-    void onPurge(World world, int x, int y, int z);
-
-    /**
      * @param event Event occurring on this plasma flow.
      */
     void onVolatilityEvent(IVolatilityEvent event);
+
+    /**
+     * @param event Event that just resolved on this plasma flow.
+     */
+    void onPostVolatilityEvent(IVolatilityEvent event);
 
     /**
      * @param container Container containing this flow.
