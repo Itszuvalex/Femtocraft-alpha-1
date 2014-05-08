@@ -19,6 +19,8 @@
 
 package femtocraft.power.plasma;
 
+import java.util.Collection;
+
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/6/14.
  * <p/>
@@ -91,4 +93,21 @@ public interface IFusionReactorCore extends IFusionReactorComponent {
      * @return Returns the amount of energy used from #energy
      */
     int contributeCoreEnergy(int energy);
+
+    /**
+     * @return All fusion reactor components being utilized by this core.
+     */
+    Collection<IFusionReactorComponent> getComponents();
+
+    /**
+     * @param component Component to add to this core
+     * @return True if component successfully added.  False otherwise (I.E. duplicates
+     */
+    boolean addComponent(IFusionReactorComponent component);
+
+    /**
+     * @param component Component to remove from this core
+     * @return True if successfully removed.  False otherwise (i.e. component not a member)
+     */
+    boolean removeComponent(IFusionReactorComponent component);
 }
