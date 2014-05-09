@@ -57,7 +57,9 @@ public class BlockPowerContainer extends TileContainer {
         super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
         TileEntityPowerBase container = (TileEntityPowerBase) par1World.getBlockTileEntity(par2, par3, par4);
 
-        if (container != null) container.checkConnections();
+        if (container != null) {
+            container.checkConnections();
+        }
     }
 
     @Override
@@ -67,7 +69,9 @@ public class BlockPowerContainer extends TileContainer {
 
         TileEntityPowerBase container = (TileEntityPowerBase) par1World.getBlockTileEntity(par2, par3, par4);
 
-        if (container != null) container.checkConnections();
+        if (container != null) {
+            container.checkConnections();
+        }
     }
 
     /*
@@ -85,7 +89,9 @@ public class BlockPowerContainer extends TileContainer {
 
         TileEntityPowerBase container = (TileEntityPowerBase) par1World.getBlockTileEntity(par2, par3, par4);
 
-        if (container != null) container.checkConnections();
+        if (container != null) {
+            container.checkConnections();
+        }
     }
 
     /*
@@ -100,7 +106,9 @@ public class BlockPowerContainer extends TileContainer {
         int val = super.onBlockPlaced(par1World, par2, par3, par4, par5, par6, par7, par8, par9);
         TileEntityPowerBase container = (TileEntityPowerBase) par1World.getBlockTileEntity(par2, par3, par4);
 
-        if (container != null) container.checkConnections();
+        if (container != null) {
+            container.checkConnections();
+        }
 
         par1World.notifyBlocksOfNeighborChange(par2, par3, par4, par1World.getBlockId(par2, par3, par4));
 

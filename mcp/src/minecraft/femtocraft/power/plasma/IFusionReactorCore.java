@@ -62,6 +62,12 @@ public interface IFusionReactorCore extends IFusionReactorComponent {
     int getReactionThreshold();
 
     /**
+     *
+     * @return Amount of power required to maintain the reaction.
+     */
+    int getReactorFailureThreshold();
+
+    /**
      * @return Measure of how stable the reaction occurring in the core is.
      */
     int getReactionStability();

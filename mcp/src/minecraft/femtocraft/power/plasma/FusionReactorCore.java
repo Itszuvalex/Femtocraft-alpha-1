@@ -37,7 +37,7 @@ import java.util.Random;
  * Created by Christopher Harris (Itszuvalex) on 5/7/14.
  */
 public class FusionReactorCore implements IFusionReactorCore,
-        IPowerContainer, ISaveable {
+                                          IPowerContainer, ISaveable {
     public static double ignitionSucessfulPowerMultiplier = .5d;
     public static double reactionLossPerTickMultiplier = .01d;
     //    public static int corePowerMax = 25000000;
@@ -87,7 +87,7 @@ public class FusionReactorCore implements IFusionReactorCore,
         this.plasmaFlowTicksToGenerateMax = plasmaFlowTicksToGenerateMax;
         components = new ArrayList<IFusionReactorComponent>();
         plasmaContainer = new PlasmaContainer(maxContainedFlows, stability,
-                temperatureRating);
+                                              temperatureRating);
         powerContainer = new PowerContainer(EnumTechLevel.FEMTO, corePowerMax);
         selfSustaining = false;
         igniting = false;
@@ -243,21 +243,24 @@ public class FusionReactorCore implements IFusionReactorCore,
                 powerContainer.setCurrentPower(0);
             }
 
-        } else if (igniting) {
+        }
+        else if (igniting) {
             ++ignitionProcessTicks;
             if (powerContainer.getCurrentPower() > getReactionThreshold()) {
                 powerContainer.consume((int) (powerContainer.getCurrentPower() * ignitionSucessfulPowerMultiplier));
                 selfSustaining = true;
                 generateTicksToPlasmaFlow();
                 endIgnitionProcess(this);
-            } else if (ignitionProcessTicks > getIgnitionProcessWindow()) {
+            }
+            else if (ignitionProcessTicks > getIgnitionProcessWindow()) {
                 powerContainer.setCurrentPower(0);
                 endIgnitionProcess(this);
             }
         }
     }
 
-    private int getReactorFailureThreshold() {
+    @Override
+    public int getReactorFailureThreshold() {
         return reactionFailureThreshold;
     }
 
@@ -338,7 +341,7 @@ public class FusionReactorCore implements IFusionReactorCore,
     @Override
     public void saveToNBT(NBTTagCompound compound) {
         FemtocraftDataUtils.saveObjectToNBT(compound, this,
-                FemtocraftDataUtils.EnumSaveType.WORLD);
+                                            FemtocraftDataUtils.EnumSaveType.WORLD);
     }
 
     @Override

@@ -350,7 +350,9 @@ public class TileEntityBaseEntityMicroReconstructor extends
 
         for (int i = 0; i < icopy.length; ++i) {
             ItemStack is = icopy[i];
-            if (is == null) continue;
+            if (is == null) {
+                continue;
+            }
 
             int iter = is.getMaxStackSize() / is.stackSize;
             maxSimul = Math.min(iter, maxSimul);
@@ -393,7 +395,9 @@ public class TileEntityBaseEntityMicroReconstructor extends
             }
             else {
                 for (int j = 0; j < recipe.input.length; ++j) {
-                    if (recipe.input[j] == null) continue;
+                    if (recipe.input[j] == null) {
+                        continue;
+                    }
                     reconstructingStacks[j].stackSize += recipe.input[j]
                             .stackSize;
                 }
@@ -447,7 +451,9 @@ public class TileEntityBaseEntityMicroReconstructor extends
             }
             empty = true;
             for (int i = 0; i < 9 && i < recipe.input.length; ++i) {
-                if (reconstructingStacks[i] == null) continue;
+                if (reconstructingStacks[i] == null) {
+                    continue;
+                }
 
                 if ((reconstructingStacks[i].stackSize -= recipe.input[i].stackSize) <= 0) {
                     reconstructingStacks[i] = null;

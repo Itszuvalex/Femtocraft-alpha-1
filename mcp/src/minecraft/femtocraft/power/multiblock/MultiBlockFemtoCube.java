@@ -44,27 +44,12 @@ public class MultiBlockFemtoCube implements IMultiBlock {
     private boolean canForm(World world, int x, int y, int z, boolean strict) {
         // If interior would not contain a valid NanoCube, then this cannot
         // form.
-        if (!MultiBlockNanoCube.instance.canForm(world, x, y + 1, z)) {
-            return false;
-        }
-
-        if (!checkBotTopLayer(world, x, y, z, 0, strict)) {
-            return false;
-        }
-        if (!checkBetweenLayer(world, x, y, z, 1, strict)) {
-            return false;
-        }
-        if (!checkMiddleLayer(world, x, y, z, strict)) {
-            return false;
-        }
-        if (!checkBetweenLayer(world, x, y, z, 3, strict)) {
-            return false;
-        }
-        if (!checkBotTopLayer(world, x, y, z, 4, strict)) {
-            return false;
-        }
-
-        return true;
+        return MultiBlockNanoCube.instance.canForm(world, x, y + 1, z) &&
+                checkBotTopLayer(world, x, y, z, 0, strict) &&
+                checkBetweenLayer(world, x, y, z, 1, strict) &&
+                checkMiddleLayer(world, x, y, z, strict) &&
+                checkBetweenLayer(world, x, y, z, 3, strict) &&
+                checkBotTopLayer(world, x, y, z, 4, strict);
     }
 
     private boolean checkBotTopLayer(World world, int x, int y, int z,

@@ -42,17 +42,10 @@ public class MultiBlockNanoCube implements IMultiBlock {
     }
 
     private boolean canForm(World world, int x, int y, int z, boolean strict) {
-        if (!checkGroundLevel(world, x, y, z, strict)) {
-            return false;
-        }
-        if (!checkMidLevel(world, x, y, z, strict)) {
-            return false;
-        }
-        if (!checkTopLevel(world, x, y, z, strict)) {
-            return false;
-        }
+        return checkGroundLevel(world, x, y, z, strict) &&
+                checkMidLevel(world, x, y, z, strict) &&
+                checkTopLevel(world, x, y, z, strict);
 
-        return true;
     }
 
     private boolean checkGroundLevel(World world, int x, int y, int z,

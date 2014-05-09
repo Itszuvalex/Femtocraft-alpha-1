@@ -91,7 +91,9 @@ public class TileEntityBaseEntityNanoEnmesher extends
     }
 
     public int getCookProgressScaled(int i) {
-        if (ticksToCook == 0) return 0;
+        if (ticksToCook == 0) {
+            return 0;
+        }
         return (cookTime * i) / ticksToCook;
     }
 

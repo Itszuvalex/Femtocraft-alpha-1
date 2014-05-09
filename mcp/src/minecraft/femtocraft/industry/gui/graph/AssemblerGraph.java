@@ -49,12 +49,18 @@ public class AssemblerGraph extends MapGraph<Integer> {
         //Set up children and parents
         for (AssemblerRecipe recipe : recipes) {
             IGraphNode output = nodes.get(recipe.output.itemID);
-            if (output == null) continue;
+            if (output == null) {
+                continue;
+            }
 
             for (ItemStack stack : recipe.input) {
-                if (stack == null) continue;
+                if (stack == null) {
+                    continue;
+                }
                 IGraphNode child = nodes.get(stack.itemID);
-                if (child == null) continue;
+                if (child == null) {
+                    continue;
+                }
                 output.addChild(child);
                 child.addParent(output);
             }

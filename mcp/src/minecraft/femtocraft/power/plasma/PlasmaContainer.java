@@ -71,7 +71,9 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
 
     @Override
     public boolean setInput(IPlasmaContainer container, ForgeDirection dir) {
-        if (container == this) return false;
+        if (container == this) {
+            return false;
+        }
         input = container;
         inputDir = dir;
         return true;
@@ -79,7 +81,9 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
 
     @Override
     public boolean setOutput(IPlasmaContainer container, ForgeDirection dir) {
-        if (container == this) return false;
+        if (container == this) {
+            return false;
+        }
         output = container;
         outputDir = dir;
         return true;

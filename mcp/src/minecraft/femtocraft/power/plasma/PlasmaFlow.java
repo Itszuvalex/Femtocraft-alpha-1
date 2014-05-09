@@ -275,8 +275,12 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
 
     protected final void applyEventToContainer(IPlasmaContainer container,
                                                IVolatilityEvent event) {
-        if (event == null) return;
-        if (container == null) return;
+        if (event == null) {
+            return;
+        }
+        if (container == null) {
+            return;
+        }
 
         container.onVolatilityEvent(event);
 

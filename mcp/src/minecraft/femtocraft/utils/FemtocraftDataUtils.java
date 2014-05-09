@@ -846,13 +846,10 @@ public class FemtocraftDataUtils {
                                                  IllegalAccessException {
         }
 
-        ;
-
         public void readFromNBT(NBTTagCompound compound, Field saveable,
                                 Object obj) throws IllegalArgumentException,
                                                    IllegalAccessException {
         }
 
-        ;
     }
 }

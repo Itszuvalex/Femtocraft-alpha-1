@@ -102,10 +102,8 @@ public class MultiBlockMicroCrystallizer implements IMultiBlock {
                         continue;
                     }
                 }
-                else {
-                    if (world.getBlockId(x + i, y + 1, z + j) != FemtocraftConfigs.FemtocraftMicroCrystallizerShieldingID) {
-                        return false;
-                    }
+                if (world.getBlockId(x + i, y + 1, z + j) != FemtocraftConfigs.FemtocraftMicroCrystallizerShieldingID) {
+                    return false;
                 }
 
                 if (strict) {

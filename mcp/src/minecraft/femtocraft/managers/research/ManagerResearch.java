@@ -114,8 +114,6 @@ public class ManagerResearch {
             new ArrayList<ItemStack>()
     );
 
-    ;
-
     // MACRO
     @Technology
     public static ResearchTechnology technologyVacuumTubeHub = new ResearchTechnology(
