@@ -19,6 +19,7 @@
 
 package femtocraft.power.plasma;
 
+import femtocraft.power.plasma.volatility.IFusionReaction;
 import femtocraft.power.plasma.volatility.IVolatilityEvent;
 import net.minecraft.world.World;
 
@@ -67,7 +68,7 @@ public interface IPlasmaFlow {
      * @return Temperature of the flow.  Bad things happen if this exceeds
      * the temperature rating of the container.
      */
-    int getTemperature();
+    long getTemperature();
 
     /**
      * @param temperature To set temperature of the flow to.  For use by
@@ -90,9 +91,9 @@ public interface IPlasmaFlow {
     /**
      * Called by the core when it recharges this flow.
      *
-     * @param core The core doing the recharging.
+     * @param reaction The reaction doing the recharging.
      */
-    void recharge(IFusionReactorCore core);
+    void recharge(IFusionReaction reaction);
 
     /**
      * @param event Event occurring on this plasma flow.

@@ -19,10 +19,7 @@
 
 package femtocraft.power.plasma;
 
-import femtocraft.power.plasma.volatility.IVolatilityEvent;
-import femtocraft.power.plasma.volatility.VolatilityEventMagneticFluctuation;
-import femtocraft.power.plasma.volatility.VolatilityEventPlasmaLeak;
-import femtocraft.power.plasma.volatility.VolatilityEventTemperatureSpike;
+import femtocraft.power.plasma.volatility.*;
 import femtocraft.utils.FemtocraftDataUtils;
 import femtocraft.utils.ISaveable;
 import net.minecraft.nbt.NBTTagCompound;
@@ -52,7 +49,7 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
     @FemtocraftDataUtils.Saveable
     private int frequency;
     @FemtocraftDataUtils.Saveable
-    private int temperature;
+    private long temperature;
     @FemtocraftDataUtils.Saveable
     private int volatility;
     @FemtocraftDataUtils.Saveable
@@ -65,22 +62,22 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
     }
 
 
-    public PlasmaFlow(IFusionReactorCore core) {
+    public PlasmaFlow(IFusionReaction reaction) {
         boolean unstableFlow = false;
-        int energy = random.nextInt(getEnergyRequirementMax -
-                                            energyRequirementMin) +
+        long energy = random.nextLong() * (getEnergyRequirementMax -
+                energyRequirementMin) +
                 energyRequirementMin;
 
-        if (energyRequirementMin > core.getCoreEnergy()) {
-            energy = core.getCoreEnergy();
+        if (energyRequirementMin > reaction.getReactionEnergy()) {
+            energy = reaction.getReactionEnergy();
             unstableFlow = true;
         }
-        else if (energy > core.getCoreEnergy()) {
-            energy = core.getCoreEnergy();
+        else if (energy > reaction.getReactionEnergy()) {
+            energy = reaction.getReactionEnergy();
 
         }
 
-        core.consumeCoreEnergy(energy);
+        reaction.consumeReactionEnergy(energy);
 
         temperature = energy / IPlasmaFlow.temperatureToEnergy;
 
@@ -96,7 +93,8 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
         freqPos = random.nextInt(frequency + 1);
 
         if (unstableFlow) {
-            applyEventToContainer(core, onSpontaneousEvent(core));
+            applyEventToContainer(reaction.getCore(), onSpontaneousEvent(reaction
+                                                                                 .getCore()));
         }
     }
 
@@ -129,7 +127,7 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
             }
         }
 
-        int prev = temperature;
+        long prev = temperature;
         temperature *= random.nextFloat() * (temperatureDecayMax -
                 temperatureDecayMin) + temperatureDecayMin;
         temperature = temperature < temperatureMin ?
@@ -147,7 +145,7 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
         owner = container;
     }
 
-    private void updateFreqAndVolatility(int temperaturePrev) {
+    private void updateFreqAndVolatility(long temperaturePrev) {
         frequency *= temperature / temperaturePrev;
 
         frequency = frequency > frequencyMax ? frequencyMax : frequency;
@@ -173,7 +171,7 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
     }
 
     @Override
-    public int getTemperature() {
+    public long getTemperature() {
         return temperature;
     }
 
@@ -198,29 +196,31 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
         return true;
     }
 
+
     @Override
-    public void recharge(IFusionReactorCore core) {
+    public void recharge(IFusionReaction reaction) {
         boolean unstableFlow = false;
-        int energy = random.nextInt(getEnergyRequirementMax -
-                                            energyRequirementMin) +
+        long energy = random.nextInt(getEnergyRequirementMax -
+                                             energyRequirementMin) +
                 energyRequirementMin;
         energy -= getTemperature() * IPlasmaFlow.temperatureToEnergy;
 
-        if (energy > core.getCoreEnergy()) {
-            energy = core.getCoreEnergy();
+        if (energy > reaction.getReactionEnergy()) {
+            energy = reaction.getReactionEnergy();
             unstableFlow = true;
         }
 
-        core.consumeCoreEnergy(energy);
+        reaction.consumeReactionEnergy(energy);
 
-        int prev = temperature;
+        long prev = temperature;
         temperature = energy / IPlasmaFlow.temperatureToEnergy;
 
         updateFreqAndVolatility(prev);
 
 
         if (unstableFlow) {
-            applyEventToContainer(core, onSpontaneousEvent(core));
+            applyEventToContainer(reaction.getCore(), onSpontaneousEvent(reaction
+                                                                                 .getCore()));
         }
     }
 
