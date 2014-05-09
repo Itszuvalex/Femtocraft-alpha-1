@@ -20,6 +20,7 @@
 package femtocraft.power.plasma;
 
 import femtocraft.power.plasma.volatility.IFusionReaction;
+import femtocraft.power.plasma.volatility.VolatilityEventMagneticFluctuation;
 import femtocraft.utils.FemtocraftDataUtils;
 import femtocraft.utils.ISaveable;
 import net.minecraft.nbt.NBTTagCompound;
@@ -83,6 +84,13 @@ public class FusionReaction implements IFusionReaction, ISaveable {
             if (ticksToGeneratePlasmaFlow-- <= 0) {
                 core.addFlow(generateFlow());
                 generateTicksToPlasmaFlow();
+            }
+            if (getReactionInstability() > core.getStabilityRating()) {
+                long eventEnergy = (long) (random.nextDouble() * this.energy *
+                        .25d);
+                FemtocraftPlasmaUtils.applyEventToContainer(core, new VolatilityEventMagneticFluctuation(null, getReactionInstability() - core.getStabilityRating(), eventEnergy), world, x, y, z
+                );
+                energy -= eventEnergy;
             }
             if (energy < getReactionFailureThreshold()) {
                 selfSustaining = false;
@@ -184,6 +192,15 @@ public class FusionReaction implements IFusionReaction, ISaveable {
     public void endIgnitionProcess() {
         igniting = false;
         ignitionProcessTicks = 0;
+    }
+
+    @Override
+    public void endSelfSustainingReaction() {
+        if (!selfSustaining) {
+            return;
+        }
+        selfSustaining = false;
+        energy = 0;
     }
 
 

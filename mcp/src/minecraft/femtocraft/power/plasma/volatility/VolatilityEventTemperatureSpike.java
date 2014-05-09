@@ -27,7 +27,9 @@ import femtocraft.power.plasma.IPlasmaFlow;
 public class VolatilityEventTemperatureSpike extends
                                              VolatilityEvent {
 
-    public VolatilityEventTemperatureSpike(IPlasmaFlow creator, int volatilityLevel, int volatilityEnergy) {
+    public VolatilityEventTemperatureSpike(IPlasmaFlow creator,
+                                           int volatilityLevel,
+                                           long volatilityEnergy) {
         super(creator, volatilityLevel, volatilityEnergy);
     }
 }

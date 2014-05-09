@@ -23,6 +23,7 @@ import femtocraft.power.plasma.IFusionReactorComponent;
 import femtocraft.power.plasma.IFusionReactorCore;
 import femtocraft.power.plasma.IPlasmaContainer;
 import femtocraft.power.plasma.IPlasmaFlow;
+import net.minecraft.world.World;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/5/14.
@@ -50,7 +51,7 @@ public interface IVolatilityEvent {
     /**
      * @return Amount of energy invested in this event.
      */
-    int volatilityEnergy();
+    long volatilityEnergy();
 
     /**
      * Interact with a Reactor core, if this event is spawned from a Flow
@@ -58,7 +59,7 @@ public interface IVolatilityEvent {
      *
      * @param core
      */
-    void interact(IFusionReactorCore core);
+    void interact(IFusionReactorCore core, World world, int x, int y, int z);
 
     /**
      * Interact with the reactor components, if this event is spawned from a
@@ -66,7 +67,8 @@ public interface IVolatilityEvent {
      *
      * @param component
      */
-    void interact(IFusionReactorComponent component);
+    void interact(IFusionReactorComponent component, World world, int x,
+                  int y, int z);
 
     /**
      * Interact with a plasma container, if this event is spawned from a Flow
@@ -74,12 +76,12 @@ public interface IVolatilityEvent {
      *
      * @param container
      */
-    void interact(IPlasmaContainer container);
+    void interact(IPlasmaContainer container, World world, int x, int y, int z);
 
     /**
      * Interact with all plasma flows contained inside of the main block.
      *
      * @param flow
      */
-    void interact(IPlasmaFlow flow);
+    void interact(IPlasmaFlow flow, World world, int x, int y, int z);
 }

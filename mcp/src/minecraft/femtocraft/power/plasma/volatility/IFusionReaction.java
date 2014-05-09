@@ -101,7 +101,19 @@ public interface IFusionReaction {
      */
     long contributeReactionEnergy(long energy);
 
+    /**
+     * Called to begin the ignition process
+     */
     void beginIgnitionProcess();
 
+    /**
+     * Called to end the ignition process
+     */
     void endIgnitionProcess();
+
+    /**
+     * Brings an end to the self-sustaiing reaction.  Does nothing if
+     * reaction isn't self-sustaining (dormant or igniting)
+     */
+    void endSelfSustainingReaction();
 }

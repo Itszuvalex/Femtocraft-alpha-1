@@ -27,7 +27,9 @@ import femtocraft.power.plasma.IPlasmaFlow;
 public class VolatilityEventMagneticFluctuation extends
                                                 VolatilityEvent {
 
-    public VolatilityEventMagneticFluctuation(IPlasmaFlow creator, int volatilityLevel, int volatilityEnergy) {
+    public VolatilityEventMagneticFluctuation(IPlasmaFlow creator,
+                                              int volatilityLevel,
+                                              long volatilityEnergy) {
         super(creator, volatilityLevel, volatilityEnergy);
     }
 }

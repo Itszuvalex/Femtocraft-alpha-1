@@ -25,7 +25,9 @@ import femtocraft.power.plasma.IPlasmaFlow;
  * Created by Christopher Harris (Itszuvalex) on 5/6/14.
  */
 public class VolatilityEventPlasmaLeak extends VolatilityEvent {
-    public VolatilityEventPlasmaLeak(IPlasmaFlow creator, int volatilityLevel, int volatilityEnergy) {
+    public VolatilityEventPlasmaLeak(IPlasmaFlow creator,
+                                     int volatilityLevel,
+                                     long volatilityEnergy) {
         super(creator, volatilityLevel, volatilityEnergy);
     }
 }

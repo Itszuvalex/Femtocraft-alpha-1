@@ -40,8 +40,6 @@ import net.minecraft.world.World;
  * those they themselves write, shoot me an email and I'll whip something up.
  */
 public interface IPlasmaFlow {
-    public static final int temperatureToEnergy = 10000;
-
     /**
      * Should be called every tick by the container for the plasma.
      *
@@ -74,7 +72,7 @@ public interface IPlasmaFlow {
      * @param temperature To set temperature of the flow to.  For use by
      *                    other flows / Plasma prewarmers / Cores
      */
-    void setTemperature(int temperature);
+    void setTemperature(long temperature);
 
     /**
      * @return Volatility of the flow.  Bad things happen if this exceeds the
