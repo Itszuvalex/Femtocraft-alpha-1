@@ -19,7 +19,11 @@
 
 package femtocraft.power.plasma.volatility;
 
+import femtocraft.power.plasma.IFusionReactorComponent;
+import femtocraft.power.plasma.IFusionReactorCore;
+import femtocraft.power.plasma.IPlasmaContainer;
 import femtocraft.power.plasma.IPlasmaFlow;
+import net.minecraft.world.World;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/6/14.
@@ -29,5 +33,25 @@ public class VolatilityEventPlasmaLeak extends VolatilityEvent {
                                      int volatilityLevel,
                                      long volatilityEnergy) {
         super(creator, volatilityLevel, volatilityEnergy);
+    }
+
+    @Override
+    public void interact(IFusionReactorCore core, World world, int x, int y, int z) {
+        core.removeFlow(creator);
+    }
+
+    @Override
+    public void interact(IFusionReactorComponent component, World world, int x, int y, int z) {
+        component.removeFlow(creator);
+    }
+
+    @Override
+    public void interact(IPlasmaContainer container, World world, int x, int y, int z) {
+        container.removeFlow(creator);
+    }
+
+    @Override
+    public void interact(IPlasmaFlow flow, World world, int x, int y, int z) {
+
     }
 }

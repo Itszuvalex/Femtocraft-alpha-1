@@ -87,6 +87,17 @@ public interface IPlasmaFlow {
     boolean isRechargeable();
 
     /**
+     * @return True if flow is unstable.  Unstable flows always return higher
+     * volatility.
+     */
+    boolean isUnstable();
+
+    /**
+     * @param isUnstable Set the unstable flag of this flow.
+     */
+    void setUnstable(boolean isUnstable);
+
+    /**
      * Called by the core when it recharges this flow.
      *
      * @param reaction The reaction doing the recharging.

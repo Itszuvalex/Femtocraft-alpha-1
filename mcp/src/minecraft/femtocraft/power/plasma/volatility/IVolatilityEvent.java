@@ -36,6 +36,11 @@ import net.minecraft.world.World;
  * you can make reactors that never experience volatility events.  Or ones
  * that keep their stored flows safe, etc.  That's fine,
  * I just ask that you take that to heart and balance accordingly.
+ * <p/>
+ * All interaction calls are handled by the FemtocraftPlasmaUtils.apply
+ * function.  You do not need to loop through the flows in a container passed
+ * in the interact() call and call interact upon those flows yourself.  It
+ * will be taken care of for you.
  */
 public interface IVolatilityEvent {
     /**

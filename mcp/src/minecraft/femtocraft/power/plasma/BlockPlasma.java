@@ -20,10 +20,11 @@
 package femtocraft.power.plasma;
 
 import femtocraft.Femtocraft;
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Icon;
@@ -37,7 +38,7 @@ import java.util.Random;
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/6/14.
  */
-public class BlockPlasma extends Block {
+public class BlockPlasma extends BlockContainer {
     public static float damagePerTick = .2f;
 
     public BlockPlasma(int par1) {
@@ -150,5 +151,10 @@ public class BlockPlasma extends Block {
         if (!entity.isBurning()) {
             entity.setFire(4);
         }
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World world) {
+        return new TileEntityPlasma();
     }
 }

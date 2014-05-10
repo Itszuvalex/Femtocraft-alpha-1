@@ -32,6 +32,7 @@ import java.util.Random;
  * Created by Christopher Harris (Itszuvalex) on 5/8/14.
  */
 public class FusionReaction implements IFusionReaction, ISaveable {
+    public static int overChargeMultiplier = 10;
     public static int stabilityMultiplier = 1000;
     public static double ignitionSucessfulPowerMultiplier = .5d;
     public static double reactionLossPerTickMultiplier = .99d;
@@ -84,6 +85,9 @@ public class FusionReaction implements IFusionReaction, ISaveable {
             if (ticksToGeneratePlasmaFlow-- <= 0) {
                 core.addFlow(generateFlow());
                 generateTicksToPlasmaFlow();
+            }
+            if (energy > (getReactionThreshold() * overChargeMultiplier)) {
+                core.addFlow(generateFlow());
             }
             if (getReactionInstability() > core.getStabilityRating()) {
                 long eventEnergy = (long) (random.nextDouble() * this.energy *

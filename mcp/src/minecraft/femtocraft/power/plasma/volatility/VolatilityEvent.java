@@ -19,13 +19,13 @@
 
 package femtocraft.power.plasma.volatility;
 
-import femtocraft.power.plasma.*;
-import net.minecraft.world.World;
+import femtocraft.power.plasma.FemtocraftPlasmaUtils;
+import femtocraft.power.plasma.IPlasmaFlow;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/6/14.
  */
-public class VolatilityEvent implements IVolatilityEvent {
+public abstract class VolatilityEvent implements IVolatilityEvent {
     protected final IPlasmaFlow creator;
     protected int volatilityLevel;
     protected long volatilityEnergy;
@@ -53,28 +53,5 @@ public class VolatilityEvent implements IVolatilityEvent {
     @Override
     public long volatilityEnergy() {
         return volatilityEnergy;
-    }
-
-    @Override
-    public void interact(IFusionReactorCore core, World world, int x, int y,
-                         int z) {
-
-    }
-
-    @Override
-    public void interact(IFusionReactorComponent component, World world,
-                         int x, int y, int z) {
-
-    }
-
-    @Override
-    public void interact(IPlasmaContainer container, World world, int x,
-                         int y, int z) {
-
-    }
-
-    @Override
-    public void interact(IPlasmaFlow flow, World world, int x, int y, int z) {
-
     }
 }

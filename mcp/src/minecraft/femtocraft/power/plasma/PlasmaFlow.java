@@ -203,10 +203,19 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
         return true;
     }
 
+    @Override
+    public boolean isUnstable() {
+        return unstable;
+    }
+
+    @Override
+    public void setUnstable(boolean isUnstable) {
+        unstable = isUnstable;
+    }
+
 
     @Override
     public void recharge(IFusionReaction reaction) {
-        boolean unstableFlow = false;
         long energy = random.nextInt(getEnergyRequirementMax -
                                              energyRequirementMin) +
                 energyRequirementMin;
@@ -214,7 +223,7 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
 
         if (energy > reaction.getReactionEnergy()) {
             energy = reaction.getReactionEnergy();
-            unstableFlow = true;
+            unstable = true;
         }
 
         reaction.consumeReactionEnergy(energy);
@@ -260,6 +269,16 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
 
     @Override
     public IVolatilityEvent onSpontaneousEvent(IPlasmaContainer container) {
+        switch (random.nextInt(4)) {
+            case 0:
+                return onPlasmaOverflow(container);
+            case 1:
+                return onIncompleteCircuit(container);
+            case 2:
+                return onOverheat(container);
+            case 3:
+                return onRecharge(container);
+        }
         return null;
     }
 
