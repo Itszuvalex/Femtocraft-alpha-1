@@ -206,6 +206,9 @@ public class FemtocraftConfigs {
     int FemtocraftMassBlockID = 450;
     public static
     @CfgId(block = true)
+    int BlockPlasmaID = 451;
+    public static
+    @CfgId(block = true)
     int microCableID = 500;
     public static
     @CfgId(block = true)

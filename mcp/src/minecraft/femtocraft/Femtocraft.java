@@ -55,6 +55,7 @@ import femtocraft.power.items.ItemBlockMicroCube;
 import femtocraft.power.items.ItemMicroCoil;
 import femtocraft.power.items.ItemSpoolGold;
 import femtocraft.power.items.ItemSpoolPlatinum;
+import femtocraft.power.plasma.BlockPlasma;
 import femtocraft.proxy.ProxyClient;
 import femtocraft.proxy.ProxyCommon;
 import femtocraft.research.blocks.BlockResearchComputer;
@@ -157,6 +158,9 @@ public class Femtocraft {
     // liquids
     public static Fluid mass;
     public static BlockFluidMass mass_block;
+
+    // plasma
+    public static Block blockPlasma;
 
     // items
     public static Item ingotTitanium;
@@ -530,6 +534,9 @@ public class Femtocraft {
         mass_block = new BlockFluidMass(FemtocraftConfigs.FemtocraftMassBlockID);
         GameRegistry.registerBlock(mass_block, "Mass");
         LanguageRegistry.addName(mass_block, "Mass");
+
+        //plasma
+        blockPlasma = new BlockPlasma(FemtocraftConfigs.BlockPlasmaID);
 
         // items
         ingotTitanium = new ItemIngotTitanium(FemtocraftConfigs.ingotTitaniumID)

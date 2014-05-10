@@ -21,6 +21,7 @@ package femtocraft.proxy;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import femtocraft.industry.tiles.*;
+import femtocraft.power.plasma.TileEntityPlasma;
 import femtocraft.power.tiles.*;
 import femtocraft.research.tiles.TileEntityResearchComputer;
 import femtocraft.research.tiles.TileEntityResearchConsole;
@@ -106,6 +107,9 @@ public class ProxyCommon {
                                         "blockOrbitalEqualizer");
         GameRegistry.registerTileEntity(TileEntityNullEqualizer.class,
                                         "blockNullEqualizer");
+
+        GameRegistry.registerTileEntity(TileEntityPlasma.class,
+                                        "TileEntityPlasma");
     }
 
     public void registerBlockRenderers() {

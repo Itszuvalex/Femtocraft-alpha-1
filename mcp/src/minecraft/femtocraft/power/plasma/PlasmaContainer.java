@@ -29,6 +29,8 @@ import net.minecraftforge.common.ForgeDirection;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/2/14.
@@ -113,7 +115,10 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
 
     @Override
     public Collection<IPlasmaFlow> getFlows() {
-        return flows;
+        List<IPlasmaFlow> ret = new ArrayList<IPlasmaFlow>();
+        Collections.copy(flows, ret);
+        ret.removeAll(pendingRemove);
+        return ret;
     }
 
     @Override

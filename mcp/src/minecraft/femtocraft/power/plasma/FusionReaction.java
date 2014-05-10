@@ -19,7 +19,6 @@
 
 package femtocraft.power.plasma;
 
-import femtocraft.power.plasma.volatility.IFusionReaction;
 import femtocraft.power.plasma.volatility.VolatilityEventMagneticFluctuation;
 import femtocraft.utils.FemtocraftDataUtils;
 import femtocraft.utils.ISaveable;
