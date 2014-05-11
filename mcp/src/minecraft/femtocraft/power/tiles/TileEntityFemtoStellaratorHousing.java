@@ -64,6 +64,7 @@ public class TileEntityFemtoStellaratorHousing extends TileEntityBase
 
     @Override
     public void femtocraftServerUpdate() {
+        super.femtocraftServerUpdate();
         if (checkForCore) {
             TileEntity te = coreLocation.getTileEntity();
             if (te instanceof IFusionReactorCore) {
@@ -76,7 +77,7 @@ public class TileEntityFemtoStellaratorHousing extends TileEntityBase
     @Override
     public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
         super.readFromNBT(par1nbtTagCompound);
-        if (core == null) {
+        if (coreLocation != null) {
             TileEntity te = coreLocation.getTileEntity();
             if (te instanceof IFusionReactorCore) {
                 core = (IFusionReactorCore) te;
@@ -85,11 +86,6 @@ public class TileEntityFemtoStellaratorHousing extends TileEntityBase
                 checkForCore = true;
             }
         }
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-        super.writeToNBT(par1nbtTagCompound);
     }
 
     @Override
@@ -118,6 +114,7 @@ public class TileEntityFemtoStellaratorHousing extends TileEntityBase
             coreLocation = new WorldLocation(worldObj, info.x(), info.y(),
                                              info.z());
             core = (IFusionReactorCore) coreLocation.getTileEntity();
+            setModified();
             return true;
         }
         return false;
@@ -128,6 +125,7 @@ public class TileEntityFemtoStellaratorHousing extends TileEntityBase
         if (info.breakMultiBlock(world, x, y, z)) {
             core = null;
             coreLocation = null;
+            setModified();
             return true;
         }
         return false;

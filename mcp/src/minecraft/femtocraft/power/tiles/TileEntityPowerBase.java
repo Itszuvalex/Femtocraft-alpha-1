@@ -51,14 +51,17 @@ public class TileEntityPowerBase extends TileEntityBase implements
 
     public void setMaxStorage(int maxStorage_) {
         container.setMaxPower(maxStorage_);
+        setModified();
     }
 
     public void setCurrentStorage(int currentStorage) {
         container.setCurrentPower(currentStorage);
+        setModified();
     }
 
     public void setTechLevel(EnumTechLevel level) {
         container.setTechLevel(level);
+        setModified();
     }
 
     public boolean isConnected(int i) {
@@ -107,12 +110,20 @@ public class TileEntityPowerBase extends TileEntityBase implements
 
     @Override
     public int charge(ForgeDirection from, int amount) {
-        return container.charge(amount);
+        int ret = container.charge(amount);
+        if (ret > 0) {
+            setModified();
+        }
+        return ret;
     }
 
     @Override
     public boolean consume(int amount) {
-        return container.consume(amount);
+        if (container.consume(amount)) {
+            setModified();
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -228,6 +239,8 @@ public class TileEntityPowerBase extends TileEntityBase implements
                 maxSpreadThisTick -= powerconsumed;
             }
         }
+
+        setModified();
     }
 
 
@@ -262,8 +275,8 @@ public class TileEntityPowerBase extends TileEntityBase implements
             }
         }
         if (changed) {
-            this.worldObj.markBlockForRenderUpdate(this.xCoord, this.yCoord,
-                                                   this.zCoord);
+            setModified();
+            setRenderUpdate();
         }
     }
 

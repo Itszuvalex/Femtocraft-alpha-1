@@ -19,10 +19,228 @@
 
 package femtocraft.power.tiles;
 
-public class TileEntityFemtoStellaratorOpticalMaser {
+import femtocraft.core.multiblock.IMultiBlockComponent;
+import femtocraft.core.multiblock.MultiBlockInfo;
+import femtocraft.managers.research.EnumTechLevel;
+import femtocraft.power.plasma.IFusionReactorComponent;
+import femtocraft.power.plasma.IFusionReactorCore;
+import femtocraft.power.plasma.IPlasmaContainer;
+import femtocraft.power.plasma.IPlasmaFlow;
+import femtocraft.power.plasma.volatility.IVolatilityEvent;
+import femtocraft.utils.FemtocraftDataUtils;
+import femtocraft.utils.WorldLocation;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
+
+import java.util.Collection;
+
+public class TileEntityFemtoStellaratorOpticalMaser extends
+                                                    TileEntityPowerConsumer
+        implements IFusionReactorComponent, IMultiBlockComponent {
+
+    public static int powerStorage = 10000000;
+    public static int warmupThreshold = 1000000;
+    public static int powerTransferPerTick = 50000;
+    public static int temperatureRating;
+    public static int stability;
+    @FemtocraftDataUtils.Saveable
+    private boolean igniting;
+    @FemtocraftDataUtils.Saveable
+    private boolean sustaining;
+    @FemtocraftDataUtils.Saveable
+    private boolean warmed;
+    @FemtocraftDataUtils.Saveable
+    private MultiBlockInfo info;
+    private boolean checkForCore = false;
+    private IFusionReactorCore core;
+    @FemtocraftDataUtils.Saveable
+    private WorldLocation coreLocation;
 
     public TileEntityFemtoStellaratorOpticalMaser() {
-        // TODO Auto-generated constructor stub
+        setTechLevel(EnumTechLevel.FEMTO);
+        setMaxStorage(powerStorage);
+        info = new MultiBlockInfo();
+        igniting = false;
+        sustaining = false;
+        warmed = false;
     }
 
+    @Override
+    public void femtocraftServerUpdate() {
+        super.femtocraftServerUpdate();
+        if (checkForCore) {
+            TileEntity te = coreLocation.getTileEntity();
+            if (te instanceof IFusionReactorCore) {
+                core = (IFusionReactorCore) te;
+                checkForCore = false;
+            }
+        }
+
+        if (igniting || sustaining) {
+            if (!warmed) {
+                if (getCurrentPower() >= warmupThreshold) {
+                    warmed = true;
+                    setModified();
+                }
+            }
+            else {
+                if (core != null && consume(powerTransferPerTick)) {
+                    core.contributeCoreEnergy(powerTransferPerTick);
+                    setModified();
+                }
+                else {
+                    warmed = false;
+                    setModified();
+                }
+            }
+        }
+        else {
+            warmed = false;
+            setModified();
+        }
+    }
+
+    @Override
+    public void beginIgnitionProcess(IFusionReactorCore core) {
+        igniting = true;
+        sustaining = false;
+        warmed = false;
+        setModified();
+    }
+
+    @Override
+    public void endIgnitionProcess(IFusionReactorCore core) {
+        igniting = false;
+        sustaining = core.isSelfSustaining();
+        setModified();
+    }
+
+    @Override
+    public IFusionReactorCore getCore() {
+        return core;
+    }
+
+    @Override
+    public boolean isValidMultiBlock() {
+        return info.isValidMultiBlock();
+    }
+
+    @Override
+    public boolean formMultiBlock(World world, int x, int y, int z) {
+        if (info.formMultiBlock(world, x, y, z)) {
+            setModified();
+            coreLocation = new WorldLocation(world, x, y, z);
+            core = (IFusionReactorCore) coreLocation.getTileEntity();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
+        super.readFromNBT(par1nbtTagCompound);
+        if (coreLocation != null) {
+            TileEntity te = coreLocation.getTileEntity();
+            if (te instanceof IFusionReactorCore) {
+                core = (IFusionReactorCore) te;
+            }
+            else {
+                checkForCore = true;
+            }
+        }
+    }
+
+    @Override
+    public boolean breakMultiBlock(World world, int x, int y, int z) {
+        if (info.breakMultiBlock(world, x, y, z)) {
+            setModified();
+            core = null;
+            coreLocation = null;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public MultiBlockInfo getInfo() {
+        return info;
+    }
+
+    @Override
+    public IPlasmaContainer getInput() {
+        return core != null ? core.getInput() : null;
+    }
+
+    @Override
+    public IPlasmaContainer getOutput() {
+        return core != null ? core.getOutput() : null;
+    }
+
+    @Override
+    public boolean setInput(IPlasmaContainer container, ForgeDirection dir) {
+        return core != null && core.setInput(container, dir);
+    }
+
+    @Override
+    public boolean setOutput(IPlasmaContainer container, ForgeDirection
+            dir) {
+        return core != null && core.setOutput(container, dir);
+    }
+
+    @Override
+    public ForgeDirection getInputDir() {
+        return core != null ? core.getInputDir() : null;
+    }
+
+    @Override
+    public ForgeDirection getOutputDir() {
+        return core != null ? core.getOutputDir() : null;
+    }
+
+    @Override
+    public boolean addFlow(IPlasmaFlow flow) {
+        return core != null && core.addFlow(flow);
+    }
+
+    @Override
+    public Collection<IPlasmaFlow> getFlows() {
+        return core != null ? core.getFlows() : null;
+    }
+
+    @Override
+    public boolean removeFlow(IPlasmaFlow flow) {
+        return core != null && core.removeFlow(flow);
+    }
+
+    @Override
+    public int getMaxFlows() {
+        return core != null ? core.getMaxFlows() : 0;
+    }
+
+    @Override
+    public void update(World world, int x, int y, int z) {
+
+    }
+
+    @Override
+    public void onVolatilityEvent(IVolatilityEvent event) {
+
+    }
+
+    @Override
+    public void onPostVolatilityEvent(IVolatilityEvent event) {
+
+    }
+
+    @Override
+    public int getTemperatureRating() {
+        return temperatureRating;
+    }
+
+    @Override
+    public int getStabilityRating() {
+        return stability;
+    }
 }
