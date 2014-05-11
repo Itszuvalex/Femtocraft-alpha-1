@@ -39,10 +39,11 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
     public static int capacity;
     public static int temperatureRating;
     public static int stability;
+    //For display purposes
+    @FemtocraftDataUtils.Saveable(desc = true)
+    public boolean containsPlasma;
     @FemtocraftDataUtils.Saveable
     private PlasmaContainer plasma;
-    @FemtocraftDataUtils.Saveable(desc = true)
-    private boolean containsPlasma;
 
     public TileEntityPlasmaConduit() {
         plasma = new PlasmaContainer(capacity, stability, temperatureRating);
@@ -54,7 +55,9 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
     }
 
     public boolean searchForInput() {
-        if (plasma.getInput() != null) return true;
+        if (plasma.getInput() != null) {
+            return true;
+        }
         for (int i = 0; i < 6; ++i) {
             ForgeDirection dir = ForgeDirection.getOrientation(i);
             TileEntity te = worldObj.getBlockTileEntity(xCoord + dir.offsetX,
@@ -63,8 +66,10 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
             if (te instanceof IPlasmaContainer) {
                 IPlasmaContainer plasmaContainer = (IPlasmaContainer) te;
                 if (plasmaContainer.getOutput() == null) {
-                    plasmaContainer.setOutput(plasma, dir.getOpposite());
+                    plasmaContainer.setOutput(this, dir.getOpposite());
                     plasma.setInput(plasmaContainer, dir);
+                    setModified();
+                    setRenderUpdate();
                     return true;
                 }
             }
@@ -74,20 +79,38 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
     }
 
     public boolean searchForOutput() {
-        if (plasma.getOutput() != null) return true;
+        if (plasma.getOutput() != null) {
+            return true;
+        }
         for (int i = 0; i < 6; ++i) {
             ForgeDirection dir = ForgeDirection.getOrientation(i);
-
+            TileEntity te = worldObj.getBlockTileEntity(xCoord + dir.offsetX,
+                                                        yCoord + dir.offsetY,
+                                                        zCoord + dir.offsetZ);
+            if (te instanceof IPlasmaContainer) {
+                IPlasmaContainer plasmaContainer = (IPlasmaContainer) te;
+                if (plasmaContainer.getInput() == null) {
+                    plasmaContainer.setInput(this, dir.getOpposite());
+                    plasma.setOutput(plasmaContainer, dir);
+                    setModified();
+                    setRenderUpdate();
+                    return true;
+                }
+            }
         }
         return false;
     }
 
     public void clearInput() {
         plasma.setInput(null, ForgeDirection.UNKNOWN);
+        setModified();
+        setRenderUpdate();
     }
 
     public void clearOutput() {
         plasma.setOutput(null, ForgeDirection.UNKNOWN);
+        setModified();
+        setRenderUpdate();
     }
 
     public void searchForConnections() {
@@ -101,8 +124,8 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
         super.femtocraftServerUpdate();
         boolean prev = hasFlows();
         update(worldObj, xCoord, yCoord, zCoord);
-        boolean post = hasFlows();
-        if (prev != post) {
+        containsPlasma = hasFlows();
+        if (prev != containsPlasma) {
             setRenderUpdate();
         }
     }
@@ -124,12 +147,22 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
 
     @Override
     public boolean setInput(IPlasmaContainer container, ForgeDirection dir) {
-        return plasma.setInput(container, dir);
+        if (plasma.setInput(container, dir)) {
+            setModified();
+            setRenderUpdate();
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean setOutput(IPlasmaContainer container, ForgeDirection dir) {
-        return plasma.setOutput(container, dir);
+        if (plasma.setOutput(container, dir)) {
+            setModified();
+            setRenderUpdate();
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -144,7 +177,11 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
 
     @Override
     public boolean addFlow(IPlasmaFlow flow) {
-        return plasma.addFlow(flow);
+        if (plasma.addFlow(flow)) {
+            setModified();
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -154,7 +191,11 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
 
     @Override
     public boolean removeFlow(IPlasmaFlow flow) {
-        return plasma.removeFlow(flow);
+        if (plasma.removeFlow(flow)) {
+            setModified();
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -165,16 +206,19 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
     @Override
     public void update(World world, int x, int y, int z) {
         plasma.update(world, x, y, z);
+        setModified();
     }
 
     @Override
     public void onVolatilityEvent(IVolatilityEvent event) {
         plasma.onVolatilityEvent(event);
+        setModified();
     }
 
     @Override
     public void onPostVolatilityEvent(IVolatilityEvent event) {
         plasma.onPostVolatilityEvent(event);
+        setModified();
     }
 
     @Override

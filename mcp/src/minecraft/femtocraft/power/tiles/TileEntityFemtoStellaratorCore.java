@@ -101,12 +101,20 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
 
     @Override
     public boolean consumeCoreEnergy(long energy) {
-        return core.consumeCoreEnergy(energy);
+        if (core.consumeCoreEnergy(energy)) {
+            setModified();
+            return true;
+        }
+        return false;
     }
 
     @Override
     public long contributeCoreEnergy(long energy) {
-        return core.contributeCoreEnergy(energy);
+        long amount = core.contributeCoreEnergy(energy);
+        if (amount > 0) {
+            setModified();
+        }
+        return amount;
     }
 
     @Override
@@ -116,33 +124,43 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
 
     @Override
     public boolean addComponent(IFusionReactorComponent component) {
-        return core.addComponent(component);
+        if (core.addComponent(component)) {
+            setModified();
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean removeComponent(IFusionReactorComponent component) {
-        return core.removeComponent(component);
+        if (core.removeComponent(component)) {
+            setModified();
+            return true;
+        }
+        return false;
     }
 
     @Override
     public void beginIgnitionProcess(IFusionReactorCore core) {
         this.core.beginIgnitionProcess(core);
         for (IFusionReactorComponent component : core.getComponents()) {
-            component.beginIgnitionProcess(this.core);
+            component.beginIgnitionProcess(this);
         }
+        setModified();
     }
 
     @Override
     public void endIgnitionProcess(IFusionReactorCore core) {
         this.core.endIgnitionProcess(core);
         for (IFusionReactorComponent component : core.getComponents()) {
-            component.endIgnitionProcess(this.core);
+            component.endIgnitionProcess(this);
         }
+        setModified();
     }
 
     @Override
     public IFusionReactorCore getCore() {
-        return core;
+        return this;
     }
 
     @Override
@@ -152,12 +170,20 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
 
     @Override
     public boolean formMultiBlock(World world, int x, int y, int z) {
-        return info.formMultiBlock(world, x, y, z);
+        if (info.formMultiBlock(world, x, y, z)) {
+            setModified();
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean breakMultiBlock(World world, int x, int y, int z) {
-        return info.breakMultiBlock(world, x, y, z);
+        if (info.breakMultiBlock(world, x, y, z)) {
+            setModified();
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -177,12 +203,20 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
 
     @Override
     public boolean setInput(IPlasmaContainer container, ForgeDirection dir) {
-        return core.setInput(container, dir);
+        if (core.setInput(container, dir)) {
+            setModified();
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean setOutput(IPlasmaContainer container, ForgeDirection dir) {
-        return core.setOutput(container, dir);
+        if (core.setOutput(container, dir)) {
+            setModified();
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -197,7 +231,11 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
 
     @Override
     public boolean addFlow(IPlasmaFlow flow) {
-        return core.addFlow(flow);
+        if (core.addFlow(flow)) {
+            setModified();
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -207,7 +245,11 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
 
     @Override
     public boolean removeFlow(IPlasmaFlow flow) {
-        return core.removeFlow(flow);
+        if (core.removeFlow(flow)) {
+            setModified();
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -218,16 +260,19 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
     @Override
     public void update(World world, int x, int y, int z) {
         core.update(world, x, y, z);
+        setModified();
     }
 
     @Override
     public void onVolatilityEvent(IVolatilityEvent event) {
         core.onVolatilityEvent(event);
+        setModified();
     }
 
     @Override
     public void onPostVolatilityEvent(IVolatilityEvent event) {
         core.onPostVolatilityEvent(event);
+        setModified();
     }
 
     @Override
