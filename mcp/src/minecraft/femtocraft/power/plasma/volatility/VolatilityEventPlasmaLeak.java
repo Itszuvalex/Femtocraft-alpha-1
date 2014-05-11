@@ -67,11 +67,14 @@ public class VolatilityEventPlasmaLeak extends VolatilityEvent {
     private void extractFlowsAndPurge(IPlasmaContainer container,
                                       World world, int x, int y, int z) {
         long totalEnergy = volatilityEnergy;
-        for (IPlasmaFlow flow : container.getFlows()) {
-            if (flow.isUnstable() || flow.getVolatility() > volatilityLevel) {
-                totalEnergy += flow.getTemperature() * FemtocraftPlasmaUtils
-                        .temperatureToEnergy;
-                container.removeFlow(flow);
+        if (container.getFlows() != null) {
+
+            for (IPlasmaFlow flow : container.getFlows()) {
+                if (flow.isUnstable() || flow.getVolatility() > volatilityLevel) {
+                    totalEnergy += flow.getTemperature() * FemtocraftPlasmaUtils
+                            .temperatureToEnergy;
+                    container.removeFlow(flow);
+                }
             }
         }
 
@@ -86,7 +89,6 @@ public class VolatilityEventPlasmaLeak extends VolatilityEvent {
     }
 
     private boolean placeSegment(WorldLocation loc) {
-        boolean placed = false;
         ForgeDirection dir = ForgeDirection.UNKNOWN;
         int[] dirs = new int[6];
         for (int i = 0; i < dirs.length; i++) {

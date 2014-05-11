@@ -181,4 +181,17 @@ public class TileEntityBase extends TileEntity {
         return false;
     }
 
+    protected void setRenderUpdate() {
+        worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+    }
+
+    protected void setUpdate() {
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+    }
+
+    protected void setModified() {
+        worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
+    }
+
+
 }

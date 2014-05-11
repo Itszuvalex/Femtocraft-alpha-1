@@ -56,6 +56,8 @@ public class ProxyClient extends ProxyCommon {
         // RenderingRegistry.registerEntityRenderingHandler(entityClass,
         // renderer);
         // registerBlockHandler
+//        ClientRegistry.bindTileEntitySpecialRenderer
+//                (TileEntityFemtoStellaratorCore.class, new RenderStellaratorCore());
     }
 
 

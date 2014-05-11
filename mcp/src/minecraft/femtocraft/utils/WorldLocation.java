@@ -19,7 +19,9 @@
 
 package femtocraft.utils;
 
+import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 
@@ -59,5 +61,17 @@ public class WorldLocation implements ISaveable {
         y = compound.getInteger("y");
         z = compound.getInteger("z");
         world = DimensionManager.getWorld(compound.getInteger("dim"));
+    }
+
+    public TileEntity getTileEntity() {
+        return world.getBlockTileEntity(x, y, z);
+    }
+
+    public Block getBlock() {
+        return Block.blocksList[getBlockID()];
+    }
+
+    public int getBlockID() {
+        return world.getBlockId(x, y, z);
     }
 }

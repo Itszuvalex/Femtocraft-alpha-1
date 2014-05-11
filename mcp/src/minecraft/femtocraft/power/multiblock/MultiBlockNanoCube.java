@@ -163,17 +163,10 @@ public class MultiBlockNanoCube implements IMultiBlock {
     @Override
     public boolean isBlockInMultiBlock(World world, int x, int y, int z,
                                        int c_x, int c_y, int c_z) {
-        if (y < c_y || y > (c_y + 2)) {
-            return false;
-        }
-        if (x < (c_x - 1) || x > (c_x + 1)) {
-            return false;
-        }
-        if (z < (c_z - 1) || z > (c_z + 1)) {
-            return false;
-        }
+        return y >= c_y && y <= (c_y + 2) &&
+                x >= (c_x - 1) && x <= (c_x + 1) &&
+                z >= (c_z - 1) && z <= (c_z + 1);
 
-        return true;
     }
 
     @Override
@@ -185,14 +178,14 @@ public class MultiBlockNanoCube implements IMultiBlock {
                 for (int k = 0; k <= 2; ++k) {
                     TileEntity te = world.getBlockTileEntity(x + i, y + k, z
                             + j);
-                    if (!(te instanceof IMultiBlockComponent)) {
+                    if (te instanceof IMultiBlockComponent) {
+                        result = ((IMultiBlockComponent) te).formMultiBlock(
+                                world, x, y, z) && result;
+                    }
+                    else {
                         if (!(i == 0 && j == 0 && k == 1)) {
                             result = false;
                         }
-                    }
-                    else {
-                        result = ((IMultiBlockComponent) te).formMultiBlock(
-                                world, x, y, z) && result;
                     }
                 }
             }
@@ -226,14 +219,14 @@ public class MultiBlockNanoCube implements IMultiBlock {
                 for (int k = 0; k <= 2; ++k) {
                     TileEntity te = world.getBlockTileEntity(x + i, y + k, z
                             + j);
-                    if (!(te instanceof IMultiBlockComponent)) {
+                    if (te instanceof IMultiBlockComponent) {
+                        result = ((IMultiBlockComponent) te).breakMultiBlock(
+                                world, x, y, z) && result;
+                    }
+                    else {
                         if (!(i == 0 && j == 0 && k == 1)) {
                             result = false;
                         }
-                    }
-                    else {
-                        result = ((IMultiBlockComponent) te).breakMultiBlock(
-                                world, x, y, z) && result;
                     }
                 }
             }

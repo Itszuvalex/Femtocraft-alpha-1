@@ -35,13 +35,21 @@ import java.util.Collection;
  */
 public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
                                                                    IFusionReactorCore, IMultiBlockComponent {
+    public static int maxContainedFlows = 10;
+    public static int stability = 5000;
+    public static int temperatureRating = 8000;
+    public static int ignitionProcessWindow = 20 * 10;
+    public static long reactionThreshold = 15000000;
+    public static long reactionFailureThreshold = 2500000;
+    public static int plasmaFlowTicksToGenerateMin = 20;
+    public static int plasmaFlowTicksToGenerateMax = 200;
     @FemtocraftDataUtils.Saveable
     private FusionReactorCore core;
     @FemtocraftDataUtils.Saveable
     private MultiBlockInfo info;
 
     public TileEntityFemtoStellaratorCore() {
-        core = new FusionReactorCore();
+        core = new FusionReactorCore(maxContainedFlows, stability, temperatureRating, ignitionProcessWindow, reactionThreshold, reactionFailureThreshold, plasmaFlowTicksToGenerateMin, plasmaFlowTicksToGenerateMax);
         info = new MultiBlockInfo();
     }
 
@@ -118,12 +126,18 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
 
     @Override
     public void beginIgnitionProcess(IFusionReactorCore core) {
-        core.beginIgnitionProcess(core);
+        this.core.beginIgnitionProcess(core);
+        for (IFusionReactorComponent component : core.getComponents()) {
+            component.beginIgnitionProcess(this.core);
+        }
     }
 
     @Override
     public void endIgnitionProcess(IFusionReactorCore core) {
-        core.endIgnitionProcess(core);
+        this.core.endIgnitionProcess(core);
+        for (IFusionReactorComponent component : core.getComponents()) {
+            component.endIgnitionProcess(this.core);
+        }
     }
 
     @Override

@@ -19,7 +19,10 @@
 
 package femtocraft.power.plasma;
 
-import femtocraft.power.plasma.volatility.*;
+import femtocraft.power.plasma.volatility.IVolatilityEvent;
+import femtocraft.power.plasma.volatility.VolatilityEventMagneticFluctuation;
+import femtocraft.power.plasma.volatility.VolatilityEventPlasmaLeak;
+import femtocraft.power.plasma.volatility.VolatilityEventTemperatureSpike;
 import femtocraft.utils.FemtocraftDataUtils;
 import femtocraft.utils.ISaveable;
 import net.minecraft.nbt.NBTTagCompound;
@@ -39,9 +42,9 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
     /**
      * Kelvin
      */
-    public static final int energyRequirementMin = 50000;
+    public static final int energyRequirementMin = 500000;
     public static final int temperatureMin = energyRequirementMin / FemtocraftPlasmaUtils.temperatureToEnergy;
-    public static final int getEnergyRequirementMax = 100000;
+    public static final int getEnergyRequirementMax = 10000000;
     public static final int temperatureMax = getEnergyRequirementMax /
             FemtocraftPlasmaUtils.temperatureToEnergy;
     private static final int volatilityMin = 100;

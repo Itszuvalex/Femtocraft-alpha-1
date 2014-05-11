@@ -210,21 +210,21 @@ public class MultiBlockFemtoCube implements IMultiBlock {
             for (int j = -2; j <= 2; ++j) {
                 for (int k = 0; k <= 4; ++k) {
                     // Ignore center
-                    if ((i > -2 && i < 2) && (j > -2 && j < 2)
-                            && (k > 0 && k < 4)) {
+                    if (i > -2 && i < 2 && j > -2 && j < 2
+                            && k > 0 && k < 4) {
                         continue;
                     }
 
                     TileEntity te = world.getBlockTileEntity(x + i, y + k, z
                             + j);
-                    if (!(te instanceof IMultiBlockComponent)) {
+                    if (te instanceof IMultiBlockComponent) {
+                        result = ((IMultiBlockComponent) te).formMultiBlock(
+                                world, x, y, z) && result;
+                    }
+                    else {
                         if (!(i == 0 && j == 0 && k == 1)) {
                             result = false;
                         }
-                    }
-                    else {
-                        result = ((IMultiBlockComponent) te).formMultiBlock(
-                                world, x, y, z) && result;
                     }
                 }
             }
@@ -257,21 +257,21 @@ public class MultiBlockFemtoCube implements IMultiBlock {
             for (int j = -2; j <= 2; ++j) {
                 for (int k = 0; k <= 4; ++k) {
                     // Ignore center
-                    if ((i > -2 && i < 2) && (j > -2 && j < 2)
-                            && (k > 0 && k < 4)) {
+                    if (i > -2 && i < 2 && j > -2 && j < 2
+                            && k > 0 && k < 4) {
                         continue;
                     }
 
                     TileEntity te = world.getBlockTileEntity(x + i, y + k, z
                             + j);
-                    if (!(te instanceof IMultiBlockComponent)) {
+                    if (te instanceof IMultiBlockComponent) {
+                        result = ((IMultiBlockComponent) te).breakMultiBlock(
+                                world, x, y, z) && result;
+                    }
+                    else {
                         if (!(i == 0 && j == 0 && k == 1)) {
                             result = false;
                         }
-                    }
-                    else {
-                        result = ((IMultiBlockComponent) te).breakMultiBlock(
-                                world, x, y, z) && result;
                     }
                 }
             }

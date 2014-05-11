@@ -50,7 +50,9 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
     private ArrayList<IPlasmaFlow> pendingRemove;
     private IPlasmaContainer input;
     private IPlasmaContainer output;
+    @FemtocraftDataUtils.Saveable
     private ForgeDirection inputDir;
+    @FemtocraftDataUtils.Saveable
     private ForgeDirection outputDir;
 
     public PlasmaContainer(int capacity, int stability, int temperature) {

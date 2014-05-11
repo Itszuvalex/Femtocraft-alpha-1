@@ -23,6 +23,7 @@ import femtocraft.Femtocraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidTank;
 
 import java.lang.annotation.Retention;
@@ -602,6 +603,37 @@ public class FemtocraftDataUtils {
         // .getCompoundTag(saveable.getName())));
         // }
         // });
+
+        // ForgeDirection
+        registerSaveManager(ForgeDirection.class, new SaveManager() {
+
+            @Override
+            public void saveToNBT(NBTTagCompound compound, Field saveable,
+                                  Object obj) throws IllegalArgumentException,
+                                                     IllegalAccessException {
+
+
+                NBTTagCompound container = new NBTTagCompound();
+                ForgeDirection direction = (ForgeDirection) saveable.get(obj);
+                if (direction == null) {
+                    return;
+                }
+                container.setInteger(saveable.getName(), direction.ordinal());
+            }
+
+            @Override
+            public void readFromNBT(NBTTagCompound compound, Field saveable,
+                                    Object obj) throws IllegalArgumentException,
+                                                       IllegalAccessException {
+                if (!compound.hasKey(saveable.getName())) {
+                    saveable.set(obj, null);
+                    return;
+                }
+                ForgeDirection direction = ForgeDirection.getOrientation
+                        (compound.getInteger(saveable.getName()));
+                saveable.set(obj, direction);
+            }
+        });
 
         // FluidTank
         registerSaveManager(FluidTank.class, new SaveManager() {

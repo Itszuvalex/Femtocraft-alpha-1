@@ -19,8 +19,114 @@
 
 package femtocraft.power.multiblock;
 
+import femtocraft.core.multiblock.IMultiBlock;
+import femtocraft.core.multiblock.IMultiBlockComponent;
+import femtocraft.power.plasma.IFusionReactorComponent;
+import femtocraft.power.plasma.IFusionReactorCore;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/2/14.
  */
-public class MultiBlockFemtoStellarator {
+public class MultiBlockFemtoStellarator implements IMultiBlock {
+    public static MultiBlockFemtoStellarator instance = new
+            MultiBlockFemtoStellarator();
+
+    private MultiBlockFemtoStellarator() {
+    }
+
+    @Override
+    public boolean canForm(World world, int x, int y, int z) {
+        return checkComponents(world, x, y, z, false);
+    }
+
+    @Override
+    public boolean canFormStrict(World world, int x, int y, int z) {
+        return checkComponents(world, x, y, z, true);
+    }
+
+    private boolean checkComponents(World world, int x, int y, int z,
+                                    boolean strict) {
+        for (int i = -2; i <= 2; ++i) {
+            for (int j = -2; j <= 2; ++j) {
+                for (int k = -2; k <= 2; ++k) {
+                    TileEntity te = world.getBlockTileEntity(x + i, y + k, z
+                            + j);
+                    if (!(i == 0 && j == 0 & k == 0 ? te instanceof
+                            IFusionReactorCore : te
+                            instanceof IFusionReactorComponent && !(te
+                            instanceof IFusionReactorCore) && te instanceof
+                            IMultiBlockComponent)) {
+                        return false;
+                    }
+
+                    if (strict) {
+                        if (((IMultiBlockComponent) te).getInfo()
+                                                       .isValidMultiBlock()) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+
+    @Override
+    public boolean isBlockInMultiBlock(World world, int x, int y, int z, int c_x, int c_y, int c_z) {
+        return x >= (c_x - 2) && x <= (c_x + 2) &&
+                y >= (c_y - 2) && y <= (c_y + 2) &&
+                z >= (c_z - 2) && z <= (c_z + 2);
+    }
+
+    @Override
+    public boolean formMultiBlock(World world, int x, int y, int z) {
+        boolean result = true;
+
+        for (int i = -2; i <= 2; ++i) {
+            for (int j = -2; j <= 2; ++j) {
+                for (int k = -2; k <= 2; ++k) {
+                    TileEntity te = world.getBlockTileEntity(x + i, y + k, z
+                            + j);
+                    result = te instanceof IMultiBlockComponent && ((IMultiBlockComponent) te).formMultiBlock(world, x, y, z) && result;
+                }
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public boolean formMultiBlockWithBlock(World world, int x, int y, int z) {
+        // x
+        for (int i = -2; i <= 2; ++i) {
+            // z
+            for (int j = -2; j <= 2; ++j) {
+                // y
+                for (int k = -2; k <= 2; ++k) {
+                    if (canFormStrict(world, x + i, y + k, z + j)) {
+                        return formMultiBlock(world, x + i, y + k, z + j);
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean breakMultiBlock(World world, int x, int y, int z) {
+        boolean result = true;
+
+        for (int i = -2; i <= 2; ++i) {
+            for (int j = -2; j <= 2; ++j) {
+                for (int k = 0; k <= 4; ++k) {
+                    TileEntity te = world.getBlockTileEntity(x + i, y + k, z
+                            + j);
+                    result = te instanceof IMultiBlockComponent && ((IMultiBlockComponent) te).breakMultiBlock(world, x, y, z) && result;
+                }
+            }
+        }
+        return result;
+    }
 }
