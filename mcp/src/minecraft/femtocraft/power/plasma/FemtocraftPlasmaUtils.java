@@ -22,6 +22,8 @@ package femtocraft.power.plasma;
 import femtocraft.power.plasma.volatility.IVolatilityEvent;
 import net.minecraft.world.World;
 
+import java.util.Collection;
+
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/8/14.
  */
@@ -52,10 +54,13 @@ public class FemtocraftPlasmaUtils {
             event.interact(container, world, x, y, z);
         }
 
-        for (IPlasmaFlow flow : container.getFlows()) {
-            flow.onVolatilityEvent(event);
-            event.interact(flow, world, x, y, z);
-            flow.onPostVolatilityEvent(event);
+        Collection<IPlasmaFlow> flows = container.getFlows();
+        if (flows != null) {
+            for (IPlasmaFlow flow : flows) {
+                flow.onVolatilityEvent(event);
+                event.interact(flow, world, x, y, z);
+                flow.onPostVolatilityEvent(event);
+            }
         }
 
         container.onPostVolatilityEvent(event);
