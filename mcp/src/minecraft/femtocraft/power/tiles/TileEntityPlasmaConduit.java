@@ -69,6 +69,7 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
                     plasmaContainer.setOutput(this, dir.getOpposite());
                     plasma.setInput(plasmaContainer, dir);
                     setModified();
+                    setUpdate();
                     setRenderUpdate();
                     return true;
                 }
@@ -93,6 +94,7 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
                     plasmaContainer.setInput(this, dir.getOpposite());
                     plasma.setOutput(plasmaContainer, dir);
                     setModified();
+                    setUpdate();
                     setRenderUpdate();
                     return true;
                 }
@@ -104,12 +106,14 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
     public void clearInput() {
         plasma.setInput(null, ForgeDirection.UNKNOWN);
         setModified();
+        setUpdate();
         setRenderUpdate();
     }
 
     public void clearOutput() {
         plasma.setOutput(null, ForgeDirection.UNKNOWN);
         setModified();
+        setUpdate();
         setRenderUpdate();
     }
 
@@ -126,6 +130,7 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
         update(worldObj, xCoord, yCoord, zCoord);
         containsPlasma = hasFlows();
         if (prev != containsPlasma) {
+            setUpdate();
             setRenderUpdate();
         }
     }

@@ -155,12 +155,14 @@ public class TileEntityPlasmaVent extends TileEntityPlasmaConduit {
                                     zCoord + testDir.offsetZ)) {
                 ventDirection = testDir;
                 setModified();
+                setUpdate();
                 setRenderUpdate();
                 return;
             }
         }
         ventDirection = ForgeDirection.UNKNOWN;
         setModified();
+        setUpdate();
         setRenderUpdate();
     }
 

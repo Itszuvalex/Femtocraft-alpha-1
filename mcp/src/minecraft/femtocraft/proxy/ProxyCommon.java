@@ -45,7 +45,7 @@ public class ProxyCommon {
         GameRegistry.registerTileEntity(TileEntityPowerConsumerTest.class,
                                         "TileEntityPowerConsumerTest");
         GameRegistry.registerTileEntity(TileEntityBaseEntityMicroFurnace.class,
-                                        "FemtocraftMicroFurnace");
+                                        "TileEntityMicroFurnace");
         GameRegistry.registerTileEntity(
                 TileEntityBaseEntityMicroDeconstructor.class,
                 "TileEntityMicroDeconstructor");
@@ -117,9 +117,9 @@ public class ProxyCommon {
                                         "TileEntitySuctionPipe");
 
         GameRegistry.registerTileEntity(TileEntityOrbitalEqualizer.class,
-                                        "blockOrbitalEqualizer");
+                                        "TileEntityOrbitalEqualizer");
         GameRegistry.registerTileEntity(TileEntityNullEqualizer.class,
-                                        "blockNullEqualizer");
+                                        "TileEntityNullEqualizer");
 
         GameRegistry.registerTileEntity(TileEntityPlasma.class,
                                         "TileEntityPlasma");
