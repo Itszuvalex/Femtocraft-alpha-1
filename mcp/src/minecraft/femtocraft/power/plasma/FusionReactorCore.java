@@ -85,7 +85,8 @@ public class FusionReactorCore implements IFusionReactorCore,
 
     @Override
     public long getReactionTemperature() {
-        return reaction.getReactionEnergy() / FemtocraftPlasmaUtils.temperatureToEnergy;
+        return (long) (reaction.getReactionEnergy() * FemtocraftPlasmaUtils
+                .energyToTemperature);
     }
 
     @Override

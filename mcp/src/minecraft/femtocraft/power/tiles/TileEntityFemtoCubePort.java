@@ -34,7 +34,7 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
                                                                  IMultiBlockComponent {
-    private static int storage = 10000000;
+    private static int storage = 50000000;
     public
     @Saveable(desc = true)
     boolean output;

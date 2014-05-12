@@ -72,6 +72,7 @@ public class TileEntityFemtoStellaratorHousing extends TileEntityBase
                 checkForCore = false;
             }
         }
+        update(worldObj, xCoord, yCoord, zCoord);
     }
 
     @Override

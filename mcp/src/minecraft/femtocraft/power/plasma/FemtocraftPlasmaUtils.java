@@ -19,10 +19,14 @@
 
 package femtocraft.power.plasma;
 
+import femtocraft.Femtocraft;
 import femtocraft.power.plasma.volatility.IVolatilityEvent;
+import femtocraft.utils.WorldLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 
 import java.util.Collection;
+import java.util.Random;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/8/14.
@@ -65,4 +69,91 @@ public class FemtocraftPlasmaUtils {
 
         container.onPostVolatilityEvent(event);
     }
+
+    public static void extractFlowsAndPurge(IPlasmaContainer container,
+                                            long volatilityEnergy,
+                                            int volatilityLevel,
+                                            int energyToSegmentsDividend,
+                                            int plasmaDuration,
+                                            World world, int x, int y, int z) {
+        long totalEnergy = volatilityEnergy;
+        if (container.getFlows() != null) {
+
+            for (IPlasmaFlow flow : container.getFlows()) {
+                if (flow.isUnstable() || flow.getVolatility() > volatilityLevel) {
+                    totalEnergy += flow.getTemperature() * FemtocraftPlasmaUtils
+                            .temperatureToEnergy;
+                    container.removeFlow(flow);
+                }
+            }
+        }
+
+        int segments = (int) (totalEnergy / energyToSegmentsDividend);
+
+        WorldLocation segLoc = new WorldLocation(world, x, y, z);
+        for (int i = 0; i < segments; i++) {
+            if (!placeSegment(segLoc, plasmaDuration)) {
+                return;
+            }
+        }
+    }
+
+    public static void purgeFlow(long volatilityEnergy,
+                                 int energyToSegmentsDividend,
+                                 int plasmaDuration, World world, int x,
+                                 int y, int z) {
+        int segments = (int) (volatilityEnergy / energyToSegmentsDividend);
+
+        WorldLocation segLoc = new WorldLocation(world, x, y, z);
+        for (int i = 0; i < segments; i++) {
+            if (!placeSegment(segLoc, plasmaDuration)) {
+                return;
+            }
+        }
+    }
+
+    private static boolean placeSegment(WorldLocation loc, int plasmaDuration) {
+        Random random = new Random();
+        ForgeDirection dir = ForgeDirection.UNKNOWN;
+        int[] dirs = new int[6];
+        for (int i = 0; i < dirs.length; i++) {
+            dirs[i] = i;
+        }
+        //shuffle
+        for (int i = 0; i < 500; ++i) {
+            int a = random.nextInt(dirs.length);
+            int b = random.nextInt(dirs.length);
+            if (a == b) {
+                continue;
+            }
+            int d = dirs[a];
+            dirs[a] = dirs[b];
+            dirs[b] = d;
+        }
+
+        for (int i = 0; i < dirs.length; i++) {
+            dir = ForgeDirection.getOrientation(dirs[i]);
+            if (loc.world.isAirBlock(loc.x + dir.offsetX, loc.y + dir.offsetY,
+                                     loc.z + dir.offsetZ)) {
+                break;
+            }
+        }
+        if (dir == ForgeDirection.UNKNOWN) return false;
+
+        loc.world.setBlock(loc.x + dir.offsetX, loc.y + dir.offsetY,
+                           loc.z + dir.offsetZ, Femtocraft.blockPlasma.blockID);
+        loc.world.setBlockMetadataWithNotify(loc.x, loc.y, loc.z,
+                                             dir.ordinal(), 2);
+
+        loc.x += dir.offsetX;
+        loc.y += dir.offsetY;
+        loc.z += dir.offsetZ;
+
+        TileEntityPlasma te = (TileEntityPlasma) loc.world.getBlockTileEntity(loc.x, loc.y,
+                                                                              loc.z);
+        te.setDuration(plasmaDuration);
+
+        return true;
+    }
+
 }

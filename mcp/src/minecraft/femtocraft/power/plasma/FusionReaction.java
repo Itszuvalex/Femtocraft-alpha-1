@@ -33,7 +33,7 @@ import java.util.Random;
 public class FusionReaction implements IFusionReaction, ISaveable {
     public static int overChargeMultiplier = 10;
     public static int stabilityMultiplier = 1000;
-    public static double ignitionSucessfulPowerMultiplier = .5d;
+    public static double ignitionSuccessfulPowerMultiplier = .5d;
     public static double reactionLossPerTickMultiplier = .99d;
     //References
     IFusionReactorCore core;
@@ -85,9 +85,13 @@ public class FusionReaction implements IFusionReaction, ISaveable {
                 core.addFlow(generateFlow());
                 generateTicksToPlasmaFlow();
             }
+            //Overcharged, add more flows
             if (energy > (getReactionThreshold() * overChargeMultiplier)) {
-                core.addFlow(generateFlow());
+                IPlasmaFlow flow = generateFlow();
+                flow.setUnstable(true);
+                core.addFlow(flow);
             }
+            //If, even after this, core is unstable, Volatility!!
             if (getReactionInstability() > core.getStabilityRating()) {
                 long eventEnergy = (long) (random.nextDouble() * this.energy *
                         .25d);
@@ -95,6 +99,7 @@ public class FusionReaction implements IFusionReaction, ISaveable {
                 );
                 energy -= eventEnergy;
             }
+            //Reaction collapses, all energy invested is gone.
             if (energy < getReactionFailureThreshold()) {
                 selfSustaining = false;
                 energy = 0;
@@ -105,7 +110,7 @@ public class FusionReaction implements IFusionReaction, ISaveable {
             ++ignitionProcessTicks;
             if (energy > getReactionThreshold()) {
                 energy -= (int) (energy *
-                        ignitionSucessfulPowerMultiplier);
+                        ignitionSuccessfulPowerMultiplier);
                 selfSustaining = true;
                 generateTicksToPlasmaFlow();
                 endIgnitionProcess();

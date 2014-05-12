@@ -19,11 +19,8 @@
 
 package femtocraft.power.plasma.volatility;
 
-import femtocraft.Femtocraft;
 import femtocraft.power.plasma.*;
-import femtocraft.utils.WorldLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
 
 import java.util.Random;
 
@@ -44,19 +41,31 @@ public class VolatilityEventPlasmaLeak extends VolatilityEvent {
     @Override
     public void interact(IFusionReactorCore core, World world, int x, int y, int z) {
         core.removeFlow(creator);
-        extractFlowsAndPurge(core, world, x, y, z);
+        FemtocraftPlasmaUtils.extractFlowsAndPurge(core, volatilityEnergy,
+                                                   volatilityLevel,
+                                                   energyToSegmentsDividend,
+                                                   plasmaDuration,
+                                                   world, x, y, z);
     }
 
     @Override
     public void interact(IFusionReactorComponent component, World world, int x, int y, int z) {
         component.removeFlow(creator);
-        extractFlowsAndPurge(component, world, x, y, z);
+        FemtocraftPlasmaUtils.extractFlowsAndPurge(component, volatilityEnergy,
+                                                   volatilityLevel,
+                                                   energyToSegmentsDividend,
+                                                   plasmaDuration,
+                                                   world, x, y, z);
     }
 
     @Override
     public void interact(IPlasmaContainer container, World world, int x, int y, int z) {
         container.removeFlow(creator);
-        extractFlowsAndPurge(container, world, x, y, z);
+        FemtocraftPlasmaUtils.extractFlowsAndPurge(container, volatilityEnergy,
+                                                   volatilityLevel,
+                                                   energyToSegmentsDividend,
+                                                   plasmaDuration,
+                                                   world, x, y, z);
     }
 
     @Override
@@ -64,71 +73,5 @@ public class VolatilityEventPlasmaLeak extends VolatilityEvent {
 
     }
 
-    private void extractFlowsAndPurge(IPlasmaContainer container,
-                                      World world, int x, int y, int z) {
-        long totalEnergy = volatilityEnergy;
-        if (container.getFlows() != null) {
-
-            for (IPlasmaFlow flow : container.getFlows()) {
-                if (flow.isUnstable() || flow.getVolatility() > volatilityLevel) {
-                    totalEnergy += flow.getTemperature() * FemtocraftPlasmaUtils
-                            .temperatureToEnergy;
-                    container.removeFlow(flow);
-                }
-            }
-        }
-
-        int segments = (int) (volatilityEnergy / energyToSegmentsDividend);
-
-        WorldLocation segLoc = new WorldLocation(world, x, y, z);
-        for (int i = 0; i < segments; i++) {
-            if (!placeSegment(segLoc)) {
-                return;
-            }
-        }
-    }
-
-    private boolean placeSegment(WorldLocation loc) {
-        ForgeDirection dir = ForgeDirection.UNKNOWN;
-        int[] dirs = new int[6];
-        for (int i = 0; i < dirs.length; i++) {
-            dirs[i] = i;
-        }
-        //shuffle
-        for (int i = 0; i < 500; ++i) {
-            int a = random.nextInt(dirs.length);
-            int b = random.nextInt(dirs.length);
-            if (a == b) {
-                continue;
-            }
-            int d = dirs[a];
-            dirs[a] = dirs[b];
-            dirs[b] = d;
-        }
-
-        for (int i = 0; i < dirs.length; i++) {
-            dir = ForgeDirection.getOrientation(dirs[i]);
-            if (loc.world.isAirBlock(loc.x + dir.offsetX, loc.y + dir.offsetY,
-                                     loc.z + dir.offsetZ)) {
-                break;
-            }
-        }
-        if (dir == ForgeDirection.UNKNOWN) return false;
-
-        loc.world.setBlock(loc.x + dir.offsetX, loc.y + dir.offsetY,
-                           loc.z + dir.offsetZ, Femtocraft.blockPlasma.blockID);
-        loc.world.setBlockMetadataWithNotify(loc.x, loc.y, loc.z,
-                                             dir.ordinal(), 2);
-
-        loc.x += dir.offsetX;
-        loc.y += dir.offsetY;
-        loc.z += dir.offsetZ;
-
-        TileEntityPlasma te = (TileEntityPlasma) loc.world.getBlockTileEntity(loc.x, loc.y,
-                                                                              loc.z);
-        te.setDuration(plasmaDuration);
-
-        return true;
-    }
 
 }

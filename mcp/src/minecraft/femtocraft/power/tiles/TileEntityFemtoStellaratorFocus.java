@@ -21,7 +21,7 @@ package femtocraft.power.tiles;
 
 import femtocraft.core.multiblock.IMultiBlockComponent;
 import femtocraft.core.multiblock.MultiBlockInfo;
-import femtocraft.managers.research.EnumTechLevel;
+import femtocraft.core.tiles.TileEntityBase;
 import femtocraft.power.plasma.IFusionReactorComponent;
 import femtocraft.power.plasma.IFusionReactorCore;
 import femtocraft.power.plasma.IPlasmaContainer;
@@ -36,35 +36,23 @@ import net.minecraftforge.common.ForgeDirection;
 
 import java.util.Collection;
 
-public class TileEntityFemtoStellaratorOpticalMaser extends
-                                                    TileEntityPowerConsumer
-        implements IFusionReactorComponent, IMultiBlockComponent {
-
-    public static int powerStorage = 10000000;
-    public static int warmupThreshold = 1000000;
-    public static int powerTransferPerTick = 50000;
-    public static int temperatureRating = 6000;
-    public static int stability = 6000;
-    @FemtocraftDataUtils.Saveable
-    private boolean igniting;
-    @FemtocraftDataUtils.Saveable
-    private boolean sustaining;
-    @FemtocraftDataUtils.Saveable
-    private boolean warmed;
+/**
+ * Created by Christopher Harris (Itszuvalex) on 5/12/14.
+ */
+public class TileEntityFemtoStellaratorFocus extends TileEntityBase
+        implements IMultiBlockComponent, IFusionReactorComponent {
+    public static int temperatureRating = 5000;
+    public static int stability = 5000;
     @FemtocraftDataUtils.Saveable
     private MultiBlockInfo info;
-    private boolean checkForCore = false;
-    private IFusionReactorCore core;
     @FemtocraftDataUtils.Saveable
     private WorldLocation coreLocation;
+    private boolean checkForCore = false;
+    private IFusionReactorCore core;
 
-    public TileEntityFemtoStellaratorOpticalMaser() {
-        setTechLevel(EnumTechLevel.FEMTO);
-        setMaxStorage(powerStorage);
+    public TileEntityFemtoStellaratorFocus() {
         info = new MultiBlockInfo();
-        igniting = false;
-        sustaining = false;
-        warmed = false;
+
     }
 
     @Override
@@ -77,45 +65,17 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
                 checkForCore = false;
             }
         }
-
-        if (igniting || sustaining) {
-            if (!warmed) {
-                if (getCurrentPower() >= warmupThreshold) {
-                    warmed = true;
-                    setModified();
-                }
-            }
-            else {
-                if (core != null && consume(powerTransferPerTick)) {
-                    //Excess power is lost
-                    core.contributeCoreEnergy(powerTransferPerTick);
-                    setModified();
-                }
-                else {
-                    warmed = false;
-                    setModified();
-                }
-            }
-        }
-        else {
-            warmed = false;
-            setModified();
-        }
+        update(worldObj, xCoord, yCoord, zCoord);
     }
 
     @Override
     public void beginIgnitionProcess(IFusionReactorCore core) {
-        igniting = true;
-        sustaining = false;
-        warmed = false;
-        setModified();
+
     }
 
     @Override
     public void endIgnitionProcess(IFusionReactorCore core) {
-        igniting = false;
-        sustaining = core.isSelfSustaining();
-        setModified();
+
     }
 
     @Override
@@ -131,9 +91,9 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
     @Override
     public boolean formMultiBlock(World world, int x, int y, int z) {
         if (info.formMultiBlock(world, x, y, z)) {
-            setModified();
             coreLocation = new WorldLocation(world, x, y, z);
             core = (IFusionReactorCore) coreLocation.getTileEntity();
+            setModified();
             return true;
         }
         return false;
@@ -185,8 +145,7 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
     }
 
     @Override
-    public boolean setOutput(IPlasmaContainer container, ForgeDirection
-            dir) {
+    public boolean setOutput(IPlasmaContainer container, ForgeDirection dir) {
         return core != null && core.setOutput(container, dir);
     }
 
