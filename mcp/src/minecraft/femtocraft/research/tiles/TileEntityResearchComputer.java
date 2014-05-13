@@ -19,11 +19,17 @@
 
 package femtocraft.research.tiles;
 
+import femtocraft.FemtocraftGuiHandler;
 import femtocraft.core.tiles.TileEntityBase;
 
 public class TileEntityResearchComputer extends TileEntityBase {
     public TileEntityResearchComputer() {
         super();
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.ResearchComputerGuiID;
     }
 
     /*

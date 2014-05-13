@@ -53,16 +53,16 @@ public class TileEntityBase extends TileEntity {
 
     public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
         boolean inrange = this.worldObj.getBlockTileEntity(this.xCoord,
-                                                           this.yCoord, this.zCoord) == this
+                this.yCoord, this.zCoord) == this
                 && par1EntityPlayer.getDistanceSq((double) this.xCoord + 0.5D,
-                                                  (double) this.yCoord + 0.5D,
-                                                  (double) this.zCoord + 0.5D) <= 64.0D;
+                (double) this.yCoord + 0.5D,
+                (double) this.zCoord + 0.5D) <= 64.0D;
         boolean isowner = owner == null || owner.isEmpty()
                 || (owner.equals(par1EntityPlayer.username));
         return inrange
                 && (isowner || (MinecraftServer.getServer()
-                                               .getConfigurationManager()
-                                               .isPlayerOpped(par1EntityPlayer.username) || par1EntityPlayer.capabilities.isCreativeMode));
+                .getConfigurationManager()
+                .isPlayerOpped(par1EntityPlayer.username) || par1EntityPlayer.capabilities.isCreativeMode));
     }
 
     @Override
@@ -97,7 +97,7 @@ public class TileEntityBase extends TileEntity {
     public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
         super.readFromNBT(par1nbtTagCompound);
         FemtocraftDataUtils.loadObjectFromNBT(par1nbtTagCompound, this,
-                                              EnumSaveType.WORLD);
+                EnumSaveType.WORLD);
         // owner = par1nbtTagCompound.getString(NBT_TAG);
     }
 
@@ -105,7 +105,7 @@ public class TileEntityBase extends TileEntity {
     public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
         super.writeToNBT(par1nbtTagCompound);
         FemtocraftDataUtils.saveObjectToNBT(par1nbtTagCompound, this,
-                                            EnumSaveType.WORLD);
+                EnumSaveType.WORLD);
         // par1nbtTagCompound.setString(NBT_TAG, owner);
     }
 
@@ -137,12 +137,12 @@ public class TileEntityBase extends TileEntity {
 
     public void handleDescriptionNBT(NBTTagCompound compound) {
         FemtocraftDataUtils.loadObjectFromNBT(compound, this,
-                                              EnumSaveType.DESCRIPTION);
+                EnumSaveType.DESCRIPTION);
     }
 
     public void saveToDescriptionCompound(NBTTagCompound compound) {
         FemtocraftDataUtils.saveObjectToNBT(compound, this,
-                                            EnumSaveType.DESCRIPTION);
+                EnumSaveType.DESCRIPTION);
     }
 
     public void loadInfoFromItemNBT(NBTTagCompound compound) {
@@ -160,7 +160,7 @@ public class TileEntityBase extends TileEntity {
     public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
         if (hasGUI() && isUseableByPlayer(par5EntityPlayer)) {
             par5EntityPlayer.openGui(getMod(), getGuiID(), worldObj, xCoord,
-                                     yCoord, zCoord);
+                    yCoord, zCoord);
             return true;
         }
         return false;
@@ -190,7 +190,8 @@ public class TileEntityBase extends TileEntity {
     }
 
     protected void setModified() {
-        worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
+        if (worldObj != null)
+            worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
     }
 
 

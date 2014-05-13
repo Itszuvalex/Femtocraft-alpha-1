@@ -30,6 +30,42 @@ import java.util.TreeMap;
  */
 public class ManagerDimensionalRecipe {
 
+    private SortedMap<DimensionalKey, DimensionalRecipe> recipes;
+
+    public ManagerDimensionalRecipe() {
+        recipes = new TreeMap<DimensionalKey, DimensionalRecipe>();
+    }
+
+    public DimensionalRecipe getRecipe(ItemStack input, ItemStack[] configurators) {
+        if (input == null) return null;
+        return recipes.get(getDimensionalKey(input, configurators));
+    }
+
+    public void addRecipe(DimensionalRecipe recipe) {
+        recipes.put(getDimensionalKey(recipe.input, recipe.configurators),
+                recipe);
+    }
+
+    private DimensionalKey getDimensionalKey(ItemStack input,
+                                             ItemStack[] configurators) {
+        if (input == null) return null;
+        ItemStack ninput = input.copy();
+        input.stackSize = 1;
+
+        ItemStack[] configs = new ItemStack[configurators.length];
+        if (configs != null) {
+            for (int i = 0; i < configs.length; ++i) {
+                if (configurators[i] == null) {
+                    continue;
+                }
+                configs[i] = configurators[i].copy();
+                configs[i].stackSize = 1;
+            }
+        }
+
+        return new DimensionalKey(ninput, configs);
+    }
+
     private class DimensionalKey implements Comparable {
         private final ItemStack input;
         private final ItemStack[] configurators;
@@ -64,7 +100,7 @@ public class ManagerDimensionalRecipe {
                 for (int i = 0; i < configurators.length; ++i) {
                     result = FemtocraftUtils.compareItem
                             (configurators[i],
-                             dk.configurators[i]);
+                                    dk.configurators[i]);
                     if (result != 0) {
                         return result;
                     }
@@ -72,40 +108,6 @@ public class ManagerDimensionalRecipe {
             }
             return 0;
         }
-    }
-
-    private SortedMap<DimensionalKey, DimensionalRecipe> recipes;
-
-    public ManagerDimensionalRecipe() {
-        recipes = new TreeMap<DimensionalKey, DimensionalRecipe>();
-    }
-
-    public DimensionalRecipe getRecipe(ItemStack input, ItemStack[] configurators) {
-        return recipes.get(getDimensionalKey(input, configurators));
-    }
-
-    public void addRecipe(DimensionalRecipe recipe) {
-        recipes.put(getDimensionalKey(recipe.input, recipe.configurators),
-                    recipe);
-    }
-
-    private DimensionalKey getDimensionalKey(ItemStack input,
-                                             ItemStack[] configurators) {
-        ItemStack ninput = input.copy();
-        input.stackSize = 1;
-
-        ItemStack[] configs = new ItemStack[configurators.length];
-        if (configs != null) {
-            for (int i = 0; i < configs.length; ++i) {
-                if (configurators[i] == null) {
-                    continue;
-                }
-                configs[i] = configurators[i].copy();
-                configs[i].stackSize = 1;
-            }
-        }
-
-        return new DimensionalKey(ninput, configs);
     }
 
 }

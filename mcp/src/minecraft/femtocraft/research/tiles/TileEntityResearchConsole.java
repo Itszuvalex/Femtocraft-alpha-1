@@ -20,6 +20,7 @@
 package femtocraft.research.tiles;
 
 import femtocraft.Femtocraft;
+import femtocraft.FemtocraftGuiHandler;
 import femtocraft.api.ITechnologyCarrier;
 import femtocraft.core.tiles.TileEntityBase;
 import femtocraft.managers.research.ResearchTechnology;
@@ -32,7 +33,7 @@ import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet132TileEntityData;
 
 public class TileEntityResearchConsole extends TileEntityBase implements
-                                                              IInventory {
+        IInventory {
     public static final String PACKET_CHANNEL = "Femtocraft" + "." + "rcon";
     private static final int ticksToResearch = 400;
     public
@@ -53,6 +54,11 @@ public class TileEntityResearchConsole extends TileEntityBase implements
 
     public TileEntityResearchConsole() {
         super();
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.ResearchConsoleGuiID;
     }
 
     /*
@@ -252,7 +258,7 @@ public class TileEntityResearchConsole extends TileEntityBase implements
         }
         ItemStack techstack = new ItemStack(techItem, 1);
         ((ITechnologyCarrier) techItem).setTechnology(techstack,
-                                                      researchingTech);
+                researchingTech);
         researchingTech = null;
         inventory[inventory.length - 1] = techstack;
         onInventoryChanged();
@@ -299,8 +305,7 @@ public class TileEntityResearchConsole extends TileEntityBase implements
                 itemstack = this.inventory[i];
                 this.inventory[i] = null;
                 return itemstack;
-            }
-            else {
+            } else {
                 itemstack = this.inventory[i].splitStack(j);
 
                 if (this.inventory[i].stackSize == 0) {
@@ -309,8 +314,7 @@ public class TileEntityResearchConsole extends TileEntityBase implements
 
                 return itemstack;
             }
-        }
-        else {
+        } else {
             return null;
         }
     }
