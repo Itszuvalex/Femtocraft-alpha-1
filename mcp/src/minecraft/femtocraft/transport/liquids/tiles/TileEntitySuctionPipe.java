@@ -33,7 +33,7 @@ import net.minecraftforge.fluids.*;
 import java.util.Arrays;
 
 public class TileEntitySuctionPipe extends TileEntityBase implements
-                                                          ISuctionPipe {
+        ISuctionPipe {
     static final int renderLength = 10;
     private final float TRANSFER_RATIO = .1f;
     public
@@ -137,10 +137,9 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
         if (renderFluid != null && tank.getFluid() == null) {
             if (renderTick++ >= renderLength) {
                 renderFluid = null;
-                worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+                setRenderUpdate();
             }
-        }
-        else {
+        } else {
             renderTick = 0;
         }
 
@@ -151,7 +150,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
     public void femtocraftServerUpdate() {
         super.femtocraftServerUpdate();
 
-        FluidStack pre = renderFluid;
+        boolean pre = renderFluid != null && renderFluid.amount > 0;
         renderFluid = null;
 
         int[] pressures = new int[6];
@@ -163,17 +162,12 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
             requestLiquid(pressures, neighbors);
         }
 
-        FluidStack post = renderFluid;
+        boolean post = renderFluid != null && renderFluid.amount > 0;
 
         // Pass description packet to clients - fluid has either emptied, or
         // filled
-        if (pre == null && post == null) {
-            return;
-        }
-
-        if (((pre == null && post != null) || (pre != null && post == null))
-                || ((pre.amount == 0 && post.amount > 0) || (pre.amount > 0 && post.amount == 0))) {
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+        if (!(pre && post) && (pre || post)) {
+            setUpdate();
         }
     }
 
@@ -193,7 +187,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
             int locz = this.zCoord + dir.offsetZ;
 
             TileEntity checkTile = this.worldObj.getBlockTileEntity(locx, locy,
-                                                                    locz);
+                    locz);
 
             if (checkTile != null) {
                 if (checkTile instanceof ISuctionPipe) {
@@ -202,8 +196,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
                         changed = true;
                     }
                     neighbors[i] = (IFluidHandler) checkTile;
-                }
-                else if (checkTile instanceof IFluidHandler) {
+                } else if (checkTile instanceof IFluidHandler) {
                     tankconnections[i] = true;
                     if (!oldtanks[i]) {
                         changed = true;
@@ -218,7 +211,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
         }
 
         if (changed) {
-            worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+            setRenderUpdate();
         }
     }
 
@@ -237,7 +230,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
             if (tankconnections[i]) {
                 FluidTankInfo[] infoArray = neighbors[i]
                         .getTankInfo(ForgeDirection.getOrientation(i)
-                                                   .getOpposite());
+                                .getOpposite());
                 ++pipeCount;
 
                 FluidTankInfo info = chooseTank(infoArray, output);
@@ -272,7 +265,6 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
     }
 
     private void distributeLiquid(int[] pressures, IFluidHandler[] neighbors) {
-        int distributeCount = 0;
         int ratioMax = 0;
         int amountToRemove = 0;
 
@@ -293,20 +285,20 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
             if (tankconnections[i]
                     && pressures[i] < pressure
                     && neighbors[i].canFill(dir.getOpposite(), tank.getFluid()
-                                                                   .getFluid()) && output) {
+                    .getFluid()) && output) {
                 ratioMax += pressure - pressures[i];
             }
             if (pipeconnections[i]
                     && pressures[i] < pressure
                     && neighbors[i].canFill(dir.getOpposite(), tank.getFluid()
-                                                                   .getFluid())) {
+                    .getFluid())) {
                 ratioMax += pressure - pressures[i];
             }
         }
 
         // TODO: get it to transmit miniscule amounts
-        int amount = (int) (Math.min(tank.getFluidAmount(), tank.getCapacity()
-                * TRANSFER_RATIO));
+        int amount = (int) Math.min(tank.getFluidAmount(), tank.getCapacity()
+                * TRANSFER_RATIO);
 
         for (int i = 0; i < 6; ++i) {
             if (neighbors[i] == null) {
@@ -319,14 +311,14 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 
             if (pressures[i] < pressure
                     && neighbors[i].canFill(ForgeDirection.getOrientation(i)
-                                                          .getOpposite(), tank.getFluid().getFluid())) {
+                    .getOpposite(), tank.getFluid().getFluid())) {
 
                 ForgeDirection dir = ForgeDirection.getOrientation(i);
 
-                int rationedAmount = (int) (((float) amount) * (((float) (pressure - pressures[i])) / ((float) ratioMax)));
+                int rationedAmount = (int) ((float) amount * ((float) (pressure - pressures[i]) / (float) ratioMax));
                 amountToRemove += neighbors[i].fill(dir.getOpposite(),
-                                                    new FluidStack(tank.getFluid().getFluid(),
-                                                                   rationedAmount), true
+                        new FluidStack(tank.getFluid().getFluid(),
+                                rationedAmount), true
                 );
             }
         }
@@ -336,7 +328,6 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 
     private void requestLiquid(int[] pressures, IFluidHandler[] neighbors) {
         int ratioMax = 0;
-        int amountToAdd = 0;
         int space = tank.getCapacity() - tank.getFluidAmount();
 
         for (int i = 0; i < 6; ++i) {
@@ -352,32 +343,31 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
         for (int i = 0; i < 6; ++i) {
             if (!(tankconnections[i] && pressure < pressures[i] && (tank
                     .getFluid() == null || neighbors[i].canDrain(ForgeDirection
-                                                                         .getOrientation(i).getOpposite(), tank.getFluid()
-                                                                                                               .getFluid())))) {
+                    .getOrientation(i).getOpposite(), tank.getFluid()
+                    .getFluid())))) {
                 continue;
             }
             FluidTankInfo[] infoArray = neighbors[i].getTankInfo(ForgeDirection
-                                                                         .getOrientation(i).getOpposite());
+                    .getOrientation(i).getOpposite());
 
             FluidTankInfo info = chooseTank(infoArray, output);
             if (info == null) {
                 continue;
             }
 
-            int amount = (int) (info.fluid == null ? 0 : (info.fluid.amount));
+            int amount = (int) (info.fluid == null ? 0 : info.fluid.amount);
 
-            int rationedAmount = (int) (space * (((float) (pressures[i] - pressure)) / ((float) ratioMax)));
+            int rationedAmount = (int) (space * ((float) (pressures[i] - pressure) / (float) ratioMax));
 
             rationedAmount = rationedAmount > amount ? amount : rationedAmount;
 
             if (tank.getFluid() == null) {
                 tank.fill(neighbors[i].drain(ForgeDirection.getOrientation(i)
-                                                           .getOpposite(), rationedAmount, true), true);
-            }
-            else {
+                        .getOpposite(), rationedAmount, true), true);
+            } else {
                 tank.fill(neighbors[i].drain(ForgeDirection.getOrientation(i)
-                                                           .getOpposite(), new FluidStack(tank.getFluid()
-                                                                                              .getFluid(), rationedAmount), true), true);
+                        .getOpposite(), new FluidStack(tank.getFluid()
+                        .getFluid(), rationedAmount), true), true);
             }
         }
 
@@ -404,7 +394,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
                 return info;
             }
 
-            if (info.fluid.isFluidEqual(tank.getFluid())) {
+            if (info.fluid != null && info.fluid.isFluidEqual(tank.getFluid())) {
                 return info;
             }
         }
@@ -478,10 +468,10 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 
         par5EntityPlayer.addChatMessage((worldObj.isRemote ? "Client:"
                 : "Server:")
-                                                + " Pressure = "
-                                                + pressure
-                                                + "; Amount = "
-                                                + tank.getFluidAmount());
+                + " Pressure = "
+                + pressure
+                + "; Amount = "
+                + tank.getFluidAmount());
 
         ItemStack item = par5EntityPlayer.getHeldItem();
         if (item != null && item.getItem() instanceof IInterfaceDevice) {

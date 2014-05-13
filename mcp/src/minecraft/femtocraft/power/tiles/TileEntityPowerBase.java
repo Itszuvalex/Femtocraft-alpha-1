@@ -30,7 +30,7 @@ import net.minecraftforge.common.ForgeDirection;
 import java.util.Arrays;
 
 public class TileEntityPowerBase extends TileEntityBase implements
-                                                        IPowerBlockContainer {
+        IPowerBlockContainer {
     public boolean[] connections;
     private
     @Saveable(item = true)
@@ -139,104 +139,46 @@ public class TileEntityPowerBase extends TileEntityBase implements
             return;
         }
 
-        boolean[] willCharge = Arrays.copyOf(connections, 6);
-        // boolean[] willCharge = new boolean[6];
-        // Arrays.fill(willCharge, true);
-        int numToFill = 0;
+        float percentDifferenceTotal = 0.f;
+        int maxSpreadThisTick = (int) ((float) getCurrentPower() * maxPowerPerTick) * numConnections();
+        float[] fillPercentages = new float[6];
         for (int i = 0; i < 6; ++i) {
-            if (willCharge[i]) {
-                ++numToFill;
+            fillPercentages[i] = getFillPercentageForOutput(ForgeDirection.getOrientation(i));
+        }
+
+        //Sum % differences
+        for (int i = 0; i < 6; ++i) {
+            if (!connections[i]) {
+                continue;
+            }
+
+            ForgeDirection dir = ForgeDirection.getOrientation(i);
+            TileEntity te = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+            if (te instanceof IPowerBlockContainer) {
+
+                IPowerBlockContainer container = (IPowerBlockContainer) te;
+                float percentDif = fillPercentages[i] - container.getFillPercentageForCharging(dir.getOpposite());
+                if (percentDif > distributionBuffer) {
+                    percentDifferenceTotal += percentDif;
+                }
             }
         }
-        float[] percentFilled = new float[6];
-        Arrays.fill(percentFilled, 1.0f);
-        int maxSpreadThisTick = (int) (((float) getCurrentPower()) * maxPowerPerTick);
 
-        while (maxSpreadThisTick > 0 && numToFill > 0) {
-            for (int j = 0; j < 6; ++j) {
-                // Once it won't accept power, nothing will happen this tick,
-                // Inside this update, that could make it accept power again
-                if (!willCharge[j]) {
-                    continue;
-                }
-
-                ForgeDirection offset = ForgeDirection.getOrientation(j);
-                int locx = this.xCoord + offset.offsetX;
-                int locy = this.yCoord + offset.offsetY;
-                int locz = this.zCoord + offset.offsetZ;
-
-                TileEntity checkTile = this.worldObj.getBlockTileEntity(locx,
-                                                                        locy, locz);
-
-                if (!(checkTile instanceof IPowerBlockContainer)) {
-                    willCharge[j] = false;
-                    --numToFill;
-                    percentFilled[j] = 1.f;
-                    continue;
-                }
-
-                // Having passed initial check, and due to this now being this
-                // block's
-                // update function, can safely assume adjacent blocks remain the
-                // same (unless it does simultaneous updates)
-                IPowerBlockContainer container = (IPowerBlockContainer) this.worldObj
-                        .getBlockTileEntity(locx, locy, locz);
-
-                if (container != null
-                        && container.canCharge(offset.getOpposite())) {
-                    // Check for within buffer range - if so, this pipe will
-                    // only get less filled from here on out
-                    // So it will never attempt to fill that pipe again
-                    percentFilled[j] = container
-                            .getFillPercentageForCharging(offset.getOpposite());
-
-                    if ((this.getFillPercentageForOutput(offset) - percentFilled[j]) < distributionBuffer) {
-                        willCharge[j] = false;
-                        numToFill--;
-                        percentFilled[j] = 1.f;
-                    }
-                }
-                else {
-                    // Update as we fill
-                    willCharge[j] = false;
-                    numToFill--;
-                    percentFilled[j] = 1.f;
-                }
+        //Distribute
+        for (int i = 0; i < 6; ++i) {
+            if (!connections[i]) {
+                continue;
             }
 
-            // Find lowest % filled from
-            int lowest = 0;
-            float lowestAmt = 1.f;
-
-            for (int i = 0; i < 6; i++) {
-                if (willCharge[i] && percentFilled[i] < lowestAmt) {
-                    lowestAmt = percentFilled[i];
-                    lowest = i;
+            ForgeDirection dir = ForgeDirection.getOrientation(i);
+            TileEntity te = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+            if (te instanceof IPowerBlockContainer) {
+                IPowerBlockContainer container = (IPowerBlockContainer) te;
+                float percentDif = fillPercentages[i] - container.getFillPercentageForCharging(dir.getOpposite());
+                if (percentDif > distributionBuffer) {
+                    int amountToCharge = (int) Math.ceil(maxSpreadThisTick * percentDif / percentDifferenceTotal);
+                    consume(container.charge(dir.getOpposite(), amountToCharge));
                 }
-            }
-
-            ForgeDirection offset = ForgeDirection.getOrientation(lowest);
-            int locx = this.xCoord + offset.offsetX;
-            int locy = this.yCoord + offset.offsetY;
-            int locz = this.zCoord + offset.offsetZ;
-
-            int amountToFill = (int) ((float) getCurrentPower() * maxSizePackets);
-            amountToFill = amountToFill < maxSpreadThisTick ? amountToFill
-                    : maxSpreadThisTick;
-            amountToFill = amountToFill < getCurrentPower() ? amountToFill
-                    : getCurrentPower();
-            // Having passed initial check, and due to this now being this
-            // block's
-            // update function, can safely assume adjacent blocks remain the
-            // same (unless it does simultaneous updates)
-            TileEntity TE = this.worldObj.getBlockTileEntity(locx, locy, locz);
-            if (TE instanceof IPowerBlockContainer) {
-                IPowerBlockContainer container = (IPowerBlockContainer) TE;
-
-                int powerconsumed = container.charge(offset.getOpposite(),
-                                                     amountToFill);
-                consume(powerconsumed);
-                maxSpreadThisTick -= powerconsumed;
             }
         }
 
@@ -255,7 +197,7 @@ public class TileEntityPowerBase extends TileEntityBase implements
             int locz = this.zCoord + offset.offsetZ;
 
             TileEntity checkTile = this.worldObj.getBlockTileEntity(locx, locy,
-                                                                    locz);
+                    locz);
 
             if (checkTile instanceof IPowerBlockContainer) {
                 IPowerBlockContainer fc = (IPowerBlockContainer) checkTile;
