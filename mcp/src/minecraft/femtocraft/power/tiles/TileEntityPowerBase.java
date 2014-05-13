@@ -23,6 +23,7 @@ import femtocraft.api.IPowerBlockContainer;
 import femtocraft.api.PowerContainer;
 import femtocraft.core.tiles.TileEntityBase;
 import femtocraft.managers.research.EnumTechLevel;
+import femtocraft.power.FemtocraftPowerUtils;
 import femtocraft.utils.FemtocraftDataUtils.Saveable;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
@@ -35,16 +36,10 @@ public class TileEntityPowerBase extends TileEntityBase implements
     private
     @Saveable(item = true)
     PowerContainer container;
-    private float maxPowerPerTick;
-    private float maxSizePackets;
-    private float distributionBuffer;
 
     public TileEntityPowerBase() {
         super();
         container = new PowerContainer(EnumTechLevel.MACRO, 250);
-        maxPowerPerTick = .05f;
-        maxSizePackets = .05f;
-        distributionBuffer = .01f;
         connections = new boolean[6];
         Arrays.fill(connections, false);
     }
@@ -134,54 +129,8 @@ public class TileEntityPowerBase extends TileEntityBase implements
 
     @Override
     public void femtocraftServerUpdate() {
-        // Don't do anything for empty containers
-        if (getCurrentPower() <= 0) {
-            return;
-        }
-
-        float percentDifferenceTotal = 0.f;
-        int maxSpreadThisTick = (int) ((float) getCurrentPower() * maxPowerPerTick) * numConnections();
-        float[] fillPercentages = new float[6];
-        for (int i = 0; i < 6; ++i) {
-            fillPercentages[i] = getFillPercentageForOutput(ForgeDirection.getOrientation(i));
-        }
-
-        //Sum % differences
-        for (int i = 0; i < 6; ++i) {
-            if (!connections[i]) {
-                continue;
-            }
-
-            ForgeDirection dir = ForgeDirection.getOrientation(i);
-            TileEntity te = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-            if (te instanceof IPowerBlockContainer) {
-
-                IPowerBlockContainer container = (IPowerBlockContainer) te;
-                float percentDif = fillPercentages[i] - container.getFillPercentageForCharging(dir.getOpposite());
-                if (percentDif > distributionBuffer) {
-                    percentDifferenceTotal += percentDif;
-                }
-            }
-        }
-
-        //Distribute
-        for (int i = 0; i < 6; ++i) {
-            if (!connections[i]) {
-                continue;
-            }
-
-            ForgeDirection dir = ForgeDirection.getOrientation(i);
-            TileEntity te = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-            if (te instanceof IPowerBlockContainer) {
-                IPowerBlockContainer container = (IPowerBlockContainer) te;
-                float percentDif = fillPercentages[i] - container.getFillPercentageForCharging(dir.getOpposite());
-                if (percentDif > distributionBuffer) {
-                    int amountToCharge = (int) Math.ceil(maxSpreadThisTick * percentDif / percentDifferenceTotal);
-                    consume(container.charge(dir.getOpposite(), amountToCharge));
-                }
-            }
-        }
-
+        super.femtocraftServerUpdate();
+        FemtocraftPowerUtils.distributePower(this, connections, worldObj, xCoord, yCoord, zCoord);
         setModified();
     }
 
