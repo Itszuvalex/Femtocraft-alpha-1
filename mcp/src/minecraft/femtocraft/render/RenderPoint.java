@@ -48,11 +48,11 @@ public class RenderPoint {
         float ym = this.y;
         float zm = this.z;
         this.y = (float) ((ym - yrotoffset) * Math.cos(rot) - (zm - zrotoffset)
-                * Math.sin(rot))
-                + yrotoffset;
+                                                              * Math.sin(rot))
+                 + yrotoffset;
         this.z = (float) ((ym - yrotoffset) * Math.sin(rot) + (zm - zrotoffset)
-                * Math.cos(rot))
-                + zrotoffset;
+                                                              * Math.cos(rot))
+                 + zrotoffset;
         return this;
     }
 
@@ -64,11 +64,11 @@ public class RenderPoint {
         float xm = this.x;
         float zm = this.z;
         this.z = (float) ((zm - zrotoffset) * Math.cos(rot) - (xm - xrotoffset)
-                * Math.sin(rot))
-                + xrotoffset;
+                                                              * Math.sin(rot))
+                 + xrotoffset;
         this.x = (float) ((zm - zrotoffset) * Math.sin(rot) + (xm - xrotoffset)
-                * Math.cos(rot))
-                + zrotoffset;
+                                                              * Math.cos(rot))
+                 + zrotoffset;
         return this;
     }
 
@@ -80,9 +80,9 @@ public class RenderPoint {
         float xm = this.x;
         float ym = this.y;
         this.x = (float) (((xm - xrotoffset) * Math.cos(rot) - (ym - yrotoffset)
-                * Math.sin(rot)) + xrotoffset);
-        this.y = (float) (((xm - xrotoffset) * Math.sin(rot) + (ym - yrotoffset)
-                * Math.cos(rot)) + yrotoffset);
+                                                               * Math.sin(rot)) + xrotoffset);
+        this.y = (float) ((xm - xrotoffset) * Math.sin(rot) + (ym - yrotoffset)
+                                                              * Math.cos(rot) + yrotoffset);
         return this;
     }
 

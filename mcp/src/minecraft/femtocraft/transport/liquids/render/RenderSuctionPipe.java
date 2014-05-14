@@ -103,7 +103,7 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
         tessellator.setColorOpaque_F(1, 1, 1);
 
         renderPipe((BlockSuctionPipe) block, x, y, z, pipe.pipeconnections,
-                   pipe.tankconnections, pipe.isOutput(), pipe.getRenderFluid());
+                pipe.tankconnections, pipe.isOutput(), pipe.getRenderFluid());
 
         return true;
     }
@@ -125,20 +125,22 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
         float max = 10.f / 16.f;
 
         center_liquid.addQuad(RenderUtils.makeTopFace(min, max, min, max,
-                                                      max - .01f, pipe.center, 0, 0, 0, 0));
+                max - .01f, pipe.center, 0, 0, 0, 0));
         center_liquid.addQuad(RenderUtils.makeBottomFace(min, max, min, max,
-                                                         min + .01f, pipe.center, 0, 0, 0, 0));
+                min + .01f, pipe.center, 0, 0, 0, 0));
         center_liquid.addQuad(RenderUtils.makeNorthFace(min, max, min, max,
-                                                        min + .01f, pipe.center, 0, 0, 0, 0));
+                min + .01f, pipe.center, 0, 0, 0, 0));
         center_liquid.addQuad(RenderUtils.makeSouthFace(min, max, min, max,
-                                                        max - .01f, pipe.center, 0, 0, 0, 0));
+                max - .01f, pipe.center, 0, 0, 0, 0));
         center_liquid.addQuad(RenderUtils.makeEastFace(min, max, min, max,
-                                                       max - .01f, pipe.center, 0, 0, 0, 0));
+                max - .01f, pipe.center, 0, 0, 0, 0));
         center_liquid.addQuad(RenderUtils.makeWestFace(min, max, min, max,
-                                                       min + .01f, pipe.center, 0, 0, 0, 0));
+                min + .01f, pipe.center, 0, 0, 0, 0));
 
         createPipePipe(pipe);
         createPipeTank(pipe);
+
+        initialized = true;
     }
 
     private void createPipePipe(BlockSuctionPipe pipe) {
@@ -160,43 +162,43 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
         {
             // North
             pipes_Up.addQuad(RenderUtils.makeNorthFace(min, max, max, 1.f, min,
-                                                       pipe.connector, minU, maxU, minV, maxV));
+                    pipe.connector, minU, maxU, minV, maxV));
             pipes_Up.addQuad(RenderUtils.makeSouthFace(min, max, max, 1.f, min,
-                                                       pipe.connector, minU, maxU, minV, maxV));
+                    pipe.connector, minU, maxU, minV, maxV));
 
             // South
             pipes_Up.addQuad(RenderUtils.makeSouthFace(min, max, max, 1.f, max,
-                                                       pipe.connector, minU, maxU, minV, maxV));
+                    pipe.connector, minU, maxU, minV, maxV));
             pipes_Up.addQuad(RenderUtils.makeNorthFace(min, max, max, 1.f, max,
-                                                       pipe.connector, minU, maxU, minV, maxV));
+                    pipe.connector, minU, maxU, minV, maxV));
 
             // East
             pipes_Up.addQuad(RenderUtils.makeEastFace(max, 1.f, min, max, max,
-                                                      pipe.connector, minU, maxU, minV, maxV));
+                    pipe.connector, minU, maxU, minV, maxV));
             pipes_Up.addQuad(RenderUtils.makeWestFace(max, 1.f, min, max, max,
-                                                      pipe.connector, minU, maxU, minV, maxV));
+                    pipe.connector, minU, maxU, minV, maxV));
 
             // West
             pipes_Up.addQuad(RenderUtils.makeWestFace(max, 1.f, min, max, min,
-                                                      pipe.connector, minU, maxU, minV, maxV));
+                    pipe.connector, minU, maxU, minV, maxV));
             pipes_Up.addQuad(RenderUtils.makeEastFace(max, 1.f, min, max, min,
-                                                      pipe.connector, minU, maxU, minV, maxV));
+                    pipe.connector, minU, maxU, minV, maxV));
 
             pipes_liquid_Up.addQuad(RenderUtils.makeNorthFace(min + .01f,
-                                                              max - .01f, max, 1.f, min + .01f, pipe.connector, 0, 0, 0,
-                                                              0));
+                    max - .01f, max, 1.f, min + .01f, pipe.connector, 0, 0, 0,
+                    0));
             pipes_liquid_Up.addQuad(RenderUtils.makeSouthFace(min + .01f,
-                                                              max - .01f, max, 1.f, max - .01f, pipe.connector, 0, 0, 0,
-                                                              0));
+                    max - .01f, max, 1.f, max - .01f, pipe.connector, 0, 0, 0,
+                    0));
             pipes_liquid_Up.addQuad(RenderUtils.makeEastFace(max, 1.f,
-                                                             min + .01f, max - .01f, max - .01f, pipe.connector, 0, 0,
-                                                             0, 0));
+                    min + .01f, max - .01f, max - .01f, pipe.connector, 0, 0,
+                    0, 0));
             pipes_liquid_Up.addQuad(RenderUtils.makeWestFace(max, 1.f,
-                                                             min + .01f, max - .01f, min + .01f, pipe.connector, 0, 0,
-                                                             0, 0));
+                    min + .01f, max - .01f, min + .01f, pipe.connector, 0, 0,
+                    0, 0));
 
             pipes_liquid_cap_Up.addQuad(RenderUtils.makeTopFace(min, max, min,
-                                                                max, 1.f, pipe.connector, 0, 0, 0, 0));
+                    max, 1.f, pipe.connector, 0, 0, 0, 0));
         }
 
         pipes_Down = pipes_Up.rotatedOnZAxis(Math.PI);
@@ -250,72 +252,72 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
         {
             // North
             tanks_Up.addQuad(RenderUtils.makeNorthFace(min, max, max, height,
-                                                       min, pipe.connector, minU, maxU, minV, maxV));
+                    min, pipe.connector, minU, maxU, minV, maxV));
             tanks_Up.addQuad(RenderUtils.makeSouthFace(min, max, max, height,
-                                                       min, pipe.connector, minU, maxU, minV, maxV));
+                    min, pipe.connector, minU, maxU, minV, maxV));
 
             // South
             tanks_Up.addQuad(RenderUtils.makeSouthFace(min, max, max, height,
-                                                       max, pipe.connector, minU, maxU, minV, maxV));
+                    max, pipe.connector, minU, maxU, minV, maxV));
             tanks_Up.addQuad(RenderUtils.makeNorthFace(min, max, max, height,
-                                                       max, pipe.connector, minU, maxU, minV, maxV));
+                    max, pipe.connector, minU, maxU, minV, maxV));
 
             // East
             tanks_Up.addQuad(RenderUtils.makeEastFace(max, height, min, max,
-                                                      max, pipe.connector, minU, maxU, minV, maxV));
+                    max, pipe.connector, minU, maxU, minV, maxV));
             tanks_Up.addQuad(RenderUtils.makeWestFace(max, height, min, max,
-                                                      max, pipe.connector, minU, maxU, minV, maxV));
+                    max, pipe.connector, minU, maxU, minV, maxV));
 
             // West
             tanks_Up.addQuad(RenderUtils.makeWestFace(max, height, min, max,
-                                                      min, pipe.connector, minU, maxU, minV, maxV));
+                    min, pipe.connector, minU, maxU, minV, maxV));
             tanks_Up.addQuad(RenderUtils.makeEastFace(max, height, min, max,
-                                                      min, pipe.connector, minU, maxU, minV, maxV));
+                    min, pipe.connector, minU, maxU, minV, maxV));
 
             // Tank cap
             tanks_Up.addQuad(RenderUtils.makeTopFace(min, max, min, max,
-                                                     height, pipe.center, pipe.center.getMinU(),
-                                                     pipe.center.getMaxU(), pipe.center.getMinV(),
-                                                     pipe.center.getMaxV()));
+                    height, pipe.center, pipe.center.getMinU(),
+                    pipe.center.getMaxU(), pipe.center.getMinV(),
+                    pipe.center.getMaxV()));
             tanks_Up.addQuad(RenderUtils.makeBottomFace(min, max, min, max,
-                                                        height, pipe.center, pipe.center.getMinU(),
-                                                        pipe.center.getMaxU(), pipe.center.getMinV(),
-                                                        pipe.center.getMaxV()));
+                    height, pipe.center, pipe.center.getMinU(),
+                    pipe.center.getMaxU(), pipe.center.getMinV(),
+                    pipe.center.getMaxV()));
 
             // Tip
             tanks_Up.addQuad(RenderUtils.makeNorthFace(min_tip, max_tip,
-                                                       height, 1.f, min_tip, pipe.connector_tank, minUtip,
-                                                       maxUtip, minVtip, maxVtip));
+                    height, 1.f, min_tip, pipe.connector_tank, minUtip,
+                    maxUtip, minVtip, maxVtip));
             tanks_Up.addQuad(RenderUtils.makeSouthFace(min_tip, max_tip,
-                                                       height, 1.f, max_tip, pipe.connector_tank, minUtip,
-                                                       maxUtip, minVtip, maxVtip));
+                    height, 1.f, max_tip, pipe.connector_tank, minUtip,
+                    maxUtip, minVtip, maxVtip));
             tanks_Up.addQuad(RenderUtils.makeEastFace(height, 1.f, min_tip,
-                                                      max_tip, max_tip, pipe.connector_tank, minUtip, maxUtip,
-                                                      minVtip, maxVtip));
+                    max_tip, max_tip, pipe.connector_tank, minUtip, maxUtip,
+                    minVtip, maxVtip));
             tanks_Up.addQuad(RenderUtils.makeWestFace(height, 1.f, min_tip,
-                                                      max_tip, min_tip, pipe.connector_tank, minUtip, maxUtip,
-                                                      minVtip, maxVtip));
+                    max_tip, min_tip, pipe.connector_tank, minUtip, maxUtip,
+                    minVtip, maxVtip));
 
             // Tip cap
             tanks_Up.addQuad(RenderUtils.makeTopFace(min_tip, max_tip, min_tip,
-                                                     max_tip, 1.f, pipe.connector_tank,
-                                                     pipe.connector_tank.getMinU(),
-                                                     pipe.connector_tank.getInterpolatedU(4.f),
-                                                     pipe.connector_tank.getInterpolatedV(12.f),
-                                                     pipe.connector_tank.getMaxV()));
+                    max_tip, 1.f, pipe.connector_tank,
+                    pipe.connector_tank.getMinU(),
+                    pipe.connector_tank.getInterpolatedU(4.f),
+                    pipe.connector_tank.getInterpolatedV(12.f),
+                    pipe.connector_tank.getMaxV()));
 
             tanks_liquid_Up.addQuad(RenderUtils.makeNorthFace(min + .01f,
-                                                              max - .01f, max, height, min + .01f, pipe.connector, 0, 0,
-                                                              0, 0));
+                    max - .01f, max, height, min + .01f, pipe.connector, 0, 0,
+                    0, 0));
             tanks_liquid_Up.addQuad(RenderUtils.makeSouthFace(min + .01f,
-                                                              max - .01f, max, height, max - .01f, pipe.connector, 0, 0,
-                                                              0, 0));
+                    max - .01f, max, height, max - .01f, pipe.connector, 0, 0,
+                    0, 0));
             tanks_liquid_Up.addQuad(RenderUtils.makeEastFace(max, height,
-                                                             min + .01f, max - .01f, max - .01f, pipe.connector, 0, 0,
-                                                             0, 0));
+                    min + .01f, max - .01f, max - .01f, pipe.connector, 0, 0,
+                    0, 0));
             tanks_liquid_Up.addQuad(RenderUtils.makeWestFace(max, height,
-                                                             min + .01f, max - .01f, min + .01f, pipe.connector, 0, 0,
-                                                             0, 0));
+                    min + .01f, max - .01f, min + .01f, pipe.connector, 0, 0,
+                    0, 0));
         }
 
         tanks_Down = tanks_Up.rotatedOnZAxis(Math.PI);
@@ -343,7 +345,7 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
         }
 
         RenderUtils.renderDoubleSidedCube(x, y, z, 6.f / 16.f, 10.f / 16.f,
-                                          6.f / 16.f, 10.f / 16.f, 6.f / 16.f, 10.f / 16.f, pipe.center);
+                6.f / 16.f, 10.f / 16.f, 6.f / 16.f, 10.f / 16.f, pipe.center);
 
         if (fluid != null) {
             center_liquid.location = new RenderPoint(x, y, z);
@@ -461,8 +463,7 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
                             quad.minU = pipe.connector_tank.getMinU();
                             quad.maxU = pipe.connector_tank
                                     .getInterpolatedU(4.f);
-                        }
-                        else {
+                        } else {
                             quad.minU = pipe.connector_tank
                                     .getInterpolatedU(8.f);
                             quad.maxU = pipe.connector_tank
