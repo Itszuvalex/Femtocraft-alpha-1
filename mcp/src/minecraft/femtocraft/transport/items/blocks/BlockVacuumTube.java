@@ -54,7 +54,7 @@ public class BlockVacuumTube extends TileContainer {
 
     public BlockVacuumTube(int id) {
         super(id, Material.iron);
-        setUnlocalizedName("vacuumTube");
+        setUnlocalizedName("BlockVacuumTube");
         setHardness(3.5f);
         setStepSound(Block.soundMetalFootstep);
         setCreativeTab(Femtocraft.femtocraftTab);
@@ -103,7 +103,7 @@ public class BlockVacuumTube extends TileContainer {
         // }
         // }
         super.onBlockPlacedBy(par1World, par2, par3, par4,
-                              par5EntityLivingBase, par6ItemStack);
+                par5EntityLivingBase, par6ItemStack);
     }
 
     @Override
@@ -214,13 +214,14 @@ public class BlockVacuumTube extends TileContainer {
         straightIcon = par1IconRegister.registerIcon(Femtocraft.ID
                                                              .toLowerCase() + ":" + "VacuumTube_side_straight");
         straightInsetIcon = par1IconRegister.registerIcon(Femtocraft.ID
-                                                                  .toLowerCase() + ":" + "VacuumTube_side_straight_inset");
+                                                                  .toLowerCase() + ":" +
+                                                          "VacuumTube_side_straight_inset");
         turnIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                                                         + ":" + "VacuumTube_side_curved");
+                                                 + ":" + "VacuumTube_side_curved");
         turnInsetIcon = par1IconRegister.registerIcon(Femtocraft.ID
                                                               .toLowerCase() + ":" + "VacuumTube_side_curved_inset");
         endIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                                                        + ":" + "VacuumTube_end");
+                                                + ":" + "VacuumTube_end");
         endInsetIcon = par1IconRegister.registerIcon(Femtocraft.ID
                                                              .toLowerCase() + ":" + "VacuumTube_end_inset");
     }
@@ -230,7 +231,7 @@ public class BlockVacuumTube extends TileContainer {
                                         AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
 
         super.addCollisionBoxesToList(par1World, x, y, z, par5AxisAlignedBB,
-                                      par6List, par7Entity);
+                par6List, par7Entity);
 
         TileEntity tile = par1World.getBlockTileEntity(x, y, z);
         if (!(tile instanceof TileEntityVacuumTube)) {
@@ -239,13 +240,13 @@ public class BlockVacuumTube extends TileContainer {
         TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
 
         AxisAlignedBB inputBB = boundingBoxForDirection(tube.getInput(), x, y,
-                                                        z);
+                z);
         if (par5AxisAlignedBB.intersectsWith(inputBB)) {
             par6List.add(inputBB);
         }
 
         AxisAlignedBB outputBB = boundingBoxForDirection(tube.getOutput(), x,
-                                                         y, z);
+                y, z);
         if (par5AxisAlignedBB.intersectsWith(outputBB)) {
             par6List.add(outputBB);
         }
@@ -286,17 +287,17 @@ public class BlockVacuumTube extends TileContainer {
         }
 
         return AxisAlignedBB.getAABBPool().getAABB((double) x + minX,
-                                                   (double) y + minY, (double) z + minZ, (double) x + maxX,
-                                                   (double) y + maxY, (double) z + maxZ);
+                (double) y + minY, (double) z + minZ, (double) x + maxX,
+                (double) y + maxY, (double) z + maxZ);
     }
 
     @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
                                                          int x, int y, int z) {
         return AxisAlignedBB.getAABBPool().getAABB((double) x + 4.d / 16.d,
-                                                   (double) y + 4.d / 16.d, (double) z + 4.d / 16.d,
-                                                   (double) x + 12.d / 16.d, (double) y + 12.d / 16.d,
-                                                   (double) z + 12.d / 16.d);
+                (double) y + 4.d / 16.d, (double) z + 4.d / 16.d,
+                (double) x + 12.d / 16.d, (double) y + 12.d / 16.d,
+                (double) z + 12.d / 16.d);
     }
 
     @Override
@@ -318,9 +319,9 @@ public class BlockVacuumTube extends TileContainer {
         TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
 
         AxisAlignedBB inputBB = boundingBoxForDirection(tube.getInput(), x, y,
-                                                        z);
+                z);
         AxisAlignedBB outputBB = boundingBoxForDirection(tube.getOutput(), x,
-                                                         y, z);
+                y, z);
 
         return box.func_111270_a(inputBB).func_111270_a(outputBB);
     }
@@ -329,9 +330,9 @@ public class BlockVacuumTube extends TileContainer {
     public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess,
                                            int x, int y, int z) {
         AxisAlignedBB.getAABBPool().getAABB((double) x + 4.f / 16.f,
-                                            (double) y + 4.f / 16.f, (double) z + 4.f / 16.f,
-                                            (double) x + 12.f / 16.f, (double) y + 12.f / 16.f,
-                                            (double) z + 12.f / 16.f);
+                (double) y + 4.f / 16.f, (double) z + 4.f / 16.f,
+                (double) x + 12.f / 16.f, (double) y + 12.f / 16.f,
+                (double) z + 12.f / 16.f);
 
         TileEntity tile = par1iBlockAccess.getBlockTileEntity(x, y, z);
         if (!(tile instanceof TileEntityVacuumTube)) {
@@ -396,6 +397,6 @@ public class BlockVacuumTube extends TileContainer {
         }
 
         setBlockBounds((float) minX, (float) minY, (float) minZ, (float) maxX,
-                       (float) maxY, (float) maxZ);
+                (float) maxY, (float) maxZ);
     }
 }
