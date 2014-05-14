@@ -52,9 +52,22 @@ public class FemtocraftPowerUtils {
         if (container.getCurrentPower() <= 0) {
             return;
         }
+        if (connections.length != 6) {
+            return;
+        }
+        IPowerBlockContainer[] cons = new IPowerBlockContainer[6];
+
         int numConnections = 0;
         for (int i = 0; i < 6; ++i) {
-            numConnections += connections[i] ? 1 : 0;
+            if (!connections[i]) {
+                continue;
+            }
+            ForgeDirection dir = ForgeDirection.getOrientation(i);
+            TileEntity te = world.getBlockTileEntity(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
+            if (te instanceof IPowerBlockContainer) {
+                cons[i] = (IPowerBlockContainer) te;
+                ++numConnections;
+            }
         }
 
         float percentDifferenceTotal = 0.f;
@@ -66,39 +79,28 @@ public class FemtocraftPowerUtils {
 
         //Sum % differences
         for (int i = 0; i < 6; ++i) {
-            if (!connections[i]) {
+            if (!connections[i] || cons[i] == null) {
                 continue;
             }
-
             ForgeDirection dir = ForgeDirection.getOrientation(i);
-            TileEntity te = world.getBlockTileEntity(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
-            if (te instanceof IPowerBlockContainer) {
-
-                IPowerBlockContainer dest = (IPowerBlockContainer) te;
-                float percentDif = fillPercentages[i] - dest.getFillPercentageForCharging(dir.getOpposite());
-                if (percentDif > distributionBuffer) {
-                    percentDifferenceTotal += percentDif;
-                }
+            float percentDif = fillPercentages[i] - cons[i].getFillPercentageForCharging(dir.getOpposite());
+            if (percentDif > distributionBuffer) {
+                percentDifferenceTotal += percentDif;
             }
+
         }
 
         //Distribute
         for (int i = 0; i < 6; ++i) {
-            if (!connections[i]) {
+            if (!connections[i] || cons[i] == null) {
                 continue;
             }
-
             ForgeDirection dir = ForgeDirection.getOrientation(i);
-            TileEntity te = world.getBlockTileEntity(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
-            if (te instanceof IPowerBlockContainer) {
-                IPowerBlockContainer dest = (IPowerBlockContainer) te;
-                float percentDif = fillPercentages[i] - dest.getFillPercentageForCharging(dir.getOpposite());
-                if (percentDif > distributionBuffer) {
-                    int amountToCharge = (int) Math.ceil(maxSpreadThisTick * percentDif / percentDifferenceTotal);
-                    container.consume(dest.charge(dir.getOpposite(), amountToCharge));
-                }
+            float percentDif = fillPercentages[i] - cons[i].getFillPercentageForCharging(dir.getOpposite());
+            if (percentDif > distributionBuffer) {
+                int amountToCharge = (int) Math.ceil(maxSpreadThisTick * percentDif / percentDifferenceTotal);
+                container.consume(cons[i].charge(dir.getOpposite(), amountToCharge));
             }
         }
     }
-
 }

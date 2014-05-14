@@ -141,11 +141,6 @@ public class TileEntityResearchConsole extends TileEntityBase implements
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
-    }
-
-    @Override
     public void femtocraftServerUpdate() {
         super.femtocraftServerUpdate();
         if (researchingTech != null) {

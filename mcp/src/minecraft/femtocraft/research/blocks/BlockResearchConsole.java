@@ -74,9 +74,9 @@ public class BlockResearchConsole extends TileContainer {
 
                         itemstack.stackSize -= k1;
                         EntityItem entityitem = new EntityItem(par1World,
-                                                               (double) ((float) par2 + f),
-                                                               (double) ((float) par3 + f1),
-                                                               (double) ((float) par4 + f2), new ItemStack(
+                                (double) ((float) par2 + f),
+                                (double) ((float) par3 + f1),
+                                (double) ((float) par4 + f2), new ItemStack(
                                 itemstack.itemID, k1,
                                 itemstack.getItemDamage())
                         );
@@ -84,7 +84,7 @@ public class BlockResearchConsole extends TileContainer {
                         if (itemstack.hasTagCompound()) {
                             entityitem.getEntityItem().setTagCompound(
                                     (NBTTagCompound) itemstack.getTagCompound()
-                                                              .copy()
+                                            .copy()
                             );
                         }
 
@@ -130,9 +130,9 @@ public class BlockResearchConsole extends TileContainer {
         blockIcon = side = par1IconRegister.registerIcon(Femtocraft.ID
                                                                  .toLowerCase() + ":" + "BlockResearchConsole_side");
         top = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":"
-                                                    + "BlockResearchConsole_top");
+                                            + "BlockResearchConsole_top");
         bot = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":"
-                                                    + "BlockResearchConsole_bot");
+                                            + "BlockResearchConsole_bot");
     }
 
 }
