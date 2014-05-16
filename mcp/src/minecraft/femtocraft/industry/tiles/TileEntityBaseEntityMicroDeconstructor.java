@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class TileEntityBaseEntityMicroDeconstructor extends
-                                                    TileEntityBaseEntityIndustry implements ISidedInventory, IFluidHandler {
+        TileEntityBaseEntityIndustry implements ISidedInventory, IFluidHandler {
     public static int powerToCook = 40;
     public static int ticksToCook = 100;
     public static int maxSmelt = 1;
@@ -111,6 +111,7 @@ public class TileEntityBaseEntityMicroDeconstructor extends
      * Returns the number of slots in the inventory.
      */
 
+    @Override
     public int getSizeInventory() {
         return deconstructorInventory.getSizeInventory();
     }
@@ -118,14 +119,16 @@ public class TileEntityBaseEntityMicroDeconstructor extends
     /**
      * Returns the stack in slot i
      */
+    @Override
     public ItemStack getStackInSlot(int par1) {
         return deconstructorInventory.getStackInSlot(par1);
     }
 
     /**
-     * Removes from an inventory slot (first arg) up to a specified number
-     * (second arg) of items and returns them in a new stack.
+     * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
+     * new stack.
      */
+    @Override
     public ItemStack decrStackSize(int par1, int par2) {
         ItemStack ret = deconstructorInventory.decrStackSize(par1, par2);
         this.onInventoryChanged();
@@ -133,25 +136,24 @@ public class TileEntityBaseEntityMicroDeconstructor extends
     }
 
     /**
-     * When some containers are closed they call this on each slot, then drop
-     * whatever it returns as an EntityItem - like when you close a workbench
-     * GUI.
+     * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
+     * like when you close a workbench GUI.
      */
+    @Override
     public ItemStack getStackInSlotOnClosing(int par1) {
         if (deconstructorInventory.getInventory()[par1] != null) {
             ItemStack itemstack = deconstructorInventory.getInventory()[par1];
             deconstructorInventory.getInventory()[par1] = null;
             return itemstack;
-        }
-        else {
+        } else {
             return null;
         }
     }
 
     /**
-     * Sets the given item stack to the specified slot in the inventory (can be
-     * crafting or armor sections).
+     * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
      */
+    @Override
     public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
         deconstructorInventory.setInventorySlotContents(par1, par2ItemStack);
         this.onInventoryChanged();
@@ -160,16 +162,17 @@ public class TileEntityBaseEntityMicroDeconstructor extends
     /**
      * Returns the name of the inventory.
      */
+    @Override
     public String getInvName() {
         return this.isInvNameLocalized() ? this.field_94130_e
                 : "Microtech Deconstructor";
     }
 
     /**
-     * If this returns false, the inventory name will be used as an unlocalized
-     * name, and translated into the player's language. Otherwise it will be
-     * used directly.
+     * If this returns false, the inventory name will be used as an unlocalized name, and translated into the player's
+     * language. Otherwise it will be used directly.
      */
+    @Override
     public boolean isInvNameLocalized() {
         return this.field_94130_e != null && this.field_94130_e.length() > 0;
     }
@@ -179,9 +182,10 @@ public class TileEntityBaseEntityMicroDeconstructor extends
     }
 
     /**
-     * Returns the maximum stack size for a inventory slot. Seems to always be
-     * 64, possibly will be extended. *Isn't this more of a set than a get?*
+     * Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be extended. *Isn't
+     * this more of a set than a get?*
      */
+    @Override
     public int getInventoryStackLimit() {
         return deconstructorInventory.getInventoryStackLimit();
     }
@@ -217,22 +221,21 @@ public class TileEntityBaseEntityMicroDeconstructor extends
     @Override
     protected boolean canStartWork() {
         if (getStackInSlot(0) == null || deconstructingStack != null
-                || this.getCurrentPower() < getPowerToCook()) {
+            || this.getCurrentPower() < getPowerToCook()) {
             return false;
-        }
-        else {
+        } else {
             AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
                     .getRecipe(deconstructorInventory.getStackInSlot(0));
             return recipe != null &&
-                    recipe.enumTechLevel.tier <= getAssemblerTech().tier &&
-                    (tank
+                   recipe.enumTechLevel.tier <= getAssemblerTech().tier &&
+                   (tank
                             .getCapacity() -
-                            tank
-                                    .getFluidAmount())
-                            >=
-                            recipe.mass
-                    && getStackInSlot(0).stackSize >= recipe.output.stackSize
-                    && roomForItems(recipe.input);
+                    tank
+                            .getFluidAmount())
+                   >=
+                   recipe.mass
+                   && getStackInSlot(0).stackSize >= recipe.output.stackSize
+                   && roomForItems(recipe.input);
         }
     }
 
@@ -315,15 +318,14 @@ public class TileEntityBaseEntityMicroDeconstructor extends
             if (recipe != null) {
                 for (ItemStack item : recipe.input) {
                     FemtocraftUtils.placeItem(item,
-                                              deconstructorInventory.getInventory(),
-                                              placementRestrictionArray);
+                            deconstructorInventory.getInventory(),
+                            placementRestrictionArray);
                 }
                 // tank.fill(new FluidStack(Femtocraft.mass, recipe.mass),
                 // true);
                 if (tank.getFluid() == null) {
                     tank.setFluid(new FluidStack(Femtocraft.mass, recipe.mass));
-                }
-                else {
+                } else {
                     tank.getFluid().amount += recipe.mass;
                 }
                 // deconstructingStack = null;
@@ -344,7 +346,7 @@ public class TileEntityBaseEntityMicroDeconstructor extends
         }
         for (ItemStack item : items) {
             if (!FemtocraftUtils.placeItem(item == null ? null : item.copy(),
-                                           fake, null)) {
+                    fake, null)) {
                 return false;
             }
         }
@@ -357,45 +359,18 @@ public class TileEntityBaseEntityMicroDeconstructor extends
         return true;
     }
 
+    @Override
     public void openChest() {
     }
 
+    @Override
     public void closeChest() {
     }
 
     /**
-     * Returns true if automation is allowed to insert the given stack (ignoring
-     * stack size) into the given slot.
-     */
-    public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack) {
-        return par1 == 0;
-    }
-
-    /**
-     * Get the size of the side inventory.
-     */
-    public int[] getSizeInventorySide(int par1) {
-        if (par1 == 1) {
-            return new int[]{0};
-        }
-        else {
-            return new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
-        }
-    }
-
-    public boolean func_102007_a(int par1, ItemStack par2ItemStack, int par3) {
-        return this.isStackValidForSlot(par1, par2ItemStack);
-    }
-
-    public boolean func_102008_b(int par1, ItemStack par2ItemStack, int par3) {
-        return true;
-    }
-
-    /**
-     * ********************************************************************************
-     * This function is here for compatibilities sake, Modders should Check for
-     * Sided before ContainerWorldly, Vanilla Minecraft does not follow the
-     * sided standard that Modding has for a while.
+     * ******************************************************************************** This function is here for
+     * compatibilities sake, Modders should Check for Sided before ContainerWorldly, Vanilla Minecraft does not follow
+     * the sided standard that Modding has for a while.
      * <p/>
      * In vanilla:
      * <p/>
@@ -403,12 +378,10 @@ public class TileEntityBaseEntityMicroDeconstructor extends
      * <p/>
      * Standard Modding: Top: Ores Sides: Output Bottom: Fuel
      * <p/>
-     * The Modding one is designed after the GUI, the vanilla one is designed
-     * because its intended use is for the hopper, which logically would take
-     * things in from the top.
+     * The Modding one is designed after the GUI, the vanilla one is designed because its intended use is for the
+     * hopper, which logically would take things in from the top.
      * <p/>
-     * This will possibly be removed in future updates, and make vanilla the
-     * definitive standard.
+     * This will possibly be removed in future updates, and make vanilla the definitive standard.
      */
 
     @Override
@@ -485,8 +458,7 @@ public class TileEntityBaseEntityMicroDeconstructor extends
     public void setFluidAmount(int amount) {
         if (tank.getFluid() != null) {
             tank.setFluid(new FluidStack(tank.getFluid().fluidID, amount));
-        }
-        else {
+        } else {
             tank.setFluid(new FluidStack(Femtocraft.mass, amount));
         }
     }

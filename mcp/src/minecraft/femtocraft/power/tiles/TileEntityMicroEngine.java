@@ -25,13 +25,12 @@ import femtocraft.industry.tiles.TileEntityBaseEntityIndustry;
 import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.utils.BaseInventory;
 import femtocraft.utils.FemtocraftDataUtils;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityMicroEngine extends TileEntityBaseEntityIndustry
-        implements IInventory, ISidedInventory {
+        implements ISidedInventory {
     public static int powerPerTick = 1;
     public static float powerPerTickMultipler = 1.f;
     public static float cookTimeMultipler = 1.f;
@@ -63,16 +62,16 @@ public class TileEntityMicroEngine extends TileEntityBaseEntityIndustry
     @java.lang.Override
     protected boolean canStartWork() {
         return currentHeat == 0 && inventory.getStackInSlot(inputSlot) != null &&
-                GameRegistry.getFuelValue
-                        (inventory
-                                 .getStackInSlot(inputSlot)) > 0;
+               GameRegistry.getFuelValue
+                       (inventory
+                               .getStackInSlot(inputSlot)) > 0;
     }
 
     @java.lang.Override
     protected void startWork() {
         maxHeat = currentHeat = (int) (cookTimeMultipler * GameRegistry.getFuelValue
                 (inventory
-                         .getStackInSlot(inputSlot)));
+                        .getStackInSlot(inputSlot)));
         inventory.decrStackSize(inputSlot, 1);
     }
 

@@ -26,7 +26,6 @@ import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.utils.BaseInventory;
 import femtocraft.utils.FemtocraftDataUtils;
 import femtocraft.utils.FemtocraftUtils;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
@@ -34,8 +33,8 @@ import net.minecraftforge.common.ForgeDirection;
 import java.util.Arrays;
 
 public class TileEntityBaseEntityNanoEnmesher extends
-                                              TileEntityBaseEntityIndustry
-        implements IInventory, ISidedInventory {
+        TileEntityBaseEntityIndustry
+        implements ISidedInventory {
     public static final int inputSlot = 0;
     public static final int outputSlot = 5;
     public static final int inventorySize = 6;
@@ -87,7 +86,7 @@ public class TileEntityBaseEntityNanoEnmesher extends
 
     protected ItemStack[] getConfigurators() {
         return Arrays.copyOfRange(inventory.getInventory(),
-                                  inputSlot + 1, getOutputSlotIndex() - 1);
+                inputSlot + 1, getOutputSlotIndex() - 1);
     }
 
     public int getCookProgressScaled(int i) {
@@ -114,7 +113,7 @@ public class TileEntityBaseEntityNanoEnmesher extends
 
         DimensionalRecipe dr = Femtocraft.recipeManager.dimensionalRecipes
                 .getRecipe(inventory.getStackInSlot(inputSlot),
-                           getConfigurators()
+                        getConfigurators()
                 );
         if (dr == null) {
             return false;
@@ -124,7 +123,7 @@ public class TileEntityBaseEntityNanoEnmesher extends
         }
         if (
                 !Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner(),
-                                                                          dr.getTechnology())) {
+                        dr.getTechnology())) {
             return false;
         }
 
@@ -150,8 +149,8 @@ public class TileEntityBaseEntityNanoEnmesher extends
     protected void startWork() {
         DimensionalRecipe dr = Femtocraft.recipeManager.dimensionalRecipes
                 .getRecipe(inventory.getStackInSlot(inputSlot),
-                           Arrays.copyOfRange(inventory.getInventory(),
-                                              inputSlot + 1, getOutputSlotIndex() - 1)
+                        Arrays.copyOfRange(inventory.getInventory(),
+                                inputSlot + 1, getOutputSlotIndex() - 1)
                 );
 
         meshStack = inventory.decrStackSize(inputSlot, dr.input.stackSize);
@@ -188,7 +187,7 @@ public class TileEntityBaseEntityNanoEnmesher extends
             }
 
             FemtocraftUtils.placeItem(dr.output, inventory.getInventory(),
-                                      placeRestrictions);
+                    placeRestrictions);
             onInventoryChanged();
         }
         cookTime = 0;

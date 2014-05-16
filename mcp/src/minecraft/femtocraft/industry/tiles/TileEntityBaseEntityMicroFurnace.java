@@ -30,7 +30,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 
 public class TileEntityBaseEntityMicroFurnace extends
-                                              TileEntityBaseEntityIndustry implements ISidedInventory {
+        TileEntityBaseEntityIndustry implements ISidedInventory {
     public static int powerToCook = 40;
     public static int ticksToCook = 100;
     public static int maxSmelt = 1;
@@ -98,8 +98,8 @@ public class TileEntityBaseEntityMicroFurnace extends
     }
 
     /**
-     * Removes from an inventory slot (first arg) up to a specified number
-     * (second arg) of items and returns them in a new stack.
+     * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
+     * new stack.
      */
     @Override
     public ItemStack decrStackSize(int par1, int par2) {
@@ -110,8 +110,7 @@ public class TileEntityBaseEntityMicroFurnace extends
                 itemstack = this.furnaceItemStacks[par1];
                 this.furnaceItemStacks[par1] = null;
                 return itemstack;
-            }
-            else {
+            } else {
                 itemstack = this.furnaceItemStacks[par1].splitStack(par2);
 
                 if (this.furnaceItemStacks[par1].stackSize == 0) {
@@ -120,16 +119,14 @@ public class TileEntityBaseEntityMicroFurnace extends
 
                 return itemstack;
             }
-        }
-        else {
+        } else {
             return null;
         }
     }
 
     /**
-     * When some containers are closed they call this on each slot, then drop
-     * whatever it returns as an EntityItem - like when you close a workbench
-     * GUI.
+     * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
+     * like when you close a workbench GUI.
      */
     @Override
     public ItemStack getStackInSlotOnClosing(int par1) {
@@ -137,22 +134,20 @@ public class TileEntityBaseEntityMicroFurnace extends
             ItemStack itemstack = this.furnaceItemStacks[par1];
             this.furnaceItemStacks[par1] = null;
             return itemstack;
-        }
-        else {
+        } else {
             return null;
         }
     }
 
     /**
-     * Sets the given item stack to the specified slot in the inventory (can be
-     * crafting or armor sections).
+     * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
      */
     @Override
     public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
         this.furnaceItemStacks[par1] = par2ItemStack;
 
         if (par2ItemStack != null
-                && par2ItemStack.stackSize > this.getInventoryStackLimit()) {
+            && par2ItemStack.stackSize > this.getInventoryStackLimit()) {
             par2ItemStack.stackSize = this.getInventoryStackLimit();
         }
     }
@@ -166,9 +161,8 @@ public class TileEntityBaseEntityMicroFurnace extends
     }
 
     /**
-     * If this returns false, the inventory name will be used as an unlocalized
-     * name, and translated into the player's language. Otherwise it will be
-     * used directly.
+     * If this returns false, the inventory name will be used as an unlocalized name, and translated into the player's
+     * language. Otherwise it will be used directly.
      */
     @Override
     public boolean isInvNameLocalized() {
@@ -180,8 +174,8 @@ public class TileEntityBaseEntityMicroFurnace extends
     }
 
     /**
-     * Returns the maximum stack size for a inventory slot. Seems to always be
-     * 64, possibly will be extended. *Isn't this more of a set than a get?*
+     * Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be extended. *Isn't
+     * this more of a set than a get?*
      */
     @Override
     public int getInventoryStackLimit() {
@@ -212,11 +206,9 @@ public class TileEntityBaseEntityMicroFurnace extends
         }
         if (smeltingStack != null) {
             return false;
-        }
-        else if (getCurrentPower() < getPowerToCook()) {
+        } else if (getCurrentPower() < getPowerToCook()) {
             return false;
-        }
-        else {
+        } else {
             ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(
                     this.furnaceItemStacks[0]);
             if (itemstack == null) {
@@ -229,8 +221,8 @@ public class TileEntityBaseEntityMicroFurnace extends
                 return false;
             }
             int result = furnaceItemStacks[1].stackSize + itemstack.stackSize;
-            return (result <= getInventoryStackLimit() && result <= itemstack
-                    .getMaxStackSize());
+            return result <= getInventoryStackLimit() && result <= itemstack
+                    .getMaxStackSize();
         }
     }
 
@@ -243,7 +235,7 @@ public class TileEntityBaseEntityMicroFurnace extends
         do {
 
             if (furnaceItemStacks[1] != null
-                    && ((smeltingStack.stackSize + i) > furnaceItemStacks[1]
+                && ((smeltingStack.stackSize + i) > furnaceItemStacks[1]
                     .getMaxStackSize())) {
                 break;
             }
@@ -289,8 +281,7 @@ public class TileEntityBaseEntityMicroFurnace extends
             if (this.furnaceItemStacks[1] == null) {
                 this.furnaceItemStacks[1] = itemstack.copy();
                 this.furnaceItemStacks[1].stackSize = smeltingStack.stackSize;
-            }
-            else if (this.furnaceItemStacks[1].isItemEqual(itemstack)) {
+            } else if (this.furnaceItemStacks[1].isItemEqual(itemstack)) {
                 furnaceItemStacks[1].stackSize += smeltingStack.stackSize;
             }
 
@@ -304,7 +295,7 @@ public class TileEntityBaseEntityMicroFurnace extends
 
     protected void updateBlockState(boolean working) {
         BlockMicroFurnace.updateFurnaceBlockState(working, this.worldObj,
-                                                  this.xCoord, this.yCoord, this.zCoord);
+                this.xCoord, this.yCoord, this.zCoord);
     }
 
     @Override
@@ -320,39 +311,11 @@ public class TileEntityBaseEntityMicroFurnace extends
     public void closeChest() {
     }
 
-    /**
-     * Returns true if automation is allowed to insert the given stack (ignoring
-     * stack size) into the given slot.
-     */
-    public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack) {
-        return par1 != 1;
-    }
 
     /**
-     * Get the size of the side inventory.
-     */
-    public int[] getSizeInventorySide(int par1) {
-        if (par1 == 1) {
-            return new int[]{0};
-        }
-        else {
-            return new int[]{1};
-        }
-    }
-
-    public boolean func_102007_a(int par1, ItemStack par2ItemStack, int par3) {
-        return this.isStackValidForSlot(par1, par2ItemStack);
-    }
-
-    public boolean func_102008_b(int par1, ItemStack par2ItemStack, int par3) {
-        return true;
-    }
-
-    /**
-     * ********************************************************************************
-     * This function is here for compatibilities sake, Modders should Check for
-     * Sided before ContainerWorldly, Vanilla Minecraft does not follow the
-     * sided standard that Modding has for a while.
+     * ******************************************************************************** This function is here for
+     * compatibilities sake, Modders should Check for Sided before ContainerWorldly, Vanilla Minecraft does not follow
+     * the sided standard that Modding has for a while.
      * <p/>
      * In vanilla:
      * <p/>
@@ -360,12 +323,10 @@ public class TileEntityBaseEntityMicroFurnace extends
      * <p/>
      * Standard Modding: Top: Ores Sides: Output Bottom: Fuel
      * <p/>
-     * The Modding one is designed after the GUI, the vanilla one is designed
-     * because its intended use is for the hopper, which logically would take
-     * things in from the top.
+     * The Modding one is designed after the GUI, the vanilla one is designed because its intended use is for the
+     * hopper, which logically would take things in from the top.
      * <p/>
-     * This will possibly be removed in future updates, and make vanilla the
-     * definitive standard.
+     * This will possibly be removed in future updates, and make vanilla the definitive standard.
      */
 
     @Override
