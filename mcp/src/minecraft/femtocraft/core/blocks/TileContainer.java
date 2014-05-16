@@ -61,7 +61,7 @@ public class TileContainer extends BlockContainer {
             return tile.onSideActivate(par5EntityPlayer, par6);
         }
         return super.onBlockActivated(par1World, par2, par3, par4,
-                                      par5EntityPlayer, par6, par7, par8, par9);
+                par5EntityPlayer, par6, par7, par8, par9);
     }
 
     @Override
@@ -77,12 +77,12 @@ public class TileContainer extends BlockContainer {
                 if (par5EntityLivingBase instanceof EntityPlayerMP) {
                     Item item = par6ItemStack.getItem();
                     if ((item instanceof CoreItemBlock)
-                            && (((CoreItemBlock) item).hasItemNBT())) {
+                        && (((CoreItemBlock) item).hasItemNBT())) {
                         ((TileEntityBase) te)
                                 .loadInfoFromItemNBT(par6ItemStack.stackTagCompound);
                     }
                     if (((TileEntityBase) te).getOwner() == null
-                            || ((TileEntityBase) te).getOwner().isEmpty()) {
+                        || ((TileEntityBase) te).getOwner().isEmpty()) {
                         ((TileEntityBase) te)
                                 .setOwner(((EntityPlayerMP) par5EntityLivingBase).username);
                     }
@@ -90,7 +90,7 @@ public class TileContainer extends BlockContainer {
             }
         }
         super.onBlockPlacedBy(par1World, par2, par3, par4,
-                              par5EntityLivingBase, par6ItemStack);
+                par5EntityLivingBase, par6ItemStack);
     }
 
     @Override
@@ -104,13 +104,13 @@ public class TileContainer extends BlockContainer {
                 ItemStack stack = new ItemStack(Block.blocksList[par5]);
                 Item item = stack.getItem();
                 if ((item instanceof CoreItemBlock)
-                        && (((CoreItemBlock) item).hasItemNBT())) {
+                    && ((CoreItemBlock) item).hasItemNBT()) {
                     stack.stackTagCompound = new NBTTagCompound();
                     tile.saveInfoToItemNBT(stack.stackTagCompound);
                 }
 
                 EntityItem spawn = new EntityItem(par1World, par2 + .5d,
-                                                  par3 + .5d, par4 + .5d, stack);
+                        par3 + .5d, par4 + .5d, stack);
                 spawn.delayBeforeCanPickup = 10;
                 par1World.spawnEntityInWorld(spawn);
             }
@@ -126,7 +126,7 @@ public class TileContainer extends BlockContainer {
             return false;
         }
         if (!canPlayerRemove(player, (TileEntityBase) te)) {
-            player.addChatMessage("You do not own this block.");
+            player.addChatMessage(((TileEntityBase) te).getOwner() + " is the owner of this block.");
             return false;
         }
         return super.removeBlockByPlayer(world, player, x, y, z);
@@ -134,11 +134,11 @@ public class TileContainer extends BlockContainer {
 
     private boolean canPlayerRemove(EntityPlayer player, TileEntityBase tile) {
         return player != null
-                && (tile.getOwner() == null
-                || tile.getOwner().equals(player.username)
-                || MinecraftServer.getServer()
-                                  .getConfigurationManager()
-                                  .isPlayerOpped(player.username) || player.capabilities.isCreativeMode);
+               && (tile.getOwner() == null
+                   || tile.getOwner().equals(player.username)
+                   || MinecraftServer.getServer()
+                .getConfigurationManager()
+                .isPlayerOpped(player.username) || player.capabilities.isCreativeMode);
     }
 
     @Override
@@ -146,8 +146,8 @@ public class TileContainer extends BlockContainer {
                                     Entity entity) {
         TileEntity te = world.getBlockTileEntity(x, y, z);
         return te instanceof TileEntityBase && entity instanceof EntityPlayer
-                && canPlayerRemove((EntityPlayer) entity, (TileEntityBase) te)
-                && super.canEntityDestroy(world, x, y, z, entity);
+               && canPlayerRemove((EntityPlayer) entity, (TileEntityBase) te)
+               && super.canEntityDestroy(world, x, y, z, entity);
     }
 
     @Override
