@@ -43,7 +43,7 @@ public class TileEntityFemtoStellaratorFocus extends TileEntityBase
         implements IMultiBlockComponent, IFusionReactorComponent {
     public static int temperatureRating = 5000;
     public static int stability = 5000;
-    @FemtocraftDataUtils.Saveable
+    @FemtocraftDataUtils.Saveable(desc = true)
     private MultiBlockInfo info;
     @FemtocraftDataUtils.Saveable
     private WorldLocation coreLocation;

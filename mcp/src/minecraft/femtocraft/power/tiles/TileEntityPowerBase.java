@@ -31,9 +31,9 @@ import net.minecraftforge.common.ForgeDirection;
 import java.util.Arrays;
 
 public class TileEntityPowerBase extends TileEntityBase implements
-        IPowerBlockContainer {
+                                                        IPowerBlockContainer {
     public boolean[] connections;
-    private
+    protected
     @Saveable(item = true)
     PowerContainer container;
 
@@ -146,7 +146,7 @@ public class TileEntityPowerBase extends TileEntityBase implements
             int locz = this.zCoord + offset.offsetZ;
 
             TileEntity checkTile = this.worldObj.getBlockTileEntity(locx, locy,
-                    locz);
+                                                                    locz);
 
             if (checkTile instanceof IPowerBlockContainer) {
                 IPowerBlockContainer fc = (IPowerBlockContainer) checkTile;

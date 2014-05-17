@@ -45,7 +45,7 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
     public static int plasmaFlowTicksToGenerateMax = 200;
     @FemtocraftDataUtils.Saveable
     private FusionReactorCore core;
-    @FemtocraftDataUtils.Saveable
+    @FemtocraftDataUtils.Saveable(desc = true)
     private MultiBlockInfo info;
 
     public TileEntityFemtoStellaratorCore() {

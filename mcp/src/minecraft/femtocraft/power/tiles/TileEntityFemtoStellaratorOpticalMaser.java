@@ -51,14 +51,14 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
     private boolean sustaining;
     @FemtocraftDataUtils.Saveable
     private boolean warmed;
-    @FemtocraftDataUtils.Saveable
+    @FemtocraftDataUtils.Saveable(desc = true)
     private MultiBlockInfo info;
-    private boolean checkForCore = false;
     private IFusionReactorCore core;
     @FemtocraftDataUtils.Saveable
     private WorldLocation coreLocation;
 
     public TileEntityFemtoStellaratorOpticalMaser() {
+        super();
         setTechLevel(EnumTechLevel.FEMTO);
         setMaxStorage(powerStorage);
         info = new MultiBlockInfo();
@@ -70,29 +70,28 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
     @Override
     public void femtocraftServerUpdate() {
         super.femtocraftServerUpdate();
-        if (checkForCore) {
+        if (core == null && coreLocation != null) {
             TileEntity te = coreLocation.getTileEntity();
             if (te instanceof IFusionReactorCore) {
                 core = (IFusionReactorCore) te;
-                checkForCore = false;
             }
         }
 
         if (igniting || sustaining) {
-            if (!warmed) {
-                if (getCurrentPower() >= warmupThreshold) {
-                    warmed = true;
+            if (warmed) {
+                if (core == null || !consume(powerTransferPerTick)) {
+                    warmed = false;
                     setModified();
                 }
-            }
-            else {
-                if (core != null && consume(powerTransferPerTick)) {
+                else {
                     //Excess power is lost
                     core.contributeCoreEnergy(powerTransferPerTick);
                     setModified();
                 }
-                else {
-                    warmed = false;
+            }
+            else {
+                if (getCurrentPower() >= warmupThreshold) {
+                    warmed = true;
                     setModified();
                 }
             }
@@ -146,9 +145,6 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
             TileEntity te = coreLocation.getTileEntity();
             if (te instanceof IFusionReactorCore) {
                 core = (IFusionReactorCore) te;
-            }
-            else {
-                checkForCore = true;
             }
         }
     }

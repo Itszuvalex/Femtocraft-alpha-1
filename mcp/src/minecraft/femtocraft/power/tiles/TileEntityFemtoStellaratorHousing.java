@@ -52,13 +52,14 @@ public class TileEntityFemtoStellaratorHousing extends TileEntityBase
     public static int temperatureRating;
     public static int stability;
     IFusionReactorCore core;
-    @FemtocraftDataUtils.Saveable
+    @FemtocraftDataUtils.Saveable(desc = true)
     private MultiBlockInfo info;
     private boolean checkForCore = false;
     @FemtocraftDataUtils.Saveable
     private WorldLocation coreLocation;
 
     public TileEntityFemtoStellaratorHousing() {
+        super();
         info = new MultiBlockInfo();
     }
 

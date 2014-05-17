@@ -26,6 +26,7 @@ import femtocraft.power.plasma.IPlasmaFlow;
 import femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 
 /**
@@ -102,6 +103,12 @@ public class TileEntityPlasmaVent extends TileEntityPlasmaConduit {
     }
 
     @Override
+    public void handleDescriptionNBT(NBTTagCompound compound) {
+        super.handleDescriptionNBT(compound);
+        setRenderUpdate();
+    }
+
+    @Override
     public void femtocraftServerUpdate() {
         super.femtocraftServerUpdate();
         if (ventDuration > 0 || ventDirection == ForgeDirection.UNKNOWN) {
@@ -125,7 +132,6 @@ public class TileEntityPlasmaVent extends TileEntityPlasmaConduit {
                 removeFlow(flow);
                 ventFlow(flow);
                 setModified();
-                setRenderUpdate();
                 return;
             }
         }
@@ -156,14 +162,12 @@ public class TileEntityPlasmaVent extends TileEntityPlasmaConduit {
                 ventDirection = testDir;
                 setModified();
                 setUpdate();
-                setRenderUpdate();
                 return;
             }
         }
         ventDirection = ForgeDirection.UNKNOWN;
         setModified();
         setUpdate();
-        setRenderUpdate();
     }
 
     private void ventFlow(IPlasmaFlow flow) {
@@ -175,6 +179,4 @@ public class TileEntityPlasmaVent extends TileEntityPlasmaConduit {
                                         zCoord + ventDirection.offsetZ
         );
     }
-
-
 }
