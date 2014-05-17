@@ -81,8 +81,8 @@ public class RenderStellaratorCore implements ISimpleBlockRenderingHandler {
         float minV = icon.getMinV();
         float maxV = icon.getMaxV();
 
-        float min = 0;
-        float max = 1;
+        float min = 0 + .0001f;
+        float max = 1 - .0001f;
 
         float bmin = 0 - .0001f;
         float bmax = 1 + .0001f;

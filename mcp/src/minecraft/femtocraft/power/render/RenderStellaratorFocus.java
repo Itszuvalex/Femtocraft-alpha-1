@@ -85,15 +85,17 @@ public class RenderStellaratorFocus implements ISimpleBlockRenderingHandler {
         float max = 1;
 
         focusModel.addQuad(RenderUtils.makeNorthFace(0, 1, 0, 1, min, icon,
-                                                     minU, maxU, minV, maxV));
+                                                     minU, maxU, minV,
+                                                     maxV).flipV());
         focusModel.addQuad(RenderUtils.makeSouthFace(0, 1, 0, 1, max, icon,
-                                                     minU, maxU, minV, maxV));
+                                                     minU, maxU, minV,
+                                                     maxV).flipV());
         focusModel.addQuad(RenderUtils.makeEastFace(0, 1, 0, 1, max, icon,
                                                     minU, maxU, minV,
-                                                    maxV).flipV());
+                                                    maxV).flipU());
         focusModel.addQuad(RenderUtils.makeWestFace(0, 1, 0, 1, min, icon,
                                                     minU, maxU, minV,
-                                                    maxV).flipV());
+                                                    maxV).flipV().flipU());
         focusModel.addQuad(RenderUtils.makeTopFace(0, 1, 0, 1, max, icon,
                                                    minU, maxU, minV,
                                                    maxV).flipV());

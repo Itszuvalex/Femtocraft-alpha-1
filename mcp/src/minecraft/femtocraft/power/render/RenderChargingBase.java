@@ -109,10 +109,10 @@ public class RenderChargingBase implements
         RenderQuad side_west = new RenderQuad(new RenderPoint(0, 0, 1), new RenderPoint(0, 1, 1),
                                               new RenderPoint(0, 1, 0), new RenderPoint(0, 0, 0), base.side);
 
-        base_model.addQuad(side_north);
-        base_model.addQuad(side_south);
-        base_model.addQuad(side_east);
-        base_model.addQuad(side_west);
+        base_model.addQuad(side_north.flipU());
+        base_model.addQuad(side_south.flipU());
+        base_model.addQuad(side_east.flipU());
+        base_model.addQuad(side_west.flipU());
 
         RenderQuad side_top = new RenderQuad(new RenderPoint(0, 14.f / 16.f, 0), new RenderPoint(0,
                                                                                                  14.f / 16.f, 1), new RenderPoint(1, 14.f / 16.f, 1), new RenderPoint(1,
@@ -215,9 +215,10 @@ public class RenderChargingBase implements
         RenderQuad coil_column_inset_east = new RenderQuad(new RenderPoint(14.f / 16.f, 0, 0),
                                                            new RenderPoint(14.f / 16.f, 1, 0), new RenderPoint(14.f / 16.f, 1, 1),
                                                            new RenderPoint(14.f / 16.f, 0, 1), base.coil_column_inset);
-        RenderQuad coil_column_inset_west = new RenderQuad(new RenderPoint(1.f / 14.f, 0, 1),
+        RenderQuad coil_column_inset_west = new RenderQuad(new RenderPoint(2.f / 16.f, 0, 1),
                                                            new RenderPoint(2.f / 16.f, 1, 1), new RenderPoint(2.f / 16.f, 1, 0),
-                                                           new RenderPoint(2.f / 16.f, 0, 0), base.coil_column_inset);
+                                                           new RenderPoint(2.f / 16.f, 0, 0), base.coil_column_inset
+        );
 
         base_model.addQuad(coil_column_inset_north);
         base_model.addQuad(coil_column_inset_south);
