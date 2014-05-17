@@ -23,6 +23,7 @@ import femtocraft.Femtocraft;
 import femtocraft.core.blocks.TileContainer;
 import femtocraft.core.multiblock.MultiBlockInfo;
 import femtocraft.power.multiblock.MultiBlockFemtoStellarator;
+import femtocraft.power.plasma.IFusionReactorCore;
 import femtocraft.power.tiles.TileEntityFemtoStellaratorFocus;
 import femtocraft.proxy.ProxyClient;
 import net.minecraft.block.material.Material;
@@ -30,6 +31,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 
 public class BlockFemtoStellaratorFocus extends TileContainer {
     public Icon outsideIcon;
@@ -86,6 +88,40 @@ public class BlockFemtoStellaratorFocus extends TileContainer {
                                                                     par3, par4);
         super.onPostBlockPlaced(par1World, par2, par3, par4, par5);
     }
+
+    @Override
+    public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
+        return canBlockStay(par1World, par2, par3, par4);
+    }
+
+    @Override
+    public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
+        return hasCoreAsNeighbor(par1World, par2, par3, par4);
+    }
+
+    private boolean hasCoreAsNeighbor(World par1World, int par2, int par3, int par4) {
+        for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+            TileEntity te = par1World.getBlockTileEntity(par2 + dir.offsetX,
+                                                         par3 + dir.offsetY,
+                                                         par4 + dir.offsetZ);
+            if (te instanceof IFusionReactorCore) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public void onNeighborBlockChange(World par1World, int par2, int par3,
+                                      int par4, int par5) {
+        if (!canBlockStay(par1World, par2, par3, par4)) {
+            breakBlock(par1World, par2, par3, par4, blockID,
+                       par1World.getBlockMetadata(par2, par3, par4));
+            par1World.setBlockToAir(par2, par3, par4);
+        }
+    }
+
 
     /*
      * (non-Javadoc)

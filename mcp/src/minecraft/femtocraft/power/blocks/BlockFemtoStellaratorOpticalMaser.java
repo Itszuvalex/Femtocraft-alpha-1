@@ -23,10 +23,12 @@ import femtocraft.Femtocraft;
 import femtocraft.core.blocks.TileContainer;
 import femtocraft.core.multiblock.MultiBlockInfo;
 import femtocraft.power.multiblock.MultiBlockFemtoStellarator;
+import femtocraft.power.plasma.IFusionReactorCore;
 import femtocraft.power.tiles.TileEntityFemtoStellaratorOpticalMaser;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 
 public class BlockFemtoStellaratorOpticalMaser extends TileContainer {
 
@@ -58,6 +60,49 @@ public class BlockFemtoStellaratorOpticalMaser extends TileContainer {
         MultiBlockFemtoStellarator.instance.formMultiBlockWithBlock(par1World, par2,
                                                                     par3, par4);
         super.onPostBlockPlaced(par1World, par2, par3, par4, par5);
+    }
+
+    @Override
+    public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
+        return canBlockStay(par1World, par2, par3, par4);
+    }
+
+    @Override
+    public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
+        return hasFocusAsNeighbor(par1World, par2, par3, par4);
+    }
+
+    private boolean hasFocusAsNeighbor(World par1World, int par2, int par3,
+                                       int par4) {
+        for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+            if (par1World.getBlockId(par2 + dir.offsetX, par3 + dir.offsetY,
+                                     par4 + dir.offsetZ) == Femtocraft
+                    .stellaratorFocus.blockID) {
+                TileEntity te = par1World.getBlockTileEntity(par2 + 2 * dir
+                                                                     .offsetX,
+                                                             par3 + 2 * dir
+                                                                     .offsetY,
+                                                             par4 + 2 * dir
+                                                                     .offsetZ
+                );
+                if (te instanceof IFusionReactorCore) {
+                    return true;
+                }
+            }
+
+        }
+
+        return false;
+    }
+
+    @Override
+    public void onNeighborBlockChange(World par1World, int par2, int par3,
+                                      int par4, int par5) {
+        if (!canBlockStay(par1World, par2, par3, par4)) {
+            breakBlock(par1World, par2, par3, par4, blockID,
+                       par1World.getBlockMetadata(par2, par3, par4));
+            par1World.setBlockToAir(par2, par3, par4);
+        }
     }
 
     /*
