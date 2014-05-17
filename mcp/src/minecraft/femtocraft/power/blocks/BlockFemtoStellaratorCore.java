@@ -26,7 +26,7 @@ import femtocraft.core.blocks.TileContainer;
 import femtocraft.core.multiblock.MultiBlockInfo;
 import femtocraft.power.multiblock.MultiBlockFemtoStellarator;
 import femtocraft.power.tiles.TileEntityFemtoStellaratorCore;
-import femtocraft.power.tiles.TileEntityPlasmaConduit;
+import femtocraft.proxy.ProxyClient;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
@@ -40,20 +40,37 @@ public class BlockFemtoStellaratorCore extends TileContainer {
 
     public BlockFemtoStellaratorCore(int id) {
         super(id, Material.iron);
+        setUnlocalizedName("BlockStellaratorCore");
+        setCreativeTab(Femtocraft.femtocraftTab);
+    }
+
+    @Override
+    public int getRenderType() {
+        return ProxyClient.FemtocraftStellaratorCoreRenderID;
+    }
+
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
     }
 
     @Override
     public TileEntity createNewTileEntity(World world) {
-        return new TileEntityPlasmaConduit();
+        return new TileEntityFemtoStellaratorCore();
+    }
+
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
     }
 
     /*
-     * (non-Javadoc)
-     *
-     * @see
-     * net.minecraft.block.Block#onPostBlockPlaced(net.minecraft.world.World,
-     * int, int, int, int)
-     */
+         * (non-Javadoc)
+         *
+         * @see
+         * net.minecraft.block.Block#onPostBlockPlaced(net.minecraft.world.World,
+         * int, int, int, int)
+         */
     @Override
     public void onPostBlockPlaced(World par1World, int par2, int par3,
                                   int par4, int par5) {

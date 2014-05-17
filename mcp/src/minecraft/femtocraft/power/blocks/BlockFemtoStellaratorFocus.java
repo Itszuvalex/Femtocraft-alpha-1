@@ -19,15 +19,91 @@
 
 package femtocraft.power.blocks;
 
+import femtocraft.Femtocraft;
 import femtocraft.core.blocks.TileContainer;
+import femtocraft.core.multiblock.MultiBlockInfo;
+import femtocraft.power.multiblock.MultiBlockFemtoStellarator;
+import femtocraft.power.tiles.TileEntityFemtoStellaratorFocus;
+import femtocraft.proxy.ProxyClient;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.world.World;
 
 public class BlockFemtoStellaratorFocus extends TileContainer {
     public Icon outsideIcon;
     public Icon insideIcon;
 
-    public BlockFemtoStellaratorFocus(int par1, Material par2Material) {
-        super(par1, par2Material);
+    public BlockFemtoStellaratorFocus(int par1) {
+        super(par1, Material.iron);
+        setUnlocalizedName("BlockStellaratorFocus");
+        setCreativeTab(Femtocraft.femtocraftTab);
+    }
+
+    @Override
+    public int getRenderType() {
+        return ProxyClient.FemtocraftStellaratorFocusRenderID;
+    }
+
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
+
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World world) {
+        return new TileEntityFemtoStellaratorFocus();
+    }
+
+    @Override
+    public void registerIcons(IconRegister par1IconRegister) {
+        blockIcon = outsideIcon = par1IconRegister.registerIcon(Femtocraft.ID
+                                                                        .toLowerCase() + ":" + "BlockFemtoStellaratorFocus");
+        insideIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase
+                () + ":" + "BlockFemtoStellaratorHollowInternals");
+    }
+
+    /*
+         * (non-Javadoc)
+         *
+         * @see
+         * net.minecraft.block.Block#onPostBlockPlaced(net.minecraft.world.World,
+         * int, int, int, int)
+         */
+    @Override
+    public void onPostBlockPlaced(World par1World, int par2, int par3,
+                                  int par4, int par5) {
+        //Don't really have to do this, except for if something can
+        // place/remove blocks at a distance.  This will be contained within
+        // other blocks and should never be teh block to trigger the formation.
+        MultiBlockFemtoStellarator.instance.formMultiBlockWithBlock(par1World, par2,
+                                                                    par3, par4);
+        super.onPostBlockPlaced(par1World, par2, par3, par4, par5);
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * femtocraft.core.blocks.TileContainer#breakBlock(net.minecraft.world.World
+     * , int, int, int, int, int)
+     */
+    @Override
+    public void breakBlock(World par1World, int par2, int par3, int par4,
+                           int par5, int par6) {
+        TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+        if (te instanceof TileEntityFemtoStellaratorFocus) {
+            MultiBlockInfo info = ((TileEntityFemtoStellaratorFocus) te).getInfo();
+            MultiBlockFemtoStellarator.instance.breakMultiBlock(par1World, info.x(),
+                                                                info.y(), info.z());
+
+        }
+        super.breakBlock(par1World, par2, par3, par4, par5, par6);
     }
 }

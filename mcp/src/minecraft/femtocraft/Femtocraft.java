@@ -149,6 +149,10 @@ public class Femtocraft {
     public static Block microChargingCapacitor;
     public static Block orbitalEqualizer;
     public static Block nullEqualizer;
+    public static Block stellaratorCore;
+    public static Block stellaratorFocus;
+    public static Block stellaratorOpticalMaser;
+    public static Block stellaratorHousing;
 
     // cables
     public static Block blockMicroCable;
@@ -526,6 +530,29 @@ public class Femtocraft {
                 FemtocraftConfigs.nullEqualizerID);
         GameRegistry.registerBlock(nullEqualizer, "BlockNullEqualizer");
         LanguageRegistry.addName(nullEqualizer, "Null-Energy Equalizer");
+
+        stellaratorCore = new BlockFemtoStellaratorCore(FemtocraftConfigs
+                                                                .FemtopowerFemtoStelleratorCoreID);
+        GameRegistry.registerBlock(stellaratorCore, "BlockStellaratorCore");
+        LanguageRegistry.addName(stellaratorCore, "Stellarator Core");
+
+        stellaratorFocus = new BlockFemtoStellaratorFocus(FemtocraftConfigs
+                                                                  .FemtopowerFemtoStelleratorFocusID);
+        GameRegistry.registerBlock(stellaratorFocus, "BlockStellaratorFocus");
+        LanguageRegistry.addName(stellaratorFocus, "Stellarator Focus");
+
+        stellaratorOpticalMaser = new BlockFemtoStellaratorOpticalMaser
+                (FemtocraftConfigs.FemtopowerFemtoStellaratorOpticalMaserID);
+        GameRegistry.registerBlock(stellaratorOpticalMaser,
+                                   "BlockStellaratorOpticalMaser");
+        LanguageRegistry.addName(stellaratorOpticalMaser,
+                                 "Stellarator Optical Maser");
+
+        stellaratorHousing = new BlockFemtoStellaratorHousing
+                (FemtocraftConfigs.FemtopowerFemtoStellaratorHousingID);
+        GameRegistry.registerBlock(stellaratorHousing,
+                                   "BlockStellaratorHousing");
+        LanguageRegistry.addName(stellaratorHousing, "Stellarator Housing");
 
         // Liquids
         mass = new FluidMass();

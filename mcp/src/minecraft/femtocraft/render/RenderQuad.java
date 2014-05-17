@@ -78,6 +78,34 @@ public class RenderQuad {
                               maxU, minV, maxV);
     }
 
+    public RenderQuad flipU() {
+        float temp = minU;
+        minU = maxU;
+        maxU = temp;
+        return this;
+    }
+
+    public RenderQuad flippedU() {
+        return copy().flipU();
+    }
+
+    public RenderQuad flipV() {
+        float temp = minV;
+        minV = maxV;
+        maxV = temp;
+        return this;
+    }
+
+    public RenderQuad flippedV() {
+        return copy().flipV();
+    }
+
+    public RenderVector3 getNormal() {
+        return new RenderVector3(c, b).crossProduct(new RenderVector3(a,
+                                                                      b)).normalized();
+    }
+
+
     public RenderQuad rotateOnXAxis(double rot, float yrotoffset, float zrotoffset) {
         a.rotateOnXAxis(rot, yrotoffset, zrotoffset);
         b.rotateOnXAxis(rot, yrotoffset, zrotoffset);
@@ -116,6 +144,8 @@ public class RenderQuad {
 
     public void draw() {
         Tessellator tes = Tessellator.instance;
+        RenderVector3 normal = getNormal();
+        tes.setNormal((float) normal.x, (float) normal.y, (float) normal.z);
         tes.addVertexWithUV(a.x, a.y, a.z, minU, maxV);
         tes.addVertexWithUV(b.x, b.y, b.z, minU, minV);
         tes.addVertexWithUV(c.x, c.y, c.z, maxU, minV);

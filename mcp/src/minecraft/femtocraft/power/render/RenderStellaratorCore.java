@@ -55,6 +55,7 @@ public class RenderStellaratorCore implements ISimpleBlockRenderingHandler {
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 
         tessellator.startDrawingQuads();
+        tessellator.setBrightness(0xfffff);
         tessellator.setColorOpaque_F(1, 1, 1);
         renderCore(core, 0, 0, 0);
         tessellator.draw();

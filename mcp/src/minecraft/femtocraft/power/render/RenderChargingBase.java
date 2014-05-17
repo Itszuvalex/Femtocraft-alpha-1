@@ -51,6 +51,7 @@ public class RenderChargingBase implements
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 
         tessellator.startDrawingQuads();
+        tessellator.setBrightness(983055);
         tessellator.setColorOpaque_F(1, 1, 1);
         renderBase(base, 0, 0, 0);
         tessellator.draw();
