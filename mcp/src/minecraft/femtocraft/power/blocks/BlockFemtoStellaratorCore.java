@@ -30,9 +30,13 @@ import femtocraft.power.tiles.TileEntityPlasmaConduit;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 public class BlockFemtoStellaratorCore extends TileContainer {
+    public Icon outsideIcon;
+    public Icon insideIcon;
+    public Icon coreIcon;
 
     public BlockFemtoStellaratorCore(int id) {
         super(id, Material.iron);
@@ -84,9 +88,21 @@ public class BlockFemtoStellaratorCore extends TileContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                                                               + ":" +
-                                                               "BlockFemtoStellaratorCore");
+        outsideIcon = blockIcon = par1IconRegister.registerIcon
+                (Femtocraft.ID
+                         .toLowerCase()
+                         + ":" +
+                         "BlockFemtoStellaratorCore");
+        insideIcon = par1IconRegister.registerIcon
+                (Femtocraft.ID
+                         .toLowerCase()
+                         + ":" +
+                         "BlockFemtoStellaratorEnclosedInternals");
+        coreIcon = par1IconRegister.registerIcon
+                (Femtocraft.ID
+                         .toLowerCase()
+                         + ":" +
+                         "BlockFemtoStellaratorCore_core");
     }
 
 }

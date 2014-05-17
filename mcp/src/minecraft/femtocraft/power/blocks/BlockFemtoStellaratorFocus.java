@@ -19,10 +19,15 @@
 
 package femtocraft.power.blocks;
 
-public class BlockFemtoStellaratorFocus {
+import femtocraft.core.blocks.TileContainer;
+import net.minecraft.block.material.Material;
+import net.minecraft.util.Icon;
 
-    public BlockFemtoStellaratorFocus() {
-        // TODO Auto-generated constructor stub
+public class BlockFemtoStellaratorFocus extends TileContainer {
+    public Icon outsideIcon;
+    public Icon insideIcon;
+
+    public BlockFemtoStellaratorFocus(int par1, Material par2Material) {
+        super(par1, par2Material);
     }
-
 }

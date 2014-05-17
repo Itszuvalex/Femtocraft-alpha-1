@@ -20,7 +20,7 @@
 package femtocraft.power.render;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import femtocraft.power.blocks.BlockFemtoStellaratorCore;
+import femtocraft.power.blocks.BlockFemtoStellaratorFocus;
 import femtocraft.proxy.ProxyClient;
 import femtocraft.render.RenderModel;
 import femtocraft.render.RenderPoint;
@@ -35,18 +35,18 @@ import org.lwjgl.opengl.GL11;
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/10/14.
  */
-public class RenderStellaratorCore implements ISimpleBlockRenderingHandler {
-    private RenderModel coreModel;
+public class RenderStellaratorFocus implements ISimpleBlockRenderingHandler {
+    private RenderModel focusModel;
 
-    public RenderStellaratorCore() {
+    public RenderStellaratorFocus() {
 
     }
 
-    @java.lang.Override
+    @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-        BlockFemtoStellaratorCore core = (BlockFemtoStellaratorCore)
+        BlockFemtoStellaratorFocus focus = (BlockFemtoStellaratorFocus)
                 block;
-        if (core == null) {
+        if (focus == null) {
             return;
         }
 
@@ -56,25 +56,25 @@ public class RenderStellaratorCore implements ISimpleBlockRenderingHandler {
 
         tessellator.startDrawingQuads();
         tessellator.setColorOpaque_F(1, 1, 1);
-        renderCore(core, 0, 0, 0);
+        renderFocus(focus, 0, 0, 0);
         tessellator.draw();
 
         GL11.glTranslatef(0.5F, 0.5F, 0.5F);
     }
 
-    private void renderCore(BlockFemtoStellaratorCore core, int x, int y, int z) {
-        if (coreModel == null) {
-            createCore(core);
+    private void renderFocus(BlockFemtoStellaratorFocus focus, int x, int y, int z) {
+        if (focusModel == null) {
+            createFocus(focus);
         }
 
-        coreModel.location = new RenderPoint(x, y, z);
-        coreModel.draw();
+        focusModel.location = new RenderPoint(x, y, z);
+        focusModel.draw();
     }
 
-    private void createCore(BlockFemtoStellaratorCore core) {
-        coreModel = new RenderModel();
+    private void createFocus(BlockFemtoStellaratorFocus focus) {
+        focusModel = new RenderModel();
 
-        Icon icon = core.outsideIcon;
+        Icon icon = focus.outsideIcon;
         float minU = icon.getMinU();
         float maxU = icon.getMaxU();
         float minV = icon.getMinV();
@@ -83,20 +83,20 @@ public class RenderStellaratorCore implements ISimpleBlockRenderingHandler {
         float min = 0;
         float max = 1;
 
-        coreModel.addQuad(RenderUtils.makeNorthFace(0, 1, 0, 1, min, icon,
-                                                    minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeSouthFace(0, 1, 0, 1, max, icon,
-                                                    minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeEastFace(0, 1, 0, 1, max, icon,
-                                                   minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeWestFace(0, 1, 0, 1, min, icon,
-                                                   minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeTopFace(0, 1, 0, 1, max, icon,
-                                                  minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeBottomFace(0, 1, 0, 1, min, icon,
+        focusModel.addQuad(RenderUtils.makeNorthFace(0, 1, 0, 1, min, icon,
                                                      minU, maxU, minV, maxV));
+        focusModel.addQuad(RenderUtils.makeSouthFace(0, 1, 0, 1, max, icon,
+                                                     minU, maxU, minV, maxV));
+        focusModel.addQuad(RenderUtils.makeEastFace(0, 1, 0, 1, max, icon,
+                                                    minU, maxU, minV, maxV));
+        focusModel.addQuad(RenderUtils.makeWestFace(0, 1, 0, 1, min, icon,
+                                                    minU, maxU, minV, maxV));
+        focusModel.addQuad(RenderUtils.makeTopFace(0, 1, 0, 1, max, icon,
+                                                   minU, maxU, minV, maxV));
+        focusModel.addQuad(RenderUtils.makeBottomFace(0, 1, 0, 1, min, icon,
+                                                      minU, maxU, minV, maxV));
 
-        icon = core.insideIcon;
+        icon = focus.insideIcon;
         minU = icon.getMinU();
         maxU = icon.getMaxU();
         minV = icon.getMinV();
@@ -105,47 +105,26 @@ public class RenderStellaratorCore implements ISimpleBlockRenderingHandler {
         min = 6.f / 16.f;
         max = 10.f / 16.f;
 
-        coreModel.addQuad(RenderUtils.makeNorthFace(0, 1, 0, 1, max, icon,
-                                                    minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeSouthFace(0, 1, 0, 1, min, icon,
-                                                    minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeEastFace(0, 1, 0, 1, min, icon,
-                                                   minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeWestFace(0, 1, 0, 1, max, icon,
-                                                   minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeTopFace(0, 1, 0, 1, min, icon,
-                                                  minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeBottomFace(0, 1, 0, 1, max, icon,
+        focusModel.addQuad(RenderUtils.makeNorthFace(0, 1, 0, 1, max, icon,
                                                      minU, maxU, minV, maxV));
-
-        icon = core.coreIcon;
-        minU = icon.getMinU();
-        maxU = icon.getMaxU();
-        minV = icon.getMinV();
-        maxV = icon.getMaxV();
-
-        min = 7.f / 16.f;
-        max = 9.f / 16.f;
-
-        coreModel.addQuad(RenderUtils.makeNorthFace(0, 1, 0, 1, max, icon,
-                                                    minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeSouthFace(0, 1, 0, 1, min, icon,
-                                                    minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeEastFace(0, 1, 0, 1, min, icon,
-                                                   minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeWestFace(0, 1, 0, 1, max, icon,
-                                                   minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeTopFace(0, 1, 0, 1, min, icon,
-                                                  minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeBottomFace(0, 1, 0, 1, max, icon,
+        focusModel.addQuad(RenderUtils.makeSouthFace(0, 1, 0, 1, min, icon,
                                                      minU, maxU, minV, maxV));
+        focusModel.addQuad(RenderUtils.makeEastFace(0, 1, 0, 1, min, icon,
+                                                    minU, maxU, minV, maxV));
+        focusModel.addQuad(RenderUtils.makeWestFace(0, 1, 0, 1, max, icon,
+                                                    minU, maxU, minV, maxV));
+        focusModel.addQuad(RenderUtils.makeTopFace(0, 1, 0, 1, min, icon,
+                                                   minU, maxU, minV, maxV));
+        focusModel.addQuad(RenderUtils.makeBottomFace(0, 1, 0, 1, max, icon,
+                                                      minU, maxU, minV, maxV));
+
     }
 
-    @java.lang.Override
+    @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-        BlockFemtoStellaratorCore core = (BlockFemtoStellaratorCore)
+        BlockFemtoStellaratorFocus focus = (BlockFemtoStellaratorFocus)
                 block;
-        if (core == null) {
+        if (focus == null) {
             return false;
         }
 
@@ -153,18 +132,18 @@ public class RenderStellaratorCore implements ISimpleBlockRenderingHandler {
         tessellator.setBrightness(block.getMixedBrightnessForBlock(
                 renderer.blockAccess, x, y, z));
         tessellator.setColorOpaque_F(1, 1, 1);
-        renderCore(core, x, y, z);
+        renderFocus(focus, x, y, z);
 
         return true;
     }
 
-    @java.lang.Override
+    @Override
     public boolean shouldRender3DInInventory() {
         return true;
     }
 
-    @java.lang.Override
+    @Override
     public int getRenderId() {
-        return ProxyClient.FemtocraftStellaratorCoreRenderID;
+        return ProxyClient.FemtocraftStellaratorFocusRenderID;
     }
 }
