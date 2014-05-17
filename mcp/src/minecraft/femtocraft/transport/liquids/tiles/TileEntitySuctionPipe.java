@@ -174,7 +174,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 
         // Pass description packet to clients - fluid has either emptied, or
         // filled
-        if (!(pre && post) && (pre || post)) {
+        if (pre != post) {
             setUpdate();
         }
     }
