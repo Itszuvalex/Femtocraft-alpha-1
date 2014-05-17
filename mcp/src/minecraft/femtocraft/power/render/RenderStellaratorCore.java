@@ -84,18 +84,26 @@ public class RenderStellaratorCore implements ISimpleBlockRenderingHandler {
         float min = 0;
         float max = 1;
 
-        coreModel.addQuad(RenderUtils.makeNorthFace(0, 1, 0, 1, min, icon,
-                                                    minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeSouthFace(0, 1, 0, 1, max, icon,
-                                                    minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeEastFace(0, 1, 0, 1, max, icon,
-                                                   minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeWestFace(0, 1, 0, 1, min, icon,
-                                                   minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeTopFace(0, 1, 0, 1, max, icon,
-                                                  minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeBottomFace(0, 1, 0, 1, min, icon,
-                                                     minU, maxU, minV, maxV));
+        float bmin = 0 - .0001f;
+        float bmax = 1 + .0001f;
+        coreModel.addQuad(RenderUtils.makeNorthFace(bmin, bmax, bmin, bmax, min, icon,
+                                                    minU, maxU, minV,
+                                                    maxV).flipV());
+        coreModel.addQuad(RenderUtils.makeSouthFace(bmin, bmax, bmin, bmax, max, icon,
+                                                    minU, maxU, minV,
+                                                    maxV).flipV());
+        coreModel.addQuad(RenderUtils.makeEastFace(bmin, bmax, bmin, bmax, max, icon,
+                                                   minU, maxU, minV,
+                                                   maxV).flipU());
+        coreModel.addQuad(RenderUtils.makeWestFace(bmin, bmax, bmin, bmax, min, icon,
+                                                   minU, maxU, minV,
+                                                   maxV).flipV().flipU());
+        coreModel.addQuad(RenderUtils.makeTopFace(bmin, bmax, bmin, bmax, max, icon,
+                                                  minU, maxU, minV,
+                                                  maxV).flipV());
+        coreModel.addQuad(RenderUtils.makeBottomFace(bmin, bmax, bmin, bmax, min, icon,
+                                                     minU, maxU, minV,
+                                                     maxV).flipV());
 
         icon = core.insideIcon;
         minU = icon.getMinU();
@@ -106,18 +114,24 @@ public class RenderStellaratorCore implements ISimpleBlockRenderingHandler {
         min = 6.f / 16.f;
         max = 10.f / 16.f;
 
-        coreModel.addQuad(RenderUtils.makeNorthFace(0, 1, 0, 1, max, icon,
-                                                    minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeSouthFace(0, 1, 0, 1, min, icon,
-                                                    minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeEastFace(0, 1, 0, 1, min, icon,
-                                                   minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeWestFace(0, 1, 0, 1, max, icon,
-                                                   minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeTopFace(0, 1, 0, 1, min, icon,
-                                                  minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeBottomFace(0, 1, 0, 1, max, icon,
-                                                     minU, maxU, minV, maxV));
+        coreModel.addQuad(RenderUtils.makeNorthFace(bmin, bmax, bmin, bmax, max, icon,
+                                                    minU, maxU, minV,
+                                                    maxV).flipV());
+        coreModel.addQuad(RenderUtils.makeSouthFace(bmin, bmax, bmin, bmax, min, icon,
+                                                    minU, maxU, minV,
+                                                    maxV).flipV());
+        coreModel.addQuad(RenderUtils.makeEastFace(bmin, bmax, bmin, bmax, min, icon,
+                                                   minU, maxU, minV,
+                                                   maxV).flipU());
+        coreModel.addQuad(RenderUtils.makeWestFace(bmin, bmax, bmin, bmax, max, icon,
+                                                   minU, maxU, minV,
+                                                   maxV).flipV().flipU());
+        coreModel.addQuad(RenderUtils.makeTopFace(bmin, bmax, bmin, bmax, min, icon,
+                                                  minU, maxU, minV,
+                                                  maxV).flipV());
+        coreModel.addQuad(RenderUtils.makeBottomFace(bmin, bmax, bmin, bmax, max, icon,
+                                                     minU, maxU, minV,
+                                                     maxV).flipV());
 
         icon = core.coreIcon;
         minU = icon.getMinU();
@@ -128,18 +142,24 @@ public class RenderStellaratorCore implements ISimpleBlockRenderingHandler {
         min = 7.f / 16.f;
         max = 9.f / 16.f;
 
-        coreModel.addQuad(RenderUtils.makeNorthFace(0, 1, 0, 1, max, icon,
-                                                    minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeSouthFace(0, 1, 0, 1, min, icon,
-                                                    minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeEastFace(0, 1, 0, 1, min, icon,
-                                                   minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeWestFace(0, 1, 0, 1, max, icon,
-                                                   minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeTopFace(0, 1, 0, 1, min, icon,
-                                                  minU, maxU, minV, maxV));
-        coreModel.addQuad(RenderUtils.makeBottomFace(0, 1, 0, 1, max, icon,
-                                                     minU, maxU, minV, maxV));
+        coreModel.addQuad(RenderUtils.makeNorthFace(bmin, bmax, bmin, bmax, min, icon,
+                                                    minU, maxU, minV,
+                                                    maxV).flipV());
+        coreModel.addQuad(RenderUtils.makeSouthFace(bmin, bmax, bmin, bmax, max, icon,
+                                                    minU, maxU, minV,
+                                                    maxV).flipV());
+        coreModel.addQuad(RenderUtils.makeEastFace(bmin, bmax, bmin, bmax, max, icon,
+                                                   minU, maxU, minV,
+                                                   maxV).flipU());
+        coreModel.addQuad(RenderUtils.makeWestFace(bmin, bmax, bmin, bmax, min, icon,
+                                                   minU, maxU, minV,
+                                                   maxV).flipV().flipU());
+        coreModel.addQuad(RenderUtils.makeTopFace(bmin, bmax, bmin, bmax, max, icon,
+                                                  minU, maxU, minV,
+                                                  maxV).flipV());
+        coreModel.addQuad(RenderUtils.makeBottomFace(bmin, bmax, bmin, bmax, min, icon,
+                                                     minU, maxU, minV,
+                                                     maxV).flipV());
     }
 
     @java.lang.Override

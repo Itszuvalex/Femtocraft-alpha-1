@@ -105,6 +105,24 @@ public class RenderQuad {
                                                                       b)).normalized();
     }
 
+    public RenderQuad rotatePointsCounterClockwise() {
+        RenderPoint temp = a;
+        a = b;
+        b = c;
+        c = d;
+        d = temp;
+        return this;
+    }
+
+    public RenderQuad rotatePointsClockwise() {
+        RenderPoint temp = d;
+        d = c;
+        c = b;
+        b = a;
+        a = temp;
+        return this;
+    }
+
 
     public RenderQuad rotateOnXAxis(double rot, float yrotoffset, float zrotoffset) {
         a.rotateOnXAxis(rot, yrotoffset, zrotoffset);

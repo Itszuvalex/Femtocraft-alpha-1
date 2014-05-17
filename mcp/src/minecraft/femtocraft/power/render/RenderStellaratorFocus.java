@@ -89,13 +89,17 @@ public class RenderStellaratorFocus implements ISimpleBlockRenderingHandler {
         focusModel.addQuad(RenderUtils.makeSouthFace(0, 1, 0, 1, max, icon,
                                                      minU, maxU, minV, maxV));
         focusModel.addQuad(RenderUtils.makeEastFace(0, 1, 0, 1, max, icon,
-                                                    minU, maxU, minV, maxV));
+                                                    minU, maxU, minV,
+                                                    maxV).flipV());
         focusModel.addQuad(RenderUtils.makeWestFace(0, 1, 0, 1, min, icon,
-                                                    minU, maxU, minV, maxV));
+                                                    minU, maxU, minV,
+                                                    maxV).flipV());
         focusModel.addQuad(RenderUtils.makeTopFace(0, 1, 0, 1, max, icon,
-                                                   minU, maxU, minV, maxV));
+                                                   minU, maxU, minV,
+                                                   maxV).flipV());
         focusModel.addQuad(RenderUtils.makeBottomFace(0, 1, 0, 1, min, icon,
-                                                      minU, maxU, minV, maxV));
+                                                      minU, maxU, minV,
+                                                      maxV).flipV());
 
         icon = focus.insideIcon;
         minU = icon.getMinU();
@@ -107,17 +111,23 @@ public class RenderStellaratorFocus implements ISimpleBlockRenderingHandler {
         max = 10.f / 16.f;
 
         focusModel.addQuad(RenderUtils.makeNorthFace(0, 1, 0, 1, max, icon,
-                                                     minU, maxU, minV, maxV));
+                                                     minU, maxU, minV,
+                                                     maxV).flipV());
         focusModel.addQuad(RenderUtils.makeSouthFace(0, 1, 0, 1, min, icon,
-                                                     minU, maxU, minV, maxV));
+                                                     minU, maxU, minV,
+                                                     maxV).flipV());
         focusModel.addQuad(RenderUtils.makeEastFace(0, 1, 0, 1, min, icon,
-                                                    minU, maxU, minV, maxV));
+                                                    minU, maxU, minV,
+                                                    maxV).flipV().flipU());
         focusModel.addQuad(RenderUtils.makeWestFace(0, 1, 0, 1, max, icon,
-                                                    minU, maxU, minV, maxV));
+                                                    minU, maxU, minV,
+                                                    maxV).flipV().flipU());
         focusModel.addQuad(RenderUtils.makeTopFace(0, 1, 0, 1, min, icon,
-                                                   minU, maxU, minV, maxV));
+                                                   minU, maxU, minV,
+                                                   maxV).flipV());
         focusModel.addQuad(RenderUtils.makeBottomFace(0, 1, 0, 1, max, icon,
-                                                      minU, maxU, minV, maxV));
+                                                      minU, maxU, minV,
+                                                      maxV).flipV());
 
     }
 
