@@ -46,34 +46,6 @@ public class MultiBlockFemtoStellarator implements IMultiBlock {
         return checkComponents(world, x, y, z, true);
     }
 
-    private boolean checkComponents(World world, int x, int y, int z,
-                                    boolean strict) {
-        for (int i = -2; i <= 2; ++i) {
-            for (int j = -2; j <= 2; ++j) {
-                for (int k = -2; k <= 2; ++k) {
-                    TileEntity te = world.getBlockTileEntity(x + i, y + k, z
-                            + j);
-                    if (!(i == 0 && j == 0 & k == 0 ? te instanceof
-                            IFusionReactorCore : te
-                            instanceof IFusionReactorComponent && !(te
-                            instanceof IFusionReactorCore) && te instanceof
-                            IMultiBlockComponent)) {
-                        return false;
-                    }
-
-                    if (strict) {
-                        if (((IMultiBlockComponent) te).getInfo()
-                                                       .isValidMultiBlock()) {
-                            return false;
-                        }
-                    }
-                }
-            }
-        }
-        return true;
-    }
-
-
     @Override
     public boolean isBlockInMultiBlock(World world, int x, int y, int z, int c_x, int c_y, int c_z) {
         return x >= (c_x - 2) && x <= (c_x + 2) &&
@@ -120,7 +92,7 @@ public class MultiBlockFemtoStellarator implements IMultiBlock {
 
         for (int i = -2; i <= 2; ++i) {
             for (int j = -2; j <= 2; ++j) {
-                for (int k = 0; k <= 4; ++k) {
+                for (int k = -2; k <= 2; ++k) {
                     TileEntity te = world.getBlockTileEntity(x + i, y + k, z
                             + j);
                     result = te instanceof IMultiBlockComponent && ((IMultiBlockComponent) te).breakMultiBlock(world, x, y, z) && result;
@@ -128,5 +100,35 @@ public class MultiBlockFemtoStellarator implements IMultiBlock {
             }
         }
         return result;
+    }
+
+    private boolean checkComponents(World world, int x, int y, int z,
+                                    boolean strict) {
+        for (int i = -2; i <= 2; ++i) {
+            for (int j = -2; j <= 2; ++j) {
+                for (int k = -2; k <= 2; ++k) {
+                    TileEntity te = world.getBlockTileEntity(x + i, y + k, z
+                            + j);
+                    if (i == 0 && j == 0 & k == 0 ? te instanceof
+                            IFusionReactorCore : (te
+                            instanceof IFusionReactorComponent && !(te
+                            instanceof
+                            IFusionReactorCore)) && te instanceof
+                            IMultiBlockComponent) {
+
+                        if (strict) {
+                            if (((IMultiBlockComponent) te).getInfo()
+                                                           .isValidMultiBlock()) {
+                                return false;
+                            }
+                        }
+                    }
+                    else {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 }

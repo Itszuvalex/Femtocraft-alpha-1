@@ -114,9 +114,10 @@ public class TileEntityFemtoStellaratorHousing extends TileEntityBase
     public boolean formMultiBlock(World world, int x, int y, int z) {
         if (info.formMultiBlock(world, x, y, z)) {
             coreLocation = new WorldLocation(worldObj, info.x(), info.y(),
-                                             info.z());
+                    info.z());
             core = (IFusionReactorCore) coreLocation.getTileEntity();
             setModified();
+            setUpdate();
             return true;
         }
         return false;
@@ -128,6 +129,7 @@ public class TileEntityFemtoStellaratorHousing extends TileEntityBase
             core = null;
             coreLocation = null;
             setModified();
+            setUpdate();
             return true;
         }
         return false;
