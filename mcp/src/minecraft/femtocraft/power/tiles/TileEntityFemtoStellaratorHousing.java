@@ -29,7 +29,6 @@ import femtocraft.power.plasma.IPlasmaFlow;
 import femtocraft.power.plasma.volatility.IVolatilityEvent;
 import femtocraft.utils.FemtocraftDataUtils;
 import femtocraft.utils.WorldLocation;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -54,55 +53,25 @@ public class TileEntityFemtoStellaratorHousing extends TileEntityBase
     IFusionReactorCore core;
     @FemtocraftDataUtils.Saveable(desc = true)
     private MultiBlockInfo info;
-    private boolean checkForCore = false;
     @FemtocraftDataUtils.Saveable
     private WorldLocation coreLocation;
 
     public TileEntityFemtoStellaratorHousing() {
         super();
         info = new MultiBlockInfo();
+        coreLocation = new WorldLocation();
     }
 
     @Override
     public void femtocraftServerUpdate() {
         super.femtocraftServerUpdate();
-        if (checkForCore) {
+        if (core == null && isValidMultiBlock()) {
             TileEntity te = coreLocation.getTileEntity();
             if (te instanceof IFusionReactorCore) {
                 core = (IFusionReactorCore) te;
-                checkForCore = false;
             }
         }
         update(worldObj, xCoord, yCoord, zCoord);
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-        super.readFromNBT(par1nbtTagCompound);
-        if (coreLocation != null) {
-            TileEntity te = coreLocation.getTileEntity();
-            if (te instanceof IFusionReactorCore) {
-                core = (IFusionReactorCore) te;
-            }
-            else {
-                checkForCore = true;
-            }
-        }
-    }
-
-    @Override
-    public void beginIgnitionProcess(IFusionReactorCore core) {
-
-    }
-
-    @Override
-    public void endIgnitionProcess(IFusionReactorCore core) {
-
-    }
-
-    @Override
-    public IFusionReactorCore getCore() {
-        return core;
     }
 
     @Override
@@ -138,6 +107,21 @@ public class TileEntityFemtoStellaratorHousing extends TileEntityBase
     @Override
     public MultiBlockInfo getInfo() {
         return info;
+    }
+
+    @Override
+    public void beginIgnitionProcess(IFusionReactorCore core) {
+
+    }
+
+    @Override
+    public void endIgnitionProcess(IFusionReactorCore core) {
+
+    }
+
+    @Override
+    public IFusionReactorCore getCore() {
+        return core;
     }
 
     @Override

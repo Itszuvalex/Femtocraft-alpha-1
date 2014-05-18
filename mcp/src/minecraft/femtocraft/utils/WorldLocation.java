@@ -64,14 +64,15 @@ public class WorldLocation implements ISaveable {
     }
 
     public TileEntity getTileEntity() {
-        return world.getBlockTileEntity(x, y, z);
+        return world == null ? null : world.getBlockTileEntity(x, y, z);
     }
 
     public Block getBlock() {
-        return Block.blocksList[getBlockID()];
+        return world == null ? null : Block
+                .blocksList[getBlockID()];
     }
 
     public int getBlockID() {
-        return world.getBlockId(x, y, z);
+        return world == null ? 0 : world.getBlockId(x, y, z);
     }
 }

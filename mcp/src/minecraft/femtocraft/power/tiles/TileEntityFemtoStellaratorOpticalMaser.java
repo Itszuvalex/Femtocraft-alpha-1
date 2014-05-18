@@ -29,7 +29,6 @@ import femtocraft.power.plasma.IPlasmaFlow;
 import femtocraft.power.plasma.volatility.IVolatilityEvent;
 import femtocraft.utils.FemtocraftDataUtils;
 import femtocraft.utils.WorldLocation;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -65,12 +64,13 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
         igniting = false;
         sustaining = false;
         warmed = false;
+        coreLocation = new WorldLocation();
     }
 
     @Override
     public void femtocraftServerUpdate() {
         super.femtocraftServerUpdate();
-        if (core == null && coreLocation != null) {
+        if (core == null && isValidMultiBlock()) {
             TileEntity te = coreLocation.getTileEntity();
             if (te instanceof IFusionReactorCore) {
                 core = (IFusionReactorCore) te;
@@ -103,6 +103,38 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
     }
 
     @Override
+    public boolean isValidMultiBlock() {
+        return info.isValidMultiBlock();
+    }
+
+    @Override
+    public boolean formMultiBlock(World world, int x, int y, int z) {
+        if (info.formMultiBlock(world, x, y, z)) {
+            setModified();
+            coreLocation = new WorldLocation(world, x, y, z);
+            core = (IFusionReactorCore) coreLocation.getTileEntity();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean breakMultiBlock(World world, int x, int y, int z) {
+        if (info.breakMultiBlock(world, x, y, z)) {
+            setModified();
+            core = null;
+            coreLocation = null;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public MultiBlockInfo getInfo() {
+        return info;
+    }
+
+    @Override
     public void beginIgnitionProcess(IFusionReactorCore core) {
         igniting = true;
         sustaining = false;
@@ -120,49 +152,6 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
     @Override
     public IFusionReactorCore getCore() {
         return core;
-    }
-
-    @Override
-    public boolean isValidMultiBlock() {
-        return info.isValidMultiBlock();
-    }
-
-    @Override
-    public boolean formMultiBlock(World world, int x, int y, int z) {
-        if (info.formMultiBlock(world, x, y, z)) {
-            setModified();
-            coreLocation = new WorldLocation(world, x, y, z);
-            core = (IFusionReactorCore) coreLocation.getTileEntity();
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-        super.readFromNBT(par1nbtTagCompound);
-        if (coreLocation != null) {
-            TileEntity te = coreLocation.getTileEntity();
-            if (te instanceof IFusionReactorCore) {
-                core = (IFusionReactorCore) te;
-            }
-        }
-    }
-
-    @Override
-    public boolean breakMultiBlock(World world, int x, int y, int z) {
-        if (info.breakMultiBlock(world, x, y, z)) {
-            setModified();
-            core = null;
-            coreLocation = null;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public MultiBlockInfo getInfo() {
-        return info;
     }
 
     @Override
