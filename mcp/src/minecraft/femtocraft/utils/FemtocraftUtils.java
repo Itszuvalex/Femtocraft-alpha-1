@@ -33,8 +33,9 @@ import java.util.Arrays;
 public class FemtocraftUtils {
 
     public static int indexOfForgeDirection(ForgeDirection dir) {
-        return Arrays.asList(ForgeDirection.VALID_DIRECTIONS).indexOf(dir);
+//        return Arrays.asList(ForgeDirection.VALID_DIRECTIONS).indexOf(dir);
         // switch(dir)
+        return dir.ordinal();
         // {
         // case UP:
         // return 1;
@@ -52,7 +53,6 @@ public class FemtocraftUtils {
         // return -1;
         // }
     }
-
 
     public static boolean isPlayerOnline(String username) {
         return Arrays.asList(MinecraftServer.getServer().getAllUsernames())
@@ -110,7 +110,7 @@ public class FemtocraftUtils {
 
         for (int i = 0; i < slots.length; ++i) {
             if (restrictions != null && Arrays.binarySearch(restrictions,
-                                                            i) >= 0) {
+                    i) >= 0) {
                 continue;
             }
 
@@ -131,7 +131,7 @@ public class FemtocraftUtils {
         // Place into null locations
         for (int i = 0; i < slots.length; ++i) {
             if (restrictions != null && Arrays.binarySearch(restrictions,
-                                                            i) >= 0) {
+                    i) >= 0) {
                 continue;
             }
 
@@ -158,7 +158,7 @@ public class FemtocraftUtils {
 
         for (int i = 0; i < slots.length; ++i) {
             if (restrictions != null && Arrays.binarySearch(restrictions,
-                                                            i) >= 0) {
+                    i) >= 0) {
                 continue;
             }
 
@@ -185,6 +185,10 @@ public class FemtocraftUtils {
         return input.substring(0, 1).toUpperCase() + input.substring(1);
     }
 
+    public static int blueColor() {
+        return colorFromARGB(0, 0, 0, 255);
+    }
+
     public static int colorFromARGB(int a, int r, int g, int b) {
         int r1 = 0;
         r1 += (a & 255) << 24;
@@ -192,10 +196,6 @@ public class FemtocraftUtils {
         r1 += (g & 255) << 8;
         r1 += b & 255;
         return r1;
-    }
-
-    public static int blueColor() {
-        return colorFromARGB(0, 0, 0, 255);
     }
 
     public static int greenColor() {
@@ -219,5 +219,25 @@ public class FemtocraftUtils {
     public static String orangeify(String name) {
         return EnumTechLevel.FEMTO.getTooltipEnum() + name
                 + EnumChatFormatting.RESET;
+    }
+
+    public static String formatIntegerToString(int i) {
+        return formatIntegerString(String.valueOf(i));
+    }
+
+
+    public static String formatIntegerString(String number) {
+        return formatIntegerString_recursive(number);
+    }
+
+    private static String formatIntegerString_recursive(String number) {
+        if (number.length() <= 3) {
+            return number;
+        }
+        else {
+            return formatIntegerString_recursive(number.substring(0,
+                    number.length() - 3)) + "," + number.substring
+                    (number.length() - 3);
+        }
     }
 }

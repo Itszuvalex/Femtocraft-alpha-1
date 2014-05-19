@@ -50,7 +50,7 @@ public class TileEntityFemtoStellaratorHousing extends TileEntityBase
         implements IFusionReactorComponent, IMultiBlockComponent {
     public static int temperatureRating;
     public static int stability;
-    IFusionReactorCore core;
+    private IFusionReactorCore core;
     @FemtocraftDataUtils.Saveable(desc = true)
     private MultiBlockInfo info;
     @FemtocraftDataUtils.Saveable
@@ -166,7 +166,7 @@ public class TileEntityFemtoStellaratorHousing extends TileEntityBase
 
     @Override
     public boolean removeFlow(IPlasmaFlow flow) {
-        return core != null & core.removeFlow(flow);
+        return core != null && core.removeFlow(flow);
     }
 
     @Override
@@ -181,12 +181,12 @@ public class TileEntityFemtoStellaratorHousing extends TileEntityBase
 
     @Override
     public void onVolatilityEvent(IVolatilityEvent event) {
-
+        setUpdate();
     }
 
     @Override
     public void onPostVolatilityEvent(IVolatilityEvent event) {
-
+        setUpdate();
     }
 
     @Override

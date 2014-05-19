@@ -43,7 +43,7 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
     public static long reactionFailureThreshold = 2500000;
     public static int plasmaFlowTicksToGenerateMin = 20;
     public static int plasmaFlowTicksToGenerateMax = 200;
-    @FemtocraftDataUtils.Saveable
+    @FemtocraftDataUtils.Saveable(desc = true)
     private FusionReactorCore core;
     @FemtocraftDataUtils.Saveable(desc = true)
     private MultiBlockInfo info;
@@ -147,6 +147,7 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
             component.beginIgnitionProcess(this);
         }
         setModified();
+        setUpdate();
     }
 
     @Override
@@ -156,6 +157,7 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
             component.endIgnitionProcess(this);
         }
         setModified();
+        setUpdate();
     }
 
     @Override

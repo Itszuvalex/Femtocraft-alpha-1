@@ -42,6 +42,28 @@ public class GuiNanoHorologe extends GuiContainer {
         this.inventory = horologe;
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see net.minecraft.client.gui.inventory.GuiContainer#drawScreen(int, int,
+     * float)
+     */
+    @Override
+    public void drawScreen(int par1, int par2, float par3) {
+        super.drawScreen(par1, par2, par3);
+
+        int furnaceCurrent = this.inventory.getCurrentPower();
+        int furnaceMax = this.inventory.getMaxPower();
+
+        // String text = String.format("%i/%i", furnaceCurrent, furnaceMax);
+        String text = FemtocraftUtils.formatIntegerToString(furnaceCurrent) + '/'
+                + FemtocraftUtils.formatIntegerToString(furnaceMax);
+
+        if (this.isPointInRegion(18, 12, 16, 60, par1, par2)) {
+            this.drawCreativeTabHoveringText(text, par1, par2);
+        }
+    }
+
     /**
      * Draw the foreground layer for the GuiContainer (everything in front of
      * the items)
@@ -83,27 +105,5 @@ public class GuiNanoHorologe extends GuiContainer {
                 / this.inventory.getMaxPower();
         this.drawTexturedModalRect(k + 18, l + 12 + (60 - i1), 176,
                 32 + (60 - i1), 16 + (60 - i1), 60);
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see net.minecraft.client.gui.inventory.GuiContainer#drawScreen(int, int,
-     * float)
-     */
-    @Override
-    public void drawScreen(int par1, int par2, float par3) {
-        super.drawScreen(par1, par2, par3);
-
-        int furnaceCurrent = this.inventory.getCurrentPower();
-        int furnaceMax = this.inventory.getMaxPower();
-
-        // String text = String.format("%i/%i", furnaceCurrent, furnaceMax);
-        String text = String.valueOf(furnaceCurrent) + '/'
-                + String.valueOf(furnaceMax);
-
-        if (this.isPointInRegion(18, 12, 16, 60, par1, par2)) {
-            this.drawCreativeTabHoveringText(text, par1, par2);
-        }
     }
 }

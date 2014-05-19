@@ -46,6 +46,42 @@ public class GuiNanoDismantler extends GuiContainer {
         this.dismantlerInventory = tileEntity;
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see net.minecraft.client.gui.inventory.GuiContainer#drawScreen(int, int,
+     * float)
+     */
+    @Override
+    public void drawScreen(int par1, int par2, float par3) {
+        super.drawScreen(par1, par2, par3);
+
+        if (this.isPointInRegion(10, 8, 16, 60, par1, par2)) {
+
+            int furnaceCurrent = this.dismantlerInventory.currentPower;
+            int furnaceMax = this.dismantlerInventory.getMaxPower();
+
+            // String text = String.format("%i/%i", furnaceCurrent, furnaceMax);
+            String text = FemtocraftUtils.formatIntegerToString(furnaceCurrent) + '/'
+                    + FemtocraftUtils.formatIntegerToString(furnaceMax);
+            this.drawCreativeTabHoveringText(text, par1, par2);
+        }
+        else if (this.isPointInRegion(150, 8, 16, 60, par1, par2)) {
+            int massCurrent = this.dismantlerInventory.getMassAmount();
+            int massMax = this.dismantlerInventory.getMassCapacity();
+
+            FluidStack fluid = this.dismantlerInventory
+                    .getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
+            String name = fluid == null ? "" : (" " + FluidRegistry
+                    .getFluidName(fluid));
+            String text = FemtocraftUtils.formatIntegerToString(massCurrent) + '/'
+                    + FemtocraftUtils.formatIntegerToString(massMax) + " mB"
+                    + name;
+
+            this.drawCreativeTabHoveringText(text, par1, par2);
+        }
+    }
+
     /**
      * Draw the foreground layer for the GuiContainer (everything in front of
      * the items)
@@ -53,8 +89,8 @@ public class GuiNanoDismantler extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         String s = "Nano Dismantler";
         this.fontRenderer.drawString(s,
-                                     this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
-                                     FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
+                this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
+                FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
         this.fontRenderer.drawString(
                 StatCollector.translateToLocal("container.inventory"), 8,
                 this.ySize - 96 + 2,
@@ -86,7 +122,7 @@ public class GuiNanoDismantler extends GuiContainer {
         i1 = (this.dismantlerInventory.currentPower * 60)
                 / this.dismantlerInventory.getMaxPower();
         this.drawTexturedModalRect(k + 10, l + 8 + (60 - i1), 176,
-                                   40 + (60 - i1), 16, i1);
+                40 + (60 - i1), 16, i1);
 
         FluidStack fluid = this.dismantlerInventory
                 .getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
@@ -106,40 +142,5 @@ public class GuiNanoDismantler extends GuiContainer {
 
         // Draw Tank Lines
         this.drawTexturedModalRect(k + 150, l + 8, 176, 100, 16, 60);
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see net.minecraft.client.gui.inventory.GuiContainer#drawScreen(int, int,
-     * float)
-     */
-    @Override
-    public void drawScreen(int par1, int par2, float par3) {
-        super.drawScreen(par1, par2, par3);
-
-        if (this.isPointInRegion(10, 8, 16, 60, par1, par2)) {
-
-            int furnaceCurrent = this.dismantlerInventory.currentPower;
-            int furnaceMax = this.dismantlerInventory.getMaxPower();
-
-            // String text = String.format("%i/%i", furnaceCurrent, furnaceMax);
-            String text = String.valueOf(furnaceCurrent) + '/'
-                    + String.valueOf(furnaceMax);
-            this.drawCreativeTabHoveringText(text, par1, par2);
-        }
-        else if (this.isPointInRegion(150, 8, 16, 60, par1, par2)) {
-            int massCurrent = this.dismantlerInventory.getMassAmount();
-            int massMax = this.dismantlerInventory.getMassCapacity();
-
-            FluidStack fluid = this.dismantlerInventory
-                    .getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
-            String name = fluid == null ? "" : (" " + FluidRegistry
-                    .getFluidName(fluid));
-            String text = String.valueOf(massCurrent) + '/'
-                    + String.valueOf(massMax) + " mB" + name;
-
-            this.drawCreativeTabHoveringText(text, par1, par2);
-        }
     }
 }

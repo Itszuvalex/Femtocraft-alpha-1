@@ -39,18 +39,25 @@ public class GuiNanoCube extends GuiContainer {
     }
 
     @Override
+    public void drawScreen(int par1, int par2, float par3) {
+        super.drawScreen(par1, par2, par3);
+    }
+
+    @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         String s = "Nano-Cube";
         this.fontRenderer.drawString(s,
-                                     this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
-                                     FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
+                this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
+                FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
 
-        String power = controller.getCurrentPower() + "/"
-                + controller.getMaxPower();
+        String power = FemtocraftUtils.formatIntegerToString(controller
+                .getCurrentPower()) + "/"
+                + FemtocraftUtils.formatIntegerToString(controller
+                .getMaxPower());
         this.fontRenderer.drawString(power,
-                                     this.xSize / 2 - this.fontRenderer.getStringWidth(power) / 2,
-                                     this.ySize * 4 / 5,
-                                     FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
+                this.xSize / 2 - this.fontRenderer.getStringWidth(power) / 2,
+                this.ySize * 4 / 5,
+                FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
     }
 
     @Override
@@ -65,12 +72,7 @@ public class GuiNanoCube extends GuiContainer {
         int max = controller.getMaxPower();
         int i1 = (int) (((power > 0) && (max > 0)) ? power / max : 0);
         this.drawTexturedModalRect(k + 52, l + 33 + (82 - i1), 176, 82 - i1,
-                                   70, i1);
-    }
-
-    @Override
-    public void drawScreen(int par1, int par2, float par3) {
-        super.drawScreen(par1, par2, par3);
+                70, i1);
     }
 
 }

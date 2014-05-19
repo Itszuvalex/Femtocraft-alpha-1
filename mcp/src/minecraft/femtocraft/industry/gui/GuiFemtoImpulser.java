@@ -36,10 +36,32 @@ public class GuiFemtoImpulser extends GuiContainer {
     private TileEntityFemtoImpulser furnaceInventory;
 
     public GuiFemtoImpulser(InventoryPlayer par1InventoryPlayer,
-                             TileEntityFemtoImpulser par2TileEntityFurnace) {
+                            TileEntityFemtoImpulser par2TileEntityFurnace) {
         super(new ContainerFemtoImpulser(par1InventoryPlayer,
-                                          par2TileEntityFurnace));
+                par2TileEntityFurnace));
         this.furnaceInventory = par2TileEntityFurnace;
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see net.minecraft.client.gui.inventory.GuiContainer#drawScreen(int, int,
+     * float)
+     */
+    @Override
+    public void drawScreen(int par1, int par2, float par3) {
+        super.drawScreen(par1, par2, par3);
+
+        int furnaceCurrent = this.furnaceInventory.currentPower;
+        int furnaceMax = this.furnaceInventory.getMaxPower();
+
+        // String text = String.format("%i/%i", furnaceCurrent, furnaceMax);
+        String text = FemtocraftUtils.formatIntegerToString(furnaceCurrent) + '/'
+                + FemtocraftUtils.formatIntegerToString(furnaceMax);
+
+        if (this.isPointInRegion(18, 12, 16, 60, par1, par2)) {
+            this.drawCreativeTabHoveringText(text, par1, par2);
+        }
     }
 
     /**
@@ -49,8 +71,8 @@ public class GuiFemtoImpulser extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         String s = "Femto Impulser";
         this.fontRenderer.drawString(s,
-                                     this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
-                                     FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
+                this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
+                FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
         this.fontRenderer.drawString(
                 StatCollector.translateToLocal("container.inventory"), 8,
                 this.ySize - 96 + 2,
@@ -83,28 +105,6 @@ public class GuiFemtoImpulser extends GuiContainer {
         i1 = (this.furnaceInventory.currentPower * 60)
                 / this.furnaceInventory.getMaxPower();
         this.drawTexturedModalRect(k + 18, l + 12 + (60 - i1), 176,
-                                   32 + (60 - i1), 16 + (60 - i1), 60);
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see net.minecraft.client.gui.inventory.GuiContainer#drawScreen(int, int,
-     * float)
-     */
-    @Override
-    public void drawScreen(int par1, int par2, float par3) {
-        super.drawScreen(par1, par2, par3);
-
-        int furnaceCurrent = this.furnaceInventory.currentPower;
-        int furnaceMax = this.furnaceInventory.getMaxPower();
-
-        // String text = String.format("%i/%i", furnaceCurrent, furnaceMax);
-        String text = String.valueOf(furnaceCurrent) + '/'
-                + String.valueOf(furnaceMax);
-
-        if (this.isPointInRegion(18, 12, 16, 60, par1, par2)) {
-            this.drawCreativeTabHoveringText(text, par1, par2);
-        }
+                32 + (60 - i1), 16 + (60 - i1), 60);
     }
 }

@@ -41,9 +41,44 @@ public class GuiFemtoRepurposer extends GuiContainer {
     private TileEntityFemtoRepurposer repurposerInventory;
 
     public GuiFemtoRepurposer(InventoryPlayer par1InventoryPlayer,
-                             TileEntityFemtoRepurposer tileEntity) {
+                              TileEntityFemtoRepurposer tileEntity) {
         super(new ContainerFemtoRepurposer(par1InventoryPlayer, tileEntity));
         this.repurposerInventory = tileEntity;
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see net.minecraft.client.gui.inventory.GuiContainer#drawScreen(int, int,
+     * float)
+     */
+    @Override
+    public void drawScreen(int par1, int par2, float par3) {
+        super.drawScreen(par1, par2, par3);
+
+        if (this.isPointInRegion(10, 8, 16, 60, par1, par2)) {
+
+            int furnaceCurrent = this.repurposerInventory.currentPower;
+            int furnaceMax = this.repurposerInventory.getMaxPower();
+
+            // String text = String.format("%i/%i", furnaceCurrent, furnaceMax);
+            String text = FemtocraftUtils.formatIntegerToString(furnaceCurrent) + '/'
+                    + FemtocraftUtils.formatIntegerToString(furnaceMax);
+            this.drawCreativeTabHoveringText(text, par1, par2);
+        }
+        else if (this.isPointInRegion(150, 8, 16, 60, par1, par2)) {
+            int massCurrent = this.repurposerInventory.getMassAmount();
+            int massMax = this.repurposerInventory.getMassCapacity();
+
+            FluidStack fluid = this.repurposerInventory
+                    .getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
+            String name = fluid == null ? "" : (" " + FluidRegistry
+                    .getFluidName(fluid));
+            String text = FemtocraftUtils.formatIntegerToString(massCurrent) + '/'
+                    + FemtocraftUtils.formatIntegerToString(massMax) + " mB" + name;
+
+            this.drawCreativeTabHoveringText(text, par1, par2);
+        }
     }
 
     /**
@@ -53,8 +88,8 @@ public class GuiFemtoRepurposer extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         String s = "Femto Repurposer";
         this.fontRenderer.drawString(s,
-                                     this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
-                                     FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
+                this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
+                FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
         this.fontRenderer.drawString(
                 StatCollector.translateToLocal("container.inventory"), 8,
                 this.ySize - 96 + 2,
@@ -86,7 +121,7 @@ public class GuiFemtoRepurposer extends GuiContainer {
         i1 = (this.repurposerInventory.currentPower * 60)
                 / this.repurposerInventory.getMaxPower();
         this.drawTexturedModalRect(k + 10, l + 8 + (60 - i1), 176,
-                                   40 + (60 - i1), 16, i1);
+                40 + (60 - i1), 16, i1);
 
         FluidStack fluid = this.repurposerInventory
                 .getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
@@ -106,40 +141,5 @@ public class GuiFemtoRepurposer extends GuiContainer {
 
         // Draw Tank Lines
         this.drawTexturedModalRect(k + 150, l + 8, 176, 100, 16, 60);
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see net.minecraft.client.gui.inventory.GuiContainer#drawScreen(int, int,
-     * float)
-     */
-    @Override
-    public void drawScreen(int par1, int par2, float par3) {
-        super.drawScreen(par1, par2, par3);
-
-        if (this.isPointInRegion(10, 8, 16, 60, par1, par2)) {
-
-            int furnaceCurrent = this.repurposerInventory.currentPower;
-            int furnaceMax = this.repurposerInventory.getMaxPower();
-
-            // String text = String.format("%i/%i", furnaceCurrent, furnaceMax);
-            String text = String.valueOf(furnaceCurrent) + '/'
-                    + String.valueOf(furnaceMax);
-            this.drawCreativeTabHoveringText(text, par1, par2);
-        }
-        else if (this.isPointInRegion(150, 8, 16, 60, par1, par2)) {
-            int massCurrent = this.repurposerInventory.getMassAmount();
-            int massMax = this.repurposerInventory.getMassCapacity();
-
-            FluidStack fluid = this.repurposerInventory
-                    .getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
-            String name = fluid == null ? "" : (" " + FluidRegistry
-                    .getFluidName(fluid));
-            String text = String.valueOf(massCurrent) + '/'
-                    + String.valueOf(massMax) + " mB" + name;
-
-            this.drawCreativeTabHoveringText(text, par1, par2);
-        }
     }
 }

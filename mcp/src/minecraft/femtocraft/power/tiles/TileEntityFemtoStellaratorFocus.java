@@ -50,7 +50,7 @@ public class TileEntityFemtoStellaratorFocus extends TileEntityBase
 
     public TileEntityFemtoStellaratorFocus() {
         info = new MultiBlockInfo();
-
+        coreLocation = new WorldLocation();
     }
 
     @Override
