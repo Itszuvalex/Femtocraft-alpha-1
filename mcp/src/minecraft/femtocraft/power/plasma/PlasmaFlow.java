@@ -104,14 +104,14 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
     public void update(IPlasmaContainer container, World world, int x, int y, int z) {
         if (container.getStabilityRating() < getVolatility()) {
             FemtocraftPlasmaUtils.applyEventToContainer(container,
-                                                        onSpontaneousEvent
-                                                                (container),
-                                                        world, x, y, z
+                    onSpontaneousEvent
+                            (container),
+                    world, x, y, z
             );
         }
         if (container.getTemperatureRating() < getTemperature()) {
             FemtocraftPlasmaUtils.applyEventToContainer(container,
-                                                        onOverheat(container)
+                    onOverheat(container)
                     , world, x, y, z);
         }
 
@@ -120,17 +120,24 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
             // tick with bad events.  Despite likely being realistic...
             freqPos = getFrequency();
 
+
             if (container.getOutput() == null) {
                 FemtocraftPlasmaUtils.applyEventToContainer(container,
-                                                            onIncompleteCircuit(container), world, x, y, z);
+                        onIncompleteCircuit(container), world, x, y, z);
             }
             else {
-                if (!container.getOutput().addFlow(this)) {
-                    FemtocraftPlasmaUtils.applyEventToContainer(container,
-                                                                onPlasmaOverflow(container), world, x, y, z);
+                //Need a reference to our current container at the start of this.
+                IPlasmaContainer cont = container;
+
+                if (cont.getOutput().addFlow(this)) {
+                    //If cont's output successfully adds this flow,
+                    // then our current container is set to cont.getOutput().
+                    // Hence our reference to cont, our original container.
+                    cont.removeFlow(this);
                 }
                 else {
-                    container.removeFlow(this);
+                    FemtocraftPlasmaUtils.applyEventToContainer(cont,
+                            onPlasmaOverflow(cont), world, x, y, z);
                 }
             }
         }
@@ -151,25 +158,6 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
     @Override
     public void setContainer(IPlasmaContainer container) {
         owner = container;
-    }
-
-    private void updateFreqAndVolatility(long temperaturePrev) {
-        frequency *= temperature / temperaturePrev;
-
-        frequency = frequency > frequencyMax ? frequencyMax : frequency;
-        frequency = frequency < frequencyMin ? frequencyMin : frequency;
-
-        volatility /= temperature / temperaturePrev;
-
-        volatility = unstable ? (int) (volatility * unstableMultiplier) : volatility;
-
-        volatility = volatility > volatilityMax ? volatilityMax : volatility;
-        volatility = volatility < volatilityMin ? volatilityMin : volatility;
-    }
-
-    private int getVolatilityEventTemperature() {
-        return (int) (temperature * (
-                (random.nextFloat() * .5f) + .5f) * FemtocraftPlasmaUtils.temperatureToEnergy);
     }
 
     /**
@@ -196,6 +184,20 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
         updateFreqAndVolatility(prev);
     }
 
+    private void updateFreqAndVolatility(long temperaturePrev) {
+        frequency *= temperature / temperaturePrev;
+
+        frequency = frequency > frequencyMax ? frequencyMax : frequency;
+        frequency = frequency < frequencyMin ? frequencyMin : frequency;
+
+        volatility /= temperature / temperaturePrev;
+
+        volatility = unstable ? (int) (volatility * unstableMultiplier) : volatility;
+
+        volatility = volatility > volatilityMax ? volatilityMax : volatility;
+        volatility = volatility < volatilityMin ? volatilityMin : volatility;
+    }
+
     @Override
     public int getVolatility() {
         return volatility;
@@ -216,11 +218,10 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
         unstable = isUnstable;
     }
 
-
     @Override
     public void recharge(IFusionReaction reaction) {
         long energy = random.nextInt(getEnergyRequirementMax -
-                                             energyRequirementMin) +
+                energyRequirementMin) +
                 energyRequirementMin;
         energy -= getTemperature() * FemtocraftPlasmaUtils.temperatureToEnergy;
 
@@ -261,7 +262,7 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
     @Override
     public IVolatilityEvent onOverheat(IPlasmaContainer container) {
         return new VolatilityEventTemperatureSpike(this, volatility,
-                                                   getVolatilityEventTemperature()
+                getVolatilityEventTemperature()
         );
     }
 
@@ -285,16 +286,21 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
         return null;
     }
 
+    private int getVolatilityEventTemperature() {
+        return (int) (temperature * (
+                (random.nextFloat() * .5f) + .5f) * FemtocraftPlasmaUtils.temperatureToEnergy);
+    }
+
     @Override
     public void saveToNBT(NBTTagCompound compound) {
         FemtocraftDataUtils.saveObjectToNBT(compound, this,
-                                            FemtocraftDataUtils.EnumSaveType.WORLD);
+                FemtocraftDataUtils.EnumSaveType.WORLD);
     }
 
     @Override
     public void loadFromNBT(NBTTagCompound compound) {
         FemtocraftDataUtils.loadObjectFromNBT(compound, this,
-                                              FemtocraftDataUtils.EnumSaveType.WORLD);
+                FemtocraftDataUtils.EnumSaveType.WORLD);
     }
 
 }
