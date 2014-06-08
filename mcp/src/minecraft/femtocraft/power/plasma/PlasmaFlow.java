@@ -126,18 +126,12 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
                         onIncompleteCircuit(container), world, x, y, z);
             }
             else {
-                //Need a reference to our current container at the start of this.
-                IPlasmaContainer cont = container;
-
-                if (cont.getOutput().addFlow(this)) {
-                    //If cont's output successfully adds this flow,
-                    // then our current container is set to cont.getOutput().
-                    // Hence our reference to cont, our original container.
-                    cont.removeFlow(this);
+                if (container.getOutput().addFlow(this)) {
+                    container.removeFlow(this);
                 }
                 else {
-                    FemtocraftPlasmaUtils.applyEventToContainer(cont,
-                            onPlasmaOverflow(cont), world, x, y, z);
+                    FemtocraftPlasmaUtils.applyEventToContainer(container,
+                            onPlasmaOverflow(container), world, x, y, z);
                 }
             }
         }
@@ -175,13 +169,12 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
 
     @Override
     public void setTemperature(long temperature) {
-        long prev = temperature;
         this.temperature = temperature;
         this.temperature = this.temperature > temperatureMax ? temperatureMax
                 : temperature;
         this.temperature = this.temperature < temperatureMin ? temperatureMin
                 : temperature;
-        updateFreqAndVolatility(prev);
+        updateFreqAndVolatility(temperature);
     }
 
     private void updateFreqAndVolatility(long temperaturePrev) {

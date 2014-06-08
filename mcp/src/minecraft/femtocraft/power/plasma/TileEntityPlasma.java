@@ -58,7 +58,9 @@ public class TileEntityPlasma extends TileEntity {
     public void updateEntity() {
         super.updateEntity();
 
-        if (worldObj.isRemote) return;
+        if (worldObj.isRemote) {
+            return;
+        }
 
         if (duration-- <= 0) {
             worldObj.setBlockToAir(xCoord, yCoord, zCoord);

@@ -36,23 +36,13 @@ public interface IVacuumTube {
      * @param item ItemStack to be inserted into tube.
      * @return True if ItemStack is able to be put into tube.
      */
-    public boolean canInsertItem(ItemStack item);
+    public boolean canInsertItem(ItemStack item, ForgeDirection dir);
 
     /**
      * @param item ItemStack to be inserted into tube.
      * @return True if ItemStack was successfully put into tube.
      */
-    public boolean insertItem(ItemStack item);
-
-    /**
-     * @return True if Tube is connected via its Input.
-     */
-    public boolean hasInput();
-
-    /**
-     * @return True if Tube is connected via its Output;
-     */
-    public boolean hasOutput();
+    public boolean insertItem(ItemStack item, ForgeDirection dir);
 
     /**
      * @return True if given ForgeDirection is an input.  This allows

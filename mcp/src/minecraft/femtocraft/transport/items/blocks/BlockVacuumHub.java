@@ -25,6 +25,7 @@
 //import femtocraft.api.IInterfaceDevice;
 //import femtocraft.core.blocks.TileContainer;
 //import femtocraft.proxy.ProxyClient;
+//import femtocraft.transport.items.tiles.TileEntityVacuumHub;
 //import femtocraft.transport.items.tiles.TileEntityVacuumTube;
 //import net.minecraft.block.Block;
 //import net.minecraft.block.material.Material;
@@ -60,113 +61,14 @@
 //        setBlockBounds();
 //    }
 //
-//    @Override
-//    public TileEntity createNewTileEntity(World world) {
-//        return new TileEntityVacuumTube();
-//    }
-//
-//    @Override
-//    public void onBlockAdded(World par1World, int par2, int par3, int par4) {
-//
-//        super.onBlockAdded(par1World, par2, par3, par4);
-//    }
-//
-//    @Override
-//    public void onNeighborBlockChange(World par1World, int par2, int par3,
-//                                      int par4, int par5) {
-//        // tiles tile = par1World.getBlockTileEntity(par2, par3, par4);
-//        // if(tile != null)
-//        // {
-//        // if(tile instanceof TileEntityVacuumTube)
-//        // {
-//        // TileEntityVacuumTube tube = (TileEntityVacuumTube)tile;
-//        //
-//        // tube.validateConnections();
-//        // tube.searchForMissingConnection();
-//        // }
-//        // }
-//        super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
-//    }
-//
-//    @Override
-//    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
-//                                EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
-//        // tiles tile = par1World.getBlockTileEntity(par2, par3, par4);
-//        // if(tile != null)
-//        // {
-//        // if(tile instanceof TileEntityVacuumTube)
-//        // {
-//        // TileEntityVacuumTube tube = (TileEntityVacuumTube)tile;
-//        //
-//        // tube.searchForMissingConnection();
-//        // }
-//        // }
-//        super.onBlockPlacedBy(par1World, par2, par3, par4,
-//                par5EntityLivingBase, par6ItemStack);
-//    }
-//
-//    @Override
-//    public void onPostBlockPlaced(World par1World, int par2, int par3,
-//                                  int par4, int par5) {
-//        TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
-//        if (tile != null) {
-//            if (tile instanceof TileEntityVacuumHub) {
-//                ((TileEntityVacuumHub) tile).searchForFullConnections();
-//            }
-//        }
-//        super.onPostBlockPlaced(par1World, par2, par3, par4, par5);
-//    }
-//
-//    @Override
-//    public void onNeighborTileChange(World world, int x, int y, int z,
-//                                     int tileX, int tileY, int tileZ) {
-//        TileEntity tile = world.getBlockTileEntity(x, y, z);
-//        if (tile != null) {
-//            if (tile instanceof TileEntityVacuumHub) {
-//                TileEntityVacuumHub hub = (TileEntityVacuumHub) tile;
-//
-//                // tube.validateConnections();
-//                // tube.searchForMissingConnection();
-//                hub.onNeighborTileChange();
-//            }
-//        }
-//        super.onNeighborTileChange(world, x, y, z, tileX, tileY, tileZ);
-//    }
-//
-//    @Override
-//    public void breakBlock(World par1World, int par2, int par3, int par4,
-//                           int par5, int par6) {
-//
-//        TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
-//        if (tile != null) {
-//            if (tile instanceof TileEntityVacuumHub) {
-//                TileEntityVacuumHub tube = (TileEntityVacuumHub) tile;
-//
-//                hub.onBlockBreak();
-//            }
-//        }
-//
-//        super.breakBlock(par1World, par2, par3, par4, par5, par6);
-//    }
-//
 //    public void setBlockBounds() {
 //        this.minX = this.minY = this.minZ = 4.0D / 16.0D;
 //        this.maxX = this.maxY = this.maxZ = 12.0D / 16.0D;
 //    }
 //
 //    @Override
-//    public boolean renderAsNormalBlock() {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean isOpaqueCube() {
-//        return false;
-//    }
-//
-//    @Override
-//    public int getRenderType() {
-//        return ProxyClient.FemtocraftVacuumHubRenderID;
+//    public TileEntity createNewTileEntity(World world) {
+//        return new TileEntityVacuumHub();
 //    }
 //
 //    @Override
@@ -193,23 +95,52 @@
 //    }
 //
 //    @Override
-//    @SideOnly(Side.CLIENT)
-//    public void registerIcons(IconRegister par1IconRegister) {
-//        indicatorIcon = par1IconRegister.registerIcon(Femtocraft.ID
-//                                                              .toLowerCase() + ":" + "VacuumTube_indicator");
-//        straightIcon = par1IconRegister.registerIcon(Femtocraft.ID
-//                                                             .toLowerCase() + ":" + "VacuumTube_side_straight");
-//        straightInsetIcon = par1IconRegister.registerIcon(Femtocraft.ID
-//                                                                  .toLowerCase() + ":" +
-//                                                          "VacuumTube_side_straight_inset");
-//        turnIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-//                                                 + ":" + "VacuumTube_side_curved");
-//        turnInsetIcon = par1IconRegister.registerIcon(Femtocraft.ID
-//                                                              .toLowerCase() + ":" + "VacuumTube_side_curved_inset");
-//        endIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-//                                                + ":" + "VacuumTube_end");
-//        endInsetIcon = par1IconRegister.registerIcon(Femtocraft.ID
-//                                                             .toLowerCase() + ":" + "VacuumTube_end_inset");
+//    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
+//                                EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
+//        // tiles tile = par1World.getBlockTileEntity(par2, par3, par4);
+//        // if(tile != null)
+//        // {
+//        // if(tile instanceof TileEntityVacuumTube)
+//        // {
+//        // TileEntityVacuumTube tube = (TileEntityVacuumTube)tile;
+//        //
+//        // tube.searchForMissingConnection();
+//        // }
+//        // }
+//        super.onBlockPlacedBy(par1World, par2, par3, par4,
+//                par5EntityLivingBase, par6ItemStack);
+//    }
+//
+//    @Override
+//    public void breakBlock(World par1World, int par2, int par3, int par4,
+//                           int par5, int par6) {
+//
+//        TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
+//        if (tile != null) {
+//            if (tile instanceof TileEntityVacuumHub) {
+//                TileEntityVacuumHub hub = (TileEntityVacuumHub) tile;
+//
+//                hub.onBlockBreak();
+//            }
+//        }
+//
+//        super.breakBlock(par1World, par2, par3, par4, par5, par6);
+//    }
+//
+//    @Override
+//    public void onBlockAdded(World par1World, int par2, int par3, int par4) {
+//
+//        super.onBlockAdded(par1World, par2, par3, par4);
+//    }
+//
+//    @Override
+//    public boolean renderAsNormalBlock() {
+//        return false;
+//    }
+//
+//    @Override
+//    public int getRenderType() {
+//        return ProxyClient.FemtocraftVacuumHubRenderID;
 //    }
 //
 //    @Override
@@ -277,15 +208,6 @@
 //    }
 //
 //    @Override
-//    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
-//                                                         int x, int y, int z) {
-//        return AxisAlignedBB.getAABBPool().getAABB((double) x + 4.d / 16.d,
-//                (double) y + 4.d / 16.d, (double) z + 4.d / 16.d,
-//                (double) x + 12.d / 16.d, (double) y + 12.d / 16.d,
-//                (double) z + 12.d / 16.d);
-//    }
-//
-//    @Override
 //    @SideOnly(Side.CLIENT)
 //    public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int x,
 //                                                        int y, int z) {
@@ -309,6 +231,37 @@
 //                y, z);
 //
 //        return box.func_111270_a(inputBB).func_111270_a(outputBB);
+//    }
+//
+//    @Override
+//    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
+//                                                         int x, int y, int z) {
+//        return AxisAlignedBB.getAABBPool().getAABB((double) x + 4.d / 16.d,
+//                (double) y + 4.d / 16.d, (double) z + 4.d / 16.d,
+//                (double) x + 12.d / 16.d, (double) y + 12.d / 16.d,
+//                (double) z + 12.d / 16.d);
+//    }
+//
+//    @Override
+//    public boolean isOpaqueCube() {
+//        return false;
+//    }
+//
+//    @Override
+//    public void onNeighborBlockChange(World par1World, int par2, int par3,
+//                                      int par4, int par5) {
+//        // tiles tile = par1World.getBlockTileEntity(par2, par3, par4);
+//        // if(tile != null)
+//        // {
+//        // if(tile instanceof TileEntityVacuumTube)
+//        // {
+//        // TileEntityVacuumTube tube = (TileEntityVacuumTube)tile;
+//        //
+//        // tube.validateConnections();
+//        // tube.searchForMissingConnection();
+//        // }
+//        // }
+//        super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
 //    }
 //
 //    @Override
@@ -383,5 +336,53 @@
 //
 //        setBlockBounds((float) minX, (float) minY, (float) minZ, (float) maxX,
 //                (float) maxY, (float) maxZ);
+//    }
+//
+//    @Override
+//    public void onPostBlockPlaced(World par1World, int par2, int par3,
+//                                  int par4, int par5) {
+//        TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
+//        if (tile != null) {
+//            if (tile instanceof TileEntityVacuumHub) {
+//                ((TileEntityVacuumHub) tile).searchForFullConnections();
+//            }
+//        }
+//        super.onPostBlockPlaced(par1World, par2, par3, par4, par5);
+//    }
+//
+//    @Override
+//    @SideOnly(Side.CLIENT)
+//    public void registerIcons(IconRegister par1IconRegister) {
+//        indicatorIcon = par1IconRegister.registerIcon(Femtocraft.ID
+//                .toLowerCase() + ":" + "VacuumTube_indicator");
+//        straightIcon = par1IconRegister.registerIcon(Femtocraft.ID
+//                .toLowerCase() + ":" + "VacuumTube_side_straight");
+//        straightInsetIcon = par1IconRegister.registerIcon(Femtocraft.ID
+//                .toLowerCase() + ":" +
+//                "VacuumTube_side_straight_inset");
+//        turnIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+//                + ":" + "VacuumTube_side_curved");
+//        turnInsetIcon = par1IconRegister.registerIcon(Femtocraft.ID
+//                .toLowerCase() + ":" + "VacuumTube_side_curved_inset");
+//        endIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+//                + ":" + "VacuumTube_end");
+//        endInsetIcon = par1IconRegister.registerIcon(Femtocraft.ID
+//                .toLowerCase() + ":" + "VacuumTube_end_inset");
+//    }
+//
+//    @Override
+//    public void onNeighborTileChange(World world, int x, int y, int z,
+//                                     int tileX, int tileY, int tileZ) {
+//        TileEntity tile = world.getBlockTileEntity(x, y, z);
+//        if (tile != null) {
+//            if (tile instanceof TileEntityVacuumHub) {
+//                TileEntityVacuumHub hub = (TileEntityVacuumHub) tile;
+//
+//                // tube.validateConnections();
+//                // tube.searchForMissingConnection();
+//                hub.onNeighborTileChange();
+//            }
+//        }
+//        super.onNeighborTileChange(world, x, y, z, tileX, tileY, tileZ);
 //    }
 //}

@@ -23,6 +23,7 @@ import femtocraft.utils.BaseInventory;
 import femtocraft.utils.FemtocraftDataUtils.Saveable;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityDiscriminatingVacuumTube extends TileEntityVacuumTube
         implements IInventory {
@@ -36,7 +37,7 @@ public class TileEntityDiscriminatingVacuumTube extends TileEntityVacuumTube
     }
 
     @Override
-    public boolean canInsertItem(ItemStack item) {
+    public boolean canInsertItem(ItemStack item, ForgeDirection dir) {
         return queuedItem == null && filterCheck(item)
                 ;
     }
