@@ -89,9 +89,6 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
             return false;
         }
         TileEntity tile = world.getBlockTileEntity(x, y, z);
-        if (tile == null) {
-            return false;
-        }
         if (!(tile instanceof TileEntitySuctionPipe)) {
             return false;
         }

@@ -490,7 +490,6 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         if (queuedItem == null) {
             queuedItem = item.copy();
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-            worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 
             if (items[0] == null) {
                 items[0] = queuedItem;

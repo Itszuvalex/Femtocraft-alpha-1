@@ -63,10 +63,14 @@ public class FemtocraftPowerUtils {
                 continue;
             }
             ForgeDirection dir = ForgeDirection.getOrientation(i);
-            TileEntity te = world.getBlockTileEntity(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
-            if (te instanceof IPowerBlockContainer) {
-                cons[i] = (IPowerBlockContainer) te;
-                ++numConnections;
+
+            if (world.getChunkProvider().chunkExists((x + dir.offsetX) >> 4,
+                    (z + dir.offsetZ) >> 4)) {
+                TileEntity te = world.getBlockTileEntity(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
+                if (te instanceof IPowerBlockContainer) {
+                    cons[i] = (IPowerBlockContainer) te;
+                    ++numConnections;
+                }
             }
         }
 

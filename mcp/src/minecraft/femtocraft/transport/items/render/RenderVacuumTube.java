@@ -1382,5 +1382,4 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
 
         return ret;
     }
-
 }

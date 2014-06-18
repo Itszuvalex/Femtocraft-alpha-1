@@ -37,8 +37,13 @@ public class TileEntityDiscriminatingVacuumTube extends TileEntityVacuumTube
     }
 
     @Override
+    protected boolean canAcceptItemStack(ItemStack item) {
+        return filterCheck(item);
+    }
+
+    @Override
     public boolean canInsertItem(ItemStack item, ForgeDirection dir) {
-        return queuedItem == null && filterCheck(item)
+        return filterCheck(item) && super.canInsertItem(item, dir)
                 ;
     }
 
@@ -58,12 +63,6 @@ public class TileEntityDiscriminatingVacuumTube extends TileEntityVacuumTube
 
         return filterInclude ? contained : !contained;
     }
-
-    @Override
-    protected boolean canAcceptItemStack(ItemStack item) {
-        return filterCheck(item);
-    }
-
 
     @Override
     public int getSizeInventory() {
