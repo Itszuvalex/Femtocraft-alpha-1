@@ -60,7 +60,7 @@ public class ManagerResearch {
     @Technology
     public static ResearchTechnology technologyBasicCircuits = new ResearchTechnology(
             "Basic Circuits", "Farenite, Circuit Boards", EnumTechLevel.MACRO,
-            null, new ItemStack(Femtocraft.microCircuitBoard), true,
+            null, new ItemStack(Femtocraft.microchip), true,
             null, GuiTechnologyBasicCircuits.class, null);
     @Technology
     // TODO: replace machining icon with micro machine chassis item
@@ -71,13 +71,13 @@ public class ManagerResearch {
             new ItemStack(Femtocraft.itemMicroPlating), false,
             new ArrayList<ItemStack>(Arrays.asList(new ItemStack(
                     Femtocraft.ingotTemperedTitanium), new ItemStack(
-                    Femtocraft.microCircuitBoard), new ItemStack(
+                    Femtocraft.microchip), new ItemStack(
                     Femtocraft.ingotTemperedTitanium), new ItemStack(
-                    Femtocraft.microCircuitBoard), new ItemStack(
+                    Femtocraft.microchip), new ItemStack(
                     Femtocraft.conductivePowder), new ItemStack(
-                    Femtocraft.microCircuitBoard), new ItemStack(
+                    Femtocraft.microchip), new ItemStack(
                     Femtocraft.ingotTemperedTitanium), new ItemStack(
-                    Femtocraft.microCircuitBoard), new ItemStack(
+                    Femtocraft.microchip), new ItemStack(
                     Femtocraft.ingotTemperedTitanium))),
             GuiTechnologyMachining.class, new ItemStack(
             Femtocraft.itemMicroPlating)

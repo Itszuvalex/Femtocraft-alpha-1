@@ -128,7 +128,7 @@ public class GuiTechnologyBasicCircuits extends GuiTechnology {
                 renderCraftingRecipeWithInfo(x, y + height / 2, width, height / 2,
                         new ItemStack[]{new ItemStack(Femtocraft.spoolGold),
                                 null, null, new ItemStack(Femtocraft.dopedBoard)},
-                        new ItemStack(Femtocraft.microCircuitBoard),
+                        new ItemStack(Femtocraft.microchip),
                         mouseX, mouseY, tooltip,
                         "Simply wire the connections using gold wiring to produce the needed circuit."
                 );

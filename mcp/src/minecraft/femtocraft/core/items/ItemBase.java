@@ -17,22 +17,27 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  ******************************************************************************/
 
-package femtocraft.core.items.decomposition;
+package femtocraft.core.items;
 
 import femtocraft.Femtocraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 
-public class ItemElectrite extends Item {
-    public ItemElectrite(int id) {
-        super(id);
+/**
+ * Created by Christopher Harris (Itszuvalex) on 6/22/14.
+ */
+public class ItemBase extends Item {
+
+    public ItemBase(int par1, String unlocalizedName) {
+        super(par1);
         setMaxStackSize(64);
         setCreativeTab(Femtocraft.femtocraftTab);
-        setTextureName(Femtocraft.ID.toLowerCase() + ":" + "ItemElectrite");
+        setUnlocalizedName(unlocalizedName);
+        setTextureName(Femtocraft.ID.toLowerCase() + ":" + unlocalizedName);
     }
 
     public void updateIcons(IconRegister par1IconRegister) {
         this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
-                                                              .toLowerCase() + ":" + "ItemElectrite");
+                .toLowerCase() + ":" + getUnlocalizedName());
     }
 }

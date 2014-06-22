@@ -47,16 +47,16 @@ public class ManagerRecipe {
                 Femtocraft.ingotPlatinum), 0.1f);
         GameRegistry.addSmelting(Femtocraft.oreThorium.blockID, new ItemStack(
                 Femtocraft.ingotThorium), 0.1f);
-        GameRegistry.addSmelting(Femtocraft.deconstructedIron.itemID,
-                new ItemStack(Item.ingotIron), 0.1f);
-        GameRegistry.addSmelting(Femtocraft.deconstructedGold.itemID,
-                new ItemStack(Item.ingotGold), 0.1f);
-        GameRegistry.addSmelting(Femtocraft.deconstructedTitanium.itemID,
-                new ItemStack(Femtocraft.ingotTitanium), 0.1f);
-        GameRegistry.addSmelting(Femtocraft.deconstructedThorium.itemID,
-                new ItemStack(Femtocraft.ingotThorium), 0.1f);
-        GameRegistry.addSmelting(Femtocraft.deconstructedPlatinum.itemID,
-                new ItemStack(Femtocraft.ingotPlatinum), 0.1f);
+//        GameRegistry.addSmelting(Femtocraft.deconstructedIron.itemID,
+//                new ItemStack(Item.ingotIron), 0.1f);
+//        GameRegistry.addSmelting(Femtocraft.deconstructedGold.itemID,
+//                new ItemStack(Item.ingotGold), 0.1f);
+//        GameRegistry.addSmelting(Femtocraft.deconstructedTitanium.itemID,
+//                new ItemStack(Femtocraft.ingotTitanium), 0.1f);
+//        GameRegistry.addSmelting(Femtocraft.deconstructedThorium.itemID,
+//                new ItemStack(Femtocraft.ingotThorium), 0.1f);
+//        GameRegistry.addSmelting(Femtocraft.deconstructedPlatinum.itemID,
+//                new ItemStack(Femtocraft.ingotPlatinum), 0.1f);
         GameRegistry.addSmelting(Femtocraft.ingotTitanium.itemID,
                 new ItemStack(Femtocraft.ingotTemperedTitanium), 0.1f);
 
@@ -72,7 +72,7 @@ public class ManagerRecipe {
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.board), "###",
                 '#', Item.stick);
         GameRegistry.addShapedRecipe(
-                new ItemStack(Femtocraft.microCircuitBoard), "#", "$", '#',
+                new ItemStack(Femtocraft.microchip), "#", "$", '#',
                 Femtocraft.spoolGold, '$', Femtocraft.dopedBoard);
 
         CraftingManager
@@ -91,9 +91,9 @@ public class ManagerRecipe {
                         "#-#", "###", '#', Femtocraft.ingotPlatinum, '-',
                         Femtocraft.spool);
 
-        GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemMicroLogicCore), "TGT", "GBG", "TTT", 'T', Femtocraft.ingotTemperedTitanium, 'G', Femtocraft.spoolGold, 'B', Femtocraft.microCircuitBoard);
+        GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemMicroLogicCore), "TGT", "GBG", "TTT", 'T', Femtocraft.ingotTemperedTitanium, 'G', Femtocraft.spoolGold, 'B', Femtocraft.microchip);
 
-        GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemHeatingCoil), " P ", "G G", "TBT", 'P', Femtocraft.spoolPlatinum, 'G', Femtocraft.spoolGold, 'T', Femtocraft.ingotTemperedTitanium, 'B', Femtocraft.microCircuitBoard);
+        GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemHeatingCoil), " P ", "G G", "TBT", 'P', Femtocraft.spoolPlatinum, 'G', Femtocraft.spoolGold, 'T', Femtocraft.ingotTemperedTitanium, 'B', Femtocraft.microchip);
 
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.microFurnaceUnlit), "TMT", "MHM", "TLT", 'T', Femtocraft.ingotTemperedTitanium, 'M', Femtocraft.itemMicroPlating, 'H', Femtocraft.itemHeatingCoil, 'L', Femtocraft.itemMicroLogicCore);
 
@@ -104,7 +104,7 @@ public class ManagerRecipe {
         GameRegistry.addShapedRecipe(
                 new ItemStack(Femtocraft.itemMicroPlating), "TCT", "CPC",
                 "TCT", 'T', Femtocraft.ingotTemperedTitanium, 'C',
-                Femtocraft.microCircuitBoard, 'P', Femtocraft.conductivePowder);
+                Femtocraft.microchip, 'P', Femtocraft.conductivePowder);
 
     }
 }

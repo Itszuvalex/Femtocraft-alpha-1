@@ -33,7 +33,8 @@ public class FemtocraftPowerUtils {
 
     /**
      * This algorithm distributes power from the given container, located in the given world, at the givne coordinates,
-     * in a manner consistent with intended behaviors.  It distributes power to IPowerContainers, where the difference
+     * in a manner consistent with intended behaviors.  It distributes power
+     * to IPowerBlockContainers, where the difference
      * in the given container's currentPowerPercentageForOutput() and the adjacent container's
      * currentPowerPercentageForInput() is greater than the distributionBuffer.  It will attempt to distribute at most
      * maxPowerPerTick*currentPower() power from the given container.

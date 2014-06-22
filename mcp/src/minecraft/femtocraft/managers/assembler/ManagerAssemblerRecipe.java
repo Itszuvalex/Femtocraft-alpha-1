@@ -1319,41 +1319,41 @@ public class ManagerAssemblerRecipe {
     private void registerFemtocraftAssemblerRecipes() {
         try {
             if (configRegisterRecipe("IronOre")) {
-                addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null,
-                        null, null, null,
-                        new ItemStack(Femtocraft.deconstructedIron, 2), null,
-                        null, null, null}, 0, new ItemStack(Block.oreIron),
-                        EnumTechLevel.MACRO, null
-                ));
+//                addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null,
+//                        null, null, null,
+//                        new ItemStack(Femtocraft.deconstructedIron, 2), null,
+//                        null, null, null}, 0, new ItemStack(Block.oreIron),
+//                        EnumTechLevel.MACRO, null
+//                ));
             }
             if (configRegisterRecipe("GoldOre")) {
-                addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null,
-                        null, null, null,
-                        new ItemStack(Femtocraft.deconstructedGold, 2), null,
-                        null, null, null}, 0, new ItemStack(Block.oreGold),
-                        EnumTechLevel.MACRO, null
-                ));
+//                addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null,
+//                        null, null, null,
+//                        new ItemStack(Femtocraft.deconstructedGold, 2), null,
+//                        null, null, null}, 0, new ItemStack(Block.oreGold),
+//                        EnumTechLevel.MACRO, null
+//                ));
             }
             if (configRegisterRecipe("TitaniumOre")) {
-                addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null,
-                        null, null, null,
-                        new ItemStack(Femtocraft.deconstructedTitanium, 2),
-                        null, null, null, null}, 0, new ItemStack(
-                        Femtocraft.oreTitanium), EnumTechLevel.MACRO, null));
+//                addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null,
+//                        null, null, null,
+//                        new ItemStack(Femtocraft.deconstructedTitanium, 2),
+//                        null, null, null, null}, 0, new ItemStack(
+//                        Femtocraft.oreTitanium), EnumTechLevel.MACRO, null));
             }
             if (configRegisterRecipe("ThoriumOre")) {
-                addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null,
-                        null, null, null,
-                        new ItemStack(Femtocraft.deconstructedThorium, 2),
-                        null, null, null, null}, 0, new ItemStack(
-                        Femtocraft.oreThorium), EnumTechLevel.MACRO, null));
+//                addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null,
+//                        null, null, null,
+//                        new ItemStack(Femtocraft.deconstructedThorium, 2),
+//                        null, null, null, null}, 0, new ItemStack(
+//                        Femtocraft.oreThorium), EnumTechLevel.MACRO, null));
             }
             if (configRegisterRecipe("PlatinumOre")) {
-                addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null,
-                        null, null, null,
-                        new ItemStack(Femtocraft.deconstructedPlatinum, 2),
-                        null, null, null, null}, 0, new ItemStack(
-                        Femtocraft.orePlatinum), EnumTechLevel.MACRO, null));
+//                addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null,
+//                        null, null, null,
+//                        new ItemStack(Femtocraft.deconstructedPlatinum, 2),
+//                        null, null, null, null}, 0, new ItemStack(
+//                        Femtocraft.orePlatinum), EnumTechLevel.MACRO, null));
             }
 
             addDecompositionRecipe(new AssemblerRecipe(new ItemStack[]{
@@ -1375,7 +1375,7 @@ public class ManagerAssemblerRecipe {
                                     OreDictionary.WILDCARD_VALUE),
                             new ItemStack(Block.planks, 1,
                                     OreDictionary.WILDCARD_VALUE)}, 0,
-                    new ItemStack(Femtocraft.microCircuitBoard, 6),
+                    new ItemStack(Femtocraft.microchip, 6),
                     EnumTechLevel.MACRO, null
             ));
 
