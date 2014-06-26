@@ -1339,43 +1339,43 @@ public class ManagerAssemblerRecipe {
 //                        null, null, null,
 //                        new ItemStack(Femtocraft.deconstructedTitanium, 2),
 //                        null, null, null, null}, 0, new ItemStack(
-//                        Femtocraft.oreTitanium), EnumTechLevel.MACRO, null));
+//                        Femtocraft.blockOreTitanium), EnumTechLevel.MACRO, null));
             }
             if (configRegisterRecipe("ThoriumOre")) {
 //                addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null,
 //                        null, null, null,
 //                        new ItemStack(Femtocraft.deconstructedThorium, 2),
 //                        null, null, null, null}, 0, new ItemStack(
-//                        Femtocraft.oreThorium), EnumTechLevel.MACRO, null));
+//                        Femtocraft.blockOreThorium), EnumTechLevel.MACRO, null));
             }
             if (configRegisterRecipe("PlatinumOre")) {
 //                addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null,
 //                        null, null, null,
 //                        new ItemStack(Femtocraft.deconstructedPlatinum, 2),
 //                        null, null, null, null}, 0, new ItemStack(
-//                        Femtocraft.orePlatinum), EnumTechLevel.MACRO, null));
+//                        Femtocraft.blockOrePlatinum), EnumTechLevel.MACRO, null));
             }
 
             addDecompositionRecipe(new AssemblerRecipe(new ItemStack[]{
                     new ItemStack(Item.paper, 3), null, null, null, null, null,
                     null, null, null}, 0, new ItemStack(
-                    Femtocraft.paperSchematic), EnumTechLevel.MACRO, null));
+                    Femtocraft.itemPaperSchematic), EnumTechLevel.MACRO, null));
 
             addRecompositionRecipe(new AssemblerRecipe(
                     new ItemStack[]{
-                            new ItemStack(Femtocraft.spoolGold),
-                            new ItemStack(Femtocraft.spoolGold),
-                            new ItemStack(Femtocraft.spoolGold),
-                            new ItemStack(Femtocraft.conductivePowder),
-                            new ItemStack(Femtocraft.conductivePowder),
-                            new ItemStack(Femtocraft.conductivePowder),
+                            new ItemStack(Femtocraft.itemSpoolGold),
+                            new ItemStack(Femtocraft.itemSpoolGold),
+                            new ItemStack(Femtocraft.itemSpoolGold),
+                            new ItemStack(Femtocraft.itemConductivePowder),
+                            new ItemStack(Femtocraft.itemConductivePowder),
+                            new ItemStack(Femtocraft.itemConductivePowder),
                             new ItemStack(Block.planks, 1,
                                     OreDictionary.WILDCARD_VALUE),
                             new ItemStack(Block.planks, 1,
                                     OreDictionary.WILDCARD_VALUE),
                             new ItemStack(Block.planks, 1,
                                     OreDictionary.WILDCARD_VALUE)}, 0,
-                    new ItemStack(Femtocraft.microchip, 6),
+                    new ItemStack(Femtocraft.itemMicrochip, 6),
                     EnumTechLevel.MACRO, null
             ));
 

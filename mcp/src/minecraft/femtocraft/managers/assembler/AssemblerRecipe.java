@@ -100,7 +100,7 @@ public class AssemblerRecipe implements Comparable, ISaveable {
         compound.setTag("input", inputList);
 
         // FluidMass
-        compound.setInteger("mass", mass);
+        compound.setInteger("fluidMass", mass);
 
         // Output
         NBTTagCompound outputCompound = new NBTTagCompound();
@@ -139,7 +139,7 @@ public class AssemblerRecipe implements Comparable, ISaveable {
         }
 
         // FluidMass
-        mass = compound.getInteger("mass");
+        mass = compound.getInteger("fluidMass");
 
         // Output
         output = ItemStack.loadItemStackFromNBT((NBTTagCompound) compound

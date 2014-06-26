@@ -1042,7 +1042,7 @@ public class FemtocraftConfigs {
                     .get("Item Constants",
                          "SchematicInfiniteUseMultiplier",
                          200.f,
-                         "When AssemblerSchematics have infinite uses, this number will be used instead of the # of uses the schematic would be good for, when calculating the mass required to key the schematic to a recipe.")
+                         "When AssemblerSchematics have infinite uses, this number will be used instead of the # of uses the schematic would be good for, when calculating the fluidMass required to key the schematic to a recipe.")
                     .getDouble(200.f);
             ItemAssemblySchematic.infiniteUseMassMultiplier = schematicInfiniteUseMultiplier;
 

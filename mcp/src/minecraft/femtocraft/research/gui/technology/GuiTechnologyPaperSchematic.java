@@ -53,14 +53,14 @@ public class GuiTechnologyPaperSchematic extends GuiTechnology {
                         mouseX,
                         mouseY,
                         tooltip,
-                        "Combining small pieces of wood, it is possible to create a simple container to support the fragile requirements of a circuit board."
+                        "Combining small pieces of wood, it is possible to create a simple container to support the fragile requirements of a circuit itemBoard."
                 );
                 renderCraftingGridWithInfo(
                         x,
                         y + height / 2,
                         width,
                         height / 2,
-                        new ItemStack[]{new ItemStack(Femtocraft.ingotFarenite),
+                        new ItemStack[]{new ItemStack(Femtocraft.itemIngotFarenite),
                                 new ItemStack(Item.dyePowder, 1, 4)},
                         mouseX,
                         mouseY,
@@ -95,7 +95,7 @@ public class GuiTechnologyPaperSchematic extends GuiTechnology {
                                 new ItemStack(Item.ingotGold),
                                 new ItemStack(Item.ingotGold),
                                 new ItemStack(Item.ingotGold),
-                                new ItemStack(Femtocraft.spool),
+                                new ItemStack(Femtocraft.itemSpool),
                                 new ItemStack(Item.ingotGold),
                                 new ItemStack(Item.ingotGold),
                                 new ItemStack(Item.ingotGold),
@@ -113,16 +113,16 @@ public class GuiTechnologyPaperSchematic extends GuiTechnology {
                         width,
                         height / 2,
                         new ItemStack[]{
-                                new ItemStack(Femtocraft.conductivePowder), null,
-                                null, new ItemStack(Femtocraft.board)},
+                                new ItemStack(Femtocraft.itemConductivePowder), null,
+                                null, new ItemStack(Femtocraft.itemBoard)},
                         mouseX,
                         mouseY,
                         tooltip,
-                        "Filling a board with conductive powder, then running it through an oven, produces a board suitable for wiring."
+                        "Filling a itemBoard with conductive powder, then running it through an oven, produces a itemBoard suitable for wiring."
                 );
                 renderCraftingGridWithInfo(x, y + height / 2, width, height / 2,
-                                           new ItemStack[]{new ItemStack(Femtocraft.spoolGold),
-                                                   null, null, new ItemStack(Femtocraft.dopedBoard)},
+                                           new ItemStack[]{new ItemStack(Femtocraft.itemSpoolGold),
+                                                   null, null, new ItemStack(Femtocraft.itemDopedBoard)},
                                            mouseX, mouseY, tooltip,
                                            "Simply wire the connections using gold wiring to produce the needed circuit."
                 );

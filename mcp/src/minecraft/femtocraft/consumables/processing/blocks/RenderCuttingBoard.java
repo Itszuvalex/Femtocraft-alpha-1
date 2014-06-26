@@ -36,7 +36,7 @@ public class RenderCuttingBoard implements ISimpleBlockRenderingHandler {
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
                                     Block block, int modelId, RenderBlocks renderer) {
-        // Draw cutting board top/bottom
+        // Draw cutting itemBoard top/bottom
         renderer.setRenderBounds(0, 0, 0, 1, 1.0D / 16.0D, 1);
         renderer.renderStandardBlock(block, x, y, z);
 

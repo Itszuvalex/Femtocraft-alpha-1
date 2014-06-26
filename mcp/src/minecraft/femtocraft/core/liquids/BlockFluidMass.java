@@ -34,10 +34,10 @@ public class BlockFluidMass extends BlockFluidClassic {
     public Icon flowingIcon;
 
     public BlockFluidMass(int id) {
-        super(id, Femtocraft.mass, Material.water);
-        setUnlocalizedName("mass");
+        super(id, Femtocraft.fluidMass, Material.water);
+        setUnlocalizedName("fluidMass");
         setCreativeTab(Femtocraft.femtocraftTab);
-        Femtocraft.mass.setBlockID(id);
+        Femtocraft.fluidMass.setBlockID(id);
     }
 
     @Override

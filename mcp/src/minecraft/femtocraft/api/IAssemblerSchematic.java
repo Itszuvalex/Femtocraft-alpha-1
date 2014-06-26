@@ -50,7 +50,7 @@ public interface IAssemblerSchematic {
 
     /**
      * @param recipe Recipe that will be imprinted upon this Schematic
-     * @return Amount of mass required to create this recipe, in mB.
+     * @return Amount of fluidMass required to create this recipe, in mB.
      */
     int massRequired(AssemblerRecipe recipe);
 

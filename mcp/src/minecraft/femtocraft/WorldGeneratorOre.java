@@ -63,7 +63,7 @@ public class WorldGeneratorOre implements IWorldGenerator {
                         + FemtocraftConfigs.titaniumOreYHeightMin;
                 int zCoord = j + random.nextInt(16);
 
-                (new WorldGenMinable(Femtocraft.oreTitanium.blockID,
+                (new WorldGenMinable(Femtocraft.blockOreTitanium.blockID,
                                      FemtocraftConfigs.titaniumOreBlockPerVeinCount))
                         .generate(world, random, xCoord, yCoord, zCoord);
 
@@ -80,7 +80,7 @@ public class WorldGeneratorOre implements IWorldGenerator {
                         + FemtocraftConfigs.platinumOreYHeightMin;
                 int zCoord = j + random.nextInt(16);
 
-                (new WorldGenMinable(Femtocraft.orePlatinum.blockID,
+                (new WorldGenMinable(Femtocraft.blockOrePlatinum.blockID,
                                      FemtocraftConfigs.platinumOreBlockPerVeinCount))
                         .generate(world, random, xCoord, yCoord, zCoord);
             }
@@ -96,7 +96,7 @@ public class WorldGeneratorOre implements IWorldGenerator {
                         + FemtocraftConfigs.thoriumOreYHeightMin;
                 int zCoord = j + random.nextInt(16);
 
-                (new WorldGenMinable(Femtocraft.oreThorium.blockID,
+                (new WorldGenMinable(Femtocraft.blockOreThorium.blockID,
                                      FemtocraftConfigs.thoriumOreBlockPerVeinCount))
                         .generate(world, random, xCoord, yCoord, zCoord);
 
@@ -113,7 +113,7 @@ public class WorldGeneratorOre implements IWorldGenerator {
                         + FemtocraftConfigs.fareniteOreYHeightMin;
                 int zCoord = j + random.nextInt(16);
 
-                (new WorldGenMinable(Femtocraft.oreFarenite.blockID,
+                (new WorldGenMinable(Femtocraft.blockOreFarenite.blockID,
                                      FemtocraftConfigs.fareniteOreBlockPerVeinCount))
                         .generate(world, random, xCoord, yCoord, zCoord);
 
@@ -132,7 +132,7 @@ public class WorldGeneratorOre implements IWorldGenerator {
                         + FemtocraftConfigs.maleniteOreYHeightMin;
                 int zCoord = j + random.nextInt(16);
 
-                (new WorldGenMinable(Femtocraft.oreMalenite.blockID,
+                (new WorldGenMinable(Femtocraft.blockOreMalenite.blockID,
                                      FemtocraftConfigs.maleniteOreBlockPerVeinCount,
                                      Block.netherrack.blockID)).generate(world, random,
                                                                          xCoord, yCoord, zCoord);

@@ -36,7 +36,8 @@ public class ItemBase extends Item {
         setTextureName(Femtocraft.ID.toLowerCase() + ":" + unlocalizedName);
     }
 
-    public void updateIcons(IconRegister par1IconRegister) {
+    @Override
+    public void registerIcons(IconRegister par1IconRegister) {
         this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
                 .toLowerCase() + ":" + getUnlocalizedName());
     }

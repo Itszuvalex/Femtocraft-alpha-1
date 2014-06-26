@@ -41,7 +41,7 @@ public class RenderOrbitalEqualizer extends TileEntitySpecialRenderer {
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
         Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Femtocraft.ID.toLowerCase(),
-                                                                               "textures/blocks/orbitalEqualizer.png"));
+                                                                               "textures/blocks/blockOrbitalEqualizer.png"));
         GL11.glPushMatrix();
         GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
         model.render();

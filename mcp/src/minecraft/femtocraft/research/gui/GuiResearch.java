@@ -380,17 +380,17 @@ public class GuiResearch extends GuiScreen {
                 if (j3 <= 37 && j2 + i3 != 35) {
                     if (j3 == 22) {
                         if (random.nextInt(2) == 0) {
-                            icon = Femtocraft.orePlatinum.getIcon(0, 0);
+                            icon = Femtocraft.blockOrePlatinum.getIcon(0, 0);
                         }
                         else {
-                            icon = Femtocraft.oreFarenite.getIcon(0, 0);
+                            icon = Femtocraft.blockOreFarenite.getIcon(0, 0);
                         }
                     }
                     else if (j3 == 10) {
-                        icon = Femtocraft.oreTitanium.getIcon(0, 0);
+                        icon = Femtocraft.blockOreTitanium.getIcon(0, 0);
                     }
                     else if (j3 == 8) {
-                        icon = Femtocraft.oreThorium.getIcon(0, 0);
+                        icon = Femtocraft.blockOreThorium.getIcon(0, 0);
                     }
                     else if (j3 > 4) {
                         icon = Block.stone.getIcon(0, 0);

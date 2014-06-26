@@ -38,7 +38,7 @@ public class BlockMicroCube extends BlockPowerContainer {
     public BlockMicroCube(int par1) {
         super(par1, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
-        setUnlocalizedName("microCube");
+        setUnlocalizedName("blockMicroCube");
         setHardness(3.f);
         setStepSound(Block.soundMetalFootstep);
     }

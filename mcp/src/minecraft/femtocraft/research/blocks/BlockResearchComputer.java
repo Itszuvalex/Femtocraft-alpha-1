@@ -36,7 +36,7 @@ public class BlockResearchComputer extends TileContainer {
 
     public BlockResearchComputer(int par1) {
         super(par1, Material.iron);
-        setUnlocalizedName("researchComputer");
+        setUnlocalizedName("blockResearchComputer");
         setCreativeTab(Femtocraft.femtocraftTab);
     }
 

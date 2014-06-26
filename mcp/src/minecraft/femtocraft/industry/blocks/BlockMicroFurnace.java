@@ -81,11 +81,11 @@ public class BlockMicroFurnace extends TileContainer {
         shouldDrop = false;
         if (par0) {
             par1World.setBlock(par2, par3, par4,
-                               Femtocraft.microFurnaceLit.blockID);
+                               Femtocraft.blockMicroFurnaceLit.blockID);
         }
         else {
             par1World.setBlock(par2, par3, par4,
-                               Femtocraft.microFurnaceUnlit.blockID);
+                               Femtocraft.blockMicroFurnaceUnlit.blockID);
         }
         shouldDrop = true;
         keepFurnaceInventory = false;
@@ -111,7 +111,7 @@ public class BlockMicroFurnace extends TileContainer {
      * Returns the ID of the items to drop on destruction.
      */
     public int idDropped(int par1, Random par2Random, int par3) {
-        return Femtocraft.microFurnaceUnlit.blockID;
+        return Femtocraft.blockMicroFurnaceUnlit.blockID;
     }
 
     /**
@@ -391,6 +391,6 @@ public class BlockMicroFurnace extends TileContainer {
      * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
      */
     public int idPicked(World par1World, int par2, int par3, int par4) {
-        return Femtocraft.microFurnaceUnlit.blockID;
+        return Femtocraft.blockMicroFurnaceUnlit.blockID;
     }
 }

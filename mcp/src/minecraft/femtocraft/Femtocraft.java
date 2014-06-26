@@ -101,53 +101,53 @@ public class Femtocraft {
     public static ManagerResearch researchManager;
 
     // blocks
-    public static Block oreTitanium;
-    public static Block orePlatinum;
-    public static Block oreThorium;
-    public static Block oreFarenite;
-    public static Block oreMalenite;
+    public static Block blockOreTitanium;
+    public static Block blockOrePlatinum;
+    public static Block blockOreThorium;
+    public static Block blockOreFarenite;
+    public static Block blockOreMalenite;
     public static Block microStone;
     public static Block nanoStone;
     public static Block femtoStone;
     public static Block unidentifiedAlloy;
-    public static Block researchComputer;
-    public static Block researchConsole;
+    public static Block blockResearchComputer;
+    public static Block blockResearchConsole;
     public static Block generatorTest;
     public static Block consumerTest;
-    public static Block microFurnaceUnlit;
-    public static Block microFurnaceLit;
-    public static Block microDeconstructor;
-    public static Block microReconstructor;
-    public static Block encoder;
-    public static Block nanoInnervatorUnlit;
-    public static Block nanoInnervatorLit;
-    public static Block nanoDismantler;
-    public static Block nanoFabricator;
-    public static Block nanoEnmesher;
-    public static Block nanoHorologe;
-    public static Block femtoImpulserLit;
-    public static Block femtoImpulserUnlit;
-    public static Block femtoRepurposer;
-    public static Block femtoCoagulator;
-    public static Block femtoEntangler;
-    public static Block femtoChronoshifter;
-    public static Block microCube;
-    public static Block nanoCubeFrame;
-    public static Block nanoCubePort;
-    public static Block femtoCubePort;
-    public static Block femtoCubeFrame;
-    public static Block femtoCubeChassis;
-    public static Block vacuumTube;
-    public static Block suctionPipe;
-    public static Block microChargingBase;
-    public static Block microChargingCoil;
-    public static Block microChargingCapacitor;
-    public static Block orbitalEqualizer;
-    public static Block nullEqualizer;
-    public static Block stellaratorCore;
-    public static Block stellaratorFocus;
-    public static Block stellaratorOpticalMaser;
-    public static Block stellaratorHousing;
+    public static Block blockMicroFurnaceUnlit;
+    public static Block blockMicroFurnaceLit;
+    public static Block blockMicroDeconstructor;
+    public static Block blockMicroReconstructor;
+    public static Block blockEncoder;
+    public static Block blockNanoInnervatorUnlit;
+    public static Block blockNanoInnervatorLit;
+    public static Block blockNanoDismantler;
+    public static Block blockNanoFabricator;
+    public static Block blockNanoEnmesher;
+    public static Block blockNanoHorologe;
+    public static Block blockFemtoImpulserLit;
+    public static Block blockFemtoImpulserUnlit;
+    public static Block blockFemtoRepurposer;
+    public static Block blockFemtoCoagulator;
+    public static Block blockFemtoEntangler;
+    public static Block blockFemtoChronoshifter;
+    public static Block blockMicroCube;
+    public static Block blockNanoCubeFrame;
+    public static Block blockNanoCubePort;
+    public static Block blockFemtoCubePort;
+    public static Block blockFemtoCubeFrame;
+    public static Block blockFemtoCubeChassis;
+    public static Block blockVacuumTube;
+    public static Block blockSuctionPipe;
+    public static Block blockMicroChargingBase;
+    public static Block blockMicroChargingCoil;
+    public static Block blockMicroChargingCapacitor;
+    public static Block blockOrbitalEqualizer;
+    public static Block blockNullEqualizer;
+    public static Block blockStellaratorCore;
+    public static Block blockStellaratorFocus;
+    public static Block blockStellaratorOpticalMaser;
+    public static Block blockStellaratorHousing;
 
     // cables
     public static Block blockMicroCable;
@@ -155,40 +155,36 @@ public class Femtocraft {
     public static Block blockFemtoCable;
 
     // liquids
-    public static Fluid mass;
+    public static Fluid fluidMass;
     public static BlockFluidMass mass_block;
 
     // plasma
     public static Block blockPlasma;
 
     // items
-    public static Item ingotTitanium;
-    public static Item ingotPlatinum;
-    public static Item ingotThorium;
-    public static Item ingotFarenite;
-    public static Item ingotMalenite;
-    public static Item ingotTemperedTitanium;
+    public static Item itemIngotTitanium;
+    public static Item itemIngotPlatinum;
+    public static Item itemIngotThorium;
+    public static Item itemIngotFarenite;
+    public static Item itemIngotMalenite;
+    public static Item itemIngotTemperedTitanium;
 
-    public static Item deconstructedIron;
-    public static Item deconstructedGold;
-    public static Item deconstructedTitanium;
-    public static Item deconstructedThorium;
-    public static Item deconstructedPlatinum;
+    public static Item itemConductivePowder;
+    public static Item itemBoard;
+    public static Item itemPrimedBoard;
+    public static Item itemDopedBoard;
+    public static Item itemMicrochip;
 
-    public static Item conductivePowder;
-    public static Item board;
-    public static Item primedBoard;
-    public static Item dopedBoard;
-    public static Item microchip;
-
-    public static Item spool;
-    public static Item spoolGold;
-    public static Item spoolPlatinum;
+    public static Item itemSpool;
+    public static Item itemSpoolGold;
+    public static Item itemSpoolPlatinum;
 
     public static Item itemMicroCoil;
+    public static Item itemBattery;
 
     public static Item itemMicroLogicCore;
-    public static Item itemHeatingCoil;
+    public static Item itemHeatingElement;
+    public static Item itemArticulatingArm;
 
     public static Item itemPortableResearchComputer;
 
@@ -196,11 +192,11 @@ public class Femtocraft {
     public static Item itemNanoTechnology;
     public static Item itemFemtoTechnology;
 
-    public static Item paperSchematic;
+    public static Item itemPaperSchematic;
 
-    public static Item microInterfaceDevice;
-    public static Item nanoInterfaceDevice;
-    public static Item femtoInterfaceDevice;
+    public static Item itemInterfaceDeviceMicro;
+    public static Item itemInterfaceDeviceNano;
+    public static Item itemInterfaceDeviceFemto;
 
     // Decomp items
     // Femto
@@ -233,12 +229,6 @@ public class Femtocraft {
 
     public static Item itemMicroPlating;
 
-    // Produce
-    public static Item tomatoSeed;
-    public static Item tomato;
-
-    // Cooking
-    public static Block cuttingBoard;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -277,48 +267,48 @@ public class Femtocraft {
 
         // blocks
 
-        oreTitanium = new BlockOreTitanium(FemtocraftConfigs.oreTitaniumID);
-        MinecraftForge.setBlockHarvestLevel(oreTitanium, "pickaxe", 2);
-        GameRegistry.registerBlock(oreTitanium, "oreTitanium");
-        LanguageRegistry.addName(oreTitanium, "Titanium Ore");
+        blockOreTitanium = new BlockOreTitanium(FemtocraftConfigs.oreTitaniumID);
+        MinecraftForge.setBlockHarvestLevel(blockOreTitanium, "pickaxe", 2);
+        GameRegistry.registerBlock(blockOreTitanium, "blockOreTitanium");
+        LanguageRegistry.addName(blockOreTitanium, "Titanium Ore");
         if (FemtocraftConfigs.registerTitaniumOreInOreDictionary) {
             OreDictionary
-                    .registerOre("oreTitanium", new ItemStack(oreTitanium));
+                    .registerOre("blockOreTitanium", new ItemStack(blockOreTitanium));
         }
 
-        orePlatinum = new BlockOrePlatinum(FemtocraftConfigs.orePlatinumID);
-        MinecraftForge.setBlockHarvestLevel(orePlatinum, "pickaxe", 2);
-        GameRegistry.registerBlock(orePlatinum, "orePlatinum");
-        LanguageRegistry.addName(orePlatinum, "Platinum Ore");
+        blockOrePlatinum = new BlockOrePlatinum(FemtocraftConfigs.orePlatinumID);
+        MinecraftForge.setBlockHarvestLevel(blockOrePlatinum, "pickaxe", 2);
+        GameRegistry.registerBlock(blockOrePlatinum, "blockOrePlatinum");
+        LanguageRegistry.addName(blockOrePlatinum, "Platinum Ore");
         if (FemtocraftConfigs.registerPlatinumOreInOreDictionary) {
             OreDictionary
-                    .registerOre("orePlatinum", new ItemStack(orePlatinum));
+                    .registerOre("blockOrePlatinum", new ItemStack(blockOrePlatinum));
         }
 
-        oreThorium = new BlockOreThorium(FemtocraftConfigs.oreThoriumID);
-        MinecraftForge.setBlockHarvestLevel(oreThorium, "pickaxe", 2);
-        GameRegistry.registerBlock(oreThorium, "oreThorium");
-        LanguageRegistry.addName(oreThorium, "Thorium Ore");
+        blockOreThorium = new BlockOreThorium(FemtocraftConfigs.oreThoriumID);
+        MinecraftForge.setBlockHarvestLevel(blockOreThorium, "pickaxe", 2);
+        GameRegistry.registerBlock(blockOreThorium, "blockOreThorium");
+        LanguageRegistry.addName(blockOreThorium, "Thorium Ore");
         if (FemtocraftConfigs.registerThoriumOreInOreDictionary) {
-            OreDictionary.registerOre("oreThorium", new ItemStack(oreThorium));
+            OreDictionary.registerOre("blockOreThorium", new ItemStack(blockOreThorium));
         }
 
-        oreFarenite = new BlockOreFarenite(FemtocraftConfigs.oreFareniteID);
-        MinecraftForge.setBlockHarvestLevel(oreFarenite, "pickaxe", 2);
-        GameRegistry.registerBlock(oreFarenite, "oreFarenite");
-        LanguageRegistry.addName(oreFarenite, "Farenite Ore");
+        blockOreFarenite = new BlockOreFarenite(FemtocraftConfigs.oreFareniteID);
+        MinecraftForge.setBlockHarvestLevel(blockOreFarenite, "pickaxe", 2);
+        GameRegistry.registerBlock(blockOreFarenite, "blockOreFarenite");
+        LanguageRegistry.addName(blockOreFarenite, "Farenite Ore");
         if (FemtocraftConfigs.registerFareniteOreInOreDictionary) {
             OreDictionary
-                    .registerOre("oreFarenite", new ItemStack(oreFarenite));
+                    .registerOre("blockOreFarenite", new ItemStack(blockOreFarenite));
         }
 
-        oreMalenite = new BlockOreMalenite(FemtocraftConfigs.oreMaleniteID);
-        MinecraftForge.setBlockHarvestLevel(oreFarenite, "pickaxe", 3);
-        GameRegistry.registerBlock(oreMalenite, "oreMalenite");
-        LanguageRegistry.addName(oreMalenite, "Malenite Ore");
+        blockOreMalenite = new BlockOreMalenite(FemtocraftConfigs.oreMaleniteID);
+        MinecraftForge.setBlockHarvestLevel(blockOreFarenite, "pickaxe", 3);
+        GameRegistry.registerBlock(blockOreMalenite, "blockOreMalenite");
+        LanguageRegistry.addName(blockOreMalenite, "Malenite Ore");
         if (FemtocraftConfigs.registerMaleniteOreInOreDictionary) {
             OreDictionary
-                    .registerOre("oreMalenite", new ItemStack(oreMalenite));
+                    .registerOre("blockOreMalenite", new ItemStack(blockOreMalenite));
         }
 
         nanoStone = new BlockNanoStone(FemtocraftConfigs.nanoStoneID);
@@ -338,15 +328,15 @@ public class Femtocraft {
         GameRegistry.registerBlock(unidentifiedAlloy, "unidentifiedAlloy");
         LanguageRegistry.addName(unidentifiedAlloy, "Unidentified Alloy");
 
-        researchComputer = new BlockResearchComputer(
+        blockResearchComputer = new BlockResearchComputer(
                 FemtocraftConfigs.FemtocraftResearchComputerID);
-        GameRegistry.registerBlock(researchComputer, "researchComputer");
-        LanguageRegistry.addName(researchComputer, "Research Computer");
+        GameRegistry.registerBlock(blockResearchComputer, "blockResearchComputer");
+        LanguageRegistry.addName(blockResearchComputer, "Research Computer");
 
-        researchConsole = new BlockResearchConsole(
+        blockResearchConsole = new BlockResearchConsole(
                 FemtocraftConfigs.FemtocraftResearchConsoleID);
-        GameRegistry.registerBlock(researchConsole, "researchConsole");
-        LanguageRegistry.addName(researchConsole, "Research Console");
+        GameRegistry.registerBlock(blockResearchConsole, "blockResearchConsole");
+        LanguageRegistry.addName(blockResearchConsole, "Research Console");
 
         blockMicroCable = new BlockMicroCable(FemtocraftConfigs.microCableID,
                 Material.rock);
@@ -377,181 +367,181 @@ public class Femtocraft {
         GameRegistry.registerBlock(consumerTest, "BlockConsumer");
         LanguageRegistry.addName(consumerTest, "Consumer");
 
-        microFurnaceUnlit = new BlockMicroFurnace(
+        blockMicroFurnaceUnlit = new BlockMicroFurnace(
                 FemtocraftConfigs.FemtocraftMicroFurnaceUnlitID, false);
-        GameRegistry.registerBlock(microFurnaceUnlit, "BlockMicroFurnace");
-        LanguageRegistry.addName(microFurnaceUnlit, "Micro-Furnace");
+        GameRegistry.registerBlock(blockMicroFurnaceUnlit, "BlockMicroFurnace");
+        LanguageRegistry.addName(blockMicroFurnaceUnlit, "Micro-Furnace");
 
-        microFurnaceLit = new BlockMicroFurnace(
+        blockMicroFurnaceLit = new BlockMicroFurnace(
                 FemtocraftConfigs.FemtocraftMicroFurnaceLitID, true);
 
-        microDeconstructor = new BlockMicroDeconstructor(
+        blockMicroDeconstructor = new BlockMicroDeconstructor(
                 FemtocraftConfigs.FemtocraftMicroDeconstructorID);
-        GameRegistry.registerBlock(microDeconstructor,
+        GameRegistry.registerBlock(blockMicroDeconstructor,
                 "BlockMicroDeconstructor");
-        LanguageRegistry.addName(microDeconstructor, "Microtech Deconstructor");
+        LanguageRegistry.addName(blockMicroDeconstructor, "Microtech Deconstructor");
 
-        microReconstructor = new BlockMicroReconstructor(
+        blockMicroReconstructor = new BlockMicroReconstructor(
                 FemtocraftConfigs.FemtocraftMicroReconstructorID);
-        GameRegistry.registerBlock(microReconstructor,
+        GameRegistry.registerBlock(blockMicroReconstructor,
                 "BlockMicroReconstructor");
-        LanguageRegistry.addName(microReconstructor, "Microtech Reconstructor");
+        LanguageRegistry.addName(blockMicroReconstructor, "Microtech Reconstructor");
 
-        encoder = new BlockEncoder(FemtocraftConfigs.FemtocraftMicroEncoderID);
-        GameRegistry.registerBlock(encoder, "BlockEncoder");
-        LanguageRegistry.addName(encoder, "Schematic Encoder");
+        blockEncoder = new BlockEncoder(FemtocraftConfigs.FemtocraftMicroEncoderID);
+        GameRegistry.registerBlock(blockEncoder, "BlockEncoder");
+        LanguageRegistry.addName(blockEncoder, "Schematic Encoder");
 
-        nanoInnervatorUnlit = new BlockNanoInnervator(
+        blockNanoInnervatorUnlit = new BlockNanoInnervator(
                 FemtocraftConfigs.FemtocraftNanoInnervatorUnlitID, false);
-        GameRegistry.registerBlock(nanoInnervatorUnlit, "BlockNanoInnervator");
-        LanguageRegistry.addName(nanoInnervatorUnlit, "Nano Innervator");
+        GameRegistry.registerBlock(blockNanoInnervatorUnlit, "BlockNanoInnervator");
+        LanguageRegistry.addName(blockNanoInnervatorUnlit, "Nano Innervator");
 
-        nanoInnervatorLit = new BlockNanoInnervator(
+        blockNanoInnervatorLit = new BlockNanoInnervator(
                 FemtocraftConfigs.FemtocraftNanoInnervatorLitID, true);
 
-        nanoDismantler = new BlockNanoDismantler(
+        blockNanoDismantler = new BlockNanoDismantler(
                 FemtocraftConfigs.FemtocraftNanoDismantlerID);
-        GameRegistry.registerBlock(nanoDismantler, "BlockNanoDismantler");
-        LanguageRegistry.addName(nanoDismantler, "Nano Dismantler");
+        GameRegistry.registerBlock(blockNanoDismantler, "BlockNanoDismantler");
+        LanguageRegistry.addName(blockNanoDismantler, "Nano Dismantler");
 
-        nanoFabricator = new BlockNanoFabricator(FemtocraftConfigs
+        blockNanoFabricator = new BlockNanoFabricator(FemtocraftConfigs
                 .FemtocraftNanoFabricatorID);
-        GameRegistry.registerBlock(nanoFabricator, "BlockNanoFabricator");
-        LanguageRegistry.addName(nanoFabricator, "Nano Fabricator");
+        GameRegistry.registerBlock(blockNanoFabricator, "BlockNanoFabricator");
+        LanguageRegistry.addName(blockNanoFabricator, "Nano Fabricator");
 
-        nanoEnmesher = new BlockNanoEnmesher(FemtocraftConfigs
+        blockNanoEnmesher = new BlockNanoEnmesher(FemtocraftConfigs
                 .FemtocraftNanoEnmesherID);
-        GameRegistry.registerBlock(nanoEnmesher, "BlockNanoEnmesher");
-        LanguageRegistry.addName(nanoEnmesher, "Nano Enmesher");
+        GameRegistry.registerBlock(blockNanoEnmesher, "BlockNanoEnmesher");
+        LanguageRegistry.addName(blockNanoEnmesher, "Nano Enmesher");
 
-        nanoHorologe = new BlockNanoHorologe(FemtocraftConfigs
+        blockNanoHorologe = new BlockNanoHorologe(FemtocraftConfigs
                 .FemtocraftNanoHorologeID);
-        GameRegistry.registerBlock(nanoHorologe, "BlockNanoHorologe");
-        LanguageRegistry.addName(nanoHorologe, "Nano Horologe");
+        GameRegistry.registerBlock(blockNanoHorologe, "BlockNanoHorologe");
+        LanguageRegistry.addName(blockNanoHorologe, "Nano Horologe");
 
-        femtoImpulserUnlit = new BlockFemtoImpulser(
+        blockFemtoImpulserUnlit = new BlockFemtoImpulser(
                 FemtocraftConfigs.FemtocraftFemtoImpulserUnlitID, false);
-        GameRegistry.registerBlock(femtoImpulserUnlit, "BlockFemtoImpulser");
-        LanguageRegistry.addName(femtoImpulserUnlit, "Femto Impulser");
+        GameRegistry.registerBlock(blockFemtoImpulserUnlit, "BlockFemtoImpulser");
+        LanguageRegistry.addName(blockFemtoImpulserUnlit, "Femto Impulser");
 
-        femtoImpulserLit = new BlockFemtoImpulser(
+        blockFemtoImpulserLit = new BlockFemtoImpulser(
                 FemtocraftConfigs.FemtocraftFemtoImpulserLitID, true);
 
-        femtoRepurposer = new BlockFemtoRepurposer(
+        blockFemtoRepurposer = new BlockFemtoRepurposer(
                 FemtocraftConfigs.FemtocraftFemtoRepurposerID);
-        GameRegistry.registerBlock(femtoRepurposer, "BlockFemtoRepurposer");
-        LanguageRegistry.addName(femtoRepurposer, "Femto Repurposer");
+        GameRegistry.registerBlock(blockFemtoRepurposer, "BlockFemtoRepurposer");
+        LanguageRegistry.addName(blockFemtoRepurposer, "Femto Repurposer");
 
-        femtoCoagulator = new BlockFemtoCoagulator(FemtocraftConfigs
+        blockFemtoCoagulator = new BlockFemtoCoagulator(FemtocraftConfigs
                 .FemtocraftFemtoCoagulatorID);
-        GameRegistry.registerBlock(femtoCoagulator, "BlockFemtoCoagulator");
-        LanguageRegistry.addName(femtoCoagulator, "Femto Coagulator");
+        GameRegistry.registerBlock(blockFemtoCoagulator, "BlockFemtoCoagulator");
+        LanguageRegistry.addName(blockFemtoCoagulator, "Femto Coagulator");
 
-        femtoEntangler = new BlockFemtoEntangler(FemtocraftConfigs
+        blockFemtoEntangler = new BlockFemtoEntangler(FemtocraftConfigs
                 .FemtocraftFemtoEntanglerID);
-        GameRegistry.registerBlock(femtoEntangler, "BlockFemtoEntangler");
-        LanguageRegistry.addName(femtoEntangler, "Femto Entangler");
+        GameRegistry.registerBlock(blockFemtoEntangler, "BlockFemtoEntangler");
+        LanguageRegistry.addName(blockFemtoEntangler, "Femto Entangler");
 
-        femtoChronoshifter = new BlockFemtoChronoshifter(FemtocraftConfigs
+        blockFemtoChronoshifter = new BlockFemtoChronoshifter(FemtocraftConfigs
                 .FemtocraftFemtoChronoshifterID);
-        GameRegistry.registerBlock(femtoChronoshifter, "BlockFemtoChronoshifter");
-        LanguageRegistry.addName(femtoChronoshifter, "Femto Chronoshifter");
+        GameRegistry.registerBlock(blockFemtoChronoshifter, "BlockFemtoChronoshifter");
+        LanguageRegistry.addName(blockFemtoChronoshifter, "Femto Chronoshifter");
 
-        microCube = new BlockMicroCube(FemtocraftConfigs.FemtopowerMicroCubeID);
-        GameRegistry.registerBlock(microCube, ItemBlockMicroCube.class,
+        blockMicroCube = new BlockMicroCube(FemtocraftConfigs.FemtopowerMicroCubeID);
+        GameRegistry.registerBlock(blockMicroCube, ItemBlockMicroCube.class,
                 "BlockMicroCube");
-        LanguageRegistry.addName(microCube, "Micro-Cube");
+        LanguageRegistry.addName(blockMicroCube, "Micro-Cube");
 
-        nanoCubeFrame = new BlockNanoCubeFrame(
+        blockNanoCubeFrame = new BlockNanoCubeFrame(
                 FemtocraftConfigs.FemtopowerNanoCubeFrameID);
-        GameRegistry.registerBlock(nanoCubeFrame, "BlockNanoCubeFrame");
-        LanguageRegistry.addName(nanoCubeFrame, "Nano-Cube Frame");
+        GameRegistry.registerBlock(blockNanoCubeFrame, "BlockNanoCubeFrame");
+        LanguageRegistry.addName(blockNanoCubeFrame, "Nano-Cube Frame");
 
-        nanoCubePort = new BlockNanoCubePort(
+        blockNanoCubePort = new BlockNanoCubePort(
                 FemtocraftConfigs.FemtopowerNanoCubePortID);
-        GameRegistry.registerBlock(nanoCubePort, "BlockNanoCubePort");
-        LanguageRegistry.addName(nanoCubePort, "Nano-Cube Port");
+        GameRegistry.registerBlock(blockNanoCubePort, "BlockNanoCubePort");
+        LanguageRegistry.addName(blockNanoCubePort, "Nano-Cube Port");
 
-        femtoCubePort = new BlockFemtoCubePort(
+        blockFemtoCubePort = new BlockFemtoCubePort(
                 FemtocraftConfigs.FemtopowerFemtoCubePortID);
-        GameRegistry.registerBlock(femtoCubePort, "BlockFemtoCubePort");
-        LanguageRegistry.addName(femtoCubePort, "Femto-Cube Port");
+        GameRegistry.registerBlock(blockFemtoCubePort, "BlockFemtoCubePort");
+        LanguageRegistry.addName(blockFemtoCubePort, "Femto-Cube Port");
 
-        femtoCubeFrame = new BlockFemtoCubeFrame(
+        blockFemtoCubeFrame = new BlockFemtoCubeFrame(
                 FemtocraftConfigs.FemtopowerFemtoCubeFrameID);
-        GameRegistry.registerBlock(femtoCubeFrame, "BlockFemtoCubeFrame");
-        LanguageRegistry.addName(femtoCubeFrame, "Femto-Cube Frame");
+        GameRegistry.registerBlock(blockFemtoCubeFrame, "BlockFemtoCubeFrame");
+        LanguageRegistry.addName(blockFemtoCubeFrame, "Femto-Cube Frame");
 
-        femtoCubeChassis = new BlockFemtoCubeChassis(
+        blockFemtoCubeChassis = new BlockFemtoCubeChassis(
                 FemtocraftConfigs.FemtopowerFemtoCubeChassisID);
-        GameRegistry.registerBlock(femtoCubeChassis, "BlockFemtoCubeChassis");
-        LanguageRegistry.addName(femtoCubeChassis, "Femto-Cube Chassis");
+        GameRegistry.registerBlock(blockFemtoCubeChassis, "BlockFemtoCubeChassis");
+        LanguageRegistry.addName(blockFemtoCubeChassis, "Femto-Cube Chassis");
 
-        vacuumTube = new BlockVacuumTube(
+        blockVacuumTube = new BlockVacuumTube(
                 FemtocraftConfigs.FemtocraftVacuumTubeID);
-        GameRegistry.registerBlock(vacuumTube, "BlockVacuumTube");
-        LanguageRegistry.addName(vacuumTube, "Vacuum Tube");
+        GameRegistry.registerBlock(blockVacuumTube, "BlockVacuumTube");
+        LanguageRegistry.addName(blockVacuumTube, "Vacuum Tube");
 
-        suctionPipe = new BlockSuctionPipe(
+        blockSuctionPipe = new BlockSuctionPipe(
                 FemtocraftConfigs.FemtocraftSuctionPipeID);
-        GameRegistry.registerBlock(suctionPipe, "BlockSuctionPipe");
-        LanguageRegistry.addName(suctionPipe, "Suction Pipe");
+        GameRegistry.registerBlock(blockSuctionPipe, "BlockSuctionPipe");
+        LanguageRegistry.addName(blockSuctionPipe, "Suction Pipe");
 
-        microChargingBase = new BlockAtmosphericChargingBase(
+        blockMicroChargingBase = new BlockAtmosphericChargingBase(
                 FemtocraftConfigs.FemtopowerMicroChargingBaseID);
-        GameRegistry.registerBlock(microChargingBase, "BlockBaseMicroCharging");
-        LanguageRegistry.addName(microChargingBase,
+        GameRegistry.registerBlock(blockMicroChargingBase, "BlockBaseMicroCharging");
+        LanguageRegistry.addName(blockMicroChargingBase,
                 "Electrostatic Charging Base");
 
-        microChargingCoil = new BlockAtmosphericChargingCoil(
+        blockMicroChargingCoil = new BlockAtmosphericChargingCoil(
                 FemtocraftConfigs.FemtopowerMicroChargingCoilID);
-        GameRegistry.registerBlock(microChargingCoil, "BlockCoilMicroCharging");
-        LanguageRegistry.addName(microChargingCoil,
+        GameRegistry.registerBlock(blockMicroChargingCoil, "BlockCoilMicroCharging");
+        LanguageRegistry.addName(blockMicroChargingCoil,
                 "Electrostatic Charging Coil");
 
-        microChargingCapacitor = new BlockAtmosphericChargingCapacitor
+        blockMicroChargingCapacitor = new BlockAtmosphericChargingCapacitor
                 (FemtocraftConfigs.FemtopowerMicroChargingCapacitorID);
-        GameRegistry.registerBlock(microChargingCapacitor,
+        GameRegistry.registerBlock(blockMicroChargingCapacitor,
                 "BlockAtmosphericChargingCapacitor");
-        LanguageRegistry.addName(microChargingCapacitor,
+        LanguageRegistry.addName(blockMicroChargingCapacitor,
                 "Electrostatic Charging Capacitor");
 
-        orbitalEqualizer = new BlockOrbitalEqualizer(
+        blockOrbitalEqualizer = new BlockOrbitalEqualizer(
                 FemtocraftConfigs.orbitalEqualizerID);
-        GameRegistry.registerBlock(orbitalEqualizer, "BlockOrbitalEqualizer");
-        LanguageRegistry.addName(orbitalEqualizer, "Orbital Equalizer");
+        GameRegistry.registerBlock(blockOrbitalEqualizer, "BlockOrbitalEqualizer");
+        LanguageRegistry.addName(blockOrbitalEqualizer, "Orbital Equalizer");
 
-        nullEqualizer = new BlockNullEqualizer(
+        blockNullEqualizer = new BlockNullEqualizer(
                 FemtocraftConfigs.nullEqualizerID);
-        GameRegistry.registerBlock(nullEqualizer, "BlockNullEqualizer");
-        LanguageRegistry.addName(nullEqualizer, "Null-Energy Equalizer");
+        GameRegistry.registerBlock(blockNullEqualizer, "BlockNullEqualizer");
+        LanguageRegistry.addName(blockNullEqualizer, "Null-Energy Equalizer");
 
-        stellaratorCore = new BlockFemtoStellaratorCore(FemtocraftConfigs
+        blockStellaratorCore = new BlockFemtoStellaratorCore(FemtocraftConfigs
                 .FemtopowerFemtoStelleratorCoreID);
-        GameRegistry.registerBlock(stellaratorCore, "BlockStellaratorCore");
-        LanguageRegistry.addName(stellaratorCore, "Stellarator Core");
+        GameRegistry.registerBlock(blockStellaratorCore, "BlockStellaratorCore");
+        LanguageRegistry.addName(blockStellaratorCore, "Stellarator Core");
 
-        stellaratorFocus = new BlockFemtoStellaratorFocus(FemtocraftConfigs
+        blockStellaratorFocus = new BlockFemtoStellaratorFocus(FemtocraftConfigs
                 .FemtopowerFemtoStelleratorFocusID);
-        GameRegistry.registerBlock(stellaratorFocus, "BlockStellaratorFocus");
-        LanguageRegistry.addName(stellaratorFocus, "Stellarator Focus");
+        GameRegistry.registerBlock(blockStellaratorFocus, "BlockStellaratorFocus");
+        LanguageRegistry.addName(blockStellaratorFocus, "Stellarator Focus");
 
-        stellaratorOpticalMaser = new BlockFemtoStellaratorOpticalMaser
+        blockStellaratorOpticalMaser = new BlockFemtoStellaratorOpticalMaser
                 (FemtocraftConfigs.FemtopowerFemtoStellaratorOpticalMaserID);
-        GameRegistry.registerBlock(stellaratorOpticalMaser,
+        GameRegistry.registerBlock(blockStellaratorOpticalMaser,
                 "BlockStellaratorOpticalMaser");
-        LanguageRegistry.addName(stellaratorOpticalMaser,
+        LanguageRegistry.addName(blockStellaratorOpticalMaser,
                 "Stellarator Optical Maser");
 
-        stellaratorHousing = new BlockFemtoStellaratorHousing
+        blockStellaratorHousing = new BlockFemtoStellaratorHousing
                 (FemtocraftConfigs.FemtopowerFemtoStellaratorHousingID);
-        GameRegistry.registerBlock(stellaratorHousing,
+        GameRegistry.registerBlock(blockStellaratorHousing,
                 "BlockStellaratorHousing");
-        LanguageRegistry.addName(stellaratorHousing, "Stellarator Housing");
+        LanguageRegistry.addName(blockStellaratorHousing, "Stellarator Housing");
 
         // Liquids
-        mass = new FluidMass();
-        FluidRegistry.registerFluid(mass);
+        fluidMass = new FluidMass();
+        FluidRegistry.registerFluid(fluidMass);
 
         mass_block = new BlockFluidMass(FemtocraftConfigs.FemtocraftMassBlockID);
         GameRegistry.registerBlock(mass_block, "Mass");
@@ -561,81 +551,81 @@ public class Femtocraft {
         blockPlasma = new BlockPlasma(FemtocraftConfigs.BlockPlasmaID);
 
         // items
-        ingotTitanium = new ItemBase(FemtocraftConfigs.ingotTitaniumID,
+        itemIngotTitanium = new ItemBase(FemtocraftConfigs.ingotTitaniumID,
                 "ItemIngotTitanium");
-        LanguageRegistry.addName(ingotTitanium, "Titanium Ingot");
+        LanguageRegistry.addName(itemIngotTitanium, "Titanium Ingot");
         if (FemtocraftConfigs.registerTitaniumIngotInOreDictionary) {
-            OreDictionary.registerOre("ingotTitanium", new ItemStack(
-                    ingotTitanium));
+            OreDictionary.registerOre("itemIngotTitanium", new ItemStack(
+                    itemIngotTitanium));
         }
 
-        ingotPlatinum = new ItemBase(FemtocraftConfigs.ingotPlatinumID,
+        itemIngotPlatinum = new ItemBase(FemtocraftConfigs.ingotPlatinumID,
                 "ItemIngotPlatinum");
-        LanguageRegistry.addName(ingotPlatinum, "Platinum Ingot");
+        LanguageRegistry.addName(itemIngotPlatinum, "Platinum Ingot");
         if (FemtocraftConfigs.registerPlatinumIngotInOreDictionary) {
-            OreDictionary.registerOre("ingotPlatinum", new ItemStack(
-                    ingotPlatinum));
+            OreDictionary.registerOre("itemIngotPlatinum", new ItemStack(
+                    itemIngotPlatinum));
         }
 
-        ingotThorium = new ItemBase(FemtocraftConfigs.ingotThoriumID,
+        itemIngotThorium = new ItemBase(FemtocraftConfigs.ingotThoriumID,
                 "ItemIngotThorium");
-        LanguageRegistry.addName(ingotThorium, "Thorium Ingot");
+        LanguageRegistry.addName(itemIngotThorium, "Thorium Ingot");
         if (FemtocraftConfigs.registerThoriumIngotInOreDictionary) {
-            OreDictionary.registerOre("ingotThorium", new ItemStack(
-                    ingotThorium));
+            OreDictionary.registerOre("itemIngotThorium", new ItemStack(
+                    itemIngotThorium));
         }
 
-        ingotFarenite = new ItemBase(FemtocraftConfigs.ingotFareniteID,
+        itemIngotFarenite = new ItemBase(FemtocraftConfigs.ingotFareniteID,
                 "ItemIngotFarenite");
-        LanguageRegistry.addName(ingotFarenite, "Farenite");
+        LanguageRegistry.addName(itemIngotFarenite, "Farenite");
         OreDictionary
-                .registerOre("ingotFarenite", new ItemStack(ingotFarenite));
+                .registerOre("itemIngotFarenite", new ItemStack(itemIngotFarenite));
 
-        ingotMalenite = new ItemBase(FemtocraftConfigs.ingotMaleniteID,
+        itemIngotMalenite = new ItemBase(FemtocraftConfigs.ingotMaleniteID,
                 "ItemIngotMalenite");
-        LanguageRegistry.addName(ingotMalenite, "Malenite");
+        LanguageRegistry.addName(itemIngotMalenite, "Malenite");
         OreDictionary
-                .registerOre("ingotMalenite", new ItemStack(ingotMalenite));
+                .registerOre("itemIngotMalenite", new ItemStack(itemIngotMalenite));
 
-        ingotTemperedTitanium = new ItemBase(
+        itemIngotTemperedTitanium = new ItemBase(
                 FemtocraftConfigs.ingotTemperedTitaniumID,
                 "ItemIngotTemperedTitanium");
-        LanguageRegistry.addName(ingotTemperedTitanium,
+        LanguageRegistry.addName(itemIngotTemperedTitanium,
                 "Tempered Titanium Ingot");
-        OreDictionary.registerOre("ingotTemperedTitanium", new ItemStack(
-                ingotTemperedTitanium));
+        OreDictionary.registerOre("itemIngotTemperedTitanium", new ItemStack(
+                itemIngotTemperedTitanium));
 
         //
 
-        conductivePowder = new ItemBase(
+        itemConductivePowder = new ItemBase(
                 FemtocraftConfigs.conductivePowderID, "ItemConductivePowder");
-        LanguageRegistry.addName(conductivePowder, "Conductive Powder");
+        LanguageRegistry.addName(itemConductivePowder, "Conductive Powder");
 
-        board = new ItemBase(FemtocraftConfigs.boardID, "ItemBoard");
-        LanguageRegistry.addName(board, "Board");
+        itemBoard = new ItemBase(FemtocraftConfigs.boardID, "ItemBoard");
+        LanguageRegistry.addName(itemBoard, "Board");
 
-        primedBoard = new ItemBase(FemtocraftConfigs.primedBoardID,
+        itemPrimedBoard = new ItemBase(FemtocraftConfigs.primedBoardID,
                 "ItemPrimedBoard");
-        LanguageRegistry.addName(primedBoard, "Primed Board");
+        LanguageRegistry.addName(itemPrimedBoard, "Primed Board");
 
-        dopedBoard = new ItemBase(FemtocraftConfigs.dopedBoardID,
+        itemDopedBoard = new ItemBase(FemtocraftConfigs.dopedBoardID,
                 "ItemDopedBoard");
-        LanguageRegistry.addName(dopedBoard, "Doped Board");
+        LanguageRegistry.addName(itemDopedBoard, "Doped Board");
 
-        microchip = new ItemBase(
+        itemMicrochip = new ItemBase(
                 FemtocraftConfigs.microCircuitID, "ItemMicrochip");
-        LanguageRegistry.addName(microchip, "Microchip");
+        LanguageRegistry.addName(itemMicrochip, "Microchip");
 
-        spool = new ItemBase(FemtocraftConfigs.spoolID, "ItemSpool");
-        LanguageRegistry.addName(spool, "Spool");
+        itemSpool = new ItemBase(FemtocraftConfigs.spoolID, "ItemSpool");
+        LanguageRegistry.addName(itemSpool, "Spool");
 
-        spoolGold = new ItemBase(FemtocraftConfigs.spoolGoldID,
+        itemSpoolGold = new ItemBase(FemtocraftConfigs.spoolGoldID,
                 "ItemSpoolGold");
-        LanguageRegistry.addName(spoolGold, "Gold Wire Spool");
+        LanguageRegistry.addName(itemSpoolGold, "Gold Wire Spool");
 
-        spoolPlatinum = new ItemBase(FemtocraftConfigs.spoolPlatinumID,
+        itemSpoolPlatinum = new ItemBase(FemtocraftConfigs.spoolPlatinumID,
                 "ItemSpoolPlatinum");
-        LanguageRegistry.addName(spoolPlatinum, "Platinum Wire Spool");
+        LanguageRegistry.addName(itemSpoolPlatinum, "Platinum Wire Spool");
 
         itemMicroCoil = new ItemBase(FemtocraftConfigs.itemMicroCoilID,
                 "ItemMicroCoil");
@@ -645,8 +635,8 @@ public class Femtocraft {
                 .itemMicroLogicCoreID, "ItemMicroLogicCore");
         LanguageRegistry.addName(itemMicroLogicCore, "Micro Logic Core");
 
-        itemHeatingCoil = new ItemHeatingCoil(FemtocraftConfigs.itemHeatingCoilID).setUnlocalizedName("itemHeatingCoil");
-        LanguageRegistry.addName(itemHeatingCoil, "Heating Coil");
+        itemHeatingElement = new ItemHeatingCoil(FemtocraftConfigs.itemHeatingCoilID).setUnlocalizedName("itemHeatingElement");
+        LanguageRegistry.addName(itemHeatingElement, "Heating Coil");
 
         itemPortableResearchComputer = new ItemPortableResearchComputer
                 (FemtocraftConfigs.itemPortableResearchComputerID);
@@ -666,24 +656,24 @@ public class Femtocraft {
         LanguageRegistry.addName(itemFemtoTechnology, "Femto Technology");
 
         // Schematics
-        paperSchematic = new ItemPaperSchematic(
+        itemPaperSchematic = new ItemPaperSchematic(
                 FemtocraftConfigs.paperSchematicID);
-        LanguageRegistry.addName(paperSchematic, "Paper Schematic");
+        LanguageRegistry.addName(itemPaperSchematic, "Paper Schematic");
 
-        microInterfaceDevice = new ItemMicroInterfaceDevice(
+        itemInterfaceDeviceMicro = new ItemMicroInterfaceDevice(
                 FemtocraftConfigs.microInterfaceDeviceID)
-                .setUnlocalizedName("microInterfaceDevice");
-        LanguageRegistry.addName(microInterfaceDevice, "MicroInterface Device");
+                .setUnlocalizedName("itemInterfaceDeviceMicro");
+        LanguageRegistry.addName(itemInterfaceDeviceMicro, "MicroInterface Device");
 
-        nanoInterfaceDevice = new ItemNanoInterfaceDevice(
+        itemInterfaceDeviceNano = new ItemNanoInterfaceDevice(
                 FemtocraftConfigs.nanoInterfaceDeviceID)
-                .setUnlocalizedName("nanoInterfaceDevice");
-        LanguageRegistry.addName(nanoInterfaceDevice, "NanoInterface Device");
+                .setUnlocalizedName("itemInterfaceDeviceNano");
+        LanguageRegistry.addName(itemInterfaceDeviceNano, "NanoInterface Device");
 
-        femtoInterfaceDevice = new ItemFemtoInterfaceDevice(
+        itemInterfaceDeviceFemto = new ItemFemtoInterfaceDevice(
                 FemtocraftConfigs.femtoInterfaceDeviceID)
-                .setUnlocalizedName("femtoInterfaceDevice");
-        LanguageRegistry.addName(femtoInterfaceDevice, "FemtoInterface Device");
+                .setUnlocalizedName("itemInterfaceDeviceFemto");
+        LanguageRegistry.addName(itemInterfaceDeviceFemto, "FemtoInterface Device");
 
         // Decomp
         // Femto

@@ -80,11 +80,11 @@ public class BlockNanoInnervator extends TileContainer {
         shouldDrop = false;
         if (par0) {
             par1World.setBlock(par2, par3, par4,
-                               Femtocraft.nanoInnervatorLit.blockID);
+                               Femtocraft.blockNanoInnervatorLit.blockID);
         }
         else {
             par1World.setBlock(par2, par3, par4,
-                               Femtocraft.nanoInnervatorUnlit.blockID);
+                               Femtocraft.blockNanoInnervatorUnlit.blockID);
         }
         shouldDrop = true;
         keepFurnaceInventory = false;
@@ -110,7 +110,7 @@ public class BlockNanoInnervator extends TileContainer {
      * Returns the ID of the items to drop on destruction.
      */
     public int idDropped(int par1, Random par2Random, int par3) {
-        return Femtocraft.nanoInnervatorUnlit.blockID;
+        return Femtocraft.blockNanoInnervatorUnlit.blockID;
     }
 
     /**
@@ -387,6 +387,6 @@ public class BlockNanoInnervator extends TileContainer {
      * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
      */
     public int idPicked(World par1World, int par2, int par3, int par4) {
-        return Femtocraft.nanoInnervatorUnlit.blockID;
+        return Femtocraft.blockNanoInnervatorUnlit.blockID;
     }
 }

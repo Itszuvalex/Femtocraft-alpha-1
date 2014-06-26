@@ -77,7 +77,7 @@ public class BlockFemtoStellaratorOpticalMaser extends TileContainer {
         for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
             if (par1World.getBlockId(par2 + dir.offsetX, par3 + dir.offsetY,
                                      par4 + dir.offsetZ) == Femtocraft
-                    .stellaratorFocus.blockID) {
+                    .blockStellaratorFocus.blockID) {
                 TileEntity te = par1World.getBlockTileEntity(par2 + 2 * dir
                                                                      .offsetX,
                                                              par3 + 2 * dir

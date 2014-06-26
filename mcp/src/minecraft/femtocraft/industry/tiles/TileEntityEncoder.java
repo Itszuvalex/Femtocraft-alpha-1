@@ -161,7 +161,7 @@ public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
 
     @Override
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-        if (resource.fluidID != Femtocraft.mass.getID()) {
+        if (resource.fluidID != Femtocraft.fluidMass.getID()) {
             return 0;
         }
         return massTank.fill(resource, doFill);
@@ -287,7 +287,7 @@ public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
                                              amount));
         }
         else {
-            massTank.setFluid(new FluidStack(Femtocraft.mass, amount));
+            massTank.setFluid(new FluidStack(Femtocraft.fluidMass, amount));
         }
     }
 

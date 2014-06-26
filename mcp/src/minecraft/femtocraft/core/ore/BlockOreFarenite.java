@@ -47,7 +47,7 @@ public class BlockOreFarenite extends BlockOre {
     }
 
     public int idDropped(int par1, Random random, int par2) {
-        return Femtocraft.ingotFarenite.itemID;
+        return Femtocraft.itemIngotFarenite.itemID;
     }
 
     public int quantityDropped(Random random) {

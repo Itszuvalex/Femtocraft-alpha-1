@@ -42,7 +42,7 @@ import java.util.Random;
  * @placeholderIcon <i>static</i> - Icon for use in display slots when no
  * schematic is there to draw reference from.
  * @infiniteUseMassMultipler <i>static</i> - Multiplier to use instead of use
- * count when calculating mass requirements.
+ * count when calculating fluidMass requirements.
  * @keyedIcon Icon to use instead of itemIcon, when the itemStack has a recipe
  * associated with it.
  * @Info This is a base class for Schematics with most of the hard work already

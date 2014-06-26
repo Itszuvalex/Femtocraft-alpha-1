@@ -55,12 +55,12 @@ public class ManagerResearch {
     @Technology
     public static ResearchTechnology technologyMetallurgy = new ResearchTechnology(
             "Metallurgy", "Titanium, Thorium, Platinum", EnumTechLevel.MACRO,
-            null, new ItemStack(Femtocraft.ingotTemperedTitanium),
+            null, new ItemStack(Femtocraft.itemIngotTemperedTitanium),
             true, null);
     @Technology
     public static ResearchTechnology technologyBasicCircuits = new ResearchTechnology(
             "Basic Circuits", "Farenite, Circuit Boards", EnumTechLevel.MACRO,
-            null, new ItemStack(Femtocraft.microchip), true,
+            null, new ItemStack(Femtocraft.itemMicrochip), true,
             null, GuiTechnologyBasicCircuits.class, null);
     @Technology
     // TODO: replace machining icon with micro machine chassis item
@@ -70,15 +70,15 @@ public class ManagerResearch {
                     technologyMetallurgy, technologyBasicCircuits)),
             new ItemStack(Femtocraft.itemMicroPlating), false,
             new ArrayList<ItemStack>(Arrays.asList(new ItemStack(
-                    Femtocraft.ingotTemperedTitanium), new ItemStack(
-                    Femtocraft.microchip), new ItemStack(
-                    Femtocraft.ingotTemperedTitanium), new ItemStack(
-                    Femtocraft.microchip), new ItemStack(
-                    Femtocraft.conductivePowder), new ItemStack(
-                    Femtocraft.microchip), new ItemStack(
-                    Femtocraft.ingotTemperedTitanium), new ItemStack(
-                    Femtocraft.microchip), new ItemStack(
-                    Femtocraft.ingotTemperedTitanium))),
+                    Femtocraft.itemIngotTemperedTitanium), new ItemStack(
+                    Femtocraft.itemMicrochip), new ItemStack(
+                    Femtocraft.itemIngotTemperedTitanium), new ItemStack(
+                    Femtocraft.itemMicrochip), new ItemStack(
+                    Femtocraft.itemConductivePowder), new ItemStack(
+                    Femtocraft.itemMicrochip), new ItemStack(
+                    Femtocraft.itemIngotTemperedTitanium), new ItemStack(
+                    Femtocraft.itemMicrochip), new ItemStack(
+                    Femtocraft.itemIngotTemperedTitanium))),
             GuiTechnologyMachining.class, new ItemStack(
             Femtocraft.itemMicroPlating)
     );
@@ -87,7 +87,7 @@ public class ManagerResearch {
             "Algorithms", "", EnumTechLevel.MICRO,
             new ArrayList<ResearchTechnology>(Arrays
                     .asList(technologyMachining)), new ItemStack(
-            Femtocraft.encoder), false,
+            Femtocraft.blockEncoder), false,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -95,7 +95,7 @@ public class ManagerResearch {
             "Mechanical Precision", "", EnumTechLevel.MICRO,
             new ArrayList<ResearchTechnology>(Arrays
                     .asList(technologyMachining)), new ItemStack(
-            Femtocraft.microFurnaceUnlit), false,
+            Femtocraft.blockMicroFurnaceUnlit), false,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -110,7 +110,7 @@ public class ManagerResearch {
             "VacuumTubes", "These tubes contain nothing!", EnumTechLevel.MICRO,
             new ArrayList<ResearchTechnology>(Arrays
                     .asList(technologyPowerOfNothing)), new ItemStack(
-            Femtocraft.vacuumTube), false,
+            Femtocraft.blockVacuumTube), false,
             new ArrayList<ItemStack>()
     );
 
@@ -127,7 +127,7 @@ public class ManagerResearch {
             "Suction Pipes", "These pipes suck!", EnumTechLevel.MICRO,
             new ArrayList<ResearchTechnology>(Arrays
                     .asList(technologyPowerOfNothing)), new ItemStack(
-            Femtocraft.suctionPipe), false,
+            Femtocraft.blockSuctionPipe), false,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -165,7 +165,7 @@ public class ManagerResearch {
             "Discriminating Vacuum Tube", "", EnumTechLevel.NANO,
             new ArrayList<ResearchTechnology>(Arrays.asList(
                     technologyVacuumTubeHub, technologyPatternRecognition)),
-            new ItemStack(Femtocraft.vacuumTube), false,
+            new ItemStack(Femtocraft.blockVacuumTube), false,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -195,7 +195,7 @@ public class ManagerResearch {
             "Potentiality Storage", "", EnumTechLevel.MICRO,
             new ArrayList<ResearchTechnology>(Arrays.asList(
                     technologyPotentiality, technologyMachining)),
-            new ItemStack(Femtocraft.microCube), false,
+            new ItemStack(Femtocraft.blockMicroCube), false,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -203,7 +203,7 @@ public class ManagerResearch {
             "Potentiality Harnessing", "", EnumTechLevel.MICRO,
             new ArrayList<ResearchTechnology>(Arrays
                     .asList(technologyPotentiality)), new ItemStack(
-            Femtocraft.microChargingBase), false,
+            Femtocraft.blockMicroChargingBase), false,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -229,7 +229,7 @@ public class ManagerResearch {
             new ArrayList<ResearchTechnology>(Arrays.asList(
                     technologyAlgorithms, technologyMechanicalPrecision,
                     technologyBasicChemistry)), new ItemStack(
-            Femtocraft.microDeconstructor), false,
+            Femtocraft.blockMicroDeconstructor), false,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -308,7 +308,7 @@ public class ManagerResearch {
             "Potentiality Transformation", "", EnumTechLevel.NANO,
             new ArrayList<ResearchTechnology>(Arrays
                     .asList(technologyFareniteStabilization)),
-            new ItemStack(Femtocraft.orbitalEqualizer), false,
+            new ItemStack(Femtocraft.blockOrbitalEqualizer), false,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -317,7 +317,7 @@ public class ManagerResearch {
             new ArrayList<ResearchTechnology>(Arrays.asList(
                     technologyPotentialityTransformation,
                     technologyResourceOptimization)), new ItemStack(
-            Femtocraft.nanoCubeFrame), false,
+            Femtocraft.blockNanoCubeFrame), false,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -326,7 +326,7 @@ public class ManagerResearch {
             new ArrayList<ResearchTechnology>(Arrays
                     .asList(technologyWorkloadScheduling,
                             technologyArtificialMaterials)), new ItemStack(
-            Femtocraft.nanoInnervatorUnlit), false,
+            Femtocraft.blockNanoInnervatorUnlit), false,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -335,7 +335,7 @@ public class ManagerResearch {
             new ArrayList<ResearchTechnology>(Arrays
                     .asList(technologyArtificialMaterials,
                             technologyWorkloadScheduling)), new ItemStack(
-            Femtocraft.nanoDismantler), false,
+            Femtocraft.blockNanoDismantler), false,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -375,7 +375,7 @@ public class ManagerResearch {
             EnumTechLevel.DIMENSIONAL, new ArrayList<ResearchTechnology>(
             Arrays.asList(technologyArtificialMaterials,
                     technologySpacetimeManipulation)
-    ), new ItemStack(Femtocraft.nanoEnmesher),
+    ), new ItemStack(Femtocraft.blockNanoEnmesher),
             false, new ArrayList<ItemStack>()
     );
     @Technology
@@ -390,7 +390,7 @@ public class ManagerResearch {
             "Dimensional Transformation", "", EnumTechLevel.FEMTO,
             new ArrayList<ResearchTechnology>(Arrays
                     .asList(technologyDimensionalBraiding)),
-            new ItemStack(Femtocraft.ingotMalenite), true,
+            new ItemStack(Femtocraft.itemIngotMalenite), true,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -407,7 +407,7 @@ public class ManagerResearch {
             EnumTechLevel.TEMPORAL, new ArrayList<ResearchTechnology>(
             Arrays.asList(technologyArtificialMaterials,
                     technologySpacetimeManipulation)
-    ), new ItemStack(Femtocraft.nanoHorologe),
+    ), new ItemStack(Femtocraft.blockNanoHorologe),
             false, new ArrayList<ItemStack>()
     );
     @Technology
@@ -448,7 +448,7 @@ public class ManagerResearch {
             EnumTechLevel.DIMENSIONAL, new ArrayList<ResearchTechnology>(
             Arrays.asList(technologySpacetimeExploitation,
                     technologyElementManufacturing)
-    ), new ItemStack(Femtocraft.femtoEntangler),
+    ), new ItemStack(Femtocraft.blockFemtoEntangler),
             false, new ArrayList<ItemStack>()
     );
     @Technology
@@ -466,7 +466,7 @@ public class ManagerResearch {
             EnumTechLevel.TEMPORAL, new ArrayList<ResearchTechnology>(
             Arrays.asList(technologySpacetimeExploitation,
                     technologyElementManufacturing)
-    ), new ItemStack(Femtocraft.femtoChronoshifter),
+    ), new ItemStack(Femtocraft.blockFemtoChronoshifter),
             false, new ArrayList<ItemStack>()
     );
     @Technology
@@ -507,7 +507,7 @@ public class ManagerResearch {
             new ArrayList<ResearchTechnology>(Arrays
                     .asList(technologyPerfectScheduling,
                             technologyElementManufacturing)), new ItemStack(
-            Femtocraft.femtoImpulserUnlit), false,
+            Femtocraft.blockFemtoImpulserUnlit), false,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -516,7 +516,7 @@ public class ManagerResearch {
             new ArrayList<ResearchTechnology>(Arrays
                     .asList(technologyPerfectScheduling,
                             technologyElementManufacturing)), new ItemStack(
-            Femtocraft.femtoRepurposer), false,
+            Femtocraft.blockFemtoRepurposer), false,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -549,7 +549,7 @@ public class ManagerResearch {
             new ArrayList<ResearchTechnology>(Arrays.asList(
                     technologySingularityCalculator,
                     technologyDemonicParticulates)), new ItemStack(
-            Femtocraft.nullEqualizer), false,
+            Femtocraft.blockNullEqualizer), false,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -558,7 +558,7 @@ public class ManagerResearch {
             new ArrayList<ResearchTechnology>(Arrays
                     .asList(technologyNBodySimulations,
                             technologySpontaneousGeneration)), new ItemStack(
-            Femtocraft.femtoCubeFrame), false,
+            Femtocraft.blockFemtoCubeFrame), false,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -627,11 +627,11 @@ public class ManagerResearch {
     // "Paper Schematic", "Like IKEA for reality!", EnumTechLevel.MICRO,
     // new ArrayList<ResearchTechnology>(Arrays.asList(
     // technologyWorldStructure, technologyMachining)),
-    // new ItemStack(Femtocraft.paperSchematic), 1, -1, false,
+    // new ItemStack(Femtocraft.itemPaperSchematic), 1, -1, false,
     // new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Item.paper),
     // new ItemStack(Item.paper), new ItemStack(Item.paper))),
     // GuiTechnologyPaperSchematic.class, new ItemStack(
-    // Femtocraft.paperSchematic, 1));
+    // Femtocraft.itemPaperSchematic, 1));
 
     private void loadTechnologies() {
         Field[] fields = ManagerResearch.class.getFields();

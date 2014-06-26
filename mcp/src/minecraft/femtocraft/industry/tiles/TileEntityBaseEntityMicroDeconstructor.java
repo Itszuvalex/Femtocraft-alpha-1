@@ -321,10 +321,10 @@ public class TileEntityBaseEntityMicroDeconstructor extends
                             deconstructorInventory.getInventory(),
                             placementRestrictionArray);
                 }
-                // tank.fill(new FluidStack(Femtocraft.mass, recipe.mass),
+                // tank.fill(new FluidStack(Femtocraft.fluidMass, recipe.fluidMass),
                 // true);
                 if (tank.getFluid() == null) {
-                    tank.setFluid(new FluidStack(Femtocraft.mass, recipe.mass));
+                    tank.setFluid(new FluidStack(Femtocraft.fluidMass, recipe.mass));
                 } else {
                     tank.getFluid().amount += recipe.mass;
                 }
@@ -419,10 +419,10 @@ public class TileEntityBaseEntityMicroDeconstructor extends
 
     @Override
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-        // We don't want to be able to put mass into this from anywhere, only
+        // We don't want to be able to put fluidMass into this from anywhere, only
         // withdraw
-        // Otherwise, we'd also have to worry about mass being pumped in while a
-        // decomposition is happening, which would result in an overflow of mass
+        // Otherwise, we'd also have to worry about fluidMass being pumped in while a
+        // decomposition is happening, which would result in an overflow of fluidMass
         return 0;
     }
 
@@ -459,7 +459,7 @@ public class TileEntityBaseEntityMicroDeconstructor extends
         if (tank.getFluid() != null) {
             tank.setFluid(new FluidStack(tank.getFluid().fluidID, amount));
         } else {
-            tank.setFluid(new FluidStack(Femtocraft.mass, amount));
+            tank.setFluid(new FluidStack(Femtocraft.fluidMass, amount));
         }
     }
 

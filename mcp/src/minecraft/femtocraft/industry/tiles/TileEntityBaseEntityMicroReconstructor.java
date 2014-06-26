@@ -572,7 +572,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
 
     @Override
     public boolean canFill(ForgeDirection from, Fluid fluid) {
-        return fluid == Femtocraft.mass;
+        return fluid == Femtocraft.fluidMass;
     }
 
     @Override
@@ -589,7 +589,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
         if (tank.getFluid() != null) {
             tank.setFluid(new FluidStack(tank.getFluid().getFluid(), amount));
         } else {
-            tank.setFluid(new FluidStack(Femtocraft.mass, amount));
+            tank.setFluid(new FluidStack(Femtocraft.fluidMass, amount));
         }
     }
 
