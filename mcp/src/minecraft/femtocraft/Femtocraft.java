@@ -204,7 +204,38 @@ public class Femtocraft {
     public static Item itemInterfaceDeviceMicro;
 
     //nano
+    public static Item itemThoriumRod;
+
+    public static Item itemNanochip;
+    public static Item itemNanoCalculator;
+    public static Item itemNanoRegulator;
+    public static Item itemNanoSimulator;
+
+    public static Item itemBasicAICore;
+    public static Item itemLearningCore;
+    public static Item itemSchedulerCore;
+    public static Item itemManagerCore;
+
+    public static Item itemFluidConductor;
+    public static Item itemNanoCoil;
+
+    public static Item itemTemporalResonator;
+    public static Item itemDimensionalMonopole;
+
+    public static Item itemSelfFulfillingOracle;
+    public static Item itemCrossDimensionalCommunicator;
+    public static Item itemInfallibleEstimator;
+    public static Item itemPanLocationalComputer;
+    public static Item itemPandoraCube;
+
+    public static Item itemFissionReactorPlating;
+
+    public static Item itemDigitalSchematic;
+
     public static Item itemInterfaceDeviceNano;
+
+    //femto
+
     public static Item itemInterfaceDeviceFemto;
 
     // Decomp items
