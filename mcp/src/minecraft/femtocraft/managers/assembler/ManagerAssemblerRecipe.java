@@ -1095,7 +1095,6 @@ public class ManagerAssemblerRecipe {
                             Femtocraft.logger.log(Level.SEVERE,
                                     "Ore recipe with nothing registered in " +
                                             "ore dictionary");
-                            exc.printStackTrace();
                             return false;
                         }
                     } else {
@@ -1184,6 +1183,13 @@ public class ManagerAssemblerRecipe {
                                                ItemStack recipeOutput) {
         boolean valid = false;
         int[] slots = new int[recipeItems.size()];
+        ItemStack[] input = new ItemStack[9];
+        AssemblerRecipe recipe = new AssemblerRecipe(input, 0,
+                recipeOutput.copy(), EnumTechLevel.MACRO, null);
+
+        if (recipe.output.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
+            recipe.output.setItemDamage(0);
+        }
 
         // Exhaustively find a configuration that works - this should NEVER have
         // to go the full distance
@@ -1196,7 +1202,6 @@ public class ManagerAssemblerRecipe {
             }
 
             while (!valid) {
-                ItemStack[] input = new ItemStack[9];
                 Arrays.fill(input, null);
 
                 for (int i = 0; (i < slots.length) && (i < 9); ++i) {
@@ -1212,7 +1217,6 @@ public class ManagerAssemblerRecipe {
                             Femtocraft.logger.log(Level.SEVERE,
                                     "Ore recipe with nothing registered in " +
                                             "ore dictionary");
-                            exc.printStackTrace();
                             return false;
                         }
                     } else {
@@ -1221,11 +1225,6 @@ public class ManagerAssemblerRecipe {
 
                     input[slots[i] + offset] = item == null ? null : item
                             .copy();
-                }
-
-                ItemStack output = recipeOutput.copy();
-                if (output.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
-                    output.setItemDamage(0);
                 }
 
                 for (ItemStack i : input) {
@@ -1238,9 +1237,9 @@ public class ManagerAssemblerRecipe {
                     }
                 }
 
+
                 try {
-                    addReversableRecipe(new AssemblerRecipe(input, 0, output,
-                            EnumTechLevel.MACRO, null));
+                    addReversableRecipe(recipe);
                     valid = true;
                 } catch (AssemblerRecipeFoundException e) {
                     // Permute the slots
@@ -1258,6 +1257,9 @@ public class ManagerAssemblerRecipe {
                                             ItemStack recipeOutput) {
         boolean valid = false;
         int[] slots = new int[recipeItems.size()];
+        ItemStack[] input = new ItemStack[9];
+        AssemblerRecipe recipe = new AssemblerRecipe(input, 0,
+                recipeOutput.copy(), EnumTechLevel.MACRO, null);
 
         // Exhaustively find a configuration that works - this should NEVER have
         // to go the full distance
@@ -1270,7 +1272,6 @@ public class ManagerAssemblerRecipe {
             }
 
             while (!valid) {
-                ItemStack[] input = new ItemStack[9];
                 Arrays.fill(input, null);
 
                 for (int i = 0; (i < slots.length) && (i < 9); ++i) {
@@ -1280,8 +1281,7 @@ public class ManagerAssemblerRecipe {
                 }
 
                 try {
-                    addReversableRecipe(new AssemblerRecipe(input, 0,
-                            recipeOutput.copy(), EnumTechLevel.MACRO, null));
+                    addReversableRecipe(recipe);
                     valid = true;
                 } catch (AssemblerRecipeFoundException e) {
                     // Permute the slots
