@@ -162,6 +162,8 @@ public class Femtocraft {
     public static Block blockPlasma;
 
     // items
+
+    //ores
     public static Item itemIngotTitanium;
     public static Item itemIngotPlatinum;
     public static Item itemIngotThorium;
@@ -169,6 +171,7 @@ public class Femtocraft {
     public static Item itemIngotMalenite;
     public static Item itemIngotTemperedTitanium;
 
+    //micro
     public static Item itemConductivePowder;
     public static Item itemBoard;
     public static Item itemPrimedBoard;
@@ -185,6 +188,10 @@ public class Femtocraft {
     public static Item itemMicroLogicCore;
     public static Item itemHeatingElement;
     public static Item itemArticulatingArm;
+    public static Item itemDissassemblyArray;
+    public static Item itemAssemblyArray;
+
+    public static Item itemVacuumCore;
 
     public static Item itemPortableResearchComputer;
 
@@ -195,6 +202,8 @@ public class Femtocraft {
     public static Item itemPaperSchematic;
 
     public static Item itemInterfaceDeviceMicro;
+
+    //nano
     public static Item itemInterfaceDeviceNano;
     public static Item itemInterfaceDeviceFemto;
 
