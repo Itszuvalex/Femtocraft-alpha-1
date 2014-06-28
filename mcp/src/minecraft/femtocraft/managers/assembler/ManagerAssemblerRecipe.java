@@ -1204,7 +1204,17 @@ public class ManagerAssemblerRecipe {
                     Object obj = recipeItems.get(i);
 
                     if (obj instanceof ArrayList<?>) {
-                        item = ((ArrayList<ItemStack>) obj).get(0);
+                        try {
+                            item = ((ArrayList<ItemStack>) obj).get(0);
+                        }
+                        catch(IndexOutOfBoundsException exc)
+                        {
+                            Femtocraft.logger.log(Level.SEVERE,
+                                    "Ore recipe with nothing registered in " +
+                                            "ore dictionary");
+                            exc.printStackTrace();
+                            return false;
+                        }
                     } else {
                         item = (ItemStack) obj;
                     }
