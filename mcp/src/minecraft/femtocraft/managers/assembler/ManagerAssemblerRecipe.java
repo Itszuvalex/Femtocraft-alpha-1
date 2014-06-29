@@ -1252,7 +1252,7 @@ public class ManagerAssemblerRecipe {
 
 
                 try {
-                    if((System.currentTimeMillis() - timeStart) <
+                    if((System.currentTimeMillis() - timeStart) >
                             shapelessPermuteTimeMillis) {
                         return false;
                     }
@@ -1300,7 +1300,7 @@ public class ManagerAssemblerRecipe {
                 }
 
                 try {
-                    if((System.currentTimeMillis() - timeStart) <
+                    if((System.currentTimeMillis() - timeStart) >
                             shapelessPermuteTimeMillis) {
                         return false;
                     }
