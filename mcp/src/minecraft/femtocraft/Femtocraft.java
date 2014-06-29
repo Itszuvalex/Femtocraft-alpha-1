@@ -43,7 +43,6 @@ import femtocraft.core.liquids.BlockFluidMass;
 import femtocraft.core.liquids.FluidMass;
 import femtocraft.core.ore.*;
 import femtocraft.industry.blocks.*;
-import femtocraft.industry.items.ItemHeatingCoil;
 import femtocraft.industry.items.ItemPaperSchematic;
 import femtocraft.managers.ManagerRecipe;
 import femtocraft.managers.research.ManagerResearch;
@@ -675,7 +674,8 @@ public class Femtocraft {
                 .itemMicroLogicCoreID, "ItemMicroLogicCore");
         LanguageRegistry.addName(itemMicroLogicCore, "Micro Logic Core");
 
-        itemHeatingElement = new ItemHeatingCoil(FemtocraftConfigs.itemHeatingCoilID).setUnlocalizedName("itemHeatingElement");
+        itemHeatingElement = new ItemBase(FemtocraftConfigs
+                .itemHeatingCoilID, "itemHeatingElement");
         LanguageRegistry.addName(itemHeatingElement, "Heating Coil");
 
         itemPortableResearchComputer = new ItemPortableResearchComputer

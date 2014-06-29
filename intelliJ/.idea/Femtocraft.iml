@@ -31,6 +31,7 @@
     <orderEntry type="library" name="LZMA Compression v0.0.1" level="project" />
     <orderEntry type="library" name="3d Sound System v2012.01.07" level="project" />
     <orderEntry type="module" module-name="ForgeDev" />
+    <orderEntry type="library" name="sqlite-jdbc-3.7.15-M1" level="project" />
   </component>
 </module>
 

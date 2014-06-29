@@ -24,7 +24,6 @@ import femtocraft.managers.research.EnumTechLevel;
 import femtocraft.managers.research.ResearchTechnology;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTTagCompound;
 
 import java.io.IOException;
 import java.sql.*;
@@ -35,15 +34,18 @@ import java.util.logging.Level;
  * Created by Christopher Harris (Itszuvalex) on 6/28/14.
  */
 public class AssemblerRecipeDatabase {
-    public static final String DB_ITEMS_DAMAGE = "DAMAGE";
-    public static final String DB_ITEMS_NBT = "NBT";
-    public static final String DB_ITEMS_STACKSIZE = "STACKSIZE";
-    public static final String DB_RECIPES_INPUT = "INPUT";
-    public static final String DB_RECIPES_MASS = "MASS";
-    public static final String DB_RECIPES_OUTPUT = "OUTPUT";
-    public static final String DB_RECIPES_TECH_LEVEL = "TECHLEVEL";
-    public static final String DB_RECIPES_TECHNOLOGY = "TECHNAME";
-    public static final String DB_NULL_ITEM = "null";
+    private static final String DB_ITEMS_DAMAGE = "DAMAGE";
+    private static final String DB_ITEMS_NBT = "NBT";
+    private static final String DB_ITEMS_STACKSIZE = "STACKSIZE";
+    private static final String DB_RECIPES_INPUT = "INPUT";
+    private static final String DB_RECIPES_INPUT_SIZE = "INPUTSIZE";
+    private static final String DB_RECIPES_MASS = "MASS";
+    private static final String DB_RECIPES_OUTPUT = "OUTPUT";
+    private static final String DB_RECIPES_OUTPUT_SIZE = "OUTPUTSIZE";
+    private static final String DB_RECIPES_OUTPUT_NBT = "OUTPUTNBT";
+    private static final String DB_RECIPES_TECH_LEVEL = "TECHLEVEL";
+    private static final String DB_RECIPES_TECHNOLOGY = "TECHNAME";
+    private static final String DB_NULL_ITEM = "null";
     private static final String DB_FILENAME = "AssemblerRecipes.db";
     private static final String DB_TABLE_ITEMS = "ITEMS";
     private static final String DB_TABLE_RECIPES = "RECIPES";
@@ -54,7 +56,7 @@ public class AssemblerRecipeDatabase {
         try {
             Class.forName("org.sqlite.JDBC");
             refreshConnection();
-            createItemTable();
+//            createItemTable();
             createRecipeTable();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -81,9 +83,12 @@ public class AssemblerRecipeDatabase {
             String sql = "CREATE TABLE " + DB_TABLE_RECIPES +
                     "(ID INTEGER PRIMARY KEY, " +
                     DB_RECIPES_INPUT + " STRING NOT NULL," +
+                    DB_RECIPES_INPUT_SIZE + " STRING NOT NULL," +
                     DB_RECIPES_MASS + " INT CHECK(" + DB_RECIPES_MASS + " >= " +
                     "0) NOT NULL," +
-                    DB_RECIPES_OUTPUT + " INT NOT NULL," +
+                    DB_RECIPES_OUTPUT + " STRING NOT NULL," +
+                    DB_RECIPES_OUTPUT_SIZE + " STRING NOT NULL," +
+                    DB_RECIPES_OUTPUT_NBT + " BYTES," +
                     DB_RECIPES_TECH_LEVEL + " STRING NOT NULL," +
                     DB_RECIPES_TECHNOLOGY + " STRING," +
                     "UNIQUE(" + DB_RECIPES_INPUT + ", " + DB_RECIPES_MASS + "," +
@@ -97,8 +102,6 @@ public class AssemblerRecipeDatabase {
             Femtocraft.logger.log(Level.SEVERE, "SQLite recipe table creation" +
                     " failed");
             return false;
-        } finally {
-
         }
     }
 
@@ -134,7 +137,7 @@ public class AssemblerRecipeDatabase {
             refreshConnection();
             PreparedStatement ps = c.prepareStatement("SELECT * FROM " +
                     DB_TABLE_RECIPES + " WHERE " + DB_RECIPES_INPUT + " = ? " +
-                    "LIMIT 1", ResultSet.HOLD_CURSORS_OVER_COMMIT);
+                    "LIMIT 1");
             ps.setString(1, formatItems(inputs));
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -157,8 +160,9 @@ public class AssemblerRecipeDatabase {
                 sb.append(DB_NULL_ITEM);
             }
             else {
-                int id = getItemDB_ID(items[i]);
-                sb.append(id);
+                sb.append(items[i].itemID);
+                sb.append(":");
+                sb.append(items[i].getItemDamage());
             }
             if (i < items.length - 1) {
                 sb.append(",");
@@ -167,11 +171,18 @@ public class AssemblerRecipeDatabase {
         return sb.toString();
     }
 
+    private String formatItem(ItemStack item) {
+        return item == null ? null : item.itemID + ":" + item.getItemDamage();
+    }
+
     private AssemblerRecipe getRecipe(ResultSet rs) throws SQLException {
         AssemblerRecipe ac = new AssemblerRecipe();
-        ac.input = getItems(rs.getString(DB_RECIPES_INPUT));
+        ac.input = getItems(rs.getString(DB_RECIPES_INPUT),
+                rs.getString(DB_RECIPES_INPUT_SIZE));
         ac.mass = rs.getInt(DB_RECIPES_MASS);
-        ac.output = getItem(rs.getInt(DB_RECIPES_OUTPUT));
+        ac.output = getItem(rs.getString(DB_RECIPES_OUTPUT),
+                rs.getString(DB_RECIPES_OUTPUT_SIZE),
+                rs.getBytes(DB_RECIPES_OUTPUT_NBT));
         ac.enumTechLevel = EnumTechLevel.getTech(rs.getString
                 (DB_RECIPES_TECH_LEVEL));
         String tech = rs.getString
@@ -181,43 +192,15 @@ public class AssemblerRecipeDatabase {
         return ac;
     }
 
-    private int getItemDB_ID(ItemStack item) {
-        int db_id = -1;
-        if (item == null) return db_id;
-        try {
-            refreshConnection();
-            PreparedStatement ps = c.prepareStatement("SELECT ID FROM " +
-                    DB_TABLE_ITEMS +
-                    " WHERE " + DB_ITEMS_ITEMID + "= ? AND " +
-                    DB_ITEMS_DAMAGE + "= ? AND " +
-                    DB_ITEMS_STACKSIZE + "= ? AND " +
-                    DB_ITEMS_NBT + "= ? LIMIT 1");
-            ps.setInt(1, item.itemID);
-            ps.setInt(2, item.getItemDamage());
-            ps.setInt(3, item.stackSize);
-
-            byte[] bytes = null;
-            if (item.hasTagCompound()) {
-                try {
-                    bytes = CompressedStreamTools.compress(item.getTagCompound());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+    private ItemStack[] getItems(String items, String stackSizes) {
+        ItemStack[] itemStacks = getItems(items);
+        String[] sizes = stackSizes.split(",");
+        for (int i = 0; i < itemStacks.length; ++i) {
+            if (itemStacks[i] != null) {
+                itemStacks[i].stackSize = Integer.parseInt(sizes[i]);
             }
-            ps.setBytes(4, bytes);
-
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                db_id = rs.getInt(0);
-            }
-            rs.close();
-            ps.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            Femtocraft.logger.log(Level.SEVERE, "SQLite select item" +
-                    " failed");
         }
-        return db_id;
+        return itemStacks;
     }
 
     private ItemStack[] getItems(String items) {
@@ -228,50 +211,42 @@ public class AssemblerRecipeDatabase {
                 itemArray[i] = null;
             }
             else {
-                int db_id = Integer.parseInt(ids[i]);
-                itemArray[i] = getItem(db_id);
+                String[] id_damage = ids[i].split(":");
+                itemArray[i] = new ItemStack(Integer.parseInt(id_damage[0]), 1,
+                        Integer.parseInt(id_damage[1]));
             }
         }
         return itemArray;
     }
 
-    private ItemStack getItem(int db_id) {
-        if (db_id < 0) return null;
-        try {
-            refreshConnection();
-            PreparedStatement ps = c.prepareStatement("SELECT * FROM " +
-                    DB_TABLE_ITEMS +
-                    " WHERE ID = ? LIMIT 1");
-            ps.setInt(1, db_id);
-
-            ResultSet rs = ps.executeQuery();
-            ItemStack stack = null;
-            if (rs.next()) {
-                int itemID = rs.getInt(DB_ITEMS_ITEMID);
-                int damage = rs.getInt(DB_ITEMS_DAMAGE);
-                int stackSize = rs.getInt(DB_ITEMS_STACKSIZE);
-                byte[] bytes = rs.getBytes(DB_ITEMS_NBT);
-                stack = new ItemStack(itemID, stackSize, damage);
-
-                if (bytes != null) {
-                    try {
-                        NBTTagCompound compound = CompressedStreamTools.decompress
-                                (bytes);
-                        stack.setTagCompound(compound);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+    private String formatItemSizes(ItemStack[] items) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < items.length; ++i) {
+            if (items[i] == null) {
+                sb.append(DB_NULL_ITEM);
             }
-            rs.close();
-            ps.close();
-            return stack;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            Femtocraft.logger.log(Level.SEVERE, "SQLite select item" +
-                    " failed");
-            return null;
+            else {
+                sb.append(items[i].stackSize);
+            }
+            if (i < items.length - 1) {
+                sb.append(",");
+            }
         }
+        return sb.toString();
+    }
+
+    private ItemStack getItem(String item, String stackSize, byte[] nbt) {
+        String[] id_damage = item.split(":");
+        ItemStack result = new ItemStack(Integer.parseInt(id_damage[0]),
+                Integer.parseInt(stackSize), Integer.parseInt(id_damage[1]));
+        if (nbt != null) {
+            try {
+                result.setTagCompound(CompressedStreamTools.decompress(nbt));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
     }
 
     public AssemblerRecipe getRecipe(ItemStack output) {
@@ -280,8 +255,8 @@ public class AssemblerRecipeDatabase {
             refreshConnection();
             PreparedStatement ps = c.prepareStatement("SELECT * FROM " +
                     DB_TABLE_RECIPES + " WHERE " + DB_RECIPES_OUTPUT + " = ? " +
-                    "LIMIT 1", ResultSet.HOLD_CURSORS_OVER_COMMIT);
-            ps.setInt(1, getItemDB_ID(output));
+                    "LIMIT 1");
+            ps.setString(1, formatItem(output));
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 ac = getRecipe(rs);
@@ -297,66 +272,39 @@ public class AssemblerRecipeDatabase {
     }
 
     public boolean insertRecipe(AssemblerRecipe recipe) {
-        for (ItemStack item : recipe.input) {
-            insertItem(item);
-        }
-        insertItem(recipe.output);
-
         try {
             refreshConnection();
             PreparedStatement ps = c.prepareStatement("INSERT OR IGNORE INTO " +
                     DB_TABLE_RECIPES + "(ID, " + DB_RECIPES_INPUT + ", " +
+                    DB_RECIPES_INPUT_SIZE + ", " +
                     DB_RECIPES_MASS + "," + DB_RECIPES_OUTPUT + ", " +
+                    DB_RECIPES_OUTPUT_SIZE + ", " +
+                    DB_RECIPES_OUTPUT_NBT + ", " +
                     DB_RECIPES_TECH_LEVEL + ", " + DB_RECIPES_TECHNOLOGY + ")" +
-                    "VALUES (null, ?, ?, ?, ?, ?)");
+                    "VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, formatItems(recipe.input));
-            ps.setInt(2, recipe.mass);
-            ps.setInt(3, getItemDB_ID(recipe.output));
-            ps.setString(4, recipe.enumTechLevel.key);
-            ps.setString(5, recipe.tech == null ? null : recipe.tech.name);
+            ps.setString(2, formatItemSizes(recipe.input));
+            ps.setInt(3, recipe.mass);
+            ps.setString(4, formatItem(recipe.output));
+            ps.setString(5, String.valueOf(recipe.output.stackSize));
+            byte[] nbt = null;
+            if(recipe.output.hasTagCompound()) {
+                try {
+                    nbt = CompressedStreamTools.compress(recipe.output
+                            .getTagCompound());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            ps.setBytes(6, nbt);
+            ps.setString(7, recipe.enumTechLevel.key);
+            ps.setString(8, recipe.tech == null ? null : recipe.tech.name);
             ps.executeUpdate();
             ps.close();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
             Femtocraft.logger.log(Level.SEVERE, "SQLite insert recipe failed");
-            return false;
-        }
-    }
-
-    private boolean insertItem(ItemStack item) {
-        if (item == null) return true;
-        if (getItemDB_ID(item) != -1) return true;
-        try {
-            refreshConnection();
-            PreparedStatement ps = c.prepareStatement("INSERT OR IGNORE INTO " +
-                    DB_TABLE_ITEMS + "(" + DB_ITEMS_ITEMID + ", " +
-                    DB_ITEMS_DAMAGE + "," +
-                    DB_ITEMS_STACKSIZE + "," +
-                    DB_ITEMS_NBT + ") VALUES (?, ?, ?, ?) ");
-            ps.setInt(1, item.itemID);
-            ps.setInt(2, item.getItemDamage());
-            ps.setInt(3, item.stackSize);
-
-            byte[] bytes = null;
-
-            if (item.hasTagCompound()) {
-                try {
-                    bytes = CompressedStreamTools.compress(item.getTagCompound());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    bytes = null;
-                }
-            }
-            ps.setBytes(4, bytes);
-
-            ps.executeUpdate();
-            ps.close();
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            Femtocraft.logger.log(Level.SEVERE, "SQLite insert item" +
-                    " failed");
             return false;
         }
     }
