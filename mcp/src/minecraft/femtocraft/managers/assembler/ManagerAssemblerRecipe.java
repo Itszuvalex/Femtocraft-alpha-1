@@ -877,206 +877,205 @@ public class ManagerAssemblerRecipe {
                         "Registering assembler recipes from Vanilla Minecraft's Crafting Manager.\t This may take awhile ._.");
 
         List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
-        List<ShapelessRecipes> shapelessRecipes = new ArrayList<ShapelessRecipes>();
-        List<ShapedOreRecipe> shapedOre = new ArrayList<ShapedOreRecipe>();
-        List<ShapelessOreRecipe> shapelessOre = new ArrayList<ShapelessOreRecipe>();
 
-        Femtocraft.logger
-                .log(Level.WARNING,
-                        "Registering shaped recipes from Vanilla Minecraft's Crafting Manager.");
-        for (IRecipe recipe : recipes) {
-            if (getRecipe(recipe.getRecipeOutput()) != null) {
-                Femtocraft.logger.log(Level.CONFIG,
-                        "Assembler recipe already found for "
-                                + recipe.getRecipeOutput().getDisplayName()
-                                + "."
-                );
-                continue;
-            }
-
-            if (recipe instanceof ShapelessRecipes) {
-                shapelessRecipes.add((ShapelessRecipes) recipe);
-                continue;
-            }
-
-            if (recipe instanceof ShapedOreRecipe) {
-                shapedOre.add((ShapedOreRecipe) recipe);
-            }
-
-            if (recipe instanceof ShapelessOreRecipe) {
-                shapelessOre.add((ShapelessOreRecipe) recipe);
-            }
-
-            if (!(recipe instanceof ShapedRecipes)) {
-                // When I figure out how to do the other recipes...WITHOUT
-                // iterating through every conceivable combination of items and
-                // damages in the scope of minecraft
-                // It will go here.
-                continue;
-            }
-            ShapedRecipes sr = (ShapedRecipes) recipe;
-
-            Femtocraft.logger.log(Level.CONFIG,
-                    "Attempting to register shaped assembler recipe for "
-                            + sr.getRecipeOutput().getDisplayName() + "."
-            );
-            boolean valid = registerShapedRecipe(sr.recipeItems,
-                    sr.getRecipeOutput(), sr.recipeWidth, sr.recipeHeight);
-            if (!valid) {
-                Femtocraft.logger.log(Level.WARNING,
-                        "Failed to register shaped assembler recipe for "
-                                + sr.getRecipeOutput().getDisplayName() + "!"
-                );
-            }
-            else {
-                Femtocraft.logger.log(Level.CONFIG,
-                        "Loaded Vanilla Minecraft shaped recipe as assembler recipe for "
-                                + sr.getRecipeOutput().getDisplayName() + "."
-                );
-            }
-        }
-
-        Femtocraft.logger.log(Level.WARNING,
-                "Registering shaped ore recipes from Forge.");
-        for (ShapedOreRecipe orecipe : shapedOre) {
-            Femtocraft.logger.log(Level.CONFIG,
-                    "Attempting to register shaped assembler recipe for "
-                            + orecipe.getRecipeOutput().getDisplayName() + "."
-            );
-            // Hacky hacky hacky
-            // They should at least have accessors for goodness sake
-            int width = 0, height = 0;
-            try {
-                // Width
-                {
-                    Field width_field = ShapedOreRecipe.class
-                            .getDeclaredField("width");
-                    boolean prev = width_field.isAccessible();
-                    if (!prev) {
-                        width_field.setAccessible(true);
-                    }
-                    width = width_field.getInt(orecipe);
-                    if (!prev) {
-                        width_field.setAccessible(prev);
-                    }
-                }
-                // Height
-                {
-                    Field height_field = ShapedOreRecipe.class
-                            .getDeclaredField("height");
-                    boolean prev = height_field.isAccessible();
-                    if (!prev) {
-                        height_field.setAccessible(true);
-                    }
-                    height = height_field.getInt(orecipe);
-                    if (!prev) {
-                        height_field.setAccessible(prev);
-                    }
-                }
-            } catch (SecurityException e) {
-                e.printStackTrace();
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-
-            boolean valid = registerShapedOreRecipe(orecipe.getInput(),
-                    orecipe.getRecipeOutput(), width, height);
-            if (!valid) {
-                Femtocraft.logger.log(Level.WARNING,
-                        "Failed to register shaped assembler recipe for "
-                                + orecipe.getRecipeOutput().getDisplayName()
-                                + "!"
-                );
-            }
-            else {
-                Femtocraft.logger.log(Level.CONFIG,
-                        "LoadedForge shaped ore recipe as assembler recipe for "
-                                + orecipe.getRecipeOutput().getDisplayName()
-                                + "."
-                );
-            }
-        }
-
-        Femtocraft.logger
-                .log(Level.WARNING,
-                        "Registering shapeless recipes from Vanilla Minecraft's Crafting Manager.");
-        for (ShapelessRecipes recipe : shapelessRecipes) {
-            if (getRecipe(recipe.getRecipeOutput()) != null) {
-                Femtocraft.logger.log(Level.CONFIG,
-                        "Assembler recipe already found for "
-                                + recipe.getRecipeOutput().getDisplayName()
-                                + "."
-                );
-                continue;
-            }
-
-            Femtocraft.logger.log(Level.CONFIG,
-                    "Attempting to register shapeless assembler recipe for "
-                            + recipe.getRecipeOutput().getDisplayName() + "."
-            );
-
-            boolean valid = registerShapelessRecipe(recipe.recipeItems,
-                    recipe.getRecipeOutput());
-
-            if (!valid) {
-                Femtocraft.logger.log(Level.WARNING,
-                        "Failed to register shapeless assembler recipe for "
-                                + recipe.getRecipeOutput().getDisplayName()
-                                + "!"
-                );
+        for (int i = 0; i < 4; ++i) {
+            if (i == 0) {
                 Femtocraft.logger
                         .log(Level.WARNING,
-                                "I have no clue how this would happen...as the search space is literally thousands of configurations.  Sorry for the wait.");
+                                "Registering shaped recipes from Vanilla Minecraft's Crafting Manager.");
             }
-            else {
-                Femtocraft.logger.log(Level.CONFIG,
-                        "Loaded Vanilla Minecraft shapeless recipe as assembler recipe for + "
-                                + recipe.getRecipeOutput().getDisplayName()
-                                + "."
-                );
-            }
-        }
-
-        Femtocraft.logger.log(Level.WARNING,
-                "Registering shapeless ore recipes from Forge.");
-        for (ShapelessOreRecipe recipe : shapelessOre) {
-            if (getRecipe(recipe.getRecipeOutput()) != null) {
-                Femtocraft.logger.log(Level.CONFIG,
-                        "Assembler recipe already found for "
-                                + recipe.getRecipeOutput().getDisplayName()
-                                + "."
-                );
-                continue;
-            }
-
-            Femtocraft.logger.log(Level.CONFIG,
-                    "Attempting to register shapeless assembler recipe for "
-                            + recipe.getRecipeOutput().getDisplayName() + "."
-            );
-
-            boolean valid = registerShapelessOreRecipe(recipe.getInput(),
-                    recipe.getRecipeOutput());
-
-            if (!valid) {
-                Femtocraft.logger.log(Level.WARNING,
-                        "Failed to register shapeless ore assembler recipe for "
-                                + recipe.getRecipeOutput().getDisplayName()
-                                + "!"
-                );
+            else if (i == 1) {
                 Femtocraft.logger
                         .log(Level.WARNING,
-                                "I have no clue how this would happen...as the search space is literally thousands of configurations.  Sorry for the wait.");
+                                "Registering shaped ore recipes from Forge.");
             }
-            else {
-                Femtocraft.logger.log(Level.CONFIG,
-                        "Loaded Forge shapeless ore recipe as assembler recipe for + "
-                                + recipe.getRecipeOutput().getDisplayName()
-                                + "."
-                );
+            else if (i == 2) {
+                Femtocraft.logger
+                        .log(Level.WARNING,
+                                "Registering shapeless recipes from Vanilla Minecraft's Crafting Manager.");
+            }
+            else if (i == 3) {
+                Femtocraft.logger.log(Level.WARNING,
+                        "Registering shapeless ore recipes from Forge.");
+            }
+
+
+            for (IRecipe recipe : recipes) {
+                if (getRecipe(recipe.getRecipeOutput()) != null) {
+                    Femtocraft.logger.log(Level.CONFIG,
+                            "Assembler recipe already found for "
+                                    + recipe.getRecipeOutput().getDisplayName()
+                                    + "."
+                    );
+                    continue;
+                }
+
+                if (i == 0 && recipe instanceof ShapedRecipes) {
+                    // When I figure out how to do the other recipes...WITHOUT
+                    // iterating through every conceivable combination of items and
+                    // damages in the scope of minecraft
+                    // It will go here.
+
+                    ShapedRecipes sr = (ShapedRecipes) recipe;
+
+                    Femtocraft.logger.log(Level.CONFIG,
+                            "Attempting to register shaped assembler recipe for "
+                                    + sr.getRecipeOutput().getDisplayName() + "."
+                    );
+                    boolean valid = registerShapedRecipe(sr.recipeItems,
+                            sr.getRecipeOutput(), sr.recipeWidth, sr.recipeHeight);
+                    if (!valid) {
+                        Femtocraft.logger.log(Level.WARNING,
+                                "Failed to register shaped assembler recipe for "
+                                        + sr.getRecipeOutput().getDisplayName() + "!"
+                        );
+                    }
+                    else {
+                        Femtocraft.logger.log(Level.CONFIG,
+                                "Loaded Vanilla Minecraft shaped recipe as assembler recipe for "
+                                        + sr.getRecipeOutput().getDisplayName() + "."
+                        );
+                    }
+                }
+                else if (i == 1 && recipe instanceof ShapedOreRecipe) {
+                    ShapedOreRecipe orecipe = (ShapedOreRecipe) recipe;
+
+                    Femtocraft.logger.log(Level.CONFIG,
+                            "Attempting to register shaped assembler recipe for "
+                                    + orecipe.getRecipeOutput().getDisplayName() + "."
+                    );
+                    // Hacky hacky hacky
+                    // They should at least have accessors for goodness sake
+                    int width = 0, height = 0;
+                    try {
+                        // Width
+                        {
+                            Field width_field = ShapedOreRecipe.class
+                                    .getDeclaredField("width");
+                            boolean prev = width_field.isAccessible();
+                            if (!prev) {
+                                width_field.setAccessible(true);
+                            }
+                            width = width_field.getInt(orecipe);
+                            if (!prev) {
+                                width_field.setAccessible(prev);
+                            }
+                        }
+                        // Height
+                        {
+                            Field height_field = ShapedOreRecipe.class
+                                    .getDeclaredField("height");
+                            boolean prev = height_field.isAccessible();
+                            if (!prev) {
+                                height_field.setAccessible(true);
+                            }
+                            height = height_field.getInt(orecipe);
+                            if (!prev) {
+                                height_field.setAccessible(prev);
+                            }
+                        }
+                    } catch (SecurityException e) {
+                        e.printStackTrace();
+                    } catch (NoSuchFieldException e) {
+                        e.printStackTrace();
+                    } catch (IllegalArgumentException e) {
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+
+                    boolean valid = registerShapedOreRecipe(orecipe.getInput(),
+                            orecipe.getRecipeOutput(), width, height);
+                    if (!valid) {
+                        Femtocraft.logger.log(Level.WARNING,
+                                "Failed to register shaped assembler recipe for "
+                                        + orecipe.getRecipeOutput().getDisplayName()
+                                        + "!"
+                        );
+                    }
+                    else {
+                        Femtocraft.logger.log(Level.CONFIG,
+                                "LoadedForge shaped ore recipe as assembler recipe for "
+                                        + orecipe.getRecipeOutput().getDisplayName()
+                                        + "."
+                        );
+                    }
+                }
+                else if (i == 2 && recipe instanceof ShapelessRecipes) {
+                    if (getRecipe(recipe.getRecipeOutput()) != null) {
+                        Femtocraft.logger.log(Level.CONFIG,
+                                "Assembler recipe already found for "
+                                        + recipe.getRecipeOutput().getDisplayName()
+                                        + "."
+                        );
+                        continue;
+                    }
+
+                    Femtocraft.logger.log(Level.CONFIG,
+                            "Attempting to register shapeless assembler recipe for "
+                                    + recipe.getRecipeOutput().getDisplayName() + "."
+                    );
+
+                    boolean valid = registerShapelessRecipe(
+                            ((ShapelessRecipes) recipe)
+                                    .recipeItems,
+                            recipe.getRecipeOutput());
+
+                    if (!valid) {
+                        Femtocraft.logger.log(Level.WARNING,
+                                "Failed to register shapeless assembler recipe for "
+                                        + recipe.getRecipeOutput().getDisplayName()
+                                        + "!"
+                        );
+                        Femtocraft.logger
+                                .log(Level.WARNING,
+                                        "I have no clue how this would happen...as the search space is literally thousands of configurations.  Sorry for the wait.");
+                    }
+                    else {
+                        Femtocraft.logger.log(Level.CONFIG,
+                                "Loaded Vanilla Minecraft shapeless recipe as assembler recipe for + "
+                                        + recipe.getRecipeOutput().getDisplayName()
+                                        + "."
+                        );
+                    }
+                }
+                else if (i == 3 && recipe instanceof ShapelessOreRecipe) {
+                    if (getRecipe(recipe.getRecipeOutput()) != null) {
+                        Femtocraft.logger.log(Level.CONFIG,
+                                "Assembler recipe already found for "
+                                        + recipe.getRecipeOutput().getDisplayName()
+                                        + "."
+                        );
+                        continue;
+                    }
+
+                    Femtocraft.logger.log(Level.CONFIG,
+                            "Attempting to register shapeless assembler recipe for "
+                                    + recipe.getRecipeOutput().getDisplayName() + "."
+                    );
+
+                    boolean valid = registerShapelessOreRecipe((
+                                    (ShapelessOreRecipe) recipe).getInput(),
+                            recipe.getRecipeOutput());
+
+                    if (!valid) {
+                        Femtocraft.logger.log(Level.WARNING,
+                                "Failed to register shapeless ore assembler recipe for "
+                                        + recipe.getRecipeOutput().getDisplayName()
+                                        + "!"
+                        );
+                        Femtocraft.logger
+                                .log(Level.WARNING,
+                                        "I have no clue how this would happen...as the search space is literally thousands of configurations.  Sorry for the wait.");
+                    }
+                    else {
+                        Femtocraft.logger.log(Level.CONFIG,
+                                "Loaded Forge shapeless ore recipe as assembler recipe for + "
+                                        + recipe.getRecipeOutput().getDisplayName()
+                                        + "."
+                        );
+                    }
+                }
             }
         }
     }
