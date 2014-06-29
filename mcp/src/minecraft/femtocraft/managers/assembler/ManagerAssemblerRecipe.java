@@ -64,7 +64,7 @@ import java.util.logging.Level;
  * is also stated here for reference.
  */
 public class ManagerAssemblerRecipe {
-    public static final long shapelessPermuteTimeMillis = 500;
+    public static final long shapelessPermuteTimeMillis = 10;
     //    private SortedMap<ItemStack[], AssemblerRecipe> inputToRecipeMap;
 //    private SortedMap<ItemStack, AssemblerRecipe> outputToRecipeMap;
 //    private HashMap<EnumTechLevel, ArrayList<AssemblerRecipe>> techLevelToRecipeMap;
@@ -1214,7 +1214,7 @@ public class ManagerAssemblerRecipe {
                 slots[i] = i;
             }
 
-            while (!valid) {
+            while (!valid && (System.currentTimeMillis() - timeStart) < shapelessPermuteTimeMillis) {
                 Arrays.fill(input, null);
 
                 for (int i = 0; (i < slots.length) && (i < 9); ++i) {
@@ -1274,6 +1274,8 @@ public class ManagerAssemblerRecipe {
         AssemblerRecipe recipe = new AssemblerRecipe(input, 0,
                 recipeOutput.copy(), EnumTechLevel.MACRO, null);
 
+        long timeStart = System.currentTimeMillis();
+
         // Exhaustively find a configuration that works - this should NEVER have
         // to go the full distance
         // but I don't want to half-ass the attempt in case there are MANY
@@ -1284,7 +1286,8 @@ public class ManagerAssemblerRecipe {
                 slots[i] = i;
             }
 
-            while (!valid) {
+            while (!valid && (System.currentTimeMillis() - timeStart) <
+                    shapelessPermuteTimeMillis) {
                 Arrays.fill(input, null);
 
                 for (int i = 0; (i < slots.length) && (i < 9); ++i) {
