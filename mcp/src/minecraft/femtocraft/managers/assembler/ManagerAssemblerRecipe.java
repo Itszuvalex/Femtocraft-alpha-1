@@ -39,7 +39,9 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 
 /**
@@ -62,18 +64,20 @@ import java.util.logging.Level;
  * is also stated here for reference.
  */
 public class ManagerAssemblerRecipe {
-    private SortedMap<ItemStack[], AssemblerRecipe> inputToRecipeMap;
-    private SortedMap<ItemStack, AssemblerRecipe> outputToRecipeMap;
-    private HashMap<EnumTechLevel, ArrayList<AssemblerRecipe>> techLevelToRecipeMap;
-    private HashMap<ResearchTechnology, ArrayList<AssemblerRecipe>> technologyToRecipeMap;
+    public static final long shapelessPermuteTimeMillis = 500;
+    //    private SortedMap<ItemStack[], AssemblerRecipe> inputToRecipeMap;
+//    private SortedMap<ItemStack, AssemblerRecipe> outputToRecipeMap;
+//    private HashMap<EnumTechLevel, ArrayList<AssemblerRecipe>> techLevelToRecipeMap;
+//    private HashMap<ResearchTechnology, ArrayList<AssemblerRecipe>> technologyToRecipeMap;
+    AssemblerRecipeDatabase ard = new AssemblerRecipeDatabase();
 
     public ManagerAssemblerRecipe() {
-        inputToRecipeMap = new TreeMap<ItemStack[], AssemblerRecipe>(
-                new ComparatorItemStackArray());
-        outputToRecipeMap = new TreeMap<ItemStack, AssemblerRecipe>(
-                new ComparatorItemStack());
-        techLevelToRecipeMap = new HashMap<EnumTechLevel, ArrayList<AssemblerRecipe>>();
-        technologyToRecipeMap = new HashMap<ResearchTechnology, ArrayList<AssemblerRecipe>>();
+//        inputToRecipeMap = new TreeMap<ItemStack[], AssemblerRecipe>(
+//                new ComparatorItemStackArray());
+//        outputToRecipeMap = new TreeMap<ItemStack, AssemblerRecipe>(
+//                new ComparatorItemStack());
+//        techLevelToRecipeMap = new HashMap<EnumTechLevel, ArrayList<AssemblerRecipe>>();
+//        technologyToRecipeMap = new HashMap<ResearchTechnology, ArrayList<AssemblerRecipe>>();
 
         registerRecipes();
     }
@@ -923,7 +927,8 @@ public class ManagerAssemblerRecipe {
                         "Failed to register shaped assembler recipe for "
                                 + sr.getRecipeOutput().getDisplayName() + "!"
                 );
-            } else {
+            }
+            else {
                 Femtocraft.logger.log(Level.CONFIG,
                         "Loaded Vanilla Minecraft shaped recipe as assembler recipe for "
                                 + sr.getRecipeOutput().getDisplayName() + "."
@@ -986,7 +991,8 @@ public class ManagerAssemblerRecipe {
                                 + orecipe.getRecipeOutput().getDisplayName()
                                 + "!"
                 );
-            } else {
+            }
+            else {
                 Femtocraft.logger.log(Level.CONFIG,
                         "LoadedForge shaped ore recipe as assembler recipe for "
                                 + orecipe.getRecipeOutput().getDisplayName()
@@ -1025,7 +1031,8 @@ public class ManagerAssemblerRecipe {
                 Femtocraft.logger
                         .log(Level.WARNING,
                                 "I have no clue how this would happen...as the search space is literally thousands of configurations.  Sorry for the wait.");
-            } else {
+            }
+            else {
                 Femtocraft.logger.log(Level.CONFIG,
                         "Loaded Vanilla Minecraft shapeless recipe as assembler recipe for + "
                                 + recipe.getRecipeOutput().getDisplayName()
@@ -1063,7 +1070,8 @@ public class ManagerAssemblerRecipe {
                 Femtocraft.logger
                         .log(Level.WARNING,
                                 "I have no clue how this would happen...as the search space is literally thousands of configurations.  Sorry for the wait.");
-            } else {
+            }
+            else {
                 Femtocraft.logger.log(Level.CONFIG,
                         "Loaded Forge shapeless ore recipe as assembler recipe for + "
                                 + recipe.getRecipeOutput().getDisplayName()
@@ -1078,8 +1086,16 @@ public class ManagerAssemblerRecipe {
         boolean done = false;
         int xOffset = 0;
         int yOffset = 0;
+        ItemStack[] input = new ItemStack[9];
+        AssemblerRecipe recipe = new AssemblerRecipe(input, 0,
+                recipeOutput.copy(),
+                EnumTechLevel.MACRO, null);
+
+        if (recipe.output.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
+            recipe.output.setItemDamage(0);
+        }
+
         while ((!done) && (xOffset < 3) && (yOffset < 3)) {
-            ItemStack[] input = new ItemStack[9];
             Arrays.fill(input, null);
             for (int i = 0; (i < recipeInput.length) && (i < 9); i++) {
                 try {
@@ -1089,15 +1105,15 @@ public class ManagerAssemblerRecipe {
                     if (obj instanceof ArrayList<?>) {
                         try {
                             item = ((ArrayList<ItemStack>) obj).get(0);
-                        }
-                        catch(IndexOutOfBoundsException exc)
-                        {
+                        } catch (IndexOutOfBoundsException exc) {
                             Femtocraft.logger.log(Level.SEVERE,
                                     "Ore recipe with nothing registered in " +
-                                            "ore dictionary");
+                                            "ore dictionary for " + recipe
+                                            .output.getDisplayName() + ".");
                             return false;
                         }
-                    } else {
+                    }
+                    else {
                         item = (ItemStack) obj;
                     }
                     input[((i + xOffset) % width) + 3
@@ -1113,11 +1129,6 @@ public class ManagerAssemblerRecipe {
                 }
             }
 
-            ItemStack output = recipeOutput.copy();
-            if (output.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
-                output.setItemDamage(0);
-            }
-
             for (ItemStack i : input) {
                 if (i == null) {
                     continue;
@@ -1129,8 +1140,7 @@ public class ManagerAssemblerRecipe {
             }
 
             try {
-                addReversableRecipe(new AssemblerRecipe(input, 0, output,
-                        EnumTechLevel.MACRO, null));
+                addReversableRecipe(recipe);
                 done = true;
             } catch (AssemblerRecipeFoundException e) {
                 // Attempt to offset, while staying inside crafting grid
@@ -1150,9 +1160,12 @@ public class ManagerAssemblerRecipe {
         boolean done = false;
         int xoffset = 0;
         int yoffset = 0;
+        ItemStack[] input = new ItemStack[9];
+        AssemblerRecipe recipe = new AssemblerRecipe(input, 0,
+                recipeOutput.copy(), EnumTechLevel.MACRO, null);
+
         while ((!done) && ((xoffset + recipeWidth) <= 3)
                 && ((yoffset + recipeHeight) <= 3)) {
-            ItemStack[] input = new ItemStack[9];
             Arrays.fill(input, null);
             for (int i = 0; (i < recipeItems.length) && (i < 9); i++) {
                 ItemStack item = recipeItems[i];
@@ -1163,8 +1176,7 @@ public class ManagerAssemblerRecipe {
             }
 
             try {
-                addReversableRecipe(new AssemblerRecipe(input, 0,
-                        recipeOutput.copy(), EnumTechLevel.MACRO, null));
+                addReversableRecipe(recipe);
                 done = true;
             } catch (AssemblerRecipeFoundException e) {
                 // Attempt to offset, while staying inside crafting grid
@@ -1186,6 +1198,8 @@ public class ManagerAssemblerRecipe {
         ItemStack[] input = new ItemStack[9];
         AssemblerRecipe recipe = new AssemblerRecipe(input, 0,
                 recipeOutput.copy(), EnumTechLevel.MACRO, null);
+
+        long timeStart = System.currentTimeMillis();
 
         if (recipe.output.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
             recipe.output.setItemDamage(0);
@@ -1211,15 +1225,15 @@ public class ManagerAssemblerRecipe {
                     if (obj instanceof ArrayList<?>) {
                         try {
                             item = ((ArrayList<ItemStack>) obj).get(0);
-                        }
-                        catch(IndexOutOfBoundsException exc)
-                        {
+                        } catch (IndexOutOfBoundsException exc) {
                             Femtocraft.logger.log(Level.SEVERE,
                                     "Ore recipe with nothing registered in " +
-                                            "ore dictionary");
+                                            "ore dictionary for " + recipe
+                                            .output.getDisplayName() + ".");
                             return false;
                         }
-                    } else {
+                    }
+                    else {
                         item = (ItemStack) obj;
                     }
 
@@ -1426,7 +1440,8 @@ public class ManagerAssemblerRecipe {
                                 "Loading default AssemblerRecipe for " + name
                                         + "."
                         );
-                    } else {
+                    }
+                    else {
                         Femtocraft.logger
                                 .log(logLevel,
                                         "Not loading AssemblerRecipe for "
@@ -1482,6 +1497,40 @@ public class ManagerAssemblerRecipe {
         test = getRecipe(new ItemStack(Femtocraft.itemFlorite));
         Femtocraft.logger.log(Level.WARNING, "Recipe "
                 + (test != null ? "found" : "not found") + ".");
+    }
+
+    public AssemblerRecipe getRecipe(ItemStack[] input) {
+        ItemStack[] normal = normalizedInput(input);
+        if (normal == null) {
+            return null;
+        }
+        return ard.getRecipe(input);
+//        return inputToRecipeMap.get(normal);
+    }
+
+    public AssemblerRecipe getRecipe(ItemStack output) {
+        return ard.getRecipe(output);
+//        return outputToRecipeMap.get(normalizedItem(output));
+    }
+
+    private ItemStack[] normalizedInput(ItemStack[] input) {
+        if (input.length != 9) {
+            return null;
+        }
+
+        ItemStack[] ret = new ItemStack[9];
+
+        for (int i = 0; i < 9; i++) {
+            ret[i] = normalizedItem(input[i]);
+        }
+        return ret;
+    }
+
+    private ItemStack normalizedItem(ItemStack original) {
+        if (original == null) {
+            return null;
+        }
+        return new ItemStack(original.itemID, 1, original.getItemDamage());
     }
 
     public boolean addReversableRecipe(AssemblerRecipe recipe)
@@ -1540,7 +1589,8 @@ public class ManagerAssemblerRecipe {
         AssemblerRecompositionRegisterEvent event = new AssemblerRecompositionRegisterEvent(
                 recipe);
         if (!MinecraftForge.EVENT_BUS.post(event)) {
-            inputToRecipeMap.put(normal, recipe);
+            ard.insertRecipe(recipe);
+//            inputToRecipeMap.put(normal, recipe);
             addRecipeToTechLevelMap(recipe);
             addRecipeToTechnologyMap(recipe);
             return true;
@@ -1553,7 +1603,8 @@ public class ManagerAssemblerRecipe {
         AssemblerDecompositionRegisterEvent event = new AssemblerDecompositionRegisterEvent(
                 recipe);
         if (!MinecraftForge.EVENT_BUS.post(event)) {
-            outputToRecipeMap.put(normal, recipe);
+            ard.insertRecipe(recipe);
+//            outputToRecipeMap.put(normal, recipe);
             addRecipeToTechLevelMap(recipe);
             addRecipeToTechnologyMap(recipe);
             return true;
@@ -1562,32 +1613,33 @@ public class ManagerAssemblerRecipe {
     }
 
     private void addRecipeToTechLevelMap(AssemblerRecipe recipe) {
-        ArrayList<AssemblerRecipe> array = techLevelToRecipeMap
-                .get(recipe.enumTechLevel);
-        if (array == null) {
-            array = new ArrayList<AssemblerRecipe>();
-            techLevelToRecipeMap.put(recipe.enumTechLevel, array);
-        }
-        if (!array.contains(recipe)) {
-            array.add(recipe);
-        }
+//        ArrayList<AssemblerRecipe> array = techLevelToRecipeMap
+//                .get(recipe.enumTechLevel);
+//        if (array == null) {
+//            array = new ArrayList<AssemblerRecipe>();
+//            techLevelToRecipeMap.put(recipe.enumTechLevel, array);
+//        }
+//        if (!array.contains(recipe)) {
+//            array.add(recipe);
+//        }
     }
 
     private void addRecipeToTechnologyMap(AssemblerRecipe recipe) {
-        ArrayList<AssemblerRecipe> array = technologyToRecipeMap
-                .get(recipe.tech);
-        if (array == null) {
-            array = new ArrayList<AssemblerRecipe>();
-            technologyToRecipeMap.put(recipe.tech, array);
-        }
-        if (!array.contains(recipe)) {
-            array.add(recipe);
-        }
+//        ArrayList<AssemblerRecipe> array = technologyToRecipeMap
+//                .get(recipe.tech);
+//        if (array == null) {
+//            array = new ArrayList<AssemblerRecipe>();
+//            technologyToRecipeMap.put(recipe.tech, array);
+//        }
+//        if (!array.contains(recipe)) {
+//            array.add(recipe);
+//        }
     }
 
     private void checkDecomposition(ItemStack normal, AssemblerRecipe recipe)
             throws AssemblerRecipeFoundException {
-        if (outputToRecipeMap.containsKey(normal)) {
+        if (ard.getRecipe(normal) != null) {
+//        if (outputToRecipeMap.containsKey(normal)) {
             throw new AssemblerRecipeFoundException(
                     "AssemblerRecipe found for Decomposition of item - "
                             + recipe.output.getDisplayName() + "."
@@ -1597,7 +1649,8 @@ public class ManagerAssemblerRecipe {
 
     private void checkRecomposition(ItemStack[] normal, AssemblerRecipe recipe)
             throws AssemblerRecipeFoundException {
-        if (inputToRecipeMap.containsKey(normal)) {
+        if (ard.getRecipe(normal) != null) {
+//        if (inputToRecipeMap.containsKey(normal)) {
             throw new AssemblerRecipeFoundException(
                     "AssemblerRecipe found for Recomposition of item - "
                             + recipe.output.getDisplayName() + "."
@@ -1610,18 +1663,28 @@ public class ManagerAssemblerRecipe {
                 || removeRecompositionRecipe(recipe);
     }
 
-    public boolean removeReversableRecipe(AssemblerRecipe recipe) {
-        return removeDecompositionRecipe(recipe)
-                && removeRecompositionRecipe(recipe);
+    public boolean removeDecompositionRecipe(AssemblerRecipe recipe) {
+//        return (outputToRecipeMap.remove(normalizedOutput(recipe)) != null);
+        return false;
     }
 
     public boolean removeRecompositionRecipe(AssemblerRecipe recipe) {
-        ItemStack[] normal = normalizedInput(recipe);
-        return normal != null && (inputToRecipeMap.remove(normal) != null);
+//        ItemStack[] normal = normalizedInput(recipe);
+//        return normal != null && (inputToRecipeMap.remove(normal) != null);
+        return false;
     }
 
-    public boolean removeDecompositionRecipe(AssemblerRecipe recipe) {
-        return (outputToRecipeMap.remove(normalizedOutput(recipe)) != null);
+    private ItemStack normalizedOutput(AssemblerRecipe recipe) {
+        return normalizedItem(recipe.output);
+    }
+
+    private ItemStack[] normalizedInput(AssemblerRecipe recipe) {
+        return normalizedInput(recipe.input);
+    }
+
+    public boolean removeReversableRecipe(AssemblerRecipe recipe) {
+        return removeDecompositionRecipe(recipe)
+                && removeRecompositionRecipe(recipe);
     }
 
     public boolean canCraft(ItemStack[] input) {
@@ -1656,58 +1719,20 @@ public class ManagerAssemblerRecipe {
                 && FemtocraftUtils.compareItem(recipe.output, input) == 0;
     }
 
-    public AssemblerRecipe getRecipe(ItemStack[] input) {
-        ItemStack[] normal = normalizedInput(input);
-        if (normal == null) {
-            return null;
-        }
-        return inputToRecipeMap.get(normal);
-    }
-
-    public AssemblerRecipe getRecipe(ItemStack output) {
-        return outputToRecipeMap.get(normalizedItem(output));
-    }
-
     public ArrayList<AssemblerRecipe> getRecipesForTechLevel(EnumTechLevel level) {
-        return techLevelToRecipeMap.get(level);
+//        return techLevelToRecipeMap.get(level);
+        return ard.getRecipesForLevel(level);
     }
 
     public ArrayList<AssemblerRecipe> getRecipesForTechnology(
             ResearchTechnology tech) {
-        return technologyToRecipeMap.get(tech);
+//        return technologyToRecipeMap.get(tech);
+        return ard.getRecipesForTech(tech);
     }
 
     public boolean hasResearchedRecipe(AssemblerRecipe recipe, String username) {
         return Femtocraft.researchManager.hasPlayerResearchedTechnology(
                 username, recipe.tech);
-    }
-
-    private ItemStack normalizedOutput(AssemblerRecipe recipe) {
-        return normalizedItem(recipe.output);
-    }
-
-    private ItemStack[] normalizedInput(AssemblerRecipe recipe) {
-        return normalizedInput(recipe.input);
-    }
-
-    private ItemStack[] normalizedInput(ItemStack[] input) {
-        if (input.length != 9) {
-            return null;
-        }
-
-        ItemStack[] ret = new ItemStack[9];
-
-        for (int i = 0; i < 9; i++) {
-            ret[i] = normalizedItem(input[i]);
-        }
-        return ret;
-    }
-
-    private ItemStack normalizedItem(ItemStack original) {
-        if (original == null) {
-            return null;
-        }
-        return new ItemStack(original.itemID, 1, original.getItemDamage());
     }
 
     public static class AssemblerRecipeFoundException extends Exception {
