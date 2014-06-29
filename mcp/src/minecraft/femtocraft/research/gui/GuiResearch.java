@@ -129,6 +129,7 @@ public class GuiResearch extends GuiScreen {
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
+    @Override
     public void initGui() {
         // this.buttonList.clear();
         // this.buttonList.addInput(new GuiSmallButton(1, this.width / 2 + 24,
@@ -201,6 +202,7 @@ public class GuiResearch extends GuiScreen {
      * Fired when a control is clicked. This is the equivalent of
      * ActionListener.actionPerformed(ActionEvent e).
      */
+    @Override
     protected void actionPerformed(GuiButton par1GuiButton) {
         // if (par1GuiButton.id == 1) {
         // this.mc.displayGuiScreen((GuiScreen) null);
@@ -222,6 +224,7 @@ public class GuiResearch extends GuiScreen {
      * Fired when a key is typed. This is the equivalent of
      * KeyListener.keyTyped(KeyEvent e).
      */
+    @Override
     protected void keyTyped(char par1, int par2) {
         if (par2 == this.mc.gameSettings.keyBindInventory.keyCode) {
             this.mc.displayGuiScreen((GuiScreen) null);
@@ -235,6 +238,7 @@ public class GuiResearch extends GuiScreen {
     /**
      * Draws the screen and all the components in it.
      */
+    @Override
     public void drawScreen(int par1, int par2, float par3) {
         if (Mouse.isButtonDown(0)) {
             int k = (this.width - this.researchPaneWidth) / 2;
@@ -291,6 +295,7 @@ public class GuiResearch extends GuiScreen {
     /**
      * Called from the main game loop to update the screen.
      */
+    @Override
     public void updateScreen() {
         this.field_74117_m = this.guiMapX;
         this.field_74115_n = this.guiMapY;
@@ -645,6 +650,7 @@ public class GuiResearch extends GuiScreen {
      * Returns true if this GUI should pause the game when it is displayed in
      * single-player
      */
+    @Override
     public boolean doesGuiPauseGame() {
         return true;
     }

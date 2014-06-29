@@ -40,16 +40,19 @@ public class BlockOreMalenite extends BlockOre {
         setResistance(1f);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
                                                                .toLowerCase() + ":" + "BlockOreMalenite");
     }
 
+    @Override
     public int idDropped(int par1, Random random, int par2) {
         return Femtocraft.itemIngotMalenite.itemID;
     }
 
+    @Override
     public int quantityDropped(Random random) {
         // 2-4
         return random.nextInt(3) + 2;

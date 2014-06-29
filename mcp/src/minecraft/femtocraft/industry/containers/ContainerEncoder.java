@@ -75,6 +75,7 @@ public class ContainerEncoder extends Container {
         }
     }
 
+    @Override
     public void addCraftingToCrafters(ICrafting par1ICrafting) {
         super.addCraftingToCrafters(par1ICrafting);
         par1ICrafting.sendProgressBarUpdate(this, 0, this.encoder.timeWorked);
@@ -85,6 +86,7 @@ public class ContainerEncoder extends Container {
     /**
      * Looks for changes made in the container, sends them to every listener.
      */
+    @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
@@ -110,6 +112,7 @@ public class ContainerEncoder extends Container {
         this.lastMass = this.encoder.getMassAmount();
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int par1, int par2) {
         if (par1 == 0) {
@@ -128,6 +131,7 @@ public class ContainerEncoder extends Container {
         }
     }
 
+    @Override
     public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
         return this.encoder.isUseableByPlayer(par1EntityPlayer);
     }
@@ -136,6 +140,7 @@ public class ContainerEncoder extends Container {
      * Called when a player shift-clicks on a slot. You must override this or
      * you will crash when someone does that.
      */
+    @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
         ItemStack itemstack = null;
         Slot slot = (Slot) this.inventorySlots.get(par2);

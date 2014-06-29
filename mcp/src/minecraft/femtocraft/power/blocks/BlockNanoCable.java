@@ -40,6 +40,7 @@ public class BlockNanoCable extends BlockMicroCable {
         setBlockBounds();
     }
 
+    @Override
     public void setBlockBounds() {
         this.minX = this.minY = this.minZ = 4.0D / 16.0D;
         this.maxX = this.maxY = this.maxZ = 12.0D / 16.0D;
@@ -55,6 +56,7 @@ public class BlockNanoCable extends BlockMicroCable {
         return ProxyClient.nanoCableRenderID;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "nanoCableCoil");

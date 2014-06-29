@@ -64,6 +64,7 @@ public class ContainerNanoDismantler extends Container {
         }
     }
 
+    @Override
     public void addCraftingToCrafters(ICrafting par1ICrafting) {
         super.addCraftingToCrafters(par1ICrafting);
         par1ICrafting.sendProgressBarUpdate(this, 0,
@@ -77,6 +78,7 @@ public class ContainerNanoDismantler extends Container {
     /**
      * Looks for changes made in the container, sends them to every listener.
      */
+    @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
@@ -102,6 +104,7 @@ public class ContainerNanoDismantler extends Container {
         this.lastMass = this.dismantler.getMassAmount();
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int par1, int par2) {
         switch (par1) {
@@ -131,6 +134,7 @@ public class ContainerNanoDismantler extends Container {
         // }
     }
 
+    @Override
     public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
         return this.dismantler.isUseableByPlayer(par1EntityPlayer);
     }
@@ -139,6 +143,7 @@ public class ContainerNanoDismantler extends Container {
      * Called when a player shift-clicks on a slot. You must override this or
      * you will crash when someone does that.
      */
+    @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
         ItemStack itemstack = null;
         Slot slot = (Slot) this.inventorySlots.get(par2);

@@ -52,6 +52,8 @@ public class AssemblerRecipeDatabase {
     private static final String DB_ITEMS_ITEMID = "ITEMID";
     private Connection c;
 
+    private boolean shouldRegister = true;
+
     public AssemblerRecipeDatabase() {
         try {
             Class.forName("org.sqlite.JDBC");
@@ -99,10 +101,15 @@ public class AssemblerRecipeDatabase {
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            shouldRegister = false;
             Femtocraft.logger.log(Level.SEVERE, "SQLite recipe table creation" +
                     " failed");
             return false;
         }
+    }
+
+    public boolean shouldRegister() {
+        return shouldRegister;
     }
 
     private boolean createItemTable() {
@@ -171,10 +178,6 @@ public class AssemblerRecipeDatabase {
         return sb.toString();
     }
 
-    private String formatItem(ItemStack item) {
-        return item == null ? null : item.itemID + ":" + item.getItemDamage();
-    }
-
     private AssemblerRecipe getRecipe(ResultSet rs) throws SQLException {
         AssemblerRecipe ac = new AssemblerRecipe();
         ac.input = getItems(rs.getString(DB_RECIPES_INPUT),
@@ -203,6 +206,20 @@ public class AssemblerRecipeDatabase {
         return itemStacks;
     }
 
+    private ItemStack getItem(String item, String stackSize, byte[] nbt) {
+        String[] id_damage = item.split(":");
+        ItemStack result = new ItemStack(Integer.parseInt(id_damage[0]),
+                Integer.parseInt(stackSize), Integer.parseInt(id_damage[1]));
+        if (nbt != null) {
+            try {
+                result.setTagCompound(CompressedStreamTools.decompress(nbt));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
     private ItemStack[] getItems(String items) {
         String[] ids = items.split(",");
         ItemStack[] itemArray = new ItemStack[ids.length];
@@ -217,36 +234,6 @@ public class AssemblerRecipeDatabase {
             }
         }
         return itemArray;
-    }
-
-    private String formatItemSizes(ItemStack[] items) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < items.length; ++i) {
-            if (items[i] == null) {
-                sb.append(DB_NULL_ITEM);
-            }
-            else {
-                sb.append(items[i].stackSize);
-            }
-            if (i < items.length - 1) {
-                sb.append(",");
-            }
-        }
-        return sb.toString();
-    }
-
-    private ItemStack getItem(String item, String stackSize, byte[] nbt) {
-        String[] id_damage = item.split(":");
-        ItemStack result = new ItemStack(Integer.parseInt(id_damage[0]),
-                Integer.parseInt(stackSize), Integer.parseInt(id_damage[1]));
-        if (nbt != null) {
-            try {
-                result.setTagCompound(CompressedStreamTools.decompress(nbt));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return result;
     }
 
     public AssemblerRecipe getRecipe(ItemStack output) {
@@ -271,6 +258,10 @@ public class AssemblerRecipeDatabase {
         return ac;
     }
 
+    private String formatItem(ItemStack item) {
+        return item == null ? null : item.itemID + ":" + item.getItemDamage();
+    }
+
     public boolean insertRecipe(AssemblerRecipe recipe) {
         try {
             refreshConnection();
@@ -288,7 +279,7 @@ public class AssemblerRecipeDatabase {
             ps.setString(4, formatItem(recipe.output));
             ps.setString(5, String.valueOf(recipe.output.stackSize));
             byte[] nbt = null;
-            if(recipe.output.hasTagCompound()) {
+            if (recipe.output.hasTagCompound()) {
                 try {
                     nbt = CompressedStreamTools.compress(recipe.output
                             .getTagCompound());
@@ -307,6 +298,22 @@ public class AssemblerRecipeDatabase {
             Femtocraft.logger.log(Level.SEVERE, "SQLite insert recipe failed");
             return false;
         }
+    }
+
+    private String formatItemSizes(ItemStack[] items) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < items.length; ++i) {
+            if (items[i] == null) {
+                sb.append(DB_NULL_ITEM);
+            }
+            else {
+                sb.append(items[i].stackSize);
+            }
+            if (i < items.length - 1) {
+                sb.append(",");
+            }
+        }
+        return sb.toString();
     }
 
     public ArrayList<AssemblerRecipe> getRecipesForLevel(EnumTechLevel level) {

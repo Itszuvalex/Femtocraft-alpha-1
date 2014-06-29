@@ -43,6 +43,7 @@ public class ComparatorRecipeSorter implements Comparator {
                 .getRecipeSize() ? 1 : 0)));
     }
 
+    @Override
     public int compare(Object par1Obj, Object par2Obj) {
         return this.compareRecipes((IRecipe) par1Obj, (IRecipe) par2Obj);
     }

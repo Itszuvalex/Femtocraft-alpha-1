@@ -45,6 +45,7 @@ public class ContainerMicroReconstructor extends Container {
         this.reconstructor = reconstructor;
         this.addSlotToContainer(new OutputSlot(reconstructor, 9, 122, 18));
         Slot schematic = new Slot(reconstructor, 10, 93, 54) {
+            @Override
             public boolean isItemValid(ItemStack par1ItemStack) {
                 return par1ItemStack.getItem() instanceof IAssemblerSchematic;
             }
@@ -69,7 +70,7 @@ public class ContainerMicroReconstructor extends Container {
         for (int y = 0; y < 2; ++y) {
             for (int x = 0; x < 9; ++x) {
                 this.addSlotToContainer(new Slot(reconstructor, 11 + x + y * 9,
-                                                 8 + x * 18, 77 + y * 18));
+                        8 + x * 18, 77 + y * 18));
             }
         }
 
@@ -85,23 +86,25 @@ public class ContainerMicroReconstructor extends Container {
         // Bind player actionbar
         for (i = 0; i < 9; ++i) {
             this.addSlotToContainer(new Slot(par1InventoryPlayer, i,
-                                             8 + i * 18, 180));
+                    8 + i * 18, 180));
         }
     }
 
+    @Override
     public void addCraftingToCrafters(ICrafting par1ICrafting) {
         super.addCraftingToCrafters(par1ICrafting);
         par1ICrafting.sendProgressBarUpdate(this, 0,
-                                            this.reconstructor.cookTime);
+                this.reconstructor.cookTime);
         par1ICrafting.sendProgressBarUpdate(this, 1,
-                                            this.reconstructor.getCurrentPower());
+                this.reconstructor.getCurrentPower());
         par1ICrafting.sendProgressBarUpdate(this, 2,
-                                            this.reconstructor.getMassAmount());
+                this.reconstructor.getMassAmount());
     }
 
     /**
      * Looks for changes made in the container, sends them to every listener.
      */
+    @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
@@ -110,15 +113,15 @@ public class ContainerMicroReconstructor extends Container {
 
             if (this.lastCookTime != this.reconstructor.cookTime) {
                 icrafting.sendProgressBarUpdate(this, 0,
-                                                this.reconstructor.cookTime);
+                        this.reconstructor.cookTime);
             }
             if (this.lastPower != this.reconstructor.getCurrentPower()) {
                 icrafting.sendProgressBarUpdate(this, 1,
-                                                this.reconstructor.getCurrentPower());
+                        this.reconstructor.getCurrentPower());
             }
             if (this.lastMass != this.reconstructor.getMassAmount()) {
                 icrafting.sendProgressBarUpdate(this, 2,
-                                                this.reconstructor.getMassAmount());
+                        this.reconstructor.getMassAmount());
             }
         }
 
@@ -127,43 +130,11 @@ public class ContainerMicroReconstructor extends Container {
         this.lastMass = this.reconstructor.getMassAmount();
     }
 
-    @SideOnly(Side.CLIENT)
-    public void updateProgressBar(int par1, int par2) {
-        switch (par1) {
-            case 0:
-                this.reconstructor.cookTime = par2;
-                break;
-            case 1:
-                this.reconstructor.currentPower = par2;
-                break;
-            case 2:
-                if (par2 > 0) {
-                    this.reconstructor.setFluidAmount(par2);
-                }
-                else {
-                    this.reconstructor.clearFluid();
-                }
-                break;
-            default:
-        }
-        // if (par1 == 0)
-        // {
-        // this.deconstructor.cookTime = par2;
-        // }
-        // if(par1 == 1)
-        // {
-        // this.deconstructor.currentPower = par2;
-        // }
-    }
-
-    public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
-        return this.reconstructor.isUseableByPlayer(par1EntityPlayer);
-    }
-
     /**
      * Called when a player shift-clicks on a slot. You must override this or
      * you will crash when someone does that.
      */
+    @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
         ItemStack itemstack = null;
         Slot slot = (Slot) this.inventorySlots.get(par2);
@@ -218,5 +189,40 @@ public class ContainerMicroReconstructor extends Container {
         }
 
         return itemstack;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void updateProgressBar(int par1, int par2) {
+        switch (par1) {
+            case 0:
+                this.reconstructor.cookTime = par2;
+                break;
+            case 1:
+                this.reconstructor.currentPower = par2;
+                break;
+            case 2:
+                if (par2 > 0) {
+                    this.reconstructor.setFluidAmount(par2);
+                }
+                else {
+                    this.reconstructor.clearFluid();
+                }
+                break;
+            default:
+        }
+        // if (par1 == 0)
+        // {
+        // this.deconstructor.cookTime = par2;
+        // }
+        // if(par1 == 1)
+        // {
+        // this.deconstructor.currentPower = par2;
+        // }
+    }
+
+    @Override
+    public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
+        return this.reconstructor.isUseableByPlayer(par1EntityPlayer);
     }
 }

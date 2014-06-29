@@ -83,12 +83,14 @@ public class ManagerAssemblerRecipe {
     }
 
     private void registerRecipes() {
-        registerFemtoDecompositionRecipes();
-        registerNanoDecompositionRecipes();
-        registerMicroDecompositionRecipes();
-        registerMacroDecompositionRecipes();
+        if (ard.shouldRegister()) {
+            registerFemtoDecompositionRecipes();
+            registerNanoDecompositionRecipes();
+            registerMicroDecompositionRecipes();
+            registerMacroDecompositionRecipes();
 
-        registerFemtocraftAssemblerRecipes();
+            registerFemtocraftAssemblerRecipes();
+        }
     }
 
     private void registerFemtoDecompositionRecipes() {
@@ -1252,7 +1254,7 @@ public class ManagerAssemblerRecipe {
 
 
                 try {
-                    if((System.currentTimeMillis() - timeStart) >
+                    if ((System.currentTimeMillis() - timeStart) >
                             shapelessPermuteTimeMillis) {
                         return false;
                     }
@@ -1300,7 +1302,7 @@ public class ManagerAssemblerRecipe {
                 }
 
                 try {
-                    if((System.currentTimeMillis() - timeStart) >
+                    if ((System.currentTimeMillis() - timeStart) >
                             shapelessPermuteTimeMillis) {
                         return false;
                     }

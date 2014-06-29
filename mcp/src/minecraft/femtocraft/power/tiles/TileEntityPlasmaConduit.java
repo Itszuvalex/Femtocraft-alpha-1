@@ -46,6 +46,7 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
     private PlasmaContainer plasma;
 
     public TileEntityPlasmaConduit() {
+        super();
         plasma = new PlasmaContainer(capacity, stability, temperatureRating);
     }
 

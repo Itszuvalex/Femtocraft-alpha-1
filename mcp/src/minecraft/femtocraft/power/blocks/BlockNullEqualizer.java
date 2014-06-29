@@ -50,6 +50,7 @@ public class BlockNullEqualizer extends BlockPowerContainer {
         return false;
     }
 
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }

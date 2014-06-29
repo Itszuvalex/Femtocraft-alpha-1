@@ -49,6 +49,7 @@ public class TileEntityFemtoStellaratorFocus extends TileEntityBase
     private IFusionReactorCore core;
 
     public TileEntityFemtoStellaratorFocus() {
+        super();
         info = new MultiBlockInfo();
         coreLocation = new WorldLocation();
     }

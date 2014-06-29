@@ -30,6 +30,7 @@ public class TileEntityPlasma extends TileEntity {
     private int duration;
 
     public TileEntityPlasma() {
+        super();
         duration = 0;
     }
 

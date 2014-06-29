@@ -49,6 +49,7 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
     private MultiBlockInfo info;
 
     public TileEntityFemtoStellaratorCore() {
+        super();
         core = new FusionReactorCore(maxContainedFlows, stability, temperatureRating, ignitionProcessWindow, reactionThreshold, reactionFailureThreshold, plasmaFlowTicksToGenerateMin, plasmaFlowTicksToGenerateMax);
         info = new MultiBlockInfo();
     }

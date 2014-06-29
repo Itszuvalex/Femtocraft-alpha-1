@@ -38,6 +38,7 @@ public class BlockOrePlatinum extends BlockOre {
         setResistance(1f);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID

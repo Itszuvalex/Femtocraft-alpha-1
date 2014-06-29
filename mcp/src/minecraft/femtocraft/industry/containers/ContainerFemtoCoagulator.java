@@ -45,6 +45,7 @@ public class ContainerFemtoCoagulator extends Container {
         this.coagulator = coagulator;
         this.addSlotToContainer(new OutputSlot(coagulator, 9, 122, 18));
         Slot schematic = new Slot(coagulator, 10, 93, 54) {
+            @Override
             public boolean isItemValid(ItemStack par1ItemStack) {
                 return par1ItemStack.getItem() instanceof IAssemblerSchematic;
             }
@@ -89,6 +90,7 @@ public class ContainerFemtoCoagulator extends Container {
         }
     }
 
+    @Override
     public void addCraftingToCrafters(ICrafting par1ICrafting) {
         super.addCraftingToCrafters(par1ICrafting);
         par1ICrafting.sendProgressBarUpdate(this, 0,
@@ -102,6 +104,7 @@ public class ContainerFemtoCoagulator extends Container {
     /**
      * Looks for changes made in the container, sends them to every listener.
      */
+    @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
@@ -127,6 +130,7 @@ public class ContainerFemtoCoagulator extends Container {
         this.lastMass = this.coagulator.getMassAmount();
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int par1, int par2) {
         switch (par1) {
@@ -156,6 +160,7 @@ public class ContainerFemtoCoagulator extends Container {
         // }
     }
 
+    @Override
     public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
         return this.coagulator.isUseableByPlayer(par1EntityPlayer);
     }
@@ -164,6 +169,7 @@ public class ContainerFemtoCoagulator extends Container {
      * Called when a player shift-clicks on a slot. You must override this or
      * you will crash when someone does that.
      */
+    @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
         ItemStack itemstack = null;
         Slot slot = (Slot) this.inventorySlots.get(par2);

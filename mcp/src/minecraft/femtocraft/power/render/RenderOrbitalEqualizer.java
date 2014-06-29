@@ -33,6 +33,7 @@ public class RenderOrbitalEqualizer extends TileEntitySpecialRenderer {
     private final ModelOrbitalEqualizer model;
 
     public RenderOrbitalEqualizer() {
+        super();
         model = new ModelOrbitalEqualizer();
     }
 

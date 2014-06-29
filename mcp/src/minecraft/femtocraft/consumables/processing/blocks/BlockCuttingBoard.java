@@ -110,6 +110,7 @@ public class BlockCuttingBoard extends Block {
         return 1;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister) {
         this.blockIcon = iconRegister.registerIcon(Femtocraft.ID.toLowerCase()
@@ -129,6 +130,7 @@ public class BlockCuttingBoard extends Block {
      * neighbor changed (coordinates passed are their own) Args: x, y, z,
      * neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int x, int y, int z,
                                       int neighborBlockID) {
         if (!par1World.doesBlockHaveSolidTopSurface(x, y - 1, z)) {
@@ -142,6 +144,7 @@ public class BlockCuttingBoard extends Block {
      * Checks to see if its valid to put this block at the specified
      * coordinates. Args: world, x, y, z
      */
+    @Override
     public boolean canPlaceBlockAt(World par1World, int x, int y, int z) {
         return par1World.doesBlockHaveSolidTopSurface(x, y - 1, z);
     }
@@ -150,6 +153,7 @@ public class BlockCuttingBoard extends Block {
      * Returns the mobility information of the block, 0 = free, 1 = can't push
      * but can move over, 2 = total immobility and stop pistons
      */
+    @Override
     public int getMobilityFlag() {
         return 1;
     }
@@ -157,6 +161,7 @@ public class BlockCuttingBoard extends Block {
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World par1World, int par2, int par3,
                                     int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
                                     float par8, float par9) {
@@ -175,6 +180,7 @@ public class BlockCuttingBoard extends Block {
         }
     }
 
+    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4,
                            int par5, int par6) {
         TileEntityFurnace tileentityfurnace = (TileEntityFurnace) par1World

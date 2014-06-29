@@ -125,6 +125,7 @@ public class GuiResearchConsole extends GuiContainer {
      * Draw the foreground layer for the GuiContainer (everything in front of
      * the items)
      */
+    @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         String s = "Research Console";
         this.fontRenderer.drawString(s,

@@ -34,6 +34,7 @@ public class TileEntityFemtoCubeChassis extends TileEntityBase implements
     MultiBlockInfo info;
 
     public TileEntityFemtoCubeChassis() {
+        super();
         info = new MultiBlockInfo();
     }
 

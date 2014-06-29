@@ -72,6 +72,7 @@ public class BlockFemtoCoagulator extends TileContainer {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         super.onBlockAdded(par1World, par2, par3, par4);
         this.setDefaultDirection(par1World, par2, par3, par4);
@@ -109,6 +110,7 @@ public class BlockFemtoCoagulator extends TileContainer {
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
@@ -122,6 +124,7 @@ public class BlockFemtoCoagulator extends TileContainer {
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     /**
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
@@ -140,6 +143,7 @@ public class BlockFemtoCoagulator extends TileContainer {
      * Returns a new instance of a block's tile entity class. Called on placing
      * the block.
      */
+    @Override
     public TileEntity createNewTileEntity(World par1World) {
         return new TileEntityFemtoCoagulator();
     }
@@ -147,6 +151,7 @@ public class BlockFemtoCoagulator extends TileContainer {
     /**
      * Called when the block is placed in the world.
      */
+    @Override
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
                                 EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
         super.onBlockPlacedBy(par1World, par2, par3, par4,
@@ -183,6 +188,7 @@ public class BlockFemtoCoagulator extends TileContainer {
      * ejects contained items into the world, and notifies neighbours of an
      * update, as appropriate
      */
+    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4,
                            int par5, int par6) {
         TileEntityFemtoCoagulator tileEntity = (TileEntityFemtoCoagulator) par1World
@@ -291,6 +297,7 @@ public class BlockFemtoCoagulator extends TileContainer {
      * use the value from getComparatorInputOverride instead of the actual
      * redstone signal strength.
      */
+    @Override
     public boolean hasComparatorInputOverride() {
         return true;
     }
@@ -300,6 +307,7 @@ public class BlockFemtoCoagulator extends TileContainer {
      * used instead of the redstone signal strength when this block inputs to a
      * comparator.
      */
+    @Override
     public int getComparatorInputOverride(World par1World, int par2, int par3,
                                           int par4, int par5) {
         return Container.calcRedstoneFromInventory((IInventory) par1World

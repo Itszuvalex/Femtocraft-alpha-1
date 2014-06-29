@@ -31,6 +31,7 @@ public class ContainerFemtoCube extends Container {
     private int lastPower = 0;
 
     public ContainerFemtoCube(TileEntityFemtoCubePort controller) {
+        super();
         this.controller = controller;
     }
 

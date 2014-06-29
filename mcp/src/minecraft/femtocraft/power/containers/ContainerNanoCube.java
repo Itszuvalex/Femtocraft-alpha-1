@@ -31,6 +31,7 @@ public class ContainerNanoCube extends Container {
     private int lastPower = 0;
 
     public ContainerNanoCube(TileEntityNanoCubePort controller) {
+        super();
         this.controller = controller;
     }
 

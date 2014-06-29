@@ -72,6 +72,7 @@ public class GuiMicroFurnace extends GuiContainer {
      * Draw the foreground layer for the GuiContainer (everything in front of
      * the items)
      */
+    @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         String s = "Micro-Furnace";
         this.fontRenderer.drawString(s,
@@ -87,6 +88,7 @@ public class GuiMicroFurnace extends GuiContainer {
      * Draw the background layer for the GuiContainer (everything behind the
      * items)
      */
+    @Override
     protected void drawGuiContainerBackgroundLayer(float par1, int par2,
                                                    int par3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

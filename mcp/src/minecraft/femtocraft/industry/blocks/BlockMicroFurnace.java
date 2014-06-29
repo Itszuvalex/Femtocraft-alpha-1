@@ -110,6 +110,7 @@ public class BlockMicroFurnace extends TileContainer {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return Femtocraft.blockMicroFurnaceUnlit.blockID;
     }
@@ -117,6 +118,7 @@ public class BlockMicroFurnace extends TileContainer {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         super.onBlockAdded(par1World, par2, par3, par4);
         this.setDefaultDirection(par1World, par2, par3, par4);
@@ -154,6 +156,7 @@ public class BlockMicroFurnace extends TileContainer {
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
@@ -167,6 +170,7 @@ public class BlockMicroFurnace extends TileContainer {
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     /**
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
@@ -180,6 +184,7 @@ public class BlockMicroFurnace extends TileContainer {
                 .toLowerCase() + ":" + "MicroFurnace_front_unlit");
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     /**
      * A randomly called display update to be able to addInput particles or other items for display
@@ -226,6 +231,7 @@ public class BlockMicroFurnace extends TileContainer {
      * Returns a new instance of a block's tile entity class. Called on placing
      * the block.
      */
+    @Override
     public TileEntity createNewTileEntity(World par1World) {
         return new TileEntityBaseEntityMicroFurnace();
     }
@@ -233,6 +239,7 @@ public class BlockMicroFurnace extends TileContainer {
     /**
      * Called when the block is placed in the world.
      */
+    @Override
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
                                 EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
         super.onBlockPlacedBy(par1World, par2, par3, par4,
@@ -266,6 +273,7 @@ public class BlockMicroFurnace extends TileContainer {
      * ejects contained items into the world, and notifies neighbours of an
      * update, as appropriate
      */
+    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4,
                            int par5, int par6) {
         if (!keepFurnaceInventory) {
@@ -371,6 +379,7 @@ public class BlockMicroFurnace extends TileContainer {
      * use the value from getComparatorInputOverride instead of the actual
      * redstone signal strength.
      */
+    @Override
     public boolean hasComparatorInputOverride() {
         return true;
     }
@@ -380,12 +389,14 @@ public class BlockMicroFurnace extends TileContainer {
      * used instead of the redstone signal strength when this block inputs to a
      * comparator.
      */
+    @Override
     public int getComparatorInputOverride(World par1World, int par2, int par3,
                                           int par4, int par5) {
         return Container.calcRedstoneFromInventory((IInventory) par1World
                 .getBlockTileEntity(par2, par3, par4));
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     /**
      * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)

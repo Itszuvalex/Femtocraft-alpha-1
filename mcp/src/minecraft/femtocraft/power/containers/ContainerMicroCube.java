@@ -31,6 +31,7 @@ public class ContainerMicroCube extends Container {
     private int lastPower = 0;
 
     public ContainerMicroCube(TileEntityMicroCube cube) {
+        super();
         this.cube = cube;
     }
 

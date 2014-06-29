@@ -49,6 +49,7 @@ public class TileEntityPlasmaVent extends TileEntityPlasmaConduit {
     private int ventDuration;
 
     public TileEntityPlasmaVent() {
+        super();
         ventDirection = ForgeDirection.UNKNOWN;
         ventingUnstable = false;
         ventingTemperature = false;

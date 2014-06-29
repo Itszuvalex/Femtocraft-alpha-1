@@ -34,6 +34,7 @@ public class TileEntityFemtoCubeFrame extends TileEntityBase implements
     MultiBlockInfo info;
 
     public TileEntityFemtoCubeFrame() {
+        super();
         info = new MultiBlockInfo();
     }
 

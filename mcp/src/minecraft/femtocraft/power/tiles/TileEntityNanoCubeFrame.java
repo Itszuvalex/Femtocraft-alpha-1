@@ -34,6 +34,7 @@ public class TileEntityNanoCubeFrame extends TileEntityBase implements
     MultiBlockInfo info;
 
     public TileEntityNanoCubeFrame() {
+        super();
         info = new MultiBlockInfo();
     }
 
