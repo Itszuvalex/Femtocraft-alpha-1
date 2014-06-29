@@ -1214,7 +1214,7 @@ public class ManagerAssemblerRecipe {
                 slots[i] = i;
             }
 
-            while (!valid && (System.currentTimeMillis() - timeStart) < shapelessPermuteTimeMillis) {
+            while (!valid) {
                 Arrays.fill(input, null);
 
                 for (int i = 0; (i < slots.length) && (i < 9); ++i) {
@@ -1252,6 +1252,10 @@ public class ManagerAssemblerRecipe {
 
 
                 try {
+                    if((System.currentTimeMillis() - timeStart) <
+                            shapelessPermuteTimeMillis) {
+                        return false;
+                    }
                     addReversableRecipe(recipe);
                     valid = true;
                 } catch (AssemblerRecipeFoundException e) {
@@ -1286,8 +1290,7 @@ public class ManagerAssemblerRecipe {
                 slots[i] = i;
             }
 
-            while (!valid && (System.currentTimeMillis() - timeStart) <
-                    shapelessPermuteTimeMillis) {
+            while (!valid) {
                 Arrays.fill(input, null);
 
                 for (int i = 0; (i < slots.length) && (i < 9); ++i) {
@@ -1297,6 +1300,10 @@ public class ManagerAssemblerRecipe {
                 }
 
                 try {
+                    if((System.currentTimeMillis() - timeStart) <
+                            shapelessPermuteTimeMillis) {
+                        return false;
+                    }
                     addReversableRecipe(recipe);
                     valid = true;
                 } catch (AssemblerRecipeFoundException e) {
