@@ -172,11 +172,18 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
                 return super.charge(from, amount);
             }
 
-            IPowerBlockContainer fc = (IPowerBlockContainer) worldObj
+            TileEntityNanoCubePort fc = (TileEntityNanoCubePort) worldObj
                     .getBlockTileEntity(info.x(), info.y(), info.z());
             if (fc != null) {
-                return fc.charge(from, amount);
+                return fc.controllerCharge(from, amount);
             }
+        }
+        return 0;
+    }
+
+    private int controllerCharge(ForgeDirection from, int amount) {
+        if (isController()) {
+            return super.charge(from, amount);
         }
         return 0;
     }
@@ -193,13 +200,18 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
                 return super.consume(amount);
             }
 
-            IPowerBlockContainer fc = (IPowerBlockContainer) worldObj
+            TileEntityNanoCubePort fc = (TileEntityNanoCubePort) worldObj
                     .getBlockTileEntity(info.x(), info.y(), info.z());
             if (fc != null) {
-                return fc.consume(amount);
+                return fc.controllerConsume(amount);
             }
         }
         return false;
+    }
+
+
+    private boolean controllerConsume(int amount) {
+        return isController() && super.consume(amount);
     }
 
     /*

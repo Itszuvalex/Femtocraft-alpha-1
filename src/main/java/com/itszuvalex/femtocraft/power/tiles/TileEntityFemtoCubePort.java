@@ -159,12 +159,12 @@ public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
     }
 
     /*
-     * (non-Javadoc)
-     *
-     * @see
-     * TileEntityPowerBase#charge(net.minecraftforge.
-     * common.ForgeDirection, int)
-     */
+       * (non-Javadoc)
+       *
+       * @see
+       * TileEntityPowerBase#charge(net.minecraftforge.
+       * common.ForgeDirection, int)
+       */
     @Override
     public int charge(ForgeDirection from, int amount) {
         if (info.isValidMultiBlock() && !output) {
@@ -172,11 +172,18 @@ public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
                 return super.charge(from, amount);
             }
 
-            IPowerBlockContainer fc = (IPowerBlockContainer) worldObj
+            TileEntityFemtoCubePort fc = (TileEntityFemtoCubePort) worldObj
                     .getBlockTileEntity(info.x(), info.y(), info.z());
             if (fc != null) {
-                return fc.charge(from, amount);
+                return fc.controllerCharge(from, amount);
             }
+        }
+        return 0;
+    }
+
+    private int controllerCharge(ForgeDirection from, int amount) {
+        if (isController()) {
+            return super.charge(from, amount);
         }
         return 0;
     }
@@ -193,13 +200,18 @@ public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
                 return super.consume(amount);
             }
 
-            IPowerBlockContainer fc = (IPowerBlockContainer) worldObj
+            TileEntityFemtoCubePort fc = (TileEntityFemtoCubePort) worldObj
                     .getBlockTileEntity(info.x(), info.y(), info.z());
             if (fc != null) {
-                return fc.consume(amount);
+                return fc.controllerConsume(amount);
             }
         }
         return false;
+    }
+
+
+    private boolean controllerConsume(int amount) {
+        return isController() && super.consume(amount);
     }
 
     /*
