@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="3d Sound System v2012.01.07">
-    <CLASSES>
-      <root url="jar://$MCP_LOC$/jars/libraries/com/paulscode/soundsystem/20120107/soundsystem-20120107.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

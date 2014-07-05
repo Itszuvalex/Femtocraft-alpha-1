@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="LZMA Compression v0.0.1">
-    <CLASSES>
-      <root url="jar://$MCP_LOC$/jars/libraries/lzma/lzma/0.0.1/lzma-0.0.1.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
