@@ -17,12 +17,28 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  ******************************************************************************/
 
-package com.itszuvalex.femtocraft.industry.multiblock;
+package com.itszuvalex.femtocraft.industry.items;
 
-public class MultiBlockNanoEfflorescer {
+import com.itszuvalex.femtocraft.Femtocraft;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IconRegister;
 
-    public MultiBlockNanoEfflorescer() {
-        // TODO Auto-generated constructor stub
+public class ItemDigitalSchematic extends ItemAssemblySchematic {
+
+    public ItemDigitalSchematic(int itemID) {
+        super(itemID);
+        setMaxDamage(64);
+        setUnlocalizedName("ItemDigitalSchematic");
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IconRegister par1IconRegister) {
+        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
+                .toLowerCase() + ":" + "ItemDigitalSchematic");
+        this.keyedIcon = par1IconRegister.registerIcon(Femtocraft.ID
+                .toLowerCase() + ":" + "ItemDigitalSchematicKeyed");
     }
 
 }

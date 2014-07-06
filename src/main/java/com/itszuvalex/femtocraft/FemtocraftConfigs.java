@@ -372,6 +372,9 @@ public class FemtocraftConfigs {
     int ItemErinyesCircuitID;
     public static
     @CfgId
+    int ItemMinervaComplexID;
+    public static
+    @CfgId
     int ItemAtlasMountID;
     public static
     @CfgId
@@ -396,10 +399,13 @@ public class FemtocraftConfigs {
     int ItemPhlegethonTunnelPrimerID;
     public static
     @CfgId
-    int ItemInfinitelyResurvieALUID;
+    int ItemStellaratorPlatingID;
     public static
     @CfgId
-    int ItemInfinteVolumePolychoraID;
+    int ItemInfinitelyRecursiveALUID;
+    public static
+    @CfgId
+    int ItemInfiniteVolumePolychoraID;
     public static
     @CfgId
     int ItemMicroTechnologyID;

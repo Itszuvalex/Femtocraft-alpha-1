@@ -51,6 +51,7 @@ import java.util.Random;
  * Schematics.
  */
 public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
+    public static final int INFINITE_USE_DAMAGE = -1;
     public static Icon placeholderIcon;
     public static float infiniteUseMassMultiplier = FemtocraftConfigs.schematicInfiniteUseMultiplier;
     public Icon keyedIcon;
@@ -85,7 +86,7 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
         // whether it's extended or not, I believe.
         int uses = usesRemaining(par1ItemStack);
         String useString;
-        if (uses == -1) {
+        if (uses == INFINITE_USE_DAMAGE) {
             useString = "Infinite Uses";
         }
         else {

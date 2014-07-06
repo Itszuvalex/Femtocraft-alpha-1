@@ -31,7 +31,9 @@ import com.itszuvalex.femtocraft.core.liquids.BlockFluidMass;
 import com.itszuvalex.femtocraft.core.liquids.FluidMass;
 import com.itszuvalex.femtocraft.core.ore.*;
 import com.itszuvalex.femtocraft.industry.blocks.*;
+import com.itszuvalex.femtocraft.industry.items.ItemDigitalSchematic;
 import com.itszuvalex.femtocraft.industry.items.ItemPaperSchematic;
+import com.itszuvalex.femtocraft.industry.items.ItemQuantumSchematic;
 import com.itszuvalex.femtocraft.managers.ManagerRecipe;
 import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
 import com.itszuvalex.femtocraft.player.PropertiesNanite;
@@ -714,21 +716,21 @@ public class Femtocraft {
 
         itemBattery = new ItemBase(FemtocraftConfigs.ItemBatteryID,
                 "ItemBattery");
-        LanguageRegistry.addName(itemBattery, "ItemBattery");
+        LanguageRegistry.addName(itemBattery, "Battery");
 
         itemArticulatingArm = new ItemBase(FemtocraftConfigs.ItemArticutingArmID,
                 "ItemArticulatingArm");
-        LanguageRegistry.addName(itemArticulatingArm, "ItemArticulatingArm");
+        LanguageRegistry.addName(itemArticulatingArm, "Articulating Arm");
 
         itemDissassemblyArray = new ItemBase(FemtocraftConfigs.ItemDissassemblyArrayID, "ItemDissassemblyArray");
-        LanguageRegistry.addName(itemDissassemblyArray, "ItemDissassemblyArray");
+        LanguageRegistry.addName(itemDissassemblyArray, "Dissassembly Array");
 
         itemAssemblyArray = new ItemBase(FemtocraftConfigs.ItemAssemblyArrayID,
                 "ItemAssemblyArray");
-        LanguageRegistry.addName(itemAssemblyArray, "ItemAssemblyArray");
+        LanguageRegistry.addName(itemAssemblyArray, "Assembly Array");
 
         itemVacuumCore = new ItemBase(FemtocraftConfigs.ItemVacuumCoreID, "ItemVacuumCore");
-        LanguageRegistry.addName(itemVacuumCore, "ItemVacuumCore");
+        LanguageRegistry.addName(itemVacuumCore, "Vacuum Core");
 
         itemMicroLogicCore = new ItemBase(FemtocraftConfigs
                 .ItemMicroLogicCoreID, "ItemMicroLogicCore");
@@ -744,55 +746,110 @@ public class Femtocraft {
                 "Portable Research Computer");
 
         itemThoriumRod = new ItemBase(FemtocraftConfigs.ItemThoriumRodID, "ItemThoriumRod");
-        LanguageRegistry.addName(itemThoriumRod, "ItemThoriumRod");
+        LanguageRegistry.addName(itemThoriumRod, "Thorium Rod");
 
         itemNanochip = new ItemBase(FemtocraftConfigs.ItemNanochipID, "ItemNanochip");
-        LanguageRegistry.addName(itemNanochip, "ItemNanochip");
+        LanguageRegistry.addName(itemNanochip, "Nanochip");
 
         itemNanoCalculator = new ItemBase(FemtocraftConfigs.ItemNanoCalculatorID, "ItemNanoCalculator");
-        LanguageRegistry.addName(itemNanoCalculator, "ItemNanoCalculator");
+        LanguageRegistry.addName(itemNanoCalculator, "Nano Calculator");
         itemNanoRegulator = new ItemBase(FemtocraftConfigs.ItemNanoRegulatorID, "ItemNanoRegulator");
-        LanguageRegistry.addName(itemNanoRegulator, "ItemNanoRegulator");
+        LanguageRegistry.addName(itemNanoRegulator, "Nano Regulator");
         itemNanoSimulator = new ItemBase(FemtocraftConfigs.ItemNanoSimulatorID, "ItemNanoSimulator");
-        LanguageRegistry.addName(itemNanoSimulator, "ItemNanoSimulator");
+        LanguageRegistry.addName(itemNanoSimulator, "Nano Simulator");
 
         itemBasicAICore = new ItemBase(FemtocraftConfigs.ItemBasicAICoreID, "ItemBasicAICore");
-        LanguageRegistry.addName(itemBasicAICore, "ItemBasicAICore");
+        LanguageRegistry.addName(itemBasicAICore, "Basic AI Core");
         itemLearningCore = new ItemBase(FemtocraftConfigs.ItemLearningCoreID, "ItemLearningCore");
-        LanguageRegistry.addName(itemLearningCore, "ItemLearningCore");
+        LanguageRegistry.addName(itemLearningCore, "Learning Core");
         itemSchedulerCore = new ItemBase(FemtocraftConfigs.ItemSchedulerCoreID, "ItemSchedulerCore");
-        LanguageRegistry.addName(itemSchedulerCore, "ItemSchedulerCore");
+        LanguageRegistry.addName(itemSchedulerCore, "Scheduler Core");
         itemManagerCore = new ItemBase(FemtocraftConfigs.ItemManagerCoreID, "ItemManagerCore");
-        LanguageRegistry.addName(itemManagerCore, "ItemManagerCore");
+        LanguageRegistry.addName(itemManagerCore, "Manager Core");
 
         itemFluidicConductor = new ItemBase(FemtocraftConfigs.ItemFluidicConductorID, "ItemFluidicConductor");
-        LanguageRegistry.addName(itemFluidicConductor, "ItemFluidicConductor");
+        LanguageRegistry.addName(itemFluidicConductor, "Fluidic Conductor");
         itemNanoCoil = new ItemBase(FemtocraftConfigs.ItemNanoCoilID, "ItemNanoCoil");
-        LanguageRegistry.addName(itemNanoCoil, "ItemNanoCoil");
+        LanguageRegistry.addName(itemNanoCoil, "Nano Coil");
         itemNanoPlating = new ItemBase(FemtocraftConfigs.ItemNanoPlatingID, "ItemNanoPlating");
-        LanguageRegistry.addName(itemNanoPlating, "ItemNanoPlating");
+        LanguageRegistry.addName(itemNanoPlating, "Nano Plating");
 
         itemTemporalResonator = new ItemBase(FemtocraftConfigs.ItemTemporalResonatorID, "ItemTemporalResonator");
-        LanguageRegistry.addName(itemTemporalResonator, "ItemTemporalResonator");
+        LanguageRegistry.addName(itemTemporalResonator, "Temporal Resonator");
         itemDimensionalMonopole = new ItemBase(FemtocraftConfigs.ItemDimensionalMonopoleID, "ItemDimensionalMonopole");
-        LanguageRegistry.addName(itemDimensionalMonopole, "ItemDimensionalMonopole");
+        LanguageRegistry.addName(itemDimensionalMonopole,
+                "Dimensional Monopole");
 
         itemSelfFulfillingOracle = new ItemBase(FemtocraftConfigs.ItemSelfFulfillingOracleID, "ItemSelfFulfillingOracle");
-        LanguageRegistry.addName(itemSelfFulfillingOracle, "ItemSelfFulfillingOracle");
+        LanguageRegistry.addName(itemSelfFulfillingOracle,
+                "Self Fulfilling Oracle");
         itemCrossDimensionalCommunicator = new ItemBase(FemtocraftConfigs.ItemCrossDimensionalCommunicatorID, "ItemCrossDimensionalCommunicator");
-        LanguageRegistry.addName(itemCrossDimensionalCommunicator, "ItemCrossDimensionalCommunicator");
+        LanguageRegistry.addName(itemCrossDimensionalCommunicator,
+                "Cross Dimensional Communicator");
         itemInfallibleEstimator = new ItemBase(FemtocraftConfigs.ItemInfallibleEstimatorID, "ItemInfallibleEstimator");
-        LanguageRegistry.addName(itemInfallibleEstimator, "ItemInfallibleEstimator");
+        LanguageRegistry.addName(itemInfallibleEstimator,
+                "Infallible Estimator");
         itemPanLocationalComputer = new ItemBase(FemtocraftConfigs.ItemPanLocationalComputerID, "ItemPanLocationalComputer");
-        LanguageRegistry.addName(itemPanLocationalComputer, "ItemPanLocationalComputer");
+        LanguageRegistry.addName(itemPanLocationalComputer,
+                "Pan Locational Computer");
         itemPandoraCube = new ItemBase(FemtocraftConfigs.ItemPandoraCubeID, "ItemPandoraCube");
-        LanguageRegistry.addName(itemPandoraCube, "ItemPandoraCube");
+        LanguageRegistry.addName(itemPandoraCube, "Pandora Cube");
 
         itemFissionReactorPlating = new ItemBase(FemtocraftConfigs.ItemFissionReactorPlatingID, "ItemFissionReactorPlating");
-        LanguageRegistry.addName(itemFissionReactorPlating, "ItemFissionReactorPlating");
+        LanguageRegistry.addName(itemFissionReactorPlating,
+                "Fission Reactor Plating");
 
-        itemDigitalSchematic = new ItemBase(FemtocraftConfigs.ItemDigitalSchematicID, "ItemDigitalSchematic");
-        LanguageRegistry.addName(itemDigitalSchematic, "ItemDigitalSchematic");
+        itemDigitalSchematic = new ItemDigitalSchematic(FemtocraftConfigs
+                .ItemDigitalSchematicID);
+        LanguageRegistry.addName(itemDigitalSchematic, "Digital Schematic");
+
+        itemMinosGate = new ItemBase(FemtocraftConfigs.ItemMinosGateID, "ItemMinosGate");
+        LanguageRegistry.addName(itemMinosGate, "Minos Gate");
+        itemCharosGate = new ItemBase(FemtocraftConfigs.ItemCharosGateID, "ItemCharosGate");
+        LanguageRegistry.addName(itemCharosGate, "Charos Gate");
+        itemCerberusGate = new ItemBase(FemtocraftConfigs.ItemCerberusGateID, "ItemCerberusGate");
+        LanguageRegistry.addName(itemCerberusGate, "Cerberus Gate");
+
+        itemErinyesCircuit = new ItemBase(FemtocraftConfigs.ItemErinyesCircuitID, "ItemErinyesCircuit");
+        LanguageRegistry.addName(itemErinyesCircuit, "Erinyes Circuit");
+        itemMinervaComplex = new ItemBase(FemtocraftConfigs.ItemMinervaComplexID, "ItemMinervaComplex");
+        LanguageRegistry.addName(itemMinervaComplex, "Minerva Complex");
+
+        itemAtlasMount = new ItemBase(FemtocraftConfigs.ItemAtlasMountID, "ItemAtlasMount");
+        LanguageRegistry.addName(itemAtlasMount, "Atlas Mount");
+        itemHermesBus = new ItemBase(FemtocraftConfigs.ItemHermesBusID, "ItemHermesBus");
+        LanguageRegistry.addName(itemHermesBus, "Hermes Bus");
+        itemHerculesDrive = new ItemBase(FemtocraftConfigs.ItemHerculesDriveID, "ItemHerculesDrive");
+        LanguageRegistry.addName(itemHerculesDrive, "Hercules Drive");
+        itemOrpheusProcessor = new ItemBase(FemtocraftConfigs.ItemOrpheusProcessorID, "ItemOrpheusProcessor");
+        LanguageRegistry.addName(itemOrpheusProcessor, "Orpheus Processor");
+
+        itemFemtoPlating = new ItemBase(FemtocraftConfigs.ItemFemtoPlatingID, "ItemFemtoPlating");
+        LanguageRegistry.addName(itemFemtoPlating, "Femto Plating");
+
+        itemStyxValve = new ItemBase(FemtocraftConfigs.ItemStyxValveID, "ItemStyxValve");
+        LanguageRegistry.addName(itemStyxValve, "Styx Valve");
+        itemFemtoCoil = new ItemBase(FemtocraftConfigs.ItemFemtoCoilID, "ItemFemtoCoil");
+        LanguageRegistry.addName(itemFemtoCoil, "Femto Coil");
+
+        itemPhlegethonTunnelPrimer = new ItemBase(FemtocraftConfigs.ItemPhlegethonTunnelPrimerID, "ItemPhlegethonTunnelPrimer");
+        LanguageRegistry.addName(itemPhlegethonTunnelPrimer,
+                "Phlegethon Tunnel Primer");
+
+        itemStellaratorPlating = new ItemBase(FemtocraftConfigs.ItemStellaratorPlatingID, "ItemStellaratorPlating");
+        LanguageRegistry.addName(itemStellaratorPlating, "Stellarator Plating");
+
+        itemInfinitelyRecursiveALU = new ItemBase(FemtocraftConfigs.ItemInfinitelyRecursiveALUID, "ItemInfinitelyRecursiveALU");
+        LanguageRegistry.addName(itemInfinitelyRecursiveALU,
+                "Infinitely Recursive ALU");
+        itemInfiniteVolumePolychora = new ItemBase(FemtocraftConfigs.ItemInfiniteVolumePolychoraID, "ItemInfiniteVolumePolychora");
+        LanguageRegistry.addName(itemInfiniteVolumePolychora,
+                "Infinite Volume Polychora");
+
+        itemQuantumSchematic = new ItemQuantumSchematic(FemtocraftConfigs
+                .ItemQuantumSchematicID);
+        LanguageRegistry.addName(itemQuantumSchematic, "Quantum Schematic");
+
 
         itemMicroTechnology = new ItemMicroTechnology(
                 FemtocraftConfigs.ItemMicroTechnologyID);

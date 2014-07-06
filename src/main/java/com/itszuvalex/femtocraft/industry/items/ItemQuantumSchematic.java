@@ -17,12 +17,28 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  ******************************************************************************/
 
-package com.itszuvalex.femtocraft.industry.multiblock;
+package com.itszuvalex.femtocraft.industry.items;
 
-public class MultiBlockFemtoQuantumUnraveler {
+import com.itszuvalex.femtocraft.Femtocraft;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IconRegister;
 
-    public MultiBlockFemtoQuantumUnraveler() {
-        // TODO Auto-generated constructor stub
+public class ItemQuantumSchematic extends ItemAssemblySchematic {
+
+    public ItemQuantumSchematic(int itemID) {
+        super(itemID);
+        setMaxDamage(ItemAssemblySchematic.INFINITE_USE_DAMAGE);
+        setUnlocalizedName("ItemQuantumSchematic");
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IconRegister par1IconRegister) {
+        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
+                .toLowerCase() + ":" + "ItemQuantumSchematic");
+        this.keyedIcon = par1IconRegister.registerIcon(Femtocraft.ID
+                .toLowerCase() + ":" + "ItemQuantumSchematicKeyed");
     }
 
 }
