@@ -871,6 +871,15 @@ public class ManagerAssemblerRecipe {
     }
 
     public void registerDefaultRecipes() {
+
+        if(!ard.shouldRegister())
+        {
+            Femtocraft.logger.log(Level.INFO, "Database already exists.  " +
+                    "Skipping item registration.");
+            return;
+        }
+
+
         // Does not use Ore Dictionary values - this is why things like crafting
         // tables don't work.
 

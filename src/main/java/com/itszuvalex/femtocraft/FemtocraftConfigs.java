@@ -35,383 +35,344 @@ public class FemtocraftConfigs {
     // blocks
     public static
     @CfgId(block = true)
-    int oreTitaniumID = 350;
+    int oreTitaniumID;
     public static
     @CfgId(block = true)
-    int orePlatinumID = 351;
+    int orePlatinumID;
     public static
     @CfgId(block = true)
-    int oreThoriumID = 352;
+    int oreThoriumID;
     public static
     @CfgId(block = true)
-    int oreFareniteID = 353;
+    int oreFareniteID;
     public static
     @CfgId(block = true)
-    int oreMaleniteID = 354;
-
-    // example use
-    // public static @CfgId int itemId = 12000;
-    // public static @CfgId(block=true) int blockId = 350;
-    // public static @CfgBool boolean booleanConfig = false;
+    int oreMaleniteID;
     public static
     @CfgId(block = true)
-    int microStoneID = 360;
+    int microStoneID;
     public static
     @CfgId(block = true)
-    int nanoStoneID = 361;
+    int nanoStoneID;
     public static
     @CfgId(block = true)
-    int femtoStoneID = 362;
+    int femtoStoneID;
     public static
     @CfgId(block = true)
-    int unidentifiedAlloyID = 363;
+    int unidentifiedAlloyID;
     public static
     @CfgId(block = true)
-    int FemtocraftResearchComputerID = 365;
+    int FemtocraftResearchComputerID;
     public static
     @CfgId(block = true)
-    int FemtocraftResearchConsoleID = 366;
-    // TODO: moved microcable to something else - need to fill id 370
+    int FemtocraftResearchConsoleID;
     public static
     @CfgId(block = true)
-    int testID = 370;
+    int testID;
     public static
     @CfgId(block = true)
-    int FemtopowerGeneratorTestID = 371;
+    int FemtopowerGeneratorTestID;
     public static
     @CfgId(block = true)
-    int FemtopowerConsumerTestBlockID = 372;
+    int FemtopowerConsumerTestBlockID;
     public static
     @CfgId(block = true)
-    int FemtocraftMicroFurnaceUnlitID = 373;
+    int FemtocraftMicroFurnaceUnlitID;
     public static
     @CfgId(block = true)
-    int FemtocraftMicroFurnaceLitID = 374;
+    int FemtocraftMicroFurnaceLitID;
     public static
     @CfgId(block = true)
-    int FemtocraftMicroDeconstructorID = 375;
+    int FemtocraftMicroDeconstructorID;
     public static
     @CfgId(block = true)
-    int FemtocraftMicroReconstructorID = 376;
+    int FemtocraftMicroReconstructorID;
     public static
     @CfgId(block = true)
-    int FemtocraftMicroEncoderID = 377;
+    int FemtocraftMicroEncoderID;
     public static
     @CfgId(block = true)
-    int FemtocraftMicroCrystallizerPlatformID = 378;
+    int FemtocraftMicroCrystallizerPlatformID;
     public static
     @CfgId(block = true)
-    int FemtocraftMicroCrystallizerShieldingID = 379;
+    int FemtocraftMicroCrystallizerShieldingID;
     public static
     @CfgId(block = true)
-    int FemtocraftNanoInnervatorUnlitID = 380;
+    int FemtocraftNanoInnervatorUnlitID;
     public static
     @CfgId(block = true)
-    int FemtocraftNanoInnervatorLitID = 381;
+    int FemtocraftNanoInnervatorLitID;
     public static
     @CfgId(block = true)
-    int FemtocraftNanoDismantlerID = 382;
+    int FemtocraftNanoDismantlerID;
     public static
     @CfgId(block = true)
-    int FemtocraftNanoFabricatorID = 383;
+    int FemtocraftNanoFabricatorID;
     public static
     @CfgId(block = true)
-    int FemtocraftNanoEnmesherID = 384;
+    int FemtocraftNanoEnmesherID;
     public static
     @CfgId(block = true)
-    int FemtocraftNanoHorologeID = 385;
+    int FemtocraftNanoHorologeID;
     public static
     @CfgId(block = true)
-    int FemtocraftNanoEfflorescerPlatformID = 386;
+    int FemtocraftNanoEfflorescerPlatformID;
     public static
     @CfgId(block = true)
-    int FemtocraftNanoEfflorescerShieldingID = 387;
+    int FemtocraftNanoEfflorescerShieldingID;
     public static
     @CfgId(block = true)
-    int FemtocraftFemtoImpulserUnlitID = 388;
+    int FemtocraftFemtoImpulserUnlitID;
     public static
     @CfgId(block = true)
-    int FemtocraftFemtoImpulserLitID = 389;
+    int FemtocraftFemtoImpulserLitID;
     public static
     @CfgId(block = true)
-    int FemtocraftFemtoRepurposerID = 390;
+    int FemtocraftFemtoRepurposerID;
     public static
     @CfgId(block = true)
-    int FemtocraftFemtoCoagulatorID = 391;
+    int FemtocraftFemtoCoagulatorID;
     public static
     @CfgId(block = true)
-    int FemtocraftFemtoEntanglerID = 392;
+    int FemtocraftFemtoEntanglerID;
     public static
     @CfgId(block = true)
-    int FemtocraftFemtoChronoshifterID = 393;
+    int FemtocraftFemtoChronoshifterID;
     public static
     @CfgId(block = true)
-    int FemtocraftFemtoQuantumUnravelerPlatformID = 394;
+    int FemtocraftFemtoQuantumUnravelerPlatformID;
     public static
     @CfgId(block = true)
-    int FemtocraftFemtoQuantumUnravelerShieldingID = 395;
+    int FemtocraftFemtoQuantumUnravelerShieldingID;
     public static
     @CfgId(block = true)
-    int FemtocraftVacuumTubeID = 396;
+    int FemtocraftVacuumTubeID;
     public static
     @CfgId(block = true)
-    int FemtocraftSuctionPipeID = 397;
+    int FemtocraftSuctionPipeID;
     public static
     @CfgId(block = true)
-    int FemtopowerMicroCubeID = 400;
+    int FemtopowerMicroCubeID;
     public static
     @CfgId(block = true)
-    int FemtopowerMicroChargingBaseID = 401;
+    int FemtopowerMicroChargingBaseID;
     public static
     @CfgId(block = true)
-    int FemtopowerMicroChargingCoilID = 402;
+    int FemtopowerMicroChargingCoilID;
     public static
     @CfgId(block = true)
-    int FemtopowerMicroChargingCapacitorID = 403;
+    int FemtopowerMicroChargingCapacitorID;
     public static
     @CfgId(block = true)
-    int FemtopowerNanoCubeFrameID = 405;
+    int FemtopowerNanoCubeFrameID;
     public static
     @CfgId(block = true)
-    int FemtopowerNanoCubePortID = 406;
+    int FemtopowerNanoCubePortID;
     public static
     @CfgId(block = true)
-    int FemtopowerNanoFissionReactorHousingID = 407;
+    int FemtopowerNanoFissionReactorHousingID;
     public static
     @CfgId(block = true)
-    int FemtopowerNanoFissionReactorCoreID = 408;
+    int FemtopowerNanoFissionReactorCoreID;
     public static
     @CfgId(block = true)
-    int FemtopowerFemtoCubeFrameID = 409;
+    int FemtopowerFemtoCubeFrameID;
     public static
     @CfgId(block = true)
-    int FemtopowerFemtoCubeChassisID = 410;
+    int FemtopowerFemtoCubeChassisID;
     public static
     @CfgId(block = true)
-    int FemtopowerFemtoCubePortID = 411;
+    int FemtopowerFemtoCubePortID;
     public static
     @CfgId(block = true)
-    int FemtopowerFemtoStelleratorCoreID = 412;
+    int FemtopowerFemtoStelleratorCoreID;
     public static
     @CfgId(block = true)
-    int FemtopowerFemtoStelleratorFocusID = 413;
+    int FemtopowerFemtoStelleratorFocusID;
     public static
     @CfgId(block = true)
-    int FemtopowerFemtoStellaratorHousingID = 414;
+    int FemtopowerFemtoStellaratorHousingID;
     public static
     @CfgId(block = true)
-    int FemtopowerFemtoStellaratorOpticalMaserID = 415;
+    int FemtopowerFemtoStellaratorOpticalMaserID;
     public static
     @CfgId(block = true)
-    int FemtocraftMassBlockID = 450;
+    int FemtocraftMassBlockID;
     public static
     @CfgId(block = true)
-    int BlockPlasmaID = 451;
+    int BlockPlasmaID;
     public static
     @CfgId(block = true)
-    int microCableID = 500;
+    int microCableID;
     public static
     @CfgId(block = true)
-    int nanoCableID = 501;
+    int nanoCableID;
     public static
     @CfgId(block = true)
-    int femtoCableID = 502;
+    int femtoCableID;
     public static
     @CfgId(block = true)
-    int orbitalEqualizerID = 505;
+    int orbitalEqualizerID;
     public static
     @CfgId(block = true)
-    int nullEqualizerID = 506;
-    // items
+    int nullEqualizerID;    // items
     public static
     @CfgId
-    int ingotTitaniumID = 12000;
+    int ingotTitaniumID;
     public static
     @CfgId
-    int ingotPlatinumID = 12001;
+    int ingotPlatinumID;
     public static
     @CfgId
-    int ingotThoriumID = 12002;
+    int ingotThoriumID;
     public static
     @CfgId
-    int ingotFareniteID = 12003;
+    int ingotFareniteID;
     public static
     @CfgId
-    int ingotMaleniteID = 12004;
+    int ingotMaleniteID;
     public static
     @CfgId
-    int ingotTemperedTitaniumID = 12005;
+    int ingotTemperedTitaniumID;
     public static
     @CfgId
-    int deconstructedIronID = 12010;
+    int conductivePowderID;
     public static
     @CfgId
-    int deconstructedGoldID = 12011;
+    int boardID;
     public static
     @CfgId
-    int deconstructedTitaniumID = 12012;
+    int primedBoardID;
     public static
     @CfgId
-    int deconstructedThoriumID = 12013;
+    int dopedBoardID;
     public static
     @CfgId
-    int deconstructedPlatinumID = 12014;
+    int microCircuitID;
     public static
     @CfgId
-    int conductivePowderID = 12020;
+    int spoolID;
     public static
     @CfgId
-    int boardID = 12029;
+    int spoolGoldID;
     public static
     @CfgId
-    int primedBoardID = 12030;
+    int spoolPlatinumID;
     public static
     @CfgId
-    int dopedBoardID = 12031;
+    int itemMicroLogicCoreID;
     public static
     @CfgId
-    int microCircuitID = 12032;
+    int itemHeatingCoilID;
     public static
     @CfgId
-    int spoolID = 12033;
+    int itemMicroCoilID;
     public static
     @CfgId
-    int spoolGoldID = 12034;
+    int itemPortableResearchComputerID;
     public static
     @CfgId
-    int spoolPlatinumID = 12035;
+    int itemMicroTechnologyID;
     public static
     @CfgId
-    int itemMicroLogicCoreID = 12036;
+    int itemNanoTechnologyID;
     public static
     @CfgId
-    int itemHeatingCoilID = 12037;
+    int itemFemtoTechnologyID;
     public static
     @CfgId
-    int itemMicroCoilID = 12038;
+    int paperSchematicID;
     public static
     @CfgId
-    int itemPortableResearchComputerID = 12039;
+    int digitalSchematicID;
     public static
     @CfgId
-    int itemMicroTechnologyID = 12040;
+    int quantumSchematicID;
     public static
     @CfgId
-    int itemNanoTechnologyID = 12041;
+    int microInterfaceDeviceID;
     public static
     @CfgId
-    int itemFemtoTechnologyID = 12042;
+    int nanoInterfaceDeviceID;
     public static
     @CfgId
-    int itemAdvancedTechnologyID = 12043;
-    public static
-    @CfgId
-    int paperSchematicID = 12044;
-    public static
-    @CfgId
-    int metalSchematicID = 12045;
-    public static
-    @CfgId
-    int advMetalSchematicID = 12046;
-    public static
-    @CfgId
-    int microInterfaceDeviceID = 12047;
-    public static
-    @CfgId
-    int nanoInterfaceDeviceID = 12048;
-    public static
-    @CfgId
-    int femtoInterfaceDeviceID = 12049;
-    // Decomp items 12046 - 12069
+    int femtoInterfaceDeviceID;    // Decomp items 12046 - 12069
     // Femto
     public static
     @CfgId
-    int CubitID = 12050;
+    int CubitID;
     public static
     @CfgId
-    int RectangulonID = 12051;
+    int RectangulonID;
     public static
     @CfgId
-    int PlaneoidID = 12052;
-    // Nano
+    int PlaneoidID;    // Nano
     public static
     @CfgId
-    int CrystalliteID = 12053;
+    int CrystalliteID;
     public static
     @CfgId
-    int MineraliteID = 12054;
+    int MineraliteID;
     public static
     @CfgId
-    int MetalliteID = 12055;
+    int MetalliteID;
     public static
     @CfgId
-    int FauniteID = 12056;
+    int FauniteID;
     public static
     @CfgId
-    int ElectriteID = 12057;
+    int ElectriteID;
     public static
     @CfgId
-    int FloriteID = 12058;
-    // Micro
+    int FloriteID;    // Micro
     public static
     @CfgId
-    int MicroCrystalID = 12059;
+    int MicroCrystalID;
     public static
     @CfgId
-    int ProteinChainID = 12060;
+    int ProteinChainID;
     public static
     @CfgId
-    int NerveClusterID = 12061;
+    int NerveClusterID;
     public static
     @CfgId
-    int ConductiveAlloyID = 12062;
+    int ConductiveAlloyID;
     public static
     @CfgId
-    int MetalCompositeID = 12063;
+    int MetalCompositeID;
     public static
     @CfgId
-    int FibrousStrandID = 12064;
+    int FibrousStrandID;
     public static
     @CfgId
-    int MineralLatticeID = 12065;
+    int MineralLatticeID;
     public static
     @CfgId
-    int FungalSporesID = 12066;
+    int FungalSporesID;
     public static
     @CfgId
-    int IonicChunkID = 12067;
+    int IonicChunkID;
     public static
     @CfgId
-    int ReplicatingMaterialID = 12068;
+    int ReplicatingMaterialID;
     public static
     @CfgId
-    int SpinyFilamentID = 12069;
+    int SpinyFilamentID;
     public static
     @CfgId
-    int HardenedBulbID = 12070;
+    int HardenedBulbID;
     public static
     @CfgId
-    int MorphicChannelID = 12071;
+    int MorphicChannelID;
     public static
     @CfgId
-    int SynthesizedFiberID = 12072;
+    int SynthesizedFiberID;
     public static
     @CfgId
-    int OrganometallicPlateID = 12073;
+    int OrganometallicPlateID;
     public static
     @CfgId
-    int microPlatingID = 12100;
-    // Produce 12070 - 12150
-    public static
-    @CfgId
-    int tomatoSeedID = 12200;
-    public static
-    @CfgId
-    int tomatoID = 12001;
-    // Cooking 12150 - 12300 items and 370-375
-    public static
-    @CfgId(block = true)
-    int cuttingBoardID = 450;
+    int microPlatingID;
     // bool
     public static
     @CfgBool
@@ -968,6 +929,10 @@ public class FemtocraftConfigs {
     boolean registerPlatinumIngotInOreDictionary = true;
     public static float schematicInfiniteUseMultiplier = 200.f;
 
+
+    private static int baseItemID = 12000;
+    private static int baseBlockID = 350;
+
     public static void load(Configuration config) {
         try {
 
@@ -978,12 +943,16 @@ public class FemtocraftConfigs {
             for (Field field : fields) {
                 CfgId annotation = field.getAnnotation(CfgId.class);
                 if (annotation != null) {
-                    int id = field.getInt(null);
+                    int id;
                     if (annotation.block()) {
+                        id = baseBlockID;
                         id = config.getBlock(field.getName(), id).getInt();
+                        if (id == baseBlockID) baseBlockID++;
                     }
                     else {
+                        id = baseItemID;
                         id = config.getItem(field.getName(), id).getInt();
+                        if (id == baseItemID) baseItemID++;
                     }
                     field.setInt(null, id);
                 }

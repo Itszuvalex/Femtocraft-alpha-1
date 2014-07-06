@@ -345,3 +345,127 @@ java.io.FileNotFoundException: femtocraft:textures/blocks/blockOrbitalEqualizer.
 2014-07-05 12:26:45 [CLIENT] [INFO] [CHAT] 0/2000
 2014-07-05 12:26:45 [CLIENT] [INFO] [CHAT] 585/2000
 2014-07-05 12:28:59 [CLIENT] [INFO] Stopping!
+2014-07-05 14:56:49 [CLIENT] [INFO] Setting user: Player1234
+2014-07-05 14:56:50 [CLIENT] [INFO] LWJGL Version: 2.9.0
+2014-07-05 14:56:53 [CLIENT] [INFO] Reloading ResourceManager: Default
+2014-07-05 14:56:59 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-05 14:57:01 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-05 14:57:01 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/itemHeatingElement.png
+2014-07-05 14:57:01 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemMicrochip.png
+2014-07-05 14:57:01 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_415_BlockStellaratorOpticalMaser.png
+2014-07-05 14:57:01 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_506_blockNullEqualizer.png
+2014-07-05 14:57:01 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_451_null.png
+2014-07-05 14:57:01 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4082_BlockConsumer.png
+2014-07-05 14:57:01 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_505_blockOrbitalEqualizer.png
+2014-07-05 14:57:01 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4083_BlockGenerator.png
+2014-07-05 14:57:02 [CLIENT] [SEVERE] Realms: Server not available!
+2014-07-05 14:57:57 [CLIENT] [INFO] [CHAT] 0/2000
+2014-07-05 14:57:57 [CLIENT] [INFO] [CHAT] 843/2000
+2014-07-05 14:57:57 [CLIENT] [INFO] [CHAT] 0/2000
+2014-07-05 14:57:57 [CLIENT] [INFO] [CHAT] 776/2000
+2014-07-05 14:57:58 [CLIENT] [INFO] [CHAT] 0/2000
+2014-07-05 14:57:58 [CLIENT] [INFO] [CHAT] 784/2000
+2014-07-05 15:02:07 [CLIENT] [INFO] Stopping!
+2014-07-05 20:37:15 [CLIENT] [INFO] Setting user: Player1234
+2014-07-05 20:37:16 [CLIENT] [INFO] LWJGL Version: 2.9.0
+2014-07-05 20:37:18 [CLIENT] [INFO] Reloading ResourceManager: Default
+2014-07-05 20:37:24 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-05 20:37:26 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-05 20:37:26 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/itemHeatingElement.png
+2014-07-05 20:37:26 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemMicrochip.png
+2014-07-05 20:37:26 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4036_blockNullEqualizer.png
+2014-07-05 20:37:26 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4042_BlockStellaratorOpticalMaser.png
+2014-07-05 20:37:26 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4082_BlockConsumer.png
+2014-07-05 20:37:26 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_409_blockOrbitalEqualizer.png
+2014-07-05 20:37:26 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4040_null.png
+2014-07-05 20:37:26 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4083_BlockGenerator.png
+2014-07-05 20:37:27 [CLIENT] [SEVERE] Realms: Server not available!
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] Basic Circuits successfully researched.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] New technology Machining discovered.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] New technology Potentiality discovered.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] Basic Chemistry successfully researched.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] New technology Potentiality discovered.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] Potentiality Transformation successfully researched.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] Star Matter Recollection successfully researched.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] Metallurgy successfully researched.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] New technology Machining discovered.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] Machining successfully researched.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] New technology Mechanical Precision discovered.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] Potentiality successfully researched.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] Corruption Stabilization successfully researched.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] VacuumTube Hub successfully researched.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] New technology Discriminating Vacuum Tube discovered.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] Perfect Scheduling successfully researched.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] Applied Particle Physics successfully researched.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] Advanced Programming successfully researched.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] Geothermal Harnessing successfully researched.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] Macroscopic Structures successfully researched.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] Mechanical Precision successfully researched.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] Industrial Storage successfully researched.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] Singularity Calculator successfully researched.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] Discriminating Vacuum Tube successfully researched.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] Reality Overclocker successfully researched.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] New technology Spacetime Exploitation discovered.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] Spacetime Exploitation successfully researched.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] Artificial Materials successfully researched.
+2014-07-05 20:37:39 [CLIENT] [INFO] [CHAT] Element Manufacturing successfully researched.
+2014-07-05 20:38:00 [CLIENT] [INFO] Stopping!
+2014-07-05 20:38:27 [CLIENT] [INFO] Setting user: Player1234
+2014-07-05 20:38:28 [CLIENT] [INFO] LWJGL Version: 2.9.0
+2014-07-05 20:38:29 [CLIENT] [INFO] Reloading ResourceManager: Default
+2014-07-05 20:38:34 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-05 20:38:37 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-05 20:38:37 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/itemHeatingElement.png
+2014-07-05 20:38:37 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemMicrochip.png
+2014-07-05 20:38:37 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4042_BlockStellaratorOpticalMaser.png
+2014-07-05 20:38:37 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4082_BlockConsumer.png
+2014-07-05 20:38:37 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4040_null.png
+2014-07-05 20:38:37 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4035_blockNullEqualizer.png
+2014-07-05 20:38:37 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4083_BlockGenerator.png
+2014-07-05 20:38:37 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4036_blockOrbitalEqualizer.png
+2014-07-05 20:38:38 [CLIENT] [SEVERE] Realms: Server not available!
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] Basic Circuits successfully researched.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] New technology Machining discovered.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] New technology Potentiality discovered.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] Basic Chemistry successfully researched.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] New technology Potentiality discovered.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] Potentiality Transformation successfully researched.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] Star Matter Recollection successfully researched.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] Metallurgy successfully researched.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] New technology Machining discovered.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] Machining successfully researched.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] New technology Mechanical Precision discovered.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] Potentiality successfully researched.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] Corruption Stabilization successfully researched.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] VacuumTube Hub successfully researched.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] New technology Discriminating Vacuum Tube discovered.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] Perfect Scheduling successfully researched.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] Applied Particle Physics successfully researched.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] Advanced Programming successfully researched.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] Geothermal Harnessing successfully researched.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] Macroscopic Structures successfully researched.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] Mechanical Precision successfully researched.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] Industrial Storage successfully researched.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] Singularity Calculator successfully researched.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] Discriminating Vacuum Tube successfully researched.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] Reality Overclocker successfully researched.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] New technology Spacetime Exploitation discovered.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] Spacetime Exploitation successfully researched.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] Artificial Materials successfully researched.
+2014-07-05 20:38:52 [CLIENT] [INFO] [CHAT] Element Manufacturing successfully researched.
+2014-07-05 20:39:06 [CLIENT] [INFO] Stopping!
+2014-07-05 20:39:23 [CLIENT] [INFO] Setting user: Player1234
+2014-07-05 20:39:24 [CLIENT] [INFO] LWJGL Version: 2.9.0
+2014-07-05 20:39:26 [CLIENT] [INFO] Reloading ResourceManager: Default
+2014-07-05 20:39:31 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-05 20:39:33 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-05 20:39:33 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/itemHeatingElement.png
+2014-07-05 20:39:33 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemMicrochip.png
+2014-07-05 20:39:33 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4042_BlockStellaratorOpticalMaser.png
+2014-07-05 20:39:33 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4082_BlockConsumer.png
+2014-07-05 20:39:33 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4040_null.png
+2014-07-05 20:39:33 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4035_blockNullEqualizer.png
+2014-07-05 20:39:33 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4083_BlockGenerator.png
+2014-07-05 20:39:33 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4036_blockOrbitalEqualizer.png
+2014-07-05 20:39:35 [CLIENT] [SEVERE] Realms: Server not available!
+2014-07-05 20:39:57 [CLIENT] [INFO] Stopping!

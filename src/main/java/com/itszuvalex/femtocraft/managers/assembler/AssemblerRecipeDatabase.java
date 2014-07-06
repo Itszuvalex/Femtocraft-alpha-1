@@ -72,7 +72,7 @@ public class AssemblerRecipeDatabase {
     private void InitializeDatabase() throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
         refreshConnection();
-        createRecipeTable();
+        shouldRegister = createRecipeTable();
     }
 
     private void refreshConnection() throws SQLException {
@@ -105,10 +105,6 @@ public class AssemblerRecipeDatabase {
             s.close();
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
-            shouldRegister = false;
-            Femtocraft.logger.log(Level.SEVERE, "SQLite recipe table creation" +
-                    " failed");
             return false;
         }
     }

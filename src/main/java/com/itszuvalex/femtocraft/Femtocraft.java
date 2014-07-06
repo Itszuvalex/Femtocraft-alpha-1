@@ -142,12 +142,25 @@ public class Femtocraft {
     public static Block blockMicroChargingBase;
     public static Block blockMicroChargingCoil;
     public static Block blockMicroChargingCapacitor;
+    public static Block blockMicroEngine;
     public static Block blockOrbitalEqualizer;
     public static Block blockNullEqualizer;
+    public static Block blockGeothermalChargingBase;
+    public static Block blockGeothermalChargingCoil;
+    public static Block blockFissionReactorCore;
+    public static Block blockFissionReactorHousing;
+    public static Block blockDecontaminationChamber;
+    public static Block blockPhlegethonTunnelCore;
+    public static Block blockPhlegethonTunnelFrame;
+    public static Block blockSisyphusStabilizer;
     public static Block blockStellaratorCore;
     public static Block blockStellaratorFocus;
     public static Block blockStellaratorOpticalMaser;
     public static Block blockStellaratorHousing;
+    public static Block blockPlasmaConduit;
+    public static Block blockPlasmaVent;
+    public static Block blockPlasmaTurbine;
+    public static Block blockPlasmaCondenser;
 
     // cables
     public static Block blockMicroCable;
@@ -216,7 +229,7 @@ public class Femtocraft {
     public static Item itemSchedulerCore;
     public static Item itemManagerCore;
 
-    public static Item itemFluidConductor;
+    public static Item itemFluidicConductor;
     public static Item itemNanoCoil;
 
     public static Item itemTemporalResonator;
@@ -235,6 +248,32 @@ public class Femtocraft {
     public static Item itemInterfaceDeviceNano;
 
     //femto
+
+    public static Item itemMinosGate;
+    public static Item itemCharosGate;
+    public static Item itemCerberusGate;
+
+    public static Item itemErinyesCircuit;
+    public static Item itemMinervaComplex;
+
+    public static Item itemAtlasMount;
+    public static Item itemHermesBus;
+    public static Item itemHerculesDrive;
+    public static Item itemOrpheusProcessor;
+
+    public static Item itemFemtoPlating;
+
+    public static Item itemStyxValve;
+    public static Item itemFemtoCoil;
+
+    public static Item itemPhlegethonTunnelPrimer;
+
+    public static Item itemStellaratorPlating;
+
+    public static Item itemInfinitelyRecursiveALU;
+    public static Item itemInfiniteVolumePolychora;
+
+    public static Item itemQuantumSchematic;
 
     public static Item itemInterfaceDeviceFemto;
 
