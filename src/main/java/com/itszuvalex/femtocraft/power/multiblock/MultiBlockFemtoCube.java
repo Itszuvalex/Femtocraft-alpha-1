@@ -155,17 +155,17 @@ public class MultiBlockFemtoCube implements IMultiBlock {
                 }
 
                 if (i == -2 || j == -2 || i == 2 || j == 2) {
-                    if (world.getBlockId(x + i, y + yoffset, z + j) != FemtocraftConfigs.FemtopowerFemtoCubeFrameID) {
+                    if (world.getBlockId(x + i, y + yoffset, z + j) != FemtocraftConfigs.BlockFemtoCubeFrameID) {
                         return false;
                     }
                 }
                 else if (i == 0 && j == 0) {
-                    if (world.getBlockId(x + i, y + yoffset, z + j) != FemtocraftConfigs.FemtopowerFemtoCubePortID) {
+                    if (world.getBlockId(x + i, y + yoffset, z + j) != FemtocraftConfigs.BlockFemtoCubePortID) {
                         return false;
                     }
                 }
                 else {
-                    if (world.getBlockId(x + i, y + yoffset, z + j) != FemtocraftConfigs.FemtopowerFemtoCubeChassisID) {
+                    if (world.getBlockId(x + i, y + yoffset, z + j) != FemtocraftConfigs.BlockFemtoCubeChassisID) {
                         return false;
                     }
                 }
@@ -202,12 +202,12 @@ public class MultiBlockFemtoCube implements IMultiBlock {
 
                 if (((i == -2 || i == 2) && (j > -2 && j < 2))
                         || (j == -2 || j == 2) && (i > -2 && i < 2)) {
-                    if (world.getBlockId(x + i, y + yoffset, z + j) != FemtocraftConfigs.FemtopowerFemtoCubeChassisID) {
+                    if (world.getBlockId(x + i, y + yoffset, z + j) != FemtocraftConfigs.BlockFemtoCubeChassisID) {
                         return false;
                     }
                 }
                 else {
-                    if (world.getBlockId(x + i, y + yoffset, z + j) != FemtocraftConfigs.FemtopowerFemtoCubeFrameID) {
+                    if (world.getBlockId(x + i, y + yoffset, z + j) != FemtocraftConfigs.BlockFemtoCubeFrameID) {
                         return false;
                     }
                 }
@@ -245,19 +245,19 @@ public class MultiBlockFemtoCube implements IMultiBlock {
                 if (((i == -2 || i == 2) && (j > -2 && j < 2))
                         || (j == -2 || j == 2) && (i > -2 && i < 2)) {
                     if ((i == 0) || (j == 0)) {
-                        if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.FemtopowerFemtoCubePortID) {
+                        if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.BlockFemtoCubePortID) {
                             return false;
                         }
                     }
                     else {
-                        if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.FemtopowerFemtoCubeChassisID) {
+                        if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.BlockFemtoCubeChassisID) {
                             return false;
                         }
                     }
                 }
                 else {
 
-                    if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.FemtopowerFemtoCubeFrameID) {
+                    if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.BlockFemtoCubeFrameID) {
                         return false;
                     }
                 }

@@ -132,12 +132,12 @@ public class MultiBlockNanoCube implements IMultiBlock {
                 }
 
                 if (i == 0 && j == 0) {
-                    if (world.getBlockId(x + i, y, z + j) != FemtocraftConfigs.FemtopowerNanoCubePortID) {
+                    if (world.getBlockId(x + i, y, z + j) != FemtocraftConfigs.BlockNanoCubePortID) {
                         return false;
                     }
                 }
                 else {
-                    if (world.getBlockId(x + i, y, z + j) != FemtocraftConfigs.FemtopowerNanoCubeFrameID) {
+                    if (world.getBlockId(x + i, y, z + j) != FemtocraftConfigs.BlockNanoCubeFrameID) {
                         return false;
                     }
                 }
@@ -159,7 +159,7 @@ public class MultiBlockNanoCube implements IMultiBlock {
 
     private boolean checkMidLevel(World world, int x, int y, int z,
                                   boolean strict) {
-        if (world.getBlockId(x, y + 1, z) != FemtocraftConfigs.FemtopowerMicroCubeID) {
+        if (world.getBlockId(x, y + 1, z) != FemtocraftConfigs.BlockMicroCubeID) {
             return false;
         }
 
@@ -173,12 +173,12 @@ public class MultiBlockNanoCube implements IMultiBlock {
                     continue;
                 }
                 if (i == 0 || j == 0) {
-                    if (world.getBlockId(x + i, y + 1, z + j) != FemtocraftConfigs.FemtopowerNanoCubePortID) {
+                    if (world.getBlockId(x + i, y + 1, z + j) != FemtocraftConfigs.BlockNanoCubePortID) {
                         return false;
                     }
                 }
                 else {
-                    if (world.getBlockId(x + i, y + 1, z + j) != FemtocraftConfigs.FemtopowerNanoCubeFrameID) {
+                    if (world.getBlockId(x + i, y + 1, z + j) != FemtocraftConfigs.BlockNanoCubeFrameID) {
                         return false;
                     }
                 }
@@ -208,12 +208,12 @@ public class MultiBlockNanoCube implements IMultiBlock {
                 }
 
                 if (i == 0 && j == 0) {
-                    if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.FemtopowerNanoCubePortID) {
+                    if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.BlockNanoCubePortID) {
                         return false;
                     }
                 }
                 else {
-                    if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.FemtopowerNanoCubeFrameID) {
+                    if (world.getBlockId(x + i, y + 2, z + j) != FemtocraftConfigs.BlockNanoCubeFrameID) {
                         return false;
                     }
                 }
