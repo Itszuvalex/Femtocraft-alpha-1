@@ -201,6 +201,7 @@ public class Femtocraft {
     public static Item itemBattery;
 
     public static Item itemMicroLogicCore;
+    public static Item itemKineticPulverizer;
     public static Item itemHeatingElement;
     public static Item itemArticulatingArm;
     public static Item itemDissassemblyArray;
@@ -589,10 +590,44 @@ public class Femtocraft {
         LanguageRegistry.addName(blockMicroChargingCapacitor,
                 "Electrostatic Charging Capacitor");
 
+        blockMicroEngine = new BlockMicroEngine(FemtocraftConfigs
+                .BlockMicroEngineID);
+        GameRegistry.registerBlock(blockMicroEngine,
+                "BlockMicroEngine");
+        LanguageRegistry.addName(blockMicroEngine, "Micro Engine");
+
         blockOrbitalEqualizer = new BlockOrbitalEqualizer(
                 FemtocraftConfigs.BlockOrbitalEqualizerID);
         GameRegistry.registerBlock(blockOrbitalEqualizer, "BlockOrbitalEqualizer");
         LanguageRegistry.addName(blockOrbitalEqualizer, "Orbital Equalizer");
+
+        blockGeothermalChargingBase = new BlockGeothermalChargingBase
+                (FemtocraftConfigs.BlockGeothermalChargingBaseID);
+        GameRegistry.registerBlock(blockGeothermalChargingBase,
+                "BlockGeothermalChargingBase");
+        LanguageRegistry.addName(blockGeothermalChargingBase,
+                "Geothermal Charging Base");
+
+        blockGeothermalChargingCoil = new BlockGeothermalChargingCoil
+                (FemtocraftConfigs.BlockGeothermalChargingCoilID);
+        GameRegistry.registerBlock(blockGeothermalChargingCoil,
+                "BlockGeothermalChargingCoil");
+        LanguageRegistry.addName(blockGeothermalChargingCoil,
+                "Geothermal Charging Coil");
+
+        blockFissionReactorCore = new BlockNanoFissionReactorCore
+                (FemtocraftConfigs.BlockFissionReactorCoreID);
+        GameRegistry.registerBlock(blockFissionReactorCore,
+                "BlockFissionReactorCore");
+        LanguageRegistry.addName(blockFissionReactorCore,
+                "Fission Reactor Core");
+
+        blockFissionReactorHousing = new BlockNanoFissionReactorHousing
+                (FemtocraftConfigs.BlockFissionReactorHousingID);
+        GameRegistry.registerBlock(blockFissionReactorHousing,
+                "BlockFissionReactorHousing");
+        LanguageRegistry.addName(blockFissionReactorHousing,
+                "Fission Reactor Housing");
 
         blockNullEqualizer = new BlockNullEqualizer(
                 FemtocraftConfigs.BlockNullEqualizerID);
@@ -621,6 +656,22 @@ public class Femtocraft {
         GameRegistry.registerBlock(blockStellaratorHousing,
                 "BlockStellaratorHousing");
         LanguageRegistry.addName(blockStellaratorHousing, "Stellarator Housing");
+
+        blockPlasmaVent = new BlockPlasmaVent(FemtocraftConfigs
+                .BlockPlasmaVentID);
+        GameRegistry.registerBlock(blockPlasmaVent, "BlockPlasmaVent");
+        LanguageRegistry.addName(blockPlasmaVent, "Plasma Vent");
+
+        blockPlasmaTurbine = new BlockPlasmaTurbine(FemtocraftConfigs
+                .BlockPlasmaTurbineID);
+        GameRegistry.registerBlock(blockPlasmaTurbine, "BlockPlasmaTurbine");
+        LanguageRegistry.addName(blockOreThorium, "Plasma Turbine");
+
+        blockPlasmaCondenser = new BlockPlasmaCondenser(FemtocraftConfigs
+                .BlockPlasmaCondenserID);
+        GameRegistry.registerBlock(blockPlasmaCondenser,
+                "BlockPlasmaCondenser");
+        LanguageRegistry.addName(blockPlasmaCondenser, "Plasma Condenser");
 
         // Liquids
         fluidMass = new FluidMass();
@@ -735,6 +786,10 @@ public class Femtocraft {
         itemMicroLogicCore = new ItemBase(FemtocraftConfigs
                 .ItemMicroLogicCoreID, "ItemMicroLogicCore");
         LanguageRegistry.addName(itemMicroLogicCore, "Micro Logic Core");
+
+        itemKineticPulverizer = new ItemBase(FemtocraftConfigs
+                .ItemKineticPulverizerID, "ItemKineticPulverizer");
+        LanguageRegistry.addName(itemKineticPulverizer, "Kinetic Pulverizer");
 
         itemHeatingElement = new ItemBase(FemtocraftConfigs
                 .ItemHeatingCoilID, "itemHeatingElement");

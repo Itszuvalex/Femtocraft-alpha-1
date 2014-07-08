@@ -10,17 +10,17 @@ import net.minecraft.client.renderer.texture.IconRegister;
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/6/14.
  */
-public class BlockMicroEngine extends Block {
-    public BlockMicroEngine(int id) {
+public class BlockPlasmaCondenser extends Block {
+    public BlockPlasmaCondenser(int id) {
         super(id, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
-        setUnlocalizedName("BlockBlockMicroEngine");
+        setUnlocalizedName("BlockBlockPlasmaCondenser");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                + ":" + "BlockBlockMicroEngine");
+                + ":" + "BlockBlockPlasmaCondenser");
     }
 }

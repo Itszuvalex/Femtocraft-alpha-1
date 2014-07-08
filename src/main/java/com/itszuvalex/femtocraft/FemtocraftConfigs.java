@@ -276,6 +276,9 @@ public class FemtocraftConfigs {
     int ItemMicroLogicCoreID;
     public static
     @CfgId
+    int ItemKineticPulverizerID;
+    public static
+    @CfgId
     int ItemArticutingArmID;
     public static
     @CfgId
@@ -1150,6 +1153,7 @@ public class FemtocraftConfigs {
                             "When AssemblerSchematics have infinite uses, this number will be used instead of the # of uses the schematic would be good for, when calculating the fluidMass required to key the schematic to a recipe.")
                     .getDouble(200.f);
             ItemAssemblySchematic.infiniteUseMassMultiplier = schematicInfiniteUseMultiplier;
+
 
         } catch (Exception e) {
             // failed to load configs log

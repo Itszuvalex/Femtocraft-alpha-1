@@ -102,7 +102,8 @@ public class ManagerResearch {
     public static ResearchTechnology technologyPowerOfNothing = new ResearchTechnology(
             "Power of Nothing", "\"Poof!\" It's nothing!", EnumTechLevel.MICRO,
             new ArrayList<ResearchTechnology>(Arrays
-                    .asList(technologyMechanicalPrecision)), null,
+                    .asList(technologyMechanicalPrecision)),
+            new ItemStack(Femtocraft.itemVacuumCore),
             false, new ArrayList<ItemStack>()
     );
     @Technology
@@ -135,13 +136,15 @@ public class ManagerResearch {
             "Nano Circuits", "", EnumTechLevel.NANO,
             new ArrayList<ResearchTechnology>(Arrays.asList(
                     technologyMechanicalPrecision, technologyBasicCircuits)),
-            null, true, new ArrayList<ItemStack>()
+            new ItemStack(Femtocraft.itemNanochip), true,
+            new ArrayList<ItemStack>()
     );
     @Technology
     public static ResearchTechnology technologyAdvancedProgramming = new ResearchTechnology(
             "Advanced Programming", "", EnumTechLevel.NANO,
             new ArrayList<ResearchTechnology>(Arrays
-                    .asList(technologyNanoCircuits)), null, false,
+                    .asList(technologyNanoCircuits)),
+            new ItemStack(Femtocraft.itemBasicAICore), false,
             new ArrayList<ItemStack>()
     );
 
@@ -150,14 +153,16 @@ public class ManagerResearch {
     public static ResearchTechnology technologyWorkloadScheduling = new ResearchTechnology(
             "Workload Scheduling", "", EnumTechLevel.NANO,
             new ArrayList<ResearchTechnology>(Arrays
-                    .asList(technologyAdvancedProgramming)), null,
+                    .asList(technologyAdvancedProgramming)),
+            new ItemStack(Femtocraft.itemSchedulerCore),
             false, new ArrayList<ItemStack>()
     );
     @Technology
     public static ResearchTechnology technologyPatternRecognition = new ResearchTechnology(
             "Pattern Recognition", "", EnumTechLevel.NANO,
             new ArrayList<ResearchTechnology>(Arrays
-                    .asList(technologyAdvancedProgramming)), null,
+                    .asList(technologyAdvancedProgramming)),
+            new ItemStack(Femtocraft.itemLearningCore),
             false, new ArrayList<ItemStack>()
     );
     @Technology
@@ -172,7 +177,8 @@ public class ManagerResearch {
     public static ResearchTechnology technologyResourceOptimization = new ResearchTechnology(
             "ResourceOptimization", "", EnumTechLevel.NANO,
             new ArrayList<ResearchTechnology>(Arrays
-                    .asList(technologyAdvancedProgramming)), null,
+                    .asList(technologyAdvancedProgramming)),
+            new ItemStack(Femtocraft.itemManagerCore),
             false, new ArrayList<ItemStack>()
     );
     @Technology
@@ -212,7 +218,7 @@ public class ManagerResearch {
             EnumTechLevel.MICRO, new ArrayList<ResearchTechnology>(
             Arrays.asList(technologyMechanicalPrecision,
                     technologyPotentialityHarnessing)
-    ), null,
+    ), new ItemStack(Femtocraft.blockMicroEngine),
             false, new ArrayList<ItemStack>()
     );
     @Technology
@@ -220,7 +226,8 @@ public class ManagerResearch {
             "Potential Harvesting", "Headhunters Unite!", EnumTechLevel.MICRO,
             new ArrayList<ResearchTechnology>(Arrays.asList(
                     technologyPotentialityStorage,
-                    technologyPotentialityHarnessing)), null, false,
+                    technologyPotentialityHarnessing)),
+            new ItemStack(Femtocraft.blockMicroChargingCapacitor), false,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -232,19 +239,21 @@ public class ManagerResearch {
             Femtocraft.blockMicroDeconstructor), false,
             new ArrayList<ItemStack>()
     );
-    @Technology
-    public static ResearchTechnology technologyOreRefining = new ResearchTechnology(
-            "Ore Refining", "Build your potential!", EnumTechLevel.MICRO,
-            new ArrayList<ResearchTechnology>(Arrays.asList(
-                    technologyMetallurgy, technologyMolecularManipulation)),
-            null, false, new ArrayList<ItemStack>()
-    );
+    //    @Technology
+//    public static ResearchTechnology technologyOreRefining = new ResearchTechnology(
+//            "Ore Refining", "Build your potential!", EnumTechLevel.MICRO,
+//            new ArrayList<ResearchTechnology>(Arrays.asList(
+//                    technologyMetallurgy, technologyMolecularManipulation)),
+//            null, false, new ArrayList<ItemStack>()
+//    );
     @Technology
     public static ResearchTechnology technologyAdvancedChemistry = new ResearchTechnology(
             "Advanced Chemistry", "", EnumTechLevel.NANO,
             new ArrayList<ResearchTechnology>(Arrays.asList(
-                    technologyPotentialityGeneration, technologyBasicChemistry,
-                    technologyOreRefining)), null, true,
+                    technologyPotentialityGeneration,
+                    technologyBasicChemistry/*,
+                    technologyOreRefining*/)), new ItemStack(Femtocraft
+            .itemCrystallite), true,
             new ArrayList<ItemStack>(), GuiTechnologyAdvancedChemistry.class,
             null
     );
@@ -255,7 +264,7 @@ public class ManagerResearch {
             EnumTechLevel.NANO,
             new ArrayList<ResearchTechnology>(Arrays.asList(
                     technologyPotentialHarvesting, technologyAdvancedChemistry)),
-            null, false, new ArrayList<ItemStack>()
+            new ItemStack(Femtocraft.itemThoriumRod), false, new ArrayList<ItemStack>()
     );
 
     // NANO
@@ -264,14 +273,16 @@ public class ManagerResearch {
             "Artificial Materials", "Make what you need.", EnumTechLevel.NANO,
             new ArrayList<ResearchTechnology>(Arrays.asList(
                     technologyNanoCircuits, technologyAdvancedChemistry)),
-            null, false, new ArrayList<ItemStack>()
+            new ItemStack(Femtocraft.itemNanoPlating), false,
+            new ArrayList<ItemStack>()
     );
     @Technology
     public static ResearchTechnology technologyFareniteStabilization = new ResearchTechnology(
             "Farenite Stabilization", "", EnumTechLevel.NANO,
             new ArrayList<ResearchTechnology>(Arrays.asList(
                     technologyNanoCircuits, technologyAdvancedChemistry,
-                    technologyArtificialMaterials)), null, false,
+                    technologyArtificialMaterials)), new ItemStack(Femtocraft
+            .itemNanoCoil), false,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -281,7 +292,7 @@ public class ManagerResearch {
             Arrays.asList(technologyFareniteStabilization,
                     technologyAdvancedChemistry,
                     technologyPotentialityHarnessing)
-    ), null,
+    ), new ItemStack(Femtocraft.blockGeothermalChargingBase),
             false, new ArrayList<ItemStack>()
     );
     @Technology
@@ -290,7 +301,8 @@ public class ManagerResearch {
             new ArrayList<ResearchTechnology>(Arrays.asList(
                     technologyThoriumFissibility,
                     technologyResourceOptimization,
-                    technologyGeothermalHarnessing)), null, false,
+                    technologyGeothermalHarnessing)),
+            new ItemStack(Femtocraft.blockFissionReactorCore), false,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -299,7 +311,7 @@ public class ManagerResearch {
             EnumTechLevel.FEMTO, new ArrayList<ResearchTechnology>(
             Arrays.asList(technologyHarnessedNuclearDecay,
                     technologyAdvancedChemistry)
-    ), null, true,
+    ), new ItemStack(Femtocraft.itemCubit), true,
             new ArrayList<ItemStack>(),
             GuiTechnologyAppliedParticlePhysics.class, null
     );
@@ -338,27 +350,28 @@ public class ManagerResearch {
             Femtocraft.blockNanoDismantler), false,
             new ArrayList<ItemStack>()
     );
-    @Technology
-    public static ResearchTechnology technologyMatterExtension = new ResearchTechnology(
-            "Matter Extension", "", EnumTechLevel.NANO,
-            new ArrayList<ResearchTechnology>(Arrays
-                    .asList(technologyAtomicManipulation)), null,
-            false, new ArrayList<ItemStack>()
-    );
-    @Technology
-    public static ResearchTechnology technologyEndothermicReactionReversal = new ResearchTechnology(
-            "Endothermic Reaction Reversal",
-            "Undo those pesky combustion reactions.", EnumTechLevel.NANO,
-            new ArrayList<ResearchTechnology>(Arrays
-                    .asList(technologyAtomicManipulation)), null,
-            false, new ArrayList<ItemStack>()
-    );
+    //    @Technology
+//    public static ResearchTechnology technologyMatterExtension = new ResearchTechnology(
+//            "Matter Extension", "", EnumTechLevel.NANO,
+//            new ArrayList<ResearchTechnology>(Arrays
+//                    .asList(technologyAtomicManipulation)), null,
+//            false, new ArrayList<ItemStack>()
+//    );
+//    @Technology
+//    public static ResearchTechnology technologyEndothermicReactionReversal = new ResearchTechnology(
+//            "Endothermic Reaction Reversal",
+//            "Undo those pesky combustion reactions.", EnumTechLevel.NANO,
+//            new ArrayList<ResearchTechnology>(Arrays
+//                    .asList(technologyAtomicManipulation)), null,
+//            false, new ArrayList<ItemStack>()
+//    );
     @Technology
     public static ResearchTechnology technologyDigitizedWorkloads = new ResearchTechnology(
             "Digitized Workloads", "", EnumTechLevel.NANO,
             new ArrayList<ResearchTechnology>(Arrays.asList(
                     technologyAtomicManipulation,
-                    technologyResourceOptimization)), null, false,
+                    technologyResourceOptimization)),
+            new ItemStack(Femtocraft.itemDigitalSchematic), false,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -366,7 +379,8 @@ public class ManagerResearch {
             "Spacetime Manipulation",
             "The question is: When did you ACTUALLY finish researching this?",
             EnumTechLevel.NANO, new ArrayList<ResearchTechnology>(
-            Arrays.asList(technologyAdvancedChemistry)), null,
+            Arrays.asList(technologyAdvancedChemistry)),
+            new ItemStack(Femtocraft.itemDimensionalMonopole),
             true, new ArrayList<ItemStack>()
     );
     @Technology
@@ -382,7 +396,8 @@ public class ManagerResearch {
     public static ResearchTechnology technologyLocalityEntangler = new ResearchTechnology(
             "Locality Entangler", "", EnumTechLevel.DIMENSIONAL,
             new ArrayList<ResearchTechnology>(Arrays
-                    .asList(technologyDimensionalBraiding)), null,
+                    .asList(technologyDimensionalBraiding)),
+            new ItemStack(Femtocraft.itemInfallibleEstimator),
             false, new ArrayList<ItemStack>()
     );
     @Technology
@@ -393,13 +408,13 @@ public class ManagerResearch {
             new ItemStack(Femtocraft.itemIngotMalenite), true,
             new ArrayList<ItemStack>()
     );
-    @Technology
-    public static ResearchTechnology technologyStarMatterRecollection = new ResearchTechnology(
-            "Star Matter Recollection", "Recollecting what has been spread.",
-            EnumTechLevel.FEMTO, new ArrayList<ResearchTechnology>(
-            Arrays.asList(technologyDimensionalTransformation)), null,
-            false, new ArrayList<ItemStack>()
-    );
+    //    @Technology
+//    public static ResearchTechnology technologyStarMatterRecollection = new ResearchTechnology(
+//            "Star Matter Recollection", "Recollecting what has been spread.",
+//            EnumTechLevel.FEMTO, new ArrayList<ResearchTechnology>(
+//            Arrays.asList(technologyDimensionalTransformation)), null,
+//            false, new ArrayList<ItemStack>()
+//    );
     @Technology
     public static ResearchTechnology technologyTemporalPipelining = new ResearchTechnology(
             "Temporal Pipelining",
@@ -414,7 +429,8 @@ public class ManagerResearch {
     public static ResearchTechnology technologyRealityOverclocker = new ResearchTechnology(
             "Reality Overclocker", "", EnumTechLevel.TEMPORAL,
             new ArrayList<ResearchTechnology>(Arrays
-                    .asList(technologyTemporalPipelining)), null,
+                    .asList(technologyTemporalPipelining)),
+            new ItemStack(Femtocraft.itemInfallibleEstimator),
             false, new ArrayList<ItemStack>()
     );
     @Technology
@@ -423,7 +439,7 @@ public class ManagerResearch {
             EnumTechLevel.FEMTO, new ArrayList<ResearchTechnology>(
             Arrays.asList(technologyLocalityEntangler,
                     technologyRealityOverclocker)
-    ), null, true,
+    ), new ItemStack(Femtocraft.itemPandoraCube), true,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -432,14 +448,16 @@ public class ManagerResearch {
             new ArrayList<ResearchTechnology>(Arrays.asList(
                     technologyDimensionalTransformation,
                     technologyNanoCircuits, technologyDimensionalBraiding,
-                    technologyTemporalPipelining)), null, true,
+                    technologyTemporalPipelining)), new ItemStack(Femtocraft
+            .itemCharosGate), true,
             new ArrayList<ItemStack>()
     );
     @Technology
     public static ResearchTechnology technologyElementManufacturing = new ResearchTechnology(
             "Element Manufacturing", "Create circles, spheres, and ovals!",
             EnumTechLevel.FEMTO, new ArrayList<ResearchTechnology>(
-            Arrays.asList(technologyQuantumInteractivity)), null,
+            Arrays.asList(technologyQuantumInteractivity)),
+            new ItemStack(Femtocraft.itemFemtoPlating),
             false, new ArrayList<ItemStack>()
     );
     @Technology
@@ -455,7 +473,8 @@ public class ManagerResearch {
     public static ResearchTechnology technologyMultiDimensionalIndustry = new ResearchTechnology(
             "Multi-Dimensional Industry", "Share the load.",
             EnumTechLevel.DIMENSIONAL, new ArrayList<ResearchTechnology>(
-            Arrays.asList(technologyDimensionalSuperpositions)), null,
+            Arrays.asList(technologyDimensionalSuperpositions)),
+            new ItemStack(Femtocraft.itemInfiniteVolumePolychora),
             false, new ArrayList<ItemStack>()
     );
 
@@ -474,7 +493,8 @@ public class ManagerResearch {
             "Causality Singularity",
             "If you researched this, you never would have researched this.",
             EnumTechLevel.TEMPORAL, new ArrayList<ResearchTechnology>(
-            Arrays.asList(technologyTemporalThreading)), null,
+            Arrays.asList(technologyTemporalThreading)),
+            new ItemStack(Femtocraft.itemInfinitelyRecursiveALU),
             false, new ArrayList<ItemStack>()
     );
     @Technology
@@ -482,7 +502,8 @@ public class ManagerResearch {
             "Demonic Particulates", "", EnumTechLevel.FEMTO,
             new ArrayList<ResearchTechnology>(Arrays.asList(
                     technologyDimensionalTransformation,
-                    technologyElementManufacturing)), null, false,
+                    technologyElementManufacturing)),
+            new ItemStack(Femtocraft.itemFemtoCoil), false,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -533,7 +554,7 @@ public class ManagerResearch {
             EnumTechLevel.FEMTO,
             new ArrayList<ResearchTechnology>(Arrays.asList(
                     technologyParticleManipulation, technologyNBodySimulations)),
-            null, false, new ArrayList<ItemStack>()
+            new ItemStack(Femtocraft.itemQuantumSchematic), false, new ArrayList<ItemStack>()
     );
     @Technology
     public static ResearchTechnology technologySingularityCalculator = new ResearchTechnology(
@@ -565,23 +586,26 @@ public class ManagerResearch {
     public static ResearchTechnology technologyStellarMimicry = new ResearchTechnology(
             "Stellar Mimicry", "Make your own pet star!", EnumTechLevel.FEMTO,
             new ArrayList<ResearchTechnology>(Arrays.asList(
-                    technologyStarMatterRecollection,
+//                    technologyStarMatterRecollection,
                     technologyDemonicParticulates,
-                    technologySingularityCalculator)), null, false,
+                    technologySingularityCalculator)),
+            new ItemStack(Femtocraft.blockStellaratorCore), false,
             new ArrayList<ItemStack>()
     );
     @Technology
     public static ResearchTechnology technologyEnergyConversion = new ResearchTechnology(
             "Energy Conversion", "Plasma to Energy", EnumTechLevel.FEMTO,
             new ArrayList<ResearchTechnology>(Arrays
-                    .asList(technologyStellarMimicry)), null,
+                    .asList(technologyStellarMimicry)),
+            new ItemStack(Femtocraft.blockPlasmaTurbine),
             false, new ArrayList<ItemStack>()
     );
     @Technology
     public static ResearchTechnology technologyMatterConversion = new ResearchTechnology(
             "Matter Conversion", "Plasma to Mass", EnumTechLevel.FEMTO,
             new ArrayList<ResearchTechnology>(Arrays
-                    .asList(technologyStellarMimicry)), null,
+                    .asList(technologyStellarMimicry)),
+            new ItemStack(Femtocraft.blockPlasmaCondenser),
             false, new ArrayList<ItemStack>()
     );
     @Technology
@@ -594,14 +618,14 @@ public class ManagerResearch {
     ), new ItemStack(
             Item.netherStar), true, new ArrayList<ItemStack>()
     );
-    @Technology
-    public static ResearchTechnology technologyParticleDestruction = new ResearchTechnology(
-            "Particle Destruction", "", EnumTechLevel.FEMTO,
-            new ArrayList<ResearchTechnology>(Arrays.asList(
-                    technologyParticleManipulation,
-                    technologySingularityCalculator)), null, false,
-            new ArrayList<ItemStack>()
-    );
+    //    @Technology
+//    public static ResearchTechnology technologyParticleDestruction = new ResearchTechnology(
+//            "Particle Destruction", "", EnumTechLevel.FEMTO,
+//            new ArrayList<ResearchTechnology>(Arrays.asList(
+//                    technologyParticleManipulation,
+//                    technologySingularityCalculator)), null, false,
+//            new ArrayList<ItemStack>()
+//    );
     @Technology
     public static ResearchTechnology technologyMacroscopicStructure = new ResearchTechnology(
             "Macroscopic Structures", "The patterns everything take.",

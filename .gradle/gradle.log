@@ -11,11 +11,8 @@
 :mergeJars SKIPPED
 :applyBinPatches SKIPPED
 :downloadMcpTools UP-TO-DATE
-:genSrgs
-:deobfBinJar
-Applying SpecialSource...
-Applying Exceptor...
-Injecting source info...
+:genSrgs UP-TO-DATE
+:deobfBinJar UP-TO-DATE
 :compileApiJava UP-TO-DATE
 :processApiResources UP-TO-DATE
 :apiClasses UP-TO-DATE
@@ -39,4 +36,4 @@ Note: Recompile with -Xlint:unchecked for details.
 
 BUILD SUCCESSFUL
 
-Total time: 20.598 secs
+Total time: 20.041 secs
