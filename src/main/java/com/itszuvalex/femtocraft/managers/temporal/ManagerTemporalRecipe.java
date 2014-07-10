@@ -34,6 +34,11 @@ public class ManagerTemporalRecipe {
 
     public ManagerTemporalRecipe() {
         recipes = new TreeMap<TemporalKey, TemporalRecipe>();
+        addRecipes();
+    }
+
+    private void addRecipes() {
+
     }
 
     public TemporalRecipe getRecipe(ItemStack input, ItemStack[] configurators) {

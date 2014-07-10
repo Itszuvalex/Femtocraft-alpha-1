@@ -34,6 +34,11 @@ public class ManagerDimensionalRecipe {
 
     public ManagerDimensionalRecipe() {
         recipes = new TreeMap<DimensionalKey, DimensionalRecipe>();
+        addRecipes();
+    }
+
+    private void addRecipes() {
+
     }
 
     public DimensionalRecipe getRecipe(ItemStack input, ItemStack[] configurators) {
