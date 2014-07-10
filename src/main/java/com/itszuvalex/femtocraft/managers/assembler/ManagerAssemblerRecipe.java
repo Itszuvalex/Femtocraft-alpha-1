@@ -1488,7 +1488,7 @@ public class ManagerAssemblerRecipe {
                     EnumTechLevel.MICRO, null));
 
             addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Item.netherQuartz), null, null, new ItemStack(Femtocraft.itemIngotFarenite), null, null, new ItemStack(Item.netherQuartz), null, null}, 0,
-                    new ItemStack(Femtocraft.itemNanoRegulator, 16),
+                    new ItemStack(Femtocraft.itemFluidicConductor, 16),
                     EnumTechLevel.MICRO, null));
 
             addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemIngotTemperedTitanium), new ItemStack(Femtocraft.itemNanochip), new ItemStack(Femtocraft.itemIngotTemperedTitanium), new ItemStack(Femtocraft.itemNanoRegulator), new ItemStack(Femtocraft.itemMicroPlating), new ItemStack(Femtocraft.itemNanoRegulator), new ItemStack(Femtocraft.itemIngotTemperedTitanium), new ItemStack(Femtocraft.itemNanochip), new ItemStack(Femtocraft.itemIngotTemperedTitanium)}, 0,
@@ -1540,7 +1540,7 @@ public class ManagerAssemblerRecipe {
                     EnumTechLevel.MICRO, null));
 
             addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemNanoPlating), new ItemStack(Femtocraft.itemNanoCoil), new ItemStack(Femtocraft.itemNanoPlating), new ItemStack(Femtocraft.itemIngotFarenite),
-                    new ItemStack(Femtocraft.itemNanochip), new ItemStack(Femtocraft.itemNanoPlating), new ItemStack(Femtocraft.itemIngotFarenite), new ItemStack(Femtocraft.itemNanoCoil), new ItemStack(Femtocraft.itemNanoPlating)}, 0,
+                    new ItemStack(Femtocraft.itemNanochip), new ItemStack(Femtocraft.itemIngotFarenite), new ItemStack(Femtocraft.itemNanoPlating), new ItemStack(Femtocraft.itemNanoCoil), new ItemStack(Femtocraft.itemNanoPlating)}, 0,
                     new ItemStack(Femtocraft.blockGeothermalChargingCoil),
                     EnumTechLevel.MICRO, null));
 
