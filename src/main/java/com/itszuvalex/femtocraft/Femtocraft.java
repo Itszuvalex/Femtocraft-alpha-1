@@ -629,6 +629,13 @@ public class Femtocraft {
         LanguageRegistry.addName(blockFissionReactorHousing,
                 "Fission Reactor Housing");
 
+        blockDecontaminationChamber = new BlockDecontaminationChamber
+                (FemtocraftConfigs.BlockDecontaminationChamberID);
+        GameRegistry.registerBlock(blockDecontaminationChamber,
+                "BlockDecontaminationChamber");
+        LanguageRegistry.addName(blockDecontaminationChamber,
+                "Decontamination Chamber");
+
         blockNullEqualizer = new BlockNullEqualizer(
                 FemtocraftConfigs.BlockNullEqualizerID);
         GameRegistry.registerBlock(blockNullEqualizer, "BlockNullEqualizer");
