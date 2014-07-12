@@ -14,13 +14,13 @@ public class BlockMicroEngine extends Block {
     public BlockMicroEngine(int id) {
         super(id, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
-        setUnlocalizedName("BlockBlockMicroEngine");
+        setUnlocalizedName("BlockMicroEngine");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                + ":" + "BlockBlockMicroEngine");
+                + ":" + "BlockMicroEngine");
     }
 }

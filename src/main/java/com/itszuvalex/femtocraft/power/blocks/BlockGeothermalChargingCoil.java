@@ -14,13 +14,13 @@ public class BlockGeothermalChargingCoil extends Block {
     public BlockGeothermalChargingCoil(int id) {
         super(id, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
-        setUnlocalizedName("BlockBlockGeothermalChargingCoil");
+        setUnlocalizedName("BlockGeothermalChargingCoil");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                + ":" + "BlockBlockGeothermalChargingCoil");
+                + ":" + "BlockGeothermalChargingCoil");
     }
 }

@@ -1693,6 +1693,70 @@ public class ManagerAssemblerRecipe {
 
             //Femto
 
+            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemHerculesDrive), new ItemStack(Femtocraft.itemOrpheusProcessor), new ItemStack(Femtocraft.itemHerculesDrive), new ItemStack(Femtocraft.itemHermesBus), new ItemStack(Item.netherStar), new ItemStack(Femtocraft.itemHermesBus), new ItemStack(Femtocraft.itemMinervaComplex), new ItemStack(Femtocraft.itemAtlasMount), new ItemStack(Femtocraft.itemMinervaComplex)}, 0,
+                    new ItemStack(Femtocraft.itemQuantumSchematic, 8),
+                    EnumTechLevel.FEMTO, null));
+
+            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemOrpheusProcessor), new ItemStack(Femtocraft.itemFemtoPlating), new ItemStack(Femtocraft.itemOrpheusProcessor), new ItemStack(Femtocraft.itemFemtoPlating), new ItemStack(Femtocraft.blockNanoHorologe), new ItemStack(Femtocraft.itemFemtoPlating), new ItemStack(Femtocraft.itemInfallibleEstimator), new ItemStack(Femtocraft.itemFemtoPlating), new ItemStack(Femtocraft.itemInfallibleEstimator)}, 0,
+                    new ItemStack(Femtocraft.blockFemtoChronoshifter),
+                    EnumTechLevel.FEMTO, null));
+
+            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemHerculesDrive), new ItemStack(Femtocraft.itemFemtoPlating), new ItemStack(Femtocraft.itemHerculesDrive), new ItemStack(Femtocraft.itemFemtoPlating), new ItemStack(Femtocraft.blockNanoEnmesher), new ItemStack(Femtocraft.itemFemtoPlating), new ItemStack(Femtocraft.itemOrpheusProcessor), new ItemStack(Femtocraft.itemFemtoPlating), new ItemStack(Femtocraft.itemOrpheusProcessor)}, 0,
+                    new ItemStack(Femtocraft.blockFemtoEntangler),
+                    EnumTechLevel.FEMTO, null));
+
+            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.blockNanoCable), new ItemStack(Femtocraft.itemStyxValve), new ItemStack(Femtocraft.blockFemtoCable), null, null, null, null, null, null}, 0,
+                    new ItemStack(Femtocraft.blockNullEqualizer),
+                    EnumTechLevel.FEMTO, null));
+
+            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemFemtoPlating), new ItemStack(Femtocraft.blockFemtoCable), new ItemStack(Femtocraft.itemFemtoPlating), new ItemStack(Femtocraft.blockFemtoCable), new ItemStack(Femtocraft.itemAtlasMount), new ItemStack(Femtocraft.blockFemtoCable), new ItemStack(Femtocraft.itemFemtoPlating), new ItemStack(Femtocraft.blockFemtoCable), new ItemStack(Femtocraft.itemFemtoPlating)}, 0,
+                    new ItemStack(Femtocraft.blockFemtoCubePort),
+                    EnumTechLevel.FEMTO, null));
+
+            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Item.netherrackBrick), new ItemStack(Femtocraft.itemFemtoPlating), new ItemStack(Item.netherrackBrick), new ItemStack(Femtocraft.itemFemtoPlating), new ItemStack(Femtocraft.itemHermesBus), new ItemStack(Femtocraft.itemFemtoPlating), new ItemStack(Item.netherrackBrick), new ItemStack(Femtocraft.itemFemtoPlating), new ItemStack(Item.netherrackBrick)}, 0,
+                    new ItemStack(Femtocraft.blockFemtoCubeFrame),
+                    EnumTechLevel.FEMTO, null));
+
+            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemFemtoPlating), new ItemStack(Femtocraft.itemHermesBus), new ItemStack(Femtocraft.itemFemtoPlating), new ItemStack(Femtocraft.itemHermesBus), new ItemStack(Femtocraft.itemCerberusGate), new ItemStack(Femtocraft.itemHermesBus), new ItemStack(Femtocraft.itemFemtoPlating), new ItemStack(Femtocraft.itemHermesBus), new ItemStack(Femtocraft.itemFemtoPlating)}, 0,
+                    new ItemStack(Femtocraft.blockFemtoCubeChassis),
+                    EnumTechLevel.FEMTO, null));
+
+            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Item.diamond), new ItemStack(Item.netherrackBrick), new ItemStack(Item.diamond), new ItemStack(Item.diamond), new ItemStack(Femtocraft.itemFemtoPlating), new ItemStack(Item.diamond), new ItemStack(Item.diamond), new ItemStack(Item.netherrackBrick), new ItemStack(Item.diamond)}, 0,
+                    new ItemStack(Femtocraft.itemStellaratorPlating),
+                    EnumTechLevel.FEMTO, null));
+
+            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.blockSisyphusStabilizer), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.blockSisyphusStabilizer), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Item.netherStar), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.blockSisyphusStabilizer), new ItemStack(Femtocraft.itemStellaratorPlating)}, 0,
+                    new ItemStack(Femtocraft.blockStellaratorCore),
+                    EnumTechLevel.FEMTO, null));
+
+            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Block.glass), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Block.glass), new ItemStack(Item.diamond), new ItemStack(Block.glass), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Block.glass), new ItemStack(Femtocraft.itemStellaratorPlating)}, 0,
+                    new ItemStack(Femtocraft.blockStellaratorFocus),
+                    EnumTechLevel.FEMTO, null));
+
+            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Item.netherrackBrick), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Item.netherrackBrick), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Block.netherBrick), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Item.netherrackBrick), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Item.netherrackBrick)}, 0,
+                    new ItemStack(Femtocraft.blockStellaratorHousing),
+                    EnumTechLevel.FEMTO, null));
+
+            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Item.netherrackBrick), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Item.netherrackBrick), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.itemPhlegethonTunnelPrimer), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Item.netherrackBrick), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Item.netherrackBrick)}, 0,
+                    new ItemStack(Femtocraft.blockStellaratorOpticalMaser),
+                    EnumTechLevel.FEMTO, null));
+
+            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Item.blazeRod), new ItemStack(Item.blazeRod), new ItemStack(Item.blazeRod), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.itemStellaratorPlating)}, 0,
+                    new ItemStack(Femtocraft.blockPlasmaConduit, 8),
+                    EnumTechLevel.FEMTO, null));
+
+            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Item.netherrackBrick), new ItemStack(Femtocraft.blockPlasmaConduit), new ItemStack(Item.netherrackBrick), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Item.blazeRod), new ItemStack(Block.dispenser), new ItemStack(Item.netherrackBrick), new ItemStack(Femtocraft.blockPlasmaConduit), new ItemStack(Item.netherrackBrick)}, 0,
+                    new ItemStack(Femtocraft.blockPlasmaVent),
+                    EnumTechLevel.FEMTO, null));
+
+            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.blockPlasmaConduit), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.blockPlasmaConduit), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.itemFemtoCoil), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.blockPlasmaConduit), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.blockPlasmaConduit)}, 0,
+                    new ItemStack(Femtocraft.blockPlasmaTurbine),
+                    EnumTechLevel.FEMTO, null));
+
+            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.blockSisyphusStabilizer), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.blockSisyphusStabilizer), new ItemStack(Block.blockDiamond), new ItemStack(Femtocraft.blockSisyphusStabilizer), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.blockSisyphusStabilizer), new ItemStack(Femtocraft.itemStellaratorPlating)}, 0,
+                    new ItemStack(Femtocraft.blockPlasmaCondenser),
+                    EnumTechLevel.FEMTO, null));
+
         } catch (AssemblerRecipeFoundException e) {
             Femtocraft.logger.log(Level.SEVERE, e.errMsg);
             Femtocraft.logger.log(Level.SEVERE,

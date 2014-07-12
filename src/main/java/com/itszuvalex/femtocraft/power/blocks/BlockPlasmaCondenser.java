@@ -14,13 +14,13 @@ public class BlockPlasmaCondenser extends Block {
     public BlockPlasmaCondenser(int id) {
         super(id, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
-        setUnlocalizedName("BlockBlockPlasmaCondenser");
+        setUnlocalizedName("BlockPlasmaCondenser");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                + ":" + "BlockBlockPlasmaCondenser");
+                + ":" + "BlockPlasmaCondenser");
     }
 }

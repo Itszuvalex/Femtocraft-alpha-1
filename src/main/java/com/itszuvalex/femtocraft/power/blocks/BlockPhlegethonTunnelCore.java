@@ -8,19 +8,19 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 
 /**
- * Created by Christopher Harris (Itszuvalex) on 7/6/14.
+ * Created by Christopher Harris (Itszuvalex) on 7/12/14.
  */
-public class BlockGeothermalChargingBase extends Block {
-    public BlockGeothermalChargingBase(int id) {
+public class BlockPhlegethonTunnelCore extends Block {
+    public BlockPhlegethonTunnelCore(int id) {
         super(id, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
-        setUnlocalizedName("BlockGeothermalChargingBase");
+        setUnlocalizedName("BlockPhlegethonTunnelCore");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                + ":" + "BlockGeothermalChargingBase");
+                + ":" + "BlockPhlegethonTunnelCore");
     }
 }

@@ -14,13 +14,13 @@ public class BlockPlasmaVent extends Block {
     public BlockPlasmaVent(int id) {
         super(id, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
-        setUnlocalizedName("BlockBlockPlasmaVent");
+        setUnlocalizedName("BlockPlasmaVent");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                + ":" + "BlockBlockPlasmaVent");
+                + ":" + "BlockPlasmaVent");
     }
 }

@@ -14,13 +14,13 @@ public class BlockNanoFissionReactorHousing extends Block {
     public BlockNanoFissionReactorHousing(int id) {
         super(id, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
-        setUnlocalizedName("BlockBlockNanoFissionReactorHousing");
+        setUnlocalizedName("BlockNanoFissionReactorHousing");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                + ":" + "BlockBlockNanoFissionReactorHousing");
+                + ":" + "BlockNanoFissionReactorHousing");
     }
 }

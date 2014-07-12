@@ -30,7 +30,7 @@ public class BlockNullEqualizer extends BlockPowerContainer {
     public BlockNullEqualizer(int par1) {
         super(par1, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
-        setUnlocalizedName("blockNullEqualizer");
+        setUnlocalizedName("BlockNullEqualizer");
         setHardness(1.0f);
         setStepSound(Block.soundStoneFootstep);
     }

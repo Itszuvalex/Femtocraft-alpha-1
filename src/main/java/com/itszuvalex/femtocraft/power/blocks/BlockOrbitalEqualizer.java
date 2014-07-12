@@ -30,7 +30,7 @@ public class BlockOrbitalEqualizer extends BlockPowerContainer {
     public BlockOrbitalEqualizer(int par1) {
         super(par1, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
-        setUnlocalizedName("blockOrbitalEqualizer");
+        setUnlocalizedName("BlockOrbitalEqualizer");
         setHardness(1.0f);
         setStepSound(Block.soundStoneFootstep);
     }

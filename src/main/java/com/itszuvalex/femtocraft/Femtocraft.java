@@ -636,6 +636,20 @@ public class Femtocraft {
         LanguageRegistry.addName(blockDecontaminationChamber,
                 "Decontamination Chamber");
 
+        blockPhlegethonTunnelCore = new BlockPhlegethonTunnelCore
+                (FemtocraftConfigs.BlockPhlegethonTunnelCoreID);
+        GameRegistry.registerBlock(blockPhlegethonTunnelCore,
+                "BlockPhlegethonTunnelCore");
+        LanguageRegistry.addName(blockPhlegethonTunnelCore,
+                "Phlegethon Tunnel Core");
+
+        blockPhlegethonTunnelFrame = new BlockPhlegethonTunnelFrame
+                (FemtocraftConfigs.BlockPhlegethonTunnelFrameID);
+        GameRegistry.registerBlock(blockPhlegethonTunnelFrame,
+                "BlockPhlegethonTunnelFrame");
+        LanguageRegistry.addName(blockPhlegethonTunnelFrame,
+                "Phlegethon Tunnel Frame");
+
         blockNullEqualizer = new BlockNullEqualizer(
                 FemtocraftConfigs.BlockNullEqualizerID);
         GameRegistry.registerBlock(blockNullEqualizer, "BlockNullEqualizer");
@@ -799,7 +813,7 @@ public class Femtocraft {
         LanguageRegistry.addName(itemKineticPulverizer, "Kinetic Pulverizer");
 
         itemHeatingElement = new ItemBase(FemtocraftConfigs
-                .ItemHeatingCoilID, "itemHeatingElement");
+                .ItemHeatingCoilID, "ItemHeatingElement");
         LanguageRegistry.addName(itemHeatingElement, "Heating Coil");
 
         itemPortableResearchComputer = new ItemPortableResearchComputer

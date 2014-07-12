@@ -14,13 +14,13 @@ public class BlockDecontaminationChamber extends Block {
     public BlockDecontaminationChamber(int id) {
         super(id, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
-        setUnlocalizedName("BlockBlockDecontaminationChamber");
+        setUnlocalizedName("BlockDecontaminationChamber");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                + ":" + "BlockBlockDecontaminationChamber");
+                + ":" + "BlockDecontaminationChamber");
     }
 }
