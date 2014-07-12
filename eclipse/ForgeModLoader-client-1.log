@@ -1,160 +1,160 @@
-2014-07-12 00:40:50 [INFO] [ForgeModLoader] Forge Mod Loader version 6.99.19.964 for Minecraft 1.6.4 loading
-2014-07-12 00:40:50 [INFO] [ForgeModLoader] Java is Java HotSpot(TM) 64-Bit Server VM, version 1.7.0_60, running on Mac OS X:x86_64:10.9.4, installed at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre
-2014-07-12 00:40:50 [FINE] [ForgeModLoader] Java classpath at launch is /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/ant-javafx.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/dt.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/javafx-doclet.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/javafx-mx.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/jconsole.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/sa-jdi.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/tools.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/deploy.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/htmlconverter.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/javaws.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/jfxrt.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/management-agent.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/plugin.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/dnsns.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/localedata.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/sunec.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/sunjce_provider.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/sunpkcs11.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/zipfs.jar:/Users/chris/Documents/Minecraft Project/Femtocraft/out/production/forge-1.6.4-9.11.1.964-src:/Users/chris/.gradle/caches/artifacts-26/filestore/net.minecraft/launchwrapper/1.8/jar/d4c0895977dd7f0b3f56281cee53a64d4c0c0322/launchwrapper-1.8.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.ow2.asm/asm-debug-all/4.1/jar/dd6ba5c392d4102458494e29f54f70ac534ec2a2/asm-debug-all-4.1.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-library/2.10.2/jar/6ba65d12cd09d441083262d6f73d2257fec7c663/scala-library-2.10.2.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-compiler/2.10.2/jar/64c8b1380cc53d6850823d6e4e7ae984aa44ef9c/scala-compiler-2.10.2.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/net.sf.jopt-simple/jopt-simple/4.5/jar/6065cc95c661255349c1d0756657be17c29a4fd3/jopt-simple-4.5.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/lzma/lzma/0.0.1/jar/521616dc7487b42bef0e803bd2fa3faf668101d7/lzma-0.0.1.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/com.paulscode/codecjorbis/20101023/jar/c73b5636faf089d9f00e8732a829577de25237ee/codecjorbis-20101023.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/com.paulscode/codecwav/20101023/jar/12f031cfe88fef5c1dd36c563c0a3a69bd7261da/codecwav-20101023.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/com.paulscode/libraryjavasound/20101123/jar/5c5e304366f75f9eaa2e8cca546a1fb6109348b3/libraryjavasound-20101123.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/com.paulscode/librarylwjglopenal/20100824/jar/73e80d0794c39665aec3f62eee88ca91676674ef/librarylwjglopenal-20100824.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/com.paulscode/soundsystem/20120107/jar/419c05fe9be71f792b2d76cfc9b67f1ed0fec7f6/soundsystem-20120107.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl/2.9.0/jar/5654d06e61a1bba7ae1e7f5233e1106be64c91cd/lwjgl-2.9.0.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl_util/2.9.0/jar/a778846b64008fc7f48ead2377f034e547991699/lwjgl_util-2.9.0.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/argo/argo/2.25_fixed/jar/751761ce15a3e3aaf3fc75b9f013ff8f7b88a585/argo-2.25_fixed.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/net.sourceforge.argo/argo/2.25/jar/751761ce15a3e3aaf3fc75b9f013ff8f7b88a585/argo-2.25.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.bouncycastle/bcprov-jdk15on/1.47/jar/b6f5d9926b0afbde9f4dbe3db88c5247be7794bb/bcprov-jdk15on-1.47.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/com.google.guava/guava/14.0/bundle/67b7be4ee7ba48e4828a42d6d5069761186d4a53/guava-14.0.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.apache.commons/commons-lang3/3.1/jar/905075e6c80f206bbe6cf1e809d2caa69f420c76/commons-lang3-3.1.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/commons-io/commons-io/2.4/jar/b1b6ea3b7e4aa4f492509a4952029cd8e48019ad/commons-io-2.4.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput/2.0.5/jar/39c7796b469a600f72380316f6b1f11db6c2c7c4/jinput-2.0.5.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/net.java.jutils/jutils/1.0.0/jar/e12fe1fda814bd348c1579329c86943d2cd3c6a6/jutils-1.0.0.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/com.google.code.gson/gson/2.2.2/jar/1f96456ca233dec780aa224bff076d8e8bca3908/gson-2.2.2.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl-platform/2.9.0/jar/2ba5dcb11048147f1a74eff2deb192c001321f77/lwjgl-platform-2.9.0-natives-linux.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl-platform/2.9.0/jar/6621b382cb14cc409b041d8d72829156a87c31aa/lwjgl-platform-2.9.0-natives-osx.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl-platform/2.9.0/jar/3f11873dc8e84c854ec7c5a8fd2e869f8aaef764/lwjgl-platform-2.9.0-natives-windows.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput-platform/2.0.5/jar/7ff832a6eb9ab6a767f1ade2b548092d0fa64795/jinput-platform-2.0.5-natives-linux.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput-platform/2.0.5/jar/53f9c919f34d2ca9de8c51fc4e1e8282029a9232/jinput-platform-2.0.5-natives-osx.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput-platform/2.0.5/jar/385ee093e01f587f30ee1c8a2ee7d408fd732e16/jinput-platform-2.0.5-natives-windows.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-reflect/2.10.2/jar/444ff8e89a81697997ed8a98a4642ba283130249/scala-reflect-2.10.2.jar:/Users/chris/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-mcp.jar:/Users/chris/Documents/Minecraft Project/Femtocraft/lib/sqlite-jdbc-3.7.15-M1.jar:/Applications/IntelliJ IDEA 13 CE.app/lib/idea_rt.jar
-2014-07-12 00:40:50 [FINE] [ForgeModLoader] Java library path at launch is /Users/chris/Documents/Minecraft Project/Femtocraft/build/natives
-2014-07-12 00:40:50 [INFO] [ForgeModLoader] Managed to load a deobfuscated Minecraft name- we are in a deobfuscated environment. Skipping runtime deobfuscation
-2014-07-12 00:40:50 [FINE] [ForgeModLoader] Instantiating coremod class FMLCorePlugin
-2014-07-12 00:40:50 [FINE] [ForgeModLoader] Enqueued coremod FMLCorePlugin
-2014-07-12 00:40:50 [FINE] [ForgeModLoader] Instantiating coremod class FMLForgePlugin
-2014-07-12 00:40:50 [FINE] [ForgeModLoader] Enqueued coremod FMLForgePlugin
-2014-07-12 00:40:50 [FINE] [ForgeModLoader] All fundamental core mods are successfully located
-2014-07-12 00:40:50 [FINE] [ForgeModLoader] Discovering coremods
-2014-07-12 00:40:50 [FINE] [ForgeModLoader] Examining for coremod candidacy sqlite-jdbc-3.7.15-M1.jar
-2014-07-12 00:40:50 [FINE] [ForgeModLoader] Not found coremod data in sqlite-jdbc-3.7.15-M1.jar
-2014-07-12 00:40:50 [INFO] [ForgeModLoader] Loading tweak class name cpw.mods.fml.common.launcher.FMLInjectionAndSortingTweaker
-2014-07-12 00:40:50 [INFO] [ForgeModLoader] Loading tweak class name cpw.mods.fml.common.launcher.FMLDeobfTweaker
-2014-07-12 00:40:50 [INFO] [ForgeModLoader] Calling tweak class cpw.mods.fml.common.launcher.FMLInjectionAndSortingTweaker
-2014-07-12 00:40:50 [INFO] [ForgeModLoader] Calling tweak class cpw.mods.fml.common.launcher.FMLInjectionAndSortingTweaker
-2014-07-12 00:40:50 [INFO] [ForgeModLoader] Calling tweak class cpw.mods.fml.relauncher.CoreModManager$FMLPluginWrapper
-2014-07-12 00:40:50 [FINE] [ForgeModLoader] Injecting coremod FMLCorePlugin {cpw.mods.fml.relauncher.FMLCorePlugin} class transformers
-2014-07-12 00:40:50 [FINEST] [ForgeModLoader] Registering transformer cpw.mods.fml.common.asm.transformers.AccessTransformer
-2014-07-12 00:40:50 [INFO] [STDOUT] Loaded 40 rules from AccessTransformer config file fml_at.cfg
-2014-07-12 00:40:50 [FINEST] [ForgeModLoader] Registering transformer cpw.mods.fml.common.asm.transformers.MarkerTransformer
-2014-07-12 00:40:50 [FINEST] [ForgeModLoader] Registering transformer cpw.mods.fml.common.asm.transformers.SideTransformer
-2014-07-12 00:40:50 [FINE] [ForgeModLoader] Injection complete
-2014-07-12 00:40:50 [FINE] [ForgeModLoader] Running coremod plugin for FMLCorePlugin {cpw.mods.fml.relauncher.FMLCorePlugin}
-2014-07-12 00:40:50 [FINE] [ForgeModLoader] Running coremod plugin FMLCorePlugin
-2014-07-12 00:40:51 [SEVERE] [ForgeModLoader] The binary patch set is missing. Either you are in a development environment, or things are not going to work!
-2014-07-12 00:40:51 [SEVERE] [ForgeModLoader] The minecraft jar file:/Users/chris/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-mcp.jar!/net/minecraft/client/ClientBrandRetriever.class appears to be corrupt! There has been CRITICAL TAMPERING WITH MINECRAFT, it is highly unlikely minecraft will work! STOP NOW, get a clean copy and try again!
-2014-07-12 00:40:51 [SEVERE] [ForgeModLoader] FML has been ordered to ignore the invalid or missing minecraft certificate. This is very likely to cause a problem!
-2014-07-12 00:40:51 [SEVERE] [ForgeModLoader] Technical information: ClientBrandRetriever was at jar:file:/Users/chris/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-mcp.jar!/net/minecraft/client/ClientBrandRetriever.class, there were 0 certificates for it
-2014-07-12 00:40:51 [SEVERE] [ForgeModLoader] FML appears to be missing any signature data. This is not a good thing
-2014-07-12 00:40:51 [FINE] [ForgeModLoader] Coremod plugin class FMLCorePlugin run successfully
-2014-07-12 00:40:51 [INFO] [ForgeModLoader] Calling tweak class cpw.mods.fml.relauncher.CoreModManager$FMLPluginWrapper
-2014-07-12 00:40:51 [FINE] [ForgeModLoader] Injecting coremod FMLForgePlugin {net.minecraftforge.classloading.FMLForgePlugin} class transformers
-2014-07-12 00:40:51 [FINEST] [ForgeModLoader] Registering transformer net.minecraftforge.transformers.ForgeAccessTransformer
-2014-07-12 00:40:51 [INFO] [STDOUT] Loaded 110 rules from AccessTransformer config file forge_at.cfg
-2014-07-12 00:40:51 [FINEST] [ForgeModLoader] Registering transformer net.minecraftforge.transformers.EventTransformer
-2014-07-12 00:40:51 [FINE] [ForgeModLoader] Injection complete
-2014-07-12 00:40:51 [FINE] [ForgeModLoader] Running coremod plugin for FMLForgePlugin {net.minecraftforge.classloading.FMLForgePlugin}
-2014-07-12 00:40:51 [FINE] [ForgeModLoader] Running coremod plugin FMLForgePlugin
-2014-07-12 00:40:51 [FINE] [ForgeModLoader] Coremod plugin class FMLForgePlugin run successfully
-2014-07-12 00:40:51 [INFO] [ForgeModLoader] Calling tweak class cpw.mods.fml.common.launcher.FMLDeobfTweaker
-2014-07-12 00:40:51 [FINE] [ForgeModLoader] Validating minecraft
-2014-07-12 00:40:51 [FINE] [ForgeModLoader] Minecraft validated, launching...
-2014-07-12 00:40:51 [INFO] [ForgeModLoader] Launching wrapped minecraft {net.minecraft.client.main.Main}
-2014-07-12 00:40:52 [INFO] [Minecraft-Client] Setting user: Player1234
-2014-07-12 00:40:53 [INFO] [Minecraft-Client] LWJGL Version: 2.9.0
-2014-07-12 00:40:54 [INFO] [Minecraft-Client] Reloading ResourceManager: Default
-2014-07-12 00:40:54 [INFO] [MinecraftForge] Attempting early MinecraftForge initialization
-2014-07-12 00:40:54 [INFO] [STDOUT] MinecraftForge v9.11.1.964 Initialized
-2014-07-12 00:40:54 [INFO] [ForgeModLoader] MinecraftForge v9.11.1.964 Initialized
-2014-07-12 00:40:54 [INFO] [STDOUT] Replaced 112 ore recipies
-2014-07-12 00:40:54 [INFO] [MinecraftForge] Completed early MinecraftForge initialization
-2014-07-12 00:40:54 [INFO] [ForgeModLoader] Reading custom logging properties from /Users/chris/Documents/Minecraft Project/Femtocraft/eclipse/config/logging.properties
-2014-07-12 00:40:54 [OFF] [ForgeModLoader] Logging level for ForgeModLoader logging is set to ALL
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Building injected Mod Containers [cpw.mods.fml.common.FMLDummyContainer, net.minecraftforge.common.ForgeDummyContainer]
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Attempting to load mods contained in the minecraft jar file and associated classes
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/ant-javafx.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/dt.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/javafx-doclet.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/javafx-mx.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/jconsole.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/sa-jdi.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/tools.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/charsets.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/deploy.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/htmlconverter.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/javaws.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/jce.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/jfr.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/jfxrt.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/jsse.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/management-agent.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/plugin.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/resources.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/rt.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/dnsns.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/localedata.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/sunec.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/sunjce_provider.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/sunpkcs11.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/zipfs.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related directory at /Users/chris/Documents/Minecraft Project/Femtocraft/out/production/forge-1.6.4-9.11.1.964-src, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/net.minecraft/launchwrapper/1.8/jar/d4c0895977dd7f0b3f56281cee53a64d4c0c0322/launchwrapper-1.8.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.ow2.asm/asm-debug-all/4.1/jar/dd6ba5c392d4102458494e29f54f70ac534ec2a2/asm-debug-all-4.1.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-library/2.10.2/jar/6ba65d12cd09d441083262d6f73d2257fec7c663/scala-library-2.10.2.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-compiler/2.10.2/jar/64c8b1380cc53d6850823d6e4e7ae984aa44ef9c/scala-compiler-2.10.2.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/net.sf.jopt-simple/jopt-simple/4.5/jar/6065cc95c661255349c1d0756657be17c29a4fd3/jopt-simple-4.5.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/lzma/lzma/0.0.1/jar/521616dc7487b42bef0e803bd2fa3faf668101d7/lzma-0.0.1.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/com.paulscode/codecjorbis/20101023/jar/c73b5636faf089d9f00e8732a829577de25237ee/codecjorbis-20101023.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/com.paulscode/codecwav/20101023/jar/12f031cfe88fef5c1dd36c563c0a3a69bd7261da/codecwav-20101023.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/com.paulscode/libraryjavasound/20101123/jar/5c5e304366f75f9eaa2e8cca546a1fb6109348b3/libraryjavasound-20101123.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/com.paulscode/librarylwjglopenal/20100824/jar/73e80d0794c39665aec3f62eee88ca91676674ef/librarylwjglopenal-20100824.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/com.paulscode/soundsystem/20120107/jar/419c05fe9be71f792b2d76cfc9b67f1ed0fec7f6/soundsystem-20120107.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl/2.9.0/jar/5654d06e61a1bba7ae1e7f5233e1106be64c91cd/lwjgl-2.9.0.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl_util/2.9.0/jar/a778846b64008fc7f48ead2377f034e547991699/lwjgl_util-2.9.0.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/argo/argo/2.25_fixed/jar/751761ce15a3e3aaf3fc75b9f013ff8f7b88a585/argo-2.25_fixed.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/net.sourceforge.argo/argo/2.25/jar/751761ce15a3e3aaf3fc75b9f013ff8f7b88a585/argo-2.25.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.bouncycastle/bcprov-jdk15on/1.47/jar/b6f5d9926b0afbde9f4dbe3db88c5247be7794bb/bcprov-jdk15on-1.47.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/com.google.guava/guava/14.0/bundle/67b7be4ee7ba48e4828a42d6d5069761186d4a53/guava-14.0.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.apache.commons/commons-lang3/3.1/jar/905075e6c80f206bbe6cf1e809d2caa69f420c76/commons-lang3-3.1.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/commons-io/commons-io/2.4/jar/b1b6ea3b7e4aa4f492509a4952029cd8e48019ad/commons-io-2.4.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput/2.0.5/jar/39c7796b469a600f72380316f6b1f11db6c2c7c4/jinput-2.0.5.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/net.java.jutils/jutils/1.0.0/jar/e12fe1fda814bd348c1579329c86943d2cd3c6a6/jutils-1.0.0.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/com.google.code.gson/gson/2.2.2/jar/1f96456ca233dec780aa224bff076d8e8bca3908/gson-2.2.2.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl-platform/2.9.0/jar/2ba5dcb11048147f1a74eff2deb192c001321f77/lwjgl-platform-2.9.0-natives-linux.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl-platform/2.9.0/jar/6621b382cb14cc409b041d8d72829156a87c31aa/lwjgl-platform-2.9.0-natives-osx.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl-platform/2.9.0/jar/3f11873dc8e84c854ec7c5a8fd2e869f8aaef764/lwjgl-platform-2.9.0-natives-windows.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput-platform/2.0.5/jar/7ff832a6eb9ab6a767f1ade2b548092d0fa64795/jinput-platform-2.0.5-natives-linux.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput-platform/2.0.5/jar/53f9c919f34d2ca9de8c51fc4e1e8282029a9232/jinput-platform-2.0.5-natives-osx.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput-platform/2.0.5/jar/385ee093e01f587f30ee1c8a2ee7d408fd732e16/jinput-platform-2.0.5-natives-windows.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-reflect/2.10.2/jar/444ff8e89a81697997ed8a98a4642ba283130249/scala-reflect-2.10.2.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-mcp.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/Documents/Minecraft Project/Femtocraft/lib/sqlite-jdbc-3.7.15-M1.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a minecraft related file at /Applications/IntelliJ IDEA 13 CE.app/lib/idea_rt.jar, examining for mod candidates
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Minecraft jar mods loaded successfully
-2014-07-12 00:40:54 [INFO] [ForgeModLoader] Searching /Users/chris/Documents/Minecraft Project/Femtocraft/eclipse/mods for mods
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Found a candidate zip or jar file sqlite-jdbc-3.7.15-M1.jar
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] Examining file ant-javafx.jar for potential mods
-2014-07-12 00:40:54 [FINE] [ForgeModLoader] The mod container ant-javafx.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:55 [FINE] [ForgeModLoader] Examining file dt.jar for potential mods
-2014-07-12 00:40:55 [FINE] [ForgeModLoader] The mod container dt.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:55 [FINE] [ForgeModLoader] Examining file javafx-doclet.jar for potential mods
-2014-07-12 00:40:55 [FINE] [ForgeModLoader] The mod container javafx-doclet.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:55 [FINE] [ForgeModLoader] Examining file javafx-mx.jar for potential mods
-2014-07-12 00:40:55 [FINE] [ForgeModLoader] The mod container javafx-mx.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:55 [FINE] [ForgeModLoader] Examining file jconsole.jar for potential mods
-2014-07-12 00:40:55 [FINE] [ForgeModLoader] The mod container jconsole.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:55 [FINE] [ForgeModLoader] Examining file sa-jdi.jar for potential mods
-2014-07-12 00:40:55 [FINE] [ForgeModLoader] The mod container sa-jdi.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:55 [FINE] [ForgeModLoader] Examining file tools.jar for potential mods
-2014-07-12 00:40:55 [FINE] [ForgeModLoader] The mod container tools.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] Examining file charsets.jar for potential mods
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] The mod container charsets.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] Examining file deploy.jar for potential mods
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] The mod container deploy.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] Examining file htmlconverter.jar for potential mods
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] The mod container htmlconverter.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] Examining file javaws.jar for potential mods
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] The mod container javaws.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] Examining file jce.jar for potential mods
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] The mod container jce.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] Examining file jfr.jar for potential mods
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] The mod container jfr.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] Examining file jfxrt.jar for potential mods
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] The mod container jfxrt.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] Examining file jsse.jar for potential mods
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] The mod container jsse.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] Examining file management-agent.jar for potential mods
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] The mod container management-agent.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] Examining file plugin.jar for potential mods
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] The mod container plugin.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] Examining file resources.jar for potential mods
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] The mod container resources.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] Examining file rt.jar for potential mods
-2014-07-12 00:40:56 [FINE] [ForgeModLoader] The mod container rt.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:57 [WARNING] [ForgeModLoader] Zip file rt.jar failed to read properly, it will be ignored
+2014-07-12 00:46:09 [INFO] [ForgeModLoader] Forge Mod Loader version 6.99.19.964 for Minecraft 1.6.4 loading
+2014-07-12 00:46:09 [INFO] [ForgeModLoader] Java is Java HotSpot(TM) 64-Bit Server VM, version 1.7.0_60, running on Mac OS X:x86_64:10.9.4, installed at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre
+2014-07-12 00:46:09 [FINE] [ForgeModLoader] Java classpath at launch is /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/ant-javafx.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/dt.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/javafx-doclet.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/javafx-mx.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/jconsole.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/sa-jdi.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/tools.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/deploy.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/htmlconverter.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/javaws.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/jfxrt.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/management-agent.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/plugin.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/dnsns.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/localedata.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/sunec.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/sunjce_provider.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/sunpkcs11.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/zipfs.jar:/Users/chris/Documents/Minecraft Project/Femtocraft/out/production/forge-1.6.4-9.11.1.964-src:/Users/chris/.gradle/caches/artifacts-26/filestore/net.minecraft/launchwrapper/1.8/jar/d4c0895977dd7f0b3f56281cee53a64d4c0c0322/launchwrapper-1.8.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.ow2.asm/asm-debug-all/4.1/jar/dd6ba5c392d4102458494e29f54f70ac534ec2a2/asm-debug-all-4.1.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-library/2.10.2/jar/6ba65d12cd09d441083262d6f73d2257fec7c663/scala-library-2.10.2.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-compiler/2.10.2/jar/64c8b1380cc53d6850823d6e4e7ae984aa44ef9c/scala-compiler-2.10.2.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/net.sf.jopt-simple/jopt-simple/4.5/jar/6065cc95c661255349c1d0756657be17c29a4fd3/jopt-simple-4.5.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/lzma/lzma/0.0.1/jar/521616dc7487b42bef0e803bd2fa3faf668101d7/lzma-0.0.1.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/com.paulscode/codecjorbis/20101023/jar/c73b5636faf089d9f00e8732a829577de25237ee/codecjorbis-20101023.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/com.paulscode/codecwav/20101023/jar/12f031cfe88fef5c1dd36c563c0a3a69bd7261da/codecwav-20101023.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/com.paulscode/libraryjavasound/20101123/jar/5c5e304366f75f9eaa2e8cca546a1fb6109348b3/libraryjavasound-20101123.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/com.paulscode/librarylwjglopenal/20100824/jar/73e80d0794c39665aec3f62eee88ca91676674ef/librarylwjglopenal-20100824.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/com.paulscode/soundsystem/20120107/jar/419c05fe9be71f792b2d76cfc9b67f1ed0fec7f6/soundsystem-20120107.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl/2.9.0/jar/5654d06e61a1bba7ae1e7f5233e1106be64c91cd/lwjgl-2.9.0.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl_util/2.9.0/jar/a778846b64008fc7f48ead2377f034e547991699/lwjgl_util-2.9.0.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/argo/argo/2.25_fixed/jar/751761ce15a3e3aaf3fc75b9f013ff8f7b88a585/argo-2.25_fixed.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/net.sourceforge.argo/argo/2.25/jar/751761ce15a3e3aaf3fc75b9f013ff8f7b88a585/argo-2.25.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.bouncycastle/bcprov-jdk15on/1.47/jar/b6f5d9926b0afbde9f4dbe3db88c5247be7794bb/bcprov-jdk15on-1.47.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/com.google.guava/guava/14.0/bundle/67b7be4ee7ba48e4828a42d6d5069761186d4a53/guava-14.0.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.apache.commons/commons-lang3/3.1/jar/905075e6c80f206bbe6cf1e809d2caa69f420c76/commons-lang3-3.1.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/commons-io/commons-io/2.4/jar/b1b6ea3b7e4aa4f492509a4952029cd8e48019ad/commons-io-2.4.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput/2.0.5/jar/39c7796b469a600f72380316f6b1f11db6c2c7c4/jinput-2.0.5.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/net.java.jutils/jutils/1.0.0/jar/e12fe1fda814bd348c1579329c86943d2cd3c6a6/jutils-1.0.0.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/com.google.code.gson/gson/2.2.2/jar/1f96456ca233dec780aa224bff076d8e8bca3908/gson-2.2.2.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl-platform/2.9.0/jar/2ba5dcb11048147f1a74eff2deb192c001321f77/lwjgl-platform-2.9.0-natives-linux.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl-platform/2.9.0/jar/6621b382cb14cc409b041d8d72829156a87c31aa/lwjgl-platform-2.9.0-natives-osx.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl-platform/2.9.0/jar/3f11873dc8e84c854ec7c5a8fd2e869f8aaef764/lwjgl-platform-2.9.0-natives-windows.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput-platform/2.0.5/jar/7ff832a6eb9ab6a767f1ade2b548092d0fa64795/jinput-platform-2.0.5-natives-linux.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput-platform/2.0.5/jar/53f9c919f34d2ca9de8c51fc4e1e8282029a9232/jinput-platform-2.0.5-natives-osx.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput-platform/2.0.5/jar/385ee093e01f587f30ee1c8a2ee7d408fd732e16/jinput-platform-2.0.5-natives-windows.jar:/Users/chris/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-reflect/2.10.2/jar/444ff8e89a81697997ed8a98a4642ba283130249/scala-reflect-2.10.2.jar:/Users/chris/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-mcp.jar:/Users/chris/Documents/Minecraft Project/Femtocraft/lib/sqlite-jdbc-3.7.15-M1.jar:/Applications/IntelliJ IDEA 13 CE.app/lib/idea_rt.jar
+2014-07-12 00:46:09 [FINE] [ForgeModLoader] Java library path at launch is /Users/chris/Documents/Minecraft Project/Femtocraft/build/natives
+2014-07-12 00:46:09 [INFO] [ForgeModLoader] Managed to load a deobfuscated Minecraft name- we are in a deobfuscated environment. Skipping runtime deobfuscation
+2014-07-12 00:46:09 [FINE] [ForgeModLoader] Instantiating coremod class FMLCorePlugin
+2014-07-12 00:46:09 [FINE] [ForgeModLoader] Enqueued coremod FMLCorePlugin
+2014-07-12 00:46:09 [FINE] [ForgeModLoader] Instantiating coremod class FMLForgePlugin
+2014-07-12 00:46:09 [FINE] [ForgeModLoader] Enqueued coremod FMLForgePlugin
+2014-07-12 00:46:09 [FINE] [ForgeModLoader] All fundamental core mods are successfully located
+2014-07-12 00:46:09 [FINE] [ForgeModLoader] Discovering coremods
+2014-07-12 00:46:09 [FINE] [ForgeModLoader] Examining for coremod candidacy sqlite-jdbc-3.7.15-M1.jar
+2014-07-12 00:46:09 [FINE] [ForgeModLoader] Not found coremod data in sqlite-jdbc-3.7.15-M1.jar
+2014-07-12 00:46:09 [INFO] [ForgeModLoader] Loading tweak class name cpw.mods.fml.common.launcher.FMLInjectionAndSortingTweaker
+2014-07-12 00:46:09 [INFO] [ForgeModLoader] Loading tweak class name cpw.mods.fml.common.launcher.FMLDeobfTweaker
+2014-07-12 00:46:09 [INFO] [ForgeModLoader] Calling tweak class cpw.mods.fml.common.launcher.FMLInjectionAndSortingTweaker
+2014-07-12 00:46:09 [INFO] [ForgeModLoader] Calling tweak class cpw.mods.fml.common.launcher.FMLInjectionAndSortingTweaker
+2014-07-12 00:46:09 [INFO] [ForgeModLoader] Calling tweak class cpw.mods.fml.relauncher.CoreModManager$FMLPluginWrapper
+2014-07-12 00:46:09 [FINE] [ForgeModLoader] Injecting coremod FMLCorePlugin {cpw.mods.fml.relauncher.FMLCorePlugin} class transformers
+2014-07-12 00:46:09 [FINEST] [ForgeModLoader] Registering transformer cpw.mods.fml.common.asm.transformers.AccessTransformer
+2014-07-12 00:46:09 [INFO] [STDOUT] Loaded 40 rules from AccessTransformer config file fml_at.cfg
+2014-07-12 00:46:09 [FINEST] [ForgeModLoader] Registering transformer cpw.mods.fml.common.asm.transformers.MarkerTransformer
+2014-07-12 00:46:09 [FINEST] [ForgeModLoader] Registering transformer cpw.mods.fml.common.asm.transformers.SideTransformer
+2014-07-12 00:46:09 [FINE] [ForgeModLoader] Injection complete
+2014-07-12 00:46:09 [FINE] [ForgeModLoader] Running coremod plugin for FMLCorePlugin {cpw.mods.fml.relauncher.FMLCorePlugin}
+2014-07-12 00:46:09 [FINE] [ForgeModLoader] Running coremod plugin FMLCorePlugin
+2014-07-12 00:46:09 [SEVERE] [ForgeModLoader] The binary patch set is missing. Either you are in a development environment, or things are not going to work!
+2014-07-12 00:46:10 [SEVERE] [ForgeModLoader] The minecraft jar file:/Users/chris/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-mcp.jar!/net/minecraft/client/ClientBrandRetriever.class appears to be corrupt! There has been CRITICAL TAMPERING WITH MINECRAFT, it is highly unlikely minecraft will work! STOP NOW, get a clean copy and try again!
+2014-07-12 00:46:10 [SEVERE] [ForgeModLoader] FML has been ordered to ignore the invalid or missing minecraft certificate. This is very likely to cause a problem!
+2014-07-12 00:46:10 [SEVERE] [ForgeModLoader] Technical information: ClientBrandRetriever was at jar:file:/Users/chris/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-mcp.jar!/net/minecraft/client/ClientBrandRetriever.class, there were 0 certificates for it
+2014-07-12 00:46:10 [SEVERE] [ForgeModLoader] FML appears to be missing any signature data. This is not a good thing
+2014-07-12 00:46:10 [FINE] [ForgeModLoader] Coremod plugin class FMLCorePlugin run successfully
+2014-07-12 00:46:10 [INFO] [ForgeModLoader] Calling tweak class cpw.mods.fml.relauncher.CoreModManager$FMLPluginWrapper
+2014-07-12 00:46:10 [FINE] [ForgeModLoader] Injecting coremod FMLForgePlugin {net.minecraftforge.classloading.FMLForgePlugin} class transformers
+2014-07-12 00:46:10 [FINEST] [ForgeModLoader] Registering transformer net.minecraftforge.transformers.ForgeAccessTransformer
+2014-07-12 00:46:10 [INFO] [STDOUT] Loaded 110 rules from AccessTransformer config file forge_at.cfg
+2014-07-12 00:46:10 [FINEST] [ForgeModLoader] Registering transformer net.minecraftforge.transformers.EventTransformer
+2014-07-12 00:46:10 [FINE] [ForgeModLoader] Injection complete
+2014-07-12 00:46:10 [FINE] [ForgeModLoader] Running coremod plugin for FMLForgePlugin {net.minecraftforge.classloading.FMLForgePlugin}
+2014-07-12 00:46:10 [FINE] [ForgeModLoader] Running coremod plugin FMLForgePlugin
+2014-07-12 00:46:10 [FINE] [ForgeModLoader] Coremod plugin class FMLForgePlugin run successfully
+2014-07-12 00:46:10 [INFO] [ForgeModLoader] Calling tweak class cpw.mods.fml.common.launcher.FMLDeobfTweaker
+2014-07-12 00:46:10 [FINE] [ForgeModLoader] Validating minecraft
+2014-07-12 00:46:10 [FINE] [ForgeModLoader] Minecraft validated, launching...
+2014-07-12 00:46:10 [INFO] [ForgeModLoader] Launching wrapped minecraft {net.minecraft.client.main.Main}
+2014-07-12 00:46:11 [INFO] [Minecraft-Client] Setting user: Player1234
+2014-07-12 00:46:12 [INFO] [Minecraft-Client] LWJGL Version: 2.9.0
+2014-07-12 00:46:13 [INFO] [Minecraft-Client] Reloading ResourceManager: Default
+2014-07-12 00:46:13 [INFO] [MinecraftForge] Attempting early MinecraftForge initialization
+2014-07-12 00:46:13 [INFO] [STDOUT] MinecraftForge v9.11.1.964 Initialized
+2014-07-12 00:46:13 [INFO] [ForgeModLoader] MinecraftForge v9.11.1.964 Initialized
+2014-07-12 00:46:13 [INFO] [STDOUT] Replaced 112 ore recipies
+2014-07-12 00:46:13 [INFO] [MinecraftForge] Completed early MinecraftForge initialization
+2014-07-12 00:46:13 [INFO] [ForgeModLoader] Reading custom logging properties from /Users/chris/Documents/Minecraft Project/Femtocraft/eclipse/config/logging.properties
+2014-07-12 00:46:13 [OFF] [ForgeModLoader] Logging level for ForgeModLoader logging is set to ALL
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Building injected Mod Containers [cpw.mods.fml.common.FMLDummyContainer, net.minecraftforge.common.ForgeDummyContainer]
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Attempting to load mods contained in the minecraft jar file and associated classes
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/ant-javafx.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/dt.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/javafx-doclet.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/javafx-mx.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/jconsole.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/sa-jdi.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/lib/tools.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/charsets.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/deploy.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/htmlconverter.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/javaws.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/jce.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/jfr.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/jfxrt.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/jsse.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/management-agent.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/plugin.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/resources.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/rt.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/dnsns.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/localedata.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/sunec.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/sunjce_provider.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/sunpkcs11.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/ext/zipfs.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related directory at /Users/chris/Documents/Minecraft Project/Femtocraft/out/production/forge-1.6.4-9.11.1.964-src, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/net.minecraft/launchwrapper/1.8/jar/d4c0895977dd7f0b3f56281cee53a64d4c0c0322/launchwrapper-1.8.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.ow2.asm/asm-debug-all/4.1/jar/dd6ba5c392d4102458494e29f54f70ac534ec2a2/asm-debug-all-4.1.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-library/2.10.2/jar/6ba65d12cd09d441083262d6f73d2257fec7c663/scala-library-2.10.2.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-compiler/2.10.2/jar/64c8b1380cc53d6850823d6e4e7ae984aa44ef9c/scala-compiler-2.10.2.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/net.sf.jopt-simple/jopt-simple/4.5/jar/6065cc95c661255349c1d0756657be17c29a4fd3/jopt-simple-4.5.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/lzma/lzma/0.0.1/jar/521616dc7487b42bef0e803bd2fa3faf668101d7/lzma-0.0.1.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/com.paulscode/codecjorbis/20101023/jar/c73b5636faf089d9f00e8732a829577de25237ee/codecjorbis-20101023.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/com.paulscode/codecwav/20101023/jar/12f031cfe88fef5c1dd36c563c0a3a69bd7261da/codecwav-20101023.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/com.paulscode/libraryjavasound/20101123/jar/5c5e304366f75f9eaa2e8cca546a1fb6109348b3/libraryjavasound-20101123.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/com.paulscode/librarylwjglopenal/20100824/jar/73e80d0794c39665aec3f62eee88ca91676674ef/librarylwjglopenal-20100824.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/com.paulscode/soundsystem/20120107/jar/419c05fe9be71f792b2d76cfc9b67f1ed0fec7f6/soundsystem-20120107.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl/2.9.0/jar/5654d06e61a1bba7ae1e7f5233e1106be64c91cd/lwjgl-2.9.0.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl_util/2.9.0/jar/a778846b64008fc7f48ead2377f034e547991699/lwjgl_util-2.9.0.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/argo/argo/2.25_fixed/jar/751761ce15a3e3aaf3fc75b9f013ff8f7b88a585/argo-2.25_fixed.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/net.sourceforge.argo/argo/2.25/jar/751761ce15a3e3aaf3fc75b9f013ff8f7b88a585/argo-2.25.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.bouncycastle/bcprov-jdk15on/1.47/jar/b6f5d9926b0afbde9f4dbe3db88c5247be7794bb/bcprov-jdk15on-1.47.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/com.google.guava/guava/14.0/bundle/67b7be4ee7ba48e4828a42d6d5069761186d4a53/guava-14.0.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.apache.commons/commons-lang3/3.1/jar/905075e6c80f206bbe6cf1e809d2caa69f420c76/commons-lang3-3.1.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/commons-io/commons-io/2.4/jar/b1b6ea3b7e4aa4f492509a4952029cd8e48019ad/commons-io-2.4.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput/2.0.5/jar/39c7796b469a600f72380316f6b1f11db6c2c7c4/jinput-2.0.5.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/net.java.jutils/jutils/1.0.0/jar/e12fe1fda814bd348c1579329c86943d2cd3c6a6/jutils-1.0.0.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/com.google.code.gson/gson/2.2.2/jar/1f96456ca233dec780aa224bff076d8e8bca3908/gson-2.2.2.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl-platform/2.9.0/jar/2ba5dcb11048147f1a74eff2deb192c001321f77/lwjgl-platform-2.9.0-natives-linux.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl-platform/2.9.0/jar/6621b382cb14cc409b041d8d72829156a87c31aa/lwjgl-platform-2.9.0-natives-osx.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl-platform/2.9.0/jar/3f11873dc8e84c854ec7c5a8fd2e869f8aaef764/lwjgl-platform-2.9.0-natives-windows.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput-platform/2.0.5/jar/7ff832a6eb9ab6a767f1ade2b548092d0fa64795/jinput-platform-2.0.5-natives-linux.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput-platform/2.0.5/jar/53f9c919f34d2ca9de8c51fc4e1e8282029a9232/jinput-platform-2.0.5-natives-osx.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput-platform/2.0.5/jar/385ee093e01f587f30ee1c8a2ee7d408fd732e16/jinput-platform-2.0.5-natives-windows.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-reflect/2.10.2/jar/444ff8e89a81697997ed8a98a4642ba283130249/scala-reflect-2.10.2.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-mcp.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Users/chris/Documents/Minecraft Project/Femtocraft/lib/sqlite-jdbc-3.7.15-M1.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a minecraft related file at /Applications/IntelliJ IDEA 13 CE.app/lib/idea_rt.jar, examining for mod candidates
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Minecraft jar mods loaded successfully
+2014-07-12 00:46:13 [INFO] [ForgeModLoader] Searching /Users/chris/Documents/Minecraft Project/Femtocraft/eclipse/mods for mods
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Found a candidate zip or jar file sqlite-jdbc-3.7.15-M1.jar
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] Examining file ant-javafx.jar for potential mods
+2014-07-12 00:46:13 [FINE] [ForgeModLoader] The mod container ant-javafx.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:14 [FINE] [ForgeModLoader] Examining file dt.jar for potential mods
+2014-07-12 00:46:14 [FINE] [ForgeModLoader] The mod container dt.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:14 [FINE] [ForgeModLoader] Examining file javafx-doclet.jar for potential mods
+2014-07-12 00:46:14 [FINE] [ForgeModLoader] The mod container javafx-doclet.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:14 [FINE] [ForgeModLoader] Examining file javafx-mx.jar for potential mods
+2014-07-12 00:46:14 [FINE] [ForgeModLoader] The mod container javafx-mx.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:14 [FINE] [ForgeModLoader] Examining file jconsole.jar for potential mods
+2014-07-12 00:46:14 [FINE] [ForgeModLoader] The mod container jconsole.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:14 [FINE] [ForgeModLoader] Examining file sa-jdi.jar for potential mods
+2014-07-12 00:46:14 [FINE] [ForgeModLoader] The mod container sa-jdi.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:14 [FINE] [ForgeModLoader] Examining file tools.jar for potential mods
+2014-07-12 00:46:14 [FINE] [ForgeModLoader] The mod container tools.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:14 [FINE] [ForgeModLoader] Examining file charsets.jar for potential mods
+2014-07-12 00:46:14 [FINE] [ForgeModLoader] The mod container charsets.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:14 [FINE] [ForgeModLoader] Examining file deploy.jar for potential mods
+2014-07-12 00:46:14 [FINE] [ForgeModLoader] The mod container deploy.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:15 [FINE] [ForgeModLoader] Examining file htmlconverter.jar for potential mods
+2014-07-12 00:46:15 [FINE] [ForgeModLoader] The mod container htmlconverter.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:15 [FINE] [ForgeModLoader] Examining file javaws.jar for potential mods
+2014-07-12 00:46:15 [FINE] [ForgeModLoader] The mod container javaws.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:15 [FINE] [ForgeModLoader] Examining file jce.jar for potential mods
+2014-07-12 00:46:15 [FINE] [ForgeModLoader] The mod container jce.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:15 [FINE] [ForgeModLoader] Examining file jfr.jar for potential mods
+2014-07-12 00:46:15 [FINE] [ForgeModLoader] The mod container jfr.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:15 [FINE] [ForgeModLoader] Examining file jfxrt.jar for potential mods
+2014-07-12 00:46:15 [FINE] [ForgeModLoader] The mod container jfxrt.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:15 [FINE] [ForgeModLoader] Examining file jsse.jar for potential mods
+2014-07-12 00:46:15 [FINE] [ForgeModLoader] The mod container jsse.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:15 [FINE] [ForgeModLoader] Examining file management-agent.jar for potential mods
+2014-07-12 00:46:15 [FINE] [ForgeModLoader] The mod container management-agent.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:15 [FINE] [ForgeModLoader] Examining file plugin.jar for potential mods
+2014-07-12 00:46:15 [FINE] [ForgeModLoader] The mod container plugin.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:15 [FINE] [ForgeModLoader] Examining file resources.jar for potential mods
+2014-07-12 00:46:15 [FINE] [ForgeModLoader] The mod container resources.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:15 [FINE] [ForgeModLoader] Examining file rt.jar for potential mods
+2014-07-12 00:46:15 [FINE] [ForgeModLoader] The mod container rt.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:16 [WARNING] [ForgeModLoader] Zip file rt.jar failed to read properly, it will be ignored
 java.lang.NullPointerException
 	at cpw.mods.fml.common.discovery.asm.ASMModParser.isBaseMod(ASMModParser.java:130)
 	at cpw.mods.fml.common.ModContainerFactory.build(ModContainerFactory.java:34)
@@ -179,636 +179,616 @@ java.lang.NullPointerException
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.lang.reflect.Method.invoke(Method.java:606)
 	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:134)
-2014-07-12 00:40:57 [FINE] [ForgeModLoader] Examining file dnsns.jar for potential mods
-2014-07-12 00:40:57 [FINE] [ForgeModLoader] The mod container dnsns.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:57 [FINE] [ForgeModLoader] Examining file localedata.jar for potential mods
-2014-07-12 00:40:57 [FINE] [ForgeModLoader] The mod container localedata.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Examining file sunec.jar for potential mods
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] The mod container sunec.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Examining file sunjce_provider.jar for potential mods
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] The mod container sunjce_provider.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Examining file sunpkcs11.jar for potential mods
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] The mod container sunpkcs11.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Examining file zipfs.jar for potential mods
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] The mod container zipfs.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Examining directory forge-1.6.4-9.11.1.964-src for potential mods
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Found an mcmod.info file in directory forge-1.6.4-9.11.1.964-src
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package assets
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package assets.femtocraft
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package assets.femtocraft.models
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package assets.femtocraft.textures
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package assets.femtocraft.textures.blocks
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package assets.femtocraft.textures.guis
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package assets.femtocraft.textures.items
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Identified an FMLMod type mod com.itszuvalex.femtocraft.Femtocraft
-2014-07-12 00:40:58 [FINEST] [Femtocraft] Parsed dependency info : [] [] []
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.api
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.blocks
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.common
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.common.gui
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.consumables
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.consumables.farming
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.consumables.farming.items
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.consumables.items
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.consumables.processing
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.consumables.processing.blocks
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.core
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.core.blocks
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.core.items
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.core.liquids
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.core.multiblock
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.core.ore
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.core.tiles
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.entities
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.entities.fx
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.graph
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.industry
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.industry.blocks
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.industry.containers
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.industry.gui
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.industry.gui.graph
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.industry.items
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.industry.tiles
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.managers
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.managers.assembler
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.managers.dimensional
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.managers.research
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.managers.temporal
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.models
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.player
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.power
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.power.blocks
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.power.containers
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.power.gui
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.power.items
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.power.multiblock
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.power.plasma
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.power.plasma.volatility
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.power.render
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.power.tiles
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.proxy
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.render
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.research
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.research.blocks
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.research.containers
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.research.gui
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.research.gui.graph
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.research.gui.technology
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.research.items
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.research.tiles
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.transport
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.transport.items
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.transport.items.blocks
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.transport.items.render
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.transport.items.tiles
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.transport.liquids
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.transport.liquids.blocks
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.transport.liquids.render
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.transport.liquids.tiles
-2014-07-12 00:40:58 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.utils
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Examining file launchwrapper-1.8.jar for potential mods
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] The mod container launchwrapper-1.8.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Examining file asm-debug-all-4.1.jar for potential mods
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] The mod container asm-debug-all-4.1.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Examining file scala-library-2.10.2.jar for potential mods
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] The mod container scala-library-2.10.2.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Examining file scala-compiler-2.10.2.jar for potential mods
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] The mod container scala-compiler-2.10.2.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Examining file jopt-simple-4.5.jar for potential mods
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] The mod container jopt-simple-4.5.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Examining file lzma-0.0.1.jar for potential mods
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] The mod container lzma-0.0.1.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Examining file codecjorbis-20101023.jar for potential mods
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] The mod container codecjorbis-20101023.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Examining file codecwav-20101023.jar for potential mods
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] The mod container codecwav-20101023.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Examining file libraryjavasound-20101123.jar for potential mods
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] The mod container libraryjavasound-20101123.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Examining file librarylwjglopenal-20100824.jar for potential mods
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] The mod container librarylwjglopenal-20100824.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Examining file soundsystem-20120107.jar for potential mods
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] The mod container soundsystem-20120107.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Examining file lwjgl-2.9.0.jar for potential mods
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] The mod container lwjgl-2.9.0.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Examining file lwjgl_util-2.9.0.jar for potential mods
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] The mod container lwjgl_util-2.9.0.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Examining file argo-2.25_fixed.jar for potential mods
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] The mod container argo-2.25_fixed.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Examining file argo-2.25.jar for potential mods
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] The mod container argo-2.25.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] Examining file bcprov-jdk15on-1.47.jar for potential mods
-2014-07-12 00:40:58 [FINE] [ForgeModLoader] The mod container bcprov-jdk15on-1.47.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] Examining file guava-14.0.jar for potential mods
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] The mod container guava-14.0.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] Examining file commons-lang3-3.1.jar for potential mods
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] The mod container commons-lang3-3.1.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] Examining file commons-io-2.4.jar for potential mods
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] The mod container commons-io-2.4.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] Examining file jinput-2.0.5.jar for potential mods
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] The mod container jinput-2.0.5.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] Examining file jutils-1.0.0.jar for potential mods
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] The mod container jutils-1.0.0.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] Examining file gson-2.2.2.jar for potential mods
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] The mod container gson-2.2.2.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] Examining file lwjgl-platform-2.9.0-natives-linux.jar for potential mods
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] The mod container lwjgl-platform-2.9.0-natives-linux.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] Examining file lwjgl-platform-2.9.0-natives-osx.jar for potential mods
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] The mod container lwjgl-platform-2.9.0-natives-osx.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] Examining file lwjgl-platform-2.9.0-natives-windows.jar for potential mods
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] The mod container lwjgl-platform-2.9.0-natives-windows.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] Examining file jinput-platform-2.0.5-natives-linux.jar for potential mods
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] The mod container jinput-platform-2.0.5-natives-linux.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] Examining file jinput-platform-2.0.5-natives-osx.jar for potential mods
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] The mod container jinput-platform-2.0.5-natives-osx.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] Examining file jinput-platform-2.0.5-natives-windows.jar for potential mods
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] The mod container jinput-platform-2.0.5-natives-windows.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] Examining file scala-reflect-2.10.2.jar for potential mods
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] The mod container scala-reflect-2.10.2.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] Examining file forge-1.6.4-9.11.1.964-mcp.jar for potential mods
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] The mod container forge-1.6.4-9.11.1.964-mcp.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:59 [SEVERE] [ForgeModLoader] FML has detected a mod that is using a package name based on 'net.minecraft.src' : net.minecraft.src.Start. This is generally a severe programming error.  There should be no mod code in the minecraft namespace. MOVE YOUR MOD! If you're in eclipse, select your source code and 'refactor' it into a new package. Go on. DO IT NOW!
-2014-07-12 00:40:59 [SEVERE] [ForgeModLoader] FML has detected a mod that is using a package name based on 'net.minecraft.src' : net.minecraft.src.FMLRenderAccessLibrary. This is generally a severe programming error.  There should be no mod code in the minecraft namespace. MOVE YOUR MOD! If you're in eclipse, select your source code and 'refactor' it into a new package. Go on. DO IT NOW!
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] Examining file sqlite-jdbc-3.7.15-M1.jar for potential mods
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] The mod container sqlite-jdbc-3.7.15-M1.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] Examining file idea_rt.jar for potential mods
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] The mod container idea_rt.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] Examining file sqlite-jdbc-3.7.15-M1.jar for potential mods
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] The mod container sqlite-jdbc-3.7.15-M1.jar appears to be missing an mcmod.info file
-2014-07-12 00:40:59 [INFO] [ForgeModLoader] Forge Mod Loader has identified 4 mods to load
-2014-07-12 00:40:59 [FINER] [ForgeModLoader] Received a system property request ''
-2014-07-12 00:40:59 [FINER] [ForgeModLoader] System property request managing the state of 0 mods
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] After merging, found state information for 0 mods
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] Reloading logging properties from /Users/chris/Documents/Minecraft Project/Femtocraft/eclipse/config/logging.properties
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] Reloaded logging properties
-2014-07-12 00:40:59 [FINE] [mcp] Mod Logging channel mcp configured at default level.
-2014-07-12 00:40:59 [INFO] [mcp] Activating mod mcp
-2014-07-12 00:40:59 [FINE] [FML] Mod Logging channel FML configured at default level.
-2014-07-12 00:40:59 [INFO] [FML] Activating mod FML
-2014-07-12 00:40:59 [FINE] [Forge] Mod Logging channel Forge configured at default level.
-2014-07-12 00:40:59 [INFO] [Forge] Activating mod Forge
-2014-07-12 00:40:59 [FINE] [Femtocraft] Enabling mod Femtocraft
-2014-07-12 00:40:59 [FINE] [Femtocraft] Mod Logging channel Femtocraft configured at default level.
-2014-07-12 00:40:59 [INFO] [Femtocraft] Activating mod Femtocraft
-2014-07-12 00:40:59 [WARNING] [Femtocraft] Mod Femtocraft is missing a pack.mcmeta file, things may not work well
-2014-07-12 00:40:59 [INFO] [Minecraft-Client] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
-2014-07-12 00:40:59 [FINER] [ForgeModLoader] Verifying mod requirements are satisfied
-2014-07-12 00:40:59 [FINER] [ForgeModLoader] All mod requirements are satisfied
-2014-07-12 00:40:59 [FINER] [ForgeModLoader] Sorting mods into an ordered list
-2014-07-12 00:40:59 [FINER] [ForgeModLoader] Mod sorting completed successfully
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] Mod sorting data
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] 	Femtocraft(Femtocraft:0.1.0): forge-1.6.4-9.11.1.964-src ()
-2014-07-12 00:40:59 [INFO] [ForgeModLoader] FML has found a non-mod file sqlite-jdbc-3.7.15-M1.jar in your mods directory. It will now be injected into your classpath. This could severe stability issues, it should be removed if possible.
-2014-07-12 00:40:59 [FINEST] [mcp] Sending event FMLConstructionEvent to mod mcp
-2014-07-12 00:40:59 [FINEST] [mcp] Sent event FMLConstructionEvent to mod mcp
-2014-07-12 00:40:59 [FINEST] [FML] Sending event FMLConstructionEvent to mod FML
-2014-07-12 00:40:59 [FINEST] [FML] Sent event FMLConstructionEvent to mod FML
-2014-07-12 00:40:59 [FINEST] [Forge] Sending event FMLConstructionEvent to mod Forge
-2014-07-12 00:40:59 [INFO] [ForgeModLoader] Registering Forge Packet Handler
-2014-07-12 00:40:59 [FINEST] [ForgeModLoader] Testing mod Forge to verify it accepts its own version in a remote connection
-2014-07-12 00:40:59 [FINEST] [ForgeModLoader] The mod Forge accepts its own version (9.11.1.964)
-2014-07-12 00:40:59 [INFO] [ForgeModLoader] Succeeded registering Forge Packet Handler
-2014-07-12 00:40:59 [FINEST] [Forge] Sent event FMLConstructionEvent to mod Forge
-2014-07-12 00:40:59 [FINEST] [Femtocraft] Sending event FMLConstructionEvent to mod Femtocraft
-2014-07-12 00:40:59 [FINEST] [ForgeModLoader] Testing mod Femtocraft to verify it accepts its own version in a remote connection
-2014-07-12 00:40:59 [FINEST] [ForgeModLoader] The mod Femtocraft accepts its own version (0.1.0)
-2014-07-12 00:40:59 [FINE] [ForgeModLoader] Attempting to inject @SidedProxy classes into Femtocraft
-2014-07-12 00:41:00 [FINEST] [Femtocraft] Sent event FMLConstructionEvent to mod Femtocraft
-2014-07-12 00:41:00 [FINE] [ForgeModLoader] Mod signature data
-2014-07-12 00:41:00 [FINE] [ForgeModLoader] 	mcp(Minecraft Coder Pack:8.09): minecraft.jar (NO VALID CERTIFICATE FOUND)
-2014-07-12 00:41:00 [FINE] [ForgeModLoader] 	FML(Forge Mod Loader:6.99.19.964): forge-1.6.4-9.11.1.964-mcp.jar (NO VALID CERTIFICATE FOUND)
-2014-07-12 00:41:00 [FINE] [ForgeModLoader] 	Forge(Minecraft Forge:9.11.1.964): forge-1.6.4-9.11.1.964-mcp.jar (NO VALID CERTIFICATE FOUND)
-2014-07-12 00:41:00 [FINE] [ForgeModLoader] 	Femtocraft(Femtocraft:0.1.0): forge-1.6.4-9.11.1.964-src (NO VALID CERTIFICATE FOUND)
-2014-07-12 00:41:00 [FINEST] [mcp] Sending event FMLPreInitializationEvent to mod mcp
-2014-07-12 00:41:00 [FINEST] [mcp] Sent event FMLPreInitializationEvent to mod mcp
-2014-07-12 00:41:00 [FINEST] [FML] Sending event FMLPreInitializationEvent to mod FML
-2014-07-12 00:41:00 [FINEST] [FML] Sent event FMLPreInitializationEvent to mod FML
-2014-07-12 00:41:00 [FINEST] [Forge] Sending event FMLPreInitializationEvent to mod Forge
-2014-07-12 00:41:00 [INFO] [ForgeModLoader] Configured a dormant chunk cache size of 0
-2014-07-12 00:41:00 [FINEST] [Forge] Sent event FMLPreInitializationEvent to mod Forge
-2014-07-12 00:41:00 [FINEST] [Femtocraft] Sending event FMLPreInitializationEvent to mod Femtocraft
-2014-07-12 00:41:00 [FINEST] [Femtocraft] Sent event FMLPreInitializationEvent to mod Femtocraft
-2014-07-12 00:41:00 [FINEST] [mcp] Sending event FMLInitializationEvent to mod mcp
-2014-07-12 00:41:00 [FINEST] [mcp] Sent event FMLInitializationEvent to mod mcp
-2014-07-12 00:41:00 [FINEST] [FML] Sending event FMLInitializationEvent to mod FML
-2014-07-12 00:41:00 [FINEST] [FML] Sent event FMLInitializationEvent to mod FML
-2014-07-12 00:41:00 [FINEST] [Forge] Sending event FMLInitializationEvent to mod Forge
-2014-07-12 00:41:00 [FINEST] [Forge] Sent event FMLInitializationEvent to mod Forge
-2014-07-12 00:41:00 [FINEST] [Femtocraft] Sending event FMLInitializationEvent to mod Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4095) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4094) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4093) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4092) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4091) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4089) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4090) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4088) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4087) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4086) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4085) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4035) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4034) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4033) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4084) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4083) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4082) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4080) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4079) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4078) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4077) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4075) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4074) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4073) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4072) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4071) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4069) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4068) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4067) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4066) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.power.items.ItemBlockMicroCube(4063) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4058) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4057) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4049) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4051) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4050) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4065) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4064) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4062) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4061) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4060) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4059) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4032) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4056) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4055) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4054) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4053) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4052) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4048) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4047) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4031) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4045) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4044) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4042) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4043) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4040) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4039) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4038) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4037) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12256) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12257) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12258) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12259) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12260) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12261) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12262) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12263) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12264) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12265) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12266) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12267) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12268) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12269) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12276) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12277) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12272) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12273) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12274) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12278) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12270) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12271) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12275) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.research.items.ItemPortableResearchComputer(12279) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12280) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12281) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12282) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12283) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12284) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12285) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12286) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12287) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12288) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12289) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12290) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12298) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12291) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12292) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12293) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12294) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12295) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12296) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12297) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12299) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.industry.items.ItemDigitalSchematic(12320) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12300) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12301) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12302) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12303) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12304) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12305) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12306) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12307) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12308) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12309) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12310) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12311) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12312) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12313) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12314) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12315) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.industry.items.ItemQuantumSchematic(12321) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.research.items.ItemMicroTechnology(12316) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.research.items.ItemNanoTechnology(12317) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.research.items.ItemFemtoTechnology(12318) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.industry.items.ItemPaperSchematic(12319) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemMicroInterfaceDevice(12322) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemNanoInterfaceDevice(12323) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemFemtoInterfaceDevice(12324) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12325) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12326) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12327) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12328) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12329) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12330) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12331) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12332) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12333) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12334) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12335) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12336) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12337) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12338) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12339) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12340) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12341) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12342) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12343) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12344) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12345) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12346) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12347) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12348) owned by Femtocraft
-2014-07-12 00:41:00 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12349) owned by Femtocraft
-2014-07-12 00:41:01 [FINEST] [Femtocraft] Sent event FMLInitializationEvent to mod Femtocraft
-2014-07-12 00:41:01 [FINEST] [ForgeModLoader] Attempting to deliver 0 IMC messages to mod mcp
-2014-07-12 00:41:01 [FINEST] [mcp] Sending event IMCEvent to mod mcp
-2014-07-12 00:41:01 [FINEST] [mcp] Sent event IMCEvent to mod mcp
-2014-07-12 00:41:01 [FINEST] [ForgeModLoader] Attempting to deliver 0 IMC messages to mod FML
-2014-07-12 00:41:01 [FINEST] [FML] Sending event IMCEvent to mod FML
-2014-07-12 00:41:01 [FINEST] [FML] Sent event IMCEvent to mod FML
-2014-07-12 00:41:01 [FINEST] [ForgeModLoader] Attempting to deliver 0 IMC messages to mod Forge
-2014-07-12 00:41:01 [FINEST] [Forge] Sending event IMCEvent to mod Forge
-2014-07-12 00:41:01 [FINEST] [Forge] Sent event IMCEvent to mod Forge
-2014-07-12 00:41:01 [FINEST] [ForgeModLoader] Attempting to deliver 0 IMC messages to mod Femtocraft
-2014-07-12 00:41:01 [FINEST] [Femtocraft] Sending event IMCEvent to mod Femtocraft
-2014-07-12 00:41:01 [FINEST] [Femtocraft] Sent event IMCEvent to mod Femtocraft
-2014-07-12 00:41:01 [FINEST] [mcp] Sending event FMLPostInitializationEvent to mod mcp
-2014-07-12 00:41:01 [FINEST] [mcp] Sent event FMLPostInitializationEvent to mod mcp
-2014-07-12 00:41:01 [FINEST] [FML] Sending event FMLPostInitializationEvent to mod FML
-2014-07-12 00:41:01 [FINEST] [FML] Sent event FMLPostInitializationEvent to mod FML
-2014-07-12 00:41:01 [FINEST] [Forge] Sending event FMLPostInitializationEvent to mod Forge
-2014-07-12 00:41:01 [FINEST] [Forge] Sent event FMLPostInitializationEvent to mod Forge
-2014-07-12 00:41:01 [FINEST] [Femtocraft] Sending event FMLPostInitializationEvent to mod Femtocraft
-2014-07-12 00:41:01 [INFO] [Femtocraft] Database already exists.  Skipping item registration.
-2014-07-12 00:41:01 [INFO] [Femtocraft] Creating Graph of Technologies.
-2014-07-12 00:41:01 [INFO] [Femtocraft] Transfering Technologies to Nodes.
-2014-07-12 00:41:01 [INFO] [Femtocraft] Linking edges.
-2014-07-12 00:41:01 [INFO] [Femtocraft] Computing Placements. This process may take a while on slower computers.
-2014-07-12 00:41:01 [INFO] [Femtocraft] Computing heights.
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing edge crossings for 15 rows.
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimize Pass 0.
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 0(9)->1(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 1(9)->2(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 2(9)->3(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 3(9)->4(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 4(9)->5(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 5(9)->6(10).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 6(10)->7(10).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 7(10)->8(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 8(9)->9(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 9(9)->10(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 10(9)->11(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 11(9)->12(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 12(9)->13(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 13(9)->14(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimize Pass 1.
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 0(9)->1(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 1(9)->2(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 2(9)->3(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 3(9)->4(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 4(9)->5(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 5(9)->6(10).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 6(10)->7(10).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 7(10)->8(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 8(9)->9(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 9(9)->10(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 10(9)->11(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 11(9)->12(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 12(9)->13(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 13(9)->14(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimize Pass 2.
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 0(9)->1(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 1(9)->2(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 2(9)->3(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 3(9)->4(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 4(9)->5(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 5(9)->6(10).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 6(10)->7(10).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 7(10)->8(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 8(9)->9(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 9(9)->10(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 10(9)->11(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 11(9)->12(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 12(9)->13(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 13(9)->14(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimize Pass 3.
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 0(9)->1(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 1(9)->2(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 2(9)->3(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 3(9)->4(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 4(9)->5(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 5(9)->6(10).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 6(10)->7(10).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 7(10)->8(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 8(9)->9(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 9(9)->10(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 10(9)->11(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 11(9)->12(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 12(9)->13(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 13(9)->14(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimize Pass 4.
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 0(9)->1(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 1(9)->2(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 2(9)->3(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 3(9)->4(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 4(9)->5(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 5(9)->6(10).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 6(10)->7(10).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 7(10)->8(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 8(9)->9(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 9(9)->10(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 10(9)->11(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 11(9)->12(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 12(9)->13(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 13(9)->14(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimize Pass 5.
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 0(9)->1(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 1(9)->2(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 2(9)->3(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 3(9)->4(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 4(9)->5(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 5(9)->6(10).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 6(10)->7(10).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 7(10)->8(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 8(9)->9(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 9(9)->10(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 10(9)->11(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 11(9)->12(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 12(9)->13(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 13(9)->14(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimize Pass 6.
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 0(9)->1(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 1(9)->2(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 2(9)->3(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 3(9)->4(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 4(9)->5(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 5(9)->6(10).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 6(10)->7(10).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 7(10)->8(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 8(9)->9(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 9(9)->10(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 10(9)->11(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 11(9)->12(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 12(9)->13(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 13(9)->14(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimize Pass 7.
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 0(9)->1(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 1(9)->2(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 2(9)->3(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 3(9)->4(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 4(9)->5(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 5(9)->6(10).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 6(10)->7(10).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 7(10)->8(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 8(9)->9(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 9(9)->10(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 10(9)->11(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 11(9)->12(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 12(9)->13(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 13(9)->14(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimize Pass 8.
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 0(9)->1(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 1(9)->2(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 2(9)->3(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 3(9)->4(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 4(9)->5(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 5(9)->6(10).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 6(10)->7(10).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 7(10)->8(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 8(9)->9(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 9(9)->10(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 10(9)->11(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 11(9)->12(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 12(9)->13(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 13(9)->14(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimize Pass 9.
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 0(9)->1(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 1(9)->2(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 2(9)->3(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 3(9)->4(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 4(9)->5(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 5(9)->6(10).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 6(10)->7(10).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 7(10)->8(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 8(9)->9(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 9(9)->10(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 10(9)->11(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 11(9)->12(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 12(9)->13(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Minimizing 13(9)->14(9).
-2014-07-12 00:41:01 [INFO] [Femtocraft] Graph placement finished.
-2014-07-12 00:41:01 [FINEST] [Femtocraft] Sent event FMLPostInitializationEvent to mod Femtocraft
-2014-07-12 00:41:01 [FINEST] [mcp] Sending event FMLLoadCompleteEvent to mod mcp
-2014-07-12 00:41:01 [FINEST] [mcp] Sent event FMLLoadCompleteEvent to mod mcp
-2014-07-12 00:41:01 [FINEST] [FML] Sending event FMLLoadCompleteEvent to mod FML
-2014-07-12 00:41:01 [FINEST] [FML] Sent event FMLLoadCompleteEvent to mod FML
-2014-07-12 00:41:01 [FINEST] [Forge] Sending event FMLLoadCompleteEvent to mod Forge
-2014-07-12 00:41:01 [FINEST] [Forge] Sent event FMLLoadCompleteEvent to mod Forge
-2014-07-12 00:41:01 [FINEST] [Femtocraft] Sending event FMLLoadCompleteEvent to mod Femtocraft
-2014-07-12 00:41:01 [FINEST] [Femtocraft] Sent event FMLLoadCompleteEvent to mod Femtocraft
-2014-07-12 00:41:01 [INFO] [ForgeModLoader] Forge Mod Loader has successfully loaded 4 mods
-2014-07-12 00:41:01 [WARNING] [Femtocraft] Mod Femtocraft is missing a pack.mcmeta file, things may not work well
-2014-07-12 00:41:01 [INFO] [Minecraft-Client] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoCalculator.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemFluidicConductor.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemCharosGate.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemHeatingElement.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemInfinitelyRecursiveALU.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemBattery.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemHerculesDrive.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemMinervaComplex.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemDissassemblyArray.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemCrossDimensionalCommunicator.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemArticulatingArm.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemStellaratorPlating.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoSimulator.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemDimensionalMonopole.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemThoriumRod.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemBasicAICore.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemStyxValve.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemTemporalResonator.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemAssemblyArray.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoCoil.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemInfiniteVolumePolychora.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemPanLocationalComputer.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemAtlasMount.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemOrpheusProcessor.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemPandoraCube.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoRegulator.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemHermesBus.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemKineticPulverizer.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemMinosGate.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemVacuumCore.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoPlating.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemInfallibleEstimator.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemManagerCore.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemSelfFulfillingOracle.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemSchedulerCore.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemErinyesCircuit.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemPhlegethonTunnelPrimer.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemFissionReactorPlating.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemNanochip.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemFemtoCoil.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemCerberusGate.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemFemtoPlating.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/items/ItemLearningCore.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaVent.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/blocks/BlockNanoFissionReactorHousing.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4083_BlockConsumer.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4042_BlockStellaratorOpticalMaser.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/blocks/BlockGeothermalChargingBase.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPhlegethonTunnelFrame.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4036_null.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/blocks/BlockNanoFissionReactorCore.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4032_BlockOrbitalEqualizer.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/blocks/BlockMicroEngine.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaCondenser.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPhlegethonTunnelCore.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/blocks/BlockDecontaminationChamber.png
-2014-07-12 00:41:01 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4084_BlockGenerator.png
-2014-07-12 00:41:02 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaTurbine.png
-2014-07-12 00:41:02 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: femtocraft:textures/blocks/BlockGeothermalChargingCoil.png
-2014-07-12 00:41:02 [SEVERE] [Minecraft-Client] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4031_BlockNullEqualizer.png
-2014-07-12 00:41:02 [INFO] [STDOUT] 
-2014-07-12 00:41:02 [INFO] [STDOUT] Starting up SoundSystem...
-2014-07-12 00:41:02 [INFO] [STDOUT] Initializing LWJGL OpenAL
-2014-07-12 00:41:02 [INFO] [STDOUT]     (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-2014-07-12 00:41:02 [INFO] [STDOUT] OpenAL initialized.
-2014-07-12 00:41:02 [INFO] [STDOUT] 
-2014-07-12 00:41:02 [SEVERE] [Minecraft-Client] Realms: Server not available!
-2014-07-12 00:41:07 [INFO] [Minecraft-Client] Stopping!
-2014-07-12 00:41:07 [INFO] [STDOUT] 
-2014-07-12 00:41:07 [INFO] [STDOUT] SoundSystem shutting down...
-2014-07-12 00:41:07 [INFO] [STDOUT]     Author: Paul Lamb, www.paulscode.com
-2014-07-12 00:41:07 [INFO] [STDOUT] 
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] Examining file dnsns.jar for potential mods
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] The mod container dnsns.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] Examining file localedata.jar for potential mods
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] The mod container localedata.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] Examining file sunec.jar for potential mods
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] The mod container sunec.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] Examining file sunjce_provider.jar for potential mods
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] The mod container sunjce_provider.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] Examining file sunpkcs11.jar for potential mods
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] The mod container sunpkcs11.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] Examining file zipfs.jar for potential mods
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] The mod container zipfs.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] Examining directory forge-1.6.4-9.11.1.964-src for potential mods
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] Found an mcmod.info file in directory forge-1.6.4-9.11.1.964-src
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package assets
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package assets.femtocraft
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package assets.femtocraft.models
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package assets.femtocraft.textures
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package assets.femtocraft.textures.blocks
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package assets.femtocraft.textures.guis
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package assets.femtocraft.textures.items
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] Identified an FMLMod type mod com.itszuvalex.femtocraft.Femtocraft
+2014-07-12 00:46:16 [FINEST] [Femtocraft] Parsed dependency info : [] [] []
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.api
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.blocks
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.common
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.common.gui
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.consumables
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.consumables.farming
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.consumables.farming.items
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.consumables.items
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.consumables.processing
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.consumables.processing.blocks
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.core
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.core.blocks
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.core.items
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.core.liquids
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.core.multiblock
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.core.ore
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.core.tiles
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.entities
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.entities.fx
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.graph
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.industry
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.industry.blocks
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.industry.containers
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.industry.gui
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.industry.gui.graph
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.industry.items
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.industry.tiles
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.managers
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.managers.assembler
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.managers.dimensional
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.managers.research
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.managers.temporal
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.models
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.player
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.power
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.power.blocks
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.power.containers
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.power.gui
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.power.items
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.power.multiblock
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.power.plasma
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.power.plasma.volatility
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.power.render
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.power.tiles
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.proxy
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.render
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.research
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.research.blocks
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.research.containers
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.research.gui
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.research.gui.graph
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.research.gui.technology
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.research.items
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.research.tiles
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.transport
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.transport.items
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.transport.items.blocks
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.transport.items.render
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.transport.items.tiles
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.transport.liquids
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.transport.liquids.blocks
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.transport.liquids.render
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.transport.liquids.tiles
+2014-07-12 00:46:16 [FINEST] [ForgeModLoader] Recursing into package com.itszuvalex.femtocraft.utils
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] Examining file launchwrapper-1.8.jar for potential mods
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] The mod container launchwrapper-1.8.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] Examining file asm-debug-all-4.1.jar for potential mods
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] The mod container asm-debug-all-4.1.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] Examining file scala-library-2.10.2.jar for potential mods
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] The mod container scala-library-2.10.2.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] Examining file scala-compiler-2.10.2.jar for potential mods
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] The mod container scala-compiler-2.10.2.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] Examining file jopt-simple-4.5.jar for potential mods
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] The mod container jopt-simple-4.5.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] Examining file lzma-0.0.1.jar for potential mods
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] The mod container lzma-0.0.1.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] Examining file codecjorbis-20101023.jar for potential mods
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] The mod container codecjorbis-20101023.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] Examining file codecwav-20101023.jar for potential mods
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] The mod container codecwav-20101023.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] Examining file libraryjavasound-20101123.jar for potential mods
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] The mod container libraryjavasound-20101123.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] Examining file librarylwjglopenal-20100824.jar for potential mods
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] The mod container librarylwjglopenal-20100824.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] Examining file soundsystem-20120107.jar for potential mods
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] The mod container soundsystem-20120107.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] Examining file lwjgl-2.9.0.jar for potential mods
+2014-07-12 00:46:16 [FINE] [ForgeModLoader] The mod container lwjgl-2.9.0.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Examining file lwjgl_util-2.9.0.jar for potential mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] The mod container lwjgl_util-2.9.0.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Examining file argo-2.25_fixed.jar for potential mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] The mod container argo-2.25_fixed.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Examining file argo-2.25.jar for potential mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] The mod container argo-2.25.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Examining file bcprov-jdk15on-1.47.jar for potential mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] The mod container bcprov-jdk15on-1.47.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Examining file guava-14.0.jar for potential mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] The mod container guava-14.0.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Examining file commons-lang3-3.1.jar for potential mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] The mod container commons-lang3-3.1.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Examining file commons-io-2.4.jar for potential mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] The mod container commons-io-2.4.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Examining file jinput-2.0.5.jar for potential mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] The mod container jinput-2.0.5.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Examining file jutils-1.0.0.jar for potential mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] The mod container jutils-1.0.0.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Examining file gson-2.2.2.jar for potential mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] The mod container gson-2.2.2.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Examining file lwjgl-platform-2.9.0-natives-linux.jar for potential mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] The mod container lwjgl-platform-2.9.0-natives-linux.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Examining file lwjgl-platform-2.9.0-natives-osx.jar for potential mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] The mod container lwjgl-platform-2.9.0-natives-osx.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Examining file lwjgl-platform-2.9.0-natives-windows.jar for potential mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] The mod container lwjgl-platform-2.9.0-natives-windows.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Examining file jinput-platform-2.0.5-natives-linux.jar for potential mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] The mod container jinput-platform-2.0.5-natives-linux.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Examining file jinput-platform-2.0.5-natives-osx.jar for potential mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] The mod container jinput-platform-2.0.5-natives-osx.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Examining file jinput-platform-2.0.5-natives-windows.jar for potential mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] The mod container jinput-platform-2.0.5-natives-windows.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Examining file scala-reflect-2.10.2.jar for potential mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] The mod container scala-reflect-2.10.2.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Examining file forge-1.6.4-9.11.1.964-mcp.jar for potential mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] The mod container forge-1.6.4-9.11.1.964-mcp.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [SEVERE] [ForgeModLoader] FML has detected a mod that is using a package name based on 'net.minecraft.src' : net.minecraft.src.Start. This is generally a severe programming error.  There should be no mod code in the minecraft namespace. MOVE YOUR MOD! If you're in eclipse, select your source code and 'refactor' it into a new package. Go on. DO IT NOW!
+2014-07-12 00:46:17 [SEVERE] [ForgeModLoader] FML has detected a mod that is using a package name based on 'net.minecraft.src' : net.minecraft.src.FMLRenderAccessLibrary. This is generally a severe programming error.  There should be no mod code in the minecraft namespace. MOVE YOUR MOD! If you're in eclipse, select your source code and 'refactor' it into a new package. Go on. DO IT NOW!
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Examining file sqlite-jdbc-3.7.15-M1.jar for potential mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] The mod container sqlite-jdbc-3.7.15-M1.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Examining file idea_rt.jar for potential mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] The mod container idea_rt.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Examining file sqlite-jdbc-3.7.15-M1.jar for potential mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] The mod container sqlite-jdbc-3.7.15-M1.jar appears to be missing an mcmod.info file
+2014-07-12 00:46:17 [INFO] [ForgeModLoader] Forge Mod Loader has identified 4 mods to load
+2014-07-12 00:46:17 [FINER] [ForgeModLoader] Received a system property request ''
+2014-07-12 00:46:17 [FINER] [ForgeModLoader] System property request managing the state of 0 mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] After merging, found state information for 0 mods
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Reloading logging properties from /Users/chris/Documents/Minecraft Project/Femtocraft/eclipse/config/logging.properties
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Reloaded logging properties
+2014-07-12 00:46:17 [FINE] [mcp] Mod Logging channel mcp configured at default level.
+2014-07-12 00:46:17 [INFO] [mcp] Activating mod mcp
+2014-07-12 00:46:17 [FINE] [FML] Mod Logging channel FML configured at default level.
+2014-07-12 00:46:17 [INFO] [FML] Activating mod FML
+2014-07-12 00:46:17 [FINE] [Forge] Mod Logging channel Forge configured at default level.
+2014-07-12 00:46:17 [INFO] [Forge] Activating mod Forge
+2014-07-12 00:46:17 [FINE] [Femtocraft] Enabling mod Femtocraft
+2014-07-12 00:46:17 [FINE] [Femtocraft] Mod Logging channel Femtocraft configured at default level.
+2014-07-12 00:46:17 [INFO] [Femtocraft] Activating mod Femtocraft
+2014-07-12 00:46:17 [WARNING] [Femtocraft] Mod Femtocraft is missing a pack.mcmeta file, things may not work well
+2014-07-12 00:46:17 [INFO] [Minecraft-Client] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-12 00:46:17 [FINER] [ForgeModLoader] Verifying mod requirements are satisfied
+2014-07-12 00:46:17 [FINER] [ForgeModLoader] All mod requirements are satisfied
+2014-07-12 00:46:17 [FINER] [ForgeModLoader] Sorting mods into an ordered list
+2014-07-12 00:46:17 [FINER] [ForgeModLoader] Mod sorting completed successfully
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] Mod sorting data
+2014-07-12 00:46:17 [FINE] [ForgeModLoader] 	Femtocraft(Femtocraft:0.1.0): forge-1.6.4-9.11.1.964-src ()
+2014-07-12 00:46:17 [INFO] [ForgeModLoader] FML has found a non-mod file sqlite-jdbc-3.7.15-M1.jar in your mods directory. It will now be injected into your classpath. This could severe stability issues, it should be removed if possible.
+2014-07-12 00:46:17 [FINEST] [mcp] Sending event FMLConstructionEvent to mod mcp
+2014-07-12 00:46:17 [FINEST] [mcp] Sent event FMLConstructionEvent to mod mcp
+2014-07-12 00:46:17 [FINEST] [FML] Sending event FMLConstructionEvent to mod FML
+2014-07-12 00:46:17 [FINEST] [FML] Sent event FMLConstructionEvent to mod FML
+2014-07-12 00:46:17 [FINEST] [Forge] Sending event FMLConstructionEvent to mod Forge
+2014-07-12 00:46:17 [INFO] [ForgeModLoader] Registering Forge Packet Handler
+2014-07-12 00:46:17 [FINEST] [ForgeModLoader] Testing mod Forge to verify it accepts its own version in a remote connection
+2014-07-12 00:46:17 [FINEST] [ForgeModLoader] The mod Forge accepts its own version (9.11.1.964)
+2014-07-12 00:46:17 [INFO] [ForgeModLoader] Succeeded registering Forge Packet Handler
+2014-07-12 00:46:17 [FINEST] [Forge] Sent event FMLConstructionEvent to mod Forge
+2014-07-12 00:46:17 [FINEST] [Femtocraft] Sending event FMLConstructionEvent to mod Femtocraft
+2014-07-12 00:46:18 [FINEST] [ForgeModLoader] Testing mod Femtocraft to verify it accepts its own version in a remote connection
+2014-07-12 00:46:18 [FINEST] [ForgeModLoader] The mod Femtocraft accepts its own version (0.1.0)
+2014-07-12 00:46:18 [FINE] [ForgeModLoader] Attempting to inject @SidedProxy classes into Femtocraft
+2014-07-12 00:46:18 [FINEST] [Femtocraft] Sent event FMLConstructionEvent to mod Femtocraft
+2014-07-12 00:46:18 [FINE] [ForgeModLoader] Mod signature data
+2014-07-12 00:46:18 [FINE] [ForgeModLoader] 	mcp(Minecraft Coder Pack:8.09): minecraft.jar (NO VALID CERTIFICATE FOUND)
+2014-07-12 00:46:18 [FINE] [ForgeModLoader] 	FML(Forge Mod Loader:6.99.19.964): forge-1.6.4-9.11.1.964-mcp.jar (NO VALID CERTIFICATE FOUND)
+2014-07-12 00:46:18 [FINE] [ForgeModLoader] 	Forge(Minecraft Forge:9.11.1.964): forge-1.6.4-9.11.1.964-mcp.jar (NO VALID CERTIFICATE FOUND)
+2014-07-12 00:46:18 [FINE] [ForgeModLoader] 	Femtocraft(Femtocraft:0.1.0): forge-1.6.4-9.11.1.964-src (NO VALID CERTIFICATE FOUND)
+2014-07-12 00:46:18 [FINEST] [mcp] Sending event FMLPreInitializationEvent to mod mcp
+2014-07-12 00:46:18 [FINEST] [mcp] Sent event FMLPreInitializationEvent to mod mcp
+2014-07-12 00:46:18 [FINEST] [FML] Sending event FMLPreInitializationEvent to mod FML
+2014-07-12 00:46:18 [FINEST] [FML] Sent event FMLPreInitializationEvent to mod FML
+2014-07-12 00:46:18 [FINEST] [Forge] Sending event FMLPreInitializationEvent to mod Forge
+2014-07-12 00:46:18 [INFO] [ForgeModLoader] Configured a dormant chunk cache size of 0
+2014-07-12 00:46:18 [FINEST] [Forge] Sent event FMLPreInitializationEvent to mod Forge
+2014-07-12 00:46:18 [FINEST] [Femtocraft] Sending event FMLPreInitializationEvent to mod Femtocraft
+2014-07-12 00:46:18 [FINEST] [Femtocraft] Sent event FMLPreInitializationEvent to mod Femtocraft
+2014-07-12 00:46:18 [FINEST] [mcp] Sending event FMLInitializationEvent to mod mcp
+2014-07-12 00:46:18 [FINEST] [mcp] Sent event FMLInitializationEvent to mod mcp
+2014-07-12 00:46:18 [FINEST] [FML] Sending event FMLInitializationEvent to mod FML
+2014-07-12 00:46:18 [FINEST] [FML] Sent event FMLInitializationEvent to mod FML
+2014-07-12 00:46:18 [FINEST] [Forge] Sending event FMLInitializationEvent to mod Forge
+2014-07-12 00:46:18 [FINEST] [Forge] Sent event FMLInitializationEvent to mod Forge
+2014-07-12 00:46:18 [FINEST] [Femtocraft] Sending event FMLInitializationEvent to mod Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4095) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4094) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4093) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4092) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4091) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4089) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4090) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4088) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4087) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4086) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4085) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4035) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4034) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4033) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4084) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4083) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4082) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4080) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4079) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4078) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4077) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4075) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4074) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4073) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4072) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4071) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4069) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4068) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4067) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4066) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.power.items.ItemBlockMicroCube(4063) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4058) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4057) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4049) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4051) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4050) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4065) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4064) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4062) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4061) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4060) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4059) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4032) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4056) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4055) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4054) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4053) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4052) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4048) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4047) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4046) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4031) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4045) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4044) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4042) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4043) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4040) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4039) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4038) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item net.minecraft.item.ItemBlock(4037) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12256) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12257) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12258) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12259) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12260) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12261) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12262) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12263) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12264) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12265) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12266) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12267) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12268) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12269) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12276) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12277) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12272) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12273) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12274) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12278) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12270) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12271) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12275) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.research.items.ItemPortableResearchComputer(12279) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12280) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12281) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12282) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12283) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12284) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12285) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12286) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12287) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12288) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12289) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12290) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12298) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12291) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12292) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12293) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12294) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12295) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12296) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12297) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12299) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.industry.items.ItemDigitalSchematic(12320) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12300) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12301) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12302) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12303) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12304) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12305) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12306) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12307) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12308) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12309) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12310) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12311) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12312) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12313) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12314) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12315) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.industry.items.ItemQuantumSchematic(12321) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.research.items.ItemMicroTechnology(12316) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.research.items.ItemNanoTechnology(12317) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.research.items.ItemFemtoTechnology(12318) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.industry.items.ItemPaperSchematic(12319) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemMicroInterfaceDevice(12322) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemNanoInterfaceDevice(12323) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemFemtoInterfaceDevice(12324) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12325) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12326) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12327) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12328) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12329) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12330) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12331) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12332) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12333) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12334) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12335) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12336) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12337) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12338) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12339) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12340) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12341) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12342) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12343) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12344) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12345) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12346) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12347) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12348) owned by Femtocraft
+2014-07-12 00:46:18 [FINE] [fml.ItemTracker] Adding item com.itszuvalex.femtocraft.core.items.ItemBase(12349) owned by Femtocraft
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ItemCrystallite.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ItemMineralite.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ItemMetallite.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ItemFaunite.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ItemElectrite.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ItemFlorite.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ItemMicroCrystal.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ItemProteinChain.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ItemNerveCluster.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ItemConductiveAlloy.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ItemMetalComposite.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ItemFibrousStrand.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ItemMineralLattice.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ItemFungalSpores.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ItemIonicChunk.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ItemReplicatingMaterial.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ItemSpinyFilament.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ItemHardenedBulb.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ItemMorphicChannel.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ItemSynthesizedFiber.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ItemOrganometallicPlate.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Stone.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Grass.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Dirt.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Cobblestone.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for WoodPlank.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Sapling.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Sand.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Leaves.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Cobweb.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for DeadBush.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Dandelion.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Rose.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for MushroomBrown.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for MushroomRed.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for MossStone.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Obsidian.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Ice.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Cactus.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Pumpkin.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Netherrack.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for SoulSand.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Glowstone.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Melon.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Vine.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Mycelium.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for LilyPad.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for EnderStone.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Cocoa.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Apple.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Coal.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Diamond.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for IronIngot.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for GoldIngot.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Stick.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for String.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Feather.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Gunpowder.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Seeds.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Wheat.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Flint.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for RawPorkchop.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Porkchop.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Redstone.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Snowball.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Leather.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Clay.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for SugarCane.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Slimeball.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Egg.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for RawFish.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for CookedFish.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Dye.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Bone.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for PumpkinSeeds.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for MelonSeeds.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for RawBeef.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for CookedBeef.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for RawChicken.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for CookedChicken.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for RottenFlesh.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for EnderPearl.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for GhastTear.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for NetherWart.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for SpiderEye.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for BlazePowder.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Emerald.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Carrot.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Potato.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for BakedPotato.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for PoisonPotato.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for Cake.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for NetherStar.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for IronOre.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for GoldOre.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for TitaniumOre.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for ThoriumOre.
+2014-07-12 00:46:19 [INFO] [Femtocraft] Loading default AssemblerRecipe for PlatinumOre.
+2014-07-12 00:46:19 [FINEST] [Femtocraft] Sent event FMLInitializationEvent to mod Femtocraft
+2014-07-12 00:46:19 [SEVERE] [ForgeModLoader] Fatal errors were detected during the transition from INITIALIZATION to POSTINITIALIZATION. Loading cannot continue
+2014-07-12 00:46:19 [SEVERE] [ForgeModLoader] 
+	mcp{8.09} [Minecraft Coder Pack] (minecraft.jar) Unloaded->Constructed->Pre-initialized->Initialized
+	FML{6.99.19.964} [Forge Mod Loader] (forge-1.6.4-9.11.1.964-mcp.jar) Unloaded->Constructed->Pre-initialized->Initialized
+	Forge{9.11.1.964} [Minecraft Forge] (forge-1.6.4-9.11.1.964-mcp.jar) Unloaded->Constructed->Pre-initialized->Initialized
+	Femtocraft{0.1.0} [Femtocraft] (forge-1.6.4-9.11.1.964-src) Unloaded->Constructed->Pre-initialized->Errored
+2014-07-12 00:46:19 [SEVERE] [ForgeModLoader] The following problems were captured during this phase
+2014-07-12 00:46:19 [SEVERE] [ForgeModLoader] Caught exception from Femtocraft
+java.lang.ExceptionInInitializerError
+	at com.itszuvalex.femtocraft.Femtocraft.load(Femtocraft.java:1129)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at cpw.mods.fml.common.FMLModContainer.handleModStateEvent(FMLModContainer.java:523)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.google.common.eventbus.EventHandler.handleEvent(EventHandler.java:74)
+	at com.google.common.eventbus.SynchronizedEventHandler.handleEvent(SynchronizedEventHandler.java:45)
+	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:313)
+	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:296)
+	at com.google.common.eventbus.EventBus.post(EventBus.java:267)
+	at cpw.mods.fml.common.LoadController.sendEventToModContainer(LoadController.java:197)
+	at cpw.mods.fml.common.LoadController.propogateStateMessage(LoadController.java:177)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.google.common.eventbus.EventHandler.handleEvent(EventHandler.java:74)
+	at com.google.common.eventbus.SynchronizedEventHandler.handleEvent(SynchronizedEventHandler.java:45)
+	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:313)
+	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:296)
+	at com.google.common.eventbus.EventBus.post(EventBus.java:267)
+	at cpw.mods.fml.common.LoadController.distributeStateMessage(LoadController.java:108)
+	at cpw.mods.fml.common.Loader.initializeMods(Loader.java:670)
+	at cpw.mods.fml.client.FMLClientHandler.finishMinecraftLoading(FMLClientHandler.java:241)
+	at net.minecraft.client.Minecraft.startGame(Minecraft.java:509)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:808)
+	at net.minecraft.client.main.Main.main(Main.java:101)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:131)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:27)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:134)
+Caused by: java.lang.NullPointerException
+	at net.minecraft.item.ItemStack.<init>(ItemStack.java:67)
+	at com.itszuvalex.femtocraft.managers.assembler.ManagerAssemblerRecipe.registerFemtocraftAssemblerRecipes(ManagerAssemblerRecipe.java:1744)
+	at com.itszuvalex.femtocraft.managers.assembler.ManagerAssemblerRecipe.registerRecipes(ManagerAssemblerRecipe.java:92)
+	at com.itszuvalex.femtocraft.managers.assembler.ManagerAssemblerRecipe.<init>(ManagerAssemblerRecipe.java:82)
+	at com.itszuvalex.femtocraft.managers.ManagerRecipe.<clinit>(ManagerRecipe.java:34)
+	... 43 more
+2014-07-12 00:46:19 [INFO] [STDOUT] ---- Minecraft Crash Report ----
+2014-07-12 00:46:19 [INFO] [STDOUT] // Ooh. Shiny.
+2014-07-12 00:46:19 [INFO] [STDOUT] 
+2014-07-12 00:46:19 [INFO] [STDOUT] Time: 7/12/14 12:46 AM
+2014-07-12 00:46:19 [INFO] [STDOUT] Description: There was a severe problem during mod loading that has caused the game to fail
+2014-07-12 00:46:19 [INFO] [STDOUT] 
+2014-07-12 00:46:19 [INFO] [STDOUT] cpw.mods.fml.common.LoaderException: java.lang.ExceptionInInitializerError
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at cpw.mods.fml.common.LoadController.transition(LoadController.java:152)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at cpw.mods.fml.common.Loader.initializeMods(Loader.java:671)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at cpw.mods.fml.client.FMLClientHandler.finishMinecraftLoading(FMLClientHandler.java:241)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at net.minecraft.client.Minecraft.startGame(Minecraft.java:509)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at net.minecraft.client.Minecraft.run(Minecraft.java:808)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at net.minecraft.client.main.Main.main(Main.java:101)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at java.lang.reflect.Method.invoke(Method.java:606)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at net.minecraft.launchwrapper.Launch.launch(Launch.java:131)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at net.minecraft.launchwrapper.Launch.main(Launch.java:27)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at java.lang.reflect.Method.invoke(Method.java:606)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:134)
+2014-07-12 00:46:19 [INFO] [STDOUT] Caused by: java.lang.ExceptionInInitializerError
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at com.itszuvalex.femtocraft.Femtocraft.load(Femtocraft.java:1129)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at java.lang.reflect.Method.invoke(Method.java:606)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at cpw.mods.fml.common.FMLModContainer.handleModStateEvent(FMLModContainer.java:523)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at java.lang.reflect.Method.invoke(Method.java:606)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at com.google.common.eventbus.EventHandler.handleEvent(EventHandler.java:74)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at com.google.common.eventbus.SynchronizedEventHandler.handleEvent(SynchronizedEventHandler.java:45)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:313)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:296)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at com.google.common.eventbus.EventBus.post(EventBus.java:267)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at cpw.mods.fml.common.LoadController.sendEventToModContainer(LoadController.java:197)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at cpw.mods.fml.common.LoadController.propogateStateMessage(LoadController.java:177)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at java.lang.reflect.Method.invoke(Method.java:606)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at com.google.common.eventbus.EventHandler.handleEvent(EventHandler.java:74)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at com.google.common.eventbus.SynchronizedEventHandler.handleEvent(SynchronizedEventHandler.java:45)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:313)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:296)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at com.google.common.eventbus.EventBus.post(EventBus.java:267)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at cpw.mods.fml.common.LoadController.distributeStateMessage(LoadController.java:108)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at cpw.mods.fml.common.Loader.initializeMods(Loader.java:670)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	... 15 more
+2014-07-12 00:46:19 [INFO] [STDOUT] Caused by: java.lang.NullPointerException
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at net.minecraft.item.ItemStack.<init>(ItemStack.java:67)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at com.itszuvalex.femtocraft.managers.assembler.ManagerAssemblerRecipe.registerFemtocraftAssemblerRecipes(ManagerAssemblerRecipe.java:1744)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at com.itszuvalex.femtocraft.managers.assembler.ManagerAssemblerRecipe.registerRecipes(ManagerAssemblerRecipe.java:92)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at com.itszuvalex.femtocraft.managers.assembler.ManagerAssemblerRecipe.<init>(ManagerAssemblerRecipe.java:82)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	at com.itszuvalex.femtocraft.managers.ManagerRecipe.<clinit>(ManagerRecipe.java:34)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	... 43 more
+2014-07-12 00:46:19 [INFO] [STDOUT] 
+2014-07-12 00:46:19 [INFO] [STDOUT] 
+2014-07-12 00:46:19 [INFO] [STDOUT] A detailed walkthrough of the error, its code path and all known details is as follows:
+2014-07-12 00:46:19 [INFO] [STDOUT] ---------------------------------------------------------------------------------------
+2014-07-12 00:46:19 [INFO] [STDOUT] 
+2014-07-12 00:46:19 [INFO] [STDOUT] -- System Details --
+2014-07-12 00:46:19 [INFO] [STDOUT] Details:
+2014-07-12 00:46:19 [INFO] [STDOUT] 	Minecraft Version: 1.6.4
+2014-07-12 00:46:19 [INFO] [STDOUT] 	Operating System: Mac OS X (x86_64) version 10.9.4
+2014-07-12 00:46:19 [INFO] [STDOUT] 	Java Version: 1.7.0_60, Oracle Corporation
+2014-07-12 00:46:19 [INFO] [STDOUT] 	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+2014-07-12 00:46:19 [INFO] [STDOUT] 	Memory: 668811136 bytes (637 MB) / 1037959168 bytes (989 MB) up to 1037959168 bytes (989 MB)
+2014-07-12 00:46:19 [INFO] [STDOUT] 	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+2014-07-12 00:46:19 [INFO] [STDOUT] 	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+2014-07-12 00:46:19 [INFO] [STDOUT] 	Suspicious classes: FML and Forge are installed
+2014-07-12 00:46:19 [INFO] [STDOUT] 	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+2014-07-12 00:46:19 [INFO] [STDOUT] 	FML: MCP v8.11 FML v6.99.19.964 Minecraft Forge 9.11.1.964 4 mods loaded, 4 mods active
+2014-07-12 00:46:19 [INFO] [STDOUT] 	mcp{8.09} [Minecraft Coder Pack] (minecraft.jar) Unloaded->Constructed->Pre-initialized->Initialized
+2014-07-12 00:46:19 [INFO] [STDOUT] 	FML{6.99.19.964} [Forge Mod Loader] (forge-1.6.4-9.11.1.964-mcp.jar) Unloaded->Constructed->Pre-initialized->Initialized
+2014-07-12 00:46:19 [INFO] [STDOUT] 	Forge{9.11.1.964} [Minecraft Forge] (forge-1.6.4-9.11.1.964-mcp.jar) Unloaded->Constructed->Pre-initialized->Initialized
+2014-07-12 00:46:19 [INFO] [STDOUT] 	Femtocraft{0.1.0} [Femtocraft] (forge-1.6.4-9.11.1.964-src) Unloaded->Constructed->Pre-initialized->Errored
+2014-07-12 00:46:19 [INFO] [STDOUT] #@!@# Game crashed! Crash report saved to: #@!@# /Users/chris/Documents/Minecraft Project/Femtocraft/eclipse/./crash-reports/crash-2014-07-12_00.46.19-client.txt

@@ -62,11 +62,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Femtocraft.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Femtocraft.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/Femtocraft.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="11055" max-vertical-offset="17070">
-              <caret line="650" column="42" selection-start-line="650" selection-start-column="42" selection-end-line="650" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.45507812" vertical-offset="9877" max-vertical-offset="17250">
+              <caret line="690" column="70" selection-start-line="690" selection-start-column="70" selection-end-line="690" selection-end-column="70" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -74,11 +74,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ManagerAssemblerRecipe.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="BlockSisyphusStabilizer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockSisyphusStabilizer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ManagerAssemblerRecipe.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/ManagerAssemblerRecipe.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.837838" vertical-offset="29760" max-vertical-offset="35190">
-              <caret line="1677" column="0" selection-start-line="1677" selection-start-column="0" selection-end-line="1677" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="29440" max-vertical-offset="35190">
+              <caret line="1743" column="0" selection-start-line="1743" selection-start-column="0" selection-end-line="1743" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -94,7 +104,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/femtocraft/utils/FemtocraftDataUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/femtocraft/power/FemtocraftPowerUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/femtocraft/FemtocraftConnectionHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/proxy/ProxyClient.java" />
@@ -130,7 +139,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/ManagerRecipe.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/dimensional/ManagerDimensionalRecipe.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/temporal/ManagerTemporalRecipe.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/ManagerAssemblerRecipe.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockPhlegethonTunnelCore.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockPlasmaCondenser.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockPlasmaTurbine.java" />
@@ -144,6 +152,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockOrbitalEqualizer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockNullEqualizer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockPhlegethonTunnelFrame.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockSisyphusStabilizer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/ManagerAssemblerRecipe.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/Femtocraft.java" />
       </list>
     </option>
@@ -251,6 +261,70 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="femtocraft" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="forge-1.6.4-9.11.1.964-src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="femtocraft" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="power" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="forge-1.6.4-9.11.1.964-src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="femtocraft" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="power" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="blocks" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -603,6 +677,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919255" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17638889" sideWeight="0.49814814" order="5" side_tool="false" content_ui="tabs" x="910" y="181" width="475" height="262" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -610,9 +685,8 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="IntelliCalc" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19375" sideWeight="0.50185186" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919255" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32919255" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919255" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919255" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919255" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -650,20 +724,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/containers/ContainerMicroFurnace.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1633" max-vertical-offset="2175">
-          <caret line="163" column="46" selection-start-line="163" selection-start-column="46" selection-end-line="163" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityMicroCube.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="419" max-vertical-offset="2085">
-          <caret line="111" column="49" selection-start-line="111" selection-start-column="49" selection-end-line="111" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-src.jar!/net/minecraft/inventory/IInventory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="749" max-vertical-offset="1215">
@@ -998,21 +1058,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/Femtocraft.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockSisyphusStabilizer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="11055" max-vertical-offset="17070">
-          <caret line="650" column="42" selection-start-line="650" selection-start-column="42" selection-end-line="650" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockPlasmaConduit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26367188" vertical-offset="0" max-vertical-offset="660">
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/ManagerAssemblerRecipe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.837838" vertical-offset="29760" max-vertical-offset="35190">
-          <caret line="1677" column="0" selection-start-line="1677" selection-start-column="0" selection-end-line="1677" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="29440" max-vertical-offset="35190">
+          <caret line="1743" column="0" selection-start-line="1743" selection-start-column="0" selection-end-line="1743" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/Femtocraft.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45507812" vertical-offset="9877" max-vertical-offset="17250">
+          <caret line="690" column="70" selection-start-line="690" selection-start-column="70" selection-end-line="690" selection-end-column="70" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

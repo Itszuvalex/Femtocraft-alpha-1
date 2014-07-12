@@ -650,6 +650,13 @@ public class Femtocraft {
         LanguageRegistry.addName(blockPhlegethonTunnelFrame,
                 "Phlegethon Tunnel Frame");
 
+        blockSisyphusStabilizer = new BlockSisyphusStabilizer
+                (FemtocraftConfigs.BlockSisyphusStabilizerID);
+        GameRegistry.registerBlock(blockSisyphusStabilizer,
+                "BlockSisyphusStabilizer");
+        LanguageRegistry.addName(blockSisyphusStabilizer,
+                "Sisyphus Stabilizer");
+
         blockNullEqualizer = new BlockNullEqualizer(
                 FemtocraftConfigs.BlockNullEqualizerID);
         GameRegistry.registerBlock(blockNullEqualizer, "BlockNullEqualizer");
@@ -677,6 +684,11 @@ public class Femtocraft {
         GameRegistry.registerBlock(blockStellaratorHousing,
                 "BlockStellaratorHousing");
         LanguageRegistry.addName(blockStellaratorHousing, "Stellarator Housing");
+
+        blockPlasmaConduit = new BlockPlasmaConduit(FemtocraftConfigs
+                .BlockPlasmaConduitID);
+        GameRegistry.registerBlock(blockPlasmaConduit, "BlockPlasmaConduit");
+        LanguageRegistry.addName(blockPlasmaConduit, "Plasma Conduit");
 
         blockPlasmaVent = new BlockPlasmaVent(FemtocraftConfigs
                 .BlockPlasmaVentID);

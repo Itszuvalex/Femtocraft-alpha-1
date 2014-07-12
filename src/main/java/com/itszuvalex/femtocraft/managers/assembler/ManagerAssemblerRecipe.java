@@ -1725,7 +1725,7 @@ public class ManagerAssemblerRecipe {
                     new ItemStack(Femtocraft.itemStellaratorPlating),
                     EnumTechLevel.FEMTO, null));
 
-            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.blockSisyphusStabilizer), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.blockSisyphusStabilizer), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Item.netherStar), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.blockSisyphusStabilizer), new ItemStack(Femtocraft.itemStellaratorPlating)}, 0,
+            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.blockSisyphusStabilizer), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.blockSisyphusStabilizer), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Item.netherStar), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.blockSisyphusStabilizer), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.blockSisyphusStabilizer)}, 0,
                     new ItemStack(Femtocraft.blockStellaratorCore),
                     EnumTechLevel.FEMTO, null));
 
