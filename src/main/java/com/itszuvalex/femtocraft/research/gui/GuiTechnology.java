@@ -277,10 +277,6 @@ public class GuiTechnology extends GuiScreen {
         super.mouseClicked(par1, par2, par3);
     }
 
-    protected int getNumPages(boolean researched) {
-        return 1;
-    }
-
     /**
      * @param x
      * @param y
@@ -295,6 +291,10 @@ public class GuiTechnology extends GuiScreen {
                                      int pageNum, int mouseX, int mouseY, List tooltip,
                                      boolean isResearched) {
 
+    }
+
+    protected int getNumPages(boolean researched) {
+        return 1;
     }
 
     /**

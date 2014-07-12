@@ -58,11 +58,6 @@ public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
         setMaxStorage(1200);
     }
 
-    @Override
-    public int getGuiID() {
-        return FemtocraftGuiHandler.EncoderGuiID;
-    }
-
     /*
      * (non-Javadoc)
      *
@@ -71,6 +66,11 @@ public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
     @Override
     public boolean hasGUI() {
         return true;
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.EncoderGuiID;
     }
 
     @Override

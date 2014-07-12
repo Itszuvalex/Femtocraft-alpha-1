@@ -64,13 +64,13 @@ public class TileEntityBaseEntityMicroFurnace extends
     }
 
     @Override
-    public int getGuiID() {
-        return FemtocraftGuiHandler.MicroFurnaceGuiID;
+    public boolean hasGUI() {
+        return true;
     }
 
     @Override
-    public boolean hasGUI() {
-        return true;
+    public int getGuiID() {
+        return FemtocraftGuiHandler.MicroFurnaceGuiID;
     }
 
     /**

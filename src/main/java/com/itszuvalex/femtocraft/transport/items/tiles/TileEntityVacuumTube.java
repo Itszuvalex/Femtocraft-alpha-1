@@ -74,6 +74,19 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
     }
 
     @Override
+    public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
+        super.readFromNBT(par1nbtTagCompound);
+        byte connections = par1nbtTagCompound.getByte("Connections");
+        parseConnectionMask(connections);
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
+        super.writeToNBT(par1nbtTagCompound);
+        par1nbtTagCompound.setByte("Connections", generateConnectionMask());
+    }
+
+    @Override
     public boolean shouldTick() {
         return true;
     }
@@ -423,6 +436,16 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
     }
 
+//    @Override
+//    public boolean hasInput() {
+//        return !missingInput();
+//    }
+//
+//    @Override
+//    public boolean hasOutput() {
+//        return !missingOutput();
+//    }
+
     private void clearOutput() {
         outputInv = null;
         outputSidedInv = null;
@@ -466,16 +489,6 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         entityitem.motionZ = dir.offsetZ;
         worldObj.spawnEntityInWorld(entityitem);
     }
-
-//    @Override
-//    public boolean hasInput() {
-//        return !missingInput();
-//    }
-//
-//    @Override
-//    public boolean hasOutput() {
-//        return !missingOutput();
-//    }
 
     @Override
     public boolean canInsertItem(ItemStack item, ForgeDirection dir) {
@@ -652,26 +665,13 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-        super.readFromNBT(par1nbtTagCompound);
-        byte connections = par1nbtTagCompound.getByte("Connections");
-        parseConnectionMask(connections);
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-        super.writeToNBT(par1nbtTagCompound);
-        par1nbtTagCompound.setByte("Connections", generateConnectionMask());
+    public Packet getDescriptionPacket() {
+        return generatePacket();
     }
 
     @Override
     public boolean hasDescription() {
         return true;
-    }
-
-    @Override
-    public Packet getDescriptionPacket() {
-        return generatePacket();
     }
 
     @Override

@@ -93,15 +93,15 @@ public class TileEntityMicroCube extends TileEntityPowerBase {
     }
 
     @Override
-    public void handleDescriptionNBT(NBTTagCompound compound) {
-        super.handleDescriptionNBT(compound);
-        parseOutputMask(compound.getByte("outputs"));
-    }
-
-    @Override
     public void saveToDescriptionCompound(NBTTagCompound compound) {
         super.saveToDescriptionCompound(compound);
         compound.setByte("outputs", generateOutputMask());
+    }
+
+    @Override
+    public void handleDescriptionNBT(NBTTagCompound compound) {
+        super.handleDescriptionNBT(compound);
+        parseOutputMask(compound.getByte("outputs"));
     }
 
     @Override
@@ -129,13 +129,13 @@ public class TileEntityMicroCube extends TileEntityPowerBase {
     }
 
     @Override
-    public int getGuiID() {
-        return FemtocraftGuiHandler.MicroCubeGuiID;
+    public boolean hasGUI() {
+        return true;
     }
 
     @Override
-    public boolean hasGUI() {
-        return true;
+    public int getGuiID() {
+        return FemtocraftGuiHandler.MicroCubeGuiID;
     }
 
     public byte generateOutputMask() {

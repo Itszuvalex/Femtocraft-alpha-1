@@ -53,6 +53,23 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
     /*
      * (non-Javadoc)
      *
+     * @see
+     * TileEntityPowerBase#canAcceptPowerOfLevel(femtocraft
+     * .managers.research.EnumTechLevel,
+     * net.minecraftforge.common.ForgeDirection)
+     */
+    @Override
+    public boolean canAcceptPowerOfLevel(EnumTechLevel level,
+                                         ForgeDirection from) {
+        if (!info.isValidMultiBlock()) {
+            return false;
+        }
+        return super.canAcceptPowerOfLevel(level, from);
+    }
+
+    /*
+     * (non-Javadoc)
+     *
      * @see TileEntityPowerBase#getCurrentPower()
      */
     @Override
@@ -162,6 +179,21 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
      * (non-Javadoc)
      *
      * @see
+     * TileEntityPowerBase#canConnect(net.minecraftforge
+     * .common.ForgeDirection)
+     */
+    @Override
+    public boolean canConnect(ForgeDirection from) {
+        if (!info.isValidMultiBlock()) {
+            return false;
+        }
+        return super.canConnect(from);
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see
      * TileEntityPowerBase#charge(net.minecraftforge.
      * common.ForgeDirection, int)
      */
@@ -209,41 +241,8 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
         return false;
     }
 
-
     private boolean controllerConsume(int amount) {
         return isController() && super.consume(amount);
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * TileEntityPowerBase#canAcceptPowerOfLevel(femtocraft
-     * .managers.research.EnumTechLevel,
-     * net.minecraftforge.common.ForgeDirection)
-     */
-    @Override
-    public boolean canAcceptPowerOfLevel(EnumTechLevel level,
-                                         ForgeDirection from) {
-        if (!info.isValidMultiBlock()) {
-            return false;
-        }
-        return super.canAcceptPowerOfLevel(level, from);
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * TileEntityPowerBase#canConnect(net.minecraftforge
-     * .common.ForgeDirection)
-     */
-    @Override
-    public boolean canConnect(ForgeDirection from) {
-        if (!info.isValidMultiBlock()) {
-            return false;
-        }
-        return super.canConnect(from);
     }
 
     private boolean isController() {
@@ -295,13 +294,13 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
     }
 
     @Override
-    public int getGuiID() {
-        return FemtocraftGuiHandler.NanoCubeGuiID;
+    public boolean hasGUI() {
+        return info.isValidMultiBlock();
     }
 
     @Override
-    public boolean hasGUI() {
-        return info.isValidMultiBlock();
+    public int getGuiID() {
+        return FemtocraftGuiHandler.NanoCubeGuiID;
     }
 
     @Override

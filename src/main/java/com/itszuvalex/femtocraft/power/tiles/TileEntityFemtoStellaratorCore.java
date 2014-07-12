@@ -61,13 +61,13 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
     }
 
     @Override
-    public int getGuiID() {
-        return super.getGuiID();
+    public boolean hasGUI() {
+        return true;
     }
 
     @Override
-    public boolean hasGUI() {
-        return true;
+    public int getGuiID() {
+        return super.getGuiID();
     }
 
     @Override

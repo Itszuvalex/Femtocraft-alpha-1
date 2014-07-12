@@ -78,13 +78,13 @@ public class TileEntityBaseEntityMicroDeconstructor extends
     }
 
     @Override
-    public int getGuiID() {
-        return FemtocraftGuiHandler.MicroDeconstructorGuiID;
+    public boolean hasGUI() {
+        return true;
     }
 
     @Override
-    public boolean hasGUI() {
-        return true;
+    public int getGuiID() {
+        return FemtocraftGuiHandler.MicroDeconstructorGuiID;
     }
 
     public int getMassAmount() {

@@ -94,6 +94,36 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
     }
 
     @Override
+    public void femtocraftServerUpdate() {
+        super.femtocraftServerUpdate();
+        update(worldObj, xCoord, yCoord, zCoord);
+    }
+
+    @Override
+    public boolean canAcceptPowerOfLevel(EnumTechLevel level, ForgeDirection from) {
+        IPowerBlockContainer c = getController();
+        if (c != null) {
+            if (c == this) {
+                return container.canAcceptPowerOfLevel(level);
+            }
+            return c.canAcceptPowerOfLevel(level, from);
+        }
+        return false;
+    }
+
+    @Override
+    public EnumTechLevel getTechLevel(ForgeDirection to) {
+        IPowerBlockContainer c = getController();
+        if (c != null) {
+            if (c == this) {
+                return container.getTechLevel();
+            }
+            return c.getTechLevel(to);
+        }
+        return container.getTechLevel();
+    }
+
+    @Override
     public int getCurrentPower() {
         IPowerBlockContainer c = getController();
         if (c != null) {
@@ -136,6 +166,12 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
     }
 
     @Override
+    public boolean canConnect(ForgeDirection from) {
+        IPowerBlockContainer c = getController();
+        return c != null && (c == this || c.canConnect(from));
+    }
+
+    @Override
     public int charge(ForgeDirection from, int amount) {
         IPowerBlockContainer c = getController();
         if (c != null) {
@@ -157,42 +193,6 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
             return c.consume(amount);
         }
         return false;
-    }
-
-    @Override
-    public void femtocraftServerUpdate() {
-        super.femtocraftServerUpdate();
-        update(worldObj, xCoord, yCoord, zCoord);
-    }
-
-    @Override
-    public boolean canAcceptPowerOfLevel(EnumTechLevel level, ForgeDirection from) {
-        IPowerBlockContainer c = getController();
-        if (c != null) {
-            if (c == this) {
-                return container.canAcceptPowerOfLevel(level);
-            }
-            return c.canAcceptPowerOfLevel(level, from);
-        }
-        return false;
-    }
-
-    @Override
-    public EnumTechLevel getTechLevel(ForgeDirection to) {
-        IPowerBlockContainer c = getController();
-        if (c != null) {
-            if (c == this) {
-                return container.getTechLevel();
-            }
-            return c.getTechLevel(to);
-        }
-        return container.getTechLevel();
-    }
-
-    @Override
-    public boolean canConnect(ForgeDirection from) {
-        IPowerBlockContainer c = getController();
-        return c != null && (c == this || c.canConnect(from));
     }
 
     @Override

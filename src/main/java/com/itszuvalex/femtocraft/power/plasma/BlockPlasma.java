@@ -134,6 +134,12 @@ public class BlockPlasma extends BlockContainer {
         return true;
     }
 
+    private void applyEffects(Entity entity) {
+        if (!entity.isBurning()) {
+            entity.setFire(4);
+        }
+    }
+
     @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         super.onBlockAdded(par1World, par2, par3, par4);
@@ -144,12 +150,6 @@ public class BlockPlasma extends BlockContainer {
 
         for (Entity entity : entities) {
             applyEffects(entity);
-        }
-    }
-
-    private void applyEffects(Entity entity) {
-        if (!entity.isBurning()) {
-            entity.setFire(4);
         }
     }
 

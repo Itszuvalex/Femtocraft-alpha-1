@@ -51,6 +51,7 @@ public class TileEntityBaseEntityNanoEnmesher extends
     private int cookTime = 0;
     @FemtocraftDataUtils.Saveable
     private int ticksToCook;
+
     public TileEntityBaseEntityNanoEnmesher() {
         super();
         inventory = new BaseInventory(inventorySize);
@@ -59,13 +60,13 @@ public class TileEntityBaseEntityNanoEnmesher extends
     }
 
     @Override
-    public int getGuiID() {
-        return FemtocraftGuiHandler.NanoEnmesherGuiID;
+    public boolean hasGUI() {
+        return true;
     }
 
     @Override
-    public boolean hasGUI() {
-        return true;
+    public int getGuiID() {
+        return FemtocraftGuiHandler.NanoEnmesherGuiID;
     }
 
     public int getCookProgressScaled(int i) {
@@ -79,37 +80,36 @@ public class TileEntityBaseEntityNanoEnmesher extends
     public int[] getAccessibleSlotsFromSide(int var1) {
         return ForgeDirection.getOrientation(var1) == ForgeDirection.UP ? new
                 int[]{inputSlot} : new int[]{getOutputSlotIndex()};
-    }    protected float getTickMultiplier() {
-        return tickMultiplier_default;
     }
 
     @Override
     public boolean canInsertItem(int i, ItemStack itemstack, int j) {
         return i != getOutputSlotIndex();
-    }    protected int getPowerToCook() {
-        return powerToCook_default;
+    }    protected float getTickMultiplier() {
+        return tickMultiplier_default;
     }
 
     @Override
     public boolean canExtractItem(int i, ItemStack itemstack, int j) {
         return true;
-    }    protected EnumTechLevel getTechLevel() {
-        return EnumTechLevel.NANO;
+    }
+
+    protected int getOutputSlotIndex() {
+        return outputSlot;
+    }    protected int getPowerToCook() {
+        return powerToCook_default;
     }
 
     @Override
     public int getSizeInventory() {
         return inventory.getSizeInventory();
-    }    protected int getOutputSlotIndex() {
-        return outputSlot;
     }
 
     @Override
     public ItemStack getStackInSlot(int i) {
         return inventory.getStackInSlot(i);
-    }    protected ItemStack[] getConfigurators() {
-        return Arrays.copyOfRange(inventory.getInventory(),
-                inputSlot + 1, getOutputSlotIndex() - 1);
+    }    protected EnumTechLevel getTechLevel() {
+        return EnumTechLevel.NANO;
     }
 
     @Override
@@ -120,14 +120,47 @@ public class TileEntityBaseEntityNanoEnmesher extends
     @Override
     public ItemStack getStackInSlotOnClosing(int i) {
         return inventory.getStackInSlotOnClosing(i);
+    }
+
+    @Override
+    public void setInventorySlotContents(int i, ItemStack itemstack) {
+        inventory.setInventorySlotContents(i, itemstack);
+    }
+
+    @Override
+    public String getInvName() {
+        return inventory.getInvName();
+    }    protected ItemStack[] getConfigurators() {
+        return Arrays.copyOfRange(inventory.getInventory(),
+                inputSlot + 1, getOutputSlotIndex() - 1);
+    }
+
+    @Override
+    public boolean isInvNameLocalized() {
+        return false;
+    }
+
+    @Override
+    public int getInventoryStackLimit() {
+        return inventory.getInventoryStackLimit();
+    }
+
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+        return canPlayerUse(entityplayer);
     }    @Override
     public boolean isWorking() {
         return meshStack != null;
     }
 
     @Override
-    public void setInventorySlotContents(int i, ItemStack itemstack) {
-        inventory.setInventorySlotContents(i, itemstack);
+    public void openChest() {
+
+    }
+
+    @Override
+    public void closeChest() {
+
     }    @Override
     protected boolean canStartWork() {
         if (isWorking()) {
@@ -173,9 +206,11 @@ public class TileEntityBaseEntityNanoEnmesher extends
     }
 
     @Override
-    public String getInvName() {
-        return inventory.getInvName();
-    }    @Override
+    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+        return i != getOutputSlotIndex();
+    }
+
+    @Override
     protected void startWork() {
         DimensionalRecipe dr = Femtocraft.recipeManager.dimensionalRecipes
                 .getRecipe(inventory.getStackInSlot(inputSlot),
@@ -196,26 +231,23 @@ public class TileEntityBaseEntityNanoEnmesher extends
         onInventoryChanged();
     }
 
+
+
     @Override
-    public boolean isInvNameLocalized() {
-        return false;
-    }    @Override
     protected void continueWork() {
         ++cookTime;
     }
 
+
+
     @Override
-    public int getInventoryStackLimit() {
-        return inventory.getInventoryStackLimit();
-    }    @Override
     protected boolean canFinishWork() {
         return cookTime >= ticksToCook;
     }
 
+
+
     @Override
-    public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-        return canPlayerUse(entityplayer);
-    }    @Override
     protected void finishWork() {
         DimensionalRecipe dr = Femtocraft.recipeManager.dimensionalRecipes
                 .getRecipe(meshStack, meshConfigStacks);
@@ -234,35 +266,6 @@ public class TileEntityBaseEntityNanoEnmesher extends
         meshStack = null;
         meshConfigStacks = null;
     }
-
-    @Override
-    public void openChest() {
-
-    }
-
-    @Override
-    public void closeChest() {
-
-    }
-
-    @Override
-    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-        return i != getOutputSlotIndex();
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

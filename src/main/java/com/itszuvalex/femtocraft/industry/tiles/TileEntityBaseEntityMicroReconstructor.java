@@ -75,6 +75,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
     private
     @Saveable
     String field_94130_e;
+
     public TileEntityBaseEntityMicroReconstructor() {
         super();
         setMaxStorage(800);
@@ -83,13 +84,13 @@ public class TileEntityBaseEntityMicroReconstructor extends
     }
 
     @Override
-    public int getGuiID() {
-        return FemtocraftGuiHandler.MicroReconstructorGuiID;
+    public boolean hasGUI() {
+        return true;
     }
 
     @Override
-    public boolean hasGUI() {
-        return true;
+    public int getGuiID() {
+        return FemtocraftGuiHandler.MicroReconstructorGuiID;
     }
 
     public int getMassCapacity() {

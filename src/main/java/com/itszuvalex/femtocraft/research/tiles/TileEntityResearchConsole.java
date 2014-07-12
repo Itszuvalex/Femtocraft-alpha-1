@@ -52,6 +52,7 @@ public class TileEntityResearchConsole extends TileEntityBase implements
     private
     @FemtocraftDataUtils.Saveable
     ItemStack[] inventory = new ItemStack[10];
+
     public TileEntityResearchConsole() {
         super();
     }
@@ -85,6 +86,17 @@ public class TileEntityResearchConsole extends TileEntityBase implements
 
     public String getResearchingName() {
         return researchingTech;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
+        super.readFromNBT(par1nbtTagCompound);
+        checkForTechnology();
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
+        super.writeToNBT(par1nbtTagCompound);
     }
 
     @Override
@@ -211,29 +223,13 @@ public class TileEntityResearchConsole extends TileEntityBase implements
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-        super.readFromNBT(par1nbtTagCompound);
-        checkForTechnology();
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-        super.writeToNBT(par1nbtTagCompound);
-    }
-
-    @Override
-    public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
-        super.onDataPacket(net, pkt);
-    }
-
-    @Override
     public void saveToDescriptionCompound(NBTTagCompound compound) {
         super.saveToDescriptionCompound(compound);
     }
 
     @Override
-    public int getGuiID() {
-        return FemtocraftGuiHandler.ResearchConsoleGuiID;
+    public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
+        super.onDataPacket(net, pkt);
     }
 
     /*
@@ -244,6 +240,11 @@ public class TileEntityResearchConsole extends TileEntityBase implements
     @Override
     public boolean hasGUI() {
         return true;
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.ResearchConsoleGuiID;
     }
 
     public void startWork() {

@@ -50,14 +50,14 @@ public class TileEntityMicroEngine extends TileEntityBaseEntityIndustry
         inventory = new BaseInventory(1);
     }
 
-    @Override
-    public int getGuiID() {
-        return FemtocraftGuiHandler.MicroEngineGuiID;
-    }
-
     @java.lang.Override
     public boolean hasGUI() {
         return true;
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.MicroEngineGuiID;
     }
 
     @java.lang.Override

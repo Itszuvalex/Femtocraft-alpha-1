@@ -46,6 +46,11 @@ public class TileEntityFemtoChronoshifter extends TileEntityBaseEntityNanoHorolo
     }
 
     @Override
+    protected int getOutputSlotIndex() {
+        return outputSlot;
+    }
+
+    @Override
     protected int getPowerToCook() {
         return powerToCook_default;
     }
@@ -53,10 +58,5 @@ public class TileEntityFemtoChronoshifter extends TileEntityBaseEntityNanoHorolo
     @Override
     protected EnumTechLevel getTechLevel() {
         return EnumTechLevel.FEMTO;
-    }
-
-    @Override
-    protected int getOutputSlotIndex() {
-        return outputSlot;
     }
 }

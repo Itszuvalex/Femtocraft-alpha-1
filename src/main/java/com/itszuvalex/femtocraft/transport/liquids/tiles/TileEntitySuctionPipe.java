@@ -137,6 +137,23 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
     }
 
     @Override
+    public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
+        super.readFromNBT(par1nbtTagCompound);
+        tank.readFromNBT(par1nbtTagCompound);
+        if (tank.getFluid() != null) {
+            renderFluid = tank.getFluid();
+        }
+        output = par1nbtTagCompound.getBoolean("output");
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
+        super.writeToNBT(par1nbtTagCompound);
+        tank.writeToNBT(par1nbtTagCompound);
+        par1nbtTagCompound.setBoolean("output", output);
+    }
+
+    @Override
     public void updateEntity() {
         Arrays.fill(neighbors, null);
         checkConnections(neighbors);
@@ -368,20 +385,21 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-        super.readFromNBT(par1nbtTagCompound);
-        tank.readFromNBT(par1nbtTagCompound);
-        if (tank.getFluid() != null) {
-            renderFluid = tank.getFluid();
-        }
-        output = par1nbtTagCompound.getBoolean("output");
-    }
+    public void saveToDescriptionCompound(NBTTagCompound compound) {
+        super.saveToDescriptionCompound(compound);
+        // NBTTagCompound fluid = new NBTTagCompound();
+        // if (tank.getFluid() != null) {
+        // tank.getFluid().writeToNBT(fluid);
+        // compound.setTag("fluid", fluid);
+        // }
 
-    @Override
-    public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-        super.writeToNBT(par1nbtTagCompound);
-        tank.writeToNBT(par1nbtTagCompound);
-        par1nbtTagCompound.setBoolean("output", output);
+        NBTTagCompound renderfluid = new NBTTagCompound();
+        if (renderFluid != null) {
+            renderFluid.writeToNBT(renderfluid);
+            compound.setTag("renderfluid", renderfluid);
+        }
+
+        // compound.setBoolean("output", output);
     }
 
     @Override
@@ -400,24 +418,6 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
         if (worldObj != null) {
             worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
         }
-    }
-
-    @Override
-    public void saveToDescriptionCompound(NBTTagCompound compound) {
-        super.saveToDescriptionCompound(compound);
-        // NBTTagCompound fluid = new NBTTagCompound();
-        // if (tank.getFluid() != null) {
-        // tank.getFluid().writeToNBT(fluid);
-        // compound.setTag("fluid", fluid);
-        // }
-
-        NBTTagCompound renderfluid = new NBTTagCompound();
-        if (renderFluid != null) {
-            renderFluid.writeToNBT(renderfluid);
-            compound.setTag("renderfluid", renderfluid);
-        }
-
-        // compound.setBoolean("output", output);
     }
 
     @Override

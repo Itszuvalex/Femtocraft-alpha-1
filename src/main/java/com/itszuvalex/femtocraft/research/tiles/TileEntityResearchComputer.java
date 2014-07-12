@@ -27,11 +27,6 @@ public class TileEntityResearchComputer extends TileEntityBase {
         super();
     }
 
-    @Override
-    public int getGuiID() {
-        return FemtocraftGuiHandler.ResearchComputerGuiID;
-    }
-
     /*
      * (non-Javadoc)
      *
@@ -40,6 +35,11 @@ public class TileEntityResearchComputer extends TileEntityBase {
     @Override
     public boolean hasGUI() {
         return true;
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.ResearchComputerGuiID;
     }
 
 }

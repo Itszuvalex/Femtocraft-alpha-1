@@ -171,43 +171,6 @@ public class BlockFemtoChronoshifter extends TileContainer {
     }
 
     /**
-     * Called when the block is placed in the world.
-     */
-    @Override
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
-                                EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
-
-        super.onBlockPlacedBy(par1World, par2, par3, par4,
-                par5EntityLivingBase, par6ItemStack);
-
-        int l = MathHelper
-                .floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-
-        if (l == 0) {
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 2);
-        }
-
-        if (l == 1) {
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 5, 2);
-        }
-
-        if (l == 2) {
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 3, 2);
-        }
-
-        if (l == 3) {
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 4, 2);
-        }
-
-        // if (par6ItemStack.hasDisplayName())
-        // {
-        // ((TileEntityBaseEntityMicroDeconstructor)par1World.getBlockTileEntity(par2,
-        // par3,
-        // par4)).setGuiDisplayName(par6ItemStack.getDisplayName());
-        // }
-    }
-
-    /**
      * ejects contained items into the world, and notifies neighbours of an
      * update, as appropriate
      */
@@ -310,6 +273,43 @@ public class BlockFemtoChronoshifter extends TileContainer {
 
         super.breakBlock(par1World, par2, par3, par4, par5, par6);
 
+    }
+
+    /**
+     * Called when the block is placed in the world.
+     */
+    @Override
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
+                                EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
+
+        super.onBlockPlacedBy(par1World, par2, par3, par4,
+                par5EntityLivingBase, par6ItemStack);
+
+        int l = MathHelper
+                .floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+
+        if (l == 0) {
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 2);
+        }
+
+        if (l == 1) {
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 5, 2);
+        }
+
+        if (l == 2) {
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 3, 2);
+        }
+
+        if (l == 3) {
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 4, 2);
+        }
+
+        // if (par6ItemStack.hasDisplayName())
+        // {
+        // ((TileEntityBaseEntityMicroDeconstructor)par1World.getBlockTileEntity(par2,
+        // par3,
+        // par4)).setGuiDisplayName(par6ItemStack.getDisplayName());
+        // }
     }
 }
 
