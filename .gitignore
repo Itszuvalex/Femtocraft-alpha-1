@@ -200,5 +200,9 @@ mcp/eclipse/.metadata/*
 *.bat
 *.sh
 
+*.ipr
+*.iws
+
 *
 !src/
+!src/*
