@@ -200,7 +200,6 @@ public abstract class Graph {
                            ArrayList<IGraphNode> row1, ArrayList<IGraphNode> row2) {
         int crossings = totalCrossingCount(rows);
         float distance = totalDistance(rows);
-        // for (int i = 0; i < MAX_HILLCLIMB_ITERATIONS; ++i) {
 
         if (row2.size() < 2) {
             return;
@@ -211,6 +210,7 @@ public abstract class Graph {
                 if (i1 == i2) {
                     continue;
                 }
+
 
                 boolean h = heuristics(row2.get(i1), row2.get(i2));
                 // Switch x
@@ -241,7 +241,6 @@ public abstract class Graph {
                     }
                 }
             }
-            // }
         }
     }
 

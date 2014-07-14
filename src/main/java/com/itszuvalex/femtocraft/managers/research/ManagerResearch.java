@@ -407,14 +407,6 @@ public class ManagerResearch {
             new ArrayList<ItemStack>()
     );
     @Technology
-    public static ResearchTechnology technologyElementManufacturing = new ResearchTechnology(
-            "Element Manufacturing", "Create circles, spheres, and ovals!",
-            EnumTechLevel.FEMTO, new ArrayList<ResearchTechnology>(
-            Arrays.asList(technologyQuantumInteractivity)),
-            new ItemStack(Femtocraft.itemFemtoPlating),
-            false, new ArrayList<ItemStack>()
-    );
-    @Technology
     public static ResearchTechnology technologyPotentialHarvesting = new ResearchTechnology(
             "Potential Harvesting", "Headhunters Unite!", EnumTechLevel.MICRO,
             new ArrayList<ResearchTechnology>(Arrays.asList(
@@ -467,11 +459,19 @@ public class ManagerResearch {
             new ArrayList<ResearchTechnology>(Arrays.asList(technologyQuantumComputing)), new ItemStack(Femtocraft.itemErinyesCircuit), false, new ArrayList<ItemStack>()
     );
     @Technology
+    public static ResearchTechnology technologyElementManufacturing = new ResearchTechnology(
+            "Element Manufacturing", "Create circles, spheres, and ovals!",
+            EnumTechLevel.FEMTO, new ArrayList<ResearchTechnology>(
+            Arrays.asList(technologyQuantumRobotics)),
+            new ItemStack(Femtocraft.itemFemtoPlating),
+            false, new ArrayList<ItemStack>()
+    );
+    @Technology
     public static ResearchTechnology technologyDimensionalSuperpositions = new ResearchTechnology(
             "Dimensional Superpositions", "It's a layer effect.",
             EnumTechLevel.DIMENSIONAL, new ArrayList<ResearchTechnology>(
             Arrays.asList(technologySpacetimeExploitation,
-                    technologyElementManufacturing, technologyQuantumRobotics)
+                    technologyElementManufacturing)
     ), new ItemStack(Femtocraft.blockFemtoEntangler),
             false, new ArrayList<ItemStack>()
     );
@@ -489,7 +489,7 @@ public class ManagerResearch {
             "Temporal Threading", "Having multiple timelines do work at once.",
             EnumTechLevel.TEMPORAL, new ArrayList<ResearchTechnology>(
             Arrays.asList(technologySpacetimeExploitation,
-                    technologyElementManufacturing, technologyQuantumRobotics)
+                    technologyElementManufacturing)
     ), new ItemStack(Femtocraft.blockFemtoChronoshifter),
             false, new ArrayList<ItemStack>()
     );
@@ -522,8 +522,7 @@ public class ManagerResearch {
     public static ResearchTechnology technologyParticleExcitation = new ResearchTechnology(
             "Particle Excitation", "", EnumTechLevel.FEMTO,
             new ArrayList<ResearchTechnology>(Arrays
-                    .asList(technologyQuantumRobotics,
-                            technologyElementManufacturing)), new ItemStack(
+                    .asList(technologyElementManufacturing)), new ItemStack(
             Femtocraft.blockFemtoImpulserUnlit), false,
             new ArrayList<ItemStack>()
     );
@@ -531,8 +530,7 @@ public class ManagerResearch {
     public static ResearchTechnology technologyParticleManipulation = new ResearchTechnology(
             "Particle Manipulation", "", EnumTechLevel.FEMTO,
             new ArrayList<ResearchTechnology>(Arrays
-                    .asList(technologyQuantumRobotics,
-                            technologyElementManufacturing)), new ItemStack(
+                    .asList(technologyElementManufacturing)), new ItemStack(
             Femtocraft.blockFemtoRepurposer), false,
             new ArrayList<ItemStack>()
     );
@@ -550,7 +548,7 @@ public class ManagerResearch {
             "",
             EnumTechLevel.FEMTO,
             new ArrayList<ResearchTechnology>(Arrays.asList(
-                    technologyParticleManipulation, technologyQuantumRobotics)),
+                    technologyParticleManipulation)),
             new ItemStack(Femtocraft.itemQuantumSchematic), false, new ArrayList<ItemStack>()
     );
     //    @Technology
@@ -583,8 +581,7 @@ public class ManagerResearch {
     public static ResearchTechnology technologyCorruptionStabilization = new ResearchTechnology(
             "Corruption Stabilization", "", EnumTechLevel.FEMTO,
             new ArrayList<ResearchTechnology>(Arrays
-                    .asList(technologyQuantumRobotics,
-                            technologySpontaneousGeneration)), new ItemStack(
+                    .asList(technologySpontaneousGeneration)), new ItemStack(
             Femtocraft.blockFemtoCubeFrame), false,
             new ArrayList<ItemStack>()
     );
@@ -594,7 +591,7 @@ public class ManagerResearch {
             new ArrayList<ResearchTechnology>(Arrays.asList(
 //                    technologyStarMatterRecollection,
                     technologyDemonicParticulates,
-                    technologyQuantumRobotics)),
+                    technologyElementManufacturing)),
             new ItemStack(Femtocraft.blockStellaratorCore), false,
             new ArrayList<ItemStack>()
     );
@@ -677,7 +674,12 @@ public class ManagerResearch {
         for (Field field : fields) {
             if (field.getAnnotation(Technology.class) != null) {
                 try {
-                    addTechnology((ResearchTechnology) field.get(null));
+                    ResearchTechnology tech = (ResearchTechnology) field.get(null);
+                    if (tech == null) {
+                        Femtocraft.logger.log(Level.SEVERE, field.getName() + " failed to initialize and cannot be added to Technologies list.");
+                        continue;
+                    }
+                    addTechnology(tech);
                 } catch (IllegalArgumentException e) {
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {

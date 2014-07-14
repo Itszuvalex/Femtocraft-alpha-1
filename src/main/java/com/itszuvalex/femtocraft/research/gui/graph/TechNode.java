@@ -94,14 +94,16 @@ public class TechNode extends GraphNode {
     public void pruneParents() {
         ArrayList<IGraphNode> nodes = new ArrayList<IGraphNode>();
 
+        ArrayList<IGraphNode> parents = getParents();
+
         for (IGraphNode parent : getParents()) {
             for (IGraphNode alt : getParents()) {
                 if (parent == alt) {
                     continue;
                 }
 
-                if ((((TechNode) alt)
-                        .hasParentTechRecursive(((TechNode) parent).technology))) {
+                if (((TechNode) alt)
+                        .hasParentTechRecursive(((TechNode) parent).technology)) {
                     nodes.add(parent);
                 }
             }
