@@ -1,5 +1,6 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
+import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.api.IPhlegethonTunnelAddon;
 import com.itszuvalex.femtocraft.api.IPhlegethonTunnelComponent;
 import com.itszuvalex.femtocraft.api.IPhlegethonTunnelCore;
@@ -7,8 +8,12 @@ import com.itszuvalex.femtocraft.api.PowerContainer;
 import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import com.itszuvalex.femtocraft.utils.BaseInventory;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -16,15 +21,17 @@ import net.minecraftforge.common.ForgeDirection;
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/13/14.
  */
-public class TileEntityPhlegethonTunnelCore extends TileEntityBase implements IPhlegethonTunnelCore {
+public class TileEntityPhlegethonTunnelCore extends TileEntityBase implements IPhlegethonTunnelCore, IInventory {
     public static float PowerGenBase = 150;
-    public static int ContainerMax = 10000;
-    @FemtocraftDataUtils.Saveable
+    public static int ContainerMax = 100000;
+    @FemtocraftDataUtils.Saveable(desc = true)
     private boolean active = false;
-    @FemtocraftDataUtils.Saveable
+    @FemtocraftDataUtils.Saveable(desc = true)
     private MultiBlockInfo info = new MultiBlockInfo();
     @FemtocraftDataUtils.Saveable
     private PowerContainer container = new PowerContainer();
+    @FemtocraftDataUtils.Saveable
+    private BaseInventory inventory = new BaseInventory(1);
 
     public TileEntityPhlegethonTunnelCore() {
         container.setTechLevel(EnumTechLevel.FEMTO);
@@ -60,12 +67,30 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityBase implements IP
         return yCoord;
     }
 
+    public void sendActivateMessage() {
+        if (worldObj.isRemote) {
+
+        }
+    }
+
+
     @Override
     public boolean activate() {
         if (isActive()) {
             return false;
         }
+        if (!worldObj.isRemote) {
+            return false;
+        }
 
+        ItemStack item = inventory.getStackInSlot(0);
+        if (item == null) return false;
+
+        if (item.getItem() != Femtocraft.itemPhlegethonTunnelPrimer) {
+            return false;
+        }
+
+        inventory.setInventorySlotContents(0, null);
         active = true;
         setModified();
         notifyTunnelOfChange(active);
@@ -75,6 +100,9 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityBase implements IP
     @Override
     public boolean deactivate() {
         if (!isActive()) {
+            return false;
+        }
+        if (!worldObj.isRemote) {
             return false;
         }
 
@@ -115,6 +143,7 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityBase implements IP
         boolean val = info.formMultiBlock(world, x, y, z);
         if (val) {
             setModified();
+            setUpdate();
         }
         return val;
     }
@@ -128,6 +157,7 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityBase implements IP
             }
             else {
                 setModified();
+                setUpdate();
             }
         }
         return val;
@@ -199,5 +229,68 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityBase implements IP
     @Override
     public void onCoreActivityChange(boolean active) {
 
+    }
+
+    @Override
+    public int getSizeInventory() {
+        return inventory.getSizeInventory();
+    }
+
+    @Override
+    public ItemStack getStackInSlot(int i) {
+        return inventory.getStackInSlot(i);
+    }
+
+    @Override
+    public ItemStack decrStackSize(int i, int j) {
+        ItemStack is = inventory.decrStackSize(i, j);
+        setModified();
+        return is;
+    }
+
+    @Override
+    public ItemStack getStackInSlotOnClosing(int i) {
+        return inventory.getStackInSlotOnClosing(i);
+    }
+
+    @Override
+    public void setInventorySlotContents(int i, ItemStack itemstack) {
+        inventory.setInventorySlotContents(i, itemstack);
+        setModified();
+    }
+
+    @Override
+    public String getInvName() {
+        return inventory.getInvName();
+    }
+
+    @Override
+    public boolean isInvNameLocalized() {
+        return inventory.isInvNameLocalized();
+    }
+
+    @Override
+    public int getInventoryStackLimit() {
+        return 1;
+    }
+
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+        return inventory.isUseableByPlayer(entityplayer);
+    }
+
+    @Override
+    public void openChest() {
+        inventory.openChest();
+    }
+
+    @Override
+    public void closeChest() {
+        inventory.closeChest();
+    }
+
+    @Override
+    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+        return !isActive() && inventory.isItemValidForSlot(i, itemstack);
     }
 }

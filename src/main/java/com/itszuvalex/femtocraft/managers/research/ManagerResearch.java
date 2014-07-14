@@ -501,7 +501,7 @@ public class ManagerResearch {
             new ArrayList<ResearchTechnology>(Arrays.asList(
                     technologyQuantumInteractivity,
                     technologyAdvancedProgramming,
-                    technologyAppliedParticlePhysics)), null, false,
+                    technologyAppliedParticlePhysics)), new ItemStack(Femtocraft.itemHerculesDrive), false,
             new ArrayList<ItemStack>()
     );
     @Technology
@@ -530,34 +530,48 @@ public class ManagerResearch {
             new ArrayList<ItemStack>()
     );
     @Technology
-    public static ResearchTechnology technologyNBodySimulations = new ResearchTechnology(
-            "N-Body Simulations", "Simulate everything.", EnumTechLevel.FEMTO,
-            new ArrayList<ResearchTechnology>(Arrays
-                    .asList(technologyQuantumComputing)), null,
-            false, new ArrayList<ItemStack>()
+    public static ResearchTechnology technologyQuantumRobotics = new ResearchTechnology(
+            "Quantum Robotics", "", EnumTechLevel.FEMTO,
+            new ArrayList<ResearchTechnology>(Arrays.asList(technologyQuantumComputing)), new ItemStack(Femtocraft.itemErinyesCircuit), false, new ArrayList<ItemStack>()
     );
+    //    @Technology
+//    public static ResearchTechnology technologyNBodySimulations = new ResearchTechnology(
+//            "N-Body Simulations", "Simulate everything.", EnumTechLevel.FEMTO,
+//            new ArrayList<ResearchTechnology>(Arrays
+//                    .asList(technologyQuantumComputing)), null,
+//            false, new ArrayList<ItemStack>()
+//    );
     @Technology
     public static ResearchTechnology technologySpinRetention = new ResearchTechnology(
             "Spin Retention",
             "",
             EnumTechLevel.FEMTO,
             new ArrayList<ResearchTechnology>(Arrays.asList(
-                    technologyParticleManipulation, technologyNBodySimulations)),
+                    technologyParticleManipulation, technologyQuantumRobotics)),
             new ItemStack(Femtocraft.itemQuantumSchematic), false, new ArrayList<ItemStack>()
     );
-    @Technology
-    public static ResearchTechnology technologySingularityCalculator = new ResearchTechnology(
-            "Singularity Calculator",
-            "What are the odds you can't calculate the odds?",
-            EnumTechLevel.FEMTO, new ArrayList<ResearchTechnology>(
-            Arrays.asList(technologyQuantumComputing)), null,
-            false, new ArrayList<ItemStack>()
-    );
+    //    @Technology
+//    public static ResearchTechnology technologyQuantumComputing = new ResearchTechnology(
+//            "Quantum Computing",
+//            "",
+//            EnumTechLevel.FEMTO,
+//            new ArrayList<ResearchTechnology>(Arrays.asList(
+//                    technologyQuantumInteractivity, technologyAppliedParticlePhysics)),
+//            new ItemStack(Femtocraft.itemHerculesDrive), false, new ArrayList<ItemStack>()
+//    );
+    //    @Technology
+//    public static ResearchTechnology technologySingularityCalculator = new ResearchTechnology(
+//            "Singularity Calculator",
+//            "What are the odds you can't calculate the odds?",
+//            EnumTechLevel.FEMTO, new ArrayList<ResearchTechnology>(
+//            Arrays.asList(technologyQuantumComputing)), null,
+//            false, new ArrayList<ItemStack>()
+//    );
     @Technology
     public static ResearchTechnology technologySpontaneousGeneration = new ResearchTechnology(
             "Spontaneous Generation", "", EnumTechLevel.FEMTO,
             new ArrayList<ResearchTechnology>(Arrays.asList(
-                    technologySingularityCalculator,
+                    technologyQuantumRobotics,
                     technologyDemonicParticulates)), new ItemStack(
             Femtocraft.blockNullEqualizer), false,
             new ArrayList<ItemStack>()
@@ -566,7 +580,7 @@ public class ManagerResearch {
     public static ResearchTechnology technologyCorruptionStabilization = new ResearchTechnology(
             "Corruption Stabilization", "", EnumTechLevel.FEMTO,
             new ArrayList<ResearchTechnology>(Arrays
-                    .asList(technologyNBodySimulations,
+                    .asList(technologyQuantumRobotics,
                             technologySpontaneousGeneration)), new ItemStack(
             Femtocraft.blockFemtoCubeFrame), false,
             new ArrayList<ItemStack>()
@@ -577,7 +591,7 @@ public class ManagerResearch {
             new ArrayList<ResearchTechnology>(Arrays.asList(
 //                    technologyStarMatterRecollection,
                     technologyDemonicParticulates,
-                    technologySingularityCalculator)),
+                    technologyQuantumRobotics)),
             new ItemStack(Femtocraft.blockStellaratorCore), false,
             new ArrayList<ItemStack>()
     );

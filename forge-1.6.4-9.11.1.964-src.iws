@@ -62,21 +62,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="BlockNanoCubePort.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockNanoCubePort.java">
+      <file leaf-file-name="ManagerResearch.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/research/ManagerResearch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="678" max-vertical-offset="1455">
-              <caret line="118" column="4" selection-start-line="118" selection-start-column="4" selection-end-line="118" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BlockPhlegethonTunnelCore.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockPhlegethonTunnelCore.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7297297" vertical-offset="228" max-vertical-offset="1005">
-              <caret line="63" column="65" selection-start-line="63" selection-start-column="65" selection-end-line="63" selection-end-column="65" />
+            <state vertical-scroll-proportion="-1.1522634" vertical-offset="7475" max-vertical-offset="13500">
+              <caret line="503" column="97" selection-start-line="503" selection-start-column="97" selection-end-line="503" selection-end-column="97" />
               <folding />
             </state>
           </provider>
@@ -92,8 +82,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/proxy/ProxyCommon.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/plasma/volatility/VolatilityEventMagneticFluctuation.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/plasma/volatility/VolatilityEventPlasmaLeak.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/items/ItemBase.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/tiles/TileEntityBaseEntityMicroFurnace.java" />
@@ -116,7 +104,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/items/ItemAssemblySchematic.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/items/ItemQuantumSchematic.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/items/ItemDigitalSchematic.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/research/ManagerResearch.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/FemtocraftConfigs.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/ManagerRecipe.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/dimensional/ManagerDimensionalRecipe.java" />
@@ -132,17 +119,20 @@
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockNanoFissionReactorHousing.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockOrbitalEqualizer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockNullEqualizer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockPhlegethonTunnelFrame.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockSisyphusStabilizer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/ManagerAssemblerRecipe.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/Femtocraft.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/IPhlegethonTunnelComponent.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/api/IPhlegethonTunnelComponent.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/api/IPhlegethonTunnelAddon.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/api/IPhlegethonTunnelCore.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityPhlegethonTunnelCore.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/multiblock/MultiBlockPhlegethonTunnel.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockPhlegethonTunnelCore.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/api/IPhlegethonTunnelCore.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockPhlegethonTunnelFrame.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityPhlegethonTunnelCore.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockSisyphusStabilizer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntitySisyphusStabilizer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityPhlegethonTunnelFrame.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/research/ManagerResearch.java" />
       </list>
     </option>
   </component>
@@ -343,11 +333,41 @@
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="power" />
+              <option name="myItemId" value="managers" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="forge-1.6.4-9.11.1.964-src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="blocks" />
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="femtocraft" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="managers" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="research" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -416,6 +436,7 @@
       <recent name="com.itszuvalex.femtocraft.industry.items" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.itszuvalex.femtocraft.power.tiles" />
       <recent name="com.itszuvalex.femtocraft.api" />
     </key>
   </component>
@@ -656,7 +677,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="22" width="1440" height="874" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -669,6 +690,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919255" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17638889" sideWeight="0.49814814" order="5" side_tool="false" content_ui="tabs" x="910" y="181" width="475" height="262" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -676,9 +698,8 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="IntelliCalc" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19375" sideWeight="0.50185186" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919255" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32919255" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919255" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919255" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919255" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -716,34 +737,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityFemtoCubePort.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.9921875" vertical-offset="3540" max-vertical-offset="4560">
-          <caret line="196" column="35" selection-start-line="196" selection-start-column="35" selection-end-line="196" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityNanoCubePort.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52734375" vertical-offset="2520" max-vertical-offset="4575">
-          <caret line="214" column="5" selection-start-line="214" selection-start-column="5" selection-end-line="214" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/AssemblerRecipeDatabase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9667969" vertical-offset="720" max-vertical-offset="5115">
-          <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-src.jar!/net/minecraft/item/Item.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="6827" max-vertical-offset="20190">
-          <caret line="382" column="16" selection-start-line="382" selection-start-column="16" selection-end-line="382" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/items/ItemAssemblySchematic.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334" vertical-offset="2762" max-vertical-offset="3555">
@@ -828,14 +821,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1545">
           <caret line="40" column="8" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/research/ManagerResearch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5820" max-vertical-offset="13260">
-          <caret line="430" column="6" selection-start-line="430" selection-start-column="6" selection-end-line="430" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -965,13 +950,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockPhlegethonTunnelFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14648438" vertical-offset="0" max-vertical-offset="512">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockPlasmaConduit.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.26367188" vertical-offset="0" max-vertical-offset="660">
@@ -984,7 +962,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="10110" max-vertical-offset="17250">
           <caret line="690" column="70" selection-start-line="690" selection-start-column="70" selection-end-line="690" selection-end-column="70" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -997,26 +975,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-src.jar!/net/minecraft/world/World.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33289126" vertical-offset="9709" max-vertical-offset="69450">
-          <caret line="718" column="19" selection-start-line="718" selection-start-column="19" selection-end-line="718" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/ManagerAssemblerRecipe.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="29440" max-vertical-offset="35190">
           <caret line="1743" column="0" selection-start-line="1743" selection-start-column="0" selection-end-line="1743" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockSisyphusStabilizer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1037,47 +999,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/api/IPhlegethonTunnelCore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
-          <caret line="17" column="86" selection-start-line="17" selection-start-column="86" selection-end-line="17" selection-end-column="86" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/multiblock/MultiBlockFemtoCube.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4125">
           <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityPhlegethonTunnelCore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="761" max-vertical-offset="3135">
-          <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1407#1408#0" expanded="true" />
-            <element signature="e#1436#1437#0" expanded="true" />
-            <element signature="e#2118#2119#0" expanded="true" />
-            <element signature="e#2147#2148#0" expanded="true" />
-            <element signature="e#3347#3348#0" expanded="true" />
-            <element signature="e#3394#3395#0" expanded="true" />
-            <element signature="e#4066#4067#0" expanded="true" />
-            <element signature="e#4093#4094#0" expanded="true" />
-            <element signature="e#4290#4291#0" expanded="true" />
-            <element signature="e#4337#4338#0" expanded="true" />
-            <element signature="e#4387#4388#0" expanded="true" />
-            <element signature="e#4437#4438#0" expanded="true" />
-            <element signature="e#4483#4484#0" expanded="true" />
-            <element signature="e#4529#4530#0" expanded="true" />
-            <element signature="e#4583#4584#0" expanded="true" />
-            <element signature="e#4635#4636#0" expanded="true" />
-            <element signature="e#4935#4936#0" expanded="true" />
-            <element signature="e#4979#4980#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1099,18 +1025,126 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/api/IPhlegethonTunnelCore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3580902" vertical-offset="0" max-vertical-offset="754">
+          <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-src.jar!/net/minecraft/world/WorldProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5225464" vertical-offset="6431" max-vertical-offset="7230">
+          <caret line="523" column="15" selection-start-line="523" selection-start-column="15" selection-end-line="523" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-src.jar!/net/minecraft/world/World.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35278514" vertical-offset="66229" max-vertical-offset="70890">
+          <caret line="4366" column="25" selection-start-line="4366" selection-start-column="25" selection-end-line="4366" selection-end-column="25" />
+          <folding>
+            <element signature="e#142771#142772#0" expanded="true" />
+            <element signature="e#142820#142821#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityNanoCubeFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1193634" vertical-offset="0" max-vertical-offset="1080">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockNanoCubePort.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="678" max-vertical-offset="1455">
+        <state vertical-scroll-proportion="1.7181467" vertical-offset="0" max-vertical-offset="1455">
           <caret line="118" column="4" selection-start-line="118" selection-start-column="4" selection-end-line="118" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityPhlegethonTunnelCore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="1841" max-vertical-offset="4275">
+          <caret line="145" column="23" selection-start-line="145" selection-start-column="23" selection-end-line="145" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6397#6398#0" expanded="true" />
+            <element signature="e#6448#6449#0" expanded="true" />
+            <element signature="e#7075#7076#0" expanded="true" />
+            <element signature="e#7120#7121#0" expanded="true" />
+            <element signature="e#7287#7288#0" expanded="true" />
+            <element signature="e#7311#7312#0" expanded="true" />
+            <element signature="e#7501#7502#0" expanded="true" />
+            <element signature="e#7538#7539#0" expanded="true" />
+            <element signature="e#7584#7585#0" expanded="true" />
+            <element signature="e#7622#7623#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockPhlegethonTunnelFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="401" max-vertical-offset="1155">
+          <caret line="69" column="4" selection-start-line="69" selection-start-column="4" selection-end-line="69" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntitySisyphusStabilizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2685">
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1483#1484#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockSisyphusStabilizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7413793" vertical-offset="386" max-vertical-offset="1140">
+          <caret line="63" column="63" selection-start-line="63" selection-start-column="63" selection-end-line="63" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockPhlegethonTunnelCore.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7297297" vertical-offset="228" max-vertical-offset="1005">
-          <caret line="63" column="65" selection-start-line="63" selection-start-column="65" selection-end-line="63" selection-end-column="65" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3" max-vertical-offset="1005">
+          <caret line="69" column="5" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityPhlegethonTunnelFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5212355" vertical-offset="0" max-vertical-offset="2550">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1139#1140#0" expanded="true" />
+            <element signature="e#1186#1187#0" expanded="true" />
+            <element signature="e#1744#1745#0" expanded="true" />
+            <element signature="e#1771#1772#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/research/ManagerResearch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.1522634" vertical-offset="7475" max-vertical-offset="13500">
+          <caret line="503" column="97" selection-start-line="503" selection-start-column="97" selection-end-line="503" selection-end-column="97" />
           <folding />
         </state>
       </provider>
