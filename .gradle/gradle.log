@@ -10,9 +10,12 @@
 :extractUserDev
 :mergeJars SKIPPED
 :applyBinPatches SKIPPED
-:downloadMcpTools UP-TO-DATE
-:genSrgs UP-TO-DATE
-:deobfBinJar UP-TO-DATE
+:downloadMcpTools
+:genSrgs
+:deobfBinJar
+Applying SpecialSource...
+Applying Exceptor...
+Injecting source info...
 :compileApiJava UP-TO-DATE
 :processApiResources UP-TO-DATE
 :apiClasses UP-TO-DATE
@@ -22,7 +25,7 @@ Note: Some input files use unchecked or unsafe operations.
 Note: Recompile with -Xlint:unchecked for details.
 1 warning
 
-:processResources UP-TO-DATE
+:processResources
 :classes
 :jar
 :reobf
@@ -36,4 +39,4 @@ Note: Recompile with -Xlint:unchecked for details.
 
 BUILD SUCCESSFUL
 
-Total time: 18.864 secs
+Total time: 29.536 secs
