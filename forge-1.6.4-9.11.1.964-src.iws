@@ -4,14 +4,7 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4eef6911-7e00-49d5-8116-9bdd1a893cef" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/ForgeModLoader-client-0.log" afterPath="$PROJECT_DIR$/eclipse/ForgeModLoader-client-0.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/ForgeModLoader-client-1.log" afterPath="$PROJECT_DIR$/eclipse/ForgeModLoader-client-1.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/ForgeModLoader-client-2.log" afterPath="$PROJECT_DIR$/eclipse/ForgeModLoader-client-2.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/research/ManagerResearch.java" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/research/ManagerResearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/forge-1.6.4-9.11.1.964-src.ipr" afterPath="$PROJECT_DIR$/forge-1.6.4-9.11.1.964-src.ipr" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/forge-1.6.4-9.11.1.964-src.iws" afterPath="$PROJECT_DIR$/forge-1.6.4-9.11.1.964-src.iws" />
-    </list>
+    <list default="true" id="4eef6911-7e00-49d5-8116-9bdd1a893cef" name="Default" comment="" />
     <ignored path="forge-1.6.4-9.11.1.964-src.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -718,7 +711,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -738,7 +731,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="IntelliCalc" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19375" sideWeight="0.50185186" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19375" sideWeight="0.50185186" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32919255" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919255" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919255" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />

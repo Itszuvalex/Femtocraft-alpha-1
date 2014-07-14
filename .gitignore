@@ -199,3 +199,6 @@ mcp/eclipse/.metadata/*
 
 *.bat
 *.sh
+
+*
+!src/
