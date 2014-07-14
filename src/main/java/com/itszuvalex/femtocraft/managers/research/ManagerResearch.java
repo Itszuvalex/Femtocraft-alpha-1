@@ -509,18 +509,18 @@ public class ManagerResearch {
             new ItemStack(Femtocraft.itemFemtoCoil), false,
             new ArrayList<ItemStack>()
     );
-    @Technology
-    public static ResearchTechnology technologyPerfectScheduling = new ResearchTechnology(
-            "Perfect Scheduling", "Never miss a meeting!", EnumTechLevel.FEMTO,
-            new ArrayList<ResearchTechnology>(Arrays
-                    .asList(technologyQuantumComputing)), null,
-            false, new ArrayList<ItemStack>()
-    );
+    //    @Technology
+//    public static ResearchTechnology technologyPerfectScheduling = new ResearchTechnology(
+//            "Perfect Scheduling", "Never miss a meeting!", EnumTechLevel.FEMTO,
+//            new ArrayList<ResearchTechnology>(Arrays
+//                    .asList(technologyQuantumComputing)), null,
+//            false, new ArrayList<ItemStack>()
+//    );
     @Technology
     public static ResearchTechnology technologyParticleExcitation = new ResearchTechnology(
             "Particle Excitation", "", EnumTechLevel.FEMTO,
             new ArrayList<ResearchTechnology>(Arrays
-                    .asList(technologyPerfectScheduling,
+                    .asList(technologyQuantumRobotics,
                             technologyElementManufacturing)), new ItemStack(
             Femtocraft.blockFemtoImpulserUnlit), false,
             new ArrayList<ItemStack>()
@@ -529,7 +529,7 @@ public class ManagerResearch {
     public static ResearchTechnology technologyParticleManipulation = new ResearchTechnology(
             "Particle Manipulation", "", EnumTechLevel.FEMTO,
             new ArrayList<ResearchTechnology>(Arrays
-                    .asList(technologyPerfectScheduling,
+                    .asList(technologyQuantumRobotics,
                             technologyElementManufacturing)), new ItemStack(
             Femtocraft.blockFemtoRepurposer), false,
             new ArrayList<ItemStack>()
