@@ -154,10 +154,10 @@ public class FemtocraftConfigs {
     int BlockNanoCubePortID;
     public static
     @CfgId(block = true)
-    int BlockGeothermalChargingBaseID;
+    int BlockCryoEndothermalChargingBaseID;
     public static
     @CfgId(block = true)
-    int BlockGeothermalChargingCoilID;
+    int BlockCryoEndothermalChargingCoilID;
     public static
     @CfgId(block = true)
     int BlockFissionReactorCoreID;

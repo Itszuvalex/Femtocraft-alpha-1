@@ -44,6 +44,7 @@ public class ProxyClient extends ProxyCommon {
     public static int FemtocraftStellaratorCoreRenderID;
     public static int FemtocraftStellaratorFocusRenderID;
     public static int FemtocraftSuctionPipeRenderID;
+    public static int FemtocraftPlasmaConduitID;
 
     public static int CuttingBoardRenderPass;
     public static int cuttingBoardRenderType;
@@ -120,6 +121,9 @@ public class ProxyClient extends ProxyCommon {
 
         FemtocraftSuctionPipeRenderID = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(FemtocraftSuctionPipeRenderID, new RenderSuctionPipe());
+
+        FemtocraftPlasmaConduitID = RenderingRegistry.getNextAvailableRenderId();
+//        RenderingRegistry.registerBlockHandler(FemtocraftPlasmaConduitID, new RenderPlasmaConduit());
 
     }
 }

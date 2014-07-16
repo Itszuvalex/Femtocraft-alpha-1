@@ -46,6 +46,10 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
     public boolean containsPlasma;
     @FemtocraftDataUtils.Saveable
     private PlasmaContainer plasma;
+    @FemtocraftDataUtils.Saveable(desc = true)
+    private ForgeDirection input;
+    @FemtocraftDataUtils.Saveable(desc = true)
+    private ForgeDirection output;
 
     public TileEntityPlasmaConduit() {
         super();
@@ -54,16 +58,16 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
 
     public void clearInput() {
         plasma.setInput(null, ForgeDirection.UNKNOWN);
+        input = ForgeDirection.UNKNOWN;
         setModified();
         setUpdate();
-        setRenderUpdate();
     }
 
     public void clearOutput() {
         plasma.setOutput(null, ForgeDirection.UNKNOWN);
+        output = ForgeDirection.UNKNOWN;
         setModified();
         setUpdate();
-        setRenderUpdate();
     }
 
     public void searchForConnections() {
@@ -84,11 +88,7 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
                 IPlasmaContainer plasmaContainer = (IPlasmaContainer) te;
                 if (plasmaContainer.getOutput() == null) {
                     plasmaContainer.setOutput(this, dir.getOpposite());
-                    plasma.setInput(plasmaContainer, dir);
-                    setModified();
-                    setUpdate();
-                    setRenderUpdate();
-                    return true;
+                    return setInput(plasmaContainer, dir);
                 }
             }
         }
@@ -109,11 +109,7 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
                 IPlasmaContainer plasmaContainer = (IPlasmaContainer) te;
                 if (plasmaContainer.getInput() == null) {
                     plasmaContainer.setInput(this, dir.getOpposite());
-                    plasma.setOutput(plasmaContainer, dir);
-                    setModified();
-                    setUpdate();
-                    setRenderUpdate();
-                    return true;
+                    return setOutput(plasmaContainer, dir);
                 }
             }
         }
@@ -128,7 +124,6 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
         containsPlasma = hasFlows();
         if (prev != containsPlasma) {
             setUpdate();
-            setRenderUpdate();
         }
     }
 
@@ -147,16 +142,29 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
         return plasma.getInput();
     }
 
+    public ForgeDirection getRenderInputDir() {
+        return input;
+    }
+
     @Override
     public IPlasmaContainer getOutput() {
         return plasma.getOutput();
     }
 
+    public ForgeDirection getRenderOutputDir() {
+        return output;
+    }
+
+    public boolean getRenderHasPlasma() {
+        return containsPlasma;
+    }
+
     @Override
     public boolean setInput(IPlasmaContainer container, ForgeDirection dir) {
         if (plasma.setInput(container, dir)) {
+            input = dir;
             setModified();
-            setRenderUpdate();
+            setUpdate();
             return true;
         }
         return false;
@@ -165,8 +173,9 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
     @Override
     public boolean setOutput(IPlasmaContainer container, ForgeDirection dir) {
         if (plasma.setOutput(container, dir)) {
+            output = dir;
             setModified();
-            setRenderUpdate();
+            setUpdate();
             return true;
         }
         return false;
@@ -185,6 +194,7 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
     @Override
     public boolean addFlow(IPlasmaFlow flow) {
         if (plasma.addFlow(flow)) {
+            containsPlasma = hasFlows();
             setModified();
             return true;
         }
@@ -199,6 +209,7 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
     @Override
     public boolean removeFlow(IPlasmaFlow flow) {
         if (plasma.removeFlow(flow)) {
+            containsPlasma = hasFlows();
             setModified();
             return true;
         }
@@ -213,6 +224,7 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
     @Override
     public void update(World world, int x, int y, int z) {
         plasma.update(world, x, y, z);
+        containsPlasma = hasFlows();
         setModified();
     }
 

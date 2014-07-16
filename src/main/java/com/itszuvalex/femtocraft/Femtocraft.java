@@ -149,8 +149,8 @@ public class Femtocraft {
     public static Block blockMicroEngine;
     public static Block blockOrbitalEqualizer;
     public static Block blockNullEqualizer;
-    public static Block blockGeothermalChargingBase;
-    public static Block blockGeothermalChargingCoil;
+    public static Block blockCryoEndothermalChargingBase;
+    public static Block blockCryoEndothermalChargingCoil;
     public static Block blockFissionReactorCore;
     public static Block blockFissionReactorHousing;
     public static Block blockDecontaminationChamber;
@@ -603,19 +603,19 @@ public class Femtocraft {
         GameRegistry.registerBlock(blockOrbitalEqualizer, "BlockOrbitalEqualizer");
         LanguageRegistry.addName(blockOrbitalEqualizer, "Orbital Equalizer");
 
-        blockGeothermalChargingBase = new BlockGeothermalChargingBase
-                (FemtocraftConfigs.BlockGeothermalChargingBaseID);
-        GameRegistry.registerBlock(blockGeothermalChargingBase,
-                "BlockGeothermalChargingBase");
-        LanguageRegistry.addName(blockGeothermalChargingBase,
-                "Geothermal Charging Base");
+        blockCryoEndothermalChargingBase = new BlockCryoEndothermalChargingBase
+                (FemtocraftConfigs.BlockCryoEndothermalChargingBaseID);
+        GameRegistry.registerBlock(blockCryoEndothermalChargingBase,
+                "BlockCryoEndothermalChargingBase");
+        LanguageRegistry.addName(blockCryoEndothermalChargingBase,
+                "CryoEndothermal Charging Base");
 
-        blockGeothermalChargingCoil = new BlockGeothermalChargingCoil
-                (FemtocraftConfigs.BlockGeothermalChargingCoilID);
-        GameRegistry.registerBlock(blockGeothermalChargingCoil,
-                "BlockGeothermalChargingCoil");
-        LanguageRegistry.addName(blockGeothermalChargingCoil,
-                "Geothermal Charging Coil");
+        blockCryoEndothermalChargingCoil = new BlockCryoEndothermalChargingCoil
+                (FemtocraftConfigs.BlockCryoEndothermalChargingCoilID);
+        GameRegistry.registerBlock(blockCryoEndothermalChargingCoil,
+                "BlockCryoEndothermalChargingCoil");
+        LanguageRegistry.addName(blockCryoEndothermalChargingCoil,
+                "CryoEndothermal Charging Coil");
 
         blockFissionReactorCore = new BlockNanoFissionReactorCore
                 (FemtocraftConfigs.BlockFissionReactorCoreID);

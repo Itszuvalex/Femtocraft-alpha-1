@@ -266,7 +266,7 @@ public class ManagerResearch {
             Arrays.asList(technologyFareniteStabilization,
                     technologyAdvancedChemistry,
                     technologyPotentialityHarnessing)
-    ), new ItemStack(Femtocraft.blockGeothermalChargingBase),
+    ), new ItemStack(Femtocraft.blockCryoEndothermalChargingBase),
             false, new ArrayList<ItemStack>()
     );
     @Technology
