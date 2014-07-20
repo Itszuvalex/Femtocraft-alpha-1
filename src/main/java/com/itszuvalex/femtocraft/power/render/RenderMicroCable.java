@@ -58,7 +58,7 @@ public class RenderMicroCable implements ISimpleBlockRenderingHandler {
     private RenderModel Coil_Up_Close;
     private RenderModel Coil_Down_Close;
 
-    private boolean CoilInitialized = false;
+    private boolean initialized = false;
 
     public RenderMicroCable() {
     }
@@ -104,8 +104,6 @@ public class RenderMicroCable implements ISimpleBlockRenderingHandler {
         tessellator.setBrightness(block.getMixedBrightnessForBlock(
                 renderer.blockAccess, x, y, z));
         tessellator.setColorOpaque_F(1, 1, 1);
-        // tessellator.setBrightness((int)
-        // (blockMicroCable.getBlockBrightness(renderer.blockAccess, x, y, z) * 3200.));
         return renderCable(cable, x, y, z, cableTile.connections);
     }
 
@@ -121,27 +119,7 @@ public class RenderMicroCable implements ISimpleBlockRenderingHandler {
 
     private boolean renderCable(BlockMicroCable cable, float x, float y, float z, boolean[] connections) {
 
-        // //Render border
-        // renderer.setOverrideBlockTexture(blockMicroCable.coreBorder);
-        // block.setBlockBounds(4.F/16.0F, 4.F/16.0F, 4.F/16.0F, 12.F/16.0F,
-        // 12.F/16.0F, 12.F/16.F);
-        // renderer.setRenderBoundsFromBlock(block);
-        // renderer.renderStandardBlock(block, x, y, z);
-        // renderer.clearOverrideBlockTexture();
-        //
-        // block.setBlockBounds(5.F/16.0F, 5.F/16.0F, 5.F/16.0F, 11.F/16.0F,
-        // 11.F/16.0F, 11.F/16.F);
-        // renderer.setRenderBoundsFromBlock(block);
-        // renderer.renderStandardBlock(block, x, y, z);
-        //
-        // renderer.clearOverrideBlockTexture();
-        //
-        // renderer.
-        //
-        // blockMicroCable.setBlockBounds();
 
-        // tessellator.setBrightness((int)
-        // (renderer.blockAccess.getLightBrightness(x, y, z) * 100));
 
         drawCore(cable, x, y, z, connections);
 
@@ -149,7 +127,7 @@ public class RenderMicroCable implements ISimpleBlockRenderingHandler {
     }
 
     private void drawCore(BlockMicroCable cable, float x, float y, float z, boolean[] connections) {
-        if (!CoilInitialized) {
+        if (!initialized) {
             initializeCoils(cable);
         }
 
@@ -209,7 +187,7 @@ public class RenderMicroCable implements ISimpleBlockRenderingHandler {
         Coil_East_Close = Coil_North_Close.rotatedOnYAxis(-Math.PI / 2.d);
         Coil_West_Close = Coil_North_Close.rotatedOnYAxis(Math.PI / 2.d);
 
-        CoilInitialized = true;
+        initialized = true;
     }
 
     private boolean connectedAcross(boolean[] connections) {
@@ -235,7 +213,7 @@ public class RenderMicroCable implements ISimpleBlockRenderingHandler {
     // drawConnector(blockMicroCable, x, y, z, -1.0F/16.0F + offset, renderer, direction,
     // false);
     //
-    // if(!CoilInitialized)
+    // if(!initialized)
     // initializeCoils(blockMicroCable);
     //
     // double yrot = Math.PI/2.0D;

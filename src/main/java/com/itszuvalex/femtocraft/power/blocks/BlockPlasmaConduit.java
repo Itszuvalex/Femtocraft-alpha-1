@@ -34,6 +34,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -44,6 +45,9 @@ import java.util.List;
  * Created by Christopher Harris (Itszuvalex) on 5/12/14.
  */
 public class BlockPlasmaConduit extends TileContainer {
+    public Icon center, center_filled;
+    public Icon input, input_filled, output, output_filled;
+
     public BlockPlasmaConduit(int id) {
         super(id, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
@@ -68,7 +72,7 @@ public class BlockPlasmaConduit extends TileContainer {
 
     @Override
     public int getRenderType() {
-        return ProxyClient.microCableRenderID;
+        return ProxyClient.FemtocraftPlasmaConduitID;
     }
 
     @Override
@@ -269,7 +273,17 @@ public class BlockPlasmaConduit extends TileContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                + ":" + "BlockPlasmaConduit");
+        center = blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+                + ":" + "BlockPlasmaConduit_core");
+        center_filled = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+                + ":" + "BlockPlasmaConduit_core_filled");
+        input = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+                + ":" + "BlockPlasmaConduit_connector_input");
+        input_filled = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+                + ":" + "BlockPlasmaConduit_connector_input_filled");
+        output = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+                + ":" + "BlockPlasmaConduit_connector_output");
+        output_filled = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+                + ":" + "BlockPlasmaConduit_connector_output_filled");
     }
 }

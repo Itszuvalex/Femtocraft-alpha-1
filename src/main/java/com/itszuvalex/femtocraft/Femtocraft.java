@@ -827,7 +827,7 @@ public class Femtocraft {
         LanguageRegistry.addName(itemKineticPulverizer, "Kinetic Pulverizer");
 
         itemHeatingElement = new ItemBase(FemtocraftConfigs
-                .ItemHeatingCoilID, "ItemHeatingElement");
+                .ItemHeatingCoilID, "ItemHeatingCoil");
         LanguageRegistry.addName(itemHeatingElement, "Heating Coil");
 
         itemPortableResearchComputer = new ItemPortableResearchComputer

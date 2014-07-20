@@ -123,7 +123,7 @@ public class ProxyClient extends ProxyCommon {
         RenderingRegistry.registerBlockHandler(FemtocraftSuctionPipeRenderID, new RenderSuctionPipe());
 
         FemtocraftPlasmaConduitID = RenderingRegistry.getNextAvailableRenderId();
-//        RenderingRegistry.registerBlockHandler(FemtocraftPlasmaConduitID, new RenderPlasmaConduit());
+        RenderingRegistry.registerBlockHandler(FemtocraftPlasmaConduitID, new RenderPlasmaConduit());
 
     }
 }

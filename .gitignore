@@ -206,3 +206,5 @@ mcp/eclipse/.metadata/*
 *
 !src/
 !src/*
+!art/
+!art/*
