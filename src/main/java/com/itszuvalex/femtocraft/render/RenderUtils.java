@@ -34,24 +34,30 @@ public class RenderUtils {
     public static void renderCube(float x, float y, float z, float startx,
                                   float starty, float startz, float endx, float endy, float endz,
                                   Icon texture) {
+        renderCube(x, y, z, startx, starty, startz, endx, endy, endz, texture, texture.getMinU(), texture.getMaxU(), texture.getMinV(), texture.getMaxV());
+    }
+
+    public static void renderCube(float x, float y, float z, float startx,
+                                  float starty, float startz, float endx, float endy, float endz,
+                                  Icon texture, float minU, float maxU, float minV, float maxV) {
         RenderUtils.drawTopFace(x, y, z, startx, endx, startz, endz, endy,
-                texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
+                texture, minU, maxU,
+                minV, maxV);
         RenderUtils.drawBottomFace(x, y, z, startx, endx, startz, endz, starty,
-                texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
+                texture, minU, maxU,
+                minV, maxV);
         RenderUtils.drawNorthFace(x, y, z, startx, endx, starty, endy, startz,
-                texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
+                texture, minU, maxU,
+                minV, maxV);
         RenderUtils.drawEastFace(x, y, z, starty, endy, startz, endz, endx,
-                texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
+                texture, minU, maxU,
+                minV, maxV);
         RenderUtils.drawSouthFace(x, y, z, startx, endx, starty, endy, endz,
-                texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
+                texture, minU, maxU,
+                minV, maxV);
         RenderUtils.drawWestFace(x, y, z, starty, endy, startz, endz, startx,
-                texture, texture.getMinU(), texture.getMaxU(),
-                texture.getMinV(), texture.getMaxV());
+                texture, minU, maxU,
+                minV, maxV);
     }
 
     public static void drawTopFace(float x, float y, float z, float xmin,

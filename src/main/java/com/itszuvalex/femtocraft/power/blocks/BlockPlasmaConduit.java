@@ -66,6 +66,21 @@ public class BlockPlasmaConduit extends TileContainer {
     }
 
     @Override
+    public void breakBlock(World par1World, int par2, int par3, int par4,
+                           int par5, int par6) {
+
+        TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
+        if (tile != null) {
+            if (tile instanceof TileEntityPlasmaConduit) {
+                TileEntityPlasmaConduit conduit = (TileEntityPlasmaConduit) tile;
+                conduit.onBlockBreak();
+            }
+        }
+
+        super.breakBlock(par1World, par2, par3, par4, par5, par6);
+    }
+
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -93,23 +108,20 @@ public class BlockPlasmaConduit extends TileContainer {
                 par6List, par7Entity);
 
         TileEntity tile = par1World.getBlockTileEntity(x, y, z);
-        if (!(tile instanceof TileEntityPlasmaConduit)) {
-            return;
-        }
-        TileEntityPlasmaConduit conduit = (TileEntityPlasmaConduit) tile;
+        if (tile instanceof TileEntityPlasmaConduit) {
+            TileEntityPlasmaConduit conduit = (TileEntityPlasmaConduit) tile;
 
-
-        AxisAlignedBB bb = boundingBoxForDirection(
-                conduit.getRenderInputDir(), x, y, z);
-        if (par5AxisAlignedBB.intersectsWith(bb)) {
-            par6List.add(bb);
+            AxisAlignedBB bb = boundingBoxForDirection(
+                    conduit.getInputDir(), x, y, z);
+            if (par5AxisAlignedBB.intersectsWith(bb)) {
+                par6List.add(bb);
+            }
+            bb = boundingBoxForDirection(
+                    conduit.getOutputDir(), x, y, z);
+            if (par5AxisAlignedBB.intersectsWith(bb)) {
+                par6List.add(bb);
+            }
         }
-        bb = boundingBoxForDirection(
-                conduit.getRenderOutputDir(), x, y, z);
-        if (par5AxisAlignedBB.intersectsWith(bb)) {
-            par6List.add(bb);
-        }
-
     }
 
     protected AxisAlignedBB boundingBoxForDirection(ForgeDirection dir, int x,
@@ -121,27 +133,29 @@ public class BlockPlasmaConduit extends TileContainer {
         double maxY = 14.f / 16.d;
         double maxZ = 14.f / 16.d;
 
-        switch (dir) {
-            case UP:
-                maxY = 1;
-                break;
-            case DOWN:
-                minY = 0;
-                break;
-            case NORTH:
-                minZ = 0;
-                break;
-            case SOUTH:
-                maxZ = 1;
-                break;
-            case EAST:
-                maxX = 1;
-                break;
-            case WEST:
-                minX = 0;
-                break;
-            default:
-                break;
+        if (dir != null) {
+            switch (dir) {
+                case UP:
+                    maxY = 1;
+                    break;
+                case DOWN:
+                    minY = 0;
+                    break;
+                case NORTH:
+                    minZ = 0;
+                    break;
+                case SOUTH:
+                    maxZ = 1;
+                    break;
+                case EAST:
+                    maxX = 1;
+                    break;
+                case WEST:
+                    minX = 0;
+                    break;
+                default:
+                    break;
+            }
         }
 
         return AxisAlignedBB.getAABBPool().getAABB((double) x + minX,
@@ -168,9 +182,9 @@ public class BlockPlasmaConduit extends TileContainer {
         TileEntityPlasmaConduit cable = (TileEntityPlasmaConduit) tile;
 
         box = box.func_111270_a(boundingBoxForDirection(
-                cable.getRenderInputDir(), x, y, z));
+                cable.getInputDir(), x, y, z));
         box = box.func_111270_a(boundingBoxForDirection(
-                cable.getRenderOutputDir(), x, y, z));
+                cable.getOutputDir(), x, y, z));
 
         return box;
     }
@@ -193,24 +207,7 @@ public class BlockPlasmaConduit extends TileContainer {
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess,
                                            int x, int y, int z) {
-        AxisAlignedBB box = AxisAlignedBB.getAABBPool().getAABB(
-                (double) x + 2.d / 16.d, (double) y + 2.d / 16.d,
-                (double) z + 2.d / 16.d, (double) x + 14.d / 16.d,
-                (double) y + 14.d / 16.d, (double) z + 14.d / 16.d);
 
-        TileEntity tile = par1iBlockAccess.getBlockTileEntity(x, y, z);
-        if (tile == null) {
-            setBlockBounds((float) box.minX, (float) box.minY,
-                    (float) box.minZ, (float) box.maxX, (float) box.maxY,
-                    (float) box.maxZ);
-            return;
-        }
-        if (!(tile instanceof TileEntityPlasmaConduit)) {
-            setBlockBounds((float) box.minX, (float) box.minY,
-                    (float) box.minZ, (float) box.maxX, (float) box.maxY,
-                    (float) box.maxZ);
-            return;
-        }
 
         double minX = 2.d / 16.d;
         double minY = 2.d / 16.d;
@@ -218,53 +215,57 @@ public class BlockPlasmaConduit extends TileContainer {
         double maxX = 14.d / 16.d;
         double maxY = 14.d / 16.d;
         double maxZ = 14.d / 16.d;
-        TileEntityPlasmaConduit cable = (TileEntityPlasmaConduit) tile;
 
-        switch (cable.getRenderInputDir()) {
-            case UP:
-                maxY = 1;
-                break;
-            case DOWN:
-                minY = 0;
-                break;
-            case NORTH:
-                minZ = 0;
-                break;
-            case SOUTH:
-                maxZ = 1;
-                break;
-            case EAST:
-                maxX = 1;
-                break;
-            case WEST:
-                minX = 0;
-                break;
-            default:
-                break;
-        }
-        switch (cable.getRenderOutputDir()) {
-            case UP:
-                maxY = 1;
-                break;
-            case DOWN:
-                minY = 0;
-                break;
-            case NORTH:
-                minZ = 0;
-                break;
-            case SOUTH:
-                maxZ = 1;
-                break;
-            case EAST:
-                maxX = 1;
-                break;
-            case WEST:
-                minX = 0;
-                break;
-            default:
-                break;
-        }
+        TileEntity tile = par1iBlockAccess.getBlockTileEntity(x, y, z);
 
+        if (tile instanceof TileEntityPlasmaConduit) {
+            TileEntityPlasmaConduit cable = (TileEntityPlasmaConduit) tile;
+
+            switch (cable.getInputDir()) {
+                case UP:
+                    maxY = 1;
+                    break;
+                case DOWN:
+                    minY = 0;
+                    break;
+                case NORTH:
+                    minZ = 0;
+                    break;
+                case SOUTH:
+                    maxZ = 1;
+                    break;
+                case EAST:
+                    maxX = 1;
+                    break;
+                case WEST:
+                    minX = 0;
+                    break;
+                default:
+                    break;
+            }
+            switch (cable.getOutputDir()) {
+                case UP:
+                    maxY = 1;
+                    break;
+                case DOWN:
+                    minY = 0;
+                    break;
+                case NORTH:
+                    minZ = 0;
+                    break;
+                case SOUTH:
+                    maxZ = 1;
+                    break;
+                case EAST:
+                    maxX = 1;
+                    break;
+                case WEST:
+                    minX = 0;
+                    break;
+                default:
+                    break;
+            }
+        }
 
         setBlockBounds((float) minX, (float) minY, (float) minZ, (float) maxX,
                 (float) maxY, (float) maxZ);

@@ -53,9 +53,9 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
     private IPlasmaContainer input;
     private IPlasmaContainer output;
     @FemtocraftDataUtils.Saveable
-    private ForgeDirection inputDir;
+    private ForgeDirection inputDir = ForgeDirection.UNKNOWN;
     @FemtocraftDataUtils.Saveable
-    private ForgeDirection outputDir;
+    private ForgeDirection outputDir = ForgeDirection.UNKNOWN;
 
     public PlasmaContainer(int capacity, int stability, int temperature) {
         maxCapacity = capacity;

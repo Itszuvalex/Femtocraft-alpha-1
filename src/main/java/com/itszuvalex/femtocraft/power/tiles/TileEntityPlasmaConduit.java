@@ -28,6 +28,7 @@ import com.itszuvalex.femtocraft.power.plasma.PlasmaContainer;
 import com.itszuvalex.femtocraft.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -38,25 +39,28 @@ import java.util.Collection;
  * Created by Christopher Harris (Itszuvalex) on 5/2/14.
  */
 public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaContainer {
-    public static int capacity;
-    public static int temperatureRating;
-    public static int stability;
+    public static int capacity = 5;
+    public static int temperatureRating = 4000;
+    public static int stability = 3000;
     //For display purposes
     @FemtocraftDataUtils.Saveable(desc = true)
-    public boolean containsPlasma;
+    public boolean containsPlasma = false;
     @FemtocraftDataUtils.Saveable
-    private PlasmaContainer plasma;
+    private PlasmaContainer plasma = new PlasmaContainer(capacity, stability, temperatureRating);
+
     @FemtocraftDataUtils.Saveable(desc = true)
-    private ForgeDirection input;
+    private ForgeDirection input = ForgeDirection.UNKNOWN;
     @FemtocraftDataUtils.Saveable(desc = true)
-    private ForgeDirection output;
+    private ForgeDirection output = ForgeDirection.UNKNOWN;
 
     public TileEntityPlasmaConduit() {
         super();
-        plasma = new PlasmaContainer(capacity, stability, temperatureRating);
     }
 
     public void clearInput() {
+        if (plasma.getInput() == this) {
+            plasma.getInput().setOutput(null, ForgeDirection.UNKNOWN);
+        }
         plasma.setInput(null, ForgeDirection.UNKNOWN);
         input = ForgeDirection.UNKNOWN;
         setModified();
@@ -64,6 +68,9 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
     }
 
     public void clearOutput() {
+        if (plasma.getOutput() == this) {
+            plasma.getOutput().setInput(null, ForgeDirection.UNKNOWN);
+        }
         plasma.setOutput(null, ForgeDirection.UNKNOWN);
         output = ForgeDirection.UNKNOWN;
         setModified();
@@ -87,8 +94,9 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
             if (te instanceof IPlasmaContainer) {
                 IPlasmaContainer plasmaContainer = (IPlasmaContainer) te;
                 if (plasmaContainer.getOutput() == null) {
-                    plasmaContainer.setOutput(this, dir.getOpposite());
-                    return setInput(plasmaContainer, dir);
+                    if (plasmaContainer.setOutput(this, dir.getOpposite())) {
+                        return setInput(plasmaContainer, dir);
+                    }
                 }
             }
         }
@@ -108,8 +116,9 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
             if (te instanceof IPlasmaContainer) {
                 IPlasmaContainer plasmaContainer = (IPlasmaContainer) te;
                 if (plasmaContainer.getInput() == null) {
-                    plasmaContainer.setInput(this, dir.getOpposite());
-                    return setOutput(plasmaContainer, dir);
+                    if (plasmaContainer.setInput(this, dir.getOpposite())) {
+                        return setOutput(plasmaContainer, dir);
+                    }
                 }
             }
         }
@@ -248,5 +257,20 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
     @Override
     public int getStabilityRating() {
         return plasma.getStabilityRating();
+    }
+
+    @Override
+    public boolean hasDescription() {
+        return true;
+    }
+
+    @Override
+    public void handleDescriptionNBT(NBTTagCompound compound) {
+        super.handleDescriptionNBT(compound);
+    }
+
+    public void onBlockBreak() {
+        clearInput();
+        clearOutput();
     }
 }

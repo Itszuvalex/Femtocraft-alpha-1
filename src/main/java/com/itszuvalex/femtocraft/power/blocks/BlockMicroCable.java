@@ -147,9 +147,7 @@ public class BlockMicroCable extends BlockPowerContainer {
                 (double) y + 12.f / 16.f, (double) z + 12.f / 16.f);
 
         TileEntity tile = par1World.getBlockTileEntity(x, y, z);
-        if (tile == null) {
-            return box;
-        }
+
         if (!(tile instanceof TileEntityMicroCable)) {
             return box;
         }
@@ -184,24 +182,6 @@ public class BlockMicroCable extends BlockPowerContainer {
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess,
                                            int x, int y, int z) {
-        AxisAlignedBB box = AxisAlignedBB.getAABBPool().getAABB(
-                (double) x + 4.d / 16.d, (double) y + 4.d / 16.d,
-                (double) z + 4.d / 16.d, (double) x + 12.d / 16.d,
-                (double) y + 12.d / 16.d, (double) z + 12.d / 16.d);
-
-        TileEntity tile = par1iBlockAccess.getBlockTileEntity(x, y, z);
-        if (tile == null) {
-            setBlockBounds((float) box.minX, (float) box.minY,
-                    (float) box.minZ, (float) box.maxX, (float) box.maxY,
-                    (float) box.maxZ);
-            return;
-        }
-        if (!(tile instanceof TileEntityMicroCable)) {
-            setBlockBounds((float) box.minX, (float) box.minY,
-                    (float) box.minZ, (float) box.maxX, (float) box.maxY,
-                    (float) box.maxZ);
-            return;
-        }
 
         double minX = 4.d / 16.d;
         double minY = 4.d / 16.d;
@@ -209,6 +189,16 @@ public class BlockMicroCable extends BlockPowerContainer {
         double maxX = 12.d / 16.d;
         double maxY = 12.d / 16.d;
         double maxZ = 12.d / 16.d;
+
+        TileEntity tile = par1iBlockAccess.getBlockTileEntity(x, y, z);
+
+        if (!(tile instanceof TileEntityMicroCable)) {
+            setBlockBounds((float) minX, (float) minY,
+                    (float) minZ, (float) maxX, (float) maxY,
+                    (float) maxZ);
+            return;
+        }
+
         TileEntityMicroCable cable = (TileEntityMicroCable) tile;
 
         for (int i = 0; i < 6; ++i) {

@@ -204,9 +204,9 @@ mcp/eclipse/.metadata/*
 *.iws
 
 /*
-!src
-!src/
-!src/*
-!art
-!art/
-!art/*
+!/src
+!/src/
+!/src/*
+!/art
+!/art/
+!/art/*

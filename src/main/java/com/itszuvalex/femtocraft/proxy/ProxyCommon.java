@@ -125,6 +125,7 @@ public class ProxyCommon {
 
         GameRegistry.registerTileEntity(TileEntityPlasma.class,
                 "TileEntityPlasma");
+        GameRegistry.registerTileEntity(TileEntityPlasmaConduit.class, "TileEntityPlasmaConduit");
     }
 
     public void registerBlockRenderers() {
