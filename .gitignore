@@ -204,7 +204,12 @@ mcp/eclipse/.metadata/*
 *.iws
 
 *
+!src
 !src/
 !src/*
+!art
 !art/
 !art/*
+!art/RaggedyItemTextures
+!art/RaggedyItemTextures/
+!art/RaggedyItemTextures/*
