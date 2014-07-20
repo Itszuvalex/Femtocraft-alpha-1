@@ -203,13 +203,10 @@ mcp/eclipse/.metadata/*
 *.ipr
 *.iws
 
-*
+/*
 !src
 !src/
 !src/*
 !art
 !art/
 !art/*
-!art/RaggedyItemTextures
-!art/RaggedyItemTextures/
-!art/RaggedyItemTextures/*
