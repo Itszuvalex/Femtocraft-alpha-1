@@ -76,6 +76,7 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
             TileEntity te = coreLocation.getTileEntity();
             if (te instanceof IFusionReactorCore) {
                 core = (IFusionReactorCore) te;
+                core.addComponent(this);
             }
         }
 
@@ -115,6 +116,7 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
             setModified();
             coreLocation = new WorldLocation(world, x, y, z);
             core = (IFusionReactorCore) coreLocation.getTileEntity();
+            core.addComponent(this);
             return true;
         }
         return false;

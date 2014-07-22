@@ -71,6 +71,7 @@ public class TileEntityFemtoStellaratorHousing extends TileEntityBase
             TileEntity te = coreLocation.getTileEntity();
             if (te instanceof IFusionReactorCore) {
                 core = (IFusionReactorCore) te;
+                core.addComponent(this);
             }
         }
         update(worldObj, xCoord, yCoord, zCoord);
@@ -87,6 +88,7 @@ public class TileEntityFemtoStellaratorHousing extends TileEntityBase
             coreLocation = new WorldLocation(worldObj, info.x(), info.y(),
                     info.z());
             core = (IFusionReactorCore) coreLocation.getTileEntity();
+            core.addComponent(this);
             setModified();
             setUpdate();
             return true;

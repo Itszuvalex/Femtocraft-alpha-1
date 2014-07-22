@@ -73,9 +73,9 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
 
     public PlasmaFlow(IFusionReaction reaction) {
         unstable = false;
-        long energy = random.nextLong() * (getEnergyRequirementMax -
+        long energy = (long) (random.nextFloat() * (getEnergyRequirementMax -
                 energyRequirementMin) +
-                energyRequirementMin;
+                energyRequirementMin);
 
         if (energyRequirementMin > reaction.getReactionEnergy()) {
             energy = reaction.getReactionEnergy();
@@ -171,12 +171,13 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
 
     @Override
     public void setTemperature(long temperature) {
+        long prevTemp = this.temperature;
         this.temperature = temperature;
         this.temperature = this.temperature > temperatureMax ? temperatureMax
-                : temperature;
+                : this.temperature;
         this.temperature = this.temperature < temperatureMin ? temperatureMin
-                : temperature;
-        updateFreqAndVolatility(temperature);
+                : this.temperature;
+        updateFreqAndVolatility(prevTemp);
     }
 
     private void updateFreqAndVolatility(long temperaturePrev) {
@@ -185,7 +186,7 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
         frequency = frequency > frequencyMax ? frequencyMax : frequency;
         frequency = frequency < frequencyMin ? frequencyMin : frequency;
 
-        volatility /= temperature / temperaturePrev;
+        volatility /= (double) temperature / (double) temperaturePrev;
 
         volatility = unstable ? (int) (volatility * unstableMultiplier) : volatility;
 

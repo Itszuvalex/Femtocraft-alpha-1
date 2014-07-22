@@ -54,7 +54,9 @@ public class WorldLocation implements ISaveable {
         compound.setInteger("x", x);
         compound.setInteger("y", y);
         compound.setInteger("z", z);
-        compound.setInteger("dim", world.provider.dimensionId);
+        if (world != null && !world.isRemote) {
+            compound.setInteger("dim", world.provider.dimensionId);
+        }
     }
 
     @Override

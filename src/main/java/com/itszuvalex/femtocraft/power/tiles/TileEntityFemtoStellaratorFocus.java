@@ -63,6 +63,7 @@ public class TileEntityFemtoStellaratorFocus extends TileEntityBase
             TileEntity te = coreLocation.getTileEntity();
             if (te instanceof IFusionReactorCore) {
                 core = (IFusionReactorCore) te;
+                core.addComponent(this);
             }
         }
         update(worldObj, xCoord, yCoord, zCoord);
@@ -78,6 +79,7 @@ public class TileEntityFemtoStellaratorFocus extends TileEntityBase
         if (info.formMultiBlock(world, x, y, z)) {
             coreLocation = new WorldLocation(world, x, y, z);
             core = (IFusionReactorCore) coreLocation.getTileEntity();
+            core.addComponent(this);
             setModified();
             return true;
         }

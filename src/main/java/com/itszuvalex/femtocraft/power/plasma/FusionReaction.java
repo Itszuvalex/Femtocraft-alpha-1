@@ -95,7 +95,7 @@ public class FusionReaction implements IFusionReaction, ISaveable {
             }
             //If, even after this, core is unstable, Volatility!!
             if (getReactionInstability() > core.getStabilityRating()) {
-                long eventEnergy = (long) (random.nextDouble() * this.energy *
+                long eventEnergy = (long) (random.nextFloat() * this.energy *
                         .25d);
                 FemtocraftPlasmaUtils.applyEventToContainer(core, new VolatilityEventMagneticFluctuation(null, getReactionInstability() - core.getStabilityRating(), eventEnergy), world, x, y, z
                 );

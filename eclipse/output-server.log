@@ -5012,3 +5012,287 @@ java.lang.StackOverflowError
 2014-07-21 23:08:47 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
 2014-07-21 23:08:47 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
 2014-07-21 23:08:47 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-21 23:11:00 [SERVER] [INFO] Saving and pausing game...
+2014-07-21 23:11:00 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-21 23:11:00 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-21 23:11:00 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-21 23:11:04 [SERVER] [INFO] Saving and pausing game...
+2014-07-21 23:11:04 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-21 23:11:04 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-21 23:11:04 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-21 23:11:05 [SERVER] [INFO] Stopping server
+2014-07-21 23:11:05 [SERVER] [INFO] Saving players
+2014-07-21 23:11:05 [SERVER] [INFO] Player1234 left the game
+2014-07-21 23:11:05 [SERVER] [INFO] Saving worlds
+2014-07-21 23:11:05 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-21 23:11:05 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-21 23:11:05 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-21 23:19:38 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-07-21 23:19:38 [SERVER] [INFO] Generating keypair
+2014-07-21 23:19:38 [SERVER] [INFO] Preparing start region for level 0
+2014-07-21 23:19:39 [SERVER] [INFO] Player1234[/127.0.0.1:0] logged in with entity id 321 at (-216.96505364259357, 76.875, 239.9959698918746)
+2014-07-21 23:19:39 [SERVER] [INFO] Player1234 joined the game
+2014-07-21 23:20:05 [SERVER] [SEVERE] Encountered an unexpected exception ReportedException
+net.minecraft.util.ReportedException: Ticking memory connection
+	at net.minecraft.network.NetworkListenThread.networkTick(NetworkListenThread.java:63)
+	at net.minecraft.server.integrated.IntegratedServerListenThread.networkTick(IntegratedServerListenThread.java:109)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:691)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:587)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:129)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:484)
+	at net.minecraft.server.ThreadMinecraftServer.run(ThreadMinecraftServer.java:583)
+Caused by: java.lang.NullPointerException
+	at com.itszuvalex.femtocraft.core.tiles.TileEntityBase.setUpdate(TileEntityBase.java:189)
+	at com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoStellaratorCore.beginIgnitionProcess(TileEntityFemtoStellaratorCore.java:157)
+	at com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoStellaratorCore.<init>(TileEntityFemtoStellaratorCore.java:60)
+	at com.itszuvalex.femtocraft.power.blocks.BlockFemtoStellaratorCore.createNewTileEntity(BlockFemtoStellaratorCore.java:104)
+	at net.minecraft.block.Block.createTileEntity(Block.java:1794)
+	at net.minecraft.world.chunk.Chunk.getChunkBlockTileEntity(Chunk.java:991)
+	at net.minecraft.world.chunk.Chunk.setBlockIDWithMetadata(Chunk.java:763)
+	at net.minecraft.world.World.setBlock(World.java:559)
+	at net.minecraft.item.ItemBlock.placeBlockAt(ItemBlock.java:241)
+	at net.minecraft.item.ItemBlock.onItemUse(ItemBlock.java:119)
+	at net.minecraft.item.ItemStack.tryPlaceItemIntoWorld(ItemStack.java:153)
+	at net.minecraft.item.ItemInWorldManager.activateBlockOrUseItem(ItemInWorldManager.java:434)
+	at net.minecraft.network.NetServerHandler.handlePlace(NetServerHandler.java:556)
+	at net.minecraft.network.packet.Packet15Place.processPacket(Packet15Place.java:58)
+	at net.minecraft.network.MemoryConnection.processReadPackets(MemoryConnection.java:89)
+	at net.minecraft.network.NetServerHandler.networkTick(NetServerHandler.java:141)
+	at net.minecraft.network.NetworkListenThread.networkTick(NetworkListenThread.java:54)
+	... 6 more
+2014-07-21 23:20:05 [SERVER] [SEVERE] This crash report has been saved to: /Users/chris/Documents/Minecraft Project/Femtocraft/eclipse/./crash-reports/crash-2014-07-21_23.20.05-server.txt
+2014-07-21 23:20:05 [SERVER] [INFO] Stopping server
+2014-07-21 23:20:05 [SERVER] [INFO] Saving players
+2014-07-21 23:20:05 [SERVER] [INFO] Player1234 left the game
+2014-07-21 23:20:05 [SERVER] [INFO] Saving worlds
+2014-07-21 23:20:05 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-21 23:20:05 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-21 23:20:05 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-21 23:21:06 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-07-21 23:21:06 [SERVER] [INFO] Generating keypair
+2014-07-21 23:21:07 [SERVER] [INFO] Preparing start region for level 0
+2014-07-21 23:21:08 [SERVER] [INFO] Player1234[/127.0.0.1:0] logged in with entity id 319 at (-215.06796230546485, 75.24918707874468, 230.67690810557468)
+2014-07-21 23:21:08 [SERVER] [INFO] Player1234 joined the game
+2014-07-21 23:24:14 [SERVER] [INFO] Saving and pausing game...
+2014-07-21 23:24:14 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-21 23:24:14 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-21 23:24:14 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-21 23:25:55 [SERVER] [INFO] Saving and pausing game...
+2014-07-21 23:25:55 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-21 23:25:55 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-21 23:25:55 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-21 23:25:56 [SERVER] [INFO] Stopping server
+2014-07-21 23:25:56 [SERVER] [INFO] Saving players
+2014-07-21 23:25:56 [SERVER] [INFO] Player1234 left the game
+2014-07-21 23:25:56 [SERVER] [INFO] Saving worlds
+2014-07-21 23:25:56 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-21 23:25:56 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-21 23:25:56 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-21 23:27:13 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-07-21 23:27:13 [SERVER] [INFO] Generating keypair
+2014-07-21 23:27:13 [SERVER] [INFO] Converting map!
+2014-07-21 23:27:13 [SERVER] [INFO] Scanning folders...
+2014-07-21 23:27:13 [SERVER] [INFO] Total conversion count is 0
+2014-07-21 23:27:14 [SERVER] [INFO] Preparing start region for level 0
+2014-07-21 23:27:15 [SERVER] [INFO] Preparing spawn area: 12%
+2014-07-21 23:27:16 [SERVER] [INFO] Preparing spawn area: 36%
+2014-07-21 23:27:17 [SERVER] [INFO] Preparing spawn area: 60%
+2014-07-21 23:27:18 [SERVER] [INFO] Preparing spawn area: 80%
+2014-07-21 23:27:19 [SERVER] [INFO] Player1234[/127.0.0.1:0] logged in with entity id 160 at (130.5, 64.0, 109.5)
+2014-07-21 23:27:19 [SERVER] [INFO] Player1234 joined the game
+2014-07-21 23:27:46 [SERVER] [INFO] Saving and pausing game...
+2014-07-21 23:27:46 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-21 23:27:46 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-21 23:27:46 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-21 23:30:43 [SERVER] [INFO] Saving and pausing game...
+2014-07-21 23:30:43 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-21 23:30:43 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-21 23:30:43 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-21 23:30:50 [SERVER] [INFO] Saving and pausing game...
+2014-07-21 23:30:50 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-21 23:30:50 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-21 23:30:50 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-21 23:31:16 [SERVER] [INFO] Saving and pausing game...
+2014-07-21 23:31:16 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-21 23:31:16 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-21 23:31:16 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-21 23:31:19 [SERVER] [INFO] Stopping server
+2014-07-21 23:31:19 [SERVER] [INFO] Saving players
+2014-07-21 23:31:19 [SERVER] [INFO] Player1234 left the game
+2014-07-21 23:31:19 [SERVER] [INFO] Saving worlds
+2014-07-21 23:31:19 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-21 23:31:19 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-21 23:31:19 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-21 23:39:26 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-07-21 23:39:26 [SERVER] [INFO] Generating keypair
+2014-07-21 23:39:26 [SERVER] [INFO] Preparing start region for level 0
+2014-07-21 23:39:27 [SERVER] [INFO] Player1234[/127.0.0.1:0] logged in with entity id 395 at (101.03636294083582, 67.41253782261528, 131.69685173012513)
+2014-07-21 23:39:27 [SERVER] [INFO] Player1234 joined the game
+2014-07-21 23:42:23 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-07-21 23:42:23 [SERVER] [INFO] Generating keypair
+2014-07-21 23:42:23 [SERVER] [INFO] Preparing start region for level 0
+2014-07-21 23:42:24 [SERVER] [INFO] Player1234[/127.0.0.1:0] logged in with entity id 395 at (101.03636294083582, 67.41253782261528, 131.69685173012513)
+2014-07-21 23:42:24 [SERVER] [INFO] Player1234 joined the game
+2014-07-21 23:45:27 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-07-21 23:45:27 [SERVER] [INFO] Generating keypair
+2014-07-21 23:45:28 [SERVER] [INFO] Preparing start region for level 0
+2014-07-21 23:45:45 [SERVER] [INFO] Player1234[/127.0.0.1:0] logged in with entity id 395 at (101.03636294083582, 67.41253782261528, 131.69685173012513)
+2014-07-21 23:45:45 [SERVER] [INFO] Player1234 joined the game
+2014-07-21 23:45:45 [SERVER] [WARNING] Can't keep up! Did the system time change, or is the server overloaded?
+2014-07-21 23:45:46 [SERVER] [INFO] Saving and pausing game...
+2014-07-21 23:45:46 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-21 23:45:46 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-21 23:45:46 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-21 23:46:20 [SERVER] [WARNING] Can't keep up! Did the system time change, or is the server overloaded?
+2014-07-21 23:46:23 [SERVER] [INFO] Saving and pausing game...
+2014-07-21 23:46:23 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-21 23:46:23 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-21 23:46:23 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-21 23:46:23 [SERVER] [WARNING] Can't keep up! Did the system time change, or is the server overloaded?
+2014-07-21 23:46:43 [SERVER] [INFO] Saving and pausing game...
+2014-07-21 23:46:43 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-21 23:46:43 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-21 23:46:43 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-21 23:46:43 [SERVER] [WARNING] Can't keep up! Did the system time change, or is the server overloaded?
+2014-07-21 23:46:50 [SERVER] [INFO] Saving and pausing game...
+2014-07-21 23:46:50 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-21 23:46:50 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-21 23:46:50 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-21 23:47:04 [SERVER] [INFO] Saving and pausing game...
+2014-07-21 23:47:04 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-21 23:47:04 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-21 23:47:04 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-21 23:47:04 [SERVER] [WARNING] Can't keep up! Did the system time change, or is the server overloaded?
+2014-07-21 23:47:21 [SERVER] [INFO] Saving and pausing game...
+2014-07-21 23:47:21 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-21 23:47:21 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-21 23:47:21 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-21 23:52:31 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-07-21 23:52:31 [SERVER] [INFO] Generating keypair
+2014-07-21 23:52:32 [SERVER] [INFO] Preparing start region for level 0
+2014-07-21 23:53:24 [SERVER] [SEVERE] Encountered an unexpected exception ReportedException
+net.minecraft.util.ReportedException: Ticking tile entity
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:674)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:587)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:129)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:484)
+	at net.minecraft.server.ThreadMinecraftServer.run(ThreadMinecraftServer.java:583)
+Caused by: java.lang.ArithmeticException: / by zero
+	at com.itszuvalex.femtocraft.power.plasma.PlasmaFlow.updateFreqAndVolatility(PlasmaFlow.java:188)
+	at com.itszuvalex.femtocraft.power.plasma.PlasmaFlow.update(PlasmaFlow.java:146)
+	at com.itszuvalex.femtocraft.power.plasma.PlasmaContainer.update(PlasmaContainer.java:148)
+	at com.itszuvalex.femtocraft.power.plasma.FusionReactorCore.update(FusionReactorCore.java:193)
+	at com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoStellaratorCore.update(TileEntityFemtoStellaratorCore.java:271)
+	at com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoStellaratorCore.femtocraftServerUpdate(TileEntityFemtoStellaratorCore.java:63)
+	at com.itszuvalex.femtocraft.core.tiles.TileEntityBase.updateEntity(TileEntityBase.java:81)
+	at net.minecraft.world.World.updateEntities(World.java:2209)
+	at net.minecraft.world.WorldServer.updateEntities(WorldServer.java:550)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:668)
+	... 4 more
+2014-07-21 23:53:24 [SERVER] [SEVERE] This crash report has been saved to: /Users/chris/Documents/Minecraft Project/Femtocraft/eclipse/./crash-reports/crash-2014-07-21_23.53.24-server.txt
+2014-07-21 23:53:24 [SERVER] [INFO] Stopping server
+2014-07-21 23:53:24 [SERVER] [INFO] Saving players
+2014-07-21 23:53:24 [SERVER] [INFO] Saving worlds
+2014-07-21 23:53:24 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-21 23:53:24 [SERVER] [INFO] Stopping server
+2014-07-21 23:54:58 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-07-21 23:54:58 [SERVER] [INFO] Generating keypair
+2014-07-21 23:54:58 [SERVER] [INFO] Preparing start region for level 0
+2014-07-21 23:55:35 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-07-21 23:55:35 [SERVER] [INFO] Generating keypair
+2014-07-21 23:55:35 [SERVER] [INFO] Preparing start region for level 0
+2014-07-21 23:58:20 [SERVER] [SEVERE] Encountered an unexpected exception ReportedException
+net.minecraft.util.ReportedException: Ticking tile entity
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:674)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:587)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:129)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:484)
+	at net.minecraft.server.ThreadMinecraftServer.run(ThreadMinecraftServer.java:583)
+Caused by: java.lang.ArithmeticException: / by zero
+	at com.itszuvalex.femtocraft.power.plasma.PlasmaFlow.updateFreqAndVolatility(PlasmaFlow.java:188)
+	at com.itszuvalex.femtocraft.power.plasma.PlasmaFlow.update(PlasmaFlow.java:146)
+	at com.itszuvalex.femtocraft.power.plasma.PlasmaContainer.update(PlasmaContainer.java:148)
+	at com.itszuvalex.femtocraft.power.plasma.FusionReactorCore.update(FusionReactorCore.java:193)
+	at com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoStellaratorCore.update(TileEntityFemtoStellaratorCore.java:271)
+	at com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoStellaratorCore.femtocraftServerUpdate(TileEntityFemtoStellaratorCore.java:63)
+	at com.itszuvalex.femtocraft.core.tiles.TileEntityBase.updateEntity(TileEntityBase.java:81)
+	at net.minecraft.world.World.updateEntities(World.java:2209)
+	at net.minecraft.world.WorldServer.updateEntities(WorldServer.java:550)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:668)
+	... 4 more
+2014-07-21 23:58:20 [SERVER] [SEVERE] This crash report has been saved to: /Users/chris/Documents/Minecraft Project/Femtocraft/eclipse/./crash-reports/crash-2014-07-21_23.58.20-server.txt
+2014-07-21 23:58:20 [SERVER] [INFO] Stopping server
+2014-07-21 23:58:20 [SERVER] [INFO] Saving players
+2014-07-21 23:58:20 [SERVER] [INFO] Saving worlds
+2014-07-21 23:58:20 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-21 23:58:20 [SERVER] [INFO] Stopping server
+2014-07-21 23:59:35 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-07-21 23:59:35 [SERVER] [INFO] Generating keypair
+2014-07-21 23:59:35 [SERVER] [INFO] Preparing start region for level 0
+2014-07-21 23:59:36 [SERVER] [SEVERE] Encountered an unexpected exception ReportedException
+net.minecraft.util.ReportedException: Ticking tile entity
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:674)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:587)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:129)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:484)
+	at net.minecraft.server.ThreadMinecraftServer.run(ThreadMinecraftServer.java:583)
+Caused by: java.lang.ArithmeticException: / by zero
+	at com.itszuvalex.femtocraft.power.plasma.PlasmaFlow.updateFreqAndVolatility(PlasmaFlow.java:189)
+	at com.itszuvalex.femtocraft.power.plasma.PlasmaFlow.setTemperature(PlasmaFlow.java:180)
+	at com.itszuvalex.femtocraft.power.plasma.volatility.VolatilityEvent.<init>(VolatilityEvent.java:40)
+	at com.itszuvalex.femtocraft.power.plasma.volatility.VolatilityEventMagneticFluctuation.<init>(VolatilityEventMagneticFluctuation.java:45)
+	at com.itszuvalex.femtocraft.power.plasma.PlasmaFlow.onRecharge(PlasmaFlow.java:267)
+	at com.itszuvalex.femtocraft.power.plasma.PlasmaFlow.onSpontaneousEvent(PlasmaFlow.java:280)
+	at com.itszuvalex.femtocraft.power.plasma.PlasmaFlow.update(PlasmaFlow.java:108)
+	at com.itszuvalex.femtocraft.power.plasma.PlasmaContainer.update(PlasmaContainer.java:148)
+	at com.itszuvalex.femtocraft.power.plasma.FusionReactorCore.update(FusionReactorCore.java:193)
+	at com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoStellaratorCore.update(TileEntityFemtoStellaratorCore.java:271)
+	at com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoStellaratorCore.femtocraftServerUpdate(TileEntityFemtoStellaratorCore.java:63)
+	at com.itszuvalex.femtocraft.core.tiles.TileEntityBase.updateEntity(TileEntityBase.java:81)
+	at net.minecraft.world.World.updateEntities(World.java:2209)
+	at net.minecraft.world.WorldServer.updateEntities(WorldServer.java:550)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:668)
+	... 4 more
+2014-07-21 23:59:36 [SERVER] [SEVERE] This crash report has been saved to: /Users/chris/Documents/Minecraft Project/Femtocraft/eclipse/./crash-reports/crash-2014-07-21_23.59.36-server.txt
+2014-07-21 23:59:36 [SERVER] [INFO] Stopping server
+2014-07-21 23:59:36 [SERVER] [INFO] Saving players
+2014-07-21 23:59:36 [SERVER] [INFO] Saving worlds
+2014-07-21 23:59:36 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-21 23:59:36 [SERVER] [INFO] Stopping server
+2014-07-22 00:00:19 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-07-22 00:00:19 [SERVER] [INFO] Generating keypair
+2014-07-22 00:00:19 [SERVER] [INFO] Preparing start region for level 0
+2014-07-22 00:00:20 [SERVER] [INFO] Player1234[/127.0.0.1:0] logged in with entity id 320 at (99.12000654096585, 66.29988300021529, 132.29582020459546)
+2014-07-22 00:00:20 [SERVER] [INFO] Player1234 joined the game
+2014-07-22 00:00:28 [SERVER] [WARNING] Can't keep up! Did the system time change, or is the server overloaded?
+2014-07-22 00:00:32 [SERVER] [INFO] Saving and pausing game...
+2014-07-22 00:00:32 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-22 00:00:32 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-22 00:00:32 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-22 00:00:56 [SERVER] [INFO] Saving and pausing game...
+2014-07-22 00:00:56 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-22 00:00:56 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-22 00:00:56 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-22 00:01:00 [SERVER] [INFO] Saving and pausing game...
+2014-07-22 00:01:00 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-22 00:01:00 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-22 00:01:00 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-22 00:03:37 [SERVER] [INFO] Player1234 lost connection: disconnect.quitting
+2014-07-22 00:03:37 [SERVER] [INFO] Player1234 left the game
+2014-07-22 00:03:37 [SERVER] [INFO] Stopping singleplayer server as player logged out
+2014-07-22 00:03:37 [SERVER] [INFO] Stopping server
+2014-07-22 00:03:37 [SERVER] [INFO] Saving players
+2014-07-22 00:03:37 [SERVER] [INFO] Saving worlds
+2014-07-22 00:03:37 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-22 00:03:37 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-22 00:03:37 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-22 00:04:13 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-07-22 00:04:13 [SERVER] [INFO] Generating keypair
+2014-07-22 00:04:13 [SERVER] [INFO] Preparing start region for level 0
+2014-07-22 00:04:15 [SERVER] [INFO] Player1234[/127.0.0.1:0] logged in with entity id 318 at (96.70879624987808, 68.98707626958856, 135.83104564180522)
+2014-07-22 00:04:15 [SERVER] [INFO] Player1234 joined the game
+2014-07-22 00:04:50 [SERVER] [INFO] Saving and pausing game...
+2014-07-22 00:04:50 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-22 00:04:50 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-22 00:04:50 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-22 00:05:11 [SERVER] [WARNING] Can't keep up! Did the system time change, or is the server overloaded?

@@ -54,6 +54,7 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
         super();
         core = new FusionReactorCore(maxContainedFlows, stability, temperatureRating, ignitionProcessWindow, reactionThreshold, reactionFailureThreshold, plasmaFlowTicksToGenerateMin, plasmaFlowTicksToGenerateMax);
         info = new MultiBlockInfo();
+
     }
 
     @Override
@@ -177,6 +178,8 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
     public boolean formMultiBlock(World world, int x, int y, int z) {
         if (info.formMultiBlock(world, x, y, z)) {
             setModified();
+            beginIgnitionProcess(core);
+            core.contributeCoreEnergy(45000000);
             return true;
         }
         return false;
@@ -186,6 +189,7 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
     public boolean breakMultiBlock(World world, int x, int y, int z) {
         if (info.breakMultiBlock(world, x, y, z)) {
             setModified();
+            core.getComponents().clear();
             return true;
         }
         return false;
