@@ -52,10 +52,8 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
     private ArrayList<IPlasmaFlow> pendingRemove;
     private IPlasmaContainer input;
     private IPlasmaContainer output;
-    @FemtocraftDataUtils.Saveable
-    private ForgeDirection inputDir = ForgeDirection.UNKNOWN;
-    @FemtocraftDataUtils.Saveable
-    private ForgeDirection outputDir = ForgeDirection.UNKNOWN;
+    private ForgeDirection inputDir;
+    private ForgeDirection outputDir;
 
     public PlasmaContainer(int capacity, int stability, int temperature) {
         maxCapacity = capacity;
@@ -63,6 +61,8 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
         temperatureRating = temperature;
         flows = new ArrayList<IPlasmaFlow>(capacity);
         pendingRemove = new ArrayList<IPlasmaFlow>(capacity);
+        inputDir = ForgeDirection.UNKNOWN;
+        outputDir = ForgeDirection.UNKNOWN;
     }
 
     @Override
@@ -180,8 +180,6 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
 
     @Override
     public void saveToNBT(NBTTagCompound compound) {
-        FemtocraftDataUtils.saveObjectToNBT(compound, this, FemtocraftDataUtils.EnumSaveType.WORLD);
-
         if (pendingRemove.size() > 0) {
             flows.removeAll(pendingRemove);
             pendingRemove.clear();
@@ -195,13 +193,17 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
             list.appendTag(fc);
         }
         compound.setTag(flowListKey, list);
+
+
+        compound.setInteger("inputDir", inputDir.ordinal());
+        compound.setInteger("outputDir", outputDir.ordinal());
+        compound.setInteger("capacity", maxCapacity);
+        compound.setInteger("stability", stability);
+        compound.setInteger("temperature", temperatureRating);
     }
 
     @Override
     public void loadFromNBT(NBTTagCompound compound) {
-        FemtocraftDataUtils.loadObjectFromNBT(compound, this,
-                FemtocraftDataUtils.EnumSaveType.WORLD);
-
         //Load array
         NBTTagList list = compound.getTagList(flowListKey);
         for (int i = 0; i < list.tagCount(); ++i) {
@@ -209,5 +211,11 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
             flow.loadFromNBT((NBTTagCompound) list.tagAt(i));
             addFlow(flow);
         }
+
+        inputDir = ForgeDirection.getOrientation(compound.getInteger("inputDir"));
+        outputDir = ForgeDirection.getOrientation(compound.getInteger("outputDir"));
+        maxCapacity = compound.getInteger("capacity");
+        stability = compound.getInteger("stability");
+        temperatureRating = compound.getInteger("temperature");
     }
 }

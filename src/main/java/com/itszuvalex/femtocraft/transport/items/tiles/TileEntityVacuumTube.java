@@ -88,12 +88,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         par1nbtTagCompound.setByte("Connections", generateConnectionMask());
     }
 
-    @Override
-    public boolean shouldTick() {
-        return true;
-    }
-
-    @Override
+   @Override
     public void femtocraftServerUpdate() {
 
         if (needsCheckInput || inputDir != ForgeDirection.UNKNOWN

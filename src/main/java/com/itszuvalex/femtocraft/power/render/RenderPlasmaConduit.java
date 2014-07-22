@@ -178,7 +178,7 @@ public class RenderPlasmaConduit implements ISimpleBlockRenderingHandler {
 
         tessellator.startDrawingQuads();
         tessellator.setColorOpaque_F(1, 1, 1);
-        renderConduit(conduit, 0, 0, 0, false, ForgeDirection.UNKNOWN, ForgeDirection.UNKNOWN);
+        renderConduit(conduit, 0, 0, 0, false, ForgeDirection.NORTH, ForgeDirection.UNKNOWN);
         tessellator.draw();
 
         GL11.glTranslatef(0.5F, 0.5F, 0.5F);
@@ -263,18 +263,15 @@ public class RenderPlasmaConduit implements ISimpleBlockRenderingHandler {
             return false;
         }
         TileEntity tile = renderer.blockAccess.getBlockTileEntity(x, y, z);
-        if (tile == null) {
-            return false;
+        if (tile instanceof TileEntityPlasmaConduit) {
+            TileEntityPlasmaConduit conduitTile = (TileEntityPlasmaConduit) tile;
+            Tessellator tessellator = Tessellator.instance;
+            tessellator.setBrightness(block.getMixedBrightnessForBlock(
+                    renderer.blockAccess, x, y, z));
+            tessellator.setColorOpaque_F(1, 1, 1);
+            return renderConduit(conduit, x, y, z, conduitTile.hasFlows(), conduitTile.getInputDir(), conduitTile.getOutputDir());
         }
-        if (!(tile instanceof TileEntityPlasmaConduit)) {
-            return false;
-        }
-        TileEntityPlasmaConduit conduitTile = (TileEntityPlasmaConduit) tile;
-        Tessellator tessellator = Tessellator.instance;
-        tessellator.setBrightness(block.getMixedBrightnessForBlock(
-                renderer.blockAccess, x, y, z));
-        tessellator.setColorOpaque_F(1, 1, 1);
-        return renderConduit(conduit, x, y, z, conduitTile.getRenderHasPlasma(), conduitTile.getRenderInputDir(), conduitTile.getRenderOutputDir());
+        return false;
     }
 
     @Override
