@@ -102,44 +102,25 @@ public class FemtocraftPlasmaUtils {
 
     private static boolean placeSegment(WorldLocation loc, int plasmaDuration) {
         Random random = new Random();
-        ForgeDirection dir = ForgeDirection.UNKNOWN;
-        int[] dirs = new int[6];
-        for (int i = 0; i < dirs.length; i++) {
-            dirs[i] = i;
-        }
-        //shuffle
-        for (int i = 0; i < 500; ++i) {
-            int a = random.nextInt(dirs.length);
-            int b = random.nextInt(dirs.length);
-            if (a == b) {
-                continue;
-            }
-            int d = dirs[a];
-            dirs[a] = dirs[b];
-            dirs[b] = d;
-        }
+        ForgeDirection dir = ForgeDirection.getOrientation(random.nextInt(6));
 
-        for (int i = 0; i < dirs.length; i++) {
-            dir = ForgeDirection.getOrientation(dirs[i]);
-            if (loc.world.isAirBlock(loc.x + dir.offsetX, loc.y + dir.offsetY,
-                    loc.z + dir.offsetZ)) {
-                break;
+        int newX = loc.x + dir.offsetX;
+        int newY = loc.y + dir.offsetY;
+        int newZ = loc.z + dir.offsetZ;
+
+        if (loc.world.isAirBlock(newX, newY, newZ)) {
+            loc.world.setBlock(newX, newY, newZ, Femtocraft.blockPlasma.blockID);
+            loc.world.setBlockMetadataWithNotify(newX, newY, newZ, dir.ordinal(), 2);
+            TileEntityPlasma te = (TileEntityPlasma) loc.world.getBlockTileEntity(newX, newY, newZ);
+            if (te != null) {
+                te.setDuration(plasmaDuration);
             }
         }
-        if (dir == ForgeDirection.UNKNOWN) return false;
-
-        loc.world.setBlock(loc.x + dir.offsetX, loc.y + dir.offsetY,
-                loc.z + dir.offsetZ, Femtocraft.blockPlasma.blockID);
-        loc.world.setBlockMetadataWithNotify(loc.x, loc.y, loc.z,
-                dir.ordinal(), 2);
 
         loc.x += dir.offsetX;
         loc.y += dir.offsetY;
         loc.z += dir.offsetZ;
 
-        TileEntityPlasma te = (TileEntityPlasma) loc.world.getBlockTileEntity(loc.x, loc.y,
-                loc.z);
-        te.setDuration(plasmaDuration);
 
         return true;
     }

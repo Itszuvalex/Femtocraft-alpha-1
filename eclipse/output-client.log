@@ -7222,3 +7222,489 @@ java.io.FileNotFoundException: femtocraft:textures/blocks/blockOrbitalEqualizer.
 2014-07-22 00:04:02 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaTurbine.png
 2014-07-22 00:04:02 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4031_BlockNullEqualizer.png
 2014-07-22 00:04:03 [CLIENT] [SEVERE] Realms: Server not available!
+2014-07-22 22:56:46 [CLIENT] [INFO] Setting user: Player1234
+2014-07-22 22:56:47 [CLIENT] [INFO] LWJGL Version: 2.9.0
+2014-07-22 22:56:50 [CLIENT] [INFO] Reloading ResourceManager: Default
+2014-07-22 22:59:35 [CLIENT] [INFO] Setting user: Player1234
+2014-07-22 22:59:36 [CLIENT] [INFO] LWJGL Version: 2.9.0
+2014-07-22 22:59:38 [CLIENT] [INFO] Reloading ResourceManager: Default
+2014-07-22 22:59:43 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-22 22:59:46 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoCalculator.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFluidicConductor.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfinitelyRecursiveALU.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemHerculesDrive.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemMinervaComplex.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemCrossDimensionalCommunicator.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemStellaratorPlating.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoSimulator.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemDimensionalMonopole.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemThoriumRod.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemBasicAICore.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemStyxValve.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemTemporalResonator.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoCoil.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfiniteVolumePolychora.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPanLocationalComputer.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemAtlasMount.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemOrpheusProcessor.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPandoraCube.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoRegulator.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemHermesBus.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoPlating.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfallibleEstimator.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemManagerCore.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemSelfFulfillingOracle.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemSchedulerCore.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemErinyesCircuit.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPhlegethonTunnelPrimer.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFissionReactorPlating.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanochip.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFemtoCoil.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFemtoPlating.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemLearningCore.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaVent.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockNanoFissionReactorHousing.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockSisyphusStabilizer.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4083_BlockConsumer.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4042_BlockStellaratorOpticalMaser.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPhlegethonTunnelFrame.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4036_null.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockCryoEndothermalChargingBase.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockCryoEndothermalChargingCoil.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockNanoFissionReactorCore.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4032_BlockOrbitalEqualizer.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockMicroEngine.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaCondenser.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPhlegethonTunnelCore.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockDecontaminationChamber.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4084_BlockGenerator.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaTurbine.png
+2014-07-22 22:59:46 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4031_BlockNullEqualizer.png
+2014-07-22 22:59:47 [CLIENT] [SEVERE] Realms: Server not available!
+2014-07-23 21:01:38 [CLIENT] [INFO] Setting user: Player1234
+2014-07-23 21:01:38 [CLIENT] [INFO] LWJGL Version: 2.9.0
+2014-07-23 21:01:41 [CLIENT] [INFO] Reloading ResourceManager: Default
+2014-07-23 21:01:46 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-23 21:01:48 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoCalculator.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFluidicConductor.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfinitelyRecursiveALU.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemHerculesDrive.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemMinervaComplex.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemCrossDimensionalCommunicator.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemStellaratorPlating.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoSimulator.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemDimensionalMonopole.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemThoriumRod.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemBasicAICore.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemStyxValve.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemTemporalResonator.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoCoil.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfiniteVolumePolychora.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPanLocationalComputer.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemAtlasMount.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemOrpheusProcessor.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPandoraCube.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoRegulator.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemHermesBus.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoPlating.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfallibleEstimator.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemManagerCore.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemSelfFulfillingOracle.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemSchedulerCore.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemErinyesCircuit.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPhlegethonTunnelPrimer.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFissionReactorPlating.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanochip.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFemtoCoil.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFemtoPlating.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemLearningCore.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaVent.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockNanoFissionReactorHousing.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockSisyphusStabilizer.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4083_BlockConsumer.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4042_BlockStellaratorOpticalMaser.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPhlegethonTunnelFrame.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4036_null.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockCryoEndothermalChargingBase.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockCryoEndothermalChargingCoil.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockNanoFissionReactorCore.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4032_BlockOrbitalEqualizer.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockMicroEngine.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaCondenser.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPhlegethonTunnelCore.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockDecontaminationChamber.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4084_BlockGenerator.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaTurbine.png
+2014-07-23 21:01:48 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4031_BlockNullEqualizer.png
+2014-07-23 21:01:49 [CLIENT] [SEVERE] Realms: Server not available!
+2014-07-23 21:03:09 [CLIENT] [INFO] Setting user: Player1234
+2014-07-23 21:03:10 [CLIENT] [INFO] LWJGL Version: 2.9.0
+2014-07-23 21:03:12 [CLIENT] [INFO] Reloading ResourceManager: Default
+2014-07-23 21:03:18 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-23 21:03:19 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoCalculator.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFluidicConductor.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfinitelyRecursiveALU.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemHerculesDrive.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemMinervaComplex.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemCrossDimensionalCommunicator.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemStellaratorPlating.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoSimulator.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemDimensionalMonopole.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemThoriumRod.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemBasicAICore.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemStyxValve.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemTemporalResonator.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoCoil.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfiniteVolumePolychora.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPanLocationalComputer.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemAtlasMount.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemOrpheusProcessor.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPandoraCube.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoRegulator.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemHermesBus.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoPlating.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfallibleEstimator.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemManagerCore.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemSelfFulfillingOracle.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemSchedulerCore.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemErinyesCircuit.png
+2014-07-23 21:03:19 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPhlegethonTunnelPrimer.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFissionReactorPlating.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanochip.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFemtoCoil.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFemtoPlating.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemLearningCore.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaVent.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockNanoFissionReactorHousing.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockSisyphusStabilizer.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4083_BlockConsumer.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4042_BlockStellaratorOpticalMaser.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPhlegethonTunnelFrame.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4036_null.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockCryoEndothermalChargingBase.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockCryoEndothermalChargingCoil.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockNanoFissionReactorCore.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4032_BlockOrbitalEqualizer.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockMicroEngine.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaCondenser.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPhlegethonTunnelCore.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockDecontaminationChamber.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4084_BlockGenerator.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaTurbine.png
+2014-07-23 21:03:20 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4031_BlockNullEqualizer.png
+2014-07-23 21:03:21 [CLIENT] [SEVERE] Realms: Server not available!
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] Basic Circuits successfully researched.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] New technology Machining discovered.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] New technology Potentiality discovered.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] Basic Chemistry successfully researched.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] New technology Potentiality discovered.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] Potentiality Transformation successfully researched.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] Metallurgy successfully researched.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] New technology Machining discovered.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] Machining successfully researched.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] New technology Mechanical Precision discovered.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] Potentiality successfully researched.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] Corruption Stabilization successfully researched.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] VacuumTube Hub successfully researched.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] New technology Discriminating Vacuum Tube discovered.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] Applied Particle Physics successfully researched.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] Advanced Programming successfully researched.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] Geothermal Harnessing successfully researched.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] Macroscopic Structures successfully researched.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] Mechanical Precision successfully researched.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] Industrial Storage successfully researched.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] Discriminating Vacuum Tube successfully researched.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] Reality Overclocker successfully researched.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] New technology Spacetime Exploitation discovered.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] Spacetime Exploitation successfully researched.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] Artificial Materials successfully researched.
+2014-07-23 21:03:32 [CLIENT] [INFO] [CHAT] Element Manufacturing successfully researched.
+2014-07-23 21:09:55 [CLIENT] [INFO] Setting user: Player1234
+2014-07-23 21:09:56 [CLIENT] [INFO] LWJGL Version: 2.9.0
+2014-07-23 21:09:58 [CLIENT] [INFO] Reloading ResourceManager: Default
+2014-07-23 21:10:04 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-23 21:10:06 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoCalculator.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFluidicConductor.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfinitelyRecursiveALU.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemHerculesDrive.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemMinervaComplex.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemCrossDimensionalCommunicator.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemStellaratorPlating.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoSimulator.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemDimensionalMonopole.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemThoriumRod.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemBasicAICore.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemStyxValve.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemTemporalResonator.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoCoil.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfiniteVolumePolychora.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPanLocationalComputer.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemAtlasMount.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemOrpheusProcessor.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPandoraCube.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoRegulator.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemHermesBus.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoPlating.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfallibleEstimator.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemManagerCore.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemSelfFulfillingOracle.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemSchedulerCore.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemErinyesCircuit.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPhlegethonTunnelPrimer.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFissionReactorPlating.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanochip.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFemtoCoil.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFemtoPlating.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemLearningCore.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaVent.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockNanoFissionReactorHousing.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockSisyphusStabilizer.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4083_BlockConsumer.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4042_BlockStellaratorOpticalMaser.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPhlegethonTunnelFrame.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4036_null.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockCryoEndothermalChargingBase.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockCryoEndothermalChargingCoil.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockNanoFissionReactorCore.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4032_BlockOrbitalEqualizer.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockMicroEngine.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaCondenser.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPhlegethonTunnelCore.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockDecontaminationChamber.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4084_BlockGenerator.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaTurbine.png
+2014-07-23 21:10:06 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4031_BlockNullEqualizer.png
+2014-07-23 21:10:07 [CLIENT] [SEVERE] Realms: Server not available!
+2014-07-23 21:13:30 [CLIENT] [INFO] Setting user: Player1234
+2014-07-23 21:13:31 [CLIENT] [INFO] LWJGL Version: 2.9.0
+2014-07-23 21:13:33 [CLIENT] [INFO] Reloading ResourceManager: Default
+2014-07-23 21:13:38 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-23 21:13:40 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoCalculator.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFluidicConductor.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfinitelyRecursiveALU.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemHerculesDrive.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemMinervaComplex.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemCrossDimensionalCommunicator.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemStellaratorPlating.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoSimulator.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemDimensionalMonopole.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemThoriumRod.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemBasicAICore.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemStyxValve.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemTemporalResonator.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoCoil.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfiniteVolumePolychora.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPanLocationalComputer.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemAtlasMount.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemOrpheusProcessor.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPandoraCube.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoRegulator.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemHermesBus.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoPlating.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfallibleEstimator.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemManagerCore.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemSelfFulfillingOracle.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemSchedulerCore.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemErinyesCircuit.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPhlegethonTunnelPrimer.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFissionReactorPlating.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanochip.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFemtoCoil.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFemtoPlating.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemLearningCore.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaVent.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockNanoFissionReactorHousing.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockSisyphusStabilizer.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4083_BlockConsumer.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4042_BlockStellaratorOpticalMaser.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPhlegethonTunnelFrame.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4036_null.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockCryoEndothermalChargingBase.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockCryoEndothermalChargingCoil.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockNanoFissionReactorCore.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4032_BlockOrbitalEqualizer.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockMicroEngine.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaCondenser.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPhlegethonTunnelCore.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockDecontaminationChamber.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4084_BlockGenerator.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaTurbine.png
+2014-07-23 21:13:40 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4031_BlockNullEqualizer.png
+2014-07-23 21:13:41 [CLIENT] [SEVERE] Realms: Server not available!
+2014-07-23 21:22:36 [CLIENT] [INFO] Setting user: Player1234
+2014-07-23 21:22:36 [CLIENT] [INFO] LWJGL Version: 2.9.0
+2014-07-23 21:22:38 [CLIENT] [INFO] Reloading ResourceManager: Default
+2014-07-23 21:22:43 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-23 21:22:45 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoCalculator.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFluidicConductor.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfinitelyRecursiveALU.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemHerculesDrive.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemMinervaComplex.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemCrossDimensionalCommunicator.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemStellaratorPlating.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoSimulator.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemDimensionalMonopole.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemThoriumRod.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemBasicAICore.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemStyxValve.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemTemporalResonator.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoCoil.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfiniteVolumePolychora.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPanLocationalComputer.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemAtlasMount.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemOrpheusProcessor.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPandoraCube.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoRegulator.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemHermesBus.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoPlating.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfallibleEstimator.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemManagerCore.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemSelfFulfillingOracle.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemSchedulerCore.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemErinyesCircuit.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPhlegethonTunnelPrimer.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFissionReactorPlating.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanochip.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFemtoCoil.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFemtoPlating.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemLearningCore.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaVent.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockNanoFissionReactorHousing.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockSisyphusStabilizer.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4083_BlockConsumer.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4042_BlockStellaratorOpticalMaser.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPhlegethonTunnelFrame.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4036_null.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockCryoEndothermalChargingBase.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockCryoEndothermalChargingCoil.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockNanoFissionReactorCore.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4032_BlockOrbitalEqualizer.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockMicroEngine.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaCondenser.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPhlegethonTunnelCore.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockDecontaminationChamber.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4084_BlockGenerator.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaTurbine.png
+2014-07-23 21:22:45 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4031_BlockNullEqualizer.png
+2014-07-23 21:22:46 [CLIENT] [SEVERE] Realms: Server not available!
+2014-07-23 21:26:13 [CLIENT] [INFO] Setting user: Player1234
+2014-07-23 21:26:13 [CLIENT] [INFO] LWJGL Version: 2.9.0
+2014-07-23 21:26:15 [CLIENT] [INFO] Reloading ResourceManager: Default
+2014-07-23 21:26:20 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-23 21:26:22 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoCalculator.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFluidicConductor.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfinitelyRecursiveALU.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemHerculesDrive.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemMinervaComplex.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemCrossDimensionalCommunicator.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemStellaratorPlating.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoSimulator.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemDimensionalMonopole.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemThoriumRod.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemBasicAICore.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemStyxValve.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemTemporalResonator.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoCoil.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfiniteVolumePolychora.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPanLocationalComputer.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemAtlasMount.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemOrpheusProcessor.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPandoraCube.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoRegulator.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemHermesBus.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoPlating.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfallibleEstimator.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemManagerCore.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemSelfFulfillingOracle.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemSchedulerCore.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemErinyesCircuit.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPhlegethonTunnelPrimer.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFissionReactorPlating.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanochip.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFemtoCoil.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFemtoPlating.png
+2014-07-23 21:26:22 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemLearningCore.png
+2014-07-23 21:26:23 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaVent.png
+2014-07-23 21:26:23 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockNanoFissionReactorHousing.png
+2014-07-23 21:26:23 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockSisyphusStabilizer.png
+2014-07-23 21:26:23 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4083_BlockConsumer.png
+2014-07-23 21:26:23 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4042_BlockStellaratorOpticalMaser.png
+2014-07-23 21:26:23 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPhlegethonTunnelFrame.png
+2014-07-23 21:26:23 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4036_null.png
+2014-07-23 21:26:23 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockCryoEndothermalChargingBase.png
+2014-07-23 21:26:23 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockCryoEndothermalChargingCoil.png
+2014-07-23 21:26:23 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockNanoFissionReactorCore.png
+2014-07-23 21:26:23 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4032_BlockOrbitalEqualizer.png
+2014-07-23 21:26:23 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockMicroEngine.png
+2014-07-23 21:26:23 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaCondenser.png
+2014-07-23 21:26:23 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPhlegethonTunnelCore.png
+2014-07-23 21:26:23 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockDecontaminationChamber.png
+2014-07-23 21:26:23 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4084_BlockGenerator.png
+2014-07-23 21:26:23 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaTurbine.png
+2014-07-23 21:26:23 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4031_BlockNullEqualizer.png
+2014-07-23 21:26:24 [CLIENT] [SEVERE] Realms: Server not available!
+2014-07-23 21:26:54 [CLIENT] [INFO] Setting user: Player1234
+2014-07-23 21:26:55 [CLIENT] [INFO] LWJGL Version: 2.9.0
+2014-07-23 21:26:57 [CLIENT] [INFO] Reloading ResourceManager: Default
+2014-07-23 21:27:02 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-23 21:27:04 [CLIENT] [INFO] Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Femtocraft
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoCalculator.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFluidicConductor.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfinitelyRecursiveALU.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemHerculesDrive.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemMinervaComplex.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemCrossDimensionalCommunicator.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemStellaratorPlating.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoSimulator.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemDimensionalMonopole.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemThoriumRod.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemBasicAICore.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemStyxValve.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemTemporalResonator.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoCoil.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfiniteVolumePolychora.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPanLocationalComputer.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemAtlasMount.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemOrpheusProcessor.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPandoraCube.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoRegulator.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemHermesBus.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanoPlating.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemInfallibleEstimator.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemManagerCore.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemSelfFulfillingOracle.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemSchedulerCore.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemErinyesCircuit.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemPhlegethonTunnelPrimer.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFissionReactorPlating.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemNanochip.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFemtoCoil.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemFemtoPlating.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/items/ItemLearningCore.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaVent.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockNanoFissionReactorHousing.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockSisyphusStabilizer.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4083_BlockConsumer.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4042_BlockStellaratorOpticalMaser.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPhlegethonTunnelFrame.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4036_null.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockCryoEndothermalChargingBase.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockCryoEndothermalChargingCoil.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockNanoFissionReactorCore.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4032_BlockOrbitalEqualizer.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockMicroEngine.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaCondenser.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPhlegethonTunnelCore.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockDecontaminationChamber.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4084_BlockGenerator.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: femtocraft:textures/blocks/BlockPlasmaTurbine.png
+2014-07-23 21:27:04 [CLIENT] [SEVERE] Using missing texture, unable to load: minecraft:textures/blocks/MISSING_ICON_TILE_4031_BlockNullEqualizer.png
+2014-07-23 21:27:05 [CLIENT] [SEVERE] Realms: Server not available!
+2014-07-23 21:33:41 [CLIENT] [INFO] Stopping!

@@ -34,8 +34,8 @@ import java.util.Random;
  */
 public class VolatilityEventMagneticFluctuation extends
                                                 VolatilityEvent {
-    public static double volatilityToRadiusDividend = 500.d;
-    public static double volatilityEnergyToVelocityDividend = 500.d;
+    public static double volatilityToRadiusDividend = 1000.d;
+    public static double volatilityEnergyToVelocityDividend = 1000.d;
     public static double coreMultiplier = 1.5d;
     private Random random = new Random();
 
@@ -89,9 +89,9 @@ public class VolatilityEventMagneticFluctuation extends
         );
         for (Entity entity : entities) {
             double tforce = force;
-            double forcex = random.nextDouble() * tforce;
+            double forcex = random.nextFloat() * tforce;
             tforce -= forcex;
-            double forcey = random.nextDouble() * tforce;
+            double forcey = random.nextFloat() * tforce;
             tforce -= forcey;
             double forcez = tforce;
             entity.addVelocity(forcex, forcey, forcez);

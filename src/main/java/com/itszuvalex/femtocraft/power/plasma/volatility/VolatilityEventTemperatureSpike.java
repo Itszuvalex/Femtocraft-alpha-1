@@ -35,8 +35,8 @@ import java.util.Random;
  */
 public class VolatilityEventTemperatureSpike extends
                                              VolatilityEvent {
-    public static double volatilityToRadiusDividend = 500.d;
-    public static double volatilityEnergyToDurationDividend = 500.d;
+    public static double volatilityToRadiusDividend = 1000.d;
+    public static double volatilityEnergyToDurationDividend = 1000.d;
     public static double coreMultiplier = 1.5d;
     private Random random = new Random();
 
@@ -78,8 +78,7 @@ public class VolatilityEventTemperatureSpike extends
                     FemtocraftPlasmaUtils
                             .temperatureToEnergy;
             if (flow.getTemperature() < temp) {
-                flow.setTemperature((long) (flow.getTemperature() + random.nextDouble
-                        () * temp));
+                flow.setTemperature((long) (flow.getTemperature() + random.nextFloat() * temp));
             }
         }
     }
@@ -98,7 +97,7 @@ public class VolatilityEventTemperatureSpike extends
         for (int wx = -wradius; wx < wradius; ++wx) {
             for (int wy = -wradius; wy < wradius; ++wy) {
                 for (int wz = -wradius; wz < wradius; ++wz) {
-                    if (world.isAirBlock(x + wx, y + wy, z + wz)) {
+                    if (world.isAirBlock(x + wx, y + wy, z + wz) && !world.isAirBlock(x + wx, y + wy - 1, z + wz)) {
                         world.setBlock(x + wx, y + wy, z + wz,
                                 Block.fire.blockID);
                     }

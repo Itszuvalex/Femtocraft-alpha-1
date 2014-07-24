@@ -31,7 +31,7 @@ import java.util.Random;
  */
 public class VolatilityEventPlasmaLeak extends VolatilityEvent {
     public static int plasmaDuration = 50;
-    public static int energyToSegmentsDividend = 500;
+    public static int energyToSegmentsDividend = 1000;
     private Random random = new Random();
 
     public VolatilityEventPlasmaLeak(IPlasmaFlow creator,
