@@ -43,9 +43,13 @@ import java.util.Random;
 public class BlockPlasma extends BlockContainer {
     public static float damagePerTick = .2f;
 
+    @Override
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
+        return null;
+    }
+
     public BlockPlasma(int par1) {
         super(par1, Material.lava);
-        setLightValue(16.f);
         setCreativeTab(Femtocraft.femtocraftTab);
         setBlockUnbreakable();
     }
@@ -60,10 +64,6 @@ public class BlockPlasma extends BlockContainer {
         return false;
     }
 
-    @Override
-    public int getRenderType() {
-        return super.getRenderType();
-    }
 
     @Override
     public Icon getIcon(int par1, int par2) {

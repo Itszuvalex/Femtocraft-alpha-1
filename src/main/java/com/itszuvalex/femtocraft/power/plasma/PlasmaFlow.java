@@ -46,7 +46,7 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
      */
     public static final int energyRequirementMin = 500000;
     public static final int temperatureMin = energyRequirementMin / FemtocraftPlasmaUtils.temperatureToEnergy;
-    public static final int getEnergyRequirementMax = 10000000;
+    public static final int getEnergyRequirementMax = 1000000;
     public static final int temperatureMax = getEnergyRequirementMax /
             FemtocraftPlasmaUtils.temperatureToEnergy;
     private static final int volatilityMin = 100;

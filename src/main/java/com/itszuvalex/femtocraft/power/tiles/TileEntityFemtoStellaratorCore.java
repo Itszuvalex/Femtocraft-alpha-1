@@ -189,6 +189,16 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
     public boolean breakMultiBlock(World world, int x, int y, int z) {
         if (info.breakMultiBlock(world, x, y, z)) {
             setModified();
+            if (getInput() != null) {
+                IPlasmaContainer input = getInput();
+                setInput(null, ForgeDirection.UNKNOWN);
+                input.setOutput(null, ForgeDirection.UNKNOWN);
+            }
+            if (getOutput() != null) {
+                IPlasmaContainer output = getOutput();
+                setOutput(null, ForgeDirection.UNKNOWN);
+                output.setInput(null, ForgeDirection.UNKNOWN);
+            }
             core.getComponents().clear();
             return true;
         }
