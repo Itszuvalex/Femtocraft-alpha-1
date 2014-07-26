@@ -335,6 +335,7 @@ public class Femtocraft {
         NetworkRegistry.instance().registerConnectionHandler(
                 new FemtocraftConnectionHandler());
         MinecraftForge.EVENT_BUS.register(new FemtocraftEventHookContainer());
+        MinecraftForge.EVENT_BUS.register(new FemtocraftOreRetrogenHandler());
     }
 
     @EventHandler
@@ -342,7 +343,7 @@ public class Femtocraft {
         proxy.registerRendering();
 
         if (FemtocraftConfigs.worldGen) {
-            GameRegistry.registerWorldGenerator(new WorldGeneratorOre());
+            GameRegistry.registerWorldGenerator(new FemtocraftOreGenerator());
         }
 
         // Change the creative tab name

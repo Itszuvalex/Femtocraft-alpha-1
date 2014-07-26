@@ -5705,3 +5705,165 @@ Caused by: java.lang.NullPointerException
 2014-07-23 22:48:49 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
 2014-07-23 22:48:49 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
 2014-07-23 22:48:49 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-25 19:13:31 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-07-25 19:13:31 [SERVER] [INFO] Generating keypair
+2014-07-25 19:13:31 [SERVER] [INFO] Preparing start region for level 0
+2014-07-25 19:13:32 [SERVER] [INFO] Preparing spawn area: 92%
+2014-07-25 19:13:32 [SERVER] [INFO] Player1234[/127.0.0.1:0] logged in with entity id 341 at (91.25413275537458, 66.37438748079866, 132.1258630804674)
+2014-07-25 19:13:32 [SERVER] [INFO] Player1234 joined the game
+2014-07-25 19:13:35 [SERVER] [INFO] Saving and pausing game...
+2014-07-25 19:13:35 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-25 19:13:35 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-25 19:13:35 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-25 19:13:57 [SERVER] [INFO] Saving and pausing game...
+2014-07-25 19:13:57 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-25 19:13:57 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-25 19:13:57 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-25 19:13:57 [SERVER] [INFO] Stopping server
+2014-07-25 19:13:57 [SERVER] [INFO] Saving players
+2014-07-25 19:13:57 [SERVER] [INFO] Player1234 left the game
+2014-07-25 19:13:57 [SERVER] [INFO] Saving worlds
+2014-07-25 19:13:57 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-25 19:13:57 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-25 19:13:57 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-25 19:15:32 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-07-25 19:15:32 [SERVER] [INFO] Generating keypair
+2014-07-25 19:15:32 [SERVER] [INFO] Preparing start region for level 0
+2014-07-25 19:15:33 [SERVER] [INFO] Player1234[/127.0.0.1:0] logged in with entity id 334 at (99.18017403030377, 67.86616408086266, 121.69888466318508)
+2014-07-25 19:15:33 [SERVER] [INFO] Player1234 joined the game
+2014-07-25 19:15:50 [SERVER] [INFO] Saving and pausing game...
+2014-07-25 19:15:50 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-25 19:15:50 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-25 19:15:50 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-25 20:43:55 [SERVER] [INFO] Stopping server
+2014-07-25 20:43:55 [SERVER] [INFO] Saving players
+2014-07-25 20:43:55 [SERVER] [INFO] Player1234 left the game
+2014-07-25 20:43:55 [SERVER] [INFO] Saving worlds
+2014-07-25 20:43:55 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-25 20:43:55 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-25 20:43:55 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-25 20:44:06 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-07-25 20:44:06 [SERVER] [INFO] Generating keypair
+2014-07-25 20:44:06 [SERVER] [INFO] Preparing start region for level 0
+2014-07-25 20:44:07 [SERVER] [INFO] Player1234[/127.0.0.1:0] logged in with entity id 327 at (109.77619927839255, 70.11546369330964, 130.0938071644579)
+2014-07-25 20:44:07 [SERVER] [INFO] Player1234 joined the game
+2014-07-25 20:45:27 [SERVER] [INFO] Saving and pausing game...
+2014-07-25 20:45:27 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-25 20:45:27 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-25 20:45:27 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-25 20:49:20 [SERVER] [INFO] Saving and pausing game...
+2014-07-25 20:49:20 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-25 20:49:21 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-25 20:49:21 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-25 20:49:21 [SERVER] [INFO] Stopping server
+2014-07-25 20:49:21 [SERVER] [INFO] Saving players
+2014-07-25 20:49:21 [SERVER] [INFO] Player1234 left the game
+2014-07-25 20:49:21 [SERVER] [INFO] Saving worlds
+2014-07-25 20:49:21 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-07-25 20:49:21 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-07-25 20:49:21 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-07-26 14:44:08 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-07-26 14:44:08 [SERVER] [INFO] Generating keypair
+2014-07-26 14:44:08 [SERVER] [INFO] Converting map!
+2014-07-26 14:44:08 [SERVER] [INFO] Scanning folders...
+2014-07-26 14:44:08 [SERVER] [INFO] Total conversion count is 0
+2014-07-26 14:44:08 [SERVER] [INFO] Preparing start region for level 0
+2014-07-26 14:44:09 [SERVER] [INFO] Preparing spawn area: 11%
+2014-07-26 14:44:10 [SERVER] [INFO] Preparing spawn area: 26%
+2014-07-26 14:44:11 [SERVER] [INFO] Preparing spawn area: 44%
+2014-07-26 14:44:12 [SERVER] [INFO] Preparing spawn area: 62%
+2014-07-26 14:44:13 [SERVER] [INFO] Preparing spawn area: 83%
+2014-07-26 14:44:14 [SERVER] [INFO] Player1234[/127.0.0.1:0] logged in with entity id 192 at (73.5, 73.0, 250.5)
+2014-07-26 14:44:14 [SERVER] [INFO] Player1234 joined the game
+2014-07-26 14:44:19 [SERVER] [INFO] Saving and pausing game...
+2014-07-26 14:44:19 [SERVER] [INFO] Saving chunks for level 'RetrogenTestWorld_RegGen'/Overworld
+2014-07-26 14:44:23 [SERVER] [INFO] Saving chunks for level 'RetrogenTestWorld_RegGen'/Nether
+2014-07-26 14:44:23 [SERVER] [INFO] Saving chunks for level 'RetrogenTestWorld_RegGen'/The End
+2014-07-26 14:44:23 [SERVER] [WARNING] Can't keep up! Did the system time change, or is the server overloaded?
+2014-07-26 14:45:02 [SERVER] [INFO] Saving and pausing game...
+2014-07-26 14:45:02 [SERVER] [INFO] Saving chunks for level 'RetrogenTestWorld_RegGen'/Overworld
+2014-07-26 14:45:02 [SERVER] [INFO] Saving chunks for level 'RetrogenTestWorld_RegGen'/Nether
+2014-07-26 14:45:02 [SERVER] [INFO] Saving chunks for level 'RetrogenTestWorld_RegGen'/The End
+2014-07-26 14:47:23 [SERVER] [INFO] Saving and pausing game...
+2014-07-26 14:47:23 [SERVER] [INFO] Saving chunks for level 'RetrogenTestWorld_RegGen'/Overworld
+2014-07-26 14:47:23 [SERVER] [INFO] Saving chunks for level 'RetrogenTestWorld_RegGen'/Nether
+2014-07-26 14:47:23 [SERVER] [INFO] Saving chunks for level 'RetrogenTestWorld_RegGen'/The End
+2014-07-26 14:47:24 [SERVER] [INFO] Stopping server
+2014-07-26 14:47:24 [SERVER] [INFO] Saving players
+2014-07-26 14:47:24 [SERVER] [INFO] Player1234 left the game
+2014-07-26 14:47:24 [SERVER] [INFO] Saving worlds
+2014-07-26 14:47:24 [SERVER] [INFO] Saving chunks for level 'RetrogenTestWorld_RegGen'/Overworld
+2014-07-26 14:47:24 [SERVER] [INFO] Saving chunks for level 'RetrogenTestWorld_RegGen'/Nether
+2014-07-26 14:47:24 [SERVER] [INFO] Saving chunks for level 'RetrogenTestWorld_RegGen'/The End
+2014-07-26 15:39:42 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-07-26 15:39:42 [SERVER] [INFO] Generating keypair
+2014-07-26 15:39:42 [SERVER] [INFO] Preparing start region for level 0
+2014-07-26 15:39:43 [SERVER] [INFO] Player1234[/127.0.0.1:0] logged in with entity id 357 at (73.68732204508055, 13.790143980648379, 261.69999998807907)
+2014-07-26 15:39:43 [SERVER] [INFO] Player1234 joined the game
+2014-07-26 15:39:48 [SERVER] [INFO] Saving and pausing game...
+2014-07-26 15:39:48 [SERVER] [INFO] Saving chunks for level 'RetrogenTestWorld_RegGen'/Overworld
+2014-07-26 15:39:48 [SERVER] [INFO] Saving chunks for level 'RetrogenTestWorld_RegGen'/Nether
+2014-07-26 15:39:48 [SERVER] [INFO] Saving chunks for level 'RetrogenTestWorld_RegGen'/The End
+2014-07-26 15:43:03 [SERVER] [INFO] Saving and pausing game...
+2014-07-26 15:43:03 [SERVER] [INFO] Saving chunks for level 'RetrogenTestWorld_RegGen'/Overworld
+2014-07-26 15:43:03 [SERVER] [INFO] Saving chunks for level 'RetrogenTestWorld_RegGen'/Nether
+2014-07-26 15:43:03 [SERVER] [INFO] Saving chunks for level 'RetrogenTestWorld_RegGen'/The End
+2014-07-26 15:43:04 [SERVER] [INFO] Stopping server
+2014-07-26 15:43:04 [SERVER] [INFO] Saving players
+2014-07-26 15:43:04 [SERVER] [INFO] Player1234 left the game
+2014-07-26 15:43:04 [SERVER] [INFO] Saving worlds
+2014-07-26 15:43:04 [SERVER] [INFO] Saving chunks for level 'RetrogenTestWorld_RegGen'/Overworld
+2014-07-26 15:43:04 [SERVER] [INFO] Saving chunks for level 'RetrogenTestWorld_RegGen'/Nether
+2014-07-26 15:43:04 [SERVER] [INFO] Saving chunks for level 'RetrogenTestWorld_RegGen'/The End
+2014-07-26 15:45:10 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-07-26 15:45:10 [SERVER] [INFO] Generating keypair
+2014-07-26 15:45:10 [SERVER] [INFO] Converting map!
+2014-07-26 15:45:10 [SERVER] [INFO] Scanning folders...
+2014-07-26 15:45:10 [SERVER] [INFO] Total conversion count is 0
+2014-07-26 15:45:10 [SERVER] [INFO] Preparing start region for level 0
+2014-07-26 15:45:11 [SERVER] [INFO] Preparing spawn area: 15%
+2014-07-26 15:45:12 [SERVER] [INFO] Preparing spawn area: 38%
+2014-07-26 15:45:13 [SERVER] [INFO] Preparing spawn area: 59%
+2014-07-26 15:45:14 [SERVER] [INFO] Preparing spawn area: 82%
+2014-07-26 15:45:15 [SERVER] [INFO] Player1234[/127.0.0.1:0] logged in with entity id 338 at (243.5, 68.0, 201.5)
+2014-07-26 15:45:15 [SERVER] [INFO] Player1234 joined the game
+2014-07-26 15:45:18 [SERVER] [INFO] Saving and pausing game...
+2014-07-26 15:45:18 [SERVER] [INFO] Saving chunks for level 'New World - Gen + Research File'/Overworld
+2014-07-26 15:45:22 [SERVER] [INFO] Saving chunks for level 'New World - Gen + Research File'/Nether
+2014-07-26 15:45:22 [SERVER] [INFO] Saving chunks for level 'New World - Gen + Research File'/The End
+2014-07-26 15:45:22 [SERVER] [WARNING] Can't keep up! Did the system time change, or is the server overloaded?
+2014-07-26 15:46:02 [SERVER] [INFO] Saving and pausing game...
+2014-07-26 15:46:02 [SERVER] [INFO] Saving chunks for level 'New World - Gen + Research File'/Overworld
+2014-07-26 15:46:04 [SERVER] [INFO] Saving chunks for level 'New World - Gen + Research File'/Nether
+2014-07-26 15:46:04 [SERVER] [INFO] Saving chunks for level 'New World - Gen + Research File'/The End
+2014-07-26 15:46:04 [SERVER] [INFO] Stopping server
+2014-07-26 15:46:04 [SERVER] [INFO] Saving players
+2014-07-26 15:46:04 [SERVER] [INFO] Player1234 left the game
+2014-07-26 15:46:04 [SERVER] [INFO] Saving worlds
+2014-07-26 15:46:04 [SERVER] [INFO] Saving chunks for level 'New World - Gen + Research File'/Overworld
+2014-07-26 15:46:04 [SERVER] [INFO] Saving chunks for level 'New World - Gen + Research File'/Nether
+2014-07-26 15:46:04 [SERVER] [INFO] Saving chunks for level 'New World - Gen + Research File'/The End
+2014-07-26 15:49:25 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-07-26 15:49:25 [SERVER] [INFO] Generating keypair
+2014-07-26 15:49:25 [SERVER] [INFO] Converting map!
+2014-07-26 15:49:25 [SERVER] [INFO] Scanning folders...
+2014-07-26 15:49:25 [SERVER] [INFO] Total conversion count is 0
+2014-07-26 15:49:25 [SERVER] [INFO] Preparing start region for level 0
+2014-07-26 15:49:26 [SERVER] [INFO] Preparing spawn area: 14%
+2014-07-26 15:49:27 [SERVER] [INFO] Preparing spawn area: 37%
+2014-07-26 15:49:28 [SERVER] [INFO] Preparing spawn area: 59%
+2014-07-26 15:49:29 [SERVER] [INFO] Preparing spawn area: 81%
+2014-07-26 15:49:30 [SERVER] [INFO] Player1234[/127.0.0.1:0] logged in with entity id 338 at (243.5, 68.0, 201.5)
+2014-07-26 15:49:30 [SERVER] [INFO] Player1234 joined the game
+2014-07-26 15:49:32 [SERVER] [INFO] Saving and pausing game...
+2014-07-26 15:49:32 [SERVER] [INFO] Saving chunks for level 'Copy of New World - Gen + Resear'/Overworld
+2014-07-26 15:49:37 [SERVER] [INFO] Saving chunks for level 'Copy of New World - Gen + Resear'/Nether
+2014-07-26 15:49:37 [SERVER] [INFO] Saving chunks for level 'Copy of New World - Gen + Resear'/The End
+2014-07-26 15:49:37 [SERVER] [WARNING] Can't keep up! Did the system time change, or is the server overloaded?
+2014-07-26 15:49:43 [SERVER] [INFO] Stopping server
+2014-07-26 15:49:43 [SERVER] [INFO] Saving players
+2014-07-26 15:49:43 [SERVER] [INFO] Player1234 left the game
+2014-07-26 15:49:43 [SERVER] [INFO] Saving worlds
+2014-07-26 15:49:43 [SERVER] [INFO] Saving chunks for level 'Copy of New World - Gen + Resear'/Overworld
+2014-07-26 15:49:43 [SERVER] [INFO] Saving chunks for level 'Copy of New World - Gen + Resear'/Nether
+2014-07-26 15:49:43 [SERVER] [INFO] Saving chunks for level 'Copy of New World - Gen + Resear'/The End

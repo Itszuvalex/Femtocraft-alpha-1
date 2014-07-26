@@ -526,6 +526,10 @@ public class FemtocraftConfigs {
     public static
     @CfgBool
     @CfgCat(category = CATEGORY_GENERATION)
+    boolean retroGen = false;
+    public static
+    @CfgBool
+    @CfgCat(category = CATEGORY_GENERATION)
     boolean titaniumGen = true;
     public static
     @CfgBool
@@ -1073,6 +1077,7 @@ public class FemtocraftConfigs {
 
     private static int baseItemID = 12000;
     private static int baseBlockID = 350;
+    ;
 
     public static void load(Configuration config) {
         try {

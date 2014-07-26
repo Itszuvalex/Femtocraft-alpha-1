@@ -22,11 +22,11 @@
 package com.itszuvalex.femtocraft.managers.research;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.FemtocraftFileUtils;
 import com.itszuvalex.femtocraft.managers.research.EventTechnology.TechnologyAddedEvent;
 import com.itszuvalex.femtocraft.research.gui.graph.TechNode;
 import com.itszuvalex.femtocraft.research.gui.graph.TechnologyGraph;
 import com.itszuvalex.femtocraft.research.gui.technology.*;
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompressedStreamTools;
@@ -645,7 +645,7 @@ public class ManagerResearch {
             true, null, GuiTechnologyMacroscopicStructure.class, null);
     // TODO: REMOVE ME
     private static boolean debug = true;
-    private final String FILENAME = "FemtocraftResearch";
+    private final String FILENAME = "Research";
     private HashMap<String, ResearchTechnology> technologies;
     private HashMap<String, ResearchPlayer> playerData;
     private TechnologyGraph graph;
@@ -829,7 +829,7 @@ public class ManagerResearch {
 
     public boolean save(World world) {
         try {
-            File folder = new File(savePath(world), FILENAME);
+            File folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), FILENAME);
             if (!folder.exists()) {
                 folder.mkdir();
             }
@@ -851,7 +851,7 @@ public class ManagerResearch {
                 } catch (Exception exception) {
                     Femtocraft.logger.log(Level.SEVERE,
                             "Failed to save data for player " + pdata.username
-                                    + " in world - " + savePath(world) + "."
+                                    + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
                     );
                     exception.printStackTrace();
                     continue;
@@ -860,17 +860,12 @@ public class ManagerResearch {
 
         } catch (Exception e) {
             Femtocraft.logger.log(Level.SEVERE, "Failed to create folder "
-                    + savePath(world) + File.pathSeparator + FILENAME + ".");
+                    + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator + FILENAME + ".");
             e.printStackTrace();
             return false;
         }
 
         return true;
-    }
-
-    private String savePath(World world) {
-        return Minecraft.getMinecraft().mcDataDir + "/saves/"
-                + world.getSaveHandler().getWorldDirectoryName();
     }
 
     public boolean load(World world) {
@@ -883,10 +878,10 @@ public class ManagerResearch {
         playerData.clear();
 
         try {
-            File folder = new File(savePath(world), FILENAME);
+            File folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), FILENAME);
             if (!folder.exists()) {
                 Femtocraft.logger.log(Level.WARNING, "No " + FILENAME
-                        + " folder found for world - " + savePath(world) + ".");
+                        + " folder found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".");
                 return false;
             }
 
@@ -910,7 +905,7 @@ public class ManagerResearch {
                 } catch (Exception e) {
                     Femtocraft.logger.log(Level.SEVERE,
                             "Failed to load data from file " + pdata.getName()
-                                    + " in world - " + savePath(world) + "."
+                                    + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
                     );
                     e.printStackTrace();
                 }
@@ -919,7 +914,7 @@ public class ManagerResearch {
         } catch (Exception exception) {
             Femtocraft.logger.log(Level.SEVERE,
                     "Failed to load data from folder " + FILENAME
-                            + " in world - " + savePath(world) + "."
+                            + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
             );
             exception.printStackTrace();
             return false;
