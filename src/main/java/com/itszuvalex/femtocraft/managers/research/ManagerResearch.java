@@ -645,7 +645,7 @@ public class ManagerResearch {
             true, null, GuiTechnologyMacroscopicStructure.class, null);
     // TODO: REMOVE ME
     private static boolean debug = true;
-    private final String FILENAME = "Research";
+    private static final String DIRECTORY = "Research";
     private HashMap<String, ResearchTechnology> technologies;
     private HashMap<String, ResearchPlayer> playerData;
     private TechnologyGraph graph;
@@ -829,7 +829,7 @@ public class ManagerResearch {
 
     public boolean save(World world) {
         try {
-            File folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), FILENAME);
+            File folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), DIRECTORY);
             if (!folder.exists()) {
                 folder.mkdir();
             }
@@ -860,7 +860,7 @@ public class ManagerResearch {
 
         } catch (Exception e) {
             Femtocraft.logger.log(Level.SEVERE, "Failed to create folder "
-                    + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator + FILENAME + ".");
+                    + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator + DIRECTORY + ".");
             e.printStackTrace();
             return false;
         }
@@ -878,9 +878,9 @@ public class ManagerResearch {
         playerData.clear();
 
         try {
-            File folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), FILENAME);
+            File folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), DIRECTORY);
             if (!folder.exists()) {
-                Femtocraft.logger.log(Level.WARNING, "No " + FILENAME
+                Femtocraft.logger.log(Level.WARNING, "No " + DIRECTORY
                         + " folder found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".");
                 return false;
             }
@@ -913,7 +913,7 @@ public class ManagerResearch {
 
         } catch (Exception exception) {
             Femtocraft.logger.log(Level.SEVERE,
-                    "Failed to load data from folder " + FILENAME
+                    "Failed to load data from folder " + DIRECTORY
                             + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
             );
             exception.printStackTrace();

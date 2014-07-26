@@ -42,53 +42,80 @@ public class FemtocraftOreGenerator implements IWorldGenerator {
 
     }
 
-    public static void retroGenerate(Random random, Chunk chunk, NBTTagCompound chunkData) {
-        generate(random, chunk.xPosition, chunk.zPosition, chunk.worldObj, chunkData);
+    public static void retroGenerate(Random random, Chunk chunk, NBTTagCompound regionOreConfig) {
+        generate(random, chunk.xPosition, chunk.zPosition, chunk.worldObj, regionOreConfig);
     }
 
-    public static void generate(Random random, int chunkX, int chunkZ, World world, NBTTagCompound chunkData) {
+    public static boolean shouldRetroGenerate(World world, NBTTagCompound regionOreConfig) {
         switch (world.provider.dimensionId) {
             case -1:
-                generateNether(world, random, chunkX * 16, chunkZ * 16, chunkData);
+                return shouldRetroGenNether(world, regionOreConfig);
+            default:
+            case 0:
+                return shouldRetroGenSurface(world, regionOreConfig);
+            case 1:
+                return shouldRetroGenEnd(world, regionOreConfig);
+        }
+    }
+
+    private static boolean shouldRetroGenEnd(World world, NBTTagCompound regionOreConfig) {
+        return false;
+    }
+
+    private static boolean shouldRetroGenSurface(World world, NBTTagCompound regionOreConfig) {
+        return (FemtocraftConfigs.fareniteGen && !getOreGenerated(regionOreConfig, Femtocraft.blockOreFarenite.getUnlocalizedName())) ||
+                (FemtocraftConfigs.platinumGen && !getOreGenerated(regionOreConfig, Femtocraft.blockOrePlatinum.getUnlocalizedName())) ||
+                (FemtocraftConfigs.thoriumGen && !getOreGenerated(regionOreConfig, Femtocraft.blockOreThorium.getUnlocalizedName())) ||
+                (FemtocraftConfigs.titaniumGen && !getOreGenerated(regionOreConfig, Femtocraft.blockOreTitanium.getUnlocalizedName()));
+    }
+
+    private static boolean shouldRetroGenNether(World world, NBTTagCompound regionOreConfig) {
+        return FemtocraftConfigs.maleniteGen && !getOreGenerated(regionOreConfig, Femtocraft.blockOreMalenite.getUnlocalizedName());
+    }
+
+    public static void generate(Random random, int chunkX, int chunkZ, World world, NBTTagCompound regionOreConfig) {
+        switch (world.provider.dimensionId) {
+            case -1:
+                generateNether(world, random, chunkX * 16, chunkZ * 16, regionOreConfig);
                 break;
             default:
             case 0:
-                generateSurface(world, random, chunkX * 16, chunkZ * 16, chunkData);
+                generateSurface(world, random, chunkX * 16, chunkZ * 16, regionOreConfig);
                 break;
             case 1:
-                generateEnd(world, random, chunkX * 16, chunkZ * 16, chunkData);
+                generateEnd(world, random, chunkX * 16, chunkZ * 16, regionOreConfig);
                 break;
         }
     }
 
-    private static void generateNether(World world, Random random, int i, int j, NBTTagCompound chunkData) {
+    private static void generateNether(World world, Random random, int i, int j, NBTTagCompound regionOreConfig) {
         if (FemtocraftConfigs.maleniteGen) {
-            generateMalenite(world, random, i, j, chunkData);
+            generateMalenite(world, random, i, j, regionOreConfig);
         }
 
     }
 
-    private static void generateSurface(World world, Random random, int i, int j, NBTTagCompound chunkData) {
+    private static void generateSurface(World world, Random random, int i, int j, NBTTagCompound regionOreConfig) {
 
         if (FemtocraftConfigs.titaniumGen) {
-            generateTitanium(world, random, i, j, chunkData);
+            generateTitanium(world, random, i, j, regionOreConfig);
         }
 
         if (FemtocraftConfigs.platinumGen) {
-            generatePlatinum(world, random, i, j, chunkData);
+            generatePlatinum(world, random, i, j, regionOreConfig);
         }
 
         if (FemtocraftConfigs.thoriumGen) {
-            generateThorium(world, random, i, j, chunkData);
+            generateThorium(world, random, i, j, regionOreConfig);
         }
 
         if (FemtocraftConfigs.fareniteGen) {
-            generateFarenite(world, random, i, j, chunkData);
+            generateFarenite(world, random, i, j, regionOreConfig);
         }
     }
 
-    public static void generateFarenite(World world, Random random, int i, int j, NBTTagCompound chunkData) {
-        if (getOreGenerated(chunkData, Femtocraft.blockOreFarenite.getLocalizedName())) {
+    public static void generateFarenite(World world, Random random, int i, int j, NBTTagCompound regionOreConfig) {
+        if (getOreGenerated(regionOreConfig, Femtocraft.blockOreFarenite.getUnlocalizedName())) {
             return;
         }
 
@@ -108,11 +135,11 @@ public class FemtocraftOreGenerator implements IWorldGenerator {
             }
         }
 
-        markOreGeneration(chunkData, Femtocraft.blockOreFarenite.getUnlocalizedName(), true);
+        markOreGeneration(regionOreConfig, Femtocraft.blockOreFarenite.getUnlocalizedName(), true);
     }
 
-    public static void generateThorium(World world, Random random, int i, int j, NBTTagCompound chunkData) {
-        if (getOreGenerated(chunkData, Femtocraft.blockOreThorium.getLocalizedName())) {
+    public static void generateThorium(World world, Random random, int i, int j, NBTTagCompound regionOreConfig) {
+        if (getOreGenerated(regionOreConfig, Femtocraft.blockOreThorium.getUnlocalizedName())) {
             return;
         }
 
@@ -130,11 +157,11 @@ public class FemtocraftOreGenerator implements IWorldGenerator {
 
         }
 
-        markOreGeneration(chunkData, Femtocraft.blockOreThorium.getUnlocalizedName(), true);
+        markOreGeneration(regionOreConfig, Femtocraft.blockOreThorium.getUnlocalizedName(), true);
     }
 
-    public static void generatePlatinum(World world, Random random, int i, int j, NBTTagCompound chunkData) {
-        if (getOreGenerated(chunkData, Femtocraft.blockOrePlatinum.getLocalizedName())) {
+    public static void generatePlatinum(World world, Random random, int i, int j, NBTTagCompound regionOreConfig) {
+        if (getOreGenerated(regionOreConfig, Femtocraft.blockOrePlatinum.getUnlocalizedName())) {
             return;
         }
 
@@ -151,11 +178,11 @@ public class FemtocraftOreGenerator implements IWorldGenerator {
                     .generate(world, random, xCoord, yCoord, zCoord);
         }
 
-        markOreGeneration(chunkData, Femtocraft.blockOrePlatinum.getUnlocalizedName(), true);
+        markOreGeneration(regionOreConfig, Femtocraft.blockOrePlatinum.getUnlocalizedName(), true);
     }
 
-    public static void generateTitanium(World world, Random random, int i, int j, NBTTagCompound chunkData) {
-        if (getOreGenerated(chunkData, Femtocraft.blockOreTitanium.getLocalizedName())) {
+    public static void generateTitanium(World world, Random random, int i, int j, NBTTagCompound regionOreConfig) {
+        if (getOreGenerated(regionOreConfig, Femtocraft.blockOreTitanium.getUnlocalizedName())) {
             return;
         }
 
@@ -173,16 +200,16 @@ public class FemtocraftOreGenerator implements IWorldGenerator {
                     .generate(world, random, xCoord, yCoord, zCoord);
         }
 
-        markOreGeneration(chunkData, Femtocraft.blockOreTitanium.getUnlocalizedName(), true);
+        markOreGeneration(regionOreConfig, Femtocraft.blockOreTitanium.getUnlocalizedName(), true);
     }
 
-    private static void generateEnd(World world, Random random, int i, int j, NBTTagCompound chunkData) {
+    private static void generateEnd(World world, Random random, int i, int j, NBTTagCompound regionOreConfig) {
         // TODO Auto-generated method stub
     }
 
 
-    public static void generateMalenite(World world, Random random, int i, int j, NBTTagCompound chunkData) {
-        if (getOreGenerated(chunkData, Femtocraft.blockOreMalenite.getLocalizedName())) {
+    public static void generateMalenite(World world, Random random, int i, int j, NBTTagCompound regionOreConfig) {
+        if (getOreGenerated(regionOreConfig, Femtocraft.blockOreMalenite.getUnlocalizedName())) {
             return;
         }
 
@@ -201,7 +228,7 @@ public class FemtocraftOreGenerator implements IWorldGenerator {
                     xCoord, yCoord, zCoord);
         }
 
-        markOreGeneration(chunkData, Femtocraft.blockOreMalenite.getUnlocalizedName(), true);
+        markOreGeneration(regionOreConfig, Femtocraft.blockOreMalenite.getUnlocalizedName(), true);
     }
 
 
