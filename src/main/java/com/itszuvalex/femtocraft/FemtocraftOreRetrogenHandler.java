@@ -60,7 +60,7 @@ public class FemtocraftOreRetrogenHandler {
         NBTTagCompound regionCompound = getRetroGenFile(event.world, regionX, regionZ);
 
         if (regionCompound == null) {
-            Femtocraft.logger.log(Level.WARNING, "No Retrogen File found for " + regionX + " " + regionZ + ".  Generating now.");
+            Femtocraft.logger.log(Level.WARNING, "No Retrogen File found for worldId:" + event.world.provider.dimensionId + " x:" + regionX + " z:" + regionZ + ".  Generating now.");
         }
 
         regionCompound = regionCompound == null ? new NBTTagCompound() : regionCompound;
@@ -88,9 +88,13 @@ public class FemtocraftOreRetrogenHandler {
             if (!folder.exists()) {
                 folder.mkdir();
             }
+            File worldFolder = new File(folder.getPath(), String.valueOf(world.provider.dimensionId));
+            if (!worldFolder.exists()) {
+                worldFolder.mkdir();
+            }
             String filename = getRegionFileName(regionX, regionZ);
             try {
-                File file = new File(folder, filename);
+                File file = new File(worldFolder, filename);
                 if (!file.exists()) {
                     file.createNewFile();
                 }
@@ -126,11 +130,17 @@ public class FemtocraftOreRetrogenHandler {
                         + " folder found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".");
                 return null;
             }
+            File worldFolder = new File(folder.getPath(), String.valueOf(world.provider.dimensionId));
+            if (!worldFolder.exists()) {
+                Femtocraft.logger.log(Level.WARNING, "No " + String.valueOf(world.provider.dimensionId)
+                        + " folder found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".");
+                return null;
+            }
 
 
             String filename = getRegionFileName(regionX, regionZ);
             try {
-                File regionFile = new File(folder.getPath(), filename);
+                File regionFile = new File(worldFolder.getPath(), filename);
                 if (!regionFile.exists()) return null;
                 FileInputStream fileinputstream = new FileInputStream(regionFile);
                 NBTTagCompound data = CompressedStreamTools
