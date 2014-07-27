@@ -21,7 +21,12 @@
 
 package com.itszuvalex.femtocraft.managers.dimensional;
 
+import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.SortedMap;
@@ -40,7 +45,9 @@ public class ManagerDimensionalRecipe {
     }
 
     private void addRecipes() {
-
+        addRecipe(new DimensionalRecipe(new ItemStack(Femtocraft.itemManagerCore), new ItemStack[]{new ItemStack(Femtocraft.itemNanochip), new ItemStack(Item.enderPearl), new ItemStack(Femtocraft.itemCrossDimensionalCommunicator), new ItemStack(Femtocraft.itemDimensionalMonopole)}, new ItemStack(Femtocraft.itemPanLocationalComputer), 400, EnumTechLevel.NANO, (ResearchTechnology) null));
+        addRecipe(new DimensionalRecipe(new ItemStack(Block.chest), new ItemStack[]{new ItemStack(Femtocraft.itemPanLocationalComputer), new ItemStack(Item.enderPearl), new ItemStack(Item.enderPearl), new ItemStack(Femtocraft.itemDimensionalMonopole)}, new ItemStack(Femtocraft.itemPandoraCube), 400, EnumTechLevel.NANO, (ResearchTechnology) null));
+        addRecipe(new DimensionalRecipe(new ItemStack(Femtocraft.itemPandoraCube), new ItemStack[]{new ItemStack(Femtocraft.itemHerculesDrive), new ItemStack(Femtocraft.itemPanLocationalComputer), new ItemStack(Femtocraft.itemPanLocationalComputer), new ItemStack(Femtocraft.itemHerculesDrive), new ItemStack(Item.eyeOfEnder), new ItemStack(Item.eyeOfEnder), new ItemStack(Item.eyeOfEnder), new ItemStack(Item.eyeOfEnder), new ItemStack(Femtocraft.itemHerculesDrive), new ItemStack(Femtocraft.itemInfallibleEstimator), new ItemStack(Femtocraft.itemInfallibleEstimator), new ItemStack(Femtocraft.itemHerculesDrive)}, new ItemStack(Femtocraft.itemInfiniteVolumePolychora), 400, EnumTechLevel.FEMTO, (ResearchTechnology) null));
     }
 
     public DimensionalRecipe getRecipe(ItemStack input, ItemStack[] configurators) {
@@ -52,7 +59,7 @@ public class ManagerDimensionalRecipe {
                                              ItemStack[] configurators) {
         if (input == null) return null;
         ItemStack ninput = input.copy();
-        input.stackSize = 1;
+        ninput.stackSize = 1;
 
         ItemStack[] configs = new ItemStack[configurators.length];
         if (configs != null) {

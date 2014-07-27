@@ -104,7 +104,7 @@ public class FemtocraftGuiHandler implements IGuiHandler {
             case NanoHorologeGuiID:
                 return new ContainerNanoHorologe(player.inventory, (TileEntityBaseEntityNanoHorologe) tileEntity);
             case NanoEnmesherGuiID:
-                break;                //TODO
+                return new ContainerNanoEnmesher(player.inventory, (TileEntityBaseEntityNanoEnmesher) tileEntity);
             case FemtoImpulserGuiID:
                 return new ContainerFemtoImpulser(player.inventory, (TileEntityFemtoImpulser) tileEntity);
             case FemtoRepurposerGuiID:
@@ -172,7 +172,7 @@ public class FemtocraftGuiHandler implements IGuiHandler {
             case NanoHorologeGuiID:
                 return new GuiNanoHorologe(player.inventory, (TileEntityBaseEntityNanoHorologe) tileEntity);
             case NanoEnmesherGuiID:
-                break; //TODO
+                return new GuiNanoEnmesher(player.inventory, (TileEntityBaseEntityNanoEnmesher) tileEntity);
             case FemtoImpulserGuiID:
                 return new GuiFemtoImpulser(player.inventory, (TileEntityFemtoImpulser) tileEntity);
             case FemtoRepurposerGuiID:

@@ -87,7 +87,9 @@ public class TileEntityBaseEntityNanoEnmesher extends
     @Override
     public boolean canInsertItem(int i, ItemStack itemstack, int j) {
         return i != getOutputSlotIndex();
-    }    protected float getTickMultiplier() {
+    }
+
+    protected float getTickMultiplier() {
         return tickMultiplier_default;
     }
 
@@ -98,7 +100,9 @@ public class TileEntityBaseEntityNanoEnmesher extends
 
     protected int getOutputSlotIndex() {
         return outputSlot;
-    }    protected int getPowerToCook() {
+    }
+
+    protected int getPowerToCook() {
         return powerToCook_default;
     }
 
@@ -110,7 +114,9 @@ public class TileEntityBaseEntityNanoEnmesher extends
     @Override
     public ItemStack getStackInSlot(int i) {
         return inventory.getStackInSlot(i);
-    }    protected EnumTechLevel getTechLevel() {
+    }
+
+    protected EnumTechLevel getTechLevel() {
         return EnumTechLevel.NANO;
     }
 
@@ -132,9 +138,11 @@ public class TileEntityBaseEntityNanoEnmesher extends
     @Override
     public String getInvName() {
         return inventory.getInvName();
-    }    protected ItemStack[] getConfigurators() {
+    }
+
+    protected ItemStack[] getConfigurators() {
         return Arrays.copyOfRange(inventory.getInventory(),
-                inputSlot + 1, getOutputSlotIndex() - 1);
+                inputSlot + 1, getOutputSlotIndex());
     }
 
     @Override
@@ -150,7 +158,9 @@ public class TileEntityBaseEntityNanoEnmesher extends
     @Override
     public boolean isUseableByPlayer(EntityPlayer entityplayer) {
         return canPlayerUse(entityplayer);
-    }    @Override
+    }
+
+    @Override
     public boolean isWorking() {
         return meshStack != null;
     }
@@ -163,7 +173,9 @@ public class TileEntityBaseEntityNanoEnmesher extends
     @Override
     public void closeChest() {
 
-    }    @Override
+    }
+
+    @Override
     protected boolean canStartWork() {
         if (isWorking()) {
             return false;
@@ -196,12 +208,14 @@ public class TileEntityBaseEntityNanoEnmesher extends
 
         //If output item mismatch
         ItemStack output = inventory.getStackInSlot(getOutputSlotIndex());
-        if (!output.isItemEqual(dr.output)) {
-            return false;
-        }
-        //If not enough room in output stack for output of recipe
-        if ((output.getMaxStackSize() - output.stackSize) < dr.output.stackSize) {
-            return false;
+        if (output != null) {
+            if (!output.isItemEqual(dr.output)) {
+                return false;
+            }
+            //If not enough room in output stack for output of recipe
+            if ((output.getMaxStackSize() - output.stackSize) < dr.output.stackSize) {
+                return false;
+            }
         }
 
         return true;
@@ -216,9 +230,7 @@ public class TileEntityBaseEntityNanoEnmesher extends
     protected void startWork() {
         DimensionalRecipe dr = Femtocraft.recipeManager.dimensionalRecipes
                 .getRecipe(inventory.getStackInSlot(inputSlot),
-                        Arrays.copyOfRange(inventory.getInventory(),
-                                inputSlot + 1, getOutputSlotIndex() - 1)
-                );
+                        getConfigurators());
 
         meshStack = inventory.decrStackSize(inputSlot, dr.input.stackSize);
         ItemStack[] configurators = getConfigurators();
@@ -234,19 +246,16 @@ public class TileEntityBaseEntityNanoEnmesher extends
     }
 
 
-
     @Override
     protected void continueWork() {
         ++cookTime;
     }
 
 
-
     @Override
     protected boolean canFinishWork() {
         return cookTime >= ticksToCook;
     }
-
 
 
     @Override
@@ -270,10 +279,19 @@ public class TileEntityBaseEntityNanoEnmesher extends
     }
 
 
+    public int getProgress() {
+        return cookTime;
+    }
 
+    public int getProgressMax() {
+        return ticksToCook;
+    }
 
+    public void setProgress(int progress) {
+        cookTime = progress;
+    }
 
-
-
-
+    public void setProgressMax(int progressMax) {
+        ticksToCook = progressMax;
+    }
 }
