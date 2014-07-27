@@ -60,7 +60,9 @@ public class FemtocraftOreRetrogenHandler {
         NBTTagCompound regionCompound = getRetroGenFile(event.world, regionX, regionZ);
 
         if (regionCompound == null) {
-            Femtocraft.logger.log(Level.WARNING, "No Retrogen File found for worldId:" + event.world.provider.dimensionId + " x:" + regionX + " z:" + regionZ + ".  Generating now.");
+            if (FemtocraftConfigs.retrogenAlerts) {
+                Femtocraft.logger.log(Level.WARNING, "No Retrogen File found for worldId:" + event.world.provider.dimensionId + " x:" + regionX + " z:" + regionZ + ".  Generating now.");
+            }
         }
 
         regionCompound = regionCompound == null ? new NBTTagCompound() : regionCompound;
@@ -126,14 +128,18 @@ public class FemtocraftOreRetrogenHandler {
         try {
             File folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), DIRECTORY);
             if (!folder.exists()) {
-                Femtocraft.logger.log(Level.WARNING, "No " + DIRECTORY
-                        + " folder found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".");
+                if (FemtocraftConfigs.retrogenAlerts) {
+                    Femtocraft.logger.log(Level.WARNING, "No " + DIRECTORY
+                            + " folder found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".");
+                }
                 return null;
             }
             File worldFolder = new File(folder.getPath(), String.valueOf(world.provider.dimensionId));
             if (!worldFolder.exists()) {
-                Femtocraft.logger.log(Level.WARNING, "No " + String.valueOf(world.provider.dimensionId)
-                        + " folder found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".");
+                if (FemtocraftConfigs.retrogenAlerts) {
+                    Femtocraft.logger.log(Level.WARNING, "No " + String.valueOf(world.provider.dimensionId)
+                            + " folder found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".");
+                }
                 return null;
             }
 

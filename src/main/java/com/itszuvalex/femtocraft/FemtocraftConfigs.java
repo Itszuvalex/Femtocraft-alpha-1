@@ -558,6 +558,10 @@ public class FemtocraftConfigs {
     boolean silentRecipeLoadAlerts = false;
     public static
     @CfgBool
+    @CfgCat(category = CATEGORY_DEBUG)
+    boolean retrogenAlerts = false;
+    public static
+    @CfgBool
     @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
     boolean recipeItemCrystallite = true;
     public static
@@ -1077,7 +1081,6 @@ public class FemtocraftConfigs {
 
     private static int baseItemID = 12000;
     private static int baseBlockID = 350;
-    ;
 
     public static void load(Configuration config) {
         try {

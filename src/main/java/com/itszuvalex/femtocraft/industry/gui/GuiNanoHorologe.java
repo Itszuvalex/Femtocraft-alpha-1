@@ -103,11 +103,11 @@ public class GuiNanoHorologe extends GuiContainer {
         // 14, i1 + 2);
         // }
 
-        i1 = this.inventory.getCookProgressScaled(38);
-        this.drawTexturedModalRect(k + 73, l + 34, 176, 13, i1, 18);
+        i1 = this.inventory.getCookProgressScaled(86);
+        this.drawTexturedModalRect(k + 51, l + 39, 0, 167, i1, 8);
         i1 = (this.inventory.getCurrentPower() * 60)
                 / this.inventory.getMaxPower();
-        this.drawTexturedModalRect(k + 18, l + 12 + (60 - i1), 176,
-                32 + (60 - i1), 16 + (60 - i1), 60);
+        this.drawTexturedModalRect(k + 12, l + 11 + (60 - i1), 176,
+                34 + (60 - i1), 16 + (60 - i1), 60);
     }
 }

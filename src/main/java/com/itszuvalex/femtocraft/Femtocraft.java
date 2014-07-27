@@ -202,6 +202,8 @@ public class Femtocraft {
     public static Item itemMicroCoil;
     public static Item itemBattery;
 
+    public static Item itemMicroPlating;
+
     public static Item itemMicroLogicCore;
     public static Item itemKineticPulverizer;
     public static Item itemHeatingElement;
@@ -312,9 +314,6 @@ public class Femtocraft {
     public static Item itemMorphicChannel;
     public static Item itemSynthesizedFiber;
     public static Item itemOrganometallicPlate;
-
-    public static Item itemMicroPlating;
-
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {

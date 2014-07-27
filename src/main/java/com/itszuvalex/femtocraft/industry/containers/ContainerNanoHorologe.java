@@ -36,7 +36,12 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 public class ContainerNanoHorologe extends Container {
     private TileEntityBaseEntityNanoHorologe horologe;
     private int lastCookTime = 0;
+    private int lastCookMax = 0;
     private int lastPower = 0;
+
+    private static final int cookTimeID = 0;
+    private static final int cookTimeMaxID = 1;
+    private static final int powerID = 2;
 
     public ContainerNanoHorologe(InventoryPlayer par1InventoryPlayer,
                                  TileEntityBaseEntityNanoHorologe par2TileEntityFurnace) {
@@ -65,9 +70,10 @@ public class ContainerNanoHorologe extends Container {
     @Override
     public void addCraftingToCrafters(ICrafting par1ICrafting) {
         super.addCraftingToCrafters(par1ICrafting);
-        par1ICrafting.sendProgressBarUpdate(this, 0,
+        par1ICrafting.sendProgressBarUpdate(this, cookTimeID,
                 this.horologe.getProgress());
-        par1ICrafting.sendProgressBarUpdate(this, 1,
+        par1ICrafting.sendProgressBarUpdate(this, cookTimeMaxID, this.horologe.getProgressMax());
+        par1ICrafting.sendProgressBarUpdate(this, powerID,
                 this.horologe.getCurrentPower());
     }
 
@@ -82,11 +88,14 @@ public class ContainerNanoHorologe extends Container {
             ICrafting icrafting = (ICrafting) crafter;
 
             if (this.lastCookTime != this.horologe.getProgress()) {
-                icrafting.sendProgressBarUpdate(this, 0,
+                icrafting.sendProgressBarUpdate(this, cookTimeID,
                         this.horologe.getProgress());
             }
+            if (this.lastCookMax != this.horologe.getProgressMax()) {
+                icrafting.sendProgressBarUpdate(this, cookTimeMaxID, this.horologe.getProgressMax());
+            }
             if (this.lastPower != this.horologe.getCurrentPower()) {
-                icrafting.sendProgressBarUpdate(this, 1,
+                icrafting.sendProgressBarUpdate(this, powerID,
                         this.horologe.getCurrentPower());
             }
         }
@@ -155,11 +164,16 @@ public class ContainerNanoHorologe extends Container {
     @Override
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int par1, int par2) {
-        if (par1 == 0) {
-            this.horologe.setProgress(par2);
-        }
-        if (par1 == 1) {
-            this.horologe.setCurrentStorage(par2);
+        switch (par1) {
+            case cookTimeID:
+                this.horologe.setProgress(par2);
+                break;
+            case cookTimeMaxID:
+                this.horologe.setProgressMax(par2);
+                break;
+            case powerID:
+                this.horologe.setCurrentStorage(par2);
+                break;
         }
     }
 

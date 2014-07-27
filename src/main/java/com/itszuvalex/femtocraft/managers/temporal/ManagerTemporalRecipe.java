@@ -21,7 +21,11 @@
 
 package com.itszuvalex.femtocraft.managers.temporal;
 
+import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.SortedMap;
@@ -40,6 +44,8 @@ public class ManagerTemporalRecipe {
     }
 
     private void addRecipes() {
+        addRecipe(new TemporalRecipe(new ItemStack(Femtocraft.itemSelfFulfillingOracle), new ItemStack[]{new ItemStack(Femtocraft.itemTemporalResonator), new ItemStack(Femtocraft.itemSchedulerCore), new ItemStack(Item.pocketSundial)}, new ItemStack(Femtocraft.itemInfallibleEstimator), 200, EnumTechLevel.NANO, (ResearchTechnology) null));
+        addRecipe(new TemporalRecipe(new ItemStack(Femtocraft.itemInfallibleEstimator), new ItemStack[]{new ItemStack(Femtocraft.itemInfallibleEstimator), new ItemStack(Femtocraft.itemOrpheusProcessor), new ItemStack(Femtocraft.itemPanLocationalComputer), new ItemStack(Femtocraft.itemInfallibleEstimator), new ItemStack(Femtocraft.itemOrpheusProcessor), new ItemStack(Femtocraft.itemPanLocationalComputer)}, new ItemStack(Femtocraft.itemInfinitelyRecursiveALU), 800, EnumTechLevel.FEMTO, (ResearchTechnology) null));
 
     }
 
@@ -52,7 +58,7 @@ public class ManagerTemporalRecipe {
                                        ItemStack[] configurators) {
         if (input == null) return null;
         ItemStack ninput = input.copy();
-        input.stackSize = 1;
+        ninput.stackSize = 1;
 
         ItemStack[] configs = new ItemStack[configurators.length];
         if (configs != null) {

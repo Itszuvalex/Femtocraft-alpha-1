@@ -50,7 +50,7 @@ public class TemporalRecipe implements Comparable, ISaveable {
     public TemporalRecipe(ItemStack input, ItemStack[] configurators,
                           ItemStack output, int ticks,
                           EnumTechLevel level, ResearchTechnology tech) {
-        this(input, configurators, output, ticks, level, tech.name);
+        this(input, configurators, output, ticks, level, tech == null ? null : tech.name);
     }
 
     public TemporalRecipe(ItemStack input, ItemStack[] configurators,
