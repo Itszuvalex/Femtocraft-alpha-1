@@ -115,9 +115,9 @@ public class FemtocraftGuiHandler implements IGuiHandler {
                                 tileEntity
                 );
             case FemtoChronoshifterGuiID:
-                break;       //TODO
+                return new ContainerFemtoChronoshifter(player.inventory, (TileEntityFemtoChronoshifter) tileEntity);
             case FemtoEntanglerGuiID:
-                break;             //TODO
+                return new ContainerFemtoEntangler(player.inventory, (TileEntityFemtoEntangler) tileEntity);
             case MicroCubeGuiID:
                 return new ContainerMicroCube((TileEntityMicroCube) tileEntity);
             case MicroEngineGuiID:
@@ -128,8 +128,6 @@ public class FemtocraftGuiHandler implements IGuiHandler {
             default:
                 return null;
         }
-
-        return null;
     }
 
 
@@ -180,9 +178,9 @@ public class FemtocraftGuiHandler implements IGuiHandler {
             case FemtoCoagulatorGuiID:
                 return new GuiFemtoCoagulator(player.inventory, (TileEntityFemtoCoagulator) tileEntity);
             case FemtoChronoshifterGuiID:
-                break;         //TODO
+                return new GuiFemtoChronoshifter(player.inventory, (TileEntityFemtoChronoshifter) tileEntity);
             case FemtoEntanglerGuiID:
-                break;               //TODO
+                return new GuiFemtoEntangler(player.inventory, (TileEntityFemtoEntangler) tileEntity);
             case MicroCubeGuiID:
                 return new GuiMicroCube((TileEntityMicroCube) tileEntity);
             case MicroEngineGuiID:
