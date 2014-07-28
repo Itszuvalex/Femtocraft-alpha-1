@@ -27,6 +27,7 @@ import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityNanoHorologe
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -37,9 +38,9 @@ public class GuiNanoHorologe extends GuiContainer {
             Femtocraft.ID.toLowerCase(), "textures/guis/NanoHorologe.png");
     private TileEntityBaseEntityNanoHorologe inventory;
 
-    public GuiNanoHorologe(InventoryPlayer par1InventoryPlayer,
+    public GuiNanoHorologe(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
                            TileEntityBaseEntityNanoHorologe horologe) {
-        super(new ContainerNanoHorologe(par1InventoryPlayer,
+        super(new ContainerNanoHorologe(player, par1InventoryPlayer,
                 horologe));
         this.inventory = horologe;
     }

@@ -29,6 +29,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -40,9 +41,9 @@ public class GuiNanoInnervator extends GuiContainer {
             Femtocraft.ID.toLowerCase(), "textures/guis/NanoInnervator.png");
     private TileEntityNanoInnervator furnaceInventory;
 
-    public GuiNanoInnervator(InventoryPlayer par1InventoryPlayer,
+    public GuiNanoInnervator(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
                              TileEntityNanoInnervator par2TileEntityFurnace) {
-        super(new ContainerNanoInnervator(par1InventoryPlayer,
+        super(new ContainerNanoInnervator(player, par1InventoryPlayer,
                 par2TileEntityFurnace));
         this.furnaceInventory = par2TileEntityFurnace;
     }

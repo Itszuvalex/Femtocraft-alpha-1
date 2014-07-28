@@ -27,6 +27,7 @@ import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityNanoEnmesher
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -37,9 +38,9 @@ public class GuiNanoEnmesher extends GuiContainer {
             Femtocraft.ID.toLowerCase(), "textures/guis/NanoEnmesher.png");
     private TileEntityBaseEntityNanoEnmesher inventory;
 
-    public GuiNanoEnmesher(InventoryPlayer par1InventoryPlayer,
+    public GuiNanoEnmesher(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
                            TileEntityBaseEntityNanoEnmesher enmesher) {
-        super(new ContainerNanoEnmesher(par1InventoryPlayer,
+        super(new ContainerNanoEnmesher(player, par1InventoryPlayer,
                 enmesher));
         this.inventory = enmesher;
     }

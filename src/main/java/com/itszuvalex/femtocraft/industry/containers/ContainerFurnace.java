@@ -21,44 +21,41 @@
 
 package com.itszuvalex.femtocraft.industry.containers;
 
-import com.itszuvalex.femtocraft.common.gui.OutputSlot;
 import com.itszuvalex.femtocraft.core.container.ContainerInv;
-import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityNanoHorologe;
+import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 
-public class ContainerNanoHorologe extends ContainerInv<TileEntityBaseEntityNanoHorologe> {
+/**
+ * Created by Christopher Harris (Itszuvalex) on 7/27/14.
+ */
+
+public class ContainerFurnace<T extends TileEntityBaseEntityMicroFurnace> extends ContainerInv<T> {
     private int lastCookTime = 0;
-    private int lastCookMax = 0;
     private int lastPower = 0;
 
-    private static final int cookTimeID = 0;
-    private static final int cookTimeMaxID = 1;
-    private static final int powerID = 2;
-
-    public ContainerNanoHorologe(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
-                                 TileEntityBaseEntityNanoHorologe par2TileEntityFurnace) {
-        super(player, par2TileEntityFurnace, 0, 4);
-        this.addSlotToContainer(new Slot(inventory, 0, 33, 35));
-        this.addSlotToContainer(new Slot(inventory, 1, 66, 21));
-        this.addSlotToContainer(new Slot(inventory, 2, 87, 21));
-        this.addSlotToContainer(new Slot(inventory, 3, 108, 21));
-        this.addSlotToContainer(new OutputSlot(inventory, 4, 143, 35));
+    public ContainerFurnace(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
+                            T par2TileEntityFurnace) {
+        super(player, par2TileEntityFurnace, 0, 1);
+        this.addSlotToContainer(new Slot(par2TileEntityFurnace, 0, 56, 35));
+        this.addSlotToContainer(new SlotFurnace(par1InventoryPlayer.player,
+                par2TileEntityFurnace, 1, 116, 35));
         addPlayerInventorySlots(par1InventoryPlayer);
     }
 
     @Override
     public void addCraftingToCrafters(ICrafting par1ICrafting) {
         super.addCraftingToCrafters(par1ICrafting);
-        par1ICrafting.sendProgressBarUpdate(this, cookTimeID,
-                this.inventory.getProgress());
-        par1ICrafting.sendProgressBarUpdate(this, cookTimeMaxID, this.inventory.getProgressMax());
-        par1ICrafting.sendProgressBarUpdate(this, powerID,
+        par1ICrafting.sendProgressBarUpdate(this, 0,
+                this.inventory.furnaceCookTime);
+        par1ICrafting.sendProgressBarUpdate(this, 1,
                 this.inventory.getCurrentPower());
     }
 
@@ -72,41 +69,33 @@ public class ContainerNanoHorologe extends ContainerInv<TileEntityBaseEntityNano
         for (Object crafter : this.crafters) {
             ICrafting icrafting = (ICrafting) crafter;
 
-            if (this.lastCookTime != this.inventory.getProgress()) {
-                icrafting.sendProgressBarUpdate(this, cookTimeID,
-                        this.inventory.getProgress());
-            }
-            if (this.lastCookMax != this.inventory.getProgressMax()) {
-                icrafting.sendProgressBarUpdate(this, cookTimeMaxID, this.inventory.getProgressMax());
+            if (this.lastCookTime != this.inventory.furnaceCookTime) {
+                icrafting.sendProgressBarUpdate(this, 0,
+                        this.inventory.furnaceCookTime);
             }
             if (this.lastPower != this.inventory.getCurrentPower()) {
-                icrafting.sendProgressBarUpdate(this, powerID,
+                icrafting.sendProgressBarUpdate(this, 1,
                         this.inventory.getCurrentPower());
             }
         }
 
-        this.lastCookTime = this.inventory.getProgress();
+        this.lastCookTime = this.inventory.furnaceCookTime;
         this.lastPower = this.inventory.getCurrentPower();
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int par1, int par2) {
-        switch (par1) {
-            case cookTimeID:
-                this.inventory.setProgress(par2);
-                break;
-            case cookTimeMaxID:
-                this.inventory.setProgressMax(par2);
-                break;
-            case powerID:
-                this.inventory.setCurrentStorage(par2);
-                break;
+        if (par1 == 0) {
+            this.inventory.furnaceCookTime = par2;
+        }
+        if (par1 == 1) {
+            this.inventory.currentPower = par2;
         }
     }
 
     @Override
     protected boolean eligibleForInput(ItemStack item) {
-        return true;
+        return FurnaceRecipes.smelting().getSmeltingResult(item) != null;
     }
 }

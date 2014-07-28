@@ -28,6 +28,7 @@ import com.itszuvalex.femtocraft.render.RenderUtils;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
@@ -42,9 +43,9 @@ public class GuiNanoDismantler extends GuiContainer {
             Femtocraft.ID.toLowerCase(), "textures/guis/NanoDismantler.png");
     private TileEntityNanoDismantler dismantlerInventory;
 
-    public GuiNanoDismantler(InventoryPlayer par1InventoryPlayer,
+    public GuiNanoDismantler(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
                              TileEntityNanoDismantler tileEntity) {
-        super(new ContainerNanoDismantler(par1InventoryPlayer, tileEntity));
+        super(new ContainerNanoDismantler(player, par1InventoryPlayer, tileEntity));
         this.dismantlerInventory = tileEntity;
     }
 

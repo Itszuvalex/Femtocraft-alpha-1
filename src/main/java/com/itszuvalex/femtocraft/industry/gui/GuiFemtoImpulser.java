@@ -27,6 +27,7 @@ import com.itszuvalex.femtocraft.industry.tiles.TileEntityFemtoImpulser;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -37,9 +38,9 @@ public class GuiFemtoImpulser extends GuiContainer {
             Femtocraft.ID.toLowerCase(), "textures/guis/FemtoImpulser.png");
     private TileEntityFemtoImpulser furnaceInventory;
 
-    public GuiFemtoImpulser(InventoryPlayer par1InventoryPlayer,
+    public GuiFemtoImpulser(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
                             TileEntityFemtoImpulser par2TileEntityFurnace) {
-        super(new ContainerFemtoImpulser(par1InventoryPlayer,
+        super(new ContainerFemtoImpulser(player, par1InventoryPlayer,
                 par2TileEntityFurnace));
         this.furnaceInventory = par2TileEntityFurnace;
     }

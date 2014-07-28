@@ -30,6 +30,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
@@ -45,9 +46,9 @@ public class GuiMicroDeconstructor extends GuiContainer {
             Femtocraft.ID.toLowerCase(), "textures/guis/Disassembler.png");
     private TileEntityBaseEntityMicroDeconstructor deconstructorInventory;
 
-    public GuiMicroDeconstructor(InventoryPlayer par1InventoryPlayer,
+    public GuiMicroDeconstructor(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
                                  TileEntityBaseEntityMicroDeconstructor tileEntity) {
-        super(new ContainerMicroDeconstructor(par1InventoryPlayer, tileEntity));
+        super(new ContainerMicroDeconstructor(player, par1InventoryPlayer, tileEntity));
         this.deconstructorInventory = tileEntity;
     }
 

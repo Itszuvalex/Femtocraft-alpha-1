@@ -27,6 +27,7 @@ import com.itszuvalex.femtocraft.industry.tiles.TileEntityFemtoEntangler;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -37,9 +38,9 @@ public class GuiFemtoEntangler extends GuiContainer {
             Femtocraft.ID.toLowerCase(), "textures/guis/FemtoEntangler.png");
     private TileEntityFemtoEntangler inventory;
 
-    public GuiFemtoEntangler(InventoryPlayer par1InventoryPlayer,
+    public GuiFemtoEntangler(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
                              TileEntityFemtoEntangler entangler) {
-        super(new ContainerFemtoEntangler(par1InventoryPlayer,
+        super(new ContainerFemtoEntangler(player, par1InventoryPlayer,
                 entangler));
         this.inventory = entangler;
     }

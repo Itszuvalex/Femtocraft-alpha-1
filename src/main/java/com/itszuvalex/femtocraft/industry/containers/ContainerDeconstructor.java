@@ -21,9 +21,10 @@
 
 package com.itszuvalex.femtocraft.industry.containers;
 
+import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.common.gui.OutputSlot;
 import com.itszuvalex.femtocraft.core.container.ContainerInv;
-import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityNanoHorologe;
+import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,34 +33,36 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerNanoHorologe extends ContainerInv<TileEntityBaseEntityNanoHorologe> {
+/**
+ * Created by Christopher Harris (Itszuvalex) on 7/27/14.
+ */
+public class ContainerDeconstructor<T extends TileEntityBaseEntityMicroDeconstructor> extends ContainerInv<T> {
     private int lastCookTime = 0;
-    private int lastCookMax = 0;
     private int lastPower = 0;
+    private int lastMass = 0;
 
-    private static final int cookTimeID = 0;
-    private static final int cookTimeMaxID = 1;
-    private static final int powerID = 2;
-
-    public ContainerNanoHorologe(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
-                                 TileEntityBaseEntityNanoHorologe par2TileEntityFurnace) {
-        super(player, par2TileEntityFurnace, 0, 4);
-        this.addSlotToContainer(new Slot(inventory, 0, 33, 35));
-        this.addSlotToContainer(new Slot(inventory, 1, 66, 21));
-        this.addSlotToContainer(new Slot(inventory, 2, 87, 21));
-        this.addSlotToContainer(new Slot(inventory, 3, 108, 21));
-        this.addSlotToContainer(new OutputSlot(inventory, 4, 143, 35));
+    public ContainerDeconstructor(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
+                                  T inventory) {
+        super(player, inventory, 0, 9);
+        this.addSlotToContainer(new Slot(inventory, 0, 38, 36));
+        for (int y = 0; y < 3; ++y) {
+            for (int x = 0; x < 3; ++x) {
+                this.addSlotToContainer(new OutputSlot(inventory, x + y * 3
+                        + 1, 88 + x * 18, 18 + y * 18));
+            }
+        }
         addPlayerInventorySlots(par1InventoryPlayer);
     }
 
     @Override
     public void addCraftingToCrafters(ICrafting par1ICrafting) {
         super.addCraftingToCrafters(par1ICrafting);
-        par1ICrafting.sendProgressBarUpdate(this, cookTimeID,
-                this.inventory.getProgress());
-        par1ICrafting.sendProgressBarUpdate(this, cookTimeMaxID, this.inventory.getProgressMax());
-        par1ICrafting.sendProgressBarUpdate(this, powerID,
+        par1ICrafting.sendProgressBarUpdate(this, 0,
+                this.inventory.cookTime);
+        par1ICrafting.sendProgressBarUpdate(this, 1,
                 this.inventory.getCurrentPower());
+        par1ICrafting.sendProgressBarUpdate(this, 2,
+                this.inventory.getMassAmount());
     }
 
     /**
@@ -72,41 +75,58 @@ public class ContainerNanoHorologe extends ContainerInv<TileEntityBaseEntityNano
         for (Object crafter : this.crafters) {
             ICrafting icrafting = (ICrafting) crafter;
 
-            if (this.lastCookTime != this.inventory.getProgress()) {
-                icrafting.sendProgressBarUpdate(this, cookTimeID,
-                        this.inventory.getProgress());
-            }
-            if (this.lastCookMax != this.inventory.getProgressMax()) {
-                icrafting.sendProgressBarUpdate(this, cookTimeMaxID, this.inventory.getProgressMax());
+            if (this.lastCookTime != this.inventory.cookTime) {
+                icrafting.sendProgressBarUpdate(this, 0,
+                        this.inventory.cookTime);
             }
             if (this.lastPower != this.inventory.getCurrentPower()) {
-                icrafting.sendProgressBarUpdate(this, powerID,
+                icrafting.sendProgressBarUpdate(this, 1,
                         this.inventory.getCurrentPower());
+            }
+            if (this.lastMass != this.inventory.getMassAmount()) {
+                icrafting.sendProgressBarUpdate(this, 2,
+                        this.inventory.getMassAmount());
             }
         }
 
-        this.lastCookTime = this.inventory.getProgress();
+        this.lastCookTime = this.inventory.cookTime;
         this.lastPower = this.inventory.getCurrentPower();
+        this.lastMass = this.inventory.getMassAmount();
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int par1, int par2) {
         switch (par1) {
-            case cookTimeID:
-                this.inventory.setProgress(par2);
+            case 0:
+                this.inventory.cookTime = par2;
                 break;
-            case cookTimeMaxID:
-                this.inventory.setProgressMax(par2);
+            case 1:
+                this.inventory.currentPower = par2;
                 break;
-            case powerID:
-                this.inventory.setCurrentStorage(par2);
+            case 2:
+                if (par2 > 0) {
+                    this.inventory.setFluidAmount(par2);
+                }
+                else {
+                    this.inventory.clearFluid();
+                }
                 break;
+            default:
         }
+        // if (par1 == 0)
+        // {
+        // this.inventory.cookTime = par2;
+        // }
+        // if(par1 == 1)
+        // {
+        // this.inventory.currentPower = par2;
+        // }
     }
 
     @Override
     protected boolean eligibleForInput(ItemStack item) {
-        return true;
+        return Femtocraft.recipeManager.assemblyRecipes.getRecipe(item) != null;
     }
 }
+

@@ -28,6 +28,7 @@ import com.itszuvalex.femtocraft.render.RenderUtils;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
@@ -42,9 +43,9 @@ public class GuiFemtoRepurposer extends GuiContainer {
             Femtocraft.ID.toLowerCase(), "textures/guis/FemtoRepurposer.png");
     private TileEntityFemtoRepurposer repurposerInventory;
 
-    public GuiFemtoRepurposer(InventoryPlayer par1InventoryPlayer,
+    public GuiFemtoRepurposer(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
                               TileEntityFemtoRepurposer tileEntity) {
-        super(new ContainerFemtoRepurposer(par1InventoryPlayer, tileEntity));
+        super(new ContainerFemtoRepurposer(player, par1InventoryPlayer, tileEntity));
         this.repurposerInventory = tileEntity;
     }
 

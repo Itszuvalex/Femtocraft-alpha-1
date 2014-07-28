@@ -100,7 +100,7 @@ public abstract class ContainerInv<T extends TileEntityBase> extends Container {
 
             if (par2 < INV_START) {
 // try to place in player inventory / action bar
-                if (!this.mergeItemStack(itemstack1, INV_START, HOTBAR_END + 1, true)) {
+                if (!this.mergeItemStack(itemstack1, INV_START, HOTBAR_END + 1, false)) {
                     return null;
                 }
 
@@ -110,7 +110,7 @@ public abstract class ContainerInv<T extends TileEntityBase> extends Container {
             else {
 // if item is a sharingan eye
                 if (eligibleForInput(itemstack1)) {
-                    if (!this.mergeItemStack(itemstack1, INPUT_SLOT, INPUT_SLOT, true)) {
+                    if (!this.mergeItemStack(itemstack1, INPUT_SLOT, INPUT_SLOT, false)) {
                         return null;
                     }
                 }
@@ -123,7 +123,7 @@ public abstract class ContainerInv<T extends TileEntityBase> extends Container {
                 }
 // item in action bar - place in player inventory
                 else if (par2 >= HOTBAR_START && par2 <= HOTBAR_END) {
-                    if (!this.mergeItemStack(itemstack1, INV_START, INV_END + 1, true)) {
+                    if (!this.mergeItemStack(itemstack1, INV_START, INV_END + 1, false)) {
                         return null;
                     }
                 }

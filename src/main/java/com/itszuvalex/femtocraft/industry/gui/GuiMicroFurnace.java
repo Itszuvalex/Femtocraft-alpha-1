@@ -29,6 +29,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -40,9 +41,9 @@ public class GuiMicroFurnace extends GuiContainer {
             Femtocraft.ID.toLowerCase(), "textures/guis/MicroFurnace.png");
     private TileEntityBaseEntityMicroFurnace furnaceInventory;
 
-    public GuiMicroFurnace(InventoryPlayer par1InventoryPlayer,
+    public GuiMicroFurnace(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
                            TileEntityBaseEntityMicroFurnace par2TileEntityFurnace) {
-        super(new ContainerMicroFurnace(par1InventoryPlayer,
+        super(new ContainerMicroFurnace(player, par1InventoryPlayer,
                 par2TileEntityFurnace));
         this.furnaceInventory = par2TileEntityFurnace;
     }

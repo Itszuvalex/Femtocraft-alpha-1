@@ -6788,3 +6788,24 @@ Caused by: java.lang.ArrayIndexOutOfBoundsException: 4
 2014-07-27 20:06:04 [SERVER] [INFO] Saving chunks for level 'Copy of Copy of New World - Gen'/Overworld
 2014-07-27 20:06:04 [SERVER] [INFO] Saving chunks for level 'Copy of Copy of New World - Gen'/Nether
 2014-07-27 20:06:04 [SERVER] [INFO] Saving chunks for level 'Copy of Copy of New World - Gen'/The End
+2014-07-27 21:02:30 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-07-27 21:02:30 [SERVER] [INFO] Generating keypair
+2014-07-27 21:02:30 [SERVER] [INFO] Preparing start region for level 0
+2014-07-27 21:02:31 [SERVER] [INFO] Preparing spawn area: 80%
+2014-07-27 21:02:31 [SERVER] [INFO] Player1234[/127.0.0.1:0] logged in with entity id 331 at (-266.2933225227162, 65.0, 139.96255691549075)
+2014-07-27 21:02:31 [SERVER] [INFO] Player1234 joined the game
+2014-07-27 21:02:32 [SERVER] [INFO] Saving and pausing game...
+2014-07-27 21:02:32 [SERVER] [INFO] Saving chunks for level 'Copy of Copy of New World - Gen'/Overworld
+2014-07-27 21:02:33 [SERVER] [INFO] Saving chunks for level 'Copy of Copy of New World - Gen'/Nether
+2014-07-27 21:02:33 [SERVER] [INFO] Saving chunks for level 'Copy of Copy of New World - Gen'/The End
+2014-07-27 21:04:18 [SERVER] [INFO] Saving and pausing game...
+2014-07-27 21:04:18 [SERVER] [INFO] Saving chunks for level 'Copy of Copy of New World - Gen'/Overworld
+2014-07-27 21:04:18 [SERVER] [INFO] Saving chunks for level 'Copy of Copy of New World - Gen'/Nether
+2014-07-27 21:04:18 [SERVER] [INFO] Saving chunks for level 'Copy of Copy of New World - Gen'/The End
+2014-07-27 21:04:18 [SERVER] [INFO] Stopping server
+2014-07-27 21:04:18 [SERVER] [INFO] Saving players
+2014-07-27 21:04:18 [SERVER] [INFO] Player1234 left the game
+2014-07-27 21:04:18 [SERVER] [INFO] Saving worlds
+2014-07-27 21:04:18 [SERVER] [INFO] Saving chunks for level 'Copy of Copy of New World - Gen'/Overworld
+2014-07-27 21:04:18 [SERVER] [INFO] Saving chunks for level 'Copy of Copy of New World - Gen'/Nether
+2014-07-27 21:04:18 [SERVER] [INFO] Saving chunks for level 'Copy of Copy of New World - Gen'/The End

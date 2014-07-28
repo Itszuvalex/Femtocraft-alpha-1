@@ -22,19 +22,17 @@
 package com.itszuvalex.femtocraft.industry.containers;
 
 import com.itszuvalex.femtocraft.common.gui.OutputSlot;
+import com.itszuvalex.femtocraft.core.container.ContainerInv;
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityNanoEnmesher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 
-public class ContainerNanoEnmesher extends Container {
-    private TileEntityBaseEntityNanoEnmesher enmesher;
+public class ContainerNanoEnmesher extends ContainerInv<TileEntityBaseEntityNanoEnmesher> {
     private int lastCookTime = 0;
     private int lastCookMax = 0;
     private int lastPower = 0;
@@ -43,39 +41,26 @@ public class ContainerNanoEnmesher extends Container {
     private static final int cookTimeMaxID = 1;
     private static final int powerID = 2;
 
-    public ContainerNanoEnmesher(InventoryPlayer par1InventoryPlayer,
+    public ContainerNanoEnmesher(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
                                  TileEntityBaseEntityNanoEnmesher par2TileEntityFurnace) {
-        this.enmesher = par2TileEntityFurnace;
-        this.addSlotToContainer(new Slot(enmesher, 0, 89, 35));
-        this.addSlotToContainer(new Slot(enmesher, 1, 89, 8));
-        this.addSlotToContainer(new Slot(enmesher, 2, 62, 35));
-        this.addSlotToContainer(new Slot(enmesher, 3, 116, 35));
-        this.addSlotToContainer(new Slot(enmesher, 4, 89, 62));
-        this.addSlotToContainer(new OutputSlot(enmesher, 5, 147, 35));
-        int i;
-
-        // Bind player inventory
-        for (i = 0; i < 3; ++i) {
-            for (int j = 0; j < 9; ++j) {
-                this.addSlotToContainer(new Slot(par1InventoryPlayer, j + i * 9
-                        + 9, 8 + j * 18, 84 + i * 18));
-            }
-        }
-        // Bind player actionbar
-        for (i = 0; i < 9; ++i) {
-            this.addSlotToContainer(new Slot(par1InventoryPlayer, i,
-                    8 + i * 18, 142));
-        }
+        super(player, par2TileEntityFurnace, 0, 5);
+        this.addSlotToContainer(new Slot(inventory, 0, 89, 35));
+        this.addSlotToContainer(new Slot(inventory, 1, 89, 8));
+        this.addSlotToContainer(new Slot(inventory, 2, 62, 35));
+        this.addSlotToContainer(new Slot(inventory, 3, 116, 35));
+        this.addSlotToContainer(new Slot(inventory, 4, 89, 62));
+        this.addSlotToContainer(new OutputSlot(inventory, 5, 147, 35));
+        addPlayerInventorySlots(par1InventoryPlayer);
     }
 
     @Override
     public void addCraftingToCrafters(ICrafting par1ICrafting) {
         super.addCraftingToCrafters(par1ICrafting);
         par1ICrafting.sendProgressBarUpdate(this, cookTimeID,
-                this.enmesher.getProgress());
-        par1ICrafting.sendProgressBarUpdate(this, cookTimeMaxID, this.enmesher.getProgressMax());
+                this.inventory.getProgress());
+        par1ICrafting.sendProgressBarUpdate(this, cookTimeMaxID, this.inventory.getProgressMax());
         par1ICrafting.sendProgressBarUpdate(this, powerID,
-                this.enmesher.getCurrentPower());
+                this.inventory.getCurrentPower());
     }
 
     /**
@@ -88,78 +73,21 @@ public class ContainerNanoEnmesher extends Container {
         for (Object crafter : this.crafters) {
             ICrafting icrafting = (ICrafting) crafter;
 
-            if (this.lastCookTime != this.enmesher.getProgress()) {
+            if (this.lastCookTime != this.inventory.getProgress()) {
                 icrafting.sendProgressBarUpdate(this, cookTimeID,
-                        this.enmesher.getProgress());
+                        this.inventory.getProgress());
             }
-            if (this.lastCookMax != this.enmesher.getProgressMax()) {
-                icrafting.sendProgressBarUpdate(this, cookTimeMaxID, this.enmesher.getProgressMax());
+            if (this.lastCookMax != this.inventory.getProgressMax()) {
+                icrafting.sendProgressBarUpdate(this, cookTimeMaxID, this.inventory.getProgressMax());
             }
-            if (this.lastPower != this.enmesher.getCurrentPower()) {
+            if (this.lastPower != this.inventory.getCurrentPower()) {
                 icrafting.sendProgressBarUpdate(this, powerID,
-                        this.enmesher.getCurrentPower());
+                        this.inventory.getCurrentPower());
             }
         }
 
-        this.lastCookTime = this.enmesher.getProgress();
-        this.lastPower = this.enmesher.getCurrentPower();
-    }
-
-    /**
-     * Called when a player shift-clicks on a slot. You must override this or
-     * you will crash when someone does that.
-     */
-    @Override
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
-        ItemStack itemstack = null;
-        Slot slot = (Slot) this.inventorySlots.get(par2);
-
-        if (slot != null && slot.getHasStack()) {
-            ItemStack itemstack1 = slot.getStack();
-            itemstack = itemstack1.copy();
-
-            if (par2 == 1) {
-                if (!this.mergeItemStack(itemstack1, 2, 38, true)) {
-                    return null;
-                }
-
-                slot.onSlotChange(itemstack1, itemstack);
-            }
-            else if (par2 != 0) {
-                if (FurnaceRecipes.smelting().getSmeltingResult(itemstack1) != null) {
-                    if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
-                        return null;
-                    }
-                }
-                else if (par2 >= 2 && par2 < 29) {
-                    if (!this.mergeItemStack(itemstack1, 29, 38, false)) {
-                        return null;
-                    }
-                }
-                else if (par2 >= 29 && par2 < 38
-                        && !this.mergeItemStack(itemstack1, 2, 29, false)) {
-                    return null;
-                }
-            }
-            else if (!this.mergeItemStack(itemstack1, 2, 38, false)) {
-                return null;
-            }
-
-            if (itemstack1.stackSize == 0) {
-                slot.putStack(null);
-            }
-            else {
-                slot.onSlotChanged();
-            }
-
-            if (itemstack1.stackSize == itemstack.stackSize) {
-                return null;
-            }
-
-            slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
-        }
-
-        return itemstack;
+        this.lastCookTime = this.inventory.getProgress();
+        this.lastPower = this.inventory.getCurrentPower();
     }
 
     @Override
@@ -167,19 +95,19 @@ public class ContainerNanoEnmesher extends Container {
     public void updateProgressBar(int par1, int par2) {
         switch (par1) {
             case cookTimeID:
-                this.enmesher.setProgress(par2);
+                this.inventory.setProgress(par2);
                 break;
             case cookTimeMaxID:
-                this.enmesher.setProgressMax(par2);
+                this.inventory.setProgressMax(par2);
                 break;
             case powerID:
-                this.enmesher.setCurrentStorage(par2);
+                this.inventory.setCurrentStorage(par2);
                 break;
         }
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
-        return this.enmesher.canPlayerUse(par1EntityPlayer);
+    protected boolean eligibleForInput(ItemStack item) {
+        return true;
     }
 }
