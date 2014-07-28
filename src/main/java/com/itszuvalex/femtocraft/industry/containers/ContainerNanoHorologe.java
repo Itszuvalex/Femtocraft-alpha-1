@@ -118,7 +118,7 @@ public class ContainerNanoHorologe extends Container {
             itemstack = itemstack1.copy();
 
             if (par2 == 1) {
-                if (!this.mergeItemStack(itemstack1, 2, 38, true)) {
+                if (!this.mergeItemStack(itemstack1, 2, 40, true)) {
                     return null;
                 }
 
@@ -130,17 +130,17 @@ public class ContainerNanoHorologe extends Container {
                         return null;
                     }
                 }
-                else if (par2 >= 2 && par2 < 29) {
-                    if (!this.mergeItemStack(itemstack1, 29, 38, false)) {
+                else if (par2 >= 2 && par2 < 31) {
+                    if (!this.mergeItemStack(itemstack1, 31, 40, false)) {
                         return null;
                     }
                 }
-                else if (par2 >= 29 && par2 < 38
-                        && !this.mergeItemStack(itemstack1, 2, 29, false)) {
+                else if (par2 >= 31 && par2 < 40
+                        && !this.mergeItemStack(itemstack1, 2, 31, false)) {
                     return null;
                 }
             }
-            else if (!this.mergeItemStack(itemstack1, 2, 38, false)) {
+            else if (!this.mergeItemStack(itemstack1, 2, 40, false)) {
                 return null;
             }
 

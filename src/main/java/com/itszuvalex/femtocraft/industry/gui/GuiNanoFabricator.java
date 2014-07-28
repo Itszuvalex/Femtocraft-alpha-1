@@ -28,6 +28,7 @@ import com.itszuvalex.femtocraft.render.RenderUtils;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
@@ -42,9 +43,9 @@ public class GuiNanoFabricator extends GuiContainer {
             Femtocraft.ID.toLowerCase(), "textures/guis/NanoFabricator.png");
     private TileEntityNanoFabricator fabricatorInventory;
 
-    public GuiNanoFabricator(InventoryPlayer par1InventoryPlayer,
+    public GuiNanoFabricator(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
                              TileEntityNanoFabricator tileEntity) {
-        super(new ContainerNanoFabricator(par1InventoryPlayer, tileEntity));
+        super(new ContainerNanoFabricator(player, par1InventoryPlayer, tileEntity));
         this.ySize = 204;
         this.fabricatorInventory = tileEntity;
     }

@@ -28,6 +28,7 @@ import com.itszuvalex.femtocraft.render.RenderUtils;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
@@ -42,9 +43,9 @@ public class GuiFemtoCoagulator extends GuiContainer {
             Femtocraft.ID.toLowerCase(), "textures/guis/FemtoCoagulator.png");
     private TileEntityFemtoCoagulator coagulatorInventory;
 
-    public GuiFemtoCoagulator(InventoryPlayer par1InventoryPlayer,
+    public GuiFemtoCoagulator(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
                               TileEntityFemtoCoagulator tileEntity) {
-        super(new ContainerFemtoCoagulator(par1InventoryPlayer, tileEntity));
+        super(new ContainerFemtoCoagulator(player, par1InventoryPlayer, tileEntity));
         this.ySize = 204;
         this.coagulatorInventory = tileEntity;
     }

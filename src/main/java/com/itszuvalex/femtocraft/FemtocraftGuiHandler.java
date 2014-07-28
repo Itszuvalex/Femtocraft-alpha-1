@@ -80,7 +80,7 @@ public class FemtocraftGuiHandler implements IGuiHandler {
                 return new ContainerResearchConsole(player.inventory,
                         (TileEntityResearchConsole) tileEntity);
             case EncoderGuiID:
-                return new ContainerEncoder(player.inventory,
+                return new ContainerEncoder(player, player.inventory,
                         (TileEntityEncoder) tileEntity);
             case MicroFurnaceGuiID:
                 return new ContainerMicroFurnace(player.inventory,
@@ -89,7 +89,7 @@ public class FemtocraftGuiHandler implements IGuiHandler {
                 return new ContainerMicroDeconstructor(player.inventory,
                         (TileEntityBaseEntityMicroDeconstructor) tileEntity);
             case MicroReconstructorGuiID:
-                return new ContainerMicroReconstructor(player.inventory,
+                return new ContainerMicroReconstructor(player, player.inventory,
                         (TileEntityBaseEntityMicroReconstructor) tileEntity);
             case NanoInnervatorGuiID:
                 return new ContainerNanoInnervator(player.inventory,
@@ -97,7 +97,7 @@ public class FemtocraftGuiHandler implements IGuiHandler {
             case NanoDismantlerGuiID:
                 return new ContainerNanoDismantler(player.inventory, (TileEntityNanoDismantler) tileEntity);
             case NanoFabricatorGuiID:
-                return new ContainerNanoFabricator(player.inventory,
+                return new ContainerNanoFabricator(player, player.inventory,
                         (TileEntityNanoFabricator)
                                 tileEntity
                 );
@@ -110,12 +110,12 @@ public class FemtocraftGuiHandler implements IGuiHandler {
             case FemtoRepurposerGuiID:
                 return new ContainerFemtoRepurposer(player.inventory, (TileEntityFemtoRepurposer) tileEntity);
             case FemtoCoagulatorGuiID:
-                return new ContainerFemtoCoagulator(player.inventory,
+                return new ContainerFemtoCoagulator(player, player.inventory,
                         (TileEntityFemtoCoagulator)
                                 tileEntity
                 );
             case FemtoChronoshifterGuiID:
-                return new ContainerFemtoChronoshifter(player.inventory, (TileEntityFemtoChronoshifter) tileEntity);
+                return new ContainerFemtoChronoshifter(player, player.inventory, (TileEntityFemtoChronoshifter) tileEntity);
             case FemtoEntanglerGuiID:
                 return new ContainerFemtoEntangler(player.inventory, (TileEntityFemtoEntangler) tileEntity);
             case MicroCubeGuiID:
@@ -148,7 +148,7 @@ public class FemtocraftGuiHandler implements IGuiHandler {
                 return new GuiResearchConsole(player.inventory,
                         (TileEntityResearchConsole) tileEntity);
             case EncoderGuiID:
-                return new GuiEncoder(player.inventory,
+                return new GuiEncoder(player, player.inventory,
                         (TileEntityEncoder) tileEntity);
             case MicroFurnaceGuiID:
                 return new GuiMicroFurnace(player.inventory,
@@ -157,7 +157,7 @@ public class FemtocraftGuiHandler implements IGuiHandler {
                 return new GuiMicroDeconstructor(player.inventory,
                         (TileEntityBaseEntityMicroDeconstructor) tileEntity);
             case MicroReconstructorGuiID:
-                return new GuiMicroReconstructor(player.inventory,
+                return new GuiMicroReconstructor(player, player.inventory,
                         (TileEntityBaseEntityMicroReconstructor) tileEntity);
             case NanoInnervatorGuiID:
                 return new GuiNanoInnervator(player.inventory,
@@ -165,7 +165,7 @@ public class FemtocraftGuiHandler implements IGuiHandler {
             case NanoDismantlerGuiID:
                 return new GuiNanoDismantler(player.inventory, (TileEntityNanoDismantler) tileEntity);
             case NanoFabricatorGuiID:
-                return new GuiNanoFabricator(player.inventory,
+                return new GuiNanoFabricator(player, player.inventory,
                         (TileEntityNanoFabricator) tileEntity);
             case NanoHorologeGuiID:
                 return new GuiNanoHorologe(player.inventory, (TileEntityBaseEntityNanoHorologe) tileEntity);
@@ -176,9 +176,9 @@ public class FemtocraftGuiHandler implements IGuiHandler {
             case FemtoRepurposerGuiID:
                 return new GuiFemtoRepurposer(player.inventory, (TileEntityFemtoRepurposer) tileEntity);
             case FemtoCoagulatorGuiID:
-                return new GuiFemtoCoagulator(player.inventory, (TileEntityFemtoCoagulator) tileEntity);
+                return new GuiFemtoCoagulator(player, player.inventory, (TileEntityFemtoCoagulator) tileEntity);
             case FemtoChronoshifterGuiID:
-                return new GuiFemtoChronoshifter(player.inventory, (TileEntityFemtoChronoshifter) tileEntity);
+                return new GuiFemtoChronoshifter(player, player.inventory, (TileEntityFemtoChronoshifter) tileEntity);
             case FemtoEntanglerGuiID:
                 return new GuiFemtoEntangler(player.inventory, (TileEntityFemtoEntangler) tileEntity);
             case MicroCubeGuiID:

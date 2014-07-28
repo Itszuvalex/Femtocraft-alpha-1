@@ -27,6 +27,7 @@ import com.itszuvalex.femtocraft.industry.tiles.TileEntityFemtoChronoshifter;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -37,9 +38,9 @@ public class GuiFemtoChronoshifter extends GuiContainer {
             Femtocraft.ID.toLowerCase(), "textures/guis/FemtoChronoshifter.png");
     private TileEntityFemtoChronoshifter inventory;
 
-    public GuiFemtoChronoshifter(InventoryPlayer par1InventoryPlayer,
+    public GuiFemtoChronoshifter(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
                                  TileEntityFemtoChronoshifter chronoshifter) {
-        super(new ContainerFemtoChronoshifter(par1InventoryPlayer,
+        super(new ContainerFemtoChronoshifter(player, par1InventoryPlayer,
                 chronoshifter));
         this.inventory = chronoshifter;
     }

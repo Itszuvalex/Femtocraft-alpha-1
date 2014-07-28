@@ -28,6 +28,7 @@ import com.itszuvalex.femtocraft.render.RenderUtils;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
@@ -43,9 +44,9 @@ public class GuiEncoder extends GuiContainer {
             Femtocraft.ID.toLowerCase(), "textures/guis/Encoder.png");
     private TileEntityEncoder encoder;
 
-    public GuiEncoder(InventoryPlayer par1InventoryPlayer,
+    public GuiEncoder(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
                       TileEntityEncoder par2Encoder) {
-        super(new ContainerEncoder(par1InventoryPlayer, par2Encoder));
+        super(new ContainerEncoder(player, par1InventoryPlayer, par2Encoder));
         this.encoder = par2Encoder;
     }
 
