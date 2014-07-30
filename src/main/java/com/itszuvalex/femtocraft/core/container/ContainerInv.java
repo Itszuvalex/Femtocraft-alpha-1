@@ -99,29 +99,23 @@ public abstract class ContainerInv<T extends TileEntityBase> extends Container {
             itemstack = itemstack1.copy();
 
             if (par2 < INV_START) {
-// try to place in player inventory / action bar
                 if (!this.mergeItemStack(itemstack1, INV_START, HOTBAR_END + 1, false)) {
                     return null;
                 }
 
                 slot.onSlotChange(itemstack1, itemstack);
             }
-// Item is in inventory / hotbar, try to place either in eye or armor slots
             else {
-// if item is a sharingan eye
                 if (eligibleForInput(itemstack1)) {
                     if (!this.mergeItemStack(itemstack1, INPUT_SLOT, INPUT_SLOT, false)) {
                         return null;
                     }
                 }
-// item in player's inventory, but not in action bar
                 else if (par2 >= INV_START && par2 <= INV_END) {
-// place in action bar
                     if (!this.mergeItemStack(itemstack1, HOTBAR_START, HOTBAR_END + 1, true)) {
                         return null;
                     }
                 }
-// item in action bar - place in player inventory
                 else if (par2 >= HOTBAR_START && par2 <= HOTBAR_END) {
                     if (!this.mergeItemStack(itemstack1, INV_START, INV_END + 1, false)) {
                         return null;

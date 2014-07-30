@@ -592,8 +592,8 @@ public class Femtocraft {
         LanguageRegistry.addName(blockMicroChargingCapacitor,
                 "Electrostatic Charging Capacitor");
 
-        blockMicroEngine = new BlockMicroEngine(FemtocraftConfigs
-                .BlockMicroEngineID);
+        blockMicroEngine = new BlockElectrostaticGenerator(FemtocraftConfigs
+                .BlockElectrostaticGeneratorID);
         GameRegistry.registerBlock(blockMicroEngine,
                 "BlockMicroEngine");
         LanguageRegistry.addName(blockMicroEngine, "Micro Engine");

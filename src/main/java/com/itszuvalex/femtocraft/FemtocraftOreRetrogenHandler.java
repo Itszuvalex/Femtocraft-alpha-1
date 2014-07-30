@@ -105,10 +105,11 @@ public class FemtocraftOreRetrogenHandler {
                         file);
                 CompressedStreamTools.writeCompressed(regionCompound,
                         fileoutputstream);
+                fileoutputstream.flush();
                 fileoutputstream.close();
             } catch (Exception exception) {
                 Femtocraft.logger.log(Level.SEVERE,
-                        "Failed to save data for player " + filename
+                        "Failed to save data for " + filename
                                 + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
                 );
                 exception.printStackTrace();
@@ -178,8 +179,8 @@ public class FemtocraftOreRetrogenHandler {
     }
 
 
-    @ForgeSubscribe
-    public void onChunkSave(ChunkDataEvent.Save event) {
-
-    }
+//    @ForgeSubscribe
+//    public void onChunkSave(ChunkDataEvent.Save event) {
+//
+//    }
 }
