@@ -27,6 +27,7 @@ import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.power.plasma.*;
 import com.itszuvalex.femtocraft.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -45,10 +46,23 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
     public static long reactionFailureThreshold = 2500000;
     public static int plasmaFlowTicksToGenerateMin = 20;
     public static int plasmaFlowTicksToGenerateMax = 200;
-    @FemtocraftDataUtils.Saveable(desc = true)
+
+    @Override
+    public void saveToDescriptionCompound(NBTTagCompound compound) {
+        selfSustaining = isSelfSustaining();
+        igniting = isIgniting();
+        super.saveToDescriptionCompound(compound);
+    }
+
+    @FemtocraftDataUtils.Saveable()
     private FusionReactorCore core;
     @FemtocraftDataUtils.Saveable(desc = true)
     private MultiBlockInfo info;
+
+    @FemtocraftDataUtils.Saveable(desc = true)
+    private boolean selfSustaining = false;
+    @FemtocraftDataUtils.Saveable(desc = true)
+    private boolean igniting = false;
 
     public TileEntityFemtoStellaratorCore() {
         super();
@@ -75,12 +89,12 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
 
     @Override
     public boolean isSelfSustaining() {
-        return core.isSelfSustaining();
+        return worldObj.isRemote ? selfSustaining : core.isSelfSustaining();
     }
 
     @Override
     public boolean isIgniting() {
-        return core.isIgniting();
+        return worldObj.isRemote ? igniting : core.isIgniting();
     }
 
     @Override
