@@ -136,7 +136,7 @@ public class GuiMicroDeconstructor extends GuiContainer {
         if (fluid != null) {
             Icon image = fluid.getFluid().getStillIcon();
             // Icon image = BlockFluid.getFluidIcon("water_still");
-            // image = Femtocraft.mass_block.stillIcon;
+            // image = Femtocraft.blockFluidMass.stillIcon;
 
             i1 = (this.deconstructorInventory.getMassAmount() * 60)
                     / this.deconstructorInventory.getMassCapacity();

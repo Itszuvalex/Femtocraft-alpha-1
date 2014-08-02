@@ -134,7 +134,7 @@ public class GuiNanoDismantler extends GuiContainer {
         if (fluid != null) {
             Icon image = fluid.getFluid().getStillIcon();
             // Icon image = BlockFluid.getFluidIcon("water_still");
-            // image = Femtocraft.mass_block.stillIcon;
+            // image = Femtocraft.blockFluidMass.stillIcon;
 
             i1 = (this.dismantlerInventory.getMassAmount() * 60)
                     / this.dismantlerInventory.getMassCapacity();

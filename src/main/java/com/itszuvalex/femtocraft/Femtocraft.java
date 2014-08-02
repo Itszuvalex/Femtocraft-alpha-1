@@ -25,12 +25,12 @@ import com.itszuvalex.femtocraft.blocks.BlockFemtoStone;
 import com.itszuvalex.femtocraft.blocks.BlockMicroStone;
 import com.itszuvalex.femtocraft.blocks.BlockNanoStone;
 import com.itszuvalex.femtocraft.blocks.BlockUnidentifiedAlloy;
+import com.itszuvalex.femtocraft.core.fluids.BlockFluidMass;
+import com.itszuvalex.femtocraft.core.fluids.FluidMass;
 import com.itszuvalex.femtocraft.core.items.ItemBase;
 import com.itszuvalex.femtocraft.core.items.ItemFemtoInterfaceDevice;
 import com.itszuvalex.femtocraft.core.items.ItemMicroInterfaceDevice;
 import com.itszuvalex.femtocraft.core.items.ItemNanoInterfaceDevice;
-import com.itszuvalex.femtocraft.core.liquids.BlockFluidMass;
-import com.itszuvalex.femtocraft.core.liquids.FluidMass;
 import com.itszuvalex.femtocraft.core.ore.*;
 import com.itszuvalex.femtocraft.industry.blocks.*;
 import com.itszuvalex.femtocraft.industry.items.ItemDigitalSchematic;
@@ -40,6 +40,8 @@ import com.itszuvalex.femtocraft.managers.ManagerRecipe;
 import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
 import com.itszuvalex.femtocraft.player.PropertiesNanite;
 import com.itszuvalex.femtocraft.power.blocks.*;
+import com.itszuvalex.femtocraft.power.fluids.FluidCooledMoltenSalt;
+import com.itszuvalex.femtocraft.power.fluids.FluidMoltenSalt;
 import com.itszuvalex.femtocraft.power.items.ItemBlockMicroCube;
 import com.itszuvalex.femtocraft.power.plasma.BlockPlasma;
 import com.itszuvalex.femtocraft.proxy.ProxyClient;
@@ -173,7 +175,13 @@ public class Femtocraft {
 
     // liquids
     public static Fluid fluidMass;
-    public static BlockFluidMass mass_block;
+    public static BlockFluidMass blockFluidMass;
+
+    public static Fluid fluidMoltenSalt;
+    public static BlockFluidMoltenSalt blockFluidMoltenSalt;
+
+    public static Fluid fluidCooledMoltenSalt;
+    public static BlockFluidCooledMoltenSalt blockFluidCooledMoltenSalt;
 
     // plasma
     public static Block blockPlasma;
@@ -712,9 +720,23 @@ public class Femtocraft {
         fluidMass = new FluidMass();
         FluidRegistry.registerFluid(fluidMass);
 
-        mass_block = new BlockFluidMass(FemtocraftConfigs.BlockMassID);
-        GameRegistry.registerBlock(mass_block, "Mass");
-        LanguageRegistry.addName(mass_block, "Mass");
+        blockFluidMass = new BlockFluidMass(FemtocraftConfigs.BlockMassID);
+        GameRegistry.registerBlock(blockFluidMass, "Mass");
+        LanguageRegistry.addName(blockFluidMass, "Mass");
+
+        fluidMoltenSalt = new FluidMoltenSalt();
+        FluidRegistry.registerFluid(fluidMoltenSalt);
+
+        blockFluidMoltenSalt = new BlockFluidMoltenSalt(FemtocraftConfigs.BlockFluidMoltenSaltID);
+        GameRegistry.registerBlock(blockFluidMoltenSalt, "BlockFluidMoltenSalt");
+        LanguageRegistry.addName(blockFluidMoltenSalt, "Molten Salt");
+
+        fluidCooledMoltenSalt = new FluidCooledMoltenSalt();
+        FluidRegistry.registerFluid(fluidCooledMoltenSalt);
+
+        blockFluidCooledMoltenSalt = new BlockFluidCooledMoltenSalt(FemtocraftConfigs.BlockFluidCooledMoltenSaltID);
+        GameRegistry.registerBlock(blockFluidCooledMoltenSalt, "BlockFluidCooledMoltenSalt");
+        LanguageRegistry.addName(blockFluidCooledMoltenSalt, "Cooled Molten Salt");
 
         //plasma
         blockPlasma = new BlockPlasma(FemtocraftConfigs.BlockPlasmaID);

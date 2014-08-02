@@ -494,10 +494,6 @@ public class GuiResearch extends GuiScreen {
 
         ResearchTechnology tooltipTech = null;
         RenderItem renderitem = new RenderItem();
-        RenderHelper.enableGUIStandardItemLighting();
-        GL11.glDisable(GL11.GL_LIGHTING);
-        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-        GL11.glEnable(GL11.GL_COLOR_MATERIAL);
         int l4;
         int i5;
 
@@ -547,17 +543,17 @@ public class GuiResearch extends GuiScreen {
                 // renderitem.renderWithColor = false;
                 // }
 
-                GL11.glEnable(GL11.GL_LIGHTING);
-                GL11.glEnable(GL11.GL_CULL_FACE);
+                RenderHelper.enableGUIStandardItemLighting();
+                GL11.glDisable(GL11.GL_LIGHTING);
                 GL11.glEnable(GL12.GL_RESCALE_NORMAL);
                 GL11.glEnable(GL11.GL_COLOR_MATERIAL);
-                GL11.glPushMatrix();
+                GL11.glEnable(GL11.GL_LIGHTING);
+                GL11.glEnable(GL11.GL_CULL_FACE);
                 renderitem.renderItemAndEffectIntoGUI(
                         Minecraft.getMinecraft().fontRenderer, Minecraft
                                 .getMinecraft().getTextureManager(),
                         tech.displayItem, i5 + 3, l4 + 3
                 );
-                GL11.glPopMatrix();
                 GL11.glDisable(GL11.GL_LIGHTING);
                 GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 

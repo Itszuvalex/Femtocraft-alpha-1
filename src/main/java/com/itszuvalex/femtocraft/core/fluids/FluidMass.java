@@ -19,41 +19,33 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.core.liquids;
+package com.itszuvalex.femtocraft.core.fluids;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.util.Icon;
-import net.minecraftforge.fluids.BlockFluidClassic;
+import net.minecraftforge.fluids.Fluid;
 
-public class BlockFluidMass extends BlockFluidClassic {
-    @SideOnly(Side.CLIENT)
-    public Icon stillIcon;
-    @SideOnly(Side.CLIENT)
-    public Icon flowingIcon;
+public class FluidMass extends Fluid {
 
-    public BlockFluidMass(int id) {
-        super(id, Femtocraft.fluidMass, Material.water);
-        setUnlocalizedName("fluidMass");
-        setCreativeTab(Femtocraft.femtocraftTab);
-        Femtocraft.fluidMass.setBlockID(id);
+    public FluidMass() {
+        super("Mass");
+        setUnlocalizedName("FluidMass");
+        setLuminosity(1);
+        setDensity(5000);
+        setTemperature(600);
+        setViscosity(3000);
+        setGaseous(false);
+        setRarity(EnumRarity.rare);
     }
 
     @Override
-    public Icon getIcon(int side, int meta) {
-        return (side == 0 || side == 1) ? stillIcon : flowingIcon;
+    public Icon getStillIcon() {
+        return Femtocraft.blockFluidMass.stillIcon;
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
-        stillIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                + ":" + "mass_still");
-        flowingIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                + ":" + "mass_flow");
+    public Icon getFlowingIcon() {
+        return Femtocraft.blockFluidMass.flowingIcon;
     }
-
 }

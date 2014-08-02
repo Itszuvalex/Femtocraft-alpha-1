@@ -214,6 +214,12 @@ public class FemtocraftConfigs {
     int BlockMassID;
     public static
     @CfgId(block = true)
+    int BlockFluidMoltenSaltID;
+    public static
+    @CfgId(block = true)
+    int BlockFluidCooledMoltenSaltID;
+    public static
+    @CfgId(block = true)
     int BlockPlasmaID;
     public static
     @CfgId(block = true)

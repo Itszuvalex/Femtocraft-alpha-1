@@ -19,21 +19,23 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.core.liquids;
+package com.itszuvalex.femtocraft.power.fluids;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.util.Icon;
 import net.minecraftforge.fluids.Fluid;
 
-public class FluidMass extends Fluid {
-
-    public FluidMass() {
-        super("Mass");
-        setUnlocalizedName("FluidMass");
+/**
+ * Created by Christopher Harris (Itszuvalex) on 8/2/14.
+ */
+public class FluidCooledMoltenSalt extends Fluid {
+    public FluidCooledMoltenSalt() {
+        super("FluidCooledMoltenSalt");
+        setUnlocalizedName("FluidCooledMoltenSalt");
         setLuminosity(1);
         setDensity(5000);
-        setTemperature(600);
+        setTemperature(1200);
         setViscosity(3000);
         setGaseous(false);
         setRarity(EnumRarity.rare);
@@ -41,11 +43,11 @@ public class FluidMass extends Fluid {
 
     @Override
     public Icon getStillIcon() {
-        return Femtocraft.mass_block.stillIcon;
+        return Femtocraft.blockFluidCooledMoltenSalt.stillIcon;
     }
 
     @Override
     public Icon getFlowingIcon() {
-        return Femtocraft.mass_block.flowingIcon;
+        return Femtocraft.blockFluidCooledMoltenSalt.flowingIcon;
     }
 }
