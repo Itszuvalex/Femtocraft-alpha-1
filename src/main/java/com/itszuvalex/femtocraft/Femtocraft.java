@@ -175,13 +175,13 @@ public class Femtocraft {
 
     // liquids
     public static Fluid fluidMass;
-    public static Block blockFluidMass;
+    public static BlockFluidMass blockFluidMass;
 
     public static Fluid fluidMoltenSalt;
-    public static Block blockFluidMoltenSalt;
+    public static BlockFluidMoltenSalt blockFluidMoltenSalt;
 
     public static Fluid fluidCooledMoltenSalt;
-    public static Block blockFluidCooledMoltenSalt;
+    public static BlockFluidCooledMoltenSalt blockFluidCooledMoltenSalt;
 
     // plasma
     public static Block blockPlasma;
