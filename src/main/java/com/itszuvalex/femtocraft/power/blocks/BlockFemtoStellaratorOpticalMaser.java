@@ -41,7 +41,7 @@ public class BlockFemtoStellaratorOpticalMaser extends TileContainer {
         TileEntity te = par1IBlockAccess.getBlockTileEntity(par2, par3, par4);
         if (te instanceof TileEntityFemtoStellaratorOpticalMaser) {
             TileEntityFemtoStellaratorOpticalMaser maser = (TileEntityFemtoStellaratorOpticalMaser) te;
-            if (maser.isValidMultiBlock() && maser.getCore() != null && (maser.getCore().isIgniting() || maser.getCore().isSelfSustaining())) {
+            if (maser.isIgniting() || maser.isSustaining()) {
                 return activeIcon;
             }
         }

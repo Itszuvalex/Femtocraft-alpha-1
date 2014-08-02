@@ -46,9 +46,18 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
     public static int powerTransferPerTick = 50000;
     public static int temperatureRating = 6000;
     public static int stability = 6000;
-    @FemtocraftDataUtils.Saveable
+
+    public boolean isIgniting() {
+        return igniting;
+    }
+
+    public boolean isSustaining() {
+        return sustaining;
+    }
+
+    @FemtocraftDataUtils.Saveable(desc = true)
     private boolean igniting;
-    @FemtocraftDataUtils.Saveable
+    @FemtocraftDataUtils.Saveable(desc = true)
     private boolean sustaining;
     @FemtocraftDataUtils.Saveable
     private boolean warmed;
@@ -76,7 +85,8 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
             TileEntity te = coreLocation.getTileEntity();
             if (te instanceof IFusionReactorCore) {
                 core = (IFusionReactorCore) te;
-                core.addComponent(this);
+                addToCore();
+                setUpdate();
             }
         }
 
@@ -105,6 +115,16 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
         }
     }
 
+    private void addToCore() {
+        core.addComponent(this);
+        refreshFromCore();
+    }
+
+    private void refreshFromCore() {
+        igniting = core != null && core.isIgniting();
+        sustaining = core != null && core.isSelfSustaining();
+    }
+
     @Override
     public boolean isValidMultiBlock() {
         return info.isValidMultiBlock();
@@ -114,9 +134,10 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
     public boolean formMultiBlock(World world, int x, int y, int z) {
         if (info.formMultiBlock(world, x, y, z)) {
             setModified();
+            setUpdate();
             coreLocation = new WorldLocation(world, x, y, z);
             core = (IFusionReactorCore) coreLocation.getTileEntity();
-            core.addComponent(this);
+            addToCore();
             return true;
         }
         return false;
@@ -126,8 +147,10 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
     public boolean breakMultiBlock(World world, int x, int y, int z) {
         if (info.breakMultiBlock(world, x, y, z)) {
             setModified();
+            setUpdate();
             core = null;
             coreLocation = null;
+            refreshFromCore();
             return true;
         }
         return false;
@@ -140,22 +163,29 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
 
     @Override
     public void beginIgnitionProcess(IFusionReactorCore core) {
-        igniting = true;
-        sustaining = false;
+        refreshFromCore();
         warmed = false;
         setModified();
+        setUpdate();
     }
 
     @Override
     public void endIgnitionProcess(IFusionReactorCore core) {
-        igniting = false;
-        sustaining = core.isSelfSustaining();
+        refreshFromCore();
         setModified();
+        setUpdate();
     }
 
     @Override
     public IFusionReactorCore getCore() {
         return core;
+    }
+
+    @Override
+    public void onReactionStop(IFusionReactorCore core) {
+        refreshFromCore();
+        setModified();
+        setUpdate();
     }
 
     @Override

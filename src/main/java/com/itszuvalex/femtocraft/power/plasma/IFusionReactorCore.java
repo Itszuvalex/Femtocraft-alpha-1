@@ -43,6 +43,11 @@ import java.util.Collection;
 public interface IFusionReactorCore extends IFusionReactorComponent {
 
     /**
+     * Stops the currently running reaction.  Does nothing is no reaction going.
+     */
+    void stopReaction();
+
+    /**
      * @return True if the reactor is in self-sustaining state.
      */
     boolean isSelfSustaining();

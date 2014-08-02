@@ -74,7 +74,16 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
     @Override
     public void femtocraftServerUpdate() {
         super.femtocraftServerUpdate();
+        boolean igniting = isIgniting();
+        boolean sustaining = isSelfSustaining();
         update(worldObj, xCoord, yCoord, zCoord);
+        if (igniting != isIgniting()) {
+            setModified();
+            setUpdate();
+        }
+        if (sustaining && !isSelfSustaining()) {
+            onReactionStop(this);
+        }
     }
 
     @Override
@@ -85,6 +94,11 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
     @Override
     public int getGuiID() {
         return super.getGuiID();
+    }
+
+    @Override
+    public void stopReaction() {
+        core.stopReaction();
     }
 
     @Override
@@ -161,7 +175,7 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
     @Override
     public void beginIgnitionProcess(IFusionReactorCore core) {
         this.core.beginIgnitionProcess(core);
-        for (IFusionReactorComponent component : core.getComponents()) {
+        for (IFusionReactorComponent component : this.core.getComponents()) {
             component.beginIgnitionProcess(this);
         }
         setModified();
@@ -171,7 +185,7 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
     @Override
     public void endIgnitionProcess(IFusionReactorCore core) {
         this.core.endIgnitionProcess(core);
-        for (IFusionReactorComponent component : core.getComponents()) {
+        for (IFusionReactorComponent component : this.core.getComponents()) {
             component.endIgnitionProcess(this);
         }
         setModified();
@@ -184,6 +198,13 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
     }
 
     @Override
+    public void onReactionStop(IFusionReactorCore core) {
+        this.core.onReactionStop(this);
+        setModified();
+        setUpdate();
+    }
+
+    @Override
     public boolean isValidMultiBlock() {
         return info.isValidMultiBlock();
     }
@@ -192,6 +213,7 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
     public boolean formMultiBlock(World world, int x, int y, int z) {
         if (info.formMultiBlock(world, x, y, z)) {
             setModified();
+            setUpdate();
             beginIgnitionProcess(core);
             core.contributeCoreEnergy(45000000);
             return true;
@@ -203,6 +225,7 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
     public boolean breakMultiBlock(World world, int x, int y, int z) {
         if (info.breakMultiBlock(world, x, y, z)) {
             setModified();
+            setUpdate();
             if (getInput() != null) {
                 IPlasmaContainer input = getInput();
                 setInput(null, ForgeDirection.UNKNOWN);
@@ -213,6 +236,7 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
                 setOutput(null, ForgeDirection.UNKNOWN);
                 output.setInput(null, ForgeDirection.UNKNOWN);
             }
+            stopReaction();
             core.getComponents().clear();
             return true;
         }

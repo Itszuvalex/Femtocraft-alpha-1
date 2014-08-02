@@ -45,4 +45,11 @@ public interface IFusionReactorComponent extends IPlasmaContainer {
      */
     IFusionReactorCore getCore();
 
+    /**
+     * Called when a self-sustaining reaction is ended, for any reason.
+     *
+     * @param core Core this is a component of.
+     */
+    void onReactionStop(IFusionReactorCore core);
+
 }

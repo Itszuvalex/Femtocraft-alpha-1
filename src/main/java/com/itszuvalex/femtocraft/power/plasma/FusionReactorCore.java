@@ -66,6 +66,18 @@ public class FusionReactorCore implements IFusionReactorCore,
 
 
     @Override
+    public void stopReaction() {
+        if (isIgniting()) {
+            endIgnitionProcess(this);
+        }
+        else if (isSelfSustaining()) {
+            reaction.endSelfSustainingReaction();
+        }
+
+        onReactionStop(this);
+    }
+
+    @Override
     public boolean isSelfSustaining() {
         return reaction.isSelfSustaining();
     }
@@ -135,6 +147,13 @@ public class FusionReactorCore implements IFusionReactorCore,
     @Override
     public IFusionReactorCore getCore() {
         return this;
+    }
+
+    @Override
+    public void onReactionStop(IFusionReactorCore core) {
+        for (IFusionReactorComponent component : core.getComponents()) {
+            component.onReactionStop(this);
+        }
     }
 
     @Override

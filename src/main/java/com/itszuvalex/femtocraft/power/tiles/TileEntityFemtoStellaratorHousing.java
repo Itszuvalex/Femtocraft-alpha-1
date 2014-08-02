@@ -115,17 +115,25 @@ public class TileEntityFemtoStellaratorHousing extends TileEntityBase
 
     @Override
     public void beginIgnitionProcess(IFusionReactorCore core) {
-
+        setModified();
+        setUpdate();
     }
 
     @Override
     public void endIgnitionProcess(IFusionReactorCore core) {
-
+        setModified();
+        setUpdate();
     }
 
     @Override
     public IFusionReactorCore getCore() {
         return core;
+    }
+
+    @Override
+    public void onReactionStop(IFusionReactorCore core) {
+        setModified();
+        setUpdate();
     }
 
     @Override

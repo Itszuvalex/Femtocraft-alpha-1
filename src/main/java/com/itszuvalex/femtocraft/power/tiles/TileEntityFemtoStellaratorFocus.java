@@ -118,6 +118,11 @@ public class TileEntityFemtoStellaratorFocus extends TileEntityBase
     }
 
     @Override
+    public void onReactionStop(IFusionReactorCore core) {
+
+    }
+
+    @Override
     public IPlasmaContainer getInput() {
         return core != null ? core.getInput() : null;
     }
