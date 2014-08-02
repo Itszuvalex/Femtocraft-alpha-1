@@ -2355,3 +2355,38 @@ java.lang.NullPointerException
 2014-08-02 00:42:37 [INFO] [Minecraft-Server] Saving chunks for level 'New World'/Overworld
 2014-08-02 00:42:37 [INFO] [Minecraft-Server] Saving chunks for level 'New World'/Nether
 2014-08-02 00:42:37 [INFO] [Minecraft-Server] Saving chunks for level 'New World'/The End
+2014-08-02 00:52:51 [INFO] [Minecraft-Server] Saving and pausing game...
+2014-08-02 00:52:51 [INFO] [Minecraft-Server] Saving chunks for level 'New World'/Overworld
+2014-08-02 00:52:51 [INFO] [Minecraft-Server] Saving chunks for level 'New World'/Nether
+2014-08-02 00:52:51 [INFO] [Minecraft-Server] Saving chunks for level 'New World'/The End
+2014-08-02 00:52:51 [FINEST] [mcp] Sending event FMLServerStoppingEvent to mod mcp
+2014-08-02 00:52:51 [FINEST] [mcp] Sent event FMLServerStoppingEvent to mod mcp
+2014-08-02 00:52:51 [FINEST] [FML] Sending event FMLServerStoppingEvent to mod FML
+2014-08-02 00:52:51 [FINEST] [FML] Sent event FMLServerStoppingEvent to mod FML
+2014-08-02 00:52:51 [FINEST] [Forge] Sending event FMLServerStoppingEvent to mod Forge
+2014-08-02 00:52:51 [FINEST] [Forge] Sent event FMLServerStoppingEvent to mod Forge
+2014-08-02 00:52:51 [FINEST] [Femtocraft] Sending event FMLServerStoppingEvent to mod Femtocraft
+2014-08-02 00:52:51 [FINEST] [Femtocraft] Sent event FMLServerStoppingEvent to mod Femtocraft
+2014-08-02 00:52:51 [INFO] [Minecraft-Server] Stopping server
+2014-08-02 00:52:51 [INFO] [Minecraft-Server] Saving players
+2014-08-02 00:52:51 [INFO] [Minecraft-Server] Player1234 left the game
+2014-08-02 00:52:51 [INFO] [Minecraft-Server] Saving worlds
+2014-08-02 00:52:51 [INFO] [Minecraft-Server] Saving chunks for level 'New World'/Overworld
+2014-08-02 00:52:51 [INFO] [Minecraft-Server] Saving chunks for level 'New World'/Nether
+2014-08-02 00:52:51 [INFO] [Minecraft-Server] Saving chunks for level 'New World'/The End
+2014-08-02 00:52:52 [INFO] [ForgeModLoader] Unloading dimension 0
+2014-08-02 00:52:52 [INFO] [ForgeModLoader] Unloading dimension -1
+2014-08-02 00:52:52 [INFO] [ForgeModLoader] Unloading dimension 1
+2014-08-02 00:52:52 [FINEST] [mcp] Sending event FMLServerStoppedEvent to mod mcp
+2014-08-02 00:52:52 [FINEST] [mcp] Sent event FMLServerStoppedEvent to mod mcp
+2014-08-02 00:52:52 [FINEST] [FML] Sending event FMLServerStoppedEvent to mod FML
+2014-08-02 00:52:52 [FINEST] [FML] Sent event FMLServerStoppedEvent to mod FML
+2014-08-02 00:52:52 [FINEST] [Forge] Sending event FMLServerStoppedEvent to mod Forge
+2014-08-02 00:52:52 [FINEST] [Forge] Sent event FMLServerStoppedEvent to mod Forge
+2014-08-02 00:52:52 [FINEST] [Femtocraft] Sending event FMLServerStoppedEvent to mod Femtocraft
+2014-08-02 00:52:52 [FINEST] [Femtocraft] Sent event FMLServerStoppedEvent to mod Femtocraft
+2014-08-02 00:52:52 [INFO] [Minecraft-Client] Stopping!
+2014-08-02 00:52:52 [INFO] [STDOUT] 
+2014-08-02 00:52:52 [INFO] [STDOUT] SoundSystem shutting down...
+2014-08-02 00:52:53 [INFO] [STDOUT]     Author: Paul Lamb, www.paulscode.com
+2014-08-02 00:52:53 [INFO] [STDOUT] 

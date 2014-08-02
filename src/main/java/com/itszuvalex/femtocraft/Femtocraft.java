@@ -175,13 +175,13 @@ public class Femtocraft {
 
     // liquids
     public static Fluid fluidMass;
-    public static BlockFluidMass blockFluidMass;
+    public static Block blockFluidMass;
 
     public static Fluid fluidMoltenSalt;
-    public static BlockFluidMoltenSalt blockFluidMoltenSalt;
+    public static Block blockFluidMoltenSalt;
 
     public static Fluid fluidCooledMoltenSalt;
-    public static BlockFluidCooledMoltenSalt blockFluidCooledMoltenSalt;
+    public static Block blockFluidCooledMoltenSalt;
 
     // plasma
     public static Block blockPlasma;
@@ -356,8 +356,6 @@ public class Femtocraft {
         // Change the creative tab name
         LanguageRegistry.instance().addStringLocalization(
                 "itemGroup.Femtocraft", "en_US", "Femtocraft");
-
-        // item = new Item(Configs.itemId);
 
         // blocks
 
@@ -708,7 +706,7 @@ public class Femtocraft {
         blockPlasmaTurbine = new BlockPlasmaTurbine(FemtocraftConfigs
                 .BlockPlasmaTurbineID);
         GameRegistry.registerBlock(blockPlasmaTurbine, "BlockPlasmaTurbine");
-        LanguageRegistry.addName(blockOreThorium, "Plasma Turbine");
+        LanguageRegistry.addName(blockPlasmaTurbine, "Plasma Turbine");
 
         blockPlasmaCondenser = new BlockPlasmaCondenser(FemtocraftConfigs
                 .BlockPlasmaCondenserID);
