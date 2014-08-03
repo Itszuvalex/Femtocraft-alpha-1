@@ -195,6 +195,7 @@ public class Femtocraft {
     public static Item itemIngotFarenite;
     public static Item itemIngotMalenite;
     public static Item itemIngotTemperedTitanium;
+    public static Item itemIngotThFaSalt;
 
     //micro
     public static Item itemConductivePowder;
@@ -783,6 +784,10 @@ public class Femtocraft {
                 "Tempered Titanium Ingot");
         OreDictionary.registerOre("itemIngotTemperedTitanium", new ItemStack(
                 itemIngotTemperedTitanium));
+
+        itemIngotThFaSalt = new ItemBase(FemtocraftConfigs.ItemIngotThFaSaltID, "ItemIngotThFaSalt");
+        LanguageRegistry.addName(itemIngotThFaSalt, "ThFa Salt Ingot");
+        OreDictionary.registerOre("itemIngotThFaSalt", new ItemStack(itemIngotThFaSalt));
 
         //
 

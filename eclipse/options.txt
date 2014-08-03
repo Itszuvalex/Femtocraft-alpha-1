@@ -1,4 +1,4 @@
-music:1.0
+music:0.0
 sound:1.0
 invertYMouse:false
 mouseSensitivity:0.5

@@ -8182,3 +8182,30 @@ Caused by: java.lang.StackOverflowError
 2014-08-02 17:19:26 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
 2014-08-02 17:19:26 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
 2014-08-02 17:19:26 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-08-02 23:00:39 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-08-02 23:00:39 [SERVER] [INFO] Generating keypair
+2014-08-02 23:03:44 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2014-08-02 23:03:44 [SERVER] [INFO] Generating keypair
+2014-08-02 23:03:44 [SERVER] [INFO] Preparing start region for level 0
+2014-08-02 23:03:45 [SERVER] [INFO] Preparing spawn area: 24%
+2014-08-02 23:03:46 [SERVER] [INFO] Preparing spawn area: 41%
+2014-08-02 23:03:47 [SERVER] [INFO] Preparing spawn area: 61%
+2014-08-02 23:03:48 [SERVER] [INFO] Preparing spawn area: 79%
+2014-08-02 23:03:49 [SERVER] [INFO] Preparing spawn area: 98%
+2014-08-02 23:03:49 [SERVER] [INFO] Player1234[/127.0.0.1:0] logged in with entity id 243 at (251.5, 69.0, 262.5)
+2014-08-02 23:03:49 [SERVER] [INFO] Player1234 joined the game
+2014-08-02 23:08:42 [SERVER] [INFO] Saving and pausing game...
+2014-08-02 23:08:42 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-08-02 23:08:42 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-08-02 23:08:42 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-08-02 23:17:46 [SERVER] [INFO] Saving and pausing game...
+2014-08-02 23:17:46 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-08-02 23:17:46 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-08-02 23:17:46 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2014-08-02 23:17:46 [SERVER] [INFO] Stopping server
+2014-08-02 23:17:46 [SERVER] [INFO] Saving players
+2014-08-02 23:17:46 [SERVER] [INFO] Player1234 left the game
+2014-08-02 23:17:46 [SERVER] [INFO] Saving worlds
+2014-08-02 23:17:46 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2014-08-02 23:17:46 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2014-08-02 23:17:46 [SERVER] [INFO] Saving chunks for level 'New World'/The End

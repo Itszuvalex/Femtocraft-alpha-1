@@ -257,6 +257,9 @@ public class FemtocraftConfigs {
     int ItemIngotTemperedTitaniumID;
     public static
     @CfgId
+    int ItemIngotThFaSaltID;
+    public static
+    @CfgId
     int ItemConductivePowderID;
     public static
     @CfgId
@@ -1087,6 +1090,7 @@ public class FemtocraftConfigs {
 
     private static int baseItemID = 12000;
     private static int baseBlockID = 350;
+
 
     public static void load(Configuration config) {
         try {
