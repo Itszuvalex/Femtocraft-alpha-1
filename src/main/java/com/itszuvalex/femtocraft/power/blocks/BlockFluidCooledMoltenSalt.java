@@ -40,7 +40,7 @@ public class BlockFluidCooledMoltenSalt extends BlockFluidClassic {
 
     public BlockFluidCooledMoltenSalt(int id) {
         super(id, Femtocraft.fluidCooledMoltenSalt, Material.water);
-        setUnlocalizedName("FluidMoltenSalt");
+        setUnlocalizedName("FluidCooledMoltenSalt");
         setCreativeTab(Femtocraft.femtocraftTab);
         Femtocraft.fluidCooledMoltenSalt.setBlockID(id);
     }
