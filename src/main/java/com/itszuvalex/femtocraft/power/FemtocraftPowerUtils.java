@@ -22,9 +22,12 @@
 package com.itszuvalex.femtocraft.power;
 
 import com.itszuvalex.femtocraft.api.IPowerBlockContainer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+
+import java.util.HashMap;
 
 /**
  * Created by Chris on 5/13/2014.
@@ -34,15 +37,15 @@ public class FemtocraftPowerUtils {
     public static final float maxPowerPerTick = .05f;
 
     /**
-     * This algorithm distributes power from the given container, located in the given world, at the givne coordinates,
-     * in a manner consistent with intended behaviors.  It distributes power
+     * This algorithm distributes temp from the given container, located in the given world, at the givne coordinates,
+     * in a manner consistent with intended behaviors.  It distributes temp
      * to IPowerBlockContainers, where the difference
      * in the given container's currentPowerPercentageForOutput() and the adjacent container's
      * currentPowerPercentageForInput() is greater than the distributionBuffer.  It will attempt to distribute at most
-     * maxPowerPerTick*currentPower() power from the given container.
+     * maxPowerPerTick*currentPower() temp from the given container.
      *
-     * @param container   IPowerBlockContainer to pull power from
-     * @param connections Array of size 6, where true represents that this algorithm should attempt to distribute power
+     * @param container   IPowerBlockContainer to pull temp from
+     * @param connections Array of size 6, where true represents that this algorithm should attempt to distribute temp
      *                    in this ForgeDirection.ordinal()
      * @param world       World for the algorithm to search for IPowerBlockContainers in
      * @param x           X coordinate for the algorithm to center its distribution search upon
@@ -110,4 +113,46 @@ public class FemtocraftPowerUtils {
             }
         }
     }
+
+    private static HashMap<Integer, FissionReactorReagent> thoriumMap = new HashMap<>();
+    private static HashMap<Integer, FissionReactorReagent> saltMap = new HashMap<>();
+
+    public static class FissionReactorReagent {
+        public final ItemStack item;
+        public final int amount;
+        public final float temp;
+
+        public FissionReactorReagent(ItemStack item, int amount, float temp) {
+            this.item = item;
+            this.amount = amount;
+            this.temp = temp;
+        }
+    }
+
+    public static void addFissionReactorThoriumSource(ItemStack item, int amount, float temp) {
+        addFissionReactorThoriumSource(new FissionReactorReagent(item, amount, temp));
+    }
+
+    public static void addFissionReactorThoriumSource(FissionReactorReagent reagent) {
+        thoriumMap.put(reagent.item.itemID, reagent);
+    }
+
+    public static void addFissionReactorSaltSource(ItemStack item, int amount, float temp) {
+        addFissionReactorSaltSource(new FissionReactorReagent(item, amount, temp));
+    }
+
+    public static void addFissionReactorSaltSource(FissionReactorReagent reagent) {
+        saltMap.put(reagent.item.itemID, reagent);
+    }
+
+
+    public static FissionReactorReagent getThoriumSource(ItemStack item) {
+        return thoriumMap.get(item.itemID);
+    }
+
+    public static FissionReactorReagent getSaltSource(ItemStack item) {
+        return saltMap.get(item.itemID);
+    }
+
+
 }
