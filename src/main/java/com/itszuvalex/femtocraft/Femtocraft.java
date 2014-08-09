@@ -40,6 +40,7 @@ import com.itszuvalex.femtocraft.managers.ManagerRecipe;
 import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
 import com.itszuvalex.femtocraft.player.PropertiesNanite;
 import com.itszuvalex.femtocraft.power.blocks.*;
+import com.itszuvalex.femtocraft.power.fluids.FluidCooledContaminatedMoltenSalt;
 import com.itszuvalex.femtocraft.power.fluids.FluidCooledMoltenSalt;
 import com.itszuvalex.femtocraft.power.fluids.FluidMoltenSalt;
 import com.itszuvalex.femtocraft.power.items.ItemBlockMicroCube;
@@ -182,6 +183,9 @@ public class Femtocraft {
 
     public static Fluid fluidCooledMoltenSalt;
     public static BlockFluidCooledMoltenSalt blockFluidCooledMoltenSalt;
+
+    public static Fluid fluidCooledContaminatedMoltenSalt;
+    public static BlockFluidCooledContaminatedMoltenSalt blockFluidCooledContaminatedMoltenSalt;
 
     // plasma
     public static Block blockPlasma;
@@ -736,6 +740,13 @@ public class Femtocraft {
         blockFluidCooledMoltenSalt = new BlockFluidCooledMoltenSalt(FemtocraftConfigs.BlockFluidCooledMoltenSaltID);
         GameRegistry.registerBlock(blockFluidCooledMoltenSalt, "BlockFluidCooledMoltenSalt");
         LanguageRegistry.addName(blockFluidCooledMoltenSalt, "Cooled Molten Salt");
+
+        fluidCooledContaminatedMoltenSalt = new FluidCooledContaminatedMoltenSalt();
+        FluidRegistry.registerFluid(fluidCooledContaminatedMoltenSalt);
+
+        blockFluidCooledContaminatedMoltenSalt = new BlockFluidCooledContaminatedMoltenSalt(FemtocraftConfigs.BlockFluidCooledContaminatedMoltenSaltID);
+        GameRegistry.registerBlock(blockFluidCooledContaminatedMoltenSalt, "BlockFluidCooledContaminatedMoltenSalt");
+        LanguageRegistry.addName(blockFluidCooledContaminatedMoltenSalt, "Cooled Contaminated Molten Salt");
 
         //plasma
         blockPlasma = new BlockPlasma(FemtocraftConfigs.BlockPlasmaID);

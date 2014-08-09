@@ -53,7 +53,7 @@ public class BlockFluidMoltenSalt extends BlockFluidClassic {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        stillIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        blockIcon = stillIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
                 + ":" + "BlockMoltenSalt_still");
         flowingIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
                 + ":" + "BlockMoltenSalt_flow");

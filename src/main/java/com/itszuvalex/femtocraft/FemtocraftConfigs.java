@@ -220,6 +220,9 @@ public class FemtocraftConfigs {
     int BlockFluidCooledMoltenSaltID;
     public static
     @CfgId(block = true)
+    int BlockFluidCooledContaminatedMoltenSaltID;
+    public static
+    @CfgId(block = true)
     int BlockPlasmaID;
     public static
     @CfgId(block = true)

@@ -19,7 +19,7 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.core.fluids;
+package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import cpw.mods.fml.relauncher.Side;
@@ -29,17 +29,20 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
-public class BlockFluidMass extends BlockFluidClassic {
+/**
+ * Created by Christopher Harris (Itszuvalex) on 8/2/14.
+ */
+public class BlockFluidCooledContaminatedMoltenSalt extends BlockFluidClassic {
     @SideOnly(Side.CLIENT)
     public Icon stillIcon;
     @SideOnly(Side.CLIENT)
     public Icon flowingIcon;
 
-    public BlockFluidMass(int id) {
-        super(id, Femtocraft.fluidMass, Material.water);
-        setUnlocalizedName("fluidMass");
+    public BlockFluidCooledContaminatedMoltenSalt(int id) {
+        super(id, Femtocraft.fluidCooledContaminatedMoltenSalt, Material.water);
+        setUnlocalizedName("FluidCooledContamiantedMoltenSalt");
         setCreativeTab(Femtocraft.femtocraftTab);
-        Femtocraft.fluidMass.setBlockID(id);
+        Femtocraft.fluidCooledContaminatedMoltenSalt.setBlockID(id);
     }
 
     @Override
@@ -51,9 +54,8 @@ public class BlockFluidMass extends BlockFluidClassic {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         blockIcon = stillIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                + ":" + "mass_still");
+                + ":" + "BlockCooledContaminatedMoltenSalt_still");
         flowingIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                + ":" + "mass_flow");
+                + ":" + "BlockCooledContaminatedMoltenSalt_flow");
     }
-
 }

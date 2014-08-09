@@ -98,6 +98,8 @@ public class ProxyCommon {
                 "TileEntityFemtoCubeChassis");
         GameRegistry.registerTileEntity(TileEntityFemtoCubePort.class,
                 "TileEntityFemtoCubePort");
+        GameRegistry.registerTileEntity(TileEntityNanoFissionReactorCore.class, "TileEntityNanoFissionReactorCore");
+        GameRegistry.registerTileEntity(TileEntityNanoFissionReactorHousing.class, "TileEntityNanoFissionReactorHousing");
         GameRegistry.registerTileEntity(TileEntityFemtoStellaratorCore.class,
                 "TileEntityFemtoStellaratorCore");
         GameRegistry.registerTileEntity
