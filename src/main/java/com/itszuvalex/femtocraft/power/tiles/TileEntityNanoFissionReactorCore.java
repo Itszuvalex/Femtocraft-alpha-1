@@ -28,14 +28,19 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
+import net.minecraftforge.fluids.*;
 
 public class TileEntityNanoFissionReactorCore extends TileEntityBase implements IInventory, IFluidHandler {
     @FemtocraftDataUtils.Saveable
     private BaseInventory inventory;
+    @FemtocraftDataUtils.Saveable
+    private FluidTank cooledSaltTank;
+    @FemtocraftDataUtils.Saveable
+    private FluidTank moltenSaltTank;
+    @FemtocraftDataUtils.Saveable
+    private int thoriumStoreMax;
+    @FemtocraftDataUtils.Saveable
+    private int thoriumStoreCurrent;
 
     public TileEntityNanoFissionReactorCore() {
         inventory = new BaseInventory(3);

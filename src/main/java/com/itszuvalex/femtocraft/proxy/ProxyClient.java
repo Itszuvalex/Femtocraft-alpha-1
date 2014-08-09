@@ -23,12 +23,9 @@ package com.itszuvalex.femtocraft.proxy;
 
 import com.itszuvalex.femtocraft.consumables.processing.blocks.RenderCuttingBoard;
 import com.itszuvalex.femtocraft.power.render.*;
-import com.itszuvalex.femtocraft.power.tiles.TileEntityNullEqualizer;
-import com.itszuvalex.femtocraft.power.tiles.TileEntityOrbitalEqualizer;
 import com.itszuvalex.femtocraft.render.RenderSimpleMachine;
 import com.itszuvalex.femtocraft.transport.items.render.RenderVacuumTube;
 import com.itszuvalex.femtocraft.transport.liquids.render.RenderSuctionPipe;
-import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ProxyClient extends ProxyCommon {
@@ -70,11 +67,11 @@ public class ProxyClient extends ProxyCommon {
     @Override
     public void registerBlockRenderers() {
         super.registerBlockRenderers();
-
-        ClientRegistry.bindTileEntitySpecialRenderer(
-                TileEntityOrbitalEqualizer.class, new RenderOrbitalEqualizer());
-        ClientRegistry.bindTileEntitySpecialRenderer(
-                TileEntityNullEqualizer.class, new RenderNullEqualizer());
+//
+//        ClientRegistry.bindTileEntitySpecialRenderer(
+//                TileEntityOrbitalEqualizer.class, new RenderOrbitalEqualizer());
+//        ClientRegistry.bindTileEntitySpecialRenderer(
+//                TileEntityNullEqualizer.class, new RenderNullEqualizer());
 
         RenderSimpleMachine.renderID = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(RenderSimpleMachine.renderID, new RenderSimpleMachine());
