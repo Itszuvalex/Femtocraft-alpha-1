@@ -21,7 +21,9 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
-public class TileEntityNanoFissionReactorHousing {
+import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
+
+public class TileEntityNanoFissionReactorHousing extends TileEntityBase {
 
     public TileEntityNanoFissionReactorHousing() {
         // TODO Auto-generated constructor stub
