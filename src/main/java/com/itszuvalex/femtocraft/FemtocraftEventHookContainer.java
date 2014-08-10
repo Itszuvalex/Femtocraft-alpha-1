@@ -38,6 +38,7 @@ public class FemtocraftEventHookContainer {
             return;
         }
         Femtocraft.researchManager.load(event.world);
+        Femtocraft.assistantManager.load(event.world);
     }
 
     @ForgeSubscribe
@@ -46,6 +47,7 @@ public class FemtocraftEventHookContainer {
             return;
         }
         Femtocraft.researchManager.save(event.world);
+        Femtocraft.assistantManager.save(event.world);
     }
 
     @ForgeSubscribe

@@ -37,7 +37,7 @@ import com.itszuvalex.femtocraft.industry.blocks.*;
 import com.itszuvalex.femtocraft.industry.items.ItemDigitalSchematic;
 import com.itszuvalex.femtocraft.industry.items.ItemPaperSchematic;
 import com.itszuvalex.femtocraft.industry.items.ItemQuantumSchematic;
-import com.itszuvalex.femtocraft.managers.ManagerAssistant;
+import com.itszuvalex.femtocraft.managers.assistant.ManagerAssistant;
 import com.itszuvalex.femtocraft.managers.ManagerRecipe;
 import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
 import com.itszuvalex.femtocraft.player.PropertiesNanite;

@@ -165,11 +165,11 @@ public class TileEntityBase extends TileEntity {
         boolean isowner = owner == null || owner.isEmpty()
                 || (owner.equals(par1EntityPlayer.username));
         boolean isAssist = (owner != null && !owner.isEmpty())
-                && Femtocraft.assistantManager.isPlayerAssistant(owner,par1EntityPlayer.username);
+                && Femtocraft.assistantManager.isPlayerAssistant(owner, par1EntityPlayer.username);
         return inrange
                 && (isowner || isAssist || (MinecraftServer.getServer()
-                                               .getConfigurationManager()
-                                               .isPlayerOpped(par1EntityPlayer.username) || par1EntityPlayer.capabilities.isCreativeMode));
+                                                           .getConfigurationManager()
+                                                           .isPlayerOpped(par1EntityPlayer.username) || par1EntityPlayer.capabilities.isCreativeMode));
     }
 
     public Object getMod() {
@@ -184,11 +184,15 @@ public class TileEntityBase extends TileEntity {
     }
 
     protected void setRenderUpdate() {
-        worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+        if (worldObj != null) {
+            worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+        }
     }
 
     protected void setUpdate() {
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+        if (worldObj != null) {
+            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+        }
     }
 
     protected void setModified() {
