@@ -3,6 +3,7 @@ package com.itszuvalex.femtocraft.command;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatMessageComponent;
+import net.minecraft.util.EnumChatFormatting;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,12 +60,13 @@ public class CommandHandler implements ICommand {
         }
         else {
             // Empty argument list. Display sub-commands
-            StringBuilder output = new StringBuilder("Sub-command list:\n");
+            StringBuilder output = new StringBuilder(EnumChatFormatting.YELLOW + "Sub-command list:\n");
             for (Map.Entry<String, ISubCommand> entry : this.subcmds.entrySet()) {
                 String key = entry.getKey();
                 System.out.print(key + "\n");
                 output.append(key + "\n");
             }
+            output.append(EnumChatFormatting.RESET);
             sender.sendChatToPlayer(ChatMessageComponent.createFromText(output.toString()));
         }
     }

@@ -51,8 +51,7 @@ public class ManagerAssistant {
             pdata = addPlayerAssistant(owner);
         }
         if (pdata != null) {
-            pdata.put(user, new AssistantPermissions(user));
-            return true;
+            return pdata.put(user, new AssistantPermissions(user)) != null;
         }
         return false;
     }
@@ -60,8 +59,7 @@ public class ManagerAssistant {
     public boolean removeAssistantFrom(String owner, String user) {
         Map<String, AssistantPermissions> pdata = data.get(owner);
         if (pdata != null) {
-            pdata.remove(user);
-            return true;
+            return pdata.remove(user) != null;
         }
         return false;
     }
