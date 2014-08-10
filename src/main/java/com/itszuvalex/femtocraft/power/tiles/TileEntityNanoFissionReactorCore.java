@@ -22,6 +22,8 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.core.multiblock.IMultiBlockComponent;
+import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.power.FemtocraftPowerUtils;
 import com.itszuvalex.femtocraft.utils.BaseInventory;
@@ -29,14 +31,16 @@ import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
-public class TileEntityNanoFissionReactorCore extends TileEntityBase implements IInventory, IFluidHandler {
-    public static final double cooledSaltHeatMultiplier = .01;
-    public static final double moltenSaltHeatMultiplier = .02;
-    public static final double unstableTemperatureThreshold = .66;
-    public static final double criticalTemperatureThreshold = .83;
+public class TileEntityNanoFissionReactorCore extends TileEntityBase implements IInventory, IFluidHandler, IMultiBlockComponent {
+    public static double cooledSaltHeatMultiplier = .01;
+    public static double moltenSaltHeatMultiplier = .02;
+    public static double unstableTemperatureThreshold = .66;
+    public static double criticalTemperatureThreshold = .83;
+    public static double solidSaltToThoriumRatio = .2;
     public static double enviroHeatLossMultiplier = .99;
     public static int cooledSaltTankMaxAmount = 100000;
     public static int moltenSaltTankMaxAmount = 100000;
@@ -47,6 +51,8 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     public static final int saltSlot = 1;
     @FemtocraftDataUtils.Saveable
     private BaseInventory inventory;
+    @FemtocraftDataUtils.Saveable
+    private MultiBlockInfo info;
     @FemtocraftDataUtils.Saveable
     private FluidTank cooledSaltTank;
     @FemtocraftDataUtils.Saveable
@@ -95,6 +101,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
 
     public TileEntityNanoFissionReactorCore() {
         inventory = new BaseInventory(3);
+        info = new MultiBlockInfo();
         cooledSaltTank = new FluidTank(cooledSaltTankMaxAmount);
         moltenSaltTank = new FluidTank(moltenSaltTankMaxAmount);
         thoriumStoreMax = thoriumStoreMaxAmount;
@@ -115,8 +122,8 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
         super.femtocraftServerUpdate();
         loseHeat();
         gainHeat();
-        meltSalt();
         meltThorium();
+        meltSalt();
         heatSalt();
         meltWorld();
     }
@@ -140,15 +147,17 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     private void meltThorium() {
         if (getThoriumConcentration() < thoriumConcentrationTarget) {
             ItemStack item = getStackInSlot(thoriumSlot);
-            if (item != null) {
-                FemtocraftPowerUtils.FissionReactorReagent reagent = FemtocraftPowerUtils.getThoriumSource(item);
-                if (reagent != null) {
-                    if (reagent.item.stackSize <= item.stackSize && getTemperatureCurrent() >= reagent.temp && (thoriumStoreMax - thoriumStoreCurrent) >= reagent.amount) {
-                        decrStackSize(thoriumSlot, reagent.item.stackSize);
-                        temperatureCurrent -= reagent.temp;
-                        thoriumStoreCurrent += reagent.amount;
-                    }
-                }
+            if (item == null) {
+                return;
+            }
+            FemtocraftPowerUtils.FissionReactorReagent reagent = FemtocraftPowerUtils.getThoriumSource(item);
+            if (reagent == null) {
+                return;
+            }
+            if (reagent.item.stackSize <= item.stackSize && getTemperatureCurrent() >= reagent.temp && (thoriumStoreMax - thoriumStoreCurrent) >= reagent.amount) {
+                decrStackSize(thoriumSlot, reagent.item.stackSize);
+                temperatureCurrent -= reagent.temp;
+                thoriumStoreCurrent += reagent.amount;
             }
         }
     }
@@ -159,15 +168,18 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
 
     private void meltSalt() {
         ItemStack item = getStackInSlot(saltSlot);
-        if (item != null) {
-            FemtocraftPowerUtils.FissionReactorReagent reagent = FemtocraftPowerUtils.getSaltSource(item);
-            if (reagent != null) {
-                if (reagent.item.stackSize <= item.stackSize && getTemperatureCurrent() >= reagent.temp && (cooledSaltTank.getCapacity() - getCooledSaltAmount()) >= reagent.amount) {
-                    decrStackSize(saltSlot, reagent.item.stackSize);
-                    temperatureCurrent -= reagent.temp;
-                    addCooledSalt(reagent.amount);
-                }
-            }
+        if (item == null) {
+            return;
+        }
+        FemtocraftPowerUtils.FissionReactorReagent reagent = FemtocraftPowerUtils.getSaltSource(item);
+        if (reagent == null) {
+            return;
+        }
+        if (reagent.item.stackSize <= item.stackSize && getTemperatureCurrent() >= reagent.temp && (cooledSaltTank.getCapacity() - getCooledSaltAmount()) >= reagent.amount && thoriumStoreCurrent >= (reagent.amount * solidSaltToThoriumRatio)) {
+            decrStackSize(saltSlot, reagent.item.stackSize);
+            temperatureCurrent -= reagent.temp;
+            addCooledSalt(reagent.amount);
+            thoriumStoreCurrent -= reagent.amount * solidSaltToThoriumRatio;
         }
     }
 
@@ -180,8 +192,8 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     }
 
     private void gainHeat() {
-        temperatureCurrent += getCooledSaltAmount() * cooledSaltHeatMultiplier * getThoriumConcentration();
-        temperatureCurrent += getMoltenSaltAmount() * moltenSaltHeatMultiplier * getThoriumConcentration();
+        temperatureCurrent += getCooledSaltAmount() * cooledSaltHeatMultiplier * (1. + getThoriumConcentration());
+        temperatureCurrent += getMoltenSaltAmount() * moltenSaltHeatMultiplier * (1. + getThoriumConcentration());
     }
 
     public int getMoltenSaltAmount() {
@@ -206,7 +218,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
 
         }
         else if (resource.getFluid() == Femtocraft.fluidCooledMoltenSalt) {
-
+            fill = resource;
         }
         else {
             return 0;
@@ -313,5 +325,33 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
         return inventory.isItemValidForSlot(i, itemstack);
+    }
+
+    @Override
+    public boolean isValidMultiBlock() {
+        return info.isValidMultiBlock();
+    }
+
+    @Override
+    public boolean formMultiBlock(World world, int x, int y, int z) {
+        boolean ret = info.formMultiBlock(world, x, y, z);
+        if (ret) {
+            setModified();
+        }
+        return ret;
+    }
+
+    @Override
+    public boolean breakMultiBlock(World world, int x, int y, int z) {
+        boolean ret = info.breakMultiBlock(world, x, y, z);
+        if (ret) {
+            setModified();
+        }
+        return ret;
+    }
+
+    @Override
+    public MultiBlockInfo getInfo() {
+        return info;
     }
 }
