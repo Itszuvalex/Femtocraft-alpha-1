@@ -21,6 +21,7 @@
 
 package com.itszuvalex.femtocraft;
 
+import com.itszuvalex.femtocraft.command.CommandHandler;
 import com.itszuvalex.femtocraft.blocks.BlockFemtoStone;
 import com.itszuvalex.femtocraft.blocks.BlockMicroStone;
 import com.itszuvalex.femtocraft.blocks.BlockNanoStone;
@@ -36,6 +37,7 @@ import com.itszuvalex.femtocraft.industry.blocks.*;
 import com.itszuvalex.femtocraft.industry.items.ItemDigitalSchematic;
 import com.itszuvalex.femtocraft.industry.items.ItemPaperSchematic;
 import com.itszuvalex.femtocraft.industry.items.ItemQuantumSchematic;
+import com.itszuvalex.femtocraft.managers.ManagerAssistant;
 import com.itszuvalex.femtocraft.managers.ManagerRecipe;
 import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
 import com.itszuvalex.femtocraft.player.PropertiesNanite;
@@ -66,6 +68,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -106,6 +109,7 @@ public class Femtocraft {
 
     public static ManagerRecipe recipeManager;
     public static ManagerResearch researchManager;
+    public static ManagerAssistant assistantManager;
 
     // blocks
     public static Block blockOreTitanium;
@@ -1171,11 +1175,17 @@ public class Femtocraft {
         // 32, 10, true)
         recipeManager = new ManagerRecipe();
         researchManager = new ManagerResearch();
+        assistantManager = new ManagerAssistant();
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         ManagerRecipe.assemblyRecipes.registerDefaultRecipes();
         researchManager.calculateGraph();
+    }
+
+    @EventHandler
+    public void serverLoad(FMLServerStartingEvent event) {
+        event.registerServerCommand(CommandHandler.instance);
     }
 }
