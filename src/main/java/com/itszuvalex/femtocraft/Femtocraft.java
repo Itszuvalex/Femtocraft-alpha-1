@@ -21,7 +21,7 @@
 
 package com.itszuvalex.femtocraft;
 
-import com.itszuvalex.femtocraft.command.CommandHandler;
+import com.itszuvalex.femtocraft.command.CommandFemtocraft;
 import com.itszuvalex.femtocraft.blocks.BlockFemtoStone;
 import com.itszuvalex.femtocraft.blocks.BlockMicroStone;
 import com.itszuvalex.femtocraft.blocks.BlockNanoStone;
@@ -1186,6 +1186,6 @@ public class Femtocraft {
 
     @EventHandler
     public void serverLoad(FMLServerStartingEvent event) {
-        event.registerServerCommand(CommandHandler.instance);
+        event.registerServerCommand(CommandFemtocraft.instance);
     }
 }
