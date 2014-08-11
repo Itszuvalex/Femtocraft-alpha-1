@@ -51,7 +51,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     public static final int saltSlot = 1;
     @FemtocraftDataUtils.Saveable
     private BaseInventory inventory;
-    @FemtocraftDataUtils.Saveable
+    @FemtocraftDataUtils.Saveable(desc = true)
     private MultiBlockInfo info;
     @FemtocraftDataUtils.Saveable
     private FluidTank cooledSaltTank;
@@ -337,6 +337,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
         boolean ret = info.formMultiBlock(world, x, y, z);
         if (ret) {
             setModified();
+            setUpdate();
         }
         return ret;
     }
@@ -346,6 +347,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
         boolean ret = info.breakMultiBlock(world, x, y, z);
         if (ret) {
             setModified();
+            setUpdate();
         }
         return ret;
     }

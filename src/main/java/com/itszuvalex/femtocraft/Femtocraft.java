@@ -25,6 +25,7 @@ import com.itszuvalex.femtocraft.blocks.BlockFemtoStone;
 import com.itszuvalex.femtocraft.blocks.BlockMicroStone;
 import com.itszuvalex.femtocraft.blocks.BlockNanoStone;
 import com.itszuvalex.femtocraft.blocks.BlockUnidentifiedAlloy;
+import com.itszuvalex.femtocraft.command.CommandBase;
 import com.itszuvalex.femtocraft.command.CommandFemtocraft;
 import com.itszuvalex.femtocraft.core.fluids.BlockFluidMass;
 import com.itszuvalex.femtocraft.core.fluids.FluidMass;
@@ -110,6 +111,8 @@ public class Femtocraft {
     public static ManagerRecipe recipeManager;
     public static ManagerResearch researchManager;
     public static ManagerAssistant assistantManager;
+
+    public static CommandBase femtocraftServerCommand;
 
     // blocks
     public static Block blockOreTitanium;
@@ -1176,6 +1179,8 @@ public class Femtocraft {
         recipeManager = new ManagerRecipe();
         researchManager = new ManagerResearch();
         assistantManager = new ManagerAssistant();
+
+        femtocraftServerCommand = new CommandFemtocraft();
     }
 
     @EventHandler
@@ -1186,6 +1191,6 @@ public class Femtocraft {
 
     @EventHandler
     public void serverLoad(FMLServerStartingEvent event) {
-        event.registerServerCommand(new CommandFemtocraft());
+        event.registerServerCommand(femtocraftServerCommand);
     }
 }
