@@ -30,7 +30,7 @@ public class ManagerAssistant {
             return data.get(uname);
         }
         else {
-            Map<String, AssistantPermissions> pdata = new TreeMap<>();
+            Map<String, AssistantPermissions> pdata = new TreeMap<String, AssistantPermissions>();
             data.put(uname, pdata);
             return pdata;
         }
