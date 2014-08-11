@@ -39,7 +39,7 @@ public abstract class CommandBase implements ICommand {
     public CommandBase(String name, String[] aliases) {
         this.aliases = aliases == null ? new ArrayList<String>() : Arrays.asList(aliases);
         this.name = name;
-        subcmds = new HashMap<>();
+        subcmds = new HashMap<String, ICommand>();
     }
 
     public boolean addSubCommand(ICommand subcommand) {

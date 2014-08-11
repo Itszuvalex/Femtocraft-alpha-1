@@ -114,8 +114,8 @@ public class FemtocraftPowerUtils {
         }
     }
 
-    private static HashMap<Integer, FissionReactorReagent> thoriumMap = new HashMap<>();
-    private static HashMap<Integer, FissionReactorReagent> saltMap = new HashMap<>();
+    private static HashMap<Integer, FissionReactorReagent> thoriumMap = new HashMap<Integer, FissionReactorReagent>();
+    private static HashMap<Integer, FissionReactorReagent> saltMap = new HashMap<Integer, FissionReactorReagent>();
 
     public static class FissionReactorReagent {
         public final ItemStack item;

@@ -22,7 +22,7 @@ public class ManagerAssistant {
     private static HashMap<String, Map<String, AssistantPermissions>> data;
 
     public ManagerAssistant() {
-        data = new HashMap<>();
+        data = new HashMap<String, Map<String, AssistantPermissions>>();
     }
 
     public Map<String, AssistantPermissions> addPlayerAssistant(String uname) {
