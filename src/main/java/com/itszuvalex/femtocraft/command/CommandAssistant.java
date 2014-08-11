@@ -1,6 +1,5 @@
 package com.itszuvalex.femtocraft.command;
 
-import net.minecraft.command.ICommandSender;
 import net.minecraft.util.EnumChatFormatting;
 
 public class CommandAssistant extends CommandBase {
@@ -19,7 +18,7 @@ public class CommandAssistant extends CommandBase {
     }
 
     @Override
-    public String getCommandUsage(ICommandSender icommandsender) {
-        return help;
+    public String getDescription() {
+        return "Used for managing assistants, those capable of accessing your machines.";
     }
 }

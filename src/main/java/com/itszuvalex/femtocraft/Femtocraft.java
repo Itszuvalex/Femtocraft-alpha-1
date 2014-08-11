@@ -21,11 +21,11 @@
 
 package com.itszuvalex.femtocraft;
 
-import com.itszuvalex.femtocraft.command.CommandFemtocraft;
 import com.itszuvalex.femtocraft.blocks.BlockFemtoStone;
 import com.itszuvalex.femtocraft.blocks.BlockMicroStone;
 import com.itszuvalex.femtocraft.blocks.BlockNanoStone;
 import com.itszuvalex.femtocraft.blocks.BlockUnidentifiedAlloy;
+import com.itszuvalex.femtocraft.command.CommandFemtocraft;
 import com.itszuvalex.femtocraft.core.fluids.BlockFluidMass;
 import com.itszuvalex.femtocraft.core.fluids.FluidMass;
 import com.itszuvalex.femtocraft.core.items.ItemBase;
@@ -37,8 +37,8 @@ import com.itszuvalex.femtocraft.industry.blocks.*;
 import com.itszuvalex.femtocraft.industry.items.ItemDigitalSchematic;
 import com.itszuvalex.femtocraft.industry.items.ItemPaperSchematic;
 import com.itszuvalex.femtocraft.industry.items.ItemQuantumSchematic;
-import com.itszuvalex.femtocraft.managers.assistant.ManagerAssistant;
 import com.itszuvalex.femtocraft.managers.ManagerRecipe;
+import com.itszuvalex.femtocraft.managers.assistant.ManagerAssistant;
 import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
 import com.itszuvalex.femtocraft.player.PropertiesNanite;
 import com.itszuvalex.femtocraft.power.blocks.*;
@@ -1186,6 +1186,6 @@ public class Femtocraft {
 
     @EventHandler
     public void serverLoad(FMLServerStartingEvent event) {
-        event.registerServerCommand(CommandFemtocraft.instance);
+        event.registerServerCommand(new CommandFemtocraft());
     }
 }

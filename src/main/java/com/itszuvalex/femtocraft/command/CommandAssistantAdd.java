@@ -56,6 +56,11 @@ public class CommandAssistantAdd extends CommandBase {
     }
 
     @Override
+    public String getDescription() {
+        return "Add a player as an assistant";
+    }
+
+    @Override
     public void processCommand(ICommandSender icommandsender, String[] astring) {
         if (icommandsender instanceof EntityPlayer) {
             if (astring.length != 1) {

@@ -29,6 +29,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.EnumChatFormatting;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,7 +43,15 @@ public class CommandAssistantRemove extends CommandBase {
 
     @Override
     public List addTabCompletionOptions(ICommandSender icommandsender, String[] astring) {
+        if (icommandsender instanceof EntityPlayer) {
+            return new ArrayList(Femtocraft.assistantManager.getPlayerAssistants(((EntityPlayer) icommandsender).username).keySet());
+        }
         return Arrays.asList(MinecraftServer.getServer().getAllUsernames());
+    }
+
+    @Override
+    public String getDescription() {
+        return "Remove a player as an assistant.";
     }
 
     @Override

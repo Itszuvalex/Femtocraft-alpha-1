@@ -44,10 +44,11 @@ public abstract class CommandBase implements ICommand {
 
     public boolean addSubCommand(ICommand subcommand) {
         subcmds.put(subcommand.getCommandName(), subcommand);
-        for (Object alias : subcommand.getCommandAliases()) {
-            subcmds.put((String) alias, subcommand);
-        }
         return true;
+    }
+
+    public String getDescription() {
+        return "";
     }
 
 
@@ -58,10 +59,29 @@ public abstract class CommandBase implements ICommand {
 
     @Override
     public String getCommandUsage(ICommandSender icommandsender) {
-        StringBuilder output = new StringBuilder(EnumChatFormatting.YELLOW + getCommandName() + ": subcommands\n");
-        for (String subcommand : subcmds.keySet()) {
-            output.append(subcommand + "\n");
+        StringBuilder output = new StringBuilder();
+        output.append(EnumChatFormatting.YELLOW);
+        output.append(getCommandName());
+        output.append('\n');
+        output.append(EnumChatFormatting.BOLD + "aliases\n" + EnumChatFormatting.RESET + EnumChatFormatting.YELLOW);
+        for (String alias : aliases) {
+            output.append(alias);
+            output.append('\n');
         }
+        output.append(EnumChatFormatting.BOLD + "subcommands\n" + EnumChatFormatting.RESET + EnumChatFormatting.YELLOW);
+        for (String subcommand : subcmds.keySet()) {
+            ICommand com = getSubCommand(subcommand);
+            output.append(EnumChatFormatting.RED + subcommand + EnumChatFormatting.YELLOW);
+            for (Object alias : com.getCommandAliases()) {
+                output.append(EnumChatFormatting.BLUE + "|" + EnumChatFormatting.GRAY);
+                output.append((String) alias);
+            }
+            if (com instanceof CommandBase) {
+                output.append(EnumChatFormatting.WHITE + " - " + ((CommandBase) com).getDescription() + EnumChatFormatting.YELLOW);
+            }
+            output.append('\n');
+        }
+        output.deleteCharAt(output.length() - 1);
         output.append(EnumChatFormatting.RESET);
         return output.toString();
     }
@@ -74,7 +94,7 @@ public abstract class CommandBase implements ICommand {
     @Override
     public void processCommand(ICommandSender icommandsender, String[] astring) {
         if (astring.length > 0) {
-            ICommand subcommand = subcmds.get(astring[0]);
+            ICommand subcommand = getSubCommand(astring[0]);
             if (subcommand != null) {
                 subcommand.processCommand(icommandsender, Arrays.copyOfRange(astring, 1, astring.length));
                 return;
@@ -91,7 +111,7 @@ public abstract class CommandBase implements ICommand {
     @Override
     public List addTabCompletionOptions(ICommandSender icommandsender, String[] astring) {
         if (astring.length > 0) {
-            ICommand subcommand = subcmds.get(astring[0]);
+            ICommand subcommand = getSubCommand(astring[0]);
             if (subcommand != null) {
                 return subcommand.addTabCompletionOptions(icommandsender, Arrays.copyOfRange(astring, 1, astring.length));
             }
@@ -102,7 +122,7 @@ public abstract class CommandBase implements ICommand {
     @Override
     public boolean isUsernameIndex(String[] astring, int i) {
         if (astring.length > 0) {
-            ICommand subcommand = subcmds.get(astring[0]);
+            ICommand subcommand = getSubCommand(astring[0]);
             if (subcommand != null) {
                 return subcommand.isUsernameIndex(Arrays.copyOfRange(astring, 1, astring.length), i - 1);
             }
@@ -114,4 +134,19 @@ public abstract class CommandBase implements ICommand {
     public int compareTo(Object o) {
         return getCommandName().compareTo(((ICommand) o).getCommandName());
     }
+
+    ICommand getSubCommand(String name) {
+        ICommand sub = subcmds.get(name);
+        if (sub != null) return sub;
+
+        for (ICommand subc : subcmds.values()) {
+            for (Object alias : subc.getCommandAliases()) {
+                if (((String) alias).compareToIgnoreCase(name) == 0) {
+                    return subc;
+                }
+            }
+        }
+        return null;
+    }
+
 }

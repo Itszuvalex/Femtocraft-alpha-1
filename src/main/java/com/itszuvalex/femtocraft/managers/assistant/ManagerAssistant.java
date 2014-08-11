@@ -51,7 +51,7 @@ public class ManagerAssistant {
             pdata = addPlayerAssistant(owner);
         }
         if (pdata != null) {
-            return pdata.put(user, new AssistantPermissions(user)) != null;
+            return pdata.put(user, new AssistantPermissions(user)) == null;
         }
         return false;
     }

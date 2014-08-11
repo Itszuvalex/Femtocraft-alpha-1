@@ -39,6 +39,11 @@ public class CommandAssistantList extends CommandBase {
     }
 
     @Override
+    public String getDescription() {
+        return "List all of your assistants.";
+    }
+
+    @Override
     public void processCommand(ICommandSender icommandsender, String[] astring) {
         if (icommandsender instanceof EntityPlayer) {
             String username = ((EntityPlayer) icommandsender).username;
