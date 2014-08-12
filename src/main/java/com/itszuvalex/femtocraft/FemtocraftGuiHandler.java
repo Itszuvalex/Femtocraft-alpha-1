@@ -67,6 +67,7 @@ public class FemtocraftGuiHandler implements IGuiHandler {
     public static final int MicroCubeGuiID = 30;
     public static final int MicroEngineGuiID = 31;
     public static final int NanoCubeGuiID = 35;
+    public static final int NanoFissionReactorGuiID = 36;
     public static final int FemtoCubeGuiID = 40;
 
 

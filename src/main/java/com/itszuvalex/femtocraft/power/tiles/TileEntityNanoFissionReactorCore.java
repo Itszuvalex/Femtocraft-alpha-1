@@ -22,6 +22,7 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
 import com.itszuvalex.femtocraft.core.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
@@ -31,6 +32,7 @@ import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.*;
@@ -109,6 +111,35 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
         thoriumStoreCurrent = 0;
         temperatureCurrent = 0;
         thoriumConcentrationTarget = 0;
+    }
+
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.NanoFissionReactorGuiID;
+    }
+
+    @Override
+    public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
+        if (isValidMultiBlock()) {
+            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(),
+                    info.z());
+            // Big Oops? Or chunk unloaded...despite having player activating it
+            // >.>
+            if (te == null) {
+                return false;
+            }
+
+            par5EntityPlayer.openGui(getMod(), getGuiID(), worldObj, info.x(),
+                    info.y(), info.z());
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasGUI() {
+        return info.isValidMultiBlock();
     }
 
     public void abortReaction() {
