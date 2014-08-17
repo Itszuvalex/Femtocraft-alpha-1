@@ -46,7 +46,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     public static double enviroHeatLossMultiplier = .99;
     public static int cooledSaltTankMaxAmount = 100000;
     public static int moltenSaltTankMaxAmount = 100000;
-    public static int thoriumStoreMaxAmount = 10000;
+    public static int thoriumStoreMaxAmount = 100000;
     public static int temperatureMaxAmount = 3000;
     public static final int heatSlot = 0;
     public static final int thoriumSlot = 2;
