@@ -24,6 +24,7 @@ package com.itszuvalex.femtocraft.managers.research;
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.FemtocraftFileUtils;
 import com.itszuvalex.femtocraft.managers.research.EventTechnology.TechnologyAddedEvent;
+import com.itszuvalex.femtocraft.research.gui.GuiTechnology;
 import com.itszuvalex.femtocraft.research.gui.graph.TechNode;
 import com.itszuvalex.femtocraft.research.gui.graph.TechnologyGraph;
 import com.itszuvalex.femtocraft.research.gui.technology.*;
@@ -63,7 +64,12 @@ public class ManagerResearch {
     public static ResearchTechnology technologyBasicCircuits = new ResearchTechnology(
             "Basic Circuits", "Farenite, Circuit Boards", EnumTechLevel.MACRO,
             null, new ItemStack(Femtocraft.itemMicrochip), true,
-            null, GuiTechnologyBasicCircuits.class, null);
+            null, null) {
+        @Override
+        public Class<? extends GuiTechnology> getGuiClass() {
+            return GuiTechnologyBasicCircuits.class;
+        }
+    };
     @Technology
     // TODO: replace machining icon with micro machine chassis item
     public static ResearchTechnology technologyMachining = new ResearchTechnology(
@@ -81,9 +87,14 @@ public class ManagerResearch {
                     Femtocraft.itemIngotTemperedTitanium), new ItemStack(
                     Femtocraft.itemMicrochip), new ItemStack(
                     Femtocraft.itemIngotTemperedTitanium))),
-            GuiTechnologyMachining.class, new ItemStack(
-            Femtocraft.itemMicroPlating)
-    );
+            new ItemStack(
+                    Femtocraft.itemMicroPlating)
+    ) {
+        @Override
+        public Class<? extends GuiTechnology> getGuiClass() {
+            return GuiTechnologyMachining.class;
+        }
+    };
     @Technology
     public static ResearchTechnology technologyAlgorithms = new ResearchTechnology(
             "Algorithms", "", EnumTechLevel.MICRO,
@@ -187,7 +198,12 @@ public class ManagerResearch {
     public static ResearchTechnology technologyBasicChemistry = new ResearchTechnology(
             "Basic Chemistry", "Composition of Matter", EnumTechLevel.MACRO,
             null, new ItemStack(Femtocraft.itemMineralLattice), true,
-            null, GuiTechnologyBasicChemistry.class, null);
+            null, null) {
+        @Override
+        public Class<? extends GuiTechnology> getGuiClass() {
+            return GuiTechnologyBasicChemistry.class;
+        }
+    };
     @Technology
     // TODO: replace icon with micro coil
     public static ResearchTechnology technologyPotentiality = new ResearchTechnology(
@@ -238,9 +254,14 @@ public class ManagerResearch {
                     technologyBasicChemistry/*,
                     technologyOreRefining*/)), new ItemStack(Femtocraft
             .itemCrystallite), true,
-            new ArrayList<ItemStack>(), GuiTechnologyAdvancedChemistry.class,
+            new ArrayList<ItemStack>(),
             null
-    );
+    ) {
+        @Override
+        public Class<? extends GuiTechnology> getGuiClass() {
+            return GuiTechnologyAdvancedChemistry.class;
+        }
+    };
     // NANO
     @Technology
     public static ResearchTechnology technologyArtificialMaterials = new ResearchTechnology(
@@ -442,8 +463,13 @@ public class ManagerResearch {
                     technologyAdvancedChemistry)
     ), new ItemStack(Femtocraft.itemCubit), true,
             new ArrayList<ItemStack>(),
-            GuiTechnologyAppliedParticlePhysics.class, null
-    );
+            null
+    ) {
+        @Override
+        public Class<? extends GuiTechnology> getGuiClass() {
+            return GuiTechnologyAppliedParticlePhysics.class;
+        }
+    };
     @Technology
     public static ResearchTechnology technologyQuantumComputing = new ResearchTechnology(
             "Quantum Computing", "", EnumTechLevel.FEMTO,
@@ -456,7 +482,8 @@ public class ManagerResearch {
     @Technology
     public static ResearchTechnology technologyQuantumRobotics = new ResearchTechnology(
             "Quantum Robotics", "", EnumTechLevel.FEMTO,
-            new ArrayList<ResearchTechnology>(Arrays.asList(technologyQuantumComputing)), new ItemStack(Femtocraft.itemErinyesCircuit), false, new ArrayList<ItemStack>()
+            new ArrayList<ResearchTechnology>(Arrays.asList(technologyQuantumComputing)),
+            new ItemStack(Femtocraft.itemErinyesCircuit), false, new ArrayList<ItemStack>()
     );
     @Technology
     public static ResearchTechnology technologyElementManufacturing = new ResearchTechnology(
@@ -642,7 +669,12 @@ public class ManagerResearch {
     public static ResearchTechnology technologyMacroscopicStructure = new ResearchTechnology(
             "Macroscopic Structures", "The patterns everything take.",
             EnumTechLevel.MACRO, null, new ItemStack(Item.pickaxeIron),
-            true, null, GuiTechnologyMacroscopicStructure.class, null);
+            true, null, null) {
+        @Override
+        public Class<? extends GuiTechnology> getGuiClass() {
+            return GuiTechnologyMacroscopicStructure.class;
+        }
+    };
     // TODO: REMOVE ME
     private static boolean debug = true;
     private static final String DIRECTORY = "Research";
@@ -676,7 +708,8 @@ public class ManagerResearch {
                 try {
                     ResearchTechnology tech = (ResearchTechnology) field.get(null);
                     if (tech == null) {
-                        Femtocraft.logger.log(Level.SEVERE, field.getName() + " failed to initialize and cannot be added to Technologies list.");
+                        Femtocraft.logger.log(Level.SEVERE,
+                                field.getName() + " failed to initialize and cannot be added to Technologies list.");
                         continue;
                     }
                     addTechnology(tech);
@@ -851,7 +884,7 @@ public class ManagerResearch {
                 } catch (Exception exception) {
                     Femtocraft.logger.log(Level.SEVERE,
                             "Failed to save data for player " + pdata.username
-                                    + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
+                            + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
                     );
                     exception.printStackTrace();
                     continue;
@@ -860,7 +893,8 @@ public class ManagerResearch {
 
         } catch (Exception e) {
             Femtocraft.logger.log(Level.SEVERE, "Failed to create folder "
-                    + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator + DIRECTORY + ".");
+                                                + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator +
+                                                DIRECTORY + ".");
             e.printStackTrace();
             return false;
         }
@@ -881,7 +915,8 @@ public class ManagerResearch {
             File folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), DIRECTORY);
             if (!folder.exists()) {
                 Femtocraft.logger.log(Level.WARNING, "No " + DIRECTORY
-                        + " folder found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".");
+                                                     + " folder found for world - " +
+                                                     FemtocraftFileUtils.savePathFemtocraft(world) + ".");
                 return false;
             }
 
@@ -905,7 +940,7 @@ public class ManagerResearch {
                 } catch (Exception e) {
                     Femtocraft.logger.log(Level.SEVERE,
                             "Failed to load data from file " + pdata.getName()
-                                    + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
+                            + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
                     );
                     e.printStackTrace();
                 }
@@ -914,7 +949,7 @@ public class ManagerResearch {
         } catch (Exception exception) {
             Femtocraft.logger.log(Level.SEVERE,
                     "Failed to load data from folder " + DIRECTORY
-                            + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
+                    + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
             );
             exception.printStackTrace();
             return false;

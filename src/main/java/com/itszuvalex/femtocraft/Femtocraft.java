@@ -74,6 +74,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -91,7 +92,8 @@ import java.util.logging.Logger;
 @NetworkMod(channels = {Femtocraft.ID, PropertiesNanite.PACKET_CHANNEL,
         ManagerResearch.RESEARCH_CHANNEL,
         TileEntityResearchConsole.PACKET_CHANNEL,
-        TileEntityVacuumTube.packetChannel}, packetHandler = FemtocraftPacketHandler.class, clientSideRequired = true, serverSideRequired = true)
+        TileEntityVacuumTube.packetChannel}, packetHandler = FemtocraftPacketHandler.class,
+        clientSideRequired = true, serverSideRequired = true)
 public class Femtocraft {
     public static final String ID = "Femtocraft";
     public static final String VERSION = "0.1.0";
@@ -355,10 +357,9 @@ public class Femtocraft {
                 new FemtocraftConnectionHandler());
         MinecraftForge.EVENT_BUS.register(new FemtocraftEventHookContainer());
         MinecraftForge.EVENT_BUS.register(new FemtocraftOreRetrogenHandler());
-    }
 
-    @EventHandler
-    public void load(FMLInitializationEvent event) {
+        //Do normal load things here, to allow followup mods to access this.
+
         proxy.registerRendering();
 
         if (FemtocraftConfigs.worldGen) {
@@ -751,7 +752,8 @@ public class Femtocraft {
         fluidCooledContaminatedMoltenSalt = new FluidCooledContaminatedMoltenSalt();
         FluidRegistry.registerFluid(fluidCooledContaminatedMoltenSalt);
 
-        blockFluidCooledContaminatedMoltenSalt = new BlockFluidCooledContaminatedMoltenSalt(FemtocraftConfigs.BlockFluidCooledContaminatedMoltenSaltID);
+        blockFluidCooledContaminatedMoltenSalt = new BlockFluidCooledContaminatedMoltenSalt(FemtocraftConfigs
+                .BlockFluidCooledContaminatedMoltenSaltID);
         GameRegistry.registerBlock(blockFluidCooledContaminatedMoltenSalt, "BlockFluidCooledContaminatedMoltenSalt");
         LanguageRegistry.addName(blockFluidCooledContaminatedMoltenSalt, "Cooled Contaminated Molten Salt");
 
@@ -913,22 +915,26 @@ public class Femtocraft {
         LanguageRegistry.addName(itemDimensionalMonopole,
                 "Dimensional Monopole");
 
-        itemSelfFulfillingOracle = new ItemBase(FemtocraftConfigs.ItemSelfFulfillingOracleID, "ItemSelfFulfillingOracle");
+        itemSelfFulfillingOracle = new ItemBase(FemtocraftConfigs.ItemSelfFulfillingOracleID,
+                "ItemSelfFulfillingOracle");
         LanguageRegistry.addName(itemSelfFulfillingOracle,
                 "Self Fulfilling Oracle");
-        itemCrossDimensionalCommunicator = new ItemBase(FemtocraftConfigs.ItemCrossDimensionalCommunicatorID, "ItemCrossDimensionalCommunicator");
+        itemCrossDimensionalCommunicator = new ItemBase(FemtocraftConfigs.ItemCrossDimensionalCommunicatorID,
+                "ItemCrossDimensionalCommunicator");
         LanguageRegistry.addName(itemCrossDimensionalCommunicator,
                 "Cross Dimensional Communicator");
         itemInfallibleEstimator = new ItemBase(FemtocraftConfigs.ItemInfallibleEstimatorID, "ItemInfallibleEstimator");
         LanguageRegistry.addName(itemInfallibleEstimator,
                 "Infallible Estimator");
-        itemPanLocationalComputer = new ItemBase(FemtocraftConfigs.ItemPanLocationalComputerID, "ItemPanLocationalComputer");
+        itemPanLocationalComputer = new ItemBase(FemtocraftConfigs.ItemPanLocationalComputerID,
+                "ItemPanLocationalComputer");
         LanguageRegistry.addName(itemPanLocationalComputer,
                 "Pan Locational Computer");
         itemPandoraCube = new ItemBase(FemtocraftConfigs.ItemPandoraCubeID, "ItemPandoraCube");
         LanguageRegistry.addName(itemPandoraCube, "Pandora Cube");
 
-        itemFissionReactorPlating = new ItemBase(FemtocraftConfigs.ItemFissionReactorPlatingID, "ItemFissionReactorPlating");
+        itemFissionReactorPlating = new ItemBase(FemtocraftConfigs.ItemFissionReactorPlatingID,
+                "ItemFissionReactorPlating");
         LanguageRegistry.addName(itemFissionReactorPlating,
                 "Fission Reactor Plating");
 
@@ -965,17 +971,20 @@ public class Femtocraft {
         itemFemtoCoil = new ItemBase(FemtocraftConfigs.ItemFemtoCoilID, "ItemFemtoCoil");
         LanguageRegistry.addName(itemFemtoCoil, "Femto Coil");
 
-        itemPhlegethonTunnelPrimer = new ItemBase(FemtocraftConfigs.ItemPhlegethonTunnelPrimerID, "ItemPhlegethonTunnelPrimer");
+        itemPhlegethonTunnelPrimer = new ItemBase(FemtocraftConfigs.ItemPhlegethonTunnelPrimerID,
+                "ItemPhlegethonTunnelPrimer");
         LanguageRegistry.addName(itemPhlegethonTunnelPrimer,
                 "Phlegethon Tunnel Primer");
 
         itemStellaratorPlating = new ItemBase(FemtocraftConfigs.ItemStellaratorPlatingID, "ItemStellaratorPlating");
         LanguageRegistry.addName(itemStellaratorPlating, "Stellarator Plating");
 
-        itemInfinitelyRecursiveALU = new ItemBase(FemtocraftConfigs.ItemInfinitelyRecursiveALUID, "ItemInfinitelyRecursiveALU");
+        itemInfinitelyRecursiveALU = new ItemBase(FemtocraftConfigs.ItemInfinitelyRecursiveALUID,
+                "ItemInfinitelyRecursiveALU");
         LanguageRegistry.addName(itemInfinitelyRecursiveALU,
                 "Infinitely Recursive ALU");
-        itemInfiniteVolumePolychora = new ItemBase(FemtocraftConfigs.ItemInfiniteVolumePolychoraID, "ItemInfiniteVolumePolychora");
+        itemInfiniteVolumePolychora = new ItemBase(FemtocraftConfigs.ItemInfiniteVolumePolychoraID,
+                "ItemInfiniteVolumePolychora");
         LanguageRegistry.addName(itemInfiniteVolumePolychora,
                 "Infinite Volume Polychora");
 
@@ -1170,7 +1179,10 @@ public class Femtocraft {
                 FemtocraftConfigs.ItemMicroPlatingID, "ItemMicroPlating");
         LanguageRegistry.addName(itemMicroPlating, "Micro Plating");
         GameRegistry.registerItem(itemMicroPlating, "Micro Plating");
+    }
 
+    @EventHandler
+    public void load(FMLInitializationEvent event) {
         ProxyClient.setCustomRenderers();
         // GameRegistry.registerTileEntity(TileEntity.class, "myTile");
         // GameRegistry.addRecipe(new ItemStack(itemId), new Object[] {});
@@ -1186,7 +1198,8 @@ public class Femtocraft {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         ManagerRecipe.assemblyRecipes.registerDefaultRecipes();
-        researchManager.calculateGraph();
+
+        if (event.getSide() == Side.CLIENT) { researchManager.calculateGraph(); }
     }
 
     @EventHandler

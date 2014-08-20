@@ -22,12 +22,9 @@
 package com.itszuvalex.femtocraft.power;
 
 import com.itszuvalex.femtocraft.api.IPowerBlockContainer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-
-import java.util.HashMap;
 
 /**
  * Created by Chris on 5/13/2014.
@@ -38,9 +35,8 @@ public class FemtocraftPowerUtils {
 
     /**
      * This algorithm distributes temp from the given container, located in the given world, at the givne coordinates,
-     * in a manner consistent with intended behaviors.  It distributes temp
-     * to IPowerBlockContainers, where the difference
-     * in the given container's currentPowerPercentageForOutput() and the adjacent container's
+     * in a manner consistent with intended behaviors.  It distributes temp to IPowerBlockContainers, where the
+     * difference in the given container's currentPowerPercentageForOutput() and the adjacent container's
      * currentPowerPercentageForInput() is greater than the distributionBuffer.  It will attempt to distribute at most
      * maxPowerPerTick*currentPower() temp from the given container.
      *
@@ -114,45 +110,35 @@ public class FemtocraftPowerUtils {
         }
     }
 
-    private static HashMap<Integer, FissionReactorReagent> thoriumMap = new HashMap<Integer, FissionReactorReagent>();
-    private static HashMap<Integer, FissionReactorReagent> saltMap = new HashMap<Integer, FissionReactorReagent>();
+    public static void distributePower(IPowerBlockContainer container, IPowerBlockContainer[] contacts) {
+        float percentDifferenceTotal = 0.f;
+        int maxSpreadThisTick = (int) ((float) container.getCurrentPower() * maxPowerPerTick) * contacts.length;
+        float[] fillPercentages = new float[contacts.length];
+        for (int i = 0; i < fillPercentages.length; ++i) {
+            fillPercentages[i] = container.getFillPercentageForOutput(ForgeDirection.UNKNOWN);
+        }
 
-    public static class FissionReactorReagent {
-        public final ItemStack item;
-        public final int amount;
-        public final float temp;
+        //Sum % differences
+        for (int i = 0; i < fillPercentages.length; ++i) {
+            if (contacts[i] == null) {
+                continue;
+            }
+            float percentDif = fillPercentages[i] - contacts[i].getFillPercentageForCharging(ForgeDirection.UNKNOWN);
+            if (percentDif > distributionBuffer) {
+                percentDifferenceTotal += percentDif;
+            }
+        }
 
-        public FissionReactorReagent(ItemStack item, int amount, float temp) {
-            this.item = item;
-            this.amount = amount;
-            this.temp = temp;
+        //Distribute
+        for (int i = 0; i < fillPercentages.length; ++i) {
+            if (contacts[i] == null) {
+                continue;
+            }
+            float percentDif = fillPercentages[i] - contacts[i].getFillPercentageForCharging(ForgeDirection.UNKNOWN);
+            if (percentDif > distributionBuffer) {
+                int amountToCharge = (int) Math.ceil(maxSpreadThisTick * percentDif / percentDifferenceTotal);
+                container.consume(contacts[i].charge(ForgeDirection.UNKNOWN, amountToCharge));
+            }
         }
     }
-
-    public static void addFissionReactorThoriumSource(ItemStack item, int amount, float temp) {
-        addFissionReactorThoriumSource(new FissionReactorReagent(item, amount, temp));
-    }
-
-    public static void addFissionReactorThoriumSource(FissionReactorReagent reagent) {
-        thoriumMap.put(reagent.item.itemID, reagent);
-    }
-
-    public static void addFissionReactorSaltSource(ItemStack item, int amount, float temp) {
-        addFissionReactorSaltSource(new FissionReactorReagent(item, amount, temp));
-    }
-
-    public static void addFissionReactorSaltSource(FissionReactorReagent reagent) {
-        saltMap.put(reagent.item.itemID, reagent);
-    }
-
-
-    public static FissionReactorReagent getThoriumSource(ItemStack item) {
-        return thoriumMap.get(item.itemID);
-    }
-
-    public static FissionReactorReagent getSaltSource(ItemStack item) {
-        return saltMap.get(item.itemID);
-    }
-
-
 }

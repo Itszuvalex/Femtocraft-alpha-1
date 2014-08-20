@@ -22,6 +22,7 @@
 package com.itszuvalex.femtocraft;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
 import java.io.File;
@@ -31,14 +32,16 @@ import java.io.File;
  */
 public class FemtocraftFileUtils {
     public static String savePath(World world) {
-        return Minecraft.getMinecraft().mcDataDir + "/saves/"
-                + world.getSaveHandler().getWorldDirectoryName();
+        return world.isRemote ? Minecraft.getMinecraft().mcDataDir + "/saves/"
+                                +
+                                world.getSaveHandler().getWorldDirectoryName() : MinecraftServer.getServer().getFile
+                (world.getSaveHandler().getWorldDirectoryName())
+                .getPath();
     }
 
     public static String savePathFemtocraft(World world) {
         File dir = new File(savePath(world), Femtocraft.ID.toLowerCase());
-        if(!dir.exists())
-        {
+        if (!dir.exists()) {
             dir.mkdir();
         }
         return dir.getPath();

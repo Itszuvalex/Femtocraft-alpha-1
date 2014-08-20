@@ -24,6 +24,8 @@ package com.itszuvalex.femtocraft;
 import com.itszuvalex.femtocraft.common.gui.DisplaySlot;
 import com.itszuvalex.femtocraft.industry.items.ItemAssemblySchematic;
 import com.itszuvalex.femtocraft.player.PropertiesNanite;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -50,6 +52,7 @@ public class FemtocraftEventHookContainer {
         Femtocraft.assistantManager.save(event.world);
     }
 
+    @SideOnly(value = Side.CLIENT)
     @ForgeSubscribe
     public void preTextureStitch(TextureStitchEvent.Pre event) {
         // Skip out of blocks

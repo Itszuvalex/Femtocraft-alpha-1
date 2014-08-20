@@ -26,7 +26,7 @@ import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
 import com.itszuvalex.femtocraft.core.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
-import com.itszuvalex.femtocraft.power.FemtocraftPowerUtils;
+import com.itszuvalex.femtocraft.power.FissionReactorRegistry;
 import com.itszuvalex.femtocraft.utils.BaseInventory;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,7 +37,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
-public class TileEntityNanoFissionReactorCore extends TileEntityBase implements IInventory, IFluidHandler, IMultiBlockComponent {
+public class TileEntityNanoFissionReactorCore extends TileEntityBase implements IInventory, IFluidHandler,
+        IMultiBlockComponent {
+
+
+    public static double cooledSaltConversionHeatRatio = 1.;
     public static double cooledSaltHeatMultiplier = .01;
     public static double moltenSaltHeatMultiplier = .02;
     public static double unstableTemperatureThreshold = .66;
@@ -76,7 +80,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
         return temperatureCurrent;
     }
 
-    public void setTemperatureCurrent(int temperatureCurrent) {
+    public void setTemperatureCurrent(float temperatureCurrent) {
         this.temperatureCurrent = temperatureCurrent;
     }
 
@@ -155,22 +159,15 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
         gainHeat();
         meltThorium();
         meltSalt();
-        heatSalt();
         meltWorld();
-    }
-
-    private void heatSalt() {
-
     }
 
     private void meltWorld() {
         if (temperatureCurrent > temperatureMax) {
 
-        }
-        else if (temperatureCurrent > temperatureMax * criticalTemperatureThreshold) {
+        } else if (temperatureCurrent > temperatureMax * criticalTemperatureThreshold) {
 
-        }
-        else if (temperatureCurrent > temperatureMax * unstableTemperatureThreshold) {
+        } else if (temperatureCurrent > temperatureMax * unstableTemperatureThreshold) {
 
         }
     }
@@ -181,11 +178,13 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
             if (item == null) {
                 return;
             }
-            FemtocraftPowerUtils.FissionReactorReagent reagent = FemtocraftPowerUtils.getThoriumSource(item);
+            FissionReactorRegistry.FissionReactorReagent reagent = FissionReactorRegistry
+                    .getThoriumSource(item);
             if (reagent == null) {
                 return;
             }
-            if (reagent.item.stackSize <= item.stackSize && getTemperatureCurrent() >= reagent.temp && (thoriumStoreMax - thoriumStoreCurrent) >= reagent.amount) {
+            if (reagent.item.stackSize <= item.stackSize && getTemperatureCurrent() >= reagent.temp &&
+                (thoriumStoreMax - thoriumStoreCurrent) >= reagent.amount) {
                 decrStackSize(thoriumSlot, reagent.item.stackSize);
                 temperatureCurrent -= reagent.temp;
                 thoriumStoreCurrent += reagent.amount;
@@ -198,15 +197,30 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     }
 
     private void meltSalt() {
+        int saltAmount = getCooledSaltAmount();
+        if (saltAmount > 0) {
+            saltAmount = Math.min(saltAmount, (moltenSaltTankMaxAmount - getMoltenSaltAmount()));
+            int heatAmount = (int) (saltAmount * cooledSaltConversionHeatRatio);
+            saltAmount = Math.min(heatAmount, (int) getTemperatureCurrent());
+            if (saltAmount > 0) {
+                cooledSaltTank.drain(saltAmount, true);
+                setTemperatureCurrent((float) (getTemperatureCurrent() - saltAmount * cooledSaltConversionHeatRatio));
+                addMoltenSalt(saltAmount);
+            }
+        }
+
+
         ItemStack item = getStackInSlot(saltSlot);
         if (item == null) {
             return;
         }
-        FemtocraftPowerUtils.FissionReactorReagent reagent = FemtocraftPowerUtils.getSaltSource(item);
+        FissionReactorRegistry.FissionReactorReagent reagent = FissionReactorRegistry.getSaltSource(item);
         if (reagent == null) {
             return;
         }
-        if (reagent.item.stackSize <= item.stackSize && getTemperatureCurrent() >= reagent.temp && (cooledSaltTank.getCapacity() - getCooledSaltAmount()) >= reagent.amount && thoriumStoreCurrent >= (reagent.amount * solidSaltToThoriumRatio)) {
+        if (reagent.item.stackSize <= item.stackSize && getTemperatureCurrent() >= reagent.temp &&
+            (cooledSaltTank.getCapacity() - getCooledSaltAmount()) >= reagent.amount &&
+            thoriumStoreCurrent >= (reagent.amount * solidSaltToThoriumRatio)) {
             decrStackSize(saltSlot, reagent.item.stackSize);
             temperatureCurrent -= reagent.temp;
             addCooledSalt(reagent.amount);
@@ -223,8 +237,8 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     }
 
     private void gainHeat() {
-        temperatureCurrent += getCooledSaltAmount() * cooledSaltHeatMultiplier * (1. + getThoriumConcentration());
-        temperatureCurrent += getMoltenSaltAmount() * moltenSaltHeatMultiplier * (1. + getThoriumConcentration());
+        temperatureCurrent += getCooledSaltAmount() * cooledSaltHeatMultiplier * getThoriumConcentration();
+        temperatureCurrent += getMoltenSaltAmount() * moltenSaltHeatMultiplier * getThoriumConcentration();
     }
 
     public int getMoltenSaltAmount() {
@@ -247,11 +261,9 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
 
             }
 
-        }
-        else if (resource.getFluid() == Femtocraft.fluidCooledMoltenSalt) {
+        } else if (resource.getFluid() == Femtocraft.fluidCooledMoltenSalt) {
             fill = resource;
-        }
-        else {
+        } else {
             return 0;
         }
 
@@ -355,7 +367,15 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
 
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-        return inventory.isItemValidForSlot(i, itemstack);
+        switch (i) {
+            case heatSlot:
+                return FissionReactorRegistry.getHeatSource(itemstack) != null;
+            case saltSlot:
+                return FissionReactorRegistry.getSaltSource(itemstack) != null;
+            case thoriumSlot:
+                return FissionReactorRegistry.getThoriumSource(itemstack) != null;
+        }
+        return false;
     }
 
     @Override

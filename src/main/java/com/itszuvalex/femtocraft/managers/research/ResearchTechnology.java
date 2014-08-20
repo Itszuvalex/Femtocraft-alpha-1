@@ -24,6 +24,8 @@ package com.itszuvalex.femtocraft.managers.research;
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.research.gui.GuiResearch;
 import com.itszuvalex.femtocraft.research.gui.GuiTechnology;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.ItemStack;
 
 import java.lang.reflect.InvocationTargetException;
@@ -44,14 +46,12 @@ public class ResearchTechnology {
 
     public ItemStack discoverItem;
 
-    public Class<? extends GuiTechnology> guiClass;
-
     public ResearchTechnology(String name, String description,
                               EnumTechLevel level, ArrayList<ResearchTechnology> prerequisites,
                               ItemStack displayItem,
                               boolean isKeystone, ArrayList<ItemStack> researchMaterials) {
         this(name, description, level, prerequisites, displayItem,
-                isKeystone, researchMaterials, GuiTechnology.class,
+                isKeystone, researchMaterials,
                 null);
     }
 
@@ -59,7 +59,7 @@ public class ResearchTechnology {
                               EnumTechLevel level, ArrayList<ResearchTechnology> prerequisites,
                               ItemStack displayItem,
                               boolean isKeystone, ArrayList<ItemStack> researchMaterials,
-                              Class<? extends GuiTechnology> guiClass, ItemStack discoverItem) {
+                              ItemStack discoverItem) {
         this.name = name;
         this.description = description;
         this.level = level;
@@ -69,7 +69,6 @@ public class ResearchTechnology {
         this.yDisplay = 0;
         this.isKeystone = isKeystone;
         this.researchMaterials = researchMaterials;
-        this.guiClass = guiClass;
         this.discoverItem = discoverItem;
     }
 
@@ -92,10 +91,11 @@ public class ResearchTechnology {
         return prerequisites.contains(prereq);
     }
 
+    @SideOnly(value = Side.CLIENT)
     public GuiTechnology getGui(GuiResearch research,
                                 ResearchTechnologyStatus status) {
         try {
-            return guiClass.getConstructor(GuiResearch.class,
+            return getGuiClass().getConstructor(GuiResearch.class,
                     ResearchTechnologyStatus.class).newInstance(research,
                     status);
         } catch (InstantiationException e) {
@@ -109,7 +109,8 @@ public class ResearchTechnology {
         } catch (NoSuchMethodException e) {
             Femtocraft.logger
                     .log(Level.SEVERE,
-                            "Technologies must return a GuiTechnology class that supports the constructor(GuiResearch, ResearchTechnologyStatus)");
+                            "Technologies must return a GuiTechnology class that supports the constructor" +
+                            "(GuiResearch, ResearchTechnologyStatus)");
             e.printStackTrace();
         } catch (SecurityException e) {
             e.printStackTrace();
@@ -117,4 +118,7 @@ public class ResearchTechnology {
 
         return null;
     }
+
+    @SideOnly(value = Side.CLIENT)
+    public Class<? extends GuiTechnology> getGuiClass() {return GuiTechnology.class;}
 }
