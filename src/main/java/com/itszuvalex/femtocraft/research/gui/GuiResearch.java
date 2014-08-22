@@ -320,7 +320,7 @@ public class GuiResearch extends GuiScreen {
      */
     @Override
     public boolean doesGuiPauseGame() {
-        return true;
+        return false;
     }
 
     protected void genAchievementBackground(int par1, int par2, float par3) {

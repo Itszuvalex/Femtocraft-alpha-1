@@ -96,12 +96,12 @@ public class GuiTechnology extends GuiScreen {
                 l + 17, FemtocraftUtils.colorFromARGB(255, 255, 255, 255));
 
         if ((par1 >= (k + backButtonX))
-                && (par1 <= (k + backButtonX + backButtonWidth))
-                && (par2 >= (l + backButtonY))
-                && (par2 <= (l + backButtonY + backButtonHeight))) {
+            && (par1 <= (k + backButtonX + backButtonWidth))
+            && (par2 >= (l + backButtonY))
+            && (par2 <= (l + backButtonY + backButtonHeight))) {
             this.drawGradientRect(k + backButtonX, l + backButtonY, k
-                            + backButtonWidth + backButtonX, l + backButtonY
-                            + backButtonHeight,
+                                                                    + backButtonWidth + backButtonX, l + backButtonY
+                                                                                                     + backButtonHeight,
                     FemtocraftUtils.colorFromARGB(60, 45, 0, 110),
                     FemtocraftUtils.colorFromARGB(60, 45, 0, 110)
             );
@@ -110,21 +110,21 @@ public class GuiTechnology extends GuiScreen {
         this.fontRenderer.drawString(
                 "Back",
                 k + backButtonX + (backButtonWidth) / 2
-                        - this.fontRenderer.getStringWidth("Back") / 2, l
-                        + backButtonY
-                        + (backButtonHeight - this.fontRenderer.FONT_HEIGHT)
-                        / 2, FemtocraftUtils.colorFromARGB(255, 255, 255, 255)
+                - this.fontRenderer.getStringWidth("Back") / 2, l
+                                                                + backButtonY
+                                                                + (backButtonHeight - this.fontRenderer.FONT_HEIGHT)
+                                                                  / 2, FemtocraftUtils.colorFromARGB(255, 255, 255, 255)
         );
 
         int color = FemtocraftUtils.colorFromARGB(60, 45, 0, 110);
         if (displayPage > 1) {
             if ((par1 >= (k + pageLeftButtonX))
-                    && (par1 <= (k + pageLeftButtonX + pageLeftButtonWidth))
-                    && (par2 >= (l + pageLeftButtonY))
-                    && (par2 <= (l + pageLeftButtonY + pageLeftButtonHeight))) {
+                && (par1 <= (k + pageLeftButtonX + pageLeftButtonWidth))
+                && (par2 >= (l + pageLeftButtonY))
+                && (par2 <= (l + pageLeftButtonY + pageLeftButtonHeight))) {
                 this.drawGradientRect(k + pageLeftButtonX, l + pageLeftButtonY,
                         k + pageLeftButtonX + pageLeftButtonWidth, l
-                                + pageLeftButtonY + pageLeftButtonHeight,
+                                                                   + pageLeftButtonY + pageLeftButtonHeight,
                         color, color
                 );
             }
@@ -133,31 +133,33 @@ public class GuiTechnology extends GuiScreen {
                     .drawString(
                             "<-",
                             k + pageLeftButtonX + (pageLeftButtonWidth) / 2
-                                    - this.fontRenderer.getStringWidth("<-")
-                                    / 2,
+                            - this.fontRenderer.getStringWidth("<-")
+                              / 2,
                             l
-                                    + pageLeftButtonY
-                                    + (pageLeftButtonHeight - this.fontRenderer.FONT_HEIGHT)
-                                    / 2 + 1,
+                            + pageLeftButtonY
+                            + (pageLeftButtonHeight - this.fontRenderer.FONT_HEIGHT)
+                              / 2 + 1,
                             FemtocraftUtils.colorFromARGB(255, 255, 255, 255)
                     );
-        }
-        else {
+        } else {
             color = FemtocraftUtils.colorFromARGB(60, 0, 0, 0);
             this.drawGradientRect(k + pageLeftButtonX, l + pageLeftButtonY, k
-                    + pageLeftButtonX + pageLeftButtonWidth, l
-                    + pageLeftButtonY + pageLeftButtonHeight, color, color);
+                                                                            + pageLeftButtonX + pageLeftButtonWidth, l
+                                                                                                                     +
+                                                                                                                     pageLeftButtonY +
+                                                                                                                     pageLeftButtonHeight, color, color);
         }
 
         color = FemtocraftUtils.colorFromARGB(60, 45, 0, 110);
         if (displayPage < getNumPages(status.researched)) {
             if ((par1 >= (k + pageRightButtonX))
-                    && (par1 <= (k + pageRightButtonX + pageRightButtonWidth))
-                    && (par2 >= (l + pageRightButtonY))
-                    && (par2 <= (l + pageRightButtonY + pageRightButtonHeight))) {
+                && (par1 <= (k + pageRightButtonX + pageRightButtonWidth))
+                && (par2 >= (l + pageRightButtonY))
+                && (par2 <= (l + pageRightButtonY + pageRightButtonHeight))) {
                 this.drawGradientRect(k + pageRightButtonX, l
-                        + pageRightButtonY, k + pageRightButtonX
-                        + pageRightButtonWidth, l + pageRightButtonY
+                                                            + pageRightButtonY, k + pageRightButtonX
+                                                                                + pageRightButtonWidth,
+                        l + pageRightButtonY
                         + pageRightButtonHeight, color, color);
             }
 
@@ -165,30 +167,36 @@ public class GuiTechnology extends GuiScreen {
                     .drawString(
                             "->",
                             k + pageRightButtonX + (pageRightButtonWidth) / 2
-                                    - this.fontRenderer.getStringWidth("->")
-                                    / 2,
+                            - this.fontRenderer.getStringWidth("->")
+                              / 2,
                             l
-                                    + pageRightButtonY
-                                    + (pageRightButtonHeight - this.fontRenderer.FONT_HEIGHT)
-                                    / 2 + 1,
+                            + pageRightButtonY
+                            + (pageRightButtonHeight - this.fontRenderer.FONT_HEIGHT)
+                              / 2 + 1,
                             FemtocraftUtils.colorFromARGB(255, 255, 255, 255)
                     );
-        }
-        else {
+        } else {
             color = FemtocraftUtils.colorFromARGB(60, 0, 0, 0);
             this.drawGradientRect(k + pageRightButtonX, l + pageRightButtonY, k
-                    + pageRightButtonX + pageRightButtonWidth, l
+                                                                              + pageRightButtonX + pageRightButtonWidth,
+                    l
                     + pageRightButtonY + pageRightButtonHeight, color, color);
         }
 
         String pageString = String.format("Page %s/%s", displayPage,
                 getNumPages(status.researched));
         this.fontRenderer.drawString(pageString, k + pageLeftButtonX
-                + (pageLeftButtonWidth + pageRightButtonX - pageLeftButtonX)
-                / 2 - this.fontRenderer.getStringWidth(pageString) / 2, l
-                + pageLeftButtonY
-                + (pageLeftButtonHeight - this.fontRenderer.FONT_HEIGHT) / 2
-                + 1, FemtocraftUtils.colorFromARGB(255, 255, 255, 255));
+                                                 + (pageLeftButtonWidth + pageRightButtonX - pageLeftButtonX)
+                                                   / 2 - this.fontRenderer.getStringWidth(pageString) / 2, l
+                                                                                                           +
+                                                                                                           pageLeftButtonY
+                                                                                                           +
+                                                                                                           (pageLeftButtonHeight -
+                                                                                                            this.fontRenderer.FONT_HEIGHT) /
+                                                                                                           2
+                                                                                                           +
+                                                                                                           1,
+                FemtocraftUtils.colorFromARGB(255, 255, 255, 255));
 
         GL11.glPushMatrix();
         RenderItem renderitem = new RenderItem();
@@ -201,7 +209,7 @@ public class GuiTechnology extends GuiScreen {
         GL11.glEnable(GL11.GL_CULL_FACE);
         renderitem.renderItemAndEffectIntoGUI(
                 Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft()
-                                                                .getTextureManager(), tech.displayItem, k + 66, l + 12
+                        .getTextureManager(), tech.displayItem, k + 66, l + 12
         );
 
         ItemStack[] materials = null;
@@ -236,10 +244,14 @@ public class GuiTechnology extends GuiScreen {
     protected void keyTyped(char par1, int par2) {
         if (par2 == this.mc.gameSettings.keyBindInventory.keyCode) {
             this.mc.displayGuiScreen(guiResearch);
-        }
-        else {
+        } else {
             super.keyTyped(par1, par2);
         }
+    }
+
+    @Override
+    public final boolean doesGuiPauseGame() {
+        return false;
     }
 
     @Override
@@ -249,28 +261,28 @@ public class GuiTechnology extends GuiScreen {
             int l = (this.height - this.ySize) / 2;
 
             if ((par1 >= (k + backButtonX))
-                    && (par1 <= (k + backButtonX + backButtonWidth))
-                    && (par2 >= (l + backButtonY))
-                    && (par2 <= (l + backButtonY + backButtonHeight))) {
+                && (par1 <= (k + backButtonX + backButtonWidth))
+                && (par2 >= (l + backButtonY))
+                && (par2 <= (l + backButtonY + backButtonHeight))) {
                 Minecraft.getMinecraft().sndManager.playSoundFX("random.click",
                         1.0F, 1.0F);
                 this.mc.displayGuiScreen(guiResearch);
             }
 
             if ((displayPage > 1) && (par1 >= (k + pageLeftButtonX))
-                    && (par1 <= (k + pageLeftButtonX + pageLeftButtonWidth))
-                    && (par2 >= (l + pageLeftButtonY))
-                    && (par2 <= (l + pageLeftButtonY + pageLeftButtonHeight))) {
+                && (par1 <= (k + pageLeftButtonX + pageLeftButtonWidth))
+                && (par2 >= (l + pageLeftButtonY))
+                && (par2 <= (l + pageLeftButtonY + pageLeftButtonHeight))) {
                 Minecraft.getMinecraft().sndManager.playSoundFX("random.click",
                         1.0F, 1.0F);
                 displayPage--;
             }
 
             if ((displayPage < getNumPages(status.researched))
-                    && (par1 >= (k + pageRightButtonX))
-                    && (par1 <= (k + pageRightButtonX + pageRightButtonWidth))
-                    && (par2 >= (l + pageRightButtonY))
-                    && (par2 <= (l + pageRightButtonY + pageRightButtonHeight))) {
+                && (par1 >= (k + pageRightButtonX))
+                && (par1 <= (k + pageRightButtonX + pageRightButtonWidth))
+                && (par2 >= (l + pageRightButtonY))
+                && (par2 <= (l + pageRightButtonY + pageRightButtonHeight))) {
                 Minecraft.getMinecraft().sndManager.playSoundFX("random.click",
                         1.0F, 1.0F);
                 displayPage++;
@@ -313,7 +325,7 @@ public class GuiTechnology extends GuiScreen {
         for (int i = 0; (i < 9); ++i) {
             ItemStack item = i >= ir.length ? null : ir[i];
             int xr = x
-                    + 18 * (i % 3);
+                     + 18 * (i % 3);
             int yr = y + 18 * (i / 3);
             renderItemSlot(xr, yr, item, renderitem, mouseX, mouseY,
                     tooltip);
@@ -363,9 +375,9 @@ public class GuiTechnology extends GuiScreen {
             int i2 = 1347420415;
             int j2 = (i2 & 16711422) >> 1 | i2 & -16777216;
             this.drawGradientRect(i1 - 3, j1 - 3 + 1, i1 - 3 + 1, j1 + k1 + 3
-                    - 1, i2, j2);
+                                                                  - 1, i2, j2);
             this.drawGradientRect(i1 + k + 2, j1 - 3 + 1, i1 + k + 3, j1 + k1
-                    + 3 - 1, i2, j2);
+                                                                      + 3 - 1, i2, j2);
             this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 - 3 + 1, i2,
                     i2);
             this.drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + k + 3, j1 + k1 + 3,
@@ -405,7 +417,7 @@ public class GuiTechnology extends GuiScreen {
 
 
         int xr = x
-                + 1;
+                 + 1;
         int yr = y + 1;
         renderitem.renderItemIntoGUI(
                 Minecraft.getMinecraft().fontRenderer, Minecraft
@@ -415,7 +427,7 @@ public class GuiTechnology extends GuiScreen {
         renderitem.renderItemOverlayIntoGUI(Minecraft.getMinecraft()
                         .fontRenderer,
                 Minecraft.getMinecraft()
-                         .getTextureManager()
+                        .getTextureManager()
                 , item, xr, yr
         );
 
@@ -423,7 +435,7 @@ public class GuiTechnology extends GuiScreen {
         RenderHelper.disableStandardItemLighting();
 
         if (mouseX > x && mouseX < x + 17 && mouseY > y && mouseY <
-                y + 17)
+                                                           y + 17)
 
         {
             tooltip.add(item.getDisplayName());
@@ -433,8 +445,8 @@ public class GuiTechnology extends GuiScreen {
     }
 
     /**
-     * Height must be greater than 54. Width must be MUCH greater than 54, to
-     * allow room for the info string to be drawn.
+     * Height must be greater than 54. Width must be MUCH greater than 54, to allow room for the info string to be
+     * drawn.
      *
      * @param x
      * @param y
@@ -477,14 +489,14 @@ public class GuiTechnology extends GuiScreen {
 
     {
         String recipeDir = EnumChatFormatting.WHITE + "<->" +
-                EnumChatFormatting.RESET;
+                           EnumChatFormatting.RESET;
         renderCraftingGrid(x, y, recipe.input, mouseX,
                 mouseY, tooltip);
         GL11.glColor4f(1.f, 1.f, 1.f, 1.f);
         fontRenderer.drawSplitString(recipeDir, x + 54 + 1,
                 y + (54 - fontRenderer
                         .FONT_HEIGHT)
-                        / 2, fontRenderer.getStringWidth
+                    / 2, fontRenderer.getStringWidth
                         (recipeDir) + 2,
                 fontRenderer.FONT_HEIGHT
         );
@@ -509,14 +521,14 @@ public class GuiTechnology extends GuiScreen {
 
     protected void renderCraftingRecipe(int x, int y, int width, int height, ItemStack[] input, ItemStack output, int mouseX, int mouseY, List tooltip) {
         String recipeDir = EnumChatFormatting.WHITE + "->" +
-                EnumChatFormatting.RESET;
+                           EnumChatFormatting.RESET;
         renderCraftingGrid(x, y, input, mouseX,
                 mouseY, tooltip);
         GL11.glColor4f(1.f, 1.f, 1.f, 1.f);
         fontRenderer.drawSplitString(recipeDir, x + 54 + 1,
                 y + (54 - fontRenderer
                         .FONT_HEIGHT)
-                        / 2, fontRenderer.getStringWidth
+                    / 2, fontRenderer.getStringWidth
                         (recipeDir) + 2,
                 fontRenderer.FONT_HEIGHT
         );

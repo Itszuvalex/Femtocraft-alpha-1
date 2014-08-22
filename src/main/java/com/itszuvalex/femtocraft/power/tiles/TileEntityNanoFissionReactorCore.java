@@ -41,6 +41,8 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
         IMultiBlockComponent {
 
 
+    public static float contaminatedSaltLossRatio = .7f;
+    public static float contaminatedThoriumLossRatio = .3f;
     public static double cooledSaltConversionHeatRatio = 1.;
     public static double cooledSaltHeatMultiplier = .01;
     public static double moltenSaltHeatMultiplier = .02;
@@ -67,6 +69,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     @FemtocraftDataUtils.Saveable
     private int thoriumStoreCurrent;
     private int temperatureMax;
+
 
     public float getThoriumConcentrationTarget() {
         return thoriumConcentrationTarget;
@@ -257,10 +260,19 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
         FluidStack fill = null;
         if (resource.getFluid() == Femtocraft.fluidCooledContaminatedMoltenSalt) {
+            int amount = resource.amount;
+            //limit based on thorium amount
+            amount = (int) Math.min(amount, Math.min(getThoriumStoreCurrent(),
+                    resource.amount * contaminatedThoriumLossRatio) / contaminatedThoriumLossRatio);
+            //limit based on cooledSaltTank remaining capacity
+            amount = (int) Math.min(amount,
+                    (moltenSaltTank.getCapacity() - getMoltenSaltAmount()) /
+                    contaminatedSaltLossRatio);
+            //create
+            fill = new FluidStack(Femtocraft.fluidCooledMoltenSalt, amount);
             if (doFill) {
-
+                thoriumStoreCurrent -= amount * contaminatedThoriumLossRatio;
             }
-
         } else if (resource.getFluid() == Femtocraft.fluidCooledMoltenSalt) {
             fill = resource;
         } else {
