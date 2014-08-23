@@ -78,6 +78,7 @@ public class ManagerRecipe {
                 new ItemStack(Femtocraft.itemMicrochip), "#", "$", '#',
                 Femtocraft.itemSpoolGold, '$', Femtocraft.itemDopedBoard);
 
+
         CraftingManager
                 .getInstance()
                 .getRecipeList()
@@ -86,8 +87,8 @@ public class ManagerRecipe {
 
         GameRegistry
                 .addShapedRecipe(new ItemStack(Femtocraft.itemSpoolGold, 8), "###",
-                        "#-#", "###", '#', Item.ingotGold, '-',
-                        Femtocraft.itemSpool);
+                "#-#", "###", '#', Item.ingotGold, '-',
+                Femtocraft.itemSpool);
 
         GameRegistry
                 .addShapedRecipe(new ItemStack(Femtocraft.itemSpoolPlatinum, 8), "###",

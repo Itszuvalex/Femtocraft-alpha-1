@@ -21,10 +21,136 @@
 
 package com.itszuvalex.femtocraft.power.gui;
 
-public class GuiNanoFissionReactor {
+import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.power.containers.ContainerNanoFissionReactor;
+import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoFissionReactorCore;
+import com.itszuvalex.femtocraft.render.RenderUtils;
+import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import org.lwjgl.opengl.GL11;
 
-    public GuiNanoFissionReactor() {
-        // TODO Auto-generated constructor stub
+public class GuiNanoFissionReactor extends GuiContainer {
+
+    public static final ResourceLocation texture = new ResourceLocation(
+            Femtocraft.ID.toLowerCase(), "textures/guis/NanoFissionReactor.png");
+    private TileEntityNanoFissionReactorCore reactor;
+
+    public GuiNanoFissionReactor(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
+                                 TileEntityNanoFissionReactorCore reactor) {
+        super(new ContainerNanoFissionReactor(player, par1InventoryPlayer, reactor));
+        this.reactor = reactor;
     }
 
-}
+    /*
+     * (non-Javadoc)
+     *
+     * @see net.minecraft.client.gui.inventory.GuiContainer#drawScreen(int, int,
+     * float)
+     */
+    @Override
+    public void drawScreen(int par1, int par2, float par3) {
+        super.drawScreen(par1, par2, par3);
+
+        //Heat
+        if (this.isPointInRegion(8, 28, 16, 46, par1, par2)) {
+            int temperatureCurrent = (int) this.reactor.getTemperatureCurrent();
+            int temperatureMax = this.reactor.getTemperatureMax();
+
+            this.drawCreativeTabHoveringText(temperatureCurrent + '/' + temperatureMax + " TU", par1, par2);
+        }
+        //Cooled Salt Tank
+        else if (this.isPointInRegion(134, 8, 16, 60, par1, par2)) {
+            int cooledSaltAmount = this.reactor.getCooledSaltAmount();
+            int cooledSaltMax = this.reactor.getCooledSaltTank().getCapacity();
+
+            FluidStack fluid = this.reactor.getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
+            String name = fluid == null ? "" : (" " + FluidRegistry
+                    .getFluidName(fluid));
+            String text = FemtocraftUtils.formatIntegerToString(cooledSaltAmount) + '/'
+                          + FemtocraftUtils.formatIntegerToString(cooledSaltMax) + " mB" + name;
+
+            this.drawCreativeTabHoveringText(text, par1, par2);
+
+            //Molten Salt Tank
+        } else if (this.isPointInRegion(152, 8, 16, 60, par1, par2)) {
+            int moltenSaltAmount = this.reactor.getMoltenSaltAmount();
+            int moltenSaltMax = this.reactor.getMoltenSaltTank().getCapacity();
+
+            FluidStack fluid = this.reactor.getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
+            String name = fluid == null ? "" : (" " + FluidRegistry
+                    .getFluidName(fluid));
+            String text = FemtocraftUtils.formatIntegerToString(moltenSaltAmount) + '/'
+                          + FemtocraftUtils.formatIntegerToString(moltenSaltMax) + " mB" + name;
+
+            this.drawCreativeTabHoveringText(text, par1, par2);
+        }
+    }
+
+    /**
+     * Draw the foreground layer for the GuiContainer (everything in front of the items)
+     */
+    @Override
+    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+        String s = "Fission Reactor";
+        this.fontRenderer.drawString(s,
+                this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
+                FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
+        this.fontRenderer.drawString(
+                StatCollector.translateToLocal("container.inventory"), 8,
+                this.ySize - 96 + 2,
+                FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
+    }
+
+    /**
+     * Draw the background layer for the GuiContainer (everything behind the items)
+     */
+    @Override
+    protected void drawGuiContainerBackgroundLayer(float par1, int par2,
+                                                   int par3) {
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
+        int k = (this.width - this.xSize) / 2;
+        int l = (this.height - this.ySize) / 2;
+        this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
+        int i1;
+
+        // if (this.furnaceInventory.isBurning())
+        // {
+        // i1 = this.furnaceInventory.getBurnTimeRemainingScaled(12);
+        // this.drawTexturedModalRect(k + 56, l + 36 + 12 - i1, 176, 12 - i1,
+        // 14, i1 + 2);
+        // }
+
+        i1 = this.reactor.getProgressScaled(20);
+        this.drawTexturedModalRect(k + 119, l + 25, 176, 0, 18, i1);
+        i1 = (int) (this.reactor.getFillPercentage() * 60);
+        this.drawTexturedModalRect(k + 10, l + 68 - i1, 176, 100 - i1, 16, i1);
+
+        FluidStack fluid = this.reactor.getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
+        if (fluid != null) {
+            Icon image = fluid.getFluid().getStillIcon();
+            // Icon image = BlockFluid.getFluidIcon("water_still");
+            // image = Femtocraft.blockFluidMass.stillIcon;
+
+            i1 = (this.reactor.getMassAmount() * 60)
+                 / this.reactor.getMassCapacity();
+            RenderUtils.renderLiquidInGUI(this, this.zLevel, image, k + 150, l
+                                                                             + 8 + (60 - i1), 16, i1);
+
+            // Rebind texture
+            Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
+        }
+
+        // Draw Tank Lines
+        this.drawTexturedModalRect(k + 150, l + 8, 176, 100, 16, 60);
+    }
+

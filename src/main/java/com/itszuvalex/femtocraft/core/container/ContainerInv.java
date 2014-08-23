@@ -37,14 +37,10 @@ public abstract class ContainerInv<T extends TileEntityBase> extends Container {
 
     protected final EntityPlayer player;
 
-    // For this particular case, there are only 2 slots in the custom inventory, plus a slot that is 'active'
-// but not able to interact with (like an active spell slot that doesn't really contain an item)
     protected final int INPUT_SLOT;
     protected final int OUTPUT_SLOT;
     protected final int INV_SIZE;
 
-    // Note how these all back-reference themselves, so all you need to do is change the initial value and the
-// rest are automatically adjusted! Just swap ACTIVE_SLOT with your inventory index like the above tut
     protected final int INV_START, INV_END, HOTBAR_START, HOTBAR_END;
 
 
@@ -70,7 +66,8 @@ public abstract class ContainerInv<T extends TileEntityBase> extends Container {
 // PLAYER INVENTORY SLOTS
         for (i = 0; i < 3; ++i) {
             for (int j = 0; j < 9; ++j) {
-                this.addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, inventoryXStart + j * 18, inventoryYStart + i * 18));
+                this.addSlotToContainer(new Slot(inventoryPlayer,
+                        j + i * 9 + 9, inventoryXStart + j * 18, inventoryYStart + i * 18));
             }
         }
 
@@ -104,19 +101,16 @@ public abstract class ContainerInv<T extends TileEntityBase> extends Container {
                 }
 
                 slot.onSlotChange(itemstack1, itemstack);
-            }
-            else {
+            } else {
                 if (eligibleForInput(itemstack1)) {
-                    if (!this.mergeItemStack(itemstack1, INPUT_SLOT, INPUT_SLOT, false)) {
+                    if (!this.mergeItemStack(itemstack1, INPUT_SLOT, INPUT_SLOT + 1, false)) {
                         return null;
                     }
-                }
-                else if (par2 >= INV_START && par2 <= INV_END) {
-                    if (!this.mergeItemStack(itemstack1, HOTBAR_START, HOTBAR_END + 1, true)) {
+                } else if (par2 >= INV_START && par2 <= INV_END) {
+                    if (!this.mergeItemStack(itemstack1, HOTBAR_START, HOTBAR_END + 1, false)) {
                         return null;
                     }
-                }
-                else if (par2 >= HOTBAR_START && par2 <= HOTBAR_END) {
+                } else if (par2 >= HOTBAR_START && par2 <= HOTBAR_END) {
                     if (!this.mergeItemStack(itemstack1, INV_START, INV_END + 1, false)) {
                         return null;
                     }
@@ -125,8 +119,7 @@ public abstract class ContainerInv<T extends TileEntityBase> extends Container {
 
             if (itemstack1.stackSize == 0) {
                 slot.putStack(null);
-            }
-            else {
+            } else {
                 slot.onSlotChanged();
             }
 

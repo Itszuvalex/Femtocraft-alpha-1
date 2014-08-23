@@ -27,12 +27,15 @@ import com.itszuvalex.femtocraft.industry.tiles.*;
 import com.itszuvalex.femtocraft.power.containers.ContainerFemtoCube;
 import com.itszuvalex.femtocraft.power.containers.ContainerMicroCube;
 import com.itszuvalex.femtocraft.power.containers.ContainerNanoCube;
+import com.itszuvalex.femtocraft.power.containers.ContainerNanoFissionReactor;
 import com.itszuvalex.femtocraft.power.gui.GuiFemtoCube;
 import com.itszuvalex.femtocraft.power.gui.GuiMicroCube;
 import com.itszuvalex.femtocraft.power.gui.GuiNanoCube;
+import com.itszuvalex.femtocraft.power.gui.GuiNanoFissionReactor;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoCubePort;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityMicroCube;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoCubePort;
+import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoFissionReactorCore;
 import com.itszuvalex.femtocraft.research.containers.ContainerResearchConsole;
 import com.itszuvalex.femtocraft.research.gui.GuiResearch;
 import com.itszuvalex.femtocraft.research.gui.GuiResearchConsole;
@@ -103,9 +106,11 @@ public class FemtocraftGuiHandler implements IGuiHandler {
                                 tileEntity
                 );
             case NanoHorologeGuiID:
-                return new ContainerNanoHorologe(player, player.inventory, (TileEntityBaseEntityNanoHorologe) tileEntity);
+                return new ContainerNanoHorologe(player, player.inventory, (TileEntityBaseEntityNanoHorologe)
+                        tileEntity);
             case NanoEnmesherGuiID:
-                return new ContainerNanoEnmesher(player, player.inventory, (TileEntityBaseEntityNanoEnmesher) tileEntity);
+                return new ContainerNanoEnmesher(player, player.inventory, (TileEntityBaseEntityNanoEnmesher)
+                        tileEntity);
             case FemtoImpulserGuiID:
                 return new ContainerFemtoImpulser(player, player.inventory, (TileEntityFemtoImpulser) tileEntity);
             case FemtoRepurposerGuiID:
@@ -116,7 +121,8 @@ public class FemtocraftGuiHandler implements IGuiHandler {
                                 tileEntity
                 );
             case FemtoChronoshifterGuiID:
-                return new ContainerFemtoChronoshifter(player, player.inventory, (TileEntityFemtoChronoshifter) tileEntity);
+                return new ContainerFemtoChronoshifter(player, player.inventory,
+                        (TileEntityFemtoChronoshifter) tileEntity);
             case FemtoEntanglerGuiID:
                 return new ContainerFemtoEntangler(player, player.inventory, (TileEntityFemtoEntangler) tileEntity);
             case MicroCubeGuiID:
@@ -124,6 +130,9 @@ public class FemtocraftGuiHandler implements IGuiHandler {
             case MicroEngineGuiID:
             case NanoCubeGuiID:
                 return new ContainerNanoCube((TileEntityNanoCubePort) tileEntity);
+            case NanoFissionReactorGuiID:
+                return new ContainerNanoFissionReactor(player, player.inventory, (
+                        TileEntityNanoFissionReactorCore) tileEntity);
             case FemtoCubeGuiID:
                 return new ContainerFemtoCube((TileEntityFemtoCubePort) tileEntity);
             default:
@@ -186,6 +195,8 @@ public class FemtocraftGuiHandler implements IGuiHandler {
                 return new GuiMicroCube((TileEntityMicroCube) tileEntity);
             case MicroEngineGuiID:
                 break;//TODO
+            case NanoFissionReactorGuiID:
+                return new GuiNanoFissionReactor(player, player.inventory, (TileEntityNanoFissionReactorCore)tileEntity);
             case NanoCubeGuiID:
                 return new GuiNanoCube((TileEntityNanoCubePort) tileEntity);
             case FemtoCubeGuiID:

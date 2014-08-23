@@ -18,107 +18,108 @@
 *  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 *  *****************************************************************************
 */
-//
-//package com.itszuvalex.femtocraft.power.containers;
-//
-//import com.itszuvalex.femtocraft.core.container.ContainerInv;
-//import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoFissionReactorCore;
-//import cpw.mods.fml.relauncher.Side;
-//import cpw.mods.fml.relauncher.SideOnly;
-//import net.minecraft.entity.player.EntityPlayer;
-//import net.minecraft.entity.player.InventoryPlayer;
-//import net.minecraft.inventory.ICrafting;
-//import net.minecraft.inventory.Slot;
-//import net.minecraft.item.ItemStack;
-//
-//public class ContainerNanoFissionReactor<T extends TileEntityNanoFissionReactorCore> extends ContainerInv<T> {
-//    private int lastCookTime = 0;
-//    private int lastPower = 0;
-//    private int lastMass = 0;
-//
-//    public ContainerNanoFissionReactor(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
-//                                       T inventory) {
-//        super(player, inventory, 0, 2);
-//        this.addSlotToContainer(new Slot(inventory, 0, 8, 8));
-//        this.addSlotToContainer(new Slot(inventory, 1, 112, 9));
-//        this.addSlotToContainer(new Slot(inventory, 2, 112, 29));
-//        addPlayerInventorySlots(par1InventoryPlayer);
-//    }
-//
-//    @Override
-//    public void addCraftingToCrafters(ICrafting par1ICrafting) {
-//        super.addCraftingToCrafters(par1ICrafting);
-//        par1ICrafting.sendProgressBarUpdate(this, 0,
-//                this.inventory.cookTime);
-//        par1ICrafting.sendProgressBarUpdate(this, 1,
-//                this.inventory.getCurrentPower());
-//        par1ICrafting.sendProgressBarUpdate(this, 2,
-//                this.inventory.getMassAmount());
-//    }
-//
-//    /**
-//     * Looks for changes made in the container, sends them to every listener.
-//     */
-//    @Override
-//    public void detectAndSendChanges() {
-//        super.detectAndSendChanges();
-//
-//        for (Object crafter : this.crafters) {
-//            ICrafting icrafting = (ICrafting) crafter;
-//
-//            if (this.lastCookTime != this.inventory.cookTime) {
-//                icrafting.sendProgressBarUpdate(this, 0,
-//                        this.inventory.cookTime);
-//            }
-//            if (this.lastPower != this.inventory.getCurrentPower()) {
-//                icrafting.sendProgressBarUpdate(this, 1,
-//                        this.inventory.getCurrentPower());
-//            }
-//            if (this.lastMass != this.inventory.getMassAmount()) {
-//                icrafting.sendProgressBarUpdate(this, 2,
-//                        this.inventory.getMassAmount());
-//            }
-//        }
-//
-//        this.lastCookTime = this.inventory.cookTime;
-//        this.lastPower = this.inventory.getCurrentPower();
-//        this.lastMass = this.inventory.getMassAmount();
-//    }
-//
-//    @Override
-//    @SideOnly(Side.CLIENT)
-//    public void updateProgressBar(int par1, int par2) {
-//        switch (par1) {
-//            case 0:
-//                this.inventory.cookTime = par2;
-//                break;
-//            case 1:
-//                this.inventory.currentPower = par2;
-//                break;
-//            case 2:
-//                if (par2 > 0) {
-//                    this.inventory.setFluidAmount(par2);
-//                }
-//                else {
-//                    this.inventory.clearFluid();
-//                }
-//                break;
-//            default:
-//        }
-//        // if (par1 == 0)
-//        // {
-//        // this.inventory.cookTime = par2;
-//        // }
-//        // if(par1 == 1)
-//        // {
-//        // this.inventory.currentPower = par2;
-//        // }
-//    }
-//
-//    @Override
-//    protected boolean eligibleForInput(ItemStack item) {
-//        return false;
-//    }
-//}
-//
+
+package com.itszuvalex.femtocraft.power.containers;
+
+import com.itszuvalex.femtocraft.core.container.ContainerInv;
+import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoFissionReactorCore;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+
+public class ContainerNanoFissionReactor extends ContainerInv<TileEntityNanoFissionReactorCore> {
+    private int lastHeat = 0;
+    private int lastCooledMoltenSalt = 0;
+    private int lastMoltenSalt = 0;
+    private int lastThorium = 0;
+
+    private static final int heatIndex = 0;
+    private static final int cooledMoltenSaltIndex = 1;
+    private static final int moltenSaltIndex = 2;
+    private static final int thoriumIndex = 3;
+
+    public ContainerNanoFissionReactor(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
+                                       TileEntityNanoFissionReactorCore inventory) {
+        super(player, inventory, 0, 2);
+        this.addSlotToContainer(new Slot(inventory, TileEntityNanoFissionReactorCore.heatSlot, 8, 8));
+        this.addSlotToContainer(new Slot(inventory, TileEntityNanoFissionReactorCore.saltSlot, 112, 8));
+        this.addSlotToContainer(new Slot(inventory, TileEntityNanoFissionReactorCore.thoriumSlot, 112, 28));
+        addPlayerInventorySlots(par1InventoryPlayer);
+    }
+
+    @Override
+    public void addCraftingToCrafters(ICrafting par1ICrafting) {
+        super.addCraftingToCrafters(par1ICrafting);
+        par1ICrafting.sendProgressBarUpdate(this, heatIndex,
+                (int) this.inventory.getTemperatureCurrent());
+        par1ICrafting.sendProgressBarUpdate(this, cooledMoltenSaltIndex,
+                this.inventory.getCooledSaltAmount());
+        par1ICrafting.sendProgressBarUpdate(this, moltenSaltIndex,
+                this.inventory.getMoltenSaltAmount());
+        par1ICrafting.sendProgressBarUpdate(this, thoriumIndex, this.inventory.getThoriumStoreCurrent());
+    }
+
+    /**
+     * Looks for changes made in the container, sends them to every listener.
+     */
+    @Override
+    public void detectAndSendChanges() {
+        super.detectAndSendChanges();
+
+        for (Object crafter : this.crafters) {
+            ICrafting icrafting = (ICrafting) crafter;
+
+            if (this.lastHeat != (int) this.inventory.getTemperatureCurrent()) {
+                icrafting.sendProgressBarUpdate(this, heatIndex,
+                        (int) this.inventory.getTemperatureCurrent());
+            }
+            if (this.lastCooledMoltenSalt != this.inventory.getCooledSaltAmount()) {
+                icrafting.sendProgressBarUpdate(this, cooledMoltenSaltIndex,
+                        this.inventory.getCooledSaltAmount());
+            }
+            if (this.lastMoltenSalt != this.inventory.getMoltenSaltAmount()) {
+                icrafting.sendProgressBarUpdate(this, moltenSaltIndex,
+                        this.inventory.getMoltenSaltAmount());
+            }
+            if (this.lastThorium != this.inventory.getTemperatureCurrent()) {
+                icrafting.sendProgressBarUpdate(this, thoriumIndex, this.inventory.getThoriumStoreCurrent());
+            }
+        }
+
+        this.lastHeat = (int) this.inventory.getTemperatureCurrent();
+        this.lastCooledMoltenSalt = this.inventory.getCooledSaltAmount();
+        this.lastMoltenSalt = this.inventory.getMoltenSaltAmount();
+        this.lastHeat = this.inventory.getThoriumStoreCurrent();
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void updateProgressBar(int par1, int par2) {
+        switch (par1) {
+            case heatIndex:
+                this.inventory.setTemperatureCurrent(par2);
+                break;
+            case cooledMoltenSaltIndex:
+                this.inventory.setCooledMoltenSalt(par2);
+                break;
+            case moltenSaltIndex:
+                this.inventory.setMoltenSalt(par2);
+                break;
+            case thoriumIndex:
+                this.inventory.setThoriumStoreCurrent(par2);
+                break;
+            default:
+        }
+    }
+
+    @Override
+    protected boolean eligibleForInput(ItemStack item) {
+        return false;
+    }
+}
+
 
