@@ -864,7 +864,7 @@ public class ManagerResearch {
         try {
             File folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), DIRECTORY);
             if (!folder.exists()) {
-                folder.mkdir();
+                folder.mkdirs();
             }
 
             for (ResearchPlayer pdata : playerData.values()) {
