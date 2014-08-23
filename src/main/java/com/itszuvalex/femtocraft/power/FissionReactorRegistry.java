@@ -1,5 +1,8 @@
 package com.itszuvalex.femtocraft.power;
 
+import com.itszuvalex.femtocraft.Femtocraft;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.HashMap;
@@ -11,6 +14,16 @@ public class FissionReactorRegistry {
     private static HashMap<Integer, FissionReactorReagent> thoriumMap = new HashMap<Integer, FissionReactorReagent>();
     private static HashMap<Integer, FissionReactorReagent> saltMap = new HashMap<Integer, FissionReactorReagent>();
     private static HashMap<Integer, FissionReactorReagent> heatMap = new HashMap<Integer, FissionReactorReagent>();
+
+    public static void init() {
+        addFissionReactorHeatSource(new ItemStack(Block.blockSnow), 0, -1);
+        addFissionReactorHeatSource(new ItemStack(Block.ice), 0, -10);
+        addFissionReactorHeatSource(new ItemStack(Item.bucketLava), 0, 100);
+        addFissionReactorHeatSource(new ItemStack(Item.bucketWater), 0, -5);
+        addFissionReactorSaltSource(new ItemStack(Femtocraft.itemIngotThFaSalt), 1000, 10);
+        addFissionReactorThoriumSource(new ItemStack(Femtocraft.itemIngotThorium), 1000, 20);
+    }
+
 
     public static void addFissionReactorThoriumSource(ItemStack item, int amount, float temp) {
         addFissionReactorThoriumSource(new FissionReactorReagent(item, amount, temp));

@@ -25,6 +25,7 @@ import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.managers.assembler.ManagerAssemblerRecipe;
 import com.itszuvalex.femtocraft.managers.dimensional.ManagerDimensionalRecipe;
 import com.itszuvalex.femtocraft.managers.temporal.ManagerTemporalRecipe;
+import com.itszuvalex.femtocraft.power.FissionReactorRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -41,6 +42,7 @@ public class ManagerRecipe {
 
     public ManagerRecipe() {
         registerRecipes();
+        FissionReactorRegistry.init();
     }
 
     private void registerRecipes() {
@@ -87,8 +89,8 @@ public class ManagerRecipe {
 
         GameRegistry
                 .addShapedRecipe(new ItemStack(Femtocraft.itemSpoolGold, 8), "###",
-                "#-#", "###", '#', Item.ingotGold, '-',
-                Femtocraft.itemSpool);
+                        "#-#", "###", '#', Item.ingotGold, '-',
+                        Femtocraft.itemSpool);
 
         GameRegistry
                 .addShapedRecipe(new ItemStack(Femtocraft.itemSpoolPlatinum, 8), "###",
@@ -109,7 +111,8 @@ public class ManagerRecipe {
                 "FCF", 'F', Item.ingotIron, 'C',
                 Femtocraft.itemConductivePowder);
 
-        GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemMicroLogicCore), "TGT", "GBG", "TTT", 'T', Femtocraft.itemIngotTemperedTitanium, 'G', Femtocraft.itemSpoolGold, 'B', Femtocraft.itemMicrochip);
+        GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemMicroLogicCore), "TGT", "GBG", "TTT", 'T',
+                Femtocraft.itemIngotTemperedTitanium, 'G', Femtocraft.itemSpoolGold, 'B', Femtocraft.itemMicrochip);
 
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft
                         .itemKineticPulverizer), "FTF", " P ", "FMF", 'F', Item.ingotIron,
@@ -122,7 +125,9 @@ public class ManagerRecipe {
                 Femtocraft.itemIngotTemperedTitanium, 'F', Item.ingotIron,
                 'S', Item.shears);
 
-        GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemHeatingElement), " P ", "G G", "TBT", 'P', Femtocraft.itemSpoolPlatinum, 'G', Femtocraft.itemSpoolGold, 'T', Femtocraft.itemIngotTemperedTitanium, 'B', Femtocraft.itemMicrochip);
+        GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemHeatingElement), " P ", "G G", "TBT", 'P',
+                Femtocraft.itemSpoolPlatinum, 'G', Femtocraft.itemSpoolGold, 'T',
+                Femtocraft.itemIngotTemperedTitanium, 'B', Femtocraft.itemMicrochip);
 
         GameRegistry.addShapedRecipe(
                 new ItemStack(Femtocraft.itemMicroPlating), "TCT", "CSC",
@@ -180,7 +185,9 @@ public class ManagerRecipe {
                 Femtocraft.itemMicroLogicCore);
 
 
-        GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockMicroFurnaceUnlit), "TMT", "MHM", "TLT", 'T', Femtocraft.itemIngotTemperedTitanium, 'M', Femtocraft.itemMicroPlating, 'H', Femtocraft.itemHeatingElement, 'L', Femtocraft.itemMicroLogicCore);
+        GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockMicroFurnaceUnlit), "TMT", "MHM", "TLT", 'T',
+                Femtocraft.itemIngotTemperedTitanium, 'M', Femtocraft.itemMicroPlating, 'H',
+                Femtocraft.itemHeatingElement, 'L', Femtocraft.itemMicroLogicCore);
 
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft
                         .blockMicroEngine), "MHT", "MHC", "MHT", 'M',

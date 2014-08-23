@@ -31,7 +31,7 @@ import net.minecraftforge.fluids.Fluid;
  */
 public class FluidCooledMoltenSalt extends Fluid {
     public FluidCooledMoltenSalt() {
-        super("FluidCooledMoltenSalt");
+        super("Cooled Molten Salt");
         setUnlocalizedName("FluidCooledMoltenSalt");
         setLuminosity(1);
         setDensity(5000);

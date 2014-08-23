@@ -33,9 +33,9 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidTank;
 import org.lwjgl.opengl.GL11;
 
 public class GuiNanoFissionReactor extends GuiContainer {
@@ -65,14 +65,14 @@ public class GuiNanoFissionReactor extends GuiContainer {
             int temperatureCurrent = (int) this.reactor.getTemperatureCurrent();
             int temperatureMax = this.reactor.getTemperatureMax();
 
-            this.drawCreativeTabHoveringText(temperatureCurrent + '/' + temperatureMax + " TU", par1, par2);
+            this.drawCreativeTabHoveringText("" + temperatureCurrent + '/' + temperatureMax + " TU", par1, par2);
         }
         //Cooled Salt Tank
         else if (this.isPointInRegion(134, 8, 16, 60, par1, par2)) {
             int cooledSaltAmount = this.reactor.getCooledSaltAmount();
             int cooledSaltMax = this.reactor.getCooledSaltTank().getCapacity();
 
-            FluidStack fluid = this.reactor.getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
+            FluidStack fluid = this.reactor.getCooledSaltTank().getFluid();
             String name = fluid == null ? "" : (" " + FluidRegistry
                     .getFluidName(fluid));
             String text = FemtocraftUtils.formatIntegerToString(cooledSaltAmount) + '/'
@@ -85,7 +85,7 @@ public class GuiNanoFissionReactor extends GuiContainer {
             int moltenSaltAmount = this.reactor.getMoltenSaltAmount();
             int moltenSaltMax = this.reactor.getMoltenSaltTank().getCapacity();
 
-            FluidStack fluid = this.reactor.getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
+            FluidStack fluid = this.reactor.getMoltenSaltTank().getFluid();
             String name = fluid == null ? "" : (" " + FluidRegistry
                     .getFluidName(fluid));
             String text = FemtocraftUtils.formatIntegerToString(moltenSaltAmount) + '/'
@@ -102,12 +102,19 @@ public class GuiNanoFissionReactor extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         String s = "Fission Reactor";
         this.fontRenderer.drawString(s,
-                this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
+                (110 + 25) / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
                 FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
         this.fontRenderer.drawString(
                 StatCollector.translateToLocal("container.inventory"), 8,
-                this.ySize - 96 + 2,
+                76,
                 FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
+
+        this.fontRenderer.drawString("-", 112, 61, FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
+        this.fontRenderer.drawString("+", 123, 61, FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
+
+        String abort = "ABORT";
+        this.fontRenderer.drawString(abort, (108 + 37) / 2 - this.fontRenderer.getStringWidth(abort) /
+                                                             2, 68, FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
     }
 
     /**
@@ -130,27 +137,35 @@ public class GuiNanoFissionReactor extends GuiContainer {
         // 14, i1 + 2);
         // }
 
-        i1 = this.reactor.getProgressScaled(20);
-        this.drawTexturedModalRect(k + 119, l + 25, 176, 0, 18, i1);
-        i1 = (int) (this.reactor.getFillPercentage() * 60);
-        this.drawTexturedModalRect(k + 10, l + 68 - i1, 176, 100 - i1, 16, i1);
+        //Heat
+        int heatHeight = 46;
+        i1 = (this.reactor.getCooledSaltAmount() * heatHeight) / this.reactor.getCooledSaltTank().getCapacity();
+        this.drawTexturedModalRect(k + 7, l + 27 + (heatHeight - i1), 176, 69, 8, 3);
 
-        FluidStack fluid = this.reactor.getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
+        //CooledMoltenSalt
+        renderTank(this.reactor.getCooledSaltTank(), 134, 8, k, l);
+
+        //Molten Salt
+        renderTank(this.reactor.getMoltenSaltTank(), 152, 8, k, l);
+
+        // Draw Tank Lines
+        this.drawTexturedModalRect(k + 134, l + 8, 176, 9, 16, 60);
+        this.drawTexturedModalRect(k + 152, l + 8, 176, 9, 16, 60);
+    }
+
+    private void renderTank(IFluidTank tank, int x, int y, int k, int l) {
+        FluidStack fluid = tank.getFluid();
         if (fluid != null) {
             Icon image = fluid.getFluid().getStillIcon();
-            // Icon image = BlockFluid.getFluidIcon("water_still");
-            // image = Femtocraft.blockFluidMass.stillIcon;
 
-            i1 = (this.reactor.getMassAmount() * 60)
-                 / this.reactor.getMassCapacity();
-            RenderUtils.renderLiquidInGUI(this, this.zLevel, image, k + 150, l
-                                                                             + 8 + (60 - i1), 16, i1);
+            int i1 = (fluid.amount * 60)
+                     / tank.getCapacity();
+            RenderUtils.renderLiquidInGUI(this, this.zLevel, image, k + x, l
+                                                                           + y + (60 - i1), 16, i1);
 
             // Rebind texture
             Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
         }
-
-        // Draw Tank Lines
-        this.drawTexturedModalRect(k + 150, l + 8, 176, 100, 16, 60);
     }
+}
 

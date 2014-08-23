@@ -196,7 +196,8 @@ public class FemtocraftGuiHandler implements IGuiHandler {
             case MicroEngineGuiID:
                 break;//TODO
             case NanoFissionReactorGuiID:
-                return new GuiNanoFissionReactor(player, player.inventory, (TileEntityNanoFissionReactorCore)tileEntity);
+                return new GuiNanoFissionReactor(player, player.inventory, (TileEntityNanoFissionReactorCore)
+                        tileEntity);
             case NanoCubeGuiID:
                 return new GuiNanoCube((TileEntityNanoCubePort) tileEntity);
             case FemtoCubeGuiID:
