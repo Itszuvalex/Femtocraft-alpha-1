@@ -192,6 +192,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
                 decrStackSize(thoriumSlot, reagent.item.stackSize);
                 temperatureCurrent -= reagent.temp;
                 thoriumStoreCurrent += reagent.amount;
+                setModified();
             }
         }
     }
@@ -210,6 +211,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
                 cooledSaltTank.drain(saltAmount, true);
                 setTemperatureCurrent((float) (getTemperatureCurrent() - saltAmount * cooledSaltConversionHeatRatio));
                 addMoltenSalt(saltAmount);
+                setModified();
             }
         } else {
             ItemStack item = getStackInSlot(saltSlot);
@@ -227,16 +229,25 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
                 temperatureCurrent -= reagent.temp;
                 addCooledSalt(reagent.amount);
                 thoriumStoreCurrent -= reagent.amount * solidSaltToThoriumRatio;
+                setModified();
             }
         }
     }
 
     public int addCooledSalt(int amount) {
-        return cooledSaltTank.fill(new FluidStack(Femtocraft.fluidCooledMoltenSalt, amount), true);
+        int ret = cooledSaltTank.fill(new FluidStack(Femtocraft.fluidCooledMoltenSalt, amount), true);
+        if (ret > 0) {
+            setModified();
+        }
+        return ret;
     }
 
     public int addMoltenSalt(int amount) {
-        return moltenSaltTank.fill(new FluidStack(Femtocraft.fluidMoltenSalt, amount), true);
+        int ret = moltenSaltTank.fill(new FluidStack(Femtocraft.fluidMoltenSalt, amount), true);
+        if (ret > 0) {
+            setModified();
+        }
+        return ret;
     }
 
     private void gainHeat() {
@@ -247,11 +258,12 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
         if (heatItem != null) {
             FissionReactorRegistry.FissionReactorReagent result = FissionReactorRegistry.getHeatSource(heatItem);
             if (result != null) {
-                if (result.amount <= heatItem.stackSize &&
-                    ((result.temp > 0 && ((getTemperatureMax() - getTemperatureCurrent()) >= result.temp)) ||
-                     (result.temp < 0 && Math.abs(result.temp) >= getTemperatureCurrent()))) {
-                    inventory.decrStackSize(heatSlot, result.amount);
+                if (result.item.stackSize <= heatItem.stackSize &&
+                    ((result.temp > 0 && (getTemperatureMax() - getTemperatureCurrent()) >= result.temp) ||
+                     (result.temp < 0 && Math.abs(result.temp) <= getTemperatureCurrent()))) {
+                    inventory.decrStackSize(heatSlot, result.item.stackSize);
                     setTemperatureCurrent(getTemperatureCurrent() + result.temp);
+                    setModified();
                 }
             }
         }
