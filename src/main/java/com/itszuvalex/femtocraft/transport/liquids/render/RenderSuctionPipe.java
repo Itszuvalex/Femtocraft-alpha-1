@@ -128,7 +128,7 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
         RenderUtils.renderDoubleSidedCube(x, y, z, 6.f / 16.f, 10.f / 16.f,
                 6.f / 16.f, 10.f / 16.f, 6.f / 16.f, 10.f / 16.f, pipe.center);
 
-        if (fluid != null) {
+        if (fluid != null && fluid.amount > 0) {
             center_liquid.location = new RenderPoint(x, y, z);
             for (RenderQuad quad : center_liquid.faces) {
                 Icon icon_f = fluid.getFluid().getIcon();
@@ -183,7 +183,7 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
                 pipe_m.location = new RenderPoint(x, y, z);
                 pipe_m.draw();
 
-                if (fluid != null) {
+                if (fluid != null && fluid.amount > 0) {
                     pipe_liquid_m.location = new RenderPoint(x, y, z);
                     for (RenderQuad quad : pipe_liquid_m.faces) {
                         Icon icon_f = fluid.getFluid().getIcon();
@@ -244,8 +244,7 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
                             quad.minU = pipe.connector_tank.getMinU();
                             quad.maxU = pipe.connector_tank
                                     .getInterpolatedU(4.f);
-                        }
-                        else {
+                        } else {
                             quad.minU = pipe.connector_tank
                                     .getInterpolatedU(8.f);
                             quad.maxU = pipe.connector_tank
@@ -257,7 +256,7 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
                 tank_m.location = new RenderPoint(x, y, z);
                 tank_m.draw();
 
-                if (fluid != null) {
+                if (fluid != null && fluid.amount > 0) {
                     tank_liquid_m.location = new RenderPoint(x, y, z);
                     for (RenderQuad quad : tank_liquid_m.faces) {
                         Icon icon_f = fluid.getFluid().getIcon();
@@ -424,7 +423,7 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
                     max, pipe.connector,
                     minU, maxU, minV,
                     maxV)
-                                        .rotatePointsClockwise().rotatePointsClockwise());
+                    .rotatePointsClockwise().rotatePointsClockwise());
             tanks_Up.addQuad(RenderUtils.makeWestFace(max, height, min, max,
                     max, pipe.connector, minU, maxU, minV, maxV).rotatePointsClockwise());
 
@@ -435,7 +434,7 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
                     min, pipe.connector,
                     minU, maxU, minV,
                     maxV)
-                                        .rotatePointsClockwise().rotatePointsClockwise());
+                    .rotatePointsClockwise().rotatePointsClockwise());
 
             // Tank cap
             tanks_Up.addQuad(RenderUtils.makeTopFace(min, max, min, max,
@@ -458,7 +457,7 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
                     max_tip, max_tip, pipe.connector_tank, minUtip, maxUtip,
                     minVtip,
                     maxVtip)
-                                        .rotatePointsClockwise().rotatePointsClockwise());
+                    .rotatePointsClockwise().rotatePointsClockwise());
             tanks_Up.addQuad(RenderUtils.makeWestFace(height, 1.f, min_tip,
                     max_tip, min_tip, pipe.connector_tank, minUtip, maxUtip,
                     minVtip, maxVtip).rotatePointsClockwise());

@@ -37,7 +37,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
-public class TileEntityNanoFissionReactorHousing extends TileEntityBase implements IMultiBlockComponent, IFluidHandler, IInventory {
+public class TileEntityNanoFissionReactorHousing extends TileEntityBase implements IMultiBlockComponent, IFluidHandler,
+        IInventory {
     @FemtocraftDataUtils.Saveable(desc = true)
     private MultiBlockInfo info;
 
@@ -105,7 +106,11 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
         if (info.isValidMultiBlock()) {
             IFluidHandler core = (IFluidHandler) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (core == null) return 0;
-            return core.fill(from, resource, doFill);
+            int result = core.fill(from, resource, doFill);
+            if (result > 0) {
+                setModified();
+            }
+            return result;
         }
         return 0;
     }
@@ -116,7 +121,11 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
         if (info.isValidMultiBlock()) {
             IFluidHandler core = (IFluidHandler) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (core == null) return null;
-            return core.drain(from, resource, doDrain);
+            FluidStack result = core.drain(from, resource, doDrain);
+            if (result != null) {
+                setModified();
+            }
+            return result;
         }
         return null;
     }
@@ -127,7 +136,11 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
         if (info.isValidMultiBlock()) {
             IFluidHandler core = (IFluidHandler) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (core == null) return null;
-            return core.drain(from, maxDrain, doDrain);
+            FluidStack result = core.drain(from, maxDrain, doDrain);
+            if (result != null) {
+                setModified();
+            }
+            return result;
         }
         return null;
     }
@@ -175,7 +188,12 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
         if (info.isValidMultiBlock()) {
             IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (core == null) return null;
-            return core.getStackInSlot(i);
+            ItemStack result = core.getStackInSlot(i);
+            if (result != null) {
+                setModified();
+                this.onInventoryChanged();
+            }
+            return result;
         }
         return null;
     }
@@ -185,7 +203,12 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
         if (info.isValidMultiBlock()) {
             IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (core == null) return null;
-            return core.decrStackSize(i, j);
+            ItemStack result = core.decrStackSize(i, j);
+            if (result != null) {
+                setModified();
+                this.onInventoryChanged();
+            }
+            return result;
         }
         return null;
     }
@@ -206,6 +229,8 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
             IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (core == null) return;
             core.setInventorySlotContents(i, itemstack);
+            setModified();
+            this.onInventoryChanged();
         }
     }
 

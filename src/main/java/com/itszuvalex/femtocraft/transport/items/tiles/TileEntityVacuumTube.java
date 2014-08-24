@@ -56,7 +56,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
     ForgeDirection outputDir = ForgeDirection.UNKNOWN;
     private
     @Saveable
-    ItemStack[] items = new ItemStack[4];
+    ItemStack[] items;
     private ISidedInventory inputSidedInv = null;
     private ISidedInventory outputSidedInv = null;
     private IInventory inputInv = null;
@@ -71,6 +71,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
 
     public TileEntityVacuumTube() {
         super();
+        items = new ItemStack[4];
         Arrays.fill(hasItem, false);
         Arrays.fill(items, null);
     }
@@ -88,16 +89,16 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         par1nbtTagCompound.setByte("Connections", generateConnectionMask());
     }
 
-   @Override
+    @Override
     public void femtocraftServerUpdate() {
 
         if (needsCheckInput || inputDir != ForgeDirection.UNKNOWN
-                && missingInput()) {
+                               && missingInput()) {
             needsCheckInput = false;
             addInput(inputDir);
         }
         if (needsCheckOutput || outputDir != ForgeDirection.UNKNOWN
-                && missingOutput()) {
+                                && missingOutput()) {
             needsCheckOutput = false;
             addOutput(outputDir);
         }
@@ -108,13 +109,10 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                 if (outputTube.insertItem(items[3], outputDir.getOpposite())) {
                     items[3] = null;
                     hasItem[3] = false;
-                    worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-                    worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-                    worldObj.markTileEntityChunkModified(xCoord, yCoord,
-                            zCoord, this);
+                    setUpdate();
+                    setModified();
                 }
-            }
-            else if (outputSidedInv != null) {
+            } else if (outputSidedInv != null) {
                 if (canFillInv) {
                     int side = FemtocraftUtils.indexOfForgeDirection(outputDir
                             .getOpposite());
@@ -135,12 +133,8 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                                             slots[i], items[3].copy());
                                     items[3] = null;
                                     hasItem[3] = false;
-                                    worldObj.markBlockForUpdate(xCoord, yCoord,
-                                            zCoord);
-                                    worldObj.markBlockForRenderUpdate(xCoord,
-                                            yCoord, zCoord);
-                                    worldObj.markTileEntityChunkModified(
-                                            xCoord, yCoord, zCoord, this);
+                                    setUpdate();
+                                    setModified();
                                     outputSidedInv.onInventoryChanged();
                                 }
                                 // Combine items
@@ -164,13 +158,9 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                                     if (items[3].stackSize <= 0) {
                                         items[3] = null;
                                         hasItem[3] = false;
-                                        worldObj.markBlockForUpdate(xCoord,
-                                                yCoord, zCoord);
-                                        worldObj.markBlockForRenderUpdate(
-                                                xCoord, yCoord, zCoord);
+                                        setUpdate();
                                     }
-                                    worldObj.markTileEntityChunkModified(
-                                            xCoord, yCoord, zCoord, this);
+                                    setModified();
                                     outputSidedInv.onInventoryChanged();
                                 }
                             }
@@ -178,15 +168,11 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                     }
                     if (items[3] != null) {
                         canFillInv = false;
-                        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-                        worldObj.markBlockForRenderUpdate(xCoord, yCoord,
-                                zCoord);
-                        worldObj.markTileEntityChunkModified(xCoord, yCoord,
-                                zCoord, this);
+                        setUpdate();
+                        setModified();
                     }
                 }
-            }
-            else if (outputInv != null) {
+            } else if (outputInv != null) {
                 if (canFillInv) {
                     int size = outputInv.getSizeInventory();
                     int invMax = outputInv.getInventoryStackLimit();
@@ -200,12 +186,8 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                                         items[3].copy());
                                 items[3] = null;
                                 hasItem[3] = false;
-                                worldObj.markBlockForUpdate(xCoord, yCoord,
-                                        zCoord);
-                                worldObj.markBlockForRenderUpdate(xCoord,
-                                        yCoord, zCoord);
-                                worldObj.markTileEntityChunkModified(xCoord,
-                                        yCoord, zCoord, this);
+                                setUpdate();
+                                setModified();
                                 outputInv.onInventoryChanged();
                             }
                             // Combine items
@@ -228,13 +210,9 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                                 if (items[3].stackSize <= 0) {
                                     items[3] = null;
                                     hasItem[3] = false;
-                                    worldObj.markBlockForUpdate(xCoord, yCoord,
-                                            zCoord);
-                                    worldObj.markBlockForRenderUpdate(xCoord,
-                                            yCoord, zCoord);
+                                    setUpdate();
                                 }
-                                worldObj.markTileEntityChunkModified(xCoord,
-                                        yCoord, zCoord, this);
+                                setModified();
                                 outputInv.onInventoryChanged();
                             }
                         }
@@ -242,13 +220,11 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                     }
                     if (items[3] != null) {
                         canFillInv = false;
-                        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-                        worldObj.markBlockForRenderUpdate(xCoord, yCoord,
-                                zCoord);
+                        setUpdate();
+                        setModified();
                     }
                 }
-            }
-            else if (missingOutput()) {
+            } else if (missingOutput()) {
                 ejectItem(3);
             }
         }
@@ -258,10 +234,8 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
             // Move up only if room
             if (items[i + 1] == null) {
                 if (hasItem[i]) {
-                    worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-                    worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-                    worldObj.markTileEntityChunkModified(xCoord, yCoord,
-                            zCoord, this);
+                    setUpdate();
+                    setModified();
                 }
 
                 hasItem[i + 1] = hasItem[i];
@@ -275,8 +249,8 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         if (isOverflowing()) {
             overflowing = true;
             // Send overflow update
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-            worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+            setUpdate();
+            setModified();
             return;
         }
 
@@ -285,9 +259,8 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
             items[0] = queuedItem;
             hasItem[0] = true;
             queuedItem = null;
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-            worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-            worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
+            setUpdate();
+            setModified();
         }
         // Pull from inventory
         else if (inputSidedInv != null) {
@@ -309,11 +282,8 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                         items[0] = inputSidedInv.decrStackSize(slot, 64);
                         hasItem[0] = true;
                         inputSidedInv.onInventoryChanged();
-                        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-                        worldObj.markBlockForRenderUpdate(xCoord, yCoord,
-                                zCoord);
-                        worldObj.markTileEntityChunkModified(xCoord, yCoord,
-                                zCoord, this);
+                        setUpdate();
+                        setModified();
                         return;
                     }
                 }
@@ -321,8 +291,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                     canExtractInv = false;
                 }
             }
-        }
-        else if (inputInv != null) {
+        } else if (inputInv != null) {
             if (canExtractInv) {
                 boolean extracted = false;
                 int size = inputInv.getSizeInventory();
@@ -336,11 +305,8 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                         items[0] = inputInv.decrStackSize(i, 64);
                         hasItem[0] = true;
                         inputInv.onInventoryChanged();
-                        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-                        worldObj.markBlockForRenderUpdate(xCoord, yCoord,
-                                zCoord);
-                        worldObj.markTileEntityChunkModified(xCoord, yCoord,
-                                zCoord, this);
+                        setUpdate();
+                        setModified();
                         return;
                     }
                 }
@@ -356,8 +322,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
             if (inputDir == ForgeDirection.UNKNOWN) {
                 if (outputDir == ForgeDirection.UNKNOWN) {
                     dir = ForgeDirection.SOUTH;
-                }
-                else {
+                } else {
                     dir = outputDir.getOpposite();
                 }
             }
@@ -376,19 +341,19 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                     continue;
                 }
                 item.addVelocity((xCoord + .5) - item.posX, (yCoord + .5)
-                        - item.posY, (zCoord + .5) - item.posZ);
+                                                            - item.posY, (zCoord + .5) - item.posZ);
             }
         }
     }
 
     public boolean missingInput() {
         return (inputSidedInv == null) && (inputTube == null)
-                && (inputInv == null);
+               && (inputInv == null);
     }
 
     public boolean missingOutput() {
         return (outputSidedInv == null) && (outputTube == null)
-                && (outputInv == null);
+               && (outputInv == null);
     }
 
     private void ejectItem(int slot) {
@@ -396,20 +361,19 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         ejectItemStack(dropItem);
         items[slot] = null;
         hasItem[slot] = false;
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-        worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-        worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
+        setUpdate();
+        setModified();
     }
 
     @Override
     public boolean isOverflowing() {
         return (worldObj.isRemote && overflowing)
-                || (((outputTube != null && !outputTube.canInsertItem(null,
+               || (((outputTube != null && !outputTube.canInsertItem(null,
                 outputDir.getOpposite()
         )) ||
-                ((outputInv != null || outputSidedInv != null) && !canFillInv))
-                && hasItem[0] && hasItem[1] && hasItem[2] && hasItem[3] &&
-                (inputTube == null || queuedItem != null));
+                    ((outputInv != null || outputSidedInv != null) && !canFillInv))
+                   && hasItem[0] && hasItem[1] && hasItem[2] && hasItem[3] &&
+                   (inputTube == null || queuedItem != null));
     }
 
     protected boolean canAcceptItemStack(ItemStack item) {
@@ -426,11 +390,8 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
             tube.disconnect(inputDir.getOpposite());
             inputDir = ForgeDirection.UNKNOWN;
         }
-
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-        worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-
-        worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
+        setUpdate();
+        setModified();
     }
 
 //    @Override
@@ -454,10 +415,8 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
             outputDir = ForgeDirection.UNKNOWN;
         }
 
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-        worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-
-        worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
+        setUpdate();
+        setModified();
     }
 
     private void ejectItemStack(ItemStack dropItem) {
@@ -475,8 +434,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         if (dir == ForgeDirection.UNKNOWN) {
             if (inputDir == ForgeDirection.UNKNOWN) {
                 dir = ForgeDirection.NORTH;
-            }
-            else {
+            } else {
                 dir = inputDir.getOpposite();
             }
         }
@@ -485,6 +443,8 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         entityitem.motionY = dir.offsetY;
         entityitem.motionZ = dir.offsetZ;
         worldObj.spawnEntityInWorld(entityitem);
+        setUpdate();
+        setModified();
     }
 
     @Override
@@ -499,15 +459,14 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         }
         if (queuedItem == null) {
             queuedItem = item.copy();
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+            setUpdate();
 
             if (items[0] == null) {
                 items[0] = queuedItem;
                 queuedItem = null;
                 hasItem[0] = true;
             }
-
-            worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
+            setModified();
 
             return true;
         }
@@ -529,8 +488,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
     public void disconnect(ForgeDirection dir) {
         if (isInput(dir)) {
             clearInput();
-        }
-        else if (isOutput(dir)) {
+        } else if (isOutput(dir)) {
             clearOutput();
         }
     }
@@ -544,7 +502,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
             return false;
         }
         if ((inputInv != null || inputSidedInv != null || inputTube != null)
-                && (dir == inputDir)) {
+            && (dir == inputDir)) {
             return true;
         }
         TileEntity tile = worldObj.getBlockTileEntity(xCoord + dir.offsetX,
@@ -565,33 +523,25 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
             inputInv = null;
             inputTube = null;
             inputDir = dir;
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-            worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-            worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
+            setUpdate();
+            setModified();
             return true;
-        }
-
-        if (tile instanceof IVacuumTube) {
-
+        } else if (tile instanceof IVacuumTube) {
             inputTube = (IVacuumTube) tile;
             inputDir = dir;
             inputSidedInv = null;
             inputInv = null;
             inputTube.addOutput(dir.getOpposite());
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-            worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-            worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
+            setUpdate();
+            setModified();
             return true;
-        }
-
-        if (tile instanceof IInventory) {
+        } else if (tile instanceof IInventory) {
             inputTube = null;
             inputDir = dir;
             inputSidedInv = null;
             inputInv = (IInventory) tile;
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-            worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-            worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
+            setUpdate();
+            setModified();
             return true;
         }
 
@@ -607,7 +557,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
             return false;
         }
         if ((outputInv != null || outputSidedInv != null || outputTube != null)
-                && (dir == outputDir)) {
+            && (dir == outputDir)) {
             return true;
         }
         TileEntity tile = worldObj.getBlockTileEntity(xCoord + dir.offsetX,
@@ -628,33 +578,25 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
             outputInv = null;
             outputTube = null;
             outputDir = dir;
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-            worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-            worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
+            setUpdate();
+            setModified();
             return true;
-        }
-
-        if (tile instanceof IVacuumTube) {
-
+        } else if (tile instanceof IVacuumTube) {
             outputTube = (IVacuumTube) tile;
             outputDir = dir;
             outputSidedInv = null;
             outputInv = null;
             outputTube.addInput(dir.getOpposite());
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-            worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-            worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
+            setUpdate();
+            setModified();
             return true;
-        }
-
-        if (tile instanceof IInventory) {
+        } else if (tile instanceof IInventory) {
             outputTube = null;
             outputDir = dir;
             outputSidedInv = null;
             outputInv = (IInventory) tile;
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-            worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-            worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
+            setUpdate();
+            setModified();
             return true;
         }
 
@@ -736,30 +678,30 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         }
 
         TileEntity inputTile = worldObj.getBlockTileEntity(xCoord
-                + inputDir.offsetX, yCoord + inputDir.offsetY, zCoord
-                +
-                inputDir.offsetZ);
+                                                           + inputDir.offsetX, yCoord + inputDir.offsetY, zCoord
+                                                                                                          +
+                                                                                                          inputDir.offsetZ);
         if (inputTile == null) {
             if (hasInput) {
                 needsCheckInput = true;
             }
-        }
-        else {
+        } else {
             addInput(inputDir);
         }
 
         TileEntity outputTile = worldObj.getBlockTileEntity(xCoord
-                + outputDir.offsetX, yCoord + outputDir.offsetY, zCoord
-                +
-                outputDir.offsetZ);
+                                                            + outputDir.offsetX, yCoord + outputDir.offsetY, zCoord
+                                                                                                             +
+                                                                                                             outputDir.offsetZ);
         if (outputTile == null) {
             if (hasOutput) {
                 needsCheckOutput = true;
             }
-        }
-        else {
+        } else {
             addOutput(outputDir);
         }
+
+        setRenderUpdate();
     }
 
     public boolean isEndpoint() {
@@ -804,8 +746,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                         return true;
                     }
                 }
-            }
-            else {
+            } else {
                 check.add(i);
             }
         }
@@ -844,8 +785,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                         return true;
                     }
                 }
-            }
-            else {
+            } else {
                 check.add(i);
             }
         }
@@ -867,8 +807,8 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
     }
 
     public void searchForFullConnections() {
-        searchForInput();
         searchForOutput();
+        searchForInput();
     }
 
     public boolean searchForConnection() {
@@ -879,6 +819,19 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
 
     private void cycleSearch() {
         int i = 0;
+
+
+        if (missingInput() && !missingOutput()) {
+            ForgeDirection temp = outputDir;
+            clearOutput();
+            addInput(temp);
+            return;
+        } else if (missingOutput() && !missingInput()) {
+            ForgeDirection temp = inputDir;
+            clearInput();
+            addOutput(temp);
+            return;
+        }
 
         int lastOutputOrientation = FemtocraftUtils
                 .indexOfForgeDirection(outputDir);
@@ -915,7 +868,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
             return;
         }
         clearInput();
-        worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+        setUpdate();
     }
 
     private void removeLastOutput() {
@@ -923,7 +876,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
             return;
         }
         clearOutput();
-        worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+        setUpdate();
     }
 
     private void setupReceiveFromTube(TileEntityVacuumTube tube,
@@ -932,10 +885,10 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         tube.outputInv = null;
         tube.outputSidedInv = null;
         tube.outputDir = dir.getOpposite();
-        tube.worldObj.markBlockForUpdate(tube.xCoord, tube.yCoord, tube.zCoord);
-        tube.worldObj.markBlockForRenderUpdate(tube.xCoord, tube.yCoord,
-                tube.zCoord);
-        worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
+        tube.setUpdate();
+        tube.setModified();
+        setUpdate();
+        setModified();
     }
 
     private void setupSendToTube(TileEntityVacuumTube tube, ForgeDirection dir) {
@@ -943,10 +896,10 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         tube.inputInv = null;
         tube.inputSidedInv = null;
         tube.inputDir = dir.getOpposite();
-        tube.worldObj.markBlockForUpdate(tube.xCoord, tube.yCoord, tube.zCoord);
-        tube.worldObj.markBlockForRenderUpdate(tube.xCoord, tube.yCoord,
-                tube.zCoord);
-        worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
+        tube.setUpdate();
+        tube.setModified();
+        setUpdate();
+        setModified();
     }
 
     private void removeReceiveFromTube(TileEntityVacuumTube tube) {
@@ -956,10 +909,10 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
 
         tube.outputTube = null;
         tube.outputDir = tube.inputDir.getOpposite();
-        tube.worldObj.markBlockForUpdate(tube.xCoord, tube.yCoord, tube.zCoord);
-        tube.worldObj.markBlockForRenderUpdate(tube.xCoord, tube.yCoord,
-                tube.zCoord);
-        worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
+        tube.setUpdate();
+        tube.setModified();
+        setUpdate();
+        setModified();
     }
 
     private void removeSendToTube(TileEntityVacuumTube tube) {
@@ -969,47 +922,41 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
 
         tube.inputTube = null;
         tube.inputDir = tube.outputDir.getOpposite();
-        tube.worldObj.markBlockForUpdate(tube.xCoord, tube.yCoord, tube.zCoord);
-        tube.worldObj.markBlockForRenderUpdate(tube.xCoord, tube.yCoord,
-                tube.zCoord);
-        worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
+        tube.setUpdate();
+        tube.setModified();
+        setUpdate();
+        setModified();
     }
 
     public void validateConnections() {
         if (inputDir != ForgeDirection.UNKNOWN) {
             TileEntity tile = worldObj.getBlockTileEntity(xCoord
-                    + inputDir.offsetX, yCoord + inputDir.offsetY, zCoord
-                    +
-                    inputDir.offsetZ);
+                                                          + inputDir.offsetX, yCoord + inputDir.offsetY, zCoord
+                                                                                                         +
+                                                                                                         inputDir.offsetZ);
             if (tile == null) {
                 inputTube = null;
                 inputInv = null;
                 inputSidedInv = null;
-                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-                worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-                worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord,
-                        this);
-            }
-            else {
+                setUpdate();
+                setModified();
+            } else {
                 addInput(inputDir);
             }
         }
         if (outputDir != ForgeDirection.UNKNOWN) {
             TileEntity tile = worldObj.getBlockTileEntity(xCoord
-                    + outputDir.offsetX, yCoord + outputDir.offsetY, zCoord
-                    +
-                    outputDir
-                            .offsetZ);
+                                                          + outputDir.offsetX, yCoord + outputDir.offsetY, zCoord
+                                                                                                           +
+                                                                                                           outputDir
+                                                                                                                   .offsetZ);
             if (tile == null) {
                 outputTube = null;
                 outputInv = null;
                 outputSidedInv = null;
-                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-                worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-                worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord,
-                        this);
-            }
-            else {
+                setUpdate();
+                setModified();
+            } else {
                 addOutput(outputDir);
             }
         }
@@ -1029,8 +976,8 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         insertItem(ItemStack.copyItemStack(item.getEntityItem()),
                 inputDir);
         worldObj.removeEntity(item);
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-        worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+        setUpdate();
+        setModified();
     }
 
     public void onNeighborTileChange() {
@@ -1048,6 +995,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
 
         temp = mask;
         overflowing = ((temp >> hasItem.length) & 1) == 1;
+        setRenderUpdate();
     }
 
     public ForgeDirection getInput() {

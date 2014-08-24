@@ -58,8 +58,8 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     public static float contaminatedThoriumLossRatio = .3f;
     public static float thoriumConcentrationTargetIncrementAmount = .01f;
     public static double cooledSaltConversionHeatRatio = 1.;
-    public static double cooledSaltHeatMultiplier = .01;
-    public static double moltenSaltHeatMultiplier = .02;
+    public static double cooledSaltHeatMultiplier = .001;
+    public static double moltenSaltHeatMultiplier = .002;
     public static double unstableTemperatureThreshold = .66;
     public static double criticalTemperatureThreshold = .83;
     public static double solidSaltToThoriumRatio = .2;
@@ -206,7 +206,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
                 return;
             }
             if (reagent.item.stackSize <= item.stackSize && getTemperatureCurrent() >= reagent.temp &&
-                    (thoriumStoreMax - thoriumStoreCurrent) >= reagent.amount) {
+                (thoriumStoreMax - thoriumStoreCurrent) >= reagent.amount) {
                 decrStackSize(thoriumSlot, reagent.item.stackSize);
                 temperatureCurrent -= reagent.temp;
                 thoriumStoreCurrent += reagent.amount;
@@ -241,8 +241,8 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
                 return;
             }
             if (reagent.item.stackSize <= item.stackSize && getTemperatureCurrent() >= reagent.temp &&
-                    (moltenSaltTank.getCapacity() - getMoltenSaltAmount()) >= reagent.amount &&
-                    thoriumStoreCurrent >= (reagent.amount * solidSaltToThoriumRatio)) {
+                (moltenSaltTank.getCapacity() - getMoltenSaltAmount()) >= reagent.amount &&
+                thoriumStoreCurrent >= (reagent.amount * solidSaltToThoriumRatio)) {
                 decrStackSize(saltSlot, reagent.item.stackSize);
                 temperatureCurrent -= reagent.temp;
                 addMoltenSalt(reagent.amount);
@@ -277,8 +277,8 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
             FissionReactorRegistry.FissionReactorReagent result = FissionReactorRegistry.getHeatSource(heatItem);
             if (result != null) {
                 if (result.item.stackSize <= heatItem.stackSize &&
-                        ((result.temp > 0 && (getTemperatureMax() - getTemperatureCurrent()) >= result.temp) ||
-                                (result.temp < 0 && Math.abs(result.temp) <= getTemperatureCurrent()))) {
+                    ((result.temp > 0 && (getTemperatureMax() - getTemperatureCurrent()) >= result.temp) ||
+                     (result.temp < 0 && Math.abs(result.temp) <= getTemperatureCurrent()))) {
                     inventory.decrStackSize(heatSlot, result.item.stackSize);
                     setTemperatureCurrent(getTemperatureCurrent() + result.temp);
                     setModified();
@@ -310,7 +310,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
             //limit based on cooledSaltTank remaining capacity
             amount = (int) Math.min(amount,
                     (moltenSaltTank.getCapacity() - getMoltenSaltAmount()) /
-                            contaminatedSaltLossRatio);
+                    contaminatedSaltLossRatio);
             //create
             fill = new FluidStack(Femtocraft.fluidCooledMoltenSalt, amount);
             if (doFill) {
@@ -535,7 +535,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
             default:
                 Femtocraft.logger.log(Level.SEVERE,
                         "Received invalid action for Fusion Reactor at x-" + xCoord + " y-" + yCoord + " z-" + zCoord +
-                                " at dimension-" + worldObj.provider.dimensionId + ".");
+                        " at dimension-" + worldObj.provider.dimensionId + ".");
         }
     }
 }
