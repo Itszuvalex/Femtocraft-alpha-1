@@ -32,15 +32,17 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerNanoFissionReactor extends ContainerInv<TileEntityNanoFissionReactorCore> {
-    private int lastHeat = 0;
-    private int lastCooledMoltenSalt = 0;
-    private int lastMoltenSalt = 0;
-    private int lastThorium = 0;
-
     private static final int heatIndex = 0;
     private static final int cooledMoltenSaltIndex = 1;
     private static final int moltenSaltIndex = 2;
     private static final int thoriumIndex = 3;
+    private static final int concentrationTargetIndex = 4;
+    private static final int concentrationMultiplier = 10000;
+    private int lastHeat = 0;
+    private int lastCooledMoltenSalt = 0;
+    private int lastMoltenSalt = 0;
+    private int lastThorium = 0;
+    private int lastConcentrationTarget = 0;
 
     public ContainerNanoFissionReactor(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
                                        TileEntityNanoFissionReactorCore inventory) {
@@ -61,6 +63,7 @@ public class ContainerNanoFissionReactor extends ContainerInv<TileEntityNanoFiss
         par1ICrafting.sendProgressBarUpdate(this, moltenSaltIndex,
                 this.inventory.getMoltenSaltAmount());
         par1ICrafting.sendProgressBarUpdate(this, thoriumIndex, this.inventory.getThoriumStoreCurrent());
+        par1ICrafting.sendProgressBarUpdate(this, concentrationTargetIndex, (int) (this.inventory.getThoriumConcentrationTarget() * concentrationMultiplier));
     }
 
     /**
@@ -88,12 +91,16 @@ public class ContainerNanoFissionReactor extends ContainerInv<TileEntityNanoFiss
             if (this.lastThorium != this.inventory.getTemperatureCurrent()) {
                 icrafting.sendProgressBarUpdate(this, thoriumIndex, this.inventory.getThoriumStoreCurrent());
             }
+            if (this.lastConcentrationTarget != (int) (this.inventory.getThoriumConcentrationTarget() * concentrationMultiplier)) {
+                icrafting.sendProgressBarUpdate(this, concentrationTargetIndex, (int) (this.inventory.getThoriumConcentrationTarget() * concentrationMultiplier));
+            }
         }
 
         this.lastHeat = (int) this.inventory.getTemperatureCurrent();
         this.lastCooledMoltenSalt = this.inventory.getCooledSaltAmount();
         this.lastMoltenSalt = this.inventory.getMoltenSaltAmount();
         this.lastHeat = this.inventory.getThoriumStoreCurrent();
+        this.lastConcentrationTarget = (int) (this.inventory.getThoriumConcentrationTarget() * concentrationMultiplier);
     }
 
     @Override
@@ -111,6 +118,9 @@ public class ContainerNanoFissionReactor extends ContainerInv<TileEntityNanoFiss
                 break;
             case thoriumIndex:
                 this.inventory.setThoriumStoreCurrent(par2);
+                break;
+            case concentrationTargetIndex:
+                this.inventory.setThoriumConcentrationTarget((float) par2 / (float) concentrationMultiplier);
                 break;
             default:
         }

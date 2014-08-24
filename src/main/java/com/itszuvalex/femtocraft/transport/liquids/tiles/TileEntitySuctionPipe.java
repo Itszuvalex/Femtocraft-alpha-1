@@ -35,7 +35,7 @@ import net.minecraftforge.fluids.*;
 import java.util.Arrays;
 
 public class TileEntitySuctionPipe extends TileEntityBase implements
-                                                          ISuctionPipe {
+        ISuctionPipe {
     static final int renderLength = 10;
     private final float TRANSFER_RATIO = .1f;
     public
@@ -165,8 +165,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
                 renderFluid = null;
                 setRenderUpdate();
             }
-        }
-        else {
+        } else {
             renderTick = 0;
         }
 
@@ -213,7 +212,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
             if (tankconnections[i]) {
                 FluidTankInfo[] infoArray = neighbors[i]
                         .getTankInfo(ForgeDirection.getOrientation(i)
-                                                   .getOpposite());
+                                .getOpposite());
                 ++pipeCount;
 
                 FluidTankInfo info = chooseTank(infoArray, output);
@@ -256,13 +255,13 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
             if (tankconnections[i]
                     && pressures[i] < pressure
                     && neighbors[i].canFill(dir.getOpposite(), tank.getFluid()
-                                                                   .getFluid()) && output) {
+                    .getFluid()) && output) {
                 ratioMax += pressure - pressures[i];
             }
             if (pipeconnections[i]
                     && pressures[i] < pressure
                     && neighbors[i].canFill(dir.getOpposite(), tank.getFluid()
-                                                                   .getFluid())) {
+                    .getFluid())) {
                 ratioMax += pressure - pressures[i];
             }
         }
@@ -282,7 +281,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 
             if (pressures[i] < pressure
                     && neighbors[i].canFill(ForgeDirection.getOrientation(i)
-                                                          .getOpposite(), tank.getFluid().getFluid())) {
+                    .getOpposite(), tank.getFluid().getFluid())) {
 
                 ForgeDirection dir = ForgeDirection.getOrientation(i);
 
@@ -315,7 +314,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
             if (!(tankconnections[i] && pressure < pressures[i] && (tank
                     .getFluid() == null || neighbors[i].canDrain(ForgeDirection
                     .getOrientation(i).getOpposite(), tank.getFluid()
-                                                          .getFluid())))) {
+                    .getFluid())))) {
                 continue;
             }
             FluidTankInfo[] infoArray = neighbors[i].getTankInfo(ForgeDirection
@@ -334,12 +333,11 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 
             if (tank.getFluid() == null) {
                 tank.fill(neighbors[i].drain(ForgeDirection.getOrientation(i)
-                                                           .getOpposite(), rationedAmount, true), true);
-            }
-            else {
+                        .getOpposite(), rationedAmount, true), true);
+            } else {
                 tank.fill(neighbors[i].drain(ForgeDirection.getOrientation(i)
-                                                           .getOpposite(), new FluidStack(tank.getFluid()
-                                                                                              .getFluid(), rationedAmount), true), true);
+                        .getOpposite(), new FluidStack(tank.getFluid()
+                        .getFluid(), rationedAmount), true), true);
             }
         }
 
@@ -358,7 +356,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
                 return info;
             }
 
-            if (info.fluid == null && !output) {
+            if ((info.fluid == null || info.fluid.amount == 0) && !output) {
                 continue;
             }
 
@@ -469,8 +467,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
                         changed = true;
                     }
                     neighbors[i] = (IFluidHandler) checkTile;
-                }
-                else if (checkTile instanceof IFluidHandler) {
+                } else if (checkTile instanceof IFluidHandler) {
                     tankconnections[i] = true;
                     if (!oldtanks[i]) {
                         changed = true;

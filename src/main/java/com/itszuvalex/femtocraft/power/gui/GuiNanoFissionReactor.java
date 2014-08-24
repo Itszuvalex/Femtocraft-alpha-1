@@ -42,22 +42,19 @@ public class GuiNanoFissionReactor extends GuiContainer {
 
     public static final ResourceLocation texture = new ResourceLocation(
             Femtocraft.ID.toLowerCase(), "textures/guis/NanoFissionReactor.png");
-    private TileEntityNanoFissionReactorCore reactor;
-
     private static final int decrementButtonX = 111;
     private static final int decrementButtonWidth = 117 - decrementButtonX;
     private static final int decrementButtonY = 61;
     private static final int decrementButtonHeight = 67 - decrementButtonY;
-
     private static final int incrementButtonX = 122;
     private static final int incrementButtonWidth = 128 - incrementButtonX;
     private static final int incrementButtonY = 61;
     private static final int incrementButtonHeight = 67 - incrementButtonY;
-
     private static final int abortButtonX = 37;
     private static final int abortButtonWidth = 108 - abortButtonX;
     private static final int abortButtonY = 67;
     private static final int abortButtonHeight = 75 - abortButtonY;
+    private TileEntityNanoFissionReactorCore reactor;
 
     public GuiNanoFissionReactor(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
                                  TileEntityNanoFissionReactorCore reactor) {
@@ -72,9 +69,9 @@ public class GuiNanoFissionReactor extends GuiContainer {
             int l = (this.height - this.ySize) / 2;
             //incrementButton
             if ((par1 >= (k + incrementButtonX))
-                && (par1 <= (k + incrementButtonX + incrementButtonWidth))
-                && (par2 >= (l + incrementButtonY))
-                && (par2 <= (l + incrementButtonY + incrementButtonHeight))) {
+                    && (par1 <= (k + incrementButtonX + incrementButtonWidth))
+                    && (par2 >= (l + incrementButtonY))
+                    && (par2 <= (l + incrementButtonY + incrementButtonHeight))) {
                 Minecraft.getMinecraft().sndManager.playSoundFX("random.click",
                         1.0F, 1.0F);
                 reactor.onIncrementClick();
@@ -82,9 +79,9 @@ public class GuiNanoFissionReactor extends GuiContainer {
 
             //decrementButton
             if ((par1 >= (k + decrementButtonX))
-                && (par1 <= (k + decrementButtonX + decrementButtonWidth))
-                && (par2 >= (l + decrementButtonY))
-                && (par2 <= (l + decrementButtonY + decrementButtonHeight))) {
+                    && (par1 <= (k + decrementButtonX + decrementButtonWidth))
+                    && (par2 >= (l + decrementButtonY))
+                    && (par2 <= (l + decrementButtonY + decrementButtonHeight))) {
                 Minecraft.getMinecraft().sndManager.playSoundFX("random.click",
                         1.0F, 1.0F);
                 reactor.onDecrementClick();
@@ -92,9 +89,9 @@ public class GuiNanoFissionReactor extends GuiContainer {
 
             //abortButton
             if ((par1 >= (k + abortButtonX))
-                && (par1 <= (k + abortButtonX + abortButtonWidth))
-                && (par2 >= (l + abortButtonY))
-                && (par2 <= (l + abortButtonY + abortButtonHeight))) {
+                    && (par1 <= (k + abortButtonX + abortButtonWidth))
+                    && (par2 >= (l + abortButtonY))
+                    && (par2 <= (l + abortButtonY + abortButtonHeight))) {
                 Minecraft.getMinecraft().sndManager.playSoundFX("random.click",
                         1.0F, 1.0F);
                 reactor.onAbortClick();
@@ -117,22 +114,22 @@ public class GuiNanoFissionReactor extends GuiContainer {
 
         //incrementButton
         if ((par1 >= (k + incrementButtonX))
-            && (par1 <= (k + incrementButtonX + incrementButtonWidth))
-            && (par2 >= (l + incrementButtonY))
-            && (par2 <= (l + incrementButtonY + incrementButtonHeight))) {
+                && (par1 <= (k + incrementButtonX + incrementButtonWidth))
+                && (par2 >= (l + incrementButtonY))
+                && (par2 <= (l + incrementButtonY + incrementButtonHeight))) {
             this.drawGradientRect(
                     k + incrementButtonX, l + incrementButtonY, k + incrementButtonWidth + incrementButtonX,
                     l + incrementButtonY +
-                    incrementButtonHeight, FemtocraftUtils.colorFromARGB(60, 45, 0, 110),
+                            incrementButtonHeight, FemtocraftUtils.colorFromARGB(60, 45, 0, 110),
                     FemtocraftUtils.colorFromARGB(60, 45, 0, 110)
             );
         }
 
         //decrementButton
         if ((par1 >= (k + decrementButtonX))
-            && (par1 <= (k + decrementButtonX + decrementButtonWidth))
-            && (par2 >= (l + decrementButtonY))
-            && (par2 <= (l + decrementButtonY + decrementButtonHeight))) {
+                && (par1 <= (k + decrementButtonX + decrementButtonWidth))
+                && (par2 >= (l + decrementButtonY))
+                && (par2 <= (l + decrementButtonY + decrementButtonHeight))) {
             this.drawGradientRect(
                     k + decrementButtonX,
                     l + decrementButtonY,
@@ -144,9 +141,9 @@ public class GuiNanoFissionReactor extends GuiContainer {
 
         //abortButton
         if ((par1 >= (k + abortButtonX))
-            && (par1 <= (k + abortButtonX + abortButtonWidth))
-            && (par2 >= (l + abortButtonY))
-            && (par2 <= (l + abortButtonY + abortButtonHeight))) {
+                && (par1 <= (k + abortButtonX + abortButtonWidth))
+                && (par2 >= (l + abortButtonY))
+                && (par2 <= (l + abortButtonY + abortButtonHeight))) {
             this.drawGradientRect(
                     k + abortButtonX,
                     l + abortButtonY, k + abortButtonWidth + abortButtonX, l + abortButtonY + abortButtonHeight,
@@ -171,7 +168,7 @@ public class GuiNanoFissionReactor extends GuiContainer {
             String name = fluid == null ? "" : (" " + FluidRegistry
                     .getFluidName(fluid));
             String text = FemtocraftUtils.formatIntegerToString(cooledSaltAmount) + '/'
-                          + FemtocraftUtils.formatIntegerToString(cooledSaltMax) + " mB" + name;
+                    + FemtocraftUtils.formatIntegerToString(cooledSaltMax) + " mB" + name;
 
             this.drawCreativeTabHoveringText(text, par1, par2);
 
@@ -184,7 +181,7 @@ public class GuiNanoFissionReactor extends GuiContainer {
             String name = fluid == null ? "" : (" " + FluidRegistry
                     .getFluidName(fluid));
             String text = FemtocraftUtils.formatIntegerToString(moltenSaltAmount) + '/'
-                          + FemtocraftUtils.formatIntegerToString(moltenSaltMax) + " mB" + name;
+                    + FemtocraftUtils.formatIntegerToString(moltenSaltMax) + " mB" + name;
 
             this.drawCreativeTabHoveringText(text, par1, par2);
         }
@@ -210,16 +207,16 @@ public class GuiNanoFissionReactor extends GuiContainer {
         String abort = "ABORT";
         this.fontRenderer.drawString(abort,
                 (abortButtonX + (abortButtonWidth) / 2) - ((this.fontRenderer.getStringWidth(abort) /
-                                                            2)), 68, FemtocraftUtils.colorFromARGB(0, 255, 255,
+                        2)), 68, FemtocraftUtils.colorFromARGB(0, 255, 255,
                         255));
 
 
         String concentrationTarget = String.format("%2.1f", reactor.getThoriumConcentrationTarget() * 100.f) + "%";
         this.fontRenderer.drawString(concentrationTarget,
                 112 + (127 - 112) / 2 - this.fontRenderer.getStringWidth(concentrationTarget) / 2, 48 + (58 - 48) / 2 -
-                                                                                                   this.fontRenderer
-                                                                                                           .FONT_HEIGHT /
-                                                                                                   2,
+                        this.fontRenderer
+                                .FONT_HEIGHT /
+                                2,
                 FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
     }
 
@@ -264,10 +261,10 @@ public class GuiNanoFissionReactor extends GuiContainer {
         if (fluid != null) {
             Icon image = fluid.getFluid().getStillIcon();
 
-            int i1 = (fluid.amount * 60)
-                     / tank.getCapacity();
+            int i1 = (fluid.amount * 59)
+                    / tank.getCapacity();
             RenderUtils.renderLiquidInGUI(this, this.zLevel, image, k + x, l
-                                                                           + y + (60 - i1), 16, i1);
+                    + y + (59 - i1), 16, i1);
 
             // Rebind texture
             Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
