@@ -27,23 +27,34 @@ import com.itszuvalex.femtocraft.core.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.power.FissionReactorRegistry;
+import com.itszuvalex.femtocraft.research.tiles.TileEntityResearchConsole;
 import com.itszuvalex.femtocraft.utils.BaseInventory;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.util.logging.Level;
+
 public class TileEntityNanoFissionReactorCore extends TileEntityBase implements IInventory, IFluidHandler,
         IMultiBlockComponent {
+    public static final String PACKET_CHANNEL = "Femtocraft" + "." + "fiss";
 
-
+    public static final byte incrementAction = 0;
+    public static final byte decrementAction = 1;
+    public static final byte abortAction = 2;
     public static int cooledSaltConversionPerTick = 100;
     public static float contaminatedSaltLossRatio = .7f;
     public static float contaminatedThoriumLossRatio = .3f;
+    public static float thoriumConcentrationTargetIncrementAmount = .01f;
     public static double cooledSaltConversionHeatRatio = 1.;
     public static double cooledSaltHeatMultiplier = .01;
     public static double moltenSaltHeatMultiplier = .02;
@@ -77,7 +88,17 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     }
 
     public void setThoriumConcentrationTarget(float thoriumConcentrationTarget) {
-        this.thoriumConcentrationTarget = thoriumConcentrationTarget;
+        this.thoriumConcentrationTarget = Math.min(Math.max(thoriumConcentrationTarget, 0f), 1.f);
+        setModified();
+        setUpdate();
+    }
+
+    public void incrementThoriumConcentrationTarget() {
+        setThoriumConcentrationTarget(getThoriumConcentrationTarget() + thoriumConcentrationTargetIncrementAmount);
+    }
+
+    public void decrementThoriumConcentrationTarget() {
+        setThoriumConcentrationTarget(getThoriumConcentrationTarget() - thoriumConcentrationTargetIncrementAmount);
     }
 
     public float getTemperatureCurrent() {
@@ -106,7 +127,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
 
     @FemtocraftDataUtils.Saveable
     private float temperatureCurrent;
-    @FemtocraftDataUtils.Saveable
+    @FemtocraftDataUtils.Saveable(desc = true)
     private float thoriumConcentrationTarget;
 
     public TileEntityNanoFissionReactorCore() {
@@ -154,6 +175,8 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
         thoriumStoreCurrent = 0;
         cooledSaltTank.setFluid(null);
         moltenSaltTank.setFluid(null);
+        setUpdate();
+        setModified();
     }
 
     @Override
@@ -223,11 +246,11 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
                 return;
             }
             if (reagent.item.stackSize <= item.stackSize && getTemperatureCurrent() >= reagent.temp &&
-                (cooledSaltTank.getCapacity() - getCooledSaltAmount()) >= reagent.amount &&
+                (moltenSaltTank.getCapacity() - getMoltenSaltAmount()) >= reagent.amount &&
                 thoriumStoreCurrent >= (reagent.amount * solidSaltToThoriumRatio)) {
                 decrStackSize(saltSlot, reagent.item.stackSize);
                 temperatureCurrent -= reagent.temp;
-                addCooledSalt(reagent.amount);
+                addMoltenSalt(reagent.amount);
                 thoriumStoreCurrent -= reagent.amount * solidSaltToThoriumRatio;
                 setModified();
             }
@@ -467,5 +490,57 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
 
     public IFluidTank getMoltenSaltTank() {
         return moltenSaltTank;
+    }
+
+    public void onIncrementClick() {
+        onClick(incrementAction);
+    }
+
+    public void onDecrementClick() {
+        onClick(decrementAction);
+    }
+
+    public void onAbortClick() {
+        onClick(abortAction);
+    }
+
+    private void onClick(byte action) {
+        Packet250CustomPayload packet = new Packet250CustomPayload();
+        packet.channel = TileEntityResearchConsole.PACKET_CHANNEL;
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream(17);
+        DataOutputStream outputStream = new DataOutputStream(bos);
+        try {
+            outputStream.writeInt(xCoord);
+            outputStream.writeInt(yCoord);
+            outputStream.writeInt(zCoord);
+            outputStream.writeInt(worldObj.provider.dimensionId);
+            outputStream.writeByte(action);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        packet.data = bos.toByteArray();
+        packet.length = bos.size();
+
+        PacketDispatcher.sendPacketToServer(packet);
+    }
+
+    public void handleAction(byte action) {
+        switch (action) {
+            case incrementAction:
+                incrementThoriumConcentrationTarget();
+                break;
+            case decrementAction:
+                decrementThoriumConcentrationTarget();
+                break;
+            case abortAction:
+                abortReaction();
+                break;
+            default:
+                Femtocraft.logger.log(Level.SEVERE,
+                        "Received invalid action for Fusion Reactor at x-" + xCoord + " y-" + yCoord + " z-" + zCoord +
+                        " at dimension-" + worldObj.provider.dimensionId + ".");
+        }
     }
 }

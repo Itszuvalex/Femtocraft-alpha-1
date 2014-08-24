@@ -48,6 +48,7 @@ import com.itszuvalex.femtocraft.power.fluids.FluidCooledMoltenSalt;
 import com.itszuvalex.femtocraft.power.fluids.FluidMoltenSalt;
 import com.itszuvalex.femtocraft.power.items.ItemBlockMicroCube;
 import com.itszuvalex.femtocraft.power.plasma.BlockPlasma;
+import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoFissionReactorCore;
 import com.itszuvalex.femtocraft.proxy.ProxyClient;
 import com.itszuvalex.femtocraft.proxy.ProxyCommon;
 import com.itszuvalex.femtocraft.research.blocks.BlockResearchComputer;
@@ -92,7 +93,8 @@ import java.util.logging.Logger;
 @NetworkMod(channels = {Femtocraft.ID, PropertiesNanite.PACKET_CHANNEL,
         ManagerResearch.RESEARCH_CHANNEL,
         TileEntityResearchConsole.PACKET_CHANNEL,
-        TileEntityVacuumTube.packetChannel}, packetHandler = FemtocraftPacketHandler.class,
+        TileEntityVacuumTube.PACKET_CHANNEL, TileEntityNanoFissionReactorCore.PACKET_CHANNEL},
+        packetHandler = FemtocraftPacketHandler.class,
         clientSideRequired = true, serverSideRequired = true)
 public class Femtocraft {
     public static final String ID = "Femtocraft";

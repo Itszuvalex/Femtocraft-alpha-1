@@ -46,7 +46,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
     // hasItem array for client-side rendering only
     // Server will update this array and this alone to save bytes
     // Player has no need to know WHAT is in the pipes, anyways
-    static final public String packetChannel = "Femtocraft" + ".VTube";
+    static final public String PACKET_CHANNEL = "Femtocraft" + ".VTube";
     // Will not be @Saveable due to bit masking
     public boolean[] hasItem = new boolean[4];
     public
@@ -673,7 +673,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
 
     @Override
     public String getPacketChannel() {
-        return packetChannel;
+        return PACKET_CHANNEL;
     }
 
     private Packet250CustomPayload generatePacket() {
@@ -691,7 +691,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         }
 
         Packet250CustomPayload packet = new Packet250CustomPayload();
-        packet.channel = packetChannel;
+        packet.channel = PACKET_CHANNEL;
         packet.data = bos.toByteArray();
         packet.length = bos.size();
 

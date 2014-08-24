@@ -24,6 +24,7 @@ package com.itszuvalex.femtocraft;
 import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
 import com.itszuvalex.femtocraft.managers.research.ResearchPlayer;
 import com.itszuvalex.femtocraft.player.PropertiesNanite;
+import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoFissionReactorCore;
 import com.itszuvalex.femtocraft.research.tiles.TileEntityResearchConsole;
 import com.itszuvalex.femtocraft.transport.items.tiles.TileEntityVacuumTube;
 import cpw.mods.fml.common.network.IPacketHandler;
@@ -62,15 +63,47 @@ public class FemtocraftPacketHandler implements IPacketHandler {
         DataInputStream inputStream = new DataInputStream(
                 new ByteArrayInputStream(packet.data));
 
-        if (packet.channel.equalsIgnoreCase(TileEntityVacuumTube.packetChannel)) {
+        if (packet.channel.equalsIgnoreCase(TileEntityVacuumTube.PACKET_CHANNEL)) {
             handleVacuumTube(inputStream, playerEntity);
             return;
         }
         if (packet.channel
                 .equalsIgnoreCase(TileEntityResearchConsole.PACKET_CHANNEL)) {
             handleResearchConsole(inputStream, playerEntity);
+            return;
         }
 
+        if (packet.channel.equalsIgnoreCase(TileEntityNanoFissionReactorCore.PACKET_CHANNEL)) {
+            handleFissionReactorPacket(inputStream, playerEntity);
+            return;
+        }
+
+    }
+
+    private void handleFissionReactorPacket(DataInputStream inputStream, Player playerEntity) {
+        int x = 0, y = 0, z = 0, dim = 0;
+        byte action = -1;
+
+        try {
+            x = inputStream.readInt();
+            y = inputStream.readInt();
+            z = inputStream.readInt();
+            dim = inputStream.readInt();
+            action = inputStream.readByte();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        WorldServer world = DimensionManager.getWorld(dim);
+        if (world == null) {
+            Femtocraft.logger.log(Level.SEVERE,
+                    "Received FissionReactor Packet for nonexistent World");
+        } else {
+            TileEntity te = world.getBlockTileEntity(x, y, z);
+            if (te instanceof TileEntityNanoFissionReactorCore) {
+                ((TileEntityNanoFissionReactorCore) te).handleAction(action);
+            }
+        }
     }
 
     private void handleResearchPacket(Packet250CustomPayload packet,
@@ -87,7 +120,8 @@ public class FemtocraftPacketHandler implements IPacketHandler {
             e.printStackTrace();
             Femtocraft.logger
                     .log(Level.SEVERE,
-                            "Error decompressing PlayerResearch data from packet.  This client will not be able to detect its research.");
+                            "Error decompressing PlayerResearch data from packet.  This client will not be able to " +
+                            "detect its research.");
             return;
         }
         ResearchPlayer rp = new ResearchPlayer(cp.username);
@@ -143,8 +177,7 @@ public class FemtocraftPacketHandler implements IPacketHandler {
         if (world == null) {
             Femtocraft.logger.log(Level.SEVERE,
                     "Received ResearchConsole Packet for nonexistent World");
-        }
-        else {
+        } else {
             TileEntity te = world.getBlockTileEntity(x, y, z);
             if (te instanceof TileEntityResearchConsole) {
                 ((TileEntityResearchConsole) te).startWork();
