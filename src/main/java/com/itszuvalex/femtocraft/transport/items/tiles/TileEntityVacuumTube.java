@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft.transport.items.tiles;
 
 import com.itszuvalex.femtocraft.api.IVacuumTube;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
+import com.itszuvalex.femtocraft.utils.BaseInventory;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.entity.item.EntityItem;
@@ -56,7 +57,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
     ForgeDirection outputDir = ForgeDirection.UNKNOWN;
     private
     @Saveable
-    ItemStack[] items;
+    BaseInventory items;
     private ISidedInventory inputSidedInv = null;
     private ISidedInventory outputSidedInv = null;
     private IInventory inputInv = null;
@@ -71,9 +72,8 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
 
     public TileEntityVacuumTube() {
         super();
-        items = new ItemStack[4];
+        items = new BaseInventory(4);
         Arrays.fill(hasItem, false);
-        Arrays.fill(items, null);
     }
 
     @Override
@@ -95,19 +95,23 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         if (needsCheckInput || inputDir != ForgeDirection.UNKNOWN
                                && missingInput()) {
             needsCheckInput = false;
-            addInput(inputDir);
+            if (!addInput(inputDir)) {
+                return;
+            }
         }
         if (needsCheckOutput || outputDir != ForgeDirection.UNKNOWN
                                 && missingOutput()) {
             needsCheckOutput = false;
-            addOutput(outputDir);
+            if (!addOutput(outputDir)) {
+                return;
+            }
         }
 
-        if (items[3] != null) {
+        if (items.getStackInSlot(3) != null) {
             // If next tube has a slot
             if (outputTube != null) {
-                if (outputTube.insertItem(items[3], outputDir.getOpposite())) {
-                    items[3] = null;
+                if (outputTube.insertItem(items.getStackInSlot(3), outputDir.getOpposite())) {
+                    items.setInventorySlotContents(3, null);
                     hasItem[3] = false;
                     setUpdate();
                     setModified();
@@ -119,19 +123,19 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                     int[] slots = outputSidedInv
                             .getAccessibleSlotsFromSide(side);
                     int invMax = outputSidedInv.getInventoryStackLimit();
-                    for (int i = 0; i < slots.length && items[3] != null; i++) {
-                        if (outputSidedInv.canInsertItem(slots[i], items[3],
+                    for (int i = 0; i < slots.length && items.getStackInSlot(3) != null; i++) {
+                        if (outputSidedInv.canInsertItem(slots[i], items.getStackInSlot(3),
                                 side)) {
                             if (outputSidedInv.isItemValidForSlot(slots[i],
-                                    items[3])) {
+                                    items.getStackInSlot(3))) {
                                 ItemStack slotStack = outputSidedInv
                                         .getStackInSlot(slots[i]);
 
                                 // If no items in that slot
                                 if (slotStack == null) {
                                     outputSidedInv.setInventorySlotContents(
-                                            slots[i], items[3].copy());
-                                    items[3] = null;
+                                            slots[i], items.getStackInSlot(3).copy());
+                                    items.setInventorySlotContents(3, null);
                                     hasItem[3] = false;
                                     setUpdate();
                                     setModified();
@@ -140,10 +144,10 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                                 // Combine items
                                 else {
                                     // Account for possible mismatch
-                                    if (items[3].itemID != slotStack.itemID) {
+                                    if (items.getStackInSlot(3).itemID != slotStack.itemID) {
                                         continue;
                                     }
-                                    if (!items[3].isStackable()) {
+                                    if (!items.getStackInSlot(3).isStackable()) {
                                         continue;
                                     }
 
@@ -151,12 +155,12 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                                     int max = invMax > itemMax ? itemMax
                                             : invMax;
                                     int room = max - slotStack.stackSize;
-                                    int amount = room > items[3].stackSize ? items[3].stackSize
-                                            : room;
+                                    int amount =
+                                            room > items.getStackInSlot(3).stackSize ? items.getStackInSlot(3).stackSize
+                                                    : room;
                                     slotStack.stackSize += amount;
-                                    items[3].stackSize -= amount;
-                                    if (items[3].stackSize <= 0) {
-                                        items[3] = null;
+                                    items.decrStackSize(3, amount);
+                                    if (items.getStackInSlot(3) == null || items.getStackInSlot(3).stackSize <= 0) {
                                         hasItem[3] = false;
                                         setUpdate();
                                     }
@@ -166,7 +170,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                             }
                         }
                     }
-                    if (items[3] != null) {
+                    if (items.getStackInSlot(3) != null) {
                         canFillInv = false;
                         setUpdate();
                         setModified();
@@ -176,15 +180,15 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                 if (canFillInv) {
                     int size = outputInv.getSizeInventory();
                     int invMax = outputInv.getInventoryStackLimit();
-                    for (int i = 0; i < size && items[3] != null; i++) {
-                        if (outputInv.isItemValidForSlot(i, items[3])) {
+                    for (int i = 0; i < size && items.getStackInSlot(3) != null; i++) {
+                        if (outputInv.isItemValidForSlot(i, items.getStackInSlot(3))) {
                             ItemStack slotStack = outputInv.getStackInSlot(i);
 
                             // If no items in that slot
                             if (slotStack == null) {
                                 outputInv.setInventorySlotContents(i,
-                                        items[3].copy());
-                                items[3] = null;
+                                        items.getStackInSlot(3).copy());
+                                items.setInventorySlotContents(3, null);
                                 hasItem[3] = false;
                                 setUpdate();
                                 setModified();
@@ -193,22 +197,22 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                             // Combine items
                             else {
                                 // Account for possible mismatch
-                                if (items[3].itemID != slotStack.itemID) {
+                                if (items.getStackInSlot(3).itemID != slotStack.itemID) {
                                     continue;
                                 }
-                                if (!items[3].isStackable()) {
+                                if (!items.getStackInSlot(3).isStackable()) {
                                     continue;
                                 }
 
                                 int itemMax = slotStack.getMaxStackSize();
                                 int max = invMax > itemMax ? itemMax : invMax;
                                 int room = max - slotStack.stackSize;
-                                int amount = room > items[3].stackSize ? items[3].stackSize
-                                        : room;
+                                int amount =
+                                        room > items.getStackInSlot(3).stackSize ? items.getStackInSlot(3).stackSize
+                                                : room;
                                 slotStack.stackSize += amount;
-                                items[3].stackSize -= amount;
-                                if (items[3].stackSize <= 0) {
-                                    items[3] = null;
+                                items.decrStackSize(3, amount);
+                                if (items.getStackInSlot(3) == null) {
                                     hasItem[3] = false;
                                     setUpdate();
                                 }
@@ -218,7 +222,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                         }
 
                     }
-                    if (items[3] != null) {
+                    if (items.getStackInSlot(3) != null) {
                         canFillInv = false;
                         setUpdate();
                         setModified();
@@ -230,9 +234,9 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         }
 
         // Move up rest of items, starting from end
-        for (int i = items.length - 2; i >= 0; i--) {
+        for (int i = items.getSizeInventory() - 2; i >= 0; i--) {
             // Move up only if room
-            if (items[i + 1] == null) {
+            if (items.getStackInSlot(i + 1) == null) {
                 if (hasItem[i]) {
                     setUpdate();
                     setModified();
@@ -240,8 +244,8 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
 
                 hasItem[i + 1] = hasItem[i];
                 hasItem[i] = false;
-                items[i + 1] = items[i];
-                items[i] = null;
+                items.setInventorySlotContents(i + 1, items.getStackInSlot(i));
+                items.setInventorySlotContents(i, null);
             }
         }
 
@@ -256,7 +260,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
 
         // If being loaded by another BlockVacuumTube
         if (queuedItem != null) {
-            items[0] = queuedItem;
+            items.setInventorySlotContents(0, queuedItem);
             hasItem[0] = true;
             queuedItem = null;
             setUpdate();
@@ -279,7 +283,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                             continue;
                         }
                         extracted = true;
-                        items[0] = inputSidedInv.decrStackSize(slot, 64);
+                        items.setInventorySlotContents(0, inputSidedInv.decrStackSize(slot, 64));
                         hasItem[0] = true;
                         inputSidedInv.onInventoryChanged();
                         setUpdate();
@@ -302,7 +306,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                             continue;
                         }
                         extracted = true;
-                        items[0] = inputInv.decrStackSize(i, 64);
+                        items.setInventorySlotContents(0, inputInv.decrStackSize(i, 64));
                         hasItem[0] = true;
                         inputInv.onInventoryChanged();
                         setUpdate();
@@ -357,9 +361,9 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
     }
 
     private void ejectItem(int slot) {
-        ItemStack dropItem = items[slot];
+        ItemStack dropItem = items.getStackInSlot(slot);
         ejectItemStack(dropItem);
-        items[slot] = null;
+        items.setInventorySlotContents(slot, null);
         hasItem[slot] = false;
         setUpdate();
         setModified();
@@ -461,8 +465,8 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
             queuedItem = item.copy();
             setUpdate();
 
-            if (items[0] == null) {
-                items[0] = queuedItem;
+            if (items.getStackInSlot(0) == null) {
+                items.setInventorySlotContents(0, queuedItem);
                 queuedItem = null;
                 hasItem[0] = true;
             }
@@ -712,7 +716,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         clearInput();
         clearOutput();
 
-        for (int i = 0; i < items.length; i++) {
+        for (int i = 0; i < items.getSizeInventory(); i++) {
             ejectItem(i);
         }
 
@@ -822,12 +826,12 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
 
 
         if (missingInput() && !missingOutput()) {
-            ForgeDirection temp = outputDir;
+            ForgeDirection temp = outputDir.getOpposite();
             clearOutput();
             addInput(temp);
             return;
         } else if (missingOutput() && !missingInput()) {
-            ForgeDirection temp = inputDir;
+            ForgeDirection temp = inputDir.getOpposite();
             clearInput();
             addOutput(temp);
             return;
