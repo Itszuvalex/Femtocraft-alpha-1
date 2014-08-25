@@ -27,6 +27,7 @@ import com.itszuvalex.femtocraft.core.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.power.FissionReactorRegistry;
+import com.itszuvalex.femtocraft.power.multiblock.MultiBlockNanoFissionReactor;
 import com.itszuvalex.femtocraft.utils.BaseInventory;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import cpw.mods.fml.common.network.PacketDispatcher;
@@ -95,6 +96,29 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
         thoriumStoreCurrent = 0;
         temperatureCurrent = 0;
         thoriumConcentrationTarget = 0;
+    }
+
+    public enum ReactorState {
+        INACTIVE,
+        ACTIVE,
+        UNSTABLE,
+        CRITICAL
+    }
+
+    public ReactorState getState() {
+        float temp = getTemperatureCurrent();
+        float max = getTemperatureMax();
+        if (temp <= 0) {return ReactorState.INACTIVE;}
+        if (temp >= 0 && temp < max * unstableTemperatureThreshold) {return ReactorState.ACTIVE;}
+        if (temp >= max * unstableTemperatureThreshold && temp < max * criticalTemperatureThreshold) {
+            return ReactorState.UNSTABLE;
+        }
+        return ReactorState.CRITICAL;
+    }
+
+    @Override
+    public void onInventoryChanged() {
+        MultiBlockNanoFissionReactor.instance.onMultiblockInventoryChanged(worldObj, info.x(), info.y(), info.z());
     }
 
     public float getThoriumConcentrationTarget() {
@@ -376,6 +400,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     public ItemStack decrStackSize(int i, int j) {
         ItemStack stack = inventory.decrStackSize(i, j);
         setModified();
+        onInventoryChanged();
         return stack;
     }
 
@@ -388,6 +413,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     public void setInventorySlotContents(int i, ItemStack itemstack) {
         inventory.setInventorySlotContents(i, itemstack);
         setModified();
+        onInventoryChanged();
     }
 
     @Override

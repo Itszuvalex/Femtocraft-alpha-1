@@ -240,6 +240,20 @@ public class GuiNanoFissionReactor extends GuiContainer {
         // 14, i1 + 2);
         // }
 
+        //ReactorState
+        switch (reactor.getState()) {
+            case ACTIVE:
+                this.drawTexturedModalRect(k + 30, l + 70, 176, 6, 3, 3);
+                break;
+            case UNSTABLE:
+                this.drawTexturedModalRect(k + 30, l + 70, 176, 3, 3, 3);
+                break;
+            case CRITICAL:
+                this.drawTexturedModalRect(k + 30, l + 70, 176, 0, 3, 3);
+                break;
+            default:
+        }
+
         //Heat
         int heatHeight = 46;
         i1 = (int) (Math.min(

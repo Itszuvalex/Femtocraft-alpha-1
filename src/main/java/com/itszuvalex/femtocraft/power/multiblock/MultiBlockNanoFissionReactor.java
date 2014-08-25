@@ -38,6 +38,16 @@ public class MultiBlockNanoFissionReactor implements IMultiBlock {
 
     }
 
+    public void onMultiblockInventoryChanged(World world, int x, int y, int z) {
+        for (int i = -1; i <= 1; ++i) {
+            for (int j = -1; j <= 1; ++j) {
+                for (int k = -1; k <= 1; ++k) {
+                    world.func_96440_m(x + i, y + j, z + k, world.getBlockId(x + i, y + j, z + k));
+                }
+            }
+        }
+    }
+
     @Override
     public boolean canForm(World world, int x, int y, int z) {
         return checkComponents(world, x, y, z, false);
@@ -51,8 +61,8 @@ public class MultiBlockNanoFissionReactor implements IMultiBlock {
     @Override
     public boolean isBlockInMultiBlock(World world, int x, int y, int z, int c_x, int c_y, int c_z) {
         return x >= (c_x - 1) && x <= (c_x + 1) &&
-                y >= (c_y - 1) && y <= (c_y + 1) &&
-                z >= (c_z - 1) && z <= (c_z + 1);
+               y >= (c_y - 1) && y <= (c_y + 1) &&
+               z >= (c_z - 1) && z <= (c_z + 1);
     }
 
     @Override
@@ -63,8 +73,9 @@ public class MultiBlockNanoFissionReactor implements IMultiBlock {
             for (int j = -1; j <= 1; ++j) {
                 for (int k = -1; k <= 1; ++k) {
                     TileEntity te = world.getBlockTileEntity(x + i, y + k, z
-                            + j);
-                    result = te instanceof IMultiBlockComponent && ((IMultiBlockComponent) te).formMultiBlock(world, x, y, z) && result;
+                                                                           + j);
+                    result = te instanceof IMultiBlockComponent &&
+                             ((IMultiBlockComponent) te).formMultiBlock(world, x, y, z) && result;
                 }
             }
         }
@@ -96,8 +107,9 @@ public class MultiBlockNanoFissionReactor implements IMultiBlock {
             for (int j = -1; j <= 1; ++j) {
                 for (int k = -1; k <= 1; ++k) {
                     TileEntity te = world.getBlockTileEntity(x + i, y + k, z
-                            + j);
-                    result = te instanceof IMultiBlockComponent && ((IMultiBlockComponent) te).breakMultiBlock(world, x, y, z) && result;
+                                                                           + j);
+                    result = te instanceof IMultiBlockComponent &&
+                             ((IMultiBlockComponent) te).breakMultiBlock(world, x, y, z) && result;
                 }
             }
         }
@@ -110,17 +122,16 @@ public class MultiBlockNanoFissionReactor implements IMultiBlock {
             for (int j = -1; j <= 1; ++j) {
                 for (int k = -1; k <= 1; ++k) {
                     TileEntity te = world.getBlockTileEntity(x + i, y + k, z
-                            + j);
+                                                                           + j);
                     if ((i == 0 && j == 0 & k == 0 && te instanceof
                             TileEntityNanoFissionReactorCore) || te instanceof TileEntityNanoFissionReactorHousing) {
                         if (strict) {
                             if (((IMultiBlockComponent) te).getInfo()
-                                                           .isValidMultiBlock()) {
+                                    .isValidMultiBlock()) {
                                 return false;
                             }
                         }
-                    }
-                    else {
+                    } else {
                         return false;
                     }
                 }
