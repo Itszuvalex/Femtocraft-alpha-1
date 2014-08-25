@@ -81,12 +81,15 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         super.readFromNBT(par1nbtTagCompound);
         byte connections = par1nbtTagCompound.getByte("Connections");
         parseConnectionMask(connections);
+        byte hasItems = par1nbtTagCompound.getByte("HasItems");
+        parseItemMask(hasItems);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
         super.writeToNBT(par1nbtTagCompound);
         par1nbtTagCompound.setByte("Connections", generateConnectionMask());
+        par1nbtTagCompound.setByte("HasItems", generateItemMask());
     }
 
     @Override
@@ -94,17 +97,17 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
 
         if (needsCheckInput || inputDir != ForgeDirection.UNKNOWN
                                && missingInput()) {
-            needsCheckInput = false;
             if (!addInput(inputDir)) {
                 return;
             }
+            needsCheckInput = false;
         }
         if (needsCheckOutput || outputDir != ForgeDirection.UNKNOWN
                                 && missingOutput()) {
-            needsCheckOutput = false;
             if (!addOutput(outputDir)) {
                 return;
             }
+            needsCheckOutput = false;
         }
 
         if (items.getStackInSlot(3) != null) {
@@ -269,7 +272,6 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         // Pull from inventory
         else if (inputSidedInv != null) {
             if (canExtractInv) {
-                boolean extracted = false;
                 int side = FemtocraftUtils.indexOfForgeDirection(inputDir
                         .getOpposite());
                 int[] slots = inputSidedInv.getAccessibleSlotsFromSide(side);
@@ -282,7 +284,6 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                         if (!canAcceptItemStack(stack)) {
                             continue;
                         }
-                        extracted = true;
                         items.setInventorySlotContents(0, inputSidedInv.decrStackSize(slot, 64));
                         hasItem[0] = true;
                         inputSidedInv.onInventoryChanged();
@@ -291,13 +292,10 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                         return;
                     }
                 }
-                if (!extracted) {
-                    canExtractInv = false;
-                }
+                canExtractInv = false;
             }
         } else if (inputInv != null) {
             if (canExtractInv) {
-                boolean extracted = false;
                 int size = inputInv.getSizeInventory();
                 for (int i = 0; i < size; i++) {
                     ItemStack stack = inputInv.getStackInSlot(i);
@@ -305,7 +303,6 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                         if (!canAcceptItemStack(stack)) {
                             continue;
                         }
-                        extracted = true;
                         items.setInventorySlotContents(0, inputInv.decrStackSize(i, 64));
                         hasItem[0] = true;
                         inputInv.onInventoryChanged();
@@ -314,9 +311,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                         return;
                     }
                 }
-                if (!extracted) {
-                    canExtractInv = false;
-                }
+                canExtractInv = false;
             }
         }
         // Suck them in, only if room
@@ -458,6 +453,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
 
     @Override
     public boolean insertItem(ItemStack item, ForgeDirection dir) {
+        if (item == null) return true;
         if (isOverflowing()) {
             return false;
         }
@@ -977,11 +973,12 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         if (!canAcceptItemStack(item.getEntityItem())) {
             return;
         }
-        insertItem(ItemStack.copyItemStack(item.getEntityItem()),
-                inputDir);
-        worldObj.removeEntity(item);
-        setUpdate();
-        setModified();
+        if (insertItem(ItemStack.copyItemStack(item.getEntityItem()),
+                inputDir)) {
+            worldObj.removeEntity(item);
+            setUpdate();
+            setModified();
+        }
     }
 
     public void onNeighborTileChange() {
