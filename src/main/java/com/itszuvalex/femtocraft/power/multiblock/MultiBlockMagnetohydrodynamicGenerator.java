@@ -21,20 +21,19 @@
 
 package com.itszuvalex.femtocraft.power.multiblock;
 
-import com.itszuvalex.femtocraft.api.IPhlegethonTunnelComponent;
-import com.itszuvalex.femtocraft.api.IPhlegethonTunnelCore;
 import com.itszuvalex.femtocraft.core.multiblock.IMultiBlock;
 import com.itszuvalex.femtocraft.core.multiblock.IMultiBlockComponent;
+import com.itszuvalex.femtocraft.power.tiles.TileEntityMagnetohydrodynamicGenerator;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 /**
- * Created by Christopher Harris (Itszuvalex) on 7/13/14.
+ * Created by Christopher Harris (Itszuvalex) on 8/25/14.
  */
-public class MultiBlockPhlegethonTunnel implements IMultiBlock {
-    public static MultiBlockPhlegethonTunnel instance = new MultiBlockPhlegethonTunnel();
+public class MultiBlockMagnetohydrodynamicGenerator implements IMultiBlock {
+    public MultiBlockMagnetohydrodynamicGenerator instance = new MultiBlockMagnetohydrodynamicGenerator();
 
-    private MultiBlockPhlegethonTunnel() {
+    private MultiBlockMagnetohydrodynamicGenerator() {
 
     }
 
@@ -43,9 +42,32 @@ public class MultiBlockPhlegethonTunnel implements IMultiBlock {
         return checkComponents(world, x, y, z, false);
     }
 
+    private boolean checkComponents(World world, int x, int y, int z, boolean strict) {
+        for (int i = -1; i <= 1; ++i) {
+            for (int j = -1; j <= 1; ++j) {
+                for (int k = -1; k <= 1; ++k) {
+                    TileEntity te = world.getBlockTileEntity(x + i, y + k, z
+                            + j);
+                    if (te instanceof TileEntityMagnetohydrodynamicGenerator || te instanceof TileEntitySteamGenerator) {
+                        if (strict) {
+                            if (((IMultiBlockComponent) te).getInfo()
+                                                           .isValidMultiBlock()) {
+                                return false;
+                            }
+                        }
+                    }
+                    else {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
     @Override
     public boolean canFormStrict(World world, int x, int y, int z) {
-        return checkComponents(world, x, y, z, true);
+        return checkComponents(world, x, y, z, false);
     }
 
     @Override
@@ -102,30 +124,5 @@ public class MultiBlockPhlegethonTunnel implements IMultiBlock {
             }
         }
         return result;
-    }
-
-    private boolean checkComponents(World world, int x, int y, int z,
-                                    boolean strict) {
-        for (int i = -1; i <= 1; ++i) {
-            for (int j = -1; j <= 1; ++j) {
-                for (int k = -1; k <= 1; ++k) {
-                    TileEntity te = world.getBlockTileEntity(x + i, y + k, z
-                            + j);
-                    if ((i == 0 && j == 0 & k == 0 && te instanceof
-                            IPhlegethonTunnelCore) || te instanceof IPhlegethonTunnelComponent) {
-                        if (strict) {
-                            if (((IMultiBlockComponent) te).getInfo()
-                                                           .isValidMultiBlock()) {
-                                return false;
-                            }
-                        }
-                    }
-                    else {
-                        return false;
-                    }
-                }
-            }
-        }
-        return true;
     }
 }
