@@ -21,11 +21,63 @@
 
 package com.itszuvalex.femtocraft.power.blocks;
 
+import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.core.blocks.TileContainer;
+import com.itszuvalex.femtocraft.core.multiblock.IMultiBlockComponent;
+import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.power.multiblock.MultiBlockMagnetohydrodynamicGenerator;
+import com.itszuvalex.femtocraft.power.tiles.TileEntitySteamGenerator;
+import net.minecraft.block.material.Material;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+
 /**
  * Created by Christopher Harris (Itszuvalex) on 8/25/14.
  */
-public class BlockSteamGenerator {
-    public BlockSteamGenerator() {
+public class BlockSteamGenerator extends TileContainer {
+    public BlockSteamGenerator(int par1) {
+        super(par1, Material.iron);
+        setCreativeTab(Femtocraft.femtocraftTab);
+        setUnlocalizedName("BlockSteamGenerator");
+    }
 
+    @Override
+    public TileEntity createNewTileEntity(World world) {
+        return new TileEntitySteamGenerator();
+    }
+
+    /*
+    * (non-Javadoc)
+    *
+    * @see
+    * net.minecraft.block.Block#onPostBlockPlaced(net.minecraft.world.World,
+    * int, int, int, int)
+    */
+    @Override
+    public void onPostBlockPlaced(World par1World, int par2, int par3,
+                                  int par4, int par5) {
+        MultiBlockMagnetohydrodynamicGenerator.instance.formMultiBlockWithBlock(par1World, par2,
+                par3, par4);
+        super.onPostBlockPlaced(par1World, par2, par3, par4, par5);
+    }
+
+    /*
+         * (non-Javadoc)
+         *
+         * @see
+         * TileContainer#breakBlock(net.minecraft.world.World
+         * , int, int, int, int, int)
+         */
+    @Override
+    public void breakBlock(World par1World, int par2, int par3, int par4,
+                           int par5, int par6) {
+        TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+        if (te instanceof TileEntitySteamGenerator) {
+            MultiBlockInfo info = ((IMultiBlockComponent) te).getInfo();
+            MultiBlockMagnetohydrodynamicGenerator.instance.breakMultiBlock(par1World, info.x(),
+                    info.y(), info.z());
+
+        }
+        super.breakBlock(par1World, par2, par3, par4, par5, par6);
     }
 }

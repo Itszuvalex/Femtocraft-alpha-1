@@ -27,13 +27,14 @@ import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 public class TileEntityFemtoEntangler extends TileEntityBaseEntityNanoEnmesher {
     public static final int outputSlot = 13;
     public static final int inventorySize = 14;
+    public static int powerStorage = 10000;
     public static int powerToCook_default = 160;
     public static float tickMultiplier_default = .5f;
 
     public TileEntityFemtoEntangler() {
         super();
         setTechLevel(EnumTechLevel.FEMTO);
-        setMaxStorage(10000);
+        setMaxStorage(powerStorage);
         inventory.setInventorySize(inventorySize);
     }
 

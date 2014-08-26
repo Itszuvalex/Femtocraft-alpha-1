@@ -25,6 +25,7 @@ import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 
 public class TileEntityFemtoCoagulator extends TileEntityBaseEntityMicroReconstructor {
+    public static int powerStorage = 100000;
     public static int maxSmelt_default = 32;
     public static int ticksToCook_default = 20;
     public static int powerToCook_default = 160;
@@ -33,7 +34,7 @@ public class TileEntityFemtoCoagulator extends TileEntityBaseEntityMicroReconstr
         super();
         this.setTechLevel(EnumTechLevel.FEMTO);
         // TODO: Pull number from configs
-        this.setMaxStorage(100000);
+        this.setMaxStorage(powerStorage);
     }
 
     @Override

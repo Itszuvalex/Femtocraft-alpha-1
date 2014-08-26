@@ -85,6 +85,10 @@ public class MultiBlockInfo implements IMultiBlockComponent, ISaveable {
         return controller_z;
     }
 
+    public boolean isController(int x, int y, int z) {
+        return isValidMultiBlock() && x == controller_x && y == controller_y && z == controller_z;
+    }
+
     @Override
     public void saveToNBT(NBTTagCompound compound) {
         compound.setBoolean("isFormed", isMultiBlock);

@@ -24,6 +24,7 @@ package com.itszuvalex.femtocraft.power.multiblock;
 import com.itszuvalex.femtocraft.core.multiblock.IMultiBlock;
 import com.itszuvalex.femtocraft.core.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityMagnetohydrodynamicGenerator;
+import com.itszuvalex.femtocraft.power.tiles.TileEntitySteamGenerator;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -31,7 +32,7 @@ import net.minecraft.world.World;
  * Created by Christopher Harris (Itszuvalex) on 8/25/14.
  */
 public class MultiBlockMagnetohydrodynamicGenerator implements IMultiBlock {
-    public MultiBlockMagnetohydrodynamicGenerator instance = new MultiBlockMagnetohydrodynamicGenerator();
+    public static MultiBlockMagnetohydrodynamicGenerator instance = new MultiBlockMagnetohydrodynamicGenerator();
 
     private MultiBlockMagnetohydrodynamicGenerator() {
 

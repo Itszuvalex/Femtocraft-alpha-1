@@ -26,6 +26,7 @@ import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 
 public class TileEntityFemtoRepurposer extends
                                        TileEntityBaseEntityMicroDeconstructor {
+    public static int powerStorage = 100000;
     public static int maxSmelt_default = 32;
     public static int ticksToCook_default = 20;
     public static int powerToCook_default = 160;
@@ -34,7 +35,7 @@ public class TileEntityFemtoRepurposer extends
         super();
         this.setTechLevel(EnumTechLevel.FEMTO);
         // TODO: Pull number from configs
-        this.setMaxStorage(100000);
+        this.setMaxStorage(powerStorage);
     }
 
     @Override

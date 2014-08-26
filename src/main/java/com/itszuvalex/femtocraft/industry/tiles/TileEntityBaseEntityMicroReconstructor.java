@@ -38,7 +38,11 @@ import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
 public class TileEntityBaseEntityMicroReconstructor extends
-                                                    TileEntityBaseEntityIndustry implements ISidedInventory, IFluidHandler {
+        TileEntityBaseEntityIndustry implements ISidedInventory, IFluidHandler {
+
+
+    public static int powerStorage = 800;
+    public static int massStorage = 600;
     // TODO: Load from configs
     public static int powerToCook = 40;
     // TODO: Load from configs
@@ -80,8 +84,8 @@ public class TileEntityBaseEntityMicroReconstructor extends
 
     public TileEntityBaseEntityMicroReconstructor() {
         super();
-        setMaxStorage(800);
-        tank = new FluidTank(600);
+        setMaxStorage(powerStorage);
+        tank = new FluidTank(massStorage);
         setTechLevel(EnumTechLevel.MICRO);
     }
 
@@ -133,8 +137,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
                 this.reconstructorItemStacks[par1] = null;
                 this.onInventoryChanged();
                 return itemstack;
-            }
-            else {
+            } else {
                 itemstack = this.reconstructorItemStacks[par1].splitStack(par2);
 
                 if (this.reconstructorItemStacks[par1].stackSize == 0) {
@@ -144,8 +147,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
                 this.onInventoryChanged();
                 return itemstack;
             }
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -159,16 +161,14 @@ public class TileEntityBaseEntityMicroReconstructor extends
                 for (int i = 0; i < 9; ++i) {
                     reconstructorItemStacks[i] = null;
                 }
-            }
-            else {
+            } else {
                 for (int i = 0; i < recipe.input.length; ++i) {
                     ItemStack is = recipe.input[i];
                     reconstructorItemStacks[i] = (is == null) ? null : is
                             .copy();
                 }
             }
-        }
-        else {
+        } else {
             for (int i = 0; i < 9; ++i) {
                 reconstructorItemStacks[i] = null;
             }
@@ -205,8 +205,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
             ItemStack itemstack = this.reconstructorItemStacks[par1];
             this.reconstructorItemStacks[par1] = null;
             return itemstack;
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -219,7 +218,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
         this.reconstructorItemStacks[par1] = par2ItemStack;
 
         if (par2ItemStack != null
-                && par2ItemStack.stackSize > this.getInventoryStackLimit()) {
+            && par2ItemStack.stackSize > this.getInventoryStackLimit()) {
             par2ItemStack.stackSize = this.getInventoryStackLimit();
         }
     }
@@ -284,7 +283,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
         return i > 10
-                || (i == 10 && itemstack.getItem() instanceof IAssemblerSchematic);
+               || (i == 10 && itemstack.getItem() instanceof IAssemblerSchematic);
     }
 
     public void func_94129_a(String par1Str) {
@@ -315,7 +314,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
     @Override
     protected boolean canStartWork() {
         if (reconstructingStacks != null
-                || (reconstructorItemStacks[0] == null
+            || (reconstructorItemStacks[0] == null
                 && reconstructorItemStacks[1] == null
                 && reconstructorItemStacks[2] == null
                 && reconstructorItemStacks[3] == null
@@ -324,12 +323,11 @@ public class TileEntityBaseEntityMicroReconstructor extends
                 && reconstructorItemStacks[6] == null
                 && reconstructorItemStacks[7] == null
                 && reconstructorItemStacks[8] == null)
-                || getSchematic() == null
-                || this.getCurrentPower() < getPowerToCook()
-                || cookTime > 0) {
+            || getSchematic() == null
+            || this.getCurrentPower() < getPowerToCook()
+            || cookTime > 0) {
             return false;
-        }
-        else {
+        } else {
             if (!hasItems) {
                 return false;
             }
@@ -348,7 +346,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
             }
 
             return tank.getFluidAmount() >= recipe.mass
-                    && roomForItem(recipe.output);
+                   && roomForItem(recipe.output);
         }
     }
 
@@ -402,7 +400,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
         int maxSimul = (reconstructorItemStacks[9] == null ? recipe.output.getMaxStackSize() :
                 reconstructorItemStacks[9]
                         .stackSize) / recipe.output
-                .stackSize;
+                               .stackSize;
 
         for (int i = 0; i < icopy.length; ++i) {
             ItemStack is = icopy[i];
@@ -448,8 +446,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
 
             if (i == 0) {
                 reconstructingStacks = icopy;
-            }
-            else {
+            } else {
                 for (int j = 0; j < recipe.input.length; ++j) {
                     if (recipe.input[j] == null) {
                         continue;
@@ -521,8 +518,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
 
                 if ((reconstructingStacks[i].stackSize -= recipe.input[i].stackSize) <= 0) {
                     reconstructingStacks[i] = null;
-                }
-                else {
+                } else {
                     empty = false;
                 }
 
@@ -603,8 +599,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
     public void setFluidAmount(int amount) {
         if (tank.getFluid() != null) {
             tank.setFluid(new FluidStack(tank.getFluid().getFluid(), amount));
-        }
-        else {
+        } else {
             tank.setFluid(new FluidStack(Femtocraft.fluidMass, amount));
         }
     }

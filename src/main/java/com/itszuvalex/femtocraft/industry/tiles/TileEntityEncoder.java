@@ -37,7 +37,9 @@ import net.minecraftforge.fluids.*;
 import java.util.Arrays;
 
 public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
-                                                                    IInventory, IFluidHandler {
+        IInventory, IFluidHandler {
+    public static int massStorage = 1000;
+    public static int powerStorage = 1200;
     public static int powerToEncode = 100;
     public static int timeToEncode = 200;
     @Saveable
@@ -54,10 +56,10 @@ public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
     public TileEntityEncoder() {
         inventory = new BaseInventory(12);
 
-        massTank = new FluidTank(1000);
+        massTank = new FluidTank(massStorage);
 
         setTechLevel(EnumTechLevel.MICRO);
-        setMaxStorage(1200);
+        setMaxStorage(powerStorage);
     }
 
     /*
@@ -198,12 +200,12 @@ public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
     protected boolean canStartWork() {
         AssemblerRecipe recipe = getRecipe();
         return recipe != null
-                && getStackInSlot(11) == null
-                && getStackInSlot(10) != null
-                && getCurrentPower() >= powerToEncode
-                && massTank.getFluidAmount() >= ((IAssemblerSchematic) getStackInSlot(
+               && getStackInSlot(11) == null
+               && getStackInSlot(10) != null
+               && getCurrentPower() >= powerToEncode
+               && massTank.getFluidAmount() >= ((IAssemblerSchematic) getStackInSlot(
                 10).getItem()).massRequired(recipe)
-                && getStackInSlot(10).getItem() instanceof IAssemblerSchematic;
+               && getStackInSlot(10).getItem() instanceof IAssemblerSchematic;
     }
 
     private AssemblerRecipe getRecipe() {
@@ -293,8 +295,7 @@ public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
         if (massTank.getFluid() != null) {
             massTank.setFluid(new FluidStack(massTank.getFluid().fluidID,
                     amount));
-        }
-        else {
+        } else {
             massTank.setFluid(new FluidStack(Femtocraft.fluidMass, amount));
         }
     }

@@ -41,6 +41,7 @@ public class TileEntityBaseEntityNanoHorologe extends
     public static final int inputSlot = 0;
     public static final int outputSlot = 4;
     public static final int inventorySize = 5;
+    public static int powerStorage = 10000;
     public static int powerToCook_default = 80;
     public static float tickMultiplier_default = 1.f;
     @FemtocraftDataUtils.Saveable
@@ -58,7 +59,7 @@ public class TileEntityBaseEntityNanoHorologe extends
         super();
         inventory = new BaseInventory(inventorySize);
         setTechLevel(EnumTechLevel.NANO);
-        setMaxStorage(10000);
+        setMaxStorage(powerStorage);
     }
 
     @Override

@@ -23,7 +23,10 @@ package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.core.blocks.TileContainer;
+import com.itszuvalex.femtocraft.core.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.power.multiblock.MultiBlockMagnetohydrodynamicGenerator;
+import com.itszuvalex.femtocraft.power.tiles.TileEntityMagnetohydrodynamicGenerator;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -70,7 +73,7 @@ public class BlockMagnetohydrodynamicGenerator extends TileContainer {
                            int par5, int par6) {
         TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
         if (te instanceof TileEntityMagnetohydrodynamicGenerator) {
-            MultiBlockInfo info = ((TileEntityMagnetohydrodynamicGenerator) te).getInfo();
+            MultiBlockInfo info = ((IMultiBlockComponent) te).getInfo();
             MultiBlockMagnetohydrodynamicGenerator.instance.breakMultiBlock(par1World, info.x(),
                     info.y(), info.z());
 

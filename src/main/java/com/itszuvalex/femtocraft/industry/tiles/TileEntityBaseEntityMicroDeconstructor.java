@@ -41,7 +41,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class TileEntityBaseEntityMicroDeconstructor extends
-                                                    TileEntityBaseEntityIndustry implements ISidedInventory, IFluidHandler {
+        TileEntityBaseEntityIndustry implements ISidedInventory, IFluidHandler {
+
+
+    public static int powerStorage = 800;
+    public static int massStorage = 600;
     public static int powerToCook = 40;
     public static int ticksToCook = 100;
     public static int maxSmelt = 1;
@@ -73,8 +77,8 @@ public class TileEntityBaseEntityMicroDeconstructor extends
 
     public TileEntityBaseEntityMicroDeconstructor() {
         super();
-        setMaxStorage(800);
-        tank = new FluidTank(600);
+        setMaxStorage(powerStorage);
+        tank = new FluidTank(massStorage);
         setTechLevel(EnumTechLevel.MICRO);
         deconstructorInventory = new BaseInventory(10);
     }
@@ -135,8 +139,7 @@ public class TileEntityBaseEntityMicroDeconstructor extends
             ItemStack itemstack = deconstructorInventory.getInventory()[par1];
             deconstructorInventory.getInventory()[par1] = null;
             return itemstack;
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -252,22 +255,21 @@ public class TileEntityBaseEntityMicroDeconstructor extends
     @Override
     protected boolean canStartWork() {
         if (getStackInSlot(0) == null || deconstructingStack != null
-                || this.getCurrentPower() < getPowerToCook()) {
+            || this.getCurrentPower() < getPowerToCook()) {
             return false;
-        }
-        else {
+        } else {
             AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
                     .getRecipe(deconstructorInventory.getStackInSlot(0));
             return recipe != null &&
-                    recipe.enumTechLevel.tier <= getAssemblerTech().tier &&
-                    (tank
+                   recipe.enumTechLevel.tier <= getAssemblerTech().tier &&
+                   (tank
                             .getCapacity() -
-                            tank
-                                    .getFluidAmount())
-                            >=
-                            recipe.mass
-                    && getStackInSlot(0).stackSize >= recipe.output.stackSize
-                    && roomForItems(recipe.input);
+                    tank
+                            .getFluidAmount())
+                   >=
+                   recipe.mass
+                   && getStackInSlot(0).stackSize >= recipe.output.stackSize
+                   && roomForItems(recipe.input);
         }
     }
 
@@ -387,8 +389,7 @@ public class TileEntityBaseEntityMicroDeconstructor extends
                 // true);
                 if (tank.getFluid() == null) {
                     tank.setFluid(new FluidStack(Femtocraft.fluidMass, recipe.mass));
-                }
-                else {
+                } else {
                     tank.getFluid().amount += recipe.mass;
                 }
                 // deconstructingStack = null;
@@ -469,8 +470,7 @@ public class TileEntityBaseEntityMicroDeconstructor extends
     public void setFluidAmount(int amount) {
         if (tank.getFluid() != null) {
             tank.setFluid(new FluidStack(tank.getFluid().fluidID, amount));
-        }
-        else {
+        } else {
             tank.setFluid(new FluidStack(Femtocraft.fluidMass, amount));
         }
     }

@@ -34,6 +34,7 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 
 public class TileEntityBaseEntityMicroFurnace extends
                                               TileEntityBaseEntityIndustry implements ISidedInventory {
+    public static int powerStorage = 800;
     public static int powerToCook = 40;
     public static int ticksToCook = 100;
     public static int maxSmelt = 1;
@@ -61,7 +62,7 @@ public class TileEntityBaseEntityMicroFurnace extends
 
     public TileEntityBaseEntityMicroFurnace() {
         super();
-        setMaxStorage(800);
+        setMaxStorage(powerStorage);
         setTechLevel(EnumTechLevel.MICRO);
     }
 

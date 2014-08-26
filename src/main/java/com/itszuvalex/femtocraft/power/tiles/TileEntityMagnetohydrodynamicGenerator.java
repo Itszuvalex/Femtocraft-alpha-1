@@ -21,132 +21,329 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
+import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.api.IPowerBlockContainer;
 import com.itszuvalex.femtocraft.core.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
-import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
+import net.minecraftforge.fluids.*;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 8/25/14.
  */
-public class TileEntityMagnetohydrodynamicGenerator extends TileEntityBase implements IMultiBlockComponent, IPowerBlockContainer, IFluidHandler {
+public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProducer implements IMultiBlockComponent,
+        IPowerBlockContainer, IFluidHandler {
+
+
+    public static final int powerPerMoltenSaltMB = 10;
+    public static int contaminatedSaltTankStorage = 100000;
+    public static int moltenSaltTankStorage = 100000;
+    public static int powerStorage = 200000;
+    public static int maxMoltenSaltProcessingPerTick = 100;
+    public static double moltenSaltToContaminatedProcessingRatio = .9;
+    public static boolean processFluidsWithFullPower = true;
     @Saveable
     private MultiBlockInfo info = new MultiBlockInfo();
-
-    public TileEntityMagnetohydrodynamicGenerator() {
-
-    }
-
-    @Override
-    public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-        return 0;
-    }
-
-    @Override
-    public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-        return null;
-    }
-
-    @Override
-    public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-        return null;
-    }
-
-    @Override
-    public boolean canFill(ForgeDirection from, Fluid fluid) {
-        return false;
-    }
-
-    @Override
-    public boolean canDrain(ForgeDirection from, Fluid fluid) {
-        return false;
-    }
-
-    @Override
-    public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-        return new FluidTankInfo[0];
-    }
-
-    @Override
-    public boolean isValidMultiBlock() {
-        return false;
-    }
-
-    @Override
-    public boolean formMultiBlock(World world, int x, int y, int z) {
-        return false;
-    }
-
-    @Override
-    public boolean breakMultiBlock(World world, int x, int y, int z) {
-        return false;
-    }
-
-    @Override
-    public MultiBlockInfo getInfo() {
-        return null;
-    }
-
-    @Override
-    public boolean canAcceptPowerOfLevel(EnumTechLevel level, ForgeDirection from) {
-        return false;
-    }
-
-    @Override
-    public EnumTechLevel getTechLevel(ForgeDirection to) {
-        return null;
-    }
-
-    @Override
-    public int getCurrentPower() {
-        return 0;
-    }
-
-    @Override
-    public int getMaxPower() {
-        return 0;
-    }
-
-    @Override
-    public float getFillPercentage() {
-        return 0;
-    }
+    @Saveable
+    private FluidTank moltenSaltTank;
+    @Saveable
+    private FluidTank contaminatedSaltTank;
 
     @Override
     public float getFillPercentageForCharging(ForgeDirection from) {
-        return 0;
+        if (info.isValidMultiBlock()) {
+            if (info.isController(xCoord, yCoord, zCoord)) {
+                return super.getFillPercentageForCharging(from);
+            } else {
+                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                if (te instanceof IPowerBlockContainer) {
+                    return ((IPowerBlockContainer) te).getFillPercentageForCharging(from);
+                }
+            }
+        }
+        return 1f;
     }
 
     @Override
     public float getFillPercentageForOutput(ForgeDirection to) {
-        return 0;
+        if (info.isValidMultiBlock()) {
+            if (info.isController(xCoord, yCoord, zCoord)) {
+                return super.getFillPercentageForOutput(to);
+            } else {
+                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                if (te instanceof IPowerBlockContainer) {
+                    return ((IPowerBlockContainer) te).getFillPercentageForOutput(to);
+                }
+            }
+        }
+        return 0f;
     }
 
     @Override
     public boolean canCharge(ForgeDirection from) {
+        if (info.isValidMultiBlock()) {
+            if (info.isController(xCoord, yCoord, zCoord)) {
+                return super.canCharge(from);
+            } else {
+                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                if (te instanceof IPowerBlockContainer) {
+                    return ((IPowerBlockContainer) te).canCharge(from);
+                }
+            }
+        }
         return false;
     }
 
     @Override
     public boolean canConnect(ForgeDirection from) {
+        if (info.isValidMultiBlock()) {
+            if (info.isController(xCoord, yCoord, zCoord)) {
+                return super.canConnect(from);
+            } else {
+                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                if (te instanceof IPowerBlockContainer) {
+                    return ((IPowerBlockContainer) te).canConnect(from);
+                }
+            }
+        }
         return false;
     }
 
     @Override
     public int charge(ForgeDirection from, int amount) {
+        if (info.isValidMultiBlock()) {
+            if (info.isController(xCoord, yCoord, zCoord)) {
+                int ret = charge(from, amount);
+                if (ret > 0) {
+                    setModified();
+                }
+                return ret;
+            } else {
+                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                if (te instanceof IPowerBlockContainer) {
+                    return ((IPowerBlockContainer) te).charge(from, amount);
+                }
+            }
+        }
         return 0;
     }
 
     @Override
     public boolean consume(int amount) {
+        if (info.isValidMultiBlock()) {
+            if (info.isController(xCoord, yCoord, zCoord)) {
+                boolean ret = consume(amount);
+                if (ret) {
+                    setModified();
+                }
+                return ret;
+            } else {
+                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                if (te instanceof IPowerBlockContainer) {
+                    return ((IPowerBlockContainer) te).consume(amount);
+                }
+            }
+        }
         return false;
+    }
+
+    @Override
+    public float getFillPercentage() {
+        if (info.isValidMultiBlock()) {
+            if (info.isController(xCoord, yCoord, zCoord)) {
+                return super.getFillPercentage();
+            } else {
+                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                if (te instanceof IPowerBlockContainer) {
+                    return ((IPowerBlockContainer) te).getFillPercentage();
+                }
+            }
+        }
+        return 1.f;
+    }
+
+    @Override
+    public boolean canAcceptPowerOfLevel(EnumTechLevel level, ForgeDirection from) {
+        if (info.isValidMultiBlock()) {
+            if (info.isController(xCoord, yCoord, zCoord)) {
+                return super.canAcceptPowerOfLevel(level, from);
+            } else {
+                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                if (te instanceof IPowerBlockContainer) {
+                    return ((IPowerBlockContainer) te).canAcceptPowerOfLevel(level, from);
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void femtocraftServerUpdate() {
+        super.femtocraftServerUpdate();
+
+        if (info.isValidMultiBlock() && info.isController(xCoord, yCoord, zCoord)) {
+            if (moltenSaltTank.getFluidAmount() > 0) {
+                int amount = Math.min(moltenSaltTank.getFluidAmount(), maxMoltenSaltProcessingPerTick);
+                amount = (int) Math.min(
+                        amount * moltenSaltToContaminatedProcessingRatio,
+                        (contaminatedSaltTank.getCapacity() - contaminatedSaltTank.getFluidAmount()) /
+                        moltenSaltToContaminatedProcessingRatio);
+                if (!processFluidsWithFullPower) {
+                    amount = Math.min(amount, (getMaxPower() - getCurrentPower()) / powerPerMoltenSaltMB);
+                }
+
+                moltenSaltTank.drain(amount, true);
+                contaminatedSaltTank.fill(new FluidStack(Femtocraft.fluidCooledContaminatedMoltenSalt, (int) (
+                        amount *
+                        moltenSaltToContaminatedProcessingRatio)), true);
+                charge(ForgeDirection.UNKNOWN, amount * powerPerMoltenSaltMB);
+            }
+        }
+    }
+
+    public TileEntityMagnetohydrodynamicGenerator() {
+        moltenSaltTank = new FluidTank(moltenSaltTankStorage);
+        contaminatedSaltTank = new FluidTank(contaminatedSaltTankStorage);
+        setMaxStorage(powerStorage);
+    }
+
+    @Override
+    public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+        if (resource.getFluid() != Femtocraft.fluidMoltenSalt) {
+            return 0;
+        }
+        if (isValidMultiBlock()) {
+            if (info.isController(xCoord, yCoord, zCoord)) {
+                int ret = moltenSaltTank.fill(resource, doFill);
+                if (ret > 0) {
+                    setModified();
+                }
+                return ret;
+            } else {
+                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                if (te instanceof IFluidHandler) {
+                    return ((IFluidHandler) te).fill(from, resource, doFill);
+                }
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
+        if (resource.getFluid() != Femtocraft.fluidCooledContaminatedMoltenSalt) {
+            return null;
+        }
+        if (isValidMultiBlock()) {
+            if (info.isController(xCoord, yCoord, zCoord)) {
+                FluidStack ret = contaminatedSaltTank.drain(resource.amount, doDrain);
+                if (ret != null) {
+                    setModified();
+                }
+                return ret;
+            } else {
+                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                if (te instanceof IFluidHandler) {
+                    return ((IFluidHandler) te).drain(from, resource, doDrain);
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+        if (isValidMultiBlock()) {
+            if (info.isController(xCoord, yCoord, zCoord)) {
+                FluidStack ret = contaminatedSaltTank.drain(maxDrain, doDrain);
+                if (ret != null) {
+                    setModified();
+                }
+                return ret;
+            } else {
+                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                if (te instanceof IFluidHandler) {
+                    return ((IFluidHandler) te).drain(from, maxDrain, doDrain);
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean canFill(ForgeDirection from, Fluid fluid) {
+        if (info.isValidMultiBlock()) {
+            if (info.isController(xCoord, yCoord, zCoord)) {
+                return fluid == Femtocraft.fluidMoltenSalt;
+            } else {
+                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                if (te instanceof IFluidHandler) {
+                    return ((IFluidHandler) te).canFill(from, fluid);
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canDrain(ForgeDirection from, Fluid fluid) {
+        if (info.isValidMultiBlock()) {
+            if (info.isController(xCoord, yCoord, zCoord)) {
+                return fluid == Femtocraft.fluidCooledContaminatedMoltenSalt;
+            } else {
+                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                if (te instanceof IFluidHandler) {
+                    return ((IFluidHandler) te).canFill(from, fluid);
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+        if (info.isValidMultiBlock()) {
+            if (info.isController(xCoord, yCoord, zCoord)) {
+                return new FluidTankInfo[]{moltenSaltTank.getInfo(), contaminatedSaltTank.getInfo()};
+            } else {
+                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                if (te instanceof IFluidHandler) {
+                    return ((IFluidHandler) te).getTankInfo(from);
+                }
+            }
+        }
+        return new FluidTankInfo[0];
+    }
+
+    @Override
+    public boolean isValidMultiBlock() {
+        return info.isValidMultiBlock();
+    }
+
+    @Override
+    public boolean formMultiBlock(World world, int x, int y, int z) {
+        boolean ret = info.formMultiBlock(world, x, y, z);
+        if (ret) {
+            setModified();
+        }
+        return ret;
+    }
+
+    @Override
+    public boolean breakMultiBlock(World world, int x, int y, int z) {
+        boolean ret = info.breakMultiBlock(world, x, y, z);
+        if (ret) {
+            setModified();
+        }
+        return ret;
+    }
+
+    @Override
+    public MultiBlockInfo getInfo() {
+        return info;
     }
 }
