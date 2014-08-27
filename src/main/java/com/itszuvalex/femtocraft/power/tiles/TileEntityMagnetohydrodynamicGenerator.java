@@ -121,11 +121,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
     public int charge(ForgeDirection from, int amount) {
         if (info.isValidMultiBlock()) {
             if (info.isController(xCoord, yCoord, zCoord)) {
-                int ret = charge(from, amount);
-                if (ret > 0) {
-                    setModified();
-                }
-                return ret;
+                return super.charge(from, amount);
             }
             else {
                 TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
@@ -141,11 +137,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
     public boolean consume(int amount) {
         if (info.isValidMultiBlock()) {
             if (info.isController(xCoord, yCoord, zCoord)) {
-                boolean ret = consume(amount);
-                if (ret) {
-                    setModified();
-                }
-                return ret;
+                return super.consume(amount);
             }
             else {
                 TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
