@@ -183,9 +183,10 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
 
     @Override
     public void femtocraftServerUpdate() {
-        super.femtocraftServerUpdate();
-
-        if (info.isValidMultiBlock() && info.isController(xCoord, yCoord, zCoord)) {
+        if (info.isValidMultiBlock()) {
+            super.femtocraftServerUpdate();
+        }
+        if (info.isController(xCoord, yCoord, zCoord)) {
             if (moltenSaltTank.getFluidAmount() > 0) {
                 int amount = Math.min(moltenSaltTank.getFluidAmount(), maxMoltenSaltProcessingPerTick);
                 amount = (int) Math.min(
@@ -210,6 +211,38 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
         contaminatedSaltTank = new FluidTank(contaminatedSaltTankStorage);
         setMaxStorage(powerStorage);
         setTechLevel(EnumTechLevel.NANO);
+    }
+
+    @Override
+    public int getCurrentPower() {
+        if (isValidMultiBlock()) {
+            if (info.isController(xCoord, yCoord, zCoord)) {
+                return super.getCurrentPower();
+            }
+            else {
+                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                if (te instanceof IPowerBlockContainer) {
+                    return ((IPowerBlockContainer) te).getCurrentPower();
+                }
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public int getMaxPower() {
+        if (isValidMultiBlock()) {
+            if (info.isController(xCoord, yCoord, zCoord)) {
+                return super.getMaxPower();
+            }
+            else {
+                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                if (te instanceof IPowerBlockContainer) {
+                    return ((IPowerBlockContainer) te).getMaxPower();
+                }
+            }
+        }
+        return 0;
     }
 
     @Override
