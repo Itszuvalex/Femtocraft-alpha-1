@@ -166,6 +166,12 @@ public class FemtocraftConfigs {
     int BlockFissionReactorHousingID;
     public static
     @CfgId(block = true)
+    int BlockMagnetohydrodynamicGeneratorID;
+    public static
+    @CfgId(block = true)
+    int BlockSteamGeneratorID;
+    public static
+    @CfgId(block = true)
     int BlockDecontaminationChamberID;
     public static
     @CfgId(block = true)

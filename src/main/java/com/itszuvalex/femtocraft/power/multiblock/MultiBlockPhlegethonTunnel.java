@@ -21,6 +21,7 @@
 
 package com.itszuvalex.femtocraft.power.multiblock;
 
+import com.itszuvalex.femtocraft.api.IPhlegethonTunnelAddon;
 import com.itszuvalex.femtocraft.api.IPhlegethonTunnelComponent;
 import com.itszuvalex.femtocraft.api.IPhlegethonTunnelCore;
 import com.itszuvalex.femtocraft.core.multiblock.IMultiBlock;
@@ -112,7 +113,7 @@ public class MultiBlockPhlegethonTunnel implements IMultiBlock {
                     TileEntity te = world.getBlockTileEntity(x + i, y + k, z
                             + j);
                     if ((i == 0 && j == 0 & k == 0 && te instanceof
-                            IPhlegethonTunnelCore) || te instanceof IPhlegethonTunnelComponent) {
+                            IPhlegethonTunnelCore) || te instanceof IPhlegethonTunnelComponent || (isAddonSlot(i, j, k) && te instanceof IPhlegethonTunnelAddon)) {
                         if (strict) {
                             if (((IMultiBlockComponent) te).getInfo()
                                                            .isValidMultiBlock()) {
@@ -127,5 +128,11 @@ public class MultiBlockPhlegethonTunnel implements IMultiBlock {
             }
         }
         return true;
+    }
+
+    private boolean isAddonSlot(int x, int y, int z) {
+        return (((x == -1 || x == 1) && y == 0 && z == 0) ||
+                ((y == -1 || y == 1) && x == 0 && z == 0) ||
+                ((z == -1 || z == 1) && x == 0 && y == 0));
     }
 }

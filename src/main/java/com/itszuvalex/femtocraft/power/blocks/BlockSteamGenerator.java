@@ -28,6 +28,7 @@ import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockMagnetohydrodynamicGenerator;
 import com.itszuvalex.femtocraft.power.tiles.TileEntitySteamGenerator;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -39,6 +40,11 @@ public class BlockSteamGenerator extends TileContainer {
         super(par1, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
         setUnlocalizedName("BlockSteamGenerator");
+    }
+
+    @Override
+    public void registerIcons(IconRegister par1IconRegister) {
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "BlockSteamGenerator");
     }
 
     @Override

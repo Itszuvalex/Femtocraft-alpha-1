@@ -17,9 +17,9 @@ import net.minecraftforge.fluids.IFluidHandler;
  * Created by Chris on 8/26/2014.
  */
 public class TileEntitySteamGenerator extends TileEntityPowerProducer implements IMultiBlockComponent,
-        IPowerBlockContainer, IFluidHandler {
+                                                                                 IPowerBlockContainer, IFluidHandler {
 
-    @FemtocraftDataUtils.Saveable
+    @FemtocraftDataUtils.Saveable(desc = true)
     private MultiBlockInfo info = new MultiBlockInfo();
 
     @Override

@@ -167,6 +167,8 @@ public class Femtocraft {
     public static Block blockCryoEndothermalChargingCoil;
     public static Block blockFissionReactorCore;
     public static Block blockFissionReactorHousing;
+    public static Block blockMagnetohydrodynamicGenerator;
+    public static Block blockSteamGenerator;
     public static Block blockDecontaminationChamber;
     public static Block blockPhlegethonTunnelCore;
     public static Block blockPhlegethonTunnelFrame;
@@ -651,6 +653,14 @@ public class Femtocraft {
                 "BlockFissionReactorHousing");
         LanguageRegistry.addName(blockFissionReactorHousing,
                 "Fission Reactor Housing");
+
+        blockMagnetohydrodynamicGenerator = new BlockMagnetohydrodynamicGenerator(FemtocraftConfigs.BlockMagnetohydrodynamicGeneratorID);
+        GameRegistry.registerBlock(blockMagnetohydrodynamicGenerator, "BlockMagnetohydrodynamicGenerator");
+        LanguageRegistry.addName(blockMagnetohydrodynamicGenerator, "Magnetohydrodynamic Generator");
+
+        blockSteamGenerator = new BlockSteamGenerator(FemtocraftConfigs.BlockSteamGeneratorID);
+        GameRegistry.registerBlock(blockSteamGenerator, "BlockSteamGenerator");
+        LanguageRegistry.addName(blockSteamGenerator, "Steam Generator");
 
         blockDecontaminationChamber = new BlockDecontaminationChamber
                 (FemtocraftConfigs.BlockDecontaminationChamberID);

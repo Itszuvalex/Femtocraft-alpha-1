@@ -49,7 +49,7 @@ public class MultiBlockMagnetohydrodynamicGenerator implements IMultiBlock {
                 for (int k = -1; k <= 1; ++k) {
                     TileEntity te = world.getBlockTileEntity(x + i, y + k, z
                             + j);
-                    if (te instanceof TileEntityMagnetohydrodynamicGenerator || te instanceof TileEntitySteamGenerator) {
+                    if (te instanceof TileEntityMagnetohydrodynamicGenerator || (isSteamGeneratorSlot(i, k, j) && te instanceof TileEntitySteamGenerator)) {
                         if (strict) {
                             if (((IMultiBlockComponent) te).getInfo()
                                                            .isValidMultiBlock()) {
@@ -125,5 +125,11 @@ public class MultiBlockMagnetohydrodynamicGenerator implements IMultiBlock {
             }
         }
         return result;
+    }
+
+    private boolean isSteamGeneratorSlot(int x, int y, int z) {
+        return (((x == -1 || x == 1) && y == 0 && z == 0) ||
+                ((y == -1 || y == 1) && x == 0 && z == 0) ||
+                ((z == -1 || z == 1) && x == 0 && y == 0));
     }
 }
