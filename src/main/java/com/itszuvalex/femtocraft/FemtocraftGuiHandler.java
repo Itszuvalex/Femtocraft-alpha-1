@@ -24,18 +24,9 @@ package com.itszuvalex.femtocraft;
 import com.itszuvalex.femtocraft.industry.containers.*;
 import com.itszuvalex.femtocraft.industry.gui.*;
 import com.itszuvalex.femtocraft.industry.tiles.*;
-import com.itszuvalex.femtocraft.power.containers.ContainerFemtoCube;
-import com.itszuvalex.femtocraft.power.containers.ContainerMicroCube;
-import com.itszuvalex.femtocraft.power.containers.ContainerNanoCube;
-import com.itszuvalex.femtocraft.power.containers.ContainerNanoFissionReactor;
-import com.itszuvalex.femtocraft.power.gui.GuiFemtoCube;
-import com.itszuvalex.femtocraft.power.gui.GuiMicroCube;
-import com.itszuvalex.femtocraft.power.gui.GuiNanoCube;
-import com.itszuvalex.femtocraft.power.gui.GuiNanoFissionReactor;
-import com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoCubePort;
-import com.itszuvalex.femtocraft.power.tiles.TileEntityMicroCube;
-import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoCubePort;
-import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoFissionReactorCore;
+import com.itszuvalex.femtocraft.power.containers.*;
+import com.itszuvalex.femtocraft.power.gui.*;
+import com.itszuvalex.femtocraft.power.tiles.*;
 import com.itszuvalex.femtocraft.research.containers.ContainerResearchConsole;
 import com.itszuvalex.femtocraft.research.gui.GuiResearch;
 import com.itszuvalex.femtocraft.research.gui.GuiResearchConsole;
@@ -71,6 +62,7 @@ public class FemtocraftGuiHandler implements IGuiHandler {
     public static final int MicroEngineGuiID = 31;
     public static final int NanoCubeGuiID = 35;
     public static final int NanoFissionReactorGuiID = 36;
+    public static final int NanoMagnetohydrodynamicGeneratorGuiID = 37;
     public static final int FemtoCubeGuiID = 40;
 
 
@@ -133,6 +125,8 @@ public class FemtocraftGuiHandler implements IGuiHandler {
             case NanoFissionReactorGuiID:
                 return new ContainerNanoFissionReactor(player, player.inventory, (
                         TileEntityNanoFissionReactorCore) tileEntity);
+            case NanoMagnetohydrodynamicGeneratorGuiID:
+                return new ContainerMagnetoHydrodynamicGenerator((TileEntityMagnetohydrodynamicGenerator) tileEntity);
             case FemtoCubeGuiID:
                 return new ContainerFemtoCube((TileEntityFemtoCubePort) tileEntity);
             default:
@@ -198,6 +192,8 @@ public class FemtocraftGuiHandler implements IGuiHandler {
             case NanoFissionReactorGuiID:
                 return new GuiNanoFissionReactor(player, player.inventory, (TileEntityNanoFissionReactorCore)
                         tileEntity);
+            case NanoMagnetohydrodynamicGeneratorGuiID:
+                return new GuiMagnetohydrodynamicGenerator((TileEntityMagnetohydrodynamicGenerator) tileEntity);
             case NanoCubeGuiID:
                 return new GuiNanoCube((TileEntityNanoCubePort) tileEntity);
             case FemtoCubeGuiID:

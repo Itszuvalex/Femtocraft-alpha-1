@@ -353,7 +353,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
         if (resource.getFluid() == Femtocraft.fluidCooledContaminatedMoltenSalt) {
             int amount = resource.amount;
             //limit based on thorium amount
-            amount = (int) Math.min(amount, Math.max(Math.min(getThoriumStoreCurrent() - minimumThoriumConcentrationToMeltSalt, 0),
+            amount = (int) Math.min(amount, Math.min(Math.max(getThoriumStoreCurrent() - minimumThoriumConcentrationToMeltSalt, 0),
                     resource.amount * contaminatedThoriumLossRatio) / contaminatedThoriumLossRatio);
             //limit based on cooledSaltTank remaining capacity
             amount = (int) Math.min(amount,

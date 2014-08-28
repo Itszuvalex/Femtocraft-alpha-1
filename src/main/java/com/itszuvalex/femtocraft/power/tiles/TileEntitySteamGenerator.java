@@ -1,10 +1,12 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
+import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
 import com.itszuvalex.femtocraft.api.IPowerBlockContainer;
 import com.itszuvalex.femtocraft.core.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -21,6 +23,21 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
 
     @FemtocraftDataUtils.Saveable(desc = true)
     private MultiBlockInfo info = new MultiBlockInfo();
+
+    @Override
+    public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
+        if (info.isValidMultiBlock() && canPlayerUse(par5EntityPlayer)) {
+            par5EntityPlayer.openGui(getMod(), getGuiID(), worldObj, info.x(),
+                    info.y(), info.z());
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.NanoMagnetohydrodynamicGeneratorGuiID;
+    }
 
     @Override
     public float getFillPercentageForCharging(ForgeDirection from) {
@@ -189,6 +206,7 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
         boolean ret = info.formMultiBlock(world, x, y, z);
         if (ret) {
             setModified();
+            setUpdate();
         }
         return ret;
     }
@@ -198,6 +216,7 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
         boolean ret = info.breakMultiBlock(world, x, y, z);
         if (ret) {
             setModified();
+            setUpdate();
         }
         return ret;
     }
