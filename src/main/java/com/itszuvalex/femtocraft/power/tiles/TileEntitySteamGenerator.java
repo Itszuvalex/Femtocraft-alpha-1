@@ -21,6 +21,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 public class TileEntitySteamGenerator extends TileEntityPowerProducer implements IMultiBlockComponent,
                                                                                  IPowerBlockContainer, IFluidHandler {
 
+    public static float steamGeneratorPercentageMultiplier = (1.f / 3.f);
     @FemtocraftDataUtils.Saveable(desc = true)
     private MultiBlockInfo info = new MultiBlockInfo();
 

@@ -220,7 +220,15 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
                 contaminatedSaltTank.fill(new FluidStack(Femtocraft.fluidCooledContaminatedMoltenSalt, (int) (
                         amount *
                                 moltenSaltToContaminatedProcessingRatio)), true);
-                charge(ForgeDirection.UNKNOWN, amount * powerPerMoltenSaltMB);
+                float steamGenerators = 0.f;
+                for (int i = 0; i < 6; ++i) {
+                    ForgeDirection dir = ForgeDirection.getOrientation(i);
+                    TileEntity te = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+                    if (te instanceof TileEntitySteamGenerator) {
+                        steamGenerators += TileEntitySteamGenerator.steamGeneratorPercentageMultiplier;
+                    }
+                }
+                charge(ForgeDirection.UNKNOWN, (int) (amount * powerPerMoltenSaltMB * (1. + steamGenerators)));
             }
         }
         else {
