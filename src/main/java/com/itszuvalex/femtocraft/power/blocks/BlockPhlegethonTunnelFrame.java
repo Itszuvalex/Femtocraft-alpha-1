@@ -31,24 +31,62 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/12/14.
  */
 public class BlockPhlegethonTunnelFrame extends Block {
+    Icon[][] sideIcons_inactive;
+    Icon[][] topIcons_inactive;
+    Icon[][] botIcons_inactive;
+    Icon[][] sideIcons_active;
+    Icon[][] topIcons_active;
+    Icon[][] botIcons_active;
+
     public BlockPhlegethonTunnelFrame(int id) {
         super(id, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
         setUnlocalizedName("BlockPhlegethonTunnelFrame");
+        sideIcons_inactive = makeEmptyIconArray();
+        sideIcons_active = makeEmptyIconArray();
+        topIcons_inactive = makeEmptyIconArray();
+        topIcons_active = makeEmptyIconArray();
+        botIcons_inactive = makeEmptyIconArray();
+        botIcons_active = makeEmptyIconArray();
+    }
+
+    private Icon[][] makeEmptyIconArray() {
+        Icon[][] newArray = new Icon[3][];
+        for (int i = 0; i < newArray.length; ++i) {
+            newArray[i] = new Icon[3];
+        }
+        return newArray;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                + ":" + "BlockPhlegethonTunnelFrame");
+                + ":" + "BlockPhlegethonTunnelFrame_unformed");
+        registerIcons(sideIcons_active, "side_active", par1IconRegister);
+        registerIcons(sideIcons_inactive, "side_inactive", par1IconRegister);
+        registerIcons(topIcons_inactive, "top_inactive", par1IconRegister);
+        registerIcons(topIcons_active, "top_active", par1IconRegister);
+        registerIcons(botIcons_inactive, "bot_inactive", par1IconRegister);
+        registerIcons(botIcons_active, "bot_active", par1IconRegister);
     }
+
+    private void registerIcons(Icon[][] array, String name, IconRegister register) {
+        for (int i = 0; i < array.length; ++i) {
+            for (int j = 0; j < array[i].length; ++j) {
+                array[j][i] = register.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "BlockPhlegethonTunnelFrame_" + name + "_" + i + "_" + j);
+
+            }
+        }
+    }
+
 
     /*
     * (non-Javadoc)

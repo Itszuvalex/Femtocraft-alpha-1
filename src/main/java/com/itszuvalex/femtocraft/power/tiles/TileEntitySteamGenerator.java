@@ -73,8 +73,61 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
     }
 
     @Override
+    public EnumTechLevel getTechLevel(ForgeDirection to) {
+        if (info.isValidMultiBlock()) {
+            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            if (te instanceof IPowerBlockContainer) {
+                return ((IPowerBlockContainer) te).getTechLevel(to);
+            }
+        }
+        return super.getTechLevel(to);
+    }
+
+    @Override
+    public int getCurrentPower() {
+        if (info.isValidMultiBlock()) {
+            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            if (te instanceof IPowerBlockContainer) {
+                return ((IPowerBlockContainer) te).getCurrentPower();
+            }
+        }
+        return super.getCurrentPower();
+    }
+
+    @Override
+    public int getMaxPower() {
+        if (info.isValidMultiBlock()) {
+            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            if (te instanceof IPowerBlockContainer) {
+                return ((IPowerBlockContainer) te).getMaxPower();
+            }
+        }
+        return super.getMaxPower();
+    }
+
+    @Override
     public boolean canConnect(ForgeDirection from) {
         if (info.isValidMultiBlock()) {
+            switch (from) {
+                case UP:
+                    if (yCoord - info.y() != 1) return false;
+                    break;
+                case DOWN:
+                    if (yCoord - info.y() != -1) return false;
+                    break;
+                case NORTH:
+                    if (zCoord - info.z() != -1) return false;
+                    break;
+                case SOUTH:
+                    if (zCoord - info.z() != 1) return false;
+                    break;
+                case EAST:
+                    if (xCoord - info.x() != 1) return false;
+                    break;
+                case WEST:
+                    if (xCoord - info.x() != -1) return false;
+                    break;
+            }
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).canConnect(from);

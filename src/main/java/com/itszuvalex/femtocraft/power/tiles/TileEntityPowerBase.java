@@ -103,7 +103,7 @@ public class TileEntityPowerBase extends TileEntityBase implements
 
             if (checkTile instanceof IPowerBlockContainer) {
                 IPowerBlockContainer fc = (IPowerBlockContainer) checkTile;
-                if (!fc.canConnect(offset.getOpposite())) {
+                if (!fc.canConnect(offset.getOpposite()) || !canConnect(offset)) {
                     continue;
                 }
                 if (!fc.canAcceptPowerOfLevel(

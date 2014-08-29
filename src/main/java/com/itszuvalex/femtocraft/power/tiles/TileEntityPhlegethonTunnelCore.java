@@ -89,11 +89,7 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityBase implements IP
     }
 
     public void sendActivateMessage() {
-        if (worldObj.isRemote) {
-
-        }
     }
-
 
     @Override
     public boolean activate() {
@@ -249,7 +245,7 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityBase implements IP
 
     @Override
     public void onCoreActivityChange(boolean active) {
-
+        setUpdate();
     }
 
     @Override

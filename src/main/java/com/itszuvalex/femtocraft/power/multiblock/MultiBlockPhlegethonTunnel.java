@@ -113,7 +113,7 @@ public class MultiBlockPhlegethonTunnel implements IMultiBlock {
                     TileEntity te = world.getBlockTileEntity(x + i, y + k, z
                             + j);
                     if ((i == 0 && j == 0 & k == 0 && te instanceof
-                            IPhlegethonTunnelCore) || te instanceof IPhlegethonTunnelComponent || (isAddonSlot(i, j, k) && te instanceof IPhlegethonTunnelAddon)) {
+                            IPhlegethonTunnelCore) || (te instanceof IPhlegethonTunnelComponent && !(te instanceof IPhlegethonTunnelAddon)) || (isAddonSlot(i, j, k) && te instanceof IPhlegethonTunnelAddon)) {
                         if (strict) {
                             if (((IMultiBlockComponent) te).getInfo()
                                                            .isValidMultiBlock()) {

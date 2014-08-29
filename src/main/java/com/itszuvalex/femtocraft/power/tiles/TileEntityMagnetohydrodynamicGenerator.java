@@ -107,6 +107,26 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
                 return super.canConnect(from);
             }
             else {
+                switch (from) {
+                    case UP:
+                        if (yCoord - info.y() != 1) return false;
+                        break;
+                    case DOWN:
+                        if (yCoord - info.y() != -1) return false;
+                        break;
+                    case NORTH:
+                        if (zCoord - info.z() != -1) return false;
+                        break;
+                    case SOUTH:
+                        if (zCoord - info.z() != 1) return false;
+                        break;
+                    case EAST:
+                        if (xCoord - info.x() != 1) return false;
+                        break;
+                    case WEST:
+                        if (xCoord - info.x() != -1) return false;
+                        break;
+                }
                 TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
                 if (te instanceof IPowerBlockContainer) {
                     return ((IPowerBlockContainer) te).canConnect(from);
@@ -182,8 +202,8 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
 
     @Override
     public void femtocraftServerUpdate() {
-        if (info.isValidMultiBlock()) {
-            super.femtocraftServerUpdate();
+        if (!info.isValidMultiBlock()) {
+            return;
         }
         if (info.isController(xCoord, yCoord, zCoord)) {
             if (moltenSaltTank.getFluidAmount() > 0) {
@@ -202,6 +222,9 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
                                 moltenSaltToContaminatedProcessingRatio)), true);
                 charge(ForgeDirection.UNKNOWN, amount * powerPerMoltenSaltMB);
             }
+        }
+        else {
+            super.femtocraftServerUpdate();
         }
     }
 
