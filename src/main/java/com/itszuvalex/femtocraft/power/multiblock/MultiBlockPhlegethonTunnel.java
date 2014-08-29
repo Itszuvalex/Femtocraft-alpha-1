@@ -52,8 +52,8 @@ public class MultiBlockPhlegethonTunnel implements IMultiBlock {
     @Override
     public boolean isBlockInMultiBlock(World world, int x, int y, int z, int c_x, int c_y, int c_z) {
         return x >= (c_x - 1) && x <= (c_x + 1) &&
-                y >= (c_y - 1) && y <= (c_y + 1) &&
-                z >= (c_z - 1) && z <= (c_z + 1);
+               y >= (c_y - 1) && y <= (c_y + 1) &&
+               z >= (c_z - 1) && z <= (c_z + 1);
     }
 
     @Override
@@ -64,8 +64,9 @@ public class MultiBlockPhlegethonTunnel implements IMultiBlock {
             for (int j = -1; j <= 1; ++j) {
                 for (int k = -1; k <= 1; ++k) {
                     TileEntity te = world.getBlockTileEntity(x + i, y + k, z
-                            + j);
-                    result = te instanceof IMultiBlockComponent && ((IMultiBlockComponent) te).formMultiBlock(world, x, y, z) && result;
+                                                                           + j);
+                    result = te instanceof IMultiBlockComponent &&
+                             ((IMultiBlockComponent) te).formMultiBlock(world, x, y, z) && result;
                 }
             }
         }
@@ -97,8 +98,9 @@ public class MultiBlockPhlegethonTunnel implements IMultiBlock {
             for (int j = -1; j <= 1; ++j) {
                 for (int k = -1; k <= 1; ++k) {
                     TileEntity te = world.getBlockTileEntity(x + i, y + k, z
-                            + j);
-                    result = te instanceof IMultiBlockComponent && ((IMultiBlockComponent) te).breakMultiBlock(world, x, y, z) && result;
+                                                                           + j);
+                    result = te instanceof IMultiBlockComponent &&
+                             ((IMultiBlockComponent) te).breakMultiBlock(world, x, y, z) && result;
                 }
             }
         }
@@ -111,17 +113,18 @@ public class MultiBlockPhlegethonTunnel implements IMultiBlock {
             for (int j = -1; j <= 1; ++j) {
                 for (int k = -1; k <= 1; ++k) {
                     TileEntity te = world.getBlockTileEntity(x + i, y + k, z
-                            + j);
+                                                                           + j);
                     if ((i == 0 && j == 0 & k == 0 && te instanceof
-                            IPhlegethonTunnelCore) || (te instanceof IPhlegethonTunnelComponent && !(te instanceof IPhlegethonTunnelAddon)) || (isAddonSlot(i, j, k) && te instanceof IPhlegethonTunnelAddon)) {
+                            IPhlegethonTunnelCore) ||
+                        (te instanceof IPhlegethonTunnelComponent && !(te instanceof IPhlegethonTunnelAddon)) ||
+                        (isAddonSlot(i, j, k) && te instanceof IPhlegethonTunnelAddon)) {
                         if (strict) {
                             if (((IMultiBlockComponent) te).getInfo()
-                                                           .isValidMultiBlock()) {
+                                    .isValidMultiBlock()) {
                                 return false;
                             }
                         }
-                    }
-                    else {
+                    } else {
                         return false;
                     }
                 }
