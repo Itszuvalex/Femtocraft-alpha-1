@@ -22,11 +22,11 @@
 package com.itszuvalex.femtocraft.command;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.EnumChatFormatting;
 
 import java.util.Arrays;
@@ -68,10 +68,12 @@ public class CommandAssistantAdd extends CommandBase {
             }
             String username = ((EntityPlayer) icommandsender).username;
             if (Femtocraft.assistantManager.addAssistantTo(username, astring[0])) {
-                icommandsender.sendChatToPlayer(ChatMessageComponent.createFromText(EnumChatFormatting.YELLOW + astring[0] + " successfully added!" + EnumChatFormatting.RESET));
-            }
-            else {
-                icommandsender.sendChatToPlayer(ChatMessageComponent.createFromText(EnumChatFormatting.RED + "Error adding " + astring[0] + " as assistant!" + EnumChatFormatting.RESET));
+                FemtocraftUtils.sendMessageToPlayer(username, astring[0] + " successfully added as assistant!");
+                FemtocraftUtils.sendMessageToPlayer(astring[0], username + " just added you as an assistant!");
+            } else {
+                FemtocraftUtils.sendMessageToPlayer(username,
+                        EnumChatFormatting.RED + "Error adding " + astring[0] + " as assistant!"
+                );
             }
         }
     }

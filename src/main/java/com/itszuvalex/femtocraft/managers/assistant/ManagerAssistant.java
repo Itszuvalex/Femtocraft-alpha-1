@@ -1,7 +1,7 @@
 package com.itszuvalex.femtocraft.managers.assistant;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.FemtocraftFileUtils;
+import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;

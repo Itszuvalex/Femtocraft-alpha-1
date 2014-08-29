@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.managers.research;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.FemtocraftFileUtils;
+import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils;
 import com.itszuvalex.femtocraft.managers.research.EventTechnology.TechnologyAddedEvent;
 import com.itszuvalex.femtocraft.research.gui.GuiTechnology;
 import com.itszuvalex.femtocraft.research.gui.graph.TechNode;

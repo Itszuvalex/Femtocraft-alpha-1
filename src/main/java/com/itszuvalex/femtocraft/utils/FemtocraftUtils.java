@@ -58,7 +58,7 @@ public class FemtocraftUtils {
 
     public static boolean isPlayerOnline(String username) {
         return Arrays.asList(MinecraftServer.getServer().getAllUsernames())
-                     .contains(username);
+                .contains(username);
     }
 
     public static EntityPlayer getPlayer(String username) {
@@ -87,7 +87,7 @@ public class FemtocraftUtils {
         int damage = cur.getItemDamage();
         int indamage = in.getItemDamage();
         if ((damage != OreDictionary.WILDCARD_VALUE)
-                || (indamage != OreDictionary.WILDCARD_VALUE)) {
+            || (indamage != OreDictionary.WILDCARD_VALUE)) {
             if (damage < indamage) {
                 return -1;
             }
@@ -122,8 +122,7 @@ public class FemtocraftUtils {
                 if (room < amount) {
                     slot.stackSize += room;
                     amount -= room;
-                }
-                else {
+                } else {
                     slot.stackSize += amount;
                     return true;
                 }
@@ -173,8 +172,7 @@ public class FemtocraftUtils {
                     if (amountLeftToRemove <= 0) {
                         return true;
                     }
-                }
-                else {
+                } else {
                     slot.stackSize -= amountLeftToRemove;
                     return true;
                 }
@@ -210,17 +208,17 @@ public class FemtocraftUtils {
 
     public static String blueify(String name) {
         return EnumTechLevel.MICRO.getTooltipEnum() + name
-                + EnumChatFormatting.RESET;
+               + EnumChatFormatting.RESET;
     }
 
     public static String greenify(String name) {
         return EnumTechLevel.NANO.getTooltipEnum() + name
-                + EnumChatFormatting.RESET;
+               + EnumChatFormatting.RESET;
     }
 
     public static String orangeify(String name) {
         return EnumTechLevel.FEMTO.getTooltipEnum() + name
-                + EnumChatFormatting.RESET;
+               + EnumChatFormatting.RESET;
     }
 
     public static String formatIntegerToString(int i) {
@@ -229,17 +227,30 @@ public class FemtocraftUtils {
 
 
     public static String formatIntegerString(String number) {
-        return formatIntegerString_recursive(number);
+        StringBuilder builder = new StringBuilder(number);
+        int length = number.length();
+        for (int i = 0; i < length; ++i) {
+            if (i != 0 && i % 3 == 0) {
+                builder.insert(length - i, ',');
+            }
+        }
+        return builder.toString();
     }
 
-    private static String formatIntegerString_recursive(String number) {
-        if (number.length() <= 3) {
-            return number;
+    public static boolean sendMessageToPlayer(String username, String message) {
+        return sendMessageToPlayer(username, message, "");
+    }
+
+    public static boolean sendMessageToPlayer(String username, String message, String formatting) {
+        EntityPlayer assistant = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername
+                (username);
+        if (assistant != null) {
+            assistant.addChatMessage(
+                    new StringBuilder().append(EnumChatFormatting.GOLD).append("Femtocraft").append
+                            (EnumChatFormatting.RESET).append(": ").append(formatting).append(message).append
+                            (EnumChatFormatting.RESET).toString());
+            return true;
         }
-        else {
-            return formatIntegerString_recursive(number.substring(0,
-                    number.length() - 3)) + "," + number.substring
-                    (number.length() - 3);
-        }
+        return false;
     }
 }

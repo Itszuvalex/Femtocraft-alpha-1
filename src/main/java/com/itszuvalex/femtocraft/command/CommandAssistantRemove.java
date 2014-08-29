@@ -22,11 +22,11 @@
 package com.itszuvalex.femtocraft.command;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.EnumChatFormatting;
 
 import java.util.ArrayList;
@@ -44,7 +44,8 @@ public class CommandAssistantRemove extends CommandBase {
     @Override
     public List addTabCompletionOptions(ICommandSender icommandsender, String[] astring) {
         if (icommandsender instanceof EntityPlayer) {
-            return new ArrayList(Femtocraft.assistantManager.getPlayerAssistants(((EntityPlayer) icommandsender).username).keySet());
+            return new ArrayList(Femtocraft.assistantManager.getPlayerAssistants(((EntityPlayer) icommandsender)
+                    .username).keySet());
         }
         return Arrays.asList(MinecraftServer.getServer().getAllUsernames());
     }
@@ -67,10 +68,12 @@ public class CommandAssistantRemove extends CommandBase {
             }
             String username = ((EntityPlayer) icommandsender).username;
             if (Femtocraft.assistantManager.removeAssistantFrom(username, astring[0])) {
-                icommandsender.sendChatToPlayer(ChatMessageComponent.createFromText(EnumChatFormatting.YELLOW + astring[0] + " successfully removed!" + EnumChatFormatting.RESET));
-            }
-            else {
-                icommandsender.sendChatToPlayer(ChatMessageComponent.createFromText(EnumChatFormatting.RED + "Error removing " + astring[0] + " as assistant!" + EnumChatFormatting.RESET));
+                FemtocraftUtils.sendMessageToPlayer(username, astring[0] + " successfully removed as assistant!");
+                FemtocraftUtils.sendMessageToPlayer(astring[0], username + " just removed you as his assistant!");
+            } else {
+                FemtocraftUtils.sendMessageToPlayer(username,
+                        EnumChatFormatting.RED + "Error removing " + astring[0] + " as assistant!"
+                );
             }
         }
     }
