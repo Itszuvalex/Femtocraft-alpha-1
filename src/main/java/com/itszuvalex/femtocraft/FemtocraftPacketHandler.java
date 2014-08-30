@@ -63,6 +63,10 @@ public class FemtocraftPacketHandler implements IPacketHandler {
         DataInputStream inputStream = new DataInputStream(
                 new ByteArrayInputStream(packet.data));
 
+        if (packet.channel.equalsIgnoreCase(FemtocraftGuiHandler.PACKET_CHANNEL)) {
+            handleGUIPacket(inputStream, playerEntity);
+        }
+
         if (packet.channel.equalsIgnoreCase(TileEntityVacuumTube.PACKET_CHANNEL)) {
             handleVacuumTube(inputStream, playerEntity);
             return;
@@ -78,6 +82,19 @@ public class FemtocraftPacketHandler implements IPacketHandler {
             return;
         }
 
+    }
+
+    private void handleGUIPacket(DataInputStream stream, Player playerEntity) {
+        EntityPlayer player = (EntityPlayer) playerEntity;
+        try {
+            int id = stream.readInt();
+            int value = stream.readInt();
+            player.openContainer.updateProgressBar(id, value);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
     }
 
     private void handleFissionReactorPacket(DataInputStream inputStream, Player playerEntity) {

@@ -56,14 +56,12 @@ public class ContainerNanoFissionReactor extends ContainerInv<TileEntityNanoFiss
     @Override
     public void addCraftingToCrafters(ICrafting par1ICrafting) {
         super.addCraftingToCrafters(par1ICrafting);
-        par1ICrafting.sendProgressBarUpdate(this, heatIndex,
-                (int) this.inventory.getTemperatureCurrent());
-        par1ICrafting.sendProgressBarUpdate(this, cooledMoltenSaltIndex,
-                this.inventory.getCooledSaltAmount());
-        par1ICrafting.sendProgressBarUpdate(this, moltenSaltIndex,
-                this.inventory.getMoltenSaltAmount());
-        par1ICrafting.sendProgressBarUpdate(this, thoriumIndex, this.inventory.getThoriumStoreCurrent());
-        par1ICrafting.sendProgressBarUpdate(this, concentrationTargetIndex, (int) (this.inventory.getThoriumConcentrationTarget() * concentrationMultiplier));
+        sendUpdateToCrafter(this, par1ICrafting, heatIndex, (int) inventory.getTemperatureCurrent());
+        sendUpdateToCrafter(this, par1ICrafting, cooledMoltenSaltIndex, inventory.getCooledSaltAmount());
+        sendUpdateToCrafter(this, par1ICrafting, moltenSaltIndex, inventory.getMoltenSaltAmount());
+        sendUpdateToCrafter(this, par1ICrafting, thoriumIndex, inventory.getThoriumStoreCurrent());
+        sendUpdateToCrafter(this, par1ICrafting, concentrationTargetIndex, (int) (
+                inventory.getThoriumConcentrationTarget() * concentrationMultiplier));
     }
 
     /**
@@ -77,22 +75,21 @@ public class ContainerNanoFissionReactor extends ContainerInv<TileEntityNanoFiss
             ICrafting icrafting = (ICrafting) crafter;
 
             if (this.lastHeat != (int) this.inventory.getTemperatureCurrent()) {
-                icrafting.sendProgressBarUpdate(this, heatIndex,
-                        (int) this.inventory.getTemperatureCurrent());
+                sendUpdateToCrafter(this, icrafting, heatIndex, (int) inventory.getTemperatureCurrent());
             }
             if (this.lastCooledMoltenSalt != this.inventory.getCooledSaltAmount()) {
-                icrafting.sendProgressBarUpdate(this, cooledMoltenSaltIndex,
-                        this.inventory.getCooledSaltAmount());
+                sendUpdateToCrafter(this, icrafting, cooledMoltenSaltIndex, inventory.getCooledSaltAmount());
             }
             if (this.lastMoltenSalt != this.inventory.getMoltenSaltAmount()) {
-                icrafting.sendProgressBarUpdate(this, moltenSaltIndex,
-                        this.inventory.getMoltenSaltAmount());
+                sendUpdateToCrafter(this, icrafting, moltenSaltIndex, inventory.getMoltenSaltAmount());
             }
             if (this.lastThorium != this.inventory.getTemperatureCurrent()) {
-                icrafting.sendProgressBarUpdate(this, thoriumIndex, this.inventory.getThoriumStoreCurrent());
+                sendUpdateToCrafter(this, icrafting, thoriumIndex, inventory.getThoriumStoreCurrent());
             }
-            if (this.lastConcentrationTarget != (int) (this.inventory.getThoriumConcentrationTarget() * concentrationMultiplier)) {
-                icrafting.sendProgressBarUpdate(this, concentrationTargetIndex, (int) (this.inventory.getThoriumConcentrationTarget() * concentrationMultiplier));
+            if (this.lastConcentrationTarget !=
+                (int) (this.inventory.getThoriumConcentrationTarget() * concentrationMultiplier)) {
+                sendUpdateToCrafter(this, icrafting, concentrationTargetIndex, (int) (
+                        inventory.getThoriumConcentrationTarget() * concentrationMultiplier));
             }
         }
 

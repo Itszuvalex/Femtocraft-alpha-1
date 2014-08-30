@@ -43,7 +43,7 @@ public class ContainerReconstructor<T extends TileEntityBaseEntityMicroReconstru
 
     public ContainerReconstructor(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
                                   T inventory) {
-        super(player,inventory, 10, 9);
+        super(player, inventory, 10, 9);
         this.addSlotToContainer(new OutputSlot(inventory, 9, 122, 18));
         Slot schematic = new Slot(inventory, 10, 93, 54) {
             @Override
@@ -56,12 +56,12 @@ public class ContainerReconstructor<T extends TileEntityBaseEntityMicroReconstru
         for (int y = 0; y < 3; ++y) {
             for (int x = 0; x < 3; ++x) {
                 this.addSlotToContainer(new DisplaySlot(inventory, x + y
-                        * 3, 32 + x * 18, 18 + y * 18) {
+                                                                       * 3, 32 + x * 18, 18 + y * 18) {
                     @Override
                     @SideOnly(Side.CLIENT)
                     public Icon getBackgroundIconIndex() {
                         return this.inventory
-                                .getStackInSlot(10) != null ? null
+                                       .getStackInSlot(10) != null ? null
                                 : DisplaySlot.noPlaceDisplayIcon;
                     }
                 });
@@ -81,12 +81,9 @@ public class ContainerReconstructor<T extends TileEntityBaseEntityMicroReconstru
     @Override
     public void addCraftingToCrafters(ICrafting par1ICrafting) {
         super.addCraftingToCrafters(par1ICrafting);
-        par1ICrafting.sendProgressBarUpdate(this, 0,
-                this.inventory.cookTime);
-        par1ICrafting.sendProgressBarUpdate(this, 1,
-                this.inventory.getCurrentPower());
-        par1ICrafting.sendProgressBarUpdate(this, 2,
-                this.inventory.getMassAmount());
+        sendUpdateToCrafter(this, par1ICrafting, 0, inventory.cookTime);
+        sendUpdateToCrafter(this, par1ICrafting, 1, inventory.getCurrentPower());
+        sendUpdateToCrafter(this, par1ICrafting, 2, inventory.getMassAmount());
     }
 
     /**
@@ -100,16 +97,13 @@ public class ContainerReconstructor<T extends TileEntityBaseEntityMicroReconstru
             ICrafting icrafting = (ICrafting) crafter;
 
             if (this.lastCookTime != this.inventory.cookTime) {
-                icrafting.sendProgressBarUpdate(this, 0,
-                        this.inventory.cookTime);
+                sendUpdateToCrafter(this, icrafting, 0, inventory.cookTime);
             }
             if (this.lastPower != this.inventory.getCurrentPower()) {
-                icrafting.sendProgressBarUpdate(this, 1,
-                        this.inventory.getCurrentPower());
+                sendUpdateToCrafter(this, icrafting, 1, inventory.getCurrentPower());
             }
             if (this.lastMass != this.inventory.getMassAmount()) {
-                icrafting.sendProgressBarUpdate(this, 2,
-                        this.inventory.getMassAmount());
+                sendUpdateToCrafter(this, icrafting, 2, inventory.getMassAmount());
             }
         }
 
@@ -131,8 +125,7 @@ public class ContainerReconstructor<T extends TileEntityBaseEntityMicroReconstru
             case 2:
                 if (par2 > 0) {
                     this.inventory.setFluidAmount(par2);
-                }
-                else {
+                } else {
                     this.inventory.clearFluid();
                 }
                 break;

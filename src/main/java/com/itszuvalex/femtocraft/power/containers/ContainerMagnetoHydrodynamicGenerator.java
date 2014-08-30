@@ -21,17 +21,17 @@
 
 package com.itszuvalex.femtocraft.power.containers;
 
+import com.itszuvalex.femtocraft.core.container.ContainerBase;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityMagnetohydrodynamicGenerator;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 8/27/14.
  */
-public class ContainerMagnetoHydrodynamicGenerator extends Container {
+public class ContainerMagnetoHydrodynamicGenerator extends ContainerBase {
     private final TileEntityMagnetohydrodynamicGenerator generator;
     private int lastPower = 0;
     private int lastMoltenSalt = 0;
@@ -48,10 +48,10 @@ public class ContainerMagnetoHydrodynamicGenerator extends Container {
     @Override
     public void addCraftingToCrafters(ICrafting par1iCrafting) {
         super.addCraftingToCrafters(par1iCrafting);
-        par1iCrafting.sendProgressBarUpdate(this, powerIndex,
-                generator.getCurrentPower());
-        par1iCrafting.sendProgressBarUpdate(this, moltenSaltIndex, generator.getMoltenSaltTank().getFluidAmount());
-        par1iCrafting.sendProgressBarUpdate(this, contaminatedSaltIndex, generator.getContaminatedSaltTank().getFluidAmount());
+        sendUpdateToCrafter(this, par1iCrafting, powerIndex, generator.getCurrentPower());
+        sendUpdateToCrafter(this, par1iCrafting, moltenSaltIndex, generator.getMoltenSaltTank().getFluidAmount());
+        sendUpdateToCrafter(this, par1iCrafting, contaminatedSaltIndex, generator.getContaminatedSaltTank()
+                .getFluidAmount());
     }
 
     @Override
@@ -64,13 +64,13 @@ public class ContainerMagnetoHydrodynamicGenerator extends Container {
             ICrafting icrafting = (ICrafting) crafter;
 
             if (lastPower != power) {
-                icrafting.sendProgressBarUpdate(this, powerIndex, power);
+                sendUpdateToCrafter(this, icrafting, powerIndex, power);
             }
             if (lastMoltenSalt != moltenSalt) {
-                icrafting.sendProgressBarUpdate(this, moltenSaltIndex, moltenSalt);
+                sendUpdateToCrafter(this, icrafting, moltenSaltIndex, moltenSalt);
             }
             if (lastContaminatedSalt != contaminatedSalt) {
-                icrafting.sendProgressBarUpdate(this, contaminatedSaltIndex, contaminatedSalt);
+                sendUpdateToCrafter(this, icrafting, contaminatedSaltIndex, contaminatedSalt);
             }
         }
         lastPower = power;

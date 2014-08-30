@@ -83,14 +83,13 @@ public class TileEntityBase extends TileEntity {
 
     public boolean shouldTick() {
         return !FemtocraftConfigs.requirePlayersOnlineForTileEntityTicks
-                || FemtocraftUtils.isPlayerOnline(owner);
+               || FemtocraftUtils.isPlayerOnline(owner);
     }
 
     /**
-     * Gated update call. This will only be called on the server, and only if
-     * the tile's {@link #shouldTick()} returns true. This should be used
-     * instead of updateEntity() for heavy computation, unless the tile
-     * absolutely needs to update.
+     * Gated update call. This will only be called on the server, and only if the tile's {@link #shouldTick()} returns
+     * true. This should be used instead of updateEntity() for heavy computation, unless the tile absolutely needs to
+     * update.
      */
     public void femtocraftServerUpdate() {
     }
@@ -157,19 +156,21 @@ public class TileEntityBase extends TileEntity {
     }
 
     public boolean canPlayerUse(EntityPlayer par1EntityPlayer) {
-        boolean inrange = this.worldObj.getBlockTileEntity(this.xCoord,
+        boolean inRange = this.worldObj.getBlockTileEntity(this.xCoord,
                 this.yCoord, this.zCoord) == this
-                && par1EntityPlayer.getDistanceSq((double) this.xCoord + 0.5D,
+                          && par1EntityPlayer.getDistanceSq((double) this.xCoord + 0.5D,
                 (double) this.yCoord + 0.5D,
                 (double) this.zCoord + 0.5D) <= 64.0D;
-        boolean isowner = owner == null || owner.isEmpty()
-                || (owner.equals(par1EntityPlayer.username));
+        boolean isOwner = owner == null || owner.isEmpty()
+                          || (owner.equals(par1EntityPlayer.username));
         boolean isAssist = (owner != null && !owner.isEmpty())
-                && Femtocraft.assistantManager.isPlayerAssistant(owner, par1EntityPlayer.username);
-        return inrange
-                && (isowner || isAssist || (MinecraftServer.getServer()
-                                                           .getConfigurationManager()
-                                                           .isPlayerOpped(par1EntityPlayer.username) || par1EntityPlayer.capabilities.isCreativeMode));
+                           && Femtocraft.assistantManager.isPlayerAssistant(owner, par1EntityPlayer.username);
+        boolean isOp = (MinecraftServer.getServer()
+                                .getConfigurationManager()
+                                .isPlayerOpped(par1EntityPlayer.username) ||
+                        par1EntityPlayer.capabilities.isCreativeMode);
+        return inRange
+               && (isOwner || isAssist || isOp);
     }
 
     public Object getMod() {

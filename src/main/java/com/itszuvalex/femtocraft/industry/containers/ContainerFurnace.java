@@ -53,10 +53,8 @@ public class ContainerFurnace<T extends TileEntityBaseEntityMicroFurnace> extend
     @Override
     public void addCraftingToCrafters(ICrafting par1ICrafting) {
         super.addCraftingToCrafters(par1ICrafting);
-        par1ICrafting.sendProgressBarUpdate(this, 0,
-                this.inventory.furnaceCookTime);
-        par1ICrafting.sendProgressBarUpdate(this, 1,
-                this.inventory.getCurrentPower());
+        sendUpdateToCrafter(this, par1ICrafting, 0, inventory.furnaceCookTime);
+        sendUpdateToCrafter(this, par1ICrafting, 1, inventory.getCurrentPower());
     }
 
     /**
@@ -70,12 +68,10 @@ public class ContainerFurnace<T extends TileEntityBaseEntityMicroFurnace> extend
             ICrafting icrafting = (ICrafting) crafter;
 
             if (this.lastCookTime != this.inventory.furnaceCookTime) {
-                icrafting.sendProgressBarUpdate(this, 0,
-                        this.inventory.furnaceCookTime);
+                sendUpdateToCrafter(this, icrafting, 0, inventory.furnaceCookTime);
             }
             if (this.lastPower != this.inventory.getCurrentPower()) {
-                icrafting.sendProgressBarUpdate(this, 1,
-                        this.inventory.getCurrentPower());
+                sendUpdateToCrafter(this, icrafting, 1, inventory.getCurrentPower());
             }
         }
 

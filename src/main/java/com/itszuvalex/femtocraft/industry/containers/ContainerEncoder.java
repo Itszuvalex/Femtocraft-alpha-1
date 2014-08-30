@@ -68,9 +68,8 @@ public class ContainerEncoder extends ContainerInv<TileEntityEncoder> {
     @Override
     public void addCraftingToCrafters(ICrafting par1ICrafting) {
         super.addCraftingToCrafters(par1ICrafting);
-        par1ICrafting.sendProgressBarUpdate(this, 0, inventory.timeWorked);
-        par1ICrafting.sendProgressBarUpdate(this, 1,
-                inventory.getCurrentPower());
+        sendUpdateToCrafter(this, par1ICrafting, 0, inventory.timeWorked);
+        sendUpdateToCrafter(this, par1ICrafting, 1, inventory.getCurrentPower());
     }
 
     /**
@@ -84,16 +83,13 @@ public class ContainerEncoder extends ContainerInv<TileEntityEncoder> {
             ICrafting icrafting = (ICrafting) crafter;
 
             if (this.lastCookTime != inventory.timeWorked) {
-                icrafting.sendProgressBarUpdate(this, 0,
-                        inventory.timeWorked);
+                sendUpdateToCrafter(this, icrafting, 0, inventory.timeWorked);
             }
             if (this.lastPower != inventory.getCurrentPower()) {
-                icrafting.sendProgressBarUpdate(this, 1,
-                        inventory.getCurrentPower());
+                sendUpdateToCrafter(this, icrafting, 1, inventory.getCurrentPower());
             }
             if (this.lastMass != inventory.getMassAmount()) {
-                icrafting.sendProgressBarUpdate(this, 2,
-                        inventory.getMassAmount());
+                sendUpdateToCrafter(this, icrafting, 2, inventory.getMassAmount());
             }
         }
 
@@ -119,8 +115,7 @@ public class ContainerEncoder extends ContainerInv<TileEntityEncoder> {
         if (par1 == 2) {
             if (par2 > 0) {
                 inventory.setFluidAmount(par2);
-            }
-            else {
+            } else {
                 inventory.clearFluid();
             }
         }

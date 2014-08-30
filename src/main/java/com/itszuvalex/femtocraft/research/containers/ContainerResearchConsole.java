@@ -21,23 +21,20 @@
 
 package com.itszuvalex.femtocraft.research.containers;
 
-import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.common.gui.OutputSlot;
+import com.itszuvalex.femtocraft.core.container.ContainerBase;
 import com.itszuvalex.femtocraft.research.tiles.TileEntityResearchConsole;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 
-import java.util.logging.Level;
 
-
-public class ContainerResearchConsole extends Container {
+public class ContainerResearchConsole extends ContainerBase {
     private static final int progressID = 0;
     private static final int progressMaxID = 1;
     private final TileEntityResearchConsole console;
@@ -62,7 +59,7 @@ public class ContainerResearchConsole extends Container {
         for (i = 0; i < 3; ++i) {
             for (int j = 0; j < 9; ++j) {
                 this.addSlotToContainer(new Slot(par1InventoryPlayer, j + i * 9
-                        + 9, 8 + j * 18, 84 + i * 18));
+                                                                      + 9, 8 + j * 18, 84 + i * 18));
             }
         }
         // Bind player actionbar
@@ -75,10 +72,8 @@ public class ContainerResearchConsole extends Container {
     @Override
     public void addCraftingToCrafters(ICrafting par1iCrafting) {
         super.addCraftingToCrafters(par1iCrafting);
-        par1iCrafting.sendProgressBarUpdate(this, progressID,
-                console.getResearchProgress());
-        par1iCrafting.sendProgressBarUpdate(this, progressMaxID,
-                console.getResearchMax());
+        sendUpdateToCrafter(this, par1iCrafting, progressID, console.getResearchProgress());
+        sendUpdateToCrafter(this, par1iCrafting, progressMaxID, console.getResearchMax());
     }
 
     @Override
@@ -89,12 +84,10 @@ public class ContainerResearchConsole extends Container {
             ICrafting icrafting = (ICrafting) crafter;
 
             if (this.lastProgress != this.console.getResearchProgress()) {
-                icrafting.sendProgressBarUpdate(this, progressID,
-                        this.console.getResearchProgress());
+                sendUpdateToCrafter(this, icrafting, progressID, console.getResearchProgress());
             }
             if (this.lastProgressMax != this.console.getResearchMax()) {
-                icrafting.sendProgressBarUpdate(this, progressMaxID,
-                        this.console.getResearchMax());
+                sendUpdateToCrafter(this, icrafting, progressMaxID, console.getResearchMax());
             }
         }
 
@@ -103,8 +96,7 @@ public class ContainerResearchConsole extends Container {
     }
 
     /**
-     * Called when a player shift-clicks on a slot. You must override this or
-     * you will crash when someone does that.
+     * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
      */
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
@@ -121,31 +113,26 @@ public class ContainerResearchConsole extends Container {
                 }
 
                 slot.onSlotChange(itemstack1, itemstack);
-            }
-            else if (par2 != 0) {
+            } else if (par2 != 0) {
                 if (FurnaceRecipes.smelting().getSmeltingResult(itemstack1) != null) {
                     if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
                         return null;
                     }
-                }
-                else if (par2 >= 2 && par2 < 29) {
+                } else if (par2 >= 2 && par2 < 29) {
                     if (!this.mergeItemStack(itemstack1, 29, 38, false)) {
                         return null;
                     }
-                }
-                else if (par2 >= 29 && par2 < 38
-                        && !this.mergeItemStack(itemstack1, 2, 29, false)) {
+                } else if (par2 >= 29 && par2 < 38
+                           && !this.mergeItemStack(itemstack1, 2, 29, false)) {
                     return null;
                 }
-            }
-            else if (!this.mergeItemStack(itemstack1, 2, 38, false)) {
+            } else if (!this.mergeItemStack(itemstack1, 2, 38, false)) {
                 return null;
             }
 
             if (itemstack1.stackSize == 0) {
                 slot.putStack(null);
-            }
-            else {
+            } else {
                 slot.onSlotChanged();
             }
 
@@ -176,8 +163,6 @@ public class ContainerResearchConsole extends Container {
 
     @Override
     public boolean canInteractWith(EntityPlayer entityplayer) {
-        Femtocraft.logger.log(Level.WARNING,
-                "canInteractWith ContainerResearchConsole");
         return console.isUseableByPlayer(entityplayer);
     }
 }

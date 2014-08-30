@@ -24,7 +24,6 @@ package com.itszuvalex.femtocraft.core.container;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -32,7 +31,7 @@ import net.minecraft.item.ItemStack;
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/27/14.
  */
-public abstract class ContainerInv<T extends TileEntityBase> extends Container {
+public abstract class ContainerInv<T extends TileEntityBase> extends ContainerBase {
     protected T inventory;
 
     protected final EntityPlayer player;

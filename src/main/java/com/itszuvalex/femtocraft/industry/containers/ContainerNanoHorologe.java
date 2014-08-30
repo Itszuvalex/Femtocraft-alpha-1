@@ -55,11 +55,9 @@ public class ContainerNanoHorologe extends ContainerInv<TileEntityBaseEntityNano
     @Override
     public void addCraftingToCrafters(ICrafting par1ICrafting) {
         super.addCraftingToCrafters(par1ICrafting);
-        par1ICrafting.sendProgressBarUpdate(this, cookTimeID,
-                this.inventory.getProgress());
-        par1ICrafting.sendProgressBarUpdate(this, cookTimeMaxID, this.inventory.getProgressMax());
-        par1ICrafting.sendProgressBarUpdate(this, powerID,
-                this.inventory.getCurrentPower());
+        sendUpdateToCrafter(this, par1ICrafting, cookTimeID, inventory.getProgress());
+        sendUpdateToCrafter(this, par1ICrafting, cookTimeMaxID, inventory.getProgressMax());
+        sendUpdateToCrafter(this, par1ICrafting, powerID, inventory.getCurrentPower());
     }
 
     /**
@@ -73,19 +71,18 @@ public class ContainerNanoHorologe extends ContainerInv<TileEntityBaseEntityNano
             ICrafting icrafting = (ICrafting) crafter;
 
             if (this.lastCookTime != this.inventory.getProgress()) {
-                icrafting.sendProgressBarUpdate(this, cookTimeID,
-                        this.inventory.getProgress());
+                sendUpdateToCrafter(this, icrafting, cookTimeID, inventory.getProgress());
             }
             if (this.lastCookMax != this.inventory.getProgressMax()) {
-                icrafting.sendProgressBarUpdate(this, cookTimeMaxID, this.inventory.getProgressMax());
+                sendUpdateToCrafter(this, icrafting, cookTimeMaxID, inventory.getProgressMax());
             }
             if (this.lastPower != this.inventory.getCurrentPower()) {
-                icrafting.sendProgressBarUpdate(this, powerID,
-                        this.inventory.getCurrentPower());
+                sendUpdateToCrafter(this, icrafting, powerID, inventory.getCurrentPower());
             }
         }
 
         this.lastCookTime = this.inventory.getProgress();
+        this.lastCookMax = this.inventory.getProgressMax();
         this.lastPower = this.inventory.getCurrentPower();
     }
 

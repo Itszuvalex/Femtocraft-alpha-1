@@ -64,6 +64,7 @@ public class FemtocraftGuiHandler implements IGuiHandler {
     public static final int NanoFissionReactorGuiID = 36;
     public static final int NanoMagnetohydrodynamicGeneratorGuiID = 37;
     public static final int FemtoCubeGuiID = 40;
+    public static final String PACKET_CHANNEL = "Femtocraft" + ".GUI";
 
 
     @Override

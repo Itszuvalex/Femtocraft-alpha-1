@@ -21,14 +21,14 @@
 
 package com.itszuvalex.femtocraft.power.containers;
 
+import com.itszuvalex.femtocraft.core.container.ContainerBase;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoCubePort;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 
-public class ContainerNanoCube extends Container {
+public class ContainerNanoCube extends ContainerBase {
     private final TileEntityNanoCubePort controller;
     private int lastPower = 0;
 
@@ -40,8 +40,7 @@ public class ContainerNanoCube extends Container {
     @Override
     public void addCraftingToCrafters(ICrafting par1iCrafting) {
         super.addCraftingToCrafters(par1iCrafting);
-        par1iCrafting.sendProgressBarUpdate(this, 0,
-                controller.getCurrentPower());
+        sendUpdateToCrafter(this, par1iCrafting, 0, controller.getCurrentPower());
     }
 
     @Override
@@ -52,7 +51,7 @@ public class ContainerNanoCube extends Container {
             ICrafting icrafting = (ICrafting) crafter;
 
             if (lastPower != power) {
-                icrafting.sendProgressBarUpdate(this, 0, power);
+                sendUpdateToCrafter(this, icrafting, 0, power);
             }
         }
         lastPower = power;
