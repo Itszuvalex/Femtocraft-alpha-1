@@ -165,9 +165,9 @@ public class TileEntityBase extends TileEntity {
                           || (owner.equals(par1EntityPlayer.username));
         boolean isAssist = (owner != null && !owner.isEmpty())
                            && Femtocraft.assistantManager.isPlayerAssistant(owner, par1EntityPlayer.username);
-        boolean isOp = (MinecraftServer.getServer()
-                                .getConfigurationManager()
-                                .isPlayerOpped(par1EntityPlayer.username) ||
+        boolean isOp = ((MinecraftServer.getServer() != null && MinecraftServer.getServer()
+                .getConfigurationManager()
+                .isPlayerOpped(par1EntityPlayer.username)) ||
                         par1EntityPlayer.capabilities.isCreativeMode);
         return inRange
                && (isOwner || isAssist || isOp);
