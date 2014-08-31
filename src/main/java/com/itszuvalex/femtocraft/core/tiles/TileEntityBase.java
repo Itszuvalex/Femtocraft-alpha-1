@@ -143,7 +143,7 @@ public class TileEntityBase extends TileEntity {
     }
 
     public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
-        if (hasGUI() && canPlayerUse(par5EntityPlayer)) {
+        if (hasGUI()) {
             par5EntityPlayer.openGui(getMod(), getGuiID(), worldObj, xCoord,
                     yCoord, zCoord);
             return true;
