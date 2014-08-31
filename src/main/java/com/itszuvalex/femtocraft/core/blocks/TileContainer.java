@@ -86,9 +86,13 @@ public class TileContainer extends BlockContainer {
                                     int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
                                     float par8, float par9) {
         TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
-        if (te instanceof TileEntityBase && ((TileEntityBase) te).canPlayerUse(par5EntityPlayer)) {
-            TileEntityBase tile = (TileEntityBase) te;
-            return tile.onSideActivate(par5EntityPlayer, par6);
+        if (te instanceof TileEntityBase) {
+            if (((TileEntityBase) te).canPlayerUse(par5EntityPlayer)) {
+                return ((TileEntityBase) te).onSideActivate(par5EntityPlayer, par6);
+            } else {
+                par5EntityPlayer.addChatMessage(((TileEntityBase) te).getOwner() + " is the owner of this block.");
+                return true;
+            }
         }
         return super.onBlockActivated(par1World, par2, par3, par4,
                 par5EntityPlayer, par6, par7, par8, par9);
