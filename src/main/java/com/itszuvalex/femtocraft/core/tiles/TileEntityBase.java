@@ -35,7 +35,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityBase extends TileEntity {
     private
-    @FemtocraftDataUtils.Saveable(item = true)
+    @FemtocraftDataUtils.Saveable(desc = true, item = true)
     String owner;
 
     public TileEntityBase() {

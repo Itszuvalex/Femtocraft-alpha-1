@@ -58,15 +58,15 @@ public class BlockPowerContainer extends TileContainer {
     @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer,
                                     int par6, float par7, float par8, float par9) {
-
-        TileEntityPowerBase container = (TileEntityPowerBase) par1World.getBlockTileEntity(par2, par3, par4);
-
-        if (container != null) {
-            par5EntityPlayer.addChatMessage(String.valueOf(container.getCurrentPower()) + "/" + String.valueOf
-                    (container.getMaxPower()));
+        if (super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9)) {
+            TileEntityPowerBase container = (TileEntityPowerBase) par1World.getBlockTileEntity(par2, par3, par4);
+            if (container != null) {
+                par5EntityPlayer.addChatMessage(String.valueOf(container.getCurrentPower()) + "/" + String.valueOf
+                        (container.getMaxPower()));
+            }
+            return true;
         }
-
-        return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
+        return false;
     }
 
     @Override
