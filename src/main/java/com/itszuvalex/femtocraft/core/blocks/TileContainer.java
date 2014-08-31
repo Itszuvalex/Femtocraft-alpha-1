@@ -34,7 +34,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -63,7 +62,7 @@ public class TileContainer extends BlockContainer {
                 ItemStack stack = new ItemStack(Block.blocksList[par5]);
                 Item item = stack.getItem();
                 if ((item instanceof CoreItemBlock)
-                        && ((CoreItemBlock) item).hasItemNBT()) {
+                    && ((CoreItemBlock) item).hasItemNBT()) {
                     stack.stackTagCompound = new NBTTagCompound();
                     tile.saveInfoToItemNBT(stack.stackTagCompound);
                 }
@@ -109,12 +108,12 @@ public class TileContainer extends BlockContainer {
                 if (par5EntityLivingBase instanceof EntityPlayerMP) {
                     Item item = par6ItemStack.getItem();
                     if ((item instanceof CoreItemBlock)
-                            && (((CoreItemBlock) item).hasItemNBT())) {
+                        && (((CoreItemBlock) item).hasItemNBT())) {
                         ((TileEntityBase) te)
                                 .loadInfoFromItemNBT(par6ItemStack.stackTagCompound);
                     }
                     if (((TileEntityBase) te).getOwner() == null
-                            || ((TileEntityBase) te).getOwner().isEmpty()) {
+                        || ((TileEntityBase) te).getOwner().isEmpty()) {
                         ((TileEntityBase) te)
                                 .setOwner(((EntityPlayerMP) par5EntityLivingBase).username);
                     }
@@ -132,20 +131,11 @@ public class TileContainer extends BlockContainer {
         if (!(te instanceof TileEntityBase)) {
             return false;
         }
-        if (!canPlayerRemove(player, (TileEntityBase) te)) {
+        if (!((TileEntityBase) te).canPlayerUse(player)) {
             player.addChatMessage(((TileEntityBase) te).getOwner() + " is the owner of this block.");
             return false;
         }
         return super.removeBlockByPlayer(world, player, x, y, z);
-    }
-
-    private boolean canPlayerRemove(EntityPlayer player, TileEntityBase tile) {
-        return player != null
-                && (tile.getOwner() == null
-                || tile.getOwner().equals(player.username)
-                || MinecraftServer.getServer()
-                                  .getConfigurationManager()
-                                  .isPlayerOpped(player.username) || player.capabilities.isCreativeMode);
     }
 
     @Override
@@ -153,7 +143,7 @@ public class TileContainer extends BlockContainer {
                                     Entity entity) {
         TileEntity te = world.getBlockTileEntity(x, y, z);
         return te instanceof TileEntityBase && entity instanceof EntityPlayer
-                && canPlayerRemove((EntityPlayer) entity, (TileEntityBase) te)
-                && super.canEntityDestroy(world, x, y, z, entity);
+               && ((TileEntityBase) te).canPlayerUse((EntityPlayer) entity)
+               && super.canEntityDestroy(world, x, y, z, entity);
     }
 }

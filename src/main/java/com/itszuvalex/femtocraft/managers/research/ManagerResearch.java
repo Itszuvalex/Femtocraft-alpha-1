@@ -22,12 +22,12 @@
 package com.itszuvalex.femtocraft.managers.research;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils;
 import com.itszuvalex.femtocraft.managers.research.EventTechnology.TechnologyAddedEvent;
 import com.itszuvalex.femtocraft.research.gui.GuiTechnology;
 import com.itszuvalex.femtocraft.research.gui.graph.TechNode;
 import com.itszuvalex.femtocraft.research.gui.graph.TechnologyGraph;
 import com.itszuvalex.femtocraft.research.gui.technology.*;
+import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompressedStreamTools;
@@ -121,7 +121,7 @@ public class ManagerResearch {
     );
     @Technology
     public static ResearchTechnology technologyVacuumTubes = new ResearchTechnology(
-            "VacuumTubes", "These tubes contain nothing!", EnumTechLevel.MICRO,
+            "Vacuum Tubes", "These tubes contain nothing!", EnumTechLevel.MICRO,
             new ArrayList<ResearchTechnology>(Arrays
                     .asList(technologyPowerOfNothing)), new ItemStack(
             Femtocraft.blockVacuumTube), false,

@@ -22,7 +22,6 @@
 package com.itszuvalex.femtocraft;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class FemtocraftCreativeTab extends CreativeTabs {
@@ -33,7 +32,7 @@ public class FemtocraftCreativeTab extends CreativeTabs {
 
     @Override
     public ItemStack getIconItemStack() {
-        return new ItemStack(Item.netherStar);
+        return new ItemStack(Femtocraft.itemCubit);
     }
 
 }

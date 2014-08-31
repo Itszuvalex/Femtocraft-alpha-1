@@ -155,22 +155,32 @@ public class TileEntityBase extends TileEntity {
         return false;
     }
 
-    public boolean canPlayerUse(EntityPlayer par1EntityPlayer) {
-        boolean inRange = this.worldObj.getBlockTileEntity(this.xCoord,
-                this.yCoord, this.zCoord) == this
-                          && par1EntityPlayer.getDistanceSq((double) this.xCoord + 0.5D,
-                (double) this.yCoord + 0.5D,
-                (double) this.zCoord + 0.5D) <= 64.0D;
-        boolean isOwner = owner == null || owner.isEmpty()
-                          || (owner.equals(par1EntityPlayer.username));
-        boolean isAssist = (owner != null && !owner.isEmpty())
-                           && Femtocraft.assistantManager.isPlayerAssistant(owner, par1EntityPlayer.username);
-        boolean isOp = ((MinecraftServer.getServer() != null && MinecraftServer.getServer()
+//    public boolean canPlayerUse(EntityPlayer par1EntityPlayer) {
+//        boolean inRange = this.worldObj.getBlockTileEntity(this.xCoord,
+//                this.yCoord, this.zCoord) == this
+//                          && par1EntityPlayer.getDistanceSq((double) this.xCoord + 0.5D,
+//                (double) this.yCoord + 0.5D,
+//                (double) this.zCoord + 0.5D) <= 64.0D;
+//        boolean isOwner = owner == null || owner.isEmpty()
+//                          || (owner.equals(par1EntityPlayer.username));
+//        boolean isAssist = (owner != null && !owner.isEmpty())
+//                           && Femtocraft.assistantManager.isPlayerAssistant(owner, par1EntityPlayer.username);
+//        boolean isOp = ((MinecraftServer.getServer() != null && MinecraftServer.getServer()
+//                .getConfigurationManager()
+//                .isPlayerOpped(par1EntityPlayer.username)) ||
+//                        par1EntityPlayer.capabilities.isCreativeMode);
+//        return inRange
+//               && (isOwner || isAssist || isOp);
+//    }
+
+    public boolean canPlayerUse(EntityPlayer player) {
+        return player != null
+               && (getOwner() == null
+                   || getOwner().equals(player.username) ||
+                   Femtocraft.assistantManager.isPlayerAssistant(getOwner(), player.username)
+                   || (MinecraftServer.getServer() != null && MinecraftServer.getServer()
                 .getConfigurationManager()
-                .isPlayerOpped(par1EntityPlayer.username)) ||
-                        par1EntityPlayer.capabilities.isCreativeMode);
-        return inRange
-               && (isOwner || isAssist || isOp);
+                .isPlayerOpped(player.username)) || player.capabilities.isCreativeMode);
     }
 
     public Object getMod() {
@@ -201,6 +211,4 @@ public class TileEntityBase extends TileEntity {
             worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
         }
     }
-
-
 }
