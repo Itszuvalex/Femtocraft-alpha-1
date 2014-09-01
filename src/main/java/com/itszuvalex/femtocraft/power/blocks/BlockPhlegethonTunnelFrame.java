@@ -22,22 +22,25 @@
 package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockPhlegethonTunnel;
+import com.itszuvalex.femtocraft.power.tiles.TileEntityPhlegethonTunnelCore;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityPhlegethonTunnelFrame;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/12/14.
  */
-public class BlockPhlegethonTunnelFrame extends Block {
+public class BlockPhlegethonTunnelFrame extends TileContainer {
     Icon[][] sideIcons_inactive;
     Icon[][] topIcons_inactive;
     Icon[][] botIcons_inactive;
@@ -69,7 +72,7 @@ public class BlockPhlegethonTunnelFrame extends Block {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                + ":" + "BlockPhlegethonTunnelFrame_unformed");
+                                                       + ":" + "BlockPhlegethonTunnelFrame_unformed");
         registerIcons(sideIcons_active, "side_active", par1IconRegister);
         registerIcons(sideIcons_inactive, "side_inactive", par1IconRegister);
         registerIcons(topIcons_inactive, "top_inactive", par1IconRegister);
@@ -81,10 +84,68 @@ public class BlockPhlegethonTunnelFrame extends Block {
     private void registerIcons(Icon[][] array, String name, IconRegister register) {
         for (int i = 0; i < array.length; ++i) {
             for (int j = 0; j < array[i].length; ++j) {
-                array[j][i] = register.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "BlockPhlegethonTunnelFrame_" + name + "_" + i + "_" + j);
-
+                array[j][i] = register.registerIcon(
+                        Femtocraft.ID.toLowerCase() + ":" + "BlockPhlegethonTunnel_" + name + "_" + i + "_" + j);
             }
         }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int par2,
+                                int par3, int par4, int par5) {
+        TileEntity te = par1iBlockAccess.getBlockTileEntity(par2, par3, par4);
+        if (te instanceof TileEntityPhlegethonTunnelFrame) {
+            TileEntityPhlegethonTunnelFrame frame = (TileEntityPhlegethonTunnelFrame) te;
+            if (frame.isValidMultiBlock()) {
+                MultiBlockInfo info = frame.getInfo();
+                ForgeDirection dir = ForgeDirection.getOrientation(par5);
+                TileEntityPhlegethonTunnelCore core = (TileEntityPhlegethonTunnelCore) par1iBlockAccess
+                        .getBlockTileEntity(info.x(), info.y(), info.z());
+                boolean active = core != null && core.isActive();
+                return iconForSide(info, dir, active, par2, par3, par4);
+            }
+        }
+        return super.getBlockTexture(par1iBlockAccess, par2, par3, par4, par5);
+    }
+
+    private Icon iconForSide(MultiBlockInfo info, ForgeDirection dir, boolean active, int x,
+                             int y, int z) {
+        int xdif = x - info.x();
+        int ydif = y - info.y();
+        int zdif = z - info.z();
+
+        switch (dir) {
+            case UP:
+                return iconFromGrid(dir, active, xdif, -zdif);
+            case DOWN:
+                return iconFromGrid(dir, active, xdif, -zdif);
+            case NORTH:
+                return iconFromGrid(dir, active, -xdif, ydif);
+            case SOUTH:
+                return iconFromGrid(dir, active, xdif, ydif);
+            case EAST:
+                return iconFromGrid(dir, active, -zdif, ydif);
+            case WEST:
+                return iconFromGrid(dir, active, zdif, ydif);
+            default:
+                return this.blockIcon;
+        }
+    }
+
+    private Icon iconFromGrid(ForgeDirection side, boolean active, int xdif, int ydif) {
+        try {
+            switch (side) {
+                case UP:
+                    return active ? topIcons_active[xdif + 1][ydif + 1] : topIcons_inactive[xdif + 1][ydif + 1];
+                case DOWN:
+                    return active ? botIcons_active[xdif + 1][ydif + 1] : botIcons_inactive[xdif + 1][ydif + 1];
+                default:
+                    return active ? sideIcons_inactive[xdif + 1][ydif + 1] : sideIcons_inactive[xdif + 1][ydif + 1];
+            }
+        } catch (IndexOutOfBoundsException ignored) {
+        }
+        return this.blockIcon;
     }
 
 

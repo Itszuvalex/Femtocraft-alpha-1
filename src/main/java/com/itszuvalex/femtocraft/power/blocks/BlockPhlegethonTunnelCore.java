@@ -22,12 +22,12 @@
 package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockPhlegethonTunnel;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityPhlegethonTunnelCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
@@ -36,7 +36,7 @@ import net.minecraft.world.World;
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/12/14.
  */
-public class BlockPhlegethonTunnelCore extends Block {
+public class BlockPhlegethonTunnelCore extends TileContainer {
     public BlockPhlegethonTunnelCore(int id) {
         super(id, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
@@ -52,7 +52,7 @@ public class BlockPhlegethonTunnelCore extends Block {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                + ":" + "BlockPhlegethonTunnelCore");
+                                                       + ":" + "BlockPhlegethonTunnelCore");
     }
 
     /*
