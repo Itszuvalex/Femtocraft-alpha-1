@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.HashMap;
@@ -29,6 +30,12 @@ public class CryogenRegistry {
             this.power = power;
         }
     }
+
+    public static void init() {
+        addCryogenSource(new FluidStack(FluidRegistry.WATER, 2000), new ItemStack(Block.ice), 60);
+        addCryogenSource(new FluidStack(FluidRegistry.LAVA, 2000), new ItemStack(Block.obsidian), 180);
+    }
+
 
     public static void addCryogenSource(ItemStack input, ItemStack output, float power) {
         itemMap.put(input.itemID, new CryoReactionReagent<ItemStack>(input, output, power));

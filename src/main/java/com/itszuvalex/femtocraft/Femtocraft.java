@@ -47,6 +47,8 @@ import com.itszuvalex.femtocraft.power.fluids.FluidCooledContaminatedMoltenSalt;
 import com.itszuvalex.femtocraft.power.fluids.FluidCooledMoltenSalt;
 import com.itszuvalex.femtocraft.power.fluids.FluidMoltenSalt;
 import com.itszuvalex.femtocraft.power.items.ItemBlockMicroCube;
+import com.itszuvalex.femtocraft.power.items.ItemInhibitionCore;
+import com.itszuvalex.femtocraft.power.items.ItemNucleationCore;
 import com.itszuvalex.femtocraft.power.plasma.BlockPlasma;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoFissionReactorCore;
 import com.itszuvalex.femtocraft.proxy.ProxyClient;
@@ -238,6 +240,9 @@ public class Femtocraft {
     public static Item itemAssemblyArray;
 
     public static Item itemVacuumCore;
+
+    public static Item itemNucleationCore;
+    public static Item itemInhibitionCore;
 
     public static Item itemPortableResearchComputer;
 
@@ -1062,6 +1067,14 @@ public class Femtocraft {
         GameRegistry.registerItem(itemInfiniteVolumePolychora, "ItemInfiniteVolumePolychora");
         LanguageRegistry.addName(itemInfiniteVolumePolychora,
                 "Infinite Volume Polychora");
+
+        itemNucleationCore = new ItemNucleationCore(FemtocraftConfigs.ItemNucleationCoreID, "ItemNucleationCore");
+        GameRegistry.registerItem(itemNucleationCore, "ItemNucleationCore");
+        LanguageRegistry.addName(itemNucleationCore, "Nucleation Core");
+
+        itemInhibitionCore = new ItemInhibitionCore(FemtocraftConfigs.ItemInhibitionCoreID, "ItemInhibitionCore");
+        GameRegistry.registerItem(itemInhibitionCore, "ItemInhibitionCore");
+        LanguageRegistry.addName(itemInhibitionCore, "Inhibition Core");
 
         itemQuantumSchematic = new ItemQuantumSchematic(FemtocraftConfigs
                 .ItemQuantumSchematicID);

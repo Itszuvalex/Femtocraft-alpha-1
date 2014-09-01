@@ -25,6 +25,7 @@ import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.managers.assembler.ManagerAssemblerRecipe;
 import com.itszuvalex.femtocraft.managers.dimensional.ManagerDimensionalRecipe;
 import com.itszuvalex.femtocraft.managers.temporal.ManagerTemporalRecipe;
+import com.itszuvalex.femtocraft.power.CryogenRegistry;
 import com.itszuvalex.femtocraft.power.FissionReactorRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -43,6 +44,7 @@ public class ManagerRecipe {
     public ManagerRecipe() {
         registerRecipes();
         FissionReactorRegistry.init();
+        CryogenRegistry.init();
     }
 
     private void registerRecipes() {
