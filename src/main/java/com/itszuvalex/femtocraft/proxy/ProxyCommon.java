@@ -104,6 +104,9 @@ public class ProxyCommon {
         GameRegistry.registerTileEntity(TileEntityMagnetohydrodynamicGenerator.class,
                 "TileEntityMagnetohydrodynamicGenerator");
         GameRegistry.registerTileEntity(TileEntitySteamGenerator.class, "TileEntitySteamGenerator");
+        GameRegistry.registerTileEntity(TileEntityPhlegethonTunnelCore.class, "TileEntityPhlegethonTunnelCore");
+        GameRegistry.registerTileEntity(TileEntityPhlegethonTunnelFrame.class, "TileEntityPhlegethonTunnelFrame");
+        GameRegistry.registerTileEntity(TileEntitySisyphusStabilizer.class, "TileEntitySisyphusStabilizer");
         GameRegistry.registerTileEntity(TileEntityFemtoStellaratorCore.class,
                 "TileEntityFemtoStellaratorCore");
         GameRegistry.registerTileEntity

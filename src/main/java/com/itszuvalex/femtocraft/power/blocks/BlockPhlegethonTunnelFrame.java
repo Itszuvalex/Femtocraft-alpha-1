@@ -72,7 +72,7 @@ public class BlockPhlegethonTunnelFrame extends TileContainer {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                                                       + ":" + "BlockPhlegethonTunnelFrame_unformed");
+                + ":" + "BlockPhlegethonTunnelFrame_unformed");
         registerIcons(sideIcons_active, "side_active", par1IconRegister);
         registerIcons(sideIcons_inactive, "side_inactive", par1IconRegister);
         registerIcons(topIcons_inactive, "top_inactive", par1IconRegister);
