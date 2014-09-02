@@ -25,24 +25,30 @@ import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.api.IPhlegethonTunnelAddon;
 import com.itszuvalex.femtocraft.api.IPhlegethonTunnelComponent;
 import com.itszuvalex.femtocraft.api.IPhlegethonTunnelCore;
-import com.itszuvalex.femtocraft.api.PowerContainer;
 import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
-import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.BaseInventory;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/13/14.
  */
-public class TileEntityPhlegethonTunnelCore extends TileEntityBase implements IPhlegethonTunnelCore, IInventory {
+public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer implements IPhlegethonTunnelCore,
+        IInventory {
+    public static final String PACKET_CHANNEL = "Femtocraft" + "." + "phleg";
     public static float PowerGenBase = 150;
     public static int ContainerMax = 100000;
     @FemtocraftDataUtils.Saveable(desc = true)
@@ -50,13 +56,11 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityBase implements IP
     @FemtocraftDataUtils.Saveable(desc = true)
     private MultiBlockInfo info = new MultiBlockInfo();
     @FemtocraftDataUtils.Saveable
-    private PowerContainer container = new PowerContainer();
-    @FemtocraftDataUtils.Saveable
     private BaseInventory inventory = new BaseInventory(1);
 
     public TileEntityPhlegethonTunnelCore() {
-        container.setTechLevel(EnumTechLevel.FEMTO);
-        container.setMaxPower(ContainerMax);
+        setTechLevel(EnumTechLevel.FEMTO);
+        setMaxStorage(ContainerMax);
     }
 
     @Override
@@ -66,7 +70,13 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityBase implements IP
 
     @Override
     public float getPowerGenBase() {
-        return (float) (PowerGenBase / Math.log(getHeight() + 1));
+        return (float) (PowerGenBase / Math.log1p(getHeight()));
+    }
+
+    @Override
+    public void handleDescriptionNBT(NBTTagCompound compound) {
+        super.handleDescriptionNBT(compound);
+        setRenderUpdate();
     }
 
     @Override
@@ -88,15 +98,13 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityBase implements IP
         return yCoord;
     }
 
-    public void sendActivateMessage() {
-    }
 
     @Override
     public boolean activate() {
         if (isActive()) {
             return false;
         }
-        if (!worldObj.isRemote) {
+        if (worldObj.isRemote) {
             return false;
         }
 
@@ -110,6 +118,7 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityBase implements IP
         inventory.setInventorySlotContents(0, null);
         active = true;
         setModified();
+        setUpdate();
         notifyTunnelOfChange(active);
         return true;
     }
@@ -119,12 +128,13 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityBase implements IP
         if (!isActive()) {
             return false;
         }
-        if (!worldObj.isRemote) {
+        if (worldObj.isRemote) {
             return false;
         }
 
         active = false;
         setModified();
+        setUpdate();
         notifyTunnelOfChange(active);
         return true;
     }
@@ -144,7 +154,6 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityBase implements IP
 
     @Override
     public void femtocraftServerUpdate() {
-        super.femtocraftServerUpdate();
         if (active) {
             charge((int) getTotalPowerGen());
         }
@@ -171,8 +180,7 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityBase implements IP
         if (val) {
             if (isActive()) {
                 worldObj.setBlock(xCoord, yCoord, zCoord, Block.lavaStill.blockID);
-            }
-            else {
+            } else {
                 setModified();
                 setUpdate();
             }
@@ -187,56 +195,71 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityBase implements IP
 
     @Override
     public boolean canAcceptPowerOfLevel(EnumTechLevel level) {
-        return container.canAcceptPowerOfLevel(level);
+        return this.canAcceptPowerOfLevel(level, ForgeDirection.UNKNOWN);
+    }
+
+    @Override
+    public boolean canCharge(ForgeDirection from) {
+        return info.isValidMultiBlock() && super.canCharge(from);
+    }
+
+    @Override
+    public boolean canConnect(ForgeDirection from) {
+        return info.isValidMultiBlock() && super.canConnect(from);
     }
 
     @Override
     public EnumTechLevel getTechLevel() {
-        return container.getTechLevel();
+        return super.getTechLevel(ForgeDirection.UNKNOWN);
     }
 
     @Override
     public int getCurrentPower() {
-        return container.getCurrentPower();
+        return super.getCurrentPower();
     }
 
     @Override
     public int getMaxPower() {
-        return container.getMaxPower();
+        return super.getMaxPower();
     }
 
     @Override
     public float getFillPercentage() {
-        return container.getFillPercentage();
+        return super.getFillPercentage();
     }
 
     @Override
     public float getFillPercentageForCharging() {
-        return container.getFillPercentageForCharging();
+        return super.getFillPercentageForCharging(ForgeDirection.UNKNOWN);
     }
 
     @Override
     public float getFillPercentageForOutput() {
-        return container.getFillPercentageForOutput();
+        return super.getFillPercentageForOutput(ForgeDirection.UNKNOWN);
     }
 
     @Override
     public boolean canCharge() {
-        return container.canCharge();
+        return info.isValidMultiBlock() && super.canCharge(ForgeDirection.UNKNOWN);
     }
 
     @Override
-    public int charge(int amount) {
-        int charge = container.charge(amount);
-        if (charge >= 0) {
+    public int charge(ForgeDirection from, int amount) {
+        int charge = super.charge(from, amount);
+        if (charge > 0) {
             setModified();
         }
         return charge;
     }
 
     @Override
+    public int charge(int amount) {
+        return this.charge(ForgeDirection.UNKNOWN, amount);
+    }
+
+    @Override
     public boolean consume(int amount) {
-        boolean result = container.consume(amount);
+        boolean result = super.consume(amount);
         if (result) {
             setModified();
         }
@@ -262,6 +285,7 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityBase implements IP
     public ItemStack decrStackSize(int i, int j) {
         ItemStack is = inventory.decrStackSize(i, j);
         setModified();
+        onInventoryChanged();
         return is;
     }
 
@@ -274,6 +298,7 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityBase implements IP
     public void setInventorySlotContents(int i, ItemStack itemstack) {
         inventory.setInventorySlotContents(i, itemstack);
         setModified();
+        onInventoryChanged();
     }
 
     @Override
@@ -309,5 +334,39 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityBase implements IP
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
         return !isActive() && inventory.isItemValidForSlot(i, itemstack);
+    }
+
+    public void onActivateClick() {
+        PacketDispatcher.sendPacketToServer(getPacket(true));
+    }
+
+    public void onDeactivateClick() {
+        PacketDispatcher.sendPacketToServer(getPacket(false));
+    }
+
+    private Packet250CustomPayload getPacket(boolean active) {
+        Packet250CustomPayload packet = new Packet250CustomPayload();
+        packet.channel = TileEntityPhlegethonTunnelCore.PACKET_CHANNEL;
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream(17);
+        DataOutputStream outputStream = new DataOutputStream(bos);
+        try {
+            outputStream.writeInt(xCoord);
+            outputStream.writeInt(yCoord);
+            outputStream.writeInt(zCoord);
+            outputStream.writeInt(worldObj.provider.dimensionId);
+            outputStream.writeBoolean(active);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        packet.data = bos.toByteArray();
+        packet.length = bos.size();
+
+        return packet;
+    }
+
+    public void handlePacket(boolean active) {
+        if (active) { activate(); } else { deactivate(); }
     }
 }

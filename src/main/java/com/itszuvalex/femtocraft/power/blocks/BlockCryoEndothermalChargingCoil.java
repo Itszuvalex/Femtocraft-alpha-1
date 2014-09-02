@@ -22,26 +22,58 @@
 package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.proxy.ProxyClient;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/6/14.
  */
 public class BlockCryoEndothermalChargingCoil extends Block {
+    public Icon coilConnector, coilConnectorTop;
+
     public BlockCryoEndothermalChargingCoil(int id) {
         super(id, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
         setUnlocalizedName("BlockCryoEndothermalChargingCoil");
+        setBlockBounds(4.f / 16.f, 0, 4.f / 16.f, 12.f / 16.f, 1, 12.f / 16.f);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                + ":" + "BlockCryoEndothermalChargingCoil");
+        blockIcon = coilConnector = par1IconRegister.registerIcon(Femtocraft.ID
+                                                                          .toLowerCase() + ":" +
+                                                                  "BlockCryoEndothermalChargingCoil_connector");
+        coilConnectorTop = par1IconRegister.registerIcon(Femtocraft.ID
+                                                                 .toLowerCase() + ":" +
+                                                         "BlockCryoEndothermalChargingCoil_connector_top");
+    }
+
+
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
+
+    @Override
+    public int getRenderType() {
+        return ProxyClient.FemtocraftCryoEndothermalChargingCoilRenderID;
+    }
+
+    @Override
+    public boolean isBlockSolid(IBlockAccess par1iBlockAccess, int par2,
+                                int par3, int par4, int par5) {
+        return false;
+    }
+
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
     }
 }

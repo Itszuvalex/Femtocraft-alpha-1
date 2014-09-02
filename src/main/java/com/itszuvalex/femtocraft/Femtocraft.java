@@ -51,6 +51,7 @@ import com.itszuvalex.femtocraft.power.items.ItemInhibitionCore;
 import com.itszuvalex.femtocraft.power.items.ItemNucleationCore;
 import com.itszuvalex.femtocraft.power.plasma.BlockPlasma;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoFissionReactorCore;
+import com.itszuvalex.femtocraft.power.tiles.TileEntityPhlegethonTunnelCore;
 import com.itszuvalex.femtocraft.proxy.ProxyClient;
 import com.itszuvalex.femtocraft.proxy.ProxyCommon;
 import com.itszuvalex.femtocraft.research.blocks.BlockResearchComputer;
@@ -95,7 +96,8 @@ import java.util.logging.Logger;
 @NetworkMod(channels = {Femtocraft.ID, FemtocraftGuiHandler.PACKET_CHANNEL, PropertiesNanite.PACKET_CHANNEL,
         ManagerResearch.RESEARCH_CHANNEL,
         TileEntityResearchConsole.PACKET_CHANNEL,
-        TileEntityVacuumTube.PACKET_CHANNEL, TileEntityNanoFissionReactorCore.PACKET_CHANNEL},
+        TileEntityVacuumTube.PACKET_CHANNEL, TileEntityNanoFissionReactorCore.PACKET_CHANNEL,
+        TileEntityPhlegethonTunnelCore.PACKET_CHANNEL},
         packetHandler = FemtocraftPacketHandler.class,
         clientSideRequired = true, serverSideRequired = true)
 public class Femtocraft {

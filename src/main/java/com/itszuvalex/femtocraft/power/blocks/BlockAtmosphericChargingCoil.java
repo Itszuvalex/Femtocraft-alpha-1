@@ -89,27 +89,29 @@ public class BlockAtmosphericChargingCoil extends Block implements IAtmosphericC
         Block block = Block.blocksList[par1World.getBlockId(par2, par3 - 1,
                 par4)];
         return block != null
-                && (block instanceof IAtmosphericChargingAddon &&
-                ((IAtmosphericChargingAddon) block).canSupportAddon(this,
-                        par1World,
-                        par2,
-                        par3,
-                        par4) ||
-                (block
-                        instanceof IAtmosphericChargingBase))
-                && par1World.isAirBlock(par2 - 1, par3, par4)
-                && par1World.isAirBlock(par2 + 1, par3, par4)
-                && par1World.isAirBlock(par2, par3, par4 - 1)
-                && par1World.isAirBlock(par2, par3, par4 + 1);
+               && (block instanceof IAtmosphericChargingAddon &&
+                   ((IAtmosphericChargingAddon) block).canSupportAddon(this,
+                           par1World,
+                           par2,
+                           par3,
+                           par4) ||
+                   (block
+                           instanceof IAtmosphericChargingBase))
+               && par1World.isAirBlock(par2 - 1, par3, par4)
+               && par1World.isAirBlock(par2 + 1, par3, par4)
+               && par1World.isAirBlock(par2, par3, par4 - 1)
+               && par1World.isAirBlock(par2, par3, par4 + 1);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        coilConnector = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "MicroChargingCoil_connector");
+        blockIcon = coilConnector = par1IconRegister.registerIcon(Femtocraft.ID
+                                                                          .toLowerCase() + ":" +
+                                                                  "MicroChargingCoil_connector");
         coilConnectorTop = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "MicroChargingCoil_coilConnectorTop");
+                                                                 .toLowerCase() + ":" +
+                                                         "MicroChargingCoil_coilConnectorTop");
     }
 
     @Override

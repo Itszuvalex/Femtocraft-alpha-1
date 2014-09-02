@@ -64,6 +64,8 @@ public class FemtocraftGuiHandler implements IGuiHandler {
     public static final int NanoFissionReactorGuiID = 36;
     public static final int NanoMagnetohydrodynamicGeneratorGuiID = 37;
     public static final int FemtoCubeGuiID = 40;
+    public static final int PhlegethonTunnelGuiID = 41;
+
     public static final String PACKET_CHANNEL = "Femtocraft" + ".GUI";
 
 
@@ -130,6 +132,9 @@ public class FemtocraftGuiHandler implements IGuiHandler {
                 return new ContainerMagnetoHydrodynamicGenerator((TileEntityMagnetohydrodynamicGenerator) tileEntity);
             case FemtoCubeGuiID:
                 return new ContainerFemtoCube((TileEntityFemtoCubePort) tileEntity);
+            case PhlegethonTunnelGuiID:
+                return new ContainerPhlegethonTunnel(player, player.inventory, (TileEntityPhlegethonTunnelCore)
+                        tileEntity);
             default:
                 return null;
         }
@@ -199,6 +204,8 @@ public class FemtocraftGuiHandler implements IGuiHandler {
                 return new GuiNanoCube((TileEntityNanoCubePort) tileEntity);
             case FemtoCubeGuiID:
                 return new GuiFemtoCube((TileEntityFemtoCubePort) tileEntity);
+            case PhlegethonTunnelGuiID:
+                return new GuiPhlegethonTunnel(player, player.inventory, (TileEntityPhlegethonTunnelCore) tileEntity);
             default:
                 return null;
         }

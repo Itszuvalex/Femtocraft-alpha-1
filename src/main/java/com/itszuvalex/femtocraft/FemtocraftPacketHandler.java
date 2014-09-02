@@ -25,6 +25,7 @@ import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
 import com.itszuvalex.femtocraft.managers.research.ResearchPlayer;
 import com.itszuvalex.femtocraft.player.PropertiesNanite;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoFissionReactorCore;
+import com.itszuvalex.femtocraft.power.tiles.TileEntityPhlegethonTunnelCore;
 import com.itszuvalex.femtocraft.research.tiles.TileEntityResearchConsole;
 import com.itszuvalex.femtocraft.transport.items.tiles.TileEntityVacuumTube;
 import cpw.mods.fml.common.network.IPacketHandler;
@@ -82,7 +83,39 @@ public class FemtocraftPacketHandler implements IPacketHandler {
             return;
         }
 
+        if (packet.channel.equalsIgnoreCase(TileEntityPhlegethonTunnelCore.PACKET_CHANNEL)) {
+            handlePhlegethonTunnelPacket(inputStream, playerEntity);
+            return;
+        }
+
     }
+
+    private void handlePhlegethonTunnelPacket(DataInputStream inputStream, Player playerEntity) {
+        int x = 0, y = 0, z = 0, dim = 0;
+        boolean action = false;
+
+        try {
+            x = inputStream.readInt();
+            y = inputStream.readInt();
+            z = inputStream.readInt();
+            dim = inputStream.readInt();
+            action = inputStream.readBoolean();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        WorldServer world = DimensionManager.getWorld(dim);
+        if (world == null) {
+            Femtocraft.logger.log(Level.SEVERE,
+                    "Received PhlegethonTunnel Packet for nonexistent World");
+        } else {
+            TileEntity te = world.getBlockTileEntity(x, y, z);
+            if (te instanceof TileEntityPhlegethonTunnelCore) {
+                ((TileEntityPhlegethonTunnelCore) te).handlePacket(action);
+            }
+        }
+    }
+
 
     private void handleGUIPacket(DataInputStream stream, Player playerEntity) {
         EntityPlayer player = (EntityPlayer) playerEntity;

@@ -51,7 +51,7 @@ public class BlockAtmosphericChargingCapacitor extends Block implements IAtmosph
         setUnlocalizedName("BlockAtmosphericChargingCapacitor");
         setHardness(1.0f);
         setStepSound(Block.soundMetalFootstep);
-        setBlockBounds(4.f / 16.f, 0, 4.f / 16.f, 12.f / 16.f, 1, 12.f / 16.f);
+        setBlockBounds(2.f / 16.f, 0, 2.f / 16.f, 14.f / 16.f, 14.f / 16.f, 14.f / 16.f);
     }
 
     @Override
@@ -95,44 +95,44 @@ public class BlockAtmosphericChargingCapacitor extends Block implements IAtmosph
         Block block = Block.blocksList[par1World.getBlockId(par2, par3 - 1,
                 par4)];
         return block != null
-                && (block instanceof IAtmosphericChargingAddon &&
-                ((IAtmosphericChargingAddon) block).canSupportAddon(this,
-                        par1World,
-                        par2,
-                        par3,
-                        par4) ||
-                (block
-                        instanceof IAtmosphericChargingBase))
-                && par1World.isAirBlock(par2 - 1, par3, par4)
-                && par1World.isAirBlock(par2 + 1, par3, par4)
-                && par1World.isAirBlock(par2, par3, par4 - 1)
-                && par1World.isAirBlock(par2, par3, par4 + 1);
+               && (block instanceof IAtmosphericChargingAddon &&
+                   ((IAtmosphericChargingAddon) block).canSupportAddon(this,
+                           par1World,
+                           par2,
+                           par3,
+                           par4) ||
+                   (block
+                           instanceof IAtmosphericChargingBase))
+               && par1World.isAirBlock(par2 - 1, par3, par4)
+               && par1World.isAirBlock(par2 + 1, par3, par4)
+               && par1World.isAirBlock(par2, par3, par4 - 1)
+               && par1World.isAirBlock(par2, par3, par4 + 1);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         capacitorConnector = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase()
-                + ":" +
-                "AtmosphericChargingCapacitor_connector");
+                                                                   .toLowerCase()
+                                                           + ":" +
+                                                           "AtmosphericChargingCapacitor_connector");
         capacitorConnectorBot = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase
-                        () +
-                ":" +
-                "AtmosphericChargingCapacitor_connector_bot");
+                                                                      .toLowerCase
+                                                                              () +
+                                                              ":" +
+                                                              "AtmosphericChargingCapacitor_connector_bot");
         blockIcon = capacitorSide = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase()
-                + ":" +
-                "AtmosphericChargingCapacitor_side");
+                                                                          .toLowerCase()
+                                                                  + ":" +
+                                                                  "AtmosphericChargingCapacitor_side");
         capacitorTop = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase()
-                + ":" +
-                "AtmosphericChargingCapacitor_top");
+                                                             .toLowerCase()
+                                                     + ":" +
+                                                     "AtmosphericChargingCapacitor_top");
         capacitorBot = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase()
-                + ":" +
-                "AtmosphericChargingCapacitor_bot");
+                                                             .toLowerCase()
+                                                     + ":" +
+                                                     "AtmosphericChargingCapacitor_bot");
     }
 
     @Override
@@ -146,12 +146,10 @@ public class BlockAtmosphericChargingCapacitor extends Block implements IAtmosph
             b = Block.blocksList[world.getBlockId(x, y - offset, z)];
             if (b instanceof IAtmosphericChargingBase) {
                 searchEnded = true;
-            }
-            else if (b instanceof IAtmosphericChargingAddon) {
+            } else if (b instanceof IAtmosphericChargingAddon) {
                 IAtmosphericChargingAddon addon = (IAtmosphericChargingAddon) b;
                 power += addon.powerPerTick(world, x, y - offset, z);
-            }
-            else {
+            } else {
                 searchEnded = true;
             }
         }
@@ -159,11 +157,9 @@ public class BlockAtmosphericChargingCapacitor extends Block implements IAtmosph
 
         if (world.isThundering()) {
             power *= powerMultiplierStorm;
-        }
-        else if (world.isRaining()) {
+        } else if (world.isRaining()) {
             power *= powerMultiplierRain;
-        }
-        else {
+        } else {
             power *= powerMultiplierBase;
         }
 

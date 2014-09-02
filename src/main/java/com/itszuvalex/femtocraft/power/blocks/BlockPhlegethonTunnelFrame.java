@@ -72,7 +72,7 @@ public class BlockPhlegethonTunnelFrame extends TileContainer {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
-                + ":" + "BlockPhlegethonTunnelFrame_unformed");
+                                                       + ":" + "BlockPhlegethonTunnelFrame_unformed");
         registerIcons(sideIcons_active, "side_active", par1IconRegister);
         registerIcons(sideIcons_inactive, "side_inactive", par1IconRegister);
         registerIcons(topIcons_inactive, "top_inactive", par1IconRegister);
@@ -141,7 +141,7 @@ public class BlockPhlegethonTunnelFrame extends TileContainer {
                 case DOWN:
                     return active ? botIcons_active[xdif + 1][ydif + 1] : botIcons_inactive[xdif + 1][ydif + 1];
                 default:
-                    return active ? sideIcons_inactive[xdif + 1][ydif + 1] : sideIcons_inactive[xdif + 1][ydif + 1];
+                    return active ? sideIcons_active[xdif + 1][ydif + 1] : sideIcons_inactive[xdif + 1][ydif + 1];
             }
         } catch (IndexOutOfBoundsException ignored) {
         }
@@ -184,7 +184,6 @@ public class BlockPhlegethonTunnelFrame extends TileContainer {
             MultiBlockInfo info = ((TileEntityPhlegethonTunnelFrame) te).getInfo();
             MultiBlockPhlegethonTunnel.instance.breakMultiBlock(par1World, info.x(),
                     info.y(), info.z());
-
         }
         super.breakBlock(par1World, par2, par3, par4, par5, par6);
     }

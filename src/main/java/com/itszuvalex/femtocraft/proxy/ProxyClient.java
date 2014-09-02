@@ -45,6 +45,7 @@ public class ProxyClient extends ProxyCommon {
 
     public static int CuttingBoardRenderPass;
     public static int cuttingBoardRenderType;
+    public static int FemtocraftCryoEndothermalChargingCoilRenderID;
 
 
     public static void setCustomRenderers() {
@@ -105,6 +106,10 @@ public class ProxyClient extends ProxyCommon {
         RenderingRegistry.registerBlockHandler
                 (FemtocraftChargingCapacitorRenderID,
                         new RenderChargingCapacitor());
+
+        FemtocraftCryoEndothermalChargingCoilRenderID = RenderingRegistry.getNextAvailableRenderId();
+        RenderingRegistry.registerBlockHandler(FemtocraftCryoEndothermalChargingCoilRenderID,
+                new RenderCryoEndothermalChargingCoil());
 
         FemtocraftStellaratorCoreRenderID = RenderingRegistry
                 .getNextAvailableRenderId();
