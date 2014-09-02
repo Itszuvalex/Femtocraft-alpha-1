@@ -21,6 +21,7 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
+import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
 import com.itszuvalex.femtocraft.api.IPhlegethonTunnelAddon;
 import com.itszuvalex.femtocraft.api.IPhlegethonTunnelCore;
 import com.itszuvalex.femtocraft.api.IPowerBlockContainer;
@@ -28,6 +29,7 @@ import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -90,6 +92,21 @@ public class TileEntitySisyphusStabilizer extends TileEntityBase implements IPhl
     @Override
     public MultiBlockInfo getInfo() {
         return info;
+    }
+
+    @Override
+    public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
+        if (info.isValidMultiBlock() && canPlayerUse(par5EntityPlayer)) {
+            par5EntityPlayer.openGui(getMod(), getGuiID(), worldObj, info.x(),
+                    info.y(), info.z());
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiHandler.PhlegethonTunnelGuiID;
     }
 
     @Override
@@ -170,7 +187,33 @@ public class TileEntitySisyphusStabilizer extends TileEntityBase implements IPhl
 
     @Override
     public boolean canConnect(ForgeDirection from) {
-        return info.isValidMultiBlock();
+        if (info.isValidMultiBlock()) {
+            switch (from) {
+                case UP:
+                    if (yCoord - info.y() != 1) return false;
+                    break;
+                case DOWN:
+                    if (yCoord - info.y() != -1) return false;
+                    break;
+                case NORTH:
+                    if (zCoord - info.z() != -1) return false;
+                    break;
+                case SOUTH:
+                    if (zCoord - info.z() != 1) return false;
+                    break;
+                case EAST:
+                    if (xCoord - info.x() != 1) return false;
+                    break;
+                case WEST:
+                    if (xCoord - info.x() != -1) return false;
+                    break;
+            }
+            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            if (te instanceof IPowerBlockContainer) {
+                return ((IPowerBlockContainer) te).canConnect(from);
+            }
+        }
+        return false;
     }
 
     @Override
