@@ -365,7 +365,10 @@ public class Femtocraft {
         Femtocraft.proxy.registerTickHandlers();
 
 
-        soundManager = new FemtocraftSoundManager();
+        if (event.getSide() == Side.CLIENT) {
+            soundManager = new FemtocraftSoundManager();
+            MinecraftForge.EVENT_BUS.register(soundManager);
+        }
 
         NetworkRegistry.instance().registerGuiHandler(this,
                 new FemtocraftGuiHandler());
@@ -373,7 +376,7 @@ public class Femtocraft {
                 new FemtocraftConnectionHandler());
         MinecraftForge.EVENT_BUS.register(new FemtocraftEventHookContainer());
         MinecraftForge.EVENT_BUS.register(new FemtocraftOreRetrogenHandler());
-        MinecraftForge.EVENT_BUS.register(soundManager);
+
 
         //Do normal load things here, to allow followup mods to access this.
 

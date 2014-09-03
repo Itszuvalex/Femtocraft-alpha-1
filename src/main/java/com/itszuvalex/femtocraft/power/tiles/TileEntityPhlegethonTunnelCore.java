@@ -85,11 +85,11 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
 
     private void startSoundEffect() {
         soundTime = 0;
-        worldObj.playSoundEffect(
+        worldObj.playSound(
                 (double) xCoord + 0.5D,
                 (double) yCoord + 0.5D,
                 (double) zCoord + 0.5D,
-                Femtocraft.ID.toLowerCase() + ":" + "PhlegethonTunnel", 1.0F, 1.0F);
+                Femtocraft.ID.toLowerCase() + ":" + "PhlegethonTunnel", 1.0F, 1.0F, true);
     }
 
     @Override
