@@ -9,6 +9,5 @@ public abstract class ItemCryogenCore extends ItemBase implements ICryogenCore {
     public ItemCryogenCore(int par1, String unlocalizedName) {
         super(par1, unlocalizedName);
         setMaxStackSize(1);
-        setNoRepair();
     }
 }

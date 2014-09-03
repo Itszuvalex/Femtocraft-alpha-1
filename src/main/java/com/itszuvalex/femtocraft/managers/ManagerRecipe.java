@@ -192,7 +192,7 @@ public class ManagerRecipe {
                 Femtocraft.itemHeatingElement, 'L', Femtocraft.itemMicroLogicCore);
 
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft
-                        .blockMicroEngine), "MHT", "MHC", "MHT", 'M',
+                        .blockCryoGenerator), "MHT", "MHC", "MHT", 'M',
                 Femtocraft.itemMicroPlating, 'H',
                 Femtocraft.itemHeatingElement, 'T',
                 Femtocraft.itemIngotTemperedTitanium, 'C',

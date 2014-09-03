@@ -236,7 +236,7 @@ public class ManagerResearch {
             EnumTechLevel.MICRO, new ArrayList<ResearchTechnology>(
             Arrays.asList(technologyMechanicalPrecision,
                     technologyPotentialityHarnessing)
-    ), new ItemStack(Femtocraft.blockMicroEngine),
+    ), new ItemStack(Femtocraft.blockCryoGenerator),
             false, new ArrayList<ItemStack>()
     );
     //    @Technology
@@ -761,6 +761,10 @@ public class ManagerResearch {
         // Return playerData for a player. If it doesn't exist, makes it.
         ResearchPlayer rp = playerData.get(username);
         if (rp != null) {
+            //If another mod is added since last startup, we won't have known to discover its technologies.  This
+            // scans the research tree for technologies the player hasn't discovered, but should have.  Additionally,
+            // it'll automatically research technologies with no prerequisites.
+            addKnownTechnologies(rp);
             return rp;
         }
         ResearchPlayer r = new ResearchPlayer(username);
@@ -772,6 +776,25 @@ public class ManagerResearch {
 
         playerData.put(username, r);
         return r;
+    }
+
+    private void addKnownTechnologies(ResearchPlayer rp) {
+        for (ResearchTechnology t : technologies.values()) {
+            if (!rp.hasDiscoveredTechnology(t)) {
+                if (t.prerequisites != null && !t.prerequisites.isEmpty()) {
+                    boolean shouldDiscover = true;
+                    for (ResearchTechnology pre : t.prerequisites) {
+                        if (!shouldDiscover) continue;
+                        if (!rp.hasDiscoveredTechnology(pre)) shouldDiscover = false;
+                    }
+                    if (shouldDiscover) {
+                        rp.discoverTechnology(t.name);
+                    }
+                } else {
+                    rp.researchTechnology(t.name, false);
+                }
+            }
+        }
     }
 
     // --------------------------------------------------

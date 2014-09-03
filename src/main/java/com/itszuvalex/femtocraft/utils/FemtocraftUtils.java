@@ -244,6 +244,14 @@ public class FemtocraftUtils {
     public static boolean sendMessageToPlayer(String username, String message, String formatting) {
         EntityPlayer assistant = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername
                 (username);
+        return sendMessageToPlayer(assistant, message, formatting);
+    }
+
+    public static boolean sendMessageToPlayer(EntityPlayer assistant, String message) {
+        return sendMessageToPlayer(assistant, message, "");
+    }
+
+    public static boolean sendMessageToPlayer(EntityPlayer assistant, String message, String formatting) {
         if (assistant != null) {
             assistant.addChatMessage(
                     new StringBuilder().append(EnumChatFormatting.GOLD).append("Femtocraft").append

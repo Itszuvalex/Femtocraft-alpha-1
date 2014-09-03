@@ -58,6 +58,9 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
     @FemtocraftDataUtils.Saveable
     private BaseInventory inventory = new BaseInventory(1);
 
+    private int soundTime = soundLength;
+    private static final int soundLength = 100;
+
     public TileEntityPhlegethonTunnelCore() {
         setTechLevel(EnumTechLevel.FEMTO);
         setMaxStorage(ContainerMax);
@@ -73,10 +76,20 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
         return (float) (PowerGenBase / Math.log1p(getHeight()));
     }
 
+
     @Override
     public void handleDescriptionNBT(NBTTagCompound compound) {
         super.handleDescriptionNBT(compound);
         setRenderUpdate();
+    }
+
+    private void startSoundEffect() {
+        soundTime = 0;
+        worldObj.playSoundEffect(
+                (double) xCoord + 0.5D,
+                (double) yCoord + 0.5D,
+                (double) zCoord + 0.5D,
+                Femtocraft.ID.toLowerCase() + ":" + "PhlegethonTunnel", 1.0F, 1.0F);
     }
 
     @Override
@@ -133,6 +146,7 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
         }
 
         active = false;
+        soundTime = soundLength;
         setModified();
         setUpdate();
         notifyTunnelOfChange(active);
@@ -154,8 +168,12 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
 
     @Override
     public void femtocraftServerUpdate() {
-        if (active) {
+        if (isActive()) {
             charge((int) getTotalPowerGen());
+            soundTime++;
+            if (soundTime >= soundLength) {
+                startSoundEffect();
+            }
         }
     }
 

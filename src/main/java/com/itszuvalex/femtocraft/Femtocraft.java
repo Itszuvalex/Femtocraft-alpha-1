@@ -164,7 +164,7 @@ public class Femtocraft {
     public static Block blockMicroChargingBase;
     public static Block blockMicroChargingCoil;
     public static Block blockMicroChargingCapacitor;
-    public static Block blockMicroEngine;
+    public static Block blockCryoGenerator;
     public static Block blockOrbitalEqualizer;
     public static Block blockNullEqualizer;
     public static Block blockCryoEndothermalChargingBase;
@@ -622,11 +622,11 @@ public class Femtocraft {
         LanguageRegistry.addName(blockMicroChargingCapacitor,
                 "Electrostatic Charging Capacitor");
 
-        blockMicroEngine = new BlockElectrostaticGenerator(FemtocraftConfigs
+        blockCryoGenerator = new BlockElectrostaticGenerator(FemtocraftConfigs
                 .BlockElectrostaticGeneratorID);
-        GameRegistry.registerBlock(blockMicroEngine,
-                "BlockMicroEngine");
-        LanguageRegistry.addName(blockMicroEngine, "Micro Engine");
+        GameRegistry.registerBlock(blockCryoGenerator,
+                "BlockCryoGenerator");
+        LanguageRegistry.addName(blockCryoGenerator, "Micro Engine");
 
         blockOrbitalEqualizer = new BlockOrbitalEqualizer(
                 FemtocraftConfigs.BlockOrbitalEqualizerID);
