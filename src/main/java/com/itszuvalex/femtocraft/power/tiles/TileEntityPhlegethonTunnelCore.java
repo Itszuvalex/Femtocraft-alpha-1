@@ -58,8 +58,8 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
     @FemtocraftDataUtils.Saveable
     private BaseInventory inventory = new BaseInventory(1);
 
-    private int soundTime = soundLength;
-    private static final int soundLength = 100;
+    private int timePlaying = soundLength;
+    public static final int soundLength = 100;
 
     public TileEntityPhlegethonTunnelCore() {
         setTechLevel(EnumTechLevel.FEMTO);
@@ -79,17 +79,25 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
 
     @Override
     public void handleDescriptionNBT(NBTTagCompound compound) {
+        boolean wasActive = isActive();
+        boolean wasMultiblock = isValidMultiBlock();
         super.handleDescriptionNBT(compound);
         setRenderUpdate();
+        if ((wasActive && !isActive()) || (wasMultiblock && !isValidMultiBlock())) {
+            Femtocraft.soundManager.stopSound(Femtocraft.soundManager.getSoundIDForLocation(xCoord, yCoord, zCoord));
+            timePlaying = soundLength;
+        } else if (!wasActive && isActive()) {
+            timePlaying = soundLength;
+        }
     }
 
-    private void startSoundEffect() {
-        soundTime = 0;
-        worldObj.playSound(
-                (double) xCoord + 0.5D,
-                (double) yCoord + 0.5D,
-                (double) zCoord + 0.5D,
-                Femtocraft.ID.toLowerCase() + ":" + "PhlegethonTunnel", 1.0F, 1.0F, true);
+    @Override
+    public void invalidate() {
+        super.invalidate();
+        if (worldObj.isRemote && isActive()) {
+            Femtocraft.soundManager.stopSound(Femtocraft.soundManager.getSoundIDForLocation(xCoord, yCoord, zCoord));
+            timePlaying = soundLength;
+        }
     }
 
     @Override
@@ -146,7 +154,6 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
         }
 
         active = false;
-        soundTime = soundLength;
         setModified();
         setUpdate();
         notifyTunnelOfChange(active);
@@ -167,13 +174,25 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
     }
 
     @Override
+    public void updateEntity() {
+        super.updateEntity();
+        if (worldObj.isRemote && isActive()) {
+            if (timePlaying++ > soundLength) {
+                Femtocraft.soundManager.stopSound(Femtocraft.soundManager.getSoundIDForLocation(xCoord, yCoord,
+                        zCoord));
+                Femtocraft.soundManager.playSound(worldObj,
+                        xCoord + 0.5D,
+                        yCoord + 0.5D,
+                        zCoord + 0.5D, Femtocraft.soundManager.PhlegethonTunnelIdentifier, 1.f, 1.f, true);
+                timePlaying = 0;
+            }
+        }
+    }
+
+    @Override
     public void femtocraftServerUpdate() {
         if (isActive()) {
             charge((int) getTotalPowerGen());
-            soundTime++;
-            if (soundTime >= soundLength) {
-                startSoundEffect();
-            }
         }
     }
 

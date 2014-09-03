@@ -30,7 +30,7 @@ import net.minecraftforge.common.DimensionManager;
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/9/14.
  */
-public class WorldLocation implements ISaveable {
+public class WorldLocation implements ISaveable, Comparable<WorldLocation> {
     public World world;
     public int x;
     public int y;
@@ -104,5 +104,21 @@ public class WorldLocation implements ISaveable {
 
     public int getBlockID() {
         return world == null ? 0 : world.getBlockId(x, y, z);
+    }
+
+    @Override
+    public int compareTo(WorldLocation o) {
+        if (x < o.x) return -1;
+        if (x > o.x) return 1;
+        if (y < o.y) return -1;
+        if (y > o.y) return 1;
+        if (z < o.z) return -1;
+        if (z > o.z) return 1;
+        if (world == null && o.world != null) return -1;
+        if (world != null && o.world == null) return 1;
+        if (world == null) return 0;
+        if (world.provider.dimensionId < o.world.provider.dimensionId) return -1;
+        if (world.provider.dimensionId > o.world.provider.dimensionId) return 1;
+        return 0;
     }
 }

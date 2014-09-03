@@ -370,6 +370,8 @@ public class Femtocraft {
             MinecraftForge.EVENT_BUS.register(soundManager);
         }
 
+        GameRegistry.registerPlayerTracker(new FemtocraftPlayerTracker());
+
         NetworkRegistry.instance().registerGuiHandler(this,
                 new FemtocraftGuiHandler());
         NetworkRegistry.instance().registerConnectionHandler(
