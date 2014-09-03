@@ -40,6 +40,32 @@ public class WorldLocation implements ISaveable {
         this(null, 0, 0, 0);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof WorldLocation)) return false;
+
+        WorldLocation that = (WorldLocation) o;
+
+        if (x != that.x) return false;
+        if (y != that.y) return false;
+        if (z != that.z) return false;
+        if (world == null && that.world != null) return false;
+        if (that.world == null && world != null) return false;
+        if (world == null) return true;
+        if (world.provider.dimensionId != that.world.provider.dimensionId) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = world == null ? 0 : world.provider.dimensionId;
+        result = 31 * result + x;
+        result = 31 * result + y;
+        result = 31 * result + z;
+        return result;
+    }
 
     public WorldLocation(World world, int x, int y, int z) {
         this.world = world;

@@ -120,6 +120,8 @@ public class Femtocraft {
     public static ManagerResearch researchManager;
     public static ManagerAssistant assistantManager;
 
+    public static FemtocraftSoundManager soundManager;
+
     public static CommandBase femtocraftServerCommand;
 
     // blocks
@@ -362,12 +364,16 @@ public class Femtocraft {
         Femtocraft.proxy.registerBlockRenderers();
         Femtocraft.proxy.registerTickHandlers();
 
+
+        soundManager = new FemtocraftSoundManager();
+
         NetworkRegistry.instance().registerGuiHandler(this,
                 new FemtocraftGuiHandler());
         NetworkRegistry.instance().registerConnectionHandler(
                 new FemtocraftConnectionHandler());
         MinecraftForge.EVENT_BUS.register(new FemtocraftEventHookContainer());
         MinecraftForge.EVENT_BUS.register(new FemtocraftOreRetrogenHandler());
+        MinecraftForge.EVENT_BUS.register(soundManager);
 
         //Do normal load things here, to allow followup mods to access this.
 

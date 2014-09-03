@@ -28,7 +28,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -66,12 +65,6 @@ public class FemtocraftEventHookContainer {
                               + "ItemAssemblySchematic");
         DisplaySlot.noPlaceDisplayIcon = event.map.registerIcon(Femtocraft.ID
                                                                         .toLowerCase() + ":" + "NoPlaceSlot");
-    }
-
-    @SideOnly(value = Side.CLIENT)
-    @ForgeSubscribe
-    public void onSoundLoad(SoundLoadEvent event) {
-        event.manager.addSound(Femtocraft.ID.toLowerCase() + ":" + "PhlegethonTunnel.wav");
     }
 
     @ForgeSubscribe
