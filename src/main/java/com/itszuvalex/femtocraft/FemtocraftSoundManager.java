@@ -90,8 +90,9 @@ public class FemtocraftSoundManager {
     }
 
     public void stopAllSounds() {
-        for (String id : soundIDToLocMap.keySet()) {
-            stopSound(id);
+        Object[] sounds = soundIDToLocMap.keySet().toArray();
+        for (Object id : sounds) {
+            stopSound((String) id);
         }
     }
 
