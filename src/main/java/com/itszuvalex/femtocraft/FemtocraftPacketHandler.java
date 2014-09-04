@@ -68,6 +68,10 @@ public class FemtocraftPacketHandler implements IPacketHandler {
             handleGUIPacket(inputStream, playerEntity);
         }
 
+        if (packet.channel.equalsIgnoreCase(FemtocraftSoundManager.PACKET_CHANNEL)) {
+            handleSoundPacket(inputStream, playerEntity);
+        }
+
         if (packet.channel.equalsIgnoreCase(TileEntityVacuumTube.PACKET_CHANNEL)) {
             handleVacuumTube(inputStream, playerEntity);
             return;
@@ -88,6 +92,10 @@ public class FemtocraftPacketHandler implements IPacketHandler {
             return;
         }
 
+    }
+
+    private void handleSoundPacket(DataInputStream inputStream, Player playerEntity) {
+        Femtocraft.soundManager.handlePacket(inputStream);
     }
 
     private void handlePhlegethonTunnelPacket(DataInputStream inputStream, Player playerEntity) {

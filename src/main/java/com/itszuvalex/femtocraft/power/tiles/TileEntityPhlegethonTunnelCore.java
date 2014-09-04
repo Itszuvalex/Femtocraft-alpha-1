@@ -174,6 +174,15 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
     }
 
     @Override
+    public void onChunkUnload() {
+        if (worldObj.isRemote && isActive()) {
+            Femtocraft.soundManager.stopSound(Femtocraft.soundManager.getSoundIDForLocation(xCoord, yCoord, zCoord));
+            timePlaying = soundLength;
+        }
+        super.onChunkUnload();
+    }
+
+    @Override
     public void updateEntity() {
         super.updateEntity();
         if (worldObj.isRemote && isActive()) {

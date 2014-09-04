@@ -93,7 +93,8 @@ import net.minecraftforge.oredict.OreDictionary;
 import java.util.logging.Logger;
 
 @Mod(modid = Femtocraft.ID, name = "Femtocraft", version = Femtocraft.VERSION)
-@NetworkMod(channels = {Femtocraft.ID, FemtocraftGuiHandler.PACKET_CHANNEL, PropertiesNanite.PACKET_CHANNEL,
+@NetworkMod(channels = {Femtocraft.ID, FemtocraftGuiHandler.PACKET_CHANNEL, FemtocraftSoundManager.PACKET_CHANNEL,
+        PropertiesNanite.PACKET_CHANNEL,
         ManagerResearch.RESEARCH_CHANNEL,
         TileEntityResearchConsole.PACKET_CHANNEL,
         TileEntityVacuumTube.PACKET_CHANNEL, TileEntityNanoFissionReactorCore.PACKET_CHANNEL,
