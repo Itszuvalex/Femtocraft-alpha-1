@@ -188,7 +188,7 @@ public class ManagerResearch {
     );
     @Technology
     public static ResearchTechnology technologyResourceOptimization = new ResearchTechnology(
-            "ResourceOptimization", "", EnumTechLevel.NANO,
+            "Resource Optimization", "", EnumTechLevel.NANO,
             new ArrayList<ResearchTechnology>(Arrays
                     .asList(technologyAdvancedProgramming)),
             new ItemStack(Femtocraft.itemManagerCore),

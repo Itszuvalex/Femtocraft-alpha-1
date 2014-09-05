@@ -91,9 +91,13 @@ public class GuiTechnology extends GuiScreen {
                 tooltip, status.researched);
 
         String s = status.tech;
-        this.fontRenderer.drawString(s,
-                k + this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2,
-                l + 17, FemtocraftUtils.colorFromARGB(255, 255, 255, 255));
+//        this.fontRenderer.drawString(status,
+//                k + this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2,
+//                l + 17, FemtocraftUtils.colorFromARGB(255, 255, 255, 255));
+        int width = 188 - (66 + 16 + 2);
+        int top = fontRenderer.getStringWidth(s) > width ? 12 : 17;
+        fontRenderer.drawSplitString(
+                EnumChatFormatting.WHITE + s + EnumChatFormatting.RESET, k + 84, l + top, width, 27 - top);
 
         if ((par1 >= (k + backButtonX))
             && (par1 <= (k + backButtonX + backButtonWidth))
@@ -506,7 +510,8 @@ public class GuiTechnology extends GuiScreen {
 
     }
 
-    protected void renderCraftingRecipeWithInfo(int x, int y, int width, int height, ItemStack[] input, ItemStack output, int mouseX, int mouseY, List tooltip, String info) {
+    protected void renderCraftingRecipeWithInfo(int x, int y, int width, int height, ItemStack[] input,
+                                                ItemStack output, int mouseX, int mouseY, List tooltip, String info) {
         int padding = 2;
         renderCraftingRecipe(x, y, width, height, input, output, mouseX, mouseY, tooltip);
         info = String.format("%s%s%s", EnumChatFormatting.WHITE, info,
@@ -519,7 +524,8 @@ public class GuiTechnology extends GuiScreen {
         );
     }
 
-    protected void renderCraftingRecipe(int x, int y, int width, int height, ItemStack[] input, ItemStack output, int mouseX, int mouseY, List tooltip) {
+    protected void renderCraftingRecipe(int x, int y, int width, int height, ItemStack[] input, ItemStack output,
+                                        int mouseX, int mouseY, List tooltip) {
         String recipeDir = EnumChatFormatting.WHITE + "->" +
                            EnumChatFormatting.RESET;
         renderCraftingGrid(x, y, input, mouseX,
