@@ -761,10 +761,6 @@ public class ManagerResearch {
         // Return playerData for a player. If it doesn't exist, makes it.
         ResearchPlayer rp = playerData.get(username);
         if (rp != null) {
-            //If another mod is added since last startup, we won't have known to discover its technologies.  This
-            // scans the research tree for technologies the player hasn't discovered, but should have.  Additionally,
-            // it'll automatically research technologies with no prerequisites.
-            addKnownTechnologies(rp);
             return rp;
         }
         ResearchPlayer r = new ResearchPlayer(username);
@@ -785,13 +781,13 @@ public class ManagerResearch {
                     boolean shouldDiscover = true;
                     for (ResearchTechnology pre : t.prerequisites) {
                         if (!shouldDiscover) continue;
-                        if (!rp.hasDiscoveredTechnology(pre)) shouldDiscover = false;
+                        if (!rp.hasResearchedTechnology(pre)) shouldDiscover = false;
                     }
-                    if (shouldDiscover) {
+                    if (shouldDiscover && rp.canDiscoverTechnology(t)) {
                         rp.discoverTechnology(t.name);
                     }
                 } else {
-                    rp.researchTechnology(t.name, false);
+                    rp.researchTechnology(t.name, true);
                 }
             }
         }
@@ -959,6 +955,12 @@ public class ManagerResearch {
                     ResearchPlayer file = new ResearchPlayer(username);
                     file.loadFromNBTTagCompound(data);
                     fileinputstream.close();
+                    //If another mod is added since last startup, we won't have known to discover its technologies.
+                    // This
+                    // scans the research tree for technologies the player hasn't discovered,
+                    // but should have.  Additionally,
+                    // it'll automatically research technologies with no prerequisites.
+                    addKnownTechnologies(file);
                     playerData.put(username, file);
                 } catch (Exception e) {
                     Femtocraft.logger.log(Level.SEVERE,

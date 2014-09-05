@@ -114,7 +114,7 @@ public class ResearchPlayer {
                 boolean discovererPrereq = false;
                 boolean shouldDiscover = true;
                 for (ResearchTechnology pt : t.prerequisites) {
-                    if (pt == discoverer) {
+                    if (pt == discoverer && discoverer == null) {
                         discovererPrereq = true;
                     }
                     ResearchTechnologyStatus rts = techStatus.get(pt.name);
@@ -151,6 +151,8 @@ public class ResearchPlayer {
     }
 
     public boolean discoverTechnology(String name) {
+        if (techStatus.containsKey(name)) return true;
+
         EventTechnology.TechnologyDiscoveredEvent event = new EventTechnology.TechnologyDiscoveredEvent(
                 username, Femtocraft.researchManager.getTechnology(name));
         if (!MinecraftForge.EVENT_BUS.post(event)) {
