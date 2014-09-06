@@ -33,11 +33,11 @@ import java.io.File;
  */
 public class FemtocraftFileUtils {
     public static String savePath(World world) {
-        return world.isRemote ? Minecraft.getMinecraft().mcDataDir + "/saves/"
-                                +
-                                world.getSaveHandler().getWorldDirectoryName() : MinecraftServer.getServer().getFile
+        return !MinecraftServer.getServer().isDedicatedServer() ? Minecraft.getMinecraft().mcDataDir + "/saves/"
+                +
+                world.getSaveHandler().getWorldDirectoryName() : MinecraftServer.getServer().getFile
                 (world.getSaveHandler().getWorldDirectoryName())
-                .getPath();
+                                                                                .getPath();
     }
 
     public static String savePathFemtocraft(World world) {

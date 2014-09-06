@@ -781,12 +781,15 @@ public class ManagerResearch {
                     boolean shouldDiscover = true;
                     for (ResearchTechnology pre : t.prerequisites) {
                         if (!shouldDiscover) continue;
-                        if (!rp.hasResearchedTechnology(pre)) shouldDiscover = false;
+                        if (!rp.hasResearchedTechnology(pre)) {
+                            shouldDiscover = false;
+                        }
                     }
                     if (shouldDiscover && rp.canDiscoverTechnology(t)) {
                         rp.discoverTechnology(t.name);
                     }
-                } else {
+                }
+                else {
                     rp.researchTechnology(t.name, true);
                 }
             }
@@ -880,6 +883,8 @@ public class ManagerResearch {
     }
 
     public boolean save(World world) {
+        if (world.isRemote) return true;
+
         try {
             File folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), DIRECTORY);
             if (!folder.exists()) {
@@ -903,7 +908,7 @@ public class ManagerResearch {
                 } catch (Exception exception) {
                     Femtocraft.logger.log(Level.SEVERE,
                             "Failed to save data for player " + pdata.username
-                            + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
+                                    + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
                     );
                     exception.printStackTrace();
                     continue;
@@ -912,8 +917,8 @@ public class ManagerResearch {
 
         } catch (Exception e) {
             Femtocraft.logger.log(Level.SEVERE, "Failed to create folder "
-                                                + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator +
-                                                DIRECTORY + ".");
+                    + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator +
+                    DIRECTORY + ".");
             e.printStackTrace();
             return false;
         }
@@ -922,6 +927,8 @@ public class ManagerResearch {
     }
 
     public boolean load(World world) {
+        if (world.isRemote) return true;
+
         String worldName = world.getWorldInfo().getWorldName();
         if (lastWorldLoaded.equals(worldName)) {
             return false;
@@ -934,8 +941,8 @@ public class ManagerResearch {
             File folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), DIRECTORY);
             if (!folder.exists()) {
                 Femtocraft.logger.log(Level.WARNING, "No " + DIRECTORY
-                                                     + " folder found for world - " +
-                                                     FemtocraftFileUtils.savePathFemtocraft(world) + ".");
+                        + " folder found for world - " +
+                        FemtocraftFileUtils.savePathFemtocraft(world) + ".");
                 return false;
             }
 
@@ -965,7 +972,7 @@ public class ManagerResearch {
                 } catch (Exception e) {
                     Femtocraft.logger.log(Level.SEVERE,
                             "Failed to load data from file " + pdata.getName()
-                            + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
+                                    + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
                     );
                     e.printStackTrace();
                 }
@@ -974,7 +981,7 @@ public class ManagerResearch {
         } catch (Exception exception) {
             Femtocraft.logger.log(Level.SEVERE,
                     "Failed to load data from folder " + DIRECTORY
-                    + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
+                            + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
             );
             exception.printStackTrace();
             return false;
