@@ -372,7 +372,7 @@ public class ManagerResearch {
             "Locality Entangler", "", EnumTechLevel.DIMENSIONAL,
             new ArrayList<ResearchTechnology>(Arrays
                     .asList(technologyDimensionalBraiding)),
-            new ItemStack(Femtocraft.itemInfallibleEstimator),
+            new ItemStack(Femtocraft.itemPanLocationalComputer),
             false, new ArrayList<ItemStack>()
     );
     @Technology
@@ -443,7 +443,7 @@ public class ManagerResearch {
             EnumTechLevel.NANO,
             new ArrayList<ResearchTechnology>(Arrays.asList(
                     technologyPotentialHarvesting, technologyAdvancedChemistry)),
-            new ItemStack(Femtocraft.itemThoriumRod), false, new ArrayList<ItemStack>()
+            new ItemStack(Femtocraft.itemIngotThFaSalt), false, new ArrayList<ItemStack>()
     );
     @Technology
     public static ResearchTechnology technologyHarnessedNuclearDecay = new ResearchTechnology(

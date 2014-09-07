@@ -260,8 +260,6 @@ public class Femtocraft {
     public static Item itemInterfaceDeviceMicro;
 
     //nano
-    public static Item itemThoriumRod;
-
     public static Item itemNanochip;
     public static Item itemNanoCalculator;
     public static Item itemNanoRegulator;
@@ -936,10 +934,6 @@ public class Femtocraft {
         GameRegistry.registerItem(itemPortableResearchComputer, "ItemPortableResearchComputer");
         LanguageRegistry.addName(itemPortableResearchComputer,
                 "Portable Research Computer");
-
-        itemThoriumRod = new ItemBase(FemtocraftConfigs.ItemThoriumRodID, "ItemThoriumRod");
-        GameRegistry.registerItem(itemThoriumRod, "ItemThoriumRod");
-        LanguageRegistry.addName(itemThoriumRod, "Thorium Rod");
 
         itemNanochip = new ItemBase(FemtocraftConfigs.ItemNanochipID, "ItemNanochip");
         GameRegistry.registerItem(itemNanochip, "ItemNanochip");

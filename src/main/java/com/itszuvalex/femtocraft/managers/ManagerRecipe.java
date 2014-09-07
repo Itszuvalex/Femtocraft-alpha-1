@@ -207,9 +207,5 @@ public class ManagerRecipe {
                 Femtocraft.itemIngotTemperedTitanium, 'F', Item.ingotIron,
                 'V', Femtocraft.itemVacuumCore);
 
-        GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemThoriumRod)
-                , "PPP", "TTT", "PPP", 'P', Femtocraft.itemIngotPlatinum,
-                'T', Femtocraft.itemIngotThorium);
-
     }
 }
