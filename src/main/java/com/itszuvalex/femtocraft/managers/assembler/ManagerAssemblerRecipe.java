@@ -1607,6 +1607,8 @@ public class ManagerAssemblerRecipe {
                     new ItemStack(Femtocraft.blockDecontaminationChamber),
                     EnumTechLevel.NANO, null));
 
+            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemIngotFarenite), null, new ItemStack(Femtocraft.itemIngotFarenite), new ItemStack(Femtocraft.itemIngotThorium), new ItemStack(Femtocraft.itemIngotFarenite), new ItemStack(Femtocraft.itemIngotThorium), new ItemStack(Femtocraft.itemIngotFarenite), null, new ItemStack(Femtocraft.itemIngotFarenite)}, 0, new ItemStack(Femtocraft.itemIngotThFaSalt, 2), EnumTechLevel.NANO, null));
+
             addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Item.eyeOfEnder), new ItemStack(Femtocraft.itemIngotMalenite), new ItemStack(Item.eyeOfEnder), new ItemStack(Femtocraft.itemIngotMalenite), new ItemStack(Item.netherQuartz), new ItemStack(Femtocraft.itemIngotMalenite), new ItemStack(Item.eyeOfEnder), new ItemStack(Femtocraft.itemIngotMalenite), new ItemStack(Item.eyeOfEnder)}, 0,
                     new ItemStack(Femtocraft.itemMinosGate, 2),
                     EnumTechLevel.NANO, null));

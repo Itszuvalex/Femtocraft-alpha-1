@@ -476,14 +476,14 @@ public class ManagerResearch {
             new ArrayList<ResearchTechnology>(Arrays.asList(
                     technologyQuantumInteractivity,
                     technologyAdvancedProgramming,
-                    technologyAppliedParticlePhysics)), new ItemStack(Femtocraft.itemHerculesDrive), false,
+                    technologyAppliedParticlePhysics)), new ItemStack(Femtocraft.itemErinyesCircuit), false,
             new ArrayList<ItemStack>()
     );
     @Technology
     public static ResearchTechnology technologyQuantumRobotics = new ResearchTechnology(
             "Quantum Robotics", "", EnumTechLevel.FEMTO,
             new ArrayList<ResearchTechnology>(Arrays.asList(technologyQuantumComputing)),
-            new ItemStack(Femtocraft.itemErinyesCircuit), false, new ArrayList<ItemStack>()
+            new ItemStack(Femtocraft.itemHerculesDrive), false, new ArrayList<ItemStack>()
     );
     @Technology
     public static ResearchTechnology technologyElementManufacturing = new ResearchTechnology(
