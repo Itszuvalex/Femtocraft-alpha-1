@@ -78,11 +78,33 @@ public class GuiTechnology extends GuiScreen {
     public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
 
+
+        this.zLevel = 0.0F;
+        GL11.glDepthFunc(GL11.GL_GEQUAL);
+        GL11.glPushMatrix();
+        GL11.glTranslatef(0.0F, 0.0F, -200.0F);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+        GL11.glEnable(GL11.GL_COLOR_MATERIAL);
+
         Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
+
+        GL11.glDepthFunc(GL11.GL_LEQUAL);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GL11.glPopMatrix();
+        this.zLevel = 0.0F;
+        GL11.glDepthFunc(GL11.GL_LEQUAL);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
 
         super.drawScreen(par1, par2, par3);
 
@@ -202,6 +224,8 @@ public class GuiTechnology extends GuiScreen {
                                                                                                            1,
                 FemtocraftUtils.colorFromARGB(255, 255, 255, 255));
 
+        this.zLevel = 0;
+
         GL11.glPushMatrix();
         RenderItem renderitem = new RenderItem();
         RenderHelper.enableGUIStandardItemLighting();
@@ -215,6 +239,9 @@ public class GuiTechnology extends GuiScreen {
                 Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft()
                         .getTextureManager(), tech.displayItem, k + 66, l + 12
         );
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 
         ItemStack[] materials = null;
         if (tech.researchMaterials != null) {

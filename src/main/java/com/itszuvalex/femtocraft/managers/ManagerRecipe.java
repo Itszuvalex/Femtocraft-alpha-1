@@ -70,6 +70,14 @@ public class ManagerRecipe {
         GameRegistry.addSmelting(Femtocraft.itemPrimedBoard.itemID, new ItemStack(
                 Femtocraft.itemDopedBoard), 0.1f);
 
+        GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockResearchConsole), "THT", "TCT", "RFR", 'T',
+                Femtocraft.itemIngotTitanium, 'H', Block.hopperBlock, 'C', Item.comparator, 'R', Item.redstone, 'F',
+                Femtocraft.itemIngotFarenite);
+
+        GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockResearchComputer), "GGG", "TET", "RFR", 'G',
+                Block.glass, 'T', Femtocraft.itemIngotTitanium, 'E', Item.redstoneRepeater, 'R', Item.redstone, 'F',
+                Femtocraft.itemIngotFarenite);
+
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemPrimedBoard),
                 "#", "$", '#', Femtocraft.itemConductivePowder, '$',
                 Femtocraft.itemBoard);
