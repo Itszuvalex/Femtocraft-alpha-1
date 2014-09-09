@@ -24,6 +24,14 @@ public class CryogenRegistry {
         return activeHandlers.add(handler);
     }
 
+    public static boolean unregisterPassiveHandler(ICryogenHandler handler) {
+        return passiveHandlers.remove(handler);
+    }
+
+    public static boolean unregisterActiveHandler(ICryogenHandler handler) {
+        return activeHandlers.remove(handler);
+    }
+
     public static float getPassivePower(World world, int x, int y, int z) {
         return getPower(world, x, y, z, passiveHandlers);
     }
