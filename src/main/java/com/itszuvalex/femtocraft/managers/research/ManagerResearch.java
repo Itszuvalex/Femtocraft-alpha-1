@@ -96,6 +96,11 @@ public class ManagerResearch {
         }
     };
     @Technology
+    public static ResearchTechnology technologyScientificTheory = new ResearchTechnology(
+            "Scientific Theory", "Gentlemen, start your research!", EnumTechLevel.MACRO,
+            null, new ItemStack(Femtocraft.blockResearchConsole), true, null
+    );
+    @Technology
     public static ResearchTechnology technologyAlgorithms = new ResearchTechnology(
             "Algorithms", "", EnumTechLevel.MICRO,
             new ArrayList<ResearchTechnology>(Arrays
@@ -476,13 +481,13 @@ public class ManagerResearch {
             new ArrayList<ResearchTechnology>(Arrays.asList(
                     technologyQuantumInteractivity,
                     technologyAdvancedProgramming,
-                    technologyAppliedParticlePhysics)), new ItemStack(Femtocraft.itemErinyesCircuit), false,
+                    technologyAppliedParticlePhysics, technologyLocalityEntangler, technologyRealityOverclocker)), new ItemStack(Femtocraft.itemErinyesCircuit), false,
             new ArrayList<ItemStack>()
     );
     @Technology
     public static ResearchTechnology technologyQuantumRobotics = new ResearchTechnology(
             "Quantum Robotics", "", EnumTechLevel.FEMTO,
-            new ArrayList<ResearchTechnology>(Arrays.asList(technologyQuantumComputing)),
+            new ArrayList<ResearchTechnology>(Arrays.asList(technologyQuantumComputing, technologySpacetimeExploitation)),
             new ItemStack(Femtocraft.itemHerculesDrive), false, new ArrayList<ItemStack>()
     );
     @Technology

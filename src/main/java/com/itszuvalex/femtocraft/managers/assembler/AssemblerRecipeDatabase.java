@@ -341,14 +341,19 @@ public class AssemblerRecipeDatabase {
         return arrayList;
     }
 
+
     public ArrayList<AssemblerRecipe> getRecipesForTech(ResearchTechnology tech) {
+        return getRecipesForTech(tech.name);
+    }
+
+    public ArrayList<AssemblerRecipe> getRecipesForTech(String techName) {
         ArrayList<AssemblerRecipe> arrayList = new ArrayList<AssemblerRecipe>();
         try {
             refreshConnection();
             PreparedStatement ps = c.prepareStatement("SELECT * FROM " +
                     DB_TABLE_RECIPES + " WHERE " + DB_RECIPES_TECHNOLOGY + " " +
                     "= ?", ResultSet.HOLD_CURSORS_OVER_COMMIT);
-            ps.setString(1, tech.name);
+            ps.setString(1, techName);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 arrayList.add(getRecipe(rs));

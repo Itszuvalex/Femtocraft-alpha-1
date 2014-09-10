@@ -30,11 +30,14 @@ import com.itszuvalex.femtocraft.research.gui.GuiTechnology;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuiTechnologyMacroscopicStructure extends GuiTechnology {
+/**
+ * Created by Christopher Harris (Itszuvalex) on 9/10/14.
+ */
+public class GuiTechnologyDefault extends GuiTechnology {
     private final ArrayList<AssemblerRecipe> recipes;
 
-    public GuiTechnologyMacroscopicStructure(GuiResearch guiResearch,
-                                             ResearchTechnologyStatus status) {
+    public GuiTechnologyDefault(GuiResearch guiResearch,
+                                ResearchTechnologyStatus status) {
         super(guiResearch, status);
         recipes = Femtocraft.recipeManager.assemblyRecipes
                 .getRecipesForTechnology(status.tech);
@@ -68,3 +71,4 @@ public class GuiTechnologyMacroscopicStructure extends GuiTechnology {
         }
     }
 }
+

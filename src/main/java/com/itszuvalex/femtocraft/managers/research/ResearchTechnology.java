@@ -24,6 +24,7 @@ package com.itszuvalex.femtocraft.managers.research;
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.research.gui.GuiResearch;
 import com.itszuvalex.femtocraft.research.gui.GuiTechnology;
+import com.itszuvalex.femtocraft.research.gui.technology.GuiTechnologyDefault;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.ItemStack;
@@ -110,7 +111,7 @@ public class ResearchTechnology {
             Femtocraft.logger
                     .log(Level.SEVERE,
                             "Technologies must return a GuiTechnology class that supports the constructor" +
-                            "(GuiResearch, ResearchTechnologyStatus)");
+                                    "(GuiResearch, ResearchTechnologyStatus)");
             e.printStackTrace();
         } catch (SecurityException e) {
             e.printStackTrace();
@@ -120,5 +121,7 @@ public class ResearchTechnology {
     }
 
     @SideOnly(value = Side.CLIENT)
-    public Class<? extends GuiTechnology> getGuiClass() {return GuiTechnology.class;}
+    public Class<? extends GuiTechnology> getGuiClass() {
+        return GuiTechnologyDefault.class;
+    }
 }

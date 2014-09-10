@@ -23,7 +23,6 @@ package com.itszuvalex.femtocraft.research.gui.technology;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
-import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnologyStatus;
 import com.itszuvalex.femtocraft.research.gui.GuiResearch;
 import com.itszuvalex.femtocraft.research.gui.GuiTechnology;
@@ -38,7 +37,7 @@ public class GuiTechnologyBasicChemistry extends GuiTechnology {
                                        ResearchTechnologyStatus status) {
         super(guiResearch, status);
         recipes = Femtocraft.recipeManager.assemblyRecipes
-                .getRecipesForTechLevel(EnumTechLevel.MICRO);
+                .getRecipesForTechnology(status.tech);
     }
 
     @Override
@@ -50,15 +49,16 @@ public class GuiTechnologyBasicChemistry extends GuiTechnology {
     protected void renderInformation(int x, int y, int width, int height,
                                      int displayPage, int mouseX, int mouseY, List tooltip,
                                      boolean isResearched) {
-        if (isResearched) {
+        if (isResearched && recipes.size() > 0) {
             int index = (displayPage - 1) * 2;
             AssemblerRecipe recipe = recipes.get(index);
 
-            renderAssemblerRecipeWithInfo(x, y, width, height / 2, recipe, mouseX,
-                    mouseY, tooltip, recipe.output.getDisplayName());
+            renderAssemblerRecipeWithInfo(x, y, width, height / 2, recipe,
+                    mouseX, mouseY, tooltip, recipe.output.getDisplayName());
             if (++index < recipes.size()) {
                 AssemblerRecipe recipe1 = recipes.get(index);
-                renderAssemblerRecipeWithInfo(x, y + (height / 2), width, height / 2,
+                renderAssemblerRecipeWithInfo(x, y + (height / 2), width,
+                        height / 2,
                         recipe1, mouseX, mouseY, tooltip,
                         recipe1.output.getDisplayName());
             }

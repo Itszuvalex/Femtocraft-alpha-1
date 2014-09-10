@@ -23,7 +23,6 @@ package com.itszuvalex.femtocraft.research.gui.technology;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
-import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnologyStatus;
 import com.itszuvalex.femtocraft.research.gui.GuiResearch;
 import com.itszuvalex.femtocraft.research.gui.GuiTechnology;
@@ -38,7 +37,7 @@ public class GuiTechnologyAdvancedChemistry extends GuiTechnology {
                                           ResearchTechnologyStatus status) {
         super(guiResearch, status);
         recipes = Femtocraft.recipeManager.assemblyRecipes
-                .getRecipesForTechLevel(EnumTechLevel.NANO);
+                .getRecipesForTechnology(status.tech);
     }
 
     @Override
@@ -50,7 +49,7 @@ public class GuiTechnologyAdvancedChemistry extends GuiTechnology {
     protected void renderInformation(int x, int y, int width, int height,
                                      int displayPage, int mouseX, int mouseY, List tooltip,
                                      boolean isResearched) {
-        if (isResearched) {
+        if (isResearched && recipes.size() > 0) {
             int index = (displayPage - 1) * 2;
             AssemblerRecipe recipe = recipes.get(index);
 
