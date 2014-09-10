@@ -22,6 +22,7 @@
 package com.itszuvalex.femtocraft.managers.temporal;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.managers.assembler.ComparatorItemStack;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
@@ -36,22 +37,40 @@ import java.util.TreeMap;
  */
 public class ManagerTemporalRecipe {
 
-    private SortedMap<TemporalKey, TemporalRecipe> recipes;
+    private SortedMap<TemporalKey, TemporalRecipe> recipesToOutput;
+    private SortedMap<ItemStack, TemporalRecipe> outputToRecipes;
 
     public ManagerTemporalRecipe() {
-        recipes = new TreeMap<TemporalKey, TemporalRecipe>();
+        recipesToOutput = new TreeMap<TemporalKey, TemporalRecipe>();
+        outputToRecipes = new TreeMap<ItemStack, TemporalRecipe>(new ComparatorItemStack());
         addRecipes();
     }
 
     private void addRecipes() {
-        addRecipe(new TemporalRecipe(new ItemStack(Femtocraft.itemSelfFulfillingOracle), new ItemStack[]{new ItemStack(Femtocraft.itemTemporalResonator), new ItemStack(Femtocraft.itemSchedulerCore), new ItemStack(Item.pocketSundial)}, new ItemStack(Femtocraft.itemInfallibleEstimator), 200, EnumTechLevel.NANO, ManagerResearch.technologyTemporalPipelining));
-        addRecipe(new TemporalRecipe(new ItemStack(Femtocraft.itemInfallibleEstimator), new ItemStack[]{new ItemStack(Femtocraft.itemInfallibleEstimator), new ItemStack(Femtocraft.itemOrpheusProcessor), new ItemStack(Femtocraft.itemPanLocationalComputer), new ItemStack(Femtocraft.itemInfallibleEstimator), new ItemStack(Femtocraft.itemOrpheusProcessor), new ItemStack(Femtocraft.itemPanLocationalComputer)}, new ItemStack(Femtocraft.itemInfinitelyRecursiveALU), 800, EnumTechLevel.FEMTO, ManagerResearch.technologyTemporalThreading));
+        addRecipe(new TemporalRecipe(new ItemStack(Femtocraft.itemSelfFulfillingOracle),
+                new ItemStack[]{new ItemStack(Femtocraft.itemTemporalResonator),
+                        new ItemStack(Femtocraft.itemSchedulerCore), new ItemStack(Item.pocketSundial)},
+                new ItemStack(Femtocraft.itemInfallibleEstimator), 200, EnumTechLevel.NANO,
+                ManagerResearch.technologyTemporalPipelining));
+        addRecipe(new TemporalRecipe(new ItemStack(Femtocraft.itemInfallibleEstimator),
+                new ItemStack[]{new ItemStack(Femtocraft.itemInfallibleEstimator),
+                        new ItemStack(Femtocraft.itemOrpheusProcessor),
+                        new ItemStack(Femtocraft.itemPanLocationalComputer),
+                        new ItemStack(Femtocraft.itemInfallibleEstimator),
+                        new ItemStack(Femtocraft.itemOrpheusProcessor),
+                        new ItemStack(Femtocraft.itemPanLocationalComputer)},
+                new ItemStack(Femtocraft.itemInfinitelyRecursiveALU), 800, EnumTechLevel.FEMTO,
+                ManagerResearch.technologyTemporalThreading));
 
     }
 
     public TemporalRecipe getRecipe(ItemStack input, ItemStack[] configurators) {
         if (input == null) return null;
-        return recipes.get(getTemporalKey(input, configurators));
+        return recipesToOutput.get(getTemporalKey(input, configurators));
+    }
+
+    public TemporalRecipe getRecipe(ItemStack output) {
+        return outputToRecipes.get(output);
     }
 
     private TemporalKey getTemporalKey(ItemStack input,
@@ -75,7 +94,8 @@ public class ManagerTemporalRecipe {
     }
 
     public void addRecipe(TemporalRecipe recipe) {
-        recipes.put(getTemporalKey(recipe.input, recipe.configurators), recipe);
+        recipesToOutput.put(getTemporalKey(recipe.input, recipe.configurators), recipe);
+        outputToRecipes.put(recipe.output, recipe);
     }
 
     private class TemporalKey implements Comparable {

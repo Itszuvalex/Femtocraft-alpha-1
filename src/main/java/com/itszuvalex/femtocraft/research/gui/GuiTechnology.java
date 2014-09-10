@@ -25,6 +25,7 @@ import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnologyStatus;
+import com.itszuvalex.femtocraft.managers.temporal.TemporalRecipe;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -496,6 +497,45 @@ public class GuiTechnology extends GuiScreen {
                 width - 54 - 2 * padding, height - 2 * padding);
     }
 
+    protected void renderTemporalRecipeWithInfo(int x, int y, int width, int height, TemporalRecipe recipe,
+                                                int mouseX, int mouseY, List tooltip, String info) {
+        int padding = 2;
+        renderTemporalRecipe(x, y, width, height, recipe, mouseX, mouseY, tooltip);
+        info = String.format("%s%s%s", EnumChatFormatting.WHITE, info,
+                EnumChatFormatting.RESET);
+        fontRenderer.drawSplitString(info, x + 90 + 2 * padding, y + 2 * padding,
+                width - 2 * padding - 72,
+                height - 2 * padding
+        );
+    }
+
+    protected void renderTemporalRecipe(int x, int y, int width, int height, TemporalRecipe recipe, int mouseX,
+                                        int mouseY, List tooltip) {
+        String recipeDir = recipe.techLevel.getTooltipEnum() + "----->" +
+                           EnumChatFormatting.RESET;
+        renderItemSlot(x,
+                y + 18, recipe.input, new RenderItem(), mouseX, mouseY,
+                tooltip);
+
+        for (int i = 0; i < recipe.configurators.length; ++i) {
+            renderItemSlot(
+                    x + 18 + 18 * (i % 3), y + 36 * (int) Math.floor(
+                            i / 3), recipe.configurators[i], new RenderItem(), mouseX, mouseY, tooltip);
+        }
+        GL11.glColor4f(1.f, 1.f, 1.f, 1.f);
+        fontRenderer.drawSplitString(recipeDir, x + 18 + (54 - fontRenderer.getStringWidth(recipeDir)) / 2 + 1,
+                y + (54 - fontRenderer
+                        .FONT_HEIGHT)
+                    / 2, fontRenderer.getStringWidth
+                        (recipeDir) + 2,
+                fontRenderer.FONT_HEIGHT
+        );
+        renderItemSlot(x + 72 + 2,
+                y + 18, recipe.output, new RenderItem(), mouseX, mouseY,
+                tooltip);
+    }
+
+
     protected void renderAssemblerRecipeWithInfo(int x, int y, int width,
                                                  int height,
                                                  AssemblerRecipe recipe,
@@ -518,7 +558,7 @@ public class GuiTechnology extends GuiScreen {
                                          int mouseY, List tooltip)
 
     {
-        String recipeDir = EnumChatFormatting.WHITE + "<->" +
+        String recipeDir = recipe.enumTechLevel.getTooltipEnum() + "<->" +
                            EnumChatFormatting.RESET;
         renderCraftingGrid(x, y, recipe.input, mouseX,
                 mouseY, tooltip);

@@ -22,6 +22,7 @@
 package com.itszuvalex.femtocraft.managers.dimensional;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.managers.assembler.ComparatorItemStack;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
@@ -37,23 +38,49 @@ import java.util.TreeMap;
  */
 public class ManagerDimensionalRecipe {
 
-    private SortedMap<DimensionalKey, DimensionalRecipe> recipes;
+    private SortedMap<DimensionalKey, DimensionalRecipe> recipesToOutput;
+    private SortedMap<ItemStack, DimensionalRecipe> outputToRecipes;
 
     public ManagerDimensionalRecipe() {
-        recipes = new TreeMap<DimensionalKey, DimensionalRecipe>();
+        recipesToOutput = new TreeMap<DimensionalKey, DimensionalRecipe>();
+        outputToRecipes = new TreeMap<ItemStack, DimensionalRecipe>(new ComparatorItemStack());
         addRecipes();
     }
 
     private void addRecipes() {
-        addRecipe(new DimensionalRecipe(new ItemStack(Femtocraft.itemManagerCore), new ItemStack[]{new ItemStack(Femtocraft.itemNanochip), new ItemStack(Item.enderPearl), new ItemStack(Femtocraft.itemCrossDimensionalCommunicator), new ItemStack(Femtocraft.itemDimensionalMonopole)}, new ItemStack(Femtocraft.itemPanLocationalComputer), 400, EnumTechLevel.NANO, ManagerResearch.technologyDimensionalBraiding));
-        addRecipe(new DimensionalRecipe(new ItemStack(Block.chest), new ItemStack[]{new ItemStack(Femtocraft.itemPanLocationalComputer), new ItemStack(Item.enderPearl), new ItemStack(Item.enderPearl), new ItemStack(Femtocraft.itemDimensionalMonopole)}, new ItemStack(Femtocraft.itemPandoraCube), 400, EnumTechLevel.NANO, ManagerResearch.technologyLocalityEntangler));
-        addRecipe(new DimensionalRecipe(new ItemStack(Femtocraft.itemPandoraCube), new ItemStack[]{new ItemStack(Femtocraft.itemHerculesDrive), new ItemStack(Femtocraft.itemPanLocationalComputer), new ItemStack(Femtocraft.itemPanLocationalComputer), new ItemStack(Femtocraft.itemHerculesDrive), new ItemStack(Item.eyeOfEnder), new ItemStack(Item.eyeOfEnder), new ItemStack(Item.eyeOfEnder), new ItemStack(Item.eyeOfEnder), new ItemStack(Femtocraft.itemHerculesDrive), new ItemStack(Femtocraft.itemInfallibleEstimator), new ItemStack(Femtocraft.itemInfallibleEstimator), new ItemStack(Femtocraft.itemHerculesDrive)}, new ItemStack(Femtocraft.itemInfiniteVolumePolychora), 400, EnumTechLevel.FEMTO, ManagerResearch.technologyDimensionalSuperpositions));
+        addRecipe(new DimensionalRecipe(new ItemStack(Femtocraft.itemManagerCore),
+                new ItemStack[]{new ItemStack(Femtocraft.itemNanochip), new ItemStack(Item.enderPearl),
+                        new ItemStack(Femtocraft.itemCrossDimensionalCommunicator),
+                        new ItemStack(Femtocraft.itemDimensionalMonopole)},
+                new ItemStack(Femtocraft.itemPanLocationalComputer), 400, EnumTechLevel.NANO,
+                ManagerResearch.technologyDimensionalBraiding));
+        addRecipe(new DimensionalRecipe(new ItemStack(Block.chest), new ItemStack[]{new ItemStack(Femtocraft
+                .itemPanLocationalComputer), new ItemStack(Item.enderPearl), new ItemStack(Item.enderPearl),
+                new ItemStack(Femtocraft.itemDimensionalMonopole)}, new ItemStack(Femtocraft.itemPandoraCube), 400,
+                EnumTechLevel.NANO, ManagerResearch.technologyLocalityEntangler));
+        addRecipe(new DimensionalRecipe(new ItemStack(Femtocraft.itemPandoraCube),
+                new ItemStack[]{new ItemStack(Femtocraft.itemHerculesDrive),
+                        new ItemStack(Femtocraft.itemPanLocationalComputer),
+                        new ItemStack(Femtocraft.itemPanLocationalComputer),
+                        new ItemStack(Femtocraft.itemHerculesDrive), new ItemStack(Item.eyeOfEnder),
+                        new ItemStack(Item.eyeOfEnder), new ItemStack(Item.eyeOfEnder),
+                        new ItemStack(Item.eyeOfEnder), new ItemStack(Femtocraft.itemHerculesDrive),
+                        new ItemStack(Femtocraft.itemInfallibleEstimator),
+                        new ItemStack(Femtocraft.itemInfallibleEstimator),
+                        new ItemStack(Femtocraft.itemHerculesDrive)},
+                new ItemStack(Femtocraft.itemInfiniteVolumePolychora), 400, EnumTechLevel.FEMTO,
+                ManagerResearch.technologyDimensionalSuperpositions));
     }
 
     public DimensionalRecipe getRecipe(ItemStack input, ItemStack[] configurators) {
         if (input == null) return null;
-        return recipes.get(getDimensionalKey(input, configurators));
+        return recipesToOutput.get(getDimensionalKey(input, configurators));
     }
+
+    public DimensionalRecipe getRecipe(ItemStack output) {
+        return outputToRecipes.get(output);
+    }
+
 
     private DimensionalKey getDimensionalKey(ItemStack input,
                                              ItemStack[] configurators) {
@@ -76,8 +103,9 @@ public class ManagerDimensionalRecipe {
     }
 
     public void addRecipe(DimensionalRecipe recipe) {
-        recipes.put(getDimensionalKey(recipe.input, recipe.configurators),
+        recipesToOutput.put(getDimensionalKey(recipe.input, recipe.configurators),
                 recipe);
+        outputToRecipes.put(recipe.output, recipe);
     }
 
     private class DimensionalKey implements Comparable {
