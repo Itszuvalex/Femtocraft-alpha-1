@@ -57,7 +57,6 @@ public class RenderStellaratorFocus implements ISimpleBlockRenderingHandler {
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 
         tessellator.startDrawingQuads();
-        tessellator.setBrightness(983055);
         tessellator.setColorOpaque_F(1, 1, 1);
         renderFocus(focus, 0, 0, 0);
         tessellator.draw();
