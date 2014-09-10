@@ -41,7 +41,7 @@ import com.itszuvalex.femtocraft.industry.items.ItemQuantumSchematic;
 import com.itszuvalex.femtocraft.managers.ManagerRecipe;
 import com.itszuvalex.femtocraft.managers.assistant.ManagerAssistant;
 import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
-import com.itszuvalex.femtocraft.player.PropertiesNanite;
+import com.itszuvalex.femtocraft.player.PlayerProperties;
 import com.itszuvalex.femtocraft.power.blocks.*;
 import com.itszuvalex.femtocraft.power.fluids.FluidCooledContaminatedMoltenSalt;
 import com.itszuvalex.femtocraft.power.fluids.FluidCooledMoltenSalt;
@@ -94,7 +94,7 @@ import java.util.logging.Logger;
 
 @Mod(modid = Femtocraft.ID, name = "Femtocraft", version = Femtocraft.VERSION)
 @NetworkMod(channels = {Femtocraft.ID, FemtocraftGuiHandler.PACKET_CHANNEL, FemtocraftSoundManager.PACKET_CHANNEL,
-        PropertiesNanite.PACKET_CHANNEL,
+        PlayerProperties.PACKET_CHANNEL,
         ManagerResearch.RESEARCH_CHANNEL,
         TileEntityResearchConsole.PACKET_CHANNEL,
         TileEntityVacuumTube.PACKET_CHANNEL, TileEntityNanoFissionReactorCore.PACKET_CHANNEL,

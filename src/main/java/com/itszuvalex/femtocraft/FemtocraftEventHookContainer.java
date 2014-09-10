@@ -23,7 +23,7 @@ package com.itszuvalex.femtocraft;
 
 import com.itszuvalex.femtocraft.common.gui.DisplaySlot;
 import com.itszuvalex.femtocraft.industry.items.ItemAssemblySchematic;
-import com.itszuvalex.femtocraft.player.PropertiesNanite;
+import com.itszuvalex.femtocraft.player.PlayerProperties;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -71,8 +71,8 @@ public class FemtocraftEventHookContainer {
     public void onEntityConstructing(EntityConstructing event) {
         if (event.entity instanceof EntityPlayer
             && event.entity
-                       .getExtendedProperties(PropertiesNanite.PROP_TAG) == null) {
-            PropertiesNanite.register((EntityPlayer) event.entity);
+                       .getExtendedProperties(PlayerProperties.PROP_TAG) == null) {
+            PlayerProperties.register((EntityPlayer) event.entity);
         }
     }
 
@@ -80,7 +80,7 @@ public class FemtocraftEventHookContainer {
     public void onEntityJoinWorld(EntityJoinWorldEvent event) {
         if (!event.entity.worldObj.isRemote
             && event.entity instanceof EntityPlayer) {
-            PropertiesNanite.get((EntityPlayer) event.entity).sync();
+            PlayerProperties.get((EntityPlayer) event.entity).sync();
         }
     }
 }

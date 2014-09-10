@@ -23,7 +23,7 @@ package com.itszuvalex.femtocraft;
 
 import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
 import com.itszuvalex.femtocraft.managers.research.ResearchPlayer;
-import com.itszuvalex.femtocraft.player.PropertiesNanite;
+import com.itszuvalex.femtocraft.player.PlayerProperties;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoFissionReactorCore;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityPhlegethonTunnelCore;
 import com.itszuvalex.femtocraft.research.tiles.TileEntityResearchConsole;
@@ -50,8 +50,8 @@ public class FemtocraftPacketHandler implements IPacketHandler {
     @Override
     public void onPacketData(INetworkManager manager,
                              Packet250CustomPayload packet, Player playerEntity) {
-        if (packet.channel.equalsIgnoreCase(PropertiesNanite.PACKET_CHANNEL)) {
-            PropertiesNanite.get((EntityPlayer) playerEntity).handlePacket(
+        if (packet.channel.equalsIgnoreCase(PlayerProperties.PACKET_CHANNEL)) {
+            PlayerProperties.get((EntityPlayer) playerEntity).handlePacket(
                     packet);
             return;
         }
