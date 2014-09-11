@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.managers.assembler;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.FemtocraftConfigs;
+import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs;
 import com.itszuvalex.femtocraft.managers.assembler.EventAssemblerRegister.AssemblerDecompositionRegisterEvent;
 import com.itszuvalex.femtocraft.managers.assembler.EventAssemblerRegister.AssemblerRecompositionRegisterEvent;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;

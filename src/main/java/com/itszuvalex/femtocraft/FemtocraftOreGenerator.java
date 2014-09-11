@@ -21,6 +21,7 @@
 
 package com.itszuvalex.femtocraft;
 
+import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs;
 import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;

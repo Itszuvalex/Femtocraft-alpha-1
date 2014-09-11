@@ -21,6 +21,7 @@
 
 package com.itszuvalex.femtocraft;
 
+import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs;
 import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;

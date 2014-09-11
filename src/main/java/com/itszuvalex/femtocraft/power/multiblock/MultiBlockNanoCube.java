@@ -21,7 +21,7 @@
 
 package com.itszuvalex.femtocraft.power.multiblock;
 
-import com.itszuvalex.femtocraft.FemtocraftConfigs;
+import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs;
 import com.itszuvalex.femtocraft.core.multiblock.IMultiBlock;
 import com.itszuvalex.femtocraft.core.multiblock.IMultiBlockComponent;
 import net.minecraft.tileentity.TileEntity;

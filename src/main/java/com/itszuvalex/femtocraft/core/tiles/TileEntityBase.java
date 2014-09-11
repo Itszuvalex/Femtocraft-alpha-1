@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.core.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.FemtocraftConfigs;
+import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.entity.player.EntityPlayer;
