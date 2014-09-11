@@ -166,7 +166,7 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
         );
         par3List.add(techLevelLine);
 
-        ResearchTechnology tech = recipe.tech;
+        ResearchTechnology tech = Femtocraft.researchManager.getTechnology(recipe.tech);
         EnumChatFormatting formatting;
         String techString;
         if (tech == null) {
@@ -174,7 +174,7 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
             techString = "none";
         }
         else {
-            formatting = recipe.tech.level.getTooltipEnum();
+            formatting = tech.level.getTooltipEnum();
             techString = FemtocraftUtils.capitalize(tech.name);
         }
 

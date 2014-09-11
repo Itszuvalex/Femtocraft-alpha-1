@@ -191,10 +191,8 @@ public class AssemblerRecipeDatabase {
                 rs.getBytes(DB_RECIPES_OUTPUT_NBT));
         ac.enumTechLevel = EnumTechLevel.getTech(rs.getString
                 (DB_RECIPES_TECH_LEVEL));
-        String tech = rs.getString
+        ac.tech = rs.getString
                 (DB_RECIPES_TECHNOLOGY);
-        ac.tech = tech == null ? null : Femtocraft.researchManager.getTechnology
-                (tech);
         return ac;
     }
 
@@ -292,7 +290,7 @@ public class AssemblerRecipeDatabase {
             }
             ps.setBytes(6, nbt);
             ps.setString(7, recipe.enumTechLevel.key);
-            ps.setString(8, recipe.tech == null ? null : recipe.tech.name);
+            ps.setString(8, recipe.tech);
             ps.executeUpdate();
             ps.close();
             return true;

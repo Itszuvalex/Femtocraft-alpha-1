@@ -37,15 +37,19 @@ public class AssemblerRecipe implements Comparable, ISaveable {
     public Integer mass;
     public ItemStack output;
     public EnumTechLevel enumTechLevel;
-    public ResearchTechnology tech;
+    public String tech;
 
     public AssemblerRecipe(ItemStack[] input, Integer mass, ItemStack output,
                            EnumTechLevel enumTechLevel, ResearchTechnology tech) {
+        this(input, mass, output, enumTechLevel, tech.name);
+    }
+
+    public AssemblerRecipe(ItemStack[] input, Integer mass, ItemStack output, EnumTechLevel enumTechLevel, String techName) {
         this.input = input;
         this.mass = mass;
         this.output = output;
         this.enumTechLevel = enumTechLevel;
-        this.tech = tech;
+        this.tech = techName;
     }
 
     /**
@@ -115,7 +119,7 @@ public class AssemblerRecipe implements Comparable, ISaveable {
 
         // ResearchTechnology
         if (tech != null) {
-            compound.setString("researchTechnology", tech.name);
+            compound.setString("researchTechnology", tech);
         }
     }
 
@@ -153,8 +157,8 @@ public class AssemblerRecipe implements Comparable, ISaveable {
 
         // ResearchTechnology
         if (compound.hasKey("researchTechnology")) {
-            tech = Femtocraft.researchManager.getTechnology(compound
-                    .getString("researchTechnology"));
+            tech = compound
+                    .getString("researchTechnology");
         }
     }
 }

@@ -545,7 +545,7 @@ public class ManagerAssemblerRecipe {
                         new ItemStack(Femtocraft.itemMicroCrystal, 8),
                         new ItemStack(Femtocraft.itemIonicChunk, 8),
                         new ItemStack(Femtocraft.itemMicroCrystal, 8)}, 1,
-                        new ItemStack(Item.diamond), EnumTechLevel.MICRO, null
+                        new ItemStack(Item.diamond), EnumTechLevel.MICRO, ManagerResearch.technologyBasicChemistry
                 ));
             }
             if (configRegisterRecipe("IronIngot")) {
