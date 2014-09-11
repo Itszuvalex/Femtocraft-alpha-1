@@ -22,8 +22,8 @@
 package com.itszuvalex.femtocraft.industry.items;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs;
 import com.itszuvalex.femtocraft.api.IAssemblerSchematic;
+import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
@@ -55,7 +55,11 @@ import java.util.Random;
 public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
     public static final int INFINITE_USE_DAMAGE = -1;
     public static Icon placeholderIcon;
-    public static float infiniteUseMassMultiplier = FemtocraftConfigs.schematicInfiniteUseMultiplier;
+
+    @Configurable(comment = "How many uses does an infinite use schematic count for when calculating mass costs? (This is a float to allow finer tuning - it will be cast to integer where it matters.")
+    public static float infiniteUseMassMultiplier = 200;
+
+    @SideOnly(value = Side.CLIENT)
     public Icon keyedIcon;
 
     public ItemAssemblySchematic(int itemID) {
