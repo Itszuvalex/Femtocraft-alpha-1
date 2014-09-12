@@ -22,6 +22,7 @@
 package com.itszuvalex.femtocraft.managers.research;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.research.gui.GuiResearch;
 import com.itszuvalex.femtocraft.research.gui.GuiTechnology;
 import com.itszuvalex.femtocraft.research.gui.technology.GuiTechnologyDefault;
@@ -34,17 +35,27 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 
 public class ResearchTechnology {
+    @Configurable(comment = "Name of technology.")
     public String name;
+    @Configurable(comment = "Displayed when moused over in Research Tree")
     public String description;
+    @Configurable(comment = "Tech level of Research.  Changes color of lines rendered to this tech in Research Tree")
     public EnumTechLevel level;
+    @Configurable(comment = "Names of all prerequisite technologies.")
     public ArrayList<ResearchTechnology> prerequisites;
 
+    @Configurable(comment = "What item stack is the icon for this technology.")
     public ItemStack displayItem;
     public int xDisplay;
     public int yDisplay;
+    @Configurable(comment = "True if special background in Research Tree, false if normal")
     public boolean isKeystone;
+    @Configurable(comment = "Null for free research, ItemStack[9] (can contain nulls) as required items to put into " +
+                            "research console.")
     public ArrayList<ItemStack> researchMaterials;
 
+    @Configurable(comment = "ItemStack that replaces technology item when used.  This will only ever have a stack " +
+                            "size of 1.")
     public ItemStack discoverItem;
 
     public ResearchTechnology(String name, String description,
@@ -111,7 +122,7 @@ public class ResearchTechnology {
             Femtocraft.logger
                     .log(Level.SEVERE,
                             "Technologies must return a GuiTechnology class that supports the constructor" +
-                                    "(GuiResearch, ResearchTechnologyStatus)");
+                            "(GuiResearch, ResearchTechnologyStatus)");
             e.printStackTrace();
         } catch (SecurityException e) {
             e.printStackTrace();

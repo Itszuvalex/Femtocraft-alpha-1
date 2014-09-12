@@ -22,6 +22,7 @@
 package com.itszuvalex.femtocraft.managers.dimensional;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
@@ -35,16 +36,25 @@ import net.minecraft.nbt.NBTTagCompound;
  */
 public class DimensionalRecipe implements Comparable, ISaveable {
     @FemtocraftDataUtils.Saveable
+    @Configurable(comment = "ItemStack that is consumed to use this recipe.")
     public ItemStack input;
     @FemtocraftDataUtils.Saveable
+    @Configurable(comment = "Null, ItemStack[4] or ItemStack[12] (can include nulls) that dictate configuration items" +
+                            " required to induce creation. Note, ItemStack[4] is associated with Nano level Enmesher," +
+                            " ItemStack[12] is associated with Femto.")
     public ItemStack[] configurators;
     @FemtocraftDataUtils.Saveable
+    @Configurable(comment = "ItemStack that is the result of this recipe.")
     public ItemStack output;
     @FemtocraftDataUtils.Saveable
+    @Configurable(comment = "Ticks required to craft.")
     public int ticks;
     @FemtocraftDataUtils.Saveable
+    @Configurable(comment = "TechLevel of this recipe.")
     public EnumTechLevel techLevel;
     @FemtocraftDataUtils.Saveable
+    @Configurable(comment = "Null or name of Technology that must be researched before a player can utilize this " +
+                            "recipe.")
     public String tech;
 
     public DimensionalRecipe(ItemStack input, ItemStack[] configurators,
