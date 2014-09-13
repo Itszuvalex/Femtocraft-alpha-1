@@ -188,7 +188,7 @@ public class ManagerResearch {
     private void addKnownTechnologies(ResearchPlayer rp) {
         for (ResearchTechnology t : technologies.values()) {
             if (!rp.hasDiscoveredTechnology(t)) {
-                if (t.prerequisites != null && !t.prerequisites.isEmpty()) {
+                if (t.prerequisites != null && t.prerequisites.length > 0) {
                     boolean shouldDiscover = true;
                     for (String pre : t.prerequisites) {
                         if (!shouldDiscover) continue;
@@ -199,7 +199,8 @@ public class ManagerResearch {
                     if (shouldDiscover && rp.canDiscoverTechnology(t)) {
                         rp.discoverTechnology(t.name);
                     }
-                } else {
+                }
+                else {
                     rp.researchTechnology(t.name, true);
                 }
             }
@@ -318,7 +319,7 @@ public class ManagerResearch {
                 } catch (Exception exception) {
                     Femtocraft.logger.log(Level.SEVERE,
                             "Failed to save data for player " + pdata.username
-                            + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
+                                    + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
                     );
                     exception.printStackTrace();
                     continue;
@@ -327,8 +328,8 @@ public class ManagerResearch {
 
         } catch (Exception e) {
             Femtocraft.logger.log(Level.SEVERE, "Failed to create folder "
-                                                + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator +
-                                                DIRECTORY + ".");
+                    + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator +
+                    DIRECTORY + ".");
             e.printStackTrace();
             return false;
         }
@@ -351,8 +352,8 @@ public class ManagerResearch {
             File folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), DIRECTORY);
             if (!folder.exists()) {
                 Femtocraft.logger.log(Level.WARNING, "No " + DIRECTORY
-                                                     + " folder found for world - " +
-                                                     FemtocraftFileUtils.savePathFemtocraft(world) + ".");
+                        + " folder found for world - " +
+                        FemtocraftFileUtils.savePathFemtocraft(world) + ".");
                 return false;
             }
 
@@ -382,7 +383,7 @@ public class ManagerResearch {
                 } catch (Exception e) {
                     Femtocraft.logger.log(Level.SEVERE,
                             "Failed to load data from file " + pdata.getName()
-                            + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
+                                    + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
                     );
                     e.printStackTrace();
                 }
@@ -391,7 +392,7 @@ public class ManagerResearch {
         } catch (Exception exception) {
             Femtocraft.logger.log(Level.SEVERE,
                     "Failed to load data from folder " + DIRECTORY
-                    + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
+                            + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
             );
             exception.printStackTrace();
             return false;

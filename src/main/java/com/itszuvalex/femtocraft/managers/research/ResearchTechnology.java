@@ -31,7 +31,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.ItemStack;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 
 public class ResearchTechnology {
@@ -42,7 +43,7 @@ public class ResearchTechnology {
     @Configurable(comment = "Tech level of Research.  Changes color of lines rendered to this tech in Research Tree")
     public EnumTechLevel level;
     @Configurable(comment = "Names of all prerequisite technologies.")
-    public ArrayList<String> prerequisites;
+    public String[] prerequisites;
 
     @Configurable(comment = "What item stack is the icon for this technology.")
     public ItemStack displayItem;
@@ -51,36 +52,36 @@ public class ResearchTechnology {
     @Configurable(comment = "True if special background in Research Tree, false if normal")
     public boolean isKeystone;
     @Configurable(comment = "Null for free research, ItemStack[9] (can contain nulls) as required items to put into " +
-                            "research console.")
-    public ArrayList<ItemStack> researchMaterials;
+            "research console.")
+    public ItemStack[] researchMaterials;
 
     @Configurable(comment = "ItemStack that replaces technology item when used.  This will only ever have a stack " +
-                            "size of 1.")
+            "size of 1.")
     public ItemStack discoverItem;
 
     public ResearchTechnology(String name, String description,
-                              EnumTechLevel level, ArrayList<String> prerequisites,
+                              EnumTechLevel level, String[] prerequisites,
                               ItemStack displayItem,
-                              boolean isKeystone, ArrayList<ItemStack> researchMaterials) {
+                              boolean isKeystone, ItemStack[] researchMaterials) {
         this(name, description, level, prerequisites, displayItem,
                 isKeystone, researchMaterials,
                 null);
     }
 
     public ResearchTechnology(String name, String description,
-                              EnumTechLevel level, ArrayList<String> prerequisites,
+                              EnumTechLevel level, String[] prereq,
                               ItemStack displayItem,
-                              boolean isKeystone, ArrayList<ItemStack> researchMaterials,
+                              boolean isKeystone, ItemStack[] resMats,
                               ItemStack discoverItem) {
         this.name = name;
         this.description = description;
         this.level = level;
-        this.prerequisites = prerequisites;
+        this.prerequisites = prereq == null ? new String[0] : prereq;
         this.displayItem = displayItem;
         this.xDisplay = 0;
         this.yDisplay = 0;
         this.isKeystone = isKeystone;
-        this.researchMaterials = researchMaterials;
+        this.researchMaterials = resMats == null ? new ItemStack[0] : resMats;
         this.discoverItem = discoverItem;
     }
 
@@ -90,21 +91,37 @@ public class ResearchTechnology {
     }
 
     public boolean addPrerequisite(ResearchTechnology prereq) {
-        return prerequisites.add(prereq.name);
+        return addPrerequisite(prereq.name);
     }
 
     public boolean addPrerequisite(String prereq) {
-        return prerequisites.add(prereq);
+        prerequisites = Arrays.copyOf(prerequisites, prerequisites.length + 1);
+        prerequisites[prerequisites.length - 1] = prereq;
+        return true;
     }
 
     public boolean removePrerequisite(ResearchTechnology prereq) {
-        return prerequisites.remove(prereq);
+        return removePrerequisite(prereq.name);
+    }
+
+    public boolean removePrerequisite(String name) {
+        if (!hasPrerequisite(name)) return false;
+        List prereqs = Arrays.asList(prerequisites);
+        boolean ret = prereqs.remove(name);
+        if (ret) {
+            prerequisites = (String[]) prereqs.toArray(new String[prereqs.size()]);
+        }
+        return ret;
     }
 
     // --------------------------------------------------
 
     public boolean hasPrerequisite(ResearchTechnology prereq) {
-        return prerequisites.contains(prereq);
+        return hasPrerequisite(prereq.name);
+    }
+
+    public boolean hasPrerequisite(String prereq) {
+        return Arrays.asList(prerequisites).contains(prereq);
     }
 
     @SideOnly(value = Side.CLIENT)
@@ -126,7 +143,7 @@ public class ResearchTechnology {
             Femtocraft.logger
                     .log(Level.SEVERE,
                             "Technologies must return a GuiTechnology class that supports the constructor" +
-                            "(GuiResearch, ResearchTechnologyStatus)");
+                                    "(GuiResearch, ResearchTechnologyStatus)");
             e.printStackTrace();
         } catch (SecurityException e) {
             e.printStackTrace();

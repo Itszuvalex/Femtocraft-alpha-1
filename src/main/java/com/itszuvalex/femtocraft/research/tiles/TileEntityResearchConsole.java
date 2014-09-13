@@ -191,8 +191,8 @@ public class TileEntityResearchConsole extends TileEntityBase implements
         if (tech.researchMaterials == null) {
             return false;
         }
-        for (int i = 0; i < 9 && i < tech.researchMaterials.size(); ++i) {
-            if (!compareItemStack(tech.researchMaterials.get(i), inventory[i])) {
+        for (int i = 0; i < 9 && i < tech.researchMaterials.length; ++i) {
+            if (!compareItemStack(tech.researchMaterials[i], inventory[i])) {
                 return false;
             }
         }
@@ -261,11 +261,11 @@ public class TileEntityResearchConsole extends TileEntityBase implements
         ResearchTechnology tech = Femtocraft.researchManager
                 .getTechnology(displayTech);
 
-        for (int i = 0; i < 9 && i < tech.researchMaterials.size(); ++i) {
-            if (tech.researchMaterials.get(i) == null) {
+        for (int i = 0; i < 9 && i < tech.researchMaterials.length; ++i) {
+            if (tech.researchMaterials[i] == null) {
                 continue;
             }
-            decrStackSize(i, tech.researchMaterials.get(i).stackSize);
+            decrStackSize(i, tech.researchMaterials[i].stackSize);
         }
 
         this.onInventoryChanged();

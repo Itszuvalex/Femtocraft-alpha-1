@@ -27,6 +27,7 @@ import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.logging.Level;
@@ -74,14 +75,14 @@ public class FemtocraftConfigHelper {
             if (!field.isAccessible()) field.setAccessible(true);
             Configurable canno = field.getAnnotation(Configurable.class);
             if (canno != null) {
-                IFieldLoader loader = loaderMap.get(field.getType());
+                FieldLoader loader = loaderMap.get(field.getType());
                 if (loader != null) {
                     try {
                         loader.load(field, section + Configuration.CATEGORY_SPLITTER + key, canno, obj, configuration);
                     } catch (Exception e) {
                         Femtocraft.logger.log(Level.SEVERE,
                                 "Error loading @Configurable field " + field.getName() + " in class " +
-                                clazz.getName() + ".");
+                                        clazz.getName() + ".");
                         e.printStackTrace();
                     }
                 }
@@ -93,12 +94,14 @@ public class FemtocraftConfigHelper {
     }
 
 
-    private static interface IFieldLoader {
-        void load(Field field, String section, Configurable anno, Object obj, Configuration config)
+    private static abstract class FieldLoader<T> {
+        abstract void load(Field field, String section, Configurable anno, Object obj, Configuration config)
                 throws IllegalAccessException;
+
+        abstract T getValue(String key, T def, String section, Configurable anno, Configuration config);
     }
 
-    private static Map<Class, IFieldLoader> loaderMap = new HashMap<Class, IFieldLoader>();
+    private static Map<Class, FieldLoader> loaderMap = new HashMap<Class, FieldLoader>();
 
     public static void init() {
         registerConfigLoaders();
@@ -110,106 +113,196 @@ public class FemtocraftConfigHelper {
     }
 
     private static void registerConfigLoaders() {
-        loaderMap.put(int.class, new IFieldLoader() {
+        loaderMap.put(int.class, new FieldLoader<Integer>() {
             @Override
-            public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
+            void load(Field field, String section, Configurable anno, Object obj, Configuration config)
                     throws IllegalAccessException {
-                field.setInt(obj, config.get(section, field.getName(), field.getInt(obj), anno.comment()).getInt());
+                field.setInt(obj, getValue(field.getName(), field.getInt(obj), section, anno, config));
+            }
+
+            @Override
+            Integer getValue(String key, Integer def, String section, Configurable anno, Configuration config) {
+                return config.get(section, key, def, anno.comment()).getInt();
             }
         });
-        loaderMap.put(int[].class, new IFieldLoader() {
+        loaderMap.put(int[].class, new FieldLoader() {
             @Override
             public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
                     throws IllegalAccessException {
-                field.set(obj, config.get(section, field.getName(), (int[]) field.get(obj),
-                        anno.comment()).getIntList());
+                field.set(obj, getValue(field.getName(), field.get(obj), section, anno, config));
+            }
+
+            @Override
+            Object getValue(String key, Object def, String section, Configurable anno, Configuration config) {
+                return config.get(section, key, (int[]) def,
+                        anno.comment()).getIntList();
             }
         });
-        loaderMap.put(String.class, new IFieldLoader() {
+        loaderMap.put(String.class, new FieldLoader<String>() {
             @Override
             public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
                     throws IllegalAccessException {
-                field.set(obj, config.get(section, field.getName(), (String) field.get(obj),
+                field.set(obj, getValue(field.getName(), (String) field.get(obj), section, anno, config));
+            }
+
+            @Override
+            String getValue(String key, String def, String section, Configurable anno, Configuration config) {
+                return config.get(section, key, def,
+                        anno.comment()).getString();
+            }
+        });
+        loaderMap.put(String[].class, new FieldLoader<String[]>() {
+            @Override
+            public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
+                    throws IllegalAccessException {
+                field.set(obj, getValue(field.getName(), (String[]) field.get(obj), section, anno, config));
+            }
+
+            @Override
+            String[] getValue(String key, String[] def, String section, Configurable anno, Configuration config) {
+                return config.get(section, key, def,
+                        anno.comment()).getStringList();
+            }
+        });
+        loaderMap.put(boolean.class, new FieldLoader<Boolean>() {
+            @Override
+            public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
+                    throws IllegalAccessException {
+                field.setBoolean(obj, getValue(field.getName(), field.getBoolean(obj), section, anno, config));
+            }
+
+            @Override
+            Boolean getValue(String key, Boolean def, String section, Configurable anno, Configuration config) {
+                return config.get(section, key, def,
+                        anno.comment()).getBoolean(def);
+            }
+        });
+        loaderMap.put(boolean[].class, new FieldLoader() {
+            @Override
+            public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
+                    throws IllegalAccessException {
+                field.set(obj, getValue(field.getName(), field.get(obj), section, anno, config));
+            }
+
+            @Override
+            Object getValue(String key, Object def, String section, Configurable anno, Configuration config) {
+                return config.get(section, key, (boolean[]) def,
+                        anno.comment()).getBooleanList();
+            }
+        });
+        loaderMap.put(double.class, new FieldLoader<Double>() {
+            @Override
+            public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
+                    throws IllegalAccessException {
+                field.setDouble(obj, getValue(field.getName(), field.getDouble(obj), section, anno, config));
+            }
+
+            @Override
+            Double getValue(String key, Double def, String section, Configurable anno, Configuration config) {
+                return config.get(section, key, def,
+                        anno.comment()).getDouble(def);
+            }
+        });
+        loaderMap.put(double[].class, new FieldLoader() {
+            @Override
+            public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
+                    throws IllegalAccessException {
+                field.set(obj, getValue(field.getName(), field.get(obj), section, anno, config));
+            }
+
+            @Override
+            Object getValue(String key, Object def, String section, Configurable anno, Configuration config) {
+                return config.get(section, key, (double[]) def,
+                        anno.comment()).getDoubleList();
+            }
+        });
+        loaderMap.put(float.class, new FieldLoader<Float>() {
+            @Override
+            public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
+                    throws IllegalAccessException {
+                field.setFloat(obj, getValue(field.getName(), field.getFloat(obj), section, anno, config));
+            }
+
+            @Override
+            Float getValue(String key, Float def, String section, Configurable anno, Configuration config) {
+                return (float) config.get(section, key, def,
+                        anno.comment()).getDouble(def);
+            }
+        });
+        loaderMap.put(EnumTechLevel.class, new FieldLoader<EnumTechLevel>() {
+            @Override
+            public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
+                    throws IllegalAccessException {
+                field.set(obj, getValue(field.getName(), (EnumTechLevel) field.get(obj), section, anno, config));
+            }
+
+            @Override
+            EnumTechLevel getValue(String key, EnumTechLevel def, String section, Configurable anno, Configuration config) {
+                return EnumTechLevel.getTech(config.get(section, key,
+                        def.key,
                         anno.comment()).getString());
             }
         });
-        loaderMap.put(String[].class, new IFieldLoader() {
+        loaderMap.put(ArrayList.class, new FieldLoader<ArrayList>() {
             @Override
             public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
                     throws IllegalAccessException {
-                field.set(obj, config.get(section, field.getName(), (String[]) field.get(obj),
-                        anno.comment()).getStringList());
+                ConfigArrayList carray = field.getAnnotation(ConfigArrayList.class);
+                if (carray != null) {
+                    FieldLoader loader = loaderMap.get(carray.arrayType());
+                    if (loader != null) {
+                        ArrayList arrayList = (ArrayList) field.get(obj);
+                        int arrayListSize = arrayList == null ? 0 : arrayList.size();
+                        Class component = carray.arrayType().getComponentType();
+                        Object array = Array.newInstance(component, arrayListSize);
+                        for (int i = 0; i < arrayListSize; ++i) {
+                            Object ao = arrayList.get(i);
+                            Object in = component.cast(ao);
+                            Array.set(array, i, in);
+                        }
+                        Object res = loader.getValue(field.getName(), array, section, anno, config);
+                        field.set(obj, res == null ? new ArrayList() : new ArrayList(Arrays.asList(res)));
+                    }
+                }
+            }
+
+            @Override
+            ArrayList getValue(String key, ArrayList def, String section, Configurable anno, Configuration config) {
+                return null;
             }
         });
-        loaderMap.put(boolean.class, new IFieldLoader() {
+        loaderMap.put(ItemStack.class, new FieldLoader<ItemStack>() {
             @Override
             public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
                     throws IllegalAccessException {
-                field.setBoolean(obj, config.get(section, field.getName(), field.getBoolean(obj),
-                        anno.comment()).getBoolean(field.getBoolean(obj)));
+                field.set(obj, getValue(field.getName(), (ItemStack) field.get(obj), section, anno, config));
+            }
+
+            @Override
+            ItemStack getValue(String key, ItemStack def, String section, Configurable anno, Configuration config) {
+                return itemStackFromString(config.get(section, key,
+                        itemStackToString(def),
+                        anno.comment()).getString());
             }
         });
-        loaderMap.put(boolean[].class, new IFieldLoader() {
+        loaderMap.put(ItemStack[].class, new FieldLoader<ItemStack[]>() {
             @Override
-            public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
-                    throws IllegalAccessException {
-                field.set(obj, config.get(section, field.getName(), (boolean[]) field.get(obj),
-                        anno.comment()).getBooleanList());
+            public void load(Field field, String section, Configurable anno, Object obj, Configuration config) throws IllegalAccessException {
+                field.set(obj, getValue(field.getName(), (ItemStack[]) field.get(obj), section, anno, config));
             }
-        });
-        loaderMap.put(double.class, new IFieldLoader() {
+
             @Override
-            public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
-                    throws IllegalAccessException {
-                field.setDouble(obj, config.get(section, field.getName(), field.getDouble(obj),
-                        anno.comment()).getDouble(field.getDouble(obj)));
-            }
-        });
-        loaderMap.put(double[].class, new IFieldLoader() {
-            @Override
-            public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
-                    throws IllegalAccessException {
-                field.set(obj, config.get(section, field.getName(), (double[]) field.get(obj),
-                        anno.comment()).getDoubleList());
-            }
-        });
-        loaderMap.put(float.class, new IFieldLoader() {
-            @Override
-            public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
-                    throws IllegalAccessException {
-                field.setFloat(obj, (float) config.get(section, field.getName(), (double) field.getFloat(obj),
-                        anno.comment()).getDouble((double) field.getFloat(obj)));
-            }
-        });
-        loaderMap.put(EnumTechLevel.class, new IFieldLoader() {
-            @Override
-            public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
-                    throws IllegalAccessException {
-                field.set(obj, EnumTechLevel.getTech(config.get(section, field.getName(),
-                        ((EnumTechLevel) field.get(obj)).key,
-                        anno.comment()).getString()));
-            }
-        });
-        loaderMap.put(ArrayList.class, new IFieldLoader() {
-            @Override
-            public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
-                    throws IllegalAccessException {
-                ArrayList<String> arrayList = ((ArrayList<String>) field.get(obj));
-                String[] array = config.get(section, field.getName(),
-                        arrayList == null ? new String[0] : arrayList.toArray(new
-                                String[arrayList.size()]),
-                        anno.comment()).getStringList();
-                field.set(obj, array ==
-                               null ? new ArrayList<String>() : new ArrayList<String>(Arrays.asList(array)));
-            }
-        });
-        loaderMap.put(ItemStack.class, new IFieldLoader() {
-            @Override
-            public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
-                    throws IllegalAccessException {
-                field.set(obj, itemStackFromString(config.get(section, field.getName(),
-                        itemStackToString((ItemStack) field.get(obj)),
-                        anno.comment()).getString()));
+            ItemStack[] getValue(String key, ItemStack[] def, String section, Configurable anno, Configuration config) {
+                String[] defsar = def == null ? new String[0] : new String[def.length];
+                for (int i = 0; i < def.length; ++i) {
+                    defsar[i] = itemStackToString(def[i]);
+                }
+                String[] sar = config.get(section, key, defsar, anno.comment()).getStringList();
+                ItemStack[] ret = sar == null ? new ItemStack[0] : new ItemStack[sar.length];
+                for (int i = 0; i < sar.length; ++i) {
+                    ret[i] = itemStackFromString(sar[i]);
+                }
+                return ret;
             }
         });
     }
@@ -218,14 +311,8 @@ public class FemtocraftConfigHelper {
     public static ItemStack itemStackFromString(String s) {
         if (s == null || s.isEmpty()) return null;
         s = s.trim();
-        if (s.charAt(0) == '(') {
-            s = s.substring(1);
-        }
-        if (s.charAt(s.length() - 1) == ')') {
-            s = s.substring(0, s.length() - 2);
-        }
         try {
-            String[] idDamage_stack = s.split(",");
+            String[] idDamage_stack = s.split("-");
             String[] id_damage = idDamage_stack[0].split(":");
             int id = Integer.parseInt(id_damage[0]);
             int damage = Integer.parseInt(id_damage[1]);
@@ -237,6 +324,6 @@ public class FemtocraftConfigHelper {
     }
 
     public static String itemStackToString(ItemStack s) {
-        return s == null ? "" : "(" + s.itemID + ":" + s.getItemDamage() + ", " + s.stackSize + ')';
+        return s == null ? "" : s.itemID + ":" + s.getItemDamage() + "- " + s.stackSize;
     }
 }
