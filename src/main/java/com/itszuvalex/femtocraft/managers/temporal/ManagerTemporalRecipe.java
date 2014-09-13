@@ -43,15 +43,16 @@ public class ManagerTemporalRecipe {
     public ManagerTemporalRecipe() {
         recipesToOutput = new TreeMap<TemporalKey, TemporalRecipe>();
         outputToRecipes = new TreeMap<ItemStack, TemporalRecipe>(new ComparatorItemStack());
-        addRecipes();
     }
+
+    public void init() {addRecipes();}
 
     private void addRecipes() {
         addRecipe(new TemporalRecipe(new ItemStack(Femtocraft.itemSelfFulfillingOracle),
                 new ItemStack[]{new ItemStack(Femtocraft.itemTemporalResonator),
                         new ItemStack(Femtocraft.itemSchedulerCore), new ItemStack(Item.pocketSundial)},
                 new ItemStack(Femtocraft.itemInfallibleEstimator), 200, EnumTechLevel.NANO,
-                ManagerResearch.technologyTemporalPipelining));
+                ManagerResearch.TEMPORAL_PIPELINING));
         addRecipe(new TemporalRecipe(new ItemStack(Femtocraft.itemInfallibleEstimator),
                 new ItemStack[]{new ItemStack(Femtocraft.itemInfallibleEstimator),
                         new ItemStack(Femtocraft.itemOrpheusProcessor),
@@ -60,7 +61,7 @@ public class ManagerTemporalRecipe {
                         new ItemStack(Femtocraft.itemOrpheusProcessor),
                         new ItemStack(Femtocraft.itemPanLocationalComputer)},
                 new ItemStack(Femtocraft.itemInfinitelyRecursiveALU), 800, EnumTechLevel.FEMTO,
-                ManagerResearch.technologyTemporalThreading));
+                ManagerResearch.TEMPORAL_THREADING));
 
     }
 

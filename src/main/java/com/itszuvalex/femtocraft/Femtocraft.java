@@ -355,6 +355,12 @@ public class Femtocraft {
         logger = Logger.getLogger(ID);
         logger.setParent(FMLLog.getLogger());
 
+        recipeManager = new ManagerRecipe();
+        researchManager = new ManagerResearch();
+        assistantManager = new ManagerAssistant();
+
+        femtocraftServerCommand = new CommandFemtocraft();
+
         Configuration config = new Configuration(
                 event.getSuggestedConfigurationFile());
         FemtocraftConfigs.load(config);
@@ -1293,11 +1299,8 @@ public class Femtocraft {
         // GameRegistry.addRecipe(new ItemStack(itemId), new Object[] {});
         // EntityRegistry.registerModEntity(entity.class, "myEntity", 0, this,
         // 32, 10, true)
-        recipeManager = new ManagerRecipe();
-        researchManager = new ManagerResearch();
-        assistantManager = new ManagerAssistant();
 
-        femtocraftServerCommand = new CommandFemtocraft();
+        recipeManager.init();
     }
 
     @EventHandler

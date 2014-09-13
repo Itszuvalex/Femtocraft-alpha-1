@@ -58,8 +58,8 @@ public class TechnologyGraph extends MapGraph<String> {
             if (tech.prerequisites == null) {
                 continue;
             }
-            for (ResearchTechnology prerequisite : tech.prerequisites) {
-                IGraphNode parent = nodes.get(prerequisite.name);
+            for (String prerequisite : tech.prerequisites) {
+                IGraphNode parent = nodes.get(prerequisite);
                 if (parent == null) {
                     continue;
                 }
@@ -79,7 +79,7 @@ public class TechnologyGraph extends MapGraph<String> {
     public void computePlacements() {
         super.computePlacements();
         GuiResearch.setSize(greatestWidth() * X_PADDING, greatestHeight()
-                * Y_PADDING);
+                                                         * Y_PADDING);
     }
 
     @Override

@@ -113,7 +113,8 @@ public class ResearchPlayer {
 
                 boolean discovererPrereq = false;
                 boolean shouldDiscover = true;
-                for (ResearchTechnology pt : t.prerequisites) {
+                for (String st : t.prerequisites) {
+                    ResearchTechnology pt = Femtocraft.researchManager.getTechnology(st);
                     if (pt == discoverer && discoverer == null) {
                         discovererPrereq = true;
                     }
@@ -176,7 +177,9 @@ public class ResearchPlayer {
             return true;
         }
 
-        for (ResearchTechnology prereq : tech.prerequisites) {
+        for (String str : tech.prerequisites) {
+            ResearchTechnology prereq = Femtocraft.researchManager.getTechnology(str);
+            if (prereq == null) continue;
             ResearchTechnologyStatus ts = techStatus.get(prereq.name);
             if (ts == null) {
                 return false;

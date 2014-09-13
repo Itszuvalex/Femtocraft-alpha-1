@@ -116,10 +116,10 @@ public class GuiResearch extends GuiScreen {
         short short1 = 141;
         short short2 = 141;
         this.field_74117_m = this.guiMapX = this.field_74124_q = (double) (
-                (Femtocraft.researchManager.technologyBasicChemistry.xDisplay - 1)
-                * 24 - short1 / 2 - 12);
+                0 - 1)
+                                                                 * 24 - short1 / 2 - 12;
         this.field_74115_n = this.guiMapY = this.field_74123_r = (double) (
-                Femtocraft.researchManager.technologyBasicChemistry.yDisplay * 24 - short2 / 2);
+                0 * 24 - short2 / 2);
     }
 
     public static void setSize(int rows, int columns) {
@@ -420,7 +420,7 @@ public class GuiResearch extends GuiScreen {
                 continue;
             }
             if (tech.prerequisites != null) {
-                for (ResearchTechnology pr : tech.prerequisites) {
+                for (String cr : tech.prerequisites) {
                     TechNode node = Femtocraft.researchManager.getNode(tech);
 
                     for (IGraphNode parent : node.getParents()) {

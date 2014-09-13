@@ -44,7 +44,6 @@ public class ManagerDimensionalRecipe {
     public ManagerDimensionalRecipe() {
         recipesToOutput = new TreeMap<DimensionalKey, DimensionalRecipe>();
         outputToRecipes = new TreeMap<ItemStack, DimensionalRecipe>(new ComparatorItemStack());
-        addRecipes();
     }
 
     private void addRecipes() {
@@ -53,11 +52,11 @@ public class ManagerDimensionalRecipe {
                         new ItemStack(Femtocraft.itemCrossDimensionalCommunicator),
                         new ItemStack(Femtocraft.itemDimensionalMonopole)},
                 new ItemStack(Femtocraft.itemPanLocationalComputer), 400, EnumTechLevel.NANO,
-                ManagerResearch.technologyDimensionalBraiding));
+                ManagerResearch.DIMENSIONAL_BRAIDING));
         addRecipe(new DimensionalRecipe(new ItemStack(Block.chest), new ItemStack[]{new ItemStack(Femtocraft
                 .itemPanLocationalComputer), new ItemStack(Item.enderPearl), new ItemStack(Item.enderPearl),
                 new ItemStack(Femtocraft.itemDimensionalMonopole)}, new ItemStack(Femtocraft.itemPandoraCube), 400,
-                EnumTechLevel.NANO, ManagerResearch.technologyLocalityEntangler));
+                EnumTechLevel.NANO, ManagerResearch.LOCALITY_ENTANGLER));
         addRecipe(new DimensionalRecipe(new ItemStack(Femtocraft.itemPandoraCube),
                 new ItemStack[]{new ItemStack(Femtocraft.itemHerculesDrive),
                         new ItemStack(Femtocraft.itemPanLocationalComputer),
@@ -69,7 +68,7 @@ public class ManagerDimensionalRecipe {
                         new ItemStack(Femtocraft.itemInfallibleEstimator),
                         new ItemStack(Femtocraft.itemHerculesDrive)},
                 new ItemStack(Femtocraft.itemInfiniteVolumePolychora), 400, EnumTechLevel.FEMTO,
-                ManagerResearch.technologyDimensionalSuperpositions));
+                ManagerResearch.DIMENSIONAL_SUPERPOSITIONS));
     }
 
     public DimensionalRecipe getRecipe(ItemStack input, ItemStack[] configurators) {
@@ -106,6 +105,10 @@ public class ManagerDimensionalRecipe {
         recipesToOutput.put(getDimensionalKey(recipe.input, recipe.configurators),
                 recipe);
         outputToRecipes.put(recipe.output, recipe);
+    }
+
+    public void init() {
+        addRecipes();
     }
 
     private class DimensionalKey implements Comparable {

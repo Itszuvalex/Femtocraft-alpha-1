@@ -42,6 +42,11 @@ public class ManagerRecipe {
             ManagerDimensionalRecipe();
 
     public ManagerRecipe() {
+    }
+
+    public void init() {
+        temporalRecipes.init();
+        dimensionalRecipes.init();
         registerRecipes();
         FissionReactorRegistry.init();
         CryogenRegistry.init();

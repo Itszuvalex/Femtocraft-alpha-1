@@ -29,10 +29,7 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 
 /**
@@ -53,7 +50,7 @@ public class FemtocraftConfigHelper {
     public static void loadClassConstants(Configuration configuration) {
         for (Class clazz : configurableClasses) {
             loadClassFromConfig(configuration,
-                    CLASS_CONSTANTS_KEY + Configuration.CATEGORY_SPLITTER, clazz.getSimpleName(), clazz);
+                    CLASS_CONSTANTS_KEY, clazz.getSimpleName(), clazz);
         }
     }
 
@@ -64,6 +61,15 @@ public class FemtocraftConfigHelper {
     public static void loadClassInstanceFromConfig(Configuration configuration, String section, String key,
                                                    Class clazz, Object obj) {
         Field[] fields = clazz.getFields();
+        if (obj != null) {
+            ArrayList<Field> fieldsList = new ArrayList<Field>(Arrays.asList(fields));
+            Class superclass = clazz.getSuperclass();
+            while (superclass != null) {
+                fieldsList.addAll(Arrays.asList(clazz.getFields()));
+                superclass = superclass.getSuperclass();
+            }
+            fields = (Field[]) fieldsList.toArray();
+        }
         for (Field field : fields) {
             boolean accessible = field.isAccessible();
             if (!field.isAccessible()) field.setAccessible(true);
@@ -189,15 +195,48 @@ public class FemtocraftConfigHelper {
                         anno.comment()).getString()));
             }
         });
+        loaderMap.put(ArrayList.class, new IFieldLoader() {
+            @Override
+            public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
+                    throws IllegalAccessException {
+                Property prop = config.getCategory(section).get(field.getName());
+                prop.comment = anno.comment();
+                field.set(obj, new ArrayList<String>(Arrays.asList(prop.getStringList())));
+            }
+        });
         loaderMap.put(ItemStack.class, new IFieldLoader() {
             @Override
             public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
                     throws IllegalAccessException {
-                field.set(obj, EnumTechLevel.getTech(config.get(section, field.getName(),
-                        EnumTechLevel.valueOf((String) field.get(obj)).key,
+                field.set(obj, itemStackFromString(config.get(section, field.getName(),
+                        itemStackToString((ItemStack) field.get(obj)),
                         anno.comment()).getString()));
             }
         });
     }
 
+
+    public static ItemStack itemStackFromString(String s) {
+        s = s.trim();
+        if (s.charAt(0) == '(') {
+            s = s.substring(1);
+        }
+        if (s.charAt(s.length() - 1) == ')') {
+            s = s.substring(0, s.length() - 2);
+        }
+        try {
+            String[] idDamage_stack = s.split(",");
+            String[] id_damage = idDamage_stack[0].split(":");
+            int id = Integer.parseInt(id_damage[0]);
+            int damage = Integer.parseInt(id_damage[1]);
+            int stackSize = Integer.parseInt(idDamage_stack[1]);
+            return new ItemStack(id, stackSize, damage);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static String itemStackToString(ItemStack s) {
+        return "(" + s.itemID + ":" + s.getItemDamage() + ", " + s.stackSize + ')';
+    }
 }

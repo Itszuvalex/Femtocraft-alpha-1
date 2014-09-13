@@ -42,7 +42,7 @@ public class ResearchTechnology {
     @Configurable(comment = "Tech level of Research.  Changes color of lines rendered to this tech in Research Tree")
     public EnumTechLevel level;
     @Configurable(comment = "Names of all prerequisite technologies.")
-    public ArrayList<ResearchTechnology> prerequisites;
+    public ArrayList<String> prerequisites;
 
     @Configurable(comment = "What item stack is the icon for this technology.")
     public ItemStack displayItem;
@@ -59,7 +59,7 @@ public class ResearchTechnology {
     public ItemStack discoverItem;
 
     public ResearchTechnology(String name, String description,
-                              EnumTechLevel level, ArrayList<ResearchTechnology> prerequisites,
+                              EnumTechLevel level, ArrayList<String> prerequisites,
                               ItemStack displayItem,
                               boolean isKeystone, ArrayList<ItemStack> researchMaterials) {
         this(name, description, level, prerequisites, displayItem,
@@ -68,7 +68,7 @@ public class ResearchTechnology {
     }
 
     public ResearchTechnology(String name, String description,
-                              EnumTechLevel level, ArrayList<ResearchTechnology> prerequisites,
+                              EnumTechLevel level, ArrayList<String> prerequisites,
                               ItemStack displayItem,
                               boolean isKeystone, ArrayList<ItemStack> researchMaterials,
                               ItemStack discoverItem) {
@@ -90,6 +90,10 @@ public class ResearchTechnology {
     }
 
     public boolean addPrerequisite(ResearchTechnology prereq) {
+        return prerequisites.add(prereq.name);
+    }
+
+    public boolean addPrerequisite(String prereq) {
         return prerequisites.add(prereq);
     }
 
