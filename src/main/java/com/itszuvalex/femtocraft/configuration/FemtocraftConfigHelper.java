@@ -314,9 +314,9 @@ public class FemtocraftConfigHelper {
         try {
             String[] idDamage_stack = s.split("-");
             String[] id_damage = idDamage_stack[0].split(":");
-            int id = Integer.parseInt(id_damage[0]);
-            int damage = Integer.parseInt(id_damage[1]);
-            int stackSize = Integer.parseInt(idDamage_stack[1]);
+            int id = Integer.parseInt(id_damage[0].trim());
+            int damage = Integer.parseInt(id_damage[1].trim());
+            int stackSize = Integer.parseInt(idDamage_stack[1].trim());
             return new ItemStack(id, stackSize, damage);
         } catch (Exception e) {
             return null;
@@ -324,6 +324,6 @@ public class FemtocraftConfigHelper {
     }
 
     public static String itemStackToString(ItemStack s) {
-        return s == null ? "" : s.itemID + ":" + s.getItemDamage() + "- " + s.stackSize;
+        return s == null ? "" : s.itemID + ":" + s.getItemDamage() + "-" + s.stackSize;
     }
 }
