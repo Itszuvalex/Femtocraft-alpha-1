@@ -27,6 +27,7 @@ import com.itszuvalex.femtocraft.blocks.BlockNanoStone;
 import com.itszuvalex.femtocraft.blocks.BlockUnidentifiedAlloy;
 import com.itszuvalex.femtocraft.command.CommandBase;
 import com.itszuvalex.femtocraft.command.CommandFemtocraft;
+import com.itszuvalex.femtocraft.configuration.FemtocraftConfigTechnologyHelper;
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs;
 import com.itszuvalex.femtocraft.core.fluids.BlockFluidMass;
 import com.itszuvalex.femtocraft.core.fluids.FluidMass;
@@ -117,6 +118,8 @@ public class Femtocraft {
             "Femtocraft");
 
     public static Logger logger;
+
+    public static Configuration config;
 
     public static ManagerRecipe recipeManager;
     public static ManagerResearch researchManager;
@@ -361,7 +364,7 @@ public class Femtocraft {
 
         femtocraftServerCommand = new CommandFemtocraft();
 
-        Configuration config = new Configuration(
+        config = new Configuration(
                 event.getSuggestedConfigurationFile());
         FemtocraftConfigs.load(config);
 
@@ -1290,6 +1293,8 @@ public class Femtocraft {
                 FemtocraftConfigs.ItemMicroPlatingID, "ItemMicroPlating");
         LanguageRegistry.addName(itemMicroPlating, "Micro Plating");
         GameRegistry.registerItem(itemMicroPlating, "Micro Plating");
+
+        new FemtocraftConfigTechnologyHelper(config).loadTechnologies();
     }
 
     @EventHandler

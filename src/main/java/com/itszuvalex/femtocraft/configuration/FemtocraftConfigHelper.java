@@ -26,7 +26,6 @@ import com.itszuvalex.femtocraft.industry.items.ItemAssemblySchematic;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.Property;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -68,7 +67,7 @@ public class FemtocraftConfigHelper {
                 fieldsList.addAll(Arrays.asList(clazz.getFields()));
                 superclass = superclass.getSuperclass();
             }
-            fields = (Field[]) fieldsList.toArray();
+            fields = fieldsList.toArray(new Field[fieldsList.size()]);
         }
         for (Field field : fields) {
             boolean accessible = field.isAccessible();
@@ -79,7 +78,7 @@ public class FemtocraftConfigHelper {
                 if (loader != null) {
                     try {
                         loader.load(field, section + Configuration.CATEGORY_SPLITTER + key, canno, obj, configuration);
-                    } catch (IllegalAccessException e) {
+                    } catch (Exception e) {
                         Femtocraft.logger.log(Level.SEVERE,
                                 "Error loading @Configurable field " + field.getName() + " in class " +
                                 clazz.getName() + ".");
@@ -122,9 +121,8 @@ public class FemtocraftConfigHelper {
             @Override
             public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
                     throws IllegalAccessException {
-                Property prop = config.getCategory(section).get(field.getName());
-                prop.comment = anno.comment();
-                field.set(obj, prop.getIntList());
+                field.set(obj, config.get(section, field.getName(), (int[]) field.get(obj),
+                        anno.comment()).getIntList());
             }
         });
         loaderMap.put(String.class, new IFieldLoader() {
@@ -139,9 +137,8 @@ public class FemtocraftConfigHelper {
             @Override
             public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
                     throws IllegalAccessException {
-                Property prop = config.getCategory(section).get(field.getName());
-                prop.comment = anno.comment();
-                field.set(obj, prop.getStringList());
+                field.set(obj, config.get(section, field.getName(), (String[]) field.get(obj),
+                        anno.comment()).getStringList());
             }
         });
         loaderMap.put(boolean.class, new IFieldLoader() {
@@ -156,9 +153,8 @@ public class FemtocraftConfigHelper {
             @Override
             public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
                     throws IllegalAccessException {
-                Property prop = config.getCategory(section).get(field.getName());
-                prop.comment = anno.comment();
-                field.set(obj, prop.getBooleanList());
+                field.set(obj, config.get(section, field.getName(), (boolean[]) field.get(obj),
+                        anno.comment()).getBooleanList());
             }
         });
         loaderMap.put(double.class, new IFieldLoader() {
@@ -173,9 +169,8 @@ public class FemtocraftConfigHelper {
             @Override
             public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
                     throws IllegalAccessException {
-                Property prop = config.getCategory(section).get(field.getName());
-                prop.comment = anno.comment();
-                field.set(obj, prop.getDoubleList());
+                field.set(obj, config.get(section, field.getName(), (double[]) field.get(obj),
+                        anno.comment()).getDoubleList());
             }
         });
         loaderMap.put(float.class, new IFieldLoader() {
@@ -191,7 +186,7 @@ public class FemtocraftConfigHelper {
             public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
                     throws IllegalAccessException {
                 field.set(obj, EnumTechLevel.getTech(config.get(section, field.getName(),
-                        EnumTechLevel.valueOf((String) field.get(obj)).key,
+                        ((EnumTechLevel) field.get(obj)).key,
                         anno.comment()).getString()));
             }
         });
@@ -199,9 +194,13 @@ public class FemtocraftConfigHelper {
             @Override
             public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
                     throws IllegalAccessException {
-                Property prop = config.getCategory(section).get(field.getName());
-                prop.comment = anno.comment();
-                field.set(obj, new ArrayList<String>(Arrays.asList(prop.getStringList())));
+                ArrayList<String> arrayList = ((ArrayList<String>) field.get(obj));
+                String[] array = config.get(section, field.getName(),
+                        arrayList == null ? new String[0] : arrayList.toArray(new
+                                String[arrayList.size()]),
+                        anno.comment()).getStringList();
+                field.set(obj, array ==
+                               null ? new ArrayList<String>() : new ArrayList<String>(Arrays.asList(array)));
             }
         });
         loaderMap.put(ItemStack.class, new IFieldLoader() {
@@ -217,6 +216,7 @@ public class FemtocraftConfigHelper {
 
 
     public static ItemStack itemStackFromString(String s) {
+        if (s == null || s.isEmpty()) return null;
         s = s.trim();
         if (s.charAt(0) == '(') {
             s = s.substring(1);
@@ -237,6 +237,6 @@ public class FemtocraftConfigHelper {
     }
 
     public static String itemStackToString(ItemStack s) {
-        return "(" + s.itemID + ":" + s.getItemDamage() + ", " + s.stackSize + ')';
+        return s == null ? "" : "(" + s.itemID + ":" + s.getItemDamage() + ", " + s.stackSize + ')';
     }
 }

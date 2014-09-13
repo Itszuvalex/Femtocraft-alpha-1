@@ -43,6 +43,10 @@ public class FemtocraftConfigTechnologyHelper {
             loadedTechnologies = loadDefaultTechnologies();
         }
 
+        if (config.hasChanged()) {
+            config.save();
+        }
+
         registerTechnologies(loadedTechnologies);
     }
 
@@ -286,7 +290,8 @@ public class FemtocraftConfigTechnologyHelper {
                         ManagerResearch.KINETIC_DISSOCIATION, "", EnumTechLevel.NANO,
                         new ArrayList<String>(Arrays
                                 .asList(ManagerResearch.WORKLOAD_SCHEDULING,
-                                        ManagerResearch.ARTIFICIAL_MATERIALS, ManagerResearch.RESOURCE_OPTIMIZATION)), new ItemStack(
+                                        ManagerResearch.ARTIFICIAL_MATERIALS, ManagerResearch.RESOURCE_OPTIMIZATION))
+                        , new ItemStack(
                         Femtocraft.blockNanoInnervatorUnlit), false,
                         new ArrayList<ItemStack>()
                 )),
@@ -294,7 +299,8 @@ public class FemtocraftConfigTechnologyHelper {
                         ManagerResearch.ATOMIC_MANIPULATION, "", EnumTechLevel.NANO,
                         new ArrayList<String>(Arrays
                                 .asList(ManagerResearch.ARTIFICIAL_MATERIALS,
-                                        ManagerResearch.WORKLOAD_SCHEDULING, ManagerResearch.RESOURCE_OPTIMIZATION)), new ItemStack(
+                                        ManagerResearch.WORKLOAD_SCHEDULING, ManagerResearch.RESOURCE_OPTIMIZATION)),
+                        new ItemStack(
                         Femtocraft.blockNanoDismantler), false,
                         new ArrayList<ItemStack>()
                 )),
@@ -435,7 +441,8 @@ public class FemtocraftConfigTechnologyHelper {
                         new ArrayList<String>(Arrays.asList(
                                 ManagerResearch.QUANTUM_INTERACTIVITY,
                                 ManagerResearch.ADVANCED_PROGRAMMING,
-                                ManagerResearch.APPLIED_PARTICLE_PHYSICS, ManagerResearch.LOCALITY_ENTANGLER, ManagerResearch.REALITY_OVERCLOCKER)),
+                                ManagerResearch.APPLIED_PARTICLE_PHYSICS, ManagerResearch.LOCALITY_ENTANGLER,
+                                ManagerResearch.REALITY_OVERCLOCKER)),
                         new ItemStack(Femtocraft.itemErinyesCircuit), false,
                         new ArrayList<ItemStack>()
                 )),

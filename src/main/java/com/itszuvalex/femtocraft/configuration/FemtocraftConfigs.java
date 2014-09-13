@@ -21,11 +21,13 @@
 
 package com.itszuvalex.femtocraft.configuration;
 
+import com.itszuvalex.femtocraft.Femtocraft;
 import net.minecraftforge.common.Configuration;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
+import java.util.logging.Level;
 
 public class FemtocraftConfigs {
     public static final String CATEGORY_GENERATION = "Generation";
@@ -1189,9 +1191,8 @@ public class FemtocraftConfigs {
 //            ItemAssemblySchematic.infiniteUseMassMultiplier = schematicInfiniteUseMultiplier;
 
             FemtocraftConfigHelper.loadClassConstants(config);
-            new FemtocraftConfigTechnologyHelper(config).loadTechnologies();
-
         } catch (Exception e) {
+            Femtocraft.logger.log(Level.SEVERE, "Error occured when attempting to load from configs.");
             // failed to load configs log
         } finally {
             if (config.hasChanged()) {
