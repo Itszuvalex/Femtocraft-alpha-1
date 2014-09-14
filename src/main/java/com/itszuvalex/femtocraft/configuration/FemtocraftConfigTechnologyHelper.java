@@ -20,7 +20,7 @@ import java.util.Set;
  * Created by Chris on 9/11/2014.
  */
 public class FemtocraftConfigTechnologyHelper {
-    public static final String SECTION_KEY = "Technologies";
+    public static final String SECTION_KEY = "technologies";
     private final Configuration config;
 
     public FemtocraftConfigTechnologyHelper(Configuration config) {
@@ -30,17 +30,16 @@ public class FemtocraftConfigTechnologyHelper {
     public void loadTechnologies() {
         List<ResearchTechnology> loadedTechnologies;
         if (config.get(SECTION_KEY, "Use custom classes", false, "Set to true if you define new technologies in this " +
-                "section.  If false, " +
-                "Femtocraft will only look for technologies of " +
-                "certain names, specifically the ones bundled with " +
-                "the vanilla version.  If true, " +
-                "it will instead look at all keys in this section " +
-                "and attempt to load each as a distinct Technology, " +
-                "and will not load ANY of the original technologies" +
-                ".").getBoolean(false)) {
+                                                                 "section.  If false, " +
+                                                                 "Femtocraft will only look for technologies of " +
+                                                                 "certain names, specifically the ones bundled with " +
+                                                                 "the vanilla version.  If true, " +
+                                                                 "it will instead look at all keys in this section " +
+                                                                 "and attempt to load each as a distinct Technology, " +
+                                                                 "and will not load ANY of the original technologies" +
+                                                                 ".").getBoolean(false)) {
             loadedTechnologies = loadCustomTechnologies();
-        }
-        else {
+        } else {
             loadedTechnologies = loadDefaultTechnologies();
         }
 
@@ -56,7 +55,8 @@ public class FemtocraftConfigTechnologyHelper {
         ConfigCategory cat = config.getCategory(SECTION_KEY);
         Set<ConfigCategory> techs = cat.getChildren();
         for (ConfigCategory cc : techs) {
-            ret.add(loadTechnology(cc.getQualifiedName()));
+            String[] name = cc.getQualifiedName().split("\\" + Configuration.CATEGORY_SPLITTER);
+            ret.add(loadTechnology(name[name.length - 1]));
         }
         return ret;
     }
@@ -183,7 +183,9 @@ public class FemtocraftConfigTechnologyHelper {
                         false, null
                 )),
 
-                loadResearchTechnology(new ResearchTechnology(ManagerResearch.BASIC_CHEMISTRY, "Composition of Matter", EnumTechLevel.MACRO, null, new ItemStack(Femtocraft.itemMineralLattice), true, null, null) {
+                loadResearchTechnology(new ResearchTechnology(ManagerResearch.BASIC_CHEMISTRY,
+                                               "Composition of Matter", EnumTechLevel.MACRO, null,
+                                               new ItemStack(Femtocraft.itemMineralLattice), true, null, null) {
                                            @Override
                                            public Class<? extends GuiTechnology> getGuiClass() {
                                                return GuiTechnologyBasicChemistry.class;
@@ -220,7 +222,9 @@ public class FemtocraftConfigTechnologyHelper {
                         ManagerResearch.POTENTIALITY_HARNESSING}
                         , new ItemStack(Femtocraft.blockCryoGenerator), false, null
                 )),
-                loadResearchTechnology(new ResearchTechnology(ManagerResearch.ADVANCED_CHEMISTRY, "", EnumTechLevel.NANO, new String[]{ManagerResearch.POTENTIALITY_GENERATION, ManagerResearch.BASIC_CHEMISTRY
+                loadResearchTechnology(new ResearchTechnology(ManagerResearch.ADVANCED_CHEMISTRY, "",
+                                               EnumTechLevel.NANO, new String[]{ManagerResearch
+                                               .POTENTIALITY_GENERATION, ManagerResearch.BASIC_CHEMISTRY
                                        }, new ItemStack(Femtocraft.itemCrystallite), true, null, null
                                        ) {
                                            @Override
@@ -437,7 +441,8 @@ public class FemtocraftConfigTechnologyHelper {
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
-                                               ManagerResearch.APPLIED_PARTICLE_PHYSICS, "Like theoretical particle physics.",
+                                               ManagerResearch.APPLIED_PARTICLE_PHYSICS,
+                                               "Like theoretical particle physics.",
                                                EnumTechLevel.FEMTO, new String[]{
                                                ManagerResearch.HARNESSED_NUCLEAR_DECAY,
                                                ManagerResearch.ADVANCED_CHEMISTRY
