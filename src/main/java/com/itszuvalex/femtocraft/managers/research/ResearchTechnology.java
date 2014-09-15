@@ -24,7 +24,7 @@ package com.itszuvalex.femtocraft.managers.research;
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.research.gui.GuiResearch;
-import com.itszuvalex.femtocraft.research.gui.GuiTechnology;
+import com.itszuvalex.femtocraft.research.gui.technology.GuiTechnology;
 import com.itszuvalex.femtocraft.research.gui.technology.GuiTechnologyDefault;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

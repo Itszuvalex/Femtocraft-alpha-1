@@ -25,7 +25,6 @@ import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnologyStatus;
 import com.itszuvalex.femtocraft.research.gui.GuiResearch;
-import com.itszuvalex.femtocraft.research.gui.GuiTechnology;
 
 import java.util.ArrayList;
 import java.util.List;

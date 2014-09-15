@@ -4,7 +4,7 @@ import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
-import com.itszuvalex.femtocraft.research.gui.GuiTechnology;
+import com.itszuvalex.femtocraft.research.gui.technology.GuiTechnology;
 import com.itszuvalex.femtocraft.research.gui.technology.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
