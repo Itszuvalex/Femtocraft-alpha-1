@@ -579,7 +579,7 @@ public class GuiResearch extends GuiScreen {
             ResearchTechnologyStatus status = researchStatus
                     .getTechnology(tooltipTech.name);
             String s = tooltipTech.name;
-            String s1 = tooltipTech.description;
+            String s1 = tooltipTech.shortDescription;
             j4 = par1 + 12;
             l3 = par2 - 4;
 

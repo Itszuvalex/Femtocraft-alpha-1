@@ -39,7 +39,7 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
     /**
      * Matches anything beginning with [ and ending with ]
      */
-    public static final Pattern recipePattern = Pattern.compile("\\[*\\]");
+    public static final Pattern recipePattern = Pattern.compile("\\[.\\]");
 
     public GuiTechnologyRenderer(String description) {
         parse(description);
@@ -51,8 +51,7 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
         int currentY = 0;
         TechnologyPageRenderer currentPage = new TechnologyPageRenderer();
         pages.add(currentPage);
-        for (int i = 0; i < textRegions.length; ++i) {
-            String region = textRegions[i];
+        for (String region : textRegions) {
             List lines = frender.listFormattedStringToWidth(region, GuiTechnology.descriptionWidth);
             for (Object oline : lines) {
                 String line = (String) oline;
@@ -64,7 +63,30 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
                 currentPage.addElement(new TechnologyLineRenderer(line, currentY));
                 currentY += frender.FONT_HEIGHT;
             }
+            /**
+             * String region ended - check for associated regex splitter section, parse, and insert.
+             */
+            if (specialMatcher.matches()) {
+                String special = specialMatcher.group();
+                ITechnologyElementRenderer renderer = parseSpecial(special);
+                //If fail parsing, replace with string representation to show fiddlers the string.
+                if (renderer == null) {
+                    renderer = new TechnologyLineRenderer(special, currentY);
+                }
+                if ((currentY + renderer.getHeight()) > GuiTechnology.descriptionHeight) {
+                    currentPage = new TechnologyPageRenderer();
+                    pages.add(currentPage);
+                    currentY = 0;
+                }
+                renderer.setY(currentY);
+                currentPage.addElement(renderer);
+                currentY += renderer.getHeight();
+            }
         }
+    }
+
+    private ITechnologyElementRenderer parseSpecial(String special) {
+        return null;
     }
 
     public int getPageCount() {
@@ -72,8 +94,9 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
     }
 
     @Override
-    public void render(int x, int y, int width, int height, int displayPage, int mouseX, int mouseY, List tooltip, boolean isResearched) {
-        pages.get(displayPage).render(x, y, width, height, displayPage, mouseX, mouseY, tooltip, isResearched);
+    public void render(int x, int y, int width, int height, int displayPage, int mouseX, int mouseY, List tooltip,
+                       boolean isResearched) {
+        pages.get(displayPage - 1).render(x, y, width, height, displayPage, mouseX, mouseY, tooltip, isResearched);
     }
 
     @Override
@@ -84,5 +107,10 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
     @Override
     public int getHeight() {
         return 0;
+    }
+
+    @Override
+    public void setY(int y) {
+
     }
 }

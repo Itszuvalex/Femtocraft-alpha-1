@@ -31,16 +31,24 @@ import java.util.List;
  */
 public class TechnologyLineRenderer implements ITechnologyElementRenderer {
     public final String line;
-    public final int y;
+    private int y;
 
     public TechnologyLineRenderer(String line, int y) {
         this.line = line;
         this.y = y;
     }
 
+    public TechnologyLineRenderer(String line) {
+        this(line, 0);
+    }
+
+
     @Override
-    public void render(int x, int y, int width, int height, int displayPage, int mouseX, int mouseY, List tooltip, boolean isResearched) {
-        Minecraft.getMinecraft().fontRenderer.drawString(line, 0, y, FemtocraftUtils.colorFromARGB(0, 255, 255, 255), false);
+    public void render(int x, int y, int width, int height, int displayPage, int mouseX, int mouseY, List tooltip,
+                       boolean isResearched) {
+        Minecraft.getMinecraft().fontRenderer.drawString(line, x,
+                this.y + y, FemtocraftUtils.colorFromARGB(0, 255, 255, 255),
+                false);
     }
 
     @Override
@@ -51,5 +59,14 @@ public class TechnologyLineRenderer implements ITechnologyElementRenderer {
     @Override
     public int getHeight() {
         return Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    @Override
+    public void setY(int y) {
+        this.y = y;
     }
 }

@@ -34,4 +34,6 @@ public interface ITechnologyElementRenderer {
     int getWidth();
 
     int getHeight();
+
+    void setY(int y);
 }

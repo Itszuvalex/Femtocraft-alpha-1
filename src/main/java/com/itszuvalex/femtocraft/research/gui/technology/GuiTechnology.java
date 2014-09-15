@@ -49,6 +49,7 @@ public class GuiTechnology extends GuiScreen {
     private final GuiResearch guiResearch;
     private final ResearchTechnologyStatus status;
     private final ResearchTechnology tech;
+    private final GuiTechnologyRenderer renderer;
     private final int xSize = 256;
     private final int ySize = 202;
 
@@ -77,6 +78,8 @@ public class GuiTechnology extends GuiScreen {
         this.guiResearch = guiResearch;
         this.status = status;
         this.tech = Femtocraft.researchManager.getTechnology(status.tech);
+        renderer = new GuiTechnologyRenderer(status.researched ? tech.researchedDescription : tech
+                .discoveredDescription);
     }
 
     @Override
@@ -126,12 +129,12 @@ public class GuiTechnology extends GuiScreen {
                 EnumChatFormatting.WHITE + s + EnumChatFormatting.RESET, k + 84, l + top, width, 27 - top);
 
         if ((par1 >= (k + backButtonX))
-                && (par1 <= (k + backButtonX + backButtonWidth))
-                && (par2 >= (l + backButtonY))
-                && (par2 <= (l + backButtonY + backButtonHeight))) {
+            && (par1 <= (k + backButtonX + backButtonWidth))
+            && (par2 >= (l + backButtonY))
+            && (par2 <= (l + backButtonY + backButtonHeight))) {
             this.drawGradientRect(k + backButtonX, l + backButtonY, k
-                            + backButtonWidth + backButtonX, l + backButtonY
-                            + backButtonHeight,
+                                                                    + backButtonWidth + backButtonX, l + backButtonY
+                                                                                                     + backButtonHeight,
                     FemtocraftUtils.colorFromARGB(60, 45, 0, 110),
                     FemtocraftUtils.colorFromARGB(60, 45, 0, 110)
             );
@@ -140,21 +143,21 @@ public class GuiTechnology extends GuiScreen {
         this.fontRenderer.drawString(
                 "Back",
                 k + backButtonX + (backButtonWidth) / 2
-                        - this.fontRenderer.getStringWidth("Back") / 2, l
-                        + backButtonY
-                        + (backButtonHeight - this.fontRenderer.FONT_HEIGHT)
-                        / 2, FemtocraftUtils.colorFromARGB(255, 255, 255, 255)
+                - this.fontRenderer.getStringWidth("Back") / 2, l
+                                                                + backButtonY
+                                                                + (backButtonHeight - this.fontRenderer.FONT_HEIGHT)
+                                                                  / 2, FemtocraftUtils.colorFromARGB(255, 255, 255, 255)
         );
 
         int color = FemtocraftUtils.colorFromARGB(60, 45, 0, 110);
         if (displayPage > 1) {
             if ((par1 >= (k + pageLeftButtonX))
-                    && (par1 <= (k + pageLeftButtonX + pageLeftButtonWidth))
-                    && (par2 >= (l + pageLeftButtonY))
-                    && (par2 <= (l + pageLeftButtonY + pageLeftButtonHeight))) {
+                && (par1 <= (k + pageLeftButtonX + pageLeftButtonWidth))
+                && (par2 >= (l + pageLeftButtonY))
+                && (par2 <= (l + pageLeftButtonY + pageLeftButtonHeight))) {
                 this.drawGradientRect(k + pageLeftButtonX, l + pageLeftButtonY,
                         k + pageLeftButtonX + pageLeftButtonWidth, l
-                                + pageLeftButtonY + pageLeftButtonHeight,
+                                                                   + pageLeftButtonY + pageLeftButtonHeight,
                         color, color
                 );
             }
@@ -163,71 +166,69 @@ public class GuiTechnology extends GuiScreen {
                     .drawString(
                             "<-",
                             k + pageLeftButtonX + (pageLeftButtonWidth) / 2
-                                    - this.fontRenderer.getStringWidth("<-")
-                                    / 2,
+                            - this.fontRenderer.getStringWidth("<-")
+                              / 2,
                             l
-                                    + pageLeftButtonY
-                                    + (pageLeftButtonHeight - this.fontRenderer.FONT_HEIGHT)
-                                    / 2 + 1,
+                            + pageLeftButtonY
+                            + (pageLeftButtonHeight - this.fontRenderer.FONT_HEIGHT)
+                              / 2 + 1,
                             FemtocraftUtils.colorFromARGB(255, 255, 255, 255)
                     );
-        }
-        else {
+        } else {
             color = FemtocraftUtils.colorFromARGB(60, 0, 0, 0);
             this.drawGradientRect(k + pageLeftButtonX, l + pageLeftButtonY, k
-                    + pageLeftButtonX + pageLeftButtonWidth, l
-                    +
-                    pageLeftButtonY +
-                    pageLeftButtonHeight, color, color);
+                                                                            + pageLeftButtonX + pageLeftButtonWidth, l
+                                                                                                                     +
+                                                                                                                     pageLeftButtonY +
+                                                                                                                     pageLeftButtonHeight, color, color);
         }
 
         color = FemtocraftUtils.colorFromARGB(60, 45, 0, 110);
         if (displayPage < getNumPages(status.researched)) {
             if ((par1 >= (k + pageRightButtonX))
-                    && (par1 <= (k + pageRightButtonX + pageRightButtonWidth))
-                    && (par2 >= (l + pageRightButtonY))
-                    && (par2 <= (l + pageRightButtonY + pageRightButtonHeight))) {
+                && (par1 <= (k + pageRightButtonX + pageRightButtonWidth))
+                && (par2 >= (l + pageRightButtonY))
+                && (par2 <= (l + pageRightButtonY + pageRightButtonHeight))) {
                 this.drawGradientRect(k + pageRightButtonX, l
-                                + pageRightButtonY, k + pageRightButtonX
-                                + pageRightButtonWidth,
+                                                            + pageRightButtonY, k + pageRightButtonX
+                                                                                + pageRightButtonWidth,
                         l + pageRightButtonY
-                                + pageRightButtonHeight, color, color);
+                        + pageRightButtonHeight, color, color);
             }
 
             this.fontRenderer
                     .drawString(
                             "->",
                             k + pageRightButtonX + (pageRightButtonWidth) / 2
-                                    - this.fontRenderer.getStringWidth("->")
-                                    / 2,
+                            - this.fontRenderer.getStringWidth("->")
+                              / 2,
                             l
-                                    + pageRightButtonY
-                                    + (pageRightButtonHeight - this.fontRenderer.FONT_HEIGHT)
-                                    / 2 + 1,
+                            + pageRightButtonY
+                            + (pageRightButtonHeight - this.fontRenderer.FONT_HEIGHT)
+                              / 2 + 1,
                             FemtocraftUtils.colorFromARGB(255, 255, 255, 255)
                     );
-        }
-        else {
+        } else {
             color = FemtocraftUtils.colorFromARGB(60, 0, 0, 0);
             this.drawGradientRect(k + pageRightButtonX, l + pageRightButtonY, k
-                            + pageRightButtonX + pageRightButtonWidth,
+                                                                              + pageRightButtonX + pageRightButtonWidth,
                     l
-                            + pageRightButtonY + pageRightButtonHeight, color, color);
+                    + pageRightButtonY + pageRightButtonHeight, color, color);
         }
 
         String pageString = String.format("Page %s/%s", displayPage,
                 getNumPages(status.researched));
         this.fontRenderer.drawString(pageString, k + pageLeftButtonX
-                        + (pageLeftButtonWidth + pageRightButtonX - pageLeftButtonX)
-                        / 2 - this.fontRenderer.getStringWidth(pageString) / 2, l
-                        +
-                        pageLeftButtonY
-                        +
-                        (pageLeftButtonHeight -
-                                this.fontRenderer.FONT_HEIGHT) /
-                                2
-                        +
-                        1,
+                                                 + (pageLeftButtonWidth + pageRightButtonX - pageLeftButtonX)
+                                                   / 2 - this.fontRenderer.getStringWidth(pageString) / 2, l
+                                                                                                           +
+                                                                                                           pageLeftButtonY
+                                                                                                           +
+                                                                                                           (pageLeftButtonHeight -
+                                                                                                            this.fontRenderer.FONT_HEIGHT) /
+                                                                                                           2
+                                                                                                           +
+                                                                                                           1,
                 FemtocraftUtils.colorFromARGB(255, 255, 255, 255));
 
         this.zLevel = 0;
@@ -243,7 +244,7 @@ public class GuiTechnology extends GuiScreen {
         GL11.glEnable(GL11.GL_CULL_FACE);
         renderitem.renderItemAndEffectIntoGUI(
                 Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft()
-                                                                .getTextureManager(), tech.displayItem, k + 66, l + 12
+                        .getTextureManager(), tech.displayItem, k + 66, l + 12
         );
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glDisable(GL11.GL_LIGHTING);
@@ -280,8 +281,7 @@ public class GuiTechnology extends GuiScreen {
     protected void keyTyped(char par1, int par2) {
         if (par2 == this.mc.gameSettings.keyBindInventory.keyCode) {
             this.mc.displayGuiScreen(guiResearch);
-        }
-        else {
+        } else {
             super.keyTyped(par1, par2);
         }
     }
@@ -298,28 +298,28 @@ public class GuiTechnology extends GuiScreen {
             int l = (this.height - this.ySize) / 2;
 
             if ((par1 >= (k + backButtonX))
-                    && (par1 <= (k + backButtonX + backButtonWidth))
-                    && (par2 >= (l + backButtonY))
-                    && (par2 <= (l + backButtonY + backButtonHeight))) {
+                && (par1 <= (k + backButtonX + backButtonWidth))
+                && (par2 >= (l + backButtonY))
+                && (par2 <= (l + backButtonY + backButtonHeight))) {
                 Minecraft.getMinecraft().sndManager.playSoundFX("random.click",
                         1.0F, 1.0F);
                 this.mc.displayGuiScreen(guiResearch);
             }
 
             if ((displayPage > 1) && (par1 >= (k + pageLeftButtonX))
-                    && (par1 <= (k + pageLeftButtonX + pageLeftButtonWidth))
-                    && (par2 >= (l + pageLeftButtonY))
-                    && (par2 <= (l + pageLeftButtonY + pageLeftButtonHeight))) {
+                && (par1 <= (k + pageLeftButtonX + pageLeftButtonWidth))
+                && (par2 >= (l + pageLeftButtonY))
+                && (par2 <= (l + pageLeftButtonY + pageLeftButtonHeight))) {
                 Minecraft.getMinecraft().sndManager.playSoundFX("random.click",
                         1.0F, 1.0F);
                 displayPage--;
             }
 
             if ((displayPage < getNumPages(status.researched))
-                    && (par1 >= (k + pageRightButtonX))
-                    && (par1 <= (k + pageRightButtonX + pageRightButtonWidth))
-                    && (par2 >= (l + pageRightButtonY))
-                    && (par2 <= (l + pageRightButtonY + pageRightButtonHeight))) {
+                && (par1 >= (k + pageRightButtonX))
+                && (par1 <= (k + pageRightButtonX + pageRightButtonWidth))
+                && (par2 >= (l + pageRightButtonY))
+                && (par2 <= (l + pageRightButtonY + pageRightButtonHeight))) {
                 Minecraft.getMinecraft().sndManager.playSoundFX("random.click",
                         1.0F, 1.0F);
                 displayPage++;
@@ -341,11 +341,11 @@ public class GuiTechnology extends GuiScreen {
     protected void renderInformation(int x, int y, int width, int height,
                                      int pageNum, int mouseX, int mouseY, List tooltip,
                                      boolean isResearched) {
-
+        renderer.render(x, y, width, height, pageNum, mouseX, mouseY, tooltip, isResearched);
     }
 
-    protected int getNumPages(boolean researched) {
-        return 1;
+    int getNumPages(boolean researched) {
+        return renderer.getPageCount();
     }
 
     /**
@@ -355,22 +355,22 @@ public class GuiTechnology extends GuiScreen {
      * @param y     Y of Top Left
      * @param items Up to 9 items to render into the crafting grid
      */
-    protected void renderCraftingGrid(int x, int y, ItemStack[] items,
-                                      int mouseX, int mouseY, List tooltip) {
+    void renderCraftingGrid(int x, int y, ItemStack[] items,
+                            int mouseX, int mouseY, List tooltip) {
         ItemStack[] ir = items != null ? items : new ItemStack[9];
         RenderItem renderitem = new RenderItem();
         for (int i = 0; (i < 9); ++i) {
             ItemStack item = i >= ir.length ? null : ir[i];
             int xr = x
-                    + 18 * (i % 3);
+                     + 18 * (i % 3);
             int yr = y + 18 * (i / 3);
             renderItemSlot(xr, yr, item, renderitem, mouseX, mouseY,
                     tooltip);
         }
     }
 
-    protected void drawHoveringText(List par1List, int par2, int par3,
-                                    FontRenderer font) {
+    void drawHoveringText(List par1List, int par2, int par3,
+                          FontRenderer font) {
         if (!par1List.isEmpty()) {
             int k = 0;
             Iterator iterator = par1List.iterator();
@@ -412,9 +412,9 @@ public class GuiTechnology extends GuiScreen {
             int i2 = 1347420415;
             int j2 = (i2 & 16711422) >> 1 | i2 & -16777216;
             this.drawGradientRect(i1 - 3, j1 - 3 + 1, i1 - 3 + 1, j1 + k1 + 3
-                    - 1, i2, j2);
+                                                                  - 1, i2, j2);
             this.drawGradientRect(i1 + k + 2, j1 - 3 + 1, i1 + k + 3, j1 + k1
-                    + 3 - 1, i2, j2);
+                                                                      + 3 - 1, i2, j2);
             this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 - 3 + 1, i2,
                     i2);
             this.drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + k + 3, j1 + k1 + 3,
@@ -432,9 +432,9 @@ public class GuiTechnology extends GuiScreen {
         }
     }
 
-    protected void renderItemSlot(int x, int y, ItemStack item,
-                                  RenderItem renderitem, int mouseX,
-                                  int mouseY, List tooltip) {
+    void renderItemSlot(int x, int y, ItemStack item,
+                        RenderItem renderitem, int mouseX,
+                        int mouseY, List tooltip) {
 
         GL11.glColor4f(1.f, 1.f, 1.f, 1.f);
         Minecraft.getMinecraft().renderEngine.bindTexture(texture);
@@ -454,7 +454,7 @@ public class GuiTechnology extends GuiScreen {
 
 
         int xr = x
-                + 1;
+                 + 1;
         int yr = y + 1;
         renderitem.renderItemIntoGUI(
                 Minecraft.getMinecraft().fontRenderer, Minecraft
@@ -464,7 +464,7 @@ public class GuiTechnology extends GuiScreen {
         renderitem.renderItemOverlayIntoGUI(Minecraft.getMinecraft()
                         .fontRenderer,
                 Minecraft.getMinecraft()
-                         .getTextureManager()
+                        .getTextureManager()
                 , item, xr, yr
         );
 
@@ -472,7 +472,7 @@ public class GuiTechnology extends GuiScreen {
         RenderHelper.disableStandardItemLighting();
 
         if (mouseX > x && mouseX < x + 17 && mouseY > y && mouseY <
-                y + 17)
+                                                           y + 17)
 
         {
             tooltip.add(item.getDisplayName());
@@ -492,9 +492,9 @@ public class GuiTechnology extends GuiScreen {
      * @param items
      * @param info
      */
-    protected void renderCraftingGridWithInfo(int x, int y, int width,
-                                              int height, ItemStack[] items, int mouseX, int mouseY,
-                                              List tooltip, String info) {
+    void renderCraftingGridWithInfo(int x, int y, int width,
+                                    int height, ItemStack[] items, int mouseX, int mouseY,
+                                    List tooltip, String info) {
         int padding = 2;
         renderCraftingGrid(x, y, items, mouseX, mouseY, tooltip);
         info = String.format("%s%s%s", EnumChatFormatting.WHITE, info,
@@ -503,8 +503,8 @@ public class GuiTechnology extends GuiScreen {
                 width - 54 - 2 * padding, height - 2 * padding);
     }
 
-    protected void renderTemporalRecipeWithInfo(int x, int y, int width, int height, TemporalRecipe recipe,
-                                                int mouseX, int mouseY, List tooltip, String info) {
+    void renderTemporalRecipeWithInfo(int x, int y, int width, int height, TemporalRecipe recipe,
+                                      int mouseX, int mouseY, List tooltip, String info) {
         int padding = 2;
         renderTemporalRecipe(x, y, width, height, recipe, mouseX, mouseY, tooltip);
         info = String.format("%s%s%s", EnumChatFormatting.WHITE, info,
@@ -515,10 +515,10 @@ public class GuiTechnology extends GuiScreen {
         );
     }
 
-    protected void renderTemporalRecipe(int x, int y, int width, int height, TemporalRecipe recipe, int mouseX,
-                                        int mouseY, List tooltip) {
+    void renderTemporalRecipe(int x, int y, int width, int height, TemporalRecipe recipe, int mouseX,
+                              int mouseY, List tooltip) {
         String recipeDir = recipe.techLevel.getTooltipEnum() + "----->" +
-                EnumChatFormatting.RESET;
+                           EnumChatFormatting.RESET;
         renderItemSlot(x,
                 y + 18, recipe.input, new RenderItem(), mouseX, mouseY,
                 tooltip);
@@ -532,7 +532,7 @@ public class GuiTechnology extends GuiScreen {
         fontRenderer.drawSplitString(recipeDir, x + 18 + (54 - fontRenderer.getStringWidth(recipeDir)) / 2 + 1,
                 y + (54 - fontRenderer
                         .FONT_HEIGHT)
-                        / 2, fontRenderer.getStringWidth
+                    / 2, fontRenderer.getStringWidth
                         (recipeDir) + 2,
                 fontRenderer.FONT_HEIGHT
         );
@@ -542,11 +542,11 @@ public class GuiTechnology extends GuiScreen {
     }
 
 
-    protected void renderAssemblerRecipeWithInfo(int x, int y, int width,
-                                                 int height,
-                                                 AssemblerRecipe recipe,
-                                                 int mouseX, int mouseY,
-                                                 List tooltip, String info) {
+    void renderAssemblerRecipeWithInfo(int x, int y, int width,
+                                       int height,
+                                       AssemblerRecipe recipe,
+                                       int mouseX, int mouseY,
+                                       List tooltip, String info) {
         int padding = 2;
         renderAssemblerRecipe(x, y, width, height, recipe, mouseX, mouseY, tooltip);
         info = String.format("%s%s%s", EnumChatFormatting.WHITE, info,
@@ -559,20 +559,20 @@ public class GuiTechnology extends GuiScreen {
         );
     }
 
-    protected void renderAssemblerRecipe(int x, int y, int width, int height,
-                                         AssemblerRecipe recipe, int mouseX,
-                                         int mouseY, List tooltip)
+    void renderAssemblerRecipe(int x, int y, int width, int height,
+                               AssemblerRecipe recipe, int mouseX,
+                               int mouseY, List tooltip)
 
     {
         String recipeDir = recipe.enumTechLevel.getTooltipEnum() + "<->" +
-                EnumChatFormatting.RESET;
+                           EnumChatFormatting.RESET;
         renderCraftingGrid(x, y, recipe.input, mouseX,
                 mouseY, tooltip);
         GL11.glColor4f(1.f, 1.f, 1.f, 1.f);
         fontRenderer.drawSplitString(recipeDir, x + 54 + 1,
                 y + (54 - fontRenderer
                         .FONT_HEIGHT)
-                        / 2, fontRenderer.getStringWidth
+                    / 2, fontRenderer.getStringWidth
                         (recipeDir) + 2,
                 fontRenderer.FONT_HEIGHT
         );
@@ -582,8 +582,8 @@ public class GuiTechnology extends GuiScreen {
 
     }
 
-    protected void renderCraftingRecipeWithInfo(int x, int y, int width, int height, ItemStack[] input,
-                                                ItemStack output, int mouseX, int mouseY, List tooltip, String info) {
+    void renderCraftingRecipeWithInfo(int x, int y, int width, int height, ItemStack[] input,
+                                      ItemStack output, int mouseX, int mouseY, List tooltip, String info) {
         int padding = 2;
         renderCraftingRecipe(x, y, width, height, input, output, mouseX, mouseY, tooltip);
         info = String.format("%s%s%s", EnumChatFormatting.WHITE, info,
@@ -596,17 +596,17 @@ public class GuiTechnology extends GuiScreen {
         );
     }
 
-    protected void renderCraftingRecipe(int x, int y, int width, int height, ItemStack[] input, ItemStack output,
-                                        int mouseX, int mouseY, List tooltip) {
+    void renderCraftingRecipe(int x, int y, int width, int height, ItemStack[] input, ItemStack output,
+                              int mouseX, int mouseY, List tooltip) {
         String recipeDir = EnumChatFormatting.WHITE + "->" +
-                EnumChatFormatting.RESET;
+                           EnumChatFormatting.RESET;
         renderCraftingGrid(x, y, input, mouseX,
                 mouseY, tooltip);
         GL11.glColor4f(1.f, 1.f, 1.f, 1.f);
         fontRenderer.drawSplitString(recipeDir, x + 54 + 1,
                 y + (54 - fontRenderer
                         .FONT_HEIGHT)
-                        / 2, fontRenderer.getStringWidth
+                    / 2, fontRenderer.getStringWidth
                         (recipeDir) + 2,
                 fontRenderer.FONT_HEIGHT
         );

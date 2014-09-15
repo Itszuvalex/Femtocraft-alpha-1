@@ -39,7 +39,8 @@ public class TechnologyPageRenderer implements ITechnologyElementRenderer {
     }
 
     @Override
-    public void render(int x, int y, int width, int height, int displayPage, int mouseX, int mouseY, List tooltip, boolean isResearched) {
+    public void render(int x, int y, int width, int height, int displayPage, int mouseX, int mouseY, List tooltip,
+                       boolean isResearched) {
         for (ITechnologyElementRenderer element : elements) {
             element.render(x, y, width, height, displayPage, mouseX, mouseY, tooltip, isResearched);
         }
@@ -53,5 +54,10 @@ public class TechnologyPageRenderer implements ITechnologyElementRenderer {
     @Override
     public int getHeight() {
         return GuiTechnology.descriptionHeight;
+    }
+
+    @Override
+    public void setY(int y) {
+
     }
 }

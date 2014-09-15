@@ -39,7 +39,7 @@ public class ResearchTechnology {
     @Configurable(comment = "Name of technology.")
     public String name;
     @Configurable(comment = "Displayed when moused over in Research Tree")
-    public String description;
+    public String shortDescription;
     @Configurable(comment = "Tech level of Research.  Changes color of lines rendered to this tech in Research Tree")
     public EnumTechLevel level;
     @Configurable(comment = "Names of all prerequisite technologies.")
@@ -52,29 +52,49 @@ public class ResearchTechnology {
     @Configurable(comment = "True if special background in Research Tree, false if normal")
     public boolean isKeystone;
     @Configurable(comment = "Null for free research, ItemStack[9] (can contain nulls) as required items to put into " +
-            "research console.")
+                            "research console.")
     public ItemStack[] researchMaterials;
 
     @Configurable(comment = "ItemStack that replaces technology item when used.  This will only ever have a stack " +
-            "size of 1.")
+                            "size of 1.")
     public ItemStack discoverItem;
 
-    public ResearchTechnology(String name, String description,
+    @Configurable(comment =
+            "Description string displayed when Technology is clicked in the research tree.  This is displayed when " +
+            "the Technology has been researched.  This is " +
+            "parsed for recipes and automatically layed out across as many pages as needed.")
+    public String researchedDescription;
+
+    @Configurable(comment =
+            "Description string displayed when Technology is clicked in the research tree.  This is displayed when " +
+            "the Technology has been discovered but not researched.  This is " +
+            "parsed for recipes and automatically layed out across as many pages as needed.")
+    public String discoveredDescription;
+
+    public ResearchTechnology(String name, String shortDescription,
                               EnumTechLevel level, String[] prerequisites,
                               ItemStack displayItem,
                               boolean isKeystone, ItemStack[] researchMaterials) {
-        this(name, description, level, prerequisites, displayItem,
+        this(name, shortDescription, level, prerequisites, displayItem,
                 isKeystone, researchMaterials,
                 null);
     }
 
-    public ResearchTechnology(String name, String description,
+    public ResearchTechnology(String name, String shortDescription,
                               EnumTechLevel level, String[] prereq,
                               ItemStack displayItem,
                               boolean isKeystone, ItemStack[] resMats,
                               ItemStack discoverItem) {
+        this(name, shortDescription, level, prereq, displayItem, isKeystone, resMats, discoverItem, "", "");
+    }
+
+    public ResearchTechnology(String name, String shortDescription,
+                              EnumTechLevel level, String[] prereq,
+                              ItemStack displayItem,
+                              boolean isKeystone, ItemStack[] resMats,
+                              ItemStack discoverItem, String discoverDescription, String researchDescription) {
         this.name = name;
-        this.description = description;
+        this.shortDescription = shortDescription;
         this.level = level;
         this.prerequisites = prereq == null ? new String[0] : prereq;
         this.displayItem = displayItem;
@@ -83,6 +103,8 @@ public class ResearchTechnology {
         this.isKeystone = isKeystone;
         this.researchMaterials = resMats == null ? new ItemStack[0] : resMats;
         this.discoverItem = discoverItem;
+        this.discoveredDescription = discoverDescription;
+        this.researchedDescription = researchDescription;
     }
 
     // --------------------------------------------------
@@ -143,7 +165,7 @@ public class ResearchTechnology {
             Femtocraft.logger
                     .log(Level.SEVERE,
                             "Technologies must return a GuiTechnology class that supports the constructor" +
-                                    "(GuiResearch, ResearchTechnologyStatus)");
+                            "(GuiResearch, ResearchTechnologyStatus)");
             e.printStackTrace();
         } catch (SecurityException e) {
             e.printStackTrace();
