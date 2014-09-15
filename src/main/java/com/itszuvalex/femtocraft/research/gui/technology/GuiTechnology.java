@@ -19,13 +19,14 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.research.gui;
+package com.itszuvalex.femtocraft.research.gui.technology;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnologyStatus;
 import com.itszuvalex.femtocraft.managers.temporal.TemporalRecipe;
+import com.itszuvalex.femtocraft.research.gui.GuiResearch;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -50,6 +51,9 @@ public class GuiTechnology extends GuiScreen {
     private final ResearchTechnology tech;
     private final int xSize = 256;
     private final int ySize = 202;
+
+    public static final int descriptionWidth = 238;
+    public static final int descriptionHeight = 117;
 
     private final int backButtonX = 8;
     private final int backButtonY = 11;

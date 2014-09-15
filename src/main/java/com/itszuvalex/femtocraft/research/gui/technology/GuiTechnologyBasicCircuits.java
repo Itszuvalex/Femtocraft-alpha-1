@@ -24,7 +24,6 @@ package com.itszuvalex.femtocraft.research.gui.technology;
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnologyStatus;
 import com.itszuvalex.femtocraft.research.gui.GuiResearch;
-import com.itszuvalex.femtocraft.research.gui.GuiTechnology;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
