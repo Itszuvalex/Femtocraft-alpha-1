@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Christopher Harris (Itszuvalex) on 9/15/14.
  */
-public class GuiTechnologyRenderer {
+public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
     private ArrayList<TechnologyPageRenderer> pages = new ArrayList<TechnologyPageRenderer>();
     protected final FontRenderer frender = Minecraft.getMinecraft().fontRenderer;
 
@@ -49,9 +49,40 @@ public class GuiTechnologyRenderer {
         Matcher specialMatcher = recipePattern.matcher(description);
         String[] textRegions = recipePattern.split(description);
         int currentY = 0;
+        TechnologyPageRenderer currentPage = new TechnologyPageRenderer();
+        pages.add(currentPage);
         for (int i = 0; i < textRegions.length; ++i) {
             String region = textRegions[i];
             List lines = frender.listFormattedStringToWidth(region, GuiTechnology.descriptionWidth);
+            for (Object oline : lines) {
+                String line = (String) oline;
+                if ((currentY + frender.FONT_HEIGHT) > GuiTechnology.descriptionHeight) {
+                    currentPage = new TechnologyPageRenderer();
+                    pages.add(currentPage);
+                    currentY = 0;
+                }
+                currentPage.addElement(new TechnologyLineRenderer(line, currentY));
+                currentY += frender.FONT_HEIGHT;
+            }
         }
+    }
+
+    public int getPageCount() {
+        return pages.size();
+    }
+
+    @Override
+    public void render(int x, int y, int width, int height, int displayPage, int mouseX, int mouseY, List tooltip, boolean isResearched) {
+        pages.get(displayPage).render(x, y, width, height, displayPage, mouseX, mouseY, tooltip, isResearched);
+    }
+
+    @Override
+    public int getWidth() {
+        return 0;
+    }
+
+    @Override
+    public int getHeight() {
+        return 0;
     }
 }
