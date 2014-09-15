@@ -670,7 +670,7 @@ public class FemtocraftConfigTechnologyHelper {
         return loadResearchTechnology(ret);
     }
 
-    private ResearchTechnology loadResearchTechnology(ResearchTechnology ret) {
+    public ResearchTechnology loadResearchTechnology(ResearchTechnology ret) {
         FemtocraftConfigHelper.loadClassInstanceFromConfig(config, SECTION_KEY, ret.name,
                 ResearchTechnology.class, ret);
         return ret;
