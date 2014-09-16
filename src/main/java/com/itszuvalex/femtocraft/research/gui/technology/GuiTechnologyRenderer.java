@@ -39,19 +39,23 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
     /**
      * Matches anything beginning with [ and ending with ]
      */
-    public static final Pattern recipePattern = Pattern.compile("\\Q__\\E(.)\\Q__\\E");
+    public static final String specialPattern = "__([^_]*)__";
+    public static final Pattern splitPattern = Pattern.compile(specialPattern);
+    public static final Pattern groupingPattern = Pattern.compile(".*?" + specialPattern + ".*?");
 
     public GuiTechnologyRenderer(String description) {
         parse(description);
     }
 
     private void parse(String description) {
-        Matcher specialMatcher = recipePattern.matcher(description);
-        String[] textRegions = recipePattern.split(description);
+        Matcher groupingMatcher = groupingPattern.matcher(description);
+        String[] textRegions = splitPattern.split(description);
         int currentY = 0;
         TechnologyPageRenderer currentPage = new TechnologyPageRenderer();
+        groupingMatcher.matches();
         pages.add(currentPage);
-        for (String region : textRegions) {
+        for (int i = 0; i < textRegions.length; i++) {
+            String region = textRegions[i];
             List lines = frender.listFormattedStringToWidth(region, GuiTechnology.descriptionWidth);
             for (Object oline : lines) {
                 String line = (String) oline;
@@ -66,21 +70,25 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
             /**
              * String region ended - check for associated regex splitter section, parse, and insert.
              */
-            if (specialMatcher.matches()) {
-                String special = specialMatcher.group();
-                ITechnologyElementRenderer renderer = parseSpecial(special);
-                //If fail parsing, replace with string representation to show fiddlers the string.
-                if (renderer == null) {
-                    renderer = new TechnologyLineRenderer(special);
+            String special;
+            try {
+                if (((i + 1) < textRegions.length) && (special = groupingMatcher.group(i + 1)) != null) {
+                    ITechnologyElementRenderer renderer = parseSpecial(special);
+                    //If fail parsing, replace with string representation to show fiddlers the string.
+                    if (renderer == null) {
+                        renderer = new TechnologyLineRenderer(special);
+                    }
+                    if ((currentY + renderer.getHeight()) > GuiTechnology.descriptionHeight) {
+                        currentPage = new TechnologyPageRenderer();
+                        pages.add(currentPage);
+                        currentY = 0;
+                    }
+                    renderer.setY(currentY);
+                    currentPage.addElement(renderer);
+                    currentY += renderer.getHeight();
                 }
-                if ((currentY + renderer.getHeight()) > GuiTechnology.descriptionHeight) {
-                    currentPage = new TechnologyPageRenderer();
-                    pages.add(currentPage);
-                    currentY = 0;
-                }
-                renderer.setY(currentY);
-                currentPage.addElement(renderer);
-                currentY += renderer.getHeight();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
