@@ -24,6 +24,7 @@ package com.itszuvalex.femtocraft.configuration;
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.industry.items.ItemAssemblySchematic;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 
@@ -280,8 +281,8 @@ public class FemtocraftConfigHelper {
 
             @Override
             ItemStack getValue(String key, ItemStack def, String section, Configurable anno, Configuration config) {
-                return itemStackFromString(config.get(section, key,
-                        itemStackToString(def),
+                return FemtocraftStringUtils.itemStackFromString(config.get(section, key,
+                        FemtocraftStringUtils.itemStackToString(def),
                         anno.comment()).getString());
             }
         });
@@ -295,35 +296,15 @@ public class FemtocraftConfigHelper {
             ItemStack[] getValue(String key, ItemStack[] def, String section, Configurable anno, Configuration config) {
                 String[] defsar = def == null ? new String[0] : new String[def.length];
                 for (int i = 0; i < def.length; ++i) {
-                    defsar[i] = itemStackToString(def[i]);
+                    defsar[i] = FemtocraftStringUtils.itemStackToString(def[i]);
                 }
                 String[] sar = config.get(section, key, defsar, anno.comment()).getStringList();
                 ItemStack[] ret = sar == null ? new ItemStack[0] : new ItemStack[sar.length];
                 for (int i = 0; i < sar.length; ++i) {
-                    ret[i] = itemStackFromString(sar[i]);
+                    ret[i] = FemtocraftStringUtils.itemStackFromString(sar[i]);
                 }
                 return ret;
             }
         });
-    }
-
-
-    public static ItemStack itemStackFromString(String s) {
-        if (s == null || s.isEmpty()) return null;
-        s = s.trim();
-        try {
-            String[] idDamage_stack = s.split("-");
-            String[] id_damage = idDamage_stack[0].split(":");
-            int id = Integer.parseInt(id_damage[0].trim());
-            int damage = Integer.parseInt(id_damage[1].trim());
-            int stackSize = Integer.parseInt(idDamage_stack[1].trim());
-            return new ItemStack(id, stackSize, damage);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public static String itemStackToString(ItemStack s) {
-        return s == null ? "" : s.itemID + ":" + s.getItemDamage() + "-" + s.stackSize;
     }
 }

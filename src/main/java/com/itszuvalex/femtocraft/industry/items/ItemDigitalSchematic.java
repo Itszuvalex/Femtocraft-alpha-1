@@ -28,19 +28,18 @@ import net.minecraft.client.renderer.texture.IconRegister;
 
 public class ItemDigitalSchematic extends ItemAssemblySchematic {
 
-    public ItemDigitalSchematic(int itemID) {
-        super(itemID);
+    public ItemDigitalSchematic(int itemID, String unlocalizedName) {
+        super(itemID, unlocalizedName);
         setMaxDamage(64);
-        setUnlocalizedName("ItemDigitalSchematic");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "ItemDigitalSchematic");
+                                                              .toLowerCase() + ":" + "ItemDigitalSchematic");
         this.keyedIcon = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "ItemDigitalSchematicKeyed");
+                                                               .toLowerCase() + ":" + "ItemDigitalSchematicKeyed");
     }
 
 }

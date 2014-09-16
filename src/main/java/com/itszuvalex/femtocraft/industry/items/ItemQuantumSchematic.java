@@ -28,19 +28,18 @@ import net.minecraft.client.renderer.texture.IconRegister;
 
 public class ItemQuantumSchematic extends ItemAssemblySchematic {
 
-    public ItemQuantumSchematic(int itemID) {
-        super(itemID);
+    public ItemQuantumSchematic(int itemID, String unlocalizedName) {
+        super(itemID, unlocalizedName);
         setMaxDamage(ItemAssemblySchematic.INFINITE_USE_DAMAGE);
-        setUnlocalizedName("ItemQuantumSchematic");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "ItemQuantumSchematic");
+                                                              .toLowerCase() + ":" + "ItemQuantumSchematic");
         this.keyedIcon = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "ItemQuantumSchematicKeyed");
+                                                               .toLowerCase() + ":" + "ItemQuantumSchematicKeyed");
     }
 
 }

@@ -24,6 +24,7 @@ package com.itszuvalex.femtocraft.power.blocks;
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.api.IAtmosphericChargingAddon;
 import com.itszuvalex.femtocraft.api.IAtmosphericChargingBase;
+import com.itszuvalex.femtocraft.core.blocks.BlockBase;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.proxy.ProxyClient;
 import cpw.mods.fml.relauncher.Side;
@@ -35,7 +36,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockAtmosphericChargingCoil extends Block implements IAtmosphericChargingAddon {
+public class BlockAtmosphericChargingCoil extends BlockBase implements IAtmosphericChargingAddon {
     public Icon coilConnector;
     public Icon coilConnectorTop;
 

@@ -22,10 +22,10 @@
 package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.core.blocks.BlockBase;
 import com.itszuvalex.femtocraft.proxy.ProxyClient;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
@@ -34,7 +34,7 @@ import net.minecraft.world.IBlockAccess;
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/6/14.
  */
-public class BlockCryoEndothermalChargingCoil extends Block {
+public class BlockCryoEndothermalChargingCoil extends BlockBase {
     public Icon coilConnector, coilConnectorTop;
 
     public BlockCryoEndothermalChargingCoil(int id) {

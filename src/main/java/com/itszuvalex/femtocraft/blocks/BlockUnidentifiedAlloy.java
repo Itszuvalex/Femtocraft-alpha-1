@@ -22,6 +22,7 @@
 package com.itszuvalex.femtocraft.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.core.blocks.BlockBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -30,7 +31,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-public class BlockUnidentifiedAlloy extends Block {
+public class BlockUnidentifiedAlloy extends BlockBase {
     public BlockUnidentifiedAlloy(int id) {
         super(id, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);

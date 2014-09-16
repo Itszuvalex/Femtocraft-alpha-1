@@ -39,7 +39,7 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
     /**
      * Matches anything beginning with [ and ending with ]
      */
-    public static final Pattern recipePattern = Pattern.compile("\\[.\\]");
+    public static final Pattern recipePattern = Pattern.compile("\\Q__\\E(.)\\Q__\\E");
 
     public GuiTechnologyRenderer(String description) {
         parse(description);
@@ -71,7 +71,7 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
                 ITechnologyElementRenderer renderer = parseSpecial(special);
                 //If fail parsing, replace with string representation to show fiddlers the string.
                 if (renderer == null) {
-                    renderer = new TechnologyLineRenderer(special, currentY);
+                    renderer = new TechnologyLineRenderer(special);
                 }
                 if ((currentY + renderer.getHeight()) > GuiTechnology.descriptionHeight) {
                     currentPage = new TechnologyPageRenderer();

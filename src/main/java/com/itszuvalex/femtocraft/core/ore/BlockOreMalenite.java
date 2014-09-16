@@ -25,12 +25,11 @@ import com.itszuvalex.femtocraft.Femtocraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockOre;
 import net.minecraft.client.renderer.texture.IconRegister;
 
 import java.util.Random;
 
-public class BlockOreMalenite extends BlockOre {
+public class BlockOreMalenite extends BlockOreBase {
 
     public BlockOreMalenite(int id) {
         super(id);

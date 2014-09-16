@@ -24,13 +24,13 @@ package com.itszuvalex.femtocraft.industry.items;
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.api.IAssemblerSchematic;
 import com.itszuvalex.femtocraft.configuration.Configurable;
+import com.itszuvalex.femtocraft.core.items.ItemBase;
 import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
@@ -41,29 +41,26 @@ import java.util.Random;
 
 /**
  * @author Itszuvalex
- * @placeholderIcon <i>static</i> - Icon for use in display slots when no
- * schematic is there to draw reference from.
- * @infiniteUseMassMultipler <i>static</i> - Multiplier to use instead of use
- * count when calculating fluidMass requirements.
- * @keyedIcon Icon to use instead of itemIcon, when the itemStack has a recipe
- * associated with it.
- * @Info This is a base class for Schematics with most of the hard work already
- * done. This includes tooltip parsing, damage behaviors, support for
- * infinite use schematics and support for a separate Icon for keyed
- * Schematics.
+ * @placeholderIcon <i>static</i> - Icon for use in display slots when no schematic is there to draw reference from.
+ * @infiniteUseMassMultipler <i>static</i> - Multiplier to use instead of use count when calculating fluidMass
+ * requirements.
+ * @keyedIcon Icon to use instead of itemIcon, when the itemStack has a recipe associated with it.
+ * @Info This is a base class for Schematics with most of the hard work already done. This includes tooltip parsing,
+ * damage behaviors, support for infinite use schematics and support for a separate Icon for keyed Schematics.
  */
-public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
+public class ItemAssemblySchematic extends ItemBase implements IAssemblerSchematic {
     public static final int INFINITE_USE_DAMAGE = -1;
     public static Icon placeholderIcon;
 
-    @Configurable(comment = "How many uses does an infinite use schematic count for when calculating mass costs? (This is a float to allow finer tuning - it will be cast to integer where it matters.")
+    @Configurable(comment = "How many uses does an infinite use schematic count for when calculating mass costs? " +
+                            "(This is a float to allow finer tuning - it will be cast to integer where it matters.")
     public static float infiniteUseMassMultiplier = 200;
 
     @SideOnly(value = Side.CLIENT)
     public Icon keyedIcon;
 
-    public ItemAssemblySchematic(int itemID) {
-        super(itemID);
+    public ItemAssemblySchematic(int itemID, String unlocalizedName) {
+        super(itemID, unlocalizedName);
         setCreativeTab(Femtocraft.femtocraftTab);
         setMaxStackSize(64);
     }
@@ -94,15 +91,14 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
         String useString;
         if (uses == INFINITE_USE_DAMAGE) {
             useString = "Infinite Uses";
-        }
-        else {
+        } else {
             useString = String.valueOf(uses);
         }
 
         NBTTagCompound itemCompound = par1ItemStack.stackTagCompound;
         if (itemCompound == null || !itemCompound.hasKey("recipe")) {
             par3List.add(String.format(EnumChatFormatting.YELLOW
-                            + "Uses good for:" + EnumChatFormatting.RESET + " %s.",
+                                       + "Uses good for:" + EnumChatFormatting.RESET + " %s.",
                     useString
             ));
             return;
@@ -117,15 +113,15 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
         }
 
         String useLine = String.format(EnumChatFormatting.YELLOW + "%s"
-                        + EnumChatFormatting.RESET + " %s", "Uses Remaining:",
+                                       + EnumChatFormatting.RESET + " %s", "Uses Remaining:",
                 useString
         );
         par3List.add(useLine);
 
         String outputLine = String.format(EnumChatFormatting.YELLOW + "Output:"
-                        + recipe.enumTechLevel.getTooltipEnum() + " %d"
-                        + EnumChatFormatting.GRAY + "x" + EnumChatFormatting.RESET
-                        + "%s" + EnumChatFormatting.RESET, recipe.output.stackSize,
+                                          + recipe.enumTechLevel.getTooltipEnum() + " %d"
+                                          + EnumChatFormatting.GRAY + "x" + EnumChatFormatting.RESET
+                                          + "%s" + EnumChatFormatting.RESET, recipe.output.stackSize,
                 recipe.output.getDisplayName()
         );
         par3List.add(outputLine);
@@ -142,15 +138,14 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
             String inputString;
             if (item == null) {
                 inputString = "empty";
-            }
-            else {
+            } else {
                 inputString = String.format("%d" + EnumChatFormatting.GRAY
-                                + "x" + EnumChatFormatting.RESET + "%s",
+                                            + "x" + EnumChatFormatting.RESET + "%s",
                         item.stackSize, item.getDisplayName()
                 );
             }
             String inputLine = String.format(EnumChatFormatting.YELLOW
-                            + "Input %d:" + EnumChatFormatting.RESET + " %s", i,
+                                             + "Input %d:" + EnumChatFormatting.RESET + " %s", i,
                     inputString
             );
             par3List.add(inputLine);
@@ -159,13 +154,13 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
         par3List.add("");
 
         String massLine = String.format(EnumChatFormatting.YELLOW + "Mass:"
-                + EnumChatFormatting.DARK_PURPLE + " %d"
-                + EnumChatFormatting.RESET, recipe.mass);
+                                        + EnumChatFormatting.DARK_PURPLE + " %d"
+                                        + EnumChatFormatting.RESET, recipe.mass);
         par3List.add(massLine);
 
         String techLevelLine = String.format(EnumChatFormatting.YELLOW
-                        + "TechLevel:" + recipe.enumTechLevel.getTooltipEnum() + " %s"
-                        + EnumChatFormatting.RESET,
+                                             + "TechLevel:" + recipe.enumTechLevel.getTooltipEnum() + " %s"
+                                             + EnumChatFormatting.RESET,
                 FemtocraftUtils.capitalize(recipe.enumTechLevel.key)
         );
         par3List.add(techLevelLine);
@@ -176,15 +171,14 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
         if (tech == null) {
             formatting = EnumChatFormatting.BLACK;
             techString = "none";
-        }
-        else {
+        } else {
             formatting = tech.level.getTooltipEnum();
             techString = FemtocraftUtils.capitalize(tech.name);
         }
 
         String techLine = String.format(EnumChatFormatting.YELLOW
-                + "Technology Required:" + formatting + " %s"
-                + EnumChatFormatting.RESET, techString);
+                                        + "Technology Required:" + formatting + " %s"
+                                        + EnumChatFormatting.RESET, techString);
         par3List.add(techLine);
     }
 
@@ -209,7 +203,7 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
 
     public boolean hasRecipe(ItemStack stack) {
         return stack.stackTagCompound != null
-                && stack.stackTagCompound.hasKey("recipe");
+               && stack.stackTagCompound.hasKey("recipe");
     }
 
     @Override
@@ -225,8 +219,7 @@ public class ItemAssemblySchematic extends Item implements IAssemblerSchematic {
     private boolean addRecipeToNBT(ItemStack stack, AssemblerRecipe recipe) {
         if (stack.stackTagCompound == null) {
             stack.stackTagCompound = new NBTTagCompound();
-        }
-        else if (stack.stackTagCompound.hasKey("recipe")) {
+        } else if (stack.stackTagCompound.hasKey("recipe")) {
             return false;
         }
 
