@@ -21,8 +21,10 @@
 
 package com.itszuvalex.femtocraft.research.gui.technology;
 
+import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,7 @@ import java.util.regex.Pattern;
 public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
     private ArrayList<TechnologyPageRenderer> pages = new ArrayList<TechnologyPageRenderer>();
     protected final FontRenderer frender = Minecraft.getMinecraft().fontRenderer;
+    protected final GuiTechnology gui;
 
     /**
      * Matches anything beginning with [ and ending with ]
@@ -43,7 +46,27 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
     public static final Pattern splitPattern = Pattern.compile(specialPattern);
     public static final Pattern groupingPattern = Pattern.compile(".*?" + specialPattern + ".*?");
 
-    public GuiTechnologyRenderer(String description) {
+    public static final String specialTypeGroup = "specialType";
+    public static final String specialTypeRegex = "(?<" + specialTypeGroup + ">[^\\._]*)";
+    public static final String specialParamGroup = "specialParam";
+    public static final String specialParamRegex = "(?<" + specialParamGroup + ">[^:_]*)?";
+    public static final String specialTextGroup = "specialText";
+    public static final String specialTextRegex = "(?<" + specialTextGroup + ">[^_]*)";
+    public static final Pattern specialDecompPattern = Pattern.compile(specialTypeRegex + "\\." + specialParamRegex + ":" + specialTextRegex);
+
+    public static final String recipeType = "Recipe";
+    public static final String recipeAssemblerParam = "Assembler";
+    public static final String recipeTemporalParam = "Temporal";
+    public static final String recipeDimensionalParam = "Dimensional";
+
+    public static final String recipeParamTypeGroup = "recipeType";
+    public static final String recipeParamTypeRegex = "(?<" + recipeParamTypeGroup + ">[^:]*)";
+    public static final String recipeParamItemGroup = "recipeItem";
+    public static final String recipeParamItemRegex = "(?<" + recipeParamItemGroup + ">[^:]*)";
+    public static final Pattern recipeParamPattern = Pattern.compile(recipeParamTypeRegex + ":" + recipeParamItemRegex);
+
+    public GuiTechnologyRenderer(GuiTechnology gui, String description) {
+        this.gui = gui;
         parse(description);
     }
 
@@ -53,6 +76,7 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
         int currentY = 0;
         TechnologyPageRenderer currentPage = new TechnologyPageRenderer();
         groupingMatcher.matches();
+        int groupIndex = 1;
         pages.add(currentPage);
         for (int i = 0; i < textRegions.length; i++) {
             String region = textRegions[i];
@@ -70,8 +94,8 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
             /**
              * String region ended - check for associated regex splitter section, parse, and insert.
              */
-            String special;
             try {
+                String special;
                 if (((i + 1) < textRegions.length) && (special = groupingMatcher.group(i + 1)) != null) {
                     ITechnologyElementRenderer renderer = parseSpecial(special);
                     //If fail parsing, replace with string representation to show fiddlers the string.
@@ -86,14 +110,62 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
                     renderer.setY(currentY);
                     currentPage.addElement(renderer);
                     currentY += renderer.getHeight();
+                    groupIndex = i + 1;
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception ignored) {
             }
+        }
+        try {
+            while (true) {
+                String special = groupingMatcher.group(groupIndex);
+                ITechnologyElementRenderer renderer = parseSpecial(special);
+                //If fail parsing, replace with string representation to show fiddlers the string.
+                if (renderer == null) {
+                    renderer = new TechnologyLineRenderer(special);
+                }
+                if ((currentY + renderer.getHeight()) > GuiTechnology.descriptionHeight) {
+                    currentPage = new TechnologyPageRenderer();
+                    pages.add(currentPage);
+                    currentY = 0;
+                }
+                renderer.setY(currentY);
+                currentPage.addElement(renderer);
+                currentY += renderer.getHeight();
+                groupIndex++;
+            }
+        } catch (Exception ignored) {
         }
     }
 
     private ITechnologyElementRenderer parseSpecial(String special) {
+        Matcher specialMatcher = specialDecompPattern.matcher(special);
+        if (specialMatcher.matches()) {
+            String type = specialMatcher.group(specialTypeGroup);
+            String param = specialMatcher.group(specialParamGroup);
+            String text = specialMatcher.group(specialTextGroup);
+            if (type.equals(recipeType)) {
+                return parseRecipe(param, text);
+            }
+        }
+        return null;
+    }
+
+    private ITechnologyElementRenderer parseRecipe(String param, String text) {
+        Matcher paramMatcher = recipeParamPattern.matcher(param);
+        String rtype = paramMatcher.group(recipeParamTypeGroup);
+        String sitem = paramMatcher.group(recipeParamItemGroup);
+        ItemStack item = FemtocraftStringUtils.itemStackFromString(sitem);
+        if (item != null) {
+            if (rtype.equals(recipeAssemblerParam)) {
+                return new GuiTechnologyAssemblerRenderer(gui, item, text);
+            }
+            else if (rtype.equals(recipeDimensionalParam)) {
+
+            }
+            else if (rtype.equals(recipeTemporalParam)) {
+
+            }
+        }
         return null;
     }
 

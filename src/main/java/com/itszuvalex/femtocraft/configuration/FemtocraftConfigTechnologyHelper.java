@@ -4,7 +4,6 @@ import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
-import com.itszuvalex.femtocraft.research.gui.technology.GuiTechnology;
 import com.itszuvalex.femtocraft.research.gui.technology.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -30,16 +29,17 @@ public class FemtocraftConfigTechnologyHelper {
     public void loadTechnologies() {
         List<ResearchTechnology> loadedTechnologies;
         if (config.get(SECTION_KEY, "Use custom classes", false, "Set to true if you define new technologies in this " +
-                                                                 "section.  If false, " +
-                                                                 "Femtocraft will only look for technologies of " +
-                                                                 "certain names, specifically the ones bundled with " +
-                                                                 "the vanilla version.  If true, " +
-                                                                 "it will instead look at all keys in this section " +
-                                                                 "and attempt to load each as a distinct Technology, " +
-                                                                 "and will not load ANY of the original technologies" +
-                                                                 ".").getBoolean(false)) {
+                "section.  If false, " +
+                "Femtocraft will only look for technologies of " +
+                "certain names, specifically the ones bundled with " +
+                "the vanilla version.  If true, " +
+                "it will instead look at all keys in this section " +
+                "and attempt to load each as a distinct Technology, " +
+                "and will not load ANY of the original technologies" +
+                ".").getBoolean(false)) {
             loadedTechnologies = loadCustomTechnologies();
-        } else {
+        }
+        else {
             loadedTechnologies = loadDefaultTechnologies();
         }
 
@@ -101,7 +101,7 @@ public class FemtocraftConfigTechnologyHelper {
                 }),
                 loadResearchTechnology(new ResearchTechnology(
                         ManagerResearch.SCIENTIFIC_THEORY, "Gentlemen, start your research!", EnumTechLevel.MACRO,
-                        null, new ItemStack(Femtocraft.blockResearchConsole), true, null
+                        null, new ItemStack(Femtocraft.blockResearchConsole), true, null, null, null, "What is a scientist without the scientific method?  Luckily for you, you no longer have to experiment.  This handy Research Computer analyzes all of your knowledge and will theorize prototypes for you to make.  Stick these prototypes into the Research Console to have it analyze the potential uses and to store the standardized blueprints into your knowledge store. __Recipe.Assembler:tile.BlockResearchComputer:Allows visual access to your personalized knowledge store.__ __Recipe.Assembler:tile.BlockResearchConsole:Analyzes your prototypes and generates standardized blueprints.__", false, false
                 )),
                 loadResearchTechnology(new ResearchTechnology(
                         ManagerResearch.ALGORITHMS, "", EnumTechLevel.MICRO,

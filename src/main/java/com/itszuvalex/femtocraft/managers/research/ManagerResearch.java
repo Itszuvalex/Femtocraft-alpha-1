@@ -188,6 +188,14 @@ public class ManagerResearch {
     private void addKnownTechnologies(ResearchPlayer rp) {
         for (ResearchTechnology t : technologies.values()) {
             if (!rp.hasDiscoveredTechnology(t)) {
+                if (t.researchedByDefault) {
+                    rp.researchTechnology(t.name, true);
+                    continue;
+                }
+                if (t.discoveredByDefault) {
+                    rp.discoverTechnology(t.name);
+                    continue;
+                }
                 if (t.prerequisites != null && t.prerequisites.length > 0) {
                     boolean shouldDiscover = true;
                     for (String pre : t.prerequisites) {

@@ -21,13 +21,13 @@ public class FemtocraftStringUtils {
     public static final String itemDamageGroup = "itemDamage";
     public static final String itemStackSizeGroup = "itemStackSize";
     public static final String itemIDRegex = "(?<" + itemIDGroup + ">\\d+)";
-    public static final String modIDRegex = "(?<" + itemModIDGroup + ">[^:]+):";
-    public static final String itemNameRegex = "(?<" + itemNameGroup + ">[^:]+)";
-    public static final String itemStackRegex = "(?<" + itemStackSizeGroup + ">\\d+)";
-    public static final String itemDamageRegex = "(?<" + itemDamageGroup + ">\\d+)";
+    public static final String modIDRegex = "(?<" + itemModIDGroup + ">[^:-]+)";
+    public static final String itemNameRegex = "(?<" + itemNameGroup + ">[^:-]+)";
+    public static final String itemStackRegex = "(?:-(?<" + itemStackSizeGroup + ">\\d+?))?";
+    public static final String itemDamageRegex = "(?::(?<" + itemDamageGroup + ">\\d+?))?";
     public static final Pattern itemStackPattern = Pattern.compile(
-            "(?:" + itemIDRegex + "|(?:" + modIDRegex + "?" + itemNameRegex + ")):" + itemDamageRegex + "-" +
-            itemStackRegex);
+            "(?:" + itemIDRegex + "|(?:" + modIDRegex + ":" + itemNameRegex + "))" + itemDamageRegex +
+                    itemStackRegex);
 
     public static ItemStack itemStackFromString(String s) {
         if (s == null || s.isEmpty()) return null;
@@ -37,8 +37,10 @@ public class FemtocraftStringUtils {
                 String itemID = itemMatcher.group(itemIDGroup);
                 String modID = itemMatcher.group(itemModIDGroup);
                 String name = itemMatcher.group(itemNameGroup);
-                int damage = Integer.parseInt(itemMatcher.group(itemDamageGroup));
-                int stackSize = Integer.parseInt(itemMatcher.group(itemStackSizeGroup));
+                String sdam = itemMatcher.group(itemDamageGroup);
+                String ssize = itemMatcher.group(itemStackSizeGroup);
+                int damage = sdam == null ? 0 : Integer.parseInt(sdam);
+                int stackSize = ssize == null ? 1 : Integer.parseInt(ssize);
                 if (itemID != null) {
                     int id = Integer.parseInt(itemID);
                     return new ItemStack(id, stackSize, damage);
@@ -81,17 +83,20 @@ public class FemtocraftStringUtils {
         if (s != null) {
             if (s.getItem() instanceof ItemBlock) {
                 id = GameRegistry.findUniqueIdentifierFor(Block.blocksList[((ItemBlock) s.getItem()).getBlockID()]);
-            } else {
+            }
+            else {
                 id = GameRegistry.findUniqueIdentifierFor(s.getItem());
             }
         }
         if (s == null) {
             return "";
-        } else {
+        }
+        else {
             String result;
             if (id == null) {
                 result = String.valueOf(s.getItem().itemID);
-            } else {
+            }
+            else {
                 result = id.modId + ":" + id.name;
             }
             return result + ":" + s.getItemDamage() + "-" + s.stackSize;
