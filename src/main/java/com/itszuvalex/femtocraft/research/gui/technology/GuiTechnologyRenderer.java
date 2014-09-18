@@ -47,12 +47,13 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
     public static final Pattern groupingPattern = Pattern.compile(".*?" + specialPattern + ".*?");
 
     public static final String specialTypeGroup = "specialType";
-    public static final String specialTypeRegex = "(?<" + specialTypeGroup + ">[^\\._]*)";
+    public static final String specialTypeRegex = "(?<" + specialTypeGroup + ">[^_]*?)";
     public static final String specialParamGroup = "specialParam";
-    public static final String specialParamRegex = "(?<" + specialParamGroup + ">[^:_]*)?";
+    public static final String specialParamRegex = "(?<" + specialParamGroup + ">[^_]*)?";
     public static final String specialTextGroup = "specialText";
     public static final String specialTextRegex = "(?<" + specialTextGroup + ">[^_]*)";
-    public static final Pattern specialDecompPattern = Pattern.compile(specialTypeRegex + "\\." + specialParamRegex + ":" + specialTextRegex);
+    public static final Pattern specialDecompPattern = Pattern.compile(
+            specialTypeRegex + "\\." + specialParamRegex + "--" + specialTextRegex);
 
     public static final String recipeType = "Recipe";
     public static final String recipeAssemblerParam = "Assembler";
@@ -60,9 +61,9 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
     public static final String recipeDimensionalParam = "Dimensional";
 
     public static final String recipeParamTypeGroup = "recipeType";
-    public static final String recipeParamTypeRegex = "(?<" + recipeParamTypeGroup + ">[^:]*)";
+    public static final String recipeParamTypeRegex = "(?<" + recipeParamTypeGroup + ">[^:]*?)";
     public static final String recipeParamItemGroup = "recipeItem";
-    public static final String recipeParamItemRegex = "(?<" + recipeParamItemGroup + ">[^:]*)";
+    public static final String recipeParamItemRegex = "(?<" + recipeParamItemGroup + ">.*)";
     public static final Pattern recipeParamPattern = Pattern.compile(recipeParamTypeRegex + ":" + recipeParamItemRegex);
 
     public GuiTechnologyRenderer(GuiTechnology gui, String description) {
@@ -71,12 +72,10 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
     }
 
     private void parse(String description) {
-        Matcher groupingMatcher = groupingPattern.matcher(description);
+        Matcher splittingMatcher = splitPattern.matcher(description);
         String[] textRegions = splitPattern.split(description);
         int currentY = 0;
         TechnologyPageRenderer currentPage = new TechnologyPageRenderer();
-        groupingMatcher.matches();
-        int groupIndex = 1;
         pages.add(currentPage);
         for (int i = 0; i < textRegions.length; i++) {
             String region = textRegions[i];
@@ -94,30 +93,12 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
             /**
              * String region ended - check for associated regex splitter section, parse, and insert.
              */
-            try {
-                String special;
-                if (((i + 1) < textRegions.length) && (special = groupingMatcher.group(i + 1)) != null) {
-                    ITechnologyElementRenderer renderer = parseSpecial(special);
-                    //If fail parsing, replace with string representation to show fiddlers the string.
-                    if (renderer == null) {
-                        renderer = new TechnologyLineRenderer(special);
-                    }
-                    if ((currentY + renderer.getHeight()) > GuiTechnology.descriptionHeight) {
-                        currentPage = new TechnologyPageRenderer();
-                        pages.add(currentPage);
-                        currentY = 0;
-                    }
-                    renderer.setY(currentY);
-                    currentPage.addElement(renderer);
-                    currentY += renderer.getHeight();
-                    groupIndex = i + 1;
+            if (splittingMatcher.find()) {
+                String special = splittingMatcher.group();
+                Matcher groupingMatcher = groupingPattern.matcher(special);
+                if (groupingMatcher.matches()) {
+                    special = groupingMatcher.group(1);
                 }
-            } catch (Exception ignored) {
-            }
-        }
-        try {
-            while (true) {
-                String special = groupingMatcher.group(groupIndex);
                 ITechnologyElementRenderer renderer = parseSpecial(special);
                 //If fail parsing, replace with string representation to show fiddlers the string.
                 if (renderer == null) {
@@ -131,9 +112,27 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
                 renderer.setY(currentY);
                 currentPage.addElement(renderer);
                 currentY += renderer.getHeight();
-                groupIndex++;
             }
-        } catch (Exception ignored) {
+        }
+        while (splittingMatcher.find()) {
+            String special = splittingMatcher.group();
+            Matcher groupingMatcher = groupingPattern.matcher(special);
+            if (groupingMatcher.matches()) {
+                special = groupingMatcher.group(1);
+            }
+            ITechnologyElementRenderer renderer = parseSpecial(special);
+            //If fail parsing, replace with string representation to show fiddlers the string.
+            if (renderer == null) {
+                renderer = new TechnologyLineRenderer(special);
+            }
+            if ((currentY + renderer.getHeight()) > GuiTechnology.descriptionHeight) {
+                currentPage = new TechnologyPageRenderer();
+                pages.add(currentPage);
+                currentY = 0;
+            }
+            renderer.setY(currentY);
+            currentPage.addElement(renderer);
+            currentY += renderer.getHeight();
         }
     }
 
@@ -152,18 +151,18 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
 
     private ITechnologyElementRenderer parseRecipe(String param, String text) {
         Matcher paramMatcher = recipeParamPattern.matcher(param);
-        String rtype = paramMatcher.group(recipeParamTypeGroup);
-        String sitem = paramMatcher.group(recipeParamItemGroup);
-        ItemStack item = FemtocraftStringUtils.itemStackFromString(sitem);
-        if (item != null) {
-            if (rtype.equals(recipeAssemblerParam)) {
-                return new GuiTechnologyAssemblerRenderer(gui, item, text);
-            }
-            else if (rtype.equals(recipeDimensionalParam)) {
+        if (paramMatcher.matches()) {
+            String rtype = paramMatcher.group(recipeParamTypeGroup);
+            String sitem = paramMatcher.group(recipeParamItemGroup);
+            ItemStack item = FemtocraftStringUtils.itemStackFromString(sitem);
+            if (item != null) {
+                if (rtype.equals(recipeAssemblerParam)) {
+                    return new GuiTechnologyAssemblerRenderer(gui, item, text);
+                } else if (rtype.equals(recipeDimensionalParam)) {
 
-            }
-            else if (rtype.equals(recipeTemporalParam)) {
+                } else if (rtype.equals(recipeTemporalParam)) {
 
+                }
             }
         }
         return null;
@@ -176,7 +175,8 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
     @Override
     public void render(int x, int y, int width, int height, int displayPage, int mouseX, int mouseY, List tooltip,
                        boolean isResearched) {
-        pages.get(displayPage - 1).render(x, y, width, height, displayPage, mouseX, mouseY, tooltip, isResearched);
+        pages.get(displayPage == 0 ? 0 :
+                displayPage - 1).render(x, y, width, height, displayPage, mouseX, mouseY, tooltip, isResearched);
     }
 
     @Override

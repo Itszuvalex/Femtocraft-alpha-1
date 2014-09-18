@@ -52,23 +52,23 @@ public class ResearchTechnology {
     @Configurable(comment = "True if special background in Research Tree, false if normal")
     public boolean isKeystone;
     @Configurable(comment = "Null for free research, ItemStack[9] (can contain nulls) as required items to put into " +
-            "research console.")
+                            "research console.")
     public ItemStack[] researchMaterials;
 
     @Configurable(comment = "ItemStack that replaces technology item when used.  This will only ever have a stack " +
-            "size of 1.")
+                            "size of 1.")
     public ItemStack discoverItem;
 
     @Configurable(comment =
             "Description string displayed when Technology is clicked in the research tree.  This is displayed when " +
-                    "the Technology has been researched.  This is " +
-                    "parsed for recipes and automatically layed out across as many pages as needed.")
+            "the Technology has been researched.  This is " +
+            "parsed for recipes and automatically layed out across as many pages as needed.")
     public String researchedDescription;
 
     @Configurable(comment =
             "Description string displayed when Technology is clicked in the research tree.  This is displayed when " +
-                    "the Technology has been discovered but not researched.  This is " +
-                    "parsed for recipes and automatically layed out across as many pages as needed.")
+            "the Technology has been discovered but not researched.  This is " +
+            "parsed for recipes and automatically layed out across as many pages as needed.")
     public String discoveredDescription;
 
     @Configurable(comment = "Set this to true to force this to be discovered off the bat.")
@@ -91,14 +91,16 @@ public class ResearchTechnology {
                               ItemStack displayItem,
                               boolean isKeystone, ItemStack[] resMats,
                               ItemStack discoverItem) {
-        this(name, shortDescription, level, prereq, displayItem, isKeystone, resMats, discoverItem, "", "", false, false);
+        this(name, shortDescription, level, prereq, displayItem, isKeystone, resMats, discoverItem, "", "", false,
+                false);
     }
 
     public ResearchTechnology(String name, String shortDescription,
                               EnumTechLevel level, String[] prereq,
                               ItemStack displayItem,
                               boolean isKeystone, ItemStack[] resMats,
-                              ItemStack discoverItem, String discoverDescription, String researchDescription, boolean discoveredByDefault, boolean researchedByDefault) {
+                              ItemStack discoverItem, String discoverDescription, String researchDescription,
+                              boolean discoveredByDefault, boolean researchedByDefault) {
         this.name = name;
         this.shortDescription = shortDescription;
         this.level = level;
@@ -109,8 +111,8 @@ public class ResearchTechnology {
         this.isKeystone = isKeystone;
         this.researchMaterials = resMats == null ? new ItemStack[0] : resMats;
         this.discoverItem = discoverItem;
-        this.discoveredDescription = discoverDescription;
-        this.researchedDescription = researchDescription;
+        this.discoveredDescription = discoverDescription == null ? "" : discoverDescription;
+        this.researchedDescription = researchDescription == null ? "" : researchDescription;
         this.discoveredByDefault = discoveredByDefault;
         this.researchedByDefault = researchedByDefault;
     }
@@ -173,7 +175,7 @@ public class ResearchTechnology {
             Femtocraft.logger
                     .log(Level.SEVERE,
                             "Technologies must return a GuiTechnology class that supports the constructor" +
-                                    "(GuiResearch, ResearchTechnologyStatus)");
+                            "(GuiResearch, ResearchTechnologyStatus)");
             e.printStackTrace();
         } catch (SecurityException e) {
             e.printStackTrace();
@@ -184,6 +186,7 @@ public class ResearchTechnology {
 
     @SideOnly(value = Side.CLIENT)
     public Class<? extends GuiTechnology> getGuiClass() {
-        return (researchedDescription == null || researchedDescription.isEmpty()) && (discoveredDescription == null || discoveredDescription.isEmpty()) ? GuiTechnologyDefault.class : GuiTechnology.class;
+        return (researchedDescription == null || researchedDescription.isEmpty()) && (discoveredDescription == null ||
+                                                                                      discoveredDescription.isEmpty()) ? GuiTechnologyDefault.class : GuiTechnology.class;
     }
 }

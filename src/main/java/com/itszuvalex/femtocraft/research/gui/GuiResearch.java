@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft.research.gui;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.graph.IGraphNode;
+import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
 import com.itszuvalex.femtocraft.managers.research.ResearchPlayer;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnologyStatus;
@@ -116,10 +117,11 @@ public class GuiResearch extends GuiScreen {
         short short1 = 141;
         short short2 = 141;
         this.field_74117_m = this.guiMapX = this.field_74124_q = (double) (
-                0 - 1)
+                Femtocraft.researchManager.getTechnology(ManagerResearch.MACROSCOPIC_STRUCTURES).xDisplay - 1)
                                                                  * 24 - short1 / 2 - 12;
         this.field_74115_n = this.guiMapY = this.field_74123_r = (double) (
-                0 * 24 - short2 / 2);
+                Femtocraft.researchManager.getTechnology(ManagerResearch.MACROSCOPIC_STRUCTURES).yDisplay * 24 -
+                short2 / 2);
     }
 
     public static void setSize(int rows, int columns) {

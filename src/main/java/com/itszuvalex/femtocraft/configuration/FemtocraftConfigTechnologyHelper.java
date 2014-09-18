@@ -29,17 +29,16 @@ public class FemtocraftConfigTechnologyHelper {
     public void loadTechnologies() {
         List<ResearchTechnology> loadedTechnologies;
         if (config.get(SECTION_KEY, "Use custom classes", false, "Set to true if you define new technologies in this " +
-                "section.  If false, " +
-                "Femtocraft will only look for technologies of " +
-                "certain names, specifically the ones bundled with " +
-                "the vanilla version.  If true, " +
-                "it will instead look at all keys in this section " +
-                "and attempt to load each as a distinct Technology, " +
-                "and will not load ANY of the original technologies" +
-                ".").getBoolean(false)) {
+                                                                 "section.  If false, " +
+                                                                 "Femtocraft will only look for technologies of " +
+                                                                 "certain names, specifically the ones bundled with " +
+                                                                 "the vanilla version.  If true, " +
+                                                                 "it will instead look at all keys in this section " +
+                                                                 "and attempt to load each as a distinct Technology, " +
+                                                                 "and will not load ANY of the original technologies" +
+                                                                 ".").getBoolean(false)) {
             loadedTechnologies = loadCustomTechnologies();
-        }
-        else {
+        } else {
             loadedTechnologies = loadDefaultTechnologies();
         }
 
@@ -65,43 +64,47 @@ public class FemtocraftConfigTechnologyHelper {
         return new ArrayList<ResearchTechnology>(Arrays.asList(
                 loadResearchTechnology(new ResearchTechnology(
                         ManagerResearch.METALLURGY, "Titanium, Thorium, Platinum", EnumTechLevel.MACRO,
-                        null, new ItemStack(Femtocraft.itemIngotTemperedTitanium),
-                        true, null)),
+                        new String[]{ManagerResearch.MACROSCOPIC_STRUCTURES},
+                        new ItemStack(Femtocraft.itemIngotTemperedTitanium),
+                        true, null, null, null, null, false, true)),
                 loadResearchTechnology(new ResearchTechnology(
-                        ManagerResearch.BASIC_CIRCUITS, "Farenite, Circuit Boards", EnumTechLevel.MACRO,
-                        null, new ItemStack(Femtocraft.itemMicrochip), true,
-                        null, null) {
-                    @Override
-                    public Class<? extends GuiTechnology> getGuiClass() {
-                        return GuiTechnologyBasicCircuits.class;
-                    }
-                }),
+                                ManagerResearch.BASIC_CIRCUITS, "Farenite, Circuit Boards", EnumTechLevel.MACRO,
+                                new String[]{ManagerResearch.MACROSCOPIC_STRUCTURES},
+                                new ItemStack(Femtocraft.itemMicrochip), true,
+                                null, null, null, null, false, true)
+                ),
                 loadResearchTechnology(new ResearchTechnology(
-                        ManagerResearch.MACHINING, "Start your industry!", EnumTechLevel.MICRO,
-                        new String[]{
-                                ManagerResearch.METALLURGY, ManagerResearch.BASIC_CIRCUITS},
-                        new ItemStack(Femtocraft.itemMicroPlating), false,
-                        new ItemStack[]{new ItemStack(
-                                Femtocraft.itemIngotTemperedTitanium), new ItemStack(
-                                Femtocraft.itemMicrochip), new ItemStack(
-                                Femtocraft.itemIngotTemperedTitanium), new ItemStack(
-                                Femtocraft.itemMicrochip), new ItemStack(
-                                Femtocraft.itemConductivePowder), new ItemStack(
-                                Femtocraft.itemMicrochip), new ItemStack(
-                                Femtocraft.itemIngotTemperedTitanium), new ItemStack(
-                                Femtocraft.itemMicrochip), new ItemStack(
-                                Femtocraft.itemIngotTemperedTitanium)},
-                        new ItemStack(
-                                Femtocraft.itemMicroPlating)
-                ) {
-                    @Override
-                    public Class<? extends GuiTechnology> getGuiClass() {
-                        return GuiTechnologyMachining.class;
-                    }
-                }),
+                                ManagerResearch.MACHINING, "Start your industry!", EnumTechLevel.MICRO,
+                                new String[]{
+                                        ManagerResearch.METALLURGY, ManagerResearch.BASIC_CIRCUITS},
+                                new ItemStack(Femtocraft.itemMicroPlating), false,
+                                new ItemStack[]{new ItemStack(
+                                        Femtocraft.itemIngotTemperedTitanium), new ItemStack(
+                                        Femtocraft.itemMicrochip), new ItemStack(
+                                        Femtocraft.itemIngotTemperedTitanium), new ItemStack(
+                                        Femtocraft.itemMicrochip), new ItemStack(
+                                        Femtocraft.itemConductivePowder), new ItemStack(
+                                        Femtocraft.itemMicrochip), new ItemStack(
+                                        Femtocraft.itemIngotTemperedTitanium), new ItemStack(
+                                        Femtocraft.itemMicrochip), new ItemStack(
+                                        Femtocraft.itemIngotTemperedTitanium)},
+                                new ItemStack(
+                                        Femtocraft.itemMicroPlating)
+                        )
+                ),
                 loadResearchTechnology(new ResearchTechnology(
                         ManagerResearch.SCIENTIFIC_THEORY, "Gentlemen, start your research!", EnumTechLevel.MACRO,
-                        null, new ItemStack(Femtocraft.blockResearchConsole), true, null, null, null, "What is a scientist without the scientific method?  Luckily for you, you no longer have to experiment.  This handy Research Computer analyzes all of your knowledge and will theorize prototypes for you to make.  Stick these prototypes into the Research Console to have it analyze the potential uses and to store the standardized blueprints into your knowledge store. __Recipe.Assembler:tile.BlockResearchComputer:Allows visual access to your personalized knowledge store.__ __Recipe.Assembler:tile.BlockResearchConsole:Analyzes your prototypes and generates standardized blueprints.__", false, false
+                        new String[]{ManagerResearch.MACROSCOPIC_STRUCTURES},
+                        new ItemStack(Femtocraft.blockResearchConsole), true, null, null, null,
+                        "What is a scientist without the scientific method?  Luckily for you, " +
+                        "you no longer have to experiment.  This handy Research Computer analyzes all of your " +
+                        "knowledge and will theorize prototypes for you to make.  Stick these prototypes into the " +
+                        "Research Console to have it analyze the potential uses and to store the standardized " +
+                        "blueprints into your knowledge store. __Recipe.Assembler:Femtocraft:tile" +
+                        ".BlockResearchComputer--Allows visual access to your personalized knowledge store.__ " +
+                        "__Recipe" +
+                        ".Assembler:Femtocraft:tile.BlockResearchConsole--Analyzes your prototypes and generates " +
+                        "standardized blueprints.__", false, true
                 )),
                 loadResearchTechnology(new ResearchTechnology(
                         ManagerResearch.ALGORITHMS, "", EnumTechLevel.MICRO,
@@ -184,14 +187,9 @@ public class FemtocraftConfigTechnologyHelper {
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(ManagerResearch.BASIC_CHEMISTRY,
-                                               "Composition of Matter", EnumTechLevel.MACRO, null,
-                                               new ItemStack(Femtocraft.itemMineralLattice), true, null, null) {
-                                           @Override
-                                           public Class<? extends GuiTechnology> getGuiClass() {
-                                               return GuiTechnologyBasicChemistry.class;
-                                           }
-                                       }
-
+                                "Composition of Matter", EnumTechLevel.MACRO,
+                                new String[]{ManagerResearch.MACROSCOPIC_STRUCTURES},
+                                new ItemStack(Femtocraft.itemMineralLattice), true, null, null, null, null, false, true)
                 ),
 
                 loadResearchTechnology(new ResearchTechnology(
