@@ -27,7 +27,7 @@ import com.itszuvalex.femtocraft.blocks.BlockNanoStone;
 import com.itszuvalex.femtocraft.blocks.BlockUnidentifiedAlloy;
 import com.itszuvalex.femtocraft.command.CommandBase;
 import com.itszuvalex.femtocraft.command.CommandFemtocraft;
-import com.itszuvalex.femtocraft.configuration.FemtocraftConfigTechnologyHelper;
+import com.itszuvalex.femtocraft.configuration.FemtocraftConfigTechnology;
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs;
 import com.itszuvalex.femtocraft.core.fluids.BlockFluidMass;
 import com.itszuvalex.femtocraft.core.fluids.FluidMass;
@@ -92,6 +92,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.io.File;
 import java.util.logging.Logger;
 
 @Mod(modid = Femtocraft.ID, name = "Femtocraft", version = Femtocraft.VERSION)
@@ -106,6 +107,8 @@ import java.util.logging.Logger;
 public class Femtocraft {
     public static final String ID = "Femtocraft";
     public static final String VERSION = "0.1.0";
+    public static final String TECH_CONFIG_APPEND = "Technology";
+    public static final String RECIPE_CONFIG_APPEND = "Recipes";
 
     @Instance(ID)
     public static Femtocraft instance;
@@ -120,6 +123,8 @@ public class Femtocraft {
     public static Logger logger;
 
     public static Configuration config;
+    public static Configuration technologyConfig;
+    public static Configuration recipeConfig;
 
     public static ManagerRecipe recipeManager;
     public static ManagerResearch researchManager;
@@ -364,9 +369,15 @@ public class Femtocraft {
 
         femtocraftServerCommand = new CommandFemtocraft();
 
+        File suggestedConfig = event.getSuggestedConfigurationFile();
         config = new Configuration(
-                event.getSuggestedConfigurationFile());
+                suggestedConfig);
         FemtocraftConfigs.load(config);
+        String[] suggestConfigName = suggestedConfig.getName().split("\\.");
+        technologyConfig = new Configuration(new File(suggestedConfig.getParentFile(),
+                suggestConfigName[0] + TECH_CONFIG_APPEND + suggestConfigName[1]));
+        recipeConfig = new Configuration(new File(suggestedConfig.getParentFile(), suggestConfigName[0] +
+                                                                                   RECIPE_CONFIG_APPEND + suggestConfigName[1]));
 
         Femtocraft.proxy.registerTileEntities();
         Femtocraft.proxy.registerRendering();
@@ -1211,7 +1222,7 @@ public class Femtocraft {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         ManagerRecipe.assemblyRecipes.registerDefaultRecipes();
-        new FemtocraftConfigTechnologyHelper(config).loadTechnologies();
+        new FemtocraftConfigTechnology(technologyConfig).loadTechnologies();
 
         if (event.getSide() == Side.CLIENT) {
             researchManager.calculateGraph();

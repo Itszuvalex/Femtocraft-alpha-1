@@ -22,6 +22,7 @@
 package com.itszuvalex.femtocraft.research.gui;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.graph.IGraphNode;
 import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
 import com.itszuvalex.femtocraft.managers.research.ResearchPlayer;
@@ -52,6 +53,8 @@ import java.util.Random;
 
 @SideOnly(Side.CLIENT)
 public class GuiResearch extends GuiScreen {
+    @Configurable(comment = "Name of technology to focus research tree on when the GUI is first opened.")
+    public static String defaultTechnology = ManagerResearch.MACROSCOPIC_STRUCTURES;
     private static final ResourceLocation achievementTextures = new ResourceLocation(
             Femtocraft.ID.toLowerCase(),
             "textures/guis/research_background.png");
@@ -117,10 +120,10 @@ public class GuiResearch extends GuiScreen {
         short short1 = 141;
         short short2 = 141;
         this.field_74117_m = this.guiMapX = this.field_74124_q = (double) (
-                Femtocraft.researchManager.getTechnology(ManagerResearch.MACROSCOPIC_STRUCTURES).xDisplay - 1)
+                Femtocraft.researchManager.getTechnology(defaultTechnology).xDisplay - 1)
                                                                  * 24 - short1 / 2 - 12;
         this.field_74115_n = this.guiMapY = this.field_74123_r = (double) (
-                Femtocraft.researchManager.getTechnology(ManagerResearch.MACROSCOPIC_STRUCTURES).yDisplay * 24 -
+                Femtocraft.researchManager.getTechnology(defaultTechnology).yDisplay * 24 -
                 short2 / 2);
     }
 
