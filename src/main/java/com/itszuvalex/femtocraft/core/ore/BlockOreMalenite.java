@@ -22,6 +22,7 @@
 package com.itszuvalex.femtocraft.core.ore;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.configuration.Configurable;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -29,7 +30,12 @@ import net.minecraft.client.renderer.texture.IconRegister;
 
 import java.util.Random;
 
+@Configurable
 public class BlockOreMalenite extends BlockOreBase {
+    @Configurable(comment = "Maximum amount of Malenite dust to drop.")
+    public static int DROP_AMOUNT_MAX = 4;
+    @Configurable(comment = "Minimum amount of Malenite dust to drop.")
+    public static int DROP_AMOUNT_MIN = 2;
 
     public BlockOreMalenite(int id) {
         super(id);
@@ -45,7 +51,7 @@ public class BlockOreMalenite extends BlockOreBase {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "BlockOreMalenite");
+                                                               .toLowerCase() + ":" + "BlockOreMalenite");
     }
 
     @Override
@@ -55,7 +61,6 @@ public class BlockOreMalenite extends BlockOreBase {
 
     @Override
     public int quantityDropped(Random random) {
-        // 2-4
-        return random.nextInt(3) + 2;
+        return random.nextInt(DROP_AMOUNT_MAX + 1 - DROP_AMOUNT_MIN) + DROP_AMOUNT_MIN;
     }
 }

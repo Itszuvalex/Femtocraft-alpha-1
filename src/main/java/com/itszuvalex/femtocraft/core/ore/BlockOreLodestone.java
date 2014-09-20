@@ -30,18 +30,17 @@ import net.minecraft.client.renderer.texture.IconRegister;
 
 import java.util.Random;
 
-@Configurable
-public class BlockOreFarenite extends BlockOreBase {
-    @Configurable(comment = "Maximum amount of Farenite dust to drop.")
+public class BlockOreLodestone extends BlockOreBase {
+    @Configurable(comment = "Maximum amount Lodestone nuggets to drop.")
     public static int DROP_AMOUNT_MAX = 4;
-    @Configurable(comment = "Minimum amount of Farenite dust to drop.")
-    public static int DROP_AMOUNT_MIN = 4;
+    @Configurable(comment = "Minimum amount of Lodestone nuggets to drop.")
+    public static int DROP_AMOUNT_MIN = 2;
 
-    public BlockOreFarenite(int id) {
+    public BlockOreLodestone(int id) {
         super(id);
         setCreativeTab(Femtocraft.femtocraftTab);
-        setTextureName(Femtocraft.ID.toLowerCase() + ":" + "BlockOreFarenite");
-        setUnlocalizedName("BlockOreFarenite");
+        setTextureName(Femtocraft.ID.toLowerCase() + ":" + "BlockOreLodestone");
+        setUnlocalizedName("BlockOreLodestone");
         setHardness(3.0f);
         setStepSound(Block.soundStoneFootstep);
         setResistance(1f);
@@ -51,12 +50,12 @@ public class BlockOreFarenite extends BlockOreBase {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
-                                                               .toLowerCase() + ":" + "BlockOreFarenite");
+                                                               .toLowerCase() + ":" + "BlockOreLodestone");
     }
 
     @Override
     public int idDropped(int par1, Random random, int par2) {
-        return Femtocraft.itemIngotFarenite.itemID;
+        return Femtocraft.itemNuggetLodestone.itemID;
     }
 
     @Override

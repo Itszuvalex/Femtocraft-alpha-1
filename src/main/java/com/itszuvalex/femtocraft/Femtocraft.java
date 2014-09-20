@@ -140,6 +140,7 @@ public class Femtocraft {
     public static Block blockOreThorium;
     public static Block blockOreFarenite;
     public static Block blockOreMalenite;
+    public static Block blockOreLodestone;
     public static Block microStone;
     public static Block nanoStone;
     public static Block femtoStone;
@@ -229,6 +230,8 @@ public class Femtocraft {
     public static Item itemIngotMalenite;
     public static Item itemIngotTemperedTitanium;
     public static Item itemIngotThFaSalt;
+    public static Item itemNuggetLodestone;
+    public static Item itemChunkLodestone;
 
     //micro
     public static Item itemConductivePowder;
@@ -462,6 +465,15 @@ public class Femtocraft {
         if (FemtocraftConfigs.registerMaleniteOreInOreDictionary) {
             OreDictionary
                     .registerOre("oreMalenite", new ItemStack(blockOreMalenite));
+        }
+
+        blockOreLodestone = new BlockOreLodestone(FemtocraftConfigs.BlockOreLodestoneID).setUnlocalizedName
+                ("BlockOreLodestone");
+        MinecraftForge.setBlockHarvestLevel(blockOreLodestone, "pickaxe", 2);
+        GameRegistry.registerBlock(blockOreLodestone, "BlockOreLodestone");
+        LanguageRegistry.addName(blockOreLodestone, "Lodestone Ore");
+        if (FemtocraftConfigs.registerLodestoneOreInOreDictionary) {
+            OreDictionary.registerOre("oreLodestone", new ItemStack(blockOreLodestone));
         }
 
         nanoStone = new BlockNanoStone(FemtocraftConfigs.BlockNanoStoneID).setUnlocalizedName("BlockNanoStone");
@@ -873,6 +885,14 @@ public class Femtocraft {
         itemIngotThFaSalt = registerItem(FemtocraftConfigs.ItemIngotThFaSaltID, "ItemIngotThFaSalt",
                 "ThFa Salt Ingot");
         OreDictionary.registerOre("ingotThFaSalt", new ItemStack(itemIngotThFaSalt));
+
+        itemNuggetLodestone = registerItem(FemtocraftConfigs.ItemNuggetLodestoneID, "ItemNuggetLodestone",
+                "Lodestone Nugget");
+        OreDictionary.registerOre("nuggetLodestone", new ItemStack(itemNuggetLodestone));
+
+        itemChunkLodestone = registerItem(FemtocraftConfigs.ItemChunkLodestoneID, "ItemChunkLodestone",
+                "Lodestone Chunk");
+        OreDictionary.registerOre("chunkLodestone", new ItemStack(itemChunkLodestone));
 
         //
 

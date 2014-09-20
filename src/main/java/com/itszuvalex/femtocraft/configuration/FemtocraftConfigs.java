@@ -53,6 +53,9 @@ public class FemtocraftConfigs {
     int BlockOreMaleniteID;
     public static
     @CfgId(block = true)
+    int BlockOreLodestoneID;
+    public static
+    @CfgId(block = true)
     int BlockMicroStoneID;
     public static
     @CfgId(block = true)
@@ -268,6 +271,12 @@ public class FemtocraftConfigs {
     public static
     @CfgId
     int ItemIngotThFaSaltID;
+    public static
+    @CfgId
+    int ItemNuggetLodestoneID;
+    public static
+    @CfgId
+    int ItemChunkLodestoneID;
     public static
     @CfgId
     int ItemConductivePowderID;
@@ -572,6 +581,10 @@ public class FemtocraftConfigs {
     @CfgBool
     @CfgCat(category = CATEGORY_GENERATION)
     boolean maleniteGen = true;
+    public static
+    @CfgBool
+    @CfgCat(category = CATEGORY_GENERATION)
+    boolean lodestoneGen = true;
     public static
     @CfgBool
     @CfgCat(category = CATEGORY_GENERATION)
@@ -1080,6 +1093,26 @@ public class FemtocraftConfigs {
     public static
     @CfgBool
     @CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+    boolean registerLodestoneOreInOreDictionary = true;
+    public static
+    @CfgInt
+    @CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+    int lodestoneOreVeinsPerChunkCount = 10;
+    public static
+    @CfgInt
+    @CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+    int lodestoneOreBlockPerVeinCount = 7;
+    public static
+    @CfgInt
+    @CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+    int lodestoneOreYHeightMax = 140;
+    public static
+    @CfgInt
+    @CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+    int lodestoneOreYHeightMin = 60;
+    public static
+    @CfgBool
+    @CfgCat(category = CATEGORY_ORE_CONFIGURATION)
     boolean registerTitaniumDustInOreDictionary = true;
     public static
     @CfgBool
@@ -1110,7 +1143,6 @@ public class FemtocraftConfigs {
     static {
         FemtocraftConfigHelper.init();
     }
-
 
     public static void load(Configuration config) {
         try {

@@ -133,7 +133,6 @@ public class FemtocraftConfigHelper {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        registerConfigurableClass(ItemAssemblySchematic.class);
     }
 
     private static void registerConfigLoaders() {
