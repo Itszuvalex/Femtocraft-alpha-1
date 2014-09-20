@@ -210,7 +210,7 @@ public class ResearchPlayer {
 
     public boolean hasResearchedTechnology(String tech) {
         if (tech == null || tech.equals("")) {
-            return true;
+            return false;
         }
 
         ResearchTechnologyStatus ts = techStatus.get(tech);

@@ -29,5 +29,5 @@ import java.lang.annotation.RetentionPolicy;
  */
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Configurable {
-    public String comment();
+    public String comment() default "";
 }

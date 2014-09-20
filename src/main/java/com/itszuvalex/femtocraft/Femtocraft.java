@@ -375,9 +375,10 @@ public class Femtocraft {
         FemtocraftConfigs.load(config);
         String[] suggestConfigName = suggestedConfig.getName().split("\\.");
         technologyConfig = new Configuration(new File(suggestedConfig.getParentFile(),
-                suggestConfigName[0] + TECH_CONFIG_APPEND + suggestConfigName[1]));
+                suggestConfigName[0] + TECH_CONFIG_APPEND + "." + suggestConfigName[1]));
         recipeConfig = new Configuration(new File(suggestedConfig.getParentFile(), suggestConfigName[0] +
-                                                                                   RECIPE_CONFIG_APPEND + suggestConfigName[1]));
+                                                                                   RECIPE_CONFIG_APPEND + "." +
+                                                                                   suggestConfigName[1]));
 
         Femtocraft.proxy.registerTileEntities();
         Femtocraft.proxy.registerRendering();

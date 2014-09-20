@@ -22,19 +22,28 @@
 package com.itszuvalex.femtocraft.industry.tiles;
 
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
+import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 
+@Configurable
 public class TileEntityFemtoEntangler extends TileEntityBaseEntityNanoEnmesher {
     public static final int outputSlot = 13;
     public static final int inventorySize = 14;
-    public static int powerStorage = 100000;
-    public static int powerToCook_default = 160;
-    public static float tickMultiplier_default = .5f;
+    @Configurable(comment = "Recipe tech level.")
+    public static EnumTechLevel RECIPE_TECH_LEVEL = EnumTechLevel.FEMTO;
+    @Configurable(comment = "Power tech level.")
+    public static EnumTechLevel TECH_LEVEL = EnumTechLevel.FEMTO;
+    @Configurable(comment = "Power storage maximum.")
+    public static int POWER_STORAGE = 100000;
+    @Configurable(comment = "Power per item to begin processing.")
+    public static int POWER_TO_COOK = 160;
+    @Configurable(comment = "Multiplier for tick processing time of Dimensional Recipes.")
+    public static float TICKS_TO_COOK_MULTIPLIER = .5f;
 
     public TileEntityFemtoEntangler() {
         super();
-        setTechLevel(EnumTechLevel.FEMTO);
-        setMaxStorage(powerStorage);
+        setTechLevel(TECH_LEVEL);
+        setMaxStorage(POWER_STORAGE);
         inventory.setInventorySize(inventorySize);
     }
 
@@ -45,7 +54,7 @@ public class TileEntityFemtoEntangler extends TileEntityBaseEntityNanoEnmesher {
 
     @Override
     protected float getTickMultiplier() {
-        return tickMultiplier_default;
+        return TICKS_TO_COOK_MULTIPLIER;
     }
 
     @Override
@@ -55,11 +64,11 @@ public class TileEntityFemtoEntangler extends TileEntityBaseEntityNanoEnmesher {
 
     @Override
     protected int getPowerToCook() {
-        return powerToCook_default;
+        return POWER_TO_COOK;
     }
 
     @Override
     protected EnumTechLevel getTechLevel() {
-        return EnumTechLevel.FEMTO;
+        return RECIPE_TECH_LEVEL;
     }
 }

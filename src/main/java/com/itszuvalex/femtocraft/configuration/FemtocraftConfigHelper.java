@@ -21,13 +21,15 @@
 
 package com.itszuvalex.femtocraft.configuration;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.reflect.ClassPath;
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.industry.items.ItemAssemblySchematic;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.*;
@@ -72,6 +74,7 @@ public class FemtocraftConfigHelper {
             fields = fieldsList.toArray(new Field[fieldsList.size()]);
         }
         for (Field field : fields) {
+            if (field.getDeclaringClass() != clazz && obj == null) continue;
             boolean accessible = field.isAccessible();
             if (!field.isAccessible()) field.setAccessible(true);
             Configurable canno = field.getAnnotation(Configurable.class);
@@ -83,7 +86,7 @@ public class FemtocraftConfigHelper {
                     } catch (Exception e) {
                         Femtocraft.logger.log(Level.SEVERE,
                                 "Error loading @Configurable field " + field.getName() + " in class " +
-                                        clazz.getName() + ".");
+                                clazz.getName() + ".");
                         e.printStackTrace();
                     }
                 }
@@ -110,7 +113,27 @@ public class FemtocraftConfigHelper {
     }
 
     private static void registerConfigurableClasses() {
-        registerConfigurableClass(ItemAssemblySchematic.class);
+        try {
+            Femtocraft.logger.log(Level.INFO, "Finding all configurable classes for registration.");
+            ImmutableSet<ClassPath.ClassInfo> classes = ClassPath.from(FemtocraftConfigHelper.class.getClassLoader())
+                    .getTopLevelClassesRecursive("com.itszuvalex.femtocraft");
+            for (ClassPath.ClassInfo info : classes) {
+                try {
+                    Class clazz = Class.forName(info.getName());
+                    if (clazz.getAnnotation(Configurable.class) != null) {
+                        registerConfigurableClass(clazz);
+                    }
+                } catch (ClassNotFoundException e) {
+                    Femtocraft.logger.log(Level.SEVERE,
+                            "Could not find @Configurable class " + info.getName() + " when attempting to discover.");
+                    e.printStackTrace();
+                }
+            }
+            Femtocraft.logger.log(Level.INFO, "Finished registering configurable classes.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        registerConfigurableClass(ItemAssemblySchematic.class);
     }
 
     private static void registerConfigLoaders() {
@@ -238,7 +261,8 @@ public class FemtocraftConfigHelper {
             }
 
             @Override
-            EnumTechLevel getValue(String key, EnumTechLevel def, String section, Configurable anno, Configuration config) {
+            EnumTechLevel getValue(String key, EnumTechLevel def, String section, Configurable anno,
+                                   Configuration config) {
                 return EnumTechLevel.getTech(config.get(section, key,
                         def.key,
                         anno.comment()).getString());
@@ -288,7 +312,8 @@ public class FemtocraftConfigHelper {
         });
         loaderMap.put(ItemStack[].class, new FieldLoader<ItemStack[]>() {
             @Override
-            public void load(Field field, String section, Configurable anno, Object obj, Configuration config) throws IllegalAccessException {
+            public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
+                    throws IllegalAccessException {
                 field.set(obj, getValue(field.getName(), (ItemStack[]) field.get(obj), section, anno, config));
             }
 

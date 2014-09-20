@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft.industry.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
+import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.managers.ManagerRecipe;
 import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
@@ -40,15 +41,24 @@ import net.minecraftforge.fluids.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+@Configurable
 public class TileEntityBaseEntityMicroDeconstructor extends
         TileEntityBaseEntityIndustry implements ISidedInventory, IFluidHandler {
 
-
-    public static int powerStorage = 800;
-    public static int massStorage = 600;
-    public static int powerToCook = 40;
-    public static int ticksToCook = 100;
-    public static int maxSmelt = 1;
+    @Configurable(comment = "Assembler recipe tech level maximum.")
+    public static EnumTechLevel ASSEMBLER_TECH_LEVEL = EnumTechLevel.MICRO;
+    @Configurable(comment = "Power tech level.")
+    public static EnumTechLevel POWER_LEVEL = EnumTechLevel.MICRO;
+    @Configurable(comment = "Power storage maximum.")
+    public static int POWER_STORAGE = 800;
+    @Configurable(comment = "Mass storage maximum.")
+    public static int MASS_STORAGE = 600;
+    @Configurable(comment = "Power per item to begin processing.")
+    public static int POWER_TO_COOK = 40;
+    @Configurable(comment = "Ticks required to process.")
+    public static int TICKS_TO_COOK = 100;
+    @Configurable(comment = "Maximum number of items allowed at a time.")
+    public static int MAX_SMELT = 1;
     /**
      * The number of ticks that the current item has been cooking for
      */
@@ -77,9 +87,9 @@ public class TileEntityBaseEntityMicroDeconstructor extends
 
     public TileEntityBaseEntityMicroDeconstructor() {
         super();
-        setMaxStorage(powerStorage);
-        tank = new FluidTank(massStorage);
-        setTechLevel(EnumTechLevel.MICRO);
+        setMaxStorage(POWER_STORAGE);
+        tank = new FluidTank(MASS_STORAGE);
+        setTechLevel(POWER_LEVEL);
         deconstructorInventory = new BaseInventory(10);
     }
 
@@ -232,8 +242,7 @@ public class TileEntityBaseEntityMicroDeconstructor extends
     }
 
     protected int getTicksToCook() {
-        // TODO: Load from configs
-        return ticksToCook;
+        return TICKS_TO_COOK;
     }
 
     /*
@@ -275,11 +284,11 @@ public class TileEntityBaseEntityMicroDeconstructor extends
 
     protected int getPowerToCook() {
         // TODO: Load from configs
-        return powerToCook;
+        return POWER_TO_COOK;
     }
 
     protected EnumTechLevel getAssemblerTech() {
-        return EnumTechLevel.MICRO;
+        return ASSEMBLER_TECH_LEVEL;
     }
 
     private boolean roomForItems(ItemStack[] items) {
@@ -343,7 +352,7 @@ public class TileEntityBaseEntityMicroDeconstructor extends
     }
 
     protected int getMaxSimultaneousSmelt() {
-        return maxSmelt;
+        return MAX_SMELT;
     }
 
     /*
