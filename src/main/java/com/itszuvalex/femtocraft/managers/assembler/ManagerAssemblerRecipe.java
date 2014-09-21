@@ -62,22 +62,10 @@ import java.util.logging.Level;
  */
 public class ManagerAssemblerRecipe {
     public static final long shapelessPermuteTimeMillis = 10;
-    //    private SortedMap<ItemStack[], AssemblerRecipe> inputToRecipeMap;
-//    private SortedMap<ItemStack, AssemblerRecipe> outputToRecipeMap;
-//    private HashMap<EnumTechLevel, ArrayList<AssemblerRecipe>> techLevelToRecipeMap;
-//    private HashMap<ResearchTechnology, ArrayList<AssemblerRecipe>> technologyToRecipeMap;
     AssemblerRecipeDatabase ard = new AssemblerRecipeDatabase();
 
-    public ManagerAssemblerRecipe() {
-//        inputToRecipeMap = new TreeMap<ItemStack[], AssemblerRecipe>(
-//                new ComparatorItemStackArray());
-//        outputToRecipeMap = new TreeMap<ItemStack, AssemblerRecipe>(
-//                new ComparatorItemStack());
-//        techLevelToRecipeMap = new HashMap<EnumTechLevel, ArrayList<AssemblerRecipe>>();
-//        technologyToRecipeMap = new HashMap<ResearchTechnology, ArrayList<AssemblerRecipe>>();
 
-        registerRecipes();
-    }
+    public void init() {registerRecipes();}
 
     private void registerRecipes() {
         if (ard.shouldRegister()) {
@@ -2324,6 +2312,14 @@ public class ManagerAssemblerRecipe {
     public ArrayList<AssemblerRecipe> getRecipesForTechLevel(EnumTechLevel level) {
 //        return techLevelToRecipeMap.get(level);
         return ard.getRecipesForLevel(level);
+    }
+
+    /**
+     * DO NOT CALL THIS unless you have good reason.  This database is huge and will take a very long time to construct.
+     * @return
+     */
+    public ArrayList<AssemblerRecipe> getAllRecipes() {
+        return ard.getAllRecipes();
     }
 
     public ArrayList<AssemblerRecipe> getRecipesForTechnology(

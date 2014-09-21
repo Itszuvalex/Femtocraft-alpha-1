@@ -80,7 +80,7 @@ public class AssemblerRecipeDatabase {
     private void refreshConnection() throws SQLException {
         if (c == null) {
             c = DriverManager.getConnection("jdbc:sqlite:" + "config/" +
-                    DB_FILENAME);
+                                            DB_FILENAME);
         }
     }
 
@@ -90,19 +90,19 @@ public class AssemblerRecipeDatabase {
             refreshConnection();
             s = c.createStatement();
             String sql = "CREATE TABLE " + DB_TABLE_RECIPES +
-                    "(ID INTEGER PRIMARY KEY, " +
-                    DB_RECIPES_INPUT + " STRING NOT NULL," +
-                    DB_RECIPES_INPUT_SIZE + " STRING NOT NULL," +
-                    DB_RECIPES_MASS + " INT CHECK(" + DB_RECIPES_MASS + " >= " +
-                    "0) NOT NULL," +
-                    DB_RECIPES_OUTPUT + " STRING NOT NULL," +
-                    DB_RECIPES_OUTPUT_SIZE + " STRING NOT NULL," +
-                    DB_RECIPES_OUTPUT_NBT + " BYTES," +
-                    DB_RECIPES_TECH_LEVEL + " STRING NOT NULL," +
-                    DB_RECIPES_TECHNOLOGY + " STRING," +
-                    "UNIQUE(" + DB_RECIPES_INPUT + ", " + DB_RECIPES_MASS + "," +
-                    DB_RECIPES_OUTPUT + "), " +
-                    "FOREIGN KEY(" + DB_RECIPES_OUTPUT + ") REFERENCES ITEMS(ID))";
+                         "(ID INTEGER PRIMARY KEY, " +
+                         DB_RECIPES_INPUT + " STRING NOT NULL," +
+                         DB_RECIPES_INPUT_SIZE + " STRING NOT NULL," +
+                         DB_RECIPES_MASS + " INT CHECK(" + DB_RECIPES_MASS + " >= " +
+                         "0) NOT NULL," +
+                         DB_RECIPES_OUTPUT + " STRING NOT NULL," +
+                         DB_RECIPES_OUTPUT_SIZE + " STRING NOT NULL," +
+                         DB_RECIPES_OUTPUT_NBT + " BYTES," +
+                         DB_RECIPES_TECH_LEVEL + " STRING NOT NULL," +
+                         DB_RECIPES_TECHNOLOGY + " STRING," +
+                         "UNIQUE(" + DB_RECIPES_INPUT + ", " + DB_RECIPES_MASS + "," +
+                         DB_RECIPES_OUTPUT + "), " +
+                         "FOREIGN KEY(" + DB_RECIPES_OUTPUT + ") REFERENCES ITEMS(ID))";
             s.executeUpdate(sql);
             s.close();
             return true;
@@ -121,13 +121,13 @@ public class AssemblerRecipeDatabase {
             refreshConnection();
             s = c.createStatement();
             String sql = "CREATE TABLE " + DB_TABLE_ITEMS +
-                    "(ID INTEGER PRIMARY KEY NOT NULL," +
-                    DB_ITEMS_ITEMID + " INT NOT NULL," +
-                    DB_ITEMS_DAMAGE + " INT NOT NULL," +
-                    DB_ITEMS_STACKSIZE + " INT CHECK(" + DB_ITEMS_STACKSIZE +
-                    ">0) NOT NULL," +
-                    DB_ITEMS_NBT + " BYTES," +
-                    "UNIQUE(" + DB_ITEMS_ITEMID + ", " + DB_ITEMS_DAMAGE + ", " +
+                         "(ID INTEGER PRIMARY KEY NOT NULL," +
+                         DB_ITEMS_ITEMID + " INT NOT NULL," +
+                         DB_ITEMS_DAMAGE + " INT NOT NULL," +
+                         DB_ITEMS_STACKSIZE + " INT CHECK(" + DB_ITEMS_STACKSIZE +
+                         ">0) NOT NULL," +
+                         DB_ITEMS_NBT + " BYTES," +
+                         "UNIQUE(" + DB_ITEMS_ITEMID + ", " + DB_ITEMS_DAMAGE + ", " +
                     /*DB_ITEMS_NBT + "," +*/ DB_ITEMS_STACKSIZE + "))";
             s.executeUpdate(sql);
             s.close();
@@ -135,7 +135,7 @@ public class AssemblerRecipeDatabase {
         } catch (SQLException e) {
             e.printStackTrace();
             Femtocraft.logger.log(Level.SEVERE, "SQLite item table creation" +
-                    " failed");
+                                                " failed");
             return false;
         }
 
@@ -146,8 +146,8 @@ public class AssemblerRecipeDatabase {
         try {
             refreshConnection();
             PreparedStatement ps = c.prepareStatement("SELECT * FROM " +
-                    DB_TABLE_RECIPES + " WHERE " + DB_RECIPES_INPUT + " = ? " +
-                    "LIMIT 1");
+                                                      DB_TABLE_RECIPES + " WHERE " + DB_RECIPES_INPUT + " = ? " +
+                                                      "LIMIT 1");
             ps.setString(1, formatItems(inputs));
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -158,7 +158,7 @@ public class AssemblerRecipeDatabase {
         } catch (SQLException e) {
             e.printStackTrace();
             Femtocraft.logger.log(Level.SEVERE, "SQLite select recipe from " +
-                    "inputs failed");
+                                                "inputs failed");
         }
         return ac;
     }
@@ -168,8 +168,7 @@ public class AssemblerRecipeDatabase {
         for (int i = 0; i < items.length; ++i) {
             if (items[i] == null) {
                 sb.append(DB_NULL_ITEM);
-            }
-            else {
+            } else {
                 sb.append(items[i].itemID);
                 sb.append(":");
                 sb.append(items[i].getItemDamage());
@@ -227,8 +226,7 @@ public class AssemblerRecipeDatabase {
         for (int i = 0; i < itemArray.length; ++i) {
             if (ids[i].matches(DB_NULL_ITEM)) {
                 itemArray[i] = null;
-            }
-            else {
+            } else {
                 String[] id_damage = ids[i].split(":");
                 itemArray[i] = new ItemStack(Integer.parseInt(id_damage[0]), 1,
                         Integer.parseInt(id_damage[1]));
@@ -242,8 +240,8 @@ public class AssemblerRecipeDatabase {
         try {
             refreshConnection();
             PreparedStatement ps = c.prepareStatement("SELECT * FROM " +
-                    DB_TABLE_RECIPES + " WHERE " + DB_RECIPES_OUTPUT + " = ? " +
-                    "LIMIT 1");
+                                                      DB_TABLE_RECIPES + " WHERE " + DB_RECIPES_OUTPUT + " = ? " +
+                                                      "LIMIT 1");
             ps.setString(1, formatItem(output));
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -254,7 +252,7 @@ public class AssemblerRecipeDatabase {
         } catch (SQLException e) {
             e.printStackTrace();
             Femtocraft.logger.log(Level.SEVERE, "SQLite select recipe from " +
-                    "inputs failed");
+                                                "inputs failed");
         }
         return ac;
     }
@@ -267,13 +265,13 @@ public class AssemblerRecipeDatabase {
         try {
             refreshConnection();
             PreparedStatement ps = c.prepareStatement("INSERT OR IGNORE INTO " +
-                    DB_TABLE_RECIPES + "(ID, " + DB_RECIPES_INPUT + ", " +
-                    DB_RECIPES_INPUT_SIZE + ", " +
-                    DB_RECIPES_MASS + "," + DB_RECIPES_OUTPUT + ", " +
-                    DB_RECIPES_OUTPUT_SIZE + ", " +
-                    DB_RECIPES_OUTPUT_NBT + ", " +
-                    DB_RECIPES_TECH_LEVEL + ", " + DB_RECIPES_TECHNOLOGY + ")" +
-                    "VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?)");
+                                                      DB_TABLE_RECIPES + "(ID, " + DB_RECIPES_INPUT + ", " +
+                                                      DB_RECIPES_INPUT_SIZE + ", " +
+                                                      DB_RECIPES_MASS + "," + DB_RECIPES_OUTPUT + ", " +
+                                                      DB_RECIPES_OUTPUT_SIZE + ", " +
+                                                      DB_RECIPES_OUTPUT_NBT + ", " +
+                                                      DB_RECIPES_TECH_LEVEL + ", " + DB_RECIPES_TECHNOLOGY + ")" +
+                                                      "VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, formatItems(recipe.input));
             ps.setString(2, formatItemSizes(recipe.input));
             ps.setInt(3, recipe.mass);
@@ -306,8 +304,7 @@ public class AssemblerRecipeDatabase {
         for (int i = 0; i < items.length; ++i) {
             if (items[i] == null) {
                 sb.append(DB_NULL_ITEM);
-            }
-            else {
+            } else {
                 sb.append(items[i].stackSize);
             }
             if (i < items.length - 1) {
@@ -322,8 +319,8 @@ public class AssemblerRecipeDatabase {
         try {
             refreshConnection();
             PreparedStatement ps = c.prepareStatement("SELECT * FROM " +
-                    DB_TABLE_RECIPES + " WHERE " + DB_RECIPES_TECH_LEVEL + " " +
-                    "=?", ResultSet.HOLD_CURSORS_OVER_COMMIT);
+                                                      DB_TABLE_RECIPES + " WHERE " + DB_RECIPES_TECH_LEVEL + " " +
+                                                      "=?", ResultSet.HOLD_CURSORS_OVER_COMMIT);
             ps.setString(1, level.key);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -334,7 +331,7 @@ public class AssemblerRecipeDatabase {
         } catch (SQLException e) {
             e.printStackTrace();
             Femtocraft.logger.log(Level.SEVERE, "SQLite select recipe from " +
-                    "inputs failed");
+                                                "inputs failed");
         }
         return arrayList;
     }
@@ -349,8 +346,8 @@ public class AssemblerRecipeDatabase {
         try {
             refreshConnection();
             PreparedStatement ps = c.prepareStatement("SELECT * FROM " +
-                    DB_TABLE_RECIPES + " WHERE " + DB_RECIPES_TECHNOLOGY + " " +
-                    "= ?", ResultSet.HOLD_CURSORS_OVER_COMMIT);
+                                                      DB_TABLE_RECIPES + " WHERE " + DB_RECIPES_TECHNOLOGY + " " +
+                                                      "= ?", ResultSet.HOLD_CURSORS_OVER_COMMIT);
             ps.setString(1, techName);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -361,7 +358,33 @@ public class AssemblerRecipeDatabase {
         } catch (SQLException e) {
             e.printStackTrace();
             Femtocraft.logger.log(Level.SEVERE, "SQLite select recipe from " +
-                    "inputs failed");
+                                                "inputs failed");
+        }
+        return arrayList;
+    }
+
+    /**
+     * DO NOT CALL THIS unless you have VERY good reason to.  This is a HUGE database and will take a long time to
+     * load.
+     *
+     * @return
+     */
+    public ArrayList<AssemblerRecipe> getAllRecipes() {
+        ArrayList<AssemblerRecipe> arrayList = new ArrayList<AssemblerRecipe>();
+        try {
+            refreshConnection();
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM " +
+                                                      DB_TABLE_RECIPES, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                arrayList.add(getRecipe(rs));
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Femtocraft.logger.log(Level.SEVERE, "SQLite select recipe from " +
+                                                "inputs failed");
         }
         return arrayList;
     }

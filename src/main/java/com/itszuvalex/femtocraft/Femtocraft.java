@@ -29,6 +29,7 @@ import com.itszuvalex.femtocraft.command.CommandBase;
 import com.itszuvalex.femtocraft.command.CommandFemtocraft;
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigTechnology;
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs;
+import com.itszuvalex.femtocraft.core.MagnetRegistry;
 import com.itszuvalex.femtocraft.core.fluids.BlockFluidMass;
 import com.itszuvalex.femtocraft.core.fluids.FluidMass;
 import com.itszuvalex.femtocraft.core.items.ItemBase;
@@ -1243,6 +1244,7 @@ public class Femtocraft {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         ManagerRecipe.assemblyRecipes.registerDefaultRecipes();
+        MagnetRegistry.init();
         new FemtocraftConfigTechnology(technologyConfig).loadTechnologies();
 
         if (event.getSide() == Side.CLIENT) {

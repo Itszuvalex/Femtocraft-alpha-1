@@ -22,15 +22,18 @@
 package com.itszuvalex.femtocraft;
 
 import com.itszuvalex.femtocraft.common.gui.DisplaySlot;
+import com.itszuvalex.femtocraft.core.MagnetRegistry;
 import com.itszuvalex.femtocraft.industry.items.ItemAssemblySchematic;
 import com.itszuvalex.femtocraft.player.PlayerProperties;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.world.WorldEvent;
 
 public class FemtocraftEventHookContainer {
@@ -81,6 +84,19 @@ public class FemtocraftEventHookContainer {
         if (!event.entity.worldObj.isRemote
             && event.entity instanceof EntityPlayer) {
             PlayerProperties.get((EntityPlayer) event.entity).sync();
+        }
+    }
+
+    @ForgeSubscribe
+    public void onTooltip(ItemTooltipEvent event) {
+        if (MagnetRegistry.showMagnetismTooltip) {
+            if (MagnetRegistry.isMagnet(event.itemStack)) {
+                if (!MagnetRegistry.magnetismTooltipIsAdvanced ||
+                    (MagnetRegistry.magnetismTooltipIsAdvanced && event.showAdvancedItemTooltips)) {
+                    event.toolTip.add(EnumChatFormatting.GOLD + "Magnet Strength: " + EnumChatFormatting.RESET +
+                                      String.valueOf(MagnetRegistry.getMagnetStrength(event.itemStack)));
+                }
+            }
         }
     }
 }

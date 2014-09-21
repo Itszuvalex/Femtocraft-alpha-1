@@ -27,6 +27,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.world.World;
 
 import java.util.Random;
 
@@ -35,6 +36,10 @@ public class BlockOreLodestone extends BlockOreBase {
     public static int DROP_AMOUNT_MAX = 4;
     @Configurable(comment = "Minimum amount of Lodestone nuggets to drop.")
     public static int DROP_AMOUNT_MIN = 2;
+
+    @Override
+    public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
+    }
 
     public BlockOreLodestone(int id) {
         super(id);
