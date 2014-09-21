@@ -13,6 +13,8 @@ import net.minecraft.tileentity.TileEntity;
 public class TileEntityOreLodestone extends TileEntity {
     @Configurable
     public static int numTicksPerUpdate = 4;
+    @Configurable
+    public static float minimumDistanceToNearestPlayerForUpdate = 30;
     int count = 0;
 
     @Override
@@ -24,8 +26,11 @@ public class TileEntityOreLodestone extends TileEntity {
     public void updateEntity() {
 //        if (worldObj.isRemote) return;
         if (count++ > numTicksPerUpdate) {
-            FemtocraftMagnetUtils.applyMagnetismFromBlock(Femtocraft.blockOreLodestone, worldObj, xCoord, yCoord,
-                    zCoord, (double) numTicksPerUpdate / (double) 20);
+            if (worldObj.getClosestPlayer(
+                    xCoord + .5d, yCoord + .5d, zCoord + .5d, minimumDistanceToNearestPlayerForUpdate) != null) {
+                FemtocraftMagnetUtils.applyMagnetismFromBlock(Femtocraft.blockOreLodestone, worldObj, xCoord, yCoord,
+                        zCoord, (double) numTicksPerUpdate / (double) 20);
+            }
             count = 0;
         }
     }
