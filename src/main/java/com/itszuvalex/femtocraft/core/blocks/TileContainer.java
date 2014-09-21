@@ -131,12 +131,11 @@ public class TileContainer extends BlockContainer {
     public boolean removeBlockByPlayer(World world, EntityPlayer player, int x,
                                        int y, int z) {
         TileEntity te = world.getBlockTileEntity(x, y, z);
-        if (!(te instanceof TileEntityBase)) {
-            return false;
-        }
-        if (!((TileEntityBase) te).canPlayerUse(player)) {
-            player.addChatMessage(((TileEntityBase) te).getOwner() + " is the owner of this block.");
-            return false;
+        if (te instanceof TileEntityBase) {
+            if (!((TileEntityBase) te).canPlayerUse(player)) {
+                player.addChatMessage(((TileEntityBase) te).getOwner() + " is the owner of this block.");
+                return false;
+            }
         }
         return super.removeBlockByPlayer(world, player, x, y, z);
     }

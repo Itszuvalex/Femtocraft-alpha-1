@@ -21,6 +21,7 @@
 
 package com.itszuvalex.femtocraft.proxy;
 
+import com.itszuvalex.femtocraft.core.tiles.TileEntityOreLodestone;
 import com.itszuvalex.femtocraft.industry.tiles.*;
 import com.itszuvalex.femtocraft.power.plasma.TileEntityPlasma;
 import com.itszuvalex.femtocraft.power.tiles.*;
@@ -35,7 +36,7 @@ public class ProxyCommon {
     }
 
     public void registerTileEntities() {
-        // Tile Entities
+        GameRegistry.registerTileEntity(TileEntityOreLodestone.class, "TileEntityOreLodestone");
         GameRegistry.registerTileEntity(TileEntityResearchComputer.class,
                 "TileEntityResearchComputer");
         GameRegistry.registerTileEntity(TileEntityResearchConsole.class,

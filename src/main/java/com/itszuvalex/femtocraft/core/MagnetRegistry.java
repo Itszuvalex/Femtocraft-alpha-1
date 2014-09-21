@@ -60,10 +60,6 @@ public class MagnetRegistry {
                 }
                 if (strength > 0) {
                     if ((strength / recipe.output.stackSize) != prevStrength) {
-                        Femtocraft.logger.log(Level.INFO,
-                                "Registering " + recipe.output + " with strength of " +
-                                (strength / recipe.output.stackSize) +
-                                " where previous was " + prevStrength + ".");
                         registerMagnet(recipe.output, strength / recipe.output.stackSize);
                         changed = true;
                     }
@@ -83,7 +79,7 @@ public class MagnetRegistry {
     }
 
     public static boolean registerMagnet(Block block, int strength) {
-        return registerMagnet(new ItemStack(block), strength);
+        return block != null && registerMagnet(new ItemStack(block), strength);
     }
 
     public static boolean registerMagnet(int id, int strength) {
@@ -91,7 +87,7 @@ public class MagnetRegistry {
     }
 
     public static boolean registerMagnet(Item item, int strength) {
-        return registerMagnet(item.itemID, strength);
+        return item != null && registerMagnet(item.itemID, strength);
     }
 
     public static boolean registerMagnet(ItemStack item, int strength) {
@@ -99,11 +95,11 @@ public class MagnetRegistry {
     }
 
     public static int getMagnetStrength(Block block) {
-        return getMagnetStrength(new ItemStack(block));
+        return block == null ? 0 : getMagnetStrength(new ItemStack(block));
     }
 
     public static int getMagnetStrength(Item item) {
-        return getMagnetStrength(item.itemID);
+        return item == null ? 0 : getMagnetStrength(item.itemID);
     }
 
     public static int getMagnetStrength(int id) {
@@ -115,7 +111,7 @@ public class MagnetRegistry {
     }
 
     public static boolean isMagnet(Block block) {
-        return isMagnet(new ItemStack(block));
+        return block != null && isMagnet(new ItemStack(block));
     }
 
     public static boolean isMagnet(int id) {
@@ -123,7 +119,7 @@ public class MagnetRegistry {
     }
 
     public static boolean isMagnet(Item item) {
-        return isMagnet(item.itemID);
+        return item != null && isMagnet(item.itemID);
     }
 
     public static boolean isMagnet(ItemStack item) {

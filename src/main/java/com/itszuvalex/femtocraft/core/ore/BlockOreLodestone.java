@@ -23,26 +23,39 @@ package com.itszuvalex.femtocraft.core.ore;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.configuration.Configurable;
+import com.itszuvalex.femtocraft.core.MagnetRegistry;
+import com.itszuvalex.femtocraft.core.blocks.TileContainer;
+import com.itszuvalex.femtocraft.core.tiles.TileEntityOreLodestone;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockOreLodestone extends BlockOreBase {
+@Configurable
+public class BlockOreLodestone extends TileContainer {
     @Configurable(comment = "Maximum amount Lodestone nuggets to drop.")
     public static int DROP_AMOUNT_MAX = 4;
     @Configurable(comment = "Minimum amount of Lodestone nuggets to drop.")
     public static int DROP_AMOUNT_MIN = 2;
+    @Configurable(comment = "Set to false to prevent tile entity ticks, and prevent Magnetism from pulling items from" +
+                            " your inventory.")
+    public static boolean MAGNETIC = true;
 
     @Override
-    public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
+    public TileEntity createNewTileEntity(World world) {
+        return new TileEntityOreLodestone();
     }
 
     public BlockOreLodestone(int id) {
-        super(id);
+        super(id, Material.rock);
         setCreativeTab(Femtocraft.femtocraftTab);
         setTextureName(Femtocraft.ID.toLowerCase() + ":" + "BlockOreLodestone");
         setUnlocalizedName("BlockOreLodestone");
@@ -56,6 +69,18 @@ public class BlockOreLodestone extends BlockOreBase {
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
                                                                .toLowerCase() + ":" + "BlockOreLodestone");
+    }
+
+    @Override
+    public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
+        if (par1World.isRemote) return;
+
+        ItemStack item = par5EntityPlayer.getHeldItem();
+        if (MAGNETIC && MagnetRegistry.isMagnet(item)) {
+            EntityItem ei = par5EntityPlayer.entityDropItem(item, par5EntityPlayer.height / 2f);
+            ei.delayBeforeCanPickup = 20;
+            par5EntityPlayer.inventory.setInventorySlotContents(par5EntityPlayer.inventory.currentItem, null);
+        }
     }
 
     @Override
