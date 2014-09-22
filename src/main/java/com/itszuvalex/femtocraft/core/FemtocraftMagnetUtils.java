@@ -7,9 +7,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,12 +40,15 @@ public class FemtocraftMagnetUtils {
     public static void applyMagnetismFromLocation(int strength, World world, double x, double y, double z,
                                                   double delta) {
         float radius = strength * strengthToRadiusMultiplier;
-        AxisAlignedBB bb = AxisAlignedBB.getAABBPool().getAABB(
-                x - radius, y - radius, z - radius, x + radius, y + radius, z + radius);
-        List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, bb);
+//
+//        AxisAlignedBB bb = AxisAlignedBB.getAABBPool().getAABB(
+//                x - radius, y - radius, z - radius, x + radius, y + radius, z + radius);
+//        List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, bb);
+        List<Entity> entities = new ArrayList<Entity>(world.getLoadedEntityList());
         for (Entity entity : entities) {
-            double distance = Math.sqrt(
-                    Math.pow(x - entity.posX, 2) + Math.pow(y - entity.posY, 2) + Math.pow(z - entity.posZ, 2));
+            double distSqr = entity.getDistanceSq(x, y, z);
+            if (distSqr > (radius * radius)) continue;
+            double distance = Math.sqrt(distSqr);
             if (entity instanceof EntityPlayer) {
                 for (int i = 0; i < ((EntityPlayer) entity).inventory.mainInventory.length; ++i) {
                     ItemStack item = ((EntityPlayer) entity).inventory.mainInventory[i];
