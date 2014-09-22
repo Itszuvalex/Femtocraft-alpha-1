@@ -22,7 +22,6 @@
 package com.itszuvalex.femtocraft.managers.assembler;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs;
 import com.itszuvalex.femtocraft.managers.assembler.EventAssemblerRegister.AssemblerDecompositionRegisterEvent;
 import com.itszuvalex.femtocraft.managers.assembler.EventAssemblerRegister.AssemblerRecompositionRegisterEvent;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
@@ -1176,46 +1175,7 @@ public class ManagerAssemblerRecipe {
 
     private void registerFemtocraftAssemblerRecipes() {
         try {
-            if (configRegisterRecipe("IronOre")) {
-//                addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null,
-//                        null, null, null,
-//                        new ItemStack(Femtocraft.deconstructedIron, 2), null,
-//                        null, null, null}, 0, new ItemStack(Block.oreIron),
-//                        EnumTechLevel.MACRO, null
-//                ));
-            }
-            if (configRegisterRecipe("GoldOre")) {
-//                addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null,
-//                        null, null, null,
-//                        new ItemStack(Femtocraft.deconstructedGold, 2), null,
-//                        null, null, null}, 0, new ItemStack(Block.oreGold),
-//                        EnumTechLevel.MACRO, null
-//                ));
-            }
-            if (configRegisterRecipe("TitaniumOre")) {
-//                addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null,
-//                        null, null, null,
-//                        new ItemStack(Femtocraft.deconstructedTitanium, 2),
-//                        null, null, null, null}, 0, new ItemStack(
-//                        Femtocraft.blockOreTitanium), EnumTechLevel.MACRO, null));
-            }
-            if (configRegisterRecipe("ThoriumOre")) {
-//                addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null,
-//                        null, null, null,
-//                        new ItemStack(Femtocraft.deconstructedThorium, 2),
-//                        null, null, null, null}, 0, new ItemStack(
-//                        Femtocraft.blockOreThorium), EnumTechLevel.MACRO, null));
-            }
-            if (configRegisterRecipe("PlatinumOre")) {
-//                addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null,
-//                        null, null, null,
-//                        new ItemStack(Femtocraft.deconstructedPlatinum, 2),
-//                        null, null, null, null}, 0, new ItemStack(
-//                        Femtocraft.blockOrePlatinum), EnumTechLevel.MACRO, null));
-            }
-
             //Micro
-
             addDecompositionRecipe(new AssemblerRecipe(new ItemStack[]{
                     new ItemStack(Item.paper, 3), null, null, null, null, null,
                     null, null, null}, 0, new ItemStack(
@@ -1837,56 +1797,6 @@ public class ManagerAssemblerRecipe {
             Femtocraft.logger.log(Level.SEVERE,
                     "Femtocraft failed to load Femtocraft Assembler Recipes!");
         }
-    }
-
-    private boolean configRegisterRecipe(String name) {
-        boolean register = false;
-        boolean found = false;
-
-        Field[] fields = FemtocraftConfigs.class.getFields();
-        for (Field field : fields) {
-            if (field.getName().equalsIgnoreCase("recipe" + name)) {
-                found = true;
-
-                try {
-                    register = field.getBoolean(null);
-
-                    Level logLevel = FemtocraftConfigs.silentRecipeLoadAlerts ? Level.CONFIG
-                            : Level.INFO;
-
-                    if (register) {
-                        Femtocraft.logger.log(logLevel,
-                                "Loading default AssemblerRecipe for " + name
-                                        + "."
-                        );
-                    }
-                    else {
-                        Femtocraft.logger
-                                .log(logLevel,
-                                        "Not loading AssemblerRecipe for "
-                                                + name + "."
-                                );
-                    }
-                } catch (Exception e) {
-                    Femtocraft.logger.log(Level.WARNING,
-                            "Exception - " + e.getLocalizedMessage()
-                                    + " thrown while loading AssemblerRecipe "
-                                    + name + "."
-                    );
-                }
-            }
-        }
-
-        if (!found) {
-            Femtocraft.logger
-                    .log(Level.WARNING,
-                            "No configuration option for AssemblerRecipe "
-                                    + name
-                                    + " has been found.  Please report this to Femtocraft developers immediately."
-                    );
-        }
-
-        return register;
     }
 
     private void testRecipes() {
