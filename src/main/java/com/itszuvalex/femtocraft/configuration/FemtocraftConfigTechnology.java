@@ -218,7 +218,7 @@ public class FemtocraftConfigTechnology {
                         EnumTechLevel.MICRO, new String[]{
                         ManagerResearch.MECHANICAL_PRECISION,
                         ManagerResearch.POTENTIALITY_HARNESSING}
-                        , new ItemStack(Femtocraft.blockCryoGenerator), false, null
+                        , new ItemStack(Femtocraft.blockMagneticInductionGenerator), false, null
                 )),
                 loadResearchTechnology(new ResearchTechnology(ManagerResearch.ADVANCED_CHEMISTRY, "",
                                                EnumTechLevel.NANO, new String[]{ManagerResearch

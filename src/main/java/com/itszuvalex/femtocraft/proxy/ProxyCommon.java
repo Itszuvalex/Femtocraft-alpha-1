@@ -125,6 +125,7 @@ public class ProxyCommon {
                 "TileEntityVacuumTube");
         GameRegistry.registerTileEntity(TileEntityAtmosphericChargingBase.class,
                 "TileEntityAtmosphericChargingBase");
+        GameRegistry.registerTileEntity(TileEntityMagneticInductionGenerator.class, "TileEntityMagneticInductionGenerator");
         GameRegistry.registerTileEntity(TileEntitySuctionPipe.class,
                 "TileEntitySuctionPipe");
 

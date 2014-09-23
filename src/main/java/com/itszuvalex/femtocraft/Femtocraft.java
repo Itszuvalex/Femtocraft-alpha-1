@@ -181,7 +181,7 @@ public class Femtocraft {
     public static Block blockMicroChargingBase;
     public static Block blockMicroChargingCoil;
     public static Block blockMicroChargingCapacitor;
-    public static Block blockCryoGenerator;
+    public static Block blockMagneticInductionGenerator;
     public static Block blockOrbitalEqualizer;
     public static Block blockNullEqualizer;
     public static Block blockCryoEndothermalChargingBase;
@@ -676,11 +676,11 @@ public class Femtocraft {
         LanguageRegistry.addName(blockMicroChargingCapacitor,
                 "Electrostatic Charging Capacitor");
 
-        blockCryoGenerator = new BlockElectrostaticGenerator(FemtocraftConfigs
-                .BlockElectrostaticGeneratorID).setUnlocalizedName("BlockCryoGenerator");
-        GameRegistry.registerBlock(blockCryoGenerator,
-                "BlockCryoGenerator");
-        LanguageRegistry.addName(blockCryoGenerator, "Micro Engine");
+        blockMagneticInductionGenerator = new BlockMagneticInductionGenerator(FemtocraftConfigs
+                .BlockMagneticInductionGeneratorID).setUnlocalizedName("BlockMagneticInductionGenerator");
+        GameRegistry.registerBlock(blockMagneticInductionGenerator,
+                "BlockMagneticInductionGenerator");
+        LanguageRegistry.addName(blockMagneticInductionGenerator, "Magnetic Induction Generator");
 
         blockOrbitalEqualizer = new BlockOrbitalEqualizer(
                 FemtocraftConfigs.BlockOrbitalEqualizerID).setUnlocalizedName("BlockOrbitalEqualizer");

@@ -149,7 +149,7 @@ public class FemtocraftConfigs {
     int BlockMicroChargingCapacitorID;
     public static
     @CfgId(block = true)
-    int BlockElectrostaticGeneratorID;
+    int BlockMagneticInductionGeneratorID;
     public static
     @CfgId(block = true)
     int BlockNanoCubeFrameID;
