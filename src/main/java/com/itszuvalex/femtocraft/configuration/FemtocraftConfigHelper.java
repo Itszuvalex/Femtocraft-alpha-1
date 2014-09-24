@@ -40,6 +40,8 @@ import java.util.logging.Level;
  */
 public class FemtocraftConfigHelper {
     public static final String CLASS_CONSTANTS_KEY = "Class Constants";
+    public static final char CATEGORY_SPLITTER_REPLACEMENT = '-';
+    public static final char CATEGORY_SPLITTER_CHAR = Configuration.CATEGORY_SPLITTER.charAt(0);
     private static List<Class> configurableClasses = new ArrayList<Class>();
 
     /**
@@ -55,6 +57,14 @@ public class FemtocraftConfigHelper {
             loadClassFromConfig(configuration,
                     CLASS_CONSTANTS_KEY, clazz.getSimpleName(), clazz);
         }
+    }
+
+    public static String escapeCategorySplitter(String string) {
+        return string.replace(CATEGORY_SPLITTER_CHAR, CATEGORY_SPLITTER_REPLACEMENT);
+    }
+
+    public static String unescapeCategorySplitter(String string) {
+        return string.replace(CATEGORY_SPLITTER_REPLACEMENT, CATEGORY_SPLITTER_CHAR);
     }
 
     private static void loadClassFromConfig(Configuration configuration, String section, String key, Class clazz) {
@@ -86,7 +96,7 @@ public class FemtocraftConfigHelper {
                     } catch (Exception e) {
                         Femtocraft.logger.log(Level.SEVERE,
                                 "Error loading @Configurable field " + field.getName() + " in class " +
-                                clazz.getName() + ".");
+                                        clazz.getName() + ".");
                         e.printStackTrace();
                     }
                 }
@@ -116,7 +126,7 @@ public class FemtocraftConfigHelper {
         try {
             Femtocraft.logger.log(Level.INFO, "Finding all configurable classes for registration.");
             ImmutableSet<ClassPath.ClassInfo> classes = ClassPath.from(FemtocraftConfigHelper.class.getClassLoader())
-                    .getTopLevelClassesRecursive("com.itszuvalex.femtocraft");
+                                                                 .getTopLevelClassesRecursive("com.itszuvalex.femtocraft");
             for (ClassPath.ClassInfo info : classes) {
                 try {
                     Class clazz = Class.forName(info.getName());

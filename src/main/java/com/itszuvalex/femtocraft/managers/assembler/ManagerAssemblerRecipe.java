@@ -69,8 +69,10 @@ public class ManagerAssemblerRecipe {
     }
 
     private void registerRecipes() {
+        Femtocraft.logger.log(Level.INFO, "Registering Femtocraft assembler recipes.");
         if (ard.shouldRegister()) {
             Femtocraft.assemblerConfigs.setBatchLoading(true);
+            registerCustomRecipes();
             registerFemtoDecompositionRecipes();
             registerNanoDecompositionRecipes();
             registerMicroDecompositionRecipes();
@@ -79,7 +81,17 @@ public class ManagerAssemblerRecipe {
             registerFemtocraftAssemblerRecipes();
             Femtocraft.assemblerConfigs.setBatchLoading(false);
         }
+        Femtocraft.logger.log(Level.INFO, "Finished registering Femtocraft assembler recipes.");
     }
+
+    private void registerCustomRecipes() {
+        Femtocraft.logger.log(Level.INFO, "Registering custom assembler recipes.");
+        List<AssemblerRecipe> custom = Femtocraft.assemblerConfigs.loadCustomRecipes();
+        for (AssemblerRecipe recipe : custom) {
+        }
+        Femtocraft.logger.log(Level.INFO, "Finished registering custom assembler recipes.");
+    }
+
 
     private void registerFemtoDecompositionRecipes() {
         try {
@@ -672,6 +684,7 @@ public class ManagerAssemblerRecipe {
     }
 
     public void registerDefaultRecipes() {
+        Femtocraft.logger.log(Level.INFO, "Scraping Minecraft recipe registries for assembler recipe mappings.");
 
         if (!ard.shouldRegister()) {
             Femtocraft.logger.log(Level.INFO, "Database already exists.  " +
@@ -892,6 +905,7 @@ public class ManagerAssemblerRecipe {
                 }
             }
         }
+        Femtocraft.logger.log(Level.INFO, "Finished mapping Minecraft recipes to assembler recipes.");
     }
 
     private boolean registerShapedOreRecipe(Object[] recipeInput,
@@ -1875,8 +1889,11 @@ public class ManagerAssemblerRecipe {
 
         ItemStack normal = normalizedOutput(recipe);
 
-        checkDecomposition(normal, recipe);
-        checkRecomposition(normalArray, recipe);
+        if (!checkDecomposition(normal, recipe) ||
+                !checkRecomposition(normalArray, recipe)) {
+            Femtocraft.logger.log(Level.WARNING, "Assembler recipe already exists for " + recipe.output.getUnlocalizedName() + ".");
+            return false;
+        }
 
         return registerRecomposition(normalArray, recipe)
                 && registerDecomposition(normal, recipe);
@@ -1894,7 +1911,10 @@ public class ManagerAssemblerRecipe {
             return false;
         }
 
-        checkRecomposition(normal, recipe);
+        if (!checkRecomposition(normal, recipe)) {
+            Femtocraft.logger.log(Level.WARNING, "Assembler recipe already exists for " + recipe.output.getUnlocalizedName() + ".");
+            return false;
+        }
 
         return registerRecomposition(normal, recipe);
     }
@@ -1908,7 +1928,10 @@ public class ManagerAssemblerRecipe {
 
         ItemStack normal = normalizedOutput(recipe);
 
-        checkDecomposition(normal, recipe);
+        if (!checkDecomposition(normal, recipe)) {
+            Femtocraft.logger.log(Level.WARNING, "Assembler recipe already exists for " + recipe.output.getUnlocalizedName() + ".");
+            return false;
+        }
 
         return registerDecomposition(normal, recipe);
     }
@@ -1967,26 +1990,21 @@ public class ManagerAssemblerRecipe {
 //        }
     }
 
-    private void checkDecomposition(ItemStack normal, AssemblerRecipe recipe)
-            throws AssemblerRecipeFoundException {
+    private boolean checkDecomposition(ItemStack normal, AssemblerRecipe recipe) {
         if (ard.getRecipe(normal) != null) {
 //        if (outputToRecipeMap.containsKey(normal)) {
-            throw new AssemblerRecipeFoundException(
-                    "AssemblerRecipe found for Decomposition of item - "
-                            + recipe.output.getDisplayName() + "."
-            );
+            return false;
+
         }
+        return true;
     }
 
-    private void checkRecomposition(ItemStack[] normal, AssemblerRecipe recipe)
-            throws AssemblerRecipeFoundException {
+    private boolean checkRecomposition(ItemStack[] normal, AssemblerRecipe recipe) {
         if (ard.getRecipe(normal) != null) {
 //        if (inputToRecipeMap.containsKey(normal)) {
-            throw new AssemblerRecipeFoundException(
-                    "AssemblerRecipe found for Recomposition of item - "
-                            + recipe.output.getDisplayName() + "."
-            );
+            return false;
         }
+        return true;
     }
 
     public boolean removeAnyRecipe(AssemblerRecipe recipe) {

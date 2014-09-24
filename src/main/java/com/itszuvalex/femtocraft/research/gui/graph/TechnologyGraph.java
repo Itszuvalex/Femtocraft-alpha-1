@@ -33,21 +33,19 @@ import java.util.logging.Level;
 public class TechnologyGraph extends MapGraph<String> {
     public static final int X_PADDING = 1;
     public static final int Y_PADDING = 2;
-    private final HashMap<String, ResearchTechnology> technologies;
 
     public TechnologyGraph(HashMap<String, ResearchTechnology> technologies) {
         super();
         Femtocraft.logger.log(Level.INFO, "Creating Graph of Technologies.");
-        this.technologies = technologies;
         HashMap<String, IGraphNode> nodes = new HashMap<String, IGraphNode>();
 
-        Femtocraft.logger.log(Level.INFO, "Transfering Technologies to Nodes.");
+        Femtocraft.logger.log(Level.FINE, "Transferring Technologies to Nodes.");
         // Fill nodes dictionary.
         for (String name : technologies.keySet()) {
             nodes.put(name, new TechNode(technologies.get(name)));
         }
 
-        Femtocraft.logger.log(Level.INFO, "Linking edges.");
+        Femtocraft.logger.log(Level.FINE, "Linking edges.");
         // Add edges
         for (String name : technologies.keySet()) {
             TechNode node = (TechNode) nodes.get(name);
@@ -79,7 +77,7 @@ public class TechnologyGraph extends MapGraph<String> {
     public void computePlacements() {
         super.computePlacements();
         GuiResearch.setSize(greatestWidth() * X_PADDING, greatestHeight()
-                                                         * Y_PADDING);
+                * Y_PADDING);
     }
 
     @Override

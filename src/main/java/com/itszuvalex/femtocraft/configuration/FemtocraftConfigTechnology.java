@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
 
 /**
  * Created by Chris on 9/11/2014.
@@ -27,18 +28,20 @@ public class FemtocraftConfigTechnology {
     }
 
     public void loadTechnologies() {
+        Femtocraft.logger.log(Level.INFO, "Loading Technologies.");
         List<ResearchTechnology> loadedTechnologies;
         if (config.get(SECTION_KEY, "Use custom classes", false, "Set to true if you define new technologies in this " +
-                                                                 "section.  If false, " +
-                                                                 "Femtocraft will only look for technologies of " +
-                                                                 "certain names, specifically the ones bundled with " +
-                                                                 "the vanilla version.  If true, " +
-                                                                 "it will instead look at all keys in this section " +
-                                                                 "and attempt to load each as a distinct Technology, " +
-                                                                 "and will not load ANY of the original technologies" +
-                                                                 ".").getBoolean(false)) {
+                "section.  If false, " +
+                "Femtocraft will only look for technologies of " +
+                "certain names, specifically the ones bundled with " +
+                "the vanilla version.  If true, " +
+                "it will instead look at all keys in this section " +
+                "and attempt to load each as a distinct Technology, " +
+                "and will not load ANY of the original technologies" +
+                " unless they are present in this section.").getBoolean(false)) {
             loadedTechnologies = loadCustomTechnologies();
-        } else {
+        }
+        else {
             loadedTechnologies = loadDefaultTechnologies();
         }
 
@@ -47,9 +50,11 @@ public class FemtocraftConfigTechnology {
         }
 
         registerTechnologies(loadedTechnologies);
+        Femtocraft.logger.log(Level.INFO, "Finished loading Technologies.");
     }
 
     private List<ResearchTechnology> loadCustomTechnologies() {
+        Femtocraft.logger.log(Level.INFO, "Loading custom Technologies from configs.");
         List<ResearchTechnology> ret = new ArrayList<ResearchTechnology>();
         ConfigCategory cat = config.getCategory(SECTION_KEY);
         Set<ConfigCategory> techs = cat.getChildren();
@@ -57,11 +62,13 @@ public class FemtocraftConfigTechnology {
             String[] name = cc.getQualifiedName().split("\\" + Configuration.CATEGORY_SPLITTER);
             ret.add(loadTechnology(name[name.length - 1]));
         }
+        Femtocraft.logger.log(Level.INFO, "Finished loading custom Technologies from configs.");
         return ret;
     }
 
     private List<ResearchTechnology> loadDefaultTechnologies() {
-        return new ArrayList<ResearchTechnology>(Arrays.asList(
+        Femtocraft.logger.log(Level.INFO, "Loading default Technologies from configs.");
+        ArrayList<ResearchTechnology> ret = new ArrayList<ResearchTechnology>(Arrays.asList(
                 loadResearchTechnology(new ResearchTechnology(
                         ManagerResearch.METALLURGY, "Titanium, Thorium, Platinum", EnumTechLevel.MACRO,
                         new String[]{ManagerResearch.MACROSCOPIC_STRUCTURES},
@@ -97,14 +104,14 @@ public class FemtocraftConfigTechnology {
                         new String[]{ManagerResearch.MACROSCOPIC_STRUCTURES},
                         new ItemStack(Femtocraft.blockResearchConsole), true, null, null, null,
                         "What is a scientist without the scientific method?  Luckily for you, " +
-                        "you no longer have to experiment.  This handy Research Computer analyzes all of your " +
-                        "knowledge and will theorize prototypes for you to make.  Stick these prototypes into the " +
-                        "Research Console to have it analyze the potential uses and to store the standardized " +
-                        "blueprints into your knowledge store. __Recipe.Assembler:Femtocraft:tile" +
-                        ".BlockResearchComputer--Allows visual access to your personalized knowledge store.__ " +
-                        "__Recipe" +
-                        ".Assembler:Femtocraft:tile.BlockResearchConsole--Analyzes your prototypes and generates " +
-                        "standardized blueprints.__", false, true
+                                "you no longer have to experiment.  This handy Research Computer analyzes all of your " +
+                                "knowledge and will theorize prototypes for you to make.  Stick these prototypes into the " +
+                                "Research Console to have it analyze the potential uses and to store the standardized " +
+                                "blueprints into your knowledge store. __Recipe.Assembler:Femtocraft:tile" +
+                                ".BlockResearchComputer--Allows visual access to your personalized knowledge store.__ " +
+                                "__Recipe" +
+                                ".Assembler:Femtocraft:tile.BlockResearchConsole--Analyzes your prototypes and generates " +
+                                "standardized blueprints.__", false, true
                 )),
                 loadResearchTechnology(new ResearchTechnology(
                         ManagerResearch.ALGORITHMS, "", EnumTechLevel.MICRO,
@@ -594,7 +601,9 @@ public class FemtocraftConfigTechnology {
                         ManagerResearch.STELLAR_MIMICRY, "Make your own pet star!", EnumTechLevel.FEMTO,
                         new String[]{
                                 ManagerResearch.DEMONIC_PARTICULATES,
-                                ManagerResearch.ELEMENT_MANUFACTURING
+                                ManagerResearch.ELEMENT_MANUFACTURING,
+                                ManagerResearch.CAUSALITY_SINGULARITY,
+                                ManagerResearch.MULTI_DIMENSIONAL_INDUSTRY
                         },
                         new ItemStack(Femtocraft.blockStellaratorCore),
                         false,
@@ -660,6 +669,8 @@ public class FemtocraftConfigTechnology {
 
                 )
         ));
+        Femtocraft.logger.log(Level.INFO, "Finished loading default technologies from configs.");
+        return ret;
     }
 
     private ResearchTechnology loadTechnology(String name) {
