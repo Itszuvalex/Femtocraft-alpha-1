@@ -21,19 +21,40 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
+import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import com.itszuvalex.femtocraft.power.FemtocraftPowerUtils;
 import net.minecraftforge.common.ForgeDirection;
 
+@Configurable
 public class TileEntityOrbitalEqualizer extends TileEntityPowerBase {
+
+    @Configurable(comment = "Maximum power storage.")
+    public static int POWER_STORAGE = 2000;
+    @Configurable(comment = "Power level to distribute energy on first.")
+    public static EnumTechLevel PRIMARY_POWER_LEVEL = EnumTechLevel.NANO;
+    @Configurable(comment = "Power level to distribute energy on second.")
+    public static EnumTechLevel SECONDARY_POWER_LEVEL = EnumTechLevel.MICRO;
+
     public TileEntityOrbitalEqualizer() {
         super();
-        setMaxStorage(2000);
-        setTechLevel(EnumTechLevel.NANO);
+        setMaxStorage(POWER_STORAGE);
+        setTechLevel(PRIMARY_POWER_LEVEL);
+    }
+
+    @Override
+    public void femtocraftServerUpdate() {
+        setTechLevel(PRIMARY_POWER_LEVEL);
+        FemtocraftPowerUtils.distributePower(this, connections, worldObj, xCoord, yCoord, zCoord);
+        setTechLevel(SECONDARY_POWER_LEVEL);
+        FemtocraftPowerUtils.distributePower(this, connections, worldObj, xCoord, yCoord, zCoord);
+        setTechLevel(PRIMARY_POWER_LEVEL);
+        setModified();
     }
 
     @Override
     public boolean canAcceptPowerOfLevel(EnumTechLevel level,
                                          ForgeDirection from) {
-        return (level == EnumTechLevel.MICRO || level == EnumTechLevel.NANO);
+        return (level == SECONDARY_POWER_LEVEL || level == PRIMARY_POWER_LEVEL);
     }
 }

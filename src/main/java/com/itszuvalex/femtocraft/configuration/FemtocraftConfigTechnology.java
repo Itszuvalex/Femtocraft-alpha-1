@@ -249,7 +249,7 @@ public class FemtocraftConfigTechnology {
                                 ManagerResearch.ARTIFICIAL_MATERIALS}
                         , new ItemStack(Femtocraft.blockNanoCable),
                         false,
-                        getInput(new ItemStack(Femtocraft.itemNanoCoil)), new ItemStack(Femtocraft.itemNanoCoil)
+                        getInput(new ItemStack(Femtocraft.itemFluidicConductor)), new ItemStack(Femtocraft.itemFluidicConductor)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -478,7 +478,7 @@ public class FemtocraftConfigTechnology {
                                 ManagerResearch.SPACETIME_EXPLOITATION
                         },
                         new ItemStack(Femtocraft.itemHerculesDrive),
-                        false, null
+                        false, getInput(new ItemStack(Femtocraft.itemHerculesDrive)), new ItemStack(Femtocraft.itemHerculesDrive)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -532,7 +532,7 @@ public class FemtocraftConfigTechnology {
                         },
                         new ItemStack(Femtocraft.blockFemtoCable),
                         false,
-                        getInput(new ItemStack(Femtocraft.itemFemtoCoil)), new ItemStack(Femtocraft.itemFemtoCoil)
+                        getInput(new ItemStack(Femtocraft.itemStyxValve)), new ItemStack(Femtocraft.itemStyxValve)
                 )),
 
                 //    public static ResearchTechnology technologyPerfectScheduling = new ResearchTechnology(
