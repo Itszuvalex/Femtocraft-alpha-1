@@ -166,7 +166,7 @@ public class TileEntityResearchConsole extends TileEntityBase implements
         for (ResearchTechnology tech : Femtocraft.researchManager
                 .getTechnologies()) {
             if (Femtocraft.researchManager.hasPlayerDiscoveredTechnology(
-                    getOwner(), tech)) {
+                    getOwner(), tech) && !Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner(), tech)) {
                 if (matchesTechnology(tech)) {
                     displayTech = tech.name;
                     if (worldObj != null) {
@@ -188,7 +188,7 @@ public class TileEntityResearchConsole extends TileEntityBase implements
         if (tech == null) {
             return false;
         }
-        if (tech.researchMaterials == null) {
+        if (tech.researchMaterials == null || tech.researchMaterials.length == 0) {
             return false;
         }
         for (int i = 0; i < 9 && i < tech.researchMaterials.length; ++i) {

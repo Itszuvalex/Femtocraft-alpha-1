@@ -1,6 +1,8 @@
 package com.itszuvalex.femtocraft.configuration;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
+import com.itszuvalex.femtocraft.managers.assembler.ManagerAssemblerRecipe;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
@@ -22,9 +24,11 @@ import java.util.logging.Level;
 public class FemtocraftConfigTechnology {
     public static final String SECTION_KEY = "technologies";
     private final Configuration config;
+    private final ManagerAssemblerRecipe assemblyRecipes;
 
     public FemtocraftConfigTechnology(Configuration config) {
         this.config = config;
+        assemblyRecipes = Femtocraft.recipeManager.assemblyRecipes;
     }
 
     public void loadTechnologies() {
@@ -70,33 +74,23 @@ public class FemtocraftConfigTechnology {
         Femtocraft.logger.log(Level.INFO, "Loading default Technologies from configs.");
         ArrayList<ResearchTechnology> ret = new ArrayList<ResearchTechnology>(Arrays.asList(
                 loadResearchTechnology(new ResearchTechnology(
-                        ManagerResearch.METALLURGY, "Titanium, Thorium, Platinum", EnumTechLevel.MACRO,
+                        ManagerResearch.METALLURGY, "The strange metals that populate your world.", EnumTechLevel.MACRO,
                         new String[]{ManagerResearch.MACROSCOPIC_STRUCTURES},
                         new ItemStack(Femtocraft.itemIngotTemperedTitanium),
                         true, null, null, null, null, false, true)),
                 loadResearchTechnology(new ResearchTechnology(
-                                ManagerResearch.BASIC_CIRCUITS, "Farenite, Circuit Boards", EnumTechLevel.MACRO,
+                                ManagerResearch.BASIC_CIRCUITS, "Basic logic for basic machines.", EnumTechLevel.MACRO,
                                 new String[]{ManagerResearch.MACROSCOPIC_STRUCTURES},
                                 new ItemStack(Femtocraft.itemMicrochip), true,
-                                null, null, null, null, false, true)
+                                getInput(new ItemStack(Femtocraft.itemConductivePowder)), new ItemStack(Femtocraft.itemConductivePowder), null, null, false, true)
                 ),
                 loadResearchTechnology(new ResearchTechnology(
                                 ManagerResearch.MACHINING, "Start your industry!", EnumTechLevel.MICRO,
                                 new String[]{
                                         ManagerResearch.METALLURGY, ManagerResearch.BASIC_CIRCUITS},
                                 new ItemStack(Femtocraft.itemMicroPlating), false,
-                                new ItemStack[]{new ItemStack(
-                                        Femtocraft.itemIngotTemperedTitanium), new ItemStack(
-                                        Femtocraft.itemMicrochip), new ItemStack(
-                                        Femtocraft.itemIngotTemperedTitanium), new ItemStack(
-                                        Femtocraft.itemMicrochip), new ItemStack(
-                                        Femtocraft.itemConductivePowder), new ItemStack(
-                                        Femtocraft.itemMicrochip), new ItemStack(
-                                        Femtocraft.itemIngotTemperedTitanium), new ItemStack(
-                                        Femtocraft.itemMicrochip), new ItemStack(
-                                        Femtocraft.itemIngotTemperedTitanium)},
-                                new ItemStack(
-                                        Femtocraft.itemMicroPlating)
+                                getInput(new ItemStack(Femtocraft.itemMicroPlating)),
+                                new ItemStack(Femtocraft.itemMicroPlating)
                         )
                 ),
                 loadResearchTechnology(new ResearchTechnology(
@@ -117,25 +111,25 @@ public class FemtocraftConfigTechnology {
                         ManagerResearch.ALGORITHMS, "", EnumTechLevel.MICRO,
                         new String[]{ManagerResearch.MACHINING}, new ItemStack(
                         Femtocraft.blockEncoder), false,
-                        null
+                        getInput(new ItemStack(Femtocraft.blockEncoder)), new ItemStack(Femtocraft.blockEncoder)
                 )),
                 loadResearchTechnology(new ResearchTechnology(
                         ManagerResearch.MECHANICAL_PRECISION, "", EnumTechLevel.MICRO,
                         new String[]{ManagerResearch.MACHINING}, new ItemStack(
                         Femtocraft.blockMicroFurnaceUnlit), false,
-                        null
+                        getInput(new ItemStack(Femtocraft.itemHeatingElement)), new ItemStack(Femtocraft.itemHeatingElement)
                 )),
                 loadResearchTechnology(new ResearchTechnology(
                         ManagerResearch.POWER_OF_NOTHING, "\"Poof!\" It's nothing!", EnumTechLevel.MICRO,
                         new String[]{ManagerResearch.MECHANICAL_PRECISION},
                         new ItemStack(Femtocraft.itemVacuumCore),
-                        false, null
+                        false, getInput(new ItemStack(Femtocraft.itemVacuumCore)), new ItemStack(Femtocraft.itemVacuumCore)
                 )),
                 loadResearchTechnology(new ResearchTechnology(
                         ManagerResearch.VACUUM_TUBES, "These tubes contain nothing!", EnumTechLevel.MICRO,
                         new String[]{ManagerResearch.POWER_OF_NOTHING}, new ItemStack(
                         Femtocraft.blockVacuumTube), false,
-                        null
+                        getInput(new ItemStack(Femtocraft.blockVacuumTube)), new ItemStack(Femtocraft.blockVacuumTube)
                 )),
                 loadResearchTechnology(new ResearchTechnology(
                         ManagerResearch.VACUUM_TUBE_HUB, "A place for nothing to congregate.",
@@ -148,35 +142,35 @@ public class FemtocraftConfigTechnology {
                         ManagerResearch.SUCTION_PIPES, "These pipes suck!", EnumTechLevel.MICRO,
                         new String[]{ManagerResearch.POWER_OF_NOTHING}
                         , new ItemStack(Femtocraft.blockSuctionPipe),
-                        false, null
+                        false, getInput(new ItemStack(Femtocraft.blockSuctionPipe)), new ItemStack(Femtocraft.blockSuctionPipe)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
                         ManagerResearch.NANO_CIRCUITS, "", EnumTechLevel.NANO,
                         new String[]{ManagerResearch.MECHANICAL_PRECISION, ManagerResearch.BASIC_CIRCUITS},
                         new ItemStack(Femtocraft.itemNanochip), true,
-                        null
+                        getInput(new ItemStack(Femtocraft.itemNanochip)), new ItemStack(Femtocraft.itemNanochip)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
                         ManagerResearch.ADVANCED_PROGRAMMING, "", EnumTechLevel.NANO,
                         new String[]{ManagerResearch.NANO_CIRCUITS},
                         new ItemStack(Femtocraft.itemBasicAICore), false,
-                        null
+                        getInput(new ItemStack(Femtocraft.itemBasicAICore)), new ItemStack(Femtocraft.itemBasicAICore)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
                         ManagerResearch.WORKLOAD_SCHEDULING, "", EnumTechLevel.NANO,
                         new String[]{ManagerResearch.ADVANCED_PROGRAMMING},
                         new ItemStack(Femtocraft.itemSchedulerCore),
-                        false, null
+                        false, getInput(new ItemStack(Femtocraft.itemSchedulerCore)), new ItemStack(Femtocraft.itemSchedulerCore)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
                         ManagerResearch.PATTERN_RECOGNITION, "", EnumTechLevel.NANO,
                         new String[]{ManagerResearch.ADVANCED_PROGRAMMING},
                         new ItemStack(Femtocraft.itemLearningCore),
-                        false, null
+                        false, getInput(new ItemStack(Femtocraft.itemLearningCore)), new ItemStack(Femtocraft.itemLearningCore)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -190,7 +184,7 @@ public class FemtocraftConfigTechnology {
                         ManagerResearch.RESOURCE_OPTIMIZATION, "", EnumTechLevel.NANO,
                         new String[]{ManagerResearch.ADVANCED_PROGRAMMING},
                         new ItemStack(Femtocraft.itemManagerCore),
-                        false, null
+                        false, getInput(new ItemStack(Femtocraft.itemManagerCore)), new ItemStack(Femtocraft.itemManagerCore)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(ManagerResearch.BASIC_CHEMISTRY,
@@ -203,21 +197,21 @@ public class FemtocraftConfigTechnology {
                         ManagerResearch.POTENTIALITY, "", EnumTechLevel.MICRO,
                         new String[]{ManagerResearch.BASIC_CIRCUITS, ManagerResearch.BASIC_CHEMISTRY
                         }, new ItemStack(Femtocraft.blockMicroCable), false,
-                        null
+                        getInput(new ItemStack(Femtocraft.itemMicroCoil)), new ItemStack(Femtocraft.itemMicroCoil)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
                         ManagerResearch.POTENTIALITY_STORAGE, "", EnumTechLevel.MICRO,
                         new String[]{ManagerResearch.POTENTIALITY, ManagerResearch.MACHINING
                         }, new ItemStack(Femtocraft.blockMicroCube), false,
-                        null
+                        getInput(new ItemStack(Femtocraft.itemBattery)), new ItemStack(Femtocraft.itemBattery)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
                         ManagerResearch.POTENTIALITY_HARNESSING, "", EnumTechLevel.MICRO,
                         new String[]{ManagerResearch.POTENTIALITY}, new
                         ItemStack(Femtocraft.blockMicroChargingBase),
-                        false, null
+                        false, getInput(new ItemStack(Femtocraft.blockMicroChargingBase)), new ItemStack(Femtocraft.blockMicroChargingBase)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -225,7 +219,7 @@ public class FemtocraftConfigTechnology {
                         EnumTechLevel.MICRO, new String[]{
                         ManagerResearch.MECHANICAL_PRECISION,
                         ManagerResearch.POTENTIALITY_HARNESSING}
-                        , new ItemStack(Femtocraft.blockMagneticInductionGenerator), false, null
+                        , new ItemStack(Femtocraft.blockMagneticInductionGenerator), false, getInput(new ItemStack(Femtocraft.blockMagneticInductionGenerator)), new ItemStack(Femtocraft.blockMagneticInductionGenerator)
                 )),
                 loadResearchTechnology(new ResearchTechnology(ManagerResearch.ADVANCED_CHEMISTRY, "",
                                                EnumTechLevel.NANO, new String[]{ManagerResearch
@@ -245,7 +239,7 @@ public class FemtocraftConfigTechnology {
                         ManagerResearch.ARTIFICIAL_MATERIALS, "Make what you need.", EnumTechLevel.NANO,
                         new String[]{ManagerResearch.NANO_CIRCUITS, ManagerResearch.ADVANCED_CHEMISTRY},
                         new ItemStack(Femtocraft.itemNanoPlating), false,
-                        null
+                        getInput(new ItemStack(Femtocraft.itemNanoPlating)), new ItemStack(Femtocraft.itemNanoPlating)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -253,9 +247,9 @@ public class FemtocraftConfigTechnology {
                         new String[]{
                                 ManagerResearch.NANO_CIRCUITS, ManagerResearch.ADVANCED_CHEMISTRY,
                                 ManagerResearch.ARTIFICIAL_MATERIALS}
-                        , new ItemStack(Femtocraft.itemNanoCoil),
+                        , new ItemStack(Femtocraft.blockNanoCable),
                         false,
-                        null
+                        getInput(new ItemStack(Femtocraft.itemNanoCoil)), new ItemStack(Femtocraft.itemNanoCoil)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -264,7 +258,7 @@ public class FemtocraftConfigTechnology {
                         ManagerResearch.ADVANCED_CHEMISTRY,
                         ManagerResearch.POTENTIALITY_HARNESSING}, new
                         ItemStack(Femtocraft.blockCryoEndothermalChargingBase),
-                        false, null
+                        false, getInput(new ItemStack(Femtocraft.blockCryoEndothermalChargingBase)), new ItemStack(Femtocraft.blockCryoEndothermalChargingBase)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -273,7 +267,7 @@ public class FemtocraftConfigTechnology {
                                 ManagerResearch.FARENITE_STABILIZATION},
                         new ItemStack(Femtocraft.blockOrbitalEqualizer),
                         false,
-                        null
+                        getInput(new ItemStack(Femtocraft.blockOrbitalEqualizer)), new ItemStack(Femtocraft.blockOrbitalEqualizer)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -283,7 +277,7 @@ public class FemtocraftConfigTechnology {
                                 ManagerResearch.RESOURCE_OPTIMIZATION
                         }, new ItemStack(Femtocraft.blockNanoCubeFrame),
                         false,
-                        null
+                        getInput(new ItemStack(Femtocraft.blockNanoCubeFrame)), new ItemStack(Femtocraft.blockNanoCubeFrame)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -292,7 +286,7 @@ public class FemtocraftConfigTechnology {
                                 ManagerResearch.WORKLOAD_SCHEDULING,
                                 ManagerResearch.ARTIFICIAL_MATERIALS, ManagerResearch.RESOURCE_OPTIMIZATION}
                         , new ItemStack(Femtocraft.blockNanoInnervatorUnlit),
-                        false, null
+                        false, getInput(new ItemStack(Femtocraft.blockNanoInnervatorUnlit)), new ItemStack(Femtocraft.blockNanoInnervatorUnlit)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -302,7 +296,7 @@ public class FemtocraftConfigTechnology {
                                 ManagerResearch.WORKLOAD_SCHEDULING, ManagerResearch.RESOURCE_OPTIMIZATION},
                         new ItemStack(Femtocraft.blockNanoDismantler),
                         false,
-                        null
+                        getInput(new ItemStack(Femtocraft.blockNanoDismantler)), new ItemStack(Femtocraft.blockNanoDismantler)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -313,7 +307,7 @@ public class FemtocraftConfigTechnology {
                         },
                         new ItemStack(Femtocraft.itemDigitalSchematic),
                         false,
-                        null
+                        getInput(new ItemStack(Femtocraft.itemDigitalSchematic)), new ItemStack(Femtocraft.itemDigitalSchematic)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -322,7 +316,7 @@ public class FemtocraftConfigTechnology {
                         EnumTechLevel.NANO, new String[]{
                         ManagerResearch.ADVANCED_CHEMISTRY
                 }, new ItemStack(Femtocraft.itemDimensionalMonopole),
-                        true, null
+                        true, getInput(new ItemStack(Femtocraft.itemDimensionalMonopole)), new ItemStack(Femtocraft.itemDimensionalMonopole)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -331,7 +325,7 @@ public class FemtocraftConfigTechnology {
                         ManagerResearch.ARTIFICIAL_MATERIALS,
                         ManagerResearch.SPACETIME_MANIPULATION, ManagerResearch.ATOMIC_MANIPULATION}
                         , new ItemStack(Femtocraft.blockNanoEnmesher),
-                        false, null
+                        false, getInput(new ItemStack(Femtocraft.blockNanoEnmesher)), new ItemStack(Femtocraft.blockNanoEnmesher)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -339,7 +333,7 @@ public class FemtocraftConfigTechnology {
                         new String[]{
                                 ManagerResearch.DIMENSIONAL_BRAIDING
                         }, new ItemStack(Femtocraft.itemPanLocationalComputer),
-                        false, null
+                        false, getInput(new ItemStack(Femtocraft.itemPanLocationalComputer)), new ItemStack(Femtocraft.itemPanLocationalComputer)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -366,7 +360,7 @@ public class FemtocraftConfigTechnology {
                         ManagerResearch.SPACETIME_MANIPULATION,
                         ManagerResearch.ATOMIC_MANIPULATION
                 }, new ItemStack(Femtocraft.blockNanoHorologe),
-                        false, null
+                        false, getInput(new ItemStack(Femtocraft.blockNanoHorologe)), new ItemStack(Femtocraft.blockNanoHorologe)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -406,7 +400,7 @@ public class FemtocraftConfigTechnology {
                                 ManagerResearch.TEMPORAL_PIPELINING
                         }, new ItemStack(Femtocraft.itemCharosGate),
                         true,
-                        null
+                        getInput(new ItemStack(Femtocraft.itemCharosGate)), new ItemStack(Femtocraft.itemCharosGate)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -417,7 +411,7 @@ public class FemtocraftConfigTechnology {
                         },
                         new ItemStack(Femtocraft.blockMicroChargingCapacitor),
                         false,
-                        null
+                        getInput(new ItemStack(Femtocraft.blockMicroChargingCapacitor)), new ItemStack(Femtocraft.blockMicroChargingCapacitor)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -429,7 +423,7 @@ public class FemtocraftConfigTechnology {
                                 ManagerResearch.ADVANCED_CHEMISTRY
                         },
                         new ItemStack(Femtocraft.itemIngotThFaSalt),
-                        false, null
+                        false, getInput(new ItemStack(Femtocraft.itemIngotThFaSalt)), new ItemStack(Femtocraft.itemIngotThFaSalt)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -442,7 +436,7 @@ public class FemtocraftConfigTechnology {
                         },
                         new ItemStack(Femtocraft.blockFissionReactorCore),
                         false,
-                        null
+                        getInput(new ItemStack(Femtocraft.itemFissionReactorPlating)), new ItemStack(Femtocraft.itemFissionReactorPlating)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -474,7 +468,7 @@ public class FemtocraftConfigTechnology {
                                 ManagerResearch.REALITY_OVERCLOCKER
                         }, new ItemStack(Femtocraft.itemErinyesCircuit),
                         false,
-                        null
+                        getInput(new ItemStack(Femtocraft.itemErinyesCircuit)), new ItemStack(Femtocraft.itemErinyesCircuit)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -492,7 +486,7 @@ public class FemtocraftConfigTechnology {
                         EnumTechLevel.FEMTO, new String[]{
                         ManagerResearch.QUANTUM_ROBOTICS
                 }, new ItemStack(Femtocraft.itemFemtoPlating),
-                        false, null
+                        false, getInput(new ItemStack(Femtocraft.itemFemtoPlating)), new ItemStack(Femtocraft.itemFemtoPlating)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -501,7 +495,7 @@ public class FemtocraftConfigTechnology {
                         ManagerResearch.SPACETIME_EXPLOITATION,
                         ManagerResearch.ELEMENT_MANUFACTURING
                 }, new ItemStack(Femtocraft.blockFemtoEntangler),
-                        false, null
+                        false, getInput(new ItemStack(Femtocraft.blockFemtoEntangler)), new ItemStack(Femtocraft.blockFemtoEntangler)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -518,7 +512,7 @@ public class FemtocraftConfigTechnology {
                         ManagerResearch.SPACETIME_EXPLOITATION,
                         ManagerResearch.ELEMENT_MANUFACTURING
                 }, new ItemStack(Femtocraft.blockFemtoChronoshifter),
-                        false, null
+                        false, getInput(new ItemStack(Femtocraft.blockFemtoChronoshifter)), new ItemStack(Femtocraft.blockFemtoChronoshifter)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -536,9 +530,9 @@ public class FemtocraftConfigTechnology {
                                 ManagerResearch.DIMENSIONAL_TRANSFORMATION,
                                 ManagerResearch.ELEMENT_MANUFACTURING
                         },
-                        new ItemStack(Femtocraft.itemFemtoCoil),
+                        new ItemStack(Femtocraft.blockFemtoCable),
                         false,
-                        null
+                        getInput(new ItemStack(Femtocraft.itemFemtoCoil)), new ItemStack(Femtocraft.itemFemtoCoil)
                 )),
 
                 //    public static ResearchTechnology technologyPerfectScheduling = new ResearchTechnology(
@@ -554,7 +548,7 @@ public class FemtocraftConfigTechnology {
                         }, new ItemStack(
                         Femtocraft.blockFemtoImpulserUnlit),
                         false,
-                        null
+                        getInput(new ItemStack(Femtocraft.blockFemtoImpulserUnlit)), new ItemStack(Femtocraft.blockFemtoImpulserUnlit)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -564,7 +558,7 @@ public class FemtocraftConfigTechnology {
                         }, new ItemStack(
                         Femtocraft.blockFemtoRepurposer),
                         false,
-                        null
+                        getInput(new ItemStack(Femtocraft.blockFemtoRepurposer)), new ItemStack(Femtocraft.blockFemtoRepurposer)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -575,7 +569,7 @@ public class FemtocraftConfigTechnology {
                                 ManagerResearch.PARTICLE_MANIPULATION
                         },
                         new ItemStack(Femtocraft.itemQuantumSchematic),
-                        false, null
+                        false, getInput(new ItemStack(Femtocraft.itemQuantumSchematic)), new ItemStack(Femtocraft.itemQuantumSchematic)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -585,7 +579,7 @@ public class FemtocraftConfigTechnology {
                                 ManagerResearch.DEMONIC_PARTICULATES
                         }, new ItemStack(Femtocraft.blockNullEqualizer),
                         false,
-                        null
+                        getInput(new ItemStack(Femtocraft.blockNullEqualizer)), new ItemStack(Femtocraft.blockNullEqualizer)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -594,7 +588,7 @@ public class FemtocraftConfigTechnology {
                                 ManagerResearch.SPONTANEOUS_GENERATION
                         }, new ItemStack(Femtocraft.blockFemtoCubeFrame),
                         false,
-                        null
+                        getInput(new ItemStack(Femtocraft.blockFemtoCubeFrame)), new ItemStack(Femtocraft.blockFemtoCubeFrame)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -607,7 +601,7 @@ public class FemtocraftConfigTechnology {
                         },
                         new ItemStack(Femtocraft.blockStellaratorCore),
                         false,
-                        null
+                        getInput(new ItemStack(Femtocraft.itemStellaratorPlating)), new ItemStack(Femtocraft.itemStellaratorPlating)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -615,7 +609,7 @@ public class FemtocraftConfigTechnology {
                         new String[]{
                                 ManagerResearch.STELLAR_MIMICRY}
                         , new ItemStack(Femtocraft.blockPlasmaTurbine),
-                        false, null
+                        false, getInput(new ItemStack(Femtocraft.blockPlasmaTurbine)), new ItemStack(Femtocraft.blockPlasmaTurbine)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -623,7 +617,7 @@ public class FemtocraftConfigTechnology {
                         new String[]{
                                 ManagerResearch.STELLAR_MIMICRY}
                         , new ItemStack(Femtocraft.blockPlasmaCondenser),
-                        false, null
+                        false, getInput(new ItemStack(Femtocraft.blockPlasmaCondenser)), new ItemStack(Femtocraft.blockPlasmaCondenser)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -633,7 +627,7 @@ public class FemtocraftConfigTechnology {
                         ManagerResearch.CORRUPTION_STABILIZATION,
                         ManagerResearch.PARTICLE_MANIPULATION}
                         , new ItemStack(Item.netherStar),
-                        true, null
+                        true, getInput(new ItemStack(Item.netherStar)), new ItemStack(Item.netherStar)
                 )),
 
                 loadResearchTechnology(new ResearchTechnology(
@@ -643,7 +637,7 @@ public class FemtocraftConfigTechnology {
                                 ManagerResearch.BASIC_CHEMISTRY}
                         , new ItemStack(Femtocraft.blockMicroDeconstructor),
                         false,
-                        null
+                        getInput(new ItemStack(Femtocraft.itemKineticPulverizer)), new ItemStack(Femtocraft.itemKineticPulverizer)
                 )),
 
                 //    @Technology
@@ -671,6 +665,11 @@ public class FemtocraftConfigTechnology {
         ));
         Femtocraft.logger.log(Level.INFO, "Finished loading default technologies from configs.");
         return ret;
+    }
+
+    private ItemStack[] getInput(ItemStack itemStack) {
+        AssemblerRecipe recipe = assemblyRecipes.getRecipe(itemStack);
+        return recipe == null ? null : recipe.input;
     }
 
     private ResearchTechnology loadTechnology(String name) {
