@@ -24,9 +24,14 @@ package com.itszuvalex.femtocraft.power.tiles;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.core.MagnetRegistry;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import com.itszuvalex.femtocraft.render.RenderUtils;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraftforge.common.ForgeDirection;
+
+import java.util.Random;
 
 @Configurable
 public class TileEntityMagneticInductionGenerator extends TileEntityPowerProducer {
@@ -38,6 +43,9 @@ public class TileEntityMagneticInductionGenerator extends TileEntityPowerProduce
     public static float MAG_DIFFERENCE_POWER_MULTIPLIER = .1f;
     @Saveable
     private int[] neighborMagnetStrength = new int[6];
+
+    @SideOnly(Side.CLIENT)
+    private Random random = new Random();
 
     public TileEntityMagneticInductionGenerator() {
         super();
@@ -54,6 +62,60 @@ public class TileEntityMagneticInductionGenerator extends TileEntityPowerProduce
 //    public int getGuiID() {
 //        return FemtocraftGuiHandler.MicroEngineGuiID;
 //    }
+
+    @Override
+    public void updateEntity() {
+        super.updateEntity();
+        if (worldObj.isRemote) {
+            boolean charged = false;
+            for (int i = 0; i < 6; ++i) {
+                int val = magStrengthOfNeighborForDir(i);
+                int old = neighborMagnetStrength[i];
+                if (val != old) {
+                    charged = true;
+                    neighborMagnetStrength[i] = val;
+                }
+            }
+            if (charged) {
+                for (int i = 0; i < 4; ++i) {
+                    spawnParticle();
+                }
+            }
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    private void spawnParticle() {
+        float x = xCoord;
+        float y = yCoord;
+        float z = zCoord;
+        int side = random.nextInt(6);
+        ForgeDirection dir = ForgeDirection.getOrientation(side);
+        float xOffset = dir.offsetX;
+        float yOffset = dir.offsetY;
+        float zOffset = dir.offsetZ;
+
+        if (xOffset == 0) {
+            xOffset = random.nextFloat();
+        }
+        if (yOffset == 0) {
+            yOffset = random.nextFloat();
+        }
+        if (zOffset == 0) {
+            zOffset = random.nextFloat();
+        }
+
+        if (xOffset < 0) xOffset = 0;
+        if (yOffset < 0) yOffset = 0;
+        if (zOffset < 0) zOffset = 0;
+
+        RenderUtils.spawnParticle(worldObj, RenderUtils.MICRO_POWER_PARTICLE,
+                x + xOffset,
+                y + yOffset,
+                z + zOffset
+        );
+    }
+
 
     @Override
     public void femtocraftServerUpdate() {

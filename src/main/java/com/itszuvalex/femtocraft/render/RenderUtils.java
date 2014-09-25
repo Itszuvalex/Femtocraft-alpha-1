@@ -37,6 +37,8 @@ import org.lwjgl.opengl.GL11;
 public class RenderUtils {
 
     public static final String MICRO_POWER_PARTICLE = "MicroPower";
+    public static final String NANO_POWER_PARTICLE = "NanoPower";
+    public static final String FEMTO_POWER_PARTICLE = "FemtoPower";
 
     public static void renderCube(float x, float y, float z, float startx,
                                   float starty, float startz, float endx, float endy, float endz,
@@ -432,6 +434,12 @@ public class RenderUtils {
         }
         if (name.equals(MICRO_POWER_PARTICLE)) {
             fx = new EntityFxPower(world, x, y, z, .1f, .1f, 1.0f);
+        }
+        else if (name.equals(NANO_POWER_PARTICLE)) {
+            fx = new EntityFxPower(world, x, y, z, .1f, 1.0f, .1f);
+        }
+        else if (name.equals(FEMTO_POWER_PARTICLE)) {
+            fx = new EntityFxPower(world, x, y, z, 1.f, .5f, .1f);
         }
         mc.effectRenderer.addEffect(fx);
         return fx;

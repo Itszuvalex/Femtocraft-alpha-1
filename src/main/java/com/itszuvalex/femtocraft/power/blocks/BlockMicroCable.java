@@ -24,6 +24,7 @@ package com.itszuvalex.femtocraft.power.blocks;
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityMicroCable;
 import com.itszuvalex.femtocraft.proxy.ProxyClient;
+import com.itszuvalex.femtocraft.render.RenderUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -38,6 +39,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 import java.util.List;
+import java.util.Random;
 
 public class BlockMicroCable extends BlockPowerContainer {
     public Icon coreBorder;
@@ -53,6 +55,16 @@ public class BlockMicroCable extends BlockPowerContainer {
         setHardness(1.0f);
         setStepSound(Block.soundStoneFootstep);
         setBlockBounds();
+        setTickRandomly(true);
+    }
+
+    @Override
+    public void randomDisplayTick(World par1World, int x, int y, int z, Random par5Random) {
+        double spawnX = x + getBlockBoundsMinX() + par5Random.nextFloat() * (getBlockBoundsMaxX() - getBlockBoundsMinX());
+        double spawnY = y + getBlockBoundsMinY() + par5Random.nextFloat() * (getBlockBoundsMaxY() - getBlockBoundsMinY());
+        double spawnZ = z + getBlockBoundsMinZ() + par5Random.nextFloat() * (getBlockBoundsMaxZ() - getBlockBoundsMinZ());
+
+        RenderUtils.spawnParticle(par1World, RenderUtils.MICRO_POWER_PARTICLE, spawnX, spawnY, spawnZ);
     }
 
     public void setBlockBounds() {
