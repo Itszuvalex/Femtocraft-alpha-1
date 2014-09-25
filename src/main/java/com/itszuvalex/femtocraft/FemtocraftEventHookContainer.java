@@ -59,22 +59,21 @@ public class FemtocraftEventHookContainer {
     @ForgeSubscribe
     public void preTextureStitch(TextureStitchEvent.Pre event) {
         // Skip out of blocks
-        if (event.map.textureType == 0) {
-            return;
+        if (event.map.textureType == 1) {
+            // Want items
+            ItemAssemblySchematic.placeholderIcon = event.map
+                    .registerIcon(Femtocraft.ID.toLowerCase() + ":"
+                            + "ItemAssemblySchematic");
+            DisplaySlot.noPlaceDisplayIcon = event.map.registerIcon(Femtocraft.ID
+                    .toLowerCase() + ":" + "NoPlaceSlot");
         }
-        // Want items
-        ItemAssemblySchematic.placeholderIcon = event.map
-                .registerIcon(Femtocraft.ID.toLowerCase() + ":"
-                              + "ItemAssemblySchematic");
-        DisplaySlot.noPlaceDisplayIcon = event.map.registerIcon(Femtocraft.ID
-                                                                        .toLowerCase() + ":" + "NoPlaceSlot");
     }
 
     @ForgeSubscribe
     public void onEntityConstructing(EntityConstructing event) {
         if (event.entity instanceof EntityPlayer
-            && event.entity
-                       .getExtendedProperties(PlayerProperties.PROP_TAG) == null) {
+                && event.entity
+                .getExtendedProperties(PlayerProperties.PROP_TAG) == null) {
             PlayerProperties.register((EntityPlayer) event.entity);
         }
     }
@@ -82,7 +81,7 @@ public class FemtocraftEventHookContainer {
     @ForgeSubscribe
     public void onEntityJoinWorld(EntityJoinWorldEvent event) {
         if (!event.entity.worldObj.isRemote
-            && event.entity instanceof EntityPlayer) {
+                && event.entity instanceof EntityPlayer) {
             PlayerProperties.get((EntityPlayer) event.entity).sync();
         }
     }
@@ -92,9 +91,9 @@ public class FemtocraftEventHookContainer {
         if (MagnetRegistry.showMagnetismTooltip) {
             if (MagnetRegistry.isMagnet(event.itemStack)) {
                 if (!MagnetRegistry.magnetismTooltipIsAdvanced ||
-                    (MagnetRegistry.magnetismTooltipIsAdvanced && event.showAdvancedItemTooltips)) {
+                        (MagnetRegistry.magnetismTooltipIsAdvanced && event.showAdvancedItemTooltips)) {
                     event.toolTip.add(EnumChatFormatting.GOLD + "Magnet Strength: " + EnumChatFormatting.RESET +
-                                      String.valueOf(MagnetRegistry.getMagnetStrength(event.itemStack)));
+                            String.valueOf(MagnetRegistry.getMagnetStrength(event.itemStack)));
                 }
             }
         }

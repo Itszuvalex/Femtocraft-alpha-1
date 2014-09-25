@@ -21,10 +21,13 @@
 
 package com.itszuvalex.femtocraft.entities.fx;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
+@SideOnly(Side.CLIENT)
 public class EntityFxAntiGravity extends EntityFX {
     public static Icon[] icons;
 

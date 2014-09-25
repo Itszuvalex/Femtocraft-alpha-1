@@ -27,6 +27,7 @@ import com.itszuvalex.femtocraft.api.IAtmosphericChargingBase;
 import com.itszuvalex.femtocraft.core.blocks.BlockBase;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.proxy.ProxyClient;
+import com.itszuvalex.femtocraft.render.RenderUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -36,9 +37,20 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 public class BlockAtmosphericChargingCoil extends BlockBase implements IAtmosphericChargingAddon {
     public Icon coilConnector;
     public Icon coilConnectorTop;
+
+    @Override
+    public void randomDisplayTick(World par1World, int x, int y, int z, Random par5Random) {
+        double spawnX = x + getBlockBoundsMinX() + par5Random.nextFloat() * (getBlockBoundsMaxX() - getBlockBoundsMinX());
+        double spawnY = y + getBlockBoundsMinY() + par5Random.nextFloat() * (getBlockBoundsMaxY() - getBlockBoundsMinY());
+        double spawnZ = z + getBlockBoundsMinZ() + par5Random.nextFloat() * (getBlockBoundsMaxZ() - getBlockBoundsMinZ());
+
+        RenderUtils.spawnParticle(par1World, RenderUtils.MICRO_POWER_PARTICLE, spawnX, spawnY, spawnZ);
+    }
 
     public BlockAtmosphericChargingCoil(int par1) {
         super(par1, Material.iron);
@@ -47,6 +59,7 @@ public class BlockAtmosphericChargingCoil extends BlockBase implements IAtmosphe
         setHardness(1.0f);
         setStepSound(Block.soundMetalFootstep);
         setBlockBounds(4.f / 16.f, 0, 4.f / 16.f, 12.f / 16.f, 1, 12.f / 16.f);
+        setTickRandomly(true);
     }
 
     @Override
@@ -90,29 +103,29 @@ public class BlockAtmosphericChargingCoil extends BlockBase implements IAtmosphe
         Block block = Block.blocksList[par1World.getBlockId(par2, par3 - 1,
                 par4)];
         return block != null
-               && (block instanceof IAtmosphericChargingAddon &&
-                   ((IAtmosphericChargingAddon) block).canSupportAddon(this,
-                           par1World,
-                           par2,
-                           par3,
-                           par4) ||
-                   (block
-                           instanceof IAtmosphericChargingBase))
-               && par1World.isAirBlock(par2 - 1, par3, par4)
-               && par1World.isAirBlock(par2 + 1, par3, par4)
-               && par1World.isAirBlock(par2, par3, par4 - 1)
-               && par1World.isAirBlock(par2, par3, par4 + 1);
+                && (block instanceof IAtmosphericChargingAddon &&
+                ((IAtmosphericChargingAddon) block).canSupportAddon(this,
+                        par1World,
+                        par2,
+                        par3,
+                        par4) ||
+                (block
+                        instanceof IAtmosphericChargingBase))
+                && par1World.isAirBlock(par2 - 1, par3, par4)
+                && par1World.isAirBlock(par2 + 1, par3, par4)
+                && par1World.isAirBlock(par2, par3, par4 - 1)
+                && par1World.isAirBlock(par2, par3, par4 + 1);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         blockIcon = coilConnector = par1IconRegister.registerIcon(Femtocraft.ID
-                                                                          .toLowerCase() + ":" +
-                                                                  "MicroChargingCoil_connector");
+                .toLowerCase() + ":" +
+                "MicroChargingCoil_connector");
         coilConnectorTop = par1IconRegister.registerIcon(Femtocraft.ID
-                                                                 .toLowerCase() + ":" +
-                                                         "MicroChargingCoil_coilConnectorTop");
+                .toLowerCase() + ":" +
+                "MicroChargingCoil_coilConnectorTop");
     }
 
     @Override

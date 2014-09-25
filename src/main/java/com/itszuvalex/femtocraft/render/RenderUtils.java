@@ -21,15 +21,22 @@
 
 package com.itszuvalex.femtocraft.render;
 
+import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.entities.fx.EntityFxPower;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 public class RenderUtils {
+
+    public static final String MICRO_POWER_PARTICLE = "MicroPower";
 
     public static void renderCube(float x, float y, float z, float startx,
                                   float starty, float startz, float endx, float endy, float endz,
@@ -402,12 +409,6 @@ public class RenderUtils {
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glColor4f(red, green, blue, alpha);
         tessellator.startDrawingQuads();
-        // Counterclockwise...WHICH IS APPARENTLY WRONG CAUSE SCREW YOU
-        // MINECRAFT
-        // tessellator.addVertex((double) x1 - xS, (double) y1 + yS, 0.0D);
-        // tessellator.addVertex((double) x1 + xS, (double) y1 - yS, 0.0D);
-        // tessellator.addVertex((double) x2 + xS, (double) y2 - yS, 0.0D);
-        // tessellator.addVertex((double) x2 - xS, (double) y2 + yS, 0.0D);
         tessellator.addVertex((double) x2 - xS, (double) y2 + yS, 0.0D);
         tessellator.addVertex((double) x2 + xS, (double) y2 - yS, 0.0D);
         tessellator.addVertex((double) x1 + xS, (double) y1 - yS, 0.0D);
@@ -415,5 +416,24 @@ public class RenderUtils {
         tessellator.draw();
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_BLEND);
+    }
+
+    public static ResourceLocation particleLocation = new ResourceLocation(Femtocraft.ID.toLowerCase(), "textures/particles/particles.png");
+
+    public static EntityFX spawnParticle(World world, String name, double x, double y, double z) {
+        Minecraft mc = Minecraft.getMinecraft();
+        double deltaX = mc.renderViewEntity.posX - x;
+        double deltaY = mc.renderViewEntity.posY - y;
+        double deltaZ = mc.renderViewEntity.posZ - z;
+        double renderDistance = 16D;
+        EntityFX fx = null;
+        if ((deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ) > (renderDistance * renderDistance)) {
+            return null;
+        }
+        if (name.equals(MICRO_POWER_PARTICLE)) {
+            fx = new EntityFxPower(world, x, y, z, .1f, .1f, 1.0f);
+        }
+        mc.effectRenderer.addEffect(fx);
+        return fx;
     }
 }
