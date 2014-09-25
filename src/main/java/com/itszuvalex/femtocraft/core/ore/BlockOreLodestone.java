@@ -48,6 +48,9 @@ public class BlockOreLodestone extends TileContainer {
     @Configurable(comment = "Set to false to prevent tile entity ticks, and prevent Magnetism from pulling items from" +
                             " your inventory.")
     public static boolean MAGNETIC = true;
+    @Configurable(comment = "Set to false to prevent the ore from automatically pulling magnetic items from the hands" +
+                            " of players who left click this block.")
+    public static boolean PULL_MAGNETS_FROM_HAND = true;
 
     @Override
     public TileEntity createNewTileEntity(World world) {
@@ -73,12 +76,12 @@ public class BlockOreLodestone extends TileContainer {
 
     @Override
     public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
-        if (par1World.isRemote) return;
-
         ItemStack item = par5EntityPlayer.getHeldItem();
-        if (MAGNETIC && MagnetRegistry.isMagnet(item)) {
-            EntityItem ei = par5EntityPlayer.entityDropItem(item, par5EntityPlayer.height / 2f);
-            ei.delayBeforeCanPickup = 20;
+        if (PULL_MAGNETS_FROM_HAND && MagnetRegistry.isMagnet(item)) {
+            if (par1World.isRemote) {
+                EntityItem ei = par5EntityPlayer.entityDropItem(item, par5EntityPlayer.height / 2f);
+                ei.delayBeforeCanPickup = 20;
+            }
             par5EntityPlayer.inventory.setInventorySlotContents(par5EntityPlayer.inventory.currentItem, null);
         }
     }
