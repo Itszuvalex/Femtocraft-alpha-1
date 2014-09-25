@@ -27,6 +27,7 @@ import com.itszuvalex.femtocraft.api.IAtmosphericChargingBase;
 import com.itszuvalex.femtocraft.core.blocks.BlockBase;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.proxy.ProxyClient;
+import com.itszuvalex.femtocraft.render.RenderUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -35,6 +36,8 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockAtmosphericChargingCapacitor extends BlockBase implements IAtmosphericChargingAddon {
     public static float powerMultiplierBase = .2f;
@@ -53,6 +56,16 @@ public class BlockAtmosphericChargingCapacitor extends BlockBase implements IAtm
         setHardness(1.0f);
         setStepSound(Block.soundMetalFootstep);
         setBlockBounds(2.f / 16.f, 0, 2.f / 16.f, 14.f / 16.f, 14.f / 16.f, 14.f / 16.f);
+        setTickRandomly(true);
+    }
+
+    @Override
+    public void randomDisplayTick(World par1World, int x, int y, int z, Random par5Random) {
+        double spawnX = x + getBlockBoundsMinX() + par5Random.nextFloat() * (getBlockBoundsMaxX() - getBlockBoundsMinX());
+        double spawnY = y + getBlockBoundsMinY() + par5Random.nextFloat() * (getBlockBoundsMaxY() - getBlockBoundsMinY());
+        double spawnZ = z + getBlockBoundsMinZ() + par5Random.nextFloat() * (getBlockBoundsMaxZ() - getBlockBoundsMinZ());
+
+        RenderUtils.spawnParticle(par1World, RenderUtils.MICRO_POWER_PARTICLE, spawnX, spawnY, spawnZ);
     }
 
     @Override
@@ -96,44 +109,44 @@ public class BlockAtmosphericChargingCapacitor extends BlockBase implements IAtm
         Block block = Block.blocksList[par1World.getBlockId(par2, par3 - 1,
                 par4)];
         return block != null
-               && (block instanceof IAtmosphericChargingAddon &&
-                   ((IAtmosphericChargingAddon) block).canSupportAddon(this,
-                           par1World,
-                           par2,
-                           par3,
-                           par4) ||
-                   (block
-                           instanceof IAtmosphericChargingBase))
-               && par1World.isAirBlock(par2 - 1, par3, par4)
-               && par1World.isAirBlock(par2 + 1, par3, par4)
-               && par1World.isAirBlock(par2, par3, par4 - 1)
-               && par1World.isAirBlock(par2, par3, par4 + 1);
+                && (block instanceof IAtmosphericChargingAddon &&
+                ((IAtmosphericChargingAddon) block).canSupportAddon(this,
+                        par1World,
+                        par2,
+                        par3,
+                        par4) ||
+                (block
+                        instanceof IAtmosphericChargingBase))
+                && par1World.isAirBlock(par2 - 1, par3, par4)
+                && par1World.isAirBlock(par2 + 1, par3, par4)
+                && par1World.isAirBlock(par2, par3, par4 - 1)
+                && par1World.isAirBlock(par2, par3, par4 + 1);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         capacitorConnector = par1IconRegister.registerIcon(Femtocraft.ID
-                                                                   .toLowerCase()
-                                                           + ":" +
-                                                           "AtmosphericChargingCapacitor_connector");
+                .toLowerCase()
+                + ":" +
+                "AtmosphericChargingCapacitor_connector");
         capacitorConnectorBot = par1IconRegister.registerIcon(Femtocraft.ID
-                                                                      .toLowerCase
-                                                                              () +
-                                                              ":" +
-                                                              "AtmosphericChargingCapacitor_connector_bot");
+                .toLowerCase
+                        () +
+                ":" +
+                "AtmosphericChargingCapacitor_connector_bot");
         blockIcon = capacitorSide = par1IconRegister.registerIcon(Femtocraft.ID
-                                                                          .toLowerCase()
-                                                                  + ":" +
-                                                                  "AtmosphericChargingCapacitor_side");
+                .toLowerCase()
+                + ":" +
+                "AtmosphericChargingCapacitor_side");
         capacitorTop = par1IconRegister.registerIcon(Femtocraft.ID
-                                                             .toLowerCase()
-                                                     + ":" +
-                                                     "AtmosphericChargingCapacitor_top");
+                .toLowerCase()
+                + ":" +
+                "AtmosphericChargingCapacitor_top");
         capacitorBot = par1IconRegister.registerIcon(Femtocraft.ID
-                                                             .toLowerCase()
-                                                     + ":" +
-                                                     "AtmosphericChargingCapacitor_bot");
+                .toLowerCase()
+                + ":" +
+                "AtmosphericChargingCapacitor_bot");
     }
 
     @Override
@@ -147,10 +160,12 @@ public class BlockAtmosphericChargingCapacitor extends BlockBase implements IAtm
             b = Block.blocksList[world.getBlockId(x, y - offset, z)];
             if (b instanceof IAtmosphericChargingBase) {
                 searchEnded = true;
-            } else if (b instanceof IAtmosphericChargingAddon) {
+            }
+            else if (b instanceof IAtmosphericChargingAddon) {
                 IAtmosphericChargingAddon addon = (IAtmosphericChargingAddon) b;
                 power += addon.powerPerTick(world, x, y - offset, z);
-            } else {
+            }
+            else {
                 searchEnded = true;
             }
         }
@@ -158,9 +173,11 @@ public class BlockAtmosphericChargingCapacitor extends BlockBase implements IAtm
 
         if (world.isThundering()) {
             power *= powerMultiplierStorm;
-        } else if (world.isRaining()) {
+        }
+        else if (world.isRaining()) {
             power *= powerMultiplierRain;
-        } else {
+        }
+        else {
             power *= powerMultiplierBase;
         }
 

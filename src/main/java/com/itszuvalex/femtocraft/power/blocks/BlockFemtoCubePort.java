@@ -26,6 +26,7 @@ import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockFemtoCube;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoCubePort;
+import com.itszuvalex.femtocraft.render.RenderUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
@@ -35,6 +36,8 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 public class BlockFemtoCubePort extends TileContainer {
     public Icon portInput;
     public Icon portOutput;
@@ -43,6 +46,19 @@ public class BlockFemtoCubePort extends TileContainer {
         super(par1, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
         setUnlocalizedName("BlockFemtoCubePort");
+        setTickRandomly(true);
+    }
+
+    @Override
+    public void randomDisplayTick(World par1World, int x, int y, int z, Random par5Random) {
+        TileEntity te = par1World.getBlockTileEntity(x, y, z);
+        if (te instanceof TileEntityFemtoCubePort && ((TileEntityFemtoCubePort) te).isValidMultiBlock() && ((TileEntityFemtoCubePort) te).output) {
+            double spawnX = x + getBlockBoundsMinX() + par5Random.nextFloat() * (getBlockBoundsMaxX() - getBlockBoundsMinX());
+            double spawnY = y + getBlockBoundsMinY() + par5Random.nextFloat() * (getBlockBoundsMaxY() - getBlockBoundsMinY());
+            double spawnZ = z + getBlockBoundsMinZ() + par5Random.nextFloat() * (getBlockBoundsMaxZ() - getBlockBoundsMinZ());
+
+            RenderUtils.spawnParticle(par1World, RenderUtils.FEMTO_POWER_PARTICLE, spawnX, spawnY, spawnZ);
+        }
     }
 
     @Override

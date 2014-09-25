@@ -43,15 +43,6 @@ public class BlockAtmosphericChargingCoil extends BlockBase implements IAtmosphe
     public Icon coilConnector;
     public Icon coilConnectorTop;
 
-    @Override
-    public void randomDisplayTick(World par1World, int x, int y, int z, Random par5Random) {
-        double spawnX = x + getBlockBoundsMinX() + par5Random.nextFloat() * (getBlockBoundsMaxX() - getBlockBoundsMinX());
-        double spawnY = y + getBlockBoundsMinY() + par5Random.nextFloat() * (getBlockBoundsMaxY() - getBlockBoundsMinY());
-        double spawnZ = z + getBlockBoundsMinZ() + par5Random.nextFloat() * (getBlockBoundsMaxZ() - getBlockBoundsMinZ());
-
-        RenderUtils.spawnParticle(par1World, RenderUtils.MICRO_POWER_PARTICLE, spawnX, spawnY, spawnZ);
-    }
-
     public BlockAtmosphericChargingCoil(int par1) {
         super(par1, Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab);
@@ -60,6 +51,15 @@ public class BlockAtmosphericChargingCoil extends BlockBase implements IAtmosphe
         setStepSound(Block.soundMetalFootstep);
         setBlockBounds(4.f / 16.f, 0, 4.f / 16.f, 12.f / 16.f, 1, 12.f / 16.f);
         setTickRandomly(true);
+    }
+
+    @Override
+    public void randomDisplayTick(World par1World, int x, int y, int z, Random par5Random) {
+        double spawnX = x + getBlockBoundsMinX() + par5Random.nextFloat() * (getBlockBoundsMaxX() - getBlockBoundsMinX());
+        double spawnY = y + getBlockBoundsMinY() + par5Random.nextFloat() * (getBlockBoundsMaxY() - getBlockBoundsMinY());
+        double spawnZ = z + getBlockBoundsMinZ() + par5Random.nextFloat() * (getBlockBoundsMaxZ() - getBlockBoundsMinZ());
+
+        RenderUtils.spawnParticle(par1World, RenderUtils.MICRO_POWER_PARTICLE, spawnX, spawnY, spawnZ);
     }
 
     @Override
