@@ -53,6 +53,9 @@ public class FemtocraftConfigs {
     int BlockOreMaleniteID;
     public static
     @CfgId(block = true)
+    int BlockOreLodestoneID;
+    public static
+    @CfgId(block = true)
     int BlockMicroStoneID;
     public static
     @CfgId(block = true)
@@ -146,7 +149,7 @@ public class FemtocraftConfigs {
     int BlockMicroChargingCapacitorID;
     public static
     @CfgId(block = true)
-    int BlockElectrostaticGeneratorID;
+    int BlockMagneticInductionGeneratorID;
     public static
     @CfgId(block = true)
     int BlockNanoCubeFrameID;
@@ -268,6 +271,12 @@ public class FemtocraftConfigs {
     public static
     @CfgId
     int ItemIngotThFaSaltID;
+    public static
+    @CfgId
+    int ItemNuggetLodestoneID;
+    public static
+    @CfgId
+    int ItemChunkLodestoneID;
     public static
     @CfgId
     int ItemConductivePowderID;
@@ -575,6 +584,10 @@ public class FemtocraftConfigs {
     public static
     @CfgBool
     @CfgCat(category = CATEGORY_GENERATION)
+    boolean lodestoneGen = true;
+    public static
+    @CfgBool
+    @CfgCat(category = CATEGORY_GENERATION)
     boolean alloyGen = true;
     // Recipes
     public static
@@ -585,398 +598,6 @@ public class FemtocraftConfigs {
     @CfgBool
     @CfgCat(category = CATEGORY_DEBUG)
     boolean retrogenAlerts = false;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeItemCrystallite = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeItemMineralite = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeItemMetallite = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeItemFaunite = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeItemElectrite = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeItemFlorite = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeItemMicroCrystal = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeItemProteinChain = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeItemNerveCluster = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeItemConductiveAlloy = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeItemMetalComposite = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeItemFibrousStrand = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeItemMineralLattice = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeItemFungalSpores = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeItemIonicChunk = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeItemReplicatingMaterial = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeItemSpinyFilament = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeItemHardenedBulb = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeItemMorphicChannel = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeItemSynthesizedFiber = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeItemOrganometallicPlate = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeStone = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeGrass = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeDirt = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeCobblestone = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeWoodPlank = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeSapling = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeSand = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeLeaves = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeCobweb = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeDeadBush = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeDandelion = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeRose = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeMushroomBrown = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeMushroomRed = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeMossStone = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeObsidian = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeIce = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeCactus = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipePumpkin = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeNetherrack = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeSoulSand = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeGlowstone = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeMelon = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeVine = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeMycelium = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeLilyPad = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeEnderStone = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeCocoa = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeApple = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeCoal = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeDiamond = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeIronIngot = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeGoldIngot = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeStick = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeString = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeFeather = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeGunpowder = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeSeeds = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeWheat = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeFlint = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeRawPorkchop = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipePorkchop = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeRedstone = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeSnowball = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeLeather = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeClay = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeSugarCane = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeSlimeball = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeEgg = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeRawFish = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeCookedFish = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeDye = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeBone = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipePumpkinSeeds = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeMelonSeeds = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeRawBeef = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeCookedBeef = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeRawChicken = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeCookedChicken = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeRottenFlesh = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeEnderPearl = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeGhastTear = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeNetherWart = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeSpiderEye = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeBlazePowder = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeEmerald = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeCarrot = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipePotato = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeBakedPotato = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipePoisonPotato = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeCake = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeNetherStar = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeIronOre = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeGoldOre = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeTitaniumOre = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipeThoriumOre = true;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_RECIPE_CONFIGURATION)
-    boolean recipePlatinumOre = true;
     public static
     @CfgBool
     @CfgCat(category = CATEGORY_ORE_CONFIGURATION)
@@ -1080,6 +701,26 @@ public class FemtocraftConfigs {
     public static
     @CfgBool
     @CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+    boolean registerLodestoneOreInOreDictionary = true;
+    public static
+    @CfgInt
+    @CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+    int lodestoneOreVeinsPerChunkCount = 10;
+    public static
+    @CfgInt
+    @CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+    int lodestoneOreBlockPerVeinCount = 7;
+    public static
+    @CfgInt
+    @CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+    int lodestoneOreYHeightMax = 140;
+    public static
+    @CfgInt
+    @CfgCat(category = CATEGORY_ORE_CONFIGURATION)
+    int lodestoneOreYHeightMin = 60;
+    public static
+    @CfgBool
+    @CfgCat(category = CATEGORY_ORE_CONFIGURATION)
     boolean registerTitaniumDustInOreDictionary = true;
     public static
     @CfgBool
@@ -1111,7 +752,6 @@ public class FemtocraftConfigs {
         FemtocraftConfigHelper.init();
     }
 
-
     public static void load(Configuration config) {
         try {
 
@@ -1127,31 +767,36 @@ public class FemtocraftConfigs {
                         id = baseBlockID;
                         id = config.getBlock(field.getName(), id).getInt();
                         if (id == baseBlockID) baseBlockID++;
-                    } else {
+                    }
+                    else {
                         id = baseItemID;
                         id = config.getItem(field.getName(), id).getInt();
                         if (id == baseItemID) baseItemID++;
                     }
                     field.setInt(null, id);
-                } else if (field.isAnnotationPresent(CfgBool.class)) {
+                }
+                else if (field.isAnnotationPresent(CfgBool.class)) {
                     CfgCat cat = field.getAnnotation(CfgCat.class);
                     String category;
                     if (cat == null) {
                         category = Configuration.CATEGORY_GENERAL;
-                    } else {
+                    }
+                    else {
                         category = cat.category();
                     }
 
                     boolean bool = field.getBoolean(null);
                     bool = config.get(category, field.getName(), bool)
-                            .getBoolean(bool);
+                                 .getBoolean(bool);
                     field.setBoolean(null, bool);
-                } else if (field.isAnnotationPresent(CfgInt.class)) {
+                }
+                else if (field.isAnnotationPresent(CfgInt.class)) {
                     CfgCat cat = field.getAnnotation(CfgCat.class);
                     String category;
                     if (cat == null) {
                         category = Configuration.CATEGORY_GENERAL;
-                    } else {
+                    }
+                    else {
                         category = cat.category();
                     }
 
@@ -1159,20 +804,23 @@ public class FemtocraftConfigs {
                     cint = config.get(category, field.getName(), cint).getInt(
                             cint);
                     field.setInt(null, cint);
-                } else if (field.isAnnotationPresent(CfgFloat.class)) {
+                }
+                else if (field.isAnnotationPresent(CfgFloat.class)) {
                     CfgCat cat = field.getAnnotation(CfgCat.class);
                     String category;
                     if (cat == null) {
                         category = Configuration.CATEGORY_GENERAL;
-                    } else {
+                    }
+                    else {
                         category = cat.category();
                     }
 
                     float cint = field.getFloat(null);
                     cint = (float) config.get(category, field.getName(), cint)
-                            .getDouble(cint);
+                                         .getDouble(cint);
                     field.setFloat(null, cint);
-                } else {
+                }
+                else {
 
                 }
             }

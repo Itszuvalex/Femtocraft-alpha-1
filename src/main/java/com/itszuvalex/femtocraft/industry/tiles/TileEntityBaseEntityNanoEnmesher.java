@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft.industry.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
+import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.managers.dimensional.DimensionalRecipe;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.BaseInventory;
@@ -35,15 +36,23 @@ import net.minecraftforge.common.ForgeDirection;
 
 import java.util.Arrays;
 
+@Configurable
 public class TileEntityBaseEntityNanoEnmesher extends
-                                              TileEntityBaseEntityIndustry
+        TileEntityBaseEntityIndustry
         implements ISidedInventory {
     public static final int inputSlot = 0;
     public static final int outputSlot = 5;
     public static final int inventorySize = 6;
-    public static int powerStorage = 10000;
-    public static int powerToCook_default = 80;
-    public static float tickMultiplier_default = 1.f;
+    @Configurable(comment = "Power tech level.")
+    public static EnumTechLevel TECH_LEVEL = EnumTechLevel.NANO;
+    @Configurable(comment = "Recipe tech level.")
+    public static EnumTechLevel RECIPE_TECH_LEVEL = EnumTechLevel.NANO;
+    @Configurable(comment = "Power storage maximum.")
+    public static int POWER_STORAGE = 10000;
+    @Configurable(comment = "Power per item to begin processing.")
+    public static int POWER_TO_COOK = 80;
+    @Configurable(comment = "Multiplier for tick processing time of Dimensional Recipes.")
+    public static float TICKS_TO_COOK_MULTIPLIER = 1.f;
     @FemtocraftDataUtils.Saveable
     public ItemStack[] meshConfigStacks = null;
     @FemtocraftDataUtils.Saveable
@@ -58,8 +67,8 @@ public class TileEntityBaseEntityNanoEnmesher extends
     public TileEntityBaseEntityNanoEnmesher() {
         super();
         inventory = new BaseInventory(inventorySize);
-        setTechLevel(EnumTechLevel.NANO);
-        setMaxStorage(powerStorage);
+        setTechLevel(TECH_LEVEL);
+        setMaxStorage(POWER_STORAGE);
     }
 
     @Override
@@ -91,7 +100,7 @@ public class TileEntityBaseEntityNanoEnmesher extends
     }
 
     protected float getTickMultiplier() {
-        return tickMultiplier_default;
+        return TICKS_TO_COOK_MULTIPLIER;
     }
 
     @Override
@@ -104,7 +113,7 @@ public class TileEntityBaseEntityNanoEnmesher extends
     }
 
     protected int getPowerToCook() {
-        return powerToCook_default;
+        return POWER_TO_COOK;
     }
 
     @Override
@@ -118,7 +127,7 @@ public class TileEntityBaseEntityNanoEnmesher extends
     }
 
     protected EnumTechLevel getTechLevel() {
-        return EnumTechLevel.NANO;
+        return RECIPE_TECH_LEVEL;
     }
 
     @Override

@@ -35,24 +35,24 @@ import java.util.logging.Level;
 
 public class AssemblerRecipe implements Comparable, ISaveable {
     @Configurable(comment = "ItemStack[9] (can include nulls) signifying input.  This is unique across all " +
-                            "AssemblerRecipes")
+            "AssemblerRecipes")
     public ItemStack[] input;
     @Configurable(comment = "Mass generated when this recipe is decomposed.  Mass required to assemble this recipe.")
-    public Integer mass;
+    public int mass;
     @Configurable(comment = "ItemStack signifying output.  This is unique across all AssemblerRecipes")
     public ItemStack output;
     @Configurable(comment = "TechLevel of recipe.  This dictates the highest level of Assembler/Dissassembler " +
-                            "required to interact with this recipe.")
+            "required to interact with this recipe.")
     public EnumTechLevel enumTechLevel;
     @Configurable(comment = "Name of Technology required to be researched before the player can use this recipe.")
     public String tech;
 
-    public AssemblerRecipe(ItemStack[] input, Integer mass, ItemStack output,
+    public AssemblerRecipe(ItemStack[] input, int mass, ItemStack output,
                            EnumTechLevel enumTechLevel, ResearchTechnology tech) {
         this(input, mass, output, enumTechLevel, tech.name);
     }
 
-    public AssemblerRecipe(ItemStack[] input, Integer mass, ItemStack output, EnumTechLevel enumTechLevel,
+    public AssemblerRecipe(ItemStack[] input, int mass, ItemStack output, EnumTechLevel enumTechLevel,
                            String techName) {
         this.input = input;
         this.mass = mass;

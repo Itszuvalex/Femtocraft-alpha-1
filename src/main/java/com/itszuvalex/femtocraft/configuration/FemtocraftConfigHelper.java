@@ -21,13 +21,15 @@
 
 package com.itszuvalex.femtocraft.configuration;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.reflect.ClassPath;
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.industry.items.ItemAssemblySchematic;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.*;
@@ -38,6 +40,8 @@ import java.util.logging.Level;
  */
 public class FemtocraftConfigHelper {
     public static final String CLASS_CONSTANTS_KEY = "Class Constants";
+    public static final char CATEGORY_SPLITTER_REPLACEMENT = '-';
+    public static final char CATEGORY_SPLITTER_CHAR = Configuration.CATEGORY_SPLITTER.charAt(0);
     private static List<Class> configurableClasses = new ArrayList<Class>();
 
     /**
@@ -53,6 +57,14 @@ public class FemtocraftConfigHelper {
             loadClassFromConfig(configuration,
                     CLASS_CONSTANTS_KEY, clazz.getSimpleName(), clazz);
         }
+    }
+
+    public static String escapeCategorySplitter(String string) {
+        return string.replace(CATEGORY_SPLITTER_CHAR, CATEGORY_SPLITTER_REPLACEMENT);
+    }
+
+    public static String unescapeCategorySplitter(String string) {
+        return string.replace(CATEGORY_SPLITTER_REPLACEMENT, CATEGORY_SPLITTER_CHAR);
     }
 
     private static void loadClassFromConfig(Configuration configuration, String section, String key, Class clazz) {
@@ -72,6 +84,7 @@ public class FemtocraftConfigHelper {
             fields = fieldsList.toArray(new Field[fieldsList.size()]);
         }
         for (Field field : fields) {
+            if (field.getDeclaringClass() != clazz && obj == null) continue;
             boolean accessible = field.isAccessible();
             if (!field.isAccessible()) field.setAccessible(true);
             Configurable canno = field.getAnnotation(Configurable.class);
@@ -110,7 +123,26 @@ public class FemtocraftConfigHelper {
     }
 
     private static void registerConfigurableClasses() {
-        registerConfigurableClass(ItemAssemblySchematic.class);
+        try {
+            Femtocraft.logger.log(Level.INFO, "Finding all configurable classes for registration.");
+            ImmutableSet<ClassPath.ClassInfo> classes = ClassPath.from(FemtocraftConfigHelper.class.getClassLoader())
+                                                                 .getTopLevelClassesRecursive("com.itszuvalex.femtocraft");
+            for (ClassPath.ClassInfo info : classes) {
+                try {
+                    Class clazz = Class.forName(info.getName());
+                    if (clazz.getAnnotation(Configurable.class) != null) {
+                        registerConfigurableClass(clazz);
+                    }
+                } catch (ClassNotFoundException e) {
+                    Femtocraft.logger.log(Level.SEVERE,
+                            "Could not find @Configurable class " + info.getName() + " when attempting to discover.");
+                    e.printStackTrace();
+                }
+            }
+            Femtocraft.logger.log(Level.INFO, "Finished registering configurable classes.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void registerConfigLoaders() {
@@ -238,7 +270,8 @@ public class FemtocraftConfigHelper {
             }
 
             @Override
-            EnumTechLevel getValue(String key, EnumTechLevel def, String section, Configurable anno, Configuration config) {
+            EnumTechLevel getValue(String key, EnumTechLevel def, String section, Configurable anno,
+                                   Configuration config) {
                 return EnumTechLevel.getTech(config.get(section, key,
                         def.key,
                         anno.comment()).getString());
@@ -288,7 +321,8 @@ public class FemtocraftConfigHelper {
         });
         loaderMap.put(ItemStack[].class, new FieldLoader<ItemStack[]>() {
             @Override
-            public void load(Field field, String section, Configurable anno, Object obj, Configuration config) throws IllegalAccessException {
+            public void load(Field field, String section, Configurable anno, Object obj, Configuration config)
+                    throws IllegalAccessException {
                 field.set(obj, getValue(field.getName(), (ItemStack[]) field.get(obj), section, anno, config));
             }
 

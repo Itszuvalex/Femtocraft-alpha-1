@@ -27,8 +27,10 @@ import com.itszuvalex.femtocraft.blocks.BlockNanoStone;
 import com.itszuvalex.femtocraft.blocks.BlockUnidentifiedAlloy;
 import com.itszuvalex.femtocraft.command.CommandBase;
 import com.itszuvalex.femtocraft.command.CommandFemtocraft;
-import com.itszuvalex.femtocraft.configuration.FemtocraftConfigTechnologyHelper;
+import com.itszuvalex.femtocraft.configuration.FemtocraftConfigAssembler;
+import com.itszuvalex.femtocraft.configuration.FemtocraftConfigTechnology;
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs;
+import com.itszuvalex.femtocraft.core.MagnetRegistry;
 import com.itszuvalex.femtocraft.core.fluids.BlockFluidMass;
 import com.itszuvalex.femtocraft.core.fluids.FluidMass;
 import com.itszuvalex.femtocraft.core.items.ItemBase;
@@ -92,6 +94,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.io.File;
 import java.util.logging.Logger;
 
 @Mod(modid = Femtocraft.ID, name = "Femtocraft", version = Femtocraft.VERSION)
@@ -106,6 +109,8 @@ import java.util.logging.Logger;
 public class Femtocraft {
     public static final String ID = "Femtocraft";
     public static final String VERSION = "0.1.0";
+    public static final String TECH_CONFIG_APPEND = "Technology";
+    public static final String RECIPE_CONFIG_APPEND = "Recipes";
 
     @Instance(ID)
     public static Femtocraft instance;
@@ -119,7 +124,11 @@ public class Femtocraft {
 
     public static Logger logger;
 
-    public static Configuration config;
+    public static Configuration configFile;
+    public static Configuration technologyConfigFile;
+    public static Configuration recipeConfigFile;
+
+    public static FemtocraftConfigAssembler assemblerConfigs;
 
     public static ManagerRecipe recipeManager;
     public static ManagerResearch researchManager;
@@ -135,6 +144,7 @@ public class Femtocraft {
     public static Block blockOreThorium;
     public static Block blockOreFarenite;
     public static Block blockOreMalenite;
+    public static Block blockOreLodestone;
     public static Block microStone;
     public static Block nanoStone;
     public static Block femtoStone;
@@ -171,7 +181,7 @@ public class Femtocraft {
     public static Block blockMicroChargingBase;
     public static Block blockMicroChargingCoil;
     public static Block blockMicroChargingCapacitor;
-    public static Block blockCryoGenerator;
+    public static Block blockMagneticInductionGenerator;
     public static Block blockOrbitalEqualizer;
     public static Block blockNullEqualizer;
     public static Block blockCryoEndothermalChargingBase;
@@ -224,6 +234,8 @@ public class Femtocraft {
     public static Item itemIngotMalenite;
     public static Item itemIngotTemperedTitanium;
     public static Item itemIngotThFaSalt;
+    public static Item itemNuggetLodestone;
+    public static Item itemChunkLodestone;
 
     //micro
     public static Item itemConductivePowder;
@@ -364,9 +376,16 @@ public class Femtocraft {
 
         femtocraftServerCommand = new CommandFemtocraft();
 
-        config = new Configuration(
-                event.getSuggestedConfigurationFile());
-        FemtocraftConfigs.load(config);
+        File suggestedConfig = event.getSuggestedConfigurationFile();
+        configFile = new Configuration(
+                suggestedConfig);
+        FemtocraftConfigs.load(configFile);
+        String[] suggestConfigName = suggestedConfig.getName().split("\\.");
+        technologyConfigFile = new Configuration(new File(suggestedConfig.getParentFile(),
+                suggestConfigName[0] + TECH_CONFIG_APPEND + "." + suggestConfigName[1]));
+        recipeConfigFile = new Configuration(new File(suggestedConfig.getParentFile(), suggestConfigName[0] +
+                RECIPE_CONFIG_APPEND + "." +
+                suggestConfigName[1]));
 
         Femtocraft.proxy.registerTileEntities();
         Femtocraft.proxy.registerRendering();
@@ -450,6 +469,15 @@ public class Femtocraft {
         if (FemtocraftConfigs.registerMaleniteOreInOreDictionary) {
             OreDictionary
                     .registerOre("oreMalenite", new ItemStack(blockOreMalenite));
+        }
+
+        blockOreLodestone = new BlockOreLodestone(FemtocraftConfigs.BlockOreLodestoneID).setUnlocalizedName
+                ("BlockOreLodestone");
+        MinecraftForge.setBlockHarvestLevel(blockOreLodestone, "pickaxe", 2);
+        GameRegistry.registerBlock(blockOreLodestone, "BlockOreLodestone");
+        LanguageRegistry.addName(blockOreLodestone, "Lodestone Ore");
+        if (FemtocraftConfigs.registerLodestoneOreInOreDictionary) {
+            OreDictionary.registerOre("oreLodestone", new ItemStack(blockOreLodestone));
         }
 
         nanoStone = new BlockNanoStone(FemtocraftConfigs.BlockNanoStoneID).setUnlocalizedName("BlockNanoStone");
@@ -648,11 +676,11 @@ public class Femtocraft {
         LanguageRegistry.addName(blockMicroChargingCapacitor,
                 "Electrostatic Charging Capacitor");
 
-        blockCryoGenerator = new BlockElectrostaticGenerator(FemtocraftConfigs
-                .BlockElectrostaticGeneratorID).setUnlocalizedName("BlockCryoGenerator");
-        GameRegistry.registerBlock(blockCryoGenerator,
-                "BlockCryoGenerator");
-        LanguageRegistry.addName(blockCryoGenerator, "Micro Engine");
+        blockMagneticInductionGenerator = new BlockMagneticInductionGenerator(FemtocraftConfigs
+                .BlockMagneticInductionGeneratorID).setUnlocalizedName("BlockMagneticInductionGenerator");
+        GameRegistry.registerBlock(blockMagneticInductionGenerator,
+                "BlockMagneticInductionGenerator");
+        LanguageRegistry.addName(blockMagneticInductionGenerator, "Magnetic Induction Generator");
 
         blockOrbitalEqualizer = new BlockOrbitalEqualizer(
                 FemtocraftConfigs.BlockOrbitalEqualizerID).setUnlocalizedName("BlockOrbitalEqualizer");
@@ -861,6 +889,14 @@ public class Femtocraft {
         itemIngotThFaSalt = registerItem(FemtocraftConfigs.ItemIngotThFaSaltID, "ItemIngotThFaSalt",
                 "ThFa Salt Ingot");
         OreDictionary.registerOre("ingotThFaSalt", new ItemStack(itemIngotThFaSalt));
+
+        itemNuggetLodestone = registerItem(FemtocraftConfigs.ItemNuggetLodestoneID, "ItemNuggetLodestone",
+                "Lodestone Nugget");
+        OreDictionary.registerOre("nuggetLodestone", new ItemStack(itemNuggetLodestone));
+
+        itemChunkLodestone = registerItem(FemtocraftConfigs.ItemChunkLodestoneID, "ItemChunkLodestone",
+                "Lodestone Chunk");
+        OreDictionary.registerOre("chunkLodestone", new ItemStack(itemChunkLodestone));
 
         //
 
@@ -1205,13 +1241,16 @@ public class Femtocraft {
         // EntityRegistry.registerModEntity(entity.class, "myEntity", 0, this,
         // 32, 10, true)
 
-        recipeManager.init();
+
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+        assemblerConfigs = new FemtocraftConfigAssembler(recipeConfigFile);
+        recipeManager.init();
         ManagerRecipe.assemblyRecipes.registerDefaultRecipes();
-        new FemtocraftConfigTechnologyHelper(config).loadTechnologies();
+        MagnetRegistry.init();
+        new FemtocraftConfigTechnology(technologyConfigFile).loadTechnologies();
 
         if (event.getSide() == Side.CLIENT) {
             researchManager.calculateGraph();

@@ -21,21 +21,44 @@
 
 package com.itszuvalex.femtocraft.industry.tiles;
 
+import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
+import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.industry.blocks.BlockNanoInnervator;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
 
 public class TileEntityNanoInnervator extends TileEntityBaseEntityMicroFurnace {
-    public static int powerStorage = 10000;
-    public static int maxSmelt_default = 8;
-    public static int ticksToCook_default = 60;
-    public static int powerToCook_default = 80;
+    @Configurable(comment = "Power tech level.")
+    public static EnumTechLevel TECH_LEVEL = EnumTechLevel.NANO;
+    @Configurable(comment = "Power storage maximum.")
+    public static int POWER_STORAGE = 10000;
+    @Configurable(comment = "Maximum number of items allowed at a time, pre upgrade.")
+    public static int MAX_SMELT_PRE = 8;
+    @Configurable(comment = "Ticks required to process, pre upgrade.")
+    public static int TICKS_TO_COOK_PRE = 60;
+    @Configurable(comment = "Power per item to begin processing, pre upgrade.")
+    public static int POWER_TO_COOK_PRE = 80;
+
+    @Configurable(comment = "Name of technology for max smelt upgrade.")
+    public static String MAX_SMELT_UPGRADE = ManagerResearch.LOCALITY_ENTANGLER;
+    @Configurable(comment = "Name of technology for ticks to cook upgrade.")
+    public static String TICKS_TO_COOK_UPGRADE = ManagerResearch.REALITY_OVERCLOCKER;
+    @Configurable(comment = "Name of technology for power to cook upgrade.")
+    public static String POWER_TO_COOK_UPGRADE = "";
+
+    @Configurable(comment = "Maximum number of items allowed at a time, post upgrade.")
+    public static int MAX_SMELT_POST = 16;
+    @Configurable(comment = "Ticks required to process, post upgrade.")
+    public static int TICKS_TO_COOK_POST = 30;
+    @Configurable(comment = "Power per item to begin processing, post upgrade.")
+    public static int POWER_TO_COOK_POST = 80;
+
 
     public TileEntityNanoInnervator() {
         super();
-        this.setTechLevel(EnumTechLevel.NANO);
-        // TODO: Pull number from configs
-        this.setMaxStorage(powerStorage);
+        this.setTechLevel(TECH_LEVEL);
+        this.setMaxStorage(POWER_STORAGE);
     }
 
     @Override
@@ -45,23 +68,21 @@ public class TileEntityNanoInnervator extends TileEntityBaseEntityMicroFurnace {
 
     @Override
     protected int getTicksToCook() {
-        // TODO: Check for modifying researches
-        // TODO: Pull number from configs
-        return ticksToCook_default;
+        return Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner(), TICKS_TO_COOK_UPGRADE) ?
+                TICKS_TO_COOK_POST :
+                TICKS_TO_COOK_PRE;
     }
 
     @Override
     protected int getPowerToCook() {
-        // TODO: Check for modifying researches
-        // TODO: Pull number from configs
-        return powerToCook_default;
+        return Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner(),
+                POWER_TO_COOK_UPGRADE) ? POWER_TO_COOK_POST : POWER_TO_COOK_PRE;
     }
 
     @Override
     protected int getMaxSimultaneousSmelt() {
-        // TODO: Check for modifying researches
-        // TODO: Pull number from configs
-        return maxSmelt_default;
+        return Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner(),
+                MAX_SMELT_UPGRADE) ? MAX_SMELT_POST : MAX_SMELT_PRE;
     }
 
     @Override

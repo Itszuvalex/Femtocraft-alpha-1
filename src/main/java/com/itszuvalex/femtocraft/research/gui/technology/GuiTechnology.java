@@ -567,9 +567,9 @@ public class GuiTechnology extends GuiScreen {
                                int mouseY, List tooltip)
 
     {
-        String recipeDir = recipe.enumTechLevel.getTooltipEnum() + "<->" +
+        String recipeDir = (recipe == null ? "" + EnumChatFormatting.WHITE : recipe.enumTechLevel.getTooltipEnum()) + "<->" +
                 EnumChatFormatting.RESET;
-        renderCraftingGrid(x, y, recipe.input, mouseX,
+        renderCraftingGrid(x, y, recipe == null ? null : recipe.input, mouseX,
                 mouseY, tooltip);
         GL11.glColor4f(1.f, 1.f, 1.f, 1.f);
         fontRenderer.drawSplitString(recipeDir, x + 54 + 1,
@@ -580,7 +580,7 @@ public class GuiTechnology extends GuiScreen {
                 fontRenderer.FONT_HEIGHT
         );
         renderItemSlot(x + 54 + fontRenderer.getStringWidth(recipeDir) + 2,
-                y + 18, recipe.output, new RenderItem(), mouseX, mouseY,
+                y + 18, recipe == null ? null : recipe.output, new RenderItem(), mouseX, mouseY,
                 tooltip);
 
     }

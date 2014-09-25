@@ -40,7 +40,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.logging.Level;
 
-//TODO:  Separate players out into their own files
 public class ManagerResearch {
     public static final String RESEARCH_CHANNEL = "Femtocraft" + ".rman";
     public static final String METALLURGY = "Metallurgy";

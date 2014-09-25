@@ -24,6 +24,7 @@ package com.itszuvalex.femtocraft.industry.tiles;
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
 import com.itszuvalex.femtocraft.api.IAssemblerSchematic;
+import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.BaseInventory;
@@ -36,12 +37,19 @@ import net.minecraftforge.fluids.*;
 
 import java.util.Arrays;
 
+@Configurable
 public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
         IInventory, IFluidHandler {
-    public static int massStorage = 1000;
-    public static int powerStorage = 1200;
-    public static int powerToEncode = 100;
-    public static int timeToEncode = 200;
+    @Configurable(comment = "Power tech level.")
+    public static EnumTechLevel TECH_LEVEL = EnumTechLevel.MICRO;
+    @Configurable(comment = "Mass storage maximum.")
+    public static int MASS_STORAGE = 1000;
+    @Configurable(comment = "Power storage maximum.")
+    public static int POWER_STORAGE = 1200;
+    @Configurable(comment = "Power per item to begin processing.")
+    public static int POWER_TO_ENCODE = 100;
+    @Configurable(comment = "Ticks required to process.")
+    public static int TICKS_TO_ENCODE = 200;
     @Saveable
     public int timeWorked = 0;
     @Saveable
@@ -55,11 +63,9 @@ public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
 
     public TileEntityEncoder() {
         inventory = new BaseInventory(12);
-
-        massTank = new FluidTank(massStorage);
-
-        setTechLevel(EnumTechLevel.MICRO);
-        setMaxStorage(powerStorage);
+        massTank = new FluidTank(MASS_STORAGE);
+        setTechLevel(TECH_LEVEL);
+        setMaxStorage(POWER_STORAGE);
     }
 
     /*
@@ -202,7 +208,7 @@ public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
         return recipe != null
                && getStackInSlot(11) == null
                && getStackInSlot(10) != null
-               && getCurrentPower() >= powerToEncode
+               && getCurrentPower() >= POWER_TO_ENCODE
                && massTank.getFluidAmount() >= ((IAssemblerSchematic) getStackInSlot(
                 10).getItem()).massRequired(recipe)
                && getStackInSlot(10).getItem() instanceof IAssemblerSchematic;
@@ -229,7 +235,7 @@ public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
         encodingSchematic = decrStackSize(10, 1);
         encodingRecipe = getRecipe();
         timeWorked = 0;
-        consume(powerToEncode);
+        consume(POWER_TO_ENCODE);
         massTank.drain(((IAssemblerSchematic) encodingSchematic.getItem())
                 .massRequired(encodingRecipe), true);
     }
@@ -265,7 +271,7 @@ public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
      */
     @Override
     protected boolean canFinishWork() {
-        return timeWorked >= timeToEncode;
+        return timeWorked >= TICKS_TO_ENCODE;
     }
 
     /*
@@ -284,7 +290,7 @@ public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
     }
 
     public int getProgressScaled(int i) {
-        return (timeWorked * i) / timeToEncode;
+        return (timeWorked * i) / TICKS_TO_ENCODE;
     }
 
     public int getMassAmount() {

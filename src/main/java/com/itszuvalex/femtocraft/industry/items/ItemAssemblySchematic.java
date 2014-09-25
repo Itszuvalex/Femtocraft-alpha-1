@@ -48,6 +48,7 @@ import java.util.Random;
  * @Info This is a base class for Schematics with most of the hard work already done. This includes tooltip parsing,
  * damage behaviors, support for infinite use schematics and support for a separate Icon for keyed Schematics.
  */
+@Configurable
 public class ItemAssemblySchematic extends ItemBase implements IAssemblerSchematic {
     public static final int INFINITE_USE_DAMAGE = -1;
     public static Icon placeholderIcon;

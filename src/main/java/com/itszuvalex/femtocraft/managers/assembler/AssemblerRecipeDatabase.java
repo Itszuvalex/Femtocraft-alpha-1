@@ -160,7 +160,7 @@ public class AssemblerRecipeDatabase {
             Femtocraft.logger.log(Level.SEVERE, "SQLite select recipe from " +
                     "inputs failed");
         }
-        return ac;
+        return Femtocraft.assemblerConfigs.isEnabled(ac) ? ac : null;
     }
 
     private String formatItems(ItemStack[] items) {
@@ -193,7 +193,7 @@ public class AssemblerRecipeDatabase {
                 (DB_RECIPES_TECH_LEVEL));
         ac.tech = rs.getString
                 (DB_RECIPES_TECHNOLOGY);
-        return ac;
+        return Femtocraft.assemblerConfigs.isEnabled(ac) ? ac : null;
     }
 
     private ItemStack[] getItems(String items, String stackSizes) {
@@ -256,7 +256,7 @@ public class AssemblerRecipeDatabase {
             Femtocraft.logger.log(Level.SEVERE, "SQLite select recipe from " +
                     "inputs failed");
         }
-        return ac;
+        return Femtocraft.assemblerConfigs.isEnabled(ac) ? ac : null;
     }
 
     private String formatItem(ItemStack item) {
@@ -327,7 +327,10 @@ public class AssemblerRecipeDatabase {
             ps.setString(1, level.key);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                arrayList.add(getRecipe(rs));
+                AssemblerRecipe ac = getRecipe(rs);
+                if (ac != null) {
+                    arrayList.add(ac);
+                }
             }
             rs.close();
             ps.close();
@@ -354,7 +357,39 @@ public class AssemblerRecipeDatabase {
             ps.setString(1, techName);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                arrayList.add(getRecipe(rs));
+                AssemblerRecipe ac = getRecipe(rs);
+                if (ac != null) {
+                    arrayList.add(ac);
+                }
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Femtocraft.logger.log(Level.SEVERE, "SQLite select recipe from " +
+                    "inputs failed");
+        }
+        return arrayList;
+    }
+
+    /**
+     * DO NOT CALL THIS unless you have VERY good reason to.  This is a HUGE database and will take a long time to
+     * load.
+     *
+     * @return
+     */
+    public ArrayList<AssemblerRecipe> getAllRecipes() {
+        ArrayList<AssemblerRecipe> arrayList = new ArrayList<AssemblerRecipe>();
+        try {
+            refreshConnection();
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM " +
+                    DB_TABLE_RECIPES, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                AssemblerRecipe ac = getRecipe(rs);
+                if (ac != null) {
+                    arrayList.add(ac);
+                }
             }
             rs.close();
             ps.close();

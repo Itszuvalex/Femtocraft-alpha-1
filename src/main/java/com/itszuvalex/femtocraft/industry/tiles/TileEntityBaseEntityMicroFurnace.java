@@ -22,6 +22,7 @@
 package com.itszuvalex.femtocraft.industry.tiles;
 
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
+import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.industry.blocks.BlockMicroFurnace;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable;
@@ -32,12 +33,19 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 
+@Configurable
 public class TileEntityBaseEntityMicroFurnace extends
-                                              TileEntityBaseEntityIndustry implements ISidedInventory {
-    public static int powerStorage = 800;
-    public static int powerToCook = 40;
-    public static int ticksToCook = 100;
-    public static int maxSmelt = 1;
+        TileEntityBaseEntityIndustry implements ISidedInventory {
+    @Configurable(comment = "Power tech level.")
+    public static EnumTechLevel TECH_LEVEL = EnumTechLevel.MICRO;
+    @Configurable(comment = "Power storage maximum.")
+    public static int POWER_STORAGE = 800;
+    @Configurable(comment = "Power per item to begin processing.")
+    public static int POWER_TO_COOK = 40;
+    @Configurable(comment = "Ticks required to process.")
+    public static int TICKS_TO_COOK = 100;
+    @Configurable(comment = "Maximum number of items allowed at a time.")
+    public static int MAX_SMELT = 1;
     /**
      * The number of ticks that the current item has been cooking for
      */
@@ -62,8 +70,8 @@ public class TileEntityBaseEntityMicroFurnace extends
 
     public TileEntityBaseEntityMicroFurnace() {
         super();
-        setMaxStorage(powerStorage);
-        setTechLevel(EnumTechLevel.MICRO);
+        setMaxStorage(POWER_STORAGE);
+        setTechLevel(TECH_LEVEL);
     }
 
     @Override
@@ -105,8 +113,7 @@ public class TileEntityBaseEntityMicroFurnace extends
                 itemstack = this.furnaceItemStacks[par1];
                 this.furnaceItemStacks[par1] = null;
                 return itemstack;
-            }
-            else {
+            } else {
                 itemstack = this.furnaceItemStacks[par1].splitStack(par2);
 
                 if (this.furnaceItemStacks[par1].stackSize == 0) {
@@ -115,8 +122,7 @@ public class TileEntityBaseEntityMicroFurnace extends
 
                 return itemstack;
             }
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -131,8 +137,7 @@ public class TileEntityBaseEntityMicroFurnace extends
             ItemStack itemstack = this.furnaceItemStacks[par1];
             this.furnaceItemStacks[par1] = null;
             return itemstack;
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -145,7 +150,7 @@ public class TileEntityBaseEntityMicroFurnace extends
         this.furnaceItemStacks[par1] = par2ItemStack;
 
         if (par2ItemStack != null
-                && par2ItemStack.stackSize > this.getInventoryStackLimit()) {
+            && par2ItemStack.stackSize > this.getInventoryStackLimit()) {
             par2ItemStack.stackSize = this.getInventoryStackLimit();
         }
     }
@@ -234,7 +239,7 @@ public class TileEntityBaseEntityMicroFurnace extends
 
     protected int getTicksToCook() {
         // TODO: Load from configs
-        return ticksToCook;
+        return TICKS_TO_COOK;
     }
 
     @Override
@@ -249,11 +254,9 @@ public class TileEntityBaseEntityMicroFurnace extends
         }
         if (smeltingStack != null) {
             return false;
-        }
-        else if (getCurrentPower() < getPowerToCook()) {
+        } else if (getCurrentPower() < getPowerToCook()) {
             return false;
-        }
-        else {
+        } else {
             ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(
                     this.furnaceItemStacks[0]);
             if (itemstack == null) {
@@ -273,7 +276,7 @@ public class TileEntityBaseEntityMicroFurnace extends
 
     protected int getPowerToCook() {
         // TODO: Load from configs
-        return powerToCook;
+        return POWER_TO_COOK;
     }
 
     @Override
@@ -285,7 +288,7 @@ public class TileEntityBaseEntityMicroFurnace extends
         do {
 
             if (furnaceItemStacks[1] != null
-                    && ((smeltingStack.stackSize + i) > furnaceItemStacks[1]
+                && ((smeltingStack.stackSize + i) > furnaceItemStacks[1]
                     .getMaxStackSize())) {
                 break;
             }
@@ -313,7 +316,7 @@ public class TileEntityBaseEntityMicroFurnace extends
     }
 
     protected int getMaxSimultaneousSmelt() {
-        return maxSmelt;
+        return MAX_SMELT;
     }
 
     protected void updateBlockState(boolean working) {
@@ -340,8 +343,7 @@ public class TileEntityBaseEntityMicroFurnace extends
             if (this.furnaceItemStacks[1] == null) {
                 this.furnaceItemStacks[1] = itemstack.copy();
                 this.furnaceItemStacks[1].stackSize = smeltingStack.stackSize;
-            }
-            else if (this.furnaceItemStacks[1].isItemEqual(itemstack)) {
+            } else if (this.furnaceItemStacks[1].isItemEqual(itemstack)) {
                 furnaceItemStacks[1].stackSize += smeltingStack.stackSize;
             }
 

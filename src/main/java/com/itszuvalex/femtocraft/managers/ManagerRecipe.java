@@ -45,6 +45,7 @@ public class ManagerRecipe {
     }
 
     public void init() {
+        assemblyRecipes.init();
         temporalRecipes.init();
         dimensionalRecipes.init();
         registerRecipes();
@@ -59,6 +60,8 @@ public class ManagerRecipe {
                 Femtocraft.itemIngotPlatinum), 0.1f);
         GameRegistry.addSmelting(Femtocraft.blockOreThorium.blockID, new ItemStack(
                 Femtocraft.itemIngotThorium), 0.1f);
+        GameRegistry.addSmelting(Femtocraft.blockOreLodestone.blockID, new ItemStack(Femtocraft.itemChunkLodestone),
+                0.1f);
 //        GameRegistry.addSmelting(Femtocraft.deconstructedIron.itemID,
 //                new ItemStack(Item.ingotIron), 0.1f);
 //        GameRegistry.addSmelting(Femtocraft.deconstructedGold.itemID,
@@ -74,6 +77,11 @@ public class ManagerRecipe {
 
         GameRegistry.addSmelting(Femtocraft.itemPrimedBoard.itemID, new ItemStack(
                 Femtocraft.itemDopedBoard), 0.1f);
+
+        GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemChunkLodestone), "NN", "NN", 'N',
+                Femtocraft.itemNuggetLodestone);
+        GameRegistry.addShapelessRecipe(new ItemStack(Femtocraft.itemNuggetLodestone, 4),
+                new ItemStack(Femtocraft.itemChunkLodestone));
 
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockResearchConsole), "THT", "TCT", "RFR", 'T',
                 Femtocraft.itemIngotTitanium, 'H', Block.hopperBlock, 'C', Item.comparator, 'R', Item.redstone, 'F',
@@ -205,7 +213,7 @@ public class ManagerRecipe {
                 Femtocraft.itemHeatingElement, 'L', Femtocraft.itemMicroLogicCore);
 
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft
-                        .blockCryoGenerator), "MHT", "MHC", "MHT", 'M',
+                        .blockMagneticInductionGenerator), "MHT", "MHC", "MHT", 'M',
                 Femtocraft.itemMicroPlating, 'H',
                 Femtocraft.itemHeatingElement, 'T',
                 Femtocraft.itemIngotTemperedTitanium, 'C',
