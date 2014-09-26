@@ -23,7 +23,6 @@ package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
-import com.itszuvalex.femtocraft.power.FemtocraftPowerUtils;
 import net.minecraftforge.common.ForgeDirection;
 
 @Configurable
@@ -44,12 +43,12 @@ public class TileEntityOrbitalEqualizer extends TileEntityPowerBase {
 
     @Override
     public void femtocraftServerUpdate() {
-        setTechLevel(PRIMARY_POWER_LEVEL);
-        FemtocraftPowerUtils.distributePower(this, connections, worldObj, xCoord, yCoord, zCoord);
-        setTechLevel(SECONDARY_POWER_LEVEL);
-        FemtocraftPowerUtils.distributePower(this, connections, worldObj, xCoord, yCoord, zCoord);
-        setTechLevel(PRIMARY_POWER_LEVEL);
-        setModified();
+        if (getTechLevel(ForgeDirection.UNKNOWN) == PRIMARY_POWER_LEVEL) {
+            setTechLevel(SECONDARY_POWER_LEVEL);
+        } else if (getTechLevel(ForgeDirection.UNKNOWN) == SECONDARY_POWER_LEVEL) {
+            setTechLevel(PRIMARY_POWER_LEVEL);
+        }
+        super.femtocraftServerUpdate();
     }
 
     @Override
