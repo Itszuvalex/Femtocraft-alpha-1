@@ -50,18 +50,20 @@ public class FemtocraftMagnetUtils {
             if (distSqr > (radius * radius)) continue;
             double distance = Math.sqrt(distSqr);
             if (entity instanceof EntityPlayer) {
-                for (int i = 0; i < ((EntityPlayer) entity).inventory.mainInventory.length; ++i) {
-                    ItemStack item = ((EntityPlayer) entity).inventory.mainInventory[i];
-                    if (!MagnetRegistry.isMagnet(item)) continue;
-                    int itemStr = MagnetRegistry.getMagnetStrength(item);
-                    if ((((double) strength / Math.max(distance, 1d)) / (double) itemStr) >=
-                        inventoryPullStrengthRatio) {
-                        EntityItem ei = entity.entityDropItem(item, entity.height / 2f);
-                        ei.delayBeforeCanPickup = 20;
-                        ((EntityPlayer) entity).inventory.mainInventory[i] = null;
-                    }
-                }
                 if (!((EntityPlayer) entity).capabilities.isCreativeMode) {
+                    if (!world.isRemote) {
+                        for (int i = 0; i < ((EntityPlayer) entity).inventory.mainInventory.length; ++i) {
+                            ItemStack item = ((EntityPlayer) entity).inventory.mainInventory[i];
+                            if (!MagnetRegistry.isMagnet(item)) continue;
+                            int itemStr = MagnetRegistry.getMagnetStrength(item);
+                            if ((((double) strength / Math.max(distance, 1d)) / (double) itemStr) >=
+                                inventoryPullStrengthRatio) {
+                                EntityItem ei = entity.entityDropItem(item, entity.height / 2f);
+                                ei.delayBeforeCanPickup = 20;
+                                ((EntityPlayer) entity).inventory.mainInventory[i] = null;
+                            }
+                        }
+                    }
                     for (int i = 0; i < ((EntityPlayer) entity).inventory.armorInventory.length; ++i) {
                         ItemStack item = ((EntityPlayer) entity).inventory.armorInventory[i];
                         if (MagnetRegistry.isMagnet(item)) {
@@ -85,14 +87,16 @@ public class FemtocraftMagnetUtils {
                 }
             } else if (entity instanceof EntityLivingBase) {
                 ItemStack[] lastActiveItems = entity.getLastActiveItems();
-                for (int i = 0; i < lastActiveItems.length; i++) {
-                    ItemStack item = lastActiveItems[i];
-                    if (!MagnetRegistry.isMagnet(item)) continue;
-                    int itemStr = MagnetRegistry.getMagnetStrength(item);
-                    if ((strength / itemStr) > inventoryPullStrengthRatio) {
-                        EntityItem ei = entity.entityDropItem(item, entity.height / 2f);
-                        ei.delayBeforeCanPickup = 20;
-                        entity.setCurrentItemOrArmor(i, null);
+                if (!world.isRemote) {
+                    for (int i = 0; i < lastActiveItems.length; i++) {
+                        ItemStack item = lastActiveItems[i];
+                        if (!MagnetRegistry.isMagnet(item)) continue;
+                        int itemStr = MagnetRegistry.getMagnetStrength(item);
+                        if ((strength / itemStr) > inventoryPullStrengthRatio) {
+                            EntityItem ei = entity.entityDropItem(item, entity.height / 2f);
+                            ei.delayBeforeCanPickup = 20;
+                            entity.setCurrentItemOrArmor(i, null);
+                        }
                     }
                 }
             } else if (entity instanceof EntityItem) {
