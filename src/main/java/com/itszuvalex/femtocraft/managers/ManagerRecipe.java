@@ -35,10 +35,10 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ManagerRecipe {
-    public static ManagerAssemblerRecipe assemblyRecipes = new ManagerAssemblerRecipe();
-    public static ManagerTemporalRecipe temporalRecipes = new
+    public ManagerAssemblerRecipe assemblyRecipes = new ManagerAssemblerRecipe();
+    public ManagerTemporalRecipe temporalRecipes = new
             ManagerTemporalRecipe();
-    public static ManagerDimensionalRecipe dimensionalRecipes = new
+    public ManagerDimensionalRecipe dimensionalRecipes = new
             ManagerDimensionalRecipe();
 
     public ManagerRecipe() {

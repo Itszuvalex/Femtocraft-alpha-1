@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft.research.gui.technology;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
+import com.itszuvalex.femtocraft.managers.dimensional.DimensionalRecipe;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnologyStatus;
 import com.itszuvalex.femtocraft.managers.temporal.TemporalRecipe;
@@ -520,6 +521,7 @@ public class GuiTechnology extends GuiScreen {
 
     void renderTemporalRecipe(int x, int y, int width, int height, TemporalRecipe recipe, int mouseX,
                               int mouseY, List tooltip) {
+        if (recipe == null) return;
         String recipeDir = recipe.techLevel.getTooltipEnum() + "----->" +
                 EnumChatFormatting.RESET;
         renderItemSlot(x,
@@ -541,6 +543,64 @@ public class GuiTechnology extends GuiScreen {
         );
         renderItemSlot(x + 72 + 2,
                 y + 18, recipe.output, new RenderItem(), mouseX, mouseY,
+                tooltip);
+    }
+
+    void renderDimensionalRecipeWithInfo(int x, int y, int width, int height, DimensionalRecipe recipe, int mouseX, int mouseY, List tooltip, String info) {
+        int padding = 2;
+        renderDimensionalRecipe(x, y, width, height, recipe, mouseX, mouseY, tooltip);
+        info = String.format("%s%s%s", EnumChatFormatting.WHITE, info,
+                EnumChatFormatting.RESET);
+        this.fontRenderer.drawSplitString(info, x + 90 + padding, y + padding,
+                width - 90 - 2 * padding, height - 2 * padding);
+    }
+
+    void renderDimensionalRecipe(int x, int y, int width, int height, DimensionalRecipe recipe, int mouseX, int mouseY, List tooltip) {
+        if (recipe == null) return;
+        String recipeDir = recipe.techLevel.getTooltipEnum() + "->" +
+                EnumChatFormatting.RESET;
+        RenderItem ri = new RenderItem();
+        int r_width, r_height;
+        switch (recipe.configurators.length) {
+            case 4:
+                renderItemSlot(x + 18, y + 18, recipe.input, ri, mouseX, mouseY, tooltip);
+                renderItemSlot(x + 18, y, recipe.configurators[0], ri, mouseX, mouseY, tooltip);
+                renderItemSlot(x, y + 18, recipe.configurators[1], ri, mouseX, mouseY, tooltip);
+                renderItemSlot(x + 36, y + 18, recipe.configurators[2], ri, mouseX, mouseY, tooltip);
+                renderItemSlot(x + 18, y + 36, recipe.configurators[3], ri, mouseX, mouseY, tooltip);
+                r_width = 54;
+                r_height = 54;
+                break;
+            case 12:
+                renderItemSlot(x + (18 * 4) / 2 - 9, y + (18 * 4) / 2 - 9, recipe.input, ri, mouseX, mouseY, tooltip);
+                for (int i = 0; i < 4; ++i) {
+                    renderItemSlot(x + 18 * i, y, recipe.configurators[i], ri, mouseX, mouseY, tooltip);
+                }
+                for (int i = 0; i < 2; ++i) {
+                    renderItemSlot(x + 54 * i, y + 18, recipe.configurators[4 + i], ri, mouseX, mouseY, tooltip);
+                }
+                for (int i = 0; i < 2; ++i) {
+                    renderItemSlot(x + 54 * i, y + 36, recipe.configurators[6 + i], ri, mouseX, mouseY, tooltip);
+                }
+                for (int i = 0; i < 4; ++i) {
+                    renderItemSlot(x + 18 * i, y + 54, recipe.configurators[8 + i], ri, mouseX, mouseY, tooltip);
+                }
+                r_width = 72;
+                r_height = 72;
+                break;
+            default:
+                return;
+        }
+        GL11.glColor4f(1.f, 1.f, 1.f, 1.f);
+        fontRenderer.drawSplitString(recipeDir, x + r_width + 1,
+                y + (r_height - fontRenderer
+                        .FONT_HEIGHT)
+                        / 2, fontRenderer.getStringWidth
+                        (recipeDir) + 2,
+                fontRenderer.FONT_HEIGHT
+        );
+        renderItemSlot(x + r_width + fontRenderer.getStringWidth(recipeDir) + 2,
+                y + r_height / 2 - 9, recipe.output, new RenderItem(), mouseX, mouseY,
                 tooltip);
     }
 

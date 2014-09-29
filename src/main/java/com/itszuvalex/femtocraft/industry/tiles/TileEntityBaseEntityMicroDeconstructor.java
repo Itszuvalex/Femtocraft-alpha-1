@@ -24,7 +24,6 @@ package com.itszuvalex.femtocraft.industry.tiles;
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
 import com.itszuvalex.femtocraft.configuration.Configurable;
-import com.itszuvalex.femtocraft.managers.ManagerRecipe;
 import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.BaseInventory;
@@ -43,7 +42,7 @@ import java.util.Arrays;
 
 @Configurable
 public class TileEntityBaseEntityMicroDeconstructor extends
-        TileEntityBaseEntityIndustry implements ISidedInventory, IFluidHandler {
+                                                    TileEntityBaseEntityIndustry implements ISidedInventory, IFluidHandler {
 
     @Configurable(comment = "Assembler recipe tech level maximum.")
     public static EnumTechLevel ASSEMBLER_TECH_LEVEL = EnumTechLevel.MICRO;
@@ -149,7 +148,8 @@ public class TileEntityBaseEntityMicroDeconstructor extends
             ItemStack itemstack = deconstructorInventory.getInventory()[par1];
             deconstructorInventory.getInventory()[par1] = null;
             return itemstack;
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -264,21 +264,22 @@ public class TileEntityBaseEntityMicroDeconstructor extends
     @Override
     protected boolean canStartWork() {
         if (getStackInSlot(0) == null || deconstructingStack != null
-            || this.getCurrentPower() < getPowerToCook()) {
+                || this.getCurrentPower() < getPowerToCook()) {
             return false;
-        } else {
-            AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
+        }
+        else {
+            AssemblerRecipe recipe = Femtocraft.recipeManager.assemblyRecipes
                     .getRecipe(deconstructorInventory.getStackInSlot(0));
             return recipe != null &&
-                   recipe.enumTechLevel.tier <= getAssemblerTech().tier &&
-                   (tank
+                    recipe.enumTechLevel.tier <= getAssemblerTech().tier &&
+                    (tank
                             .getCapacity() -
-                    tank
-                            .getFluidAmount())
-                   >=
-                   recipe.mass
-                   && getStackInSlot(0).stackSize >= recipe.output.stackSize
-                   && roomForItems(recipe.input);
+                            tank
+                                    .getFluidAmount())
+                            >=
+                            recipe.mass
+                    && getStackInSlot(0).stackSize >= recipe.output.stackSize
+                    && roomForItems(recipe.input);
         }
     }
 
@@ -311,7 +312,7 @@ public class TileEntityBaseEntityMicroDeconstructor extends
     @Override
     protected void startWork() {
         deconstructingStack = getStackInSlot(0).copy();
-        AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
+        AssemblerRecipe recipe = Femtocraft.recipeManager.assemblyRecipes
                 .getRecipe(getStackInSlot(0));
         deconstructingStack.stackSize = 0;
 
@@ -384,7 +385,7 @@ public class TileEntityBaseEntityMicroDeconstructor extends
      */
     @Override
     protected void finishWork() {
-        AssemblerRecipe recipe = ManagerRecipe.assemblyRecipes
+        AssemblerRecipe recipe = Femtocraft.recipeManager.assemblyRecipes
                 .getRecipe(deconstructingStack);
         int[] placementRestrictionArray = new int[]{0};
         for (int i = 0; i < deconstructingStack.stackSize; i += recipe.output.stackSize) {
@@ -398,7 +399,8 @@ public class TileEntityBaseEntityMicroDeconstructor extends
                 // true);
                 if (tank.getFluid() == null) {
                     tank.setFluid(new FluidStack(Femtocraft.fluidMass, recipe.mass));
-                } else {
+                }
+                else {
                     tank.getFluid().amount += recipe.mass;
                 }
                 // deconstructingStack = null;
@@ -479,7 +481,8 @@ public class TileEntityBaseEntityMicroDeconstructor extends
     public void setFluidAmount(int amount) {
         if (tank.getFluid() != null) {
             tank.setFluid(new FluidStack(tank.getFluid().fluidID, amount));
-        } else {
+        }
+        else {
             tank.setFluid(new FluidStack(Femtocraft.fluidMass, amount));
         }
     }

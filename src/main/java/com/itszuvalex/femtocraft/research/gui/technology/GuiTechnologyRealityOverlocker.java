@@ -18,14 +18,18 @@ public class GuiTechnologyRealityOverlocker extends GuiTechnology {
             switch (pageNum) {
                 case 1:
                     renderTemporalRecipeWithInfo(x, y, width, height /
-                                                              2, Femtocraft.recipeManager.temporalRecipes.getRecipe
+                                    2, Femtocraft.recipeManager.temporalRecipes.getRecipe
                                     (new ItemStack(Femtocraft.itemInfallibleEstimator)), mouseX, mouseY, tooltip,
                             "Infallible Estimator");
+                    renderDimensionalRecipeWithInfo(x, y + height / 2, width, height / 2, Femtocraft.recipeManager.dimensionalRecipes.getRecipe(new ItemStack(Femtocraft.itemPandoraCube)), mouseX, mouseY, tooltip, "Pandora Cube");
                     break;
                 case 2:
+                    renderTemporalRecipeWithInfo(x, y, width, height / 2, Femtocraft.recipeManager.temporalRecipes.getRecipe(new ItemStack(Femtocraft.itemInfinitelyRecursiveALU)), mouseX, mouseY, tooltip, "Infinite ALU");
+                    renderDimensionalRecipeWithInfo(x, y + height / 2, width, height / 2, Femtocraft.recipeManager.dimensionalRecipes.getRecipe(new ItemStack(Femtocraft.itemInfiniteVolumePolychora)), mouseX, mouseY, tooltip, "Infinite Polychora");
                     break;
             }
-        } else {
+        }
+        else {
 
         }
     }

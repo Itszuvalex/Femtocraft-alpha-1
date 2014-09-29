@@ -59,6 +59,7 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
     public static final String recipeAssemblerParam = "Assembler";
     public static final String recipeTemporalParam = "Temporal";
     public static final String recipeDimensionalParam = "Dimensional";
+    public static final String recipeCraftingParam = "Crafting";
 
     public static final String recipeParamTypeGroup = "recipeType";
     public static final String recipeParamTypeRegex = "(?<" + recipeParamTypeGroup + ">[^:]*?)";
@@ -156,12 +157,17 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
             String sitem = paramMatcher.group(recipeParamItemGroup);
             ItemStack item = FemtocraftStringUtils.itemStackFromString(sitem);
             if (item != null) {
-                if (rtype.equals(recipeAssemblerParam)) {
+                if (rtype.equalsIgnoreCase(recipeAssemblerParam)) {
                     return new GuiTechnologyAssemblerRenderer(gui, item, text);
-                } else if (rtype.equals(recipeDimensionalParam)) {
-
-                } else if (rtype.equals(recipeTemporalParam)) {
-
+                }
+                else if (rtype.equalsIgnoreCase(recipeDimensionalParam)) {
+                    return new GuiTechnologyDimensionalRenderer(gui, item, text);
+                }
+                else if (rtype.equalsIgnoreCase(recipeTemporalParam)) {
+                    return new GuiTechnologyTemporalRenderer(gui, item, text);
+                }
+                else if (rtype.equalsIgnoreCase(recipeCraftingParam)) {
+                    return new GuiTechnologyCraftingRenderer(gui, item, text);
                 }
             }
         }

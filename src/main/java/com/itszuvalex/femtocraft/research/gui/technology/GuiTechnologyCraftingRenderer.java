@@ -31,13 +31,13 @@ import java.util.List;
 /**
  * Created by Christopher Harris (Itszuvalex) on 9/17/14.
  */
-public class GuiTechnologyAssemblerRenderer implements ITechnologyElementRenderer {
+public class GuiTechnologyCraftingRenderer implements ITechnologyElementRenderer {
     private final GuiTechnology gui;
     public final AssemblerRecipe recipe;
     public final String text;
     private int y = 0;
 
-    public GuiTechnologyAssemblerRenderer(GuiTechnology gui, ItemStack output, String text) {
+    public GuiTechnologyCraftingRenderer(GuiTechnology gui, ItemStack output, String text) {
         this.gui = gui;
         this.text = text;
         recipe = Femtocraft.recipeManager.assemblyRecipes.getRecipe(output);
@@ -45,7 +45,7 @@ public class GuiTechnologyAssemblerRenderer implements ITechnologyElementRendere
 
     @Override
     public void render(int x, int y, int width, int height, int displayPage, int mouseX, int mouseY, List tooltip, boolean isResearched) {
-        gui.renderAssemblerRecipeWithInfo(x, y + getY(), width, height, recipe, mouseX, mouseY, tooltip, text);
+        gui.renderCraftingRecipeWithInfo(x, y + getY(), width, height, recipe.input, recipe.output, mouseX, mouseY, tooltip, text);
     }
 
     @Override

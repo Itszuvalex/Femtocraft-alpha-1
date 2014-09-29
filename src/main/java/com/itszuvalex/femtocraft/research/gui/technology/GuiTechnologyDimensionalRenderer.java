@@ -22,7 +22,8 @@
 package com.itszuvalex.femtocraft.research.gui.technology;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
+import com.itszuvalex.femtocraft.managers.dimensional.DimensionalRecipe;
+import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 
@@ -31,21 +32,21 @@ import java.util.List;
 /**
  * Created by Christopher Harris (Itszuvalex) on 9/17/14.
  */
-public class GuiTechnologyAssemblerRenderer implements ITechnologyElementRenderer {
+public class GuiTechnologyDimensionalRenderer implements ITechnologyElementRenderer {
     private final GuiTechnology gui;
-    public final AssemblerRecipe recipe;
+    public final DimensionalRecipe recipe;
     public final String text;
     private int y = 0;
 
-    public GuiTechnologyAssemblerRenderer(GuiTechnology gui, ItemStack output, String text) {
+    public GuiTechnologyDimensionalRenderer(GuiTechnology gui, ItemStack output, String text) {
         this.gui = gui;
         this.text = text;
-        recipe = Femtocraft.recipeManager.assemblyRecipes.getRecipe(output);
+        recipe = Femtocraft.recipeManager.dimensionalRecipes.getRecipe(output);
     }
 
     @Override
     public void render(int x, int y, int width, int height, int displayPage, int mouseX, int mouseY, List tooltip, boolean isResearched) {
-        gui.renderAssemblerRecipeWithInfo(x, y + getY(), width, height, recipe, mouseX, mouseY, tooltip, text);
+        gui.renderDimensionalRecipeWithInfo(x, y + getY(), width, height, recipe, mouseX, mouseY, tooltip, text);
     }
 
     @Override
@@ -55,7 +56,7 @@ public class GuiTechnologyAssemblerRenderer implements ITechnologyElementRendere
 
     @Override
     public int getHeight() {
-        return Math.max(54, Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT * Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(text, getWidth()).size());
+        return Math.max(recipe == null ? 0 : recipe.techLevel == EnumTechLevel.NANO ? 54 : recipe.techLevel == EnumTechLevel.FEMTO ? 72 : 0, Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT * Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(text, getWidth()).size());
     }
 
     @Override

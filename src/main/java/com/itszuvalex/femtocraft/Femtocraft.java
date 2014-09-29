@@ -1248,7 +1248,7 @@ public class Femtocraft {
     public void postInit(FMLPostInitializationEvent event) {
         assemblerConfigs = new FemtocraftConfigAssembler(recipeConfigFile);
         recipeManager.init();
-        ManagerRecipe.assemblyRecipes.registerDefaultRecipes();
+        recipeManager.assemblyRecipes.registerDefaultRecipes();
         MagnetRegistry.init();
         new FemtocraftConfigTechnology(technologyConfigFile).loadTechnologies();
 
