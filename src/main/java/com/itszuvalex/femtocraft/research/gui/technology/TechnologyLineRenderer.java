@@ -58,7 +58,7 @@ public class TechnologyLineRenderer implements ITechnologyElementRenderer {
 
     @Override
     public int getHeight() {
-        return Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT;
+        return Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT + 1;
     }
 
     public int getY() {

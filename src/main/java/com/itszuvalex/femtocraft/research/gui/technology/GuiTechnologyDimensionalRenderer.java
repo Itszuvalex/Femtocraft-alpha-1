@@ -56,7 +56,7 @@ public class GuiTechnologyDimensionalRenderer implements ITechnologyElementRende
 
     @Override
     public int getHeight() {
-        return Math.max(recipe == null ? 0 : recipe.techLevel == EnumTechLevel.NANO ? 54 : recipe.techLevel == EnumTechLevel.FEMTO ? 72 : 0, Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT * Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(text, getWidth()).size());
+        return Math.max(recipe == null ? 0 : recipe.techLevel == EnumTechLevel.NANO ? 18 * 3 + 2 : recipe.techLevel == EnumTechLevel.FEMTO ? 18 * 4 + 2 : 0, Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT * Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(text, getWidth()).size());
     }
 
     @Override

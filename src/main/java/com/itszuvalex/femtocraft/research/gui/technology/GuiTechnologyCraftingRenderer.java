@@ -55,7 +55,7 @@ public class GuiTechnologyCraftingRenderer implements ITechnologyElementRenderer
 
     @Override
     public int getHeight() {
-        return Math.max(54, Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT * Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(text, getWidth()).size());
+        return Math.max(18 * 3 + 2, Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT * Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(text, getWidth()).size());
     }
 
     @Override

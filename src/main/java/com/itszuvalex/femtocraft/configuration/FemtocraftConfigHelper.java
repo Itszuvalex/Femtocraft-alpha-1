@@ -21,6 +21,8 @@
 
 package com.itszuvalex.femtocraft.configuration;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.reflect.ClassPath;
 import com.itszuvalex.femtocraft.Femtocraft;
@@ -34,6 +36,7 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.logging.Level;
+import java.util.regex.Pattern;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 9/10/14.
@@ -43,6 +46,27 @@ public class FemtocraftConfigHelper {
     public static final char CATEGORY_SPLITTER_REPLACEMENT = '-';
     public static final char CATEGORY_SPLITTER_CHAR = Configuration.CATEGORY_SPLITTER.charAt(0);
     private static List<Class> configurableClasses = new ArrayList<Class>();
+
+    private static BiMap<String, String> configStringEscapes = HashBiMap.create();
+
+    private static void addConfigEscape(String toEscape, String escape) {
+        configStringEscapes.put(Pattern.quote(toEscape), Pattern.quote(escape));
+    }
+
+    private static String escapeConfigString(String str) {
+        for (String escapes : configStringEscapes.keySet()) {
+            str = str.replaceAll(escapes, configStringEscapes.get(escapes));
+        }
+        return str;
+    }
+
+    private static String unescapeConfigString(String str) {
+        BiMap<String, String> unEscape = configStringEscapes.inverse();
+        for (String unescape : unEscape.keySet()) {
+            str = str.replaceAll(unescape, unEscape.get(unescape));
+        }
+        return str;
+    }
 
     /**
      * @param clazz Class to load all @Configurable annotated public/private fields from.
@@ -120,6 +144,12 @@ public class FemtocraftConfigHelper {
     public static void init() {
         registerConfigLoaders();
         registerConfigurableClasses();
+        registerStringEscapes();
+    }
+
+    private static void registerStringEscapes() {
+        configStringEscapes.put(",", "-comma-");
+        configStringEscapes.put("'", "-apostrophe");
     }
 
     private static void registerConfigurableClasses() {
@@ -180,8 +210,8 @@ public class FemtocraftConfigHelper {
 
             @Override
             String getValue(String key, String def, String section, Configurable anno, Configuration config) {
-                return config.get(section, key, def,
-                        anno.comment()).getString();
+                return unescapeConfigString(config.get(section, key, escapeConfigString(def),
+                        anno.comment()).getString());
             }
         });
         loaderMap.put(String[].class, new FieldLoader<String[]>() {

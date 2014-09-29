@@ -74,15 +74,15 @@ public class FemtocraftConfigTechnology {
         Femtocraft.logger.log(Level.INFO, "Loading default Technologies from configs.");
         ArrayList<ResearchTechnology> ret = new ArrayList<ResearchTechnology>(Arrays.asList(
                 loadResearchTechnology(new ResearchTechnology(
-                        ManagerResearch.METALLURGY, "The strange metals that populate your world.", EnumTechLevel.MACRO,
+                        ManagerResearch.METALLURGY, "The metals that populate your world.", EnumTechLevel.MACRO,
                         new String[]{ManagerResearch.MACROSCOPIC_STRUCTURES},
                         new ItemStack(Femtocraft.itemIngotTemperedTitanium),
-                        true, null, null, null, null, false, true)),
+                        true, null, null, null, "    The world is full of many interesting things.  Animals roam the fields, monsters rule the night, and eldritch energies course throughout the land.  Perhaps most beneficial to you, however, are the various ores that inhabit the ground.\n    Iron and coal are plentiful, but you know both are merely the tip of the iceberg when it comes to structural integrity and fuel." + (FemtocraftConfigs.titaniumGen ? "\n\n            Titanium\n\n    This silvery metal quickly corrodes when exposed to air, resulting in a dark oxidation on its surface.  It is most commonly found at depths of " + FemtocraftConfigs.titaniumOreYHeightMax + " to " + FemtocraftConfigs.titaniumOreYHeightMin + ".  It has extremely high durability, making it suitable for encasing mechanisms and circuitry.  You theorize that you can also temper this metal by running it under intense heat for extra durability." : "") + (FemtocraftConfigs.platinumGen ? "\n\n            Platinum\n\n    A rare, shiny metal, renowned for its resistance to corrosion.  Most commonly found between depths of " + FemtocraftConfigs.platinumOreYHeightMax + " and " + FemtocraftConfigs.platinumOreYHeightMin + ", it is useful for electronics where exposure to hostile chemicals is a certainty." : "") + (FemtocraftConfigs.thoriumGen ? "\n\n            Thorium\n\n    A heavy metal, with uses in nuclear decay chains.  Found in depths of " + FemtocraftConfigs.thoriumOreYHeightMax + " to " + FemtocraftConfigs.thoriumOreYHeightMin + ", it's only truly useful once you figure out how to harness the power of its nuclear decay." : ""), false, true)),
                 loadResearchTechnology(new ResearchTechnology(
                                 ManagerResearch.BASIC_CIRCUITS, "Basic logic for basic machines.", EnumTechLevel.MACRO,
                                 new String[]{ManagerResearch.MACROSCOPIC_STRUCTURES},
                                 new ItemStack(Femtocraft.itemMicrochip), true,
-                                getInput(new ItemStack(Femtocraft.itemConductivePowder)), new ItemStack(Femtocraft.itemConductivePowder), null, null, false, true)
+                                getInput(new ItemStack(Femtocraft.itemConductivePowder)), new ItemStack(Femtocraft.itemConductivePowder), null, "    Machines and mechanisms are worthless heaps of metal unless there is a purpose behind them.  You have deduced a simple set of logical mechanisms and a simple means of producing them. __Recipe.Crafting:Femtocraft:item.ItemConductivePowder--This powder balances the volatility of farenite with the stability of lapis, making it useful for conduction.____Recipe.Crafting:Femtocraft:item.ItemBoard--A simple assembly of sticks, side-by-side, gives a base for mounting logic assemblies.____Recipe.Crafting:Femtocraft:item.ItemPrimedBoard--Some conductive powder on the board, when run through an oven, creates a foundation for circuitry.____Recipe.Crafting:Femtocraft:item.ItemSpool--Just a thin rod of wood with end caps, it makes an excellent storage unit for wires.____Recipe.Crafting:Femtocraft:item.ItemSpoolGold--Your studies show gold is an excellent conductor, and you plan on using nothing but the highest quality for your machines.____Recipe.Crafting:Femtocraft:item.ItemSpoolPlatinum--Some thin platinum wire on a spool.  Useful for corrosive environments.____Recipe.Crafting:Femtocraft:item.ItemMicrochip--Thin wiring on a solid board, these multipurpose devices enable your machines to perform basic logic.__", false, true)
                 ),
                 loadResearchTechnology(new ResearchTechnology(
                                 ManagerResearch.MACHINING, "Start your industry!", EnumTechLevel.MICRO,
@@ -90,7 +90,7 @@ public class FemtocraftConfigTechnology {
                                         ManagerResearch.METALLURGY, ManagerResearch.BASIC_CIRCUITS},
                                 new ItemStack(Femtocraft.itemMicroPlating), false,
                                 getInput(new ItemStack(Femtocraft.itemMicroPlating)),
-                                new ItemStack(Femtocraft.itemMicroPlating)
+                                new ItemStack(Femtocraft.itemMicroPlating), "", "", false, false
                         )
                 ),
                 loadResearchTechnology(new ResearchTechnology(
