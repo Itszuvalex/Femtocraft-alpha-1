@@ -25,7 +25,7 @@ import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
-import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
+import com.itszuvalex.femtocraft.research.FemtocraftTechnologies;
 
 @Configurable
 public class TileEntityNanoDismantler extends
@@ -44,9 +44,9 @@ public class TileEntityNanoDismantler extends
     public static int POWER_TO_COOK_PRE = 80;
 
     @Configurable(comment = "Name of technology for max smelt upgrade.")
-    public static String MAX_SMELT_UPGRADE = ManagerResearch.LOCALITY_ENTANGLER;
+    public static String MAX_SMELT_UPGRADE = FemtocraftTechnologies.LOCALITY_ENTANGLER;
     @Configurable(comment = "Name of technology for ticks to cook upgrade.")
-    public static String TICKS_TO_COOK_UPGRADE = ManagerResearch.REALITY_OVERCLOCKER;
+    public static String TICKS_TO_COOK_UPGRADE = FemtocraftTechnologies.REALITY_OVERCLOCKER;
     @Configurable(comment = "Name of technology for power to cook upgrade.")
     public static String POWER_TO_COOK_UPGRADE = "";
 

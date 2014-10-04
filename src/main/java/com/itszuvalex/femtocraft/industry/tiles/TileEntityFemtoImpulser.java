@@ -26,7 +26,7 @@ import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.industry.blocks.BlockFemtoImpulser;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
-import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
+import com.itszuvalex.femtocraft.research.FemtocraftTechnologies;
 
 @Configurable
 public class TileEntityFemtoImpulser extends TileEntityBaseEntityMicroFurnace {
@@ -42,9 +42,9 @@ public class TileEntityFemtoImpulser extends TileEntityBaseEntityMicroFurnace {
     public static int POWER_TO_COOK_PRE = 160;
 
     @Configurable(comment = "Name of technology for max smelt upgrade.")
-    public static String MAX_SMELT_UPGRADE = ManagerResearch.MULTI_DIMENSIONAL_INDUSTRY;
+    public static String MAX_SMELT_UPGRADE = FemtocraftTechnologies.MULTI_DIMENSIONAL_INDUSTRY;
     @Configurable(comment = "Name of technology for ticks to cook upgrade.")
-    public static String TICKS_TO_COOK_UPGRADE = ManagerResearch.CAUSALITY_SINGULARITY;
+    public static String TICKS_TO_COOK_UPGRADE = FemtocraftTechnologies.CAUSALITY_SINGULARITY;
     @Configurable(comment = "Name of technology for power to cook upgrade.")
     public static String POWER_TO_COOK_UPGRADE = "";
 

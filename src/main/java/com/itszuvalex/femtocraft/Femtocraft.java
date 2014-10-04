@@ -125,8 +125,9 @@ public class Femtocraft {
     public static Logger logger;
 
     public static Configuration configFile;
-    public static Configuration technologyConfigFile;
-    public static Configuration recipeConfigFile;
+    public static File technologyConfigFile;
+    public static File recipeConfigFile;
+    public static Configuration recipeConfig;
 
     public static FemtocraftConfigAssembler assemblerConfigs;
 
@@ -381,11 +382,13 @@ public class Femtocraft {
                 suggestedConfig);
         FemtocraftConfigs.load(configFile);
         String[] suggestConfigName = suggestedConfig.getName().split("\\.");
-        technologyConfigFile = new Configuration(new File(suggestedConfig.getParentFile(),
-                suggestConfigName[0] + TECH_CONFIG_APPEND + "." + suggestConfigName[1]));
-        recipeConfigFile = new Configuration(new File(suggestedConfig.getParentFile(), suggestConfigName[0] +
-                RECIPE_CONFIG_APPEND + "." +
-                suggestConfigName[1]));
+        technologyConfigFile = new File(suggestedConfig.getParentFile(),
+                suggestConfigName[0] + TECH_CONFIG_APPEND + "." + suggestConfigName[1]);
+        recipeConfigFile = new File(suggestedConfig.getParentFile(), suggestConfigName[0] +
+                                                                     RECIPE_CONFIG_APPEND + "." +
+                                                                     suggestConfigName[1]);
+
+        recipeConfig = new Configuration(recipeConfigFile);
 
         Femtocraft.proxy.registerTileEntities();
         Femtocraft.proxy.registerRendering();
@@ -1246,7 +1249,7 @@ public class Femtocraft {
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        assemblerConfigs = new FemtocraftConfigAssembler(recipeConfigFile);
+        assemblerConfigs = new FemtocraftConfigAssembler(recipeConfig);
         recipeManager.init();
         recipeManager.assemblyRecipes.registerDefaultRecipes();
         MagnetRegistry.init();

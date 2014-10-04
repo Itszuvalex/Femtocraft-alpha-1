@@ -24,7 +24,7 @@ package com.itszuvalex.femtocraft.managers.dimensional;
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.managers.assembler.ComparatorItemStack;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
-import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
+import com.itszuvalex.femtocraft.research.FemtocraftTechnologies;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -52,11 +52,11 @@ public class ManagerDimensionalRecipe {
                         new ItemStack(Femtocraft.itemCrossDimensionalCommunicator),
                         new ItemStack(Femtocraft.itemDimensionalMonopole)},
                 new ItemStack(Femtocraft.itemPanLocationalComputer), 400, EnumTechLevel.NANO,
-                ManagerResearch.DIMENSIONAL_BRAIDING));
+                FemtocraftTechnologies.DIMENSIONAL_BRAIDING));
         addRecipe(new DimensionalRecipe(new ItemStack(Block.chest), new ItemStack[]{new ItemStack(Femtocraft
                 .itemPanLocationalComputer), new ItemStack(Item.enderPearl), new ItemStack(Item.enderPearl),
                 new ItemStack(Femtocraft.itemDimensionalMonopole)}, new ItemStack(Femtocraft.itemPandoraCube), 400,
-                EnumTechLevel.NANO, ManagerResearch.LOCALITY_ENTANGLER));
+                EnumTechLevel.NANO, FemtocraftTechnologies.LOCALITY_ENTANGLER));
         addRecipe(new DimensionalRecipe(new ItemStack(Femtocraft.itemPandoraCube),
                 new ItemStack[]{new ItemStack(Femtocraft.itemHerculesDrive),
                         new ItemStack(Femtocraft.itemPanLocationalComputer),
@@ -68,7 +68,7 @@ public class ManagerDimensionalRecipe {
                         new ItemStack(Femtocraft.itemInfallibleEstimator),
                         new ItemStack(Femtocraft.itemHerculesDrive)},
                 new ItemStack(Femtocraft.itemInfiniteVolumePolychora), 400, EnumTechLevel.FEMTO,
-                ManagerResearch.DIMENSIONAL_SUPERPOSITIONS));
+                FemtocraftTechnologies.DIMENSIONAL_SUPERPOSITIONS));
     }
 
     public DimensionalRecipe getRecipe(ItemStack input, ItemStack[] configurators) {

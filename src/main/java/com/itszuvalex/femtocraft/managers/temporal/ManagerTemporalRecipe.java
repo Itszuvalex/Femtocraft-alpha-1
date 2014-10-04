@@ -24,7 +24,7 @@ package com.itszuvalex.femtocraft.managers.temporal;
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.managers.assembler.ComparatorItemStack;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
-import com.itszuvalex.femtocraft.managers.research.ManagerResearch;
+import com.itszuvalex.femtocraft.research.FemtocraftTechnologies;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -52,7 +52,7 @@ public class ManagerTemporalRecipe {
                 new ItemStack[]{new ItemStack(Femtocraft.itemTemporalResonator),
                         new ItemStack(Femtocraft.itemSchedulerCore), new ItemStack(Item.pocketSundial)},
                 new ItemStack(Femtocraft.itemInfallibleEstimator), 200, EnumTechLevel.NANO,
-                ManagerResearch.TEMPORAL_PIPELINING));
+                FemtocraftTechnologies.TEMPORAL_PIPELINING));
         addRecipe(new TemporalRecipe(new ItemStack(Femtocraft.itemInfallibleEstimator),
                 new ItemStack[]{new ItemStack(Femtocraft.itemInfallibleEstimator),
                         new ItemStack(Femtocraft.itemOrpheusProcessor),
@@ -61,7 +61,7 @@ public class ManagerTemporalRecipe {
                         new ItemStack(Femtocraft.itemOrpheusProcessor),
                         new ItemStack(Femtocraft.itemPanLocationalComputer)},
                 new ItemStack(Femtocraft.itemInfinitelyRecursiveALU), 800, EnumTechLevel.FEMTO,
-                ManagerResearch.TEMPORAL_THREADING));
+                FemtocraftTechnologies.TEMPORAL_THREADING));
 
     }
 
