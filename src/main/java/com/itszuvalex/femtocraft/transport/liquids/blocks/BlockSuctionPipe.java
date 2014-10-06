@@ -41,7 +41,9 @@ import java.util.List;
 
 public class BlockSuctionPipe extends TileContainer {
     public Icon center;
+    public Icon center_blackout;
     public Icon connector;
+    public Icon connector_blackout;
     public Icon connector_tank;
 
     public BlockSuctionPipe(int par1) {
@@ -234,8 +236,12 @@ public class BlockSuctionPipe extends TileContainer {
     public void registerIcons(IconRegister par1IconRegister) {
         center = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
                 + ":" + "BlockSuctionPipe_center");
+        center_blackout = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+                + ":" + "BlockSuctionPipe_center_blackout");
         connector = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
                 + ":" + "BlockSuctionPipe_connector");
+        connector_blackout = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+                + ":" + "BlockSuctionPipe_connector_blackout");
         connector_tank = par1IconRegister.registerIcon(Femtocraft.ID
                 .toLowerCase() + ":" + "BlockSuctionPipe_connector_tank");
     }

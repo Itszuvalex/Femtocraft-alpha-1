@@ -49,8 +49,10 @@ public class BlockVacuumTube extends TileContainer {
     public Icon indicatorIcon;
     public Icon straightIcon;
     public Icon straightInsetIcon;
+    public Icon straightInsetIcon_blackout;
     public Icon turnIcon;
     public Icon turnInsetIcon;
+    public Icon turnInsetIcon_blackout;
     public Icon endIcon;
     public Icon endInsetIcon;
 
@@ -376,10 +378,15 @@ public class BlockVacuumTube extends TileContainer {
         straightInsetIcon = par1IconRegister.registerIcon(Femtocraft.ID
                 .toLowerCase() + ":" +
                 "VacuumTube_side_straight_inset");
+        straightInsetIcon_blackout = par1IconRegister.registerIcon(Femtocraft.ID
+                .toLowerCase() + ":" +
+                "VacuumTube_side_straight_inset_blackout");
         turnIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
                 + ":" + "VacuumTube_side_curved");
         turnInsetIcon = par1IconRegister.registerIcon(Femtocraft.ID
                 .toLowerCase() + ":" + "VacuumTube_side_curved_inset");
+        turnInsetIcon_blackout = par1IconRegister.registerIcon(Femtocraft.ID
+                .toLowerCase() + ":" + "VacuumTube_side_curved_inset_blackout");
         endIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
                 + ":" + "VacuumTube_end");
         endInsetIcon = par1IconRegister.registerIcon(Femtocraft.ID

@@ -25,6 +25,7 @@ import com.itszuvalex.femtocraft.api.IInterfaceDevice;
 import com.itszuvalex.femtocraft.api.ISuctionPipe;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
+import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -59,6 +60,8 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
     private
     @FemtocraftDataUtils.Saveable
     int renderTick;
+    @Saveable(desc = true)
+    private boolean blackout = false;
 
     /*
      * (non-Javadoc)
@@ -191,7 +194,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 
         // Pass description packet to clients - fluid has either emptied, or
         // filled
-        if (pre != post) {
+        if (!blackout && (pre != post)) {
             setUpdate();
         }
     }
@@ -453,9 +456,16 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 
         ItemStack item = par5EntityPlayer.getHeldItem();
         if (item != null && item.getItem() instanceof IInterfaceDevice) {
-            output = !output;
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-            return true;
+            if (par5EntityPlayer.isSneaking()) {
+                blackout = !blackout;
+                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                return true;
+            }
+            else {
+                output = !output;
+                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                return true;
+            }
         }
         return super.onSideActivate(par5EntityPlayer, side);
     }
@@ -508,5 +518,9 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
     @Override
     public int getPressure() {
         return pressure;
+    }
+
+    public boolean isBlackout() {
+        return blackout;
     }
 }
