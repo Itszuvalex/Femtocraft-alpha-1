@@ -42,8 +42,8 @@ public class FemtocraftEventHookContainer {
         if (event.world.isRemote) {
             return;
         }
-        Femtocraft.researchManager.load(event.world);
-        Femtocraft.assistantManager.load(event.world);
+        Femtocraft.researchManager().load(event.world);
+        Femtocraft.assistantManager().load(event.world);
     }
 
     @ForgeSubscribe
@@ -51,8 +51,8 @@ public class FemtocraftEventHookContainer {
         if (event.world.isRemote) {
             return;
         }
-        Femtocraft.researchManager.save(event.world);
-        Femtocraft.assistantManager.save(event.world);
+        Femtocraft.researchManager().save(event.world);
+        Femtocraft.assistantManager().save(event.world);
     }
 
     @SideOnly(value = Side.CLIENT)
@@ -62,9 +62,9 @@ public class FemtocraftEventHookContainer {
         if (event.map.textureType == 1) {
             // Want items
             ItemAssemblySchematic.placeholderIcon = event.map
-                    .registerIcon(Femtocraft.ID.toLowerCase() + ":"
+                    .registerIcon(Femtocraft.ID().toLowerCase() + ":"
                             + "ItemAssemblySchematic");
-            DisplaySlot.noPlaceDisplayIcon = event.map.registerIcon(Femtocraft.ID
+            DisplaySlot.noPlaceDisplayIcon = event.map.registerIcon(Femtocraft.ID()
                     .toLowerCase() + ":" + "NoPlaceSlot");
         }
     }

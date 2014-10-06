@@ -39,10 +39,10 @@ public class BlockFluidCooledMoltenSalt extends BlockFluidClassic {
     public Icon flowingIcon;
 
     public BlockFluidCooledMoltenSalt(int id) {
-        super(id, Femtocraft.fluidCooledMoltenSalt, Material.water);
+        super(id, Femtocraft.fluidCooledMoltenSalt(), Material.water);
         setUnlocalizedName("FluidCooledMoltenSalt");
-        setCreativeTab(Femtocraft.femtocraftTab);
-        Femtocraft.fluidCooledMoltenSalt.setBlockID(id);
+        setCreativeTab(Femtocraft.femtocraftTab());
+        Femtocraft.fluidCooledMoltenSalt().setBlockID(id);
     }
 
     @Override
@@ -53,9 +53,9 @@ public class BlockFluidCooledMoltenSalt extends BlockFluidClassic {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        blockIcon = stillIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        blockIcon = stillIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockCooledMoltenSalt_still");
-        flowingIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        flowingIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockCooledMoltenSalt_flow");
     }
 }

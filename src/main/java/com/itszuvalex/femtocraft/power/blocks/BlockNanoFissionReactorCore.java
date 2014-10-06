@@ -40,14 +40,14 @@ import net.minecraft.world.World;
 public class BlockNanoFissionReactorCore extends TileContainer {
     public BlockNanoFissionReactorCore(int id) {
         super(id, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("BlockNanoFissionReactorCore");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockNanoFissionReactorCore");
     }
 

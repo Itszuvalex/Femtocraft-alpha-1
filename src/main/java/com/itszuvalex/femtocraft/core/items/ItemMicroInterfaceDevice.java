@@ -32,14 +32,14 @@ public class ItemMicroInterfaceDevice extends InterfaceDevice {
     public ItemMicroInterfaceDevice(int par1) {
         super(par1, EnumTechLevel.MICRO);
         setMaxStackSize(1);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "ItemMicroInterfaceDevice");
+        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                .toLowerCase() + ":" + "ItemMicroInterfaceDevice");
     }
 
 }

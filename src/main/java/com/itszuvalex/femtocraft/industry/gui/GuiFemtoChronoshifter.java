@@ -35,7 +35,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiFemtoChronoshifter extends GuiContainer {
     public static final ResourceLocation texture = new ResourceLocation(
-            Femtocraft.ID.toLowerCase(), "textures/guis/FemtoChronoshifter.png");
+            Femtocraft.ID().toLowerCase(), "textures/guis/FemtoChronoshifter.png");
     private TileEntityFemtoChronoshifter inventory;
 
     public GuiFemtoChronoshifter(EntityPlayer player, InventoryPlayer par1InventoryPlayer,

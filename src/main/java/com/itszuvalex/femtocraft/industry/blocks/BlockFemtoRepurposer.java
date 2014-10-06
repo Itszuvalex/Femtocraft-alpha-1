@@ -58,7 +58,7 @@ public class BlockFemtoRepurposer extends TileContainer {
         setUnlocalizedName("BlockFemtoRepurposer");
         setHardness(3.5f);
         setStepSound(Block.soundMetalFootstep);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
     }
 
     @Override
@@ -114,9 +114,9 @@ public class BlockFemtoRepurposer extends TileContainer {
      * is the only chance you get to register icons.
      */
     public void registerIcons(IconRegister par1IconRegister) {
-        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "FemtoMachineBlock_side");
-        frontIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        frontIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "FemtoRepurposer_front");
     }
 

@@ -41,7 +41,7 @@ import org.lwjgl.opengl.GL11;
 public class GuiEncoder extends GuiContainer {
 
     public static final ResourceLocation texture = new ResourceLocation(
-            Femtocraft.ID.toLowerCase(), "textures/guis/Encoder.png");
+            Femtocraft.ID().toLowerCase(), "textures/guis/Encoder.png");
     private TileEntityEncoder encoder;
 
     public GuiEncoder(EntityPlayer player, InventoryPlayer par1InventoryPlayer,

@@ -31,8 +31,8 @@ public class BlockOreTitanium extends BlockOreBase {
 
     public BlockOreTitanium(int id) {
         super(id);
-        this.setCreativeTab(Femtocraft.femtocraftTab);
-        setTextureName(Femtocraft.ID.toLowerCase() + ":" + "BlockOreTitanium");
+        this.setCreativeTab(Femtocraft.femtocraftTab());
+        setTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockOreTitanium");
         setUnlocalizedName("BlockOreTitanium");
         setHardness(3.0f);
         setStepSound(Block.soundStoneFootstep);
@@ -42,7 +42,7 @@ public class BlockOreTitanium extends BlockOreBase {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "BlockOreTitanium");
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                 .toLowerCase() + ":" + "BlockOreTitanium");
     }
 }

@@ -75,7 +75,7 @@ public class TemporalRecipe implements Comparable, ISaveable {
     }
 
     public ResearchTechnology getTechnology() {
-        return Femtocraft.researchManager.getTechnology(tech);
+        return Femtocraft.researchManager().getTechnology(tech);
     }
 
     @Override

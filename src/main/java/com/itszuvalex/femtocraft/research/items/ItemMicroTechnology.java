@@ -32,7 +32,7 @@ public class ItemMicroTechnology extends ItemTechnologyCarrier {
 
     public ItemMicroTechnology(int par1) {
         super(par1);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("itemMicroTechnology");
     }
 
@@ -44,7 +44,7 @@ public class ItemMicroTechnology extends ItemTechnologyCarrier {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        itemIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "ItemMicroTechnology");
     }
 }

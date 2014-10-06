@@ -43,7 +43,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiMicroReconstructor extends GuiContainer {
     public static final ResourceLocation texture = new ResourceLocation(
-            Femtocraft.ID.toLowerCase(), "textures/guis/Reassembler.png");
+            Femtocraft.ID().toLowerCase(), "textures/guis/Reassembler.png");
     private TileEntityBaseEntityMicroReconstructor reconstructorInventory;
 
     public GuiMicroReconstructor(EntityPlayer player, InventoryPlayer par1InventoryPlayer,

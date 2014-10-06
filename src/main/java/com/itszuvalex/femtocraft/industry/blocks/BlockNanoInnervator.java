@@ -68,7 +68,7 @@ public class BlockNanoInnervator extends TileContainer {
         setUnlocalizedName("BlockNanoInnervator");
         setHardness(3.5f);
         setStepSound(Block.soundMetalFootstep);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         if (par2) {
             setLightValue(0.875F);
         }
@@ -82,11 +82,11 @@ public class BlockNanoInnervator extends TileContainer {
         shouldDrop = false;
         if (par0) {
             par1World.setBlock(par2, par3, par4,
-                    Femtocraft.blockNanoInnervatorLit.blockID);
+                    Femtocraft.blockNanoInnervatorLit().blockID);
         }
         else {
             par1World.setBlock(par2, par3, par4,
-                    Femtocraft.blockNanoInnervatorUnlit.blockID);
+                    Femtocraft.blockNanoInnervatorUnlit().blockID);
         }
         shouldDrop = true;
         keepFurnaceInventory = false;
@@ -170,7 +170,7 @@ public class BlockNanoInnervator extends TileContainer {
      */
     @Override
     public int idDropped(int par1, Random par2Random, int par3) {
-        return Femtocraft.blockNanoInnervatorUnlit.blockID;
+        return Femtocraft.blockNanoInnervatorUnlit().blockID;
     }
 
     @Override
@@ -179,7 +179,7 @@ public class BlockNanoInnervator extends TileContainer {
      * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
      */
     public int idPicked(World par1World, int par2, int par3, int par4) {
-        return Femtocraft.blockNanoInnervatorUnlit.blockID;
+        return Femtocraft.blockNanoInnervatorUnlit().blockID;
     }
 
     /**
@@ -211,11 +211,11 @@ public class BlockNanoInnervator extends TileContainer {
      * is the only chance you get to register icons.
      */
     public void registerIcons(IconRegister par1IconRegister) {
-        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "NanoMachineBlock_side");
-        frontIcon = par1IconRegister.registerIcon(this.isActive ? Femtocraft.ID
-                .toLowerCase() + ":" + "NanoInnervator_front_lit"
-                : Femtocraft.ID.toLowerCase() + ":"
+        frontIcon = par1IconRegister.registerIcon(this.isActive ? Femtocraft.ID()
+                                                                            .toLowerCase() + ":" + "NanoInnervator_front_lit"
+                : Femtocraft.ID().toLowerCase() + ":"
                 + "NanoInnervator_front_unlit");
     }
 

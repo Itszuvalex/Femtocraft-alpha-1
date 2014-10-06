@@ -268,7 +268,7 @@ public class TileEntityBaseEntityMicroDeconstructor extends
             return false;
         }
         else {
-            AssemblerRecipe recipe = Femtocraft.recipeManager.assemblyRecipes
+            AssemblerRecipe recipe = Femtocraft.recipeManager().assemblyRecipes
                     .getRecipe(deconstructorInventory.getStackInSlot(0));
             return recipe != null &&
                     recipe.enumTechLevel.tier <= getAssemblerTech().tier &&
@@ -312,7 +312,7 @@ public class TileEntityBaseEntityMicroDeconstructor extends
     @Override
     protected void startWork() {
         deconstructingStack = getStackInSlot(0).copy();
-        AssemblerRecipe recipe = Femtocraft.recipeManager.assemblyRecipes
+        AssemblerRecipe recipe = Femtocraft.recipeManager().assemblyRecipes
                 .getRecipe(getStackInSlot(0));
         deconstructingStack.stackSize = 0;
 
@@ -385,7 +385,7 @@ public class TileEntityBaseEntityMicroDeconstructor extends
      */
     @Override
     protected void finishWork() {
-        AssemblerRecipe recipe = Femtocraft.recipeManager.assemblyRecipes
+        AssemblerRecipe recipe = Femtocraft.recipeManager().assemblyRecipes
                 .getRecipe(deconstructingStack);
         int[] placementRestrictionArray = new int[]{0};
         for (int i = 0; i < deconstructingStack.stackSize; i += recipe.output.stackSize) {
@@ -398,7 +398,7 @@ public class TileEntityBaseEntityMicroDeconstructor extends
                 // tank.fill(new FluidStack(Femtocraft.fluidMass, recipe.fluidMass),
                 // true);
                 if (tank.getFluid() == null) {
-                    tank.setFluid(new FluidStack(Femtocraft.fluidMass, recipe.mass));
+                    tank.setFluid(new FluidStack(Femtocraft.fluidMass(), recipe.mass));
                 }
                 else {
                     tank.getFluid().amount += recipe.mass;
@@ -483,7 +483,7 @@ public class TileEntityBaseEntityMicroDeconstructor extends
             tank.setFluid(new FluidStack(tank.getFluid().fluidID, amount));
         }
         else {
-            tank.setFluid(new FluidStack(Femtocraft.fluidMass, amount));
+            tank.setFluid(new FluidStack(Femtocraft.fluidMass(), amount));
         }
     }
 

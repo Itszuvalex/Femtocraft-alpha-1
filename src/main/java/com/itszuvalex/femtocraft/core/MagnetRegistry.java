@@ -46,8 +46,8 @@ public class MagnetRegistry {
     }
 
     private static void registerMagnetTree() {
-        Femtocraft.logger.log(Level.INFO, "Registering all magnets.");
-        ArrayList<AssemblerRecipe> recipes = Femtocraft.recipeManager.assemblyRecipes.getAllRecipes();
+        Femtocraft.log(Level.INFO, "Registering all magnets.");
+        ArrayList<AssemblerRecipe> recipes = Femtocraft.recipeManager().assemblyRecipes.getAllRecipes();
         boolean changed = true;
         int depth = 0;
         while (changed && depth < MAXIMUM_DEPTH) {
@@ -67,15 +67,15 @@ public class MagnetRegistry {
             }
             depth++;
         }
-        Femtocraft.logger.log(Level.INFO, "Finished registering magnets.  Total depth was " + depth + ".");
+        Femtocraft.log(Level.INFO, "Finished registering magnets.  Total depth was " + depth + ".");
     }
 
     private static void registerMagnetDefaults() {
         registerMagnet(Block.oreIron, ORE_IRON);
         registerMagnet(Item.ingotIron, INGOT_IRON);
-        registerMagnet(Femtocraft.blockOreLodestone, ORE_LODESTONE);
-        registerMagnet(Femtocraft.itemNuggetLodestone, NUGGET_LODESTONE);
-        registerMagnet(Femtocraft.itemChunkLodestone, CHUNK_LODESTONE);
+        registerMagnet(Femtocraft.blockOreLodestone(), ORE_LODESTONE);
+        registerMagnet(Femtocraft.itemNuggetLodestone(), NUGGET_LODESTONE);
+        registerMagnet(Femtocraft.itemChunkLodestone(), CHUNK_LODESTONE);
     }
 
     public static boolean registerMagnet(Block block, int strength) {

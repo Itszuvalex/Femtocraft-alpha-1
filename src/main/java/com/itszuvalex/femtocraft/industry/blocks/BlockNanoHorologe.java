@@ -58,7 +58,7 @@ public class BlockNanoHorologe extends TileContainer {
         setUnlocalizedName("BlockNanoHorologe");
         setHardness(3.5f);
         setStepSound(Block.soundMetalFootstep);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
     }
 
     @Override
@@ -114,10 +114,10 @@ public class BlockNanoHorologe extends TileContainer {
      * is the only chance you get to register icons.
      */
     public void registerIcons(IconRegister par1IconRegister) {
-        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" +
                 "NanoMachineBlock_side");
-        frontIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        frontIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" +
                 "NanoHorologe_front");
     }

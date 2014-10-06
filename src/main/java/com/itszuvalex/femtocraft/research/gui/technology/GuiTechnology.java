@@ -46,7 +46,7 @@ import java.util.List;
 
 public class GuiTechnology extends GuiScreen {
     private static final ResourceLocation texture = new ResourceLocation(
-            Femtocraft.ID.toLowerCase(), "textures/guis/GuiTechnology.png");
+            Femtocraft.ID().toLowerCase(), "textures/guis/GuiTechnology.png");
     private final GuiResearch guiResearch;
     private final ResearchTechnologyStatus status;
     private final ResearchTechnology tech;
@@ -78,7 +78,7 @@ public class GuiTechnology extends GuiScreen {
                          ResearchTechnologyStatus status) {
         this.guiResearch = guiResearch;
         this.status = status;
-        this.tech = Femtocraft.researchManager.getTechnology(status.tech);
+        this.tech = Femtocraft.researchManager().getTechnology(status.tech);
         renderer = new GuiTechnologyRenderer(this, status.researched ? tech.researchedDescription : tech
                 .discoveredDescription);
     }

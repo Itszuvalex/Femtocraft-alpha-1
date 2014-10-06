@@ -42,7 +42,7 @@ import java.io.DataOutputStream;
 
 public class GuiResearchConsole extends GuiContainer {
     private static final ResourceLocation texture = new ResourceLocation(
-            Femtocraft.ID.toLowerCase(), "textures/guis/ResearchConsole.png");
+            Femtocraft.ID().toLowerCase(), "textures/guis/ResearchConsole.png");
     private static final int xSize = 176;
     private static final int ySize = 166;
 
@@ -72,14 +72,14 @@ public class GuiResearchConsole extends GuiContainer {
         int l = (this.height - this.ySize) / 2;
 
         if ((par1 >= (k + researchButtonX))
-            && (par1 <= (k + researchButtonX + researchButtonWidth))
-            && (par2 >= (l + researchButtonY))
-            && (par2 <= (l + researchButtonY + researchButtonHeight))) {
+                && (par1 <= (k + researchButtonX + researchButtonWidth))
+                && (par2 >= (l + researchButtonY))
+                && (par2 <= (l + researchButtonY + researchButtonHeight))) {
             this.drawGradientRect(k + researchButtonX, l + researchButtonY, k
-                                                                            + researchButtonWidth + researchButtonX, l
-                                                                                                                     +
-                                                                                                                     researchButtonY +
-                                                                                                                     researchButtonHeight,
+                            + researchButtonWidth + researchButtonX, l
+                            +
+                            researchButtonY +
+                            researchButtonHeight,
                     FemtocraftUtils.colorFromARGB(60, 45, 0, 110),
                     FemtocraftUtils.colorFromARGB(60, 45, 0, 110)
             );
@@ -118,17 +118,18 @@ public class GuiResearchConsole extends GuiContainer {
 
             if (console.isResearching()) {
                 name = console.getResearchingName();
-            } else {
+            }
+            else {
                 name = console.displayTech;
             }
 
-            ResearchTechnology tech = Femtocraft.researchManager
-                    .getTechnology(name);
+            ResearchTechnology tech = Femtocraft.researchManager()
+                                                .getTechnology(name);
             if (tech != null) {
 
                 String s = tech.name;
                 this.fontRenderer.drawString(s, k + 71
-                                                + (165 - 71 - this.fontRenderer.getStringWidth(s)) / 2,
+                                + (165 - 71 - this.fontRenderer.getStringWidth(s)) / 2,
                         l + 20,
                         FemtocraftUtils.colorFromARGB(255, 255, 255, 255)
                 );
@@ -140,14 +141,15 @@ public class GuiResearchConsole extends GuiContainer {
                             k + 168 - this.fontRenderer.getStringWidth(s),
                             l + 40,
                             FemtocraftUtils.colorFromARGB(255, 255, 255, 255));
-                } else {
+                }
+                else {
                     s = "Begin";
                     this.fontRenderer.drawString(s,
                             k + 85 - this.fontRenderer.getStringWidth(s) / 2, l
-                                                                              + 36
-                                                                              +
-                                                                              (52 - 36 - this.fontRenderer.FONT_HEIGHT)
-                                                                              / 2,
+                                    + 36
+                                    +
+                                    (52 - 36 - this.fontRenderer.FONT_HEIGHT)
+                                            / 2,
                             FemtocraftUtils.colorFromARGB(255, 255, 255, 255)
                     );
                 }
@@ -170,9 +172,9 @@ public class GuiResearchConsole extends GuiContainer {
             int l = (this.height - this.ySize) / 2;
 
             if ((par1 >= (k + researchButtonX))
-                && (par1 <= (k + researchButtonX + researchButtonWidth))
-                && (par2 >= (l + researchButtonY))
-                && (par2 <= (l + researchButtonY + researchButtonHeight))) {
+                    && (par1 <= (k + researchButtonX + researchButtonWidth))
+                    && (par2 >= (l + researchButtonY))
+                    && (par2 <= (l + researchButtonY + researchButtonHeight))) {
                 Minecraft.getMinecraft().sndManager.playSoundFX("random.click",
                         1.0F, 1.0F);
                 onResearchClick();

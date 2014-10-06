@@ -40,7 +40,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiNanoDismantler extends GuiContainer {
     public static final ResourceLocation texture = new ResourceLocation(
-            Femtocraft.ID.toLowerCase(), "textures/guis/NanoDismantler.png");
+            Femtocraft.ID().toLowerCase(), "textures/guis/NanoDismantler.png");
     private TileEntityNanoDismantler dismantlerInventory;
 
     public GuiNanoDismantler(EntityPlayer player, InventoryPlayer par1InventoryPlayer,

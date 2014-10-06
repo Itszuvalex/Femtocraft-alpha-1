@@ -54,14 +54,14 @@ public abstract class ItemTechnologyCarrier extends Item implements
     @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
                                       EntityPlayer par3EntityPlayer) {
-        ResearchPlayer pr = Femtocraft.researchManager
+        ResearchPlayer pr = Femtocraft.researchManager()
                 .getPlayerResearch(par3EntityPlayer.username);
         if (pr != null) {
             String tech = getTechnology(par1ItemStack);
             if (!(tech == null || tech.isEmpty())) {
                 if (!par2World.isRemote) {
                     if (pr.researchTechnology(tech, false)) {
-                        ResearchTechnology rt = Femtocraft.researchManager
+                        ResearchTechnology rt = Femtocraft.researchManager()
                                 .getTechnology(tech);
                         if (rt != null && rt.discoverItem != null) {
                             return rt.discoverItem.copy();

@@ -67,7 +67,7 @@ public class CommandAssistantAdd extends CommandBase {
                 throw new WrongUsageException(getCommandUsage(icommandsender));
             }
             String username = ((EntityPlayer) icommandsender).username;
-            if (Femtocraft.assistantManager.addAssistantTo(username, astring[0])) {
+            if (Femtocraft.assistantManager().addAssistantTo(username, astring[0])) {
                 FemtocraftUtils.sendMessageToPlayer(username, astring[0] + " successfully added as assistant!");
                 FemtocraftUtils.sendMessageToPlayer(astring[0], username + " just added you as an assistant!");
             } else {

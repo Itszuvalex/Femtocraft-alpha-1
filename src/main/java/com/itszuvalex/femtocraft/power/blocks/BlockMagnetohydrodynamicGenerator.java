@@ -46,17 +46,17 @@ public class BlockMagnetohydrodynamicGenerator extends TileContainer {
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "BlockMagnetohydrodynamicGenerator_unformed");
+        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "BlockMagnetohydrodynamicGenerator_unformed");
         for (int i = 0; i < formedSides.length; ++i) {
             for (int j = 0; j < formedSides[i].length; ++j) {
-                formedSides[j][i] = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "BlockMagnetohydrodynamicGenerator_" + i + "_" + j);
+                formedSides[j][i] = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "BlockMagnetohydrodynamicGenerator_" + i + "_" + j);
             }
         }
     }
 
     public BlockMagnetohydrodynamicGenerator(int par1) {
         super(par1, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("BlockMagnetohydrodynamicGenerator");
         formedSides = new Icon[3][];
         for (int i = 0; i < formedSides.length; ++i) {

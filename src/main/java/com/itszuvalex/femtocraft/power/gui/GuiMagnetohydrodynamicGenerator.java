@@ -40,7 +40,7 @@ import org.lwjgl.opengl.GL11;
  */
 public class GuiMagnetohydrodynamicGenerator extends GuiContainer {
     public static final ResourceLocation texture = new ResourceLocation(
-            Femtocraft.ID.toLowerCase(), "textures/guis/MagnetohydrodynamicGenerator.png");
+            Femtocraft.ID().toLowerCase(), "textures/guis/MagnetohydrodynamicGenerator.png");
     private final TileEntityMagnetohydrodynamicGenerator generator;
 
     public GuiMagnetohydrodynamicGenerator(TileEntityMagnetohydrodynamicGenerator generator) {

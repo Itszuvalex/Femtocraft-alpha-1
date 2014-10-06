@@ -45,22 +45,24 @@ public class ManagerTemporalRecipe {
         outputToRecipes = new TreeMap<ItemStack, TemporalRecipe>(new ComparatorItemStack());
     }
 
-    public void init() {addRecipes();}
+    public void init() {
+        addRecipes();
+    }
 
     private void addRecipes() {
-        addRecipe(new TemporalRecipe(new ItemStack(Femtocraft.itemSelfFulfillingOracle),
-                new ItemStack[]{new ItemStack(Femtocraft.itemTemporalResonator),
-                        new ItemStack(Femtocraft.itemSchedulerCore), new ItemStack(Item.pocketSundial)},
-                new ItemStack(Femtocraft.itemInfallibleEstimator), 200, EnumTechLevel.NANO,
+        addRecipe(new TemporalRecipe(new ItemStack(Femtocraft.itemSelfFulfillingOracle()),
+                new ItemStack[]{new ItemStack(Femtocraft.itemTemporalResonator()),
+                        new ItemStack(Femtocraft.itemSchedulerCore()), new ItemStack(Item.pocketSundial)},
+                new ItemStack(Femtocraft.itemInfallibleEstimator()), 200, EnumTechLevel.NANO,
                 FemtocraftTechnologies.TEMPORAL_PIPELINING));
-        addRecipe(new TemporalRecipe(new ItemStack(Femtocraft.itemInfallibleEstimator),
-                new ItemStack[]{new ItemStack(Femtocraft.itemInfallibleEstimator),
-                        new ItemStack(Femtocraft.itemOrpheusProcessor),
-                        new ItemStack(Femtocraft.itemPanLocationalComputer),
-                        new ItemStack(Femtocraft.itemInfallibleEstimator),
-                        new ItemStack(Femtocraft.itemOrpheusProcessor),
-                        new ItemStack(Femtocraft.itemPanLocationalComputer)},
-                new ItemStack(Femtocraft.itemInfinitelyRecursiveALU), 800, EnumTechLevel.FEMTO,
+        addRecipe(new TemporalRecipe(new ItemStack(Femtocraft.itemInfallibleEstimator()),
+                new ItemStack[]{new ItemStack(Femtocraft.itemInfallibleEstimator()),
+                        new ItemStack(Femtocraft.itemOrpheusProcessor()),
+                        new ItemStack(Femtocraft.itemPanLocationalComputer()),
+                        new ItemStack(Femtocraft.itemInfallibleEstimator()),
+                        new ItemStack(Femtocraft.itemOrpheusProcessor()),
+                        new ItemStack(Femtocraft.itemPanLocationalComputer())},
+                new ItemStack(Femtocraft.itemInfinitelyRecursiveALU()), 800, EnumTechLevel.FEMTO,
                 FemtocraftTechnologies.TEMPORAL_THREADING));
 
     }

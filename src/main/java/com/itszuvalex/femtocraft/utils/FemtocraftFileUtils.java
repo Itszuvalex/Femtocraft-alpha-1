@@ -41,7 +41,7 @@ public class FemtocraftFileUtils {
     }
 
     public static String savePathFemtocraft(World world) {
-        File dir = new File(savePath(world), Femtocraft.ID.toLowerCase());
+        File dir = new File(savePath(world), Femtocraft.ID().toLowerCase());
         if (!dir.exists()) {
             dir.mkdir();
         }

@@ -93,7 +93,7 @@ public class ManagerAssistant {
                     CompressedStreamTools.writeCompressed(gTag, fos);
                     fos.close();
                 } catch (Exception e) {
-                    Femtocraft.logger.log(Level.SEVERE,
+                    Femtocraft.log(Level.SEVERE,
                             "Failed to save assistant data in world - "
                                     + FemtocraftFileUtils.savePathFemtocraft(world) + " for player" + username + "."
                     );
@@ -102,7 +102,7 @@ public class ManagerAssistant {
             }
 
         } catch (Exception e) {
-            Femtocraft.logger.log(Level.SEVERE,
+            Femtocraft.log(Level.SEVERE,
                     "Failed to save assistant data in world - "
                             + FemtocraftFileUtils.savePathFemtocraft(world) + "."
             );
@@ -116,7 +116,7 @@ public class ManagerAssistant {
         try {
             File file = new File(FemtocraftFileUtils.savePathFemtocraft(world), dir);
             if (!file.exists()) {
-                Femtocraft.logger.log(Level.WARNING, "No assistant data"
+                Femtocraft.log(Level.WARNING, "No assistant data"
                         + " found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".");
                 return false;
             }
@@ -151,7 +151,7 @@ public class ManagerAssistant {
                         }
                     }
                 } catch (Exception e) {
-                    Femtocraft.logger.log(Level.SEVERE,
+                    Femtocraft.log(Level.SEVERE,
                             "Failed to load assistant data in world - "
                                     + FemtocraftFileUtils.savePathFemtocraft(world) + " for player" + username + "."
                     );
@@ -164,7 +164,7 @@ public class ManagerAssistant {
                 )
 
         {
-            Femtocraft.logger.log(Level.SEVERE,
+            Femtocraft.log(Level.SEVERE,
                     "Failed to load assistant data in world - "
                             + FemtocraftFileUtils.savePathFemtocraft(world) + "."
             );

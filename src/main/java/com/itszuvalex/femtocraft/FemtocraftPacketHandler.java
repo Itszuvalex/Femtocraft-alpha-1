@@ -95,7 +95,7 @@ public class FemtocraftPacketHandler implements IPacketHandler {
     }
 
     private void handleSoundPacket(DataInputStream inputStream, Player playerEntity) {
-        Femtocraft.soundManager.handlePacket(inputStream);
+        Femtocraft.soundManager().handlePacket(inputStream);
     }
 
     private void handlePhlegethonTunnelPacket(DataInputStream inputStream, Player playerEntity) {
@@ -114,9 +114,10 @@ public class FemtocraftPacketHandler implements IPacketHandler {
 
         WorldServer world = DimensionManager.getWorld(dim);
         if (world == null) {
-            Femtocraft.logger.log(Level.SEVERE,
+            Femtocraft.log(Level.SEVERE,
                     "Received PhlegethonTunnel Packet for nonexistent World");
-        } else {
+        }
+        else {
             TileEntity te = world.getBlockTileEntity(x, y, z);
             if (te instanceof TileEntityPhlegethonTunnelCore) {
                 ((TileEntityPhlegethonTunnelCore) te).handlePacket(action);
@@ -154,9 +155,10 @@ public class FemtocraftPacketHandler implements IPacketHandler {
 
         WorldServer world = DimensionManager.getWorld(dim);
         if (world == null) {
-            Femtocraft.logger.log(Level.SEVERE,
+            Femtocraft.log(Level.SEVERE,
                     "Received FissionReactor Packet for nonexistent World");
-        } else {
+        }
+        else {
             TileEntity te = world.getBlockTileEntity(x, y, z);
             if (te instanceof TileEntityNanoFissionReactorCore) {
                 ((TileEntityNanoFissionReactorCore) te).handleAction(action);
@@ -176,15 +178,15 @@ public class FemtocraftPacketHandler implements IPacketHandler {
             data = CompressedStreamTools.decompress(packet.data);
         } catch (IOException e) {
             e.printStackTrace();
-            Femtocraft.logger
+            Femtocraft
                     .log(Level.SEVERE,
                             "Error decompressing PlayerResearch data from packet.  This client will not be able to " +
-                            "detect its research.");
+                                    "detect its research.");
             return;
         }
         ResearchPlayer rp = new ResearchPlayer(cp.username);
         rp.loadFromNBTTagCompound(data);
-        Femtocraft.researchManager.syncResearch(rp);
+        Femtocraft.researchManager().syncResearch(rp);
     }
 
     private void handleVacuumTube(DataInputStream stream, Player player) {
@@ -233,9 +235,10 @@ public class FemtocraftPacketHandler implements IPacketHandler {
 
         WorldServer world = DimensionManager.getWorld(dim);
         if (world == null) {
-            Femtocraft.logger.log(Level.SEVERE,
+            Femtocraft.log(Level.SEVERE,
                     "Received ResearchConsole Packet for nonexistent World");
-        } else {
+        }
+        else {
             TileEntity te = world.getBlockTileEntity(x, y, z);
             if (te instanceof TileEntityResearchConsole) {
                 ((TileEntityResearchConsole) te).startWork();

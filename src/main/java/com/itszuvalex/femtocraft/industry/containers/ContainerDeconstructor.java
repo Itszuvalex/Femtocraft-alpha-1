@@ -119,7 +119,7 @@ public class ContainerDeconstructor<T extends TileEntityBaseEntityMicroDeconstru
 
     @Override
     protected boolean eligibleForInput(ItemStack item) {
-        return Femtocraft.recipeManager.assemblyRecipes.getRecipe(item) != null;
+        return Femtocraft.recipeManager().assemblyRecipes.getRecipe(item) != null;
     }
 }
 

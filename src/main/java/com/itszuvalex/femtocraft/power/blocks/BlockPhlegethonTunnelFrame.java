@@ -50,7 +50,7 @@ public class BlockPhlegethonTunnelFrame extends TileContainer {
 
     public BlockPhlegethonTunnelFrame(int id) {
         super(id, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("BlockPhlegethonTunnelFrame");
         sideIcons_inactive = makeEmptyIconArray();
         sideIcons_active = makeEmptyIconArray();
@@ -71,7 +71,7 @@ public class BlockPhlegethonTunnelFrame extends TileContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                                                        + ":" + "BlockPhlegethonTunnelFrame_unformed");
         registerIcons(sideIcons_active, "side_active", par1IconRegister);
         registerIcons(sideIcons_inactive, "side_inactive", par1IconRegister);
@@ -85,7 +85,7 @@ public class BlockPhlegethonTunnelFrame extends TileContainer {
         for (int i = 0; i < array.length; ++i) {
             for (int j = 0; j < array[i].length; ++j) {
                 array[j][i] = register.registerIcon(
-                        Femtocraft.ID.toLowerCase() + ":" + "BlockPhlegethonTunnel_" + name + "_" + i + "_" + j);
+                        Femtocraft.ID().toLowerCase() + ":" + "BlockPhlegethonTunnel_" + name + "_" + i + "_" + j);
             }
         }
     }

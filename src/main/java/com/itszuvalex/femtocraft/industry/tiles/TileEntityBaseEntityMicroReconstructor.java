@@ -515,7 +515,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
                 21, 22, 23, 24, 25, 26, 27, 28};
         while (reconstructingStacks != null && !empty) {
             // Cannot look off schematic, cause schematic can change mid-build
-            AssemblerRecipe recipe = Femtocraft.recipeManager.assemblyRecipes
+            AssemblerRecipe recipe = Femtocraft.recipeManager().assemblyRecipes
                     .getRecipe(reconstructingStacks);
             if (recipe == null) {
                 break;
@@ -594,7 +594,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
 
     @Override
     public boolean canFill(ForgeDirection from, Fluid fluid) {
-        return fluid == Femtocraft.fluidMass;
+        return fluid == Femtocraft.fluidMass();
     }
 
     @Override
@@ -612,7 +612,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
             tank.setFluid(new FluidStack(tank.getFluid().getFluid(), amount));
         }
         else {
-            tank.setFluid(new FluidStack(Femtocraft.fluidMass, amount));
+            tank.setFluid(new FluidStack(Femtocraft.fluidMass(), amount));
         }
     }
 

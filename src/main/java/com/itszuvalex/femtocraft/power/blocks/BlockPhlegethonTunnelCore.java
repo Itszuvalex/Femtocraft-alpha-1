@@ -39,7 +39,7 @@ import net.minecraft.world.World;
 public class BlockPhlegethonTunnelCore extends TileContainer {
     public BlockPhlegethonTunnelCore(int id) {
         super(id, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("BlockPhlegethonTunnelCore");
     }
 
@@ -51,7 +51,7 @@ public class BlockPhlegethonTunnelCore extends TileContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                                                        + ":" + "BlockPhlegethonTunnelCore");
     }
 

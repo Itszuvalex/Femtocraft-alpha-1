@@ -62,7 +62,7 @@ public class ItemAssemblySchematic extends ItemBase implements IAssemblerSchemat
 
     public ItemAssemblySchematic(int itemID, String unlocalizedName) {
         super(itemID, unlocalizedName);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setMaxStackSize(64);
     }
 
@@ -166,7 +166,7 @@ public class ItemAssemblySchematic extends ItemBase implements IAssemblerSchemat
         );
         par3List.add(techLevelLine);
 
-        ResearchTechnology tech = Femtocraft.researchManager.getTechnology(recipe.tech);
+        ResearchTechnology tech = Femtocraft.researchManager().getTechnology(recipe.tech);
         EnumChatFormatting formatting;
         String techString;
         if (tech == null) {

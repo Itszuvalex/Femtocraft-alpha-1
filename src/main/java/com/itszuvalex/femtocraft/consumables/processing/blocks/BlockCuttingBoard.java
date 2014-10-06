@@ -59,13 +59,13 @@ public class BlockCuttingBoard extends Block {
         super(id, Material.cake);
         this.setBlockBounds(MIN_DIST, 0.0F, MIN_DIST, MAX_DIST, MIN_DIST,
                 MAX_DIST);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
 
-        setTextureName(Femtocraft.ID.toLowerCase() + ":" + "cuttingBoard"); // top
-        setTextureName(Femtocraft.ID.toLowerCase() + ":"
+        setTextureName(Femtocraft.ID().toLowerCase() + ":" + "cuttingBoard"); // top
+        setTextureName(Femtocraft.ID().toLowerCase() + ":"
                 + "cuttingBoard_NorthSouth");
-        setTextureName(Femtocraft.ID.toLowerCase() + ":" + "cuttingBoard_Left");
-        setTextureName(Femtocraft.ID.toLowerCase() + ":" + "cuttingBoard_Right");
+        setTextureName(Femtocraft.ID().toLowerCase() + ":" + "cuttingBoard_Left");
+        setTextureName(Femtocraft.ID().toLowerCase() + ":" + "cuttingBoard_Right");
     }
 
     public Icon getCuttingBoardSideNS() {
@@ -219,15 +219,15 @@ public class BlockCuttingBoard extends Block {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister) {
-        this.blockIcon = iconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        this.blockIcon = iconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "cuttingBoard"); // top
-        this.cuttingBoardSideNS = iconRegister.registerIcon(Femtocraft.ID
+        this.cuttingBoardSideNS = iconRegister.registerIcon(Femtocraft.ID()
                 .toLowerCase() + ":" + "cuttingBoard_NorthSouth");
         this.cuttingBoardSideNS = new IconFlipped(this.cuttingBoardSideNS,
                 true, false);
-        this.cuttingBoardSideE = iconRegister.registerIcon(Femtocraft.ID
+        this.cuttingBoardSideE = iconRegister.registerIcon(Femtocraft.ID()
                 .toLowerCase() + ":" + "cuttingBoard_Left");
-        this.cuttingBoardSideW = iconRegister.registerIcon(Femtocraft.ID
+        this.cuttingBoardSideW = iconRegister.registerIcon(Femtocraft.ID()
                 .toLowerCase() + ":" + "cuttingBoard_Right");
     }
 

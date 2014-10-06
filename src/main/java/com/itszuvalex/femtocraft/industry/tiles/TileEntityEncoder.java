@@ -39,7 +39,7 @@ import java.util.Arrays;
 
 @Configurable
 public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
-        IInventory, IFluidHandler {
+                                                                    IInventory, IFluidHandler {
     @Configurable(comment = "Power tech level.")
     public static EnumTechLevel TECH_LEVEL = EnumTechLevel.MICRO;
     @Configurable(comment = "Mass storage maximum.")
@@ -113,7 +113,7 @@ public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
 
     @Override
     public String getInvName() {
-        return Femtocraft.ID.toLowerCase() + "." + "InventoryEncoder";
+        return Femtocraft.ID().toLowerCase() + "." + "InventoryEncoder";
     }
 
     @Override
@@ -154,7 +154,7 @@ public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
 
     @Override
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-        if (resource.fluidID != Femtocraft.fluidMass.getID()) {
+        if (resource.fluidID != Femtocraft.fluidMass().getID()) {
             return 0;
         }
         return massTank.fill(resource, doFill);
@@ -206,22 +206,22 @@ public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
     protected boolean canStartWork() {
         AssemblerRecipe recipe = getRecipe();
         return recipe != null
-               && getStackInSlot(11) == null
-               && getStackInSlot(10) != null
-               && getCurrentPower() >= POWER_TO_ENCODE
-               && massTank.getFluidAmount() >= ((IAssemblerSchematic) getStackInSlot(
+                && getStackInSlot(11) == null
+                && getStackInSlot(10) != null
+                && getCurrentPower() >= POWER_TO_ENCODE
+                && massTank.getFluidAmount() >= ((IAssemblerSchematic) getStackInSlot(
                 10).getItem()).massRequired(recipe)
-               && getStackInSlot(10).getItem() instanceof IAssemblerSchematic;
+                && getStackInSlot(10).getItem() instanceof IAssemblerSchematic;
     }
 
     private AssemblerRecipe getRecipe() {
-        AssemblerRecipe recipe = Femtocraft.recipeManager.assemblyRecipes
+        AssemblerRecipe recipe = Femtocraft.recipeManager().assemblyRecipes
                 .getRecipe(Arrays.copyOfRange(inventory.getInventory(), 0, 9));
         if (recipe == null) {
             return null;
         }
-        boolean researched = Femtocraft.researchManager
-                .hasPlayerResearchedTechnology(getOwner(), recipe.tech);
+        boolean researched = Femtocraft.researchManager()
+                                       .hasPlayerResearchedTechnology(getOwner(), recipe.tech);
         return researched ? recipe : null;
     }
 
@@ -301,8 +301,9 @@ public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
         if (massTank.getFluid() != null) {
             massTank.setFluid(new FluidStack(massTank.getFluid().fluidID,
                     amount));
-        } else {
-            massTank.setFluid(new FluidStack(Femtocraft.fluidMass, amount));
+        }
+        else {
+            massTank.setFluid(new FluidStack(Femtocraft.fluidMass(), amount));
         }
     }
 

@@ -193,7 +193,7 @@ public class TileEntityBaseEntityNanoHorologe extends
             return false;
         }
 
-        TemporalRecipe tr = Femtocraft.recipeManager.temporalRecipes
+        TemporalRecipe tr = Femtocraft.recipeManager().temporalRecipes
                 .getRecipe(inventory.getStackInSlot(inputSlot),
                         getConfigurators()
                 );
@@ -204,7 +204,7 @@ public class TileEntityBaseEntityNanoHorologe extends
             return false;
         }
         if (
-                !Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner(),
+                !Femtocraft.researchManager().hasPlayerResearchedTechnology(getOwner(),
                         tr.getTechnology())) {
             return false;
         }
@@ -240,7 +240,7 @@ public class TileEntityBaseEntityNanoHorologe extends
 
     @Override
     protected void startWork() {
-        TemporalRecipe tr = Femtocraft.recipeManager.temporalRecipes
+        TemporalRecipe tr = Femtocraft.recipeManager().temporalRecipes
                 .getRecipe(inventory.getStackInSlot(inputSlot),
                         getConfigurators());
 
@@ -279,7 +279,7 @@ public class TileEntityBaseEntityNanoHorologe extends
 
     @Override
     protected void finishWork() {
-        TemporalRecipe tr = Femtocraft.recipeManager.temporalRecipes
+        TemporalRecipe tr = Femtocraft.recipeManager().temporalRecipes
                 .getRecipe(chronoStack, chronoConfigStacks);
         if (tr != null) {
             int[] placeRestrictions = new int[inventory.getSizeInventory() - 1];

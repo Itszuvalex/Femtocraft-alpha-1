@@ -35,7 +35,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiFemtoImpulser extends GuiContainer {
     public static final ResourceLocation texture = new ResourceLocation(
-            Femtocraft.ID.toLowerCase(), "textures/guis/FemtoImpulser.png");
+            Femtocraft.ID().toLowerCase(), "textures/guis/FemtoImpulser.png");
     private TileEntityFemtoImpulser furnaceInventory;
 
     public GuiFemtoImpulser(EntityPlayer player, InventoryPlayer par1InventoryPlayer,

@@ -39,8 +39,8 @@ public class BlockOreFarenite extends BlockOreBase {
 
     public BlockOreFarenite(int id) {
         super(id);
-        setCreativeTab(Femtocraft.femtocraftTab);
-        setTextureName(Femtocraft.ID.toLowerCase() + ":" + "BlockOreFarenite");
+        setCreativeTab(Femtocraft.femtocraftTab());
+        setTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockOreFarenite");
         setUnlocalizedName("BlockOreFarenite");
         setHardness(3.0f);
         setStepSound(Block.soundStoneFootstep);
@@ -50,13 +50,13 @@ public class BlockOreFarenite extends BlockOreBase {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID()
                                                                .toLowerCase() + ":" + "BlockOreFarenite");
     }
 
     @Override
     public int idDropped(int par1, Random random, int par2) {
-        return Femtocraft.itemIngotFarenite.itemID;
+        return Femtocraft.itemIngotFarenite().itemID;
     }
 
     @Override

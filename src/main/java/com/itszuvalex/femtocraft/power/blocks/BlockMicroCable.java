@@ -50,7 +50,7 @@ public class BlockMicroCable extends BlockPowerContainer {
 
     public BlockMicroCable(int par1, Material par2Material) {
         super(par1, par2Material);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("blockMicroCable");
         setHardness(1.0f);
         setStepSound(Block.soundStoneFootstep);
@@ -249,17 +249,17 @@ public class BlockMicroCable extends BlockPowerContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "FemtopowerCableCoil");
-        this.coreBorder = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "FemtopowerCableCoreBorder");
-        this.connector = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "FemtopowerCableConnector");
-        this.coil = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                 .toLowerCase() + ":" + "FemtopowerCableCoil");
+        this.coreBorder = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                  .toLowerCase() + ":" + "FemtopowerCableCoreBorder");
+        this.connector = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                 .toLowerCase() + ":" + "FemtopowerCableConnector");
+        this.coil = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "FemtopowerCableCoil");
-        this.coilEdge = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "FemtopowerCableCoilEdge");
-        this.border = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        this.coilEdge = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                .toLowerCase() + ":" + "FemtopowerCableCoilEdge");
+        this.border = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "FemtopowerCableBorder");
     }
 

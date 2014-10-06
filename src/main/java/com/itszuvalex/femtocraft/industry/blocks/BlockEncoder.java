@@ -40,7 +40,7 @@ public class BlockEncoder extends TileContainer {
 
     public BlockEncoder(int par1) {
         super(par1, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setHardness(3.5f);
         setStepSound(Block.soundMetalFootstep);
     }
@@ -61,11 +61,11 @@ public class BlockEncoder extends TileContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        top = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":"
+        top = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":"
                 + "BlockEncoder_top");
-        side = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":"
+        side = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":"
                 + "BlockEncoder_side");
-        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "MicroMachineBlock_side");
     }
 

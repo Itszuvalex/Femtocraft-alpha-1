@@ -39,7 +39,7 @@ public class BlockMicroCube extends BlockPowerContainer {
 
     public BlockMicroCube(int par1) {
         super(par1, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("blockMicroCube");
         setHardness(3.f);
         setStepSound(Block.soundMetalFootstep);
@@ -86,11 +86,11 @@ public class BlockMicroCube extends BlockPowerContainer {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = inputSide = par1IconRegister
-                .registerIcon(Femtocraft.ID.toLowerCase() + ":"
+                .registerIcon(Femtocraft.ID().toLowerCase() + ":"
                         + "MicroCube_input");
-        outputSide = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        outputSide = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "MicroCube_output");
-        // side = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +
+        // side = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() +
         // ":" + "MicroCube_side");
     }
 }

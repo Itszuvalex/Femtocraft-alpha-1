@@ -22,6 +22,7 @@
 package com.itszuvalex.femtocraft.core.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.Femtocraft$;
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
@@ -83,7 +84,7 @@ public class TileEntityBase extends TileEntity {
 
     public boolean shouldTick() {
         return !FemtocraftConfigs.requirePlayersOnlineForTileEntityTicks
-               || FemtocraftUtils.isPlayerOnline(owner);
+                || FemtocraftUtils.isPlayerOnline(owner);
     }
 
     /**
@@ -127,7 +128,7 @@ public class TileEntityBase extends TileEntity {
     }
 
     public String getPacketChannel() {
-        return Femtocraft.ID;
+        return Femtocraft.ID();
     }
 
     public void loadInfoFromItemNBT(NBTTagCompound compound) {
@@ -164,7 +165,7 @@ public class TileEntityBase extends TileEntity {
 //        boolean isOwner = owner == null || owner.isEmpty()
 //                          || (owner.equals(par1EntityPlayer.username));
 //        boolean isAssist = (owner != null && !owner.isEmpty())
-//                           && Femtocraft.assistantManager.isPlayerAssistant(owner, par1EntityPlayer.username);
+//                           && Femtocraft.assistantManager().isPlayerAssistant(owner, par1EntityPlayer.username);
 //        boolean isOp = ((MinecraftServer.getServer() != null && MinecraftServer.getServer()
 //                .getConfigurationManager()
 //                .isPlayerOpped(par1EntityPlayer.username)) ||
@@ -175,16 +176,16 @@ public class TileEntityBase extends TileEntity {
 
     public boolean canPlayerUse(EntityPlayer player) {
         return player != null
-               && (getOwner() == null
-                   || getOwner().equals(player.username) ||
-                   Femtocraft.assistantManager.isPlayerAssistant(getOwner(), player.username)
-                   || (MinecraftServer.getServer() != null && MinecraftServer.getServer()
-                .getConfigurationManager()
-                .isPlayerOpped(player.username)) || player.capabilities.isCreativeMode);
+                && (getOwner() == null
+                || getOwner().equals(player.username) ||
+                Femtocraft.assistantManager().isPlayerAssistant(getOwner(), player.username)
+                || (MinecraftServer.getServer() != null && MinecraftServer.getServer()
+                                                                          .getConfigurationManager()
+                                                                          .isPlayerOpped(player.username)) || player.capabilities.isCreativeMode);
     }
 
     public Object getMod() {
-        return Femtocraft.instance;
+        return Femtocraft$.MODULE$;
     }
 
     /**

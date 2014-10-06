@@ -41,7 +41,7 @@ import org.lwjgl.opengl.GL11;
 public class GuiNanoFissionReactor extends GuiContainer {
 
     public static final ResourceLocation texture = new ResourceLocation(
-            Femtocraft.ID.toLowerCase(), "textures/guis/NanoFissionReactor.png");
+            Femtocraft.ID().toLowerCase(), "textures/guis/NanoFissionReactor.png");
     private static final int decrementButtonX = 111;
     private static final int decrementButtonWidth = 117 - decrementButtonX;
     private static final int decrementButtonY = 61;

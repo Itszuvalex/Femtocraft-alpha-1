@@ -31,7 +31,7 @@ public class BlockGenerator extends BlockPowerContainer {
 
     public BlockGenerator(int par1, Material par2Material) {
         super(par1, par2Material);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
     }
 
     @Override

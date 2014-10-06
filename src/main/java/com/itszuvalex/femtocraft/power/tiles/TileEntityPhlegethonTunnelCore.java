@@ -47,8 +47,8 @@ import java.io.DataOutputStream;
  * Created by Christopher Harris (Itszuvalex) on 7/13/14.
  */
 public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer implements IPhlegethonTunnelCore,
-        IInventory {
-    public static final String PACKET_CHANNEL = "Femtocraft" + "." + "phleg";
+                                                                                       IInventory {
+    public static final String PACKET_CHANNEL = Femtocraft.PHLEGETHON_TUNNEL_CHANNEL();
     public static float PowerGenBase = 150;
     public static int ContainerMax = 100000;
     @FemtocraftDataUtils.Saveable(desc = true)
@@ -84,9 +84,10 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
         super.handleDescriptionNBT(compound);
         setRenderUpdate();
         if ((wasActive && !isActive()) || (wasMultiblock && !isValidMultiBlock())) {
-            Femtocraft.soundManager.stopSound(Femtocraft.soundManager.getSoundIDForLocation(xCoord, yCoord, zCoord));
+            Femtocraft.soundManager().stopSound(Femtocraft.soundManager().getSoundIDForLocation(xCoord, yCoord, zCoord));
             timePlaying = soundLength;
-        } else if (!wasActive && isActive()) {
+        }
+        else if (!wasActive && isActive()) {
             timePlaying = soundLength;
         }
     }
@@ -95,7 +96,7 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
     public void invalidate() {
         super.invalidate();
         if (worldObj.isRemote && isActive()) {
-            Femtocraft.soundManager.stopSound(Femtocraft.soundManager.getSoundIDForLocation(xCoord, yCoord, zCoord));
+            Femtocraft.soundManager().stopSound(Femtocraft.soundManager().getSoundIDForLocation(xCoord, yCoord, zCoord));
             timePlaying = soundLength;
         }
     }
@@ -132,7 +133,7 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
         ItemStack item = inventory.getStackInSlot(0);
         if (item == null) return false;
 
-        if (item.getItem() != Femtocraft.itemPhlegethonTunnelPrimer) {
+        if (item.getItem() != Femtocraft.itemPhlegethonTunnelPrimer()) {
             return false;
         }
 
@@ -176,7 +177,7 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
     @Override
     public void onChunkUnload() {
         if (worldObj.isRemote && isActive()) {
-            Femtocraft.soundManager.stopSound(Femtocraft.soundManager.getSoundIDForLocation(xCoord, yCoord, zCoord));
+            Femtocraft.soundManager().stopSound(Femtocraft.soundManager().getSoundIDForLocation(xCoord, yCoord, zCoord));
             timePlaying = soundLength;
         }
         super.onChunkUnload();
@@ -187,12 +188,12 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
         super.updateEntity();
         if (worldObj.isRemote && isActive()) {
             if (timePlaying++ > soundLength) {
-                Femtocraft.soundManager.stopSound(Femtocraft.soundManager.getSoundIDForLocation(xCoord, yCoord,
+                Femtocraft.soundManager().stopSound(Femtocraft.soundManager().getSoundIDForLocation(xCoord, yCoord,
                         zCoord));
-                Femtocraft.soundManager.playSound(worldObj,
+                Femtocraft.soundManager().playSound(worldObj,
                         xCoord + 0.5D,
                         yCoord + 0.5D,
-                        zCoord + 0.5D, Femtocraft.soundManager.PhlegethonTunnelIdentifier, 1.f, 1.f, true);
+                        zCoord + 0.5D, Femtocraft.soundManager().PhlegethonTunnelIdentifier, 1.f, 1.f, true);
                 timePlaying = 0;
             }
         }
@@ -226,7 +227,8 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
         if (val) {
             if (isActive()) {
                 worldObj.setBlock(xCoord, yCoord, zCoord, Block.lavaStill.blockID);
-            } else {
+            }
+            else {
                 setModified();
                 setUpdate();
             }
@@ -413,6 +415,11 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
     }
 
     public void handlePacket(boolean active) {
-        if (active) { activate(); } else { deactivate(); }
+        if (active) {
+            activate();
+        }
+        else {
+            deactivate();
+        }
     }
 }

@@ -748,16 +748,16 @@ public class FemtocraftDataUtils {
                 iSaveableSaveManager.saveToNBT(compound, saveable, obj);
             }
             else {
-                Femtocraft.logger
-                        .log(Level.SEVERE,
-                                "Field "
-                                        + saveable.getName()
-                                        + " in Class "
-                                        + saveable.getDeclaringClass()
-                                                  .getName()
-                                        + " marked as Saveable is of unsupported class - "
-                                        + clazz.getName() + "."
-                        );
+                Femtocraft.logger()
+                          .log(Level.SEVERE,
+                                  "Field "
+                                          + saveable.getName()
+                                          + " in Class "
+                                          + saveable.getDeclaringClass()
+                                                    .getName()
+                                          + " marked as Saveable is of unsupported class - "
+                                          + clazz.getName() + "."
+                          );
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -821,31 +821,31 @@ public class FemtocraftDataUtils {
             else if (ISaveable.class.isAssignableFrom(clazz)) {
                 Object os = saveable.get(obj);
                 if (os == null) {
-                    Femtocraft.logger
-                            .log(Level.SEVERE,
-                                    "Field "
-                                            + saveable.getName()
-                                            + " in Class "
-                                            + saveable.getDeclaringClass()
-                                                      .getName()
-                                            + " must not be null to be loaded from NBT."
-                            );
+                    Femtocraft.logger()
+                              .log(Level.SEVERE,
+                                      "Field "
+                                              + saveable.getName()
+                                              + " in Class "
+                                              + saveable.getDeclaringClass()
+                                                        .getName()
+                                              + " must not be null to be loaded from NBT."
+                              );
                 }
                 else {
                     iSaveableSaveManager.readFromNBT(compound, saveable, obj);
                 }
             }
             else {
-                Femtocraft.logger
-                        .log(Level.SEVERE,
-                                "Field "
-                                        + saveable.getName()
-                                        + " in Class "
-                                        + saveable.getDeclaringClass()
-                                                  .getName()
-                                        + " marked as Saveable is of unsupported class - "
-                                        + clazz.getName() + "."
-                        );
+                Femtocraft.logger()
+                          .log(Level.SEVERE,
+                                  "Field "
+                                          + saveable.getName()
+                                          + " in Class "
+                                          + saveable.getDeclaringClass()
+                                                    .getName()
+                                          + " marked as Saveable is of unsupported class - "
+                                          + clazz.getName() + "."
+                          );
             }
         } catch (Exception e) {
             e.printStackTrace();

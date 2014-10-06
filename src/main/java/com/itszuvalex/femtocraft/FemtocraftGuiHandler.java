@@ -66,7 +66,7 @@ public class FemtocraftGuiHandler implements IGuiHandler {
     public static final int FemtoCubeGuiID = 40;
     public static final int PhlegethonTunnelGuiID = 41;
 
-    public static final String PACKET_CHANNEL = "Femtocraft" + ".GUI";
+    public static final String PACKET_CHANNEL = Femtocraft.GUI_CHANNEL();
 
 
     @Override

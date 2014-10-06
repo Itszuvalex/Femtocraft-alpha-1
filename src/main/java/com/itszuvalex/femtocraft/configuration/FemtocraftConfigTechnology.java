@@ -30,45 +30,50 @@ public class FemtocraftConfigTechnology {
             this.xml = new XMLTechnology(file);
             if (!xml.valid()) {
                 this.config = new Configuration(file);
-            } else {
+            }
+            else {
                 this.config = null;
             }
-        } else {
+        }
+        else {
             this.config = new Configuration();
             xml = null;
         }
-        assemblyRecipes = Femtocraft.recipeManager.assemblyRecipes;
+        assemblyRecipes = Femtocraft.recipeManager().assemblyRecipes;
     }
 
     public void loadTechnologies() {
-        Femtocraft.logger.log(Level.INFO, "Loading Technologies.");
+        Femtocraft.log(Level.INFO, "Loading Technologies.");
         List<ResearchTechnology> loadedTechnologies;
         if (xml != null && xml.valid()) {
-            Femtocraft.logger.log(Level.INFO, "XML file successfully parsed.  Using this instead of configuration " +
-                                              "file.");
+            Femtocraft.log(Level.INFO, "XML file successfully parsed.  Using this instead of configuration " +
+                    "file.");
             if (FemtocraftConfigs.useCustomTechnologies) {
                 loadedTechnologies = xml.loadCustomTechnologies();
-            } else {
+            }
+            else {
                 loadedTechnologies = xml.loadDefaultTechnologies();
             }
 
             if (xml.isChanged()) {
                 xml.save();
             }
-        } else {
+        }
+        else {
             if (config.get(SECTION_KEY, "Use custom classes", false,
                     "Set to true if you define new technologies in this " +
-                    "section.  If false, " +
-                    "Femtocraft will only look for technologies of " +
-                    "certain names, specifically the ones bundled with " +
-                    "the vanilla version.  If true, " +
-                    "it will instead look at all keys in this section " +
-                    "and attempt to load each as a distinct Technology, " +
-                    "and will not load ANY of the original technologies" +
-                    " unless they are present in this section.")
-                    .getBoolean(false)) {
+                            "section.  If false, " +
+                            "Femtocraft will only look for technologies of " +
+                            "certain names, specifically the ones bundled with " +
+                            "the vanilla version.  If true, " +
+                            "it will instead look at all keys in this section " +
+                            "and attempt to load each as a distinct Technology, " +
+                            "and will not load ANY of the original technologies" +
+                            " unless they are present in this section.")
+                      .getBoolean(false)) {
                 loadedTechnologies = loadCustomTechnologies();
-            } else {
+            }
+            else {
                 loadedTechnologies = loadDefaultTechnologies();
             }
 
@@ -77,11 +82,11 @@ public class FemtocraftConfigTechnology {
             }
         }
         registerTechnologies(loadedTechnologies);
-        Femtocraft.logger.log(Level.INFO, "Finished loading Technologies.");
+        Femtocraft.log(Level.INFO, "Finished loading Technologies.");
     }
 
     private List<ResearchTechnology> loadCustomTechnologies() {
-        Femtocraft.logger.log(Level.INFO, "Loading custom Technologies from configs.");
+        Femtocraft.log(Level.INFO, "Loading custom Technologies from configs.");
         List<ResearchTechnology> ret = new ArrayList<ResearchTechnology>();
         ConfigCategory cat = config.getCategory(SECTION_KEY);
         Set<ConfigCategory> techs = cat.getChildren();
@@ -89,19 +94,19 @@ public class FemtocraftConfigTechnology {
             String[] name = cc.getQualifiedName().split("\\" + Configuration.CATEGORY_SPLITTER);
             ret.add(loadTechnology(name[name.length - 1]));
         }
-        Femtocraft.logger.log(Level.INFO, "Finished loading custom Technologies from configs.");
+        Femtocraft.log(Level.INFO, "Finished loading custom Technologies from configs.");
         return ret;
     }
 
     private List<ResearchTechnology> loadDefaultTechnologies() {
-        Femtocraft.logger.log(Level.INFO, "Loading default Technologies from configs.");
+        Femtocraft.log(Level.INFO, "Loading default Technologies from configs.");
 
         List<ResearchTechnology> techs = FemtocraftTechnologies.defaultTechnologies();
         for (int i = 0; i < techs.size(); ++i) {
             techs.set(i, loadResearchTechnology(techs.get(i)));
         }
 
-        Femtocraft.logger.log(Level.INFO, "Finished loading default technologies from configs.");
+        Femtocraft.log(Level.INFO, "Finished loading default technologies from configs.");
         return techs;
     }
 
@@ -120,7 +125,7 @@ public class FemtocraftConfigTechnology {
 
     private void registerTechnologies(List<ResearchTechnology> loadedTechnologies) {
         for (ResearchTechnology tech : loadedTechnologies) {
-            Femtocraft.researchManager.addTechnology(tech);
+            Femtocraft.researchManager().addTechnology(tech);
         }
         loadedTechnologies.clear();
     }

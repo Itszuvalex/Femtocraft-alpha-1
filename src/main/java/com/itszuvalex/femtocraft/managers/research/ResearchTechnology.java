@@ -163,21 +163,13 @@ public class ResearchTechnology {
             return getGuiClass().getConstructor(GuiResearch.class,
                     ResearchTechnologyStatus.class).newInstance(research,
                     status);
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | SecurityException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException e) {
-            Femtocraft.logger
+            Femtocraft.logger()
                     .log(Level.SEVERE,
                             "Technologies must return a GuiTechnology class that supports the constructor" +
-                            "(GuiResearch, ResearchTechnologyStatus)");
-            e.printStackTrace();
-        } catch (SecurityException e) {
+                                    "(GuiResearch, ResearchTechnologyStatus)");
             e.printStackTrace();
         }
 

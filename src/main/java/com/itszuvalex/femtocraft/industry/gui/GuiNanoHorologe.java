@@ -35,7 +35,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiNanoHorologe extends GuiContainer {
     public static final ResourceLocation texture = new ResourceLocation(
-            Femtocraft.ID.toLowerCase(), "textures/guis/NanoHorologe.png");
+            Femtocraft.ID().toLowerCase(), "textures/guis/NanoHorologe.png");
     private TileEntityBaseEntityNanoHorologe inventory;
 
     public GuiNanoHorologe(EntityPlayer player, InventoryPlayer par1InventoryPlayer,

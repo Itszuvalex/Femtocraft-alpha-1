@@ -50,7 +50,7 @@ public class BlockAtmosphericChargingBase extends BlockPowerContainer implements
 
     public BlockAtmosphericChargingBase(int par1) {
         super(par1, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("BlockAtmosphericChargingBase");
         setHardness(2.0f);
         setStepSound(Block.soundMetalFootstep);
@@ -102,28 +102,28 @@ public class BlockAtmosphericChargingBase extends BlockPowerContainer implements
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        side = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":"
+        side = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":"
                 + "ChargingBase_side");
-        top = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":"
+        top = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":"
                 + "ChargingBase_top");
-        // bottom = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() +
+        // bottom = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() +
         // ":" + "ChargingBase_bottom");
-        bottom = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        bottom = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "MicroMachineBlock_side");
-        side_inset = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        side_inset = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "ChargingBase_side_inset");
-        coil_inset = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        coil_inset = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "ChargingBase_coil_inset");
-        coil_column_inset = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "ChargingBase_coil_column_inset");
-        top_inset = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        coil_column_inset = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                    .toLowerCase() + ":" + "ChargingBase_coil_column_inset");
+        top_inset = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "ChargingBase_top_inset");
-        coil_top_inset = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "ChargingBase_coil_top_inset");
-        top_pillar_top = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "ChargingBase_top_pillar_top");
-        top_pillar_side = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "ChargingBase_top_pillar_side");
+        coil_top_inset = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                 .toLowerCase() + ":" + "ChargingBase_coil_top_inset");
+        top_pillar_top = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                 .toLowerCase() + ":" + "ChargingBase_top_pillar_top");
+        top_pillar_side = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                  .toLowerCase() + ":" + "ChargingBase_top_pillar_side");
     }
 
     @Override

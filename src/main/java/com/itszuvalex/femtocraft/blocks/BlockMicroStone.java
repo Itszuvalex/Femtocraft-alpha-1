@@ -34,8 +34,8 @@ import net.minecraft.world.World;
 public class BlockMicroStone extends BlockBase {
     public BlockMicroStone(int id) {
         super(id, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
-        setTextureName(Femtocraft.ID.toLowerCase() + ":" + "BlockMicroStone");
+        setCreativeTab(Femtocraft.femtocraftTab());
+        setTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockMicroStone");
         setUnlocalizedName("BlockMicroStone");
         setHardness(6.0f);
         setStepSound(Block.soundMetalFootstep);
@@ -52,7 +52,7 @@ public class BlockMicroStone extends BlockBase {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "BlockMicroStone");
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                 .toLowerCase() + ":" + "BlockMicroStone");
     }
 }

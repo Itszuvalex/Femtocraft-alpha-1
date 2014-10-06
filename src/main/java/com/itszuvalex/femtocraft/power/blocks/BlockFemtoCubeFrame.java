@@ -41,7 +41,7 @@ public class BlockFemtoCubeFrame extends TileContainer {
 
     public BlockFemtoCubeFrame(int par1) {
         super(par1, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("BlockFemtoCubeFrame");
 
         icons = new Icon[5][];
@@ -120,7 +120,7 @@ public class BlockFemtoCubeFrame extends TileContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockFemtoCubeFrame_unformed");
 
         for (int x = 0; x < icons.length; ++x) {
@@ -130,7 +130,7 @@ public class BlockFemtoCubeFrame extends TileContainer {
                     continue;
                 }
 
-                icons[x][y] = par1IconRegister.registerIcon(Femtocraft.ID
+                icons[x][y] = par1IconRegister.registerIcon(Femtocraft.ID()
                         .toLowerCase()
                         + ":"
                         + "BlockFemtoCubeFrame_"

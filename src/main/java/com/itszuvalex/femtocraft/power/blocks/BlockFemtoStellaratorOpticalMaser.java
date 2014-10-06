@@ -50,8 +50,8 @@ public class BlockFemtoStellaratorOpticalMaser extends TileContainer {
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "BlockFemtoStellaratorOpticalMaser");
-        activeIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "BlockFemtoStellaratorOpticalMaser_active");
+        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "BlockFemtoStellaratorOpticalMaser");
+        activeIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "BlockFemtoStellaratorOpticalMaser_active");
     }
 
     public Icon activeIcon;
@@ -59,7 +59,7 @@ public class BlockFemtoStellaratorOpticalMaser extends TileContainer {
     public BlockFemtoStellaratorOpticalMaser(int par1) {
         super(par1, Material.iron);
         setUnlocalizedName("BlockStellaratorOpticalMaser");
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
     }
 
     @Override
@@ -129,8 +129,7 @@ public class BlockFemtoStellaratorOpticalMaser extends TileContainer {
                                        int par4) {
         for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
             if (par1World.getBlockId(par2 + dir.offsetX, par3 + dir.offsetY,
-                    par4 + dir.offsetZ) == Femtocraft
-                    .blockStellaratorFocus.blockID) {
+                    par4 + dir.offsetZ) == Femtocraft.blockStellaratorFocus().blockID) {
                 TileEntity te = par1World.getBlockTileEntity(par2 + 2 * dir
                                 .offsetX,
                         par3 + 2 * dir

@@ -61,13 +61,13 @@ public class AssemblerRecipeDatabase {
             InitializeDatabase();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            Femtocraft.logger.log(Level.SEVERE,
+            Femtocraft.log(Level.SEVERE,
                     "SQLite dependency missing.");
             System.exit(1);
 
         } catch (SQLException e) {
             e.printStackTrace();
-            Femtocraft.logger.log(Level.SEVERE, "Error opening connection");
+            Femtocraft.log(Level.SEVERE, "Error opening connection");
         }
     }
 
@@ -134,7 +134,7 @@ public class AssemblerRecipeDatabase {
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            Femtocraft.logger.log(Level.SEVERE, "SQLite item table creation" +
+            Femtocraft.log(Level.SEVERE, "SQLite item table creation" +
                     " failed");
             return false;
         }
@@ -157,10 +157,10 @@ public class AssemblerRecipeDatabase {
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            Femtocraft.logger.log(Level.SEVERE, "SQLite select recipe from " +
+            Femtocraft.log(Level.SEVERE, "SQLite select recipe from " +
                     "inputs failed");
         }
-        return Femtocraft.assemblerConfigs.isEnabled(ac) ? ac : null;
+        return Femtocraft.assemblerConfigs().isEnabled(ac) ? ac : null;
     }
 
     private String formatItems(ItemStack[] items) {
@@ -193,7 +193,7 @@ public class AssemblerRecipeDatabase {
                 (DB_RECIPES_TECH_LEVEL));
         ac.tech = rs.getString
                 (DB_RECIPES_TECHNOLOGY);
-        return Femtocraft.assemblerConfigs.isEnabled(ac) ? ac : null;
+        return Femtocraft.assemblerConfigs().isEnabled(ac) ? ac : null;
     }
 
     private ItemStack[] getItems(String items, String stackSizes) {
@@ -253,10 +253,10 @@ public class AssemblerRecipeDatabase {
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            Femtocraft.logger.log(Level.SEVERE, "SQLite select recipe from " +
+            Femtocraft.log(Level.SEVERE, "SQLite select recipe from " +
                     "inputs failed");
         }
-        return Femtocraft.assemblerConfigs.isEnabled(ac) ? ac : null;
+        return Femtocraft.assemblerConfigs().isEnabled(ac) ? ac : null;
     }
 
     private String formatItem(ItemStack item) {
@@ -296,7 +296,7 @@ public class AssemblerRecipeDatabase {
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            Femtocraft.logger.log(Level.SEVERE, "SQLite insert recipe failed");
+            Femtocraft.log(Level.SEVERE, "SQLite insert recipe failed");
             return false;
         }
     }
@@ -336,7 +336,7 @@ public class AssemblerRecipeDatabase {
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            Femtocraft.logger.log(Level.SEVERE, "SQLite select recipe from " +
+            Femtocraft.log(Level.SEVERE, "SQLite select recipe from " +
                     "inputs failed");
         }
         return arrayList;
@@ -366,7 +366,7 @@ public class AssemblerRecipeDatabase {
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            Femtocraft.logger.log(Level.SEVERE, "SQLite select recipe from " +
+            Femtocraft.log(Level.SEVERE, "SQLite select recipe from " +
                     "inputs failed");
         }
         return arrayList;
@@ -395,7 +395,7 @@ public class AssemblerRecipeDatabase {
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            Femtocraft.logger.log(Level.SEVERE, "SQLite select recipe from " +
+            Femtocraft.log(Level.SEVERE, "SQLite select recipe from " +
                     "inputs failed");
         }
         return arrayList;

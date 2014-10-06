@@ -49,7 +49,7 @@ public class BlockSuctionPipe extends TileContainer {
     public BlockSuctionPipe(int par1) {
         super(par1, Material.iron);
         setUnlocalizedName("BlockSuctionPipe");
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
     }
 
     @Override
@@ -234,16 +234,16 @@ public class BlockSuctionPipe extends TileContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        center = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        center = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockSuctionPipe_center");
-        center_blackout = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        center_blackout = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockSuctionPipe_center_blackout");
-        connector = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        connector = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockSuctionPipe_connector");
-        connector_blackout = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        connector_blackout = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockSuctionPipe_connector_blackout");
-        connector_tank = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "BlockSuctionPipe_connector_tank");
+        connector_tank = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                 .toLowerCase() + ":" + "BlockSuctionPipe_connector_tank");
     }
 
     @Override

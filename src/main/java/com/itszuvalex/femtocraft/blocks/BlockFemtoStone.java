@@ -34,8 +34,8 @@ import net.minecraft.world.World;
 public class BlockFemtoStone extends BlockBase {
     public BlockFemtoStone(int id) {
         super(id, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
-        setTextureName(Femtocraft.ID.toLowerCase() + ":" + "BlockFemtoStone");
+        setCreativeTab(Femtocraft.femtocraftTab());
+        setTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockFemtoStone");
         setUnlocalizedName("BlockFemtoStone");
         setHardness(8.0f);
         setStepSound(Block.soundMetalFootstep);
@@ -52,7 +52,7 @@ public class BlockFemtoStone extends BlockBase {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "BlockFemtoStone");
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                 .toLowerCase() + ":" + "BlockFemtoStone");
     }
 }

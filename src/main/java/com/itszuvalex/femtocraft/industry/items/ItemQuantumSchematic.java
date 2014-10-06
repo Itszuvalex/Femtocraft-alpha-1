@@ -36,10 +36,10 @@ public class ItemQuantumSchematic extends ItemAssemblySchematic {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
-                                                              .toLowerCase() + ":" + "ItemQuantumSchematic");
-        this.keyedIcon = par1IconRegister.registerIcon(Femtocraft.ID
-                                                               .toLowerCase() + ":" + "ItemQuantumSchematicKeyed");
+        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                .toLowerCase() + ":" + "ItemQuantumSchematic");
+        this.keyedIcon = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                 .toLowerCase() + ":" + "ItemQuantumSchematicKeyed");
     }
 
 }

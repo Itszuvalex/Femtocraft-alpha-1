@@ -46,7 +46,7 @@ public abstract class Graph {
      * Technologies.
      */
     public void computePlacements() {
-        Femtocraft.logger
+        Femtocraft
                 .log(Level.FINE,
                         "Computing Placements. This process may take a while on slower computers.");
         computeHeights();
@@ -74,11 +74,11 @@ public abstract class Graph {
         // largest row
         // reduceRows(rows);
         minimizeCrossings(rows);
-        Femtocraft.logger.log(Level.FINE, "Graph placement finished.");
+        Femtocraft.log(Level.FINE, "Graph placement finished.");
     }
 
     private void computeHeights() {
-        Femtocraft.logger.log(Level.FINE, "Computing heights.");
+        Femtocraft.log(Level.FINE, "Computing heights.");
         for (IGraphNode node : getNodes()) {
             // For finding stand-alone technologies with no parents or children.
             if (node.isRoot()) {
@@ -165,20 +165,20 @@ public abstract class Graph {
                 }
             }
         } catch (InstantiationException e) {
-            Femtocraft.logger.log(Level.SEVERE, "Invalid DummyNode class", e);
+            Femtocraft.logger().log(Level.SEVERE, "Invalid DummyNode class", e);
         } catch (IllegalAccessException e) {
-            Femtocraft.logger.log(Level.SEVERE, "Error creating DummyNode " +
+            Femtocraft.logger().log(Level.SEVERE, "Error creating DummyNode " +
                     "instance", e);
         }
     }
 
     private void minimizeCrossings(ArrayList<IGraphNode>[] rows) {
-        Femtocraft.logger.log(Level.FINE, "Minimizing edge crossings for "
+        Femtocraft.log(Level.FINE, "Minimizing edge crossings for "
                 + rows.length + " rows.");
         for (int pass = 0; pass < MAX_MINIMIZE_PASSES; ++pass) {
-            Femtocraft.logger.log(Level.FINER, "Minimize Pass " + pass + ".");
+            Femtocraft.log(Level.FINER, "Minimize Pass " + pass + ".");
             for (int i = 0; i < rows.length - 1; ++i) {
-                Femtocraft.logger.log(Level.FINEST, "Minimizing " + i + "("
+                Femtocraft.log(Level.FINEST, "Minimizing " + i + "("
                         + rows[i].size() + ")" + "->" + (i + 1) + "("
                         + rows[i + 1].size() + ")" + ".");
                 hillClimb(rows, rows[i], rows[i + 1]);
@@ -326,7 +326,7 @@ public abstract class Graph {
     }
 
     private void reduceRows(ArrayList<IGraphNode>[] rows) {
-        Femtocraft.logger.log(Level.FINE, "Reducing row widths.");
+        Femtocraft.log(Level.FINE, "Reducing row widths.");
         for (int i = 0; i < rows.length; ++i) {
             ArrayList<IGraphNode> row = rows[i];
             int ri = 0;

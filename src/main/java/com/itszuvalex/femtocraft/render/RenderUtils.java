@@ -420,7 +420,7 @@ public class RenderUtils {
         GL11.glDisable(GL11.GL_BLEND);
     }
 
-    public static ResourceLocation particleLocation = new ResourceLocation(Femtocraft.ID.toLowerCase(), "textures/particles/particles.png");
+    public static ResourceLocation particleLocation = new ResourceLocation(Femtocraft.ID().toLowerCase(), "textures/particles/particles.png");
 
     public static EntityFX spawnParticle(World world, String name, double x, double y, double z) {
         Minecraft mc = Minecraft.getMinecraft();

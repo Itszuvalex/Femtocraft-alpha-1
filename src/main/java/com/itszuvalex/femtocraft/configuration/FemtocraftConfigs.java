@@ -840,7 +840,7 @@ public class FemtocraftConfigs {
 
             FemtocraftConfigHelper.loadClassConstants(config);
         } catch (Exception e) {
-            Femtocraft.logger.log(Level.SEVERE, "Error occured when attempting to load from configs.");
+            Femtocraft.log(Level.SEVERE, "Error occured when attempting to load from configs.");
             // failed to load configs log
         } finally {
             if (config.hasChanged()) {

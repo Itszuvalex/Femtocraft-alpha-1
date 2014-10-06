@@ -40,7 +40,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiNanoFabricator extends GuiContainer {
     public static final ResourceLocation texture = new ResourceLocation(
-            Femtocraft.ID.toLowerCase(), "textures/guis/NanoFabricator.png");
+            Femtocraft.ID().toLowerCase(), "textures/guis/NanoFabricator.png");
     private TileEntityNanoFabricator fabricatorInventory;
 
     public GuiNanoFabricator(EntityPlayer player, InventoryPlayer par1InventoryPlayer,

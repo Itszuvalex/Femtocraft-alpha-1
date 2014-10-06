@@ -51,7 +51,7 @@ public class BlockAtmosphericChargingCapacitor extends BlockBase implements IAtm
 
     public BlockAtmosphericChargingCapacitor(int par1) {
         super(par1, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("BlockAtmosphericChargingCapacitor");
         setHardness(1.0f);
         setStepSound(Block.soundMetalFootstep);
@@ -126,25 +126,25 @@ public class BlockAtmosphericChargingCapacitor extends BlockBase implements IAtm
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        capacitorConnector = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase()
+        capacitorConnector = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                     .toLowerCase()
                 + ":" +
                 "AtmosphericChargingCapacitor_connector");
-        capacitorConnectorBot = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase
-                        () +
+        capacitorConnectorBot = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                        .toLowerCase
+                                                                                () +
                 ":" +
                 "AtmosphericChargingCapacitor_connector_bot");
-        blockIcon = capacitorSide = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase()
+        blockIcon = capacitorSide = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                            .toLowerCase()
                 + ":" +
                 "AtmosphericChargingCapacitor_side");
-        capacitorTop = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase()
+        capacitorTop = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                               .toLowerCase()
                 + ":" +
                 "AtmosphericChargingCapacitor_top");
-        capacitorBot = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase()
+        capacitorBot = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                               .toLowerCase()
                 + ":" +
                 "AtmosphericChargingCapacitor_bot");
     }

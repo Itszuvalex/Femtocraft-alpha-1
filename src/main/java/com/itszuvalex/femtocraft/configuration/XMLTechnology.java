@@ -49,7 +49,7 @@ public class XMLTechnology {
 
     public XMLTechnology(File file) {
         techFile = file;
-        assemblyRecipes = Femtocraft.recipeManager.assemblyRecipes;
+        assemblyRecipes = Femtocraft.recipeManager().assemblyRecipes;
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -215,7 +215,7 @@ public class XMLTechnology {
     }
 
     List<ResearchTechnology> loadDefaultTechnologies() {
-        Femtocraft.logger.log(Level.INFO, "Loading default Technologies from XML.");
+        Femtocraft.log(Level.INFO, "Loading default Technologies from XML.");
 
         NodeList nodes = getTechnologies();
         List<ResearchTechnology> techs = FemtocraftTechnologies.defaultTechnologies();
@@ -223,7 +223,7 @@ public class XMLTechnology {
             techs.set(i, loadTechnology(techs.get(i), nodes));
         }
 
-        Femtocraft.logger.log(Level.INFO, "Finished loading default technologies from XML.");
+        Femtocraft.log(Level.INFO, "Finished loading default technologies from XML.");
         return techs;
     }
 

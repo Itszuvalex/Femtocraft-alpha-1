@@ -39,7 +39,7 @@ public class BlockResearchComputer extends TileContainer {
     public BlockResearchComputer(int par1) {
         super(par1, Material.iron);
         setUnlocalizedName("blockResearchComputer");
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
     }
 
     /*
@@ -68,9 +68,9 @@ public class BlockResearchComputer extends TileContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BasicMachineBlockSide");
-        top = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":"
+        top = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":"
                 + "BlockResearchComputer_top");
     }
 

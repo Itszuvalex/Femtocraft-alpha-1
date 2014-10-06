@@ -36,16 +36,16 @@ public class TechnologyGraph extends MapGraph<String> {
 
     public TechnologyGraph(HashMap<String, ResearchTechnology> technologies) {
         super();
-        Femtocraft.logger.log(Level.INFO, "Creating Graph of Technologies.");
+        Femtocraft.log(Level.INFO, "Creating Graph of Technologies.");
         HashMap<String, IGraphNode> nodes = new HashMap<String, IGraphNode>();
 
-        Femtocraft.logger.log(Level.FINE, "Transferring Technologies to Nodes.");
+        Femtocraft.log(Level.FINE, "Transferring Technologies to Nodes.");
         // Fill nodes dictionary.
         for (String name : technologies.keySet()) {
             nodes.put(name, new TechNode(technologies.get(name)));
         }
 
-        Femtocraft.logger.log(Level.FINE, "Linking edges.");
+        Femtocraft.log(Level.FINE, "Linking edges.");
         // Add edges
         for (String name : technologies.keySet()) {
             TechNode node = (TechNode) nodes.get(name);

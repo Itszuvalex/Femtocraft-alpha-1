@@ -32,7 +32,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiNanoCube extends GuiContainer {
     public static final ResourceLocation texture = new ResourceLocation(
-            Femtocraft.ID.toLowerCase(), "textures/guis/NanoCube.png");
+            Femtocraft.ID().toLowerCase(), "textures/guis/NanoCube.png");
     private final TileEntityNanoCubePort controller;
 
     public GuiNanoCube(TileEntityNanoCubePort controller) {

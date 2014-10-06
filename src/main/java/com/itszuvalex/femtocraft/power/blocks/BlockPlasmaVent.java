@@ -34,14 +34,14 @@ import net.minecraft.client.renderer.texture.IconRegister;
 public class BlockPlasmaVent extends BlockBase {
     public BlockPlasmaVent(int id) {
         super(id, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("BlockPlasmaVent");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockPlasmaVent");
     }
 }

@@ -32,8 +32,8 @@ public class ItemBase extends Item {
     public ItemBase(int par1, String unlocalizedName) {
         super(par1);
         setMaxStackSize(64);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName(unlocalizedName);
-        setTextureName(Femtocraft.ID.toLowerCase() + ":" + unlocalizedName);
+        setTextureName(Femtocraft.ID().toLowerCase() + ":" + unlocalizedName);
     }
 }

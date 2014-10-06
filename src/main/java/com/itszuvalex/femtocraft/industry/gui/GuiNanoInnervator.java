@@ -38,7 +38,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiNanoInnervator extends GuiContainer {
     public static final ResourceLocation texture = new ResourceLocation(
-            Femtocraft.ID.toLowerCase(), "textures/guis/NanoInnervator.png");
+            Femtocraft.ID().toLowerCase(), "textures/guis/NanoInnervator.png");
     private TileEntityNanoInnervator furnaceInventory;
 
     public GuiNanoInnervator(EntityPlayer player, InventoryPlayer par1InventoryPlayer,

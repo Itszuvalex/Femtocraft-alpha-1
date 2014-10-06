@@ -34,7 +34,7 @@ import net.minecraft.world.World;
 public class BlockOrbitalEqualizer extends BlockPowerContainer {
     public BlockOrbitalEqualizer(int par1) {
         super(par1, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("BlockOrbitalEqualizer");
         setHardness(1.0f);
         setStepSound(Block.soundStoneFootstep);
@@ -43,7 +43,7 @@ public class BlockOrbitalEqualizer extends BlockPowerContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockOrbitalEqualizer");
     }
 

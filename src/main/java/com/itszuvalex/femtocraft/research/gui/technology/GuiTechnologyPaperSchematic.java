@@ -66,7 +66,7 @@ public class GuiTechnologyPaperSchematic extends GuiTechnology {
                         y + height / 2,
                         width,
                         height / 2,
-                        new ItemStack[]{new ItemStack(Femtocraft.itemIngotFarenite),
+                        new ItemStack[]{new ItemStack(Femtocraft.itemIngotFarenite()),
                                 new ItemStack(Item.dyePowder, 1, 4)},
                         mouseX,
                         mouseY,
@@ -101,7 +101,7 @@ public class GuiTechnologyPaperSchematic extends GuiTechnology {
                                 new ItemStack(Item.ingotGold),
                                 new ItemStack(Item.ingotGold),
                                 new ItemStack(Item.ingotGold),
-                                new ItemStack(Femtocraft.itemSpool),
+                                new ItemStack(Femtocraft.itemSpool()),
                                 new ItemStack(Item.ingotGold),
                                 new ItemStack(Item.ingotGold),
                                 new ItemStack(Item.ingotGold),
@@ -119,16 +119,16 @@ public class GuiTechnologyPaperSchematic extends GuiTechnology {
                         width,
                         height / 2,
                         new ItemStack[]{
-                                new ItemStack(Femtocraft.itemConductivePowder), null,
-                                null, new ItemStack(Femtocraft.itemBoard)},
+                                new ItemStack(Femtocraft.itemConductivePowder()), null,
+                                null, new ItemStack(Femtocraft.itemBoard())},
                         mouseX,
                         mouseY,
                         tooltip,
                         "Filling a itemBoard with conductive powder, then running it through an oven, produces a itemBoard suitable for wiring."
                 );
                 renderCraftingGridWithInfo(x, y + height / 2, width, height / 2,
-                        new ItemStack[]{new ItemStack(Femtocraft.itemSpoolGold),
-                                null, null, new ItemStack(Femtocraft.itemDopedBoard)},
+                        new ItemStack[]{new ItemStack(Femtocraft.itemSpoolGold()),
+                                null, null, new ItemStack(Femtocraft.itemDopedBoard())},
                         mouseX, mouseY, tooltip,
                         "Simply wire the connections using gold wiring to produce the needed circuit."
                 );

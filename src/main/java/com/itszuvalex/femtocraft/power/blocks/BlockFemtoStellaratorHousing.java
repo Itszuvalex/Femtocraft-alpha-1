@@ -42,7 +42,7 @@ public class BlockFemtoStellaratorHousing extends TileContainer {
     public BlockFemtoStellaratorHousing(int par1) {
         super(par1, Material.iron);
         setUnlocalizedName("BlockStellaratorHousing");
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         icons = new Icon[5][];
         for (int i = 0; i < icons.length; ++i) {
             icons[i] = new Icon[5];
@@ -148,13 +148,13 @@ public class BlockFemtoStellaratorHousing extends TileContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockFemtoStellaratorHousing_unformed");
 
         for (int x = 0; x < icons.length; ++x) {
             for (int y = 0; y < icons[x].length; ++y) {
-                icons[x][y] = par1IconRegister.registerIcon(Femtocraft.ID
-                        .toLowerCase()
+                icons[x][y] = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                      .toLowerCase()
                         + ":"
                         + "BlockFemtoStellaratorHousing_"
                         + x

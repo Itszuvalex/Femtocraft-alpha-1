@@ -43,11 +43,11 @@ public class FluidMoltenSalt extends Fluid {
 
     @Override
     public Icon getStillIcon() {
-        return Femtocraft.blockFluidMoltenSalt.stillIcon;
+        return Femtocraft.blockFluidMoltenSalt().stillIcon;
     }
 
     @Override
     public Icon getFlowingIcon() {
-        return Femtocraft.blockFluidMoltenSalt.flowingIcon;
+        return Femtocraft.blockFluidMoltenSalt().flowingIcon;
     }
 }

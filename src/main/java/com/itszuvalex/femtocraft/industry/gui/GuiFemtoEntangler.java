@@ -35,7 +35,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiFemtoEntangler extends GuiContainer {
     public static final ResourceLocation texture = new ResourceLocation(
-            Femtocraft.ID.toLowerCase(), "textures/guis/FemtoEntangler.png");
+            Femtocraft.ID().toLowerCase(), "textures/guis/FemtoEntangler.png");
     private TileEntityFemtoEntangler inventory;
 
     public GuiFemtoEntangler(EntityPlayer player, InventoryPlayer par1InventoryPlayer,

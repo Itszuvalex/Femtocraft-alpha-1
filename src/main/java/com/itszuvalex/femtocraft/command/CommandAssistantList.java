@@ -48,7 +48,7 @@ public class CommandAssistantList extends CommandBase {
         if (icommandsender instanceof EntityPlayer) {
             String username = ((EntityPlayer) icommandsender).username;
             StringBuilder str = new StringBuilder(EnumChatFormatting.YELLOW + "Assistants:\n");
-            Map<String, AssistantPermissions> assist = Femtocraft.assistantManager.getPlayerAssistants(username);
+            Map<String, AssistantPermissions> assist = Femtocraft.assistantManager().getPlayerAssistants(username);
             if (assist == null || assist.isEmpty()) {
                 str.append("None.");
             }

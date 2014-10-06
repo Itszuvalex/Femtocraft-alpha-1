@@ -44,7 +44,7 @@ public class BlockFemtoCubePort extends TileContainer {
 
     public BlockFemtoCubePort(int par1) {
         super(par1, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("BlockFemtoCubePort");
         setTickRandomly(true);
     }
@@ -99,9 +99,9 @@ public class BlockFemtoCubePort extends TileContainer {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = portInput = par1IconRegister
-                .registerIcon(Femtocraft.ID.toLowerCase() + ":"
+                .registerIcon(Femtocraft.ID().toLowerCase() + ":"
                         + "BlockFemtoCubePort_input");
-        portOutput = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        portOutput = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockFemtoCubePort_output");
     }
 

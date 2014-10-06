@@ -37,7 +37,7 @@ import org.lwjgl.opengl.GL11;
 public class GuiPhlegethonTunnel extends GuiContainer {
 
     public static final ResourceLocation texture = new ResourceLocation(
-            Femtocraft.ID.toLowerCase(), "textures/guis/PhlegethonTunnel.png");
+            Femtocraft.ID().toLowerCase(), "textures/guis/PhlegethonTunnel.png");
     private static final int activateButtonX = 14;
     private static final int activateButtonWidth = 44 - activateButtonX;
     private static final int activateButtonY = 56;

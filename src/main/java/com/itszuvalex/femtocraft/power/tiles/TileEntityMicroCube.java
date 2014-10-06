@@ -21,7 +21,6 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
-import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
 import com.itszuvalex.femtocraft.api.IInterfaceDevice;
 import com.itszuvalex.femtocraft.api.PowerContainer;
@@ -35,7 +34,6 @@ import net.minecraftforge.common.ForgeDirection;
 import java.util.Arrays;
 
 public class TileEntityMicroCube extends TileEntityPowerBase {
-    static final public String packetChannel = Femtocraft.ID + ".MCube";
     public static final int maxStorage = 10000;
     public static final EnumTechLevel ENUM_TECH_LEVEL = EnumTechLevel.MICRO;
     public boolean[] outputs = new boolean[6]; // Not @Saveable due to bit masking

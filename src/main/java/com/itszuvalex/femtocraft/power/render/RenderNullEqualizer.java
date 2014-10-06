@@ -43,7 +43,7 @@ public class RenderNullEqualizer extends TileEntitySpecialRenderer {
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
-        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Femtocraft.ID.toLowerCase(),
+        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Femtocraft.ID().toLowerCase(),
                 "textures/blocks/blockNullEqualizer.png"));
         GL11.glPushMatrix();
         GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);

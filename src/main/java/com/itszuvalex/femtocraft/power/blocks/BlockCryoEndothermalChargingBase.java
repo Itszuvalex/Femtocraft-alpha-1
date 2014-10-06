@@ -34,14 +34,14 @@ import net.minecraft.client.renderer.texture.IconRegister;
 public class BlockCryoEndothermalChargingBase extends BlockBase {
     public BlockCryoEndothermalChargingBase(int id) {
         super(id, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("BlockCryoEndothermalChargingBase");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockCryoEndothermalChargingBase");
     }
 }

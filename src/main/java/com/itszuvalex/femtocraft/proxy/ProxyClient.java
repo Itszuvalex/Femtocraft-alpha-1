@@ -21,7 +21,6 @@
 
 package com.itszuvalex.femtocraft.proxy;
 
-import com.itszuvalex.femtocraft.consumables.processing.blocks.RenderCuttingBoard;
 import com.itszuvalex.femtocraft.power.render.*;
 import com.itszuvalex.femtocraft.render.RenderSimpleMachine;
 import com.itszuvalex.femtocraft.transport.items.render.RenderVacuumTube;
@@ -46,12 +45,6 @@ public class ProxyClient extends ProxyCommon {
     public static int CuttingBoardRenderPass;
     public static int cuttingBoardRenderType;
     public static int FemtocraftCryoEndothermalChargingCoilRenderID;
-
-
-    public static void setCustomRenderers() {
-        cuttingBoardRenderType = RenderingRegistry.getNextAvailableRenderId();
-        RenderingRegistry.registerBlockHandler(new RenderCuttingBoard());
-    }
 
     @Override
     public void registerRendering() {

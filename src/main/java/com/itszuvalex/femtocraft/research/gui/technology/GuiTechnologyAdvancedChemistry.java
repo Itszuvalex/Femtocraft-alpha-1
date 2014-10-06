@@ -35,7 +35,7 @@ public class GuiTechnologyAdvancedChemistry extends GuiTechnology {
     public GuiTechnologyAdvancedChemistry(GuiResearch guiResearch,
                                           ResearchTechnologyStatus status) {
         super(guiResearch, status);
-        recipes = Femtocraft.recipeManager.assemblyRecipes
+        recipes = Femtocraft.recipeManager().assemblyRecipes
                 .getRecipesForTechnology(status.tech);
     }
 

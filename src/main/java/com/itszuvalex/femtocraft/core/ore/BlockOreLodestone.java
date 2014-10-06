@@ -46,10 +46,10 @@ public class BlockOreLodestone extends TileContainer {
     @Configurable(comment = "Minimum amount of Lodestone nuggets to drop.")
     public static int DROP_AMOUNT_MIN = 2;
     @Configurable(comment = "Set to false to prevent tile entity ticks, and prevent Magnetism from pulling items from" +
-                            " your inventory.")
+            " your inventory.")
     public static boolean MAGNETIC = true;
     @Configurable(comment = "Set to false to prevent the ore from automatically pulling magnetic items from the hands" +
-                            " of players who left click this block.")
+            " of players who left click this block.")
     public static boolean PULL_MAGNETS_FROM_HAND = true;
 
     @Override
@@ -59,8 +59,8 @@ public class BlockOreLodestone extends TileContainer {
 
     public BlockOreLodestone(int id) {
         super(id, Material.rock);
-        setCreativeTab(Femtocraft.femtocraftTab);
-        setTextureName(Femtocraft.ID.toLowerCase() + ":" + "BlockOreLodestone");
+        setCreativeTab(Femtocraft.femtocraftTab());
+        setTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockOreLodestone");
         setUnlocalizedName("BlockOreLodestone");
         setHardness(3.0f);
         setStepSound(Block.soundStoneFootstep);
@@ -70,8 +70,8 @@ public class BlockOreLodestone extends TileContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
-                                                               .toLowerCase() + ":" + "BlockOreLodestone");
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                 .toLowerCase() + ":" + "BlockOreLodestone");
     }
 
     @Override
@@ -88,7 +88,7 @@ public class BlockOreLodestone extends TileContainer {
 
     @Override
     public int idDropped(int par1, Random random, int par2) {
-        return Femtocraft.itemNuggetLodestone.itemID;
+        return Femtocraft.itemNuggetLodestone().itemID;
     }
 
     @Override

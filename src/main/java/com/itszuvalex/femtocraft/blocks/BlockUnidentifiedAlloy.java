@@ -34,8 +34,8 @@ import net.minecraft.world.World;
 public class BlockUnidentifiedAlloy extends BlockBase {
     public BlockUnidentifiedAlloy(int id) {
         super(id, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
-        setTextureName(Femtocraft.ID.toLowerCase() + ":" + "BlockUnidentifiedAlloy");
+        setCreativeTab(Femtocraft.femtocraftTab());
+        setTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockUnidentifiedAlloy");
         setUnlocalizedName("BlockUnidentifiedAlloy");
         setBlockUnbreakable();
         setStepSound(Block.soundMetalFootstep);
@@ -52,7 +52,7 @@ public class BlockUnidentifiedAlloy extends BlockBase {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "BlockUnidentifiedAlloy");
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                 .toLowerCase() + ":" + "BlockUnidentifiedAlloy");
     }
 }

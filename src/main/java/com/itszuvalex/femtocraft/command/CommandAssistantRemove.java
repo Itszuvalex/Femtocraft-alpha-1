@@ -44,7 +44,7 @@ public class CommandAssistantRemove extends CommandBase {
     @Override
     public List addTabCompletionOptions(ICommandSender icommandsender, String[] astring) {
         if (icommandsender instanceof EntityPlayer) {
-            return new ArrayList(Femtocraft.assistantManager.getPlayerAssistants(((EntityPlayer) icommandsender)
+            return new ArrayList(Femtocraft.assistantManager().getPlayerAssistants(((EntityPlayer) icommandsender)
                     .username).keySet());
         }
         return Arrays.asList(MinecraftServer.getServer().getAllUsernames());
@@ -67,7 +67,7 @@ public class CommandAssistantRemove extends CommandBase {
                 throw new WrongUsageException(getCommandUsage(icommandsender));
             }
             String username = ((EntityPlayer) icommandsender).username;
-            if (Femtocraft.assistantManager.removeAssistantFrom(username, astring[0])) {
+            if (Femtocraft.assistantManager().removeAssistantFrom(username, astring[0])) {
                 FemtocraftUtils.sendMessageToPlayer(username, astring[0] + " successfully removed as assistant!");
                 FemtocraftUtils.sendMessageToPlayer(astring[0], username + " just removed you as his assistant!");
             } else {

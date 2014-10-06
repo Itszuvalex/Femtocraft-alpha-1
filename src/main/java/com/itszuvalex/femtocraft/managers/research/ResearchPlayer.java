@@ -63,8 +63,8 @@ public class ResearchPlayer {
      * @return True if researchTechnology successfully marked as researched. False otherwise.
      */
     public boolean researchTechnology(String name, boolean force) {
-        ResearchTechnology rtech = Femtocraft.researchManager
-                .getTechnology(name);
+        ResearchTechnology rtech = Femtocraft.researchManager()
+                                             .getTechnology(name);
         ResearchTechnologyStatus tech = techStatus.get(name);
         if (tech == null && !force) {
             return false;
@@ -82,14 +82,14 @@ public class ResearchPlayer {
         if (!MinecraftForge.EVENT_BUS.post(event)) {
             tech.researched = true;
             EntityPlayerMP player = MinecraftServer.getServer()
-                    .getConfigurationManager().getPlayerForUsername(username);
+                                                   .getConfigurationManager().getPlayerForUsername(username);
             if (player != null) {
-                ResearchTechnology techno = Femtocraft.researchManager
-                        .getTechnology(name);
+                ResearchTechnology techno = Femtocraft.researchManager()
+                                                      .getTechnology(name);
                 if (techno != null) {
                     FemtocraftUtils.sendMessageToPlayer(player, techno.level.getTooltipEnum() + name
-                                                                + EnumChatFormatting.RESET
-                                                                + " successfully researched.");
+                            + EnumChatFormatting.RESET
+                            + " successfully researched.");
                 }
             }
             discoverNewTechs(rtech, true);
@@ -103,8 +103,8 @@ public class ResearchPlayer {
     // ---------------------------------------------------------
 
     private void discoverNewTechs(ResearchTechnology discoverer, boolean notify) {
-        for (ResearchTechnology t : Femtocraft.researchManager
-                .getTechnologies()) {
+        for (ResearchTechnology t : Femtocraft.researchManager()
+                                              .getTechnologies()) {
             if (t.prerequisites != null) {
                 ResearchTechnologyStatus ts = techStatus.get(t.name);
                 if (ts != null && ts.researched) {
@@ -114,7 +114,7 @@ public class ResearchPlayer {
                 boolean discovererPrereq = false;
                 boolean shouldDiscover = true;
                 for (String st : t.prerequisites) {
-                    ResearchTechnology pt = Femtocraft.researchManager.getTechnology(st);
+                    ResearchTechnology pt = Femtocraft.researchManager().getTechnology(st);
 
                     if (pt == discoverer && discoverer == null) {
                         discovererPrereq = true;
@@ -136,16 +136,16 @@ public class ResearchPlayer {
                     discoverTechnology(t.name);
                     if (notify) {
                         EntityPlayerMP player = MinecraftServer.getServer()
-                                .getConfigurationManager()
-                                .getPlayerForUsername(username);
+                                                               .getConfigurationManager()
+                                                               .getPlayerForUsername(username);
                         if (player != null) {
-                            ResearchTechnology techno = Femtocraft.researchManager
-                                    .getTechnology(t.name);
+                            ResearchTechnology techno = Femtocraft.researchManager()
+                                                                  .getTechnology(t.name);
                             if (techno != null) {
                                 FemtocraftUtils.sendMessageToPlayer(player, "New technology "
-                                                                            + techno.level.getTooltipEnum()
-                                                                            + t.name + EnumChatFormatting.RESET
-                                                                            + " discovered.");
+                                        + techno.level.getTooltipEnum()
+                                        + t.name + EnumChatFormatting.RESET
+                                        + " discovered.");
                             }
                         }
                     }
@@ -158,7 +158,7 @@ public class ResearchPlayer {
         if (techStatus.containsKey(name)) return true;
 
         EventTechnology.TechnologyDiscoveredEvent event = new EventTechnology.TechnologyDiscoveredEvent(
-                username, Femtocraft.researchManager.getTechnology(name));
+                username, Femtocraft.researchManager().getTechnology(name));
         if (!MinecraftForge.EVENT_BUS.post(event)) {
             techStatus.put(name, new ResearchTechnologyStatus(name));
             sync();
@@ -181,7 +181,7 @@ public class ResearchPlayer {
         }
 
         for (String str : tech.prerequisites) {
-            ResearchTechnology prereq = Femtocraft.researchManager.getTechnology(str);
+            ResearchTechnology prereq = Femtocraft.researchManager().getTechnology(str);
             if (prereq == null) continue;
             ResearchTechnologyStatus ts = techStatus.get(prereq.name);
             if (ts == null) {
@@ -219,7 +219,7 @@ public class ResearchPlayer {
 
     public void sync() {
         EntityPlayerMP player = MinecraftServer.getServer()
-                .getConfigurationManager().getPlayerForUsername(username);
+                                               .getConfigurationManager().getPlayerForUsername(username);
         if (player == null) {
             return;
         }
@@ -239,12 +239,12 @@ public class ResearchPlayer {
             packet.data = CompressedStreamTools.compress(data);
         } catch (IOException e) {
             e.printStackTrace();
-            Femtocraft.logger
-                    .log(Level.SEVERE,
-                            "Error writing "
-                            + username
-                            + "'s PlayerResearch to packet data.  It will fail to sync to his client."
-                    );
+            Femtocraft.logger()
+                      .log(Level.SEVERE,
+                              "Error writing "
+                                      + username
+                                      + "'s PlayerResearch to packet data.  It will fail to sync to his client."
+                      );
             return;
         }
         packet.length = packet.data.length;

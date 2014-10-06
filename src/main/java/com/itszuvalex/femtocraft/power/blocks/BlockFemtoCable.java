@@ -47,7 +47,7 @@ public class BlockFemtoCable extends BlockMicroCable {
 
     public BlockFemtoCable(int par1, Material par2Material) {
         super(par1, par2Material);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("blockFemtoCable");
         setHardness(1.0f);
         setStepSound(Block.soundStoneFootstep);
@@ -74,12 +74,12 @@ public class BlockFemtoCable extends BlockMicroCable {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "femtoCableCoil");
-        this.coreBorder = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" +
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "femtoCableCoil");
+        this.coreBorder = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" +
                 "femtoCableCoreBorder");
-        this.connector = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "femtoCableConnector");
-        this.coil = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "femtoCableCoil");
-        this.coilEdge = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "femtoCableCoilEdge");
-        this.border = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "femtoCableBorder");
+        this.connector = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "femtoCableConnector");
+        this.coil = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "femtoCableCoil");
+        this.coilEdge = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "femtoCableCoilEdge");
+        this.border = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "femtoCableBorder");
     }
 }

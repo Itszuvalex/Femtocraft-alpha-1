@@ -35,7 +35,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiNanoEnmesher extends GuiContainer {
     public static final ResourceLocation texture = new ResourceLocation(
-            Femtocraft.ID.toLowerCase(), "textures/guis/NanoEnmesher.png");
+            Femtocraft.ID().toLowerCase(), "textures/guis/NanoEnmesher.png");
     private TileEntityBaseEntityNanoEnmesher inventory;
 
     public GuiNanoEnmesher(EntityPlayer player, InventoryPlayer par1InventoryPlayer,

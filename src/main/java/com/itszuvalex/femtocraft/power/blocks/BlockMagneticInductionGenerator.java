@@ -37,14 +37,14 @@ import net.minecraft.world.World;
 public class BlockMagneticInductionGenerator extends TileContainer {
     public BlockMagneticInductionGenerator(int id) {
         super(id, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("BlockMagneticInductionGenerator");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockMagneticInductionGenerator");
     }
 

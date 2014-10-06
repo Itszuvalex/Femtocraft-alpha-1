@@ -41,7 +41,7 @@ public class GuiTechnologyTemporalRenderer implements ITechnologyElementRenderer
     public GuiTechnologyTemporalRenderer(GuiTechnology gui, ItemStack output, String text) {
         this.gui = gui;
         this.text = text;
-        recipe = Femtocraft.recipeManager.temporalRecipes.getRecipe(output);
+        recipe = Femtocraft.recipeManager().temporalRecipes.getRecipe(output);
     }
 
     @Override

@@ -45,7 +45,7 @@ public class BlockNanoFissionReactorHousing extends TileContainer {
 
     public BlockNanoFissionReactorHousing(int id) {
         super(id, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("BlockNanoFissionReactorHousing");
 
         formedSides = new Icon[3][];
@@ -122,12 +122,12 @@ public class BlockNanoFissionReactorHousing extends TileContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockNanoFissionReactorHousing_unformed");
 
         for (int i = 0; i < formedSides.length; ++i) {
             for (int j = 0; j < formedSides[i].length; ++j) {
-                formedSides[i][j] = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "BlockNanoFissionReactorHousing_" + i + "_" + j);
+                formedSides[i][j] = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "BlockNanoFissionReactorHousing_" + i + "_" + j);
             }
         }
     }

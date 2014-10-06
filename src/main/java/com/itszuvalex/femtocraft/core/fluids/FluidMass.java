@@ -41,11 +41,11 @@ public class FluidMass extends Fluid {
 
     @Override
     public Icon getStillIcon() {
-        return Femtocraft.blockFluidMass.stillIcon;
+        return Femtocraft.blockFluidMass().stillIcon;
     }
 
     @Override
     public Icon getFlowingIcon() {
-        return Femtocraft.blockFluidMass.flowingIcon;
+        return Femtocraft.blockFluidMass().flowingIcon;
     }
 }

@@ -195,7 +195,7 @@ public class TileEntityBaseEntityNanoEnmesher extends
             return false;
         }
 
-        DimensionalRecipe dr = Femtocraft.recipeManager.dimensionalRecipes
+        DimensionalRecipe dr = Femtocraft.recipeManager().dimensionalRecipes
                 .getRecipe(inventory.getStackInSlot(inputSlot),
                         getConfigurators()
                 );
@@ -206,7 +206,7 @@ public class TileEntityBaseEntityNanoEnmesher extends
             return false;
         }
         if (
-                !Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner(),
+                !Femtocraft.researchManager().hasPlayerResearchedTechnology(getOwner(),
                         dr.getTechnology())) {
             return false;
         }
@@ -238,7 +238,7 @@ public class TileEntityBaseEntityNanoEnmesher extends
 
     @Override
     protected void startWork() {
-        DimensionalRecipe dr = Femtocraft.recipeManager.dimensionalRecipes
+        DimensionalRecipe dr = Femtocraft.recipeManager().dimensionalRecipes
                 .getRecipe(inventory.getStackInSlot(inputSlot),
                         getConfigurators());
 
@@ -270,7 +270,7 @@ public class TileEntityBaseEntityNanoEnmesher extends
 
     @Override
     protected void finishWork() {
-        DimensionalRecipe dr = Femtocraft.recipeManager.dimensionalRecipes
+        DimensionalRecipe dr = Femtocraft.recipeManager().dimensionalRecipes
                 .getRecipe(meshStack, meshConfigStacks);
         if (dr != null) {
             int[] placeRestrictions = new int[inventory.getSizeInventory() - 1];

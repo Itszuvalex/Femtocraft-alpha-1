@@ -28,7 +28,7 @@ public class TileEntityOreLodestone extends TileEntity {
         if (count++ > numTicksPerUpdate) {
             if (worldObj.getClosestPlayer(
                     xCoord + .5d, yCoord + .5d, zCoord + .5d, minimumDistanceToNearestPlayerForUpdate) != null) {
-                FemtocraftMagnetUtils.applyMagnetismFromBlock(Femtocraft.blockOreLodestone, worldObj, xCoord, yCoord,
+                FemtocraftMagnetUtils.applyMagnetismFromBlock(Femtocraft.blockOreLodestone(), worldObj, xCoord, yCoord,
                         zCoord, (double) numTicksPerUpdate / (double) 20);
             }
             count = 0;

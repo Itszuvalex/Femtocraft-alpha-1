@@ -21,8 +21,8 @@ public class FissionReactorRegistry {
         addFissionReactorHeatSource(new ItemStack(Item.bucketLava), 0, 100);
         addFissionReactorHeatSource(new ItemStack(Item.fireballCharge), 0, 20);
         addFissionReactorHeatSource(new ItemStack(Item.bucketWater), 0, -5);
-        addFissionReactorSaltSource(new ItemStack(Femtocraft.itemIngotThFaSalt), 1000, 10);
-        addFissionReactorThoriumSource(new ItemStack(Femtocraft.itemIngotThorium), 1000, 20);
+        addFissionReactorSaltSource(new ItemStack(Femtocraft.itemIngotThFaSalt()), 1000, 10);
+        addFissionReactorThoriumSource(new ItemStack(Femtocraft.itemIngotThorium()), 1000, 20);
     }
 
 

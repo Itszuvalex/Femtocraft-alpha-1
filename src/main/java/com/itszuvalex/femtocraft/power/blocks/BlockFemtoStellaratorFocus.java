@@ -42,7 +42,7 @@ public class BlockFemtoStellaratorFocus extends TileContainer {
     public BlockFemtoStellaratorFocus(int par1) {
         super(par1, Material.iron);
         setUnlocalizedName("BlockStellaratorFocus");
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
     }
 
     @Override
@@ -100,9 +100,9 @@ public class BlockFemtoStellaratorFocus extends TileContainer {
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        blockIcon = outsideIcon = par1IconRegister.registerIcon(Femtocraft.ID
+        blockIcon = outsideIcon = par1IconRegister.registerIcon(Femtocraft.ID()
                 .toLowerCase() + ":" + "BlockFemtoStellaratorFocus");
-        insideIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase
+        insideIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase
                 () + ":" + "BlockFemtoStellaratorHollowInternals");
     }
 

@@ -39,14 +39,14 @@ import net.minecraft.world.World;
 public class BlockSisyphusStabilizer extends TileContainer {
     public BlockSisyphusStabilizer(int id) {
         super(id, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("BlockSisyphusStabilizer");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                                                        + ":" + "BlockSisyphusStabilizer");
     }
 

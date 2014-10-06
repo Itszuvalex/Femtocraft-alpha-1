@@ -42,7 +42,7 @@ public class BlockNanoCubeFrame extends TileContainer {
 
     public BlockNanoCubeFrame(int par1) {
         super(par1, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("BlockNanoCubeFrame");
         formedCorners = new Icon[4];
         formedSides = new Icon[4];
@@ -141,26 +141,26 @@ public class BlockNanoCubeFrame extends TileContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockNanoCubeFrame_unformed");
 
-        formedCorners[0] = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "BlockNanoCubeFrame_top_left");
-        formedCorners[1] = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "BlockNanoCubeFrame_top_right");
-        formedCorners[2] = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "BlockNanoCubeFrame_bot_left");
-        formedCorners[3] = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "BlockNanoCubeFrame_bot_right");
+        formedCorners[0] = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                   .toLowerCase() + ":" + "BlockNanoCubeFrame_top_left");
+        formedCorners[1] = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                   .toLowerCase() + ":" + "BlockNanoCubeFrame_top_right");
+        formedCorners[2] = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                   .toLowerCase() + ":" + "BlockNanoCubeFrame_bot_left");
+        formedCorners[3] = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                   .toLowerCase() + ":" + "BlockNanoCubeFrame_bot_right");
 
-        formedSides[0] = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "BlockNanoCubeFrame_top");
-        formedSides[1] = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "BlockNanoCubeFrame_bot");
-        formedSides[2] = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "BlockNanoCubeFrame_right");
-        formedSides[3] = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "BlockNanoCubeFrame_left");
+        formedSides[0] = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                 .toLowerCase() + ":" + "BlockNanoCubeFrame_top");
+        formedSides[1] = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                 .toLowerCase() + ":" + "BlockNanoCubeFrame_bot");
+        formedSides[2] = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                 .toLowerCase() + ":" + "BlockNanoCubeFrame_right");
+        formedSides[3] = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                 .toLowerCase() + ":" + "BlockNanoCubeFrame_left");
     }
 
     @Override

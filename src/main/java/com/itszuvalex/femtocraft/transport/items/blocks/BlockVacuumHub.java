@@ -57,7 +57,7 @@
 //        setUnlocalizedName("BlockVacuumHub");
 //        setHardness(3.5f);
 //        setStepSound(Block.soundMetalFootstep);
-//        setCreativeTab(Femtocraft.femtocraftTab);
+//        setCreativeTab(Femtocraft.femtocraftTab());
 //        setBlockBounds();
 //    }
 //
@@ -360,11 +360,11 @@
 //        straightInsetIcon = par1IconRegister.registerIcon(Femtocraft.ID
 //                .toLowerCase() + ":" +
 //                "VacuumTube_side_straight_inset");
-//        turnIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+//        turnIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
 //                + ":" + "VacuumTube_side_curved");
 //        turnInsetIcon = par1IconRegister.registerIcon(Femtocraft.ID
 //                .toLowerCase() + ":" + "VacuumTube_side_curved_inset");
-//        endIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+//        endIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
 //                + ":" + "VacuumTube_end");
 //        endInsetIcon = par1IconRegister.registerIcon(Femtocraft.ID
 //                .toLowerCase() + ":" + "VacuumTube_end_inset");

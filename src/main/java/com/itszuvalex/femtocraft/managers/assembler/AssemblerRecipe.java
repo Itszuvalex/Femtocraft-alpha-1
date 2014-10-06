@@ -142,9 +142,9 @@ public class AssemblerRecipe implements Comparable, ISaveable {
             NBTTagCompound itemCompound = (NBTTagCompound) inputList.tagAt(i);
             byte slot = itemCompound.getByte("Slot");
             if (slot != (byte) i) {
-                Femtocraft.logger
-                        .log(Level.WARNING,
-                                "Slot mismatch occurred while loading AssemblerRecipe.");
+                Femtocraft.logger()
+                          .log(Level.WARNING,
+                                  "Slot mismatch occurred while loading AssemblerRecipe.");
             }
             if (itemCompound.hasKey("item")) {
                 input[i] = ItemStack

@@ -23,7 +23,7 @@ public class FemtocraftPlayerTracker implements IPlayerTracker {
 
     @Override
     public void onPlayerChangedDimension(EntityPlayer player) {
-        PacketDispatcher.sendPacketToPlayer(Femtocraft.soundManager.getPacket(STOP_ALL_SOUNDS), (Player) player);
+        PacketDispatcher.sendPacketToPlayer(Femtocraft.soundManager().getPacket(STOP_ALL_SOUNDS), (Player) player);
     }
 
     @Override

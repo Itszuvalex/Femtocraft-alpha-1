@@ -69,14 +69,14 @@ public class TileEntityFemtoCoagulator extends TileEntityBaseEntityMicroReconstr
 
     @Override
     protected int getTicksToCook() {
-        return Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner(), TICKS_TO_COOK_UPGRADE) ?
+        return Femtocraft.researchManager().hasPlayerResearchedTechnology(getOwner(), TICKS_TO_COOK_UPGRADE) ?
                 TICKS_TO_COOK_POST :
                 TICKS_TO_COOK_PRE;
     }
 
     @Override
     protected int getPowerToCook() {
-        return Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner(),
+        return Femtocraft.researchManager().hasPlayerResearchedTechnology(getOwner(),
                 POWER_TO_COOK_UPGRADE) ? POWER_TO_COOK_POST : POWER_TO_COOK_PRE;
     }
 
@@ -87,7 +87,7 @@ public class TileEntityFemtoCoagulator extends TileEntityBaseEntityMicroReconstr
 
     @Override
     protected int getMaxSimultaneousSmelt() {
-        return Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner(),
+        return Femtocraft.researchManager().hasPlayerResearchedTechnology(getOwner(),
                 MAX_SMELT_UPGRADE) ? MAX_SMELT_POST : MAX_SMELT_PRE;
     }
 }

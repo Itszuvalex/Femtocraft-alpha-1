@@ -40,7 +40,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiFemtoCoagulator extends GuiContainer {
     public static final ResourceLocation texture = new ResourceLocation(
-            Femtocraft.ID.toLowerCase(), "textures/guis/FemtoCoagulator.png");
+            Femtocraft.ID().toLowerCase(), "textures/guis/FemtoCoagulator.png");
     private TileEntityFemtoCoagulator coagulatorInventory;
 
     public GuiFemtoCoagulator(EntityPlayer player, InventoryPlayer par1InventoryPlayer,

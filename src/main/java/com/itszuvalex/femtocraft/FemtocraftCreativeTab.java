@@ -32,7 +32,7 @@ public class FemtocraftCreativeTab extends CreativeTabs {
 
     @Override
     public ItemStack getIconItemStack() {
-        return new ItemStack(Femtocraft.itemCubit);
+        return new ItemStack(Femtocraft.itemCubit());
     }
 
 }

@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft.research.items;
 
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.Femtocraft$;
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,14 +38,14 @@ public class ItemPortableResearchComputer extends Item {
 
     public ItemPortableResearchComputer(int par1) {
         super(par1);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setMaxStackSize(1);
         setUnlocalizedName("ItemPortableResearchComputer");
     }
 
     @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
-        par3EntityPlayer.openGui(Femtocraft.instance,
+        par3EntityPlayer.openGui(Femtocraft$.MODULE$,
                 FemtocraftGuiHandler.ResearchComputerGuiID,
                 par2World, (int) par3EntityPlayer.posX,
                 (int) par3EntityPlayer.posY,
@@ -54,7 +55,7 @@ public class ItemPortableResearchComputer extends Item {
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        itemIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" +
                 "ItemPortableResearchComputer");
     }

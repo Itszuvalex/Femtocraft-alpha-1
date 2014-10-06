@@ -40,7 +40,7 @@ public class FemtocraftConnectionHandler implements IConnectionHandler {
     public void playerLoggedIn(Player player, NetHandler netHandler,
                                INetworkManager manager) {
         ResearchPlayer pr = Femtocraft.researchManager
-                .addPlayerResearch(((EntityPlayer) player).username);
+                ().addPlayerResearch(((EntityPlayer) player).username);
         pr.sync(player);
     }
 

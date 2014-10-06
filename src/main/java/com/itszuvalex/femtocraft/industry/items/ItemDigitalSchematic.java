@@ -36,9 +36,9 @@ public class ItemDigitalSchematic extends ItemAssemblySchematic {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
+        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID()
                                                               .toLowerCase() + ":" + "ItemDigitalSchematic");
-        this.keyedIcon = par1IconRegister.registerIcon(Femtocraft.ID
+        this.keyedIcon = par1IconRegister.registerIcon(Femtocraft.ID()
                                                                .toLowerCase() + ":" + "ItemDigitalSchematicKeyed");
     }
 

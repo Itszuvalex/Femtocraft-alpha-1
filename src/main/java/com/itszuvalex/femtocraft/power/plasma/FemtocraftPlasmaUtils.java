@@ -109,7 +109,7 @@ public class FemtocraftPlasmaUtils {
         int newZ = loc.z + dir.offsetZ;
 
         if (loc.world.isAirBlock(newX, newY, newZ)) {
-            loc.world.setBlock(newX, newY, newZ, Femtocraft.blockPlasma.blockID);
+            loc.world.setBlock(newX, newY, newZ, Femtocraft.blockPlasma().blockID);
             loc.world.setBlockMetadataWithNotify(newX, newY, newZ, dir.ordinal(), 2);
             TileEntityPlasma te = (TileEntityPlasma) loc.world.getBlockTileEntity(newX, newY, newZ);
             if (te != null) {

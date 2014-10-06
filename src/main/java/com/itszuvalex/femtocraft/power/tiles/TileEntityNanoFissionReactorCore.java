@@ -46,7 +46,7 @@ import java.util.logging.Level;
 
 public class TileEntityNanoFissionReactorCore extends TileEntityBase implements IInventory, IFluidHandler,
                                                                                 IMultiBlockComponent {
-    public static final String PACKET_CHANNEL = "Femtocraft" + "." + "fiss";
+    public static final String PACKET_CHANNEL = Femtocraft.FISSION_REACTOR_CHANNEL();
 
     public static final byte incrementAction = 0;
     public static final byte decrementAction = 1;
@@ -297,7 +297,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     }
 
     public int addCooledSalt(int amount) {
-        int ret = cooledSaltTank.fill(new FluidStack(Femtocraft.fluidCooledMoltenSalt, amount), true);
+        int ret = cooledSaltTank.fill(new FluidStack(Femtocraft.fluidCooledMoltenSalt(), amount), true);
         if (ret > 0) {
             setModified();
         }
@@ -305,7 +305,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     }
 
     public int addMoltenSalt(int amount) {
-        int ret = moltenSaltTank.fill(new FluidStack(Femtocraft.fluidMoltenSalt, amount), true);
+        int ret = moltenSaltTank.fill(new FluidStack(Femtocraft.fluidMoltenSalt(), amount), true);
         if (ret > 0) {
             setModified();
         }
@@ -350,7 +350,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     @Override
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
         FluidStack fill = null;
-        if (resource.getFluid() == Femtocraft.fluidCooledContaminatedMoltenSalt) {
+        if (resource.getFluid() == Femtocraft.fluidCooledContaminatedMoltenSalt()) {
             int amount = resource.amount;
             //limit based on thorium amount
             amount = (int) Math.min(amount, Math.min(Math.max(getThoriumStoreCurrent() - minimumThoriumConcentrationToMeltSalt, 0),
@@ -360,12 +360,12 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
                     (moltenSaltTank.getCapacity() - getMoltenSaltAmount()) /
                             contaminatedSaltLossRatio);
             //create
-            fill = new FluidStack(Femtocraft.fluidCooledMoltenSalt, amount);
+            fill = new FluidStack(Femtocraft.fluidCooledMoltenSalt(), amount);
             if (doFill) {
                 thoriumStoreCurrent -= amount * contaminatedThoriumLossRatio;
             }
         }
-        else if (resource.getFluid() == Femtocraft.fluidCooledMoltenSalt) {
+        else if (resource.getFluid() == Femtocraft.fluidCooledMoltenSalt()) {
             fill = resource;
         }
         else {
@@ -381,7 +381,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
 
     @Override
     public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-        if (resource.getFluid() != Femtocraft.fluidMoltenSalt) return null;
+        if (resource.getFluid() != Femtocraft.fluidMoltenSalt()) return null;
         return drain(from, resource.amount, doDrain);
     }
 
@@ -397,12 +397,12 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
 
     @Override
     public boolean canFill(ForgeDirection from, Fluid fluid) {
-        return fluid == Femtocraft.fluidCooledContaminatedMoltenSalt || fluid == Femtocraft.fluidCooledMoltenSalt;
+        return fluid == Femtocraft.fluidCooledContaminatedMoltenSalt() || fluid == Femtocraft.fluidCooledMoltenSalt();
     }
 
     @Override
     public boolean canDrain(ForgeDirection from, Fluid fluid) {
-        return fluid == Femtocraft.fluidMoltenSalt;
+        return fluid == Femtocraft.fluidMoltenSalt();
     }
 
     @Override
@@ -517,7 +517,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
 
     public void setCooledMoltenSalt(int cooledMoltenSalt) {
         if (cooledSaltTank.getFluid() == null) {
-            cooledSaltTank.fill(new FluidStack(Femtocraft.fluidCooledMoltenSalt, cooledMoltenSalt), true);
+            cooledSaltTank.fill(new FluidStack(Femtocraft.fluidCooledMoltenSalt(), cooledMoltenSalt), true);
         }
         else {
             cooledSaltTank.getFluid().amount = cooledMoltenSalt;
@@ -526,7 +526,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
 
     public void setMoltenSalt(int moltenSalt) {
         if (moltenSaltTank.getFluid() == null) {
-            moltenSaltTank.fill(new FluidStack(Femtocraft.fluidMoltenSalt, moltenSalt), true);
+            moltenSaltTank.fill(new FluidStack(Femtocraft.fluidMoltenSalt(), moltenSalt), true);
         }
         else {
             moltenSaltTank.getFluid().amount = moltenSalt;
@@ -587,7 +587,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
                 abortReaction();
                 break;
             default:
-                Femtocraft.logger.log(Level.SEVERE,
+                Femtocraft.logger().log(Level.SEVERE,
                         "Received invalid action for Fusion Reactor at x-" + xCoord + " y-" + yCoord + " z-" + zCoord +
                                 " at dimension-" + worldObj.provider.dimensionId + ".");
         }

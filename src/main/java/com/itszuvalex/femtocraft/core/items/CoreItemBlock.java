@@ -37,7 +37,7 @@ public class CoreItemBlock extends ItemBlock {
 
     public CoreItemBlock(int par1) {
         super(par1);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
     }
 
     @Override

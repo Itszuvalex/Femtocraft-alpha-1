@@ -50,9 +50,9 @@ public class BlockPlasma extends BlockContainer {
 
     public BlockPlasma(int par1) {
         super(par1, Material.lava);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setBlockUnbreakable();
-        setTextureName(Femtocraft.ID.toLowerCase() + ":" + "BlockPlasma");
+        setTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockPlasma");
     }
 
     @Override

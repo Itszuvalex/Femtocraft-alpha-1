@@ -32,14 +32,14 @@ public class ItemFemtoInterfaceDevice extends InterfaceDevice {
     public ItemFemtoInterfaceDevice(int par1) {
         super(par1, EnumTechLevel.FEMTO);
         setMaxStackSize(1);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "ItemFemtoInterfaceDevice");
+        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                .toLowerCase() + ":" + "ItemFemtoInterfaceDevice");
     }
 
 }

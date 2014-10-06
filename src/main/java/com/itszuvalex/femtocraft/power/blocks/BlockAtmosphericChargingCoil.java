@@ -45,7 +45,7 @@ public class BlockAtmosphericChargingCoil extends BlockBase implements IAtmosphe
 
     public BlockAtmosphericChargingCoil(int par1) {
         super(par1, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("BlockAtmosphericChargingCoil");
         setHardness(1.0f);
         setStepSound(Block.soundMetalFootstep);
@@ -120,11 +120,11 @@ public class BlockAtmosphericChargingCoil extends BlockBase implements IAtmosphe
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        blockIcon = coilConnector = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" +
+        blockIcon = coilConnector = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                            .toLowerCase() + ":" +
                 "MicroChargingCoil_connector");
-        coilConnectorTop = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" +
+        coilConnectorTop = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                   .toLowerCase() + ":" +
                 "MicroChargingCoil_coilConnectorTop");
     }
 

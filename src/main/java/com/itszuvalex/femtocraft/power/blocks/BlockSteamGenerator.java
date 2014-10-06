@@ -38,13 +38,13 @@ import net.minecraft.world.World;
 public class BlockSteamGenerator extends TileContainer {
     public BlockSteamGenerator(int par1) {
         super(par1, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("BlockSteamGenerator");
     }
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":" + "BlockSteamGenerator");
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "BlockSteamGenerator");
     }
 
     @Override

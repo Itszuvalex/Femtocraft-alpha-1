@@ -44,7 +44,7 @@ public class BlockNanoCubePort extends TileContainer {
 
     public BlockNanoCubePort(int par1) {
         super(par1, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("BlockNanoCubePort");
         setTickRandomly(true);
     }
@@ -98,9 +98,9 @@ public class BlockNanoCubePort extends TileContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = portInput = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        this.blockIcon = portInput = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockNanoCubePort_input");
-        portOutput = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        portOutput = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockNanoCubePort_output");
     }
 

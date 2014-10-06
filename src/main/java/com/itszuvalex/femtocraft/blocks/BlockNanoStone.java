@@ -34,8 +34,8 @@ import net.minecraft.world.World;
 public class BlockNanoStone extends BlockBase {
     public BlockNanoStone(int id) {
         super(id, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
-        setTextureName(Femtocraft.ID.toLowerCase() + ":" + "BlockNanoStone");
+        setCreativeTab(Femtocraft.femtocraftTab());
+        setTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockNanoStone");
         setUnlocalizedName("BlockNanoStone");
         setHardness(7.0f);
         setStepSound(Block.soundMetalFootstep);
@@ -52,7 +52,7 @@ public class BlockNanoStone extends BlockBase {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID()
                 .toLowerCase() + ":" + "BlockNanoStone");
     }
 }

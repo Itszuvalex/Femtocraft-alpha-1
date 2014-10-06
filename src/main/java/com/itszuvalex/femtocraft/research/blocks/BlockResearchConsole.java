@@ -45,7 +45,7 @@ public class BlockResearchConsole extends TileContainer {
 
     public BlockResearchConsole(int par1) {
         super(par1, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("BlockResearchConsole");
     }
 
@@ -65,11 +65,11 @@ public class BlockResearchConsole extends TileContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        blockIcon = side = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "BlockResearchConsole_side");
-        top = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":"
+        blockIcon = side = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                   .toLowerCase() + ":" + "BlockResearchConsole_side");
+        top = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":"
                 + "BlockResearchConsole_top");
-        bot = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase() + ":"
+        bot = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":"
                 + "BlockResearchConsole_bot");
     }
 

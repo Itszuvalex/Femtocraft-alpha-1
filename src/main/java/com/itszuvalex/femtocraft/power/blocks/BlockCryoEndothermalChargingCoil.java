@@ -39,7 +39,7 @@ public class BlockCryoEndothermalChargingCoil extends BlockBase {
 
     public BlockCryoEndothermalChargingCoil(int id) {
         super(id, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("BlockCryoEndothermalChargingCoil");
         setBlockBounds(4.f / 16.f, 0, 4.f / 16.f, 12.f / 16.f, 1, 12.f / 16.f);
     }
@@ -47,12 +47,12 @@ public class BlockCryoEndothermalChargingCoil extends BlockBase {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        blockIcon = coilConnector = par1IconRegister.registerIcon(Femtocraft.ID
-                                                                          .toLowerCase() + ":" +
-                                                                  "BlockCryoEndothermalChargingCoil_connector");
-        coilConnectorTop = par1IconRegister.registerIcon(Femtocraft.ID
-                                                                 .toLowerCase() + ":" +
-                                                         "BlockCryoEndothermalChargingCoil_connector_top");
+        blockIcon = coilConnector = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                            .toLowerCase() + ":" +
+                "BlockCryoEndothermalChargingCoil_connector");
+        coilConnectorTop = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                   .toLowerCase() + ":" +
+                "BlockCryoEndothermalChargingCoil_connector_top");
     }
 
 

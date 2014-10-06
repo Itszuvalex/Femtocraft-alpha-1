@@ -40,7 +40,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiFemtoRepurposer extends GuiContainer {
     public static final ResourceLocation texture = new ResourceLocation(
-            Femtocraft.ID.toLowerCase(), "textures/guis/FemtoRepurposer.png");
+            Femtocraft.ID().toLowerCase(), "textures/guis/FemtoRepurposer.png");
     private TileEntityFemtoRepurposer repurposerInventory;
 
     public GuiFemtoRepurposer(EntityPlayer player, InventoryPlayer par1InventoryPlayer,

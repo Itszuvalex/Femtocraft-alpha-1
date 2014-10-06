@@ -56,7 +56,7 @@ public class FemtocraftStringUtils {
                     return new ItemStack(block, stackSize, damage);
                 }
             } catch (Exception e) {
-                Femtocraft.logger.log(Level.SEVERE, "Error parsing ItemStack string \"" + s + "\"");
+                Femtocraft.log(Level.SEVERE, "Error parsing ItemStack string \"" + s + "\"");
                 e.printStackTrace();
                 return null;
             }

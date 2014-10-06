@@ -31,8 +31,8 @@ public class BlockOreThorium extends BlockOreBase {
 
     public BlockOreThorium(int id) {
         super(id);
-        this.setCreativeTab(Femtocraft.femtocraftTab);
-        setTextureName(Femtocraft.ID.toLowerCase() + ":" + "BlockOreThorium");
+        this.setCreativeTab(Femtocraft.femtocraftTab());
+        setTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockOreThorium");
         setUnlocalizedName("BlockOreThorium");
         setHardness(3.0f);
         setStepSound(Block.soundStoneFootstep);
@@ -42,7 +42,7 @@ public class BlockOreThorium extends BlockOreBase {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID
-                .toLowerCase() + ":" + "BlockOreThorium");
+        this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID()
+                                                                 .toLowerCase() + ":" + "BlockOreThorium");
     }
 }

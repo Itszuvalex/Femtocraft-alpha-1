@@ -36,10 +36,10 @@ public class BlockFluidMass extends BlockFluidClassic {
     public Icon flowingIcon;
 
     public BlockFluidMass(int id) {
-        super(id, Femtocraft.fluidMass, Material.water);
+        super(id, Femtocraft.fluidMass(), Material.water);
         setUnlocalizedName("fluidMass");
-        setCreativeTab(Femtocraft.femtocraftTab);
-        Femtocraft.fluidMass.setBlockID(id);
+        setCreativeTab(Femtocraft.femtocraftTab());
+        Femtocraft.fluidMass().setBlockID(id);
     }
 
     @Override
@@ -50,9 +50,9 @@ public class BlockFluidMass extends BlockFluidClassic {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        blockIcon = stillIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        blockIcon = stillIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "mass_still");
-        flowingIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        flowingIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "mass_flow");
     }
 

@@ -118,7 +118,7 @@ public class FemtocraftConfigHelper {
                     try {
                         loader.load(field, section + Configuration.CATEGORY_SPLITTER + key, canno, obj, configuration);
                     } catch (Exception e) {
-                        Femtocraft.logger.log(Level.SEVERE,
+                        Femtocraft.log(Level.SEVERE,
                                 "Error loading @Configurable field " + field.getName() + " in class " +
                                         clazz.getName() + ".");
                         e.printStackTrace();
@@ -154,7 +154,7 @@ public class FemtocraftConfigHelper {
 
     private static void registerConfigurableClasses() {
         try {
-            Femtocraft.logger.log(Level.INFO, "Finding all configurable classes for registration.");
+            Femtocraft.log(Level.INFO, "Finding all configurable classes for registration.");
             ImmutableSet<ClassPath.ClassInfo> classes = ClassPath.from(FemtocraftConfigHelper.class.getClassLoader())
                                                                  .getTopLevelClassesRecursive("com.itszuvalex.femtocraft");
             for (ClassPath.ClassInfo info : classes) {
@@ -164,12 +164,12 @@ public class FemtocraftConfigHelper {
                         registerConfigurableClass(clazz);
                     }
                 } catch (ClassNotFoundException e) {
-                    Femtocraft.logger.log(Level.SEVERE,
+                    Femtocraft.log(Level.SEVERE,
                             "Could not find @Configurable class " + info.getName() + " when attempting to discover.");
                     e.printStackTrace();
                 }
             }
-            Femtocraft.logger.log(Level.INFO, "Finished registering configurable classes.");
+            Femtocraft.log(Level.INFO, "Finished registering configurable classes.");
         } catch (IOException e) {
             e.printStackTrace();
         }

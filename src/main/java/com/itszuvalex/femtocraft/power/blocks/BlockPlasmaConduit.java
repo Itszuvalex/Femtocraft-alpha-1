@@ -50,7 +50,7 @@ public class BlockPlasmaConduit extends TileContainer {
 
     public BlockPlasmaConduit(int id) {
         super(id, Material.iron);
-        setCreativeTab(Femtocraft.femtocraftTab);
+        setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("BlockBlockPlasmaConduit");
         setBlockBounds();
     }
@@ -274,17 +274,17 @@ public class BlockPlasmaConduit extends TileContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        center = blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        center = blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockPlasmaConduit_core");
-        center_filled = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        center_filled = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockPlasmaConduit_core_filled");
-        input = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        input = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockPlasmaConduit_connector_input");
-        input_filled = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        input_filled = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockPlasmaConduit_connector_input_filled");
-        output = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        output = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockPlasmaConduit_connector_output");
-        output_filled = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase()
+        output_filled = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                 + ":" + "BlockPlasmaConduit_connector_output_filled");
     }
 }

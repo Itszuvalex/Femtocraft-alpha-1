@@ -56,7 +56,7 @@ public class GuiResearch extends GuiScreen {
     @Configurable(comment = "Name of technology to focus research tree on when the GUI is first opened.")
     public static String defaultTechnology = FemtocraftTechnologies.MACROSCOPIC_STRUCTURES;
     private static final ResourceLocation achievementTextures = new ResourceLocation(
-            Femtocraft.ID.toLowerCase(),
+            Femtocraft.ID().toLowerCase(),
             "textures/guis/research_background.png");
     private static int minDisplayColumn = 0;
     /**
@@ -116,15 +116,15 @@ public class GuiResearch extends GuiScreen {
 
     public GuiResearch(String username) {
         this.username = username;
-        researchStatus = Femtocraft.researchManager.getPlayerResearch(username);
+        researchStatus = Femtocraft.researchManager().getPlayerResearch(username);
         short short1 = 141;
         short short2 = 141;
         this.field_74117_m = this.guiMapX = this.field_74124_q = (double) (
-                Femtocraft.researchManager.getTechnology(defaultTechnology).xDisplay - 1)
-                                                                 * 24 - short1 / 2 - 12;
+                Femtocraft.researchManager().getTechnology(defaultTechnology).xDisplay - 1)
+                * 24 - short1 / 2 - 12;
         this.field_74115_n = this.guiMapY = this.field_74123_r = (double) (
-                Femtocraft.researchManager.getTechnology(defaultTechnology).yDisplay * 24 -
-                short2 / 2);
+                Femtocraft.researchManager().getTechnology(defaultTechnology).yDisplay * 24 -
+                        short2 / 2);
     }
 
     public static void setSize(int rows, int columns) {
@@ -147,11 +147,12 @@ public class GuiResearch extends GuiScreen {
             int j1 = l + 17;
 
             if ((this.isMouseButtonDown == 0 || this.isMouseButtonDown == 1)
-                && par1 >= i1 && par1 < i1 + 224 && par2 >= j1
-                && par2 < j1 + 155) {
+                    && par1 >= i1 && par1 < i1 + 224 && par2 >= j1
+                    && par2 < j1 + 155) {
                 if (this.isMouseButtonDown == 0) {
                     this.isMouseButtonDown = 1;
-                } else {
+                }
+                else {
                     this.guiMapX -= (double) (par1 - this.mouseX);
                     this.guiMapY -= (double) (par2 - this.mouseY);
                     this.field_74124_q = this.field_74117_m = this.guiMapX;
@@ -177,7 +178,8 @@ public class GuiResearch extends GuiScreen {
             if (this.field_74123_r >= (double) guiMapRight) {
                 this.field_74123_r = (double) (guiMapRight - 1);
             }
-        } else {
+        }
+        else {
             this.isMouseButtonDown = 0;
         }
 
@@ -198,7 +200,8 @@ public class GuiResearch extends GuiScreen {
         if (par2 == this.mc.gameSettings.keyBindInventory.keyCode) {
             this.mc.displayGuiScreen((GuiScreen) null);
             this.mc.setIngameFocus();
-        } else {
+        }
+        else {
             super.keyTyped(par1, par2);
         }
     }
@@ -206,17 +209,17 @@ public class GuiResearch extends GuiScreen {
     @Override
     protected void mouseClicked(int par1, int par2, int par3) {
         if (par3 == 0) {
-            for (ResearchTechnology rt : Femtocraft.researchManager
-                    .getTechnologies()) {
+            for (ResearchTechnology rt : Femtocraft.researchManager()
+                                                   .getTechnologies()) {
                 ResearchTechnologyStatus ts = researchStatus
                         .getTechnology(rt.name);
                 if (ts != null) {
                     int k = MathHelper.floor_double(this.field_74117_m
-                                                    + (this.guiMapX - this.field_74117_m)
-                                                      * (double) par3);
+                            + (this.guiMapX - this.field_74117_m)
+                            * (double) par3);
                     int l = MathHelper.floor_double(this.field_74115_n
-                                                    + (this.guiMapY - this.field_74115_n)
-                                                      * (double) par3);
+                            + (this.guiMapY - this.field_74115_n)
+                            * (double) par3);
 
                     if (k < guiMapTop) {
                         k = guiMapTop;
@@ -246,8 +249,8 @@ public class GuiResearch extends GuiScreen {
                     int l4 = l1 + l3;
 
                     if (par1 >= k1 && par2 >= l1 && par1 < k1 + 224
-                        && par2 < l1 + 155 && par1 >= i5 && par1 <= i5 + 22
-                        && par2 >= l4 && par2 <= l4 + 22) {
+                            && par2 < l1 + 155 && par1 >= i5 && par1 <= i5 + 22
+                            && par2 >= l4 && par2 <= l4 + 22) {
                         // Open GUIS
                         Minecraft.getMinecraft().sndManager.playSoundFX(
                                 "random.click", 1.0F, 1.0F);
@@ -309,7 +312,8 @@ public class GuiResearch extends GuiScreen {
         if (d0 * d0 + d1 * d1 < 4.0D) {
             this.guiMapX += d0;
             this.guiMapY += d1;
-        } else {
+        }
+        else {
             this.guiMapX += d0 * 0.85D;
             this.guiMapY += d1 * 0.85D;
         }
@@ -325,9 +329,9 @@ public class GuiResearch extends GuiScreen {
 
     protected void genAchievementBackground(int par1, int par2, float par3) {
         int k = MathHelper.floor_double(this.field_74117_m
-                                        + (this.guiMapX - this.field_74117_m) * (double) par3);
+                + (this.guiMapX - this.field_74117_m) * (double) par3);
         int l = MathHelper.floor_double(this.field_74115_n
-                                        + (this.guiMapY - this.field_74115_n) * (double) par3);
+                + (this.guiMapY - this.field_74115_n) * (double) par3);
 
         if (k < guiMapTop) {
             k = guiMapTop;
@@ -386,27 +390,33 @@ public class GuiResearch extends GuiScreen {
                 if (j3 <= 37 && j2 + i3 != 35) {
                     if (j3 == 22) {
                         if (random.nextInt(2) == 0) {
-                            icon = Femtocraft.blockOrePlatinum.getIcon(0, 0);
-                        } else {
-                            icon = Femtocraft.blockOreFarenite.getIcon(0, 0);
+                            icon = Femtocraft.blockOrePlatinum().getIcon(0, 0);
                         }
-                    } else if (j3 == 10) {
-                        icon = Femtocraft.blockOreTitanium.getIcon(0, 0);
-                    } else if (j3 == 8) {
-                        icon = Femtocraft.blockOreThorium.getIcon(0, 0);
-                    } else if (j3 > 4) {
+                        else {
+                            icon = Femtocraft.blockOreFarenite().getIcon(0, 0);
+                        }
+                    }
+                    else if (j3 == 10) {
+                        icon = Femtocraft.blockOreTitanium().getIcon(0, 0);
+                    }
+                    else if (j3 == 8) {
+                        icon = Femtocraft.blockOreThorium().getIcon(0, 0);
+                    }
+                    else if (j3 > 4) {
                         icon = Block.stone.getIcon(0, 0);
-                    } else if (j3 > 0) {
+                    }
+                    else if (j3 > 0) {
                         icon = Block.dirt.getIcon(0, 0);
                     }
-                } else {
+                }
+                else {
                     icon = Block.bedrock.getIcon(0, 0);
                 }
 
                 Minecraft.getMinecraft().getTextureManager()
-                        .bindTexture(TextureMap.locationBlocksTexture);
+                         .bindTexture(TextureMap.locationBlocksTexture);
                 this.drawTexturedModelRectFromIcon(k1 + k3 * 16 - k2, l1 + i3
-                                                                           * 16 - l2, icon, 16, 16);
+                        * 16 - l2, icon, 16, 16);
             }
         }
 
@@ -417,8 +427,8 @@ public class GuiResearch extends GuiScreen {
         int i4;
         int j4;
 
-        for (ResearchTechnology tech : Femtocraft.researchManager
-                .getTechnologies()) {
+        for (ResearchTechnology tech : Femtocraft.researchManager()
+                                                 .getTechnologies()) {
             ResearchTechnologyStatus rs = researchStatus
                     .getTechnology(tech.name);
             if (rs == null) {
@@ -426,7 +436,7 @@ public class GuiResearch extends GuiScreen {
             }
             if (tech.prerequisites != null) {
                 for (String cr : tech.prerequisites) {
-                    TechNode node = Femtocraft.researchManager.getNode(tech);
+                    TechNode node = Femtocraft.researchManager().getNode(tech);
 
                     for (IGraphNode parent : node.getParents()) {
                         IGraphNode next = parent;
@@ -439,13 +449,14 @@ public class GuiResearch extends GuiScreen {
                             boolean flag5 = rs.researched;
                             boolean flag6 = !rs.researched;
                             i4 = Math
-                                         .sin((double) (Minecraft.getSystemTime() % 600L)
-                                              / 600.0D * Math.PI * 2.0D) > 0.6D ? 255
+                                    .sin((double) (Minecraft.getSystemTime() % 600L)
+                                            / 600.0D * Math.PI * 2.0D) > 0.6D ? 255
                                     : 130;
                             int color = tech.level.getColor();
                             if (flag6) {
                                 color += (i4 << 24);
-                            } else {
+                            }
+                            else {
                                 color += (255 << 24);
                             }
 
@@ -466,13 +477,14 @@ public class GuiResearch extends GuiScreen {
                         boolean flag5 = rs.researched;
                         boolean flag6 = !rs.researched;
                         i4 = Math
-                                     .sin((double) (Minecraft.getSystemTime() % 600L)
-                                          / 600.0D * Math.PI * 2.0D) > 0.6D ? 255
+                                .sin((double) (Minecraft.getSystemTime() % 600L)
+                                        / 600.0D * Math.PI * 2.0D) > 0.6D ? 255
                                 : 130;
                         int color = tech.level.getColor();
                         if (flag6) {
                             color += (i4 << 24);
-                        } else {
+                        }
+                        else {
                             color += (255 << 24);
                         }
 
@@ -489,8 +501,8 @@ public class GuiResearch extends GuiScreen {
         int l4;
         int i5;
 
-        for (ResearchTechnology tech : Femtocraft.researchManager
-                .getTechnologies()) {
+        for (ResearchTechnology tech : Femtocraft.researchManager()
+                                                 .getTechnologies()) {
             ResearchTechnologyStatus ts = researchStatus
                     .getTechnology(tech.name);
             if (ts == null) {
@@ -505,9 +517,10 @@ public class GuiResearch extends GuiScreen {
                 if (ts.researched) {
                     f2 = 1.0F;
                     GL11.glColor4f(f2, f2, f2, 1.0F);
-                } else if (!ts.researched) {
+                }
+                else if (!ts.researched) {
                     f2 = Math.sin((double) (Minecraft.getSystemTime() % 600L)
-                                  / 600.0D * Math.PI * 2.0D) < 0.6D ? 0.6F : 0.8F;
+                            / 600.0D * Math.PI * 2.0D) < 0.6D ? 0.6F : 0.8F;
                     GL11.glColor4f(f2, f2, f2, 1.0F);
                 }
                 // else {
@@ -516,13 +529,14 @@ public class GuiResearch extends GuiScreen {
                 // }
 
                 Minecraft.getMinecraft().getTextureManager()
-                        .bindTexture(achievementTextures);
+                         .bindTexture(achievementTextures);
                 i5 = k1 + j4;
                 l4 = l1 + l3;
 
                 if (tech.isKeystone) {
                     this.drawTexturedModalRect(i5 - 2, l4 - 2, 26, 202, 26, 26);
-                } else {
+                }
+                else {
                     this.drawTexturedModalRect(i5 - 2, l4 - 2, 0, 202, 26, 26);
                 }
                 //
@@ -557,8 +571,8 @@ public class GuiResearch extends GuiScreen {
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
                 if (par1 >= k1 && par2 >= l1 && par1 < k1 + 224
-                    && par2 < l1 + 155 && par1 >= i5 && par1 <= i5 + 22
-                    && par2 >= l4 && par2 <= l4 + 22) {
+                        && par2 < l1 + 155 && par1 >= i5 && par1 <= i5 + 22
+                        && par2 >= l4 && par2 <= l4 + 22) {
                     tooltipTech = tech;
                 }
             }
@@ -569,7 +583,7 @@ public class GuiResearch extends GuiScreen {
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         Minecraft.getMinecraft().getTextureManager()
-                .bindTexture(achievementTextures);
+                 .bindTexture(achievementTextures);
         this.drawTexturedModalRect(i1, j1, 0, 0, this.researchPaneWidth,
                 this.researchPaneHeight);
         GL11.glPopMatrix();
@@ -597,7 +611,7 @@ public class GuiResearch extends GuiScreen {
                 }
 
                 this.drawGradientRect(j4 - 3, l3 - 3, j4 + i5 + 3, l3 + l4 + 3
-                                                                   + 12, -1073741824, -1073741824);
+                        + 12, -1073741824, -1073741824);
                 this.fontRenderer
                         .drawSplitString(s1, j4, l3 + 12, i5, -6250336);
 

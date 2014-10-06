@@ -23,8 +23,8 @@ import java.util.Map;
  */
 @SideOnly(value = Side.CLIENT)
 public class FemtocraftSoundManager {
-    public static final String PACKET_CHANNEL = "Femtocraft.snd";
-    public static final String PhlegethonTunnelIdentifier = Femtocraft.ID.toLowerCase() + ":" + "PhlegethonTunnel";
+    public static final String PACKET_CHANNEL = Femtocraft.SOUND_CHANNEL();
+    public static final String PhlegethonTunnelIdentifier = Femtocraft.ID().toLowerCase() + ":" + "PhlegethonTunnel";
 
     private Map<WorldLocation, String> locToSoundIDMap;
     private Map<String, WorldLocation> soundIDToLocMap;

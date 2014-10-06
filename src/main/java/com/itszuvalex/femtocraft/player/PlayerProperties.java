@@ -40,7 +40,7 @@ import java.util.logging.Level;
 
 public class PlayerProperties implements IExtendedEntityProperties {
     public final static String PROP_TAG = "femtocraft.player.properties";
-    public final static String PACKET_CHANNEL = "Femtocraft" + "." + "PProp";
+    public final static String PACKET_CHANNEL = Femtocraft.PLAYER_PROP_CHANNEL();
 
     protected final EntityPlayer player;
 
@@ -68,9 +68,9 @@ public class PlayerProperties implements IExtendedEntityProperties {
             try {
                 properties.put(entry.getKey(), entry.getValue().newInstance());
             } catch (InstantiationException e) {
-                Femtocraft.logger.log(Level.SEVERE, "Failed to create new instance of " + entry.getKey() +
-                                                    " on creating PlayerProperties for player: " + player + " name: " +
-                                                    player.getCommandSenderName());
+                Femtocraft.logger().log(Level.SEVERE, "Failed to create new instance of " + entry.getKey() +
+                        " on creating PlayerProperties for player: " + player + " name: " +
+                        player.getCommandSenderName());
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
@@ -105,7 +105,7 @@ public class PlayerProperties implements IExtendedEntityProperties {
                     PACKET_CHANNEL, CompressedStreamTools.compress(compound));
             PacketDispatcher.sendPacketToPlayer(packet, (Player) player);
         } catch (IOException e) {
-            Femtocraft.logger.log(Level.SEVERE, "Failed to send PlayerProperties packet to " + player);
+            Femtocraft.logger().log(Level.SEVERE, "Failed to send PlayerProperties packet to " + player);
             e.printStackTrace();
         }
     }
@@ -141,7 +141,7 @@ public class PlayerProperties implements IExtendedEntityProperties {
                 entry.getValue().loadFromDescription(compound.getCompoundTag(entry.getKey()));
             }
         } catch (IOException e) {
-            Femtocraft.logger.log(Level.SEVERE, "Error occured while handling PlayerProperties packet.");
+            Femtocraft.logger().log(Level.SEVERE, "Error occured while handling PlayerProperties packet.");
             e.printStackTrace();
         }
     }

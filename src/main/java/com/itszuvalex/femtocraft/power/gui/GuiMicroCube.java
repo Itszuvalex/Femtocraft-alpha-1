@@ -32,7 +32,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiMicroCube extends GuiContainer {
     public static final ResourceLocation texture = new ResourceLocation(
-            Femtocraft.ID.toLowerCase(), "textures/guis/MicroCube.png");
+            Femtocraft.ID().toLowerCase(), "textures/guis/MicroCube.png");
     private final TileEntityMicroCube cube;
 
     public GuiMicroCube(TileEntityMicroCube cube) {
