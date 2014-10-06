@@ -24,6 +24,7 @@ package com.itszuvalex.femtocraft.power.fluids;
 import com.itszuvalex.femtocraft.Femtocraft;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.util.Icon;
+import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 
 /**
@@ -43,11 +44,11 @@ public class FluidMoltenSalt extends Fluid {
 
     @Override
     public Icon getStillIcon() {
-        return Femtocraft.blockFluidMoltenSalt().stillIcon;
+        return Femtocraft.blockFluidMoltenSalt().getBlockTextureFromSide(ForgeDirection.UP.ordinal());
     }
 
     @Override
     public Icon getFlowingIcon() {
-        return Femtocraft.blockFluidMoltenSalt().flowingIcon;
+        return Femtocraft.blockFluidMoltenSalt().getBlockTextureFromSide(ForgeDirection.NORTH.ordinal());
     }
 }

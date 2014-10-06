@@ -26,40 +26,40 @@ import java.io.File
 import java.util.logging.{Level, Logger}
 
 import com.itszuvalex.femtocraft.blocks.{BlockFemtoStone, BlockMicroStone, BlockNanoStone, BlockUnidentifiedAlloy}
+import com.itszuvalex.femtocraft.command.{CommandBase, CommandFemtocraft}
+import com.itszuvalex.femtocraft.configuration.{FemtocraftConfigAssembler, FemtocraftConfigTechnology, FemtocraftConfigs}
+import com.itszuvalex.femtocraft.core.MagnetRegistry
+import com.itszuvalex.femtocraft.core.fluids.{BlockFluidMass, FluidMass}
+import com.itszuvalex.femtocraft.core.items.{ItemBase, ItemFemtoInterfaceDevice, ItemMicroInterfaceDevice, ItemNanoInterfaceDevice}
 import com.itszuvalex.femtocraft.core.ore._
 import com.itszuvalex.femtocraft.industry.blocks._
+import com.itszuvalex.femtocraft.industry.items.{ItemDigitalSchematic, ItemPaperSchematic, ItemQuantumSchematic}
 import com.itszuvalex.femtocraft.managers.ManagerRecipe
 import com.itszuvalex.femtocraft.managers.assistant.ManagerAssistant
 import com.itszuvalex.femtocraft.managers.research.ManagerResearch
 import com.itszuvalex.femtocraft.power.blocks._
+import com.itszuvalex.femtocraft.power.fluids.{FluidCooledContaminatedMoltenSalt, FluidCooledMoltenSalt, FluidMoltenSalt}
+import com.itszuvalex.femtocraft.power.items.{ItemBlockMicroCube, ItemInhibitionCore, ItemNucleationCore}
+import com.itszuvalex.femtocraft.power.plasma.BlockPlasma
+import com.itszuvalex.femtocraft.proxy.ProxyCommon
 import com.itszuvalex.femtocraft.research.blocks.{BlockResearchComputer, BlockResearchConsole}
+import com.itszuvalex.femtocraft.research.items.{ItemFemtoTechnology, ItemMicroTechnology, ItemNanoTechnology, ItemPortableResearchComputer}
+import com.itszuvalex.femtocraft.transport.items.blocks.BlockVacuumTube
+import com.itszuvalex.femtocraft.transport.liquids.blocks.BlockSuctionPipe
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils
-import command.{CommandBase, CommandFemtocraft}
-import configuration.{FemtocraftConfigAssembler, FemtocraftConfigTechnology, FemtocraftConfigs}
-import core.MagnetRegistry
-import core.fluids.{BlockFluidMass, FluidMass}
-import core.items.{ItemBase, ItemFemtoInterfaceDevice, ItemMicroInterfaceDevice, ItemNanoInterfaceDevice}
 import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent, FMLServerStartingEvent}
 import cpw.mods.fml.common.network.{NetworkMod, NetworkRegistry}
 import cpw.mods.fml.common.registry.{GameRegistry, LanguageRegistry}
 import cpw.mods.fml.common.{FMLLog, Mod, SidedProxy}
 import cpw.mods.fml.relauncher.Side
-import industry.items.{ItemDigitalSchematic, ItemPaperSchematic, ItemQuantumSchematic}
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.{Item, ItemStack}
 import net.minecraftforge.common.{Configuration, MinecraftForge}
-import net.minecraftforge.fluids.{Fluid, FluidRegistry}
+import net.minecraftforge.fluids.{BlockFluidBase, Fluid, FluidRegistry}
 import net.minecraftforge.oredict.OreDictionary
-import power.fluids.{FluidCooledContaminatedMoltenSalt, FluidCooledMoltenSalt, FluidMoltenSalt}
-import power.items.{ItemBlockMicroCube, ItemInhibitionCore, ItemNucleationCore}
-import power.plasma.BlockPlasma
-import proxy.ProxyCommon
-import research.items.{ItemFemtoTechnology, ItemMicroTechnology, ItemNanoTechnology, ItemPortableResearchComputer}
-import transport.items.blocks.BlockVacuumTube
-import transport.liquids.blocks.BlockSuctionPipe
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 10/6/14.
@@ -94,193 +94,194 @@ object Femtocraft {
 
   @SidedProxy(clientSide = "com.itszuvalex.femtocraft.proxy.ProxyClient",
               serverSide = "com.itszuvalex.femtocraft.proxy.ProxyCommon")
-  var proxy                                 : ProxyCommon                            = null
-  var femtocraftTab                         : CreativeTabs                           = new FemtocraftCreativeTab("Femtocraft")
-  var logger                                : Logger                                 = null
-  var configFile                            : Configuration                          = null
-  var technologyConfigFile                  : File                                   = null
-  var recipeConfigFile                      : File                                   = null
-  var recipeConfig                          : Configuration                          = null
-  var assemblerConfigs                      : FemtocraftConfigAssembler              = null
-  var recipeManager                         : ManagerRecipe                          = null
-  var researchManager                       : ManagerResearch                        = null
-  var assistantManager                      : ManagerAssistant                       = null
-  var soundManager                          : FemtocraftSoundManager                 = null
-  var femtocraftServerCommand               : CommandBase                            = null
+  var proxy                                 : ProxyCommon               = null
+  var femtocraftTab                         : CreativeTabs              = new FemtocraftCreativeTab("Femtocraft")
+  var logger                                : Logger                    = null
+  var config                                : Configuration             = null
+  var technologyConfigFile                  : File                      = null
+  var recipeConfigFile                      : File                      = null
+  var recipeConfig                          : Configuration             = null
+  var assemblerConfigs                      : FemtocraftConfigAssembler = null
+  var recipeManager                         : ManagerRecipe             = null
+  var researchManager                       : ManagerResearch           = null
+  var assistantManager                      : ManagerAssistant          = null
+  var soundManager                          : FemtocraftSoundManager    = null
+  var femtocraftServerCommand               : CommandBase               = null
   /*blocks*/
-  var blockOreTitanium                      : Block                                  = null
-  var blockOrePlatinum                      : Block                                  = null
-  var blockOreThorium                       : Block                                  = null
-  var blockOreFarenite                      : Block                                  = null
-  var blockOreMalenite                      : Block                                  = null
-  var blockOreLodestone                     : Block                                  = null
-  var microStone                            : Block                                  = null
-  var nanoStone                             : Block                                  = null
-  var femtoStone                            : Block                                  = null
-  var unidentifiedAlloy                     : Block                                  = null
-  var blockResearchComputer                 : Block                                  = null
-  var blockResearchConsole                  : Block                                  = null
-  var generatorTest                         : Block                                  = null
-  var consumerTest                          : Block                                  = null
-  var blockMicroFurnaceUnlit                : Block                                  = null
-  var blockMicroFurnaceLit                  : Block                                  = null
-  var blockMicroDeconstructor               : Block                                  = null
-  var blockMicroReconstructor               : Block                                  = null
-  var blockEncoder                          : Block                                  = null
-  var blockNanoInnervatorUnlit              : Block                                  = null
-  var blockNanoInnervatorLit                : Block                                  = null
-  var blockNanoDismantler                   : Block                                  = null
-  var blockNanoFabricator                   : Block                                  = null
-  var blockNanoEnmesher                     : Block                                  = null
-  var blockNanoHorologe                     : Block                                  = null
-  var blockFemtoImpulserLit                 : Block                                  = null
-  var blockFemtoImpulserUnlit               : Block                                  = null
-  var blockFemtoRepurposer                  : Block                                  = null
-  var blockFemtoCoagulator                  : Block                                  = null
-  var blockFemtoEntangler                   : Block                                  = null
-  var blockFemtoChronoshifter               : Block                                  = null
-  var blockMicroCube                        : Block                                  = null
-  var blockNanoCubeFrame                    : Block                                  = null
-  var blockNanoCubePort                     : Block                                  = null
-  var blockFemtoCubePort                    : Block                                  = null
-  var blockFemtoCubeFrame                   : Block                                  = null
-  var blockFemtoCubeChassis                 : Block                                  = null
-  var blockVacuumTube                       : Block                                  = null
-  var blockSuctionPipe                      : Block                                  = null
-  var blockMicroChargingBase                : Block                                  = null
-  var blockMicroChargingCoil                : Block                                  = null
-  var blockMicroChargingCapacitor           : Block                                  = null
-  var blockMagneticInductionGenerator       : Block                                  = null
-  var blockOrbitalEqualizer                 : Block                                  = null
-  var blockNullEqualizer                    : Block                                  = null
-  var blockCryoEndothermalChargingBase      : Block                                  = null
-  var blockCryoEndothermalChargingCoil      : Block                                  = null
-  var blockFissionReactorCore               : Block                                  = null
-  var blockFissionReactorHousing            : Block                                  = null
-  var blockMagnetohydrodynamicGenerator     : Block                                  = null
-  var blockSteamGenerator                   : Block                                  = null
-  var blockDecontaminationChamber           : Block                                  = null
-  var blockPhlegethonTunnelCore             : Block                                  = null
-  var blockPhlegethonTunnelFrame            : Block                                  = null
-  var blockSisyphusStabilizer               : Block                                  = null
-  var blockStellaratorCore                  : Block                                  = null
-  var blockStellaratorFocus                 : Block                                  = null
-  var blockStellaratorOpticalMaser          : Block                                  = null
-  var blockStellaratorHousing               : Block                                  = null
-  var blockPlasmaConduit                    : Block                                  = null
-  var blockPlasmaVent                       : Block                                  = null
-  var blockPlasmaTurbine                    : Block                                  = null
-  var blockPlasmaCondenser                  : Block                                  = null
-  var blockMicroCable                       : Block                                  = null
-  var blockNanoCable                        : Block                                  = null
-  var blockFemtoCable                       : Block                                  = null
-  var fluidMass                             : Fluid                                  = null
-  var blockFluidMass                        : BlockFluidMass                         = null
-  var fluidMoltenSalt                       : Fluid                                  = null
-  var blockFluidMoltenSalt                  : BlockFluidMoltenSalt                   = null
-  var fluidCooledMoltenSalt                 : Fluid                                  = null
-  var blockFluidCooledMoltenSalt            : BlockFluidCooledMoltenSalt             = null
-  var fluidCooledContaminatedMoltenSalt     : Fluid                                  = null
-  var blockFluidCooledContaminatedMoltenSalt: BlockFluidCooledContaminatedMoltenSalt = null
-  var blockPlasma                           : Block                                  = null
-  var itemIngotTitanium                     : Item                                   = null
-  var itemIngotPlatinum                     : Item                                   = null
-  var itemIngotThorium                      : Item                                   = null
-  var itemIngotFarenite                     : Item                                   = null
-  var itemIngotMalenite                     : Item                                   = null
-  var itemIngotTemperedTitanium             : Item                                   = null
-  var itemIngotThFaSalt                     : Item                                   = null
-  var itemNuggetLodestone                   : Item                                   = null
-  var itemChunkLodestone                    : Item                                   = null
-  var itemConductivePowder                  : Item                                   = null
-  var itemBoard                             : Item                                   = null
-  var itemPrimedBoard                       : Item                                   = null
-  var itemDopedBoard                        : Item                                   = null
-  var itemMicrochip                         : Item                                   = null
-  var itemSpool                             : Item                                   = null
-  var itemSpoolGold                         : Item                                   = null
-  var itemSpoolPlatinum                     : Item                                   = null
-  var itemMicroCoil                         : Item                                   = null
-  var itemBattery                           : Item                                   = null
-  var itemMicroPlating                      : Item                                   = null
-  var itemMicroLogicCore                    : Item                                   = null
-  var itemKineticPulverizer                 : Item                                   = null
-  var itemHeatingElement                    : Item                                   = null
-  var itemArticulatingArm                   : Item                                   = null
-  var itemDissassemblyArray                 : Item                                   = null
-  var itemAssemblyArray                     : Item                                   = null
-  var itemVacuumCore                        : Item                                   = null
-  var itemNucleationCore                    : Item                                   = null
-  var itemInhibitionCore                    : Item                                   = null
-  var itemPortableResearchComputer          : Item                                   = null
-  var itemMicroTechnology                   : Item                                   = null
-  var itemNanoTechnology                    : Item                                   = null
-  var itemFemtoTechnology                   : Item                                   = null
-  var itemPaperSchematic                    : Item                                   = null
-  var itemInterfaceDeviceMicro              : Item                                   = null
-  var itemNanochip                          : Item                                   = null
-  var itemNanoCalculator                    : Item                                   = null
-  var itemNanoRegulator                     : Item                                   = null
-  var itemNanoSimulator                     : Item                                   = null
-  var itemBasicAICore                       : Item                                   = null
-  var itemLearningCore                      : Item                                   = null
-  var itemSchedulerCore                     : Item                                   = null
-  var itemManagerCore                       : Item                                   = null
-  var itemFluidicConductor                  : Item                                   = null
-  var itemNanoCoil                          : Item                                   = null
-  var itemNanoPlating                       : Item                                   = null
-  var itemTemporalResonator                 : Item                                   = null
-  var itemDimensionalMonopole               : Item                                   = null
-  var itemSelfFulfillingOracle              : Item                                   = null
-  var itemCrossDimensionalCommunicator      : Item                                   = null
-  var itemInfallibleEstimator               : Item                                   = null
-  var itemPanLocationalComputer             : Item                                   = null
-  var itemPandoraCube                       : Item                                   = null
-  var itemFissionReactorPlating             : Item                                   = null
-  var itemDigitalSchematic                  : Item                                   = null
-  var itemInterfaceDeviceNano               : Item                                   = null
-  var itemMinosGate                         : Item                                   = null
-  var itemCharosGate                        : Item                                   = null
-  var itemCerberusGate                      : Item                                   = null
-  var itemErinyesCircuit                    : Item                                   = null
-  var itemMinervaComplex                    : Item                                   = null
-  var itemAtlasMount                        : Item                                   = null
-  var itemHermesBus                         : Item                                   = null
-  var itemHerculesDrive                     : Item                                   = null
-  var itemOrpheusProcessor                  : Item                                   = null
-  var itemFemtoPlating                      : Item                                   = null
-  var itemStyxValve                         : Item                                   = null
-  var itemFemtoCoil                         : Item                                   = null
-  var itemPhlegethonTunnelPrimer            : Item                                   = null
-  var itemStellaratorPlating                : Item                                   = null
-  var itemInfinitelyRecursiveALU            : Item                                   = null
-  var itemInfiniteVolumePolychora           : Item                                   = null
-  var itemQuantumSchematic                  : Item                                   = null
-  var itemInterfaceDeviceFemto              : Item                                   = null
-  var itemCubit                             : Item                                   = null
-  var itemRectangulon                       : Item                                   = null
-  var itemPlaneoid                          : Item                                   = null
-  var itemCrystallite                       : Item                                   = null
-  var itemMineralite                        : Item                                   = null
-  var itemMetallite                         : Item                                   = null
-  var itemFaunite                           : Item                                   = null
-  var itemElectrite                         : Item                                   = null
-  var itemFlorite                           : Item                                   = null
-  var itemMicroCrystal                      : Item                                   = null
-  var itemProteinChain                      : Item                                   = null
-  var itemNerveCluster                      : Item                                   = null
-  var itemConductiveAlloy                   : Item                                   = null
-  var itemMetalComposite                    : Item                                   = null
-  var itemFibrousStrand                     : Item                                   = null
-  var itemMineralLattice                    : Item                                   = null
-  var itemFungalSpores                      : Item                                   = null
-  var itemIonicChunk                        : Item                                   = null
-  var itemReplicatingMaterial               : Item                                   = null
-  var itemSpinyFilament                     : Item                                   = null
-  var itemHardenedBulb                      : Item                                   = null
-  var itemMorphicChannel                    : Item                                   = null
-  var itemSynthesizedFiber                  : Item                                   = null
-  var itemOrganometallicPlate               : Item                                   = null
+  var blockOreTitanium                      : Block                     = null
+  var blockOrePlatinum                      : Block                     = null
+  var blockOreThorium                       : Block                     = null
+  var blockOreFarenite                      : Block                     = null
+  var blockOreMalenite                      : Block                     = null
+  var blockOreLodestone                     : Block                     = null
+  var microStone                            : Block                     = null
+  var nanoStone                             : Block                     = null
+  var femtoStone                            : Block                     = null
+  var unidentifiedAlloy                     : Block                     = null
+  var blockResearchComputer                 : Block                     = null
+  var blockResearchConsole                  : Block                     = null
+  var generatorTest                         : Block                     = null
+  var consumerTest                          : Block                     = null
+  var blockMicroFurnaceUnlit                : Block                     = null
+  var blockMicroFurnaceLit                  : Block                     = null
+  var blockMicroDeconstructor               : Block                     = null
+  var blockMicroReconstructor               : Block                     = null
+  var blockEncoder                          : Block                     = null
+  var blockNanoInnervatorUnlit              : Block                     = null
+  var blockNanoInnervatorLit                : Block                     = null
+  var blockNanoDismantler                   : Block                     = null
+  var blockNanoFabricator                   : Block                     = null
+  var blockNanoEnmesher                     : Block                     = null
+  var blockNanoHorologe                     : Block                     = null
+  var blockFemtoImpulserLit                 : Block                     = null
+  var blockFemtoImpulserUnlit               : Block                     = null
+  var blockFemtoRepurposer                  : Block                     = null
+  var blockFemtoCoagulator                  : Block                     = null
+  var blockFemtoEntangler                   : Block                     = null
+  var blockFemtoChronoshifter               : Block                     = null
+  var blockMicroCube                        : Block                     = null
+  var blockNanoCubeFrame                    : Block                     = null
+  var blockNanoCubePort                     : Block                     = null
+  var blockFemtoCubePort                    : Block                     = null
+  var blockFemtoCubeFrame                   : Block                     = null
+  var blockFemtoCubeChassis                 : Block                     = null
+  var blockVacuumTube                       : Block                     = null
+  var blockSuctionPipe                      : Block                     = null
+  var blockMicroChargingBase                : Block                     = null
+  var blockMicroChargingCoil                : Block                     = null
+  var blockMicroChargingCapacitor           : Block                     = null
+  var blockMagneticInductionGenerator       : Block                     = null
+  var blockOrbitalEqualizer                 : Block                     = null
+  var blockNullEqualizer                    : Block                     = null
+  var blockCryoEndothermalChargingBase      : Block                     = null
+  var blockCryoEndothermalChargingCoil      : Block                     = null
+  var blockFissionReactorCore               : Block                     = null
+  var blockFissionReactorHousing            : Block                     = null
+  var blockMagnetohydrodynamicGenerator     : Block                     = null
+  var blockSteamGenerator                   : Block                     = null
+  var blockDecontaminationChamber           : Block                     = null
+  var blockPhlegethonTunnelCore             : Block                     = null
+  var blockPhlegethonTunnelFrame            : Block                     = null
+  var blockSisyphusStabilizer               : Block                     = null
+  var blockStellaratorCore                  : Block                     = null
+  var blockStellaratorFocus                 : Block                     = null
+  var blockStellaratorOpticalMaser          : Block                     = null
+  var blockStellaratorHousing               : Block                     = null
+  var blockPlasmaConduit                    : Block                     = null
+  var blockPlasmaVent                       : Block                     = null
+  var blockPlasmaTurbine                    : Block                     = null
+  var blockPlasmaCondenser                  : Block                     = null
+  var blockMicroCable                       : Block                     = null
+  var blockNanoCable                        : Block                     = null
+  var blockFemtoCable                       : Block                     = null
+  var fluidMass                             : Fluid                     = null
+  var blockFluidMass                        : BlockFluidBase            = null
+  var fluidMoltenSalt                       : Fluid                     = null
+  var blockFluidMoltenSalt                  : BlockFluidBase            = null
+  var fluidCooledMoltenSalt                 : Fluid                     = null
+  var blockFluidCooledMoltenSalt            : BlockFluidBase            = null
+  var fluidCooledContaminatedMoltenSalt     : Fluid                     = null
+  var blockFluidCooledContaminatedMoltenSalt: BlockFluidBase            = null
+  var blockPlasma                           : Block                     = null
+  /* items */
+  var itemIngotTitanium                     : Item                      = null
+  var itemIngotPlatinum                     : Item                      = null
+  var itemIngotThorium                      : Item                      = null
+  var itemIngotFarenite                     : Item                      = null
+  var itemIngotMalenite                     : Item                      = null
+  var itemIngotTemperedTitanium             : Item                      = null
+  var itemIngotThFaSalt                     : Item                      = null
+  var itemNuggetLodestone                   : Item                      = null
+  var itemChunkLodestone                    : Item                      = null
+  var itemConductivePowder                  : Item                      = null
+  var itemBoard                             : Item                      = null
+  var itemPrimedBoard                       : Item                      = null
+  var itemDopedBoard                        : Item                      = null
+  var itemMicrochip                         : Item                      = null
+  var itemSpool                             : Item                      = null
+  var itemSpoolGold                         : Item                      = null
+  var itemSpoolPlatinum                     : Item                      = null
+  var itemMicroCoil                         : Item                      = null
+  var itemBattery                           : Item                      = null
+  var itemMicroPlating                      : Item                      = null
+  var itemMicroLogicCore                    : Item                      = null
+  var itemKineticPulverizer                 : Item                      = null
+  var itemHeatingElement                    : Item                      = null
+  var itemArticulatingArm                   : Item                      = null
+  var itemDissassemblyArray                 : Item                      = null
+  var itemAssemblyArray                     : Item                      = null
+  var itemVacuumCore                        : Item                      = null
+  var itemNucleationCore                    : Item                      = null
+  var itemInhibitionCore                    : Item                      = null
+  var itemPortableResearchComputer          : Item                      = null
+  var itemMicroTechnology                   : Item                      = null
+  var itemNanoTechnology                    : Item                      = null
+  var itemFemtoTechnology                   : Item                      = null
+  var itemPaperSchematic                    : Item                      = null
+  var itemInterfaceDeviceMicro              : Item                      = null
+  var itemNanochip                          : Item                      = null
+  var itemNanoCalculator                    : Item                      = null
+  var itemNanoRegulator                     : Item                      = null
+  var itemNanoSimulator                     : Item                      = null
+  var itemBasicAICore                       : Item                      = null
+  var itemLearningCore                      : Item                      = null
+  var itemSchedulerCore                     : Item                      = null
+  var itemManagerCore                       : Item                      = null
+  var itemFluidicConductor                  : Item                      = null
+  var itemNanoCoil                          : Item                      = null
+  var itemNanoPlating                       : Item                      = null
+  var itemTemporalResonator                 : Item                      = null
+  var itemDimensionalMonopole               : Item                      = null
+  var itemSelfFulfillingOracle              : Item                      = null
+  var itemCrossDimensionalCommunicator      : Item                      = null
+  var itemInfallibleEstimator               : Item                      = null
+  var itemPanLocationalComputer             : Item                      = null
+  var itemPandoraCube                       : Item                      = null
+  var itemFissionReactorPlating             : Item                      = null
+  var itemDigitalSchematic                  : Item                      = null
+  var itemInterfaceDeviceNano               : Item                      = null
+  var itemMinosGate                         : Item                      = null
+  var itemCharosGate                        : Item                      = null
+  var itemCerberusGate                      : Item                      = null
+  var itemErinyesCircuit                    : Item                      = null
+  var itemMinervaComplex                    : Item                      = null
+  var itemAtlasMount                        : Item                      = null
+  var itemHermesBus                         : Item                      = null
+  var itemHerculesDrive                     : Item                      = null
+  var itemOrpheusProcessor                  : Item                      = null
+  var itemFemtoPlating                      : Item                      = null
+  var itemStyxValve                         : Item                      = null
+  var itemFemtoCoil                         : Item                      = null
+  var itemPhlegethonTunnelPrimer            : Item                      = null
+  var itemStellaratorPlating                : Item                      = null
+  var itemInfinitelyRecursiveALU            : Item                      = null
+  var itemInfiniteVolumePolychora           : Item                      = null
+  var itemQuantumSchematic                  : Item                      = null
+  var itemInterfaceDeviceFemto              : Item                      = null
+  var itemCubit                             : Item                      = null
+  var itemRectangulon                       : Item                      = null
+  var itemPlaneoid                          : Item                      = null
+  var itemCrystallite                       : Item                      = null
+  var itemMineralite                        : Item                      = null
+  var itemMetallite                         : Item                      = null
+  var itemFaunite                           : Item                      = null
+  var itemElectrite                         : Item                      = null
+  var itemFlorite                           : Item                      = null
+  var itemMicroCrystal                      : Item                      = null
+  var itemProteinChain                      : Item                      = null
+  var itemNerveCluster                      : Item                      = null
+  var itemConductiveAlloy                   : Item                      = null
+  var itemMetalComposite                    : Item                      = null
+  var itemFibrousStrand                     : Item                      = null
+  var itemMineralLattice                    : Item                      = null
+  var itemFungalSpores                      : Item                      = null
+  var itemIonicChunk                        : Item                      = null
+  var itemReplicatingMaterial               : Item                      = null
+  var itemSpinyFilament                     : Item                      = null
+  var itemHardenedBulb                      : Item                      = null
+  var itemMorphicChannel                    : Item                      = null
+  var itemSynthesizedFiber                  : Item                      = null
+  var itemOrganometallicPlate               : Item                      = null
 
   @EventHandler def preInit(event: FMLPreInitializationEvent) {
     logger = Logger.getLogger(ID)
@@ -289,10 +290,10 @@ object Femtocraft {
     researchManager = new ManagerResearch
     assistantManager = new ManagerAssistant
     femtocraftServerCommand = new CommandFemtocraft
-    val suggestedConfig: File = event.getSuggestedConfigurationFile
-    configFile = new Configuration(suggestedConfig)
-    FemtocraftConfigs.load(configFile)
-    val suggestConfigName: Array[String] = suggestedConfig.getName.split("\\.")
+    val suggestedConfig = event.getSuggestedConfigurationFile
+    config = new Configuration(suggestedConfig)
+    FemtocraftConfigs.load(config)
+    val suggestConfigName = suggestedConfig.getName.split("\\.")
     technologyConfigFile = new File(suggestedConfig.getParentFile,
                                     suggestConfigName(0) + TECH_CONFIG_APPEND +
                                       "." + suggestConfigName(1))
@@ -310,8 +311,7 @@ object Femtocraft {
     }
     GameRegistry.registerPlayerTracker(new FemtocraftPlayerTracker)
     NetworkRegistry.instance.registerGuiHandler(this, new FemtocraftGuiHandler)
-    NetworkRegistry.instance
-    .registerConnectionHandler(new FemtocraftConnectionHandler)
+    NetworkRegistry.instance.registerConnectionHandler(new FemtocraftConnectionHandler)
     MinecraftForge.EVENT_BUS.register(new FemtocraftEventHookContainer)
     MinecraftForge.EVENT_BUS.register(new FemtocraftOreRetrogenHandler)
     proxy.registerRendering()
@@ -320,8 +320,7 @@ object Femtocraft {
       GameRegistry.registerWorldGenerator(new FemtocraftOreGenerator)
     }
 
-    LanguageRegistry.instance
-    .addStringLocalization("itemGroup.Femtocraft", "en_US", "Femtocraft")
+    LanguageRegistry.instance .addStringLocalization("itemGroup.Femtocraft", "en_US", "Femtocraft")
     blockOreTitanium = new BlockOreTitanium(FemtocraftConfigs
                                             .BlockOreTitaniumID)
                        .setUnlocalizedName("BlockOreTitanium")
@@ -1068,7 +1067,7 @@ object Femtocraft {
 
   private def registerItem(
                             id: Int, unlocalizedName: String, name: String
-                          ): Item = {
+                            ): Item = {
     val it: Item = new ItemBase(id, unlocalizedName)
     LanguageRegistry.addName(it, name)
     GameRegistry.registerItem(it, unlocalizedName)
