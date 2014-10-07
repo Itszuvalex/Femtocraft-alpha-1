@@ -103,10 +103,10 @@ class FemtocraftPacketHandler extends IPacketHandler {
   }
 
   private def handleFissionReactorPacket(inputStream: DataInputStream, playerEntity: Player) {
-    var x: Int = 0
-    var y: Int = 0
-    var z: Int = 0
-    var dim: Int = 0
+    var x = 0
+    var y = 0
+    var z = 0
+    var dim = 0
     var action: Byte = -1
     try {
       x = inputStream.readInt
@@ -130,7 +130,7 @@ class FemtocraftPacketHandler extends IPacketHandler {
     if (!player.isInstanceOf[EntityPlayer]) {
       return
     }
-    val cp: EntityPlayer = player.asInstanceOf[EntityPlayer]
+    val cp = player.asInstanceOf[EntityPlayer]
     var data: NBTTagCompound = null
     try {
       data = CompressedStreamTools.decompress(packet.data)
@@ -138,7 +138,7 @@ class FemtocraftPacketHandler extends IPacketHandler {
     catch {
       case e: IOException =>
         e.printStackTrace()
-        Femtocraft.log(Level.SEVERE, "Error decompressing PlayerResearch data from packet.  This client will not be able to " + "detect its research.")
+        Femtocraft.log(Level.SEVERE, "Error decompressing PlayerResearch data from packet.  This client will not be able to detect its research.")
         return
     }
     val rp: ResearchPlayer = new ResearchPlayer(cp.username)
@@ -149,15 +149,15 @@ class FemtocraftPacketHandler extends IPacketHandler {
   /*TODO - Unbind it to player, bind it to world instead. */
   private def handleVacuumTube(stream: DataInputStream, player: Player) {
     try {
-      val x: Int = stream.readInt
-      val y: Int = stream.readInt
-      val z: Int = stream.readInt
-      val items: Byte = stream.readByte
-      val connections: Byte = stream.readByte
+      val x = stream.readInt
+      val y = stream.readInt
+      val z = stream.readInt
+      val items = stream.readByte
+      val connections = stream.readByte
       if (!player.isInstanceOf[EntityClientPlayerMP]) {
         return
       }
-      val cp: EntityClientPlayerMP = player.asInstanceOf[EntityClientPlayerMP]
+      val cp = player.asInstanceOf[EntityClientPlayerMP]
       val tile: TileEntity = cp.worldObj.getBlockTileEntity(x, y, z)
       if (tile == null) {
         return
