@@ -27,6 +27,7 @@ import com.itszuvalex.femtocraft.managers.research.{ManagerResearch, ResearchPla
 import com.itszuvalex.femtocraft.player.PlayerProperties
 import com.itszuvalex.femtocraft.power.tiles.{TileEntityNanoFissionReactorCore, TileEntityPhlegethonTunnelCore}
 import com.itszuvalex.femtocraft.research.tiles.TileEntityResearchConsole
+import com.itszuvalex.femtocraft.sound.FemtocraftSoundManager
 import com.itszuvalex.femtocraft.transport.items.tiles.TileEntityVacuumTube
 import cpw.mods.fml.common.network.{IPacketHandler, Player}
 import net.minecraft.client.entity.EntityClientPlayerMP

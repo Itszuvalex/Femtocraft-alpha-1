@@ -44,6 +44,7 @@ import com.itszuvalex.femtocraft.power.plasma.BlockPlasma
 import com.itszuvalex.femtocraft.proxy.ProxyCommon
 import com.itszuvalex.femtocraft.research.blocks.{BlockResearchComputer, BlockResearchConsole}
 import com.itszuvalex.femtocraft.research.items.{ItemFemtoTechnology, ItemMicroTechnology, ItemNanoTechnology, ItemPortableResearchComputer}
+import com.itszuvalex.femtocraft.sound.FemtocraftSoundManager
 import com.itszuvalex.femtocraft.transport.items.blocks.BlockVacuumTube
 import com.itszuvalex.femtocraft.transport.liquids.blocks.BlockSuctionPipe
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils
@@ -296,10 +297,10 @@ object Femtocraft {
     val suggestConfigName = suggestedConfig.getName.split("\\.")
     technologyConfigFile = new File(suggestedConfig.getParentFile,
                                     suggestConfigName(0) + TECH_CONFIG_APPEND +
-                                      "." + suggestConfigName(1))
+                                    "." + suggestConfigName(1))
     recipeConfigFile = new File(suggestedConfig.getParentFile,
                                 suggestConfigName(0) + RECIPE_CONFIG_APPEND +
-                                  "." + suggestConfigName(1))
+                                "." + suggestConfigName(1))
     recipeConfig = new Configuration(recipeConfigFile)
     Femtocraft.proxy.registerTileEntities()
     Femtocraft.proxy.registerRendering()
@@ -320,7 +321,7 @@ object Femtocraft {
       GameRegistry.registerWorldGenerator(new FemtocraftOreGenerator)
     }
 
-    LanguageRegistry.instance .addStringLocalization("itemGroup.Femtocraft", "en_US", "Femtocraft")
+    LanguageRegistry.instance.addStringLocalization("itemGroup.Femtocraft", "en_US", "Femtocraft")
     blockOreTitanium = new BlockOreTitanium(FemtocraftConfigs
                                             .BlockOreTitaniumID)
                        .setUnlocalizedName("BlockOreTitanium")
@@ -867,7 +868,7 @@ object Femtocraft {
                                                     .ItemCrossDimensionalCommunicatorID,
                                                     "ItemCrossDimensionalCommunicator",
                                                     "Cross Dimensional " +
-                                                      "Communicator")
+                                                    "Communicator")
     itemInfallibleEstimator = registerItem(FemtocraftConfigs
                                            .ItemInfallibleEstimatorID,
                                            "ItemInfallibleEstimator",
