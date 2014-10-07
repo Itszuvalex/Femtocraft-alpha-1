@@ -20,7 +20,7 @@
  */
 package com.itszuvalex.femtocraft
 
-import java.io.{ByteArrayInputStream, DataInputStream, IOException}
+import java.io.{ByteArrayInputStream, DataInputStream}
 import java.util.logging.Level
 
 import com.itszuvalex.femtocraft.managers.research.{ManagerResearch, ResearchPlayer}
@@ -31,11 +31,9 @@ import com.itszuvalex.femtocraft.transport.items.tiles.TileEntityVacuumTube
 import cpw.mods.fml.common.network.{IPacketHandler, Player}
 import net.minecraft.client.entity.EntityClientPlayerMP
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.nbt.{CompressedStreamTools, NBTTagCompound}
+import net.minecraft.nbt.CompressedStreamTools
 import net.minecraft.network.INetworkManager
 import net.minecraft.network.packet.Packet250CustomPayload
-import net.minecraft.tileentity.TileEntity
-import net.minecraft.world.WorldServer
 import net.minecraftforge.common.DimensionManager
 
 class FemtocraftPacketHandler extends IPacketHandler {
@@ -57,6 +55,8 @@ class FemtocraftPacketHandler extends IPacketHandler {
       case TileEntityResearchConsole.PACKET_CHANNEL        => handleResearchConsole(inputStream, playerEntity)
       case TileEntityNanoFissionReactorCore.PACKET_CHANNEL => handleFissionReactorPacket(inputStream, playerEntity)
       case TileEntityPhlegethonTunnelCore.PACKET_CHANNEL   => handlePhlegethonTunnelPacket(inputStream, playerEntity)
+      case s: String                                       => Femtocraft.log(Level.SEVERE, "Received packet to channel " + s + " which is not under any mapping.")
+      case _                                               => Femtocraft.log(Level.SEVERE, "Received packet to null channel.")
     }
   }
 
@@ -65,27 +65,21 @@ class FemtocraftPacketHandler extends IPacketHandler {
   }
 
   private def handlePhlegethonTunnelPacket(inputStream: DataInputStream, playerEntity: Player) {
-    var x: Int = 0
-    var y: Int = 0
-    var z: Int = 0
-    var dim: Int = 0
-    var action: Boolean = false
     try {
-      x = inputStream.readInt
-      y = inputStream.readInt
-      z = inputStream.readInt
-      dim = inputStream.readInt
-      action = inputStream.readBoolean
+      val x = inputStream.readInt
+      val y = inputStream.readInt
+      val z = inputStream.readInt
+      val dim = inputStream.readInt
+      val action = inputStream.readBoolean
+      val world = DimensionManager.getWorld(dim)
+      (world, if (world != null) world.getBlockTileEntity(x, y, z)) match {
+        case (null, _)                                 => Femtocraft.log(Level.SEVERE, "Received PhlegethonTunnel Packet for nonexistent World")
+        case (w, core: TileEntityPhlegethonTunnelCore) => core.handlePacket(action)
+        case (_, _)                                    =>
+      }
     }
     catch {
-      case ex: Exception => ex.printStackTrace(); return
-    }
-
-    val world = DimensionManager.getWorld(dim)
-    (world, if (world != null) world.getBlockTileEntity(x, y, z)) match {
-      case (null, _)                                 => Femtocraft.log(Level.SEVERE, "Received PhlegethonTunnel Packet for nonexistent World")
-      case (w, core: TileEntityPhlegethonTunnelCore) => core.handlePacket(action)
-      case (_, _)                                    =>
+      case ex: Exception => ex.printStackTrace()
     }
   }
 
@@ -97,53 +91,41 @@ class FemtocraftPacketHandler extends IPacketHandler {
       player.openContainer.updateProgressBar(id, value)
     }
     catch {
-      case e: IOException          => e.printStackTrace()
-      case e: NullPointerException => e.printStackTrace()
+      case e: Exception => e.printStackTrace()
     }
   }
 
   private def handleFissionReactorPacket(inputStream: DataInputStream, playerEntity: Player) {
-    var x = 0
-    var y = 0
-    var z = 0
-    var dim = 0
-    var action: Byte = -1
     try {
-      x = inputStream.readInt
-      y = inputStream.readInt
-      z = inputStream.readInt
-      dim = inputStream.readInt
-      action = inputStream.readByte
+      val x = inputStream.readInt
+      val y = inputStream.readInt
+      val z = inputStream.readInt
+      val dim = inputStream.readInt
+      val action = inputStream.readByte
+      val world = DimensionManager.getWorld(dim)
+      (world, if (world != null) world.getBlockTileEntity(x, y, z)) match {
+        case (null, _)                                   => Femtocraft.log(Level.SEVERE, "Received FissionReactor Packet for nonexistent World")
+        case (w, core: TileEntityNanoFissionReactorCore) => core.handleAction(action)
+        case (_, _)                                      =>
+      }
     }
     catch {
-      case ex: Exception => ex.printStackTrace(); return
-    }
-    val world = DimensionManager.getWorld(dim)
-    (world, if (world != null) world.getBlockTileEntity(x, y, z)) match {
-      case (null, _)                                   => Femtocraft.log(Level.SEVERE, "Received FissionReactor Packet for nonexistent World")
-      case (w, core: TileEntityNanoFissionReactorCore) => core.handleAction(action)
-      case (_, _)                                      =>
+      case ex: Exception => ex.printStackTrace()
     }
   }
 
   private def handleResearchPacket(packet: Packet250CustomPayload, player: Player) {
-    if (!player.isInstanceOf[EntityPlayer]) {
-      return
-    }
-    val cp = player.asInstanceOf[EntityPlayer]
-    var data: NBTTagCompound = null
     try {
-      data = CompressedStreamTools.decompress(packet.data)
+      val data = CompressedStreamTools.decompress(packet.data)
+      val rp: ResearchPlayer = new ResearchPlayer(player.asInstanceOf[EntityPlayer].username)
+      rp.loadFromNBTTagCompound(data)
+      Femtocraft.researchManager.syncResearch(rp)
     }
     catch {
-      case e: IOException =>
+      case e: Exception =>
         e.printStackTrace()
-        Femtocraft.log(Level.SEVERE, "Error decompressing PlayerResearch data from packet.  This client will not be able to detect its research.")
-        return
+        Femtocraft.log(Level.SEVERE, "Error loading PlayerResearch data from packet.  This client will not be able to detect its research.")
     }
-    val rp: ResearchPlayer = new ResearchPlayer(cp.username)
-    rp.loadFromNBTTagCompound(data)
-    Femtocraft.researchManager.syncResearch(rp)
   }
 
   /*TODO - Unbind it to player, bind it to world instead. */
@@ -158,43 +140,38 @@ class FemtocraftPacketHandler extends IPacketHandler {
         return
       }
       val cp = player.asInstanceOf[EntityClientPlayerMP]
-      val tile: TileEntity = cp.worldObj.getBlockTileEntity(x, y, z)
+      val tile = cp.worldObj.getBlockTileEntity(x, y, z)
       if (tile == null) {
         return
       }
       if (!tile.isInstanceOf[TileEntityVacuumTube]) {
         return
       }
-      val tube: TileEntityVacuumTube = tile.asInstanceOf[TileEntityVacuumTube]
+      val tube = tile.asInstanceOf[TileEntityVacuumTube]
       tube.parseItemMask(items)
       tube.parseConnectionMask(connections)
       cp.worldObj.markBlockForRenderUpdate(x, y, z)
     }
     catch {
-      case e: IOException => e.printStackTrace()
+      case e: Exception => e.printStackTrace()
     }
   }
 
   private def handleResearchConsole(inputStream: DataInputStream, playerEntity: Player) {
-    var x: Int = 0
-    var y: Int = 0
-    var z: Int = 0
-    var dim: Int = 0
     try {
-      x = inputStream.readInt
-      y = inputStream.readInt
-      z = inputStream.readInt
-      dim = inputStream.readInt
+      val x = inputStream.readInt
+      val y = inputStream.readInt
+      val z = inputStream.readInt
+      val dim = inputStream.readInt
+      val world = DimensionManager.getWorld(dim)
+      (world, if (world != null) world.getBlockTileEntity(x, y, z)) match {
+        case (null, _)                          => Femtocraft.log(Level.SEVERE, "Received ResearchConsole Packet for nonexistent World")
+        case (w, te: TileEntityResearchConsole) => te.startWork()
+        case (_, _)                             =>
+      }
     }
     catch {
-      case ex: Exception => ex.printStackTrace(); return
-    }
-    val world: WorldServer = DimensionManager.getWorld(dim)
-    (world, if (world != null) world.getBlockTileEntity(x, y, z)) match {
-      case (null, _)                          => Femtocraft.log(Level.SEVERE, "Received ResearchConsole Packet for nonexistent World")
-      case (w, te: TileEntityResearchConsole) => te.startWork()
-      case (_, _)                             =>
+      case ex: Exception => ex.printStackTrace()
     }
   }
 }
-
