@@ -5,7 +5,7 @@
   "description": "Late-game Tech Mod for Minecraft",
   "version": "${version}",
   "credits": "Created by Itszuvalex (ign: Knife_point065)",
-  "logoFile": "",
+  "logoFile": "Femtocraft Logo.png",
   "mcversion": "${mcversion}",
   "url": "https://github.com/Itszuvalex/Femtocraft",
   "updateUrl": "",
