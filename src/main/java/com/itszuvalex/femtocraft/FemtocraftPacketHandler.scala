@@ -39,25 +39,29 @@ import net.minecraftforge.common.DimensionManager
 
 class FemtocraftPacketHandler extends IPacketHandler {
   def onPacketData(manager: INetworkManager, packet: Packet250CustomPayload, playerEntity: Player) {
-    if (packet.channel.equalsIgnoreCase(PlayerProperties.PACKET_CHANNEL)) {
-      PlayerProperties.get(playerEntity.asInstanceOf[EntityPlayer]).handlePacket(packet)
-      return
-    }
-    if (packet.channel.equalsIgnoreCase(ManagerResearch.RESEARCH_CHANNEL)) {
-      handleResearchPacket(packet, playerEntity)
-      return
-    }
-    val inputStream = new DataInputStream(new ByteArrayInputStream(packet.data))
+    try {
+      if (packet.channel.equalsIgnoreCase(PlayerProperties.PACKET_CHANNEL)) {
+        PlayerProperties.get(playerEntity.asInstanceOf[EntityPlayer]).handlePacket(packet)
+        return
+      }
+      if (packet.channel.equalsIgnoreCase(ManagerResearch.RESEARCH_CHANNEL)) {
+        handleResearchPacket(packet, playerEntity)
+        return
+      }
+      val inputStream = new DataInputStream(new ByteArrayInputStream(packet.data))
 
-    packet.channel match {
-      case FemtocraftGuiHandler.PACKET_CHANNEL             => handleGUIPacket(inputStream, playerEntity)
-      case FemtocraftSoundManager.PACKET_CHANNEL           => handleSoundPacket(inputStream, playerEntity)
-      case TileEntityVacuumTube.PACKET_CHANNEL             => handleVacuumTube(inputStream, playerEntity)
-      case TileEntityResearchConsole.PACKET_CHANNEL        => handleResearchConsole(inputStream, playerEntity)
-      case TileEntityNanoFissionReactorCore.PACKET_CHANNEL => handleFissionReactorPacket(inputStream, playerEntity)
-      case TileEntityPhlegethonTunnelCore.PACKET_CHANNEL   => handlePhlegethonTunnelPacket(inputStream, playerEntity)
-      case s: String                                       => Femtocraft.log(Level.SEVERE, "Received packet to channel " + s + " which is not under any mapping.")
-      case _                                               => Femtocraft.log(Level.SEVERE, "Received packet to null channel.")
+      packet.channel match {
+        case FemtocraftGuiHandler.PACKET_CHANNEL             => handleGUIPacket(inputStream, playerEntity)
+        case FemtocraftSoundManager.PACKET_CHANNEL           => handleSoundPacket(inputStream, playerEntity)
+        case TileEntityVacuumTube.PACKET_CHANNEL             => handleVacuumTube(inputStream, playerEntity)
+        case TileEntityResearchConsole.PACKET_CHANNEL        => handleResearchConsole(inputStream, playerEntity)
+        case TileEntityNanoFissionReactorCore.PACKET_CHANNEL => handleFissionReactorPacket(inputStream, playerEntity)
+        case TileEntityPhlegethonTunnelCore.PACKET_CHANNEL   => handlePhlegethonTunnelPacket(inputStream, playerEntity)
+        case s: String                                       => Femtocraft.log(Level.SEVERE, "Received packet to channel " + s + " which is not under any mapping.")
+        case _                                               => Femtocraft.log(Level.SEVERE, "Received packet to null channel.")
+      }
+    } catch {
+      case e: Exception => e.printStackTrace()
     }
   }
 
@@ -85,8 +89,8 @@ class FemtocraftPacketHandler extends IPacketHandler {
   }
 
   private def handleGUIPacket(stream: DataInputStream, playerEntity: Player) {
-    val player: EntityPlayer = playerEntity.asInstanceOf[EntityPlayer]
     try {
+      val player: EntityPlayer = playerEntity.asInstanceOf[EntityPlayer]
       val id: Int = stream.readInt
       val value: Int = stream.readInt
       player.openContainer.updateProgressBar(id, value)

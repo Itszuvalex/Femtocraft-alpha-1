@@ -1,6 +1,6 @@
 package com.itszuvalex.femtocraft.sound
 
-import java.io.{ByteArrayOutputStream, DataInputStream, DataOutputStream, IOException}
+import java.io.{ByteArrayOutputStream, DataInputStream, DataOutputStream}
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.sound.FemtocraftSoundManager.SoundAction
@@ -54,7 +54,7 @@ class FemtocraftSoundManager() {
 
 
   def addSoundIDForLocation(id: String, x: Int, y: Int, z: Int) {
-    val loc: WorldLocation = new WorldLocation(null, x, y, z)
+    val loc = new WorldLocation(null, x, y, z)
     locToSoundIDMap.put(loc, id) != null && soundIDToLocMap.put(id, loc) != null
   }
 
@@ -139,8 +139,7 @@ class FemtocraftSoundManager() {
       }
     }
     catch {
-      case e: IOException => e.printStackTrace()
-
+      case e: Exception => e.printStackTrace()
     }
   }
 }
