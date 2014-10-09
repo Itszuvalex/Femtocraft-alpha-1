@@ -1,6 +1,7 @@
 package com.itszuvalex.femtocraft.sound
 
 import java.io.{ByteArrayOutputStream, DataInputStream, DataOutputStream}
+import java.util.logging.Level
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.sound.FemtocraftSoundManager.SoundAction
@@ -131,11 +132,11 @@ class FemtocraftSoundManager() {
 
   def handlePacket(istream: DataInputStream) {
     try {
-      val action = SoundAction.actionFromString(istream.readUTF)
+      val actStr = istream.readUTF
+      val action = SoundAction.actionFromString(actStr)
       action match {
-        case STOP_ALL_SOUNDS =>
-          stopAllSounds()
-        case _               =>
+        case STOP_ALL_SOUNDS => stopAllSounds()
+        case _               => Femtocraft.log(Level.SEVERE, "Received unknown action-" + actStr + " at Sound Manager.")
       }
     }
     catch {
