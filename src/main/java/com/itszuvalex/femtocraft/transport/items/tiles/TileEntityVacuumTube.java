@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.transport.items.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.api.IVacuumTube;
+import com.itszuvalex.femtocraft.api.transport.IVacuumTube;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.utils.BaseInventory;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable;

@@ -21,7 +21,7 @@
 
 package com.itszuvalex.femtocraft.power.items;
 
-import com.itszuvalex.femtocraft.api.PowerContainer;
+import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityMicroCube;
 
 public class ItemBlockMicroCube extends ItemBlockPower {

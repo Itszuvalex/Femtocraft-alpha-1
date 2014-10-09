@@ -21,7 +21,7 @@
 
 package com.itszuvalex.femtocraft.power;
 
-import com.itszuvalex.femtocraft.api.IPowerBlockContainer;
+import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;

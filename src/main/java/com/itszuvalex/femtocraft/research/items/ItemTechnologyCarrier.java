@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.research.items;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.api.ITechnologyCarrier;
+import com.itszuvalex.femtocraft.api.research.ITechnologyCarrier;
 import com.itszuvalex.femtocraft.managers.research.ResearchPlayer;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
 import cpw.mods.fml.relauncher.Side;

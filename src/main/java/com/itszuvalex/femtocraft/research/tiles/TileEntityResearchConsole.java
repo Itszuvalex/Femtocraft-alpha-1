@@ -23,7 +23,7 @@ package com.itszuvalex.femtocraft.research.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
-import com.itszuvalex.femtocraft.api.ITechnologyCarrier;
+import com.itszuvalex.femtocraft.api.research.ITechnologyCarrier;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;

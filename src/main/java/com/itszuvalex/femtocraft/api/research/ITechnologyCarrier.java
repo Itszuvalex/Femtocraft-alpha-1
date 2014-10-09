@@ -19,18 +19,21 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.api;
+package com.itszuvalex.femtocraft.api.research;
 
-import net.minecraftforge.fluids.IFluidHandler;
+import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import net.minecraft.item.ItemStack;
 
 /**
- * @author Itszuvalex
+ * @author Itszuvalex (Christopher Harris)
+ *         <p/>
+ *         Interface for an Item that carries a Femtocraft Technology.
  */
-public interface ISuctionPipe extends IFluidHandler {
+public interface ITechnologyCarrier {
 
-    /**
-     * @return Pressure of this pipe. Liquids will flow from high pressure to
-     * low pressure pipes.
-     */
-    public int getPressure();
+    void setTechnology(ItemStack stack, String name);
+
+    String getTechnology(ItemStack stack);
+
+    EnumTechLevel getTechnologyLevel(ItemStack stack);
 }

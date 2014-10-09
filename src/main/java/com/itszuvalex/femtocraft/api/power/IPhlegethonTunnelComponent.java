@@ -19,44 +19,18 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.api;
+package com.itszuvalex.femtocraft.api.power;
 
-import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
-import net.minecraft.world.World;
+import com.itszuvalex.femtocraft.core.multiblock.IMultiBlockComponent;
 
 /**
- * Implemented by the Block class, not the TileEntity.
+ * Created by Christopher Harris (Itszuvalex) on 7/13/14.
  */
-public interface IAtmosphericChargingAddon {
-
+public interface IPhlegethonTunnelComponent extends IMultiBlockComponent {
     /**
-     * Returns the amount of power generated this tick from this block.
+     * Called when the state of the core changes.
      *
-     * @param world
-     * @param x
-     * @param y
-     * @param z
-     * @return
+     * @param active The state the core is changing into.
      */
-    float powerPerTick(World world, int x, int y, int z);
-
-    /**
-     * What techlevel this addon is.
-     *
-     * @param world
-     * @param x
-     * @param y
-     * @param z
-     * @return
-     */
-    EnumTechLevel techLevel(World world, int x, int y, int z);
-
-    /**
-     * Returns true if this can support addon, false otherwise.
-     *
-     * @param addon
-     * @return
-     */
-    boolean canSupportAddon(IAtmosphericChargingAddon addon, World world,
-                            int x, int y, int z);
+    void onCoreActivityChange(boolean active);
 }

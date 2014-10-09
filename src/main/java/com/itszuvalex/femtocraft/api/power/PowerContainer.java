@@ -19,7 +19,7 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.api;
+package com.itszuvalex.femtocraft.api.power;
 
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.ISaveable;

@@ -23,7 +23,7 @@ package com.itszuvalex.femtocraft.industry.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
-import com.itszuvalex.femtocraft.api.IAssemblerSchematic;
+import com.itszuvalex.femtocraft.api.industry.IAssemblerSchematic;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;

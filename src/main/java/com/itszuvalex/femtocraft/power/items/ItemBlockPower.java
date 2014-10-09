@@ -21,7 +21,7 @@
 
 package com.itszuvalex.femtocraft.power.items;
 
-import com.itszuvalex.femtocraft.api.PowerContainer;
+import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.core.items.CoreItemBlock;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityPowerBase;
 import cpw.mods.fml.relauncher.Side;

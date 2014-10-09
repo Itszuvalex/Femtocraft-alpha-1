@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.transport.liquids.tiles;
 
 import com.itszuvalex.femtocraft.api.IInterfaceDevice;
-import com.itszuvalex.femtocraft.api.ISuctionPipe;
+import com.itszuvalex.femtocraft.api.transport.ISuctionPipe;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable;

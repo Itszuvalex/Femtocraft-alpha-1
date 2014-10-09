@@ -21,8 +21,8 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
-import com.itszuvalex.femtocraft.api.IPowerBlockContainer;
-import com.itszuvalex.femtocraft.api.PowerContainer;
+import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
+import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.power.FemtocraftPowerUtils;

@@ -19,18 +19,35 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.api;
+package com.itszuvalex.femtocraft.api.power;
 
-import com.itszuvalex.femtocraft.core.multiblock.IMultiBlockComponent;
+import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import net.minecraft.world.World;
 
 /**
- * Created by Christopher Harris (Itszuvalex) on 7/13/14.
+ * Implemented by the Block class, not the TileEntity
  */
-public interface IPhlegethonTunnelComponent extends IMultiBlockComponent {
+public interface IAtmosphericChargingBase {
+
     /**
-     * Called when the state of the core changes.
+     * Maximum number of addons supported by this charging base.
      *
-     * @param active The state the core is changing into.
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     * @return
      */
-    void onCoreActivityChange(boolean active);
+    int maxAddonsSupported(World world, int x, int y, int z);
+
+    /**
+     * Maximum techLevel of addons supportable by this charging base.
+     *
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     */
+    EnumTechLevel maxTechSupported(World world, int x, int y, int z);
 }

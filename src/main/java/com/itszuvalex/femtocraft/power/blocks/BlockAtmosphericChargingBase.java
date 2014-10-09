@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.api.IAtmosphericChargingBase;
+import com.itszuvalex.femtocraft.api.power.IAtmosphericChargingBase;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityAtmosphericChargingBase;
 import com.itszuvalex.femtocraft.proxy.ProxyClient;

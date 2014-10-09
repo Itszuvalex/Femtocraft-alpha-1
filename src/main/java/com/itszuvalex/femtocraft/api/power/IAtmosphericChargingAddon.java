@@ -19,21 +19,44 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.api;
+package com.itszuvalex.femtocraft.api.power;
 
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 /**
- * @author Itszuvalex (Christopher Harris)
- *         <p/>
- *         Interface for an Item that carries a Femtocraft Technology.
+ * Implemented by the Block class, not the TileEntity.
  */
-public interface ITechnologyCarrier {
+public interface IAtmosphericChargingAddon {
 
-    void setTechnology(ItemStack stack, String name);
+    /**
+     * Returns the amount of power generated this tick from this block.
+     *
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     */
+    float powerPerTick(World world, int x, int y, int z);
 
-    String getTechnology(ItemStack stack);
+    /**
+     * What techlevel this addon is.
+     *
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     */
+    EnumTechLevel techLevel(World world, int x, int y, int z);
 
-    EnumTechLevel getTechnologyLevel(ItemStack stack);
+    /**
+     * Returns true if this can support addon, false otherwise.
+     *
+     * @param addon
+     * @return
+     */
+    boolean canSupportAddon(IAtmosphericChargingAddon addon, World world,
+                            int x, int y, int z);
 }

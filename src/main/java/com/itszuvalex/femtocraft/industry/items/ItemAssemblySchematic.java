@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.industry.items;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.api.IAssemblerSchematic;
+import com.itszuvalex.femtocraft.api.industry.IAssemblerSchematic;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.core.items.ItemBase;
 import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;

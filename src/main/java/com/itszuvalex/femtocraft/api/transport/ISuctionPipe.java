@@ -19,35 +19,18 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.api;
+package com.itszuvalex.femtocraft.api.transport;
 
-import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
-import net.minecraft.world.World;
+import net.minecraftforge.fluids.IFluidHandler;
 
 /**
- * Implemented by the Block class, not the TileEntity
+ * @author Itszuvalex
  */
-public interface IAtmosphericChargingBase {
+public interface ISuctionPipe extends IFluidHandler {
 
     /**
-     * Maximum number of addons supported by this charging base.
-     *
-     * @param world
-     * @param x
-     * @param y
-     * @param z
-     * @return
+     * @return Pressure of this pipe. Liquids will flow from high pressure to
+     * low pressure pipes.
      */
-    int maxAddonsSupported(World world, int x, int y, int z);
-
-    /**
-     * Maximum techLevel of addons supportable by this charging base.
-     *
-     * @param world
-     * @param x
-     * @param y
-     * @param z
-     * @return
-     */
-    EnumTechLevel maxTechSupported(World world, int x, int y, int z);
+    public int getPressure();
 }

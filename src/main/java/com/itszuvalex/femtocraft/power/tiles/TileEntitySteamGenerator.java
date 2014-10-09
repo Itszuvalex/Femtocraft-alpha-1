@@ -1,7 +1,7 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
-import com.itszuvalex.femtocraft.api.IPowerBlockContainer;
+import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
 import com.itszuvalex.femtocraft.core.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;

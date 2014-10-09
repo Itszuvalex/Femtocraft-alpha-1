@@ -21,7 +21,7 @@
 
 package com.itszuvalex.femtocraft.industry.containers;
 
-import com.itszuvalex.femtocraft.api.IAssemblerSchematic;
+import com.itszuvalex.femtocraft.api.industry.IAssemblerSchematic;
 import com.itszuvalex.femtocraft.common.gui.DisplaySlot;
 import com.itszuvalex.femtocraft.common.gui.OutputSlot;
 import com.itszuvalex.femtocraft.core.container.ContainerInv;

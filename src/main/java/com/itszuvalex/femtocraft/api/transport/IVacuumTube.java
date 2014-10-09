@@ -19,7 +19,7 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.api;
+package com.itszuvalex.femtocraft.api.transport;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;

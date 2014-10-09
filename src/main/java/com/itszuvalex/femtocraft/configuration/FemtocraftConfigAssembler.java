@@ -53,7 +53,10 @@ public class FemtocraftConfigAssembler {
     public ArrayList<AssemblerRecipe> loadCustomRecipes() {
         ArrayList<AssemblerRecipe> ret = new ArrayList<AssemblerRecipe>();
         ConfigCategory cat = config.getCategory(CUSTOM_RECIPE_SECTION_KEY);
-        cat.setComment("Any assembler recipes in this section will be registered first.  Use this to preempt recipe default recipe mappings, if you don't want to change them in the normal section.  Just make sure that the keys in this section are unique, as the Configuration files use key lookups and I make no guarantees about what happens when two objects share the same key.");
+        cat.setComment("Any assembler recipes in this section will be registered first.  Use this to preempt recipe " +
+                       "default recipe mappings, if you don't want to change them in the normal section.  Just make " +
+                       "sure that the keys in this section are unique, as the Configuration files use key lookups and" +
+                       " I make no guarantees about what happens when two objects share the same key.");
         Set<ConfigCategory> techs = cat.getChildren();
         for (ConfigCategory cc : techs) {
             String[] name = cc.getQualifiedName().split("\\" + Configuration.CATEGORY_SPLITTER);
@@ -64,7 +67,8 @@ public class FemtocraftConfigAssembler {
     }
 
     public AssemblerRecipe loadAssemblerRecipe(AssemblerRecipe recipe, String key) {
-        FemtocraftConfigHelper.loadClassInstanceFromConfig(config, SECTION_KEY, FemtocraftConfigHelper.escapeCategorySplitter(key),
+        FemtocraftConfigHelper.loadClassInstanceFromConfig(config, SECTION_KEY,
+                FemtocraftConfigHelper.escapeCategorySplitter(key),
                 recipe.getClass(), recipe);
         isEnabled(recipe);
         return recipe;
@@ -75,7 +79,9 @@ public class FemtocraftConfigAssembler {
     }
 
     public boolean isEnabled(AssemblerRecipe recipe) {
-        boolean result = recipe != null && config.get(ENABLE_SECTION_KEY, FemtocraftConfigHelper.escapeCategorySplitter(recipe.output.getUnlocalizedName()), true).getBoolean(true);
+        boolean result = recipe != null &&
+                         config.get(ENABLE_SECTION_KEY, FemtocraftConfigHelper.escapeCategorySplitter(recipe.output
+                                 .getUnlocalizedName()), true).getBoolean(true);
         if (config.hasChanged() && !batchLoading) {
             config.save();
         }
