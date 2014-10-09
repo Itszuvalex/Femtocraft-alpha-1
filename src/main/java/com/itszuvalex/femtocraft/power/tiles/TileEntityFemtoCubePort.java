@@ -35,7 +35,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
-                                                                 IMultiBlockComponent {
+        IMultiBlockComponent {
     private static int storage = 50000000;
     public
     @Saveable(desc = true)
@@ -63,10 +63,7 @@ public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
     @Override
     public boolean canAcceptPowerOfLevel(EnumTechLevel level,
                                          ForgeDirection from) {
-        if (!info.isValidMultiBlock()) {
-            return false;
-        }
-        return super.canAcceptPowerOfLevel(level, from);
+        return info.isValidMultiBlock() && super.canAcceptPowerOfLevel(level, from);
     }
 
     /*
@@ -171,10 +168,7 @@ public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
      */
     @Override
     public boolean canCharge(ForgeDirection from) {
-        if (!info.isValidMultiBlock() || output) {
-            return false;
-        }
-        return super.canCharge(from);
+        return !(!info.isValidMultiBlock() || output) && super.canCharge(from);
     }
 
     /*
@@ -186,10 +180,7 @@ public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
      */
     @Override
     public boolean canConnect(ForgeDirection from) {
-        if (!info.isValidMultiBlock()) {
-            return false;
-        }
-        return super.canConnect(from);
+        return info.isValidMultiBlock() && super.canConnect(from);
     }
 
     /*
@@ -249,7 +240,7 @@ public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
 
     private boolean isController() {
         return info.isValidMultiBlock()
-                && ((info.x() == xCoord) && (info.y() == yCoord) && (info.z() == zCoord));
+               && ((info.x() == xCoord) && (info.y() == yCoord) && (info.z() == zCoord));
     }
 
     /*
@@ -280,13 +271,12 @@ public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
         if (canPlayerUse(par5EntityPlayer) && info.isValidMultiBlock()) {
             ItemStack item = par5EntityPlayer.getCurrentEquippedItem();
             if (item != null
-                    && item.getItem() instanceof IInterfaceDevice
-                    && ((IInterfaceDevice) item.getItem()).getInterfaceLevel().tier >= EnumTechLevel.FEMTO.tier) {
+                && item.getItem() instanceof IInterfaceDevice
+                && ((IInterfaceDevice) item.getItem()).getInterfaceLevel().tier >= EnumTechLevel.FEMTO.tier) {
                 output = !output;
                 worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
                 return true;
-            }
-            else {
+            } else {
                 par5EntityPlayer.openGui(getMod(), getGuiID(), worldObj,
                         info.x(), info.y(), info.z());
                 return true;

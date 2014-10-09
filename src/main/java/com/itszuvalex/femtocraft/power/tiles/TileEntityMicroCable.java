@@ -33,8 +33,8 @@ public class TileEntityMicroCable extends TileEntityPowerBase {
 
     public boolean connectedAcross() {
         if (numConnections() == 2) {
-            if (connections[0] && connections[1] || connections[2] && connections[3] || connections[4] &&
-                    connections[5]) {
+            if (connections()[0] && connections()[1] || connections()[2] && connections()[3] || connections()[4] &&
+                                                                                                connections()[5]) {
                 return true;
             }
         }

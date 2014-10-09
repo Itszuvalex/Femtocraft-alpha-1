@@ -41,7 +41,7 @@ import java.util.Collection;
  * Created by Christopher Harris (Itszuvalex) on 5/2/14.
  */
 public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
-                                                                     IPlasmaContainer, IMultiBlockComponent {
+        IPlasmaContainer, IMultiBlockComponent {
     public static int powerStorage = 500000;
     public static int stabilityRating = 8000;
     public static int temperatureRating = 8000;
@@ -63,7 +63,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
         IPowerBlockContainer c = getController();
         if (c != null) {
             if (c == this) {
-                return container.getFillPercentageForCharging();
+                return super.getFillPercentageForCharging(from);
             }
             return c.getFillPercentageForCharging(from);
         }
@@ -76,7 +76,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
         IPowerBlockContainer c = getController();
         if (c != null) {
             if (c == this) {
-                return container.getFillPercentageForOutput();
+                return super.getFillPercentageForOutput(to);
             }
             return c.getFillPercentageForOutput(to);
         }
@@ -106,7 +106,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
         IPowerBlockContainer c = getController();
         if (c != null) {
             if (c == this) {
-                return container.canAcceptPowerOfLevel(level);
+                return super.canAcceptPowerOfLevel(level, from);
             }
             return c.canAcceptPowerOfLevel(level, from);
         }
@@ -118,11 +118,11 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
         IPowerBlockContainer c = getController();
         if (c != null) {
             if (c == this) {
-                return container.getTechLevel();
+                return super.getTechLevel(to);
             }
             return c.getTechLevel(to);
         }
-        return container.getTechLevel();
+        return super.getTechLevel(to);
     }
 
     @Override
@@ -130,7 +130,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
         IPowerBlockContainer c = getController();
         if (c != null) {
             if (c == this) {
-                return container.getCurrentPower();
+                return super.getCurrentPower();
             }
             return c.getCurrentPower();
         }
@@ -142,7 +142,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
         IPowerBlockContainer c = getController();
         if (c != null) {
             if (c == this) {
-                return container.getMaxPower();
+                return super.getMaxPower();
             }
             return c.getMaxPower();
         }
@@ -154,7 +154,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
         IPowerBlockContainer c = getController();
         if (c != null) {
             if (c == this) {
-                return container.getFillPercentage();
+                return super.getFillPercentage();
             }
             return c.getFillPercentage();
         }
@@ -178,7 +178,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
         IPowerBlockContainer c = getController();
         if (c != null) {
             if (c == this) {
-                return container.charge(amount);
+                return super.charge(from, amount);
             }
             return c.charge(from, amount);
         }
@@ -190,7 +190,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
         IPowerBlockContainer c = getController();
         if (c != null) {
             if (c == this) {
-                return container.consume(amount);
+                return super.consume(amount);
             }
             return c.consume(amount);
         }
@@ -321,7 +321,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
 
     private boolean isController() {
         return info.isValidMultiBlock() && info.x() == xCoord &&
-                info.y() == yCoord && info.z() == zCoord;
+               info.y() == yCoord && info.z() == zCoord;
     }
 
     @Override

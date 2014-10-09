@@ -106,7 +106,7 @@ public class RenderNanoCable implements ISimpleBlockRenderingHandler {
         tessellator.setColorOpaque_F(1, 1, 1);
         // tessellator.setBrightness((int)
         // (BlockNanoCable.getBlockBrightness(renderer.blockAccess, x, y, z) * 3200.));
-        return renderCable(cable, x, y, z, cableTile.connections);
+        return renderCable(cable, x, y, z, cableTile.connections());
     }
 
     @Override

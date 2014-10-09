@@ -104,7 +104,7 @@ public class RenderMicroCable implements ISimpleBlockRenderingHandler {
         tessellator.setBrightness(block.getMixedBrightnessForBlock(
                 renderer.blockAccess, x, y, z));
         tessellator.setColorOpaque_F(1, 1, 1);
-        return renderCable(cable, x, y, z, cableTile.connections);
+        return renderCable(cable, x, y, z, cableTile.connections());
     }
 
     @Override

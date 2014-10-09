@@ -60,9 +60,12 @@ public class BlockMicroCable extends BlockPowerContainer {
 
     @Override
     public void randomDisplayTick(World par1World, int x, int y, int z, Random par5Random) {
-        double spawnX = x + getBlockBoundsMinX() + par5Random.nextFloat() * (getBlockBoundsMaxX() - getBlockBoundsMinX());
-        double spawnY = y + getBlockBoundsMinY() + par5Random.nextFloat() * (getBlockBoundsMaxY() - getBlockBoundsMinY());
-        double spawnZ = z + getBlockBoundsMinZ() + par5Random.nextFloat() * (getBlockBoundsMaxZ() - getBlockBoundsMinZ());
+        double spawnX =
+                x + getBlockBoundsMinX() + par5Random.nextFloat() * (getBlockBoundsMaxX() - getBlockBoundsMinX());
+        double spawnY =
+                y + getBlockBoundsMinY() + par5Random.nextFloat() * (getBlockBoundsMaxY() - getBlockBoundsMinY());
+        double spawnZ =
+                z + getBlockBoundsMinZ() + par5Random.nextFloat() * (getBlockBoundsMaxZ() - getBlockBoundsMinZ());
 
         RenderUtils.spawnParticle(par1World, RenderUtils.MICRO_POWER_PARTICLE, spawnX, spawnY, spawnZ);
     }
@@ -101,7 +104,7 @@ public class BlockMicroCable extends BlockPowerContainer {
         TileEntityMicroCable cable = (TileEntityMicroCable) tile;
 
         for (int i = 0; i < 6; ++i) {
-            if (!cable.connections[i]) {
+            if (!cable.connections()[i]) {
                 continue;
             }
             AxisAlignedBB bb = boundingBoxForDirection(
@@ -166,7 +169,7 @@ public class BlockMicroCable extends BlockPowerContainer {
         TileEntityMicroCable cable = (TileEntityMicroCable) tile;
 
         for (int i = 0; i < 6; ++i) {
-            if (!cable.connections[i]) {
+            if (!cable.connections()[i]) {
                 continue;
             }
             box = box.func_111270_a(boundingBoxForDirection(
@@ -214,7 +217,7 @@ public class BlockMicroCable extends BlockPowerContainer {
         TileEntityMicroCable cable = (TileEntityMicroCable) tile;
 
         for (int i = 0; i < 6; ++i) {
-            if (!cable.connections[i]) {
+            if (!cable.connections()[i]) {
                 continue;
             }
             ForgeDirection dir = ForgeDirection.getOrientation(i);
@@ -250,17 +253,17 @@ public class BlockMicroCable extends BlockPowerContainer {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                 .toLowerCase() + ":" + "FemtopowerCableCoil");
+                                                               .toLowerCase() + ":" + "FemtopowerCableCoil");
         this.coreBorder = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                  .toLowerCase() + ":" + "FemtopowerCableCoreBorder");
+                                                                .toLowerCase() + ":" + "FemtopowerCableCoreBorder");
         this.connector = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                 .toLowerCase() + ":" + "FemtopowerCableConnector");
+                                                               .toLowerCase() + ":" + "FemtopowerCableConnector");
         this.coil = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "FemtopowerCableCoil");
+                                                  + ":" + "FemtopowerCableCoil");
         this.coilEdge = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                .toLowerCase() + ":" + "FemtopowerCableCoilEdge");
+                                                              .toLowerCase() + ":" + "FemtopowerCableCoilEdge");
         this.border = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "FemtopowerCableBorder");
+                                                    + ":" + "FemtopowerCableBorder");
     }
 
 }

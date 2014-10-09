@@ -164,8 +164,8 @@ object FemtocraftConfigHelper {
         field.setInt(obj, getValue(field.getName, field.getInt(obj), section, anno, config))
       }
 
-      def getValue(key: String, `def`: Integer, section: String, anno: Configurable, config: Configuration): Integer = {
-        config.get(section, key, `def`, anno.comment).getInt
+      def getValue(key: String, default: Integer, section: String, anno: Configurable, config: Configuration): Integer = {
+        config.get(section, key, default, anno.comment).getInt
       }
     })
     loaderMap.put(classOf[Array[Int]], new FemtocraftConfigHelper.FieldLoader[Array[Int]] {
@@ -173,8 +173,8 @@ object FemtocraftConfigHelper {
         field.set(obj, getValue(field.getName, field.get(obj).asInstanceOf[Array[Int]], section, anno, config))
       }
 
-      def getValue(key: String, `def`: Array[Int], section: String, anno: Configurable, config: Configuration): Array[Int] = {
-        config.get(section, key, `def`.asInstanceOf[Array[Int]], anno.comment).getIntList
+      def getValue(key: String, default: Array[Int], section: String, anno: Configurable, config: Configuration): Array[Int] = {
+        config.get(section, key, default.asInstanceOf[Array[Int]], anno.comment).getIntList
       }
     })
     loaderMap.put(classOf[String], new FemtocraftConfigHelper.FieldLoader[String] {
@@ -182,8 +182,8 @@ object FemtocraftConfigHelper {
         field.set(obj, getValue(field.getName, field.get(obj).asInstanceOf[String], section, anno, config))
 
 
-      def getValue(key: String, `def`: String, section: String, anno: Configurable, config: Configuration): String =
-        unescapeConfigString(config.get(section, key, escapeConfigString(`def`), anno.comment).getString)
+      def getValue(key: String, default: String, section: String, anno: Configurable, config: Configuration): String =
+        unescapeConfigString(config.get(section, key, escapeConfigString(default), anno.comment).getString)
 
     })
     loaderMap.put(classOf[Array[String]], new FemtocraftConfigHelper.FieldLoader[Array[String]] {
@@ -191,8 +191,8 @@ object FemtocraftConfigHelper {
         field.set(obj, getValue(field.getName, field.get(obj).asInstanceOf[Array[String]], section, anno, config))
       }
 
-      def getValue(key: String, `def`: Array[String], section: String, anno: Configurable, config: Configuration): Array[String] = {
-        config.get(section, key, `def`, anno.comment).getStringList
+      def getValue(key: String, default: Array[String], section: String, anno: Configurable, config: Configuration): Array[String] = {
+        config.get(section, key, default, anno.comment).getStringList
       }
     })
     loaderMap.put(classOf[Boolean], new FemtocraftConfigHelper.FieldLoader[Boolean] {
@@ -200,8 +200,8 @@ object FemtocraftConfigHelper {
         field.setBoolean(obj, getValue(field.getName, field.getBoolean(obj), section, anno, config))
       }
 
-      def getValue(key: String, `def`: Boolean, section: String, anno: Configurable, config: Configuration): Boolean =
-        config.get(section, key, `def`, anno.comment).getBoolean(`def`)
+      def getValue(key: String, default: Boolean, section: String, anno: Configurable, config: Configuration): Boolean =
+        config.get(section, key, default, anno.comment).getBoolean(default)
 
     })
     loaderMap.put(classOf[Array[Boolean]], new FemtocraftConfigHelper.FieldLoader[Array[Boolean]] {
@@ -209,8 +209,8 @@ object FemtocraftConfigHelper {
         field.set(obj, getValue(field.getName, field.get(obj).asInstanceOf[Array[Boolean]], section, anno, config))
       }
 
-      def getValue(key: String, `def`: Array[Boolean], section: String, anno: Configurable, config: Configuration): Array[Boolean] =
-        config.get(section, key, `def`.asInstanceOf[Array[Boolean]], anno.comment).getBooleanList
+      def getValue(key: String, default: Array[Boolean], section: String, anno: Configurable, config: Configuration): Array[Boolean] =
+        config.get(section, key, default.asInstanceOf[Array[Boolean]], anno.comment).getBooleanList
 
     })
     loaderMap.put(classOf[Double], new FemtocraftConfigHelper.FieldLoader[Double] {
@@ -218,15 +218,15 @@ object FemtocraftConfigHelper {
         field.setDouble(obj, getValue(field.getName, field.getDouble(obj), section, anno, config))
       }
 
-      def getValue(key: String, `def`: Double, section: String, anno: Configurable, config: Configuration): Double = config.get(section, key, `def`, anno.comment).getDouble(`def`)
+      def getValue(key: String, default: Double, section: String, anno: Configurable, config: Configuration): Double = config.get(section, key, default, anno.comment).getDouble(default)
     })
     loaderMap.put(classOf[Array[Double]], new FemtocraftConfigHelper.FieldLoader[Array[Double]] {
       def load(field: Field, section: String, anno: Configurable, obj: AnyRef, config: Configuration) {
         field.set(obj, getValue(field.getName, field.get(obj).asInstanceOf[Array[Double]], section, anno, config))
       }
 
-      def getValue(key: String, `def`: Array[Double], section: String, anno: Configurable, config: Configuration): Array[Double] =
-        config.get(section, key, `def`.asInstanceOf[Array[Double]], anno.comment).getDoubleList
+      def getValue(key: String, default: Array[Double], section: String, anno: Configurable, config: Configuration): Array[Double] =
+        config.get(section, key, default.asInstanceOf[Array[Double]], anno.comment).getDoubleList
 
     })
     loaderMap.put(classOf[Float], new FemtocraftConfigHelper.FieldLoader[Float] {
@@ -234,8 +234,8 @@ object FemtocraftConfigHelper {
         field.setFloat(obj, getValue(field.getName, field.getFloat(obj), section, anno, config))
       }
 
-      def getValue(key: String, `def`: Float, section: String, anno: Configurable, config: Configuration): Float =
-        config.get(section, key, `def`, anno.comment).getDouble(`def`).asInstanceOf[Float]
+      def getValue(key: String, default: Float, section: String, anno: Configurable, config: Configuration): Float =
+        config.get(section, key, default, anno.comment).getDouble(default).asInstanceOf[Float]
 
     })
     loaderMap.put(classOf[EnumTechLevel], new FemtocraftConfigHelper.FieldLoader[EnumTechLevel] {
@@ -243,8 +243,8 @@ object FemtocraftConfigHelper {
         field.set(obj, getValue(field.getName, field.get(obj).asInstanceOf[EnumTechLevel], section, anno, config))
       }
 
-      def getValue(key: String, `def`: EnumTechLevel, section: String, anno: Configurable, config: Configuration): EnumTechLevel = {
-        EnumTechLevel.getTech(config.get(section, key, `def`.key, anno.comment).getString)
+      def getValue(key: String, default: EnumTechLevel, section: String, anno: Configurable, config: Configuration): EnumTechLevel = {
+        EnumTechLevel.getTech(config.get(section, key, default.key, anno.comment).getString)
       }
     })
     loaderMap.put(classOf[ItemStack], new FemtocraftConfigHelper.FieldLoader[ItemStack] {
@@ -252,8 +252,8 @@ object FemtocraftConfigHelper {
         field.set(obj, getValue(field.getName, field.get(obj).asInstanceOf[ItemStack], section, anno, config))
       }
 
-      def getValue(key: String, `def`: ItemStack, section: String, anno: Configurable, config: Configuration): ItemStack = {
-        FemtocraftStringUtils.itemStackFromString(config.get(section, key, FemtocraftStringUtils.itemStackToString(`def`), anno.comment).getString)
+      def getValue(key: String, default: ItemStack, section: String, anno: Configurable, config: Configuration): ItemStack = {
+        FemtocraftStringUtils.itemStackFromString(config.get(section, key, FemtocraftStringUtils.itemStackToString(default), anno.comment).getString)
       }
     })
     loaderMap.put(classOf[Array[ItemStack]], new FemtocraftConfigHelper.FieldLoader[Array[ItemStack]] {
@@ -261,10 +261,10 @@ object FemtocraftConfigHelper {
         field.set(obj, getValue(field.getName, field.get(obj).asInstanceOf[Array[ItemStack]], section, anno, config))
       }
 
-      def getValue(key: String, `def`: Array[ItemStack], section: String, anno: Configurable, config: Configuration): Array[ItemStack] = {
-        val defsar = if (`def` == null) new Array[String](0) else new Array[String](`def`.length)
-        for (i <- 0 until `def`.length) {
-          defsar(i) = FemtocraftStringUtils.itemStackToString(`def`(i))
+      def getValue(key: String, default: Array[ItemStack], section: String, anno: Configurable, config: Configuration): Array[ItemStack] = {
+        val defsar = if (default == null) new Array[String](0) else new Array[String](default.length)
+        for (i <- 0 until default.length) {
+          defsar(i) = FemtocraftStringUtils.itemStackToString(default(i))
         }
         val sar = config.get(section, key, defsar, anno.comment).getStringList
         val ret = if (sar == null) new Array[ItemStack](0) else new Array[ItemStack](sar.length)
