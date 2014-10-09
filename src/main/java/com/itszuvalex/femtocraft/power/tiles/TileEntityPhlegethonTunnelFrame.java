@@ -24,6 +24,7 @@ package com.itszuvalex.femtocraft.power.tiles;
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelComponent;
 import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
+import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
@@ -35,8 +36,7 @@ import net.minecraftforge.common.ForgeDirection;
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/13/14.
  */
-public class TileEntityPhlegethonTunnelFrame extends TileEntityPowerProducer implements IPhlegethonTunnelComponent,
-        IPowerBlockContainer {
+public class TileEntityPhlegethonTunnelFrame extends TileEntityPowerProducer implements IPhlegethonTunnelComponent {
     @FemtocraftDataUtils.Saveable(desc = true)
     private MultiBlockInfo info = new MultiBlockInfo();
 

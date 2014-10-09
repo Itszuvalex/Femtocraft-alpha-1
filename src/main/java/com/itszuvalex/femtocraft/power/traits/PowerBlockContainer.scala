@@ -11,7 +11,7 @@ import net.minecraftforge.common.ForgeDirection
 
 trait PowerBlockContainer extends IPowerBlockContainer {
   @Saveable
-  val container: PowerContainer = defaultContainer
+  protected val container: PowerContainer = defaultContainer
 
   def defaultContainer: PowerContainer
 
