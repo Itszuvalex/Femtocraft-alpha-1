@@ -18,35 +18,32 @@
  *  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *  *****************************************************************************
  */
+package com.itszuvalex.femtocraft.utils
 
-package com.itszuvalex.femtocraft.utils;
+import java.io.File
 
-import com.itszuvalex.femtocraft.Femtocraft;
-import net.minecraft.client.Minecraft;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.World;
-
-import java.io.File;
+import com.itszuvalex.femtocraft.Femtocraft
+import net.minecraft.client.Minecraft
+import net.minecraft.server.MinecraftServer
+import net.minecraft.world.World
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/26/14.
  */
-public class FemtocraftFileUtils {
-    public static String savePath(World world) {
-        return !MinecraftServer.getServer().isDedicatedServer() ? Minecraft.getMinecraft().mcDataDir + "/saves/"
-                +
-                world.getSaveHandler().getWorldDirectoryName() : MinecraftServer.getServer().getFile
-                (world.getSaveHandler().getWorldDirectoryName())
-                                                                                .getPath();
-    }
+object FemtocraftFileUtils {
+  def savePath(world: World) = if (!MinecraftServer.getServer.isDedicatedServer)
+    Minecraft.getMinecraft.mcDataDir + "/saves/" + world.getSaveHandler.getWorldDirectoryName
+  else MinecraftServer.getServer.getFile(world.getSaveHandler.getWorldDirectoryName).getPath
 
-    public static String savePathFemtocraft(World world) {
-        File dir = new File(savePath(world), Femtocraft.ID().toLowerCase());
-        if (!dir.exists()) {
-            dir.mkdir();
-        }
-        return dir.getPath();
+
+  def savePathFemtocraft(world: World) = {
+    val dir = new File(savePath(world), Femtocraft.ID.toLowerCase)
+    if (!dir.exists) {
+      dir.mkdir
     }
+    dir.getPath
+  }
 }
+
 
 

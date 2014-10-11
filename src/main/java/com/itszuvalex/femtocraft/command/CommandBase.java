@@ -63,21 +63,24 @@ public abstract class CommandBase implements ICommand {
         output.append(EnumChatFormatting.YELLOW);
         output.append(getCommandName());
         output.append('\n');
-        output.append(EnumChatFormatting.BOLD + "aliases\n" + EnumChatFormatting.RESET + EnumChatFormatting.YELLOW);
+        output.append(EnumChatFormatting.BOLD).append("aliases\n").append(EnumChatFormatting.RESET).append
+                (EnumChatFormatting.YELLOW);
         for (String alias : aliases) {
             output.append(alias);
             output.append('\n');
         }
-        output.append(EnumChatFormatting.BOLD + "subcommands\n" + EnumChatFormatting.RESET + EnumChatFormatting.YELLOW);
+        output.append(EnumChatFormatting.BOLD).append("subcommands\n").append(EnumChatFormatting.RESET).append
+                (EnumChatFormatting.YELLOW);
         for (String subcommand : subcmds.keySet()) {
             ICommand com = getSubCommand(subcommand);
-            output.append(EnumChatFormatting.RED + subcommand + EnumChatFormatting.YELLOW);
+            output.append(EnumChatFormatting.RED).append(subcommand).append(EnumChatFormatting.YELLOW);
             for (Object alias : com.getCommandAliases()) {
-                output.append(EnumChatFormatting.BLUE + "|" + EnumChatFormatting.GRAY);
+                output.append(EnumChatFormatting.BLUE).append("|").append(EnumChatFormatting.GRAY);
                 output.append((String) alias);
             }
             if (com instanceof CommandBase) {
-                output.append(EnumChatFormatting.WHITE + " - " + ((CommandBase) com).getDescription() + EnumChatFormatting.YELLOW);
+                output.append(EnumChatFormatting.WHITE).append(" - ").append(((CommandBase) com).getDescription())
+                        .append(EnumChatFormatting.YELLOW);
             }
             output.append('\n');
         }
@@ -113,7 +116,8 @@ public abstract class CommandBase implements ICommand {
         if (astring.length > 0) {
             ICommand subcommand = getSubCommand(astring[0]);
             if (subcommand != null) {
-                return subcommand.addTabCompletionOptions(icommandsender, Arrays.copyOfRange(astring, 1, astring.length));
+                return subcommand.addTabCompletionOptions(icommandsender, Arrays.copyOfRange(astring, 1,
+                        astring.length));
             }
         }
         return new ArrayList(subcmds.keySet());

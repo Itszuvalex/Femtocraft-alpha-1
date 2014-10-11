@@ -19,8 +19,9 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.managers.research;
+package com.itszuvalex.femtocraft.api.events;
 
+import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
 import net.minecraftforge.event.Cancelable;
 import net.minecraftforge.event.Event;
 

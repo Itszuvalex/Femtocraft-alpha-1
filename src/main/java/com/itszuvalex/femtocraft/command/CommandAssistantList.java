@@ -51,10 +51,9 @@ public class CommandAssistantList extends CommandBase {
             Map<String, AssistantPermissions> assist = Femtocraft.assistantManager().getPlayerAssistants(username);
             if (assist == null || assist.isEmpty()) {
                 str.append("None.");
-            }
-            else {
+            } else {
                 for (String assistant : assist.keySet()) {
-                    str.append(assistant + "\n");
+                    str.append(assistant).append("\n");
                 }
             }
             str.append(EnumChatFormatting.RESET);

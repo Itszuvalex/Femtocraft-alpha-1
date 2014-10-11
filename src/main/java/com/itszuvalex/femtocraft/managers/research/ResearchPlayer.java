@@ -22,6 +22,7 @@
 package com.itszuvalex.femtocraft.managers.research;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.api.events.EventTechnology;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;

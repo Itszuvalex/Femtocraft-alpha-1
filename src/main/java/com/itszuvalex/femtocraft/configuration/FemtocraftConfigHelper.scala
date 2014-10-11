@@ -26,15 +26,14 @@ import java.util.regex.Pattern
 
 import com.google.common.collect.HashBiMap
 import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.implicits.ItemStackImplicits._
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel
-import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils
 import net.minecraft.item.ItemStack
 import net.minecraftforge.common.Configuration
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
-
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 9/10/14.
@@ -217,7 +216,7 @@ object FemtocraftConfigHelper {
       }
 
       def getValue(key: String, default: ItemStack, section: String, anno: Configurable, config: Configuration): ItemStack = {
-        FemtocraftStringUtils.itemStackFromString(config.get(section, key, FemtocraftStringUtils.itemStackToString(default), anno.comment).getString)
+        config.get(section, key, default.toModQualifiedString, anno.comment).getString.toItemStack
       }
     })
     loaderMap.put(classOf[Array[ItemStack]], new FemtocraftConfigHelper.FieldLoader[Array[ItemStack]] {
@@ -228,12 +227,12 @@ object FemtocraftConfigHelper {
       def getValue(key: String, default: Array[ItemStack], section: String, anno: Configurable, config: Configuration): Array[ItemStack] = {
         val defsar = if (default == null) new Array[String](0) else new Array[String](default.length)
         for (i <- 0 until defsar.length) {
-          defsar(i) = FemtocraftStringUtils.itemStackToString(default(i))
+          defsar(i) = default(i).toModQualifiedString
         }
         val sar = config.get(section, key, defsar, anno.comment).getStringList
         val ret = if (sar == null) new Array[ItemStack](0) else new Array[ItemStack](sar.length)
         for (i <- 0 until sar.length) {
-          ret(i) = FemtocraftStringUtils.itemStackFromString(sar(i))
+          ret(i) = sar(i).toItemStack
         }
         ret
       }

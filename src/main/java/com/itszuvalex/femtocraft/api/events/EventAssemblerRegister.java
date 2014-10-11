@@ -19,8 +19,9 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.managers.assembler;
+package com.itszuvalex.femtocraft.api.events;
 
+import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
 import net.minecraftforge.event.Cancelable;
 import net.minecraftforge.event.Event;
 
