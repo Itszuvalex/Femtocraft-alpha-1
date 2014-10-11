@@ -31,7 +31,7 @@ import java.util.Set;
 /**
  * Created by Christopher Harris (Itszuvalex) on 9/22/14.
  */
-public class FemtocraftConfigAssembler {
+public class FemtocraftAssemblerConfig {
     public static final String ENABLE_SECTION_KEY = "assembler_recipe_enabled";
     public static final String SECTION_KEY = "assembler_recipes";
     public static final String CUSTOM_RECIPE_SECTION_KEY = "custom_assembler_recipes";
@@ -46,7 +46,7 @@ public class FemtocraftConfigAssembler {
         }
     }
 
-    public FemtocraftConfigAssembler(Configuration config) {
+    public FemtocraftAssemblerConfig(Configuration config) {
         this.config = config;
     }
 

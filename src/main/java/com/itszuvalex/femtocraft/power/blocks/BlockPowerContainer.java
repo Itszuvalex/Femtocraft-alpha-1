@@ -30,7 +30,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 /**
@@ -40,11 +39,6 @@ public class BlockPowerContainer extends TileContainer {
 
     public BlockPowerContainer(int par1, Material par2Material) {
         super(par1, par2Material);
-    }
-
-    @Override
-    public TileEntity createNewTileEntity(World world) {
-        return new TileEntityPowerBase();
     }
 
     /*

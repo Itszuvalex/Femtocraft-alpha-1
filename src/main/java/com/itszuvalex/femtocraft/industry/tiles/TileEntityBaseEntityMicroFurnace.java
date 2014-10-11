@@ -32,6 +32,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraftforge.common.ForgeDirection;
 
 @Configurable
 public class TileEntityBaseEntityMicroFurnace extends
@@ -40,6 +41,17 @@ public class TileEntityBaseEntityMicroFurnace extends
     public static EnumTechLevel TECH_LEVEL = EnumTechLevel.MICRO;
     @Configurable(comment = "Power storage maximum.")
     public static int POWER_STORAGE = 800;
+
+    @Override
+    public EnumTechLevel getTechLevel(ForgeDirection to) {
+        return TECH_LEVEL;
+    }
+
+    @Override
+    public int getMaxPower() {
+        return POWER_STORAGE;
+    }
+
     @Configurable(comment = "Power per item to begin processing.")
     public static int POWER_TO_COOK = 40;
     @Configurable(comment = "Ticks required to process.")
@@ -70,8 +82,6 @@ public class TileEntityBaseEntityMicroFurnace extends
 
     public TileEntityBaseEntityMicroFurnace() {
         super();
-        setMaxStorage(POWER_STORAGE);
-        setTechLevel(TECH_LEVEL);
     }
 
     @Override

@@ -26,6 +26,7 @@ import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies;
+import net.minecraftforge.common.ForgeDirection;
 
 @Configurable
 public class TileEntityNanoDismantler extends
@@ -57,10 +58,14 @@ public class TileEntityNanoDismantler extends
     @Configurable(comment = "Power per item to begin processing, post upgrade.")
     public static int POWER_TO_COOK_POST = 80;
 
-    public TileEntityNanoDismantler() {
-        super();
-        this.setTechLevel(TECH_LEVEL);
-        this.setMaxStorage(POWER_STORAGE);
+    @Override
+    public EnumTechLevel getTechLevel(ForgeDirection to) {
+        return TECH_LEVEL;
+    }
+
+    @Override
+    public int getMaxPower() {
+        return POWER_STORAGE;
     }
 
     @Override

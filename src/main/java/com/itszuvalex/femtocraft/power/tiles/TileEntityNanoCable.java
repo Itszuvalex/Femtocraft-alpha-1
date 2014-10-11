@@ -22,11 +22,16 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityNanoCable extends TileEntityMicroCable {
-    public TileEntityNanoCable() {
-        super();
-        setMaxStorage(2000);
-        setTechLevel(EnumTechLevel.NANO);
+    @Override
+    public EnumTechLevel getTechLevel(ForgeDirection to) {
+        return EnumTechLevel.NANO;
+    }
+
+    @Override
+    public int getMaxPower() {
+        return 2000;
     }
 }

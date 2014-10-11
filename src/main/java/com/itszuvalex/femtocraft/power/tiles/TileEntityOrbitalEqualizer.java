@@ -35,10 +35,14 @@ public class TileEntityOrbitalEqualizer extends TileEntityPowerBase {
     @Configurable(comment = "Power level to distribute energy on second.")
     public static EnumTechLevel SECONDARY_POWER_LEVEL = EnumTechLevel.MICRO;
 
-    public TileEntityOrbitalEqualizer() {
-        super();
-        setMaxStorage(POWER_STORAGE);
-        setTechLevel(PRIMARY_POWER_LEVEL);
+    @Override
+    public EnumTechLevel getTechLevel(ForgeDirection to) {
+        return to == ForgeDirection.UNKNOWN ? PRIMARY_POWER_LEVEL : container().getTechLevel();
+    }
+
+    @Override
+    public int getMaxPower() {
+        return POWER_STORAGE;
     }
 
     @Override

@@ -38,12 +38,19 @@ public class TileEntityMicroCube extends TileEntityPowerBase {
     public static final EnumTechLevel ENUM_TECH_LEVEL = EnumTechLevel.MICRO;
     public boolean[] outputs = new boolean[6]; // Not @Saveable due to bit masking
 
+    @Override
+    public EnumTechLevel getTechLevel(ForgeDirection to) {
+        return ENUM_TECH_LEVEL;
+    }
+
+    @Override
+    public int getMaxPower() {
+        return maxStorage;
+    }
+
     public TileEntityMicroCube() {
         super();
-        setMaxStorage(maxStorage);
-        setTechLevel(ENUM_TECH_LEVEL);
         Arrays.fill(outputs, false);
-        setTechLevel(ENUM_TECH_LEVEL);
     }
 
     public static PowerContainer getDefaultContainer() {
@@ -68,7 +75,7 @@ public class TileEntityMicroCube extends TileEntityPowerBase {
     @Override
     public boolean canCharge(ForgeDirection from) {
         return !outputs[FemtocraftUtils.indexOfForgeDirection(from)]
-                && super.canCharge(from);
+               && super.canCharge(from);
     }
 
     @Override

@@ -64,11 +64,19 @@ public class TileEntityBaseEntityNanoEnmesher extends
     @FemtocraftDataUtils.Saveable
     private int ticksToCook;
 
+    @Override
+    public EnumTechLevel getTechLevel(ForgeDirection to) {
+        return TECH_LEVEL;
+    }
+
+    @Override
+    public int getMaxPower() {
+        return POWER_STORAGE;
+    }
+
     public TileEntityBaseEntityNanoEnmesher() {
         super();
         inventory = new BaseInventory(inventorySize);
-        setTechLevel(TECH_LEVEL);
-        setMaxStorage(POWER_STORAGE);
     }
 
     @Override

@@ -38,8 +38,17 @@ import net.minecraftforge.common.ForgeDirection;
 import java.util.Collection;
 
 public class TileEntityFemtoStellaratorOpticalMaser extends
-                                                    TileEntityPowerConsumer
+        TileEntityPowerConsumer
         implements IFusionReactorComponent, IMultiBlockComponent {
+    @Override
+    public EnumTechLevel getTechLevel(ForgeDirection to) {
+        return EnumTechLevel.FEMTO;
+    }
+
+    @Override
+    public int getMaxPower() {
+        return powerStorage;
+    }
 
     public static int powerStorage = 10000000;
     public static int warmupThreshold = 1000000;
@@ -69,8 +78,6 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
 
     public TileEntityFemtoStellaratorOpticalMaser() {
         super();
-        setTechLevel(EnumTechLevel.FEMTO);
-        setMaxStorage(powerStorage);
         info = new MultiBlockInfo();
         igniting = false;
         sustaining = false;
@@ -95,21 +102,18 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
                 if (core == null || !consume(powerTransferPerTick)) {
                     warmed = false;
                     setModified();
-                }
-                else {
+                } else {
                     //Excess power is lost
                     core.contributeCoreEnergy(powerTransferPerTick);
                     setModified();
                 }
-            }
-            else {
+            } else {
                 if (getCurrentPower() >= warmupThreshold) {
                     warmed = true;
                     setModified();
                 }
             }
-        }
-        else {
+        } else {
             warmed = false;
             setModified();
         }

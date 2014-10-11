@@ -17,14 +17,14 @@ import java.util.logging.Level;
 /**
  * Created by Chris on 9/11/2014.
  */
-public class FemtocraftConfigTechnology {
+public class FemtocraftTechnologyConfig {
     public static final String SECTION_KEY = "technologies";
     private final Configuration config;
     private final XMLTechnology xml;
     private final File file;
     private final ManagerAssemblerRecipe assemblyRecipes;
 
-    public FemtocraftConfigTechnology(File file) {
+    public FemtocraftTechnologyConfig(File file) {
         this.file = file;
         if (FemtocraftConfigs.useXMLFile) {
             this.xml = new XMLTechnology(file);

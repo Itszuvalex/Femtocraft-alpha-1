@@ -47,22 +47,6 @@ public class TileEntityMagneticInductionGenerator extends TileEntityPowerProduce
     @SideOnly(Side.CLIENT)
     private Random random = new Random();
 
-    public TileEntityMagneticInductionGenerator() {
-        super();
-        setTechLevel(POWER_LEVEL);
-        setMaxStorage(POWER_MAX);
-    }
-
-//    @java.lang.Override
-//    public boolean hasGUI() {
-//        return true;
-//    }
-//
-//    @Override
-//    public int getGuiID() {
-//        return FemtocraftGuiHandler.MicroEngineGuiID;
-//    }
-
     @Override
     public void updateEntity() {
         super.updateEntity();
@@ -132,8 +116,19 @@ public class TileEntityMagneticInductionGenerator extends TileEntityPowerProduce
 
     private int magStrengthOfNeighborForDir(int i) {
         ForgeDirection dir = ForgeDirection.getOrientation(i);
-        Block block = Block.blocksList[worldObj.getBlockId(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ)];
+        Block block = Block.blocksList[worldObj.getBlockId(
+                xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ)];
         return MagnetRegistry.isMagnet(block) ? MagnetRegistry.getMagnetStrength(block) : 0;
+    }
+
+    @Override
+    public EnumTechLevel getTechLevel(ForgeDirection to) {
+        return POWER_LEVEL;
+    }
+
+    @Override
+    public int getMaxPower() {
+        return POWER_MAX;
     }
 }
 

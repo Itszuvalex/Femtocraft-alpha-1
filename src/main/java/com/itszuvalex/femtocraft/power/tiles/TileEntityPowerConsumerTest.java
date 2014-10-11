@@ -30,13 +30,22 @@ public class TileEntityPowerConsumerTest extends TileEntityPowerConsumer {
     public TileEntityPowerConsumerTest() {
         super();
         amountPerTick = 10;
-        setTechLevel(EnumTechLevel.MICRO);
     }
 
     @Override
     public void femtocraftServerUpdate() {
         super.femtocraftServerUpdate();
         consume(amountPerTick);
+    }
+
+    @Override
+    public EnumTechLevel getTechLevel(ForgeDirection to) {
+        return EnumTechLevel.MICRO;
+    }
+
+    @Override
+    public int getMaxPower() {
+        return 250;
     }
 
     @Override

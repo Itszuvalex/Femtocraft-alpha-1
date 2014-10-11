@@ -19,7 +19,7 @@ import net.minecraftforge.fluids.IFluidHandler;
  * Created by Chris on 8/26/2014.
  */
 public class TileEntitySteamGenerator extends TileEntityPowerProducer implements IMultiBlockComponent,
-                                                                                 IPowerBlockContainer, IFluidHandler {
+        IPowerBlockContainer, IFluidHandler {
 
     public static float steamGeneratorPercentageMultiplier = (1.f / 3.f);
     @FemtocraftDataUtils.Saveable(desc = true)
@@ -81,7 +81,7 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
                 return ((IPowerBlockContainer) te).getTechLevel(to);
             }
         }
-        return super.getTechLevel(to);
+        return EnumTechLevel.NANO;
     }
 
     @Override
@@ -103,7 +103,7 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
                 return ((IPowerBlockContainer) te).getMaxPower();
             }
         }
-        return super.getMaxPower();
+        return 0;
     }
 
     @Override

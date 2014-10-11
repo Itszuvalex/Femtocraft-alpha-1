@@ -23,7 +23,7 @@ package com.itszuvalex.femtocraft.power.tiles;
 
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityPowerProducer extends TileEntityPowerBase {
+public abstract class TileEntityPowerProducer extends TileEntityPowerBase {
 
     public TileEntityPowerProducer() {
         super();

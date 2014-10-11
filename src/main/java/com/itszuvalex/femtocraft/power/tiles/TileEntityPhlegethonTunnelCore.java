@@ -61,9 +61,9 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
     private int timePlaying = soundLength;
     public static final int soundLength = 100;
 
-    public TileEntityPhlegethonTunnelCore() {
-        setTechLevel(EnumTechLevel.FEMTO);
-        setMaxStorage(ContainerMax);
+    @Override
+    public EnumTechLevel getTechLevel(ForgeDirection to) {
+        return EnumTechLevel.FEMTO;
     }
 
     @Override
@@ -258,18 +258,18 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
     }
 
     @Override
-    public EnumTechLevel getTechLevel() {
-        return super.getTechLevel(ForgeDirection.UNKNOWN);
-    }
-
-    @Override
     public int getCurrentPower() {
         return super.getCurrentPower();
     }
 
     @Override
+    public EnumTechLevel getTechLevel() {
+        return getTechLevel(ForgeDirection.UNKNOWN);
+    }
+
+    @Override
     public int getMaxPower() {
-        return super.getMaxPower();
+        return ContainerMax;
     }
 
     @Override

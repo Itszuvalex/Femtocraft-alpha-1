@@ -27,7 +27,7 @@ import java.util.logging.{Level, Logger}
 
 import com.itszuvalex.femtocraft.blocks.{BlockFemtoStone, BlockMicroStone, BlockNanoStone, BlockUnidentifiedAlloy}
 import com.itszuvalex.femtocraft.command.{CommandBase, CommandFemtocraft}
-import com.itszuvalex.femtocraft.configuration.{FemtocraftConfigAssembler, FemtocraftConfigTechnology, FemtocraftConfigs}
+import com.itszuvalex.femtocraft.configuration.{FemtocraftAssemblerConfig, FemtocraftTechnologyConfig, FemtocraftConfigs}
 import com.itszuvalex.femtocraft.core.MagnetRegistry
 import com.itszuvalex.femtocraft.core.fluids.{BlockFluidMass, FluidMass}
 import com.itszuvalex.femtocraft.core.items.{ItemBase, ItemFemtoInterfaceDevice, ItemMicroInterfaceDevice, ItemNanoInterfaceDevice}
@@ -102,7 +102,7 @@ object Femtocraft {
   var technologyConfigFile                  : File                      = null
   var recipeConfigFile                      : File                      = null
   var recipeConfig                          : Configuration             = null
-  var assemblerConfigs                      : FemtocraftConfigAssembler = null
+  var assemblerConfigs                      : FemtocraftAssemblerConfig = null
   var recipeManager                         : ManagerRecipe             = null
   var researchManager                       : ManagerResearch           = null
   var assistantManager                      : ManagerAssistant          = null
@@ -1081,11 +1081,11 @@ object Femtocraft {
   }
 
   @EventHandler def postInit(event: FMLPostInitializationEvent) {
-    assemblerConfigs = new FemtocraftConfigAssembler(recipeConfig)
+    assemblerConfigs = new FemtocraftAssemblerConfig(recipeConfig)
     recipeManager.init()
     recipeManager.assemblyRecipes.registerDefaultRecipes()
     MagnetRegistry.init()
-    new FemtocraftConfigTechnology(technologyConfigFile).loadTechnologies()
+    new FemtocraftTechnologyConfig(technologyConfigFile).loadTechnologies()
     if (event.getSide eq Side.CLIENT) {
       researchManager.calculateGraph()
     }

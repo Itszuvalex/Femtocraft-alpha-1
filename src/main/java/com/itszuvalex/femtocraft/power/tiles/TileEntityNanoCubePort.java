@@ -35,11 +35,17 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityNanoCubePort extends TileEntityPowerBase implements
-                                                                IMultiBlockComponent {
+        IMultiBlockComponent {
     private static int storage = 500000;
     public
     @Saveable(desc = true)
     boolean output;
+
+    @Override
+    public EnumTechLevel getTechLevel(ForgeDirection to) {
+        return EnumTechLevel.NANO;
+    }
+
     private
     @Saveable(desc = true)
     MultiBlockInfo info;
@@ -47,8 +53,6 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
     public TileEntityNanoCubePort() {
         super();
         info = new MultiBlockInfo();
-        setMaxStorage(storage);
-        setTechLevel(EnumTechLevel.NANO);
         output = false;
     }
 
@@ -99,7 +103,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
     public int getMaxPower() {
         if (info.isValidMultiBlock()) {
             if (isController()) {
-                return super.getMaxPower();
+                return storage;
             }
 
             IPowerBlockContainer fc = (IPowerBlockContainer) worldObj
@@ -108,7 +112,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
                 return fc.getMaxPower();
             }
         }
-        return 0;
+        return storage;
     }
 
     /*
@@ -249,7 +253,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
 
     private boolean isController() {
         return info.isValidMultiBlock()
-                && ((info.x() == xCoord) && (info.y() == yCoord) && (info.z() == zCoord));
+               && ((info.x() == xCoord) && (info.y() == yCoord) && (info.z() == zCoord));
     }
 
     /*
@@ -280,13 +284,12 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
         if (canPlayerUse(par5EntityPlayer) && info.isValidMultiBlock()) {
             ItemStack item = par5EntityPlayer.getCurrentEquippedItem();
             if (item != null
-                    && item.getItem() instanceof IInterfaceDevice
-                    && ((IInterfaceDevice) item.getItem()).getInterfaceLevel().tier >= EnumTechLevel.NANO.tier) {
+                && item.getItem() instanceof IInterfaceDevice
+                && ((IInterfaceDevice) item.getItem()).getInterfaceLevel().tier >= EnumTechLevel.NANO.tier) {
                 output = !output;
                 worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
                 return true;
-            }
-            else {
+            } else {
                 par5EntityPlayer.openGui(getMod(), getGuiID(), worldObj,
                         info.x(), info.y(), info.z());
                 return true;

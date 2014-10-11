@@ -838,7 +838,10 @@ public class FemtocraftConfigs {
 //                    .getDouble(200.f);
 //            ItemAssemblySchematic.infiniteUseMassMultiplier = schematicInfiniteUseMultiplier;
 
-            FemtocraftConfigHelper.loadClassConstants(config);
+            ConfigurableClassFinder ccf = new ConfigurableClassFinder("org.itszuvalex.femtocraft");
+            ccf.registerConfigurableClasses();
+            ccf.loadClassConstants(config);
+
         } catch (Exception e) {
             Femtocraft.log(Level.SEVERE, "Error occured when attempting to load from configs.");
             // failed to load configs log

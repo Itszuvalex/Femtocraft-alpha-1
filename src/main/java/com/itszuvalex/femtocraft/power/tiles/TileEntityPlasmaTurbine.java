@@ -118,11 +118,11 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
         IPowerBlockContainer c = getController();
         if (c != null) {
             if (c == this) {
-                return super.getTechLevel(to);
+                return EnumTechLevel.FEMTO;
             }
             return c.getTechLevel(to);
         }
-        return super.getTechLevel(to);
+        return EnumTechLevel.FEMTO;
     }
 
     @Override
@@ -142,11 +142,11 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
         IPowerBlockContainer c = getController();
         if (c != null) {
             if (c == this) {
-                return super.getMaxPower();
+                return powerStorage;
             }
             return c.getMaxPower();
         }
-        return 0;
+        return powerStorage;
     }
 
     @Override

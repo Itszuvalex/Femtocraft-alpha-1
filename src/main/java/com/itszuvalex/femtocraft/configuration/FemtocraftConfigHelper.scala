@@ -25,7 +25,6 @@ import java.util.logging.Level
 import java.util.regex.Pattern
 
 import com.google.common.collect.HashBiMap
-import com.google.common.reflect.ClassPath
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel
 import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils
@@ -45,7 +44,6 @@ object FemtocraftConfigHelper {
   final   val CLASS_CONSTANTS_KEY           = "Class Constants"
   final   val CATEGORY_SPLITTER_REPLACEMENT = '-'
   final   val CATEGORY_SPLITTER_CHAR        = Configuration.CATEGORY_SPLITTER.charAt(0)
-  private val configurableClasses           = new ArrayBuffer[Class[_]]
   private val configStringEscapes           = HashBiMap.create[String, String]
   private val loaderMap                     = new mutable.HashMap[Class[_], FemtocraftConfigHelper.FieldLoader[_]]
 
@@ -72,19 +70,11 @@ object FemtocraftConfigHelper {
     str
   }
 
-  /**
-   * @param clazz Class to load all @Configurable annotated public/private fields from.
-   * @return True if class successfully added.
-   */
-  def registerConfigurableClass(clazz: Class[_]) = configurableClasses.append(clazz)
-
-  def loadClassConstants(configuration: Configuration) = configurableClasses.foreach(clazz => loadClassFromConfig(configuration, CLASS_CONSTANTS_KEY, clazz.getSimpleName, clazz))
-
   def escapeCategorySplitter(string: String) = string.replace(CATEGORY_SPLITTER_CHAR, CATEGORY_SPLITTER_REPLACEMENT)
 
   def unescapeCategorySplitter(string: String) = string.replace(CATEGORY_SPLITTER_REPLACEMENT, CATEGORY_SPLITTER_CHAR)
 
-  private def loadClassFromConfig(configuration: Configuration, section: String, key: String, clazz: Class[_]) = loadClassInstanceFromConfig(configuration, section, key, clazz, null)
+  def loadClassFromConfig(configuration: Configuration, section: String, key: String, clazz: Class[_]) = loadClassInstanceFromConfig(configuration, section, key, clazz, null)
 
   def loadClassInstanceFromConfig(configuration: Configuration, section: String, key: String, clazz: Class[_], obj: AnyRef) {
     val fieldsList = new ArrayBuffer[Field]
@@ -124,38 +114,12 @@ object FemtocraftConfigHelper {
 
   def init() {
     registerConfigLoaders()
-    registerConfigurableClasses()
     registerStringEscapes()
   }
 
   private def registerStringEscapes() {
     configStringEscapes.put(",", "-comma-")
-    configStringEscapes.put("'", "-apostrophe")
-  }
-
-  private def registerConfigurableClasses() {
-    try {
-      Femtocraft.log(Level.INFO, "Finding all configurable classes for registration.")
-      val classes = ClassPath.from(getClass.getClassLoader).getTopLevelClassesRecursive("com.itszuvalex.femtocraft")
-      classes.foreach(info => {
-        try {
-          val clazz = Class.forName(info.getName)
-          if (clazz.getAnnotation(classOf[Configurable]) != null) {
-            registerConfigurableClass(clazz)
-          }
-          Femtocraft.log(Level.INFO, "Registered " + clazz.getSimpleName + " as configurable.")
-        }
-        catch {
-          case e: ClassNotFoundException =>
-            Femtocraft.log(Level.SEVERE, "Could not find @Configurable class " + info.getName + " when attempting to discover.")
-            e.printStackTrace()
-        }
-      })
-      Femtocraft.log(Level.INFO, "Finished registering configurable classes.")
-    }
-    catch {
-      case e: Exception => e.printStackTrace()
-    }
+    configStringEscapes.put("'", "-apostrophe-")
   }
 
   private def registerConfigLoaders() {
@@ -263,7 +227,7 @@ object FemtocraftConfigHelper {
 
       def getValue(key: String, default: Array[ItemStack], section: String, anno: Configurable, config: Configuration): Array[ItemStack] = {
         val defsar = if (default == null) new Array[String](0) else new Array[String](default.length)
-        for (i <- 0 until default.length) {
+        for (i <- 0 until defsar.length) {
           defsar(i) = FemtocraftStringUtils.itemStackToString(default(i))
         }
         val sar = config.get(section, key, defsar, anno.comment).getStringList

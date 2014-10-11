@@ -44,11 +44,14 @@ public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
     @Saveable(desc = true)
     MultiBlockInfo info;
 
+    @Override
+    public EnumTechLevel getTechLevel(ForgeDirection to) {
+        return EnumTechLevel.FEMTO;
+    }
+
     public TileEntityFemtoCubePort() {
         super();
         info = new MultiBlockInfo();
-        setMaxStorage(storage);
-        setTechLevel(EnumTechLevel.FEMTO);
         output = false;
     }
 
@@ -96,7 +99,7 @@ public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
     public int getMaxPower() {
         if (info.isValidMultiBlock()) {
             if (isController()) {
-                return super.getMaxPower();
+                return storage;
             }
 
             IPowerBlockContainer fc = (IPowerBlockContainer) worldObj
@@ -105,7 +108,7 @@ public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
                 return fc.getMaxPower();
             }
         }
-        return 0;
+        return storage;
     }
 
     /*

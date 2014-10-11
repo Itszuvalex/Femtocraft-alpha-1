@@ -22,14 +22,9 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityMicroCable extends TileEntityPowerBase {
-
-    public TileEntityMicroCable() {
-        super();
-        setMaxStorage(250);
-        setTechLevel(EnumTechLevel.MICRO);
-    }
 
     public boolean connectedAcross() {
         if (numConnections() == 2) {
@@ -41,4 +36,13 @@ public class TileEntityMicroCable extends TileEntityPowerBase {
         return false;
     }
 
+    @Override
+    public EnumTechLevel getTechLevel(ForgeDirection to) {
+        return EnumTechLevel.MICRO;
+    }
+
+    @Override
+    public int getMaxPower() {
+        return 250;
+    }
 }

@@ -26,6 +26,7 @@ import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel
 import com.itszuvalex.femtocraft.power.FemtocraftPowerUtils
 import com.itszuvalex.femtocraft.power.traits.PowerBlockContainer
+import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable
 import net.minecraftforge.common.ForgeDirection
 
 abstract class TileEntityPowerBase() extends TileEntityBase() with PowerBlockContainer {
@@ -34,12 +35,13 @@ abstract class TileEntityPowerBase() extends TileEntityBase() with PowerBlockCon
   /**
    * Have to implement the generated() function to allow Java inheritance.
    */
+  @Saveable
   override protected val container = defaultContainer
 
-  override def defaultContainer = new PowerContainer(getTechLevel(ForgeDirection.UNKNOWN), getMaxPower)
+  def defaultContainer = new PowerContainer(getTechLevel(ForgeDirection.UNKNOWN), getMaxPower)
 
-  def setMaxStorage(maxStorage_ : Int) {
-    container.setMaxPower(maxStorage_)
+  def setMaxStorage(maxStorage: Int) {
+    container.setMaxPower(maxStorage)
     setModified()
   }
 

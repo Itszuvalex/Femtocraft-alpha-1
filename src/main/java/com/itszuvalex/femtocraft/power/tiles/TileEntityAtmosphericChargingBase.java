@@ -38,10 +38,19 @@ public class TileEntityAtmosphericChargingBase extends TileEntityPowerProducer {
     @FemtocraftDataUtils.Saveable
     float storedPowerIncrement;
 
+    @Override
+    public EnumTechLevel getTechLevel(ForgeDirection to) {
+        return EnumTechLevel.MICRO;
+    }
+
+    @Override
+    public int getMaxPower() {
+        return 250;
+    }
+
     public TileEntityAtmosphericChargingBase() {
         super();
         powerPerTick = 0;
-        setTechLevel(EnumTechLevel.MICRO);
     }
 
     @Override
@@ -56,7 +65,7 @@ public class TileEntityAtmosphericChargingBase extends TileEntityPowerProducer {
 
         boolean searching = true;
         for (int i = 0; searching
-                && (i < ((IAtmosphericChargingBase) base).maxAddonsSupported(worldObj,
+                        && (i < ((IAtmosphericChargingBase) base).maxAddonsSupported(worldObj,
                 xCoord, yCoord, zCoord)); ++i) {
             Block block = Block.blocksList[worldObj.getBlockId(xCoord,
                     yCoord + i + 1, zCoord)];
@@ -68,7 +77,7 @@ public class TileEntityAtmosphericChargingBase extends TileEntityPowerProducer {
 
             IAtmosphericChargingAddon addon = (IAtmosphericChargingAddon) block;
             powerPerTick += addon.powerPerTick(worldObj, xCoord, yCoord + i
-                    + 1, zCoord);
+                                                                 + 1, zCoord);
             numCoils++;
         }
 
@@ -92,8 +101,8 @@ public class TileEntityAtmosphericChargingBase extends TileEntityPowerProducer {
 
         ItemStack item = par5EntityPlayer.getHeldItem();
         if (item != null
-                && (item.getItem() instanceof ItemBlock)
-                && Block.blocksList[((ItemBlock) item.getItem()).getBlockID()] instanceof IAtmosphericChargingAddon) {
+            && (item.getItem() instanceof ItemBlock)
+            && Block.blocksList[((ItemBlock) item.getItem()).getBlockID()] instanceof IAtmosphericChargingAddon) {
             return true;
         }
 
