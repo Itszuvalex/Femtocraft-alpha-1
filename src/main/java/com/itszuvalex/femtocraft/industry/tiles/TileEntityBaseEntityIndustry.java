@@ -23,7 +23,7 @@ package com.itszuvalex.femtocraft.industry.tiles;
 
 import com.itszuvalex.femtocraft.power.tiles.TileEntityPowerConsumer;
 
-public class TileEntityBaseEntityIndustry extends TileEntityPowerConsumer {
+public abstract class TileEntityBaseEntityIndustry extends TileEntityPowerConsumer {
 
     @Override
     public void femtocraftServerUpdate() {
@@ -33,8 +33,7 @@ public class TileEntityBaseEntityIndustry extends TileEntityPowerConsumer {
             if (canStartWork()) {
                 startWork();
             }
-        }
-        else {
+        } else {
             continueWork();
         }
 
