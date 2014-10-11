@@ -305,7 +305,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.NanoCubeGuiID;
+        return FemtocraftGuiHandler.NanoCubeGuiID();
     }
 
     @Override

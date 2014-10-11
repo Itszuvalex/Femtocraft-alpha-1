@@ -3,6 +3,7 @@ package com.itszuvalex.femtocraft.research;
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs;
 import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
+import com.itszuvalex.femtocraft.managers.assembler.ComponentRegistry;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
 import com.itszuvalex.femtocraft.research.gui.technology.*;
@@ -84,50 +85,50 @@ public class FemtocraftTechnologies {
     public static final String BASIC_CIRCUITS = "Basic Circuits";
     public static final String METALLURGY = "Metallurgy";
 
-    public static final List<ResearchTechnology> defaultTechnologies() {
-        return new ArrayList<ResearchTechnology>(Arrays.asList(
+    public static List<ResearchTechnology> defaultTechnologies() {
+        return new ArrayList<>(Arrays.asList(
                 (new ResearchTechnology(
                         METALLURGY, "The metals that populate your world.", EnumTechLevel.MACRO,
                         new String[]{MACROSCOPIC_STRUCTURES},
                         new ItemStack(Femtocraft.itemIngotTemperedTitanium()),
                         true, null, null, null,
                         "    The world is full of many interesting things.  Animals roam the fields, " +
-                                "monsters rule the night, and eldritch energies course throughout the land.  Perhaps most" +
+                        "monsters rule the night, and eldritch energies course throughout the land.  Perhaps most" +
+                        " " +
+                        "beneficial to you, however, are the various ores that inhabit the ground.\n    Iron and " +
+                        "coal" +
+                        " are plentiful, but you know both are merely the tip of the iceberg when it comes to " +
+                        "structural integrity and fuel." +
+                        (FemtocraftConfigs.titaniumGen ?
+                                "\n\n            Titanium\n\n    This silvery metal quickly corrodes when exposed" +
+                                " to " +
+                                "air, resulting in a dark oxidation on its surface.  It is most commonly found at" +
                                 " " +
-                                "beneficial to you, however, are the various ores that inhabit the ground.\n    Iron and " +
-                                "coal" +
-                                " are plentiful, but you know both are merely the tip of the iceberg when it comes to " +
-                                "structural integrity and fuel." +
-                                (FemtocraftConfigs.titaniumGen ?
-                                        "\n\n            Titanium\n\n    This silvery metal quickly corrodes when exposed" +
-                                                " to " +
-                                                "air, resulting in a dark oxidation on its surface.  It is most commonly found at" +
-                                                " " +
-                                                "depths of " +
-                                                FemtocraftConfigs.titaniumOreYHeightMax + " to " +
-                                                FemtocraftConfigs.titaniumOreYHeightMin +
-                                                ".  It has extremely high durability, making it suitable for encasing mechanisms " +
-                                                "and " +
-                                                "circuitry.  You theorize that you can also temper this metal by running it under" +
-                                                " " +
-                                                "intense heat for extra durability." : "") +
-                                (FemtocraftConfigs.platinumGen ?
-                                        "\n\n            Platinum\n\n    A rare, shiny metal, " +
-                                                "renowned for its resistance to corrosion.  Most commonly found between depths of" +
-                                                " " +
-                                                FemtocraftConfigs.platinumOreYHeightMax + " and " +
-                                                FemtocraftConfigs.platinumOreYHeightMin +
-                                                ", it is useful for electronics where exposure to hostile chemicals is a certainty."
-                                        : "") +
-                                (FemtocraftConfigs.thoriumGen ?
-                                        "\n\n            Thorium\n\n    A heavy metal, with uses in nuclear decay chains." +
-                                                "  " +
-                                                "Found in depths of " +
-                                                FemtocraftConfigs.thoriumOreYHeightMax + " to " +
-                                                FemtocraftConfigs.thoriumOreYHeightMin +
-                                                ", it's only truly useful once you figure out how to harness the power of its " +
-                                                "nuclear" +
-                                                " decay." : ""), false, true)),
+                                "depths of " +
+                                FemtocraftConfigs.titaniumOreYHeightMax + " to " +
+                                FemtocraftConfigs.titaniumOreYHeightMin +
+                                ".  It has extremely high durability, making it suitable for encasing mechanisms " +
+                                "and " +
+                                "circuitry.  You theorize that you can also temper this metal by running it under" +
+                                " " +
+                                "intense heat for extra durability." : "") +
+                        (FemtocraftConfigs.platinumGen ?
+                                "\n\n            Platinum\n\n    A rare, shiny metal, " +
+                                "renowned for its resistance to corrosion.  Most commonly found between depths of" +
+                                " " +
+                                FemtocraftConfigs.platinumOreYHeightMax + " and " +
+                                FemtocraftConfigs.platinumOreYHeightMin +
+                                ", it is useful for electronics where exposure to hostile chemicals is a certainty."
+                                : "") +
+                        (FemtocraftConfigs.thoriumGen ?
+                                "\n\n            Thorium\n\n    A heavy metal, with uses in nuclear decay chains." +
+                                "  " +
+                                "Found in depths of " +
+                                FemtocraftConfigs.thoriumOreYHeightMax + " to " +
+                                FemtocraftConfigs.thoriumOreYHeightMin +
+                                ", it's only truly useful once you figure out how to harness the power of its " +
+                                "nuclear" +
+                                " decay." : ""), false, true)),
                 (new ResearchTechnology(
                         BASIC_CIRCUITS, "Basic logic for basic machines.", EnumTechLevel.MACRO,
                         new String[]{MACROSCOPIC_STRUCTURES},
@@ -135,21 +136,21 @@ public class FemtocraftTechnologies {
                         getInput(new ItemStack(Femtocraft.itemConductivePowder())),
                         new ItemStack(Femtocraft.itemConductivePowder()), null,
                         "    Machines and mechanisms are worthless heaps of metal unless there is a purpose " +
-                                "behind them.  You have deduced a simple set of logical mechanisms and a simple means" +
-                                " of producing them. __Recipe.Crafting:Femtocraft:item.ItemConductivePowder--This " +
-                                "powder balances the volatility of farenite with the stability of lapis, " +
-                                "making it useful for conduction.____Recipe.Crafting:Femtocraft:item.ItemBoard--A " +
-                                "simple assembly of sticks, side-by-side, gives a base for mounting logic assemblies" +
-                                ".____Recipe.Crafting:Femtocraft:item.ItemPrimedBoard--Some conductive powder on the " +
-                                "board, when run through an oven, creates a foundation for circuitry.____Recipe" +
-                                ".Crafting:Femtocraft:item.ItemSpool--Just a thin rod of wood with end caps, " +
-                                "it makes an excellent storage unit for wires.____Recipe.Crafting:Femtocraft:item" +
-                                ".ItemSpoolGold--Your studies show gold is an excellent conductor, " +
-                                "and you plan on using nothing but the highest quality for your machines.____Recipe" +
-                                ".Crafting:Femtocraft:item.ItemSpoolPlatinum--Some thin platinum wire on a spool.  " +
-                                "Useful for corrosive environments.____Recipe.Crafting:Femtocraft:item" +
-                                ".ItemMicrochip--Thin wiring on a solid board, these multipurpose devices enable your" +
-                                " machines to perform basic logic.__", false, true)
+                        "behind them.  You have deduced a simple set of logical mechanisms and a simple means" +
+                        " of producing them.__Recipe.Crafting:Femtocraft:item.ItemConductivePowder--This " +
+                        "powder balances the volatility of farenite with the stability of lapis, " +
+                        "making it useful for conduction.____Recipe.Crafting:Femtocraft:item.ItemBoard--A " +
+                        "simple assembly of sticks, side-by-side, gives a base for mounting logic assemblies" +
+                        ".____Recipe.Crafting:Femtocraft:item.ItemPrimedBoard--Some conductive powder on the " +
+                        "board, when run through an oven, creates a foundation for circuitry.____Recipe" +
+                        ".Crafting:Femtocraft:item.ItemSpool--Just a thin rod of wood with end caps, " +
+                        "it makes an excellent storage unit for wires.____Recipe.Crafting:Femtocraft:item" +
+                        ".ItemSpoolGold--Your studies show gold is an excellent conductor, " +
+                        "and you plan on using nothing but the highest quality for your machines.____Recipe" +
+                        ".Crafting:Femtocraft:item.ItemSpoolPlatinum--Some thin platinum wire on a spool.  " +
+                        "Useful for corrosive environments.____Recipe.Crafting:Femtocraft:item" +
+                        ".ItemMicrochip--Thin wiring on a solid board, these multipurpose devices enable your" +
+                        " machines to perform basic logic.__", false, true)
                 ),
                 (new ResearchTechnology(
                         MACHINING, "Start your industry!", EnumTechLevel.MICRO,
@@ -165,15 +166,15 @@ public class FemtocraftTechnologies {
                         new String[]{MACROSCOPIC_STRUCTURES},
                         new ItemStack(Femtocraft.blockResearchConsole()), true, null, null, null,
                         "What is a scientist without the scientific method?  Luckily for you, " +
-                                "you no longer have to experiment.  This handy Research Computer analyzes all of your " +
-                                "knowledge and will theorize prototypes for you to make.  Stick these prototypes into the" +
-                                " " +
-                                "Research Console to have it analyze the potential uses and to store the standardized " +
-                                "blueprints into your knowledge store. __Recipe.Assembler:Femtocraft:tile" +
-                                ".BlockResearchComputer--Allows visual access to your personalized knowledge store.__ " +
-                                "__Recipe" +
-                                ".Assembler:Femtocraft:tile.BlockResearchConsole--Analyzes your prototypes and generates " +
-                                "standardized blueprints.__", false, true
+                        "you no longer have to experiment.  This handy Research Computer analyzes all of your " +
+                        "knowledge and will theorize prototypes for you to make.  Stick these prototypes into the" +
+                        " " +
+                        "Research Console to have it analyze the potential uses and to store the standardized " +
+                        "blueprints into your knowledge store. __Recipe.Assembler:Femtocraft:tile" +
+                        ".BlockResearchComputer--Allows visual access to your personalized knowledge store.__" +
+                        "__Recipe" +
+                        ".Assembler:Femtocraft:tile.BlockResearchConsole--Analyzes your prototypes and generates " +
+                        "standardized blueprints.__", false, true
                 )),
                 (new ResearchTechnology(
                         ALGORITHMS, "", EnumTechLevel.MICRO,
@@ -266,7 +267,12 @@ public class FemtocraftTechnologies {
                 (new ResearchTechnology(BASIC_CHEMISTRY,
                         "Composition of Matter", EnumTechLevel.MACRO,
                         new String[]{MACROSCOPIC_STRUCTURES},
-                        new ItemStack(Femtocraft.itemMineralLattice()), true, null, null, null, null, false, true)
+                        new ItemStack(Femtocraft.itemMineralLattice()), true, null, null, null,
+                        "    Inspecting the materials around you leads you to the conclusion that several of these " +
+                        "materials share similarities with each other.  Long nights of study and experiments have " +
+                        "shown that, in fact, these objects are created out of complex combinations of several, " +
+                        "smaller components." +
+                        ComponentRegistry.getComponentsInAssemblerRecipeDisplayString(EnumTechLevel.MICRO), false, true)
                 ),
 
                 (new ResearchTechnology(

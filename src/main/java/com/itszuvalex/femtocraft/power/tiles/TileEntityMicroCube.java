@@ -142,7 +142,7 @@ public class TileEntityMicroCube extends TileEntityPowerBase {
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.MicroCubeGuiID;
+        return FemtocraftGuiHandler.MicroCubeGuiID();
     }
 
     public byte generateOutputMask() {

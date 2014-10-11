@@ -68,7 +68,7 @@ public class TileEntityNanoInnervator extends TileEntityBaseEntityMicroFurnace {
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.NanoInnervatorGuiID;
+        return FemtocraftGuiHandler.NanoInnervatorGuiID();
     }
 
     @Override

@@ -70,7 +70,7 @@ public class TileEntityNanoDismantler extends
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.NanoDismantlerGuiID;
+        return FemtocraftGuiHandler.NanoDismantlerGuiID();
     }
 
     @Override

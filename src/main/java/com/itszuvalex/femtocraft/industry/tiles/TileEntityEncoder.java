@@ -88,7 +88,7 @@ public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.EncoderGuiID;
+        return FemtocraftGuiHandler.EncoderGuiID();
     }
 
     @Override

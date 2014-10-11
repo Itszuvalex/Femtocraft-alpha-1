@@ -46,7 +46,7 @@ public class ItemPortableResearchComputer extends Item {
     @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         par3EntityPlayer.openGui(Femtocraft$.MODULE$,
-                FemtocraftGuiHandler.ResearchComputerGuiID,
+                FemtocraftGuiHandler.ResearchComputerGuiID(),
                 par2World, (int) par3EntityPlayer.posX,
                 (int) par3EntityPlayer.posY,
                 (int) par3EntityPlayer.posZ);
@@ -56,7 +56,7 @@ public class ItemPortableResearchComputer extends Item {
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
         itemIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" +
-                "ItemPortableResearchComputer");
+                                                 + ":" +
+                                                 "ItemPortableResearchComputer");
     }
 }

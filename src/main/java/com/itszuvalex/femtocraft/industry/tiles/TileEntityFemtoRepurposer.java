@@ -70,7 +70,7 @@ public class TileEntityFemtoRepurposer extends
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.FemtoRepurposerGuiID;
+        return FemtocraftGuiHandler.FemtoRepurposerGuiID();
     }
 
 

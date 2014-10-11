@@ -48,7 +48,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.NanoFissionReactorGuiID;
+        return FemtocraftGuiHandler.NanoFissionReactorGuiID();
     }
 
     @Override

@@ -58,7 +58,7 @@ public class TileEntityFemtoEntangler extends TileEntityBaseEntityNanoEnmesher {
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.FemtoEntanglerGuiID;
+        return FemtocraftGuiHandler.FemtoEntanglerGuiID();
     }
 
     @Override

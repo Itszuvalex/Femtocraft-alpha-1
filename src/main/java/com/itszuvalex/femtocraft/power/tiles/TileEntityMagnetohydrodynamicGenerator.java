@@ -446,6 +446,6 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.NanoMagnetohydrodynamicGeneratorGuiID;
+        return FemtocraftGuiHandler.NanoMagnetohydrodynamicGeneratorGuiID();
     }
 }

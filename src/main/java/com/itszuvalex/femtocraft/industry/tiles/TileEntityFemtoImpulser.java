@@ -68,7 +68,7 @@ public class TileEntityFemtoImpulser extends TileEntityBaseEntityMicroFurnace {
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.FemtoImpulserGuiID;
+        return FemtocraftGuiHandler.FemtoImpulserGuiID();
     }
 
     @Override

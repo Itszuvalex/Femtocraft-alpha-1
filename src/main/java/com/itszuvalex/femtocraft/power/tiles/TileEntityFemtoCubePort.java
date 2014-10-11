@@ -295,7 +295,7 @@ public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.FemtoCubeGuiID;
+        return FemtocraftGuiHandler.FemtoCubeGuiID();
     }
 
     @Override

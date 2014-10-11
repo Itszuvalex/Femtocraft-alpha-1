@@ -69,7 +69,7 @@ public class TileEntityFemtoCoagulator extends TileEntityBaseEntityMicroReconstr
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.FemtoCoagulatorGuiID;
+        return FemtocraftGuiHandler.FemtoCoagulatorGuiID();
     }
 
     @Override

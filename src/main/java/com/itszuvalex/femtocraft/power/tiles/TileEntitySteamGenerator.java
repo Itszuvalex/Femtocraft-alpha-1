@@ -37,7 +37,7 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.NanoMagnetohydrodynamicGeneratorGuiID;
+        return FemtocraftGuiHandler.NanoMagnetohydrodynamicGeneratorGuiID();
     }
 
     @Override

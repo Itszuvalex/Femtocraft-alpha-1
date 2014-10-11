@@ -112,7 +112,7 @@ public class TileEntitySisyphusStabilizer extends TileEntityPowerBase implements
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.PhlegethonTunnelGuiID;
+        return FemtocraftGuiHandler.PhlegethonTunnelGuiID();
     }
 
     @Override

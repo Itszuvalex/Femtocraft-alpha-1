@@ -84,7 +84,7 @@ public class TileEntityBaseEntityNanoHorologe extends
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.NanoHorologeGuiID;
+        return FemtocraftGuiHandler.NanoHorologeGuiID();
     }
 
     public int getCookProgressScaled(int i) {

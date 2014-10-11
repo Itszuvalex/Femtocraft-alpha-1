@@ -91,7 +91,7 @@ public class TileEntityBaseEntityMicroFurnace extends
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.MicroFurnaceGuiID;
+        return FemtocraftGuiHandler.MicroFurnaceGuiID();
     }
 
     /**

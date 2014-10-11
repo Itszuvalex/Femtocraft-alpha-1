@@ -68,7 +68,7 @@ public class TileEntityNanoFabricator extends TileEntityBaseEntityMicroReconstru
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.NanoFabricatorGuiID;
+        return FemtocraftGuiHandler.NanoFabricatorGuiID();
     }
 
     @Override

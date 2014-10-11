@@ -24,7 +24,6 @@ package com.itszuvalex.femtocraft.power.tiles;
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelComponent;
 import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
-import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
@@ -92,7 +91,7 @@ public class TileEntityPhlegethonTunnelFrame extends TileEntityPowerProducer imp
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.PhlegethonTunnelGuiID;
+        return FemtocraftGuiHandler.PhlegethonTunnelGuiID();
     }
 
     @Override

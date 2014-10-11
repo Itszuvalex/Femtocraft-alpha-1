@@ -31,7 +31,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class TileEntityFemtoCubeFrame extends TileEntityBase implements
-                                                             IMultiBlockComponent {
+        IMultiBlockComponent {
     private
     @Saveable(desc = true)
     MultiBlockInfo info;
@@ -66,7 +66,7 @@ public class TileEntityFemtoCubeFrame extends TileEntityBase implements
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.FemtoCubeGuiID;
+        return FemtocraftGuiHandler.FemtoCubeGuiID();
     }
 
     @Override

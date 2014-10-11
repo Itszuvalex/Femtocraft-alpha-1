@@ -25,7 +25,7 @@ public abstract class ContainerBase extends Container {
 
     private Packet250CustomPayload updatePacket(int index, int value) {
         Packet250CustomPayload packet = new Packet250CustomPayload();
-        packet.channel = FemtocraftGuiHandler.PACKET_CHANNEL;
+        packet.channel = FemtocraftGuiHandler.PACKET_CHANNEL();
 
         ByteArrayOutputStream bos = new ByteArrayOutputStream(14);
         DataOutputStream outputStream = new DataOutputStream(bos);

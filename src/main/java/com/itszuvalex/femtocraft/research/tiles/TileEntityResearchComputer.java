@@ -41,7 +41,7 @@ public class TileEntityResearchComputer extends TileEntityBase {
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.ResearchComputerGuiID;
+        return FemtocraftGuiHandler.ResearchComputerGuiID();
     }
 
 }

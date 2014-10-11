@@ -27,7 +27,7 @@ import java.util.logging.{Level, Logger}
 
 import com.itszuvalex.femtocraft.blocks.{BlockFemtoStone, BlockMicroStone, BlockNanoStone, BlockUnidentifiedAlloy}
 import com.itszuvalex.femtocraft.command.{CommandBase, CommandFemtocraft}
-import com.itszuvalex.femtocraft.configuration.{FemtocraftAssemblerConfig, FemtocraftTechnologyConfig, FemtocraftConfigs}
+import com.itszuvalex.femtocraft.configuration.{FemtocraftAssemblerConfig, FemtocraftConfigs, FemtocraftTechnologyConfig}
 import com.itszuvalex.femtocraft.core.MagnetRegistry
 import com.itszuvalex.femtocraft.core.fluids.{BlockFluidMass, FluidMass}
 import com.itszuvalex.femtocraft.core.items.{ItemBase, ItemFemtoInterfaceDevice, ItemMicroInterfaceDevice, ItemNanoInterfaceDevice}
@@ -35,8 +35,9 @@ import com.itszuvalex.femtocraft.core.ore._
 import com.itszuvalex.femtocraft.industry.blocks._
 import com.itszuvalex.femtocraft.industry.items.{ItemDigitalSchematic, ItemPaperSchematic, ItemQuantumSchematic}
 import com.itszuvalex.femtocraft.managers.ManagerRecipe
+import com.itszuvalex.femtocraft.managers.assembler.ComponentRegistry
 import com.itszuvalex.femtocraft.managers.assistant.ManagerAssistant
-import com.itszuvalex.femtocraft.managers.research.ManagerResearch
+import com.itszuvalex.femtocraft.managers.research.{EnumTechLevel, ManagerResearch}
 import com.itszuvalex.femtocraft.power.blocks._
 import com.itszuvalex.femtocraft.power.fluids.{FluidCooledContaminatedMoltenSalt, FluidCooledMoltenSalt, FluidMoltenSalt}
 import com.itszuvalex.femtocraft.power.items.{ItemBlockMicroCube, ItemInhibitionCore, ItemNucleationCore}
@@ -985,83 +986,107 @@ object Femtocraft {
     LanguageRegistry.addName(itemInterfaceDeviceFemto, "FemtoInterface Device")
     itemCubit = registerItem(FemtocraftConfigs.ItemCubitID, "ItemCubit",
                              FemtocraftUtils.orangeify("Cubit"))
+    ComponentRegistry.registerComponent(itemCubit, EnumTechLevel.FEMTO)
     itemRectangulon = registerItem(FemtocraftConfigs.ItemRectangulonID,
                                    "ItemRectangulon",
                                    FemtocraftUtils.orangeify("Rectangulon"))
+    ComponentRegistry.registerComponent(itemRectangulon, EnumTechLevel.FEMTO)
     itemPlaneoid = registerItem(FemtocraftConfigs.ItemPlaneoidID,
                                 "ItemPlaneoid",
                                 FemtocraftUtils.orangeify("Planeoid"))
+    ComponentRegistry.registerComponent(itemPlaneoid, EnumTechLevel.FEMTO)
     itemCrystallite = registerItem(FemtocraftConfigs.ItemCrystalliteID,
                                    "ItemCrystallite",
                                    FemtocraftUtils.greenify("Crystallite"))
+    ComponentRegistry.registerComponent(itemCrystallite, EnumTechLevel.NANO)
     itemMineralite = registerItem(FemtocraftConfigs.ItemMineraliteID,
                                   "ItemMineralite",
                                   FemtocraftUtils.greenify("Mineralite"))
+    ComponentRegistry.registerComponent(itemMineralite, EnumTechLevel.NANO)
     itemMetallite = registerItem(FemtocraftConfigs.ItemMetalliteID,
                                  "ItemMetallite",
                                  FemtocraftUtils.greenify("Metallite"))
+    ComponentRegistry.registerComponent(itemMetallite, EnumTechLevel.NANO)
     itemFaunite = registerItem(FemtocraftConfigs.ItemFauniteID, "ItemFaunite",
                                FemtocraftUtils.greenify("Faunite"))
+    ComponentRegistry.registerComponent(itemFaunite, EnumTechLevel.NANO)
     itemElectrite = registerItem(FemtocraftConfigs.ItemElectriteID,
                                  "ItemElectrite",
                                  FemtocraftUtils.greenify("Electrite"))
+    ComponentRegistry.registerComponent(itemElectrite, EnumTechLevel.NANO)
     itemFlorite = registerItem(FemtocraftConfigs.ItemFloriteID, "ItemFlorite",
                                FemtocraftUtils.greenify("Florite"))
+    ComponentRegistry.registerComponent(itemFlorite, EnumTechLevel.NANO)
     itemMicroCrystal = registerItem(FemtocraftConfigs.ItemMicroCrystalID,
                                     "ItemMicroCrystal",
                                     FemtocraftUtils.blueify("Micro Crystal"))
+    ComponentRegistry.registerComponent(itemMicroCrystal, EnumTechLevel.MICRO)
     itemProteinChain = registerItem(FemtocraftConfigs.ItemProteinChainID,
                                     "ItemProteinChain",
                                     FemtocraftUtils.blueify("Protein Chain"))
+    ComponentRegistry.registerComponent(itemProteinChain, EnumTechLevel.MICRO)
     itemNerveCluster = registerItem(FemtocraftConfigs.ItemNerveClusterID,
                                     "ItemNerveCluster",
                                     FemtocraftUtils.blueify("Nerve Cluster"))
+    ComponentRegistry.registerComponent(itemNerveCluster, EnumTechLevel.MICRO)
     itemConductiveAlloy = registerItem(FemtocraftConfigs.ItemConductiveAlloyID,
                                        "ItemConductiveAlloy", FemtocraftUtils
                                                               .blueify(
           "Conductive Alloy"))
+    ComponentRegistry.registerComponent(itemConductiveAlloy, EnumTechLevel.MICRO)
     itemMetalComposite = registerItem(FemtocraftConfigs.ItemMetalCompositeID,
                                       "ItemMetalComposite", FemtocraftUtils
                                                             .blueify(
           "Metal Composite"))
+    ComponentRegistry.registerComponent(itemMetalComposite, EnumTechLevel.MICRO)
     itemFibrousStrand = registerItem(FemtocraftConfigs.ItemFibrousStrandID,
                                      "ItemFibrousStrand",
                                      FemtocraftUtils.blueify("Fibrous Strand"))
+    ComponentRegistry.registerComponent(itemFibrousStrand, EnumTechLevel.MICRO)
     itemMineralLattice = registerItem(FemtocraftConfigs.ItemMineralLatticeID,
                                       "ItemMineralLattice", FemtocraftUtils
                                                             .blueify(
           "Mineral Lattice"))
+    ComponentRegistry.registerComponent(itemMineralLattice, EnumTechLevel.MICRO)
     itemFungalSpores = registerItem(FemtocraftConfigs.ItemFungalSporesID,
                                     "ItemFungalSpores",
                                     FemtocraftUtils.blueify("Fungal Spores"))
+    ComponentRegistry.registerComponent(itemFungalSpores, EnumTechLevel.MICRO)
     itemIonicChunk = registerItem(FemtocraftConfigs.ItemIonicChunkID,
                                   "ItemIonicChunk",
                                   FemtocraftUtils.blueify("Ionic Chunk"))
+    ComponentRegistry.registerComponent(itemIonicChunk, EnumTechLevel.MICRO)
     itemReplicatingMaterial = registerItem(FemtocraftConfigs
                                            .ItemReplicatingMaterialID,
                                            "ItemReplicatingMaterial",
                                            FemtocraftUtils
                                            .blueify("Replicating Material"))
+    ComponentRegistry.registerComponent(itemReplicatingMaterial, EnumTechLevel.MICRO)
     itemSpinyFilament = registerItem(FemtocraftConfigs.ItemSpinyFilamentID,
                                      "ItemSpinyFilament",
                                      FemtocraftUtils.blueify("Spiny Filament"))
+    ComponentRegistry.registerComponent(itemSpinyFilament, EnumTechLevel.MICRO)
     itemHardenedBulb = registerItem(FemtocraftConfigs.ItemHardenedBulbID,
                                     "ItemHardenedBulb",
                                     FemtocraftUtils.blueify("Hardened Bulb"))
+    ComponentRegistry.registerComponent(itemHardenedBulb, EnumTechLevel.MICRO)
     itemMorphicChannel = registerItem(FemtocraftConfigs.ItemMorphicChannelID,
                                       "ItemMorphicChannel", FemtocraftUtils
                                                             .blueify(
           "Morphic Channel"))
+    ComponentRegistry.registerComponent(itemMorphicChannel, EnumTechLevel.MICRO)
     itemSynthesizedFiber = registerItem(FemtocraftConfigs
                                         .ItemSynthesizedFiberID,
                                         "ItemSynthesizedFiber", FemtocraftUtils
                                                                 .blueify(
           "Synthesized Fiber"))
+    ComponentRegistry.registerComponent(itemSynthesizedFiber, EnumTechLevel.MICRO)
     itemOrganometallicPlate = registerItem(FemtocraftConfigs
                                            .ItemOrganometallicPlateID,
                                            "ItemOrganometallicPlate",
                                            FemtocraftUtils
                                            .blueify("Organometallic Plate"))
+    ComponentRegistry.registerComponent(itemOrganometallicPlate, EnumTechLevel.MICRO)
     itemMicroPlating = registerItem(FemtocraftConfigs.ItemMicroPlatingID,
                                     "ItemMicroPlating", "Micro Plating")
   }

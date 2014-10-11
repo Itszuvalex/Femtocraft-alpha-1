@@ -56,7 +56,7 @@ public class TileEntityFemtoChronoshifter extends TileEntityBaseEntityNanoHorolo
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.FemtoChronoshifterGuiID;
+        return FemtocraftGuiHandler.FemtoChronoshifterGuiID();
     }
 
     @Override

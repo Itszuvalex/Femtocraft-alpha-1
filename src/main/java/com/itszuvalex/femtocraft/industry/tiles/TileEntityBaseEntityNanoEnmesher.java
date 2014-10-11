@@ -86,7 +86,7 @@ public class TileEntityBaseEntityNanoEnmesher extends
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.NanoEnmesherGuiID;
+        return FemtocraftGuiHandler.NanoEnmesherGuiID();
     }
 
     public int getCookProgressScaled(int i) {
