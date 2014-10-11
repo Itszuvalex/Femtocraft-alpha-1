@@ -21,8 +21,8 @@
 
 package com.itszuvalex.femtocraft.power.multiblock;
 
-import com.itszuvalex.femtocraft.core.multiblock.IMultiBlock;
-import com.itszuvalex.femtocraft.core.multiblock.IMultiBlockComponent;
+import com.itszuvalex.femtocraft.api.multiblock.IMultiBlock;
+import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoFissionReactorCore;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoFissionReactorHousing;
 import net.minecraft.tileentity.TileEntity;

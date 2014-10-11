@@ -22,8 +22,8 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
-import com.itszuvalex.femtocraft.core.multiblock.IMultiBlockComponent;
-import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
+import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable;
 import net.minecraft.entity.player.EntityPlayer;

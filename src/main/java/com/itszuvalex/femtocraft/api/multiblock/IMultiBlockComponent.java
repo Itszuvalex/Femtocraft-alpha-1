@@ -19,18 +19,38 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.api.power;
+package com.itszuvalex.femtocraft.api.multiblock;
 
-import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
+import net.minecraft.world.World;
 
 /**
- * Created by Christopher Harris (Itszuvalex) on 7/13/14.
+ * @author Itszuvalex
+ * @description Interface for MultiBlock components for easy implementation.
  */
-public interface IPhlegethonTunnelComponent extends IMultiBlockComponent {
+public interface IMultiBlockComponent {
     /**
-     * Called when the state of the core changes.
-     *
-     * @param active The state the core is changing into.
+     * @return True if this is in valid MultiBlock
      */
-    void onCoreActivityChange(boolean active);
+    boolean isValidMultiBlock();
+
+    /**
+     * @param x
+     * @param y
+     * @param z
+     * @return True if correctly forms, given controller block at x,y,z.
+     */
+    boolean formMultiBlock(World world, int x, int y, int z);
+
+    /**
+     * @param x
+     * @param y
+     * @param z
+     * @return True if breaks without errors, given controller block at x,y,z.
+     */
+    boolean breakMultiBlock(World world, int x, int y, int z);
+
+    /**
+     * @return MultiBlockInfo associated with this MultiBlockComponent
+     */
+    MultiBlockInfo getInfo();
 }

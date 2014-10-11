@@ -23,7 +23,7 @@ package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.core.blocks.TileContainer;
-import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockNanoCube;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoCubeFrame;
 import cpw.mods.fml.relauncher.Side;

@@ -838,7 +838,7 @@ public class FemtocraftConfigs {
 //                    .getDouble(200.f);
 //            ItemAssemblySchematic.infiniteUseMassMultiplier = schematicInfiniteUseMultiplier;
 
-            ConfigurableClassFinder ccf = new ConfigurableClassFinder("org.itszuvalex.femtocraft");
+            ConfigurableClassFinder ccf = new ConfigurableClassFinder("com.itszuvalex.femtocraft");
             ccf.registerConfigurableClasses();
             ccf.loadClassConstants(config);
 

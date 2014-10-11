@@ -23,8 +23,8 @@ package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.core.blocks.TileContainer;
-import com.itszuvalex.femtocraft.core.multiblock.IMultiBlockComponent;
-import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
+import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockNanoFissionReactor;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoFissionReactorHousing;
 import cpw.mods.fml.relauncher.Side;

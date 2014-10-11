@@ -103,8 +103,8 @@ public abstract class Graph {
 
     private void addDummyNodes(ArrayList<IGraphNode>[] rows) {
         try {
-            for (int i = 0; i < rows.length; ++i) {
-                for (IGraphNode node : rows[i]) {
+            for (ArrayList<IGraphNode> row1 : rows) {
+                for (IGraphNode node : row1) {
                     ArrayList<IGraphNode> remove = new ArrayList<IGraphNode>();
                     ArrayList<IGraphNode> add = new ArrayList<IGraphNode>();
                     for (IGraphNode child : node.getChildren()) {
@@ -116,13 +116,11 @@ public abstract class Graph {
                                 IGraphNode dummy =
                                         (IGraphNode) getDummyNodeClass()
                                                 .newInstance();
-                                int depth = j;
-                                dummy.setY(depth);
+                                dummy.setY(j);
                                 int x = prev.getX();
                                 if (x >= rows[j].size()) {
                                     rows[j].add(dummy);
-                                }
-                                else {
+                                } else {
                                     rows[j].add(x, dummy);
                                 }
 

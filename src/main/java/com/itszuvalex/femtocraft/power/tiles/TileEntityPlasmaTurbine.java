@@ -22,8 +22,8 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
-import com.itszuvalex.femtocraft.core.multiblock.IMultiBlockComponent;
-import com.itszuvalex.femtocraft.core.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
+import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.power.plasma.IPlasmaContainer;
 import com.itszuvalex.femtocraft.power.plasma.IPlasmaFlow;

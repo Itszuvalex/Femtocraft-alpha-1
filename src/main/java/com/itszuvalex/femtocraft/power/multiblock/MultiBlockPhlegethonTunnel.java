@@ -24,8 +24,8 @@ package com.itszuvalex.femtocraft.power.multiblock;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelAddon;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelComponent;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelCore;
-import com.itszuvalex.femtocraft.core.multiblock.IMultiBlock;
-import com.itszuvalex.femtocraft.core.multiblock.IMultiBlockComponent;
+import com.itszuvalex.femtocraft.api.multiblock.IMultiBlock;
+import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
