@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 
 /**
@@ -131,11 +132,23 @@ public class XMLTechnology {
             loadFromFile = true;
         }
 
-        NodeList children = arrNode.getElementsByTagName("ItemStack");
-        ItemStack[] ret = loadFromFile ? new ItemStack[children.getLength()] : def;
+        int length;
+        if (loadFromFile) {
+            if (arrNode.hasAttribute("length")) { length = Integer.parseInt(arrNode.getAttribute("length")); } else {
+                length = 0;
+            }
+        } else {
+            length = def.length;
+            arrNode.setAttribute("length", String.valueOf(def.length));
+        }
+
+        ItemStack[] ret = new ItemStack[length];
 
         for (int i = 0; i < ret.length; ++i) {
-            ret[i] = getTechItemStack(arrNode, tag + String.valueOf(i), ret[i]);
+            ret[i] = getTechItemStack(arrNode, tag +
+                                               String.valueOf(i), loadFromFile ? FemtocraftStringUtils
+                    .itemStackFromString(arrNode.getElementsByTagName(
+                            tag + String.valueOf(i)).item(0).getTextContent().trim()) : def[i]);
         }
 
         return ret;
@@ -154,11 +167,21 @@ public class XMLTechnology {
             loadFromFile = true;
         }
 
-        NodeList children = arrNode.getChildNodes();
-        String[] ret = loadFromFile ? new String[children.getLength()] : def;
+        int length;
+        if (loadFromFile) {
+            if (arrNode.hasAttribute("length")) { length = Integer.parseInt(arrNode.getAttribute("length")); } else {
+                length = 0;
+            }
+        } else {
+            length = def.length;
+            arrNode.setAttribute("length", String.valueOf(def.length));
+        }
+
+        String[] ret = new String[length];
 
         for (int i = 0; i < ret.length; ++i) {
-            ret[i] = getTechString(arrNode, tag + String.valueOf(i), ret[i]);
+            ret[i] = getTechString(arrNode, tag + String.valueOf(i), loadFromFile ? arrNode.getElementsByTagName(
+                    tag + String.valueOf(i)).item(0).getTextContent().trim() : def[i]);
         }
 
         return ret;
@@ -184,18 +207,29 @@ public class XMLTechnology {
         return ret;
     }
 
-    private Node getNode(Element parent, String tag, String def) {
+    private Node getNode(Element parent, String tag, String def, Map<String, String> attributes) {
         NodeList nodeList = parent.getElementsByTagName(tag);
         if (nodeList.getLength() == 0) {
             Element newNode = xml.createElement(tag);
             if (def != null) {
                 newNode.setTextContent(def.trim());
+            } else {
+                newNode.setTextContent(null);
+            }
+            if (attributes != null) {
+                for (String attr : attributes.keySet()) {
+                    newNode.setAttribute(attr, attributes.get(attr));
+                }
             }
             parent.appendChild(newNode);
             changed = true;
             return newNode;
         }
         return nodeList.item(0);
+    }
+
+    private Node getNode(Element parent, String tag, String def) {
+        return getNode(parent, tag, def, null);
     }
 
     public List<ResearchTechnology> loadCustomTechnologies() {

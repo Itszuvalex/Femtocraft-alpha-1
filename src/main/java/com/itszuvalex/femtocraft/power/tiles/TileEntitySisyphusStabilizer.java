@@ -22,11 +22,11 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
+import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelAddon;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelCore;
 import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
 import com.itszuvalex.femtocraft.configuration.Configurable;
-import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.entity.player.EntityPlayer;
@@ -102,7 +102,7 @@ public class TileEntitySisyphusStabilizer extends TileEntityPowerBase implements
 
     @Override
     public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
-        if (info.isValidMultiBlock() && canPlayerUse(par5EntityPlayer)) {
+        if (info != null && info.isValidMultiBlock() && canPlayerUse(par5EntityPlayer)) {
             par5EntityPlayer.openGui(getMod(), getGuiID(), worldObj, info.x(),
                     info.y(), info.z());
             return true;
@@ -128,7 +128,7 @@ public class TileEntitySisyphusStabilizer extends TileEntityPowerBase implements
 
     @Override
     public float getFillPercentageForOutput(ForgeDirection to) {
-        if (info.isValidMultiBlock()) {
+        if (info != null && info.isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getFillPercentageForOutput(to);
@@ -139,7 +139,7 @@ public class TileEntitySisyphusStabilizer extends TileEntityPowerBase implements
 
     @Override
     public boolean canCharge(ForgeDirection from) {
-        if (info.isValidMultiBlock()) {
+        if (info != null && info.isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).canCharge(from);
@@ -150,7 +150,7 @@ public class TileEntitySisyphusStabilizer extends TileEntityPowerBase implements
 
     @Override
     public EnumTechLevel getTechLevel(ForgeDirection to) {
-        if (info.isValidMultiBlock()) {
+        if (info != null && info.isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getTechLevel(to);
@@ -161,7 +161,7 @@ public class TileEntitySisyphusStabilizer extends TileEntityPowerBase implements
 
     @Override
     public int getCurrentPower() {
-        if (info.isValidMultiBlock()) {
+        if (info != null && info.isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getCurrentPower();
@@ -172,7 +172,7 @@ public class TileEntitySisyphusStabilizer extends TileEntityPowerBase implements
 
     @Override
     public int getMaxPower() {
-        if (info.isValidMultiBlock()) {
+        if (info != null && info.isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getMaxPower();
@@ -183,7 +183,7 @@ public class TileEntitySisyphusStabilizer extends TileEntityPowerBase implements
 
     @Override
     public boolean canConnect(ForgeDirection from) {
-        if (info.isValidMultiBlock()) {
+        if (info != null && info.isValidMultiBlock()) {
             switch (from) {
                 case UP:
                     if (yCoord - info.y() != 1) return false;
@@ -214,7 +214,7 @@ public class TileEntitySisyphusStabilizer extends TileEntityPowerBase implements
 
     @Override
     public int charge(ForgeDirection from, int amount) {
-        if (info.isValidMultiBlock()) {
+        if (info != null && info.isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).charge(from, amount);
@@ -225,7 +225,7 @@ public class TileEntitySisyphusStabilizer extends TileEntityPowerBase implements
 
     @Override
     public boolean consume(int amount) {
-        if (info.isValidMultiBlock()) {
+        if (info != null && info.isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).consume(amount);
@@ -236,7 +236,7 @@ public class TileEntitySisyphusStabilizer extends TileEntityPowerBase implements
 
     @Override
     public float getFillPercentage() {
-        if (info.isValidMultiBlock()) {
+        if (info != null && info.isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getFillPercentage();
@@ -247,7 +247,7 @@ public class TileEntitySisyphusStabilizer extends TileEntityPowerBase implements
 
     @Override
     public boolean canAcceptPowerOfLevel(EnumTechLevel level, ForgeDirection from) {
-        if (info.isValidMultiBlock()) {
+        if (info != null && info.isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).canAcceptPowerOfLevel(level, from);
