@@ -170,7 +170,7 @@ class AssemblerRecipeDatabase() {
     if (Femtocraft.assemblerConfigs.isEnabled(ac)) ac else null
   }
 
-  private def getItems(items: String, stackSizes: String): Array[ItemStack] = (getItems(items), stackSizes.split(",")).zipped.map((i: ItemStack, s: String) => (i, if (i != null) i.stackSize = s.toInt)).unzip._1
+  private def getItems(items: String, stackSizes: String): Array[ItemStack] = (getItems(items), stackSizes.split(",")).zipped.map((i: ItemStack, s: String) => {if (i != null) {i.stackSize = s.toInt}; i})
 
   private def getItem(item: String, stackSize: String, nbt: Array[Byte]): ItemStack = {
     val id_damage = item.split(":")
@@ -187,7 +187,7 @@ class AssemblerRecipeDatabase() {
     result
   }
 
-  private def getItems(items: String) =
+  private def getItems(items: String): Array[ItemStack] =
     items.split(",").map(s => {
       if (s.matches(AssemblerRecipeDatabase.DB_NULL_ITEM)) null
       else {
