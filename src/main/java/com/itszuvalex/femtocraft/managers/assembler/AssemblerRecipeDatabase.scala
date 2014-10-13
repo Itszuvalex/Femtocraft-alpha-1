@@ -320,13 +320,9 @@ class AssemblerRecipeDatabase() {
     arrayList
   }
 
-  /**
-   * DO NOT CALL THIS unless you have VERY good reason to.  This is a HUGE database and will take a long time to
-   * load.
-   *
-   * @return
-   */
-  def getAllRecipes: util.ArrayList[AssemblerRecipe] = {
+  def getAllRecipes: util.ArrayList[AssemblerRecipe] = allRecipes
+
+  def pullFullRecipeList: util.ArrayList[AssemblerRecipe] = {
     val arrayList = new util.ArrayList[AssemblerRecipe]
     try {
       refreshConnection()
@@ -348,4 +344,6 @@ class AssemblerRecipeDatabase() {
     }
     arrayList
   }
+
+  private lazy val allRecipes = pullFullRecipeList
 }
