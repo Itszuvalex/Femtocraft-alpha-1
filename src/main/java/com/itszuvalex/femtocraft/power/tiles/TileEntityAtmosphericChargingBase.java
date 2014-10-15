@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.api.power.IAtmosphericChargingAddon;
 import com.itszuvalex.femtocraft.api.power.IAtmosphericChargingBase;
+import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.block.Block;
@@ -39,13 +40,8 @@ public class TileEntityAtmosphericChargingBase extends TileEntityPowerProducer {
     float storedPowerIncrement;
 
     @Override
-    public EnumTechLevel getTechLevel(ForgeDirection to) {
-        return EnumTechLevel.MICRO;
-    }
-
-    @Override
-    public int getMaxPower() {
-        return 250;
+    public PowerContainer defaultContainer() {
+        return new PowerContainer(EnumTechLevel.MICRO, 250);
     }
 
     public TileEntityAtmosphericChargingBase() {

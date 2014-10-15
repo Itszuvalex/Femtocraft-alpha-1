@@ -1,7 +1,7 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
+import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
-import net.minecraftforge.common.ForgeDirection;
 
 /**
  * Created by Chris on 9/8/2014.
@@ -10,13 +10,8 @@ public class TileEntityCryoEndothermalChargingBase extends TileEntityPowerProduc
     public static final int maxStorage = 25000;
 
     @Override
-    public EnumTechLevel getTechLevel(ForgeDirection to) {
-        return EnumTechLevel.NANO;
-    }
-
-    @Override
-    public int getMaxPower() {
-        return maxStorage;
+    public PowerContainer defaultContainer() {
+        return new PowerContainer(EnumTechLevel.NANO, maxStorage);
     }
 
 }

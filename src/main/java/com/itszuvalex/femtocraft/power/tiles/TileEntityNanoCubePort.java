@@ -23,9 +23,10 @@ package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
 import com.itszuvalex.femtocraft.api.IInterfaceDevice;
-import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
+import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -42,8 +43,8 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
     boolean output;
 
     @Override
-    public EnumTechLevel getTechLevel(ForgeDirection to) {
-        return EnumTechLevel.NANO;
+    public PowerContainer defaultContainer() {
+        return new PowerContainer(EnumTechLevel.NANO, storage);
     }
 
     private
@@ -67,10 +68,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
     @Override
     public boolean canAcceptPowerOfLevel(EnumTechLevel level,
                                          ForgeDirection from) {
-        if (!info.isValidMultiBlock()) {
-            return false;
-        }
-        return super.canAcceptPowerOfLevel(level, from);
+        return isValidMultiBlock() && super.canAcceptPowerOfLevel(level, from);
     }
 
     /*
@@ -80,7 +78,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
      */
     @Override
     public int getCurrentPower() {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             if (isController()) {
                 return super.getCurrentPower();
             }
@@ -101,7 +99,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
      */
     @Override
     public int getMaxPower() {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             if (isController()) {
                 return storage;
             }
@@ -112,7 +110,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
                 return fc.getMaxPower();
             }
         }
-        return storage;
+        return 0;
     }
 
     /*
@@ -122,7 +120,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
      */
     @Override
     public float getFillPercentage() {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             if (isController()) {
                 return super.getFillPercentage();
             }
@@ -145,7 +143,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
      */
     @Override
     public float getFillPercentageForCharging(ForgeDirection from) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             return output ? 1.f : 0.f;
         }
         return 1.f;
@@ -160,7 +158,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
      */
     @Override
     public float getFillPercentageForOutput(ForgeDirection to) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             return output ? 1.f : 0.f;
         }
         return 0.f;
@@ -175,10 +173,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
      */
     @Override
     public boolean canCharge(ForgeDirection from) {
-        if (!info.isValidMultiBlock() || output) {
-            return false;
-        }
-        return super.canCharge(from);
+        return !(!isValidMultiBlock() || output) && super.canCharge(from);
     }
 
     /*
@@ -190,10 +185,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
      */
     @Override
     public boolean canConnect(ForgeDirection from) {
-        if (!info.isValidMultiBlock()) {
-            return false;
-        }
-        return super.canConnect(from);
+        return isValidMultiBlock() && super.canConnect(from);
     }
 
     /*
@@ -205,7 +197,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
      */
     @Override
     public int charge(ForgeDirection from, int amount) {
-        if (info.isValidMultiBlock() && !output) {
+        if (isValidMultiBlock() && !output) {
             if (isController()) {
                 return super.charge(from, amount);
             }
@@ -233,7 +225,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
      */
     @Override
     public boolean consume(int amount) {
-        if (info.isValidMultiBlock() && output) {
+        if (isValidMultiBlock() && output) {
             if (isController()) {
                 return super.consume(amount);
             }
@@ -252,7 +244,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
     }
 
     private boolean isController() {
-        return info.isValidMultiBlock()
+        return isValidMultiBlock()
                && ((info.x() == xCoord) && (info.y() == yCoord) && (info.z() == zCoord));
     }
 
@@ -300,7 +292,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
 
     @Override
     public boolean hasGUI() {
-        return info.isValidMultiBlock();
+        return isValidMultiBlock();
     }
 
     @Override
@@ -310,7 +302,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
 
     @Override
     public boolean isValidMultiBlock() {
-        return info.isValidMultiBlock();
+        return info != null && info.isValidMultiBlock();
     }
 
     @Override

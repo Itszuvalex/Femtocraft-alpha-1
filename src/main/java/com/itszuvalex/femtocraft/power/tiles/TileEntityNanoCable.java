@@ -21,17 +21,12 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
+import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
-import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityNanoCable extends TileEntityMicroCable {
     @Override
-    public EnumTechLevel getTechLevel(ForgeDirection to) {
-        return EnumTechLevel.NANO;
-    }
-
-    @Override
-    public int getMaxPower() {
-        return 2000;
+    public PowerContainer defaultContainer() {
+        return new PowerContainer(EnumTechLevel.NANO, 2000);
     }
 }

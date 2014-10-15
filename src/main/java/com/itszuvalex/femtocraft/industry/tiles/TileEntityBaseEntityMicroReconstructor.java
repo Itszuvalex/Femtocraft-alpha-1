@@ -24,6 +24,7 @@ package com.itszuvalex.femtocraft.industry.tiles;
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
 import com.itszuvalex.femtocraft.api.industry.IAssemblerSchematic;
+import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
@@ -86,13 +87,8 @@ public class TileEntityBaseEntityMicroReconstructor extends
     String field_94130_e;
 
     @Override
-    public EnumTechLevel getTechLevel(ForgeDirection to) {
-        return TECH_LEVEL;
-    }
-
-    @Override
-    public int getMaxPower() {
-        return POWER_STORAGE;
+    public PowerContainer defaultContainer() {
+        return new PowerContainer(TECH_LEVEL, POWER_STORAGE);
     }
 
     public TileEntityBaseEntityMicroReconstructor() {

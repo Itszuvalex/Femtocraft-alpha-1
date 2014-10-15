@@ -66,12 +66,12 @@ public class TileEntityNanoCubeFrame extends TileEntityBase implements
 
     @Override
     public boolean hasGUI() {
-        return info.isValidMultiBlock();
+        return isValidMultiBlock();
     }
 
     @Override
     public boolean isValidMultiBlock() {
-        return info.isValidMultiBlock();
+        return info != null && info.isValidMultiBlock();
     }
 
     @Override

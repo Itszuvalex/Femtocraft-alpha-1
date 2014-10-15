@@ -22,9 +22,9 @@
 package com.itszuvalex.femtocraft.industry.tiles;
 
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
+import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
-import net.minecraftforge.common.ForgeDirection;
 
 @Configurable
 public class TileEntityFemtoChronoshifter extends TileEntityBaseEntityNanoHorologe {
@@ -36,22 +36,18 @@ public class TileEntityFemtoChronoshifter extends TileEntityBaseEntityNanoHorolo
     public static int POWER_STORAGE = 100000;
     @Configurable(comment = "Power per item to begin processing.")
     public static int POWER_TO_COOK = 160;
+
     @Configurable(comment = "Multiplier for tick processing time of Temporal Recipes.")
     public static float TICKS_TO_COOK_MULTIPLIER = .5f;
-
-    @Override
-    public EnumTechLevel getTechLevel(ForgeDirection to) {
-        return TECH_LEVEL;
-    }
-
-    @Override
-    public int getMaxPower() {
-        return POWER_STORAGE;
-    }
 
     public TileEntityFemtoChronoshifter() {
         super();
         inventory.setInventorySize(inventorySize);
+    }
+
+    @Override
+    public PowerContainer defaultContainer() {
+        return new PowerContainer(TECH_LEVEL, POWER_STORAGE);
     }
 
     @Override

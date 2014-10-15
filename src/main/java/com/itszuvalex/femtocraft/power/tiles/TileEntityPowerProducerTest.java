@@ -21,6 +21,7 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
+import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -39,14 +40,10 @@ public class TileEntityPowerProducerTest extends TileEntityPowerProducer {
     }
 
     @Override
-    public EnumTechLevel getTechLevel(ForgeDirection to) {
-        return EnumTechLevel.MICRO;
+    public PowerContainer defaultContainer() {
+        return new PowerContainer(EnumTechLevel.MICRO, 250);
     }
 
-    @Override
-    public int getMaxPower() {
-        return 250;
-    }
 
     @Override
     public float getFillPercentageForCharging(ForgeDirection from) {

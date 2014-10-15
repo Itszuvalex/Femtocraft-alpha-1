@@ -22,10 +22,11 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelAddon;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelComponent;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelCore;
-import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.BaseInventory;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
@@ -59,12 +60,13 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
     private BaseInventory inventory = new BaseInventory(1);
 
     private int timePlaying = soundLength;
-    public static final int soundLength = 100;
 
     @Override
-    public EnumTechLevel getTechLevel(ForgeDirection to) {
-        return EnumTechLevel.FEMTO;
+    public PowerContainer defaultContainer() {
+        return new PowerContainer(EnumTechLevel.FEMTO, ContainerMax);
     }
+
+    public static final int soundLength = 100;
 
     @Override
     public boolean isActive() {
@@ -210,7 +212,7 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
 
     @Override
     public boolean isValidMultiBlock() {
-        return info.isValidMultiBlock();
+        return info != null && info.isValidMultiBlock();
     }
 
     @Override
@@ -249,32 +251,17 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
 
     @Override
     public boolean canCharge(ForgeDirection from) {
-        return info.isValidMultiBlock() && super.canCharge(from);
+        return isValidMultiBlock() && super.canCharge(from);
     }
 
     @Override
     public boolean canConnect(ForgeDirection from) {
-        return info.isValidMultiBlock() && super.canConnect(from);
-    }
-
-    @Override
-    public int getCurrentPower() {
-        return super.getCurrentPower();
+        return isValidMultiBlock() && super.canConnect(from);
     }
 
     @Override
     public EnumTechLevel getTechLevel() {
-        return getTechLevel(ForgeDirection.UNKNOWN);
-    }
-
-    @Override
-    public int getMaxPower() {
-        return ContainerMax;
-    }
-
-    @Override
-    public float getFillPercentage() {
-        return super.getFillPercentage();
+        return super.getTechLevel(ForgeDirection.UNKNOWN);
     }
 
     @Override
@@ -289,7 +276,7 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
 
     @Override
     public boolean canCharge() {
-        return info.isValidMultiBlock() && super.canCharge(ForgeDirection.UNKNOWN);
+        return isValidMultiBlock() && super.canCharge(ForgeDirection.UNKNOWN);
     }
 
     @Override

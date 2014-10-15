@@ -193,7 +193,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
 
     @Override
     public boolean hasGUI() {
-        return info.isValidMultiBlock();
+        return isValidMultiBlock();
     }
 
     public void abortReaction() {
@@ -484,7 +484,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
 
     @Override
     public boolean isValidMultiBlock() {
-        return info.isValidMultiBlock();
+        return info != null && info.isValidMultiBlock();
     }
 
     @Override

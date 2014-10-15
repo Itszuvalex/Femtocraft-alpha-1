@@ -1,10 +1,12 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
-import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
+import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import com.itszuvalex.femtocraft.power.FemtocraftPowerUtils;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -18,7 +20,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 /**
  * Created by Chris on 8/26/2014.
  */
-public class TileEntitySteamGenerator extends TileEntityPowerProducer implements IMultiBlockComponent,
+public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBlockComponent,
         IPowerBlockContainer, IFluidHandler {
 
     public static float steamGeneratorPercentageMultiplier = (1.f / 3.f);
@@ -27,7 +29,7 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
 
     @Override
     public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
-        if (info.isValidMultiBlock() && canPlayerUse(par5EntityPlayer)) {
+        if (isValidMultiBlock() && canPlayerUse(par5EntityPlayer)) {
             par5EntityPlayer.openGui(getMod(), getGuiID(), worldObj, info.x(),
                     info.y(), info.z());
             return true;
@@ -42,7 +44,7 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
 
     @Override
     public float getFillPercentageForCharging(ForgeDirection from) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getFillPercentageForCharging(from);
@@ -53,7 +55,7 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
 
     @Override
     public float getFillPercentageForOutput(ForgeDirection to) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getFillPercentageForOutput(to);
@@ -64,7 +66,7 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
 
     @Override
     public boolean canCharge(ForgeDirection from) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).canCharge(from);
@@ -75,29 +77,29 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
 
     @Override
     public EnumTechLevel getTechLevel(ForgeDirection to) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getTechLevel(to);
             }
         }
-        return EnumTechLevel.NANO;
+        return null;
     }
 
     @Override
     public int getCurrentPower() {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getCurrentPower();
             }
         }
-        return super.getCurrentPower();
+        return 0;
     }
 
     @Override
     public int getMaxPower() {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getMaxPower();
@@ -108,7 +110,7 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
 
     @Override
     public boolean canConnect(ForgeDirection from) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             switch (from) {
                 case UP:
                     if (yCoord - info.y() != 1) return false;
@@ -139,7 +141,7 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
 
     @Override
     public int charge(ForgeDirection from, int amount) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).charge(from, amount);
@@ -150,7 +152,7 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
 
     @Override
     public boolean consume(int amount) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).consume(amount);
@@ -161,7 +163,7 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
 
     @Override
     public float getFillPercentage() {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getFillPercentage();
@@ -172,7 +174,7 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
 
     @Override
     public boolean canAcceptPowerOfLevel(EnumTechLevel level, ForgeDirection from) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).canAcceptPowerOfLevel(level, from);
@@ -182,6 +184,12 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
     }
 
     public TileEntitySteamGenerator() {
+    }
+
+    @Override
+    public void femtocraftServerUpdate() {
+        super.femtocraftServerUpdate();
+        FemtocraftPowerUtils.distributePower(this, null, worldObj, xCoord, yCoord, zCoord);
     }
 
     @Override
@@ -219,7 +227,7 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
 
     @Override
     public boolean canFill(ForgeDirection from, Fluid fluid) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IFluidHandler) {
                 return ((IFluidHandler) te).canFill(from, fluid);
@@ -230,7 +238,7 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
 
     @Override
     public boolean canDrain(ForgeDirection from, Fluid fluid) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IFluidHandler) {
                 return ((IFluidHandler) te).canFill(from, fluid);
@@ -241,7 +249,7 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
 
     @Override
     public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IFluidHandler) {
                 return ((IFluidHandler) te).getTankInfo(from);
@@ -252,7 +260,7 @@ public class TileEntitySteamGenerator extends TileEntityPowerProducer implements
 
     @Override
     public boolean isValidMultiBlock() {
-        return info.isValidMultiBlock();
+        return info != null && info.isValidMultiBlock();
     }
 
     @Override

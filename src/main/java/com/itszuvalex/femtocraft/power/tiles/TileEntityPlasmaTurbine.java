@@ -24,6 +24,7 @@ package com.itszuvalex.femtocraft.power.tiles;
 import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.power.plasma.IPlasmaContainer;
 import com.itszuvalex.femtocraft.power.plasma.IPlasmaFlow;
@@ -50,10 +51,13 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
     @FemtocraftDataUtils.Saveable(desc = true)
     private MultiBlockInfo info;
 
+    @Override
+    public PowerContainer defaultContainer() {
+        return new PowerContainer(EnumTechLevel.FEMTO, powerStorage);
+    }
+
     public TileEntityPlasmaTurbine() {
         super();
-        setMaxStorage(powerStorage);
-        setTechLevel(EnumTechLevel.FEMTO);
         plasma = new PlasmaContainer(5, stabilityRating, temperatureRating);
         info = new MultiBlockInfo();
     }
@@ -84,7 +88,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
     }
 
     private IPowerBlockContainer getController() {
-        if (!info.isValidMultiBlock()) {
+        if (!isValidMultiBlock()) {
             return null;
         }
         TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(),
@@ -122,7 +126,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
             }
             return c.getTechLevel(to);
         }
-        return EnumTechLevel.FEMTO;
+        return null;
     }
 
     @Override
@@ -146,7 +150,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
             }
             return c.getMaxPower();
         }
-        return powerStorage;
+        return 0;
     }
 
     @Override

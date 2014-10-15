@@ -39,13 +39,8 @@ public class TileEntityMicroCube extends TileEntityPowerBase {
     public boolean[] outputs = new boolean[6]; // Not @Saveable due to bit masking
 
     @Override
-    public EnumTechLevel getTechLevel(ForgeDirection to) {
-        return ENUM_TECH_LEVEL;
-    }
-
-    @Override
-    public int getMaxPower() {
-        return maxStorage;
+    public PowerContainer defaultContainer() {
+        return new PowerContainer(ENUM_TECH_LEVEL, maxStorage);
     }
 
     public TileEntityMicroCube() {

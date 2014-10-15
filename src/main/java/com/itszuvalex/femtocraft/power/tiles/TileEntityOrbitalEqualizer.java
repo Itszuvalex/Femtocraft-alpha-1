@@ -21,6 +21,7 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
+import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import net.minecraftforge.common.ForgeDirection;
@@ -32,24 +33,20 @@ public class TileEntityOrbitalEqualizer extends TileEntityPowerBase {
     public static int POWER_STORAGE = 2000;
     @Configurable(comment = "Power level to distribute energy on first.")
     public static EnumTechLevel PRIMARY_POWER_LEVEL = EnumTechLevel.NANO;
+
+    @Override
+    public PowerContainer defaultContainer() {
+        return new PowerContainer(PRIMARY_POWER_LEVEL, POWER_STORAGE);
+    }
+
     @Configurable(comment = "Power level to distribute energy on second.")
     public static EnumTechLevel SECONDARY_POWER_LEVEL = EnumTechLevel.MICRO;
-
-    @Override
-    public EnumTechLevel getTechLevel(ForgeDirection to) {
-        return to == ForgeDirection.UNKNOWN ? PRIMARY_POWER_LEVEL : container().getTechLevel();
-    }
-
-    @Override
-    public int getMaxPower() {
-        return POWER_STORAGE;
-    }
 
     @Override
     public void femtocraftServerUpdate() {
         if (getTechLevel(ForgeDirection.UNKNOWN) == PRIMARY_POWER_LEVEL) {
             setTechLevel(SECONDARY_POWER_LEVEL);
-        } else if (getTechLevel(ForgeDirection.UNKNOWN) == SECONDARY_POWER_LEVEL) {
+        } else {
             setTechLevel(PRIMARY_POWER_LEVEL);
         }
         super.femtocraftServerUpdate();

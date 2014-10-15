@@ -2,6 +2,7 @@ package com.itszuvalex.femtocraft.power.traits
 
 import com.itszuvalex.femtocraft.api.power.{IPowerBlockContainer, PowerContainer}
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel
+import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable
 import net.minecraftforge.common.ForgeDirection
 
 /**
@@ -9,7 +10,20 @@ import net.minecraftforge.common.ForgeDirection
  */
 
 trait PowerBlockContainer extends IPowerBlockContainer {
-  protected def container: PowerContainer
+  @Saveable
+  protected val container: PowerContainer = defaultContainer
+
+  override def getTechLevel(to: ForgeDirection): EnumTechLevel = container.getTechLevel
+
+  override def getMaxPower: Int = container.getMaxPower
+
+  def defaultContainer: PowerContainer
+
+  def setMaxStorage(maxStorage: Int) = container.setMaxPower(maxStorage)
+
+  def setCurrentStorage(currentStorage: Int) = container.setCurrentPower(currentStorage)
+
+  def setTechLevel(level: EnumTechLevel) = container.setTechLevel(level)
 
   override def canAcceptPowerOfLevel(level: EnumTechLevel, from: ForgeDirection) = container.getTechLevel equals level
 

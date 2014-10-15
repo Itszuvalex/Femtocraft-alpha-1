@@ -21,7 +21,6 @@
 package com.itszuvalex.femtocraft.managers.assembler
 
 import java.util
-import java.util.List
 import java.util.logging.Level
 
 import com.itszuvalex.femtocraft.Femtocraft
@@ -39,19 +38,19 @@ import scala.collection.JavaConversions._
 
 
 /** @author chris
-  * @category Manager
-  * @info This manager is responsible for all Femtocraft AssemblerRecipes. All Assembler/Dissassemblers look to this
-  *       manager for recipe lookup. Recipes can be specified to only be disassemble-able, or only reassemble-able.
-  *       Dissassemblers simply break down items, Reassembles must use schematics to specify the recipe to follow. <br> All
-  *       recipes are ordered according to their signature in the inventory. The entire 9 slots are used for the input
-  *       signature. ItemStack stackSize does not matter for ordering. Exceptions will be thrown when attempting to addInput
-  *       recipes when their signature is already associated with a recipe (no check is performed to see if the recipes are
-  *       actually equal or not.) When reconstructing, items must conform to the input signature, and all 9 slots are
-  *       important. Slots that are null in the recipe must not contain any items, and vice versa. This will be separately
-  *       enforced in the schematic-creating TileEntities, but it it is also stated here for reference.
+  *
+  *         This manager is responsible for all [[com.itszuvalex.femtocraft.Femtocraft]] [[com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe]].
+  *
+  *         All Assembler/Dissassemblers look to this manager for recipe lookup. Recipes can be specified to only be disassemble-able, or only reassemble-able.
+  *         Dissassemblers simply break down items, Reassembles must use schematics to specify the recipe to follow. <br> All
+  *         recipes are ordered according to their signature in the inventory. The entire 9 slots are used for the input
+  *         signature. ItemStack stackSize does not matter for ordering. When reconstructing, items must conform to the input signature, and all 9 slots are
+  *         important. Slots that are null in the recipe must not contain any items, and vice versa. This will be separately
+  *         enforced in the schematic-creating TileEntities, but it it is also stated here for reference.
   */
+
 object ManagerAssemblerRecipe {
-  val shapelessPermuteTimeMillis: Long = 10
+  val shapelessPermuteTimeMillis = 10
 }
 
 class ManagerAssemblerRecipe {
@@ -68,7 +67,7 @@ class ManagerAssemblerRecipe {
       registerCustomRecipes()
       registerFemtoDecompositionRecipes()
       registerNanoDecompositionRecipes()
-      registerMicroDecompositionRecipes
+      registerMicroDecompositionRecipes()
       registerMacroDecompositionRecipes()
       registerFemtocraftAssemblerRecipes()
       Femtocraft.assemblerConfigs.setBatchLoading(false)
@@ -109,7 +108,7 @@ class ManagerAssemblerRecipe {
     addReversableRecipe(new AssemblerRecipe(Array[ItemStack](null, new ItemStack(Femtocraft.itemMetallite), null, new ItemStack(Femtocraft.itemFaunite), new ItemStack(Femtocraft.itemFaunite), new ItemStack(Femtocraft.itemFaunite), null, new ItemStack(Femtocraft.itemMetallite), null), 2, new ItemStack(Femtocraft.itemOrganometallicPlate), EnumTechLevel.NANO, FemtocraftTechnologies.ADVANCED_CHEMISTRY))
   }
 
-  private def registerMicroDecompositionRecipes {
+  private def registerMicroDecompositionRecipes() {
     addReversableRecipe(new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemMineralLattice), null, null, null, null, null, null, null, null), 1, new ItemStack(Block.stone), EnumTechLevel.MICRO, FemtocraftTechnologies.BASIC_CHEMISTRY))
     addReversableRecipe(new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemFibrousStrand), null, null, null, null, null, null, null, null), 1, new ItemStack(Block.grass), EnumTechLevel.MICRO, FemtocraftTechnologies.BASIC_CHEMISTRY))
     addReversableRecipe(new AssemblerRecipe(Array[ItemStack](null, null, new ItemStack(Femtocraft.itemMineralLattice), null, null, null, null, null, null), 1, new ItemStack(Block.dirt), EnumTechLevel.MICRO, FemtocraftTechnologies.BASIC_CHEMISTRY))
@@ -367,7 +366,7 @@ class ManagerAssemblerRecipe {
     done
   }
 
-  private def registerShapelessOreRecipe(recipeItems: List[_], recipeOutput: ItemStack): Boolean = {
+  private def registerShapelessOreRecipe(recipeItems: util.List[_], recipeOutput: ItemStack): Boolean = {
     var valid = false
     var slots = new Array[Int](recipeItems.size)
     val input = Array.fill[ItemStack](9)(null)
@@ -390,10 +389,9 @@ class ManagerAssemblerRecipe {
               item = obj.asInstanceOf[util.ArrayList[ItemStack]].get(0)
             }
             catch {
-              case exc: IndexOutOfBoundsException => {
+              case exc: IndexOutOfBoundsException =>
                 Femtocraft.log(Level.SEVERE, "Ore recipe with nothing registered in " + "ore dictionary for " + recipe.output.getDisplayName + ".")
                 return false
-              }
             }
           }
           else {
@@ -425,7 +423,7 @@ class ManagerAssemblerRecipe {
     valid
   }
 
-  private def registerShapelessRecipe(recipeItems: List[_], recipeOutput: ItemStack): Boolean = {
+  private def registerShapelessRecipe(recipeItems: util.List[_], recipeOutput: ItemStack): Boolean = {
     var valid = false
     val slots = new Array[Int](recipeItems.size)
     val input = scala.Array.fill[ItemStack](9)(null)
@@ -456,10 +454,10 @@ class ManagerAssemblerRecipe {
   private def permute(slots: Array[Int]): Array[Int] = {
     val k = findHighestK(slots)
     val i = findHigherI(slots, k)
-    val prev= slots(k)
+    val prev = slots(k)
     slots(k) = slots(i)
     slots(i) = prev
-    val remaining= Math.ceil((slots.length - k + 1) / 2f).toInt
+    val remaining = Math.ceil((slots.length - k + 1) / 2f).toInt
     var r = k + 1
     var n = 0
     while ((r < slots.length) && (n < remaining)) {
@@ -567,17 +565,17 @@ class ManagerAssemblerRecipe {
     addReversableRecipe(new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.blockSisyphusStabilizer), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.blockSisyphusStabilizer), new ItemStack(Block.blockDiamond), new ItemStack(Femtocraft.blockSisyphusStabilizer), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.blockSisyphusStabilizer), new ItemStack(Femtocraft.itemStellaratorPlating)), 0, new ItemStack(Femtocraft.blockPlasmaCondenser), EnumTechLevel.FEMTO, FemtocraftTechnologies.MATTER_CONVERSION))
   }
 
-  private def testRecipes() {
-    var test: AssemblerRecipe = getRecipe(Array[ItemStack](null, null, null, new ItemStack(Femtocraft.itemPlaneoid), new ItemStack(Femtocraft.itemRectangulon), new ItemStack(Femtocraft.itemPlaneoid), null, null, null))
-    Femtocraft.log(Level.WARNING, "Recipe " + (if (test != null) "found" else "not found") + ".")
-    if (test != null) {
-      Femtocraft.log(Level.WARNING, "Output " + (if (test.output.isItemEqual(new ItemStack(Femtocraft.itemFlorite))) "matches" else "does not match") + ".")
-    }
-    test = getRecipe(Array[ItemStack](null, null, null, new ItemStack(Femtocraft.itemRectangulon), new ItemStack(Femtocraft.itemRectangulon), new ItemStack(Femtocraft.itemPlaneoid), null, null, null))
-    Femtocraft.log(Level.WARNING, "Recipe " + (if (test != null) "found" else "not found") + ".")
-    test = getRecipe(new ItemStack(Femtocraft.itemFlorite))
-    Femtocraft.log(Level.WARNING, "Recipe " + (if (test != null) "found" else "not found") + ".")
-  }
+  //  private def testRecipes() {
+  //    var test= getRecipe(Array[ItemStack](null, null, null, new ItemStack(Femtocraft.itemPlaneoid), new ItemStack(Femtocraft.itemRectangulon), new ItemStack(Femtocraft.itemPlaneoid), null, null, null))
+  //    Femtocraft.log(Level.WARNING, "Recipe " + (if (test != null) "found" else "not found") + ".")
+  //    if (test != null) {
+  //      Femtocraft.log(Level.WARNING, "Output " + (if (test.output.isItemEqual(new ItemStack(Femtocraft.itemFlorite))) "matches" else "does not match") + ".")
+  //    }
+  //    test = getRecipe(Array[ItemStack](null, null, null, new ItemStack(Femtocraft.itemRectangulon), new ItemStack(Femtocraft.itemRectangulon), new ItemStack(Femtocraft.itemPlaneoid), null, null, null))
+  //    Femtocraft.log(Level.WARNING, "Recipe " + (if (test != null) "found" else "not found") + ".")
+  //    test = getRecipe(new ItemStack(Femtocraft.itemFlorite))
+  //    Femtocraft.log(Level.WARNING, "Recipe " + (if (test != null) "found" else "not found") + ".")
+  //  }
 
   def getRecipe(input: Array[ItemStack]): AssemblerRecipe = {
     val normal = normalizedInput(input)

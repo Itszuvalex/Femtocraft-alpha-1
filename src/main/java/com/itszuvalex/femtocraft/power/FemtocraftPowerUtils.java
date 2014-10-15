@@ -26,6 +26,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
+import java.util.Arrays;
+
 /**
  * Created by Chris on 5/13/2014.
  */
@@ -42,7 +44,7 @@ public class FemtocraftPowerUtils {
      *
      * @param container   IPowerBlockContainer to pull temp from
      * @param connections Array of size 6, where true represents that this algorithm should attempt to distribute temp
-     *                    in this ForgeDirection.ordinal()
+     *                    in this ForgeDirection.ordinal().  If null, will attempt every direction.
      * @param world       World for the algorithm to search for IPowerBlockContainers in
      * @param x           X coordinate for the algorithm to center its distribution search upon
      * @param y           Y coordinate for the algorithm to center its distribution search upon
@@ -54,7 +56,10 @@ public class FemtocraftPowerUtils {
         if (container.getCurrentPower() <= 0) {
             return;
         }
-        if (connections.length != 6) {
+        if (connections == null) {
+            connections = new boolean[6];
+            Arrays.fill(connections, true);
+        } else if (connections.length != 6) {
             return;
         }
         IPowerBlockContainer[] cons = new IPowerBlockContainer[6];

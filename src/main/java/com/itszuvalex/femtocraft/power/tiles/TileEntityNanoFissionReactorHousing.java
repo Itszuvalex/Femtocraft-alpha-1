@@ -72,7 +72,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
 
     @Override
     public boolean isValidMultiBlock() {
-        return info.isValidMultiBlock();
+        return info != null && info.isValidMultiBlock();
     }
 
     @Override
@@ -103,7 +103,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
     @Override
     public int fill(ForgeDirection from, FluidStack resource,
                     boolean doFill) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             IFluidHandler core = (IFluidHandler) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (core == null) return 0;
             int result = core.fill(from, resource, doFill);
@@ -118,7 +118,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
     @Override
     public FluidStack drain(ForgeDirection from, FluidStack resource,
                             boolean doDrain) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             IFluidHandler core = (IFluidHandler) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (core == null) return null;
             FluidStack result = core.drain(from, resource, doDrain);
@@ -133,7 +133,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
     @Override
     public FluidStack drain(ForgeDirection from, int maxDrain,
                             boolean doDrain) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             IFluidHandler core = (IFluidHandler) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (core == null) return null;
             FluidStack result = core.drain(from, maxDrain, doDrain);
@@ -156,7 +156,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
 
     @Override
     public boolean canDrain(ForgeDirection from, Fluid fluid) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             IFluidHandler core = (IFluidHandler) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             return core != null && core.canDrain(from, fluid);
         }
@@ -165,7 +165,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
 
     @Override
     public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             IFluidHandler core = (IFluidHandler) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (core == null) return null;
             return core.getTankInfo(from);
@@ -175,7 +175,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
 
     @Override
     public int getSizeInventory() {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (core == null) return 0;
             return core.getSizeInventory();
@@ -185,7 +185,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
 
     @Override
     public ItemStack getStackInSlot(int i) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (core == null) return null;
             ItemStack result = core.getStackInSlot(i);
@@ -200,7 +200,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
 
     @Override
     public ItemStack decrStackSize(int i, int j) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (core == null) return null;
             ItemStack result = core.decrStackSize(i, j);
@@ -215,7 +215,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
 
     @Override
     public ItemStack getStackInSlotOnClosing(int i) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (core == null) return null;
             return core.getStackInSlotOnClosing(i);
@@ -225,7 +225,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
 
     @Override
     public void setInventorySlotContents(int i, ItemStack itemstack) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (core == null) return;
             core.setInventorySlotContents(i, itemstack);
@@ -236,7 +236,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
 
     @Override
     public String getInvName() {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (core == null) return null;
             return core.getInvName();
@@ -246,12 +246,12 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
 
     @Override
     public boolean hasGUI() {
-        return info.isValidMultiBlock();
+        return isValidMultiBlock();
     }
 
     @Override
     public boolean isInvNameLocalized() {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             return core != null && core.isInvNameLocalized();
         }
@@ -260,7 +260,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
 
     @Override
     public int getInventoryStackLimit() {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (core == null) return 0;
             return core.getInventoryStackLimit();
@@ -270,7 +270,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
 
     @Override
     public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             return core != null && core.isUseableByPlayer(entityplayer);
         }
@@ -279,7 +279,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
 
     @Override
     public void openChest() {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (core == null) return;
             core.openChest();
@@ -288,7 +288,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
 
     @Override
     public void closeChest() {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             if (core == null) return;
             core.closeChest();
@@ -297,7 +297,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
 
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
             return core != null && core.isItemValidForSlot(i, itemstack);
         }

@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.power.plasma.IFusionReactorComponent;
 import com.itszuvalex.femtocraft.power.plasma.IFusionReactorCore;
@@ -40,15 +41,12 @@ import java.util.Collection;
 public class TileEntityFemtoStellaratorOpticalMaser extends
         TileEntityPowerConsumer
         implements IFusionReactorComponent, IMultiBlockComponent {
-    @Override
-    public EnumTechLevel getTechLevel(ForgeDirection to) {
-        return EnumTechLevel.FEMTO;
-    }
 
     @Override
-    public int getMaxPower() {
-        return powerStorage;
+    public PowerContainer defaultContainer() {
+        return new PowerContainer(EnumTechLevel.FEMTO, powerStorage);
     }
+
 
     public static int powerStorage = 10000000;
     public static int warmupThreshold = 1000000;
@@ -131,7 +129,7 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
 
     @Override
     public boolean isValidMultiBlock() {
-        return info.isValidMultiBlock();
+        return info != null && info.isValidMultiBlock();
     }
 
     @Override

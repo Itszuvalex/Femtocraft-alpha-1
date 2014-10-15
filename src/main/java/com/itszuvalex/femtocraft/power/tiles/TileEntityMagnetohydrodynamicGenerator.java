@@ -23,9 +23,10 @@ package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
-import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
+import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -55,7 +56,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
 
     @Override
     public float getFillPercentageForCharging(ForgeDirection from) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return super.getFillPercentageForCharging(from);
             } else {
@@ -70,7 +71,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
 
     @Override
     public float getFillPercentageForOutput(ForgeDirection to) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return super.getFillPercentageForOutput(to);
             } else {
@@ -85,7 +86,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
 
     @Override
     public boolean canCharge(ForgeDirection from) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return super.canCharge(from);
             } else {
@@ -100,7 +101,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
 
     @Override
     public boolean canConnect(ForgeDirection from) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return super.canConnect(from);
             } else {
@@ -135,7 +136,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
 
     @Override
     public int charge(ForgeDirection from, int amount) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return super.charge(from, amount);
             } else {
@@ -150,7 +151,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
 
     @Override
     public boolean consume(int amount) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return super.consume(amount);
             } else {
@@ -165,7 +166,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
 
     @Override
     public float getFillPercentage() {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return super.getFillPercentage();
             } else {
@@ -180,7 +181,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
 
     @Override
     public boolean canAcceptPowerOfLevel(EnumTechLevel level, ForgeDirection from) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return super.canAcceptPowerOfLevel(level, from);
             } else {
@@ -194,13 +195,8 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
     }
 
     @Override
-    public EnumTechLevel getTechLevel(ForgeDirection to) {
-        return EnumTechLevel.NANO;
-    }
-
-    @Override
     public void femtocraftServerUpdate() {
-        if (!info.isValidMultiBlock()) {
+        if (!isValidMultiBlock()) {
             return;
         }
         if (info.isController(xCoord, yCoord, zCoord)) {
@@ -237,8 +233,6 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
     public TileEntityMagnetohydrodynamicGenerator() {
         moltenSaltTank = new FluidTank(moltenSaltTankStorage);
         contaminatedSaltTank = new FluidTank(contaminatedSaltTankStorage);
-        setMaxStorage(powerStorage);
-        setTechLevel(EnumTechLevel.NANO);
     }
 
     @Override
@@ -268,7 +262,12 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
                 }
             }
         }
-        return powerStorage;
+        return 0;
+    }
+
+    @Override
+    public PowerContainer defaultContainer() {
+        return new PowerContainer(EnumTechLevel.NANO, powerStorage);
     }
 
     @Override
@@ -336,7 +335,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
 
     @Override
     public boolean canFill(ForgeDirection from, Fluid fluid) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return fluid == Femtocraft.fluidMoltenSalt();
             } else {
@@ -351,7 +350,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
 
     @Override
     public boolean canDrain(ForgeDirection from, Fluid fluid) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return fluid == Femtocraft.fluidCooledContaminatedMoltenSalt();
             } else {
@@ -366,7 +365,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
 
     @Override
     public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-        if (info.isValidMultiBlock()) {
+        if (isValidMultiBlock()) {
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return new FluidTankInfo[]{moltenSaltTank.getInfo(), contaminatedSaltTank.getInfo()};
             } else {
@@ -381,7 +380,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
 
     @Override
     public boolean isValidMultiBlock() {
-        return info.isValidMultiBlock();
+        return info != null && info.isValidMultiBlock();
     }
 
     @Override
@@ -436,7 +435,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
 
     @Override
     public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
-        if (info.isValidMultiBlock() && canPlayerUse(par5EntityPlayer)) {
+        if (isValidMultiBlock() && canPlayerUse(par5EntityPlayer)) {
             par5EntityPlayer.openGui(getMod(), getGuiID(), worldObj, info.x(),
                     info.y(), info.z());
             return true;

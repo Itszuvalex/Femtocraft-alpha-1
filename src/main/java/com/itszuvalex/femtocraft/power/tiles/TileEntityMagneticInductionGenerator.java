@@ -21,6 +21,7 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
+import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.core.MagnetRegistry;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
@@ -122,13 +123,8 @@ public class TileEntityMagneticInductionGenerator extends TileEntityPowerProduce
     }
 
     @Override
-    public EnumTechLevel getTechLevel(ForgeDirection to) {
-        return POWER_LEVEL;
-    }
-
-    @Override
-    public int getMaxPower() {
-        return POWER_MAX;
+    public PowerContainer defaultContainer() {
+        return new PowerContainer(POWER_LEVEL, POWER_MAX);
     }
 }
 

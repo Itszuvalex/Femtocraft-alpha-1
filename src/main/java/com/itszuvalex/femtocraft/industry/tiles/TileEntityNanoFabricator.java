@@ -23,10 +23,10 @@ package com.itszuvalex.femtocraft.industry.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
+import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies;
-import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityNanoFabricator extends TileEntityBaseEntityMicroReconstructor {
     @Configurable(comment = "Assembler recipe tech level maximum.")
@@ -57,13 +57,8 @@ public class TileEntityNanoFabricator extends TileEntityBaseEntityMicroReconstru
     public static int POWER_TO_COOK_POST = 80;
 
     @Override
-    public EnumTechLevel getTechLevel(ForgeDirection to) {
-        return TECH_LEVEL;
-    }
-
-    @Override
-    public int getMaxPower() {
-        return POWER_STORAGE;
+    public PowerContainer defaultContainer() {
+        return new PowerContainer(TECH_LEVEL, POWER_STORAGE);
     }
 
     @Override
