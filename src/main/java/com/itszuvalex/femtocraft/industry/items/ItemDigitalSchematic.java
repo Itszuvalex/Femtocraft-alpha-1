@@ -24,18 +24,18 @@ package com.itszuvalex.femtocraft.industry.items;
 import com.itszuvalex.femtocraft.Femtocraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 
 public class ItemDigitalSchematic extends ItemAssemblySchematic {
 
-    public ItemDigitalSchematic(int itemID, String unlocalizedName) {
-        super(itemID, unlocalizedName);
+    public ItemDigitalSchematic(String unlocalizedName) {
+        super(unlocalizedName);
         setMaxDamage(64);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerIcons(IIconRegister par1IconRegister) {
         this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID()
                                                               .toLowerCase() + ":" + "ItemDigitalSchematic");
         this.keyedIcon = par1IconRegister.registerIcon(Femtocraft.ID()

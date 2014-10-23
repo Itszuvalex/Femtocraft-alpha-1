@@ -26,22 +26,20 @@ import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
+import com.itszuvalex.femtocraft.network.FemtocraftPacketHandler;
+import com.itszuvalex.femtocraft.network.messages.MessageFissionReactorCore;
 import com.itszuvalex.femtocraft.power.FissionReactorRegistry;
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockNanoFissionReactor;
 import com.itszuvalex.femtocraft.utils.BaseInventory;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
-import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.util.logging.Level;
 
 public class TileEntityNanoFissionReactorCore extends TileEntityBase implements IInventory, IFluidHandler,
@@ -176,7 +174,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     @Override
     public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(),
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(),
                     info.z());
             // Big Oops? Or chunk unloaded...despite having player activating it
             // >.>
@@ -440,12 +438,12 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     }
 
     @Override
-    public String getInvName() {
-        return inventory.getInvName();
+    public String getInventoryName() {
+        return inventory.getInventoryName();
     }
 
     @Override
-    public boolean isInvNameLocalized() {
+    public boolean hasCustomInventoryName() {
         return false;
     }
 
@@ -460,13 +458,13 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     }
 
     @Override
-    public void openChest() {
-        inventory.openChest();
+    public void openInventory() {
+        inventory.openInventory();
     }
 
     @Override
-    public void closeChest() {
-        inventory.closeChest();
+    public void closeInventory() {
+        inventory.closeInventory();
     }
 
     @Override
@@ -549,25 +547,8 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     }
 
     private void onClick(byte action) {
-        Packet250CustomPayload packet = new Packet250CustomPayload();
-        packet.channel = TileEntityNanoFissionReactorCore.PACKET_CHANNEL;
-
-        ByteArrayOutputStream bos = new ByteArrayOutputStream(17);
-        DataOutputStream outputStream = new DataOutputStream(bos);
-        try {
-            outputStream.writeInt(xCoord);
-            outputStream.writeInt(yCoord);
-            outputStream.writeInt(zCoord);
-            outputStream.writeInt(worldObj.provider.dimensionId);
-            outputStream.writeByte(action);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        packet.data = bos.toByteArray();
-        packet.length = bos.size();
-
-        PacketDispatcher.sendPacketToServer(packet);
+        FemtocraftPacketHandler.INSTANCE().sendToServer(new MessageFissionReactorCore(xCoord, yCoord, zCoord,
+                worldObj.provider.dimensionId, action));
     }
 
     public void handleAction(byte action) {

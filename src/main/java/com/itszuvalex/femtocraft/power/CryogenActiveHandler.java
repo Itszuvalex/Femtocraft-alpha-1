@@ -1,8 +1,9 @@
 package com.itszuvalex.femtocraft.power;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Created by Chris on 9/8/2014.
@@ -17,24 +18,24 @@ public class CryogenActiveHandler implements ICryogenHandler {
     @Override
     public boolean canHandleBlock(World world, int x, int y, int z) {
         if (world.isAirBlock(x, y, z)) {
-            return world.isBlockSolidOnSide(x, y - 1, z, ForgeDirection.UP, false);
+            return world.getBlock(x, y - 1, z).isSideSolid(world, x, y - 1, z, ForgeDirection.UP);
         } else {
-            int blockId = world.getBlockId(x, y, z);
-            return blockId == Block.waterStill.blockID || blockId == Block.lavaStill.blockID;
+            Block block = world.getBlock(x, y, z);
+            return block == Blocks.water || block == Blocks.lava;
         }
     }
 
     @Override
     public float powerForBlock(World world, int x, int y, int z) {
         if (world.isAirBlock(x, y, z)) {
-            if (world.isBlockSolidOnSide(x, y - 1, z, ForgeDirection.UP, false)) {
+            if (world.getBlock(x, y - 1, z).isSideSolid(world, x, y - 1, z, ForgeDirection.UP)) {
                 return airToSnowLayerPower;
             }
         } else {
-            int blockId = world.getBlockId(x, y, z);
-            if (blockId == Block.waterStill.blockID) {
+            Block block = world.getBlock(x, y, z);
+            if (block == Blocks.water) {
                 return waterToIcePower;
-            } else if (blockId == Block.lavaStill.blockID) {
+            } else if (block == Blocks.lava) {
                 return lavaToObsidianPower;
             }
         }
@@ -44,15 +45,15 @@ public class CryogenActiveHandler implements ICryogenHandler {
     @Override
     public void usedBlockForPower(World world, int x, int y, int z) {
         if (world.isAirBlock(x, y, z)) {
-            if (world.isBlockSolidOnSide(x, y - 1, z, ForgeDirection.UP, false)) {
-                world.setBlock(x, y - 1, z, Block.snow.blockID);
+            if (world.getBlock(x, y - 1, z).isSideSolid(world, x, y - 1, z, ForgeDirection.UP)) {
+                world.setBlock(x, y - 1, z, Blocks.snow_layer);
             }
         } else {
-            int blockId = world.getBlockId(x, y, z);
-            if (blockId == Block.waterStill.blockID) {
-                world.setBlock(x, y, z, Block.ice.blockID);
-            } else if (blockId == Block.lavaStill.blockID) {
-                world.setBlock(x, y, z, Block.obsidian.blockID);
+            Block block = world.getBlock(x, y, z);
+            if (block == Blocks.water) {
+                world.setBlock(x, y, z, Blocks.ice);
+            } else if (block == Blocks.lava) {
+                world.setBlock(x, y, z, Blocks.obsidian);
             }
         }
     }

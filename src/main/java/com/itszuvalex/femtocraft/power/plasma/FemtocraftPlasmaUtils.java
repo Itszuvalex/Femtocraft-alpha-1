@@ -22,10 +22,14 @@
 package com.itszuvalex.femtocraft.power.plasma;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.power.plasma.volatility.IVolatilityEvent;
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorComponent;
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
+import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.utils.WorldLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Collection;
 import java.util.Random;
@@ -52,11 +56,9 @@ public class FemtocraftPlasmaUtils {
 
         if (container instanceof IFusionReactorCore) {
             event.interact((IFusionReactorCore) container, world, x, y, z);
-        }
-        else if (container instanceof IFusionReactorComponent) {
+        } else if (container instanceof IFusionReactorComponent) {
             event.interact((IFusionReactorComponent) container, world, x, y, z);
-        }
-        else {
+        } else {
             event.interact(container, world, x, y, z);
         }
 
@@ -109,9 +111,9 @@ public class FemtocraftPlasmaUtils {
         int newZ = loc.z + dir.offsetZ;
 
         if (loc.world.isAirBlock(newX, newY, newZ)) {
-            loc.world.setBlock(newX, newY, newZ, Femtocraft.blockPlasma().blockID);
+            loc.world.setBlock(newX, newY, newZ, Femtocraft.blockPlasma());
             loc.world.setBlockMetadataWithNotify(newX, newY, newZ, dir.ordinal(), 2);
-            TileEntityPlasma te = (TileEntityPlasma) loc.world.getBlockTileEntity(newX, newY, newZ);
+            TileEntityPlasma te = (TileEntityPlasma) loc.world.getTileEntity(newX, newY, newZ);
             if (te != null) {
                 te.setDuration(plasmaDuration);
             }

@@ -42,7 +42,7 @@ public class MultiBlockNanoFissionReactor implements IMultiBlock {
         for (int i = -1; i <= 1; ++i) {
             for (int j = -1; j <= 1; ++j) {
                 for (int k = -1; k <= 1; ++k) {
-                    world.func_96440_m(x + i, y + j, z + k, world.getBlockId(x + i, y + j, z + k));
+                    world.notifyBlocksOfNeighborChange(x + i, y + j, z + k, world.getBlock(x + i, y + j, z + k));
                 }
             }
         }
@@ -72,8 +72,8 @@ public class MultiBlockNanoFissionReactor implements IMultiBlock {
         for (int i = -1; i <= 1; ++i) {
             for (int j = -1; j <= 1; ++j) {
                 for (int k = -1; k <= 1; ++k) {
-                    TileEntity te = world.getBlockTileEntity(x + i, y + k, z
-                                                                           + j);
+                    TileEntity te = world.getTileEntity(x + i, y + k, z
+                                                                      + j);
                     result = te instanceof IMultiBlockComponent &&
                              ((IMultiBlockComponent) te).formMultiBlock(world, x, y, z) && result;
                 }
@@ -106,8 +106,8 @@ public class MultiBlockNanoFissionReactor implements IMultiBlock {
         for (int i = -1; i <= 1; ++i) {
             for (int j = -1; j <= 1; ++j) {
                 for (int k = -1; k <= 1; ++k) {
-                    TileEntity te = world.getBlockTileEntity(x + i, y + k, z
-                                                                           + j);
+                    TileEntity te = world.getTileEntity(x + i, y + k, z
+                                                                      + j);
                     result = te instanceof IMultiBlockComponent &&
                              ((IMultiBlockComponent) te).breakMultiBlock(world, x, y, z) && result;
                 }
@@ -121,8 +121,8 @@ public class MultiBlockNanoFissionReactor implements IMultiBlock {
         for (int i = -1; i <= 1; ++i) {
             for (int j = -1; j <= 1; ++j) {
                 for (int k = -1; k <= 1; ++k) {
-                    TileEntity te = world.getBlockTileEntity(x + i, y + k, z
-                                                                           + j);
+                    TileEntity te = world.getTileEntity(x + i, y + k, z
+                                                                      + j);
                     if ((i == 0 && j == 0 & k == 0 && te instanceof
                             TileEntityNanoFissionReactorCore) || te instanceof TileEntityNanoFissionReactorHousing) {
                         if (strict) {

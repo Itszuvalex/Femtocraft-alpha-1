@@ -28,8 +28,7 @@ public class ManagerAssistant {
     public Map<String, AssistantPermissions> addPlayerAssistant(String uname) {
         if (data.containsKey(uname)) {
             return data.get(uname);
-        }
-        else {
+        } else {
             Map<String, AssistantPermissions> pdata = new TreeMap<String, AssistantPermissions>();
             data.put(uname, pdata);
             return pdata;
@@ -95,7 +94,7 @@ public class ManagerAssistant {
                 } catch (Exception e) {
                     Femtocraft.log(Level.SEVERE,
                             "Failed to save assistant data in world - "
-                                    + FemtocraftFileUtils.savePathFemtocraft(world) + " for player" + username + "."
+                            + FemtocraftFileUtils.savePathFemtocraft(world) + " for player" + username + "."
                     );
                     e.printStackTrace();
                 }
@@ -104,7 +103,7 @@ public class ManagerAssistant {
         } catch (Exception e) {
             Femtocraft.log(Level.SEVERE,
                     "Failed to save assistant data in world - "
-                            + FemtocraftFileUtils.savePathFemtocraft(world) + "."
+                    + FemtocraftFileUtils.savePathFemtocraft(world) + "."
             );
             e.printStackTrace();
             return false;
@@ -117,7 +116,8 @@ public class ManagerAssistant {
             File file = new File(FemtocraftFileUtils.savePathFemtocraft(world), dir);
             if (!file.exists()) {
                 Femtocraft.log(Level.WARNING, "No assistant data"
-                        + " found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".");
+                                              + " found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) +
+                                              ".");
                 return false;
             }
 
@@ -136,10 +136,10 @@ public class ManagerAssistant {
                     FileInputStream fis = new FileInputStream(pfile);
                     NBTTagCompound gTag = CompressedStreamTools.readCompressed(fis);
                     fis.close();
-                    NBTTagList assistTag = gTag.getTagList(assistKey);
+                    NBTTagList assistTag = gTag.getTagList(assistKey, 10);
 
                     for (int j = 0; j < assistTag.tagCount(); j++) {
-                        NBTTagCompound permTag = (NBTTagCompound) assistTag.tagAt(j);
+                        NBTTagCompound permTag = assistTag.getCompoundTagAt(j);
                         AssistantPermissions perm = new AssistantPermissions();
                         perm.loadFromNBT(permTag);
                         Map<String, AssistantPermissions> pdata = data.get(username);
@@ -153,7 +153,7 @@ public class ManagerAssistant {
                 } catch (Exception e) {
                     Femtocraft.log(Level.SEVERE,
                             "Failed to load assistant data in world - "
-                                    + FemtocraftFileUtils.savePathFemtocraft(world) + " for player" + username + "."
+                            + FemtocraftFileUtils.savePathFemtocraft(world) + " for player" + username + "."
                     );
                     e.printStackTrace();
                 }
@@ -166,7 +166,7 @@ public class ManagerAssistant {
         {
             Femtocraft.log(Level.SEVERE,
                     "Failed to load assistant data in world - "
-                            + FemtocraftFileUtils.savePathFemtocraft(world) + "."
+                    + FemtocraftFileUtils.savePathFemtocraft(world) + "."
             );
             e.printStackTrace();
             return false;

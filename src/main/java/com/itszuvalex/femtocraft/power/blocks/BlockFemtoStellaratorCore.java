@@ -22,27 +22,28 @@
 package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockFemtoStellarator;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoStellaratorCore;
 import com.itszuvalex.femtocraft.proxy.ProxyClient;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public class BlockFemtoStellaratorCore extends TileContainer {
-    public Icon outsideIcon;
-    public Icon insideIcon;
-    public Icon coreIcon;
+    public IIcon outsideIcon;
+    public IIcon insideIcon;
+    public IIcon coreIcon;
 
-    public BlockFemtoStellaratorCore(int id) {
-        super(id, Material.iron);
-        setUnlocalizedName("BlockStellaratorCore");
+    public BlockFemtoStellaratorCore() {
+        super(Material.iron);
+        setBlockName("BlockStellaratorCore");
         setCreativeTab(Femtocraft.femtocraftTab());
     }
 
@@ -81,26 +82,26 @@ public class BlockFemtoStellaratorCore extends TileContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         outsideIcon = blockIcon = par1IconRegister.registerIcon
                 (Femtocraft.ID()
-                        .toLowerCase()
-                        + ":" +
-                        "BlockFemtoStellaratorCore");
+                         .toLowerCase()
+                 + ":" +
+                 "BlockFemtoStellaratorCore");
         insideIcon = par1IconRegister.registerIcon
                 (Femtocraft.ID()
-                        .toLowerCase()
-                        + ":" +
-                        "BlockFemtoStellaratorEnclosedInternals");
+                         .toLowerCase()
+                 + ":" +
+                 "BlockFemtoStellaratorEnclosedInternals");
         coreIcon = par1IconRegister.registerIcon
                 (Femtocraft.ID()
-                        .toLowerCase()
-                        + ":" +
-                        "BlockFemtoStellaratorCore_core");
+                         .toLowerCase()
+                 + ":" +
+                 "BlockFemtoStellaratorCore_core");
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityFemtoStellaratorCore();
     }
 
@@ -113,8 +114,8 @@ public class BlockFemtoStellaratorCore extends TileContainer {
      */
     @Override
     public void breakBlock(World par1World, int par2, int par3, int par4,
-                           int par5, int par6) {
-        TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+                           Block par5, int par6) {
+        TileEntity te = par1World.getTileEntity(par2, par3, par4);
         if (te instanceof TileEntityFemtoStellaratorCore) {
             MultiBlockInfo info = ((TileEntityFemtoStellaratorCore) te).getInfo();
             MultiBlockFemtoStellarator.instance.breakMultiBlock(par1World, info.x(),

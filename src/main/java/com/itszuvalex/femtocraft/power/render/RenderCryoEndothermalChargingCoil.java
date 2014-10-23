@@ -79,7 +79,7 @@ public class RenderCryoEndothermalChargingCoil implements
     }
 
     @Override
-    public boolean shouldRender3DInInventory() {
+    public boolean shouldRender3DInInventory(int modelID) {
         return true;
     }
 

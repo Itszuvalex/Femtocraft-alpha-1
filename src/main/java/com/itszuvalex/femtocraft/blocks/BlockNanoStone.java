@@ -27,18 +27,18 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 public class BlockNanoStone extends BlockBase {
-    public BlockNanoStone(int id) {
-        super(id, Material.iron);
+    public BlockNanoStone() {
+        super(Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab());
-        setTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockNanoStone");
-        setUnlocalizedName("BlockNanoStone");
+        setBlockTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockNanoStone");
+        setBlockName("BlockNanoStone");
         setHardness(7.0f);
-        setStepSound(Block.soundMetalFootstep);
+        setStepSound(Block.soundTypeMetal);
         setResistance(12f);
     }
 
@@ -51,8 +51,8 @@ public class BlockNanoStone extends BlockBase {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID()
-                .toLowerCase() + ":" + "BlockNanoStone");
+                                                               .toLowerCase() + ":" + "BlockNanoStone");
     }
 }

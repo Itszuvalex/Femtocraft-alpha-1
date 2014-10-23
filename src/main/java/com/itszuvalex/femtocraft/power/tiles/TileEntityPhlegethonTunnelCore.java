@@ -28,28 +28,28 @@ import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelComponent;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelCore;
 import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import com.itszuvalex.femtocraft.network.FemtocraftPacketHandler;
+import com.itszuvalex.femtocraft.network.messages.MessagePhlegethonTunnelCore;
+import com.itszuvalex.femtocraft.sound.FemtocraftSoundManager;
 import com.itszuvalex.femtocraft.utils.BaseInventory;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import net.minecraft.block.Block;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.audio.ISound;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
-
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/13/14.
  */
 public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer implements IPhlegethonTunnelCore,
         IInventory {
-    public static final String PACKET_CHANNEL = Femtocraft.PHLEGETHON_TUNNEL_CHANNEL();
     public static float PowerGenBase = 150;
     public static int ContainerMax = 100000;
     @FemtocraftDataUtils.Saveable(desc = true)
@@ -59,14 +59,13 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
     @FemtocraftDataUtils.Saveable
     private BaseInventory inventory = new BaseInventory(1);
 
-    private int timePlaying = soundLength;
+    @SideOnly(Side.CLIENT)
+    private ISound sound = FemtocraftSoundManager.makePhlegethonSound(xCoord, yCoord, zCoord);
 
     @Override
     public PowerContainer defaultContainer() {
         return new PowerContainer(EnumTechLevel.FEMTO, ContainerMax);
     }
-
-    public static final int soundLength = 100;
 
     @Override
     public boolean isActive() {
@@ -86,11 +85,9 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
         super.handleDescriptionNBT(compound);
         setRenderUpdate();
         if ((wasActive && !isActive()) || (wasMultiblock && !isValidMultiBlock())) {
-            Femtocraft.soundManager().stopSound(Femtocraft.soundManager().getSoundIDForLocation(xCoord, yCoord,
-                    zCoord));
-            timePlaying = soundLength;
+            Femtocraft.soundManager().stopSound(sound);
         } else if (!wasActive && isActive()) {
-            timePlaying = soundLength;
+            Femtocraft.soundManager().playSound(sound);
         }
     }
 
@@ -98,9 +95,7 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
     public void invalidate() {
         super.invalidate();
         if (worldObj.isRemote && isActive()) {
-            Femtocraft.soundManager().stopSound(Femtocraft.soundManager().getSoundIDForLocation(xCoord, yCoord,
-                    zCoord));
-            timePlaying = soundLength;
+            Femtocraft.soundManager().stopSound(sound);
         }
     }
 
@@ -109,7 +104,7 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
         float power = getPowerGenBase();
         for (ForgeDirection dir :
                 ForgeDirection.VALID_DIRECTIONS) {
-            TileEntity te = worldObj.getBlockTileEntity(xCoord + dir.offsetX,
+            TileEntity te = worldObj.getTileEntity(xCoord + dir.offsetX,
                     yCoord + dir.offsetY, zCoord + dir.offsetZ);
             if (te instanceof IPhlegethonTunnelAddon) {
                 power += ((IPhlegethonTunnelAddon) te).getPowerContribution(this);
@@ -168,7 +163,7 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y <= 1; y++) {
                 for (int z = -1; z <= 1; z++) {
-                    TileEntity te = worldObj.getBlockTileEntity(xCoord + x, yCoord + y, zCoord + z);
+                    TileEntity te = worldObj.getTileEntity(xCoord + x, yCoord + y, zCoord + z);
                     if (te instanceof IPhlegethonTunnelComponent) {
                         ((IPhlegethonTunnelComponent) te).onCoreActivityChange(status);
                     }
@@ -180,27 +175,9 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
     @Override
     public void onChunkUnload() {
         if (worldObj.isRemote && isActive()) {
-            Femtocraft.soundManager().stopSound(Femtocraft.soundManager().getSoundIDForLocation(xCoord, yCoord,
-                    zCoord));
-            timePlaying = soundLength;
+            Femtocraft.soundManager().stopSound(sound);
         }
         super.onChunkUnload();
-    }
-
-    @Override
-    public void updateEntity() {
-        super.updateEntity();
-        if (worldObj.isRemote && isActive()) {
-            if (timePlaying++ > soundLength) {
-                Femtocraft.soundManager().stopSound(Femtocraft.soundManager().getSoundIDForLocation(xCoord, yCoord,
-                        zCoord));
-                Femtocraft.soundManager().playSound(worldObj,
-                        xCoord + 0.5D,
-                        yCoord + 0.5D,
-                        zCoord + 0.5D, Femtocraft.soundManager().PhlegethonTunnelIdentifier(), 1.f, 1.f, true);
-                timePlaying = 0;
-            }
-        }
     }
 
     @Override
@@ -230,7 +207,7 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
         boolean val = info.breakMultiBlock(world, x, y, z);
         if (val) {
             if (isActive()) {
-                worldObj.setBlock(xCoord, yCoord, zCoord, Block.lavaStill.blockID);
+                worldObj.setBlock(xCoord, yCoord, zCoord, Blocks.lava);
             } else {
                 setModified();
                 setUpdate();
@@ -338,13 +315,13 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
     }
 
     @Override
-    public String getInvName() {
-        return inventory.getInvName();
+    public String getInventoryName() {
+        return inventory.getInventoryName();
     }
 
     @Override
-    public boolean isInvNameLocalized() {
-        return inventory.isInvNameLocalized();
+    public boolean hasCustomInventoryName() {
+        return inventory.hasCustomInventoryName();
     }
 
     @Override
@@ -358,13 +335,13 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
     }
 
     @Override
-    public void openChest() {
-        inventory.openChest();
+    public void openInventory() {
+        inventory.openInventory();
     }
 
     @Override
-    public void closeChest() {
-        inventory.closeChest();
+    public void closeInventory() {
+        inventory.closeInventory();
     }
 
     @Override
@@ -373,33 +350,15 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
     }
 
     public void onActivateClick() {
-        PacketDispatcher.sendPacketToServer(getPacket(true));
+        FemtocraftPacketHandler.INSTANCE().sendToServer(getMessage(true));
     }
 
     public void onDeactivateClick() {
-        PacketDispatcher.sendPacketToServer(getPacket(false));
+        FemtocraftPacketHandler.INSTANCE().sendToServer(getMessage(false));
     }
 
-    private Packet250CustomPayload getPacket(boolean active) {
-        Packet250CustomPayload packet = new Packet250CustomPayload();
-        packet.channel = TileEntityPhlegethonTunnelCore.PACKET_CHANNEL;
-
-        ByteArrayOutputStream bos = new ByteArrayOutputStream(17);
-        DataOutputStream outputStream = new DataOutputStream(bos);
-        try {
-            outputStream.writeInt(xCoord);
-            outputStream.writeInt(yCoord);
-            outputStream.writeInt(zCoord);
-            outputStream.writeInt(worldObj.provider.dimensionId);
-            outputStream.writeBoolean(active);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        packet.data = bos.toByteArray();
-        packet.length = bos.size();
-
-        return packet;
+    private MessagePhlegethonTunnelCore getMessage(boolean active) {
+        return new MessagePhlegethonTunnelCore(xCoord, yCoord, zCoord, worldObj.provider.dimensionId, active);
     }
 
     public void handlePacket(boolean active) {

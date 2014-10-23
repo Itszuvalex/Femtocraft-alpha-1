@@ -28,10 +28,10 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 public class RenderUtils {
@@ -42,13 +42,14 @@ public class RenderUtils {
 
     public static void renderCube(float x, float y, float z, float startx,
                                   float starty, float startz, float endx, float endy, float endz,
-                                  Icon texture) {
-        renderCube(x, y, z, startx, starty, startz, endx, endy, endz, texture, texture.getMinU(), texture.getMaxU(), texture.getMinV(), texture.getMaxV());
+                                  IIcon texture) {
+        renderCube(x, y, z, startx, starty, startz, endx, endy, endz, texture, texture.getMinU(), texture.getMaxU(),
+                texture.getMinV(), texture.getMaxV());
     }
 
     public static void renderCube(float x, float y, float z, float startx,
                                   float starty, float startz, float endx, float endy, float endz,
-                                  Icon texture, float minU, float maxU, float minV, float maxV) {
+                                  IIcon texture, float minU, float maxU, float minV, float maxV) {
         RenderUtils.drawTopFace(x, y, z, startx, endx, startz, endz, endy,
                 texture, minU, maxU,
                 minV, maxV);
@@ -70,7 +71,7 @@ public class RenderUtils {
     }
 
     public static void drawTopFace(float x, float y, float z, float xmin,
-                                   float xmax, float zmin, float zmax, float yoffset, Icon texture,
+                                   float xmax, float zmin, float zmax, float yoffset, IIcon texture,
                                    float minU, float maxU, float minV, float maxV) {
         Tessellator tes = Tessellator.instance;
 
@@ -85,7 +86,7 @@ public class RenderUtils {
     }
 
     public static void drawBottomFace(float x, float y, float z, float xmin,
-                                      float xmax, float zmin, float zmax, float yoffset, Icon texture,
+                                      float xmax, float zmin, float zmax, float yoffset, IIcon texture,
                                       float minU, float maxU, float minV, float maxV) {
         Tessellator tes = Tessellator.instance;
 
@@ -100,7 +101,7 @@ public class RenderUtils {
     }
 
     public static void drawNorthFace(float x, float y, float z, float xmin,
-                                     float xmax, float ymin, float ymax, float zoffset, Icon texture,
+                                     float xmax, float ymin, float ymax, float zoffset, IIcon texture,
                                      float minU, float maxU, float minV, float maxV) {
         Tessellator tes = Tessellator.instance;
 
@@ -115,7 +116,7 @@ public class RenderUtils {
     }
 
     public static void drawEastFace(float x, float y, float z, float ymin,
-                                    float ymax, float zmin, float zmax, float xoffset, Icon texture,
+                                    float ymax, float zmin, float zmax, float xoffset, IIcon texture,
                                     float minU, float maxU, float minV, float maxV) {
 
         Tessellator tes = Tessellator.instance;
@@ -131,7 +132,7 @@ public class RenderUtils {
     }
 
     public static void drawSouthFace(float x, float y, float z, float xmin,
-                                     float xmax, float ymin, float ymax, float zoffset, Icon texture,
+                                     float xmax, float ymin, float ymax, float zoffset, IIcon texture,
                                      float minU, float maxU, float minV, float maxV) {
         Tessellator tes = Tessellator.instance;
 
@@ -146,7 +147,7 @@ public class RenderUtils {
     }
 
     public static void drawWestFace(float x, float y, float z, float ymin,
-                                    float ymax, float zmin, float zmax, float xoffset, Icon texture,
+                                    float ymax, float zmin, float zmax, float xoffset, IIcon texture,
                                     float minU, float maxU, float minV, float maxV) {
 
         Tessellator tes = Tessellator.instance;
@@ -163,7 +164,7 @@ public class RenderUtils {
 
     public static void renderDoubleSidedCube(float x, float y, float z,
                                              float startx, float starty, float startz, float endx, float endy,
-                                             float endz, Icon texture) {
+                                             float endz, IIcon texture) {
         RenderUtils.drawTopFace(x, y, z, startx, endx, startz, endz, endy,
                 texture, texture.getMinU(), texture.getMaxU(),
                 texture.getMinV(), texture.getMaxV());
@@ -208,7 +209,7 @@ public class RenderUtils {
     }
 
     public static RenderQuad makeTopFace(float xmin, float xmax, float zmin,
-                                         float zmax, float yoffset, Icon texture, float minU, float maxU,
+                                         float zmax, float yoffset, IIcon texture, float minU, float maxU,
                                          float minV, float maxV) {
         RenderPoint a = new RenderPoint();
         RenderPoint b = new RenderPoint();
@@ -225,7 +226,7 @@ public class RenderUtils {
     }
 
     public static RenderQuad makeBottomFace(float xmin, float xmax, float zmin,
-                                            float zmax, float yoffset, Icon texture, float minU, float maxU,
+                                            float zmax, float yoffset, IIcon texture, float minU, float maxU,
                                             float minV, float maxV) {
         RenderPoint a = new RenderPoint();
         RenderPoint b = new RenderPoint();
@@ -242,7 +243,7 @@ public class RenderUtils {
     }
 
     public static RenderQuad makeNorthFace(float xmin, float xmax, float ymin,
-                                           float ymax, float zoffset, Icon texture, float minU, float maxU,
+                                           float ymax, float zoffset, IIcon texture, float minU, float maxU,
                                            float minV, float maxV) {
         return new RenderQuad(new RenderPoint(xmax, ymax, zoffset),
                 new RenderPoint(xmax, ymin, zoffset), new RenderPoint(xmin,
@@ -252,7 +253,7 @@ public class RenderUtils {
     }
 
     public static RenderQuad makeEastFace(float ymin, float ymax, float zmin,
-                                          float zmax, float xoffset, Icon texture, float minU, float maxU,
+                                          float zmax, float xoffset, IIcon texture, float minU, float maxU,
                                           float minV, float maxV) {
         return new RenderQuad(new RenderPoint(xoffset,
                 ymin, zmin), new RenderPoint(xoffset, ymax, zmin), new RenderPoint(xoffset, ymax, zmax),
@@ -262,7 +263,7 @@ public class RenderUtils {
     }
 
     public static RenderQuad makeWestFace(float ymin, float ymax, float zmin,
-                                          float zmax, float xoffset, Icon texture, float minU, float maxU,
+                                          float zmax, float xoffset, IIcon texture, float minU, float maxU,
                                           float minV, float maxV) {
         return new RenderQuad(
                 new RenderPoint(xoffset, ymin, zmin), new RenderPoint(xoffset,
@@ -272,7 +273,7 @@ public class RenderUtils {
     }
 
     public static RenderQuad makeSouthFace(float xmin, float xmax, float ymin,
-                                           float ymax, float zoffset, Icon texture, float minU, float maxU,
+                                           float ymax, float zoffset, IIcon texture, float minU, float maxU,
                                            float minV, float maxV) {
         return new RenderQuad(new RenderPoint(xmin, ymax, zoffset),
                 new RenderPoint(xmin, ymin, zoffset), new RenderPoint(xmax,
@@ -283,7 +284,7 @@ public class RenderUtils {
 
     public static void drawArbitraryFace(float x, float y, float z, float xmin,
                                          float xmax, float ymin, float ymax, float zmin, float zmax,
-                                         ForgeDirection normal, Icon texture, float minU, float maxU,
+                                         ForgeDirection normal, IIcon texture, float minU, float maxU,
                                          float minV, float maxV) {
         switch (normal) {
             case UP:
@@ -317,7 +318,7 @@ public class RenderUtils {
 
     public static void drawFaceByPoints(float x, float y, float z,
                                         RenderPoint A, RenderPoint B, RenderPoint C, RenderPoint D,
-                                        Icon texture, float minU, float maxU, float minV, float maxV) {
+                                        IIcon texture, float minU, float maxU, float minV, float maxV) {
         Tessellator tes = Tessellator.instance;
 
         tes.addTranslation(x, y, z);
@@ -331,7 +332,7 @@ public class RenderUtils {
     }
 
     public static void renderLiquidInGUI(GuiContainer container, float zheight,
-                                         Icon icon, int x, int y, int width, int height) {
+                                         IIcon icon, int x, int y, int width, int height) {
         TextureManager man = Minecraft.getMinecraft().getTextureManager();
         // terrain.png
         man.bindTexture(man.getResourceLocation(0));
@@ -339,7 +340,7 @@ public class RenderUtils {
     }
 
     private static void renderLiquidInGUI_height(GuiContainer container,
-                                                 float zheight, Icon icon, int x, int y, int width, int height) {
+                                                 float zheight, IIcon icon, int x, int y, int width, int height) {
         int i = 0;
         int remaining = height;
         if ((height - width) > 0) {
@@ -354,7 +355,7 @@ public class RenderUtils {
     }
 
     private static void drawTexturedModalSquareFromIcon(float zheight, int x,
-                                                        int y, int size, Icon icon) {
+                                                        int y, int size, IIcon icon) {
         drawTexturedModalRectFromIcon(zheight, x, y, size, size,
                 icon.getMinU(), icon.getMaxU(), icon.getMinV(), icon.getMaxV());
     }
@@ -377,7 +378,7 @@ public class RenderUtils {
     }
 
     private static void renderLiquidInGUI_width(GuiContainer container,
-                                                float zheight, Icon icon, int x, int y, int width, int height) {
+                                                float zheight, IIcon icon, int x, int y, int width, int height) {
         int i = 0;
         int remaining = width;
         if ((width - height) > 0) {
@@ -420,7 +421,8 @@ public class RenderUtils {
         GL11.glDisable(GL11.GL_BLEND);
     }
 
-    public static ResourceLocation particleLocation = new ResourceLocation(Femtocraft.ID().toLowerCase(), "textures/particles/particles.png");
+    public static ResourceLocation particleLocation = new ResourceLocation(Femtocraft.ID().toLowerCase(),
+            "textures/particles/particles.png");
 
     public static EntityFX spawnParticle(World world, String name, double x, double y, double z) {
         Minecraft mc = Minecraft.getMinecraft();
@@ -434,11 +436,9 @@ public class RenderUtils {
         }
         if (name.equals(MICRO_POWER_PARTICLE)) {
             fx = new EntityFxPower(world, x, y, z, .1f, .1f, 1.0f);
-        }
-        else if (name.equals(NANO_POWER_PARTICLE)) {
+        } else if (name.equals(NANO_POWER_PARTICLE)) {
             fx = new EntityFxPower(world, x, y, z, .1f, 1.0f, .1f);
-        }
-        else if (name.equals(FEMTO_POWER_PARTICLE)) {
+        } else if (name.equals(FEMTO_POWER_PARTICLE)) {
             fx = new EntityFxPower(world, x, y, z, 1.f, .5f, .1f);
         }
         mc.effectRenderer.addEffect(fx);

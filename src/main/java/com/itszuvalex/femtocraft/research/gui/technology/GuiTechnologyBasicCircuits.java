@@ -24,8 +24,8 @@ package com.itszuvalex.femtocraft.research.gui.technology;
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnologyStatus;
 import com.itszuvalex.femtocraft.research.gui.GuiResearch;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
@@ -53,14 +53,15 @@ public class GuiTechnologyBasicCircuits extends GuiTechnology {
                         y,
                         width,
                         height / 2,
-                        new ItemStack[]{new ItemStack(Item.stick),
-                                new ItemStack(Item.stick),
-                                new ItemStack(Item.stick)},
+                        new ItemStack[]{new ItemStack(Items.stick),
+                                new ItemStack(Items.stick),
+                                new ItemStack(Items.stick)},
                         new ItemStack(Femtocraft.itemBoard()),
                         mouseX,
                         mouseY,
                         tooltip,
-                        "Combining small pieces of wood, it is possible to create a simple container to support the fragile requirements of a circuit itemBoard."
+                        "Combining small pieces of wood, it is possible to create a simple container to support the " +
+                        "fragile requirements of a circuit itemBoard."
                 );
                 renderCraftingRecipeWithInfo(
                         x,
@@ -68,12 +69,13 @@ public class GuiTechnologyBasicCircuits extends GuiTechnology {
                         width,
                         height / 2,
                         new ItemStack[]{new ItemStack(Femtocraft.itemIngotFarenite()),
-                                new ItemStack(Item.dyePowder, 1, 4)},
+                                new ItemStack(Items.dye, 1, 4)},
                         new ItemStack(Femtocraft.itemConductivePowder(), 2),
                         mouseX,
                         mouseY,
                         tooltip,
-                        "Farenite is an extremely conductive powder, orders of magnitude stronger than Redstone.  By diluting it with Lapis, you find it can both store and transmit power."
+                        "Farenite is an extremely conductive powder, orders of magnitude stronger than Redstone.  By " +
+                        "diluting it with Lapis, you find it can both store and transmit power."
                 );
                 break;
             case 2:
@@ -82,33 +84,34 @@ public class GuiTechnologyBasicCircuits extends GuiTechnology {
                         y,
                         width,
                         height / 2,
-                        new ItemStack[]{new ItemStack(Block.planks), null,
-                                new ItemStack(Block.planks),
-                                new ItemStack(Block.planks),
-                                new ItemStack(Item.stick),
-                                new ItemStack(Block.planks),
-                                new ItemStack(Block.planks), null,
-                                new ItemStack(Block.planks)},
+                        new ItemStack[]{new ItemStack(Blocks.planks), null,
+                                new ItemStack(Blocks.planks),
+                                new ItemStack(Blocks.planks),
+                                new ItemStack(Items.stick),
+                                new ItemStack(Blocks.planks),
+                                new ItemStack(Blocks.planks), null,
+                                new ItemStack(Blocks.planks)},
                         new ItemStack(Femtocraft.itemSpool()),
                         mouseX,
                         mouseY,
                         tooltip,
-                        "Spools allow for easy storage and retrieval of long threads of thin metal.  Perfect for holding wires."
+                        "Spools allow for easy storage and retrieval of long threads of thin metal.  Perfect for " +
+                        "holding wires."
                 );
                 renderCraftingRecipeWithInfo(
                         x,
                         y + height / 2,
                         width,
                         height / 2,
-                        new ItemStack[]{new ItemStack(Item.ingotGold),
-                                new ItemStack(Item.ingotGold),
-                                new ItemStack(Item.ingotGold),
-                                new ItemStack(Item.ingotGold),
+                        new ItemStack[]{new ItemStack(Items.gold_ingot),
+                                new ItemStack(Items.gold_ingot),
+                                new ItemStack(Items.gold_ingot),
+                                new ItemStack(Items.gold_ingot),
                                 new ItemStack(Femtocraft.itemSpool()),
-                                new ItemStack(Item.ingotGold),
-                                new ItemStack(Item.ingotGold),
-                                new ItemStack(Item.ingotGold),
-                                new ItemStack(Item.ingotGold)},
+                                new ItemStack(Items.gold_ingot),
+                                new ItemStack(Items.gold_ingot),
+                                new ItemStack(Items.gold_ingot),
+                                new ItemStack(Items.gold_ingot)},
                         new ItemStack(Femtocraft.itemSpoolGold()),
                         mouseX,
                         mouseY,
@@ -129,7 +132,8 @@ public class GuiTechnologyBasicCircuits extends GuiTechnology {
                         mouseX,
                         mouseY,
                         tooltip,
-                        "Filling a itemBoard with conductive powder, then running it through an oven, produces a itemBoard suitable for wiring."
+                        "Filling a itemBoard with conductive powder, then running it through an oven, " +
+                        "produces a itemBoard suitable for wiring."
                 );
                 renderCraftingRecipeWithInfo(x, y + height / 2, width, height / 2,
                         new ItemStack[]{new ItemStack(Femtocraft.itemSpoolGold()),

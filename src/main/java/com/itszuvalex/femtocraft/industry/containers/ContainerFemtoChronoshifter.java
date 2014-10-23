@@ -85,6 +85,7 @@ public class ContainerFemtoChronoshifter extends ContainerInv<TileEntityFemtoChr
         }
 
         this.lastCookTime = this.inventory.getProgress();
+        this.lastCookMax = this.inventory.getProgressMax();
         this.lastPower = this.inventory.getCurrentPower();
     }
 

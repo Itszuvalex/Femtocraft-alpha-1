@@ -22,36 +22,37 @@
 package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockPhlegethonTunnel;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityPhlegethonTunnelCore;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityPhlegethonTunnelFrame;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/12/14.
  */
 public class BlockPhlegethonTunnelFrame extends TileContainer {
-    Icon[][] sideIcons_inactive;
-    Icon[][] topIcons_inactive;
-    Icon[][] botIcons_inactive;
-    Icon[][] sideIcons_active;
-    Icon[][] topIcons_active;
-    Icon[][] botIcons_active;
+    IIcon[][] sideIcons_inactive;
+    IIcon[][] topIcons_inactive;
+    IIcon[][] botIcons_inactive;
+    IIcon[][] sideIcons_active;
+    IIcon[][] topIcons_active;
+    IIcon[][] botIcons_active;
 
-    public BlockPhlegethonTunnelFrame(int id) {
-        super(id, Material.iron);
+    public BlockPhlegethonTunnelFrame() {
+        super(Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab());
-        setUnlocalizedName("BlockPhlegethonTunnelFrame");
+        setBlockName("BlockPhlegethonTunnelFrame");
         sideIcons_inactive = makeEmptyIconArray();
         sideIcons_active = makeEmptyIconArray();
         topIcons_inactive = makeEmptyIconArray();
@@ -60,17 +61,17 @@ public class BlockPhlegethonTunnelFrame extends TileContainer {
         botIcons_active = makeEmptyIconArray();
     }
 
-    private Icon[][] makeEmptyIconArray() {
-        Icon[][] newArray = new Icon[3][];
+    private IIcon[][] makeEmptyIconArray() {
+        IIcon[][] newArray = new IIcon[3][];
         for (int i = 0; i < newArray.length; ++i) {
-            newArray[i] = new Icon[3];
+            newArray[i] = new IIcon[3];
         }
         return newArray;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                                                        + ":" + "BlockPhlegethonTunnelFrame_unformed");
         registerIcons(sideIcons_active, "side_active", par1IconRegister);
@@ -81,7 +82,7 @@ public class BlockPhlegethonTunnelFrame extends TileContainer {
         registerIcons(botIcons_active, "bot_active", par1IconRegister);
     }
 
-    private void registerIcons(Icon[][] array, String name, IconRegister register) {
+    private void registerIcons(IIcon[][] array, String name, IIconRegister register) {
         for (int i = 0; i < array.length; ++i) {
             for (int j = 0; j < array[i].length; ++j) {
                 array[j][i] = register.registerIcon(
@@ -92,25 +93,25 @@ public class BlockPhlegethonTunnelFrame extends TileContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int par2,
-                                int par3, int par4, int par5) {
-        TileEntity te = par1iBlockAccess.getBlockTileEntity(par2, par3, par4);
+    public IIcon getIcon(IBlockAccess par1iBlockAccess, int par2,
+                         int par3, int par4, int par5) {
+        TileEntity te = par1iBlockAccess.getTileEntity(par2, par3, par4);
         if (te instanceof TileEntityPhlegethonTunnelFrame) {
             TileEntityPhlegethonTunnelFrame frame = (TileEntityPhlegethonTunnelFrame) te;
             if (frame.isValidMultiBlock()) {
                 MultiBlockInfo info = frame.getInfo();
                 ForgeDirection dir = ForgeDirection.getOrientation(par5);
                 TileEntityPhlegethonTunnelCore core = (TileEntityPhlegethonTunnelCore) par1iBlockAccess
-                        .getBlockTileEntity(info.x(), info.y(), info.z());
+                        .getTileEntity(info.x(), info.y(), info.z());
                 boolean active = core != null && core.isActive();
                 return iconForSide(info, dir, active, par2, par3, par4);
             }
         }
-        return super.getBlockTexture(par1iBlockAccess, par2, par3, par4, par5);
+        return super.getIcon(par1iBlockAccess, par2, par3, par4, par5);
     }
 
-    private Icon iconForSide(MultiBlockInfo info, ForgeDirection dir, boolean active, int x,
-                             int y, int z) {
+    private IIcon iconForSide(MultiBlockInfo info, ForgeDirection dir, boolean active, int x,
+                              int y, int z) {
         int xdif = x - info.x();
         int ydif = y - info.y();
         int zdif = z - info.z();
@@ -133,7 +134,7 @@ public class BlockPhlegethonTunnelFrame extends TileContainer {
         }
     }
 
-    private Icon iconFromGrid(ForgeDirection side, boolean active, int xdif, int ydif) {
+    private IIcon iconFromGrid(ForgeDirection side, boolean active, int xdif, int ydif) {
         try {
             switch (side) {
                 case UP:
@@ -178,8 +179,8 @@ public class BlockPhlegethonTunnelFrame extends TileContainer {
          */
     @Override
     public void breakBlock(World par1World, int par2, int par3, int par4,
-                           int par5, int par6) {
-        TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+                           Block par5, int par6) {
+        TileEntity te = par1World.getTileEntity(par2, par3, par4);
         if (te instanceof TileEntityPhlegethonTunnelFrame) {
             MultiBlockInfo info = ((TileEntityPhlegethonTunnelFrame) te).getInfo();
             MultiBlockPhlegethonTunnel.instance.breakMultiBlock(par1World, info.x(),

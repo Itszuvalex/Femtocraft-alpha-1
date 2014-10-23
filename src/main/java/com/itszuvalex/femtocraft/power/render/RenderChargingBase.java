@@ -34,7 +34,7 @@ import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
 public class RenderChargingBase implements
-                                ISimpleBlockRenderingHandler {
+        ISimpleBlockRenderingHandler {
     RenderModel base_model;
 
     public RenderChargingBase() {
@@ -79,7 +79,7 @@ public class RenderChargingBase implements
     }
 
     @Override
-    public boolean shouldRender3DInInventory() {
+    public boolean shouldRender3DInInventory(int modelID) {
         return true;
     }
 

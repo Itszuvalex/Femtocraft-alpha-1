@@ -22,13 +22,13 @@
 package com.itszuvalex.femtocraft.industry.gui;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.core.gui.GuiBase;
 import com.itszuvalex.femtocraft.industry.containers.ContainerMicroFurnace;
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -36,7 +36,7 @@ import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class GuiMicroFurnace extends GuiContainer {
+public class GuiMicroFurnace extends GuiBase {
     public static final ResourceLocation texture = new ResourceLocation(
             Femtocraft.ID().toLowerCase(), "textures/guis/MicroFurnace.png");
     private TileEntityBaseEntityMicroFurnace furnaceInventory;
@@ -63,8 +63,8 @@ public class GuiMicroFurnace extends GuiContainer {
 
         // String text = String.format("%i/%i", furnaceCurrent, furnaceMax);
         String text = FemtocraftUtils.formatIntegerToString(furnaceCurrent) +
-                '/'
-                + FemtocraftUtils.formatIntegerToString(furnaceMax);
+                      '/'
+                      + FemtocraftUtils.formatIntegerToString(furnaceMax);
 
         if (this.isPointInRegion(18, 12, 16, 60, par1, par2)) {
             this.drawCreativeTabHoveringText(text, par1, par2);
@@ -72,24 +72,22 @@ public class GuiMicroFurnace extends GuiContainer {
     }
 
     /**
-     * Draw the foreground layer for the GuiContainer (everything in front of
-     * the items)
+     * Draw the foreground layer for the GuiContainer (everything in front of the items)
      */
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         String s = "Micro-Furnace";
-        this.fontRenderer.drawString(s,
-                this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
+        this.fontRendererObj.drawString(s,
+                this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6,
                 FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
-        this.fontRenderer.drawString(
+        this.fontRendererObj.drawString(
                 StatCollector.translateToLocal("container.inventory"), 8,
                 this.ySize - 96 + 2,
                 FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
     }
 
     /**
-     * Draw the background layer for the GuiContainer (everything behind the
-     * items)
+     * Draw the background layer for the GuiContainer (everything behind the items)
      */
     @Override
     protected void drawGuiContainerBackgroundLayer(float par1, int par2,
@@ -111,7 +109,7 @@ public class GuiMicroFurnace extends GuiContainer {
         i1 = this.furnaceInventory.getCookProgressScaled(38);
         this.drawTexturedModalRect(k + 73, l + 34, 176, 13, i1, 18);
         i1 = (this.furnaceInventory.currentPower * 60)
-                / this.furnaceInventory.getMaxPower();
+             / this.furnaceInventory.getMaxPower();
         this.drawTexturedModalRect(k + 18, l + 12 + (60 - i1), 176,
                 32 + (60 - i1), 16 + (60 - i1), 60);
     }

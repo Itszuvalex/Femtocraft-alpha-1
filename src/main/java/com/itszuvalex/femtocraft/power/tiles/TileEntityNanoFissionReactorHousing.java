@@ -31,7 +31,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
@@ -54,7 +54,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
     @Override
     public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(),
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(),
                     info.z());
             // Big Oops? Or chunk unloaded...despite having player activating it
             // >.>
@@ -104,7 +104,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
     public int fill(ForgeDirection from, FluidStack resource,
                     boolean doFill) {
         if (isValidMultiBlock()) {
-            IFluidHandler core = (IFluidHandler) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            IFluidHandler core = (IFluidHandler) worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (core == null) return 0;
             int result = core.fill(from, resource, doFill);
             if (result > 0) {
@@ -119,7 +119,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
     public FluidStack drain(ForgeDirection from, FluidStack resource,
                             boolean doDrain) {
         if (isValidMultiBlock()) {
-            IFluidHandler core = (IFluidHandler) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            IFluidHandler core = (IFluidHandler) worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (core == null) return null;
             FluidStack result = core.drain(from, resource, doDrain);
             if (result != null) {
@@ -134,7 +134,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
     public FluidStack drain(ForgeDirection from, int maxDrain,
                             boolean doDrain) {
         if (isValidMultiBlock()) {
-            IFluidHandler core = (IFluidHandler) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            IFluidHandler core = (IFluidHandler) worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (core == null) return null;
             FluidStack result = core.drain(from, maxDrain, doDrain);
             if (result != null) {
@@ -148,7 +148,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
     @Override
     public boolean canFill(ForgeDirection from, Fluid fluid) {
         if (info.isValidMultiBlock()) {
-            IFluidHandler core = (IFluidHandler) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            IFluidHandler core = (IFluidHandler) worldObj.getTileEntity(info.x(), info.y(), info.z());
             return core != null && core.canFill(from, fluid);
         }
         return false;
@@ -157,7 +157,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
     @Override
     public boolean canDrain(ForgeDirection from, Fluid fluid) {
         if (isValidMultiBlock()) {
-            IFluidHandler core = (IFluidHandler) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            IFluidHandler core = (IFluidHandler) worldObj.getTileEntity(info.x(), info.y(), info.z());
             return core != null && core.canDrain(from, fluid);
         }
         return false;
@@ -166,7 +166,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
     @Override
     public FluidTankInfo[] getTankInfo(ForgeDirection from) {
         if (isValidMultiBlock()) {
-            IFluidHandler core = (IFluidHandler) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            IFluidHandler core = (IFluidHandler) worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (core == null) return null;
             return core.getTankInfo(from);
         }
@@ -176,7 +176,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
     @Override
     public int getSizeInventory() {
         if (isValidMultiBlock()) {
-            IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            IInventory core = (IInventory) worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (core == null) return 0;
             return core.getSizeInventory();
         }
@@ -186,7 +186,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
     @Override
     public ItemStack getStackInSlot(int i) {
         if (isValidMultiBlock()) {
-            IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            IInventory core = (IInventory) worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (core == null) return null;
             ItemStack result = core.getStackInSlot(i);
             if (result != null) {
@@ -201,7 +201,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
     @Override
     public ItemStack decrStackSize(int i, int j) {
         if (isValidMultiBlock()) {
-            IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            IInventory core = (IInventory) worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (core == null) return null;
             ItemStack result = core.decrStackSize(i, j);
             if (result != null) {
@@ -216,7 +216,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
     @Override
     public ItemStack getStackInSlotOnClosing(int i) {
         if (isValidMultiBlock()) {
-            IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            IInventory core = (IInventory) worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (core == null) return null;
             return core.getStackInSlotOnClosing(i);
         }
@@ -226,7 +226,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
     @Override
     public void setInventorySlotContents(int i, ItemStack itemstack) {
         if (isValidMultiBlock()) {
-            IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            IInventory core = (IInventory) worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (core == null) return;
             core.setInventorySlotContents(i, itemstack);
             setModified();
@@ -235,11 +235,11 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
     }
 
     @Override
-    public String getInvName() {
+    public String getInventoryName() {
         if (isValidMultiBlock()) {
-            IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            IInventory core = (IInventory) worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (core == null) return null;
-            return core.getInvName();
+            return core.getInventoryName();
         }
         return null;
     }
@@ -250,10 +250,10 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
     }
 
     @Override
-    public boolean isInvNameLocalized() {
+    public boolean hasCustomInventoryName() {
         if (isValidMultiBlock()) {
-            IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
-            return core != null && core.isInvNameLocalized();
+            IInventory core = (IInventory) worldObj.getTileEntity(info.x(), info.y(), info.z());
+            return core != null && core.hasCustomInventoryName();
         }
         return false;
     }
@@ -261,7 +261,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
     @Override
     public int getInventoryStackLimit() {
         if (isValidMultiBlock()) {
-            IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            IInventory core = (IInventory) worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (core == null) return 0;
             return core.getInventoryStackLimit();
         }
@@ -271,34 +271,34 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
     @Override
     public boolean isUseableByPlayer(EntityPlayer entityplayer) {
         if (isValidMultiBlock()) {
-            IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            IInventory core = (IInventory) worldObj.getTileEntity(info.x(), info.y(), info.z());
             return core != null && core.isUseableByPlayer(entityplayer);
         }
         return false;
     }
 
     @Override
-    public void openChest() {
+    public void openInventory() {
         if (isValidMultiBlock()) {
-            IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            IInventory core = (IInventory) worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (core == null) return;
-            core.openChest();
+            core.openInventory();
         }
     }
 
     @Override
-    public void closeChest() {
+    public void closeInventory() {
         if (isValidMultiBlock()) {
-            IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            IInventory core = (IInventory) worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (core == null) return;
-            core.closeChest();
+            core.closeInventory();
         }
     }
 
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
         if (isValidMultiBlock()) {
-            IInventory core = (IInventory) worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            IInventory core = (IInventory) worldObj.getTileEntity(info.x(), info.y(), info.z());
             return core != null && core.isItemValidForSlot(i, itemstack);
         }
         return false;

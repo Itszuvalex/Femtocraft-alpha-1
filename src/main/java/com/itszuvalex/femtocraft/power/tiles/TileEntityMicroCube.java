@@ -29,7 +29,7 @@ import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Arrays;
 
@@ -160,7 +160,7 @@ public class TileEntityMicroCube extends TileEntityPowerBase {
         }
 
         if (worldObj != null) {
-            worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+            setRenderUpdate();
         }
     }
 

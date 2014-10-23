@@ -94,16 +94,11 @@ public class WorldLocation implements ISaveable, Comparable<WorldLocation> {
     }
 
     public TileEntity getTileEntity() {
-        return world == null ? null : world.getBlockTileEntity(x, y, z);
+        return world == null ? null : world.getTileEntity(x, y, z);
     }
 
     public Block getBlock() {
-        return world == null ? null : Block
-                .blocksList[getBlockID()];
-    }
-
-    public int getBlockID() {
-        return world == null ? 0 : world.getBlockId(x, y, z);
+        return world == null ? null : world.getBlock(x, y, z);
     }
 
     @Override

@@ -26,7 +26,8 @@ import com.itszuvalex.femtocraft.configuration.Configurable;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.Item;
 
 import java.util.Random;
 
@@ -37,26 +38,26 @@ public class BlockOreMalenite extends BlockOreBase {
     @Configurable(comment = "Minimum amount of Malenite dust to drop.")
     public static int DROP_AMOUNT_MIN = 2;
 
-    public BlockOreMalenite(int id) {
-        super(id);
+    public BlockOreMalenite() {
+        super();
         setCreativeTab(Femtocraft.femtocraftTab());
-        setTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockOreMalenite");
-        setUnlocalizedName("BlockOreMalenite");
+        setBlockTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockOreMalenite");
+        setBlockName("BlockOreMalenite");
         setHardness(3.0f);
-        setStepSound(Block.soundStoneFootstep);
+        setStepSound(Block.soundTypeStone);
         setResistance(1f);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                 .toLowerCase() + ":" + "BlockOreMalenite");
+                                                               .toLowerCase() + ":" + "BlockOreMalenite");
     }
 
     @Override
-    public int idDropped(int par1, Random random, int par2) {
-        return Femtocraft.itemIngotMalenite().itemID;
+    public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
+        return Femtocraft.itemIngotMalenite();
     }
 
     @Override

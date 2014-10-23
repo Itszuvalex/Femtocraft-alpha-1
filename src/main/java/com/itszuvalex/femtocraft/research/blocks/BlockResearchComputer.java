@@ -27,18 +27,18 @@ import com.itszuvalex.femtocraft.research.tiles.TileEntityResearchComputer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockResearchComputer extends TileContainer {
-    public Icon top;
+    public IIcon top;
 
-    public BlockResearchComputer(int par1) {
-        super(par1, Material.iron);
-        setUnlocalizedName("blockResearchComputer");
+    public BlockResearchComputer() {
+        super(Material.iron);
+        setBlockName("blockResearchComputer");
         setCreativeTab(Femtocraft.femtocraftTab());
     }
 
@@ -49,7 +49,7 @@ public class BlockResearchComputer extends TileContainer {
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getIcon(int par1, int par2) {
+    public IIcon getIcon(int par1, int par2) {
         switch (ForgeDirection.getOrientation(par1)) {
             case UP:
                 return top;
@@ -67,11 +67,11 @@ public class BlockResearchComputer extends TileContainer {
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "BasicMachineBlockSide");
+                                                  + ":" + "BasicMachineBlockSide");
         top = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":"
-                + "BlockResearchComputer_top");
+                                            + "BlockResearchComputer_top");
     }
 
     /*

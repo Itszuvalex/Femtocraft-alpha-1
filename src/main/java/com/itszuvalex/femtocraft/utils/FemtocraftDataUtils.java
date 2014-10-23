@@ -25,7 +25,7 @@ import com.itszuvalex.femtocraft.Femtocraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidTank;
 
 import java.lang.annotation.Retention;
@@ -49,7 +49,7 @@ public class FemtocraftDataUtils {
             }
             NBTTagCompound info = new NBTTagCompound();
             sobj.saveToNBT(info);
-            compound.setCompoundTag(saveable.getName(), info);
+            compound.setTag(saveable.getName(), info);
         }
 
         @Override
@@ -146,7 +146,7 @@ public class FemtocraftDataUtils {
                 for (boolean bool : barr) {
                     array.setBoolean(saveable.getName() + post, bool);
                 }
-                compound.setCompoundTag(saveable.getName(), array);
+                compound.setTag(saveable.getName(), array);
             }
 
             @Override
@@ -195,7 +195,7 @@ public class FemtocraftDataUtils {
                 for (float floa : farr) {
                     array.setFloat(saveable.getName() + post, floa);
                 }
-                compound.setCompoundTag(saveable.getName(), array);
+                compound.setTag(saveable.getName(), array);
             }
 
             @Override
@@ -244,7 +244,7 @@ public class FemtocraftDataUtils {
                 for (double doub : darr) {
                     array.setDouble(saveable.getName() + post, doub);
                 }
-                compound.setCompoundTag(saveable.getName(), array);
+                compound.setTag(saveable.getName(), array);
             }
 
             @Override
@@ -293,7 +293,7 @@ public class FemtocraftDataUtils {
                 for (short str : darr) {
                     array.setShort(saveable.getName() + post, str);
                 }
-                compound.setCompoundTag(saveable.getName(), array);
+                compound.setTag(saveable.getName(), array);
             }
 
             @Override
@@ -342,7 +342,7 @@ public class FemtocraftDataUtils {
                 for (long str : darr) {
                     array.setLong(saveable.getName() + post, str);
                 }
-                compound.setCompoundTag(saveable.getName(), array);
+                compound.setTag(saveable.getName(), array);
             }
 
             @Override
@@ -439,7 +439,7 @@ public class FemtocraftDataUtils {
                     }
                     array.setString(saveable.getName() + post, str);
                 }
-                compound.setCompoundTag(saveable.getName(), array);
+                compound.setTag(saveable.getName(), array);
             }
 
             @Override
@@ -467,7 +467,7 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
-                compound.setCompoundTag(saveable.getName(),
+                compound.setTag(saveable.getName(),
                         (NBTTagCompound) saveable.get(obj));
             }
 
@@ -494,7 +494,7 @@ public class FemtocraftDataUtils {
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                saveable.set(obj, compound.getTagList(saveable.getName()));
+                saveable.set(obj, compound.getTagList(saveable.getName(), 10));
             }
         });
 
@@ -511,7 +511,7 @@ public class FemtocraftDataUtils {
                     return;
                 }
                 stack.writeToNBT(item);
-                compound.setCompoundTag(saveable.getName(), item);
+                compound.setTag(saveable.getName(), item);
             }
 
             @Override
@@ -552,7 +552,7 @@ public class FemtocraftDataUtils {
                     list.appendTag(scomp);
                 }
                 array.setTag("items", list);
-                compound.setCompoundTag(saveable.getName(), array);
+                compound.setTag(saveable.getName(), array);
             }
 
             @Override
@@ -566,11 +566,11 @@ public class FemtocraftDataUtils {
 
                 NBTTagCompound array = compound.getCompoundTag(saveable
                         .getName());
-                NBTTagList list = array.getTagList("items");
+                NBTTagList list = array.getTagList("items", 10);
                 ItemStack[] retarray = new ItemStack[array.getInteger("size")];
                 Arrays.fill(retarray, null);
                 for (int i = 0; i < list.tagCount(); ++i) {
-                    NBTTagCompound item = (NBTTagCompound) list.tagAt(i);
+                    NBTTagCompound item = list.getCompoundTagAt(i);
                     retarray[item.getInteger("index")] = ItemStack
                             .loadItemStackFromNBT(item);
                 }
@@ -648,7 +648,7 @@ public class FemtocraftDataUtils {
                 FluidTank tank = (FluidTank) saveable.get(obj);
                 container.setInteger("capacity", tank.getCapacity());
                 tank.writeToNBT(container);
-                compound.setCompoundTag(saveable.getName(), container);
+                compound.setTag(saveable.getName(), container);
             }
 
             @Override
@@ -743,21 +743,19 @@ public class FemtocraftDataUtils {
             SaveManager man = managerMap.get(clazz);
             if (man != null) {
                 man.saveToNBT(compound, saveable, obj);
-            }
-            else if (ISaveable.class.isAssignableFrom(clazz)) {
+            } else if (ISaveable.class.isAssignableFrom(clazz)) {
                 iSaveableSaveManager.saveToNBT(compound, saveable, obj);
-            }
-            else {
+            } else {
                 Femtocraft.logger()
-                          .log(Level.SEVERE,
-                                  "Field "
-                                          + saveable.getName()
-                                          + " in Class "
-                                          + saveable.getDeclaringClass()
-                                                    .getName()
-                                          + " marked as Saveable is of unsupported class - "
-                                          + clazz.getName() + "."
-                          );
+                        .log(Level.SEVERE,
+                                "Field "
+                                + saveable.getName()
+                                + " in Class "
+                                + saveable.getDeclaringClass()
+                                        .getName()
+                                + " marked as Saveable is of unsupported class - "
+                                + clazz.getName() + "."
+                        );
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -817,35 +815,32 @@ public class FemtocraftDataUtils {
             SaveManager man = managerMap.get(clazz);
             if (man != null) {
                 man.readFromNBT(compound, saveable, obj);
-            }
-            else if (ISaveable.class.isAssignableFrom(clazz)) {
+            } else if (ISaveable.class.isAssignableFrom(clazz)) {
                 Object os = saveable.get(obj);
                 if (os == null) {
                     Femtocraft.logger()
-                              .log(Level.SEVERE,
-                                      "Field "
-                                              + saveable.getName()
-                                              + " in Class "
-                                              + saveable.getDeclaringClass()
-                                                        .getName()
-                                              + " must not be null to be loaded from NBT."
-                              );
-                }
-                else {
+                            .log(Level.SEVERE,
+                                    "Field "
+                                    + saveable.getName()
+                                    + " in Class "
+                                    + saveable.getDeclaringClass()
+                                            .getName()
+                                    + " must not be null to be loaded from NBT."
+                            );
+                } else {
                     iSaveableSaveManager.readFromNBT(compound, saveable, obj);
                 }
-            }
-            else {
+            } else {
                 Femtocraft.logger()
-                          .log(Level.SEVERE,
-                                  "Field "
-                                          + saveable.getName()
-                                          + " in Class "
-                                          + saveable.getDeclaringClass()
-                                                    .getName()
-                                          + " marked as Saveable is of unsupported class - "
-                                          + clazz.getName() + "."
-                          );
+                        .log(Level.SEVERE,
+                                "Field "
+                                + saveable.getName()
+                                + " in Class "
+                                + saveable.getDeclaringClass()
+                                        .getName()
+                                + " marked as Saveable is of unsupported class - "
+                                + clazz.getName() + "."
+                        );
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -857,12 +852,10 @@ public class FemtocraftDataUtils {
     }
 
     /**
-     * @param world True by default. Field will be saved/loaded when the world
-     *              saves/loads.
-     * @param desc  False by default. If true, Field will be sent to client when
-     *              description packets are sent, and loaded on client.
-     * @param item  False by default. If true, Field will be saved to dropped
-     *              ItemStack 's NBTTagCompound.
+     * @param world True by default. Field will be saved/loaded when the world saves/loads.
+     * @param desc  False by default. If true, Field will be sent to client when description packets are sent, and
+     *              loaded on client.
+     * @param item  False by default. If true, Field will be saved to dropped ItemStack 's NBTTagCompound.
      * @author Itszuvalex
      */
     @Retention(RetentionPolicy.RUNTIME)

@@ -22,16 +22,16 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
-import com.itszuvalex.femtocraft.power.plasma.IPlasmaContainer;
-import com.itszuvalex.femtocraft.power.plasma.IPlasmaFlow;
-import com.itszuvalex.femtocraft.power.plasma.PlasmaContainer;
-import com.itszuvalex.femtocraft.power.plasma.volatility.IVolatilityEvent;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
+import com.itszuvalex.femtocraft.api.power.plasma.PlasmaContainer;
+import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Collection;
 
@@ -114,7 +114,7 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
         }
         for (int i = 0; i < 6; ++i) {
             ForgeDirection dir = ForgeDirection.getOrientation(i);
-            TileEntity te = worldObj.getBlockTileEntity(xCoord + dir.offsetX,
+            TileEntity te = worldObj.getTileEntity(xCoord + dir.offsetX,
                     yCoord + dir.offsetY,
                     zCoord + dir.offsetZ);
             if (te instanceof IPlasmaContainer) {
@@ -123,8 +123,7 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
                     if (plasmaContainer.setOutput(this, dir.getOpposite())) {
                         if (setInput(plasmaContainer, dir)) {
                             return true;
-                        }
-                        else {
+                        } else {
                             plasmaContainer.setOutput(null, ForgeDirection.UNKNOWN);
                         }
                     }
@@ -141,7 +140,7 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
         }
         for (int i = 0; i < 6; ++i) {
             ForgeDirection dir = ForgeDirection.getOrientation(i);
-            TileEntity te = worldObj.getBlockTileEntity(xCoord + dir.offsetX,
+            TileEntity te = worldObj.getTileEntity(xCoord + dir.offsetX,
                     yCoord + dir.offsetY,
                     zCoord + dir.offsetZ);
             if (te instanceof IPlasmaContainer) {
@@ -150,8 +149,7 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
                     if (plasmaContainer.setInput(this, dir.getOpposite())) {
                         if (setOutput(plasmaContainer, dir)) {
                             return true;
-                        }
-                        else {
+                        } else {
                             plasmaContainer.setInput(null, ForgeDirection.UNKNOWN);
                         }
                     }
@@ -164,17 +162,21 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
     @Override
     public void femtocraftServerUpdate() {
         if (needsCheckInput || plasma.getInputDir() != ForgeDirection.UNKNOWN
-                && plasma.getInput() == null) {
+                               && plasma.getInput() == null) {
             needsCheckInput = false;
-            TileEntity te = worldObj.getBlockTileEntity(xCoord + plasma.getInputDir().offsetX, yCoord + plasma.getInputDir().offsetY, zCoord + plasma.getInputDir().offsetZ);
+            TileEntity te = worldObj.getTileEntity(
+                    xCoord + plasma.getInputDir().offsetX,
+                    yCoord + plasma.getInputDir().offsetY, zCoord + plasma.getInputDir().offsetZ);
             if (te instanceof IPlasmaContainer) {
                 setInput((IPlasmaContainer) te, plasma.getInputDir());
             }
         }
         if (needsCheckOutput || plasma.getOutputDir() != ForgeDirection.UNKNOWN
-                && plasma.getOutput() == null) {
+                                && plasma.getOutput() == null) {
             needsCheckOutput = false;
-            TileEntity te = worldObj.getBlockTileEntity(xCoord + plasma.getOutputDir().offsetX, yCoord + plasma.getOutputDir().offsetY, zCoord + plasma.getOutputDir().offsetZ);
+            TileEntity te = worldObj.getTileEntity(
+                    xCoord + plasma.getOutputDir().offsetX,
+                    yCoord + plasma.getOutputDir().offsetY, zCoord + plasma.getOutputDir().offsetZ);
             if (te instanceof IPlasmaContainer) {
                 setOutput((IPlasmaContainer) te, plasma.getOutputDir());
             }
@@ -196,7 +198,7 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
 
     public boolean hasFlows() {
         return worldObj.isRemote ? containsPlasma : plasma.getFlows() != null && plasma.getFlows()
-                                                                                       .size() > 0;
+                                                                                         .size() > 0;
     }
 
     @Override
@@ -219,8 +221,7 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
                 setModified();
                 setUpdate();
                 return true;
-            }
-            else {
+            } else {
                 plasma.setInput(null, ForgeDirection.UNKNOWN);
             }
         }
@@ -237,8 +238,7 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
                 setModified();
                 setUpdate();
                 return true;
-            }
-            else {
+            } else {
                 plasma.setOutput(null, ForgeDirection.UNKNOWN);
             }
         }

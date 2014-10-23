@@ -26,32 +26,33 @@ import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.research.tiles.TileEntityResearchConsole;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Random;
 
 public class BlockResearchConsole extends TileContainer {
-    public Icon side;
-    public Icon top;
-    public Icon bot;
+    public IIcon side;
+    public IIcon top;
+    public IIcon bot;
 
-    public BlockResearchConsole(int par1) {
-        super(par1, Material.iron);
+    public BlockResearchConsole() {
+        super(Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab());
-        setUnlocalizedName("BlockResearchConsole");
+        setBlockName("BlockResearchConsole");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getIcon(int par1, int par2) {
+    public IIcon getIcon(int par1, int par2) {
         switch (ForgeDirection.getOrientation(par1)) {
             case UP:
                 return top;
@@ -64,26 +65,26 @@ public class BlockResearchConsole extends TileContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         blockIcon = side = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                   .toLowerCase() + ":" + "BlockResearchConsole_side");
+                                                                 .toLowerCase() + ":" + "BlockResearchConsole_side");
         top = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":"
-                + "BlockResearchConsole_top");
+                                            + "BlockResearchConsole_top");
         bot = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":"
-                + "BlockResearchConsole_bot");
+                                            + "BlockResearchConsole_bot");
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityResearchConsole();
     }
 
     @Override
     public void breakBlock(World par1World, int par2, int par3, int par4,
-                           int par5, int par6) {
+                           Block par5, int par6) {
 
         TileEntityResearchConsole console = (TileEntityResearchConsole) par1World
-                .getBlockTileEntity(par2, par3, par4);
+                .getTileEntity(par2, par3, par4);
 
         Random random = new Random();
 
@@ -108,14 +109,14 @@ public class BlockResearchConsole extends TileContainer {
                                 (double) ((float) par2 + f),
                                 (double) ((float) par3 + f1),
                                 (double) ((float) par4 + f2), new ItemStack(
-                                itemstack.itemID, k1,
+                                itemstack.getItem(), k1,
                                 itemstack.getItemDamage())
                         );
 
                         if (itemstack.hasTagCompound()) {
                             entityitem.getEntityItem().setTagCompound(
                                     (NBTTagCompound) itemstack.getTagCompound()
-                                                              .copy()
+                                            .copy()
                             );
                         }
 
@@ -130,8 +131,7 @@ public class BlockResearchConsole extends TileContainer {
                     }
                 }
             }
-
-            par1World.func_96440_m(par2, par3, par4, par5);
+            par1World.func_147453_f(par2, par3, par4, par5);
         }
 
         super.breakBlock(par1World, par2, par3, par4, par5, par6);

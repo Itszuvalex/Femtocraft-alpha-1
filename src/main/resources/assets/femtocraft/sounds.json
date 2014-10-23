@@ -1,0 +1,11 @@
+{
+  "PhlegethonTunnel": {
+    "category": "power",
+    "sounds": [
+      {
+        "name": "phlegethontunnel",
+        "stream": false
+      }
+    ]
+  }
+}

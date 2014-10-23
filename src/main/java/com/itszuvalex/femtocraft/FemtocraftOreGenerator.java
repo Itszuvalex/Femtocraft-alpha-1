@@ -23,7 +23,7 @@ package com.itszuvalex.femtocraft;
 
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs;
 import cpw.mods.fml.common.IWorldGenerator;
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
@@ -66,19 +66,19 @@ public class FemtocraftOreGenerator implements IWorldGenerator {
     private static boolean shouldRetroGenSurface(World world, NBTTagCompound regionOreConfig) {
         return (FemtocraftConfigs.fareniteGen &&
                 !getOreGenerated(regionOreConfig, Femtocraft.blockOreFarenite().getUnlocalizedName())) ||
-                (FemtocraftConfigs.platinumGen &&
-                        !getOreGenerated(regionOreConfig, Femtocraft.blockOrePlatinum().getUnlocalizedName())) ||
-                (FemtocraftConfigs.thoriumGen &&
-                        !getOreGenerated(regionOreConfig, Femtocraft.blockOreThorium().getUnlocalizedName())) ||
-                (FemtocraftConfigs.titaniumGen &&
-                        !getOreGenerated(regionOreConfig, Femtocraft.blockOreTitanium().getUnlocalizedName()) ||
-                        (FemtocraftConfigs.lodestoneGen &&
-                                !getOreGenerated(regionOreConfig, Femtocraft.blockOreLodestone().getLocalizedName())));
+               (FemtocraftConfigs.platinumGen &&
+                !getOreGenerated(regionOreConfig, Femtocraft.blockOrePlatinum().getUnlocalizedName())) ||
+               (FemtocraftConfigs.thoriumGen &&
+                !getOreGenerated(regionOreConfig, Femtocraft.blockOreThorium().getUnlocalizedName())) ||
+               (FemtocraftConfigs.titaniumGen &&
+                !getOreGenerated(regionOreConfig, Femtocraft.blockOreTitanium().getUnlocalizedName()) ||
+                (FemtocraftConfigs.lodestoneGen &&
+                 !getOreGenerated(regionOreConfig, Femtocraft.blockOreLodestone().getLocalizedName())));
     }
 
     private static boolean shouldRetroGenNether(World world, NBTTagCompound regionOreConfig) {
         return FemtocraftConfigs.maleniteGen &&
-                !getOreGenerated(regionOreConfig, Femtocraft.blockOreMalenite().getUnlocalizedName());
+               !getOreGenerated(regionOreConfig, Femtocraft.blockOreMalenite().getUnlocalizedName());
     }
 
     public static void generate(Random random, int chunkX, int chunkZ, World world, NBTTagCompound regionOreConfig) {
@@ -135,12 +135,12 @@ public class FemtocraftOreGenerator implements IWorldGenerator {
             for (int k = 0; k < FemtocraftConfigs.lodestoneOreVeinsPerChunkCount; k++) {
                 int xCoord = i + random.nextInt(16);
                 int yCoord = random
-                        .nextInt(FemtocraftConfigs.lodestoneOreYHeightMax
-                                - FemtocraftConfigs.lodestoneOreYHeightMin)
-                        + FemtocraftConfigs.lodestoneOreYHeightMin;
+                                     .nextInt(FemtocraftConfigs.lodestoneOreYHeightMax
+                                              - FemtocraftConfigs.lodestoneOreYHeightMin)
+                             + FemtocraftConfigs.lodestoneOreYHeightMin;
                 int zCoord = j + random.nextInt(16);
 
-                (new WorldGenMinable(Femtocraft.blockOreLodestone().blockID,
+                (new WorldGenMinable(Femtocraft.blockOreLodestone(),
                         FemtocraftConfigs.lodestoneOreBlockPerVeinCount))
                         .generate(world, random, xCoord, yCoord, zCoord);
 
@@ -159,12 +159,12 @@ public class FemtocraftOreGenerator implements IWorldGenerator {
             for (int k = 0; k < FemtocraftConfigs.fareniteOreVeinsPerChunkCount; k++) {
                 int xCoord = i + random.nextInt(16);
                 int yCoord = random
-                        .nextInt(FemtocraftConfigs.fareniteOreYHeightMax
-                                - FemtocraftConfigs.fareniteOreYHeightMin)
-                        + FemtocraftConfigs.fareniteOreYHeightMin;
+                                     .nextInt(FemtocraftConfigs.fareniteOreYHeightMax
+                                              - FemtocraftConfigs.fareniteOreYHeightMin)
+                             + FemtocraftConfigs.fareniteOreYHeightMin;
                 int zCoord = j + random.nextInt(16);
 
-                (new WorldGenMinable(Femtocraft.blockOreFarenite().blockID,
+                (new WorldGenMinable(Femtocraft.blockOreFarenite(),
                         FemtocraftConfigs.fareniteOreBlockPerVeinCount))
                         .generate(world, random, xCoord, yCoord, zCoord);
 
@@ -182,12 +182,12 @@ public class FemtocraftOreGenerator implements IWorldGenerator {
         for (int k = 0; k < FemtocraftConfigs.thoriumOreVeinsPerChunkCount; k++) {
             int xCoord = i + random.nextInt(16);
             int yCoord = random
-                    .nextInt(FemtocraftConfigs.thoriumOreYHeightMax
-                            - FemtocraftConfigs.thoriumOreYHeightMin)
-                    + FemtocraftConfigs.thoriumOreYHeightMin;
+                                 .nextInt(FemtocraftConfigs.thoriumOreYHeightMax
+                                          - FemtocraftConfigs.thoriumOreYHeightMin)
+                         + FemtocraftConfigs.thoriumOreYHeightMin;
             int zCoord = j + random.nextInt(16);
 
-            (new WorldGenMinable(Femtocraft.blockOreThorium().blockID,
+            (new WorldGenMinable(Femtocraft.blockOreThorium(),
                     FemtocraftConfigs.thoriumOreBlockPerVeinCount))
                     .generate(world, random, xCoord, yCoord, zCoord);
 
@@ -204,12 +204,12 @@ public class FemtocraftOreGenerator implements IWorldGenerator {
         for (int k = 0; k < FemtocraftConfigs.platinumOreVeinsPerChunkCount; k++) {
             int xCoord = i + random.nextInt(16);
             int yCoord = random
-                    .nextInt(FemtocraftConfigs.platinumOreYHeightMax
-                            - FemtocraftConfigs.platinumOreYHeightMin)
-                    + FemtocraftConfigs.platinumOreYHeightMin;
+                                 .nextInt(FemtocraftConfigs.platinumOreYHeightMax
+                                          - FemtocraftConfigs.platinumOreYHeightMin)
+                         + FemtocraftConfigs.platinumOreYHeightMin;
             int zCoord = j + random.nextInt(16);
 
-            (new WorldGenMinable(Femtocraft.blockOrePlatinum().blockID,
+            (new WorldGenMinable(Femtocraft.blockOrePlatinum(),
                     FemtocraftConfigs.platinumOreBlockPerVeinCount))
                     .generate(world, random, xCoord, yCoord, zCoord);
         }
@@ -226,12 +226,12 @@ public class FemtocraftOreGenerator implements IWorldGenerator {
         for (int k = 0; k < FemtocraftConfigs.titaniumOreVeinsPerChunkCount; k++) {
             int xCoord = i + random.nextInt(16);
             int yCoord = random
-                    .nextInt(FemtocraftConfigs.titaniumOreYHeightMax
-                            - FemtocraftConfigs.titaniumOreYHeightMin)
-                    + FemtocraftConfigs.titaniumOreYHeightMin;
+                                 .nextInt(FemtocraftConfigs.titaniumOreYHeightMax
+                                          - FemtocraftConfigs.titaniumOreYHeightMin)
+                         + FemtocraftConfigs.titaniumOreYHeightMin;
             int zCoord = j + random.nextInt(16);
 
-            (new WorldGenMinable(Femtocraft.blockOreTitanium().blockID,
+            (new WorldGenMinable(Femtocraft.blockOreTitanium(),
                     FemtocraftConfigs.titaniumOreBlockPerVeinCount))
                     .generate(world, random, xCoord, yCoord, zCoord);
         }
@@ -253,14 +253,14 @@ public class FemtocraftOreGenerator implements IWorldGenerator {
         for (int k = 0; k < FemtocraftConfigs.maleniteOreVeinsPerChunkCount; ++k) {
             int xCoord = i + random.nextInt(16);
             int yCoord = random
-                    .nextInt(FemtocraftConfigs.maleniteOreYHeightMax
-                            - FemtocraftConfigs.maleniteOreYHeightMin)
-                    + FemtocraftConfigs.maleniteOreYHeightMin;
+                                 .nextInt(FemtocraftConfigs.maleniteOreYHeightMax
+                                          - FemtocraftConfigs.maleniteOreYHeightMin)
+                         + FemtocraftConfigs.maleniteOreYHeightMin;
             int zCoord = j + random.nextInt(16);
 
-            (new WorldGenMinable(Femtocraft.blockOreMalenite().blockID,
+            (new WorldGenMinable(Femtocraft.blockOreMalenite(),
                     FemtocraftConfigs.maleniteOreBlockPerVeinCount,
-                    Block.netherrack.blockID)).generate(world, random,
+                    Blocks.netherrack)).generate(world, random,
                     xCoord, yCoord, zCoord);
         }
 
@@ -274,18 +274,16 @@ public class FemtocraftOreGenerator implements IWorldGenerator {
         NBTTagCompound femtocraftTag;
         if (!compound.hasKey(Femtocraft.ID().toLowerCase())) {
             femtocraftTag = new NBTTagCompound();
-            compound.setCompoundTag(Femtocraft.ID().toLowerCase(), femtocraftTag);
-        }
-        else {
+            compound.setTag(Femtocraft.ID().toLowerCase(), femtocraftTag);
+        } else {
             femtocraftTag = compound.getCompoundTag(Femtocraft.ID().toLowerCase());
         }
 
         NBTTagCompound oreTag;
         if (!femtocraftTag.hasKey(ORE_GEN)) {
             oreTag = new NBTTagCompound();
-            femtocraftTag.setCompoundTag(ORE_GEN, oreTag);
-        }
-        else {
+            femtocraftTag.setTag(ORE_GEN, oreTag);
+        } else {
             oreTag = femtocraftTag.getCompoundTag(ORE_GEN);
         }
 

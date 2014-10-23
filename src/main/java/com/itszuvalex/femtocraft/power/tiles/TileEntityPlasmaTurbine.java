@@ -21,20 +21,20 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
-import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
 import com.itszuvalex.femtocraft.api.power.PowerContainer;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
+import com.itszuvalex.femtocraft.api.power.plasma.PlasmaContainer;
+import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
-import com.itszuvalex.femtocraft.power.plasma.IPlasmaContainer;
-import com.itszuvalex.femtocraft.power.plasma.IPlasmaFlow;
-import com.itszuvalex.femtocraft.power.plasma.PlasmaContainer;
-import com.itszuvalex.femtocraft.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Collection;
 
@@ -91,7 +91,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
         if (!isValidMultiBlock()) {
             return null;
         }
-        TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(),
+        TileEntity te = worldObj.getTileEntity(info.x(), info.y(),
                 info.z());
         if (te instanceof IPowerBlockContainer) {
             return (IPowerBlockContainer) te;

@@ -22,18 +22,18 @@
 package com.itszuvalex.femtocraft.industry.gui;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.core.gui.GuiBase;
 import com.itszuvalex.femtocraft.industry.containers.ContainerFemtoChronoshifter;
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityFemtoChronoshifter;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
-public class GuiFemtoChronoshifter extends GuiContainer {
+public class GuiFemtoChronoshifter extends GuiBase {
     public static final ResourceLocation texture = new ResourceLocation(
             Femtocraft.ID().toLowerCase(), "textures/guis/FemtoChronoshifter.png");
     private TileEntityFemtoChronoshifter inventory;
@@ -60,7 +60,7 @@ public class GuiFemtoChronoshifter extends GuiContainer {
 
         // String text = String.format("%i/%i", furnaceCurrent, furnaceMax);
         String text = FemtocraftUtils.formatIntegerToString(furnaceCurrent) + '/'
-                + FemtocraftUtils.formatIntegerToString(furnaceMax);
+                      + FemtocraftUtils.formatIntegerToString(furnaceMax);
 
         if (this.isPointInRegion(18, 12, 16, 60, par1, par2)) {
             this.drawCreativeTabHoveringText(text, par1, par2);
@@ -68,24 +68,22 @@ public class GuiFemtoChronoshifter extends GuiContainer {
     }
 
     /**
-     * Draw the foreground layer for the GuiContainer (everything in front of
-     * the items)
+     * Draw the foreground layer for the GuiContainer (everything in front of the items)
      */
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         String s = "Femto Chronoshifter";
-        this.fontRenderer.drawString(s,
-                this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
+        this.fontRendererObj.drawString(s,
+                this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6,
                 FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
-        this.fontRenderer.drawString(
+        this.fontRendererObj.drawString(
                 StatCollector.translateToLocal("container.inventory"), 8,
                 this.ySize - 96 + 2,
                 FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
     }
 
     /**
-     * Draw the background layer for the GuiContainer (everything behind the
-     * items)
+     * Draw the background layer for the GuiContainer (everything behind the items)
      */
     @Override
     protected void drawGuiContainerBackgroundLayer(float par1, int par2,
@@ -107,7 +105,7 @@ public class GuiFemtoChronoshifter extends GuiContainer {
         i1 = this.inventory.getCookProgressScaled(86);
         this.drawTexturedModalRect(k + 51, l + 39, 0, 167, i1, 8);
         i1 = (this.inventory.getCurrentPower() * 60)
-                / this.inventory.getMaxPower();
+             / this.inventory.getMaxPower();
         this.drawTexturedModalRect(k + 12, l + 11 + (60 - i1), 176,
                 34 + (60 - i1), 16 + (60 - i1), 60);
     }

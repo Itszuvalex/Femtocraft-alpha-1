@@ -1,6 +1,6 @@
 package com.itszuvalex.femtocraft.power.traits
 
-import net.minecraftforge.common.ForgeDirection
+import net.minecraftforge.common.util.ForgeDirection
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 10/9/14.

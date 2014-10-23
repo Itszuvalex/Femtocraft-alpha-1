@@ -21,6 +21,11 @@
 
 package com.itszuvalex.femtocraft.power.plasma.volatility;
 
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorComponent;
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
+import com.itszuvalex.femtocraft.api.power.plasma.volatility.VolatilityEvent;
 import com.itszuvalex.femtocraft.power.plasma.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
@@ -33,7 +38,7 @@ import java.util.Random;
  * Created by Christopher Harris (Itszuvalex) on 5/6/14.
  */
 public class VolatilityEventMagneticFluctuation extends
-                                                VolatilityEvent {
+        VolatilityEvent {
     public static double volatilityToRadiusDividend = 1000.d;
     public static double volatilityEnergyToVelocityDividend = 1000.d;
     public static double coreMultiplier = 1.5d;
@@ -49,7 +54,7 @@ public class VolatilityEventMagneticFluctuation extends
     public void interact(IFusionReactorCore core, World world, int x, int y, int z) {
         double radius = volatilityLevel / volatilityToRadiusDividend * coreMultiplier;
         double force = volatilityEnergy / volatilityEnergyToVelocityDividend
-                * coreMultiplier;
+                       * coreMultiplier;
 
         scrambleEntities(world, x, y, z, radius, force);
     }
@@ -85,7 +90,8 @@ public class VolatilityEventMagneticFluctuation extends
     private void scrambleEntities(World world, int x, int y, int z, double radius, double force) {
         List<Entity> entities = world.getEntitiesWithinAABB(Entity.class,
                 AxisAlignedBB
-                        .getAABBPool().getAABB(x - radius, y - radius, z - radius, x + radius + 1., y + radius + 1., z + radius + 1.)
+                        .getBoundingBox(
+                                x - radius, y - radius, z - radius, x + radius + 1., y + radius + 1., z + radius + 1.)
         );
         for (Entity entity : entities) {
             double tforce = force;

@@ -34,7 +34,7 @@ import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
 public class RenderChargingCoil implements
-                                ISimpleBlockRenderingHandler {
+        ISimpleBlockRenderingHandler {
     RenderModel segment;
 
     public RenderChargingCoil() {
@@ -79,7 +79,7 @@ public class RenderChargingCoil implements
     }
 
     @Override
-    public boolean shouldRender3DInInventory() {
+    public boolean shouldRender3DInInventory(int modelID) {
         return true;
     }
 

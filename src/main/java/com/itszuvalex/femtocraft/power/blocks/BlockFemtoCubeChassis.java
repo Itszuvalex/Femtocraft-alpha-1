@@ -22,39 +22,40 @@
 package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockFemtoCube;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoCubeChassis;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockFemtoCubeChassis extends TileContainer {
-    public Icon[][] icons;
+    public IIcon[][] icons;
 
-    public BlockFemtoCubeChassis(int par1) {
-        super(par1, Material.iron);
+    public BlockFemtoCubeChassis() {
+        super(Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab());
-        setUnlocalizedName("BlockFemtoCubeChassis");
+        setBlockName("BlockFemtoCubeChassis");
 
-        icons = new Icon[3][];
+        icons = new IIcon[3][];
         for (int i = 0; i < icons.length; ++i) {
-            icons[i] = new Icon[3];
+            icons[i] = new IIcon[3];
         }
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int par2,
-                                int par3, int par4, int par5) {
-        TileEntity te = par1iBlockAccess.getBlockTileEntity(par2, par3, par4);
+    public IIcon getIcon(IBlockAccess par1iBlockAccess, int par2,
+                         int par3, int par4, int par5) {
+        TileEntity te = par1iBlockAccess.getTileEntity(par2, par3, par4);
         if (te instanceof TileEntityFemtoCubeChassis) {
             TileEntityFemtoCubeChassis chassis = (TileEntityFemtoCubeChassis) te;
             if (chassis.isValidMultiBlock()) {
@@ -63,11 +64,11 @@ public class BlockFemtoCubeChassis extends TileContainer {
                 return iconForSide(info, dir, par2, par3, par4);
             }
         }
-        return super.getBlockTexture(par1iBlockAccess, par2, par3, par4, par5);
+        return super.getIcon(par1iBlockAccess, par2, par3, par4, par5);
     }
 
-    private Icon iconForSide(MultiBlockInfo info, ForgeDirection dir, int x,
-                             int y, int z) {
+    private IIcon iconForSide(MultiBlockInfo info, ForgeDirection dir, int x,
+                              int y, int z) {
         int xdif = x - info.x();
         int ydif = y - info.y() - 2;
         int zdif = z - info.z();
@@ -90,7 +91,7 @@ public class BlockFemtoCubeChassis extends TileContainer {
         }
     }
 
-    private Icon iconFromGrid(int xdif, int ydif) {
+    private IIcon iconFromGrid(int xdif, int ydif) {
         // int i = (Math.abs(xdif +1)) % icons.length;
         // int k = (Math.abs(ydif +1)) % icons[i].length;
         try {
@@ -119,36 +120,36 @@ public class BlockFemtoCubeChassis extends TileContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "BlockFemtoCubeChassis_unformed");
+                                                  + ":" + "BlockFemtoCubeChassis_unformed");
 
         for (int x = 0; x < icons.length; ++x) {
             for (int y = 0; y < icons[x].length; ++y) {
                 if (x > 0 && x < icons.length - 1 && y > 0
-                        && y < icons[x].length - 1) {
+                    && y < icons[x].length - 1) {
                     continue;
                 }
 
                 icons[x][y] = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                      .toLowerCase()
-                        + ":"
-                        + "BlockFemtoCubeChassis_"
-                        + x
-                        + "_" + y);
+                                                                    .toLowerCase()
+                                                            + ":"
+                                                            + "BlockFemtoCubeChassis_"
+                                                            + x
+                                                            + "_" + y);
             }
         }
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityFemtoCubeChassis();
     }
 
     @Override
     public void breakBlock(World par1World, int par2, int par3, int par4,
-                           int par5, int par6) {
-        TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+                           Block par5, int par6) {
+        TileEntity te = par1World.getTileEntity(par2, par3, par4);
         if (te instanceof TileEntityFemtoCubeChassis) {
             MultiBlockInfo info = ((TileEntityFemtoCubeChassis) te).getInfo();
             MultiBlockFemtoCube.instance.breakMultiBlock(par1World, info.x(),

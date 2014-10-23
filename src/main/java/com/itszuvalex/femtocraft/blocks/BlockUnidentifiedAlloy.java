@@ -27,18 +27,18 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 public class BlockUnidentifiedAlloy extends BlockBase {
-    public BlockUnidentifiedAlloy(int id) {
-        super(id, Material.iron);
+    public BlockUnidentifiedAlloy() {
+        super(Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab());
-        setTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockUnidentifiedAlloy");
-        setUnlocalizedName("BlockUnidentifiedAlloy");
+        setBlockTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockUnidentifiedAlloy");
+        setBlockName("BlockUnidentifiedAlloy");
         setBlockUnbreakable();
-        setStepSound(Block.soundMetalFootstep);
+        setStepSound(Block.soundTypeMetal);
         setResistance(20f);
     }
 
@@ -51,8 +51,8 @@ public class BlockUnidentifiedAlloy extends BlockBase {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                 .toLowerCase() + ":" + "BlockUnidentifiedAlloy");
+                                                               .toLowerCase() + ":" + "BlockUnidentifiedAlloy");
     }
 }

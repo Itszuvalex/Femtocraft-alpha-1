@@ -19,15 +19,16 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.power.plasma;
+package com.itszuvalex.femtocraft.api.power.plasma;
 
-import com.itszuvalex.femtocraft.power.plasma.volatility.IVolatilityEvent;
+import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
+import com.itszuvalex.femtocraft.api.power.plasma.PlasmaFlow;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import com.itszuvalex.femtocraft.utils.ISaveable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,8 +38,7 @@ import java.util.List;
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/2/14.
  * <p/>
- * Class intended for internal use by a TileEntity implementing
- * IPlasmaContainer.
+ * Class intended for internal use by a TileEntity implementing IPlasmaContainer.
  */
 public class PlasmaContainer implements IPlasmaContainer, ISaveable {
     private static final String flowListKey = "Flows";
@@ -59,8 +59,8 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
         maxCapacity = capacity;
         this.stability = stability;
         temperatureRating = temperature;
-        flows = new ArrayList<IPlasmaFlow>(capacity);
-        pendingRemove = new ArrayList<IPlasmaFlow>(capacity);
+        flows = new ArrayList<>(capacity);
+        pendingRemove = new ArrayList<>(capacity);
         inputDir = ForgeDirection.UNKNOWN;
         outputDir = ForgeDirection.UNKNOWN;
     }
@@ -109,8 +109,7 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
     public boolean addFlow(IPlasmaFlow flow) {
         if (flows.size() >= maxCapacity) {
             return false;
-        }
-        else {
+        } else {
             flows.add(flow);
             flow.setContainer(this);
             return true;
@@ -205,10 +204,10 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
     @Override
     public void loadFromNBT(NBTTagCompound compound) {
         //Load array
-        NBTTagList list = compound.getTagList(flowListKey);
+        NBTTagList list = compound.getTagList(flowListKey, 10);
         for (int i = 0; i < list.tagCount(); ++i) {
             PlasmaFlow flow = new PlasmaFlow();
-            flow.loadFromNBT((NBTTagCompound) list.tagAt(i));
+            flow.loadFromNBT(list.getCompoundTagAt(i));
             addFlow(flow);
         }
 

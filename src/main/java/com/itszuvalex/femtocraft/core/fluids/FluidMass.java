@@ -23,8 +23,8 @@ package com.itszuvalex.femtocraft.core.fluids;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.util.Icon;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraft.util.IIcon;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 
 public class FluidMass extends Fluid {
@@ -41,12 +41,12 @@ public class FluidMass extends Fluid {
     }
 
     @Override
-    public Icon getStillIcon() {
+    public IIcon getStillIcon() {
         return Femtocraft.blockFluidMass().getBlockTextureFromSide(ForgeDirection.UP.ordinal());
     }
 
     @Override
-    public Icon getFlowingIcon() {
+    public IIcon getFlowingIcon() {
         return Femtocraft.blockFluidMass().getBlockTextureFromSide(ForgeDirection.NORTH.ordinal());
     }
 }

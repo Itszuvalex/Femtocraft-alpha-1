@@ -27,17 +27,18 @@ import com.itszuvalex.femtocraft.power.tiles.TileEntityPlasmaConduit;
 import com.itszuvalex.femtocraft.proxy.ProxyClient;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.List;
 
@@ -45,13 +46,13 @@ import java.util.List;
  * Created by Christopher Harris (Itszuvalex) on 5/12/14.
  */
 public class BlockPlasmaConduit extends TileContainer {
-    public Icon center, center_filled;
-    public Icon input, input_filled, output, output_filled;
+    public IIcon center, center_filled;
+    public IIcon input, input_filled, output, output_filled;
 
-    public BlockPlasmaConduit(int id) {
-        super(id, Material.iron);
+    public BlockPlasmaConduit() {
+        super(Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab());
-        setUnlocalizedName("BlockBlockPlasmaConduit");
+        setBlockName("BlockBlockPlasmaConduit");
         setBlockBounds();
     }
 
@@ -61,15 +62,15 @@ public class BlockPlasmaConduit extends TileContainer {
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityPlasmaConduit();
     }
 
     @Override
     public void breakBlock(World par1World, int par2, int par3, int par4,
-                           int par5, int par6) {
+                           Block par5, int par6) {
 
-        TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
+        TileEntity tile = par1World.getTileEntity(par2, par3, par4);
         if (tile != null) {
             if (tile instanceof TileEntityPlasmaConduit) {
                 TileEntityPlasmaConduit conduit = (TileEntityPlasmaConduit) tile;
@@ -91,9 +92,10 @@ public class BlockPlasmaConduit extends TileContainer {
     }
 
     @Override
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase,
+                                ItemStack par6ItemStack) {
         super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLivingBase, par6ItemStack);
-        TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+        TileEntity te = par1World.getTileEntity(par2, par3, par4);
         if (te instanceof TileEntityPlasmaConduit) {
             TileEntityPlasmaConduit conduit = (TileEntityPlasmaConduit) te;
             conduit.searchForConnections();
@@ -107,7 +109,7 @@ public class BlockPlasmaConduit extends TileContainer {
         super.addCollisionBoxesToList(par1World, x, y, z, par5AxisAlignedBB,
                 par6List, par7Entity);
 
-        TileEntity tile = par1World.getBlockTileEntity(x, y, z);
+        TileEntity tile = par1World.getTileEntity(x, y, z);
         if (tile instanceof TileEntityPlasmaConduit) {
             TileEntityPlasmaConduit conduit = (TileEntityPlasmaConduit) tile;
 
@@ -158,7 +160,7 @@ public class BlockPlasmaConduit extends TileContainer {
             }
         }
 
-        return AxisAlignedBB.getAABBPool().getAABB((double) x + minX,
+        return AxisAlignedBB.getBoundingBox((double) x + minX,
                 (double) y + minY, (double) z + minZ, (double) x + maxX,
                 (double) y + maxY, (double) z + maxZ);
     }
@@ -167,12 +169,12 @@ public class BlockPlasmaConduit extends TileContainer {
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int x,
                                                         int y, int z) {
-        AxisAlignedBB box = AxisAlignedBB.getAABBPool().getAABB(
+        AxisAlignedBB box = AxisAlignedBB.getBoundingBox(
                 (double) x + 2.f / 16.f, (double) y + 2.f / 16.f,
                 (double) z + 2.f / 16.f, (double) x + 14.f / 16.f,
                 (double) y + 14.f / 16.f, (double) z + 14.f / 16.f);
 
-        TileEntity tile = par1World.getBlockTileEntity(x, y, z);
+        TileEntity tile = par1World.getTileEntity(x, y, z);
         if (tile == null) {
             return box;
         }
@@ -193,7 +195,7 @@ public class BlockPlasmaConduit extends TileContainer {
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
                                                          int x, int y, int z) {
-        return AxisAlignedBB.getAABBPool().getAABB((double) x + 2.f / 16.f,
+        return AxisAlignedBB.getBoundingBox((double) x + 2.f / 16.f,
                 (double) y + 2.f / 16.f, (double) z + 2.f / 16.f,
                 (double) x + 14.f / 16.f, (double) y + 14.f / 16.f,
                 (double) z + 14.f / 16.f);
@@ -216,7 +218,7 @@ public class BlockPlasmaConduit extends TileContainer {
         double maxY = 14.d / 16.d;
         double maxZ = 14.d / 16.d;
 
-        TileEntity tile = par1iBlockAccess.getBlockTileEntity(x, y, z);
+        TileEntity tile = par1iBlockAccess.getTileEntity(x, y, z);
 
         if (tile instanceof TileEntityPlasmaConduit) {
             TileEntityPlasmaConduit cable = (TileEntityPlasmaConduit) tile;
@@ -273,18 +275,18 @@ public class BlockPlasmaConduit extends TileContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         center = blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "BlockPlasmaConduit_core");
+                                                           + ":" + "BlockPlasmaConduit_core");
         center_filled = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "BlockPlasmaConduit_core_filled");
+                                                      + ":" + "BlockPlasmaConduit_core_filled");
         input = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "BlockPlasmaConduit_connector_input");
+                                              + ":" + "BlockPlasmaConduit_connector_input");
         input_filled = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "BlockPlasmaConduit_connector_input_filled");
+                                                     + ":" + "BlockPlasmaConduit_connector_input_filled");
         output = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "BlockPlasmaConduit_connector_output");
+                                               + ":" + "BlockPlasmaConduit_connector_output");
         output_filled = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "BlockPlasmaConduit_connector_output_filled");
+                                                      + ":" + "BlockPlasmaConduit_connector_output_filled");
     }
 }

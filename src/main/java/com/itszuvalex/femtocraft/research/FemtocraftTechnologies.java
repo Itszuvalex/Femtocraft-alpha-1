@@ -7,7 +7,7 @@ import com.itszuvalex.femtocraft.managers.assembler.ComponentRegistry;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
 import com.itszuvalex.femtocraft.research.gui.technology.*;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
@@ -739,8 +739,8 @@ public class FemtocraftTechnologies {
                         STELLAR_MIMICRY,
                         CORRUPTION_STABILIZATION,
                         PARTICLE_MANIPULATION}
-                        , new ItemStack(Item.netherStar),
-                        true, getInput(new ItemStack(Item.netherStar)), new ItemStack(Item.netherStar)
+                        , new ItemStack(Items.nether_star),
+                        true, getInput(new ItemStack(Items.nether_star)), new ItemStack(Items.nether_star)
                 )),
 
                 (new ResearchTechnology(
@@ -764,7 +764,7 @@ public class FemtocraftTechnologies {
 //    );
                 (new ResearchTechnology(
                         MACROSCOPIC_STRUCTURES, "The patterns everything take.",
-                        EnumTechLevel.MACRO, null, new ItemStack(Item.pickaxeIron),
+                        EnumTechLevel.MACRO, null, new ItemStack(Items.iron_pickaxe),
 
                         true, null, null)
 

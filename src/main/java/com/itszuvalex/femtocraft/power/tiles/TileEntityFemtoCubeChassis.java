@@ -54,7 +54,7 @@ public class TileEntityFemtoCubeChassis extends TileEntityBase implements
     @Override
     public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(),
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(),
                     info.z());
             // Big Oops? Or chunk unloaded...despite having player activating it
             // >.>
@@ -84,7 +84,7 @@ public class TileEntityFemtoCubeChassis extends TileEntityBase implements
         boolean result = info.formMultiBlock(world, x, y, z);
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord,
-                worldObj.getBlockId(xCoord, yCoord, zCoord));
+                worldObj.getBlock(xCoord, yCoord, zCoord));
         return result;
     }
 
@@ -93,7 +93,7 @@ public class TileEntityFemtoCubeChassis extends TileEntityBase implements
         boolean result = info.breakMultiBlock(world, x, y, z);
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord,
-                worldObj.getBlockId(xCoord, yCoord, zCoord));
+                worldObj.getBlock(xCoord, yCoord, zCoord));
         return result;
     }
 

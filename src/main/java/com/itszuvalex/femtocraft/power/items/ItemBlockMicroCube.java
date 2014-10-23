@@ -23,10 +23,10 @@ package com.itszuvalex.femtocraft.power.items;
 
 import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityMicroCube;
+import net.minecraft.block.Block;
 
 public class ItemBlockMicroCube extends ItemBlockPower {
-
-    public ItemBlockMicroCube(int par1) {
+    public ItemBlockMicroCube(Block par1) {
         super(par1);
     }
 

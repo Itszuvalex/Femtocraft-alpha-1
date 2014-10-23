@@ -23,10 +23,10 @@ package com.itszuvalex.femtocraft;
 
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs;
 import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.world.ChunkDataEvent;
 
 import java.io.File;
@@ -47,7 +47,7 @@ public class FemtocraftOreRetrogenHandler {
 
     }
 
-    @ForgeSubscribe
+    @SubscribeEvent
     public void onChunkLoad(ChunkDataEvent.Load event) {
         if (event.world.isRemote) return;
         if (event.isCanceled()) return;
@@ -63,7 +63,9 @@ public class FemtocraftOreRetrogenHandler {
 
         if (regionCompound == null) {
             if (FemtocraftConfigs.retrogenAlerts) {
-                Femtocraft.logger().log(Level.WARNING, "No Retrogen File found for worldId:" + event.world.provider.dimensionId + " x:" + regionX + " z:" + regionZ + ".  Generating now.");
+                Femtocraft.logger().log(Level.WARNING,
+                        "No Retrogen File found for worldId:" + event.world.provider.dimensionId + " x:" + regionX +
+                        " z:" + regionZ + ".  Generating now.");
             }
         }
 
@@ -77,7 +79,8 @@ public class FemtocraftOreRetrogenHandler {
 
             for (int x = minRegionChunkX; x < maxRegionChunkX; ++x) {
                 for (int z = minRegionChunkZ; z < maxRegionChunkZ; ++z) {
-                    FemtocraftOreGenerator.retroGenerate(random, event.world.getChunkFromChunkCoords(x, z), regionCompound);
+                    FemtocraftOreGenerator.retroGenerate(random, event.world.getChunkFromChunkCoords(x, z),
+                            regionCompound);
                 }
             }
 
@@ -112,14 +115,15 @@ public class FemtocraftOreRetrogenHandler {
             } catch (Exception exception) {
                 Femtocraft.logger().log(Level.SEVERE,
                         "Failed to save data for " + filename
-                                + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
+                        + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
                 );
                 exception.printStackTrace();
             }
 
         } catch (Exception e) {
             Femtocraft.logger().log(Level.SEVERE, "Failed to create folder "
-                    + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator + DIRECTORY + ".");
+                                                  + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator +
+                                                  DIRECTORY + ".");
             e.printStackTrace();
             return false;
         }
@@ -133,7 +137,8 @@ public class FemtocraftOreRetrogenHandler {
             if (!folder.exists()) {
                 if (FemtocraftConfigs.retrogenAlerts) {
                     Femtocraft.logger().log(Level.WARNING, "No " + DIRECTORY
-                            + " folder found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".");
+                                                           + " folder found for world - " +
+                                                           FemtocraftFileUtils.savePathFemtocraft(world) + ".");
                 }
                 return null;
             }
@@ -141,7 +146,8 @@ public class FemtocraftOreRetrogenHandler {
             if (!worldFolder.exists()) {
                 if (FemtocraftConfigs.retrogenAlerts) {
                     Femtocraft.logger().log(Level.WARNING, "No " + String.valueOf(world.provider.dimensionId)
-                            + " folder found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".");
+                                                           + " folder found for world - " +
+                                                           FemtocraftFileUtils.savePathFemtocraft(world) + ".");
                 }
                 return null;
             }
@@ -159,7 +165,7 @@ public class FemtocraftOreRetrogenHandler {
             } catch (Exception e) {
                 Femtocraft.logger().log(Level.SEVERE,
                         "Failed to load data from file " + filename
-                                + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
+                        + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
                 );
                 e.printStackTrace();
             }
@@ -167,7 +173,7 @@ public class FemtocraftOreRetrogenHandler {
         } catch (Exception exception) {
             Femtocraft.logger().log(Level.SEVERE,
                     "Failed to load data from folder " + DIRECTORY
-                            + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
+                    + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
             );
             exception.printStackTrace();
             return null;

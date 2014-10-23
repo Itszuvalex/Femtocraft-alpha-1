@@ -29,7 +29,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.Container;
@@ -37,7 +37,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -45,19 +45,18 @@ import java.util.Random;
 
 public class BlockMicroReconstructor extends TileContainer {
     /**
-     * Is the random generator used by furnace to drop the inventory contents in
-     * random directions.
+     * Is the random generator used by furnace to drop the inventory contents in random directions.
      */
     private final Random rand = new Random();
 
     @SideOnly(Side.CLIENT)
-    private Icon frontIcon;
+    private IIcon frontIcon;
 
-    public BlockMicroReconstructor(int par1) {
-        super(par1, Material.iron);
-        setUnlocalizedName("BlockMicroReconstructor");
+    public BlockMicroReconstructor() {
+        super(Material.iron);
+        setBlockName("BlockMicroReconstructor");
         setHardness(3.5f);
-        setStepSound(Block.soundMetalFootstep);
+        setStepSound(Block.soundTypeMetal);
         setCreativeTab(Femtocraft.femtocraftTab());
     }
 
@@ -76,19 +75,17 @@ public class BlockMicroReconstructor extends TileContainer {
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
-    public Icon getIcon(int par1, int par2) {
+    public IIcon getIcon(int par1, int par2) {
         if (par1 == par2) {
             return frontIcon;
-        }
-        else {
+        } else {
             return blockIcon;
         }
     }
 
     /**
-     * If this returns true, then comparators facing away from this block will
-     * use the value from getComparatorInputOverride instead of the actual
-     * redstone signal strength.
+     * If this returns true, then comparators facing away from this block will use the value from
+     * getComparatorInputOverride instead of the actual redstone signal strength.
      */
     @Override
     public boolean hasComparatorInputOverride() {
@@ -96,15 +93,14 @@ public class BlockMicroReconstructor extends TileContainer {
     }
 
     /**
-     * If hasComparatorInputOverride returns true, the return value from this is
-     * used instead of the redstone signal strength when this block inputs to a
-     * comparator.
+     * If hasComparatorInputOverride returns true, the return value from this is used instead of the redstone signal
+     * strength when this block inputs to a comparator.
      */
     @Override
     public int getComparatorInputOverride(World par1World, int par2, int par3,
                                           int par4, int par5) {
         return Container.calcRedstoneFromInventory((IInventory) par1World
-                .getBlockTileEntity(par2, par3, par4));
+                .getTileEntity(par2, par3, par4));
     }
 
     @Override
@@ -113,11 +109,11 @@ public class BlockMicroReconstructor extends TileContainer {
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
      * is the only chance you get to register icons.
      */
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "MicroMachineBlock_side");
+                                                  + ":" + "MicroMachineBlock_side");
         frontIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "MicroReconstructor_front");
+                                                  + ":" + "MicroReconstructor_front");
     }
 
     /**
@@ -135,25 +131,25 @@ public class BlockMicroReconstructor extends TileContainer {
     private void setDefaultDirection(World par1World, int par2, int par3,
                                      int par4) {
         if (!par1World.isRemote) {
-            int l = par1World.getBlockId(par2, par3, par4 - 1);
-            int i1 = par1World.getBlockId(par2, par3, par4 + 1);
-            int j1 = par1World.getBlockId(par2 - 1, par3, par4);
-            int k1 = par1World.getBlockId(par2 + 1, par3, par4);
+            Block l = par1World.getBlock(par2, par3, par4 - 1);
+            Block i1 = par1World.getBlock(par2, par3, par4 + 1);
+            Block j1 = par1World.getBlock(par2 - 1, par3, par4);
+            Block k1 = par1World.getBlock(par2 + 1, par3, par4);
             byte b0 = 3;
 
-            if (Block.opaqueCubeLookup[l] && !Block.opaqueCubeLookup[i1]) {
+            if (l.isOpaqueCube() && !i1.isOpaqueCube()) {
                 b0 = 3;
             }
 
-            if (Block.opaqueCubeLookup[i1] && !Block.opaqueCubeLookup[l]) {
+            if (i1.isOpaqueCube() && !l.isOpaqueCube()) {
                 b0 = 2;
             }
 
-            if (Block.opaqueCubeLookup[j1] && !Block.opaqueCubeLookup[k1]) {
+            if (j1.isOpaqueCube() && !k1.isOpaqueCube()) {
                 b0 = 5;
             }
 
-            if (Block.opaqueCubeLookup[k1] && !Block.opaqueCubeLookup[j1]) {
+            if (k1.isOpaqueCube() && !j1.isOpaqueCube()) {
                 b0 = 4;
             }
 
@@ -162,23 +158,21 @@ public class BlockMicroReconstructor extends TileContainer {
     }
 
     /**
-     * Returns a new instance of a block's tile entity class. Called on placing
-     * the block.
+     * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
     @Override
-    public TileEntity createNewTileEntity(World par1World) {
+    public TileEntity createNewTileEntity(World par1World, int metadata) {
         return new TileEntityBaseEntityMicroReconstructor();
     }
 
     /**
-     * ejects contained items into the world, and notifies neighbours of an
-     * update, as appropriate
+     * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
     @Override
     public void breakBlock(World par1World, int par2, int par3, int par4,
-                           int par5, int par6) {
+                           Block par5, int par6) {
         TileEntityBaseEntityMicroReconstructor tileEntity = (TileEntityBaseEntityMicroReconstructor) par1World
-                .getBlockTileEntity(par2, par3, par4);
+                .getTileEntity(par2, par3, par4);
 
         if (tileEntity != null) {
             for (int j1 = 0; j1 < tileEntity.getSizeInventory(); ++j1) {
@@ -201,14 +195,14 @@ public class BlockMicroReconstructor extends TileContainer {
                                 (double) ((float) par2 + f),
                                 (double) ((float) par3 + f1),
                                 (double) ((float) par4 + f2), new ItemStack(
-                                itemstack.itemID, k1,
+                                itemstack.getItem(), k1,
                                 itemstack.getItemDamage())
                         );
 
                         if (itemstack.hasTagCompound()) {
                             entityitem.getEntityItem().setTagCompound(
                                     (NBTTagCompound) itemstack.getTagCompound()
-                                                              .copy()
+                                            .copy()
                             );
                         }
 
@@ -248,7 +242,7 @@ public class BlockMicroReconstructor extends TileContainer {
                                     (double) ((float) par2 + f),
                                     (double) ((float) par3 + f1),
                                     (double) ((float) par4 + f2),
-                                    new ItemStack(itemstack.itemID, k1,
+                                    new ItemStack(itemstack.getItem(), k1,
                                             itemstack.getItemDamage())
                             );
 
@@ -271,8 +265,7 @@ public class BlockMicroReconstructor extends TileContainer {
                     }
                 }
             }
-
-            par1World.func_96440_m(par2, par3, par4, par5);
+            par1World.func_147453_f(par2, par3, par4, par5);
         }
 
         super.breakBlock(par1World, par2, par3, par4, par5, par6);
@@ -288,7 +281,7 @@ public class BlockMicroReconstructor extends TileContainer {
                 par5EntityLivingBase, par6ItemStack);
 
         int l = MathHelper
-                .floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+                        .floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
         if (l == 0) {
             par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 2);

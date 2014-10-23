@@ -21,12 +21,13 @@
 
 package com.itszuvalex.femtocraft.power.plasma;
 
-import com.itszuvalex.femtocraft.power.plasma.volatility.IVolatilityEvent;
+import com.itszuvalex.femtocraft.api.power.plasma.*;
+import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import com.itszuvalex.femtocraft.utils.ISaveable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.ArrayList;
 import java.util.Collection;

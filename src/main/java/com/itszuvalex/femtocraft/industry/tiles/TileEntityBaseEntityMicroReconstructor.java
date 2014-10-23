@@ -35,7 +35,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
 @Configurable
@@ -234,8 +234,8 @@ public class TileEntityBaseEntityMicroReconstructor extends
      * Returns the name of the inventory.
      */
     @Override
-    public String getInvName() {
-        return this.isInvNameLocalized() ? this.field_94130_e
+    public String getInventoryName() {
+        return this.hasCustomInventoryName() ? this.field_94130_e
                 : "Microtech Reconstructor";
     }
 
@@ -244,7 +244,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
      * language. Otherwise it will be used directly.
      */
     @Override
-    public boolean isInvNameLocalized() {
+    public boolean hasCustomInventoryName() {
         return this.field_94130_e != null && this.field_94130_e.length() > 0;
     }
 
@@ -263,11 +263,11 @@ public class TileEntityBaseEntityMicroReconstructor extends
     }
 
     @Override
-    public void openChest() {
+    public void openInventory() {
     }
 
     @Override
-    public void closeChest() {
+    public void closeInventory() {
     }
 
     /**

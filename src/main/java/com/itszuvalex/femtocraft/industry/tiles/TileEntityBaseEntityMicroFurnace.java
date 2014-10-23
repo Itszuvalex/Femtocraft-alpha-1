@@ -164,8 +164,8 @@ public class TileEntityBaseEntityMicroFurnace extends
      * Returns the name of the inventory.
      */
     @Override
-    public String getInvName() {
-        return this.isInvNameLocalized() ? this.field_94130_e : "MicroFurnace";
+    public String getInventoryName() {
+        return this.hasCustomInventoryName() ? this.field_94130_e : "MicroFurnace";
     }
 
     /**
@@ -173,7 +173,7 @@ public class TileEntityBaseEntityMicroFurnace extends
      * language. Otherwise it will be used directly.
      */
     @Override
-    public boolean isInvNameLocalized() {
+    public boolean hasCustomInventoryName() {
         return this.field_94130_e != null && this.field_94130_e.length() > 0;
     }
 
@@ -192,11 +192,11 @@ public class TileEntityBaseEntityMicroFurnace extends
     }
 
     @Override
-    public void openChest() {
+    public void openInventory() {
     }
 
     @Override
-    public void closeChest() {
+    public void closeInventory() {
     }
 
     /**

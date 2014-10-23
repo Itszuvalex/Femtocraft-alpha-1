@@ -73,7 +73,7 @@ public class GuiTechnologyMachining extends GuiTechnology {
         else {
             switch (displayPage) {
                 case 1:
-                    this.fontRenderer
+                    this.fontRendererObj
                             .drawSplitString(
                                     EnumChatFormatting.WHITE
                                             + "Electronic circuits can perform basic logic, but they are far too fragile for actual use, without something to mount them on.  You have a feeling tempered titanium would provide structural integrity."

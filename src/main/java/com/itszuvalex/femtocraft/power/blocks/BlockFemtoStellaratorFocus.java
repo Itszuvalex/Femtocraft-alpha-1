@@ -22,26 +22,27 @@
 package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockFemtoStellarator;
-import com.itszuvalex.femtocraft.power.plasma.IFusionReactorCore;
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoStellaratorFocus;
 import com.itszuvalex.femtocraft.proxy.ProxyClient;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockFemtoStellaratorFocus extends TileContainer {
-    public Icon outsideIcon;
-    public Icon insideIcon;
+    public IIcon outsideIcon;
+    public IIcon insideIcon;
 
-    public BlockFemtoStellaratorFocus(int par1) {
-        super(par1, Material.iron);
-        setUnlocalizedName("BlockStellaratorFocus");
+    public BlockFemtoStellaratorFocus() {
+        super(Material.iron);
+        setBlockName("BlockStellaratorFocus");
         setCreativeTab(Femtocraft.femtocraftTab());
     }
 
@@ -62,12 +63,13 @@ public class BlockFemtoStellaratorFocus extends TileContainer {
 
     @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3,
-                                      int par4, int par5) {
+                                      int par4, Block par5) {
         if (!canBlockStay(par1World, par2, par3, par4)) {
-            breakBlock(par1World, par2, par3, par4, blockID,
+            breakBlock(par1World, par2, par3, par4, par5,
                     par1World.getBlockMetadata(par2, par3, par4));
             par1World.setBlockToAir(par2, par3, par4);
         }
+        super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
     }
 
     @Override
@@ -99,16 +101,17 @@ public class BlockFemtoStellaratorFocus extends TileContainer {
     }
 
     @Override
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         blockIcon = outsideIcon = par1IconRegister.registerIcon(Femtocraft.ID()
-                .toLowerCase() + ":" + "BlockFemtoStellaratorFocus");
+                                                                        .toLowerCase() + ":" +
+                                                                "BlockFemtoStellaratorFocus");
         insideIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase
                 () + ":" + "BlockFemtoStellaratorHollowInternals");
     }
 
     private boolean hasCoreAsNeighbor(World par1World, int par2, int par3, int par4) {
         for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-            TileEntity te = par1World.getBlockTileEntity(par2 + dir.offsetX,
+            TileEntity te = par1World.getTileEntity(par2 + dir.offsetX,
                     par3 + dir.offsetY,
                     par4 + dir.offsetZ);
             if (te instanceof IFusionReactorCore) {
@@ -120,7 +123,7 @@ public class BlockFemtoStellaratorFocus extends TileContainer {
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityFemtoStellaratorFocus();
     }
 
@@ -133,8 +136,8 @@ public class BlockFemtoStellaratorFocus extends TileContainer {
      */
     @Override
     public void breakBlock(World par1World, int par2, int par3, int par4,
-                           int par5, int par6) {
-        TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+                           Block par5, int par6) {
+        TileEntity te = par1World.getTileEntity(par2, par3, par4);
         if (te instanceof TileEntityFemtoStellaratorFocus) {
             MultiBlockInfo info = ((TileEntityFemtoStellaratorFocus) te).getInfo();
             MultiBlockFemtoStellarator.instance.breakMultiBlock(par1World, info.x(),

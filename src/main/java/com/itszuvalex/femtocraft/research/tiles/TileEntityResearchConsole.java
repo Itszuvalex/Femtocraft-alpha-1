@@ -32,8 +32,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet132TileEntityData;
 
 public class TileEntityResearchConsole extends TileEntityBase implements
         IInventory {
@@ -212,7 +210,7 @@ public class TileEntityResearchConsole extends TileEntityBase implements
             return false;
         }
 
-        if (tech.itemID != inv.itemID) {
+        if (tech.getItem() != inv.getItem()) {
             return false;
         }
         if (tech.getItemDamage() != inv.getItemDamage()) {
@@ -225,15 +223,6 @@ public class TileEntityResearchConsole extends TileEntityBase implements
         return true;
     }
 
-    @Override
-    public void saveToDescriptionCompound(NBTTagCompound compound) {
-        super.saveToDescriptionCompound(compound);
-    }
-
-    @Override
-    public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
-        super.onDataPacket(net, pkt);
-    }
 
     /*
      * (non-Javadoc)
@@ -330,12 +319,12 @@ public class TileEntityResearchConsole extends TileEntityBase implements
     }
 
     @Override
-    public String getInvName() {
+    public String getInventoryName() {
         return "Research Console";
     }
 
     @Override
-    public boolean isInvNameLocalized() {
+    public boolean hasCustomInventoryName() {
         return false;
     }
 
@@ -350,11 +339,11 @@ public class TileEntityResearchConsole extends TileEntityBase implements
     }
 
     @Override
-    public void openChest() {
+    public void openInventory() {
     }
 
     @Override
-    public void closeChest() {
+    public void closeInventory() {
     }
 
     @Override

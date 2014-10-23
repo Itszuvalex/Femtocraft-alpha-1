@@ -23,22 +23,18 @@ package com.itszuvalex.femtocraft.managers.research;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.api.events.EventTechnology;
+import com.itszuvalex.femtocraft.network.FemtocraftPacketHandler;
+import com.itszuvalex.femtocraft.network.messages.MessageResearchPlayer;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.MinecraftForge;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.logging.Level;
 
 public class ResearchPlayer {
     private final static String mapKey = "techMap";
@@ -65,7 +61,7 @@ public class ResearchPlayer {
      */
     public boolean researchTechnology(String name, boolean force) {
         ResearchTechnology rtech = Femtocraft.researchManager()
-                                             .getTechnology(name);
+                .getTechnology(name);
         ResearchTechnologyStatus tech = techStatus.get(name);
         if (tech == null && !force) {
             return false;
@@ -83,14 +79,14 @@ public class ResearchPlayer {
         if (!MinecraftForge.EVENT_BUS.post(event)) {
             tech.researched = true;
             EntityPlayerMP player = MinecraftServer.getServer()
-                                                   .getConfigurationManager().getPlayerForUsername(username);
+                    .getConfigurationManager().func_152612_a(username);
             if (player != null) {
                 ResearchTechnology techno = Femtocraft.researchManager()
-                                                      .getTechnology(name);
+                        .getTechnology(name);
                 if (techno != null) {
                     FemtocraftUtils.sendMessageToPlayer(player, techno.level.getTooltipEnum() + name
-                            + EnumChatFormatting.RESET
-                            + " successfully researched.");
+                                                                + EnumChatFormatting.RESET
+                                                                + " successfully researched.");
                 }
             }
             discoverNewTechs(rtech, true);
@@ -105,7 +101,7 @@ public class ResearchPlayer {
 
     private void discoverNewTechs(ResearchTechnology discoverer, boolean notify) {
         for (ResearchTechnology t : Femtocraft.researchManager()
-                                              .getTechnologies()) {
+                .getTechnologies()) {
             if (t.prerequisites != null) {
                 ResearchTechnologyStatus ts = techStatus.get(t.name);
                 if (ts != null && ts.researched) {
@@ -137,16 +133,16 @@ public class ResearchPlayer {
                     discoverTechnology(t.name);
                     if (notify) {
                         EntityPlayerMP player = MinecraftServer.getServer()
-                                                               .getConfigurationManager()
-                                                               .getPlayerForUsername(username);
+                                .getConfigurationManager()
+                                .func_152612_a(username);
                         if (player != null) {
                             ResearchTechnology techno = Femtocraft.researchManager()
-                                                                  .getTechnology(t.name);
+                                    .getTechnology(t.name);
                             if (techno != null) {
                                 FemtocraftUtils.sendMessageToPlayer(player, "New technology "
-                                        + techno.level.getTooltipEnum()
-                                        + t.name + EnumChatFormatting.RESET
-                                        + " discovered.");
+                                                                            + techno.level.getTooltipEnum()
+                                                                            + t.name + EnumChatFormatting.RESET
+                                                                            + " discovered.");
                             }
                         }
                     }
@@ -220,36 +216,18 @@ public class ResearchPlayer {
 
     public void sync() {
         EntityPlayerMP player = MinecraftServer.getServer()
-                                               .getConfigurationManager().getPlayerForUsername(username);
+                .getConfigurationManager().func_152612_a(username);
         if (player == null) {
             return;
         }
 
-        sync((Player) player);
+        sync(player);
     }
 
     // ---------------------------------------------------------
 
-    public void sync(Player player) {
-        NBTTagCompound data = new NBTTagCompound();
-        saveToNBTTagCompound(data);
-
-        Packet250CustomPayload packet = new Packet250CustomPayload();
-        packet.channel = ManagerResearch.RESEARCH_CHANNEL;
-        try {
-            packet.data = CompressedStreamTools.compress(data);
-        } catch (IOException e) {
-            e.printStackTrace();
-            Femtocraft.logger()
-                      .log(Level.SEVERE,
-                              "Error writing "
-                                      + username
-                                      + "'s PlayerResearch to packet data.  It will fail to sync to his client."
-                      );
-            return;
-        }
-        packet.length = packet.data.length;
-        PacketDispatcher.sendPacketToPlayer(packet, player);
+    public void sync(EntityPlayerMP player) {
+        FemtocraftPacketHandler.INSTANCE().sendTo(new MessageResearchPlayer(this), player);
     }
 
     public void saveToNBTTagCompound(NBTTagCompound compound) {
@@ -262,7 +240,7 @@ public class ResearchPlayer {
             NBTTagCompound data = new NBTTagCompound();
             status.saveToNBTTagCompound(data);
 
-            cs.setCompoundTag(dataKey, data);
+            cs.setTag(dataKey, data);
             list.appendTag(cs);
         }
 
@@ -272,10 +250,10 @@ public class ResearchPlayer {
     // ---------------------------------------------------------
 
     public void loadFromNBTTagCompound(NBTTagCompound compound) {
-        NBTTagList list = compound.getTagList(mapKey);
+        NBTTagList list = compound.getTagList(mapKey, 10);
 
         for (int i = 0; i < list.tagCount(); ++i) {
-            NBTTagCompound cs = (NBTTagCompound) list.tagAt(i);
+            NBTTagCompound cs = (NBTTagCompound) list.getCompoundTagAt(i);
             String techname = cs.getString(techNameKey);
 
             NBTTagCompound data = cs.getCompoundTag(dataKey);

@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.api.power;
 
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * @author Itszuvalex

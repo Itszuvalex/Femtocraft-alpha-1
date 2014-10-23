@@ -29,8 +29,8 @@ import net.minecraft.item.Item;
  */
 public class ItemBase extends Item {
 
-    public ItemBase(int par1, String unlocalizedName) {
-        super(par1);
+    public ItemBase(String unlocalizedName) {
+        super();
         setMaxStackSize(64);
         setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName(unlocalizedName);

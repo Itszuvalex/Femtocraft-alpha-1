@@ -96,8 +96,8 @@ public class RenderChargingCapacitor implements ISimpleBlockRenderingHandler {
         model.addQuad(RenderUtils.makeEastFace(min, max, min, max, max,
                 block.capacitorSide, minU,
                 maxU, minV, maxV).flipV()
-                                 .rotatePointsClockwise()
-                                 .rotatePointsClockwise());
+                .rotatePointsClockwise()
+                .rotatePointsClockwise());
         model.addQuad(RenderUtils.makeWestFace(min, max, min, max, min,
                 block.capacitorSide, minU,
                 maxU, minV,
@@ -125,14 +125,14 @@ public class RenderChargingCapacitor implements ISimpleBlockRenderingHandler {
                         max,
                         block.capacitorConnector, minU, maxU, minV,
                         maxV).rotateOnXAxis(-Math.PI /
-                        2.f, .5f, .5f).rotatePointsClockwise
+                                            2.f, .5f, .5f).rotatePointsClockwise
                         ()
         );
         model.addQuad(RenderUtils.makeWestFace(min, max, minY - .0001f, maxY,
                         min,
                         block.capacitorConnector, minU, maxU, minV,
                         maxV).rotateOnXAxis(-Math.PI /
-                        2.f, .5f, .5f).rotatePointsClockwise
+                                            2.f, .5f, .5f).rotatePointsClockwise
                         ().rotatePointsClockwise
                         ()
         );
@@ -156,7 +156,8 @@ public class RenderChargingCapacitor implements ISimpleBlockRenderingHandler {
 
 
     @Override
-    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
+                                    RenderBlocks renderer) {
         BlockAtmosphericChargingCapacitor capacitor =
                 (BlockAtmosphericChargingCapacitor) block;
         if (capacitor == null) {
@@ -173,7 +174,7 @@ public class RenderChargingCapacitor implements ISimpleBlockRenderingHandler {
     }
 
     @Override
-    public boolean shouldRender3DInInventory() {
+    public boolean shouldRender3DInInventory(int modelID) {
         return true;
     }
 

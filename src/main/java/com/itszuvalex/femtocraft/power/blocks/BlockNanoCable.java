@@ -29,28 +29,31 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
 public class BlockNanoCable extends BlockMicroCable {
-    public BlockNanoCable(int par1, Material par2Material) {
-        super(par1, par2Material);
+    public BlockNanoCable(Material par2Material) {
+        super(par2Material);
         setCreativeTab(Femtocraft.femtocraftTab());
-        setUnlocalizedName("blockNanoCable");
+        setBlockName("blockNanoCable");
         setHardness(1.0f);
-        setStepSound(Block.soundStoneFootstep);
+        setStepSound(Block.soundTypeMetal);
         setBlockBounds();
         setTickRandomly(true);
     }
 
     @Override
     public void randomDisplayTick(World par1World, int x, int y, int z, Random par5Random) {
-        double spawnX = x + getBlockBoundsMinX() + par5Random.nextFloat() * (getBlockBoundsMaxX() - getBlockBoundsMinX());
-        double spawnY = y + getBlockBoundsMinY() + par5Random.nextFloat() * (getBlockBoundsMaxY() - getBlockBoundsMinY());
-        double spawnZ = z + getBlockBoundsMinZ() + par5Random.nextFloat() * (getBlockBoundsMaxZ() - getBlockBoundsMinZ());
+        double spawnX =
+                x + getBlockBoundsMinX() + par5Random.nextFloat() * (getBlockBoundsMaxX() - getBlockBoundsMinX());
+        double spawnY =
+                y + getBlockBoundsMinY() + par5Random.nextFloat() * (getBlockBoundsMaxY() - getBlockBoundsMinY());
+        double spawnZ =
+                z + getBlockBoundsMinZ() + par5Random.nextFloat() * (getBlockBoundsMaxZ() - getBlockBoundsMinZ());
 
         RenderUtils.spawnParticle(par1World, RenderUtils.NANO_POWER_PARTICLE, spawnX, spawnY, spawnZ);
     }
@@ -62,7 +65,7 @@ public class BlockNanoCable extends BlockMicroCable {
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityNanoCable();
     }
 
@@ -73,10 +76,10 @@ public class BlockNanoCable extends BlockMicroCable {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "nanoCableCoil");
         this.coreBorder = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" +
-                "nanoCableCoreBorder");
+                                                        "nanoCableCoreBorder");
         this.connector = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "nanoCableConnector");
         this.coil = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "nanoCableCoil");
         this.coilEdge = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "nanoCableCoilEdge");

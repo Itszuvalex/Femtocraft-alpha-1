@@ -30,7 +30,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityAtmosphericChargingBase extends TileEntityPowerProducer {
     public int numCoils;
@@ -56,15 +56,15 @@ public class TileEntityAtmosphericChargingBase extends TileEntityPowerProducer {
         numCoils = 0;
         powerPerTick = 0;
 
-        Block base = Block.blocksList[worldObj.getBlockId(xCoord, yCoord,
-                zCoord)];
+        Block base = worldObj.getBlock(xCoord, yCoord,
+                zCoord);
 
         boolean searching = true;
         for (int i = 0; searching
                         && (i < ((IAtmosphericChargingBase) base).maxAddonsSupported(worldObj,
                 xCoord, yCoord, zCoord)); ++i) {
-            Block block = Block.blocksList[worldObj.getBlockId(xCoord,
-                    yCoord + i + 1, zCoord)];
+            Block block = worldObj.getBlock(xCoord,
+                    yCoord + i + 1, zCoord);
 
             if ((!(block instanceof IAtmosphericChargingAddon))) {
                 searching = false;
@@ -98,7 +98,7 @@ public class TileEntityAtmosphericChargingBase extends TileEntityPowerProducer {
         ItemStack item = par5EntityPlayer.getHeldItem();
         if (item != null
             && (item.getItem() instanceof ItemBlock)
-            && Block.blocksList[((ItemBlock) item.getItem()).getBlockID()] instanceof IAtmosphericChargingAddon) {
+            && Block.getBlockFromItem(item.getItem()) instanceof IAtmosphericChargingAddon) {
             return true;
         }
 

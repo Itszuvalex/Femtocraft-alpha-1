@@ -21,7 +21,8 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
-import net.minecraftforge.common.ForgeDirection;
+
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class TileEntityPowerConsumer extends TileEntityPowerBase {
 

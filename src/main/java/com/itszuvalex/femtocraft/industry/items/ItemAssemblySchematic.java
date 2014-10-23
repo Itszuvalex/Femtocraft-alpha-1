@@ -34,7 +34,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 
 import java.util.List;
 import java.util.Random;
@@ -51,24 +51,24 @@ import java.util.Random;
 @Configurable
 public class ItemAssemblySchematic extends ItemBase implements IAssemblerSchematic {
     public static final int INFINITE_USE_DAMAGE = -1;
-    public static Icon placeholderIcon;
+    public static IIcon placeholderIcon;
 
     @Configurable(comment = "How many uses does an infinite use schematic count for when calculating mass costs? " +
                             "(This is a float to allow finer tuning - it will be cast to integer where it matters.")
     public static float infiniteUseMassMultiplier = 200;
 
     @SideOnly(value = Side.CLIENT)
-    public Icon keyedIcon;
+    public IIcon keyedIcon;
 
-    public ItemAssemblySchematic(int itemID, String unlocalizedName) {
-        super(itemID, unlocalizedName);
+    public ItemAssemblySchematic(String unlocalizedName) {
+        super(unlocalizedName);
         setCreativeTab(Femtocraft.femtocraftTab());
         setMaxStackSize(64);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getIconIndex(ItemStack par1ItemStack) {
+    public IIcon getIconIndex(ItemStack par1ItemStack) {
         return hasRecipe(par1ItemStack) ? keyedIcon : this.itemIcon;
     }
 
@@ -189,7 +189,7 @@ public class ItemAssemblySchematic extends ItemBase implements IAssemblerSchemat
     }
 
     @Override
-    public Icon getIcon(ItemStack stack, int pass) {
+    public IIcon getIcon(ItemStack stack, int pass) {
         return hasRecipe(stack) ? keyedIcon : this.itemIcon;
     }
 

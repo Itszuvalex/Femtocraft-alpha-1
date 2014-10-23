@@ -19,7 +19,7 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.power.plasma;
+package com.itszuvalex.femtocraft.api.power.plasma;
 
 import net.minecraft.world.World;
 

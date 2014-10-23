@@ -21,9 +21,14 @@
 
 package com.itszuvalex.femtocraft.power.plasma.volatility;
 
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorComponent;
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
+import com.itszuvalex.femtocraft.api.power.plasma.volatility.VolatilityEvent;
 import com.itszuvalex.femtocraft.power.plasma.*;
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
@@ -34,7 +39,7 @@ import java.util.Random;
  * Created by Christopher Harris (Itszuvalex) on 5/6/14.
  */
 public class VolatilityEventTemperatureSpike extends
-                                             VolatilityEvent {
+        VolatilityEvent {
     public static double volatilityToRadiusDividend = 1000.d;
     public static double volatilityEnergyToDurationDividend = 1000.d;
     public static double coreMultiplier = 1.5d;
@@ -50,7 +55,7 @@ public class VolatilityEventTemperatureSpike extends
     public void interact(IFusionReactorCore core, World world, int x, int y, int z) {
         double radius = volatilityLevel / volatilityToRadiusDividend * coreMultiplier;
         int duration = (int) (volatilityEnergy / volatilityEnergyToDurationDividend
-                * coreMultiplier);
+                              * coreMultiplier);
 
         igniteEntitiesAndWorld(world, x, y, z, radius, duration);
     }
@@ -75,8 +80,8 @@ public class VolatilityEventTemperatureSpike extends
         if (volatilityDif > 0) {
             //Add some proportion of this event's temperature
             double temp = volatilityEnergy /
-                    FemtocraftPlasmaUtils
-                            .temperatureToEnergy;
+                          FemtocraftPlasmaUtils
+                                  .temperatureToEnergy;
             if (flow.getTemperature() < temp) {
                 flow.setTemperature((long) (flow.getTemperature() + random.nextFloat() * temp));
             }
@@ -86,7 +91,8 @@ public class VolatilityEventTemperatureSpike extends
     private void igniteEntitiesAndWorld(World world, int x, int y, int z, double radius, int duration) {
         List<Entity> entities = world.getEntitiesWithinAABB(Entity.class,
                 AxisAlignedBB
-                        .getAABBPool().getAABB(x - radius, y - radius, z - radius, x + radius + 1., y + radius + 1., z + radius + 1.)
+                        .getBoundingBox(
+                                x - radius, y - radius, z - radius, x + radius + 1., y + radius + 1., z + radius + 1.)
         );
         for (Entity entity : entities) {
             entity.setFire(duration);
@@ -99,7 +105,7 @@ public class VolatilityEventTemperatureSpike extends
                 for (int wz = -wradius; wz < wradius; ++wz) {
                     if (world.isAirBlock(x + wx, y + wy, z + wz) && !world.isAirBlock(x + wx, y + wy - 1, z + wz)) {
                         world.setBlock(x + wx, y + wy, z + wz,
-                                Block.fire.blockID);
+                                Blocks.fire);
                     }
                 }
             }

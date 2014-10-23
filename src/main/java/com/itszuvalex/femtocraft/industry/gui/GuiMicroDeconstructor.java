@@ -22,6 +22,7 @@
 package com.itszuvalex.femtocraft.industry.gui;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.core.gui.GuiBase;
 import com.itszuvalex.femtocraft.industry.containers.ContainerMicroDeconstructor;
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
 import com.itszuvalex.femtocraft.render.RenderUtils;
@@ -29,19 +30,18 @@ import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class GuiMicroDeconstructor extends GuiContainer {
+public class GuiMicroDeconstructor extends GuiBase {
     public static final ResourceLocation texture = new ResourceLocation(
             Femtocraft.ID().toLowerCase(), "textures/guis/Disassembler.png");
     private TileEntityBaseEntityMicroDeconstructor deconstructorInventory;
@@ -94,10 +94,10 @@ public class GuiMicroDeconstructor extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         String s = "Micro Deconstructor";
-        this.fontRenderer.drawString(s,
-                this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
+        this.fontRendererObj.drawString(s,
+                this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6,
                 FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
-        this.fontRenderer.drawString(
+        this.fontRendererObj.drawString(
                 StatCollector.translateToLocal("container.inventory"), 8,
                 this.ySize - 96 + 2,
                 FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
@@ -134,7 +134,7 @@ public class GuiMicroDeconstructor extends GuiContainer {
         FluidStack fluid = this.deconstructorInventory
                 .getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
         if (fluid != null) {
-            Icon image = fluid.getFluid().getStillIcon();
+            IIcon image = fluid.getFluid().getStillIcon();
             // Icon image = BlockFluid.getFluidIcon("water_still");
             // image = Femtocraft.blockFluidMass.stillIcon;
 

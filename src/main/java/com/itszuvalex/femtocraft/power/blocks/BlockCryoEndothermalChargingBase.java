@@ -26,22 +26,22 @@ import com.itszuvalex.femtocraft.core.blocks.BlockBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/6/14.
  */
 public class BlockCryoEndothermalChargingBase extends BlockBase {
-    public BlockCryoEndothermalChargingBase(int id) {
-        super(id, Material.iron);
+    public BlockCryoEndothermalChargingBase() {
+        super(Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab());
-        setUnlocalizedName("BlockCryoEndothermalChargingBase");
+        setBlockName("BlockCryoEndothermalChargingBase");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "BlockCryoEndothermalChargingBase");
+                                                       + ":" + "BlockCryoEndothermalChargingBase");
     }
 }

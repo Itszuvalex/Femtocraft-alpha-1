@@ -32,7 +32,7 @@ import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
 /**
@@ -60,7 +60,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return super.getFillPercentageForCharging(from);
             } else {
-                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
                 if (te instanceof IPowerBlockContainer) {
                     return ((IPowerBlockContainer) te).getFillPercentageForCharging(from);
                 }
@@ -75,7 +75,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return super.getFillPercentageForOutput(to);
             } else {
-                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
                 if (te instanceof IPowerBlockContainer) {
                     return ((IPowerBlockContainer) te).getFillPercentageForOutput(to);
                 }
@@ -90,7 +90,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return super.canCharge(from);
             } else {
-                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
                 if (te instanceof IPowerBlockContainer) {
                     return ((IPowerBlockContainer) te).canCharge(from);
                 }
@@ -125,7 +125,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
                         if (xCoord - info.x() != -1) return false;
                         break;
                 }
-                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
                 if (te instanceof IPowerBlockContainer) {
                     return ((IPowerBlockContainer) te).canConnect(from);
                 }
@@ -140,7 +140,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return super.charge(from, amount);
             } else {
-                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
                 if (te instanceof IPowerBlockContainer) {
                     return ((IPowerBlockContainer) te).charge(from, amount);
                 }
@@ -155,7 +155,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return super.consume(amount);
             } else {
-                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
                 if (te instanceof IPowerBlockContainer) {
                     return ((IPowerBlockContainer) te).consume(amount);
                 }
@@ -170,7 +170,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return super.getFillPercentage();
             } else {
-                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
                 if (te instanceof IPowerBlockContainer) {
                     return ((IPowerBlockContainer) te).getFillPercentage();
                 }
@@ -185,7 +185,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return super.canAcceptPowerOfLevel(level, from);
             } else {
-                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
                 if (te instanceof IPowerBlockContainer) {
                     return ((IPowerBlockContainer) te).canAcceptPowerOfLevel(level, from);
                 }
@@ -217,7 +217,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
                 float steamGenerators = 0.f;
                 for (int i = 0; i < 6; ++i) {
                     ForgeDirection dir = ForgeDirection.getOrientation(i);
-                    TileEntity te = worldObj.getBlockTileEntity(
+                    TileEntity te = worldObj.getTileEntity(
                             xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
                     if (te instanceof TileEntitySteamGenerator) {
                         steamGenerators += TileEntitySteamGenerator.steamGeneratorPercentageMultiplier;
@@ -241,7 +241,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return super.getCurrentPower();
             } else {
-                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
                 if (te instanceof IPowerBlockContainer) {
                     return ((IPowerBlockContainer) te).getCurrentPower();
                 }
@@ -256,7 +256,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return powerStorage;
             } else {
-                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
                 if (te instanceof IPowerBlockContainer) {
                     return ((IPowerBlockContainer) te).getMaxPower();
                 }
@@ -283,7 +283,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
                 }
                 return ret;
             } else {
-                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
                 if (te instanceof IFluidHandler) {
                     return ((IFluidHandler) te).fill(from, resource, doFill);
                 }
@@ -305,7 +305,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
                 }
                 return ret;
             } else {
-                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
                 if (te instanceof IFluidHandler) {
                     return ((IFluidHandler) te).drain(from, resource, doDrain);
                 }
@@ -324,7 +324,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
                 }
                 return ret;
             } else {
-                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
                 if (te instanceof IFluidHandler) {
                     return ((IFluidHandler) te).drain(from, maxDrain, doDrain);
                 }
@@ -339,7 +339,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return fluid == Femtocraft.fluidMoltenSalt();
             } else {
-                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
                 if (te instanceof IFluidHandler) {
                     return ((IFluidHandler) te).canFill(from, fluid);
                 }
@@ -354,7 +354,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return fluid == Femtocraft.fluidCooledContaminatedMoltenSalt();
             } else {
-                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
                 if (te instanceof IFluidHandler) {
                     return ((IFluidHandler) te).canFill(from, fluid);
                 }
@@ -369,7 +369,7 @@ public class TileEntityMagnetohydrodynamicGenerator extends TileEntityPowerProdu
             if (info.isController(xCoord, yCoord, zCoord)) {
                 return new FluidTankInfo[]{moltenSaltTank.getInfo(), contaminatedSaltTank.getInfo()};
             } else {
-                TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+                TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
                 if (te instanceof IFluidHandler) {
                     return ((IFluidHandler) te).getTankInfo(from);
                 }

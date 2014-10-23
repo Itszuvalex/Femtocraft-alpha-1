@@ -5,8 +5,8 @@ package com.itszuvalex.femtocraft.power.items;
  */
 public class ItemNucleationCore extends ItemCryogenCore {
 
-    public ItemNucleationCore(int par1, String unlocalizedName) {
-        super(par1, unlocalizedName);
+    public ItemNucleationCore(String unlocalizedName) {
+        super(unlocalizedName);
     }
 
 

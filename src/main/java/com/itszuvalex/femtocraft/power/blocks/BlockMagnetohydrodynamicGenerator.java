@@ -22,58 +22,61 @@
 package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockMagnetohydrodynamicGenerator;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityMagnetohydrodynamicGenerator;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 8/25/14.
  */
 public class BlockMagnetohydrodynamicGenerator extends TileContainer {
-    private Icon[][] formedSides;
+    private IIcon[][] formedSides;
 
 
     @Override
-    public void registerIcons(IconRegister par1IconRegister) {
-        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "BlockMagnetohydrodynamicGenerator_unformed");
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
+        blockIcon = par1IconRegister.registerIcon(
+                Femtocraft.ID().toLowerCase() + ":" + "BlockMagnetohydrodynamicGenerator_unformed");
         for (int i = 0; i < formedSides.length; ++i) {
             for (int j = 0; j < formedSides[i].length; ++j) {
-                formedSides[j][i] = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "BlockMagnetohydrodynamicGenerator_" + i + "_" + j);
+                formedSides[j][i] = par1IconRegister.registerIcon(
+                        Femtocraft.ID().toLowerCase() + ":" + "BlockMagnetohydrodynamicGenerator_" + i + "_" + j);
             }
         }
     }
 
-    public BlockMagnetohydrodynamicGenerator(int par1) {
-        super(par1, Material.iron);
+    public BlockMagnetohydrodynamicGenerator() {
+        super(Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab());
-        setUnlocalizedName("BlockMagnetohydrodynamicGenerator");
-        formedSides = new Icon[3][];
+        setBlockName("BlockMagnetohydrodynamicGenerator");
+        formedSides = new IIcon[3][];
         for (int i = 0; i < formedSides.length; ++i) {
-            formedSides[i] = new Icon[3];
+            formedSides[i] = new IIcon[3];
         }
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityMagnetohydrodynamicGenerator();
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int par2,
-                                int par3, int par4, int par5) {
-        TileEntity te = par1iBlockAccess.getBlockTileEntity(par2, par3, par4);
+    public IIcon getIcon(IBlockAccess par1iBlockAccess, int par2,
+                         int par3, int par4, int par5) {
+        TileEntity te = par1iBlockAccess.getTileEntity(par2, par3, par4);
         if (te instanceof TileEntityMagnetohydrodynamicGenerator) {
             TileEntityMagnetohydrodynamicGenerator frame = (TileEntityMagnetohydrodynamicGenerator) te;
             if (frame.isValidMultiBlock()) {
@@ -82,11 +85,11 @@ public class BlockMagnetohydrodynamicGenerator extends TileContainer {
                 return iconForSide(info, dir, par2, par3, par4);
             }
         }
-        return super.getBlockTexture(par1iBlockAccess, par2, par3, par4, par5);
+        return super.getIcon(par1iBlockAccess, par2, par3, par4, par5);
     }
 
-    private Icon iconForSide(MultiBlockInfo info, ForgeDirection dir, int x,
-                             int y, int z) {
+    private IIcon iconForSide(MultiBlockInfo info, ForgeDirection dir, int x,
+                              int y, int z) {
         int xdif = x - info.x();
         int ydif = y - info.y();
         int zdif = z - info.z();
@@ -109,7 +112,7 @@ public class BlockMagnetohydrodynamicGenerator extends TileContainer {
         }
     }
 
-    private Icon iconFromGrid(int xdif, int ydif) {
+    private IIcon iconFromGrid(int xdif, int ydif) {
         try {
             return formedSides[xdif + 1][ydif + 1];
         } catch (IndexOutOfBoundsException ignored) {
@@ -142,8 +145,8 @@ public class BlockMagnetohydrodynamicGenerator extends TileContainer {
          */
     @Override
     public void breakBlock(World par1World, int par2, int par3, int par4,
-                           int par5, int par6) {
-        TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+                           Block par5, int par6) {
+        TileEntity te = par1World.getTileEntity(par2, par3, par4);
         if (te instanceof TileEntityMagnetohydrodynamicGenerator) {
             MultiBlockInfo info = ((IMultiBlockComponent) te).getInfo();
             MultiBlockMagnetohydrodynamicGenerator.instance.breakMultiBlock(par1World, info.x(),

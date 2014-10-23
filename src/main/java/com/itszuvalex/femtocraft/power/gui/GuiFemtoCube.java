@@ -22,15 +22,15 @@
 package com.itszuvalex.femtocraft.power.gui;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.core.gui.GuiBase;
 import com.itszuvalex.femtocraft.power.containers.ContainerFemtoCube;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoCubePort;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class GuiFemtoCube extends GuiContainer {
+public class GuiFemtoCube extends GuiBase {
     public static final ResourceLocation texture = new ResourceLocation(
             Femtocraft.ID().toLowerCase(), "textures/guis/FemtoCube.png");
     private final TileEntityFemtoCubePort controller;
@@ -48,16 +48,16 @@ public class GuiFemtoCube extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         String s = "Femto-Cube";
-        this.fontRenderer.drawString(s,
-                this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
+        this.fontRendererObj.drawString(s,
+                this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6,
                 FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
 
         String power = FemtocraftUtils.formatIntegerToString(controller
                 .getCurrentPower()) + "/"
-                + FemtocraftUtils.formatIntegerToString(controller
+                       + FemtocraftUtils.formatIntegerToString(controller
                 .getMaxPower());
-        this.fontRenderer.drawString(power,
-                this.xSize / 2 - this.fontRenderer.getStringWidth(power) / 2,
+        this.fontRendererObj.drawString(power,
+                this.xSize / 2 - this.fontRendererObj.getStringWidth(power) / 2,
                 this.ySize * 4 / 5,
                 FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
     }

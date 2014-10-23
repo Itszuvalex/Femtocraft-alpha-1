@@ -22,14 +22,15 @@
 package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockPhlegethonTunnel;
 import com.itszuvalex.femtocraft.power.tiles.TileEntitySisyphusStabilizer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -37,15 +38,15 @@ import net.minecraft.world.World;
  * Created by Christopher Harris (Itszuvalex) on 7/12/14.
  */
 public class BlockSisyphusStabilizer extends TileContainer {
-    public BlockSisyphusStabilizer(int id) {
-        super(id, Material.iron);
+    public BlockSisyphusStabilizer() {
+        super(Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab());
-        setUnlocalizedName("BlockSisyphusStabilizer");
+        setBlockName("BlockSisyphusStabilizer");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                                                        + ":" + "BlockSisyphusStabilizer");
     }
@@ -79,8 +80,8 @@ public class BlockSisyphusStabilizer extends TileContainer {
          */
     @Override
     public void breakBlock(World par1World, int par2, int par3, int par4,
-                           int par5, int par6) {
-        TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+                           Block par5, int par6) {
+        TileEntity te = par1World.getTileEntity(par2, par3, par4);
         if (te instanceof TileEntitySisyphusStabilizer) {
             MultiBlockInfo info = ((TileEntitySisyphusStabilizer) te).getInfo();
             MultiBlockPhlegethonTunnel.instance.breakMultiBlock(par1World, info.x(),

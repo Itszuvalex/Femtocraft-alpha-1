@@ -26,8 +26,8 @@ import com.itszuvalex.femtocraft.managers.assembler.ComparatorItemStack;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import java.util.SortedMap;
@@ -42,28 +42,28 @@ public class ManagerDimensionalRecipe {
     private SortedMap<ItemStack, DimensionalRecipe> outputToRecipes;
 
     public ManagerDimensionalRecipe() {
-        recipesToOutput = new TreeMap<DimensionalKey, DimensionalRecipe>();
-        outputToRecipes = new TreeMap<ItemStack, DimensionalRecipe>(new ComparatorItemStack());
+        recipesToOutput = new TreeMap<>();
+        outputToRecipes = new TreeMap<>(new ComparatorItemStack());
     }
 
     private void addRecipes() {
         addRecipe(new DimensionalRecipe(new ItemStack(Femtocraft.itemManagerCore()),
-                new ItemStack[]{new ItemStack(Femtocraft.itemNanochip()), new ItemStack(Item.enderPearl),
+                new ItemStack[]{new ItemStack(Femtocraft.itemNanochip()), new ItemStack(Items.ender_pearl),
                         new ItemStack(Femtocraft.itemCrossDimensionalCommunicator()),
                         new ItemStack(Femtocraft.itemDimensionalMonopole())},
                 new ItemStack(Femtocraft.itemPanLocationalComputer()), 400, EnumTechLevel.NANO,
                 FemtocraftTechnologies.DIMENSIONAL_BRAIDING));
-        addRecipe(new DimensionalRecipe(new ItemStack(Block.chest), new ItemStack[]{new ItemStack(Femtocraft
-                .itemPanLocationalComputer()), new ItemStack(Item.enderPearl), new ItemStack(Item.enderPearl),
+        addRecipe(new DimensionalRecipe(new ItemStack(Blocks.chest), new ItemStack[]{new ItemStack(Femtocraft
+                .itemPanLocationalComputer()), new ItemStack(Items.ender_pearl), new ItemStack(Items.ender_pearl),
                 new ItemStack(Femtocraft.itemDimensionalMonopole())}, new ItemStack(Femtocraft.itemPandoraCube()), 400,
                 EnumTechLevel.NANO, FemtocraftTechnologies.LOCALITY_ENTANGLER));
         addRecipe(new DimensionalRecipe(new ItemStack(Femtocraft.itemPandoraCube()),
                 new ItemStack[]{new ItemStack(Femtocraft.itemHerculesDrive()),
                         new ItemStack(Femtocraft.itemPanLocationalComputer()),
                         new ItemStack(Femtocraft.itemPanLocationalComputer()),
-                        new ItemStack(Femtocraft.itemHerculesDrive()), new ItemStack(Item.eyeOfEnder),
-                        new ItemStack(Item.eyeOfEnder), new ItemStack(Item.eyeOfEnder),
-                        new ItemStack(Item.eyeOfEnder), new ItemStack(Femtocraft.itemHerculesDrive()),
+                        new ItemStack(Femtocraft.itemHerculesDrive()), new ItemStack(Items.ender_eye),
+                        new ItemStack(Items.ender_eye), new ItemStack(Items.ender_eye),
+                        new ItemStack(Items.ender_eye), new ItemStack(Femtocraft.itemHerculesDrive()),
                         new ItemStack(Femtocraft.itemInfallibleEstimator()),
                         new ItemStack(Femtocraft.itemInfallibleEstimator()),
                         new ItemStack(Femtocraft.itemHerculesDrive())},

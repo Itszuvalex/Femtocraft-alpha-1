@@ -23,13 +23,17 @@ package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorComponent;
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
+import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
-import com.itszuvalex.femtocraft.power.plasma.*;
-import com.itszuvalex.femtocraft.power.plasma.volatility.IVolatilityEvent;
+import com.itszuvalex.femtocraft.power.plasma.FusionReactorCore;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Collection;
 
@@ -37,7 +41,7 @@ import java.util.Collection;
  * Created by Christopher Harris (Itszuvalex) on 5/10/14.
  */
 public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
-                                                                   IFusionReactorCore, IMultiBlockComponent {
+        IFusionReactorCore, IMultiBlockComponent {
     public static int maxContainedFlows = 10;
     public static int stability = 5000;
     public static int temperatureRating = 8000;
@@ -66,7 +70,9 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
 
     public TileEntityFemtoStellaratorCore() {
         super();
-        core = new FusionReactorCore(maxContainedFlows, stability, temperatureRating, ignitionProcessWindow, reactionThreshold, reactionFailureThreshold, plasmaFlowTicksToGenerateMin, plasmaFlowTicksToGenerateMax);
+        core = new FusionReactorCore(maxContainedFlows, stability, temperatureRating, ignitionProcessWindow,
+                reactionThreshold, reactionFailureThreshold, plasmaFlowTicksToGenerateMin,
+                plasmaFlowTicksToGenerateMax);
         info = new MultiBlockInfo();
 
     }

@@ -24,6 +24,7 @@ package com.itszuvalex.femtocraft.core.items;
 import com.itszuvalex.femtocraft.Femtocraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -35,7 +36,7 @@ import java.util.List;
 
 public class CoreItemBlock extends ItemBlock {
 
-    public CoreItemBlock(int par1) {
+    public CoreItemBlock(Block par1) {
         super(par1);
         setCreativeTab(Femtocraft.femtocraftTab());
     }
@@ -55,13 +56,12 @@ public class CoreItemBlock extends ItemBlock {
             String owner = nbt.getString("owner");
 
             String ownerLabelString = EnumChatFormatting.GRAY + "Owner:"
-                    + EnumChatFormatting.RESET;
+                                      + EnumChatFormatting.RESET;
             String ownerString;
             if (owner.isEmpty()) {
                 ownerString = EnumChatFormatting.ITALIC + "unassigned"
-                        + EnumChatFormatting.RESET;
-            }
-            else {
+                              + EnumChatFormatting.RESET;
+            } else {
                 ownerString = owner;
             }
 
@@ -70,29 +70,37 @@ public class CoreItemBlock extends ItemBlock {
         }
     }
 
+    @Override
+    public boolean func_150936_a(World world, int x, int y, int z,
+                                 int side, EntityPlayer player, ItemStack itemStack) {
+        return canPlayerPlace(player) &&
+               super.func_150936_a(world, x, y, z, side, player,
+                       itemStack);
+    }
+
     /**
-     * @return true if this block, when in item form, should have NBTData. If
-     * you want this block to be stackable in item form, this must
-     * return false. Otherwise, Femtocraft will addInput NBT data
-     * automatically.
+     * @return true if this block, when in item form, should have NBTData. If you want this block to be stackable in
+     * item form, this must return false. Otherwise, Femtocraft will addInput NBT data automatically.
      */
     public boolean hasItemNBT() {
         return true;
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean canPlaceItemBlockOnSide(World par1World, int par2, int par3,
-                                           int par4, int par5, EntityPlayer par6EntityPlayer,
-                                           ItemStack par7ItemStack) {
-        return canPlayerPlace(par6EntityPlayer) && super.canPlaceItemBlockOnSide(par1World, par2, par3, par4, par5, par6EntityPlayer, par7ItemStack);
-    }
+//    @Override
+//    @SideOnly(Side.CLIENT)
+//    public boolean canPlaceItemBlockOnSide(World par1World, int par2, int par3,
+//                                           int par4, int par5, EntityPlayer par6EntityPlayer,
+//                                           ItemStack par7ItemStack) {
+//        return canPlayerPlace(par6EntityPlayer) &&
+//               super.canPlaceItemBlockOnSide(par1World, par2, par3, par4, par5, par6EntityPlayer, par7ItemStack);
+//    }
 
     @Override
     public boolean placeBlockAt(ItemStack stack, EntityPlayer player,
                                 World world, int x, int y, int z, int side, float hitX, float hitY,
                                 float hitZ, int metadata) {
-        return canPlayerPlace(player) && super.placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY, hitZ, metadata);
+        return canPlayerPlace(player) &&
+               super.placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY, hitZ, metadata);
     }
 
     private boolean canPlayerPlace(EntityPlayer player) {

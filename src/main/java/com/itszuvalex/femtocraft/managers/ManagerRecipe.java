@@ -28,8 +28,8 @@ import com.itszuvalex.femtocraft.managers.temporal.ManagerTemporalRecipe;
 import com.itszuvalex.femtocraft.power.CryogenRegistry;
 import com.itszuvalex.femtocraft.power.FissionReactorRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.oredict.ShapedOreRecipe;
@@ -54,13 +54,13 @@ public class ManagerRecipe {
     }
 
     private void registerRecipes() {
-        GameRegistry.addSmelting(Femtocraft.blockOreTitanium().blockID, new ItemStack(
+        GameRegistry.addSmelting(Femtocraft.blockOreTitanium(), new ItemStack(
                 Femtocraft.itemIngotTitanium()), 0.1f);
-        GameRegistry.addSmelting(Femtocraft.blockOrePlatinum().blockID, new ItemStack(
+        GameRegistry.addSmelting(Femtocraft.blockOrePlatinum(), new ItemStack(
                 Femtocraft.itemIngotPlatinum()), 0.1f);
-        GameRegistry.addSmelting(Femtocraft.blockOreThorium().blockID, new ItemStack(
+        GameRegistry.addSmelting(Femtocraft.blockOreThorium(), new ItemStack(
                 Femtocraft.itemIngotThorium()), 0.1f);
-        GameRegistry.addSmelting(Femtocraft.blockOreLodestone().blockID, new ItemStack(Femtocraft.itemChunkLodestone()),
+        GameRegistry.addSmelting(Femtocraft.blockOreLodestone(), new ItemStack(Femtocraft.itemChunkLodestone()),
                 0.1f);
 //        GameRegistry.addSmelting(Femtocraft.deconstructedIron.itemID,
 //                new ItemStack(Item.ingotIron), 0.1f);
@@ -72,10 +72,10 @@ public class ManagerRecipe {
 //                new ItemStack(Femtocraft.itemIngotThorium), 0.1f);
 //        GameRegistry.addSmelting(Femtocraft.deconstructedPlatinum.itemID,
 //                new ItemStack(Femtocraft.itemIngotPlatinum), 0.1f);
-        GameRegistry.addSmelting(Femtocraft.itemIngotTitanium().itemID,
+        GameRegistry.addSmelting(Femtocraft.itemIngotTitanium(),
                 new ItemStack(Femtocraft.itemIngotTemperedTitanium()), 0.1f);
 
-        GameRegistry.addSmelting(Femtocraft.itemPrimedBoard().itemID, new ItemStack(
+        GameRegistry.addSmelting(Femtocraft.itemPrimedBoard(), new ItemStack(
                 Femtocraft.itemDopedBoard()), 0.1f);
 
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemChunkLodestone()), "NN", "NN", 'N',
@@ -84,11 +84,11 @@ public class ManagerRecipe {
                 new ItemStack(Femtocraft.itemChunkLodestone()));
 
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockResearchConsole()), "THT", "TCT", "RFR", 'T',
-                Femtocraft.itemIngotTitanium(), 'H', Block.hopperBlock, 'C', Item.comparator, 'R', Item.redstone, 'F',
+                Femtocraft.itemIngotTitanium(), 'H', Blocks.hopper, 'C', Items.comparator, 'R', Items.redstone, 'F',
                 Femtocraft.itemIngotFarenite());
 
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockResearchComputer()), "GGG", "TET", "RFR", 'G',
-                Block.glass, 'T', Femtocraft.itemIngotTitanium(), 'E', Item.redstoneRepeater, 'R', Item.redstone, 'F',
+                Blocks.glass, 'T', Femtocraft.itemIngotTitanium(), 'E', Items.repeater, 'R', Items.redstone, 'F',
                 Femtocraft.itemIngotFarenite());
 
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemPrimedBoard()),
@@ -96,9 +96,9 @@ public class ManagerRecipe {
                 Femtocraft.itemBoard());
         GameRegistry.addShapedRecipe(
                 new ItemStack(Femtocraft.itemPaperSchematic(), 3), "###", "###",
-                "###", '#', Item.paper);
+                "###", '#', Items.paper);
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemBoard()), "###",
-                '#', Item.stick);
+                '#', Items.stick);
         GameRegistry.addShapedRecipe(
                 new ItemStack(Femtocraft.itemMicrochip()), "#", "$", '#',
                 Femtocraft.itemSpoolGold(), '$', Femtocraft.itemDopedBoard());
@@ -112,7 +112,7 @@ public class ManagerRecipe {
 
         GameRegistry
                 .addShapedRecipe(new ItemStack(Femtocraft.itemSpoolGold(), 8), "###",
-                        "#-#", "###", '#', Item.ingotGold, '-',
+                        "#-#", "###", '#', Items.gold_ingot, '-',
                         Femtocraft.itemSpool());
 
         GameRegistry
@@ -123,7 +123,7 @@ public class ManagerRecipe {
 
         GameRegistry.addShapelessRecipe(new ItemStack(
                 Femtocraft.itemConductivePowder(), 2), new ItemStack(
-                Femtocraft.itemIngotFarenite()), new ItemStack(Item.dyePowder, 1, 4));
+                Femtocraft.itemIngotFarenite()), new ItemStack(Items.dye, 1, 4));
 
 
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemMicroCoil(), 6),
@@ -131,20 +131,22 @@ public class ManagerRecipe {
                 Femtocraft.itemSpoolGold(), 'P', Femtocraft.itemSpoolPlatinum());
 
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemBattery()),
-                "FCF", 'F', Item.ingotIron, 'C',
+                "FCF", 'F', Items.iron_ingot, 'C',
                 Femtocraft.itemConductivePowder());
 
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemMicroLogicCore()), "TGT", "GBG", "TTT", 'T',
-                Femtocraft.itemIngotTemperedTitanium(), 'G', Femtocraft.itemSpoolGold(), 'B', Femtocraft.itemMicrochip());
+                Femtocraft.itemIngotTemperedTitanium(), 'G', Femtocraft.itemSpoolGold(), 'B',
+                Femtocraft.itemMicrochip());
 
-        GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemKineticPulverizer()), "FTF", " P ", "FMF", 'F', Item.ingotIron,
-                'M', Femtocraft.itemMicrochip(), 'P', Block.pistonBase
+        GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemKineticPulverizer()), "FTF", " P ", "FMF", 'F',
+                Items.iron_ingot,
+                'M', Femtocraft.itemMicrochip(), 'P', Blocks.piston
                 , 'T', Femtocraft.itemIngotTemperedTitanium());
 
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemArticulatingArm()), "MTM", "F T", "F S", 'M',
                 Femtocraft.itemMicrochip(), 'T',
-                Femtocraft.itemIngotTemperedTitanium(), 'F', Item.ingotIron,
-                'S', Item.shears);
+                Femtocraft.itemIngotTemperedTitanium(), 'F', Items.iron_ingot,
+                'S', Items.shears);
 
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemHeatingElement()), " P ", "G G", "TBT", 'P',
                 Femtocraft.itemSpoolPlatinum(), 'G', Femtocraft.itemSpoolGold(), 'T',
@@ -153,11 +155,11 @@ public class ManagerRecipe {
         GameRegistry.addShapedRecipe(
                 new ItemStack(Femtocraft.itemMicroPlating()), "TCT", "CSC",
                 "TCT", 'T', Femtocraft.itemIngotTemperedTitanium(), 'C',
-                Femtocraft.itemMicrochip(), 'S', Item.slimeBall);
+                Femtocraft.itemMicrochip(), 'S', Items.slime_ball);
 
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockMicroCable(), 16), "MSM", "RCR", "MSM", 'M',
                 Femtocraft.itemMicroCoil(),
-                'S', Item.silk, 'R', Item.redstone,
+                'S', Items.string, 'R', Items.redstone,
                 'C', Femtocraft.itemConductivePowder());
 
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockMicroCube())
@@ -186,7 +188,7 @@ public class ManagerRecipe {
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockEncoder()),
                 "TMT", "MRM", "TMT", 'T',
                 Femtocraft.itemIngotTemperedTitanium(), 'M', Femtocraft.itemMicroPlating(),
-                'R', Item.comparator);
+                'R', Items.comparator);
 
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockMicroDeconstructor()), "TMT", "MDM", "TCT", 'T',
                 Femtocraft.itemIngotTemperedTitanium(), 'M', Femtocraft.itemMicroPlating(),
@@ -203,7 +205,8 @@ public class ManagerRecipe {
                 Femtocraft.itemIngotTemperedTitanium(), 'M', Femtocraft.itemMicroPlating(), 'H',
                 Femtocraft.itemHeatingElement(), 'L', Femtocraft.itemMicroLogicCore());
 
-        GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockMagneticInductionGenerator()), "MHT", "MHC", "MHT", 'M',
+        GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockMagneticInductionGenerator()), "MHT", "MHC",
+                "MHT", 'M',
                 Femtocraft.itemMicroPlating(), 'H',
                 Femtocraft.itemHeatingElement(), 'T',
                 Femtocraft.itemIngotTemperedTitanium(), 'C',
@@ -211,10 +214,10 @@ public class ManagerRecipe {
 
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemVacuumCore())
                 , " P ", "FEF", " P ", 'P', Femtocraft.itemIngotPlatinum(), 'F',
-                Femtocraft.itemIngotFarenite(), 'E', Item.enderPearl);
+                Femtocraft.itemIngotFarenite(), 'E', Items.ender_pearl);
 
         GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockSuctionPipe(), 16), "TFT", " V ", "TFT", 'T',
-                Femtocraft.itemIngotTemperedTitanium(), 'F', Item.ingotIron,
+                Femtocraft.itemIngotTemperedTitanium(), 'F', Items.iron_ingot,
                 'V', Femtocraft.itemVacuumCore());
 
     }

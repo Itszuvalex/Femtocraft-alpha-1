@@ -22,43 +22,44 @@
 package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockNanoFissionReactor;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoFissionReactorHousing;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/6/14.
  */
 public class BlockNanoFissionReactorHousing extends TileContainer {
-    Icon[][] formedSides;
+    IIcon[][] formedSides;
 
-    public BlockNanoFissionReactorHousing(int id) {
-        super(id, Material.iron);
+    public BlockNanoFissionReactorHousing() {
+        super(Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab());
-        setUnlocalizedName("BlockNanoFissionReactorHousing");
+        setBlockName("BlockNanoFissionReactorHousing");
 
-        formedSides = new Icon[3][];
+        formedSides = new IIcon[3][];
         for (int i = 0; i < formedSides.length; ++i) {
-            formedSides[i] = new Icon[3];
+            formedSides[i] = new IIcon[3];
         }
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int par2,
-                                int par3, int par4, int par5) {
-        TileEntity te = par1iBlockAccess.getBlockTileEntity(par2, par3, par4);
+    public IIcon getIcon(IBlockAccess par1iBlockAccess, int par2,
+                         int par3, int par4, int par5) {
+        TileEntity te = par1iBlockAccess.getTileEntity(par2, par3, par4);
         if (te instanceof TileEntityNanoFissionReactorHousing) {
             TileEntityNanoFissionReactorHousing frame = (TileEntityNanoFissionReactorHousing) te;
             if (frame.isValidMultiBlock()) {
@@ -67,11 +68,11 @@ public class BlockNanoFissionReactorHousing extends TileContainer {
                 return iconForSide(info, dir, par2, par3, par4);
             }
         }
-        return super.getBlockTexture(par1iBlockAccess, par2, par3, par4, par5);
+        return super.getIcon(par1iBlockAccess, par2, par3, par4, par5);
     }
 
-    private Icon iconForSide(MultiBlockInfo info, ForgeDirection dir, int x,
-                             int y, int z) {
+    private IIcon iconForSide(MultiBlockInfo info, ForgeDirection dir, int x,
+                              int y, int z) {
         int xdif = x - info.x();
         int ydif = y - info.y();
         int zdif = z - info.z();
@@ -94,7 +95,7 @@ public class BlockNanoFissionReactorHousing extends TileContainer {
         }
     }
 
-    private Icon iconFromGrid(int xdif, int ydif) {
+    private IIcon iconFromGrid(int xdif, int ydif) {
         try {
             int i = xdif + 1;
             int k = ydif + 1;
@@ -121,26 +122,27 @@ public class BlockNanoFissionReactorHousing extends TileContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "BlockNanoFissionReactorHousing_unformed");
+                                                  + ":" + "BlockNanoFissionReactorHousing_unformed");
 
         for (int i = 0; i < formedSides.length; ++i) {
             for (int j = 0; j < formedSides[i].length; ++j) {
-                formedSides[i][j] = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "BlockNanoFissionReactorHousing_" + i + "_" + j);
+                formedSides[i][j] = par1IconRegister.registerIcon(
+                        Femtocraft.ID().toLowerCase() + ":" + "BlockNanoFissionReactorHousing_" + i + "_" + j);
             }
         }
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityNanoFissionReactorHousing();
     }
 
     @Override
     public void breakBlock(World par1World, int par2, int par3, int par4,
-                           int par5, int par6) {
-        TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+                           Block par5, int par6) {
+        TileEntity te = par1World.getTileEntity(par2, par3, par4);
         if (te instanceof TileEntityNanoFissionReactorHousing) {
             MultiBlockInfo info = ((IMultiBlockComponent) te).getInfo();
             MultiBlockNanoFissionReactor.instance.breakMultiBlock(par1World, info.x(),

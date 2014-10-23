@@ -27,18 +27,18 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 public class BlockMicroStone extends BlockBase {
-    public BlockMicroStone(int id) {
-        super(id, Material.iron);
+    public BlockMicroStone() {
+        super(Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab());
-        setTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockMicroStone");
-        setUnlocalizedName("BlockMicroStone");
+        setBlockTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockMicroStone");
+        setBlockName("BlockMicroStone");
         setHardness(6.0f);
-        setStepSound(Block.soundMetalFootstep);
+        setStepSound(Block.soundTypeMetal);
         setResistance(9f);
     }
 
@@ -51,8 +51,8 @@ public class BlockMicroStone extends BlockBase {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                 .toLowerCase() + ":" + "BlockMicroStone");
+                                                               .toLowerCase() + ":" + "BlockMicroStone");
     }
 }

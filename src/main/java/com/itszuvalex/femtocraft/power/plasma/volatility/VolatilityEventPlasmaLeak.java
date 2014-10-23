@@ -21,6 +21,11 @@
 
 package com.itszuvalex.femtocraft.power.plasma.volatility;
 
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorComponent;
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
+import com.itszuvalex.femtocraft.api.power.plasma.volatility.VolatilityEvent;
 import com.itszuvalex.femtocraft.power.plasma.*;
 import net.minecraft.world.World;
 

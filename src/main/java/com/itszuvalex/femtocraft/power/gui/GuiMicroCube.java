@@ -22,15 +22,15 @@
 package com.itszuvalex.femtocraft.power.gui;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.core.gui.GuiBase;
 import com.itszuvalex.femtocraft.power.containers.ContainerMicroCube;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityMicroCube;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class GuiMicroCube extends GuiContainer {
+public class GuiMicroCube extends GuiBase {
     public static final ResourceLocation texture = new ResourceLocation(
             Femtocraft.ID().toLowerCase(), "textures/guis/MicroCube.png");
     private final TileEntityMicroCube cube;
@@ -48,15 +48,15 @@ public class GuiMicroCube extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         String s = "Micro-Cube";
-        this.fontRenderer.drawString(s,
-                this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
+        this.fontRendererObj.drawString(s,
+                this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6,
                 FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
 
         String power = FemtocraftUtils.formatIntegerToString(cube
                 .getCurrentPower()) + "/" + FemtocraftUtils.formatIntegerToString(
                 cube.getMaxPower());
-        this.fontRenderer.drawString(power,
-                this.xSize / 2 - this.fontRenderer.getStringWidth(power) / 2,
+        this.fontRendererObj.drawString(power,
+                this.xSize / 2 - this.fontRendererObj.getStringWidth(power) / 2,
                 this.ySize * 4 / 5,
                 FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
     }

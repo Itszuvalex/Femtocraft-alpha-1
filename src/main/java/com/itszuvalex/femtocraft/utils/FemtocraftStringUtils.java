@@ -27,7 +27,7 @@ public class FemtocraftStringUtils {
     public static final String itemDamageRegex = "(?::(?<" + itemDamageGroup + ">\\d+?))?";
     public static final Pattern itemStackPattern = Pattern.compile(
             "(?:" + itemIDRegex + "|(?:" + modIDRegex + ":" + itemNameRegex + "))" + itemDamageRegex +
-                    itemStackRegex);
+            itemStackRegex);
 
     public static ItemStack itemStackFromString(String s) {
         if (s == null || s.isEmpty()) return null;
@@ -43,7 +43,7 @@ public class FemtocraftStringUtils {
                 int stackSize = ssize == null ? 1 : Integer.parseInt(ssize);
                 if (itemID != null) {
                     int id = Integer.parseInt(itemID);
-                    return new ItemStack(id, stackSize, damage);
+                    return new ItemStack(Item.getItemById(id), stackSize, damage);
                 }
                 String[] typeName = name.split("\\.");
                 name = typeName[typeName.length - 1];
@@ -82,21 +82,18 @@ public class FemtocraftStringUtils {
         GameRegistry.UniqueIdentifier id = null;
         if (s != null) {
             if (s.getItem() instanceof ItemBlock) {
-                id = GameRegistry.findUniqueIdentifierFor(Block.blocksList[((ItemBlock) s.getItem()).getBlockID()]);
-            }
-            else {
+                id = GameRegistry.findUniqueIdentifierFor(Block.getBlockFromItem(s.getItem()));
+            } else {
                 id = GameRegistry.findUniqueIdentifierFor(s.getItem());
             }
         }
         if (s == null) {
             return "";
-        }
-        else {
+        } else {
             String result;
             if (id == null) {
-                result = String.valueOf(s.getItem().itemID);
-            }
-            else {
+                result = String.valueOf(Item.getIdFromItem(s.getItem()));
+            } else {
                 result = id.modId + ":" + id.name;
             }
             return result + ":" + s.getItemDamage() + "-" + s.stackSize;

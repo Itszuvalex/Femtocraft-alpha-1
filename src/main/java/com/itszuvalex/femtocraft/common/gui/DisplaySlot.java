@@ -25,11 +25,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 
 public class DisplaySlot extends Slot {
 
-    public static Icon noPlaceDisplayIcon;
+    public static IIcon noPlaceDisplayIcon;
 
     public DisplaySlot(IInventory par1iInventory, int par2, int par3, int par4) {
         super(par1iInventory, par2, par3, par4);

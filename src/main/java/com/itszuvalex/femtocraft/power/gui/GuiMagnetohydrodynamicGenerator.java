@@ -22,13 +22,13 @@
 package com.itszuvalex.femtocraft.power.gui;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.core.gui.GuiBase;
 import com.itszuvalex.femtocraft.power.containers.ContainerMagnetoHydrodynamicGenerator;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityMagnetohydrodynamicGenerator;
 import com.itszuvalex.femtocraft.render.RenderUtils;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -38,7 +38,7 @@ import org.lwjgl.opengl.GL11;
 /**
  * Created by Christopher Harris (Itszuvalex) on 8/27/14.
  */
-public class GuiMagnetohydrodynamicGenerator extends GuiContainer {
+public class GuiMagnetohydrodynamicGenerator extends GuiBase {
     public static final ResourceLocation texture = new ResourceLocation(
             Femtocraft.ID().toLowerCase(), "textures/guis/MagnetohydrodynamicGenerator.png");
     private final TileEntityMagnetohydrodynamicGenerator generator;
@@ -61,13 +61,12 @@ public class GuiMagnetohydrodynamicGenerator extends GuiContainer {
             String name = fluid == null ? "" : (" " + FluidRegistry
                     .getFluidName(fluid));
             String text = FemtocraftUtils.formatIntegerToString(moltenSaltAmount) + '/'
-                    + FemtocraftUtils.formatIntegerToString(moltenSaltMax) + " mB" + name;
+                          + FemtocraftUtils.formatIntegerToString(moltenSaltMax) + " mB" + name;
 
             this.drawCreativeTabHoveringText(text, par1, par2);
 
             //Contaminated Salt Tank
-        }
-        else if (this.isPointInRegion(130, 24, 16, 120, par1, par2)) {
+        } else if (this.isPointInRegion(130, 24, 16, 120, par1, par2)) {
             int contaminatedSaltAmount = this.generator.getContaminatedSaltTank().getFluidAmount();
             int contamiantedSaltMax = this.generator.getContaminatedSaltTank().getCapacity();
 
@@ -75,7 +74,7 @@ public class GuiMagnetohydrodynamicGenerator extends GuiContainer {
             String name = fluid == null ? "" : (" " + FluidRegistry
                     .getFluidName(fluid));
             String text = FemtocraftUtils.formatIntegerToString(contaminatedSaltAmount) + '/'
-                    + FemtocraftUtils.formatIntegerToString(contamiantedSaltMax) + " mB" + name;
+                          + FemtocraftUtils.formatIntegerToString(contamiantedSaltMax) + " mB" + name;
 
             this.drawCreativeTabHoveringText(text, par1, par2);
 
@@ -85,16 +84,16 @@ public class GuiMagnetohydrodynamicGenerator extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         String s = "Magnetohydrodynamic Generator";
-        this.fontRenderer.drawString(s,
-                this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
+        this.fontRendererObj.drawString(s,
+                this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6,
                 FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
 
         String power = FemtocraftUtils.formatIntegerToString(generator
                 .getCurrentPower()) + "/"
-                + FemtocraftUtils.formatIntegerToString(generator
+                       + FemtocraftUtils.formatIntegerToString(generator
                 .getMaxPower());
-        this.fontRenderer.drawString(power,
-                this.xSize / 2 - this.fontRenderer.getStringWidth(power) / 2,
+        this.fontRendererObj.drawString(power,
+                this.xSize / 2 - this.fontRendererObj.getStringWidth(power) / 2,
                 this.ySize * 4 / 5,
                 FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
     }
@@ -125,12 +124,12 @@ public class GuiMagnetohydrodynamicGenerator extends GuiContainer {
     private void renderTank(IFluidTank tank, int x, int y, int k, int l) {
         FluidStack fluid = tank.getFluid();
         if (fluid != null) {
-            Icon image = fluid.getFluid().getStillIcon();
+            IIcon image = fluid.getFluid().getStillIcon();
 
             int i1 = (fluid.amount * 120)
-                    / tank.getCapacity();
+                     / tank.getCapacity();
             RenderUtils.renderLiquidInGUI(this, this.zLevel, image, k + x, l
-                    + y + (120 - i1), 16, i1);
+                                                                           + y + (120 - i1), 16, i1);
 
             // Rebind texture
             Minecraft.getMinecraft().getTextureManager().bindTexture(texture);

@@ -30,7 +30,7 @@ import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Random;
 
@@ -117,8 +117,7 @@ public class TileEntityMagneticInductionGenerator extends TileEntityPowerProduce
 
     private int magStrengthOfNeighborForDir(int i) {
         ForgeDirection dir = ForgeDirection.getOrientation(i);
-        Block block = Block.blocksList[worldObj.getBlockId(
-                xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ)];
+        Block block = worldObj.getBlock(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
         return MagnetRegistry.isMagnet(block) ? MagnetRegistry.getMagnetStrength(block) : 0;
     }
 

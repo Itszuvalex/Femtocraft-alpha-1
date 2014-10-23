@@ -4,6 +4,8 @@ import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -38,7 +40,7 @@ public class MagnetRegistry {
     public static int INGOT_IRON = 5;
 
 
-    private static Map<Integer, Integer> idToStrengthMap = new TreeMap<Integer, Integer>();
+    private static Map<Integer, Integer> idToStrengthMap = new TreeMap<>();
 
     public static void init() {
         registerMagnetDefaults();
@@ -71,8 +73,8 @@ public class MagnetRegistry {
     }
 
     private static void registerMagnetDefaults() {
-        registerMagnet(Block.oreIron, ORE_IRON);
-        registerMagnet(Item.ingotIron, INGOT_IRON);
+        registerMagnet(Blocks.iron_ore, ORE_IRON);
+        registerMagnet(Items.iron_ingot, INGOT_IRON);
         registerMagnet(Femtocraft.blockOreLodestone(), ORE_LODESTONE);
         registerMagnet(Femtocraft.itemNuggetLodestone(), NUGGET_LODESTONE);
         registerMagnet(Femtocraft.itemChunkLodestone(), CHUNK_LODESTONE);
@@ -87,11 +89,11 @@ public class MagnetRegistry {
     }
 
     public static boolean registerMagnet(Item item, int strength) {
-        return item != null && registerMagnet(item.itemID, strength);
+        return item != null && registerMagnet(Item.getIdFromItem(item), strength);
     }
 
     public static boolean registerMagnet(ItemStack item, int strength) {
-        return item != null && registerMagnet(item.itemID, strength);
+        return item != null && registerMagnet(Item.getIdFromItem(item.getItem()), strength);
     }
 
     public static int getMagnetStrength(Block block) {
@@ -99,7 +101,7 @@ public class MagnetRegistry {
     }
 
     public static int getMagnetStrength(Item item) {
-        return item == null ? 0 : getMagnetStrength(item.itemID);
+        return item == null ? 0 : getMagnetStrength(Item.getIdFromItem(item));
     }
 
     public static int getMagnetStrength(int id) {
@@ -107,7 +109,7 @@ public class MagnetRegistry {
     }
 
     public static int getMagnetStrength(ItemStack item) {
-        return item == null ? 0 : getMagnetStrength(item.itemID);
+        return item == null ? 0 : getMagnetStrength(Item.getIdFromItem(item.getItem()));
     }
 
     public static boolean isMagnet(Block block) {
@@ -119,10 +121,10 @@ public class MagnetRegistry {
     }
 
     public static boolean isMagnet(Item item) {
-        return item != null && isMagnet(item.itemID);
+        return item != null && isMagnet(Item.getIdFromItem(item));
     }
 
     public static boolean isMagnet(ItemStack item) {
-        return item != null && isMagnet(item.itemID);
+        return item != null && isMagnet(Item.getIdFromItem(item.getItem()));
     }
 }

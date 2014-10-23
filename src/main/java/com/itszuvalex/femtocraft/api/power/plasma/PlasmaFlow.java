@@ -19,9 +19,10 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.power.plasma;
+package com.itszuvalex.femtocraft.api.power.plasma;
 
-import com.itszuvalex.femtocraft.power.plasma.volatility.IVolatilityEvent;
+import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
+import com.itszuvalex.femtocraft.power.plasma.FemtocraftPlasmaUtils;
 import com.itszuvalex.femtocraft.power.plasma.volatility.VolatilityEventMagneticFluctuation;
 import com.itszuvalex.femtocraft.power.plasma.volatility.VolatilityEventPlasmaLeak;
 import com.itszuvalex.femtocraft.power.plasma.volatility.VolatilityEventTemperatureSpike;

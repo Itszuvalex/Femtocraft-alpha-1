@@ -41,7 +41,7 @@ public class ManagerCrafting {
     /**
      * A map containing all lists of all the recipes added
      */
-    private Map recipeListMap = new HashMap<String, List>();
+    private Map recipeListMap = new HashMap<>();
 
     private ManagerCrafting() {
 
@@ -86,8 +86,7 @@ public class ManagerCrafting {
                 j = s1.length();
                 s = s + s1;
             }
-        }
-        else {
+        } else {
             while (par2ArrayOfObj[i] instanceof String) {
                 String s2 = (String) par2ArrayOfObj[i++];
                 ++k;
@@ -104,12 +103,10 @@ public class ManagerCrafting {
 
             if (par2ArrayOfObj[i + 1] instanceof Item) {
                 itemstack1 = new ItemStack((Item) par2ArrayOfObj[i + 1]);
-            }
-            else if (par2ArrayOfObj[i + 1] instanceof Block) {
+            } else if (par2ArrayOfObj[i + 1] instanceof Block) {
                 itemstack1 = new ItemStack((Block) par2ArrayOfObj[i + 1], 1,
                         32767);
-            }
-            else if (par2ArrayOfObj[i + 1] instanceof ItemStack) {
+            } else if (par2ArrayOfObj[i + 1] instanceof ItemStack) {
                 itemstack1 = (ItemStack) par2ArrayOfObj[i + 1];
             }
 
@@ -124,8 +121,7 @@ public class ManagerCrafting {
             if (hashmap.containsKey(Character.valueOf(c0))) {
                 aitemstack[i1] = ((ItemStack) hashmap
                         .get(Character.valueOf(c0))).copy();
-            }
-            else {
+            } else {
                 aitemstack[i1] = null;
             }
         }
@@ -156,11 +152,9 @@ public class ManagerCrafting {
         for (Object object1 : par2ArrayOfObj) {
             if (object1 instanceof ItemStack) {
                 arraylist.add(((ItemStack) object1).copy());
-            }
-            else if (object1 instanceof Item) {
+            } else if (object1 instanceof Item) {
                 arraylist.add(new ItemStack((Item) object1));
-            }
-            else {
+            } else {
                 if (!(object1 instanceof Block)) {
                     throw new RuntimeException("Invalid shapeless recipy!");
                 }
@@ -209,10 +203,10 @@ public class ManagerCrafting {
             }
         }
 
-        if (i == 2 && itemstack.itemID == itemstack1.itemID
-                && itemstack.stackSize == 1 && itemstack1.stackSize == 1
-                && Item.itemsList[itemstack.itemID].isRepairable()) {
-            Item item = Item.itemsList[itemstack.itemID];
+        if (i == 2 && itemstack.getItem() == (itemstack1 != null ? itemstack1.getItem() : null)
+            && itemstack.stackSize == 1 && (itemstack1 != null ? itemstack1.stackSize : 0) == 1
+            && itemstack.getItem().isRepairable()) {
+            Item item = itemstack.getItem();
             int k = item.getMaxDamage() - itemstack.getItemDamageForDisplay();
             int l = item.getMaxDamage() - itemstack1.getItemDamageForDisplay();
             int i1 = k + l + item.getMaxDamage() * 5 / 100;
@@ -222,9 +216,8 @@ public class ManagerCrafting {
                 j1 = 0;
             }
 
-            return new ItemStack(itemstack.itemID, 1, j1);
-        }
-        else {
+            return new ItemStack(itemstack.getItem(), 1, j1);
+        } else {
             for (j = 0; j < ((ArrayList) this.recipeListMap.get(recipeListKey))
                     .size(); ++j) {
                 IRecipe irecipe = (IRecipe) ((ArrayList) this.recipeListMap

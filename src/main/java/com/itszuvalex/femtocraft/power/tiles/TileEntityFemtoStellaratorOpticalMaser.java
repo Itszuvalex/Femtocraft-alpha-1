@@ -24,17 +24,17 @@ package com.itszuvalex.femtocraft.power.tiles;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.api.power.PowerContainer;
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorComponent;
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
+import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
-import com.itszuvalex.femtocraft.power.plasma.IFusionReactorComponent;
-import com.itszuvalex.femtocraft.power.plasma.IFusionReactorCore;
-import com.itszuvalex.femtocraft.power.plasma.IPlasmaContainer;
-import com.itszuvalex.femtocraft.power.plasma.IPlasmaFlow;
-import com.itszuvalex.femtocraft.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import com.itszuvalex.femtocraft.utils.WorldLocation;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Collection;
 

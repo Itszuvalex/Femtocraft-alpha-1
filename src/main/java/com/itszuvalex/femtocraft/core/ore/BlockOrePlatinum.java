@@ -25,24 +25,24 @@ import com.itszuvalex.femtocraft.Femtocraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 
 public class BlockOrePlatinum extends BlockOreBase {
 
-    public BlockOrePlatinum(int id) {
-        super(id);
+    public BlockOrePlatinum() {
+        super();
         this.setCreativeTab(Femtocraft.femtocraftTab());
-        setTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockOrePlatinum");
-        setUnlocalizedName("BlockOrePlatinum");
+        setBlockTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockOrePlatinum");
+        setBlockName("BlockOrePlatinum");
         setHardness(3.0f);
-        setStepSound(Block.soundStoneFootstep);
+        setStepSound(Block.soundTypeStone);
         setResistance(1f);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                 .toLowerCase() + ":" + "BlockOrePlatinum");
+                                                               .toLowerCase() + ":" + "BlockOrePlatinum");
     }
 }

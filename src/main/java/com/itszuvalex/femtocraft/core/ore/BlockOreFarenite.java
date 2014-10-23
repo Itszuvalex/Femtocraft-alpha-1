@@ -26,7 +26,8 @@ import com.itszuvalex.femtocraft.configuration.Configurable;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.Item;
 
 import java.util.Random;
 
@@ -37,26 +38,26 @@ public class BlockOreFarenite extends BlockOreBase {
     @Configurable(comment = "Minimum amount of Farenite dust to drop.")
     public static int DROP_AMOUNT_MIN = 4;
 
-    public BlockOreFarenite(int id) {
-        super(id);
+    public BlockOreFarenite() {
+        super();
         setCreativeTab(Femtocraft.femtocraftTab());
-        setTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockOreFarenite");
-        setUnlocalizedName("BlockOreFarenite");
+        setBlockTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockOreFarenite");
+        setBlockName("BlockOreFarenite");
         setHardness(3.0f);
-        setStepSound(Block.soundStoneFootstep);
+        setStepSound(Block.soundTypeStone);
         setResistance(1f);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID()
                                                                .toLowerCase() + ":" + "BlockOreFarenite");
     }
 
     @Override
-    public int idDropped(int par1, Random random, int par2) {
-        return Femtocraft.itemIngotFarenite().itemID;
+    public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
+        return Femtocraft.itemIngotFarenite();
     }
 
     @Override

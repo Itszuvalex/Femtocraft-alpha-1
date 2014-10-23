@@ -1,25 +1,19 @@
 package com.itszuvalex.femtocraft
 
-import com.itszuvalex.femtocraft.sound.FemtocraftSoundManager
-import cpw.mods.fml.common.IPlayerTracker
-import cpw.mods.fml.common.network.{PacketDispatcher, Player}
-import net.minecraft.entity.player.EntityPlayer
+import cpw.mods.fml.common.eventhandler.SubscribeEvent
+import cpw.mods.fml.common.gameevent.PlayerEvent.{PlayerChangedDimensionEvent, PlayerLoggedOutEvent}
 
 /**
  * Created by Chris on 9/3/2014.
  */
-class FemtocraftPlayerTracker extends IPlayerTracker {
-  def onPlayerLogin(player: EntityPlayer) {
-  }
+class FemtocraftPlayerTracker {
 
-  def onPlayerLogout(player: EntityPlayer) {
-  }
+  @SubscribeEvent
+  def onPlayerLogout(event: PlayerLoggedOutEvent) = if (Femtocraft.soundManager != null) Femtocraft.soundManager.stopAllSounds()
 
-  def onPlayerChangedDimension(player: EntityPlayer) {
-    PacketDispatcher.sendPacketToPlayer(Femtocraft.soundManager.getPacket(FemtocraftSoundManager.SoundAction.STOP_ALL_SOUNDS), player.asInstanceOf[Player])
-  }
+  @SubscribeEvent
+  def onPlayerChangedDimension(event: PlayerChangedDimensionEvent) = if (Femtocraft.soundManager != null) Femtocraft.soundManager.stopAllSounds()
 
-  def onPlayerRespawn(player: EntityPlayer) {
-  }
+
 }
 

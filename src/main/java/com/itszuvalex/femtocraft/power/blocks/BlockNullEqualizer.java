@@ -27,28 +27,28 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class BlockNullEqualizer extends BlockPowerContainer {
-    public BlockNullEqualizer(int par1) {
-        super(par1, Material.iron);
+    public BlockNullEqualizer() {
+        super(Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab());
-        setUnlocalizedName("BlockNullEqualizer");
+        setBlockName("BlockNullEqualizer");
         setHardness(1.0f);
-        setStepSound(Block.soundStoneFootstep);
+        setStepSound(Block.soundTypeMetal);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "BlockNullEqualizer");
+                                                       + ":" + "BlockNullEqualizer");
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityNullEqualizer();
     }
 }

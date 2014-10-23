@@ -1,6 +1,7 @@
 package com.itszuvalex.femtocraft.power;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
 /**
@@ -14,14 +15,14 @@ public class CryogenPassiveHandler implements ICryogenHandler {
 
     @Override
     public boolean canHandleBlock(World world, int x, int y, int z) {
-        int id = world.getBlockId(x, y, z);
-        return id == Block.ice.blockID || id == Block.blockSnow.blockID;
+        Block block = world.getBlock(x, y, z);
+        return block == Blocks.ice || block == Blocks.snow;
     }
 
     @Override
     public float powerForBlock(World world, int x, int y, int z) {
-        int id = world.getBlockId(x, y, z);
-        return id == Block.ice.blockID ? powerPerTickForIce : id == Block.blockSnow.blockID ? powerPerTickForSnow : 0;
+        Block block = world.getBlock(x, y, z);
+        return block == Blocks.ice ? powerPerTickForIce : block == Blocks.snow ? powerPerTickForSnow : 0;
     }
 
     @Override

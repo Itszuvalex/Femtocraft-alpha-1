@@ -23,30 +23,28 @@ package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorComponent;
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
+import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
-import com.itszuvalex.femtocraft.power.plasma.IFusionReactorComponent;
-import com.itszuvalex.femtocraft.power.plasma.IFusionReactorCore;
-import com.itszuvalex.femtocraft.power.plasma.IPlasmaContainer;
-import com.itszuvalex.femtocraft.power.plasma.IPlasmaFlow;
-import com.itszuvalex.femtocraft.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import com.itszuvalex.femtocraft.utils.WorldLocation;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Collection;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/10/14.
  * <p/>
- * This assumes the IFusionReactorCore is the MultiBlock controller.
- * When the multiblock is formed/broken, it sets the IFusionCore reference
- * from the controller location.
+ * This assumes the IFusionReactorCore is the MultiBlock controller. When the multiblock is formed/broken, it sets the
+ * IFusionCore reference from the controller location.
  * <p/>
- * If the core isn't loaded yet when this loads, it sets an internal flag.
- * In the FemtocraftServerUpdate function, it queries the saved coreLocation
- * and attempts to set up the core reference again.
+ * If the core isn't loaded yet when this loads, it sets an internal flag. In the FemtocraftServerUpdate function, it
+ * queries the saved coreLocation and attempts to set up the core reference again.
  */
 public class TileEntityFemtoStellaratorHousing extends TileEntityBase
         implements IFusionReactorComponent, IMultiBlockComponent {

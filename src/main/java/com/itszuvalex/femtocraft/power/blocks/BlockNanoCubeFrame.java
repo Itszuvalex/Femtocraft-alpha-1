@@ -22,37 +22,38 @@
 package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockNanoCube;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoCubeFrame;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockNanoCubeFrame extends TileContainer {
-    public Icon formedCorners[];
-    public Icon formedSides[];
+    public IIcon formedCorners[];
+    public IIcon formedSides[];
 
-    public BlockNanoCubeFrame(int par1) {
-        super(par1, Material.iron);
+    public BlockNanoCubeFrame() {
+        super(Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab());
-        setUnlocalizedName("BlockNanoCubeFrame");
-        formedCorners = new Icon[4];
-        formedSides = new Icon[4];
+        setBlockName("BlockNanoCubeFrame");
+        formedCorners = new IIcon[4];
+        formedSides = new IIcon[4];
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int par2,
-                                int par3, int par4, int par5) {
-        TileEntity te = par1iBlockAccess.getBlockTileEntity(par2, par3, par4);
+    public IIcon getIcon(IBlockAccess par1iBlockAccess, int par2,
+                         int par3, int par4, int par5) {
+        TileEntity te = par1iBlockAccess.getTileEntity(par2, par3, par4);
         if (te instanceof TileEntityNanoCubeFrame) {
             TileEntityNanoCubeFrame frame = (TileEntityNanoCubeFrame) te;
             if (frame.isValidMultiBlock()) {
@@ -61,11 +62,11 @@ public class BlockNanoCubeFrame extends TileContainer {
                 return iconForSide(info, dir, par2, par3, par4);
             }
         }
-        return super.getBlockTexture(par1iBlockAccess, par2, par3, par4, par5);
+        return super.getIcon(par1iBlockAccess, par2, par3, par4, par5);
     }
 
-    private Icon iconForSide(MultiBlockInfo info, ForgeDirection dir, int x,
-                             int y, int z) {
+    private IIcon iconForSide(MultiBlockInfo info, ForgeDirection dir, int x,
+                              int y, int z) {
         int xdif = x - info.x();
         int ydif = y - info.y() - 1;
         int zdif = z - info.z();
@@ -88,7 +89,7 @@ public class BlockNanoCubeFrame extends TileContainer {
         }
     }
 
-    private Icon iconFromGrid(int xdif, int ydif) {
+    private IIcon iconFromGrid(int xdif, int ydif) {
         if (xdif == -1) {
             if (ydif == -1) {
                 return formedCorners[2];
@@ -140,38 +141,32 @@ public class BlockNanoCubeFrame extends TileContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
-        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "BlockNanoCubeFrame_unformed");
-
-        formedCorners[0] = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                   .toLowerCase() + ":" + "BlockNanoCubeFrame_top_left");
-        formedCorners[1] = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                   .toLowerCase() + ":" + "BlockNanoCubeFrame_top_right");
-        formedCorners[2] = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                   .toLowerCase() + ":" + "BlockNanoCubeFrame_bot_left");
-        formedCorners[3] = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                   .toLowerCase() + ":" + "BlockNanoCubeFrame_bot_right");
-
-        formedSides[0] = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                 .toLowerCase() + ":" + "BlockNanoCubeFrame_top");
-        formedSides[1] = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                 .toLowerCase() + ":" + "BlockNanoCubeFrame_bot");
-        formedSides[2] = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                 .toLowerCase() + ":" + "BlockNanoCubeFrame_right");
-        formedSides[3] = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                 .toLowerCase() + ":" + "BlockNanoCubeFrame_left");
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
+        blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "BlockNanoCubeFrame_unformed");
+        formedCorners[0] = par1IconRegister.registerIcon(
+                Femtocraft.ID().toLowerCase() + ":" + "BlockNanoCubeFrame_top_left");
+        formedCorners[1] = par1IconRegister.registerIcon(
+                Femtocraft.ID().toLowerCase() + ":" + "BlockNanoCubeFrame_top_right");
+        formedCorners[2] = par1IconRegister.registerIcon(
+                Femtocraft.ID().toLowerCase() + ":" + "BlockNanoCubeFrame_bot_left");
+        formedCorners[3] = par1IconRegister.registerIcon(
+                Femtocraft.ID().toLowerCase() + ":" + "BlockNanoCubeFrame_bot_right");
+        formedSides[0] = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "BlockNanoCubeFrame_top");
+        formedSides[1] = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "BlockNanoCubeFrame_bot");
+        formedSides[2] = par1IconRegister.registerIcon(
+                Femtocraft.ID().toLowerCase() + ":" + "BlockNanoCubeFrame_right");
+        formedSides[3] = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "BlockNanoCubeFrame_left");
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityNanoCubeFrame();
     }
 
     @Override
     public void breakBlock(World par1World, int par2, int par3, int par4,
-                           int par5, int par6) {
-        TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+                           Block par5, int par6) {
+        TileEntity te = par1World.getTileEntity(par2, par3, par4);
         if (te instanceof TileEntityNanoCubeFrame) {
             MultiBlockInfo info = ((TileEntityNanoCubeFrame) te).getInfo();
             MultiBlockNanoCube.instance.breakMultiBlock(par1World, info.x(),

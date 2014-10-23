@@ -29,11 +29,12 @@ import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.implicits.ItemStackImplicits._
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel
 import net.minecraft.item.ItemStack
-import net.minecraftforge.common.Configuration
+import net.minecraftforge.common.config.Configuration
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
+import scala.reflect.runtime._
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 9/10/14.
@@ -73,15 +74,35 @@ object FemtocraftConfigHelper {
 
   def unescapeCategorySplitter(string: String) = string.replace(CATEGORY_SPLITTER_REPLACEMENT, CATEGORY_SPLITTER_CHAR)
 
-  def loadClassFromConfig(configuration: Configuration, section: String, key: String, clazz: Class[_]) = loadClassInstanceFromConfig(configuration, section, key, clazz, null)
+  def loadClassFromConfig(configuration: Configuration, section: String, key: String, clazz: Class[_]) = {
+    var inst: AnyRef = null
+    try {
+      val rootMirror = universe.runtimeMirror(getClass.getClassLoader)
+      val classSymbol = rootMirror.classSymbol(clazz)
+      val moduleSymbol = classSymbol.companionSymbol.asModule
+      val moduleMirror = rootMirror.reflectModule(moduleSymbol)
+
+      if (moduleSymbol.annotations.exists(a => a.isInstanceOf[Configurable])) {
+        inst = moduleMirror.instance.asInstanceOf[clazz.type]
+      }
+    }
+    catch {
+      case e: Exception         =>
+        inst = null
+      case e: NoSuchMethodError =>
+        inst = null
+    }
+
+    loadClassInstanceFromConfig(configuration, section, key, clazz, inst)
+  }
 
   def loadClassInstanceFromConfig(configuration: Configuration, section: String, key: String, clazz: Class[_], obj: AnyRef) {
     val fieldsList = new ArrayBuffer[Field]
-    fieldsList ++= clazz.getFields
+    fieldsList appendAll clazz.getFields
     if (obj != null) {
       var superclass = clazz.getSuperclass
       while (superclass != null) {
-        fieldsList ++= superclass.getFields
+        fieldsList appendAll superclass.getFields
         superclass = superclass.getSuperclass
       }
     }

@@ -25,21 +25,21 @@ import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 
 public class ItemMicroInterfaceDevice extends InterfaceDevice {
 
-    public ItemMicroInterfaceDevice(int par1) {
-        super(par1, EnumTechLevel.MICRO);
+    public ItemMicroInterfaceDevice() {
+        super(EnumTechLevel.MICRO);
         setMaxStackSize(1);
         setCreativeTab(Femtocraft.femtocraftTab());
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerIcons(IIconRegister par1IconRegister) {
         this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                .toLowerCase() + ":" + "ItemMicroInterfaceDevice");
+                                                              .toLowerCase() + ":" + "ItemMicroInterfaceDevice");
     }
 
 }

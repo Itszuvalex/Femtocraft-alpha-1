@@ -24,6 +24,7 @@ package com.itszuvalex.femtocraft.models;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
@@ -32,7 +33,7 @@ public class ModelOrbitalEqualizer extends ModelBase {
     private IModelCustom test;
 
     public ModelOrbitalEqualizer() {
-        test = AdvancedModelLoader.loadModel("/assets/femtocraft/models/orbitalEqualizer.obj");
+        test = AdvancedModelLoader.loadModel(new ResourceLocation("femtocraft", "/models/orbitalEqualizer.obj"));
     }
 
     public void render() {

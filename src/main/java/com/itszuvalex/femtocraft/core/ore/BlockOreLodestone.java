@@ -30,9 +30,10 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -46,32 +47,37 @@ public class BlockOreLodestone extends TileContainer {
     @Configurable(comment = "Minimum amount of Lodestone nuggets to drop.")
     public static int DROP_AMOUNT_MIN = 2;
     @Configurable(comment = "Set to false to prevent tile entity ticks, and prevent Magnetism from pulling items from" +
-            " your inventory.")
+                            " your inventory.")
     public static boolean MAGNETIC = true;
     @Configurable(comment = "Set to false to prevent the ore from automatically pulling magnetic items from the hands" +
-            " of players who left click this block.")
+                            " of players who left click this block.")
     public static boolean PULL_MAGNETS_FROM_HAND = true;
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
         return new TileEntityOreLodestone();
     }
 
-    public BlockOreLodestone(int id) {
-        super(id, Material.rock);
+    public BlockOreLodestone() {
+        super(Material.rock);
         setCreativeTab(Femtocraft.femtocraftTab());
-        setTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockOreLodestone");
-        setUnlocalizedName("BlockOreLodestone");
+        setBlockTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockOreLodestone");
+        setBlockName("BlockOreLodestone");
         setHardness(3.0f);
-        setStepSound(Block.soundStoneFootstep);
+        setStepSound(Block.soundTypeStone);
         setResistance(1f);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                 .toLowerCase() + ":" + "BlockOreLodestone");
+                                                               .toLowerCase() + ":" + "BlockOreLodestone");
+    }
+
+    @Override
+    public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
+        return Femtocraft.itemNuggetLodestone();
     }
 
     @Override
@@ -86,10 +92,6 @@ public class BlockOreLodestone extends TileContainer {
         }
     }
 
-    @Override
-    public int idDropped(int par1, Random random, int par2) {
-        return Femtocraft.itemNuggetLodestone().itemID;
-    }
 
     @Override
     public int quantityDropped(Random random) {

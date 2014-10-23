@@ -24,7 +24,7 @@ package com.itszuvalex.femtocraft.transport.items.tiles;
 import com.itszuvalex.femtocraft.api.transport.IVacuumTube;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 6/8/14.

@@ -21,6 +21,10 @@
 
 package com.itszuvalex.femtocraft.power.plasma;
 
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReaction;
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
+import com.itszuvalex.femtocraft.api.power.plasma.PlasmaFlow;
 import com.itszuvalex.femtocraft.power.plasma.volatility.VolatilityEventMagneticFluctuation;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import com.itszuvalex.femtocraft.utils.ISaveable;

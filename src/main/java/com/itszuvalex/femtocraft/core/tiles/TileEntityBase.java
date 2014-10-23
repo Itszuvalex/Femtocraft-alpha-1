@@ -28,9 +28,9 @@ import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 
@@ -84,7 +84,7 @@ public class TileEntityBase extends TileEntity {
 
     public boolean shouldTick() {
         return !FemtocraftConfigs.requirePlayersOnlineForTileEntityTicks
-                || FemtocraftUtils.isPlayerOnline(owner);
+               || FemtocraftUtils.isPlayerOnline(owner);
     }
 
     /**
@@ -103,7 +103,7 @@ public class TileEntityBase extends TileEntity {
 
         NBTTagCompound compound = new NBTTagCompound();
         saveToDescriptionCompound(compound);
-        return new Packet132TileEntityData(xCoord, yCoord, zCoord, 1, compound);
+        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, compound);
     }
 
     public boolean hasDescription() {
@@ -116,19 +116,14 @@ public class TileEntityBase extends TileEntity {
     }
 
     @Override
-    public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
         super.onDataPacket(net, pkt);
-
-        handleDescriptionNBT(pkt.data);
+        handleDescriptionNBT(pkt.func_148857_g());
     }
 
     public void handleDescriptionNBT(NBTTagCompound compound) {
         FemtocraftDataUtils.loadObjectFromNBT(compound, this,
                 FemtocraftDataUtils.EnumSaveType.DESCRIPTION);
-    }
-
-    public String getPacketChannel() {
-        return Femtocraft.ID();
     }
 
     public void loadInfoFromItemNBT(NBTTagCompound compound) {
@@ -156,32 +151,15 @@ public class TileEntityBase extends TileEntity {
         return false;
     }
 
-//    public boolean canPlayerUse(EntityPlayer par1EntityPlayer) {
-//        boolean inRange = this.worldObj.getBlockTileEntity(this.xCoord,
-//                this.yCoord, this.zCoord) == this
-//                          && par1EntityPlayer.getDistanceSq((double) this.xCoord + 0.5D,
-//                (double) this.yCoord + 0.5D,
-//                (double) this.zCoord + 0.5D) <= 64.0D;
-//        boolean isOwner = owner == null || owner.isEmpty()
-//                          || (owner.equals(par1EntityPlayer.username));
-//        boolean isAssist = (owner != null && !owner.isEmpty())
-//                           && Femtocraft.assistantManager().isPlayerAssistant(owner, par1EntityPlayer.username);
-//        boolean isOp = ((MinecraftServer.getServer() != null && MinecraftServer.getServer()
-//                .getConfigurationManager()
-//                .isPlayerOpped(par1EntityPlayer.username)) ||
-//                        par1EntityPlayer.capabilities.isCreativeMode);
-//        return inRange
-//               && (isOwner || isAssist || isOp);
-//    }
 
     public boolean canPlayerUse(EntityPlayer player) {
         return player != null
-                && (getOwner() == null
-                || getOwner().equals(player.username) ||
-                Femtocraft.assistantManager().isPlayerAssistant(getOwner(), player.username)
-                || (MinecraftServer.getServer() != null && MinecraftServer.getServer()
-                                                                          .getConfigurationManager()
-                                                                          .isPlayerOpped(player.username)) || player.capabilities.isCreativeMode);
+               && (getOwner() == null
+                   || getOwner().equals(player.getCommandSenderName()) ||
+                   Femtocraft.assistantManager().isPlayerAssistant(getOwner(), player.getCommandSenderName())
+                   || (MinecraftServer.getServer() != null &&
+                       MinecraftServer.getServer().getConfigurationManager().func_152596_g(player.getGameProfile())) ||
+                   player.capabilities.isCreativeMode);
     }
 
     public Object getMod() {
@@ -197,7 +175,7 @@ public class TileEntityBase extends TileEntity {
 
     protected void setRenderUpdate() {
         if (worldObj != null) {
-            worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+            worldObj.markBlockRangeForRenderUpdate(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
         }
     }
 
@@ -209,7 +187,11 @@ public class TileEntityBase extends TileEntity {
 
     protected void setModified() {
         if (worldObj != null) {
-            worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this);
+            this.markDirty();
         }
+    }
+
+    public void onInventoryChanged() {
+        this.setModified();
     }
 }

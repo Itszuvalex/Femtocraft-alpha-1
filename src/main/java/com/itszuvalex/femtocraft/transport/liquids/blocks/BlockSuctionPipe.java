@@ -28,27 +28,27 @@ import com.itszuvalex.femtocraft.transport.liquids.tiles.TileEntitySuctionPipe;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.List;
 
 public class BlockSuctionPipe extends TileContainer {
-    public Icon center;
-    public Icon center_blackout;
-    public Icon connector;
-    public Icon connector_blackout;
-    public Icon connector_tank;
+    public IIcon center;
+    public IIcon center_blackout;
+    public IIcon connector;
+    public IIcon connector_blackout;
+    public IIcon connector_tank;
 
-    public BlockSuctionPipe(int par1) {
-        super(par1, Material.iron);
-        setUnlocalizedName("BlockSuctionPipe");
+    public BlockSuctionPipe() {
+        super(Material.iron);
+        setBlockName("BlockSuctionPipe");
         setCreativeTab(Femtocraft.femtocraftTab());
     }
 
@@ -69,7 +69,7 @@ public class BlockSuctionPipe extends TileContainer {
         super.addCollisionBoxesToList(par1World, x, y, z, par5AxisAlignedBB,
                 par6List, par7Entity);
 
-        TileEntity tile = par1World.getBlockTileEntity(x, y, z);
+        TileEntity tile = par1World.getTileEntity(x, y, z);
         if (!(tile instanceof TileEntitySuctionPipe)) {
             return;
         }
@@ -119,7 +119,7 @@ public class BlockSuctionPipe extends TileContainer {
                 break;
         }
 
-        return AxisAlignedBB.getAABBPool().getAABB((double) x + minX,
+        return AxisAlignedBB.getBoundingBox((double) x + minX,
                 (double) y + minY, (double) z + minZ, (double) x + maxX,
                 (double) y + maxY, (double) z + maxZ);
     }
@@ -128,12 +128,12 @@ public class BlockSuctionPipe extends TileContainer {
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int x,
                                                         int y, int z) {
-        AxisAlignedBB box = AxisAlignedBB.getAABBPool().getAABB(
+        AxisAlignedBB box = AxisAlignedBB.getBoundingBox(
                 (double) x + 6.f / 16.f, (double) y + 6.f / 16.f,
                 (double) z + 6.f / 16.f, (double) x + 10.f / 16.f,
                 (double) y + 10.f / 16.f, (double) z + 10.f / 16.f);
 
-        TileEntity tile = par1World.getBlockTileEntity(x, y, z);
+        TileEntity tile = par1World.getTileEntity(x, y, z);
         if (tile == null) {
             return box;
         }
@@ -157,7 +157,7 @@ public class BlockSuctionPipe extends TileContainer {
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
                                                          int x, int y, int z) {
-        return AxisAlignedBB.getAABBPool().getAABB((double) x + 6.f / 16.f,
+        return AxisAlignedBB.getBoundingBox((double) x + 6.f / 16.f,
                 (double) y + 6.f / 16.f, (double) z + 6.f / 16.f,
                 (double) x + 10.f / 16.f, (double) y + 10.f / 16.f,
                 (double) z + 10.f / 16.f);
@@ -171,12 +171,12 @@ public class BlockSuctionPipe extends TileContainer {
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess,
                                            int x, int y, int z) {
-        AxisAlignedBB box = AxisAlignedBB.getAABBPool().getAABB(
+        AxisAlignedBB box = AxisAlignedBB.getBoundingBox(
                 (double) x + 6.d / 16.d, (double) y + 6.d / 16.d,
                 (double) z + 6.d / 16.d, (double) x + 10.d / 16.d,
                 (double) y + 10.d / 16.d, (double) z + 10.d / 16.d);
 
-        TileEntity tile = par1iBlockAccess.getBlockTileEntity(x, y, z);
+        TileEntity tile = par1iBlockAccess.getTileEntity(x, y, z);
         if (tile == null) {
             setBlockBounds((float) box.minX, (float) box.minY,
                     (float) box.minZ, (float) box.maxX, (float) box.maxY,
@@ -233,21 +233,22 @@ public class BlockSuctionPipe extends TileContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         center = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "BlockSuctionPipe_center");
+                                               + ":" + "BlockSuctionPipe_center");
         center_blackout = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "BlockSuctionPipe_center_blackout");
+                                                        + ":" + "BlockSuctionPipe_center_blackout");
         connector = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "BlockSuctionPipe_connector");
+                                                  + ":" + "BlockSuctionPipe_connector");
         connector_blackout = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "BlockSuctionPipe_connector_blackout");
+                                                           + ":" + "BlockSuctionPipe_connector_blackout");
         connector_tank = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                 .toLowerCase() + ":" + "BlockSuctionPipe_connector_tank");
+                                                               .toLowerCase() + ":" +
+                                                       "BlockSuctionPipe_connector_tank");
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntitySuctionPipe();
     }
 

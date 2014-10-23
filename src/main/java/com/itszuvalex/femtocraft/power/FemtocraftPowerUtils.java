@@ -24,7 +24,7 @@ package com.itszuvalex.femtocraft.power;
 import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Arrays;
 
@@ -73,7 +73,7 @@ public class FemtocraftPowerUtils {
 
             if (world.getChunkProvider().chunkExists((x + dir.offsetX) >> 4,
                     (z + dir.offsetZ) >> 4)) {
-                TileEntity te = world.getBlockTileEntity(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
+                TileEntity te = world.getTileEntity(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
                 if (te instanceof IPowerBlockContainer) {
                     cons[i] = (IPowerBlockContainer) te;
                     ++numConnections;

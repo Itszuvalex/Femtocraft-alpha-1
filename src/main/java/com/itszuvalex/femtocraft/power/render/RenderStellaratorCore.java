@@ -30,7 +30,7 @@ import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
@@ -76,7 +76,7 @@ public class RenderStellaratorCore implements ISimpleBlockRenderingHandler {
     private void createCore(BlockFemtoStellaratorCore core) {
         coreModel = new RenderModel();
 
-        Icon icon = core.outsideIcon;
+        IIcon icon = core.outsideIcon;
         float minU = icon.getMinU();
         float maxU = icon.getMaxU();
         float minV = icon.getMinV();
@@ -164,7 +164,8 @@ public class RenderStellaratorCore implements ISimpleBlockRenderingHandler {
     }
 
     @java.lang.Override
-    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
+                                    RenderBlocks renderer) {
         BlockFemtoStellaratorCore core = (BlockFemtoStellaratorCore)
                 block;
         if (core == null) {
@@ -181,7 +182,7 @@ public class RenderStellaratorCore implements ISimpleBlockRenderingHandler {
     }
 
     @java.lang.Override
-    public boolean shouldRender3DInInventory() {
+    public boolean shouldRender3DInInventory(int modelID) {
         return true;
     }
 

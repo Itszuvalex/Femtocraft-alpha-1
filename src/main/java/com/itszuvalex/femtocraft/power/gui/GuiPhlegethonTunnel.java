@@ -22,11 +22,12 @@
 package com.itszuvalex.femtocraft.power.gui;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.core.gui.GuiBase;
 import com.itszuvalex.femtocraft.power.containers.ContainerPhlegethonTunnel;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityPhlegethonTunnelCore;
+import com.itszuvalex.femtocraft.sound.FemtocraftSoundUtils;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.EnumChatFormatting;
@@ -34,7 +35,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
-public class GuiPhlegethonTunnel extends GuiContainer {
+public class GuiPhlegethonTunnel extends GuiBase {
 
     public static final ResourceLocation texture = new ResourceLocation(
             Femtocraft.ID().toLowerCase(), "textures/guis/PhlegethonTunnel.png");
@@ -64,8 +65,7 @@ public class GuiPhlegethonTunnel extends GuiContainer {
                 && (par1 <= (k + activateButtonX + activateButtonWidth))
                 && (par2 >= (l + activateButtonY))
                 && (par2 <= (l + activateButtonY + activateButtonHeight))) {
-                Minecraft.getMinecraft().sndManager.playSoundFX("random.click",
-                        1.0F, 1.0F);
+                FemtocraftSoundUtils.playClickSound();
                 tunnel.onActivateClick();
             }
 
@@ -74,8 +74,7 @@ public class GuiPhlegethonTunnel extends GuiContainer {
                 && (par1 <= (k + deactivateButtonX + deactivateButtonWidth))
                 && (par2 >= (l + deactivateButtonY))
                 && (par2 <= (l + deactivateButtonY + deactivateButtonHeight))) {
-                Minecraft.getMinecraft().sndManager.playSoundFX("random.click",
-                        1.0F, 1.0F);
+                FemtocraftSoundUtils.playClickSound();
                 tunnel.onDeactivateClick();
             }
 
@@ -128,20 +127,20 @@ public class GuiPhlegethonTunnel extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         String s = "Phlegethon               Tunnel";
-        this.fontRenderer.drawString(s,
-                (xSize - this.fontRenderer.getStringWidth(s)) / 2, 6,
+        this.fontRendererObj.drawString(s,
+                (xSize - this.fontRendererObj.getStringWidth(s)) / 2, 6,
                 FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
-        this.fontRenderer.drawString(
+        this.fontRendererObj.drawString(
                 StatCollector.translateToLocal("container.inventory"), 8,
                 76,
                 FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
 
         if (!tunnel.isActive()) {
             String activate = "Open";
-            this.fontRenderer.drawString(activate,
-                    (activateButtonX + (activateButtonWidth) / 2) - ((this.fontRenderer.getStringWidth(activate) /
+            this.fontRendererObj.drawString(activate,
+                    (activateButtonX + (activateButtonWidth) / 2) - ((this.fontRendererObj.getStringWidth(activate) /
                                                                       2)), activateButtonY + (activateButtonHeight -
-                                                                                              fontRenderer
+                                                                                              fontRendererObj
                                                                                                       .FONT_HEIGHT) /
 
                                                                                              2,
@@ -149,21 +148,22 @@ public class GuiPhlegethonTunnel extends GuiContainer {
                             255));
         } else {
             String deactivate = "Close";
-            this.fontRenderer.drawString(deactivate,
-                    (deactivateButtonX + (deactivateButtonWidth) / 2) - ((this.fontRenderer.getStringWidth(deactivate) /
-                                                                          2)),
+            this.fontRendererObj.drawString(deactivate,
+                    (deactivateButtonX + (deactivateButtonWidth) / 2) -
+                    ((this.fontRendererObj.getStringWidth(deactivate) /
+                      2)),
                     deactivateButtonY + (deactivateButtonHeight -
-                                         fontRenderer.FONT_HEIGHT) /
+                                         fontRendererObj.FONT_HEIGHT) /
 
                                         2,
                     FemtocraftUtils.colorFromARGB(0, 255, 255,
                             255));
         }
 
-        fontRenderer.drawSplitString(EnumChatFormatting.WHITE +
-                                     FemtocraftUtils.formatIntegerString(
-                                             String.valueOf(tunnel.getCurrentPower())) + "/\n" +
-                                     FemtocraftUtils.formatIntegerString(String.valueOf(tunnel.getMaxPower())), 126,
+        fontRendererObj.drawSplitString(EnumChatFormatting.WHITE +
+                                        FemtocraftUtils.formatIntegerString(
+                                                String.valueOf(tunnel.getCurrentPower())) + "/\n" +
+                                        FemtocraftUtils.formatIntegerString(String.valueOf(tunnel.getMaxPower())), 126,
                 16, 40, 40);
     }
 

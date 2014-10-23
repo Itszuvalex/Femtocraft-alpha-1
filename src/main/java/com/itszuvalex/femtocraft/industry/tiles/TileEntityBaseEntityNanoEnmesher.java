@@ -33,7 +33,7 @@ import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Arrays;
 
@@ -150,8 +150,8 @@ public class TileEntityBaseEntityNanoEnmesher extends
     }
 
     @Override
-    public String getInvName() {
-        return inventory.getInvName();
+    public String getInventoryName() {
+        return inventory.getInventoryName();
     }
 
     protected ItemStack[] getConfigurators() {
@@ -160,7 +160,7 @@ public class TileEntityBaseEntityNanoEnmesher extends
     }
 
     @Override
-    public boolean isInvNameLocalized() {
+    public boolean hasCustomInventoryName() {
         return false;
     }
 
@@ -180,12 +180,12 @@ public class TileEntityBaseEntityNanoEnmesher extends
     }
 
     @Override
-    public void openChest() {
+    public void openInventory() {
 
     }
 
     @Override
-    public void closeChest() {
+    public void closeInventory() {
 
     }
 

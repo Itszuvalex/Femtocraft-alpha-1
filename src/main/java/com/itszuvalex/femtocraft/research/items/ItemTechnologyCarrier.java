@@ -23,12 +23,12 @@ package com.itszuvalex.femtocraft.research.items;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.api.research.ITechnologyCarrier;
+import com.itszuvalex.femtocraft.core.items.ItemBase;
 import com.itszuvalex.femtocraft.managers.research.ResearchPlayer;
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
@@ -36,12 +36,12 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public abstract class ItemTechnologyCarrier extends Item implements
-                                                         ITechnologyCarrier {
+public abstract class ItemTechnologyCarrier extends ItemBase implements
+        ITechnologyCarrier {
     private final static String researchKey = "techName";
 
-    public ItemTechnologyCarrier(int par1) {
-        super(par1);
+    public ItemTechnologyCarrier(String unlocalized) {
+        super(unlocalized);
     }
 
     /*
@@ -55,7 +55,7 @@ public abstract class ItemTechnologyCarrier extends Item implements
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
                                       EntityPlayer par3EntityPlayer) {
         ResearchPlayer pr = Femtocraft.researchManager()
-                .getPlayerResearch(par3EntityPlayer.username);
+                .getPlayerResearch(par3EntityPlayer.getCommandSenderName());
         if (pr != null) {
             String tech = getTechnology(par1ItemStack);
             if (!(tech == null || tech.isEmpty())) {
@@ -84,9 +84,8 @@ public abstract class ItemTechnologyCarrier extends Item implements
         NBTTagCompound compound = par1ItemStack.stackTagCompound;
         if (compound != null) {
             par3List.add(getTechnologyLevel(par1ItemStack).getTooltipEnum()
-                    + getTechnology(par1ItemStack) + EnumChatFormatting.RESET);
-        }
-        else {
+                         + getTechnology(par1ItemStack) + EnumChatFormatting.RESET);
+        } else {
             par3List.add("This is only valid if made via");
             par3List.add("Femtocraft Research Console.");
         }

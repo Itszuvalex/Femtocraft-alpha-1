@@ -25,13 +25,13 @@ import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
 
 public class ItemFemtoTechnology extends ItemTechnologyCarrier {
 
-    public ItemFemtoTechnology(int par1) {
-        super(par1);
+    public ItemFemtoTechnology() {
+        super("ItemFemtoTechnology");
         setCreativeTab(Femtocraft.femtocraftTab());
         setUnlocalizedName("itemFemtoTechnology");
     }
@@ -43,8 +43,8 @@ public class ItemFemtoTechnology extends ItemTechnologyCarrier {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerIcons(IIconRegister par1IconRegister) {
         itemIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "ItemFemtoTechnology");
+                                                 + ":" + "ItemFemtoTechnology");
     }
 }

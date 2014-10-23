@@ -25,19 +25,19 @@ import com.itszuvalex.femtocraft.common.gui.DisplaySlot;
 import com.itszuvalex.femtocraft.core.MagnetRegistry;
 import com.itszuvalex.femtocraft.industry.items.ItemAssemblySchematic;
 import com.itszuvalex.femtocraft.player.PlayerProperties;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.world.WorldEvent;
 
 public class FemtocraftEventHookContainer {
-    @ForgeSubscribe
+    @SubscribeEvent
     public void load(WorldEvent.Load event) {
         if (event.world.isRemote) {
             return;
@@ -46,7 +46,7 @@ public class FemtocraftEventHookContainer {
         Femtocraft.assistantManager().load(event.world);
     }
 
-    @ForgeSubscribe
+    @SubscribeEvent
     public void save(WorldEvent.Save event) {
         if (event.world.isRemote) {
             return;
@@ -56,10 +56,10 @@ public class FemtocraftEventHookContainer {
     }
 
     @SideOnly(value = Side.CLIENT)
-    @ForgeSubscribe
+    @SubscribeEvent
     public void preTextureStitch(TextureStitchEvent.Pre event) {
         // Skip out of blocks
-        if (event.map.textureType == 1) {
+        if (event.map.getTextureType() == 1) {
             // Want items
             ItemAssemblySchematic.placeholderIcon = event.map
                     .registerIcon(Femtocraft.ID().toLowerCase() + ":"
@@ -69,7 +69,7 @@ public class FemtocraftEventHookContainer {
         }
     }
 
-    @ForgeSubscribe
+    @SubscribeEvent
     public void onEntityConstructing(EntityConstructing event) {
         if (event.entity instanceof EntityPlayer
             && event.entity
@@ -78,7 +78,7 @@ public class FemtocraftEventHookContainer {
         }
     }
 
-    @ForgeSubscribe
+    @SubscribeEvent
     public void onEntityJoinWorld(EntityJoinWorldEvent event) {
         if (!event.entity.worldObj.isRemote
             && event.entity instanceof EntityPlayer) {
@@ -86,7 +86,7 @@ public class FemtocraftEventHookContainer {
         }
     }
 
-    @ForgeSubscribe
+    @SubscribeEvent
     public void onTooltip(ItemTooltipEvent event) {
         if (MagnetRegistry.showMagnetismTooltip) {
             if (MagnetRegistry.isMagnet(event.itemStack)) {

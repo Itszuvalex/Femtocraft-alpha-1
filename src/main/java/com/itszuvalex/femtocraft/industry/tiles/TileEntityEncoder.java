@@ -33,7 +33,7 @@ import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
 import java.util.Arrays;
@@ -116,12 +116,12 @@ public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
     }
 
     @Override
-    public String getInvName() {
+    public String getInventoryName() {
         return Femtocraft.ID().toLowerCase() + "." + "InventoryEncoder";
     }
 
     @Override
-    public boolean isInvNameLocalized() {
+    public boolean hasCustomInventoryName() {
         return false;
     }
 
@@ -136,13 +136,13 @@ public class TileEntityEncoder extends TileEntityBaseEntityIndustry implements
     }
 
     @Override
-    public void openChest() {
-        inventory.openChest();
+    public void openInventory() {
+        inventory.openInventory();
     }
 
     @Override
-    public void closeChest() {
-        inventory.closeChest();
+    public void closeInventory() {
+        inventory.closeInventory();
     }
 
     @Override

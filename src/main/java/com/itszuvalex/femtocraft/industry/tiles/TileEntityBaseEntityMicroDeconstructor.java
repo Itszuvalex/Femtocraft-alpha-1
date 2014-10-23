@@ -35,7 +35,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
 import java.util.ArrayList;
@@ -165,18 +165,24 @@ public class TileEntityBaseEntityMicroDeconstructor extends
      * Returns the name of the inventory.
      */
     @Override
-    public String getInvName() {
-        return this.isInvNameLocalized() ? this.field_94130_e
+    public String getInventoryName() {
+        return this.hasCustomInventoryName() ? this.field_94130_e
                 : "Microtech Deconstructor";
     }
 
-    /**
-     * If this returns false, the inventory name will be used as an unlocalized name, and translated into the player's
-     * language. Otherwise it will be used directly.
-     */
     @Override
-    public boolean isInvNameLocalized() {
+    public boolean hasCustomInventoryName() {
         return this.field_94130_e != null && this.field_94130_e.length() > 0;
+    }
+
+    @Override
+    public void openInventory() {
+
+    }
+
+    @Override
+    public void closeInventory() {
+
     }
 
     /**
@@ -193,13 +199,6 @@ public class TileEntityBaseEntityMicroDeconstructor extends
         return canPlayerUse(entityplayer);
     }
 
-    @Override
-    public void openChest() {
-    }
-
-    @Override
-    public void closeChest() {
-    }
 
     /**
      * ******************************************************************************** This function is here for

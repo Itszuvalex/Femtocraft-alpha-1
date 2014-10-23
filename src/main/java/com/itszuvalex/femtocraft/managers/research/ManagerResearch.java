@@ -145,8 +145,7 @@ public class ManagerResearch {
                     if (shouldDiscover && rp.canDiscoverTechnology(t)) {
                         rp.discoverTechnology(t.name);
                     }
-                }
-                else {
+                } else {
                     rp.researchTechnology(t.name, true);
                 }
             }
@@ -215,7 +214,7 @@ public class ManagerResearch {
             NBTTagCompound data = new NBTTagCompound();
             status.saveToNBTTagCompound(data);
 
-            cs.setCompoundTag(dataKey, data);
+            cs.setTag(dataKey, data);
             list.appendTag(cs);
         }
 
@@ -225,10 +224,10 @@ public class ManagerResearch {
     // --------------------------------------------------
 
     public void loadFromNBTTagCompound(NBTTagCompound compound) {
-        NBTTagList list = compound.getTagList(playerDataKey);
+        NBTTagList list = compound.getTagList(playerDataKey, 10);
 
         for (int i = 0; i < list.tagCount(); ++i) {
-            NBTTagCompound cs = (NBTTagCompound) list.tagAt(i);
+            NBTTagCompound cs = list.getCompoundTagAt(i);
             String username = cs.getString(userKey);
 
             NBTTagCompound data = cs.getCompoundTag(dataKey);
@@ -265,7 +264,7 @@ public class ManagerResearch {
                 } catch (Exception exception) {
                     Femtocraft.log(Level.SEVERE,
                             "Failed to save data for player " + pdata.username
-                                    + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
+                            + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
                     );
                     exception.printStackTrace();
                     continue;
@@ -274,8 +273,8 @@ public class ManagerResearch {
 
         } catch (Exception e) {
             Femtocraft.log(Level.SEVERE, "Failed to create folder "
-                    + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator +
-                    DIRECTORY + ".");
+                                         + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator +
+                                         DIRECTORY + ".");
             e.printStackTrace();
             return false;
         }
@@ -298,8 +297,8 @@ public class ManagerResearch {
             File folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), DIRECTORY);
             if (!folder.exists()) {
                 Femtocraft.log(Level.WARNING, "No " + DIRECTORY
-                        + " folder found for world - " +
-                        FemtocraftFileUtils.savePathFemtocraft(world) + ".");
+                                              + " folder found for world - " +
+                                              FemtocraftFileUtils.savePathFemtocraft(world) + ".");
                 return false;
             }
 
@@ -329,7 +328,7 @@ public class ManagerResearch {
                 } catch (Exception e) {
                     Femtocraft.log(Level.SEVERE,
                             "Failed to load data from file " + pdata.getName()
-                                    + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
+                            + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
                     );
                     e.printStackTrace();
                 }
@@ -338,7 +337,7 @@ public class ManagerResearch {
         } catch (Exception exception) {
             Femtocraft.log(Level.SEVERE,
                     "Failed to load data from folder " + DIRECTORY
-                            + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
+                    + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
             );
             exception.printStackTrace();
             return false;

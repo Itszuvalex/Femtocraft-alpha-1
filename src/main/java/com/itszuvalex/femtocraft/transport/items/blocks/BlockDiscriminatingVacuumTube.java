@@ -31,7 +31,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -40,28 +40,28 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.List;
 import java.util.Random;
 
 public class BlockDiscriminatingVacuumTube extends TileContainer {
-    public Icon indicatorIcon;
-    public Icon straightIcon;
-    public Icon straightInsetIcon;
-    public Icon turnIcon;
-    public Icon turnInsetIcon;
-    public Icon endIcon;
-    public Icon endInsetIcon;
+    public IIcon indicatorIcon;
+    public IIcon straightIcon;
+    public IIcon straightInsetIcon;
+    public IIcon turnIcon;
+    public IIcon turnInsetIcon;
+    public IIcon endIcon;
+    public IIcon endInsetIcon;
 
-    public BlockDiscriminatingVacuumTube(int id) {
-        super(id, Material.iron);
-        setUnlocalizedName("BlockDiscriminatingVacuumTube");
+    public BlockDiscriminatingVacuumTube() {
+        super(Material.iron);
+        setBlockName("BlockDiscriminatingVacuumTube");
         setHardness(3.5f);
-        setStepSound(Block.soundMetalFootstep);
+        setStepSound(Block.soundTypeMetal);
         setCreativeTab(Femtocraft.femtocraftTab());
         setBlockBounds();
     }
@@ -72,14 +72,14 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityDiscriminatingVacuumTube();
     }
 
     @Override
     public void breakBlock(World par1World, int par2, int par3, int par4,
-                           int par5, int par6) {
-        TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+                           Block par5, int par6) {
+        TileEntity te = par1World.getTileEntity(par2, par3, par4);
 
         if (te instanceof TileEntityDiscriminatingVacuumTube) {
 
@@ -110,14 +110,14 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
                                 (double) ((float) par2 + f),
                                 (double) ((float) par3 + f1),
                                 (double) ((float) par4 + f2), new ItemStack(
-                                itemstack.itemID, k1,
+                                itemstack.getItem(), k1,
                                 itemstack.getItemDamage())
                         );
 
                         if (itemstack.hasTagCompound()) {
                             entityitem.getEntityItem().setTagCompound(
                                     (NBTTagCompound) itemstack.getTagCompound()
-                                                              .copy()
+                                            .copy()
                             );
                         }
 
@@ -132,11 +132,9 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
                     }
                 }
             }
-
-            par1World.func_96440_m(par2, par3, par4, par5);
-
-            super.breakBlock(par1World, par2, par3, par4, par5, par6);
+            par1World.func_147453_f(par2, par3, par4, par5);
         }
+        super.breakBlock(par1World, par2, par3, par4, par5, par6);
     }
 
     @Override
@@ -150,7 +148,7 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
 
         ItemStack item = par5EntityPlayer.getCurrentEquippedItem();
         if (item != null && item.getItem() instanceof IInterfaceDevice) {
-            TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
+            TileEntity tile = par1World.getTileEntity(par2, par3, par4);
             if (tile != null) {
                 if (tile instanceof TileEntityVacuumTube) {
                     TileEntityDiscriminatingVacuumTube tube =
@@ -203,7 +201,7 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
         super.addCollisionBoxesToList(par1World, x, y, z, par5AxisAlignedBB,
                 par6List, par7Entity);
 
-        TileEntity tile = par1World.getBlockTileEntity(x, y, z);
+        TileEntity tile = par1World.getTileEntity(x, y, z);
         if (tile instanceof TileEntityDiscriminatingVacuumTube) {
             TileEntityDiscriminatingVacuumTube tube = (TileEntityDiscriminatingVacuumTube) tile;
 
@@ -254,7 +252,7 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
                 break;
         }
 
-        return AxisAlignedBB.getAABBPool().getAABB((double) x + minX,
+        return AxisAlignedBB.getBoundingBox((double) x + minX,
                 (double) y + minY, (double) z + minZ, (double) x + maxX,
                 (double) y + maxY, (double) z + maxZ);
     }
@@ -263,7 +261,7 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int x,
                                                         int y, int z) {
-        AxisAlignedBB box = AxisAlignedBB.getAABBPool().getAABB(
+        AxisAlignedBB box = AxisAlignedBB.getBoundingBox(
                 (double) x + getBlockBoundsMinX(),
                 (double) y + getBlockBoundsMinY(),
                 (double) z + getBlockBoundsMinZ(),
@@ -271,7 +269,7 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
                 (double) y + getBlockBoundsMaxY(),
                 (double) z + getBlockBoundsMaxZ());
 
-        TileEntity tile = par1World.getBlockTileEntity(x, y, z);
+        TileEntity tile = par1World.getTileEntity(x, y, z);
         if (tile instanceof TileEntityVacuumTube) {
             TileEntityDiscriminatingVacuumTube tube = (TileEntityDiscriminatingVacuumTube) tile;
 
@@ -281,8 +279,7 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
                     y, z);
 
             return box.func_111270_a(inputBB).func_111270_a(outputBB);
-        }
-        else {
+        } else {
             return box;
         }
     }
@@ -290,7 +287,7 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
     @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
                                                          int x, int y, int z) {
-        return AxisAlignedBB.getAABBPool().getAABB((double) x + 4.d / 16.d,
+        return AxisAlignedBB.getBoundingBox((double) x + 4.d / 16.d,
                 (double) y + 4.d / 16.d, (double) z + 4.d / 16.d,
                 (double) x + 12.d / 16.d, (double) y + 12.d / 16.d,
                 (double) z + 12.d / 16.d);
@@ -302,31 +299,14 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
     }
 
     @Override
-    public void onNeighborBlockChange(World par1World, int par2, int par3,
-                                      int par4, int par5) {
-        // tiles tile = par1World.getBlockTileEntity(par2, par3, par4);
-        // if(tile != null)
-        // {
-        // if(tile instanceof TileEntityVacuumTube)
-        // {
-        // TileEntityVacuumTube tube = (TileEntityVacuumTube)tile;
-        //
-        // tube.validateConnections();
-        // tube.searchForMissingConnection();
-        // }
-        // }
-        super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
-    }
-
-    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess,
                                            int x, int y, int z) {
-        AxisAlignedBB.getAABBPool().getAABB((double) x + 4.f / 16.f,
+        AxisAlignedBB.getBoundingBox((double) x + 4.f / 16.f,
                 (double) y + 4.f / 16.f, (double) z + 4.f / 16.f,
                 (double) x + 12.f / 16.f, (double) y + 12.f / 16.f,
                 (double) z + 12.f / 16.f);
 
-        TileEntity tile = par1iBlockAccess.getBlockTileEntity(x, y, z);
+        TileEntity tile = par1iBlockAccess.getTileEntity(x, y, z);
         if ((tile instanceof TileEntityDiscriminatingVacuumTube)) {
             TileEntityDiscriminatingVacuumTube tube = (TileEntityDiscriminatingVacuumTube) tile;
 
@@ -395,7 +375,7 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3,
                                           int par4, Entity par5Entity) {
         if (par5Entity instanceof EntityItem) {
-            TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
+            TileEntity tile = par1World.getTileEntity(par2, par3, par4);
             if (!(tile instanceof TileEntityVacuumTube)) {
                 return;
             }
@@ -407,7 +387,7 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
     @Override
     public void onPostBlockPlaced(World par1World, int par2, int par3,
                                   int par4, int par5) {
-        TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
+        TileEntity tile = par1World.getTileEntity(par2, par3, par4);
         if (tile != null) {
             if (tile instanceof TileEntityVacuumTube) {
                 ((TileEntityVacuumTube) tile).searchForFullConnections();
@@ -418,28 +398,27 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         indicatorIcon = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                .toLowerCase() + ":" + "VacuumTube_indicator");
+                                                              .toLowerCase() + ":" + "VacuumTube_indicator");
         straightIcon = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                               .toLowerCase() + ":" + "VacuumTube_side_straight");
+                                                             .toLowerCase() + ":" + "VacuumTube_side_straight");
         straightInsetIcon = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                    .toLowerCase() + ":" +
-                "VacuumTube_side_straight_inset");
+                                                                  .toLowerCase() + ":" +
+                                                          "VacuumTube_side_straight_inset");
         turnIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "VacuumTube_side_curved");
+                                                 + ":" + "VacuumTube_side_curved");
         turnInsetIcon = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                .toLowerCase() + ":" + "VacuumTube_side_curved_inset");
+                                                              .toLowerCase() + ":" + "VacuumTube_side_curved_inset");
         endIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "VacuumTube_end");
+                                                + ":" + "VacuumTube_end");
         endInsetIcon = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                               .toLowerCase() + ":" + "VacuumTube_end_inset");
+                                                             .toLowerCase() + ":" + "VacuumTube_end_inset");
     }
 
     @Override
-    public void onNeighborTileChange(World world, int x, int y, int z,
-                                     int tileX, int tileY, int tileZ) {
-        TileEntity tile = world.getBlockTileEntity(x, y, z);
+    public void onNeighborChange(IBlockAccess world, int x, int y, int z, int tileX, int tileY, int tileZ) {
+        TileEntity tile = world.getTileEntity(x, y, z);
         if (tile != null) {
             if (tile instanceof TileEntityVacuumTube) {
                 TileEntityVacuumTube tube = (TileEntityVacuumTube) tile;
@@ -449,6 +428,7 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
                 tube.onNeighborTileChange();
             }
         }
-        super.onNeighborTileChange(world, x, y, z, tileX, tileY, tileZ);
+        super.onNeighborChange(world, x, y, z, tileX, tileY, tileZ);
     }
+//    }
 }

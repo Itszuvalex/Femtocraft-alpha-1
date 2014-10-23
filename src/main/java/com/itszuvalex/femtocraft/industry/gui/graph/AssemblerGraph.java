@@ -24,6 +24,7 @@ package com.itszuvalex.femtocraft.industry.gui.graph;
 import com.itszuvalex.femtocraft.graph.IGraphNode;
 import com.itszuvalex.femtocraft.graph.MapGraph;
 import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.Collection;
@@ -41,8 +42,8 @@ public class AssemblerGraph extends MapGraph<Integer> {
 
         //Put recipes into map, mapped by output item ID
         for (AssemblerRecipe recipe : recipes) {
-            if (!nodes.containsKey(recipe.output.itemID)) {
-                nodes.put(recipe.output.itemID, new AssemblerNode(new ItemStack
+            if (!nodes.containsKey(Item.getIdFromItem(recipe.output.getItem()))) {
+                nodes.put(Item.getIdFromItem(recipe.output.getItem()), new AssemblerNode(new ItemStack
                         (recipe.output
                                 .getItem())));
             }
@@ -50,7 +51,7 @@ public class AssemblerGraph extends MapGraph<Integer> {
 
         //Set up children and parents
         for (AssemblerRecipe recipe : recipes) {
-            IGraphNode output = nodes.get(recipe.output.itemID);
+            IGraphNode output = nodes.get(Item.getIdFromItem(recipe.output.getItem()));
             if (output == null) {
                 continue;
             }
@@ -59,7 +60,7 @@ public class AssemblerGraph extends MapGraph<Integer> {
                 if (stack == null) {
                     continue;
                 }
-                IGraphNode child = nodes.get(stack.itemID);
+                IGraphNode child = nodes.get(Item.getIdFromItem(stack.getItem()));
                 if (child == null) {
                     continue;
                 }

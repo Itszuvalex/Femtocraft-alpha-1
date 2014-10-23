@@ -34,7 +34,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 
 public class ContainerReconstructor<T extends TileEntityBaseEntityMicroReconstructor> extends ContainerInv<T> {
     private int lastCookTime = 0;
@@ -59,7 +59,7 @@ public class ContainerReconstructor<T extends TileEntityBaseEntityMicroReconstru
                                                                        * 3, 32 + x * 18, 18 + y * 18) {
                     @Override
                     @SideOnly(Side.CLIENT)
-                    public Icon getBackgroundIconIndex() {
+                    public IIcon getBackgroundIconIndex() {
                         return this.inventory
                                        .getStackInSlot(10) != null ? null
                                 : DisplaySlot.noPlaceDisplayIcon;

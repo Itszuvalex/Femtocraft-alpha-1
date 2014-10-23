@@ -11,7 +11,7 @@ import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
@@ -45,7 +45,7 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     @Override
     public float getFillPercentageForCharging(ForgeDirection from) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getFillPercentageForCharging(from);
             }
@@ -56,7 +56,7 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     @Override
     public float getFillPercentageForOutput(ForgeDirection to) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getFillPercentageForOutput(to);
             }
@@ -67,7 +67,7 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     @Override
     public boolean canCharge(ForgeDirection from) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).canCharge(from);
             }
@@ -78,7 +78,7 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     @Override
     public EnumTechLevel getTechLevel(ForgeDirection to) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getTechLevel(to);
             }
@@ -89,7 +89,7 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     @Override
     public int getCurrentPower() {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getCurrentPower();
             }
@@ -100,7 +100,7 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     @Override
     public int getMaxPower() {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getMaxPower();
             }
@@ -131,7 +131,7 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
                     if (xCoord - info.x() != -1) return false;
                     break;
             }
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).canConnect(from);
             }
@@ -142,7 +142,7 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     @Override
     public int charge(ForgeDirection from, int amount) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).charge(from, amount);
             }
@@ -153,7 +153,7 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     @Override
     public boolean consume(int amount) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).consume(amount);
             }
@@ -164,7 +164,7 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     @Override
     public float getFillPercentage() {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getFillPercentage();
             }
@@ -175,7 +175,7 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     @Override
     public boolean canAcceptPowerOfLevel(EnumTechLevel level, ForgeDirection from) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).canAcceptPowerOfLevel(level, from);
             }
@@ -195,7 +195,7 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     @Override
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IFluidHandler) {
                 return ((IFluidHandler) te).fill(from, resource, doFill);
             }
@@ -206,7 +206,7 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     @Override
     public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IFluidHandler) {
                 return ((IFluidHandler) te).drain(from, resource, doDrain);
             }
@@ -217,7 +217,7 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     @Override
     public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IFluidHandler) {
                 return ((IFluidHandler) te).drain(from, maxDrain, doDrain);
             }
@@ -228,7 +228,7 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     @Override
     public boolean canFill(ForgeDirection from, Fluid fluid) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IFluidHandler) {
                 return ((IFluidHandler) te).canFill(from, fluid);
             }
@@ -239,7 +239,7 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     @Override
     public boolean canDrain(ForgeDirection from, Fluid fluid) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IFluidHandler) {
                 return ((IFluidHandler) te).canFill(from, fluid);
             }
@@ -250,7 +250,7 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     @Override
     public FluidTankInfo[] getTankInfo(ForgeDirection from) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IFluidHandler) {
                 return ((IFluidHandler) te).getTankInfo(from);
             }

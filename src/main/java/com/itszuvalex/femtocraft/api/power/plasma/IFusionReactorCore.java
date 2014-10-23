@@ -19,7 +19,7 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.power.plasma;
+package com.itszuvalex.femtocraft.api.power.plasma;
 
 import java.util.Collection;
 

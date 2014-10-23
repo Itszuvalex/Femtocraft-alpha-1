@@ -121,7 +121,7 @@ public class AssemblerRecipe implements Comparable, ISaveable {
         NBTTagCompound outputCompound = new NBTTagCompound();
         output.writeToNBT(outputCompound);
 
-        compound.setCompoundTag("output", outputCompound);
+        compound.setTag("output", outputCompound);
 
         // EnumTechLevel
         compound.setString("enumTechLevel", enumTechLevel.key);
@@ -137,9 +137,9 @@ public class AssemblerRecipe implements Comparable, ISaveable {
         input = new ItemStack[9];
 
         // Input
-        NBTTagList inputList = compound.getTagList("input");
+        NBTTagList inputList = compound.getTagList("input", 10);
         for (int i = 0; i < inputList.tagCount(); ++i) {
-            NBTTagCompound itemCompound = (NBTTagCompound) inputList.tagAt(i);
+            NBTTagCompound itemCompound = inputList.getCompoundTagAt(i);
             byte slot = itemCompound.getByte("Slot");
             if (slot != (byte) i) {
                 Femtocraft.logger()

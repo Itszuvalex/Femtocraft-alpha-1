@@ -26,7 +26,7 @@ import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel
 import com.itszuvalex.femtocraft.power.FemtocraftPowerUtils
 import com.itszuvalex.femtocraft.power.traits.PowerBlockContainer
-import net.minecraftforge.common.ForgeDirection
+import net.minecraftforge.common.util.ForgeDirection
 
 abstract class TileEntityPowerBase() extends TileEntityBase() with PowerBlockContainer {
   val connections = Array.fill[Boolean](6)(false)
@@ -74,7 +74,7 @@ abstract class TileEntityPowerBase() extends TileEntityBase() with PowerBlockCon
       val locx = this.xCoord + offset.offsetX
       val locy = this.yCoord + offset.offsetY
       val locz = this.zCoord + offset.offsetZ
-      val checkTile = this.worldObj.getBlockTileEntity(locx, locy, locz)
+      val checkTile = this.worldObj.getTileEntity(locx, locy, locz)
       checkTile match {
         case fc: IPowerBlockContainer =>
           if (fc.canConnect(offset.getOpposite) && fc.canAcceptPowerOfLevel(getTechLevel(offset.getOpposite), offset.getOpposite)) {

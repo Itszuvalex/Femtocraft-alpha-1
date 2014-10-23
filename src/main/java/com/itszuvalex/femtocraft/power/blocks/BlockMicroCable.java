@@ -29,31 +29,31 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.List;
 import java.util.Random;
 
 public class BlockMicroCable extends BlockPowerContainer {
-    public Icon coreBorder;
-    public Icon connector;
-    public Icon coil;
-    public Icon coilEdge;
-    public Icon border;
+    public IIcon coreBorder;
+    public IIcon connector;
+    public IIcon coil;
+    public IIcon coilEdge;
+    public IIcon border;
 
-    public BlockMicroCable(int par1, Material par2Material) {
-        super(par1, par2Material);
+    public BlockMicroCable(Material par2Material) {
+        super(par2Material);
         setCreativeTab(Femtocraft.femtocraftTab());
-        setUnlocalizedName("blockMicroCable");
+        setBlockName("blockMicroCable");
         setHardness(1.0f);
-        setStepSound(Block.soundStoneFootstep);
+        setStepSound(Block.soundTypeMetal);
         setBlockBounds();
         setTickRandomly(true);
     }
@@ -76,7 +76,7 @@ public class BlockMicroCable extends BlockPowerContainer {
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityMicroCable();
     }
 
@@ -97,7 +97,7 @@ public class BlockMicroCable extends BlockPowerContainer {
         super.addCollisionBoxesToList(par1World, x, y, z, par5AxisAlignedBB,
                 par6List, par7Entity);
 
-        TileEntity tile = par1World.getBlockTileEntity(x, y, z);
+        TileEntity tile = par1World.getTileEntity(x, y, z);
         if (!(tile instanceof TileEntityMicroCable)) {
             return;
         }
@@ -147,7 +147,7 @@ public class BlockMicroCable extends BlockPowerContainer {
                 break;
         }
 
-        return AxisAlignedBB.getAABBPool().getAABB((double) x + minX,
+        return AxisAlignedBB.getBoundingBox((double) x + minX,
                 (double) y + minY, (double) z + minZ, (double) x + maxX,
                 (double) y + maxY, (double) z + maxZ);
     }
@@ -156,12 +156,12 @@ public class BlockMicroCable extends BlockPowerContainer {
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int x,
                                                         int y, int z) {
-        AxisAlignedBB box = AxisAlignedBB.getAABBPool().getAABB(
+        AxisAlignedBB box = AxisAlignedBB.getBoundingBox(
                 (double) x + 4.f / 16.f, (double) y + 4.f / 16.f,
                 (double) z + 4.f / 16.f, (double) x + 12.f / 16.f,
                 (double) y + 12.f / 16.f, (double) z + 12.f / 16.f);
 
-        TileEntity tile = par1World.getBlockTileEntity(x, y, z);
+        TileEntity tile = par1World.getTileEntity(x, y, z);
 
         if (!(tile instanceof TileEntityMicroCable)) {
             return box;
@@ -183,7 +183,7 @@ public class BlockMicroCable extends BlockPowerContainer {
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
                                                          int x, int y, int z) {
-        return AxisAlignedBB.getAABBPool().getAABB((double) x + 4.f / 16.f,
+        return AxisAlignedBB.getBoundingBox((double) x + 4.f / 16.f,
                 (double) y + 4.f / 16.f, (double) z + 4.f / 16.f,
                 (double) x + 12.f / 16.f, (double) y + 12.f / 16.f,
                 (double) z + 12.f / 16.f);
@@ -205,7 +205,7 @@ public class BlockMicroCable extends BlockPowerContainer {
         double maxY = 12.d / 16.d;
         double maxZ = 12.d / 16.d;
 
-        TileEntity tile = par1iBlockAccess.getBlockTileEntity(x, y, z);
+        TileEntity tile = par1iBlockAccess.getTileEntity(x, y, z);
 
         if (!(tile instanceof TileEntityMicroCable)) {
             setBlockBounds((float) minX, (float) minY,
@@ -251,7 +251,7 @@ public class BlockMicroCable extends BlockPowerContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID()
                                                                .toLowerCase() + ":" + "FemtopowerCableCoil");
         this.coreBorder = par1IconRegister.registerIcon(Femtocraft.ID()

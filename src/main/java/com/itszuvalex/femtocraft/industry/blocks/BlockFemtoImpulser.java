@@ -29,30 +29,30 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
 public class BlockFemtoImpulser extends TileContainer {
     /**
-     * This flag is used to prevent the furnace inventory to be dropped upon
-     * block removal, is used internally when the furnace block changes from
-     * idle to active and vice-versa.
+     * This flag is used to prevent the furnace inventory to be dropped upon block removal, is used internally when the
+     * furnace block changes from idle to active and vice-versa.
      */
     private static boolean keepFurnaceInventory;
     /**
-     * Is the random generator used by furnace to drop the inventory contents in
-     * random directions.
+     * Is the random generator used by furnace to drop the inventory contents in random directions.
      */
     private final Random furnaceRand = new Random();
     /**
@@ -60,33 +60,32 @@ public class BlockFemtoImpulser extends TileContainer {
      */
     private final boolean isActive;
     @SideOnly(Side.CLIENT)
-    private Icon frontIcon;
+    private IIcon frontIcon;
 
-    public BlockFemtoImpulser(int par1, boolean par2) {
-        super(par1, Material.iron);
+    public BlockFemtoImpulser(boolean par2) {
+        super(Material.iron);
         this.isActive = par2;
-        setUnlocalizedName("BlockFemtoImpulser");
+        setBlockName("BlockFemtoImpulser");
         setHardness(3.5f);
-        setStepSound(Block.soundMetalFootstep);
+        setStepSound(Block.soundTypeMetal);
         setCreativeTab(Femtocraft.femtocraftTab());
         if (par2) {
-            setLightValue(0.875F);
+            setLightLevel(0.875F);
         }
     }
 
     public static void updateFurnaceBlockState(boolean par0, World par1World,
                                                int par2, int par3, int par4) {
         int l = par1World.getBlockMetadata(par2, par3, par4);
-        TileEntity tileentity = par1World.getBlockTileEntity(par2, par3, par4);
+        TileEntity tileentity = par1World.getTileEntity(par2, par3, par4);
         keepFurnaceInventory = true;
         shouldDrop = false;
         if (par0) {
             par1World.setBlock(par2, par3, par4,
-                    Femtocraft.blockFemtoImpulserLit().blockID);
-        }
-        else {
+                    Femtocraft.blockFemtoImpulserLit());
+        } else {
             par1World.setBlock(par2, par3, par4,
-                    Femtocraft.blockFemtoImpulserUnlit().blockID);
+                    Femtocraft.blockFemtoImpulserUnlit());
         }
         shouldDrop = true;
         keepFurnaceInventory = false;
@@ -94,7 +93,7 @@ public class BlockFemtoImpulser extends TileContainer {
 
         if (tileentity != null) {
             tileentity.validate();
-            par1World.setBlockTileEntity(par2, par3, par4, tileentity);
+            par1World.setTileEntity(par2, par3, par4, tileentity);
         }
     }
 
@@ -113,11 +112,10 @@ public class BlockFemtoImpulser extends TileContainer {
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
-    public Icon getIcon(int par1, int par2) {
+    public IIcon getIcon(int par1, int par2) {
         if (par1 == par2) {
             return frontIcon;
-        }
-        else {
+        } else {
             return blockIcon;
         }
     }
@@ -133,7 +131,7 @@ public class BlockFemtoImpulser extends TileContainer {
             int l = par1World.getBlockMetadata(par2, par3, par4);
             float f = (float) par2 + 0.5F;
             float f1 = (float) par3 + 0.0F + par5Random.nextFloat() * 6.0F
-                    / 16.0F;
+                                             / 16.0F;
             float f2 = (float) par4 + 0.5F;
             float f3 = 0.52F;
             float f4 = par5Random.nextFloat() * 0.6F - 0.3F;
@@ -143,20 +141,17 @@ public class BlockFemtoImpulser extends TileContainer {
                         (double) f1, (double) (f2 + f4), 0.0D, 0.0D, 0.0D);
                 par1World.spawnParticle("flame", (double) (f - f3),
                         (double) f1, (double) (f2 + f4), 0.0D, 0.0D, 0.0D);
-            }
-            else if (l == 5) {
+            } else if (l == 5) {
                 par1World.spawnParticle("smoke", (double) (f + f3),
                         (double) f1, (double) (f2 + f4), 0.0D, 0.0D, 0.0D);
                 par1World.spawnParticle("flame", (double) (f + f3),
                         (double) f1, (double) (f2 + f4), 0.0D, 0.0D, 0.0D);
-            }
-            else if (l == 2) {
+            } else if (l == 2) {
                 par1World.spawnParticle("smoke", (double) (f + f4),
                         (double) f1, (double) (f2 - f3), 0.0D, 0.0D, 0.0D);
                 par1World.spawnParticle("flame", (double) (f + f4),
                         (double) f1, (double) (f2 - f3), 0.0D, 0.0D, 0.0D);
-            }
-            else if (l == 3) {
+            } else if (l == 3) {
                 par1World.spawnParticle("smoke", (double) (f + f4),
                         (double) f1, (double) (f2 + f3), 0.0D, 0.0D, 0.0D);
                 par1World.spawnParticle("flame", (double) (f + f4),
@@ -165,27 +160,19 @@ public class BlockFemtoImpulser extends TileContainer {
         }
     }
 
-    /**
-     * Returns the ID of the items to drop on destruction.
-     */
     @Override
-    public int idDropped(int par1, Random par2Random, int par3) {
-        return Femtocraft.blockFemtoImpulserUnlit().blockID;
+    public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
+        return Item.getItemFromBlock(Femtocraft.blockFemtoImpulserUnlit());
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    /**
-     * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
-     */
-    public int idPicked(World par1World, int par2, int par3, int par4) {
-        return Femtocraft.blockFemtoImpulserUnlit().blockID;
+    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
+        return new ItemStack(Femtocraft.blockFemtoImpulserUnlit());
     }
 
     /**
-     * If this returns true, then comparators facing away from this block will
-     * use the value from getComparatorInputOverride instead of the actual
-     * redstone signal strength.
+     * If this returns true, then comparators facing away from this block will use the value from
+     * getComparatorInputOverride instead of the actual redstone signal strength.
      */
     @Override
     public boolean hasComparatorInputOverride() {
@@ -193,15 +180,14 @@ public class BlockFemtoImpulser extends TileContainer {
     }
 
     /**
-     * If hasComparatorInputOverride returns true, the return value from this is
-     * used instead of the redstone signal strength when this block inputs to a
-     * comparator.
+     * If hasComparatorInputOverride returns true, the return value from this is used instead of the redstone signal
+     * strength when this block inputs to a comparator.
      */
     @Override
     public int getComparatorInputOverride(World par1World, int par2, int par3,
                                           int par4, int par5) {
         return Container.calcRedstoneFromInventory((IInventory) par1World
-                .getBlockTileEntity(par2, par3, par4));
+                .getTileEntity(par2, par3, par4));
     }
 
     @Override
@@ -210,13 +196,14 @@ public class BlockFemtoImpulser extends TileContainer {
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
      * is the only chance you get to register icons.
      */
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "FemtoMachineBlock_side");
+                                                  + ":" + "FemtoMachineBlock_side");
         frontIcon = par1IconRegister.registerIcon(this.isActive ? Femtocraft.ID()
-                                                                            .toLowerCase() + ":" + "FemtoImpulser_front_lit"
+                                                                          .toLowerCase() + ":" +
+                                                                  "FemtoImpulser_front_lit"
                 : Femtocraft.ID().toLowerCase() + ":"
-                + "FemtoImpulser_front_unlit");
+                  + "FemtoImpulser_front_unlit");
     }
 
     /**
@@ -234,25 +221,25 @@ public class BlockFemtoImpulser extends TileContainer {
     private void setDefaultDirection(World par1World, int par2, int par3,
                                      int par4) {
         if (!par1World.isRemote) {
-            int l = par1World.getBlockId(par2, par3, par4 - 1);
-            int i1 = par1World.getBlockId(par2, par3, par4 + 1);
-            int j1 = par1World.getBlockId(par2 - 1, par3, par4);
-            int k1 = par1World.getBlockId(par2 + 1, par3, par4);
+            Block l = par1World.getBlock(par2, par3, par4 - 1);
+            Block i1 = par1World.getBlock(par2, par3, par4 + 1);
+            Block j1 = par1World.getBlock(par2 - 1, par3, par4);
+            Block k1 = par1World.getBlock(par2 + 1, par3, par4);
             byte b0 = 3;
 
-            if (Block.opaqueCubeLookup[l] && !Block.opaqueCubeLookup[i1]) {
+            if (l.isOpaqueCube() && !i1.isOpaqueCube()) {
                 b0 = 3;
             }
 
-            if (Block.opaqueCubeLookup[i1] && !Block.opaqueCubeLookup[l]) {
+            if (i1.isOpaqueCube() && !l.isOpaqueCube()) {
                 b0 = 2;
             }
 
-            if (Block.opaqueCubeLookup[j1] && !Block.opaqueCubeLookup[k1]) {
+            if (j1.isOpaqueCube() && !k1.isOpaqueCube()) {
                 b0 = 5;
             }
 
-            if (Block.opaqueCubeLookup[k1] && !Block.opaqueCubeLookup[j1]) {
+            if (k1.isOpaqueCube() && !j1.isOpaqueCube()) {
                 b0 = 4;
             }
 
@@ -261,24 +248,22 @@ public class BlockFemtoImpulser extends TileContainer {
     }
 
     /**
-     * Returns a new instance of a block's tile entity class. Called on placing
-     * the block.
+     * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
     @Override
-    public TileEntity createNewTileEntity(World par1World) {
+    public TileEntity createNewTileEntity(World par1World, int metadata) {
         return new TileEntityFemtoImpulser();
     }
 
     /**
-     * ejects contained items into the world, and notifies neighbours of an
-     * update, as appropriate
+     * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
     @Override
     public void breakBlock(World par1World, int par2, int par3, int par4,
-                           int par5, int par6) {
+                           Block par5, int par6) {
         if (!keepFurnaceInventory) {
             TileEntityFemtoImpulser tileentityfurnace = (TileEntityFemtoImpulser) par1World
-                    .getBlockTileEntity(par2, par3, par4);
+                    .getTileEntity(par2, par3, par4);
 
             if (tileentityfurnace != null) {
                 for (int j1 = 0; j1 < tileentityfurnace.getSizeInventory(); ++j1) {
@@ -301,7 +286,7 @@ public class BlockFemtoImpulser extends TileContainer {
                                     (double) ((float) par2 + f),
                                     (double) ((float) par3 + f1),
                                     (double) ((float) par4 + f2),
-                                    new ItemStack(itemstack.itemID, k1,
+                                    new ItemStack(itemstack.getItem(), k1,
                                             itemstack.getItemDamage())
                             );
 
@@ -344,7 +329,7 @@ public class BlockFemtoImpulser extends TileContainer {
                                     (double) ((float) par2 + f),
                                     (double) ((float) par3 + f1),
                                     (double) ((float) par4 + f2),
-                                    new ItemStack(itemstack.itemID, k1,
+                                    new ItemStack(itemstack.getItem(), k1,
                                             itemstack.getItemDamage())
                             );
 
@@ -367,7 +352,7 @@ public class BlockFemtoImpulser extends TileContainer {
                     }
                 }
 
-                par1World.func_96440_m(par2, par3, par4, par5);
+                par1World.func_147453_f(par2, par3, par4, par5);
             }
         }
 
@@ -384,7 +369,7 @@ public class BlockFemtoImpulser extends TileContainer {
                 par5EntityLivingBase, par6ItemStack);
 
         int l = MathHelper
-                .floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+                        .floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
         if (l == 0) {
             par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 2);

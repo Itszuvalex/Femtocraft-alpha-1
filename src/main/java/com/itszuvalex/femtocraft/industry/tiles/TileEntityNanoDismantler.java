@@ -27,7 +27,6 @@ import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies;
-import net.minecraftforge.common.ForgeDirection;
 
 @Configurable
 public class TileEntityNanoDismantler extends

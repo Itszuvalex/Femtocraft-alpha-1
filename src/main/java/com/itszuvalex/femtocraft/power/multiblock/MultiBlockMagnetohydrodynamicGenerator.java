@@ -47,17 +47,17 @@ public class MultiBlockMagnetohydrodynamicGenerator implements IMultiBlock {
         for (int i = -1; i <= 1; ++i) {
             for (int j = -1; j <= 1; ++j) {
                 for (int k = -1; k <= 1; ++k) {
-                    TileEntity te = world.getBlockTileEntity(x + i, y + k, z
-                            + j);
-                    if (te instanceof TileEntityMagnetohydrodynamicGenerator || (isSteamGeneratorSlot(i, k, j) && te instanceof TileEntitySteamGenerator)) {
+                    TileEntity te = world.getTileEntity(x + i, y + k, z
+                                                                      + j);
+                    if (te instanceof TileEntityMagnetohydrodynamicGenerator ||
+                        (isSteamGeneratorSlot(i, k, j) && te instanceof TileEntitySteamGenerator)) {
                         if (strict) {
                             if (((IMultiBlockComponent) te).getInfo()
-                                                           .isValidMultiBlock()) {
+                                    .isValidMultiBlock()) {
                                 return false;
                             }
                         }
-                    }
-                    else {
+                    } else {
                         return false;
                     }
                 }
@@ -74,8 +74,8 @@ public class MultiBlockMagnetohydrodynamicGenerator implements IMultiBlock {
     @Override
     public boolean isBlockInMultiBlock(World world, int x, int y, int z, int c_x, int c_y, int c_z) {
         return x >= (c_x - 1) && x <= (c_x + 1) &&
-                y >= (c_y - 1) && y <= (c_y + 1) &&
-                z >= (c_z - 1) && z <= (c_z + 1);
+               y >= (c_y - 1) && y <= (c_y + 1) &&
+               z >= (c_z - 1) && z <= (c_z + 1);
     }
 
     @Override
@@ -85,9 +85,10 @@ public class MultiBlockMagnetohydrodynamicGenerator implements IMultiBlock {
         for (int i = -1; i <= 1; ++i) {
             for (int j = -1; j <= 1; ++j) {
                 for (int k = -1; k <= 1; ++k) {
-                    TileEntity te = world.getBlockTileEntity(x + i, y + k, z
-                            + j);
-                    result = te instanceof IMultiBlockComponent && ((IMultiBlockComponent) te).formMultiBlock(world, x, y, z) && result;
+                    TileEntity te = world.getTileEntity(x + i, y + k, z
+                                                                      + j);
+                    result = te instanceof IMultiBlockComponent &&
+                             ((IMultiBlockComponent) te).formMultiBlock(world, x, y, z) && result;
                 }
             }
         }
@@ -118,9 +119,10 @@ public class MultiBlockMagnetohydrodynamicGenerator implements IMultiBlock {
         for (int i = -1; i <= 1; ++i) {
             for (int j = -1; j <= 1; ++j) {
                 for (int k = -1; k <= 1; ++k) {
-                    TileEntity te = world.getBlockTileEntity(x + i, y + k, z
-                            + j);
-                    result = te instanceof IMultiBlockComponent && ((IMultiBlockComponent) te).breakMultiBlock(world, x, y, z) && result;
+                    TileEntity te = world.getTileEntity(x + i, y + k, z
+                                                                      + j);
+                    result = te instanceof IMultiBlockComponent &&
+                             ((IMultiBlockComponent) te).breakMultiBlock(world, x, y, z) && result;
                 }
             }
         }

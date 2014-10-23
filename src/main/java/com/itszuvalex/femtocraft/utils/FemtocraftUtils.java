@@ -24,10 +24,12 @@ package com.itszuvalex.femtocraft.utils;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.Arrays;
@@ -77,10 +79,10 @@ public class FemtocraftUtils {
             return 0;
         }
 
-        if (cur.itemID < in.itemID) {
+        if (Item.getIdFromItem(cur.getItem()) < Item.getIdFromItem(in.getItem())) {
             return -1;
         }
-        if (cur.itemID > in.itemID) {
+        if (Item.getIdFromItem(cur.getItem()) > Item.getIdFromItem(in.getItem())) {
             return 1;
         }
 
@@ -242,7 +244,7 @@ public class FemtocraftUtils {
     }
 
     public static boolean sendMessageToPlayer(String username, String message, String formatting) {
-        EntityPlayer assistant = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername
+        EntityPlayer assistant = MinecraftServer.getServer().getConfigurationManager().func_152612_a
                 (username);
         return sendMessageToPlayer(assistant, message, formatting);
     }
@@ -253,10 +255,10 @@ public class FemtocraftUtils {
 
     public static boolean sendMessageToPlayer(EntityPlayer assistant, String message, String formatting) {
         if (assistant != null) {
-            assistant.addChatMessage(
+            assistant.addChatMessage(new ChatComponentText(
                     new StringBuilder().append(EnumChatFormatting.GOLD).append("Femtocraft").append
                             (EnumChatFormatting.RESET).append(": ").append(formatting).append(message).append
-                            (EnumChatFormatting.RESET).toString());
+                            (EnumChatFormatting.RESET).toString()));
             return true;
         }
         return false;

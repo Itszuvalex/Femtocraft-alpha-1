@@ -25,8 +25,8 @@ import com.itszuvalex.femtocraft.Femtocraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.util.Icon;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
 /**
@@ -34,28 +34,27 @@ import net.minecraftforge.fluids.BlockFluidClassic;
  */
 public class BlockFluidCooledContaminatedMoltenSalt extends BlockFluidClassic {
     @SideOnly(Side.CLIENT)
-    public Icon stillIcon;
+    public IIcon stillIcon;
     @SideOnly(Side.CLIENT)
-    public Icon flowingIcon;
+    public IIcon flowingIcon;
 
-    public BlockFluidCooledContaminatedMoltenSalt(int id) {
-        super(id, Femtocraft.fluidCooledContaminatedMoltenSalt(), Material.water);
-        setUnlocalizedName("FluidCooledContamiantedMoltenSalt");
+    public BlockFluidCooledContaminatedMoltenSalt() {
+        super(Femtocraft.fluidCooledContaminatedMoltenSalt(), Material.water);
+        setBlockName("FluidCooledContamiantedMoltenSalt");
         setCreativeTab(Femtocraft.femtocraftTab());
-        Femtocraft.fluidCooledContaminatedMoltenSalt().setBlockID(id);
     }
 
     @Override
-    public Icon getIcon(int side, int meta) {
+    public IIcon getIcon(int side, int meta) {
         return (side == 0 || side == 1) ? stillIcon : flowingIcon;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         blockIcon = stillIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "BlockCooledContaminatedMoltenSalt_still");
+                                                              + ":" + "BlockCooledContaminatedMoltenSalt_still");
         flowingIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "BlockCooledContaminatedMoltenSalt_flow");
+                                                    + ":" + "BlockCooledContaminatedMoltenSalt_flow");
     }
 }

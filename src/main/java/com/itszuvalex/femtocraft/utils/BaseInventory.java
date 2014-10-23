@@ -40,8 +40,7 @@ public class BaseInventory implements IInventory, ISaveable {
     }
 
     /**
-     * @return ItemStack[] that backs this inventory class. Modifications to it
-     * modify this.
+     * @return ItemStack[] that backs this inventory class. Modifications to it modify this.
      */
     public ItemStack[] getInventory() {
         return inventory;
@@ -66,8 +65,7 @@ public class BaseInventory implements IInventory, ISaveable {
                 itemstack = inventory[i];
                 inventory[i] = null;
                 return itemstack;
-            }
-            else {
+            } else {
                 itemstack = inventory[i].splitStack(amount);
 
                 if (inventory[i].stackSize == 0) {
@@ -76,8 +74,7 @@ public class BaseInventory implements IInventory, ISaveable {
 
                 return itemstack;
             }
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -93,12 +90,12 @@ public class BaseInventory implements IInventory, ISaveable {
     }
 
     @Override
-    public String getInvName() {
+    public String getInventoryName() {
         return "femto.BaseInventory.ImLazyAndDidntCodeThis";
     }
 
     @Override
-    public boolean isInvNameLocalized() {
+    public boolean hasCustomInventoryName() {
         return false;
     }
 
@@ -108,7 +105,8 @@ public class BaseInventory implements IInventory, ISaveable {
     }
 
     @Override
-    public void onInventoryChanged() {
+    public void markDirty() {
+
     }
 
     @Override
@@ -117,12 +115,12 @@ public class BaseInventory implements IInventory, ISaveable {
     }
 
     @Override
-    public void openChest() {
+    public void openInventory() {
 
     }
 
     @Override
-    public void closeChest() {
+    public void closeInventory() {
 
     }
 
@@ -143,8 +141,8 @@ public class BaseInventory implements IInventory, ISaveable {
     }
 
     /**
-     * Changes size of the inventory to be equal to size.  Keeps current
-     * inventory from slots 0 -> (size-1), and will drop extra itemstacks.
+     * Changes size of the inventory to be equal to size.  Keeps current inventory from slots 0 -> (size-1), and will
+     * drop extra itemstacks.
      *
      * @param size new size of inventory
      */

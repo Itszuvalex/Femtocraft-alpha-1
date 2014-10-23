@@ -24,15 +24,14 @@ package com.itszuvalex.femtocraft.power.plasma;
 import com.itszuvalex.femtocraft.Femtocraft;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.List;
 import java.util.Random;
@@ -48,11 +47,11 @@ public class BlockPlasma extends BlockContainer {
         return null;
     }
 
-    public BlockPlasma(int par1) {
-        super(par1, Material.lava);
+    public BlockPlasma() {
+        super(Material.lava);
         setCreativeTab(Femtocraft.femtocraftTab());
         setBlockUnbreakable();
-        setTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockPlasma");
+        setBlockTextureName(Femtocraft.ID().toLowerCase() + ":" + "BlockPlasma");
     }
 
     @Override
@@ -67,7 +66,7 @@ public class BlockPlasma extends BlockContainer {
 
 
     @Override
-    public Icon getIcon(int par1, int par2) {
+    public IIcon getIcon(int par1, int par2) {
         return super.getIcon(par1, par2);
     }
 
@@ -81,7 +80,7 @@ public class BlockPlasma extends BlockContainer {
         super.updateTick(par1World, par2, par3, par4, par5Random);
         //Tick rate is 10
         List<Entity> entities = par1World.getEntitiesWithinAABB(Entity.class,
-                AxisAlignedBB.getAABBPool().getAABB
+                AxisAlignedBB.getBoundingBox
                         (par2, par3, par4, 1, 1, 1)
         );
         for (Entity entity : entities) {
@@ -118,23 +117,18 @@ public class BlockPlasma extends BlockContainer {
     }
 
     @Override
-    public void registerIcons(IconRegister par1IconRegister) {
-        super.registerIcons(par1IconRegister);
+    public boolean isBurning(IBlockAccess world, int x, int y, int z) {
+        return true;
     }
 
     @Override
-    public boolean isBlockReplaceable(World world, int x, int y, int z) {
+    public boolean isFireSource(World world, int x, int y, int z, ForgeDirection side) {
+        return true;
+    }
+
+    @Override
+    public boolean isReplaceable(IBlockAccess world, int x, int y, int z) {
         return false;
-    }
-
-    @Override
-    public boolean isBlockBurning(World world, int x, int y, int z) {
-        return true;
-    }
-
-    @Override
-    public boolean isFireSource(World world, int x, int y, int z, int metadata, ForgeDirection side) {
-        return true;
     }
 
     private void applyEffects(Entity entity) {
@@ -147,7 +141,7 @@ public class BlockPlasma extends BlockContainer {
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         super.onBlockAdded(par1World, par2, par3, par4);
         List<Entity> entities = par1World.getEntitiesWithinAABB(Entity.class,
-                AxisAlignedBB.getAABBPool().getAABB
+                AxisAlignedBB.getBoundingBox
                         (par2, par3, par4, 1, 1, 1)
         );
 
@@ -157,7 +151,7 @@ public class BlockPlasma extends BlockContainer {
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityPlasma();
     }
 }

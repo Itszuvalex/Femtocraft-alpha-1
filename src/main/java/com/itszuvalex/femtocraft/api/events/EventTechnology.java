@@ -22,8 +22,8 @@
 package com.itszuvalex.femtocraft.api.events;
 
 import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
-import net.minecraftforge.event.Cancelable;
-import net.minecraftforge.event.Event;
+import cpw.mods.fml.common.eventhandler.Cancelable;
+import cpw.mods.fml.common.eventhandler.Event;
 
 @Cancelable
 public class EventTechnology extends Event {

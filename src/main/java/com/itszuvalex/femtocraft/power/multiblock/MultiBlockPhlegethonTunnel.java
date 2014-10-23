@@ -21,11 +21,11 @@
 
 package com.itszuvalex.femtocraft.power.multiblock;
 
+import com.itszuvalex.femtocraft.api.multiblock.IMultiBlock;
+import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelAddon;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelComponent;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelCore;
-import com.itszuvalex.femtocraft.api.multiblock.IMultiBlock;
-import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -63,8 +63,8 @@ public class MultiBlockPhlegethonTunnel implements IMultiBlock {
         for (int i = -1; i <= 1; ++i) {
             for (int j = -1; j <= 1; ++j) {
                 for (int k = -1; k <= 1; ++k) {
-                    TileEntity te = world.getBlockTileEntity(x + i, y + k, z
-                                                                           + j);
+                    TileEntity te = world.getTileEntity(x + i, y + k, z
+                                                                      + j);
                     result = te instanceof IMultiBlockComponent &&
                              ((IMultiBlockComponent) te).formMultiBlock(world, x, y, z) && result;
                 }
@@ -97,8 +97,8 @@ public class MultiBlockPhlegethonTunnel implements IMultiBlock {
         for (int i = -1; i <= 1; ++i) {
             for (int j = -1; j <= 1; ++j) {
                 for (int k = -1; k <= 1; ++k) {
-                    TileEntity te = world.getBlockTileEntity(x + i, y + k, z
-                                                                           + j);
+                    TileEntity te = world.getTileEntity(x + i, y + k, z
+                                                                      + j);
                     result = te instanceof IMultiBlockComponent &&
                              ((IMultiBlockComponent) te).breakMultiBlock(world, x, y, z) && result;
                 }
@@ -112,8 +112,8 @@ public class MultiBlockPhlegethonTunnel implements IMultiBlock {
         for (int i = -1; i <= 1; ++i) {
             for (int j = -1; j <= 1; ++j) {
                 for (int k = -1; k <= 1; ++k) {
-                    TileEntity te = world.getBlockTileEntity(x + i, y + k, z
-                                                                           + j);
+                    TileEntity te = world.getTileEntity(x + i, y + k, z
+                                                                      + j);
                     if ((i == 0 && j == 0 & k == 0 && te instanceof
                             IPhlegethonTunnelCore) ||
                         (te instanceof IPhlegethonTunnelComponent && !(te instanceof IPhlegethonTunnelAddon)) ||

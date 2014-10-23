@@ -58,7 +58,6 @@ public class ContainerFemtoEntangler extends ContainerInv<TileEntityFemtoEntangl
         this.addSlotToContainer(new Slot(inventory, 11, 98, 62));
         this.addSlotToContainer(new Slot(inventory, 12, 116, 62));
         this.addSlotToContainer(new OutputSlot(inventory, 13, 147, 35));
-        int i;
 
         addPlayerInventorySlots(par1InventoryPlayer);
     }

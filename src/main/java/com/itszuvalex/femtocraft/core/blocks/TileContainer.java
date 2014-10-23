@@ -35,6 +35,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -42,24 +44,24 @@ import java.util.Random;
 public class TileContainer extends BlockContainer {
     protected static boolean shouldDrop = true;
 
-    public TileContainer(int par1, Material par2Material) {
-        super(par1, par2Material);
+    public TileContainer(Material par2Material) {
+        super(par2Material);
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
         return new TileEntityBase();
     }
 
     @Override
-    public void breakBlock(World par1World, int par2, int par3, int par4,
-                           int par5, int par6) {
+    public void breakBlock(World par1World, int par2, int par3, int par4, Block par5,
+                           int par6) {
         if (shouldDrop) {
-            TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+            TileEntity te = par1World.getTileEntity(par2, par3, par4);
             if (te instanceof TileEntityBase) {
                 TileEntityBase tile = (TileEntityBase) te;
 
-                ItemStack stack = new ItemStack(Block.blocksList[par5]);
+                ItemStack stack = new ItemStack(par5);
                 Item item = stack.getItem();
                 if ((item instanceof CoreItemBlock)
                     && ((CoreItemBlock) item).hasItemNBT()) {
@@ -85,12 +87,13 @@ public class TileContainer extends BlockContainer {
     public boolean onBlockActivated(World par1World, int par2, int par3,
                                     int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
                                     float par8, float par9) {
-        TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+        TileEntity te = par1World.getTileEntity(par2, par3, par4);
         if (te instanceof TileEntityBase) {
             if (((TileEntityBase) te).canPlayerUse(par5EntityPlayer)) {
                 return ((TileEntityBase) te).onSideActivate(par5EntityPlayer, par6);
             } else {
-                par5EntityPlayer.addChatMessage(((TileEntityBase) te).getOwner() + " is the owner of this block.");
+                par5EntityPlayer.addChatMessage(new ChatComponentText(
+                        ((TileEntityBase) te).getOwner() + " is the owner of this block."));
                 return true;
             }
         }
@@ -103,7 +106,7 @@ public class TileContainer extends BlockContainer {
                                 EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
 
         if (!par1World.isRemote) {
-            TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+            TileEntity te = par1World.getTileEntity(par2, par3, par4);
             if (te instanceof TileEntityBase) {
                 if (par5EntityLivingBase == null) {
                     return;
@@ -118,7 +121,7 @@ public class TileContainer extends BlockContainer {
                     if (((TileEntityBase) te).getOwner() == null
                         || ((TileEntityBase) te).getOwner().isEmpty()) {
                         ((TileEntityBase) te)
-                                .setOwner(((EntityPlayerMP) par5EntityLivingBase).username);
+                                .setOwner(par5EntityLivingBase.getCommandSenderName());
                     }
                 }
             }
@@ -128,22 +131,36 @@ public class TileContainer extends BlockContainer {
     }
 
     @Override
-    public boolean removeBlockByPlayer(World world, EntityPlayer player, int x,
-                                       int y, int z) {
-        TileEntity te = world.getBlockTileEntity(x, y, z);
+    public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest) {
+        TileEntity te = world.getTileEntity(x, y, z);
         if (te instanceof TileEntityBase) {
             if (!((TileEntityBase) te).canPlayerUse(player)) {
-                player.addChatMessage(((TileEntityBase) te).getOwner() + " is the owner of this block.");
+                player.addChatMessage(new ChatComponentText(
+                        ((TileEntityBase) te).getOwner() + " is the owner of this block."));
                 return false;
             }
         }
-        return super.removeBlockByPlayer(world, player, x, y, z);
+        return super.removedByPlayer(world, player, x, y, z, willHarvest);
     }
 
+
+    //    @Override
+//    public boolean removeBlockByPlayer(World world, EntityPlayer player, int x,
+//                                       int y, int z) {
+//        TileEntity te = world.getTileEntity(x, y, z);
+//        if (te instanceof TileEntityBase) {
+//            if (!((TileEntityBase) te).canPlayerUse(player)) {
+//                player.addChatMessage(((TileEntityBase) te).getOwner() + " is the owner of this block.");
+//                return false;
+//            }
+//        }
+//        return super.removeBlockByPlayer(world, player, x, y, z);
+//    }
+
+
     @Override
-    public boolean canEntityDestroy(World world, int x, int y, int z,
-                                    Entity entity) {
-        TileEntity te = world.getBlockTileEntity(x, y, z);
+    public boolean canEntityDestroy(IBlockAccess world, int x, int y, int z, Entity entity) {
+        TileEntity te = world.getTileEntity(x, y, z);
         return te instanceof TileEntityBase && entity instanceof EntityPlayer
                && ((TileEntityBase) te).canPlayerUse((EntityPlayer) entity)
                && super.canEntityDestroy(world, x, y, z, entity);

@@ -22,18 +22,18 @@
 package com.itszuvalex.femtocraft.industry.gui;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.core.gui.GuiBase;
 import com.itszuvalex.femtocraft.industry.containers.ContainerNanoEnmesher;
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityNanoEnmesher;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
-public class GuiNanoEnmesher extends GuiContainer {
+public class GuiNanoEnmesher extends GuiBase {
     public static final ResourceLocation texture = new ResourceLocation(
             Femtocraft.ID().toLowerCase(), "textures/guis/NanoEnmesher.png");
     private TileEntityBaseEntityNanoEnmesher inventory;
@@ -60,7 +60,7 @@ public class GuiNanoEnmesher extends GuiContainer {
 
         // String text = String.format("%i/%i", furnaceCurrent, furnaceMax);
         String text = FemtocraftUtils.formatIntegerToString(furnaceCurrent) + '/'
-                + FemtocraftUtils.formatIntegerToString(furnaceMax);
+                      + FemtocraftUtils.formatIntegerToString(furnaceMax);
 
         if (this.isPointInRegion(18, 12, 16, 60, par1, par2)) {
             this.drawCreativeTabHoveringText(text, par1, par2);
@@ -68,24 +68,22 @@ public class GuiNanoEnmesher extends GuiContainer {
     }
 
     /**
-     * Draw the foreground layer for the GuiContainer (everything in front of
-     * the items)
+     * Draw the foreground layer for the GuiContainer (everything in front of the items)
      */
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         String s = "Nano Enmesher";
-        this.fontRenderer.drawString(s,
-                this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6,
+        this.fontRendererObj.drawString(s,
+                this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6,
                 FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
-        this.fontRenderer.drawString(
+        this.fontRendererObj.drawString(
                 StatCollector.translateToLocal("container.inventory"), 8,
                 this.ySize - 96 + 2,
                 FemtocraftUtils.colorFromARGB(0, 255, 255, 255));
     }
 
     /**
-     * Draw the background layer for the GuiContainer (everything behind the
-     * items)
+     * Draw the background layer for the GuiContainer (everything behind the items)
      */
     @Override
     protected void drawGuiContainerBackgroundLayer(float par1, int par2,
@@ -108,7 +106,7 @@ public class GuiNanoEnmesher extends GuiContainer {
         this.drawTexturedModalRect(k + 80, l + 26, 176, 0, i1, 34);
         this.drawTexturedModalRect(k + 138 + i1, l + 26, 176 + i1, 0, 34 - i1, 34);
         i1 = (this.inventory.getCurrentPower() * 60)
-                / this.inventory.getMaxPower();
+             / this.inventory.getMaxPower();
         this.drawTexturedModalRect(k + 18, l + 11 + (60 - i1), 176,
                 34 + (60 - i1), 16 + (60 - i1), 60);
     }

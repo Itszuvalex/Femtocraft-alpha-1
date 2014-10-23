@@ -33,7 +33,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
         IMultiBlockComponent {
@@ -78,7 +78,7 @@ public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
             }
 
             IPowerBlockContainer fc = (IPowerBlockContainer) worldObj
-                    .getBlockTileEntity(info.x(), info.y(), info.z());
+                    .getTileEntity(info.x(), info.y(), info.z());
             if (fc != null) {
                 return fc.getCurrentPower();
             }
@@ -99,7 +99,7 @@ public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
             }
 
             IPowerBlockContainer fc = (IPowerBlockContainer) worldObj
-                    .getBlockTileEntity(info.x(), info.y(), info.z());
+                    .getTileEntity(info.x(), info.y(), info.z());
             if (fc != null) {
                 return fc.getMaxPower();
             }
@@ -125,7 +125,7 @@ public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
             }
 
             IPowerBlockContainer fc = (IPowerBlockContainer) worldObj
-                    .getBlockTileEntity(info.x(), info.y(), info.z());
+                    .getTileEntity(info.x(), info.y(), info.z());
             if (fc != null) {
                 return fc.getFillPercentage();
             }
@@ -202,7 +202,7 @@ public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
             }
 
             TileEntityFemtoCubePort fc = (TileEntityFemtoCubePort) worldObj
-                    .getBlockTileEntity(info.x(), info.y(), info.z());
+                    .getTileEntity(info.x(), info.y(), info.z());
             if (fc != null) {
                 return fc.controllerCharge(from, amount);
             }
@@ -230,7 +230,7 @@ public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
             }
 
             TileEntityFemtoCubePort fc = (TileEntityFemtoCubePort) worldObj
-                    .getBlockTileEntity(info.x(), info.y(), info.z());
+                    .getTileEntity(info.x(), info.y(), info.z());
             if (fc != null) {
                 return fc.controllerConsume(amount);
             }
@@ -260,7 +260,7 @@ public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
         // info.loadFromNBT(compound.getCompoundTag("info"));
         // output = compound.getBoolean("output");
 
-        worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+        setRenderUpdate();
     }
 
     /*
@@ -309,7 +309,7 @@ public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
         boolean result = info.formMultiBlock(world, x, y, z);
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord,
-                worldObj.getBlockId(xCoord, yCoord, zCoord));
+                worldObj.getBlock(xCoord, yCoord, zCoord));
         return result;
     }
 
@@ -318,7 +318,7 @@ public class TileEntityFemtoCubePort extends TileEntityPowerBase implements
         boolean result = info.breakMultiBlock(world, x, y, z);
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord,
-                worldObj.getBlockId(xCoord, yCoord, zCoord));
+                worldObj.getBlock(xCoord, yCoord, zCoord));
         return result;
     }
 

@@ -23,8 +23,8 @@ package com.itszuvalex.femtocraft.power.multiblock;
 
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlock;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
-import com.itszuvalex.femtocraft.power.plasma.IFusionReactorComponent;
-import com.itszuvalex.femtocraft.power.plasma.IFusionReactorCore;
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorComponent;
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -51,8 +51,8 @@ public class MultiBlockFemtoStellarator implements IMultiBlock {
     @Override
     public boolean isBlockInMultiBlock(World world, int x, int y, int z, int c_x, int c_y, int c_z) {
         return x >= (c_x - 2) && x <= (c_x + 2) &&
-                y >= (c_y - 2) && y <= (c_y + 2) &&
-                z >= (c_z - 2) && z <= (c_z + 2);
+               y >= (c_y - 2) && y <= (c_y + 2) &&
+               z >= (c_z - 2) && z <= (c_z + 2);
     }
 
     @Override
@@ -62,9 +62,10 @@ public class MultiBlockFemtoStellarator implements IMultiBlock {
         for (int i = -2; i <= 2; ++i) {
             for (int j = -2; j <= 2; ++j) {
                 for (int k = -2; k <= 2; ++k) {
-                    TileEntity te = world.getBlockTileEntity(x + i, y + k, z
-                            + j);
-                    result = te instanceof IMultiBlockComponent && ((IMultiBlockComponent) te).formMultiBlock(world, x, y, z) && result;
+                    TileEntity te = world.getTileEntity(x + i, y + k, z
+                                                                      + j);
+                    result = te instanceof IMultiBlockComponent &&
+                             ((IMultiBlockComponent) te).formMultiBlock(world, x, y, z) && result;
                 }
             }
         }
@@ -95,9 +96,10 @@ public class MultiBlockFemtoStellarator implements IMultiBlock {
         for (int i = -2; i <= 2; ++i) {
             for (int j = -2; j <= 2; ++j) {
                 for (int k = -2; k <= 2; ++k) {
-                    TileEntity te = world.getBlockTileEntity(x + i, y + k, z
-                            + j);
-                    result = te instanceof IMultiBlockComponent && ((IMultiBlockComponent) te).breakMultiBlock(world, x, y, z) && result;
+                    TileEntity te = world.getTileEntity(x + i, y + k, z
+                                                                      + j);
+                    result = te instanceof IMultiBlockComponent &&
+                             ((IMultiBlockComponent) te).breakMultiBlock(world, x, y, z) && result;
                 }
             }
         }
@@ -109,23 +111,22 @@ public class MultiBlockFemtoStellarator implements IMultiBlock {
         for (int i = -2; i <= 2; ++i) {
             for (int j = -2; j <= 2; ++j) {
                 for (int k = -2; k <= 2; ++k) {
-                    TileEntity te = world.getBlockTileEntity(x + i, y + k, z
-                            + j);
+                    TileEntity te = world.getTileEntity(x + i, y + k, z
+                                                                      + j);
                     if (i == 0 && j == 0 & k == 0 ? te instanceof
                             IFusionReactorCore : (te
-                            instanceof IFusionReactorComponent && !(te
+                                                          instanceof IFusionReactorComponent && !(te
                             instanceof
                             IFusionReactorCore)) && te instanceof
-                            IMultiBlockComponent) {
+                                                         IMultiBlockComponent) {
 
                         if (strict) {
                             if (((IMultiBlockComponent) te).getInfo()
-                                                           .isValidMultiBlock()) {
+                                    .isValidMultiBlock()) {
                                 return false;
                             }
                         }
-                    }
-                    else {
+                    } else {
                         return false;
                     }
                 }

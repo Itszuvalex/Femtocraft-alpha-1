@@ -26,6 +26,7 @@ import com.itszuvalex.femtocraft.core.items.CoreItemBlock;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityPowerBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -35,8 +36,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public abstract class ItemBlockPower extends CoreItemBlock {
-
-    public ItemBlockPower(int par1) {
+    public ItemBlockPower(Block par1) {
         super(par1);
     }
 

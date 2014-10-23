@@ -19,7 +19,7 @@ object ComponentRegistry {
 
   def getComponents(tech: EnumTechLevel) = getOrMake(tech)
 
-  def getComponentsAssemblerRecipeDisplayString(tech: EnumTechLevel) = getComponents(tech).map(i => "__Recipe.Assembler:" + FemtocraftStringUtils.itemStackToString(new ItemStack(i)) + "--" + i.getItemDisplayName(new ItemStack(i)) + "__").aggregate("")(_ + _, _ + _)
+  def getComponentsAssemblerRecipeDisplayString(tech: EnumTechLevel) = getComponents(tech).map(i => "__Recipe.Assembler:" + FemtocraftStringUtils.itemStackToString(new ItemStack(i)) + "--" + i.getItemStackDisplayName(new ItemStack(i)) + "__").aggregate("")(_ + _, _ + _)
 
   def getComponentsInAssemblerRecipeDisplayString(tech: EnumTechLevel) = {
     Femtocraft.recipeManager.assemblyRecipes.getAllRecipes.filter(p => {
@@ -33,7 +33,7 @@ object ComponentRegistry {
                              if (it == null) false else getComponents(tech).contains(it)
                          }
       }
-    }).map(i => i.output.getItem).map(i => "__Recipe.Assembler:" + FemtocraftStringUtils.itemStackToString(new ItemStack(i)) + "--" + i.getItemDisplayName(new ItemStack(i)) + "__").aggregate("")(_ + _, _ + _)
+    }).map(i => i.output.getItem).map(i => "__Recipe.Assembler:" + FemtocraftStringUtils.itemStackToString(new ItemStack(i)) + "--" + i.getItemStackDisplayName(new ItemStack(i)) + "__").aggregate("")(_ + _, _ + _)
   }
 
   private def getOrMake(tech: EnumTechLevel) = componentMap.get(tech) match {

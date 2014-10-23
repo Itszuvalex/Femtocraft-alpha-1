@@ -3,7 +3,7 @@ package com.itszuvalex.femtocraft.power.traits
 import com.itszuvalex.femtocraft.api.power.{IPowerBlockContainer, PowerContainer}
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable
-import net.minecraftforge.common.ForgeDirection
+import net.minecraftforge.common.util.ForgeDirection
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 10/9/14.

@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.api.transport;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * @author Itszuvalex
@@ -47,16 +47,14 @@ public interface IVacuumTube {
     public boolean insertItem(ItemStack item, ForgeDirection dir);
 
     /**
-     * @return True if given ForgeDirection is an input.  This allows
-     * multiple connections, compared to simply returning "input direction",
-     * causing lockout.
+     * @return True if given ForgeDirection is an input.  This allows multiple connections, compared to simply returning
+     * "input direction", causing lockout.
      */
     public boolean isInput(ForgeDirection dir);
 
     /**
-     * @return True if given ForgeDirection is an output.  This allows
-     * multiple connections, compared to simply returning "output direction",
-     * causing lockout.
+     * @return True if given ForgeDirection is an output.  This allows multiple connections, compared to simply
+     * returning "output direction", causing lockout.
      */
     public boolean isOutput(ForgeDirection dir);
 

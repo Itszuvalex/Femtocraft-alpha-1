@@ -87,7 +87,7 @@ public class RenderSimpleMachine implements ISimpleBlockRenderingHandler {
     }
 
     @Override
-    public boolean shouldRender3DInInventory() {
+    public boolean shouldRender3DInInventory(int id) {
         return true;
     }
 

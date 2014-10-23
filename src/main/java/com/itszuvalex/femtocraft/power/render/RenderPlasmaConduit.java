@@ -33,7 +33,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -42,10 +42,14 @@ import org.lwjgl.opengl.GL11;
 public class RenderPlasmaConduit implements ISimpleBlockRenderingHandler {
     private RenderModel center;
     private RenderModel center_filled;
-    private RenderModel connector_in_north, connector_in_south, connector_in_east, connector_in_west, connector_in_up, connector_in_down;
-    private RenderModel connector_in_north_filled, connector_in_south_filled, connector_in_east_filled, connector_in_west_filled, connector_in_up_filled, connector_in_down_filled;
-    private RenderModel connector_out_north, connector_out_south, connector_out_east, connector_out_west, connector_out_up, connector_out_down;
-    private RenderModel connector_out_north_filled, connector_out_south_filled, connector_out_east_filled, connector_out_west_filled, connector_out_up_filled, connector_out_down_filled;
+    private RenderModel connector_in_north, connector_in_south, connector_in_east, connector_in_west,
+            connector_in_up, connector_in_down;
+    private RenderModel connector_in_north_filled, connector_in_south_filled, connector_in_east_filled,
+            connector_in_west_filled, connector_in_up_filled, connector_in_down_filled;
+    private RenderModel connector_out_north, connector_out_south, connector_out_east, connector_out_west,
+            connector_out_up, connector_out_down;
+    private RenderModel connector_out_north_filled, connector_out_south_filled, connector_out_east_filled,
+            connector_out_west_filled, connector_out_up_filled, connector_out_down_filled;
     private boolean initialized = false;
 
     public RenderPlasmaConduit() {
@@ -62,10 +66,14 @@ public class RenderPlasmaConduit implements ISimpleBlockRenderingHandler {
         float maxU = conduit.center.getInterpolatedU(14f);
         float minV = conduit.center.getInterpolatedV(2f);
         float maxV = conduit.center.getInterpolatedV(14f);
-        center.addQuad(RenderUtils.makeNorthFace(min, max, min, max, min, conduit.center, minU, maxU, minV, maxV).flipV());
-        center.addQuad(RenderUtils.makeSouthFace(min, max, min, max, max, conduit.center, minU, maxU, minV, maxV).flipV());
-        center.addQuad(RenderUtils.makeWestFace(min, max, min, max, min, conduit.center, minU, maxU, minV, maxV).rotatePointsClockwise().flipV());
-        center.addQuad(RenderUtils.makeEastFace(min, max, min, max, max, conduit.center, minU, maxU, minV, maxV).flipU());
+        center.addQuad(RenderUtils.makeNorthFace(min, max, min, max, min, conduit.center, minU, maxU, minV,
+                maxV).flipV());
+        center.addQuad(RenderUtils.makeSouthFace(min, max, min, max, max, conduit.center, minU, maxU, minV,
+                maxV).flipV());
+        center.addQuad(RenderUtils.makeWestFace(min, max, min, max, min, conduit.center, minU, maxU, minV,
+                maxV).rotatePointsClockwise().flipV());
+        center.addQuad(RenderUtils.makeEastFace(min, max, min, max, max, conduit.center, minU, maxU, minV,
+                maxV).flipU());
         center.addQuad(RenderUtils.makeTopFace(min, max, min, max, max, conduit.center, minU, maxU, minV, maxV));
         center.addQuad(RenderUtils.makeBottomFace(min, max, min, max, min, conduit.center, minU, maxU, minV, maxV));
 
@@ -74,12 +82,18 @@ public class RenderPlasmaConduit implements ISimpleBlockRenderingHandler {
         minV = conduit.center_filled.getInterpolatedV(2f);
         maxV = conduit.center_filled.getInterpolatedV(14f);
 
-        center_filled.addQuad(RenderUtils.makeNorthFace(min, max, min, max, min, conduit.center_filled, minU, maxU, minV, maxV).flipV());
-        center_filled.addQuad(RenderUtils.makeSouthFace(min, max, min, max, max, conduit.center_filled, minU, maxU, minV, maxV).flipV());
-        center_filled.addQuad(RenderUtils.makeWestFace(min, max, min, max, min, conduit.center_filled, minU, maxU, minV, maxV).rotatePointsClockwise().flipV());
-        center_filled.addQuad(RenderUtils.makeEastFace(min, max, min, max, max, conduit.center_filled, minU, maxU, minV, maxV).flipU());
-        center_filled.addQuad(RenderUtils.makeTopFace(min, max, min, max, max, conduit.center_filled, minU, maxU, minV, maxV));
-        center_filled.addQuad(RenderUtils.makeBottomFace(min, max, min, max, min, conduit.center_filled, minU, maxU, minV, maxV));
+        center_filled.addQuad(RenderUtils.makeNorthFace(min, max, min, max, min, conduit.center_filled, minU, maxU,
+                minV, maxV).flipV());
+        center_filled.addQuad(RenderUtils.makeSouthFace(min, max, min, max, max, conduit.center_filled, minU, maxU,
+                minV, maxV).flipV());
+        center_filled.addQuad(RenderUtils.makeWestFace(min, max, min, max, min, conduit.center_filled, minU, maxU,
+                minV, maxV).rotatePointsClockwise().flipV());
+        center_filled.addQuad(RenderUtils.makeEastFace(min, max, min, max, max, conduit.center_filled, minU, maxU,
+                minV, maxV).flipU());
+        center_filled.addQuad(RenderUtils.makeTopFace(min, max, min, max, max, conduit.center_filled, minU, maxU,
+                minV, maxV));
+        center_filled.addQuad(RenderUtils.makeBottomFace(min, max, min, max, min, conduit.center_filled, minU, maxU,
+                minV, maxV));
 
         //in
 
@@ -93,20 +107,28 @@ public class RenderPlasmaConduit implements ISimpleBlockRenderingHandler {
         minV = conduit.input.getInterpolatedV(2f);
         maxV = conduit.input.getInterpolatedV(14f);
 
-        connector_in_up.addQuad(RenderUtils.makeNorthFace(min, max, minHeight, maxHeight, min, conduit.input, minU, maxU, minV, maxV).rotatePointsClockwise());
-        connector_in_up.addQuad(RenderUtils.makeSouthFace(min, max, minHeight, maxHeight, max, conduit.input, minU, maxU, minV, maxV).rotatePointsClockwise());
-        connector_in_up.addQuad(RenderUtils.makeWestFace(minHeight, maxHeight, min, max, min, conduit.input, minU, maxU, minV, maxV).rotatePointsClockwise().rotatePointsClockwise());
-        connector_in_up.addQuad(RenderUtils.makeEastFace(minHeight, maxHeight, min, max, max, conduit.input, minU, maxU, minV, maxV).rotatePointsCounterClockwise());
+        connector_in_up.addQuad(RenderUtils.makeNorthFace(min, max, minHeight, maxHeight, min, conduit.input, minU,
+                maxU, minV, maxV).rotatePointsClockwise());
+        connector_in_up.addQuad(RenderUtils.makeSouthFace(min, max, minHeight, maxHeight, max, conduit.input, minU,
+                maxU, minV, maxV).rotatePointsClockwise());
+        connector_in_up.addQuad(RenderUtils.makeWestFace(minHeight, maxHeight, min, max, min, conduit.input, minU,
+                maxU, minV, maxV).rotatePointsClockwise().rotatePointsClockwise());
+        connector_in_up.addQuad(RenderUtils.makeEastFace(minHeight, maxHeight, min, max, max, conduit.input, minU,
+                maxU, minV, maxV).rotatePointsCounterClockwise());
 
         minU = conduit.input_filled.getInterpolatedU(0f);
         maxU = conduit.input_filled.getInterpolatedU(2f);
         minV = conduit.input_filled.getInterpolatedV(2f);
         maxV = conduit.input_filled.getInterpolatedV(14f);
 
-        connector_in_up_filled.addQuad(RenderUtils.makeNorthFace(min, max, minHeight, maxHeight, min, conduit.input_filled, minU, maxU, minV, maxV).rotatePointsClockwise());
-        connector_in_up_filled.addQuad(RenderUtils.makeSouthFace(min, max, minHeight, maxHeight, max, conduit.input_filled, minU, maxU, minV, maxV).rotatePointsClockwise());
-        connector_in_up_filled.addQuad(RenderUtils.makeWestFace(min, max, minHeight, maxHeight, min, conduit.input_filled, minU, maxU, minV, maxV).rotatePointsClockwise().rotatePointsClockwise());
-        connector_in_up_filled.addQuad(RenderUtils.makeEastFace(min, max, minHeight, maxHeight, max, conduit.input_filled, minU, maxU, minV, maxV).rotatePointsCounterClockwise());
+        connector_in_up_filled.addQuad(RenderUtils.makeNorthFace(min, max, minHeight, maxHeight, min,
+                conduit.input_filled, minU, maxU, minV, maxV).rotatePointsClockwise());
+        connector_in_up_filled.addQuad(RenderUtils.makeSouthFace(min, max, minHeight, maxHeight, max,
+                conduit.input_filled, minU, maxU, minV, maxV).rotatePointsClockwise());
+        connector_in_up_filled.addQuad(RenderUtils.makeWestFace(min, max, minHeight, maxHeight, min,
+                conduit.input_filled, minU, maxU, minV, maxV).rotatePointsClockwise().rotatePointsClockwise());
+        connector_in_up_filled.addQuad(RenderUtils.makeEastFace(min, max, minHeight, maxHeight, max,
+                conduit.input_filled, minU, maxU, minV, maxV).rotatePointsCounterClockwise());
 
         //out
 
@@ -118,20 +140,28 @@ public class RenderPlasmaConduit implements ISimpleBlockRenderingHandler {
         minV = conduit.output.getInterpolatedV(2f);
         maxV = conduit.output.getInterpolatedV(14f);
 
-        connector_out_up.addQuad(RenderUtils.makeNorthFace(min, max, minHeight, maxHeight, min, conduit.output, minU, maxU, minV, maxV).rotatePointsClockwise());
-        connector_out_up.addQuad(RenderUtils.makeSouthFace(min, max, minHeight, maxHeight, max, conduit.output, minU, maxU, minV, maxV).rotatePointsClockwise());
-        connector_out_up.addQuad(RenderUtils.makeWestFace(minHeight, maxHeight, min, max, min, conduit.output, minU, maxU, minV, maxV).rotatePointsClockwise().rotatePointsClockwise());
-        connector_out_up.addQuad(RenderUtils.makeEastFace(minHeight, maxHeight, min, max, max, conduit.output, minU, maxU, minV, maxV).rotatePointsCounterClockwise());
+        connector_out_up.addQuad(RenderUtils.makeNorthFace(min, max, minHeight, maxHeight, min, conduit.output, minU,
+                maxU, minV, maxV).rotatePointsClockwise());
+        connector_out_up.addQuad(RenderUtils.makeSouthFace(min, max, minHeight, maxHeight, max, conduit.output, minU,
+                maxU, minV, maxV).rotatePointsClockwise());
+        connector_out_up.addQuad(RenderUtils.makeWestFace(minHeight, maxHeight, min, max, min, conduit.output, minU,
+                maxU, minV, maxV).rotatePointsClockwise().rotatePointsClockwise());
+        connector_out_up.addQuad(RenderUtils.makeEastFace(minHeight, maxHeight, min, max, max, conduit.output, minU,
+                maxU, minV, maxV).rotatePointsCounterClockwise());
 
         minU = conduit.output_filled.getInterpolatedU(0f);
         maxU = conduit.output_filled.getInterpolatedU(2f);
         minV = conduit.output_filled.getInterpolatedV(2f);
         maxV = conduit.output_filled.getInterpolatedV(14f);
 
-        connector_out_up_filled.addQuad(RenderUtils.makeNorthFace(min, max, minHeight, maxHeight, min, conduit.output_filled, minU, maxU, minV, maxV).rotatePointsClockwise());
-        connector_out_up_filled.addQuad(RenderUtils.makeSouthFace(min, max, minHeight, maxHeight, max, conduit.output_filled, minU, maxU, minV, maxV).rotatePointsClockwise());
-        connector_out_up_filled.addQuad(RenderUtils.makeWestFace(min, max, minHeight, maxHeight, min, conduit.output_filled, minU, maxU, minV, maxV).rotatePointsClockwise().rotatePointsClockwise());
-        connector_out_up_filled.addQuad(RenderUtils.makeEastFace(min, max, minHeight, maxHeight, max, conduit.output_filled, minU, maxU, minV, maxV).rotatePointsCounterClockwise());
+        connector_out_up_filled.addQuad(RenderUtils.makeNorthFace(min, max, minHeight, maxHeight, min,
+                conduit.output_filled, minU, maxU, minV, maxV).rotatePointsClockwise());
+        connector_out_up_filled.addQuad(RenderUtils.makeSouthFace(min, max, minHeight, maxHeight, max,
+                conduit.output_filled, minU, maxU, minV, maxV).rotatePointsClockwise());
+        connector_out_up_filled.addQuad(RenderUtils.makeWestFace(min, max, minHeight, maxHeight, min,
+                conduit.output_filled, minU, maxU, minV, maxV).rotatePointsClockwise().rotatePointsClockwise());
+        connector_out_up_filled.addQuad(RenderUtils.makeEastFace(min, max, minHeight, maxHeight, max,
+                conduit.output_filled, minU, maxU, minV, maxV).rotatePointsCounterClockwise());
 
 
         //rotations
@@ -185,7 +215,8 @@ public class RenderPlasmaConduit implements ISimpleBlockRenderingHandler {
 
     }
 
-    private boolean renderConduit(BlockPlasmaConduit conduit, int x, int y, int z, boolean filled, ForgeDirection input, ForgeDirection output) {
+    private boolean renderConduit(BlockPlasmaConduit conduit, int x, int y, int z, boolean filled,
+                                  ForgeDirection input, ForgeDirection output) {
         if (!initialized) {
             createConduit(conduit);
         }
@@ -262,20 +293,21 @@ public class RenderPlasmaConduit implements ISimpleBlockRenderingHandler {
         if (conduit == null) {
             return false;
         }
-        TileEntity tile = renderer.blockAccess.getBlockTileEntity(x, y, z);
+        TileEntity tile = renderer.blockAccess.getTileEntity(x, y, z);
         if (tile instanceof TileEntityPlasmaConduit) {
             TileEntityPlasmaConduit conduitTile = (TileEntityPlasmaConduit) tile;
             Tessellator tessellator = Tessellator.instance;
             tessellator.setBrightness(block.getMixedBrightnessForBlock(
                     renderer.blockAccess, x, y, z));
             tessellator.setColorOpaque_F(1, 1, 1);
-            return renderConduit(conduit, x, y, z, conduitTile.hasFlows(), conduitTile.getInputDir(), conduitTile.getOutputDir());
+            return renderConduit(conduit, x, y, z, conduitTile.hasFlows(), conduitTile.getInputDir(),
+                    conduitTile.getOutputDir());
         }
         return false;
     }
 
     @Override
-    public boolean shouldRender3DInInventory() {
+    public boolean shouldRender3DInInventory(int modelID) {
         return true;
     }
 

@@ -25,19 +25,19 @@ package com.itszuvalex.femtocraft.research.items;
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.Femtocraft$;
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
-import net.minecraft.client.renderer.texture.IconRegister;
+import com.itszuvalex.femtocraft.core.items.ItemBase;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/5/14.
  */
-public class ItemPortableResearchComputer extends Item {
+public class ItemPortableResearchComputer extends ItemBase {
 
-    public ItemPortableResearchComputer(int par1) {
-        super(par1);
+    public ItemPortableResearchComputer() {
+        super("ItemPortableResearchComputer");
         setCreativeTab(Femtocraft.femtocraftTab());
         setMaxStackSize(1);
         setUnlocalizedName("ItemPortableResearchComputer");
@@ -54,7 +54,7 @@ public class ItemPortableResearchComputer extends Item {
     }
 
     @Override
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerIcons(IIconRegister par1IconRegister) {
         itemIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                                                  + ":" +
                                                  "ItemPortableResearchComputer");

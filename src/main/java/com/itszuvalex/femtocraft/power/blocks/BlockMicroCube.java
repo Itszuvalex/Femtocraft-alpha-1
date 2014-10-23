@@ -27,43 +27,40 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockMicroCube extends BlockPowerContainer {
-    public Icon outputSide;
-    public Icon inputSide;
+    public IIcon outputSide;
+    public IIcon inputSide;
 
-    public BlockMicroCube(int par1) {
-        super(par1, Material.iron);
+    public BlockMicroCube() {
+        super(Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab());
-        setUnlocalizedName("blockMicroCube");
+        setBlockName("blockMicroCube");
         setHardness(3.f);
-        setStepSound(Block.soundMetalFootstep);
+        setStepSound(Block.soundTypeMetal);
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityMicroCube();
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getBlockTexture(IBlockAccess access, int x, int y, int z,
-                                int side) {
-        TileEntity te = access.getBlockTileEntity(x, y, z);
+    public IIcon getIcon(IBlockAccess access, int x, int y, int z,
+                         int side) {
+        TileEntity te = access.getTileEntity(x, y, z);
 
-        if (te == null) {
-            return this.blockIcon;
+        if (te != null && te instanceof TileEntityMicroCube) {
+            TileEntityMicroCube cube = (TileEntityMicroCube) te;
+            return cube.outputs[side] ? outputSide : inputSide;
         }
-        if (!(te instanceof TileEntityMicroCube)) {
-            return this.blockIcon;
-        }
-        TileEntityMicroCube cube = (TileEntityMicroCube) te;
-        return cube.outputs[side] ? outputSide : inputSide;
+        return this.blockIcon;
     }
 
     // @Override
@@ -84,12 +81,12 @@ public class BlockMicroCube extends BlockPowerContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = inputSide = par1IconRegister
                 .registerIcon(Femtocraft.ID().toLowerCase() + ":"
-                        + "MicroCube_input");
+                              + "MicroCube_input");
         outputSide = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "MicroCube_output");
+                                                   + ":" + "MicroCube_output");
         // side = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() +
         // ":" + "MicroCube_side");
     }

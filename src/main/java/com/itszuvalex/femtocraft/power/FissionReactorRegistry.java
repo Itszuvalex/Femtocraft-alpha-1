@@ -1,7 +1,8 @@
 package com.itszuvalex.femtocraft.power;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -11,16 +12,16 @@ import java.util.HashMap;
  * Created by Chris on 8/19/2014.
  */
 public class FissionReactorRegistry {
-    private static HashMap<Integer, FissionReactorReagent> thoriumMap = new HashMap<Integer, FissionReactorReagent>();
-    private static HashMap<Integer, FissionReactorReagent> saltMap = new HashMap<Integer, FissionReactorReagent>();
-    private static HashMap<Integer, FissionReactorReagent> heatMap = new HashMap<Integer, FissionReactorReagent>();
+    private static HashMap<Integer, FissionReactorReagent> thoriumMap = new HashMap<>();
+    private static HashMap<Integer, FissionReactorReagent> saltMap = new HashMap<>();
+    private static HashMap<Integer, FissionReactorReagent> heatMap = new HashMap<>();
 
     public static void init() {
-        addFissionReactorHeatSource(new ItemStack(Block.blockSnow), 0, -1);
-        addFissionReactorHeatSource(new ItemStack(Block.ice), 0, -10);
-        addFissionReactorHeatSource(new ItemStack(Item.bucketLava), 0, 100);
-        addFissionReactorHeatSource(new ItemStack(Item.fireballCharge), 0, 20);
-        addFissionReactorHeatSource(new ItemStack(Item.bucketWater), 0, -5);
+        addFissionReactorHeatSource(new ItemStack(Blocks.snow), 0, -1);
+        addFissionReactorHeatSource(new ItemStack(Blocks.ice), 0, -10);
+        addFissionReactorHeatSource(new ItemStack(Items.lava_bucket), 0, 100);
+        addFissionReactorHeatSource(new ItemStack(Items.fire_charge), 0, 20);
+        addFissionReactorHeatSource(new ItemStack(Items.water_bucket), 0, -5);
         addFissionReactorSaltSource(new ItemStack(Femtocraft.itemIngotThFaSalt()), 1000, 10);
         addFissionReactorThoriumSource(new ItemStack(Femtocraft.itemIngotThorium()), 1000, 20);
     }
@@ -31,7 +32,7 @@ public class FissionReactorRegistry {
     }
 
     public static void addFissionReactorThoriumSource(FissionReactorReagent reagent) {
-        thoriumMap.put(reagent.item.itemID, reagent);
+        thoriumMap.put(Item.getIdFromItem(reagent.item.getItem()), reagent);
     }
 
     public static void addFissionReactorSaltSource(ItemStack item, int amount, float temp) {
@@ -39,7 +40,7 @@ public class FissionReactorRegistry {
     }
 
     public static void addFissionReactorSaltSource(FissionReactorReagent reagent) {
-        saltMap.put(reagent.item.itemID, reagent);
+        saltMap.put(Item.getIdFromItem(reagent.item.getItem()), reagent);
     }
 
     public static void addFissionReactorHeatSource(ItemStack item, int amount, float heat) {
@@ -47,19 +48,19 @@ public class FissionReactorRegistry {
     }
 
     public static void addFissionReactorHeatSource(FissionReactorReagent reagent) {
-        heatMap.put(reagent.item.itemID, reagent);
+        heatMap.put(Item.getIdFromItem(reagent.item.getItem()), reagent);
     }
 
     public static FissionReactorReagent getThoriumSource(ItemStack item) {
-        return thoriumMap.get(item.itemID);
+        return thoriumMap.get(Item.getIdFromItem(item.getItem()));
     }
 
     public static FissionReactorReagent getSaltSource(ItemStack item) {
-        return saltMap.get(item.itemID);
+        return saltMap.get(Item.getIdFromItem(item.getItem()));
     }
 
     public static FissionReactorReagent getHeatSource(ItemStack item) {
-        return heatMap.get(item.itemID);
+        return heatMap.get(Item.getIdFromItem(item.getItem()));
     }
 
     public static class FissionReactorReagent {

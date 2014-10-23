@@ -37,7 +37,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -92,7 +92,7 @@ public class RenderFemtoCable implements ISimpleBlockRenderingHandler {
             return false;
         }
 
-        TileEntity tile = renderer.blockAccess.getBlockTileEntity(x, y, z);
+        TileEntity tile = renderer.blockAccess.getTileEntity(x, y, z);
         if (tile == null) {
             return false;
         }
@@ -110,7 +110,7 @@ public class RenderFemtoCable implements ISimpleBlockRenderingHandler {
     }
 
     @Override
-    public boolean shouldRender3DInInventory() {
+    public boolean shouldRender3DInInventory(int modelID) {
         return true;
     }
 
@@ -157,8 +157,7 @@ public class RenderFemtoCable implements ISimpleBlockRenderingHandler {
 
         if (!connectedAcross(connections)) {
             drawCoreBlock(cable, x, y, z, connections);
-        }
-        else {
+        } else {
             if (connections[0]) {
                 drawCoilClose(cable, ForgeDirection.UP, loc);
                 drawCoilClose(cable, ForgeDirection.DOWN, loc);
@@ -166,16 +165,14 @@ public class RenderFemtoCable implements ISimpleBlockRenderingHandler {
                 // ForgeDirection.getOrientation(0));
                 // drawCoil(BlockFemtoCable, x, y, z, 2.0F/16.0F, renderer,
                 // ForgeDirection.getOrientation(0).getOpposite());
-            }
-            else if (connections[2]) {
+            } else if (connections[2]) {
                 drawCoilClose(cable, ForgeDirection.NORTH, loc);
                 drawCoilClose(cable, ForgeDirection.SOUTH, loc);
                 // drawCoil(BlockFemtoCable, x, y, z, 2.0F/16.0F, renderer,
                 // ForgeDirection.getOrientation(2));
                 // drawCoil(BlockFemtoCable, x, y, z, 2.0F/16.0F, renderer,
                 // ForgeDirection.getOrientation(2).getOpposite());
-            }
-            else if (connections[4]) {
+            } else if (connections[4]) {
                 drawCoilClose(cable, ForgeDirection.EAST, loc);
                 drawCoilClose(cable, ForgeDirection.WEST, loc);
                 // drawCoil(BlockFemtoCable, x, y, z, 2.0F/16.0F, renderer,
@@ -367,7 +364,7 @@ public class RenderFemtoCable implements ISimpleBlockRenderingHandler {
         // West-face, AA - top left, AB - bot left, AC - bot right, AD - top
         // right
         RenderPoint AA = new RenderPoint(4.0F / 16.0F, 12.0F / 16.0F, -2.0F / 16.0F
-                + offset);
+                                                                      + offset);
         RenderPoint AB = new RenderPoint(4.0F / 16.0F, 4.0F / 16.0F, -2.0F / 16.0F + offset);
         RenderPoint AC = new RenderPoint(4.0F / 16.0F, 4.0F / 16.0F, 2.0F / 16.0F + offset);
         RenderPoint AD = new RenderPoint(4.0F / 16.0F, 12.0F / 16.0F, 2.0F / 16.0F + offset);
@@ -377,9 +374,9 @@ public class RenderFemtoCable implements ISimpleBlockRenderingHandler {
                 2.0F / 16.0F + offset);
         RenderPoint BB = new RenderPoint(12.0F / 16.0F, 4.0F / 16.0F, 2.0F / 16.0F + offset);
         RenderPoint BC = new RenderPoint(12.0F / 16.0F, 4.0F / 16.0F, -2.0F / 16.0F
-                + offset);
+                                                                      + offset);
         RenderPoint BD = new RenderPoint(12.0F / 16.0F, 12.0F / 16.0F, -2.0F / 16.0F
-                + offset);
+                                                                       + offset);
 
         RenderQuad a = new RenderQuad(AD.copy(), AC.copy(), AB.copy(), AA.copy(),
                 cable.border, cable.border.getMinU(),
@@ -441,29 +438,29 @@ public class RenderFemtoCable implements ISimpleBlockRenderingHandler {
         RenderQuad e = new RenderQuad(AD.copy(), AC.copy(), AB.copy(), AA.copy(),
                 cable.coilEdge, cable.coilEdge.getMinU(),
                 cable.coilEdge.getMaxU() - 2.0F
-                        * (cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())
-                        / 3.0F, cable.coilEdge.getMinV(),
+                                           * (cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())
+                                           / 3.0F, cable.coilEdge.getMinV(),
                 cable.coilEdge.getMaxV()
         );
         RenderQuad f = new RenderQuad(BD.copy(), BC.copy(), BB.copy(), BA.copy(),
                 cable.coilEdge, cable.coilEdge.getMinU(),
                 cable.coilEdge.getMaxU() - 2.0F
-                        * (cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())
-                        / 3.0F, cable.coilEdge.getMinV(),
+                                           * (cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())
+                                           / 3.0F, cable.coilEdge.getMinV(),
                 cable.coilEdge.getMaxV()
         );
         RenderQuad g = new RenderQuad(BA.copy(), AD.copy(), AA.copy(), BD.copy(),
                 cable.coilEdge, cable.coilEdge.getMinU(),
                 cable.coilEdge.getMaxU() - 2.0F
-                        * (cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())
-                        / 3.0F, cable.coilEdge.getMinV(),
+                                           * (cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())
+                                           / 3.0F, cable.coilEdge.getMinV(),
                 cable.coilEdge.getMaxV()
         );
         RenderQuad h = new RenderQuad(BC.copy(), AB.copy(), AC.copy(), BB.copy(),
                 cable.coilEdge, cable.coilEdge.getMinU(),
                 cable.coilEdge.getMaxU() - 2.0F
-                        * (cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())
-                        / 3.0F, cable.coilEdge.getMinV(),
+                                           * (cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())
+                                           / 3.0F, cable.coilEdge.getMinV(),
                 cable.coilEdge.getMaxV()
         );
 
@@ -494,7 +491,8 @@ public class RenderFemtoCable implements ISimpleBlockRenderingHandler {
         return count;
     }
 
-    private void drawConnector(BlockFemtoCable cable, float x, float y, float z, float offset, ForgeDirection direction, boolean drawCap) {
+    private void drawConnector(BlockFemtoCable cable, float x, float y, float z, float offset,
+                               ForgeDirection direction, boolean drawCap) {
         ForgeDirection rotaxi = ForgeDirection.UNKNOWN;
         float xoffset = 0;
         float yoffset = 0;
@@ -548,7 +546,7 @@ public class RenderFemtoCable implements ISimpleBlockRenderingHandler {
 
         if (drawCap) {
             RenderUtils.drawArbitraryFace(x, y, z, -1.0F / 16.0F
-                            + xoffset, 1.0F / 16.0F + xoffset, -1.0F / 16.0F + yoffset,
+                                                   + xoffset, 1.0F / 16.0F + xoffset, -1.0F / 16.0F + yoffset,
                     1.0F / 16.0F + yoffset, -1.0F / 16.0F + zoffset,
                     1.0F / 16.0F + zoffset, direction, cable.connector,
                     cable.connector.getMinU(), cable.connector.getMaxU(),
@@ -557,28 +555,28 @@ public class RenderFemtoCable implements ISimpleBlockRenderingHandler {
         }
 
         RenderUtils.drawArbitraryFace(x, y, z, -1.0F / 16.0F
-                        + xoffset, 1.0F / 16.0F + xoffset, -1.0F / 16.0F + yoffset,
+                                               + xoffset, 1.0F / 16.0F + xoffset, -1.0F / 16.0F + yoffset,
                 1.0F / 16.0F + yoffset, -1.0F / 16.0F + zoffset,
                 1.0F / 16.0F + zoffset, face1, cable.connector,
                 cable.connector.getMinU(), cable.connector.getMaxU(),
                 cable.connector.getMinV(), cable.connector.getMaxV()
         );
         RenderUtils.drawArbitraryFace(x, y, z, -1.0F / 16.0F
-                        + xoffset, 1.0F / 16.0F + xoffset, -1.0F / 16.0F + yoffset,
+                                               + xoffset, 1.0F / 16.0F + xoffset, -1.0F / 16.0F + yoffset,
                 1.0F / 16.0F + yoffset, -1.0F / 16.0F + zoffset,
                 1.0F / 16.0F + zoffset, face2, cable.connector,
                 cable.connector.getMinU(), cable.connector.getMaxU(),
                 cable.connector.getMinV(), cable.connector.getMaxV()
         );
         RenderUtils.drawArbitraryFace(x, y, z, -1.0F / 16.0F
-                        + xoffset, 1.0F / 16.0F + xoffset, -1.0F / 16.0F + yoffset,
+                                               + xoffset, 1.0F / 16.0F + xoffset, -1.0F / 16.0F + yoffset,
                 1.0F / 16.0F + yoffset, -1.0F / 16.0F + zoffset,
                 1.0F / 16.0F + zoffset, face3, cable.connector,
                 cable.connector.getMinU(), cable.connector.getMaxU(),
                 cable.connector.getMinV(), cable.connector.getMaxV()
         );
         RenderUtils.drawArbitraryFace(x, y, z, -1.0F / 16.0F
-                        + xoffset, 1.0F / 16.0F + xoffset, -1.0F / 16.0F + yoffset,
+                                               + xoffset, 1.0F / 16.0F + xoffset, -1.0F / 16.0F + yoffset,
                 1.0F / 16.0F + yoffset, -1.0F / 16.0F + zoffset,
                 1.0F / 16.0F + zoffset, face4, cable.connector,
                 cable.connector.getMinU(), cable.connector.getMaxU(),

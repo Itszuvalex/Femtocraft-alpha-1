@@ -58,12 +58,11 @@ object FemtocraftGuiHandler {
   val NanoMagnetohydrodynamicGeneratorGuiID = 37
   val FemtoCubeGuiID                        = 40
   val PhlegethonTunnelGuiID                 = 41
-  val PACKET_CHANNEL                        = Femtocraft.GUI_CHANNEL
 }
 
 class FemtocraftGuiHandler extends IGuiHandler {
   override def getServerGuiElement(ID: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int): AnyRef = {
-    val te: TileEntity = world.getBlockTileEntity(x, y, z)
+    val te: TileEntity = world.getTileEntity(x, y, z)
     (ID, te) match {
       case (FemtocraftGuiHandler.ResearchConsoleGuiID, te: TileEntityResearchConsole)                               => new ContainerResearchConsole(player.inventory, te)
       case (FemtocraftGuiHandler.EncoderGuiID, te: TileEntityEncoder)                                               => new ContainerEncoder(player, player.inventory, te)
@@ -92,9 +91,9 @@ class FemtocraftGuiHandler extends IGuiHandler {
   }
 
   override def getClientGuiElement(ID: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int): AnyRef = {
-    val te: TileEntity = world.getBlockTileEntity(x, y, z)
+    val te: TileEntity = world.getTileEntity(x, y, z)
     (ID, te) match {
-      case (FemtocraftGuiHandler.ResearchComputerGuiID, _)                                                          => new GuiResearch(player.username)
+      case (FemtocraftGuiHandler.ResearchComputerGuiID, _)                                                          => new GuiResearch(player.getCommandSenderName)
       case (FemtocraftGuiHandler.ResearchConsoleGuiID, te: TileEntityResearchConsole)                               => new GuiResearchConsole(player.inventory, te)
       case (FemtocraftGuiHandler.EncoderGuiID, te: TileEntityEncoder)                                               => new GuiEncoder(player, player.inventory, te)
       case (FemtocraftGuiHandler.MicroFurnaceGuiID, te: TileEntityBaseEntityMicroFurnace)                           => new GuiMicroFurnace(player, player.inventory, te)

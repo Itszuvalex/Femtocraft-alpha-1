@@ -24,22 +24,22 @@ package com.itszuvalex.femtocraft.industry.items;
 import com.itszuvalex.femtocraft.Femtocraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 
 public class ItemQuantumSchematic extends ItemAssemblySchematic {
 
-    public ItemQuantumSchematic(int itemID, String unlocalizedName) {
-        super(itemID, unlocalizedName);
+    public ItemQuantumSchematic(String unlocalizedName) {
+        super(unlocalizedName);
         setMaxDamage(ItemAssemblySchematic.INFINITE_USE_DAMAGE);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerIcons(IIconRegister par1IconRegister) {
         this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                .toLowerCase() + ":" + "ItemQuantumSchematic");
+                                                              .toLowerCase() + ":" + "ItemQuantumSchematic");
         this.keyedIcon = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                 .toLowerCase() + ":" + "ItemQuantumSchematicKeyed");
+                                                               .toLowerCase() + ":" + "ItemQuantumSchematicKeyed");
     }
 
 }

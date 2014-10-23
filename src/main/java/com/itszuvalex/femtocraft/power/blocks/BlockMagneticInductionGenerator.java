@@ -27,7 +27,7 @@ import com.itszuvalex.femtocraft.power.tiles.TileEntityMagneticInductionGenerato
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -35,21 +35,21 @@ import net.minecraft.world.World;
  * Created by Christopher Harris (Itszuvalex) on 7/6/14.
  */
 public class BlockMagneticInductionGenerator extends TileContainer {
-    public BlockMagneticInductionGenerator(int id) {
-        super(id, Material.iron);
+    public BlockMagneticInductionGenerator() {
+        super(Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab());
-        setUnlocalizedName("BlockMagneticInductionGenerator");
+        setBlockName("BlockMagneticInductionGenerator");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                + ":" + "BlockMagneticInductionGenerator");
+                                                       + ":" + "BlockMagneticInductionGenerator");
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityMagneticInductionGenerator();
     }
 }

@@ -20,12 +20,12 @@
  */
 package com.itszuvalex.femtocraft.managers.assembler
 
-import java.io.IOException
+import java.io.{ByteArrayInputStream, DataInputStream, IOException}
 import java.sql._
-import java.util
 import java.util.logging.Level
 
 import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.implicits.IDImplicits._
 import com.itszuvalex.femtocraft.managers.research.{EnumTechLevel, ResearchTechnology}
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompressedStreamTools
@@ -174,10 +174,10 @@ class AssemblerRecipeDatabase() {
 
   private def getItem(item: String, stackSize: String, nbt: Array[Byte]): ItemStack = {
     val id_damage = item.split(":")
-    val result = new ItemStack(id_damage(0).toInt, stackSize.toInt, id_damage(1).toInt)
+    val result = new ItemStack(id_damage(0).toInt.getItem, stackSize.toInt, id_damage(1).toInt)
     if (nbt != null) {
       try {
-        result.setTagCompound(CompressedStreamTools.decompress(nbt))
+        result.setTagCompound(CompressedStreamTools.readCompressed(new DataInputStream(new ByteArrayInputStream(nbt))))
       }
       catch {
         case e: IOException =>
@@ -192,7 +192,7 @@ class AssemblerRecipeDatabase() {
       if (s.matches(AssemblerRecipeDatabase.DB_NULL_ITEM)) null
       else {
         val id_damage: Array[String] = s.split(":")
-        new ItemStack(id_damage(0).toInt, 1, id_damage(1).toInt)
+        new ItemStack(id_damage(0).toInt.getItem, 1, id_damage(1).toInt)
       }
     })
 
@@ -270,8 +270,8 @@ class AssemblerRecipeDatabase() {
     sb.toString()
   }
 
-  def getRecipesForLevel(level: EnumTechLevel): util.ArrayList[AssemblerRecipe] = {
-    val arrayList = new util.ArrayList[AssemblerRecipe]
+  def getRecipesForLevel(level: EnumTechLevel): java.util.ArrayList[AssemblerRecipe] = {
+    val arrayList = new java.util.ArrayList[AssemblerRecipe]
     try {
       refreshConnection()
       val ps = c.prepareStatement("SELECT * FROM " + AssemblerRecipeDatabase.DB_TABLE_RECIPES + " WHERE " + AssemblerRecipeDatabase.DB_RECIPES_TECH_LEVEL + " " + "=?", ResultSet.HOLD_CURSORS_OVER_COMMIT)
@@ -294,10 +294,10 @@ class AssemblerRecipeDatabase() {
     arrayList
   }
 
-  def getRecipesForTech(tech: ResearchTechnology): util.ArrayList[AssemblerRecipe] = getRecipesForTech(tech.name)
+  def getRecipesForTech(tech: ResearchTechnology): java.util.ArrayList[AssemblerRecipe] = getRecipesForTech(tech.name)
 
-  def getRecipesForTech(techName: String): util.ArrayList[AssemblerRecipe] = {
-    val arrayList = new util.ArrayList[AssemblerRecipe]
+  def getRecipesForTech(techName: String): java.util.ArrayList[AssemblerRecipe] = {
+    val arrayList = new java.util.ArrayList[AssemblerRecipe]
     try {
       refreshConnection()
       val ps = c.prepareStatement("SELECT * FROM " + AssemblerRecipeDatabase.DB_TABLE_RECIPES + " WHERE " + AssemblerRecipeDatabase.DB_RECIPES_TECHNOLOGY + " " + "= ?", ResultSet.HOLD_CURSORS_OVER_COMMIT)
@@ -320,10 +320,10 @@ class AssemblerRecipeDatabase() {
     arrayList
   }
 
-  def getAllRecipes: util.ArrayList[AssemblerRecipe] = allRecipes
+  def getAllRecipes: java.util.ArrayList[AssemblerRecipe] = allRecipes
 
-  def pullFullRecipeList: util.ArrayList[AssemblerRecipe] = {
-    val arrayList = new util.ArrayList[AssemblerRecipe]
+  def pullFullRecipeList: java.util.ArrayList[AssemblerRecipe] = {
+    val arrayList = new java.util.ArrayList[AssemblerRecipe]
     try {
       refreshConnection()
       val ps = c.prepareStatement("SELECT * FROM " + AssemblerRecipeDatabase.DB_TABLE_RECIPES, ResultSet.HOLD_CURSORS_OVER_COMMIT)

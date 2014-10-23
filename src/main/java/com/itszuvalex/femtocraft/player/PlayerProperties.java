@@ -22,18 +22,16 @@
 package com.itszuvalex.femtocraft.player;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.network.FemtocraftPacketHandler;
+import com.itszuvalex.femtocraft.network.messages.MessagePlayerProperty;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
-import java.io.IOException;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Level;
@@ -69,8 +67,9 @@ public class PlayerProperties implements IExtendedEntityProperties {
                 properties.put(entry.getKey(), entry.getValue().newInstance());
             } catch (InstantiationException e) {
                 Femtocraft.logger().log(Level.SEVERE, "Failed to create new instance of " + entry.getKey() +
-                        " on creating PlayerProperties for player: " + player + " name: " +
-                        player.getCommandSenderName());
+                                                      " on creating PlayerProperties for player: " + player +
+                                                      " name: " +
+                                                      player.getCommandSenderName());
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
@@ -95,18 +94,33 @@ public class PlayerProperties implements IExtendedEntityProperties {
         NBTTagCompound compound = new NBTTagCompound();
 
         for (Map.Entry<String, IFemtocraftPlayerProperty> entry : properties.entrySet()) {
-            NBTTagCompound entryComp = new NBTTagCompound();
-            entry.getValue().toDescriptionPacket(entryComp);
-            compound.setCompoundTag(entry.getKey(), entryComp);
+            savePropertyToCompound(entry.getKey(), compound);
         }
 
-        try {
-            Packet250CustomPayload packet = new Packet250CustomPayload(
-                    PACKET_CHANNEL, CompressedStreamTools.compress(compound));
-            PacketDispatcher.sendPacketToPlayer(packet, (Player) player);
-        } catch (IOException e) {
-            Femtocraft.logger().log(Level.SEVERE, "Failed to send PlayerProperties packet to " + player);
-            e.printStackTrace();
+        FemtocraftPacketHandler.INSTANCE().sendTo(new MessagePlayerProperty(player.getCommandSenderName(), compound),
+                (EntityPlayerMP) player);
+    }
+
+    public void sync(String property) {
+        if (FMLCommonHandler.instance().getEffectiveSide().isClient()) return;
+
+        NBTTagCompound packetCompound = new NBTTagCompound();
+        savePropertyToCompound(property, packetCompound);
+        FemtocraftPacketHandler.INSTANCE().sendTo(new MessagePlayerProperty(player.getCommandSenderName(),
+                packetCompound), (EntityPlayerMP) player);
+    }
+
+    private void savePropertyToCompound(String property, NBTTagCompound packetCompound) {
+        if (FMLCommonHandler.instance().getEffectiveSide().isClient()) {
+            return;
+        }
+
+        IFemtocraftPlayerProperty prop = properties.get(property);
+        if (prop != null) {
+            NBTTagCompound propCompound = new NBTTagCompound();
+            prop.toDescriptionPacket(propCompound);
+            packetCompound.setTag(property, propCompound);
+
         }
     }
 
@@ -116,7 +130,7 @@ public class PlayerProperties implements IExtendedEntityProperties {
         for (Map.Entry<String, IFemtocraftPlayerProperty> entry : this.properties.entrySet()) {
             NBTTagCompound entryComp = new NBTTagCompound();
             entry.getValue().saveToNBT(entryComp);
-            properties.setCompoundTag(entry.getKey(), entryComp);
+            properties.setTag(entry.getKey(), entryComp);
         }
 
         compound.setTag(PROP_TAG, properties);
@@ -134,15 +148,11 @@ public class PlayerProperties implements IExtendedEntityProperties {
     public void init(Entity entity, World world) {
     }
 
-    public void handlePacket(Packet250CustomPayload packet) {
-        try {
-            NBTTagCompound compound = CompressedStreamTools.decompress(packet.data);
-            for (Map.Entry<String, IFemtocraftPlayerProperty> entry : this.properties.entrySet()) {
+    public void handlePacket(NBTTagCompound compound) {
+        for (Map.Entry<String, IFemtocraftPlayerProperty> entry : this.properties.entrySet()) {
+            if (compound.hasKey(entry.getKey())) {
                 entry.getValue().loadFromDescription(compound.getCompoundTag(entry.getKey()));
             }
-        } catch (IOException e) {
-            Femtocraft.logger().log(Level.SEVERE, "Error occured while handling PlayerProperties packet.");
-            e.printStackTrace();
         }
     }
 

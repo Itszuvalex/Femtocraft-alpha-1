@@ -22,14 +22,14 @@
 package com.itszuvalex.femtocraft.render;
 
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 
 public class RenderQuad {
     public RenderPoint a;
     public RenderPoint b;
     public RenderPoint c;
     public RenderPoint d;
-    public Icon icon;
+    public IIcon icon;
     public float minU;
     public float maxU;
     public float minV;
@@ -40,12 +40,12 @@ public class RenderQuad {
         this(a, b, c, d, null);
     }
 
-    public RenderQuad(RenderPoint a, RenderPoint b, RenderPoint c, RenderPoint d, Icon icon) {
+    public RenderQuad(RenderPoint a, RenderPoint b, RenderPoint c, RenderPoint d, IIcon icon) {
         this(a, b, c, d, icon, icon.getMinU(), icon.getMaxU(), icon.getMinV(),
                 icon.getMaxV());
     }
 
-    public RenderQuad(RenderPoint a, RenderPoint b, RenderPoint c, RenderPoint d, Icon icon, float minU,
+    public RenderQuad(RenderPoint a, RenderPoint b, RenderPoint c, RenderPoint d, IIcon icon, float minU,
                       float maxU, float minV, float maxV) {
         this.a = a;
         this.b = b;

@@ -32,7 +32,7 @@ import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/13/14.
@@ -106,7 +106,7 @@ public class TileEntityPhlegethonTunnelFrame extends TileEntityBase implements I
     @Override
     public float getFillPercentageForCharging(ForgeDirection from) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getFillPercentageForCharging(from);
             }
@@ -117,7 +117,7 @@ public class TileEntityPhlegethonTunnelFrame extends TileEntityBase implements I
     @Override
     public float getFillPercentageForOutput(ForgeDirection to) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getFillPercentageForOutput(to);
             }
@@ -128,7 +128,7 @@ public class TileEntityPhlegethonTunnelFrame extends TileEntityBase implements I
     @Override
     public boolean canCharge(ForgeDirection from) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).canCharge(from);
             }
@@ -139,7 +139,7 @@ public class TileEntityPhlegethonTunnelFrame extends TileEntityBase implements I
     @Override
     public EnumTechLevel getTechLevel(ForgeDirection to) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getTechLevel(to);
             }
@@ -150,7 +150,7 @@ public class TileEntityPhlegethonTunnelFrame extends TileEntityBase implements I
     @Override
     public int getCurrentPower() {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getCurrentPower();
             }
@@ -161,7 +161,7 @@ public class TileEntityPhlegethonTunnelFrame extends TileEntityBase implements I
     @Override
     public int getMaxPower() {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getMaxPower();
             }
@@ -192,7 +192,7 @@ public class TileEntityPhlegethonTunnelFrame extends TileEntityBase implements I
                     if (xCoord - info.x() != -1) return false;
                     break;
             }
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).canConnect(from);
             }
@@ -203,7 +203,7 @@ public class TileEntityPhlegethonTunnelFrame extends TileEntityBase implements I
     @Override
     public int charge(ForgeDirection from, int amount) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).charge(from, amount);
             }
@@ -214,7 +214,7 @@ public class TileEntityPhlegethonTunnelFrame extends TileEntityBase implements I
     @Override
     public boolean consume(int amount) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).consume(amount);
             }
@@ -225,7 +225,7 @@ public class TileEntityPhlegethonTunnelFrame extends TileEntityBase implements I
     @Override
     public float getFillPercentage() {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).getFillPercentage();
             }
@@ -236,7 +236,7 @@ public class TileEntityPhlegethonTunnelFrame extends TileEntityBase implements I
     @Override
     public boolean canAcceptPowerOfLevel(EnumTechLevel level, ForgeDirection from) {
         if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getBlockTileEntity(info.x(), info.y(), info.z());
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).canAcceptPowerOfLevel(level, from);
             }

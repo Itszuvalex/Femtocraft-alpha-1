@@ -23,9 +23,9 @@ package com.itszuvalex.femtocraft.command;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.managers.assistant.AssistantPermissions;
+import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.EnumChatFormatting;
 
 import java.util.Map;
@@ -46,7 +46,7 @@ public class CommandAssistantList extends CommandBase {
     @Override
     public void processCommand(ICommandSender icommandsender, String[] astring) {
         if (icommandsender instanceof EntityPlayer) {
-            String username = ((EntityPlayer) icommandsender).username;
+            String username = icommandsender.getCommandSenderName();
             StringBuilder str = new StringBuilder(EnumChatFormatting.YELLOW + "Assistants:\n");
             Map<String, AssistantPermissions> assist = Femtocraft.assistantManager().getPlayerAssistants(username);
             if (assist == null || assist.isEmpty()) {
@@ -57,7 +57,7 @@ public class CommandAssistantList extends CommandBase {
                 }
             }
             str.append(EnumChatFormatting.RESET);
-            icommandsender.sendChatToPlayer(ChatMessageComponent.createFromText(str.toString()));
+            FemtocraftUtils.sendMessageToPlayer((EntityPlayer) icommandsender, str.toString());
         }
     }
 }

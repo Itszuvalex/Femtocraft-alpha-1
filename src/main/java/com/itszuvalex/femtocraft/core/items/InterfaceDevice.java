@@ -23,15 +23,20 @@ package com.itszuvalex.femtocraft.core.items;
 
 import com.itszuvalex.femtocraft.api.IInterfaceDevice;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.world.World;
 
 public class InterfaceDevice extends Item implements IInterfaceDevice {
     private EnumTechLevel level;
 
-    public InterfaceDevice(int par1, EnumTechLevel level) {
-        super(par1);
+    public InterfaceDevice(EnumTechLevel level) {
+        super();
         this.level = level;
+    }
+
+    @Override
+    public boolean func_150897_b(Block p_150897_1_) {
+        return true;
     }
 
     @Override
@@ -39,9 +44,9 @@ public class InterfaceDevice extends Item implements IInterfaceDevice {
         return level;
     }
 
-    @Override
-    public boolean shouldPassSneakingClickToBlock(World par2World, int par4,
-                                                  int par5, int par6) {
-        return true;
-    }
+//    @Override
+//    public boolean shouldPassSneakingClickToBlock(World par2World, int par4,
+//                                                  int par5, int par6) {
+//        return true;
+//    }
 }

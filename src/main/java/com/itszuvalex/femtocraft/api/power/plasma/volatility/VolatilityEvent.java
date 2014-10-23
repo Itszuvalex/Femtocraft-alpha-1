@@ -19,10 +19,10 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.power.plasma.volatility;
+package com.itszuvalex.femtocraft.api.power.plasma.volatility;
 
 import com.itszuvalex.femtocraft.power.plasma.FemtocraftPlasmaUtils;
-import com.itszuvalex.femtocraft.power.plasma.IPlasmaFlow;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/6/14.

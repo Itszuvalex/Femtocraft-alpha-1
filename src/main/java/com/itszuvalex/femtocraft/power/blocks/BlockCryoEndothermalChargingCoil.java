@@ -27,32 +27,32 @@ import com.itszuvalex.femtocraft.proxy.ProxyClient;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.util.Icon;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/6/14.
  */
 public class BlockCryoEndothermalChargingCoil extends BlockBase {
-    public Icon coilConnector, coilConnectorTop;
+    public IIcon coilConnector, coilConnectorTop;
 
-    public BlockCryoEndothermalChargingCoil(int id) {
-        super(id, Material.iron);
+    public BlockCryoEndothermalChargingCoil() {
+        super(Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab());
-        setUnlocalizedName("BlockCryoEndothermalChargingCoil");
+        setBlockName("BlockCryoEndothermalChargingCoil");
         setBlockBounds(4.f / 16.f, 0, 4.f / 16.f, 12.f / 16.f, 1, 12.f / 16.f);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         blockIcon = coilConnector = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                            .toLowerCase() + ":" +
-                "BlockCryoEndothermalChargingCoil_connector");
+                                                                          .toLowerCase() + ":" +
+                                                                  "BlockCryoEndothermalChargingCoil_connector");
         coilConnectorTop = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                   .toLowerCase() + ":" +
-                "BlockCryoEndothermalChargingCoil_connector_top");
+                                                                 .toLowerCase() + ":" +
+                                                         "BlockCryoEndothermalChargingCoil_connector_top");
     }
 
 

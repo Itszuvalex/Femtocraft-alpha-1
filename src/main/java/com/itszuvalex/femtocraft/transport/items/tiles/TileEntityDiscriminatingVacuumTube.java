@@ -26,7 +26,7 @@ import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityDiscriminatingVacuumTube extends TileEntityVacuumTube
         implements IInventory {
@@ -93,12 +93,12 @@ public class TileEntityDiscriminatingVacuumTube extends TileEntityVacuumTube
     }
 
     @Override
-    public String getInvName() {
+    public String getInventoryName() {
         return null;
     }
 
     @Override
-    public boolean isInvNameLocalized() {
+    public boolean hasCustomInventoryName() {
         return false;
     }
 
@@ -113,12 +113,12 @@ public class TileEntityDiscriminatingVacuumTube extends TileEntityVacuumTube
     }
 
     @Override
-    public void openChest() {
+    public void openInventory() {
 
     }
 
     @Override
-    public void closeChest() {
+    public void closeInventory() {
 
     }
 

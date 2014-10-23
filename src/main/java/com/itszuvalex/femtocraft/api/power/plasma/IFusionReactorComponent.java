@@ -19,22 +19,37 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.consumables.farming.items;
+package com.itszuvalex.femtocraft.api.power.plasma;
 
-import com.itszuvalex.femtocraft.Femtocraft;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.item.Item;
+/**
+ * Created by Christopher Harris (Itszuvalex) on 5/6/14.
+ */
+public interface IFusionReactorComponent extends IPlasmaContainer {
 
-public class ItemSeedTomato extends Item {
-    public ItemSeedTomato(int id) {
-        super(id);
-        setMaxStackSize(64);
-        setCreativeTab(Femtocraft.femtocraftTab());
-        setTextureName(Femtocraft.ID().toLowerCase() + ":" + "ItemSeedTomato");
-    }
+    /**
+     * Called when the ignition process begins.  Likely started by a player.
+     *
+     * @param core Core this is a component of.
+     */
+    void beginIgnitionProcess(IFusionReactorCore core);
 
-    public void updateIcons(IconRegister par1IconRegister) {
-        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                                .toLowerCase() + ":" + "ItemSeedTomato");
-    }
+    /**
+     * Called when the ignition process ends, whether it was successful or not.
+     *
+     * @param core Core this is a component of.
+     */
+    void endIgnitionProcess(IFusionReactorCore core);
+
+    /**
+     * @return Core this is a component of
+     */
+    IFusionReactorCore getCore();
+
+    /**
+     * Called when a self-sustaining reaction is ended, for any reason.
+     *
+     * @param core Core this is a component of.
+     */
+    void onReactionStop(IFusionReactorCore core);
+
 }

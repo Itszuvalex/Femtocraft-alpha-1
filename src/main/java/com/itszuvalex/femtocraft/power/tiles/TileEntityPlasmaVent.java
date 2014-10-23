@@ -22,14 +22,14 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.api.IInterfaceDevice;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
 import com.itszuvalex.femtocraft.power.plasma.FemtocraftPlasmaUtils;
-import com.itszuvalex.femtocraft.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/10/14.
@@ -123,11 +123,11 @@ public class TileEntityPlasmaVent extends TileEntityPlasmaConduit {
                 venting = true;
             }
             if (ventingTemperature && flow.getTemperature() >
-                    temperatureThreshold) {
+                                      temperatureThreshold) {
                 venting = true;
             }
             if (ventingStability && flow.getVolatility() >
-                    stabilityThreshold) {
+                                    stabilityThreshold) {
                 venting = true;
             }
 
@@ -147,7 +147,7 @@ public class TileEntityPlasmaVent extends TileEntityPlasmaConduit {
                 .getItem() instanceof
                 IInterfaceDevice) {
             if (((IInterfaceDevice) pitem.getItem())
-                    .getInterfaceLevel().tier >= EnumTechLevel.FEMTO.tier) {
+                        .getInterfaceLevel().tier >= EnumTechLevel.FEMTO.tier) {
                 rotateVent();
                 return true;
             }
@@ -175,7 +175,7 @@ public class TileEntityPlasmaVent extends TileEntityPlasmaConduit {
 
     private void ventFlow(IPlasmaFlow flow) {
         FemtocraftPlasmaUtils.purgeFlow(flow.getTemperature()
-                        * FemtocraftPlasmaUtils
+                                        * FemtocraftPlasmaUtils
                         .temperatureToEnergy, 500, flow.getVolatility() / 500,
                 worldObj, xCoord + ventDirection
                         .offsetX, yCoord + ventDirection.offsetY,

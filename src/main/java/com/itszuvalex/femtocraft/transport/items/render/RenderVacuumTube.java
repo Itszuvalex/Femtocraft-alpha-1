@@ -34,7 +34,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
@@ -122,7 +122,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
         if (!(block instanceof BlockVacuumTube)) {
             return false;
         }
-        TileEntity tile = world.getBlockTileEntity(x, y, z);
+        TileEntity tile = world.getTileEntity(x, y, z);
         if (tile == null) {
             return false;
         }
@@ -143,7 +143,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
     }
 
     @Override
-    public boolean shouldRender3DInInventory() {
+    public boolean shouldRender3DInInventory(int modelID) {
         return true;
     }
 
@@ -182,11 +182,9 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
 
                 if (isOverflowing) {
                     indicator = inNorthFarOverflow;
-                }
-                else if (hasItem[0]) {
+                } else if (hasItem[0]) {
                     indicator = inNorthFarOn;
-                }
-                else {
+                } else {
                     indicator = inNorthFarOff;
                 }
 
@@ -196,11 +194,9 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
 
                 if (isOverflowing) {
                     indicator = inSouthFarOverflow;
-                }
-                else if (hasItem[0]) {
+                } else if (hasItem[0]) {
                     indicator = inSouthFarOn;
-                }
-                else {
+                } else {
                     indicator = inSouthFarOff;
                 }
                 break;
@@ -209,11 +205,9 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
 
                 if (isOverflowing) {
                     indicator = inEastFarOverflow;
-                }
-                else if (hasItem[0]) {
+                } else if (hasItem[0]) {
                     indicator = inEastFarOn;
-                }
-                else {
+                } else {
                     indicator = inEastFarOff;
                 }
                 break;
@@ -222,11 +216,9 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
 
                 if (isOverflowing) {
                     indicator = inWestFarOverflow;
-                }
-                else if (hasItem[0]) {
+                } else if (hasItem[0]) {
                     indicator = inWestFarOn;
-                }
-                else {
+                } else {
                     indicator = inWestFarOff;
                 }
                 break;
@@ -235,11 +227,9 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
 
                 if (isOverflowing) {
                     indicator = inUpFarOverflow;
-                }
-                else if (hasItem[0]) {
+                } else if (hasItem[0]) {
                     indicator = inUpFarOn;
-                }
-                else {
+                } else {
                     indicator = inUpFarOff;
                 }
                 break;
@@ -248,11 +238,9 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
 
                 if (isOverflowing) {
                     indicator = inDownFarOverflow;
-                }
-                else if (hasItem[0]) {
+                } else if (hasItem[0]) {
                     indicator = inDownFarOn;
-                }
-                else {
+                } else {
                     indicator = inDownFarOff;
                 }
                 break;
@@ -284,8 +272,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
 
                 if (hasItem[3]) {
                     indicator = outNorthFarOn;
-                }
-                else {
+                } else {
                     indicator = outNorthFarOff;
                 }
 
@@ -295,8 +282,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
 
                 if (hasItem[3]) {
                     indicator = outSouthFarOn;
-                }
-                else {
+                } else {
                     indicator = outSouthFarOff;
                 }
                 break;
@@ -305,8 +291,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
 
                 if (hasItem[3]) {
                     indicator = outEastFarOn;
-                }
-                else {
+                } else {
                     indicator = outEastFarOff;
                 }
                 break;
@@ -315,8 +300,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
 
                 if (hasItem[3]) {
                     indicator = outWestFarOn;
-                }
-                else {
+                } else {
                     indicator = outWestFarOff;
                 }
                 break;
@@ -325,8 +309,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
 
                 if (hasItem[3]) {
                     indicator = outUpFarOn;
-                }
-                else {
+                } else {
                     indicator = outUpFarOff;
                 }
                 break;
@@ -335,8 +318,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
 
                 if (hasItem[3]) {
                     indicator = outDownFarOn;
-                }
-                else {
+                } else {
                     indicator = outDownFarOff;
                 }
                 break;
@@ -373,8 +355,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                 if (hasItem[1]) {
                     inNorthCloseOn.location = new RenderPoint(x, y, z);
                     inNorthCloseOn.draw();
-                }
-                else {
+                } else {
                     inNorthCloseOff.location = new RenderPoint(x, y, z);
                     inNorthCloseOff.draw();
                 }
@@ -399,8 +380,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                         if (hasItem[2]) {
                             outSouthCloseOn.location = new RenderPoint(x, y, z);
                             outSouthCloseOn.draw();
-                        }
-                        else {
+                        } else {
                             outSouthCloseOff.location = new RenderPoint(x, y, z);
                             outSouthCloseOff.draw();
                         }
@@ -418,8 +398,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                 if (hasItem[1]) {
                     inSouthCloseOn.location = new RenderPoint(x, y, z);
                     inSouthCloseOn.draw();
-                }
-                else {
+                } else {
                     inSouthCloseOff.location = new RenderPoint(x, y, z);
                     inSouthCloseOff.draw();
                 }
@@ -444,8 +423,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                         if (hasItem[2]) {
                             outNorthCloseOn.location = new RenderPoint(x, y, z);
                             outNorthCloseOn.draw();
-                        }
-                        else {
+                        } else {
                             outNorthCloseOff.location = new RenderPoint(x, y, z);
                             outNorthCloseOff.draw();
                         }
@@ -464,8 +442,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                 if (hasItem[1]) {
                     inEastCloseOn.location = new RenderPoint(x, y, z);
                     inEastCloseOn.draw();
-                }
-                else {
+                } else {
                     inEastCloseOff.location = new RenderPoint(x, y, z);
                     inEastCloseOff.draw();
                 }
@@ -490,8 +467,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                         if (hasItem[2]) {
                             outWestCloseOn.location = new RenderPoint(x, y, z);
                             outWestCloseOn.draw();
-                        }
-                        else {
+                        } else {
                             outWestCloseOff.location = new RenderPoint(x, y, z);
                             outWestCloseOff.draw();
                         }
@@ -509,8 +485,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                 if (hasItem[1]) {
                     inWestCloseOn.location = new RenderPoint(x, y, z);
                     inWestCloseOn.draw();
-                }
-                else {
+                } else {
                     inWestCloseOff.location = new RenderPoint(x, y, z);
                     inWestCloseOff.draw();
                 }
@@ -535,8 +510,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                         if (hasItem[2]) {
                             outEastCloseOn.location = new RenderPoint(x, y, z);
                             outEastCloseOn.draw();
-                        }
-                        else {
+                        } else {
                             outEastCloseOff.location = new RenderPoint(x, y, z);
                             outEastCloseOff.draw();
                         }
@@ -554,8 +528,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                 if (hasItem[1]) {
                     inUpCloseOn.location = new RenderPoint(x, y, z);
                     inUpCloseOn.draw();
-                }
-                else {
+                } else {
                     inUpCloseOff.location = new RenderPoint(x, y, z);
                     inUpCloseOff.draw();
                 }
@@ -580,8 +553,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                         if (hasItem[2]) {
                             outDownCloseOn.location = new RenderPoint(x, y, z);
                             outDownCloseOn.draw();
-                        }
-                        else {
+                        } else {
                             outDownCloseOff.location = new RenderPoint(x, y, z);
                             outDownCloseOff.draw();
                         }
@@ -599,8 +571,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                 if (hasItem[1]) {
                     inDownCloseOn.location = new RenderPoint(x, y, z);
                     inDownCloseOn.draw();
-                }
-                else {
+                } else {
                     inDownCloseOff.location = new RenderPoint(x, y, z);
                     inDownCloseOff.draw();
                 }
@@ -625,8 +596,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                         if (hasItem[2]) {
                             outUpCloseOn.location = new RenderPoint(x, y, z);
                             outUpCloseOn.draw();
-                        }
-                        else {
+                        } else {
                             outUpCloseOff.location = new RenderPoint(x, y, z);
                             outUpCloseOff.draw();
                         }
@@ -641,8 +611,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                         if (hasItem[1]) {
                             inSouthCloseOn.location = new RenderPoint(x, y, z);
                             inSouthCloseOn.draw();
-                        }
-                        else {
+                        } else {
                             inSouthCloseOff.location = new RenderPoint(x, y, z);
                             inSouthCloseOff.draw();
                         }
@@ -656,8 +625,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                         if (hasItem[1]) {
                             inNorthCloseOn.location = new RenderPoint(x, y, z);
                             inNorthCloseOn.draw();
-                        }
-                        else {
+                        } else {
                             inNorthCloseOff.location = new RenderPoint(x, y, z);
                             inNorthCloseOff.draw();
                         }
@@ -670,8 +638,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                         if (hasItem[1]) {
                             inWestCloseOn.location = new RenderPoint(x, y, z);
                             inWestCloseOn.draw();
-                        }
-                        else {
+                        } else {
                             inWestCloseOff.location = new RenderPoint(x, y, z);
                             inWestCloseOff.draw();
                         }
@@ -683,8 +650,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                         if (hasItem[1]) {
                             inEastCloseOn.location = new RenderPoint(x, y, z);
                             inEastCloseOn.draw();
-                        }
-                        else {
+                        } else {
                             inEastCloseOff.location = new RenderPoint(x, y, z);
                             inEastCloseOff.draw();
                         }
@@ -697,8 +663,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                         if (hasItem[1]) {
                             inDownCloseOn.location = new RenderPoint(x, y, z);
                             inDownCloseOn.draw();
-                        }
-                        else {
+                        } else {
                             inDownCloseOff.location = new RenderPoint(x, y, z);
                             inDownCloseOff.draw();
                         }
@@ -711,8 +676,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                         if (hasItem[1]) {
                             inUpCloseOn.location = new RenderPoint(x, y, z);
                             inUpCloseOn.draw();
-                        }
-                        else {
+                        } else {
                             inUpCloseOff.location = new RenderPoint(x, y, z);
                             inUpCloseOff.draw();
                         }
@@ -725,8 +689,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                         if (hasItem[1]) {
                             inSouthCloseOn.location = new RenderPoint(x, y, z);
                             inSouthCloseOn.draw();
-                        }
-                        else {
+                        } else {
                             inSouthCloseOff.location = new RenderPoint(x, y, z);
                             inSouthCloseOff.draw();
                         }
@@ -741,8 +704,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                         if (hasItem[2]) {
                             outNorthCloseOn.location = new RenderPoint(x, y, z);
                             outNorthCloseOn.draw();
-                        }
-                        else {
+                        } else {
                             outNorthCloseOff.location = new RenderPoint(x, y, z);
                             outNorthCloseOff.draw();
                         }
@@ -782,7 +744,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
         centerCurvedEastToSouth = centerCurvedWestToNorth.rotatedOnZAxis(
                 Math.PI).rotatedOnXAxis(Math.PI);
         centerCurvedEastToUp = centerCurvedWestToNorth.rotatedOnZAxis(Math.PI)
-                                                      .rotatedOnXAxis(Math.PI / 2.d);
+                .rotatedOnXAxis(Math.PI / 2.d);
         centerCurvedEastToDown = centerCurvedWestToNorth
                 .rotatedOnZAxis(Math.PI).rotatedOnXAxis(-Math.PI / 2.d);
 
@@ -946,8 +908,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                 if (hasItem) {
                     outNorthCloseOn.location = new RenderPoint(x, y, z);
                     outNorthCloseOn.draw();
-                }
-                else {
+                } else {
                     outNorthCloseOff.location = new RenderPoint(x, y, z);
                     outNorthCloseOff.draw();
                 }
@@ -962,8 +923,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                 if (hasItem) {
                     outSouthCloseOn.location = new RenderPoint(x, y, z);
                     outSouthCloseOn.draw();
-                }
-                else {
+                } else {
                     outSouthCloseOff.location = new RenderPoint(x, y, z);
                     outSouthCloseOff.draw();
                 }
@@ -978,8 +938,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                 if (hasItem) {
                     outEastCloseOn.location = new RenderPoint(x, y, z);
                     outEastCloseOn.draw();
-                }
-                else {
+                } else {
                     outEastCloseOff.location = new RenderPoint(x, y, z);
                     outEastCloseOff.draw();
                 }
@@ -994,8 +953,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                 if (hasItem) {
                     outWestCloseOn.location = new RenderPoint(x, y, z);
                     outWestCloseOn.draw();
-                }
-                else {
+                } else {
                     outWestCloseOff.location = new RenderPoint(x, y, z);
                     outWestCloseOff.draw();
                 }
@@ -1010,8 +968,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                 if (hasItem) {
                     outUpCloseOn.location = new RenderPoint(x, y, z);
                     outUpCloseOn.draw();
-                }
-                else {
+                } else {
                     outUpCloseOff.location = new RenderPoint(x, y, z);
                     outUpCloseOff.draw();
                 }
@@ -1026,8 +983,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                 if (hasItem) {
                     outDownCloseOn.location = new RenderPoint(x, y, z);
                     outDownCloseOn.draw();
-                }
-                else {
+                } else {
                     outDownCloseOff.location = new RenderPoint(x, y, z);
                     outDownCloseOff.draw();
                 }
@@ -1064,13 +1020,13 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                 min, tube.straightIcon, minU, maxU, minV, maxV);
         RenderQuad bot_r = RenderUtils.makeTopFace(min, max, min, max,
                 min + 3.f / 16.f, tube.straightIcon, minU, maxU, minV, maxV)
-                                      .rotateOnYAxis(Math.PI / 2.d, .5f, .5f);
+                .rotateOnYAxis(Math.PI / 2.d, .5f, .5f);
 
         RenderQuad east = RenderUtils.makeEastFace(min, max, min, max, max,
                 tube.straightIcon, minU, maxU, minV, maxV);
         RenderQuad east_r = RenderUtils.makeWestFace(min, max, min, max,
                 max - 3.f / 16.f, tube.straightIcon, minU, maxU, minV, maxV)
-                                       .rotateOnXAxis(Math.PI / 2.d, .5f, .5f);
+                .rotateOnXAxis(Math.PI / 2.d, .5f, .5f);
 
         RenderQuad west = RenderUtils.makeWestFace(min, max, min, max, min,
                 tube.straightIcon, minU, maxU, minV, maxV).rotateOnXAxis(
@@ -1135,14 +1091,14 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
                 -Math.PI / 2.d, .5f, .5f);
         RenderQuad top_r = RenderUtils.makeBottomFace(min, max, min, max,
                 max - 3.f / 16.f, tube.turnIcon, minU, maxU, minV, maxV)
-                                      .rotateOnYAxis(Math.PI / 2.d, .5f, .5f);
+                .rotateOnYAxis(Math.PI / 2.d, .5f, .5f);
 
         RenderQuad bot = RenderUtils.makeBottomFace(min, max, min, max,
                 min, tube.turnIcon, minU, maxU, minV, maxV).rotateOnYAxis(
                 Math.PI / 2.d, .5f, .5f);
         RenderQuad bot_r = RenderUtils.makeTopFace(min, max, min, max,
                 min + 3.f / 16.f, tube.turnIcon, minU, maxU, minV, maxV)
-                                      .rotateOnYAxis(-Math.PI / 2.d, .5f, .5f);
+                .rotateOnYAxis(-Math.PI / 2.d, .5f, .5f);
 
         RenderQuad east = RenderUtils.makeEastFace(min, max, min, max, max,
                 tube.straightIcon, sideMinU, sideMaxU, sideMinV, sideMaxV);
@@ -1152,8 +1108,8 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
 
         RenderQuad south = RenderUtils.makeSouthFace(min, max, min, max,
                 max, tube.straightIcon, sideMinU, sideMaxU, sideMinV, sideMaxV)
-                                      .rotateOnZAxis(Math.PI / 2.d, .5f,
-                                              .5f).rotatePointsCounterClockwise();
+                .rotateOnZAxis(Math.PI / 2.d, .5f,
+                        .5f).rotatePointsCounterClockwise();
         RenderQuad south_r = RenderUtils.makeNorthFace(min, max, min, max,
                 max - 3.f / 16.f, tube.straightIcon, sideMinU, sideMaxU,
                 sideMinV, sideMaxV);
@@ -1170,7 +1126,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
 
         RenderQuad top_inset = RenderUtils.makeTopFace(min, max, min, max,
                 max - 1.f / 16.f, tube.turnInsetIcon, minU, maxU, maxV, minV)
-                                          .rotateOnYAxis(0, .5f, .5f);
+                .rotateOnYAxis(0, .5f, .5f);
         RenderQuad bot_inset = RenderUtils.makeBottomFace(min, max, min,
                 max, min + 1.f / 16.f, tube.turnInsetIcon, minU, maxU, minV,
                 maxV).rotatedOnYAxis(Math.PI / 2.d, .5f, .5f);
@@ -1235,14 +1191,12 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
             maxU = tube.indicatorIcon.getMaxU();
             minV = tube.indicatorIcon.getInterpolatedV(8.f);
             maxV = tube.indicatorIcon.getMaxV();
-        }
-        else if (hasItem) {
+        } else if (hasItem) {
             minU = tube.indicatorIcon.getInterpolatedU(8.f);
             maxU = tube.indicatorIcon.getMaxU();
             minV = tube.indicatorIcon.getMinV();
             maxV = tube.indicatorIcon.getInterpolatedV(8.f);
-        }
-        else {
+        } else {
             minU = tube.indicatorIcon.getMinU();
             maxU = tube.indicatorIcon.getInterpolatedU(8.f);
             minV = tube.indicatorIcon.getMinV();
@@ -1291,7 +1245,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
         // Outsides
         RenderQuad top = RenderUtils.makeTopFace(minDist, maxDist, min,
                 max, max, tube.straightIcon, minU, maxU, minV, maxV)
-                                    .rotateOnYAxis(-Math.PI / 2.d, .5f, .5f);
+                .rotateOnYAxis(-Math.PI / 2.d, .5f, .5f);
         RenderQuad top_r = RenderUtils.makeBottomFace(min, max, minDist,
                 maxDist, max - 3.f / 16.f, tube.straightIcon, minU, maxU, minV,
                 maxV);
@@ -1310,7 +1264,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
 
         RenderQuad west = RenderUtils.makeWestFace(minDist, maxDist, min,
                 max, min, tube.straightIcon, minU, maxU, minV, maxV)
-                                     .rotateOnXAxis(Math.PI / 2.d, .5f, .5f);
+                .rotateOnXAxis(Math.PI / 2.d, .5f, .5f);
         RenderQuad west_r = RenderUtils.makeEastFace(min, max, minDist,
                 maxDist, min + 3.f / 16.f, tube.straightIcon, minU, maxU, minV,
                 maxV);

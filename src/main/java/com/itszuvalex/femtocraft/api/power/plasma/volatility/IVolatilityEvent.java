@@ -19,12 +19,12 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.power.plasma.volatility;
+package com.itszuvalex.femtocraft.api.power.plasma.volatility;
 
-import com.itszuvalex.femtocraft.power.plasma.IFusionReactorComponent;
-import com.itszuvalex.femtocraft.power.plasma.IFusionReactorCore;
-import com.itszuvalex.femtocraft.power.plasma.IPlasmaContainer;
-import com.itszuvalex.femtocraft.power.plasma.IPlasmaFlow;
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorComponent;
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
+import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import net.minecraft.world.World;
 
 /**

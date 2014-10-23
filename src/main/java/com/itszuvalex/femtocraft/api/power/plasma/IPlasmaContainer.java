@@ -19,11 +19,11 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.power.plasma;
+package com.itszuvalex.femtocraft.api.power.plasma;
 
-import com.itszuvalex.femtocraft.power.plasma.volatility.IVolatilityEvent;
+import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Collection;
 
