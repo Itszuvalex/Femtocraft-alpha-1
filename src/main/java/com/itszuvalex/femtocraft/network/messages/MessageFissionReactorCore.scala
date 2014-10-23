@@ -28,11 +28,11 @@ class MessageFissionReactorCore(private var x: Int, private var y: Int, private 
   }
 
   override def onMessage(message: MessageFissionReactorCore, ctx: MessageContext): IMessage = {
-    val world = DimensionManager.getWorld(dim)
+    val world = DimensionManager.getWorld(message.dim)
     if (world != null) {
-      world.getTileEntity(x, y, z) match {
+      world.getTileEntity(message.x, message.y, message.z) match {
         case core: TileEntityNanoFissionReactorCore =>
-          core.handleAction(action)
+          core.handleAction(message.action)
         case _                                      =>
       }
     }

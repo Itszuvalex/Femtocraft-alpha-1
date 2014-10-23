@@ -38,6 +38,7 @@ import com.itszuvalex.femtocraft.managers.ManagerRecipe
 import com.itszuvalex.femtocraft.managers.assembler.ComponentRegistry
 import com.itszuvalex.femtocraft.managers.assistant.ManagerAssistant
 import com.itszuvalex.femtocraft.managers.research.{EnumTechLevel, ManagerResearch}
+import com.itszuvalex.femtocraft.network.FemtocraftPacketHandler
 import com.itszuvalex.femtocraft.power.blocks._
 import com.itszuvalex.femtocraft.power.fluids._
 import com.itszuvalex.femtocraft.power.items._
@@ -293,6 +294,9 @@ object Femtocraft {
                                 suggestConfigName(0) + RECIPE_CONFIG_APPEND +
                                 "." + suggestConfigName(1))
     recipeConfig = new Configuration(recipeConfigFile)
+
+    FemtocraftPacketHandler.init()
+
     Femtocraft.proxy.registerTileEntities()
     Femtocraft.proxy.registerRendering()
     Femtocraft.proxy.registerBlockRenderers()

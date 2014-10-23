@@ -63,7 +63,7 @@ class MessageResearchPlayer() extends IMessage with IMessageHandler[MessageResea
   def onMessage(message: MessageResearchPlayer, ctx: MessageContext): IMessage = {
     if (message.playerName.equalsIgnoreCase(Minecraft.getMinecraft.thePlayer.getCommandSenderName)) {
       val rp = new ResearchPlayer(message.playerName)
-      rp.loadFromNBTTagCompound(researchData)
+      rp.loadFromNBTTagCompound(message.researchData)
       Femtocraft.researchManager.syncResearch(rp)
     }
     null

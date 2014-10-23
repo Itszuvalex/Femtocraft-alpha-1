@@ -437,30 +437,30 @@ public class RenderFemtoCable implements ISimpleBlockRenderingHandler {
 
         RenderQuad e = new RenderQuad(AD.copy(), AC.copy(), AB.copy(), AA.copy(),
                 cable.coilEdge, cable.coilEdge.getMinU(),
-                cable.coilEdge.getMaxU() - 2.0F
+                cable.coilEdge.getMaxU() - 3.0F
                                            * (cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())
-                                           / 3.0F, cable.coilEdge.getMinV(),
+                                           / 4.0F, cable.coilEdge.getMinV(),
                 cable.coilEdge.getMaxV()
         );
         RenderQuad f = new RenderQuad(BD.copy(), BC.copy(), BB.copy(), BA.copy(),
                 cable.coilEdge, cable.coilEdge.getMinU(),
-                cable.coilEdge.getMaxU() - 2.0F
+                cable.coilEdge.getMaxU() - 3.0F
                                            * (cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())
-                                           / 3.0F, cable.coilEdge.getMinV(),
+                                           / 4.0F, cable.coilEdge.getMinV(),
                 cable.coilEdge.getMaxV()
         );
         RenderQuad g = new RenderQuad(BA.copy(), AD.copy(), AA.copy(), BD.copy(),
                 cable.coilEdge, cable.coilEdge.getMinU(),
-                cable.coilEdge.getMaxU() - 2.0F
+                cable.coilEdge.getMaxU() - 3.0F
                                            * (cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())
-                                           / 3.0F, cable.coilEdge.getMinV(),
+                                           / 4.0F, cable.coilEdge.getMinV(),
                 cable.coilEdge.getMaxV()
         );
         RenderQuad h = new RenderQuad(BC.copy(), AB.copy(), AC.copy(), BB.copy(),
                 cable.coilEdge, cable.coilEdge.getMinU(),
-                cable.coilEdge.getMaxU() - 2.0F
+                cable.coilEdge.getMaxU() - 3.0F
                                            * (cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())
-                                           / 3.0F, cable.coilEdge.getMinV(),
+                                           / 4.0F, cable.coilEdge.getMinV(),
                 cable.coilEdge.getMaxV()
         );
 

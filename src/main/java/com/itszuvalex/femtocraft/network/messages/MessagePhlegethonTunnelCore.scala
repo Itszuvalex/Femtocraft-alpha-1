@@ -28,11 +28,11 @@ class MessagePhlegethonTunnelCore(private var x: Int, private var y: Int, privat
   }
 
   override def onMessage(message: MessagePhlegethonTunnelCore, ctx: MessageContext): IMessage = {
-    val world = DimensionManager.getWorld(dim)
+    val world = DimensionManager.getWorld(message.dim)
     if (world != null) {
-      world.getTileEntity(x, y, z) match {
+      world.getTileEntity(message.x, message.y, message.z) match {
         case core: TileEntityPhlegethonTunnelCore =>
-          core.handlePacket(action)
+          core.handlePacket(message.action)
         case _                                    =>
       }
     }
