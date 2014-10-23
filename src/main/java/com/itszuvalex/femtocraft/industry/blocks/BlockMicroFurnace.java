@@ -66,7 +66,6 @@ public class BlockMicroFurnace extends TileContainer {
     public BlockMicroFurnace(boolean par2) {
         super(Material.iron);
         this.isActive = par2;
-        setBlockName("FemtocraftMicroFurnace");
         setHardness(3.5f);
         setStepSound(Block.soundTypeMetal);
         setCreativeTab(Femtocraft.femtocraftTab());

@@ -35,6 +35,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.logging.Level;
 
 public class ResearchPlayer {
     private final static String mapKey = "techMap";
@@ -227,6 +228,7 @@ public class ResearchPlayer {
     // ---------------------------------------------------------
 
     public void sync(EntityPlayerMP player) {
+        Femtocraft.log(Level.FINE, "Sending research data to player: " + player.getCommandSenderName());
         FemtocraftPacketHandler.INSTANCE().sendTo(new MessageResearchPlayer(this), player);
     }
 

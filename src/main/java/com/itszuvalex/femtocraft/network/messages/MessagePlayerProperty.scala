@@ -25,7 +25,7 @@ class MessagePlayerProperty(private var username: String, private var data: NBTT
     val bytes = new Array[Byte](length)
     buf.readBytes(bytes)
     try {
-      data = CompressedStreamTools.readCompressed(new DataInputStream(new ByteArrayInputStream(bytes)))
+      data = CompressedStreamTools.readCompressed(new ByteArrayInputStream(bytes))
     }
     catch {
       case e: IOException =>

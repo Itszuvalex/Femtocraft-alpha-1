@@ -34,7 +34,7 @@ class MessageResearchPlayer() extends IMessage with IMessageHandler[MessageResea
     buf.readBytes(data)
 
     try {
-      researchData = CompressedStreamTools.readCompressed(new DataInputStream(new ByteArrayInputStream(data)))
+      researchData = CompressedStreamTools.readCompressed(new ByteArrayInputStream(data))
     }
     catch {
       case e: IOException =>

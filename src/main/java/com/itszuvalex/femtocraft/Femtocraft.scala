@@ -54,7 +54,7 @@ import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent, FMLServerStartingEvent}
 import cpw.mods.fml.common.network.NetworkRegistry
 import cpw.mods.fml.common.registry.{GameRegistry, LanguageRegistry}
-import cpw.mods.fml.common.{Mod, SidedProxy}
+import cpw.mods.fml.common.{FMLCommonHandler, Mod, SidedProxy}
 import cpw.mods.fml.relauncher.Side
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
@@ -305,8 +305,7 @@ object Femtocraft {
       soundManager = new FemtocraftSoundManager
     }
     NetworkRegistry.INSTANCE.registerGuiHandler(this, new FemtocraftGuiHandler)
-    MinecraftForge.EVENT_BUS.register(new FemtocraftPlayerTracker)
-    MinecraftForge.EVENT_BUS.register(new FemtocraftConnectionHandler)
+    FMLCommonHandler.instance().bus().register(new FemtocraftPlayerTracker)
     MinecraftForge.EVENT_BUS.register(new FemtocraftEventHookContainer)
     MinecraftForge.EVENT_BUS.register(new FemtocraftOreRetrogenHandler)
     proxy.registerRendering()
@@ -395,7 +394,8 @@ object Femtocraft {
     blockMicroFurnaceUnlit = new BlockMicroFurnace(false).setBlockName("BlockMicroFurnace")
     GameRegistry.registerBlock(blockMicroFurnaceUnlit, "BlockMicroFurnace")
     LanguageRegistry.addName(blockMicroFurnaceUnlit, "Micro-Furnace")
-    blockMicroFurnaceLit = new BlockMicroFurnace(true)
+    blockMicroFurnaceLit = new BlockMicroFurnace(true).setBlockName("BlockMicroFurnace_lit")
+    GameRegistry.registerBlock(blockMicroFurnaceLit, "BlockMicroFurnace_lit")
     blockMicroDeconstructor = new BlockMicroDeconstructor().setBlockName("BlockMicroDeconstructor")
     GameRegistry.registerBlock(blockMicroDeconstructor, "BlockMicroDeconstructor")
     LanguageRegistry.addName(blockMicroDeconstructor, "Microtech Deconstructor")
@@ -408,7 +408,8 @@ object Femtocraft {
     blockNanoInnervatorUnlit = new BlockNanoInnervator(false).setBlockName("BlockNanoInnervator")
     GameRegistry.registerBlock(blockNanoInnervatorUnlit, "BlockNanoInnervator")
     LanguageRegistry.addName(blockNanoInnervatorUnlit, "Nano Innervator")
-    blockNanoInnervatorLit = new BlockNanoInnervator(true)
+    blockNanoInnervatorLit = new BlockNanoInnervator(true).setBlockName("BlockNanoInnervator_lit")
+    GameRegistry.registerBlock(blockNanoInnervatorLit, "BlockNanoInnervator_lit")
     blockNanoDismantler = new BlockNanoDismantler().setBlockName("BlockNanoDismantler")
     GameRegistry.registerBlock(blockNanoDismantler, "BlockNanoDismantler")
     LanguageRegistry.addName(blockNanoDismantler, "Nano Dismantler")
@@ -424,7 +425,8 @@ object Femtocraft {
     blockFemtoImpulserUnlit = new BlockFemtoImpulser(false).setBlockName("BlockFemtoImpulser")
     GameRegistry.registerBlock(blockFemtoImpulserUnlit, "BlockFemtoImpulser")
     LanguageRegistry.addName(blockFemtoImpulserUnlit, "Femto Impulser")
-    blockFemtoImpulserLit = new BlockFemtoImpulser(true)
+    blockFemtoImpulserLit = new BlockFemtoImpulser(true).setBlockName("BlockFemtoImpulser_lit")
+    GameRegistry.registerBlock(blockFemtoImpulserLit, "BlockFemtoImpulser_lit")
     blockFemtoRepurposer = new BlockFemtoRepurposer().setBlockName("BlockFemtoRepurposer")
     GameRegistry.registerBlock(blockFemtoRepurposer, "BlockFemtoRepurposer")
     LanguageRegistry.addName(blockFemtoRepurposer, "Femto Repurposer")

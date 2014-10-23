@@ -31,7 +31,6 @@ import com.itszuvalex.femtocraft.research.gui.{GuiResearch, GuiResearchConsole}
 import com.itszuvalex.femtocraft.research.tiles.TileEntityResearchConsole
 import cpw.mods.fml.common.network.IGuiHandler
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.tileentity.TileEntity
 import net.minecraft.world.World
 
 object FemtocraftGuiHandler {
@@ -62,8 +61,7 @@ object FemtocraftGuiHandler {
 
 class FemtocraftGuiHandler extends IGuiHandler {
   override def getServerGuiElement(ID: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int): AnyRef = {
-    val te: TileEntity = world.getTileEntity(x, y, z)
-    (ID, te) match {
+    (ID, world.getTileEntity(x, y, z)) match {
       case (FemtocraftGuiHandler.ResearchConsoleGuiID, te: TileEntityResearchConsole)                               => new ContainerResearchConsole(player.inventory, te)
       case (FemtocraftGuiHandler.EncoderGuiID, te: TileEntityEncoder)                                               => new ContainerEncoder(player, player.inventory, te)
       case (FemtocraftGuiHandler.MicroFurnaceGuiID, te: TileEntityBaseEntityMicroFurnace)                           => new ContainerMicroFurnace(player, player.inventory, te)
@@ -91,8 +89,7 @@ class FemtocraftGuiHandler extends IGuiHandler {
   }
 
   override def getClientGuiElement(ID: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int): AnyRef = {
-    val te: TileEntity = world.getTileEntity(x, y, z)
-    (ID, te) match {
+    (ID, world.getTileEntity(x, y, z)) match {
       case (FemtocraftGuiHandler.ResearchComputerGuiID, _)                                                          => new GuiResearch(player.getCommandSenderName)
       case (FemtocraftGuiHandler.ResearchConsoleGuiID, te: TileEntityResearchConsole)                               => new GuiResearchConsole(player.inventory, te)
       case (FemtocraftGuiHandler.EncoderGuiID, te: TileEntityEncoder)                                               => new GuiEncoder(player, player.inventory, te)

@@ -1,6 +1,6 @@
 {
-  "PhlegethonTunnel": {
-    "category": "power",
+  "phlegethontunnel": {
+    "category": "block",
     "sounds": [
       {
         "name": "phlegethontunnel",

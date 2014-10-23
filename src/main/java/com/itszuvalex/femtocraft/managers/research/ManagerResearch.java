@@ -72,11 +72,8 @@ public class ManagerResearch {
 
 
     public boolean addTechnology(ResearchTechnology tech) {
-        TechnologyAddedEvent event = new TechnologyAddedEvent(tech);
-        if (!MinecraftForge.EVENT_BUS.post(event)) {
-            return technologies.put(tech.name, tech) != null;
-        }
-        return false;
+        return !MinecraftForge.EVENT_BUS.post(new TechnologyAddedEvent(tech)) &&
+               technologies.put(tech.name, tech) != null;
     }
 
     /**
@@ -347,6 +344,7 @@ public class ManagerResearch {
     }
 
     public void syncResearch(ResearchPlayer rp) {
+        Femtocraft.log(Level.FINE, "Syncing research for player: " + rp.username);
         playerData.put(rp.username, rp);
     }
 

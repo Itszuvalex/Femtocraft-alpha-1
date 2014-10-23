@@ -65,7 +65,6 @@ public class BlockFemtoImpulser extends TileContainer {
     public BlockFemtoImpulser(boolean par2) {
         super(Material.iron);
         this.isActive = par2;
-        setBlockName("BlockFemtoImpulser");
         setHardness(3.5f);
         setStepSound(Block.soundTypeMetal);
         setCreativeTab(Femtocraft.femtocraftTab());
