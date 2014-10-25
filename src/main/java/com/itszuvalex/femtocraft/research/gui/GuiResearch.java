@@ -357,11 +357,6 @@ public class GuiResearch extends GuiScreen {
         int j2 = l + 288 >> 4;
         int k2 = (k + 288) % 16;
         int l2 = (l + 288) % 16;
-        boolean flag = true;
-        boolean flag1 = true;
-        boolean flag2 = true;
-        boolean flag3 = true;
-        boolean flag4 = true;
         Random random = new Random();
         int i3;
         int j3;
@@ -408,7 +403,7 @@ public class GuiResearch extends GuiScreen {
 
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glDepthFunc(GL11.GL_LEQUAL);
-        GL11.glDisable(GL11.GL_TEXTURE_2D);
+//        GL11.glDisable(GL11.GL_TEXTURE_2D);
         int l3;
         int i4;
         int j4;
@@ -432,7 +427,6 @@ public class GuiResearch extends GuiScreen {
                             j3 = prev.getDisplayY() * 24 - l + 11 + l1 - 11;
                             j4 = next.getDisplayX() * 24 - k + 11 + k1;
                             l3 = next.getDisplayY() * 24 - l + 11 + l1 + 11;
-                            boolean flag5 = rs.researched;
                             boolean flag6 = !rs.researched;
                             i4 = Math
                                          .sin((double) (Minecraft.getSystemTime() % 600L)
@@ -459,7 +453,6 @@ public class GuiResearch extends GuiScreen {
                         j3 = prev.getDisplayY() * 24 - l + 11 + l1 - 11;
                         j4 = next.getDisplayX() * 24 - k + 11 + k1;
                         l3 = next.getDisplayY() * 24 - l + 11 + l1 + 11;
-                        boolean flag5 = rs.researched;
                         boolean flag6 = !rs.researched;
                         i4 = Math
                                      .sin((double) (Minecraft.getSystemTime() % 600L)
@@ -482,6 +475,10 @@ public class GuiResearch extends GuiScreen {
 
         ResearchTechnology tooltipTech = null;
         RenderItem renderitem = new RenderItem();
+        RenderHelper.enableGUIStandardItemLighting();
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+        GL11.glEnable(GL11.GL_COLOR_MATERIAL);
         int l4;
         int i5;
 
@@ -516,11 +513,14 @@ public class GuiResearch extends GuiScreen {
                 i5 = k1 + j4;
                 l4 = l1 + l3;
 
+                GL11.glEnable(GL11.GL_BLEND);// Forge: Specifically enable blend because it is needed here. And we
+                // fix Generic RenderItem's leakage of it.
                 if (tech.isKeystone) {
                     this.drawTexturedModalRect(i5 - 2, l4 - 2, 26, 202, 26, 26);
                 } else {
                     this.drawTexturedModalRect(i5 - 2, l4 - 2, 0, 202, 26, 26);
                 }
+                GL11.glDisable(GL11.GL_BLEND); //Forge: Cleanup states we set.
                 //
                 // if (!this.statFileWriter.canUnlockAchievement(achievement2))
                 // {
@@ -529,21 +529,29 @@ public class GuiResearch extends GuiScreen {
                 // renderitem.renderWithColor = false;
                 // }
 
-                RenderHelper.enableGUIStandardItemLighting();
-                GL11.glDisable(GL11.GL_LIGHTING);
-                GL11.glBlendFunc(GL11.GL_DST_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-                GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-                GL11.glEnable(GL11.GL_COLOR_MATERIAL);
-                GL11.glEnable(GL11.GL_LIGHTING);
+                GL11.glDisable(GL11.GL_LIGHTING); //Forge: Make sure Lighting is disabled. Fixes MC-33065
                 GL11.glEnable(GL11.GL_CULL_FACE);
+
+                RenderHelper.enableGUIStandardItemLighting();
+//                GL11.glDisable(GL11.GL_LIGHTING);
+//                GL11.glBlendFunc(GL11.GL_DST_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+//                GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+//                GL11.glEnable(GL11.GL_COLOR_MATERIAL);
+//                GL11.glEnable(GL11.GL_LIGHTING);
+//                GL11.glEnable(GL11.GL_CULL_FACE);
                 renderitem.renderItemAndEffectIntoGUI(
                         Minecraft.getMinecraft().fontRenderer, Minecraft
                                 .getMinecraft().getTextureManager(),
                         tech.displayItem, i5 + 3, l4 + 3
                 );
+                RenderHelper.disableStandardItemLighting();
+//                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+//                GL11.glDisable(GL11.GL_LIGHTING);
+//                GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+
+
                 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
                 GL11.glDisable(GL11.GL_LIGHTING);
-                GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 
                 // if (!this.statFileWriter.canUnlockAchievement(achievement2))
                 // {
@@ -561,14 +569,14 @@ public class GuiResearch extends GuiScreen {
         }
 
         GL11.glDisable(GL11.GL_DEPTH_TEST);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glEnable(GL11.GL_BLEND);
+        GL11.glPopMatrix();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         Minecraft.getMinecraft().getTextureManager()
                 .bindTexture(achievementTextures);
         this.drawTexturedModalRect(i1, j1, 0, 0, this.researchPaneWidth,
                 this.researchPaneHeight);
-        GL11.glPopMatrix();
+//        GL11.glPopMatrix();
         this.zLevel = 0.0F;
         GL11.glDepthFunc(GL11.GL_LEQUAL);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
@@ -584,23 +592,21 @@ public class GuiResearch extends GuiScreen {
             j4 = par1 + 12;
             l3 = par2 - 4;
 
-            if (true) {
-                i5 = Math.max(this.fontRendererObj.getStringWidth(s), 120);
-                l4 = this.fontRendererObj.splitStringWidth(s1, i5);
+            i5 = Math.max(this.fontRendererObj.getStringWidth(s), 120);
+            l4 = this.fontRendererObj.splitStringWidth(s1, i5);
 
-                if (status.researched) {
-                    l4 += 12;
-                }
+            if (status.researched) {
+                l4 += 12;
+            }
 
-                this.drawGradientRect(j4 - 3, l3 - 3, j4 + i5 + 3, l3 + l4 + 3
-                                                                   + 12, -1073741824, -1073741824);
-                this.fontRendererObj
-                        .drawSplitString(s1, j4, l3 + 12, i5, -6250336);
+            this.drawGradientRect(j4 - 3, l3 - 3, j4 + i5 + 3, l3 + l4 + 3
+                                                               + 12, -1073741824, -1073741824);
+            this.fontRendererObj
+                    .drawSplitString(s1, j4, l3 + 12, i5, -6250336);
 
-                if (status.researched) {
-                    this.fontRendererObj.drawStringWithShadow("Researched!", j4,
-                            l3 + l4 + 4, -7302913);
-                }
+            if (status.researched) {
+                this.fontRendererObj.drawStringWithShadow("Researched!", j4,
+                        l3 + l4 + 4, -7302913);
             }
 
             // Keep Commented
@@ -626,6 +632,7 @@ public class GuiResearch extends GuiScreen {
 
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glEnable(GL11.GL_LIGHTING);
+        RenderHelper.disableStandardItemLighting();
     }
 
     /**
