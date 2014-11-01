@@ -22,8 +22,8 @@
 package com.itszuvalex.femtocraft.research.gui.technology;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.managers.dimensional.DimensionalRecipe;
-import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import com.itszuvalex.femtocraft.api.DimensionalRecipe;
+import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 

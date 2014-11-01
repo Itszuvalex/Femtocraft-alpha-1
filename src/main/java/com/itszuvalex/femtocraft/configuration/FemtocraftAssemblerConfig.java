@@ -21,7 +21,7 @@
 
 package com.itszuvalex.femtocraft.configuration;
 
-import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
+import com.itszuvalex.femtocraft.api.AssemblerRecipe;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 

@@ -1,9 +1,10 @@
 package com.itszuvalex.femtocraft.configuration;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.api.EnumTechLevel;
+import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.managers.assembler.ManagerAssemblerRecipe;
-import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
-import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
+import com.itszuvalex.femtocraft.managers.research.Technology;
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
@@ -30,12 +31,10 @@ public class FemtocraftTechnologyConfig {
             this.xml = new XMLTechnology(file);
             if (!xml.valid()) {
                 this.config = new Configuration(file);
-            }
-            else {
+            } else {
                 this.config = null;
             }
-        }
-        else {
+        } else {
             this.config = new Configuration();
             xml = null;
         }
@@ -44,36 +43,33 @@ public class FemtocraftTechnologyConfig {
 
     public void loadTechnologies() {
         Femtocraft.log(Level.INFO, "Loading Technologies.");
-        List<ResearchTechnology> loadedTechnologies;
+        List<ITechnology> loadedTechnologies;
         if (xml != null && xml.valid()) {
             Femtocraft.log(Level.INFO, "XML file successfully parsed.  Using this instead of configuration " +
-                    "file.");
+                                       "file.");
             if (FemtocraftConfigs.useCustomTechnologies) {
                 loadedTechnologies = xml.loadCustomTechnologies();
-            }
-            else {
+            } else {
                 loadedTechnologies = xml.loadDefaultTechnologies();
             }
 
             if (xml.isChanged()) {
                 xml.save();
             }
-        }
-        else {
+        } else {
             if (config.get(SECTION_KEY, "Use custom classes", false,
                     "Set to true if you define new technologies in this " +
-                            "section.  If false, " +
-                            "Femtocraft will only look for technologies of " +
-                            "certain names, specifically the ones bundled with " +
-                            "the vanilla version.  If true, " +
-                            "it will instead look at all keys in this section " +
-                            "and attempt to load each as a distinct Technology, " +
-                            "and will not load ANY of the original technologies" +
-                            " unless they are present in this section.")
-                      .getBoolean(false)) {
+                    "section.  If false, " +
+                    "Femtocraft will only look for technologies of " +
+                    "certain names, specifically the ones bundled with " +
+                    "the vanilla version.  If true, " +
+                    "it will instead look at all keys in this section " +
+                    "and attempt to load each as a distinct Technology, " +
+                    "and will not load ANY of the original technologies" +
+                    " unless they are present in this section.")
+                    .getBoolean(false)) {
                 loadedTechnologies = loadCustomTechnologies();
-            }
-            else {
+            } else {
                 loadedTechnologies = loadDefaultTechnologies();
             }
 
@@ -85,9 +81,9 @@ public class FemtocraftTechnologyConfig {
         Femtocraft.log(Level.INFO, "Finished loading Technologies.");
     }
 
-    private List<ResearchTechnology> loadCustomTechnologies() {
+    private List<ITechnology> loadCustomTechnologies() {
         Femtocraft.log(Level.INFO, "Loading custom Technologies from configs.");
-        List<ResearchTechnology> ret = new ArrayList<ResearchTechnology>();
+        List<ITechnology> ret = new ArrayList<>();
         ConfigCategory cat = config.getCategory(SECTION_KEY);
         Set<ConfigCategory> techs = cat.getChildren();
         for (ConfigCategory cc : techs) {
@@ -98,10 +94,10 @@ public class FemtocraftTechnologyConfig {
         return ret;
     }
 
-    private List<ResearchTechnology> loadDefaultTechnologies() {
+    private List<ITechnology> loadDefaultTechnologies() {
         Femtocraft.log(Level.INFO, "Loading default Technologies from configs.");
 
-        List<ResearchTechnology> techs = FemtocraftTechnologies.defaultTechnologies();
+        List<ITechnology> techs = FemtocraftTechnologies.defaultTechnologies();
         for (int i = 0; i < techs.size(); ++i) {
             techs.set(i, loadResearchTechnology(techs.get(i)));
         }
@@ -111,20 +107,20 @@ public class FemtocraftTechnologyConfig {
     }
 
 
-    private ResearchTechnology loadTechnology(String name) {
-        ResearchTechnology ret = new ResearchTechnology(name, "DEFAULT DESCRIPTION", EnumTechLevel.MACRO,
+    private ITechnology loadTechnology(String name) {
+        ITechnology ret = new Technology(name, "DEFAULT DESCRIPTION", EnumTechLevel.MACRO,
                 null, null, false, null);
         return loadResearchTechnology(ret);
     }
 
-    public ResearchTechnology loadResearchTechnology(ResearchTechnology ret) {
-        FemtocraftConfigHelper.loadClassInstanceFromConfig(config, SECTION_KEY, ret.name,
-                ResearchTechnology.class, ret);
+    public ITechnology loadResearchTechnology(ITechnology ret) {
+        FemtocraftConfigHelper.loadClassInstanceFromConfig(config, SECTION_KEY, ret.getName(),
+                Technology.class, ret);
         return ret;
     }
 
-    private void registerTechnologies(List<ResearchTechnology> loadedTechnologies) {
-        for (ResearchTechnology tech : loadedTechnologies) {
+    private void registerTechnologies(List<ITechnology> loadedTechnologies) {
+        for (ITechnology tech : loadedTechnologies) {
             Femtocraft.researchManager().addTechnology(tech);
         }
         loadedTechnologies.clear();

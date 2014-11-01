@@ -23,7 +23,7 @@
 //
 //import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
 //import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityIndustry;
-//import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+//import com.itszuvalex.femtocraft.api.EnumTechLevel;
 //import com.itszuvalex.femtocraft.utils.BaseInventory;
 //import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 //import cpw.mods.fml.common.registry.GameRegistry;

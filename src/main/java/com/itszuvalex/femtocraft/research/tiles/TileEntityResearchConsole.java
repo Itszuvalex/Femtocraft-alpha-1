@@ -25,7 +25,7 @@ import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
 import com.itszuvalex.femtocraft.api.research.ITechnologyCarrier;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
-import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
+import com.itszuvalex.femtocraft.managers.research.Technology;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -113,7 +113,7 @@ public class TileEntityResearchConsole extends TileEntityBase implements
         progress = 0;
         progressMax = 0;
 
-        ResearchTechnology tech = Femtocraft.researchManager()
+        Technology tech = Femtocraft.researchManager()
                 .getTechnology(researchingTech);
         if (tech == null) {
             researchingTech = null;
@@ -161,13 +161,13 @@ public class TileEntityResearchConsole extends TileEntityBase implements
         boolean hadTech = displayTech != null;
         displayTech = null;
 
-        for (ResearchTechnology tech : Femtocraft.researchManager()
+        for (Technology tech : Femtocraft.researchManager()
                 .getTechnologies()) {
             if (Femtocraft.researchManager().hasPlayerDiscoveredTechnology(
                     getOwner(), tech) &&
                 !Femtocraft.researchManager().hasPlayerResearchedTechnology(getOwner(), tech)) {
                 if (matchesTechnology(tech)) {
-                    displayTech = tech.name;
+                    displayTech = tech.getName();
                     if (worldObj != null) {
                         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
                     }
@@ -183,7 +183,7 @@ public class TileEntityResearchConsole extends TileEntityBase implements
         }
     }
 
-    private boolean matchesTechnology(ResearchTechnology tech) {
+    private boolean matchesTechnology(Technology tech) {
         if (tech == null) {
             return false;
         }
@@ -248,7 +248,7 @@ public class TileEntityResearchConsole extends TileEntityBase implements
         progressMax = ticksToResearch;
         progress = 0;
 
-        ResearchTechnology tech = Femtocraft.researchManager()
+        Technology tech = Femtocraft.researchManager()
                 .getTechnology(displayTech);
 
         for (int i = 0; i < 9 && i < tech.researchMaterials.length; ++i) {
@@ -268,7 +268,7 @@ public class TileEntityResearchConsole extends TileEntityBase implements
         if (researchingTech != null && !researchingTech.isEmpty()) {
             return false;
         }
-        ResearchTechnology tech = Femtocraft.researchManager()
+        Technology tech = Femtocraft.researchManager()
                 .getTechnology(displayTech);
 
         return matchesTechnology(tech);

@@ -1,7 +1,7 @@
 package com.itszuvalex.femtocraft.managers.assembler
 
 import com.itszuvalex.femtocraft.Femtocraft
-import com.itszuvalex.femtocraft.managers.research.EnumTechLevel
+import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils
 import net.minecraft.item.{Item, ItemStack}
 

@@ -24,7 +24,7 @@ package com.itszuvalex.femtocraft.industry.tiles;
 import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
 import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.configuration.Configurable;
-import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import com.itszuvalex.femtocraft.api.EnumTechLevel;
 
 @Configurable
 public class TileEntityFemtoChronoshifter extends TileEntityBaseEntityNanoHorologe {

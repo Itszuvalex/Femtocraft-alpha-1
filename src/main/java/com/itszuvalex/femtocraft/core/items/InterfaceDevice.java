@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.core.items;
 
 import com.itszuvalex.femtocraft.api.IInterfaceDevice;
-import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 

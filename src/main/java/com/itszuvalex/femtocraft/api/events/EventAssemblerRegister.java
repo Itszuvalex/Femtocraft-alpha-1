@@ -21,7 +21,7 @@
 
 package com.itszuvalex.femtocraft.api.events;
 
-import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
+import com.itszuvalex.femtocraft.api.AssemblerRecipe;
 import cpw.mods.fml.common.eventhandler.Cancelable;
 import cpw.mods.fml.common.eventhandler.Event;
 

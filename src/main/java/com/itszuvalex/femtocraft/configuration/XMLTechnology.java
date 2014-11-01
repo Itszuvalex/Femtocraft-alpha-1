@@ -1,9 +1,10 @@
 package com.itszuvalex.femtocraft.configuration;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.managers.assembler.ManagerAssemblerRecipe;
-import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
-import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
+import com.itszuvalex.femtocraft.api.EnumTechLevel;
+import com.itszuvalex.femtocraft.managers.research.Technology;
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies;
 import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils;
 import net.minecraft.item.ItemStack;
@@ -76,16 +77,16 @@ public class XMLTechnology {
     }
 
 
-    public ResearchTechnology loadTechnology(ResearchTechnology tech) {
+    public ITechnology loadTechnology(Technology tech) {
         return loadTechnology(tech, null);
     }
 
-    private ResearchTechnology loadTechnology(ResearchTechnology tech, NodeList techList) {
+    private ITechnology loadTechnology(Technology tech, NodeList techList) {
         if (techList == null) {
             techList = getTechnologies();
         }
 
-        Element node = getTechnologyNode(tech.name, techList);
+        Element node = getTechnologyNode(tech.getName(), techList);
         tech.shortDescription = getTechString(node, shortDescTag, tech.shortDescription);
         tech.level = getTechLevel(node, techLevelTag, tech.level);
         tech.prerequisites = getTechStringArray(node, prerequisitesTag, tech.prerequisites);
@@ -232,15 +233,15 @@ public class XMLTechnology {
         return getNode(parent, tag, def, null);
     }
 
-    public List<ResearchTechnology> loadCustomTechnologies() {
-        List<ResearchTechnology> ret = new ArrayList<ResearchTechnology>();
+    public List<ITechnology> loadCustomTechnologies() {
+        List<ITechnology> ret = new ArrayList<ITechnology>();
         NodeList nodeList = getTechnologies();
         for (int i = 0; i < nodeList.getLength(); ++i) {
             Node node = nodeList.item(i);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element element = (Element) node;
                 String name = element.getAttribute("name");
-                ret.add(loadTechnology(new ResearchTechnology(name, "DEFAULT DESCRIPTION", EnumTechLevel.MACRO,
+                ret.add(loadTechnology(new Technology(name, "DEFAULT DESCRIPTION", EnumTechLevel.MACRO,
                         null, null, false, null), nodeList));
             }
         }
@@ -248,11 +249,11 @@ public class XMLTechnology {
         return ret;
     }
 
-    List<ResearchTechnology> loadDefaultTechnologies() {
+    List<ITechnology> loadDefaultTechnologies() {
         Femtocraft.log(Level.INFO, "Loading default Technologies from XML.");
 
         NodeList nodes = getTechnologies();
-        List<ResearchTechnology> techs = FemtocraftTechnologies.defaultTechnologies();
+        List<ITechnology> techs = FemtocraftTechnologies.defaultTechnologies();
         for (int i = 0; i < techs.size(); ++i) {
             techs.set(i, loadTechnology(techs.get(i), nodes));
         }

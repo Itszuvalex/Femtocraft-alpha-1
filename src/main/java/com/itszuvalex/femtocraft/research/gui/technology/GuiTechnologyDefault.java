@@ -22,8 +22,8 @@
 package com.itszuvalex.femtocraft.research.gui.technology;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
-import com.itszuvalex.femtocraft.managers.research.ResearchTechnologyStatus;
+import com.itszuvalex.femtocraft.api.AssemblerRecipe;
+import com.itszuvalex.femtocraft.managers.research.ResearchStatus;
 import com.itszuvalex.femtocraft.research.gui.GuiResearch;
 
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class GuiTechnologyDefault extends GuiTechnology {
     private final ArrayList<AssemblerRecipe> recipes;
 
     public GuiTechnologyDefault(GuiResearch guiResearch,
-                                ResearchTechnologyStatus status) {
+                                ResearchStatus status) {
         super(guiResearch, status);
         recipes = Femtocraft.recipeManager().assemblyRecipes
                 .getRecipesForTechnology(status.tech);

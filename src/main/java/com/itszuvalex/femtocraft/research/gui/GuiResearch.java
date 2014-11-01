@@ -24,9 +24,9 @@ package com.itszuvalex.femtocraft.research.gui;
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.graph.IGraphNode;
-import com.itszuvalex.femtocraft.managers.research.ResearchPlayer;
-import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
-import com.itszuvalex.femtocraft.managers.research.ResearchTechnologyStatus;
+import com.itszuvalex.femtocraft.managers.research.PlayerResearch;
+import com.itszuvalex.femtocraft.managers.research.Technology;
+import com.itszuvalex.femtocraft.managers.research.ResearchStatus;
 import com.itszuvalex.femtocraft.render.RenderUtils;
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies;
 import com.itszuvalex.femtocraft.research.gui.graph.DummyTechNode;
@@ -79,7 +79,7 @@ public class GuiResearch extends GuiScreen {
      */
     private static int guiMapRight = maxDisplayRow * 24 + 112;
     private final String username;
-    private final ResearchPlayer researchStatus;
+    private final PlayerResearch researchStatus;
     protected int researchPaneWidth = 256;
     protected int researchPaneHeight = 202;
     /**
@@ -203,10 +203,10 @@ public class GuiResearch extends GuiScreen {
     @Override
     protected void mouseClicked(int par1, int par2, int par3) {
         if (par3 == 0) {
-            for (ResearchTechnology rt : Femtocraft.researchManager()
+            for (Technology rt : Femtocraft.researchManager()
                     .getTechnologies()) {
-                ResearchTechnologyStatus ts = researchStatus
-                        .getTechnology(rt.name);
+                ResearchStatus ts = researchStatus
+                        .getTechnology(rt.getName());
                 if (ts != null) {
                     int k = MathHelper.floor_double(this.field_74117_m
                                                     + (this.guiMapX - this.field_74117_m)
@@ -408,15 +408,15 @@ public class GuiResearch extends GuiScreen {
         int i4;
         int j4;
 
-        for (ResearchTechnology tech : Femtocraft.researchManager()
+        for (Technology tech : Femtocraft.researchManager()
                 .getTechnologies()) {
-            ResearchTechnologyStatus rs = researchStatus
-                    .getTechnology(tech.name);
+            ResearchStatus rs = researchStatus
+                    .getTechnology(tech.getName());
             if (rs == null) {
                 continue;
             }
-            if (tech.prerequisites != null) {
-                for (String cr : tech.prerequisites) {
+            if (tech.getPrerequisites() != null) {
+                for (String cr : tech.getPrerequisites()) {
                     TechNode node = Femtocraft.researchManager().getNode(tech);
 
                     for (IGraphNode parent : node.getParents()) {
@@ -432,7 +432,7 @@ public class GuiResearch extends GuiScreen {
                                          .sin((double) (Minecraft.getSystemTime() % 600L)
                                               / 600.0D * Math.PI * 2.0D) > 0.6D ? 255
                                     : 130;
-                            int color = tech.level.getColor();
+                            int color = tech.getLevel().getColor();
                             if (flag6) {
                                 color += (i4 << 24);
                             } else {
@@ -473,7 +473,7 @@ public class GuiResearch extends GuiScreen {
             }
         }
 
-        ResearchTechnology tooltipTech = null;
+        Technology tooltipTech = null;
         RenderItem renderitem = new RenderItem();
         RenderHelper.enableGUIStandardItemLighting();
         GL11.glDisable(GL11.GL_LIGHTING);
@@ -482,10 +482,10 @@ public class GuiResearch extends GuiScreen {
         int l4;
         int i5;
 
-        for (ResearchTechnology tech : Femtocraft.researchManager()
+        for (Technology tech : Femtocraft.researchManager()
                 .getTechnologies()) {
-            ResearchTechnologyStatus ts = researchStatus
-                    .getTechnology(tech.name);
+            ResearchStatus ts = researchStatus
+                    .getTechnology(tech.getName());
             if (ts == null) {
                 continue;
             }
@@ -585,10 +585,10 @@ public class GuiResearch extends GuiScreen {
 
         if (tooltipTech != null) {
 
-            ResearchTechnologyStatus status = researchStatus
-                    .getTechnology(tooltipTech.name);
-            String s = tooltipTech.name;
-            String s1 = tooltipTech.shortDescription;
+            ResearchStatus status = researchStatus
+                    .getTechnology(tooltipTech.getName());
+            String s = tooltipTech.getName();
+            String s1 = tooltipTech.getShortDescription();
             j4 = par1 + 12;
             l3 = par2 - 4;
 

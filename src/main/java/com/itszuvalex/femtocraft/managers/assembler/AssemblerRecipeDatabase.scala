@@ -25,8 +25,9 @@ import java.sql._
 import java.util.logging.Level
 
 import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.api.{EnumTechLevel, AssemblerRecipe}
 import com.itszuvalex.femtocraft.implicits.IDImplicits._
-import com.itszuvalex.femtocraft.managers.research.{EnumTechLevel, ResearchTechnology}
+import com.itszuvalex.femtocraft.managers.research.Technology
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompressedStreamTools
 
@@ -294,7 +295,7 @@ class AssemblerRecipeDatabase() {
     arrayList
   }
 
-  def getRecipesForTech(tech: ResearchTechnology): java.util.ArrayList[AssemblerRecipe] = getRecipesForTech(tech.name)
+  def getRecipesForTech(tech: Technology): java.util.ArrayList[AssemblerRecipe] = getRecipesForTech(tech.name)
 
   def getRecipesForTech(techName: String): java.util.ArrayList[AssemblerRecipe] = {
     val arrayList = new java.util.ArrayList[AssemblerRecipe]

@@ -1,7 +1,7 @@
 package com.itszuvalex.femtocraft.research.gui.technology;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.managers.research.ResearchTechnologyStatus;
+import com.itszuvalex.femtocraft.managers.research.ResearchStatus;
 import com.itszuvalex.femtocraft.research.gui.GuiResearch;
 import net.minecraft.item.ItemStack;
 
@@ -39,7 +39,7 @@ public class GuiTechnologyRealityOverlocker extends GuiTechnology {
         return researched ? 2 : 1;
     }
 
-    public GuiTechnologyRealityOverlocker(GuiResearch guiResearch, ResearchTechnologyStatus status) {
+    public GuiTechnologyRealityOverlocker(GuiResearch guiResearch, ResearchStatus status) {
         super(guiResearch, status);
     }
 }

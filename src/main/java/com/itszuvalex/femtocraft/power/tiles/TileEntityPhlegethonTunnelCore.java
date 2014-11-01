@@ -27,7 +27,7 @@ import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelAddon;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelComponent;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelCore;
 import com.itszuvalex.femtocraft.api.power.PowerContainer;
-import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.network.FemtocraftPacketHandler;
 import com.itszuvalex.femtocraft.network.messages.MessagePhlegethonTunnelCore;
 import com.itszuvalex.femtocraft.sound.FemtocraftSoundManager;

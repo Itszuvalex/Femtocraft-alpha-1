@@ -21,8 +21,6 @@
 
 package com.itszuvalex.femtocraft.api;
 
-import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
-
 public interface IInterfaceDevice {
 
     EnumTechLevel getInterfaceLevel();

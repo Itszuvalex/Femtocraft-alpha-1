@@ -1,11 +1,12 @@
 package com.itszuvalex.femtocraft.research;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs;
-import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
+import com.itszuvalex.femtocraft.api.AssemblerRecipe;
 import com.itszuvalex.femtocraft.managers.assembler.ComponentRegistry;
-import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
-import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
+import com.itszuvalex.femtocraft.api.EnumTechLevel;
+import com.itszuvalex.femtocraft.managers.research.Technology;
 import com.itszuvalex.femtocraft.research.gui.technology.*;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -85,9 +86,9 @@ public class FemtocraftTechnologies {
     public static final String BASIC_CIRCUITS = "Basic Circuits";
     public static final String METALLURGY = "Metallurgy";
 
-    public static List<ResearchTechnology> defaultTechnologies() {
+    public static List<ITechnology> defaultTechnologies() {
         return new ArrayList<>(Arrays.asList(
-                (new ResearchTechnology(
+                (new Technology(
                         METALLURGY, "The metals that populate your world.", EnumTechLevel.MACRO,
                         new String[]{MACROSCOPIC_STRUCTURES},
                         new ItemStack(Femtocraft.itemIngotTemperedTitanium()),
@@ -129,7 +130,7 @@ public class FemtocraftTechnologies {
                                 ", it's only truly useful once you figure out how to harness the power of its " +
                                 "nuclear" +
                                 " decay." : ""), false, true)),
-                (new ResearchTechnology(
+                (new Technology(
                         BASIC_CIRCUITS, "Basic logic for basic machines.", EnumTechLevel.MACRO,
                         new String[]{MACROSCOPIC_STRUCTURES},
                         new ItemStack(Femtocraft.itemMicrochip()), true,
@@ -152,7 +153,7 @@ public class FemtocraftTechnologies {
                         ".ItemMicrochip--Thin wiring on a solid board, these multipurpose devices enable your" +
                         " machines to perform basic logic.__", false, true)
                 ),
-                (new ResearchTechnology(
+                (new Technology(
                         MACHINING, "Start your industry!", EnumTechLevel.MICRO,
                         new String[]{
                                 METALLURGY, BASIC_CIRCUITS},
@@ -161,7 +162,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.itemMicroPlating()), "", "", false, false
                 )
                 ),
-                (new ResearchTechnology(
+                (new Technology(
                         SCIENTIFIC_THEORY, "Gentlemen, start your research!", EnumTechLevel.MACRO,
                         new String[]{MACROSCOPIC_STRUCTURES},
                         new ItemStack(Femtocraft.blockResearchConsole()), true, null, null, null,
@@ -176,41 +177,41 @@ public class FemtocraftTechnologies {
                         ".Assembler:Femtocraft:tile.BlockResearchConsole--Analyzes your prototypes and generates " +
                         "standardized blueprints.__", false, true
                 )),
-                (new ResearchTechnology(
+                (new Technology(
                         ALGORITHMS, "", EnumTechLevel.MICRO,
                         new String[]{MACHINING}, new ItemStack(
                         Femtocraft.blockEncoder()), false,
                         getInput(new ItemStack(Femtocraft.blockEncoder())), new ItemStack(Femtocraft.blockEncoder())
                 )),
-                (new ResearchTechnology(
+                (new Technology(
                         MECHANICAL_PRECISION, "", EnumTechLevel.MICRO,
                         new String[]{MACHINING}, new ItemStack(
                         Femtocraft.blockMicroFurnaceUnlit()), false,
                         getInput(new ItemStack(Femtocraft.itemHeatingElement())),
                         new ItemStack(Femtocraft.itemHeatingElement())
                 )),
-                (new ResearchTechnology(
+                (new Technology(
                         POWER_OF_NOTHING, "\"Poof!\" It's nothing!", EnumTechLevel.MICRO,
                         new String[]{MECHANICAL_PRECISION},
                         new ItemStack(Femtocraft.itemVacuumCore()),
                         false, getInput(new ItemStack(Femtocraft.itemVacuumCore())),
                         new ItemStack(Femtocraft.itemVacuumCore())
                 )),
-                (new ResearchTechnology(
+                (new Technology(
                         VACUUM_TUBES, "These tubes contain nothing!", EnumTechLevel.MICRO,
                         new String[]{POWER_OF_NOTHING}, new ItemStack(
                         Femtocraft.blockVacuumTube()), false,
                         getInput(new ItemStack(Femtocraft.blockVacuumTube())),
                         new ItemStack(Femtocraft.blockVacuumTube())
                 )),
-                (new ResearchTechnology(
+                (new Technology(
                         VACUUM_TUBE_HUB, "A place for nothing to congregate.",
                         EnumTechLevel.MICRO, new String[]{
                         VACUUM_TUBES}, null, false,
                         null
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         SUCTION_PIPES, "These pipes suck!", EnumTechLevel.MICRO,
                         new String[]{POWER_OF_NOTHING}
                         , new ItemStack(Femtocraft.blockSuctionPipe()),
@@ -218,14 +219,14 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.blockSuctionPipe())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         NANO_CIRCUITS, "", EnumTechLevel.NANO,
                         new String[]{MECHANICAL_PRECISION, BASIC_CIRCUITS},
                         new ItemStack(Femtocraft.itemNanochip()), true,
                         getInput(new ItemStack(Femtocraft.itemNanochip())), new ItemStack(Femtocraft.itemNanochip())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         ADVANCED_PROGRAMMING, "", EnumTechLevel.NANO,
                         new String[]{NANO_CIRCUITS},
                         new ItemStack(Femtocraft.itemBasicAICore()), false,
@@ -233,7 +234,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.itemBasicAICore())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         WORKLOAD_SCHEDULING, "", EnumTechLevel.NANO,
                         new String[]{ADVANCED_PROGRAMMING},
                         new ItemStack(Femtocraft.itemSchedulerCore()),
@@ -241,7 +242,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.itemSchedulerCore())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         PATTERN_RECOGNITION, "", EnumTechLevel.NANO,
                         new String[]{ADVANCED_PROGRAMMING},
                         new ItemStack(Femtocraft.itemLearningCore()),
@@ -249,14 +250,14 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.itemLearningCore())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         DISCRIMINATING_VACUUM_TUBE, "", EnumTechLevel.NANO,
                         new String[]{VACUUM_TUBE_HUB, PATTERN_RECOGNITION},
                         new ItemStack(Femtocraft.blockVacuumTube()), false,
                         null
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         RESOURCE_OPTIMIZATION, "", EnumTechLevel.NANO,
                         new String[]{ADVANCED_PROGRAMMING},
                         new ItemStack(Femtocraft.itemManagerCore()),
@@ -264,7 +265,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.itemManagerCore())
                 )),
 
-                (new ResearchTechnology(BASIC_CHEMISTRY,
+                (new Technology(BASIC_CHEMISTRY,
                         "Composition of Matter", EnumTechLevel.MACRO,
                         new String[]{MACROSCOPIC_STRUCTURES},
                         new ItemStack(Femtocraft.itemMineralLattice()), true, null, null, null,
@@ -275,21 +276,21 @@ public class FemtocraftTechnologies {
                         ComponentRegistry.getComponentsInAssemblerRecipeDisplayString(EnumTechLevel.MICRO), false, true)
                 ),
 
-                (new ResearchTechnology(
+                (new Technology(
                         POTENTIALITY, "", EnumTechLevel.MICRO,
                         new String[]{BASIC_CIRCUITS, BASIC_CHEMISTRY
                         }, new ItemStack(Femtocraft.blockMicroCable()), false,
                         getInput(new ItemStack(Femtocraft.itemMicroCoil())), new ItemStack(Femtocraft.itemMicroCoil())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         POTENTIALITY_STORAGE, "", EnumTechLevel.MICRO,
                         new String[]{POTENTIALITY, MACHINING
                         }, new ItemStack(Femtocraft.blockMicroCube()), false,
                         getInput(new ItemStack(Femtocraft.itemBattery())), new ItemStack(Femtocraft.itemBattery())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         POTENTIALITY_HARNESSING, "", EnumTechLevel.MICRO,
                         new String[]{POTENTIALITY}, new
                         ItemStack(Femtocraft.blockMicroChargingBase()),
@@ -297,7 +298,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.blockMicroChargingBase())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         POTENTIALITY_GENERATION, "Build your potential!",
                         EnumTechLevel.MICRO, new String[]{
                         MECHANICAL_PRECISION,
@@ -306,7 +307,7 @@ public class FemtocraftTechnologies {
                         getInput(new ItemStack(Femtocraft.blockMagneticInductionGenerator())),
                         new ItemStack(Femtocraft.blockMagneticInductionGenerator())
                 )),
-                (new ResearchTechnology(ADVANCED_CHEMISTRY, "",
+                (new Technology(ADVANCED_CHEMISTRY, "",
                         EnumTechLevel.NANO, new String[]{
                         POTENTIALITY_GENERATION, BASIC_CHEMISTRY
                 }, new ItemStack(Femtocraft.itemCrystallite()), true, null, null
@@ -320,7 +321,7 @@ public class FemtocraftTechnologies {
                 ),
 
                 // NANO
-                (new ResearchTechnology(
+                (new Technology(
                         ARTIFICIAL_MATERIALS, "Make what you need.", EnumTechLevel.NANO,
                         new String[]{NANO_CIRCUITS, ADVANCED_CHEMISTRY},
                         new ItemStack(Femtocraft.itemNanoPlating()), false,
@@ -328,7 +329,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.itemNanoPlating())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         FARENITE_STABILIZATION, "", EnumTechLevel.NANO,
                         new String[]{
                                 NANO_CIRCUITS, ADVANCED_CHEMISTRY,
@@ -339,7 +340,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.itemFluidicConductor())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         GEOTHERMAL_HARNESSING, "Harness the geological thermal energy.",
                         EnumTechLevel.NANO, new String[]{FARENITE_STABILIZATION,
                         ADVANCED_CHEMISTRY,
@@ -349,7 +350,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.blockCryoEndothermalChargingBase())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         POTENTIALITY_TRANSFORMATION, "", EnumTechLevel.NANO,
                         new String[]{
                                 FARENITE_STABILIZATION},
@@ -359,7 +360,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.blockOrbitalEqualizer())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         INDUSTRIAL_STORAGE, "", EnumTechLevel.NANO,
                         new String[]{
                                 POTENTIALITY_TRANSFORMATION,
@@ -370,7 +371,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.blockNanoCubeFrame())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         KINETIC_DISSOCIATION, "", EnumTechLevel.NANO,
                         new String[]{
                                 WORKLOAD_SCHEDULING,
@@ -380,7 +381,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.blockNanoInnervatorUnlit())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         ATOMIC_MANIPULATION, "", EnumTechLevel.NANO,
                         new String[]{
                                 ARTIFICIAL_MATERIALS,
@@ -391,7 +392,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.blockNanoDismantler())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         DIGITIZED_WORKLOADS, "", EnumTechLevel.NANO,
                         new String[]{
                                 ATOMIC_MANIPULATION,
@@ -403,7 +404,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.itemDigitalSchematic())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         SPACETIME_MANIPULATION,
                         "The question is: When did you ACTUALLY finish researching this?",
                         EnumTechLevel.NANO, new String[]{
@@ -413,7 +414,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.itemDimensionalMonopole())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         DIMENSIONAL_BRAIDING, "Interweave reality",
                         EnumTechLevel.DIMENSIONAL, new String[]{
                         ARTIFICIAL_MATERIALS,
@@ -423,7 +424,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.blockNanoEnmesher())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         LOCALITY_ENTANGLER, "", EnumTechLevel.DIMENSIONAL,
                         new String[]{
                                 DIMENSIONAL_BRAIDING
@@ -432,7 +433,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.itemPanLocationalComputer())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         DIMENSIONAL_TRANSFORMATION, "", EnumTechLevel.FEMTO,
                         new String[]{
                                 DIMENSIONAL_BRAIDING
@@ -448,7 +449,7 @@ public class FemtocraftTechnologies {
 //            Arrays.asList(technologyDimensionalTransformation)), null,
 //            false, new ArrayList<ItemStack>()
 //    );
-                (new ResearchTechnology(
+                (new Technology(
                         TEMPORAL_PIPELINING,
                         "Start working on the next second, before it begins.",
                         EnumTechLevel.TEMPORAL, new String[]{
@@ -460,7 +461,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.blockNanoHorologe())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         REALITY_OVERCLOCKER, "", EnumTechLevel.TEMPORAL,
                         new String[]{
                                 TEMPORAL_PIPELINING
@@ -478,7 +479,7 @@ public class FemtocraftTechnologies {
 
                 ),
 
-                (new ResearchTechnology(
+                (new Technology(
                         SPACETIME_EXPLOITATION, "Exploiting reality itself.",
                         EnumTechLevel.FEMTO, new String[]{
                         LOCALITY_ENTANGLER,
@@ -488,7 +489,7 @@ public class FemtocraftTechnologies {
                         null
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         QUANTUM_INTERACTIVITY, "", EnumTechLevel.FEMTO,
                         new String[]{
                                 DIMENSIONAL_TRANSFORMATION,
@@ -500,7 +501,7 @@ public class FemtocraftTechnologies {
                         getInput(new ItemStack(Femtocraft.itemCharosGate())), new ItemStack(Femtocraft.itemCharosGate())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         POTENTIAL_HARVESTING, "Headhunters Unite!", EnumTechLevel.MICRO,
                         new String[]{
                                 POTENTIALITY_STORAGE,
@@ -512,7 +513,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.blockMicroChargingCapacitor())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         THORIUM_FISSIBILITY,
                         "",
                         EnumTechLevel.NANO,
@@ -525,7 +526,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.itemIngotThFaSalt())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         HARNESSED_NUCLEAR_DECAY, "", EnumTechLevel.NANO,
                         new String[]{
                                 THORIUM_FISSIBILITY,
@@ -539,7 +540,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.itemFissionReactorPlating())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         APPLIED_PARTICLE_PHYSICS,
                         "Like theoretical particle physics.",
                         EnumTechLevel.FEMTO, new String[]{
@@ -558,7 +559,7 @@ public class FemtocraftTechnologies {
 
                 ),
 
-                (new ResearchTechnology(
+                (new Technology(
                         QUANTUM_COMPUTING, "", EnumTechLevel.FEMTO,
                         new String[]{
                                 QUANTUM_INTERACTIVITY,
@@ -572,7 +573,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.itemErinyesCircuit())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         QUANTUM_ROBOTICS, "", EnumTechLevel.FEMTO,
                         new String[]{
                                 QUANTUM_COMPUTING,
@@ -583,7 +584,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.itemHerculesDrive())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         ELEMENT_MANUFACTURING, "Create circles, spheres, and ovals!",
                         EnumTechLevel.FEMTO, new String[]{
                         QUANTUM_ROBOTICS
@@ -592,7 +593,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.itemFemtoPlating())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         DIMENSIONAL_SUPERPOSITIONS, "It's a layer effect.",
                         EnumTechLevel.DIMENSIONAL, new String[]{
                         SPACETIME_EXPLOITATION,
@@ -602,7 +603,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.blockFemtoEntangler())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         MULTI_DIMENSIONAL_INDUSTRY, "Share the load.",
                         EnumTechLevel.DIMENSIONAL, new String[]{
                         DIMENSIONAL_SUPERPOSITIONS
@@ -610,7 +611,7 @@ public class FemtocraftTechnologies {
                         false, null
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         TEMPORAL_THREADING, "Having multiple timelines do work at once.",
                         EnumTechLevel.TEMPORAL, new String[]{
                         SPACETIME_EXPLOITATION,
@@ -620,7 +621,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.blockFemtoChronoshifter())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         CAUSALITY_SINGULARITY,
                         "If you researched this, you never would have researched this.",
                         EnumTechLevel.TEMPORAL, new String[]{
@@ -629,7 +630,7 @@ public class FemtocraftTechnologies {
                         false, null
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         DEMONIC_PARTICULATES, "", EnumTechLevel.FEMTO,
                         new String[]{
                                 DIMENSIONAL_TRANSFORMATION,
@@ -646,7 +647,7 @@ public class FemtocraftTechnologies {
 //                    .asList(technologyQuantumComputing)), null,
 //            false, new ArrayList<ItemStack>()
 //    );
-                (new ResearchTechnology(
+                (new Technology(
                         PARTICLE_EXCITATION, "", EnumTechLevel.FEMTO,
                         new String[]{
                                 ELEMENT_MANUFACTURING
@@ -657,7 +658,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.blockFemtoImpulserUnlit())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         PARTICLE_MANIPULATION, "", EnumTechLevel.FEMTO,
                         new String[]{
                                 ELEMENT_MANUFACTURING
@@ -668,7 +669,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.blockFemtoRepurposer())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         SPIN_RETENTION,
                         "",
                         EnumTechLevel.FEMTO,
@@ -680,7 +681,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.itemQuantumSchematic())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         SPONTANEOUS_GENERATION, "", EnumTechLevel.FEMTO,
                         new String[]{
                                 QUANTUM_ROBOTICS,
@@ -691,7 +692,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.blockNullEqualizer())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         CORRUPTION_STABILIZATION, "", EnumTechLevel.FEMTO,
                         new String[]{
                                 SPONTANEOUS_GENERATION
@@ -701,7 +702,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.blockFemtoCubeFrame())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         STELLAR_MIMICRY, "Make your own pet star!", EnumTechLevel.FEMTO,
                         new String[]{
                                 DEMONIC_PARTICULATES,
@@ -715,7 +716,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.itemStellaratorPlating())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         ENERGY_CONVERSION, "Plasma to Energy", EnumTechLevel.FEMTO,
                         new String[]{
                                 STELLAR_MIMICRY}
@@ -724,7 +725,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.blockPlasmaTurbine())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         MATTER_CONVERSION, "Plasma to Mass", EnumTechLevel.FEMTO,
                         new String[]{
                                 STELLAR_MIMICRY}
@@ -733,7 +734,7 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.blockPlasmaCondenser())
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         NETHER_STAR_FABRICATION, "Creating the unimaginable.",
                         EnumTechLevel.FEMTO, new String[]{
                         STELLAR_MIMICRY,
@@ -743,7 +744,7 @@ public class FemtocraftTechnologies {
                         true, getInput(new ItemStack(Items.nether_star)), new ItemStack(Items.nether_star)
                 )),
 
-                (new ResearchTechnology(
+                (new Technology(
                         MOLECULAR_MANIPULATION, "", EnumTechLevel.MICRO,
                         new String[]{
                                 ALGORITHMS, MECHANICAL_PRECISION,
@@ -762,7 +763,7 @@ public class FemtocraftTechnologies {
 //                    technologySingularityCalculator)), null, false,
 //            new ArrayList<ItemStack>()
 //    );
-                (new ResearchTechnology(
+                (new Technology(
                         MACROSCOPIC_STRUCTURES, "The patterns everything take.",
                         EnumTechLevel.MACRO, null, new ItemStack(Items.iron_pickaxe),
 

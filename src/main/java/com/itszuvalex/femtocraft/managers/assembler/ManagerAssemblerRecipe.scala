@@ -24,8 +24,9 @@ import java.util
 import java.util.logging.Level
 
 import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.api.{EnumTechLevel, AssemblerRecipe}
 import com.itszuvalex.femtocraft.api.events.EventAssemblerRegister
-import com.itszuvalex.femtocraft.managers.research.{EnumTechLevel, ResearchTechnology}
+import com.itszuvalex.femtocraft.managers.research.Technology
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils
 import net.minecraft.init.{Blocks, Items}
@@ -39,7 +40,7 @@ import scala.collection.JavaConversions._
 
 /** @author chris
   *
-  *         This manager is responsible for all [[com.itszuvalex.femtocraft.Femtocraft]] [[com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe]].
+  *         This manager is responsible for all [[com.itszuvalex.femtocraft.Femtocraft]] [[AssemblerRecipe]].
   *
   *         All Assembler/Dissassemblers look to this manager for recipe lookup. Recipes can be specified to only be disassemble-able, or only reassemble-able.
   *         Dissassemblers simply break down items, Reassembles must use schematics to specify the recipe to follow. <br> All
@@ -730,7 +731,7 @@ class ManagerAssemblerRecipe {
 
   def getAllRecipes = ard.getAllRecipes
 
-  def getRecipesForTechnology(tech: ResearchTechnology) = ard.getRecipesForTech(tech)
+  def getRecipesForTechnology(tech: Technology) = ard.getRecipesForTech(tech)
 
   def getRecipesForTechnology(techName: String) = ard.getRecipesForTech(techName)
 

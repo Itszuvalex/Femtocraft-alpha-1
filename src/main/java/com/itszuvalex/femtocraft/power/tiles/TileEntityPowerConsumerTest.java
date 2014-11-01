@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.api.power.PowerContainer;
-import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityPowerConsumerTest extends TileEntityPowerConsumer {

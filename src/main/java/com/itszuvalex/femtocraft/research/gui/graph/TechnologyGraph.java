@@ -22,9 +22,10 @@
 package com.itszuvalex.femtocraft.research.gui.graph;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.graph.IGraphNode;
 import com.itszuvalex.femtocraft.graph.MapGraph;
-import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
+import com.itszuvalex.femtocraft.managers.research.Technology;
 import com.itszuvalex.femtocraft.research.gui.GuiResearch;
 
 import java.util.HashMap;
@@ -34,7 +35,7 @@ public class TechnologyGraph extends MapGraph<String> {
     public static final int X_PADDING = 1;
     public static final int Y_PADDING = 2;
 
-    public TechnologyGraph(HashMap<String, ResearchTechnology> technologies) {
+    public TechnologyGraph(HashMap<String, ITechnology> technologies) {
         super();
         Femtocraft.log(Level.INFO, "Creating Graph of Technologies.");
         HashMap<String, IGraphNode> nodes = new HashMap<String, IGraphNode>();
@@ -49,7 +50,7 @@ public class TechnologyGraph extends MapGraph<String> {
         // Add edges
         for (String name : technologies.keySet()) {
             TechNode node = (TechNode) nodes.get(name);
-            ResearchTechnology tech = node.getTech();
+            Technology tech = node.getTech();
             if (tech == null) {
                 continue;
             }

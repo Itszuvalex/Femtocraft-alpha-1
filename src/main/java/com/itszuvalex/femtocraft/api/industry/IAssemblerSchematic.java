@@ -21,7 +21,7 @@
 
 package com.itszuvalex.femtocraft.api.industry;
 
-import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
+import com.itszuvalex.femtocraft.api.AssemblerRecipe;
 import net.minecraft.item.ItemStack;
 
 /**

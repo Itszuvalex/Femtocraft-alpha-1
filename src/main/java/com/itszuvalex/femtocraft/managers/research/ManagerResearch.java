@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft.managers.research;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.api.events.EventTechnology.TechnologyAddedEvent;
+import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.research.gui.graph.TechNode;
 import com.itszuvalex.femtocraft.research.gui.graph.TechnologyGraph;
 import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils;
@@ -49,14 +50,14 @@ public class ManagerResearch {
     // TODO: REMOVE ME
     private static boolean debug = true;
     private static final String DIRECTORY = "Research";
-    private HashMap<String, ResearchTechnology> technologies;
-    private HashMap<String, ResearchPlayer> playerData;
+    private HashMap<String, ITechnology> technologies;
+    private HashMap<String, PlayerResearch> playerData;
     private TechnologyGraph graph;
     private String lastWorldLoaded = "";
 
     public ManagerResearch() {
-        technologies = new HashMap<String, ResearchTechnology>();
-        playerData = new HashMap<String, ResearchPlayer>();
+        technologies = new HashMap<>();
+        playerData = new HashMap<>();
     }
 
     // public static ResearchTechnology technologyPaperSchematic = new
@@ -71,9 +72,9 @@ public class ManagerResearch {
     // Femtocraft.itemPaperSchematic, 1));
 
 
-    public boolean addTechnology(ResearchTechnology tech) {
+    public boolean addTechnology(ITechnology tech) {
         return !MinecraftForge.EVENT_BUS.post(new TechnologyAddedEvent(tech)) &&
-               technologies.put(tech.name, tech) != null;
+               technologies.put(tech.getName(), tech) != null;
     }
 
     /**
@@ -89,27 +90,27 @@ public class ManagerResearch {
     // return graph.getDummyTechs();
     // }
 
-    public Collection<ResearchTechnology> getTechnologies() {
+    public Collection<ITechnology> getTechnologies() {
         return technologies.values();
     }
 
     // --------------------------------------------------
 
-    public boolean removeTechnology(ResearchTechnology tech) {
-        return technologies.remove(tech.name) != null;
+    public boolean removeTechnology(ITechnology tech) {
+        return technologies.remove(tech.getName()) != null;
     }
 
-    public ResearchTechnology getTechnology(String name) {
+    public ITechnology getTechnology(String name) {
         return technologies.get(name);
     }
 
-    public ResearchPlayer addPlayerResearch(String username) {
+    public PlayerResearch addPlayerResearch(String username) {
         // Return playerData for a player. If it doesn't exist, makes it.
-        ResearchPlayer rp = playerData.get(username);
+        PlayerResearch rp = playerData.get(username);
         if (rp != null) {
             return rp;
         }
-        ResearchPlayer r = new ResearchPlayer(username);
+        PlayerResearch r = new PlayerResearch(username);
 
         addFreeResearches(r);
         if (debug) {
@@ -120,30 +121,30 @@ public class ManagerResearch {
         return r;
     }
 
-    private void addKnownTechnologies(ResearchPlayer rp) {
-        for (ResearchTechnology t : technologies.values()) {
+    private void addKnownTechnologies(PlayerResearch rp) {
+        for (ITechnology t : technologies.values()) {
             if (!rp.hasDiscoveredTechnology(t)) {
-                if (t.researchedByDefault) {
-                    rp.researchTechnology(t.name, true);
+                if (t.isResearchedByDefault()) {
+                    rp.researchTechnology(t.getName(), true);
                     continue;
                 }
-                if (t.discoveredByDefault) {
-                    rp.discoverTechnology(t.name);
+                if (t.isDiscoveredByDefault()) {
+                    rp.discoverTechnology(t.getName());
                     continue;
                 }
-                if (t.prerequisites != null && t.prerequisites.length > 0) {
+                if (t.getPrerequisites() != null && t.getPrerequisites().length > 0) {
                     boolean shouldDiscover = true;
-                    for (String pre : t.prerequisites) {
+                    for (String pre : t.getPrerequisites()) {
                         if (!shouldDiscover) continue;
                         if (!rp.hasResearchedTechnology(pre)) {
                             shouldDiscover = false;
                         }
                     }
                     if (shouldDiscover && rp.canDiscoverTechnology(t)) {
-                        rp.discoverTechnology(t.name);
+                        rp.discoverTechnology(t.getName());
                     }
                 } else {
-                    rp.researchTechnology(t.name, true);
+                    rp.researchTechnology(t.getName(), true);
                 }
             }
         }
@@ -151,18 +152,18 @@ public class ManagerResearch {
 
     // --------------------------------------------------
 
-    private void addFreeResearches(ResearchPlayer research) {
-        for (ResearchTechnology t : technologies.values()) {
-            if (t.prerequisites == null) {
-                research.researchTechnology(t.name, true);
+    private void addFreeResearches(PlayerResearch research) {
+        for (ITechnology t : technologies.values()) {
+            if (t.getPrerequisites() == null) {
+                research.researchTechnology(t.getName(), true);
                 // research.discoverTechnology(t.name);
             }
         }
     }
 
-    private void addAllResearches(ResearchPlayer research) {
-        for (ResearchTechnology t : technologies.values()) {
-            research.researchTechnology(t.name, true);
+    private void addAllResearches(PlayerResearch research) {
+        for (ITechnology t : technologies.values()) {
+            research.researchTechnology(t.getName(), true);
         }
     }
 
@@ -172,39 +173,39 @@ public class ManagerResearch {
 
     // --------------------------------------------------
 
-    public ResearchPlayer getPlayerResearch(String username) {
+    public PlayerResearch getPlayerResearch(String username) {
         return playerData.get(username);
     }
 
     public boolean hasPlayerDiscoveredTechnology(String username,
-                                                 ResearchTechnology tech) {
-        return hasPlayerDiscoveredTechnology(username, tech.name);
+                                                 ITechnology tech) {
+        return hasPlayerDiscoveredTechnology(username, tech.getName());
     }
 
     // --------------------------------------------------
 
     public boolean hasPlayerDiscoveredTechnology(String username, String tech) {
-        ResearchPlayer pr = playerData.get(username);
+        PlayerResearch pr = playerData.get(username);
         return pr != null && pr.hasDiscoveredTechnology(tech);
     }
 
     public boolean hasPlayerResearchedTechnology(String username,
-                                                 ResearchTechnology tech) {
+                                                 ITechnology tech) {
         if (tech == null) return true;
-        return hasPlayerResearchedTechnology(username, tech.name);
+        return hasPlayerResearchedTechnology(username, tech.getName());
     }
 
     // --------------------------------------------------
 
     public boolean hasPlayerResearchedTechnology(String username, String tech) {
-        ResearchPlayer pr = playerData.get(username);
+        PlayerResearch pr = playerData.get(username);
         return pr != null && pr.hasResearchedTechnology(tech);
     }
 
     public void saveToNBTTagCompound(NBTTagCompound compound) {
         NBTTagList list = new NBTTagList();
 
-        for (ResearchPlayer status : playerData.values()) {
+        for (PlayerResearch status : playerData.values()) {
             NBTTagCompound cs = new NBTTagCompound();
             cs.setString(userKey, status.username);
 
@@ -228,7 +229,7 @@ public class ManagerResearch {
             String username = cs.getString(userKey);
 
             NBTTagCompound data = cs.getCompoundTag(dataKey);
-            ResearchPlayer status = new ResearchPlayer(username);
+            PlayerResearch status = new PlayerResearch(username);
             status.loadFromNBTTagCompound(data);
 
             playerData.put(username, status);
@@ -244,7 +245,7 @@ public class ManagerResearch {
                 folder.mkdirs();
             }
 
-            for (ResearchPlayer pdata : playerData.values()) {
+            for (PlayerResearch pdata : playerData.values()) {
                 try {
                     File file = new File(folder, pdata.username + ".dat");
                     if (!file.exists()) {
@@ -312,7 +313,7 @@ public class ManagerResearch {
                     String username = pdata.getName().substring(0,
                             pdata.getName().length() - 4);
                     // NBTTagCompound data = CompressedStreamTools.read(file);
-                    ResearchPlayer file = new ResearchPlayer(username);
+                    PlayerResearch file = new PlayerResearch(username);
                     file.loadFromNBTTagCompound(data);
                     fileinputstream.close();
                     //If another mod is added since last startup, we won't have known to discover its technologies.
@@ -343,12 +344,12 @@ public class ManagerResearch {
         return true;
     }
 
-    public void syncResearch(ResearchPlayer rp) {
+    public void syncResearch(PlayerResearch rp) {
         Femtocraft.log(Level.FINE, "Syncing research for player: " + rp.username);
         playerData.put(rp.username, rp);
     }
 
-    public TechNode getNode(ResearchTechnology pr) {
-        return (TechNode) graph.getNode(pr.name);
+    public TechNode getNode(ITechnology pr) {
+        return (TechNode) graph.getNode(pr.getName());
     }
 }

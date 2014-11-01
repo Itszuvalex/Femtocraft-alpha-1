@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.research.gui.technology;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.managers.research.ResearchTechnologyStatus;
+import com.itszuvalex.femtocraft.managers.research.ResearchStatus;
 import com.itszuvalex.femtocraft.research.gui.GuiResearch;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -33,7 +33,7 @@ import java.util.List;
 public class GuiTechnologyBasicCircuits extends GuiTechnology {
 
     public GuiTechnologyBasicCircuits(GuiResearch guiResearch,
-                                      ResearchTechnologyStatus status) {
+                                      ResearchStatus status) {
         super(guiResearch, status);
     }
 

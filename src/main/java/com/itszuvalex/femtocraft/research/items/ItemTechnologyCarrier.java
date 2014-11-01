@@ -24,8 +24,8 @@ package com.itszuvalex.femtocraft.research.items;
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.api.research.ITechnologyCarrier;
 import com.itszuvalex.femtocraft.core.items.ItemBase;
-import com.itszuvalex.femtocraft.managers.research.ResearchPlayer;
-import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
+import com.itszuvalex.femtocraft.managers.research.PlayerResearch;
+import com.itszuvalex.femtocraft.managers.research.Technology;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -54,14 +54,14 @@ public abstract class ItemTechnologyCarrier extends ItemBase implements
     @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
                                       EntityPlayer par3EntityPlayer) {
-        ResearchPlayer pr = Femtocraft.researchManager()
+        PlayerResearch pr = Femtocraft.researchManager()
                 .getPlayerResearch(par3EntityPlayer.getCommandSenderName());
         if (pr != null) {
             String tech = getTechnology(par1ItemStack);
             if (!(tech == null || tech.isEmpty())) {
                 if (!par2World.isRemote) {
                     if (pr.researchTechnology(tech, false)) {
-                        ResearchTechnology rt = Femtocraft.researchManager()
+                        Technology rt = Femtocraft.researchManager()
                                 .getTechnology(tech);
                         if (rt != null && rt.discoverItem != null) {
                             return rt.discoverItem.copy();

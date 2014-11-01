@@ -21,16 +21,17 @@
 
 package com.itszuvalex.femtocraft.research.gui.graph;
 
+import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.graph.GraphNode;
 import com.itszuvalex.femtocraft.graph.IGraphNode;
-import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
+import com.itszuvalex.femtocraft.managers.research.Technology;
 
 import java.util.ArrayList;
 
 public class TechNode extends GraphNode {
-    private final ResearchTechnology technology;
+    private final Technology technology;
 
-    public TechNode(ResearchTechnology technology) {
+    public TechNode(Technology technology) {
         super();
         this.technology = technology;
         setX(UNINITIALIZED);
@@ -87,7 +88,7 @@ public class TechNode extends GraphNode {
         }
     }
 
-    public ResearchTechnology getTech() {
+    public Technology getTech() {
         return technology;
     }
 
@@ -115,7 +116,7 @@ public class TechNode extends GraphNode {
         getParents().removeAll(nodes);
     }
 
-    private boolean hasParentTechRecursive(ResearchTechnology tech) {
+    private boolean hasParentTechRecursive(ITechnology tech) {
         boolean contains = tech == getTech();
         if (contains) {
             return true;

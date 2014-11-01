@@ -24,7 +24,7 @@
 //import com.itszuvalex.femtocraft.Femtocraft;
 //import com.itszuvalex.femtocraft.api.events.EventAssemblerRegister.AssemblerDecompositionRegisterEvent;
 //import com.itszuvalex.femtocraft.api.events.EventAssemblerRegister.AssemblerRecompositionRegisterEvent;
-//import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+//import com.itszuvalex.femtocraft.api.EnumTechLevel;
 //import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
 //import com.itszuvalex.femtocraft.research.FemtocraftTechnologies;
 //import com.itszuvalex.femtocraft.utils.FemtocraftUtils;

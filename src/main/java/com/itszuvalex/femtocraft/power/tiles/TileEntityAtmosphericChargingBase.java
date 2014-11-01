@@ -24,7 +24,7 @@ package com.itszuvalex.femtocraft.power.tiles;
 import com.itszuvalex.femtocraft.api.power.IAtmosphericChargingAddon;
 import com.itszuvalex.femtocraft.api.power.IAtmosphericChargingBase;
 import com.itszuvalex.femtocraft.api.power.PowerContainer;
-import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

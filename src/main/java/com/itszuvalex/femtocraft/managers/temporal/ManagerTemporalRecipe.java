@@ -22,8 +22,9 @@
 package com.itszuvalex.femtocraft.managers.temporal;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.api.TemporalRecipe;
 import com.itszuvalex.femtocraft.managers.assembler.ComparatorItemStack;
-import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.init.Items;

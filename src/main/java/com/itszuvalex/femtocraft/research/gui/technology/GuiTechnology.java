@@ -22,11 +22,11 @@
 package com.itszuvalex.femtocraft.research.gui.technology;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
-import com.itszuvalex.femtocraft.managers.dimensional.DimensionalRecipe;
-import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
-import com.itszuvalex.femtocraft.managers.research.ResearchTechnologyStatus;
-import com.itszuvalex.femtocraft.managers.temporal.TemporalRecipe;
+import com.itszuvalex.femtocraft.api.AssemblerRecipe;
+import com.itszuvalex.femtocraft.api.DimensionalRecipe;
+import com.itszuvalex.femtocraft.managers.research.Technology;
+import com.itszuvalex.femtocraft.managers.research.ResearchStatus;
+import com.itszuvalex.femtocraft.api.TemporalRecipe;
 import com.itszuvalex.femtocraft.research.gui.GuiResearch;
 import com.itszuvalex.femtocraft.sound.FemtocraftSoundUtils;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
@@ -48,8 +48,8 @@ public class GuiTechnology extends GuiScreen {
     private static final ResourceLocation texture = new ResourceLocation(
             Femtocraft.ID().toLowerCase(), "textures/guis/GuiTechnology.png");
     private final GuiResearch guiResearch;
-    private final ResearchTechnologyStatus status;
-    private final ResearchTechnology tech;
+    private final ResearchStatus status;
+    private final Technology tech;
     private final GuiTechnologyRenderer renderer;
     private final int xSize = 256;
     private final int ySize = 202;
@@ -75,7 +75,7 @@ public class GuiTechnology extends GuiScreen {
     private int displayPage = 1;
 
     public GuiTechnology(GuiResearch guiResearch,
-                         ResearchTechnologyStatus status) {
+                         ResearchStatus status) {
         this.guiResearch = guiResearch;
         this.status = status;
         this.tech = Femtocraft.researchManager().getTechnology(status.tech);

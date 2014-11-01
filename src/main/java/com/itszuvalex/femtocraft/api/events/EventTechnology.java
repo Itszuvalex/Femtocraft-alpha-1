@@ -21,21 +21,21 @@
 
 package com.itszuvalex.femtocraft.api.events;
 
-import com.itszuvalex.femtocraft.managers.research.ResearchTechnology;
+import com.itszuvalex.femtocraft.api.research.ITechnology;
 import cpw.mods.fml.common.eventhandler.Cancelable;
 import cpw.mods.fml.common.eventhandler.Event;
 
 @Cancelable
 public class EventTechnology extends Event {
-    public final ResearchTechnology researchTechnology;
+    public final ITechnology technology;
 
-    public EventTechnology(ResearchTechnology tech) {
-        this.researchTechnology = tech;
+    public EventTechnology(ITechnology tech) {
+        this.technology = tech;
     }
 
     @Cancelable
     public static class TechnologyAddedEvent extends EventTechnology {
-        public TechnologyAddedEvent(ResearchTechnology tech) {
+        public TechnologyAddedEvent(ITechnology tech) {
             super(tech);
         }
     }
@@ -44,7 +44,7 @@ public class EventTechnology extends Event {
     public static class TechnologyDiscoveredEvent extends EventTechnology {
         public final String username;
 
-        public TechnologyDiscoveredEvent(String username, ResearchTechnology tech) {
+        public TechnologyDiscoveredEvent(String username, ITechnology tech) {
             super(tech);
             this.username = username;
         }
@@ -54,7 +54,7 @@ public class EventTechnology extends Event {
     public static class TechnologyResearchedEvent extends EventTechnology {
         public final String username;
 
-        public TechnologyResearchedEvent(String username, ResearchTechnology tech) {
+        public TechnologyResearchedEvent(String username, ITechnology tech) {
             super(tech);
             this.username = username;
         }

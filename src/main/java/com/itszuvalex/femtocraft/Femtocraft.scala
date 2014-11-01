@@ -25,6 +25,7 @@ package com.itszuvalex.femtocraft
 import java.io.File
 import java.util.logging.{Level, Logger}
 
+import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.blocks._
 import com.itszuvalex.femtocraft.command.{CommandBase, CommandFemtocraft}
 import com.itszuvalex.femtocraft.configuration.{FemtocraftAssemblerConfig, FemtocraftConfigs, FemtocraftTechnologyConfig}
@@ -37,7 +38,7 @@ import com.itszuvalex.femtocraft.industry.items.{ItemDigitalSchematic, ItemPaper
 import com.itszuvalex.femtocraft.managers.ManagerRecipe
 import com.itszuvalex.femtocraft.managers.assembler.ComponentRegistry
 import com.itszuvalex.femtocraft.managers.assistant.ManagerAssistant
-import com.itszuvalex.femtocraft.managers.research.{EnumTechLevel, ManagerResearch}
+import com.itszuvalex.femtocraft.managers.research.ManagerResearch
 import com.itszuvalex.femtocraft.network.FemtocraftPacketHandler
 import com.itszuvalex.femtocraft.power.blocks._
 import com.itszuvalex.femtocraft.power.fluids._

@@ -23,7 +23,7 @@ package com.itszuvalex.femtocraft.industry.gui.graph;
 
 import com.itszuvalex.femtocraft.graph.IGraphNode;
 import com.itszuvalex.femtocraft.graph.MapGraph;
-import com.itszuvalex.femtocraft.managers.assembler.AssemblerRecipe;
+import com.itszuvalex.femtocraft.api.AssemblerRecipe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 

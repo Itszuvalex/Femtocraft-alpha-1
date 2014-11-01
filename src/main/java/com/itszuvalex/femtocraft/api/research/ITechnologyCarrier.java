@@ -21,7 +21,7 @@
 
 package com.itszuvalex.femtocraft.api.research;
 
-import com.itszuvalex.femtocraft.managers.research.EnumTechLevel;
+import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import net.minecraft.item.ItemStack;
 
 /**

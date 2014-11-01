@@ -22,8 +22,8 @@ package com.itszuvalex.femtocraft.utils
 
 import java.util
 
+import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.implicits.IDImplicits._
-import com.itszuvalex.femtocraft.managers.research.EnumTechLevel
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack

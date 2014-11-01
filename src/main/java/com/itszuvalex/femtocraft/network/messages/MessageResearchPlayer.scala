@@ -4,7 +4,7 @@ import java.io.{ByteArrayInputStream, DataInputStream, IOException}
 import java.util.logging.Level
 
 import com.itszuvalex.femtocraft.Femtocraft
-import com.itszuvalex.femtocraft.managers.research.ResearchPlayer
+import com.itszuvalex.femtocraft.managers.research.PlayerResearch
 import cpw.mods.fml.common.network.simpleimpl.{IMessage, IMessageHandler, MessageContext}
 import io.netty.buffer.ByteBuf
 import net.minecraft.client.Minecraft
@@ -17,7 +17,7 @@ class MessageResearchPlayer() extends IMessage with IMessageHandler[MessageResea
   private var researchData: NBTTagCompound = null
   private var playerName  : String         = null
 
-  def this(rp: ResearchPlayer) {
+  def this(rp: PlayerResearch) {
     this()
     researchData = new NBTTagCompound
     rp.saveToNBTTagCompound(researchData)
@@ -62,7 +62,7 @@ class MessageResearchPlayer() extends IMessage with IMessageHandler[MessageResea
 
   def onMessage(message: MessageResearchPlayer, ctx: MessageContext): IMessage = {
     if (message.playerName.equalsIgnoreCase(Minecraft.getMinecraft.thePlayer.getCommandSenderName)) {
-      val rp = new ResearchPlayer(message.playerName)
+      val rp = new PlayerResearch(message.playerName)
       rp.loadFromNBTTagCompound(message.researchData)
       Femtocraft.researchManager.syncResearch(rp)
     }

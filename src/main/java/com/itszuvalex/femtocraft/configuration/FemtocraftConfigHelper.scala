@@ -26,8 +26,8 @@ import java.util.regex.Pattern
 
 import com.google.common.collect.HashBiMap
 import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.implicits.ItemStackImplicits._
-import com.itszuvalex.femtocraft.managers.research.EnumTechLevel
 import net.minecraft.item.ItemStack
 import net.minecraftforge.common.config.Configuration
 
