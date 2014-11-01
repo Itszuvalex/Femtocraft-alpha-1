@@ -18,21 +18,16 @@
  *  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *  *****************************************************************************
  */
+package com.itszuvalex.femtocraft
 
-package com.itszuvalex.femtocraft;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent
+import cpw.mods.fml.common.gameevent.PlayerEvent
+import net.minecraft.entity.player.EntityPlayerMP
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 
-public class FemtocraftCreativeTab extends CreativeTabs {
-
-    public FemtocraftCreativeTab(String label) {
-        super(label);
-    }
-
-    @Override
-    public Item getTabIconItem() {
-        return Femtocraft.itemCubit();
-    }
-
+class FemtocraftConnectionHandler {
+  @SubscribeEvent def playerLoggedIn(event: PlayerEvent.PlayerLoggedInEvent) {
+    val pr = Femtocraft.researchManager.addPlayerResearch(event.player.getCommandSenderName)
+    pr.sync(event.player.asInstanceOf[EntityPlayerMP])
+  }
 }

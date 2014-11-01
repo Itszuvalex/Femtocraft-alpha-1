@@ -81,7 +81,8 @@ public class FemtocraftAssemblerConfig {
     public boolean isEnabled(AssemblerRecipe recipe) {
         boolean result = recipe != null &&
                          config.get(ENABLE_SECTION_KEY, FemtocraftConfigHelper.escapeCategorySplitter(recipe.output
-                                 .getUnlocalizedName()), true).getBoolean(true);
+                                 .getItem().getUnlocalizedName(recipe.output))
+                                 , true).getBoolean(true);
         if (config.hasChanged() && !batchLoading) {
             config.save();
         }
