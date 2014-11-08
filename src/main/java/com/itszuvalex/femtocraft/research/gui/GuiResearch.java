@@ -22,11 +22,12 @@
 package com.itszuvalex.femtocraft.research.gui;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.graph.IGraphNode;
 import com.itszuvalex.femtocraft.managers.research.PlayerResearch;
-import com.itszuvalex.femtocraft.managers.research.Technology;
 import com.itszuvalex.femtocraft.managers.research.ResearchStatus;
+import com.itszuvalex.femtocraft.managers.research.Technology;
 import com.itszuvalex.femtocraft.render.RenderUtils;
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies;
 import com.itszuvalex.femtocraft.research.gui.graph.DummyTechNode;
@@ -203,7 +204,7 @@ public class GuiResearch extends GuiScreen {
     @Override
     protected void mouseClicked(int par1, int par2, int par3) {
         if (par3 == 0) {
-            for (Technology rt : Femtocraft.researchManager()
+            for (ITechnology rt : Femtocraft.researchManager()
                     .getTechnologies()) {
                 ResearchStatus ts = researchStatus
                         .getTechnology(rt.getName());
@@ -408,7 +409,7 @@ public class GuiResearch extends GuiScreen {
         int i4;
         int j4;
 
-        for (Technology tech : Femtocraft.researchManager()
+        for (ITechnology tech : Femtocraft.researchManager()
                 .getTechnologies()) {
             ResearchStatus rs = researchStatus
                     .getTechnology(tech.getName());
@@ -458,7 +459,7 @@ public class GuiResearch extends GuiScreen {
                                      .sin((double) (Minecraft.getSystemTime() % 600L)
                                           / 600.0D * Math.PI * 2.0D) > 0.6D ? 255
                                 : 130;
-                        int color = tech.level.getColor();
+                        int color = tech.getLevel().getColor();
                         if (flag6) {
                             color += (i4 << 24);
                         } else {
@@ -473,7 +474,7 @@ public class GuiResearch extends GuiScreen {
             }
         }
 
-        Technology tooltipTech = null;
+        ITechnology tooltipTech = null;
         RenderItem renderitem = new RenderItem();
         RenderHelper.enableGUIStandardItemLighting();
         GL11.glDisable(GL11.GL_LIGHTING);
@@ -482,7 +483,7 @@ public class GuiResearch extends GuiScreen {
         int l4;
         int i5;
 
-        for (Technology tech : Femtocraft.researchManager()
+        for (ITechnology tech : Femtocraft.researchManager()
                 .getTechnologies()) {
             ResearchStatus ts = researchStatus
                     .getTechnology(tech.getName());
@@ -498,7 +499,7 @@ public class GuiResearch extends GuiScreen {
                 if (ts.researched) {
                     f2 = 1.0F;
                     GL11.glColor4f(f2, f2, f2, 1.0F);
-                } else if (!ts.researched) {
+                } else {
                     f2 = Math.sin((double) (Minecraft.getSystemTime() % 600L)
                                   / 600.0D * Math.PI * 2.0D) < 0.6D ? 0.6F : 0.8F;
                     GL11.glColor4f(f2, f2, f2, 1.0F);
@@ -515,7 +516,7 @@ public class GuiResearch extends GuiScreen {
 
                 GL11.glEnable(GL11.GL_BLEND);// Forge: Specifically enable blend because it is needed here. And we
                 // fix Generic RenderItem's leakage of it.
-                if (tech.isKeystone) {
+                if (tech.isKeystone()) {
                     this.drawTexturedModalRect(i5 - 2, l4 - 2, 26, 202, 26, 26);
                 } else {
                     this.drawTexturedModalRect(i5 - 2, l4 - 2, 0, 202, 26, 26);
@@ -542,7 +543,7 @@ public class GuiResearch extends GuiScreen {
                 renderitem.renderItemAndEffectIntoGUI(
                         Minecraft.getMinecraft().fontRenderer, Minecraft
                                 .getMinecraft().getTextureManager(),
-                        tech.displayItem, i5 + 3, l4 + 3
+                        tech.getDisplayItem(), i5 + 3, l4 + 3
                 );
                 RenderHelper.disableStandardItemLighting();
 //                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -625,8 +626,8 @@ public class GuiResearch extends GuiScreen {
             // }
 
             this.fontRendererObj.drawStringWithShadow(s, j4, l3,
-                    status.researched ? (tooltipTech.isKeystone ? -128 : -1)
-                            : (tooltipTech.isKeystone ? -8355776 : -8355712)
+                    status.researched ? (tooltipTech.isKeystone() ? -128 : -1)
+                            : (tooltipTech.isKeystone() ? -8355776 : -8355712)
             );
         }
 

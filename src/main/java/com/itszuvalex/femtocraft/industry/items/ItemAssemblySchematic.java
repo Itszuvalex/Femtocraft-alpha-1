@@ -22,11 +22,11 @@
 package com.itszuvalex.femtocraft.industry.items;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.api.AssemblerRecipe;
 import com.itszuvalex.femtocraft.api.industry.IAssemblerSchematic;
+import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.core.items.ItemBase;
-import com.itszuvalex.femtocraft.api.AssemblerRecipe;
-import com.itszuvalex.femtocraft.managers.research.Technology;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -166,14 +166,14 @@ public class ItemAssemblySchematic extends ItemBase implements IAssemblerSchemat
         );
         par3List.add(techLevelLine);
 
-        Technology tech = Femtocraft.researchManager().getTechnology(recipe.tech);
+        ITechnology tech = Femtocraft.researchManager().getTechnology(recipe.tech);
         EnumChatFormatting formatting;
         String techString;
         if (tech == null) {
             formatting = EnumChatFormatting.BLACK;
             techString = "none";
         } else {
-            formatting = tech.level.getTooltipEnum();
+            formatting = tech.getLevel().getTooltipEnum();
             techString = FemtocraftUtils.capitalize(tech.getName());
         }
 

@@ -25,7 +25,6 @@ import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.graph.IGraphNode;
 import com.itszuvalex.femtocraft.graph.MapGraph;
-import com.itszuvalex.femtocraft.managers.research.Technology;
 import com.itszuvalex.femtocraft.research.gui.GuiResearch;
 
 import java.util.HashMap;
@@ -38,7 +37,7 @@ public class TechnologyGraph extends MapGraph<String> {
     public TechnologyGraph(HashMap<String, ITechnology> technologies) {
         super();
         Femtocraft.log(Level.INFO, "Creating Graph of Technologies.");
-        HashMap<String, IGraphNode> nodes = new HashMap<String, IGraphNode>();
+        HashMap<String, IGraphNode> nodes = new HashMap<>();
 
         Femtocraft.log(Level.FINE, "Transferring Technologies to Nodes.");
         // Fill nodes dictionary.
@@ -50,14 +49,14 @@ public class TechnologyGraph extends MapGraph<String> {
         // Add edges
         for (String name : technologies.keySet()) {
             TechNode node = (TechNode) nodes.get(name);
-            Technology tech = node.getTech();
+            ITechnology tech = node.getTech();
             if (tech == null) {
                 continue;
             }
-            if (tech.prerequisites == null) {
+            if (tech.getPrerequisites() == null) {
                 continue;
             }
-            for (String prerequisite : tech.prerequisites) {
+            for (String prerequisite : tech.getPrerequisites()) {
                 IGraphNode parent = nodes.get(prerequisite);
                 if (parent == null) {
                     continue;
@@ -78,7 +77,7 @@ public class TechnologyGraph extends MapGraph<String> {
     public void computePlacements() {
         super.computePlacements();
         GuiResearch.setSize(greatestWidth() * X_PADDING, greatestHeight()
-                * Y_PADDING);
+                                                         * Y_PADDING);
     }
 
     @Override

@@ -1,9 +1,9 @@
 package com.itszuvalex.femtocraft.configuration;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.managers.assembler.ManagerAssemblerRecipe;
-import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.managers.research.Technology;
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies;
 import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils;
@@ -87,17 +87,18 @@ public class XMLTechnology {
         }
 
         Element node = getTechnologyNode(tech.getName(), techList);
-        tech.shortDescription = getTechString(node, shortDescTag, tech.shortDescription);
-        tech.level = getTechLevel(node, techLevelTag, tech.level);
-        tech.prerequisites = getTechStringArray(node, prerequisitesTag, tech.prerequisites);
-        tech.displayItem = getTechItemStack(node, displayItemTag, tech.displayItem);
-        tech.isKeystone = getTechBoolean(node, keystoneTag, tech.isKeystone);
-        tech.researchMaterials = getTechItemStackArray(node, researchMaterialsTag, tech.researchMaterials);
-        tech.discoverItem = getTechItemStack(node, discoverItemTag, tech.discoverItem);
-        tech.researchedDescription = getTechString(node, researcheDescriptionTag, tech.researchedDescription);
-        tech.discoveredDescription = getTechString(node, discoveredDescriptionTag, tech.discoveredDescription);
-        tech.discoveredByDefault = getTechBoolean(node, discoveredByDefaultTag, tech.discoveredByDefault);
-        tech.researchedByDefault = getTechBoolean(node, researchedByDefaultTag, tech.researchedByDefault);
+        tech.setShortDescription(getTechString(node, shortDescTag, tech.getShortDescription()));
+        tech.setLevel(getTechLevel(node, techLevelTag, tech.getLevel()));
+        tech.setPrerequisites(getTechStringArray(node, prerequisitesTag, tech.getPrerequisites().toArray(new
+                String[tech.getPrerequisites().size()])));
+        tech.setDisplayItem(getTechItemStack(node, displayItemTag, tech.getDisplayItem()));
+        tech.setIsKeystone(getTechBoolean(node, keystoneTag, tech.isKeystone()));
+        tech.setResearchMaterials(getTechItemStackArray(node, researchMaterialsTag, tech.getResearchMaterials()));
+        tech.setDiscoverItem(getTechItemStack(node, discoverItemTag, tech.getDiscoverItem()));
+        tech.setResearchedDescription(getTechString(node, researcheDescriptionTag, tech.getResearchedDescription()));
+        tech.setDiscoveredDescription(getTechString(node, discoveredDescriptionTag, tech.getDiscoveredDescription()));
+        tech.setIsDiscoveredByDefault(getTechBoolean(node, discoveredByDefaultTag, tech.isDiscoveredByDefault()));
+        tech.setIsResearchedByDefault(getTechBoolean(node, researchedByDefaultTag, tech.isResearchedByDefault()));
 
         return tech;
     }
@@ -255,7 +256,7 @@ public class XMLTechnology {
         NodeList nodes = getTechnologies();
         List<ITechnology> techs = FemtocraftTechnologies.defaultTechnologies();
         for (int i = 0; i < techs.size(); ++i) {
-            techs.set(i, loadTechnology(techs.get(i), nodes));
+            techs.set(i, loadTechnology((Technology) techs.get(i), nodes));
         }
 
         Femtocraft.log(Level.INFO, "Finished loading default technologies from XML.");

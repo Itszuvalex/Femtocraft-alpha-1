@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.research.gui;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.managers.research.Technology;
+import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.network.FemtocraftPacketHandler;
 import com.itszuvalex.femtocraft.network.messages.MessageResearchConsoleStart;
 import com.itszuvalex.femtocraft.research.containers.ContainerResearchConsole;
@@ -120,7 +120,7 @@ public class GuiResearchConsole extends GuiContainer {
                 name = console.displayTech;
             }
 
-            Technology tech = Femtocraft.researchManager()
+            ITechnology tech = Femtocraft.researchManager()
                     .getTechnology(name);
             if (tech != null) {
 
@@ -154,7 +154,7 @@ public class GuiResearchConsole extends GuiContainer {
                 RenderItem render = new RenderItem();
                 RenderHelper.enableGUIStandardItemLighting();
                 render.renderItemAndEffectIntoGUI(fontRendererObj, Minecraft
-                                .getMinecraft().getTextureManager(), tech.displayItem,
+                                .getMinecraft().getTextureManager(), tech.getDisplayItem(),
                         k + 110, l + 33
                 );
             }

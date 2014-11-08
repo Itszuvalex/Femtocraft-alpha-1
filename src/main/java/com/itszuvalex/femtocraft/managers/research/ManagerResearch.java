@@ -132,7 +132,7 @@ public class ManagerResearch {
                     rp.discoverTechnology(t.getName());
                     continue;
                 }
-                if (t.getPrerequisites() != null && t.getPrerequisites().length > 0) {
+                if (t.getPrerequisites() != null && t.getPrerequisites().size() > 0) {
                     boolean shouldDiscover = true;
                     for (String pre : t.getPrerequisites()) {
                         if (!shouldDiscover) continue;

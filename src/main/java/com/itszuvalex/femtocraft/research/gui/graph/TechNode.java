@@ -24,14 +24,13 @@ package com.itszuvalex.femtocraft.research.gui.graph;
 import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.graph.GraphNode;
 import com.itszuvalex.femtocraft.graph.IGraphNode;
-import com.itszuvalex.femtocraft.managers.research.Technology;
 
 import java.util.ArrayList;
 
 public class TechNode extends GraphNode {
-    private final Technology technology;
+    private final ITechnology technology;
 
-    public TechNode(Technology technology) {
+    public TechNode(ITechnology technology) {
         super();
         this.technology = technology;
         setX(UNINITIALIZED);
@@ -52,8 +51,7 @@ public class TechNode extends GraphNode {
     public int getY() {
         if (technology == null) {
             return super.getY();
-        }
-        else {
+        } else {
             return (int) (technology.yDisplay / getYPadding());
         }
     }
@@ -62,8 +60,7 @@ public class TechNode extends GraphNode {
     public void setY(int y) {
         if (technology == null) {
             super.setY(y);
-        }
-        else {
+        } else {
             technology.yDisplay = (int) (y * getYPadding());
         }
     }
@@ -72,8 +69,7 @@ public class TechNode extends GraphNode {
     public int getX() {
         if (technology == null) {
             return super.getX();
-        }
-        else {
+        } else {
             return (int) (technology.xDisplay / getXPadding());
         }
     }
@@ -82,13 +78,12 @@ public class TechNode extends GraphNode {
     public void setX(int x) {
         if (technology == null) {
             super.setX(x);
-        }
-        else {
+        } else {
             technology.xDisplay = (int) (x * getXPadding());
         }
     }
 
-    public Technology getTech() {
+    public ITechnology getTech() {
         return technology;
     }
 
@@ -123,7 +118,7 @@ public class TechNode extends GraphNode {
         }
         for (IGraphNode parent : getParents()) {
             contains = ((TechNode) parent).hasParentTechRecursive(tech)
-                    || contains;
+                       || contains;
         }
         return contains;
     }

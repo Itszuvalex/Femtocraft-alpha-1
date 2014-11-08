@@ -22,10 +22,10 @@
 package com.itszuvalex.femtocraft.research.items;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.api.research.ITechnologyCarrier;
 import com.itszuvalex.femtocraft.core.items.ItemBase;
 import com.itszuvalex.femtocraft.managers.research.PlayerResearch;
-import com.itszuvalex.femtocraft.managers.research.Technology;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -61,10 +61,10 @@ public abstract class ItemTechnologyCarrier extends ItemBase implements
             if (!(tech == null || tech.isEmpty())) {
                 if (!par2World.isRemote) {
                     if (pr.researchTechnology(tech, false)) {
-                        Technology rt = Femtocraft.researchManager()
+                        ITechnology rt = Femtocraft.researchManager()
                                 .getTechnology(tech);
-                        if (rt != null && rt.discoverItem != null) {
-                            return rt.discoverItem.copy();
+                        if (rt != null && rt.getDiscoverItem() != null) {
+                            return rt.getDiscoverItem().copy();
                         }
 
                         par1ItemStack.stackSize = 0;

@@ -17,4 +17,8 @@ object ItemStackImplicits {
   }
 
 
+  implicit class ItemStackArrayImplicits(i: Array[ItemStack]) {
+    def deepCopy: Array[ItemStack] = i.map(f => if (f == null) null else f.copy)
+  }
+
 }

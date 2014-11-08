@@ -24,9 +24,9 @@ package com.itszuvalex.femtocraft.research.gui.technology;
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.api.AssemblerRecipe;
 import com.itszuvalex.femtocraft.api.DimensionalRecipe;
-import com.itszuvalex.femtocraft.managers.research.Technology;
-import com.itszuvalex.femtocraft.managers.research.ResearchStatus;
 import com.itszuvalex.femtocraft.api.TemporalRecipe;
+import com.itszuvalex.femtocraft.api.research.ITechnology;
+import com.itszuvalex.femtocraft.managers.research.ResearchStatus;
 import com.itszuvalex.femtocraft.research.gui.GuiResearch;
 import com.itszuvalex.femtocraft.sound.FemtocraftSoundUtils;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
@@ -49,7 +49,7 @@ public class GuiTechnology extends GuiScreen {
             Femtocraft.ID().toLowerCase(), "textures/guis/GuiTechnology.png");
     private final GuiResearch guiResearch;
     private final ResearchStatus status;
-    private final Technology tech;
+    private final ITechnology tech;
     private final GuiTechnologyRenderer renderer;
     private final int xSize = 256;
     private final int ySize = 202;
@@ -79,8 +79,8 @@ public class GuiTechnology extends GuiScreen {
         this.guiResearch = guiResearch;
         this.status = status;
         this.tech = Femtocraft.researchManager().getTechnology(status.tech);
-        renderer = new GuiTechnologyRenderer(this, status.researched ? tech.researchedDescription : tech
-                .discoveredDescription);
+        renderer = new GuiTechnologyRenderer(this, status.researched ? tech.getResearchedDescription() : tech
+                .getDiscoveredDescription());
     }
 
     @Override
@@ -247,18 +247,13 @@ public class GuiTechnology extends GuiScreen {
         GL11.glEnable(GL11.GL_CULL_FACE);
         renderitem.renderItemAndEffectIntoGUI(
                 Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft()
-                        .getTextureManager(), tech.displayItem, k + 66, l + 12
+                        .getTextureManager(), tech.getDisplayItem(), k + 66, l + 12
         );
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 
-        ItemStack[] materials = null;
-        if (tech.researchMaterials != null) {
-            materials = tech.researchMaterials;
-        }
-
-        this.renderCraftingGrid(k + 194, l + 11, materials, par1, par2, tooltip);
+        this.renderCraftingGrid(k + 194, l + 11, tech.getResearchMaterials(), par1, par2, tooltip);
 
         // if (tech.researchMaterials != null) {
         // int i = 0;

@@ -83,10 +83,10 @@ public class PlayerResearch {
             EntityPlayerMP player = MinecraftServer.getServer()
                     .getConfigurationManager().func_152612_a(username);
             if (player != null) {
-                Technology techno = Femtocraft.researchManager()
+                ITechnology techno = Femtocraft.researchManager()
                         .getTechnology(name);
                 if (techno != null) {
-                    FemtocraftUtils.sendMessageToPlayer(player, techno.level.getTooltipEnum() + name
+                    FemtocraftUtils.sendMessageToPlayer(player, techno.getLevel().getTooltipEnum() + name
                                                                 + EnumChatFormatting.RESET
                                                                 + " successfully researched.");
                 }
@@ -138,11 +138,11 @@ public class PlayerResearch {
                                 .getConfigurationManager()
                                 .func_152612_a(username);
                         if (player != null) {
-                            Technology techno = Femtocraft.researchManager()
+                            ITechnology techno = Femtocraft.researchManager()
                                     .getTechnology(t.getName());
                             if (techno != null) {
                                 FemtocraftUtils.sendMessageToPlayer(player, "New technology "
-                                                                            + techno.level.getTooltipEnum()
+                                                                            + techno.getLevel().getTooltipEnum()
                                                                             + t.getName() + EnumChatFormatting.RESET
                                                                             + " discovered.");
                             }

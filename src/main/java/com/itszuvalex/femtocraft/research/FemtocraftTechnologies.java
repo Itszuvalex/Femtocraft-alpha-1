@@ -1,11 +1,11 @@
 package com.itszuvalex.femtocraft.research;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.api.AssemblerRecipe;
+import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs;
-import com.itszuvalex.femtocraft.api.AssemblerRecipe;
 import com.itszuvalex.femtocraft.managers.assembler.ComponentRegistry;
-import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.managers.research.Technology;
 import com.itszuvalex.femtocraft.research.gui.technology.*;
 import net.minecraft.init.Items;
@@ -87,7 +87,7 @@ public class FemtocraftTechnologies {
     public static final String METALLURGY = "Metallurgy";
 
     public static List<ITechnology> defaultTechnologies() {
-        return new ArrayList<>(Arrays.asList(
+        return new ArrayList<ITechnology>(Arrays.asList(
                 (new Technology(
                         METALLURGY, "The metals that populate your world.", EnumTechLevel.MACRO,
                         new String[]{MACROSCOPIC_STRUCTURES},

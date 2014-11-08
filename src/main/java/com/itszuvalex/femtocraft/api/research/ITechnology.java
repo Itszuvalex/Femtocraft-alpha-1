@@ -58,7 +58,7 @@ public interface ITechnology {
      * collection of length 0 if there are no required materials. If this technology is not researched by default, it
      * requires a unique collection of research materials.
      */
-    Collection<ItemStack> getResearchMaterials();
+    ItemStack[] getResearchMaterials();
 
     /**
      * When this technoogy is researched, the technology carrier will be replaced with the item stack returned by this
