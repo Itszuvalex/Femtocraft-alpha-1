@@ -27,11 +27,11 @@ import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.graph.IGraphNode;
 import com.itszuvalex.femtocraft.managers.research.PlayerResearch;
 import com.itszuvalex.femtocraft.managers.research.ResearchStatus;
-import com.itszuvalex.femtocraft.managers.research.Technology;
 import com.itszuvalex.femtocraft.render.RenderUtils;
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies;
 import com.itszuvalex.femtocraft.research.gui.graph.DummyTechNode;
 import com.itszuvalex.femtocraft.research.gui.graph.TechNode;
+import com.itszuvalex.femtocraft.research.gui.technology.GuiTechnology;
 import com.itszuvalex.femtocraft.sound.FemtocraftSoundUtils;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import cpw.mods.fml.relauncher.Side;
@@ -118,10 +118,10 @@ public class GuiResearch extends GuiScreen {
         short short1 = 141;
         short short2 = 141;
         this.field_74117_m = this.guiMapX = this.field_74124_q = (double) (
-                Femtocraft.researchManager().getTechnology(defaultTechnology).xDisplay - 1)
+                Femtocraft.researchManager().getNode(defaultTechnology).getDisplayX() - 1)
                                                                  * 24 - short1 / 2 - 12;
         this.field_74115_n = this.guiMapY = this.field_74123_r = (double) (
-                Femtocraft.researchManager().getTechnology(defaultTechnology).yDisplay * 24 -
+                Femtocraft.researchManager().getNode(defaultTechnology).getDisplayY() * 24 -
                 short2 / 2);
     }
 
@@ -237,8 +237,9 @@ public class GuiResearch extends GuiScreen {
                     int k1 = i1 + 16;
                     int l1 = j1 + 17;
 
-                    int j4 = rt.xDisplay * 24 - k;
-                    int l3 = rt.yDisplay * 24 - l;
+                    TechNode node = Femtocraft.researchManager().getNode(rt);
+                    int j4 = node.getDisplayX() * 24 - k;
+                    int l3 = node.getDisplayY() * 24 - l;
 
                     int i5 = k1 + j4;
                     int l4 = l1 + l3;
@@ -249,7 +250,9 @@ public class GuiResearch extends GuiScreen {
                         // Open GUIS
                         FemtocraftSoundUtils.playClickSound();
                         Minecraft.getMinecraft().displayGuiScreen(
-                                rt.getGui(this, ts));
+                                new GuiTechnology(this, ts)
+//                                rt.getGui(this, ts)
+                         );
                         this.isMouseButtonDown = 0;
                     }
                 }
@@ -490,8 +493,9 @@ public class GuiResearch extends GuiScreen {
             if (ts == null) {
                 continue;
             }
-            j4 = tech.xDisplay * 24 - k;
-            l3 = tech.yDisplay * 24 - l;
+            TechNode node = Femtocraft.researchManager().getNode(tech);
+            j4 = node.getDisplayX() * 24 - k;
+            l3 = node.getDisplayY() * 24 - l;
 
             if (j4 >= -24 && l3 >= -24 && j4 <= 224 && l3 <= 155) {
                 float f2;

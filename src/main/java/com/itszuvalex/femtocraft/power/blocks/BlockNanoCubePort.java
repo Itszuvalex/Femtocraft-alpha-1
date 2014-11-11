@@ -86,8 +86,8 @@ public class BlockNanoCubePort extends TileContainer {
      * int, int, int, int)
      */
     @Override
-    public void onPostBlockPlaced(World par1World, int par2, int par3,
-                                  int par4, int par5) {
+     public void onPostBlockPlaced(World par1World, int par2, int par3,
+                                   int par4, int par5) {
         MultiBlockNanoCube.instance.formMultiBlockWithBlock(par1World, par2,
                 par3, par4);
         super.onPostBlockPlaced(par1World, par2, par3, par4, par5);

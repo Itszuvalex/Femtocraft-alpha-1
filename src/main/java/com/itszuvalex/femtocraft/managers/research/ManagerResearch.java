@@ -350,6 +350,10 @@ public class ManagerResearch {
     }
 
     public TechNode getNode(ITechnology pr) {
-        return (TechNode) graph.getNode(pr.getName());
+        return getNode(pr.getName());
+    }
+
+    public TechNode getNode(String name) {
+        return (TechNode) graph.getNode(name);
     }
 }

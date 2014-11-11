@@ -47,42 +47,6 @@ public class TechNode extends GraphNode {
         return TechnologyGraph.Y_PADDING;
     }
 
-    @Override
-    public int getY() {
-        if (technology == null) {
-            return super.getY();
-        } else {
-            return (int) (technology.yDisplay / getYPadding());
-        }
-    }
-
-    @Override
-    public void setY(int y) {
-        if (technology == null) {
-            super.setY(y);
-        } else {
-            technology.yDisplay = (int) (y * getYPadding());
-        }
-    }
-
-    @Override
-    public int getX() {
-        if (technology == null) {
-            return super.getX();
-        } else {
-            return (int) (technology.xDisplay / getXPadding());
-        }
-    }
-
-    @Override
-    public void setX(int x) {
-        if (technology == null) {
-            super.setX(x);
-        } else {
-            technology.xDisplay = (int) (x * getXPadding());
-        }
-    }
-
     public ITechnology getTech() {
         return technology;
     }
