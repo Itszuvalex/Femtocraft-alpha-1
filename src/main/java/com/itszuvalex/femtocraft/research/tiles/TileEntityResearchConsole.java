@@ -36,7 +36,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class TileEntityResearchConsole extends TileEntityBase implements
         IInventory {
-    private static final int ticksToResearch = 4;
+    private static final int ticksToResearch = 400;
     public
     @FemtocraftDataUtils.Saveable(desc = true)
     String displayTech = null;
