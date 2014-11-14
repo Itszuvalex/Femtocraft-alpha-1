@@ -32,10 +32,11 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class TileEntityResearchConsole extends TileEntityBase implements
         IInventory {
-    private static final int ticksToResearch = 400;
+    private static final int ticksToResearch = 4;
     public
     @FemtocraftDataUtils.Saveable(desc = true)
     String displayTech = null;
@@ -200,7 +201,10 @@ public class TileEntityResearchConsole extends TileEntityBase implements
 
     private boolean compareItemStack(ItemStack tech, ItemStack inv) {
         return tech == null && inv == null || tech != null && inv != null && tech.stackSize <= inv.stackSize &&
-                                              ItemStack.areItemStacksEqual(tech, inv);
+                                              tech.getItem() == inv.getItem() &&
+                                              (tech.getItemDamage() == inv.getItemDamage() ||
+                                               tech.getItemDamage() == OreDictionary.WILDCARD_VALUE ||
+                                               inv.getItemDamage() == OreDictionary.WILDCARD_VALUE);
 
     }
 
