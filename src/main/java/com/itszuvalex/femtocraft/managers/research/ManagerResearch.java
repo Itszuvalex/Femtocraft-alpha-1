@@ -46,7 +46,7 @@ public class ManagerResearch {
     private static final String dataKey = "data";
     private static final String userKey = "username";
     // TODO: REMOVE ME
-    private static boolean debug = true;
+    private static boolean debug = false;
     private static final String DIRECTORY = "Research";
     private HashMap<String, ITechnology> technologies;
     private HashMap<String, PlayerResearch> playerData;

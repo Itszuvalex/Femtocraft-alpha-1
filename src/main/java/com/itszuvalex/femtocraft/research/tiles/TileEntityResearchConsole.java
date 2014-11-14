@@ -144,8 +144,8 @@ public class TileEntityResearchConsole extends TileEntityBase implements
     }
 
     @Override
-    public void onInventoryChanged() {
-        super.onInventoryChanged();
+    public void markDirty() {
+        super.markDirty();
         checkForTechnology();
     }
 
@@ -199,27 +199,9 @@ public class TileEntityResearchConsole extends TileEntityBase implements
     }
 
     private boolean compareItemStack(ItemStack tech, ItemStack inv) {
-        if (tech == null && inv == null) {
-            return true;
-        }
-        if (tech == null && inv != null) {
-            return false;
-        }
-        if (tech != null && inv == null) {
-            return false;
-        }
+        return tech == null && inv == null || tech != null && inv != null && tech.stackSize <= inv.stackSize &&
+                                              ItemStack.areItemStacksEqual(tech, inv);
 
-        if (tech.getItem() != inv.getItem()) {
-            return false;
-        }
-        if (tech.getItemDamage() != inv.getItemDamage()) {
-            return false;
-        }
-        if (tech.stackSize > inv.stackSize) {
-            return false;
-        }
-
-        return true;
     }
 
 
