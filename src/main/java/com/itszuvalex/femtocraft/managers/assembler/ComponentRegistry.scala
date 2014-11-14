@@ -19,7 +19,8 @@ object ComponentRegistry {
 
   def getComponents(tech: EnumTechLevel) = getOrMake(tech)
 
-  def getComponentsAssemblerRecipeDisplayString(tech: EnumTechLevel) = getComponents(tech).map(i => "__Recipe.Assembler:" + FemtocraftStringUtils.itemStackToString(new ItemStack(i)) + "--" + i.getItemStackDisplayName(new ItemStack(i)) + "__").aggregate("")(_ + _, _ + _)
+  def getComponentsAssemblerRecipeDisplayString(tech: EnumTechLevel) = getComponents(tech).map(i => FemtocraftStringUtils.formatItemStackForTechnologyDisplay
+                                                                                                    (FemtocraftStringUtils.RecipeType.ASSEMBLER, new ItemStack(i), i.getItemStackDisplayName(new ItemStack(i)))).aggregate("")(_ + _, _ + _)
 
   def getComponentsInAssemblerRecipeDisplayString(tech: EnumTechLevel) = {
     Femtocraft.recipeManager.assemblyRecipes.getAllRecipes.filter(p => {

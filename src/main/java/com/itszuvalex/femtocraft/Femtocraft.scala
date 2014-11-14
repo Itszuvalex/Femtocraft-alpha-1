@@ -64,7 +64,7 @@ import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.config.Configuration
 import net.minecraftforge.fluids.{BlockFluidBase, Fluid, FluidRegistry}
 import net.minecraftforge.oredict.OreDictionary
-import org.apache.logging.log4j.{Level, Logger}
+import org.apache.logging.log4j.{Level, LogManager, Logger}
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 10/6/14.
@@ -92,6 +92,7 @@ object Femtocraft {
   var proxy                                 : ProxyCommon               = null
   var femtocraftTab                         : CreativeTabs              = new FemtocraftCreativeTab("Femtocraft")
   var config                                : Configuration             = null
+  var logger                                : Logger                    = null
   var technologyConfigFile                  : File                      = null
   var recipeConfigFile                      : File                      = null
   var recipeConfig                          : Configuration             = null
@@ -283,6 +284,7 @@ object Femtocraft {
     assistantManager = new ManagerAssistant
     femtocraftServerCommand = new CommandFemtocraft
     val suggestedConfig = event.getSuggestedConfigurationFile
+    logger = LogManager.getLogger("Femtocraft")
     config = new Configuration(suggestedConfig)
     FemtocraftConfigs.load(config)
     val suggestConfigName = suggestedConfig.getName.split("\\.")
@@ -726,7 +728,7 @@ object Femtocraft {
     it
   }
 
-  def log(level: Level, msg: String) = FMLCommonHandler.instance().getFMLLogger.log(level, "[Femtocraft]: " + msg)
+  def log(level: Level, msg: String) = logger.log(level, msg)
 
   @EventHandler def load(event: FMLInitializationEvent) {
   }

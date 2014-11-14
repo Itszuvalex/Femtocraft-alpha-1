@@ -42,7 +42,7 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
     /**
      * Matches anything beginning with [ and ending with ]
      */
-    public static final String specialPattern = "__([^_]*)__";
+    public static final String specialPattern = "__(((?!__).)+)__";
     public static final Pattern splitPattern = Pattern.compile(specialPattern);
     public static final Pattern groupingPattern = Pattern.compile(".*?" + specialPattern + ".*?");
 

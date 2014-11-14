@@ -1,6 +1,7 @@
 package com.itszuvalex.femtocraft.utils;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.research.gui.technology.GuiTechnologyRenderer;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -99,4 +100,23 @@ public class FemtocraftStringUtils {
             return result + ":" + s.getItemDamage() + "-" + s.stackSize;
         }
     }
+
+
+    public static String formatItemStackForTechnologyDisplay(RecipeType r, ItemStack s, String info) {
+        return "__Recipe." +
+               (r == RecipeType.CRAFTING ? GuiTechnologyRenderer.recipeCraftingParam :
+                       r == RecipeType.ASSEMBLER ? GuiTechnologyRenderer.recipeAssemblerParam :
+                               r == RecipeType.TEMPORAL ? GuiTechnologyRenderer.recipeTemporalParam :
+                                       r == RecipeType.DIMENSIONAL ? GuiTechnologyRenderer.recipeDimensionalParam :
+                                               "UNKNOWN") + ":" + FemtocraftStringUtils.itemStackToString(s) + "--" +
+               info + "__";
+    }
+
+    public enum RecipeType {
+        CRAFTING,
+        ASSEMBLER,
+        TEMPORAL,
+        DIMENSIONAL
+    }
+
 }

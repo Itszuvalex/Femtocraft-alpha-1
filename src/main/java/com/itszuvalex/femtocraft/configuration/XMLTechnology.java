@@ -44,7 +44,7 @@ public class XMLTechnology {
     private static final String keystoneTag = "Keystone";
     private static final String researchMaterialsTag = "ResearchMaterials";
     private static final String discoverItemTag = "DiscoverItem";
-    private static final String researcheDescriptionTag = "ResearchedDescription";
+    private static final String researchedDescriptionTag = "ResearchedDescription";
     private static final String discoveredDescriptionTag = "DiscoveredDescription";
     private static final String discoveredByDefaultTag = "DiscoveredByDefault";
     private static final String researchedByDefaultTag = "ResearchedByDefault";
@@ -95,7 +95,7 @@ public class XMLTechnology {
         tech.setIsKeystone(getTechBoolean(node, keystoneTag, tech.isKeystone()));
         tech.setResearchMaterials(getTechItemStackArray(node, researchMaterialsTag, tech.getResearchMaterials()));
         tech.setDiscoverItem(getTechItemStack(node, discoverItemTag, tech.getDiscoverItem()));
-        tech.setResearchedDescription(getTechString(node, researcheDescriptionTag, tech.getResearchedDescription()));
+        tech.setResearchedDescription(getTechString(node, researchedDescriptionTag, tech.getResearchedDescription()));
         tech.setDiscoveredDescription(getTechString(node, discoveredDescriptionTag, tech.getDiscoveredDescription()));
         tech.setIsDiscoveredByDefault(getTechBoolean(node, discoveredByDefaultTag, tech.isDiscoveredByDefault()));
         tech.setIsResearchedByDefault(getTechBoolean(node, researchedByDefaultTag, tech.isResearchedByDefault()));
