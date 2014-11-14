@@ -1,18 +1,18 @@
 package com.itszuvalex.femtocraft.core;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.api.AssemblerRecipe;
+import com.itszuvalex.femtocraft.configuration.Configurable;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import org.apache.logging.log4j.Level;
 
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Level;
 
 /**
  * Created by Chris on 9/20/2014.

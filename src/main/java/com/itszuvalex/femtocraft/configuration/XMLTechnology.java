@@ -8,6 +8,7 @@ import com.itszuvalex.femtocraft.managers.research.Technology;
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies;
 import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils;
 import net.minecraft.item.ItemStack;
+import org.apache.logging.log4j.Level;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -23,7 +24,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 
 /**
  * Created by Chris on 10/3/2014.

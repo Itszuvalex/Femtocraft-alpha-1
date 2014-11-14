@@ -23,7 +23,6 @@
 package com.itszuvalex.femtocraft
 
 import java.io.File
-import java.util.logging.{Level, Logger}
 
 import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.blocks._
@@ -65,6 +64,7 @@ import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.config.Configuration
 import net.minecraftforge.fluids.{BlockFluidBase, Fluid, FluidRegistry}
 import net.minecraftforge.oredict.OreDictionary
+import org.apache.logging.log4j.{Level, Logger}
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 10/6/14.
@@ -91,7 +91,6 @@ object Femtocraft {
               serverSide = "com.itszuvalex.femtocraft.proxy.ProxyCommon")
   var proxy                                 : ProxyCommon               = null
   var femtocraftTab                         : CreativeTabs              = new FemtocraftCreativeTab("Femtocraft")
-  var logger                                : Logger                    = null
   var config                                : Configuration             = null
   var technologyConfigFile                  : File                      = null
   var recipeConfigFile                      : File                      = null
@@ -279,7 +278,6 @@ object Femtocraft {
   var itemOrganometallicPlate               : Item                      = null
 
   @EventHandler def preInit(event: FMLPreInitializationEvent) {
-    logger = Logger.getLogger(ID)
     recipeManager = new ManagerRecipe
     researchManager = new ManagerResearch
     assistantManager = new ManagerAssistant
@@ -290,7 +288,7 @@ object Femtocraft {
     val suggestConfigName = suggestedConfig.getName.split("\\.")
     technologyConfigFile = new File(suggestedConfig.getParentFile,
                                     suggestConfigName(0) + TECH_CONFIG_APPEND +
-                                    "." + suggestConfigName(1))
+                                    "." + (if (FemtocraftConfigs.useXMLFile) "xml" else suggestConfigName(1)))
     recipeConfigFile = new File(suggestedConfig.getParentFile,
                                 suggestConfigName(0) + RECIPE_CONFIG_APPEND +
                                 "." + suggestConfigName(1))
@@ -728,7 +726,7 @@ object Femtocraft {
     it
   }
 
-  def log(level: Level, msg: String) = logger.log(level, msg)
+  def log(level: Level, msg: String) = FMLCommonHandler.instance().getFMLLogger.log(level, "[Femtocraft]: " + msg)
 
   @EventHandler def load(event: FMLInitializationEvent) {
   }

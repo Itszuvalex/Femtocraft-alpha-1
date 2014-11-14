@@ -6,6 +6,7 @@ import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
+import org.apache.logging.log4j.Level;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,7 +15,6 @@ import java.io.FilenameFilter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Level;
 
 public class ManagerAssistant {
     private static final String dir = "Assistants";
@@ -92,7 +92,7 @@ public class ManagerAssistant {
                     CompressedStreamTools.writeCompressed(gTag, fos);
                     fos.close();
                 } catch (Exception e) {
-                    Femtocraft.log(Level.SEVERE,
+                    Femtocraft.log(Level.ERROR,
                             "Failed to save assistant data in world - "
                             + FemtocraftFileUtils.savePathFemtocraft(world) + " for player" + username + "."
                     );
@@ -101,7 +101,7 @@ public class ManagerAssistant {
             }
 
         } catch (Exception e) {
-            Femtocraft.log(Level.SEVERE,
+            Femtocraft.log(Level.ERROR,
                     "Failed to save assistant data in world - "
                     + FemtocraftFileUtils.savePathFemtocraft(world) + "."
             );
@@ -115,7 +115,7 @@ public class ManagerAssistant {
         try {
             File file = new File(FemtocraftFileUtils.savePathFemtocraft(world), dir);
             if (!file.exists()) {
-                Femtocraft.log(Level.WARNING, "No assistant data"
+                Femtocraft.log(Level.WARN, "No assistant data"
                                               + " found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) +
                                               ".");
                 return false;
@@ -151,7 +151,7 @@ public class ManagerAssistant {
                         }
                     }
                 } catch (Exception e) {
-                    Femtocraft.log(Level.SEVERE,
+                    Femtocraft.log(Level.ERROR,
                             "Failed to load assistant data in world - "
                             + FemtocraftFileUtils.savePathFemtocraft(world) + " for player" + username + "."
                     );
@@ -164,7 +164,7 @@ public class ManagerAssistant {
                 )
 
         {
-            Femtocraft.log(Level.SEVERE,
+            Femtocraft.log(Level.ERROR,
                     "Failed to load assistant data in world - "
                     + FemtocraftFileUtils.savePathFemtocraft(world) + "."
             );

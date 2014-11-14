@@ -39,8 +39,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
+import org.apache.logging.log4j.Level;
 
-import java.util.logging.Level;
 
 public class TileEntityNanoFissionReactorCore extends TileEntityBase implements IInventory, IFluidHandler,
         IMultiBlockComponent {
@@ -563,7 +563,7 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
                 abortReaction();
                 break;
             default:
-                Femtocraft.logger().log(Level.SEVERE,
+                Femtocraft.log(Level.ERROR,
                         "Received invalid action for Fusion Reactor at x-" + xCoord + " y-" + yCoord + " z-" + zCoord +
                         " at dimension-" + worldObj.provider.dimensionId + ".");
         }

@@ -6,8 +6,8 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import org.apache.logging.log4j.Level;
 
-import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,7 +56,7 @@ public class FemtocraftStringUtils {
                     return new ItemStack(block, stackSize, damage);
                 }
             } catch (Exception e) {
-                Femtocraft.log(Level.SEVERE, "Error parsing ItemStack string \"" + s + "\"");
+                Femtocraft.log(Level.ERROR, "Error parsing ItemStack string \"" + s + "\"");
                 e.printStackTrace();
                 return null;
             }

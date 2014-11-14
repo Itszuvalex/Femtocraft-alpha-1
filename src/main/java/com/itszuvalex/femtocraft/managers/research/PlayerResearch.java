@@ -33,10 +33,10 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.MinecraftForge;
+import org.apache.logging.log4j.Level;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.logging.Level;
 
 public class PlayerResearch {
     private final static String mapKey = "techMap";
@@ -229,7 +229,7 @@ public class PlayerResearch {
     // ---------------------------------------------------------
 
     public void sync(EntityPlayerMP player) {
-        Femtocraft.log(Level.FINE, "Sending research data to player: " + player.getCommandSenderName());
+        Femtocraft.log(Level.TRACE, "Sending research data to player: " + player.getCommandSenderName());
         FemtocraftPacketHandler.INSTANCE().sendTo(new MessageResearchPlayer(this), player);
     }
 

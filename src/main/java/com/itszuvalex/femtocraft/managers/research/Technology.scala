@@ -22,7 +22,6 @@ package com.itszuvalex.femtocraft.managers.research
 
 
 import java.util
-import java.util.logging.Level
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.EnumTechLevel
@@ -33,6 +32,7 @@ import com.itszuvalex.femtocraft.research.gui.GuiResearch
 import com.itszuvalex.femtocraft.research.gui.technology.{GuiTechnology, GuiTechnologyDefault}
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.item.ItemStack
+import org.apache.logging.log4j.Level
 
 import scala.collection.JavaConversions._
 
@@ -152,7 +152,7 @@ class Technology(n: String, shortDes: String, tech: EnumTechLevel, prereq: Array
     }
     catch {
       case e: NoSuchMethodException =>
-        Femtocraft.log(Level.SEVERE, "Technologies must return a GuiTechnology class that supports the constructor" + "(GuiResearch, ResearchTechnologyStatus)")
+        Femtocraft.log(Level.ERROR, "Technologies must return a GuiTechnology class that supports the constructor" + "(GuiResearch, ResearchTechnologyStatus)")
         e.printStackTrace()
       case e: Exception             => e.printStackTrace()
     }

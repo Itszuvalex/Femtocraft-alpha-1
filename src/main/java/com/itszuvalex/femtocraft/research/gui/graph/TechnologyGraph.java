@@ -26,9 +26,9 @@ import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.graph.IGraphNode;
 import com.itszuvalex.femtocraft.graph.MapGraph;
 import com.itszuvalex.femtocraft.research.gui.GuiResearch;
+import org.apache.logging.log4j.Level;
 
 import java.util.HashMap;
-import java.util.logging.Level;
 
 public class TechnologyGraph extends MapGraph<String> {
     public static final int X_PADDING = 1;
@@ -39,13 +39,13 @@ public class TechnologyGraph extends MapGraph<String> {
         Femtocraft.log(Level.INFO, "Creating Graph of Technologies.");
         HashMap<String, IGraphNode> nodes = new HashMap<>();
 
-        Femtocraft.log(Level.FINE, "Transferring Technologies to Nodes.");
+        Femtocraft.log(Level.TRACE, "Transferring Technologies to Nodes.");
         // Fill nodes dictionary.
         for (String name : technologies.keySet()) {
             nodes.put(name, new TechNode(technologies.get(name)));
         }
 
-        Femtocraft.log(Level.FINE, "Linking edges.");
+        Femtocraft.log(Level.TRACE, "Linking edges.");
         // Add edges
         for (String name : technologies.keySet()) {
             TechNode node = (TechNode) nodes.get(name);

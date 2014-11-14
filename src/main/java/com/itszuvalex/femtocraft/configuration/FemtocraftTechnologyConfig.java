@@ -8,12 +8,12 @@ import com.itszuvalex.femtocraft.managers.research.Technology;
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
+import org.apache.logging.log4j.Level;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
 
 /**
  * Created by Chris on 9/11/2014.

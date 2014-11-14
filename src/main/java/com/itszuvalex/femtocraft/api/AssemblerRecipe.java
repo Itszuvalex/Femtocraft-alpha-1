@@ -29,8 +29,8 @@ import com.itszuvalex.femtocraft.utils.ISaveable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import org.apache.logging.log4j.Level;
 
-import java.util.logging.Level;
 
 public class AssemblerRecipe implements Comparable, ISaveable {
     @Configurable(comment = "ItemStack[9] (can include nulls) signifying input.  This is unique across all " +
@@ -141,9 +141,8 @@ public class AssemblerRecipe implements Comparable, ISaveable {
             NBTTagCompound itemCompound = inputList.getCompoundTagAt(i);
             byte slot = itemCompound.getByte("Slot");
             if (slot != (byte) i) {
-                Femtocraft.logger()
-                        .log(Level.WARNING,
-                                "Slot mismatch occurred while loading AssemblerRecipe.");
+                Femtocraft.log(Level.WARN,
+                        "Slot mismatch occurred while loading AssemblerRecipe.");
             }
             if (itemCompound.hasKey("item")) {
                 input[i] = ItemStack

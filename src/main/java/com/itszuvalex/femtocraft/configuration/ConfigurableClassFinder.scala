@@ -1,11 +1,11 @@
 package com.itszuvalex.femtocraft.configuration
 
-import java.util.logging.Level
 
 import com.google.common.reflect.ClassPath
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigHelper._
 import net.minecraftforge.common.config.Configuration
+import org.apache.logging.log4j.Level
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable.ArrayBuffer
@@ -42,7 +42,7 @@ class ConfigurableClassFinder(val classPackage: String) {
 
           if (classSymbol.annotations.exists(a => a.isInstanceOf[Configurable])) {
             registerConfigurableClass(clazz)
-            Femtocraft.log(Level.FINER, "Registered " + clazz.getSimpleName + " as configurable.")
+            Femtocraft.log(Level.INFO, "Registered " + clazz.getSimpleName + " as configurable.")
           }
         }
         catch {
@@ -52,7 +52,7 @@ class ConfigurableClassFinder(val classPackage: String) {
             try {
               if (clazz.getAnnotation(classOf[Configurable]) != null) {
                 registerConfigurableClass(clazz)
-                Femtocraft.log(Level.FINER, "Registered " + clazz.getSimpleName + " as configurable.")
+                Femtocraft.log(Level.INFO, "Registered " + clazz.getSimpleName + " as configurable.")
               }
             }
             catch {
@@ -61,7 +61,7 @@ class ConfigurableClassFinder(val classPackage: String) {
         }
       } catch {
         case e: ClassNotFoundException =>
-          Femtocraft.log(Level.SEVERE, "Could not find @Configurable class " + info.getName + " when attempting to discover.")
+          Femtocraft.log(Level.WARN, "Could not find @Configurable class " + info.getName + " when attempting to discover.")
           e.printStackTrace()
       }
     })

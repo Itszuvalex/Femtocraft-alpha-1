@@ -32,6 +32,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import org.apache.logging.log4j.Level;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,7 +40,6 @@ import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.logging.Level;
 
 public class ManagerResearch {
     public static final String RESEARCH_CHANNEL = Femtocraft.RESEARCH_CHANNEL();
@@ -260,7 +260,7 @@ public class ManagerResearch {
                             fileoutputstream);
                     fileoutputstream.close();
                 } catch (Exception exception) {
-                    Femtocraft.log(Level.SEVERE,
+                    Femtocraft.log(Level.ERROR,
                             "Failed to save data for player " + pdata.username
                             + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
                     );
@@ -270,9 +270,9 @@ public class ManagerResearch {
             }
 
         } catch (Exception e) {
-            Femtocraft.log(Level.SEVERE, "Failed to create folder "
-                                         + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator +
-                                         DIRECTORY + ".");
+            Femtocraft.log(Level.ERROR, "Failed to create folder "
+                                        + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator +
+                                        DIRECTORY + ".");
             e.printStackTrace();
             return false;
         }
@@ -294,9 +294,9 @@ public class ManagerResearch {
         try {
             File folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), DIRECTORY);
             if (!folder.exists()) {
-                Femtocraft.log(Level.WARNING, "No " + DIRECTORY
-                                              + " folder found for world - " +
-                                              FemtocraftFileUtils.savePathFemtocraft(world) + ".");
+                Femtocraft.log(Level.WARN, "No " + DIRECTORY
+                                           + " folder found for world - " +
+                                           FemtocraftFileUtils.savePathFemtocraft(world) + ".");
                 return false;
             }
 
@@ -324,7 +324,7 @@ public class ManagerResearch {
                     addKnownTechnologies(file);
                     playerData.put(username, file);
                 } catch (Exception e) {
-                    Femtocraft.log(Level.SEVERE,
+                    Femtocraft.log(Level.ERROR,
                             "Failed to load data from file " + pdata.getName()
                             + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
                     );
@@ -333,7 +333,7 @@ public class ManagerResearch {
             }
 
         } catch (Exception exception) {
-            Femtocraft.log(Level.SEVERE,
+            Femtocraft.log(Level.ERROR,
                     "Failed to load data from folder " + DIRECTORY
                     + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
             );
@@ -345,7 +345,7 @@ public class ManagerResearch {
     }
 
     public void syncResearch(PlayerResearch rp) {
-        Femtocraft.log(Level.FINE, "Syncing research for player: " + rp.username);
+        Femtocraft.log(Level.TRACE, "Syncing research for player: " + rp.username);
         playerData.put(rp.username, rp);
     }
 

@@ -22,14 +22,14 @@ package com.itszuvalex.femtocraft.managers.assembler
 
 import java.io.{ByteArrayInputStream, DataInputStream, IOException}
 import java.sql._
-import java.util.logging.Level
 
 import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.api.research.ITechnology
 import com.itszuvalex.femtocraft.api.{AssemblerRecipe, EnumTechLevel}
 import com.itszuvalex.femtocraft.implicits.IDImplicits._
-import com.itszuvalex.femtocraft.managers.research.Technology
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompressedStreamTools
+import org.apache.logging.log4j.Level
 
 import scala.Array
 
@@ -65,11 +65,11 @@ class AssemblerRecipeDatabase() {
   catch {
     case e: ClassNotFoundException =>
       e.printStackTrace()
-      Femtocraft.log(Level.SEVERE, "SQLite dependency missing.")
+      Femtocraft.log(Level.ERROR, "SQLite dependency missing.")
       System.exit(1)
     case e: SQLException           =>
       e.printStackTrace()
-      Femtocraft.log(Level.SEVERE, "Error opening connection")
+      Femtocraft.log(Level.ERROR, "Error opening connection")
   }
 
   @throws(classOf[ClassNotFoundException])
@@ -115,7 +115,7 @@ class AssemblerRecipeDatabase() {
     catch {
       case e: SQLException =>
         e.printStackTrace()
-        Femtocraft.log(Level.SEVERE, "SQLite item table creation" + " failed")
+        Femtocraft.log(Level.WARN, "SQLite item table creation" + " failed")
         false
     }
   }
@@ -136,7 +136,7 @@ class AssemblerRecipeDatabase() {
     catch {
       case e: SQLException =>
         e.printStackTrace()
-        Femtocraft.log(Level.SEVERE, "SQLite select recipe from " + "inputs failed")
+        Femtocraft.log(Level.WARN, "SQLite select recipe from " + "inputs failed")
     }
     if (Femtocraft.assemblerConfigs.isEnabled(ac)) ac else null
   }
@@ -214,7 +214,7 @@ class AssemblerRecipeDatabase() {
     catch {
       case e: SQLException =>
         e.printStackTrace()
-        Femtocraft.log(Level.SEVERE, "SQLite select recipe from " + "inputs failed")
+        Femtocraft.log(Level.WARN, "SQLite select recipe from " + "inputs failed")
     }
     if (Femtocraft.assemblerConfigs.isEnabled(ac)) ac else null
   }
@@ -250,7 +250,7 @@ class AssemblerRecipeDatabase() {
     catch {
       case e: SQLException =>
         e.printStackTrace()
-        Femtocraft.log(Level.SEVERE, "SQLite insert recipe failed")
+        Femtocraft.log(Level.WARN, "SQLite insert recipe failed")
         false
     }
   }
@@ -290,12 +290,12 @@ class AssemblerRecipeDatabase() {
     catch {
       case e: SQLException =>
         e.printStackTrace()
-        Femtocraft.log(Level.SEVERE, "SQLite select recipe from " + "inputs failed")
+        Femtocraft.log(Level.WARN, "SQLite select recipe from " + "inputs failed")
     }
     arrayList
   }
 
-  def getRecipesForTech(tech: Technology): java.util.ArrayList[AssemblerRecipe] = getRecipesForTech(tech.getName)
+  def getRecipesForTech(tech: ITechnology): java.util.ArrayList[AssemblerRecipe] = getRecipesForTech(tech.getName)
 
   def getRecipesForTech(techName: String): java.util.ArrayList[AssemblerRecipe] = {
     val arrayList = new java.util.ArrayList[AssemblerRecipe]
@@ -316,7 +316,7 @@ class AssemblerRecipeDatabase() {
     catch {
       case e: SQLException =>
         e.printStackTrace()
-        Femtocraft.log(Level.SEVERE, "SQLite select recipe from " + "inputs failed")
+        Femtocraft.log(Level.WARN, "SQLite select recipe from " + "inputs failed")
     }
     arrayList
   }
@@ -341,7 +341,7 @@ class AssemblerRecipeDatabase() {
     catch {
       case e: SQLException =>
         e.printStackTrace()
-        Femtocraft.log(Level.SEVERE, "SQLite select recipe from " + "inputs failed")
+        Femtocraft.log(Level.WARN, "SQLite select recipe from " + "inputs failed")
     }
     arrayList
   }

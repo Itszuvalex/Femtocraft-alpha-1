@@ -21,7 +21,6 @@
 package com.itszuvalex.femtocraft.configuration
 
 import java.lang.reflect.Field
-import java.util.logging.Level
 import java.util.regex.Pattern
 
 import com.google.common.collect.HashBiMap
@@ -30,6 +29,7 @@ import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.implicits.ItemStackImplicits._
 import net.minecraft.item.ItemStack
 import net.minecraftforge.common.config.Configuration
+import org.apache.logging.log4j.Level
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable
@@ -119,7 +119,7 @@ object FemtocraftConfigHelper {
             }
             catch {
               case e: Exception =>
-                Femtocraft.log(Level.SEVERE, "Error loading @Configurable field " + field.getName + " in class " + clazz.getName + ".")
+                Femtocraft.log(Level.WARN, "Error loading @Configurable field " + field.getName + " in class " + clazz.getName + ".")
                 e.printStackTrace()
             }
           }

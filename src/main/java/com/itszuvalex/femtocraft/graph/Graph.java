@@ -22,11 +22,11 @@
 package com.itszuvalex.femtocraft.graph;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import org.apache.logging.log4j.Level;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.logging.Level;
 
 public abstract class Graph {
     protected float EMPTY_PADDING_MULTIPLER = 1.00f;
@@ -42,12 +42,11 @@ public abstract class Graph {
     }
 
     /**
-     * Performs a variant of the Sugiyama algorithm to find locations for
-     * Technologies.
+     * Performs a variant of the Sugiyama algorithm to find locations for Technologies.
      */
     public void computePlacements() {
         Femtocraft
-                .log(Level.FINE,
+                .log(Level.TRACE,
                         "Computing Placements. This process may take a while on slower computers.");
         computeHeights();
 
@@ -74,11 +73,11 @@ public abstract class Graph {
         // largest row
         // reduceRows(rows);
         minimizeCrossings(rows);
-        Femtocraft.log(Level.FINE, "Graph placement finished.");
+        Femtocraft.log(Level.TRACE, "Graph placement finished.");
     }
 
     private void computeHeights() {
-        Femtocraft.log(Level.FINE, "Computing heights.");
+        Femtocraft.log(Level.TRACE, "Computing heights.");
         for (IGraphNode node : getNodes()) {
             // For finding stand-alone technologies with no parents or children.
             if (node.isRoot()) {
@@ -163,22 +162,23 @@ public abstract class Graph {
                 }
             }
         } catch (InstantiationException e) {
-            Femtocraft.logger().log(Level.SEVERE, "Invalid DummyNode class", e);
+            Femtocraft.log(Level.ERROR, "Invalid DummyNode class");
+            e.printStackTrace();
         } catch (IllegalAccessException e) {
-            Femtocraft.logger().log(Level.SEVERE, "Error creating DummyNode " +
-                    "instance", e);
+            Femtocraft.log(Level.ERROR, "Error creating DummyNode instance");
+            e.printStackTrace();
         }
     }
 
     private void minimizeCrossings(ArrayList<IGraphNode>[] rows) {
-        Femtocraft.log(Level.FINE, "Minimizing edge crossings for "
-                + rows.length + " rows.");
+        Femtocraft.log(Level.TRACE, "Minimizing edge crossings for "
+                                    + rows.length + " rows.");
         for (int pass = 0; pass < MAX_MINIMIZE_PASSES; ++pass) {
-            Femtocraft.log(Level.FINER, "Minimize Pass " + pass + ".");
+            Femtocraft.log(Level.TRACE, "Minimize Pass " + pass + ".");
             for (int i = 0; i < rows.length - 1; ++i) {
-                Femtocraft.log(Level.FINEST, "Minimizing " + i + "("
-                        + rows[i].size() + ")" + "->" + (i + 1) + "("
-                        + rows[i + 1].size() + ")" + ".");
+                Femtocraft.log(Level.TRACE, "Minimizing " + i + "("
+                                            + rows[i].size() + ")" + "->" + (i + 1) + "("
+                                            + rows[i + 1].size() + ")" + ".");
                 hillClimb(rows, rows[i], rows[i + 1]);
             }
         }
@@ -220,21 +220,17 @@ public abstract class Graph {
 
                 if (!heuristics(row2.get(i1), row2.get(i2))) {
                     switch_x_pos(row2.get(i1), row2.get(i2));
-                }
-                else {
+                } else {
                     if (new_cross_count < crossings || !h) {
                         crossings = new_cross_count;
                         distance = new_distance;
-                    }
-                    else if (new_cross_count == crossings) {
+                    } else if (new_cross_count == crossings) {
                         if (new_distance < distance) {
                             distance = new_distance;
-                        }
-                        else {
+                        } else {
                             switch_x_pos(row2.get(i1), row2.get(i2));
                         }
-                    }
-                    else {
+                    } else {
                         switch_x_pos(row2.get(i1), row2.get(i2));
                     }
                 }
@@ -312,7 +308,7 @@ public abstract class Graph {
         for (IGraphNode node : row1) {
             for (IGraphNode child : node.getChildren()) {
                 distance += Math.sqrt(Math.pow(child.getX() - node.getX(), 2)
-                        + Math.pow(child.getY() - node.getY(), 2));
+                                      + Math.pow(child.getY() - node.getY(), 2));
             }
         }
         return distance;
@@ -320,13 +316,13 @@ public abstract class Graph {
 
     private boolean isCrossing(int x_top_1, int x_connection_1, int x_top_2,
                                int x_connection_2) {
-        return ((x_top_1 < x_top_2 && x_connection_1 > x_connection_2) || (x_top_1 > x_top_2 && x_connection_1 < x_connection_2));
+        return ((x_top_1 < x_top_2 && x_connection_1 > x_connection_2) ||
+                (x_top_1 > x_top_2 && x_connection_1 < x_connection_2));
     }
 
     private void reduceRows(ArrayList<IGraphNode>[] rows) {
-        Femtocraft.log(Level.FINE, "Reducing row widths.");
-        for (int i = 0; i < rows.length; ++i) {
-            ArrayList<IGraphNode> row = rows[i];
+        Femtocraft.log(Level.TRACE, "Reducing row widths.");
+        for (ArrayList<IGraphNode> row : rows) {
             int ri = 0;
             while (row.size() > maxWidth && ri++ < row.size()) {
                 IGraphNode node = row.get(ri);

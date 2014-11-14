@@ -1,7 +1,6 @@
 package com.itszuvalex.femtocraft.network.messages
 
-import java.io.{ByteArrayInputStream, DataInputStream, IOException}
-import java.util.logging.Level
+import java.io.{ByteArrayInputStream, IOException}
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.managers.research.PlayerResearch
@@ -9,6 +8,7 @@ import cpw.mods.fml.common.network.simpleimpl.{IMessage, IMessageHandler, Messag
 import io.netty.buffer.ByteBuf
 import net.minecraft.client.Minecraft
 import net.minecraft.nbt.{CompressedStreamTools, NBTTagCompound}
+import org.apache.logging.log4j.Level
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/4/14.
@@ -39,7 +39,7 @@ class MessageResearchPlayer() extends IMessage with IMessageHandler[MessageResea
     catch {
       case e: IOException =>
         e.printStackTrace()
-        Femtocraft.log(Level.SEVERE, "Error decompressing research" + " data.")
+        Femtocraft.log(Level.ERROR, "Error decompressing research" + " data.")
     }
   }
 
@@ -51,7 +51,7 @@ class MessageResearchPlayer() extends IMessage with IMessageHandler[MessageResea
     catch {
       case e: IOException =>
         e.printStackTrace()
-        Femtocraft.log(Level.SEVERE, "Error compressing " + " research data.  No data will be sent")
+        Femtocraft.log(Level.ERROR, "Error compressing " + " research data.  No data will be sent")
         return
     }
     buf.writeInt(playerName.getBytes.length)

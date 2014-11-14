@@ -21,7 +21,6 @@
 package com.itszuvalex.femtocraft.managers.assembler
 
 import java.util
-import java.util.logging.Level
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.{EnumTechLevel, AssemblerRecipe}
@@ -34,6 +33,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.{CraftingManager, IRecipe, ShapedRecipes, ShapelessRecipes}
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.oredict.{OreDictionary, ShapedOreRecipe, ShapelessOreRecipe}
+import org.apache.logging.log4j.Level
 
 import scala.collection.JavaConversions._
 
@@ -193,26 +193,26 @@ class ManagerAssemblerRecipe {
       Femtocraft.log(Level.INFO, "Database already exists.  " + "Skipping item registration.")
       return
     }
-    Femtocraft.log(Level.WARNING, "Registering assembler recipes from Vanilla Minecraft's Crafting Manager.\t This may take " + "awhile ._.")
+    Femtocraft.log(Level.WARN, "Registering assembler recipes from Vanilla Minecraft's Crafting Manager.\t This may take " + "awhile ._.")
     val recipes = CraftingManager.getInstance.getRecipeList.filter(i => i != null && i.isInstanceOf[IRecipe]).map(_.asInstanceOf[IRecipe])
-    Femtocraft.log(Level.WARNING, "Registering shaped recipes from Vanilla Minecraft's Crafting Manager.")
+    Femtocraft.log(Level.WARN, "Registering shaped recipes from Vanilla Minecraft's Crafting Manager.")
     recipes.filter(i => i.isInstanceOf[ShapedRecipes] && getRecipe(i.getRecipeOutput) == null)
     .map(_.asInstanceOf[ShapedRecipes])
     .foreach(sr => {
-      Femtocraft.log(Level.CONFIG, "Attempting to register shaped assembler recipe for " + sr.getRecipeOutput.getDisplayName + ".")
+      Femtocraft.log(Level.INFO, "Attempting to register shaped assembler recipe for " + sr.getRecipeOutput.getDisplayName + ".")
       val valid = registerShapedRecipe(sr.recipeItems, sr.getRecipeOutput, sr.recipeWidth, sr.recipeHeight)
       if (!valid) {
-        Femtocraft.log(Level.WARNING, "Failed to register shaped assembler recipe for " + sr.getRecipeOutput.getDisplayName + "!")
+        Femtocraft.log(Level.WARN, "Failed to register shaped assembler recipe for " + sr.getRecipeOutput.getDisplayName + "!")
       }
       else {
-        Femtocraft.log(Level.CONFIG, "Loaded Vanilla Minecraft shaped recipe as assembler recipe for " + sr.getRecipeOutput.getDisplayName + ".")
+        Femtocraft.log(Level.INFO, "Loaded Vanilla Minecraft shaped recipe as assembler recipe for " + sr.getRecipeOutput.getDisplayName + ".")
       }
     })
-    Femtocraft.log(Level.WARNING, "Registering shaped ore recipes from Forge.")
+    Femtocraft.log(Level.WARN, "Registering shaped ore recipes from Forge.")
     recipes.filter(i => i.isInstanceOf[ShapedOreRecipe] && getRecipe(i.getRecipeOutput) == null)
     .map(_.asInstanceOf[ShapedOreRecipe])
     .foreach(orecipe => {
-      Femtocraft.log(Level.CONFIG, "Attempting to register shaped assembler recipe for " + orecipe.getRecipeOutput.getDisplayName + ".")
+      Femtocraft.log(Level.INFO, "Attempting to register shaped assembler recipe for " + orecipe.getRecipeOutput.getDisplayName + ".")
       var width = 0
       var height = 0
       try {
@@ -246,39 +246,39 @@ class ManagerAssemblerRecipe {
       }
       val valid = registerShapedOreRecipe(orecipe.getInput, orecipe.getRecipeOutput, width, height)
       if (!valid) {
-        Femtocraft.log(Level.WARNING, "Failed to register shaped assembler recipe for " + orecipe.getRecipeOutput.getDisplayName + "!")
+        Femtocraft.log(Level.WARN, "Failed to register shaped assembler recipe for " + orecipe.getRecipeOutput.getDisplayName + "!")
       }
       else {
-        Femtocraft.log(Level.CONFIG, "LoadedForge shaped ore recipe as assembler recipe for " + orecipe.getRecipeOutput.getDisplayName + ".")
+        Femtocraft.log(Level.INFO, "LoadedForge shaped ore recipe as assembler recipe for " + orecipe.getRecipeOutput.getDisplayName + ".")
       }
     })
-    Femtocraft.log(Level.WARNING, "Registering shapeless recipes from Vanilla Minecraft's Crafting Manager.")
+    Femtocraft.log(Level.WARN, "Registering shapeless recipes from Vanilla Minecraft's Crafting Manager.")
     recipes.filter(i => i.isInstanceOf[ShapelessRecipes] && getRecipe(i.getRecipeOutput) == null)
     .map(_.asInstanceOf[ShapelessRecipes])
     .foreach(recipe => {
-      Femtocraft.log(Level.CONFIG, "Attempting to register shapeless assembler recipe for " + recipe.getRecipeOutput.getDisplayName + ".")
+      Femtocraft.log(Level.INFO, "Attempting to register shapeless assembler recipe for " + recipe.getRecipeOutput.getDisplayName + ".")
       val valid: Boolean = registerShapelessRecipe(recipe.recipeItems, recipe.getRecipeOutput)
       if (!valid) {
-        Femtocraft.log(Level.WARNING, "Failed to register shapeless assembler recipe for " + recipe.getRecipeOutput.getDisplayName + "!")
-        Femtocraft.log(Level.WARNING, "I have no clue how this would happen...as the search space is literally " + "thousands of configurations.  Sorry for the wait.")
+        Femtocraft.log(Level.WARN, "Failed to register shapeless assembler recipe for " + recipe.getRecipeOutput.getDisplayName + "!")
+        Femtocraft.log(Level.WARN, "I have no clue how this would happen...as the search space is literally " + "thousands of configurations.  Sorry for the wait.")
       }
       else {
-        Femtocraft.log(Level.CONFIG, "Loaded Vanilla Minecraft shapeless recipe as assembler recipe for + " + recipe.getRecipeOutput.getDisplayName + ".")
+        Femtocraft.log(Level.INFO, "Loaded Vanilla Minecraft shapeless recipe as assembler recipe for + " + recipe.getRecipeOutput.getDisplayName + ".")
       }
     })
 
-    Femtocraft.log(Level.WARNING, "Registering shapeless ore recipes from Forge.")
+    Femtocraft.log(Level.WARN, "Registering shapeless ore recipes from Forge.")
     recipes.filter(i => i.isInstanceOf[ShapelessOreRecipe] && getRecipe(i.getRecipeOutput) == null)
     .map(_.asInstanceOf[ShapelessOreRecipe])
     .foreach(recipe => {
-      Femtocraft.log(Level.CONFIG, "Attempting to register shapeless assembler recipe for " + recipe.getRecipeOutput.getDisplayName + ".")
+      Femtocraft.log(Level.INFO, "Attempting to register shapeless assembler recipe for " + recipe.getRecipeOutput.getDisplayName + ".")
       val valid: Boolean = registerShapelessOreRecipe(recipe.getInput, recipe.getRecipeOutput)
       if (!valid) {
-        Femtocraft.log(Level.WARNING, "Failed to register shapeless ore assembler recipe for " + recipe.getRecipeOutput.getDisplayName + "!")
-        Femtocraft.log(Level.WARNING, "I have no clue how this would happen...as the search space is literally " + "thousands of configurations.  Sorry for the wait.")
+        Femtocraft.log(Level.WARN, "Failed to register shapeless ore assembler recipe for " + recipe.getRecipeOutput.getDisplayName + "!")
+        Femtocraft.log(Level.WARN, "I have no clue how this would happen...as the search space is literally " + "thousands of configurations.  Sorry for the wait.")
       }
       else {
-        Femtocraft.log(Level.CONFIG, "Loaded Forge shapeless ore recipe as assembler recipe for + " + recipe.getRecipeOutput.getDisplayName + ".")
+        Femtocraft.log(Level.INFO, "Loaded Forge shapeless ore recipe as assembler recipe for + " + recipe.getRecipeOutput.getDisplayName + ".")
       }
     })
     Femtocraft.log(Level.INFO, "Finished mapping Minecraft recipes to assembler recipes.")
@@ -304,7 +304,7 @@ class ManagerAssemblerRecipe {
             }
             catch {
               case exc: IndexOutOfBoundsException =>
-                Femtocraft.log(Level.SEVERE, "Ore recipe with nothing registered in " + "ore dictionary for " + recipe.output.getDisplayName + ".")
+                Femtocraft.log(Level.ERROR, "Ore recipe with nothing registered in " + "ore dictionary for " + recipe.output.getDisplayName + ".")
                 return false
             }
           }
@@ -391,7 +391,7 @@ class ManagerAssemblerRecipe {
             }
             catch {
               case exc: IndexOutOfBoundsException =>
-                Femtocraft.log(Level.SEVERE, "Ore recipe with nothing registered in " + "ore dictionary for " + recipe.output.getDisplayName + ".")
+                Femtocraft.log(Level.ERROR, "Ore recipe with nothing registered in " + "ore dictionary for " + recipe.output.getDisplayName + ".")
                 return false
             }
           }
@@ -612,7 +612,7 @@ class ManagerAssemblerRecipe {
     }
     val normal = normalizedOutput(recipe)
     if (!checkDecomposition(normal, recipe) || !checkRecomposition(normalArray, recipe)) {
-      Femtocraft.log(Level.WARNING, "Assembler recipe already exists for " + recipe.output.getUnlocalizedName + ".")
+      Femtocraft.log(Level.WARN, "Assembler recipe already exists for " + recipe.output.getUnlocalizedName + ".")
       return false
     }
     registerRecomposition(normalArray, recipe) && registerDecomposition(normal, recipe)
@@ -628,7 +628,7 @@ class ManagerAssemblerRecipe {
       return false
     }
     if (!checkRecomposition(normal, recipe)) {
-      Femtocraft.log(Level.WARNING, "Assembler recipe already exists for " + recipe.output.getUnlocalizedName + ".")
+      Femtocraft.log(Level.WARN, "Assembler recipe already exists for " + recipe.output.getUnlocalizedName + ".")
       return false
     }
     registerRecomposition(normal, recipe)
@@ -641,7 +641,7 @@ class ManagerAssemblerRecipe {
     }
     val normal = normalizedOutput(recipe)
     if (!checkDecomposition(normal, recipe)) {
-      Femtocraft.log(Level.WARNING, "Assembler recipe already exists for " + recipe.output.getUnlocalizedName + ".")
+      Femtocraft.log(Level.WARN, "Assembler recipe already exists for " + recipe.output.getUnlocalizedName + ".")
       return false
     }
     registerDecomposition(normal, recipe)

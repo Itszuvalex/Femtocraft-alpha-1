@@ -31,10 +31,10 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
+import org.apache.logging.log4j.Level;
 
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Level;
 
 public class PlayerProperties implements IExtendedEntityProperties {
     public final static String PROP_TAG = "femtocraft.player.properties";
@@ -66,7 +66,7 @@ public class PlayerProperties implements IExtendedEntityProperties {
             try {
                 properties.put(entry.getKey(), entry.getValue().newInstance());
             } catch (InstantiationException e) {
-                Femtocraft.logger().log(Level.SEVERE, "Failed to create new instance of " + entry.getKey() +
+                Femtocraft.log(Level.ERROR, "Failed to create new instance of " + entry.getKey() +
                                                       " on creating PlayerProperties for player: " + player +
                                                       " name: " +
                                                       player.getCommandSenderName());

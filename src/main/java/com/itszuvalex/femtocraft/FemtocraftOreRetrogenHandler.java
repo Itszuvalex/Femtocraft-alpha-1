@@ -28,12 +28,12 @@ import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ChunkDataEvent;
+import org.apache.logging.log4j.Level;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Random;
-import java.util.logging.Level;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/26/14.
@@ -63,7 +63,7 @@ public class FemtocraftOreRetrogenHandler {
 
         if (regionCompound == null) {
             if (FemtocraftConfigs.retrogenAlerts) {
-                Femtocraft.logger().log(Level.WARNING,
+                Femtocraft.log(Level.WARN,
                         "No Retrogen File found for worldId:" + event.world.provider.dimensionId + " x:" + regionX +
                         " z:" + regionZ + ".  Generating now.");
             }
@@ -113,7 +113,7 @@ public class FemtocraftOreRetrogenHandler {
                 fileoutputstream.flush();
                 fileoutputstream.close();
             } catch (Exception exception) {
-                Femtocraft.logger().log(Level.SEVERE,
+                Femtocraft.log(Level.ERROR,
                         "Failed to save data for " + filename
                         + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
                 );
@@ -121,9 +121,9 @@ public class FemtocraftOreRetrogenHandler {
             }
 
         } catch (Exception e) {
-            Femtocraft.logger().log(Level.SEVERE, "Failed to create folder "
-                                                  + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator +
-                                                  DIRECTORY + ".");
+            Femtocraft.log(Level.ERROR, "Failed to create folder "
+                                        + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator +
+                                        DIRECTORY + ".");
             e.printStackTrace();
             return false;
         }
@@ -136,18 +136,18 @@ public class FemtocraftOreRetrogenHandler {
             File folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), DIRECTORY);
             if (!folder.exists()) {
                 if (FemtocraftConfigs.retrogenAlerts) {
-                    Femtocraft.logger().log(Level.WARNING, "No " + DIRECTORY
-                                                           + " folder found for world - " +
-                                                           FemtocraftFileUtils.savePathFemtocraft(world) + ".");
+                    Femtocraft.log(Level.WARN, "No " + DIRECTORY
+                                               + " folder found for world - " +
+                                               FemtocraftFileUtils.savePathFemtocraft(world) + ".");
                 }
                 return null;
             }
             File worldFolder = new File(folder.getPath(), String.valueOf(world.provider.dimensionId));
             if (!worldFolder.exists()) {
                 if (FemtocraftConfigs.retrogenAlerts) {
-                    Femtocraft.logger().log(Level.WARNING, "No " + String.valueOf(world.provider.dimensionId)
-                                                           + " folder found for world - " +
-                                                           FemtocraftFileUtils.savePathFemtocraft(world) + ".");
+                    Femtocraft.log(Level.WARN, "No " + String.valueOf(world.provider.dimensionId)
+                                               + " folder found for world - " +
+                                               FemtocraftFileUtils.savePathFemtocraft(world) + ".");
                 }
                 return null;
             }
@@ -163,7 +163,7 @@ public class FemtocraftOreRetrogenHandler {
                 fileinputstream.close();
                 return data;
             } catch (Exception e) {
-                Femtocraft.logger().log(Level.SEVERE,
+                Femtocraft.log(Level.ERROR,
                         "Failed to load data from file " + filename
                         + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
                 );
@@ -171,7 +171,7 @@ public class FemtocraftOreRetrogenHandler {
             }
 
         } catch (Exception exception) {
-            Femtocraft.logger().log(Level.SEVERE,
+            Femtocraft.log(Level.ERROR,
                     "Failed to load data from folder " + DIRECTORY
                     + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + "."
             );

@@ -469,7 +469,8 @@ public class GuiTechnology extends GuiScreen {
                                                            y + 17)
 
         {
-            tooltip.add(item.getDisplayName());
+            tooltip.addAll(item.getTooltip(Minecraft.getMinecraft().thePlayer, Minecraft.getMinecraft().gameSettings
+                    .advancedItemTooltips));
         }
 
         GL11.glDisable(GL11.GL_LIGHTING);

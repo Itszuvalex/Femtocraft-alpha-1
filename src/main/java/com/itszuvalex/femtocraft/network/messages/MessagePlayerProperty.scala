@@ -1,7 +1,6 @@
 package com.itszuvalex.femtocraft.network.messages
 
-import java.io.{ByteArrayInputStream, DataInputStream, IOException}
-import java.util.logging.Level
+import java.io.{ByteArrayInputStream, IOException}
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.player.PlayerProperties
@@ -9,6 +8,7 @@ import com.itszuvalex.femtocraft.utils.FemtocraftUtils
 import cpw.mods.fml.common.network.simpleimpl.{IMessage, IMessageHandler, MessageContext}
 import io.netty.buffer.ByteBuf
 import net.minecraft.nbt.{CompressedStreamTools, NBTTagCompound}
+import org.apache.logging.log4j.Level
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 10/22/14.
@@ -30,7 +30,7 @@ class MessagePlayerProperty(private var username: String, private var data: NBTT
     catch {
       case e: IOException =>
         e.printStackTrace()
-        Femtocraft.log(Level.SEVERE, "Error decompressing player data.")
+        Femtocraft.log(Level.ERROR, "Error decompressing player data.")
     }
   }
 
@@ -42,7 +42,7 @@ class MessagePlayerProperty(private var username: String, private var data: NBTT
     catch {
       case e: IOException =>
         e.printStackTrace()
-        Femtocraft.log(Level.SEVERE, "Error compressing player data.")
+        Femtocraft.log(Level.ERROR, "Error compressing player data.")
         return
     }
     buf.writeInt(username.getBytes.length)
