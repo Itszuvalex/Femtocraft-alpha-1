@@ -49,9 +49,9 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
     public static final String specialTypeGroup = "specialType";
     public static final String specialTypeRegex = "(?<" + specialTypeGroup + ">[^_]*?)";
     public static final String specialParamGroup = "specialParam";
-    public static final String specialParamRegex = "(?<" + specialParamGroup + ">[^_]*)?";
+    public static final String specialParamRegex = "(?<" + specialParamGroup + ">((?!--).)+)?";
     public static final String specialTextGroup = "specialText";
-    public static final String specialTextRegex = "(?<" + specialTextGroup + ">[^_]*)";
+    public static final String specialTextRegex = "(?<" + specialTextGroup + ">((?!__).)+)?";
     public static final Pattern specialDecompPattern = Pattern.compile(
             specialTypeRegex + "\\." + specialParamRegex + "--" + specialTextRegex);
 
