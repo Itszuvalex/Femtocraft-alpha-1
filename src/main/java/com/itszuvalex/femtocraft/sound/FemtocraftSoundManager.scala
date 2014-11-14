@@ -13,7 +13,6 @@ import scala.collection.mutable.ArrayBuffer
 /**
  * Created by Chris on 9/3/2014.
  */
-@SideOnly(value = Side.CLIENT)
 object FemtocraftSoundManager {
 
   object SoundAction {
@@ -39,7 +38,6 @@ object FemtocraftSoundManager {
   def makePhlegethonSound(x: Int, y: Int, z: Int) = createSound(PhlegethonTunnelIdentifier, 1f, 1f, x.toInt, y.toInt, z.toInt, repeat = true, 0, AttenuationType.LINEAR)
 }
 
-@SideOnly(value = Side.CLIENT)
 class FemtocraftSoundManager() {
   private val sounds = new ArrayBuffer[ISound]
 
