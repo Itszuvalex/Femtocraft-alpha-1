@@ -115,7 +115,7 @@ public class PlayerResearch {
                 for (String st : t.getPrerequisites()) {
                     ITechnology pt = Femtocraft.researchManager().getTechnology(st);
 
-                    if (pt == discoverer && discoverer == null) {
+                    if (pt == discoverer || discoverer == null) {
                         discovererPrereq = true;
                     }
                     if (pt == null) continue;
