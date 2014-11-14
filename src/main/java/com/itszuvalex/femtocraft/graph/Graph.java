@@ -52,6 +52,7 @@ public abstract class Graph {
 
         // Prepare row count for crossing minimization
         int height = greatestHeight() + 1;
+        @SuppressWarnings("unchecked")
         ArrayList<IGraphNode>[] rows = new ArrayList[height];
         // Scope out the int array so it goes away when we're finished with it.
         // It's only for
@@ -60,7 +61,7 @@ public abstract class Graph {
             int[] rowCount = new int[height];
             Arrays.fill(rowCount, 0);
             for (int i = 0; i < rows.length; ++i) {
-                rows[i] = new ArrayList<IGraphNode>();
+                rows[i] = new ArrayList<>();
             }
             for (IGraphNode node : getNodes()) {
                 rows[node.getY()].add(node);
@@ -104,8 +105,8 @@ public abstract class Graph {
         try {
             for (ArrayList<IGraphNode> row1 : rows) {
                 for (IGraphNode node : row1) {
-                    ArrayList<IGraphNode> remove = new ArrayList<IGraphNode>();
-                    ArrayList<IGraphNode> add = new ArrayList<IGraphNode>();
+                    ArrayList<IGraphNode> remove = new ArrayList<>();
+                    ArrayList<IGraphNode> add = new ArrayList<>();
                     for (IGraphNode child : node.getChildren()) {
                         int levelDif = Math.abs(node.getY() - child.getY());
                         if (levelDif > 1) {
@@ -279,8 +280,8 @@ public abstract class Graph {
                               ArrayList<IGraphNode> row2) {
         int connections = 0;
 
-        ArrayList<Integer> x_top = new ArrayList<Integer>();
-        ArrayList<Integer> x_bot = new ArrayList<Integer>();
+        ArrayList<Integer> x_top = new ArrayList<>();
+        ArrayList<Integer> x_bot = new ArrayList<>();
 
         for (IGraphNode node : row1) {
             for (IGraphNode child : node.getChildren()) {

@@ -35,7 +35,6 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityResearchConsole extends TileEntityBase implements
         IInventory {
-    public static final String PACKET_CHANNEL = Femtocraft.RESEARCH_CONSOLE_CHANNEL();
     private static final int ticksToResearch = 400;
     public
     @FemtocraftDataUtils.Saveable(desc = true)

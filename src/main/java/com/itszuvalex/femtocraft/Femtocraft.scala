@@ -55,7 +55,7 @@ import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationE
 import cpw.mods.fml.common.network.NetworkRegistry
 import cpw.mods.fml.common.registry.{GameRegistry, LanguageRegistry}
 import cpw.mods.fml.common.{FMLCommonHandler, Mod, SidedProxy}
-import cpw.mods.fml.relauncher.Side
+import cpw.mods.fml.relauncher.{SideOnly, Side}
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.creativetab.CreativeTabs
@@ -77,15 +77,15 @@ object Femtocraft {
   final val TECH_CONFIG_APPEND   = "Technology"
   final val RECIPE_CONFIG_APPEND = "Recipes"
 
-  /* Packet Channels */
-  final val GUI_CHANNEL               = ID + ".gui"
-  final val SOUND_CHANNEL             = ID + ".snd"
-  final val PLAYER_PROP_CHANNEL       = ID + ".pprop"
-  final val RESEARCH_CHANNEL          = ID + ".rman"
-  final val RESEARCH_CONSOLE_CHANNEL  = ID + ".rcon"
-  final val VACUUM_TUBE_CHANNEL       = ID + ".vtube"
-  final val FISSION_REACTOR_CHANNEL   = ID + ".fiss"
-  final val PHLEGETHON_TUNNEL_CHANNEL = ID + ".phleg"
+//  /* Packet Channels */
+//  final val GUI_CHANNEL               = ID + ".gui"
+//  final val SOUND_CHANNEL             = ID + ".snd"
+//  final val PLAYER_PROP_CHANNEL       = ID + ".pprop"
+//  final val RESEARCH_CHANNEL          = ID + ".rman"
+//  final val RESEARCH_CONSOLE_CHANNEL  = ID + ".rcon"
+//  final val VACUUM_TUBE_CHANNEL       = ID + ".vtube"
+//  final val FISSION_REACTOR_CHANNEL   = ID + ".fiss"
+//  final val PHLEGETHON_TUNNEL_CHANNEL = ID + ".phleg"
 
   @SidedProxy(clientSide = "com.itszuvalex.femtocraft.proxy.ProxyClient",
               serverSide = "com.itszuvalex.femtocraft.proxy.ProxyCommon")
@@ -100,6 +100,7 @@ object Femtocraft {
   var recipeManager                         : ManagerRecipe             = null
   var researchManager                       : ManagerResearch           = null
   var assistantManager                      : ManagerAssistant          = null
+  @SideOnly(Side.CLIENT)
   var soundManager                          : FemtocraftSoundManager    = null
   var femtocraftServerCommand               : CommandBase               = null
   /*blocks*/

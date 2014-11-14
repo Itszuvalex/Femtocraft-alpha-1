@@ -135,9 +135,10 @@ public class PowerContainer implements IPowerContainer, ISaveable {
         level = EnumTechLevel.getTech(nbt.getString("enumTechLevel"));
     }
 
+    @SuppressWarnings("unchecked")
     public void addInformationToTooltip(List tooltip) {
         String value = level.getTooltipEnum() + "Power: "
-                + EnumChatFormatting.RESET + currentPower + "/" + maxPower;
+                       + EnumChatFormatting.RESET + currentPower + "/" + maxPower;
         tooltip.add(value);
     }
 

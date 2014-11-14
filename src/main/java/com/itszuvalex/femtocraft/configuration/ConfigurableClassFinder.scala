@@ -65,11 +65,14 @@ class ConfigurableClassFinder(val classPackage: String) {
             }
           }
           catch {
-            case e: ClassNotFoundException =>
-            case e: NoClassDefFoundError   =>
             case e: Exception              =>
           }
         }
+      }
+      catch {
+        case e: RuntimeException =>
+        case e: ClassNotFoundException =>
+        case e: NoClassDefFoundError   =>
       }
     })
     Femtocraft.log(Level.INFO, "Registered " + configurableClasses.length + " configurable classes.")

@@ -44,8 +44,6 @@ import org.apache.logging.log4j.Level;
 
 public class TileEntityNanoFissionReactorCore extends TileEntityBase implements IInventory, IFluidHandler,
         IMultiBlockComponent {
-    public static final String PACKET_CHANNEL = Femtocraft.FISSION_REACTOR_CHANNEL();
-
     public static final byte incrementAction = 0;
     public static final byte decrementAction = 1;
     public static final byte abortAction = 2;

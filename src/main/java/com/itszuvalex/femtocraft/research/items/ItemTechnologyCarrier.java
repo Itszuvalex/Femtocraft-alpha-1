@@ -78,6 +78,7 @@ public abstract class ItemTechnologyCarrier extends ItemBase implements
 
     @Override
     @SideOnly(Side.CLIENT)
+    @SuppressWarnings("unchecked")
     public void addInformation(ItemStack par1ItemStack,
                                EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
         super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);

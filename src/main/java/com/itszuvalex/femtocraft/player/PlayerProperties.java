@@ -38,8 +38,6 @@ import java.util.TreeMap;
 
 public class PlayerProperties implements IExtendedEntityProperties {
     public final static String PROP_TAG = "femtocraft.player.properties";
-    public final static String PACKET_CHANNEL = Femtocraft.PLAYER_PROP_CHANNEL();
-
     protected final EntityPlayer player;
 
     private Map<String, IFemtocraftPlayerProperty> properties = new TreeMap<String, IFemtocraftPlayerProperty>();

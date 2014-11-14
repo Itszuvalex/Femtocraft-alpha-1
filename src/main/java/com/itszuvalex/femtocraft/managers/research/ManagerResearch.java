@@ -42,11 +42,9 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class ManagerResearch {
-    public static final String RESEARCH_CHANNEL = Femtocraft.RESEARCH_CHANNEL();
     private static final String playerDataKey = "playerData";
     private static final String dataKey = "data";
     private static final String userKey = "username";
-    ;
     // TODO: REMOVE ME
     private static boolean debug = true;
     private static final String DIRECTORY = "Research";
@@ -112,7 +110,8 @@ public class ManagerResearch {
         }
         PlayerResearch r = new PlayerResearch(username);
 
-        addFreeResearches(r);
+//        addFreeResearches(r);
+        addKnownTechnologies(r);
         if (debug) {
             addAllResearches(r);
         }
@@ -154,9 +153,11 @@ public class ManagerResearch {
 
     private void addFreeResearches(PlayerResearch research) {
         for (ITechnology t : technologies.values()) {
-            if (t.getPrerequisites() == null) {
+            if (t.getPrerequisites() == null || t.isResearchedByDefault()) {
                 research.researchTechnology(t.getName(), true);
                 // research.discoverTechnology(t.name);
+            } else if (t.isDiscoveredByDefault()) {
+                research.discoverTechnology(t.getName());
             }
         }
     }

@@ -75,25 +75,25 @@ object FemtocraftConfigHelper {
   def unescapeCategorySplitter(string: String) = string.replace(CATEGORY_SPLITTER_REPLACEMENT, CATEGORY_SPLITTER_CHAR)
 
   def loadClassFromConfig(configuration: Configuration, section: String, key: String, clazz: Class[_]) = {
-    var inst: AnyRef = null
-    try {
-      val rootMirror = universe.runtimeMirror(getClass.getClassLoader)
-      val classSymbol = rootMirror.classSymbol(clazz)
-      val moduleSymbol = classSymbol.companionSymbol.asModule
-      val moduleMirror = rootMirror.reflectModule(moduleSymbol)
+//    var inst: AnyRef = null
+//    try {
+//      val rootMirror = universe.runtimeMirror(getClass.getClassLoader)
+//      val classSymbol = rootMirror.classSymbol(clazz)
+//      val moduleSymbol = classSymbol.companionSymbol.asModule
+//      val moduleMirror = rootMirror.reflectModule(moduleSymbol)
+//
+//      if (moduleSymbol.annotations.exists(a => a.isInstanceOf[Configurable])) {
+//        inst = moduleMirror.instance.asInstanceOf[clazz.type]
+//      }
+//    }
+//    catch {
+//      case e: Exception         =>
+//        inst = null
+//      case e: NoSuchMethodError =>
+//        inst = null
+//    }
 
-      if (moduleSymbol.annotations.exists(a => a.isInstanceOf[Configurable])) {
-        inst = moduleMirror.instance.asInstanceOf[clazz.type]
-      }
-    }
-    catch {
-      case e: Exception         =>
-        inst = null
-      case e: NoSuchMethodError =>
-        inst = null
-    }
-
-    loadClassInstanceFromConfig(configuration, section, key, clazz, inst)
+    loadClassInstanceFromConfig(configuration, section, key, clazz, null)
   }
 
   def loadClassInstanceFromConfig(configuration: Configuration, section: String, key: String, clazz: Class[_], obj: AnyRef) {
