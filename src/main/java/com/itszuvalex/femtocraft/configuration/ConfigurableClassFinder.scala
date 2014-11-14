@@ -8,15 +8,16 @@ import net.minecraftforge.common.config.Configuration
 import org.apache.logging.log4j.Level
 
 import scala.collection.JavaConversions._
+import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
-import scala.reflect.runtime._
 
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 10/10/14.
  */
 class ConfigurableClassFinder(val classPackage: String) {
-  private val configurableClasses = new ArrayBuffer[Class[_]]
+  private val configurableClasses    = new ArrayBuffer[Class[_]]
+  private val configurableSingletons = new mutable.HashMap[AnyRef, Class[_]]
 
   /**
    * @param clazz Class to load all @Configurable annotated public/private fields from.
@@ -24,48 +25,42 @@ class ConfigurableClassFinder(val classPackage: String) {
    */
   def registerConfigurableClass(clazz: Class[_]) = configurableClasses.append(clazz)
 
-  def loadClassConstants(configuration: Configuration) = configurableClasses.foreach(clazz => FemtocraftConfigHelper.loadClassFromConfig(configuration, CLASS_CONSTANTS_KEY, clazz.getSimpleName, clazz))
+  def loadClassConstants(configuration: Configuration) = {
+    configurableClasses.foreach(clazz => FemtocraftConfigHelper.loadClassFromConfig(configuration, CLASS_CONSTANTS_KEY, clazz.getSimpleName, clazz))
+    configurableSingletons.foreach(pair => FemtocraftConfigHelper.loadClassInstanceFromConfig(configuration, CLASS_CONSTANTS_KEY, pair._2.getSimpleName.subSequence(0, pair._2.getSimpleName.length-1).toString, pair._2, pair._1))
+  }
 
   def registerConfigurableClasses() {
     Femtocraft.log(Level.INFO, "Finding all configurable classes for registration.")
     val classes = ClassPath.from(getClass.getClassLoader).getTopLevelClassesRecursive(classPackage)
-    val rootMirror = universe.runtimeMirror(getClass.getClassLoader)
     classes.foreach(info => {
       try {
         val clazz = Class.forName(info.getName)
-
-        //Scala
         try {
-          val classSymbol = rootMirror.classSymbol(clazz)
-          //          val moduleSymbol = classSymbol.companionSymbol.asModule
-          //          val moduleMirror = rootMirror.reflectModule(moduleSymbol)
-
-          if (classSymbol.annotations.exists(a => a.isInstanceOf[Configurable])) {
-            registerConfigurableClass(clazz)
-            Femtocraft.log(Level.INFO, "Registered " + clazz.getSimpleName + " as configurable.")
+          if (clazz.getAnnotation(classOf[Configurable]) != null) {
+            try {
+              val compclazz = Class.forName(info.getName + "$")
+              val inst = compclazz.getField("MODULE$").get(null)
+              if (inst != null) {
+                configurableSingletons.put(inst, compclazz)
+                Femtocraft.log(Level.INFO, "Registered " + clazz.getSimpleName + " as configurable singleton.")
+              }
+            }
+            catch {
+              case e: ClassNotFoundException =>
+                registerConfigurableClass(clazz)
+                Femtocraft.log(Level.INFO, "Registered " + clazz.getSimpleName + " as configurable.")
+              case e: Exception              =>
+            }
           }
         }
         catch {
           case e: Exception =>
-
-            //Java
-            try {
-              if (clazz.getAnnotation(classOf[Configurable]) != null) {
-                registerConfigurableClass(clazz)
-                Femtocraft.log(Level.INFO, "Registered " + clazz.getSimpleName + " as configurable.")
-              }
-            }
-            catch {
-              case e: Exception =>
-            }
         }
-      } catch {
-        case e: ClassNotFoundException =>
-          Femtocraft.log(Level.WARN, "Could not find @Configurable class " + info.getName + " when attempting to discover.")
-          e.printStackTrace()
       }
     })
     Femtocraft.log(Level.INFO, "Registered " + configurableClasses.length + " configurable classes.")
+    Femtocraft.log(Level.INFO, "Registered " + configurableSingletons.size + " configurable singletons.")
   }
 
 }

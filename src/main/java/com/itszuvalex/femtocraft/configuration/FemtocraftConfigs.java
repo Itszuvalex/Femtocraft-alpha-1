@@ -319,7 +319,6 @@ public class FemtocraftConfigs {
             ConfigurableClassFinder ccf = new ConfigurableClassFinder("com.itszuvalex.femtocraft");
             ccf.registerConfigurableClasses();
             ccf.loadClassConstants(config);
-
         } catch (Exception e) {
             Femtocraft.log(Level.ERROR, "Error occured when attempting to load from configs.");
             // failed to load configs log
