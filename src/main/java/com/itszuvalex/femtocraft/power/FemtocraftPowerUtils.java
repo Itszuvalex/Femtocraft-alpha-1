@@ -25,6 +25,7 @@ import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import scala.Array;
 
 import java.util.Arrays;
 
@@ -35,8 +36,11 @@ public class FemtocraftPowerUtils {
     public static final float distributionBuffer = .01f;
     public static final float maxPowerPerTick = .05f;
 
+    private static boolean[] sconnections = new boolean[6];
+    private static IPowerBlockContainer[] sneighbors = new IPowerBlockContainer[6];
+
     /**
-     * This algorithm distributes temp from the given container, located in the given world, at the givne coordinates,
+     * This algorithm distributes temp from the given container, located in the given world, at the given coordinates,
      * in a manner consistent with intended behaviors.  It distributes temp to IPowerBlockContainers, where the
      * difference in the given container's currentPowerPercentageForOutput() and the adjacent container's
      * currentPowerPercentageForInput() is greater than the distributionBuffer.  It will attempt to distribute at most
@@ -57,16 +61,18 @@ public class FemtocraftPowerUtils {
             return;
         }
         if (connections == null) {
-            connections = new boolean[6];
-            Arrays.fill(connections, true);
+            Arrays.fill(sconnections, true);
         } else if (connections.length != 6) {
             return;
+        } else {
+            Array.copy(connections, 0, sconnections, 0, 6);
         }
-        IPowerBlockContainer[] cons = new IPowerBlockContainer[6];
+
+        Arrays.fill(sneighbors, null);
 
         int numConnections = 0;
         for (int i = 0; i < 6; ++i) {
-            if (!connections[i]) {
+            if (!sconnections[i]) {
                 continue;
             }
             ForgeDirection dir = ForgeDirection.getOrientation(i);
@@ -75,7 +81,7 @@ public class FemtocraftPowerUtils {
                     (z + dir.offsetZ) >> 4)) {
                 TileEntity te = world.getTileEntity(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
                 if (te instanceof IPowerBlockContainer) {
-                    cons[i] = (IPowerBlockContainer) te;
+                    sneighbors[i] = (IPowerBlockContainer) te;
                     ++numConnections;
                 }
             }
@@ -90,11 +96,11 @@ public class FemtocraftPowerUtils {
 
         //Sum % differences
         for (int i = 0; i < 6; ++i) {
-            if (!connections[i] || cons[i] == null) {
+            if (!sconnections[i] || sneighbors[i] == null) {
                 continue;
             }
             ForgeDirection dir = ForgeDirection.getOrientation(i);
-            float percentDif = fillPercentages[i] - cons[i].getFillPercentageForCharging(dir.getOpposite());
+            float percentDif = fillPercentages[i] - sneighbors[i].getFillPercentageForCharging(dir.getOpposite());
             if (percentDif > distributionBuffer) {
                 percentDifferenceTotal += percentDif;
             }
@@ -103,14 +109,14 @@ public class FemtocraftPowerUtils {
 
         //Distribute
         for (int i = 0; i < 6; ++i) {
-            if (!connections[i] || cons[i] == null) {
+            if (!sconnections[i] || sneighbors[i] == null) {
                 continue;
             }
             ForgeDirection dir = ForgeDirection.getOrientation(i);
-            float percentDif = fillPercentages[i] - cons[i].getFillPercentageForCharging(dir.getOpposite());
+            float percentDif = fillPercentages[i] - sneighbors[i].getFillPercentageForCharging(dir.getOpposite());
             if (percentDif > distributionBuffer) {
                 int amountToCharge = (int) Math.ceil(maxSpreadThisTick * percentDif / percentDifferenceTotal);
-                container.consume(cons[i].charge(dir.getOpposite(), amountToCharge));
+                container.consume(sneighbors[i].charge(dir.getOpposite(), amountToCharge));
             }
         }
     }
