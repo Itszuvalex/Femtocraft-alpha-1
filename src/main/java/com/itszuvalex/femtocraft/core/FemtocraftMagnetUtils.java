@@ -7,9 +7,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,10 +41,10 @@ public class FemtocraftMagnetUtils {
                                                   double delta) {
         float radius = strength * strengthToRadiusMultiplier;
 //
-//        AxisAlignedBB bb = AxisAlignedBB.getAABBPool().getAABB(
-//                x - radius, y - radius, z - radius, x + radius, y + radius, z + radius);
-//        List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, bb);
-        List<Entity> entities = new ArrayList<Entity>(world.getLoadedEntityList());
+        AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(
+                x - radius, y - radius, z - radius, x + radius, y + radius, z + radius);
+        List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, bb);
+//        List<Entity> entities = new ArrayList<Entity>(world.getLoadedEntityList());
         for (Entity entity : entities) {
             double distSqr = entity.getDistanceSq(x, y, z);
             if (distSqr > (radius * radius)) continue;
