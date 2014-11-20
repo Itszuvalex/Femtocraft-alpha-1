@@ -46,7 +46,7 @@ public class CryogenActiveHandler implements ICryogenHandler {
     public void usedBlockForPower(World world, int x, int y, int z) {
         if (world.isAirBlock(x, y, z)) {
             if (world.getBlock(x, y - 1, z).isSideSolid(world, x, y - 1, z, ForgeDirection.UP)) {
-                world.setBlock(x, y - 1, z, Blocks.snow_layer);
+                world.setBlock(x, y, z, Blocks.snow_layer);
             }
         } else {
             Block block = world.getBlock(x, y, z);
