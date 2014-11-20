@@ -110,7 +110,7 @@ public class ManagerResearch {
         }
         PlayerResearch r = new PlayerResearch(username);
 
-//        addFreeResearches(r);
+        addFreeResearches(r);
         addKnownTechnologies(r);
         if (debug) {
             addAllResearches(r);

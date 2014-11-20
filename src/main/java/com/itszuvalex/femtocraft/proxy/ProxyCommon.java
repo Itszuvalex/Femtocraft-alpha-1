@@ -99,6 +99,10 @@ public class ProxyCommon {
                 "TileEntityFemtoCubeChassis");
         GameRegistry.registerTileEntity(TileEntityFemtoCubePort.class,
                 "TileEntityFemtoCubePort");
+        GameRegistry.registerTileEntity(TileEntityCryoEndothermalChargingBase.class,
+                "TileEntityCryoEndothermalChargingBase");
+        GameRegistry.registerTileEntity(TileEntityCryoEndothermalChargingCoil.class,
+                "TileEntityCryoEndothermalChargingCoil");
         GameRegistry.registerTileEntity(TileEntityNanoFissionReactorCore.class, "TileEntityNanoFissionReactorCore");
         GameRegistry.registerTileEntity(TileEntityNanoFissionReactorHousing.class,
                 "TileEntityNanoFissionReactorHousing");
@@ -125,7 +129,8 @@ public class ProxyCommon {
                 "TileEntityVacuumTube");
         GameRegistry.registerTileEntity(TileEntityAtmosphericChargingBase.class,
                 "TileEntityAtmosphericChargingBase");
-        GameRegistry.registerTileEntity(TileEntityMagneticInductionGenerator.class, "TileEntityMagneticInductionGenerator");
+        GameRegistry.registerTileEntity(TileEntityMagneticInductionGenerator.class,
+                "TileEntityMagneticInductionGenerator");
         GameRegistry.registerTileEntity(TileEntitySuctionPipe.class,
                 "TileEntitySuctionPipe");
 

@@ -22,19 +22,22 @@
 package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.core.blocks.BlockBase;
+import com.itszuvalex.femtocraft.core.blocks.TileContainer;
+import com.itszuvalex.femtocraft.power.tiles.TileEntityCryoEndothermalChargingCoil;
 import com.itszuvalex.femtocraft.proxy.ProxyClient;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/6/14.
  */
-public class BlockCryoEndothermalChargingCoil extends BlockBase {
+public class BlockCryoEndothermalChargingCoil extends TileContainer {
     public IIcon coilConnector, coilConnectorTop;
 
     public BlockCryoEndothermalChargingCoil() {
@@ -70,6 +73,11 @@ public class BlockCryoEndothermalChargingCoil extends BlockBase {
     public boolean isBlockSolid(IBlockAccess par1iBlockAccess, int par2,
                                 int par3, int par4, int par5) {
         return false;
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World world, int metadata) {
+        return new TileEntityCryoEndothermalChargingCoil();
     }
 
     @Override

@@ -22,16 +22,19 @@
 package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.core.blocks.BlockBase;
+import com.itszuvalex.femtocraft.core.blocks.TileContainer;
+import com.itszuvalex.femtocraft.power.tiles.TileEntityCryoEndothermalChargingBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/6/14.
  */
-public class BlockCryoEndothermalChargingBase extends BlockBase {
+public class BlockCryoEndothermalChargingBase extends TileContainer {
     public BlockCryoEndothermalChargingBase() {
         super(Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab());
@@ -43,5 +46,10 @@ public class BlockCryoEndothermalChargingBase extends BlockBase {
     public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
                                                        + ":" + "BlockCryoEndothermalChargingBase");
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World world, int metadata) {
+        return new TileEntityCryoEndothermalChargingBase();
     }
 }
