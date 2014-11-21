@@ -21,7 +21,7 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
-import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
+import com.itszuvalex.femtocraft.FemtocraftGuiConstants;
 import com.itszuvalex.femtocraft.api.IInterfaceDevice;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
@@ -297,7 +297,7 @@ public class TileEntityNanoCubePort extends TileEntityPowerBase implements
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.NanoCubeGuiID();
+        return FemtocraftGuiConstants.NanoCubeGuiID();
     }
 
     @Override

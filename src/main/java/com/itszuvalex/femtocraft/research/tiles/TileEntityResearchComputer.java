@@ -21,7 +21,7 @@
 
 package com.itszuvalex.femtocraft.research.tiles;
 
-import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
+import com.itszuvalex.femtocraft.FemtocraftGuiConstants;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 
 public class TileEntityResearchComputer extends TileEntityBase {
@@ -41,7 +41,7 @@ public class TileEntityResearchComputer extends TileEntityBase {
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.ResearchComputerGuiID();
+        return FemtocraftGuiConstants.ResearchComputerGuiID();
     }
 
 }

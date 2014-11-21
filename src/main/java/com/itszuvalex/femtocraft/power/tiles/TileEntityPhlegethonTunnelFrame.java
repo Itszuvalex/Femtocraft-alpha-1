@@ -21,7 +21,7 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
-import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
+import com.itszuvalex.femtocraft.FemtocraftGuiConstants;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelComponent;
 import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
@@ -100,7 +100,7 @@ public class TileEntityPhlegethonTunnelFrame extends TileEntityBase implements I
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.PhlegethonTunnelGuiID();
+        return FemtocraftGuiConstants.PhlegethonTunnelGuiID();
     }
 
     @Override

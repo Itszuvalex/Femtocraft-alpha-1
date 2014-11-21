@@ -21,7 +21,7 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
-import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
+import com.itszuvalex.femtocraft.FemtocraftGuiConstants;
 import com.itszuvalex.femtocraft.api.IInterfaceDevice;
 import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.api.EnumTechLevel;
@@ -137,7 +137,7 @@ public class TileEntityMicroCube extends TileEntityPowerBase {
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.MicroCubeGuiID();
+        return FemtocraftGuiConstants.MicroCubeGuiID();
     }
 
     public byte generateOutputMask() {

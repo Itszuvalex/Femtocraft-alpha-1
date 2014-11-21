@@ -24,7 +24,7 @@ package com.itszuvalex.femtocraft.research.items;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.Femtocraft$;
-import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
+import com.itszuvalex.femtocraft.FemtocraftGuiConstants;
 import com.itszuvalex.femtocraft.core.items.ItemBase;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,7 +46,7 @@ public class ItemPortableResearchComputer extends ItemBase {
     @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         par3EntityPlayer.openGui(Femtocraft$.MODULE$,
-                FemtocraftGuiHandler.ResearchComputerGuiID(),
+                FemtocraftGuiConstants.ResearchComputerGuiID(),
                 par2World, (int) par3EntityPlayer.posX,
                 (int) par3EntityPlayer.posY,
                 (int) par3EntityPlayer.posZ);

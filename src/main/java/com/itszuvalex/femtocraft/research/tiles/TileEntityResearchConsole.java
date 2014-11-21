@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.research.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
+import com.itszuvalex.femtocraft.FemtocraftGuiConstants;
 import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.api.research.ITechnologyCarrier;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
@@ -221,7 +221,7 @@ public class TileEntityResearchConsole extends TileEntityBase implements
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.ResearchConsoleGuiID();
+        return FemtocraftGuiConstants.ResearchConsoleGuiID();
     }
 
     public void startWork() {

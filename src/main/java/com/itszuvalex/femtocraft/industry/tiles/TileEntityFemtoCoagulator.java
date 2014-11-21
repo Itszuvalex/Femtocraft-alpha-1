@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.industry.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
+import com.itszuvalex.femtocraft.FemtocraftGuiConstants;
 import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.api.EnumTechLevel;
@@ -66,7 +66,7 @@ public class TileEntityFemtoCoagulator extends TileEntityBaseEntityMicroReconstr
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.FemtoCoagulatorGuiID();
+        return FemtocraftGuiConstants.FemtoCoagulatorGuiID();
     }
 
     @Override

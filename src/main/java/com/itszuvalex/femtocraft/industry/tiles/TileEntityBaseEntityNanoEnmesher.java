@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.industry.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
+import com.itszuvalex.femtocraft.FemtocraftGuiConstants;
 import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.api.DimensionalRecipe;
@@ -82,7 +82,7 @@ public class TileEntityBaseEntityNanoEnmesher extends
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.NanoEnmesherGuiID();
+        return FemtocraftGuiConstants.NanoEnmesherGuiID();
     }
 
     public int getCookProgressScaled(int i) {

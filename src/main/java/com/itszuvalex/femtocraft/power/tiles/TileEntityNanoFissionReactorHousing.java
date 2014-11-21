@@ -21,7 +21,7 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
-import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
+import com.itszuvalex.femtocraft.FemtocraftGuiConstants;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
@@ -48,7 +48,7 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.NanoFissionReactorGuiID();
+        return FemtocraftGuiConstants.NanoFissionReactorGuiID();
     }
 
     @Override

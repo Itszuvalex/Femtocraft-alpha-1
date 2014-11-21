@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.industry.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
+import com.itszuvalex.femtocraft.FemtocraftGuiConstants;
 import com.itszuvalex.femtocraft.api.industry.IAssemblerSchematic;
 import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.configuration.Configurable;
@@ -103,7 +103,7 @@ public class TileEntityBaseEntityMicroReconstructor extends
 
     @Override
     public int getGuiID() {
-        return FemtocraftGuiHandler.MicroReconstructorGuiID();
+        return FemtocraftGuiConstants.MicroReconstructorGuiID();
     }
 
     public int getMassCapacity() {
