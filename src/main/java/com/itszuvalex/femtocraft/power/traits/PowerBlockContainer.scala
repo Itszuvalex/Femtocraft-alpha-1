@@ -1,8 +1,8 @@
 package com.itszuvalex.femtocraft.power.traits
 
 import com.itszuvalex.femtocraft.api.EnumTechLevel
+import com.itszuvalex.femtocraft.api.core.Saveable
 import com.itszuvalex.femtocraft.api.power.{IPowerBlockContainer, PowerContainer}
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable
 import net.minecraftforge.common.util.ForgeDirection
 
 /**

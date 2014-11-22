@@ -22,11 +22,12 @@
 package com.itszuvalex.femtocraft.api;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
-import com.itszuvalex.femtocraft.utils.ISaveable;
+import com.itszuvalex.femtocraft.api.core.ISaveable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -34,24 +35,24 @@ import net.minecraft.nbt.NBTTagCompound;
  * Created by Christopher Harris (Itszuvalex) on 4/27/14.
  */
 public class TemporalRecipe implements Comparable, ISaveable {
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     @Configurable(comment = "ItemStack that is consumed to use this recipe.")
     public ItemStack input;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     @Configurable(comment = "Null, ItemStack[3] or ItemStack[6] (can include nulls) that dictate configuration items" +
                             " required to induce creation. Note, ItemStack[3] is associated with Nano level Horologe," +
                             " ItemStack[6] is associated with Femto.")
     public ItemStack[] configurators;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     @Configurable(comment = "ItemStack that is the result of this recipe.")
     public ItemStack output;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     @Configurable(comment = "Ticks required to craft.")
     public int ticks;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     @Configurable(comment = "TechLevel of this recipe.")
     public EnumTechLevel techLevel;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     @Configurable(comment = "Null or name of Technology that must be researched before a player can utilize this " +
                             "recipe.")
     public String tech;

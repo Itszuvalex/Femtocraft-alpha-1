@@ -21,6 +21,7 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorComponent;
@@ -29,7 +30,6 @@ import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import com.itszuvalex.femtocraft.utils.WorldLocation;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -51,9 +51,9 @@ public class TileEntityFemtoStellaratorHousing extends TileEntityBase
     public static int temperatureRating;
     public static int stability;
     private IFusionReactorCore core;
-    @FemtocraftDataUtils.Saveable(desc = true)
+    @Saveable(desc = true)
     private MultiBlockInfo info;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private WorldLocation coreLocation;
 
     public TileEntityFemtoStellaratorHousing() {
@@ -72,7 +72,6 @@ public class TileEntityFemtoStellaratorHousing extends TileEntityBase
                 core.addComponent(this);
             }
         }
-        update(worldObj, xCoord, yCoord, zCoord);
     }
 
     @Override

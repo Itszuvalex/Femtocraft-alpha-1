@@ -29,7 +29,7 @@ import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.api.AssemblerRecipe;
 import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.BaseInventory;
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable;
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

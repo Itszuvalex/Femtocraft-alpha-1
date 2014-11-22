@@ -21,13 +21,14 @@
 
 package com.itszuvalex.femtocraft.power.plasma;
 
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.power.plasma.IFusionReaction;
 import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.api.power.plasma.PlasmaFlow;
 import com.itszuvalex.femtocraft.power.plasma.volatility.VolatilityEventMagneticFluctuation;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
-import com.itszuvalex.femtocraft.utils.ISaveable;
+import com.itszuvalex.femtocraft.api.core.ISaveable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
@@ -46,28 +47,28 @@ public class FusionReaction implements IFusionReaction, ISaveable {
     //Random
     private Random random = new Random();
     //Energy
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private long energy;
     //State
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private boolean selfSustaining;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private boolean igniting;
     //Parameters
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private int ignitionProcessWindow;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private long reactionThreshold;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private long reactionFailureThreshold;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private int plasmaFlowTicksToGenerateMin;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private int plasmaFlowTicksToGenerateMax;
     //Ongoing processes
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private int ignitionProcessTicks;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private int ticksToGeneratePlasmaFlow;
 
     public FusionReaction(IFusionReactorCore core, int ignitionProcessWindow, long reactionThreshold, long reactionFailureThreshold, int plasmaFlowTicksToGenerateMin, int plasmaFlowTicksToGenerateMax) {

@@ -22,6 +22,8 @@
 package com.itszuvalex.femtocraft.utils;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.api.core.ISaveable;
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -29,8 +31,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidTank;
 import org.apache.logging.log4j.Level;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -846,22 +846,6 @@ public class FemtocraftDataUtils {
 
     public static enum EnumSaveType {
         WORLD, DESCRIPTION, ITEM
-    }
-
-    /**
-     * @param world True by default. Field will be saved/loaded when the world saves/loads.
-     * @param desc  False by default. If true, Field will be sent to client when description packets are sent, and
-     *              loaded on client.
-     * @param item  False by default. If true, Field will be saved to dropped ItemStack 's NBTTagCompound.
-     * @author Itszuvalex
-     */
-    @Retention(RetentionPolicy.RUNTIME)
-    public static @interface Saveable {
-        public boolean world() default true;
-
-        public boolean desc() default false;
-
-        public boolean item() default false;
     }
 
     public static class SaveManager {

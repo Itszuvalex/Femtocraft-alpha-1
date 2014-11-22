@@ -22,13 +22,13 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.FemtocraftGuiConstants;
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelComponent;
 import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.power.FemtocraftPowerUtils;
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -39,7 +39,7 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public class TileEntityPhlegethonTunnelFrame extends TileEntityBase implements IPhlegethonTunnelComponent,
         IPowerBlockContainer {
-    @FemtocraftDataUtils.Saveable(desc = true)
+    @Saveable(desc = true)
     private MultiBlockInfo info = new MultiBlockInfo();
 
     public TileEntityPhlegethonTunnelFrame() {

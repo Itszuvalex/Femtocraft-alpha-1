@@ -22,6 +22,7 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelAddon;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelComponent;
@@ -32,7 +33,6 @@ import com.itszuvalex.femtocraft.network.FemtocraftPacketHandler;
 import com.itszuvalex.femtocraft.network.messages.MessagePhlegethonTunnelCore;
 import com.itszuvalex.femtocraft.sound.FemtocraftSoundManager;
 import com.itszuvalex.femtocraft.utils.BaseInventory;
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.audio.ISound;
@@ -52,11 +52,11 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
         IInventory {
     public static float PowerGenBase = 150;
     public static int ContainerMax = 100000;
-    @FemtocraftDataUtils.Saveable(desc = true)
+    @Saveable(desc = true)
     private boolean active = false;
-    @FemtocraftDataUtils.Saveable(desc = true)
+    @Saveable(desc = true)
     private MultiBlockInfo info = new MultiBlockInfo();
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private BaseInventory inventory = new BaseInventory(1);
 
     @SideOnly(Side.CLIENT)

@@ -1,5 +1,6 @@
 package com.itszuvalex.femtocraft.power;
 
+import com.itszuvalex.femtocraft.api.power.ICryogenHandler;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;

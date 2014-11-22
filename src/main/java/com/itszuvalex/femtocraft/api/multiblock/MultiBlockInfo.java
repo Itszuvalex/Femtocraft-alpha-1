@@ -21,7 +21,7 @@
 
 package com.itszuvalex.femtocraft.api.multiblock;
 
-import com.itszuvalex.femtocraft.utils.ISaveable;
+import com.itszuvalex.femtocraft.api.core.ISaveable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 

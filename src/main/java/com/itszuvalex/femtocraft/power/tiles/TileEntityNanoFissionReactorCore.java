@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.FemtocraftGuiConstants;
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
@@ -31,7 +32,6 @@ import com.itszuvalex.femtocraft.network.messages.MessageFissionReactorCore;
 import com.itszuvalex.femtocraft.power.FissionReactorRegistry;
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockNanoFissionReactor;
 import com.itszuvalex.femtocraft.utils.BaseInventory;
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -67,21 +67,21 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     public static int moltenSaltTankMaxAmount = 100000;
     public static int thoriumStoreMaxAmount = 100000;
     public static int temperatureMaxAmount = 3000;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private BaseInventory inventory;
-    @FemtocraftDataUtils.Saveable(desc = true)
+    @Saveable(desc = true)
     private MultiBlockInfo info;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private FluidTank cooledSaltTank;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private FluidTank moltenSaltTank;
     private int thoriumStoreMax;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private int thoriumStoreCurrent;
     private int temperatureMax;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private float temperatureCurrent;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private float thoriumConcentrationTarget;
 
     public TileEntityNanoFissionReactorCore() {

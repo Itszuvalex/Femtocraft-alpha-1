@@ -22,10 +22,10 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.api.IInterfaceDevice;
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.power.plasma.FemtocraftPlasmaUtils;
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -35,19 +35,19 @@ import net.minecraftforge.common.util.ForgeDirection;
  * Created by Christopher Harris (Itszuvalex) on 5/10/14.
  */
 public class TileEntityPlasmaVent extends TileEntityPlasmaConduit {
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private ForgeDirection ventDirection;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private boolean ventingUnstable;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private boolean ventingTemperature;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private boolean ventingStability;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private double temperatureThreshold;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private int stabilityThreshold;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private int ventDuration;
 
     public TileEntityPlasmaVent() {

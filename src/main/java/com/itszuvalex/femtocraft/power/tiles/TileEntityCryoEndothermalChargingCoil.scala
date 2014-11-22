@@ -1,10 +1,10 @@
 package com.itszuvalex.femtocraft.power.tiles
 
+import com.itszuvalex.femtocraft.api.core.Saveable
 import com.itszuvalex.femtocraft.api.power.{ICryoEndothermalChargingAddon, ICryoEndothermalChargingBase}
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.power.CryogenRegistry
 import com.itszuvalex.femtocraft.power.tiles.TileEntityCryoEndothermalChargingCoil._
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable
 import net.minecraftforge.common.util.ForgeDirection
 
 import scala.util.Random

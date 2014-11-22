@@ -188,6 +188,6 @@ public class RenderStellaratorCore implements ISimpleBlockRenderingHandler {
 
     @java.lang.Override
     public int getRenderId() {
-        return ProxyClient.FemtocraftStellaratorCoreRenderID;
+        return ProxyClient.FemtocraftStellaratorCoreRenderID();
     }
 }

@@ -71,7 +71,7 @@ public class BlockNanoCable extends BlockMicroCable {
 
     @Override
     public int getRenderType() {
-        return ProxyClient.nanoCableRenderID;
+        return ProxyClient.nanoCableRenderID();
     }
 
     @Override

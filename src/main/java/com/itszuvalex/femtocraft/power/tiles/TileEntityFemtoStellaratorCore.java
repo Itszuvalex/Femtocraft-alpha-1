@@ -21,6 +21,7 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorComponent;
@@ -30,7 +31,6 @@ import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.power.plasma.FusionReactorCore;
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -58,14 +58,14 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
         super.saveToDescriptionCompound(compound);
     }
 
-    @FemtocraftDataUtils.Saveable()
+    @Saveable()
     private FusionReactorCore core;
-    @FemtocraftDataUtils.Saveable(desc = true)
+    @Saveable(desc = true)
     private MultiBlockInfo info;
 
-    @FemtocraftDataUtils.Saveable(desc = true)
+    @Saveable(desc = true)
     private boolean selfSustaining = false;
-    @FemtocraftDataUtils.Saveable(desc = true)
+    @Saveable(desc = true)
     private boolean igniting = false;
 
     public TileEntityFemtoStellaratorCore() {

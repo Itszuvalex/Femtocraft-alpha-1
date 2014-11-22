@@ -25,7 +25,7 @@ import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
-import com.itszuvalex.femtocraft.utils.ISaveable;
+import com.itszuvalex.femtocraft.api.core.ISaveable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;

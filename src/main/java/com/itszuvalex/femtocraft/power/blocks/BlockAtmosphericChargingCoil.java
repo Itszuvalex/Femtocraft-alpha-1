@@ -72,7 +72,7 @@ public class BlockAtmosphericChargingCoil extends BlockBase implements IAtmosphe
 
     @Override
     public int getRenderType() {
-        return ProxyClient.FemtocraftChargingCoilRenderID;
+        return ProxyClient.FemtocraftChargingCoilRenderID();
     }
 
     @Override

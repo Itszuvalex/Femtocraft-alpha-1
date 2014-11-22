@@ -53,7 +53,7 @@ public class BlockFemtoStellaratorFocus extends TileContainer {
 
     @Override
     public int getRenderType() {
-        return ProxyClient.FemtocraftStellaratorFocusRenderID;
+        return ProxyClient.FemtocraftStellaratorFocusRenderID();
     }
 
     @Override

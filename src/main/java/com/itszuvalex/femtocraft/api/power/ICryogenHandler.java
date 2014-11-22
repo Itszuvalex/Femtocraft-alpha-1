@@ -1,4 +1,4 @@
-package com.itszuvalex.femtocraft.power;
+package com.itszuvalex.femtocraft.api.power;
 
 import net.minecraft.world.World;
 

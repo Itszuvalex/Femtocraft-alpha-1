@@ -66,7 +66,7 @@ public class BlockCryoEndothermalChargingCoil extends TileContainer {
 
     @Override
     public int getRenderType() {
-        return ProxyClient.FemtocraftCryoEndothermalChargingCoilRenderID;
+        return ProxyClient.FemtocraftCryoEndothermalChargingCoilRenderID();
     }
 
     @Override

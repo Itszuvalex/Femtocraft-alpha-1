@@ -114,7 +114,7 @@ public class RenderMicroCable implements ISimpleBlockRenderingHandler {
 
     @Override
     public int getRenderId() {
-        return ProxyClient.microCableRenderID;
+        return ProxyClient.microCableRenderID();
     }
 
     private boolean renderCable(BlockMicroCable cable, float x, float y, float z, boolean[] connections) {

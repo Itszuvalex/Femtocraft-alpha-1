@@ -23,10 +23,10 @@ package com.itszuvalex.femtocraft.research.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.FemtocraftGuiConstants;
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.api.research.ITechnologyCarrier;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -38,19 +38,19 @@ public class TileEntityResearchConsole extends TileEntityBase implements
         IInventory {
     private static final int ticksToResearch = 400;
     public
-    @FemtocraftDataUtils.Saveable(desc = true)
+    @Saveable(desc = true)
     String displayTech = null;
     private
-    @FemtocraftDataUtils.Saveable(desc = true)
+    @Saveable(desc = true)
     String researchingTech = null;
     private
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     int progress = 0;
     private
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     int progressMax = 0;
     private
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     ItemStack[] inventory = new ItemStack[10];
 
     public TileEntityResearchConsole() {

@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft.core.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.Femtocraft$;
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
@@ -36,7 +37,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityBase extends TileEntity {
     private
-    @FemtocraftDataUtils.Saveable(desc = true, item = true)
+    @Saveable(desc = true, item = true)
     String owner;
 
     public TileEntityBase() {

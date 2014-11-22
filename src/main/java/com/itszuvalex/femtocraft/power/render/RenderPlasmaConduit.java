@@ -313,6 +313,6 @@ public class RenderPlasmaConduit implements ISimpleBlockRenderingHandler {
 
     @Override
     public int getRenderId() {
-        return ProxyClient.FemtocraftPlasmaConduitID;
+        return ProxyClient.FemtocraftPlasmaConduitID();
     }
 }

@@ -26,7 +26,7 @@ import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.core.MagnetRegistry;
 import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.render.RenderUtils;
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable;
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;

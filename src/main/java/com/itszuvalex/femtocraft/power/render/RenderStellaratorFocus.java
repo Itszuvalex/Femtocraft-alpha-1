@@ -159,6 +159,6 @@ public class RenderStellaratorFocus implements ISimpleBlockRenderingHandler {
 
     @Override
     public int getRenderId() {
-        return ProxyClient.FemtocraftStellaratorFocusRenderID;
+        return ProxyClient.FemtocraftStellaratorFocusRenderID();
     }
 }

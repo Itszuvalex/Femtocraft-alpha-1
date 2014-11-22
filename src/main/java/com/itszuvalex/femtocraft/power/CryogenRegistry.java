@@ -1,5 +1,6 @@
 package com.itszuvalex.femtocraft.power;
 
+import com.itszuvalex.femtocraft.api.power.ICryogenHandler;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;

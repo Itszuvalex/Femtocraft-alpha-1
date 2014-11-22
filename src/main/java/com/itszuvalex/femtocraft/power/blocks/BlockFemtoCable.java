@@ -71,7 +71,7 @@ public class BlockFemtoCable extends BlockMicroCable {
 
     @Override
     public int getRenderType() {
-        return ProxyClient.femtoCableRenderID;
+        return ProxyClient.femtoCableRenderID();
     }
 
     @Override

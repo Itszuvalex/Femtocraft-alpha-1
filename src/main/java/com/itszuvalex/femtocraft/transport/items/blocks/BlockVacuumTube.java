@@ -144,7 +144,7 @@ public class BlockVacuumTube extends TileContainer {
 
     @Override
     public int getRenderType() {
-        return ProxyClient.FemtocraftVacuumTubeRenderID;
+        return ProxyClient.FemtocraftVacuumTubeRenderID();
     }
 
     @Override

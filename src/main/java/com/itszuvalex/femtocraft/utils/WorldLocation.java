@@ -21,6 +21,7 @@
 
 package com.itszuvalex.femtocraft.utils;
 
+import com.itszuvalex.femtocraft.api.core.ISaveable;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;

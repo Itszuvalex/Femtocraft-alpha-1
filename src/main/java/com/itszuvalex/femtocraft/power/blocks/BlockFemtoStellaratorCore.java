@@ -54,7 +54,7 @@ public class BlockFemtoStellaratorCore extends TileContainer {
 
     @Override
     public int getRenderType() {
-        return ProxyClient.FemtocraftStellaratorCoreRenderID;
+        return ProxyClient.FemtocraftStellaratorCoreRenderID();
     }
 
     @Override

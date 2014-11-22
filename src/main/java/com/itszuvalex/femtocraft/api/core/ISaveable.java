@@ -19,7 +19,7 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.utils;
+package com.itszuvalex.femtocraft.api.core;
 
 import net.minecraft.nbt.NBTTagCompound;
 

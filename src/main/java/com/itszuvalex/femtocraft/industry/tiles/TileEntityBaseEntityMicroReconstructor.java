@@ -28,7 +28,7 @@ import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.api.AssemblerRecipe;
 import com.itszuvalex.femtocraft.api.EnumTechLevel;
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable;
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

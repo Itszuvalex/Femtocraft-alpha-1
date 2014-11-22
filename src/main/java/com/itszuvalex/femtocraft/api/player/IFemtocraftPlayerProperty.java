@@ -1,6 +1,6 @@
-package com.itszuvalex.femtocraft.player;
+package com.itszuvalex.femtocraft.api.player;
 
-import com.itszuvalex.femtocraft.utils.ISaveable;
+import com.itszuvalex.femtocraft.api.core.ISaveable;
 import net.minecraft.nbt.NBTTagCompound;
 
 /**

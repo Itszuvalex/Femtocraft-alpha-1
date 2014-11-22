@@ -116,7 +116,7 @@ public class RenderFemtoCable implements ISimpleBlockRenderingHandler {
 
     @Override
     public int getRenderId() {
-        return ProxyClient.microCableRenderID;
+        return ProxyClient.microCableRenderID();
     }
 
     private boolean renderCable(BlockFemtoCable cable, float x, float y, float z, boolean[] connections) {

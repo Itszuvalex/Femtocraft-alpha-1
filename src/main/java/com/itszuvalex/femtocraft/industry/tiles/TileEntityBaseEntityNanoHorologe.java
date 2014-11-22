@@ -23,12 +23,12 @@ package com.itszuvalex.femtocraft.industry.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.FemtocraftGuiConstants;
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.configuration.Configurable;
 import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.api.TemporalRecipe;
 import com.itszuvalex.femtocraft.utils.BaseInventory;
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -52,15 +52,15 @@ public class TileEntityBaseEntityNanoHorologe extends
     public static int POWER_TO_COOK = 80;
     @Configurable(comment = "Multiplier for tick processing time of Temporal Recipes.")
     public static float TICKS_TO_COOK_MULTIPLIER = 1.f;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     public ItemStack[] chronoConfigStacks = null;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     public ItemStack chronoStack = null;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     protected BaseInventory inventory;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private int cookTime = 0;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private int ticksToCook;
 
     @Override

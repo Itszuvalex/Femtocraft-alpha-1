@@ -88,7 +88,7 @@ public class BlockPlasmaConduit extends TileContainer {
 
     @Override
     public int getRenderType() {
-        return ProxyClient.FemtocraftPlasmaConduitID;
+        return ProxyClient.FemtocraftPlasmaConduitID();
     }
 
     @Override

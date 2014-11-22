@@ -22,10 +22,10 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.FemtocraftGuiConstants;
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -39,7 +39,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 public class TileEntityNanoFissionReactorHousing extends TileEntityBase implements IMultiBlockComponent, IFluidHandler,
         IInventory {
-    @FemtocraftDataUtils.Saveable(desc = true)
+    @Saveable(desc = true)
     private MultiBlockInfo info;
 
     public TileEntityNanoFissionReactorHousing() {

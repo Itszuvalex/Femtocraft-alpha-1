@@ -63,7 +63,7 @@ public class BlockAtmosphericChargingBase extends BlockPowerContainer implements
 
     @Override
     public int getRenderType() {
-        return ProxyClient.FemtocraftChargingBaseRenderID;
+        return ProxyClient.FemtocraftChargingBaseRenderID();
     }
 
     @Override

@@ -24,8 +24,7 @@ package com.itszuvalex.femtocraft.transport.liquids.tiles;
 import com.itszuvalex.femtocraft.api.IInterfaceDevice;
 import com.itszuvalex.femtocraft.api.transport.ISuctionPipe;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable;
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -41,25 +40,25 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
     static final int renderLength = 10;
     private final float TRANSFER_RATIO = .1f;
     public
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     boolean[] tankconnections;
     public
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     boolean[] pipeconnections;
     public IFluidHandler[] neighbors;
     private
-    @FemtocraftDataUtils.Saveable(desc = true)
+    @Saveable(desc = true)
     FluidTank tank;
     private
-    @FemtocraftDataUtils.Saveable(desc = true)
+    @Saveable(desc = true)
     boolean output;
     private
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     int pressure;
     // Not @Saveable due to special rendering requirements
     private FluidStack renderFluid;
     private
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     int renderTick;
     @Saveable(desc = true)
     private boolean blackout = false;

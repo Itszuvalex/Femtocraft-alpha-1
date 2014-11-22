@@ -180,6 +180,6 @@ public class RenderChargingCapacitor implements ISimpleBlockRenderingHandler {
 
     @Override
     public int getRenderId() {
-        return ProxyClient.FemtocraftChargingCapacitorRenderID;
+        return ProxyClient.FemtocraftChargingCapacitorRenderID();
     }
 }

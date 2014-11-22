@@ -85,7 +85,7 @@ public class RenderCryoEndothermalChargingCoil implements
 
     @Override
     public int getRenderId() {
-        return ProxyClient.FemtocraftCryoEndothermalChargingCoilRenderID;
+        return ProxyClient.FemtocraftCryoEndothermalChargingCoilRenderID();
     }
 
     private void renderCoil(BlockCryoEndothermalChargingCoil coil, int x, int y, int z) {

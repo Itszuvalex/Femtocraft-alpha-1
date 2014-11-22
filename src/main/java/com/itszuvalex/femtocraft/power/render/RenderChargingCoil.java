@@ -85,7 +85,7 @@ public class RenderChargingCoil implements
 
     @Override
     public int getRenderId() {
-        return ProxyClient.FemtocraftChargingCoilRenderID;
+        return ProxyClient.FemtocraftChargingCoilRenderID();
     }
 
     private void renderCoil(BlockAtmosphericChargingCoil coil, int x, int y, int z) {

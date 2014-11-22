@@ -21,10 +21,9 @@
 
 package com.itszuvalex.femtocraft.api.power.plasma;
 
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
-import com.itszuvalex.femtocraft.api.power.plasma.PlasmaFlow;
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
-import com.itszuvalex.femtocraft.utils.ISaveable;
+import com.itszuvalex.femtocraft.api.core.ISaveable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
@@ -42,11 +41,11 @@ import java.util.List;
  */
 public class PlasmaContainer implements IPlasmaContainer, ISaveable {
     private static final String flowListKey = "Flows";
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private int maxCapacity;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private int stability;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private int temperatureRating;
     private ArrayList<IPlasmaFlow> flows;
     private ArrayList<IPlasmaFlow> pendingRemove;

@@ -21,12 +21,12 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.api.power.plasma.PlasmaContainer;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -45,7 +45,7 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
 
     //For display purposes
     public boolean containsPlasma = false;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private PlasmaContainer plasma = new PlasmaContainer(capacity, stability, temperatureRating);
 
     private ForgeDirection input;

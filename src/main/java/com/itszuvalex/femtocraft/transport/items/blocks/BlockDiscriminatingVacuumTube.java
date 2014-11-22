@@ -191,7 +191,7 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
 
     @Override
     public int getRenderType() {
-        return ProxyClient.FemtocraftVacuumTubeRenderID;
+        return ProxyClient.FemtocraftVacuumTubeRenderID();
     }
 
     @Override

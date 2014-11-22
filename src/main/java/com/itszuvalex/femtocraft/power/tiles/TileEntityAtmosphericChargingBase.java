@@ -21,11 +21,11 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.power.IAtmosphericChargingAddon;
 import com.itszuvalex.femtocraft.api.power.IAtmosphericChargingBase;
 import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.api.EnumTechLevel;
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -36,7 +36,7 @@ public class TileEntityAtmosphericChargingBase extends TileEntityPowerProducer {
     public int numCoils;
     public float powerPerTick;
     public
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     float storedPowerIncrement;
 
     @Override

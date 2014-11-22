@@ -21,6 +21,7 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
@@ -30,7 +31,6 @@ import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.api.power.plasma.PlasmaContainer;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.api.EnumTechLevel;
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -46,9 +46,9 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
     public static int powerStorage = 500000;
     public static int stabilityRating = 8000;
     public static int temperatureRating = 8000;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private PlasmaContainer plasma;
-    @FemtocraftDataUtils.Saveable(desc = true)
+    @Saveable(desc = true)
     private MultiBlockInfo info;
 
     @Override

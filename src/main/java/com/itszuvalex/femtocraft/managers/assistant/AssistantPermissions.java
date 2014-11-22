@@ -21,15 +21,16 @@
 
 package com.itszuvalex.femtocraft.managers.assistant;
 
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
-import com.itszuvalex.femtocraft.utils.ISaveable;
+import com.itszuvalex.femtocraft.api.core.ISaveable;
 import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 8/10/14.
  */
 public class AssistantPermissions implements ISaveable, Comparable<AssistantPermissions> {
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     public String assistant;
 
     public AssistantPermissions() {

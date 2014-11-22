@@ -85,7 +85,7 @@ public class RenderChargingBase implements
 
     @Override
     public int getRenderId() {
-        return ProxyClient.FemtocraftChargingBaseRenderID;
+        return ProxyClient.FemtocraftChargingBaseRenderID();
     }
 
     void renderBase(BlockAtmosphericChargingBase base, int x, int y, int z) {

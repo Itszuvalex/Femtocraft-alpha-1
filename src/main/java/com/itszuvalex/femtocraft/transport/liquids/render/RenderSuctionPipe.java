@@ -118,7 +118,7 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
 
     @Override
     public int getRenderId() {
-        return ProxyClient.FemtocraftSuctionPipeRenderID;
+        return ProxyClient.FemtocraftSuctionPipeRenderID();
     }
 
     @SuppressWarnings("incomplete-switch")

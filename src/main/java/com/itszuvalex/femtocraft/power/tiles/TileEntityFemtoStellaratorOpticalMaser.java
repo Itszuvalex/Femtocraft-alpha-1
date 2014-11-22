@@ -21,6 +21,7 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.api.power.PowerContainer;
@@ -30,7 +31,6 @@ import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.api.EnumTechLevel;
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
 import com.itszuvalex.femtocraft.utils.WorldLocation;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -62,16 +62,16 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
         return sustaining;
     }
 
-    @FemtocraftDataUtils.Saveable(desc = true)
+    @Saveable(desc = true)
     private boolean igniting;
-    @FemtocraftDataUtils.Saveable(desc = true)
+    @Saveable(desc = true)
     private boolean sustaining;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private boolean warmed;
-    @FemtocraftDataUtils.Saveable(desc = true)
+    @Saveable(desc = true)
     private MultiBlockInfo info;
     private IFusionReactorCore core;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private WorldLocation coreLocation;
 
     public TileEntityFemtoStellaratorOpticalMaser() {

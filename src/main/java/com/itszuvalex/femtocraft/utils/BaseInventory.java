@@ -21,8 +21,9 @@
 
 package com.itszuvalex.femtocraft.utils;
 
+import com.itszuvalex.femtocraft.api.core.ISaveable;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.EnumSaveType;
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils.Saveable;
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;

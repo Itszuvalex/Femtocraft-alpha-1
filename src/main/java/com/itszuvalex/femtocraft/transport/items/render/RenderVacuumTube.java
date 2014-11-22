@@ -149,7 +149,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
 
     @Override
     public int getRenderId() {
-        return ProxyClient.FemtocraftVacuumTubeRenderID;
+        return ProxyClient.FemtocraftVacuumTubeRenderID();
     }
 
     private void renderTube(BlockVacuumTube tube, int x, int y, int z,

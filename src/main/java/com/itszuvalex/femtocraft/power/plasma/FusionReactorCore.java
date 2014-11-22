@@ -21,10 +21,11 @@
 
 package com.itszuvalex.femtocraft.power.plasma;
 
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.power.plasma.*;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
-import com.itszuvalex.femtocraft.utils.ISaveable;
+import com.itszuvalex.femtocraft.api.core.ISaveable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -45,9 +46,9 @@ public class FusionReactorCore implements IFusionReactorCore,
 //    public static int ignitionProcessWindow = 20 * 10;
 
     //Parameters
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private PlasmaContainer plasmaContainer;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     private FusionReaction reaction;
 
 

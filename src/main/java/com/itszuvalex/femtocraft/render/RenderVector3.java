@@ -21,19 +21,20 @@
 
 package com.itszuvalex.femtocraft.render;
 
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
-import com.itszuvalex.femtocraft.utils.ISaveable;
+import com.itszuvalex.femtocraft.api.core.ISaveable;
 import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/16/14.
  */
 public class RenderVector3 implements ISaveable {
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     double x;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     double y;
-    @FemtocraftDataUtils.Saveable
+    @Saveable
     double z;
 
     public RenderVector3() {

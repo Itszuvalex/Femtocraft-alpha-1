@@ -59,7 +59,7 @@ public class BlockSuctionPipe extends TileContainer {
 
     @Override
     public int getRenderType() {
-        return ProxyClient.FemtocraftSuctionPipeRenderID;
+        return ProxyClient.FemtocraftSuctionPipeRenderID();
     }
 
     @Override
