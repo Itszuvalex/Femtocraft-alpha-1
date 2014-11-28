@@ -46,20 +46,20 @@ public class ContainerEncoder extends ContainerInv<TileEntityEncoder> {
 
         for (int y = 0; y < 3; ++y) {
             for (int x = 0; x < 3; ++x) {
-                this.addSlotToContainer(new Slot(inventory, x + 3 * y,
+                this.addSlotToContainer(new Slot(inventory(), x + 3 * y,
                         31 + 18 * x, 16 + 18 * y));
             }
         }
 
-        DisplaySlot recipeOutput = new DisplaySlot(inventory, 9, 87, 34);
+        DisplaySlot recipeOutput = new DisplaySlot(inventory(), 9, 87, 34);
         recipeOutput.setBackgroundIcon(DisplaySlot.noPlaceDisplayIcon);
         this.addSlotToContainer(recipeOutput);
 
-        Slot schematicInput = new Slot(inventory, 10, 120, 8);
+        Slot schematicInput = new Slot(inventory(), 10, 120, 8);
         schematicInput.setBackgroundIcon(ItemAssemblySchematic.placeholderIcon);
         this.addSlotToContainer(schematicInput);
 
-        this.addSlotToContainer(new OutputSlot(inventory, 11, 120, 50));
+        this.addSlotToContainer(new OutputSlot(inventory(), 11, 120, 50));
 
 
         addPlayerInventorySlots(par1InventoryPlayer);
@@ -68,8 +68,8 @@ public class ContainerEncoder extends ContainerInv<TileEntityEncoder> {
     @Override
     public void addCraftingToCrafters(ICrafting par1ICrafting) {
         super.addCraftingToCrafters(par1ICrafting);
-        sendUpdateToCrafter(this, par1ICrafting, 0, inventory.timeWorked);
-        sendUpdateToCrafter(this, par1ICrafting, 1, inventory.getCurrentPower());
+        sendUpdateToCrafter(this, par1ICrafting, 0, inventory().timeWorked);
+        sendUpdateToCrafter(this, par1ICrafting, 1, inventory().getCurrentPower());
     }
 
     /**
@@ -82,24 +82,24 @@ public class ContainerEncoder extends ContainerInv<TileEntityEncoder> {
         for (Object crafter : this.crafters) {
             ICrafting icrafting = (ICrafting) crafter;
 
-            if (this.lastCookTime != inventory.timeWorked) {
-                sendUpdateToCrafter(this, icrafting, 0, inventory.timeWorked);
+            if (this.lastCookTime != inventory().timeWorked) {
+                sendUpdateToCrafter(this, icrafting, 0, inventory().timeWorked);
             }
-            if (this.lastPower != inventory.getCurrentPower()) {
-                sendUpdateToCrafter(this, icrafting, 1, inventory.getCurrentPower());
+            if (this.lastPower != inventory().getCurrentPower()) {
+                sendUpdateToCrafter(this, icrafting, 1, inventory().getCurrentPower());
             }
-            if (this.lastMass != inventory.getMassAmount()) {
-                sendUpdateToCrafter(this, icrafting, 2, inventory.getMassAmount());
+            if (this.lastMass != inventory().getMassAmount()) {
+                sendUpdateToCrafter(this, icrafting, 2, inventory().getMassAmount());
             }
         }
 
-        this.lastCookTime = inventory.timeWorked;
-        this.lastPower = inventory.getCurrentPower();
-        this.lastMass = inventory.getMassAmount();
+        this.lastCookTime = inventory().timeWorked;
+        this.lastPower = inventory().getCurrentPower();
+        this.lastMass = inventory().getMassAmount();
     }
 
     @Override
-    protected boolean eligibleForInput(ItemStack item) {
+    public boolean eligibleForInput(ItemStack item) {
         return item.getItem() instanceof IAssemblerSchematic;
     }
 
@@ -107,16 +107,16 @@ public class ContainerEncoder extends ContainerInv<TileEntityEncoder> {
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int par1, int par2) {
         if (par1 == 0) {
-            inventory.timeWorked = par2;
+            inventory().timeWorked = par2;
         }
         if (par1 == 1) {
-            inventory.setCurrentStorage(par2);
+            inventory().setCurrentStorage(par2);
         }
         if (par1 == 2) {
             if (par2 > 0) {
-                inventory.setFluidAmount(par2);
+                inventory().setFluidAmount(par2);
             } else {
-                inventory.clearFluid();
+                inventory().clearFluid();
             }
         }
     }

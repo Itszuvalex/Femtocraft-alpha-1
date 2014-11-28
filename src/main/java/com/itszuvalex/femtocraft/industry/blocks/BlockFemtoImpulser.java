@@ -78,7 +78,7 @@ public class BlockFemtoImpulser extends TileContainer {
         int l = par1World.getBlockMetadata(par2, par3, par4);
         TileEntity tileentity = par1World.getTileEntity(par2, par3, par4);
         keepFurnaceInventory = true;
-        shouldDrop = false;
+        TileContainer.shouldDrop_$eq(false);
         if (par0) {
             par1World.setBlock(par2, par3, par4,
                     Femtocraft.blockFemtoImpulserLit());
@@ -86,7 +86,7 @@ public class BlockFemtoImpulser extends TileContainer {
             par1World.setBlock(par2, par3, par4,
                     Femtocraft.blockFemtoImpulserUnlit());
         }
-        shouldDrop = true;
+        TileContainer.shouldDrop_$eq(true);
         keepFurnaceInventory = false;
         par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
 

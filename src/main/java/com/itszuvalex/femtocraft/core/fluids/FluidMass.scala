@@ -18,35 +18,23 @@
  *  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *  *****************************************************************************
  */
+package com.itszuvalex.femtocraft.core.fluids
 
-package com.itszuvalex.femtocraft.core.fluids;
+import com.itszuvalex.femtocraft.Femtocraft
+import net.minecraft.item.EnumRarity
+import net.minecraftforge.common.util.ForgeDirection
+import net.minecraftforge.fluids.Fluid
 
-import com.itszuvalex.femtocraft.Femtocraft;
-import net.minecraft.item.EnumRarity;
-import net.minecraft.util.IIcon;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
+class FluidMass extends Fluid("Mass") {
+  setUnlocalizedName("FluidMass")
+  setLuminosity(1)
+  setDensity(5000)
+  setTemperature(600)
+  setViscosity(3000)
+  setGaseous(false)
+  setRarity(EnumRarity.rare)
 
-public class FluidMass extends Fluid {
+  override def getStillIcon = Femtocraft.blockFluidMass.getBlockTextureFromSide(ForgeDirection.UP.ordinal)
 
-    public FluidMass() {
-        super("Mass");
-        setUnlocalizedName("FluidMass");
-        setLuminosity(1);
-        setDensity(5000);
-        setTemperature(600);
-        setViscosity(3000);
-        setGaseous(false);
-        setRarity(EnumRarity.rare);
-    }
-
-    @Override
-    public IIcon getStillIcon() {
-        return Femtocraft.blockFluidMass().getBlockTextureFromSide(ForgeDirection.UP.ordinal());
-    }
-
-    @Override
-    public IIcon getFlowingIcon() {
-        return Femtocraft.blockFluidMass().getBlockTextureFromSide(ForgeDirection.NORTH.ordinal());
-    }
+  override def getFlowingIcon = Femtocraft.blockFluidMass.getBlockTextureFromSide(ForgeDirection.NORTH.ordinal)
 }
