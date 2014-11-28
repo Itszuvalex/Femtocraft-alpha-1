@@ -44,20 +44,20 @@ public class ContainerFemtoEntangler extends ContainerInv<TileEntityFemtoEntangl
     public ContainerFemtoEntangler(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
                                    TileEntityFemtoEntangler par2TileEntityFurnace) {
         super(player, par2TileEntityFurnace, 0, 13);
-        this.addSlotToContainer(new Slot(inventory, 0, 89, 35));
-        this.addSlotToContainer(new Slot(inventory, 1, 62, 8));
-        this.addSlotToContainer(new Slot(inventory, 2, 80, 8));
-        this.addSlotToContainer(new Slot(inventory, 3, 98, 8));
-        this.addSlotToContainer(new Slot(inventory, 4, 116, 8));
-        this.addSlotToContainer(new Slot(inventory, 5, 62, 26));
-        this.addSlotToContainer(new Slot(inventory, 6, 116, 26));
-        this.addSlotToContainer(new Slot(inventory, 7, 62, 44));
-        this.addSlotToContainer(new Slot(inventory, 8, 116, 44));
-        this.addSlotToContainer(new Slot(inventory, 9, 62, 62));
-        this.addSlotToContainer(new Slot(inventory, 10, 80, 62));
-        this.addSlotToContainer(new Slot(inventory, 11, 98, 62));
-        this.addSlotToContainer(new Slot(inventory, 12, 116, 62));
-        this.addSlotToContainer(new OutputSlot(inventory, 13, 147, 35));
+        this.addSlotToContainer(new Slot(inventory(), 0, 89, 35));
+        this.addSlotToContainer(new Slot(inventory(), 1, 62, 8));
+        this.addSlotToContainer(new Slot(inventory(), 2, 80, 8));
+        this.addSlotToContainer(new Slot(inventory(), 3, 98, 8));
+        this.addSlotToContainer(new Slot(inventory(), 4, 116, 8));
+        this.addSlotToContainer(new Slot(inventory(), 5, 62, 26));
+        this.addSlotToContainer(new Slot(inventory(), 6, 116, 26));
+        this.addSlotToContainer(new Slot(inventory(), 7, 62, 44));
+        this.addSlotToContainer(new Slot(inventory(), 8, 116, 44));
+        this.addSlotToContainer(new Slot(inventory(), 9, 62, 62));
+        this.addSlotToContainer(new Slot(inventory(), 10, 80, 62));
+        this.addSlotToContainer(new Slot(inventory(), 11, 98, 62));
+        this.addSlotToContainer(new Slot(inventory(), 12, 116, 62));
+        this.addSlotToContainer(new OutputSlot(inventory(), 13, 147, 35));
 
         addPlayerInventorySlots(par1InventoryPlayer);
     }
@@ -65,9 +65,9 @@ public class ContainerFemtoEntangler extends ContainerInv<TileEntityFemtoEntangl
     @Override
     public void addCraftingToCrafters(ICrafting par1ICrafting) {
         super.addCraftingToCrafters(par1ICrafting);
-        sendUpdateToCrafter(this, par1ICrafting, cookTimeID, inventory.getProgress());
-        sendUpdateToCrafter(this, par1ICrafting, cookTimeMaxID, inventory.getProgressMax());
-        sendUpdateToCrafter(this, par1ICrafting, powerID, inventory.getCurrentPower());
+        sendUpdateToCrafter(this, par1ICrafting, cookTimeID, inventory().getProgress());
+        sendUpdateToCrafter(this, par1ICrafting, cookTimeMaxID, inventory().getProgressMax());
+        sendUpdateToCrafter(this, par1ICrafting, powerID, inventory().getCurrentPower());
     }
 
     /**
@@ -80,20 +80,20 @@ public class ContainerFemtoEntangler extends ContainerInv<TileEntityFemtoEntangl
         for (Object crafter : this.crafters) {
             ICrafting icrafting = (ICrafting) crafter;
 
-            if (this.lastCookTime != this.inventory.getProgress()) {
-                sendUpdateToCrafter(this, icrafting, cookTimeID, inventory.getProgress());
+            if (this.lastCookTime != this.inventory().getProgress()) {
+                sendUpdateToCrafter(this, icrafting, cookTimeID, inventory().getProgress());
             }
-            if (this.lastCookMax != this.inventory.getProgressMax()) {
-                sendUpdateToCrafter(this, icrafting, cookTimeMaxID, inventory.getProgressMax());
+            if (this.lastCookMax != this.inventory().getProgressMax()) {
+                sendUpdateToCrafter(this, icrafting, cookTimeMaxID, inventory().getProgressMax());
             }
-            if (this.lastPower != this.inventory.getCurrentPower()) {
-                sendUpdateToCrafter(this, icrafting, powerID, inventory.getCurrentPower());
+            if (this.lastPower != this.inventory().getCurrentPower()) {
+                sendUpdateToCrafter(this, icrafting, powerID, inventory().getCurrentPower());
             }
         }
 
-        this.lastCookTime = this.inventory.getProgress();
-        this.lastCookMax = inventory.getProgressMax();
-        this.lastPower = this.inventory.getCurrentPower();
+        this.lastCookTime = this.inventory().getProgress();
+        this.lastCookMax = inventory().getProgressMax();
+        this.lastPower = this.inventory().getCurrentPower();
     }
 
     @Override
@@ -101,19 +101,19 @@ public class ContainerFemtoEntangler extends ContainerInv<TileEntityFemtoEntangl
     public void updateProgressBar(int par1, int par2) {
         switch (par1) {
             case cookTimeID:
-                this.inventory.setProgress(par2);
+                this.inventory().setProgress(par2);
                 break;
             case cookTimeMaxID:
-                this.inventory.setProgressMax(par2);
+                this.inventory().setProgressMax(par2);
                 break;
             case powerID:
-                this.inventory.setCurrentStorage(par2);
+                this.inventory().setCurrentStorage(par2);
                 break;
         }
     }
 
     @Override
-    protected boolean eligibleForInput(ItemStack item) {
+    public boolean eligibleForInput(ItemStack item) {
         return true;
     }
 }

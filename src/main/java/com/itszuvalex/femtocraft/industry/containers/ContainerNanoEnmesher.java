@@ -44,21 +44,21 @@ public class ContainerNanoEnmesher extends ContainerInv<TileEntityBaseEntityNano
     public ContainerNanoEnmesher(EntityPlayer player, InventoryPlayer par1InventoryPlayer,
                                  TileEntityBaseEntityNanoEnmesher par2TileEntityFurnace) {
         super(player, par2TileEntityFurnace, 0, 5);
-        this.addSlotToContainer(new Slot(inventory, 0, 89, 35));
-        this.addSlotToContainer(new Slot(inventory, 1, 89, 8));
-        this.addSlotToContainer(new Slot(inventory, 2, 62, 35));
-        this.addSlotToContainer(new Slot(inventory, 3, 116, 35));
-        this.addSlotToContainer(new Slot(inventory, 4, 89, 62));
-        this.addSlotToContainer(new OutputSlot(inventory, 5, 147, 35));
+        this.addSlotToContainer(new Slot(inventory(), 0, 89, 35));
+        this.addSlotToContainer(new Slot(inventory(), 1, 89, 8));
+        this.addSlotToContainer(new Slot(inventory(), 2, 62, 35));
+        this.addSlotToContainer(new Slot(inventory(), 3, 116, 35));
+        this.addSlotToContainer(new Slot(inventory(), 4, 89, 62));
+        this.addSlotToContainer(new OutputSlot(inventory(), 5, 147, 35));
         addPlayerInventorySlots(par1InventoryPlayer);
     }
 
     @Override
     public void addCraftingToCrafters(ICrafting par1ICrafting) {
         super.addCraftingToCrafters(par1ICrafting);
-        sendUpdateToCrafter(this, par1ICrafting, cookTimeID, inventory.getProgress());
-        sendUpdateToCrafter(this, par1ICrafting, cookTimeMaxID, inventory.getProgressMax());
-        sendUpdateToCrafter(this, par1ICrafting, powerID, inventory.getCurrentPower());
+        sendUpdateToCrafter(this, par1ICrafting, cookTimeID, inventory().getProgress());
+        sendUpdateToCrafter(this, par1ICrafting, cookTimeMaxID, inventory().getProgressMax());
+        sendUpdateToCrafter(this, par1ICrafting, powerID, inventory().getCurrentPower());
     }
 
     /**
@@ -71,20 +71,20 @@ public class ContainerNanoEnmesher extends ContainerInv<TileEntityBaseEntityNano
         for (Object crafter : this.crafters) {
             ICrafting icrafting = (ICrafting) crafter;
 
-            if (this.lastCookTime != this.inventory.getProgress()) {
-                sendUpdateToCrafter(this, icrafting, cookTimeID, inventory.getProgress());
+            if (this.lastCookTime != this.inventory().getProgress()) {
+                sendUpdateToCrafter(this, icrafting, cookTimeID, inventory().getProgress());
             }
-            if (this.lastCookMax != this.inventory.getProgressMax()) {
-                sendUpdateToCrafter(this, icrafting, cookTimeMaxID, inventory.getProgressMax());
+            if (this.lastCookMax != this.inventory().getProgressMax()) {
+                sendUpdateToCrafter(this, icrafting, cookTimeMaxID, inventory().getProgressMax());
             }
-            if (this.lastPower != this.inventory.getCurrentPower()) {
-                sendUpdateToCrafter(this, icrafting, powerID, inventory.getCurrentPower());
+            if (this.lastPower != this.inventory().getCurrentPower()) {
+                sendUpdateToCrafter(this, icrafting, powerID, inventory().getCurrentPower());
             }
         }
 
-        this.lastCookTime = this.inventory.getProgress();
-        this.lastCookMax = inventory.getProgressMax();
-        this.lastPower = this.inventory.getCurrentPower();
+        this.lastCookTime = this.inventory().getProgress();
+        this.lastCookMax = inventory().getProgressMax();
+        this.lastPower = this.inventory().getCurrentPower();
     }
 
     @Override
@@ -92,19 +92,19 @@ public class ContainerNanoEnmesher extends ContainerInv<TileEntityBaseEntityNano
     public void updateProgressBar(int par1, int par2) {
         switch (par1) {
             case cookTimeID:
-                this.inventory.setProgress(par2);
+                this.inventory().setProgress(par2);
                 break;
             case cookTimeMaxID:
-                this.inventory.setProgressMax(par2);
+                this.inventory().setProgressMax(par2);
                 break;
             case powerID:
-                this.inventory.setCurrentStorage(par2);
+                this.inventory().setCurrentStorage(par2);
                 break;
         }
     }
 
     @Override
-    protected boolean eligibleForInput(ItemStack item) {
+    public boolean eligibleForInput(ItemStack item) {
         return true;
     }
 }

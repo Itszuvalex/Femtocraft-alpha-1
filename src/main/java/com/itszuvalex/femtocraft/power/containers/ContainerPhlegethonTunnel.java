@@ -45,7 +45,7 @@ public class ContainerPhlegethonTunnel extends ContainerInv<TileEntityPhlegethon
     @Override
     public void addCraftingToCrafters(ICrafting par1ICrafting) {
         super.addCraftingToCrafters(par1ICrafting);
-        sendUpdateToCrafter(this, par1ICrafting, powerIndex, inventory.getCurrentPower());
+        sendUpdateToCrafter(this, par1ICrafting, powerIndex, inventory().getCurrentPower());
     }
 
     /**
@@ -58,12 +58,12 @@ public class ContainerPhlegethonTunnel extends ContainerInv<TileEntityPhlegethon
         for (Object crafter : this.crafters) {
             ICrafting icrafting = (ICrafting) crafter;
             if (this.lastPower !=
-                inventory.getCurrentPower()) {
-                sendUpdateToCrafter(this, icrafting, powerIndex, inventory.getCurrentPower());
+                inventory().getCurrentPower()) {
+                sendUpdateToCrafter(this, icrafting, powerIndex, inventory().getCurrentPower());
             }
         }
 
-        lastPower = inventory.getCurrentPower();
+        lastPower = inventory().getCurrentPower();
     }
 
     @Override
@@ -71,14 +71,14 @@ public class ContainerPhlegethonTunnel extends ContainerInv<TileEntityPhlegethon
     public void updateProgressBar(int par1, int par2) {
         switch (par1) {
             case powerIndex:
-                this.inventory.setCurrentStorage(par2);
+                this.inventory().setCurrentStorage(par2);
                 break;
             default:
         }
     }
 
     @Override
-    protected boolean eligibleForInput(ItemStack item) {
+    public boolean eligibleForInput(ItemStack item) {
         return false;
     }
 }

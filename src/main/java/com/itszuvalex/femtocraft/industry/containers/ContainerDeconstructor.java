@@ -57,9 +57,9 @@ public class ContainerDeconstructor<T extends TileEntityBaseEntityMicroDeconstru
     @Override
     public void addCraftingToCrafters(ICrafting par1ICrafting) {
         super.addCraftingToCrafters(par1ICrafting);
-        sendUpdateToCrafter(this, par1ICrafting, 0, inventory.cookTime);
-        sendUpdateToCrafter(this, par1ICrafting, 1, inventory.getCurrentPower());
-        sendUpdateToCrafter(this, par1ICrafting, 2, inventory.getMassAmount());
+        sendUpdateToCrafter(this, par1ICrafting, 0, inventory().cookTime);
+        sendUpdateToCrafter(this, par1ICrafting, 1, inventory().getCurrentPower());
+        sendUpdateToCrafter(this, par1ICrafting, 2, inventory().getMassAmount());
     }
 
     /**
@@ -72,20 +72,20 @@ public class ContainerDeconstructor<T extends TileEntityBaseEntityMicroDeconstru
         for (Object crafter : this.crafters) {
             ICrafting icrafting = (ICrafting) crafter;
 
-            if (this.lastCookTime != this.inventory.cookTime) {
-                sendUpdateToCrafter(this, icrafting, 0, inventory.cookTime);
+            if (this.lastCookTime != this.inventory().cookTime) {
+                sendUpdateToCrafter(this, icrafting, 0, inventory().cookTime);
             }
-            if (this.lastPower != this.inventory.getCurrentPower()) {
-                sendUpdateToCrafter(this, icrafting, 1, inventory.getCurrentPower());
+            if (this.lastPower != this.inventory().getCurrentPower()) {
+                sendUpdateToCrafter(this, icrafting, 1, inventory().getCurrentPower());
             }
-            if (this.lastMass != this.inventory.getMassAmount()) {
-                sendUpdateToCrafter(this, icrafting, 2, inventory.getMassAmount());
+            if (this.lastMass != this.inventory().getMassAmount()) {
+                sendUpdateToCrafter(this, icrafting, 2, inventory().getMassAmount());
             }
         }
 
-        this.lastCookTime = this.inventory.cookTime;
-        this.lastPower = this.inventory.getCurrentPower();
-        this.lastMass = this.inventory.getMassAmount();
+        this.lastCookTime = this.inventory().cookTime;
+        this.lastPower = this.inventory().getCurrentPower();
+        this.lastMass = this.inventory().getMassAmount();
     }
 
     @Override
@@ -93,16 +93,16 @@ public class ContainerDeconstructor<T extends TileEntityBaseEntityMicroDeconstru
     public void updateProgressBar(int par1, int par2) {
         switch (par1) {
             case 0:
-                this.inventory.cookTime = par2;
+                this.inventory().cookTime = par2;
                 break;
             case 1:
-                this.inventory.currentPower = par2;
+                this.inventory().currentPower = par2;
                 break;
             case 2:
                 if (par2 > 0) {
-                    this.inventory.setFluidAmount(par2);
+                    this.inventory().setFluidAmount(par2);
                 } else {
-                    this.inventory.clearFluid();
+                    this.inventory().clearFluid();
                 }
                 break;
             default:
@@ -118,7 +118,7 @@ public class ContainerDeconstructor<T extends TileEntityBaseEntityMicroDeconstru
     }
 
     @Override
-    protected boolean eligibleForInput(ItemStack item) {
+    public boolean eligibleForInput(ItemStack item) {
         return Femtocraft.recipeManager().assemblyRecipes.getRecipe(item) != null;
     }
 }
