@@ -18,28 +18,17 @@
  *  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *  *****************************************************************************
  */
+package com.itszuvalex.femtocraft.industry.items
 
-package com.itszuvalex.femtocraft.industry.items;
+import com.itszuvalex.femtocraft.Femtocraft
+import cpw.mods.fml.relauncher.{Side, SideOnly}
+import net.minecraft.client.renderer.texture.IIconRegister
 
-import com.itszuvalex.femtocraft.Femtocraft;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
+class ItemDigitalSchematic(uName: String) extends ItemAssemblySchematic(uName) {
+  setMaxDamage(64)
 
-public class ItemPaperSchematic extends ItemAssemblySchematic {
-
-    public ItemPaperSchematic(String unlocalizedName) {
-        super(unlocalizedName);
-        setMaxDamage(16);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister par1IconRegister) {
-        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                              .toLowerCase() + ":" + "ItemPaperSchematic");
-        this.keyedIcon = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                               .toLowerCase() + ":" + "ItemPaperSchematicKeyed");
-    }
-
+  @SideOnly(Side.CLIENT) override def registerIcons(par1IconRegister: IIconRegister) {
+    itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "ItemDigitalSchematic")
+    keyedIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "ItemDigitalSchematicKeyed")
+  }
 }

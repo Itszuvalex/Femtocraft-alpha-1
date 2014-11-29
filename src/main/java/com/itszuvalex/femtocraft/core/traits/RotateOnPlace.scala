@@ -24,24 +24,24 @@ trait RotateOnPlace extends Block {
    */
   private def setDefaultDirection(world: World, x: Int, y: Int, z: Int) {
     if (!world.isRemote) {
-      val south: Block = world.getBlock(x, y, z - 1)
-      val north: Block = world.getBlock(x, y, z + 1)
-      val west: Block = world.getBlock(x - 1, y, z)
-      val east: Block = world.getBlock(x + 1, y, z)
-      var mask: Byte = 3
+      val south = world.getBlock(x, y, z - 1)
+      val north = world.getBlock(x, y, z + 1)
+      val west = world.getBlock(x - 1, y, z)
+      val east = world.getBlock(x + 1, y, z)
+      var metadata: Byte = 3
       if (south.isOpaqueCube && !north.isOpaqueCube) {
-        mask = 3
+        metadata = 3
       }
       if (north.isOpaqueCube && !south.isOpaqueCube) {
-        mask = 2
+        metadata = 2
       }
       if (west.isOpaqueCube && !east.isOpaqueCube) {
-        mask = 5
+        metadata = 5
       }
       if (east.isOpaqueCube && !west.isOpaqueCube) {
-        mask = 4
+        metadata = 4
       }
-      world.setBlockMetadataWithNotify(x, y, z, mask, 2)
+      world.setBlockMetadataWithNotify(x, y, z, metadata, 2)
     }
   }
 

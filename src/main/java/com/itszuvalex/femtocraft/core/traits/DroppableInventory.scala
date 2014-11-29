@@ -18,10 +18,7 @@ trait DroppableInventory extends Block {
       world.getTileEntity(x, y, z) match {
         case ti: IInventory =>
           val random = new Random
-          for (i <- 0 until ti.getSizeInventory) {
-            val itemstack = ti.getStackInSlotOnClosing(i)
-            FemtocraftUtils.dropItem(itemstack, world, x, y, z, random)
-          }
+          (0 until ti.getSizeInventory).map(ti.getStackInSlotOnClosing).foreach(FemtocraftUtils.dropItem(_, world, x, y, z, random))
           world.func_147453_f(x, y, z, block)
         case _              =>
       }

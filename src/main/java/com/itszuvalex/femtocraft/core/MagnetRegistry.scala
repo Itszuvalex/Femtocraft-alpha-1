@@ -18,21 +18,21 @@ import scala.collection.JavaConversions._
 @Configurable object MagnetRegistry {
   private val idToStrengthMap: util.Map[Integer, Integer] = new util.TreeMap[Integer, Integer]
   @Configurable(comment = "Maximum depth to search the magnet tree.")
-  var MAXIMUM_DEPTH             : Int     = 3000
+  var MAXIMUM_DEPTH = 3000
   @Configurable(comment = "Set true to show magnetism value in tooltip at all.")
-  var showMagnetismTooltip      : Boolean = true
+  var showMagnetismTooltip = true
   @Configurable(comment = "Set this to true to only show magnetism value if advanced tooltips are on.")
-  var magnetismTooltipIsAdvanced: Boolean = false
+  var magnetismTooltipIsAdvanced = false
   @Configurable
-  var ORE_LODESTONE             : Int     = 50
+  var ORE_LODESTONE = 50
   @Configurable
-  var NUGGET_LODESTONE          : Int     = 10
+  var NUGGET_LODESTONE = 10
   @Configurable
-  var CHUNK_LODESTONE           : Int     = 40
+  var CHUNK_LODESTONE = 40
   @Configurable
-  var ORE_IRON                  : Int     = 5
+  var ORE_IRON = 5
   @Configurable
-  var INGOT_IRON                : Int     = 5
+  var INGOT_IRON = 5
 
   def init() {
     registerMagnetDefaults()
