@@ -21,14 +21,18 @@
 package com.itszuvalex.femtocraft.utils
 
 import java.util
+import java.util.Random
 
 import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.implicits.IDImplicits._
 import net.minecraft.client.Minecraft
+import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.server.MinecraftServer
 import net.minecraft.util.{ChatComponentText, EnumChatFormatting}
+import net.minecraft.world.World
 import net.minecraftforge.common.util.ForgeDirection
 import net.minecraftforge.oredict.OreDictionary
 
@@ -105,6 +109,30 @@ object FemtocraftUtils {
     false
   }
 
+  def dropItem(item: ItemStack, world: World, x: Int, y: Int, z: Int, rand: Random): Unit = {
+    if (item != null) {
+      val f = rand.nextFloat * 0.8F + 0.1F
+      val f1 = rand.nextFloat * 0.8F + 0.1F
+      val f2 = rand.nextFloat * 0.8F + 0.1F
+      while (item.stackSize > 0) {
+        var k1 = rand.nextInt(21) + 10
+        if (k1 > item.stackSize) {
+          k1 = item.stackSize
+        }
+        item.stackSize -= k1
+        val entityitem = new EntityItem(world, (x.toFloat + f).toDouble, (y.toFloat + f1).toDouble, (z.toFloat + f2).toDouble, new ItemStack(item.getItem, k1, item.getItemDamage))
+        if (item.hasTagCompound) {
+          entityitem.getEntityItem.setTagCompound(item.getTagCompound.copy.asInstanceOf[NBTTagCompound])
+        }
+        val f3 = 0.05F
+        entityitem.motionX = (rand.nextGaussian.toFloat * f3).toDouble
+        entityitem.motionY = (rand.nextGaussian.toFloat * f3 + 0.2F).toDouble
+        entityitem.motionZ = (rand.nextGaussian.toFloat * f3).toDouble
+        world.spawnEntityInWorld(entityitem)
+      }
+    }
+  }
+
   def removeItem(item: ItemStack, slots: Array[ItemStack], restrictions: Array[Int]): Boolean = {
     if (item == null) {
       return true
@@ -139,6 +167,9 @@ object FemtocraftUtils {
 
   def blueColor = colorFromARGB(0, 0, 0, 255)
 
+  def greenColor = colorFromARGB(0, 0, 255, 0)
+
+  def orangeColor = colorFromARGB(0, 255, 140, 0)
 
   def colorFromARGB(a: Int, r: Int, g: Int, b: Int) = {
     var r1 = 0
@@ -148,12 +179,6 @@ object FemtocraftUtils {
     r1 += b & 255
     r1
   }
-
-  def greenColor = colorFromARGB(0, 0, 255, 0)
-
-
-  def orangeColor = colorFromARGB(0, 255, 140, 0)
-
 
   def blueify(name: String) = EnumTechLevel.MICRO.getTooltipEnum + name + EnumChatFormatting.RESET
 

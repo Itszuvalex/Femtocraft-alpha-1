@@ -18,35 +18,18 @@
  *  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *  *****************************************************************************
  */
+package com.itszuvalex.femtocraft.core.items
 
-package com.itszuvalex.femtocraft.core.items;
+import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.api.EnumTechLevel
+import cpw.mods.fml.relauncher.{Side, SideOnly}
+import net.minecraft.client.renderer.texture.IIconRegister
 
-import com.itszuvalex.femtocraft.api.IInterfaceDevice;
-import com.itszuvalex.femtocraft.api.EnumTechLevel;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+class ItemFemtoInterfaceDevice extends InterfaceDevice(EnumTechLevel.FEMTO) {
+  setMaxStackSize(1)
+  setCreativeTab(Femtocraft.femtocraftTab)
 
-public class InterfaceDevice extends Item implements IInterfaceDevice {
-    private EnumTechLevel level;
-
-    public InterfaceDevice(EnumTechLevel level) {
-        super();
-        this.level = level;
-    }
-
-    @Override
-    public boolean func_150897_b(Block p_150897_1_) {
-        return true;
-    }
-
-    @Override
-    public EnumTechLevel getInterfaceLevel() {
-        return level;
-    }
-
-//    @Override
-//    public boolean shouldPassSneakingClickToBlock(World par2World, int par4,
-//                                                  int par5, int par6) {
-//        return true;
-//    }
+  @SideOnly(Side.CLIENT) override def registerIcons(par1IconRegister: IIconRegister) {
+    itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "ItemFemtoInterfaceDevice")
+  }
 }

@@ -18,28 +18,17 @@
  *  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *  *****************************************************************************
  */
+package com.itszuvalex.femtocraft.core.items
 
-package com.itszuvalex.femtocraft.core.items;
+import com.itszuvalex.femtocraft.Femtocraft
+import net.minecraft.item.Item
 
-import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.api.EnumTechLevel;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
-
-public class ItemFemtoInterfaceDevice extends InterfaceDevice {
-
-    public ItemFemtoInterfaceDevice() {
-        super(EnumTechLevel.FEMTO);
-        setMaxStackSize(1);
-        setCreativeTab(Femtocraft.femtocraftTab());
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister par1IconRegister) {
-        this.itemIcon = par1IconRegister.registerIcon(Femtocraft.ID()
-                                                              .toLowerCase() + ":" + "ItemFemtoInterfaceDevice");
-    }
-
+/**
+ * Created by Christopher Harris (Itszuvalex) on 6/22/14.
+ */
+class ItemBase(unlocalizedName: String) extends Item {
+  setMaxStackSize(64)
+  setCreativeTab(Femtocraft.femtocraftTab)
+  setUnlocalizedName(unlocalizedName)
+  setTextureName(Femtocraft.ID.toLowerCase + ":" + unlocalizedName)
 }

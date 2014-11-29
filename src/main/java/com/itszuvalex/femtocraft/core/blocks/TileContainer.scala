@@ -43,11 +43,11 @@ class TileContainer(material: Material) extends BlockContainer(material) {
 
   def createNewTileEntity(p_149915_1_ : World, p_149915_2_ : Int): TileEntity = new TileEntityBase
 
-  override def breakBlock(par1World: World, par2: Int, par3: Int, par4: Int, par5: Block, par6: Int) {
+  override def breakBlock(world: World, x: Int, y: Int, z: Int, block: Block, metadata: Int) {
     if (TileContainer.shouldDrop) {
-      par1World.getTileEntity(par2, par3, par4) match {
+      world.getTileEntity(x, y, z) match {
         case tile: TileEntityBase =>
-          val stack = new ItemStack(par5)
+          val stack = new ItemStack(block.getItemDropped(metadata, world.rand, 0))
           val item = stack.getItem
           item match {
             case block: CoreItemBlock if block.hasItemNBT =>
@@ -55,13 +55,13 @@ class TileContainer(material: Material) extends BlockContainer(material) {
               tile.saveInfoToItemNBT(stack.stackTagCompound)
             case _                                        =>
           }
-          val spawn = new EntityItem(par1World, par2 + .5d, par3 + .5d, par4 + .5d, stack)
+          val spawn = new EntityItem(world, x + .5d, y + .5d, z + .5d, stack)
           spawn.delayBeforeCanPickup = 10
-          par1World.spawnEntityInWorld(spawn)
+          world.spawnEntityInWorld(spawn)
         case _                    =>
       }
     }
-    super.breakBlock(par1World, par2, par3, par4, par5, par6)
+    super.breakBlock(world, x, y, z, block, metadata)
   }
 
   override def quantityDropped(par1Random: Random) = 0

@@ -72,6 +72,7 @@ import org.apache.logging.log4j.{Level, LogManager, Logger}
 @Mod(modid = Femtocraft.ID, name = "Femtocraft", version = Femtocraft.VERSION,
      modLanguage = "scala")
 object Femtocraft {
+
   final val ID                   = "Femtocraft"
   final val VERSION              = "0.1.0"
   final val TECH_CONFIG_APPEND   = "Technology"
