@@ -34,7 +34,7 @@ import org.apache.logging.log4j.Level
 import scala.collection.JavaConversions._
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
-import scala.reflect.runtime._
+import scala.reflect.runtime.{universe => ru}
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 9/10/14.
@@ -47,62 +47,25 @@ object FemtocraftConfigHelper {
   private val configStringEscapes           = HashBiMap.create[String, String]
   private val loaderMap                     = new mutable.HashMap[Class[_], FemtocraftConfigHelper.FieldLoader[_]]
 
-  private abstract class FieldLoader[T] {
-    def load(field: Field, section: String, anno: Configurable, obj: AnyRef, config: Configuration)
-
-    def getValue(key: String, default: T, section: String, anno: Configurable, config: Configuration): T
-  }
-
-
-  private def addConfigEscape(toEscape: String, escape: String) = configStringEscapes.put(Pattern.quote(toEscape), Pattern.quote(escape))
-
-
-  private def escapeConfigString(string: String): String = {
-    var str = string
-    configStringEscapes.keySet.foreach(escape => str = str.replaceAll(escape, configStringEscapes.get(escape)))
-    str
-  }
-
-  private def unescapeConfigString(string: String): String = {
-    val unEscape = configStringEscapes.inverse
-    var str = string
-    unEscape.keySet.foreach(unescape => str = str.replaceAll(unescape, unEscape.get(unescape)))
-    str
-  }
-
   def escapeCategorySplitter(string: String) = string.replace(CATEGORY_SPLITTER_CHAR, CATEGORY_SPLITTER_REPLACEMENT)
 
   def unescapeCategorySplitter(string: String) = string.replace(CATEGORY_SPLITTER_REPLACEMENT, CATEGORY_SPLITTER_CHAR)
 
   def loadClassFromConfig(configuration: Configuration, section: String, key: String, clazz: Class[_]) = {
-//    var inst: AnyRef = null
-//    try {
-//      val rootMirror = universe.runtimeMirror(getClass.getClassLoader)
-//      val classSymbol = rootMirror.classSymbol(clazz)
-//      val moduleSymbol = classSymbol.companionSymbol.asModule
-//      val moduleMirror = rootMirror.reflectModule(moduleSymbol)
-//
-//      if (moduleSymbol.annotations.exists(a => a.isInstanceOf[Configurable])) {
-//        inst = moduleMirror.instance.asInstanceOf[clazz.type]
-//      }
-//    }
-//    catch {
-//      case e: Exception         =>
-//        inst = null
-//      case e: NoSuchMethodError =>
-//        inst = null
-//    }
-
     loadClassInstanceFromConfig(configuration, section, key, clazz, null)
   }
 
   def loadClassInstanceFromConfig(configuration: Configuration, section: String, key: String, clazz: Class[_], obj: AnyRef) {
+    loadJavaConfigurableObject(configuration, section, key, clazz, obj)
+  }
+
+  private def loadJavaConfigurableObject(configuration: Configuration, section: String, key: String, clazz: Class[_], obj: AnyRef) {
     val fieldsList = new ArrayBuffer[Field]
-    fieldsList appendAll clazz.getFields
+    fieldsList appendAll clazz.getDeclaredFields
     if (obj != null) {
       var superclass = clazz.getSuperclass
       while (superclass != null) {
-        fieldsList appendAll superclass.getFields
+        fieldsList appendAll superclass.getDeclaredFields
         superclass = superclass.getSuperclass
       }
     }
@@ -126,7 +89,6 @@ object FemtocraftConfigHelper {
         }
         if (!accessible) {
           field.setAccessible(false)
-
         }
       }
     })
@@ -259,6 +221,28 @@ object FemtocraftConfigHelper {
       }
     })
   }
+
+  private def escapeConfigString(string: String): String = {
+    var str = string
+    configStringEscapes.keySet.foreach(escape => str = str.replaceAll(escape, configStringEscapes.get(escape)))
+    str
+  }
+
+  private def unescapeConfigString(string: String): String = {
+    val unEscape = configStringEscapes.inverse
+    var str = string
+    unEscape.keySet.foreach(unescape => str = str.replaceAll(unescape, unEscape.get(unescape)))
+    str
+  }
+
+  private def addConfigEscape(toEscape: String, escape: String) = configStringEscapes.put(Pattern.quote(toEscape), Pattern.quote(escape))
+
+  private abstract class FieldLoader[T] {
+    def load(field: Field, section: String, anno: Configurable, obj: AnyRef, config: Configuration)
+
+    def getValue(key: String, default: T, section: String, anno: Configurable, config: Configuration): T
+  }
+
 }
 
 
