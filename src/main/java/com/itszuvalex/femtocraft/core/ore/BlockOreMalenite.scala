@@ -18,24 +18,34 @@
  *  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *  *****************************************************************************
  */
-package com.itszuvalex.femtocraft.industry.items
+package com.itszuvalex.femtocraft.core.ore
+
+import java.util.Random
 
 import com.itszuvalex.femtocraft.Femtocraft
-import com.itszuvalex.femtocraft.api.items.ItemAssemblySchematic
 import com.itszuvalex.femtocraft.configuration.Configurable
-import com.itszuvalex.femtocraft.industry.items.ItemQuantumSchematic.SCHEMATIC_USES
 import cpw.mods.fml.relauncher.{Side, SideOnly}
+import net.minecraft.block.Block
 import net.minecraft.client.renderer.texture.IIconRegister
 
-object ItemQuantumSchematic {
-  @Configurable(comment = "Number of uses good for.") private var SCHEMATIC_USES = ItemAssemblySchematic.INFINITE_USE_DAMAGE
+object BlockOreMalenite {
+  @Configurable(comment = "Maximum amount of Malenite dust to drop.") var DROP_AMOUNT_MAX = 4
+  @Configurable(comment = "Minimum amount of Malenite dust to drop.") var DROP_AMOUNT_MIN = 2
 }
 
-@Configurable class ItemQuantumSchematic(uName: String) extends ItemAssemblySchematic(uName) {
-  setMaxDamage(SCHEMATIC_USES)
+@Configurable class BlockOreMalenite extends BlockOreBase {
+  setCreativeTab(Femtocraft.femtocraftTab)
+  setBlockTextureName(Femtocraft.ID.toLowerCase + ":" + "BlockOreMalenite")
+  setBlockName("BlockOreMalenite")
+  setHardness(3.0f)
+  setStepSound(Block.soundTypeStone)
+  setResistance(1f)
 
-  @SideOnly(Side.CLIENT) override def registerIcons(par1IconRegister: IIconRegister) {
-    itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "ItemQuantumSchematic")
-    keyedIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "ItemQuantumSchematicKeyed")
+  @SideOnly(Side.CLIENT) override def registerBlockIcons(par1IconRegister: IIconRegister) {
+    this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "BlockOreMalenite")
   }
+
+  override def getItemDropped(p_149650_1_ : Int, p_149650_2_ : Random, p_149650_3_ : Int) = Femtocraft.itemIngotMalenite
+
+  override def quantityDropped(random: Random) = random.nextInt(BlockOreMalenite.DROP_AMOUNT_MAX + 1 - BlockOreMalenite.DROP_AMOUNT_MIN) + BlockOreMalenite.DROP_AMOUNT_MIN
 }

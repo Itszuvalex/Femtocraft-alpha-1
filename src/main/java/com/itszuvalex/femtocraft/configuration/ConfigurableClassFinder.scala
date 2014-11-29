@@ -21,12 +21,6 @@ class ConfigurableClassFinder(val classPackage: String) {
   private val configurableClasses    = new ArrayBuffer[Class[_]]
   private val configurableSingletons = new mutable.HashMap[AnyRef, Class[_]]
 
-  /**
-   * @param clazz Class to load all @Configurable annotated public/private fields from.
-   * @return True if class successfully added.
-   */
-  def registerConfigurableClass(clazz: Class[_]) = configurableClasses.append(clazz)
-
   def loadClassConstants(configuration: Configuration) = {
     configurableClasses.foreach(clazz => FemtocraftConfigHelper.loadClassFromConfig(configuration, CLASS_CONSTANTS_KEY, clazz.getSimpleName, clazz))
     configurableSingletons.foreach(pair => FemtocraftConfigHelper.loadClassInstanceFromConfig(configuration, CLASS_CONSTANTS_KEY, pair._2.getSimpleName.subSequence(0, pair._2.getSimpleName.length - 1).toString, pair._2, pair._1))
@@ -38,7 +32,6 @@ class ConfigurableClassFinder(val classPackage: String) {
     classes.foreach(info => {
       try {
         val side = FMLCommonHandler.instance().getEffectiveSide
-        Femtocraft.log(Level.INFO, info.getResourceName)
         val clientPackage = info.getResourceName.toLowerCase.matches(".*client.*") ||
                             info.getResourceName.toLowerCase.matches(".*gui.*") ||
                             info.getResourceName.toLowerCase.matches(".*render.*") ||
@@ -65,12 +58,12 @@ class ConfigurableClassFinder(val classPackage: String) {
             }
           }
           catch {
-            case e: Exception              =>
+            case e: Exception =>
           }
         }
       }
       catch {
-        case e: RuntimeException =>
+        case e: RuntimeException       =>
         case e: ClassNotFoundException =>
         case e: NoClassDefFoundError   =>
       }
@@ -78,5 +71,11 @@ class ConfigurableClassFinder(val classPackage: String) {
     Femtocraft.log(Level.INFO, "Registered " + configurableClasses.length + " configurable classes.")
     Femtocraft.log(Level.INFO, "Registered " + configurableSingletons.size + " configurable singletons.")
   }
+
+  /**
+   * @param clazz Class to load all @Configurable annotated public/private fields from.
+   * @return True if class successfully added.
+   */
+  def registerConfigurableClass(clazz: Class[_]) = configurableClasses.append(clazz)
 
 }

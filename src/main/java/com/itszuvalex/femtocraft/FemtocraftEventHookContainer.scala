@@ -20,9 +20,9 @@
  */
 package com.itszuvalex.femtocraft
 
+import com.itszuvalex.femtocraft.api.items.ItemAssemblySchematic
 import com.itszuvalex.femtocraft.common.gui.DisplaySlot
 import com.itszuvalex.femtocraft.core.MagnetRegistry
-import com.itszuvalex.femtocraft.industry.items.ItemAssemblySchematic
 import com.itszuvalex.femtocraft.player.PlayerProperties
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.relauncher.{Side, SideOnly}

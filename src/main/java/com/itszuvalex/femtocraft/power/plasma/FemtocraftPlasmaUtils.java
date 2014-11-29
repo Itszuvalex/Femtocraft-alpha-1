@@ -106,22 +106,22 @@ public class FemtocraftPlasmaUtils {
         Random random = new Random();
         ForgeDirection dir = ForgeDirection.getOrientation(random.nextInt(6));
 
-        int newX = loc.x + dir.offsetX;
-        int newY = loc.y + dir.offsetY;
-        int newZ = loc.z + dir.offsetZ;
+        int newX = loc.x() + dir.offsetX;
+        int newY = loc.y() + dir.offsetY;
+        int newZ = loc.z() + dir.offsetZ;
 
-        if (loc.world.isAirBlock(newX, newY, newZ)) {
-            loc.world.setBlock(newX, newY, newZ, Femtocraft.blockPlasma());
-            loc.world.setBlockMetadataWithNotify(newX, newY, newZ, dir.ordinal(), 2);
-            TileEntityPlasma te = (TileEntityPlasma) loc.world.getTileEntity(newX, newY, newZ);
+        if (loc.world().isAirBlock(newX, newY, newZ)) {
+            loc.world().setBlock(newX, newY, newZ, Femtocraft.blockPlasma());
+            loc.world().setBlockMetadataWithNotify(newX, newY, newZ, dir.ordinal(), 2);
+            TileEntityPlasma te = (TileEntityPlasma) loc.world().getTileEntity(newX, newY, newZ);
             if (te != null) {
                 te.setDuration(plasmaDuration);
             }
         }
 
-        loc.x += dir.offsetX;
-        loc.y += dir.offsetY;
-        loc.z += dir.offsetZ;
+        loc.x_$eq(loc.x() + dir.offsetX);
+        loc.y_$eq(loc.y() + dir.offsetY);
+        loc.z_$eq(loc.z() + dir.offsetZ);
 
 
         return true;

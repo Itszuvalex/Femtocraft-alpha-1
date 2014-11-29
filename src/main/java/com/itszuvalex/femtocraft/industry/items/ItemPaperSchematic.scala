@@ -21,11 +21,18 @@
 package com.itszuvalex.femtocraft.industry.items
 
 import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.api.items.ItemAssemblySchematic
+import com.itszuvalex.femtocraft.configuration.Configurable
+import com.itszuvalex.femtocraft.industry.items.ItemPaperSchematic.SCHEMATIC_USES
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.client.renderer.texture.IIconRegister
 
-class ItemPaperSchematic(uName: String) extends ItemAssemblySchematic(uName) {
-  setMaxDamage(16)
+object ItemPaperSchematic {
+  @Configurable(comment = "Number of uses good for.") private var SCHEMATIC_USES = 16
+}
+
+@Configurable class ItemPaperSchematic(uName: String) extends ItemAssemblySchematic(uName) {
+  setMaxDamage(SCHEMATIC_USES)
 
   @SideOnly(Side.CLIENT) override def registerIcons(par1IconRegister: IIconRegister) {
     itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "ItemPaperSchematic")

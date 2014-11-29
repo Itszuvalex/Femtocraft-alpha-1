@@ -25,7 +25,7 @@ import com.itszuvalex.femtocraft.api.industry.IAssemblerSchematic;
 import com.itszuvalex.femtocraft.common.gui.DisplaySlot;
 import com.itszuvalex.femtocraft.common.gui.OutputSlot;
 import com.itszuvalex.femtocraft.core.container.ContainerInv;
-import com.itszuvalex.femtocraft.industry.items.ItemAssemblySchematic;
+import com.itszuvalex.femtocraft.api.items.ItemAssemblySchematic;
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

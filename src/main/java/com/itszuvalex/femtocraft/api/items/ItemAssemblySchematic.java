@@ -19,7 +19,7 @@
  *  *****************************************************************************
  */
 
-package com.itszuvalex.femtocraft.industry.items;
+package com.itszuvalex.femtocraft.api.items;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.api.AssemblerRecipe;
@@ -87,7 +87,7 @@ public class ItemAssemblySchematic extends ItemBase implements IAssemblerSchemat
     public void addInformation(ItemStack par1ItemStack,
                                EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
         // This is called when displaying the tooltip for an item. par4 is
-        // whether it's extended or not, I believe.
+        // whether it's advanced or not.
         int uses = usesRemaining(par1ItemStack);
         String useString;
         if (uses == INFINITE_USE_DAMAGE) {

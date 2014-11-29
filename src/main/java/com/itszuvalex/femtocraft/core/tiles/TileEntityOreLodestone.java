@@ -19,7 +19,7 @@ public class TileEntityOreLodestone extends TileEntity {
 
     @Override
     public boolean canUpdate() {
-        return BlockOreLodestone.MAGNETIC;
+        return BlockOreLodestone.MAGNETIC();
     }
 
     @Override
