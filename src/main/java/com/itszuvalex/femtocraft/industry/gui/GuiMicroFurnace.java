@@ -58,7 +58,7 @@ public class GuiMicroFurnace extends GuiBase {
     public void drawScreen(int par1, int par2, float par3) {
         super.drawScreen(par1, par2, par3);
 
-        int furnaceCurrent = this.furnaceInventory.currentPower;
+        int furnaceCurrent = this.furnaceInventory.currentPower();
         int furnaceMax = this.furnaceInventory.getMaxPower();
 
         // String text = String.format("%i/%i", furnaceCurrent, furnaceMax);
@@ -108,7 +108,7 @@ public class GuiMicroFurnace extends GuiBase {
 
         i1 = this.furnaceInventory.getCookProgressScaled(38);
         this.drawTexturedModalRect(k + 73, l + 34, 176, 13, i1, 18);
-        i1 = (this.furnaceInventory.currentPower * 60)
+        i1 = (this.furnaceInventory.currentPower() * 60)
              / this.furnaceInventory.getMaxPower();
         this.drawTexturedModalRect(k + 18, l + 12 + (60 - i1), 176,
                 32 + (60 - i1), 16 + (60 - i1), 60);

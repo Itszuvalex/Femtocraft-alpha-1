@@ -81,7 +81,7 @@ public class ContainerReconstructor<T extends TileEntityBaseEntityMicroReconstru
     @Override
     public void addCraftingToCrafters(ICrafting par1ICrafting) {
         super.addCraftingToCrafters(par1ICrafting);
-        sendUpdateToCrafter(this, par1ICrafting, 0, inventory().cookTime);
+        sendUpdateToCrafter(this, par1ICrafting, 0, inventory().cookTime());
         sendUpdateToCrafter(this, par1ICrafting, 1, inventory().getCurrentPower());
         sendUpdateToCrafter(this, par1ICrafting, 2, inventory().getMassAmount());
     }
@@ -96,8 +96,8 @@ public class ContainerReconstructor<T extends TileEntityBaseEntityMicroReconstru
         for (Object crafter : this.crafters) {
             ICrafting icrafting = (ICrafting) crafter;
 
-            if (this.lastCookTime != this.inventory().cookTime) {
-                sendUpdateToCrafter(this, icrafting, 0, inventory().cookTime);
+            if (this.lastCookTime != this.inventory().cookTime()) {
+                sendUpdateToCrafter(this, icrafting, 0, inventory().cookTime());
             }
             if (this.lastPower != this.inventory().getCurrentPower()) {
                 sendUpdateToCrafter(this, icrafting, 1, inventory().getCurrentPower());
@@ -107,7 +107,7 @@ public class ContainerReconstructor<T extends TileEntityBaseEntityMicroReconstru
             }
         }
 
-        this.lastCookTime = this.inventory().cookTime;
+        this.lastCookTime = this.inventory().cookTime();
         this.lastPower = this.inventory().getCurrentPower();
         this.lastMass = this.inventory().getMassAmount();
     }
@@ -117,10 +117,10 @@ public class ContainerReconstructor<T extends TileEntityBaseEntityMicroReconstru
     public void updateProgressBar(int par1, int par2) {
         switch (par1) {
             case 0:
-                this.inventory().cookTime = par2;
+                this.inventory().cookTime_$eq(par2);
                 break;
             case 1:
-                this.inventory().currentPower = par2;
+                this.inventory().currentPower_$eq(par2);
                 break;
             case 2:
                 if (par2 > 0) {

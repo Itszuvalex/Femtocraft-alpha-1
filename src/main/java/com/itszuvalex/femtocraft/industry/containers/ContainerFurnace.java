@@ -53,7 +53,7 @@ public class ContainerFurnace<T extends TileEntityBaseEntityMicroFurnace> extend
     @Override
     public void addCraftingToCrafters(ICrafting par1ICrafting) {
         super.addCraftingToCrafters(par1ICrafting);
-        sendUpdateToCrafter(this, par1ICrafting, 0, inventory().furnaceCookTime);
+        sendUpdateToCrafter(this, par1ICrafting, 0, inventory().furnaceCookTime());
         sendUpdateToCrafter(this, par1ICrafting, 1, inventory().getCurrentPower());
     }
 
@@ -67,15 +67,15 @@ public class ContainerFurnace<T extends TileEntityBaseEntityMicroFurnace> extend
         for (Object crafter : this.crafters) {
             ICrafting icrafting = (ICrafting) crafter;
 
-            if (this.lastCookTime != this.inventory().furnaceCookTime) {
-                sendUpdateToCrafter(this, icrafting, 0, inventory().furnaceCookTime);
+            if (this.lastCookTime != this.inventory().furnaceCookTime()) {
+                sendUpdateToCrafter(this, icrafting, 0, inventory().furnaceCookTime());
             }
             if (this.lastPower != this.inventory().getCurrentPower()) {
                 sendUpdateToCrafter(this, icrafting, 1, inventory().getCurrentPower());
             }
         }
 
-        this.lastCookTime = this.inventory().furnaceCookTime;
+        this.lastCookTime = this.inventory().furnaceCookTime();
         this.lastPower = this.inventory().getCurrentPower();
     }
 
@@ -83,10 +83,10 @@ public class ContainerFurnace<T extends TileEntityBaseEntityMicroFurnace> extend
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int par1, int par2) {
         if (par1 == 0) {
-            this.inventory().furnaceCookTime = par2;
+            this.inventory().furnaceCookTime_$eq(par2);
         }
         if (par1 == 1) {
-            this.inventory().currentPower = par2;
+            this.inventory().currentPower_$eq(par2);
         }
     }
 

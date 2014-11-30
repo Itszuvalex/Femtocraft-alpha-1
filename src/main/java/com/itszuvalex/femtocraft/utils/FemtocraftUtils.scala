@@ -73,6 +73,15 @@ object FemtocraftUtils {
     0
   }
 
+  /**
+   *
+   * This DOES modify slots when attempting to place, regardless of true false.  Thus, passing a copy of the inventory is recommended when testing
+   *
+   * @param item Item used for matching/stacksize.  Does not modify item
+   * @param slots Array of slots to attempt to place item.
+   * @param restrictions Array of slot indexs to skip when placing.
+   * @return True if slots contains room for item.
+   */
   def placeItem(item: ItemStack, slots: Array[ItemStack], restrictions: Array[Int]): Boolean = {
     if (item == null) {
       return true
@@ -133,6 +142,15 @@ object FemtocraftUtils {
     }
   }
 
+  /**
+   *
+   * This DOES modify slots when attempting to place, regardless of output.  THus, it is recommended to pass a copy when testing.
+   *
+   * @param item Item used to attempt to place.  This is NOT modified.
+   * @param slots
+   * @param restrictions
+   * @return
+   */
   def removeItem(item: ItemStack, slots: Array[ItemStack], restrictions: Array[Int]): Boolean = {
     if (item == null) {
       return true

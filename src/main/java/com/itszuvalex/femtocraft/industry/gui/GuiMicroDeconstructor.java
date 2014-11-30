@@ -64,7 +64,7 @@ public class GuiMicroDeconstructor extends GuiBase {
 
         if (this.isPointInRegion(10, 8, 16, 60, par1, par2)) {
 
-            int furnaceCurrent = this.deconstructorInventory.currentPower;
+            int furnaceCurrent = this.deconstructorInventory.currentPower();
             int furnaceMax = this.deconstructorInventory.getMaxPower();
 
             // String text = String.format("%i/%i", furnaceCurrent, furnaceMax);
@@ -126,7 +126,7 @@ public class GuiMicroDeconstructor extends GuiBase {
 
         i1 = this.deconstructorInventory.getCookProgressScaled(26);
         this.drawTexturedModalRect(k + 60, l + 24, 176, 0, i1 + 1, 40);
-        i1 = (this.deconstructorInventory.currentPower * 60)
+        i1 = (this.deconstructorInventory.currentPower() * 60)
                 / this.deconstructorInventory.getMaxPower();
         this.drawTexturedModalRect(k + 10, l + 8 + (60 - i1), 176,
                 40 + (60 - i1), 16, i1);

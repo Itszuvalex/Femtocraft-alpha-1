@@ -23,9 +23,9 @@ package com.itszuvalex.femtocraft.api.items;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.api.AssemblerRecipe;
+import com.itszuvalex.femtocraft.api.core.Configurable;
 import com.itszuvalex.femtocraft.api.industry.IAssemblerSchematic;
 import com.itszuvalex.femtocraft.api.research.ITechnology;
-import com.itszuvalex.femtocraft.api.core.Configurable;
 import com.itszuvalex.femtocraft.core.items.ItemBase;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import cpw.mods.fml.relauncher.Side;
@@ -233,6 +233,7 @@ public class ItemAssemblySchematic extends ItemBase implements IAssemblerSchemat
 
     @Override
     public int usesRemaining(ItemStack stack) {
+        if (stack == null) return 0;
         return stack.getMaxDamage() - stack.getItemDamage();
     }
 

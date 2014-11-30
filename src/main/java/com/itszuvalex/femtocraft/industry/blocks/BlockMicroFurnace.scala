@@ -24,8 +24,7 @@ import java.util.Random
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
-import com.itszuvalex.femtocraft.core.traits.RotateOnPlace
-import com.itszuvalex.femtocraft.core.traits.block.{RotateOnPlace, DroppableInventory}
+import com.itszuvalex.femtocraft.core.traits.block.{DroppableInventory, RotateOnPlace}
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace
 import com.itszuvalex.femtocraft.render.RenderSimpleMachine
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils
@@ -140,7 +139,7 @@ class BlockMicroFurnace(private val isActive: Boolean) extends TileContainer(Mat
     if (!BlockMicroFurnace.keepFurnaceInventory) {
       world.getTileEntity(x, y, z) match {
         case te: TileEntityBaseEntityMicroFurnace if te.isWorking => FemtocraftUtils.dropItem(te.smeltingStack, world, x, y, z, furnaceRand)
-        case _                                                    =>
+        case _ =>
       }
       world.func_147453_f(x, y, z, block)
       shouldDrop = true

@@ -125,9 +125,9 @@ class TileEntityBase extends TileEntity {
 
   def setOwner(newOwner: String) = owner = newOwner
 
-  def onInventoryChanged() = setModified()
+  @Deprecated def onInventoryChanged() = setModified()
 
-  def setModified() = if (worldObj != null) markDirty()
+  def setModified() = if (worldObj != null) super.markDirty()
 
   def setRenderUpdate() = if (worldObj != null) worldObj.markBlockRangeForRenderUpdate(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord)
 

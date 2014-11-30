@@ -62,7 +62,7 @@ public class GuiNanoFabricator extends GuiBase {
 
         if (this.isPointInRegion(10, 8, 16, 60, par1, par2)) {
 
-            int furnaceCurrent = this.fabricatorInventory.currentPower;
+            int furnaceCurrent = this.fabricatorInventory.currentPower();
             int furnaceMax = this.fabricatorInventory.getMaxPower();
 
             // String text = String.format("%i/%i", furnaceCurrent, furnaceMax);
@@ -126,7 +126,7 @@ public class GuiNanoFabricator extends GuiBase {
 
         i1 = this.fabricatorInventory.getCookProgressScaled(30);
         this.drawTexturedModalRect(k + 86, l + 21, 176, 0, i1 + 1, 31);
-        i1 = (this.fabricatorInventory.currentPower * 60)
+        i1 = (this.fabricatorInventory.currentPower() * 60)
              / this.fabricatorInventory.getMaxPower();
         this.drawTexturedModalRect(k + 10, l + 8 + (60 - i1), 176,
                 31 + (60 - i1), 16, i1);

@@ -61,7 +61,7 @@ public class GuiFemtoRepurposer extends GuiBase {
 
         if (this.isPointInRegion(10, 8, 16, 60, par1, par2)) {
 
-            int furnaceCurrent = this.repurposerInventory.currentPower;
+            int furnaceCurrent = this.repurposerInventory.currentPower();
             int furnaceMax = this.repurposerInventory.getMaxPower();
 
             // String text = String.format("%i/%i", furnaceCurrent, furnaceMax);
@@ -120,7 +120,7 @@ public class GuiFemtoRepurposer extends GuiBase {
 
         i1 = this.repurposerInventory.getCookProgressScaled(26);
         this.drawTexturedModalRect(k + 60, l + 24, 176, 0, i1 + 1, 40);
-        i1 = (this.repurposerInventory.currentPower * 60)
+        i1 = (this.repurposerInventory.currentPower() * 60)
              / this.repurposerInventory.getMaxPower();
         this.drawTexturedModalRect(k + 10, l + 8 + (60 - i1), 176,
                 40 + (60 - i1), 16, i1);

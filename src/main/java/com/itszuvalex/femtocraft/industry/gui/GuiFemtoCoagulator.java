@@ -62,7 +62,7 @@ public class GuiFemtoCoagulator extends GuiBase {
 
         if (this.isPointInRegion(10, 8, 16, 60, par1, par2)) {
 
-            int furnaceCurrent = this.coagulatorInventory.currentPower;
+            int furnaceCurrent = this.coagulatorInventory.currentPower();
             int furnaceMax = this.coagulatorInventory.getMaxPower();
 
             // String text = String.format("%i/%i", furnaceCurrent, furnaceMax);
@@ -126,7 +126,7 @@ public class GuiFemtoCoagulator extends GuiBase {
 
         i1 = this.coagulatorInventory.getCookProgressScaled(30);
         this.drawTexturedModalRect(k + 86, l + 21, 176, 0, i1 + 1, 31);
-        i1 = (this.coagulatorInventory.currentPower * 60)
+        i1 = (this.coagulatorInventory.currentPower() * 60)
              / this.coagulatorInventory.getMaxPower();
         this.drawTexturedModalRect(k + 10, l + 8 + (60 - i1), 176,
                 31 + (60 - i1), 16, i1);

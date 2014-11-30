@@ -61,7 +61,7 @@ public class GuiNanoDismantler extends GuiBase {
 
         if (this.isPointInRegion(10, 8, 16, 60, par1, par2)) {
 
-            int furnaceCurrent = this.dismantlerInventory.currentPower;
+            int furnaceCurrent = this.dismantlerInventory.currentPower();
             int furnaceMax = this.dismantlerInventory.getMaxPower();
 
             // String text = String.format("%i/%i", furnaceCurrent, furnaceMax);
@@ -121,7 +121,7 @@ public class GuiNanoDismantler extends GuiBase {
 
         i1 = this.dismantlerInventory.getCookProgressScaled(26);
         this.drawTexturedModalRect(k + 60, l + 24, 176, 0, i1 + 1, 40);
-        i1 = (this.dismantlerInventory.currentPower * 60)
+        i1 = (this.dismantlerInventory.currentPower() * 60)
              / this.dismantlerInventory.getMaxPower();
         this.drawTexturedModalRect(k + 10, l + 8 + (60 - i1), 176,
                 40 + (60 - i1), 16, i1);

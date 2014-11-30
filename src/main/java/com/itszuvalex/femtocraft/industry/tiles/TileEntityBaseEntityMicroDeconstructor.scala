@@ -129,7 +129,7 @@ object TileEntityBaseEntityMicroDeconstructor {
       fake(i) = if (it == null) null else it.copy
     }
 
-    !items.exists(item => !FemtocraftUtils.placeItem(if (item == null) null else item.copy, fake, null))
+    items.forall(FemtocraftUtils.placeItem(_, fake, null))
   }
 
   override protected def startWork() {
@@ -149,8 +149,7 @@ object TileEntityBaseEntityMicroDeconstructor {
       }
       if (continue) {
         items.addAll(recipe.input.toList)
-        val ita = new Array[ItemStack](items.size)
-        items.toArray(ita)
+        val ita = items.toArray
         if (!roomForItems(ita)) {
           continue = false
         }

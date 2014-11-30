@@ -24,7 +24,6 @@ import java.util.Random
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
-import com.itszuvalex.femtocraft.core.traits.RotateOnPlace
 import com.itszuvalex.femtocraft.core.traits.block.{RotateOnPlace, DroppableInventory}
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityNanoInnervator
 import com.itszuvalex.femtocraft.render.RenderSimpleMachine
