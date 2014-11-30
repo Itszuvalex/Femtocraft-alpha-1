@@ -18,48 +18,34 @@
  *  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *  *****************************************************************************
  */
+package com.itszuvalex.femtocraft.industry.traits
 
-package com.itszuvalex.femtocraft.industry.tiles;
+import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 
-import com.itszuvalex.femtocraft.power.tiles.TileEntityPowerConsumer;
-
-public abstract class TileEntityBaseEntityIndustry extends TileEntityPowerConsumer {
-
-    @Override
-    public void femtocraftServerUpdate() {
-        super.femtocraftServerUpdate();
-
-        if (!isWorking()) {
-            if (canStartWork()) {
-                startWork();
-            }
-        } else {
-            continueWork();
-        }
-
-        if (isWorking() && canFinishWork()) {
-            finishWork();
-        }
+trait IndustryBehavior extends TileEntityBase {
+  override def femtocraftServerUpdate() {
+    super.femtocraftServerUpdate()
+    if (!isWorking) {
+      if (canStartWork) startWork()
     }
-
-    public boolean isWorking() {
-        return false;
+    else continueWork()
+    if (isWorking && canFinishWork) {
+      finishWork()
     }
+  }
 
-    protected boolean canStartWork() {
-        return false;
-    }
+  def isWorking = false
 
-    protected void startWork() {
-    }
+  protected def canStartWork = false
 
-    protected void continueWork() {
-    }
+  protected def startWork() {
+  }
 
-    protected boolean canFinishWork() {
-        return true;
-    }
+  protected def continueWork() {
+  }
 
-    protected void finishWork() {
-    }
+  protected def canFinishWork = true
+
+  protected def finishWork() {
+  }
 }

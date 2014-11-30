@@ -22,7 +22,7 @@ package com.itszuvalex.femtocraft.industry.blocks
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
-import com.itszuvalex.femtocraft.core.traits.DroppableInventory
+import com.itszuvalex.femtocraft.core.traits.block.DroppableInventory
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityEncoder
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.block.Block

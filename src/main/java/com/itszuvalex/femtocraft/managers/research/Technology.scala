@@ -25,8 +25,8 @@ import java.util
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.EnumTechLevel
+import com.itszuvalex.femtocraft.api.core.Configurable
 import com.itszuvalex.femtocraft.api.research.ITechnology
-import com.itszuvalex.femtocraft.configuration.Configurable
 import com.itszuvalex.femtocraft.implicits.ItemStackImplicits._
 import com.itszuvalex.femtocraft.research.gui.GuiResearch
 import com.itszuvalex.femtocraft.research.gui.technology.{GuiTechnology, GuiTechnologyDefault}

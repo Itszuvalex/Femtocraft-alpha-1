@@ -3,7 +3,7 @@ package com.itszuvalex.femtocraft.core
 import java.util
 
 import com.itszuvalex.femtocraft.Femtocraft
-import com.itszuvalex.femtocraft.configuration.Configurable
+import com.itszuvalex.femtocraft.api.core.Configurable
 import com.itszuvalex.femtocraft.implicits.IDImplicits._
 import net.minecraft.block.Block
 import net.minecraft.init.{Blocks, Items}

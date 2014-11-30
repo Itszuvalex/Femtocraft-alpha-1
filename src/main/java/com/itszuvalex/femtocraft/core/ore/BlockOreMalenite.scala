@@ -23,7 +23,7 @@ package com.itszuvalex.femtocraft.core.ore
 import java.util.Random
 
 import com.itszuvalex.femtocraft.Femtocraft
-import com.itszuvalex.femtocraft.configuration.Configurable
+import com.itszuvalex.femtocraft.api.core.Configurable
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.texture.IIconRegister

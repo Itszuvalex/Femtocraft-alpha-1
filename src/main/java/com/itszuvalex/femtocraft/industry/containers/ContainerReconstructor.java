@@ -22,10 +22,10 @@
 package com.itszuvalex.femtocraft.industry.containers;
 
 import com.itszuvalex.femtocraft.api.industry.IAssemblerSchematic;
+import com.itszuvalex.femtocraft.api.items.ItemAssemblySchematic;
 import com.itszuvalex.femtocraft.common.gui.DisplaySlot;
 import com.itszuvalex.femtocraft.common.gui.OutputSlot;
 import com.itszuvalex.femtocraft.core.container.ContainerInv;
-import com.itszuvalex.femtocraft.api.items.ItemAssemblySchematic;
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -56,13 +56,13 @@ public class ContainerReconstructor<T extends TileEntityBaseEntityMicroReconstru
         for (int y = 0; y < 3; ++y) {
             for (int x = 0; x < 3; ++x) {
                 this.addSlotToContainer(new DisplaySlot(inventory(), x + y
-                                                                       * 3, 32 + x * 18, 18 + y * 18) {
+                                                                         * 3, 32 + x * 18, 18 + y * 18) {
                     @Override
                     @SideOnly(Side.CLIENT)
                     public IIcon getBackgroundIconIndex() {
                         return this.inventory
                                        .getStackInSlot(10) != null ? null
-                                : DisplaySlot.noPlaceDisplayIcon;
+                                : DisplaySlot.noPlaceDisplayIcon();
                     }
                 });
             }

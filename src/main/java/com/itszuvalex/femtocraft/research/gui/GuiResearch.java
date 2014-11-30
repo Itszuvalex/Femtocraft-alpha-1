@@ -23,7 +23,7 @@ package com.itszuvalex.femtocraft.research.gui;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.api.research.ITechnology;
-import com.itszuvalex.femtocraft.configuration.Configurable;
+import com.itszuvalex.femtocraft.api.core.Configurable;
 import com.itszuvalex.femtocraft.graph.IGraphNode;
 import com.itszuvalex.femtocraft.managers.research.PlayerResearch;
 import com.itszuvalex.femtocraft.managers.research.ResearchStatus;

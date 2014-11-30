@@ -25,7 +25,7 @@ import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.FemtocraftGuiConstants;
 import com.itszuvalex.femtocraft.api.industry.IAssemblerSchematic;
 import com.itszuvalex.femtocraft.api.power.PowerContainer;
-import com.itszuvalex.femtocraft.configuration.Configurable;
+import com.itszuvalex.femtocraft.api.core.Configurable;
 import com.itszuvalex.femtocraft.api.AssemblerRecipe;
 import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.BaseInventory;

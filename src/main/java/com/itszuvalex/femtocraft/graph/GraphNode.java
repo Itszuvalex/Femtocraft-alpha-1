@@ -30,8 +30,8 @@ public abstract class GraphNode implements IGraphNode {
     private int y;
 
     public GraphNode() {
-        parents = new ArrayList<IGraphNode>();
-        children = new ArrayList<IGraphNode>();
+        parents = new ArrayList<>();
+        children = new ArrayList<>();
         setX(UNINITIALIZED);
         setY(UNINITIALIZED);
     }
@@ -58,32 +58,32 @@ public abstract class GraphNode implements IGraphNode {
 
     @Override
     public int getY() {
-        return (int) (y / getYPadding());
+        return y / getYPadding();
     }
 
     @Override
     public void setY(int y) {
-        this.y = (int) (y * getYPadding());
+        this.y = y * getYPadding();
     }
 
     @Override
     public int getDisplayY() {
-        return (int) (getY() * getYPadding());
+        return getY() * getYPadding();
     }
 
     @Override
     public int getX() {
-        return (int) (x / getXPadding());
+        return x / getXPadding();
     }
 
     @Override
     public void setX(int x) {
-        this.x = (int) (x * getXPadding());
+        this.x = x * getXPadding();
     }
 
     @Override
     public int getDisplayX() {
-        return (int) (getX() * getXPadding());
+        return getX() * getXPadding();
     }
 
     @Override
@@ -97,8 +97,7 @@ public abstract class GraphNode implements IGraphNode {
     }
 
     /**
-     * Sets y to be 1 greater than the max y of all this node's parents. This
-     * assumes 0 is the minimum y.
+     * Sets y to be 1 greater than the max y of all this node's parents. This assumes 0 is the minimum y.
      */
     @Override
     public void findHeight() {
@@ -114,8 +113,7 @@ public abstract class GraphNode implements IGraphNode {
     }
 
     /**
-     * Orders all parents to find their heights, and once it does, then
-     * determines its own;
+     * Orders all parents to find their heights, and once it does, then determines its own;
      */
     @Override
     public void findHeightRecursive() {
@@ -131,8 +129,8 @@ public abstract class GraphNode implements IGraphNode {
     }
 
     /**
-     * Sets height to be 1 less than the minimum of all this node's children.
-     * This assumes findHeight has been run previously.
+     * Sets height to be 1 less than the minimum of all this node's children. This assumes findHeight has been run
+     * previously.
      */
     @Override
     public void shrinkDown() {

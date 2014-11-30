@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.api.power.PowerContainer;
-import com.itszuvalex.femtocraft.configuration.Configurable;
+import com.itszuvalex.femtocraft.api.core.Configurable;
 import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import net.minecraftforge.common.util.ForgeDirection;
 

@@ -27,7 +27,7 @@ import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelAddon;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelCore;
 import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
-import com.itszuvalex.femtocraft.configuration.Configurable;
+import com.itszuvalex.femtocraft.api.core.Configurable;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.power.FemtocraftPowerUtils;

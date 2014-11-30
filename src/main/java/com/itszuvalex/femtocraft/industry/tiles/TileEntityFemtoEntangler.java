@@ -23,7 +23,7 @@ package com.itszuvalex.femtocraft.industry.tiles;
 
 import com.itszuvalex.femtocraft.FemtocraftGuiConstants;
 import com.itszuvalex.femtocraft.api.power.PowerContainer;
-import com.itszuvalex.femtocraft.configuration.Configurable;
+import com.itszuvalex.femtocraft.api.core.Configurable;
 import com.itszuvalex.femtocraft.api.EnumTechLevel;
 
 @Configurable

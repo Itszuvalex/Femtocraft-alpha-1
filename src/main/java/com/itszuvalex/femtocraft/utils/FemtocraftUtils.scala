@@ -110,26 +110,26 @@ object FemtocraftUtils {
   }
 
   def dropItem(item: ItemStack, world: World, x: Int, y: Int, z: Int, rand: Random): Unit = {
-    if (item != null) {
-      val f = rand.nextFloat * 0.8F + 0.1F
-      val f1 = rand.nextFloat * 0.8F + 0.1F
-      val f2 = rand.nextFloat * 0.8F + 0.1F
-      while (item.stackSize > 0) {
-        var k1 = rand.nextInt(21) + 10
-        if (k1 > item.stackSize) {
-          k1 = item.stackSize
-        }
-        item.stackSize -= k1
-        val entityitem = new EntityItem(world, (x.toFloat + f).toDouble, (y.toFloat + f1).toDouble, (z.toFloat + f2).toDouble, new ItemStack(item.getItem, k1, item.getItemDamage))
-        if (item.hasTagCompound) {
-          entityitem.getEntityItem.setTagCompound(item.getTagCompound.copy.asInstanceOf[NBTTagCompound])
-        }
-        val f3 = 0.05F
-        entityitem.motionX = (rand.nextGaussian.toFloat * f3).toDouble
-        entityitem.motionY = (rand.nextGaussian.toFloat * f3 + 0.2F).toDouble
-        entityitem.motionZ = (rand.nextGaussian.toFloat * f3).toDouble
-        world.spawnEntityInWorld(entityitem)
+    if (item == null) return
+
+    val f = rand.nextFloat * 0.8F + 0.1F
+    val f1 = rand.nextFloat * 0.8F + 0.1F
+    val f2 = rand.nextFloat * 0.8F + 0.1F
+    while (item.stackSize > 0) {
+      var k1 = rand.nextInt(21) + 10
+      if (k1 > item.stackSize) {
+        k1 = item.stackSize
       }
+      item.stackSize -= k1
+      val entityitem = new EntityItem(world, (x.toFloat + f).toDouble, (y.toFloat + f1).toDouble, (z.toFloat + f2).toDouble, new ItemStack(item.getItem, k1, item.getItemDamage))
+      if (item.hasTagCompound) {
+        entityitem.getEntityItem.setTagCompound(item.getTagCompound.copy.asInstanceOf[NBTTagCompound])
+      }
+      val f3 = 0.05F
+      entityitem.motionX = (rand.nextGaussian.toFloat * f3).toDouble
+      entityitem.motionY = (rand.nextGaussian.toFloat * f3 + 0.2F).toDouble
+      entityitem.motionZ = (rand.nextGaussian.toFloat * f3).toDouble
+      world.spawnEntityInWorld(entityitem)
     }
   }
 

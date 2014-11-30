@@ -3,6 +3,7 @@ package com.itszuvalex.femtocraft.configuration
 
 import com.google.common.reflect.ClassPath
 import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.api.core.Configurable
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigHelper._
 import cpw.mods.fml.common.FMLCommonHandler
 import cpw.mods.fml.relauncher.Side

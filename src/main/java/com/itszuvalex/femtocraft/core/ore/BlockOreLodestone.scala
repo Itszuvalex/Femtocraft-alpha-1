@@ -23,7 +23,7 @@ package com.itszuvalex.femtocraft.core.ore
 import java.util.Random
 
 import com.itszuvalex.femtocraft.Femtocraft
-import com.itszuvalex.femtocraft.configuration.Configurable
+import com.itszuvalex.femtocraft.api.core.Configurable
 import com.itszuvalex.femtocraft.core.MagnetRegistry
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
 import com.itszuvalex.femtocraft.core.tiles.TileEntityOreLodestone
