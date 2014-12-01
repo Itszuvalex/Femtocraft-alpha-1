@@ -2,6 +2,7 @@ package com.itszuvalex.femtocraft.managers.assembler
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.EnumTechLevel
+import com.itszuvalex.femtocraft.api.core.RecipeType
 import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils
 import net.minecraft.item.{Item, ItemStack}
 
@@ -20,16 +21,16 @@ object ComponentRegistry {
   def getComponents(tech: EnumTechLevel) = getOrMake(tech)
 
   def getComponentsAssemblerRecipeDisplayString(tech: EnumTechLevel) = getComponents(tech).map(i => FemtocraftStringUtils.formatItemStackForTechnologyDisplay
-                                                                                                    (FemtocraftStringUtils.RecipeType.ASSEMBLER, new ItemStack(i), i.getItemStackDisplayName(new ItemStack(i)))).aggregate("")(_ + _, _ + _)
+                                                                                                    (RecipeType.ASSEMBLER, new ItemStack(i), i.getItemStackDisplayName(new ItemStack(i)))).aggregate("")(_ + _, _ + _)
 
   def getComponentsInAssemblerRecipeDisplayString(tech: EnumTechLevel) = {
     Femtocraft.recipeManager.assemblyRecipes.getAllRecipes.filter(p => {
       p.input match {
         case null => false
-        case _    =>
+        case _ =>
           p.input.exists {
                            case null => false
-                           case i    =>
+                           case i =>
                              val it = i.getItem
                              if (it == null) false else getComponents(tech).contains(it)
                          }
@@ -39,6 +40,6 @@ object ComponentRegistry {
 
   private def getOrMake(tech: EnumTechLevel) = componentMap.get(tech) match {
     case Some(a) => a
-    case None    => val b = new ArrayBuffer[Item]; componentMap.put(tech, b); b
+    case None => val b = new ArrayBuffer[Item]; componentMap.put(tech, b); b
   }
 }

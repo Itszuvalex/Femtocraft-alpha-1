@@ -18,33 +18,14 @@
  *  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *  *****************************************************************************
  */
+package com.itszuvalex.femtocraft.research.tiles
 
-package com.itszuvalex.femtocraft.research.items;
+import com.itszuvalex.femtocraft.FemtocraftGuiConstants
+import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 
-import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.api.EnumTechLevel;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.ItemStack;
+class TileEntityResearchComputer extends TileEntityBase {
 
-public class ItemMicroTechnology extends ItemTechnologyCarrier {
+  override def hasGUI = true
 
-    public ItemMicroTechnology() {
-        super("ItemMicroTechnology");
-        setCreativeTab(Femtocraft.femtocraftTab());
-        setUnlocalizedName("itemMicroTechnology");
-    }
-
-    @Override
-    public EnumTechLevel getTechnologyLevel(ItemStack stack) {
-        return EnumTechLevel.MICRO;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister par1IconRegister) {
-        itemIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                                                 + ":" + "ItemMicroTechnology");
-    }
+  override def getGuiID = FemtocraftGuiConstants.ResearchComputerGuiID
 }

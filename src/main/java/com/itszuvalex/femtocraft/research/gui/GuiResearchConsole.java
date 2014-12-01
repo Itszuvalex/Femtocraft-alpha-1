@@ -110,14 +110,14 @@ public class GuiResearchConsole extends GuiContainer {
         int progress = console.getResearchProgressScaled(78);
         this.drawTexturedModalRect(k + 64, l + 65, 0, 166, progress, 6);
 
-        if (console.displayTech != null || console.isResearching()) {
+        if (console.displayTech() != null || console.isResearching()) {
 
             String name;
 
             if (console.isResearching()) {
                 name = console.getResearchingName();
             } else {
-                name = console.displayTech;
+                name = console.displayTech();
             }
 
             ITechnology tech = Femtocraft.researchManager()

@@ -18,33 +18,22 @@
  *  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *  *****************************************************************************
  */
+package com.itszuvalex.femtocraft.research.items
 
-package com.itszuvalex.femtocraft.research.items;
+import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.api.EnumTechLevel
+import com.itszuvalex.femtocraft.api.research.ItemTechnologyCarrier
+import cpw.mods.fml.relauncher.{Side, SideOnly}
+import net.minecraft.client.renderer.texture.IIconRegister
+import net.minecraft.item.ItemStack
 
-import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.api.EnumTechLevel;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.ItemStack;
+class ItemFemtoTechnology extends ItemTechnologyCarrier("ItemFemtoTechnology") {
+  setCreativeTab(Femtocraft.femtocraftTab)
+  setUnlocalizedName("itemFemtoTechnology")
 
-public class ItemNanoTechnology extends ItemTechnologyCarrier {
+  def getTechnologyLevel(stack: ItemStack) = EnumTechLevel.FEMTO
 
-    public ItemNanoTechnology() {
-        super("ItemNanoTechnology");
-        setCreativeTab(Femtocraft.femtocraftTab());
-        setUnlocalizedName("itemNanoTechnology");
-    }
-
-    @Override
-    public EnumTechLevel getTechnologyLevel(ItemStack stack) {
-        return EnumTechLevel.NANO;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister par1IconRegister) {
-        itemIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                                                 + ":" + "ItemNanoTechnology");
-    }
+  @SideOnly(Side.CLIENT) override def registerIcons(par1IconRegister: IIconRegister) {
+    itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "ItemFemtoTechnology")
+  }
 }

@@ -159,7 +159,7 @@ public class RenderQuad {
     public void draw() {
         Tessellator tes = Tessellator.instance;
         RenderVector3 normal = getNormal();
-        tes.setNormal((float) normal.x, (float) normal.y, (float) normal.z);
+        tes.setNormal((float) normal.x(), (float) normal.y(), (float) normal.z());
         tes.addVertexWithUV(a.x, a.y, a.z, minU, maxV);
         tes.addVertexWithUV(b.x, b.y, b.z, minU, minV);
         tes.addVertexWithUV(c.x, c.y, c.z, maxU, minV);

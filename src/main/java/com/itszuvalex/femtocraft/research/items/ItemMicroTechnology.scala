@@ -18,30 +18,22 @@
  *  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *  *****************************************************************************
  */
+package com.itszuvalex.femtocraft.research.items
 
-package com.itszuvalex.femtocraft.research.tiles;
+import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.api.EnumTechLevel
+import com.itszuvalex.femtocraft.api.research.ItemTechnologyCarrier
+import cpw.mods.fml.relauncher.{Side, SideOnly}
+import net.minecraft.client.renderer.texture.IIconRegister
+import net.minecraft.item.ItemStack
 
-import com.itszuvalex.femtocraft.FemtocraftGuiConstants;
-import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
+class ItemMicroTechnology extends ItemTechnologyCarrier("ItemMicroTechnology") {
+  setCreativeTab(Femtocraft.femtocraftTab)
+  setUnlocalizedName("itemMicroTechnology")
 
-public class TileEntityResearchComputer extends TileEntityBase {
-    public TileEntityResearchComputer() {
-        super();
-    }
+  def getTechnologyLevel(stack: ItemStack) = EnumTechLevel.MICRO
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see TileEntityBase#hasGUI()
-     */
-    @Override
-    public boolean hasGUI() {
-        return true;
-    }
-
-    @Override
-    public int getGuiID() {
-        return FemtocraftGuiConstants.ResearchComputerGuiID();
-    }
-
+  @SideOnly(Side.CLIENT) override def registerIcons(par1IconRegister: IIconRegister) {
+    itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "ItemMicroTechnology")
+  }
 }
