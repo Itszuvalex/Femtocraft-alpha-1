@@ -22,8 +22,8 @@ package com.itszuvalex.femtocraft.industry.containers
 
 import com.itszuvalex.femtocraft.common.gui.OutputSlot
 import com.itszuvalex.femtocraft.core.container.ContainerInv
-import com.itszuvalex.femtocraft.industry.containers.ContainerFemtoChronoshifter._
-import com.itszuvalex.femtocraft.industry.tiles.TileEntityFemtoChronoshifter
+import com.itszuvalex.femtocraft.industry.containers.ContainerNanoHorologe._
+import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityNanoHorologe
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.entity.player.{EntityPlayer, InventoryPlayer}
 import net.minecraft.inventory.{ICrafting, Slot}
@@ -31,13 +31,13 @@ import net.minecraft.item.ItemStack
 
 import scala.collection.JavaConversions._
 
-object ContainerFemtoChronoshifter {
+object ContainerNanoHorologe {
   private val cookTimeID    = 0
   private val cookTimeMaxID = 1
   private val powerID       = 2
 }
 
-class ContainerFemtoChronoshifter(player: EntityPlayer, par1InventoryPlayer: InventoryPlayer, par2TileEntityFurnace: TileEntityFemtoChronoshifter) extends ContainerInv[TileEntityFemtoChronoshifter](player, par2TileEntityFurnace, 0, 1) {
+class ContainerNanoHorologe(player: EntityPlayer, par1InventoryPlayer: InventoryPlayer, par2TileEntityFurnace: TileEntityBaseEntityNanoHorologe) extends ContainerInv[TileEntityBaseEntityNanoHorologe](player, par2TileEntityFurnace, 0, 4) {
   private var lastCookTime = 0
   private var lastCookMax  = 0
   private var lastPower    = 0
@@ -46,10 +46,7 @@ class ContainerFemtoChronoshifter(player: EntityPlayer, par1InventoryPlayer: Inv
   addSlotToContainer(new Slot(inventory, 1, 66, 21))
   addSlotToContainer(new Slot(inventory, 2, 87, 21))
   addSlotToContainer(new Slot(inventory, 3, 108, 21))
-  addSlotToContainer(new Slot(inventory, 4, 66, 49))
-  addSlotToContainer(new Slot(inventory, 5, 87, 49))
-  addSlotToContainer(new Slot(inventory, 6, 108, 49))
-  addSlotToContainer(new OutputSlot(inventory, 7, 143, 35))
+  addSlotToContainer(new OutputSlot(inventory, 4, 143, 35))
   addPlayerInventorySlots(par1InventoryPlayer)
 
   override def addCraftingToCrafters(par1ICrafting: ICrafting) {
@@ -75,9 +72,9 @@ class ContainerFemtoChronoshifter(player: EntityPlayer, par1InventoryPlayer: Inv
         sendUpdateToCrafter(this, icrafting, powerID, inventory.getCurrentPower)
       }
                      }
-    lastCookTime = inventory.getProgress
-    lastCookMax = inventory.getProgressMax
-    lastPower = inventory.getCurrentPower
+    this.lastCookTime = this.inventory.getProgress
+    this.lastCookMax = this.inventory.getProgressMax
+    this.lastPower = this.inventory.getCurrentPower
   }
 
   @SideOnly(Side.CLIENT) override def updateProgressBar(par1: Int, par2: Int) {
@@ -85,9 +82,9 @@ class ContainerFemtoChronoshifter(player: EntityPlayer, par1InventoryPlayer: Inv
       case `cookTimeID` => inventory.setProgress(par2)
       case `cookTimeMaxID` => inventory.setProgressMax(par2)
       case `powerID` => inventory.setCurrentStorage(par2)
+      case _ =>
     }
   }
 
   override def eligibleForInput(item: ItemStack) = true
 }
-

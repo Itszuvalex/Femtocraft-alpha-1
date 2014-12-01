@@ -18,15 +18,12 @@
  *  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *  *****************************************************************************
  */
+package com.itszuvalex.femtocraft.industry.containers
 
-package com.itszuvalex.femtocraft.industry.containers;
+import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor
+import net.minecraft.entity.player.{EntityPlayer, InventoryPlayer}
 
-import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-
-public class ContainerMicroFurnace extends ContainerFurnace<TileEntityBaseEntityMicroFurnace> {
-    public ContainerMicroFurnace(EntityPlayer player, InventoryPlayer par1InventoryPlayer, TileEntityBaseEntityMicroFurnace par2TileEntityFurnace) {
-        super(player, par1InventoryPlayer, par2TileEntityFurnace);
-    }
-}
+/**
+ * Created by Christopher Harris (Itszuvalex) on 7/27/14.
+ */
+class ContainerMicroReconstructor(player: EntityPlayer, par1InventoryPlayer: InventoryPlayer, inventory: TileEntityBaseEntityMicroReconstructor) extends ContainerReconstructor[TileEntityBaseEntityMicroReconstructor](player, par1InventoryPlayer, inventory)

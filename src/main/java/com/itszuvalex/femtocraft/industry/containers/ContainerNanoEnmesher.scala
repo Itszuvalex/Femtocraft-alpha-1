@@ -22,8 +22,8 @@ package com.itszuvalex.femtocraft.industry.containers
 
 import com.itszuvalex.femtocraft.common.gui.OutputSlot
 import com.itszuvalex.femtocraft.core.container.ContainerInv
-import com.itszuvalex.femtocraft.industry.containers.ContainerFemtoChronoshifter._
-import com.itszuvalex.femtocraft.industry.tiles.TileEntityFemtoChronoshifter
+import com.itszuvalex.femtocraft.industry.containers.ContainerNanoEnmesher._
+import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityNanoEnmesher
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.entity.player.{EntityPlayer, InventoryPlayer}
 import net.minecraft.inventory.{ICrafting, Slot}
@@ -31,25 +31,23 @@ import net.minecraft.item.ItemStack
 
 import scala.collection.JavaConversions._
 
-object ContainerFemtoChronoshifter {
+object ContainerNanoEnmesher {
   private val cookTimeID    = 0
   private val cookTimeMaxID = 1
   private val powerID       = 2
 }
 
-class ContainerFemtoChronoshifter(player: EntityPlayer, par1InventoryPlayer: InventoryPlayer, par2TileEntityFurnace: TileEntityFemtoChronoshifter) extends ContainerInv[TileEntityFemtoChronoshifter](player, par2TileEntityFurnace, 0, 1) {
+class ContainerNanoEnmesher(player: EntityPlayer, par1InventoryPlayer: InventoryPlayer, par2TileEntityFurnace: TileEntityBaseEntityNanoEnmesher) extends ContainerInv[TileEntityBaseEntityNanoEnmesher](player, par2TileEntityFurnace, 0, 5) {
   private var lastCookTime = 0
   private var lastCookMax  = 0
   private var lastPower    = 0
 
-  addSlotToContainer(new Slot(inventory, 0, 33, 35))
-  addSlotToContainer(new Slot(inventory, 1, 66, 21))
-  addSlotToContainer(new Slot(inventory, 2, 87, 21))
-  addSlotToContainer(new Slot(inventory, 3, 108, 21))
-  addSlotToContainer(new Slot(inventory, 4, 66, 49))
-  addSlotToContainer(new Slot(inventory, 5, 87, 49))
-  addSlotToContainer(new Slot(inventory, 6, 108, 49))
-  addSlotToContainer(new OutputSlot(inventory, 7, 143, 35))
+  addSlotToContainer(new Slot(inventory, 0, 89, 35))
+  addSlotToContainer(new Slot(inventory, 1, 89, 8))
+  addSlotToContainer(new Slot(inventory, 2, 62, 35))
+  addSlotToContainer(new Slot(inventory, 3, 116, 35))
+  addSlotToContainer(new Slot(inventory, 4, 89, 62))
+  addSlotToContainer(new OutputSlot(inventory, 5, 147, 35))
   addPlayerInventorySlots(par1InventoryPlayer)
 
   override def addCraftingToCrafters(par1ICrafting: ICrafting) {
@@ -90,4 +88,3 @@ class ContainerFemtoChronoshifter(player: EntityPlayer, par1InventoryPlayer: Inv
 
   override def eligibleForInput(item: ItemStack) = true
 }
-

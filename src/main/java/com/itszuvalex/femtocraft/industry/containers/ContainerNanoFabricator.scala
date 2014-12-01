@@ -18,16 +18,10 @@
  *  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *  *****************************************************************************
  */
+package com.itszuvalex.femtocraft.industry.containers
 
-package com.itszuvalex.femtocraft.industry.containers;
+import com.itszuvalex.femtocraft.industry.tiles.TileEntityNanoFabricator
+import net.minecraft.entity.player.{EntityPlayer, InventoryPlayer}
 
-import com.itszuvalex.femtocraft.industry.tiles.TileEntityNanoFabricator;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-
-public class ContainerNanoFabricator extends ContainerReconstructor<TileEntityNanoFabricator> {
-
-    public ContainerNanoFabricator(EntityPlayer player, InventoryPlayer par1InventoryPlayer, TileEntityNanoFabricator inventory) {
-        super(player, par1InventoryPlayer, inventory);
-    }
-}
+class ContainerNanoFabricator(player: EntityPlayer, par1InventoryPlayer: InventoryPlayer, inventory: TileEntityNanoFabricator)
+  extends ContainerReconstructor[TileEntityNanoFabricator](player, par1InventoryPlayer, inventory)

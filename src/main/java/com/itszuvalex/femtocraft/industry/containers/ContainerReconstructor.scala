@@ -20,47 +20,49 @@
  */
 package com.itszuvalex.femtocraft.industry.containers
 
-import com.itszuvalex.femtocraft.Femtocraft
-import com.itszuvalex.femtocraft.common.gui.OutputSlot
+import com.itszuvalex.femtocraft.api.industry.IAssemblerSchematic
+import com.itszuvalex.femtocraft.api.items.ItemAssemblySchematic
+import com.itszuvalex.femtocraft.common.gui.{DisplaySlot, OutputSlot}
 import com.itszuvalex.femtocraft.core.container.ContainerInv
-import com.itszuvalex.femtocraft.industry.containers.ContainerDeconstructor._
-import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor
+import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.entity.player.{EntityPlayer, InventoryPlayer}
 import net.minecraft.inventory.{ICrafting, Slot}
 import net.minecraft.item.ItemStack
+import net.minecraft.util.IIcon
 
 import scala.collection.JavaConversions._
 
-/**
- * Created by Christopher Harris (Itszuvalex) on 7/27/14.
- */
-object ContainerDeconstructor {
-  private val cookTimeIndex     = 0
-  private val currentPowerIndex = 1
-  private val massAmountIndex   = 2
-}
-
-
-class ContainerDeconstructor[T <: TileEntityBaseEntityMicroDeconstructor](player: EntityPlayer, par1InventoryPlayer: InventoryPlayer, inv: T) extends ContainerInv[T](player, inv, 0, 9) {
+class ContainerReconstructor[T <: TileEntityBaseEntityMicroReconstructor](player: EntityPlayer, par1InventoryPlayer: InventoryPlayer, inventory: T) extends ContainerInv[T](player, inventory, 10, 9) {
   private var lastCookTime = 0
   private var lastPower    = 0
   private var lastMass     = 0
 
-  addSlotToContainer(new Slot(inventory, 0, 38, 36))
-
+  addSlotToContainer(new OutputSlot(inventory, 9, 122, 18))
+  val schematic: Slot = new Slot(inventory, 10, 93, 54) {
+    override def isItemValid(par1ItemStack: ItemStack) = par1ItemStack.getItem.isInstanceOf[IAssemblerSchematic]
+  }
+  schematic.setBackgroundIcon(ItemAssemblySchematic.placeholderIcon)
+  addSlotToContainer(schematic)
   for (y <- 0 until 3) {
     for (x <- 0 until 3) {
-      addSlotToContainer(new OutputSlot(inventory, x + y * 3 + 1, 88 + x * 18, 18 + y * 18))
+      addSlotToContainer(new DisplaySlot(inventory, x + y * 3, 32 + x * 18, 18 + y * 18) {
+        @SideOnly(Side.CLIENT) override def getBackgroundIconIndex: IIcon = if (this.inventory.getStackInSlot(10) != null) null else DisplaySlot.noPlaceDisplayIcon
+      })
     }
   }
-  addPlayerInventorySlots(par1InventoryPlayer)
+  for (y <- 0 until 2) {
+    for (x <- 0 until 9) {
+      addSlotToContainer(new Slot(inventory, 11 + x + y * 9, 8 + x * 18, 77 + y * 18))
+    }
+  }
+  addPlayerInventorySlots(par1InventoryPlayer, 8, 122)
 
   override def addCraftingToCrafters(par1ICrafting: ICrafting) {
     super.addCraftingToCrafters(par1ICrafting)
-    sendUpdateToCrafter(this, par1ICrafting, cookTimeIndex, inventory.cookTime)
-    sendUpdateToCrafter(this, par1ICrafting, currentPowerIndex, inventory.getCurrentPower)
-    sendUpdateToCrafter(this, par1ICrafting, massAmountIndex, inventory.getMassAmount)
+    sendUpdateToCrafter(this, par1ICrafting, 0, inventory.cookTime)
+    sendUpdateToCrafter(this, par1ICrafting, 1, inventory.getCurrentPower)
+    sendUpdateToCrafter(this, par1ICrafting, 2, inventory.getMassAmount)
   }
 
   /**
@@ -70,16 +72,15 @@ class ContainerDeconstructor[T <: TileEntityBaseEntityMicroDeconstructor](player
     super.detectAndSendChanges()
     crafters.foreach { case icrafting: ICrafting =>
       if (lastCookTime != inventory.cookTime) {
-        sendUpdateToCrafter(this, icrafting, cookTimeIndex, inventory.cookTime)
+        sendUpdateToCrafter(this, icrafting, 0, inventory.cookTime)
       }
       if (lastPower != inventory.getCurrentPower) {
-        sendUpdateToCrafter(this, icrafting, currentPowerIndex, inventory.getCurrentPower)
+        sendUpdateToCrafter(this, icrafting, 1, inventory.getCurrentPower)
       }
       if (lastMass != inventory.getMassAmount) {
-        sendUpdateToCrafter(this, icrafting, massAmountIndex, inventory.getMassAmount)
+        sendUpdateToCrafter(this, icrafting, 2, inventory.getMassAmount)
       }
                      }
-
     lastCookTime = inventory.cookTime
     lastPower = inventory.getCurrentPower
     lastMass = inventory.getMassAmount
@@ -87,13 +88,12 @@ class ContainerDeconstructor[T <: TileEntityBaseEntityMicroDeconstructor](player
 
   @SideOnly(Side.CLIENT) override def updateProgressBar(par1: Int, par2: Int) {
     par1 match {
-      case `cookTimeIndex` => inventory.cookTime = par2
-      case `currentPowerIndex` => inventory.currentPower = par2
-      case `massAmountIndex` => if (par2 > 0) inventory.setFluidAmount(par2) else inventory.clearFluid()
+      case 0 => inventory.cookTime_$eq(par2)
+      case 1 => inventory.currentPower_$eq(par2)
+      case 2 => if (par2 > 0) inventory.setFluidAmount(par2) else this.inventory.clearFluid()
       case _ =>
     }
   }
 
-  override def eligibleForInput(item: ItemStack) = Femtocraft.recipeManager.assemblyRecipes.getRecipe(item) != null
+  override def eligibleForInput(item: ItemStack) = item.getItem.isInstanceOf[IAssemblerSchematic]
 }
-

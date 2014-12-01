@@ -18,35 +18,10 @@
  *  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *  *****************************************************************************
  */
+package com.itszuvalex.femtocraft.industry.containers
 
-package com.itszuvalex.femtocraft.industry.gui.graph;
+import com.itszuvalex.femtocraft.industry.tiles.TileEntityFemtoCoagulator
+import net.minecraft.entity.player.{EntityPlayer, InventoryPlayer}
 
-import com.itszuvalex.femtocraft.graph.GraphNode;
-import net.minecraft.item.ItemStack;
+class ContainerFemtoCoagulator(player: EntityPlayer, par1InventoryPlayer: InventoryPlayer, inventory: TileEntityFemtoCoagulator) extends ContainerReconstructor[TileEntityFemtoCoagulator](player, par1InventoryPlayer, inventory)
 
-/**
- * Created by Christopher Harris (Itszuvalex) on 4/26/14.
- */
-public class AssemblerNode extends GraphNode {
-    private final ItemStack item;
-
-    public AssemblerNode(ItemStack item) {
-        super();
-        this.item = item;
-    }
-
-    public ItemStack getItemStack() {
-        return item;
-    }
-
-    @Override
-    public int getXPadding() {
-        return 0;
-    }
-
-    @Override
-    public int getYPadding() {
-        return 0;
-    }
-
-}

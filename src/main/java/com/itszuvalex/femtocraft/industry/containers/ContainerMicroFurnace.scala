@@ -18,14 +18,9 @@
  *  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *  *****************************************************************************
  */
+package com.itszuvalex.femtocraft.industry.containers
 
-package com.itszuvalex.femtocraft.industry.gui.graph;
+import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace
+import net.minecraft.entity.player.{EntityPlayer, InventoryPlayer}
 
-/**
- * Created by Christopher Harris (Itszuvalex) on 4/26/14.
- */
-public class DummyAssemblerNode extends AssemblerGraph {
-    public DummyAssemblerNode() {
-        super(null);
-    }
-}
+class ContainerMicroFurnace(player: EntityPlayer, par1InventoryPlayer: InventoryPlayer, par2TileEntityFurnace: TileEntityBaseEntityMicroFurnace) extends ContainerFurnace[TileEntityBaseEntityMicroFurnace](player, par1InventoryPlayer, par2TileEntityFurnace)

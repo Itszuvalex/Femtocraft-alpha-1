@@ -18,15 +18,9 @@
  *  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *  *****************************************************************************
  */
+package com.itszuvalex.femtocraft.industry.gui.graph
 
-package com.itszuvalex.femtocraft.industry.containers;
-
-import com.itszuvalex.femtocraft.industry.tiles.TileEntityFemtoRepurposer;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-
-public class ContainerFemtoRepurposer extends ContainerDeconstructor<TileEntityFemtoRepurposer> {
-    public ContainerFemtoRepurposer(EntityPlayer player, InventoryPlayer par1InventoryPlayer, TileEntityFemtoRepurposer inventory) {
-        super(player, par1InventoryPlayer, inventory);
-    }
-}
+/**
+ * Created by Christopher Harris (Itszuvalex) on 4/26/14.
+ */
+class DummyAssemblerNode extends AssemblerNode(null)

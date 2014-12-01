@@ -140,7 +140,7 @@ public class TileEntityResearchConsole extends TileEntityBase implements
                 researchingTech);
         researchingTech = null;
         inventory[inventory.length - 1] = techstack;
-        onInventoryChanged();
+        markDirty();
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 
@@ -243,7 +243,7 @@ public class TileEntityResearchConsole extends TileEntityBase implements
             decrStackSize(i, tech.getResearchMaterials()[i].stackSize);
         }
 
-        this.onInventoryChanged();
+        markDirty();
     }
 
     private boolean canWork() {

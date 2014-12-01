@@ -18,15 +18,19 @@
  *  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *  *****************************************************************************
  */
+package com.itszuvalex.femtocraft.industry.gui.graph
 
-package com.itszuvalex.femtocraft.industry.containers;
+import com.itszuvalex.femtocraft.graph.GraphNode
+import net.minecraft.item.ItemStack
 
-import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
+/**
+ * Created by Christopher Harris (Itszuvalex) on 4/26/14.
+ */
+class AssemblerNode(private val item: ItemStack) extends GraphNode {
 
-public class ContainerMicroDeconstructor extends ContainerDeconstructor<TileEntityBaseEntityMicroDeconstructor> {
-    public ContainerMicroDeconstructor(EntityPlayer player, InventoryPlayer par1InventoryPlayer, TileEntityBaseEntityMicroDeconstructor inventory) {
-        super(player, par1InventoryPlayer, inventory);
-    }
+  def getItemStack = item
+
+  def getXPadding = 0
+
+  def getYPadding = 0
 }

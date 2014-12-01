@@ -22,8 +22,8 @@ package com.itszuvalex.femtocraft.industry.containers
 
 import com.itszuvalex.femtocraft.common.gui.OutputSlot
 import com.itszuvalex.femtocraft.core.container.ContainerInv
-import com.itszuvalex.femtocraft.industry.containers.ContainerFemtoChronoshifter._
-import com.itszuvalex.femtocraft.industry.tiles.TileEntityFemtoChronoshifter
+import com.itszuvalex.femtocraft.industry.containers.ContainerFemtoEntangler._
+import com.itszuvalex.femtocraft.industry.tiles.TileEntityFemtoEntangler
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.entity.player.{EntityPlayer, InventoryPlayer}
 import net.minecraft.inventory.{ICrafting, Slot}
@@ -31,25 +31,32 @@ import net.minecraft.item.ItemStack
 
 import scala.collection.JavaConversions._
 
-object ContainerFemtoChronoshifter {
-  private val cookTimeID    = 0
-  private val cookTimeMaxID = 1
-  private val powerID       = 2
+object ContainerFemtoEntangler {
+  private val cookTimeID   : Int = 0
+  private val cookTimeMaxID: Int = 1
+  private val powerID      : Int = 2
 }
 
-class ContainerFemtoChronoshifter(player: EntityPlayer, par1InventoryPlayer: InventoryPlayer, par2TileEntityFurnace: TileEntityFemtoChronoshifter) extends ContainerInv[TileEntityFemtoChronoshifter](player, par2TileEntityFurnace, 0, 1) {
+class ContainerFemtoEntangler(player: EntityPlayer, par1InventoryPlayer: InventoryPlayer, par2TileEntityFurnace: TileEntityFemtoEntangler)
+  extends ContainerInv[TileEntityFemtoEntangler](player, par2TileEntityFurnace, 0, 13) {
   private var lastCookTime = 0
   private var lastCookMax  = 0
   private var lastPower    = 0
 
-  addSlotToContainer(new Slot(inventory, 0, 33, 35))
-  addSlotToContainer(new Slot(inventory, 1, 66, 21))
-  addSlotToContainer(new Slot(inventory, 2, 87, 21))
-  addSlotToContainer(new Slot(inventory, 3, 108, 21))
-  addSlotToContainer(new Slot(inventory, 4, 66, 49))
-  addSlotToContainer(new Slot(inventory, 5, 87, 49))
-  addSlotToContainer(new Slot(inventory, 6, 108, 49))
-  addSlotToContainer(new OutputSlot(inventory, 7, 143, 35))
+  addSlotToContainer(new Slot(inventory, 0, 89, 35))
+  addSlotToContainer(new Slot(inventory, 1, 62, 8))
+  addSlotToContainer(new Slot(inventory, 2, 80, 8))
+  addSlotToContainer(new Slot(inventory, 3, 98, 8))
+  addSlotToContainer(new Slot(inventory, 4, 116, 8))
+  addSlotToContainer(new Slot(inventory, 5, 62, 26))
+  addSlotToContainer(new Slot(inventory, 6, 116, 26))
+  addSlotToContainer(new Slot(inventory, 7, 62, 44))
+  addSlotToContainer(new Slot(inventory, 8, 116, 44))
+  addSlotToContainer(new Slot(inventory, 9, 62, 62))
+  addSlotToContainer(new Slot(inventory, 10, 80, 62))
+  addSlotToContainer(new Slot(inventory, 11, 98, 62))
+  addSlotToContainer(new Slot(inventory, 12, 116, 62))
+  addSlotToContainer(new OutputSlot(inventory, 13, 147, 35))
   addPlayerInventorySlots(par1InventoryPlayer)
 
   override def addCraftingToCrafters(par1ICrafting: ICrafting) {

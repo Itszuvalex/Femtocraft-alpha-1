@@ -18,19 +18,9 @@
  *  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *  *****************************************************************************
  */
+package com.itszuvalex.femtocraft.industry.containers
 
-package com.itszuvalex.femtocraft.industry.containers;
+import com.itszuvalex.femtocraft.industry.tiles.TileEntityNanoDismantler
+import net.minecraft.entity.player.{EntityPlayer, InventoryPlayer}
 
-import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-
-/**
- * Created by Christopher Harris (Itszuvalex) on 7/27/14.
- */
-public class ContainerMicroReconstructor extends ContainerReconstructor<TileEntityBaseEntityMicroReconstructor> {
-
-    public ContainerMicroReconstructor(EntityPlayer player, InventoryPlayer par1InventoryPlayer, TileEntityBaseEntityMicroReconstructor inventory) {
-        super(player, par1InventoryPlayer, inventory);
-    }
-}
+class ContainerNanoDismantler(player: EntityPlayer, par1InventoryPlayer: InventoryPlayer, inventory: TileEntityNanoDismantler) extends ContainerDeconstructor[TileEntityNanoDismantler](player, par1InventoryPlayer, inventory)
