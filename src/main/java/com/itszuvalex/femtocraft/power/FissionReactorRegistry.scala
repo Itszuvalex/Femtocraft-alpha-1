@@ -3,7 +3,7 @@ package com.itszuvalex.femtocraft.power
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.implicits.IDImplicits._
 import net.minecraft.init.{Blocks, Items}
-import net.minecraft.item.{Item, ItemStack}
+import net.minecraft.item.ItemStack
 
 import scala.collection.mutable
 
@@ -11,9 +11,9 @@ import scala.collection.mutable
  * Created by Chris on 8/19/2014.
  */
 object FissionReactorRegistry {
-  private val thoriumMap = new mutable.HashMap[Integer, FissionReactorReagent]
-  private val saltMap    = new mutable.HashMap[Integer, FissionReactorReagent]
-  private val heatMap    = new mutable.HashMap[Integer, FissionReactorReagent]
+  private val thoriumMap = new mutable.HashMap[Int, FissionReactorReagent]
+  private val saltMap    = new mutable.HashMap[Int, FissionReactorReagent]
+  private val heatMap    = new mutable.HashMap[Int, FissionReactorReagent]
 
   def init() {
     addFissionReactorHeatSource(new ItemStack(Blocks.snow), 0, -1)
@@ -51,9 +51,9 @@ object FissionReactorRegistry {
 
   def getThoriumSource(item: ItemStack): FissionReactorReagent = thoriumMap.get(item.getItem.itemID).orNull
 
-  def getSaltSource(item: ItemStack): FissionReactorReagent = saltMap.get(Item.getIdFromItem(item.getItem)).orNull
+  def getSaltSource(item: ItemStack): FissionReactorReagent = saltMap.get(item.getItem.itemID).orNull
 
-  def getHeatSource(item: ItemStack): FissionReactorReagent = heatMap.get(Item.getIdFromItem(item.getItem)).orNull
+  def getHeatSource(item: ItemStack): FissionReactorReagent = heatMap.get(item.getItem.itemID).orNull
 
   class FissionReactorReagent(val item: ItemStack, val amount: Int, val temp: Float)
 
