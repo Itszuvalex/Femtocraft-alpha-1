@@ -109,17 +109,17 @@ public class RenderChargingCoil implements
 
         RenderQuad connectorNorth = new RenderQuad(new RenderPoint(min, minY, min), new RenderPoint(
                 min, maxY, min), new RenderPoint(max, maxY, min), new RenderPoint(max,
-                minY, min), coil.coilConnector);
+                minY, min), coil.coilConnector());
         RenderQuad connectorSouth = new RenderQuad(new RenderPoint(max, minY, max), new RenderPoint(
                 max, maxY, max), new RenderPoint(min, maxY, max), new RenderPoint(min,
-                minY, max), coil.coilConnector);
+                minY, max), coil.coilConnector());
         RenderQuad connectorEast = new RenderQuad(new RenderPoint(max, minY, min), new RenderPoint(max,
                 maxY, min), new RenderPoint(max, maxY, max),
-                new RenderPoint(max, minY, max), coil.coilConnector
+                new RenderPoint(max, minY, max), coil.coilConnector()
         );
         RenderQuad connectorWest = new RenderQuad(new RenderPoint(min, minY, max), new RenderPoint(min,
                 maxY, max), new RenderPoint(min, maxY, min),
-                new RenderPoint(min, minY, min), coil.coilConnector
+                new RenderPoint(min, minY, min), coil.coilConnector()
         );
 
         segment.addQuad(connectorNorth);
@@ -129,10 +129,10 @@ public class RenderChargingCoil implements
 
         RenderQuad top = new RenderQuad(new RenderPoint(0, maxY, 0), new RenderPoint(0, maxY, 1),
                 new RenderPoint(1, maxY, 1), new RenderPoint(1, maxY, 0),
-                coil.coilConnectorTop);
+                coil.coilConnectorTop());
         RenderQuad bot = new RenderQuad(new RenderPoint(1, minY, 0), new RenderPoint(1, minY, 1),
                 new RenderPoint(0, minY, 1), new RenderPoint(0, minY, 0),
-                coil.coilConnectorTop);
+                coil.coilConnectorTop());
 
         segment.addQuad(top);
         segment.addQuad(bot);

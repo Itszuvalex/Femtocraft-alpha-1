@@ -72,39 +72,39 @@ public class RenderChargingCapacitor implements ISimpleBlockRenderingHandler {
         float min = 2.f / 16.f;
         float max = 14.f / 16.f;
         model.addQuad(RenderUtils.makeTopFace(min, max, min, max, max,
-                block.capacitorTop,
-                block.capacitorTop.getInterpolatedU(2.f),
-                block.capacitorTop.getInterpolatedU(14.f),
-                block.capacitorTop.getInterpolatedV(2.f),
-                block.capacitorTop.getInterpolatedV(14.f)
+                block.capacitorTop(),
+                block.capacitorTop().getInterpolatedU(2.f),
+                block.capacitorTop().getInterpolatedU(14.f),
+                block.capacitorTop().getInterpolatedV(2.f),
+                block.capacitorTop().getInterpolatedV(14.f)
         ));
         model.addQuad(RenderUtils.makeBottomFace(min, max, min, max, min,
-                block.capacitorBot,
-                block.capacitorBot.getInterpolatedU(2.f),
-                block.capacitorBot.getInterpolatedU(14.f),
-                block.capacitorBot.getInterpolatedV(2.f),
-                block.capacitorBot.getInterpolatedV(14.f)
+                block.capacitorBot(),
+                block.capacitorBot().getInterpolatedU(2.f),
+                block.capacitorBot().getInterpolatedU(14.f),
+                block.capacitorBot().getInterpolatedV(2.f),
+                block.capacitorBot().getInterpolatedV(14.f)
         ));
-        float minU = block.capacitorSide.getInterpolatedU(2.f);
-        float maxU = block.capacitorSide.getInterpolatedU(14.f);
-        float minV = block.capacitorSide.getInterpolatedV(2.f);
-        float maxV = block.capacitorSide.getInterpolatedV(14.f);
+        float minU = block.capacitorSide().getInterpolatedU(2.f);
+        float maxU = block.capacitorSide().getInterpolatedU(14.f);
+        float minV = block.capacitorSide().getInterpolatedV(2.f);
+        float maxV = block.capacitorSide().getInterpolatedV(14.f);
         model.addQuad(RenderUtils.makeNorthFace(min, max, min, max,
                 min,
-                block.capacitorSide, minU,
+                block.capacitorSide(), minU,
                 maxU, minV, maxV).flipV());
         model.addQuad(RenderUtils.makeEastFace(min, max, min, max, max,
-                block.capacitorSide, minU,
+                block.capacitorSide(), minU,
                 maxU, minV, maxV).flipV()
                 .rotatePointsClockwise()
                 .rotatePointsClockwise());
         model.addQuad(RenderUtils.makeWestFace(min, max, min, max, min,
-                block.capacitorSide, minU,
+                block.capacitorSide(), minU,
                 maxU, minV,
                 maxV).flipV().rotatePointsClockwise
                 ());
         model.addQuad(RenderUtils.makeSouthFace(min, max, min, max, max,
-                block.capacitorSide, minU,
+                block.capacitorSide(), minU,
                 maxU, minV, maxV).flipV());
 
         min = 4.f / 16.f;
@@ -112,25 +112,25 @@ public class RenderChargingCapacitor implements ISimpleBlockRenderingHandler {
         float minY = 0.f;
         float maxY = 2.f / 16.f;
 
-        minU = block.capacitorConnector.getMinU();
-        maxU = block.capacitorConnector.getMaxU();
-        minV = block.capacitorConnector.getInterpolatedV(12.f);
-        maxV = block.capacitorConnector.getMaxV();
+        minU = block.capacitorConnector().getMinU();
+        maxU = block.capacitorConnector().getMaxU();
+        minV = block.capacitorConnector().getInterpolatedV(12.f);
+        maxV = block.capacitorConnector().getMaxV();
 
         model.addQuad(RenderUtils.makeNorthFace(min, max, minY - .0001f, maxY,
                 min,
-                block.capacitorConnector, minU, maxU, minV,
+                block.capacitorConnector(), minU, maxU, minV,
                 maxV));
         model.addQuad(RenderUtils.makeEastFace(min, max, minY - .0001f, maxY,
                         max,
-                        block.capacitorConnector, minU, maxU, minV,
+                        block.capacitorConnector(), minU, maxU, minV,
                         maxV).rotateOnXAxis(-Math.PI /
                                             2.f, .5f, .5f).rotatePointsClockwise
                         ()
         );
         model.addQuad(RenderUtils.makeWestFace(min, max, minY - .0001f, maxY,
                         min,
-                        block.capacitorConnector, minU, maxU, minV,
+                        block.capacitorConnector(), minU, maxU, minV,
                         maxV).rotateOnXAxis(-Math.PI /
                                             2.f, .5f, .5f).rotatePointsClockwise
                         ().rotatePointsClockwise
@@ -138,16 +138,16 @@ public class RenderChargingCapacitor implements ISimpleBlockRenderingHandler {
         );
         model.addQuad(RenderUtils.makeSouthFace(min, max, minY - .0001f, maxY,
                 max,
-                block.capacitorConnector, minU, maxU, minV,
+                block.capacitorConnector(), minU, maxU, minV,
                 maxV));
 
-        minU = block.capacitorConnectorBot.getMinU();
-        maxU = block.capacitorConnectorBot.getMaxU();
-        minV = block.capacitorConnectorBot.getMinV();
-        maxV = block.capacitorConnectorBot.getMaxV();
+        minU = block.capacitorConnectorBot().getMinU();
+        maxU = block.capacitorConnectorBot().getMaxU();
+        minV = block.capacitorConnectorBot().getMinV();
+        maxV = block.capacitorConnectorBot().getMaxV();
 
         model.addQuad(RenderUtils.makeBottomFace(min, max, min, max, minY,
-                block.capacitorConnectorBot,
+                block.capacitorConnectorBot(),
                 minU,
                 maxU,
                 minV,

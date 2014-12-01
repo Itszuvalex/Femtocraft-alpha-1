@@ -235,12 +235,12 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
             if (reagent == null) {
                 return;
             }
-            if (reagent.item.stackSize <= item.stackSize && getTemperatureCurrent() >= reagent.temp &&
+            if (reagent.item().stackSize <= item.stackSize && getTemperatureCurrent() >= reagent.temp() &&
                 getTemperatureCurrent() > minimumHeat &&
-                (thoriumStoreMax - thoriumStoreCurrent) >= reagent.amount) {
-                decrStackSize(thoriumSlot, reagent.item.stackSize);
-                setTemperatureCurrent(getTemperatureCurrent() - reagent.temp);
-                thoriumStoreCurrent += reagent.amount;
+                (thoriumStoreMax - thoriumStoreCurrent) >= reagent.amount()) {
+                decrStackSize(thoriumSlot, reagent.item().stackSize);
+                setTemperatureCurrent(getTemperatureCurrent() - reagent.temp());
+                thoriumStoreCurrent += reagent.amount();
                 setModified();
             }
         }
@@ -277,13 +277,13 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
             }
             FissionReactorRegistry.FissionReactorReagent reagent = FissionReactorRegistry.getSaltSource(item);
             if (reagent != null) {
-                if (reagent.item.stackSize <= item.stackSize && getTemperatureCurrent() >= reagent.temp &&
-                    (moltenSaltTank.getCapacity() - getMoltenSaltAmount()) >= reagent.amount &&
-                    thoriumStoreCurrent >= (reagent.amount * solidSaltToThoriumRatio)) {
-                    decrStackSize(saltSlot, reagent.item.stackSize);
-                    setTemperatureCurrent(getTemperatureCurrent() - reagent.temp);
-                    addMoltenSalt(reagent.amount);
-                    thoriumStoreCurrent -= reagent.amount * solidSaltToThoriumRatio;
+                if (reagent.item().stackSize <= item.stackSize && getTemperatureCurrent() >= reagent.temp() &&
+                    (moltenSaltTank.getCapacity() - getMoltenSaltAmount()) >= reagent.amount() &&
+                    thoriumStoreCurrent >= (reagent.amount() * solidSaltToThoriumRatio)) {
+                    decrStackSize(saltSlot, reagent.item().stackSize);
+                    setTemperatureCurrent(getTemperatureCurrent() - reagent.temp());
+                    addMoltenSalt(reagent.amount());
+                    thoriumStoreCurrent -= reagent.amount() * solidSaltToThoriumRatio;
                     setModified();
                 }
             }
@@ -318,11 +318,11 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
         if (heatItem != null) {
             FissionReactorRegistry.FissionReactorReagent result = FissionReactorRegistry.getHeatSource(heatItem);
             if (result != null) {
-                if (result.item.stackSize <= heatItem.stackSize &&
-                    ((result.temp > 0 && (getTemperatureMax() - getTemperatureCurrent()) >= result.temp) ||
-                     (result.temp < 0 && Math.abs(result.temp) <= getTemperatureCurrent()))) {
-                    decrStackSize(heatSlot, result.item.stackSize);
-                    setTemperatureCurrent(getTemperatureCurrent() + result.temp);
+                if (result.item().stackSize <= heatItem.stackSize &&
+                    ((result.temp() > 0 && (getTemperatureMax() - getTemperatureCurrent()) >= result.temp()) ||
+                     (result.temp() < 0 && Math.abs(result.temp()) <= getTemperatureCurrent()))) {
+                    decrStackSize(heatSlot, result.item().stackSize);
+                    setTemperatureCurrent(getTemperatureCurrent() + result.temp());
                     setModified();
                 }
             }

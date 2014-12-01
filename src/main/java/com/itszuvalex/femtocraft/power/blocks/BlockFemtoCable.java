@@ -78,10 +78,10 @@ public class BlockFemtoCable extends BlockMicroCable {
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "femtoCableCoil");
-        this.coreBorder = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "femtoCableCoreBorder");
-        this.connector = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "femtoCableConnector");
-        this.coil = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "femtoCableCoil");
-        this.coilEdge = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "femtoCableCoilEdge");
-        this.border = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "femtoCableBorder");
+        coreBorder_$eq(par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "femtoCableCoreBorder"));
+        connector_$eq(par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "femtoCableConnector"));
+        coil_$eq(par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "femtoCableCoil"));
+        coilEdge_$eq(par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "femtoCableCoilEdge"));
+        border_$eq(par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase() + ":" + "femtoCableBorder"));
     }
 }

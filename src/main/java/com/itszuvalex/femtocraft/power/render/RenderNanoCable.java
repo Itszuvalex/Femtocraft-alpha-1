@@ -271,10 +271,10 @@ public class RenderNanoCable implements ISimpleBlockRenderingHandler {
     private void drawCoreBlock(BlockNanoCable cable, float x, float y, float z, boolean[] connections) {
         RenderUtils.renderCube(x, y, z, 5.0f / 16.0f, 5.0f / 16.0f,
                 5.0f / 16.0f, 11.0f / 16.0f, 11.0f / 16.0f, 11.0f / 16.0f,
-                cable.coil);
+                cable.coil());
         RenderUtils.renderDoubleSidedCube(x, y, z, 4.0f / 16.0f,
                 4.0f / 16.0f, 4.0f / 16.0f, 12.0f / 16.0f, 12.0f / 16.0f,
-                12.0f / 16.0f, cable.coreBorder);
+                12.0f / 16.0f, cable.coreBorder());
 
         // Draw connector caps
         drawConnector(cable, x, y, z, 3.0F / 16.0F, ForgeDirection.UP, !connections[1]);
@@ -379,37 +379,37 @@ public class RenderNanoCable implements ISimpleBlockRenderingHandler {
                                                                        + offset);
 
         RenderQuad a = new RenderQuad(AD.copy(), AC.copy(), AB.copy(), AA.copy(),
-                cable.border, cable.border.getMinU(),
-                cable.border.getInterpolatedU(8.f), cable.border.getMinV(),
-                cable.border.getMaxV());
+                cable.border(), cable.border().getMinU(),
+                cable.border().getInterpolatedU(8.f), cable.border().getMinV(),
+                cable.border().getMaxV());
         RenderQuad ar = new RenderQuad(AA.copy(), AB.copy(), AC.copy(), AD.copy(),
-                cable.border, cable.border.getMinU(),
-                cable.border.getInterpolatedU(8.f), cable.border.getMinV(),
-                cable.border.getMaxV());
+                cable.border(), cable.border().getMinU(),
+                cable.border().getInterpolatedU(8.f), cable.border().getMinV(),
+                cable.border().getMaxV());
         RenderQuad b = new RenderQuad(BD.copy(), BC.copy(), BB.copy(), BA.copy(),
-                cable.border, cable.border.getMinU(),
-                cable.border.getInterpolatedU(8.f), cable.border.getMinV(),
-                cable.border.getMaxV());
+                cable.border(), cable.border().getMinU(),
+                cable.border().getInterpolatedU(8.f), cable.border().getMinV(),
+                cable.border().getMaxV());
         RenderQuad br = new RenderQuad(BA.copy(), BB.copy(), BC.copy(), BD.copy(),
-                cable.border, cable.border.getMinU(),
-                cable.border.getInterpolatedU(8.f), cable.border.getMinV(),
-                cable.border.getMaxV());
+                cable.border(), cable.border().getMinU(),
+                cable.border().getInterpolatedU(8.f), cable.border().getMinV(),
+                cable.border().getMaxV());
         RenderQuad c = new RenderQuad(BA.copy(), AD.copy(), AA.copy(), BD.copy(),
-                cable.border, cable.border.getMinU(),
-                cable.border.getInterpolatedU(8.f), cable.border.getMinV(),
-                cable.border.getMaxV());
+                cable.border(), cable.border().getMinU(),
+                cable.border().getInterpolatedU(8.f), cable.border().getMinV(),
+                cable.border().getMaxV());
         RenderQuad cr = new RenderQuad(BD.copy(), AA.copy(), AD.copy(), BA.copy(),
-                cable.border, cable.border.getMinU(),
-                cable.border.getInterpolatedU(8.f), cable.border.getMinV(),
-                cable.border.getMaxV());
+                cable.border(), cable.border().getMinU(),
+                cable.border().getInterpolatedU(8.f), cable.border().getMinV(),
+                cable.border().getMaxV());
         RenderQuad d = new RenderQuad(BC.copy(), AB.copy(), AC.copy(), BB.copy(),
-                cable.border, cable.border.getMinU(),
-                cable.border.getInterpolatedU(8.f), cable.border.getMinV(),
-                cable.border.getMaxV());
+                cable.border(), cable.border().getMinU(),
+                cable.border().getInterpolatedU(8.f), cable.border().getMinV(),
+                cable.border().getMaxV());
         RenderQuad dr = new RenderQuad(BB.copy(), AC.copy(), AB.copy(), BC.copy(),
-                cable.border, cable.border.getMinU(),
-                cable.border.getInterpolatedU(8.f), cable.border.getMinV(),
-                cable.border.getMaxV());
+                cable.border(), cable.border().getMinU(),
+                cable.border().getInterpolatedU(8.f), cable.border().getMinV(),
+                cable.border().getMaxV());
 
         Coil.addQuad(a);
         Coil.addQuad(ar);
@@ -436,32 +436,32 @@ public class RenderNanoCable implements ISimpleBlockRenderingHandler {
         BD = new RenderPoint(11.0F / 16.0F, 11.0F / 16.0F, -1.0F / 16.0F + offset);
 
         RenderQuad e = new RenderQuad(AD.copy(), AC.copy(), AB.copy(), AA.copy(),
-                cable.coilEdge, cable.coilEdge.getMinU(),
-                cable.coilEdge.getMaxU() - 3.0F
-                                           * (cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())
-                                           / 4.0F, cable.coilEdge.getMinV(),
-                cable.coilEdge.getMaxV()
+                cable.coilEdge(), cable.coilEdge().getMinU(),
+                cable.coilEdge().getMaxU() - 3.0F
+                                             * (cable.coilEdge().getMaxU() - cable.coilEdge().getMinU())
+                                             / 4.0F, cable.coilEdge().getMinV(),
+                cable.coilEdge().getMaxV()
         );
         RenderQuad f = new RenderQuad(BD.copy(), BC.copy(), BB.copy(), BA.copy(),
-                cable.coilEdge, cable.coilEdge.getMinU(),
-                cable.coilEdge.getMaxU() - 3.0F
-                                           * (cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())
-                                           / 4.0F, cable.coilEdge.getMinV(),
-                cable.coilEdge.getMaxV()
+                cable.coilEdge(), cable.coilEdge().getMinU(),
+                cable.coilEdge().getMaxU() - 3.0F
+                                             * (cable.coilEdge().getMaxU() - cable.coilEdge().getMinU())
+                                             / 4.0F, cable.coilEdge().getMinV(),
+                cable.coilEdge().getMaxV()
         );
         RenderQuad g = new RenderQuad(BA.copy(), AD.copy(), AA.copy(), BD.copy(),
-                cable.coilEdge, cable.coilEdge.getMinU(),
-                cable.coilEdge.getMaxU() - 3.0F
-                                           * (cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())
-                                           / 4.0F, cable.coilEdge.getMinV(),
-                cable.coilEdge.getMaxV()
+                cable.coilEdge(), cable.coilEdge().getMinU(),
+                cable.coilEdge().getMaxU() - 3.0F
+                                             * (cable.coilEdge().getMaxU() - cable.coilEdge().getMinU())
+                                             / 4.0F, cable.coilEdge().getMinV(),
+                cable.coilEdge().getMaxV()
         );
         RenderQuad h = new RenderQuad(BC.copy(), AB.copy(), AC.copy(), BB.copy(),
-                cable.coilEdge, cable.coilEdge.getMinU(),
-                cable.coilEdge.getMaxU() - 3.0F
-                                           * (cable.coilEdge.getMaxU() - cable.coilEdge.getMinU())
-                                           / 4.0F, cable.coilEdge.getMinV(),
-                cable.coilEdge.getMaxV()
+                cable.coilEdge(), cable.coilEdge().getMinU(),
+                cable.coilEdge().getMaxU() - 3.0F
+                                             * (cable.coilEdge().getMaxU() - cable.coilEdge().getMinU())
+                                             / 4.0F, cable.coilEdge().getMinV(),
+                cable.coilEdge().getMaxV()
         );
 
         Coil.addQuad(e.reverse());
@@ -470,11 +470,11 @@ public class RenderNanoCable implements ISimpleBlockRenderingHandler {
         Coil.addQuad(h.reverse());
 
         RenderQuad i = new RenderQuad(BB.copy(), AC.copy(), AD.copy(), BA.copy(),
-                cable.coil, cable.coil.getMinU(), cable.coil.getMaxU(),
-                cable.coil.getMinV(), cable.coil.getMaxV());
+                cable.coil(), cable.coil().getMinU(), cable.coil().getMaxU(),
+                cable.coil().getMinV(), cable.coil().getMaxV());
         RenderQuad j = new RenderQuad(AA.copy(), AB.copy(), BC.copy(), BD.copy(),
-                cable.coil, cable.coil.getMinU(), cable.coil.getMaxU(),
-                cable.coil.getMinV(), cable.coil.getMaxV());
+                cable.coil(), cable.coil().getMinU(), cable.coil().getMaxU(),
+                cable.coil().getMinV(), cable.coil().getMaxV());
         Coil.addQuad(i.reverse());
         Coil.addQuad(j.reverse());
 
@@ -548,39 +548,39 @@ public class RenderNanoCable implements ISimpleBlockRenderingHandler {
             RenderUtils.drawArbitraryFace(x, y, z, -1.0F / 16.0F
                                                    + xoffset, 1.0F / 16.0F + xoffset, -1.0F / 16.0F + yoffset,
                     1.0F / 16.0F + yoffset, -1.0F / 16.0F + zoffset,
-                    1.0F / 16.0F + zoffset, direction, cable.connector,
-                    cable.connector.getMinU(), cable.connector.getMaxU(),
-                    cable.connector.getMinV(), cable.connector.getMaxV()
+                    1.0F / 16.0F + zoffset, direction, cable.connector(),
+                    cable.connector().getMinU(), cable.connector().getMaxU(),
+                    cable.connector().getMinV(), cable.connector().getMaxV()
             );
         }
 
         RenderUtils.drawArbitraryFace(x, y, z, -1.0F / 16.0F
                                                + xoffset, 1.0F / 16.0F + xoffset, -1.0F / 16.0F + yoffset,
                 1.0F / 16.0F + yoffset, -1.0F / 16.0F + zoffset,
-                1.0F / 16.0F + zoffset, face1, cable.connector,
-                cable.connector.getMinU(), cable.connector.getMaxU(),
-                cable.connector.getMinV(), cable.connector.getMaxV()
+                1.0F / 16.0F + zoffset, face1, cable.connector(),
+                cable.connector().getMinU(), cable.connector().getMaxU(),
+                cable.connector().getMinV(), cable.connector().getMaxV()
         );
         RenderUtils.drawArbitraryFace(x, y, z, -1.0F / 16.0F
                                                + xoffset, 1.0F / 16.0F + xoffset, -1.0F / 16.0F + yoffset,
                 1.0F / 16.0F + yoffset, -1.0F / 16.0F + zoffset,
-                1.0F / 16.0F + zoffset, face2, cable.connector,
-                cable.connector.getMinU(), cable.connector.getMaxU(),
-                cable.connector.getMinV(), cable.connector.getMaxV()
+                1.0F / 16.0F + zoffset, face2, cable.connector(),
+                cable.connector().getMinU(), cable.connector().getMaxU(),
+                cable.connector().getMinV(), cable.connector().getMaxV()
         );
         RenderUtils.drawArbitraryFace(x, y, z, -1.0F / 16.0F
                                                + xoffset, 1.0F / 16.0F + xoffset, -1.0F / 16.0F + yoffset,
                 1.0F / 16.0F + yoffset, -1.0F / 16.0F + zoffset,
-                1.0F / 16.0F + zoffset, face3, cable.connector,
-                cable.connector.getMinU(), cable.connector.getMaxU(),
-                cable.connector.getMinV(), cable.connector.getMaxV()
+                1.0F / 16.0F + zoffset, face3, cable.connector(),
+                cable.connector().getMinU(), cable.connector().getMaxU(),
+                cable.connector().getMinV(), cable.connector().getMaxV()
         );
         RenderUtils.drawArbitraryFace(x, y, z, -1.0F / 16.0F
                                                + xoffset, 1.0F / 16.0F + xoffset, -1.0F / 16.0F + yoffset,
                 1.0F / 16.0F + yoffset, -1.0F / 16.0F + zoffset,
-                1.0F / 16.0F + zoffset, face4, cable.connector,
-                cable.connector.getMinU(), cable.connector.getMaxU(),
-                cable.connector.getMinV(), cable.connector.getMaxV()
+                1.0F / 16.0F + zoffset, face4, cable.connector(),
+                cable.connector().getMinU(), cable.connector().getMaxU(),
+                cable.connector().getMinV(), cable.connector().getMaxV()
         );
     }
 }
