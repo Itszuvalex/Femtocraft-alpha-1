@@ -25,11 +25,12 @@ import java.util
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.EnumTechLevel
-import com.itszuvalex.femtocraft.api.core.Configurable
+import com.itszuvalex.femtocraft.api.core.{Configurable, RecipeType}
 import com.itszuvalex.femtocraft.api.research.ITechnology
 import com.itszuvalex.femtocraft.implicits.ItemStackImplicits._
 import com.itszuvalex.femtocraft.research.gui.GuiResearch
 import com.itszuvalex.femtocraft.research.gui.technology.{GuiTechnology, GuiTechnologyDefault}
+import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.item.ItemStack
 import org.apache.logging.log4j.Level
@@ -56,7 +57,11 @@ class Technology(n: String, shortDes: String, tech: EnumTechLevel, prereq: Array
   @Configurable(comment = "ItemStack that replaces technology item when used.  This will only ever have a stack " + "size of 1.")
   protected var discoverItem                         = discover
   @Configurable(comment = "Description string displayed when Technology is clicked in the research tree.  This is displayed when " + "the Technology has been researched.  This is " + "parsed for recipes and automatically layed out across as many pages as needed.")
-  protected var researchedDescription: String        = if (researchDescription == null) "" else researchDescription
+  protected var researchedDescription: String        = if (researchDescription == null || researchDescription.isEmpty)
+    Femtocraft.recipeManager.assemblyRecipes.getRecipesForTechnology(name).map { r => FemtocraftStringUtils.formatItemStackForTechnologyDisplay(RecipeType.ASSEMBLER, r.output, r.output.getDisplayName)}.aggregate("")(_ + _, _ + _) +
+    Femtocraft.recipeManager.temporalRecipes.getRecipesForTech(name).map { r => FemtocraftStringUtils.formatItemStackForTechnologyDisplay(RecipeType.TEMPORAL, r.output, r.output.getDisplayName)}.aggregate("")(_ + _, _ + _) +
+    Femtocraft.recipeManager.dimensionalRecipes.getRecipesForTech(name).map { r => FemtocraftStringUtils.formatItemStackForTechnologyDisplay(RecipeType.DIMENSIONAL, r.output, r.output.getDisplayName)}.aggregate("")(_ + _, _ + _)
+  else researchDescription
   @Configurable(comment = "Description string displayed when Technology is clicked in the research tree.  This is displayed when " + "the Technology has been discovered but not researched.  This is " + "parsed for recipes and automatically layed out across as many pages as needed.")
   protected var discoveredDescription: String        = if (discoverDescription == null) "" else discoverDescription
   @Configurable(comment = "Set this to true to force this to be discovered off the bat.")
@@ -70,7 +75,6 @@ class Technology(n: String, shortDes: String, tech: EnumTechLevel, prereq: Array
 
   def this(name: String, shortDescription: String, level: EnumTechLevel, prerequisites: Array[String], displayItem: ItemStack, isKeystone: Boolean, researchMaterials: Array[ItemStack])
   = this(name, shortDescription, level, prerequisites, displayItem, isKeystone, researchMaterials, null)
-
 
   override def getName = name
 
@@ -136,7 +140,7 @@ class Technology(n: String, shortDes: String, tech: EnumTechLevel, prereq: Array
     val ret = prereqs.remove(name)
     if (ret) {
       prerequisites = prereqs.toArray
-//      prerequisites = prereqs.toArray(new Array[String](prereqs.size))
+      //      prerequisites = prereqs.toArray(new Array[String](prereqs.size))
     }
     ret
   }
@@ -154,7 +158,7 @@ class Technology(n: String, shortDes: String, tech: EnumTechLevel, prereq: Array
       case e: NoSuchMethodException =>
         Femtocraft.log(Level.ERROR, "Technologies must return a GuiTechnology class that supports the constructor" + "(GuiResearch, ResearchTechnologyStatus)")
         e.printStackTrace()
-      case e: Exception             => e.printStackTrace()
+      case e: Exception => e.printStackTrace()
     }
     null
   }

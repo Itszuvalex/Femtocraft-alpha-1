@@ -55,7 +55,7 @@ public class BlockNanoCable extends BlockMicroCable {
         double spawnZ =
                 z + getBlockBoundsMinZ() + par5Random.nextFloat() * (getBlockBoundsMaxZ() - getBlockBoundsMinZ());
 
-        RenderUtils.spawnParticle(par1World, RenderUtils.NANO_POWER_PARTICLE, spawnX, spawnY, spawnZ);
+        RenderUtils.spawnParticle(par1World, RenderUtils.NANO_POWER_PARTICLE(), spawnX, spawnY, spawnZ);
     }
 
     @Override

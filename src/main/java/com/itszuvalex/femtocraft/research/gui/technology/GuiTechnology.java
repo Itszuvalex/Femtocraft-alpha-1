@@ -78,8 +78,8 @@ public class GuiTechnology extends GuiScreen {
                          ResearchStatus status) {
         this.guiResearch = guiResearch;
         this.status = status;
-        this.tech = Femtocraft.researchManager().getTechnology(status.tech);
-        renderer = new GuiTechnologyRenderer(this, status.researched ? tech.getResearchedDescription() : tech
+        this.tech = Femtocraft.researchManager().getTechnology(status.tech());
+        renderer = new GuiTechnologyRenderer(this, status.researched() ? tech.getResearchedDescription() : tech
                 .getDiscoveredDescription());
     }
 
@@ -118,9 +118,9 @@ public class GuiTechnology extends GuiScreen {
 
         List tooltip = new ArrayList();
         renderInformation(k + 9, l + 76, 237, 116, displayPage, par1, par2,
-                tooltip, status.researched);
+                tooltip, status.researched());
 
-        String s = status.tech;
+        String s = status.tech();
 //        this.fontRendererObj.drawString(status,
 //                k + this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2,
 //                l + 17, FemtocraftUtils.colorFromARGB(255, 255, 255, 255));
@@ -187,7 +187,7 @@ public class GuiTechnology extends GuiScreen {
         }
 
         color = FemtocraftUtils.colorFromARGB(60, 45, 0, 110);
-        if (displayPage < getNumPages(status.researched)) {
+        if (displayPage < getNumPages(status.researched())) {
             if ((par1 >= (k + pageRightButtonX))
                 && (par1 <= (k + pageRightButtonX + pageRightButtonWidth))
                 && (par2 >= (l + pageRightButtonY))
@@ -220,7 +220,7 @@ public class GuiTechnology extends GuiScreen {
         }
 
         String pageString = String.format("Page %s/%s", displayPage,
-                getNumPages(status.researched));
+                getNumPages(status.researched()));
         this.fontRendererObj.drawString(pageString, k + pageLeftButtonX
                                                     + (pageLeftButtonWidth + pageRightButtonX - pageLeftButtonX)
                                                       / 2 - this.fontRendererObj.getStringWidth(pageString) / 2, l
@@ -311,7 +311,7 @@ public class GuiTechnology extends GuiScreen {
                 displayPage--;
             }
 
-            if ((displayPage < getNumPages(status.researched))
+            if ((displayPage < getNumPages(status.researched()))
                 && (par1 >= (k + pageRightButtonX))
                 && (par1 <= (k + pageRightButtonX + pageRightButtonWidth))
                 && (par2 >= (l + pageRightButtonY))

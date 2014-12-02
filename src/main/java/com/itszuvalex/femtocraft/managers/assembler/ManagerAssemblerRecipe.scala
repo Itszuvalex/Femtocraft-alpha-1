@@ -23,8 +23,8 @@ package com.itszuvalex.femtocraft.managers.assembler
 import java.util
 
 import com.itszuvalex.femtocraft.Femtocraft
-import com.itszuvalex.femtocraft.api.{EnumTechLevel, AssemblerRecipe}
 import com.itszuvalex.femtocraft.api.events.EventAssemblerRegister
+import com.itszuvalex.femtocraft.api.{AssemblerRecipe, EnumTechLevel}
 import com.itszuvalex.femtocraft.managers.research.Technology
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils
@@ -239,10 +239,10 @@ class ManagerAssemblerRecipe {
 
       }
       catch {
-        case e: SecurityException        => e.printStackTrace()
-        case e: NoSuchFieldException     => e.printStackTrace()
+        case e: SecurityException => e.printStackTrace()
+        case e: NoSuchFieldException => e.printStackTrace()
         case e: IllegalArgumentException => e.printStackTrace()
-        case e: IllegalAccessException   => e.printStackTrace()
+        case e: IllegalAccessException => e.printStackTrace()
       }
       val valid = registerShapedOreRecipe(orecipe.getInput, orecipe.getRecipeOutput, width, height)
       if (!valid) {
@@ -517,7 +517,7 @@ class ManagerAssemblerRecipe {
     addReversableRecipe(new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemNanoRegulator), new ItemStack(Items.ender_pearl), new ItemStack(Femtocraft.itemNanoRegulator), new ItemStack(Items.ender_pearl), new ItemStack(Items.compass), new ItemStack(Items.ender_pearl), new ItemStack(Femtocraft.itemNanoSimulator), new ItemStack(Items.ender_pearl), new ItemStack(Femtocraft.itemNanoSimulator)), 0, new ItemStack(Femtocraft.itemDimensionalMonopole), EnumTechLevel.NANO, FemtocraftTechnologies.SPACETIME_MANIPULATION))
     addReversableRecipe(new AssemblerRecipe(Array[ItemStack](new ItemStack(Items.iron_ingot), new ItemStack(Femtocraft.itemIngotPlatinum), new ItemStack(Items.iron_ingot), new ItemStack(Items.iron_ingot), new ItemStack(Femtocraft.itemTemporalResonator), new ItemStack(Items.iron_ingot), new ItemStack(Items.iron_ingot), new ItemStack(Femtocraft.itemIngotPlatinum), new ItemStack(Items.iron_ingot)), 0, new ItemStack(Femtocraft.itemSelfFulfillingOracle), EnumTechLevel.NANO, FemtocraftTechnologies.SPACETIME_MANIPULATION))
     addReversableRecipe(new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemIngotPlatinum), new ItemStack(Femtocraft.itemIngotPlatinum), new ItemStack(Femtocraft.itemIngotPlatinum), new ItemStack(Femtocraft.itemIngotPlatinum), new ItemStack(Femtocraft.itemDimensionalMonopole), new ItemStack(Femtocraft.itemIngotPlatinum), new ItemStack(Femtocraft.itemIngotPlatinum), new ItemStack(Femtocraft.itemIngotPlatinum), new ItemStack(Femtocraft.itemIngotPlatinum)), 0, new ItemStack(Femtocraft.itemCrossDimensionalCommunicator), EnumTechLevel.NANO, FemtocraftTechnologies.SPACETIME_MANIPULATION))
-    addReversableRecipe(new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemNanoCalculator), new ItemStack(Femtocraft.itemSelfFulfillingOracle), new ItemStack(Femtocraft.itemNanoCalculator), new ItemStack(Femtocraft.itemNanoPlating), new ItemStack(Femtocraft.blockNanoFabricator), new ItemStack(Femtocraft.itemNanoPlating), new ItemStack(Femtocraft.itemNanoRegulator), new ItemStack(Femtocraft.itemTemporalResonator), new ItemStack(Femtocraft.itemNanoRegulator)), 0, new ItemStack(Femtocraft.blockNanoHorologe), EnumTechLevel.NANO, FemtocraftTechnologies.SPACETIME_MANIPULATION))
+    addReversableRecipe(new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemNanoCalculator), new ItemStack(Femtocraft.itemSelfFulfillingOracle), new ItemStack(Femtocraft.itemNanoCalculator), new ItemStack(Femtocraft.itemNanoPlating), new ItemStack(Femtocraft.blockNanoFabricator), new ItemStack(Femtocraft.itemNanoPlating), new ItemStack(Femtocraft.itemNanoRegulator), new ItemStack(Femtocraft.itemTemporalResonator), new ItemStack(Femtocraft.itemNanoRegulator)), 0, new ItemStack(Femtocraft.blockNanoHorologe), EnumTechLevel.NANO, FemtocraftTechnologies.TEMPORAL_PIPELINING))
     addReversableRecipe(new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemNanoSimulator), new ItemStack(Femtocraft.itemCrossDimensionalCommunicator), new ItemStack(Femtocraft.itemNanoSimulator), new ItemStack(Femtocraft.itemNanoPlating), new ItemStack(Femtocraft.blockNanoFabricator), new ItemStack(Femtocraft.itemNanoPlating), new ItemStack(Femtocraft.itemNanoRegulator), new ItemStack(Femtocraft.itemDimensionalMonopole), new ItemStack(Femtocraft.itemNanoRegulator)), 0, new ItemStack(Femtocraft.blockNanoEnmesher), EnumTechLevel.NANO, FemtocraftTechnologies.DIMENSIONAL_BRAIDING))
     addReversableRecipe(new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemIngotPlatinum), new ItemStack(Femtocraft.itemIngotPlatinum), new ItemStack(Femtocraft.itemIngotPlatinum), new ItemStack(Femtocraft.itemIngotPlatinum), new ItemStack(Femtocraft.itemManagerCore), new ItemStack(Femtocraft.itemIngotPlatinum), new ItemStack(Femtocraft.itemIngotPlatinum), new ItemStack(Femtocraft.itemIngotPlatinum), new ItemStack(Femtocraft.itemIngotPlatinum)), 0, new ItemStack(Femtocraft.itemDigitalSchematic, 8), EnumTechLevel.NANO, FemtocraftTechnologies.DIGITIZED_WORKLOADS))
     addReversableRecipe(new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.blockMicroCable), new ItemStack(Femtocraft.itemFluidicConductor), new ItemStack(Femtocraft.blockNanoCable), null, null, null, null, null, null), 0, new ItemStack(Femtocraft.blockOrbitalEqualizer), EnumTechLevel.NANO, FemtocraftTechnologies.POTENTIALITY_TRANSFORMATION))

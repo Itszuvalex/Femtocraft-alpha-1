@@ -29,12 +29,13 @@ import com.itszuvalex.femtocraft.research.gui.GuiResearch;
 import org.apache.logging.log4j.Level;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class TechnologyGraph extends MapGraph<String> {
     public static final int X_PADDING = 1;
     public static final int Y_PADDING = 2;
 
-    public TechnologyGraph(HashMap<String, ITechnology> technologies) {
+    public TechnologyGraph(Map<String, ITechnology> technologies) {
         super();
         Femtocraft.log(Level.INFO, "Creating Graph of Technologies.");
         HashMap<String, IGraphNode> nodes = new HashMap<>();

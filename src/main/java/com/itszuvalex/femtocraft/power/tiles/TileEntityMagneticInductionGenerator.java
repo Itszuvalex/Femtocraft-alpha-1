@@ -21,12 +21,12 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
-import com.itszuvalex.femtocraft.api.power.PowerContainer;
-import com.itszuvalex.femtocraft.api.core.Configurable;
-import com.itszuvalex.femtocraft.core.MagnetRegistry;
 import com.itszuvalex.femtocraft.api.EnumTechLevel;
-import com.itszuvalex.femtocraft.render.RenderUtils;
+import com.itszuvalex.femtocraft.api.core.Configurable;
 import com.itszuvalex.femtocraft.api.core.Saveable;
+import com.itszuvalex.femtocraft.api.power.PowerContainer;
+import com.itszuvalex.femtocraft.core.MagnetRegistry;
+import com.itszuvalex.femtocraft.render.RenderUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -94,7 +94,7 @@ public class TileEntityMagneticInductionGenerator extends TileEntityPowerProduce
         if (yOffset < 0) yOffset = 0;
         if (zOffset < 0) zOffset = 0;
 
-        RenderUtils.spawnParticle(worldObj, RenderUtils.MICRO_POWER_PARTICLE,
+        RenderUtils.spawnParticle(worldObj, RenderUtils.MICRO_POWER_PARTICLE(),
                 x + xOffset,
                 y + yOffset,
                 z + zOffset

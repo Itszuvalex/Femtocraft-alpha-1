@@ -469,14 +469,6 @@ public class FemtocraftTechnologies {
                         new ItemStack(Femtocraft.itemInfallibleEstimator()),
                         false, null
                 )
-
-                {
-                    @Override
-                    public Class<? extends GuiTechnology> getGuiClass() {
-                        return GuiTechnologyRealityOverlocker.class;
-                    }
-                }
-
                 ),
 
                 (new Technology(

@@ -431,7 +431,7 @@ public class GuiResearch extends GuiScreen {
                             j3 = prev.getDisplayY() * 24 - l + 11 + l1 - 11;
                             j4 = next.getDisplayX() * 24 - k + 11 + k1;
                             l3 = next.getDisplayY() * 24 - l + 11 + l1 + 11;
-                            boolean flag6 = !rs.researched;
+                            boolean flag6 = !rs.researched();
                             i4 = Math
                                          .sin((double) (Minecraft.getSystemTime() % 600L)
                                               / 600.0D * Math.PI * 2.0D) > 0.6D ? 255
@@ -457,7 +457,7 @@ public class GuiResearch extends GuiScreen {
                         j3 = prev.getDisplayY() * 24 - l + 11 + l1 - 11;
                         j4 = next.getDisplayX() * 24 - k + 11 + k1;
                         l3 = next.getDisplayY() * 24 - l + 11 + l1 + 11;
-                        boolean flag6 = !rs.researched;
+                        boolean flag6 = !rs.researched();
                         i4 = Math
                                      .sin((double) (Minecraft.getSystemTime() % 600L)
                                           / 600.0D * Math.PI * 2.0D) > 0.6D ? 255
@@ -500,7 +500,7 @@ public class GuiResearch extends GuiScreen {
             if (j4 >= -24 && l3 >= -24 && j4 <= 224 && l3 <= 155) {
                 float f2;
 
-                if (ts.researched) {
+                if (ts.researched()) {
                     f2 = 1.0F;
                     GL11.glColor4f(f2, f2, f2, 1.0F);
                 } else {
@@ -600,7 +600,7 @@ public class GuiResearch extends GuiScreen {
             i5 = Math.max(this.fontRendererObj.getStringWidth(s), 120);
             l4 = this.fontRendererObj.splitStringWidth(s1, i5);
 
-            if (status.researched) {
+            if (status.researched()) {
                 l4 += 12;
             }
 
@@ -609,7 +609,7 @@ public class GuiResearch extends GuiScreen {
             this.fontRendererObj
                     .drawSplitString(s1, j4, l3 + 12, i5, -6250336);
 
-            if (status.researched) {
+            if (status.researched()) {
                 this.fontRendererObj.drawStringWithShadow("Researched!", j4,
                         l3 + l4 + 4, -7302913);
             }
@@ -630,7 +630,7 @@ public class GuiResearch extends GuiScreen {
             // }
 
             this.fontRendererObj.drawStringWithShadow(s, j4, l3,
-                    status.researched ? (tooltipTech.isKeystone() ? -128 : -1)
+                    status.researched() ? (tooltipTech.isKeystone() ? -128 : -1)
                             : (tooltipTech.isKeystone() ? -8355776 : -8355712)
             );
         }
