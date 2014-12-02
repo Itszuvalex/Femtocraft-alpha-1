@@ -41,7 +41,7 @@ class BlockNanoEnmesher extends TileContainer(Material.iron) with DroppableInven
    * Is the random generator used by furnace to drop the inventory contents in random directions.
    */
   private                        val rand             = new Random
-  @SideOnly(Side.CLIENT) private var frontIcon: IIcon = null
+  private var frontIcon: IIcon = null
 
   setBlockName("BlockNanoEnmesher")
   setHardness(3.5f)

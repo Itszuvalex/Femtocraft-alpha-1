@@ -64,8 +64,8 @@ class BlockMicroFurnace(private val isActive: Boolean) extends TileContainer(Mat
   /**
    * Is the random generator used by furnace to drop the inventory contents in random directions.
    */
-  private                        val furnaceRand      = new Random
-  @SideOnly(Side.CLIENT) private var frontIcon: IIcon = null
+  private val furnaceRand      = new Random
+  private var frontIcon: IIcon = null
 
   setHardness(3.5f)
   setStepSound(Block.soundTypeMetal)

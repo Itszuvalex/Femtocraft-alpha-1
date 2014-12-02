@@ -28,8 +28,8 @@ import net.minecraft.util.IIcon
 import net.minecraftforge.fluids.BlockFluidClassic
 
 class BlockFluidMass() extends BlockFluidClassic(Femtocraft.fluidMass, Material.water) {
-  @SideOnly(Side.CLIENT) var stillIcon  : IIcon = null
-  @SideOnly(Side.CLIENT) var flowingIcon: IIcon = null
+  var stillIcon  : IIcon = null
+  var flowingIcon: IIcon = null
 
   setBlockName("fluidMass")
   setCreativeTab(Femtocraft.femtocraftTab)

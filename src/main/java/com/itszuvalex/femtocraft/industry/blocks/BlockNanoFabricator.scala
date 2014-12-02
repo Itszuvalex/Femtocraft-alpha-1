@@ -41,7 +41,7 @@ class BlockNanoFabricator extends TileContainer(Material.iron) with DroppableInv
    * Is the random generator used by furnace to drop the inventory contents in random directions.
    */
   private                        val rand             = new Random
-  @SideOnly(Side.CLIENT) private var frontIcon: IIcon = null
+  private var frontIcon: IIcon = null
 
   setBlockName("BlockNanoFabricator")
   setHardness(3.5f)

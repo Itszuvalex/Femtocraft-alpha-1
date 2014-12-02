@@ -42,7 +42,7 @@ class BlockFemtoRepurposer extends TileContainer(Material.iron) with DroppableIn
    * random directions.
    */
   private                        val rand             = new Random
-  @SideOnly(Side.CLIENT) private var frontIcon: IIcon = null
+  private var frontIcon: IIcon = null
 
   setBlockName("BlockFemtoRepurposer")
   setHardness(3.5f)

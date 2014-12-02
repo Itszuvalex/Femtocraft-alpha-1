@@ -31,8 +31,8 @@ import net.minecraftforge.fluids.BlockFluidClassic
  * Created by Christopher Harris (Itszuvalex) on 8/2/14.
  */
 class BlockFluidMoltenSalt extends BlockFluidClassic(Femtocraft.fluidMoltenSalt, Material.water) {
-  @SideOnly(Side.CLIENT) var stillIcon  : IIcon = null
-  @SideOnly(Side.CLIENT) var flowingIcon: IIcon = null
+  var stillIcon  : IIcon = null
+  var flowingIcon: IIcon = null
 
   setBlockName("FluidMoltenSalt")
   setCreativeTab(Femtocraft.femtocraftTab)

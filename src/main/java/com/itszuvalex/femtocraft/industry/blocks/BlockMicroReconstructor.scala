@@ -24,7 +24,7 @@ import java.util.Random
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
-import com.itszuvalex.femtocraft.core.traits.block.{RotateOnPlace, DroppableInventory}
+import com.itszuvalex.femtocraft.core.traits.block.{DroppableInventory, RotateOnPlace}
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor
 import com.itszuvalex.femtocraft.render.RenderSimpleMachine
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils
@@ -40,8 +40,8 @@ class BlockMicroReconstructor extends TileContainer(Material.iron) with Droppabl
   /**
    * Is the random generator used by furnace to drop the inventory contents in random directions.
    */
-  private                        val rand             = new Random
-  @SideOnly(Side.CLIENT) private var frontIcon: IIcon = null
+  private val rand             = new Random
+  private var frontIcon: IIcon = null
 
   setBlockName("BlockMicroReconstructor")
   setHardness(3.5f)
@@ -82,7 +82,7 @@ class BlockMicroReconstructor extends TileContainer(Material.iron) with Droppabl
   override def breakBlock(world: World, x: Int, y: Int, z: Int, block: Block, metadata: Int) {
     world.getTileEntity(x, y, z) match {
       case te: TileEntityBaseEntityMicroReconstructor if te.isWorking => te.reconstructingStacks.foreach(FemtocraftUtils.dropItem(_, world, x, y, z, rand))
-      case _                                                          =>
+      case _ =>
     }
     world.func_147453_f(x, y, z, block)
     super.breakBlock(world, x, y, z, block, metadata)
