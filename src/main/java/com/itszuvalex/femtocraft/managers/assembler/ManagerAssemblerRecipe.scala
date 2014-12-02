@@ -199,71 +199,86 @@ class ManagerAssemblerRecipe {
     recipes.filter(i => i.isInstanceOf[ShapedRecipes] && getRecipe(i.getRecipeOutput) == null)
     .map(_.asInstanceOf[ShapedRecipes])
     .foreach(sr => {
-      Femtocraft.log(Level.INFO, "Attempting to register shaped assembler recipe for " + sr.getRecipeOutput.getDisplayName + ".")
-      val valid = registerShapedRecipe(sr.recipeItems, sr.getRecipeOutput, sr.recipeWidth, sr.recipeHeight)
-      if (!valid) {
-        Femtocraft.log(Level.WARN, "Failed to register shaped assembler recipe for " + sr.getRecipeOutput.getDisplayName + "!")
+      try {
+        Femtocraft.log(Level.INFO, "Attempting to register shaped assembler recipe for " + sr.getRecipeOutput.getDisplayName + ".")
+        val valid = registerShapedRecipe(sr.recipeItems, sr.getRecipeOutput, sr.recipeWidth, sr.recipeHeight)
+        if (!valid) {
+          Femtocraft.log(Level.WARN, "Failed to register shaped assembler recipe for " + sr.getRecipeOutput.getDisplayName + "!")
+        }
+        else {
+          Femtocraft.log(Level.INFO, "Loaded Vanilla Minecraft shaped recipe as assembler recipe for " + sr.getRecipeOutput.getDisplayName + ".")
+        }
       }
-      else {
-        Femtocraft.log(Level.INFO, "Loaded Vanilla Minecraft shaped recipe as assembler recipe for " + sr.getRecipeOutput.getDisplayName + ".")
+      catch {
+        case e: Exception =>
       }
     })
     Femtocraft.log(Level.WARN, "Registering shaped ore recipes from Forge.")
     recipes.filter(i => i.isInstanceOf[ShapedOreRecipe] && getRecipe(i.getRecipeOutput) == null)
     .map(_.asInstanceOf[ShapedOreRecipe])
     .foreach(orecipe => {
-      Femtocraft.log(Level.INFO, "Attempting to register shaped assembler recipe for " + orecipe.getRecipeOutput.getDisplayName + ".")
-      var width = 0
-      var height = 0
       try {
-        val width_field = classOf[ShapedOreRecipe].getDeclaredField("width")
-        var prev = width_field.isAccessible
-        if (!prev) {
-          width_field.setAccessible(true)
-        }
-        width = width_field.getInt(orecipe)
-        if (!prev) {
-          width_field.setAccessible(prev)
-        }
+        Femtocraft.log(Level.INFO, "Attempting to register shaped assembler recipe for " + orecipe.getRecipeOutput.getDisplayName + ".")
+        var width = 0
+        var height = 0
+        try {
+          val width_field = classOf[ShapedOreRecipe].getDeclaredField("width")
+          var prev = width_field.isAccessible
+          if (!prev) {
+            width_field.setAccessible(true)
+          }
+          width = width_field.getInt(orecipe)
+          if (!prev) {
+            width_field.setAccessible(prev)
+          }
 
 
-        val height_field = classOf[ShapedOreRecipe].getDeclaredField("height")
-        prev = height_field.isAccessible
-        if (!prev) {
-          height_field.setAccessible(true)
-        }
-        height = height_field.getInt(orecipe)
-        if (!prev) {
-          height_field.setAccessible(prev)
-        }
+          val height_field = classOf[ShapedOreRecipe].getDeclaredField("height")
+          prev = height_field.isAccessible
+          if (!prev) {
+            height_field.setAccessible(true)
+          }
+          height = height_field.getInt(orecipe)
+          if (!prev) {
+            height_field.setAccessible(prev)
+          }
 
+        }
+        catch {
+          case e: SecurityException => e.printStackTrace()
+          case e: NoSuchFieldException => e.printStackTrace()
+          case e: IllegalArgumentException => e.printStackTrace()
+          case e: IllegalAccessException => e.printStackTrace()
+        }
+        val valid = registerShapedOreRecipe(orecipe.getInput, orecipe.getRecipeOutput, width, height)
+        if (!valid) {
+          Femtocraft.log(Level.WARN, "Failed to register shaped assembler recipe for " + orecipe.getRecipeOutput.getDisplayName + "!")
+        }
+        else {
+          Femtocraft.log(Level.INFO, "LoadedForge shaped ore recipe as assembler recipe for " + orecipe.getRecipeOutput.getDisplayName + ".")
+        }
       }
       catch {
-        case e: SecurityException => e.printStackTrace()
-        case e: NoSuchFieldException => e.printStackTrace()
-        case e: IllegalArgumentException => e.printStackTrace()
-        case e: IllegalAccessException => e.printStackTrace()
-      }
-      val valid = registerShapedOreRecipe(orecipe.getInput, orecipe.getRecipeOutput, width, height)
-      if (!valid) {
-        Femtocraft.log(Level.WARN, "Failed to register shaped assembler recipe for " + orecipe.getRecipeOutput.getDisplayName + "!")
-      }
-      else {
-        Femtocraft.log(Level.INFO, "LoadedForge shaped ore recipe as assembler recipe for " + orecipe.getRecipeOutput.getDisplayName + ".")
+        case e: Exception =>
       }
     })
     Femtocraft.log(Level.WARN, "Registering shapeless recipes from Vanilla Minecraft's Crafting Manager.")
     recipes.filter(i => i.isInstanceOf[ShapelessRecipes] && getRecipe(i.getRecipeOutput) == null)
     .map(_.asInstanceOf[ShapelessRecipes])
     .foreach(recipe => {
-      Femtocraft.log(Level.INFO, "Attempting to register shapeless assembler recipe for " + recipe.getRecipeOutput.getDisplayName + ".")
-      val valid: Boolean = registerShapelessRecipe(recipe.recipeItems, recipe.getRecipeOutput)
-      if (!valid) {
-        Femtocraft.log(Level.WARN, "Failed to register shapeless assembler recipe for " + recipe.getRecipeOutput.getDisplayName + "!")
-        Femtocraft.log(Level.WARN, "I have no clue how this would happen...as the search space is literally " + "thousands of configurations.  Sorry for the wait.")
+      try {
+        Femtocraft.log(Level.INFO, "Attempting to register shapeless assembler recipe for " + recipe.getRecipeOutput.getDisplayName + ".")
+        val valid: Boolean = registerShapelessRecipe(recipe.recipeItems, recipe.getRecipeOutput)
+        if (!valid) {
+          Femtocraft.log(Level.WARN, "Failed to register shapeless assembler recipe for " + recipe.getRecipeOutput.getDisplayName + "!")
+          Femtocraft.log(Level.WARN, "I have no clue how this would happen...as the search space is literally " + "thousands of configurations.  Sorry for the wait.")
+        }
+        else {
+          Femtocraft.log(Level.INFO, "Loaded Vanilla Minecraft shapeless recipe as assembler recipe for + " + recipe.getRecipeOutput.getDisplayName + ".")
+        }
       }
-      else {
-        Femtocraft.log(Level.INFO, "Loaded Vanilla Minecraft shapeless recipe as assembler recipe for + " + recipe.getRecipeOutput.getDisplayName + ".")
+      catch {
+        case e: Exception =>
       }
     })
 
@@ -271,134 +286,61 @@ class ManagerAssemblerRecipe {
     recipes.filter(i => i.isInstanceOf[ShapelessOreRecipe] && getRecipe(i.getRecipeOutput) == null)
     .map(_.asInstanceOf[ShapelessOreRecipe])
     .foreach(recipe => {
-      Femtocraft.log(Level.INFO, "Attempting to register shapeless assembler recipe for " + recipe.getRecipeOutput.getDisplayName + ".")
-      val valid: Boolean = registerShapelessOreRecipe(recipe.getInput, recipe.getRecipeOutput)
-      if (!valid) {
-        Femtocraft.log(Level.WARN, "Failed to register shapeless ore assembler recipe for " + recipe.getRecipeOutput.getDisplayName + "!")
-        Femtocraft.log(Level.WARN, "I have no clue how this would happen...as the search space is literally " + "thousands of configurations.  Sorry for the wait.")
+      try {
+        Femtocraft.log(Level.INFO, "Attempting to register shapeless assembler recipe for " + recipe.getRecipeOutput.getDisplayName + ".")
+        val valid: Boolean = registerShapelessOreRecipe(recipe.getInput, recipe.getRecipeOutput)
+        if (!valid) {
+          Femtocraft.log(Level.WARN, "Failed to register shapeless ore assembler recipe for " + recipe.getRecipeOutput.getDisplayName + "!")
+          Femtocraft.log(Level.WARN, "I have no clue how this would happen...as the search space is literally " + "thousands of configurations.  Sorry for the wait.")
+        }
+        else {
+          Femtocraft.log(Level.INFO, "Loaded Forge shapeless ore recipe as assembler recipe for + " + recipe.getRecipeOutput.getDisplayName + ".")
+        }
       }
-      else {
-        Femtocraft.log(Level.INFO, "Loaded Forge shapeless ore recipe as assembler recipe for + " + recipe.getRecipeOutput.getDisplayName + ".")
+      catch {
+        case e: Exception =>
       }
     })
     Femtocraft.log(Level.INFO, "Finished mapping Minecraft recipes to assembler recipes.")
   }
 
   private def registerShapedOreRecipe(recipeInput: Array[AnyRef], recipeOutput: ItemStack, width: Int, height: Int): Boolean = {
-    var done = false
-    var xOffset = 0
-    var yOffset = 0
-    val input = Array.fill[ItemStack](9)(null)
-    val recipe = new AssemblerRecipe(input, 0, recipeOutput.copy, EnumTechLevel.MACRO, FemtocraftTechnologies.MACROSCOPIC_STRUCTURES)
-    if (recipe.output.getItemDamage == OreDictionary.WILDCARD_VALUE) {
-      recipe.output.setItemDamage(0)
-    }
-    while ((!done) && (xOffset < 3) && (yOffset < 3)) {
-      for (i <- 0 until Math.min(recipeInput.length, 9)) {
-        try {
-          var item: ItemStack = null
-          val obj: AnyRef = recipeInput(i)
-          if (obj.isInstanceOf[util.ArrayList[_]]) {
-            try {
-              item = obj.asInstanceOf[util.ArrayList[ItemStack]].get(0)
+    try {
+      var done = false
+      var xOffset = 0
+      var yOffset = 0
+      val input = Array.fill[ItemStack](9)(null)
+      val recipe = new AssemblerRecipe(input, 0, recipeOutput.copy, EnumTechLevel.MACRO, FemtocraftTechnologies.MACROSCOPIC_STRUCTURES)
+      if (recipe.output.getItemDamage == OreDictionary.WILDCARD_VALUE) {
+        recipe.output.setItemDamage(0)
+      }
+      while ((!done) && (xOffset < 3) && (yOffset < 3)) {
+        for (i <- 0 until Math.min(recipeInput.length, 9)) {
+          try {
+            var item: ItemStack = null
+            val obj: AnyRef = recipeInput(i)
+            if (obj.isInstanceOf[util.ArrayList[_]]) {
+              try {
+                item = obj.asInstanceOf[util.ArrayList[ItemStack]].get(0)
+              }
+              catch {
+                case exc: IndexOutOfBoundsException =>
+                  Femtocraft.log(Level.ERROR, "Ore recipe with nothing registered in " + "ore dictionary for " + recipe.output.getDisplayName + ".")
+                  return false
+              }
             }
-            catch {
-              case exc: IndexOutOfBoundsException =>
-                Femtocraft.log(Level.ERROR, "Ore recipe with nothing registered in " + "ore dictionary for " + recipe.output.getDisplayName + ".")
-                return false
+            else {
+              item = obj.asInstanceOf[ItemStack]
             }
+            input(((i + xOffset) % width) + 3 * (yOffset + ((i + xOffset) / width))) = if (item == null) null else new ItemStack(item.getItem, 1, item.getItemDamage)
           }
-          else {
-            item = obj.asInstanceOf[ItemStack]
+          catch {
+            case e: ArrayIndexOutOfBoundsException =>
+              if ( {xOffset += 1; xOffset} >= 3) {
+                xOffset = 0
+                yOffset += 1
+              }
           }
-          input(((i + xOffset) % width) + 3 * (yOffset + ((i + xOffset) / width))) = if (item == null) null else new ItemStack(item.getItem, 1, item.getItemDamage)
-        }
-        catch {
-          case e: ArrayIndexOutOfBoundsException =>
-            if ( {xOffset += 1; xOffset} >= 3) {
-              xOffset = 0
-              yOffset += 1
-            }
-        }
-      }
-
-      for (i <- input) {
-        if (i != null) {
-          if (i.getItemDamage == OreDictionary.WILDCARD_VALUE) {
-            i.setItemDamage(0)
-          }
-        }
-      }
-      if (addReversableRecipe(recipe)) {
-        done = true
-      }
-      else {
-        if ( {xOffset += 1; xOffset} >= 3) {
-          xOffset = 0
-          yOffset += 1
-        }
-        done = false
-      }
-    }
-    done
-  }
-
-  private def registerShapedRecipe(recipeItems: Array[ItemStack], recipeOutput: ItemStack, recipeWidth: Int, recipeHeight: Int): Boolean = {
-    var done = false
-    var xoffset = 0
-    var yoffset = 0
-    val input = Array.fill[ItemStack](9)(null)
-    val recipe = new AssemblerRecipe(input, 0, recipeOutput.copy, EnumTechLevel.MACRO, FemtocraftTechnologies.MACROSCOPIC_STRUCTURES)
-    while ((!done) && ((xoffset + recipeWidth) <= 3) && ((yoffset + recipeHeight) <= 3)) {
-      for (i <- 0 until Math.min(recipeItems.length, 9)) {
-        val item = recipeItems(i)
-        input(((i + xoffset) % recipeWidth) + 3 * (yoffset + ((i + xoffset) / recipeWidth))) = if (item == null) null else new ItemStack(item.getItem, 1, item.getItemDamage)
-      }
-      if (addReversableRecipe(recipe))
-        done = true
-      else {
-        if (({xoffset += 1; xoffset} + recipeWidth) > 3) {
-          xoffset = 0
-          yoffset += 1
-        }
-        done = false
-      }
-    }
-    done
-  }
-
-  private def registerShapelessOreRecipe(recipeItems: util.List[_], recipeOutput: ItemStack): Boolean = {
-    var valid = false
-    var slots = new Array[Int](recipeItems.size)
-    val input = Array.fill[ItemStack](9)(null)
-    val recipe = new AssemblerRecipe(input, 0, recipeOutput.copy, EnumTechLevel.MACRO, FemtocraftTechnologies.MACROSCOPIC_STRUCTURES)
-    val timeStart = System.currentTimeMillis
-    if (recipe.output.getItemDamage == OreDictionary.WILDCARD_VALUE) {
-      recipe.output.setItemDamage(0)
-    }
-    val offset = 0
-    while (!valid && ((offset + recipeItems.size) <= 9)) {
-      for (i <- 0 until slots.length) {
-        slots(i) = i
-      }
-      while (!valid) {
-        for (i <- 0 until Math.min(slots.length, 9)) {
-          var item: ItemStack = null
-          val obj = recipeItems.get(i)
-          if (obj.isInstanceOf[util.ArrayList[_]]) {
-            try {
-              item = obj.asInstanceOf[util.ArrayList[ItemStack]].get(0)
-            }
-            catch {
-              case exc: IndexOutOfBoundsException =>
-                Femtocraft.log(Level.ERROR, "Ore recipe with nothing registered in " + "ore dictionary for " + recipe.output.getDisplayName + ".")
-                return false
-            }
-          }
-          else {
-            item = obj.asInstanceOf[ItemStack]
-          }
-          input(slots(i) + offset) = if (item == null) null else item.copy
         }
 
         for (i <- input) {
@@ -408,48 +350,151 @@ class ManagerAssemblerRecipe {
             }
           }
         }
-        if ((System.currentTimeMillis - timeStart) > ManagerAssemblerRecipe.shapelessPermuteTimeMillis) {
-          return false
+        if (addReversableRecipe(recipe)) {
+          done = true
         }
-
-        if (addReversableRecipe(recipe))
-          valid = true
         else {
-          slots = permute(slots)
-          valid = false
+          if ( {xOffset += 1; xOffset} >= 3) {
+            xOffset = 0
+            yOffset += 1
+          }
+          done = false
         }
       }
+      done
+    } catch {
+      case e: Exception =>
+        Femtocraft.log(Level.ERROR, "An error occured while registering a shaped orec recipe for " + (if (recipeOutput == null) "null" else recipeOutput.getDisplayName))
+        false
     }
+  }
 
-    valid
+  private def registerShapedRecipe(recipeItems: Array[ItemStack], recipeOutput: ItemStack, recipeWidth: Int, recipeHeight: Int): Boolean = {
+    try {
+      var done = false
+      var xoffset = 0
+      var yoffset = 0
+      val input = Array.fill[ItemStack](9)(null)
+      val recipe = new AssemblerRecipe(input, 0, recipeOutput.copy, EnumTechLevel.MACRO, FemtocraftTechnologies.MACROSCOPIC_STRUCTURES)
+      while ((!done) && ((xoffset + recipeWidth) <= 3) && ((yoffset + recipeHeight) <= 3)) {
+        for (i <- 0 until Math.min(recipeItems.length, 9)) {
+          val item = recipeItems(i)
+          input(((i + xoffset) % recipeWidth) + 3 * (yoffset + ((i + xoffset) / recipeWidth))) = if (item == null) null else new ItemStack(item.getItem, 1, item.getItemDamage)
+        }
+        if (addReversableRecipe(recipe))
+          done = true
+        else {
+          if (({xoffset += 1; xoffset} + recipeWidth) > 3) {
+            xoffset = 0
+            yoffset += 1
+          }
+          done = false
+        }
+      }
+      done
+    }
+    catch {
+      case e: Exception =>
+        Femtocraft.log(Level.ERROR, "An error occured while registering shaped recipe for " + (if (recipeOutput == null) "null" else recipeOutput.getDisplayName) + ".  Width: " + recipeWidth + " Height: " + recipeHeight)
+        false
+    }
+  }
+
+  private def registerShapelessOreRecipe(recipeItems: util.List[_], recipeOutput: ItemStack): Boolean = {
+    try {
+      var valid = false
+      var slots = new Array[Int](recipeItems.size)
+      val input = Array.fill[ItemStack](9)(null)
+      val recipe = new AssemblerRecipe(input, 0, recipeOutput.copy, EnumTechLevel.MACRO, FemtocraftTechnologies.MACROSCOPIC_STRUCTURES)
+      val timeStart = System.currentTimeMillis
+      if (recipe.output.getItemDamage == OreDictionary.WILDCARD_VALUE) {
+        recipe.output.setItemDamage(0)
+      }
+      val offset = 0
+      while (!valid && ((offset + recipeItems.size) <= 9)) {
+        for (i <- 0 until slots.length) {
+          slots(i) = i
+        }
+        while (!valid) {
+          for (i <- 0 until Math.min(slots.length, 9)) {
+            var item: ItemStack = null
+            val obj = recipeItems.get(i)
+            if (obj.isInstanceOf[util.ArrayList[_]]) {
+              try {
+                item = obj.asInstanceOf[util.ArrayList[ItemStack]].get(0)
+              }
+              catch {
+                case exc: IndexOutOfBoundsException =>
+                  Femtocraft.log(Level.ERROR, "Ore recipe with nothing registered in " + "ore dictionary for " + recipe.output.getDisplayName + ".")
+                  return false
+              }
+            }
+            else {
+              item = obj.asInstanceOf[ItemStack]
+            }
+            input(slots(i) + offset) = if (item == null) null else item.copy
+          }
+
+          for (i <- input) {
+            if (i != null) {
+              if (i.getItemDamage == OreDictionary.WILDCARD_VALUE) {
+                i.setItemDamage(0)
+              }
+            }
+          }
+          if ((System.currentTimeMillis - timeStart) > ManagerAssemblerRecipe.shapelessPermuteTimeMillis) {
+            return false
+          }
+
+          if (addReversableRecipe(recipe))
+            valid = true
+          else {
+            slots = permute(slots)
+            valid = false
+          }
+        }
+      }
+
+      valid
+    } catch {
+      case e: Exception =>
+        Femtocraft.log(Level.ERROR, "An error occured while registering a shapeless ore recipe for " + (if (recipeOutput == null) "null" else recipeOutput.getDisplayName))
+        false
+    }
   }
 
   private def registerShapelessRecipe(recipeItems: util.List[_], recipeOutput: ItemStack): Boolean = {
-    var valid = false
-    val slots = new Array[Int](recipeItems.size)
-    val input = scala.Array.fill[ItemStack](9)(null)
-    val recipe = new AssemblerRecipe(input, 0, recipeOutput.copy, EnumTechLevel.MACRO, FemtocraftTechnologies.MACROSCOPIC_STRUCTURES)
-    val timeStart = System.currentTimeMillis
-    val offset = 0
-    while (!valid && ((offset + recipeItems.size) <= 9)) {
-      for (i <- 0 until slots.length) {
-        slots(i) = i
-      }
-
-      while (!valid) {
-        for (i <- 0 until Math.min(slots.length, 9)) {
-          val item = recipeItems.get(i).asInstanceOf[ItemStack]
-          input(slots(i) + offset) = if (item == null) null else item.copy
+    try {
+      var valid = false
+      val slots = new Array[Int](recipeItems.size)
+      val input = scala.Array.fill[ItemStack](9)(null)
+      val recipe = new AssemblerRecipe(input, 0, recipeOutput.copy, EnumTechLevel.MACRO, FemtocraftTechnologies.MACROSCOPIC_STRUCTURES)
+      val timeStart = System.currentTimeMillis
+      val offset = 0
+      while (!valid && ((offset + recipeItems.size) <= 9)) {
+        for (i <- 0 until slots.length) {
+          slots(i) = i
         }
 
-        if ((System.currentTimeMillis - timeStart) > ManagerAssemblerRecipe.shapelessPermuteTimeMillis) {
-          return false
+        while (!valid) {
+          for (i <- 0 until Math.min(slots.length, 9)) {
+            val item = recipeItems.get(i).asInstanceOf[ItemStack]
+            input(slots(i) + offset) = if (item == null) null else item.copy
+          }
+
+          if ((System.currentTimeMillis - timeStart) > ManagerAssemblerRecipe.shapelessPermuteTimeMillis) {
+            return false
+          }
+          addReversableRecipe(recipe)
+          valid = true
         }
-        addReversableRecipe(recipe)
-        valid = true
       }
+      valid
+    } catch {
+      case e: Exception =>
+        Femtocraft.log(Level.ERROR, "An error occured while registering a shapeless recipe for " + (if (recipeOutput == null) "null" else recipeOutput.getDisplayName))
+        false
     }
-    valid
   }
 
   private def permute(slots: Array[Int]): Array[Int] = {

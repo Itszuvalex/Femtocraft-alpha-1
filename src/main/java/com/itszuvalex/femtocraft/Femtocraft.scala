@@ -96,7 +96,7 @@ object Femtocraft {
   var guiProxy                              : ProxyGuiCommon            = null
   var femtocraftTab                         : CreativeTabs              = new FemtocraftCreativeTab("Femtocraft")
   var config                                : Configuration             = null
-  var logger                                : Logger                    = null
+  var logger                                : Logger                    = LogManager.getLogger("Femtocraft")
   var technologyConfigFile                  : File                      = null
   var recipeConfigFile                      : File                      = null
   var recipeConfig                          : Configuration             = null
@@ -288,7 +288,6 @@ object Femtocraft {
     assistantManager = new ManagerAssistant
     femtocraftServerCommand = new CommandFemtocraft
     val suggestedConfig = event.getSuggestedConfigurationFile
-    logger = LogManager.getLogger("Femtocraft")
     config = new Configuration(suggestedConfig)
     FemtocraftConfigs.load(config)
     val suggestConfigName = suggestedConfig.getName.split("\\.")

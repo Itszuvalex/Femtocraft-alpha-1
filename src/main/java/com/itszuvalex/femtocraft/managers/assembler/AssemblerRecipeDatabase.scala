@@ -66,8 +66,7 @@ class AssemblerRecipeDatabase() {
     case e: ClassNotFoundException =>
       e.printStackTrace()
       Femtocraft.log(Level.ERROR, "SQLite dependency missing.")
-      System.exit(1)
-    case e: SQLException           =>
+    case e: SQLException =>
       e.printStackTrace()
       Femtocraft.log(Level.ERROR, "Error opening connection")
   }
@@ -219,7 +218,7 @@ class AssemblerRecipeDatabase() {
     if (Femtocraft.assemblerConfigs.isEnabled(ac)) ac else null
   }
 
-  private def formatItem(item: ItemStack) = if (item == null) null else item.itemID + ":" + item.getItemDamage
+  private def formatItem(item: ItemStack) = if (item == null || item.getItem == null) null else item.itemID + ":" + item.getItemDamage
 
 
   def insertRecipe(recipe: AssemblerRecipe): Boolean = {
