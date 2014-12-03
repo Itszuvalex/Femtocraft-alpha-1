@@ -47,7 +47,10 @@ public abstract class CommandBase implements ICommand {
         return true;
     }
 
-    public String getDescription() {
+    @Override
+    public int compareTo(Object o) {
+        return getCommandName().compareTo(((ICommand) o).getCommandName());
+    }    public String getDescription() {
         return "";
     }
 
@@ -134,10 +137,7 @@ public abstract class CommandBase implements ICommand {
         return false;
     }
 
-    @Override
-    public int compareTo(Object o) {
-        return getCommandName().compareTo(((ICommand) o).getCommandName());
-    }
+
 
     ICommand getSubCommand(String name) {
         ICommand sub = subcmds.get(name);

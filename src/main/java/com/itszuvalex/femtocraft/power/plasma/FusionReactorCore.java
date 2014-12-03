@@ -21,11 +21,11 @@
 
 package com.itszuvalex.femtocraft.power.plasma;
 
+import com.itszuvalex.femtocraft.api.core.ISaveable;
 import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.power.plasma.*;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
-import com.itszuvalex.femtocraft.api.core.ISaveable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -37,7 +37,7 @@ import java.util.Collection;
  * Created by Christopher Harris (Itszuvalex) on 5/7/14.
  */
 public class FusionReactorCore implements IFusionReactorCore,
-                                          ISaveable {
+        ISaveable {
     //    public static int corePowerMax = 25000000;
 //    public static int ignitionThreshold = 15000000;
 //    public static int maxContainedFlows = 10;
@@ -54,7 +54,9 @@ public class FusionReactorCore implements IFusionReactorCore,
 
     private ArrayList<IFusionReactorComponent> components;
 
-    public FusionReactorCore(int maxContainedFlows, int stability, int temperatureRating, int ignitionProcessWindow, long reactionThreshold, long reactionFailureThreshold, int plasmaFlowTicksToGenerateMin, int plasmaFlowTicksToGenerateMax) {
+    public FusionReactorCore(int maxContainedFlows, int stability, int temperatureRating, int ignitionProcessWindow,
+                             long reactionThreshold, long reactionFailureThreshold, int plasmaFlowTicksToGenerateMin,
+                             int plasmaFlowTicksToGenerateMax) {
 
         components = new ArrayList<IFusionReactorComponent>();
         plasmaContainer = new PlasmaContainer(maxContainedFlows, stability,
@@ -71,8 +73,7 @@ public class FusionReactorCore implements IFusionReactorCore,
     public void stopReaction() {
         if (isIgniting()) {
             endIgnitionProcess(this);
-        }
-        else if (isSelfSustaining()) {
+        } else if (isSelfSustaining()) {
             reaction.endSelfSustainingReaction();
         }
 

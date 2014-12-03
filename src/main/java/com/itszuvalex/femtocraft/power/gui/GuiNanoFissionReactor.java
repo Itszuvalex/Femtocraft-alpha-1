@@ -63,41 +63,6 @@ public class GuiNanoFissionReactor extends GuiBase {
         this.reactor = reactor;
     }
 
-    @Override
-    protected void mouseClicked(int par1, int par2, int par3) {
-        if (par3 == 0) {
-            int k = (this.width - this.xSize) / 2;
-            int l = (this.height - this.ySize) / 2;
-            //incrementButton
-            if ((par1 >= (k + incrementButtonX))
-                && (par1 <= (k + incrementButtonX + incrementButtonWidth))
-                && (par2 >= (l + incrementButtonY))
-                && (par2 <= (l + incrementButtonY + incrementButtonHeight))) {
-                FemtocraftSoundUtils.playClickSound();
-                reactor.onIncrementClick();
-            }
-
-            //decrementButton
-            if ((par1 >= (k + decrementButtonX))
-                && (par1 <= (k + decrementButtonX + decrementButtonWidth))
-                && (par2 >= (l + decrementButtonY))
-                && (par2 <= (l + decrementButtonY + decrementButtonHeight))) {
-                FemtocraftSoundUtils.playClickSound();
-                reactor.onDecrementClick();
-            }
-
-            //abortButton
-            if ((par1 >= (k + abortButtonX))
-                && (par1 <= (k + abortButtonX + abortButtonWidth))
-                && (par2 >= (l + abortButtonY))
-                && (par2 <= (l + abortButtonY + abortButtonHeight))) {
-                FemtocraftSoundUtils.playClickSound();
-                reactor.onAbortClick();
-            }
-            super.mouseClicked(par1, par2, par3);
-        }
-    }
-
     /*
      * (non-Javadoc)
      *
@@ -280,6 +245,41 @@ public class GuiNanoFissionReactor extends GuiBase {
         // Draw Tank Lines
         this.drawTexturedModalRect(k + 134, l + 8, 176, 9, 16, 60);
         this.drawTexturedModalRect(k + 152, l + 8, 176, 9, 16, 60);
+    }
+
+    @Override
+    protected void mouseClicked(int par1, int par2, int par3) {
+        if (par3 == 0) {
+            int k = (this.width - this.xSize) / 2;
+            int l = (this.height - this.ySize) / 2;
+            //incrementButton
+            if ((par1 >= (k + incrementButtonX))
+                && (par1 <= (k + incrementButtonX + incrementButtonWidth))
+                && (par2 >= (l + incrementButtonY))
+                && (par2 <= (l + incrementButtonY + incrementButtonHeight))) {
+                FemtocraftSoundUtils.playClickSound();
+                reactor.onIncrementClick();
+            }
+
+            //decrementButton
+            if ((par1 >= (k + decrementButtonX))
+                && (par1 <= (k + decrementButtonX + decrementButtonWidth))
+                && (par2 >= (l + decrementButtonY))
+                && (par2 <= (l + decrementButtonY + decrementButtonHeight))) {
+                FemtocraftSoundUtils.playClickSound();
+                reactor.onDecrementClick();
+            }
+
+            //abortButton
+            if ((par1 >= (k + abortButtonX))
+                && (par1 <= (k + abortButtonX + abortButtonWidth))
+                && (par2 >= (l + abortButtonY))
+                && (par2 <= (l + abortButtonY + abortButtonHeight))) {
+                FemtocraftSoundUtils.playClickSound();
+                reactor.onAbortClick();
+            }
+            super.mouseClicked(par1, par2, par3);
+        }
     }
 
     private void renderTank(IFluidTank tank, int x, int y, int k, int l) {

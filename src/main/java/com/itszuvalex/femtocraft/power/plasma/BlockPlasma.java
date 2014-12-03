@@ -42,11 +42,6 @@ import java.util.Random;
 public class BlockPlasma extends BlockContainer {
     public static float damagePerTick = .2f;
 
-    @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
-        return null;
-    }
-
     public BlockPlasma() {
         super(Material.lava);
         setCreativeTab(Femtocraft.femtocraftTab());
@@ -64,10 +59,14 @@ public class BlockPlasma extends BlockContainer {
         return false;
     }
 
-
     @Override
     public IIcon getIcon(int par1, int par2) {
         return super.getIcon(par1, par2);
+    }
+
+    @Override
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
+        return null;
     }
 
     @Override
@@ -117,6 +116,11 @@ public class BlockPlasma extends BlockContainer {
     }
 
     @Override
+    public boolean isReplaceable(IBlockAccess world, int x, int y, int z) {
+        return false;
+    }
+
+    @Override
     public boolean isBurning(IBlockAccess world, int x, int y, int z) {
         return true;
     }
@@ -124,11 +128,6 @@ public class BlockPlasma extends BlockContainer {
     @Override
     public boolean isFireSource(World world, int x, int y, int z, ForgeDirection side) {
         return true;
-    }
-
-    @Override
-    public boolean isReplaceable(IBlockAccess world, int x, int y, int z) {
-        return false;
     }
 
     private void applyEffects(Entity entity) {

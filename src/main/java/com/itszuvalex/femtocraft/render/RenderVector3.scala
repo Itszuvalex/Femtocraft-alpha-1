@@ -29,9 +29,6 @@ import net.minecraft.nbt.NBTTagCompound
  */
 class RenderVector3(@Saveable var x: Double, @Saveable var y: Double, @Saveable var z: Double) extends ISaveable {
 
-  def this() =
-    this(0, 0, 0)
-
   def this(a: RenderPoint, b: RenderPoint) =
     this(a.x - b.x, a.y - b.y, a.z - b.z)
 
@@ -53,6 +50,9 @@ class RenderVector3(@Saveable var x: Double, @Saveable var y: Double, @Saveable 
     ret.z = x * vector.y - y * vector.x
     ret
   }
+
+  def this() =
+    this(0, 0, 0)
 
   def saveToNBT(compound: NBTTagCompound) {
     FemtocraftDataUtils.saveObjectToNBT(compound, this, FemtocraftDataUtils.EnumSaveType.WORLD)

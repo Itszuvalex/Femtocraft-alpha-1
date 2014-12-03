@@ -14,6 +14,13 @@ import scala.collection.mutable.ArrayBuffer
  */
 object FemtocraftSoundManager {
 
+  private final val PhlegethonTunnelIdentifier = Femtocraft.ID.toLowerCase + ":" + "phlegethontunnel"
+
+  def makePhlegethonSound(x: Int, y: Int, z: Int) = createSound(PhlegethonTunnelIdentifier, 1f, 1f, x.toInt, y.toInt, z.toInt, repeat = true, 0, AttenuationType.LINEAR)
+
+  def createSound(identifier: String, volume: Float, pitch: Float, x: Int, y: Int, z: Int, repeat: Boolean, repeatDelay: Int, attenuation: AttenuationType) =
+    new PositionedSoundLoopable(new ResourceLocation(identifier), volume, pitch, x, y, z, repeat, repeatDelay, attenuation)
+
   object SoundAction {
 
     def actionFromString(id: String): SoundAction = {
@@ -27,14 +34,6 @@ object FemtocraftSoundManager {
     case object STOP_ALL_SOUNDS extends SoundAction {val id = "STOP_ALL_SOUNDS"}
 
   }
-
-
-  private final val PhlegethonTunnelIdentifier = Femtocraft.ID.toLowerCase + ":" + "phlegethontunnel"
-
-  def createSound(identifier: String, volume: Float, pitch: Float, x: Int, y: Int, z: Int, repeat: Boolean, repeatDelay: Int, attenuation: AttenuationType) =
-    new PositionedSoundLoopable(new ResourceLocation(identifier), volume, pitch, x, y, z, repeat, repeatDelay, attenuation)
-
-  def makePhlegethonSound(x: Int, y: Int, z: Int) = createSound(PhlegethonTunnelIdentifier, 1f, 1f, x.toInt, y.toInt, z.toInt, repeat = true, 0, AttenuationType.LINEAR)
 }
 
 class FemtocraftSoundManager() {
@@ -49,6 +48,7 @@ class FemtocraftSoundManager() {
 
   def isSoundPlaying(sound: ISound) = Minecraft.getMinecraft.getSoundHandler.isSoundPlaying(sound)
 
+  def stopAllSounds() = sounds.foreach(sound => stopSound(sound))
 
   def stopSound(sound: ISound): Boolean = {
     if (isSoundPlaying(sound)) {
@@ -60,8 +60,6 @@ class FemtocraftSoundManager() {
     }
     false
   }
-
-  def stopAllSounds() = sounds.foreach(sound => stopSound(sound))
 
   //
   //  def getPacket(action: SoundAction): Packet250CustomPayload = {

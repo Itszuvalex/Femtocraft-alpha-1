@@ -96,13 +96,6 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
         thoriumConcentrationTarget = 0;
     }
 
-    public enum ReactorState {
-        INACTIVE,
-        ACTIVE,
-        UNSTABLE,
-        CRITICAL
-    }
-
     public ReactorState getState() {
         float temp = getTemperatureCurrent();
         float max = getTemperatureMax();
@@ -116,28 +109,6 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
             return ReactorState.UNSTABLE;
         }
         return ReactorState.CRITICAL;
-    }
-
-    @Override
-    public void onInventoryChanged() {
-        MultiBlockNanoFissionReactor.instance.onMultiblockInventoryChanged(worldObj, info.x(), info.y(), info.z());
-    }
-
-    public float getThoriumConcentrationTarget() {
-        return thoriumConcentrationTarget;
-    }
-
-    public void setThoriumConcentrationTarget(float thoriumConcentrationTarget) {
-        this.thoriumConcentrationTarget = Math.min(Math.max(thoriumConcentrationTarget, 0f), 1.f);
-        setModified();
-    }
-
-    public void incrementThoriumConcentrationTarget() {
-        setThoriumConcentrationTarget(getThoriumConcentrationTarget() + thoriumConcentrationTargetIncrementAmount);
-    }
-
-    public void decrementThoriumConcentrationTarget() {
-        setThoriumConcentrationTarget(getThoriumConcentrationTarget() - thoriumConcentrationTargetIncrementAmount);
     }
 
     public float getTemperatureCurrent() {
@@ -154,19 +125,6 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
 
     public void setTemperatureMax(int temperatureMax) {
         this.temperatureMax = temperatureMax;
-    }
-
-    public int getThoriumStoreCurrent() {
-        return thoriumStoreCurrent;
-    }
-
-    public void setThoriumStoreCurrent(int thoriumStoreCurrent) {
-        this.thoriumStoreCurrent = thoriumStoreCurrent;
-    }
-
-    @Override
-    public int getGuiID() {
-        return FemtocraftGuiConstants.NanoFissionReactorGuiID();
     }
 
     @Override
@@ -188,19 +146,6 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
     }
 
     @Override
-    public boolean hasGUI() {
-        return isValidMultiBlock();
-    }
-
-    public void abortReaction() {
-        thoriumStoreCurrent = 0;
-        cooledSaltTank.setFluid(null);
-        moltenSaltTank.setFluid(null);
-        setUpdate();
-        setModified();
-    }
-
-    @Override
     public void femtocraftServerUpdate() {
         super.femtocraftServerUpdate();
         loseHeat();
@@ -208,6 +153,51 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
         meltThorium();
         meltSalt();
         meltWorld();
+    }
+
+    @Override
+    public boolean hasGUI() {
+        return isValidMultiBlock();
+    }
+
+    @Override
+    public void onInventoryChanged() {
+        MultiBlockNanoFissionReactor.instance.onMultiblockInventoryChanged(worldObj, info.x(), info.y(), info.z());
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiConstants.NanoFissionReactorGuiID();
+    }
+
+    @Override
+    public boolean isValidMultiBlock() {
+        return info != null && info.isValidMultiBlock();
+    }
+
+    @Override
+    public boolean formMultiBlock(World world, int x, int y, int z) {
+        boolean ret = info.formMultiBlock(world, x, y, z);
+        if (ret) {
+            setModified();
+            setUpdate();
+        }
+        return ret;
+    }
+
+    @Override
+    public boolean breakMultiBlock(World world, int x, int y, int z) {
+        boolean ret = info.breakMultiBlock(world, x, y, z);
+        if (ret) {
+            setModified();
+            setUpdate();
+        }
+        return ret;
+    }
+
+    @Override
+    public MultiBlockInfo getInfo() {
+        return info;
     }
 
     private void meltWorld() {
@@ -329,10 +319,6 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
         }
     }
 
-    public int getMoltenSaltAmount() {
-        return moltenSaltTank.getFluidAmount();
-    }
-
     public int getCooledSaltAmount() {
         return cooledSaltTank.getFluidAmount();
     }
@@ -372,12 +358,23 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
         return result;
     }
 
+    public int getThoriumStoreCurrent() {
+        return thoriumStoreCurrent;
+    }
+
+    public void setThoriumStoreCurrent(int thoriumStoreCurrent) {
+        this.thoriumStoreCurrent = thoriumStoreCurrent;
+    }
+
+    public int getMoltenSaltAmount() {
+        return moltenSaltTank.getFluidAmount();
+    }
+
     @Override
     public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
         if (resource.getFluid() != Femtocraft.fluidMoltenSalt()) return null;
         return drain(from, resource.amount, doDrain);
     }
-
 
     @Override
     public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
@@ -478,36 +475,6 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
         return false;
     }
 
-    @Override
-    public boolean isValidMultiBlock() {
-        return info != null && info.isValidMultiBlock();
-    }
-
-    @Override
-    public boolean formMultiBlock(World world, int x, int y, int z) {
-        boolean ret = info.formMultiBlock(world, x, y, z);
-        if (ret) {
-            setModified();
-            setUpdate();
-        }
-        return ret;
-    }
-
-    @Override
-    public boolean breakMultiBlock(World world, int x, int y, int z) {
-        boolean ret = info.breakMultiBlock(world, x, y, z);
-        if (ret) {
-            setModified();
-            setUpdate();
-        }
-        return ret;
-    }
-
-    @Override
-    public MultiBlockInfo getInfo() {
-        return info;
-    }
-
     public void setCooledMoltenSalt(int cooledMoltenSalt) {
         if (cooledSaltTank.getFluid() == null) {
             cooledSaltTank.fill(new FluidStack(Femtocraft.fluidCooledMoltenSalt(), cooledMoltenSalt), true);
@@ -536,17 +503,17 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
         onClick(incrementAction);
     }
 
+    private void onClick(byte action) {
+        FemtocraftPacketHandler.INSTANCE().sendToServer(new MessageFissionReactorCore(xCoord, yCoord, zCoord,
+                worldObj.provider.dimensionId, action));
+    }
+
     public void onDecrementClick() {
         onClick(decrementAction);
     }
 
     public void onAbortClick() {
         onClick(abortAction);
-    }
-
-    private void onClick(byte action) {
-        FemtocraftPacketHandler.INSTANCE().sendToServer(new MessageFissionReactorCore(xCoord, yCoord, zCoord,
-                worldObj.provider.dimensionId, action));
     }
 
     public void handleAction(byte action) {
@@ -565,5 +532,37 @@ public class TileEntityNanoFissionReactorCore extends TileEntityBase implements 
                         "Received invalid action for Fusion Reactor at x-" + xCoord + " y-" + yCoord + " z-" + zCoord +
                         " at dimension-" + worldObj.provider.dimensionId + ".");
         }
+    }
+
+    public void incrementThoriumConcentrationTarget() {
+        setThoriumConcentrationTarget(getThoriumConcentrationTarget() + thoriumConcentrationTargetIncrementAmount);
+    }
+
+    public void decrementThoriumConcentrationTarget() {
+        setThoriumConcentrationTarget(getThoriumConcentrationTarget() - thoriumConcentrationTargetIncrementAmount);
+    }
+
+    public void abortReaction() {
+        thoriumStoreCurrent = 0;
+        cooledSaltTank.setFluid(null);
+        moltenSaltTank.setFluid(null);
+        setUpdate();
+        setModified();
+    }
+
+    public float getThoriumConcentrationTarget() {
+        return thoriumConcentrationTarget;
+    }
+
+    public void setThoriumConcentrationTarget(float thoriumConcentrationTarget) {
+        this.thoriumConcentrationTarget = Math.min(Math.max(thoriumConcentrationTarget, 0f), 1.f);
+        setModified();
+    }
+
+    public enum ReactorState {
+        INACTIVE,
+        ACTIVE,
+        UNSTABLE,
+        CRITICAL
     }
 }

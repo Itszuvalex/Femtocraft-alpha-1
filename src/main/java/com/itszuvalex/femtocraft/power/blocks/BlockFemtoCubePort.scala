@@ -49,14 +49,14 @@ class BlockFemtoCubePort extends TileContainer(Material.iron) {
         val spawnY = y + getBlockBoundsMinY + par5Random.nextFloat * (getBlockBoundsMaxY - getBlockBoundsMinY)
         val spawnZ = z + getBlockBoundsMinZ + par5Random.nextFloat * (getBlockBoundsMaxZ - getBlockBoundsMinZ)
         RenderUtils.spawnParticle(par1World, RenderUtils.FEMTO_POWER_PARTICLE, spawnX, spawnY, spawnZ)
-      case _ =>
+      case _                                                                      =>
     }
   }
 
   @SideOnly(Side.CLIENT) override def getIcon(par1iBlockAccess: IBlockAccess, par2: Int, par3: Int, par4: Int, par5: Int): IIcon = par1iBlockAccess.getTileEntity(par2, par3, par4) match {
     case port: TileEntityFemtoCubePort =>
       if (port.output) portOutput else portInput
-    case _ => super.getIcon(par1iBlockAccess, par2, par3, par4, par5)
+    case _                             => super.getIcon(par1iBlockAccess, par2, par3, par4, par5)
   }
 
   override def onPostBlockPlaced(par1World: World, par2: Int, par3: Int, par4: Int, par5: Int) {
@@ -76,7 +76,7 @@ class BlockFemtoCubePort extends TileContainer(Material.iron) {
       case port: TileEntityFemtoCubePort =>
         val info = port.getInfo
         MultiBlockFemtoCube.breakMultiBlock(par1World, info.x, info.y, info.z)
-      case _ =>
+      case _                             =>
     }
     super.breakBlock(par1World, par2, par3, par4, par5, par6)
   }

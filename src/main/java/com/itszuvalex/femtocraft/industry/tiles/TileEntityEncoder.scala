@@ -67,16 +67,16 @@ object TileEntityEncoder {
 
 
   override def isItemValidForSlot(i: Int, itemstack: ItemStack): Boolean = i match {
-    case 9 => false
+    case 9  => false
     case 10 => itemstack.getItem.isInstanceOf[IAssemblerSchematic]
-    case _ => super.isItemValidForSlot(i, itemstack)
+    case _  => super.isItemValidForSlot(i, itemstack)
   }
 
   override def isWorking = encodingRecipe != null
 
-  override protected def canStartWork = {
+  override def markDirty() {
     val recipe = getRecipe
-    recipe != null && getStackInSlot(11) == null && getStackInSlot(10) != null && getCurrentPower >= TileEntityEncoder.POWER_TO_ENCODE && massTank.getFluidAmount >= getStackInSlot(10).getItem.asInstanceOf[IAssemblerSchematic].massRequired(recipe) && getStackInSlot(10).getItem.isInstanceOf[IAssemblerSchematic]
+    inventory.setInventorySlotContents(9, if (recipe == null) null else recipe.output.copy)
   }
 
   private def getRecipe: AssemblerRecipe = {
@@ -86,33 +86,6 @@ object TileEntityEncoder {
     }
     val researched = Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner, recipe.tech)
     if (researched) recipe else null
-  }
-
-  override protected def startWork() {
-    encodingSchematic = decrStackSize(10, 1)
-    encodingRecipe = getRecipe
-    timeWorked = 0
-    consume(TileEntityEncoder.POWER_TO_ENCODE)
-    massTank.drain(encodingSchematic.getItem.asInstanceOf[IAssemblerSchematic].massRequired(encodingRecipe), true)
-  }
-
-  override def markDirty() {
-    val recipe = getRecipe
-    inventory.setInventorySlotContents(9, if (recipe == null) null else recipe.output.copy)
-  }
-
-  override protected def continueWork() {
-    timeWorked += 1
-  }
-
-  override protected def canFinishWork = timeWorked >= TileEntityEncoder.TICKS_TO_ENCODE
-
-  override protected def finishWork() {
-    timeWorked = 0
-    encodingSchematic.getItem.asInstanceOf[IAssemblerSchematic].setRecipe(encodingSchematic, encodingRecipe)
-    setInventorySlotContents(11, encodingSchematic)
-    encodingSchematic = null
-    encodingRecipe = null
   }
 
   def getProgressScaled(i: Int) = (timeWorked * i) / TileEntityEncoder.TICKS_TO_ENCODE
@@ -133,4 +106,31 @@ object TileEntityEncoder {
   }
 
   def getMassCapacity = massTank.getCapacity
+
+  override protected def canStartWork = {
+    val recipe = getRecipe
+    recipe != null && getStackInSlot(11) == null && getStackInSlot(10) != null && getCurrentPower >= TileEntityEncoder.POWER_TO_ENCODE && massTank.getFluidAmount >= getStackInSlot(10).getItem.asInstanceOf[IAssemblerSchematic].massRequired(recipe) && getStackInSlot(10).getItem.isInstanceOf[IAssemblerSchematic]
+  }
+
+  override protected def startWork() {
+    encodingSchematic = decrStackSize(10, 1)
+    encodingRecipe = getRecipe
+    timeWorked = 0
+    consume(TileEntityEncoder.POWER_TO_ENCODE)
+    massTank.drain(encodingSchematic.getItem.asInstanceOf[IAssemblerSchematic].massRequired(encodingRecipe), true)
+  }
+
+  override protected def continueWork() {
+    timeWorked += 1
+  }
+
+  override protected def canFinishWork = timeWorked >= TileEntityEncoder.TICKS_TO_ENCODE
+
+  override protected def finishWork() {
+    timeWorked = 0
+    encodingSchematic.getItem.asInstanceOf[IAssemblerSchematic].setRecipe(encodingSchematic, encodingRecipe)
+    setInventorySlotContents(11, encodingSchematic)
+    encodingSchematic = null
+    encodingRecipe = null
+  }
 }

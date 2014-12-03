@@ -38,7 +38,7 @@ class EntityFxPower(par1World: World, x: Double, y: Double, z: Double, scale: Fl
 
   def this(par1World: World, x: Double, y: Double, z: Double, red: Float, green: Float, blue: Float) =
     this(par1World, x, y, z, 1.0F, red, green, blue)
- 
+
   {
     this.motionX *= 0.10000000149011612D
     this.motionY *= 0.10000000149011612D
@@ -95,11 +95,6 @@ class EntityFxPower(par1World: World, x: Double, y: Double, z: Double, scale: Fl
     glAlphaFunc(GL_GREATER, 0.1f)
   }
 
-  override def setParticleTextureIndex(par1: Int) {
-    this.particleTextureIndexX = par1 % 16
-    this.particleTextureIndexY = par1 / 16
-  }
-
   /**
    * Called to update the entity's position/logic.
    */
@@ -126,6 +121,11 @@ class EntityFxPower(par1World: World, x: Double, y: Double, z: Double, scale: Fl
       this.motionX *= 0.699999988079071D
       this.motionZ *= 0.699999988079071D
     }
+  }
+
+  override def setParticleTextureIndex(par1: Int) {
+    this.particleTextureIndexX = par1 % 16
+    this.particleTextureIndexY = par1 / 16
   }
 }
 

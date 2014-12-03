@@ -21,10 +21,10 @@
 
 package com.itszuvalex.femtocraft.transport.items.tiles;
 
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.transport.IVacuumTube;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.utils.BaseInventory;
-import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
@@ -79,12 +79,16 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-        super.readFromNBT(par1nbtTagCompound);
-        byte connections = par1nbtTagCompound.getByte("Connections");
-        parseConnectionMask(connections);
-        byte hasItems = par1nbtTagCompound.getByte("HasItems");
-        parseItemMask(hasItems);
+    public boolean hasDescription() {
+        return true;
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+        super.onDataPacket(net, pkt);
+        NBTTagCompound compound = pkt.func_148857_g();
+        parseItemMask(compound.getByte(ITEM_MASK_KEY));
+        parseConnectionMask(compound.getByte(CONNECTION_MASK_KEY));
     }
 
     @Override
@@ -92,6 +96,11 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         super.writeToNBT(par1nbtTagCompound);
         par1nbtTagCompound.setByte("Connections", generateConnectionMask());
         par1nbtTagCompound.setByte("HasItems", generateItemMask());
+    }
+
+    @Override
+    public Packet getDescriptionPacket() {
+        return generatePacket();
     }
 
     @Override
@@ -347,38 +356,66 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         }
     }
 
-    public boolean missingInput() {
-        return (inputSidedInv == null) && (inputTube == null)
-               && (inputInv == null);
-    }
-
-    public boolean missingOutput() {
-        return (outputSidedInv == null) && (outputTube == null)
-               && (outputInv == null);
-    }
-
-    private void ejectItem(int slot) {
-        ItemStack dropItem = items.getStackInSlot(slot);
-        ejectItemStack(dropItem);
-        items.setInventorySlotContents(slot, null);
-        hasItem[slot] = false;
-        setUpdate();
-        setModified();
-    }
-
     @Override
-    public boolean isOverflowing() {
-        return (worldObj.isRemote && overflowing)
-               || (((outputTube != null && !outputTube.canInsertItem(null,
-                outputDir.getOpposite()
-        )) ||
-                    ((outputInv != null || outputSidedInv != null) && !canFillInv))
-                   && hasItem[0] && hasItem[1] && hasItem[2] && hasItem[3] &&
-                   (inputTube == null || queuedItem != null));
+    public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
+        super.readFromNBT(par1nbtTagCompound);
+        byte connections = par1nbtTagCompound.getByte("Connections");
+        parseConnectionMask(connections);
+        byte hasItems = par1nbtTagCompound.getByte("HasItems");
+        parseItemMask(hasItems);
     }
 
-    protected boolean canAcceptItemStack(ItemStack item) {
-        return true;
+    public void parseConnectionMask(byte mask) {
+        int input = mask & 7;
+        int output = (mask >> 4) & 7;
+        inputDir = ForgeDirection.getOrientation(input);
+        outputDir = ForgeDirection.getOrientation(output);
+        boolean hasInput = ((mask >> 3) & 1) == 1;
+        boolean hasOutput = ((mask >> 7) & 1) == 1;
+
+        if (worldObj == null) {
+            return;
+        }
+
+        TileEntity inputTile = worldObj.getTileEntity(xCoord
+                                                      + inputDir.offsetX, yCoord + inputDir.offsetY, zCoord
+                                                                                                     +
+                                                                                                     inputDir.offsetZ);
+        if (inputTile == null) {
+            if (hasInput) {
+                needsCheckInput = true;
+            }
+        } else {
+            addInput(inputDir);
+        }
+
+        TileEntity outputTile = worldObj.getTileEntity(xCoord
+                                                       + outputDir.offsetX, yCoord + outputDir.offsetY, zCoord
+                                                                                                        +
+                                                                                                        outputDir
+                                                                                                                .offsetZ);
+        if (outputTile == null) {
+            if (hasOutput) {
+                needsCheckOutput = true;
+            }
+        } else {
+            addOutput(outputDir);
+        }
+
+        setRenderUpdate();
+    }
+
+    public void parseItemMask(byte mask) {
+        byte temp;
+
+        for (int i = 0; i < hasItem.length; i++) {
+            temp = mask;
+            hasItem[i] = ((temp >> i) & 1) == 1;
+        }
+
+        temp = mask;
+        overflowing = ((temp >> hasItem.length) & 1) == 1;
+        setRenderUpdate();
     }
 
     private void clearInput() {
@@ -420,6 +457,19 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         setModified();
     }
 
+    private void ejectItem(int slot) {
+        ItemStack dropItem = items.getStackInSlot(slot);
+        ejectItemStack(dropItem);
+        items.setInventorySlotContents(slot, null);
+        hasItem[slot] = false;
+        setUpdate();
+        setModified();
+    }
+
+    protected boolean canAcceptItemStack(ItemStack item) {
+        return true;
+    }
+
     private void ejectItemStack(ItemStack dropItem) {
         if (dropItem == null) {
             return;
@@ -446,6 +496,59 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         worldObj.spawnEntityInWorld(entityitem);
         setUpdate();
         setModified();
+    }
+
+    private S35PacketUpdateTileEntity generatePacket() {
+        NBTTagCompound compound = new NBTTagCompound();
+        compound.setByte(ITEM_MASK_KEY, generateItemMask());
+        compound.setByte(CONNECTION_MASK_KEY, generateConnectionMask());
+        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, compound);
+    }
+
+    public byte generateConnectionMask() {
+        byte output = 0;
+        output += FemtocraftUtils.indexOfForgeDirection(inputDir) & 7;
+        output += missingInput() ? 0 : 1 << 3;
+        output += (FemtocraftUtils.indexOfForgeDirection(outputDir) & 7) << 4;
+        output += missingOutput() ? 0 : 1 << 7;
+        return output;
+    }
+
+    public byte generateItemMask() {
+        byte output = 0;
+
+        for (int i = 0; i < hasItem.length; i++) {
+            if (hasItem[i]) {
+                output += 1 << i;
+            }
+        }
+
+        if (isOverflowing()) {
+            output += 1 << hasItem.length;
+        }
+
+        return output;
+    }
+
+    public boolean missingInput() {
+        return (inputSidedInv == null) && (inputTube == null)
+               && (inputInv == null);
+    }
+
+    public boolean missingOutput() {
+        return (outputSidedInv == null) && (outputTube == null)
+               && (outputInv == null);
+    }
+
+    @Override
+    public boolean isOverflowing() {
+        return (worldObj.isRemote && overflowing)
+               || (((outputTube != null && !outputTube.canInsertItem(null,
+                outputDir.getOpposite()
+        )) ||
+                    ((outputInv != null || outputSidedInv != null) && !canFillInv))
+                   && hasItem[0] && hasItem[1] && hasItem[2] && hasItem[3] &&
+                   (inputTube == null || queuedItem != null));
     }
 
     @Override
@@ -603,88 +706,6 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         }
 
         return false;
-    }
-
-    @Override
-    public Packet getDescriptionPacket() {
-        return generatePacket();
-    }
-
-    @Override
-    public boolean hasDescription() {
-        return true;
-    }
-
-    private S35PacketUpdateTileEntity generatePacket() {
-        NBTTagCompound compound = new NBTTagCompound();
-        compound.setByte(ITEM_MASK_KEY, generateItemMask());
-        compound.setByte(CONNECTION_MASK_KEY, generateConnectionMask());
-        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, compound);
-    }
-
-    public byte generateItemMask() {
-        byte output = 0;
-
-        for (int i = 0; i < hasItem.length; i++) {
-            if (hasItem[i]) {
-                output += 1 << i;
-            }
-        }
-
-        if (isOverflowing()) {
-            output += 1 << hasItem.length;
-        }
-
-        return output;
-    }
-
-    public byte generateConnectionMask() {
-        byte output = 0;
-        output += FemtocraftUtils.indexOfForgeDirection(inputDir) & 7;
-        output += missingInput() ? 0 : 1 << 3;
-        output += (FemtocraftUtils.indexOfForgeDirection(outputDir) & 7) << 4;
-        output += missingOutput() ? 0 : 1 << 7;
-        return output;
-    }
-
-    public void parseConnectionMask(byte mask) {
-        int input = mask & 7;
-        int output = (mask >> 4) & 7;
-        inputDir = ForgeDirection.getOrientation(input);
-        outputDir = ForgeDirection.getOrientation(output);
-        boolean hasInput = ((mask >> 3) & 1) == 1;
-        boolean hasOutput = ((mask >> 7) & 1) == 1;
-
-        if (worldObj == null) {
-            return;
-        }
-
-        TileEntity inputTile = worldObj.getTileEntity(xCoord
-                                                      + inputDir.offsetX, yCoord + inputDir.offsetY, zCoord
-                                                                                                     +
-                                                                                                     inputDir.offsetZ);
-        if (inputTile == null) {
-            if (hasInput) {
-                needsCheckInput = true;
-            }
-        } else {
-            addInput(inputDir);
-        }
-
-        TileEntity outputTile = worldObj.getTileEntity(xCoord
-                                                       + outputDir.offsetX, yCoord + outputDir.offsetY, zCoord
-                                                                                                        +
-                                                                                                        outputDir
-                                                                                                                .offsetZ);
-        if (outputTile == null) {
-            if (hasOutput) {
-                needsCheckOutput = true;
-            }
-        } else {
-            addOutput(outputDir);
-        }
-
-        setRenderUpdate();
     }
 
     public boolean isEndpoint() {
@@ -967,27 +988,6 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
     public void onNeighborTileChange() {
         canFillInv = true;
         canExtractInv = true;
-    }
-
-    @Override
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-        super.onDataPacket(net, pkt);
-        NBTTagCompound compound = pkt.func_148857_g();
-        parseItemMask(compound.getByte(ITEM_MASK_KEY));
-        parseConnectionMask(compound.getByte(CONNECTION_MASK_KEY));
-    }
-
-    public void parseItemMask(byte mask) {
-        byte temp;
-
-        for (int i = 0; i < hasItem.length; i++) {
-            temp = mask;
-            hasItem[i] = ((temp >> i) & 1) == 1;
-        }
-
-        temp = mask;
-        overflowing = ((temp >> hasItem.length) & 1) == 1;
-        setRenderUpdate();
     }
 
     public ForgeDirection getInput() {

@@ -81,35 +81,6 @@ object TileEntityBaseEntityMicroReconstructor {
     super.decrStackSize(par1, par2)
   }
 
-  override def markDirty() {
-    val as = getSchematic
-    if (as != null) {
-      val recipe = as.getRecipe(getStackInSlot(10))
-      if (recipe == null) (0 until 9).foreach(inventory.setInventorySlotContents(_, null))
-      else (0 until recipe.input.length).map((i: Int) => (i, recipe.input(i))).foreach { case (i, item) => inventory.setInventorySlotContents(i, if (item == null) null else item.copy)}
-    }
-    else {
-      for (i <- 0 until 9) {
-        inventory.setInventorySlotContents(i, null)
-      }
-    }
-    hasItems = true
-    super.markDirty()
-  }
-
-  private def getSchematic: IAssemblerSchematic = {
-    val is = getStackInSlot(10)
-    if (is == null) {
-      return null
-    }
-    is.getItem match {
-      case schematic: IAssemblerSchematic =>
-        return schematic
-      case _ =>
-    }
-    null
-  }
-
   override def getStackInSlotOnClosing(par1: Int): ItemStack = {
     if (par1 < 9) {
       return null
@@ -120,7 +91,6 @@ object TileEntityBaseEntityMicroReconstructor {
   override def getInventoryName = if (this.hasCustomInventoryName) this.field_94130_e else "Microtech Reconstructor"
 
   override def hasCustomInventoryName = this.field_94130_e != null && this.field_94130_e.length > 0
-
 
   override def isItemValidForSlot(i: Int, itemstack: ItemStack) = i > 10 || (i == 10 && itemstack.getItem.isInstanceOf[IAssemblerSchematic])
 
@@ -136,6 +106,30 @@ object TileEntityBaseEntityMicroReconstructor {
   protected def getTicksToCook = TileEntityBaseEntityMicroReconstructor.TICKS_TO_COOK
 
   override def isWorking = reconstructingStacks != null
+
+  override def getAccessibleSlotsFromSide(var1: Int): Array[Int] = var1 match {
+    case 5 =>
+      Array[Int](9)
+    case _ =>
+      (11 until getSizeInventory).toArray
+  }
+
+  override def canInsertItem(i: Int, itemstack: ItemStack, j: Int) = i > 10
+
+  override def canExtractItem(i: Int, itemstack: ItemStack, j: Int) = i == 9 || i > 10
+
+  def setFluidAmount(amount: Int) {
+    if (massTank.getFluid != null) {
+      massTank.setFluid(new FluidStack(massTank.getFluid.getFluid, amount))
+    }
+    else {
+      massTank.setFluid(new FluidStack(Femtocraft.fluidMass, amount))
+    }
+  }
+
+  def clearFluid() {
+    massTank.setFluid(null)
+  }
 
   override protected def canStartWork: Boolean = {
     if (reconstructingStacks != null || !(0 until 9).exists(getStackInSlot(_) != null) || getSchematic == null || this.getCurrentPower < getPowerToCook || cookTime > 0) {
@@ -158,6 +152,19 @@ object TileEntityBaseEntityMicroReconstructor {
       }
       massTank.getFluidAmount >= recipe.mass && roomForItem(recipe.output)
     }
+  }
+
+  private def getSchematic: IAssemblerSchematic = {
+    val is = getStackInSlot(10)
+    if (is == null) {
+      return null
+    }
+    is.getItem match {
+      case schematic: IAssemblerSchematic =>
+        return schematic
+      case _                              =>
+    }
+    null
   }
 
   protected def getPowerToCook = TileEntityBaseEntityMicroReconstructor.POWER_TO_COOK
@@ -259,6 +266,22 @@ object TileEntityBaseEntityMicroReconstructor {
     }
   }
 
+  override def markDirty() {
+    val as = getSchematic
+    if (as != null) {
+      val recipe = as.getRecipe(getStackInSlot(10))
+      if (recipe == null) (0 until 9).foreach(inventory.setInventorySlotContents(_, null))
+      else (0 until recipe.input.length).map((i: Int) => (i, recipe.input(i))).foreach { case (i, item) => inventory.setInventorySlotContents(i, if (item == null) null else item.copy)}
+    }
+    else {
+      for (i <- 0 until 9) {
+        inventory.setInventorySlotContents(i, null)
+      }
+    }
+    hasItems = true
+    super.markDirty()
+  }
+
   def getMassAmount = massTank.getFluidAmount
 
   protected def getMaxSimultaneousSmelt = TileEntityBaseEntityMicroReconstructor.MAX_SMELT
@@ -298,29 +321,5 @@ object TileEntityBaseEntityMicroReconstructor {
     }
     reconstructingStacks = null
     cookTime = 0
-  }
-
-  override def getAccessibleSlotsFromSide(var1: Int): Array[Int] = var1 match {
-    case 5 =>
-      Array[Int](9)
-    case _ =>
-      (11 until getSizeInventory).toArray
-  }
-
-  override def canInsertItem(i: Int, itemstack: ItemStack, j: Int) = i > 10
-
-  override def canExtractItem(i: Int, itemstack: ItemStack, j: Int) = i == 9 || i > 10
-
-  def setFluidAmount(amount: Int) {
-    if (massTank.getFluid != null) {
-      massTank.setFluid(new FluidStack(massTank.getFluid.getFluid, amount))
-    }
-    else {
-      massTank.setFluid(new FluidStack(Femtocraft.fluidMass, amount))
-    }
-  }
-
-  def clearFluid() {
-    massTank.setFluid(null)
   }
 }

@@ -56,6 +56,98 @@ public class RenderPlasmaConduit implements ISimpleBlockRenderingHandler {
 
     }
 
+    @Override
+    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
+        BlockPlasmaConduit conduit = (BlockPlasmaConduit) block;
+        if (conduit == null) {
+            return;
+        }
+
+
+        Tessellator tessellator = Tessellator.instance;
+
+        GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+
+        tessellator.startDrawingQuads();
+        tessellator.setColorOpaque_F(1, 1, 1);
+        renderConduit(conduit, 0, 0, 0, false, ForgeDirection.NORTH, ForgeDirection.UNKNOWN);
+        tessellator.draw();
+
+        GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+
+    }
+
+    private boolean renderConduit(BlockPlasmaConduit conduit, int x, int y, int z, boolean filled,
+                                  ForgeDirection input, ForgeDirection output) {
+        if (!initialized) {
+            createConduit(conduit);
+        }
+
+        RenderModel core_model = filled ? center_filled : center;
+
+
+        RenderModel input_model = null;
+        if (input != null) {
+            switch (input) {
+                case DOWN:
+                    input_model = filled ? connector_in_down_filled : connector_in_down;
+                    break;
+                case UP:
+                    input_model = filled ? connector_in_up_filled : connector_in_up;
+                    break;
+                case NORTH:
+                    input_model = filled ? connector_in_north_filled : connector_in_north;
+                    break;
+                case SOUTH:
+                    input_model = filled ? connector_in_south_filled : connector_in_south;
+                    break;
+                case WEST:
+                    input_model = filled ? connector_in_west_filled : connector_in_west;
+                    break;
+                case EAST:
+                    input_model = filled ? connector_in_east_filled : connector_in_east;
+                    break;
+            }
+        }
+
+        RenderModel output_model = null;
+        if (output != null) {
+            switch (output) {
+                case DOWN:
+                    output_model = filled ? connector_out_down_filled : connector_out_down;
+                    break;
+                case UP:
+                    output_model = filled ? connector_out_up_filled : connector_out_up;
+                    break;
+                case NORTH:
+                    output_model = filled ? connector_out_north_filled : connector_out_north;
+                    break;
+                case SOUTH:
+                    output_model = filled ? connector_out_south_filled : connector_out_south;
+                    break;
+                case WEST:
+                    output_model = filled ? connector_out_west_filled : connector_out_west;
+                    break;
+                case EAST:
+                    output_model = filled ? connector_out_east_filled : connector_out_east;
+                    break;
+            }
+        }
+
+        core_model.location = new RenderPoint(x, y, z);
+        core_model.draw();
+        if (input_model != null) {
+            input_model.location = new RenderPoint(x, y, z);
+            input_model.draw();
+        }
+        if (output_model != null) {
+            output_model.location = new RenderPoint(x, y, z);
+            output_model.draw();
+        }
+
+        return true;
+    }
+
     private void createConduit(BlockPlasmaConduit conduit) {
         center = new RenderModel(new RenderPoint(0, 0, 0), new RenderPoint(.5f, .5f, .5f));
         center_filled = new RenderModel(new RenderPoint(0, 0, 0), new RenderPoint(.5f, .5f, .5f));
@@ -192,98 +284,6 @@ public class RenderPlasmaConduit implements ISimpleBlockRenderingHandler {
         connector_out_south_filled = connector_out_up_filled.rotatedOnXAxis(Math.PI / 2.f);
 
         initialized = true;
-    }
-
-    @Override
-    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-        BlockPlasmaConduit conduit = (BlockPlasmaConduit) block;
-        if (conduit == null) {
-            return;
-        }
-
-
-        Tessellator tessellator = Tessellator.instance;
-
-        GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-
-        tessellator.startDrawingQuads();
-        tessellator.setColorOpaque_F(1, 1, 1);
-        renderConduit(conduit, 0, 0, 0, false, ForgeDirection.NORTH, ForgeDirection.UNKNOWN);
-        tessellator.draw();
-
-        GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-
-    }
-
-    private boolean renderConduit(BlockPlasmaConduit conduit, int x, int y, int z, boolean filled,
-                                  ForgeDirection input, ForgeDirection output) {
-        if (!initialized) {
-            createConduit(conduit);
-        }
-
-        RenderModel core_model = filled ? center_filled : center;
-
-
-        RenderModel input_model = null;
-        if (input != null) {
-            switch (input) {
-                case DOWN:
-                    input_model = filled ? connector_in_down_filled : connector_in_down;
-                    break;
-                case UP:
-                    input_model = filled ? connector_in_up_filled : connector_in_up;
-                    break;
-                case NORTH:
-                    input_model = filled ? connector_in_north_filled : connector_in_north;
-                    break;
-                case SOUTH:
-                    input_model = filled ? connector_in_south_filled : connector_in_south;
-                    break;
-                case WEST:
-                    input_model = filled ? connector_in_west_filled : connector_in_west;
-                    break;
-                case EAST:
-                    input_model = filled ? connector_in_east_filled : connector_in_east;
-                    break;
-            }
-        }
-
-        RenderModel output_model = null;
-        if (output != null) {
-            switch (output) {
-                case DOWN:
-                    output_model = filled ? connector_out_down_filled : connector_out_down;
-                    break;
-                case UP:
-                    output_model = filled ? connector_out_up_filled : connector_out_up;
-                    break;
-                case NORTH:
-                    output_model = filled ? connector_out_north_filled : connector_out_north;
-                    break;
-                case SOUTH:
-                    output_model = filled ? connector_out_south_filled : connector_out_south;
-                    break;
-                case WEST:
-                    output_model = filled ? connector_out_west_filled : connector_out_west;
-                    break;
-                case EAST:
-                    output_model = filled ? connector_out_east_filled : connector_out_east;
-                    break;
-            }
-        }
-
-        core_model.location = new RenderPoint(x, y, z);
-        core_model.draw();
-        if (input_model != null) {
-            input_model.location = new RenderPoint(x, y, z);
-            input_model.draw();
-        }
-        if (output_model != null) {
-            output_model.location = new RenderPoint(x, y, z);
-            output_model.draw();
-        }
-
-        return true;
     }
 
     @Override

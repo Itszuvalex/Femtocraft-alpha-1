@@ -30,19 +30,16 @@ import net.minecraft.world.World;
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/5/14.
  * <p/>
- * Volatility events are what will make or break a good Fusion Reactor setup.
- * Obviously, if you're here, you're likely implementing new Volatility
- * Events, or looking to see how you have to handle them.
+ * Volatility events are what will make or break a good Fusion Reactor setup. Obviously, if you're here, you're likely
+ * implementing new Volatility Events, or looking to see how you have to handle them.
  * <p/>
- * As you can see, some of these things I can't easily enforce.  Yes,
- * you can make reactors that never experience volatility events.  Or ones
- * that keep their stored flows safe, etc.  That's fine,
- * I just ask that you take that to heart and balance accordingly.
+ * As you can see, some of these things I can't easily enforce.  Yes, you can make reactors that never experience
+ * volatility events.  Or ones that keep their stored flows safe, etc.  That's fine, I just ask that you take that to
+ * heart and balance accordingly.
  * <p/>
- * All interaction calls are handled by the FemtocraftPlasmaUtils.apply
- * function.  You do not need to loop through the flows in a container passed
- * in the interact() call and call interact upon those flows yourself.  It
- * will be taken care of for you.
+ * All interaction calls are handled by the FemtocraftPlasmaUtils.apply function.  You do not need to loop through the
+ * flows in a container passed in the interact() call and call interact upon those flows yourself.  It will be taken
+ * care of for you.
  */
 public interface IVolatilityEvent {
     /**
@@ -61,16 +58,14 @@ public interface IVolatilityEvent {
     long volatilityEnergy();
 
     /**
-     * Interact with a Reactor core, if this event is spawned from a Flow
-     * currently in the reactor.
+     * Interact with a Reactor core, if this event is spawned from a Flow currently in the reactor.
      *
      * @param core
      */
     void interact(IFusionReactorCore core, World world, int x, int y, int z);
 
     /**
-     * Interact with the reactor components, if this event is spawned from a
-     * Flow currently in the reactor.
+     * Interact with the reactor components, if this event is spawned from a Flow currently in the reactor.
      *
      * @param component
      */
@@ -78,8 +73,7 @@ public interface IVolatilityEvent {
                   int y, int z);
 
     /**
-     * Interact with a plasma container, if this event is spawned from a Flow
-     * currently in a container.
+     * Interact with a plasma container, if this event is spawned from a Flow currently in a container.
      *
      * @param container
      */

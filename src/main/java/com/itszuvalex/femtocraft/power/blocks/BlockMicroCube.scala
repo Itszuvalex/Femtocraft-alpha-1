@@ -42,7 +42,7 @@ class BlockMicroCube extends BlockPowerContainer(Material.iron) {
 
   @SideOnly(Side.CLIENT) override def getIcon(access: IBlockAccess, x: Int, y: Int, z: Int, side: Int): IIcon = access.getTileEntity(x, y, z) match {
     case cube: TileEntityMicroCube => if (cube.outputs(side)) outputSide else inputSide
-    case _ => this.blockIcon
+    case _                         => this.blockIcon
   }
 
   @SideOnly(Side.CLIENT) override def registerBlockIcons(par1IconRegister: IIconRegister) {

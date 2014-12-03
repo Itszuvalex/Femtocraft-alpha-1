@@ -43,6 +43,18 @@ public class BlockPowerContainer extends TileContainer {
         super(par2Material);
     }
 
+    @Override
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase,
+                                ItemStack par6ItemStack) {
+        super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLivingBase, par6ItemStack);
+
+        TileEntityPowerBase container = (TileEntityPowerBase) par1World.getTileEntity(par2, par3, par4);
+
+        if (container != null) {
+            container.checkConnections();
+        }
+    }
+
     /*
      * (non-Javadoc)
      *
@@ -64,18 +76,6 @@ public class BlockPowerContainer extends TileContainer {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase,
-                                ItemStack par6ItemStack) {
-        super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLivingBase, par6ItemStack);
-
-        TileEntityPowerBase container = (TileEntityPowerBase) par1World.getTileEntity(par2, par3, par4);
-
-        if (container != null) {
-            container.checkConnections();
-        }
     }
 
     /*

@@ -63,6 +63,10 @@ object FemtocraftStringUtils {
     null
   }
 
+  def formatItemStackForTechnologyDisplay(r: RecipeType, s: ItemStack, info: String): String = {
+    "__Recipe." + (if (r eq RecipeType.CRAFTING) GuiTechnologyRenderer.recipeCraftingParam else if (r eq RecipeType.ASSEMBLER) GuiTechnologyRenderer.recipeAssemblerParam else if (r eq RecipeType.TEMPORAL) GuiTechnologyRenderer.recipeTemporalParam else if (r eq RecipeType.DIMENSIONAL) GuiTechnologyRenderer.recipeDimensionalParam else "UNKNOWN") + ":" + FemtocraftStringUtils.itemStackToString(s) + "--" + info + "__"
+  }
+
   def itemStackToString(s: ItemStack): String = {
     var id: GameRegistry.UniqueIdentifier = null
     if (s != null) {
@@ -86,10 +90,6 @@ object FemtocraftStringUtils {
       }
       result + ":" + s.getItemDamage + "-" + s.stackSize
     }
-  }
-
-  def formatItemStackForTechnologyDisplay(r: RecipeType, s: ItemStack, info: String): String = {
-    "__Recipe." + (if (r eq RecipeType.CRAFTING) GuiTechnologyRenderer.recipeCraftingParam else if (r eq RecipeType.ASSEMBLER) GuiTechnologyRenderer.recipeAssemblerParam else if (r eq RecipeType.TEMPORAL) GuiTechnologyRenderer.recipeTemporalParam else if (r eq RecipeType.DIMENSIONAL) GuiTechnologyRenderer.recipeDimensionalParam else "UNKNOWN") + ":" + FemtocraftStringUtils.itemStackToString(s) + "--" + info + "__"
   }
 
 }

@@ -35,8 +35,8 @@ import org.apache.logging.log4j.Level
  * Created by Christopher Harris (Itszuvalex) on 7/26/14.
  */
 object FemtocraftOreRetrogenHandler {
-  private var RetroGenning = false
   private val DIRECTORY    = "Retrogen"
+  private var RetroGenning = false
 }
 
 class FemtocraftOreRetrogenHandler {

@@ -94,10 +94,10 @@ class ContainerEncoder(player: EntityPlayer, par1InventoryPlayer: InventoryPlaye
 
   @SideOnly(Side.CLIENT) override def updateProgressBar(par1: Int, par2: Int) {
     par1 match {
-      case `timeWorkedIndex` => inventory.timeWorked = par2
+      case `timeWorkedIndex`   => inventory.timeWorked = par2
       case `currentPowerIndex` => inventory.setCurrentStorage(par2)
-      case `currentMassIndex` => if (par2 > 0) inventory.setFluidAmount(par2) else inventory.clearFluid()
-      case _ =>
+      case `currentMassIndex`  => if (par2 > 0) inventory.setFluidAmount(par2) else inventory.clearFluid()
+      case _                   =>
     }
   }
 }

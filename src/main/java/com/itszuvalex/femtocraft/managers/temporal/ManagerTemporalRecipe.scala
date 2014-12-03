@@ -50,21 +50,9 @@ class ManagerTemporalRecipe {
     addRecipe(new TemporalRecipe(new ItemStack(Femtocraft.itemInfallibleEstimator), Array[ItemStack](new ItemStack(Femtocraft.itemInfallibleEstimator), new ItemStack(Femtocraft.itemOrpheusProcessor), new ItemStack(Femtocraft.itemPanLocationalComputer), new ItemStack(Femtocraft.itemInfallibleEstimator), new ItemStack(Femtocraft.itemOrpheusProcessor), new ItemStack(Femtocraft.itemPanLocationalComputer)), new ItemStack(Femtocraft.itemInfinitelyRecursiveALU), 800, EnumTechLevel.FEMTO, FemtocraftTechnologies.TEMPORAL_THREADING))
   }
 
-  def getRecipe(input: ItemStack, configurators: Array[ItemStack]): TemporalRecipe = {
-    if (input == null) return null
-    recipesToOutput.get(getTemporalKey(input, configurators))
-  }
-
-  def getRecipe(output: ItemStack): TemporalRecipe = {
-    outputToRecipes.get(output)
-  }
-
-  def getRecipesForTech(tech: ITechnology): util.Collection[TemporalRecipe] = if (tech == null)
-    recipesToOutput.values().filter(_.getTechnology == null).asJavaCollection
-  else getRecipesForTech(tech.getName)
-
-  def getRecipesForTech(name: String): util.Collection[TemporalRecipe] = {
-    recipesToOutput.values().filter(_.tech != null).filter(_.tech equalsIgnoreCase name).asJavaCollection
+  def addRecipe(recipe: TemporalRecipe) {
+    recipesToOutput.put(getTemporalKey(recipe.input, recipe.configurators), recipe)
+    outputToRecipes.put(recipe.output, recipe)
   }
 
   private def getTemporalKey(input: ItemStack, configurators: Array[ItemStack]): TemporalKey = {
@@ -82,9 +70,21 @@ class ManagerTemporalRecipe {
     new TemporalKey(ninput, configs)
   }
 
-  def addRecipe(recipe: TemporalRecipe) {
-    recipesToOutput.put(getTemporalKey(recipe.input, recipe.configurators), recipe)
-    outputToRecipes.put(recipe.output, recipe)
+  def getRecipe(input: ItemStack, configurators: Array[ItemStack]): TemporalRecipe = {
+    if (input == null) return null
+    recipesToOutput.get(getTemporalKey(input, configurators))
+  }
+
+  def getRecipe(output: ItemStack): TemporalRecipe = {
+    outputToRecipes.get(output)
+  }
+
+  def getRecipesForTech(tech: ITechnology): util.Collection[TemporalRecipe] = if (tech == null)
+                                                                                recipesToOutput.values().filter(_.getTechnology == null).asJavaCollection
+                                                                              else getRecipesForTech(tech.getName)
+
+  def getRecipesForTech(name: String): util.Collection[TemporalRecipe] = {
+    recipesToOutput.values().filter(_.tech != null).filter(_.tech equalsIgnoreCase name).asJavaCollection
   }
 
   private class TemporalKey(private val input: ItemStack, private val configurators: Array[ItemStack]) extends Comparable[TemporalKey] {

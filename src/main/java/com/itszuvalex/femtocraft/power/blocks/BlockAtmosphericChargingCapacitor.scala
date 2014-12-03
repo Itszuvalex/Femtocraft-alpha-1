@@ -79,12 +79,12 @@ object BlockAtmosphericChargingCapacitor {
     }
   }
 
-  override def canPlaceBlockAt(par1World: World, par2: Int, par3: Int, par4: Int) = canBlockStay(par1World, par2, par3, par4)
-
   override def canBlockStay(par1World: World, par2: Int, par3: Int, par4: Int): Boolean = {
     val block = par1World.getBlock(par2, par3 - 1, par4)
     block != null && (block.isInstanceOf[IAtmosphericChargingAddon] && block.asInstanceOf[IAtmosphericChargingAddon].canSupportAddon(this, par1World, par2, par3, par4) || block.isInstanceOf[IAtmosphericChargingBase]) && par1World.isAirBlock(par2 - 1, par3, par4) && par1World.isAirBlock(par2 + 1, par3, par4) && par1World.isAirBlock(par2, par3, par4 - 1) && par1World.isAirBlock(par2, par3, par4 + 1)
   }
+
+  override def canPlaceBlockAt(par1World: World, par2: Int, par3: Int, par4: Int) = canBlockStay(par1World, par2, par3, par4)
 
   @SideOnly(Side.CLIENT) override def registerBlockIcons(par1IconRegister: IIconRegister) {
     capacitorConnector = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "AtmosphericChargingCapacitor_connector")
@@ -102,9 +102,9 @@ object BlockAtmosphericChargingCapacitor {
     do {
       offset -= 1
       world.getBlock(x, y - offset, z) match {
-        case _: IAtmosphericChargingBase => searchEnded = true
+        case _: IAtmosphericChargingBase      => searchEnded = true
         case addon: IAtmosphericChargingAddon => power += addon.powerPerTick(world, x, y - offset, z)
-        case _ => searchEnded = true
+        case _                                => searchEnded = true
       }
     } while (!searchEnded)
     if (world.isThundering) {

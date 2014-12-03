@@ -74,7 +74,7 @@ object FemtocraftPowerUtils {
             case container1: IPowerBlockContainer =>
               sneighbors(i) = container1
               numConnections += 1
-            case _ =>
+            case _                                =>
           }
         }
       }

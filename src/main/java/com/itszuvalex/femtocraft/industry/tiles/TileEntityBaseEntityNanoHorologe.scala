@@ -75,17 +75,19 @@ import net.minecraftforge.common.util.ForgeDirection
 
   override def canInsertItem(i: Int, itemstack: ItemStack, j: Int) = i != getOutputSlotIndex
 
-  protected def getTickMultiplier = TICKS_TO_COOK_MULTIPLIER
+  override def isItemValidForSlot(i: Int, itemstack: ItemStack) = i != getOutputSlotIndex
 
-  protected def getOutputSlotIndex = outputSlot
+  def getProgress = cookTime
 
-  protected def getPowerToCook = POWER_TO_COOK
+  def setProgress(progress: Int) {
+    cookTime = progress
+  }
 
-  protected def getTechLevel = EnumTechLevel.NANO
+  def getProgressMax = ticksToCook
 
-  protected def getConfigurators = util.Arrays.copyOfRange(inventory.getInventory, inputSlot + 1, getOutputSlotIndex)
-
-  override def isWorking = chronoStack != null
+  def setProgressMax(progressMax: Int) {
+    ticksToCook = progressMax
+  }
 
   override protected def canStartWork: Boolean = {
     if (isWorking) {
@@ -119,9 +121,15 @@ import net.minecraftforge.common.util.ForgeDirection
     true
   }
 
-  override def isItemValidForSlot(i: Int, itemstack: ItemStack) = i != getOutputSlotIndex
+  protected def getOutputSlotIndex = outputSlot
 
-  def getProgress = cookTime
+  protected def getPowerToCook = POWER_TO_COOK
+
+  protected def getTechLevel = EnumTechLevel.NANO
+
+  protected def getConfigurators = util.Arrays.copyOfRange(inventory.getInventory, inputSlot + 1, getOutputSlotIndex)
+
+  override def isWorking = chronoStack != null
 
   override protected def startWork() {
     val tr = Femtocraft.recipeManager.temporalRecipes.getRecipe(inventory.getStackInSlot(inputSlot), getConfigurators)
@@ -138,13 +146,7 @@ import net.minecraftforge.common.util.ForgeDirection
     markDirty()
   }
 
-  def setProgress(progress: Int) {
-    cookTime = progress
-  }
-
-  def setProgressMax(progressMax: Int) {
-    ticksToCook = progressMax
-  }
+  protected def getTickMultiplier = TICKS_TO_COOK_MULTIPLIER
 
   override protected def continueWork() {
     cookTime += 1
@@ -168,6 +170,4 @@ import net.minecraftforge.common.util.ForgeDirection
     chronoStack = null
     chronoConfigStacks = null
   }
-
-  def getProgressMax = ticksToCook
 }

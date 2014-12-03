@@ -18,28 +18,28 @@ object ComponentRegistry {
 
   def registerComponent(item: Item, tech: EnumTechLevel) = getOrMake(tech) append item
 
-  def getComponents(tech: EnumTechLevel) = getOrMake(tech)
+  private def getOrMake(tech: EnumTechLevel) = componentMap.get(tech) match {
+    case Some(a) => a
+    case None    => val b = new ArrayBuffer[Item]; componentMap.put(tech, b); b
+  }
 
   def getComponentsAssemblerRecipeDisplayString(tech: EnumTechLevel) = getComponents(tech).map(i => FemtocraftStringUtils.formatItemStackForTechnologyDisplay
                                                                                                     (RecipeType.ASSEMBLER, new ItemStack(i), i.getItemStackDisplayName(new ItemStack(i)))).aggregate("")(_ + _, _ + _)
+
+  def getComponents(tech: EnumTechLevel) = getOrMake(tech)
 
   def getComponentsInAssemblerRecipeDisplayString(tech: EnumTechLevel) = {
     Femtocraft.recipeManager.assemblyRecipes.getAllRecipes.filter(p => {
       p.input match {
         case null => false
-        case _ =>
+        case _    =>
           p.input.exists {
                            case null => false
-                           case i =>
+                           case i    =>
                              val it = i.getItem
                              if (it == null) false else getComponents(tech).contains(it)
                          }
       }
     }).map(i => i.output.getItem).map(i => "__Recipe.Assembler:" + FemtocraftStringUtils.itemStackToString(new ItemStack(i)) + "--" + i.getItemStackDisplayName(new ItemStack(i)) + "__").aggregate("")(_ + _, _ + _)
-  }
-
-  private def getOrMake(tech: EnumTechLevel) = componentMap.get(tech) match {
-    case Some(a) => a
-    case None => val b = new ArrayBuffer[Item]; componentMap.put(tech, b); b
   }
 }

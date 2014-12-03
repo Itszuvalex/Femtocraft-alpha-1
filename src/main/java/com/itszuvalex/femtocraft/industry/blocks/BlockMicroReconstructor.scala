@@ -82,7 +82,7 @@ class BlockMicroReconstructor extends TileContainer(Material.iron) with Droppabl
   override def breakBlock(world: World, x: Int, y: Int, z: Int, block: Block, metadata: Int) {
     world.getTileEntity(x, y, z) match {
       case te: TileEntityBaseEntityMicroReconstructor if te.isWorking => te.reconstructingStacks.foreach(FemtocraftUtils.dropItem(_, world, x, y, z, rand))
-      case _ =>
+      case _                                                          =>
     }
     world.func_147453_f(x, y, z, block)
     super.breakBlock(world, x, y, z, block, metadata)

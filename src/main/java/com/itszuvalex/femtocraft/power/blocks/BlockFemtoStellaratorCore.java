@@ -100,11 +100,6 @@ public class BlockFemtoStellaratorCore extends TileContainer {
                  "BlockFemtoStellaratorCore_core");
     }
 
-    @Override
-    public TileEntity createNewTileEntity(World world, int metadata) {
-        return new TileEntityFemtoStellaratorCore();
-    }
-
     /*
      * (non-Javadoc)
      *
@@ -123,6 +118,11 @@ public class BlockFemtoStellaratorCore extends TileContainer {
 
         }
         super.breakBlock(par1World, par2, par3, par4, par5, par6);
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World world, int metadata) {
+        return new TileEntityFemtoStellaratorCore();
     }
 
 }

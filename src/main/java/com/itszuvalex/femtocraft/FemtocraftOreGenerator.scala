@@ -37,32 +37,6 @@ object FemtocraftOreGenerator {
     generate(random, chunk.xPosition, chunk.zPosition, chunk.worldObj, regionOreConfig)
   }
 
-  def shouldRetroGenerate(world: World, regionOreConfig: NBTTagCompound): Boolean = {
-    world.provider.dimensionId match {
-      case -1 =>
-        shouldRetroGenNether(world, regionOreConfig)
-      case 0  =>
-        shouldRetroGenSurface(world, regionOreConfig)
-      case 1  =>
-        shouldRetroGenEnd(world, regionOreConfig)
-      case _  =>
-        shouldRetroGenSurface(world, regionOreConfig)
-    }
-  }
-
-  private def shouldRetroGenEnd(world: World, regionOreConfig: NBTTagCompound) = false
-
-  private def shouldRetroGenSurface(world: World, regionOreConfig: NBTTagCompound) =
-    (FemtocraftConfigs.fareniteGen && !getOreGenerated(regionOreConfig, Femtocraft.blockOreFarenite.getUnlocalizedName)) ||
-    (FemtocraftConfigs.platinumGen && !getOreGenerated(regionOreConfig, Femtocraft.blockOrePlatinum.getUnlocalizedName)) ||
-    (FemtocraftConfigs.thoriumGen && !getOreGenerated(regionOreConfig, Femtocraft.blockOreThorium.getUnlocalizedName)) ||
-    (FemtocraftConfigs.titaniumGen && !getOreGenerated(regionOreConfig, Femtocraft.blockOreTitanium.getUnlocalizedName) ||
-     (FemtocraftConfigs.lodestoneGen && !getOreGenerated(regionOreConfig, Femtocraft.blockOreLodestone.getLocalizedName)))
-
-
-  private def shouldRetroGenNether(world: World, regionOreConfig: NBTTagCompound) =
-    FemtocraftConfigs.maleniteGen && !getOreGenerated(regionOreConfig, Femtocraft.blockOreMalenite.getUnlocalizedName)
-
   def generate(random: Random, chunkX: Int, chunkZ: Int, world: World, regionOreConfig: NBTTagCompound) {
     world.provider.dimensionId match {
       case -1 =>
@@ -80,6 +54,40 @@ object FemtocraftOreGenerator {
     if (FemtocraftConfigs.maleniteGen) {
       generateMalenite(world, random, i, j, regionOreConfig)
     }
+  }
+
+  def generateMalenite(world: World, random: Random, i: Int, j: Int, regionOreConfig: NBTTagCompound) {
+    if (getOreGenerated(regionOreConfig, Femtocraft.blockOreMalenite.getUnlocalizedName)) {
+      return
+    }
+    for (k <- 0 until FemtocraftConfigs.maleniteOreVeinsPerChunkCount) {
+      val xCoord = i + random.nextInt(16)
+      val yCoord = random.nextInt(FemtocraftConfigs.maleniteOreYHeightMax - FemtocraftConfigs.maleniteOreYHeightMin) + FemtocraftConfigs.maleniteOreYHeightMin
+      val zCoord = j + random.nextInt(16)
+      new WorldGenMinable(Femtocraft.blockOreMalenite, FemtocraftConfigs.maleniteOreBlockPerVeinCount, Blocks.netherrack).generate(world, random, xCoord, yCoord, zCoord)
+    }
+    markOreGeneration(regionOreConfig, Femtocraft.blockOreMalenite.getUnlocalizedName, true)
+  }
+
+  def markOreGeneration(compound: NBTTagCompound, oreName: String, value: Boolean) {
+    if (compound == null) return
+    var femtocraftTag: NBTTagCompound = null
+    if (!compound.hasKey(Femtocraft.ID.toLowerCase)) {
+      femtocraftTag = new NBTTagCompound
+      compound.setTag(Femtocraft.ID.toLowerCase, femtocraftTag)
+    }
+    else {
+      femtocraftTag = compound.getCompoundTag(Femtocraft.ID.toLowerCase)
+    }
+    var oreTag: NBTTagCompound = null
+    if (!femtocraftTag.hasKey(ORE_GEN)) {
+      oreTag = new NBTTagCompound
+      femtocraftTag.setTag(ORE_GEN, oreTag)
+    }
+    else {
+      oreTag = femtocraftTag.getCompoundTag(ORE_GEN)
+    }
+    oreTag.setBoolean(oreName, value)
   }
 
   private def generateSurface(world: World, random: Random, i: Int, j: Int, regionOreConfig: NBTTagCompound) {
@@ -169,39 +177,30 @@ object FemtocraftOreGenerator {
   private def generateEnd(world: World, random: Random, i: Int, j: Int, regionOreConfig: NBTTagCompound) {
   }
 
-  def generateMalenite(world: World, random: Random, i: Int, j: Int, regionOreConfig: NBTTagCompound) {
-    if (getOreGenerated(regionOreConfig, Femtocraft.blockOreMalenite.getUnlocalizedName)) {
-      return
+  def shouldRetroGenerate(world: World, regionOreConfig: NBTTagCompound): Boolean = {
+    world.provider.dimensionId match {
+      case -1 =>
+        shouldRetroGenNether(world, regionOreConfig)
+      case 0  =>
+        shouldRetroGenSurface(world, regionOreConfig)
+      case 1  =>
+        shouldRetroGenEnd(world, regionOreConfig)
+      case _  =>
+        shouldRetroGenSurface(world, regionOreConfig)
     }
-    for (k <- 0 until FemtocraftConfigs.maleniteOreVeinsPerChunkCount) {
-      val xCoord = i + random.nextInt(16)
-      val yCoord = random.nextInt(FemtocraftConfigs.maleniteOreYHeightMax - FemtocraftConfigs.maleniteOreYHeightMin) + FemtocraftConfigs.maleniteOreYHeightMin
-      val zCoord = j + random.nextInt(16)
-      new WorldGenMinable(Femtocraft.blockOreMalenite, FemtocraftConfigs.maleniteOreBlockPerVeinCount, Blocks.netherrack).generate(world, random, xCoord, yCoord, zCoord)
-    }
-    markOreGeneration(regionOreConfig, Femtocraft.blockOreMalenite.getUnlocalizedName, true)
   }
 
-  def markOreGeneration(compound: NBTTagCompound, oreName: String, value: Boolean) {
-    if (compound == null) return
-    var femtocraftTag: NBTTagCompound = null
-    if (!compound.hasKey(Femtocraft.ID.toLowerCase)) {
-      femtocraftTag = new NBTTagCompound
-      compound.setTag(Femtocraft.ID.toLowerCase, femtocraftTag)
-    }
-    else {
-      femtocraftTag = compound.getCompoundTag(Femtocraft.ID.toLowerCase)
-    }
-    var oreTag: NBTTagCompound = null
-    if (!femtocraftTag.hasKey(ORE_GEN)) {
-      oreTag = new NBTTagCompound
-      femtocraftTag.setTag(ORE_GEN, oreTag)
-    }
-    else {
-      oreTag = femtocraftTag.getCompoundTag(ORE_GEN)
-    }
-    oreTag.setBoolean(oreName, value)
-  }
+  private def shouldRetroGenEnd(world: World, regionOreConfig: NBTTagCompound) = false
+
+  private def shouldRetroGenSurface(world: World, regionOreConfig: NBTTagCompound) =
+    (FemtocraftConfigs.fareniteGen && !getOreGenerated(regionOreConfig, Femtocraft.blockOreFarenite.getUnlocalizedName)) ||
+    (FemtocraftConfigs.platinumGen && !getOreGenerated(regionOreConfig, Femtocraft.blockOrePlatinum.getUnlocalizedName)) ||
+    (FemtocraftConfigs.thoriumGen && !getOreGenerated(regionOreConfig, Femtocraft.blockOreThorium.getUnlocalizedName)) ||
+    (FemtocraftConfigs.titaniumGen && !getOreGenerated(regionOreConfig, Femtocraft.blockOreTitanium.getUnlocalizedName) ||
+     (FemtocraftConfigs.lodestoneGen && !getOreGenerated(regionOreConfig, Femtocraft.blockOreLodestone.getLocalizedName)))
+
+  private def shouldRetroGenNether(world: World, regionOreConfig: NBTTagCompound) =
+    FemtocraftConfigs.maleniteGen && !getOreGenerated(regionOreConfig, Femtocraft.blockOreMalenite.getUnlocalizedName)
 
   def getOreGenerated(compound: NBTTagCompound, oreName: String): Boolean = {
     if (compound == null) return false

@@ -18,21 +18,21 @@ import scala.collection.JavaConversions._
 @Configurable object MagnetRegistry {
   private val idToStrengthMap: util.Map[Integer, Integer] = new util.TreeMap[Integer, Integer]
   @Configurable(comment = "Maximum depth to search the magnet tree.")
-  var MAXIMUM_DEPTH = 3000
+  var MAXIMUM_DEPTH              = 3000
   @Configurable(comment = "Set true to show magnetism value in tooltip at all.")
-  var showMagnetismTooltip = true
+  var showMagnetismTooltip       = true
   @Configurable(comment = "Set this to true to only show magnetism value if advanced tooltips are on.")
   var magnetismTooltipIsAdvanced = false
   @Configurable
-  var ORE_LODESTONE = 50
+  var ORE_LODESTONE              = 50
   @Configurable
-  var NUGGET_LODESTONE = 10
+  var NUGGET_LODESTONE           = 10
   @Configurable
-  var CHUNK_LODESTONE = 40
+  var CHUNK_LODESTONE            = 40
   @Configurable
-  var ORE_IRON = 5
+  var ORE_IRON                   = 5
   @Configurable
-  var INGOT_IRON = 5
+  var INGOT_IRON                 = 5
 
   def init() {
     registerMagnetDefaults()
@@ -59,9 +59,9 @@ import scala.collection.JavaConversions._
 
   def isMagnet(item: ItemStack): Boolean = item != null && isMagnet(item.itemID)
 
-  def isMagnet(item: Item): Boolean = item != null && isMagnet(item.itemID)
-
   def isMagnet(id: Int): Boolean = idToStrengthMap.containsKey(id)
+
+  def isMagnet(item: Item): Boolean = item != null && isMagnet(item.itemID)
 
   private def registerMagnetTree() {
     Femtocraft.log(Level.INFO, "Registering all magnets.")

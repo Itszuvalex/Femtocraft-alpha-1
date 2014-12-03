@@ -47,11 +47,6 @@ public class TileEntityFemtoCubeChassis extends TileEntityBase implements
     }
 
     @Override
-    public int getGuiID() {
-        return FemtocraftGuiConstants.FemtoCubeGuiID();
-    }
-
-    @Override
     public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
         if (isValidMultiBlock()) {
             TileEntity te = worldObj.getTileEntity(info.x(), info.y(),
@@ -72,6 +67,11 @@ public class TileEntityFemtoCubeChassis extends TileEntityBase implements
     @Override
     public boolean hasGUI() {
         return info.isValidMultiBlock();
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiConstants.FemtoCubeGuiID();
     }
 
     @Override

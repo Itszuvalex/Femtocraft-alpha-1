@@ -43,8 +43,6 @@ class CommandAssistantRemove extends CommandBase("remove", null) {
 
   override def getDescription = "Remove a player as an assistant."
 
-  override def getCommandUsage(icommandsender: ICommandSender) = "remove [username]"
-
   override def processCommand(icommandsender: ICommandSender, astring: Array[String]) {
     if (icommandsender.isInstanceOf[EntityPlayer]) {
       if (astring.length != 1) {
@@ -60,6 +58,8 @@ class CommandAssistantRemove extends CommandBase("remove", null) {
       }
     }
   }
+
+  override def getCommandUsage(icommandsender: ICommandSender) = "remove [username]"
 
   override def isUsernameIndex(astring: Array[String], i: Int) = i == 0
 }

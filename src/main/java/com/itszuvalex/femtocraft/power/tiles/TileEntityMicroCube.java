@@ -22,9 +22,9 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.FemtocraftGuiConstants;
+import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.api.IInterfaceDevice;
 import com.itszuvalex.femtocraft.api.power.PowerContainer;
-import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -38,11 +38,6 @@ public class TileEntityMicroCube extends TileEntityPowerBase {
     public static final EnumTechLevel ENUM_TECH_LEVEL = EnumTechLevel.MICRO;
     public boolean[] outputs = new boolean[6]; // Not @Saveable due to bit masking
 
-    @Override
-    public PowerContainer defaultContainer() {
-        return new PowerContainer(ENUM_TECH_LEVEL, maxStorage);
-    }
-
     public TileEntityMicroCube() {
         super();
         Arrays.fill(outputs, false);
@@ -53,24 +48,13 @@ public class TileEntityMicroCube extends TileEntityPowerBase {
     }
 
     @Override
+    public PowerContainer defaultContainer() {
+        return new PowerContainer(ENUM_TECH_LEVEL, maxStorage);
+    }
+
+    @Override
     public float getFillPercentageForCharging(ForgeDirection from) {
         return outputs[FemtocraftUtils.indexOfForgeDirection(from)] ? 1.f : 0.f;
-    }
-
-    @Override
-    public float getFillPercentageForOutput(ForgeDirection to) {
-        return outputs[FemtocraftUtils.indexOfForgeDirection(to)] ? 1.f : 0.f;
-    }
-
-    // @Override
-    // public String getPacketChannel() {
-    // return packetChannel;
-    // }
-
-    @Override
-    public boolean canCharge(ForgeDirection from) {
-        return !outputs[FemtocraftUtils.indexOfForgeDirection(from)]
-               && super.canCharge(from);
     }
 
     @Override
@@ -82,22 +66,20 @@ public class TileEntityMicroCube extends TileEntityPowerBase {
         return 0;
     }
 
+    // @Override
+    // public String getPacketChannel() {
+    // return packetChannel;
+    // }
+
     @Override
-    public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-        super.readFromNBT(par1nbtTagCompound);
-        parseOutputMask(par1nbtTagCompound.getByte("outputs"));
+    public float getFillPercentageForOutput(ForgeDirection to) {
+        return outputs[FemtocraftUtils.indexOfForgeDirection(to)] ? 1.f : 0.f;
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-        super.writeToNBT(par1nbtTagCompound);
-        par1nbtTagCompound.setByte("outputs", generateOutputMask());
-    }
-
-    @Override
-    public void saveToDescriptionCompound(NBTTagCompound compound) {
-        super.saveToDescriptionCompound(compound);
-        compound.setByte("outputs", generateOutputMask());
+    public boolean canCharge(ForgeDirection from) {
+        return !outputs[FemtocraftUtils.indexOfForgeDirection(from)]
+               && super.canCharge(from);
     }
 
     @Override
@@ -131,6 +113,18 @@ public class TileEntityMicroCube extends TileEntityPowerBase {
     }
 
     @Override
+    public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
+        super.writeToNBT(par1nbtTagCompound);
+        par1nbtTagCompound.setByte("outputs", generateOutputMask());
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
+        super.readFromNBT(par1nbtTagCompound);
+        parseOutputMask(par1nbtTagCompound.getByte("outputs"));
+    }
+
+    @Override
     public boolean hasGUI() {
         return true;
     }
@@ -140,15 +134,10 @@ public class TileEntityMicroCube extends TileEntityPowerBase {
         return FemtocraftGuiConstants.MicroCubeGuiID();
     }
 
-    public byte generateOutputMask() {
-        byte output = 0;
-
-        for (int i = 0; i < 6; i++) {
-            if (outputs[i]) {
-                output += 1 << i;
-            }
-        }
-        return output;
+    @Override
+    public void saveToDescriptionCompound(NBTTagCompound compound) {
+        super.saveToDescriptionCompound(compound);
+        compound.setByte("outputs", generateOutputMask());
     }
 
     public void parseOutputMask(byte mask) {
@@ -162,6 +151,17 @@ public class TileEntityMicroCube extends TileEntityPowerBase {
         if (worldObj != null) {
             setRenderUpdate();
         }
+    }
+
+    public byte generateOutputMask() {
+        byte output = 0;
+
+        for (int i = 0; i < 6; i++) {
+            if (outputs[i]) {
+                output += 1 << i;
+            }
+        }
+        return output;
     }
 
 }

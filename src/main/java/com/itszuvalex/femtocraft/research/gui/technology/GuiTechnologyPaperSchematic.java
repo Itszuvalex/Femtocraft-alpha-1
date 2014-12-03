@@ -38,11 +38,6 @@ public class GuiTechnologyPaperSchematic extends GuiTechnology {
     }
 
     @Override
-    protected int getNumPages(boolean researched) {
-        return 3;
-    }
-
-    @Override
     protected void renderInformation(int x, int y, int width, int height,
                                      int displayPage, int mouseX, int mouseY, List tooltip,
                                      boolean isResearched) {
@@ -138,5 +133,10 @@ public class GuiTechnologyPaperSchematic extends GuiTechnology {
                 );
                 break;
         }
+    }
+
+    @Override
+    protected int getNumPages(boolean researched) {
+        return 3;
     }
 }

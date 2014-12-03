@@ -35,17 +35,12 @@ import java.util.regex.Pattern;
  * Created by Christopher Harris (Itszuvalex) on 9/15/14.
  */
 public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
-    private ArrayList<TechnologyPageRenderer> pages = new ArrayList<TechnologyPageRenderer>();
-    protected final FontRenderer frender = Minecraft.getMinecraft().fontRenderer;
-    protected final GuiTechnology gui;
-
     /**
      * Matches anything beginning with [ and ending with ]
      */
     public static final String specialPattern = "__(((?!__).)+)__";
     public static final Pattern splitPattern = Pattern.compile(specialPattern);
     public static final Pattern groupingPattern = Pattern.compile(".*?" + specialPattern + ".*?");
-
     public static final String specialTypeGroup = "specialType";
     public static final String specialTypeRegex = "(?<" + specialTypeGroup + ">[^_]*?)";
     public static final String specialParamGroup = "specialParam";
@@ -54,18 +49,19 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
     public static final String specialTextRegex = "(?<" + specialTextGroup + ">((?!__).)+)?";
     public static final Pattern specialDecompPattern = Pattern.compile(
             specialTypeRegex + "\\." + specialParamRegex + "--" + specialTextRegex);
-
     public static final String recipeType = "Recipe";
     public static final String recipeAssemblerParam = "Assembler";
     public static final String recipeTemporalParam = "Temporal";
     public static final String recipeDimensionalParam = "Dimensional";
     public static final String recipeCraftingParam = "Crafting";
-
     public static final String recipeParamTypeGroup = "recipeType";
     public static final String recipeParamTypeRegex = "(?<" + recipeParamTypeGroup + ">[^:]*?)";
     public static final String recipeParamItemGroup = "recipeItem";
     public static final String recipeParamItemRegex = "(?<" + recipeParamItemGroup + ">.*)";
     public static final Pattern recipeParamPattern = Pattern.compile(recipeParamTypeRegex + ":" + recipeParamItemRegex);
+    protected final FontRenderer frender = Minecraft.getMinecraft().fontRenderer;
+    protected final GuiTechnology gui;
+    private ArrayList<TechnologyPageRenderer> pages = new ArrayList<TechnologyPageRenderer>();
 
     public GuiTechnologyRenderer(GuiTechnology gui, String description) {
         this.gui = gui;
@@ -159,14 +155,11 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
             if (item != null) {
                 if (rtype.equalsIgnoreCase(recipeAssemblerParam)) {
                     return new GuiTechnologyAssemblerRenderer(gui, item, text);
-                }
-                else if (rtype.equalsIgnoreCase(recipeDimensionalParam)) {
+                } else if (rtype.equalsIgnoreCase(recipeDimensionalParam)) {
                     return new GuiTechnologyDimensionalRenderer(gui, item, text);
-                }
-                else if (rtype.equalsIgnoreCase(recipeTemporalParam)) {
+                } else if (rtype.equalsIgnoreCase(recipeTemporalParam)) {
                     return new GuiTechnologyTemporalRenderer(gui, item, text);
-                }
-                else if (rtype.equalsIgnoreCase(recipeCraftingParam)) {
+                } else if (rtype.equalsIgnoreCase(recipeCraftingParam)) {
                     return new GuiTechnologyCraftingRenderer(gui, item, text);
                 }
             }

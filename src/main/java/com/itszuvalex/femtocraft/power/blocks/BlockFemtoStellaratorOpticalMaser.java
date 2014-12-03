@@ -23,9 +23,9 @@ package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
 import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockFemtoStellarator;
-import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoStellaratorOpticalMaser;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -37,6 +37,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockFemtoStellaratorOpticalMaser extends TileContainer {
+    public IIcon activeIcon;
+
+    public BlockFemtoStellaratorOpticalMaser() {
+        super(Material.iron);
+        setBlockName("BlockStellaratorOpticalMaser");
+        setCreativeTab(Femtocraft.femtocraftTab());
+    }
+
     @Override
     public IIcon getIcon(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         TileEntity te = par1IBlockAccess.getTileEntity(par2, par3, par4);
@@ -50,24 +58,14 @@ public class BlockFemtoStellaratorOpticalMaser extends TileContainer {
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister par1IconRegister) {
-        blockIcon = par1IconRegister.registerIcon(
-                Femtocraft.ID().toLowerCase() + ":" + "BlockFemtoStellaratorOpticalMaser");
-        activeIcon = par1IconRegister.registerIcon(
-                Femtocraft.ID().toLowerCase() + ":" + "BlockFemtoStellaratorOpticalMaser_active");
-    }
-
-    public IIcon activeIcon;
-
-    public BlockFemtoStellaratorOpticalMaser() {
-        super(Material.iron);
-        setBlockName("BlockStellaratorOpticalMaser");
-        setCreativeTab(Femtocraft.femtocraftTab());
-    }
-
-    @Override
-    public TileEntity createNewTileEntity(World world, int metadata) {
-        return new TileEntityFemtoStellaratorOpticalMaser();
+    public void onNeighborBlockChange(World par1World, int par2, int par3,
+                                      int par4, Block par5) {
+        if (!canBlockStay(par1World, par2, par3, par4)) {
+            breakBlock(par1World, par2, par3, par4, par5,
+                    par1World.getBlockMetadata(par2, par3, par4));
+            par1World.setBlockToAir(par2, par3, par4);
+        }
+        super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
     }
 
     /*
@@ -91,14 +89,30 @@ public class BlockFemtoStellaratorOpticalMaser extends TileContainer {
     }
 
     @Override
-    public void onNeighborBlockChange(World par1World, int par2, int par3,
-                                      int par4, Block par5) {
-        if (!canBlockStay(par1World, par2, par3, par4)) {
-            breakBlock(par1World, par2, par3, par4, par5,
-                    par1World.getBlockMetadata(par2, par3, par4));
-            par1World.setBlockToAir(par2, par3, par4);
+    public TileEntity createNewTileEntity(World world, int metadata) {
+        return new TileEntityFemtoStellaratorOpticalMaser();
+    }
+
+    private boolean hasFocusAsNeighbor(World par1World, int par2, int par3,
+                                       int par4) {
+        for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+            if (par1World.getBlock(par2 + dir.offsetX, par3 + dir.offsetY,
+                    par4 + dir.offsetZ) == Femtocraft.blockStellaratorFocus()) {
+                TileEntity te = par1World.getTileEntity(par2 + 2 * dir
+                                .offsetX,
+                        par3 + 2 * dir
+                                .offsetY,
+                        par4 + 2 * dir
+                                .offsetZ
+                );
+                if (te instanceof IFusionReactorCore) {
+                    return true;
+                }
+            }
+
         }
-        super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
+
+        return false;
     }
 
     @Override
@@ -129,25 +143,11 @@ public class BlockFemtoStellaratorOpticalMaser extends TileContainer {
         super.onPostBlockPlaced(par1World, par2, par3, par4, par5);
     }
 
-    private boolean hasFocusAsNeighbor(World par1World, int par2, int par3,
-                                       int par4) {
-        for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-            if (par1World.getBlock(par2 + dir.offsetX, par3 + dir.offsetY,
-                    par4 + dir.offsetZ) == Femtocraft.blockStellaratorFocus()) {
-                TileEntity te = par1World.getTileEntity(par2 + 2 * dir
-                                .offsetX,
-                        par3 + 2 * dir
-                                .offsetY,
-                        par4 + 2 * dir
-                                .offsetZ
-                );
-                if (te instanceof IFusionReactorCore) {
-                    return true;
-                }
-            }
-
-        }
-
-        return false;
+    @Override
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
+        blockIcon = par1IconRegister.registerIcon(
+                Femtocraft.ID().toLowerCase() + ":" + "BlockFemtoStellaratorOpticalMaser");
+        activeIcon = par1IconRegister.registerIcon(
+                Femtocraft.ID().toLowerCase() + ":" + "BlockFemtoStellaratorOpticalMaser_active");
     }
 }

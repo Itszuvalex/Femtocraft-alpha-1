@@ -126,7 +126,7 @@ class ContainerResearchConsole(par1InventoryPlayer: InventoryPlayer, private val
   @SideOnly(Side.CLIENT) override def updateProgressBar(par1: Int, par2: Int) {
     super.updateProgressBar(par1, par2)
     par1 match {
-      case `progressID` => console.setResearchProgress(par2)
+      case `progressID`    => console.setResearchProgress(par2)
       case `progressMaxID` => console.setResearchMax(par2)
     }
   }

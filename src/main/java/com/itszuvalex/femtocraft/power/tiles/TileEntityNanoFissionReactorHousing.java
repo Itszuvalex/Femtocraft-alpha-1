@@ -47,11 +47,6 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
     }
 
     @Override
-    public int getGuiID() {
-        return FemtocraftGuiConstants.NanoFissionReactorGuiID();
-    }
-
-    @Override
     public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
         if (isValidMultiBlock()) {
             TileEntity te = worldObj.getTileEntity(info.x(), info.y(),
@@ -68,7 +63,6 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
         }
         return false;
     }
-
 
     @Override
     public boolean isValidMultiBlock() {
@@ -98,6 +92,16 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
     @Override
     public MultiBlockInfo getInfo() {
         return info;
+    }
+
+    @Override
+    public boolean hasGUI() {
+        return isValidMultiBlock();
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiConstants.NanoFissionReactorGuiID();
     }
 
     @Override
@@ -242,11 +246,6 @@ public class TileEntityNanoFissionReactorHousing extends TileEntityBase implemen
             return core.getInventoryName();
         }
         return null;
-    }
-
-    @Override
-    public boolean hasGUI() {
-        return isValidMultiBlock();
     }
 
     @Override

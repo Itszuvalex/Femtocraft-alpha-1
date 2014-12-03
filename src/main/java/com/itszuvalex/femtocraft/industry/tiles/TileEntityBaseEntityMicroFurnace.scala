@@ -44,10 +44,6 @@ object TileEntityBaseEntityMicroFurnace {
 }
 
 @Configurable class TileEntityBaseEntityMicroFurnace extends TileEntityBase with IndustryBehavior with Inventory with PowerConsumer {
-  override def defaultContainer = new PowerContainer(TECH_LEVEL, POWER_STORAGE)
-
-  override def defaultInventory = new BaseInventory(2)
-
   /**
    * The number of ticks that the current item has been cooking for
    */
@@ -58,6 +54,10 @@ object TileEntityBaseEntityMicroFurnace {
    * The ItemStacks that hold the items currently being used in the furnace
    */
   @Saveable private var field_94130_e: String = null
+
+  override def defaultContainer = new PowerContainer(TECH_LEVEL, POWER_STORAGE)
+
+  override def defaultInventory = new BaseInventory(2)
 
   override def hasGUI = true
 
@@ -78,7 +78,7 @@ object TileEntityBaseEntityMicroFurnace {
   override def isItemValidForSlot(i: Int, itemstack: ItemStack) = i match {
     case (1) =>
       false
-    case _ =>
+    case _   =>
       true
   }
 
@@ -96,6 +96,18 @@ object TileEntityBaseEntityMicroFurnace {
   protected def getTicksToCook = TICKS_TO_COOK
 
   override def isWorking = smeltingStack != null
+
+  override def getAccessibleSlotsFromSide(var1: Int) = var1 match {
+    case 1 => Array[Int](0)
+    case _ => Array[Int](1)
+  }
+
+  override def canInsertItem(i: Int, itemstack: ItemStack, j: Int) = i match {
+    case 1 => false
+    case _ => true
+  }
+
+  override def canExtractItem(i: Int, itemstack: ItemStack, j: Int) = true
 
   override protected def canStartWork: Boolean = {
     if (getStackInSlot(0) == null) {
@@ -153,10 +165,6 @@ object TileEntityBaseEntityMicroFurnace {
 
   protected def getMaxSimultaneousSmelt = MAX_SMELT
 
-  protected def updateBlockState(working: Boolean) {
-    BlockMicroFurnace.updateFurnaceBlockState(working, this.worldObj, this.xCoord, this.yCoord, this.zCoord)
-  }
-
   override protected def continueWork() {
     furnaceCookTime += 1
   }
@@ -180,15 +188,7 @@ object TileEntityBaseEntityMicroFurnace {
     furnaceCookTime = 0
   }
 
-  override def getAccessibleSlotsFromSide(var1: Int) = var1 match {
-    case 1 => Array[Int](0)
-    case _ => Array[Int](1)
+  protected def updateBlockState(working: Boolean) {
+    BlockMicroFurnace.updateFurnaceBlockState(working, this.worldObj, this.xCoord, this.yCoord, this.zCoord)
   }
-
-  override def canInsertItem(i: Int, itemstack: ItemStack, j: Int) = i match {
-    case 1 => false
-    case _ => true
-  }
-
-  override def canExtractItem(i: Int, itemstack: ItemStack, j: Int) = true
 }

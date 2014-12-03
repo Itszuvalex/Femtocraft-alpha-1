@@ -41,9 +41,9 @@ class BlockResearchConsole extends TileContainer(Material.iron) with DroppableIn
   setBlockName("BlockResearchConsole")
 
   @SideOnly(Side.CLIENT) override def getIcon(par1: Int, par2: Int) = ForgeDirection.getOrientation(par1) match {
-    case UP => top
+    case UP   => top
     case DOWN => bot
-    case _ => side
+    case _    => side
   }
 
   @SideOnly(Side.CLIENT) override def registerBlockIcons(par1IconRegister: IIconRegister) {

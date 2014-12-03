@@ -58,10 +58,10 @@ class Technology(n: String, shortDes: String, tech: EnumTechLevel, prereq: Array
   protected var discoverItem                         = discover
   @Configurable(comment = "Description string displayed when Technology is clicked in the research tree.  This is displayed when " + "the Technology has been researched.  This is " + "parsed for recipes and automatically layed out across as many pages as needed.")
   protected var researchedDescription: String        = if (researchDescription == null || researchDescription.isEmpty)
-    Femtocraft.recipeManager.assemblyRecipes.getRecipesForTechnology(name).map { r => FemtocraftStringUtils.formatItemStackForTechnologyDisplay(RecipeType.ASSEMBLER, r.output, r.output.getDisplayName)}.aggregate("")(_ + _, _ + _) +
-    Femtocraft.recipeManager.temporalRecipes.getRecipesForTech(name).map { r => FemtocraftStringUtils.formatItemStackForTechnologyDisplay(RecipeType.TEMPORAL, r.output, r.output.getDisplayName)}.aggregate("")(_ + _, _ + _) +
-    Femtocraft.recipeManager.dimensionalRecipes.getRecipesForTech(name).map { r => FemtocraftStringUtils.formatItemStackForTechnologyDisplay(RecipeType.DIMENSIONAL, r.output, r.output.getDisplayName)}.aggregate("")(_ + _, _ + _)
-  else researchDescription
+                                                         Femtocraft.recipeManager.assemblyRecipes.getRecipesForTechnology(name).map { r => FemtocraftStringUtils.formatItemStackForTechnologyDisplay(RecipeType.ASSEMBLER, r.output, r.output.getDisplayName)}.aggregate("")(_ + _, _ + _) +
+                                                         Femtocraft.recipeManager.temporalRecipes.getRecipesForTech(name).map { r => FemtocraftStringUtils.formatItemStackForTechnologyDisplay(RecipeType.TEMPORAL, r.output, r.output.getDisplayName)}.aggregate("")(_ + _, _ + _) +
+                                                         Femtocraft.recipeManager.dimensionalRecipes.getRecipesForTech(name).map { r => FemtocraftStringUtils.formatItemStackForTechnologyDisplay(RecipeType.DIMENSIONAL, r.output, r.output.getDisplayName)}.aggregate("")(_ + _, _ + _)
+                                                       else researchDescription
   @Configurable(comment = "Description string displayed when Technology is clicked in the research tree.  This is displayed when " + "the Technology has been discovered but not researched.  This is " + "parsed for recipes and automatically layed out across as many pages as needed.")
   protected var discoveredDescription: String        = if (discoverDescription == null) "" else discoverDescription
   @Configurable(comment = "Set this to true to force this to be discovered off the bat.")
@@ -145,9 +145,9 @@ class Technology(n: String, shortDes: String, tech: EnumTechLevel, prereq: Array
     ret
   }
 
-  def hasPrerequisite(prereq: Technology): Boolean = hasPrerequisite(prereq.name)
-
   def hasPrerequisite(prereq: String): Boolean = util.Arrays.asList(prerequisites).contains(prereq)
+
+  def hasPrerequisite(prereq: Technology): Boolean = hasPrerequisite(prereq.name)
 
   @SideOnly(value = Side.CLIENT)
   def getGui(research: GuiResearch, status: ResearchStatus): GuiTechnology = {
@@ -158,7 +158,7 @@ class Technology(n: String, shortDes: String, tech: EnumTechLevel, prereq: Array
       case e: NoSuchMethodException =>
         Femtocraft.log(Level.ERROR, "Technologies must return a GuiTechnology class that supports the constructor" + "(GuiResearch, ResearchTechnologyStatus)")
         e.printStackTrace()
-      case e: Exception => e.printStackTrace()
+      case e: Exception             => e.printStackTrace()
     }
     null
   }

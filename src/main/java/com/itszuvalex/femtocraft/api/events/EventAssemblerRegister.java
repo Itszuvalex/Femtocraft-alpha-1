@@ -36,7 +36,7 @@ public class EventAssemblerRegister extends Event {
 
     @Cancelable
     public static class AssemblerDecompositionRegisterEvent extends
-                                                            EventAssemblerRegister {
+            EventAssemblerRegister {
         public AssemblerDecompositionRegisterEvent(
                 AssemblerRecipe recipe) {
             super(recipe);
@@ -45,7 +45,7 @@ public class EventAssemblerRegister extends Event {
 
     @Cancelable
     public static class AssemblerRecompositionRegisterEvent extends
-                                                            EventAssemblerRegister {
+            EventAssemblerRegister {
         public AssemblerRecompositionRegisterEvent(
                 AssemblerRecipe recipe) {
             super(recipe);

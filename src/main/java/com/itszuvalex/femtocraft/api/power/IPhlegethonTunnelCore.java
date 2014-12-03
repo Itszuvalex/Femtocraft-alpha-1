@@ -36,8 +36,8 @@ public interface IPhlegethonTunnelCore extends IPhlegethonTunnelComponent, IPowe
     float getPowerGenBase();
 
     /**
-     * Be careful when calling this from IPhlegethonTunnelAddon.
-     * This may cause a recursive loop as the core will request all addon's power contributions.
+     * Be careful when calling this from IPhlegethonTunnelAddon. This may cause a recursive loop as the core will
+     * request all addon's power contributions.
      *
      * @return Amount of power this core generates, including all 6 neighboring addons.
      */

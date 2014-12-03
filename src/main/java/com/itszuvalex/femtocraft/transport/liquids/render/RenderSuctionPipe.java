@@ -312,154 +312,6 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
         initialized = true;
     }
 
-    private void createPipeTankBlackout(BlockSuctionPipe pipe) {
-        float min = 6.f / 16.f;
-        float max = 10.f / 16.f;
-        float height = 13.f / 16.f;
-
-        float min_tip = 7.f / 16.f;
-        float max_tip = 9.f / 16.f;
-
-        float minU = pipe.connector_blackout.getMinU();
-        float maxU = pipe.connector_blackout.getInterpolatedU(8.f);
-        float minV = pipe.connector_blackout.getInterpolatedV(10.f);
-        float maxV = pipe.connector_blackout.getInterpolatedV(16.f);
-
-        float minUtip = pipe.connector_tank.getMinU();
-        float maxUtip = pipe.connector_tank.getInterpolatedU(4.f);
-        float minVtip = pipe.connector_tank.getInterpolatedV(10.f);
-        float maxVtip = pipe.connector_tank.getMaxV();
-
-        tanks_blackout_Up = new RenderModel();
-        tanks_blackout_Up.center = new RenderPoint(.5f, .5f, .5f);
-
-        {
-            // North
-            tanks_blackout_Up.addQuad(RenderUtils.makeNorthFace(min, max, max, height,
-                    min, pipe.connector_blackout, minU, maxU, minV, maxV));
-            tanks_blackout_Up.addQuad(RenderUtils.makeSouthFace(min, max, max, height,
-                    min, pipe.connector_blackout, minU, maxU, minV, maxV));
-
-            // South
-            tanks_blackout_Up.addQuad(RenderUtils.makeSouthFace(min, max, max, height,
-                    max, pipe.connector_blackout, minU, maxU, minV, maxV));
-            tanks_blackout_Up.addQuad(RenderUtils.makeNorthFace(min, max, max, height,
-                    max, pipe.connector_blackout, minU, maxU, minV, maxV));
-
-            // East
-            tanks_blackout_Up.addQuad(RenderUtils.makeEastFace(max, height, min, max,
-                    max, pipe.connector_blackout,
-                    minU, maxU, minV,
-                    maxV)
-                    .rotatePointsClockwise().rotatePointsClockwise());
-            tanks_blackout_Up.addQuad(RenderUtils.makeWestFace(max, height, min, max,
-                    max, pipe.connector_blackout, minU, maxU, minV, maxV).rotatePointsClockwise());
-
-            // West
-            tanks_blackout_Up.addQuad(RenderUtils.makeWestFace(max, height, min, max,
-                    min, pipe.connector_blackout, minU, maxU, minV, maxV).rotatePointsClockwise());
-            tanks_blackout_Up.addQuad(RenderUtils.makeEastFace(max, height, min, max,
-                    min, pipe.connector_blackout,
-                    minU, maxU, minV,
-                    maxV)
-                    .rotatePointsClockwise().rotatePointsClockwise());
-
-            // Tank cap
-            tanks_blackout_Up.addQuad(RenderUtils.makeTopFace(min, max, min, max,
-                    height, pipe.center_blackout, pipe.center_blackout.getMinU(),
-                    pipe.center_blackout.getMaxU(), pipe.center_blackout.getMinV(),
-                    pipe.center_blackout.getMaxV()));
-            tanks_blackout_Up.addQuad(RenderUtils.makeBottomFace(min, max, min, max,
-                    height, pipe.center_blackout, pipe.center_blackout.getMinU(),
-                    pipe.center_blackout.getMaxU(), pipe.center_blackout.getMinV(),
-                    pipe.center_blackout.getMaxV()));
-
-            // Tip
-            tanks_blackout_Up.addQuad(RenderUtils.makeNorthFace(min_tip, max_tip,
-                    height, 1.f, min_tip, pipe.connector_tank, minUtip,
-                    maxUtip, minVtip, maxVtip));
-            tanks_blackout_Up.addQuad(RenderUtils.makeSouthFace(min_tip, max_tip,
-                    height, 1.f, max_tip, pipe.connector_tank, minUtip,
-                    maxUtip, minVtip, maxVtip));
-            tanks_blackout_Up.addQuad(RenderUtils.makeEastFace(height, 1.f, min_tip,
-                    max_tip, max_tip, pipe.connector_tank, minUtip, maxUtip,
-                    minVtip,
-                    maxVtip)
-                    .rotatePointsClockwise().rotatePointsClockwise());
-            tanks_blackout_Up.addQuad(RenderUtils.makeWestFace(height, 1.f, min_tip,
-                    max_tip, min_tip, pipe.connector_tank, minUtip, maxUtip,
-                    minVtip, maxVtip).rotatePointsClockwise());
-
-            // Tip cap
-            tanks_blackout_Up.addQuad(RenderUtils.makeTopFace(min_tip, max_tip, min_tip,
-                    max_tip, 1.f, pipe.connector_tank,
-                    pipe.connector_tank.getMinU(),
-                    pipe.connector_tank.getInterpolatedU(4.f),
-                    pipe.connector_tank.getInterpolatedV(12.f),
-                    pipe.connector_tank.getMaxV()));
-        }
-
-        tanks_blackout_Down = tanks_blackout_Up.rotatedOnZAxis(Math.PI);
-
-        tanks_blackout_East = tanks_blackout_Up.rotatedOnZAxis(-Math.PI / 2.f);
-
-        tanks_blackout_West = tanks_blackout_Up.rotatedOnZAxis(Math.PI / 2.f);
-
-        tanks_blackout_North = tanks_blackout_Up.rotatedOnXAxis(-Math.PI / 2.f);
-
-        tanks_blackout_South = tanks_blackout_Up.rotatedOnXAxis(Math.PI / 2.f);
-    }
-
-    private void createPipePipeBlackout(BlockSuctionPipe pipe) {
-        float min = 6.f / 16.f;
-        float max = 10.f / 16.f;
-
-        float minU = pipe.connector_blackout.getMinU();
-        float maxU = pipe.connector_blackout.getInterpolatedU(8.f);
-        float minV = pipe.connector_blackout.getInterpolatedV(2.f);
-        float maxV = pipe.connector_blackout.getInterpolatedV(14.f);
-
-        pipes_blackout_Up = new RenderModel();
-        pipes_blackout_Up.center = new RenderPoint(.5f, .5f, .5f);
-        {
-            // North
-            pipes_blackout_Up.addQuad(RenderUtils.makeNorthFace(min, max, max, 1.f, min,
-                    pipe.connector_blackout, minU, maxU, minV, maxV));
-            pipes_blackout_Up.addQuad(RenderUtils.makeSouthFace(min, max, max, 1.f, min,
-                    pipe.connector_blackout, minU, maxU, minV, maxV));
-
-            // South
-            pipes_blackout_Up.addQuad(RenderUtils.makeSouthFace(min, max, max, 1.f, max,
-                    pipe.connector_blackout, minU, maxU, minV, maxV));
-            pipes_blackout_Up.addQuad(RenderUtils.makeNorthFace(min, max, max, 1.f, max,
-                    pipe.connector_blackout, minU, maxU, minV, maxV));
-
-            // East
-            pipes_blackout_Up.addQuad(RenderUtils.makeEastFace(max, 1.f, min, max, max,
-                    pipe.connector_blackout, minU, maxU, minV, maxV).rotatePointsClockwise().rotatePointsClockwise());
-            pipes_blackout_Up.addQuad(RenderUtils.makeWestFace(max, 1.f, min, max, max,
-                    pipe.connector_blackout, minU,
-                    maxU, minV, maxV).rotatePointsClockwise());
-
-            // West
-            pipes_blackout_Up.addQuad(RenderUtils.makeWestFace(max, 1.f, min, max, min,
-                    pipe.connector_blackout, minU,
-                    maxU, minV, maxV).rotatePointsClockwise());
-            pipes_blackout_Up.addQuad(RenderUtils.makeEastFace(max, 1.f, min, max, min,
-                    pipe.connector_blackout, minU, maxU, minV, maxV).rotatePointsClockwise().rotatePointsClockwise());
-        }
-
-        pipes_blackout_Down = pipes_blackout_Up.rotatedOnZAxis(Math.PI);
-
-        pipes_blackout_East = pipes_blackout_Up.rotatedOnZAxis(-Math.PI / 2.f);
-
-        pipes_blackout_West = pipes_blackout_Up.rotatedOnZAxis(Math.PI / 2.f);
-
-        pipes_blackout_North = pipes_blackout_Up.rotatedOnXAxis(-Math.PI / 2.f);
-
-        pipes_blackout_South = pipes_blackout_Up.rotatedOnXAxis(Math.PI / 2.f);
-    }
-
     private void createPipePipe(BlockSuctionPipe pipe) {
         float min = 6.f / 16.f;
         float max = 10.f / 16.f;
@@ -543,6 +395,56 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
         pipes_liquid_South = pipes_liquid_Up.rotatedOnXAxis(Math.PI / 2.f);
         pipes_liquid_cap_South = pipes_liquid_cap_Up
                 .rotatedOnXAxis(Math.PI / 2.f);
+    }
+
+    private void createPipePipeBlackout(BlockSuctionPipe pipe) {
+        float min = 6.f / 16.f;
+        float max = 10.f / 16.f;
+
+        float minU = pipe.connector_blackout.getMinU();
+        float maxU = pipe.connector_blackout.getInterpolatedU(8.f);
+        float minV = pipe.connector_blackout.getInterpolatedV(2.f);
+        float maxV = pipe.connector_blackout.getInterpolatedV(14.f);
+
+        pipes_blackout_Up = new RenderModel();
+        pipes_blackout_Up.center = new RenderPoint(.5f, .5f, .5f);
+        {
+            // North
+            pipes_blackout_Up.addQuad(RenderUtils.makeNorthFace(min, max, max, 1.f, min,
+                    pipe.connector_blackout, minU, maxU, minV, maxV));
+            pipes_blackout_Up.addQuad(RenderUtils.makeSouthFace(min, max, max, 1.f, min,
+                    pipe.connector_blackout, minU, maxU, minV, maxV));
+
+            // South
+            pipes_blackout_Up.addQuad(RenderUtils.makeSouthFace(min, max, max, 1.f, max,
+                    pipe.connector_blackout, minU, maxU, minV, maxV));
+            pipes_blackout_Up.addQuad(RenderUtils.makeNorthFace(min, max, max, 1.f, max,
+                    pipe.connector_blackout, minU, maxU, minV, maxV));
+
+            // East
+            pipes_blackout_Up.addQuad(RenderUtils.makeEastFace(max, 1.f, min, max, max,
+                    pipe.connector_blackout, minU, maxU, minV, maxV).rotatePointsClockwise().rotatePointsClockwise());
+            pipes_blackout_Up.addQuad(RenderUtils.makeWestFace(max, 1.f, min, max, max,
+                    pipe.connector_blackout, minU,
+                    maxU, minV, maxV).rotatePointsClockwise());
+
+            // West
+            pipes_blackout_Up.addQuad(RenderUtils.makeWestFace(max, 1.f, min, max, min,
+                    pipe.connector_blackout, minU,
+                    maxU, minV, maxV).rotatePointsClockwise());
+            pipes_blackout_Up.addQuad(RenderUtils.makeEastFace(max, 1.f, min, max, min,
+                    pipe.connector_blackout, minU, maxU, minV, maxV).rotatePointsClockwise().rotatePointsClockwise());
+        }
+
+        pipes_blackout_Down = pipes_blackout_Up.rotatedOnZAxis(Math.PI);
+
+        pipes_blackout_East = pipes_blackout_Up.rotatedOnZAxis(-Math.PI / 2.f);
+
+        pipes_blackout_West = pipes_blackout_Up.rotatedOnZAxis(Math.PI / 2.f);
+
+        pipes_blackout_North = pipes_blackout_Up.rotatedOnXAxis(-Math.PI / 2.f);
+
+        pipes_blackout_South = pipes_blackout_Up.rotatedOnXAxis(Math.PI / 2.f);
     }
 
     private void createPipeTank(BlockSuctionPipe pipe) {
@@ -661,5 +563,103 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
 
         tanks_South = tanks_Up.rotatedOnXAxis(Math.PI / 2.f);
         tanks_liquid_South = tanks_liquid_Up.rotatedOnXAxis(Math.PI / 2.f);
+    }
+
+    private void createPipeTankBlackout(BlockSuctionPipe pipe) {
+        float min = 6.f / 16.f;
+        float max = 10.f / 16.f;
+        float height = 13.f / 16.f;
+
+        float min_tip = 7.f / 16.f;
+        float max_tip = 9.f / 16.f;
+
+        float minU = pipe.connector_blackout.getMinU();
+        float maxU = pipe.connector_blackout.getInterpolatedU(8.f);
+        float minV = pipe.connector_blackout.getInterpolatedV(10.f);
+        float maxV = pipe.connector_blackout.getInterpolatedV(16.f);
+
+        float minUtip = pipe.connector_tank.getMinU();
+        float maxUtip = pipe.connector_tank.getInterpolatedU(4.f);
+        float minVtip = pipe.connector_tank.getInterpolatedV(10.f);
+        float maxVtip = pipe.connector_tank.getMaxV();
+
+        tanks_blackout_Up = new RenderModel();
+        tanks_blackout_Up.center = new RenderPoint(.5f, .5f, .5f);
+
+        {
+            // North
+            tanks_blackout_Up.addQuad(RenderUtils.makeNorthFace(min, max, max, height,
+                    min, pipe.connector_blackout, minU, maxU, minV, maxV));
+            tanks_blackout_Up.addQuad(RenderUtils.makeSouthFace(min, max, max, height,
+                    min, pipe.connector_blackout, minU, maxU, minV, maxV));
+
+            // South
+            tanks_blackout_Up.addQuad(RenderUtils.makeSouthFace(min, max, max, height,
+                    max, pipe.connector_blackout, minU, maxU, minV, maxV));
+            tanks_blackout_Up.addQuad(RenderUtils.makeNorthFace(min, max, max, height,
+                    max, pipe.connector_blackout, minU, maxU, minV, maxV));
+
+            // East
+            tanks_blackout_Up.addQuad(RenderUtils.makeEastFace(max, height, min, max,
+                    max, pipe.connector_blackout,
+                    minU, maxU, minV,
+                    maxV)
+                    .rotatePointsClockwise().rotatePointsClockwise());
+            tanks_blackout_Up.addQuad(RenderUtils.makeWestFace(max, height, min, max,
+                    max, pipe.connector_blackout, minU, maxU, minV, maxV).rotatePointsClockwise());
+
+            // West
+            tanks_blackout_Up.addQuad(RenderUtils.makeWestFace(max, height, min, max,
+                    min, pipe.connector_blackout, minU, maxU, minV, maxV).rotatePointsClockwise());
+            tanks_blackout_Up.addQuad(RenderUtils.makeEastFace(max, height, min, max,
+                    min, pipe.connector_blackout,
+                    minU, maxU, minV,
+                    maxV)
+                    .rotatePointsClockwise().rotatePointsClockwise());
+
+            // Tank cap
+            tanks_blackout_Up.addQuad(RenderUtils.makeTopFace(min, max, min, max,
+                    height, pipe.center_blackout, pipe.center_blackout.getMinU(),
+                    pipe.center_blackout.getMaxU(), pipe.center_blackout.getMinV(),
+                    pipe.center_blackout.getMaxV()));
+            tanks_blackout_Up.addQuad(RenderUtils.makeBottomFace(min, max, min, max,
+                    height, pipe.center_blackout, pipe.center_blackout.getMinU(),
+                    pipe.center_blackout.getMaxU(), pipe.center_blackout.getMinV(),
+                    pipe.center_blackout.getMaxV()));
+
+            // Tip
+            tanks_blackout_Up.addQuad(RenderUtils.makeNorthFace(min_tip, max_tip,
+                    height, 1.f, min_tip, pipe.connector_tank, minUtip,
+                    maxUtip, minVtip, maxVtip));
+            tanks_blackout_Up.addQuad(RenderUtils.makeSouthFace(min_tip, max_tip,
+                    height, 1.f, max_tip, pipe.connector_tank, minUtip,
+                    maxUtip, minVtip, maxVtip));
+            tanks_blackout_Up.addQuad(RenderUtils.makeEastFace(height, 1.f, min_tip,
+                    max_tip, max_tip, pipe.connector_tank, minUtip, maxUtip,
+                    minVtip,
+                    maxVtip)
+                    .rotatePointsClockwise().rotatePointsClockwise());
+            tanks_blackout_Up.addQuad(RenderUtils.makeWestFace(height, 1.f, min_tip,
+                    max_tip, min_tip, pipe.connector_tank, minUtip, maxUtip,
+                    minVtip, maxVtip).rotatePointsClockwise());
+
+            // Tip cap
+            tanks_blackout_Up.addQuad(RenderUtils.makeTopFace(min_tip, max_tip, min_tip,
+                    max_tip, 1.f, pipe.connector_tank,
+                    pipe.connector_tank.getMinU(),
+                    pipe.connector_tank.getInterpolatedU(4.f),
+                    pipe.connector_tank.getInterpolatedV(12.f),
+                    pipe.connector_tank.getMaxV()));
+        }
+
+        tanks_blackout_Down = tanks_blackout_Up.rotatedOnZAxis(Math.PI);
+
+        tanks_blackout_East = tanks_blackout_Up.rotatedOnZAxis(-Math.PI / 2.f);
+
+        tanks_blackout_West = tanks_blackout_Up.rotatedOnZAxis(Math.PI / 2.f);
+
+        tanks_blackout_North = tanks_blackout_Up.rotatedOnXAxis(-Math.PI / 2.f);
+
+        tanks_blackout_South = tanks_blackout_Up.rotatedOnXAxis(Math.PI / 2.f);
     }
 }

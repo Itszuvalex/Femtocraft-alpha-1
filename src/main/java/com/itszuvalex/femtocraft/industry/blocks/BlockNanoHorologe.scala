@@ -82,7 +82,7 @@ class BlockNanoHorologe extends TileContainer(Material.iron) with DroppableInven
   override def breakBlock(world: World, x: Int, y: Int, z: Int, block: Block, metadata: Int) {
     world.getTileEntity(x, y, z) match {
       case te: TileEntityBaseEntityNanoHorologe if te.isWorking => FemtocraftUtils.dropItem(te.chronoStack, world, x, y, z, rand)
-      case _ =>
+      case _                                                    =>
     }
     world.func_147453_f(x, y, z, block)
     super.breakBlock(world, x, y, z, block, metadata)

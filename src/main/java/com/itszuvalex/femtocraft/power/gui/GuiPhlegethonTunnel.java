@@ -55,33 +55,6 @@ public class GuiPhlegethonTunnel extends GuiBase {
         this.tunnel = tunnel;
     }
 
-    @Override
-    protected void mouseClicked(int par1, int par2, int par3) {
-        if (par3 == 0) {
-            int k = (this.width - this.xSize) / 2;
-            int l = (this.height - this.ySize) / 2;
-            //incrementButton
-            if (!tunnel.isActive() && (par1 >= (k + activateButtonX))
-                && (par1 <= (k + activateButtonX + activateButtonWidth))
-                && (par2 >= (l + activateButtonY))
-                && (par2 <= (l + activateButtonY + activateButtonHeight))) {
-                FemtocraftSoundUtils.playClickSound();
-                tunnel.onActivateClick();
-            }
-
-            //decrementButton
-            if (tunnel.isActive() && (par1 >= (k + deactivateButtonX))
-                && (par1 <= (k + deactivateButtonX + deactivateButtonWidth))
-                && (par2 >= (l + deactivateButtonY))
-                && (par2 <= (l + deactivateButtonY + deactivateButtonHeight))) {
-                FemtocraftSoundUtils.playClickSound();
-                tunnel.onDeactivateClick();
-            }
-
-            super.mouseClicked(par1, par2, par3);
-        }
-    }
-
     /*
      * (non-Javadoc)
      *
@@ -184,6 +157,33 @@ public class GuiPhlegethonTunnel extends GuiBase {
         int i1 = ((power > 0) && (max > 0)) ? power / max : 0;
         this.drawTexturedModalRect(k + 52, l + 3 + (80 - i1), 176, 80 - i1,
                 70, i1);
+    }
+
+    @Override
+    protected void mouseClicked(int par1, int par2, int par3) {
+        if (par3 == 0) {
+            int k = (this.width - this.xSize) / 2;
+            int l = (this.height - this.ySize) / 2;
+            //incrementButton
+            if (!tunnel.isActive() && (par1 >= (k + activateButtonX))
+                && (par1 <= (k + activateButtonX + activateButtonWidth))
+                && (par2 >= (l + activateButtonY))
+                && (par2 <= (l + activateButtonY + activateButtonHeight))) {
+                FemtocraftSoundUtils.playClickSound();
+                tunnel.onActivateClick();
+            }
+
+            //decrementButton
+            if (tunnel.isActive() && (par1 >= (k + deactivateButtonX))
+                && (par1 <= (k + deactivateButtonX + deactivateButtonWidth))
+                && (par2 >= (l + deactivateButtonY))
+                && (par2 <= (l + deactivateButtonY + deactivateButtonHeight))) {
+                FemtocraftSoundUtils.playClickSound();
+                tunnel.onDeactivateClick();
+            }
+
+            super.mouseClicked(par1, par2, par3);
+        }
     }
 }
 

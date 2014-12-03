@@ -45,8 +45,7 @@ public interface IPowerContainer {
     public int getCurrentPower();
 
     /**
-     * @return Max storage amount of container - used for percentage
-     * approximations during charging
+     * @return Max storage amount of container - used for percentage approximations during charging
      */
     public int getMaxPower();
 
@@ -56,21 +55,19 @@ public interface IPowerContainer {
     public float getFillPercentage();
 
     /**
-     * @return Fill percentage for purposes of charging - allows tanks and
-     * whatnot to trick pipes into filling them I.E. return
-     * getFillPercentage() < .25f ? getFillPercentage() : .25f;
+     * @return Fill percentage for purposes of charging - allows tanks and whatnot to trick pipes into filling them I.E.
+     * return getFillPercentage() < .25f ? getFillPercentage() : .25f;
      */
     public float getFillPercentageForCharging();
 
     /**
-     * @return Fill percentage for purposes of output - allows tanks and other
-     * TileEntities to trick pipes into not pulling all of their power.
+     * @return Fill percentage for purposes of output - allows tanks and other TileEntities to trick pipes into not
+     * pulling all of their power.
      */
     public float getFillPercentageForOutput();
 
     /**
-     * @return True if container has room and can accept charging
-     * false otherwise
+     * @return True if container has room and can accept charging false otherwise
      */
     public boolean canCharge();
 
@@ -82,8 +79,7 @@ public interface IPowerContainer {
 
     /**
      * @param amount Amount of power to drain from internal storage
-     * @return True if all power was consumed, false otherwise. This anticipates
-     * all or nothing behavior.
+     * @return True if all power was consumed, false otherwise. This anticipates all or nothing behavior.
      */
     public boolean consume(int amount);
 

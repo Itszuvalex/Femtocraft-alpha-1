@@ -82,27 +82,8 @@ class BlockMicroCable(material: Material) extends BlockPowerContainer(material) 
             }
           }
         }
-      case _ =>
+      case _                           =>
     }
-  }
-
-  protected def boundingBoxForDirection(dir: ForgeDirection, x: Int, y: Int, z: Int): AxisAlignedBB = {
-    var minX = 4f / 16d
-    var minY = 4f / 16d
-    var minZ = 4f / 16d
-    var maxX = 12f / 16d
-    var maxY = 12f / 16d
-    var maxZ = 12f / 16d
-    dir match {
-      case UP => maxY = 1
-      case DOWN => minY = 0
-      case NORTH => minZ = 0
-      case SOUTH => maxZ = 1
-      case EAST => maxX = 1
-      case WEST => minX = 0
-      case _ =>
-    }
-    AxisAlignedBB.getBoundingBox(x.toDouble + minX, y.toDouble + minY, z.toDouble + minZ, x.toDouble + maxX, y.toDouble + maxY, z.toDouble + maxZ)
   }
 
   @SideOnly(Side.CLIENT) override def getSelectedBoundingBoxFromPool(par1World: World, x: Int, y: Int, z: Int): AxisAlignedBB = {
@@ -114,9 +95,28 @@ class BlockMicroCable(material: Material) extends BlockPowerContainer(material) 
             box = box.func_111270_a(boundingBoxForDirection(ForgeDirection.getOrientation(i), x, y, z))
           }
         }
-      case _ =>
+      case _                           =>
     }
     box
+  }
+
+  protected def boundingBoxForDirection(dir: ForgeDirection, x: Int, y: Int, z: Int): AxisAlignedBB = {
+    var minX = 4f / 16d
+    var minY = 4f / 16d
+    var minZ = 4f / 16d
+    var maxX = 12f / 16d
+    var maxY = 12f / 16d
+    var maxZ = 12f / 16d
+    dir match {
+      case UP    => maxY = 1
+      case DOWN  => minY = 0
+      case NORTH => minZ = 0
+      case SOUTH => maxZ = 1
+      case EAST  => maxX = 1
+      case WEST  => minX = 0
+      case _     =>
+    }
+    AxisAlignedBB.getBoundingBox(x.toDouble + minX, y.toDouble + minY, z.toDouble + minZ, x.toDouble + maxX, y.toDouble + maxY, z.toDouble + maxZ)
   }
 
   @SideOnly(Side.CLIENT) override def getCollisionBoundingBoxFromPool(par1World: World, x: Int, y: Int, z: Int): AxisAlignedBB = {
@@ -138,17 +138,17 @@ class BlockMicroCable(material: Material) extends BlockPowerContainer(material) 
           if (cable.connections(i)) {
             val dir = ForgeDirection.getOrientation(i)
             dir match {
-              case UP => maxY = 1
-              case DOWN => minY = 0
+              case UP    => maxY = 1
+              case DOWN  => minY = 0
               case NORTH => minZ = 0
               case SOUTH => maxZ = 1
-              case EAST => maxX = 1
-              case WEST => minX = 0
-              case _ =>
+              case EAST  => maxX = 1
+              case WEST  => minX = 0
+              case _     =>
             }
           }
         }
-      case _ =>
+      case _                           =>
     }
     setBlockBounds(minX.toFloat, minY.toFloat, minZ.toFloat, maxX.toFloat, maxY.toFloat, maxZ.toFloat)
   }

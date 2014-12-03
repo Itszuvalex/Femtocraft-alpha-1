@@ -106,10 +106,10 @@ class PlayerResearch(val username: String) {
   def discoverNewTechs(notify: Boolean) {
     Femtocraft.researchManager.getTechnologies.filterNot(hasDiscoveredTechnology).filterNot(hasResearchedTechnology).
     foreach {
-              case t if t.isResearchedByDefault => researchTechnology(t.getName, true, notify); return //End here, let recursion do its thing.
-              case t if t.isDiscoveredByDefault => discoverTechnology(t.getName, notify)
+              case t if t.isResearchedByDefault  => researchTechnology(t.getName, true, notify); return //End here, let recursion do its thing.
+              case t if t.isDiscoveredByDefault  => discoverTechnology(t.getName, notify)
               case t if canDiscoverTechnology(t) => discoverTechnology(t.getName, notify)
-              case _ =>
+              case _                             =>
             }
 
 
@@ -175,6 +175,19 @@ class PlayerResearch(val username: String) {
     false
   }
 
+  def sync() {
+    val player = MinecraftServer.getServer.getConfigurationManager.func_152612_a(username)
+    if (player == null) {
+      return
+    }
+    sync(player)
+  }
+
+  def sync(player: EntityPlayerMP) {
+    Femtocraft.log(Level.TRACE, "Sending research data to player: " + player.getCommandSenderName)
+    FemtocraftPacketHandler.INSTANCE.sendTo(new MessageResearchPlayer(this), player)
+  }
+
   def getTechnology(name: String): ResearchStatus = techStatus.get(name).orNull
 
   def removeTechnology(name: String): ResearchStatus = techStatus.remove(name).orNull
@@ -198,19 +211,6 @@ class PlayerResearch(val username: String) {
     }
     val ts = techStatus.get(tech).orNull
     ts != null && ts.researched
-  }
-
-  def sync() {
-    val player = MinecraftServer.getServer.getConfigurationManager.func_152612_a(username)
-    if (player == null) {
-      return
-    }
-    sync(player)
-  }
-
-  def sync(player: EntityPlayerMP) {
-    Femtocraft.log(Level.TRACE, "Sending research data to player: " + player.getCommandSenderName)
-    FemtocraftPacketHandler.INSTANCE.sendTo(new MessageResearchPlayer(this), player)
   }
 
   def saveToNBTTagCompound(compound: NBTTagCompound) {

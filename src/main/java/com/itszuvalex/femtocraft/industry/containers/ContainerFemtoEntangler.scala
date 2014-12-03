@@ -89,9 +89,9 @@ class ContainerFemtoEntangler(player: EntityPlayer, par1InventoryPlayer: Invento
 
   @SideOnly(Side.CLIENT) override def updateProgressBar(par1: Int, par2: Int) {
     par1 match {
-      case `cookTimeID` => inventory.setProgress(par2)
+      case `cookTimeID`    => inventory.setProgress(par2)
       case `cookTimeMaxID` => inventory.setProgressMax(par2)
-      case `powerID` => inventory.setCurrentStorage(par2)
+      case `powerID`       => inventory.setCurrentStorage(par2)
     }
   }
 

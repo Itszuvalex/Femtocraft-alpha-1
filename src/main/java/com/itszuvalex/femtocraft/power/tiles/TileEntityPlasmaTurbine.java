@@ -21,6 +21,7 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
+import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
@@ -30,7 +31,6 @@ import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.api.power.plasma.PlasmaContainer;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
-import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -51,15 +51,15 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
     @Saveable(desc = true)
     private MultiBlockInfo info;
 
-    @Override
-    public PowerContainer defaultContainer() {
-        return new PowerContainer(EnumTechLevel.FEMTO, powerStorage);
-    }
-
     public TileEntityPlasmaTurbine() {
         super();
         plasma = new PlasmaContainer(5, stabilityRating, temperatureRating);
         info = new MultiBlockInfo();
+    }
+
+    @Override
+    public PowerContainer defaultContainer() {
+        return new PowerContainer(EnumTechLevel.FEMTO, powerStorage);
     }
 
     @Override
@@ -100,108 +100,6 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
     }
 
     @Override
-    public void femtocraftServerUpdate() {
-        super.femtocraftServerUpdate();
-        update(worldObj, xCoord, yCoord, zCoord);
-    }
-
-    @Override
-    public boolean canAcceptPowerOfLevel(EnumTechLevel level, ForgeDirection from) {
-        IPowerBlockContainer c = getController();
-        if (c != null) {
-            if (c == this) {
-                return super.canAcceptPowerOfLevel(level, from);
-            }
-            return c.canAcceptPowerOfLevel(level, from);
-        }
-        return false;
-    }
-
-    @Override
-    public EnumTechLevel getTechLevel(ForgeDirection to) {
-        IPowerBlockContainer c = getController();
-        if (c != null) {
-            if (c == this) {
-                return EnumTechLevel.FEMTO;
-            }
-            return c.getTechLevel(to);
-        }
-        return null;
-    }
-
-    @Override
-    public int getCurrentPower() {
-        IPowerBlockContainer c = getController();
-        if (c != null) {
-            if (c == this) {
-                return super.getCurrentPower();
-            }
-            return c.getCurrentPower();
-        }
-        return 0;
-    }
-
-    @Override
-    public int getMaxPower() {
-        IPowerBlockContainer c = getController();
-        if (c != null) {
-            if (c == this) {
-                return powerStorage;
-            }
-            return c.getMaxPower();
-        }
-        return 0;
-    }
-
-    @Override
-    public float getFillPercentage() {
-        IPowerBlockContainer c = getController();
-        if (c != null) {
-            if (c == this) {
-                return super.getFillPercentage();
-            }
-            return c.getFillPercentage();
-        }
-        return 1.f;
-    }
-
-    @Override
-    public boolean canCharge(ForgeDirection from) {
-        IPowerBlockContainer c = getController();
-        return c != null && (c == this || c.canCharge(from));
-    }
-
-    @Override
-    public boolean canConnect(ForgeDirection from) {
-        IPowerBlockContainer c = getController();
-        return c != null && (c == this || c.canConnect(from));
-    }
-
-    @Override
-    public int charge(ForgeDirection from, int amount) {
-        IPowerBlockContainer c = getController();
-        if (c != null) {
-            if (c == this) {
-                return super.charge(from, amount);
-            }
-            return c.charge(from, amount);
-        }
-        return 0;
-    }
-
-    @Override
-    public boolean consume(int amount) {
-        IPowerBlockContainer c = getController();
-        if (c != null) {
-            if (c == this) {
-                return super.consume(amount);
-            }
-            return c.consume(amount);
-        }
-        return false;
-    }
-
-    @Override
     public boolean isValidMultiBlock() {
         return info.isValidMultiBlock();
     }
@@ -229,6 +127,108 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
     @Override
     public MultiBlockInfo getInfo() {
         return info;
+    }
+
+    @Override
+    public boolean consume(int amount) {
+        IPowerBlockContainer c = getController();
+        if (c != null) {
+            if (c == this) {
+                return super.consume(amount);
+            }
+            return c.consume(amount);
+        }
+        return false;
+    }
+
+    @Override
+    public int charge(ForgeDirection from, int amount) {
+        IPowerBlockContainer c = getController();
+        if (c != null) {
+            if (c == this) {
+                return super.charge(from, amount);
+            }
+            return c.charge(from, amount);
+        }
+        return 0;
+    }
+
+    @Override
+    public int getMaxPower() {
+        IPowerBlockContainer c = getController();
+        if (c != null) {
+            if (c == this) {
+                return powerStorage;
+            }
+            return c.getMaxPower();
+        }
+        return 0;
+    }
+
+    @Override
+    public boolean canAcceptPowerOfLevel(EnumTechLevel level, ForgeDirection from) {
+        IPowerBlockContainer c = getController();
+        if (c != null) {
+            if (c == this) {
+                return super.canAcceptPowerOfLevel(level, from);
+            }
+            return c.canAcceptPowerOfLevel(level, from);
+        }
+        return false;
+    }
+
+    @Override
+    public int getCurrentPower() {
+        IPowerBlockContainer c = getController();
+        if (c != null) {
+            if (c == this) {
+                return super.getCurrentPower();
+            }
+            return c.getCurrentPower();
+        }
+        return 0;
+    }
+
+    @Override
+    public float getFillPercentage() {
+        IPowerBlockContainer c = getController();
+        if (c != null) {
+            if (c == this) {
+                return super.getFillPercentage();
+            }
+            return c.getFillPercentage();
+        }
+        return 1.f;
+    }
+
+    @Override
+    public void femtocraftServerUpdate() {
+        super.femtocraftServerUpdate();
+        update(worldObj, xCoord, yCoord, zCoord);
+    }
+
+    @Override
+    public boolean canCharge(ForgeDirection from) {
+        IPowerBlockContainer c = getController();
+        return c != null && (c == this || c.canCharge(from));
+    }
+
+    @Override
+    public boolean canConnect(ForgeDirection from) {
+        IPowerBlockContainer c = getController();
+        return c != null && (c == this || c.canConnect(from));
+    }
+
+    @Override
+    public EnumTechLevel getTechLevel(ForgeDirection to) {
+        IPowerBlockContainer c = getController();
+        if (c != null) {
+            if (c == this) {
+                return EnumTechLevel.FEMTO;
+            }
+            return c.getTechLevel(to);
+        }
+        return null;
     }
 
     @Override

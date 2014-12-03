@@ -40,11 +40,6 @@ public class GuiTechnologyMacroscopicStructure extends GuiTechnology {
     }
 
     @Override
-    protected int getNumPages(boolean researched) {
-        return researched ? (int) Math.ceil(recipes.size() / 2.f) : 1;
-    }
-
-    @Override
     protected void renderInformation(int x, int y, int width, int height,
                                      int displayPage, int mouseX, int mouseY, List tooltip,
                                      boolean isResearched) {
@@ -61,9 +56,13 @@ public class GuiTechnologyMacroscopicStructure extends GuiTechnology {
                         recipe1, mouseX, mouseY, tooltip,
                         recipe1.output.getDisplayName());
             }
-        }
-        else {
+        } else {
 
         }
+    }
+
+    @Override
+    protected int getNumPages(boolean researched) {
+        return researched ? (int) Math.ceil(recipes.size() / 2.f) : 1;
     }
 }

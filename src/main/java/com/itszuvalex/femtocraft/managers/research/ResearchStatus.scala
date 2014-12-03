@@ -32,8 +32,6 @@ class ResearchStatus(var tech: String, var researched: Boolean) {
 
   def this(name: String) = this(name, false)
 
-  private def this() = this(null)
-
   def saveToNBTTagCompound(compound: NBTTagCompound) {
     compound.setString(techKey, tech)
     compound.setBoolean(researchKey, researched)
@@ -43,4 +41,6 @@ class ResearchStatus(var tech: String, var researched: Boolean) {
     tech = compound.getString(techKey)
     researched = compound.getBoolean(researchKey)
   }
+
+  private def this() = this(null)
 }

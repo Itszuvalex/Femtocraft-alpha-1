@@ -27,8 +27,6 @@ object CryogenRegistry {
 
   def getPassivePower(world: World, x: Int, y: Int, z: Int) = getPower(world, x, y, z, passiveHandlers)
 
-  def getActivePower(world: World, x: Int, y: Int, z: Int) = getPower(world, x, y, z, activeHandlers)
-
   private def getPower(world: World, x: Int, y: Int, z: Int, handlers: ArrayBuffer[ICryogenHandler]): Float = {
     handlers.filter(_.canHandleBlock(world, x, y, z)).foreach { handler =>
       val amount = handler.powerForBlock(world, x, y, z)
@@ -37,5 +35,7 @@ object CryogenRegistry {
                                                               }
     0
   }
+
+  def getActivePower(world: World, x: Int, y: Int, z: Int) = getPower(world, x, y, z, activeHandlers)
 }
 

@@ -24,7 +24,7 @@ import java.util.Random
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
-import com.itszuvalex.femtocraft.core.traits.block.{RotateOnPlace, DroppableInventory}
+import com.itszuvalex.femtocraft.core.traits.block.{DroppableInventory, RotateOnPlace}
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityNanoFabricator
 import com.itszuvalex.femtocraft.render.RenderSimpleMachine
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils
@@ -40,7 +40,7 @@ class BlockNanoFabricator extends TileContainer(Material.iron) with DroppableInv
   /**
    * Is the random generator used by furnace to drop the inventory contents in random directions.
    */
-  private                        val rand             = new Random
+  private val rand             = new Random
   private var frontIcon: IIcon = null
 
   setBlockName("BlockNanoFabricator")

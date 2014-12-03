@@ -21,6 +21,7 @@
 
 package com.itszuvalex.femtocraft.power.plasma;
 
+import com.itszuvalex.femtocraft.api.core.ISaveable;
 import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.power.plasma.IFusionReaction;
 import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
@@ -28,7 +29,6 @@ import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.api.power.plasma.PlasmaFlow;
 import com.itszuvalex.femtocraft.power.plasma.volatility.VolatilityEventMagneticFluctuation;
 import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
-import com.itszuvalex.femtocraft.api.core.ISaveable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
@@ -71,7 +71,8 @@ public class FusionReaction implements IFusionReaction, ISaveable {
     @Saveable
     private int ticksToGeneratePlasmaFlow;
 
-    public FusionReaction(IFusionReactorCore core, int ignitionProcessWindow, long reactionThreshold, long reactionFailureThreshold, int plasmaFlowTicksToGenerateMin, int plasmaFlowTicksToGenerateMax) {
+    public FusionReaction(IFusionReactorCore core, int ignitionProcessWindow, long reactionThreshold, long
+            reactionFailureThreshold, int plasmaFlowTicksToGenerateMin, int plasmaFlowTicksToGenerateMax) {
         this.core = core;
         this.ignitionProcessWindow = ignitionProcessWindow;
         this.reactionThreshold = reactionThreshold;
@@ -101,8 +102,9 @@ public class FusionReaction implements IFusionReaction, ISaveable {
             //If, even after this, core is unstable, Volatility!!
             if (getReactionInstability() > core.getStabilityRating()) {
                 long eventEnergy = (long) (random.nextFloat() * this.energy *
-                        .25d);
-                FemtocraftPlasmaUtils.applyEventToContainer(core, new VolatilityEventMagneticFluctuation(null, getReactionInstability() - core.getStabilityRating(), eventEnergy), world, x, y, z
+                                           .25d);
+                FemtocraftPlasmaUtils.applyEventToContainer(core, new VolatilityEventMagneticFluctuation(null,
+                        getReactionInstability() - core.getStabilityRating(), eventEnergy), world, x, y, z
                 );
                 energy -= eventEnergy;
             }
@@ -112,17 +114,15 @@ public class FusionReaction implements IFusionReaction, ISaveable {
                 energy = 0;
             }
 
-        }
-        else if (igniting) {
+        } else if (igniting) {
             ++ignitionProcessTicks;
             if (energy > getReactionThreshold()) {
                 energy -= (int) (energy *
-                        ignitionSuccessfulPowerMultiplier);
+                                 ignitionSuccessfulPowerMultiplier);
                 selfSustaining = true;
                 generateTicksToPlasmaFlow();
                 endIgnitionProcess();
-            }
-            else if (ignitionProcessTicks > getIgnitionProcessWindow()) {
+            } else if (ignitionProcessTicks > getIgnitionProcessWindow()) {
                 energy = 0;
                 endIgnitionProcess();
             }
@@ -219,7 +219,8 @@ public class FusionReaction implements IFusionReaction, ISaveable {
     }
 
     private void generateTicksToPlasmaFlow() {
-        ticksToGeneratePlasmaFlow = random.nextInt(plasmaFlowTicksToGenerateMax - plasmaFlowTicksToGenerateMin) + plasmaFlowTicksToGenerateMin;
+        ticksToGeneratePlasmaFlow = random.nextInt(plasmaFlowTicksToGenerateMax - plasmaFlowTicksToGenerateMin) +
+                                    plasmaFlowTicksToGenerateMin;
     }
 
     @Override

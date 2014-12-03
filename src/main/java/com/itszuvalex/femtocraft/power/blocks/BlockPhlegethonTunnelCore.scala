@@ -53,7 +53,7 @@ class BlockPhlegethonTunnelCore extends TileContainer(Material.iron) {
       case core: TileEntityPhlegethonTunnelCore =>
         val info = core.getInfo
         MultiBlockPhlegethonTunnel.instance.breakMultiBlock(par1World, info.x, info.y, info.z)
-      case _ =>
+      case _                                    =>
     }
     super.breakBlock(par1World, par2, par3, par4, par5, par6)
   }

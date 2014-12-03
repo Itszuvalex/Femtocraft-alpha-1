@@ -21,9 +21,9 @@
 
 package com.itszuvalex.femtocraft.api.power.plasma;
 
+import com.itszuvalex.femtocraft.api.core.ISaveable;
 import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
-import com.itszuvalex.femtocraft.api.core.ISaveable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;

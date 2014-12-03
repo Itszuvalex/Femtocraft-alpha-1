@@ -25,16 +25,6 @@ public class ManagerAssistant {
         data = new HashMap<String, Map<String, AssistantPermissions>>();
     }
 
-    public Map<String, AssistantPermissions> addPlayerAssistant(String uname) {
-        if (data.containsKey(uname)) {
-            return data.get(uname);
-        } else {
-            Map<String, AssistantPermissions> pdata = new TreeMap<String, AssistantPermissions>();
-            data.put(uname, pdata);
-            return pdata;
-        }
-    }
-
     public Map<String, AssistantPermissions> getPlayerAssistants(String owner) {
         return data.get(owner);
     }
@@ -53,6 +43,16 @@ public class ManagerAssistant {
             return pdata.put(user, new AssistantPermissions(user)) == null;
         }
         return false;
+    }
+
+    public Map<String, AssistantPermissions> addPlayerAssistant(String uname) {
+        if (data.containsKey(uname)) {
+            return data.get(uname);
+        } else {
+            Map<String, AssistantPermissions> pdata = new TreeMap<String, AssistantPermissions>();
+            data.put(uname, pdata);
+            return pdata;
+        }
     }
 
     public boolean removeAssistantFrom(String owner, String user) {
@@ -116,8 +116,8 @@ public class ManagerAssistant {
             File file = new File(FemtocraftFileUtils.savePathFemtocraft(world), dir);
             if (!file.exists()) {
                 Femtocraft.log(Level.WARN, "No assistant data"
-                                              + " found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) +
-                                              ".");
+                                           + " found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) +
+                                           ".");
                 return false;
             }
 

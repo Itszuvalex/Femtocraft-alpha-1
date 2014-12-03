@@ -22,10 +22,10 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.FemtocraftGuiConstants;
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
-import com.itszuvalex.femtocraft.api.core.Saveable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -39,11 +39,6 @@ public class TileEntityNanoCubeFrame extends TileEntityBase implements
     public TileEntityNanoCubeFrame() {
         super();
         info = new MultiBlockInfo();
-    }
-
-    @Override
-    public int getGuiID() {
-        return FemtocraftGuiConstants.NanoCubeGuiID();
     }
 
     @Override
@@ -67,6 +62,11 @@ public class TileEntityNanoCubeFrame extends TileEntityBase implements
     @Override
     public boolean hasGUI() {
         return isValidMultiBlock();
+    }
+
+    @Override
+    public int getGuiID() {
+        return FemtocraftGuiConstants.NanoCubeGuiID();
     }
 
     @Override

@@ -52,7 +52,7 @@ class CommandAssistantList extends CommandBase("list", null) {
         }
         str.append(EnumChatFormatting.RESET)
         FemtocraftUtils.sendMessageToPlayer(assistant1, str.toString())
-      case _ =>
+      case _                        =>
     }
   }
 }

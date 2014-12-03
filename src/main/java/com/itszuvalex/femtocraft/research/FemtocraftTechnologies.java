@@ -7,7 +7,10 @@ import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs;
 import com.itszuvalex.femtocraft.managers.assembler.ComponentRegistry;
 import com.itszuvalex.femtocraft.managers.research.Technology;
-import com.itszuvalex.femtocraft.research.gui.technology.*;
+import com.itszuvalex.femtocraft.research.gui.technology.GuiTechnology;
+import com.itszuvalex.femtocraft.research.gui.technology.GuiTechnologyAdvancedChemistry;
+import com.itszuvalex.femtocraft.research.gui.technology.GuiTechnologyAppliedParticlePhysics;
+import com.itszuvalex.femtocraft.research.gui.technology.GuiTechnologyMacroscopicStructure;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
@@ -19,11 +22,6 @@ import java.util.List;
  * Created by Chris on 10/4/2014.
  */
 public class FemtocraftTechnologies {
-    private static ItemStack[] getInput(ItemStack itemStack) {
-        AssemblerRecipe recipe = Femtocraft.recipeManager().assemblyRecipes.getRecipe(itemStack);
-        return recipe == null ? null : recipe.input;
-    }
-
     public static final String MACROSCOPIC_STRUCTURES = "Macroscopic Structures";
     public static final String MOLECULAR_MANIPULATION = "Molecular Manipulation";
     public static final String NETHER_STAR_FABRICATION = "Nether Star Fabrication";
@@ -770,5 +768,10 @@ public class FemtocraftTechnologies {
 
                 )
         ));
+    }
+
+    private static ItemStack[] getInput(ItemStack itemStack) {
+        AssemblerRecipe recipe = Femtocraft.recipeManager().assemblyRecipes.getRecipe(itemStack);
+        return recipe == null ? null : recipe.input;
     }
 }

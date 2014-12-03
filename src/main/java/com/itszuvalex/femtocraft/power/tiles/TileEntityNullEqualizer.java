@@ -21,9 +21,9 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
-import com.itszuvalex.femtocraft.api.power.PowerContainer;
-import com.itszuvalex.femtocraft.api.core.Configurable;
 import com.itszuvalex.femtocraft.api.EnumTechLevel;
+import com.itszuvalex.femtocraft.api.core.Configurable;
+import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import net.minecraftforge.common.util.ForgeDirection;
 
 @Configurable
@@ -42,6 +42,12 @@ public class TileEntityNullEqualizer extends TileEntityPowerBase {
     }
 
     @Override
+    public boolean canAcceptPowerOfLevel(EnumTechLevel level,
+                                         ForgeDirection from) {
+        return (level == SECONDARY_POWER_LEVEL || level == PRIMARY_POWER_LEVEL);
+    }
+
+    @Override
     public void femtocraftServerUpdate() {
         if (getTechLevel(ForgeDirection.UNKNOWN) == PRIMARY_POWER_LEVEL) {
             setTechLevel(SECONDARY_POWER_LEVEL);
@@ -49,11 +55,5 @@ public class TileEntityNullEqualizer extends TileEntityPowerBase {
             setTechLevel(PRIMARY_POWER_LEVEL);
         }
         super.femtocraftServerUpdate();
-    }
-
-    @Override
-    public boolean canAcceptPowerOfLevel(EnumTechLevel level,
-                                         ForgeDirection from) {
-        return (level == SECONDARY_POWER_LEVEL || level == PRIMARY_POWER_LEVEL);
     }
 }

@@ -72,11 +72,6 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world, int metadata) {
-        return new TileEntityDiscriminatingVacuumTube();
-    }
-
-    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4,
                            Block par5, int par6) {
         TileEntity te = par1World.getTileEntity(par2, par3, par4);
@@ -138,6 +133,23 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
     }
 
     @Override
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
+                                EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
+        // tiles tile = par1World.getBlockTileEntity(par2, par3, par4);
+        // if(tile != null)
+        // {
+        // if(tile instanceof TileEntityVacuumTube)
+        // {
+        // TileEntityVacuumTube tube = (TileEntityVacuumTube)tile;
+        //
+        // tube.searchForMissingConnection();
+        // }
+        // }
+        super.onBlockPlacedBy(par1World, par2, par3, par4,
+                par5EntityLivingBase, par6ItemStack);
+    }
+
+    @Override
     public boolean onBlockActivated(World par1World, int par2, int par3,
                                     int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
                                     float par8, float par9) {
@@ -162,20 +174,8 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
     }
 
     @Override
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
-                                EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
-        // tiles tile = par1World.getBlockTileEntity(par2, par3, par4);
-        // if(tile != null)
-        // {
-        // if(tile instanceof TileEntityVacuumTube)
-        // {
-        // TileEntityVacuumTube tube = (TileEntityVacuumTube)tile;
-        //
-        // tube.searchForMissingConnection();
-        // }
-        // }
-        super.onBlockPlacedBy(par1World, par2, par3, par4,
-                par5EntityLivingBase, par6ItemStack);
+    public TileEntity createNewTileEntity(World world, int metadata) {
+        return new TileEntityDiscriminatingVacuumTube();
     }
 
     @Override
@@ -258,6 +258,15 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
     }
 
     @Override
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
+                                                         int x, int y, int z) {
+        return AxisAlignedBB.getBoundingBox((double) x + 4.d / 16.d,
+                (double) y + 4.d / 16.d, (double) z + 4.d / 16.d,
+                (double) x + 12.d / 16.d, (double) y + 12.d / 16.d,
+                (double) z + 12.d / 16.d);
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int x,
                                                         int y, int z) {
@@ -282,15 +291,6 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
         } else {
             return box;
         }
-    }
-
-    @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
-                                                         int x, int y, int z) {
-        return AxisAlignedBB.getBoundingBox((double) x + 4.d / 16.d,
-                (double) y + 4.d / 16.d, (double) z + 4.d / 16.d,
-                (double) x + 12.d / 16.d, (double) y + 12.d / 16.d,
-                (double) z + 12.d / 16.d);
     }
 
     @Override

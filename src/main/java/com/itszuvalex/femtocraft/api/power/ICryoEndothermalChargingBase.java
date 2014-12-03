@@ -14,7 +14,6 @@ public interface ICryoEndothermalChargingBase {
     int addPower(int power);
 
     /**
-     *
      * @param tech tech level
      * @return True if this tech level is supported or not.
      */

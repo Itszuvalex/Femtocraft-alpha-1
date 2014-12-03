@@ -42,25 +42,9 @@ class ManagerDimensionalRecipe {
   private val recipesToOutput = new TreeMap[DimensionalKey, DimensionalRecipe]
   private val outputToRecipes = new TreeMap[ItemStack, DimensionalRecipe](new ComparatorItemStack)
 
-  private def addRecipes() {
-    addRecipe(new DimensionalRecipe(new ItemStack(Femtocraft.itemManagerCore), Array[ItemStack](new ItemStack(Femtocraft.itemNanochip), new ItemStack(Items.ender_pearl), new ItemStack(Femtocraft.itemCrossDimensionalCommunicator), new ItemStack(Femtocraft.itemDimensionalMonopole)), new ItemStack(Femtocraft.itemPanLocationalComputer), 400, EnumTechLevel.NANO, FemtocraftTechnologies.DIMENSIONAL_BRAIDING))
-    addRecipe(new DimensionalRecipe(new ItemStack(Blocks.chest), Array[ItemStack](new ItemStack(Femtocraft.itemPanLocationalComputer), new ItemStack(Items.ender_pearl), new ItemStack(Items.ender_pearl), new ItemStack(Femtocraft.itemDimensionalMonopole)), new ItemStack(Femtocraft.itemPandoraCube), 400, EnumTechLevel.NANO, FemtocraftTechnologies.LOCALITY_ENTANGLER))
-    addRecipe(new DimensionalRecipe(new ItemStack(Femtocraft.itemPandoraCube), Array[ItemStack](new ItemStack(Femtocraft.itemHerculesDrive), new ItemStack(Femtocraft.itemPanLocationalComputer), new ItemStack(Femtocraft.itemPanLocationalComputer), new ItemStack(Femtocraft.itemHerculesDrive), new ItemStack(Items.ender_eye), new ItemStack(Items.ender_eye), new ItemStack(Items.ender_eye), new ItemStack(Items.ender_eye), new ItemStack(Femtocraft.itemHerculesDrive), new ItemStack(Femtocraft.itemInfallibleEstimator), new ItemStack(Femtocraft.itemInfallibleEstimator), new ItemStack(Femtocraft.itemHerculesDrive)), new ItemStack(Femtocraft.itemInfiniteVolumePolychora), 400, EnumTechLevel.FEMTO, FemtocraftTechnologies.DIMENSIONAL_SUPERPOSITIONS))
-  }
-
   def getRecipe(input: ItemStack, configurators: Array[ItemStack]): DimensionalRecipe = {
     if (input == null) return null
     recipesToOutput.get(getDimensionalKey(input, configurators))
-  }
-
-  def getRecipe(output: ItemStack): DimensionalRecipe = {
-    outputToRecipes.get(output)
-  }
-
-  def getRecipesForTech(tech: ITechnology): util.Collection[DimensionalRecipe] = if (tech == null) recipesToOutput.values().filter(_.getTechnology == null).asJavaCollection else getRecipesForTech(tech.getName)
-
-  def getRecipesForTech(name: String): util.Collection[DimensionalRecipe] = {
-    recipesToOutput.values().filter(_.tech != null).filter(_.tech equalsIgnoreCase name).asJavaCollection
   }
 
   private def getDimensionalKey(input: ItemStack, configurators: Array[ItemStack]): DimensionalKey = {
@@ -81,13 +65,29 @@ class ManagerDimensionalRecipe {
     new DimensionalKey(ninput, configs)
   }
 
-  def addRecipe(recipe: DimensionalRecipe) {
-    recipesToOutput.put(getDimensionalKey(recipe.input, recipe.configurators), recipe)
-    outputToRecipes.put(recipe.output, recipe)
+  def getRecipe(output: ItemStack): DimensionalRecipe = {
+    outputToRecipes.get(output)
+  }
+
+  def getRecipesForTech(tech: ITechnology): util.Collection[DimensionalRecipe] = if (tech == null) recipesToOutput.values().filter(_.getTechnology == null).asJavaCollection else getRecipesForTech(tech.getName)
+
+  def getRecipesForTech(name: String): util.Collection[DimensionalRecipe] = {
+    recipesToOutput.values().filter(_.tech != null).filter(_.tech equalsIgnoreCase name).asJavaCollection
   }
 
   def init() {
     addRecipes()
+  }
+
+  private def addRecipes() {
+    addRecipe(new DimensionalRecipe(new ItemStack(Femtocraft.itemManagerCore), Array[ItemStack](new ItemStack(Femtocraft.itemNanochip), new ItemStack(Items.ender_pearl), new ItemStack(Femtocraft.itemCrossDimensionalCommunicator), new ItemStack(Femtocraft.itemDimensionalMonopole)), new ItemStack(Femtocraft.itemPanLocationalComputer), 400, EnumTechLevel.NANO, FemtocraftTechnologies.DIMENSIONAL_BRAIDING))
+    addRecipe(new DimensionalRecipe(new ItemStack(Blocks.chest), Array[ItemStack](new ItemStack(Femtocraft.itemPanLocationalComputer), new ItemStack(Items.ender_pearl), new ItemStack(Items.ender_pearl), new ItemStack(Femtocraft.itemDimensionalMonopole)), new ItemStack(Femtocraft.itemPandoraCube), 400, EnumTechLevel.NANO, FemtocraftTechnologies.LOCALITY_ENTANGLER))
+    addRecipe(new DimensionalRecipe(new ItemStack(Femtocraft.itemPandoraCube), Array[ItemStack](new ItemStack(Femtocraft.itemHerculesDrive), new ItemStack(Femtocraft.itemPanLocationalComputer), new ItemStack(Femtocraft.itemPanLocationalComputer), new ItemStack(Femtocraft.itemHerculesDrive), new ItemStack(Items.ender_eye), new ItemStack(Items.ender_eye), new ItemStack(Items.ender_eye), new ItemStack(Items.ender_eye), new ItemStack(Femtocraft.itemHerculesDrive), new ItemStack(Femtocraft.itemInfallibleEstimator), new ItemStack(Femtocraft.itemInfallibleEstimator), new ItemStack(Femtocraft.itemHerculesDrive)), new ItemStack(Femtocraft.itemInfiniteVolumePolychora), 400, EnumTechLevel.FEMTO, FemtocraftTechnologies.DIMENSIONAL_SUPERPOSITIONS))
+  }
+
+  def addRecipe(recipe: DimensionalRecipe) {
+    recipesToOutput.put(getDimensionalKey(recipe.input, recipe.configurators), recipe)
+    outputToRecipes.put(recipe.output, recipe)
   }
 
   private class DimensionalKey(val input: ItemStack, val configurators: Array[ItemStack]) extends Comparable[DimensionalKey] {

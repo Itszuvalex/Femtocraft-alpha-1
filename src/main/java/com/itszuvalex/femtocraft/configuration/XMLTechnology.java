@@ -29,14 +29,7 @@ import java.util.Map;
  * Created by Chris on 10/3/2014.
  */
 public class XMLTechnology {
-    public final File techFile;
-    private Document xml = null;
-    private boolean changed = false;
-
-    private final ManagerAssemblerRecipe assemblyRecipes;
-
     private static final String technologyTag = "technology";
-
     private static final String shortDescTag = "ShortDescription";
     private static final String techLevelTag = "TechLevel";
     private static final String prerequisitesTag = "Prerequisites";
@@ -48,6 +41,10 @@ public class XMLTechnology {
     private static final String discoveredDescriptionTag = "DiscoveredDescription";
     private static final String discoveredByDefaultTag = "DiscoveredByDefault";
     private static final String researchedByDefaultTag = "ResearchedByDefault";
+    public final File techFile;
+    private final ManagerAssemblerRecipe assemblyRecipes;
+    private Document xml = null;
+    private boolean changed = false;
 
     public XMLTechnology(File file) {
         techFile = file;

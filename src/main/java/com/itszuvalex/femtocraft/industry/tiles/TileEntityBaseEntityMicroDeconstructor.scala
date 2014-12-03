@@ -49,10 +49,6 @@ object TileEntityBaseEntityMicroDeconstructor {
 }
 
 @Configurable class TileEntityBaseEntityMicroDeconstructor extends TileEntityBase with IndustryBehavior with PowerBlockContainer with Inventory with MassTank {
-  override def defaultInventory = new BaseInventory(10)
-
-  override def defaultTank = new FluidTank(MASS_STORAGE)
-
   /**
    * The number of ticks that the current item has been cooking for
    */
@@ -60,6 +56,10 @@ object TileEntityBaseEntityMicroDeconstructor {
   @Saveable var currentPower                   = 0
   @Saveable var deconstructingStack: ItemStack = null
   @Saveable private var field_94130_e: String = null
+
+  override def defaultInventory = new BaseInventory(10)
+
+  override def defaultTank = new FluidTank(MASS_STORAGE)
 
   override def hasGUI = true
 
@@ -106,17 +106,45 @@ object TileEntityBaseEntityMicroDeconstructor {
     this.cookTime * par1 / getTicksToCook
   }
 
-  protected def getTicksToCook = TICKS_TO_COOK
-
   override def isWorking = deconstructingStack != null
+
+  override def getAccessibleSlotsFromSide(var1: Int) = {
+    var1 match {
+      case (1) => Array[Int](0)
+      case _   => (1 until getSizeInventory).toArray
+    }
+  }
+
+  override def canInsertItem(i: Int, itemstack: ItemStack, j: Int) = i == 0
+
+  override def canExtractItem(i: Int, itemstack: ItemStack, j: Int) = true
+
+  override def fill(from: ForgeDirection, resource: FluidStack, doFill: Boolean) = 0
+
+  override def canFill(from: ForgeDirection, fluid: Fluid) = false
+
+  def setFluidAmount(amount: Int) {
+    if (massTank.getFluid != null) {
+      massTank.setFluid(new FluidStack(massTank.getFluid.fluidID, amount))
+    }
+    else {
+      massTank.setFluid(new FluidStack(Femtocraft.fluidMass, amount))
+    }
+  }
+
+  def clearFluid() {
+    massTank.setFluid(null)
+  }
+
+  override def defaultContainer = new PowerContainer(POWER_LEVEL, POWER_STORAGE)
 
   override protected def canStartWork = if (getStackInSlot(0) == null || deconstructingStack != null || this.getCurrentPower < getPowerToCook) {
     false
   }
-  else {
-    val recipe: AssemblerRecipe = Femtocraft.recipeManager.assemblyRecipes.getRecipe(getStackInSlot(0))
-    recipe != null && recipe.enumTechLevel.tier <= getAssemblerTech.tier && (massTank.getCapacity - massTank.getFluidAmount) >= recipe.mass && getStackInSlot(0).stackSize >= recipe.output.stackSize && roomForItems(recipe.input)
-  }
+                                        else {
+                                          val recipe: AssemblerRecipe = Femtocraft.recipeManager.assemblyRecipes.getRecipe(getStackInSlot(0))
+                                          recipe != null && recipe.enumTechLevel.tier <= getAssemblerTech.tier && (massTank.getCapacity - massTank.getFluidAmount) >= recipe.mass && getStackInSlot(0).stackSize >= recipe.output.stackSize && roomForItems(recipe.input)
+                                        }
 
   protected def getPowerToCook = POWER_TO_COOK
 
@@ -177,6 +205,8 @@ object TileEntityBaseEntityMicroDeconstructor {
 
   override protected def canFinishWork = cookTime >= getTicksToCook
 
+  protected def getTicksToCook = TICKS_TO_COOK
+
   override protected def finishWork() {
     val recipe = Femtocraft.recipeManager.assemblyRecipes.getRecipe(deconstructingStack)
     val placementRestrictionArray: Array[Int] = Array[Int](0)
@@ -200,34 +230,4 @@ object TileEntityBaseEntityMicroDeconstructor {
     cookTime = 0
     onInventoryChanged()
   }
-
-  override def getAccessibleSlotsFromSide(var1: Int) = {
-    var1 match {
-      case (1) => Array[Int](0)
-      case _ => (1 until getSizeInventory).toArray
-    }
-  }
-
-  override def canInsertItem(i: Int, itemstack: ItemStack, j: Int) = i == 0
-
-  override def canExtractItem(i: Int, itemstack: ItemStack, j: Int) = true
-
-  override def fill(from: ForgeDirection, resource: FluidStack, doFill: Boolean) = 0
-
-  override def canFill(from: ForgeDirection, fluid: Fluid) = false
-
-  def setFluidAmount(amount: Int) {
-    if (massTank.getFluid != null) {
-      massTank.setFluid(new FluidStack(massTank.getFluid.fluidID, amount))
-    }
-    else {
-      massTank.setFluid(new FluidStack(Femtocraft.fluidMass, amount))
-    }
-  }
-
-  def clearFluid() {
-    massTank.setFluid(null)
-  }
-
-  override def defaultContainer = new PowerContainer(POWER_LEVEL, POWER_STORAGE)
 }

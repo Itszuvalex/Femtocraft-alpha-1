@@ -68,12 +68,12 @@ class BlockAtmosphericChargingCoil extends BlockBase(Material.iron) with IAtmosp
     }
   }
 
-  override def canPlaceBlockAt(par1World: World, par2: Int, par3: Int, par4: Int) = canBlockStay(par1World, par2, par3, par4)
-
   override def canBlockStay(par1World: World, par2: Int, par3: Int, par4: Int): Boolean = {
     val block = par1World.getBlock(par2, par3 - 1, par4)
     block != null && (block.isInstanceOf[IAtmosphericChargingAddon] && block.asInstanceOf[IAtmosphericChargingAddon].canSupportAddon(this, par1World, par2, par3, par4) || block.isInstanceOf[IAtmosphericChargingBase]) && par1World.isAirBlock(par2 - 1, par3, par4) && par1World.isAirBlock(par2 + 1, par3, par4) && par1World.isAirBlock(par2, par3, par4 - 1) && par1World.isAirBlock(par2, par3, par4 + 1)
   }
+
+  override def canPlaceBlockAt(par1World: World, par2: Int, par3: Int, par4: Int) = canBlockStay(par1World, par2, par3, par4)
 
   @SideOnly(Side.CLIENT) override def registerBlockIcons(par1IconRegister: IIconRegister) {
     blockIcon = {coilConnector = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "MicroChargingCoil_connector"); coilConnector}

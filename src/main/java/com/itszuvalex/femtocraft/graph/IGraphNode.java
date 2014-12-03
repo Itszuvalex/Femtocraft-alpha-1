@@ -55,20 +55,18 @@ public interface IGraphNode {
     public int getYPadding();
 
     /**
-     * Sets y to be 1 greater than the max y of all this node's parents. This
-     * assumes 0 is the minimum y.
+     * Sets y to be 1 greater than the max y of all this node's parents. This assumes 0 is the minimum y.
      */
     public void findHeight();
 
     /**
-     * Orders all parents to find their heights, and once it does, then
-     * determines its own;
+     * Orders all parents to find their heights, and once it does, then determines its own;
      */
     public void findHeightRecursive();
 
     /**
-     * Sets height to be 1 less than the minimum of all this node's children.
-     * This assumes findHeight has been run previously.
+     * Sets height to be 1 less than the minimum of all this node's children. This assumes findHeight has been run
+     * previously.
      */
     public void shrinkDown();
 }

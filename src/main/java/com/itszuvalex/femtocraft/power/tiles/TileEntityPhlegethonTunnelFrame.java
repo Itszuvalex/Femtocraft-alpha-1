@@ -22,12 +22,12 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.FemtocraftGuiConstants;
+import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelComponent;
 import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
-import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.power.FemtocraftPowerUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -47,15 +47,30 @@ public class TileEntityPhlegethonTunnelFrame extends TileEntityBase implements I
     }
 
     @Override
+    public void onCoreActivityChange(boolean active) {
+        setModified();
+        setUpdate();
+    }
+
+    @Override
+    public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
+        if (isValidMultiBlock() && canPlayerUse(par5EntityPlayer)) {
+            par5EntityPlayer.openGui(getMod(), getGuiID(), worldObj, info.x(),
+                    info.y(), info.z());
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public void femtocraftServerUpdate() {
         super.femtocraftServerUpdate();
         FemtocraftPowerUtils.distributePower(this, null, worldObj, xCoord, yCoord, zCoord);
     }
 
     @Override
-    public void onCoreActivityChange(boolean active) {
-        setModified();
-        setUpdate();
+    public int getGuiID() {
+        return FemtocraftGuiConstants.PhlegethonTunnelGuiID();
     }
 
     @Override
@@ -89,48 +104,11 @@ public class TileEntityPhlegethonTunnelFrame extends TileEntityBase implements I
     }
 
     @Override
-    public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
-        if (isValidMultiBlock() && canPlayerUse(par5EntityPlayer)) {
-            par5EntityPlayer.openGui(getMod(), getGuiID(), worldObj, info.x(),
-                    info.y(), info.z());
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public int getGuiID() {
-        return FemtocraftGuiConstants.PhlegethonTunnelGuiID();
-    }
-
-    @Override
-    public float getFillPercentageForCharging(ForgeDirection from) {
+    public boolean canAcceptPowerOfLevel(EnumTechLevel level, ForgeDirection from) {
         if (isValidMultiBlock()) {
             TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
-                return ((IPowerBlockContainer) te).getFillPercentageForCharging(from);
-            }
-        }
-        return 1f;
-    }
-
-    @Override
-    public float getFillPercentageForOutput(ForgeDirection to) {
-        if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
-            if (te instanceof IPowerBlockContainer) {
-                return ((IPowerBlockContainer) te).getFillPercentageForOutput(to);
-            }
-        }
-        return 0f;
-    }
-
-    @Override
-    public boolean canCharge(ForgeDirection from) {
-        if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
-            if (te instanceof IPowerBlockContainer) {
-                return ((IPowerBlockContainer) te).canCharge(from);
+                return ((IPowerBlockContainer) te).canAcceptPowerOfLevel(level, from);
             }
         }
         return false;
@@ -167,6 +145,50 @@ public class TileEntityPhlegethonTunnelFrame extends TileEntityBase implements I
             }
         }
         return 0;
+    }
+
+    @Override
+    public float getFillPercentage() {
+        if (isValidMultiBlock()) {
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
+            if (te instanceof IPowerBlockContainer) {
+                return ((IPowerBlockContainer) te).getFillPercentage();
+            }
+        }
+        return 1.f;
+    }
+
+    @Override
+    public float getFillPercentageForCharging(ForgeDirection from) {
+        if (isValidMultiBlock()) {
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
+            if (te instanceof IPowerBlockContainer) {
+                return ((IPowerBlockContainer) te).getFillPercentageForCharging(from);
+            }
+        }
+        return 1f;
+    }
+
+    @Override
+    public float getFillPercentageForOutput(ForgeDirection to) {
+        if (isValidMultiBlock()) {
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
+            if (te instanceof IPowerBlockContainer) {
+                return ((IPowerBlockContainer) te).getFillPercentageForOutput(to);
+            }
+        }
+        return 0f;
+    }
+
+    @Override
+    public boolean canCharge(ForgeDirection from) {
+        if (isValidMultiBlock()) {
+            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
+            if (te instanceof IPowerBlockContainer) {
+                return ((IPowerBlockContainer) te).canCharge(from);
+            }
+        }
+        return false;
     }
 
     @Override
@@ -217,28 +239,6 @@ public class TileEntityPhlegethonTunnelFrame extends TileEntityBase implements I
             TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
             if (te instanceof IPowerBlockContainer) {
                 return ((IPowerBlockContainer) te).consume(amount);
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public float getFillPercentage() {
-        if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
-            if (te instanceof IPowerBlockContainer) {
-                return ((IPowerBlockContainer) te).getFillPercentage();
-            }
-        }
-        return 1.f;
-    }
-
-    @Override
-    public boolean canAcceptPowerOfLevel(EnumTechLevel level, ForgeDirection from) {
-        if (isValidMultiBlock()) {
-            TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
-            if (te instanceof IPowerBlockContainer) {
-                return ((IPowerBlockContainer) te).canAcceptPowerOfLevel(level, from);
             }
         }
         return false;

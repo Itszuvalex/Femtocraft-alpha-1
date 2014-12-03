@@ -61,6 +61,253 @@ class ManagerAssemblerRecipe {
     registerRecipes()
   }
 
+  def registerDefaultRecipes() {
+    Femtocraft.log(Level.INFO, "Scraping Minecraft recipe registries for assembler recipe mappings.")
+    if (!ard.shouldRegister) {
+      Femtocraft.log(Level.INFO, "Database already exists.  " + "Skipping item registration.")
+      return
+    }
+    Femtocraft.log(Level.WARN, "Registering assembler recipes from Vanilla Minecraft's Crafting Manager.\t This may take " + "awhile ._.")
+    val recipes = CraftingManager.getInstance.getRecipeList.filter(i => i != null && i.isInstanceOf[IRecipe]).map(_.asInstanceOf[IRecipe])
+    Femtocraft.log(Level.WARN, "Registering shaped recipes from Vanilla Minecraft's Crafting Manager.")
+    recipes.filter(i => i.isInstanceOf[ShapedRecipes] && getRecipe(i.getRecipeOutput) == null)
+    .map(_.asInstanceOf[ShapedRecipes])
+    .foreach(sr => {
+      try {
+        Femtocraft.log(Level.INFO, "Attempting to register shaped assembler recipe for " + sr.getRecipeOutput.getDisplayName + ".")
+        val valid = registerShapedRecipe(sr.recipeItems, sr.getRecipeOutput, sr.recipeWidth, sr.recipeHeight)
+        if (!valid) {
+          Femtocraft.log(Level.WARN, "Failed to register shaped assembler recipe for " + sr.getRecipeOutput.getDisplayName + "!")
+        }
+        else {
+          Femtocraft.log(Level.INFO, "Loaded Vanilla Minecraft shaped recipe as assembler recipe for " + sr.getRecipeOutput.getDisplayName + ".")
+        }
+      }
+      catch {
+        case e: Exception =>
+      }
+    })
+    Femtocraft.log(Level.WARN, "Registering shaped ore recipes from Forge.")
+    recipes.filter(i => i.isInstanceOf[ShapedOreRecipe] && getRecipe(i.getRecipeOutput) == null)
+    .map(_.asInstanceOf[ShapedOreRecipe])
+    .foreach(orecipe => {
+      try {
+        Femtocraft.log(Level.INFO, "Attempting to register shaped assembler recipe for " + orecipe.getRecipeOutput.getDisplayName + ".")
+        var width = 0
+        var height = 0
+        try {
+          val width_field = classOf[ShapedOreRecipe].getDeclaredField("width")
+          var prev = width_field.isAccessible
+          if (!prev) {
+            width_field.setAccessible(true)
+          }
+          width = width_field.getInt(orecipe)
+          if (!prev) {
+            width_field.setAccessible(prev)
+          }
+
+
+          val height_field = classOf[ShapedOreRecipe].getDeclaredField("height")
+          prev = height_field.isAccessible
+          if (!prev) {
+            height_field.setAccessible(true)
+          }
+          height = height_field.getInt(orecipe)
+          if (!prev) {
+            height_field.setAccessible(prev)
+          }
+
+        }
+        catch {
+          case e: SecurityException        => e.printStackTrace()
+          case e: NoSuchFieldException     => e.printStackTrace()
+          case e: IllegalArgumentException => e.printStackTrace()
+          case e: IllegalAccessException   => e.printStackTrace()
+        }
+        val valid = registerShapedOreRecipe(orecipe.getInput, orecipe.getRecipeOutput, width, height)
+        if (!valid) {
+          Femtocraft.log(Level.WARN, "Failed to register shaped assembler recipe for " + orecipe.getRecipeOutput.getDisplayName + "!")
+        }
+        else {
+          Femtocraft.log(Level.INFO, "LoadedForge shaped ore recipe as assembler recipe for " + orecipe.getRecipeOutput.getDisplayName + ".")
+        }
+      }
+      catch {
+        case e: Exception =>
+      }
+    })
+    Femtocraft.log(Level.WARN, "Registering shapeless recipes from Vanilla Minecraft's Crafting Manager.")
+    recipes.filter(i => i.isInstanceOf[ShapelessRecipes] && getRecipe(i.getRecipeOutput) == null)
+    .map(_.asInstanceOf[ShapelessRecipes])
+    .foreach(recipe => {
+      try {
+        Femtocraft.log(Level.INFO, "Attempting to register shapeless assembler recipe for " + recipe.getRecipeOutput.getDisplayName + ".")
+        val valid: Boolean = registerShapelessRecipe(recipe.recipeItems, recipe.getRecipeOutput)
+        if (!valid) {
+          Femtocraft.log(Level.WARN, "Failed to register shapeless assembler recipe for " + recipe.getRecipeOutput.getDisplayName + "!")
+          Femtocraft.log(Level.WARN, "I have no clue how this would happen...as the search space is literally " + "thousands of configurations.  Sorry for the wait.")
+        }
+        else {
+          Femtocraft.log(Level.INFO, "Loaded Vanilla Minecraft shapeless recipe as assembler recipe for + " + recipe.getRecipeOutput.getDisplayName + ".")
+        }
+      }
+      catch {
+        case e: Exception =>
+      }
+    })
+
+    Femtocraft.log(Level.WARN, "Registering shapeless ore recipes from Forge.")
+    recipes.filter(i => i.isInstanceOf[ShapelessOreRecipe] && getRecipe(i.getRecipeOutput) == null)
+    .map(_.asInstanceOf[ShapelessOreRecipe])
+    .foreach(recipe => {
+      try {
+        Femtocraft.log(Level.INFO, "Attempting to register shapeless assembler recipe for " + recipe.getRecipeOutput.getDisplayName + ".")
+        val valid: Boolean = registerShapelessOreRecipe(recipe.getInput, recipe.getRecipeOutput)
+        if (!valid) {
+          Femtocraft.log(Level.WARN, "Failed to register shapeless ore assembler recipe for " + recipe.getRecipeOutput.getDisplayName + "!")
+          Femtocraft.log(Level.WARN, "I have no clue how this would happen...as the search space is literally " + "thousands of configurations.  Sorry for the wait.")
+        }
+        else {
+          Femtocraft.log(Level.INFO, "Loaded Forge shapeless ore recipe as assembler recipe for + " + recipe.getRecipeOutput.getDisplayName + ".")
+        }
+      }
+      catch {
+        case e: Exception =>
+      }
+    })
+    Femtocraft.log(Level.INFO, "Finished mapping Minecraft recipes to assembler recipes.")
+  }
+
+  @throws(classOf[IllegalArgumentException])
+  def addReversableRecipe(recipe: AssemblerRecipe): Boolean = {
+    if (recipe.input.length != 9) {
+      throw new IllegalArgumentException("AssemblerRecipe - Invalid Input Array Length!  Must be 9!")
+    }
+    val normalArray = normalizedInput(recipe)
+    if (normalArray == null) {
+      return false
+    }
+    val normal = normalizedOutput(recipe)
+    if (!checkDecomposition(normal, recipe) || !checkRecomposition(normalArray, recipe)) {
+      Femtocraft.log(Level.WARN, "Assembler recipe already exists for " + recipe.output.getUnlocalizedName + ".")
+      return false
+    }
+    registerRecomposition(normalArray, recipe) && registerDecomposition(normal, recipe)
+  }
+
+  @throws(classOf[IllegalArgumentException])
+  def addRecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
+    if (recipe.input.length != 9) {
+      throw new IllegalArgumentException("AssemblerRecipe - Invalid Input Array Length!  Must be 9!")
+    }
+    val normal = normalizedInput(recipe)
+    if (normal == null) {
+      return false
+    }
+    if (!checkRecomposition(normal, recipe)) {
+      Femtocraft.log(Level.WARN, "Assembler recipe already exists for " + recipe.output.getUnlocalizedName + ".")
+      return false
+    }
+    registerRecomposition(normal, recipe)
+  }
+
+  @throws(classOf[IllegalArgumentException])
+  def addDecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
+    if (recipe.input.length != 9) {
+      throw new IllegalArgumentException("AssemblerRecipe - Invalid Input Array Length!  Must be 9!")
+    }
+    val normal = normalizedOutput(recipe)
+    if (!checkDecomposition(normal, recipe)) {
+      Femtocraft.log(Level.WARN, "Assembler recipe already exists for " + recipe.output.getUnlocalizedName + ".")
+      return false
+    }
+    registerDecomposition(normal, recipe)
+  }
+
+  def removeAnyRecipe(recipe: AssemblerRecipe) = removeDecompositionRecipe(recipe) || removeRecompositionRecipe(recipe)
+
+  def removeDecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
+    false
+  }
+
+  def removeRecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
+    false
+  }
+
+  def removeReversableRecipe(recipe: AssemblerRecipe) = removeDecompositionRecipe(recipe) && removeRecompositionRecipe(recipe)
+
+  def canCraft(input: Array[ItemStack]): Boolean = {
+    if (input.length != 9) {
+      return false
+    }
+    val recipe: AssemblerRecipe = getRecipe(input)
+    if (recipe == null) {
+      return false
+    }
+    for (i <- 0 until 9) {
+      val rec = recipe.input(i)
+      if (!(input(i) == null || rec == null)) {
+        if (input(i).stackSize < input(i).stackSize) {
+          return false
+        }
+        if (FemtocraftUtils.compareItem(rec, input(i)) != 0) {
+          return false
+        }
+      }
+    }
+    true
+  }
+
+  def getRecipe(input: Array[ItemStack]): AssemblerRecipe = {
+    val normal = normalizedInput(input)
+    if (normal == null) {
+      return null
+    }
+    ard.getRecipe(input)
+  }
+
+  private def normalizedInput(input: Array[ItemStack]): Array[ItemStack] = {
+    if (input.length != 9) {
+      return null
+    }
+    val ret: Array[ItemStack] = new Array[ItemStack](9)
+    for (i <- 0 until 9) {
+      ret(i) = normalizedItem(input(i))
+    }
+    ret
+  }
+
+  private def normalizedItem(original: ItemStack) = if (original == null) null else new ItemStack(original.getItem, 1, original.getItemDamage)
+
+  def canCraft(input: ItemStack) = {
+    val recipe = getRecipe(input)
+    recipe != null && input.stackSize >= recipe.output.stackSize && FemtocraftUtils.compareItem(recipe.output, input) == 0
+  }
+
+  def getRecipe(output: ItemStack): AssemblerRecipe = ard.getRecipe(output)
+
+  def getRecipesForTechLevel(level: EnumTechLevel) = ard.getRecipesForLevel(level)
+
+  //  private def testRecipes() {
+  //    var test= getRecipe(Array[ItemStack](null, null, null, new ItemStack(Femtocraft.itemPlaneoid), new ItemStack(Femtocraft.itemRectangulon), new ItemStack(Femtocraft.itemPlaneoid), null, null, null))
+  //    Femtocraft.log(Level.WARNING, "Recipe " + (if (test != null) "found" else "not found") + ".")
+  //    if (test != null) {
+  //      Femtocraft.log(Level.WARNING, "Output " + (if (test.output.isItemEqual(new ItemStack(Femtocraft.itemFlorite))) "matches" else "does not match") + ".")
+  //    }
+  //    test = getRecipe(Array[ItemStack](null, null, null, new ItemStack(Femtocraft.itemRectangulon), new ItemStack(Femtocraft.itemRectangulon), new ItemStack(Femtocraft.itemPlaneoid), null, null, null))
+  //    Femtocraft.log(Level.WARNING, "Recipe " + (if (test != null) "found" else "not found") + ".")
+  //    test = getRecipe(new ItemStack(Femtocraft.itemFlorite))
+  //    Femtocraft.log(Level.WARNING, "Recipe " + (if (test != null) "found" else "not found") + ".")
+  //  }
+
+  def getAllRecipes = ard.getAllRecipes
+
+  def getRecipesForTechnology(tech: Technology) = ard.getRecipesForTech(tech)
+
+  def getRecipesForTechnology(techName: String) = ard.getRecipesForTech(techName)
+
+  def hasResearchedRecipe(recipe: AssemblerRecipe, username: String) = Femtocraft.researchManager.hasPlayerResearchedTechnology(username, recipe.tech)
+
   private def registerRecipes() {
     Femtocraft.log(Level.INFO, "Registering Femtocraft assembler recipes.")
     if (ard.shouldRegister) {
@@ -185,123 +432,6 @@ class ManagerAssemblerRecipe {
   }
 
   private def registerMacroDecompositionRecipes() {
-  }
-
-  def registerDefaultRecipes() {
-    Femtocraft.log(Level.INFO, "Scraping Minecraft recipe registries for assembler recipe mappings.")
-    if (!ard.shouldRegister) {
-      Femtocraft.log(Level.INFO, "Database already exists.  " + "Skipping item registration.")
-      return
-    }
-    Femtocraft.log(Level.WARN, "Registering assembler recipes from Vanilla Minecraft's Crafting Manager.\t This may take " + "awhile ._.")
-    val recipes = CraftingManager.getInstance.getRecipeList.filter(i => i != null && i.isInstanceOf[IRecipe]).map(_.asInstanceOf[IRecipe])
-    Femtocraft.log(Level.WARN, "Registering shaped recipes from Vanilla Minecraft's Crafting Manager.")
-    recipes.filter(i => i.isInstanceOf[ShapedRecipes] && getRecipe(i.getRecipeOutput) == null)
-    .map(_.asInstanceOf[ShapedRecipes])
-    .foreach(sr => {
-      try {
-        Femtocraft.log(Level.INFO, "Attempting to register shaped assembler recipe for " + sr.getRecipeOutput.getDisplayName + ".")
-        val valid = registerShapedRecipe(sr.recipeItems, sr.getRecipeOutput, sr.recipeWidth, sr.recipeHeight)
-        if (!valid) {
-          Femtocraft.log(Level.WARN, "Failed to register shaped assembler recipe for " + sr.getRecipeOutput.getDisplayName + "!")
-        }
-        else {
-          Femtocraft.log(Level.INFO, "Loaded Vanilla Minecraft shaped recipe as assembler recipe for " + sr.getRecipeOutput.getDisplayName + ".")
-        }
-      }
-      catch {
-        case e: Exception =>
-      }
-    })
-    Femtocraft.log(Level.WARN, "Registering shaped ore recipes from Forge.")
-    recipes.filter(i => i.isInstanceOf[ShapedOreRecipe] && getRecipe(i.getRecipeOutput) == null)
-    .map(_.asInstanceOf[ShapedOreRecipe])
-    .foreach(orecipe => {
-      try {
-        Femtocraft.log(Level.INFO, "Attempting to register shaped assembler recipe for " + orecipe.getRecipeOutput.getDisplayName + ".")
-        var width = 0
-        var height = 0
-        try {
-          val width_field = classOf[ShapedOreRecipe].getDeclaredField("width")
-          var prev = width_field.isAccessible
-          if (!prev) {
-            width_field.setAccessible(true)
-          }
-          width = width_field.getInt(orecipe)
-          if (!prev) {
-            width_field.setAccessible(prev)
-          }
-
-
-          val height_field = classOf[ShapedOreRecipe].getDeclaredField("height")
-          prev = height_field.isAccessible
-          if (!prev) {
-            height_field.setAccessible(true)
-          }
-          height = height_field.getInt(orecipe)
-          if (!prev) {
-            height_field.setAccessible(prev)
-          }
-
-        }
-        catch {
-          case e: SecurityException => e.printStackTrace()
-          case e: NoSuchFieldException => e.printStackTrace()
-          case e: IllegalArgumentException => e.printStackTrace()
-          case e: IllegalAccessException => e.printStackTrace()
-        }
-        val valid = registerShapedOreRecipe(orecipe.getInput, orecipe.getRecipeOutput, width, height)
-        if (!valid) {
-          Femtocraft.log(Level.WARN, "Failed to register shaped assembler recipe for " + orecipe.getRecipeOutput.getDisplayName + "!")
-        }
-        else {
-          Femtocraft.log(Level.INFO, "LoadedForge shaped ore recipe as assembler recipe for " + orecipe.getRecipeOutput.getDisplayName + ".")
-        }
-      }
-      catch {
-        case e: Exception =>
-      }
-    })
-    Femtocraft.log(Level.WARN, "Registering shapeless recipes from Vanilla Minecraft's Crafting Manager.")
-    recipes.filter(i => i.isInstanceOf[ShapelessRecipes] && getRecipe(i.getRecipeOutput) == null)
-    .map(_.asInstanceOf[ShapelessRecipes])
-    .foreach(recipe => {
-      try {
-        Femtocraft.log(Level.INFO, "Attempting to register shapeless assembler recipe for " + recipe.getRecipeOutput.getDisplayName + ".")
-        val valid: Boolean = registerShapelessRecipe(recipe.recipeItems, recipe.getRecipeOutput)
-        if (!valid) {
-          Femtocraft.log(Level.WARN, "Failed to register shapeless assembler recipe for " + recipe.getRecipeOutput.getDisplayName + "!")
-          Femtocraft.log(Level.WARN, "I have no clue how this would happen...as the search space is literally " + "thousands of configurations.  Sorry for the wait.")
-        }
-        else {
-          Femtocraft.log(Level.INFO, "Loaded Vanilla Minecraft shapeless recipe as assembler recipe for + " + recipe.getRecipeOutput.getDisplayName + ".")
-        }
-      }
-      catch {
-        case e: Exception =>
-      }
-    })
-
-    Femtocraft.log(Level.WARN, "Registering shapeless ore recipes from Forge.")
-    recipes.filter(i => i.isInstanceOf[ShapelessOreRecipe] && getRecipe(i.getRecipeOutput) == null)
-    .map(_.asInstanceOf[ShapelessOreRecipe])
-    .foreach(recipe => {
-      try {
-        Femtocraft.log(Level.INFO, "Attempting to register shapeless assembler recipe for " + recipe.getRecipeOutput.getDisplayName + ".")
-        val valid: Boolean = registerShapelessOreRecipe(recipe.getInput, recipe.getRecipeOutput)
-        if (!valid) {
-          Femtocraft.log(Level.WARN, "Failed to register shapeless ore assembler recipe for " + recipe.getRecipeOutput.getDisplayName + "!")
-          Femtocraft.log(Level.WARN, "I have no clue how this would happen...as the search space is literally " + "thousands of configurations.  Sorry for the wait.")
-        }
-        else {
-          Femtocraft.log(Level.INFO, "Loaded Forge shapeless ore recipe as assembler recipe for + " + recipe.getRecipeOutput.getDisplayName + ".")
-        }
-      }
-      catch {
-        case e: Exception =>
-      }
-    })
-    Femtocraft.log(Level.INFO, "Finished mapping Minecraft recipes to assembler recipes.")
   }
 
   private def registerShapedOreRecipe(recipeInput: Array[AnyRef], recipeOutput: ItemStack, width: Int, height: Int): Boolean = {
@@ -611,87 +741,6 @@ class ManagerAssemblerRecipe {
     addReversableRecipe(new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.blockSisyphusStabilizer), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.blockSisyphusStabilizer), new ItemStack(Blocks.diamond_block), new ItemStack(Femtocraft.blockSisyphusStabilizer), new ItemStack(Femtocraft.itemStellaratorPlating), new ItemStack(Femtocraft.blockSisyphusStabilizer), new ItemStack(Femtocraft.itemStellaratorPlating)), 0, new ItemStack(Femtocraft.blockPlasmaCondenser), EnumTechLevel.FEMTO, FemtocraftTechnologies.MATTER_CONVERSION))
   }
 
-  //  private def testRecipes() {
-  //    var test= getRecipe(Array[ItemStack](null, null, null, new ItemStack(Femtocraft.itemPlaneoid), new ItemStack(Femtocraft.itemRectangulon), new ItemStack(Femtocraft.itemPlaneoid), null, null, null))
-  //    Femtocraft.log(Level.WARNING, "Recipe " + (if (test != null) "found" else "not found") + ".")
-  //    if (test != null) {
-  //      Femtocraft.log(Level.WARNING, "Output " + (if (test.output.isItemEqual(new ItemStack(Femtocraft.itemFlorite))) "matches" else "does not match") + ".")
-  //    }
-  //    test = getRecipe(Array[ItemStack](null, null, null, new ItemStack(Femtocraft.itemRectangulon), new ItemStack(Femtocraft.itemRectangulon), new ItemStack(Femtocraft.itemPlaneoid), null, null, null))
-  //    Femtocraft.log(Level.WARNING, "Recipe " + (if (test != null) "found" else "not found") + ".")
-  //    test = getRecipe(new ItemStack(Femtocraft.itemFlorite))
-  //    Femtocraft.log(Level.WARNING, "Recipe " + (if (test != null) "found" else "not found") + ".")
-  //  }
-
-  def getRecipe(input: Array[ItemStack]): AssemblerRecipe = {
-    val normal = normalizedInput(input)
-    if (normal == null) {
-      return null
-    }
-    ard.getRecipe(input)
-  }
-
-  def getRecipe(output: ItemStack): AssemblerRecipe = ard.getRecipe(output)
-
-  private def normalizedInput(input: Array[ItemStack]): Array[ItemStack] = {
-    if (input.length != 9) {
-      return null
-    }
-    val ret: Array[ItemStack] = new Array[ItemStack](9)
-    for (i <- 0 until 9) {
-      ret(i) = normalizedItem(input(i))
-    }
-    ret
-  }
-
-  private def normalizedItem(original: ItemStack) = if (original == null) null else new ItemStack(original.getItem, 1, original.getItemDamage)
-
-  @throws(classOf[IllegalArgumentException])
-  def addReversableRecipe(recipe: AssemblerRecipe): Boolean = {
-    if (recipe.input.length != 9) {
-      throw new IllegalArgumentException("AssemblerRecipe - Invalid Input Array Length!  Must be 9!")
-    }
-    val normalArray = normalizedInput(recipe)
-    if (normalArray == null) {
-      return false
-    }
-    val normal = normalizedOutput(recipe)
-    if (!checkDecomposition(normal, recipe) || !checkRecomposition(normalArray, recipe)) {
-      Femtocraft.log(Level.WARN, "Assembler recipe already exists for " + recipe.output.getUnlocalizedName + ".")
-      return false
-    }
-    registerRecomposition(normalArray, recipe) && registerDecomposition(normal, recipe)
-  }
-
-  @throws(classOf[IllegalArgumentException])
-  def addRecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
-    if (recipe.input.length != 9) {
-      throw new IllegalArgumentException("AssemblerRecipe - Invalid Input Array Length!  Must be 9!")
-    }
-    val normal = normalizedInput(recipe)
-    if (normal == null) {
-      return false
-    }
-    if (!checkRecomposition(normal, recipe)) {
-      Femtocraft.log(Level.WARN, "Assembler recipe already exists for " + recipe.output.getUnlocalizedName + ".")
-      return false
-    }
-    registerRecomposition(normal, recipe)
-  }
-
-  @throws(classOf[IllegalArgumentException])
-  def addDecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
-    if (recipe.input.length != 9) {
-      throw new IllegalArgumentException("AssemblerRecipe - Invalid Input Array Length!  Must be 9!")
-    }
-    val normal = normalizedOutput(recipe)
-    if (!checkDecomposition(normal, recipe)) {
-      Femtocraft.log(Level.WARN, "Assembler recipe already exists for " + recipe.output.getUnlocalizedName + ".")
-      return false
-    }
-    registerDecomposition(normal, recipe)
-  }
-
   private def registerRecomposition(normal: Array[ItemStack], recipe: AssemblerRecipe): Boolean = {
     val event = new EventAssemblerRegister.AssemblerRecompositionRegisterEvent(recipe)
     Femtocraft.assemblerConfigs.loadAssemblerRecipe(recipe)
@@ -726,59 +775,7 @@ class ManagerAssemblerRecipe {
 
   private def checkRecomposition(normal: Array[ItemStack], recipe: AssemblerRecipe) = ard.getRecipe(normal) == null
 
-  def removeAnyRecipe(recipe: AssemblerRecipe) = removeDecompositionRecipe(recipe) || removeRecompositionRecipe(recipe)
-
-  def removeDecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
-    false
-  }
-
-  def removeRecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
-    false
-  }
-
   private def normalizedOutput(recipe: AssemblerRecipe): ItemStack = normalizedItem(recipe.output)
 
-
   private def normalizedInput(recipe: AssemblerRecipe): Array[ItemStack] = normalizedInput(recipe.input)
-
-
-  def removeReversableRecipe(recipe: AssemblerRecipe) = removeDecompositionRecipe(recipe) && removeRecompositionRecipe(recipe)
-
-
-  def canCraft(input: Array[ItemStack]): Boolean = {
-    if (input.length != 9) {
-      return false
-    }
-    val recipe: AssemblerRecipe = getRecipe(input)
-    if (recipe == null) {
-      return false
-    }
-    for (i <- 0 until 9) {
-      val rec = recipe.input(i)
-      if (!(input(i) == null || rec == null)) {
-        if (input(i).stackSize < input(i).stackSize) {
-          return false
-        }
-        if (FemtocraftUtils.compareItem(rec, input(i)) != 0) {
-          return false
-        }
-      }
-    }
-    true
-  }
-
-  def canCraft(input: ItemStack) = {
-    val recipe = getRecipe(input)
-    recipe != null && input.stackSize >= recipe.output.stackSize && FemtocraftUtils.compareItem(recipe.output, input) == 0
-  }
-
-  def getRecipesForTechLevel(level: EnumTechLevel) = ard.getRecipesForLevel(level)
-
-  def getAllRecipes = ard.getAllRecipes
-
-  def getRecipesForTechnology(tech: Technology) = ard.getRecipesForTech(tech)
-
-  def getRecipesForTechnology(techName: String) = ard.getRecipesForTech(techName)
-
-  def hasResearchedRecipe(recipe: AssemblerRecipe, username: String) = Femtocraft.researchManager.hasPlayerResearchedTechnology(username, recipe.tech)
 }

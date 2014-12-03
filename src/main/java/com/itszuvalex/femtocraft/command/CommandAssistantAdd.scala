@@ -38,8 +38,6 @@ class CommandAssistantAdd extends CommandBase("add", null) {
 
   override def isUsernameIndex(astring: Array[String], i: Int) = i == 0
 
-  override def getCommandUsage(icommandsender: ICommandSender) = "add [username]"
-
   override def getDescription = "Add a player as an assistant"
 
   override def processCommand(icommandsender: ICommandSender, astring: Array[String]) {
@@ -57,4 +55,6 @@ class CommandAssistantAdd extends CommandBase("add", null) {
       }
     }
   }
+
+  override def getCommandUsage(icommandsender: ICommandSender) = "add [username]"
 }

@@ -52,7 +52,7 @@ class BlockSteamGenerator extends TileContainer(Material.iron) {
       case te: TileEntitySteamGenerator =>
         val info = te.getInfo
         MultiBlockMagnetohydrodynamicGenerator.instance.breakMultiBlock(par1World, info.x, info.y, info.z)
-      case _ =>
+      case _                            =>
     }
     super.breakBlock(par1World, par2, par3, par4, par5, par6)
   }

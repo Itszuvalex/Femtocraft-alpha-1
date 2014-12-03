@@ -48,14 +48,6 @@ class BlockPhlegethonTunnelFrame extends TileContainer(Material.iron) {
   setCreativeTab(Femtocraft.femtocraftTab)
   setBlockName("BlockPhlegethonTunnelFrame")
 
-  private def makeEmptyIconArray: Array[Array[IIcon]] = {
-    val newArray = new Array[Array[IIcon]](3)
-    for (i <- 0 until newArray.length) {
-      newArray(i) = new Array[IIcon](3)
-    }
-    newArray
-  }
-
   @SideOnly(Side.CLIENT) override def registerBlockIcons(par1IconRegister: IIconRegister) {
     blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "BlockPhlegethonTunnelFrame_unformed")
     registerIcons(sideIcons_active, "side_active", par1IconRegister)
@@ -81,7 +73,7 @@ class BlockPhlegethonTunnelFrame extends TileContainer(Material.iron) {
       val core = par1iBlockAccess.getTileEntity(info.x, info.y, info.z).asInstanceOf[TileEntityPhlegethonTunnelCore]
       val active: Boolean = core != null && core.isActive
       iconForSide(info, dir, active, par2, par3, par4)
-    case _ => super.getIcon(par1iBlockAccess, par2, par3, par4, par5)
+    case _                                                                 => super.getIcon(par1iBlockAccess, par2, par3, par4, par5)
   }
 
   private def iconForSide(info: MultiBlockInfo, dir: ForgeDirection, active: Boolean, x: Int, y: Int, z: Int): IIcon = {
@@ -89,23 +81,23 @@ class BlockPhlegethonTunnelFrame extends TileContainer(Material.iron) {
     val ydif = y - info.y
     val zdif = z - info.z
     dir match {
-      case UP => iconFromGrid(dir, active, xdif, -zdif)
-      case DOWN => iconFromGrid(dir, active, xdif, -zdif)
+      case UP    => iconFromGrid(dir, active, xdif, -zdif)
+      case DOWN  => iconFromGrid(dir, active, xdif, -zdif)
       case NORTH => iconFromGrid(dir, active, -xdif, ydif)
       case SOUTH => iconFromGrid(dir, active, xdif, ydif)
-      case EAST => iconFromGrid(dir, active, -zdif, ydif)
-      case WEST => iconFromGrid(dir, active, zdif, ydif)
-      case _ => blockIcon
+      case EAST  => iconFromGrid(dir, active, -zdif, ydif)
+      case WEST  => iconFromGrid(dir, active, zdif, ydif)
+      case _     => blockIcon
     }
   }
 
   private def iconFromGrid(side: ForgeDirection, active: Boolean, xdif: Int, ydif: Int): IIcon = try
     side match {
-      case UP =>
+      case UP   =>
         if (active) topIcons_active(xdif + 1)(ydif + 1) else topIcons_inactive(xdif + 1)(ydif + 1)
       case DOWN =>
         if (active) botIcons_active(xdif + 1)(ydif + 1) else botIcons_inactive(xdif + 1)(ydif + 1)
-      case _ =>
+      case _    =>
         if (active) sideIcons_active(xdif + 1)(ydif + 1) else sideIcons_inactive(xdif + 1)(ydif + 1)
     }
   catch {
@@ -124,8 +116,16 @@ class BlockPhlegethonTunnelFrame extends TileContainer(Material.iron) {
       case frame: TileEntityPhlegethonTunnelFrame =>
         val info = frame.getInfo
         MultiBlockPhlegethonTunnel.instance.breakMultiBlock(par1World, info.x, info.y, info.z)
-      case _ =>
+      case _                                      =>
     }
     super.breakBlock(par1World, par2, par3, par4, par5, par6)
+  }
+
+  private def makeEmptyIconArray: Array[Array[IIcon]] = {
+    val newArray = new Array[Array[IIcon]](3)
+    for (i <- 0 until newArray.length) {
+      newArray(i) = new Array[IIcon](3)
+    }
+    newArray
   }
 }

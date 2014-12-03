@@ -31,11 +31,6 @@ import net.minecraft.world.World
  * Created by Christopher Harris (Itszuvalex) on 7/26/14.
  */
 object FemtocraftFileUtils {
-  def savePath(world: World) = if (!MinecraftServer.getServer.isDedicatedServer)
-    Minecraft.getMinecraft.mcDataDir + "/saves/" + world.getSaveHandler.getWorldDirectoryName
-  else MinecraftServer.getServer.getFile(world.getSaveHandler.getWorldDirectoryName).getPath
-
-
   def savePathFemtocraft(world: World) = {
     val dir = new File(savePath(world), Femtocraft.ID.toLowerCase)
     if (!dir.exists) {
@@ -43,6 +38,10 @@ object FemtocraftFileUtils {
     }
     dir.getPath
   }
+
+  def savePath(world: World) = if (!MinecraftServer.getServer.isDedicatedServer)
+                                 Minecraft.getMinecraft.mcDataDir + "/saves/" + world.getSaveHandler.getWorldDirectoryName
+                               else MinecraftServer.getServer.getFile(world.getSaveHandler.getWorldDirectoryName).getPath
 }
 
 

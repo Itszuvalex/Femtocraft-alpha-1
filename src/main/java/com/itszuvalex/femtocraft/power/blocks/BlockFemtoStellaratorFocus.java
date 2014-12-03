@@ -23,9 +23,9 @@ package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
+import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
 import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockFemtoStellarator;
-import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoStellaratorFocus;
 import com.itszuvalex.femtocraft.proxy.ProxyClient;
 import net.minecraft.block.Block;
@@ -109,24 +109,6 @@ public class BlockFemtoStellaratorFocus extends TileContainer {
                 () + ":" + "BlockFemtoStellaratorHollowInternals");
     }
 
-    private boolean hasCoreAsNeighbor(World par1World, int par2, int par3, int par4) {
-        for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-            TileEntity te = par1World.getTileEntity(par2 + dir.offsetX,
-                    par3 + dir.offsetY,
-                    par4 + dir.offsetZ);
-            if (te instanceof IFusionReactorCore) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    @Override
-    public TileEntity createNewTileEntity(World world, int metadata) {
-        return new TileEntityFemtoStellaratorFocus();
-    }
-
     /*
      * (non-Javadoc)
      *
@@ -145,5 +127,23 @@ public class BlockFemtoStellaratorFocus extends TileContainer {
 
         }
         super.breakBlock(par1World, par2, par3, par4, par5, par6);
+    }
+
+    private boolean hasCoreAsNeighbor(World par1World, int par2, int par3, int par4) {
+        for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+            TileEntity te = par1World.getTileEntity(par2 + dir.offsetX,
+                    par3 + dir.offsetY,
+                    par4 + dir.offsetZ);
+            if (te instanceof IFusionReactorCore) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World world, int metadata) {
+        return new TileEntityFemtoStellaratorFocus();
     }
 }

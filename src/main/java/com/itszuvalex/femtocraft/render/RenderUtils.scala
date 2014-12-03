@@ -36,6 +36,7 @@ object RenderUtils {
   val MICRO_POWER_PARTICLE = "MicroPower"
   val NANO_POWER_PARTICLE  = "NanoPower"
   val FEMTO_POWER_PARTICLE = "FemtoPower"
+  var particleLocation: ResourceLocation = new ResourceLocation(Femtocraft.ID.toLowerCase, "textures/particles/particles.png")
 
   def renderCube(x: Float, y: Float, z: Float, startx: Float, starty: Float, startz: Float, endx: Float, endy: Float, endz: Float, texture: IIcon) {
     renderCube(x, y, z, startx, starty, startz, endx, endy, endz, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
@@ -48,6 +49,67 @@ object RenderUtils {
     drawEastFace(x, y, z, starty, endy, startz, endz, endx, texture, minU, maxU, minV, maxV)
     drawSouthFace(x, y, z, startx, endx, starty, endy, endz, texture, minU, maxU, minV, maxV)
     drawWestFace(x, y, z, starty, endy, startz, endz, startx, texture, minU, maxU, minV, maxV)
+  }
+
+  def renderDoubleSidedCube(x: Float, y: Float, z: Float, startx: Float, starty: Float, startz: Float, endx: Float, endy: Float, endz: Float, texture: IIcon) {
+    drawTopFace(x, y, z, startx, endx, startz, endz, endy, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
+    drawBottomFace(x, y, z, startx, endx, startz, endz, endy, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
+    drawBottomFace(x, y, z, startx, endx, startz, endz, starty, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
+    drawTopFace(x, y, z, startx, endx, startz, endz, starty, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
+    drawNorthFace(x, y, z, startx, endx, starty, endy, startz, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
+    drawSouthFace(x, y, z, startx, endx, starty, endy, startz, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
+    drawEastFace(x, y, z, starty, endy, startz, endz, endx, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
+    drawWestFace(x, y, z, starty, endy, startz, endz, endx, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
+    drawSouthFace(x, y, z, startx, endx, starty, endy, endz, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
+    drawNorthFace(x, y, z, startx, endx, starty, endy, endz, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
+    drawWestFace(x, y, z, starty, endy, startz, endz, startx, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
+    drawEastFace(x, y, z, starty, endy, startz, endz, startx, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
+  }
+
+  def makeTopFace(xmin: Float, xmax: Float, zmin: Float, zmax: Float, yoffset: Float, texture: IIcon, minU: Float, maxU: Float, minV: Float, maxV: Float): RenderQuad = {
+    val a = new RenderPoint
+    val b = new RenderPoint
+    val c = new RenderPoint
+    val d = new RenderPoint
+    a.y = {b.y = {c.y = {d.y = yoffset; d.y}; c.y}; b.y}
+    a.x = {b.x = xmin; b.x}
+    c.x = {d.x = xmax; d.x}
+    a.z = {d.z = zmin; d.z}
+    b.z = {c.z = zmax; c.z}
+    new RenderQuad(a, b, c, d, texture, minU, maxU, minV, maxV)
+  }
+
+  def makeBottomFace(xmin: Float, xmax: Float, zmin: Float, zmax: Float, yoffset: Float, texture: IIcon, minU: Float, maxU: Float, minV: Float, maxV: Float): RenderQuad = {
+    val a = new RenderPoint
+    val b = new RenderPoint
+    val c = new RenderPoint
+    val d = new RenderPoint
+    a.y = {b.y = {c.y = {d.y = yoffset; d.y}; c.y}; b.y}
+    a.x = {d.x = xmin; d.x}
+    b.x = {c.x = xmax; c.x}
+    a.z = {b.z = zmin; b.z}
+    c.z = {d.z = zmax; d.z}
+    new RenderQuad(a, b, c, d, texture, minU, maxU, minV, maxV)
+  }
+
+  def makeNorthFace(xmin: Float, xmax: Float, ymin: Float, ymax: Float, zoffset: Float, texture: IIcon, minU: Float, maxU: Float, minV: Float, maxV: Float): RenderQuad = new RenderQuad(new RenderPoint(xmax, ymax, zoffset), new RenderPoint(xmax, ymin, zoffset), new RenderPoint(xmin, ymin, zoffset), new RenderPoint(xmin, ymax, zoffset), texture, minU, maxU, minV, maxV)
+
+  def makeEastFace(ymin: Float, ymax: Float, zmin: Float, zmax: Float, xoffset: Float, texture: IIcon, minU: Float, maxU: Float, minV: Float, maxV: Float): RenderQuad = new RenderQuad(new RenderPoint(xoffset, ymin, zmin), new RenderPoint(xoffset, ymax, zmin), new RenderPoint(xoffset, ymax, zmax), new RenderPoint(xoffset, ymin, zmax), texture, minU, maxU, minV, maxV)
+
+  def makeWestFace(ymin: Float, ymax: Float, zmin: Float, zmax: Float, xoffset: Float, texture: IIcon, minU: Float, maxU: Float, minV: Float, maxV: Float): RenderQuad = new RenderQuad(new RenderPoint(xoffset, ymin, zmin), new RenderPoint(xoffset, ymin, zmax), new RenderPoint(xoffset, ymax, zmax), new RenderPoint(xoffset, ymax, zmin), texture, minU, maxU, minV, maxV)
+
+  def makeSouthFace(xmin: Float, xmax: Float, ymin: Float, ymax: Float, zoffset: Float, texture: IIcon, minU: Float, maxU: Float, minV: Float, maxV: Float): RenderQuad = new RenderQuad(new RenderPoint(xmin, ymax, zoffset), new RenderPoint(xmin, ymin, zoffset), new RenderPoint(xmax, ymin, zoffset), new RenderPoint(xmax, ymax, zoffset), texture, minU, maxU, minV, maxV)
+
+  def drawArbitraryFace(x: Float, y: Float, z: Float, xmin: Float, xmax: Float, ymin: Float, ymax: Float, zmin: Float, zmax: Float, normal: ForgeDirection, texture: IIcon, minU: Float, maxU: Float, minV: Float, maxV: Float) {
+    normal match {
+      case UP    => drawTopFace(x, y, z, xmin, xmax, zmin, zmax, ymax, texture, minU, maxU, minV, maxV)
+      case DOWN  => drawBottomFace(x, y, z, xmin, xmax, zmin, zmax, ymin, texture, minU, maxU, minV, maxV)
+      case NORTH => drawNorthFace(x, y, z, xmin, xmax, ymin, ymax, zmin, texture, minU, maxU, minV, maxV)
+      case EAST  => drawEastFace(x, y, z, ymin, ymax, zmin, zmax, xmax, texture, minU, maxU, minV, maxV)
+      case SOUTH => drawSouthFace(x, y, z, xmin, xmax, ymin, ymax, zmax, texture, minU, maxU, minV, maxV)
+      case WEST  => drawWestFace(x, y, z, ymin, ymax, zmin, zmax, xmin, texture, minU, maxU, minV, maxV)
+      case _     =>
+    }
   }
 
   def drawTopFace(x: Float, y: Float, z: Float, xmin: Float, xmax: Float, zmin: Float, zmax: Float, yoffset: Float, texture: IIcon, minU: Float, maxU: Float, minV: Float, maxV: Float) {
@@ -110,67 +172,6 @@ object RenderUtils {
     tes.addTranslation(-x, -y, -z)
   }
 
-  def renderDoubleSidedCube(x: Float, y: Float, z: Float, startx: Float, starty: Float, startz: Float, endx: Float, endy: Float, endz: Float, texture: IIcon) {
-    drawTopFace(x, y, z, startx, endx, startz, endz, endy, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
-    drawBottomFace(x, y, z, startx, endx, startz, endz, endy, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
-    drawBottomFace(x, y, z, startx, endx, startz, endz, starty, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
-    drawTopFace(x, y, z, startx, endx, startz, endz, starty, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
-    drawNorthFace(x, y, z, startx, endx, starty, endy, startz, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
-    drawSouthFace(x, y, z, startx, endx, starty, endy, startz, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
-    drawEastFace(x, y, z, starty, endy, startz, endz, endx, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
-    drawWestFace(x, y, z, starty, endy, startz, endz, endx, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
-    drawSouthFace(x, y, z, startx, endx, starty, endy, endz, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
-    drawNorthFace(x, y, z, startx, endx, starty, endy, endz, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
-    drawWestFace(x, y, z, starty, endy, startz, endz, startx, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
-    drawEastFace(x, y, z, starty, endy, startz, endz, startx, texture, texture.getMinU, texture.getMaxU, texture.getMinV, texture.getMaxV)
-  }
-
-  def makeTopFace(xmin: Float, xmax: Float, zmin: Float, zmax: Float, yoffset: Float, texture: IIcon, minU: Float, maxU: Float, minV: Float, maxV: Float): RenderQuad = {
-    val a = new RenderPoint
-    val b = new RenderPoint
-    val c = new RenderPoint
-    val d = new RenderPoint
-    a.y = {b.y = {c.y = {d.y = yoffset; d.y}; c.y}; b.y}
-    a.x = {b.x = xmin; b.x}
-    c.x = {d.x = xmax; d.x}
-    a.z = {d.z = zmin; d.z}
-    b.z = {c.z = zmax; c.z}
-    new RenderQuad(a, b, c, d, texture, minU, maxU, minV, maxV)
-  }
-
-  def makeBottomFace(xmin: Float, xmax: Float, zmin: Float, zmax: Float, yoffset: Float, texture: IIcon, minU: Float, maxU: Float, minV: Float, maxV: Float): RenderQuad = {
-    val a = new RenderPoint
-    val b = new RenderPoint
-    val c = new RenderPoint
-    val d = new RenderPoint
-    a.y = {b.y = {c.y = {d.y = yoffset; d.y}; c.y}; b.y}
-    a.x = {d.x = xmin; d.x}
-    b.x = {c.x = xmax; c.x}
-    a.z = {b.z = zmin; b.z}
-    c.z = {d.z = zmax; d.z}
-    new RenderQuad(a, b, c, d, texture, minU, maxU, minV, maxV)
-  }
-
-  def makeNorthFace(xmin: Float, xmax: Float, ymin: Float, ymax: Float, zoffset: Float, texture: IIcon, minU: Float, maxU: Float, minV: Float, maxV: Float): RenderQuad = new RenderQuad(new RenderPoint(xmax, ymax, zoffset), new RenderPoint(xmax, ymin, zoffset), new RenderPoint(xmin, ymin, zoffset), new RenderPoint(xmin, ymax, zoffset), texture, minU, maxU, minV, maxV)
-
-  def makeEastFace(ymin: Float, ymax: Float, zmin: Float, zmax: Float, xoffset: Float, texture: IIcon, minU: Float, maxU: Float, minV: Float, maxV: Float): RenderQuad = new RenderQuad(new RenderPoint(xoffset, ymin, zmin), new RenderPoint(xoffset, ymax, zmin), new RenderPoint(xoffset, ymax, zmax), new RenderPoint(xoffset, ymin, zmax), texture, minU, maxU, minV, maxV)
-
-  def makeWestFace(ymin: Float, ymax: Float, zmin: Float, zmax: Float, xoffset: Float, texture: IIcon, minU: Float, maxU: Float, minV: Float, maxV: Float): RenderQuad = new RenderQuad(new RenderPoint(xoffset, ymin, zmin), new RenderPoint(xoffset, ymin, zmax), new RenderPoint(xoffset, ymax, zmax), new RenderPoint(xoffset, ymax, zmin), texture, minU, maxU, minV, maxV)
-
-  def makeSouthFace(xmin: Float, xmax: Float, ymin: Float, ymax: Float, zoffset: Float, texture: IIcon, minU: Float, maxU: Float, minV: Float, maxV: Float): RenderQuad = new RenderQuad(new RenderPoint(xmin, ymax, zoffset), new RenderPoint(xmin, ymin, zoffset), new RenderPoint(xmax, ymin, zoffset), new RenderPoint(xmax, ymax, zoffset), texture, minU, maxU, minV, maxV)
-
-  def drawArbitraryFace(x: Float, y: Float, z: Float, xmin: Float, xmax: Float, ymin: Float, ymax: Float, zmin: Float, zmax: Float, normal: ForgeDirection, texture: IIcon, minU: Float, maxU: Float, minV: Float, maxV: Float) {
-    normal match {
-      case UP => drawTopFace(x, y, z, xmin, xmax, zmin, zmax, ymax, texture, minU, maxU, minV, maxV)
-      case DOWN => drawBottomFace(x, y, z, xmin, xmax, zmin, zmax, ymin, texture, minU, maxU, minV, maxV)
-      case NORTH => drawNorthFace(x, y, z, xmin, xmax, ymin, ymax, zmin, texture, minU, maxU, minV, maxV)
-      case EAST => drawEastFace(x, y, z, ymin, ymax, zmin, zmax, xmax, texture, minU, maxU, minV, maxV)
-      case SOUTH => drawSouthFace(x, y, z, xmin, xmax, ymin, ymax, zmax, texture, minU, maxU, minV, maxV)
-      case WEST => drawWestFace(x, y, z, ymin, ymax, zmin, zmax, xmin, texture, minU, maxU, minV, maxV)
-      case _ =>
-    }
-  }
-
   def drawFaceByPoints(x: Float, y: Float, z: Float, A: RenderPoint, B: RenderPoint, C: RenderPoint, D: RenderPoint, texture: IIcon, minU: Float, maxU: Float, minV: Float, maxV: Float) {
     val tes = Tessellator.instance
     tes.addTranslation(x, y, z)
@@ -219,24 +220,6 @@ object RenderUtils {
     tessellator.draw
   }
 
-  private def renderLiquidInGUI_width(container: GuiContainer, zheight: Float, icon: IIcon, x: Int, y: Int, width: Int, height: Int) {
-    var i = 0
-    var remaining = width
-    if ((width - height) > 0) {
-      {
-        i = 0
-        while (height < remaining) {
-          {
-            drawTexturedModalSquareFromIcon(zheight, x + i, y, height, icon)
-          }
-          i += height
-          remaining -= height
-        }
-      }
-    }
-    drawTexturedModalRectFromIcon(zheight, x + i, y, remaining, height, icon.getMinU, icon.getInterpolatedV((remaining * 16f) / height), icon.getMinV, icon.getMaxV)
-  }
-
   def drawLine(x1: Int, x2: Int, y1: Int, y2: Int, width: Int, color: Int) {
     val difX = (x2 - x1).toFloat
     val difY = (y2 - y1).toFloat
@@ -262,8 +245,6 @@ object RenderUtils {
     GL11.glDisable(GL11.GL_BLEND)
   }
 
-  var particleLocation: ResourceLocation = new ResourceLocation(Femtocraft.ID.toLowerCase, "textures/particles/particles.png")
-
   def spawnParticle(world: World, name: String, x: Double, y: Double, z: Double): EntityFX = {
     val mc = Minecraft.getMinecraft
     val deltaX = mc.renderViewEntity.posX - x
@@ -285,6 +266,24 @@ object RenderUtils {
     }
     mc.effectRenderer.addEffect(fx)
     fx
+  }
+
+  private def renderLiquidInGUI_width(container: GuiContainer, zheight: Float, icon: IIcon, x: Int, y: Int, width: Int, height: Int) {
+    var i = 0
+    var remaining = width
+    if ((width - height) > 0) {
+      {
+        i = 0
+        while (height < remaining) {
+          {
+            drawTexturedModalSquareFromIcon(zheight, x + i, y, height, icon)
+          }
+          i += height
+          remaining -= height
+        }
+      }
+    }
+    drawTexturedModalRectFromIcon(zheight, x + i, y, remaining, height, icon.getMinU, icon.getInterpolatedV((remaining * 16f) / height), icon.getMinV, icon.getMaxV)
   }
 }
 

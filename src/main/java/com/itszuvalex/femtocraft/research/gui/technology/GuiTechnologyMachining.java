@@ -36,11 +36,6 @@ public class GuiTechnologyMachining extends GuiTechnology {
     }
 
     @Override
-    protected int getNumPages(boolean researched) {
-        return researched ? 1 : 1;
-    }
-
-    @Override
     protected void renderInformation(int x, int y, int width, int height,
                                      int displayPage, int mouseX, int mouseY, List tooltip,
                                      boolean isResearched) {
@@ -65,23 +60,31 @@ public class GuiTechnologyMachining extends GuiTechnology {
                             mouseX,
                             mouseY,
                             tooltip,
-                            "The resiliency of tempered titanium makes for a solid structure, while the integrated circuits allow for interface with other devices."
+                            "The resiliency of tempered titanium makes for a solid structure, while the integrated " +
+                            "circuits allow for interface with other devices."
                     );
                     break;
             }
-        }
-        else {
+        } else {
             switch (displayPage) {
                 case 1:
                     this.fontRendererObj
                             .drawSplitString(
                                     EnumChatFormatting.WHITE
-                                            + "Electronic circuits can perform basic logic, but they are far too fragile for actual use, without something to mount them on.  You have a feeling tempered titanium would provide structural integrity."
-                                            + EnumChatFormatting.RESET, x + 2,
+                                    +
+                                    "Electronic circuits can perform basic logic, but they are far too fragile for " +
+                                    "actual use, without something to mount them on.  You have a feeling tempered " +
+                                    "titanium would provide structural integrity."
+                                    + EnumChatFormatting.RESET, x + 2,
                                     y + 2, width - 4, height - 4
                             );
                     break;
             }
         }
+    }
+
+    @Override
+    protected int getNumPages(boolean researched) {
+        return researched ? 1 : 1;
     }
 }

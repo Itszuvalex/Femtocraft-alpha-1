@@ -28,61 +28,6 @@ object MultiBlockNanoCube extends IMultiBlock {
 
   def canForm(world: World, x: Int, y: Int, z: Int): Boolean = this.canForm(world, x, y, z, false)
 
-  def canFormStrict(world: World, x: Int, y: Int, z: Int): Boolean = this.canForm(world, x, y, z, true)
-
-  def isBlockInMultiBlock(world: World, x: Int, y: Int, z: Int, c_x: Int, c_y: Int, c_z: Int): Boolean = y >= c_y && y <= (c_y + 2) && x >= (c_x - 1) && x <= (c_x + 1) && z >= (c_z - 1) && z <= (c_z + 1)
-
-  def formMultiBlock(world: World, x: Int, y: Int, z: Int): Boolean = {
-    var result = true
-    for (i <- -1 to 1) {
-      for (j <- -1 to 1) {
-        for (k <- 0 to 2) {
-          world.getTileEntity(x + i, y + k, z + j) match {
-            case component: IMultiBlockComponent =>
-              result = component.formMultiBlock(world, x, y, z) && result
-            case _ =>
-              if (!(i == 0 && j == 0 && k == 1)) {
-                result = false
-              }
-          }
-        }
-      }
-    }
-    result
-  }
-
-  def formMultiBlockWithBlock(world: World, x: Int, y: Int, z: Int): Boolean = {
-    for (i <- -1 to 1) {
-      for (j <- -1 to 1) {
-        for (k <- -2 to 0) {
-          if (canFormStrict(world, x + i, y + k, z + j)) {
-            return formMultiBlock(world, x + i, y + k, z + j)
-          }
-        }
-      }
-    }
-    false
-  }
-
-  def breakMultiBlock(world: World, x: Int, y: Int, z: Int): Boolean = {
-    var result = true
-    for (i <- -1 to 1) {
-      for (j <- -1 to 1) {
-        for (k <- 0 to 2) {
-          world.getTileEntity(x + i, y + k, z + j) match {
-            case component: IMultiBlockComponent =>
-              result = component.breakMultiBlock(world, x, y, z) && result
-            case _ =>
-              if (!(i == 0 && j == 0 && k == 1)) {
-                result = false
-              }
-          }
-        }
-      }
-    }
-    result
-  }
-
   private def canForm(world: World, x: Int, y: Int, z: Int, strict: Boolean): Boolean = checkGroundLevel(world, x, y, z, strict) && checkMidLevel(world, x, y, z, strict) && checkTopLevel(world, x, y, z, strict)
 
   private def checkGroundLevel(world: World, x: Int, y: Int, z: Int, strict: Boolean): Boolean = {
@@ -151,6 +96,8 @@ object MultiBlockNanoCube extends IMultiBlock {
     true
   }
 
+  def isBlockInMultiBlock(world: World, x: Int, y: Int, z: Int, c_x: Int, c_y: Int, c_z: Int): Boolean = y >= c_y && y <= (c_y + 2) && x >= (c_x - 1) && x <= (c_x + 1) && z >= (c_z - 1) && z <= (c_z + 1)
+
   private def checkTopLevel(world: World, x: Int, y: Int, z: Int, strict: Boolean): Boolean = {
     for (i <- -1 to 1) {
       for (j <- -1 to 1) {
@@ -179,5 +126,58 @@ object MultiBlockNanoCube extends IMultiBlock {
       }
     }
     true
+  }
+
+  def formMultiBlockWithBlock(world: World, x: Int, y: Int, z: Int): Boolean = {
+    for (i <- -1 to 1) {
+      for (j <- -1 to 1) {
+        for (k <- -2 to 0) {
+          if (canFormStrict(world, x + i, y + k, z + j)) {
+            return formMultiBlock(world, x + i, y + k, z + j)
+          }
+        }
+      }
+    }
+    false
+  }
+
+  def canFormStrict(world: World, x: Int, y: Int, z: Int): Boolean = this.canForm(world, x, y, z, true)
+
+  def formMultiBlock(world: World, x: Int, y: Int, z: Int): Boolean = {
+    var result = true
+    for (i <- -1 to 1) {
+      for (j <- -1 to 1) {
+        for (k <- 0 to 2) {
+          world.getTileEntity(x + i, y + k, z + j) match {
+            case component: IMultiBlockComponent =>
+              result = component.formMultiBlock(world, x, y, z) && result
+            case _                               =>
+              if (!(i == 0 && j == 0 && k == 1)) {
+                result = false
+              }
+          }
+        }
+      }
+    }
+    result
+  }
+
+  def breakMultiBlock(world: World, x: Int, y: Int, z: Int): Boolean = {
+    var result = true
+    for (i <- -1 to 1) {
+      for (j <- -1 to 1) {
+        for (k <- 0 to 2) {
+          world.getTileEntity(x + i, y + k, z + j) match {
+            case component: IMultiBlockComponent =>
+              result = component.breakMultiBlock(world, x, y, z) && result
+            case _                               =>
+              if (!(i == 0 && j == 0 && k == 1)) {
+                result = false
+              }
+          }
+        }
+      }
+    }
+    result
   }
 }

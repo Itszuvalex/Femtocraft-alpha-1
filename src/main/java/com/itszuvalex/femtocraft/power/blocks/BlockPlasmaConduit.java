@@ -62,11 +62,6 @@ public class BlockPlasmaConduit extends TileContainer {
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world, int metadata) {
-        return new TileEntityPlasmaConduit();
-    }
-
-    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4,
                            Block par5, int par6) {
 
@@ -82,16 +77,6 @@ public class BlockPlasmaConduit extends TileContainer {
     }
 
     @Override
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
-
-    @Override
-    public int getRenderType() {
-        return ProxyClient.FemtocraftPlasmaConduitID();
-    }
-
-    @Override
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase,
                                 ItemStack par6ItemStack) {
         super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLivingBase, par6ItemStack);
@@ -100,6 +85,21 @@ public class BlockPlasmaConduit extends TileContainer {
             TileEntityPlasmaConduit conduit = (TileEntityPlasmaConduit) te;
             conduit.searchForConnections();
         }
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World world, int metadata) {
+        return new TileEntityPlasmaConduit();
+    }
+
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
+
+    @Override
+    public int getRenderType() {
+        return ProxyClient.FemtocraftPlasmaConduitID();
     }
 
     @Override
@@ -167,6 +167,16 @@ public class BlockPlasmaConduit extends TileContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
+                                                         int x, int y, int z) {
+        return AxisAlignedBB.getBoundingBox((double) x + 2.f / 16.f,
+                (double) y + 2.f / 16.f, (double) z + 2.f / 16.f,
+                (double) x + 14.f / 16.f, (double) y + 14.f / 16.f,
+                (double) z + 14.f / 16.f);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
     public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int x,
                                                         int y, int z) {
         AxisAlignedBB box = AxisAlignedBB.getBoundingBox(
@@ -189,16 +199,6 @@ public class BlockPlasmaConduit extends TileContainer {
                 cable.getOutputDir(), x, y, z));
 
         return box;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
-                                                         int x, int y, int z) {
-        return AxisAlignedBB.getBoundingBox((double) x + 2.f / 16.f,
-                (double) y + 2.f / 16.f, (double) z + 2.f / 16.f,
-                (double) x + 14.f / 16.f, (double) y + 14.f / 16.f,
-                (double) z + 14.f / 16.f);
     }
 
     @Override

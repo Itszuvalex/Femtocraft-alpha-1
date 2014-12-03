@@ -26,7 +26,7 @@ import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.VolatilityEvent;
-import com.itszuvalex.femtocraft.power.plasma.*;
+import com.itszuvalex.femtocraft.power.plasma.FemtocraftPlasmaUtils;
 import net.minecraft.world.World;
 
 import java.util.Random;

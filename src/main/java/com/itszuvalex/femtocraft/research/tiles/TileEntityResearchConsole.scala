@@ -74,49 +74,6 @@ class TileEntityResearchConsole extends TileEntityBase with Inventory {
     checkForTechnology()
   }
 
-  override def writeToNBT(par1nbtTagCompound: NBTTagCompound) {
-    super.writeToNBT(par1nbtTagCompound)
-  }
-
-  override def femtocraftServerUpdate() {
-    super.femtocraftServerUpdate()
-    if (researchingTech != null) {
-      if ( {progress += 1; progress - 1} >= progressMax) {
-        finishWork()
-      }
-    }
-  }
-
-  private def finishWork() {
-    progress = 0
-    progressMax = 0
-    val tech = Femtocraft.researchManager.getTechnology(researchingTech)
-    if (tech == null) {
-      researchingTech = null
-      return
-    }
-    var techItem: Item = null
-    tech.getLevel match {
-      case MACRO | MICRO =>
-        techItem = Femtocraft.itemMicroTechnology
-      case NANO =>
-        techItem = Femtocraft.itemNanoTechnology
-      case FEMTO | DIMENSIONAL | TEMPORAL =>
-        techItem = Femtocraft.itemFemtoTechnology
-    }
-    val techstack = new ItemStack(techItem, 1)
-    techItem.asInstanceOf[ITechnologyCarrier].setTechnology(techstack, researchingTech)
-    researchingTech = null
-    setInventorySlotContents(getSizeInventory - 1, techstack)
-    markDirty()
-    worldObj.markBlockForUpdate(xCoord, yCoord, zCoord)
-  }
-
-  override def markDirty() {
-    super.markDirty()
-    checkForTechnology()
-  }
-
   private def checkForTechnology() {
     if (worldObj == null) {
       return
@@ -161,6 +118,49 @@ class TileEntityResearchConsole extends TileEntityBase with Inventory {
     tech == null && inv == null || tech != null && inv != null && tech.stackSize <= inv.stackSize && tech.getItem == inv.getItem && (tech.getItemDamage == inv.getItemDamage || tech.getItemDamage == OreDictionary.WILDCARD_VALUE || inv.getItemDamage == OreDictionary.WILDCARD_VALUE)
   }
 
+  override def writeToNBT(par1nbtTagCompound: NBTTagCompound) {
+    super.writeToNBT(par1nbtTagCompound)
+  }
+
+  override def femtocraftServerUpdate() {
+    super.femtocraftServerUpdate()
+    if (researchingTech != null) {
+      if ( {progress += 1; progress - 1} >= progressMax) {
+        finishWork()
+      }
+    }
+  }
+
+  private def finishWork() {
+    progress = 0
+    progressMax = 0
+    val tech = Femtocraft.researchManager.getTechnology(researchingTech)
+    if (tech == null) {
+      researchingTech = null
+      return
+    }
+    var techItem: Item = null
+    tech.getLevel match {
+      case MACRO | MICRO                  =>
+        techItem = Femtocraft.itemMicroTechnology
+      case NANO                           =>
+        techItem = Femtocraft.itemNanoTechnology
+      case FEMTO | DIMENSIONAL | TEMPORAL =>
+        techItem = Femtocraft.itemFemtoTechnology
+    }
+    val techstack = new ItemStack(techItem, 1)
+    techItem.asInstanceOf[ITechnologyCarrier].setTechnology(techstack, researchingTech)
+    researchingTech = null
+    setInventorySlotContents(getSizeInventory - 1, techstack)
+    markDirty()
+    worldObj.markBlockForUpdate(xCoord, yCoord, zCoord)
+  }
+
+  override def markDirty() {
+    super.markDirty()
+    checkForTechnology()
+  }
+
   override def hasGUI = true
 
   override def getGuiID = FemtocraftGuiConstants.ResearchConsoleGuiID
@@ -181,6 +181,15 @@ class TileEntityResearchConsole extends TileEntityBase with Inventory {
     markDirty()
   }
 
+  override def getInventoryName = "Research Console"
+
+  override def hasCustomInventoryName = false
+
+  override def isItemValidForSlot(i: Int, itemstack: ItemStack) = i match {
+    case 9 => false
+    case _ => true
+  }
+
   private def canWork: Boolean = {
     if (displayTech == null || displayTech.isEmpty) {
       return false
@@ -190,15 +199,5 @@ class TileEntityResearchConsole extends TileEntityBase with Inventory {
     }
     val tech = Femtocraft.researchManager.getTechnology(displayTech)
     matchesTechnology(tech)
-  }
-
-
-  override def getInventoryName = "Research Console"
-
-  override def hasCustomInventoryName = false
-
-  override def isItemValidForSlot(i: Int, itemstack: ItemStack) = i match {
-    case 9 => false
-    case _ => true
   }
 }

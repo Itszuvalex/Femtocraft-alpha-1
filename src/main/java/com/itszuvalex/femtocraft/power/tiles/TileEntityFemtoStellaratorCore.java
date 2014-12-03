@@ -50,24 +50,14 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
     public static long reactionFailureThreshold = 2500000;
     public static int plasmaFlowTicksToGenerateMin = 20;
     public static int plasmaFlowTicksToGenerateMax = 200;
-
-    @Override
-    public void saveToDescriptionCompound(NBTTagCompound compound) {
-        selfSustaining = isSelfSustaining();
-        igniting = isIgniting();
-        super.saveToDescriptionCompound(compound);
-    }
-
     @Saveable()
     private FusionReactorCore core;
     @Saveable(desc = true)
     private MultiBlockInfo info;
-
     @Saveable(desc = true)
     private boolean selfSustaining = false;
     @Saveable(desc = true)
     private boolean igniting = false;
-
     public TileEntityFemtoStellaratorCore() {
         super();
         core = new FusionReactorCore(maxContainedFlows, stability, temperatureRating, ignitionProcessWindow,
@@ -100,6 +90,94 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
     @Override
     public int getGuiID() {
         return super.getGuiID();
+    }
+
+    @Override
+    public void saveToDescriptionCompound(NBTTagCompound compound) {
+        selfSustaining = isSelfSustaining();
+        igniting = isIgniting();
+        super.saveToDescriptionCompound(compound);
+    }
+
+    @Override
+    public boolean isValidMultiBlock() {
+        return info.isValidMultiBlock();
+    }
+
+    @Override
+    public boolean formMultiBlock(World world, int x, int y, int z) {
+        if (info.formMultiBlock(world, x, y, z)) {
+            setModified();
+            setUpdate();
+            beginIgnitionProcess(core);
+            core.contributeCoreEnergy(45000000);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void beginIgnitionProcess(IFusionReactorCore core) {
+        this.core.beginIgnitionProcess(core);
+        for (IFusionReactorComponent component : this.core.getComponents()) {
+            component.beginIgnitionProcess(this);
+        }
+        setModified();
+        setUpdate();
+    }
+
+    @Override
+    public void endIgnitionProcess(IFusionReactorCore core) {
+        this.core.endIgnitionProcess(core);
+        for (IFusionReactorComponent component : this.core.getComponents()) {
+            component.endIgnitionProcess(this);
+        }
+        setModified();
+        setUpdate();
+    }
+
+    @Override
+    public IFusionReactorCore getCore() {
+        return this;
+    }
+
+    @Override
+    public void onReactionStop(IFusionReactorCore core) {
+        this.core.onReactionStop(this);
+        setModified();
+        setUpdate();
+    }
+
+    @Override
+    public boolean breakMultiBlock(World world, int x, int y, int z) {
+        if (info.breakMultiBlock(world, x, y, z)) {
+            setModified();
+            setUpdate();
+            if (getInput() != null) {
+                IPlasmaContainer input = getInput();
+                setInput(null, ForgeDirection.UNKNOWN);
+                input.setOutput(null, ForgeDirection.UNKNOWN);
+            }
+            if (getOutput() != null) {
+                IPlasmaContainer output = getOutput();
+                setOutput(null, ForgeDirection.UNKNOWN);
+                output.setInput(null, ForgeDirection.UNKNOWN);
+            }
+            stopReaction();
+            core.getComponents().clear();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public MultiBlockInfo getInfo() {
+        return info;
+    }
+
+    @Override
+    public IPlasmaContainer getInput() {
+        return core.getInput();
     }
 
     @Override
@@ -176,87 +254,6 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
             return true;
         }
         return false;
-    }
-
-    @Override
-    public void beginIgnitionProcess(IFusionReactorCore core) {
-        this.core.beginIgnitionProcess(core);
-        for (IFusionReactorComponent component : this.core.getComponents()) {
-            component.beginIgnitionProcess(this);
-        }
-        setModified();
-        setUpdate();
-    }
-
-    @Override
-    public void endIgnitionProcess(IFusionReactorCore core) {
-        this.core.endIgnitionProcess(core);
-        for (IFusionReactorComponent component : this.core.getComponents()) {
-            component.endIgnitionProcess(this);
-        }
-        setModified();
-        setUpdate();
-    }
-
-    @Override
-    public IFusionReactorCore getCore() {
-        return this;
-    }
-
-    @Override
-    public void onReactionStop(IFusionReactorCore core) {
-        this.core.onReactionStop(this);
-        setModified();
-        setUpdate();
-    }
-
-    @Override
-    public boolean isValidMultiBlock() {
-        return info.isValidMultiBlock();
-    }
-
-    @Override
-    public boolean formMultiBlock(World world, int x, int y, int z) {
-        if (info.formMultiBlock(world, x, y, z)) {
-            setModified();
-            setUpdate();
-            beginIgnitionProcess(core);
-            core.contributeCoreEnergy(45000000);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean breakMultiBlock(World world, int x, int y, int z) {
-        if (info.breakMultiBlock(world, x, y, z)) {
-            setModified();
-            setUpdate();
-            if (getInput() != null) {
-                IPlasmaContainer input = getInput();
-                setInput(null, ForgeDirection.UNKNOWN);
-                input.setOutput(null, ForgeDirection.UNKNOWN);
-            }
-            if (getOutput() != null) {
-                IPlasmaContainer output = getOutput();
-                setOutput(null, ForgeDirection.UNKNOWN);
-                output.setInput(null, ForgeDirection.UNKNOWN);
-            }
-            stopReaction();
-            core.getComponents().clear();
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public MultiBlockInfo getInfo() {
-        return info;
-    }
-
-    @Override
-    public IPlasmaContainer getInput() {
-        return core.getInput();
     }
 
     @Override

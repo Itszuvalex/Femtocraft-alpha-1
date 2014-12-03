@@ -21,6 +21,7 @@
 
 package com.itszuvalex.femtocraft.power.tiles;
 
+import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
@@ -30,7 +31,6 @@ import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
-import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.utils.WorldLocation;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -42,26 +42,11 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
         TileEntityPowerConsumer
         implements IFusionReactorComponent, IMultiBlockComponent {
 
-    @Override
-    public PowerContainer defaultContainer() {
-        return new PowerContainer(EnumTechLevel.FEMTO, powerStorage);
-    }
-
-
     public static int powerStorage = 10000000;
     public static int warmupThreshold = 1000000;
     public static int powerTransferPerTick = 50000;
     public static int temperatureRating = 6000;
     public static int stability = 6000;
-
-    public boolean isIgniting() {
-        return igniting;
-    }
-
-    public boolean isSustaining() {
-        return sustaining;
-    }
-
     @Saveable(desc = true)
     private boolean igniting;
     @Saveable(desc = true)
@@ -73,7 +58,6 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
     private IFusionReactorCore core;
     @Saveable
     private WorldLocation coreLocation;
-
     public TileEntityFemtoStellaratorOpticalMaser() {
         super();
         info = new MultiBlockInfo();
@@ -81,6 +65,19 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
         sustaining = false;
         warmed = false;
         coreLocation = new WorldLocation();
+    }
+
+    @Override
+    public PowerContainer defaultContainer() {
+        return new PowerContainer(EnumTechLevel.FEMTO, powerStorage);
+    }
+
+    public boolean isIgniting() {
+        return igniting;
+    }
+
+    public boolean isSustaining() {
+        return sustaining;
     }
 
     @Override
@@ -117,6 +114,11 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
         }
     }
 
+    @Override
+    public boolean isValidMultiBlock() {
+        return info != null && info.isValidMultiBlock();
+    }
+
     private void addToCore() {
         core.addComponent(this);
         refreshFromCore();
@@ -125,11 +127,6 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
     private void refreshFromCore() {
         igniting = core != null && core.isIgniting();
         sustaining = core != null && core.isSelfSustaining();
-    }
-
-    @Override
-    public boolean isValidMultiBlock() {
-        return info != null && info.isValidMultiBlock();
     }
 
     @Override

@@ -22,13 +22,13 @@
 package com.itszuvalex.femtocraft.power.tiles;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelAddon;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelComponent;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelCore;
 import com.itszuvalex.femtocraft.api.power.PowerContainer;
-import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.network.FemtocraftPacketHandler;
 import com.itszuvalex.femtocraft.network.messages.MessagePhlegethonTunnelCore;
 import com.itszuvalex.femtocraft.sound.FemtocraftSoundManager;
@@ -68,17 +68,6 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
     }
 
     @Override
-    public boolean isActive() {
-        return active;
-    }
-
-    @Override
-    public float getPowerGenBase() {
-        return (float) (PowerGenBase / Math.log1p(getHeight()));
-    }
-
-
-    @Override
     public void handleDescriptionNBT(NBTTagCompound compound) {
         boolean wasActive = isActive();
         boolean wasMultiblock = isValidMultiBlock();
@@ -92,11 +81,13 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
     }
 
     @Override
-    public void invalidate() {
-        super.invalidate();
-        if (worldObj.isRemote && isActive()) {
-            Femtocraft.soundManager().stopSound(sound);
-        }
+    public boolean isActive() {
+        return active;
+    }
+
+    @Override
+    public float getPowerGenBase() {
+        return (float) (PowerGenBase / Math.log1p(getHeight()));
     }
 
     @Override
@@ -117,7 +108,6 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
     public int getHeight() {
         return yCoord;
     }
-
 
     @Override
     public boolean activate() {
@@ -159,34 +149,6 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
         return true;
     }
 
-    private void notifyTunnelOfChange(boolean status) {
-        for (int x = -1; x <= 1; x++) {
-            for (int y = -1; y <= 1; y++) {
-                for (int z = -1; z <= 1; z++) {
-                    TileEntity te = worldObj.getTileEntity(xCoord + x, yCoord + y, zCoord + z);
-                    if (te instanceof IPhlegethonTunnelComponent) {
-                        ((IPhlegethonTunnelComponent) te).onCoreActivityChange(status);
-                    }
-                }
-            }
-        }
-    }
-
-    @Override
-    public void onChunkUnload() {
-        if (worldObj.isRemote && isActive()) {
-            Femtocraft.soundManager().stopSound(sound);
-        }
-        super.onChunkUnload();
-    }
-
-    @Override
-    public void femtocraftServerUpdate() {
-        if (isActive()) {
-            charge((int) getTotalPowerGen());
-        }
-    }
-
     @Override
     public boolean isValidMultiBlock() {
         return info != null && info.isValidMultiBlock();
@@ -222,18 +184,24 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
     }
 
     @Override
+    public void invalidate() {
+        super.invalidate();
+        if (worldObj.isRemote && isActive()) {
+            Femtocraft.soundManager().stopSound(sound);
+        }
+    }
+
+    @Override
+    public void onChunkUnload() {
+        if (worldObj.isRemote && isActive()) {
+            Femtocraft.soundManager().stopSound(sound);
+        }
+        super.onChunkUnload();
+    }
+
+    @Override
     public boolean canAcceptPowerOfLevel(EnumTechLevel level) {
         return this.canAcceptPowerOfLevel(level, ForgeDirection.UNKNOWN);
-    }
-
-    @Override
-    public boolean canCharge(ForgeDirection from) {
-        return isValidMultiBlock() && super.canCharge(from);
-    }
-
-    @Override
-    public boolean canConnect(ForgeDirection from) {
-        return isValidMultiBlock() && super.canConnect(from);
     }
 
     @Override
@@ -257,15 +225,6 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
     }
 
     @Override
-    public int charge(ForgeDirection from, int amount) {
-        int charge = super.charge(from, amount);
-        if (charge > 0) {
-            setModified();
-        }
-        return charge;
-    }
-
-    @Override
     public int charge(int amount) {
         return this.charge(ForgeDirection.UNKNOWN, amount);
     }
@@ -277,6 +236,32 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
             setModified();
         }
         return result;
+    }
+
+    @Override
+    public int charge(ForgeDirection from, int amount) {
+        int charge = super.charge(from, amount);
+        if (charge > 0) {
+            setModified();
+        }
+        return charge;
+    }
+
+    @Override
+    public void femtocraftServerUpdate() {
+        if (isActive()) {
+            charge((int) getTotalPowerGen());
+        }
+    }
+
+    @Override
+    public boolean canCharge(ForgeDirection from) {
+        return isValidMultiBlock() && super.canCharge(from);
+    }
+
+    @Override
+    public boolean canConnect(ForgeDirection from) {
+        return isValidMultiBlock() && super.canConnect(from);
     }
 
     @Override
@@ -353,12 +338,12 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
         FemtocraftPacketHandler.INSTANCE().sendToServer(getMessage(true));
     }
 
-    public void onDeactivateClick() {
-        FemtocraftPacketHandler.INSTANCE().sendToServer(getMessage(false));
-    }
-
     private MessagePhlegethonTunnelCore getMessage(boolean active) {
         return new MessagePhlegethonTunnelCore(xCoord, yCoord, zCoord, worldObj.provider.dimensionId, active);
+    }
+
+    public void onDeactivateClick() {
+        FemtocraftPacketHandler.INSTANCE().sendToServer(getMessage(false));
     }
 
     public void handlePacket(boolean active) {
@@ -366,6 +351,19 @@ public class TileEntityPhlegethonTunnelCore extends TileEntityPowerProducer impl
             activate();
         } else {
             deactivate();
+        }
+    }
+
+    private void notifyTunnelOfChange(boolean status) {
+        for (int x = -1; x <= 1; x++) {
+            for (int y = -1; y <= 1; y++) {
+                for (int z = -1; z <= 1; z++) {
+                    TileEntity te = worldObj.getTileEntity(xCoord + x, yCoord + y, zCoord + z);
+                    if (te instanceof IPhlegethonTunnelComponent) {
+                        ((IPhlegethonTunnelComponent) te).onCoreActivityChange(status);
+                    }
+                }
+            }
         }
     }
 }

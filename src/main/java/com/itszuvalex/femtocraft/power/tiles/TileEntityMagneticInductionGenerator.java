@@ -49,6 +49,19 @@ public class TileEntityMagneticInductionGenerator extends TileEntityPowerProduce
     private Random random = new Random();
 
     @Override
+    public void femtocraftServerUpdate() {
+        super.femtocraftServerUpdate();
+        for (int i = 0; i < 6; ++i) {
+            int val = magStrengthOfNeighborForDir(i);
+            int old = neighborMagnetStrength[i];
+            if (val != old) {
+                charge(ForgeDirection.UNKNOWN, (int) Math.abs((val - old) * MAG_DIFFERENCE_POWER_MULTIPLIER));
+                neighborMagnetStrength[i] = val;
+            }
+        }
+    }
+
+    @Override
     public void updateEntity() {
         super.updateEntity();
         if (worldObj.isRemote) {
@@ -67,6 +80,12 @@ public class TileEntityMagneticInductionGenerator extends TileEntityPowerProduce
                 }
             }
         }
+    }
+
+    private int magStrengthOfNeighborForDir(int i) {
+        ForgeDirection dir = ForgeDirection.getOrientation(i);
+        Block block = worldObj.getBlock(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+        return MagnetRegistry.isMagnet(block) ? MagnetRegistry.getMagnetStrength(block) : 0;
     }
 
     @SideOnly(Side.CLIENT)
@@ -99,26 +118,6 @@ public class TileEntityMagneticInductionGenerator extends TileEntityPowerProduce
                 y + yOffset,
                 z + zOffset
         );
-    }
-
-
-    @Override
-    public void femtocraftServerUpdate() {
-        super.femtocraftServerUpdate();
-        for (int i = 0; i < 6; ++i) {
-            int val = magStrengthOfNeighborForDir(i);
-            int old = neighborMagnetStrength[i];
-            if (val != old) {
-                charge(ForgeDirection.UNKNOWN, (int) Math.abs((val - old) * MAG_DIFFERENCE_POWER_MULTIPLIER));
-                neighborMagnetStrength[i] = val;
-            }
-        }
-    }
-
-    private int magStrengthOfNeighborForDir(int i) {
-        ForgeDirection dir = ForgeDirection.getOrientation(i);
-        Block block = worldObj.getBlock(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-        return MagnetRegistry.isMagnet(block) ? MagnetRegistry.getMagnetStrength(block) : 0;
     }
 
     @Override

@@ -34,11 +34,6 @@ trait Inventory extends TileEntityBase with ISidedInventory {
 
   override def getInventoryStackLimit = inventory.getInventoryStackLimit
 
-  override def markDirty() = {
-    inventory.markDirty()
-    setModified()
-  }
-
   override def isItemValidForSlot(slot: Int, item: ItemStack) = inventory.isItemValidForSlot(slot, item)
 
   override def getStackInSlotOnClosing(slot: Int): ItemStack = inventory.getStackInSlotOnClosing(slot)
@@ -48,6 +43,11 @@ trait Inventory extends TileEntityBase with ISidedInventory {
   override def setInventorySlotContents(slot: Int, item: ItemStack) = {
     inventory.setInventorySlotContents(slot, item)
     markDirty()
+  }
+
+  override def markDirty() = {
+    inventory.markDirty()
+    setModified()
   }
 
   override def isUseableByPlayer(player: EntityPlayer) = canPlayerUse(player) && inventory.isUseableByPlayer(player)

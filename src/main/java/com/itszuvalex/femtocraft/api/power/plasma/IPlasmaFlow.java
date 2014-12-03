@@ -29,16 +29,13 @@ import net.minecraft.world.World;
  * <p/>
  * The Evil propagates.
  * <p/>
- * PlasmaFlows are responsible for moving themselves down the container
- * circuit.  This deviates from normal management where the container moves
- * what it contains.  This is more to simulate how the plasma containers
- * exist simply to guide and contain the immense energies being released.
- * They cannot hope to do much more than that.
+ * PlasmaFlows are responsible for moving themselves down the container circuit.  This deviates from normal management
+ * where the container moves what it contains.  This is more to simulate how the plasma containers exist simply to guide
+ * and contain the immense energies being released. They cannot hope to do much more than that.
  * <p/>
- * There is no class registry for implementors of IPlasmaFlow.  This is due
- * to laziness on my part.  If someone is interested in creating custom
- * implementers of IPlasmaFlow and wants them usable in reactors other than
- * those they themselves write, shoot me an email and I'll whip something up.
+ * There is no class registry for implementors of IPlasmaFlow.  This is due to laziness on my part.  If someone is
+ * interested in creating custom implementers of IPlasmaFlow and wants them usable in reactors other than those they
+ * themselves write, shoot me an email and I'll whip something up.
  */
 public interface IPlasmaFlow {
     /**
@@ -64,32 +61,27 @@ public interface IPlasmaFlow {
     int getFrequency();
 
     /**
-     * @return Temperature of the flow.  Bad things happen if this exceeds
-     * the temperature rating of the container.
+     * @return Temperature of the flow.  Bad things happen if this exceeds the temperature rating of the container.
      */
     long getTemperature();
 
     /**
-     * @param temperature To set temperature of the flow to.  For use by
-     *                    other flows / Plasma prewarmers / Cores
+     * @param temperature To set temperature of the flow to.  For use by other flows / Plasma prewarmers / Cores
      */
     void setTemperature(long temperature);
 
     /**
-     * @return Volatility of the flow.  Bad things happen if this exceeds the
-     * stability rating of the container.
+     * @return Volatility of the flow.  Bad things happen if this exceeds the stability rating of the container.
      */
     int getVolatility();
 
     /**
-     * @return True if ths flow can be recharged by returning to the core.
-     * If not, it will be vented.
+     * @return True if ths flow can be recharged by returning to the core. If not, it will be vented.
      */
     boolean isRechargeable();
 
     /**
-     * @return True if flow is unstable.  Unstable flows always return higher
-     * volatility.
+     * @return True if flow is unstable.  Unstable flows always return higher volatility.
      */
     boolean isUnstable();
 
@@ -117,38 +109,36 @@ public interface IPlasmaFlow {
 
     /**
      * @param container Container containing this flow.
-     * @return Volatility event that occurs #IPlasmaContainer addFlow returns
-     * false.  Can return NULL if plasma is particularly stable.
+     * @return Volatility event that occurs #IPlasmaContainer addFlow returns false.  Can return NULL if plasma is
+     * particularly stable.
      */
     IVolatilityEvent onPlasmaOverflow(IPlasmaContainer container);
 
     /**
      * @param container Container containing this flow.
-     * @return Volatility event that occurs when the Flow fails to move down
-     * the circuit do to no #IPlasmaContainer getOutput returning null;
+     * @return Volatility event that occurs when the Flow fails to move down the circuit do to no #IPlasmaContainer
+     * getOutput returning null;
      */
     IVolatilityEvent onIncompleteCircuit(IPlasmaContainer container);
 
     /**
      * @param container Container containing this flow.
-     * @return Volatility event that occurs when the flow's temperature
-     * exceeds the temperature rating of its container.  This likely
-     * increases the temperature of all flows in the container.
+     * @return Volatility event that occurs when the flow's temperature exceeds the temperature rating of its container.
+     * This likely increases the temperature of all flows in the container.
      */
     IVolatilityEvent onOverheat(IPlasmaContainer container);
 
     /**
      * @param container Container containing this flow.
-     * @return The exact means by which flows are recharged is unknown.
-     * However, it's a volatile act which could result in consequences.  This
-     * mainly returns NULL, but could potentially return something nasty.
+     * @return The exact means by which flows are recharged is unknown. However, it's a volatile act which could result
+     * in consequences.  This mainly returns NULL, but could potentially return something nasty.
      */
     IVolatilityEvent onRecharge(IPlasmaContainer container);
 
     /**
      * @param container Container containing this flow.
-     * @return Volatility event that occurs when this flow's volatility is
-     * greater than its container's stability.  This could be anything.
+     * @return Volatility event that occurs when this flow's volatility is greater than its container's stability.  This
+     * could be anything.
      */
     IVolatilityEvent onSpontaneousEvent(IPlasmaContainer container);
 }

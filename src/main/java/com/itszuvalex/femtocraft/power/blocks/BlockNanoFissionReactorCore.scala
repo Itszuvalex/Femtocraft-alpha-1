@@ -49,7 +49,7 @@ class BlockNanoFissionReactorCore extends TileContainer(Material.iron) with Drop
       case te: TileEntityNanoFissionReactorCore =>
         val info = te.getInfo
         MultiBlockNanoFissionReactor.instance.breakMultiBlock(par1World, info.x, info.y, info.z)
-      case _ =>
+      case _                                    =>
     }
     super.breakBlock(par1World, par2, par3, par4, par5, par6)
   }

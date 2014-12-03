@@ -23,5 +23,5 @@ package com.itszuvalex.femtocraft
 import net.minecraft.creativetab.CreativeTabs
 
 class FemtocraftCreativeTab(label: String) extends CreativeTabs(label) {
-   override def getTabIconItem = Femtocraft.itemCubit
- }
+  override def getTabIconItem = Femtocraft.itemCubit
+}

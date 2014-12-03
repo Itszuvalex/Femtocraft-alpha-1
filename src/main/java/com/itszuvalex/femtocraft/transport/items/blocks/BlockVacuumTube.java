@@ -71,11 +71,6 @@ public class BlockVacuumTube extends TileContainer {
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world, int metadata) {
-        return new TileEntityVacuumTube();
-    }
-
-    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4,
                            Block par5, int par6) {
 
@@ -89,6 +84,23 @@ public class BlockVacuumTube extends TileContainer {
         }
 
         super.breakBlock(par1World, par2, par3, par4, par5, par6);
+    }
+
+    @Override
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
+                                EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
+        // tiles tile = par1World.getBlockTileEntity(par2, par3, par4);
+        // if(tile != null)
+        // {
+        // if(tile instanceof TileEntityVacuumTube)
+        // {
+        // TileEntityVacuumTube tube = (TileEntityVacuumTube)tile;
+        //
+        // tube.searchForMissingConnection();
+        // }
+        // }
+        super.onBlockPlacedBy(par1World, par2, par3, par4,
+                par5EntityLivingBase, par6ItemStack);
     }
 
     @Override
@@ -115,20 +127,8 @@ public class BlockVacuumTube extends TileContainer {
     }
 
     @Override
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
-                                EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
-        // tiles tile = par1World.getBlockTileEntity(par2, par3, par4);
-        // if(tile != null)
-        // {
-        // if(tile instanceof TileEntityVacuumTube)
-        // {
-        // TileEntityVacuumTube tube = (TileEntityVacuumTube)tile;
-        //
-        // tube.searchForMissingConnection();
-        // }
-        // }
-        super.onBlockPlacedBy(par1World, par2, par3, par4,
-                par5EntityLivingBase, par6ItemStack);
+    public TileEntity createNewTileEntity(World world, int metadata) {
+        return new TileEntityVacuumTube();
     }
 
     @Override
@@ -213,6 +213,15 @@ public class BlockVacuumTube extends TileContainer {
     }
 
     @Override
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
+                                                         int x, int y, int z) {
+        return AxisAlignedBB.getBoundingBox((double) x + 4.d / 16.d,
+                (double) y + 4.d / 16.d, (double) z + 4.d / 16.d,
+                (double) x + 12.d / 16.d, (double) y + 12.d / 16.d,
+                (double) z + 12.d / 16.d);
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int x,
                                                         int y, int z) {
@@ -236,15 +245,6 @@ public class BlockVacuumTube extends TileContainer {
                 y, z);
 
         return box.func_111270_a(inputBB).func_111270_a(outputBB);
-    }
-
-    @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
-                                                         int x, int y, int z) {
-        return AxisAlignedBB.getBoundingBox((double) x + 4.d / 16.d,
-                (double) y + 4.d / 16.d, (double) z + 4.d / 16.d,
-                (double) x + 12.d / 16.d, (double) y + 12.d / 16.d,
-                (double) z + 12.d / 16.d);
     }
 
     @Override

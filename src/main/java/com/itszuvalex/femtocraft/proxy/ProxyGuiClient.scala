@@ -39,7 +39,7 @@ class ProxyGuiClient extends ProxyGuiCommon {
       case (FemtocraftGuiConstants.NanoCubeGuiID, te: TileEntityNanoCubePort)                                         => new GuiNanoCube(te)
       case (FemtocraftGuiConstants.FemtoCubeGuiID, te: TileEntityFemtoCubePort)                                       => new GuiFemtoCube(te)
       case (FemtocraftGuiConstants.PhlegethonTunnelGuiID, te: TileEntityPhlegethonTunnelCore)                         => new GuiPhlegethonTunnel(player, player.inventory, te)
-      case (_, _)                                                                                                   => null
+      case (_, _)                                                                                                     => null
     }
   }
 }

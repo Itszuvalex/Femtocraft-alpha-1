@@ -121,7 +121,8 @@
 //    protected int yDisplay;
 //    @Configurable(comment = "True if special background in Research Tree, false if normal")
 //    protected boolean isKeystone;
-//    @Configurable(comment = "Null for free research, ItemStack[9] (can contain nulls) as required items to put into " +
+//    @Configurable(comment = "Null for free research, ItemStack[9] (can contain nulls) as required items to put into
+// " +
 //                            "research console.")
 //    protected ItemStack[] researchMaterials;
 //

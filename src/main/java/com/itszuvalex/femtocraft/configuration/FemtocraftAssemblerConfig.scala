@@ -63,8 +63,6 @@ class FemtocraftAssemblerConfig(private val config: Configuration) {
     recipe
   }
 
-  def loadAssemblerRecipe(recipe: AssemblerRecipe): AssemblerRecipe = loadAssemblerRecipe(recipe, recipe.output.getUnlocalizedName)
-
   def isEnabled(recipe: AssemblerRecipe): Boolean = {
     try {
       val result = recipe != null && config.get(FemtocraftAssemblerConfig.ENABLE_SECTION_KEY, FemtocraftConfigHelper.escapeCategorySplitter(recipe.output.getItem.getUnlocalizedName(recipe.output)), true).getBoolean(true)
@@ -77,4 +75,6 @@ class FemtocraftAssemblerConfig(private val config: Configuration) {
       case e: Exception => false
     }
   }
+
+  def loadAssemblerRecipe(recipe: AssemblerRecipe): AssemblerRecipe = loadAssemblerRecipe(recipe, recipe.output.getUnlocalizedName)
 }

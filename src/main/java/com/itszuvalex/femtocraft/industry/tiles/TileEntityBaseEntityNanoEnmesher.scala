@@ -76,17 +76,19 @@ import net.minecraftforge.common.util.ForgeDirection
 
   override def canInsertItem(i: Int, itemstack: ItemStack, j: Int) = i != getOutputSlotIndex
 
-  protected def getTickMultiplier = TICKS_TO_COOK_MULTIPLIER
+  override def isItemValidForSlot(i: Int, itemstack: ItemStack) = i != getOutputSlotIndex
 
-  protected def getOutputSlotIndex = outputSlot
+  def getProgress = cookTime
 
-  protected def getPowerToCook = POWER_TO_COOK
+  def setProgress(progress: Int) {
+    cookTime = progress
+  }
 
-  protected def getTechLevel = RECIPE_TECH_LEVEL
+  def getProgressMax = ticksToCook
 
-  protected def getConfigurators = util.Arrays.copyOfRange(inventory.getInventory, inputSlot + 1, getOutputSlotIndex)
-
-  override def isWorking = meshStack != null
+  def setProgressMax(progressMax: Int) {
+    ticksToCook = progressMax
+  }
 
   override protected def canStartWork: Boolean = {
     if (isWorking) {
@@ -120,7 +122,9 @@ import net.minecraftforge.common.util.ForgeDirection
     true
   }
 
-  override def isItemValidForSlot(i: Int, itemstack: ItemStack) = i != getOutputSlotIndex
+  protected def getTechLevel = RECIPE_TECH_LEVEL
+
+  override def isWorking = meshStack != null
 
   override protected def startWork() {
     val dr: DimensionalRecipe = Femtocraft.recipeManager.dimensionalRecipes.getRecipe(inventory.getStackInSlot(inputSlot), getConfigurators)
@@ -136,6 +140,14 @@ import net.minecraftforge.common.util.ForgeDirection
     cookTime = 0
     markDirty()
   }
+
+  protected def getTickMultiplier = TICKS_TO_COOK_MULTIPLIER
+
+  protected def getPowerToCook = POWER_TO_COOK
+
+  protected def getConfigurators = util.Arrays.copyOfRange(inventory.getInventory, inputSlot + 1, getOutputSlotIndex)
+
+  protected def getOutputSlotIndex = outputSlot
 
   override protected def continueWork() {
     cookTime += 1
@@ -158,17 +170,5 @@ import net.minecraftforge.common.util.ForgeDirection
     ticksToCook = 0
     meshStack = null
     meshConfigStacks = null
-  }
-
-  def getProgress = cookTime
-
-  def getProgressMax = ticksToCook
-
-  def setProgress(progress: Int) {
-    cookTime = progress
-  }
-
-  def setProgressMax(progressMax: Int) {
-    ticksToCook = progressMax
   }
 }

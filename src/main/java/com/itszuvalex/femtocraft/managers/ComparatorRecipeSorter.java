@@ -41,9 +41,9 @@ public class ComparatorRecipeSorter implements Comparator {
 
     public int compareRecipes(IRecipe par1IRecipe, IRecipe par2IRecipe) {
         return par1IRecipe instanceof ShapelessRecipes
-                && par2IRecipe instanceof ShapedRecipes ? 1
+               && par2IRecipe instanceof ShapedRecipes ? 1
                 : (par2IRecipe instanceof ShapelessRecipes
-                && par1IRecipe instanceof ShapedRecipes ? -1
+                   && par1IRecipe instanceof ShapedRecipes ? -1
                 : (par2IRecipe.getRecipeSize() < par1IRecipe
                 .getRecipeSize() ? -1
                 : (par2IRecipe.getRecipeSize() > par1IRecipe

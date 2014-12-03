@@ -52,7 +52,7 @@ class BlockNanoFissionReactorHousing extends TileContainer(Material.iron) {
       val info: MultiBlockInfo = frame.getInfo
       val dir: ForgeDirection = ForgeDirection.getOrientation(par5)
       iconForSide(info, dir, par2, par3, par4)
-    case _ => super.getIcon(par1iBlockAccess, par2, par3, par4, par5)
+    case _                                                                     => super.getIcon(par1iBlockAccess, par2, par3, par4, par5)
   }
 
   private def iconForSide(info: MultiBlockInfo, dir: ForgeDirection, x: Int, y: Int, z: Int): IIcon = {
@@ -60,13 +60,13 @@ class BlockNanoFissionReactorHousing extends TileContainer(Material.iron) {
     val ydif = y - info.y
     val zdif = z - info.z
     dir match {
-      case UP => iconFromGrid(xdif, -zdif)
-      case DOWN => iconFromGrid(xdif, -zdif)
+      case UP    => iconFromGrid(xdif, -zdif)
+      case DOWN  => iconFromGrid(xdif, -zdif)
       case NORTH => iconFromGrid(-xdif, ydif)
       case SOUTH => iconFromGrid(xdif, ydif)
-      case EAST => iconFromGrid(-zdif, ydif)
-      case WEST => iconFromGrid(zdif, ydif)
-      case _ => blockIcon
+      case EAST  => iconFromGrid(-zdif, ydif)
+      case WEST  => iconFromGrid(zdif, ydif)
+      case _     => blockIcon
     }
   }
 
@@ -102,7 +102,7 @@ class BlockNanoFissionReactorHousing extends TileContainer(Material.iron) {
       case te: TileEntityNanoFissionReactorHousing =>
         val info = te.getInfo
         MultiBlockNanoFissionReactor.instance.breakMultiBlock(par1World, info.x, info.y, info.z)
-      case _ =>
+      case _                                       =>
     }
     super.breakBlock(par1World, par2, par3, par4, par5, par6)
   }

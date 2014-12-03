@@ -33,9 +33,9 @@ import java.util.List;
  * Created by Christopher Harris (Itszuvalex) on 9/17/14.
  */
 public class GuiTechnologyTemporalRenderer implements ITechnologyElementRenderer {
-    private final GuiTechnology gui;
     public final TemporalRecipe recipe;
     public final String text;
+    private final GuiTechnology gui;
     private int y = 0;
 
     public GuiTechnologyTemporalRenderer(GuiTechnology gui, ItemStack output, String text) {
@@ -45,7 +45,8 @@ public class GuiTechnologyTemporalRenderer implements ITechnologyElementRenderer
     }
 
     @Override
-    public void render(int x, int y, int width, int height, int displayPage, int mouseX, int mouseY, List tooltip, boolean isResearched) {
+    public void render(int x, int y, int width, int height, int displayPage, int mouseX, int mouseY, List tooltip,
+                       boolean isResearched) {
         gui.renderTemporalRecipeWithInfo(x, y + getY(), width, height, recipe, mouseX, mouseY, tooltip, text);
     }
 
@@ -56,15 +57,18 @@ public class GuiTechnologyTemporalRenderer implements ITechnologyElementRenderer
 
     @Override
     public int getHeight() {
-        return Math.max(recipe == null ? 0 : recipe.techLevel == EnumTechLevel.NANO ? 18 * 2 + 2 : recipe.techLevel == EnumTechLevel.FEMTO ? 18 * 3 + 2 : 0, Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT * Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(text, getWidth()).size());
+        return Math.max(recipe == null ? 0 : recipe.techLevel == EnumTechLevel.NANO ?
+                18 * 2 + 2 : recipe.techLevel == EnumTechLevel.FEMTO ? 18 * 3 + 2 : 0,
+                Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT *
+                Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(text, getWidth()).size());
+    }
+
+    public int getY() {
+        return y;
     }
 
     @Override
     public void setY(int y) {
         this.y = y;
-    }
-
-    public int getY() {
-        return y;
     }
 }

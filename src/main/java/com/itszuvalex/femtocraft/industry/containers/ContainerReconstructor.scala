@@ -34,14 +34,14 @@ import net.minecraft.util.IIcon
 import scala.collection.JavaConversions._
 
 class ContainerReconstructor[T <: TileEntityBaseEntityMicroReconstructor](player: EntityPlayer, par1InventoryPlayer: InventoryPlayer, inventory: T) extends ContainerInv[T](player, inventory, 10, 9) {
-  private var lastCookTime = 0
-  private var lastPower    = 0
-  private var lastMass     = 0
-
-  addSlotToContainer(new OutputSlot(inventory, 9, 122, 18))
   val schematic: Slot = new Slot(inventory, 10, 93, 54) {
     override def isItemValid(par1ItemStack: ItemStack) = par1ItemStack.getItem.isInstanceOf[IAssemblerSchematic]
   }
+  private var lastCookTime = 0
+  private var lastPower    = 0
+
+  addSlotToContainer(new OutputSlot(inventory, 9, 122, 18))
+  private var lastMass     = 0
   schematic.setBackgroundIcon(ItemAssemblySchematic.placeholderIcon)
   addSlotToContainer(schematic)
   for (y <- 0 until 3) {

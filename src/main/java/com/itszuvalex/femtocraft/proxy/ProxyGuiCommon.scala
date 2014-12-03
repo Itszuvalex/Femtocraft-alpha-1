@@ -39,7 +39,7 @@ class ProxyGuiCommon extends IGuiHandler {
       case (FemtocraftGuiConstants.NanoMagnetohydrodynamicGeneratorGuiID, te: TileEntityMagnetohydrodynamicGenerator) => new ContainerMagnetoHydrodynamicGenerator(te)
       case (FemtocraftGuiConstants.FemtoCubeGuiID, te: TileEntityFemtoCubePort)                                       => new ContainerFemtoCube(te)
       case (FemtocraftGuiConstants.PhlegethonTunnelGuiID, te: TileEntityPhlegethonTunnelCore)                         => new ContainerPhlegethonTunnel(player, player.inventory, te)
-      case (_, _)                                                                                                   => null
+      case (_, _)                                                                                                     => null
     }
   }
 

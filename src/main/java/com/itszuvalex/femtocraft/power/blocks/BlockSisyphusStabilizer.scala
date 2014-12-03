@@ -35,8 +35,8 @@ import net.minecraft.world.World
  * Created by Christopher Harris (Itszuvalex) on 7/12/14.
  */
 class BlockSisyphusStabilizer extends TileContainer(Material.iron) {
-    setCreativeTab(Femtocraft.femtocraftTab)
-    setBlockName("BlockSisyphusStabilizer")
+  setCreativeTab(Femtocraft.femtocraftTab)
+  setBlockName("BlockSisyphusStabilizer")
 
   @SideOnly(Side.CLIENT) override def registerBlockIcons(par1IconRegister: IIconRegister) {
     blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "BlockSisyphusStabilizer")
@@ -50,11 +50,11 @@ class BlockSisyphusStabilizer extends TileContainer(Material.iron) {
   override def createTileEntity(world: World, metadata: Int) = new TileEntitySisyphusStabilizer
 
   override def breakBlock(par1World: World, par2: Int, par3: Int, par4: Int, par5: Block, par6: Int) {
-      par1World.getTileEntity(par2, par3, par4) match {
+    par1World.getTileEntity(par2, par3, par4) match {
       case stabilizer: TileEntitySisyphusStabilizer =>
         val info: MultiBlockInfo = stabilizer.getInfo
         MultiBlockPhlegethonTunnel.instance.breakMultiBlock(par1World, info.x, info.y, info.z)
-      case _ =>
+      case _                                        =>
     }
     super.breakBlock(par1World, par2, par3, par4, par5, par6)
   }

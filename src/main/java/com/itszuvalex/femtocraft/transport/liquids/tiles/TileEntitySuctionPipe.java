@@ -22,9 +22,9 @@
 package com.itszuvalex.femtocraft.transport.liquids.tiles;
 
 import com.itszuvalex.femtocraft.api.IInterfaceDevice;
+import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.transport.ISuctionPipe;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
-import com.itszuvalex.femtocraft.api.core.Saveable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -137,65 +137,6 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
     @Override
     public FluidTankInfo[] getTankInfo(ForgeDirection from) {
         return new FluidTankInfo[]{tank.getInfo()};
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-        super.readFromNBT(par1nbtTagCompound);
-        tank.readFromNBT(par1nbtTagCompound);
-        if (tank.getFluid() != null) {
-            renderFluid = tank.getFluid();
-        }
-        output = par1nbtTagCompound.getBoolean("output");
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-        super.writeToNBT(par1nbtTagCompound);
-        tank.writeToNBT(par1nbtTagCompound);
-        par1nbtTagCompound.setBoolean("output", output);
-    }
-
-    @Override
-    public void updateEntity() {
-        Arrays.fill(neighbors, null);
-        checkConnections(neighbors);
-
-        if (renderFluid != null && tank.getFluid() == null) {
-            if (renderTick++ >= renderLength) {
-                renderFluid = null;
-                setRenderUpdate();
-            }
-        } else {
-            renderTick = 0;
-        }
-
-        super.updateEntity();
-    }
-
-    @Override
-    public void femtocraftServerUpdate() {
-        super.femtocraftServerUpdate();
-
-        boolean pre = renderFluid != null && renderFluid.amount > 0;
-        renderFluid = null;
-
-        int[] pressures = new int[6];
-        Arrays.fill(pressures, 0);
-
-        calculatePressure(pressures, neighbors);
-        distributeLiquid(pressures, neighbors);
-        if (!output) {
-            requestLiquid(pressures, neighbors);
-        }
-
-        boolean post = renderFluid != null && renderFluid.amount > 0;
-
-        // Pass description packet to clients - fluid has either emptied, or
-        // filled
-        if (!blackout && (pre != post)) {
-            setUpdate();
-        }
     }
 
     private void calculatePressure(int[] pressures, IFluidHandler[] neighbors) {
@@ -404,24 +345,6 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
     }
 
     @Override
-    public void saveToDescriptionCompound(NBTTagCompound compound) {
-        super.saveToDescriptionCompound(compound);
-        // NBTTagCompound fluid = new NBTTagCompound();
-        // if (tank.getFluid() != null) {
-        // tank.getFluid().writeToNBT(fluid);
-        // compound.setTag("fluid", fluid);
-        // }
-
-        NBTTagCompound renderfluid = new NBTTagCompound();
-        if (renderFluid != null) {
-            renderFluid.writeToNBT(renderfluid);
-            compound.setTag("renderfluid", renderfluid);
-        }
-
-        // compound.setBoolean("output", output);
-    }
-
-    @Override
     public void handleDescriptionNBT(NBTTagCompound compound) {
         super.handleDescriptionNBT(compound);
 
@@ -465,6 +388,83 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
             }
         }
         return super.onSideActivate(par5EntityPlayer, side);
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
+        super.writeToNBT(par1nbtTagCompound);
+        tank.writeToNBT(par1nbtTagCompound);
+        par1nbtTagCompound.setBoolean("output", output);
+    }
+
+    @Override
+    public void femtocraftServerUpdate() {
+        super.femtocraftServerUpdate();
+
+        boolean pre = renderFluid != null && renderFluid.amount > 0;
+        renderFluid = null;
+
+        int[] pressures = new int[6];
+        Arrays.fill(pressures, 0);
+
+        calculatePressure(pressures, neighbors);
+        distributeLiquid(pressures, neighbors);
+        if (!output) {
+            requestLiquid(pressures, neighbors);
+        }
+
+        boolean post = renderFluid != null && renderFluid.amount > 0;
+
+        // Pass description packet to clients - fluid has either emptied, or
+        // filled
+        if (!blackout && (pre != post)) {
+            setUpdate();
+        }
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
+        super.readFromNBT(par1nbtTagCompound);
+        tank.readFromNBT(par1nbtTagCompound);
+        if (tank.getFluid() != null) {
+            renderFluid = tank.getFluid();
+        }
+        output = par1nbtTagCompound.getBoolean("output");
+    }
+
+    @Override
+    public void updateEntity() {
+        Arrays.fill(neighbors, null);
+        checkConnections(neighbors);
+
+        if (renderFluid != null && tank.getFluid() == null) {
+            if (renderTick++ >= renderLength) {
+                renderFluid = null;
+                setRenderUpdate();
+            }
+        } else {
+            renderTick = 0;
+        }
+
+        super.updateEntity();
+    }
+
+    @Override
+    public void saveToDescriptionCompound(NBTTagCompound compound) {
+        super.saveToDescriptionCompound(compound);
+        // NBTTagCompound fluid = new NBTTagCompound();
+        // if (tank.getFluid() != null) {
+        // tank.getFluid().writeToNBT(fluid);
+        // compound.setTag("fluid", fluid);
+        // }
+
+        NBTTagCompound renderfluid = new NBTTagCompound();
+        if (renderFluid != null) {
+            renderFluid.writeToNBT(renderfluid);
+            compound.setTag("renderfluid", renderfluid);
+        }
+
+        // compound.setBoolean("output", output);
     }
 
     private void checkConnections(IFluidHandler[] neighbors) {

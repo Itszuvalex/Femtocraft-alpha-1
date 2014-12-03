@@ -28,17 +28,14 @@ import java.util.Collection;
  * <p/>
  * The Evil starts here.
  * <p/>
- * The Fusion Reactor Core is the process by which Femtocraft Femto tier
- * power is generated.
+ * The Fusion Reactor Core is the process by which Femtocraft Femto tier power is generated.
  * <p/>
- * Power is drained by the reactor when the ignition process starts.  At this
- * point, there are #ignitionProcessWindow ticks remaining for the core to
- * acquire #ignitionProcessThreshold power.  At this point,
- * the reactor is ignited and it is self-sustaining.
+ * Power is drained by the reactor when the ignition process starts.  At this point, there are #ignitionProcessWindow
+ * ticks remaining for the core to acquire #ignitionProcessThreshold power.  At this point, the reactor is ignited and
+ * it is self-sustaining.
  * <p/>
- * The core then generates plasma flows, likely into internal storage.  These
- * flows complete the circuit and likely end up back in the core.  If they
- * do, then the core can recharge these flows in a positive feedback loop.
+ * The core then generates plasma flows, likely into internal storage.  These flows complete the circuit and likely end
+ * up back in the core.  If they do, then the core can recharge these flows in a positive feedback loop.
  */
 public interface IFusionReactorCore extends IFusionReactorComponent {
 

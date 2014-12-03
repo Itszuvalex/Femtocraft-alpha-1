@@ -39,7 +39,7 @@ class BlockResearchComputer extends TileContainer(Material.iron) {
 
   @SideOnly(Side.CLIENT) override def getIcon(par1: Int, par2: Int) = ForgeDirection.getOrientation(par1) match {
     case UP => top
-    case _ => blockIcon
+    case _  => blockIcon
   }
 
   @SideOnly(Side.CLIENT) override def registerBlockIcons(par1IconRegister: IIconRegister) {

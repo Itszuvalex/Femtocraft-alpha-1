@@ -32,9 +32,9 @@ import java.util.List;
  * Created by Christopher Harris (Itszuvalex) on 9/17/14.
  */
 public class GuiTechnologyCraftingRenderer implements ITechnologyElementRenderer {
-    private final GuiTechnology gui;
     public final AssemblerRecipe recipe;
     public final String text;
+    private final GuiTechnology gui;
     private int y = 0;
 
     public GuiTechnologyCraftingRenderer(GuiTechnology gui, ItemStack output, String text) {
@@ -44,8 +44,10 @@ public class GuiTechnologyCraftingRenderer implements ITechnologyElementRenderer
     }
 
     @Override
-    public void render(int x, int y, int width, int height, int displayPage, int mouseX, int mouseY, List tooltip, boolean isResearched) {
-        gui.renderCraftingRecipeWithInfo(x, y + getY(), width, height, recipe.input, recipe.output, mouseX, mouseY, tooltip, text);
+    public void render(int x, int y, int width, int height, int displayPage, int mouseX, int mouseY, List tooltip,
+                       boolean isResearched) {
+        gui.renderCraftingRecipeWithInfo(x,
+                y + getY(), width, height, recipe.input, recipe.output, mouseX, mouseY, tooltip, text);
     }
 
     @Override
@@ -55,15 +57,17 @@ public class GuiTechnologyCraftingRenderer implements ITechnologyElementRenderer
 
     @Override
     public int getHeight() {
-        return Math.max(18 * 3 + 2, Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT * Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(text, getWidth()).size());
+        return Math.max(
+                18 * 3 + 2, Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT *
+                            Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(text, getWidth()).size());
+    }
+
+    public int getY() {
+        return y;
     }
 
     @Override
     public void setY(int y) {
         this.y = y;
-    }
-
-    public int getY() {
-        return y;
     }
 }

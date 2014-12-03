@@ -33,15 +33,14 @@ public class TechnologyLineRenderer implements ITechnologyElementRenderer {
     public final String line;
     private int y;
 
-    public TechnologyLineRenderer(String line, int y) {
-        this.line = line;
-        this.y = y;
-    }
-
     public TechnologyLineRenderer(String line) {
         this(line, 0);
     }
 
+    public TechnologyLineRenderer(String line, int y) {
+        this.line = line;
+        this.y = y;
+    }
 
     @Override
     public void render(int x, int y, int width, int height, int displayPage, int mouseX, int mouseY, List tooltip,

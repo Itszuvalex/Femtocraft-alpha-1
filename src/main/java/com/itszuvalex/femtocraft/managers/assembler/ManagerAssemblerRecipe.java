@@ -203,7 +203,8 @@
 //                    null, null, new ItemStack(Femtocraft.itemFlorite()),
 //                    null, new ItemStack(Femtocraft.itemMineralite()), null,
 //                    null, null}, 2, new ItemStack(
-//                    Femtocraft.itemFibrousStrand()), EnumTechLevel.NANO, FemtocraftTechnologies.ADVANCED_CHEMISTRY)); //
+//                    Femtocraft.itemFibrousStrand()), EnumTechLevel.NANO, FemtocraftTechnologies.ADVANCED_CHEMISTRY)
+// ); //
 //            // ItemFibrousStrand
 //            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null,
 //                    null, null, new ItemStack(Femtocraft.itemMineralite()),
@@ -986,7 +987,8 @@
 //            for (int i = 0; (i < recipeItems.length) && (i < 9); i++) {
 //                ItemStack item = recipeItems[i];
 //                input[((i + xoffset) % recipeWidth) + 3
-//                                                      * (yoffset + ((i + xoffset) / recipeWidth))] = item == null ? null
+//                                                      * (yoffset + ((i + xoffset) / recipeWidth))] = item == null ?
+// null
 ////                        : item.copy();
 //                        : new ItemStack(item.itemID, 1, item.getItemDamage());
 //            }
@@ -1291,9 +1293,12 @@
 //                    new ItemStack(Femtocraft.itemBasicAICore()),
 //                    EnumTechLevel.MICRO, FemtocraftTechnologies.ADVANCED_PROGRAMMING));
 //
-//            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null, new ItemStack(Femtocraft.itemNanoSimulator())
-//                    , null, new ItemStack(Femtocraft.itemNanoCalculator()), new ItemStack(Femtocraft.itemBasicAICore()),
-//                    new ItemStack(Femtocraft.itemNanoCalculator()), null, new ItemStack(Femtocraft.itemNanoSimulator()),
+//            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null, new ItemStack(Femtocraft
+// .itemNanoSimulator())
+//                    , null, new ItemStack(Femtocraft.itemNanoCalculator()), new ItemStack(Femtocraft
+// .itemBasicAICore()),
+//                    new ItemStack(Femtocraft.itemNanoCalculator()), null, new ItemStack(Femtocraft
+// .itemNanoSimulator()),
 //                    null}, 0,
 //                    new ItemStack(Femtocraft.itemLearningCore()),
 //                    EnumTechLevel.MICRO, FemtocraftTechnologies.PATTERN_RECOGNITION));
@@ -1338,9 +1343,12 @@
 //
 //            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemNanoPlating()),
 //                    new ItemStack(Femtocraft.itemIngotTemperedTitanium()),
-//                    new ItemStack(Femtocraft.itemIngotTemperedTitanium()), new ItemStack(Femtocraft.itemManagerCore()),
-//                    new ItemStack(Femtocraft.blockMicroDeconstructor()), new ItemStack(Femtocraft.itemSchedulerCore()),
-//                    new ItemStack(Femtocraft.itemNanoPlating()), new ItemStack(Femtocraft.itemIngotTemperedTitanium()),
+//                    new ItemStack(Femtocraft.itemIngotTemperedTitanium()), new ItemStack(Femtocraft.itemManagerCore
+// ()),
+//                    new ItemStack(Femtocraft.blockMicroDeconstructor()), new ItemStack(Femtocraft.itemSchedulerCore
+// ()),
+//                    new ItemStack(Femtocraft.itemNanoPlating()), new ItemStack(Femtocraft.itemIngotTemperedTitanium
+// ()),
 //                    new ItemStack(Femtocraft.itemIngotTemperedTitanium())}, 0,
 //                    new ItemStack(Femtocraft.blockNanoDismantler()),
 //                    EnumTechLevel.MICRO, FemtocraftTechnologies.ATOMIC_MANIPULATION));
@@ -1406,7 +1414,8 @@
 //
 //            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemIngotPlatinum()),
 //                    new ItemStack(Femtocraft.itemIngotPlatinum()), new ItemStack(Femtocraft.itemIngotPlatinum()),
-//                    new ItemStack(Femtocraft.itemIngotPlatinum()), new ItemStack(Femtocraft.itemDimensionalMonopole()),
+//                    new ItemStack(Femtocraft.itemIngotPlatinum()), new ItemStack(Femtocraft.itemDimensionalMonopole
+// ()),
 //                    new ItemStack(Femtocraft.itemIngotPlatinum()), new ItemStack(Femtocraft.itemIngotPlatinum()),
 //                    new ItemStack(Femtocraft.itemIngotPlatinum()), new ItemStack(Femtocraft.itemIngotPlatinum())}, 0,
 //                    new ItemStack(Femtocraft.itemCrossDimensionalCommunicator()),
@@ -1426,7 +1435,8 @@
 //                    new ItemStack(Femtocraft.itemCrossDimensionalCommunicator()),
 //                    new ItemStack(Femtocraft.itemNanoSimulator()), new ItemStack(Femtocraft.itemNanoPlating()),
 //                    new ItemStack(Femtocraft.blockNanoFabricator()), new ItemStack(Femtocraft.itemNanoPlating()),
-//                    new ItemStack(Femtocraft.itemNanoRegulator()), new ItemStack(Femtocraft.itemDimensionalMonopole()),
+//                    new ItemStack(Femtocraft.itemNanoRegulator()), new ItemStack(Femtocraft.itemDimensionalMonopole
+// ()),
 //                    new ItemStack(Femtocraft.itemNanoRegulator())}, 0,
 //                    new ItemStack(Femtocraft.blockNanoEnmesher()),
 //                    EnumTechLevel.NANO, FemtocraftTechnologies.DIMENSIONAL_BRAIDING));
@@ -1441,7 +1451,8 @@
 //                    EnumTechLevel.NANO, FemtocraftTechnologies.DIGITIZED_WORKLOADS));
 //
 //            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.blockMicroCable()),
-//                    new ItemStack(Femtocraft.itemFluidicConductor()), new ItemStack(Femtocraft.blockNanoCable()), null,
+//                    new ItemStack(Femtocraft.itemFluidicConductor()), new ItemStack(Femtocraft.blockNanoCable()),
+// null,
 //                    null, null, null, null, null}, 0,
 //                    new ItemStack(Femtocraft.blockOrbitalEqualizer()),
 //                    EnumTechLevel.NANO, FemtocraftTechnologies.POTENTIALITY_TRANSFORMATION));
@@ -1480,7 +1491,8 @@
 //                    new ItemStack(Femtocraft.blockFissionReactorHousing()),
 //                    new ItemStack(Femtocraft.itemSchedulerCore())
 //                    , new ItemStack(Femtocraft.blockFissionReactorHousing()), new ItemStack(Item.diamond),
-//                    new ItemStack(Femtocraft.blockFissionReactorHousing()), new ItemStack(Femtocraft.itemManagerCore()),
+//                    new ItemStack(Femtocraft.blockFissionReactorHousing()), new ItemStack(Femtocraft
+// .itemManagerCore()),
 //                    new ItemStack(Femtocraft.blockFissionReactorHousing()), new ItemStack(Femtocraft.itemManagerCore
 //                    ())}, 0,
 //                    new ItemStack(Femtocraft.blockFissionReactorCore()),
@@ -1490,14 +1502,16 @@
 //                    new ItemStack(Femtocraft.itemFissionReactorPlating()), new ItemStack(Femtocraft.itemNanochip()),
 //                    new ItemStack(Femtocraft.blockOrbitalEqualizer()), new ItemStack(Block.chest),
 //                    new ItemStack(Femtocraft.blockOrbitalEqualizer()), new ItemStack(Femtocraft.itemNanochip()),
-//                    new ItemStack(Femtocraft.itemFissionReactorPlating()), new ItemStack(Femtocraft.itemNanochip())}, 0,
+//                    new ItemStack(Femtocraft.itemFissionReactorPlating()), new ItemStack(Femtocraft.itemNanochip())
+// }, 0,
 //                    new ItemStack(Femtocraft.blockDecontaminationChamber()),
 //                    EnumTechLevel.NANO, FemtocraftTechnologies.HARNESSED_NUCLEAR_DECAY));
 //
 //            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemIngotFarenite()),
 //                    null, new ItemStack(Femtocraft.itemIngotFarenite()), new ItemStack(Femtocraft.itemIngotThorium()),
 //                    new ItemStack(Femtocraft.itemIngotFarenite()), new ItemStack(Femtocraft.itemIngotThorium()),
-//                    new ItemStack(Femtocraft.itemIngotFarenite()), null, new ItemStack(Femtocraft.itemIngotFarenite())},
+//                    new ItemStack(Femtocraft.itemIngotFarenite()), null, new ItemStack(Femtocraft.itemIngotFarenite
+// ())},
 //                    0, new ItemStack(Femtocraft.itemIngotThFaSalt(), 2), EnumTechLevel.NANO,
 //                    FemtocraftTechnologies.THORIUM_FISSIBILITY));
 //
@@ -1535,7 +1549,8 @@
 //                    new ItemStack(Femtocraft.itemErinyesCircuit(), 3),
 //                    EnumTechLevel.NANO, FemtocraftTechnologies.QUANTUM_COMPUTING));
 //
-//            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null, new ItemStack(Femtocraft.itemCerberusGate()),
+//            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{null, new ItemStack(Femtocraft.itemCerberusGate
+// ()),
 //                    null, new ItemStack(Femtocraft.itemMinosGate()), new ItemStack(Item.book),
 //                    new ItemStack(Femtocraft.itemCharosGate()), null, new ItemStack(Femtocraft.itemMinosGate()), null
 //            }, 0,
@@ -1554,7 +1569,8 @@
 //                    new ItemStack(Femtocraft.itemMinervaComplex()), new ItemStack(Femtocraft.itemErinyesCircuit()),
 //                    new ItemStack(Femtocraft.itemIngotMalenite()), new ItemStack(Item.feather),
 //                    new ItemStack(Femtocraft.itemIngotMalenite()), new ItemStack(Femtocraft.itemErinyesCircuit()),
-//                    new ItemStack(Femtocraft.itemMinervaComplex()), new ItemStack(Femtocraft.itemErinyesCircuit())}, 0,
+//                    new ItemStack(Femtocraft.itemMinervaComplex()), new ItemStack(Femtocraft.itemErinyesCircuit())
+// }, 0,
 //                    new ItemStack(Femtocraft.itemHermesBus()),
 //                    EnumTechLevel.NANO, FemtocraftTechnologies.QUANTUM_COMPUTING));
 //
@@ -1571,7 +1587,8 @@
 //                    new ItemStack(Femtocraft.itemInfallibleEstimator()), new ItemStack(Item.comparator),
 //                    new ItemStack(Femtocraft.itemPanLocationalComputer()),
 //                    new ItemStack(Femtocraft.itemErinyesCircuit())
-//                    , new ItemStack(Femtocraft.itemIngotMalenite()), new ItemStack(Femtocraft.itemErinyesCircuit())}, 0,
+//                    , new ItemStack(Femtocraft.itemIngotMalenite()), new ItemStack(Femtocraft.itemErinyesCircuit())
+// }, 0,
 //                    new ItemStack(Femtocraft.itemOrpheusProcessor()),
 //                    EnumTechLevel.NANO, FemtocraftTechnologies.QUANTUM_COMPUTING));
 //
@@ -1585,7 +1602,8 @@
 //
 //            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemErinyesCircuit()),
 //                    new ItemStack(Femtocraft.itemFemtoPlating()), new ItemStack(Femtocraft.itemErinyesCircuit()),
-//                    new ItemStack(Femtocraft.itemFemtoPlating()), new ItemStack(Femtocraft.blockNanoInnervatorUnlit()),
+//                    new ItemStack(Femtocraft.itemFemtoPlating()), new ItemStack(Femtocraft.blockNanoInnervatorUnlit
+// ()),
 //                    new ItemStack(Femtocraft.itemFemtoPlating()), new ItemStack(Femtocraft.itemCerberusGate()),
 //                    new ItemStack(Femtocraft.itemFemtoPlating()), new ItemStack(Femtocraft.itemCerberusGate())}, 0,
 //                    new ItemStack(Femtocraft.blockFemtoImpulserUnlit()),
@@ -1625,7 +1643,8 @@
 //                    EnumTechLevel.NANO, FemtocraftTechnologies.DEMONIC_PARTICULATES));
 //
 //            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Item.diamond),
-//                    new ItemStack(Item.diamond), new ItemStack(Item.diamond), new ItemStack(Femtocraft.itemFemtoCoil())
+//                    new ItemStack(Item.diamond), new ItemStack(Item.diamond), new ItemStack(Femtocraft
+// .itemFemtoCoil())
 //                    , new ItemStack(Femtocraft.itemFemtoCoil()), new ItemStack(Femtocraft.itemFemtoCoil()),
 //                    new ItemStack(Femtocraft.itemFemtoPlating()), new ItemStack(Femtocraft.itemFemtoPlating()),
 //                    new ItemStack(Femtocraft.itemFemtoPlating())}, 0,
@@ -1641,7 +1660,8 @@
 //                    new ItemStack(Femtocraft.blockPhlegethonTunnelCore()),
 //                    EnumTechLevel.NANO, FemtocraftTechnologies.SPONTANEOUS_GENERATION));
 //
-//            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemDimensionalMonopole())
+//            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft
+// .itemDimensionalMonopole())
 //                    , new ItemStack(Item.eyeOfEnder), new ItemStack(Femtocraft.itemDimensionalMonopole()),
 //                    new ItemStack(Item.eyeOfEnder), new ItemStack(Item.diamond), new ItemStack(Item.eyeOfEnder),
 //                    new ItemStack(Femtocraft.itemDimensionalMonopole()), new ItemStack(Item.eyeOfEnder),
@@ -1689,12 +1709,14 @@
 //                    new ItemStack(Femtocraft.itemFemtoPlating()), new ItemStack(Femtocraft.itemHerculesDrive()),
 //                    new ItemStack(Femtocraft.itemFemtoPlating()), new ItemStack(Femtocraft.blockNanoEnmesher()),
 //                    new ItemStack(Femtocraft.itemFemtoPlating()), new ItemStack(Femtocraft.itemOrpheusProcessor()),
-//                    new ItemStack(Femtocraft.itemFemtoPlating()), new ItemStack(Femtocraft.itemOrpheusProcessor())}, 0,
+//                    new ItemStack(Femtocraft.itemFemtoPlating()), new ItemStack(Femtocraft.itemOrpheusProcessor())
+// }, 0,
 //                    new ItemStack(Femtocraft.blockFemtoEntangler()),
 //                    EnumTechLevel.FEMTO, FemtocraftTechnologies.DIMENSIONAL_SUPERPOSITIONS));
 //
 //            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.blockNanoCable()),
-//                    new ItemStack(Femtocraft.itemStyxValve()), new ItemStack(Femtocraft.blockFemtoCable()), null, null,
+//                    new ItemStack(Femtocraft.itemStyxValve()), new ItemStack(Femtocraft.blockFemtoCable()), null,
+// null,
 //                    null, null, null, null}, 0,
 //                    new ItemStack(Femtocraft.blockNullEqualizer()),
 //                    EnumTechLevel.FEMTO, FemtocraftTechnologies.SPONTANEOUS_GENERATION));
@@ -1730,7 +1752,8 @@
 //                    new ItemStack(Femtocraft.itemStellaratorPlating()),
 //                    EnumTechLevel.FEMTO, FemtocraftTechnologies.STELLAR_MIMICRY));
 //
-//            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.blockSisyphusStabilizer())
+//            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft
+// .blockSisyphusStabilizer())
 //                    , new ItemStack(Femtocraft.itemStellaratorPlating()),
 //                    new ItemStack(Femtocraft.blockSisyphusStabilizer()),
 //                    new ItemStack(Femtocraft.itemStellaratorPlating()), new ItemStack(Item.netherStar),
@@ -1741,7 +1764,8 @@
 //                    new ItemStack(Femtocraft.blockStellaratorCore()),
 //                    EnumTechLevel.FEMTO, FemtocraftTechnologies.STELLAR_MIMICRY));
 //
-//            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemStellaratorPlating()),
+//            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemStellaratorPlating
+// ()),
 //                    new ItemStack(Block.glass), new ItemStack(Femtocraft.itemStellaratorPlating()),
 //                    new ItemStack(Block.glass), new ItemStack(Item.diamond), new ItemStack(Block.glass),
 //                    new ItemStack(Femtocraft.itemStellaratorPlating()), new ItemStack(Block.glass),
@@ -1766,7 +1790,8 @@
 //                    new ItemStack(Femtocraft.blockStellaratorOpticalMaser()),
 //                    EnumTechLevel.FEMTO, FemtocraftTechnologies.STELLAR_MIMICRY));
 //
-//            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemStellaratorPlating()),
+//            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemStellaratorPlating
+// ()),
 //                    new ItemStack(Femtocraft.itemStellaratorPlating()),
 //                    new ItemStack(Femtocraft.itemStellaratorPlating()), new ItemStack(Item.blazeRod),
 //                    new ItemStack(Item.blazeRod), new ItemStack(Item.blazeRod),
@@ -1785,15 +1810,18 @@
 //                    EnumTechLevel.FEMTO, FemtocraftTechnologies.STELLAR_MIMICRY));
 //
 //            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.blockPlasmaConduit()),
-//                    new ItemStack(Femtocraft.itemStellaratorPlating()), new ItemStack(Femtocraft.blockPlasmaConduit()),
+//                    new ItemStack(Femtocraft.itemStellaratorPlating()), new ItemStack(Femtocraft.blockPlasmaConduit
+// ()),
 //                    new ItemStack(Femtocraft.itemStellaratorPlating()), new ItemStack(Femtocraft.itemFemtoCoil()),
-//                    new ItemStack(Femtocraft.itemStellaratorPlating()), new ItemStack(Femtocraft.blockPlasmaConduit()),
+//                    new ItemStack(Femtocraft.itemStellaratorPlating()), new ItemStack(Femtocraft.blockPlasmaConduit
+// ()),
 //                    new ItemStack(Femtocraft.itemStellaratorPlating()), new ItemStack(Femtocraft.blockPlasmaConduit()
 //            )}, 0,
 //                    new ItemStack(Femtocraft.blockPlasmaTurbine()),
 //                    EnumTechLevel.FEMTO, FemtocraftTechnologies.ENERGY_CONVERSION));
 //
-//            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemStellaratorPlating()),
+//            addReversableRecipe(new AssemblerRecipe(new ItemStack[]{new ItemStack(Femtocraft.itemStellaratorPlating
+// ()),
 //                    new ItemStack(Femtocraft.blockSisyphusStabilizer()),
 //                    new ItemStack(Femtocraft.itemStellaratorPlating()),
 //                    new ItemStack(Femtocraft.blockSisyphusStabilizer()), new ItemStack(Block.blockDiamond),

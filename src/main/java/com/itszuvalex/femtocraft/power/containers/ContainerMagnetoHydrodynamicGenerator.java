@@ -32,13 +32,13 @@ import net.minecraft.inventory.ICrafting;
  * Created by Christopher Harris (Itszuvalex) on 8/27/14.
  */
 public class ContainerMagnetoHydrodynamicGenerator extends ContainerBase {
+    private static final int powerIndex = 0;
+    private static final int moltenSaltIndex = 1;
+    private static final int contaminatedSaltIndex = 2;
     private final TileEntityMagnetohydrodynamicGenerator generator;
     private int lastPower = 0;
     private int lastMoltenSalt = 0;
     private int lastContaminatedSalt = 0;
-    private static final int powerIndex = 0;
-    private static final int moltenSaltIndex = 1;
-    private static final int contaminatedSaltIndex = 2;
 
     public ContainerMagnetoHydrodynamicGenerator(TileEntityMagnetohydrodynamicGenerator tileEntity) {
         super();

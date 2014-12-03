@@ -36,6 +36,16 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockFemtoCable extends BlockMicroCable {
+    public BlockFemtoCable(Material par2Material) {
+        super(par2Material);
+        setCreativeTab(Femtocraft.femtocraftTab());
+        setBlockName("blockFemtoCable");
+        setHardness(1.0f);
+        setStepSound(Block.soundTypeMetal);
+        setBlockBounds();
+        setTickRandomly(true);
+    }
+
     @Override
     public void randomDisplayTick(World par1World, int x, int y, int z, Random par5Random) {
         double spawnX =
@@ -48,14 +58,9 @@ public class BlockFemtoCable extends BlockMicroCable {
         RenderUtils.spawnParticle(par1World, RenderUtils.FEMTO_POWER_PARTICLE(), spawnX, spawnY, spawnZ);
     }
 
-    public BlockFemtoCable(Material par2Material) {
-        super(par2Material);
-        setCreativeTab(Femtocraft.femtocraftTab());
-        setBlockName("blockFemtoCable");
-        setHardness(1.0f);
-        setStepSound(Block.soundTypeMetal);
-        setBlockBounds();
-        setTickRandomly(true);
+    @Override
+    public int getRenderType() {
+        return ProxyClient.femtoCableRenderID();
     }
 
     @Override
@@ -67,11 +72,6 @@ public class BlockFemtoCable extends BlockMicroCable {
     @Override
     public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityFemtoCable();
-    }
-
-    @Override
-    public int getRenderType() {
-        return ProxyClient.femtoCableRenderID();
     }
 
     @Override

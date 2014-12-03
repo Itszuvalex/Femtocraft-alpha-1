@@ -35,6 +35,22 @@ public class MultiBlockInfo implements IMultiBlockComponent, ISaveable {
         isMultiBlock = false;
     }
 
+    public int x() {
+        return controller_x;
+    }
+
+    public int y() {
+        return controller_y;
+    }
+
+    public int z() {
+        return controller_z;
+    }
+
+    public boolean isController(int x, int y, int z) {
+        return isValidMultiBlock() && x == controller_x && y == controller_y && z == controller_z;
+    }
+
     @Override
     public boolean isValidMultiBlock() {
         return isMultiBlock;
@@ -71,22 +87,6 @@ public class MultiBlockInfo implements IMultiBlockComponent, ISaveable {
     @Override
     public MultiBlockInfo getInfo() {
         return this;
-    }
-
-    public int x() {
-        return controller_x;
-    }
-
-    public int y() {
-        return controller_y;
-    }
-
-    public int z() {
-        return controller_z;
-    }
-
-    public boolean isController(int x, int y, int z) {
-        return isValidMultiBlock() && x == controller_x && y == controller_y && z == controller_z;
     }
 
     @Override

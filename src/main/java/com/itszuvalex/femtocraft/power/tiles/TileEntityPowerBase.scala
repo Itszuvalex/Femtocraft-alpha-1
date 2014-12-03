@@ -60,12 +60,6 @@ abstract class TileEntityPowerBase() extends TileEntityBase() with PowerBlockCon
     super.updateEntity()
   }
 
-  override def femtocraftServerUpdate() {
-    super.femtocraftServerUpdate()
-    FemtocraftPowerUtils.distributePower(this, connections, worldObj, xCoord, yCoord, zCoord)
-    setModified()
-  }
-
   def checkConnections() {
     var changed = false
     ForgeDirection.VALID_DIRECTIONS.foreach(offset => {
@@ -92,6 +86,11 @@ abstract class TileEntityPowerBase() extends TileEntityBase() with PowerBlockCon
     }
   }
 
+  override def femtocraftServerUpdate() {
+    super.femtocraftServerUpdate()
+    FemtocraftPowerUtils.distributePower(this, connections, worldObj, xCoord, yCoord, zCoord)
+    setModified()
+  }
 
   override def charge(from: ForgeDirection, amount: Int) = {
     val ret = super.charge(from, amount)

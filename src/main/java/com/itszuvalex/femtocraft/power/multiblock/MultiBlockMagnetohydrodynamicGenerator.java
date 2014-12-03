@@ -66,6 +66,12 @@ public class MultiBlockMagnetohydrodynamicGenerator implements IMultiBlock {
         return true;
     }
 
+    private boolean isSteamGeneratorSlot(int x, int y, int z) {
+        return (((x == -1 || x == 1) && y == 0 && z == 0) ||
+                ((y == -1 || y == 1) && x == 0 && z == 0) ||
+                ((z == -1 || z == 1) && x == 0 && y == 0));
+    }
+
     @Override
     public boolean canFormStrict(World world, int x, int y, int z) {
         return checkComponents(world, x, y, z, false);
@@ -127,11 +133,5 @@ public class MultiBlockMagnetohydrodynamicGenerator implements IMultiBlock {
             }
         }
         return result;
-    }
-
-    private boolean isSteamGeneratorSlot(int x, int y, int z) {
-        return (((x == -1 || x == 1) && y == 0 && z == 0) ||
-                ((y == -1 || y == 1) && x == 0 && z == 0) ||
-                ((z == -1 || z == 1) && x == 0 && y == 0));
     }
 }

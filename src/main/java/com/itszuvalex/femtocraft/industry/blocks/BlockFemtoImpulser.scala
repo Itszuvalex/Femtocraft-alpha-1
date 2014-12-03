@@ -139,7 +139,7 @@ class BlockFemtoImpulser(private val isActive: Boolean) extends TileContainer(Ma
     if (!BlockFemtoImpulser.keepFurnaceInventory) {
       world.getTileEntity(x, y, z) match {
         case te: TileEntityFemtoImpulser if te.isWorking => FemtocraftUtils.dropItem(te.smeltingStack, world, x, y, z, furnaceRand)
-        case _ =>
+        case _                                           =>
       }
       world.func_147453_f(x, y, z, block)
       shouldDrop = true

@@ -45,6 +45,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GuiTechnology extends GuiScreen {
+    public static final int descriptionWidth = 238;
+    public static final int descriptionHeight = 117;
     private static final ResourceLocation texture = new ResourceLocation(
             Femtocraft.ID().toLowerCase(), "textures/guis/GuiTechnology.png");
     private final GuiResearch guiResearch;
@@ -53,10 +55,6 @@ public class GuiTechnology extends GuiScreen {
     private final GuiTechnologyRenderer renderer;
     private final int xSize = 256;
     private final int ySize = 202;
-
-    public static final int descriptionWidth = 238;
-    public static final int descriptionHeight = 117;
-
     private final int backButtonX = 8;
     private final int backButtonY = 11;
     private final int backButtonWidth = 52 - 8;
@@ -284,86 +282,6 @@ public class GuiTechnology extends GuiScreen {
         }
     }
 
-    @Override
-    public final boolean doesGuiPauseGame() {
-        return false;
-    }
-
-    @Override
-    protected void mouseClicked(int par1, int par2, int par3) {
-        if (par3 == 0) {
-            int k = (this.width - this.xSize) / 2;
-            int l = (this.height - this.ySize) / 2;
-
-            if ((par1 >= (k + backButtonX))
-                && (par1 <= (k + backButtonX + backButtonWidth))
-                && (par2 >= (l + backButtonY))
-                && (par2 <= (l + backButtonY + backButtonHeight))) {
-                FemtocraftSoundUtils.playClickSound();
-                this.mc.displayGuiScreen(guiResearch);
-            }
-
-            if ((displayPage > 1) && (par1 >= (k + pageLeftButtonX))
-                && (par1 <= (k + pageLeftButtonX + pageLeftButtonWidth))
-                && (par2 >= (l + pageLeftButtonY))
-                && (par2 <= (l + pageLeftButtonY + pageLeftButtonHeight))) {
-                FemtocraftSoundUtils.playClickSound();
-                displayPage--;
-            }
-
-            if ((displayPage < getNumPages(status.researched()))
-                && (par1 >= (k + pageRightButtonX))
-                && (par1 <= (k + pageRightButtonX + pageRightButtonWidth))
-                && (par2 >= (l + pageRightButtonY))
-                && (par2 <= (l + pageRightButtonY + pageRightButtonHeight))) {
-                FemtocraftSoundUtils.playClickSound();
-                displayPage++;
-            }
-        }
-        super.mouseClicked(par1, par2, par3);
-    }
-
-    /**
-     * @param x
-     * @param y
-     * @param width
-     * @param height
-     * @param pageNum
-     * @param mouseX
-     * @param mouseY
-     * @param isResearched
-     */
-    protected void renderInformation(int x, int y, int width, int height,
-                                     int pageNum, int mouseX, int mouseY, List tooltip,
-                                     boolean isResearched) {
-        renderer.render(x, y, width, height, pageNum, mouseX, mouseY, tooltip, isResearched);
-    }
-
-    int getNumPages(boolean researched) {
-        return renderer.getPageCount();
-    }
-
-    /**
-     * 54 width and height
-     *
-     * @param x     X of Top Left
-     * @param y     Y of Top Left
-     * @param items Up to 9 items to render into the crafting grid
-     */
-    void renderCraftingGrid(int x, int y, ItemStack[] items,
-                            int mouseX, int mouseY, List tooltip) {
-        ItemStack[] ir = items != null ? items : new ItemStack[9];
-        RenderItem renderitem = new RenderItem();
-        for (int i = 0; (i < 9); ++i) {
-            ItemStack item = i >= ir.length ? null : ir[i];
-            int xr = x
-                     + 18 * (i % 3);
-            int yr = y + 18 * (i / 3);
-            renderItemSlot(xr, yr, item, renderitem, mouseX, mouseY,
-                    tooltip);
-        }
-    }
-
     protected void drawHoveringText(List par1List, int par2, int par3,
                                     FontRenderer font) {
         if (!par1List.isEmpty()) {
@@ -423,6 +341,86 @@ public class GuiTechnology extends GuiScreen {
 
                 j1 += 10;
             }
+        }
+    }
+
+    @Override
+    protected void mouseClicked(int par1, int par2, int par3) {
+        if (par3 == 0) {
+            int k = (this.width - this.xSize) / 2;
+            int l = (this.height - this.ySize) / 2;
+
+            if ((par1 >= (k + backButtonX))
+                && (par1 <= (k + backButtonX + backButtonWidth))
+                && (par2 >= (l + backButtonY))
+                && (par2 <= (l + backButtonY + backButtonHeight))) {
+                FemtocraftSoundUtils.playClickSound();
+                this.mc.displayGuiScreen(guiResearch);
+            }
+
+            if ((displayPage > 1) && (par1 >= (k + pageLeftButtonX))
+                && (par1 <= (k + pageLeftButtonX + pageLeftButtonWidth))
+                && (par2 >= (l + pageLeftButtonY))
+                && (par2 <= (l + pageLeftButtonY + pageLeftButtonHeight))) {
+                FemtocraftSoundUtils.playClickSound();
+                displayPage--;
+            }
+
+            if ((displayPage < getNumPages(status.researched()))
+                && (par1 >= (k + pageRightButtonX))
+                && (par1 <= (k + pageRightButtonX + pageRightButtonWidth))
+                && (par2 >= (l + pageRightButtonY))
+                && (par2 <= (l + pageRightButtonY + pageRightButtonHeight))) {
+                FemtocraftSoundUtils.playClickSound();
+                displayPage++;
+            }
+        }
+        super.mouseClicked(par1, par2, par3);
+    }
+
+    @Override
+    public final boolean doesGuiPauseGame() {
+        return false;
+    }
+
+    /**
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @param pageNum
+     * @param mouseX
+     * @param mouseY
+     * @param isResearched
+     */
+    protected void renderInformation(int x, int y, int width, int height,
+                                     int pageNum, int mouseX, int mouseY, List tooltip,
+                                     boolean isResearched) {
+        renderer.render(x, y, width, height, pageNum, mouseX, mouseY, tooltip, isResearched);
+    }
+
+    int getNumPages(boolean researched) {
+        return renderer.getPageCount();
+    }
+
+    /**
+     * 54 width and height
+     *
+     * @param x     X of Top Left
+     * @param y     Y of Top Left
+     * @param items Up to 9 items to render into the crafting grid
+     */
+    void renderCraftingGrid(int x, int y, ItemStack[] items,
+                            int mouseX, int mouseY, List tooltip) {
+        ItemStack[] ir = items != null ? items : new ItemStack[9];
+        RenderItem renderitem = new RenderItem();
+        for (int i = 0; (i < 9); ++i) {
+            ItemStack item = i >= ir.length ? null : ir[i];
+            int xr = x
+                     + 18 * (i % 3);
+            int yr = y + 18 * (i / 3);
+            renderItemSlot(xr, yr, item, renderitem, mouseX, mouseY,
+                    tooltip);
         }
     }
 

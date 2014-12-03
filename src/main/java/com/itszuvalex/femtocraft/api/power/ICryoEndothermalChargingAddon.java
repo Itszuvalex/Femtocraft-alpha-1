@@ -11,11 +11,7 @@ public interface ICryoEndothermalChargingAddon {
      * @param power amount of power to propagate upwards.
      *              <p/>
      *              This is called whenever an addon wishes to propagate power up the addon stack.  If the tile above
-     *              you is a base, call
-     *,
-     *              otherwise call
-     * on the
-     *              above you.
+     *              you is a base, call , otherwise call on the above you.
      */
     void propagatePower(int power);
 }

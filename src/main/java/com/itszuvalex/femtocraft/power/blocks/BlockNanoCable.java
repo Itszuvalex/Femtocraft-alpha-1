@@ -59,6 +59,11 @@ public class BlockNanoCable extends BlockMicroCable {
     }
 
     @Override
+    public int getRenderType() {
+        return ProxyClient.nanoCableRenderID();
+    }
+
+    @Override
     public void setBlockBounds() {
         this.minX = this.minY = this.minZ = 4.0D / 16.0D;
         this.maxX = this.maxY = this.maxZ = 12.0D / 16.0D;
@@ -67,11 +72,6 @@ public class BlockNanoCable extends BlockMicroCable {
     @Override
     public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityNanoCable();
-    }
-
-    @Override
-    public int getRenderType() {
-        return ProxyClient.nanoCableRenderID();
     }
 
     @Override

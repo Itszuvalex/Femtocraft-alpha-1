@@ -59,6 +59,9 @@ class FemtocraftTechnologyConfig(private val file: File) {
     ret
   }
 
+  private def loadTechnology(name: String) =
+    loadResearchTechnology(new Technology(name, "DEFAULT DESCRIPTION", EnumTechLevel.MACRO, null, null, false, null))
+
   private def loadDefaultTechnologies: util.List[ITechnology] = {
     Femtocraft.log(Level.INFO, "Loading default Technologies from configs.")
     val techs = FemtocraftTechnologies.defaultTechnologies
@@ -66,9 +69,6 @@ class FemtocraftTechnologyConfig(private val file: File) {
     Femtocraft.log(Level.INFO, "Finished loading default technologies from configs.")
     techs
   }
-
-  private def loadTechnology(name: String) =
-    loadResearchTechnology(new Technology(name, "DEFAULT DESCRIPTION", EnumTechLevel.MACRO, null, null, false, null))
 
   def loadResearchTechnology(ret: ITechnology): ITechnology = {
     FemtocraftConfigHelper.loadClassInstanceFromConfig(config, FemtocraftTechnologyConfig.SECTION_KEY, ret.getName, classOf[Technology], ret)

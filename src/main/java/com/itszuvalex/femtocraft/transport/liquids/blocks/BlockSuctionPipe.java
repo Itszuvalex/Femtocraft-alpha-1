@@ -126,6 +126,16 @@ public class BlockSuctionPipe extends TileContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
+                                                         int x, int y, int z) {
+        return AxisAlignedBB.getBoundingBox((double) x + 6.f / 16.f,
+                (double) y + 6.f / 16.f, (double) z + 6.f / 16.f,
+                (double) x + 10.f / 16.f, (double) y + 10.f / 16.f,
+                (double) z + 10.f / 16.f);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
     public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int x,
                                                         int y, int z) {
         AxisAlignedBB box = AxisAlignedBB.getBoundingBox(
@@ -151,16 +161,6 @@ public class BlockSuctionPipe extends TileContainer {
         }
 
         return box;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World,
-                                                         int x, int y, int z) {
-        return AxisAlignedBB.getBoundingBox((double) x + 6.f / 16.f,
-                (double) y + 6.f / 16.f, (double) z + 6.f / 16.f,
-                (double) x + 10.f / 16.f, (double) y + 10.f / 16.f,
-                (double) z + 10.f / 16.f);
     }
 
     @Override

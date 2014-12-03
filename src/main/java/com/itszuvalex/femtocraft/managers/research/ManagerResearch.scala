@@ -39,11 +39,11 @@ import scala.collection.JavaConverters._
 import scala.collection.mutable
 
 object ManagerResearch {
-  private val playerDataKey = "playerData"
-  private val dataKey       = "data"
-  private val userKey       = "username"
+  private                                                                                        val playerDataKey = "playerData"
+  private                                                                                        val dataKey       = "data"
+  private                                                                                        val userKey       = "username"
   @Configurable(comment = "Set to true to have all technologies researched by default.") private val debug         = true
-  private val DIRECTORY     = "Research"
+  private                                                                                        val DIRECTORY     = "Research"
 }
 
 @Configurable class ManagerResearch {

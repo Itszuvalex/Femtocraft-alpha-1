@@ -97,7 +97,8 @@ public class ContainerNanoFissionReactor extends ContainerInv<TileEntityNanoFiss
         this.lastCooledMoltenSalt = this.inventory().getCooledSaltAmount();
         this.lastMoltenSalt = this.inventory().getMoltenSaltAmount();
         this.lastHeat = this.inventory().getThoriumStoreCurrent();
-        this.lastConcentrationTarget = (int) (this.inventory().getThoriumConcentrationTarget() * concentrationMultiplier);
+        this.lastConcentrationTarget = (int) (this.inventory().getThoriumConcentrationTarget() *
+                                              concentrationMultiplier);
     }
 
     @Override

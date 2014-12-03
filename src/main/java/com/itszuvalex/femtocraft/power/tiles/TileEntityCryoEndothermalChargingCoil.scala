@@ -37,7 +37,7 @@ class TileEntityCryoEndothermalChargingCoil extends TileEntityBase with ICryoEnd
                                                     zCoord + Random.nextInt(2 * activeGenRange + 1) - activeGenRange)
     }
     else {
-      ticksToActive-=1
+      ticksToActive -= 1
     }
 
     val propagate = powerStored.toInt

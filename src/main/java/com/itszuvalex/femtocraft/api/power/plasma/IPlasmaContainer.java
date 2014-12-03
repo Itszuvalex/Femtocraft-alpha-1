@@ -32,21 +32,19 @@ import java.util.Collection;
  * <p/>
  * Interface for TileEntities that wish to be able to handle PlasmaFlows.
  * <p/>
- * These TileEntities will be expected to handle these flows in a fair
- * manner, and except for great reason, apply volatility events fairly.
+ * These TileEntities will be expected to handle these flows in a fair manner, and except for great reason, apply
+ * volatility events fairly.
  */
 public interface IPlasmaContainer {
     /**
-     * @return Plasma travels in a circuit.  This can return NULL,
-     * i.e. while the player is placing conduits.  If this returns NULL while
-     * in use, expect Volatility Events.
+     * @return Plasma travels in a circuit.  This can return NULL, i.e. while the player is placing conduits.  If this
+     * returns NULL while in use, expect Volatility Events.
      */
     IPlasmaContainer getInput();
 
     /**
-     * @return Plasma travels in a circuit.  This can return NULL,
-     * i.e. while the player is placing conduits.  If this returns NULL while
-     * in use, expect Volatility Events.
+     * @return Plasma travels in a circuit.  This can return NULL, i.e. while the player is placing conduits.  If this
+     * returns NULL while in use, expect Volatility Events.
      */
     IPlasmaContainer getOutput();
 
@@ -65,21 +63,18 @@ public interface IPlasmaContainer {
     boolean setOutput(IPlasmaContainer container, ForgeDirection dir);
 
     /**
-     * @return Direction of input, or UNKNOWN if NULL.  Helper function for
-     * rendering, basically.
+     * @return Direction of input, or UNKNOWN if NULL.  Helper function for rendering, basically.
      */
     ForgeDirection getInputDir();
 
     /**
-     * @return Direction of output, or UNKNOWN if NULL.  Helper function for
-     * rendering, basically.
+     * @return Direction of output, or UNKNOWN if NULL.  Helper function for rendering, basically.
      */
     ForgeDirection getOutputDir();
 
     /**
      * @param flow
-     * @return True if flow successfully added, false otherwise.  Expect
-     * Volatility Events if this returns false.
+     * @return True if flow successfully added, false otherwise.  Expect Volatility Events if this returns false.
      */
     boolean addFlow(IPlasmaFlow flow);
 
@@ -115,11 +110,10 @@ public interface IPlasmaContainer {
     void onVolatilityEvent(IVolatilityEvent event);
 
     /**
-     * Called once a volatility event has resolved.  This could be used to
-     * prevent meltdowns, normalize PlasmaFlows, etc.
+     * Called once a volatility event has resolved.  This could be used to prevent meltdowns, normalize PlasmaFlows,
+     * etc.
      *
-     * @param event The event that just
-     *              resolved
+     * @param event The event that just resolved
      */
     void onPostVolatilityEvent(IVolatilityEvent event);
 

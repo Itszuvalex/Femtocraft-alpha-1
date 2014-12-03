@@ -56,7 +56,7 @@ object AssemblerRecipeDatabase {
 }
 
 class AssemblerRecipeDatabase() {
-  private var c: Connection = null
+  private lazy val allRecipes = pullFullRecipeList
   var shouldRegister = true
 
   try {
@@ -66,58 +66,11 @@ class AssemblerRecipeDatabase() {
     case e: ClassNotFoundException =>
       e.printStackTrace()
       Femtocraft.log(Level.ERROR, "SQLite dependency missing.")
-    case e: SQLException =>
+    case e: SQLException           =>
       e.printStackTrace()
       Femtocraft.log(Level.ERROR, "Error opening connection")
   }
-
-  @throws(classOf[ClassNotFoundException])
-  @throws(classOf[SQLException])
-  private def InitializeDatabase() {
-    Class.forName("org.sqlite.JDBC")
-    refreshConnection()
-    shouldRegister = createRecipeTable
-  }
-
-  @throws(classOf[SQLException])
-  private def refreshConnection() {
-    if (c == null) {
-      c = DriverManager.getConnection("jdbc:sqlite:" + "config/" + AssemblerRecipeDatabase.DB_FILENAME)
-    }
-  }
-
-  private def createRecipeTable: Boolean = {
-    var s: Statement = null
-    try {
-      refreshConnection()
-      s = c.createStatement
-      val sql = "CREATE TABLE " + AssemblerRecipeDatabase.DB_TABLE_RECIPES + "(ID INTEGER PRIMARY KEY, " + AssemblerRecipeDatabase.DB_RECIPES_INPUT + " STRING NOT NULL," + AssemblerRecipeDatabase.DB_RECIPES_INPUT_SIZE + " STRING NOT NULL," + AssemblerRecipeDatabase.DB_RECIPES_MASS + " INT CHECK(" + AssemblerRecipeDatabase.DB_RECIPES_MASS + " >= " + "0) NOT NULL," + AssemblerRecipeDatabase.DB_RECIPES_OUTPUT + " STRING NOT NULL," + AssemblerRecipeDatabase.DB_RECIPES_OUTPUT_SIZE + " STRING NOT NULL," + AssemblerRecipeDatabase.DB_RECIPES_OUTPUT_NBT + " BYTES," + AssemblerRecipeDatabase.DB_RECIPES_TECH_LEVEL + " STRING NOT NULL," + AssemblerRecipeDatabase.DB_RECIPES_TECHNOLOGY + " STRING," + "UNIQUE(" + AssemblerRecipeDatabase.DB_RECIPES_INPUT + ", " + AssemblerRecipeDatabase.DB_RECIPES_MASS + "," + AssemblerRecipeDatabase.DB_RECIPES_OUTPUT + "), " + "FOREIGN KEY(" + AssemblerRecipeDatabase.DB_RECIPES_OUTPUT + ") REFERENCES ITEMS(ID))"
-      s.executeUpdate(sql)
-      s.close()
-      true
-    }
-    catch {
-      case e: SQLException => false
-    }
-  }
-
-  private def createItemTable: Boolean = {
-    var s: Statement = null
-    try {
-      refreshConnection()
-      s = c.createStatement
-      val sql = "CREATE TABLE " + AssemblerRecipeDatabase.DB_TABLE_ITEMS + "(ID INTEGER PRIMARY KEY NOT NULL," + AssemblerRecipeDatabase.DB_ITEMS_ITEMID + " INT NOT NULL," + AssemblerRecipeDatabase.DB_ITEMS_DAMAGE + " INT NOT NULL," + AssemblerRecipeDatabase.DB_ITEMS_STACKSIZE + " INT CHECK(" + AssemblerRecipeDatabase.DB_ITEMS_STACKSIZE + ">0) NOT NULL," + AssemblerRecipeDatabase.DB_ITEMS_NBT + " BYTES," + "UNIQUE(" + AssemblerRecipeDatabase.DB_ITEMS_ITEMID + ", " + AssemblerRecipeDatabase.DB_ITEMS_DAMAGE + ", " + AssemblerRecipeDatabase.DB_ITEMS_STACKSIZE + "))"
-      s.executeUpdate(sql)
-      s.close()
-      true
-    }
-    catch {
-      case e: SQLException =>
-        e.printStackTrace()
-        Femtocraft.log(Level.WARN, "SQLite item table creation" + " failed")
-        false
-    }
-  }
+  private var c: Connection = null
 
   def getRecipe(inputs: Array[ItemStack]): AssemblerRecipe = {
     var ac: AssemblerRecipe = null
@@ -135,7 +88,7 @@ class AssemblerRecipeDatabase() {
     catch {
       case e: SQLException =>
         e.printStackTrace()
-        Femtocraft.log(Level.WARN, "SQLite select recipe from " + "inputs failed")
+        Femtocraft.log(Level.WARN, "SQLite select recipe from inputs failed")
     }
     if (Femtocraft.assemblerConfigs.isEnabled(ac)) ac else null
   }
@@ -159,44 +112,6 @@ class AssemblerRecipeDatabase() {
     sb.toString()
   }
 
-  @throws(classOf[SQLException])
-  private def getRecipe(rs: ResultSet): AssemblerRecipe = {
-    val ac = new AssemblerRecipe
-    ac.input = getItems(rs.getString(AssemblerRecipeDatabase.DB_RECIPES_INPUT), rs.getString(AssemblerRecipeDatabase.DB_RECIPES_INPUT_SIZE))
-    ac.mass = rs.getInt(AssemblerRecipeDatabase.DB_RECIPES_MASS)
-    ac.output = getItem(rs.getString(AssemblerRecipeDatabase.DB_RECIPES_OUTPUT), rs.getString(AssemblerRecipeDatabase.DB_RECIPES_OUTPUT_SIZE), rs.getBytes(AssemblerRecipeDatabase.DB_RECIPES_OUTPUT_NBT))
-    ac.enumTechLevel = EnumTechLevel.getTech(rs.getString(AssemblerRecipeDatabase.DB_RECIPES_TECH_LEVEL))
-    ac.tech = rs.getString(AssemblerRecipeDatabase.DB_RECIPES_TECHNOLOGY)
-    if (Femtocraft.assemblerConfigs.isEnabled(ac)) ac else null
-  }
-
-  private def getItems(items: String, stackSizes: String): Array[ItemStack] = (getItems(items), stackSizes.split(",")).zipped.map((i: ItemStack, s: String) => {if (i != null) {i.stackSize = s.toInt}; i})
-
-  private def getItem(item: String, stackSize: String, nbt: Array[Byte]): ItemStack = {
-    val id_damage = item.split(":")
-    val result = new ItemStack(id_damage(0).toInt.getItem, stackSize.toInt, id_damage(1).toInt)
-    if (nbt != null) {
-      try {
-        result.setTagCompound(CompressedStreamTools.readCompressed(new DataInputStream(new ByteArrayInputStream(nbt))))
-      }
-      catch {
-        case e: IOException =>
-          e.printStackTrace()
-      }
-    }
-    result
-  }
-
-  private def getItems(items: String): Array[ItemStack] =
-    items.split(",").map(s => {
-      if (s.matches(AssemblerRecipeDatabase.DB_NULL_ITEM)) null
-      else {
-        val id_damage: Array[String] = s.split(":")
-        new ItemStack(id_damage(0).toInt.getItem, 1, id_damage(1).toInt)
-      }
-    })
-
-
   def getRecipe(output: ItemStack): AssemblerRecipe = {
     var ac: AssemblerRecipe = null
     try {
@@ -217,9 +132,6 @@ class AssemblerRecipeDatabase() {
     }
     if (Femtocraft.assemblerConfigs.isEnabled(ac)) ac else null
   }
-
-  private def formatItem(item: ItemStack) = if (item == null || item.getItem == null) null else item.itemID + ":" + item.getItemDamage
-
 
   def insertRecipe(recipe: AssemblerRecipe): Boolean = {
     try {
@@ -253,6 +165,8 @@ class AssemblerRecipeDatabase() {
         false
     }
   }
+
+  private def formatItem(item: ItemStack) = if (item == null || item.getItem == null) null else item.itemID + ":" + item.getItemDamage
 
   private def formatItemSizes(items: Array[ItemStack]) = {
     val sb = new StringBuilder
@@ -320,6 +234,50 @@ class AssemblerRecipeDatabase() {
     arrayList
   }
 
+  @throws(classOf[SQLException])
+  private def refreshConnection() {
+    if (c == null) {
+      c = DriverManager.getConnection("jdbc:sqlite:" + "config/" + AssemblerRecipeDatabase.DB_FILENAME)
+    }
+  }
+
+  @throws(classOf[SQLException])
+  private def getRecipe(rs: ResultSet): AssemblerRecipe = {
+    val ac = new AssemblerRecipe
+    ac.input = getItems(rs.getString(AssemblerRecipeDatabase.DB_RECIPES_INPUT), rs.getString(AssemblerRecipeDatabase.DB_RECIPES_INPUT_SIZE))
+    ac.mass = rs.getInt(AssemblerRecipeDatabase.DB_RECIPES_MASS)
+    ac.output = getItem(rs.getString(AssemblerRecipeDatabase.DB_RECIPES_OUTPUT), rs.getString(AssemblerRecipeDatabase.DB_RECIPES_OUTPUT_SIZE), rs.getBytes(AssemblerRecipeDatabase.DB_RECIPES_OUTPUT_NBT))
+    ac.enumTechLevel = EnumTechLevel.getTech(rs.getString(AssemblerRecipeDatabase.DB_RECIPES_TECH_LEVEL))
+    ac.tech = rs.getString(AssemblerRecipeDatabase.DB_RECIPES_TECHNOLOGY)
+    if (Femtocraft.assemblerConfigs.isEnabled(ac)) ac else null
+  }
+
+  private def getItems(items: String, stackSizes: String): Array[ItemStack] = (getItems(items), stackSizes.split(",")).zipped.map((i: ItemStack, s: String) => {if (i != null) {i.stackSize = s.toInt}; i})
+
+  private def getItems(items: String): Array[ItemStack] =
+    items.split(",").map(s => {
+      if (s.matches(AssemblerRecipeDatabase.DB_NULL_ITEM)) null
+      else {
+        val id_damage: Array[String] = s.split(":")
+        new ItemStack(id_damage(0).toInt.getItem, 1, id_damage(1).toInt)
+      }
+    })
+
+  private def getItem(item: String, stackSize: String, nbt: Array[Byte]): ItemStack = {
+    val id_damage = item.split(":")
+    val result = new ItemStack(id_damage(0).toInt.getItem, stackSize.toInt, id_damage(1).toInt)
+    if (nbt != null) {
+      try {
+        result.setTagCompound(CompressedStreamTools.readCompressed(new DataInputStream(new ByteArrayInputStream(nbt))))
+      }
+      catch {
+        case e: IOException =>
+          e.printStackTrace()
+      }
+    }
+    result
+  }
+
   def getAllRecipes: java.util.ArrayList[AssemblerRecipe] = allRecipes
 
   def pullFullRecipeList: java.util.ArrayList[AssemblerRecipe] = {
@@ -345,5 +303,44 @@ class AssemblerRecipeDatabase() {
     arrayList
   }
 
-  private lazy val allRecipes = pullFullRecipeList
+  @throws(classOf[ClassNotFoundException])
+  @throws(classOf[SQLException])
+  private def InitializeDatabase() {
+    Class.forName("org.sqlite.JDBC")
+    refreshConnection()
+    shouldRegister = createRecipeTable
+  }
+
+  private def createRecipeTable: Boolean = {
+    var s: Statement = null
+    try {
+      refreshConnection()
+      s = c.createStatement
+      val sql = "CREATE TABLE " + AssemblerRecipeDatabase.DB_TABLE_RECIPES + "(ID INTEGER PRIMARY KEY, " + AssemblerRecipeDatabase.DB_RECIPES_INPUT + " STRING NOT NULL," + AssemblerRecipeDatabase.DB_RECIPES_INPUT_SIZE + " STRING NOT NULL," + AssemblerRecipeDatabase.DB_RECIPES_MASS + " INT CHECK(" + AssemblerRecipeDatabase.DB_RECIPES_MASS + " >= " + "0) NOT NULL," + AssemblerRecipeDatabase.DB_RECIPES_OUTPUT + " STRING NOT NULL," + AssemblerRecipeDatabase.DB_RECIPES_OUTPUT_SIZE + " STRING NOT NULL," + AssemblerRecipeDatabase.DB_RECIPES_OUTPUT_NBT + " BYTES," + AssemblerRecipeDatabase.DB_RECIPES_TECH_LEVEL + " STRING NOT NULL," + AssemblerRecipeDatabase.DB_RECIPES_TECHNOLOGY + " STRING," + "UNIQUE(" + AssemblerRecipeDatabase.DB_RECIPES_INPUT + ", " + AssemblerRecipeDatabase.DB_RECIPES_MASS + "," + AssemblerRecipeDatabase.DB_RECIPES_OUTPUT + "), " + "FOREIGN KEY(" + AssemblerRecipeDatabase.DB_RECIPES_OUTPUT + ") REFERENCES ITEMS(ID))"
+      s.executeUpdate(sql)
+      s.close()
+      true
+    }
+    catch {
+      case e: SQLException => false
+    }
+  }
+
+  private def createItemTable: Boolean = {
+    var s: Statement = null
+    try {
+      refreshConnection()
+      s = c.createStatement
+      val sql = "CREATE TABLE " + AssemblerRecipeDatabase.DB_TABLE_ITEMS + "(ID INTEGER PRIMARY KEY NOT NULL," + AssemblerRecipeDatabase.DB_ITEMS_ITEMID + " INT NOT NULL," + AssemblerRecipeDatabase.DB_ITEMS_DAMAGE + " INT NOT NULL," + AssemblerRecipeDatabase.DB_ITEMS_STACKSIZE + " INT CHECK(" + AssemblerRecipeDatabase.DB_ITEMS_STACKSIZE + ">0) NOT NULL," + AssemblerRecipeDatabase.DB_ITEMS_NBT + " BYTES," + "UNIQUE(" + AssemblerRecipeDatabase.DB_ITEMS_ITEMID + ", " + AssemblerRecipeDatabase.DB_ITEMS_DAMAGE + ", " + AssemblerRecipeDatabase.DB_ITEMS_STACKSIZE + "))"
+      s.executeUpdate(sql)
+      s.close()
+      true
+    }
+    catch {
+      case e: SQLException =>
+        e.printStackTrace()
+        Femtocraft.log(Level.WARN, "SQLite item table creation" + " failed")
+        false
+    }
+  }
 }

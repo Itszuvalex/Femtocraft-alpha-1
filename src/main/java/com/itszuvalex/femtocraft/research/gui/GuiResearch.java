@@ -22,8 +22,8 @@
 package com.itszuvalex.femtocraft.research.gui;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.api.core.Configurable;
+import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.graph.IGraphNode;
 import com.itszuvalex.femtocraft.managers.research.PlayerResearch;
 import com.itszuvalex.femtocraft.managers.research.ResearchStatus;
@@ -54,11 +54,11 @@ import java.util.Random;
 
 @SideOnly(Side.CLIENT)
 public class GuiResearch extends GuiScreen {
-    @Configurable(comment = "Name of technology to focus research tree on when the GUI is first opened.")
-    public static String defaultTechnology = FemtocraftTechnologies.MACROSCOPIC_STRUCTURES;
     private static final ResourceLocation achievementTextures = new ResourceLocation(
             Femtocraft.ID().toLowerCase(),
             "textures/guis/research_background.png");
+    @Configurable(comment = "Name of technology to focus research tree on when the GUI is first opened.")
+    public static String defaultTechnology = FemtocraftTechnologies.MACROSCOPIC_STRUCTURES;
     private static int minDisplayColumn = 0;
     /**
      * The top x coordinate of the achievement map
@@ -252,7 +252,7 @@ public class GuiResearch extends GuiScreen {
                         Minecraft.getMinecraft().displayGuiScreen(
                                 new GuiTechnology(this, ts)
 //                                rt.getGui(this, ts)
-                         );
+                        );
                         this.isMouseButtonDown = 0;
                     }
                 }
