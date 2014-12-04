@@ -18,6 +18,8 @@ object ComponentRegistry {
 
   def registerComponent(item: Item, tech: EnumTechLevel) = getOrMake(tech) append item
 
+  def isItemComponent(item: Item, tech: EnumTechLevel) = componentMap.get(tech).exists(_.contains(item))
+
   private def getOrMake(tech: EnumTechLevel) = componentMap.get(tech) match {
     case Some(a) => a
     case None    => val b = new ArrayBuffer[Item]; componentMap.put(tech, b); b

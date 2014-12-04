@@ -29,6 +29,9 @@ import net.minecraftforge.common.util.ForgeDirection
 /**
  * Created by Chris on 5/13/2014.
  */
+/**
+ * Oscillating Photons
+ */
 object FemtocraftPowerUtils {
   val distributionBuffer = .01f
   val maxPowerPerTick    = .05f

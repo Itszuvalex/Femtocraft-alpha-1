@@ -6,7 +6,7 @@
   "version": "",
   "credits": "Created by Itszuvalex (ign: Knife_point065)",
   "logoFile": "",
-  "mcversion": "1.6.4",
+  "mcversion": "1.7.10",
   "url": "https://github.com/Itszuvalex/Femtocraft",
   "updateUrl": "",
   "authors": [ "Itszuvalex" ],

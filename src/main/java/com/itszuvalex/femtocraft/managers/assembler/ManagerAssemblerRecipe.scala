@@ -25,6 +25,7 @@ import java.util
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.events.EventAssemblerRegister
 import com.itszuvalex.femtocraft.api.{AssemblerRecipe, EnumTechLevel}
+import com.itszuvalex.femtocraft.implicits.IDImplicits._
 import com.itszuvalex.femtocraft.managers.research.Technology
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils
@@ -36,6 +37,7 @@ import net.minecraftforge.oredict.{OreDictionary, ShapedOreRecipe, ShapelessOreR
 import org.apache.logging.log4j.Level
 
 import scala.collection.JavaConversions._
+import scala.collection.{immutable, mutable}
 
 
 /** @author chris
@@ -59,6 +61,56 @@ class ManagerAssemblerRecipe {
 
   def init() {
     registerRecipes()
+  }
+
+  private lazy val decompCountMemo = new mutable.HashMap[Int, (Int, Int, Int, Int)]
+
+  def getDecompositionCounts(i: ItemStack): (Int, Int, Int, Int) = {
+    getDecompositionCounts(i, immutable.TreeSet[Int]())
+  }
+
+  private def getDecompositionCounts(i: ItemStack, s: immutable.TreeSet[Int]): (Int, Int, Int, Int) = {
+    var molecules = 0
+    var atoms = 0
+    var particles = 0
+    var mass = 0
+
+
+    if (i != null) {
+      decompCountMemo.get(i.itemID) match {
+        case Some((mol, at, pa, ma)) => return (mol * i.stackSize, at * i.stackSize, pa * i.stackSize, ma * i.stackSize)
+        case _                       =>
+      }
+
+
+
+      i match {
+        case micro if ComponentRegistry.isItemComponent(i.getItem, EnumTechLevel.MICRO) => molecules = i.stackSize
+        case nano if ComponentRegistry.isItemComponent(i.getItem, EnumTechLevel.NANO)   => atoms = i.stackSize
+        case femto if ComponentRegistry.isItemComponent(i.getItem, EnumTechLevel.FEMTO) => particles = i.stackSize
+        case _                                                                          =>
+      }
+
+      if (!s.contains(i.itemID)) {
+        val recipe = getRecipe(i)
+        if (recipe != null) {
+          mass += (recipe.mass * i.stackSize)
+          recipe.input.foreach {
+                                 case in if !ItemStack.areItemStacksEqual(i, in) =>
+                                   val (m, a, p, ma) = getDecompositionCounts(in, s + i.itemID)
+                                   molecules += m
+                                   atoms += a
+                                   particles += p
+                                   mass += ma
+                                 case _                                          =>
+                               }
+        }
+        decompCountMemo.put(i.itemID, (molecules / i.stackSize, atoms / i.stackSize, particles / i.stackSize, mass / i.stackSize))
+      }
+      (molecules * i.stackSize, atoms * i.stackSize, particles * i.stackSize, mass * i.stackSize)
+    }
+    else
+      (molecules, atoms, particles, mass)
   }
 
   def registerDefaultRecipes() {

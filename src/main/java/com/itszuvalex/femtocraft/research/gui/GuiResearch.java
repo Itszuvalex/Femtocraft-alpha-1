@@ -58,7 +58,7 @@ public class GuiResearch extends GuiScreen {
             Femtocraft.ID().toLowerCase(),
             "textures/guis/research_background.png");
     @Configurable(comment = "Name of technology to focus research tree on when the GUI is first opened.")
-    public static String defaultTechnology = FemtocraftTechnologies.MACROSCOPIC_STRUCTURES;
+    public static String defaultTechnology = FemtocraftTechnologies.MACROSCOPIC_STRUCTURES();
     private static int minDisplayColumn = 0;
     /**
      * The top x coordinate of the achievement map

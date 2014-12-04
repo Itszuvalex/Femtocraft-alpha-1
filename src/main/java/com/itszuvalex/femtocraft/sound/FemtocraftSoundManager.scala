@@ -18,7 +18,7 @@ object FemtocraftSoundManager {
 
   def makePhlegethonSound(x: Int, y: Int, z: Int) = createSound(PhlegethonTunnelIdentifier, 1f, 1f, x.toInt, y.toInt, z.toInt, repeat = true, 0, AttenuationType.LINEAR)
 
-  def createSound(identifier: String, volume: Float, pitch: Float, x: Int, y: Int, z: Int, repeat: Boolean, repeatDelay: Int, attenuation: AttenuationType) =
+  def createSound(identifier: String, volume: Float, pitch: Float, x: Int, y: Int, z: Int, repeat: Boolean, repeatDelay: Int, attenuation: ISound.AttenuationType) =
     new PositionedSoundLoopable(new ResourceLocation(identifier), volume, pitch, x, y, z, repeat, repeatDelay, attenuation)
 
   object SoundAction {

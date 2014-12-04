@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft.utils
 import java.util
 import java.util.Random
 
+import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.implicits.IDImplicits._
 import net.minecraft.client.Minecraft
@@ -36,10 +37,14 @@ import net.minecraft.world.World
 import net.minecraftforge.common.util.ForgeDirection
 import net.minecraftforge.oredict.OreDictionary
 
+import scala.collection.JavaConversions._
+
 object FemtocraftUtils {
   def indexOfForgeDirection(dir: ForgeDirection) = dir.ordinal
 
   def isPlayerOnline(username: String) = MinecraftServer.getServer.getAllUsernames.contains(username)
+
+  def isPlayerAssistantsOnline(username: String): Boolean = Femtocraft.assistantManager.getPlayerAssistants(username).exists(p => isPlayerOnline(p._1))
 
   def getPlayer(username: String) = Minecraft.getMinecraft.theWorld.getPlayerEntityByName(username)
 
