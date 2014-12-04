@@ -23,9 +23,12 @@ package com.itszuvalex.femtocraft.utils
 import java.io.File
 
 import com.itszuvalex.femtocraft.Femtocraft
+import cpw.mods.fml.common.FMLCommonHandler
+import cpw.mods.fml.relauncher.Side
 import net.minecraft.client.Minecraft
 import net.minecraft.server.MinecraftServer
 import net.minecraft.world.World
+
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/26/14.
@@ -39,9 +42,18 @@ object FemtocraftFileUtils {
     dir.getPath
   }
 
-  def savePath(world: World) = if (!MinecraftServer.getServer.isDedicatedServer)
-                                 Minecraft.getMinecraft.mcDataDir + "/saves/" + world.getSaveHandler.getWorldDirectoryName
-                               else MinecraftServer.getServer.getFile(world.getSaveHandler.getWorldDirectoryName).getPath
+  def savePath(world: World) = if (!MinecraftServer.getServer.isDedicatedServer) Minecraft.getMinecraft.mcDataDir + "/saves/" + world.getSaveHandler.getWorldDirectoryName else MinecraftServer.getServer.getFile(world.getSaveHandler.getWorldDirectoryName).getPath
+
+  def configPath = if (FMLCommonHandler.instance.getEffectiveSide == Side.SERVER) MinecraftServer.getServer.getFile("/config/" + Femtocraft.ID + "/").getPath else Minecraft.getMinecraft.mcDataDir + "/config/" + Femtocraft.ID + "/"
+
+  def configFolder: File = {
+    val path = configPath
+    val f = new File(path)
+    if (!f.exists()) {
+      f.mkdir()
+    }
+    f
+  }
 }
 
 

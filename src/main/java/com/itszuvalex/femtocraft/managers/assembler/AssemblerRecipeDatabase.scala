@@ -20,18 +20,21 @@
  */
 package com.itszuvalex.femtocraft.managers.assembler
 
-import java.io.{ByteArrayInputStream, DataInputStream, IOException}
+import java.io.{ByteArrayInputStream, DataInputStream, File, IOException}
 import java.sql._
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.research.ITechnology
 import com.itszuvalex.femtocraft.api.{AssemblerRecipe, EnumTechLevel}
 import com.itszuvalex.femtocraft.implicits.IDImplicits._
+import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompressedStreamTools
 import org.apache.logging.log4j.Level
 
 import scala.Array
+
+import scala.collection.JavaConversions._
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 6/28/14.
@@ -237,7 +240,7 @@ class AssemblerRecipeDatabase() {
   @throws(classOf[SQLException])
   private def refreshConnection() {
     if (c == null) {
-      c = DriverManager.getConnection("jdbc:sqlite:" + "config/" + AssemblerRecipeDatabase.DB_FILENAME)
+      c = DriverManager.getConnection("jdbc:sqlite:" + new File(FemtocraftFileUtils.configFolder, AssemblerRecipeDatabase.DB_FILENAME).getPath)
     }
   }
 

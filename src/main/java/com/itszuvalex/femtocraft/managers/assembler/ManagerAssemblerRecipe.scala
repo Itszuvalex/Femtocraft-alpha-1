@@ -129,7 +129,7 @@ class ManagerAssemblerRecipe {
           Femtocraft.log(Level.WARN, "Failed to register shaped assembler recipe for " + orecipe.getRecipeOutput.getDisplayName + "!")
         }
         else {
-          Femtocraft.log(Level.INFO, "LoadedForge shaped ore recipe as assembler recipe for " + orecipe.getRecipeOutput.getDisplayName + ".")
+          Femtocraft.log(Level.INFO, "Loaded Forge shaped ore recipe as assembler recipe for " + orecipe.getRecipeOutput.getDisplayName + ".")
         }
       }
       catch {

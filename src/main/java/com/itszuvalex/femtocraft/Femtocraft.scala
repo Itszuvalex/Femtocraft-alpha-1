@@ -49,7 +49,7 @@ import com.itszuvalex.femtocraft.research.items.{ItemFemtoTechnology, ItemMicroT
 import com.itszuvalex.femtocraft.sound.FemtocraftSoundManager
 import com.itszuvalex.femtocraft.transport.items.blocks.BlockVacuumTube
 import com.itszuvalex.femtocraft.transport.liquids.blocks.BlockSuctionPipe
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.utils.{FemtocraftFileUtils, FemtocraftUtils}
 import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent, FMLServerStartingEvent}
 import cpw.mods.fml.common.network.NetworkRegistry
@@ -76,7 +76,7 @@ object Femtocraft {
   final val ID                   = "Femtocraft"
   final val VERSION              = "0.1.0"
   final val TECH_CONFIG_APPEND   = "Technology"
-  final val RECIPE_CONFIG_APPEND = "Recipes"
+  final val RECIPE_CONFIG_APPEND = "AssemblerRecipes"
 
   //  /* Packet Channels */
   //  final val GUI_CHANNEL               = ID + ".gui"
@@ -287,16 +287,11 @@ object Femtocraft {
     researchManager = new ManagerResearch
     assistantManager = new ManagerAssistant
     femtocraftServerCommand = new CommandFemtocraft
-    val suggestedConfig = event.getSuggestedConfigurationFile
-    config = new Configuration(suggestedConfig)
+    config = new Configuration(new File(FemtocraftFileUtils.configFolder, ID + ".cfg"))
     FemtocraftConfigs.load(config)
-    val suggestConfigName = suggestedConfig.getName.split("\\.")
-    technologyConfigFile = new File(suggestedConfig.getParentFile,
-                                    suggestConfigName(0) + TECH_CONFIG_APPEND +
-                                    "." + (if (FemtocraftConfigs.useXMLFile) "xml" else suggestConfigName(1)))
-    recipeConfigFile = new File(suggestedConfig.getParentFile,
-                                suggestConfigName(0) + RECIPE_CONFIG_APPEND +
-                                "." + suggestConfigName(1))
+    technologyConfigFile = new File(FemtocraftFileUtils.configFolder, TECH_CONFIG_APPEND +
+                                                                      "." + (if (FemtocraftConfigs.useXMLFile) "xml" else "cfg"))
+    recipeConfigFile = new File(FemtocraftFileUtils.configFolder, RECIPE_CONFIG_APPEND + ".cfg")
     recipeConfig = new Configuration(recipeConfigFile)
 
     FemtocraftPacketHandler.init()
