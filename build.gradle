@@ -23,7 +23,7 @@ compileScala {
   targetCompatibility = 1.7
 }
 
-version = "${VERSION}"
+version = ".1"
 group= "com.itszuvalex.femtocraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "femtocraft"
 
