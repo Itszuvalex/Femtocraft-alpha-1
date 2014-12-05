@@ -2,7 +2,8 @@ package com.itszuvalex.femtocraft.managers.assembler
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.EnumTechLevel
-import com.itszuvalex.femtocraft.api.core.RecipeType
+import com.itszuvalex.femtocraft.api.core.{Configurable, RecipeType}
+import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
 import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils
 import net.minecraft.item.{Item, ItemStack}
 
@@ -13,7 +14,14 @@ import scala.collection.mutable.ArrayBuffer
 /**
  * Created by Christopher Harris (Itszuvalex) on 10/10/14.
  */
-object ComponentRegistry {
+@Configurable object ComponentRegistry {
+  @Configurable val showComponentTooltips           = true
+  @Configurable val componentTooltipsAreAdvanced    = true
+  @Configurable val microComponentTooltipTechnology = FemtocraftTechnologies.BASIC_CHEMISTRY
+  @Configurable val nanoComponentTooltipTechnology  = FemtocraftTechnologies.ADVANCED_CHEMISTRY
+  @Configurable val femtoComponentTooltipTechnology = FemtocraftTechnologies.APPLIED_PARTICLE_PHYSICS
+
+
   private val componentMap = new mutable.HashMap[EnumTechLevel, ArrayBuffer[Item]]
 
   def registerComponent(item: Item, tech: EnumTechLevel) = getOrMake(tech) append item

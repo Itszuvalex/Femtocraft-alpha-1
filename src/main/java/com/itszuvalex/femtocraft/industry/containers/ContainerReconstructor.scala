@@ -40,10 +40,10 @@ class ContainerReconstructor[T <: TileEntityBaseEntityMicroReconstructor](player
   private var lastCookTime = 0
   private var lastPower    = 0
 
-  addSlotToContainer(new OutputSlot(inventory, 9, 122, 18))
+
   private var lastMass = 0
   schematic.setBackgroundIcon(ItemAssemblySchematic.placeholderIcon)
-  addSlotToContainer(schematic)
+
   for (y <- 0 until 3) {
     for (x <- 0 until 3) {
       addSlotToContainer(new DisplaySlot(inventory, x + y * 3, 32 + x * 18, 18 + y * 18) {
@@ -51,6 +51,8 @@ class ContainerReconstructor[T <: TileEntityBaseEntityMicroReconstructor](player
       })
     }
   }
+  addSlotToContainer(new OutputSlot(inventory, 9, 122, 18))
+  addSlotToContainer(schematic)
   for (y <- 0 until 2) {
     for (x <- 0 until 9) {
       addSlotToContainer(new Slot(inventory, 11 + x + y * 9, 8 + x * 18, 77 + y * 18))

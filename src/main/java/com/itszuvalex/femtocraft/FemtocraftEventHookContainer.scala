@@ -23,10 +23,12 @@ package com.itszuvalex.femtocraft
 import com.itszuvalex.femtocraft.api.items.ItemAssemblySchematic
 import com.itszuvalex.femtocraft.common.gui.DisplaySlot
 import com.itszuvalex.femtocraft.core.MagnetRegistry
+import com.itszuvalex.femtocraft.managers.assembler.ComponentRegistry
 import com.itszuvalex.femtocraft.player.PlayerProperties
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.relauncher.{Side, SideOnly}
+import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumChatFormatting
 import net.minecraftforge.client.event.TextureStitchEvent
@@ -73,20 +75,25 @@ class FemtocraftEventHookContainer {
     }
   }
 
-  val showDecompositionTooltips: Boolean = true
-
   @SubscribeEvent def onTooltip(event: ItemTooltipEvent) {
     if (MagnetRegistry.showMagnetismTooltip && MagnetRegistry.isMagnet(event.itemStack) && !MagnetRegistry.magnetismTooltipIsAdvanced || (MagnetRegistry.magnetismTooltipIsAdvanced && event.showAdvancedItemTooltips)) {
-      event.toolTip.add(EnumChatFormatting.GOLD + "Magnet Strength: " + EnumChatFormatting.RESET + String.valueOf(MagnetRegistry.getMagnetStrength(event.itemStack)))
+      event.toolTip.add(EnumChatFormatting.DARK_RED + "Magnet Strength: " + EnumChatFormatting.RESET + String.valueOf(MagnetRegistry.getMagnetStrength(event.itemStack)))
     }
 
 
-    if (showDecompositionTooltips) {
-      val (molecules, atoms, particles, mass) = Femtocraft.recipeManager.assemblyRecipes.getDecompositionCounts(event.itemStack)
-      event.toolTip.add(FemtocraftUtils.blueify("Molecules:") + FemtocraftUtils.formatIntegerToString(molecules))
-      event.toolTip.add(FemtocraftUtils.greenify("Atoms:") + FemtocraftUtils.formatIntegerToString(atoms))
-      event.toolTip.add(FemtocraftUtils.orangeify("Particles:") + FemtocraftUtils.formatIntegerToString(particles))
-      event.toolTip.add(EnumChatFormatting.LIGHT_PURPLE + "Mass:" + EnumChatFormatting.RESET + FemtocraftUtils.formatIntegerToString(mass))
+    if (ComponentRegistry.showComponentTooltips && (!ComponentRegistry.componentTooltipsAreAdvanced || (ComponentRegistry.componentTooltipsAreAdvanced && event.showAdvancedItemTooltips))) {
+      val username = Minecraft.getMinecraft.thePlayer.getCommandSenderName
+      Femtocraft.recipeManager.assemblyRecipes.getDecompositionCounts(event.itemStack) match {
+        case (0, 0, 0, 0)                        =>
+        case (molecules, atoms, particles, mass) =>
+          if (Femtocraft.researchManager.hasPlayerResearchedTechnology(username, ComponentRegistry.microComponentTooltipTechnology))
+            event.toolTip.add(FemtocraftUtils.blueify("Molecules: ") + FemtocraftUtils.formatIntegerToString(molecules))
+          if (Femtocraft.researchManager.hasPlayerResearchedTechnology(username, ComponentRegistry.nanoComponentTooltipTechnology))
+            event.toolTip.add(FemtocraftUtils.greenify("Atoms: ") + FemtocraftUtils.formatIntegerToString(atoms))
+          if (Femtocraft.researchManager.hasPlayerResearchedTechnology(username, ComponentRegistry.femtoComponentTooltipTechnology))
+            event.toolTip.add(FemtocraftUtils.orangeify("Particles: ") + FemtocraftUtils.formatIntegerToString(particles))
+          event.toolTip.add(EnumChatFormatting.DARK_PURPLE + "Mass: " + EnumChatFormatting.RESET + FemtocraftUtils.formatIntegerToString(mass))
+      }
     }
 
   }
