@@ -278,8 +278,8 @@ public class GuiNanoFissionReactor extends GuiBase {
                 FemtocraftSoundUtils.playClickSound();
                 reactor.onAbortClick();
             }
-            super.mouseClicked(par1, par2, par3);
         }
+        super.mouseClicked(par1, par2, par3);
     }
 
     private void renderTank(IFluidTank tank, int x, int y, int k, int l) {
