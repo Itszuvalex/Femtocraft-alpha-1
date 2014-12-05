@@ -114,7 +114,7 @@ object TileEntityBaseEntityMicroReconstructor {
       (11 until getSizeInventory).toArray
   }
 
-  override def canInsertItem(i: Int, itemstack: ItemStack, j: Int) = i > 10
+  override def canInsertItem(i: Int, itemstack: ItemStack, j: Int) = i == 10 && isItemValidForSlot(10, itemstack)
 
   override def canExtractItem(i: Int, itemstack: ItemStack, j: Int) = i == 9 || i > 10
 
@@ -210,7 +210,7 @@ object TileEntityBaseEntityMicroReconstructor {
 
     reconstructingStacks = null
     var i: Int = 0
-    val exclusions: Array[Int] = Array[Int](0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    val exclusions: Array[Int] = (0 to 10).toArray
     var continue = true
     do {
       as = getSchematic

@@ -41,7 +41,7 @@ class ContainerReconstructor[T <: TileEntityBaseEntityMicroReconstructor](player
   private var lastPower    = 0
 
   addSlotToContainer(new OutputSlot(inventory, 9, 122, 18))
-  private var lastMass     = 0
+  private var lastMass = 0
   schematic.setBackgroundIcon(ItemAssemblySchematic.placeholderIcon)
   addSlotToContainer(schematic)
   for (y <- 0 until 3) {
@@ -88,8 +88,8 @@ class ContainerReconstructor[T <: TileEntityBaseEntityMicroReconstructor](player
 
   @SideOnly(Side.CLIENT) override def updateProgressBar(par1: Int, par2: Int) {
     par1 match {
-      case 0 => inventory.cookTime_$eq(par2)
-      case 1 => inventory.currentPower_$eq(par2)
+      case 0 => inventory.cookTime = par2
+      case 1 => inventory.currentPower = par2
       case 2 => if (par2 > 0) inventory.setFluidAmount(par2) else this.inventory.clearFluid()
       case _ =>
     }
