@@ -20,15 +20,17 @@
  */
 package com.itszuvalex.femtocraft.managers.assembler
 
+import java.io.File
 import java.util
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.events.EventAssemblerRegister
 import com.itszuvalex.femtocraft.api.{AssemblerRecipe, EnumTechLevel}
+import com.itszuvalex.femtocraft.configuration.XMLRecipes
 import com.itszuvalex.femtocraft.implicits.IDImplicits._
 import com.itszuvalex.femtocraft.managers.research.Technology
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.utils.{FemtocraftFileUtils, FemtocraftDataUtils, FemtocraftUtils}
 import net.minecraft.init.{Blocks, Items}
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.{CraftingManager, IRecipe, ShapedRecipes, ShapelessRecipes}
@@ -370,14 +372,23 @@ class ManagerAssemblerRecipe {
   private def registerRecipes() {
     Femtocraft.log(Level.INFO, "Registering Femtocraft assembler recipes.")
     if (ard.shouldRegister) {
-      Femtocraft.assemblerConfigs.setBatchLoading(true)
-      registerCustomRecipes()
-      registerFemtoDecompositionRecipes()
-      registerNanoDecompositionRecipes()
-      registerMicroDecompositionRecipes()
-      registerMacroDecompositionRecipes()
-      registerFemtocraftAssemblerRecipes()
-      Femtocraft.assemblerConfigs.setBatchLoading(false)
+
+      val test =new XMLRecipes(new File(FemtocraftFileUtils.configFolder, "Recipes.xml"))
+      if(!test.initialized)
+      {
+        Femtocraft.assemblerConfigs.setBatchLoading(true)
+        registerCustomRecipes()
+        registerFemtoDecompositionRecipes()
+        registerNanoDecompositionRecipes()
+        registerMicroDecompositionRecipes()
+        registerMacroDecompositionRecipes()
+        registerFemtocraftAssemblerRecipes()
+        Femtocraft.assemblerConfigs.setBatchLoading(false)
+        test.seedInitialRecipes(getAllRecipes)
+      }
+      else {
+        test.loadCustomRecipes().foreach(addReversableRecipe)
+      }
     }
     Femtocraft.log(Level.INFO, "Finished registering Femtocraft assembler recipes.")
   }
