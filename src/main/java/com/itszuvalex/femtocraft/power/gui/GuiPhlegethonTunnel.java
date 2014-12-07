@@ -136,7 +136,7 @@ public class GuiPhlegethonTunnel extends GuiBase {
         fontRendererObj.drawSplitString(EnumChatFormatting.WHITE +
                                         FemtocraftUtils.formatIntegerString(
                                                 String.valueOf(tunnel.getCurrentPower())) + "/\n" +
-                                        FemtocraftUtils.formatIntegerString(String.valueOf(tunnel.getMaxPower())), 126,
+                                        FemtocraftUtils.formatIntegerString(String.valueOf(tunnel.getMaxPower())) + " OP", 126,
                 16, 40, 40);
     }
 
