@@ -102,39 +102,39 @@ object MultiSided {
         dir match {
           case UP   =>
             orig match {
-              case UP    =>
-              case DOWN  =>
-              case NORTH =>
-              case EAST  =>
-              case SOUTH =>
-              case WEST  =>
+              case UP    => NORTH
+              case DOWN  => SOUTH
+              case NORTH => UP
+              case EAST  => WEST
+              case SOUTH => DOWN
+              case WEST  => EAST
             }
           case EAST =>
             orig match {
-              case UP    =>
-              case DOWN  =>
-              case NORTH =>
-              case EAST  =>
-              case SOUTH =>
-              case WEST  =>
+              case UP    => EAST
+              case DOWN  => WEST
+              case NORTH => UP
+              case EAST  => NORTH
+              case SOUTH => DOWN
+              case WEST  => SOUTH
             }
           case DOWN =>
             orig match {
-              case UP    =>
-              case DOWN  =>
-              case NORTH =>
-              case EAST  =>
-              case SOUTH =>
-              case WEST  =>
+              case UP    => SOUTH
+              case DOWN  => NORTH
+              case NORTH => UP
+              case EAST  => EAST
+              case SOUTH => DOWN
+              case WEST  => WEST
             }
           case WEST =>
             orig match {
-              case UP    =>
-              case DOWN  =>
-              case NORTH =>
-              case EAST  =>
-              case SOUTH =>
-              case WEST  =>
+              case UP    => WEST
+              case DOWN  => EAST
+              case NORTH => UP
+              case EAST  => SOUTH
+              case SOUTH => DOWN
+              case WEST  => NORTH
             }
           case _    => UNKNOWN
         }
@@ -166,39 +166,39 @@ object MultiSided {
         dir match {
           case UP    =>
             orig match {
-              case UP    =>
-              case DOWN  =>
-              case NORTH =>
-              case EAST  =>
-              case SOUTH =>
-              case WEST  =>
+              case UP    => NORTH
+              case DOWN  => SOUTH
+              case NORTH => EAST
+              case EAST  => UP
+              case SOUTH => WEST
+              case WEST  => DOWN
             }
           case SOUTH =>
             orig match {
-              case UP    =>
-              case DOWN  =>
-              case NORTH =>
-              case EAST  =>
-              case SOUTH =>
-              case WEST  =>
+              case UP    => EAST
+              case DOWN  => WEST
+              case NORTH => SOUTH
+              case EAST  => UP
+              case SOUTH => NORTH
+              case WEST  => DOWN
             }
           case DOWN  =>
             orig match {
-              case UP    =>
-              case DOWN  =>
-              case NORTH =>
-              case EAST  =>
-              case SOUTH =>
-              case WEST  =>
+              case UP    => SOUTH
+              case DOWN  => NORTH
+              case NORTH => WEST
+              case EAST  => UP
+              case SOUTH => EAST
+              case WEST  => DOWN
             }
           case NORTH =>
             orig match {
-              case UP    =>
-              case DOWN  =>
-              case NORTH =>
-              case EAST  =>
-              case SOUTH =>
-              case WEST  =>
+              case UP    => WEST
+              case DOWN  => EAST
+              case NORTH => NORTH
+              case EAST  => UP
+              case SOUTH => SOUTH
+              case WEST  => DOWN
             }
           case _     => UNKNOWN
         }
