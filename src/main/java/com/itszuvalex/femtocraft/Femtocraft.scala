@@ -559,6 +559,10 @@ object Femtocraft {
     GameRegistry.registerBlock(blockFluidCooledContaminatedMoltenSalt, "BlockFluidCooledContaminatedMoltenSalt")
     LanguageRegistry.addName(blockFluidCooledContaminatedMoltenSalt, "Cooled Contaminated Molten Salt")
     blockPlasma = new BlockPlasma()
+
+    val sidedTest = new BlockSidedTest().setBlockName("SidedTest")
+    GameRegistry.registerBlock(sidedTest, "Sided Test")
+
     itemIngotTitanium = registerItem("ItemIngotTitanium", "Titanium Ingot")
     if (FemtocraftConfigs.registerTitaniumIngotInOreDictionary) OreDictionary.registerOre("ingotTitanium", new ItemStack(itemIngotTitanium))
 

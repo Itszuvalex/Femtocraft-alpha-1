@@ -14,6 +14,9 @@ import net.minecraftforge.common.util.ForgeDirection._
  * Created by Chris on 12/6/2014.
  */
 object MultiSided {
+  //TODO : THIS DOES NOT WORK
+  //     METADATA IS ONLY 16 POSSIBLE VALUES
+  //    THIS REQURIES 24.  YOU WILL NEED TO GO TO TILE ENTITIES TO DO THIS.
   def getTopAndFrontFromMetadata(metadata: Byte): (ForgeDirection, ForgeDirection) = {
     val top = getOrientation(metadata / 4)
     var front = UNKNOWN
@@ -108,6 +111,7 @@ object MultiSided {
               case EAST  => WEST
               case SOUTH => DOWN
               case WEST  => EAST
+              case _     => UNKNOWN
             }
           case EAST =>
             orig match {
@@ -117,6 +121,7 @@ object MultiSided {
               case EAST  => NORTH
               case SOUTH => DOWN
               case WEST  => SOUTH
+              case _     => UNKNOWN
             }
           case DOWN =>
             orig match {
@@ -126,6 +131,7 @@ object MultiSided {
               case EAST  => EAST
               case SOUTH => DOWN
               case WEST  => WEST
+              case _     => UNKNOWN
             }
           case WEST =>
             orig match {
@@ -135,6 +141,7 @@ object MultiSided {
               case EAST  => SOUTH
               case SOUTH => DOWN
               case WEST  => NORTH
+              case _     => UNKNOWN
             }
           case _    => UNKNOWN
         }
@@ -149,6 +156,7 @@ object MultiSided {
               case EAST  => NORTH
               case SOUTH => EAST
               case WEST  => SOUTH
+              case _     => UNKNOWN
             }
           case SOUTH => orig.getOpposite
           case WEST  =>
@@ -159,6 +167,7 @@ object MultiSided {
               case EAST  => SOUTH
               case SOUTH => WEST
               case WEST  => NORTH
+              case _     => UNKNOWN
             }
           case _     => UNKNOWN
         }
@@ -172,6 +181,7 @@ object MultiSided {
               case EAST  => UP
               case SOUTH => WEST
               case WEST  => DOWN
+              case _     => UNKNOWN
             }
           case SOUTH =>
             orig match {
@@ -181,6 +191,7 @@ object MultiSided {
               case EAST  => UP
               case SOUTH => NORTH
               case WEST  => DOWN
+              case _     => UNKNOWN
             }
           case DOWN  =>
             orig match {
@@ -190,6 +201,7 @@ object MultiSided {
               case EAST  => UP
               case SOUTH => EAST
               case WEST  => DOWN
+              case _     => UNKNOWN
             }
           case NORTH =>
             orig match {
@@ -199,6 +211,7 @@ object MultiSided {
               case EAST  => UP
               case SOUTH => SOUTH
               case WEST  => DOWN
+              case _     => UNKNOWN
             }
           case _     => UNKNOWN
         }
@@ -225,7 +238,7 @@ trait MultiSided extends Block {
   override def getIcon(side: Int, metadata: Int): IIcon = {
     val (top, front) = getTopAndFrontFromMetadata(metadata.toByte)
     getRotatedSide(ForgeDirection.getOrientation(side), top, front) match {
-      case UNKNOWN => blockIcon
+      case UNKNOWN => super.getIcon(side, metadata)
       case other   => icons(other.ordinal)
     }
   }
@@ -235,14 +248,15 @@ trait MultiSided extends Block {
     Assume north face is front.
     Assume up face is top.
      */
-    icons(NORTH.ordinal()) = register.registerIcon(getTextureName + "_north")
-    icons(EAST.ordinal()) = register.registerIcon(getTextureName + "_east")
-    icons(SOUTH.ordinal()) = register.registerIcon(getTextureName + "_south")
-    icons(WEST.ordinal()) = register.registerIcon(getTextureName + "_west")
-    icons(UP.ordinal()) = register.registerIcon(getTextureName + "_up")
-    icons(DOWN.ordinal()) = register.registerIcon(getTextureName + "_down")
+    icons(NORTH.ordinal()) = register.registerIcon(getTextureNameForSide(NORTH))
+    icons(EAST.ordinal()) = register.registerIcon(getTextureNameForSide(EAST))
+    icons(SOUTH.ordinal()) = register.registerIcon(getTextureNameForSide(SOUTH))
+    icons(WEST.ordinal()) = register.registerIcon(getTextureNameForSide(WEST))
+    icons(UP.ordinal()) = register.registerIcon(getTextureNameForSide(UP))
+    icons(DOWN.ordinal()) = register.registerIcon(getTextureNameForSide(DOWN))
   }
 
+  def getTextureNameForSide(side: ForgeDirection): String
 
   /**
    * set a blocks direction
