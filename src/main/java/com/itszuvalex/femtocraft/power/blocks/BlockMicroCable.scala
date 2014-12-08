@@ -75,7 +75,7 @@ class BlockMicroCable(material: Material) extends BlockPowerContainer(material) 
     par1World.getTileEntity(x, y, z) match {
       case cable: TileEntityMicroCable =>
         for (i <- 0 until 6) {
-          if (cable.connections(i)) {
+          if (cable.isConnected(i)) {
             val bb = boundingBoxForDirection(ForgeDirection.getOrientation(i), x, y, z)
             if (par5AxisAlignedBB.intersectsWith(bb)) {
               par6List.asInstanceOf[util.List[AxisAlignedBB]].add(bb)
@@ -84,20 +84,6 @@ class BlockMicroCable(material: Material) extends BlockPowerContainer(material) 
         }
       case _                           =>
     }
-  }
-
-  @SideOnly(Side.CLIENT) override def getSelectedBoundingBoxFromPool(par1World: World, x: Int, y: Int, z: Int): AxisAlignedBB = {
-    var box = AxisAlignedBB.getBoundingBox(x.toDouble + 4f / 16f, y.toDouble + 4f / 16f, z.toDouble + 4f / 16f, x.toDouble + 12f / 16f, y.toDouble + 12f / 16f, z.toDouble + 12f / 16f)
-    par1World.getTileEntity(x, y, z) match {
-      case cable: TileEntityMicroCable =>
-        for (i <- 0 until 6) {
-          if (cable.connections(i)) {
-            box = box.func_111270_a(boundingBoxForDirection(ForgeDirection.getOrientation(i), x, y, z))
-          }
-        }
-      case _                           =>
-    }
-    box
   }
 
   protected def boundingBoxForDirection(dir: ForgeDirection, x: Int, y: Int, z: Int): AxisAlignedBB = {
@@ -119,6 +105,20 @@ class BlockMicroCable(material: Material) extends BlockPowerContainer(material) 
     AxisAlignedBB.getBoundingBox(x.toDouble + minX, y.toDouble + minY, z.toDouble + minZ, x.toDouble + maxX, y.toDouble + maxY, z.toDouble + maxZ)
   }
 
+  @SideOnly(Side.CLIENT) override def getSelectedBoundingBoxFromPool(par1World: World, x: Int, y: Int, z: Int): AxisAlignedBB = {
+    var box = AxisAlignedBB.getBoundingBox(x.toDouble + 4f / 16f, y.toDouble + 4f / 16f, z.toDouble + 4f / 16f, x.toDouble + 12f / 16f, y.toDouble + 12f / 16f, z.toDouble + 12f / 16f)
+    par1World.getTileEntity(x, y, z) match {
+      case cable: TileEntityMicroCable =>
+        for (i <- 0 until 6) {
+          if (cable.isConnected(i)) {
+            box = box.func_111270_a(boundingBoxForDirection(ForgeDirection.getOrientation(i), x, y, z))
+          }
+        }
+      case _                           =>
+    }
+    box
+  }
+
   @SideOnly(Side.CLIENT) override def getCollisionBoundingBoxFromPool(par1World: World, x: Int, y: Int, z: Int): AxisAlignedBB = {
     AxisAlignedBB.getBoundingBox(x.toDouble + 4f / 16f, y.toDouble + 4f / 16f, z.toDouble + 4f / 16f, x.toDouble + 12f / 16f, y.toDouble + 12f / 16f, z.toDouble + 12f / 16f)
   }
@@ -135,7 +135,7 @@ class BlockMicroCable(material: Material) extends BlockPowerContainer(material) 
     par1iBlockAccess.getTileEntity(x, y, z) match {
       case cable: TileEntityMicroCable =>
         for (i <- 0 until 6) {
-          if (cable.connections(i)) {
+          if (cable.isConnected(i)) {
             val dir = ForgeDirection.getOrientation(i)
             dir match {
               case UP    => maxY = 1

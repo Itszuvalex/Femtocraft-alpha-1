@@ -8,10 +8,10 @@ import net.minecraft.world.World;
  */
 public class FemtocraftPowerTrampoline {
     /**
-     * {@link com.itszuvalex.femtocraft.power.FemtocraftPowerUtils#distributePower(IPowerBlockContainer, boolean[],
+     * {@link com.itszuvalex.femtocraft.power.FemtocraftPowerUtils#distributePower(IPowerTileContainer, boolean[],
      * net.minecraft.world.World, int, int, int)}
      */
-    public static void distributePower(IPowerBlockContainer container, boolean[] connections, World world, int x,
+    public static void distributePower(IPowerTileContainer container, boolean[] connections, World world, int x,
                                        int y, int z) {
         FemtocraftPowerUtils.distributePower(container, connections, world, x, y, z);
     }

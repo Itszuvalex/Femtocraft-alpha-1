@@ -22,7 +22,7 @@ package com.itszuvalex.femtocraft.power
 
 import java.util
 
-import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer
+import com.itszuvalex.femtocraft.api.power.IPowerTileContainer
 import net.minecraft.world.World
 import net.minecraftforge.common.util.ForgeDirection
 
@@ -36,7 +36,7 @@ object FemtocraftPowerUtils {
   val distributionBuffer = .01f
   val maxPowerPerTick    = .05f
   private val sconnections    = new Array[Boolean](6)
-  private val sneighbors      = new Array[IPowerBlockContainer](6)
+  private val sneighbors      = new Array[IPowerTileContainer](6)
   private val fillPercentages = new Array[Float](6)
 
   /**
@@ -54,7 +54,7 @@ object FemtocraftPowerUtils {
    * @param y           Y coordinate for the algorithm to center its distribution search upon
    * @param z           Z coordinate for the algorithm to center its distribution search upon
    */
-  def distributePower(container: IPowerBlockContainer, connections: Array[Boolean], world: World, x: Int, y: Int, z: Int) {
+  def distributePower(container: IPowerTileContainer, connections: Array[Boolean], world: World, x: Int, y: Int, z: Int) {
     if (container.getCurrentPower <= 0) {
       return
     }
@@ -74,7 +74,7 @@ object FemtocraftPowerUtils {
         val dir = ForgeDirection.getOrientation(i)
         if (world.getChunkProvider.chunkExists((x + dir.offsetX) >> 4, (z + dir.offsetZ) >> 4)) {
           world.getTileEntity(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ) match {
-            case container1: IPowerBlockContainer =>
+            case container1: IPowerTileContainer =>
               sneighbors(i) = container1
               numConnections += 1
             case _                                =>
@@ -113,7 +113,7 @@ object FemtocraftPowerUtils {
     }
   }
 
-  def distributePower(container: IPowerBlockContainer, contacts: Array[IPowerBlockContainer]) {
+  def distributePower(container: IPowerTileContainer, contacts: Array[IPowerTileContainer]) {
     var percentDifferenceTotal = 0f
     val maxSpreadThisTick = (container.getCurrentPower.toFloat * maxPowerPerTick).toInt * contacts.length
     val fillPercentages = new Array[Float](contacts.length)

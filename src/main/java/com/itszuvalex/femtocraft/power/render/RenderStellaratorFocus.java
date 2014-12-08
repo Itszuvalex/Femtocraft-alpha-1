@@ -76,7 +76,7 @@ public class RenderStellaratorFocus implements ISimpleBlockRenderingHandler {
     private void createFocus(BlockFemtoStellaratorFocus focus) {
         focusModel = new RenderModel();
 
-        IIcon icon = focus.outsideIcon;
+        IIcon icon = focus.outsideIcon();
         float minU = icon.getMinU();
         float maxU = icon.getMaxU();
         float minV = icon.getMinV();
@@ -104,7 +104,7 @@ public class RenderStellaratorFocus implements ISimpleBlockRenderingHandler {
                 minU, maxU, minV,
                 maxV).flipV());
 
-        icon = focus.insideIcon;
+        icon = focus.insideIcon();
         minU = icon.getMinU();
         maxU = icon.getMaxU();
         minV = icon.getMinV();

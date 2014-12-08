@@ -5,7 +5,7 @@ import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
-import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
+import com.itszuvalex.femtocraft.api.power.IPowerTileContainer;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.power.FemtocraftPowerUtils;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,7 +21,7 @@ import net.minecraftforge.fluids.IFluidHandler;
  * Created by Chris on 8/26/2014.
  */
 public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBlockComponent,
-        IPowerBlockContainer, IFluidHandler {
+        IPowerTileContainer, IFluidHandler {
 
     public static float steamGeneratorPercentageMultiplier = (1.f / 3.f);
     @Saveable(desc = true)
@@ -85,8 +85,8 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     public boolean canAcceptPowerOfLevel(EnumTechLevel level, ForgeDirection from) {
         if (isValidMultiBlock()) {
             TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
-            if (te instanceof IPowerBlockContainer) {
-                return ((IPowerBlockContainer) te).canAcceptPowerOfLevel(level, from);
+            if (te instanceof IPowerTileContainer) {
+                return ((IPowerTileContainer) te).canAcceptPowerOfLevel(level, from);
             }
         }
         return false;
@@ -96,8 +96,8 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     public EnumTechLevel getTechLevel(ForgeDirection to) {
         if (isValidMultiBlock()) {
             TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
-            if (te instanceof IPowerBlockContainer) {
-                return ((IPowerBlockContainer) te).getTechLevel(to);
+            if (te instanceof IPowerTileContainer) {
+                return ((IPowerTileContainer) te).getTechLevel(to);
             }
         }
         return null;
@@ -107,8 +107,8 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     public int getCurrentPower() {
         if (isValidMultiBlock()) {
             TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
-            if (te instanceof IPowerBlockContainer) {
-                return ((IPowerBlockContainer) te).getCurrentPower();
+            if (te instanceof IPowerTileContainer) {
+                return ((IPowerTileContainer) te).getCurrentPower();
             }
         }
         return 0;
@@ -118,8 +118,8 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     public int getMaxPower() {
         if (isValidMultiBlock()) {
             TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
-            if (te instanceof IPowerBlockContainer) {
-                return ((IPowerBlockContainer) te).getMaxPower();
+            if (te instanceof IPowerTileContainer) {
+                return ((IPowerTileContainer) te).getMaxPower();
             }
         }
         return 0;
@@ -129,8 +129,8 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     public float getFillPercentage() {
         if (isValidMultiBlock()) {
             TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
-            if (te instanceof IPowerBlockContainer) {
-                return ((IPowerBlockContainer) te).getFillPercentage();
+            if (te instanceof IPowerTileContainer) {
+                return ((IPowerTileContainer) te).getFillPercentage();
             }
         }
         return 1.f;
@@ -140,8 +140,8 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     public float getFillPercentageForCharging(ForgeDirection from) {
         if (isValidMultiBlock()) {
             TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
-            if (te instanceof IPowerBlockContainer) {
-                return ((IPowerBlockContainer) te).getFillPercentageForCharging(from);
+            if (te instanceof IPowerTileContainer) {
+                return ((IPowerTileContainer) te).getFillPercentageForCharging(from);
             }
         }
         return 1f;
@@ -151,8 +151,8 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     public float getFillPercentageForOutput(ForgeDirection to) {
         if (isValidMultiBlock()) {
             TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
-            if (te instanceof IPowerBlockContainer) {
-                return ((IPowerBlockContainer) te).getFillPercentageForOutput(to);
+            if (te instanceof IPowerTileContainer) {
+                return ((IPowerTileContainer) te).getFillPercentageForOutput(to);
             }
         }
         return 0f;
@@ -162,8 +162,8 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     public boolean canCharge(ForgeDirection from) {
         if (isValidMultiBlock()) {
             TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
-            if (te instanceof IPowerBlockContainer) {
-                return ((IPowerBlockContainer) te).canCharge(from);
+            if (te instanceof IPowerTileContainer) {
+                return ((IPowerTileContainer) te).canCharge(from);
             }
         }
         return false;
@@ -193,8 +193,8 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
                     break;
             }
             TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
-            if (te instanceof IPowerBlockContainer) {
-                return ((IPowerBlockContainer) te).canConnect(from);
+            if (te instanceof IPowerTileContainer) {
+                return ((IPowerTileContainer) te).canConnect(from);
             }
         }
         return false;
@@ -204,8 +204,8 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     public int charge(ForgeDirection from, int amount) {
         if (isValidMultiBlock()) {
             TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
-            if (te instanceof IPowerBlockContainer) {
-                return ((IPowerBlockContainer) te).charge(from, amount);
+            if (te instanceof IPowerTileContainer) {
+                return ((IPowerTileContainer) te).charge(from, amount);
             }
         }
         return 0;
@@ -215,8 +215,8 @@ public class TileEntitySteamGenerator extends TileEntityBase implements IMultiBl
     public boolean consume(int amount) {
         if (isValidMultiBlock()) {
             TileEntity te = worldObj.getTileEntity(info.x(), info.y(), info.z());
-            if (te instanceof IPowerBlockContainer) {
-                return ((IPowerBlockContainer) te).consume(amount);
+            if (te instanceof IPowerTileContainer) {
+                return ((IPowerTileContainer) te).consume(amount);
             }
         }
         return false;

@@ -22,18 +22,13 @@ package com.itszuvalex.femtocraft.power.tiles
 
 
 import com.itszuvalex.femtocraft.api.EnumTechLevel
-import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer
+import com.itszuvalex.femtocraft.api.power.IPowerTileContainer
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.power.FemtocraftPowerUtils
-import com.itszuvalex.femtocraft.power.traits.PowerBlockDistributor
+import com.itszuvalex.femtocraft.power.traits.PowerTileContainer
 import net.minecraftforge.common.util.ForgeDirection
 
-abstract class TileEntityPowerBase() extends TileEntityBase() with PowerBlockDistributor {
-  val connections = Array.fill[Boolean](6)(false)
-
-  /**
-   * Have to implement the generated() function to allow Java inheritance.
-   */
+abstract class TileEntityPowerBase extends TileEntityBase with PowerTileContainer {
 
   override def setMaxStorage(maxStorage: Int) {
     super.setMaxStorage(maxStorage)
@@ -50,41 +45,12 @@ abstract class TileEntityPowerBase() extends TileEntityBase() with PowerBlockDis
     setModified()
   }
 
-  def isConnected(i: Int) = connections(i)
-
-  def numConnections = connections.count(b => b)
-
-
   override def updateEntity() {
     checkConnections()
     super.updateEntity()
   }
 
-  def checkConnections() {
-    var changed = false
-    ForgeDirection.VALID_DIRECTIONS.foreach(offset => {
-      val prev = connections(offset.ordinal())
-      connections(offset.ordinal()) = false
-      val locx = this.xCoord + offset.offsetX
-      val locy = this.yCoord + offset.offsetY
-      val locz = this.zCoord + offset.offsetZ
-      val checkTile = this.worldObj.getTileEntity(locx, locy, locz)
-      checkTile match {
-        case fc: IPowerBlockContainer =>
-          if (fc.canConnect(offset.getOpposite) && fc.canAcceptPowerOfLevel(getTechLevel(offset.getOpposite), offset.getOpposite)) {
-            connections(offset.ordinal()) = true
-            if (prev != connections(offset.ordinal())) {
-              changed = true
-            }
-          }
-        case _                        =>
-      }
-    })
-    if (changed) {
-      setModified()
-      setRenderUpdate()
-    }
-  }
+
 
   override def femtocraftServerUpdate() {
     super.femtocraftServerUpdate()

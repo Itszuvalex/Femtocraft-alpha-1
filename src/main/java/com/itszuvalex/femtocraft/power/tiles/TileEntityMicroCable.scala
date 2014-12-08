@@ -18,15 +18,29 @@
  *  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *  *****************************************************************************
  */
+package com.itszuvalex.femtocraft.power.tiles
 
-package com.itszuvalex.femtocraft.power.tiles;
+import com.itszuvalex.femtocraft.api.EnumTechLevel
+import com.itszuvalex.femtocraft.api.core.Configurable
+import com.itszuvalex.femtocraft.api.power.PowerContainer
+import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
+import com.itszuvalex.femtocraft.power.tiles.TileEntityMicroCable._
+import com.itszuvalex.femtocraft.power.traits.PowerTileContainer
 
-import com.itszuvalex.femtocraft.api.EnumTechLevel;
-import com.itszuvalex.femtocraft.api.power.PowerContainer;
+object TileEntityMicroCable {
+  @Configurable(comment = "Power storage maximum.") private val storage   = 250
+  @Configurable(comment = "Tech level of power.") private   val techLevel = EnumTechLevel.MICRO
+}
 
-public class TileEntityFemtoCable extends TileEntityMicroCable {
-    @Override
-    public PowerContainer defaultContainer() {
-        return new PowerContainer(EnumTechLevel.FEMTO, 10000);
+@Configurable class TileEntityMicroCable extends TileEntityBase with PowerTileContainer {
+  def defaultContainer: PowerContainer = new PowerContainer(techLevel, storage)
+
+  def connectedAcross: Boolean = {
+    if (numConnections == 2) {
+      if (connections(0) && connections(1) || connections(2) && connections(3) || connections(4) && connections(5)) {
+        return true
+      }
     }
+    return false
+  }
 }

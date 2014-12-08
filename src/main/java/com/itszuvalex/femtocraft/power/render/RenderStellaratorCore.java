@@ -76,7 +76,7 @@ public class RenderStellaratorCore implements ISimpleBlockRenderingHandler {
     private void createCore(BlockFemtoStellaratorCore core) {
         coreModel = new RenderModel();
 
-        IIcon icon = core.outsideIcon;
+        IIcon icon = core.outsideIcon();
         float minU = icon.getMinU();
         float maxU = icon.getMaxU();
         float minV = icon.getMinV();
@@ -106,7 +106,7 @@ public class RenderStellaratorCore implements ISimpleBlockRenderingHandler {
                 minU, maxU, minV,
                 maxV).flipV());
 
-        icon = core.insideIcon;
+        icon = core.insideIcon();
         minU = icon.getMinU();
         maxU = icon.getMaxU();
         minV = icon.getMinV();
@@ -134,7 +134,7 @@ public class RenderStellaratorCore implements ISimpleBlockRenderingHandler {
                 minU, maxU, minV,
                 maxV).flipV());
 
-        icon = core.coreIcon;
+        icon = core.coreIcon();
         minU = icon.getMinU();
         maxU = icon.getMaxU();
         minV = icon.getMinV();

@@ -18,26 +18,29 @@
  *  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *  *****************************************************************************
  */
+package com.itszuvalex.femtocraft.power.tiles
 
-package com.itszuvalex.femtocraft.power.tiles;
+import com.itszuvalex.femtocraft.FemtocraftGuiConstants
+import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
+import com.itszuvalex.femtocraft.core.traits.tile.MultiBlockComponent
+import net.minecraft.entity.player.EntityPlayer
 
-import com.itszuvalex.femtocraft.api.EnumTechLevel;
-import com.itszuvalex.femtocraft.api.power.PowerContainer;
+class TileEntityFemtoCubeChassis extends TileEntityBase with MultiBlockComponent {
+  override def canUpdate = false
 
-public class TileEntityMicroCable extends TileEntityPowerBase {
-
-    @Override
-    public PowerContainer defaultContainer() {
-        return new PowerContainer(EnumTechLevel.MICRO, 250);
+  override def onSideActivate(par5EntityPlayer: EntityPlayer, side: Int): Boolean = {
+    if (isValidMultiBlock) {
+      val te = worldObj.getTileEntity(info.x, info.y, info.z)
+      if (te == null) {
+        return false
+      }
+      par5EntityPlayer.openGui(getMod, getGuiID, worldObj, info.x, info.y, info.z)
+      return true
     }
+    false
+  }
 
-    public boolean connectedAcross() {
-        if (numConnections() == 2) {
-            if (connections()[0] && connections()[1] || connections()[2] && connections()[3] || connections()[4] &&
-                                                                                                connections()[5]) {
-                return true;
-            }
-        }
-        return false;
-    }
+  override def getGuiID = FemtocraftGuiConstants.FemtoCubeGuiID
+
+  override def hasGUI = info.isValidMultiBlock
 }

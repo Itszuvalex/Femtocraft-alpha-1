@@ -25,7 +25,7 @@ import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.multiblock.IMultiBlockComponent;
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
-import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer;
+import com.itszuvalex.femtocraft.api.power.IPowerTileContainer;
 import com.itszuvalex.femtocraft.api.power.PowerContainer;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
@@ -64,7 +64,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
 
     @Override
     public float getFillPercentageForCharging(ForgeDirection from) {
-        IPowerBlockContainer c = getController();
+        IPowerTileContainer c = getController();
         if (c != null) {
             if (c == this) {
                 return super.getFillPercentageForCharging(from);
@@ -77,7 +77,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
     @Override
     public float getFillPercentageForOutput(ForgeDirection to) {
 
-        IPowerBlockContainer c = getController();
+        IPowerTileContainer c = getController();
         if (c != null) {
             if (c == this) {
                 return super.getFillPercentageForOutput(to);
@@ -87,14 +87,14 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
         return 0.f;
     }
 
-    private IPowerBlockContainer getController() {
+    private IPowerTileContainer getController() {
         if (!isValidMultiBlock()) {
             return null;
         }
         TileEntity te = worldObj.getTileEntity(info.x(), info.y(),
                 info.z());
-        if (te instanceof IPowerBlockContainer) {
-            return (IPowerBlockContainer) te;
+        if (te instanceof IPowerTileContainer) {
+            return (IPowerTileContainer) te;
         }
         return null;
     }
@@ -131,7 +131,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
 
     @Override
     public boolean consume(int amount) {
-        IPowerBlockContainer c = getController();
+        IPowerTileContainer c = getController();
         if (c != null) {
             if (c == this) {
                 return super.consume(amount);
@@ -143,7 +143,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
 
     @Override
     public int charge(ForgeDirection from, int amount) {
-        IPowerBlockContainer c = getController();
+        IPowerTileContainer c = getController();
         if (c != null) {
             if (c == this) {
                 return super.charge(from, amount);
@@ -155,7 +155,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
 
     @Override
     public int getMaxPower() {
-        IPowerBlockContainer c = getController();
+        IPowerTileContainer c = getController();
         if (c != null) {
             if (c == this) {
                 return powerStorage;
@@ -167,7 +167,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
 
     @Override
     public boolean canAcceptPowerOfLevel(EnumTechLevel level, ForgeDirection from) {
-        IPowerBlockContainer c = getController();
+        IPowerTileContainer c = getController();
         if (c != null) {
             if (c == this) {
                 return super.canAcceptPowerOfLevel(level, from);
@@ -179,7 +179,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
 
     @Override
     public int getCurrentPower() {
-        IPowerBlockContainer c = getController();
+        IPowerTileContainer c = getController();
         if (c != null) {
             if (c == this) {
                 return super.getCurrentPower();
@@ -191,7 +191,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
 
     @Override
     public float getFillPercentage() {
-        IPowerBlockContainer c = getController();
+        IPowerTileContainer c = getController();
         if (c != null) {
             if (c == this) {
                 return super.getFillPercentage();
@@ -209,19 +209,19 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
 
     @Override
     public boolean canCharge(ForgeDirection from) {
-        IPowerBlockContainer c = getController();
+        IPowerTileContainer c = getController();
         return c != null && (c == this || c.canCharge(from));
     }
 
     @Override
     public boolean canConnect(ForgeDirection from) {
-        IPowerBlockContainer c = getController();
+        IPowerTileContainer c = getController();
         return c != null && (c == this || c.canConnect(from));
     }
 
     @Override
     public EnumTechLevel getTechLevel(ForgeDirection to) {
-        IPowerBlockContainer c = getController();
+        IPowerTileContainer c = getController();
         if (c != null) {
             if (c == this) {
                 return EnumTechLevel.FEMTO;
