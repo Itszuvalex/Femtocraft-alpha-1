@@ -48,7 +48,7 @@ import org.lwjgl.opengl.GL11
     if (isPointInRegion(10, 8, 16, 60, par1, par2)) {
       val furnaceCurrent = reconstructorInventory.currentPower
       val furnaceMax = reconstructorInventory.getMaxPower
-      val text = FemtocraftUtils.formatIntegerToString(furnaceCurrent) + '/' + FemtocraftUtils.formatIntegerToString(furnaceMax)
+      val text = FemtocraftUtils.formatIntegerToString(furnaceCurrent) + '/' + FemtocraftUtils.formatIntegerToString(furnaceMax) + " OP"
       drawCreativeTabHoveringText(text, par1, par2)
     }
     else if (isPointInRegion(150, 8, 16, 60, par1, par2)) {

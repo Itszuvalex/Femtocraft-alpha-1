@@ -48,7 +48,7 @@ import org.lwjgl.opengl.GL11
     if (isPointInRegion(10, 8, 16, 60, par1, par2)) {
       val furnaceCurrent = repurposerInventory.currentPower
       val furnaceMax = repurposerInventory.getMaxPower
-      val text = formatIntegerToString(furnaceCurrent) + '/' + formatIntegerToString(furnaceMax)
+      val text = formatIntegerToString(furnaceCurrent) + '/' + formatIntegerToString(furnaceMax) + " OP"
       drawCreativeTabHoveringText(text, par1, par2)
     }
     else if (isPointInRegion(150, 8, 16, 60, par1, par2)) {

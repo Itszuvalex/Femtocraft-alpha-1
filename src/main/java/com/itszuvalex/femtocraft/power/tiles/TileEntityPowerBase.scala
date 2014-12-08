@@ -25,10 +25,10 @@ import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.api.power.IPowerBlockContainer
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.power.FemtocraftPowerUtils
-import com.itszuvalex.femtocraft.power.traits.PowerBlockContainer
+import com.itszuvalex.femtocraft.power.traits.PowerBlockDistributor
 import net.minecraftforge.common.util.ForgeDirection
 
-abstract class TileEntityPowerBase() extends TileEntityBase() with PowerBlockContainer {
+abstract class TileEntityPowerBase() extends TileEntityBase() with PowerBlockDistributor {
   val connections = Array.fill[Boolean](6)(false)
 
   /**

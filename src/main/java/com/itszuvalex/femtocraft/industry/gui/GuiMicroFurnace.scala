@@ -44,7 +44,7 @@ import org.lwjgl.opengl.GL11
     super.drawScreen(par1, par2, par3)
     val furnaceCurrent = furnaceInventory.currentPower
     val furnaceMax = furnaceInventory.getMaxPower
-    val text = FemtocraftUtils.formatIntegerToString(furnaceCurrent) + '/' + FemtocraftUtils.formatIntegerToString(furnaceMax)
+    val text = FemtocraftUtils.formatIntegerToString(furnaceCurrent) + '/' + FemtocraftUtils.formatIntegerToString(furnaceMax) + " OP"
     if (isPointInRegion(18, 12, 16, 60, par1, par2)) {
       drawCreativeTabHoveringText(text, par1, par2)
     }

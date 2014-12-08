@@ -7,8 +7,8 @@
       <entry name=".+\.(gif|png|jpeg|jpg)" />
     </resourceExtensions>
     <wildcardResourcePatterns>
-      <entry name="!?*.java" />
       <entry name="!?*.groovy" />
+      <entry name="!?*.java" />
     </wildcardResourcePatterns>
     <annotationProcessing>
       <profile default="true" name="Default" enabled="false">
@@ -23,9 +23,6 @@
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
-    <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="net.minecraftforge.event.ForgeSubscribe" />
-    </list>
   </component>
   <component name="GradleUISettings">
     <setting name="root" />
@@ -177,26 +174,77 @@
       <module fileurl="file://$PROJECT_DIR$/Femtocraft.iml" filepath="$PROJECT_DIR$/Femtocraft.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" assert-keyword="true" jdk-15="true" project-jdk-name="1.7 (1)" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="ScalaCompilerConfiguration">
+    <option name="dynamics" value="true" />
+    <option name="postfixOps" value="true" />
+    <option name="reflectiveCalls" value="true" />
+    <option name="implicitConversions" value="true" />
+    <option name="higherKinds" value="true" />
+    <option name="existentials" value="true" />
+    <option name="macros" value="true" />
   </component>
   <component name="SvnBranchConfigurationManager">
     <option name="mySupportsUserInfoFilter" value="true" />
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="" />
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
   <component name="libraryTable">
     <library name="scala-compiler-2.11.2">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-compiler/2.11.2/781338d6dd3c5e002a838c2d483858fb963ae479/scala-compiler-2.11.2.jar!/" />
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-library/2.11.2/4718c022bd5bd84705ddacec18072c351832bc20/scala-library-2.11.2.jar!/" />
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-reflect/2.11.2/1a6265829fcde7d3a522fe2c0366f2fc40727b17/scala-reflect-2.11.2.jar!/" />
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-xml_2.11/1.0.2/820fbca7e524b530fdadc594c39d49a21ea0337e/scala-xml_2.11-1.0.2.jar!/" />
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-parser-combinators_2.11/1.0.2/ba0bbca656b10f235b6eb17a541e5d728c29040a/scala-parser-combinators_2.11-1.0.2.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-compiler/2.11.2/jar/781338d6dd3c5e002a838c2d483858fb963ae479/scala-compiler-2.11.2.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-library/2.11.2/jar/4718c022bd5bd84705ddacec18072c351832bc20/scala-library-2.11.2.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-reflect/2.11.2/jar/1a6265829fcde7d3a522fe2c0366f2fc40727b17/scala-reflect-2.11.2.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.scala-lang.modules/scala-xml_2.11/1.0.2/bundle/820fbca7e524b530fdadc594c39d49a21ea0337e/scala-xml_2.11-1.0.2.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.scala-lang.modules/scala-parser-combinators_2.11/1.0.2/bundle/ba0bbca656b10f235b6eb17a541e5d728c29040a/scala-parser-combinators_2.11-1.0.2.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
     </library>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <UIState>
+          <splitter-proportions>
+            <SplitterProportionsDataImpl />
+          </splitter-proportions>
+          <settings />
+        </UIState>
+      </state>
+      <state key="Copyright.UI">
+        <UIState>
+          <splitter-proportions>
+            <SplitterProportionsDataImpl />
+          </splitter-proportions>
+        </UIState>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <UIState>
+          <splitter-proportions>
+            <SplitterProportionsDataImpl>
+              <option name="proportions">
+                <list>
+                  <option value="0.2" />
+                </list>
+              </option>
+            </SplitterProportionsDataImpl>
+          </splitter-proportions>
+          <last-edited>1.6</last-edited>
+        </UIState>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <UIState>
+          <splitter-proportions>
+            <SplitterProportionsDataImpl />
+          </splitter-proportions>
+          <settings />
+        </UIState>
+      </state>
+    </states>
   </component>
 </project>

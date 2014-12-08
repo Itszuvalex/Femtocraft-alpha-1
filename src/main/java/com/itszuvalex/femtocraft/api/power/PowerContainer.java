@@ -138,7 +138,7 @@ public class PowerContainer implements IPowerContainer, ISaveable {
     @SuppressWarnings("unchecked")
     public void addInformationToTooltip(List tooltip) {
         String value = level.getTooltipEnum() + "Power: "
-                       + EnumChatFormatting.RESET + currentPower + "/" + maxPower;
+                       + EnumChatFormatting.RESET + currentPower + "/" + maxPower + " OP";
         tooltip.add(value);
     }
 

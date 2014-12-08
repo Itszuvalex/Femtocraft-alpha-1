@@ -41,7 +41,7 @@ class GuiFemtoChronoshifter(player: EntityPlayer, par1InventoryPlayer: Inventory
     super.drawScreen(par1, par2, par3)
     val furnaceCurrent = inventory.getCurrentPower
     val furnaceMax = inventory.getMaxPower
-    val text = FemtocraftUtils.formatIntegerToString(furnaceCurrent) + '/' + FemtocraftUtils.formatIntegerToString(furnaceMax)
+    val text = FemtocraftUtils.formatIntegerToString(furnaceCurrent) + '/' + FemtocraftUtils.formatIntegerToString(furnaceMax) + " OP"
     if (isPointInRegion(18, 12, 16, 60, par1, par2)) {
       drawCreativeTabHoveringText(text, par1, par2)
     }

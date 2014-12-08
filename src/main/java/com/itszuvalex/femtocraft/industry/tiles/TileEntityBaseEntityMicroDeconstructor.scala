@@ -27,7 +27,7 @@ import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.core.traits.tile.{Inventory, MassTank}
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor._
 import com.itszuvalex.femtocraft.industry.traits.IndustryBehavior
-import com.itszuvalex.femtocraft.power.traits.PowerBlockContainer
+import com.itszuvalex.femtocraft.power.traits.PowerConsumer
 import com.itszuvalex.femtocraft.utils.{BaseInventory, FemtocraftUtils}
 import com.itszuvalex.femtocraft.{Femtocraft, FemtocraftGuiConstants}
 import cpw.mods.fml.relauncher.{Side, SideOnly}
@@ -48,7 +48,7 @@ object TileEntityBaseEntityMicroDeconstructor {
   @Configurable(comment = "Maximum number of items allowed at a time.") val MAX_SMELT            = 1
 }
 
-@Configurable class TileEntityBaseEntityMicroDeconstructor extends TileEntityBase with IndustryBehavior with PowerBlockContainer with Inventory with MassTank {
+@Configurable class TileEntityBaseEntityMicroDeconstructor extends TileEntityBase with IndustryBehavior with PowerConsumer with Inventory with MassTank {
   /**
    * The number of ticks that the current item has been cooking for
    */
@@ -106,6 +106,8 @@ object TileEntityBaseEntityMicroDeconstructor {
     this.cookTime * par1 / getTicksToCook
   }
 
+  protected def getTicksToCook = TICKS_TO_COOK
+
   override def isWorking = deconstructingStack != null
 
   override def getAccessibleSlotsFromSide(var1: Int) = {
@@ -141,24 +143,12 @@ object TileEntityBaseEntityMicroDeconstructor {
   override protected def canStartWork = if (getStackInSlot(0) == null || deconstructingStack != null || this.getCurrentPower < getPowerToCook) {
     false
   }
-                                        else {
-                                          val recipe: AssemblerRecipe = Femtocraft.recipeManager.assemblyRecipes.getRecipe(getStackInSlot(0))
-                                          recipe != null && recipe.enumTechLevel.tier <= getAssemblerTech.tier && (massTank.getCapacity - massTank.getFluidAmount) >= recipe.mass && getStackInSlot(0).stackSize >= recipe.output.stackSize && roomForItems(recipe.input)
-                                        }
-
-  protected def getPowerToCook = POWER_TO_COOK
+  else {
+    val recipe: AssemblerRecipe = Femtocraft.recipeManager.assemblyRecipes.getRecipe(getStackInSlot(0))
+    recipe != null && recipe.enumTechLevel.tier <= getAssemblerTech.tier && (massTank.getCapacity - massTank.getFluidAmount) >= recipe.mass && getStackInSlot(0).stackSize >= recipe.output.stackSize && roomForItems(recipe.input)
+  }
 
   protected def getAssemblerTech = ASSEMBLER_TECH_LEVEL
-
-  private def roomForItems(items: Array[ItemStack]): Boolean = {
-    val fake = new Array[ItemStack](getSizeInventory)
-    for (i <- 0 until fake.length) {
-      val it = getStackInSlot(i)
-      fake(i) = if (it == null) null else it.copy
-    }
-
-    items.forall(FemtocraftUtils.placeItem(_, fake, null))
-  }
 
   override protected def startWork() {
     deconstructingStack = getStackInSlot(0).copy
@@ -197,6 +187,18 @@ object TileEntityBaseEntityMicroDeconstructor {
     onInventoryChanged()
   }
 
+  protected def getPowerToCook = POWER_TO_COOK
+
+  private def roomForItems(items: Array[ItemStack]): Boolean = {
+    val fake = new Array[ItemStack](getSizeInventory)
+    for (i <- 0 until fake.length) {
+      val it = getStackInSlot(i)
+      fake(i) = if (it == null) null else it.copy
+    }
+
+    items.forall(FemtocraftUtils.placeItem(_, fake, null))
+  }
+
   protected def getMaxSimultaneousSmelt = MAX_SMELT
 
   override protected def continueWork() {
@@ -204,8 +206,6 @@ object TileEntityBaseEntityMicroDeconstructor {
   }
 
   override protected def canFinishWork = cookTime >= getTicksToCook
-
-  protected def getTicksToCook = TICKS_TO_COOK
 
   override protected def finishWork() {
     val recipe = Femtocraft.recipeManager.assemblyRecipes.getRecipe(deconstructingStack)

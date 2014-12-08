@@ -91,7 +91,7 @@ public class GuiMagnetohydrodynamicGenerator extends GuiBase {
         String power = FemtocraftUtils.formatIntegerToString(generator
                 .getCurrentPower()) + "/"
                        + FemtocraftUtils.formatIntegerToString(generator
-                .getMaxPower());
+                .getMaxPower()) + " OP";
         this.fontRendererObj.drawString(power,
                 this.xSize / 2 - this.fontRendererObj.getStringWidth(power) / 2,
                 this.ySize * 4 / 5,

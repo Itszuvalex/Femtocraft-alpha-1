@@ -54,7 +54,7 @@ public class GuiMicroCube extends GuiBase {
 
         String power = FemtocraftUtils.formatIntegerToString(cube
                 .getCurrentPower()) + "/" + FemtocraftUtils.formatIntegerToString(
-                cube.getMaxPower());
+                cube.getMaxPower()) + " OP";
         this.fontRendererObj.drawString(power,
                 this.xSize / 2 - this.fontRendererObj.getStringWidth(power) / 2,
                 this.ySize * 4 / 5,
