@@ -101,7 +101,7 @@ object TileEntityNanoFissionReactorCore {
     val temp = getTemperatureCurrent
     val max = getTemperatureMax
     temp match {
-      case _ if temp <= 0                                 => ReactorState.INACTIVE
+      case _ if temp <= minimumHeat                       => ReactorState.INACTIVE
       case _ if temp < max * unstableTemperatureThreshold => ReactorState.ACTIVE
       case _ if temp < max * criticalTemperatureThreshold => ReactorState.UNSTABLE
       case _                                              => ReactorState.CRITICAL
@@ -209,6 +209,18 @@ object TileEntityNanoFissionReactorCore {
     ret
   }
 
+  def getThoriumConcentration = thoriumStoreCurrent.toFloat / thoriumStoreMax.toFloat
+
+  def getCooledSaltAmount = cooledSaltTank.getFluidAmount
+
+  def getMoltenSaltAmount = moltenSaltTank.getFluidAmount
+
+  def getTemperatureCurrent = temperatureCurrent
+
+  def setTemperatureCurrent(temperatureCurrent: Float) {
+    this.temperatureCurrent = temperatureCurrent
+  }
+
   private def gainHeat() {
     setTemperatureCurrent((getTemperatureCurrent + (getCooledSaltAmount.toFloat * cooledSaltHeatMultiplier * getThoriumConcentration)).toFloat)
     setTemperatureCurrent((getTemperatureCurrent + (getMoltenSaltAmount.toFloat * moltenSaltHeatMultiplier * getThoriumConcentration)).toFloat)
@@ -231,20 +243,8 @@ object TileEntityNanoFissionReactorCore {
     this.temperatureMax = temperatureMax
   }
 
-  def getThoriumConcentration = thoriumStoreCurrent.toFloat / thoriumStoreMax.toFloat
-
-  def getCooledSaltAmount = cooledSaltTank.getFluidAmount
-
-  def getMoltenSaltAmount = moltenSaltTank.getFluidAmount
-
   private def loseHeat() {
     setTemperatureCurrent((getTemperatureCurrent * enviroHeatLossMultiplier).toFloat)
-  }
-
-  def getTemperatureCurrent = temperatureCurrent
-
-  def setTemperatureCurrent(temperatureCurrent: Float) {
-    this.temperatureCurrent = temperatureCurrent
   }
 
   override def hasGUI = isValidMultiBlock
@@ -344,12 +344,12 @@ object TileEntityNanoFissionReactorCore {
     onClick(incrementAction)
   }
 
-  def onDecrementClick() {
-    onClick(decrementAction)
-  }
-
   private def onClick(action: Byte) {
     FemtocraftPacketHandler.INSTANCE.sendToServer(new MessageFissionReactorCore(xCoord, yCoord, zCoord, worldObj.provider.dimensionId, action))
+  }
+
+  def onDecrementClick() {
+    onClick(decrementAction)
   }
 
   def onAbortClick() {
@@ -369,13 +369,13 @@ object TileEntityNanoFissionReactorCore {
     setThoriumConcentrationTarget(getThoriumConcentrationTarget + thoriumConcentrationTargetIncrementAmount)
   }
 
-  def decrementThoriumConcentrationTarget() {
-    setThoriumConcentrationTarget(getThoriumConcentrationTarget - thoriumConcentrationTargetIncrementAmount)
-  }
-
   def setThoriumConcentrationTarget(thoriumConcentrationTarget: Float) {
     this.thoriumConcentrationTarget = Math.min(Math.max(thoriumConcentrationTarget, 0f), 1f)
     setModified()
+  }
+
+  def decrementThoriumConcentrationTarget() {
+    setThoriumConcentrationTarget(getThoriumConcentrationTarget - thoriumConcentrationTargetIncrementAmount)
   }
 
   def abortReaction() {
