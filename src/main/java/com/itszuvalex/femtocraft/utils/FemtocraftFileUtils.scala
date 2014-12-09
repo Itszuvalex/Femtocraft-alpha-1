@@ -42,9 +42,9 @@ object FemtocraftFileUtils {
     dir.getPath
   }
 
-  def savePath(world: World) = if (!MinecraftServer.getServer.isDedicatedServer) Minecraft.getMinecraft.mcDataDir + "/saves/" + world.getSaveHandler.getWorldDirectoryName else MinecraftServer.getServer.getFile(world.getSaveHandler.getWorldDirectoryName).getPath
-
-  def configPath = if (FMLCommonHandler.instance.getEffectiveSide == Side.SERVER) MinecraftServer.getServer.getFile("/config/" + Femtocraft.ID + "/").getPath else Minecraft.getMinecraft.mcDataDir + "/config/" + Femtocraft.ID + "/"
+  def savePath(world: World) = if (!MinecraftServer.getServer.isDedicatedServer) {
+    Minecraft.getMinecraft.mcDataDir + "/saves/" + world.getSaveHandler.getWorldDirectoryName
+  } else {MinecraftServer.getServer.getFile(world.getSaveHandler.getWorldDirectoryName).getPath}
 
   def configFolder: File = {
     val path = configPath
@@ -54,6 +54,12 @@ object FemtocraftFileUtils {
     }
     f
   }
+
+  def configPath = if (FMLCommonHandler.instance.getEffectiveSide == Side.SERVER) {
+    MinecraftServer.getServer.getFile("/config/" + Femtocraft.ID + "/").getPath
+  } else {Minecraft.getMinecraft.mcDataDir + "/config/" + Femtocraft.ID + "/"}
+
+  def customConfigPath = configPath + "custom/"
 }
 
 

@@ -17,7 +17,9 @@ object AssemblerXMLLoader {
  * Created by Chris on 12/8/2014.
  */
 class AssemblerXMLLoader(file: File) extends CustomXMLLoader[AssemblerRecipe](file) {
-  override def loadRecipesFromXML(xml: Elem): ArrayBuffer[AssemblerRecipe] = {
+  if (!file.exists) file.mkdirs()
+
+  override def loadItemsFromXML(xml: Elem): ArrayBuffer[AssemblerRecipe] = {
     val ret = new ArrayBuffer[AssemblerRecipe]
     val recipes = xml \ recipeNode
     ret ++= recipes.map(_.getAssemblerRecipe)

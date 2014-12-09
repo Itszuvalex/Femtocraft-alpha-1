@@ -216,17 +216,12 @@ public class GuiNanoFissionReactor extends GuiBase {
         // }
 
         //ReactorState
-        switch (reactor.getState()) {
-            case ACTIVE:
-                this.drawTexturedModalRect(k + 30, l + 70, 176, 6, 3, 3);
-                break;
-            case UNSTABLE:
-                this.drawTexturedModalRect(k + 30, l + 70, 176, 3, 3, 3);
-                break;
-            case CRITICAL:
-                this.drawTexturedModalRect(k + 30, l + 70, 176, 0, 3, 3);
-                break;
-            default:
+        if (reactor.getState() == TileEntityNanoFissionReactorCore.ReactorState$.MODULE$.ACTIVE()) {
+            this.drawTexturedModalRect(k + 30, l + 70, 176, 6, 3, 3);
+        } else if (reactor.getState() == TileEntityNanoFissionReactorCore.ReactorState$.MODULE$.UNSTABLE()) {
+            this.drawTexturedModalRect(k + 30, l + 70, 176, 3, 3, 3);
+        } else if (reactor.getState() == TileEntityNanoFissionReactorCore.ReactorState$.MODULE$.CRITICAL()) {
+            this.drawTexturedModalRect(k + 30, l + 70, 176, 0, 3, 3);
         }
 
         //Heat

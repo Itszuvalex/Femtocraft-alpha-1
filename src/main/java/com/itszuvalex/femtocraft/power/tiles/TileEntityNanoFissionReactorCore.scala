@@ -45,39 +45,39 @@ object TileEntityNanoFissionReactorCore {
   val thoriumSlot                                       = 2
   val saltSlot                                          = 1
   //***********************************************************
-  @Configurable("Amount of cooled salt converted to molten salt per tick.")
+  @Configurable(comment = "Amount of cooled salt converted to molten salt per tick.")
   val cooledSaltConversionPerTick              : Int    = 100
-  @Configurable("Contaminated salt converts to cooled salt at this ratio.")
+  @Configurable(comment = "Contaminated salt converts to cooled salt at this ratio.")
   val contaminatedSaltLossRatio                : Float  = .7f
-  @Configurable("Contamianted salt consumes thorium at this ratio.")
+  @Configurable(comment = "Contamianted salt consumes thorium at this ratio.")
   val contaminatedThoriumLossRatio             : Float  = .3f
-  @Configurable("When the plus or minus button is hit, increment thorium concentration target by this amount.")
+  @Configurable(comment = "When the plus or minus button is hit, increment thorium concentration target by this amount.")
   val thoriumConcentrationTargetIncrementAmount: Float  = .01f
-  @Configurable("Minimum thorium concentration before salt is melted.")
+  @Configurable(comment = "Minimum thorium concentration before salt is melted.")
   val minimumThoriumConcentrationToMeltSalt    : Float  = .01f
-  @Configurable("Minimum heat required before the reactor melts anything.")
+  @Configurable(comment = "Minimum heat required before the reactor melts anything.")
   val minimumHeat                              : Int    = 100
-  @Configurable("Heat required per mB of cooled salt to convert it to molten salt.")
+  @Configurable(comment = "Heat required per mB of cooled salt to convert it to molten salt.")
   val cooledSaltConversionHeatRatio            : Double = 1D
-  @Configurable("Amount of heat generated per mB of cooled salt per tick.")
+  @Configurable(comment = "Amount of heat generated per mB of cooled salt per tick.")
   val cooledSaltHeatMultiplier                 : Double = .001
-  @Configurable("Amount of heat generated per mB of molten salt per tick.")
+  @Configurable(comment = "Amount of heat generated per mB of molten salt per tick.")
   val moltenSaltHeatMultiplier                 : Double = .002
-  @Configurable("% of maximum heat that represents the minimum of the UNSTABLE threshold.")
+  @Configurable(comment = "% of maximum heat that represents the minimum of the UNSTABLE threshold.")
   val unstableTemperatureThreshold             : Double = .66
-  @Configurable("% of maximum heat that represents the minimum of the CRITICAL threshold.")
+  @Configurable(comment = "% of maximum heat that represents the minimum of the CRITICAL threshold.")
   val criticalTemperatureThreshold             : Double = .83
-  @Configurable("Amount of solid salt needed per thorium")
+  @Configurable(comment = "Amount of solid salt needed per thorium")
   val solidSaltToThoriumRatio                  : Double = .2
-  @Configurable("Heat is multiplied by this amount every tick.")
+  @Configurable(comment = "Heat is multiplied by this amount every tick.")
   val enviroHeatLossMultiplier                 : Double = .99
-  @Configurable("Tank size for cooled salt.")
+  @Configurable(comment = "Tank size for cooled salt.")
   val cooledSaltTankMaxAmount                  : Int    = 100000
-  @Configurable("Tank size for molten salt.")
+  @Configurable(comment = "Tank size for molten salt.")
   val moltenSaltTankMaxAmount                  : Int    = 100000
-  @Configurable("Amount of stored thorium maximum.")
+  @Configurable(comment = "Amount of stored thorium maximum.")
   val thoriumStoreMax                          : Int    = 100000
-  @Configurable("Maximum temperature.")
+  @Configurable(comment = "Maximum temperature.")
   val temperatureMaxAmount                     : Int    = 3000
 
   object ReactorState extends Enumeration {
@@ -87,7 +87,8 @@ object TileEntityNanoFissionReactorCore {
 
 }
 
-@Configurable class TileEntityNanoFissionReactorCore extends TileEntityBase with Inventory with IFluidHandler with MultiBlockComponent {
+@Configurable class TileEntityNanoFissionReactorCore
+  extends TileEntityBase with Inventory with IFluidHandler with MultiBlockComponent {
   @Saveable private val cooledSaltTank             = new FluidTank(cooledSaltTankMaxAmount)
   @Saveable private val moltenSaltTank             = new FluidTank(moltenSaltTankMaxAmount)
   @Saveable private var thoriumStoreCurrent        = 0
@@ -153,7 +154,9 @@ object TileEntityNanoFissionReactorCore {
       if (reagent == null) {
         return
       }
-      if (reagent.item.stackSize <= item.stackSize && getTemperatureCurrent >= reagent.temp && getTemperatureCurrent > minimumHeat && (thoriumStoreMax - thoriumStoreCurrent) >= reagent.amount) {
+      if (reagent.item.stackSize <= item.stackSize && getTemperatureCurrent >= reagent
+                                                                               .temp && getTemperatureCurrent > minimumHeat && (thoriumStoreMax - thoriumStoreCurrent) >= reagent
+                                                                                                                                                                          .amount) {
         decrStackSize(thoriumSlot, reagent.item.stackSize)
         setTemperatureCurrent(getTemperatureCurrent - reagent.temp)
         thoriumStoreCurrent += reagent.amount
@@ -190,11 +193,14 @@ object TileEntityNanoFissionReactorCore {
       }
       val reagent: FissionReactorRegistry.FissionReactorReagent = FissionReactorRegistry.getSaltSource(item)
       if (reagent != null) {
-        if (reagent.item.stackSize <= item.stackSize && getTemperatureCurrent >= reagent.temp && (moltenSaltTank.getCapacity - getMoltenSaltAmount) >= reagent.amount && thoriumStoreCurrent >= (reagent.amount * solidSaltToThoriumRatio)) {
+        if (reagent.item.stackSize <= item.stackSize && getTemperatureCurrent >= reagent.temp && (moltenSaltTank
+                                                                                                  .getCapacity - getMoltenSaltAmount) >= reagent
+                                                                                                                                         .amount && thoriumStoreCurrent >= (reagent
+                                                                                                                                                                            .amount * solidSaltToThoriumRatio)) {
           decrStackSize(saltSlot, reagent.item.stackSize)
           setTemperatureCurrent(getTemperatureCurrent - reagent.temp)
           addMoltenSalt(reagent.amount)
-          thoriumStoreCurrent -= reagent.amount * solidSaltToThoriumRatio
+          thoriumStoreCurrent -= (reagent.amount * solidSaltToThoriumRatio).toInt
           setModified()
         }
       }
@@ -215,20 +221,23 @@ object TileEntityNanoFissionReactorCore {
 
   def getMoltenSaltAmount = moltenSaltTank.getFluidAmount
 
-  def getTemperatureCurrent = temperatureCurrent
-
-  def setTemperatureCurrent(temperatureCurrent: Float) {
-    this.temperatureCurrent = temperatureCurrent
-  }
-
   private def gainHeat() {
-    setTemperatureCurrent((getTemperatureCurrent + (getCooledSaltAmount.toFloat * cooledSaltHeatMultiplier * getThoriumConcentration)).toFloat)
-    setTemperatureCurrent((getTemperatureCurrent + (getMoltenSaltAmount.toFloat * moltenSaltHeatMultiplier * getThoriumConcentration)).toFloat)
+    setTemperatureCurrent((getTemperatureCurrent + (getCooledSaltAmount
+                                                    .toFloat * cooledSaltHeatMultiplier * getThoriumConcentration))
+                          .toFloat)
+    setTemperatureCurrent((getTemperatureCurrent + (getMoltenSaltAmount
+                                                    .toFloat * moltenSaltHeatMultiplier * getThoriumConcentration))
+                          .toFloat)
     val heatItem: ItemStack = inventory.getStackInSlot(heatSlot)
     if (heatItem != null) {
       val result: FissionReactorRegistry.FissionReactorReagent = FissionReactorRegistry.getHeatSource(heatItem)
       if (result != null) {
-        if (result.item.stackSize <= heatItem.stackSize && ((result.temp > 0 && (getTemperatureMax - getTemperatureCurrent) >= result.temp) || (result.temp < 0 && Math.abs(result.temp) <= getTemperatureCurrent))) {
+        if (result.item.stackSize <= heatItem.stackSize && ((result
+                                                             .temp > 0 && (getTemperatureMax - getTemperatureCurrent) >= result
+                                                                                                                         .temp) || (result
+                                                                                                                                    .temp < 0 && Math
+                                                                                                                                                 .abs(result
+                                                                                                                                                      .temp) <= getTemperatureCurrent))) {
           decrStackSize(heatSlot, result.item.stackSize)
           setTemperatureCurrent(getTemperatureCurrent + result.temp)
           setModified()
@@ -247,6 +256,12 @@ object TileEntityNanoFissionReactorCore {
     setTemperatureCurrent((getTemperatureCurrent * enviroHeatLossMultiplier).toFloat)
   }
 
+  def getTemperatureCurrent = temperatureCurrent
+
+  def setTemperatureCurrent(temperatureCurrent: Float) {
+    this.temperatureCurrent = temperatureCurrent
+  }
+
   override def hasGUI = isValidMultiBlock
 
   def addCooledSalt(amount: Int): Int = {
@@ -261,11 +276,13 @@ object TileEntityNanoFissionReactorCore {
     var fill: FluidStack = null
     if (resource.getFluid eq Femtocraft.fluidCooledContaminatedMoltenSalt) {
       var amount: Int = resource.amount
-      amount = Math.min(amount, Math.min(Math.max(getThoriumStoreCurrent - minimumThoriumConcentrationToMeltSalt, 0), resource.amount * contaminatedThoriumLossRatio) / contaminatedThoriumLossRatio).toInt
+      amount = Math.min(amount, Math.min(Math.max(getThoriumStoreCurrent - minimumThoriumConcentrationToMeltSalt, 0),
+                                         resource.amount * contaminatedThoriumLossRatio) / contaminatedThoriumLossRatio)
+               .toInt
       amount = Math.min(amount, (moltenSaltTank.getCapacity - getMoltenSaltAmount) / contaminatedSaltLossRatio).toInt
       fill = new FluidStack(Femtocraft.fluidCooledMoltenSalt, amount)
       if (doFill) {
-        thoriumStoreCurrent -= amount * contaminatedThoriumLossRatio
+        thoriumStoreCurrent -= (amount * contaminatedThoriumLossRatio).toInt
       }
     }
     else if (resource.getFluid eq Femtocraft.fluidCooledMoltenSalt) {
@@ -300,11 +317,14 @@ object TileEntityNanoFissionReactorCore {
     result
   }
 
-  def canFill(from: ForgeDirection, fluid: Fluid) = fluid == Femtocraft.fluidCooledContaminatedMoltenSalt || fluid == Femtocraft.fluidCooledMoltenSalt
+  def canFill(from: ForgeDirection, fluid: Fluid) = fluid == Femtocraft
+                                                             .fluidCooledContaminatedMoltenSalt || fluid == Femtocraft
+                                                                                                            .fluidCooledMoltenSalt
 
   def canDrain(from: ForgeDirection, fluid: Fluid) = fluid == Femtocraft.fluidMoltenSalt
 
-  def getTankInfo(from: ForgeDirection): Array[FluidTankInfo] = Array[FluidTankInfo](cooledSaltTank.getInfo, moltenSaltTank.getInfo)
+  def getTankInfo(from: ForgeDirection): Array[FluidTankInfo] = Array[FluidTankInfo](cooledSaltTank.getInfo,
+                                                                                     moltenSaltTank.getInfo)
 
   override def markDirty() {
     MultiBlockNanoFissionReactor.instance.onMultiblockInventoryChanged(worldObj, info.x, info.y, info.z)
@@ -344,10 +364,6 @@ object TileEntityNanoFissionReactorCore {
     onClick(incrementAction)
   }
 
-  private def onClick(action: Byte) {
-    FemtocraftPacketHandler.INSTANCE.sendToServer(new MessageFissionReactorCore(xCoord, yCoord, zCoord, worldObj.provider.dimensionId, action))
-  }
-
   def onDecrementClick() {
     onClick(decrementAction)
   }
@@ -356,12 +372,20 @@ object TileEntityNanoFissionReactorCore {
     onClick(abortAction)
   }
 
+  private def onClick(action: Byte) {
+    FemtocraftPacketHandler.INSTANCE
+    .sendToServer(new MessageFissionReactorCore(xCoord, yCoord, zCoord, worldObj.provider.dimensionId, action))
+  }
+
   def handleAction(action: Byte) {
     action match {
       case `incrementAction` => incrementThoriumConcentrationTarget()
       case `decrementAction` => decrementThoriumConcentrationTarget()
       case `abortAction`     => abortReaction()
-      case _                 => Femtocraft.log(Level.ERROR, "Received invalid action for Fusion Reactor at x-" + xCoord + " y-" + yCoord + " z-" + zCoord + " at dimension-" + worldObj.provider.dimensionId + ".")
+      case _                 => Femtocraft.log(Level.ERROR,
+                                               "Received invalid action for Fusion Reactor at x-" + xCoord + " y-" + yCoord + " z-" + zCoord + " at dimension-" + worldObj
+                                                                                                                                                                  .provider
+                                                                                                                                                                  .dimensionId + ".")
     }
   }
 

@@ -32,7 +32,7 @@ import net.minecraft.nbt.NBTTagList;
 import org.apache.logging.log4j.Level;
 
 
-public class AssemblerRecipe implements Comparable, ISaveable {
+public class AssemblerRecipe implements Comparable<AssemblerRecipe>, ISaveable {
     @Configurable(comment = "ItemStack[9] (can include nulls) signifying input.  This is unique across all " +
                             "AssemblerRecipes")
     public ItemStack[] input;
@@ -46,18 +46,32 @@ public class AssemblerRecipe implements Comparable, ISaveable {
     @Configurable(comment = "Name of Technology required to be researched before the player can use this recipe.")
     public String tech;
 
+    @Configurable(comment = "Type of assembler recipe.")
+    public RecipeType type;
+
     public AssemblerRecipe(ItemStack[] input, int mass, ItemStack output,
                            EnumTechLevel enumTechLevel, ITechnology tech) {
+        this(input, mass, output, enumTechLevel, tech, RecipeType.Reversable);
+    }
+
+    public AssemblerRecipe(ItemStack[] input, int mass, ItemStack output,
+                           EnumTechLevel enumTechLevel, ITechnology tech, RecipeType type) {
         this(input, mass, output, enumTechLevel, tech.getName());
     }
 
     public AssemblerRecipe(ItemStack[] input, int mass, ItemStack output, EnumTechLevel enumTechLevel,
                            String techName) {
+        this(input, mass, output, enumTechLevel, techName, RecipeType.Reversable);
+    }
+
+    public AssemblerRecipe(ItemStack[] input, int mass, ItemStack output, EnumTechLevel enumTechLevel,
+                           String techName, RecipeType type) {
         this.input = input;
         this.mass = mass;
         this.output = output;
         this.enumTechLevel = enumTechLevel;
         this.tech = techName;
+        this.type = type;
     }
 
     /**
@@ -73,23 +87,22 @@ public class AssemblerRecipe implements Comparable, ISaveable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        AssemblerRecipe ir = (AssemblerRecipe) o;
+    public int compareTo(AssemblerRecipe o) {
         for (int i = 0; i < 9; i++) {
-            int comp = FemtocraftUtils.compareItem(input[i], ir.input[i]);
+            int comp = FemtocraftUtils.compareItem(input[i], o.input[i]);
             if (comp != 0) {
                 return comp;
             }
         }
 
-        if (mass < ir.mass) {
+        if (mass < o.mass) {
             return -1;
         }
-        if (mass > ir.mass) {
+        if (mass > o.mass) {
             return 1;
         }
 
-        int comp = FemtocraftUtils.compareItem(output, ir.output);
+        int comp = FemtocraftUtils.compareItem(output, o.output);
         if (comp != 0) {
             return comp;
         }
@@ -166,6 +179,34 @@ public class AssemblerRecipe implements Comparable, ISaveable {
         if (compound.hasKey("researchTechnology")) {
             tech = compound
                     .getString("researchTechnology");
+        }
+    }
+
+    public enum RecipeType {
+
+        Reversable, Decomposition, Recomposition;
+
+        private static final String reverseKey = "Reversable";
+        private static final String decompKey = "Decomposition";
+        private static final String recompKey = "Recomposition";
+
+        public String getValue() {
+            switch (this) {
+                case Reversable:
+                    return reverseKey;
+                case Decomposition:
+                    return decompKey;
+                case Recomposition:
+                    return recompKey;
+            }
+            return "unknown";
+        }
+
+        public static RecipeType getRecipe(String key) {
+            if (key.equals(reverseKey)) return Reversable;
+            if (key.equals(decompKey)) return Decomposition;
+            if (key.equals(recompKey)) return Recomposition;
+            return null;
         }
     }
 }
