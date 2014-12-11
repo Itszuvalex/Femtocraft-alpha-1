@@ -45,12 +45,12 @@ public class ManagerRecipe {
     }
 
     public void init() {
-        assemblyRecipes.init();
         temporalRecipes.init();
         dimensionalRecipes.init();
         registerRecipes();
         FissionReactorRegistry.init();
         CryogenRegistry.init();
+        assemblyRecipes.init();
     }
 
     private void registerRecipes() {

@@ -123,8 +123,6 @@ class ManagerAssemblerRecipe {
 
   def removeAnyRecipe(recipe: AssemblerRecipe) = removeDecompositionRecipe(recipe) || removeRecompositionRecipe(recipe)
 
-  def removeReversableRecipe(recipe: AssemblerRecipe) = removeDecompositionRecipe(recipe) && removeRecompositionRecipe(recipe)
-
   def removeDecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
     false
   }
@@ -132,6 +130,8 @@ class ManagerAssemblerRecipe {
   def removeRecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
     false
   }
+
+  def removeReversableRecipe(recipe: AssemblerRecipe) = removeDecompositionRecipe(recipe) && removeRecompositionRecipe(recipe)
 
   def canCraft(input: Array[ItemStack]): Boolean = {
     if (input.length != 9) {
@@ -379,7 +379,9 @@ class ManagerAssemblerRecipe {
     Femtocraft.assemblerConfigs.loadAssemblerRecipe(recipe)
     if (!MinecraftForge.EVENT_BUS.post(event)) {
       assemblerDecompTree.put(new DecompositionKey(recipe), recipe)
-      assemblerRecipeList += recipe
+      if (getRecipe(recipe.input) == null) /* lg n   compared to n from assemblerRecipeList.contains() */ {
+        assemblerRecipeList += recipe
+      }
       return true
     }
     false
