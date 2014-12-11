@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "femtocraft",
+  "name": "Femtocraft",
+  "description": "Late-game Tech mod for Minecraft.",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "",
+  "url": "femtocraft.blogspot.com",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["Itszuvalex"],
+  "credits": "Thank you to Robfd, Auric, n0rw0lf, Brucethemoose, Helkarakse for helping test and work on Femtocraft.  Special thanks to Cozza38 for hosting his awesome community and giving me technical assistance.",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
