@@ -13,15 +13,16 @@ import scala.xml.{Elem, XML}
  * Created by Chris on 12/8/2014.
  */
 abstract class CustomXMLLoader[recipe](val file: File) {
-  
+  if (!file.exists) file.mkdirs()
+
   def loadItemsFromXML(xml: Elem): ArrayBuffer[recipe]
-  
+
   def loadItems(): ArrayBuffer[recipe] = {
     val ret = loadItems(file)
     Femtocraft.log(Level.INFO, "Loaded " + ret.size + " items from " + file.getPath + ".")
     ret
   }
-  
+
   private def loadItems(f: File): ArrayBuffer[recipe] = {
     Femtocraft.log(Level.INFO, "Loading " + f.getPath + "...")
     var ret = new ArrayBuffer[recipe]()

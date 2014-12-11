@@ -1,6 +1,6 @@
 package com.itszuvalex.femtocraft.configuration
 
-import com.itszuvalex.femtocraft.api.{AssemblerRecipe, EnumTechLevel}
+import com.itszuvalex.femtocraft.api.{AssemblerRecipe, DimensionalRecipe, EnumTechLevel, TemporalRecipe}
 import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils
 import net.minecraft.item.ItemStack
 
@@ -10,7 +10,10 @@ import scala.xml.{Elem, Node}
  * Created by Chris on 12/5/2014.
  */
 object XMLSerializable {
-
+  val assemblerRecipeTag   = "AssemblerRecipe"
+  val temporalRecipeTag    = "TemporalRecipe"
+  val dimensionalRecipeTag = "DimensionalRecipe"
+  val magnetismMappingTag  = "MagnetismMapping"
 
   trait XMLSerial[Type] {
     def toNode(tag: String): Elem
@@ -59,9 +62,27 @@ object XMLSerializable {
   }
 
   implicit class XMLSerializeAssemblerRecipe(value: AssemblerRecipe) {
-    def toNode = <AssemblerRecipe>
-      {value.input.toNode("input")}{value.mass.toNode("mass")}{value.output.toNode("output")}{value.enumTechLevel.key.toNode("techLevel")}{value.tech.toNode("technology")}{value.`type`.getValue.toNode("type")}
-    </AssemblerRecipe>
+    def toNode = <xml>
+                   {value.input.toNode("input")}{value.mass.toNode("mass")}{value.output.toNode("output")}{value.enumTechLevel.key.toNode("techLevel")}{value.tech.toNode("technology")}{value.`type`.getValue.toNode("type")}
+                 </xml>.copy(label = assemblerRecipeTag)
+  }
+
+  implicit class XMLSerializeTemporalRecipe(value: TemporalRecipe) {
+    def toNode = <xml>
+                   {value.configurators.toNode("configurators")}{value.input.toNode("input")}{value.output.toNode("output")}{value.techLevel.key.toNode("techLevel")}{value.tech.toNode("tech")}{value.ticks.toNode("ticks")}
+                 </xml>.copy(label = temporalRecipeTag)
+  }
+
+  implicit class XMLSerializeDimensionalRecipe(value: DimensionalRecipe) {
+    def toNode = <xml>
+                   {value.configurators.toNode("configurators")}{value.input.toNode("input")}{value.output.toNode("output")}{value.techLevel.key.toNode("techLevel")}{value.tech.toNode("tech")}{value.ticks.toNode("ticks")}
+                 </xml>.copy(label = dimensionalRecipeTag)
+  }
+
+  implicit class XMLSerializeMagnetismMapping(value: (ItemStack, Int)) {
+    def toNode = <xml>
+                   {value._1.toNode("item")}{value._2.toNode("strength")}
+                 </xml>.copy(label = magnetismMappingTag)
   }
 
   implicit class XMLDeserialize(node: Node) {
@@ -83,6 +104,16 @@ object XMLSerializable {
       recipe
     }
 
+    def getTemporalRecipe: TemporalRecipe = {
+      val configurators = node.getItemStackArray("configurators")
+      val input = node.getItemStack("input")
+      val output = node.getItemStack("output")
+      val techLevel = EnumTechLevel.getTech(node.getString("techLevel"))
+      val tech = node.getString("tech")
+      val ticks = node.getInt("ticks")
+      new TemporalRecipe(input, configurators, output, ticks, techLevel, tech)
+    }
+
     def getString(tag: String): String = (node \ tag).text.trim
 
     def getInt(tag: String): Int = (node \ tag).text.trim.toInt
@@ -99,6 +130,20 @@ object XMLSerializable {
       val nodes = node \ tag
       if (nodes == null) return null
       FemtocraftStringUtils.itemStackFromString(nodes.text.trim)
+    }
+
+    def getMagnetismMapping: (ItemStack, Int) = {
+      (node.getItemStack("item"), node.getInt("strength"))
+    }
+
+    def getDimensionalRecipe: DimensionalRecipe = {
+      val configurators = node.getItemStackArray("configurators")
+      val input = node.getItemStack("input")
+      val output = node.getItemStack("output")
+      val techLevel = EnumTechLevel.getTech(node.getString("techLevel"))
+      val tech = node.getString("tech")
+      val ticks = node.getInt("ticks")
+      new DimensionalRecipe(input, configurators, output, ticks, techLevel, tech)
     }
   }
 

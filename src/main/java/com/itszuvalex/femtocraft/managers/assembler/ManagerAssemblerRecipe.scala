@@ -26,7 +26,7 @@ import java.util
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.events.EventAssemblerRegister
 import com.itszuvalex.femtocraft.api.{AssemblerRecipe, EnumTechLevel}
-import com.itszuvalex.femtocraft.configuration.{AssemblerXMLLoader, XMLRecipes}
+import com.itszuvalex.femtocraft.configuration.{AssemblerXMLLoader, XMLAssemblerRecipes$}
 import com.itszuvalex.femtocraft.implicits.IDImplicits._
 import com.itszuvalex.femtocraft.managers.research.Technology
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
@@ -319,7 +319,7 @@ class ManagerAssemblerRecipe {
 
     val defaults = new ArrayBuffer[AssemblerRecipe]()
 
-    val femtocraftRecipes = new XMLRecipes(new File(FemtocraftFileUtils.configFolder, "Recipes.xml"))
+    val femtocraftRecipes = new XMLAssemblerRecipes(new File(FemtocraftFileUtils.configFolder, "Recipes.xml"))
     if (femtocraftRecipes.initialized) {
       defaults ++= femtocraftRecipes.loadCustomRecipes()
       defaults.foreach(addRecipe)
@@ -338,7 +338,7 @@ class ManagerAssemblerRecipe {
     }
     Femtocraft.log(Level.INFO, "Finished registering Femtocraft assembler recipes.")
 
-    val database = new XMLRecipes(new File(FemtocraftFileUtils.configFolder, "ScrapedRecipes.xml"))
+    val database = new XMLAssemblerRecipes(new File(FemtocraftFileUtils.configFolder, "ScrapedRecipes.xml"))
     Femtocraft.log(Level.INFO, "Scraping Minecraft recipe registries for assembler recipe mappings.")
     if (database.initialized) {
       Femtocraft.log(Level.INFO, "Scraped Recipes Database already exists.  Loading from file.")
