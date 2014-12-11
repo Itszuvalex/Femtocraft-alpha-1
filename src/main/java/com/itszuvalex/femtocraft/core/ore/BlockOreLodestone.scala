@@ -36,13 +36,13 @@ import net.minecraft.world.World
 
 object BlockOreLodestone {
   @Configurable(comment = "Maximum amount Lodestone nuggets to drop.")
-  var DROP_AMOUNT_MAX        = 4
+  val DROP_AMOUNT_MAX        = 4
   @Configurable(comment = "Minimum amount of Lodestone nuggets to drop.")
-  var DROP_AMOUNT_MIN        = 2
+  val DROP_AMOUNT_MIN        = 2
   @Configurable(comment = "Set to false to prevent tile entity ticks, and prevent Magnetism from pulling items from your inventory.")
-  var MAGNETIC               = true
+  val MAGNETIC               = true
   @Configurable(comment = "Set to false to prevent the ore from automatically pulling magnetic items from the hands of players who left click this block.")
-  var PULL_MAGNETS_FROM_HAND = true
+  val PULL_MAGNETS_FROM_HAND = true
 }
 
 @Configurable class BlockOreLodestone extends TileContainer(Material.rock) {
@@ -64,7 +64,7 @@ object BlockOreLodestone {
   override def onBlockClicked(par1World: World, par2: Int, par3: Int, par4: Int, par5EntityPlayer: EntityPlayer) {
     val item = par5EntityPlayer.getHeldItem
     if (BlockOreLodestone.PULL_MAGNETS_FROM_HAND && MagnetRegistry.isMagnet(item)) {
-      if (par1World.isRemote) {
+      if (!par1World.isRemote) {
         val ei = par5EntityPlayer.entityDropItem(item, par5EntityPlayer.height / 2f)
         ei.delayBeforeCanPickup = 20
       }

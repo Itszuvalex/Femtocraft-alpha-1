@@ -20,23 +20,19 @@ import scala.collection.mutable.ArrayBuffer
  * Created by Chris on 9/20/2014.
  */
 @Configurable object MagnetRegistry {
-  private val idToStrengthMap: util.Map[Integer, Integer] = new util.TreeMap[Integer, Integer]
+
+  val NUGGET_LODESTONE           = 10
   @Configurable(comment = "Maximum depth to search the magnet tree.")
-  var MAXIMUM_DEPTH              = 3000
+  val MAXIMUM_DEPTH              = 3000
   @Configurable(comment = "Set true to show magnetism value in tooltip at all.")
-  var showMagnetismTooltip       = true
+  val showMagnetismTooltip       = true
   @Configurable(comment = "Set this to true to only show magnetism value if advanced tooltips are on.")
-  var magnetismTooltipIsAdvanced = false
-  @Configurable
-  var ORE_LODESTONE              = 50
-  @Configurable
-  var NUGGET_LODESTONE           = 10
-  @Configurable
-  var CHUNK_LODESTONE            = 40
-  @Configurable
-  var ORE_IRON                   = 5
-  @Configurable
-  var INGOT_IRON                 = 5
+  val magnetismTooltipIsAdvanced = false
+  val ORE_LODESTONE              = 50
+  val CHUNK_LODESTONE            = 40
+  val ORE_IRON                   = 5
+  val INGOT_IRON                 = 5
+  private val idToStrengthMap: util.Map[Integer, Integer] = new util.TreeMap[Integer, Integer]
 
   def init() {
     registerMagnetMappings()

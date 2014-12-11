@@ -2,6 +2,7 @@ package com.itszuvalex.femtocraft.core
 
 import java.util
 
+import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.core.Configurable
 import net.minecraft.block.Block
 import net.minecraft.entity.item.EntityItem
@@ -9,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.{Entity, EntityLivingBase}
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.world.World
+import org.apache.logging.log4j.Level
 
 import scala.collection.JavaConversions._
 
@@ -16,9 +18,9 @@ import scala.collection.JavaConversions._
  * Created by Chris on 9/20/2014.
  */
 @Configurable object FemtocraftMagnetUtils {
-  @Configurable(comment = "Multiplier of magnetic strength to radius.")                                     var strengthToRadiusMultiplier   = .05f
-  @Configurable(comment = "Ratio of strength/distance to item strength or greater to pull from inventory.") var inventoryPullStrengthRatio   = 2f
-  @Configurable(comment = "Strength to velocity multiplier.")                                               var strengthToVelocityMultiplier = .0000000001d
+  @Configurable(comment = "Multiplier of magnetic strength to radius.")                                     val strengthToRadiusMultiplier   = .05f
+  @Configurable(comment = "Ratio of strength/distance to item strength or greater to pull from inventory.") val inventoryPullStrengthRatio   = 2f
+  @Configurable(comment = "Strength to velocity multiplier.")                                               val strengthToVelocityMultiplier = .3d
 
   /**
    * @param block
@@ -49,7 +51,7 @@ import scala.collection.JavaConversions._
                   if (MagnetRegistry.isMagnet(item)) {
                     val itemStr = MagnetRegistry.getMagnetStrength(item)
                     if (((strength.toDouble / Math.max(distance, 1d)) / itemStr.toDouble) >= inventoryPullStrengthRatio) {
-                      val ei = entity.entityDropItem(item, entity.height / 2f)
+                      val ei = player.entityDropItem(item, entity.height / 2f)
                       ei.delayBeforeCanPickup = 20
                       player.inventory.mainInventory(i) = null
                     }
@@ -61,10 +63,10 @@ import scala.collection.JavaConversions._
                 if (MagnetRegistry.isMagnet(item)) {
                   val itemStrength = MagnetRegistry.getMagnetStrength(item)
                   val velocity = itemStrength * strengthToVelocityMultiplier
-                  val velX = (Math.signum(x - entity.posX) * velocity / (50 * Math.max(distance, 1))) * distance * delta
-                  val velY = (Math.signum(y - entity.posY) * velocity / (50 * Math.max(distance, 1))) * distance * delta
-                  val velZ = (Math.signum(z - entity.posZ) * velocity / (50 * Math.max(distance, 1))) * distance * delta
-                  entity.addVelocity(velX, velY, velZ)
+                  val velX = (Math.signum(x - player.posX) * velocity / (50 * Math.max(distance, 1))) * distance * delta
+                  val velY = (Math.signum(y - player.posY) * velocity / (50 * Math.max(distance, 1))) * distance * delta
+                  val velZ = (Math.signum(z - player.posZ) * velocity / (50 * Math.max(distance, 1))) * distance * delta
+                  player.addVelocity(velX, velY, velZ)
                 }
               }
             }
@@ -76,9 +78,9 @@ import scala.collection.JavaConversions._
                 if (MagnetRegistry.isMagnet(item)) {
                   val itemStr = MagnetRegistry.getMagnetStrength(item)
                   if ((strength / itemStr) > inventoryPullStrengthRatio) {
-                    val ei = entity.entityDropItem(item, entity.height / 2f)
+                    val ei = base.entityDropItem(item, base.height / 2f)
                     ei.delayBeforeCanPickup = 20
-                    entity.setCurrentItemOrArmor(i, null)
+                    base.setCurrentItemOrArmor(i, null)
                   }
                 }
               }
@@ -86,10 +88,10 @@ import scala.collection.JavaConversions._
           case item: EntityItem       =>
             if (MagnetRegistry.isMagnet(item.getEntityItem)) {
               val velocity = strength * strengthToVelocityMultiplier
-              val velX = (Math.signum(x - entity.posX) * velocity / (Math.max(distance, 1) * 50)) * distance * delta
-              val velY = (Math.signum(y - entity.posY) * velocity / (Math.max(distance, 1) * 50)) * distance * delta
-              val velZ = (Math.signum(z - entity.posZ) * velocity / (Math.max(distance, 1) * 50)) * distance * delta
-              entity.addVelocity(velX, velY, velZ)
+              val velX = (Math.signum(x - item.posX) * velocity / (Math.max(distance, 1) * 50)) * distance * delta
+              val velY = (Math.signum(y - item.posY) * velocity / (Math.max(distance, 1) * 50)) * distance * delta
+              val velZ = (Math.signum(z - item.posZ) * velocity / (Math.max(distance, 1) * 50)) * distance * delta
+              item.addVelocity(velX, velY, velZ)
             }
           case _                      =>
         }
