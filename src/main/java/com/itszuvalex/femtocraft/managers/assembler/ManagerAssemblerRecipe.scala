@@ -26,7 +26,7 @@ import java.util
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.events.EventAssemblerRegister
 import com.itszuvalex.femtocraft.api.{AssemblerRecipe, EnumTechLevel}
-import com.itszuvalex.femtocraft.configuration.{AssemblerXMLLoader, XMLAssemblerRecipes$}
+import com.itszuvalex.femtocraft.configuration.{AssemblerXMLLoader, XMLAssemblerRecipes}
 import com.itszuvalex.femtocraft.implicits.IDImplicits._
 import com.itszuvalex.femtocraft.managers.research.Technology
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
@@ -314,15 +314,15 @@ class ManagerAssemblerRecipe {
 
     Femtocraft.log(Level.INFO, "Registering custom assembler recipes.")
     val customRecipes = new AssemblerXMLLoader(new File(FemtocraftFileUtils.customConfigPath + "Assembler/")).loadItems()
-    customRecipes.foreach(addRecipe)
+    customRecipes.view.foreach(addRecipe)
     Femtocraft.log(Level.INFO, "Finished registering custom assembler recipes.")
 
     val defaults = new ArrayBuffer[AssemblerRecipe]()
 
-    val femtocraftRecipes = new XMLAssemblerRecipes(new File(FemtocraftFileUtils.configFolder, "Recipes.xml"))
+    val femtocraftRecipes = new XMLAssemblerRecipes(new File(FemtocraftFileUtils.configFolder, "AssemblerRecipes.xml"))
     if (femtocraftRecipes.initialized) {
       defaults ++= femtocraftRecipes.loadCustomRecipes()
-      defaults.foreach(addRecipe)
+      defaults.view.foreach(addRecipe)
     } else {
       Femtocraft.assemblerConfigs.setBatchLoading(true)
       defaults ++= AssemblerDefaults.getFemtoDefaults
@@ -330,7 +330,7 @@ class ManagerAssemblerRecipe {
       defaults ++= AssemblerDefaults.getMicroDefaults
       defaults ++= AssemblerDefaults.getMacroDefaults
       defaults ++= AssemblerDefaults.getFemtocraftDefaults
-      defaults.foreach(addRecipe)
+      defaults.view.foreach(addRecipe)
       Femtocraft.assemblerConfigs.setBatchLoading(false)
       Femtocraft.log(Level.INFO, "Saving Femtocraft default recipes to file.")
       femtocraftRecipes.seedInitialRecipes(defaults)
@@ -338,11 +338,11 @@ class ManagerAssemblerRecipe {
     }
     Femtocraft.log(Level.INFO, "Finished registering Femtocraft assembler recipes.")
 
-    val database = new XMLAssemblerRecipes(new File(FemtocraftFileUtils.configFolder, "ScrapedRecipes.xml"))
+    val database = new XMLAssemblerRecipes(new File(FemtocraftFileUtils.configFolder, "ScrapedAssemblerRecipes.xml"))
     Femtocraft.log(Level.INFO, "Scraping Minecraft recipe registries for assembler recipe mappings.")
     if (database.initialized) {
       Femtocraft.log(Level.INFO, "Scraped Recipes Database already exists.  Loading from file.")
-      database.loadCustomRecipes().foreach(addRecipe)
+      database.loadCustomRecipes().view.foreach(addRecipe)
     }
     else {
       Femtocraft.log(Level.WARN,

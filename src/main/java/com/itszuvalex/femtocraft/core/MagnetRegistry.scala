@@ -1,16 +1,20 @@
 package com.itszuvalex.femtocraft.core
 
+import java.io.File
 import java.util
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.core.Configurable
+import com.itszuvalex.femtocraft.configuration.{MagnetismXMLLoader, XMLMagnetismMappings}
 import com.itszuvalex.femtocraft.implicits.IDImplicits._
+import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils
 import net.minecraft.block.Block
 import net.minecraft.init.{Blocks, Items}
 import net.minecraft.item.{Item, ItemStack}
 import org.apache.logging.log4j.Level
 
 import scala.collection.JavaConversions._
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * Created by Chris on 9/20/2014.
@@ -35,33 +39,33 @@ import scala.collection.JavaConversions._
   var INGOT_IRON                 = 5
 
   def init() {
-    registerMagnetDefaults()
+    registerMagnetMappings()
     registerMagnetTree()
   }
 
   def registerMagnet(block: Block, strength: Int): Boolean = block != null && registerMagnet(new ItemStack(block), strength)
 
+  def registerMagnet(item: ItemStack, strength: Int): Boolean = item != null && registerMagnet(item.itemID, strength)
+
   def registerMagnet(id: Int, strength: Int): Boolean = idToStrengthMap.put(id, strength) != null
 
   def registerMagnet(item: Item, strength: Int): Boolean = item != null && registerMagnet(item.itemID, strength)
-
-  def registerMagnet(item: ItemStack, strength: Int): Boolean = item != null && registerMagnet(item.itemID, strength)
 
   def getMagnetStrength(block: Block): Int = if (block == null) 0 else getMagnetStrength(new ItemStack(block))
 
   def getMagnetStrength(item: ItemStack): Int = if (item == null) 0 else getMagnetStrength(item.itemID)
 
-  def getMagnetStrength(item: Item): Int = if (item == null) 0 else getMagnetStrength(item.itemID)
-
   def getMagnetStrength(id: Int): Int = idToStrengthMap.get(id)
+
+  def getMagnetStrength(item: Item): Int = if (item == null) 0 else getMagnetStrength(item.itemID)
 
   def isMagnet(block: Block): Boolean = block != null && isMagnet(new ItemStack(block))
 
   def isMagnet(item: ItemStack): Boolean = item != null && isMagnet(item.itemID)
 
-  def isMagnet(id: Int): Boolean = idToStrengthMap.containsKey(id)
-
   def isMagnet(item: Item): Boolean = item != null && isMagnet(item.itemID)
+
+  def isMagnet(id: Int): Boolean = idToStrengthMap.containsKey(id)
 
   private def registerMagnetTree() {
     Femtocraft.log(Level.INFO, "Registering all magnets.")
@@ -88,12 +92,31 @@ import scala.collection.JavaConversions._
     Femtocraft.log(Level.INFO, "Finished registering magnets.  Total depth was " + depth + ".")
   }
 
-  private def registerMagnetDefaults() {
-    registerMagnet(Blocks.iron_ore, ORE_IRON)
-    registerMagnet(Items.iron_ingot, INGOT_IRON)
-    registerMagnet(Femtocraft.blockOreLodestone, ORE_LODESTONE)
-    registerMagnet(Femtocraft.itemNuggetLodestone, NUGGET_LODESTONE)
-    registerMagnet(Femtocraft.itemChunkLodestone, CHUNK_LODESTONE)
+  private def registerMagnetMappings(): Unit = {
+    val customMappings = new MagnetismXMLLoader(new File(FemtocraftFileUtils.customConfigPath + "Magnetism/")).loadItems()
+    customMappings.view.foreach(registerMapping)
+
+    val recipes = new XMLMagnetismMappings(new File(FemtocraftFileUtils.configFolder, "MagnetismMappings.xml"))
+    if (recipes.initialized) {
+      recipes.loadCustomRecipes().view.foreach(registerMapping)
+    }
+    else {
+      val defaults = getMagnetDefaults
+      recipes.seedInitialRecipes(defaults)
+      defaults.view.foreach(registerMapping)
+    }
+  }
+
+  private def registerMapping(mapping: (ItemStack, Int)) = registerMagnet(mapping._1, mapping._2)
+
+  private def getMagnetDefaults: ArrayBuffer[(ItemStack, Int)] = {
+    val ret = new ArrayBuffer[(ItemStack, Int)]()
+    ret.append((new ItemStack(Blocks.iron_ore), ORE_IRON))
+    ret append ((new ItemStack(Items.iron_ingot), INGOT_IRON))
+    ret.append((new ItemStack(Femtocraft.blockOreLodestone), ORE_LODESTONE))
+    ret.append((new ItemStack(Femtocraft.itemNuggetLodestone), NUGGET_LODESTONE))
+    ret.append((new ItemStack(Femtocraft.itemChunkLodestone), CHUNK_LODESTONE))
+    ret
   }
 }
 

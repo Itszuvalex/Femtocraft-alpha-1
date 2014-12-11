@@ -3,7 +3,6 @@ package com.itszuvalex.femtocraft.configuration
 import java.io.File
 import java.util
 
-import com.itszuvalex.femtocraft.configuration.XMLAssemblerRecipes._
 import com.itszuvalex.femtocraft.configuration.XMLSerializable._
 import net.minecraft.item.ItemStack
 

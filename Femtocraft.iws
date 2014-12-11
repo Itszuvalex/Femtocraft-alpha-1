@@ -2,21 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="334ed2b9-d383-45b1-801c-a13fbb9ee325" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/DimensionalXMLLoader.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/MagnetismXMLLoader.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/TemporalXMLLoader.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLDimensionalRecipes.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLLoaderWriter.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLMagnetismMappings.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLTemporalRecipes.scala" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/mods/sqlite-jdbc-3.7.15-M1.jar" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLRecipes.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLAssemblerRecipes.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/AssemblerXMLLoader.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/AssemblerXMLLoader.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/CustomXMLLoader.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/CustomXMLLoader.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Femtocraft.ipr" afterPath="$PROJECT_DIR$/Femtocraft.ipr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Femtocraft.iws" afterPath="$PROJECT_DIR$/Femtocraft.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/MagnetRegistry.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/MagnetRegistry.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/ManagerAssemblerRecipe.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/ManagerAssemblerRecipe.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLSerializable.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLSerializable.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/dimensional/ManagerDimensionalRecipe.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/dimensional/ManagerDimensionalRecipe.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/research/ManagerResearch.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/research/ManagerResearch.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/temporal/ManagerTemporalRecipe.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/temporal/ManagerTemporalRecipe.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLDimensionalRecipes.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLDimensionalRecipes.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLMagnetismMappings.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLMagnetismMappings.scala" />
     </list>
     <ignored path="Femtocraft.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -79,58 +72,8 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="XMLSerializable.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLSerializable.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1104" max-vertical-offset="3496">
-              <caret line="84" column="56" selection-start-line="84" selection-start-column="56" selection-end-line="84" selection-end-column="56" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="XMLAssemblerRecipes.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLAssemblerRecipes.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="552">
-              <caret line="16" column="57" selection-start-line="16" selection-start-column="57" selection-end-line="16" selection-end-column="57" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="XMLTemporalRecipes.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLTemporalRecipes.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="575">
-              <caret line="17" column="56" selection-start-line="17" selection-start-column="56" selection-end-line="17" selection-end-column="56" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AssemblerXMLLoader.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/AssemblerXMLLoader.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="483">
-              <caret line="21" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TemporalXMLLoader.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/TemporalXMLLoader.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="483">
-              <caret line="14" column="73" selection-start-line="14" selection-start-column="73" selection-end-line="14" selection-end-column="73" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DimensionalXMLLoader.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/DimensionalXMLLoader.scala">
+      <file leaf-file-name="MagnetismXMLLoader.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/MagnetismXMLLoader.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="483">
               <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
@@ -139,22 +82,58 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MagnetismXMLLoader.scala" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/MagnetismXMLLoader.scala">
+      <file leaf-file-name="MagnetRegistry.scala" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/MagnetRegistry.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.23937555" vertical-offset="0" max-vertical-offset="1153">
-              <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.47090518" vertical-offset="1863" max-vertical-offset="2944">
+              <caret line="100" column="62" selection-start-line="100" selection-start-column="62" selection-end-line="100" selection-end-column="62" />
+              <folding>
+                <element signature="e#40#59#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ManagerDimensionalRecipe.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/dimensional/ManagerDimensionalRecipe.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="851" max-vertical-offset="3128">
+              <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+              <folding>
+                <element signature="e#1076#1095#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ManagerResearch.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/research/ManagerResearch.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4393">
+              <caret line="45" column="1" selection-start-line="45" selection-start-column="1" selection-end-line="45" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CustomXMLLoader.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/CustomXMLLoader.scala">
+      <file leaf-file-name="ManagerAssistant.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assistant/ManagerAssistant.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="966">
-              <caret line="15" column="32" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3726">
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ManagerTemporalRecipe.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/temporal/ManagerTemporalRecipe.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="851" max-vertical-offset="3059">
+              <caret line="77" column="2" selection-start-line="77" selection-start-column="2" selection-end-line="77" selection-end-column="2" />
+              <folding>
+                <element signature="e#1073#1092#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -162,9 +141,11 @@
       <file leaf-file-name="XMLDimensionalRecipes.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLDimensionalRecipes.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="575">
-              <caret line="18" column="59" selection-start-line="18" selection-start-column="59" selection-end-line="18" selection-end-column="59" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="736">
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <folding>
+                <element signature="e#49#68#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -172,8 +153,20 @@
       <file leaf-file-name="XMLMagnetismMappings.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLMagnetismMappings.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="575">
-              <caret line="18" column="58" selection-start-line="18" selection-start-column="58" selection-end-line="18" selection-end-column="58" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="736">
+              <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+              <folding>
+                <element signature="e#49#68#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ManagerAssemblerRecipe.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/ManagerAssemblerRecipe.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="6106" max-vertical-offset="16560">
+              <caret line="344" column="39" selection-start-line="344" selection-start-column="39" selection-end-line="344" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -199,10 +192,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/gui/GuiNanoEnmesher.scala" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/gui/GuiNanoFabricator.scala" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/gui/GuiNanoHorologe.scala" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/gui/GuiNanoInnervator.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/api/power/PowerContainer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/gui/GuiFemtoCube.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/gui/GuiMagnetohydrodynamicGenerator.java" />
@@ -234,7 +223,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/Femtocraft.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/FemtocraftTechnologies.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/FissionReactorRegistry.scala" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/ManagerAssemblerRecipe.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/ManagerRecipe.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockNanoCable.scala" />
         <option value="$PROJECT_DIR$/src/main/resources/mcmod.info" />
@@ -244,12 +232,17 @@
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLSerializable.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLAssemblerRecipes.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/AssemblerXMLLoader.scala" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLDimensionalRecipes.scala" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLMagnetismMappings.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLTemporalRecipes.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/TemporalXMLLoader.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/DimensionalXMLLoader.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/MagnetismXMLLoader.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/ManagerAssemblerRecipe.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLDimensionalRecipes.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLMagnetismMappings.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/temporal/ManagerTemporalRecipe.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/dimensional/ManagerDimensionalRecipe.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/research/ManagerResearch.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/MagnetRegistry.scala" />
       </list>
     </option>
   </component>
@@ -401,42 +394,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="configuration" />
+              <option name="myItemId" value="core" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="configuration" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FemtocraftAssemblerConfig.scala" />
-              <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$ScalaFileTreeNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -848,7 +807,13 @@
       <option name="project" value="LOCAL" />
       <updated>1418280986794</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="XML Loaders and LoaderWriters for remaining recipes types, and magnetism mapping.">
+      <created>1418318992080</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1418318992080</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -858,13 +823,15 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4122867" sideWeight="0.49892473" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Floobits Chat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17747441" sideWeight="0.32795697" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33105803" sideWeight="0.32795697" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18566553" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33105803" sideWeight="0.672043" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20332481" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17132616" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -872,16 +839,14 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39915073" sideWeight="0.633311" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette " active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
       <window_info id="Clojure REPL" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39915073" sideWeight="0.633311" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4122867" sideWeight="0.49892473" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="100" y="155" width="2680" height="1485" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33105803" sideWeight="0.672043" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3337884" sideWeight="0.49964157" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -940,7 +905,8 @@
     <MESSAGE value="Redid AssemblerRecipe database.&#10;&#10;No more SQLite!!!!&#10;&#10;And the entire thing generates in &lt;2 seconds.  No kidding.  I wonder how damn fast it'll be for larger packs." />
     <MESSAGE value="Fix ordering errors that caused nullptrs when referring to regular crafting added by Femtocraft.&#10;&#10;This also means regular Femtocraft recipes are added in time to be scraped, as should happen." />
     <MESSAGE value="Updated correct mcmod.info.  Removed unneeded sqlite dependency" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated correct mcmod.info.  Removed unneeded sqlite dependency" />
+    <MESSAGE value="XML Loaders and LoaderWriters for remaining recipes types, and magnetism mapping." />
+    <option name="LAST_COMMIT_MESSAGE" value="XML Loaders and LoaderWriters for remaining recipes types, and magnetism mapping." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -962,41 +928,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/traits/PowerConsumer.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="432">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/traits/PowerBlockContainer.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="168" max-vertical-offset="384">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/tiles/TileEntityBaseEntityMicroDeconstructor.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4896">
-          <caret line="50" column="114" selection-start-line="50" selection-start-column="114" selection-end-line="50" selection-end-column="114" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityPowerBase.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="552" max-vertical-offset="1992">
-          <caret line="23" column="50" selection-start-line="23" selection-start-column="50" selection-end-line="23" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.scala-lang.modules/scala-xml_2.11/1.0.2/source/312c3557d1ca0b34820f3b3fc5404a47936ceb26/scala-xml_2.11-1.0.2-sources.jar!/scala/xml/Elem.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.59574467" vertical-offset="2256" max-vertical-offset="3384">
-          <caret line="129" column="6" selection-start-line="129" selection-start-column="6" selection-end-line="129" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/api/AssemblerRecipe.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3227" max-vertical-offset="4368">
@@ -1158,13 +1089,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/ManagerAssemblerRecipe.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="8090" max-vertical-offset="17434">
-          <caret line="371" column="0" selection-start-line="371" selection-start-column="0" selection-end-line="371" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/cpw/mods/fml/common/registry/GameRegistry.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334" vertical-offset="3789" max-vertical-offset="9039">
@@ -1183,13 +1107,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22306034" vertical-offset="0" max-vertical-offset="928">
           <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assistant/ManagerAssistant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.016163792" vertical-offset="107" max-vertical-offset="3726">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1283,22 +1200,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLDimensionalRecipes.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="575">
-          <caret line="18" column="59" selection-start-line="18" selection-start-column="59" selection-end-line="18" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLMagnetismMappings.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="575">
-          <caret line="18" column="58" selection-start-line="18" selection-start-column="58" selection-end-line="18" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLTemporalRecipes.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="575">
@@ -1333,9 +1234,91 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/MagnetismXMLLoader.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23937555" vertical-offset="0" max-vertical-offset="1153">
-          <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="483">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/ManagerAssemblerRecipe.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6106" max-vertical-offset="16560">
+          <caret line="344" column="39" selection-start-line="344" selection-start-column="39" selection-end-line="344" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLMagnetismMappings.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="736">
+          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+          <folding>
+            <element signature="e#49#68#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLDimensionalRecipes.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="736">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding>
+            <element signature="e#49#68#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/temporal/ManagerTemporalRecipe.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="851" max-vertical-offset="3059">
+          <caret line="77" column="2" selection-start-line="77" selection-start-column="2" selection-end-line="77" selection-end-column="2" />
+          <folding>
+            <element signature="e#1073#1092#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/dimensional/ManagerDimensionalRecipe.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="851" max-vertical-offset="3128">
+          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+          <folding>
+            <element signature="e#1076#1095#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/research/ManagerResearch.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4393">
+          <caret line="45" column="1" selection-start-line="45" selection-start-column="1" selection-end-line="45" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assistant/ManagerAssistant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3726">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-library/2.11.2/source/daf0aaff6a520fdacd3486509ddcee6c8c0a1241/scala-library-2.11.2-sources.jar!/scala/collection/generic/Growable.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.66918105" vertical-offset="0" max-vertical-offset="1564">
+          <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/MagnetRegistry.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47090518" vertical-offset="1863" max-vertical-offset="2944">
+          <caret line="100" column="62" selection-start-line="100" selection-start-column="62" selection-end-line="100" selection-end-column="62" />
+          <folding>
+            <element signature="e#40#59#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
