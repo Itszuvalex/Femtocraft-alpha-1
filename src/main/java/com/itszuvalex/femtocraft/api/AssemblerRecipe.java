@@ -22,7 +22,6 @@
 package com.itszuvalex.femtocraft.api;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.api.core.Configurable;
 import com.itszuvalex.femtocraft.api.core.ISaveable;
 import com.itszuvalex.femtocraft.api.research.ITechnology;
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
@@ -33,20 +32,11 @@ import org.apache.logging.log4j.Level;
 
 
 public class AssemblerRecipe implements Comparable<AssemblerRecipe>, ISaveable {
-    @Configurable(comment = "ItemStack[9] (can include nulls) signifying input.  This is unique across all " +
-                            "AssemblerRecipes")
     public ItemStack[] input;
-    @Configurable(comment = "Mass generated when this recipe is decomposed.  Mass required to assemble this recipe.")
     public int mass;
-    @Configurable(comment = "ItemStack signifying output.  This is unique across all AssemblerRecipes")
     public ItemStack output;
-    @Configurable(comment = "TechLevel of recipe.  This dictates the highest level of Assembler/Dissassembler " +
-                            "required to interact with this recipe.")
     public EnumTechLevel enumTechLevel;
-    @Configurable(comment = "Name of Technology required to be researched before the player can use this recipe.")
     public String tech;
-
-    @Configurable(comment = "Type of assembler recipe.")
     public RecipeType type;
 
     public AssemblerRecipe(ItemStack[] input, int mass, ItemStack output,

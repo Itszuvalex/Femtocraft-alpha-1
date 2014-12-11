@@ -738,7 +738,6 @@ object Femtocraft {
   @EventHandler def postInit(event: FMLPostInitializationEvent) {
     assemblerConfigs = new FemtocraftAssemblerConfig(recipeConfig)
     recipeManager.init()
-    recipeManager.assemblyRecipes.registerDefaultRecipes()
     MagnetRegistry.init()
     new FemtocraftTechnologyConfig(technologyConfigFile).loadTechnologies()
     if (event.getSide eq Side.CLIENT) {
