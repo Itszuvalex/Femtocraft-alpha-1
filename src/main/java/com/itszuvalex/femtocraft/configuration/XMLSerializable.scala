@@ -5,6 +5,7 @@ import com.itszuvalex.femtocraft.managers.research.Technology
 import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils
 import net.minecraft.item.ItemStack
 
+import scala.xml.Utility.escape
 import scala.xml.{Elem, Node}
 
 /**
@@ -23,38 +24,28 @@ object XMLSerializable {
 
   implicit class XMLSerializeString(value: String) extends XMLSerial[String] {
     override def toNode(tag: String) = <xml>
-                                         {value}
+                                         {escape(value)}
                                        </xml>.copy(label = tag, minimizeEmpty = true)
   }
 
   implicit class XMLSerializeInt(value: Int) extends XMLSerial[Int] {
-    override def toNode(tag: String) = <xml>
-                                         {value}
-                                       </xml>.copy(label = tag, minimizeEmpty = true)
+    override def toNode(tag: String) = value.toString.toNode(tag)
   }
 
   implicit class XMLSerializeFloat(value: Float) extends XMLSerial[Float] {
-    override def toNode(tag: String) = <xml>
-                                         {value}
-                                       </xml>.copy(label = tag, minimizeEmpty = true)
+    override def toNode(tag: String) = value.toString.toNode(tag)
   }
 
   implicit class XMLSerializeDouble(value: Double) extends XMLSerial[Double] {
-    override def toNode(tag: String) = <xml>
-                                         {value}
-                                       </xml>.copy(label = tag, minimizeEmpty = true)
+    override def toNode(tag: String) = value.toString.toNode(tag)
   }
 
   implicit class XMLSerializeBool(value: Boolean) extends XMLSerial[Boolean] {
-    override def toNode(tag: String) = <xml>
-                                         {value}
-                                       </xml>.copy(label = tag, minimizeEmpty = true)
+    override def toNode(tag: String) = value.toString.toNode(tag)
   }
 
   implicit class XMLSerializeItemStack(value: ItemStack) extends XMLSerial[ItemStack] {
-    override def toNode(tag: String) = <xml>
-                                         {FemtocraftStringUtils.itemStackToString(value)}
-                                       </xml>.copy(label = tag, minimizeEmpty = true)
+    override def toNode(tag: String) = FemtocraftStringUtils.itemStackToString(value).toNode(tag)
   }
 
   implicit class XMLSerializeItemStackArray(value: Array[ItemStack]) extends XMLSerial[Array[ItemStack]] {
@@ -124,7 +115,7 @@ object XMLSerializable {
       new Technology(name, shortDescription, level, prerequisites, displayItem, keystone, researchMaterials, discoverItem, discoveredDescription, researchedDescription, discoveredByDefault, researchedByDefault)
     }
 
-    def getBool(tag: String): Boolean = (node \ tag).text.trim.toBoolean
+    def getBool(tag: String): Boolean = getString(tag).toBoolean
 
     def getStringArray(tag: String): Array[String] = {
       val arrayNode = (node \ tag).head
@@ -134,9 +125,9 @@ object XMLSerializable {
       array
     }
 
-    def getFloat(tag: String): Float = (node \ tag).text.trim.toFloat
+    def getFloat(tag: String): Float = getString(tag).toFloat
 
-    def getDouble(tag: String): Double = (node \ tag).text.trim.toDouble
+    def getDouble(tag: String): Double = getString(tag).toDouble
 
     def getAssemblerRecipe: AssemblerRecipe = {
       val recipe = new AssemblerRecipe
@@ -159,8 +150,6 @@ object XMLSerializable {
       new TemporalRecipe(input, configurators, output, ticks, techLevel, tech)
     }
 
-    def getString(tag: String): String = (node \ tag).text.trim
-
     def getItemStackArray(tag: String): Array[ItemStack] = {
       val arrayNode = (node \ tag).head
       val size = (arrayNode \@ "length").toInt
@@ -169,17 +158,17 @@ object XMLSerializable {
       array
     }
 
-    def getItemStack(tag: String): ItemStack = {
-      val nodes = node \ tag
-      if (nodes == null) return null
-      FemtocraftStringUtils.itemStackFromString(nodes.text.trim)
-    }
-
-    def getInt(tag: String): Int = (node \ tag).text.trim.toInt
-
     def getMagnetismMapping: (ItemStack, Int) = {
       (node.getItemStack("item"), node.getInt("strength"))
     }
+
+    def getItemStack(tag: String): ItemStack = {
+      FemtocraftStringUtils.itemStackFromString(getString(tag))
+    }
+
+    def getInt(tag: String): Int = getString(tag).toInt
+
+    def getString(tag: String): String = (node \ tag).text.trim
 
     def getDimensionalRecipe: DimensionalRecipe = {
       val configurators = node.getItemStackArray("configurators")

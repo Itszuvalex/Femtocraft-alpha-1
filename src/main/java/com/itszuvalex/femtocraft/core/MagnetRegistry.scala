@@ -70,7 +70,7 @@ import scala.collection.mutable.ArrayBuffer
     var depth = 0
     while (changed && depth < MAXIMUM_DEPTH) {
       changed = false
-      for (recipe <- recipes) {
+      recipes.view.foreach{recipe =>
         val prevStrength = if (isMagnet(recipe.output)) getMagnetStrength(recipe.output) else 0
         var strength = 0
         for (input <- recipe.input) {
