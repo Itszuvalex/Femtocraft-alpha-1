@@ -82,7 +82,7 @@ class BlockNanoFissionReactorHousing extends TileContainer(Material.iron) {
   }
 
   override def onPostBlockPlaced(par1World: World, par2: Int, par3: Int, par4: Int, par5: Int) {
-    MultiBlockNanoFissionReactor.instance.formMultiBlockWithBlock(par1World, par2, par3, par4)
+    MultiBlockNanoFissionReactor.formMultiBlockWithBlock(par1World, par2, par3, par4)
     super.onPostBlockPlaced(par1World, par2, par3, par4, par5)
   }
 
@@ -101,7 +101,7 @@ class BlockNanoFissionReactorHousing extends TileContainer(Material.iron) {
     par1World.getTileEntity(par2, par3, par4) match {
       case te: TileEntityNanoFissionReactorHousing =>
         val info = te.getInfo
-        MultiBlockNanoFissionReactor.instance.breakMultiBlock(par1World, info.x, info.y, info.z)
+        MultiBlockNanoFissionReactor.breakMultiBlock(par1World, info.x, info.y, info.z)
       case _                                       =>
     }
     super.breakBlock(par1World, par2, par3, par4, par5, par6)

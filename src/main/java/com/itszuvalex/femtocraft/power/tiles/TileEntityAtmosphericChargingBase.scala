@@ -21,22 +21,28 @@
 package com.itszuvalex.femtocraft.power.tiles
 
 import com.itszuvalex.femtocraft.api.EnumTechLevel
-import com.itszuvalex.femtocraft.api.core.Saveable
+import com.itszuvalex.femtocraft.api.core.{Configurable, Saveable}
 import com.itszuvalex.femtocraft.api.power.{IAtmosphericChargingAddon, IAtmosphericChargingBase, PowerContainer}
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
+import com.itszuvalex.femtocraft.power.tiles.TileEntityAtmosphericChargingBase._
 import com.itszuvalex.femtocraft.power.traits.PowerProducer
 import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.{ItemBlock, ItemStack}
 import net.minecraftforge.common.util.ForgeDirection
 
-class TileEntityAtmosphericChargingBase extends TileEntityBase with PowerProducer {
+object TileEntityAtmosphericChargingBase {
+  @Configurable val POWER_MAX  = 250
+  @Configurable val TECH_LEVEL = EnumTechLevel.MICRO
+}
+
+@Configurable class TileEntityAtmosphericChargingBase extends TileEntityBase with PowerProducer {
   var numCoils             = 0
   var powerPerTick         = 0f
   @Saveable
   var storedPowerIncrement = 0f
 
-  def defaultContainer = new PowerContainer(EnumTechLevel.MICRO, 250)
+  def defaultContainer = new PowerContainer(TECH_LEVEL, POWER_MAX)
 
   override def femtocraftServerUpdate() {
     super.femtocraftServerUpdate()

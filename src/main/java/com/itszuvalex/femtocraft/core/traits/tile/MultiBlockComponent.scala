@@ -3,6 +3,7 @@ package com.itszuvalex.femtocraft.core.traits.tile
 import com.itszuvalex.femtocraft.api.core.Saveable
 import com.itszuvalex.femtocraft.api.multiblock.{IMultiBlockComponent, MultiBlockInfo}
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
+import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.world.World
 
 /**
@@ -18,6 +19,11 @@ trait MultiBlockComponent extends TileEntityBase with IMultiBlockComponent {
     getWorldObj.markBlockForUpdate(xCoord, yCoord, zCoord)
     getWorldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, getWorldObj.getBlock(xCoord, yCoord, zCoord))
     result
+  }
+
+  override def handleDescriptionNBT(compound: NBTTagCompound): Unit = {
+    super.handleDescriptionNBT(compound)
+    setRenderUpdate()
   }
 
   def breakMultiBlock(world: World, x: Int, y: Int, z: Int): Boolean = {

@@ -327,7 +327,7 @@ object TileEntityNanoFissionReactorCore {
                                                                                      moltenSaltTank.getInfo)
 
   override def markDirty() {
-    MultiBlockNanoFissionReactor.instance.onMultiblockInventoryChanged(worldObj, info.x, info.y, info.z)
+    MultiBlockNanoFissionReactor.onMultiblockInventoryChanged(worldObj, info.x, info.y, info.z)
     super.markDirty()
   }
 

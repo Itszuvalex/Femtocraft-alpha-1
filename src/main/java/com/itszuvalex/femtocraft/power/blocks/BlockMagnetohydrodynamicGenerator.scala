@@ -87,7 +87,7 @@ class BlockMagnetohydrodynamicGenerator extends TileContainer(Material.iron) {
   }
 
   override def onPostBlockPlaced(par1World: World, par2: Int, par3: Int, par4: Int, par5: Int) {
-    MultiBlockMagnetohydrodynamicGenerator.instance.formMultiBlockWithBlock(par1World, par2, par3, par4)
+    MultiBlockMagnetohydrodynamicGenerator.formMultiBlockWithBlock(par1World, par2, par3, par4)
     super.onPostBlockPlaced(par1World, par2, par3, par4, par5)
   }
 
@@ -95,7 +95,7 @@ class BlockMagnetohydrodynamicGenerator extends TileContainer(Material.iron) {
     par1World.getTileEntity(par2, par3, par4) match {
       case te: TileEntityMagnetohydrodynamicGenerator =>
         val info = te.getInfo
-        MultiBlockMagnetohydrodynamicGenerator.instance.breakMultiBlock(par1World, info.x, info.y, info.z)
+        MultiBlockMagnetohydrodynamicGenerator.breakMultiBlock(par1World, info.x, info.y, info.z)
       case _                                          =>
     }
     super.breakBlock(par1World, par2, par3, par4, par5, par6)

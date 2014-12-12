@@ -49,7 +49,7 @@ class BlockFemtoStellaratorHousing extends TileContainer(Material.iron) {
     par1World.getTileEntity(par2, par3, par4) match {
       case housing: TileEntityFemtoStellaratorHousing =>
         val info: MultiBlockInfo = housing.getInfo
-        MultiBlockFemtoStellarator.instance.breakMultiBlock(par1World, info.x, info.y, info.z)
+        MultiBlockFemtoStellarator.breakMultiBlock(par1World, info.x, info.y, info.z)
       case _                                          =>
     }
     super.breakBlock(par1World, par2, par3, par4, par5, par6)
@@ -97,7 +97,7 @@ class BlockFemtoStellaratorHousing extends TileContainer(Material.iron) {
   }
 
   override def onPostBlockPlaced(par1World: World, par2: Int, par3: Int, par4: Int, par5: Int) {
-    MultiBlockFemtoStellarator.instance.formMultiBlockWithBlock(par1World, par2, par3, par4)
+    MultiBlockFemtoStellarator.formMultiBlockWithBlock(par1World, par2, par3, par4)
     super.onPostBlockPlaced(par1World, par2, par3, par4, par5)
   }
 
