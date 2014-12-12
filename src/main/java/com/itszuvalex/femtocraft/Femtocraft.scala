@@ -289,8 +289,7 @@ object Femtocraft {
     femtocraftServerCommand = new CommandFemtocraft
     config = new Configuration(new File(FemtocraftFileUtils.configFolder, ID + ".cfg"))
     FemtocraftConfigs.load(config)
-    technologyConfigFile = new File(FemtocraftFileUtils.configFolder, TECH_CONFIG_APPEND +
-                                                                      "." + (if (FemtocraftConfigs.useXMLFile) "xml" else "cfg"))
+    technologyConfigFile = new File(FemtocraftFileUtils.configFolder, TECH_CONFIG_APPEND + ".xml")
     recipeConfigFile = new File(FemtocraftFileUtils.configFolder, RECIPE_CONFIG_APPEND + ".cfg")
     recipeConfig = new Configuration(recipeConfigFile)
 
@@ -468,19 +467,23 @@ object Femtocraft {
     blockMicroChargingCoil = new BlockAtmosphericChargingCoil().setBlockName("BlockCoilMicroCharging")
     GameRegistry.registerBlock(blockMicroChargingCoil, "BlockCoilMicroCharging")
     LanguageRegistry.addName(blockMicroChargingCoil, "Electrostatic Charging Coil")
-    blockMicroChargingCapacitor = new BlockAtmosphericChargingCapacitor().setBlockName("BlockAtmosphericChargingCapacitor")
+    blockMicroChargingCapacitor = new BlockAtmosphericChargingCapacitor()
+                                  .setBlockName("BlockAtmosphericChargingCapacitor")
     GameRegistry.registerBlock(blockMicroChargingCapacitor, "BlockAtmosphericChargingCapacitor")
     LanguageRegistry.addName(blockMicroChargingCapacitor, "Electrostatic Charging Capacitor")
-    blockMagneticInductionGenerator = new BlockMagneticInductionGenerator().setBlockName("BlockMagneticInductionGenerator")
+    blockMagneticInductionGenerator = new BlockMagneticInductionGenerator()
+                                      .setBlockName("BlockMagneticInductionGenerator")
     GameRegistry.registerBlock(blockMagneticInductionGenerator, "BlockMagneticInductionGenerator")
     LanguageRegistry.addName(blockMagneticInductionGenerator, "Magnetic Induction Generator")
     blockOrbitalEqualizer = new BlockOrbitalEqualizer().setBlockName("BlockOrbitalEqualizer")
     GameRegistry.registerBlock(blockOrbitalEqualizer, "BlockOrbitalEqualizer")
     LanguageRegistry.addName(blockOrbitalEqualizer, "Orbital Equalizer")
-    blockCryoEndothermalChargingBase = new BlockCryoEndothermalChargingBase().setBlockName("BlockCryoEndothermalChargingBase")
+    blockCryoEndothermalChargingBase = new BlockCryoEndothermalChargingBase()
+                                       .setBlockName("BlockCryoEndothermalChargingBase")
     GameRegistry.registerBlock(blockCryoEndothermalChargingBase, "BlockCryoEndothermalChargingBase")
     LanguageRegistry.addName(blockCryoEndothermalChargingBase, "CryoEndothermal Charging Base")
-    blockCryoEndothermalChargingCoil = new BlockCryoEndothermalChargingCoil().setBlockName("BlockCryoEndothermalChargingCoil")
+    blockCryoEndothermalChargingCoil = new BlockCryoEndothermalChargingCoil()
+                                       .setBlockName("BlockCryoEndothermalChargingCoil")
     GameRegistry.registerBlock(blockCryoEndothermalChargingCoil, "BlockCryoEndothermalChargingCoil")
     LanguageRegistry.addName(blockCryoEndothermalChargingCoil, "CryoEndothermal Charging Coil")
     blockFissionReactorCore = new BlockNanoFissionReactorCore().setBlockName("BlockFissionReactorCore")
@@ -489,7 +492,8 @@ object Femtocraft {
     blockFissionReactorHousing = new BlockNanoFissionReactorHousing().setBlockName("BlockFissionReactorHousing")
     GameRegistry.registerBlock(blockFissionReactorHousing, "BlockFissionReactorHousing")
     LanguageRegistry.addName(blockFissionReactorHousing, "Fission Reactor Housing")
-    blockMagnetohydrodynamicGenerator = new BlockMagnetohydrodynamicGenerator().setBlockName("BlockMagnetohydrodynamicGenerator")
+    blockMagnetohydrodynamicGenerator = new BlockMagnetohydrodynamicGenerator()
+                                        .setBlockName("BlockMagnetohydrodynamicGenerator")
     GameRegistry.registerBlock(blockMagnetohydrodynamicGenerator, "BlockMagnetohydrodynamicGenerator")
     LanguageRegistry.addName(blockMagnetohydrodynamicGenerator, "Magnetohydrodynamic Generator")
     blockSteamGenerator = new BlockSteamGenerator().setBlockName("BlockSteamGenerator")
@@ -564,13 +568,22 @@ object Femtocraft {
     GameRegistry.registerBlock(sidedTest, "Sided Test")
 
     itemIngotTitanium = registerItem("ItemIngotTitanium", "Titanium Ingot")
-    if (FemtocraftConfigs.registerTitaniumIngotInOreDictionary) OreDictionary.registerOre("ingotTitanium", new ItemStack(itemIngotTitanium))
+    if (FemtocraftConfigs.registerTitaniumIngotInOreDictionary) {
+      OreDictionary.registerOre("ingotTitanium", new
+          ItemStack(itemIngotTitanium))
+    }
 
     itemIngotPlatinum = registerItem("ItemIngotPlatinum", "Platinum Ingot")
-    if (FemtocraftConfigs.registerPlatinumIngotInOreDictionary) OreDictionary.registerOre("ingotPlatinum", new ItemStack(itemIngotPlatinum))
+    if (FemtocraftConfigs.registerPlatinumIngotInOreDictionary) {
+      OreDictionary.registerOre("ingotPlatinum", new
+          ItemStack(itemIngotPlatinum))
+    }
 
     itemIngotThorium = registerItem("ItemIngotThorium", "Thorium Ingot")
-    if (FemtocraftConfigs.registerThoriumIngotInOreDictionary) OreDictionary.registerOre("ingotThorium", new ItemStack(itemIngotThorium))
+    if (FemtocraftConfigs.registerThoriumIngotInOreDictionary) {
+      OreDictionary.registerOre("ingotThorium", new
+          ItemStack(itemIngotThorium))
+    }
 
     itemIngotFarenite = registerItem("ItemIngotFarenite", "Farenite")
     OreDictionary.registerOre("ingotFarenite", new ItemStack(itemIngotFarenite))
@@ -618,7 +631,8 @@ object Femtocraft {
     itemTemporalResonator = registerItem("ItemTemporalResonator", "Temporal Resonator")
     itemDimensionalMonopole = registerItem("ItemDimensionalMonopole", "Dimensional Monopole")
     itemSelfFulfillingOracle = registerItem("ItemSelfFulfillingOracle", "Self Fulfilling Oracle")
-    itemCrossDimensionalCommunicator = registerItem("ItemCrossDimensionalCommunicator", "Cross Dimensional Communicator")
+    itemCrossDimensionalCommunicator = registerItem("ItemCrossDimensionalCommunicator",
+                                                    "Cross Dimensional Communicator")
     itemInfallibleEstimator = registerItem("ItemInfallibleEstimator", "Infallible Estimator")
     itemPanLocationalComputer = registerItem("ItemPanLocationalComputer", "Pan Locational Computer")
     itemPandoraCube = registerItem("ItemPandoraCube", "Pandora Cube")

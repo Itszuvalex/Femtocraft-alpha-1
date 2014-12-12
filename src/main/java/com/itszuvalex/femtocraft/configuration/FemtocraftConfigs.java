@@ -33,9 +33,7 @@ public class FemtocraftConfigs {
     public static final String CATEGORY_GENERATION = "Generation";
     public static final String CATEGORY_MULTIPLAYER = "Multiplayer";
     public static final String CATEGORY_DEBUG = "Debug";
-    public static final String CATEGORY_RECIPE_CONFIGURATION = "Recipe Configuration";
     public static final String CATEGORY_ORE_CONFIGURATION = "Ore Configuration";
-    public static final String CATEGORY_TECHNOLOGY = "Technology Configuration";
     // bool
     public static
     @CfgBool
@@ -234,18 +232,6 @@ public class FemtocraftConfigs {
     @CfgBool
     @CfgCat(category = CATEGORY_ORE_CONFIGURATION)
     boolean registerPlatinumIngotInOreDictionary = true;
-
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_TECHNOLOGY)
-    boolean useCustomTechnologies = false;
-    public static
-    @CfgBool
-    @CfgCat(category = CATEGORY_TECHNOLOGY)
-    boolean useXMLFile = true;
-
-    private static int baseItemID = 12000;
-    private static int baseBlockID = 350;
 
     static {
         FemtocraftConfigHelper.init();
