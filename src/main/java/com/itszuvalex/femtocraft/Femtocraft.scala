@@ -27,7 +27,7 @@ import java.io.File
 import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.blocks._
 import com.itszuvalex.femtocraft.command.{CommandBase, CommandFemtocraft}
-import com.itszuvalex.femtocraft.configuration.{FemtocraftAssemblerConfig, FemtocraftConfigs, FemtocraftTechnologyConfig}
+import com.itszuvalex.femtocraft.configuration.{FemtocraftAssemblerConfig, FemtocraftConfigs}
 import com.itszuvalex.femtocraft.core.MagnetRegistry
 import com.itszuvalex.femtocraft.core.fluids._
 import com.itszuvalex.femtocraft.core.items.{ItemBase, ItemFemtoInterfaceDevice, ItemMicroInterfaceDevice, ItemNanoInterfaceDevice}
@@ -739,7 +739,7 @@ object Femtocraft {
     assemblerConfigs = new FemtocraftAssemblerConfig(recipeConfig)
     recipeManager.init()
     MagnetRegistry.init()
-    new FemtocraftTechnologyConfig(technologyConfigFile).loadTechnologies()
+    researchManager.init()
     if (event.getSide eq Side.CLIENT) {
       researchManager.calculateGraph()
     }

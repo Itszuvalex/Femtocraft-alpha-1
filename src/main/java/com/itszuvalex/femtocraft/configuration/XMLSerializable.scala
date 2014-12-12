@@ -1,6 +1,7 @@
 package com.itszuvalex.femtocraft.configuration
 
 import com.itszuvalex.femtocraft.api.{AssemblerRecipe, DimensionalRecipe, EnumTechLevel, TemporalRecipe}
+import com.itszuvalex.femtocraft.managers.research.Technology
 import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils
 import net.minecraft.item.ItemStack
 
@@ -14,6 +15,7 @@ object XMLSerializable {
   val temporalRecipeTag    = "TemporalRecipe"
   val dimensionalRecipeTag = "DimensionalRecipe"
   val magnetismMappingTag  = "MagnetismMapping"
+  val technologyTag        = "Technology"
 
   trait XMLSerial[Type] {
     def toNode(tag: String): Elem
@@ -61,6 +63,12 @@ object XMLSerializable {
                                        </xml>.copy(label = tag, minimizeEmpty = true)
   }
 
+  implicit class XMLSerializeStringArray(value: Array[String]) extends XMLSerial[Array[String]] {
+    override def toNode(tag: String) = <xml length={value.length.toString}>
+                                         {(value zip (0 until value.length)).map { pair => pair._1.toNode(tag + pair._2.toString)}}
+                                       </xml>.copy(label = tag, minimizeEmpty = true)
+  }
+
   implicit class XMLSerializeAssemblerRecipe(value: AssemblerRecipe) {
     def toNode = <xml>
                    {value.input.toNode("input")}{value.mass.toNode("mass")}{value.output.toNode("output")}{value.enumTechLevel.key.toNode("techLevel")}{value.tech.toNode("technology")}{value.`type`.getValue.toNode("type")}
@@ -85,13 +93,50 @@ object XMLSerializable {
                  </xml>.copy(label = magnetismMappingTag)
   }
 
+
+  implicit class XMLSerializeTechnology(value: Technology) {
+    def toNode = {
+      val prereqs = new Array[String](value.getPrerequisites.size)
+      value.getPrerequisites.toArray(prereqs)
+      val ret = <xml>
+                  {value.getName.toNode("name")}{value.getShortDescription.toNode("shortDescription")}{value.getLevel.key.toNode("techLevel")}{prereqs.toNode("prerequisites")}{value.getDisplayItem.toNode("displayItem")}{value.isKeystone.toNode("keystone")}{value.getResearchMaterials.toNode("researchMaterials")}{value.getDiscoverItem.toNode("discoverItem")}{value.getResearchedDescription.toNode("researchedDescription")}{value.getDiscoveredDescription.toNode("discoveredDescription")}{value.isDiscoveredByDefault.toNode("discoveredByDefault")}{value.isResearchedByDefault.toNode("researchedByDefault")}
+                </xml>.copy(label = technologyTag)
+
+      ret
+    }
+  }
+
   implicit class XMLDeserialize(node: Node) {
+
+    def getTechnology: Technology = {
+      val name = node.getString("name")
+      val shortDescription = node.getString("shortDescription")
+      val level = EnumTechLevel.getTech(node.getString("techLevel"))
+      val prerequisites = node.getStringArray("prerequisites")
+      val displayItem = node.getItemStack("displayItem")
+      val keystone = node.getBool("keystone")
+      val researchMaterials = node.getItemStackArray("researchMaterials")
+      val discoverItem = node.getItemStack("discoverItem")
+      val researchedDescription = node.getString("researchedDescription")
+      val discoveredDescription = node.getString("discoveredDescription")
+      val discoveredByDefault = node.getBool("discoveredByDefault")
+      val researchedByDefault = node.getBool("researchedByDefault")
+      new Technology(name, shortDescription, level, prerequisites, displayItem, keystone, researchMaterials, discoverItem, discoveredDescription, researchedDescription, discoveredByDefault, researchedByDefault)
+    }
+
+    def getBool(tag: String): Boolean = (node \ tag).text.trim.toBoolean
+
+    def getStringArray(tag: String): Array[String] = {
+      val arrayNode = (node \ tag).head
+      val size = (arrayNode \@ "length").toInt
+      val array = new Array[String](size)
+      (0 until size).foreach { i => array(i) = arrayNode.getString(tag + i.toString)}
+      array
+    }
 
     def getFloat(tag: String): Float = (node \ tag).text.trim.toFloat
 
     def getDouble(tag: String): Double = (node \ tag).text.trim.toDouble
-
-    def getBool(tag: String): Boolean = (node \ tag).text.trim.toBoolean
 
     def getAssemblerRecipe: AssemblerRecipe = {
       val recipe = new AssemblerRecipe
@@ -116,8 +161,6 @@ object XMLSerializable {
 
     def getString(tag: String): String = (node \ tag).text.trim
 
-    def getInt(tag: String): Int = (node \ tag).text.trim.toInt
-
     def getItemStackArray(tag: String): Array[ItemStack] = {
       val arrayNode = (node \ tag).head
       val size = (arrayNode \@ "length").toInt
@@ -131,6 +174,8 @@ object XMLSerializable {
       if (nodes == null) return null
       FemtocraftStringUtils.itemStackFromString(nodes.text.trim)
     }
+
+    def getInt(tag: String): Int = (node \ tag).text.trim.toInt
 
     def getMagnetismMapping: (ItemStack, Int) = {
       (node.getItemStack("item"), node.getInt("strength"))

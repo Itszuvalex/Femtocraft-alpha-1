@@ -27,6 +27,8 @@ import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.core.Configurable
 import com.itszuvalex.femtocraft.api.events.EventTechnology
 import com.itszuvalex.femtocraft.api.research.ITechnology
+import com.itszuvalex.femtocraft.configuration.{TechnologyXMLLoader, XMLTechnology}
+import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
 import com.itszuvalex.femtocraft.research.gui.graph.{TechNode, TechnologyGraph}
 import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils
 import net.minecraft.nbt.{CompressedStreamTools, NBTTagCompound, NBTTagList}
@@ -53,6 +55,24 @@ object ManagerResearch {
   private var graph          : TechnologyGraph = null
   private var lastWorldLoaded: String          = ""
 
+  def init() {
+    registerTechnologies()
+  }
+
+  private def registerTechnologies(): Unit = {
+    val custom = new TechnologyXMLLoader(new File(FemtocraftFileUtils.customConfigPath + "Technologies/")).loadItems()
+    custom.view.foreach(addTechnology)
+
+    val techs = new XMLTechnology(new File(FemtocraftFileUtils.configFolder, "Technologies.xml"))
+    if (techs.initialized) {
+      techs.loadCustomRecipes().view.foreach(addTechnology)
+    }
+    else {
+      val defs = FemtocraftTechnologies.defaultTechnologies.asInstanceOf[util.List[Technology]]
+      techs.seedInitialRecipes(defs)
+      defs.view.foreach(addTechnology)
+    }
+  }
 
   def addTechnology(tech: ITechnology): Boolean = !MinecraftForge.EVENT_BUS.post(new EventTechnology.TechnologyAddedEvent(tech)) && technologies.put(tech.getName, tech) != null
 
