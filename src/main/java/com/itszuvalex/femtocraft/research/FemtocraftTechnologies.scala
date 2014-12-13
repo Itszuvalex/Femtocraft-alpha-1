@@ -191,8 +191,10 @@ object FemtocraftTechnologies {
                           false,
                           getInput(new ItemStack(Femtocraft.itemMicroPlating)),
                           new ItemStack(Femtocraft.itemMicroPlating),
-                          "",
-                          "",
+                          " If you're going to invest resources in expensive machines, you figure it's only best that you create something to encase the fragile inner workings with.  Better yet if these cases also have ports to enable easy input/output and power sockets.  A little bit of slime can go a long way in that instance.",
+                          Femtocraft.itemMicroPlating.toRecipeWithInfoString(RecipeType.CRAFTING,
+                                                                             "Tempered Titanium siding, some basic logic for input/output and power flow regulation, and a slimeball to ensure plugs stick.  Simple yet effective.")
+                          ,
                           false,
                           false)
     ret += new Technology(SCIENTIFIC_THEORY,
@@ -216,29 +218,46 @@ object FemtocraftTechnologies {
                           Femtocraft
                           .blockResearchComputer
                           .toRecipeWithInfoString(RecipeType.CRAFTING,
-                                                  "Allows visual access to your personalized knowledge store.") + Femtocraft
-                                                                                                                  .blockResearchConsole
-                                                                                                                  .toRecipeWithInfoString(RecipeType
-                                                                                                                                          .CRAFTING,
-                                                                                                                                          "Analyzes your prototypes and generates standardized blueprints."),
+                                                  "Allows visual access to your personalized knowledge store.") +
+                          Femtocraft.blockResearchConsole
+                          .toRecipeWithInfoString(RecipeType.CRAFTING,
+                                                  "Analyzes your prototypes and generates standardized blueprints."),
                           false,
                           true)
     ret += new Technology(ALGORITHMS,
-                          "",
+                          "Ordering machines to do your bidding.",
                           EnumTechLevel.MICRO,
                           Array[String](MACHINING),
                           new ItemStack(Femtocraft.blockEncoder),
                           false,
                           getInput(new ItemStack(Femtocraft.blockEncoder)),
-                          new ItemStack(Femtocraft.blockEncoder))
+                          new ItemStack(Femtocraft.blockEncoder),
+                          " These machines and ideas are starting to get too complicated!  Time to get some scratch space for jotting it all down! *You read off your digital screen.  Speaking of, you realize you never found a keyboard for it.",
+                          " A simple set of rules and methods that is capable of governing an entire realm of machines. \n" +
+                          Femtocraft.itemPaperSchematic.toRecipeWithInfoString(RecipeType.CRAFTING,
+                                                                               "A thick durable sheet of paper.") +
+                          Femtocraft.itemMicroLogicCore.toRecipeWithInfoString(RecipeType.CRAFTING,
+                                                                               "While formulating your logic for the ports, you conceive of a large set of circuits that is capable of forming the logical core of a machine.") +
+                          Femtocraft.blockEncoder.toRecipeWithInfoString(RecipeType.CRAFTING,
+                                                                         "A simple machine that it simply encodes the layout of items into a schematic."),
+                          false,
+                          false)
     ret += new Technology(MECHANICAL_PRECISION,
-                          "",
+                          "Mathematically Precise",
                           EnumTechLevel.MICRO,
-                          Array[String](MACHINING),
+                          Array[String](MACHINING, POTENTIALITY_HARNESSING, ALGORITHMS),
                           new ItemStack(Femtocraft.blockMicroFurnaceUnlit),
                           false,
                           getInput(new ItemStack(Femtocraft.itemHeatingElement)),
-                          new ItemStack(Femtocraft.itemHeatingElement))
+                          new ItemStack(Femtocraft.itemHeatingElement),
+                          " Now that you have the power and the logic, time to apply!  The simplest application of the power you have stored is immediate transformation back into energy, in the form of heat.",
+                          " The simplest starts can lead to the largest things.\n" +
+                          Femtocraft.itemHeatingElement.toRecipeWithInfoString(RecipeType.CRAFTING,
+                                                                               "A simple setup that turns stored energy back into heat.  This coil heats up hot enough to melt metal.") +
+                          Femtocraft.blockMicroFurnaceUnlit.toRecipeWithInfoString(RecipeType.CRAFTING,
+                                                                                   "Wrapping up the Heating Coil in the safe confines of some plating, along with a logic core to make sure your base doesn't go up in flames."),
+                          false,
+                          false)
     ret += new Technology(POWER_OF_NOTHING,
                           "\"Poof!\" It's nothing!",
                           EnumTechLevel.MICRO,
@@ -337,29 +356,47 @@ object FemtocraftTechnologies {
                           false,
                           true)
     ret += new Technology(POTENTIALITY,
-                          "",
+                          "Power Overwhelming",
                           EnumTechLevel.MICRO,
                           Array[String](BASIC_CIRCUITS, BASIC_CHEMISTRY),
                           new ItemStack(Femtocraft.blockMicroCable),
                           false,
                           getInput(new ItemStack(Femtocraft.itemMicroCoil)),
-                          new ItemStack(Femtocraft.itemMicroCoil))
+                          new ItemStack(Femtocraft.itemMicroCoil),
+                          "  Through experimentation, you know Farenite has tremendous power storage potential.  A simple assembly of wires and conducting powder may be able to provide a buffer for storage and transfer of energy potential.",
+                          "  Eureka!  You finally found a power source worthy of the name.  Through various processes, Farenite has the potential to store and release energy in the form of oscillating photons.  Though your efforts are crude now, you know that you can only get better!\n" +
+                          Femtocraft.itemMicroCoil.toRecipeWithInfoString(RecipeType.CRAFTING,
+                                                                          "A simple block of condensed conductive powder, this induces photon oscillation acting as a solenoid for potential energy.  You have a feeling this will have widespread uses.") +
+                          Femtocraft.blockMicroCable.toRecipeWithInfoString(RecipeType.CRAFTING,
+                                                                            "A rickety assembly, the MicroCable is composed of many micro coils to move power around.  The wires will act to equalize power among each other and they have an internal buffer that collects and moves energy."), false, false)
     ret += new Technology(POTENTIALITY_STORAGE,
-                          "",
+                          "Power, Cubed",
                           EnumTechLevel.MICRO,
                           Array[String](POTENTIALITY, MACHINING),
                           new ItemStack(Femtocraft.blockMicroCube),
                           false,
                           getInput(new ItemStack(Femtocraft.itemBattery)),
-                          new ItemStack(Femtocraft.itemBattery))
+                          new ItemStack(Femtocraft.itemBattery),
+                          " Though micro coils can store some power, you know there's a better way to cram more power into a smaller space.  Forming a metal case to hold the conductive powder might be a better way to ensure that the inherent volatility is contained.\n",
+                          Femtocraft.itemBattery.toRecipeWithInfoString(RecipeType.CRAFTING, "Though not much use for anything else, these batteries can store a large amount of power in a small space.") +
+                          Femtocraft.blockMicroCube.toRecipeWithInfoString(RecipeType.CRAFTING, "Nothing more than a big box of batteries and some basic input/output circuits.  Each side is individually toggleable with an interface device to determine whether it accepts power or outputs it."),
+                          false,
+                          false)
     ret += new Technology(POTENTIALITY_HARNESSING,
-                          "",
+                          "Harness the Potential all around you.",
                           EnumTechLevel.MICRO,
-                          Array[String](POTENTIALITY),
+                          Array[String](POTENTIALITY_STORAGE),
                           new ItemStack(Femtocraft.blockMicroChargingBase),
                           false,
                           getInput(new ItemStack(Femtocraft.blockMicroChargingBase)),
-                          new ItemStack(Femtocraft.blockMicroChargingBase))
+                          new ItemStack(Femtocraft.blockMicroChargingBase),
+                          " On a particularly windy day, you touched one of the micro coils you had lying around only to receive a large shock.  You realize that the air itself contains power just waiting for the micro coils to yank it out.",
+                          " In order to use the atmospheric power, you need something built to take this amount of energy.  If it could store some amount as well, all the better.\n" +
+                          Femtocraft.blockMicroChargingBase.toRecipeWithInfoString(RecipeType.CRAFTING,
+                                                                                   "A battery box with input cables and a manager core to handle the various stresses of environmental effects.") +
+                          Femtocraft.blockMicroChargingCoil.toRecipeWithInfoString(RecipeType.CRAFTING,
+                                                                                   "Nothing more than micro coils and a cover intended to grab as much energy from the air as possible."),
+                          false, false)
     ret += new Technology(POTENTIALITY_GENERATION,
                           "Build your potential!",
                           EnumTechLevel.MICRO,
@@ -371,7 +408,7 @@ object FemtocraftTechnologies {
     ret += new Technology(ADVANCED_CHEMISTRY,
                           "",
                           EnumTechLevel.NANO,
-                          Array[String](POTENTIALITY_GENERATION, BASIC_CHEMISTRY),
+                          Array[String](POTENTIALITY_GENERATION, BASIC_CHEMISTRY, MOLECULAR_MANIPULATION),
                           new ItemStack(Femtocraft.itemCrystallite),
                           true,
                           null,
@@ -635,8 +672,8 @@ object FemtocraftTechnologies {
                           Array[String](QUANTUM_ROBOTICS, DEMONIC_PARTICULATES),
                           new ItemStack(Femtocraft.blockNullEqualizer),
                           false,
-                          getInput(new ItemStack(Femtocraft.blockNullEqualizer)),
-                          new ItemStack(Femtocraft.blockNullEqualizer))
+                          getInput(new ItemStack(Femtocraft.blockPhlegethonTunnelCore)),
+                          new ItemStack(Femtocraft.blockPhlegethonTunnelCore))
     ret += new Technology(CORRUPTION_STABILIZATION,
                           "",
                           EnumTechLevel.FEMTO,
@@ -683,7 +720,7 @@ object FemtocraftTechnologies {
     ret += new Technology(MOLECULAR_MANIPULATION,
                           "",
                           EnumTechLevel.MICRO,
-                          Array[String](ALGORITHMS, MECHANICAL_PRECISION, BASIC_CHEMISTRY),
+                          Array[String](MECHANICAL_PRECISION, BASIC_CHEMISTRY),
                           new ItemStack(Femtocraft.blockMicroDeconstructor),
                           false,
                           getInput(new ItemStack(Femtocraft.itemKineticPulverizer)),

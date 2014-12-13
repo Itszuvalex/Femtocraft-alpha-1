@@ -94,7 +94,7 @@ abstract class Graph {
                   rows(j) += dummy
                 }
                 else {
-                  rows(j) += dummy
+                  rows(j).insert(x, dummy)
                 }
                 for (k <- 0 until rows(j).size) {
                   rows(j).get(k).setX(k)
@@ -120,7 +120,7 @@ abstract class Graph {
         for (x <- row.size until width) {
           val dummy = getDummyNodeClass.newInstance.asInstanceOf[IGraphNode]
           dummy.setY(y)
-          row += dummy
+          row.prepend(dummy)
         }
 
 
