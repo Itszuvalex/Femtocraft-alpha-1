@@ -2,12 +2,11 @@ package com.itszuvalex.femtocraft.managers.assembler
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.EnumTechLevel
-import com.itszuvalex.femtocraft.api.core.{Configurable, RecipeType}
+import com.itszuvalex.femtocraft.api.core.Configurable
+import com.itszuvalex.femtocraft.implicits.StringImplicits._
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
-import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils
-import net.minecraft.item.{Item, ItemStack}
+import net.minecraft.item.Item
 
-import scala.collection.JavaConversions._
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
@@ -28,15 +27,15 @@ import scala.collection.mutable.ArrayBuffer
 
   def isItemComponent(item: Item, tech: EnumTechLevel) = componentMap.get(tech).exists(_.contains(item))
 
+  def getComponentsAssemblerRecipeDisplayString(tech: EnumTechLevel) = getComponents(tech).map(_.toAssemblerString)
+                                                                       .aggregate("")(_ + _, _ + _)
+
+  def getComponents(tech: EnumTechLevel) = getOrMake(tech)
+
   private def getOrMake(tech: EnumTechLevel) = componentMap.get(tech) match {
     case Some(a) => a
     case None    => val b = new ArrayBuffer[Item]; componentMap.put(tech, b); b
   }
-
-  def getComponentsAssemblerRecipeDisplayString(tech: EnumTechLevel) = getComponents(tech).map(i => FemtocraftStringUtils.formatItemStackForTechnologyDisplay
-                                                                                                    (RecipeType.ASSEMBLER, new ItemStack(i), i.getItemStackDisplayName(new ItemStack(i)))).aggregate("")(_ + _, _ + _)
-
-  def getComponents(tech: EnumTechLevel) = getOrMake(tech)
 
   def getComponentsInAssemblerRecipeDisplayString(tech: EnumTechLevel) = {
     Femtocraft.recipeManager.assemblyRecipes.getAllRecipes.filter(p => {
@@ -50,6 +49,6 @@ import scala.collection.mutable.ArrayBuffer
                              if (it == null) false else getComponents(tech).contains(it)
                          }
       }
-    }).map(i => i.output.getItem).map(i => "__Recipe.Assembler:" + FemtocraftStringUtils.itemStackToString(new ItemStack(i)) + "--" + i.getItemStackDisplayName(new ItemStack(i)) + "__").aggregate("")(_ + _, _ + _)
+    }).map(i => i.output.getItem).map(_.toAssemblerString).aggregate("")(_ + _, _ + _)
   }
 }

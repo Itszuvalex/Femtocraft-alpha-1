@@ -488,8 +488,7 @@ class ManagerAssemblerRecipe {
               catch {
                 case exc: IndexOutOfBoundsException =>
                   Femtocraft.log(Level.ERROR,
-                                 "Ore recipe with nothing registered in " + "ore dictionary for " + recipe.output
-                                                                                                    .getDisplayName + ".")
+                                 "Ore recipe with nothing registered in " + "ore dictionary for " + recipe.getRecipeName + ".")
                   return false
               }
             }

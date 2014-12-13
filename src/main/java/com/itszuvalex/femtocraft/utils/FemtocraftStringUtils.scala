@@ -54,12 +54,11 @@ object FemtocraftStringUtils {
       }
       catch {
         case e: Exception =>
+          Femtocraft.log(Level.ERROR, "Error parsing ItemStack string \"" + s + "\"")
           e.printStackTrace()
           return null
       }
-      finally {
-        Femtocraft.log(Level.ERROR, "Error parsing ItemStack string \"" + s + "\"")
-      }
+      Femtocraft.log(Level.ERROR, "Error parsing ItemStack string \"" + s + "\"")
     }
     null
   }

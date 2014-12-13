@@ -1,5 +1,6 @@
 package com.itszuvalex.femtocraft.implicits
 
+import com.itszuvalex.femtocraft.api.core.RecipeType
 import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils
 import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
@@ -27,7 +28,19 @@ object ItemStackImplicits {
   implicit class ItemStackOreDictionaryComparison(item: ItemStack) {
     def ==(oreDictionary: String) = isOre(oreDictionary)
 
-    def isOre(oreDictionary: String) = OreDictionary.getOres(oreDictionary).exists(ItemStack.areItemStacksEqual(_, item))
+    def isOre(oreDictionary: String) = OreDictionary.getOres(oreDictionary)
+                                       .exists(ItemStack.areItemStacksEqual(_, item))
+  }
+  
+  implicit class TechnologyRendererString(item: ItemStack) {
+    def toAssemblerString = toRecipeString(RecipeType.ASSEMBLER)
+    
+    def toRecipeString(recipeType: RecipeType) = item.toRecipeWithInfoString(recipeType,
+                                                                             item.getItem.getItemStackDisplayName(item))
+
+    def toRecipeWithInfoString(recipeType: RecipeType, info: String) = FemtocraftStringUtils
+                                                                       .formatItemStackForTechnologyDisplay(recipeType,
+                                                                                                            item, info)
   }
 
 }
