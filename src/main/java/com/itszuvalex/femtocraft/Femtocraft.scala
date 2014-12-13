@@ -754,7 +754,7 @@ object Femtocraft {
     recipeManager.init()
     MagnetRegistry.init()
     researchManager.init()
-    if (event.getSide eq Side.CLIENT) {
+    if (event.getSide == Side.CLIENT) {
       researchManager.calculateGraph()
     }
   }

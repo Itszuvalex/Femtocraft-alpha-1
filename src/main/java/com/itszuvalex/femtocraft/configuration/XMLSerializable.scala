@@ -24,7 +24,7 @@ object XMLSerializable {
 
   implicit class XMLSerializeString(value: String) extends XMLSerial[String] {
     override def toNode(tag: String) = <xml>
-                                         {escape(value)}
+                                         {value}
                                        </xml>.copy(label = tag, minimizeEmpty = true)
   }
 

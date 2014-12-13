@@ -119,13 +119,16 @@ public class ItemAssemblySchematic extends ItemBase implements IAssemblerSchemat
         );
         par3List.add(useLine);
 
-        String outputLine = String.format(EnumChatFormatting.YELLOW + "Output:"
-                                          + recipe.enumTechLevel.getTooltipEnum() + " %d"
-                                          + EnumChatFormatting.GRAY + "x" + EnumChatFormatting.RESET
-                                          + "%s" + EnumChatFormatting.RESET, recipe.output.stackSize,
-                recipe.output.getDisplayName()
-        );
-        par3List.add(outputLine);
+
+        try {
+            String outputLine = String.format(EnumChatFormatting.YELLOW + "Output:"
+                                              + recipe.enumTechLevel.getTooltipEnum() + " %d"
+                                              + EnumChatFormatting.GRAY + "x" + EnumChatFormatting.RESET
+                                              + "%s" + EnumChatFormatting.RESET, recipe.output.stackSize,
+                    recipe.getRecipeName()
+            );
+            par3List.add(outputLine);
+        }catch (Exception e) {}
 
         // End short
         if (!par4) {

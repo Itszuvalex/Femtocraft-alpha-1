@@ -74,8 +74,11 @@ class ManagerAssemblerRecipe {
     if (recipe.input.length != 9) {
       throw new IllegalArgumentException("AssemblerRecipe - Invalid Input Array Length!  Must be 9!")
     }
+    if (recipe.output == null) {
+      throw new IllegalArgumentException("AssemblerRecipe - Output ItemStack cannot be null.")
+    }
     if (!checkDecomposition(recipe) || !checkRecomposition(recipe)) {
-      Femtocraft.log(Level.WARN, "Assembler recipe already exists for " + recipe.output.getUnlocalizedName + ".")
+      Femtocraft.log(Level.WARN, "Assembler recipe already exists for " + recipe.getRecipeName + ".")
       return false
     }
     registerRecomposition(recipe) && registerDecomposition(recipe)
@@ -90,10 +93,15 @@ class ManagerAssemblerRecipe {
 
   @throws(classOf[IllegalArgumentException])
   def addRecipe(recipe: AssemblerRecipe): Boolean =
-    recipe.`type` match {
-      case AssemblerRecipe.RecipeType.Reversable    => addReversableRecipe(recipe)
-      case AssemblerRecipe.RecipeType.Decomposition => addDecompositionRecipe(recipe)
-      case AssemblerRecipe.RecipeType.Recomposition => addRecompositionRecipe(recipe)
+    try {
+      recipe.`type` match {
+        case AssemblerRecipe.RecipeType.Reversable    => addReversableRecipe(recipe)
+        case AssemblerRecipe.RecipeType.Decomposition => addDecompositionRecipe(recipe)
+        case AssemblerRecipe.RecipeType.Recomposition => addRecompositionRecipe(recipe)
+      }
+    }
+    catch {
+      case e: Throwable => false
     }
 
 
@@ -102,8 +110,11 @@ class ManagerAssemblerRecipe {
     if (recipe.input.length != 9) {
       throw new IllegalArgumentException("AssemblerRecipe - Invalid Input Array Length!  Must be 9!")
     }
+    if (recipe.output == null) {
+      throw new IllegalArgumentException("AssemblerRecipe - Output ItemStack cannot be null.")
+    }
     if (!checkRecomposition(recipe)) {
-      Femtocraft.log(Level.WARN, "Assembler recipe already exists for " + recipe.output.getUnlocalizedName + ".")
+      Femtocraft.log(Level.WARN, "Assembler recipe already exists for " + recipe.getRecipeName + ".")
       return false
     }
     registerRecomposition(recipe)
@@ -114,16 +125,17 @@ class ManagerAssemblerRecipe {
     if (recipe.input.length != 9) {
       throw new IllegalArgumentException("AssemblerRecipe - Invalid Input Array Length!  Must be 9!")
     }
+    if (recipe.output == null) {
+      throw new IllegalArgumentException("AssemblerRecipe - Output ItemStack cannot be null.")
+    }
     if (!checkDecomposition(recipe)) {
-      Femtocraft.log(Level.WARN, "Assembler recipe already exists for " + recipe.output.getUnlocalizedName + ".")
+      Femtocraft.log(Level.WARN, "Assembler recipe already exists for " + recipe.getRecipeName + ".")
       return false
     }
     registerDecomposition(recipe)
   }
 
   def removeAnyRecipe(recipe: AssemblerRecipe) = removeDecompositionRecipe(recipe) || removeRecompositionRecipe(recipe)
-
-  def removeReversableRecipe(recipe: AssemblerRecipe) = removeDecompositionRecipe(recipe) && removeRecompositionRecipe(recipe)
 
   def removeDecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
     false
@@ -132,6 +144,8 @@ class ManagerAssemblerRecipe {
   def removeRecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
     false
   }
+
+  def removeReversableRecipe(recipe: AssemblerRecipe) = removeDecompositionRecipe(recipe) && removeRecompositionRecipe(recipe)
 
   def canCraft(input: Array[ItemStack]): Boolean = {
     if (input.length != 9) {
@@ -171,7 +185,9 @@ class ManagerAssemblerRecipe {
 
   def getRecipesForTechnology(tech: Technology): ArrayBuffer[AssemblerRecipe] = getRecipesForTechnology(tech.getName)
 
-  def getRecipesForTechnology(techName: String): ArrayBuffer[AssemblerRecipe] = assemblerRecipeList.filter(_.tech.equalsIgnoreCase(techName))
+  def getRecipesForTechnology(techName: String): ArrayBuffer[AssemblerRecipe] = assemblerRecipeList.filter(_.tech
+                                                                                                           .equalsIgnoreCase(
+      techName))
 
   def hasResearchedRecipe(recipe: AssemblerRecipe, username: String) = Femtocraft.researchManager
                                                                        .hasPlayerResearchedTechnology(username,
@@ -313,7 +329,8 @@ class ManagerAssemblerRecipe {
     Femtocraft.log(Level.INFO, "Registering Femtocraft assembler recipes.")
 
     Femtocraft.log(Level.INFO, "Registering custom assembler recipes.")
-    val customRecipes = new AssemblerXMLLoader(new File(FemtocraftFileUtils.customConfigPath + "Assembler/")).loadItems()
+    val customRecipes = new AssemblerXMLLoader(new File(FemtocraftFileUtils.customConfigPath + "Assembler/"))
+                        .loadItems()
     customRecipes.view.foreach(addRecipe)
     Femtocraft.log(Level.INFO, "Finished registering custom assembler recipes.")
 
@@ -482,10 +499,12 @@ class ManagerAssemblerRecipe {
             input(((i + xOffset) % width) + 3 * (yOffset + ((i + xOffset) / width))) = if (item == null) {
               null
             }
-            else {
-              new
-                  ItemStack(item.getItem, 1, item.getItemDamage)
-            }
+                                                                                       else {
+                                                                                         new
+                                                                                             ItemStack(item.getItem, 1,
+                                                                                                       item
+                                                                                                       .getItemDamage)
+                                                                                       }
           }
           catch {
             case e: ArrayIndexOutOfBoundsException =>
@@ -522,10 +541,10 @@ class ManagerAssemblerRecipe {
                        "An error occured while registering a shaped orec recipe for " + (if (recipeOutput == null) {
                          "null"
                        }
-                       else {
-                         recipeOutput
-                         .getDisplayName
-                       }))
+                                                                                         else {
+                                                                                           recipeOutput
+                                                                                           .getDisplayName
+                                                                                         }))
         false
     }
   }
@@ -546,9 +565,12 @@ class ManagerAssemblerRecipe {
           input(((i + xoffset) % recipeWidth) + 3 * (yoffset + ((i + xoffset) / recipeWidth))) = if (item == null) {
             null
           }
-          else {
-            new ItemStack(item.getItem, 1, item.getItemDamage)
-          }
+                                                                                                 else {
+                                                                                                   new ItemStack(item
+                                                                                                                 .getItem,
+                                                                                                                 1, item
+                                                                                                                    .getItemDamage)
+                                                                                                 }
         }
         if (addReversableRecipe(recipe)) {
           done = true
@@ -569,10 +591,10 @@ class ManagerAssemblerRecipe {
                        "An error occured while registering shaped recipe for " + (if (recipeOutput == null) {
                          "null"
                        }
-                       else {
-                         recipeOutput
-                         .getDisplayName
-                       }) + ".  Width: " + recipeWidth + " Height: " + recipeHeight)
+                                                                                  else {
+                                                                                    recipeOutput
+                                                                                    .getDisplayName
+                                                                                  }) + ".  Width: " + recipeWidth + " Height: " + recipeHeight)
         false
     }
   }
@@ -604,8 +626,8 @@ class ManagerAssemblerRecipe {
               catch {
                 case exc: IndexOutOfBoundsException =>
                   Femtocraft.log(Level.ERROR,
-                                 "Ore recipe with nothing registered in " + "ore dictionary for " + recipe.output
-                                                                                                    .getDisplayName + ".")
+                                 "Ore recipe with nothing registered in " + "ore dictionary for " + recipe
+                                                                                                    .getRecipeName + ".")
                   return false
               }
             }
@@ -644,10 +666,10 @@ class ManagerAssemblerRecipe {
                        "An error occured while registering a shapeless ore recipe for " + (if (recipeOutput == null) {
                          "null"
                        }
-                       else {
-                         recipeOutput
-                         .getDisplayName
-                       }))
+                                                                                           else {
+                                                                                             recipeOutput
+                                                                                             .getDisplayName
+                                                                                           }))
         false
     }
   }
@@ -687,10 +709,10 @@ class ManagerAssemblerRecipe {
                        "An error occured while registering a shapeless recipe for " + (if (recipeOutput == null) {
                          "null"
                        }
-                       else {
-                         recipeOutput
-                         .getDisplayName
-                       }))
+                                                                                       else {
+                                                                                         recipeOutput
+                                                                                         .getDisplayName
+                                                                                       }))
         false
     }
   }
@@ -738,7 +760,8 @@ class ManagerAssemblerRecipe {
     def this(recipe: AssemblerRecipe) = this(recipe.input)
 
     override def compareTo(o: RecompositionKey): Int = {
-      (input zip o.input).foreach { case (a, b) => FemtocraftUtils.compareItem(a, b) match {case 0 => ; case t => return t}}
+      (input zip o.input)
+      .foreach { case (a, b) => FemtocraftUtils.compareItem(a, b) match {case 0 => ; case t => return t}}
       0
     }
   }

@@ -34,10 +34,10 @@ class GuiTechnologyAdvancedChemistry(guiResearch: GuiResearch, status: ResearchS
     if (isResearched && recipes.size > 0) {
       var index: Int = (displayPage - 1) * 2
       val recipe: AssemblerRecipe = recipes(index)
-      renderAssemblerRecipeWithInfo(x, y, width, height / 2, recipe, mouseX, mouseY, tooltip, recipe.output.getDisplayName)
+      renderAssemblerRecipeWithInfo(x, y, width, height / 2, recipe, mouseX, mouseY, tooltip, recipe.getRecipeName)
       if ( {index += 1; index} < recipes.size) {
         val recipe1: AssemblerRecipe = recipes(index)
-        renderAssemblerRecipeWithInfo(x, y + (height / 2), width, height / 2, recipe1, mouseX, mouseY, tooltip, recipe1.output.getDisplayName)
+        renderAssemblerRecipeWithInfo(x, y + (height / 2), width, height / 2, recipe1, mouseX, mouseY, tooltip, recipe1.getRecipeName)
       }
     }
     else {

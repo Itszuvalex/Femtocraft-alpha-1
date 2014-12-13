@@ -24,7 +24,8 @@ object FemtocraftStringUtils {
   val itemNameRegex      = "(?<" + itemNameGroup + ">[^:-]+)"
   val itemStackRegex     = "(?:-(?<" + itemStackSizeGroup + ">\\d+?))?"
   val itemDamageRegex    = "(?::(?<" + itemDamageGroup + ">\\d+?))?"
-  val itemStackPattern   = Pattern.compile("(?:" + itemIDRegex + "|(?:" + modIDRegex + ":" + itemNameRegex + "))" + itemDamageRegex + itemStackRegex)
+  val itemStackPattern   = Pattern
+                           .compile("(?:" + itemIDRegex + "|(?:" + modIDRegex + ":" + itemNameRegex + "))" + itemDamageRegex + itemStackRegex)
 
   def itemStackFromString(s: String): ItemStack = {
     if (s == null || s.isEmpty) return null
@@ -33,7 +34,7 @@ object FemtocraftStringUtils {
       try {
         val itemID = itemMatcher.group(itemIDGroup)
         val modID = itemMatcher.group(itemModIDGroup)
-        var name = itemMatcher.group(itemNameGroup)
+        val name = itemMatcher.group(itemNameGroup)
         val sdam = itemMatcher.group(itemDamageGroup)
         val ssize = itemMatcher.group(itemStackSizeGroup)
         val damage = if (sdam == null) 0 else sdam.toInt
@@ -42,8 +43,6 @@ object FemtocraftStringUtils {
           val id = itemID.toInt
           return new ItemStack(Item.getItemById(id), stackSize, damage)
         }
-        val typeName = name.split("\\.")
-        name = typeName(typeName.length - 1)
         val item = GameRegistry.findItem(modID, name)
         if (item != null) {
           return new ItemStack(item, stackSize, damage)
@@ -55,16 +54,32 @@ object FemtocraftStringUtils {
       }
       catch {
         case e: Exception =>
-          Femtocraft.log(Level.ERROR, "Error parsing ItemStack string \"" + s + "\"")
           e.printStackTrace()
           return null
+      }
+      finally {
+        Femtocraft.log(Level.ERROR, "Error parsing ItemStack string \"" + s + "\"")
       }
     }
     null
   }
 
   def formatItemStackForTechnologyDisplay(r: RecipeType, s: ItemStack, info: String): String = {
-    "__Recipe." + (if (r eq RecipeType.CRAFTING) GuiTechnologyRenderer.recipeCraftingParam else if (r eq RecipeType.ASSEMBLER) GuiTechnologyRenderer.recipeAssemblerParam else if (r eq RecipeType.TEMPORAL) GuiTechnologyRenderer.recipeTemporalParam else if (r eq RecipeType.DIMENSIONAL) GuiTechnologyRenderer.recipeDimensionalParam else "UNKNOWN") + ":" + FemtocraftStringUtils.itemStackToString(s) + "--" + info + "__"
+    "__Recipe." + (if (r eq RecipeType.CRAFTING) {
+      GuiTechnologyRenderer.recipeCraftingParam
+    }
+                   else if (r eq RecipeType.ASSEMBLER) {
+      GuiTechnologyRenderer.recipeAssemblerParam
+    }
+                   else if (r eq RecipeType.TEMPORAL) {
+      GuiTechnologyRenderer.recipeTemporalParam
+    }
+                   else if (r eq RecipeType.DIMENSIONAL) {
+      GuiTechnologyRenderer.recipeDimensionalParam
+    }
+                   else {
+                     "UNKNOWN"
+                   }) + ":" + FemtocraftStringUtils.itemStackToString(s) + "--" + info + "__"
   }
 
   def itemStackToString(s: ItemStack): String = {

@@ -76,6 +76,10 @@ public class AssemblerRecipe implements Comparable<AssemblerRecipe>, ISaveable {
         return recipe;
     }
 
+    public String getRecipeName() {
+        if (output == null) { return "null"; } else return output.getDisplayName();
+    }
+
     @Override
     public int compareTo(AssemblerRecipe o) {
         for (int i = 0; i < 9; i++) {

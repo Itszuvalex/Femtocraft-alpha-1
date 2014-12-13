@@ -76,5 +76,5 @@ class FemtocraftAssemblerConfig(private val config: Configuration) {
     }
   }
 
-  def loadAssemblerRecipe(recipe: AssemblerRecipe): AssemblerRecipe = loadAssemblerRecipe(recipe, recipe.output.getUnlocalizedName)
+  def loadAssemblerRecipe(recipe: AssemblerRecipe): AssemblerRecipe = loadAssemblerRecipe(recipe, recipe.getRecipeName)
 }
