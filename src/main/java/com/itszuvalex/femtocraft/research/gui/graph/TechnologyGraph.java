@@ -82,7 +82,7 @@ public class TechnologyGraph extends MapGraph<String> {
     }
 
     @Override
-    protected Class getDummyNodeClass() {
+    public Class getDummyNodeClass() {
         return DummyTechNode.class;
     }
 
