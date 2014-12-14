@@ -21,6 +21,6 @@ abstract class XMLLoaderWriter[Type](file: File) {
 
   protected def save(): Unit = {
     val pp = new PrettyPrinter(80, 2)
-    XML.save(file.getPath, XML.loadString(pp.format(xml)))
+    XML.save(file.getPath, XML.loadString(pp.format(xml)), "UTF-8", true, null)
   }
 }
