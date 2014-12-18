@@ -21,10 +21,12 @@
 package com.itszuvalex.femtocraft.power.blocks
 
 import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.api.power.{ICryoEndothermalChargingBase, ICryoEndothermalChargingAddon}
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
 import com.itszuvalex.femtocraft.power.tiles.TileEntityCryoEndothermalChargingCoil
 import com.itszuvalex.femtocraft.proxy.ProxyClient
 import cpw.mods.fml.relauncher.{Side, SideOnly}
+import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.util.IIcon
@@ -55,4 +57,27 @@ class BlockCryoEndothermalChargingCoil extends TileContainer(Material.iron) {
   override def createNewTileEntity(world: World, metadata: Int) = new TileEntityCryoEndothermalChargingCoil
 
   override def isOpaqueCube = false
+
+  override def onNeighborBlockChange(par1World: World, par2: Int, par3: Int, par4: Int, par5: Block) {
+    if (!canBlockStay(par1World, par2, par3, par4)) {
+      dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0)
+      par1World.setBlockToAir(par2, par3, par4)
+    }
+  }
+
+  override def canBlockStay(world: World, x: Int, y: Int, z: Int): Boolean = {
+    val block = world.getBlock(x, y , z)
+
+    for (height <- y + 1 until 256) {
+       world.getTileEntity(x, height, z) match {
+         case addon: ICryoEndothermalChargingAddon =>
+         case base: ICryoEndothermalChargingBase if base.maximumDepthSupported() >= (height - y) => return true
+         case _ => return false
+       }
+    }
+
+    true
+  }
+
+  override def canPlaceBlockAt(par1World: World, par2: Int, par3: Int, par4: Int) = canBlockStay(par1World, par2, par3, par4)
 }

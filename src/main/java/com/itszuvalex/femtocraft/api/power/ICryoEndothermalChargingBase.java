@@ -18,4 +18,10 @@ public interface ICryoEndothermalChargingBase {
      * @return True if this tech level is supported or not.
      */
     boolean isTechLevelSupported(EnumTechLevel tech);
+
+    /**
+     *
+     * @return The maximum number of ICryoendothermalChargingCoils that are supported by this charging base.
+     */
+    int maximumDepthSupported();
 }
