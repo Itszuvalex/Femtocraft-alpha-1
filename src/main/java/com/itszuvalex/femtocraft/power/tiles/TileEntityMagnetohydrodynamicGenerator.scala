@@ -187,7 +187,7 @@ object TileEntityMagnetohydrodynamicGenerator {
   override def getMaxPower: Int = {
     if (isValidMultiBlock) {
       if (info.isController(xCoord, yCoord, zCoord)) {
-        return powerStorage
+        return super.getMaxPower
       }
       else {
         worldObj.getTileEntity(info.x, info.y, info.z) match {
@@ -290,7 +290,7 @@ object TileEntityMagnetohydrodynamicGenerator {
       if (info.isController(xCoord, yCoord, zCoord)) {
         val ret: FluidStack = contaminatedSaltTank.drain(resource.amount, doDrain)
         if (ret != null) {
-          setModified
+          setModified()
         }
         return ret
       }

@@ -29,12 +29,14 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.server.MinecraftServer
 import net.minecraft.util.EnumChatFormatting
 
+import scala.collection.JavaConversions._
+
 /**
  * Created by Christopher Harris (Itszuvalex) on 8/10/14.
  */
 class CommandAssistantAdd extends CommandBase("add", null) {
 
-  override def addTabCompletionOptions(icommandsender: ICommandSender, astring: Array[String]): util.List[_] = util.Arrays.asList(MinecraftServer.getServer.getAllUsernames)
+  override def addTabCompletionOptions(icommandsender: ICommandSender, astring: Array[String]): util.List[_] = MinecraftServer.getServer.getAllUsernames.toList
 
   override def isUsernameIndex(astring: Array[String], i: Int) = i == 0
 

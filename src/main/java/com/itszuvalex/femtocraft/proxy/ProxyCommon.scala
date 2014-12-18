@@ -69,6 +69,7 @@ class ProxyCommon {
     GameRegistry.registerTileEntity(classOf[TileEntityNanoFissionReactorHousing], "TileEntityNanoFissionReactorHousing")
     GameRegistry.registerTileEntity(classOf[TileEntityMagnetohydrodynamicGenerator], "TileEntityMagnetohydrodynamicGenerator")
     GameRegistry.registerTileEntity(classOf[TileEntitySteamGenerator], "TileEntitySteamGenerator")
+    GameRegistry.registerTileEntity(classOf[TileEntityDecontaminationChamber], "TileEntityDecontaminationChamber")
     GameRegistry.registerTileEntity(classOf[TileEntityPhlegethonTunnelCore], "TileEntityPhlegethonTunnelCore")
     GameRegistry.registerTileEntity(classOf[TileEntityPhlegethonTunnelFrame], "TileEntityPhlegethonTunnelFrame")
     GameRegistry.registerTileEntity(classOf[TileEntitySisyphusStabilizer], "TileEntitySisyphusStabilizer")

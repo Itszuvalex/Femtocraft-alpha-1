@@ -49,7 +49,7 @@ object MultiBlockMagnetohydrodynamicGenerator extends IMultiBlock {
     false
   }
 
-  def canFormStrict(world: World, x: Int, y: Int, z: Int): Boolean = checkComponents(world, x, y, z, false)
+  def canFormStrict(world: World, x: Int, y: Int, z: Int): Boolean = checkComponents(world, x, y, z, true)
 
   private def checkComponents(world: World, x: Int, y: Int, z: Int, strict: Boolean): Boolean = {
     for (i <- -1 to 1) {

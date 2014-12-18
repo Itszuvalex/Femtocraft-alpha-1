@@ -22,11 +22,15 @@ package com.itszuvalex.femtocraft.core.items
 
 import com.itszuvalex.femtocraft.api.{EnumTechLevel, IInterfaceDevice}
 import net.minecraft.block.Block
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
+import net.minecraft.world.World
 
 class InterfaceDevice(private val level: EnumTechLevel) extends Item with IInterfaceDevice {
 
   override def func_150897_b(p_150897_1_ : Block) = true
 
   def getInterfaceLevel = level
+
+  override def doesSneakBypassUse(world: World, x: Int, y: Int, z: Int, player: EntityPlayer): Boolean = true
 }

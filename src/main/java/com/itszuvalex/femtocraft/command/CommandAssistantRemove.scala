@@ -29,6 +29,8 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.server.MinecraftServer
 import net.minecraft.util.EnumChatFormatting
 
+import scala.collection.JavaConversions._
+
 /**
  * Created by Christopher Harris (Itszuvalex) on 8/10/14.
  */
@@ -36,9 +38,11 @@ class CommandAssistantRemove extends CommandBase("remove", null) {
 
   override def addTabCompletionOptions(icommandsender: ICommandSender, astring: Array[String]): util.List[_] = {
     if (icommandsender.isInstanceOf[EntityPlayer]) {
-      return new util.ArrayList[String](Femtocraft.assistantManager.getPlayerAssistants(icommandsender.getCommandSenderName).keySet)
+      val assistants =Femtocraft.assistantManager.getPlayerAssistants(icommandsender.getCommandSenderName)
+      if (assistants == null) return new util.ArrayList[String]()
+      return assistants.keySet.toList
     }
-    util.Arrays.asList(MinecraftServer.getServer.getAllUsernames)
+    MinecraftServer.getServer.getAllUsernames.toList
   }
 
   override def getDescription = "Remove a player as an assistant."

@@ -379,11 +379,11 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
         if (item != null && item.getItem() instanceof IInterfaceDevice) {
             if (par5EntityPlayer.isSneaking()) {
                 blackout = !blackout;
-                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                setUpdate();
                 return true;
             } else {
                 output = !output;
-                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                setUpdate();
                 return true;
             }
         }

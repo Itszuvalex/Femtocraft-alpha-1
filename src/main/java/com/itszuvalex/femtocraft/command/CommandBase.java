@@ -50,7 +50,9 @@ public abstract class CommandBase implements ICommand {
     @Override
     public int compareTo(Object o) {
         return getCommandName().compareTo(((ICommand) o).getCommandName());
-    }    public String getDescription() {
+    }
+
+    public String getDescription() {
         return "";
     }
 
