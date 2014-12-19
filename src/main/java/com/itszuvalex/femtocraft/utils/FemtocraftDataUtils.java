@@ -28,6 +28,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import org.apache.logging.log4j.Level;
 
@@ -659,6 +660,34 @@ public class FemtocraftDataUtils {
                         .getName());
                 FluidTank tank = new FluidTank(container.getInteger("capacity"));
                 saveable.set(obj, tank.readFromNBT(container));
+            }
+        });
+        // FluidStack
+        registerSaveManager(FluidStack.class, new SaveManager() {
+
+            @Override
+            public void saveToNBT(NBTTagCompound compound, Field saveable,
+                                  Object obj) throws IllegalArgumentException,
+                                                     IllegalAccessException {
+                NBTTagCompound container = new NBTTagCompound();
+                FluidStack stack = (FluidStack) saveable.get(obj);
+                if (stack == null) return;
+                stack.writeToNBT(container);
+                compound.setTag(saveable.getName(), container);
+            }
+
+            @Override
+            public void readFromNBT(NBTTagCompound compound, Field saveable,
+                                    Object obj) throws IllegalArgumentException,
+                                                       IllegalAccessException {
+                NBTTagCompound container = compound.getCompoundTag(saveable
+                        .getName());
+                if (container == null) {
+                    saveable.set(obj, null);
+                    return;
+                }
+                FluidStack stack = FluidStack.loadFluidStackFromNBT(container);
+                saveable.set(obj, stack);
             }
         });
         //

@@ -22,6 +22,7 @@
 package com.itszuvalex.femtocraft.transport.liquids.tiles;
 
 import com.itszuvalex.femtocraft.api.IInterfaceDevice;
+import com.itszuvalex.femtocraft.api.core.Configurable;
 import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.transport.ISuctionPipe;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
@@ -35,10 +36,16 @@ import net.minecraftforge.fluids.*;
 
 import java.util.Arrays;
 
-public class TileEntitySuctionPipe extends TileEntityBase implements
+
+public
+@Configurable
+class TileEntitySuctionPipe extends TileEntityBase implements
         ISuctionPipe {
-    static final int renderLength = 10;
+    static final int renderLength = 20;
+    @Configurable
     private final float TRANSFER_RATIO = .1f;
+    @Configurable
+    private final int CAPACITY = 2000;
     public
     @Saveable
     boolean[] tankconnections;
@@ -48,18 +55,19 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
     public IFluidHandler[] neighbors;
     private
     @Saveable(desc = true)
-    FluidTank tank;
+    FluidTank tank = new FluidTank(CAPACITY);
     private
     @Saveable(desc = true)
-    boolean output;
+    boolean output = true;
     private
     @Saveable
-    int pressure;
-    // Not @Saveable due to special rendering requirements
-    private FluidStack renderFluid;
+    int pressure = 0;
+    private FluidStack renderFluid = null;
+    @Saveable(desc = true)
+    private FluidStack passthroughFluid = null;
     private
     @Saveable
-    int renderTick;
+    int renderTick = 0;
     @Saveable(desc = true)
     private boolean blackout = false;
 
@@ -72,17 +80,12 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
      */
     public TileEntitySuctionPipe() {
         super();
-        tank = new FluidTank(2000);
         tankconnections = new boolean[6];
         pipeconnections = new boolean[6];
         neighbors = new IFluidHandler[6];
         Arrays.fill(tankconnections, false);
         Arrays.fill(pipeconnections, false);
         Arrays.fill(neighbors, null);
-        output = true;
-        pressure = 0;
-        renderFluid = null;
-        renderTick = 0;
     }
 
     /**
@@ -102,6 +105,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
     @Override
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
         int amount = tank.fill(resource, doFill);
+        updatePassthroughFluid();
         setModified();
         return amount;
     }
@@ -185,7 +189,7 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
             return;
         }
 
-        renderFluid = tank.getFluid();
+        updatePassthroughFluid();
 
         // Sum pressure differences for tanks with less pressure than us
         for (int i = 0; i < 6; ++i) {
@@ -237,6 +241,10 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
         }
 
         tank.drain(amountToRemove, true);
+        if (tank.getFluid() == null) {
+            setUpdate();
+        }
+        setModified();
     }
 
     private void requestLiquid(int[] pressures, IFluidHandler[] neighbors) {
@@ -286,10 +294,9 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
                         .getFluid(), rationedAmount), true), true);
             }
         }
-
-        if (tank.getFluid() != null) {
-            renderFluid = tank.getFluid();
-        }
+        updatePassthroughFluid();
+        setUpdate();
+        setModified();
     }
 
     private FluidTankInfo chooseTank(IFluidHandler block, ForgeDirection dir, FluidTankInfo[] infoArray,
@@ -347,19 +354,10 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
     @Override
     public void handleDescriptionNBT(NBTTagCompound compound) {
         super.handleDescriptionNBT(compound);
-
-        // FluidStack fluid = compound.hasKey("fluid") ? FluidStack
-        // .loadFluidStackFromNBT(compound.getCompoundTag("fluid")) : null;
-        // tank.setFluid(fluid);
-
-        renderFluid = compound.hasKey("renderfluid") ? FluidStack
-                .loadFluidStackFromNBT(compound.getCompoundTag("renderfluid"))
-                : renderFluid;
-
-        // output = compound.getBoolean("output");
-        if (worldObj != null) {
-            setRenderUpdate();
+        if (passthroughFluid != null) {
+            renderFluid = passthroughFluid;
         }
+        setRenderUpdate();
     }
 
     @Override
@@ -374,35 +372,29 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
                                                               + pressure
                                                               + "; Amount = "
                                                               + tank.getFluidAmount()));
-
-        ItemStack item = par5EntityPlayer.getHeldItem();
-        if (item != null && item.getItem() instanceof IInterfaceDevice) {
-            if (par5EntityPlayer.isSneaking()) {
-                blackout = !blackout;
-                setUpdate();
-                return true;
-            } else {
-                output = !output;
-                setUpdate();
-                return true;
+        if (!worldObj.isRemote) {
+            ItemStack item = par5EntityPlayer.getHeldItem();
+            if (item != null && item.getItem() instanceof IInterfaceDevice) {
+                if (par5EntityPlayer.isSneaking()) {
+                    blackout = !blackout;
+                    setUpdate();
+                    return true;
+                } else {
+                    output = !output;
+                    setUpdate();
+                    return true;
+                }
             }
         }
         return super.onSideActivate(par5EntityPlayer, side);
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-        super.writeToNBT(par1nbtTagCompound);
-        tank.writeToNBT(par1nbtTagCompound);
-        par1nbtTagCompound.setBoolean("output", output);
-    }
-
-    @Override
     public void femtocraftServerUpdate() {
         super.femtocraftServerUpdate();
 
-        boolean pre = renderFluid != null && renderFluid.amount > 0;
-        renderFluid = null;
+//        boolean pre = renderFluid != null && renderFluid.amount > 0;
+//        renderFluid = tank.getFluid();
 
         int[] pressures = new int[6];
         Arrays.fill(pressures, 0);
@@ -411,25 +403,22 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
         distributeLiquid(pressures, neighbors);
         if (!output) {
             requestLiquid(pressures, neighbors);
+//            if (tank.getFluid() != null) renderFluid = tank.getFluid();
         }
 
-        boolean post = renderFluid != null && renderFluid.amount > 0;
+//        boolean post = renderFluid != null && renderFluid.amount > 0;
 
         // Pass description packet to clients - fluid has either emptied, or
         // filled
-        if (!blackout && (pre != post)) {
-            setUpdate();
-        }
+//        if (!blackout && (pre != post)) {
+//            setUpdate();
+//        }
     }
 
     @Override
     public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
         super.readFromNBT(par1nbtTagCompound);
-        tank.readFromNBT(par1nbtTagCompound);
-        if (tank.getFluid() != null) {
-            renderFluid = tank.getFluid();
-        }
-        output = par1nbtTagCompound.getBoolean("output");
+        updatePassthroughFluid();
     }
 
     @Override
@@ -437,34 +426,21 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
         Arrays.fill(neighbors, null);
         checkConnections(neighbors);
 
-        if (renderFluid != null && tank.getFluid() == null) {
-            if (renderTick++ >= renderLength) {
-                renderFluid = null;
-                setRenderUpdate();
+        if (worldObj.isRemote) {
+            if (renderFluid != null && passthroughFluid == null) {
+                if (renderTick >= renderLength) {
+                    renderFluid = null;
+                    setRenderUpdate();
+                    renderTick = 0;
+                } else {
+                    renderTick++;
+                }
+            } else {
+                renderTick = 0;
             }
-        } else {
-            renderTick = 0;
         }
 
         super.updateEntity();
-    }
-
-    @Override
-    public void saveToDescriptionCompound(NBTTagCompound compound) {
-        super.saveToDescriptionCompound(compound);
-        // NBTTagCompound fluid = new NBTTagCompound();
-        // if (tank.getFluid() != null) {
-        // tank.getFluid().writeToNBT(fluid);
-        // compound.setTag("fluid", fluid);
-        // }
-
-        NBTTagCompound renderfluid = new NBTTagCompound();
-        if (renderFluid != null) {
-            renderFluid.writeToNBT(renderfluid);
-            compound.setTag("renderfluid", renderfluid);
-        }
-
-        // compound.setBoolean("output", output);
     }
 
     private void checkConnections(IFluidHandler[] neighbors) {
@@ -508,6 +484,14 @@ public class TileEntitySuctionPipe extends TileEntityBase implements
 
         if (changed) {
             setRenderUpdate();
+        }
+    }
+
+    private void updatePassthroughFluid() {
+        if (passthroughFluid == null && tank.getFluid() != null) {
+            passthroughFluid = tank.getFluid();
+        } else if (tank.getFluid() != null && !passthroughFluid.isFluidEqual(tank.getFluid())) {
+            passthroughFluid = tank.getFluid();
         }
     }
 
