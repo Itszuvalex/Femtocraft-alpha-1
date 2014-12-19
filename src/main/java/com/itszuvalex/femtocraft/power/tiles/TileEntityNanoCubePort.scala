@@ -31,7 +31,7 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.common.util.ForgeDirection
 
 object TileEntityNanoCubePort {
-  @Configurable(comment = "Maximum power storage.") private val storage   = 500000
+  @Configurable(comment = "Maximum power storage.") private val storage   = 2000000
   @Configurable(comment = "Tech level of power.") private   val techLevel = EnumTechLevel.NANO
 }
 

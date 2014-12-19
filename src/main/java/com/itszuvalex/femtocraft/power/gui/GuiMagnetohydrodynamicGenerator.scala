@@ -64,7 +64,7 @@ class GuiMagnetohydrodynamicGenerator(private val generator: TileEntityMagnetohy
     val s: String = "Magnetohydrodynamic Generator"
     this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, FemtocraftUtils.colorFromARGB(0, 255, 255, 255))
     val power: String = FemtocraftUtils.formatIntegerToString(generator.getCurrentPower) + "/" + FemtocraftUtils.formatIntegerToString(generator.getMaxPower) + " OP"
-    this.fontRendererObj.drawString(power, this.xSize / 2 - this.fontRendererObj.getStringWidth(power) / 2, this.ySize * 4 / 5, FemtocraftUtils.colorFromARGB(0, 255, 255, 255))
+    this.fontRendererObj.drawString(power, this.xSize / 2 - this.fontRendererObj.getStringWidth(power) / 2, this.ySize * 7 / 8, FemtocraftUtils.colorFromARGB(0, 255, 255, 255))
   }
 
   protected def drawGuiContainerBackgroundLayer(f: Float, i: Int, j: Int) {

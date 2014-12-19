@@ -26,11 +26,11 @@ object TileEntityDecontaminationChamber {
   @Configurable(comment = "Cooled Salt Tank Capacity")
   val COOLED_SALT_TANK_CAPACITY       = 5000
   @Configurable(comment = "Amount of contaminated salt to process per tick")
-  val PROCESS_RATE                    = 20
+  val PROCESS_RATE                    = 5
   @Configurable(comment = "Amount of power used per process")
   val POWER_COST                      = 10
-  @Configurable(comment = "Ratio of contamianted salt turned into cooled salt.")
-  val CONVERSION_RATIO                = .95
+  @Configurable(comment = "Ratio of contaminated salt turned into cooled salt.")
+  val CONVERSION_RATIO                = .95f
 }
 
 
@@ -38,17 +38,20 @@ object TileEntityDecontaminationChamber {
   extends TileEntityBase with PowerConsumer with MultiBlockComponent with IFluidHandler {
   @Saveable val contaminatedSaltTank = new FluidTank(CONTAMINATED_SALT_TANK_CAPACITY)
   @Saveable val cooledSaltTank       = new FluidTank(COOLED_SALT_TANK_CAPACITY)
+  @Saveable var leftoverSaltAmount   = 0f
 
 
   override def femtocraftServerUpdate() {
     if (!isValidMultiBlock) return
 
     if (contaminatedSaltTank.getFluidAmount >= PROCESS_RATE && getCurrentPower >= POWER_COST &&
-        ((cooledSaltTank.getCapacity - cooledSaltTank.getFluidAmount) >= PROCESS_RATE * CONVERSION_RATIO)) {
+        ((cooledSaltTank.getCapacity - cooledSaltTank.getFluidAmount) >= (leftoverSaltAmount + (PROCESS_RATE * CONVERSION_RATIO)).toInt)) {
       contaminatedSaltTank.drain(PROCESS_RATE, true)
       consume(POWER_COST)
+      leftoverSaltAmount += PROCESS_RATE * CONVERSION_RATIO
       cooledSaltTank
-      .fill(new FluidStack(Femtocraft.fluidCooledMoltenSalt, (PROCESS_RATE * CONVERSION_RATIO).toInt), true)
+      .fill(new FluidStack(Femtocraft.fluidCooledMoltenSalt, leftoverSaltAmount.toInt), true)
+      leftoverSaltAmount = leftoverSaltAmount - leftoverSaltAmount.toInt
       setModified()
     }
     super.femtocraftServerUpdate()
@@ -329,6 +332,8 @@ object TileEntityDecontaminationChamber {
     false
   }
 
+  override def getGuiID = FemtocraftGuiConstants.DecontaminationChamberID
+
   def setCooledSalt(cooledSalt: Int) {
     if (cooledSaltTank.getFluid != null) {
       cooledSaltTank.getFluid.amount = cooledSalt
@@ -347,12 +352,9 @@ object TileEntityDecontaminationChamber {
     }
   }
 
-
   def getCooledSaltTank: IFluidTank = cooledSaltTank
 
   def getContaminatedSaltTank: IFluidTank = contaminatedSaltTank
-
-  override def getGuiID = FemtocraftGuiConstants.DecontaminationChamberID
 
   override def defaultContainer = new PowerContainer(TECH_LEVEL, POWER_MAX)
 }
