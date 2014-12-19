@@ -65,11 +65,11 @@ class BlockDecontaminationChamber extends TileContainer(Material.iron) {
     val ydif = y - info.y // 1 or 0
     val zdif = z - info.z // 1 or 0
     dir match {
-      case UP    => iconFromGrid(xdif, -zdif)
-      case DOWN  => iconFromGrid(xdif, -zdif)
-      case NORTH => iconFromGrid(-xdif, ydif)
+      case UP    => iconFromGrid(xdif, zdif + 1)
+      case DOWN  => iconFromGrid(xdif, zdif + 1)
+      case NORTH => iconFromGrid(xdif + 1, ydif)
       case SOUTH => iconFromGrid(xdif, ydif)
-      case EAST  => iconFromGrid(-zdif, ydif)
+      case EAST  => iconFromGrid(zdif + 1, ydif)
       case WEST  => iconFromGrid(zdif, ydif)
       case _     => blockIcon
     }
@@ -84,8 +84,11 @@ class BlockDecontaminationChamber extends TileContainer(Material.iron) {
     }
   }
 
-  private def iconFromGrid(xdif: Int, ydif: Int): IIcon = try
-    formedSides(xdif)(ydif)
+  private def iconFromGrid(xdif: Int, ydif: Int): IIcon = try {
+    val xindex = xdif % formedSides.length
+    val yindex = ydif % formedSides(xindex).length
+    formedSides(xindex)(yindex)
+  }
   catch {
     case ignored: IndexOutOfBoundsException => blockIcon
   }
