@@ -1,6 +1,5 @@
 package com.itszuvalex.femtocraft.power.tiles
 
-import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.api.core.{Configurable, Saveable}
 import com.itszuvalex.femtocraft.api.power.{IPowerTileContainer, PowerContainer}
@@ -8,6 +7,8 @@ import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.core.traits.tile.MultiBlockComponent
 import com.itszuvalex.femtocraft.power.tiles.TileEntityDecontaminationChamber._
 import com.itszuvalex.femtocraft.power.traits.PowerConsumer
+import com.itszuvalex.femtocraft.{Femtocraft, FemtocraftGuiConstants}
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraftforge.common.util.ForgeDirection
 import net.minecraftforge.common.util.ForgeDirection._
 import net.minecraftforge.fluids._
@@ -39,7 +40,9 @@ object TileEntityDecontaminationChamber {
   @Saveable val cooledSaltTank       = new FluidTank(COOLED_SALT_TANK_CAPACITY)
 
 
-  override def femtocraftServerUpdate() = {
+  override def femtocraftServerUpdate() {
+    if (!isValidMultiBlock) return
+
     if (contaminatedSaltTank.getFluidAmount >= PROCESS_RATE && getCurrentPower >= POWER_COST &&
         ((cooledSaltTank.getCapacity - cooledSaltTank.getFluidAmount) >= PROCESS_RATE * CONVERSION_RATIO)) {
       contaminatedSaltTank.drain(PROCESS_RATE, true)
@@ -48,6 +51,7 @@ object TileEntityDecontaminationChamber {
       .fill(new FluidStack(Femtocraft.fluidCooledMoltenSalt, (PROCESS_RATE * CONVERSION_RATIO).toInt), true)
       setModified()
     }
+    super.femtocraftServerUpdate()
   }
 
   override def consume(amount: Int): Boolean = {
@@ -316,6 +320,39 @@ object TileEntityDecontaminationChamber {
     }
     new Array[FluidTankInfo](0)
   }
+
+  override def onSideActivate(par5EntityPlayer: EntityPlayer, side: Int): Boolean = {
+    if (isValidMultiBlock && canPlayerUse(par5EntityPlayer)) {
+      par5EntityPlayer.openGui(getMod, getGuiID, worldObj, info.x, info.y, info.z)
+      return true
+    }
+    false
+  }
+
+  def setCooledSalt(cooledSalt: Int) {
+    if (cooledSaltTank.getFluid != null) {
+      cooledSaltTank.getFluid.amount = cooledSalt
+    }
+    else {
+      cooledSaltTank.fill(new FluidStack(Femtocraft.fluidCooledMoltenSalt, cooledSalt), true)
+    }
+  }
+
+  def setContaminatedSalt(contaminatedSalt: Int) {
+    if (contaminatedSaltTank.getFluid != null) {
+      contaminatedSaltTank.getFluid.amount = contaminatedSalt
+    }
+    else {
+      contaminatedSaltTank.fill(new FluidStack(Femtocraft.fluidCooledContaminatedMoltenSalt, contaminatedSalt), true)
+    }
+  }
+
+
+  def getCooledSaltTank: IFluidTank = cooledSaltTank
+
+  def getContaminatedSaltTank: IFluidTank = contaminatedSaltTank
+
+  override def getGuiID = FemtocraftGuiConstants.DecontaminationChamberID
 
   override def defaultContainer = new PowerContainer(TECH_LEVEL, POWER_MAX)
 }

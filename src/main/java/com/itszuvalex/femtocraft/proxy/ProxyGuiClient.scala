@@ -36,6 +36,7 @@ class ProxyGuiClient extends ProxyGuiCommon {
       case (FemtocraftGuiConstants.MicroEngineGuiID, _)                                                               => null
       case (FemtocraftGuiConstants.NanoFissionReactorGuiID, te: TileEntityNanoFissionReactorCore)                     => new GuiNanoFissionReactor(player, player.inventory, te)
       case (FemtocraftGuiConstants.NanoMagnetohydrodynamicGeneratorGuiID, te: TileEntityMagnetohydrodynamicGenerator) => new GuiMagnetohydrodynamicGenerator(te)
+      case (FemtocraftGuiConstants.DecontaminationChamberID, te: TileEntityDecontaminationChamber)                    => new GuiDecontaminationChamber(te)
       case (FemtocraftGuiConstants.NanoCubeGuiID, te: TileEntityNanoCubePort)                                         => new GuiNanoCube(te)
       case (FemtocraftGuiConstants.FemtoCubeGuiID, te: TileEntityFemtoCubePort)                                       => new GuiFemtoCube(te)
       case (FemtocraftGuiConstants.PhlegethonTunnelGuiID, te: TileEntityPhlegethonTunnelCore)                         => new GuiPhlegethonTunnel(player, player.inventory, te)

@@ -22,9 +22,9 @@ package com.itszuvalex.femtocraft.power.gui
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.core.gui.GuiBase
-import com.itszuvalex.femtocraft.power.containers.ContainerMagnetoHydrodynamicGenerator
-import com.itszuvalex.femtocraft.power.gui.GuiMagnetohydrodynamicGenerator._
-import com.itszuvalex.femtocraft.power.tiles.TileEntityMagnetohydrodynamicGenerator
+import com.itszuvalex.femtocraft.power.containers.ContainerDecontaminationChamber
+import com.itszuvalex.femtocraft.power.gui.GuiDecontaminationChamber._
+import com.itszuvalex.femtocraft.power.tiles.TileEntityDecontaminationChamber
 import com.itszuvalex.femtocraft.render.RenderUtils
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils
 import net.minecraft.client.Minecraft
@@ -35,22 +35,14 @@ import org.lwjgl.opengl.GL11
 /**
  * Created by Christopher Harris (Itszuvalex) on 8/27/14.
  */
-object GuiMagnetohydrodynamicGenerator {
-  val texture = new ResourceLocation(Femtocraft.ID.toLowerCase, "textures/guis/MagnetohydrodynamicGenerator.png")
+object GuiDecontaminationChamber {
+  val texture = new ResourceLocation(Femtocraft.ID.toLowerCase, "textures/guis/DecontaminationChamber.png")
 }
 
-class GuiMagnetohydrodynamicGenerator(private val generator: TileEntityMagnetohydrodynamicGenerator) extends GuiBase(new ContainerMagnetoHydrodynamicGenerator(generator)) {
+class GuiDecontaminationChamber(private val generator: TileEntityDecontaminationChamber) extends GuiBase(new ContainerDecontaminationChamber(generator)) {
   override def drawScreen(par1: Int, par2: Int, par3: Float) {
     super.drawScreen(par1, par2, par3)
     if (this.isPointInRegion(30, 24, 16, 120, par1, par2)) {
-      val moltenSaltAmount: Int = this.generator.getMoltenSaltTank.getFluidAmount
-      val moltenSaltMax: Int = this.generator.getMoltenSaltTank.getCapacity
-      val fluid: FluidStack = this.generator.getMoltenSaltTank.getFluid
-      val name: String = if (fluid == null) "" else " " + FluidRegistry.getFluidName(fluid)
-      val text: String = FemtocraftUtils.formatIntegerToString(moltenSaltAmount) + '/' + FemtocraftUtils.formatIntegerToString(moltenSaltMax) + " mB" + name
-      this.drawCreativeTabHoveringText(text, par1, par2)
-    }
-    else if (this.isPointInRegion(130, 24, 16, 120, par1, par2)) {
       val contaminatedSaltAmount: Int = this.generator.getContaminatedSaltTank.getFluidAmount
       val contamiantedSaltMax: Int = this.generator.getContaminatedSaltTank.getCapacity
       val fluid: FluidStack = this.generator.getContaminatedSaltTank.getFluid
@@ -58,10 +50,18 @@ class GuiMagnetohydrodynamicGenerator(private val generator: TileEntityMagnetohy
       val text: String = FemtocraftUtils.formatIntegerToString(contaminatedSaltAmount) + '/' + FemtocraftUtils.formatIntegerToString(contamiantedSaltMax) + " mB" + name
       this.drawCreativeTabHoveringText(text, par1, par2)
     }
+    else if (this.isPointInRegion(130, 24, 16, 120, par1, par2)) {
+      val cooledSaltAmount: Int = this.generator.getCooledSaltTank.getFluidAmount
+      val cooledSaltMax: Int = this.generator.getCooledSaltTank.getCapacity
+      val fluid: FluidStack = this.generator.getCooledSaltTank.getFluid
+      val name: String = if (fluid == null) "" else " " + FluidRegistry.getFluidName(fluid)
+      val text: String = FemtocraftUtils.formatIntegerToString(cooledSaltAmount) + '/' + FemtocraftUtils.formatIntegerToString(cooledSaltMax) + " mB" + name
+      this.drawCreativeTabHoveringText(text, par1, par2)
+    }
   }
 
   protected override def drawGuiContainerForegroundLayer(par1: Int, par2: Int) {
-    val s: String = "Magnetohydrodynamic Generator"
+    val s: String = "Decontamination Chamber"
     this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, FemtocraftUtils.colorFromARGB(0, 255, 255, 255))
     val power: String = FemtocraftUtils.formatIntegerToString(generator.getCurrentPower) + "/" + FemtocraftUtils.formatIntegerToString(generator.getMaxPower) + " OP"
     this.fontRendererObj.drawString(power, this.xSize / 2 - this.fontRendererObj.getStringWidth(power) / 2, this.ySize * 4 / 5, FemtocraftUtils.colorFromARGB(0, 255, 255, 255))
@@ -73,16 +73,16 @@ class GuiMagnetohydrodynamicGenerator(private val generator: TileEntityMagnetohy
     val k: Int = (this.width - this.xSize) / 2
     val l: Int = (this.height - this.ySize) / 2
     this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize)
-    val power: Int = generator.getCurrentPower * 72
+    val power: Int = generator.getCurrentPower * 81
     val max: Int = generator.getMaxPower
     val i1: Int = if ((power > 0) && (max > 0)) power / max else 0
-    this.drawTexturedModalRect(k + 52, l + 47 + (72 - i1), 176, 72 - i1, 72, i1)
-    renderTank(generator.getMoltenSaltTank, 30, 23, k, l)
-    renderTank(generator.getContaminatedSaltTank, 130, 23, k, l)
-    this.drawTexturedModalRect(k + 30, l + 23, 176, 72, 16, 60)
-    this.drawTexturedModalRect(k + 30, l + 23 + 60, 176, 72, 16, 60)
-    this.drawTexturedModalRect(k + 130, l + 23, 176, 72, 16, 60)
-    this.drawTexturedModalRect(k + 130, l + 23 + 60, 176, 72, 16, 60)
+    this.drawTexturedModalRect(k + 53, l + 46 + (81 - i1), 176, 81 - i1, 70, i1)
+    renderTank(generator.getContaminatedSaltTank, 30, 23, k, l)
+    renderTank(generator.getCooledSaltTank, 130, 23, k, l)
+    this.drawTexturedModalRect(k + 30, l + 23, 176, 81, 16, 60)
+    this.drawTexturedModalRect(k + 30, l + 23 + 60, 176, 81, 16, 60)
+    this.drawTexturedModalRect(k + 130, l + 23, 176, 81, 16, 60)
+    this.drawTexturedModalRect(k + 130, l + 23 + 60, 176, 81, 16, 60)
   }
 
   private def renderTank(tank: IFluidTank, x: Int, y: Int, k: Int, l: Int) {

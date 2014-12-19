@@ -42,6 +42,7 @@ object FemtocraftGuiConstants {
   val NanoCubeGuiID                         = 35
   val NanoFissionReactorGuiID               = 36
   val NanoMagnetohydrodynamicGeneratorGuiID = 37
+  val DecontaminationChamberID              = 38
   val FemtoCubeGuiID                        = 40
   val PhlegethonTunnelGuiID                 = 41
 }

@@ -37,6 +37,7 @@ class ProxyGuiCommon extends IGuiHandler {
       case (FemtocraftGuiConstants.NanoCubeGuiID, te: TileEntityNanoCubePort)                                         => new ContainerNanoCube(te)
       case (FemtocraftGuiConstants.NanoFissionReactorGuiID, te: TileEntityNanoFissionReactorCore)                     => new ContainerNanoFissionReactor(player, player.inventory, te)
       case (FemtocraftGuiConstants.NanoMagnetohydrodynamicGeneratorGuiID, te: TileEntityMagnetohydrodynamicGenerator) => new ContainerMagnetoHydrodynamicGenerator(te)
+      case (FemtocraftGuiConstants.DecontaminationChamberID, te: TileEntityDecontaminationChamber)                    => new ContainerDecontaminationChamber(te)
       case (FemtocraftGuiConstants.FemtoCubeGuiID, te: TileEntityFemtoCubePort)                                       => new ContainerFemtoCube(te)
       case (FemtocraftGuiConstants.PhlegethonTunnelGuiID, te: TileEntityPhlegethonTunnelCore)                         => new ContainerPhlegethonTunnel(player, player.inventory, te)
       case (_, _)                                                                                                     => null
