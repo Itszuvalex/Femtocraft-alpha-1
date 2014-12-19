@@ -105,7 +105,6 @@ class TileEntitySuctionPipe extends TileEntityBase implements
     @Override
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
         int amount = tank.fill(resource, doFill);
-        updatePassthroughFluid();
         setModified();
         return amount;
     }
@@ -390,6 +389,11 @@ class TileEntitySuctionPipe extends TileEntityBase implements
     }
 
     @Override
+    public void setUpdate() {
+        if (!blackout) super.setUpdate();
+    }
+
+    @Override
     public void femtocraftServerUpdate() {
         super.femtocraftServerUpdate();
 
@@ -398,6 +402,8 @@ class TileEntitySuctionPipe extends TileEntityBase implements
 
         int[] pressures = new int[6];
         Arrays.fill(pressures, 0);
+        boolean prev = passthroughFluid != null;
+        passthroughFluid = null;
 
         calculatePressure(pressures, neighbors);
         distributeLiquid(pressures, neighbors);
@@ -413,6 +419,7 @@ class TileEntitySuctionPipe extends TileEntityBase implements
 //        if (!blackout && (pre != post)) {
 //            setUpdate();
 //        }
+        if (prev != (passthroughFluid != null)) setUpdate();
     }
 
     @Override

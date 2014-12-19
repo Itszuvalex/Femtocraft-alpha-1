@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="334ed2b9-d383-45b1-801c-a13fbb9ee325" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Femtocraft.iws" afterPath="$PROJECT_DIR$/Femtocraft.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/gui/GuiMagnetohydrodynamicGenerator.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/gui/GuiMagnetohydrodynamicGenerator.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityDecontaminationChamber.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityDecontaminationChamber.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityMagnetohydrodynamicGenerator.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityMagnetohydrodynamicGenerator.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityNanoCubePort.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityNanoCubePort.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/liquids/tiles/TileEntitySuctionPipe.java" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/liquids/tiles/TileEntitySuctionPipe.java" />
     </list>
     <ignored path="Femtocraft.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -69,16 +66,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FemtocraftTechnologies.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/FemtocraftTechnologies.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3565" max-vertical-offset="16928">
-              <caret line="270" column="45" selection-start-line="270" selection-start-column="45" selection-end-line="270" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="TileEntityNanoCubePort.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityNanoCubePort.scala">
           <provider selected="true" editor-type-id="text-editor">
@@ -119,11 +106,56 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GuiMagnetohydrodynamicGenerator.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GuiMagnetohydrodynamicGenerator.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/gui/GuiMagnetohydrodynamicGenerator.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3715847" vertical-offset="511" max-vertical-offset="1702">
+            <state vertical-scroll-proportion="0.0" vertical-offset="511" max-vertical-offset="1702">
               <caret line="66" column="125" selection-start-line="66" selection-start-column="125" selection-end-line="66" selection-end-column="125" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BlockSuctionPipe.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/liquids/blocks/BlockSuctionPipe.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="759" max-vertical-offset="5014">
+              <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TileEntitySuctionPipe.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/liquids/tiles/TileEntitySuctionPipe.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6551724" vertical-offset="7488" max-vertical-offset="10925">
+              <caret line="392" column="40" selection-start-line="392" selection-start-column="40" selection-end-line="392" selection-end-column="40" />
+              <folding>
+                <element signature="e#3561#3562#0" expanded="true" />
+                <element signature="e#3595#3596#0" expanded="true" />
+                <element signature="e#14106#14107#0" expanded="true" />
+                <element signature="e#14154#14155#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RenderSuctionPipe.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/liquids/render/RenderSuctionPipe.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="4868" max-vertical-offset="14490">
+              <caret line="270" column="37" selection-start-line="270" selection-start-column="37" selection-end-line="270" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FemtocraftDataUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/utils/FemtocraftDataUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="14206" max-vertical-offset="19895">
+              <caret line="661" column="42" selection-start-line="661" selection-start-column="42" selection-end-line="661" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -149,9 +181,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/gui/GuiNanoCube.scala" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/gui/GuiPhlegethonTunnel.scala" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/multiblock/MultiBlockFemtoStellarator.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockFemtoStellaratorCore.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockFemtoStellaratorFocus.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockFemtoStellaratorOpticalMaser.scala" />
@@ -200,6 +229,9 @@
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityMagnetohydrodynamicGenerator.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityDecontaminationChamber.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/gui/GuiMagnetohydrodynamicGenerator.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/utils/FemtocraftDataUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/liquids/render/RenderSuctionPipe.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/liquids/tiles/TileEntitySuctionPipe.java" />
       </list>
     </option>
   </component>
@@ -318,6 +350,180 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="transport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="liquids" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tiles" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="transport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="liquids" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="render" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="transport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="liquids" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="blocks" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="transport" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -496,78 +702,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="TileEntityDecontaminationChamber.scala" />
-              <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$ScalaFileTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="power" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="power" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GuiMagnetohydrodynamicGenerator.scala" />
               <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$ScalaFileTreeNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1046,12 +1180,24 @@
       <option name="project" value="LOCAL" />
       <updated>1418971355517</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Balance changes for fission reactor power systems.  GUI fix for magnetohydrodynamic generator.">
+      <created>1419021095255</created>
+      <option name="number" value="00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1419021095255</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Fix suction pipe fluid rendering cache.">
+      <created>1419026105637</created>
+      <option name="number" value="00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1419026105637</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="55" width="2880" height="1685" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1064,7 +1210,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18566553" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33105803" sideWeight="0.672043" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33105803" sideWeight="0.672043" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20332481" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17132616" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1149,7 +1295,9 @@
     <MESSAGE value="Commit missing files" />
     <MESSAGE value="Fix Decontamination Chamber rendering." />
     <MESSAGE value="Decontamination Chamber GUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Decontamination Chamber GUI" />
+    <MESSAGE value="Balance changes for fission reactor power systems.  GUI fix for magnetohydrodynamic generator." />
+    <MESSAGE value="Fix suction pipe fluid rendering cache." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix suction pipe fluid rendering cache." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1171,48 +1319,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/traits/tile/MultiBlockComponent.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="897">
-          <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityMagneticInductionGenerator.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1219" max-vertical-offset="2737">
-          <caret line="41" column="97" selection-start-line="41" selection-start-column="97" selection-end-line="41" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityFemtoCubeChassis.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.123922415" vertical-offset="0" max-vertical-offset="928">
-          <caret line="27" column="6" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityAtmosphericChargingBase.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1725">
-          <caret line="31" column="52" selection-start-line="31" selection-start-column="52" selection-end-line="31" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityNanoFissionReactorHousing.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4431" max-vertical-offset="5359">
-          <caret line="227" column="0" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityNullEqualizer.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="874">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityOrbitalEqualizer.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="874">
@@ -1519,6 +1625,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/gui/GuiMagnetohydrodynamicGenerator.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="511" max-vertical-offset="1702">
+          <caret line="66" column="125" selection-start-line="66" selection-start-column="125" selection-end-line="66" selection-end-column="125" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/liquids/blocks/BlockSuctionPipe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="759" max-vertical-offset="5014">
+          <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityDecontaminationChamber.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="391" max-vertical-offset="8165">
@@ -1527,11 +1649,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/gui/GuiMagnetohydrodynamicGenerator.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/utils/FemtocraftDataUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3715847" vertical-offset="511" max-vertical-offset="1702">
-          <caret line="66" column="125" selection-start-line="66" selection-start-column="125" selection-end-line="66" selection-end-column="125" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="13930" max-vertical-offset="19895">
+          <caret line="661" column="42" selection-start-line="661" selection-start-column="42" selection-end-line="661" selection-end-column="42" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/net/minecraftforge/fluids/FluidTank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="1144" max-vertical-offset="3933">
+          <caret line="79" column="15" selection-start-line="79" selection-start-column="15" selection-end-line="79" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/liquids/render/RenderSuctionPipe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5627" max-vertical-offset="14490">
+          <caret line="270" column="37" selection-start-line="270" selection-start-column="37" selection-end-line="270" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/tiles/TileEntityBase.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7989071" vertical-offset="1684" max-vertical-offset="2599">
+          <caret line="133" column="6" selection-start-line="133" selection-start-column="6" selection-end-line="133" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/liquids/tiles/TileEntitySuctionPipe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6551724" vertical-offset="7488" max-vertical-offset="10925">
+          <caret line="392" column="40" selection-start-line="392" selection-start-column="40" selection-end-line="392" selection-end-column="40" />
+          <folding>
+            <element signature="e#3561#3562#0" expanded="true" />
+            <element signature="e#3595#3596#0" expanded="true" />
+            <element signature="e#14106#14107#0" expanded="true" />
+            <element signature="e#14154#14155#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
