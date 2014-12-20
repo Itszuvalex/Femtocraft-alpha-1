@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="334ed2b9-d383-45b1-801c-a13fbb9ee325" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/ManagerRecipe.scala" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/RecipeHelper.scala" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/ManagerRecipe.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Femtocraft.iws" afterPath="$PROJECT_DIR$/Femtocraft.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnology.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnology.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyAssemblerRenderer.java" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyAssemblerRenderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyCraftingRenderer.java" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyCraftingRenderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyDimensionalRenderer.java" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyDimensionalRenderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyRealityOverlocker.java" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyRealityOverlocker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyTemporalRenderer.java" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyTemporalRenderer.java" />
     </list>
     <ignored path="Femtocraft.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -66,74 +73,53 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="GuiTechnology.scala" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnology.scala">
+      <file leaf-file-name="ManagerCrafting.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/ManagerCrafting.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4888889" vertical-offset="7035" max-vertical-offset="9752">
-              <caret line="325" column="22" selection-start-line="325" selection-start-column="22" selection-end-line="325" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4991">
+              <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ManagerRecipe.scala" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/ManagerRecipe.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="897" max-vertical-offset="1840">
+              <caret line="58" column="79" selection-start-line="58" selection-start-column="79" selection-end-line="58" selection-end-column="79" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="e#1079#1095#0" expanded="true" />
+                <element signature="e#1064#1080#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RenderItem.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/net/minecraft/client/renderer/entity/RenderItem.java">
+      <file leaf-file-name="RecipeHelper.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/RecipeHelper.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="12097" max-vertical-offset="18101">
-              <caret line="694" column="16" selection-start-line="694" selection-start-column="16" selection-end-line="694" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="575">
+              <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GuiResearch.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/GuiResearch.java">
+      <file leaf-file-name="GameRegistry.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/cpw/mods/fml/common/registry/GameRegistry.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="10853" max-vertical-offset="13984">
-              <caret line="551" column="0" selection-start-line="551" selection-start-column="0" selection-end-line="551" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3829" max-vertical-offset="9039">
+              <caret line="243" column="48" selection-start-line="243" selection-start-column="48" selection-end-line="243" selection-end-column="48" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GuiResearchConsole.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/GuiResearchConsole.java">
+      <file leaf-file-name="CraftingManager.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/net/minecraft/item/crafting/CraftingManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1479" max-vertical-offset="3795">
-              <caret line="165" column="0" selection-start-line="165" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TileEntityBaseEntityMicroDeconstructor.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/tiles/TileEntityBaseEntityMicroDeconstructor.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="4692">
-              <caret line="50" column="130" selection-start-line="50" selection-start-column="130" selection-end-line="50" selection-end-column="130" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Inventory.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/traits/tile/Inventory.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="490" max-vertical-offset="1403">
-              <caret line="49" column="28" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TileEntityBase.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/tiles/TileEntityBase.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1791" max-vertical-offset="2691">
-              <caret line="135" column="115" selection-start-line="135" selection-start-column="115" selection-end-line="135" selection-end-column="115" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="4381" max-vertical-offset="7751">
+              <caret line="208" column="41" selection-start-line="208" selection-start-column="41" selection-end-line="208" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -159,8 +145,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntitySisyphusStabilizer.scala" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/blocks/BlockPowerContainer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/XMLTechnology.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/TechnologyXMLLoader.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/configuration/FemtocraftTechnologyConfig.scala" />
@@ -193,15 +177,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyAppliedParticlePhysics.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyBasicChemistry.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyMacroscopicStructure.scala" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyTemporalRenderer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyRealityOverlocker.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyRenderer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyBasicCircuits.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyPaperSchematic.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyCraftingRenderer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyDimensionalRenderer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyMachining.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyAssemblerRenderer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityDecontaminationChamber.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityMagnetohydrodynamicGenerator.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/liquids/render/RenderSuctionPipe.java" />
@@ -210,6 +189,13 @@
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/traits/tile/Inventory.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/tiles/TileEntityBase.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnology.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyTemporalRenderer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyDimensionalRenderer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyAssemblerRenderer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyCraftingRenderer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyRealityOverlocker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/RecipeHelper.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/ManagerRecipe.scala" />
       </list>
     </option>
   </component>
@@ -519,368 +505,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="research" />
+              <option name="myItemId" value="managers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="research" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="technology" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="research" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="technology" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GuiTechnology.scala" />
-              <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$ScalaFileTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="power" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="power" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tiles" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="power" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tiles" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TileEntityMagnetohydrodynamicGenerator.scala" />
-              <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$ScalaFileTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="power" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tiles" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TileEntityDecontaminationChamber.scala" />
-              <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$ScalaFileTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="power" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="industry" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="industry" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tiles" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="femtocraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="industry" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tiles" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TileEntityBaseEntityMicroDeconstructor.scala" />
-              <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$ScalaFileTreeNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -1400,7 +1026,13 @@
       <option name="project" value="LOCAL" />
       <updated>1419061374017</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Fix nether star rendering in GuiTechnology.">
+      <created>1419062088467</created>
+      <option name="number" value="00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1419062088467</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1414,11 +1046,11 @@
       <window_info id="Floobits Chat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34129694" sideWeight="0.32795697" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4122867" sideWeight="0.50107527" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18566553" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34129694" sideWeight="0.672043" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34129694" sideWeight="0.672043" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20332481" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18064517" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1483,7 +1115,6 @@
       <TodoPanelSettings />
     </option>
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
-    <MESSAGE value="Fixed Config Helper to actually load scala singletons.  Hallelujah.&#10;&#10;Stupid me was using the &quot;all public fields&quot;, instead of &quot;declared fields&quot;, which counterintuitively returns ALL fields, rather than &quot;fields&quot;.  The method with the more specific quantifier returns the more general usage of every field.  The one entitled &quot;getFields&quot; returns the smaller sample." />
     <MESSAGE value="More scalafication.  More fixes." />
     <MESSAGE value="More Scalafication.&#10;&#10;Changed some of the simpler classes, and required java interoperability changes." />
     <MESSAGE value="More Scalafication of power package." />
@@ -1508,7 +1139,8 @@
     <MESSAGE value="Fix suction pipe rendering at end of pipe liquid extension.  Begin attempt at fixing GUITechnology rendering." />
     <MESSAGE value="Fix GuiTechnology rendering except for nether stars in the crafting grid." />
     <MESSAGE value="Fix issues with Inventory trait, and VacuumTubes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix issues with Inventory trait, and VacuumTubes." />
+    <MESSAGE value="Fix nether star rendering in GuiTechnology." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix nether star rendering in GuiTechnology." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1530,272 +1162,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/net/minecraftforge/fluids/FluidTank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="1144" max-vertical-offset="3933">
-          <caret line="79" column="15" selection-start-line="79" selection-start-column="15" selection-end-line="79" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/liquids/tiles/TileEntitySuctionPipe.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="7488" max-vertical-offset="10925">
-          <caret line="396" column="41" selection-start-line="396" selection-start-column="41" selection-end-line="396" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#17765#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#3490#3491#0" expanded="false" />
-            <element signature="e#3519#3520#0" expanded="false" />
-            <element signature="e#4434#4435#0" expanded="false" />
-            <element signature="e#4461#4462#0" expanded="false" />
-            <element signature="e#4540#4541#0" expanded="false" />
-            <element signature="e#4567#4568#0" expanded="false" />
-            <element signature="e#4644#4645#0" expanded="false" />
-            <element signature="e#4702#4703#0" expanded="false" />
-            <element signature="e#17664#17665#0" expanded="false" />
-            <element signature="e#17695#17696#0" expanded="false" />
-            <element signature="e#17730#17731#0" expanded="false" />
-            <element signature="e#17761#17762#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityFemtoStellaratorCore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1094" max-vertical-offset="6532">
-          <caret line="97" column="25" selection-start-line="97" selection-start-column="25" selection-end-line="97" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#10046#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#3590#3591#0" expanded="false" />
-            <element signature="e#3617#3618#0" expanded="false" />
-            <element signature="e#3660#3661#0" expanded="false" />
-            <element signature="e#3699#3700#0" expanded="false" />
-            <element signature="e#4132#4133#0" expanded="false" />
-            <element signature="e#4179#4180#0" expanded="false" />
-            <element signature="e#5196#5197#0" expanded="false" />
-            <element signature="e#5223#5224#0" expanded="false" />
-            <element signature="e#6214#6215#0" expanded="false" />
-            <element signature="e#6241#6242#0" expanded="false" />
-            <element signature="e#6297#6298#0" expanded="false" />
-            <element signature="e#6335#6336#0" expanded="false" />
-            <element signature="e#6383#6384#0" expanded="false" />
-            <element signature="e#6418#6419#0" expanded="false" />
-            <element signature="e#6473#6474#0" expanded="false" />
-            <element signature="e#6556#6557#0" expanded="false" />
-            <element signature="e#6605#6606#0" expanded="false" />
-            <element signature="e#6676#6677#0" expanded="false" />
-            <element signature="e#6735#6736#0" expanded="false" />
-            <element signature="e#6789#6790#0" expanded="false" />
-            <element signature="e#6846#6847#0" expanded="false" />
-            <element signature="e#6898#6899#0" expanded="false" />
-            <element signature="e#6956#6957#0" expanded="false" />
-            <element signature="e#7008#7009#0" expanded="false" />
-            <element signature="e#7057#7058#0" expanded="false" />
-            <element signature="e#7100#7101#0" expanded="false" />
-            <element signature="e#7599#7600#0" expanded="false" />
-            <element signature="e#7642#7643#0" expanded="false" />
-            <element signature="e#8141#8142#0" expanded="false" />
-            <element signature="e#8180#8181#0" expanded="false" />
-            <element signature="e#8695#8696#0" expanded="false" />
-            <element signature="e#8736#8737#0" expanded="false" />
-            <element signature="e#8794#8795#0" expanded="false" />
-            <element signature="e#8836#8837#0" expanded="false" />
-            <element signature="e#9085#9086#0" expanded="false" />
-            <element signature="e#9123#9124#0" expanded="false" />
-            <element signature="e#9361#9362#0" expanded="false" />
-            <element signature="e#9402#9403#0" expanded="false" />
-            <element signature="e#9891#9892#0" expanded="false" />
-            <element signature="e#9941#9942#0" expanded="false" />
-            <element signature="e#9994#9995#0" expanded="false" />
-            <element signature="e#10042#10043#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityFemtoStellaratorOpticalMaser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="92" max-vertical-offset="4876">
-          <caret line="53" column="25" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#7900#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#3139#3140#0" expanded="false" />
-            <element signature="e#3215#3216#0" expanded="false" />
-            <element signature="e#3250#3251#0" expanded="false" />
-            <element signature="e#3281#3282#0" expanded="false" />
-            <element signature="e#3318#3319#0" expanded="false" />
-            <element signature="e#3351#3352#0" expanded="false" />
-            <element signature="e#4463#4464#0" expanded="false" />
-            <element signature="e#4526#4527#0" expanded="false" />
-            <element signature="e#5587#5588#0" expanded="false" />
-            <element signature="e#5614#5615#0" expanded="false" />
-            <element signature="e#6005#6006#0" expanded="false" />
-            <element signature="e#6032#6033#0" expanded="false" />
-            <element signature="e#6238#6239#0" expanded="false" />
-            <element signature="e#6298#6299#0" expanded="false" />
-            <element signature="e#6355#6356#0" expanded="false" />
-            <element signature="e#6416#6417#0" expanded="false" />
-            <element signature="e#6809#6810#0" expanded="false" />
-            <element signature="e#6872#6873#0" expanded="false" />
-            <element signature="e#6930#6931#0" expanded="false" />
-            <element signature="e#6994#6995#0" expanded="false" />
-            <element signature="e#7056#7057#0" expanded="false" />
-            <element signature="e#7113#7114#0" expanded="false" />
-            <element signature="e#7176#7177#0" expanded="false" />
-            <element signature="e#7236#7237#0" expanded="false" />
-            <element signature="e#7301#7302#0" expanded="false" />
-            <element signature="e#7361#7362#0" expanded="false" />
-            <element signature="e#7407#7408#0" expanded="false" />
-            <element signature="e#7467#7468#0" expanded="false" />
-            <element signature="e#7771#7772#0" expanded="false" />
-            <element signature="e#7811#7812#0" expanded="false" />
-            <element signature="e#7864#7865#0" expanded="false" />
-            <element signature="e#7896#7897#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityFemtoStellaratorHousing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="92" max-vertical-offset="3680">
-          <caret line="56" column="25" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#6603#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#3492#3493#0" expanded="false" />
-            <element signature="e#3539#3540#0" expanded="false" />
-            <element signature="e#4367#4368#0" expanded="false" />
-            <element signature="e#4394#4395#0" expanded="false" />
-            <element signature="e#4707#4708#0" expanded="false" />
-            <element signature="e#4734#4735#0" expanded="false" />
-            <element signature="e#4913#4914#0" expanded="false" />
-            <element signature="e#4973#4974#0" expanded="false" />
-            <element signature="e#5030#5031#0" expanded="false" />
-            <element signature="e#5091#5092#0" expanded="false" />
-            <element signature="e#5472#5473#0" expanded="false" />
-            <element signature="e#5535#5536#0" expanded="false" />
-            <element signature="e#5593#5594#0" expanded="false" />
-            <element signature="e#5657#5658#0" expanded="false" />
-            <element signature="e#5719#5720#0" expanded="false" />
-            <element signature="e#5776#5777#0" expanded="false" />
-            <element signature="e#5839#5840#0" expanded="false" />
-            <element signature="e#5899#5900#0" expanded="false" />
-            <element signature="e#5964#5965#0" expanded="false" />
-            <element signature="e#6024#6025#0" expanded="false" />
-            <element signature="e#6070#6071#0" expanded="false" />
-            <element signature="e#6130#6131#0" expanded="false" />
-            <element signature="e#6286#6287#0" expanded="false" />
-            <element signature="e#6313#6314#0" expanded="false" />
-            <element signature="e#6392#6393#0" expanded="false" />
-            <element signature="e#6419#6420#0" expanded="false" />
-            <element signature="e#6474#6475#0" expanded="false" />
-            <element signature="e#6514#6515#0" expanded="false" />
-            <element signature="e#6567#6568#0" expanded="false" />
-            <element signature="e#6599#6600#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityFemtoStellaratorFocus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="92" max-vertical-offset="3496">
-          <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#5959#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#3111#3112#0" expanded="false" />
-            <element signature="e#3158#3159#0" expanded="false" />
-            <element signature="e#3892#3893#0" expanded="false" />
-            <element signature="e#3919#3920#0" expanded="false" />
-            <element signature="e#4146#4147#0" expanded="false" />
-            <element signature="e#4173#4174#0" expanded="false" />
-            <element signature="e#4309#4310#0" expanded="false" />
-            <element signature="e#4369#4370#0" expanded="false" />
-            <element signature="e#4426#4427#0" expanded="false" />
-            <element signature="e#4487#4488#0" expanded="false" />
-            <element signature="e#4868#4869#0" expanded="false" />
-            <element signature="e#4931#4932#0" expanded="false" />
-            <element signature="e#4989#4990#0" expanded="false" />
-            <element signature="e#5053#5054#0" expanded="false" />
-            <element signature="e#5115#5116#0" expanded="false" />
-            <element signature="e#5172#5173#0" expanded="false" />
-            <element signature="e#5235#5236#0" expanded="false" />
-            <element signature="e#5295#5296#0" expanded="false" />
-            <element signature="e#5360#5361#0" expanded="false" />
-            <element signature="e#5420#5421#0" expanded="false" />
-            <element signature="e#5466#5467#0" expanded="false" />
-            <element signature="e#5526#5527#0" expanded="false" />
-            <element signature="e#5830#5831#0" expanded="false" />
-            <element signature="e#5870#5871#0" expanded="false" />
-            <element signature="e#5923#5924#0" expanded="false" />
-            <element signature="e#5955#5956#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityPlasmaConduit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="276" max-vertical-offset="6716">
-          <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#11409#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#3060#3061#0" expanded="false" />
-            <element signature="e#3087#3088#0" expanded="false" />
-            <element signature="e#8357#8358#0" expanded="false" />
-            <element signature="e#8397#8398#0" expanded="false" />
-            <element signature="e#8454#8455#0" expanded="false" />
-            <element signature="e#8495#8496#0" expanded="false" />
-            <element signature="e#9853#9854#0" expanded="false" />
-            <element signature="e#9924#9925#0" expanded="false" />
-            <element signature="e#9982#9983#0" expanded="false" />
-            <element signature="e#10055#10056#0" expanded="false" />
-            <element signature="e#10347#10348#0" expanded="false" />
-            <element signature="e#10387#10388#0" expanded="false" />
-            <element signature="e#10627#10628#0" expanded="false" />
-            <element signature="e#10670#10671#0" expanded="false" />
-            <element signature="e#11165#11166#0" expanded="false" />
-            <element signature="e#11217#11218#0" expanded="false" />
-            <element signature="e#11270#11271#0" expanded="false" />
-            <element signature="e#11320#11321#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/net/minecraft/world/World.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="95030" max-vertical-offset="99084">
-          <caret line="4345" column="0" selection-start-line="4345" selection-start-column="0" selection-end-line="4345" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/items/blocks/BlockVacuumTube.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="7191" max-vertical-offset="8119">
-          <caret line="390" column="35" selection-start-line="390" selection-start-column="35" selection-end-line="390" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/utils/FemtocraftDataUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="13930" max-vertical-offset="19895">
-          <caret line="661" column="42" selection-start-line="661" selection-start-column="42" selection-end-line="661" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/sound/PositionedSoundLoopable.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="782">
-          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/assets/femtocraft/sounds.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="928">
@@ -1868,17 +1234,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyAssemblerRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6939655" vertical-offset="23" max-vertical-offset="1150">
-          <caret line="53" column="46" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
-          <folding>
-            <element signature="e#2128#2129#0" expanded="false" />
-            <element signature="e#2183#2184#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyMachining.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7521552" vertical-offset="659" max-vertical-offset="1587">
@@ -1886,28 +1241,6 @@
           <folding>
             <element signature="e#4110#4111#0" expanded="false" />
             <element signature="e#4151#4152#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyDimensionalRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6939655" vertical-offset="23" max-vertical-offset="1173">
-          <caret line="54" column="46" selection-start-line="54" selection-start-column="46" selection-end-line="54" selection-end-column="46" />
-          <folding>
-            <element signature="e#2193#2194#0" expanded="false" />
-            <element signature="e#2248#2249#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyCraftingRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71875" vertical-offset="23" max-vertical-offset="1173">
-          <caret line="54" column="47" selection-start-line="54" selection-start-column="47" selection-end-line="54" selection-end-column="47" />
-          <folding>
-            <element signature="e#2162#2163#0" expanded="false" />
-            <element signature="e#2217#2218#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1939,28 +1272,6 @@
         <state vertical-scroll-proportion="0.31465518" vertical-offset="1939" max-vertical-offset="3864">
           <caret line="124" column="84" selection-start-line="124" selection-start-column="84" selection-end-line="124" selection-end-column="84" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyRealityOverlocker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7521552" vertical-offset="337" max-vertical-offset="1265">
-          <caret line="50" column="15" selection-start-line="50" selection-start-column="15" selection-end-line="50" selection-end-column="15" />
-          <folding>
-            <element signature="e#2428#2429#0" expanded="false" />
-            <element signature="e#2469#2470#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyTemporalRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6939655" vertical-offset="23" max-vertical-offset="1173">
-          <caret line="54" column="46" selection-start-line="54" selection-start-column="46" selection-end-line="54" selection-end-column="46" />
-          <folding>
-            <element signature="e#2175#2176#0" expanded="false" />
-            <element signature="e#2230#2231#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2062,7 +1373,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/tiles/TileEntityBase.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1791" max-vertical-offset="2691">
+        <state vertical-scroll-proportion="0.74444443" vertical-offset="1791" max-vertical-offset="2691">
           <caret line="135" column="115" selection-start-line="135" selection-start-column="115" selection-end-line="135" selection-end-column="115" />
           <folding />
         </state>
@@ -2084,26 +1395,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/GuiResearchConsole.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1479" max-vertical-offset="3795">
-          <caret line="165" column="0" selection-start-line="165" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/traits/tile/Inventory.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="1403">
+        <state vertical-scroll-proportion="0.5717415" vertical-offset="490" max-vertical-offset="1403">
           <caret line="49" column="28" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/GuiResearch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="10853" max-vertical-offset="13984">
-          <caret line="551" column="0" selection-start-line="551" selection-start-column="0" selection-end-line="551" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2132,6 +1427,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/GuiResearchConsole.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.84884995" vertical-offset="2238" max-vertical-offset="3795">
+          <caret line="165" column="0" selection-start-line="165" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/GuiResearch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.73384446" vertical-offset="10853" max-vertical-offset="13984">
+          <caret line="551" column="0" selection-start-line="551" selection-start-column="0" selection-end-line="551" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnology.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4888889" vertical-offset="7035" max-vertical-offset="9752">
@@ -2139,6 +1450,136 @@
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#1079#1095#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/ComponentRegistry.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1007667" vertical-offset="69" max-vertical-offset="1196">
+          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/FemtocraftTechnologies.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4002" max-vertical-offset="16928">
+          <caret line="21" column="7" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/ManagerAssemblerRecipe.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4899" max-vertical-offset="17066">
+          <caret line="56" column="7" selection-start-line="56" selection-start-column="7" selection-end-line="56" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/ManagerCrafting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4991">
+          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/java/jdk1.7.0_71/src.zip!/java/lang/Character.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.697157" vertical-offset="835" max-vertical-offset="158746">
+          <caret line="122" column="6" selection-start-line="122" selection-start-column="6" selection-end-line="122" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/cpw/mods/fml/common/registry/GameRegistry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3829" max-vertical-offset="9039">
+          <caret line="243" column="48" selection-start-line="243" selection-start-column="48" selection-end-line="243" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/net/minecraftforge/oredict/ShapedOreRecipe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5117429" vertical-offset="0" max-vertical-offset="5911">
+          <caret line="30" column="11" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-library/2.11.2/source/daf0aaff6a520fdacd3486509ddcee6c8c0a1241/scala-library-2.11.2-sources.jar!/scala/collection/TraversableLike.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33250928" vertical-offset="4929" max-vertical-offset="18216">
+          <caret line="237" column="6" selection-start-line="237" selection-start-column="6" selection-end-line="237" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyCraftingRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="1127">
+          <caret line="42" column="60" selection-start-line="42" selection-start-column="60" selection-end-line="42" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyRealityOverlocker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17552534" vertical-offset="410" max-vertical-offset="1219">
+          <caret line="29" column="80" selection-start-line="29" selection-start-column="80" selection-end-line="29" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyAssemblerRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36363637" vertical-offset="82" max-vertical-offset="1104">
+          <caret line="42" column="60" selection-start-line="42" selection-start-column="60" selection-end-line="42" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyDimensionalRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36363637" vertical-offset="82" max-vertical-offset="1127">
+          <caret line="43" column="63" selection-start-line="43" selection-start-column="63" selection-end-line="43" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyTemporalRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36363637" vertical-offset="82" max-vertical-offset="1127">
+          <caret line="43" column="60" selection-start-line="43" selection-start-column="60" selection-end-line="43" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/net/minecraft/item/crafting/CraftingManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4105" max-vertical-offset="7751">
+          <caret line="208" column="41" selection-start-line="208" selection-start-column="41" selection-end-line="208" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/RecipeHelper.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="575">
+          <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/ManagerRecipe.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="897" max-vertical-offset="1840">
+          <caret line="58" column="79" selection-start-line="58" selection-start-column="79" selection-end-line="58" selection-end-column="79" />
+          <folding>
+            <element signature="e#1064#1080#0" expanded="true" />
           </folding>
         </state>
       </provider>

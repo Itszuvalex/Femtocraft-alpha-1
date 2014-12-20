@@ -41,7 +41,7 @@ public class GuiTechnologyDimensionalRenderer implements ITechnologyElementRende
     public GuiTechnologyDimensionalRenderer(GuiTechnology gui, ItemStack output, String text) {
         this.gui = gui;
         this.text = text;
-        recipe = Femtocraft.recipeManager().dimensionalRecipes.getRecipe(output);
+        recipe = Femtocraft.recipeManager().dimensionalRecipes().getRecipe(output);
     }
 
     @Override

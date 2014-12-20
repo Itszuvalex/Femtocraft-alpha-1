@@ -40,7 +40,7 @@ public class GuiTechnologyCraftingRenderer implements ITechnologyElementRenderer
     public GuiTechnologyCraftingRenderer(GuiTechnology gui, ItemStack output, String text) {
         this.gui = gui;
         this.text = text;
-        recipe = Femtocraft.recipeManager().assemblyRecipes.getRecipe(output);
+        recipe = Femtocraft.recipeManager().assemblyRecipes().getRecipe(output);
     }
 
     @Override
