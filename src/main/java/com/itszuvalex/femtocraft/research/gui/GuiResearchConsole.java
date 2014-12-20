@@ -152,11 +152,18 @@ public class GuiResearchConsole extends GuiContainer {
                 }
 
                 RenderItem render = new RenderItem();
+                GL11.glDisable(GL11.GL_BLEND); //Forge: Cleanup states we set.
+                GL11.glDisable(GL11.GL_LIGHTING); //Forge: Make sure Lighting is disabled. Fixes MC-33065
+                GL11.glEnable(GL11.GL_CULL_FACE);
                 RenderHelper.enableGUIStandardItemLighting();
                 render.renderItemAndEffectIntoGUI(fontRendererObj, Minecraft
                                 .getMinecraft().getTextureManager(), tech.getDisplayItem(),
                         k + 110, l + 33
                 );
+                RenderHelper.disableStandardItemLighting();
+                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                GL11.glDisable(GL11.GL_LIGHTING);
+                GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             }
 
         }

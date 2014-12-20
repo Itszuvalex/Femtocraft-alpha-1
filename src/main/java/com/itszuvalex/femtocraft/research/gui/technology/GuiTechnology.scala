@@ -81,24 +81,20 @@ class GuiTechnology(private val guiResearch: GuiResearch, private val status: Re
     val k: Int = (this.width - this.xSize) / 2
     val l: Int = (this.height - this.ySize) / 2
 
+    GL11.glDepthFunc(GL11.GL_LEQUAL)
+    GL11.glDisable(GL11.GL_DEPTH_TEST)
     GL11.glEnable(GL11.GL_BLEND)
+    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F)
     this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize)
     GL11.glDisable(GL11.GL_BLEND)
     GL11.glEnable(GL11.GL_DEPTH_TEST)
     GL11.glDepthFunc(GL11.GL_LEQUAL)
 
-    GL11.glDisable(GL11.GL_TEXTURE_2D)
-    GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
-    GL11.glEnable(GL11.GL_BLEND)
-    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F)
+    GL11.glPopMatrix()
 
-
-    GL11.glDepthFunc(GL11.GL_LEQUAL)
-    GL11.glDisable(GL11.GL_DEPTH_TEST)
     GL11.glEnable(GL11.GL_TEXTURE_2D)
     super.drawScreen(par1, par2, par3)
     val tooltip = new ArrayList[String]
-    renderInformation(k + 9, l + 76, 237, 116, displayPage, par1, par2, tooltip, status.researched)
     val s: String = status.tech
     val width: Int = 188 - (66 + 16 + 2)
     val top: Int = if (fontRendererObj.getStringWidth(s) > width) 12 else 17
@@ -133,8 +129,10 @@ class GuiTechnology(private val guiResearch: GuiResearch, private val status: Re
     this.fontRendererObj.drawString(pageString, k + pageLeftButtonX + (pageLeftButtonWidth + pageRightButtonX - pageLeftButtonX) / 2 - this.fontRendererObj.getStringWidth(pageString) / 2, l + pageLeftButtonY + (pageLeftButtonHeight - this.fontRendererObj.FONT_HEIGHT) / 2 + 1, FemtocraftUtils.colorFromARGB(255, 255, 255, 255))
     this.zLevel = 0
     val renderitem = new RenderItem
-    RenderHelper.enableGUIStandardItemLighting()
     GL11.glDisable(GL11.GL_LIGHTING)
+    GL11.glEnable(GL11.GL_CULL_FACE)
+    GL11.glDisable(GL11.GL_BLEND)
+    RenderHelper.enableGUIStandardItemLighting()
     GL11.glEnable(GL12.GL_RESCALE_NORMAL)
     GL11.glEnable(GL11.GL_COLOR_MATERIAL)
     renderitem.renderItemAndEffectIntoGUI(Minecraft.getMinecraft.fontRenderer, Minecraft.getMinecraft.getTextureManager, tech.getDisplayItem, k + 66, l + 12)
@@ -142,10 +140,11 @@ class GuiTechnology(private val guiResearch: GuiResearch, private val status: Re
     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
     GL11.glDisable(GL11.GL_LIGHTING)
     this.renderCraftingGrid(k + 194, l + 11, tech.getResearchMaterials, par1, par2, tooltip)
+    renderInformation(k + 9, l + 76, 237, 116, displayPage, par1, par2, tooltip, status.researched)
     this.zLevel = 0.0F
+    GL11.glTranslatef(0.0F, 0.0F, 200.0F)
     this.drawHoveringText(tooltip, par1, par2, this.fontRendererObj)
     GL11.glPopMatrix()
-    GL11.glEnable(GL11.GL_DEPTH_TEST)
     GL11.glEnable(GL11.GL_LIGHTING)
     RenderHelper.disableStandardItemLighting()
   }
@@ -307,10 +306,14 @@ class GuiTechnology(private val guiResearch: GuiResearch, private val status: Re
     drawTexturedModalRect(x, y, 194, 11, 18, 18)
     GL11.glDisable(GL11.GL_LIGHTING)
     GL11.glEnable(GL11.GL_CULL_FACE)
+    GL11.glDisable(GL11.GL_BLEND)
     RenderHelper.enableGUIStandardItemLighting()
+    GL11.glEnable(GL12.GL_RESCALE_NORMAL)
+    GL11.glEnable(GL11.GL_COLOR_MATERIAL)
     if (item == null) {
       RenderHelper.disableStandardItemLighting()
       GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
+      GL11.glEnable(GL11.GL_BLEND)
       GL11.glDisable(GL11.GL_LIGHTING)
       return
     }
@@ -320,6 +323,7 @@ class GuiTechnology(private val guiResearch: GuiResearch, private val status: Re
     renderitem.renderItemOverlayIntoGUI(Minecraft.getMinecraft.fontRenderer, Minecraft.getMinecraft.getTextureManager, item, xr, yr)
     RenderHelper.disableStandardItemLighting()
     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
+    GL11.glEnable(GL11.GL_BLEND)
     GL11.glDisable(GL11.GL_LIGHTING)
     if (mouseX > x && mouseX < x + 17 && mouseY > y && mouseY < y + 17) {
       tooltip.asInstanceOf[util.List[String]].addAll(item.getTooltip(Minecraft.getMinecraft.thePlayer, Minecraft.getMinecraft.gameSettings.advancedItemTooltips).asInstanceOf[util.List[String]])
