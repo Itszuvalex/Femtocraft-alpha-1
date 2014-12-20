@@ -324,7 +324,8 @@ class GuiTechnology(private val guiResearch: GuiResearch, private val status: Re
     }
     val xr: Int = x + 1
     val yr: Int = y + 1
-    renderitem.renderItemIntoGUI(Minecraft.getMinecraft.fontRenderer, Minecraft.getMinecraft.getTextureManager, item, xr, yr, true)
+    renderitem.renderItemAndEffectIntoGUI(Minecraft.getMinecraft.fontRenderer, Minecraft.getMinecraft.getTextureManager, item, xr, yr)
+//    renderitem.renderItemIntoGUI(Minecraft.getMinecraft.fontRenderer, Minecraft.getMinecraft.getTextureManager, item, xr, yr, true)
     renderitem.renderItemOverlayIntoGUI(Minecraft.getMinecraft.fontRenderer, Minecraft.getMinecraft.getTextureManager, item, xr, yr)
     RenderHelper.disableStandardItemLighting()
     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)

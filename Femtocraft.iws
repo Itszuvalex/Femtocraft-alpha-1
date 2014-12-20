@@ -4,9 +4,6 @@
     <list default="true" id="334ed2b9-d383-45b1-801c-a13fbb9ee325" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Femtocraft.iws" afterPath="$PROJECT_DIR$/Femtocraft.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnology.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnology.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/traits/tile/Inventory.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/traits/tile/Inventory.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/tiles/TileEntityBase.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/tiles/TileEntityBase.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/items/tiles/TileEntityVacuumTube.java" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/items/tiles/TileEntityVacuumTube.java" />
     </list>
     <ignored path="Femtocraft.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -69,15 +66,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="GuiTechnology.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GuiTechnology.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnology.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="6897" max-vertical-offset="9729">
-              <caret line="306" column="0" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.4888889" vertical-offset="7035" max-vertical-offset="9752">
+              <caret line="325" column="22" selection-start-line="325" selection-start-column="22" selection-end-line="325" selection-end-column="22" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#1079#1095#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RenderItem.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/net/minecraft/client/renderer/entity/RenderItem.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="12097" max-vertical-offset="18101">
+              <caret line="694" column="16" selection-start-line="694" selection-start-column="16" selection-end-line="694" selection-end-column="16" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -102,20 +109,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TileEntityVacuumTube.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/items/tiles/TileEntityVacuumTube.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="15888" max-vertical-offset="22356">
-              <caret line="747" column="19" selection-start-line="747" selection-start-column="19" selection-end-line="747" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="TileEntityBaseEntityMicroDeconstructor.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/tiles/TileEntityBaseEntityMicroDeconstructor.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="276" max-vertical-offset="4692">
+            <state vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="4692">
               <caret line="50" column="130" selection-start-line="50" selection-start-column="130" selection-end-line="50" selection-end-column="130" />
               <folding />
             </state>
@@ -125,17 +122,17 @@
       <file leaf-file-name="Inventory.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/traits/tile/Inventory.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="1403">
+            <state vertical-scroll-proportion="0.0" vertical-offset="490" max-vertical-offset="1403">
               <caret line="49" column="28" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TileEntityBase.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TileEntityBase.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/tiles/TileEntityBase.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.74444443" vertical-offset="1791" max-vertical-offset="2691">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1791" max-vertical-offset="2691">
               <caret line="135" column="115" selection-start-line="135" selection-start-column="115" selection-end-line="135" selection-end-column="115" />
               <folding />
             </state>
@@ -209,10 +206,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityMagnetohydrodynamicGenerator.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/liquids/render/RenderSuctionPipe.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/GuiResearchConsole.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnology.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/items/tiles/TileEntityVacuumTube.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/traits/tile/Inventory.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/tiles/TileEntityBase.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnology.scala" />
       </list>
     </option>
   </component>
@@ -1397,12 +1394,18 @@
       <option name="project" value="LOCAL" />
       <updated>1419059539470</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Fix issues with Inventory trait, and VacuumTubes.">
+      <created>1419061374017</created>
+      <option name="number" value="00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1419061374017</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="55" width="2880" height="1685" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1480,7 +1483,6 @@
       <TodoPanelSettings />
     </option>
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
-    <MESSAGE value="More Scalafication&#10;&#10;Created Core traits for easy reuse of things like droppable inventories, rotation of blocks when placed, etc.  Should extend to things like loading sided Icons, etc." />
     <MESSAGE value="Fixed Config Helper to actually load scala singletons.  Hallelujah.&#10;&#10;Stupid me was using the &quot;all public fields&quot;, instead of &quot;declared fields&quot;, which counterintuitively returns ALL fields, rather than &quot;fields&quot;.  The method with the more specific quantifier returns the more general usage of every field.  The one entitled &quot;getFields&quot; returns the smaller sample." />
     <MESSAGE value="More scalafication.  More fixes." />
     <MESSAGE value="More Scalafication.&#10;&#10;Changed some of the simpler classes, and required java interoperability changes." />
@@ -1505,7 +1507,8 @@
     <MESSAGE value="Fix Vacuum Tubes.  Fix Stellarator Multiblock change rendering updates." />
     <MESSAGE value="Fix suction pipe rendering at end of pipe liquid extension.  Begin attempt at fixing GUITechnology rendering." />
     <MESSAGE value="Fix GuiTechnology rendering except for nether stars in the crafting grid." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix GuiTechnology rendering except for nether stars in the crafting grid." />
+    <MESSAGE value="Fix issues with Inventory trait, and VacuumTubes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix issues with Inventory trait, and VacuumTubes." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1527,13 +1530,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/liquids/blocks/BlockSuctionPipe.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="759" max-vertical-offset="5014">
-          <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/net/minecraftforge/fluids/FluidTank.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334" vertical-offset="1144" max-vertical-offset="3933">
@@ -2024,34 +2020,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/net/minecraft/client/renderer/OpenGlHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44966996" vertical-offset="15486" max-vertical-offset="16698">
-          <caret line="722" column="23" selection-start-line="722" selection-start-column="23" selection-end-line="722" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/GuiResearchConsole.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1479" max-vertical-offset="3795">
-          <caret line="165" column="0" selection-start-line="165" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/net/minecraft/client/renderer/Tessellator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33277732" vertical-offset="4707" max-vertical-offset="11132">
           <caret line="233" column="17" selection-start-line="233" selection-start-column="17" selection-end-line="233" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/GuiResearch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="10853" max-vertical-offset="13984">
-          <caret line="551" column="0" selection-start-line="551" selection-start-column="0" selection-end-line="551" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2080,29 +2052,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/net/minecraft/client/renderer/entity/RenderItem.java">
+    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/net/minecraft/tileentity/TileEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.78" vertical-offset="10503" max-vertical-offset="18101">
-          <caret line="416" column="16" selection-start-line="416" selection-start-column="16" selection-end-line="416" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.33888888" vertical-offset="3053" max-vertical-offset="8579">
+          <caret line="175" column="7" selection-start-line="175" selection-start-column="7" selection-end-line="175" selection-end-column="104" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnology.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/tiles/TileEntityBase.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6897" max-vertical-offset="9729">
-          <caret line="306" column="0" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#1079#1095#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/items/tiles/TileEntityVacuumTube.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="15888" max-vertical-offset="22356">
-          <caret line="747" column="19" selection-start-line="747" selection-start-column="19" selection-end-line="747" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1791" max-vertical-offset="2691">
+          <caret line="135" column="115" selection-start-line="135" selection-start-column="115" selection-end-line="135" selection-end-column="115" />
           <folding />
         </state>
       </provider>
@@ -2115,10 +2076,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/net/minecraft/tileentity/TileEntity.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/items/tiles/TileEntityVacuumTube.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33888888" vertical-offset="3053" max-vertical-offset="8579">
-          <caret line="175" column="7" selection-start-line="175" selection-start-column="7" selection-end-line="175" selection-end-column="104" />
+        <state vertical-scroll-proportion="0.106243156" vertical-offset="15888" max-vertical-offset="22356">
+          <caret line="747" column="19" selection-start-line="747" selection-start-column="19" selection-end-line="747" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/GuiResearchConsole.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1479" max-vertical-offset="3795">
+          <caret line="165" column="0" selection-start-line="165" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2131,11 +2100,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/core/tiles/TileEntityBase.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/GuiResearch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.74444443" vertical-offset="1791" max-vertical-offset="2691">
-          <caret line="135" column="115" selection-start-line="135" selection-start-column="115" selection-end-line="135" selection-end-column="115" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="10853" max-vertical-offset="13984">
+          <caret line="551" column="0" selection-start-line="551" selection-start-column="0" selection-end-line="551" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/net/minecraft/client/gui/FontRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.1166666" vertical-offset="10418" max-vertical-offset="21091">
+          <caret line="354" column="17" selection-start-line="354" selection-start-column="17" selection-end-line="354" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/net/minecraft/client/renderer/OpenGlHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7077778" vertical-offset="15624" max-vertical-offset="16698">
+          <caret line="732" column="37" selection-start-line="732" selection-start-column="37" selection-end-line="732" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/net/minecraft/client/renderer/entity/RenderItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="12097" max-vertical-offset="18101">
+          <caret line="694" column="16" selection-start-line="694" selection-start-column="16" selection-end-line="694" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnology.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4888889" vertical-offset="7035" max-vertical-offset="9752">
+          <caret line="325" column="22" selection-start-line="325" selection-start-column="22" selection-end-line="325" selection-end-column="22" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#1079#1095#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
