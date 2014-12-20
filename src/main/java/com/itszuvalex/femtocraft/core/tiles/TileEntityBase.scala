@@ -127,9 +127,13 @@ class TileEntityBase extends TileEntity {
 
   @Deprecated def onInventoryChanged() = setModified()
 
-  def setModified() = if (worldObj != null) super.markDirty()
+  def setModified() = if (worldObj != null) worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this)
 
   def setRenderUpdate() = if (worldObj != null) worldObj.markBlockRangeForRenderUpdate(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord)
 
   def setUpdate() = if (worldObj != null) worldObj.markBlockForUpdate(xCoord, yCoord, zCoord)
+
+  def notifyNeighborsOfChange() = if (worldObj != null) worldObj.func_147453_f(xCoord, yCoord, zCoord, getBlockType)
+
+
 }

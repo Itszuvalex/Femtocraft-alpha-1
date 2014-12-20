@@ -436,7 +436,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
             inputDir = ForgeDirection.UNKNOWN;
         }
         setUpdate();
-        markDirty();
+        setModified();
     }
 
 //    @Override
@@ -461,7 +461,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         }
 
         setUpdate();
-        markDirty();
+        setModified();
     }
 
     private void ejectItem(int slot) {
@@ -642,7 +642,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
             inputTube = null;
             inputDir = dir;
             setUpdate();
-            markDirty();
+            setModified();
             return true;
         } else if (tile instanceof IVacuumTube) {
             inputTube = (IVacuumTube) tile;
@@ -651,7 +651,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
             inputInv = null;
             inputTube.addOutput(dir.getOpposite());
             setUpdate();
-            markDirty();
+            setModified();
             return true;
         } else if (tile instanceof IInventory) {
             inputTube = null;
@@ -659,7 +659,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
             inputSidedInv = null;
             inputInv = (IInventory) tile;
             setUpdate();
-            markDirty();
+            setModified();
             return true;
         }
 
@@ -697,7 +697,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
             outputTube = null;
             outputDir = dir;
             setUpdate();
-            markDirty();
+            setModified();
             return true;
         } else if (tile instanceof IVacuumTube) {
             outputTube = (IVacuumTube) tile;
@@ -706,7 +706,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
             outputInv = null;
             outputTube.addInput(dir.getOpposite());
             setUpdate();
-            markDirty();
+            setModified();
             return true;
         } else if (tile instanceof IInventory) {
             outputTube = null;
@@ -714,7 +714,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
             outputSidedInv = null;
             outputInv = (IInventory) tile;
             setUpdate();
-            markDirty();
+            setModified();
             return true;
         }
 

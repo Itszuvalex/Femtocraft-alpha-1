@@ -304,6 +304,11 @@ class GuiTechnology(private val guiResearch: GuiResearch, private val status: Re
     GL11.glColor4f(1f, 1f, 1f, 1f)
     Minecraft.getMinecraft.renderEngine.bindTexture(texture)
     drawTexturedModalRect(x, y, 194, 11, 18, 18)
+    GL11.glEnable(GL11.GL_DEPTH_TEST)
+    GL11.glDepthFunc(GL11.GL_LEQUAL)
+
+    GL11.glEnable(GL11.GL_TEXTURE_2D)
+
     GL11.glDisable(GL11.GL_LIGHTING)
     GL11.glEnable(GL11.GL_CULL_FACE)
     GL11.glDisable(GL11.GL_BLEND)

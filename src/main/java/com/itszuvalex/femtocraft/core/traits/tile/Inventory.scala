@@ -47,7 +47,7 @@ trait Inventory extends TileEntityBase with ISidedInventory {
 
   override def markDirty() = {
     inventory.markDirty()
-    setModified()
+    notifyNeighborsOfChange()
   }
 
   override def isUseableByPlayer(player: EntityPlayer) = canPlayerUse(player) && inventory.isUseableByPlayer(player)
