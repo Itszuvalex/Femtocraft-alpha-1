@@ -16,7 +16,7 @@ public class GuiTechnologyRealityOverlocker extends GuiTechnology {
     }
 
     @Override
-    protected void renderInformation(int x, int y, int width, int height, int pageNum, int mouseX, int mouseY, List
+    public void renderInformation(int x, int y, int width, int height, int pageNum, int mouseX, int mouseY, List
             tooltip, boolean isResearched) {
         if (isResearched) {
             switch (pageNum) {
@@ -48,7 +48,7 @@ public class GuiTechnologyRealityOverlocker extends GuiTechnology {
     }
 
     @Override
-    protected int getNumPages(boolean researched) {
+    public int getNumPages(boolean researched) {
         return researched ? 2 : 1;
     }
 }

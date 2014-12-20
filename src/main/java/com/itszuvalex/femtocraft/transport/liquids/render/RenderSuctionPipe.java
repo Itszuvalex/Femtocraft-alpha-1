@@ -206,13 +206,12 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
                         pipe_liquid_m.draw();
 
                         pipe_liquid_cap_m.location = new RenderPoint(x, y, z);
-                        for (RenderQuad quad : pipe_liquid_m.faces) {
-                            IIcon icon_f = fluid.getFluid().getIcon();
-                            quad.icon = icon_f;
-                            quad.minU = icon_f.getInterpolatedU(6.f);
-                            quad.maxU = icon_f.getInterpolatedU(10.f);
-                            quad.minV = icon_f.getInterpolatedV(6.f);
-                            quad.minV = icon_f.getInterpolatedV(10.f);
+                        for (RenderQuad quad : pipe_liquid_cap_m.faces) {
+                            quad.icon = fluid.getFluid().getIcon();
+                            quad.minU = quad.icon.getInterpolatedU(6f);
+                            quad.maxU = quad.icon.getInterpolatedU(10f);
+                            quad.minV = quad.icon.getInterpolatedV(6f);
+                            quad.maxV = quad.icon.getInterpolatedV(10f);
                         }
                         pipe_liquid_cap_m.draw();
                     }
@@ -369,7 +368,7 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
                     0, 0).rotatePointsClockwise());
 
             pipes_liquid_cap_Up.addQuad(RenderUtils.makeTopFace(min, max, min,
-                    max, 1.f, pipe.connector, 0, 0, 0, 0));
+                    max, 1.f, null, 0, 0, 0, 0));
         }
 
         pipes_Down = pipes_Up.rotatedOnZAxis(Math.PI);

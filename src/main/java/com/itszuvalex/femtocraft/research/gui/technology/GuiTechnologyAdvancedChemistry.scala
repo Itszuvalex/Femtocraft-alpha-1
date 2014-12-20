@@ -44,5 +44,5 @@ class GuiTechnologyAdvancedChemistry(guiResearch: GuiResearch, status: ResearchS
     }
   }
 
-  protected override def getNumPages(researched: Boolean): Int = if (researched) Math.ceil(recipes.size / 2f).toInt else 1
+  override def getNumPages(researched: Boolean): Int = if (researched) Math.ceil(recipes.size / 2f).toInt else 1
 }

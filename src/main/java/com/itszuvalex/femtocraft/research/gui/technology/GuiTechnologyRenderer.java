@@ -76,10 +76,10 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
         pages.add(currentPage);
         for (int i = 0; i < textRegions.length; i++) {
             String region = textRegions[i];
-            List lines = frender.listFormattedStringToWidth(region, GuiTechnology.descriptionWidth);
+            List lines = frender.listFormattedStringToWidth(region, GuiTechnology.descriptionWidth());
             for (Object oline : lines) {
                 String line = (String) oline;
-                if ((currentY + frender.FONT_HEIGHT) > GuiTechnology.descriptionHeight) {
+                if ((currentY + frender.FONT_HEIGHT) > GuiTechnology.descriptionHeight()) {
                     currentPage = new TechnologyPageRenderer();
                     pages.add(currentPage);
                     currentY = 0;
@@ -101,7 +101,7 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
                 if (renderer == null) {
                     renderer = new TechnologyLineRenderer(special);
                 }
-                if ((currentY + renderer.getHeight()) > GuiTechnology.descriptionHeight) {
+                if ((currentY + renderer.getHeight()) > GuiTechnology.descriptionHeight()) {
                     currentPage = new TechnologyPageRenderer();
                     pages.add(currentPage);
                     currentY = 0;
@@ -122,7 +122,7 @@ public class GuiTechnologyRenderer implements ITechnologyElementRenderer {
             if (renderer == null) {
                 renderer = new TechnologyLineRenderer(special);
             }
-            if ((currentY + renderer.getHeight()) > GuiTechnology.descriptionHeight) {
+            if ((currentY + renderer.getHeight()) > GuiTechnology.descriptionHeight()) {
                 currentPage = new TechnologyPageRenderer();
                 pages.add(currentPage);
                 currentY = 0;

@@ -51,7 +51,7 @@ public class GuiTechnologyAssemblerRenderer implements ITechnologyElementRendere
 
     @Override
     public int getWidth() {
-        return GuiTechnology.descriptionWidth;
+        return GuiTechnology.descriptionWidth();
     }
 
     @Override

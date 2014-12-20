@@ -52,7 +52,7 @@ public class GuiTechnologyDimensionalRenderer implements ITechnologyElementRende
 
     @Override
     public int getWidth() {
-        return GuiTechnology.descriptionWidth;
+        return GuiTechnology.descriptionWidth();
     }
 
     @Override

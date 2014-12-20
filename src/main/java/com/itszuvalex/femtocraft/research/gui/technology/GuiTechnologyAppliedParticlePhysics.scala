@@ -44,5 +44,5 @@ class GuiTechnologyAppliedParticlePhysics(guiResearch: GuiResearch, status: Rese
     }
   }
 
-  protected override def getNumPages(researched: Boolean): Int = Math.ceil(recipes.size / 2f).toInt
+  override def getNumPages(researched: Boolean): Int = Math.ceil(recipes.size / 2f).toInt
 }

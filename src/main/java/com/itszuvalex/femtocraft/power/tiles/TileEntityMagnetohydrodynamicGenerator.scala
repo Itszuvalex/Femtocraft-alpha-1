@@ -38,7 +38,7 @@ import net.minecraftforge.fluids._
  */
 object TileEntityMagnetohydrodynamicGenerator {
   @Configurable(comment = "Power generated per mB of molten salt.")
-  val powerPerMoltenSaltMB                   : Int     = 1
+  val powerPerMoltenSaltMB                   : Int     = 2
   @Configurable(comment = "Amount of contaminated salt storage.")
   val contaminatedSaltTankStorage            : Int     = 100000
   @Configurable(comment = "Amount of molten salt storage.")

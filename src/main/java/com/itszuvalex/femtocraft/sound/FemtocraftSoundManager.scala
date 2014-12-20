@@ -42,20 +42,20 @@ class FemtocraftSoundManager() {
 
   def playSound(sound: ISound) = {
     Minecraft.getMinecraft.getSoundHandler.playSound(sound)
-    sounds.append(sound)
+    sounds += sound
     isSoundPlaying(sound)
   }
 
   def isSoundPlaying(sound: ISound) = Minecraft.getMinecraft.getSoundHandler.isSoundPlaying(sound)
 
-  def stopAllSounds() = sounds.foreach(sound => stopSound(sound))
+  def stopAllSounds() = sounds.foreach(stopSound)
 
   def stopSound(sound: ISound): Boolean = {
     if (isSoundPlaying(sound)) {
       Minecraft.getMinecraft.getSoundHandler.stopSound(sound)
       val i = sounds.indexOf(sound)
       if (i == -1) return false
-      sounds.remove(i)
+      sounds -= sound
       return true
     }
     false

@@ -52,7 +52,7 @@ public class GuiTechnologyTemporalRenderer implements ITechnologyElementRenderer
 
     @Override
     public int getWidth() {
-        return GuiTechnology.descriptionWidth;
+        return GuiTechnology.descriptionWidth();
     }
 
     @Override

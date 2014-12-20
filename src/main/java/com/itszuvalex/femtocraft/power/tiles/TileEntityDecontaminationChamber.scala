@@ -28,7 +28,7 @@ object TileEntityDecontaminationChamber {
   @Configurable(comment = "Amount of contaminated salt to process per tick")
   val PROCESS_RATE                    = 5
   @Configurable(comment = "Amount of power used per process")
-  val POWER_COST                      = 10
+  val POWER_COST                      = 5
   @Configurable(comment = "Ratio of contaminated salt turned into cooled salt.")
   val CONVERSION_RATIO                = .95f
 }
