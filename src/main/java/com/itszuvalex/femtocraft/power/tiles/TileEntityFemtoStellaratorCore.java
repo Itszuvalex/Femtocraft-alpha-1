@@ -93,6 +93,12 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
     }
 
     @Override
+    public void handleDescriptionNBT(NBTTagCompound compound) {
+        super.handleDescriptionNBT(compound);
+        setRenderUpdate();
+    }
+
+    @Override
     public void saveToDescriptionCompound(NBTTagCompound compound) {
         selfSustaining = isSelfSustaining();
         igniting = isIgniting();

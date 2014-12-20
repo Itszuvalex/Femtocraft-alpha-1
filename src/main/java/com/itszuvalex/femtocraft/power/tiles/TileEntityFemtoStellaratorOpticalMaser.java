@@ -32,6 +32,7 @@ import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.utils.WorldLocation;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -46,6 +47,13 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
     public static int warmupThreshold = 1000000;
     public static int powerTransferPerTick = 50000;
     public static int temperatureRating = 6000;
+
+    @Override
+    public void handleDescriptionNBT(NBTTagCompound compound) {
+        super.handleDescriptionNBT(compound);
+        setRenderUpdate();
+    }
+
     public static int stability = 6000;
     @Saveable(desc = true)
     private boolean igniting;

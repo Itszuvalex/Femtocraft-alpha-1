@@ -31,6 +31,7 @@ import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.utils.WorldLocation;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -49,6 +50,13 @@ import java.util.Collection;
 public class TileEntityFemtoStellaratorHousing extends TileEntityBase
         implements IFusionReactorComponent, IMultiBlockComponent {
     public static int temperatureRating;
+
+    @Override
+    public void handleDescriptionNBT(NBTTagCompound compound) {
+        super.handleDescriptionNBT(compound);
+        setRenderUpdate();
+    }
+
     public static int stability;
     private IFusionReactorCore core;
     @Saveable(desc = true)

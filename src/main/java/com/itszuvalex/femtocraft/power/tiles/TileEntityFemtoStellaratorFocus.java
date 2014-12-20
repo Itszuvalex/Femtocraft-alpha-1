@@ -31,6 +31,7 @@ import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 import com.itszuvalex.femtocraft.utils.WorldLocation;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -48,6 +49,13 @@ public class TileEntityFemtoStellaratorFocus extends TileEntityBase
     private MultiBlockInfo info;
     @Saveable
     private WorldLocation coreLocation;
+
+    @Override
+    public void handleDescriptionNBT(NBTTagCompound compound) {
+        super.handleDescriptionNBT(compound);
+        setRenderUpdate();
+    }
+
     private IFusionReactorCore core;
 
     public TileEntityFemtoStellaratorFocus() {
