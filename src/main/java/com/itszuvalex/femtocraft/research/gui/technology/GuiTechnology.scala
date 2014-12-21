@@ -144,7 +144,6 @@ class GuiTechnology(private val guiResearch: GuiResearch, private val status: Re
     this.zLevel = 0.0F
     GL11.glTranslatef(0.0F, 0.0F, 200.0F)
     this.drawHoveringText(tooltip, par1, par2, this.fontRendererObj)
-    GL11.glPopMatrix()
     GL11.glEnable(GL11.GL_LIGHTING)
     RenderHelper.disableStandardItemLighting()
   }

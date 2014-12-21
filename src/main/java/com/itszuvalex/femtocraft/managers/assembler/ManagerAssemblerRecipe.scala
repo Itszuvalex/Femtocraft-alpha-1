@@ -425,9 +425,9 @@ class ManagerAssemblerRecipe {
 
 
     i match {
-      case micro if ComponentRegistry.isItemComponent(i.getItem, EnumTechLevel.MICRO) => molecules = i.stackSize
-      case nano if ComponentRegistry.isItemComponent(i.getItem, EnumTechLevel.NANO)   => atoms = i.stackSize
-      case femto if ComponentRegistry.isItemComponent(i.getItem, EnumTechLevel.FEMTO) => particles = i.stackSize
+      case micro if ComponentRegistry.isItemComponent(i.getItem, EnumTechLevel.MICRO) => molecules = 1
+      case nano if ComponentRegistry.isItemComponent(i.getItem, EnumTechLevel.NANO)   => atoms = 1
+      case femto if ComponentRegistry.isItemComponent(i.getItem, EnumTechLevel.FEMTO) => particles = 1
       case _                                                                          =>
     }
 
@@ -435,7 +435,7 @@ class ManagerAssemblerRecipe {
       val recipe = getRecipe(i)
       var ret: (Float, Float, Float, Float) = null
       if (recipe != null) {
-        mass += (recipe.mass * i.stackSize).toFloat / recipe.output.stackSize
+        mass += recipe.mass / recipe.output.stackSize
         recipe.input.foreach {
                                case in if !ItemStack.areItemStacksEqual(i, in) =>
                                  val (m, a, p, ma) = getDecompositionCounts(in, s + i.itemID)
@@ -446,13 +446,13 @@ class ManagerAssemblerRecipe {
                                case _                                          =>
                              }
 
-        ret = (molecules / recipe.output.stackSize / i.stackSize,
-          atoms / recipe.output.stackSize / i.stackSize,
-          particles / recipe.output.stackSize / i.stackSize,
-          mass / recipe.output.stackSize / i.stackSize)
+        ret = (molecules / recipe.output.stackSize,
+          atoms / recipe.output.stackSize,
+          particles / recipe.output.stackSize,
+          mass / recipe.output.stackSize)
       }
       else {
-        ret = (molecules, atoms, particles, mass)
+        return (molecules / i.stackSize, atoms / i.stackSize, particles / i.stackSize, mass / i.stackSize)
       }
       decompCountMemo.put(i.itemID, ret)
       val (mo, at, pa, ma) = ret
@@ -498,12 +498,12 @@ class ManagerAssemblerRecipe {
             input(((i + xOffset) % width) + 3 * (yOffset + ((i + xOffset) / width))) = if (item == null) {
               null
             }
-                                                                                       else {
-                                                                                         new
-                                                                                             ItemStack(item.getItem, 1,
-                                                                                                       item
-                                                                                                       .getItemDamage)
-                                                                                       }
+            else {
+              new
+                  ItemStack(item.getItem, 1,
+                            item
+                            .getItemDamage)
+            }
           }
           catch {
             case e: ArrayIndexOutOfBoundsException =>
@@ -540,10 +540,10 @@ class ManagerAssemblerRecipe {
                        "An error occured while registering a shaped orec recipe for " + (if (recipeOutput == null) {
                          "null"
                        }
-                                                                                         else {
-                                                                                           recipeOutput
-                                                                                           .getDisplayName
-                                                                                         }))
+                       else {
+                         recipeOutput
+                         .getDisplayName
+                       }))
         false
     }
   }
@@ -564,12 +564,12 @@ class ManagerAssemblerRecipe {
           input(((i + xoffset) % recipeWidth) + 3 * (yoffset + ((i + xoffset) / recipeWidth))) = if (item == null) {
             null
           }
-                                                                                                 else {
-                                                                                                   new ItemStack(item
-                                                                                                                 .getItem,
-                                                                                                                 1, item
-                                                                                                                    .getItemDamage)
-                                                                                                 }
+          else {
+            new ItemStack(item
+                          .getItem,
+                          1, item
+                             .getItemDamage)
+          }
         }
         if (addReversableRecipe(recipe)) {
           done = true
@@ -590,10 +590,10 @@ class ManagerAssemblerRecipe {
                        "An error occured while registering shaped recipe for " + (if (recipeOutput == null) {
                          "null"
                        }
-                                                                                  else {
-                                                                                    recipeOutput
-                                                                                    .getDisplayName
-                                                                                  }) + ".  Width: " + recipeWidth + " Height: " + recipeHeight)
+                       else {
+                         recipeOutput
+                         .getDisplayName
+                       }) + ".  Width: " + recipeWidth + " Height: " + recipeHeight)
         false
     }
   }
@@ -665,10 +665,10 @@ class ManagerAssemblerRecipe {
                        "An error occured while registering a shapeless ore recipe for " + (if (recipeOutput == null) {
                          "null"
                        }
-                                                                                           else {
-                                                                                             recipeOutput
-                                                                                             .getDisplayName
-                                                                                           }))
+                       else {
+                         recipeOutput
+                         .getDisplayName
+                       }))
         false
     }
   }
@@ -708,10 +708,10 @@ class ManagerAssemblerRecipe {
                        "An error occured while registering a shapeless recipe for " + (if (recipeOutput == null) {
                          "null"
                        }
-                                                                                       else {
-                                                                                         recipeOutput
-                                                                                         .getDisplayName
-                                                                                       }))
+                       else {
+                         recipeOutput
+                         .getDisplayName
+                       }))
         false
     }
   }
