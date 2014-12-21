@@ -112,8 +112,10 @@ object TileEntityBaseEntityMicroDeconstructor {
 
   override def getAccessibleSlotsFromSide(var1: Int) = {
     var1 match {
-      case (1) => Array[Int](0)
-      case _   => (1 until getSizeInventory).toArray
+      case 1                                            => Array[Int](0)
+      case 0 if getResearchGatedAssemblerRecipe == null => Array[Int](0)
+      case 0                                            => Array[Int]()
+      case _                                            => (1 until getSizeInventory).toArray
     }
   }
 
@@ -144,15 +146,36 @@ object TileEntityBaseEntityMicroDeconstructor {
     false
   }
   else {
-    val recipe: AssemblerRecipe = Femtocraft.recipeManager.assemblyRecipes.getRecipe(getStackInSlot(0))
-    recipe != null && recipe.enumTechLevel.tier <= getAssemblerTech.tier && (massTank.getCapacity - massTank.getFluidAmount) >= recipe.mass && getStackInSlot(0).stackSize >= recipe.output.stackSize && roomForItems(recipe.input)
+    val recipe: AssemblerRecipe = getResearchGatedAssemblerRecipe
+    recipe != null && (massTank.getCapacity - massTank.getFluidAmount) >= recipe.mass && getStackInSlot(0).stackSize >= recipe.output.stackSize && roomForItems(recipe.input)
+  }
+
+  def getResearchGatedAssemblerRecipe: AssemblerRecipe = {
+    val recipe = getAssemblerRecipe
+    if (recipe == null) return null
+    if (recipe.enumTechLevel.tier > getAssemblerTech.tier) return null
+    recipe
   }
 
   protected def getAssemblerTech = ASSEMBLER_TECH_LEVEL
 
+  def getAssemblerRecipe = Femtocraft.recipeManager.assemblyRecipes.getRecipe(getStackInSlot(0))
+
+  protected def getPowerToCook = POWER_TO_COOK
+
+  private def roomForItems(items: Array[ItemStack]): Boolean = {
+    val fake = new Array[ItemStack](getSizeInventory)
+    for (i <- 0 until fake.length) {
+      val it = getStackInSlot(i)
+      fake(i) = if (it == null) null else it.copy
+    }
+
+    items.forall(FemtocraftUtils.placeItem(_, fake, null))
+  }
+
   override protected def startWork() {
     deconstructingStack = getStackInSlot(0).copy
-    val recipe = Femtocraft.recipeManager.assemblyRecipes.getRecipe(getStackInSlot(0))
+    val recipe = getAssemblerRecipe
     deconstructingStack.stackSize = 0
     var massReq = 0
     val items = new ArrayBuffer[ItemStack]
@@ -184,19 +207,7 @@ object TileEntityBaseEntityMicroDeconstructor {
       }
     } while (continue && ({i += 1; i} < getMaxSimultaneousSmelt))
     cookTime = 0
-    onInventoryChanged()
-  }
-
-  protected def getPowerToCook = POWER_TO_COOK
-
-  private def roomForItems(items: Array[ItemStack]): Boolean = {
-    val fake = new Array[ItemStack](getSizeInventory)
-    for (i <- 0 until fake.length) {
-      val it = getStackInSlot(i)
-      fake(i) = if (it == null) null else it.copy
-    }
-
-    items.forall(FemtocraftUtils.placeItem(_, fake, null))
+    markDirty()
   }
 
   protected def getMaxSimultaneousSmelt = MAX_SMELT
@@ -228,6 +239,6 @@ object TileEntityBaseEntityMicroDeconstructor {
 
     deconstructingStack = null
     cookTime = 0
-    onInventoryChanged()
+    markDirty()
   }
 }

@@ -607,8 +607,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
 
     @Override
     public void markDirty() {
-        if(!loading)
-         super.markDirty();
+        if (!loading) { super.markDirty(); }
     }
 
     @Override
@@ -824,8 +823,48 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
     }
 
     public void searchForFullConnections() {
-        searchForOutput();
-        searchForInput();
+        List<Integer> check = new ArrayList<>();
+
+        // Check for VacuumTubeTiles first
+        for (int i = 0; i < 6; i++) {
+            ForgeDirection dir = ForgeDirection.getOrientation(i);
+            TileEntity tile = worldObj.getTileEntity(xCoord + dir.offsetX,
+                    yCoord + dir.offsetY, zCoord + dir.offsetZ);
+            if (tile == null) {
+                continue;
+            }
+            if (tile instanceof IVacuumTube) {
+                IVacuumTube tube = (IVacuumTube) tile;
+                if (tube.isInput(ForgeDirection.UNKNOWN)) {
+                    if (addOutput(dir)) {
+                        continue;
+                    }
+                }
+                if (tube.isOutput(ForgeDirection.UNKNOWN)) {
+                    if (addInput(dir)) {
+                        continue;
+                    }
+                }
+            } else {
+                check.add(i);
+            }
+        }
+
+        for (Integer i : check) {
+            ForgeDirection dir = ForgeDirection.getOrientation(i);
+            TileEntity tile = worldObj.getTileEntity(xCoord + dir.offsetX,
+                    yCoord + dir.offsetY, zCoord + dir.offsetZ);
+            if (tile == null) {
+                continue;
+            }
+
+            if (outputDir == ForgeDirection.UNKNOWN && addOutput(dir)) {
+                continue;
+            }
+            if (inputDir == ForgeDirection.UNKNOWN && addInput(dir)) {
+                continue;
+            }
+        }
     }
 
     public boolean searchForConnection() {
@@ -1004,10 +1043,10 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
         canFillInv = true;
         canExtractInv = true;
         validateConnections();
-        if(inputDir == ForgeDirection.UNKNOWN) {
+        if (inputDir == ForgeDirection.UNKNOWN) {
             searchForInput();
         }
-        if(outputDir == ForgeDirection.UNKNOWN) {
+        if (outputDir == ForgeDirection.UNKNOWN) {
             searchForOutput();
         }
     }

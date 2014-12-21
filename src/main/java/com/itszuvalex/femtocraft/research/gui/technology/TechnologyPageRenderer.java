@@ -48,12 +48,12 @@ public class TechnologyPageRenderer implements ITechnologyElementRenderer {
 
     @Override
     public int getWidth() {
-        return GuiTechnology.descriptionWidth;
+        return GuiTechnology.descriptionWidth();
     }
 
     @Override
     public int getHeight() {
-        return GuiTechnology.descriptionHeight;
+        return GuiTechnology.descriptionHeight();
     }
 
     @Override

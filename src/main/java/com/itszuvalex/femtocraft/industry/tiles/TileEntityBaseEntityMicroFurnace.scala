@@ -30,7 +30,7 @@ import com.itszuvalex.femtocraft.industry.blocks.BlockMicroFurnace
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace._
 import com.itszuvalex.femtocraft.industry.traits.IndustryBehavior
 import com.itszuvalex.femtocraft.power.traits.PowerConsumer
-import com.itszuvalex.femtocraft.utils.BaseInventory
+import com.itszuvalex.femtocraft.utils._
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.FurnaceRecipes
@@ -93,14 +93,16 @@ object TileEntityBaseEntityMicroFurnace {
     this.furnaceCookTime * par1 / getTicksToCook
   }
 
-  protected def getTicksToCook = TICKS_TO_COOK
-
   override def isWorking = smeltingStack != null
 
   override def getAccessibleSlotsFromSide(var1: Int) = var1 match {
-    case 1 => Array[Int](0)
-    case _ => Array[Int](1)
+    case 1                              => Array[Int](0)
+    case 0 if getSmeltingResult == null => Array[Int](0)
+    case 0                              => Array[Int]()
+    case _                              => Array[Int](1)
   }
+
+  def getSmeltingResult = FurnaceRecipes.smelting.getSmeltingResult(getStackInSlot(0))
 
   override def canInsertItem(i: Int, itemstack: ItemStack, j: Int) = i match {
     case 1 => false
@@ -118,7 +120,7 @@ object TileEntityBaseEntityMicroFurnace {
       false
     }
     else {
-      val itemstack = FurnaceRecipes.smelting.getSmeltingResult(getStackInSlot(0))
+      val itemstack = getSmeltingResult
       if (itemstack == null) {
         return false
       }
@@ -132,8 +134,6 @@ object TileEntityBaseEntityMicroFurnace {
       result <= getInventoryStackLimit && result <= itemstack.getMaxStackSize
     }
   }
-
-  protected def getPowerToCook = POWER_TO_COOK
 
   override protected def startWork() {
     smeltingStack = getStackInSlot(0).copy
@@ -159,17 +159,25 @@ object TileEntityBaseEntityMicroFurnace {
       }
     } while (continue && {i += 1; i} < getMaxSimultaneousSmelt)
     updateBlockState(true)
-    this.onInventoryChanged()
+    markDirty()
     furnaceCookTime = 0
   }
 
+  protected def getPowerToCook = POWER_TO_COOK
+
   protected def getMaxSimultaneousSmelt = MAX_SMELT
+
+  protected def updateBlockState(working: Boolean) {
+    BlockMicroFurnace.updateFurnaceBlockState(working, this.worldObj, this.xCoord, this.yCoord, this.zCoord)
+  }
 
   override protected def continueWork() {
     furnaceCookTime += 1
   }
 
   override protected def canFinishWork = furnaceCookTime == getTicksToCook
+
+  protected def getTicksToCook = TICKS_TO_COOK
 
   override protected def finishWork() {
     val itemstack = FurnaceRecipes.smelting.getSmeltingResult(smeltingStack)
@@ -183,12 +191,8 @@ object TileEntityBaseEntityMicroFurnace {
       }
       smeltingStack = null
       updateBlockState(false)
-      this.onInventoryChanged()
+      markDirty()
     }
     furnaceCookTime = 0
-  }
-
-  protected def updateBlockState(working: Boolean) {
-    BlockMicroFurnace.updateFurnaceBlockState(working, this.worldObj, this.xCoord, this.yCoord, this.zCoord)
   }
 }

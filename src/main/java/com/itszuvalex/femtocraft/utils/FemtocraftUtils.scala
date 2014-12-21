@@ -40,11 +40,11 @@ import net.minecraftforge.oredict.OreDictionary
 import scala.collection.JavaConversions._
 
 object FemtocraftUtils {
-  def indexOfForgeDirection(dir: ForgeDirection) = dir.ordinal
-
-  def isPlayerOnline(username: String) = MinecraftServer.getServer.getAllUsernames.contains(username)
+  def indexOfForgeDirection(dir: ForgeDirection) = ForgeDirection.VALID_DIRECTIONS.indexOf(dir)
 
   def isPlayerAssistantsOnline(username: String): Boolean = Femtocraft.assistantManager.getPlayerAssistants(username).exists(p => isPlayerOnline(p._1))
+
+  def isPlayerOnline(username: String) = MinecraftServer.getServer.getAllUsernames.contains(username)
 
   def getPlayer(username: String) = Minecraft.getMinecraft.theWorld.getPlayerEntityByName(username)
 
@@ -226,8 +226,6 @@ object FemtocraftUtils {
 
   def sendMessageToPlayer(username: String, message: String, formatting: String): Boolean = sendMessageToPlayer(MinecraftServer.getServer.getConfigurationManager.func_152612_a(username), message, formatting)
 
-  def sendMessageToPlayer(assistant: EntityPlayer, message: String): Boolean = sendMessageToPlayer(assistant, message, "")
-
   def sendMessageToPlayer(assistant: EntityPlayer, message: String, formatting: String): Boolean = {
     if (assistant != null) {
       assistant.addChatMessage(new ChatComponentText(new StringBuilder().append(EnumChatFormatting.GOLD).append("Femtocraft").append(EnumChatFormatting.RESET).append(": ").append(formatting).append(message).append(EnumChatFormatting.RESET).toString()))
@@ -235,5 +233,7 @@ object FemtocraftUtils {
     }
     false
   }
+
+  def sendMessageToPlayer(assistant: EntityPlayer, message: String): Boolean = sendMessageToPlayer(assistant, message, "")
 }
 
