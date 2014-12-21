@@ -434,7 +434,7 @@ class ManagerAssemblerRecipe {
     if (!s.contains(i.itemID)) {
       val recipe = getRecipe(i)
       var ret: (Float, Float, Float, Float) = null
-      if (recipe != null) {
+      if (recipe != null && recipe.output != null && recipe.output.stackSize > 0) {
         mass += recipe.mass / recipe.output.stackSize
         recipe.input.foreach {
                                case in if !ItemStack.areItemStacksEqual(i, in) =>

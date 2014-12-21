@@ -326,7 +326,7 @@ object FemtocraftTechnologies {
                           false,
                           getInput(new ItemStack(Femtocraft.itemBasicAICore)),
                           new ItemStack(Femtocraft.itemBasicAICore),
-                          " Much like your previous machines had a micro logic core, your new machines are going to need controller to manage all their processes.",
+                          " Much like your previous machines had a micro logic core, your new machines are going to need a controller to manage all their processes.",
                           " You doubt that there exists one core that is capable of handling all of the different mechanisms required, but you can at least devise a starting point." +
                           Femtocraft.itemBasicAICore.toRecipeWithInfoString(RecipeType.ASSEMBLER, "This core provides a starting framework for plugging in additional logic."),
                           false, false)

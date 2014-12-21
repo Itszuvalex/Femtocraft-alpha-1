@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="334ed2b9-d383-45b1-801c-a13fbb9ee325" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/plasma/BlockPlasma.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/plasma/FusionReaction.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/plasma/FusionReactorCore.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/plasma/TileEntityPlasma.scala" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/plasma/BlockPlasma.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/plasma/FusionReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/plasma/FusionReactorCore.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/plasma/TileEntityPlasma.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnology.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Femtocraft.iws" afterPath="$PROJECT_DIR$/Femtocraft.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/FemtocraftTechnologies.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/FemtocraftTechnologies.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnology.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnology.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/ManagerAssemblerRecipe.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/ManagerAssemblerRecipe.scala" />
     </list>
     <ignored path="Femtocraft.iws" />
@@ -80,18 +70,8 @@
       <file leaf-file-name="FemtocraftTechnologies.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/FemtocraftTechnologies.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="5313" max-vertical-offset="17112">
-              <caret line="270" column="206" selection-start-line="270" selection-start-column="206" selection-end-line="270" selection-end-column="206" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FemtocraftEventHookContainer.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/FemtocraftEventHookContainer.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="759" max-vertical-offset="1679">
-              <caret line="85" column="53" selection-start-line="85" selection-start-column="53" selection-end-line="85" selection-end-column="53" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="6739" max-vertical-offset="17917">
+              <caret line="328" column="122" selection-start-line="328" selection-start-column="122" selection-end-line="328" selection-end-column="122" />
               <folding />
             </state>
           </provider>
@@ -100,8 +80,28 @@
       <file leaf-file-name="ManagerAssemblerRecipe.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/ManagerAssemblerRecipe.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.71555555" vertical-offset="8924" max-vertical-offset="17066">
-              <caret line="454" column="16" selection-start-line="454" selection-start-column="16" selection-end-line="454" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.25555557" vertical-offset="8924" max-vertical-offset="17066">
+              <caret line="436" column="79" selection-start-line="436" selection-start-column="79" selection-end-line="436" selection-end-column="79" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AssemblerDefaults.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/AssemblerDefaults.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="15474" max-vertical-offset="27370">
+              <caret line="459" column="6" selection-start-line="459" selection-start-column="6" selection-end-line="459" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ManagerRecipe.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/ManagerRecipe.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="552" max-vertical-offset="1541">
+              <caret line="87" column="253" selection-start-line="87" selection-start-column="253" selection-end-line="87" selection-end-column="253" />
               <folding />
             </state>
           </provider>
@@ -170,12 +170,12 @@
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyCraftingRenderer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyRealityOverlocker.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/RecipeHelper.scala" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/ManagerRecipe.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/plasma/BlockPlasma.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/plasma/FusionReactorCore.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/plasma/TileEntityPlasma.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/plasma/FusionReaction.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnology.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/ManagerRecipe.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/FemtocraftTechnologies.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/ManagerAssemblerRecipe.scala" />
       </list>
@@ -677,6 +677,70 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="TileEntityDecontaminationChamber.scala" />
               <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$ScalaFileTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="managers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="femtocraft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="managers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -1206,7 +1270,19 @@
       <option name="project" value="LOCAL" />
       <updated>1419065722309</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Finish OpenGL stack underflow error.  Fix component breakdown numbers.">
+      <created>1419127060747</created>
+      <option name="number" value="00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1419127060747</updated>
+    </task>
+    <task id="LOCAL-00032" summary="All micro-tier technologies have descriptions.">
+      <created>1419133750475</created>
+      <option name="number" value="00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1419133750475</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1289,8 +1365,6 @@
       <TodoPanelSettings />
     </option>
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
-    <MESSAGE value="More Scalafication.&#10;&#10;Changed some of the simpler classes, and required java interoperability changes." />
-    <MESSAGE value="More Scalafication of power package." />
     <MESSAGE value="Redid AssemblerRecipe database.&#10;&#10;No more SQLite!!!!&#10;&#10;And the entire thing generates in &lt;2 seconds.  No kidding.  I wonder how damn fast it'll be for larger packs." />
     <MESSAGE value="Fix ordering errors that caused nullptrs when referring to regular crafting added by Femtocraft.&#10;&#10;This also means regular Femtocraft recipes are added in time to be scraped, as should happen." />
     <MESSAGE value="Updated correct mcmod.info.  Removed unneeded sqlite dependency" />
@@ -1314,7 +1388,9 @@
     <MESSAGE value="Fix issues with Inventory trait, and VacuumTubes." />
     <MESSAGE value="Fix nether star rendering in GuiTechnology." />
     <MESSAGE value="ManagerRecipe to scala." />
-    <option name="LAST_COMMIT_MESSAGE" value="ManagerRecipe to scala." />
+    <MESSAGE value="Finish OpenGL stack underflow error.  Fix component breakdown numbers." />
+    <MESSAGE value="All micro-tier technologies have descriptions." />
+    <option name="LAST_COMMIT_MESSAGE" value="All micro-tier technologies have descriptions." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1336,17 +1412,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyMachining.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7521552" vertical-offset="659" max-vertical-offset="1587">
-          <caret line="86" column="15" selection-start-line="86" selection-start-column="15" selection-end-line="86" selection-end-column="15" />
-          <folding>
-            <element signature="e#4110#4111#0" expanded="false" />
-            <element signature="e#4151#4152#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/GuiTechnologyPaperSchematic.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7521552" vertical-offset="1878" max-vertical-offset="2806">
@@ -1628,14 +1693,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/ManagerRecipe.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="69" max-vertical-offset="1541">
-          <caret line="59" column="79" selection-start-line="59" selection-start-column="79" selection-end-line="59" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/plasma/FemtocraftPlasmaUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1549" max-vertical-offset="2760">
@@ -1649,7 +1706,7 @@
         <state vertical-scroll-proportion="0.37985137" vertical-offset="23" max-vertical-offset="2024">
           <caret line="40" column="45" selection-start-line="40" selection-start-column="45" selection-end-line="40" selection-end-column="45" />
           <folding>
-            <element signature="e#1068#1084#0" expanded="true" />
+            <element signature="e#1068#1084#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1703,8 +1760,8 @@
         <state vertical-scroll-proportion="0.84444445" vertical-offset="2598" max-vertical-offset="9729">
           <caret line="146" column="0" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#1079#1095#0" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
+            <element signature="e#1079#1095#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1725,26 +1782,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/FemtocraftTechnologies.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/FemtocraftEventHookContainer.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5313" max-vertical-offset="17112">
-          <caret line="270" column="206" selection-start-line="270" selection-start-column="206" selection-end-line="270" selection-end-column="206" />
+        <state vertical-scroll-proportion="0.48555556" vertical-offset="759" max-vertical-offset="1679">
+          <caret line="85" column="53" selection-start-line="85" selection-start-column="53" selection-end-line="85" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/FemtocraftEventHookContainer.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/AssemblerDefaults.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="759" max-vertical-offset="1679">
-          <caret line="85" column="53" selection-start-line="85" selection-start-column="53" selection-end-line="85" selection-end-column="53" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="15474" max-vertical-offset="27370">
+          <caret line="459" column="6" selection-start-line="459" selection-start-column="6" selection-end-line="459" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/ManagerRecipe.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="552" max-vertical-offset="1541">
+          <caret line="87" column="253" selection-start-line="87" selection-start-column="253" selection-end-line="87" selection-end-column="253" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/FemtocraftTechnologies.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6739" max-vertical-offset="17917">
+          <caret line="328" column="122" selection-start-line="328" selection-start-column="122" selection-end-line="328" selection-end-column="122" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/assembler/ManagerAssemblerRecipe.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71555555" vertical-offset="8924" max-vertical-offset="17066">
-          <caret line="454" column="16" selection-start-line="454" selection-start-column="16" selection-end-line="454" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.25555557" vertical-offset="8924" max-vertical-offset="17066">
+          <caret line="436" column="79" selection-start-line="436" selection-start-column="79" selection-end-line="436" selection-end-column="79" />
           <folding />
         </state>
       </provider>
