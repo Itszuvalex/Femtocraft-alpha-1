@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft.managers
 import java.util
 
 import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.managers.RecipeHelper._
 import com.itszuvalex.femtocraft.managers.assembler.ManagerAssemblerRecipe
 import com.itszuvalex.femtocraft.managers.dimensional.ManagerDimensionalRecipe
 import com.itszuvalex.femtocraft.managers.temporal.ManagerTemporalRecipe
@@ -32,8 +33,6 @@ import net.minecraft.init.{Blocks, Items}
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.{CraftingManager, IRecipe}
 import net.minecraftforge.oredict.ShapedOreRecipe
-
-import com.itszuvalex.femtocraft.managers.RecipeHelper._
 
 class ManagerRecipe {
   var assemblyRecipes    = new ManagerAssemblerRecipe
@@ -64,7 +63,7 @@ class ManagerRecipe {
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemPaperSchematic, 3), Array("###", "###", "###", '#', Items.paper): _*)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemBoard), Array("###", '#', Items.stick): _*)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemMicrochip), Array("#", "$", '#', Femtocraft.itemSpoolGold, '$', Femtocraft.itemDopedBoard): _*)
-    CraftingManager.getInstance.getRecipeList.asInstanceOf[util.List[IRecipe]].add(new ShapedOreRecipe(new ItemStack(Femtocraft.itemSpool), Array[Any]("# #", "#-#", "# #", '#', "plankWood", '-', "stickWood").box:_*))
+    CraftingManager.getInstance.getRecipeList.asInstanceOf[util.List[IRecipe]].add(new ShapedOreRecipe(new ItemStack(Femtocraft.itemSpool), Array[Any]("# #", "#-#", "# #", '#', "plankWood", '-', "stickWood").box: _*))
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemSpoolGold, 8), Array("###", "#-#", "###", '#', Items.gold_ingot, '-', Femtocraft.itemSpool): _*)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemSpoolPlatinum, 8), Array("###", "#-#", "###", '#', Femtocraft.itemIngotPlatinum, '-', Femtocraft.itemSpool): _*)
     GameRegistry.addShapelessRecipe(new ItemStack(Femtocraft.itemConductivePowder, 2), Array(new ItemStack(Femtocraft.itemIngotFarenite), new ItemStack(Items.dye, 1, 4)): _*)
@@ -86,8 +85,8 @@ class ManagerRecipe {
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockMicroDeconstructor), Array("TMT", "MDM", "TCT", 'T', Femtocraft.itemIngotTemperedTitanium, 'M', Femtocraft.itemMicroPlating, 'D', Femtocraft.itemDissassemblyArray, 'C', Femtocraft.itemMicroLogicCore): _*)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockMicroReconstructor), Array("TMT", "MAM", "TCT", 'T', Femtocraft.itemIngotTemperedTitanium, 'M', Femtocraft.itemMicroPlating, 'A', Femtocraft.itemAssemblyArray, 'C', Femtocraft.itemMicroLogicCore): _*)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockMicroFurnaceUnlit), Array("TMT", "MHM", "TLT", 'T', Femtocraft.itemIngotTemperedTitanium, 'M', Femtocraft.itemMicroPlating, 'H', Femtocraft.itemHeatingElement, 'L', Femtocraft.itemMicroLogicCore): _*)
-    GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockMagneticInductionGenerator), Array("MHT", "MHC", "MHT", 'M', Femtocraft.itemMicroPlating, 'H', Femtocraft.itemHeatingElement, 'T', Femtocraft.itemIngotTemperedTitanium, 'C', Femtocraft.itemMicroCoil): _*)
+    GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockMagneticInductionGenerator), Array("MHM", "CLC", "MHM", 'M', Femtocraft.itemMicroPlating, 'H', Femtocraft.itemHeatingElement, 'C', Femtocraft.itemMicroCoil, 'L', Femtocraft.itemChunkLodestone): _*)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemVacuumCore), Array("LPL", "FEF", "LPL", 'P', Femtocraft.itemIngotPlatinum, 'F', Femtocraft.itemIngotFarenite, 'E', Items.ender_pearl, 'L', Femtocraft.itemNuggetLodestone): _*)
-    GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockSuctionPipe, 16), Array("TFT", " V ", "TFT", 'T', Femtocraft.itemIngotTemperedTitanium, 'F', Items.iron_ingot, 'V', Femtocraft.itemVacuumCore): _*)
+    GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockSuctionPipe, 16), Array("TFT", "GVG", "TFT", 'T', Femtocraft.itemIngotTemperedTitanium, 'F', Items.iron_ingot, 'V', Femtocraft.itemVacuumCore, 'G', Blocks.glass): _*)
   }
 }

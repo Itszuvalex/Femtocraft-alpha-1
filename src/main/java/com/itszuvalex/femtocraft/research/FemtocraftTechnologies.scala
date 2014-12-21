@@ -266,25 +266,30 @@ object FemtocraftTechnologies {
                           false,
                           getInput(new ItemStack(Femtocraft.itemVacuumCore)),
                           new ItemStack(Femtocraft.itemVacuumCore),
-                         "Enderpearls exert a strange effect, seemingly bending space around them.  You wonder what the effect of Lodestone would be when augmented with the reality-warping properties of this astouding item.",
-                         "The world is stranger than you ever thought it would be.  Simple contraptions are capable of altering the foundations of reality.  And you have the knowledge to capitalize on it." +
-                         Femtocraft.itemVacuumCore.toRecipeWithInfoString(RecipeType.CRAFTING, "The addition of the enderpearl seems to have both amplified and generalized the magnetic strength of Lodestone."),
-                         false,false)
+                          "Enderpearls exert a strange effect, seemingly bending space around them.  You wonder what the effect of Lodestone would be when augmented with the reality-warping properties of this astouding item.",
+                          "The world is stranger than you ever thought it would be.  Simple contraptions are capable of altering the foundations of reality.  And you have the knowledge to capitalize on it." +
+                          Femtocraft.itemVacuumCore.toRecipeWithInfoString(RecipeType.CRAFTING, "The addition of the enderpearl seems to have both amplified and generalized the magnetic strength of Lodestone."),
+                          false, false)
     ret += new Technology(VACUUM_TUBES,
-                          "These tubes contain nothing!",
+                          "These tubes blow!",
                           EnumTechLevel.MICRO,
                           Array[String](POWER_OF_NOTHING),
                           new ItemStack(Femtocraft.blockVacuumTube),
                           false,
                           getInput(new ItemStack(Femtocraft.blockVacuumTube)),
-                          new ItemStack(Femtocraft.blockVacuumTube))
-    ret += new Technology(VACUUM_TUBE_HUB,
-                          "A place for nothing to congregate.",
-                          EnumTechLevel.MICRO,
-                          Array[String](VACUUM_TUBES),
-                          null,
-                          false,
-                          null)
+                          new ItemStack(Femtocraft.blockVacuumTube),
+                          "With some clever leapfrogging and metal channels, you think that you can use your newfound Vacuum Cores to enable item transfer.",
+                          "Simple but fast item transfer." +
+                          Femtocraft.blockVacuumTube.toRecipeWithInfoString(RecipeType.ASSEMBLER, "With four slots per block, this 1-way item transfer works at blazing speeds.") +
+                          "Vacuum tubes will glow red when they contain too many items.  Additionally, they will suck items in from the world, or blow them back out.",
+                          false, false)
+    //    ret += new Technology(VACUUM_TUBE_HUB,
+    //                          "A place for nothing to congregate.",
+    //                          EnumTechLevel.MICRO,
+    //                          Array[String](VACUUM_TUBES),
+    //                          null,
+    //                          false,
+    //                          null)
     ret += new Technology(SUCTION_PIPES,
                           "These pipes suck!",
                           EnumTechLevel.MICRO,
@@ -292,23 +297,39 @@ object FemtocraftTechnologies {
                           new ItemStack(Femtocraft.blockSuctionPipe),
                           false,
                           getInput(new ItemStack(Femtocraft.blockSuctionPipe)),
-                          new ItemStack(Femtocraft.blockSuctionPipe))
+                          new ItemStack(Femtocraft.blockSuctionPipe),
+                          "With a watertight tube and a Vacuum Tube, it's dead simple to induce liquid transfer.",
+                          "Simple but fast liquid distribution." +
+                          Femtocraft.blockSuctionPipe.toRecipeWithInfoString(RecipeType.CRAFTING, "These 2-mode pipes will either distribute or pull liquid from adjacent tanks.") +
+                          "Suction pipes will attempt to distribute liquid evenly throughout all connected pipes.  Shift-right-click with an interface device turns the pipe to blackout mode, stopping all packet updates and blocking out liquid rendering.",
+                          false, false)
     ret += new Technology(NANO_CIRCUITS,
-                          "",
+                          "Machine test, machine approved.",
                           EnumTechLevel.NANO,
                           Array[String](MECHANICAL_PRECISION, BASIC_CIRCUITS),
                           new ItemStack(Femtocraft.itemNanochip),
                           true,
                           getInput(new ItemStack(Femtocraft.itemNanochip)),
-                          new ItemStack(Femtocraft.itemNanochip))
+                          new ItemStack(Femtocraft.itemNanochip),
+                          " Your first machine-fabricated circuitry.  Let's see just how small the machines can go.",
+                          Femtocraft.itemNanochip.toRecipeWithInfoString(RecipeType.ASSEMBLER,"A direct improvement on the microchip.  Key farenite trails allow for blazing fast logic propagation.") +
+                          "With the addition of redstone logic, the general nanochip can become specialized for use in key circuit designs." +
+                          Femtocraft.itemNanoCalculator.toRecipeWithInfoString(RecipeType.ASSEMBLER, "The calculator is great for complex mathematical operations that are too difficult for applications without a computer.") +
+                          Femtocraft.itemNanoRegulator.toRecipeWithInfoString(RecipeType.ASSEMBLER, "The regulator has applications in multi-variable resource management problems.") +
+                          Femtocraft.itemNanoSimulator.toRecipeWithInfoString(RecipeType.ASSEMBLER,"The simulator mimics material processes for use in predictive analysis."),
+                          false, false)
     ret += new Technology(ADVANCED_PROGRAMMING,
-                          "",
+                          "Technology++",
                           EnumTechLevel.NANO,
                           Array[String](NANO_CIRCUITS),
                           new ItemStack(Femtocraft.itemBasicAICore),
                           false,
                           getInput(new ItemStack(Femtocraft.itemBasicAICore)),
-                          new ItemStack(Femtocraft.itemBasicAICore))
+                          new ItemStack(Femtocraft.itemBasicAICore),
+                          " Much like your previous machines had a micro logic core, your new machines are going to need controller to manage all their processes.",
+                          " You doubt that there exists one core that is capable of handling all of the different mechanisms required, but you can at least devise a starting point." +
+                          Femtocraft.itemBasicAICore.toRecipeWithInfoString(RecipeType.ASSEMBLER, "This core provides a starting framework for plugging in additional logic."),
+                          false, false)
     ret += new Technology(WORKLOAD_SCHEDULING,
                           "",
                           EnumTechLevel.NANO,
@@ -325,13 +346,13 @@ object FemtocraftTechnologies {
                           false,
                           getInput(new ItemStack(Femtocraft.itemLearningCore)),
                           new ItemStack(Femtocraft.itemLearningCore))
-    ret += new Technology(DISCRIMINATING_VACUUM_TUBE,
-                          "",
-                          EnumTechLevel.NANO,
-                          Array[String](VACUUM_TUBE_HUB, PATTERN_RECOGNITION),
-                          new ItemStack(Femtocraft.blockVacuumTube),
-                          false,
-                          null)
+    //    ret += new Technology(DISCRIMINATING_VACUUM_TUBE,
+    //                          "",
+    //                          EnumTechLevel.NANO,
+    //                          Array[String](VACUUM_TUBE_HUB, PATTERN_RECOGNITION),
+    //                          new ItemStack(Femtocraft.blockVacuumTube),
+    //                          false,
+    //                          null)
     ret += new Technology(RESOURCE_OPTIMIZATION,
                           "",
                           EnumTechLevel.NANO,
@@ -408,7 +429,11 @@ object FemtocraftTechnologies {
                           new ItemStack(Femtocraft.blockMagneticInductionGenerator),
                           false,
                           getInput(new ItemStack(Femtocraft.blockMagneticInductionGenerator)),
-                          new ItemStack(Femtocraft.blockMagneticInductionGenerator))
+                          new ItemStack(Femtocraft.blockMagneticInductionGenerator),
+                          " If Lodestone exerts a force upon other metals, you figure that you must be able to use this force to generate power.",
+                          " The curious arrangement of metal in Heating Coils leads to the interesting property that, instead of consuming power, moving a Lodestone-interactive material near it produces power." +
+                          Femtocraft.blockMagneticInductionGenerator.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Generates power based on the movement of neighboring magnetic blocks."),
+                          false, false)
     ret += new Technology(ADVANCED_CHEMISTRY,
                           "",
                           EnumTechLevel.NANO,
@@ -554,8 +579,8 @@ object FemtocraftTechnologies {
                           getInput(new ItemStack(Femtocraft.blockMicroChargingCapacitor)),
                           new ItemStack(Femtocraft.blockMicroChargingCapacitor),
                           "While walking past your charging coils on a particularly humid day, you couldn't help but notice that the coils couldn't keep up with all of the energy in the air.  Perhaps you could make something that would allow the coils to perform better in stormy cnoditions.",
-                          "" + Femtocraft.blockMicroChargingCapacitor.toRecipeWithInfoString(RecipeType.ASSEMBLER, "This block temporarily stores the excess power generated by the coils, releasing it once the power surges abate.") +
-                          "By placing a capacative setup at the top of the charging coil, you notice significant improvement in power generation in all weather.  However, during rain storms this block becomes significantly more cost effective.  During thunderstorms it shows that it is outright one of your best inventions.",
+                          Femtocraft.blockMicroChargingCapacitor.toRecipeWithInfoString(RecipeType.ASSEMBLER, "This block temporarily stores the excess power generated by the coils, releasing it once the power surges abate.") +
+                          "By placing a capacitive setup at the top of the charging coil, you notice significant improvement in power generation in all weather.  However, during rain storms this block becomes significantly more cost effective.  During thunderstorms it shows that it is outright one of your best inventions.",
                           false, false)
     ret += new Technology(THORIUM_FISSIBILITY,
                           "",
@@ -726,13 +751,23 @@ object FemtocraftTechnologies {
                           getInput(new ItemStack(Items.nether_star)),
                           new ItemStack(Items.nether_star))
     ret += new Technology(MOLECULAR_MANIPULATION,
-                          "",
+                          "Many machines manipulate molecules, many more merely make messes.",
                           EnumTechLevel.MICRO,
                           Array[String](MECHANICAL_PRECISION, BASIC_CHEMISTRY),
                           new ItemStack(Femtocraft.blockMicroDeconstructor),
                           false,
                           getInput(new ItemStack(Femtocraft.itemKineticPulverizer)),
-                          new ItemStack(Femtocraft.itemKineticPulverizer))
+                          new ItemStack(Femtocraft.itemKineticPulverizer),
+                          " With dutiful application of all the principles you have so learned, theoretically it should be possible to manipulate the underlying structures of matter.",
+                          " With firm resolve, you start the path down the rabbit hole." +
+                          Femtocraft.itemKineticPulverizer.toRecipeWithInfoString(RecipeType.CRAFTING, "A reinforced piston with special circuitry to prevent over enthusiastic crushing.") +
+                          Femtocraft.itemDissassemblyArray.toRecipeWithInfoString(RecipeType.CRAFTING, "A series of pulverizers together ensures maximum controlled destruction.") +
+                          Femtocraft.blockMicroDeconstructor.toRecipeWithInfoString(RecipeType.CRAFTING, "This machine takes in any item and breaks it down into its micro-tier components.") +
+                          "With deconstructing items out of the way, it's probably a good idea to figure out a way to reconstruct them.  Building is always harder than destroying, but somehow you've made it happen." +
+                          Femtocraft.itemArticulatingArm.toRecipeWithInfoString(RecipeType.CRAFTING, "A long assembly of metal with multiple degrees of freedom, ending with a precision implement.") +
+                          Femtocraft.itemAssemblyArray.toRecipeWithInfoString(RecipeType.CRAFTING, "Two arms working in tandem allow for the precise joining of components.") +
+                          Femtocraft.blockMicroReconstructor.toRecipeWithInfoString(RecipeType.CRAFTING, "Given a schematic and proper materials, this can turn micro-tier components back into useful things."),
+                          false, false)
     ret += new Technology(MACROSCOPIC_STRUCTURES,
                           "The patterns everything take.",
                           EnumTechLevel.MACRO,
