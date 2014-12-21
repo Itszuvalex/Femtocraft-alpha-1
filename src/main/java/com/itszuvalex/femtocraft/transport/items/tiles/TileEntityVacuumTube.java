@@ -485,9 +485,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
             return;
         }
 
-        // Throw the item out into the world!
-        EntityItem entityitem = new EntityItem(worldObj, xCoord + .5,
-                yCoord + .5, zCoord + .5, dropItem.copy());
+
         ForgeDirection dir = outputDir;
         if (dir == ForgeDirection.UNKNOWN) {
             if (inputDir == ForgeDirection.UNKNOWN) {
@@ -496,6 +494,9 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                 dir = inputDir.getOpposite();
             }
         }
+        // Throw the item out into the world!
+        EntityItem entityitem = new EntityItem(worldObj, xCoord + .5 + dir.offsetX * .6f,
+                yCoord + .5 + dir.offsetY * .6f, zCoord + .5f + dir.offsetZ * .6f, dropItem.copy());
 
         entityitem.motionX = dir.offsetX;
         entityitem.motionY = dir.offsetY;
@@ -858,10 +859,10 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                 continue;
             }
 
-            if (outputDir == ForgeDirection.UNKNOWN && addOutput(dir)) {
+            if (missingOutput() && addOutput(dir)) {
                 continue;
             }
-            if (inputDir == ForgeDirection.UNKNOWN && addInput(dir)) {
+            if (missingInput() && addInput(dir)) {
                 continue;
             }
         }

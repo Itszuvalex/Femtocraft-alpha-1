@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="334ed2b9-d383-45b1-801c-a13fbb9ee325" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Femtocraft.iws" afterPath="$PROJECT_DIR$/Femtocraft.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/utils/FemtocraftUtils.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/utils/FemtocraftUtils.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/TechnologyLineRenderer.java" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/TechnologyLineRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/TechnologyPageRenderer.java" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/TechnologyPageRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/tiles/TileEntityBaseEntityMicroDeconstructor.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/tiles/TileEntityBaseEntityMicroDeconstructor.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/tiles/TileEntityBaseEntityMicroFurnace.scala" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/tiles/TileEntityBaseEntityMicroFurnace.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/liquids/tiles/TileEntitySuctionPipe.java" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/liquids/tiles/TileEntitySuctionPipe.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/items/tiles/TileEntityVacuumTube.java" afterPath="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/items/tiles/TileEntityVacuumTube.java" />
     </list>
     <ignored path="Femtocraft.iws" />
@@ -81,11 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TileEntityBaseEntityMicroDeconstructor.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/tiles/TileEntityBaseEntityMicroDeconstructor.scala">
+      <file leaf-file-name="TileEntitySuctionPipe.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/liquids/tiles/TileEntitySuctionPipe.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1471" max-vertical-offset="4945">
-              <caret line="115" column="46" selection-start-line="115" selection-start-column="46" selection-end-line="115" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="7160" max-vertical-offset="10833">
+              <caret line="378" column="25" selection-start-line="378" selection-start-column="25" selection-end-line="378" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -94,76 +90,8 @@
       <file leaf-file-name="TileEntityVacuumTube.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/items/tiles/TileEntityVacuumTube.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8740416" vertical-offset="17855" max-vertical-offset="23253">
-              <caret line="863" column="53" selection-start-line="863" selection-start-column="53" selection-end-line="863" selection-end-column="53" />
-              <folding>
-                <element signature="e#22793#22794#0" expanded="true" />
-                <element signature="e#22844#22845#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TileEntityBaseEntityMicroFurnace.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/tiles/TileEntityBaseEntityMicroFurnace.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1357" max-vertical-offset="4255">
-              <caret line="100" column="54" selection-start-line="100" selection-start-column="54" selection-end-line="100" selection-end-column="54" />
-              <folding>
-                <element signature="e#1070#1125#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TechnologyLineRenderer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/TechnologyLineRenderer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="23" max-vertical-offset="1081">
-              <caret line="54" column="46" selection-start-line="54" selection-start-column="46" selection-end-line="54" selection-end-column="46" />
-              <folding>
-                <element signature="e#1971#1972#0" expanded="true" />
-                <element signature="e#2026#2027#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TileEntityBaseEntityMicroReconstructor.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/tiles/TileEntityBaseEntityMicroReconstructor.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="5931" max-vertical-offset="6900">
-              <caret line="36" column="7" selection-start-line="36" selection-start-column="7" selection-end-line="36" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TileEntityBaseEntityNanoEnmesher.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/tiles/TileEntityBaseEntityNanoEnmesher.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2504" max-vertical-offset="3404">
-              <caret line="37" column="21" selection-start-line="37" selection-start-column="21" selection-end-line="37" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TileEntityBaseEntityNanoHorologe.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/tiles/TileEntityBaseEntityNanoHorologe.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2481" max-vertical-offset="3381">
-              <caret line="37" column="21" selection-start-line="37" selection-start-column="21" selection-end-line="37" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ManagerRecipe.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/managers/ManagerRecipe.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2001" max-vertical-offset="2254">
-              <caret line="87" column="253" selection-start-line="87" selection-start-column="253" selection-end-line="87" selection-end-column="253" />
+            <state vertical-scroll-proportion="0.55969334" vertical-offset="9931" max-vertical-offset="23230">
+              <caret line="498" column="45" selection-start-line="498" selection-start-column="45" selection-end-line="498" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -199,7 +127,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityNanoCubePort.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/gui/GuiMagnetohydrodynamicGenerator.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/utils/FemtocraftDataUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/liquids/tiles/TileEntitySuctionPipe.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityFemtoStellaratorCore.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityFemtoStellaratorOpticalMaser.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityFemtoStellaratorHousing.java" />
@@ -239,6 +166,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/gui/technology/TechnologyLineRenderer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/tiles/TileEntityBaseEntityMicroFurnace.scala" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/tiles/TileEntityBaseEntityMicroDeconstructor.scala" />
+        <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/liquids/tiles/TileEntitySuctionPipe.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/items/tiles/TileEntityVacuumTube.java" />
       </list>
     </option>
@@ -1222,7 +1150,13 @@
       <option name="project" value="LOCAL" />
       <updated>1419134550893</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Smarter Vacuum Tube placement logic.&#10;&#10;Deconstructors/Furnaces now gate the bottom output.  If they don't know what to do with an item in the input slot, the bottom allows extraction from input.">
+      <created>1419190238663</created>
+      <option name="number" value="00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1419190238663</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1305,7 +1239,6 @@
       <TodoPanelSettings />
     </option>
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
-    <MESSAGE value="Fix ordering errors that caused nullptrs when referring to regular crafting added by Femtocraft.&#10;&#10;This also means regular Femtocraft recipes are added in time to be scraped, as should happen." />
     <MESSAGE value="Updated correct mcmod.info.  Removed unneeded sqlite dependency" />
     <MESSAGE value="XML Loaders and LoaderWriters for remaining recipes types, and magnetism mapping." />
     <MESSAGE value="Temporal, Dimensional, Magnetism Mappings all load from XML files.&#10;&#10;These also support custom recipes in the custom folder." />
@@ -1330,7 +1263,8 @@
     <MESSAGE value="Finish OpenGL stack underflow error.  Fix component breakdown numbers." />
     <MESSAGE value="All micro-tier technologies have descriptions." />
     <MESSAGE value="Fix component registry crash." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix component registry crash." />
+    <MESSAGE value="Smarter Vacuum Tube placement logic.&#10;&#10;Deconstructors/Furnaces now gate the bottom output.  If they don't know what to do with an item in the input slot, the bottom allows extraction from input." />
+    <option name="LAST_COMMIT_MESSAGE" value="Smarter Vacuum Tube placement logic.&#10;&#10;Deconstructors/Furnaces now gate the bottom output.  If they don't know what to do with an item in the input slot, the bottom allows extraction from input." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1352,13 +1286,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/net/minecraft/client/renderer/RenderHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16254126" vertical-offset="424" max-vertical-offset="2047">
-          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1230/forgeSrc-1.7.10-10.13.2.1230-sources.jar!/net/minecraft/client/renderer/texture/TextureManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.21947195" vertical-offset="1137" max-vertical-offset="3565">
@@ -1569,13 +1496,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/liquids/tiles/TileEntitySuctionPipe.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.197152" vertical-offset="5865" max-vertical-offset="10833">
-          <caret line="41" column="6" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/power/tiles/TileEntityDecontaminationChamber.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.025191676" vertical-offset="414" max-vertical-offset="8165">
@@ -1610,14 +1530,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.28111112" vertical-offset="8924" max-vertical-offset="17066">
           <caret line="437" column="52" selection-start-line="437" selection-start-column="52" selection-end-line="437" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/FemtocraftTechnologies.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="7544" max-vertical-offset="17917">
-          <caret line="328" column="122" selection-start-line="328" selection-start-column="122" selection-end-line="328" selection-end-column="122" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1685,10 +1597,10 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="23" max-vertical-offset="1035">
           <caret line="55" column="47" selection-start-line="55" selection-start-column="47" selection-end-line="55" selection-end-column="47" />
           <folding>
-            <element signature="e#1956#1957#0" expanded="true" />
-            <element signature="e#2011#2012#0" expanded="true" />
-            <element signature="e#2055#2056#0" expanded="true" />
-            <element signature="e#2111#2112#0" expanded="true" />
+            <element signature="e#1956#1957#0" expanded="false" />
+            <element signature="e#2011#2012#0" expanded="false" />
+            <element signature="e#2055#2056#0" expanded="false" />
+            <element signature="e#2111#2112#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1706,8 +1618,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="23" max-vertical-offset="1081">
           <caret line="54" column="46" selection-start-line="54" selection-start-column="46" selection-end-line="54" selection-end-column="46" />
           <folding>
-            <element signature="e#1971#1972#0" expanded="true" />
-            <element signature="e#2026#2027#0" expanded="true" />
+            <element signature="e#1971#1972#0" expanded="false" />
+            <element signature="e#2026#2027#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1724,20 +1636,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/industry/tiles/TileEntityBaseEntityMicroDeconstructor.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1471" max-vertical-offset="4945">
-          <caret line="115" column="46" selection-start-line="115" selection-start-column="46" selection-end-line="115" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4945">
+          <caret line="120" column="0" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/api/transport/IVacuumTube.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.3603505" vertical-offset="536" max-vertical-offset="1449">
+          <caret line="29" column="17" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/research/FemtocraftTechnologies.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="7544" max-vertical-offset="17917">
+          <caret line="328" column="122" selection-start-line="328" selection-start-column="122" selection-end-line="328" selection-end-column="122" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/liquids/tiles/TileEntitySuctionPipe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="7160" max-vertical-offset="10833">
+          <caret line="378" column="25" selection-start-line="378" selection-start-column="25" selection-end-line="378" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/itszuvalex/femtocraft/transport/items/tiles/TileEntityVacuumTube.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8740416" vertical-offset="17855" max-vertical-offset="23253">
-          <caret line="863" column="53" selection-start-line="863" selection-start-column="53" selection-end-line="863" selection-end-column="53" />
-          <folding>
-            <element signature="e#22793#22794#0" expanded="true" />
-            <element signature="e#22844#22845#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.55969334" vertical-offset="9931" max-vertical-offset="23230">
+          <caret line="498" column="45" selection-start-line="498" selection-start-column="45" selection-end-line="498" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
