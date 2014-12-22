@@ -836,15 +836,9 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
             }
             if (tile instanceof IVacuumTube) {
                 IVacuumTube tube = (IVacuumTube) tile;
-                if (tube.isInput(ForgeDirection.UNKNOWN)) {
-                    if (addOutput(dir)) {
-                        continue;
-                    }
-                }
-                if (tube.isOutput(ForgeDirection.UNKNOWN)) {
-                    if (addInput(dir)) {
-                        continue;
-                    }
+                if (tube.isInput(ForgeDirection.UNKNOWN) && missingOutput() && addOutput(dir) ||
+                    tube.isOutput(ForgeDirection.UNKNOWN) && missingInput() && addInput(dir)) {
+                    continue;
                 }
             } else {
                 check.add(i);
@@ -859,10 +853,7 @@ public class TileEntityVacuumTube extends TileEntityBase implements IVacuumTube 
                 continue;
             }
 
-            if (missingOutput() && addOutput(dir)) {
-                continue;
-            }
-            if (missingInput() && addInput(dir)) {
+            if (missingOutput() && addOutput(dir) || missingInput() && addInput(dir)) {
                 continue;
             }
         }

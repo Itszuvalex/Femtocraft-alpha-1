@@ -83,14 +83,16 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
-                compound.setInteger(saveable.getName(), saveable.getInt(obj));
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                compound.setInteger(anno.tag().isEmpty() ? saveable.getName() : anno.tag(), saveable.getInt(obj));
             }
 
             @Override
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                saveable.setInt(obj, compound.getInteger(saveable.getName()));
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                saveable.setInt(obj, compound.getInteger(anno.tag().isEmpty() ? saveable.getName() : anno.tag()));
             }
         });
 
@@ -101,7 +103,8 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
-                compound.setIntArray(saveable.getName(),
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                compound.setIntArray(anno.tag().isEmpty() ? saveable.getName() : anno.tag(),
                         (int[]) saveable.get(obj));
             }
 
@@ -109,7 +112,8 @@ public class FemtocraftDataUtils {
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                saveable.set(obj, compound.getIntArray(saveable.getName()));
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                saveable.set(obj, compound.getIntArray(anno.tag().isEmpty() ? saveable.getName() : anno.tag()));
             }
         });
 
@@ -120,7 +124,8 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
-                compound.setBoolean(saveable.getName(),
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                compound.setBoolean(anno.tag().isEmpty() ? saveable.getName() : anno.tag(),
                         saveable.getBoolean(obj));
             }
 
@@ -128,8 +133,9 @@ public class FemtocraftDataUtils {
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
+                Saveable anno = saveable.getAnnotation(Saveable.class);
                 saveable.setBoolean(obj,
-                        compound.getBoolean(saveable.getName()));
+                        compound.getBoolean(anno.tag().isEmpty() ? saveable.getName() : anno.tag()));
             }
         });
 
@@ -140,25 +146,26 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
+                Saveable anno = saveable.getAnnotation(Saveable.class);
                 NBTTagCompound array = new NBTTagCompound();
                 boolean[] barr = (boolean[]) saveable.get(obj);
                 array.setInteger("size", barr.length);
                 int post = 0;
                 for (boolean bool : barr) {
-                    array.setBoolean(saveable.getName() + post, bool);
+                    array.setBoolean((anno.tag().isEmpty() ? saveable.getName() : anno.tag()) + post, bool);
                 }
-                compound.setTag(saveable.getName(), array);
+                compound.setTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag(), array);
             }
 
             @Override
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                NBTTagCompound array = compound.getCompoundTag(saveable
-                        .getName());
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                NBTTagCompound array = compound.getCompoundTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag());
                 boolean[] ret = new boolean[array.getInteger("size")];
                 for (int i = 0; i < ret.length; ++i) {
-                    ret[i] = array.getBoolean(saveable.getName() + i);
+                    ret[i] = array.getBoolean((anno.tag().isEmpty() ? saveable.getName() : anno.tag()) + i);
                 }
                 saveable.set(obj, ret);
             }
@@ -171,14 +178,16 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
-                compound.setFloat(saveable.getName(), saveable.getFloat(obj));
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                compound.setFloat(anno.tag().isEmpty() ? saveable.getName() : anno.tag(), saveable.getFloat(obj));
             }
 
             @Override
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                saveable.setFloat(obj, compound.getFloat(saveable.getName()));
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                saveable.setFloat(obj, compound.getFloat(anno.tag().isEmpty() ? saveable.getName() : anno.tag()));
             }
         });
 
@@ -189,25 +198,26 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
+                Saveable anno = saveable.getAnnotation(Saveable.class);
                 NBTTagCompound array = new NBTTagCompound();
                 float[] farr = (float[]) saveable.get(obj);
                 array.setInteger("size", farr.length);
                 int post = 0;
                 for (float floa : farr) {
-                    array.setFloat(saveable.getName() + post, floa);
+                    array.setFloat((anno.tag().isEmpty() ? saveable.getName() : anno.tag()) + post, floa);
                 }
-                compound.setTag(saveable.getName(), array);
+                compound.setTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag(), array);
             }
 
             @Override
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                NBTTagCompound array = compound.getCompoundTag(saveable
-                        .getName());
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                NBTTagCompound array = compound.getCompoundTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag());
                 float[] ret = new float[array.getInteger("size")];
                 for (int i = 0; i < ret.length; ++i) {
-                    ret[i] = array.getFloat(saveable.getName() + i);
+                    ret[i] = array.getFloat((anno.tag().isEmpty() ? saveable.getName() : anno.tag()) + i);
                 }
                 saveable.set(obj, ret);
             }
@@ -220,14 +230,16 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
-                compound.setDouble(saveable.getName(), saveable.getDouble(obj));
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                compound.setDouble(anno.tag().isEmpty() ? saveable.getName() : anno.tag(), saveable.getDouble(obj));
             }
 
             @Override
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                saveable.setDouble(obj, compound.getDouble(saveable.getName()));
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                saveable.setDouble(obj, compound.getDouble(anno.tag().isEmpty() ? saveable.getName() : anno.tag()));
             }
         });
 
@@ -238,25 +250,26 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
+                Saveable anno = saveable.getAnnotation(Saveable.class);
                 NBTTagCompound array = new NBTTagCompound();
                 double[] darr = (double[]) saveable.get(obj);
                 array.setInteger("size", darr.length);
                 int post = 0;
                 for (double doub : darr) {
-                    array.setDouble(saveable.getName() + post, doub);
+                    array.setDouble((anno.tag().isEmpty() ? saveable.getName() : anno.tag()) + post, doub);
                 }
-                compound.setTag(saveable.getName(), array);
+                compound.setTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag(), array);
             }
 
             @Override
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                NBTTagCompound array = compound.getCompoundTag(saveable
-                        .getName());
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                NBTTagCompound array = compound.getCompoundTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag());
                 double[] ret = new double[array.getInteger("size")];
                 for (int i = 0; i < ret.length; ++i) {
-                    ret[i] = array.getDouble(saveable.getName() + i);
+                    ret[i] = array.getDouble((anno.tag().isEmpty() ? saveable.getName() : anno.tag()) + i);
                 }
                 saveable.set(obj, ret);
             }
@@ -269,14 +282,16 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
-                compound.setShort(saveable.getName(), saveable.getShort(obj));
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                compound.setShort(anno.tag().isEmpty() ? saveable.getName() : anno.tag(), saveable.getShort(obj));
             }
 
             @Override
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                saveable.setShort(obj, compound.getShort(saveable.getName()));
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                saveable.setShort(obj, compound.getShort(anno.tag().isEmpty() ? saveable.getName() : anno.tag()));
             }
         });
 
@@ -287,25 +302,26 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
+                Saveable anno = saveable.getAnnotation(Saveable.class);
                 NBTTagCompound array = new NBTTagCompound();
                 short[] darr = (short[]) saveable.get(obj);
                 array.setInteger("size", darr.length);
                 int post = 0;
                 for (short str : darr) {
-                    array.setShort(saveable.getName() + post, str);
+                    array.setShort((anno.tag().isEmpty() ? saveable.getName() : anno.tag()) + post, str);
                 }
-                compound.setTag(saveable.getName(), array);
+                compound.setTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag(), array);
             }
 
             @Override
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                NBTTagCompound array = compound.getCompoundTag(saveable
-                        .getName());
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                NBTTagCompound array = compound.getCompoundTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag());
                 short[] ret = new short[array.getInteger("size")];
                 for (int i = 0; i < ret.length; ++i) {
-                    ret[i] = array.getShort(saveable.getName() + i);
+                    ret[i] = array.getShort((anno.tag().isEmpty() ? saveable.getName() : anno.tag()) + i);
                 }
                 saveable.set(obj, ret);
             }
@@ -318,14 +334,16 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
-                compound.setLong(saveable.getName(), saveable.getLong(obj));
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                compound.setLong(anno.tag().isEmpty() ? saveable.getName() : anno.tag(), saveable.getLong(obj));
             }
 
             @Override
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                saveable.setLong(obj, compound.getLong(saveable.getName()));
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                saveable.setLong(obj, compound.getLong(anno.tag().isEmpty() ? saveable.getName() : anno.tag()));
             }
         });
 
@@ -336,25 +354,26 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
+                Saveable anno = saveable.getAnnotation(Saveable.class);
                 NBTTagCompound array = new NBTTagCompound();
                 long[] darr = (long[]) saveable.get(obj);
                 array.setInteger("size", darr.length);
                 int post = 0;
                 for (long str : darr) {
-                    array.setLong(saveable.getName() + post, str);
+                    array.setLong((anno.tag().isEmpty() ? saveable.getName() : anno.tag()) + post, str);
                 }
-                compound.setTag(saveable.getName(), array);
+                compound.setTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag(), array);
             }
 
             @Override
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                NBTTagCompound array = compound.getCompoundTag(saveable
-                        .getName());
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                NBTTagCompound array = compound.getCompoundTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag());
                 long[] ret = new long[array.getInteger("size")];
                 for (int i = 0; i < ret.length; ++i) {
-                    ret[i] = array.getLong(saveable.getName() + i);
+                    ret[i] = array.getLong((anno.tag().isEmpty() ? saveable.getName() : anno.tag()) + i);
                 }
                 saveable.set(obj, ret);
             }
@@ -367,14 +386,16 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
-                compound.setByte(saveable.getName(), saveable.getByte(obj));
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                compound.setByte(anno.tag().isEmpty() ? saveable.getName() : anno.tag(), saveable.getByte(obj));
             }
 
             @Override
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                saveable.setByte(obj, compound.getByte(saveable.getName()));
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                saveable.setByte(obj, compound.getByte(anno.tag().isEmpty() ? saveable.getName() : anno.tag()));
             }
         });
 
@@ -385,7 +406,8 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
-                compound.setByteArray(saveable.getName(),
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                compound.setByteArray(anno.tag().isEmpty() ? saveable.getName() : anno.tag(),
                         (byte[]) saveable.get(obj));
             }
 
@@ -393,7 +415,8 @@ public class FemtocraftDataUtils {
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                saveable.set(obj, compound.getByteArray(saveable.getName()));
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                saveable.set(obj, compound.getByteArray(anno.tag().isEmpty() ? saveable.getName() : anno.tag()));
             }
         });
 
@@ -404,22 +427,24 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
+                Saveable anno = saveable.getAnnotation(Saveable.class);
                 String str = (String) saveable.get(obj);
                 if (str == null) {
                     return;
                 }
-                compound.setString(saveable.getName(), str);
+                compound.setString(anno.tag().isEmpty() ? saveable.getName() : anno.tag(), str);
             }
 
             @Override
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                if (!compound.hasKey(saveable.getName())) {
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                if (!compound.hasKey(anno.tag().isEmpty() ? saveable.getName() : anno.tag())) {
                     saveable.set(obj, null);
                     return;
                 }
-                saveable.set(obj, compound.getString(saveable.getName()));
+                saveable.set(obj, compound.getString(anno.tag().isEmpty() ? saveable.getName() : anno.tag()));
             }
         });
 
@@ -430,6 +455,7 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
+                Saveable anno = saveable.getAnnotation(Saveable.class);
                 NBTTagCompound array = new NBTTagCompound();
                 String[] darr = (String[]) saveable.get(obj);
                 array.setInteger("size", darr.length);
@@ -438,24 +464,24 @@ public class FemtocraftDataUtils {
                     if (str == null) {
                         continue;
                     }
-                    array.setString(saveable.getName() + post, str);
+                    array.setString((anno.tag().isEmpty() ? saveable.getName() : anno.tag()) + post, str);
                 }
-                compound.setTag(saveable.getName(), array);
+                compound.setTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag(), array);
             }
 
             @Override
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                NBTTagCompound array = compound.getCompoundTag(saveable
-                        .getName());
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                NBTTagCompound array = compound.getCompoundTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag());
                 String[] ret = new String[array.getInteger("size")];
                 for (int i = 0; i < ret.length; ++i) {
                     if (!array.hasKey(saveable.getName() + i)) {
                         ret[i] = null;
                         continue;
                     }
-                    ret[i] = array.getString(saveable.getName() + i);
+                    ret[i] = array.getString((anno.tag().isEmpty() ? saveable.getName() : anno.tag()) + i);
                 }
                 saveable.set(obj, ret);
             }
@@ -468,7 +494,8 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
-                compound.setTag(saveable.getName(),
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                compound.setTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag(),
                         (NBTTagCompound) saveable.get(obj));
             }
 
@@ -476,7 +503,8 @@ public class FemtocraftDataUtils {
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                saveable.set(obj, compound.getCompoundTag(saveable.getName()));
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                saveable.set(obj, compound.getCompoundTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag()));
             }
         });
 
@@ -487,7 +515,8 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
-                compound.setTag(saveable.getName(),
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                compound.setTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag(),
                         (NBTTagList) saveable.get(obj));
             }
 
@@ -495,7 +524,8 @@ public class FemtocraftDataUtils {
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                saveable.set(obj, compound.getTagList(saveable.getName(), 10));
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                saveable.set(obj, compound.getTagList(anno.tag().isEmpty() ? saveable.getName() : anno.tag(), 10));
             }
         });
 
@@ -506,21 +536,22 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
+                Saveable anno = saveable.getAnnotation(Saveable.class);
                 NBTTagCompound item = new NBTTagCompound();
                 ItemStack stack = (ItemStack) saveable.get(obj);
                 if (stack == null) {
                     return;
                 }
                 stack.writeToNBT(item);
-                compound.setTag(saveable.getName(), item);
+                compound.setTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag(), item);
             }
 
             @Override
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                NBTTagCompound item = compound.getCompoundTag(saveable
-                        .getName());
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                NBTTagCompound item = compound.getCompoundTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag());
                 saveable.set(obj, ItemStack.loadItemStackFromNBT(item));
             }
         });
@@ -532,6 +563,7 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
+                Saveable anno = saveable.getAnnotation(Saveable.class);
                 NBTTagCompound array = new NBTTagCompound();
                 NBTTagList list = new NBTTagList();
                 ItemStack[] isarr = (ItemStack[]) saveable.get(obj);
@@ -553,20 +585,20 @@ public class FemtocraftDataUtils {
                     list.appendTag(scomp);
                 }
                 array.setTag("items", list);
-                compound.setTag(saveable.getName(), array);
+                compound.setTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag(), array);
             }
 
             @Override
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                if (!compound.hasKey(saveable.getName())) {
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                if (!compound.hasKey(anno.tag().isEmpty() ? saveable.getName() : anno.tag())) {
                     saveable.set(obj, null);
                     return;
                 }
 
-                NBTTagCompound array = compound.getCompoundTag(saveable
-                        .getName());
+                NBTTagCompound array = compound.getCompoundTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag());
                 NBTTagList list = array.getTagList("items", 10);
                 ItemStack[] retarray = new ItemStack[array.getInteger("size")];
                 Arrays.fill(retarray, null);
@@ -616,24 +648,26 @@ public class FemtocraftDataUtils {
                                                      IllegalAccessException {
 
 
+                Saveable anno = saveable.getAnnotation(Saveable.class);
                 NBTTagCompound container = new NBTTagCompound();
                 ForgeDirection direction = (ForgeDirection) saveable.get(obj);
                 if (direction == null) {
                     return;
                 }
-                container.setInteger(saveable.getName(), direction.ordinal());
+                container.setInteger(anno.tag().isEmpty() ? saveable.getName() : anno.tag(), direction.ordinal());
             }
 
             @Override
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                if (!compound.hasKey(saveable.getName())) {
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                if (!compound.hasKey(anno.tag().isEmpty() ? saveable.getName() : anno.tag())) {
                     saveable.set(obj, null);
                     return;
                 }
                 ForgeDirection direction = ForgeDirection.getOrientation
-                        (compound.getInteger(saveable.getName()));
+                        (compound.getInteger(anno.tag().isEmpty() ? saveable.getName() : anno.tag()));
                 saveable.set(obj, direction);
             }
         });
@@ -645,19 +679,21 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
+                Saveable anno = saveable.getAnnotation(Saveable.class);
                 NBTTagCompound container = new NBTTagCompound();
                 FluidTank tank = (FluidTank) saveable.get(obj);
                 container.setInteger("capacity", tank.getCapacity());
                 tank.writeToNBT(container);
-                compound.setTag(saveable.getName(), container);
+                compound.setTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag(), container);
             }
 
             @Override
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                NBTTagCompound container = compound.getCompoundTag(saveable
-                        .getName());
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                NBTTagCompound container = compound.getCompoundTag(anno.tag().isEmpty() ? saveable.getName() : anno
+                        .tag());
                 FluidTank tank = new FluidTank(container.getInteger("capacity"));
                 saveable.set(obj, tank.readFromNBT(container));
             }
@@ -669,19 +705,21 @@ public class FemtocraftDataUtils {
             public void saveToNBT(NBTTagCompound compound, Field saveable,
                                   Object obj) throws IllegalArgumentException,
                                                      IllegalAccessException {
+                Saveable anno = saveable.getAnnotation(Saveable.class);
                 NBTTagCompound container = new NBTTagCompound();
                 FluidStack stack = (FluidStack) saveable.get(obj);
                 if (stack == null) return;
                 stack.writeToNBT(container);
-                compound.setTag(saveable.getName(), container);
+                compound.setTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag(), container);
             }
 
             @Override
             public void readFromNBT(NBTTagCompound compound, Field saveable,
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
-                NBTTagCompound container = compound.getCompoundTag(saveable
-                        .getName());
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                NBTTagCompound container = compound.getCompoundTag(anno.tag().isEmpty() ? saveable.getName() : anno
+                        .tag());
                 if (container == null) {
                     saveable.set(obj, null);
                     return;
