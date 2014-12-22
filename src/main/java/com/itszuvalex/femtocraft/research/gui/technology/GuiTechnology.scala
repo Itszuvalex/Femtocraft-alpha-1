@@ -24,6 +24,7 @@ import java.util
 import java.util.{ArrayList, List}
 
 import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.api.AssemblerRecipe.RecipeType
 import com.itszuvalex.femtocraft.api.{AssemblerRecipe, DimensionalRecipe, TemporalRecipe}
 import com.itszuvalex.femtocraft.managers.research.ResearchStatus
 import com.itszuvalex.femtocraft.research.gui.GuiResearch
@@ -209,8 +210,6 @@ class GuiTechnology(private val guiResearch: GuiResearch, private val status: Re
     renderer.render(x, y, width, height, pageNum, mouseX, mouseY, tooltip, isResearched)
   }
 
-  def getNumPages(researched: Boolean) = renderer.getPageCount
-
   protected override def keyTyped(par1: Char, par2: Int) {
     if (par2 == this.mc.gameSettings.keyBindInventory.getKeyCode) {
       this.mc.displayGuiScreen(guiResearch)
@@ -239,6 +238,8 @@ class GuiTechnology(private val guiResearch: GuiResearch, private val status: Re
     }
     super.mouseClicked(par1, par2, par3)
   }
+
+  def getNumPages(researched: Boolean) = renderer.getPageCount
 
   /**
    * Height must be greater than 54. Width must be MUCH greater than 54, to allow room for the info string to be
@@ -278,27 +279,6 @@ class GuiTechnology(private val guiResearch: GuiResearch, private val status: Re
 
   }
 
-  private[technology] def renderTemporalRecipeWithInfo(x: Int, y: Int, width: Int, height: Int, recipe: TemporalRecipe, mouseX: Int, mouseY: Int, tooltip: List[_], info: String) {
-    val padding: Int = 2
-    renderTemporalRecipe(x, y, width, height, recipe, mouseX, mouseY, tooltip)
-    val format = EnumChatFormatting.WHITE + info + EnumChatFormatting.RESET
-    fontRendererObj.drawSplitString(format, x + 90 + 2 * padding, y + 2 * padding, width - 2 * padding - 72, height - 2 * padding)
-  }
-
-  private[technology] def renderTemporalRecipe(x: Int, y: Int, width: Int, height: Int, recipe: TemporalRecipe, mouseX: Int, mouseY: Int, tooltip: List[_]) {
-    if (recipe == null) return
-    val recipeDir: String = recipe.techLevel.getTooltipEnum + "----->" + EnumChatFormatting.RESET
-    renderItemSlot(x, y + 18, recipe.input, new RenderItem, mouseX, mouseY, tooltip)
-
-    for (i <- 0 until recipe.configurators.length) {
-      renderItemSlot(x + 18 + 18 * (i % 3), y + 36 * Math.floor(i / 3).toInt, recipe.configurators(i), new RenderItem, mouseX, mouseY, tooltip)
-    }
-
-    GL11.glColor4f(1f, 1f, 1f, 1f)
-    fontRendererObj.drawSplitString(recipeDir, x + 18 + (54 - fontRendererObj.getStringWidth(recipeDir)) / 2 + 1, y + (54 - fontRendererObj.FONT_HEIGHT) / 2, fontRendererObj.getStringWidth(recipeDir) + 2, fontRendererObj.FONT_HEIGHT)
-    renderItemSlot(x + 72 + 2, y + 18, recipe.output, new RenderItem, mouseX, mouseY, tooltip)
-  }
-
   private[technology] def renderItemSlot(x: Int, y: Int, item: ItemStack, renderitem: RenderItem, mouseX: Int, mouseY: Int, tooltip: List[_]) {
     GL11.glColor4f(1f, 1f, 1f, 1f)
     Minecraft.getMinecraft.renderEngine.bindTexture(texture)
@@ -324,7 +304,7 @@ class GuiTechnology(private val guiResearch: GuiResearch, private val status: Re
     val xr: Int = x + 1
     val yr: Int = y + 1
     renderitem.renderItemAndEffectIntoGUI(Minecraft.getMinecraft.fontRenderer, Minecraft.getMinecraft.getTextureManager, item, xr, yr)
-//    renderitem.renderItemIntoGUI(Minecraft.getMinecraft.fontRenderer, Minecraft.getMinecraft.getTextureManager, item, xr, yr, true)
+    //    renderitem.renderItemIntoGUI(Minecraft.getMinecraft.fontRenderer, Minecraft.getMinecraft.getTextureManager, item, xr, yr, true)
     renderitem.renderItemOverlayIntoGUI(Minecraft.getMinecraft.fontRenderer, Minecraft.getMinecraft.getTextureManager, item, xr, yr)
     RenderHelper.disableStandardItemLighting()
     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
@@ -333,6 +313,27 @@ class GuiTechnology(private val guiResearch: GuiResearch, private val status: Re
     if (mouseX > x && mouseX < x + 17 && mouseY > y && mouseY < y + 17) {
       tooltip.asInstanceOf[util.List[String]].addAll(item.getTooltip(Minecraft.getMinecraft.thePlayer, Minecraft.getMinecraft.gameSettings.advancedItemTooltips).asInstanceOf[util.List[String]])
     }
+  }
+
+  private[technology] def renderTemporalRecipeWithInfo(x: Int, y: Int, width: Int, height: Int, recipe: TemporalRecipe, mouseX: Int, mouseY: Int, tooltip: List[_], info: String) {
+    val padding: Int = 2
+    renderTemporalRecipe(x, y, width, height, recipe, mouseX, mouseY, tooltip)
+    val format = EnumChatFormatting.WHITE + info + EnumChatFormatting.RESET
+    fontRendererObj.drawSplitString(format, x + 90 + 2 * padding, y + 2 * padding, width - 2 * padding - 72, height - 2 * padding)
+  }
+
+  private[technology] def renderTemporalRecipe(x: Int, y: Int, width: Int, height: Int, recipe: TemporalRecipe, mouseX: Int, mouseY: Int, tooltip: List[_]) {
+    if (recipe == null) return
+    val recipeDir: String = recipe.techLevel.getTooltipEnum + "----->" + EnumChatFormatting.RESET
+    renderItemSlot(x, y + 18, recipe.input, new RenderItem, mouseX, mouseY, tooltip)
+
+    for (i <- 0 until recipe.configurators.length) {
+      renderItemSlot(x + 18 + 18 * (i % 3), y + 36 * Math.floor(i / 3).toInt, recipe.configurators(i), new RenderItem, mouseX, mouseY, tooltip)
+    }
+
+    GL11.glColor4f(1f, 1f, 1f, 1f)
+    fontRendererObj.drawSplitString(recipeDir, x + 18 + (54 - fontRendererObj.getStringWidth(recipeDir)) / 2 + 1, y + (54 - fontRendererObj.FONT_HEIGHT) / 2, fontRendererObj.getStringWidth(recipeDir) + 2, fontRendererObj.FONT_HEIGHT)
+    renderItemSlot(x + 72 + 2, y + 18, recipe.output, new RenderItem, mouseX, mouseY, tooltip)
   }
 
   private[technology] def renderDimensionalRecipeWithInfo(x: Int, y: Int, width: Int, height: Int, recipe: DimensionalRecipe, mouseX: Int, mouseY: Int, tooltip: List[_], info: String) {
@@ -388,12 +389,14 @@ class GuiTechnology(private val guiResearch: GuiResearch, private val status: Re
   private[technology] def renderAssemblerRecipeWithInfo(x: Int, y: Int, width: Int, height: Int, recipe: AssemblerRecipe, mouseX: Int, mouseY: Int, tooltip: util.List[_], info: String) {
     val padding: Int = 2
     renderAssemblerRecipe(x, y, width, height, recipe, mouseX, mouseY, tooltip)
+    val direction = if (recipe == null) "" else (if (recipe.`type` != RecipeType.Recomposition) "<" else "") + "-" + (if (recipe.`type` != RecipeType.Decomposition) ">" else "")
     val format = EnumChatFormatting.WHITE + info + EnumChatFormatting.RESET
-    fontRendererObj.drawSplitString(format, x + 54 + fontRendererObj.getStringWidth("<->") + 18 + 2 * padding, y + 2 * padding, width - 2 * padding - fontRendererObj.getStringWidth("<->") - 54 - 18, height - 2 * padding)
+    fontRendererObj.drawSplitString(format, x + 54 + fontRendererObj.getStringWidth(direction) + 18 + 2 * padding, y + 2 * padding, width - 2 * padding - fontRendererObj.getStringWidth(direction) - 54 - 18, height - 2 * padding)
   }
 
   private[technology] def renderAssemblerRecipe(x: Int, y: Int, width: Int, height: Int, recipe: AssemblerRecipe, mouseX: Int, mouseY: Int, tooltip: util.List[_]) {
-    val recipeDir: String = (if (recipe == null) "" + EnumChatFormatting.WHITE else recipe.enumTechLevel.getTooltipEnum) + "<->" + EnumChatFormatting.RESET
+    val direction = if (recipe == null) "" else (if (recipe.`type` != RecipeType.Recomposition) "<" else "") + "-" + (if (recipe.`type` != RecipeType.Decomposition) ">" else "")
+    val recipeDir: String = (if (recipe == null) "" + EnumChatFormatting.WHITE else recipe.enumTechLevel.getTooltipEnum) + direction + EnumChatFormatting.RESET
     renderCraftingGrid(x, y, if (recipe == null) null else recipe.input, mouseX, mouseY, tooltip)
     GL11.glColor4f(1f, 1f, 1f, 1f)
     fontRendererObj.drawSplitString(recipeDir, x + 54 + 1, y + (54 - fontRendererObj.FONT_HEIGHT) / 2, fontRendererObj.getStringWidth(recipeDir) + 2, fontRendererObj.FONT_HEIGHT)

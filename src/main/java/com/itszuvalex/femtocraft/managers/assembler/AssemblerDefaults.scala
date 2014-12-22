@@ -1,6 +1,7 @@
 package com.itszuvalex.femtocraft.managers.assembler
 
 import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.api.AssemblerRecipe._
 import com.itszuvalex.femtocraft.api.{AssemblerRecipe, EnumTechLevel}
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
 import net.minecraft.init.{Blocks, Items}
@@ -17,6 +18,8 @@ object AssemblerDefaults {
   def getMacroDefaults: ArrayBuffer[AssemblerRecipe] = {
     val ret = new ArrayBuffer[AssemblerRecipe]()
 
+    ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Blocks.sand), null, null, null, null, null, null, null, null), 0, new ItemStack(Blocks.glass),
+                               EnumTechLevel.MACRO, FemtocraftTechnologies.BASIC_CHEMISTRY)
     ret
   }
 
@@ -235,11 +238,13 @@ object AssemblerDefaults {
                                                 new ItemStack(Femtocraft.itemSpinyFilament), null, null, null, null,
                                                 null, null, null), 1, new ItemStack(Items.cooked_fished),
                                EnumTechLevel.MICRO, FemtocraftTechnologies.BASIC_CHEMISTRY)
-    ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemReplicatingMaterial),
-                                                new ItemStack(Femtocraft.itemSynthesizedFiber), null, null, null, null,
-                                                null, null, null), 1,
-                               new ItemStack(Items.dye, 1, OreDictionary.WILDCARD_VALUE), EnumTechLevel.MICRO,
-                               FemtocraftTechnologies.BASIC_CHEMISTRY)
+    //Dyes
+    (0 to 15).foreach(damage =>
+                        ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemReplicatingMaterial),
+                                                                    new ItemStack(Femtocraft.itemSynthesizedFiber), null, null, null, null,
+                                                                    null, null, null), 1,
+                                                   new ItemStack(Items.dye, 1, damage), EnumTechLevel.MICRO,
+                                                   FemtocraftTechnologies.BASIC_CHEMISTRY, RecipeType.Decomposition))
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemReplicatingMaterial),
                                                 new ItemStack(Femtocraft.itemHardenedBulb), null, null, null, null,
                                                 null, null, null), 1, new ItemStack(Items.bone), EnumTechLevel.MICRO,
@@ -317,7 +322,7 @@ object AssemblerDefaults {
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Items.egg), new ItemStack(Items.sugar, 2),
                                                 new ItemStack(Items.wheat, 3), null, null, null, null, null, null), 1,
                                new ItemStack(Items.cake), EnumTechLevel.MACRO,
-                               FemtocraftTechnologies.MACROSCOPIC_STRUCTURES, AssemblerRecipe.RecipeType.Decomposition)
+                               FemtocraftTechnologies.MACROSCOPIC_STRUCTURES, RecipeType.Decomposition)
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemHardenedBulb, 64),
                                                 new ItemStack(Femtocraft.itemOrganometallicPlate, 64),
                                                 new ItemStack(Femtocraft.itemHardenedBulb, 64),
@@ -462,7 +467,7 @@ object AssemblerDefaults {
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Items.paper, 3), null, null, null, null,
                                                 null, null, null, null), 0,
                                new ItemStack(Femtocraft.itemPaperSchematic), EnumTechLevel.MACRO,
-                               FemtocraftTechnologies.ALGORITHMS, AssemblerRecipe.RecipeType.Decomposition)
+                               FemtocraftTechnologies.ALGORITHMS, RecipeType.Decomposition)
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemSpoolGold),
                                                 new ItemStack(Femtocraft.itemSpoolGold),
                                                 new ItemStack(Femtocraft.itemSpoolGold),
@@ -476,7 +481,7 @@ object AssemblerDefaults {
                                                     ItemStack(Blocks.planks, 1,
                                                               OreDictionary.WILDCARD_VALUE)), 0,
                                new ItemStack(Femtocraft.itemMicrochip, 6), EnumTechLevel.MICRO,
-                               FemtocraftTechnologies.BASIC_CIRCUITS, AssemblerRecipe.RecipeType.Recomposition)
+                               FemtocraftTechnologies.BASIC_CIRCUITS, RecipeType.Recomposition)
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemIngotTemperedTitanium),
                                                 new ItemStack(Femtocraft.blockMicroCube),
                                                 new ItemStack(Femtocraft.itemIngotTemperedTitanium),

@@ -41,7 +41,7 @@ public class AssemblerRecipe implements Comparable<AssemblerRecipe>, ISaveable {
 
     public AssemblerRecipe(ItemStack[] input, int mass, ItemStack output,
                            EnumTechLevel enumTechLevel, ITechnology tech) {
-        this(input, mass, output, enumTechLevel, tech, RecipeType.Reversable);
+        this(input, mass, output, enumTechLevel, tech, RecipeType.Reversible);
     }
 
     public AssemblerRecipe(ItemStack[] input, int mass, ItemStack output,
@@ -51,7 +51,7 @@ public class AssemblerRecipe implements Comparable<AssemblerRecipe>, ISaveable {
 
     public AssemblerRecipe(ItemStack[] input, int mass, ItemStack output, EnumTechLevel enumTechLevel,
                            String techName) {
-        this(input, mass, output, enumTechLevel, techName, RecipeType.Reversable);
+        this(input, mass, output, enumTechLevel, techName, RecipeType.Reversible);
     }
 
     public AssemblerRecipe(ItemStack[] input, int mass, ItemStack output, EnumTechLevel enumTechLevel,
@@ -136,6 +136,8 @@ public class AssemblerRecipe implements Comparable<AssemblerRecipe>, ISaveable {
         if (tech != null) {
             compound.setString("researchTechnology", tech);
         }
+
+        compound.setString("type", type.getValue());
     }
 
     @Override
@@ -174,19 +176,21 @@ public class AssemblerRecipe implements Comparable<AssemblerRecipe>, ISaveable {
             tech = compound
                     .getString("researchTechnology");
         }
+
+        type = RecipeType.getRecipe(compound.getString("type"));
     }
 
     public enum RecipeType {
 
-        Reversable, Decomposition, Recomposition;
+        Reversible, Decomposition, Recomposition;
 
-        private static final String reverseKey = "Reversable";
+        private static final String reverseKey = "Reversible";
         private static final String decompKey = "Decomposition";
         private static final String recompKey = "Recomposition";
 
         public String getValue() {
             switch (this) {
-                case Reversable:
+                case Reversible:
                     return reverseKey;
                 case Decomposition:
                     return decompKey;
@@ -197,9 +201,9 @@ public class AssemblerRecipe implements Comparable<AssemblerRecipe>, ISaveable {
         }
 
         public static RecipeType getRecipe(String key) {
-            if (key.equals(reverseKey)) return Reversable;
-            if (key.equals(decompKey)) return Decomposition;
-            if (key.equals(recompKey)) return Recomposition;
+            if (key.equalsIgnoreCase(reverseKey)) return Reversible;
+            if (key.equalsIgnoreCase(decompKey)) return Decomposition;
+            if (key.equalsIgnoreCase(recompKey)) return Recomposition;
             return null;
         }
     }

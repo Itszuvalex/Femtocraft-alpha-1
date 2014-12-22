@@ -38,8 +38,9 @@ import net.minecraftforge.oredict.{OreDictionary, ShapedOreRecipe, ShapelessOreR
 import org.apache.logging.log4j.Level
 
 import scala.collection.JavaConversions._
+import scala.collection.immutable
+import scala.collection.immutable.TreeMap
 import scala.collection.mutable.ArrayBuffer
-import scala.collection.{immutable, mutable}
 
 
 /** @author chris
@@ -59,8 +60,6 @@ object ManagerAssemblerRecipe {
 }
 
 class ManagerAssemblerRecipe {
-  private lazy val decompCountMemo = new mutable.HashMap[Int, (Float, Float, Float, Float)]
-
   private val assemblerRecipeList = new ArrayBuffer[AssemblerRecipe]
   private val assemblerRecompTree = new util.TreeMap[RecompositionKey, AssemblerRecipe]()
   private val assemblerDecompTree = new util.TreeMap[DecompositionKey, AssemblerRecipe]()
@@ -86,16 +85,13 @@ class ManagerAssemblerRecipe {
 
   def getAllRecipes = assemblerRecipeList
 
-  def getDecompositionCounts(i: ItemStack): (Int, Int, Int, Int) = {
-    val (mo, at, pa, ma) = getDecompositionCounts(i, immutable.TreeSet[Int]())
-    (mo.toInt, at.toInt, pa.toInt, ma.toInt)
-  }
+  def getDecompositionCounts(i: ItemStack) = DecompositionManager.getDecompositionCounts(i)
 
   @throws(classOf[IllegalArgumentException])
   def addRecipe(recipe: AssemblerRecipe): Boolean =
     try {
       recipe.`type` match {
-        case AssemblerRecipe.RecipeType.Reversable    => addReversableRecipe(recipe)
+        case AssemblerRecipe.RecipeType.Reversible    => addReversableRecipe(recipe)
         case AssemblerRecipe.RecipeType.Decomposition => addDecompositionRecipe(recipe)
         case AssemblerRecipe.RecipeType.Recomposition => addRecompositionRecipe(recipe)
       }
@@ -103,7 +99,6 @@ class ManagerAssemblerRecipe {
     catch {
       case e: Throwable => false
     }
-
 
   @throws(classOf[IllegalArgumentException])
   def addRecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
@@ -214,18 +209,6 @@ class ManagerAssemblerRecipe {
     }
   }
 
-  //  private def testRecipes() {
-  //    var test= getRecipe(Array[ItemStack](null, null, null, new ItemStack(Femtocraft.itemPlaneoid), new ItemStack(Femtocraft.itemRectangulon), new ItemStack(Femtocraft.itemPlaneoid), null, null, null))
-  //    Femtocraft.log(Level.WARNING, "Recipe " + (if (test != null) "found" else "not found") + ".")
-  //    if (test != null) {
-  //      Femtocraft.log(Level.WARNING, "Output " + (if (test.output.isItemEqual(new ItemStack(Femtocraft.itemFlorite))) "matches" else "does not match") + ".")
-  //    }
-  //    test = getRecipe(Array[ItemStack](null, null, null, new ItemStack(Femtocraft.itemRectangulon), new ItemStack(Femtocraft.itemRectangulon), new ItemStack(Femtocraft.itemPlaneoid), null, null, null))
-  //    Femtocraft.log(Level.WARNING, "Recipe " + (if (test != null) "found" else "not found") + ".")
-  //    test = getRecipe(new ItemStack(Femtocraft.itemFlorite))
-  //    Femtocraft.log(Level.WARNING, "Recipe " + (if (test != null) "found" else "not found") + ".")
-  //  }
-
   private def registerShapedOreRecipe(orecipe: ShapedOreRecipe): Boolean = {
 
     try {
@@ -277,6 +260,18 @@ class ManagerAssemblerRecipe {
       case e: Exception => false
     }
   }
+
+  //  private def testRecipes() {
+  //    var test= getRecipe(Array[ItemStack](null, null, null, new ItemStack(Femtocraft.itemPlaneoid), new ItemStack(Femtocraft.itemRectangulon), new ItemStack(Femtocraft.itemPlaneoid), null, null, null))
+  //    Femtocraft.log(Level.WARNING, "Recipe " + (if (test != null) "found" else "not found") + ".")
+  //    if (test != null) {
+  //      Femtocraft.log(Level.WARNING, "Output " + (if (test.output.isItemEqual(new ItemStack(Femtocraft.itemFlorite))) "matches" else "does not match") + ".")
+  //    }
+  //    test = getRecipe(Array[ItemStack](null, null, null, new ItemStack(Femtocraft.itemRectangulon), new ItemStack(Femtocraft.itemRectangulon), new ItemStack(Femtocraft.itemPlaneoid), null, null, null))
+  //    Femtocraft.log(Level.WARNING, "Recipe " + (if (test != null) "found" else "not found") + ".")
+  //    test = getRecipe(new ItemStack(Femtocraft.itemFlorite))
+  //    Femtocraft.log(Level.WARNING, "Recipe " + (if (test != null) "found" else "not found") + ".")
+  //  }
 
   private def registerShapelessRecipe(recipe: ShapelessRecipes): Boolean = {
     try {
@@ -404,62 +399,9 @@ class ManagerAssemblerRecipe {
     false
   }
 
-
   private def checkDecomposition(recipe: AssemblerRecipe) = getRecipe(recipe.output) == null
 
   private def checkRecomposition(recipe: AssemblerRecipe) = getRecipe(recipe.input) == null
-
-  private def getDecompositionCounts(i: ItemStack, s: immutable.TreeSet[Int]): (Float, Float, Float, Float) = {
-    if (i == null) return (0, 0, 0, 0)
-
-    var molecules = 0f
-    var atoms = 0f
-    var particles = 0f
-    var mass = 0f
-
-    decompCountMemo.get(i.itemID) match {
-      case Some((mol, at, pa, ma)) => return (mol * i.stackSize, at * i.stackSize, pa * i.stackSize, ma * i.stackSize)
-      case _                       =>
-    }
-
-
-
-    i match {
-      case micro if ComponentRegistry.isItemComponent(i.getItem, EnumTechLevel.MICRO) => molecules = 1
-      case nano if ComponentRegistry.isItemComponent(i.getItem, EnumTechLevel.NANO)   => atoms = 1
-      case femto if ComponentRegistry.isItemComponent(i.getItem, EnumTechLevel.FEMTO) => particles = 1
-      case _                                                                          =>
-    }
-
-    if (!s.contains(i.itemID)) {
-      val recipe = getRecipe(i)
-      var ret: (Float, Float, Float, Float) = null
-      if (recipe != null && recipe.output != null && recipe.output.stackSize > 0) {
-        mass += recipe.mass / recipe.output.stackSize
-        recipe.input.foreach {
-                               case in if !ItemStack.areItemStacksEqual(i, in) =>
-                                 val (m, a, p, ma) = getDecompositionCounts(in, s + i.itemID)
-                                 molecules += m
-                                 atoms += a
-                                 particles += p
-                                 mass += ma
-                               case _                                          =>
-                             }
-
-        ret = (molecules / recipe.output.stackSize,
-          atoms / recipe.output.stackSize,
-          particles / recipe.output.stackSize,
-          mass / recipe.output.stackSize)
-      }
-      else {
-        return (molecules / i.stackSize, atoms / i.stackSize, particles / i.stackSize, mass / i.stackSize)
-      }
-      decompCountMemo.put(i.itemID, ret)
-      val (mo, at, pa, ma) = ret
-      return (mo * i.stackSize, at * i.stackSize, pa * i.stackSize, ma * i.stackSize)
-    }
-    (0, 0, 0, 0)
-  }
 
   //  private def registerMacroDecompositionRecipes() {
   //  }
@@ -547,7 +489,6 @@ class ManagerAssemblerRecipe {
         false
     }
   }
-
 
   private def registerShapedRecipe(recipeItems: Array[ItemStack], recipeOutput: ItemStack, recipeWidth: Int,
                                    recipeHeight: Int): Boolean = {
@@ -769,6 +710,80 @@ class ManagerAssemblerRecipe {
     def this(recipe: AssemblerRecipe) = this(recipe.output)
 
     override def compareTo(o: DecompositionKey): Int = FemtocraftUtils.compareItem(output, o.output)
+  }
+
+  private object DecompositionManager {
+    private var decompCountMemo = new TreeMap[ComponentKey, (Float, Float, Float, Float)]
+
+    def getDecompositionCounts(i: ItemStack): (Int, Int, Int, Int) = {
+      val (mo, at, pa, ma) = getDecompositionCounts(i, immutable.TreeSet[ComponentKey]())
+      (mo.toInt, at.toInt, pa.toInt, ma.toInt)
+    }
+
+    private def getDecompositionCounts(i: ItemStack, s: immutable.TreeSet[ComponentKey]): (Float, Float, Float, Float) = {
+      if (i == null) return (0, 0, 0, 0)
+
+      var molecules = 0f
+      var atoms = 0f
+      var particles = 0f
+      var mass = 0f
+
+      decompCountMemo.get(new ComponentKey(i)) match {
+        case Some((mol, at, pa, ma)) => return (mol * i.stackSize, at * i.stackSize, pa * i.stackSize, ma * i.stackSize)
+        case _                       =>
+      }
+
+      i match {
+        case micro if ComponentRegistry.isItemComponent(i.getItem, EnumTechLevel.MICRO) => molecules = 1
+        case nano if ComponentRegistry.isItemComponent(i.getItem, EnumTechLevel.NANO)   => atoms = 1
+        case femto if ComponentRegistry.isItemComponent(i.getItem, EnumTechLevel.FEMTO) => particles = 1
+        case _                                                                          =>
+      }
+
+      if (!s.contains(new ComponentKey(i))) {
+        val recipe = getRecipe(i)
+        var ret: (Float, Float, Float, Float) = null
+        if (recipe != null && recipe.output != null && recipe.output.stackSize > 0) {
+          mass += recipe.mass / recipe.output.stackSize
+          recipe.input.foreach {
+                                 case in if !ItemStack.areItemStacksEqual(i, in) =>
+                                   val (m, a, p, ma) = getDecompositionCounts(in, s + new ComponentKey(i))
+                                   molecules += m
+                                   atoms += a
+                                   particles += p
+                                   mass += ma
+                                 case _                                          =>
+                               }
+
+          ret = (molecules / recipe.output.stackSize,
+            atoms / recipe.output.stackSize,
+            particles / recipe.output.stackSize,
+            mass / recipe.output.stackSize)
+        }
+        else {
+          ret = (molecules / i.stackSize, atoms / i.stackSize, particles / i.stackSize, mass / i.stackSize)
+        }
+        decompCountMemo = decompCountMemo + ((new ComponentKey(i), ret))
+        val (mo, at, pa, ma) = ret
+        return (mo * i.stackSize, at * i.stackSize, pa * i.stackSize, ma * i.stackSize)
+      }
+      (0, 0, 0, 0)
+    }
+
+    class ComponentKey(val id: Int, val damage: Int) extends Comparable[ComponentKey] {
+      def this(i: ItemStack) = this(i.itemID, i.getItemDamage)
+
+      override def compareTo(o: ComponentKey): Int = {
+        if (id > o.id) return 1
+        if (id < o.id) return -1
+        if (damage == OreDictionary.WILDCARD_VALUE) return 0
+        if (o.damage == OreDictionary.WILDCARD_VALUE) return 0
+        if (damage < o.damage) return 1
+        if (damage > o.damage) return -1
+        0
+      }
+    }
+
   }
 
 }
