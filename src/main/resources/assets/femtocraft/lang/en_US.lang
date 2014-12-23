@@ -1,0 +1,191 @@
+itemGroup.Femtocraft=Femtocraft
+
+tile.BlockOreTitanium.name=Titanium Ore
+tile.BlockOreThorium.name=Thorium Ore
+tile.BlockOrePlatinum.name=Platinum Ore
+tile.BlockOreFarenite.name=Farenite Ore
+tile.BlockOreMalenite.name=Malenite Ore
+tile.BlockOreLodestone.name=Lodestone Ore
+
+tile.BlockMicroStone.name=Microstone
+tile.BlockNanoStone.name=Nanostone
+tile.BlockFemtoStone.name=Femtostone
+tile.BlockUnidentifiedAlloy.name=Unidentified Alloy
+
+tile.BlockResearchComputer.name=Research Computer
+tile.BlockResearchConsole.name=Research Console
+
+tile.BlockMicroFurnace.name=Micro Furnace
+tile.BlockMicroFurnace_lit.name=Micro Furnace
+tile.BlockMicroDeconstructor.name=Micro Deconstructor
+tile.BlockMicroReconstructor.name=Micro Reconstructor
+tile.BlockEncoder.name=Schematic Encoder
+
+tile.BlockNanoInnervator.name=Nano Innervator
+tile.BlockNanoInnervator_lit.name=Nano Innervator
+tile.BlockNanoDismantler.name=Nano Dismantler
+tile.BlockNanoFabricator.name=Nano Fabricator
+tile.BlockNanoEnmesher.name=Nano Enmesher
+tile.BlockNanoHorologe.name=Nano Horologe
+
+tile.BlockFemtoImpulser.name=Femto Impulser
+tile.BlockFemtoImpulser_lit.name=Femto Impulser
+tile.BlockFemtoRepurposer.name=Femto Repurposer
+tile.BlockFemtoCoagulator.name=Femto Coagulator
+tile.BlockFemtoEntangler.name=Femto Entangler
+tile.BlockFemtoChronoshifter.name=Femto Chronoshifter
+
+tile.BlockVacuumTube.name=Vacuum Tube
+tile.BlockSuctionPipe.name=Suction Pipe
+
+tile.BlockGenerator.name=Generator
+tile.BlockConsumer.name=Consumer
+
+tile.BlockMicroCable.name=Microcable
+tile.BlockNanoCable.name=Nanocable
+tile.BlockFemtoCable.name=Femtocable
+
+tile.BlockOrbitalEqualizer.name=Orbital Equalizer
+tile.BlockNullEqualizer.name=Null Equalizer
+
+tile.BlockMicroCube.name=Micro Cube
+
+tile.BlockNanoCubeFrame.name=Nano Cube Frame
+tile.BlockNanoCubePort.name=Nano Cube Port
+
+tile.BlockFemtoCubeFrame.name=Femto Cube Frame
+tile.BlockFemtoCubePort.name=Femto Cube Port
+tile.BlockFemtoCubeChassis.name=Femto Cube Chassis
+
+tile.BlockBaseMicroCharging.name=Electrostatic Charging Base
+tile.BlockCoilMicroCharging.name=Electrostatic Charging Coil
+tile.BlockCapacitorMicroCharging.name=Electrostatic Charging Capacitor
+tile.BlockMagneticInductionGenerator.name=Magnetic Induction Generator
+
+tile.BlockCryoEndothermalChargingBase.name=CryoEndothermal Charging Base
+tile.BlockCryoEndothermalChargingCoil.name=CryoEndothermal Charging Coil
+tile.BlockFissionReactorCore.name=Fission Reactor Core
+tile.BlockFissionReactorHousing.name=Fission Reactor Housing
+tile.BlockMagnetohydrodynamicGenerator.name=Magnetohydrodynamic Generator
+tile.BlockSteamGenerator.name=Steam Generator
+tile.BlockDecontaminationChamber.name=Decontamination Chamber
+
+tile.BlockPhlegethonTunnelCore.name=Phlegethon Tunnel Core
+tile.BlockPhlegethonTunnelFrame.name=Phlegethon Tunnel Frame
+tile.BlockSisyphusStabilizer.name=Sisyphus Stabilizer
+tile.BlockStellaratorCore.name=Stellarator Core
+tile.BlockStellaratorFocus.name=Stellarator Focus
+tile.BlockStellaratorOpticalMaser.name=Stellarator Optical Maser
+tile.BlockStellaratorHousing.name=Stellarator Housing
+tile.BlockPlasmaConduit.name=Plasma Conduit
+tile.BlockPlasmaVent.name=Plasma Vent
+tile.BlockPlasmaTurbine.name=Plasma Turbine
+tile.BlockPlasmaCondenser.name=Plasma Condenser
+
+tile.BlockPlasma.name=Plasma
+
+tile.BlockMass.name=Mass
+tile.BlockFluidMoltenSalt.name=Molten Salt
+tile.BlockFluidCooledMoltenSalt.name=Cooled Molten Salt
+tile.BlockFluidCooledContaminatedMoltenSalt.name=Cooled Contaminated Molten Salt
+
+item.ItemIngotTitanium.name=Titanium Ingot
+item.ItemIngotPlatinum.name=Platinum Ingot
+item.ItemIngotThorium.name=Thorium Ingot
+item.ItemIngotFarenite.name=Farenite
+item.ItemIngotMalenite.name=Malenite
+item.ItemIngotTemperedTitanium.name=Tempered Titanium Ingot
+item.ItemIngotThFaSalt.name=ThFa Salt Ingot
+item.ItemNuggetLodestone.name=Lodestone Nugget
+item.ItemChunkLodestone.name=Lodestone Chunk
+item.ItemConductivePowder.name=Conductive Powder
+item.ItemBoard.name=Board
+item.ItemPrimedBoard.name=Primed Board
+item.ItemDopedBoard.name=Doped Board
+item.ItemMicrochip.name=Microchip
+item.ItemSpool.name=Spool
+item.ItemSpoolGold.name=Gold Wire Spool
+item.ItemSpoolPlatinum.name=Platinum Wire Spool
+item.ItemMicroCoil.name=Micro Coil
+item.ItemBattery.name=Battery
+item.ItemArticulatingArm.name=Articulating Arm
+item.ItemDissassemblyArray.name=Dissassembly Array
+item.ItemAssemblyArray.name=Assembly Array
+item.ItemVacuumCore.name=Vacuum Core
+item.ItemMicroLogicCore.name=Micro Logic Core
+item.ItemKineticPulverizer.name=Kinetic Pulverizer
+item.ItemHeatingCoil.name=Heating Coil
+item.ItemMicroPlating.name=Micro Plating
+item.ItemPortableResearchComputer.name=Portable Research Computer
+item.ItemNanochip.name=Nanochip
+item.ItemNanoCalculator.name=Nano Calculator
+item.ItemNanoRegulator.name=Nano Regulator
+item.ItemNanoSimulator.name=Nano Simulator
+item.ItemBasicAICore.name=Basic AI Core
+item.ItemLearningCore.name=Learning Core
+item.ItemSchedulerCore.name=Scheduler Core
+item.ItemManagerCore.name=Manager Core
+item.ItemFluidicConductor.name=Fluidic Conductor
+item.ItemNanoCoil.name=Nano Coil
+item.ItemNanoPlating.name=Nano Plating
+item.ItemTemporalResonator.name=TemporalResonator
+item.ItemDimensionalMonopole.name=Dimensional Monopole
+item.ItemSelfFulfillingOracle.name=Self Fulfilling Oracle
+item.ItemCrossDimensionalCommunicator.name=Cross Dimensional Communicator
+item.ItemInfallibleEstimator.name=Infallible Estimator
+item.ItemPanlocationalComputer.name=Pan Locational Computer
+item.ItemPandoraCube.name=Pandora Cube
+item.ItemFissionReactorPlating.name=Fission Reactor Plating
+item.ItemDigitalSchematic.name=Digital Schematic
+item.ItemMinosGate.name=Minos Gate
+item.ItemCharosGate.name=Charos Gate
+item.ItemCerberusGate.name=Cerberus Gate
+item.ItemErinyesCircuit.name=Erinyes Circuit
+item.ItemMinervaComplex.name=Minerva Complex
+item.ItemAtlasMount.name=Atlas Mount
+item.ItemHerculesDrive.name=Hercules Drive
+item.ItemHermesBus.name=Hermes Bus
+item.ItemOrpheusProcessor.name=Orpheus Processor
+item.ItemFemtoPlating.name=Femto Plating
+item.ItemStyxValve.name=Styx Valve
+item.ItemFemtoCoil.name=Femto Coil
+item.ItemPhlegethonTunnelPrimer.name=Phlegethon Tunnel Primer
+item.ItemStellaratorPlating.name=Stellarator Plating
+item.ItemInfinitelyRecursiveALU.name=Infinitely Recursive ALU
+item.ItemInfiniteVolumePolychora.name=Infinite Volume Polychora
+item.ItemNucleationCore.name=Nucleation Core
+item.ItemInhibitionCore.name=Inhibition Core
+item.ItemQuantumSchematic.name=Quantum Schematic
+item.ItemMicroTechnology.name=Micro Technology
+item.ItemNanoTechnology.name=Nano Technology
+item.ItemFemtoTechnology.name=Femto Technology
+item.ItemPaperSchematic.name=Paper Schematic
+item.ItemInterfaceDeviceMicro.name=Micro Interface Device
+item.ItemInterfaceDeviceNano.name=Nano Interface Device
+item.ItemInterfaceDeviceFemto.name=Femto Interface Device
+
+item.ItemCubit.name=Cubit
+item.ItemRectangulon.name=Rectangulon
+item.ItemPlaneoid.name=Planeoid
+item.ItemCrystallite.name=Crystallite
+item.ItemMineralite.name=Mineralite
+item.ItemMetallite.name=Metallite
+item.ItemFaunite.name=Faunite
+item.ItemElectrite.name=Electrite
+item.ItemFlorite.name=Florite
+item.ItemMicroCrystal.name=Micro Crystal
+item.ItemProteinChain.name=Protein Chain
+item.ItemNerveCluster.name=Nerve Cluster
+item.ItemConductiveAlloy.name=Conductive Alloy
+item.ItemMetalComposite.name=Metal Composite
+item.ItemFibrousStrand.name=Fibrous Strand
+item.ItemMineralLattice.name=Mineral Lattice
+item.ItemFungalSpores.name=Fungal Spores
+item.ItemIonicChunk.name=Ionic Chunk
+item.ItemReplicatingMaterial.name=Replicating Material
+item.ItemSpinyFilament.name=Spiny Filament
+item.ItemHardenedBulb.name=Hardened Bulb
+item.ItemMorphicChannel.name=Morphic Channel
+item.ItemSynthesizedFiber.name=Synthesized Fiber
+item.ItemOrganometallicPlate.name=Organometallic Plate
+

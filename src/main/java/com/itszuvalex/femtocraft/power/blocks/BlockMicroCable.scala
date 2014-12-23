@@ -38,7 +38,7 @@ import net.minecraft.world.{IBlockAccess, World}
 import net.minecraftforge.common.util.ForgeDirection
 import net.minecraftforge.common.util.ForgeDirection._
 
-class BlockMicroCable(material: Material) extends BlockPowerContainer(material) {
+class BlockMicroCable() extends BlockPowerContainer(Material.iron) {
   var coreBorder: IIcon = null
   var connector : IIcon = null
   var coil      : IIcon = null

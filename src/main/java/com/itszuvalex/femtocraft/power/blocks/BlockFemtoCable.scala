@@ -33,7 +33,7 @@ import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.world.World
 
-class BlockFemtoCable(par2Material: Material) extends BlockMicroCable(par2Material) {
+class BlockFemtoCable() extends BlockMicroCable() {
   setCreativeTab(Femtocraft.femtocraftTab)
   setBlockName("blockFemtoCable")
   setHardness(1.0f)

@@ -243,7 +243,7 @@ object FemtocraftTechnologies {
                           false,
                           false)
     ret += new Technology(MECHANICAL_PRECISION,
-                          "Mathematically Precise",
+                          "Mathematically precise.",
                           EnumTechLevel.MICRO,
                           Array[String](MACHINING, POTENTIALITY_HARNESSING, ALGORITHMS),
                           new ItemStack(Femtocraft.blockMicroFurnaceUnlit),
@@ -312,11 +312,11 @@ object FemtocraftTechnologies {
                           getInput(new ItemStack(Femtocraft.itemNanochip)),
                           new ItemStack(Femtocraft.itemNanochip),
                           " Your first machine-fabricated circuitry.  Let's see just how small the machines can go.",
-                          Femtocraft.itemNanochip.toRecipeWithInfoString(RecipeType.ASSEMBLER,"A direct improvement on the microchip.  Key farenite trails allow for blazing fast logic propagation.") +
+                          Femtocraft.itemNanochip.toRecipeWithInfoString(RecipeType.ASSEMBLER, "A direct improvement on the microchip.  Key farenite trails allow for blazing fast logic propagation.") +
                           "With the addition of redstone logic, the general nanochip can become specialized for use in key circuit designs." +
                           Femtocraft.itemNanoCalculator.toRecipeWithInfoString(RecipeType.ASSEMBLER, "The calculator is great for complex mathematical operations that are too difficult for applications without a computer.") +
                           Femtocraft.itemNanoRegulator.toRecipeWithInfoString(RecipeType.ASSEMBLER, "The regulator has applications in multi-variable resource management problems.") +
-                          Femtocraft.itemNanoSimulator.toRecipeWithInfoString(RecipeType.ASSEMBLER,"The simulator mimics material processes for use in predictive analysis."),
+                          Femtocraft.itemNanoSimulator.toRecipeWithInfoString(RecipeType.ASSEMBLER, "The simulator mimics material processes for use in predictive analysis."),
                           false, false)
     ret += new Technology(ADVANCED_PROGRAMMING,
                           "Technology++",
@@ -362,7 +362,7 @@ object FemtocraftTechnologies {
                           getInput(new ItemStack(Femtocraft.itemManagerCore)),
                           new ItemStack(Femtocraft.itemManagerCore))
     ret += new Technology(BASIC_CHEMISTRY,
-                          "Composition of Matter",
+                          "Composition of matter.",
                           EnumTechLevel.MACRO,
                           Array[String](MACROSCOPIC_STRUCTURES),
                           new ItemStack(Femtocraft.itemMineralLattice),
@@ -381,7 +381,7 @@ object FemtocraftTechnologies {
                           false,
                           true)
     ret += new Technology(POTENTIALITY,
-                          "Power Overwhelming",
+                          "Power overwhelming.",
                           EnumTechLevel.MICRO,
                           Array[String](BASIC_CIRCUITS, BASIC_CHEMISTRY),
                           new ItemStack(Femtocraft.blockMicroCable),
@@ -395,7 +395,7 @@ object FemtocraftTechnologies {
                           Femtocraft.blockMicroCable.toRecipeWithInfoString(RecipeType.CRAFTING,
                                                                             "A rickety assembly, the MicroCable is composed of many micro coils to move power around.  The wires will act to equalize power among each other and they have an internal buffer that collects and moves energy."), false, false)
     ret += new Technology(POTENTIALITY_STORAGE,
-                          "Power, Cubed",
+                          "Power, cubed.",
                           EnumTechLevel.MICRO,
                           Array[String](POTENTIALITY, MACHINING),
                           new ItemStack(Femtocraft.blockMicroCube),
@@ -435,13 +435,16 @@ object FemtocraftTechnologies {
                           Femtocraft.blockMagneticInductionGenerator.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Generates power based on the movement of neighboring magnetic blocks."),
                           false, false)
     ret += new Technology(ADVANCED_CHEMISTRY,
-                          "",
+                          "Curiouser and curiouser!",
                           EnumTechLevel.NANO,
                           Array[String](POTENTIALITY_GENERATION, BASIC_CHEMISTRY, MOLECULAR_MANIPULATION),
                           new ItemStack(Femtocraft.itemCrystallite),
                           true,
+                          Array[ItemStack](new ItemStack(Femtocraft.itemArticulatingArm), new ItemStack(Femtocraft.itemAssemblyArray), new ItemStack(Femtocraft.itemArticulatingArm), new ItemStack(Femtocraft.itemDissassemblyArray), new ItemStack(Femtocraft.blockMicroDeconstructor), new ItemStack(Femtocraft.itemDissassemblyArray), new ItemStack(Femtocraft.itemMicrochip), new ItemStack(Femtocraft.itemMicroLogicCore), new ItemStack(Femtocraft.itemMicrochip)),
                           null,
-                          null)
+                          " Noticing common behavior even among as small of things as your discovered \"Molecules\", you can't help but wonder that maybe there exists something smaller than them.  After all, you would never have thought Molecules existed before you began your experiments.  Your new machinery may possibly be able uncover the answer for you.",
+                          " These \"Atoms\", though fewer in number, appear to completely describe the behaviors of molecules.  Though not all combinations of atoms are used, it appears extremely difficult to create alternate combinations." + ComponentRegistry.getComponentsAssemblerRecipeDisplayString(EnumTechLevel.MICRO),
+                          false, false)
     ret += new Technology(ARTIFICIAL_MATERIALS,
                           "Make what you need.",
                           EnumTechLevel.NANO,
@@ -507,7 +510,7 @@ object FemtocraftTechnologies {
                           getInput(new ItemStack(Femtocraft.itemDigitalSchematic)),
                           new ItemStack(Femtocraft.itemDigitalSchematic))
     ret += new Technology(SPACETIME_MANIPULATION,
-                          "The question is: When did you ACTUALLY finish " + "researching this?",
+                          "The question is: When did you ACTUALLY finish researching this?",
                           EnumTechLevel.NANO,
                           Array[String](ADVANCED_CHEMISTRY),
                           new ItemStack(Femtocraft.itemDimensionalMonopole),
@@ -515,7 +518,7 @@ object FemtocraftTechnologies {
                           getInput(new ItemStack(Femtocraft.itemDimensionalMonopole)),
                           new ItemStack(Femtocraft.itemDimensionalMonopole))
     ret += new Technology(DIMENSIONAL_BRAIDING,
-                          "Interweave reality",
+                          "Interweave reality.",
                           EnumTechLevel.DIMENSIONAL,
                           Array[String](ARTIFICIAL_MATERIALS, SPACETIME_MANIPULATION, ATOMIC_MANIPULATION),
                           new ItemStack(Femtocraft.blockNanoEnmesher),
@@ -538,7 +541,7 @@ object FemtocraftTechnologies {
                           true,
                           null)
     ret += new Technology(TEMPORAL_PIPELINING,
-                          "Start working on the next second, before it begins.",
+                          "Start working in the next second, before it begins.",
                           EnumTechLevel.TEMPORAL,
                           Array[String](ARTIFICIAL_MATERIALS, SPACETIME_MANIPULATION, ATOMIC_MANIPULATION),
                           new ItemStack(Femtocraft.blockNanoHorologe),
@@ -571,7 +574,7 @@ object FemtocraftTechnologies {
                           getInput(new ItemStack(Femtocraft.itemCharosGate)),
                           new ItemStack(Femtocraft.itemCharosGate))
     ret += new Technology(POTENTIAL_HARVESTING,
-                          "Headhunters Unite!",
+                          "Headhunters unite!",
                           EnumTechLevel.MICRO,
                           Array[String](POTENTIALITY_STORAGE, POTENTIALITY_HARNESSING),
                           new ItemStack(Femtocraft.blockMicroChargingCapacitor),
@@ -661,7 +664,7 @@ object FemtocraftTechnologies {
                           getInput(new ItemStack(Femtocraft.blockFemtoChronoshifter)),
                           new ItemStack(Femtocraft.blockFemtoChronoshifter))
     ret += new Technology(CAUSALITY_SINGULARITY,
-                          "If you researched this, you never would have researched " + "this.",
+                          "If you researched this, you never would have researched this.",
                           EnumTechLevel.TEMPORAL,
                           Array[String](TEMPORAL_THREADING),
                           new ItemStack(Femtocraft.itemInfinitelyRecursiveALU),
@@ -727,7 +730,7 @@ object FemtocraftTechnologies {
                           getInput(new ItemStack(Femtocraft.itemStellaratorPlating)),
                           new ItemStack(Femtocraft.itemStellaratorPlating))
     ret += new Technology(ENERGY_CONVERSION,
-                          "Plasma to Energy",
+                          "Plasma to Energy.",
                           EnumTechLevel.FEMTO,
                           Array[String](STELLAR_MIMICRY),
                           new ItemStack(Femtocraft.blockPlasmaTurbine),
@@ -735,7 +738,7 @@ object FemtocraftTechnologies {
                           getInput(new ItemStack(Femtocraft.blockPlasmaTurbine)),
                           new ItemStack(Femtocraft.blockPlasmaTurbine))
     ret += new Technology(MATTER_CONVERSION,
-                          "Plasma to Mass",
+                          "Plasma to Mass.",
                           EnumTechLevel.FEMTO,
                           Array[String](STELLAR_MIMICRY),
                           new ItemStack(Femtocraft.blockPlasmaCondenser),
@@ -751,7 +754,7 @@ object FemtocraftTechnologies {
                           getInput(new ItemStack(Items.nether_star)),
                           new ItemStack(Items.nether_star))
     ret += new Technology(MOLECULAR_MANIPULATION,
-                          "Many machines manipulate molecules, many more merely make messes.",
+                          "Many machines mathematically manipulate molecules, many more merely make massive messes.",
                           EnumTechLevel.MICRO,
                           Array[String](MECHANICAL_PRECISION, BASIC_CHEMISTRY),
                           new ItemStack(Femtocraft.blockMicroDeconstructor),

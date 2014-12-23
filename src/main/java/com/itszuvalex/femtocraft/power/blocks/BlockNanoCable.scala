@@ -32,7 +32,7 @@ import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.world.World
 
-class BlockNanoCable(par2Material: Material) extends BlockMicroCable(par2Material) {
+class BlockNanoCable() extends BlockMicroCable() {
   setCreativeTab(Femtocraft.femtocraftTab)
   setBlockName("blockNanoCable")
   setHardness(1.0f)

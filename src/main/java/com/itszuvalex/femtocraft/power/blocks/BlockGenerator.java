@@ -29,8 +29,8 @@ import net.minecraft.world.World;
 
 public class BlockGenerator extends BlockPowerContainer {
 
-    public BlockGenerator(Material par2Material) {
-        super(par2Material);
+    public BlockGenerator() {
+        super(Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab());
     }
 

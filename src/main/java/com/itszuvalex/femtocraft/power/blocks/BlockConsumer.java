@@ -29,8 +29,8 @@ import net.minecraft.world.World;
 
 public class BlockConsumer extends BlockPowerContainer {
 
-    public BlockConsumer(Material par2Material) {
-        super(par2Material);
+    public BlockConsumer() {
+        super(Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab());
     }
 

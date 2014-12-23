@@ -16,16 +16,18 @@ import scala.collection.mutable.ArrayBuffer
 object AssemblerDefaults {
 
   def getMacroDefaults: ArrayBuffer[AssemblerRecipe] = {
-    val ret = new ArrayBuffer[AssemblerRecipe]()
+    val ret = new ArrayBuffer[AssemblerRecipe]
 
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Blocks.sand), null, null, null, null, null, null, null, null), 0, new ItemStack(Blocks.glass),
                                EnumTechLevel.MACRO, FemtocraftTechnologies.BASIC_CHEMISTRY)
+    ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemConductivePowder), null, null, new ItemStack(Femtocraft.itemBoard), null, null, null, null, null),
+                               0, new ItemStack(Femtocraft.itemDopedBoard), EnumTechLevel.MACRO, FemtocraftTechnologies.BASIC_CHEMISTRY, RecipeType.Decomposition)
     ret
   }
 
 
   def getMicroDefaults: ArrayBuffer[AssemblerRecipe] = {
-    val ret = new ArrayBuffer[AssemblerRecipe]()
+    val ret = new ArrayBuffer[AssemblerRecipe]
     ret += new
         AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemMineralLattice), null, null, null, null, null,
                                          null, null, null), 1, new ItemStack(Blocks.stone), EnumTechLevel.MICRO,
