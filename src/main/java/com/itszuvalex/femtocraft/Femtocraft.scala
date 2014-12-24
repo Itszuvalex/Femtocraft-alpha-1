@@ -53,7 +53,7 @@ import com.itszuvalex.femtocraft.utils.{FemtocraftFileUtils, FemtocraftUtils}
 import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent, FMLServerStartingEvent}
 import cpw.mods.fml.common.network.NetworkRegistry
-import cpw.mods.fml.common.registry.{GameRegistry, LanguageRegistry}
+import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.common.{FMLCommonHandler, Mod, SidedProxy}
 import cpw.mods.fml.relauncher.Side
 import net.minecraft.block.Block
@@ -294,10 +294,10 @@ object Femtocraft {
 
     FemtocraftPacketHandler.init()
 
-    Femtocraft.proxy.registerTileEntities()
-    Femtocraft.proxy.registerRendering()
-    Femtocraft.proxy.registerBlockRenderers()
-    Femtocraft.proxy.registerTickHandlers()
+    proxy.registerTileEntities()
+    proxy.registerRendering()
+    proxy.registerBlockRenderers()
+    proxy.registerTickHandlers()
     if (event.getSide eq Side.CLIENT) {
       soundManager = new FemtocraftSoundManager
     }
@@ -305,7 +305,6 @@ object Femtocraft {
     FMLCommonHandler.instance().bus().register(new FemtocraftPlayerTracker)
     MinecraftForge.EVENT_BUS.register(new FemtocraftEventHookContainer)
     MinecraftForge.EVENT_BUS.register(new FemtocraftOreRetrogenHandler)
-    proxy.registerRendering()
 
     if (FemtocraftConfigs.worldGen) {
       GameRegistry.registerWorldGenerator(new FemtocraftOreGenerator, FemtocraftConfigs.GENERATION_WEIGHT)
@@ -485,7 +484,6 @@ object Femtocraft {
     itemKineticPulverizer = registerBaseItem("ItemKineticPulverizer", "Kinetic Pulverizer")
     itemHeatingElement = registerBaseItem("ItemHeatingCoil", "Heating Coil")
     itemPortableResearchComputer = registerItem(new ItemPortableResearchComputer, "ItemPortableResearchComputer")
-    LanguageRegistry.addName(itemPortableResearchComputer, "Portable Research Computer")
     itemNanochip = registerBaseItem("ItemNanochip", "Nanochip")
     itemNanoCalculator = registerBaseItem("ItemNanoCalculator", "Nano Calculator")
     itemNanoRegulator = registerBaseItem("ItemNanoRegulator", "Nano Regulator")
@@ -507,7 +505,6 @@ object Femtocraft {
     itemPandoraCube = registerBaseItem("ItemPandoraCube", "Pandora Cube")
     itemFissionReactorPlating = registerBaseItem("ItemFissionReactorPlating", "Fission Reactor Plating")
     itemDigitalSchematic = registerItem(new ItemDigitalSchematic("ItemDigitalSchematic"), "ItemDigitalSchematic")
-    LanguageRegistry.addName(itemDigitalSchematic, "Digital Schematic")
     itemMinosGate = registerBaseItem("ItemMinosGate", "Minos Gate")
     itemCharosGate = registerBaseItem("ItemCharosGate", "Charos Gate")
     itemCerberusGate = registerBaseItem("ItemCerberusGate", "Cerberus Gate")
@@ -528,19 +525,12 @@ object Femtocraft {
     itemInhibitionCore = registerItem(new ItemInhibitionCore("ItemInhibitionCore"), "ItemInhibitionCore")
     itemQuantumSchematic = registerItem(new ItemQuantumSchematic("ItemQuantumSchematic"), "ItemQuantumSchematic")
     itemMicroTechnology = registerItem(new ItemMicroTechnology, "ItemMicroTechnology")
-    LanguageRegistry.addName(itemMicroTechnology, "Micro Technology")
     itemNanoTechnology = registerItem(new ItemNanoTechnology, "ItemNanoTechnology")
-    LanguageRegistry.addName(itemNanoTechnology, "Nano Technology")
     itemFemtoTechnology = registerItem(new ItemFemtoTechnology, "ItemFemtoTechnology")
-    LanguageRegistry.addName(itemFemtoTechnology, "Femto Technology")
     itemPaperSchematic = registerItem(new ItemPaperSchematic("ItemPaperSchematic"), "ItemPaperSchematic")
-    LanguageRegistry.addName(itemPaperSchematic, "Paper Schematic")
     itemInterfaceDeviceMicro = registerItem(new ItemMicroInterfaceDevice, "ItemInterfaceDeviceMicro")
-    LanguageRegistry.addName(itemInterfaceDeviceMicro, "MicroInterface Device")
     itemInterfaceDeviceNano = registerItem(new ItemNanoInterfaceDevice, "ItemInterfaceDeviceNano")
-    LanguageRegistry.addName(itemInterfaceDeviceNano, "NanoInterface Device")
     itemInterfaceDeviceFemto = registerItem(new ItemFemtoInterfaceDevice, "ItemInterfaceDeviceFemto")
-    LanguageRegistry.addName(itemInterfaceDeviceFemto, "FemtoInterface Device")
     itemCubit = registerBaseItem("ItemCubit", FemtocraftUtils.orangeify("Cubit"))
     ComponentRegistry.registerComponent(itemCubit, EnumTechLevel.FEMTO)
     itemRectangulon = registerBaseItem("ItemRectangulon", FemtocraftUtils.orangeify("Rectangulon"))

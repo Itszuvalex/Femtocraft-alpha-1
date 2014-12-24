@@ -56,7 +56,7 @@ import scala.collection.mutable.ArrayBuffer
   */
 
 object ManagerAssemblerRecipe {
-  val shapelessPermuteTimeMillis = 10
+  val shapelessPermuteTimeMillis: Long = 100
 }
 
 class ManagerAssemblerRecipe {
@@ -281,8 +281,6 @@ class ManagerAssemblerRecipe {
       if (!valid) {
         Femtocraft.log(Level.WARN, "Failed to register shapeless assembler recipe for " + recipe.getRecipeOutput
                                                                                           .getDisplayName + "!")
-        Femtocraft.log(Level.WARN,
-                       "I have no clue how this would happen...as the search space is literally " + "thousands of configurations.  Sorry for the wait.")
       }
       else {
         Femtocraft.log(Level.INFO,
@@ -304,8 +302,6 @@ class ManagerAssemblerRecipe {
       if (!valid) {
         Femtocraft.log(Level.WARN, "Failed to register shapeless ore assembler recipe for " + recipe.getRecipeOutput
                                                                                               .getDisplayName + "!")
-        Femtocraft.log(Level.WARN,
-                       "I have no clue how this would happen...as the search space is literally " + "thousands of configurations.  Sorry for the wait.")
       }
       else {
         Femtocraft.log(Level.INFO,
@@ -430,7 +426,7 @@ class ManagerAssemblerRecipe {
               catch {
                 case exc: IndexOutOfBoundsException =>
                   Femtocraft.log(Level.ERROR,
-                                 "Ore recipe with nothing registered in " + "ore dictionary for " + recipe.getRecipeName + ".")
+                                 "Ore recipe with nothing registered in ore dictionary for " + recipe.getRecipeName + ".")
                   return false
               }
             }
@@ -541,64 +537,32 @@ class ManagerAssemblerRecipe {
 
   private def registerShapelessOreRecipe(recipeItems: util.List[_], recipeOutput: ItemStack): Boolean = {
     try {
-      var valid = false
-      var slots = new Array[Int](recipeItems.size)
-      val input = Array.fill[ItemStack](9)(null)
-      val recipe = new AssemblerRecipe(input, 0, recipeOutput.copy, EnumTechLevel.MACRO,
-                                       FemtocraftTechnologies.MACROSCOPIC_STRUCTURES)
       val timeStart = System.currentTimeMillis
-      if (recipe.output.getItemDamage == OreDictionary.WILDCARD_VALUE) {
-        recipe.output.setItemDamage(0)
-      }
-      val offset = 0
-      while (!valid && ((offset + recipeItems.size) <= 9)) {
-        for (i <- 0 until slots.length) {
-          slots(i) = i
+      val input = Array.fill[ItemStack](9)(null)
+      recipeItems.map {
+                        case i: ItemStack            => i.copy();
+                        case list: util.ArrayList[_] => try list.asInstanceOf[util.ArrayList[ItemStack]].get(0)
+                        catch {
+                          case exc: IndexOutOfBoundsException =>
+                            Femtocraft.log(Level.ERROR,
+                                           "Ore recipe with nothing registered in ore dictionary for " + (if (recipeOutput == null) "null" else recipeOutput.getDisplayName) + ".")
+                            return false
+                        }
+
+                        case _ => null
+                      }.copyToArray(input)
+      input.permutations.exists { permute =>
+        val recipe = new AssemblerRecipe(permute, 0, recipeOutput.copy, EnumTechLevel.MACRO,
+                                         FemtocraftTechnologies.MACROSCOPIC_STRUCTURES)
+
+        if (recipe.output.getItemDamage == OreDictionary.WILDCARD_VALUE) {
+          recipe.output.setItemDamage(0)
         }
-        while (!valid) {
-          for (i <- 0 until Math.min(slots.length, 9)) {
-            var item: ItemStack = null
-            val obj = recipeItems.get(i)
-            if (obj.isInstanceOf[util.ArrayList[_]]) {
-              try {
-                item = obj.asInstanceOf[util.ArrayList[ItemStack]].get(0)
-              }
-              catch {
-                case exc: IndexOutOfBoundsException =>
-                  Femtocraft.log(Level.ERROR,
-                                 "Ore recipe with nothing registered in " + "ore dictionary for " + recipe
-                                                                                                    .getRecipeName + ".")
-                  return false
-              }
-            }
-            else {
-              item = obj.asInstanceOf[ItemStack]
-            }
-            input(slots(i) + offset) = if (item == null) null else item.copy
-          }
-
-          for (i <- input) {
-            if (i != null) {
-              if (i.getItemDamage == OreDictionary.WILDCARD_VALUE) {
-                i.setItemDamage(0)
-              }
-            }
-          }
-          if ((System.currentTimeMillis - timeStart) > ManagerAssemblerRecipe.shapelessPermuteTimeMillis) {
-            return false
-          }
-
-          if (addReversableRecipe(recipe)) {
-            valid = true
-          }
-          else {
-            slots = permute(slots)
-            valid = false
-          }
-        }
-      }
-
-      valid
+//        if ((System.currentTimeMillis - timeStart) > ManagerAssemblerRecipe.shapelessPermuteTimeMillis) {
+//          return false
+//        }
+        checkDecomposition(recipe) && checkRecomposition(recipe) && addReversableRecipe(recipe)
+                                }
     }
     catch {
       case e: Exception =>
@@ -616,32 +580,25 @@ class ManagerAssemblerRecipe {
 
   private def registerShapelessRecipe(recipeItems: util.List[_], recipeOutput: ItemStack): Boolean = {
     try {
-      var valid = false
-      val slots = new Array[Int](recipeItems.size)
-      val input = scala.Array.fill[ItemStack](9)(null)
-      val recipe = new AssemblerRecipe(input, 0, recipeOutput.copy, EnumTechLevel.MACRO,
-                                       FemtocraftTechnologies.MACROSCOPIC_STRUCTURES)
       val timeStart = System.currentTimeMillis
-      val offset = 0
-      while (!valid && ((offset + recipeItems.size) <= 9)) {
-        for (i <- 0 until slots.length) {
-          slots(i) = i
-        }
+      val input = Array.fill[ItemStack](9)(null)
+      recipeItems.map {
+                        case i: ItemStack => i.copy()
+                        case _            => null
+                      }.copyToArray(input)
+      input.permutations.exists { permute =>
+        val recipe = new AssemblerRecipe(permute, 0, recipeOutput.copy, EnumTechLevel.MACRO,
+                                         FemtocraftTechnologies.MACROSCOPIC_STRUCTURES)
 
-        while (!valid) {
-          for (i <- 0 until Math.min(slots.length, 9)) {
-            val item = recipeItems.get(i).asInstanceOf[ItemStack]
-            input(slots(i) + offset) = if (item == null) null else item.copy
-          }
-
-          if ((System.currentTimeMillis - timeStart) > ManagerAssemblerRecipe.shapelessPermuteTimeMillis) {
-            return false
-          }
-          addReversableRecipe(recipe)
-          valid = true
+        if (recipe.output.getItemDamage == OreDictionary.WILDCARD_VALUE) {
+          recipe.output.setItemDamage(0)
         }
-      }
-      valid
+        //        if ((System.currentTimeMillis - timeStart) > ManagerAssemblerRecipe.shapelessPermuteTimeMillis) {
+        //          return false
+        //        }
+        checkDecomposition(recipe) && checkRecomposition(recipe) && addReversableRecipe(recipe)
+
+                                }
     }
     catch {
       case e: Exception =>
@@ -657,44 +614,45 @@ class ManagerAssemblerRecipe {
     }
   }
 
-  private def permute(slots: Array[Int]): Array[Int] = {
-    val k = findHighestK(slots)
-    val i = findHigherI(slots, k)
-    val prev = slots(k)
-    slots(k) = slots(i)
-    slots(i) = prev
-    val remaining = Math.ceil((slots.length - k + 1) / 2f).toInt
-    var r = k + 1
-    var n = 0
-    while ((r < slots.length) && (n < remaining)) {
-      val pr = slots(r)
-      slots(r) = slots(slots.length - n - 1)
-      slots(slots.length - n - 1) = pr
-      r += 1
-      n += 1
-    }
-    slots
-  }
-
-  private def findHighestK(slots: Array[Int]): Int = {
-    var ret: Int = 0
-    for (i <- 0 until (slots.length - 1)) {
-      if ((slots(i) < slots(i + 1)) && (ret < i)) {
-        ret = i
-      }
-    }
-    ret
-  }
-
-  private def findHigherI(slots: Array[Int], k: Int): Int = {
-    var ret: Int = 0
-    for (i <- 0 until slots.length) {
-      if ((slots(k) < slots(i)) && (ret < i)) {
-        ret = i
-      }
-    }
-    ret
-  }
+  //
+  //  private def permute(slots: Array[Int]): Array[Int] = {
+  //    val k = findHighestK(slots)
+  //    val i = findHigherI(slots, k)
+  //    val prev = slots(k)
+  //    slots(k) = slots(i)
+  //    slots(i) = prev
+  //    val remaining = Math.ceil((slots.length - k + 1) / 2f).toInt
+  //    var r = k + 1
+  //    var n = 0
+  //    while ((r < slots.length) && (n < remaining)) {
+  //      val pr = slots(r)
+  //      slots(r) = slots(slots.length - n - 1)
+  //      slots(slots.length - n - 1) = pr
+  //      r += 1
+  //      n += 1
+  //    }
+  //    slots
+  //  }
+  //
+  //  private def findHighestK(slots: Array[Int]): Int = {
+  //    var ret: Int = 0
+  //    for (i <- 0 until (slots.length - 1)) {
+  //      if ((slots(i) < slots(i + 1)) && (ret < i)) {
+  //        ret = i
+  //      }
+  //    }
+  //    ret
+  //  }
+  //
+  //  private def findHigherI(slots: Array[Int], k: Int): Int = {
+  //    var ret: Int = 0
+  //    for (i <- 0 until slots.length) {
+  //      if ((slots(k) < slots(i)) && (ret < i)) {
+  //        ret = i
+  //      }
+  //    }
+  //    ret
+  //  }
 
   class RecompositionKey(val input: Array[ItemStack]) extends Comparable[RecompositionKey] {
     def this(recipe: AssemblerRecipe) = this(recipe.input)
@@ -745,14 +703,12 @@ class ManagerAssemblerRecipe {
         var ret: (Float, Float, Float, Float) = null
         if (recipe != null && recipe.output != null && recipe.output.stackSize > 0) {
           mass += recipe.mass / recipe.output.stackSize
-          recipe.input.foreach {
-                                 case in if !ItemStack.areItemStacksEqual(i, in) =>
-                                   val (m, a, p, ma) = getDecompositionCounts(in, s + new ComponentKey(i))
-                                   molecules += m
-                                   atoms += a
-                                   particles += p
-                                   mass += ma
-                                 case _                                          =>
+          recipe.input.foreach { in =>
+            val (m, a, p, ma) = getDecompositionCounts(in, s + new ComponentKey(i))
+            molecules += m
+            atoms += a
+            particles += p
+            mass += ma
                                }
 
           ret = (molecules / recipe.output.stackSize,
