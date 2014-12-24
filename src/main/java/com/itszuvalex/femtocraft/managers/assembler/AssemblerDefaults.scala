@@ -46,8 +46,12 @@ object AssemblerDefaults {
                         FemtocraftTechnologies.BASIC_CHEMISTRY)
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemFibrousStrand),
                                                 new ItemStack(Femtocraft.itemFibrousStrand), null, null, null, null,
+                                                null, null, null), 1, new ItemStack(Blocks.planks, 1, OreDictionary.WILDCARD_VALUE), EnumTechLevel.MICRO,
+                               FemtocraftTechnologies.BASIC_CHEMISTRY, RecipeType.Decomposition)
+    ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemFibrousStrand),
+                                                new ItemStack(Femtocraft.itemFibrousStrand), null, null, null, null,
                                                 null, null, null), 1, new ItemStack(Blocks.planks), EnumTechLevel.MICRO,
-                               FemtocraftTechnologies.BASIC_CHEMISTRY)
+                               FemtocraftTechnologies.BASIC_CHEMISTRY, RecipeType.Recomposition)
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemFibrousStrand), null, null,
                                                 new ItemStack(Femtocraft.itemFibrousStrand), null, null,
                                                 new ItemStack(Femtocraft.itemFibrousStrand), null, null), 1,

@@ -61,8 +61,8 @@ object ManagerAssemblerRecipe {
 
 class ManagerAssemblerRecipe {
   private val assemblerRecipeList = new ArrayBuffer[AssemblerRecipe]
-  private val assemblerRecompTree = new util.TreeMap[RecompositionKey, AssemblerRecipe]()
-  private val assemblerDecompTree = new util.TreeMap[DecompositionKey, AssemblerRecipe]()
+  private val assemblerRecompTree = new util.TreeMap[RecompositionKey, AssemblerRecipe]
+  private val assemblerDecompTree = new util.TreeMap[DecompositionKey, AssemblerRecipe]
 
   def init() {
     registerRecipes()
@@ -90,11 +90,13 @@ class ManagerAssemblerRecipe {
   @throws(classOf[IllegalArgumentException])
   def addRecipe(recipe: AssemblerRecipe): Boolean =
     try {
-      recipe.`type` match {
+      val result = recipe.`type` match {
         case AssemblerRecipe.RecipeType.Reversible    => addReversableRecipe(recipe)
         case AssemblerRecipe.RecipeType.Decomposition => addDecompositionRecipe(recipe)
         case AssemblerRecipe.RecipeType.Recomposition => addRecompositionRecipe(recipe)
       }
+      if (result) Femtocraft.log(Level.INFO, "Added assembler recipe for " + recipe.getRecipeName)
+      result
     }
     catch {
       case e: Throwable => false
@@ -130,14 +132,20 @@ class ManagerAssemblerRecipe {
     registerDecomposition(recipe)
   }
 
-  def removeAnyRecipe(recipe: AssemblerRecipe) = removeDecompositionRecipe(recipe) || removeRecompositionRecipe(recipe)
+  def removeAnyRecipe(recipe: AssemblerRecipe) = { val result = removeDecompositionRecipe(recipe); removeRecompositionRecipe(recipe) || result }
 
   def removeDecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
-    false
+    if (checkDecomposition(recipe)) return true
+    assemblerDecompTree.remove(new DecompositionKey(recipe))
+    if (checkRecomposition(recipe)) assemblerRecipeList -= recipe
+    true
   }
 
   def removeRecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
-    false
+    if (checkRecomposition(recipe)) return true
+    assemblerRecompTree.remove(new RecompositionKey(recipe))
+    if (checkDecomposition(recipe)) assemblerRecipeList -= recipe
+    true
   }
 
   def removeReversableRecipe(recipe: AssemblerRecipe) = removeDecompositionRecipe(recipe) && removeRecompositionRecipe(recipe)
@@ -387,7 +395,7 @@ class ManagerAssemblerRecipe {
     Femtocraft.assemblerConfigs.loadAssemblerRecipe(recipe)
     if (!MinecraftForge.EVENT_BUS.post(event)) {
       assemblerDecompTree.put(new DecompositionKey(recipe), recipe)
-      if (getRecipe(recipe.input) == null) /* lg n   compared to n from assemblerRecipeList.contains() */ {
+      if (checkRecomposition(recipe)) /* lg n   compared to n from assemblerRecipeList.contains() */ {
         assemblerRecipeList += recipe
       }
       return true
@@ -402,137 +410,87 @@ class ManagerAssemblerRecipe {
   //  private def registerMacroDecompositionRecipes() {
   //  }
   //
-  private def registerShapedOreRecipe(recipeInput: Array[AnyRef], recipeOutput: ItemStack, width: Int,
-                                      height: Int): Boolean = {
+  private def registerShapedOreRecipe(recipeInput: Array[AnyRef], recipeOutput: ItemStack, recipeWidth: Int,
+                                      recipeHeight: Int): Boolean = {
     try {
-      var done = false
-      var xOffset = 0
-      var yOffset = 0
-      val input = Array.fill[ItemStack](9)(null)
-      val recipe = new AssemblerRecipe(input, 0, recipeOutput.copy, EnumTechLevel.MACRO,
-                                       FemtocraftTechnologies.MACROSCOPIC_STRUCTURES)
-      if (recipe.output.getItemDamage == OreDictionary.WILDCARD_VALUE) {
-        recipe.output.setItemDamage(0)
-      }
-      while ((!done) && (xOffset < 3) && (yOffset < 3)) {
-        for (i <- 0 until Math.min(recipeInput.length, 9)) {
-          try {
-            var item: ItemStack = null
-            val obj: AnyRef = recipeInput(i)
-            if (obj.isInstanceOf[util.ArrayList[_]]) {
-              try {
-                item = obj.asInstanceOf[util.ArrayList[ItemStack]].get(0)
-              }
-              catch {
-                case exc: IndexOutOfBoundsException =>
-                  Femtocraft.log(Level.ERROR,
-                                 "Ore recipe with nothing registered in ore dictionary for " + recipe.getRecipeName + ".")
-                  return false
-              }
-            }
+      val recipeItems = Array.fill[ItemStack](recipeInput.length)(null)
+      recipeInput.map {
+                        case i: ItemStack            => i.copy
+                        case list: util.ArrayList[_] => try list.asInstanceOf[util.ArrayList[ItemStack]].get(0).copy
+                        catch {
+                          case exc: IndexOutOfBoundsException =>
+                            Femtocraft.log(Level.ERROR,
+                                           "Ore recipe with nothing registered in ore dictionary for " + (if (recipeOutput == null) "null" else recipeOutput.getDisplayName) + ".")
+                            return false
+                        }
+                        case _                       => null
+                      }.copyToArray(recipeItems)
+      for (xoffset <- 0 to (3 - recipeWidth)) {
+        for (yoffset <- 0 to (3 - recipeHeight)) {
+          val input = Array.fill[ItemStack](9)(null)
+          for (i <- 0 until Math.min(recipeItems.length, 9)) {
+            val item = recipeItems(i)
+            input(((i + xoffset) % recipeWidth) + 3 * (yoffset + ((i + xoffset) / recipeWidth))) = if (item == null) null
             else {
-              item = obj.asInstanceOf[ItemStack]
-            }
-            input(((i + xOffset) % width) + 3 * (yOffset + ((i + xOffset) / width))) = if (item == null) {
-              null
-            }
-            else {
-              new
-                  ItemStack(item.getItem, 1,
-                            item
-                            .getItemDamage)
+              //Has to be stackSize of 1, or weird things happen.
+              new ItemStack(item.getItem, 1, item.getItemDamage)
             }
           }
-          catch {
-            case e: ArrayIndexOutOfBoundsException =>
-              if ( {xOffset += 1; xOffset} >= 3) {
-                xOffset = 0
-                yOffset += 1
-              }
-          }
-        }
-
-        for (i <- input) {
-          if (i != null) {
-            if (i.getItemDamage == OreDictionary.WILDCARD_VALUE) {
-              i.setItemDamage(0)
-            }
-          }
-        }
-        if (addReversableRecipe(recipe)) {
-          done = true
-        }
-        else {
-          if ( {xOffset += 1; xOffset} >= 3) {
-            xOffset = 0
-            yOffset += 1
-          }
-          done = false
+          val recipe = new AssemblerRecipe(input, 0, recipeOutput.copy, EnumTechLevel.MACRO,
+                                           FemtocraftTechnologies.MACROSCOPIC_STRUCTURES)
+          //          if (recipe.output.getItemDamage == OreDictionary.WILDCARD_VALUE) {
+          //            recipe.output.setItemDamage(0)
+          //          }
+          if (addReversableRecipe(recipe)) return true
         }
       }
-      done
     }
     catch {
       case e: Exception =>
         Femtocraft.log(Level.ERROR,
-                       "An error occured while registering a shaped orec recipe for " + (if (recipeOutput == null) {
+                       "An error occurred while registering a shaped ore recipe for " + (if (recipeOutput == null) {
                          "null"
                        }
                        else {
                          recipeOutput
                          .getDisplayName
                        }))
-        false
     }
+    false
   }
 
   private def registerShapedRecipe(recipeItems: Array[ItemStack], recipeOutput: ItemStack, recipeWidth: Int,
                                    recipeHeight: Int): Boolean = {
     try {
-      var done = false
-      var xoffset = 0
-      var yoffset = 0
-      val input = Array.fill[ItemStack](9)(null)
-      val recipe = new AssemblerRecipe(input, 0, recipeOutput.copy, EnumTechLevel.MACRO,
-                                       FemtocraftTechnologies.MACROSCOPIC_STRUCTURES)
-      while ((!done) && ((xoffset + recipeWidth) <= 3) && ((yoffset + recipeHeight) <= 3)) {
-        for (i <- 0 until Math.min(recipeItems.length, 9)) {
-          val item = recipeItems(i)
-          input(((i + xoffset) % recipeWidth) + 3 * (yoffset + ((i + xoffset) / recipeWidth))) = if (item == null) {
-            null
+      for (xoffset <- 0 to (3 - recipeWidth)) {
+        for (yoffset <- 0 to (3 - recipeHeight)) {
+          val input = Array.fill[ItemStack](9)(null)
+          for (i <- 0 until Math.min(recipeItems.length, 9)) {
+            val item = recipeItems(i)
+            input(((i + xoffset) % recipeWidth) + 3 * (yoffset + ((i + xoffset) / recipeWidth))) = if (item == null) null
+            else {
+              //Has to be stackSize of 1, or weird things happen.
+              new ItemStack(item.getItem, 1, item.getItemDamage)
+            }
           }
-          else {
-            new ItemStack(item
-                          .getItem,
-                          1, item
-                             .getItemDamage)
-          }
-        }
-        if (addReversableRecipe(recipe)) {
-          done = true
-        }
-        else {
-          if (({xoffset += 1; xoffset} + recipeWidth) > 3) {
-            xoffset = 0
-            yoffset += 1
-          }
-          done = false
+          val recipe = new AssemblerRecipe(input, 0, recipeOutput.copy, EnumTechLevel.MACRO,
+                                           FemtocraftTechnologies.MACROSCOPIC_STRUCTURES)
+          if (addReversableRecipe(recipe)) return true
         }
       }
-      done
     }
     catch {
       case e: Exception =>
         Femtocraft.log(Level.ERROR,
-                       "An error occured while registering shaped recipe for " + (if (recipeOutput == null) {
+                       "An error occurred while registering shaped recipe for " + (if (recipeOutput == null) {
                          "null"
                        }
                        else {
                          recipeOutput
                          .getDisplayName
                        }) + ".  Width: " + recipeWidth + " Height: " + recipeHeight)
-        false
     }
+    false
   }
 
   private def registerShapelessOreRecipe(recipeItems: util.List[_], recipeOutput: ItemStack): Boolean = {
@@ -540,8 +498,8 @@ class ManagerAssemblerRecipe {
       val timeStart = System.currentTimeMillis
       val input = Array.fill[ItemStack](9)(null)
       recipeItems.map {
-                        case i: ItemStack            => i.copy();
-                        case list: util.ArrayList[_] => try list.asInstanceOf[util.ArrayList[ItemStack]].get(0)
+                        case i: ItemStack            => i.copy
+                        case list: util.ArrayList[_] => try list.asInstanceOf[util.ArrayList[ItemStack]].get(0).copy
                         catch {
                           case exc: IndexOutOfBoundsException =>
                             Femtocraft.log(Level.ERROR,
@@ -555,12 +513,12 @@ class ManagerAssemblerRecipe {
         val recipe = new AssemblerRecipe(permute, 0, recipeOutput.copy, EnumTechLevel.MACRO,
                                          FemtocraftTechnologies.MACROSCOPIC_STRUCTURES)
 
-        if (recipe.output.getItemDamage == OreDictionary.WILDCARD_VALUE) {
-          recipe.output.setItemDamage(0)
-        }
-//        if ((System.currentTimeMillis - timeStart) > ManagerAssemblerRecipe.shapelessPermuteTimeMillis) {
-//          return false
-//        }
+        //        if (recipe.output.getItemDamage == OreDictionary.WILDCARD_VALUE) {
+        //          recipe.output.setItemDamage(0)
+        //        }
+        //        if ((System.currentTimeMillis - timeStart) > ManagerAssemblerRecipe.shapelessPermuteTimeMillis) {
+        //          return false
+        //        }
         checkDecomposition(recipe) && checkRecomposition(recipe) && addReversableRecipe(recipe)
                                 }
     }
@@ -590,9 +548,9 @@ class ManagerAssemblerRecipe {
         val recipe = new AssemblerRecipe(permute, 0, recipeOutput.copy, EnumTechLevel.MACRO,
                                          FemtocraftTechnologies.MACROSCOPIC_STRUCTURES)
 
-        if (recipe.output.getItemDamage == OreDictionary.WILDCARD_VALUE) {
-          recipe.output.setItemDamage(0)
-        }
+        //        if (recipe.output.getItemDamage == OreDictionary.WILDCARD_VALUE) {
+        //          recipe.output.setItemDamage(0)
+        //        }
         //        if ((System.currentTimeMillis - timeStart) > ManagerAssemblerRecipe.shapelessPermuteTimeMillis) {
         //          return false
         //        }
@@ -658,8 +616,9 @@ class ManagerAssemblerRecipe {
     def this(recipe: AssemblerRecipe) = this(recipe.input)
 
     override def compareTo(o: RecompositionKey): Int = {
-      (input zip o.input)
-      .foreach { case (a, b) => FemtocraftUtils.compareItem(a, b) match {case 0 => ; case t => return t}}
+      for (i <- 0 until input.length) {
+        FemtocraftUtils.compareItem(input(i), o.input(i)) match {case 0 => ; case t => return t}
+      }
       0
     }
   }
@@ -701,8 +660,9 @@ class ManagerAssemblerRecipe {
       if (!s.contains(new ComponentKey(i))) {
         val recipe = getRecipe(i)
         var ret: (Float, Float, Float, Float) = null
-        if (recipe != null && recipe.output != null && recipe.output.stackSize > 0) {
-          mass += recipe.mass / recipe.output.stackSize
+        if (recipe != null && recipe.output != null) {
+          val stackSize = Math.max(recipe.output.stackSize, 1)
+          mass += recipe.mass / stackSize
           recipe.input.foreach { in =>
             val (m, a, p, ma) = getDecompositionCounts(in, s + new ComponentKey(i))
             molecules += m
@@ -711,10 +671,10 @@ class ManagerAssemblerRecipe {
             mass += ma
                                }
 
-          ret = (molecules / recipe.output.stackSize,
-            atoms / recipe.output.stackSize,
-            particles / recipe.output.stackSize,
-            mass / recipe.output.stackSize)
+          ret = (molecules / stackSize,
+            atoms / stackSize,
+            particles / stackSize,
+            mass / stackSize)
         }
         else {
           ret = (molecules / i.stackSize, atoms / i.stackSize, particles / i.stackSize, mass / i.stackSize)
