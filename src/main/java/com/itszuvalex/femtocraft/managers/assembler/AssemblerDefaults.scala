@@ -22,6 +22,7 @@ object AssemblerDefaults {
                                EnumTechLevel.MACRO, FemtocraftTechnologies.BASIC_CHEMISTRY)
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemConductivePowder), null, null, new ItemStack(Femtocraft.itemBoard), null, null, null, null, null),
                                0, new ItemStack(Femtocraft.itemDopedBoard), EnumTechLevel.MACRO, FemtocraftTechnologies.BASIC_CHEMISTRY, RecipeType.Decomposition)
+    ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Items.clay_ball), null, null, null, null, null, null, null, null), 0, new ItemStack(Items.brick), EnumTechLevel.MACRO, FemtocraftTechnologies.BASIC_CHEMISTRY, RecipeType.Decomposition)
     ret
   }
 
@@ -111,16 +112,16 @@ object AssemblerDefaults {
                                EnumTechLevel.MICRO, FemtocraftTechnologies.BASIC_CHEMISTRY)
     ret += new
         AssemblerRecipe(Array[ItemStack](null, null, null, new ItemStack(Femtocraft.itemMineralLattice), null, null,
-                                         null, null, null), 1, new ItemStack(Blocks.netherrack), EnumTechLevel.MICRO,
-                        FemtocraftTechnologies.BASIC_CHEMISTRY)
+                                         null, null, null), 1, new ItemStack(Blocks.netherrack), EnumTechLevel.FEMTO,
+                        FemtocraftTechnologies.DIMENSIONAL_TRANSFORMATION)
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemMicroCrystal),
                                                 new ItemStack(Femtocraft.itemIonicChunk), null, null, null, null, null,
-                                                null, null), 1, new ItemStack(Blocks.soul_sand), EnumTechLevel.MICRO,
-                               FemtocraftTechnologies.BASIC_CHEMISTRY)
+                                                null, null), 1, new ItemStack(Blocks.soul_sand), EnumTechLevel.FEMTO,
+                               FemtocraftTechnologies.DIMENSIONAL_TRANSFORMATION)
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemConductiveAlloy),
                                                 new ItemStack(Femtocraft.itemIonicChunk), null, null, null, null, null,
                                                 null, null), 1, new ItemStack(Items.glowstone_dust),
-                               EnumTechLevel.MICRO, FemtocraftTechnologies.BASIC_CHEMISTRY)
+                               EnumTechLevel.FEMTO, FemtocraftTechnologies.DIMENSIONAL_TRANSFORMATION)
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemMorphicChannel),
                                                 new ItemStack(Femtocraft.itemFibrousStrand), null, null, null, null,
                                                 null, null, null), 1, new ItemStack(Blocks.melon_block),
@@ -140,7 +141,7 @@ object AssemblerDefaults {
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemConductiveAlloy),
                                                 new ItemStack(Femtocraft.itemMineralLattice), null, null, null, null,
                                                 null, null, null), 1, new ItemStack(Blocks.end_stone),
-                               EnumTechLevel.MICRO, FemtocraftTechnologies.BASIC_CHEMISTRY)
+                               EnumTechLevel.FEMTO, FemtocraftTechnologies.DIMENSIONAL_TRANSFORMATION)
     ret += new
         AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemMorphicChannel), null, null, null, null, null,
                                          null, null, null), 1, new ItemStack(Blocks.cocoa), EnumTechLevel.MICRO,
@@ -292,12 +293,12 @@ object AssemblerDefaults {
                                FemtocraftTechnologies.BASIC_CHEMISTRY)
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemNerveCluster),
                                                 new ItemStack(Femtocraft.itemIonicChunk), null, null, null, null, null,
-                                                null, null), 1, new ItemStack(Items.ghast_tear), EnumTechLevel.MICRO,
-                               FemtocraftTechnologies.BASIC_CHEMISTRY)
+                                                null, null), 1, new ItemStack(Items.ghast_tear), EnumTechLevel.FEMTO,
+                               FemtocraftTechnologies.DIMENSIONAL_TRANSFORMATION)
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemFungalSpores),
                                                 new ItemStack(Femtocraft.itemReplicatingMaterial), null, null, null,
                                                 null, null, null, null), 1, new ItemStack(Items.nether_wart),
-                               EnumTechLevel.MICRO, FemtocraftTechnologies.BASIC_CHEMISTRY)
+                               EnumTechLevel.FEMTO, FemtocraftTechnologies.DIMENSIONAL_TRANSFORMATION)
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemNerveCluster),
                                                 new ItemStack(Femtocraft.itemOrganometallicPlate), null, null, null,
                                                 null, null, null, null), 1, new ItemStack(Items.spider_eye),
@@ -305,7 +306,7 @@ object AssemblerDefaults {
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemMorphicChannel),
                                                 new ItemStack(Femtocraft.itemMicroCrystal), null, null, null, null,
                                                 null, null, null), 1, new ItemStack(Items.blaze_powder),
-                               EnumTechLevel.MICRO, FemtocraftTechnologies.BASIC_CHEMISTRY)
+                               EnumTechLevel.FEMTO, FemtocraftTechnologies.DIMENSIONAL_TRANSFORMATION)
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemMetalComposite),
                                                 new ItemStack(Femtocraft.itemConductiveAlloy), null, null, null, null,
                                                 null, null, null), 1, new ItemStack(Items.emerald), EnumTechLevel.MICRO,
@@ -340,6 +341,20 @@ object AssemblerDefaults {
                                                 new ItemStack(Femtocraft.itemHardenedBulb, 64)), 1,
                                new ItemStack(Items.nether_star), EnumTechLevel.MICRO,
                                FemtocraftTechnologies.NETHER_STAR_FABRICATION)
+    ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemIonicChunk),
+                                                new ItemStack(Femtocraft.itemHardenedBulb),
+                                                new ItemStack(Femtocraft.itemIonicChunk),
+                                                null, null, null, null, null, null), 1, new ItemStack(Items.quartz), EnumTechLevel.MICRO, FemtocraftTechnologies.BASIC_CHEMISTRY)
+    ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Items.blaze_powder), new ItemStack(Items.brick), null,
+                                                null, null, null,
+                                                null, null, null), 1, new ItemStack(Items.netherbrick), EnumTechLevel.FEMTO, FemtocraftTechnologies.DIMENSIONAL_TRANSFORMATION)
+    ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemConductiveAlloy), new ItemStack(Femtocraft.itemMorphicChannel), null,
+                                                null, null, null,
+                                                null, null, null), 1, new ItemStack(Femtocraft.itemIngotFarenite), EnumTechLevel.NANO, FemtocraftTechnologies.THORIUM_FISSIBILITY)
+    ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Items.blaze_powder), new ItemStack(Femtocraft.itemIngotFarenite), null,
+                                                null, null, null,
+                                                null, null, null), 1, new ItemStack(Femtocraft.itemIngotMalenite, 2), EnumTechLevel.FEMTO, FemtocraftTechnologies.DIMENSIONAL_TRANSFORMATION)
+
     ret
   }
 
