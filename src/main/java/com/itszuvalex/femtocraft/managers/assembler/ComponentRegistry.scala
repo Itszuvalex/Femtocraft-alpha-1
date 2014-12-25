@@ -39,7 +39,7 @@ import scala.collection.mutable.ArrayBuffer
   }
 
   def getComponentsInAssemblerRecipeDisplayString(tech: EnumTechLevel) = {
-    Femtocraft.recipeManager.assemblyRecipes.getAllRecipes.filter(p => {
+    Femtocraft.recipeManager.assemblyRecipes.getAllRecipes.view.filter(p => {
       p.input match {
         case null  => false
         case input =>
@@ -48,6 +48,6 @@ import scala.collection.mutable.ArrayBuffer
                          case _                                 => false
                        }
       }
-    }).map(i => i.output).map(i => i.toAssemblerString).aggregate("")(_ + _, _ + _)
+    }).map(i => i.output.toAssemblerString).aggregate("")(_ + _, _ + _)
   }
 }

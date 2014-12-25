@@ -67,13 +67,13 @@ object FemtocraftUtils {
     }
     val damage = cur.getItemDamage
     val indamage = in.getItemDamage
-    if ((damage != OreDictionary.WILDCARD_VALUE) || (indamage != OreDictionary.WILDCARD_VALUE)) {
-      if (damage < indamage) {
-        return -1
-      }
-      if (damage > indamage) {
-        return 1
-      }
+    if (damage == OreDictionary.WILDCARD_VALUE) return 0
+    if (indamage == OreDictionary.WILDCARD_VALUE) return 0
+    if (damage < indamage) {
+      return -1
+    }
+    if (damage > indamage) {
+      return 1
     }
     0
   }

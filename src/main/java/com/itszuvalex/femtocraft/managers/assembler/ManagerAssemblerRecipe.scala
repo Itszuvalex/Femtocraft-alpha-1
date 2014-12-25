@@ -39,7 +39,6 @@ import org.apache.logging.log4j.Level
 
 import scala.collection.JavaConversions._
 import scala.collection.immutable
-import scala.collection.immutable.TreeMap
 import scala.collection.mutable.ArrayBuffer
 
 
@@ -630,7 +629,7 @@ class ManagerAssemblerRecipe {
   }
 
   private object DecompositionManager {
-    private var decompCountMemo = new TreeMap[ComponentKey, (Float, Float, Float, Float)]
+    private val decompCountMemo = new util.TreeMap[ComponentKey, (Float, Float, Float, Float)]
 
     def getDecompositionCounts(i: ItemStack): (Int, Int, Int, Int) = {
       val (mo, at, pa, ma) = getDecompositionCounts(i, immutable.TreeSet[ComponentKey]())
@@ -646,8 +645,8 @@ class ManagerAssemblerRecipe {
       var mass = 0f
 
       decompCountMemo.get(new ComponentKey(i)) match {
-        case Some((mol, at, pa, ma)) => return (mol * i.stackSize, at * i.stackSize, pa * i.stackSize, ma * i.stackSize)
-        case _                       =>
+        case (mol, at, pa, ma) => return (mol * i.stackSize, at * i.stackSize, pa * i.stackSize, ma * i.stackSize)
+        case _                 =>
       }
 
       i match {
@@ -663,12 +662,14 @@ class ManagerAssemblerRecipe {
         if (recipe != null && recipe.output != null) {
           val stackSize = Math.max(recipe.output.stackSize, 1)
           mass += recipe.mass / stackSize
-          recipe.input.foreach { in =>
-            val (m, a, p, ma) = getDecompositionCounts(in, s + new ComponentKey(i))
-            molecules += m
-            atoms += a
-            particles += p
-            mass += ma
+          recipe.input.foreach {
+                                 case null          =>
+                                 case in: ItemStack =>
+                                   val (m, a, p, ma) = getDecompositionCounts(in, s + new ComponentKey(i))
+                                   molecules += m
+                                   atoms += a
+                                   particles += p
+                                   mass += ma
                                }
 
           ret = (molecules / stackSize,
@@ -679,7 +680,7 @@ class ManagerAssemblerRecipe {
         else {
           ret = (molecules / i.stackSize, atoms / i.stackSize, particles / i.stackSize, mass / i.stackSize)
         }
-        decompCountMemo = decompCountMemo + ((new ComponentKey(i), ret))
+        decompCountMemo.put(new ComponentKey(i), ret)
         val (mo, at, pa, ma) = ret
         return (mo * i.stackSize, at * i.stackSize, pa * i.stackSize, ma * i.stackSize)
       }

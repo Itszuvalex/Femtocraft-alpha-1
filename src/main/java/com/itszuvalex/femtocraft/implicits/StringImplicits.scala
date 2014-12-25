@@ -15,8 +15,8 @@ object StringImplicits {
 
     def toRecipeString(recipeType: RecipeType) = new ItemStack(item).toRecipeString(recipeType)
 
-    def toRecipeWithInfoString(recipeType: RecipeType, string: String) = new ItemStack(item)
-                                                                         .toRecipeWithInfoString(recipeType, string)
+    def toRecipeWithInfoString(recipeType: RecipeType, string: String) =
+      new ItemStack(item).toRecipeWithInfoString(recipeType, string)
   }
 
   implicit class BlockToTechnologyRenderer(block: Block) {
@@ -24,8 +24,8 @@ object StringImplicits {
 
     def toRecipeString(recipeType: RecipeType) = new ItemStack(block).toRecipeString(recipeType)
 
-    def toRecipeWithInfoString(recipeType: RecipeType, string: String) = new ItemStack(block)
-                                                                         .toRecipeWithInfoString(recipeType, string)
+    def toRecipeWithInfoString(recipeType: RecipeType, string: String) =
+      new ItemStack(block).toRecipeWithInfoString(recipeType, string)
   }
 
 }
