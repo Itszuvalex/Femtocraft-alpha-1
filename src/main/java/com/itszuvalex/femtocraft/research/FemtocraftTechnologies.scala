@@ -331,21 +331,29 @@ object FemtocraftTechnologies {
                           Femtocraft.itemBasicAICore.toRecipeWithInfoString(RecipeType.ASSEMBLER, "This core provides a starting framework for plugging in additional logic."),
                           false, false)
     ret += new Technology(WORKLOAD_SCHEDULING,
-                          "",
+                          "Never be late again!",
                           EnumTechLevel.NANO,
                           Array[String](ADVANCED_PROGRAMMING),
                           new ItemStack(Femtocraft.itemSchedulerCore),
                           false,
                           getInput(new ItemStack(Femtocraft.itemSchedulerCore)),
-                          new ItemStack(Femtocraft.itemSchedulerCore))
+                          new ItemStack(Femtocraft.itemSchedulerCore),
+                          " One of the most applicable problems is the correct scheduling of jobs while having limited resources.  Making a circuit capable of solving problems of this sort means useful applications everywhere.",
+                          " Whether scheduling I/O operations, threading priority, or merely planning your next day in the workshop, the Scheduler Core has you covered." +
+                          Femtocraft.itemSchedulerCore.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Advanced goal seeking with backtracking and pattern matching capabilities, with a nice UI to boot."),
+                          false, false)
     ret += new Technology(PATTERN_RECOGNITION,
-                          "",
+                          "Do you recognize the pattern?",
                           EnumTechLevel.NANO,
                           Array[String](ADVANCED_PROGRAMMING),
                           new ItemStack(Femtocraft.itemLearningCore),
                           false,
                           getInput(new ItemStack(Femtocraft.itemLearningCore)),
-                          new ItemStack(Femtocraft.itemLearningCore))
+                          new ItemStack(Femtocraft.itemLearningCore),
+                          "A useful application for the basic AI core would be some sort of algorithm to recognize and report on patterns.",
+                          "Useful for catching and fixing errors in random or fluctuating environments.  The Learning Core maintains its knowledge and incorporates new information into its world view." +
+                          Femtocraft.itemLearningCore.toRecipeWithInfoString(RecipeType.ASSEMBLER, "A collection of memory and processing circuits, the core learns from new information and applies its knowledge towards a goal."),
+                          false, false)
     //    ret += new Technology(DISCRIMINATING_VACUUM_TUBE,
     //                          "",
     //                          EnumTechLevel.NANO,
@@ -354,13 +362,17 @@ object FemtocraftTechnologies {
     //                          false,
     //                          null)
     ret += new Technology(RESOURCE_OPTIMIZATION,
-                          "",
+                          "Waste not want not.",
                           EnumTechLevel.NANO,
                           Array[String](ADVANCED_PROGRAMMING),
                           new ItemStack(Femtocraft.itemManagerCore),
                           false,
                           getInput(new ItemStack(Femtocraft.itemManagerCore)),
-                          new ItemStack(Femtocraft.itemManagerCore))
+                          new ItemStack(Femtocraft.itemManagerCore),
+                          " As your rapidly dwindling stockpiles show, you may not have been prudent in your resource consumption.  Perhaps your shiny new processor cores could help you with this problem in the future?",
+                          " Magically finding corners to cut all over the place, the Manager Core appears to bend the laws of reality in its stinginess." +
+                          Femtocraft.itemManagerCore.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Curiously, when applied to designing new circuits, the Manager Core refuses work on improving any design but its own."),
+                          false, false)
     ret += new Technology(BASIC_CHEMISTRY,
                           "Composition of matter.",
                           EnumTechLevel.MACRO,
@@ -446,13 +458,16 @@ object FemtocraftTechnologies {
                           " These \"Atoms\", though fewer in number, appear to completely describe the behaviors of molecules.  Though not all combinations of atoms are used, it appears extremely difficult to create alternate combinations." + ComponentRegistry.getComponentsAssemblerRecipeDisplayString(EnumTechLevel.MICRO),
                           false, false)
     ret += new Technology(ARTIFICIAL_MATERIALS,
-                          "Make what you need.",
+                          "Artificial Improvements.",
                           EnumTechLevel.NANO,
                           Array[String](NANO_CIRCUITS, ADVANCED_CHEMISTRY),
                           new ItemStack(Femtocraft.itemNanoPlating),
                           false,
                           getInput(new ItemStack(Femtocraft.itemNanoPlating)),
-                          new ItemStack(Femtocraft.itemNanoPlating))
+                          new ItemStack(Femtocraft.itemNanoPlating),
+                          "",
+                          "",
+                          false, false)
     ret += new Technology(FARENITE_STABILIZATION,
                           "",
                           EnumTechLevel.NANO,
@@ -556,7 +571,7 @@ object FemtocraftTechnologies {
                           false,
                           null)
     ret += new Technology(SPACETIME_EXPLOITATION,
-                          "Exploiting reality itself.",
+                          "Imagination is the only weapon in the war against reality.",
                           EnumTechLevel.FEMTO,
                           Array[String](LOCALITY_ENTANGLER, REALITY_OVERCLOCKER),
                           new ItemStack(Femtocraft.itemPandoraCube),
@@ -586,13 +601,17 @@ object FemtocraftTechnologies {
                           "By placing a capacitive setup at the top of the charging coil, you notice significant improvement in power generation in all weather.  However, during rain storms this block becomes significantly more cost effective.  During thunderstorms it shows that it is outright one of your best inventions.",
                           false, false)
     ret += new Technology(THORIUM_FISSIBILITY,
-                          "",
+                          "Split the Atom.",
                           EnumTechLevel.NANO,
                           Array[String](POTENTIAL_HARVESTING, ADVANCED_CHEMISTRY),
                           new ItemStack(Femtocraft.itemIngotThFaSalt),
                           false,
                           getInput(new ItemStack(Femtocraft.itemIngotThFaSalt)),
-                          new ItemStack(Femtocraft.itemIngotThFaSalt))
+                          new ItemStack(Femtocraft.itemIngotThFaSalt),
+                          "Thorium, that mysteriously useless metal that you find all over the ground, apparently reacts with Farenite to form a semi-stable isotope that radiates energy.  Could you harness this in some way?",
+                          "Through further inspection of the structure of this Thorium Farenite salt, you figure out the method to safely dissassemble Farenite and discover its components." + Femtocraft.itemIngotFarenite.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Though highly unstable, this material is nothing different than any other, other than requiring better machines to process.") +
+                          "Additionally, this Thorium Farenite salt compound appears to let off radiant energy in a manner similar to Thorium itself.  Perhaps you can harness this stable compound in a machine to gather this energy." + Femtocraft.itemIngotThFaSalt.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Farenite appears to naturally bond with any Thorium it comes in contact with."),
+                          false, false)
     ret += new Technology(HARNESSED_NUCLEAR_DECAY,
                           "",
                           EnumTechLevel.NANO,
@@ -695,7 +714,7 @@ object FemtocraftTechnologies {
                           getInput(new ItemStack(Femtocraft.blockFemtoRepurposer)),
                           new ItemStack(Femtocraft.blockFemtoRepurposer))
     ret += new Technology(SPIN_RETENTION,
-                          "",
+                          "Like a top.`",
                           EnumTechLevel.FEMTO,
                           Array[String](PARTICLE_MANIPULATION),
                           new ItemStack(Femtocraft.itemQuantumSchematic),
