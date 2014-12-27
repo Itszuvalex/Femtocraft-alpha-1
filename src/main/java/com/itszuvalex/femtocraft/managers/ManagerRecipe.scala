@@ -57,8 +57,8 @@ class ManagerRecipe {
     GameRegistry.addSmelting(Femtocraft.itemPrimedBoard, new ItemStack(Femtocraft.itemDopedBoard), 0.1f)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemChunkLodestone), Array("NN", "NN", 'N', Femtocraft.itemNuggetLodestone): _*)
     GameRegistry.addShapelessRecipe(new ItemStack(Femtocraft.itemNuggetLodestone, 4), Array(new ItemStack(Femtocraft.itemChunkLodestone)): _*)
-    GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockResearchConsole), Array("THT", "TCT", "RFR", 'T', Femtocraft.itemIngotTitanium, 'H', Blocks.hopper, 'C', Items.comparator, 'R', Items.redstone, 'F', Femtocraft.itemIngotFarenite): _*)
-    GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockResearchComputer), Array("GGG", "TET", "RFR", 'G', Blocks.glass, 'T', Femtocraft.itemIngotTitanium, 'E', Items.repeater, 'R', Items.redstone, 'F', Femtocraft.itemIngotFarenite): _*)
+    GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockResearchConsole), Array("THT", "TCT", "RFR", 'T', Femtocraft.itemIngotTitanium, 'H', Blocks.hopper, 'C', Items.comparator, 'R', Items.redstone, 'F', Femtocraft.itemDustFarenite): _*)
+    GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockResearchComputer), Array("GGG", "TET", "RFR", 'G', Blocks.glass, 'T', Femtocraft.itemIngotTitanium, 'E', Items.repeater, 'R', Items.redstone, 'F', Femtocraft.itemDustFarenite): _*)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemPrimedBoard), Array("#", "$", '#', Femtocraft.itemConductivePowder, '$', Femtocraft.itemBoard): _*)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemPaperSchematic, 3), Array("###", "###", "###", '#', Items.paper): _*)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemBoard), Array("###", '#', Items.stick): _*)
@@ -66,7 +66,7 @@ class ManagerRecipe {
     CraftingManager.getInstance.getRecipeList.asInstanceOf[util.List[IRecipe]].add(new ShapedOreRecipe(new ItemStack(Femtocraft.itemSpool), Array[Any]("# #", "#-#", "# #", '#', "plankWood", '-', "stickWood").box: _*))
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemSpoolGold, 8), Array("###", "#-#", "###", '#', Items.gold_ingot, '-', Femtocraft.itemSpool): _*)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemSpoolPlatinum, 8), Array("###", "#-#", "###", '#', Femtocraft.itemIngotPlatinum, '-', Femtocraft.itemSpool): _*)
-    GameRegistry.addShapelessRecipe(new ItemStack(Femtocraft.itemConductivePowder, 2), Array(new ItemStack(Femtocraft.itemIngotFarenite), new ItemStack(Items.dye, 1, 4)): _*)
+    GameRegistry.addShapelessRecipe(new ItemStack(Femtocraft.itemConductivePowder, 2), Array(new ItemStack(Femtocraft.itemDustFarenite), new ItemStack(Items.dye, 1, 4)): _*)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemMicroCoil, 6), Array("MMM", "GPG", "MMM", 'M', Femtocraft.itemConductivePowder, 'G', Femtocraft.itemSpoolGold, 'P', Femtocraft.itemSpoolPlatinum): _*)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemBattery), Array(" P ", "FCF", "FCF", 'P', Femtocraft.itemSpoolPlatinum, 'F', Items.iron_ingot, 'C', Femtocraft.itemConductivePowder): _*)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemMicroLogicCore), Array("TGT", "GBG", "TTT", 'T', Femtocraft.itemIngotTemperedTitanium, 'G', Femtocraft.itemSpoolGold, 'B', Femtocraft.itemMicrochip): _*)
@@ -86,7 +86,7 @@ class ManagerRecipe {
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockMicroReconstructor), Array("TMT", "MAM", "TCT", 'T', Femtocraft.itemIngotTemperedTitanium, 'M', Femtocraft.itemMicroPlating, 'A', Femtocraft.itemAssemblyArray, 'C', Femtocraft.itemMicroLogicCore): _*)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockMicroFurnaceUnlit), Array("TMT", "MHM", "TLT", 'T', Femtocraft.itemIngotTemperedTitanium, 'M', Femtocraft.itemMicroPlating, 'H', Femtocraft.itemHeatingElement, 'L', Femtocraft.itemMicroLogicCore): _*)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockMagneticInductionGenerator), Array("MHM", "CLC", "MHM", 'M', Femtocraft.itemMicroPlating, 'H', Femtocraft.itemHeatingElement, 'C', Femtocraft.itemMicroCoil, 'L', Femtocraft.itemChunkLodestone): _*)
-    GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemVacuumCore), Array("LPL", "FEF", "LPL", 'P', Femtocraft.itemIngotPlatinum, 'F', Femtocraft.itemIngotFarenite, 'E', Items.ender_pearl, 'L', Femtocraft.itemNuggetLodestone): _*)
+    GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemVacuumCore), Array("LPL", "FEF", "LPL", 'P', Femtocraft.itemIngotPlatinum, 'F', Femtocraft.itemDustFarenite, 'E', Items.ender_pearl, 'L', Femtocraft.itemNuggetLodestone): _*)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockSuctionPipe, 16), Array("TFT", "GVG", "TFT", 'T', Femtocraft.itemIngotTemperedTitanium, 'F', Items.iron_ingot, 'V', Femtocraft.itemVacuumCore, 'G', Blocks.glass): _*)
   }
 }

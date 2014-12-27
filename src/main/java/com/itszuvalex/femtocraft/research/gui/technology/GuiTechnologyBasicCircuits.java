@@ -63,7 +63,7 @@ public class GuiTechnologyBasicCircuits extends GuiTechnology {
                         y + height / 2,
                         width,
                         height / 2,
-                        new ItemStack[]{new ItemStack(Femtocraft.itemIngotFarenite()),
+                        new ItemStack[]{new ItemStack(Femtocraft.itemDustFarenite()),
                                 new ItemStack(Items.dye, 1, 4)},
                         new ItemStack(Femtocraft.itemConductivePowder(), 2),
                         mouseX,

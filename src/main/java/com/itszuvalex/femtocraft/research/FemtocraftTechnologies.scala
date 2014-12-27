@@ -8,6 +8,7 @@ import com.itszuvalex.femtocraft.api.research.ITechnology
 import com.itszuvalex.femtocraft.api.{AssemblerRecipe, EnumTechLevel}
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs
 import com.itszuvalex.femtocraft.implicits.StringImplicits._
+import com.itszuvalex.femtocraft.industry.tiles.TileEntityNanoInnervator
 import com.itszuvalex.femtocraft.managers.assembler.ComponentRegistry
 import com.itszuvalex.femtocraft.managers.research.Technology
 import net.minecraft.init.Items
@@ -465,17 +466,24 @@ object FemtocraftTechnologies {
                           false,
                           getInput(new ItemStack(Femtocraft.itemNanoPlating)),
                           new ItemStack(Femtocraft.itemNanoPlating),
-                          "",
-                          "",
+                          "Through micro plating has proliferated throughout all of your machines, it simply is't technologically advanced enough to support some of these newer electronics.  Time to create the casing of the future!",
+                          "With power flow regulators and plugins for the new nano circuitry, Nano Plating will prove to be just as useful as its predecessor." +
+                          Femtocraft.itemNanoPlating.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Stylish and functional.  Resistant to corrosion, spider venom, and rogue AIs."),
                           false, false)
     ret += new Technology(FARENITE_STABILIZATION,
-                          "",
+                          "...somewhat.",
                           EnumTechLevel.NANO,
-                          Array[String](NANO_CIRCUITS, ADVANCED_CHEMISTRY, ARTIFICIAL_MATERIALS),
+                          Array[String](NANO_CIRCUITS, ADVANCED_CHEMISTRY, ARTIFICIAL_MATERIALS, THORIUM_FISSIBILITY),
                           new ItemStack(Femtocraft.blockNanoCable),
                           false,
                           getInput(new ItemStack(Femtocraft.itemFluidicConductor)),
-                          new ItemStack(Femtocraft.itemFluidicConductor))
+                          new ItemStack(Femtocraft.itemFluidicConductor),
+                          "With your study of the composition of Farenite and its properties, you think that it's possible you no longer have to cut pure Farenite dust with Lapis in order to make it usable.",
+                          "Pure Farenite driven Proton Oscillation Induction promotes greater potential transfer and storage.  Farenite = more power, faster." +
+                          Femtocraft.itemFluidicConductor.toRecipeWithInfoString(RecipeType.ASSEMBLER, "With mathematically placed grooves, excess Farenite energy is absorbed by the Quartz and released as energy pulses that counteract the volatility wave.") +
+                          Femtocraft.itemNanoCoil.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Acting upon the same principle of Micro Coils, except without the calming factor of Lapis.") +
+                          Femtocraft.blockNanoCable.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Lean, green, powering machines."),
+                          false, false)
     ret += new Technology(GEOTHERMAL_HARNESSING,
                           "Harness the geological thermal energy.",
                           EnumTechLevel.NANO,
@@ -483,17 +491,26 @@ object FemtocraftTechnologies {
                           new ItemStack(Femtocraft.blockCryoEndothermalChargingBase),
                           false,
                           getInput(new ItemStack(Femtocraft.blockCryoEndothermalChargingBase)),
-                          new ItemStack(Femtocraft.blockCryoEndothermalChargingBase))
+                          new ItemStack(Femtocraft.blockCryoEndothermalChargingBase),
+                          "The earth under your feet has plenty of energy in the form of heat.  It's never cold, you notice.  It should be cold.  Make it so.",
+                          "The cause of Farenite's volatility has been found! It appears a reverse tunneling effect can occur under proper stimulation.  Heat from the surrounding environment tunnels into Farenite and is then released in the form of Farenite's infamous spontaneous energy waves." +
+                          Femtocraft.blockCryoEndothermalChargingBase.toRecipeWithInfoString(RecipeType.ASSEMBLER, "A series of tubes capable of absorbing and changeling Farenite's natural energy wavelengths. Capable of accepting a chain of up to 15 coils from the bottom.") +
+                          Femtocraft.blockCryoEndothermalChargingCoil.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Designed to provoke spontaneous Farenite reactions.  Cold objects nearby generate power, as they naturally give Thermal energy a place to go, and thus tunnel into Farenite.  Occasionally, the tunneling effect can occur on objects further away, generating spontaneous energy bursts."),
+                          false, false)
     ret += new Technology(POTENTIALITY_TRANSFORMATION,
-                          "",
+                          "Photonic Oscillation Converter.",
                           EnumTechLevel.NANO,
                           Array[String](FARENITE_STABILIZATION),
                           new ItemStack(Femtocraft.blockOrbitalEqualizer),
                           false,
                           getInput(new ItemStack(Femtocraft.blockOrbitalEqualizer)),
-                          new ItemStack(Femtocraft.blockOrbitalEqualizer))
+                          new ItemStack(Femtocraft.blockOrbitalEqualizer),
+                          "The photons, as well as the slurry of photon-generating particles, produced by the different tiers of machines are completely incompatable.  Perhaps there is a way to convert between the two?",
+                          "By equalizing the electron orbitals of similar particles in the accompanying particle slurry, the photons from one energy level can be absorbed and turned into photons of the other energy level." +
+                          Femtocraft.blockOrbitalEqualizer.toRecipeWithInfoString(RecipeType.ASSEMBLER, "This machine alternates which power level it converts to as fast as it can."),
+                          false, false)
     ret += new Technology(INDUSTRIAL_STORAGE,
-                          "",
+                          "No longer portable.",
                           EnumTechLevel.NANO,
                           Array[String](POTENTIALITY_TRANSFORMATION, RESOURCE_OPTIMIZATION),
                           new ItemStack(Femtocraft.blockNanoCubeFrame),
@@ -501,29 +518,42 @@ object FemtocraftTechnologies {
                           getInput(new ItemStack(Femtocraft.blockNanoCubeFrame)),
                           new ItemStack(Femtocraft.blockNanoCubeFrame))
     ret += new Technology(KINETIC_DISSOCIATION,
-                          "",
+                          "Better materials, better furnace.",
                           EnumTechLevel.NANO,
                           Array[String](WORKLOAD_SCHEDULING, ARTIFICIAL_MATERIALS, RESOURCE_OPTIMIZATION),
                           new ItemStack(Femtocraft.blockNanoInnervatorUnlit),
                           false,
                           getInput(new ItemStack(Femtocraft.blockNanoInnervatorUnlit)),
-                          new ItemStack(Femtocraft.blockNanoInnervatorUnlit))
+                          new ItemStack(Femtocraft.blockNanoInnervatorUnlit),
+                          "Though handy and efficient, the Micro Furnace is simply too slow to keep up with current processing demands.  Time to design the next iteration!",
+                          "Capable of smelting " + TileEntityNanoInnervator.MAX_SMELT_PRE + " loads at a time, and at a much faster rate than the Micro Furnace, the Nano Innervator is definitely the furnace to beat." +
+                          Femtocraft.blockNanoInnervatorUnlit.toRecipeWithInfoString(RecipeType.ASSEMBLER, "A feat of modern engineering.  Never has smelting been faster."),
+                          false, false)
     ret += new Technology(ATOMIC_MANIPULATION,
-                          "",
+                          "The natural progression.",
                           EnumTechLevel.NANO,
                           Array[String](ARTIFICIAL_MATERIALS, WORKLOAD_SCHEDULING, RESOURCE_OPTIMIZATION),
                           new ItemStack(Femtocraft.blockNanoDismantler),
                           false,
                           getInput(new ItemStack(Femtocraft.blockNanoDismantler)),
-                          new ItemStack(Femtocraft.blockNanoDismantler))
+                          new ItemStack(Femtocraft.blockNanoDismantler),
+                          "Manipulating \"Molecules\" is not enough.  If you really want to gain control over all elements of the universe, you must be able to manipulate these \"Atoms\" as well.",
+                          "Your logic circuits and AI cores make short work of this problem.  Shrinking down the tools and using faster circuits, it becomes all too easy." +
+                          Femtocraft.blockNanoDismantler.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Capable of everything its predecessor could do and more.  It can work on multiple items at a time, as well as working faster.") +
+                          Femtocraft.blockNanoFabricator.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Capable of working from the nano scale up to the macro scale.  Its many cores and tools allow it to assemble items in parallel."),
+                          false, false)
     ret += new Technology(DIGITIZED_WORKLOADS,
-                          "",
+                          "Made for computers, by computers.",
                           EnumTechLevel.NANO,
                           Array[String](ATOMIC_MANIPULATION, RESOURCE_OPTIMIZATION),
                           new ItemStack(Femtocraft.itemDigitalSchematic),
                           false,
                           getInput(new ItemStack(Femtocraft.itemDigitalSchematic)),
-                          new ItemStack(Femtocraft.itemDigitalSchematic))
+                          new ItemStack(Femtocraft.itemDigitalSchematic),
+                          "Your paper schematics are woefully stone age.  Circuits and computers are more elegant, more efficient, and more durable.",
+                          "Though impressive, these schematics are surprisingly affected by the intense industrial conditions of your machines." +
+                          Femtocraft.itemDigitalSchematic.toRecipeWithInfoString(RecipeType.ASSEMBLER, "The read-write circuits, though extremely precise and stable, still burn out after repeated use."),
+                          false, false)
     ret += new Technology(SPACETIME_MANIPULATION,
                           "The question is: When did you ACTUALLY finish researching this?",
                           EnumTechLevel.NANO,
@@ -531,7 +561,14 @@ object FemtocraftTechnologies {
                           new ItemStack(Femtocraft.itemDimensionalMonopole),
                           true,
                           getInput(new ItemStack(Femtocraft.itemDimensionalMonopole)),
-                          new ItemStack(Femtocraft.itemDimensionalMonopole))
+                          new ItemStack(Femtocraft.itemDimensionalMonopole),
+                          "It's undeniable that creatures like Endermen have control over space.  Nether quartz has remarkable properties with respect to time.  Put energy through and they resonate at precise intervals.  Combine them with some other processes and they seem to alter the flow of time itself.  How can you magnify these effects?",
+                          "This is by far the greatest experimental success ever accomplished by Steve.  You have discovered how to manipulate space and time itself." +
+                          Femtocraft.itemDimensionalMonopole.toRecipeWithInfoString(RecipeType.ASSEMBLER, "When placing a series of enderpearls at key localities around a compass, you find that the compass no longer points towards magnetic North.  Instead, it appears to point toward key points in space.") +
+                          Femtocraft.itemCrossDimensionalCommunicator.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Placing a dimensional monopole in a simple assembly allows for transportation of minute amounts of material, such as vibrating air waves.") +
+                          Femtocraft.itemTemporalResonator.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Some quartz, hooked up to special circuits, and attached to a time keeping clock.  This appears to warp time in the area around the item, with special effects in the epicenter.") +
+                          Femtocraft.itemSelfFulfillingOracle.toRecipeWithInfoString(RecipeType.ASSEMBLER, "The self-fulfilling oracle uses predictive analyses while in the event horizon of the temporal resonator.  These predictions propagate out, and have so far all come true seconds later."),
+                          false, false)
     ret += new Technology(DIMENSIONAL_BRAIDING,
                           "Interweave reality.",
                           EnumTechLevel.DIMENSIONAL,
@@ -539,20 +576,32 @@ object FemtocraftTechnologies {
                           new ItemStack(Femtocraft.blockNanoEnmesher),
                           false,
                           getInput(new ItemStack(Femtocraft.blockNanoEnmesher)),
-                          new ItemStack(Femtocraft.blockNanoEnmesher))
+                          new ItemStack(Femtocraft.blockNanoEnmesher),
+                          "Now that you have real working cross-dimensional manipulators, can you possibly compute their effects and automate use?",
+                          "You invent a process called \"Braiding\".  This process involves leaving together the effects of multiple \"configurators\", or specific key devices " +
+                          "placed around a center catalyst.  Whether for their effects, or for extra needed computation, these configurators are required to complete the specified process but are not consumed." +
+                          Femtocraft.blockNanoEnmesher.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Braiding together the effects results in items that can affect multiple realities simultaneously.") +
+                          Femtocraft.itemPanLocationalComputer.toRecipeWithInfoString(RecipeType.DIMENSIONAL, "Your first Braid, this computer can have multiple processes running in separate realities, and supports register swap operations with alternate dimensions."),
+                          false, false)
     ret += new Technology(LOCALITY_ENTANGLER,
-                          "",
+                          "Integrate your machine's workspaces with other yous' other machines' workspaces.",
                           EnumTechLevel.DIMENSIONAL,
                           Array[String](DIMENSIONAL_BRAIDING),
                           new ItemStack(Femtocraft.itemPanLocationalComputer),
                           false,
-                          getInput(new ItemStack(Femtocraft.itemPanLocationalComputer)),
-                          new ItemStack(Femtocraft.itemPanLocationalComputer))
+                          Array[ItemStack](new ItemStack(Femtocraft.itemNanochip), new ItemStack(Femtocraft.itemCrossDimensionalCommunicator), new ItemStack(Femtocraft.itemNanochip),
+                                           new ItemStack(Femtocraft.itemDimensionalMonopole), new ItemStack(Femtocraft.itemPanLocationalComputer), new ItemStack(Femtocraft.itemDimensionalMonopole),
+                                           new ItemStack(Femtocraft.itemNanoCalculator), new ItemStack(Femtocraft.itemManagerCore), new ItemStack(Femtocraft.itemNanoRegulator)),
+                          new ItemStack(Femtocraft.itemPanLocationalComputer),
+                          "How inefficient your machines are!  They merely use all the space available to them in THIS dimension.  It's about time you did something about that.",
+                          "Your machines are now successfully outfitted to utilize the space of all unused machines of the same type in all other dimensions.  This means that, on average, your machines can handle twice as many materials as normal.  You figured it would be more, but it appears that a new branch of mathematics involving statistics and pan-dimensional probabilities shows a weird application of a sort of pigenhole principle leads to this conclusion." +
+                          Femtocraft.itemPandoraCube.toRecipeWithInfoString(RecipeType.DIMENSIONAL, "Additionally, your next Braid begins as an empty box and is capable of cross-dimensionally storings its items.  Or spontaneously generating new ones.  Or losing things put into it already."),
+                          false, false)
     ret += new Technology(DIMENSIONAL_TRANSFORMATION,
                           "",
                           EnumTechLevel.FEMTO,
                           Array[String](DIMENSIONAL_BRAIDING),
-                          new ItemStack(Femtocraft.itemIngotMalenite),
+                          new ItemStack(Femtocraft.itemDustMalenite),
                           true,
                           null)
     ret += new Technology(TEMPORAL_PIPELINING,
@@ -562,14 +611,25 @@ object FemtocraftTechnologies {
                           new ItemStack(Femtocraft.blockNanoHorologe),
                           false,
                           getInput(new ItemStack(Femtocraft.blockNanoHorologe)),
-                          new ItemStack(Femtocraft.blockNanoHorologe))
+                          new ItemStack(Femtocraft.blockNanoHorologe),
+                          "Your Temporal Resonators all synchronized as you began working on your next prototype.  No matter what you you do, they refuse to de-synchronize.  You better hurry up and finish before something terrible happens.",
+                          "This arcane process appears to chronoshift the effects of these \"configurator\" items to spontaneously apply to the catalyst item at arbitrary times.  However, this continues even when the catalyst is taken far away from them.  Perhaps, in time, you will find a use for this." +
+                          Femtocraft.blockNanoHorologe.toRecipeWithInfoString(RecipeType.ASSEMBLER, "The temporal field of the internal Resonator appears to sweep across the configurator items, impregnating the catalyst with all of their potential effects.") +
+                          Femtocraft.itemInfallibleEstimator.toRecipeWithInfoString(RecipeType.TEMPORAL, "You found this sitting on your desk one day.  You vaguely remember taking it out of the machine later that day.  Or was it yesterday?  What machine?"),
+                          false, false)
     ret += new Technology(REALITY_OVERCLOCKER,
-                          "",
+                          "Time flies when you're you!",
                           EnumTechLevel.TEMPORAL,
                           Array[String](TEMPORAL_PIPELINING),
                           new ItemStack(Femtocraft.itemInfallibleEstimator),
                           false,
-                          null)
+                          Array[ItemStack](new ItemStack(Femtocraft.itemNanochip), new ItemStack(Femtocraft.itemSelfFulfillingOracle), new ItemStack(Femtocraft.itemNanochip),
+                                           new ItemStack(Femtocraft.itemTemporalResonator), new ItemStack(Femtocraft.itemInfallibleEstimator), new ItemStack(Femtocraft.itemTemporalResonator),
+                                           new ItemStack(Femtocraft.itemNanoSimulator), new ItemStack(Femtocraft.itemSchedulerCore), new ItemStack(Femtocraft.itemNanoSimulator)),
+                          null,
+                          "More inefficiency!  You can time shift items, why not machines?",
+                          "Your machines now temporarily back-shift in time every time they start a job.  Thus, they always finish twice as fast as you expect.",
+                          false, false)
     ret += new Technology(SPACETIME_EXPLOITATION,
                           "Imagination is the only weapon in the war against reality.",
                           EnumTechLevel.FEMTO,
@@ -609,11 +669,11 @@ object FemtocraftTechnologies {
                           getInput(new ItemStack(Femtocraft.itemIngotThFaSalt)),
                           new ItemStack(Femtocraft.itemIngotThFaSalt),
                           "Thorium, that mysteriously useless metal that you find all over the ground, apparently reacts with Farenite to form a semi-stable isotope that radiates energy.  Could you harness this in some way?",
-                          "Through further inspection of the structure of this Thorium Farenite salt, you figure out the method to safely dissassemble Farenite and discover its components." + Femtocraft.itemIngotFarenite.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Though highly unstable, this material is nothing different than any other, other than requiring better machines to process.") +
+                          "Through further inspection of the structure of this Thorium Farenite salt, you figure out the method to safely dissassemble Farenite and discover its components." + Femtocraft.itemDustFarenite.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Though highly unstable, this material is nothing different than any other, other than requiring better machines to process.") +
                           "Additionally, this Thorium Farenite salt compound appears to let off radiant energy in a manner similar to Thorium itself.  Perhaps you can harness this stable compound in a machine to gather this energy." + Femtocraft.itemIngotThFaSalt.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Farenite appears to naturally bond with any Thorium it comes in contact with."),
                           false, false)
     ret += new Technology(HARNESSED_NUCLEAR_DECAY,
-                          "",
+                          "Do you have what it takes?",
                           EnumTechLevel.NANO,
                           Array[String](THORIUM_FISSIBILITY,
                                         RESOURCE_OPTIMIZATION,
@@ -622,7 +682,26 @@ object FemtocraftTechnologies {
                           new ItemStack(Femtocraft.blockFissionReactorCore),
                           false,
                           getInput(new ItemStack(Femtocraft.itemFissionReactorPlating)),
-                          new ItemStack(Femtocraft.itemFissionReactorPlating))
+                          new ItemStack(Femtocraft.itemFissionReactorPlating),
+                          "You think you can design a system that can harness the natural decay of Thorium.  This will not be easy, but it should generate as much power as you could ever need.",
+                          "The molten Thorium-Farenite Salt allows for easy transfer of the energy-generating material to prevent heat over-saturation.  Seeding this molten slurry with additional pure Thorium allows for scaling the energy output." +
+                          Femtocraft.itemFissionReactorPlating.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Required to lock in stray radiation and equipped with additional sensors.") +
+                          "\nThe Fission Reactor is a large, 3x3x3 structure.  The center is the Fission Reactor Core, with the remaining blocks made out of Fission Reactor Housing.  " +
+                          "The reactor accepts 3 main types of items -> Salt, Thorium, and thermal reagants.\n\n" +
+                          "    Salt    - ThFa Salt Ingots\n" +
+                          "    Thorium - Pure Thorium Ingots\n" +
+                          "    Thermal - Ice/Lava/Fire Charges.\n" +
+                          "\nThe reactor uses heat to melt ThFa into molten salt, and to melt Thorium to meet the user-designated target Thorium percentage.  Molten salt and cooled salt generate heat passively, multiplied by the current Thorium percentage.  Molten salt generates more heat than cooled salt.\n\n" +
+                          Femtocraft.blockFissionReactorCore.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Stores molten and cooled salt in separate containers.  Contains a shielded mixing core with emergency dump capabilities.") +
+                          Femtocraft.blockFissionReactorHousing.toRecipeWithInfoString(RecipeType.ASSEMBLER, "A solid housing to lock in heat and radiation.") +
+                          "\nThe Magnetohydrodynamic Generator is also a large 3x3x3 structure, in order to house the complex mechanisms required.  As Molten salt passes through the generator, it is converted into power, cooling the salt.  Additionally, the natural breakdown of Thorium in the salt leads to a small amount of contaminants." +
+                          "\n\n    Contaminated Salt can be pumped directly back into the Fission Reactor to be reheated, but this drains the Thorium concentration, as the contaminants have to be drowned out." +
+                          Femtocraft.blockMagnetohydrodynamicGenerator.toRecipeWithInfoString(RecipeType.ASSEMBLER, "The flow of molten ThFa Salt through the generator generates power.") +
+                          Femtocraft.blockSteamGenerator.toRecipeWithInfoString(RecipeType.ASSEMBLER, "An upgrade to the MHD Generator.  It can be placed in the center of any of the 6 sides to dramatically increase power output.") +
+                          "\n\nA 2x2x2 structure, the Decontamination Chamber uses a moderate amount of power to remove the contaminants from Contaminated Salt.  A miniscule amount of loss is expected.  The clean salt can be pumped back into the reactor for reheating without requiring additional Thorium." +
+                          Femtocraft.blockDecontaminationChamber.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Chemical scrubbers charged by small amounts of power.")
+                          ,
+                          false, false)
     ret += new Technology(APPLIED_PARTICLE_PHYSICS,
                           "Like theoretical particle physics.",
                           EnumTechLevel.FEMTO,
@@ -714,7 +793,7 @@ object FemtocraftTechnologies {
                           getInput(new ItemStack(Femtocraft.blockFemtoRepurposer)),
                           new ItemStack(Femtocraft.blockFemtoRepurposer))
     ret += new Technology(SPIN_RETENTION,
-                          "Like a top.`",
+                          "Like a top.",
                           EnumTechLevel.FEMTO,
                           Array[String](PARTICLE_MANIPULATION),
                           new ItemStack(Femtocraft.itemQuantumSchematic),

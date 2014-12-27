@@ -62,7 +62,7 @@ public class GuiTechnologyPaperSchematic extends GuiTechnology {
                         y + height / 2,
                         width,
                         height / 2,
-                        new ItemStack[]{new ItemStack(Femtocraft.itemIngotFarenite()),
+                        new ItemStack[]{new ItemStack(Femtocraft.itemDustFarenite()),
                                 new ItemStack(Items.dye, 1, 4)},
                         mouseX,
                         mouseY,

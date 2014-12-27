@@ -185,8 +185,8 @@ object Femtocraft {
   var itemIngotTitanium                     : Item                      = null
   var itemIngotPlatinum                     : Item                      = null
   var itemIngotThorium                      : Item                      = null
-  var itemIngotFarenite                     : Item                      = null
-  var itemIngotMalenite                     : Item                      = null
+  var itemDustFarenite                      : Item                      = null
+  var itemDustMalenite                      : Item                      = null
   var itemIngotTemperedTitanium             : Item                      = null
   var itemIngotThFaSalt                     : Item                      = null
   var itemNuggetLodestone                   : Item                      = null
@@ -448,11 +448,11 @@ object Femtocraft {
       }
     })
 
-    itemIngotFarenite = registerBaseItem("ItemIngotFarenite", "Farenite", { item: Item =>
-      OreDictionary.registerOre("ingotFarenite", new ItemStack(item))
+    itemDustFarenite = registerBaseItem("ItemDustFarenite", "Farenite", { item: Item =>
+      OreDictionary.registerOre("dustFarenite", new ItemStack(item))
     })
-    itemIngotMalenite = registerBaseItem("ItemIngotMalenite", "Malenite", { item: Item =>
-      OreDictionary.registerOre("ingotMalenite", new ItemStack(item))
+    itemDustMalenite = registerBaseItem("ItemDustMalenite", "Malenite", { item: Item =>
+      OreDictionary.registerOre("dustMalenite", new ItemStack(item))
     })
     itemIngotTemperedTitanium = registerBaseItem("ItemIngotTemperedTitanium", "Tempered Titanium Ingot", { item: Item =>
       OreDictionary.registerOre("ingotTemperedTitanium", new ItemStack(item))

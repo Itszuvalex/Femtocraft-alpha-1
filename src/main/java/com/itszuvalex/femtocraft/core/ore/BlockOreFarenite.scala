@@ -45,7 +45,7 @@ object BlockOreFarenite {
     blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "BlockOreFarenite")
   }
 
-  override def getItemDropped(p_149650_1_ : Int, p_149650_2_ : Random, p_149650_3_ : Int) = Femtocraft.itemIngotFarenite
+  override def getItemDropped(p_149650_1_ : Int, p_149650_2_ : Random, p_149650_3_ : Int) = Femtocraft.itemDustFarenite
 
   override def quantityDropped(random: Random) = random.nextInt(BlockOreFarenite.DROP_AMOUNT_MAX + 1 - BlockOreFarenite.DROP_AMOUNT_MIN) + BlockOreFarenite.DROP_AMOUNT_MIN
 }
