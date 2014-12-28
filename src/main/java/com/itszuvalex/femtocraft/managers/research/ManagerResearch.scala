@@ -28,6 +28,7 @@ import com.itszuvalex.femtocraft.api.core.Configurable
 import com.itszuvalex.femtocraft.api.events.EventTechnology
 import com.itszuvalex.femtocraft.api.research.ITechnology
 import com.itszuvalex.femtocraft.configuration.{TechnologyXMLLoader, XMLTechnology}
+import com.itszuvalex.femtocraft.managers.research.ManagerResearch._
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
 import com.itszuvalex.femtocraft.research.gui.graph.{TechNode, TechnologyGraph}
 import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils
@@ -45,7 +46,7 @@ object ManagerResearch {
   private val dataKey       = "data"
   private val userKey       = "username"
   @Configurable(comment = "Set to true to have all technologies researched by default.")
-  private val debug         = true
+  private val debug         = false
   private val DIRECTORY     = "Research"
 }
 
@@ -92,7 +93,7 @@ object ManagerResearch {
 
   def addPlayerResearch(username: String): PlayerResearch = playerData.getOrElse(username, {
     val r = new PlayerResearch(username)
-    if (ManagerResearch.debug) {
+    if (debug) {
       addAllResearches(r)
     }
     else {
@@ -129,21 +130,21 @@ object ManagerResearch {
     val list: NBTTagList = new NBTTagList
     playerData.values.foreach { status =>
       val cs = new NBTTagCompound
-      cs.setString(ManagerResearch.userKey, status.username)
+      cs.setString(userKey, status.username)
       val data = new NBTTagCompound
       status.saveToNBTTagCompound(data)
-      cs.setTag(ManagerResearch.dataKey, data)
+      cs.setTag(dataKey, data)
       list.appendTag(cs)
                               }
-    compound.setTag(ManagerResearch.playerDataKey, list)
+    compound.setTag(playerDataKey, list)
   }
 
   def loadFromNBTTagCompound(compound: NBTTagCompound) {
-    val list = compound.getTagList(ManagerResearch.playerDataKey, 10)
+    val list = compound.getTagList(playerDataKey, 10)
     for (i <- 0 until list.tagCount) {
       val cs = list.getCompoundTagAt(i)
-      val username = cs.getString(ManagerResearch.userKey)
-      val data = cs.getCompoundTag(ManagerResearch.dataKey)
+      val username = cs.getString(userKey)
+      val data = cs.getCompoundTag(dataKey)
       val status = new PlayerResearch(username)
       status.loadFromNBTTagCompound(data)
       playerData.put(username, status)
@@ -154,7 +155,7 @@ object ManagerResearch {
   def save(world: World): Boolean = {
     if (world.isRemote) return true
     try {
-      val folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), ManagerResearch.DIRECTORY)
+      val folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), DIRECTORY)
       if (!folder.exists) {
         folder.mkdirs
       }
@@ -179,7 +180,7 @@ object ManagerResearch {
     }
     catch {
       case e: Exception =>
-        Femtocraft.log(Level.ERROR, "Failed to create folder " + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator + ManagerResearch.DIRECTORY + ".")
+        Femtocraft.log(Level.ERROR, "Failed to create folder " + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator + DIRECTORY + ".")
         e.printStackTrace()
         return false
     }
@@ -195,9 +196,9 @@ object ManagerResearch {
     lastWorldLoaded = worldName
     playerData.clear()
     try {
-      val folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), ManagerResearch.DIRECTORY)
+      val folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), DIRECTORY)
       if (!folder.exists) {
-        Femtocraft.log(Level.WARN, "No " + ManagerResearch.DIRECTORY + " folder found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
+        Femtocraft.log(Level.WARN, "No " + DIRECTORY + " folder found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
         return false
       }
       folder.listFiles(new FilenameFilter {
@@ -222,7 +223,7 @@ object ManagerResearch {
     }
     catch {
       case exception: Exception =>
-        Femtocraft.log(Level.ERROR, "Failed to load data from folder " + ManagerResearch.DIRECTORY + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
+        Femtocraft.log(Level.ERROR, "Failed to load data from folder " + DIRECTORY + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
         exception.printStackTrace()
         return false
     }

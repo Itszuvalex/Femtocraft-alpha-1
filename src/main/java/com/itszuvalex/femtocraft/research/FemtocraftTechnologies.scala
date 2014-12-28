@@ -1042,7 +1042,10 @@ object FemtocraftTechnologies {
                           new ItemStack(Items.iron_pickaxe),
                           true,
                           null,
-                          null)
+                          null,
+                          "",
+                          "",
+                          false, true)
     ret
   }
 
