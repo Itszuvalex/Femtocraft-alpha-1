@@ -48,36 +48,6 @@ object FemtocraftUtils {
 
   def getPlayer(username: String) = Minecraft.getMinecraft.theWorld.getPlayerEntityByName(username)
 
-
-  def compareItem(cur: ItemStack, in: ItemStack): Int = {
-    if (cur == null && in != null) {
-      return -1
-    }
-    if (cur != null && in == null) {
-      return 1
-    }
-    if (cur == null && in == null) {
-      return 0
-    }
-    if (cur.getItem.itemID < in.getItem.itemID) {
-      return -1
-    }
-    if (cur.getItem.itemID > in.getItem.itemID) {
-      return 1
-    }
-    val damage = cur.getItemDamage
-    val indamage = in.getItemDamage
-    if (damage == OreDictionary.WILDCARD_VALUE) return 0
-    if (indamage == OreDictionary.WILDCARD_VALUE) return 0
-    if (damage < indamage) {
-      return -1
-    }
-    if (damage > indamage) {
-      return 1
-    }
-    0
-  }
-
   /**
    *
    * This DOES modify slots when attempting to place, regardless of true false.  Thus, passing a copy of the inventory is recommended when testing
@@ -97,7 +67,7 @@ object FemtocraftUtils {
     }
     for (i <- 0 until slots.length) {
       if (restrictions == null || !(util.Arrays.binarySearch(restrictions, i) >= 0)) {
-        if (slots(i) != null && slots(i).isItemEqual(item)) {
+        if (slots(i) != null && FemtocraftUtils.compareItem(slots(i), item) == 0) {
           val slot = slots(i)
           val room = slot.getMaxStackSize - slot.stackSize
           if (room < amount) {
@@ -166,7 +136,7 @@ object FemtocraftUtils {
     }
     for (i <- 0 until slots.length) {
       if (restrictions == null || !(util.Arrays.binarySearch(restrictions, i) >= 0)) {
-        if (slots(i) != null && slots(i).isItemEqual(item)) {
+        if (slots(i) != null && FemtocraftUtils.compareItem(slots(i), item) == 0) {
           val slot = slots(i)
           val amount = slot.stackSize
           if (amount <= amountLeftToRemove) {
@@ -186,13 +156,38 @@ object FemtocraftUtils {
     false
   }
 
+  def compareItem(cur: ItemStack, in: ItemStack): Int = {
+    if (cur == null && in != null) {
+      return -1
+    }
+    if (cur != null && in == null) {
+      return 1
+    }
+    if (cur == null && in == null) {
+      return 0
+    }
+    if (cur.getItem.itemID < in.getItem.itemID) {
+      return -1
+    }
+    if (cur.getItem.itemID > in.getItem.itemID) {
+      return 1
+    }
+    val damage = cur.getItemDamage
+    val indamage = in.getItemDamage
+    if (damage == OreDictionary.WILDCARD_VALUE) return 0
+    if (indamage == OreDictionary.WILDCARD_VALUE) return 0
+    if (damage < indamage) {
+      return -1
+    }
+    if (damage > indamage) {
+      return 1
+    }
+    0
+  }
+
   def capitalize(input: String) = input.substring(0, 1).toUpperCase + input.substring(1)
 
   def blueColor = colorFromARGB(0, 0, 0, 255)
-
-  def greenColor = colorFromARGB(0, 0, 255, 0)
-
-  def orangeColor = colorFromARGB(0, 255, 140, 0)
 
   def colorFromARGB(a: Int, r: Int, g: Int, b: Int) = {
     var r1 = 0
@@ -202,6 +197,10 @@ object FemtocraftUtils {
     r1 += b & 255
     r1
   }
+
+  def greenColor = colorFromARGB(0, 0, 255, 0)
+
+  def orangeColor = colorFromARGB(0, 255, 140, 0)
 
   def blueify(name: String) = EnumTechLevel.MICRO.getTooltipEnum + name + EnumChatFormatting.RESET
 
