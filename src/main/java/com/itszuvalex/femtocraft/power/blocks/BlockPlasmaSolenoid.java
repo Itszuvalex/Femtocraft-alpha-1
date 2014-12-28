@@ -31,17 +31,17 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/6/14.
  */
-public class BlockPlasmaTurbine extends BlockBase {
-    public BlockPlasmaTurbine() {
+public class BlockPlasmaSolenoid extends BlockBase {
+    public BlockPlasmaSolenoid() {
         super(Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab());
-        setBlockName("BlockPlasmaTurbine");
+        setBlockName("BlockPlasmaSolenoid");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon(Femtocraft.ID().toLowerCase()
-                                                       + ":" + "BlockPlasmaTurbine");
+                                                       + ":" + "BlockPlasmaSolenoid");
     }
 }

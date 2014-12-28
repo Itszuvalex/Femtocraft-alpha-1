@@ -167,7 +167,7 @@ object Femtocraft {
   var blockStellaratorHousing               : Block                     = null
   var blockPlasmaConduit                    : Block                     = null
   var blockPlasmaVent                       : Block                     = null
-  var blockPlasmaTurbine                    : Block                     = null
+  var blockPlasmaSolenoid                    : Block                     = null
   var blockPlasmaCondenser                  : Block                     = null
   var blockMicroCable                       : Block                     = null
   var blockNanoCable                        : Block                     = null
@@ -414,7 +414,7 @@ object Femtocraft {
     blockStellaratorHousing = registerBlock(new BlockFemtoStellaratorHousing, "BlockStellaratorHousing")
     blockPlasmaConduit = registerBlock(new BlockPlasmaConduit, "BlockPlasmaConduit")
     blockPlasmaVent = registerBlock(new BlockPlasmaVent, "BlockPlasmaVent")
-    blockPlasmaTurbine = registerBlock(new BlockPlasmaTurbine, "BlockPlasmaTurbine")
+    blockPlasmaSolenoid = registerBlock(new BlockPlasmaSolenoid, "BlockPlasmaSolenoid")
     blockPlasmaCondenser = registerBlock(new BlockPlasmaCondenser, "BlockPlasmaCondenser")
     fluidMass = new FluidMass
     FluidRegistry.registerFluid(fluidMass)

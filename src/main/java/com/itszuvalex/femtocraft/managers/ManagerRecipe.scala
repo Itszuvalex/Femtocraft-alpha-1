@@ -59,6 +59,7 @@ class ManagerRecipe {
     GameRegistry.addShapelessRecipe(new ItemStack(Femtocraft.itemNuggetLodestone, 4), Array(new ItemStack(Femtocraft.itemChunkLodestone)): _*)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockResearchConsole), Array("THT", "TCT", "RFR", 'T', Femtocraft.itemIngotTitanium, 'H', Blocks.hopper, 'C', Items.comparator, 'R', Items.redstone, 'F', Femtocraft.itemDustFarenite): _*)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.blockResearchComputer), Array("GGG", "TET", "RFR", 'G', Blocks.glass, 'T', Femtocraft.itemIngotTitanium, 'E', Items.repeater, 'R', Items.redstone, 'F', Femtocraft.itemDustFarenite): _*)
+    GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemPortableResearchComputer), Array(" R ", "TST", "TST", 'R', Femtocraft.blockResearchComputer, 'T', Femtocraft.itemIngotTitanium, 'S', Items.stick): _*)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemPrimedBoard), Array("#", "$", '#', Femtocraft.itemConductivePowder, '$', Femtocraft.itemBoard): _*)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemPaperSchematic, 3), Array("###", "###", "###", '#', Items.paper): _*)
     GameRegistry.addShapedRecipe(new ItemStack(Femtocraft.itemBoard), Array("###", '#', Items.stick): _*)

@@ -339,7 +339,7 @@ object AssemblerDefaults {
                                                 new ItemStack(Femtocraft.itemHardenedBulb, 64),
                                                 new ItemStack(Femtocraft.itemOrganometallicPlate, 64),
                                                 new ItemStack(Femtocraft.itemHardenedBulb, 64)), 1,
-                               new ItemStack(Items.nether_star), EnumTechLevel.MICRO,
+                               new ItemStack(Items.nether_star), EnumTechLevel.FEMTO,
                                FemtocraftTechnologies.NETHER_STAR_FABRICATION)
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemIonicChunk),
                                                 new ItemStack(Femtocraft.itemHardenedBulb),
@@ -354,6 +354,18 @@ object AssemblerDefaults {
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Items.blaze_powder), new ItemStack(Femtocraft.itemDustFarenite), null,
                                                 null, null, null,
                                                 null, null, null), 1, new ItemStack(Femtocraft.itemDustMalenite, 2), EnumTechLevel.FEMTO, FemtocraftTechnologies.DIMENSIONAL_TRANSFORMATION)
+    ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemMetalComposite),
+                                                new ItemStack(Femtocraft.itemHardenedBulb), new ItemStack(Femtocraft.itemMetalComposite), null, null, null,
+                                                null, null, null), 1, new ItemStack(Femtocraft.itemIngotTitanium),
+                               EnumTechLevel.MICRO, FemtocraftTechnologies.BASIC_CHEMISTRY)
+    ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemMetalComposite),
+                                                new ItemStack(Femtocraft.itemHardenedBulb), new ItemStack(Femtocraft.itemConductiveAlloy), null, null, null,
+                                                null, null, null), 1, new ItemStack(Femtocraft.itemIngotPlatinum),
+                               EnumTechLevel.MICRO, FemtocraftTechnologies.BASIC_CHEMISTRY)
+    ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemMetalComposite),
+                                                new ItemStack(Femtocraft.itemHardenedBulb), new ItemStack(Femtocraft.itemIonicChunk), null, null, null,
+                                                null, null, null), 1, new ItemStack(Femtocraft.itemIngotThorium),
+                               EnumTechLevel.MICRO, FemtocraftTechnologies.BASIC_CHEMISTRY)
 
     ret
   }
@@ -1199,7 +1211,7 @@ object AssemblerDefaults {
                                                 new ItemStack(Femtocraft.blockPlasmaConduit),
                                                 new ItemStack(Femtocraft.itemStellaratorPlating),
                                                 new ItemStack(Femtocraft.blockPlasmaConduit)), 0,
-                               new ItemStack(Femtocraft.blockPlasmaTurbine), EnumTechLevel.FEMTO,
+                               new ItemStack(Femtocraft.blockPlasmaSolenoid), EnumTechLevel.FEMTO,
                                FemtocraftTechnologies.ENERGY_CONVERSION)
     ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemStellaratorPlating),
                                                 new ItemStack(Femtocraft.blockSisyphusStabilizer),
@@ -1212,6 +1224,23 @@ object AssemblerDefaults {
                                                 new ItemStack(Femtocraft.itemStellaratorPlating)), 0,
                                new ItemStack(Femtocraft.blockPlasmaCondenser), EnumTechLevel.FEMTO,
                                FemtocraftTechnologies.MATTER_CONVERSION)
+    ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemNanochip), new ItemStack(Femtocraft.blockFissionReactorHousing), new ItemStack(Femtocraft.itemNanochip),
+                                                new ItemStack(Femtocraft.blockFissionReactorHousing), new ItemStack(Blocks.hopper), new ItemStack(Femtocraft.blockFissionReactorHousing),
+                                                new ItemStack(Femtocraft.itemNanoRegulator), new ItemStack(Femtocraft.blockFissionReactorHousing), new ItemStack(Femtocraft.itemNanoRegulator)), 0,
+                               new ItemStack(Femtocraft.blockMagnetohydrodynamicGenerator), EnumTechLevel.NANO, FemtocraftTechnologies.HARNESSED_NUCLEAR_DECAY)
+    ret += new AssemblerRecipe(Array[ItemStack](new ItemStack(Femtocraft.itemNanochip), new ItemStack(Femtocraft.blockFissionReactorHousing), new ItemStack(Femtocraft.itemNanochip),
+                                                new ItemStack(Femtocraft.blockFissionReactorHousing), new ItemStack(Femtocraft.blockCryoEndothermalChargingBase), new ItemStack(Femtocraft.blockFissionReactorHousing),
+                                                new ItemStack(Femtocraft.itemNanoRegulator), new ItemStack(Femtocraft.blockFissionReactorHousing), new ItemStack(Femtocraft.itemNanoRegulator)), 0,
+                               new ItemStack(Femtocraft.blockSteamGenerator), EnumTechLevel.NANO, FemtocraftTechnologies.HARNESSED_NUCLEAR_DECAY)
+    ret += new AssemblerRecipe(Array[ItemStack](null, null, new ItemStack(Femtocraft.itemNanoCoil),
+                                                new ItemStack(Femtocraft.itemNanoPlating), new ItemStack(Femtocraft.itemInterfaceDeviceMicro), null,
+                                                new ItemStack(Femtocraft.itemNanoCalculator), new ItemStack(Femtocraft.itemNanoPlating), null), 0,
+                               new ItemStack(Femtocraft.itemInterfaceDeviceNano), EnumTechLevel.NANO, FemtocraftTechnologies.POTENTIALITY_TRANSFORMATION)
+    ret += new AssemblerRecipe(Array[ItemStack](null, null, new ItemStack(Femtocraft.itemFemtoCoil),
+                                                new ItemStack(Femtocraft.itemFemtoPlating), new ItemStack(Femtocraft.itemInterfaceDeviceNano), null,
+                                                new ItemStack(Femtocraft.itemErinyesCircuit), new ItemStack(Femtocraft.itemFemtoPlating), null),
+                               0, new ItemStack(Femtocraft.itemInterfaceDeviceFemto), EnumTechLevel.NANO, FemtocraftTechnologies.ELEMENT_MANUFACTURING)
+
     ret
   }
 }
