@@ -44,7 +44,8 @@ object TileEntityBaseEntityMicroReconstructor {
   @Configurable(comment = "Assembler recipe tech level maximum.")       val ASSEMBLER_TECH_LEVEL = EnumTechLevel.MICRO
 }
 
-@Configurable class TileEntityBaseEntityMicroReconstructor extends TileEntityBase with IndustryBehavior with Inventory with MassTank with PowerConsumer {
+@Configurable class TileEntityBaseEntityMicroReconstructor
+  extends TileEntityBase with IndustryBehavior with Inventory with MassTank with PowerConsumer {
   /**
    * The number of ticks that the current item has been cooking for
    */
@@ -55,7 +56,8 @@ object TileEntityBaseEntityMicroReconstructor {
 
   @Saveable private var field_94130_e: String = null
 
-  override def defaultContainer = new PowerContainer(TileEntityBaseEntityMicroReconstructor.TECH_LEVEL, TileEntityBaseEntityMicroReconstructor.POWER_STORAGE)
+  override def defaultContainer = new PowerContainer(TileEntityBaseEntityMicroReconstructor.TECH_LEVEL,
+                                                     TileEntityBaseEntityMicroReconstructor.POWER_STORAGE)
 
   /**
    * Slots 0-8 are for recipe area - these are dummy items, and should never be touched except when setting for
@@ -92,8 +94,6 @@ object TileEntityBaseEntityMicroReconstructor {
 
   override def hasCustomInventoryName = this.field_94130_e != null && this.field_94130_e.length > 0
 
-  override def isItemValidForSlot(i: Int, itemstack: ItemStack) = i > 10 || (i == 10 && itemstack.getItem.isInstanceOf[IAssemblerSchematic])
-
   def func_94129_a(par1Str: String) {
     this.field_94130_e = par1Str
   }
@@ -114,15 +114,19 @@ object TileEntityBaseEntityMicroReconstructor {
       (11 until getSizeInventory).toArray
   }
 
-  override def canInsertItem(i: Int, itemstack: ItemStack, j: Int) =i > 10 || i == 10 && isItemValidForSlot(10, itemstack)
+  override def canInsertItem(i: Int, itemstack: ItemStack, j: Int) = i > 10 || i == 10 && isItemValidForSlot(10,
+                                                                                                             itemstack)
+
+  override def isItemValidForSlot(i: Int, itemstack: ItemStack) = i > 10 || (i == 10 && itemstack
+                                                                                        .getItem
+                                                                                        .isInstanceOf[IAssemblerSchematic])
 
   override def canExtractItem(i: Int, itemstack: ItemStack, j: Int) = i == 9
 
   def setFluidAmount(amount: Int) {
     if (massTank.getFluid != null) {
       massTank.setFluid(new FluidStack(massTank.getFluid.getFluid, amount))
-    }
-    else {
+    } else {
       massTank.setFluid(new FluidStack(Femtocraft.fluidMass, amount))
     }
   }
@@ -132,15 +136,18 @@ object TileEntityBaseEntityMicroReconstructor {
   }
 
   override protected def canStartWork: Boolean = {
-    if (reconstructingStacks != null || !(0 until 9).exists(getStackInSlot(_) != null) || getSchematic == null || this.getCurrentPower < getPowerToCook || cookTime > 0) {
+    if (reconstructingStacks != null || !(0 until 9).exists(getStackInSlot(_) != null) || getSchematic == null || this
+                                                                                                                  .getCurrentPower < getPowerToCook || cookTime > 0) {
       false
-    }
-    else {
+    } else {
       if (!hasItems) {
         return false
       }
       val recipe = getSchematic.getRecipe(getStackInSlot(10))
       if (recipe == null) {
+        return false
+      }
+      if (!Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner, recipe.tech)) {
         return false
       }
       if (!hasItems(recipe.input)) {
@@ -173,7 +180,9 @@ object TileEntityBaseEntityMicroReconstructor {
     val offset = 10
     val size = getSizeInventory
     val inv = new Array[ItemStack](size - offset)
-    (offset until size).map(i => (i, getStackInSlot(i))).foreach { case (i, it) => inv(i - offset) = if (it == null) null else it.copy}
+    (offset until size)
+    .map(i => (i, getStackInSlot(i)))
+    .foreach { case (i, it) => inv(i - offset) = if (it == null) null else it.copy}
     items.forall(FemtocraftUtils.removeItem(_, inv, null))
   }
 
@@ -197,7 +206,13 @@ object TileEntityBaseEntityMicroReconstructor {
       icopy(i) = if (recipe.input(i) == null) null else recipe.input(i).copy
     }
 
-    var maxSimul = (if (getStackInSlot(9) == null) recipe.output.getMaxStackSize else getStackInSlot(9).stackSize) / recipe.output.stackSize
+    var maxSimul = (if (getStackInSlot(9) == null) {
+      recipe.output.getMaxStackSize
+    } else {
+      getStackInSlot(9).stackSize
+    }) / recipe
+                                       .output
+                                       .stackSize
     for (i <- 0 until icopy.length) {
       {
         val is = icopy(i)
@@ -238,8 +253,7 @@ object TileEntityBaseEntityMicroReconstructor {
           if (continue) {
             if (i == 0) {
               reconstructingStacks = icopy
-            }
-            else {
+            } else {
               for (j <- 0 until recipe.input.length) {
                 if (recipe.input(j) != null) {
                   reconstructingStacks(j).stackSize += recipe.input(j).stackSize
@@ -266,22 +280,6 @@ object TileEntityBaseEntityMicroReconstructor {
     }
   }
 
-  override def markDirty() {
-    val as = getSchematic
-    if (as != null) {
-      val recipe = as.getRecipe(getStackInSlot(10))
-      if (recipe == null) (0 until 9).foreach(inventory.setInventorySlotContents(_, null))
-      else (0 until recipe.input.length).map((i: Int) => (i, recipe.input(i))).foreach { case (i, item) => inventory.setInventorySlotContents(i, if (item == null) null else item.copy)}
-    }
-    else {
-      for (i <- 0 until 9) {
-        inventory.setInventorySlotContents(i, null)
-      }
-    }
-    hasItems = true
-    super.markDirty()
-  }
-
   def getMassAmount = massTank.getFluidAmount
 
   protected def getMaxSimultaneousSmelt = TileEntityBaseEntityMicroReconstructor.MAX_SMELT
@@ -303,10 +301,12 @@ object TileEntityBaseEntityMicroReconstructor {
         empty = true
         for (i <- 0 until math.min(9, recipe.input.length)) {
           if (reconstructingStacks(i) != null) {
-            if ( {reconstructingStacks(i).stackSize -= recipe.input(i).stackSize; reconstructingStacks(i).stackSize} <= 0) {
+            if ( {
+                   reconstructingStacks(i).stackSize -= recipe.input(i).stackSize; reconstructingStacks(i)
+                                                                                   .stackSize
+                 } <= 0) {
               reconstructingStacks(i) = null
-            }
-            else {
+            } else {
               empty = false
             }
           }
@@ -314,12 +314,31 @@ object TileEntityBaseEntityMicroReconstructor {
 
         FemtocraftUtils.placeItem(recipe.output, inventory.getInventory, placeRestrictions)
         markDirty()
-      }
-      else {
+      } else {
         continue = false
       }
     }
     reconstructingStacks = null
     cookTime = 0
+  }
+
+  override def markDirty() {
+    val as = getSchematic
+    if (as != null) {
+      val recipe = as.getRecipe(getStackInSlot(10))
+      if (recipe == null) {
+        (0 until 9).foreach(inventory.setInventorySlotContents(_, null))
+      } else {
+        (0 until recipe.input.length)
+        .map((i: Int) => (i, recipe.input(i)))
+        .foreach { case (i, item) => inventory.setInventorySlotContents(i, if (item == null) null else item.copy)}
+      }
+    } else {
+      for (i <- 0 until 9) {
+        inventory.setInventorySlotContents(i, null)
+      }
+    }
+    hasItems = true
+    super.markDirty()
   }
 }

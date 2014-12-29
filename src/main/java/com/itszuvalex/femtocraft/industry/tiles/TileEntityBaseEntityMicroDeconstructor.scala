@@ -118,17 +118,6 @@ object TileEntityBaseEntityMicroDeconstructor {
     }
   }
 
-  def getResearchGatedAssemblerRecipe: AssemblerRecipe = {
-    val recipe = getAssemblerRecipe
-    if (recipe == null) return null
-    if (recipe.enumTechLevel.tier > getAssemblerTech.tier) return null
-    recipe
-  }
-
-  protected def getAssemblerTech = ASSEMBLER_TECH_LEVEL
-
-  def getAssemblerRecipe = Femtocraft.recipeManager.assemblyRecipes.getRecipe(getStackInSlot(0))
-
   override def canInsertItem(i: Int, itemstack: ItemStack, j: Int) = i == 0
 
   override def canExtractItem(i: Int, itemstack: ItemStack, j: Int) = true
@@ -162,6 +151,16 @@ object TileEntityBaseEntityMicroDeconstructor {
                                                                                                        .stackSize && roomForItems(recipe
                                                                                                                                   .input)
   }
+
+  def getResearchGatedAssemblerRecipe: AssemblerRecipe = {
+    val recipe = getAssemblerRecipe
+    if (recipe == null) return null
+    if (recipe.enumTechLevel.tier > getAssemblerTech.tier) return null
+    if (!Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner, recipe.tech)) return null
+    recipe
+  }
+
+  protected def getAssemblerTech = ASSEMBLER_TECH_LEVEL
 
   override protected def startWork() {
     deconstructingStack = getStackInSlot(0).copy
@@ -199,6 +198,8 @@ object TileEntityBaseEntityMicroDeconstructor {
     cookTime = 0
     markDirty()
   }
+
+  def getAssemblerRecipe = Femtocraft.recipeManager.assemblyRecipes.getRecipe(getStackInSlot(0))
 
   protected def getPowerToCook = POWER_TO_COOK
 

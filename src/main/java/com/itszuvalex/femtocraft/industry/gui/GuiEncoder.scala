@@ -43,7 +43,7 @@ import org.lwjgl.opengl.GL11
 
   override def drawScreen(par1: Int, par2: Int, par3: Float) {
     super.drawScreen(par1, par2, par3)
-    if (isPointInRegion(18, 12, 16, 60, par1, par2)) {
+    if (isPointInRegion(10, 8, 16, 60, par1, par2)) {
       val furnaceCurrent = encoder.getCurrentPower
       val furnaceMax = encoder.getMaxPower
       val text = FemtocraftUtils.formatIntegerToString(furnaceCurrent) + '/' + FemtocraftUtils.formatIntegerToString(furnaceMax) + " OP"
