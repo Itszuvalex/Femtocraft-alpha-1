@@ -17,7 +17,7 @@ import net.minecraft.world.World
 class ProxyGuiCommon extends IGuiHandler {
   override def getServerGuiElement(ID: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int): AnyRef = {
     (ID, world.getTileEntity(x, y, z)) match {
-      case (FemtocraftGuiConstants.ResearchConsoleGuiID, te: TileEntityResearchConsole)                               => new ContainerResearchConsole(player.inventory, te)
+      case (FemtocraftGuiConstants.ResearchConsoleGuiID, te: TileEntityResearchConsole)                               => new ContainerResearchConsole(player, player.inventory, te)
       case (FemtocraftGuiConstants.EncoderGuiID, te: TileEntityEncoder)                                               => new ContainerEncoder(player, player.inventory, te)
       case (FemtocraftGuiConstants.MicroFurnaceGuiID, te: TileEntityBaseEntityMicroFurnace)                           => new ContainerMicroFurnace(player, player.inventory, te)
       case (FemtocraftGuiConstants.MicroDeconstructorGuiID, te: TileEntityBaseEntityMicroDeconstructor)               => new ContainerMicroDeconstructor(player, player.inventory, te)

@@ -21,7 +21,7 @@
 package com.itszuvalex.femtocraft.research.containers
 
 import com.itszuvalex.femtocraft.common.gui.OutputSlot
-import com.itszuvalex.femtocraft.core.container.ContainerBase
+import com.itszuvalex.femtocraft.core.container.ContainerInv
 import com.itszuvalex.femtocraft.research.containers.ContainerResearchConsole._
 import com.itszuvalex.femtocraft.research.tiles.TileEntityResearchConsole
 import cpw.mods.fml.relauncher.{Side, SideOnly}
@@ -37,24 +37,17 @@ object ContainerResearchConsole {
   private val progressMaxID = 1
 }
 
-class ContainerResearchConsole(par1InventoryPlayer: InventoryPlayer, private val console: TileEntityResearchConsole) extends ContainerBase {
+class ContainerResearchConsole(player: EntityPlayer, inv: InventoryPlayer,
+                               private val console: TileEntityResearchConsole)
+  extends ContainerInv[TileEntityResearchConsole](player, console, 0, 9) {
   private var lastProgress    = 0
   private var lastProgressMax = 0
 
-  addSlotToContainer(new OutputSlot(console, 9, 147, 60))
   for (i <- 0 until 9) {
     addSlotToContainer(new Slot(console, i, 8 + 18 * (i % 3), 16 + 18 * (i / 3)))
   }
-
-  for (i <- 0 until 3) {
-    for (j <- 0 until 9) {
-      addSlotToContainer(new Slot(par1InventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18))
-    }
-  }
-  for (i <- 0 until 9) {
-    addSlotToContainer(new Slot(par1InventoryPlayer, i, 8 + i * 18, 142))
-  }
-
+  addSlotToContainer(new OutputSlot(console, 9, 147, 60))
+  addPlayerInventorySlots(inv)
 
   override def addCraftingToCrafters(par1iCrafting: ICrafting) {
     super.addCraftingToCrafters(par1iCrafting)
@@ -90,29 +83,24 @@ class ContainerResearchConsole(par1InventoryPlayer: InventoryPlayer, private val
           return null
         }
         slot.onSlotChange(itemstack1, itemstack)
-      }
-      else if (par2 != 0) {
+      } else if (par2 != 0) {
         if (FurnaceRecipes.smelting.getSmeltingResult(itemstack1) != null) {
           if (!mergeItemStack(itemstack1, 0, 1, false)) {
             return null
           }
-        }
-        else if (par2 >= 2 && par2 < 29) {
+        } else if (par2 >= 2 && par2 < 29) {
           if (!mergeItemStack(itemstack1, 29, 38, false)) {
             return null
           }
-        }
-        else if (par2 >= 29 && par2 < 38 && !mergeItemStack(itemstack1, 2, 29, false)) {
+        } else if (par2 >= 29 && par2 < 38 && !mergeItemStack(itemstack1, 2, 29, false)) {
           return null
         }
-      }
-      else if (!mergeItemStack(itemstack1, 2, 38, false)) {
+      } else if (!mergeItemStack(itemstack1, 2, 38, false)) {
         return null
       }
       if (itemstack1.stackSize == 0) {
         slot.putStack(null)
-      }
-      else {
+      } else {
         slot.onSlotChanged()
       }
       if (itemstack1.stackSize == itemstack.stackSize) {
@@ -131,5 +119,5 @@ class ContainerResearchConsole(par1InventoryPlayer: InventoryPlayer, private val
     }
   }
 
-  def canInteractWith(entityplayer: EntityPlayer) = console.isUseableByPlayer(entityplayer)
+  override def eligibleForInput(item: ItemStack) = false
 }

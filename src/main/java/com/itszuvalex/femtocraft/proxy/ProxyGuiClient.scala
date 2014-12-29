@@ -17,7 +17,7 @@ class ProxyGuiClient extends ProxyGuiCommon {
   override def getClientGuiElement(ID: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int): AnyRef = {
     (ID, world.getTileEntity(x, y, z)) match {
       case (FemtocraftGuiConstants.ResearchComputerGuiID, _)                                                          => new GuiResearch(player.getCommandSenderName)
-      case (FemtocraftGuiConstants.ResearchConsoleGuiID, te: TileEntityResearchConsole)                               => new GuiResearchConsole(player.inventory, te)
+      case (FemtocraftGuiConstants.ResearchConsoleGuiID, te: TileEntityResearchConsole)                               => new GuiResearchConsole(player, player.inventory, te)
       case (FemtocraftGuiConstants.EncoderGuiID, te: TileEntityEncoder)                                               => new GuiEncoder(player, player.inventory, te)
       case (FemtocraftGuiConstants.MicroFurnaceGuiID, te: TileEntityBaseEntityMicroFurnace)                           => new GuiMicroFurnace(player, player.inventory, te)
       case (FemtocraftGuiConstants.MicroDeconstructorGuiID, te: TileEntityBaseEntityMicroDeconstructor)               => new GuiMicroDeconstructor(player, player.inventory, te)

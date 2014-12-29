@@ -33,6 +33,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -51,9 +52,9 @@ public class GuiResearchConsole extends GuiContainer {
 
     private final TileEntityResearchConsole console;
 
-    public GuiResearchConsole(InventoryPlayer par1InventoryPlayer,
+    public GuiResearchConsole(EntityPlayer player,  InventoryPlayer par1InventoryPlayer,
                               TileEntityResearchConsole console) {
-        super(new ContainerResearchConsole(par1InventoryPlayer, console));
+        super(new ContainerResearchConsole(player, par1InventoryPlayer, console));
         this.console = console;
     }
 
