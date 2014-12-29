@@ -38,6 +38,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 public class GuiResearchConsole extends GuiContainer {
     private static final ResourceLocation texture = new ResourceLocation(
@@ -157,6 +158,8 @@ public class GuiResearchConsole extends GuiContainer {
                 GL11.glDisable(GL11.GL_LIGHTING); //Forge: Make sure Lighting is disabled. Fixes MC-33065
                 GL11.glEnable(GL11.GL_CULL_FACE);
                 RenderHelper.enableGUIStandardItemLighting();
+                GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+                GL11.glEnable(GL11.GL_COLOR_MATERIAL);
                 render.renderItemAndEffectIntoGUI(fontRendererObj, Minecraft
                                 .getMinecraft().getTextureManager(), tech.getDisplayItem(),
                         k + 110, l + 33
