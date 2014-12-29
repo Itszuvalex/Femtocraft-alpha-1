@@ -256,11 +256,6 @@ public class BlockVacuumTube extends TileContainer {
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess,
                                            int x, int y, int z) {
-        AxisAlignedBB.getBoundingBox((double) x + 4.f / 16.f,
-                (double) y + 4.f / 16.f, (double) z + 4.f / 16.f,
-                (double) x + 12.f / 16.f, (double) y + 12.f / 16.f,
-                (double) z + 12.f / 16.f);
-
         TileEntity tile = par1iBlockAccess.getTileEntity(x, y, z);
         if (!(tile instanceof TileEntityVacuumTube)) {
             return;

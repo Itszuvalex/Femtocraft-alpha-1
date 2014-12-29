@@ -69,7 +69,7 @@ class TileEntitySuctionPipe extends TileEntityBase implements
     @Saveable
     int renderTick = 0;
     @Saveable(desc = true)
-    private boolean blackout = false;
+    private boolean blackout = true;
 
     /*
      * (non-Javadoc)

@@ -243,7 +243,7 @@ object FemtocraftTechnologies {
                           Femtocraft.itemMicroLogicCore.toRecipeWithInfoString(RecipeType.CRAFTING,
                                                                                "While formulating your logic for the ports, you conceive of a large set of circuits that is capable of forming the logical core of a machine.") +
                           Femtocraft.blockEncoder.toRecipeWithInfoString(RecipeType.CRAFTING,
-                                                                         "A simple machine that it simply encodes the layout of items into a schematic."),
+                                                                         "A simple machine that encodes the layout of items into a schematic."),
                           false,
                           false)
     ret += new Technology(MECHANICAL_PRECISION,
@@ -270,7 +270,7 @@ object FemtocraftTechnologies {
                           false,
                           getInput(new ItemStack(Femtocraft.itemVacuumCore)),
                           new ItemStack(Femtocraft.itemVacuumCore),
-                          "Enderpearls exert a strange effect, seemingly bending space around them.  You wonder what the effect of Lodestone would be when augmented with the reality-warping properties of this astouding item.",
+                          "Enderpearls exert a strange effect, seemingly bending space around them.  You wonder what the effect of Lodestone would be when augmented with the reality-warping properties of this astounding item.",
                           "The world is stranger than you ever thought it would be.  Simple contraptions are capable of altering the foundations of reality.  And you have the knowledge to capitalize on it." +
                           Femtocraft.itemVacuumCore.toRecipeWithInfoString(RecipeType.CRAFTING, "The addition of the enderpearl seems to have both amplified and generalized the magnetic strength of Lodestone."),
                           false, false)
@@ -375,7 +375,7 @@ object FemtocraftTechnologies {
                           new ItemStack(Femtocraft.itemManagerCore),
                           " As your rapidly dwindling stockpiles show, you may not have been prudent in your resource consumption.  Perhaps your shiny new processor cores could help you with this problem in the future?",
                           " Magically finding corners to cut all over the place, the Manager Core appears to bend the laws of reality in its stinginess." +
-                          Femtocraft.itemManagerCore.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Curiously, when applied to designing new circuits, the Manager Core refuses work on improving any design but its own."),
+                          Femtocraft.itemManagerCore.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Curiously, when applied to designing new circuits, the Manager Core refuses to work on improving any design but its own."),
                           false, false)
     ret += new Technology(BASIC_CHEMISTRY,
                           "Composition of matter.",
@@ -461,7 +461,7 @@ object FemtocraftTechnologies {
                                            new ItemStack(Femtocraft.itemDissassemblyArray), new ItemStack(Femtocraft.blockMicroDeconstructor), new ItemStack(Femtocraft.itemDissassemblyArray),
                                            new ItemStack(Femtocraft.itemMicrochip), new ItemStack(Femtocraft.itemMicroLogicCore), new ItemStack(Femtocraft.itemMicrochip)),
                           null,
-                          " Noticing common behavior even among as small of things as your discovered \"Molecules\", you can't help but wonder that maybe there exists something smaller than them.  After all, you would never have thought Molecules existed before you began your experiments.  Your new machinery may possibly be able uncover the answer for you.",
+                          " Noticing common behavior even among as small of things as your discovered \"Molecules\", you can't help but wonder that maybe there exists something smaller than them.  After all, you would never have thought Molecules existed before you began your experiments.  Your new machinery may possibly be able to uncover the answer for you.",
                           " These \"Atoms\", though fewer in number, appear to completely describe the behaviors of molecules.  Though not all combinations of atoms are used, it appears extremely difficult to create alternate combinations." + ComponentRegistry.getComponentsAssemblerRecipeDisplayString(EnumTechLevel.MICRO),
                           false, false)
     ret += new Technology(ARTIFICIAL_MATERIALS,
@@ -472,7 +472,7 @@ object FemtocraftTechnologies {
                           false,
                           getInput(new ItemStack(Femtocraft.itemNanoPlating)),
                           new ItemStack(Femtocraft.itemNanoPlating),
-                          "Through micro plating has proliferated throughout all of your machines, it simply is't technologically advanced enough to support some of these newer electronics.  Time to create the casing of the future!",
+                          "Though micro plating has proliferated throughout all of your machines, it simply isn't technologically advanced enough to support some of these newer electronics.  Time to create the casing of the future!",
                           "With power flow regulators and plugins for the new nano circuitry, Nano Plating will prove to be just as useful as its predecessor." +
                           Femtocraft.itemNanoPlating.toRecipeWithInfoString(RecipeType.ASSEMBLER, "Stylish and functional.  Resistant to corrosion, spider venom, and rogue AIs."),
                           false, false)
@@ -687,7 +687,7 @@ object FemtocraftTechnologies {
                           false,
                           getInput(new ItemStack(Femtocraft.blockMicroChargingCapacitor)),
                           new ItemStack(Femtocraft.blockMicroChargingCapacitor),
-                          "While walking past your charging coils on a particularly humid day, you couldn't help but notice that the coils couldn't keep up with all of the energy in the air.  Perhaps you could make something that would allow the coils to perform better in stormy cnoditions.",
+                          "While walking past your charging coils on a particularly humid day, you couldn't help but notice that the coils couldn't keep up with all of the energy in the air.  Perhaps you could make something that would allow the coils to perform better in stormy conditions.",
                           Femtocraft.blockMicroChargingCapacitor.toRecipeWithInfoString(RecipeType.ASSEMBLER, "This block temporarily stores the excess power generated by the coils, releasing it once the power surges abate.") +
                           "By placing a capacitive setup at the top of the charging coil, you notice significant improvement in power generation in all weather.  However, during rain storms this block becomes significantly more cost effective.  During thunderstorms it shows that it is outright one of your best inventions.",
                           false, false)

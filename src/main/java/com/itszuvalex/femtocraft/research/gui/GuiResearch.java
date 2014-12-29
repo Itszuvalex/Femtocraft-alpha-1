@@ -92,20 +92,20 @@ public class GuiResearch extends GuiScreen {
      * The current mouse y coordinate
      */
     protected int mouseY;
-    protected double field_74117_m;
-    protected double field_74115_n;
+    protected static double field_74117_m = -1;
+    protected static double field_74115_n = -1;
 
     /**
      * The x position of the achievement map
      */
-    protected double guiMapX;
+    protected static double guiMapX = -1;
 
     /**
      * The y position of the achievement map
      */
-    protected double guiMapY;
-    protected double field_74124_q;
-    protected double field_74123_r;
+    protected static double guiMapY = -1;
+    protected static double field_74124_q = -1;
+    protected static double field_74123_r = -1;
 
     /**
      * Whether the Mouse Button is down or not
@@ -117,12 +117,18 @@ public class GuiResearch extends GuiScreen {
         researchStatus = Femtocraft.researchManager().getPlayerResearch(username);
         short short1 = 141;
         short short2 = 141;
-        this.field_74117_m = this.guiMapX = this.field_74124_q = (double) (
-                Femtocraft.researchManager().getNode(defaultTechnology).getDisplayX() - 1)
-                                                                 * 24 - short1 / 2 - 12;
-        this.field_74115_n = this.guiMapY = this.field_74123_r = (double) (
+        double x =
+                (double) (Femtocraft.researchManager().getNode(defaultTechnology).getDisplayX() - 1) * 24 - short1 / 2 -
+                12;
+        if (field_74124_q == -1) field_74124_q = x;
+        if (field_74117_m == -1) field_74117_m = x;
+        if (guiMapX == -1) guiMapX = x;
+        double y = (double) (
                 Femtocraft.researchManager().getNode(defaultTechnology).getDisplayY() * 24 -
                 short2 / 2);
+        if (field_74115_n == -1) field_74115_n = y;
+        if (field_74123_r == -1) field_74123_r = y;
+        if (guiMapY == -1) guiMapY = y;
     }
 
     public static void setSize(int rows, int columns) {
@@ -150,30 +156,30 @@ public class GuiResearch extends GuiScreen {
                 if (this.isMouseButtonDown == 0) {
                     this.isMouseButtonDown = 1;
                 } else {
-                    this.guiMapX -= (double) (par1 - this.mouseX);
-                    this.guiMapY -= (double) (par2 - this.mouseY);
-                    this.field_74124_q = this.field_74117_m = this.guiMapX;
-                    this.field_74123_r = this.field_74115_n = this.guiMapY;
+                    guiMapX -= (double) (par1 - this.mouseX);
+                    guiMapY -= (double) (par2 - this.mouseY);
+                    field_74124_q = field_74117_m = guiMapX;
+                    field_74123_r = field_74115_n = guiMapY;
                 }
 
                 this.mouseX = par1;
                 this.mouseY = par2;
             }
 
-            if (this.field_74124_q < (double) guiMapTop) {
-                this.field_74124_q = (double) guiMapTop;
+            if (field_74124_q < (double) guiMapTop) {
+                field_74124_q = (double) guiMapTop;
             }
 
-            if (this.field_74123_r < (double) guiMapLeft) {
-                this.field_74123_r = (double) guiMapLeft;
+            if (field_74123_r < (double) guiMapLeft) {
+                field_74123_r = (double) guiMapLeft;
             }
 
-            if (this.field_74124_q >= (double) guiMapBottom) {
-                this.field_74124_q = (double) (guiMapBottom - 1);
+            if (field_74124_q >= (double) guiMapBottom) {
+                field_74124_q = (double) (guiMapBottom - 1);
             }
 
-            if (this.field_74123_r >= (double) guiMapRight) {
-                this.field_74123_r = (double) (guiMapRight - 1);
+            if (field_74123_r >= (double) guiMapRight) {
+                field_74123_r = (double) (guiMapRight - 1);
             }
         } else {
             this.isMouseButtonDown = 0;
@@ -209,11 +215,11 @@ public class GuiResearch extends GuiScreen {
                 ResearchStatus ts = researchStatus
                         .getTechnology(rt.getName());
                 if (ts != null) {
-                    int k = MathHelper.floor_double(this.field_74117_m
-                                                    + (this.guiMapX - this.field_74117_m)
+                    int k = MathHelper.floor_double(field_74117_m
+                                                    + (guiMapX - field_74117_m)
                                                       * (double) par3);
-                    int l = MathHelper.floor_double(this.field_74115_n
-                                                    + (this.guiMapY - this.field_74115_n)
+                    int l = MathHelper.floor_double(field_74115_n
+                                                    + (guiMapY - field_74115_n)
                                                       * (double) par3);
 
                     if (k < guiMapTop) {
@@ -301,17 +307,17 @@ public class GuiResearch extends GuiScreen {
      */
     @Override
     public void updateScreen() {
-        this.field_74117_m = this.guiMapX;
-        this.field_74115_n = this.guiMapY;
-        double d0 = this.field_74124_q - this.guiMapX;
-        double d1 = this.field_74123_r - this.guiMapY;
+        field_74117_m = guiMapX;
+        field_74115_n = guiMapY;
+        double d0 = field_74124_q - guiMapX;
+        double d1 = field_74123_r - guiMapY;
 
         if (d0 * d0 + d1 * d1 < 4.0D) {
-            this.guiMapX += d0;
-            this.guiMapY += d1;
+            guiMapX += d0;
+            guiMapY += d1;
         } else {
-            this.guiMapX += d0 * 0.85D;
-            this.guiMapY += d1 * 0.85D;
+            guiMapX += d0 * 0.85D;
+            guiMapY += d1 * 0.85D;
         }
     }
 
@@ -324,10 +330,10 @@ public class GuiResearch extends GuiScreen {
     }
 
     protected void genAchievementBackground(int par1, int par2, float par3) {
-        int k = MathHelper.floor_double(this.field_74117_m
-                                        + (this.guiMapX - this.field_74117_m) * (double) par3);
-        int l = MathHelper.floor_double(this.field_74115_n
-                                        + (this.guiMapY - this.field_74115_n) * (double) par3);
+        int k = MathHelper.floor_double(field_74117_m
+                                        + (guiMapX - field_74117_m) * (double) par3);
+        int l = MathHelper.floor_double(field_74115_n
+                                        + (guiMapY - field_74115_n) * (double) par3);
 
         if (k < guiMapTop) {
             k = guiMapTop;

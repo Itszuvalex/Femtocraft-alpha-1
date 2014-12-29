@@ -24,8 +24,10 @@ import com.itszuvalex.femtocraft.FemtocraftGuiConstants
 import com.itszuvalex.femtocraft.api.core.{Configurable, Saveable}
 import com.itszuvalex.femtocraft.api.power.{IPowerTileContainer, PowerContainer}
 import com.itszuvalex.femtocraft.api.{EnumTechLevel, IInterfaceDevice}
+import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.core.traits.tile.MultiBlockComponent
 import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoCubePort._
+import com.itszuvalex.femtocraft.power.traits.PowerTileContainer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.common.util.ForgeDirection
@@ -35,17 +37,19 @@ object TileEntityNanoCubePort {
   @Configurable(comment = "Tech level of power.") private   val techLevel = EnumTechLevel.NANO
 }
 
-@Configurable class TileEntityNanoCubePort extends TileEntityPowerBase with MultiBlockComponent {
+@Configurable class TileEntityNanoCubePort extends TileEntityBase with PowerTileContainer with MultiBlockComponent {
   @Saveable(desc = true) var output = false
 
-  override def defaultContainer: PowerContainer = new PowerContainer(techLevel, storage)
+  override def defaultContainer = new PowerContainer(techLevel, storage)
 
   override def consume(amount: Int): Boolean = {
     if (isValidMultiBlock && output) {
       if (isController) {
         return super.consume(amount)
       }
-      val fc: TileEntityNanoCubePort = worldObj.getTileEntity(info.x, info.y, info.z).asInstanceOf[TileEntityNanoCubePort]
+      val fc: TileEntityNanoCubePort = worldObj
+                                       .getTileEntity(info.x, info.y, info.z)
+                                       .asInstanceOf[TileEntityNanoCubePort]
       if (fc != null) {
         return fc.controllerConsume(amount)
       }
@@ -67,7 +71,7 @@ object TileEntityNanoCubePort {
       if (isController) {
         return super.charge(from, amount)
       }
-      val fc: TileEntityNanoCubePort = worldObj.getTileEntity(info.x, info.y, info.z).asInstanceOf[TileEntityNanoCubePort]
+      val fc = worldObj.getTileEntity(info.x, info.y, info.z).asInstanceOf[TileEntityNanoCubePort]
       if (fc != null) {
         return fc.controllerCharge(from, amount)
       }
@@ -99,7 +103,8 @@ object TileEntityNanoCubePort {
     0f
   }
 
-  override def canAcceptPowerOfLevel(level: EnumTechLevel, from: ForgeDirection) = isValidMultiBlock && super.canAcceptPowerOfLevel(level, from)
+  override def canAcceptPowerOfLevel(level: EnumTechLevel, from: ForgeDirection) =
+    isValidMultiBlock && super.canAcceptPowerOfLevel(level, from)
 
   override def getCurrentPower: Int = {
     if (isValidMultiBlock) {
@@ -119,7 +124,7 @@ object TileEntityNanoCubePort {
       if (isController) {
         return super.getFillPercentage
       }
-      val fc: IPowerTileContainer = worldObj.getTileEntity(info.x, info.y, info.z).asInstanceOf[IPowerTileContainer]
+      val fc = worldObj.getTileEntity(info.x, info.y, info.z).asInstanceOf[IPowerTileContainer]
       if (fc != null) {
         return fc.getFillPercentage
       }
@@ -139,12 +144,12 @@ object TileEntityNanoCubePort {
   override def onSideActivate(par5EntityPlayer: EntityPlayer, side: Int): Boolean = {
     if (canPlayerUse(par5EntityPlayer) && info.isValidMultiBlock) {
       val item = par5EntityPlayer.getCurrentEquippedItem
-      if (item != null && item.getItem.isInstanceOf[IInterfaceDevice] && item.getItem.asInstanceOf[IInterfaceDevice].getInterfaceLevel.tier >= EnumTechLevel.NANO.tier) {
+      if (item != null && item.getItem.isInstanceOf[IInterfaceDevice] &&
+          item.getItem.asInstanceOf[IInterfaceDevice].getInterfaceLevel.tier >= EnumTechLevel.NANO.tier) {
         output = !output
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord)
+        setUpdate()
         return true
-      }
-      else {
+      } else {
         par5EntityPlayer.openGui(getMod, getGuiID, worldObj, info.x, info.y, info.z)
         return true
       }

@@ -30,9 +30,7 @@ import com.itszuvalex.femtocraft.network.FemtocraftPacketHandler
 import com.itszuvalex.femtocraft.network.messages.MessagePhlegethonTunnelCore
 import com.itszuvalex.femtocraft.power.tiles.TileEntityPhlegethonTunnelCore._
 import com.itszuvalex.femtocraft.power.traits.PowerProducer
-import com.itszuvalex.femtocraft.sound.FemtocraftSoundManager
 import com.itszuvalex.femtocraft.utils.BaseInventory
-import net.minecraft.client.audio.ISound
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
@@ -48,8 +46,9 @@ object TileEntityPhlegethonTunnelCore {
   @Configurable val POWER_MAX   : Int   = 100000
 }
 
-@Configurable class TileEntityPhlegethonTunnelCore extends TileEntityBase with PowerProducer with IPhlegethonTunnelCore with Inventory with MultiBlockComponent {
-  private                        val sound : ISound  = FemtocraftSoundManager.makePhlegethonSound(xCoord, yCoord, zCoord)
+@Configurable class TileEntityPhlegethonTunnelCore
+  extends TileEntityBase with PowerProducer with IPhlegethonTunnelCore with Inventory with MultiBlockComponent {
+  //  private                        val sound : ISound  = FemtocraftSoundManager.makePhlegethonSound(xCoord, yCoord, zCoord)
   @Saveable(desc = true) private var active: Boolean = false
 
   override def defaultInventory = new BaseInventory(1)
@@ -62,10 +61,9 @@ object TileEntityPhlegethonTunnelCore {
     super.handleDescriptionNBT(compound)
     setRenderUpdate()
     if ((wasActive && !isActive) || (wasMultiblock && !isValidMultiBlock)) {
-      Femtocraft.soundManager.stopSound(sound)
-    }
-    else if (!wasActive && isActive) {
-      Femtocraft.soundManager.playSound(sound)
+      //      Femtocraft.soundManager.stopSound(sound)
+    } else if (!wasActive && isActive) {
+      //      Femtocraft.soundManager.playSound(sound)
     }
   }
 
@@ -79,16 +77,18 @@ object TileEntityPhlegethonTunnelCore {
     `val`
   }
 
+  def isActive = active
+
   override def invalidate() {
     super.invalidate()
     if (worldObj.isRemote && isActive) {
-      Femtocraft.soundManager.stopSound(sound)
+      //      Femtocraft.soundManager.stopSound(sound)
     }
   }
 
   override def onChunkUnload() {
     if (worldObj.isRemote && isActive) {
-      Femtocraft.soundManager.stopSound(sound)
+      //      Femtocraft.soundManager.stopSound(sound)
     }
     super.onChunkUnload()
   }
@@ -139,13 +139,12 @@ object TileEntityPhlegethonTunnelCore {
 
   override def isItemValidForSlot(i: Int, itemstack: ItemStack) = !isActive && super.isItemValidForSlot(i, itemstack)
 
-  def isActive = active
-
   def onActivateClick() {
     FemtocraftPacketHandler.INSTANCE.sendToServer(getMessage(true))
   }
 
-  private def getMessage(active: Boolean) = new MessagePhlegethonTunnelCore(xCoord, yCoord, zCoord, worldObj.provider.dimensionId, active)
+  private def getMessage(active: Boolean) = new
+      MessagePhlegethonTunnelCore(xCoord, yCoord, zCoord, worldObj.provider.dimensionId, active)
 
   def onDeactivateClick() {
     FemtocraftPacketHandler.INSTANCE.sendToServer(getMessage(false))
@@ -154,8 +153,7 @@ object TileEntityPhlegethonTunnelCore {
   def handlePacket(active: Boolean) {
     if (active) {
       activate
-    }
-    else {
+    } else {
       deactivate
     }
   }

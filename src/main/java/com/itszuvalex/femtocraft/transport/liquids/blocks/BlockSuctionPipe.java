@@ -50,9 +50,15 @@ public class BlockSuctionPipe extends TileContainer {
         super(Material.iron);
         setBlockName("BlockSuctionPipe");
         setCreativeTab(Femtocraft.femtocraftTab());
+        setBlockBounds();
     }
 
-    @Override
+    public void setBlockBounds() {
+        this.minX = this.minY = this.minZ = 6.0D / 16.0D;
+        this.maxX = this.maxY = this.maxZ = 10.0D / 16.0D;
+    }
+
+        @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -144,9 +150,6 @@ public class BlockSuctionPipe extends TileContainer {
                 (double) y + 10.f / 16.f, (double) z + 10.f / 16.f);
 
         TileEntity tile = par1World.getTileEntity(x, y, z);
-        if (tile == null) {
-            return box;
-        }
         if (!(tile instanceof TileEntitySuctionPipe)) {
             return box;
         }
@@ -171,22 +174,11 @@ public class BlockSuctionPipe extends TileContainer {
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess,
                                            int x, int y, int z) {
-        AxisAlignedBB box = AxisAlignedBB.getBoundingBox(
-                (double) x + 6.d / 16.d, (double) y + 6.d / 16.d,
-                (double) z + 6.d / 16.d, (double) x + 10.d / 16.d,
-                (double) y + 10.d / 16.d, (double) z + 10.d / 16.d);
-
         TileEntity tile = par1iBlockAccess.getTileEntity(x, y, z);
         if (tile == null) {
-            setBlockBounds((float) box.minX, (float) box.minY,
-                    (float) box.minZ, (float) box.maxX, (float) box.maxY,
-                    (float) box.maxZ);
             return;
         }
         if (!(tile instanceof TileEntitySuctionPipe)) {
-            setBlockBounds((float) box.minX, (float) box.minY,
-                    (float) box.minZ, (float) box.maxX, (float) box.maxY,
-                    (float) box.maxZ);
             return;
         }
 

@@ -114,9 +114,9 @@ object TileEntityBaseEntityMicroReconstructor {
       (11 until getSizeInventory).toArray
   }
 
-  override def canInsertItem(i: Int, itemstack: ItemStack, j: Int) = i == 10 && isItemValidForSlot(10, itemstack)
+  override def canInsertItem(i: Int, itemstack: ItemStack, j: Int) =i > 10 || i == 10 && isItemValidForSlot(10, itemstack)
 
-  override def canExtractItem(i: Int, itemstack: ItemStack, j: Int) = i == 9 || i > 10
+  override def canExtractItem(i: Int, itemstack: ItemStack, j: Int) = i == 9
 
   def setFluidAmount(amount: Int) {
     if (massTank.getFluid != null) {

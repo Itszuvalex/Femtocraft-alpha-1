@@ -39,16 +39,18 @@ object TileEntityFemtoCubePort {
 }
 
 @Configurable class TileEntityFemtoCubePort extends TileEntityBase with PowerTileContainer with MultiBlockComponent {
-  @Saveable(desc = true) var output: Boolean = false
+  @Saveable(desc = true) var output = false
 
-  def defaultContainer: PowerContainer = new PowerContainer(techLevel, storage)
+  override def defaultContainer = new PowerContainer(techLevel, storage)
 
   override def consume(amount: Int): Boolean = {
     if (isValidMultiBlock && output) {
       if (isController) {
         return super.consume(amount)
       }
-      val fc: TileEntityFemtoCubePort = worldObj.getTileEntity(info.x, info.y, info.z).asInstanceOf[TileEntityFemtoCubePort]
+      val fc: TileEntityFemtoCubePort = worldObj
+                                        .getTileEntity(info.x, info.y, info.z)
+                                        .asInstanceOf[TileEntityFemtoCubePort]
       if (fc != null) {
         return fc.controllerConsume(amount)
       }
@@ -70,7 +72,7 @@ object TileEntityFemtoCubePort {
       if (isController) {
         return super.charge(from, amount)
       }
-      val fc: TileEntityFemtoCubePort = worldObj.getTileEntity(info.x, info.y, info.z).asInstanceOf[TileEntityFemtoCubePort]
+      val fc = worldObj.getTileEntity(info.x, info.y, info.z).asInstanceOf[TileEntityFemtoCubePort]
       if (fc != null) {
         return fc.controllerCharge(from, amount)
       }
@@ -78,21 +80,14 @@ object TileEntityFemtoCubePort {
     0
   }
 
-  private def isController: Boolean = isValidMultiBlock && ((info.x == xCoord) && (info.y == yCoord) && (info.z == zCoord))
-
-  private def controllerCharge(from: ForgeDirection, amount: Int): Int = {
-    if (isController) {
-      return super.charge(from, amount)
-    }
-    0
-  }
+  private def controllerCharge(from: ForgeDirection, amount: Int) = if (isController) super.charge(from, amount) else 0
 
   override def getMaxPower: Int = {
     if (isValidMultiBlock) {
       if (isController) {
         return storage
       }
-      val fc: IPowerTileContainer = worldObj.getTileEntity(info.x, info.y, info.z).asInstanceOf[IPowerTileContainer]
+      val fc = worldObj.getTileEntity(info.x, info.y, info.z).asInstanceOf[IPowerTileContainer]
       if (fc != null) {
         return fc.getMaxPower
       }
@@ -102,19 +97,20 @@ object TileEntityFemtoCubePort {
 
   override def getFillPercentageForOutput(to: ForgeDirection): Float = {
     if (isValidMultiBlock) {
-      if (output) 1f else 0f
+      return if (output) 1f else 0f
     }
     0f
   }
 
-  override def canAcceptPowerOfLevel(level: EnumTechLevel, from: ForgeDirection) = isValidMultiBlock && super.canAcceptPowerOfLevel(level, from)
+  override def canAcceptPowerOfLevel(level: EnumTechLevel, from: ForgeDirection) =
+    isValidMultiBlock && super.canAcceptPowerOfLevel(level, from)
 
   override def getCurrentPower: Int = {
     if (isValidMultiBlock) {
       if (isController) {
         return super.getCurrentPower
       }
-      val fc: IPowerTileContainer = worldObj.getTileEntity(info.x, info.y, info.z).asInstanceOf[IPowerTileContainer]
+      val fc = worldObj.getTileEntity(info.x, info.y, info.z).asInstanceOf[IPowerTileContainer]
       if (fc != null) {
         return fc.getCurrentPower
       }
@@ -127,7 +123,7 @@ object TileEntityFemtoCubePort {
       if (isController) {
         return super.getFillPercentage
       }
-      val fc: IPowerTileContainer = worldObj.getTileEntity(info.x, info.y, info.z).asInstanceOf[IPowerTileContainer]
+      val fc = worldObj.getTileEntity(info.x, info.y, info.z).asInstanceOf[IPowerTileContainer]
       if (fc != null) {
         return fc.getFillPercentage
       }
@@ -135,9 +131,12 @@ object TileEntityFemtoCubePort {
     super.getFillPercentage
   }
 
+  private def isController: Boolean =
+    isValidMultiBlock && ((info.x == xCoord) && (info.y == yCoord) && (info.z == zCoord))
+
   override def canCharge(from: ForgeDirection) = !(!isValidMultiBlock || output) && super.canCharge(from)
 
-  override def canConnect(from: ForgeDirection) = info.isValidMultiBlock && super.canConnect(from)
+  override def canConnect(from: ForgeDirection) = isValidMultiBlock && super.canConnect(from)
 
   override def handleDescriptionNBT(compound: NBTTagCompound) {
     super.handleDescriptionNBT(compound)
@@ -147,12 +146,12 @@ object TileEntityFemtoCubePort {
   override def onSideActivate(par5EntityPlayer: EntityPlayer, side: Int): Boolean = {
     if (canPlayerUse(par5EntityPlayer) && info.isValidMultiBlock) {
       val item: ItemStack = par5EntityPlayer.getCurrentEquippedItem
-      if (item != null && item.getItem.isInstanceOf[IInterfaceDevice] && item.getItem.asInstanceOf[IInterfaceDevice].getInterfaceLevel.tier >= EnumTechLevel.FEMTO.tier) {
+      if (item != null && item.getItem.isInstanceOf[IInterfaceDevice] &&
+          item.getItem.asInstanceOf[IInterfaceDevice].getInterfaceLevel.tier >= EnumTechLevel.FEMTO.tier) {
         output = !output
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord)
+        setUpdate()
         return true
-      }
-      else {
+      } else {
         par5EntityPlayer.openGui(getMod, getGuiID, worldObj, info.x, info.y, info.z)
         return true
       }
