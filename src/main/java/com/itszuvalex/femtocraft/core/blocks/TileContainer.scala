@@ -40,6 +40,8 @@ object TileContainer {
 }
 
 class TileContainer(material: Material) extends BlockContainer(material) {
+  setHardness(3f)
+  setResistance(3f)
 
   def createNewTileEntity(p_149915_1_ : World, p_149915_2_ : Int): TileEntity = new TileEntityBase
 

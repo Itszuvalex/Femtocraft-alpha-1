@@ -6,4 +6,7 @@ import net.minecraft.block.material.Material
 /**
  * Created by Chris on 9/16/2014.
  */
-class BlockBase(material: Material) extends Block(material)
+class BlockBase(material: Material) extends Block(material) {
+  setHardness(3f)
+  setResistance(3f)
+}
