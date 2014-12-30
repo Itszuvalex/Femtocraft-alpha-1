@@ -46,7 +46,7 @@ object TileEntityMicroCube {
 
   util.Arrays.fill(outputs, false)
 
-  override def defaultContainer = new PowerContainer(ENUM_TECH_LEVEL, maxStorage)
+  override def defaultContainer = TileEntityMicroCube.getDefaultContainer
 
   override def getFillPercentageForCharging(from: ForgeDirection): Float = if (outputs(FemtocraftUtils.indexOfForgeDirection(from))) 1f else 0f
 
@@ -89,7 +89,7 @@ object TileEntityMicroCube {
       }
       val s = FemtocraftUtils.indexOfForgeDirection(dir)
       outputs(s) = !outputs(s)
-      worldObj.markBlockForUpdate(xCoord, yCoord, zCoord)
+      setUpdate()
       return true
     }
     super.onSideActivate(par5EntityPlayer, side)

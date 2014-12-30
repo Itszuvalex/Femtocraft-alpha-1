@@ -2,21 +2,21 @@ package com.itszuvalex.femtocraft.power.traits
 
 import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.api.core.Saveable
-import com.itszuvalex.femtocraft.api.power.{IPowerTileContainer, PowerContainer}
+import com.itszuvalex.femtocraft.api.power.{IPowerTileContainer, NBTPowerContainerWrapper, PowerContainer}
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.power.FemtocraftPowerUtils
+import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.common.util.ForgeDirection
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 10/9/14.
  */
-
 trait PowerTileContainer extends TileEntityBase with IPowerTileContainer {
   @Saveable
-  protected val container: PowerContainer = defaultContainer
+  val container: PowerContainer = defaultContainer
 
   @Saveable
-  protected val connections = Array.fill[Boolean](6)(false)
+  val connections = Array.fill[Boolean](6)(false)
 
 
   def isConnected(i: Int) = connections(i)
@@ -40,7 +40,9 @@ trait PowerTileContainer extends TileEntityBase with IPowerTileContainer {
       val checkTile = getWorldObj.getTileEntity(locx, locy, locz)
       checkTile match {
         case fc: IPowerTileContainer =>
-          if (fc.canConnect(offset.getOpposite) && fc.canAcceptPowerOfLevel(getTechLevel(offset.getOpposite), offset.getOpposite)) {
+          if (fc.canConnect(offset.getOpposite) && fc
+                                                   .canAcceptPowerOfLevel(getTechLevel(offset.getOpposite),
+                                                                          offset.getOpposite)) {
             connections(offset.ordinal()) = true
             if (prev != connections(offset.ordinal())) {
               changed = true
@@ -105,4 +107,15 @@ trait PowerTileContainer extends TileEntityBase with IPowerTileContainer {
   override def canCharge(from: ForgeDirection) = true
 
   override def canConnect(from: ForgeDirection) = true
+
+  override def loadInfoFromItemNBT(compound: NBTTagCompound): Unit = {
+    super.loadInfoFromItemNBT(compound)
+    val wrapper = NBTPowerContainerWrapper.wrapperFromNBT(compound)
+    if (wrapper.hasPowerData) wrapper.copyToPowerContainer(container)
+  }
+
+  override def saveInfoToItemNBT(compound: NBTTagCompound) {
+    super.saveInfoToItemNBT(compound)
+    NBTPowerContainerWrapper.wrapperFromNBT(compound).copyFromPowerContainer(container)
+  }
 }

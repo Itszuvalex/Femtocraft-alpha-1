@@ -68,13 +68,13 @@ class TileContainer(material: Material) extends BlockContainer(material) {
 
   override def quantityDropped(par1Random: Random) = 0
 
-  override def onBlockActivated(par1World: World, par2: Int, par3: Int, par4: Int, par5EntityPlayer: EntityPlayer, par6: Int, par7: Float, par8: Float, par9: Float): Boolean = {
+  override def onBlockActivated(par1World: World, par2: Int, par3: Int, par4: Int, par5EntityPlayer: EntityPlayer,
+                                par6: Int, par7: Float, par8: Float, par9: Float): Boolean = {
     par1World.getTileEntity(par2, par3, par4) match {
       case base: TileEntityBase =>
         if (base.canPlayerUse(par5EntityPlayer)) {
           return base.onSideActivate(par5EntityPlayer, par6)
-        }
-        else {
+        } else {
           par5EntityPlayer.addChatMessage(new ChatComponentText(base.getOwner + " is the owner of this block."))
           return true
         }
@@ -83,7 +83,8 @@ class TileContainer(material: Material) extends BlockContainer(material) {
     super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9)
   }
 
-  override def onBlockPlacedBy(par1World: World, par2: Int, par3: Int, par4: Int, par5EntityLivingBase: EntityLivingBase, par6ItemStack: ItemStack) {
+  override def onBlockPlacedBy(par1World: World, par2: Int, par3: Int, par4: Int,
+                               par5EntityLivingBase: EntityLivingBase, par6ItemStack: ItemStack) {
     if (!par1World.isRemote) {
       par1World.getTileEntity(par2, par3, par4) match {
         case base: TileEntityBase =>
@@ -107,7 +108,8 @@ class TileContainer(material: Material) extends BlockContainer(material) {
     super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLivingBase, par6ItemStack)
   }
 
-  override def removedByPlayer(world: World, player: EntityPlayer, x: Int, y: Int, z: Int, willHarvest: Boolean): Boolean = {
+  override def removedByPlayer(world: World, player: EntityPlayer, x: Int, y: Int, z: Int,
+                               willHarvest: Boolean): Boolean = {
     val te: TileEntity = world.getTileEntity(x, y, z)
     te match {
       case base: TileEntityBase =>
@@ -122,7 +124,8 @@ class TileContainer(material: Material) extends BlockContainer(material) {
 
   override def canEntityDestroy(world: IBlockAccess, x: Int, y: Int, z: Int, entity: Entity): Boolean = {
     (world.getTileEntity(x, y, z), entity) match {
-      case (te: TileEntityBase, player: EntityPlayer) => te.canPlayerUse(player) && super.canEntityDestroy(world, x, y, z, entity)
+      case (te: TileEntityBase, player: EntityPlayer) => te.canPlayerUse(player) &&
+                                                         super.canEntityDestroy(world, x, y, z, entity)
       case (_, _)                                     => false
     }
   }

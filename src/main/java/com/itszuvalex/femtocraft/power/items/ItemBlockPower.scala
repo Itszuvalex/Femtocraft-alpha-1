@@ -22,66 +22,32 @@ package com.itszuvalex.femtocraft.power.items
 
 import java.util
 
-import com.itszuvalex.femtocraft.api.power.PowerContainer
+import com.itszuvalex.femtocraft.api.power.{ItemStackPowerContainerWrapper, PowerContainer}
 import com.itszuvalex.femtocraft.core.items.CoreItemBlock
-import com.itszuvalex.femtocraft.power.tiles.TileEntityPowerBase
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.world.World
 
 abstract class ItemBlockPower(block: Block) extends CoreItemBlock(block) {
 
-  @SideOnly(Side.CLIENT) override def addInformation(par1ItemStack: ItemStack, par2EntityPlayer: EntityPlayer, par3List: util.List[_], par4: Boolean) {
+  @SideOnly(Side.CLIENT) override def addInformation(par1ItemStack: ItemStack, par2EntityPlayer: EntityPlayer,
+                                                     par3List: util.List[_], par4: Boolean) {
     super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4)
-    var nbt = par1ItemStack.getTagCompound
-    if (nbt == null) {
-      nbt = {par1ItemStack.stackTagCompound = new NBTTagCompound; par1ItemStack.stackTagCompound}
+    val wrapper = ItemStackPowerContainerWrapper.getWrapperForStack(par1ItemStack, false)
+    if (wrapper.hasPowerData) {
+      wrapper.addInformationToTooltip(par3List)
+    } else {
+      getDefaultContainer.addInformationToTooltip(par3List)
     }
-    val fieldName = getFieldName
-    var container: PowerContainer = null
-    val init = nbt.hasKey(fieldName)
-    val power = nbt.getCompoundTag(fieldName)
-    if (!init) {
-      container = getDefaultContainer
-      container.saveToNBT(power)
-      nbt.setTag(fieldName, power)
-    }
-    else {
-      container = PowerContainer.createFromNBT(power)
-    }
-    container.addInformationToTooltip(par3List)
-  }
-
-  private def getFieldName: String = {
-    val fields = classOf[TileEntityPowerBase].getDeclaredFields
-    val fieldName = "power"
-    fields.filter(_.getType eq classOf[PowerContainer]).
-    foreach { field =>
-      var ret: String = null
-      val access = field.isAccessible
-      if (!access) {
-        field.setAccessible(true)
-      }
-      ret = field.getName
-      if (!access) {
-        field.setAccessible(false)
-      }
-      return ret
-            }
-    fieldName
   }
 
   def getDefaultContainer: PowerContainer
 
   override def onCreated(par1ItemStack: ItemStack, par2World: World, par3EntityPlayer: EntityPlayer) {
     super.onCreated(par1ItemStack, par2World, par3EntityPlayer)
-    var nbt = par1ItemStack.getTagCompound
-    if (nbt == null) nbt = {par1ItemStack.stackTagCompound = new NBTTagCompound; par1ItemStack.stackTagCompound}
-    val power = new NBTTagCompound
-    getDefaultContainer.saveToNBT(power)
-    nbt.setTag(getFieldName, power)
+    val wrapper = ItemStackPowerContainerWrapper.getWrapperForStack(par1ItemStack)
+    wrapper.copyFromPowerContainer(getDefaultContainer)
   }
 }
