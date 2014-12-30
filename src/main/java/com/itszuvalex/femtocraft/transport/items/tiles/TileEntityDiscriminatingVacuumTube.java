@@ -40,7 +40,7 @@ public class TileEntityDiscriminatingVacuumTube extends TileEntityVacuumTube
     }
 
     @Override
-    protected boolean canAcceptItemStack(ItemStack item) {
+    public boolean canAcceptItemStack(ItemStack item) {
         return filterCheck(item);
     }
 
