@@ -120,6 +120,15 @@ class TileEntityVacuumTube extends TileEntityBase with IVacuumTube {
     par1nbtTagCompound.setByte("HasItems", generateItemMask)
   }
 
+  override def getDescriptionPacket = generatePacket
+
+  private def generatePacket: S35PacketUpdateTileEntity = {
+    val compound: NBTTagCompound = new NBTTagCompound
+    compound.setByte(TileEntityVacuumTube.ITEM_MASK_KEY, generateItemMask)
+    compound.setByte(TileEntityVacuumTube.CONNECTION_MASK_KEY, generateConnectionMask)
+    new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, compound)
+  }
+
   def generateConnectionMask: Byte = {
     var output = 0
     output += FemtocraftUtils.indexOfForgeDirection(inputDir) & 7
@@ -128,10 +137,6 @@ class TileEntityVacuumTube extends TileEntityBase with IVacuumTube {
     output += (if (missingOutput) {0} else {1 << 7})
     output.toByte
   }
-
-  def missingInput = inputTile == null
-
-  def missingOutput = outputTile == null
 
   def generateItemMask: Byte = {
     var output = 0
@@ -144,24 +149,6 @@ class TileEntityVacuumTube extends TileEntityBase with IVacuumTube {
       output += 1 << hasItem.length
     }
     output.toByte
-  }
-
-  def isOverflowing: Boolean = {
-    if (worldObj.isRemote && overflowing) return true
-    outputTile match {
-      case tube: IVacuumTube => !tube.canInsertItem(null, outputDir.getOpposite)
-      case inv: IInventory   => !canFillInv && hasItem.forall(p => p) && queuedItem != null
-      case _                 => false
-    }
-  }
-
-  override def getDescriptionPacket = generatePacket
-
-  private def generatePacket: S35PacketUpdateTileEntity = {
-    val compound: NBTTagCompound = new NBTTagCompound
-    compound.setByte(TileEntityVacuumTube.ITEM_MASK_KEY, generateItemMask)
-    compound.setByte(TileEntityVacuumTube.CONNECTION_MASK_KEY, generateConnectionMask)
-    new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, compound)
   }
 
   override def femtocraftServerUpdate() {
@@ -177,6 +164,9 @@ class TileEntityVacuumTube extends TileEntityBase with IVacuumTube {
       }
       needsCheckOutput = false
     }
+
+    if (hasItem.forall(p => !p) && queuedItem == null) return
+
     if (items.getStackInSlot(3) != null) {
       outputTile match {
         case tube: IVacuumTube if tube.insertItem(items.getStackInSlot(3), outputDir.getOpposite) =>
@@ -343,6 +333,19 @@ class TileEntityVacuumTube extends TileEntityBase with IVacuumTube {
     }
   }
 
+  def missingInput = inputTile == null && !needsCheckInput
+
+  def missingOutput = outputTile == null && !needsCheckOutput
+
+  def isOverflowing: Boolean = {
+    if (worldObj.isRemote && overflowing) return true
+    outputTile match {
+      case tube: IVacuumTube => !tube.canInsertItem(null, outputDir.getOpposite)
+      case inv: IInventory   => !canFillInv && hasItem.forall(p => p) && queuedItem != null
+      case _                 => false
+    }
+  }
+
   private def ejectItem(slot: Int) {
     val dropItem = items.getStackInSlot(slot)
     ejectItemStack(dropItem)
@@ -425,6 +428,20 @@ class TileEntityVacuumTube extends TileEntityBase with IVacuumTube {
     }
   }
 
+  private def clearInput() {
+    inputTile match {
+      case tube: IVacuumTube =>
+        val opposite = inputDir.getOpposite
+        inputDir = UNKNOWN
+        tube.disconnect(opposite)
+      case _                 =>
+    }
+    inputDir = UNKNOWN
+    inputTile = null
+    setUpdate()
+    setModified()
+  }
+
   def addOutput(dir: ForgeDirection): Boolean = {
     if (worldObj == null) {
       return false
@@ -463,6 +480,20 @@ class TileEntityVacuumTube extends TileEntityBase with IVacuumTube {
     }
   }
 
+  private def clearOutput() {
+    outputTile match {
+      case tube: IVacuumTube =>
+        val opposite = outputDir.getOpposite
+        outputDir = UNKNOWN
+        tube.disconnect(opposite)
+      case _                 =>
+    }
+    outputDir = UNKNOWN
+    outputTile = null
+    setUpdate()
+    setModified()
+  }
+
   override def readFromNBT(par1nbtTagCompound: NBTTagCompound) {
     super.readFromNBT(par1nbtTagCompound)
     parseConnectionMask(par1nbtTagCompound.getByte("Connections"))
@@ -477,34 +508,6 @@ class TileEntityVacuumTube extends TileEntityBase with IVacuumTube {
     } else if (isOutput(dir)) {
       clearOutput()
     }
-  }
-
-  private def clearInput() {
-    inputTile match {
-      case tube: IVacuumTube =>
-        val opposite = inputDir.getOpposite
-        inputDir = UNKNOWN
-        tube.disconnect(opposite)
-      case _                 =>
-    }
-    inputDir = UNKNOWN
-    inputTile = null
-    setUpdate()
-    setModified()
-  }
-
-  private def clearOutput() {
-    outputTile match {
-      case tube: IVacuumTube =>
-        val opposite = outputDir.getOpposite
-        outputDir = UNKNOWN
-        tube.disconnect(opposite)
-      case _                 =>
-    }
-    outputDir = UNKNOWN
-    outputTile = null
-    setUpdate()
-    setModified()
   }
 
   def isInput(dir: ForgeDirection) = dir == inputDir
