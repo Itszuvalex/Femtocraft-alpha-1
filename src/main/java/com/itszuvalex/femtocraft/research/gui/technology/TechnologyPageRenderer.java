@@ -42,7 +42,9 @@ public class TechnologyPageRenderer implements ITechnologyElementRenderer {
     public void render(int x, int y, int width, int height, int displayPage, int mouseX, int mouseY, List tooltip,
                        boolean isResearched) {
         for (ITechnologyElementRenderer element : elements) {
-            element.render(x, y, width, height, displayPage, mouseX, mouseY, tooltip, isResearched);
+            try {
+                element.render(x, y, width, height, displayPage, mouseX, mouseY, tooltip, isResearched);
+            }catch(Exception ignored){}
         }
     }
 

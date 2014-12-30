@@ -46,8 +46,10 @@ public class GuiTechnologyCraftingRenderer implements ITechnologyElementRenderer
     @Override
     public void render(int x, int y, int width, int height, int displayPage, int mouseX, int mouseY, List tooltip,
                        boolean isResearched) {
-        gui.renderCraftingRecipeWithInfo(x,
-                y + getY(), width, height, recipe.input, recipe.output, mouseX, mouseY, tooltip, text);
+        if (recipe != null) {
+            gui.renderCraftingRecipeWithInfo(x,
+                    y + getY(), width, height, recipe.input, recipe.output, mouseX, mouseY, tooltip, text);
+        }
     }
 
     @Override
