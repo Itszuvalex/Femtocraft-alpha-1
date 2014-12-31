@@ -50,6 +50,7 @@ import com.itszuvalex.femtocraft.research.items.{ItemFemtoTechnology, ItemMicroT
 import com.itszuvalex.femtocraft.sound.FemtocraftSoundManager
 import com.itszuvalex.femtocraft.transport.items.blocks.BlockVacuumTube
 import com.itszuvalex.femtocraft.transport.liquids.blocks.BlockSuctionPipe
+import com.itszuvalex.femtocraft.utility.blocks.BlockSpatialAlternator
 import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils
 import com.mojang.authlib.GameProfile
 import cpw.mods.fml.common.Mod.EventHandler
@@ -434,7 +435,7 @@ object Femtocraft {
                                                            "BlockFluidCooledContaminatedMoltenSalt")
     blockPlasma = registerBlock(new BlockPlasma(), "BlockPlasma")
 
-    registerBlock(new BlockSnapshotTest(), "BlockSnapshotTest")
+    registerBlock(new BlockSpatialAlternator(), "BlockSnapshotTest")
 
     itemIngotTitanium = registerBaseItem("ItemIngotTitanium", { item: Item =>
       if (FemtocraftConfigs.registerTitaniumIngotInOreDictionary) {

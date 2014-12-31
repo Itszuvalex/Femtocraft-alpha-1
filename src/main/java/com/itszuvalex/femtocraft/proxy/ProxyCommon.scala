@@ -27,6 +27,7 @@ import com.itszuvalex.femtocraft.power.tiles._
 import com.itszuvalex.femtocraft.research.tiles.{TileEntityResearchComputer, TileEntityResearchConsole}
 import com.itszuvalex.femtocraft.transport.items.tiles.TileEntityVacuumTube
 import com.itszuvalex.femtocraft.transport.liquids.tiles.TileEntitySuctionPipe
+import com.itszuvalex.femtocraft.utility.tiles.TileEntitySpatialAlternator
 import cpw.mods.fml.common.registry.GameRegistry
 
 class ProxyCommon {
@@ -85,6 +86,8 @@ class ProxyCommon {
     GameRegistry.registerTileEntity(classOf[TileEntityNullEqualizer], "TileEntityNullEqualizer")
     GameRegistry.registerTileEntity(classOf[TileEntityPlasma], "TileEntityPlasma")
     GameRegistry.registerTileEntity(classOf[TileEntityPlasmaConduit], "TileEntityPlasmaConduit")
+    
+    GameRegistry.registerTileEntity(classOf[TileEntitySpatialAlternator], "TileEntitySpatialAlternator")
   }
 
   def registerBlockRenderers() {

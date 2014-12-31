@@ -14,7 +14,6 @@ import scala.util.Random
  */
 object SpatialRelocation {
   val shiftElseRemake = false
-  val rand            = Random
 
   def shiftBlock(world: World, x: Int, y: Int, z: Int, direction: ForgeDirection): Unit = {
     val newX = x + direction.offsetX
@@ -27,6 +26,10 @@ object SpatialRelocation {
                 replace: Boolean = false): Unit = {
     if (!replace && !destWorld.isAirBlock(destX, destY, destZ)) return
     applySnapshot(extractBlock(world, x, y, z), destWorld, destX, destY, destZ)
+    world.playSoundEffect(x, y, z, "mob.endermen.portal", 1.0F, 1.0F)
+    if (world != destWorld || (((x - destX) * (x - destX) + (y - destY) * (y - destY) + (z - destZ) * (z - destZ)) > 64)) {
+      destWorld.playSoundEffect(destX, destY, destZ, "mob.endermen.portal", 1.0F, 1.0F)
+    }
   }
 
   def extractBlock(world: World, x: Int, y: Int, z: Int): BlockAndTileSnapshot = {
@@ -48,17 +51,10 @@ object SpatialRelocation {
     val snapshot = new BlockAndTileSnapshot(world, x, y, z)
     world.removeTileEntity(x, y, z)
     world.setBlockToAir(x, y, z)
-    world
-    .spawnParticle("portal",
-                   x + (this.rand.nextDouble - 0.5D),
-                   y + this.rand.nextDouble - 0.25D,
-                   z + (this.rand.nextDouble - 0.5D),
-                   (this.rand.nextDouble - 0.5D) * 2.0D,
-                   -this.rand.nextDouble,
-                   (this.rand.nextDouble - 0.5D) * 2.0D)
-
     snapshot
   }
+
+  def applySnapshot(s: BlockAndTileSnapshot): Unit = applySnapshot(s, s.world, s.x, s.y, s.z)
 
   def applySnapshot(s: BlockAndTileSnapshot, destWorld: World, destX: Int, destY: Int, destZ: Int): Unit = {
     if (s == null) return
@@ -95,16 +91,5 @@ object SpatialRelocation {
       newTile.blockType = s.block
       destWorld.setTileEntity(destX, destY, destZ, newTile)
     }
-    destWorld
-    .spawnParticle("portal",
-                   destX + (this.rand.nextDouble - 0.5D),
-                   destY + this.rand.nextDouble - 0.25D,
-                   destZ + (this.rand.nextDouble - 0.5D),
-                   (this.rand.nextDouble - 0.5D) * 2.0D,
-                   -this.rand.nextDouble,
-                   (this.rand.nextDouble - 0.5D) * 2.0D)
-
   }
-
-  def applySnapshot(s: BlockAndTileSnapshot): Unit = applySnapshot(s, s.world, s.x, s.y, s.z)
 }
