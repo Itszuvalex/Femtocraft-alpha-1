@@ -1,13 +1,12 @@
 package com.itszuvalex.femtocraft.utility
 
 import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.core.blocks.TileContainer
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.world.{World, WorldServer}
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.util.{BlockSnapshot, ForgeDirection}
 import net.minecraftforge.event.world.BlockEvent.{BreakEvent, PlaceEvent}
-
-import scala.util.Random
 
 /**
  * Created by Chris on 12/30/2014.
@@ -48,13 +47,18 @@ object SpatialRelocation {
         }
       case _                   =>
     }
-    val snapshot = new BlockAndTileSnapshot(world, x, y, z)
-    world.removeTileEntity(x, y, z)
+    val tileEntity = world.getTileEntity(x, y, z)
+    val block = world.getBlock(x, y, z)
+    val metadata = world.getBlockMetadata(x, y, z)
+    if (block != null) {
+      TileContainer.shouldDrop = false
+      block.breakBlock(world, x, y, z, block, metadata)
+      TileContainer.shouldDrop = true
+    }
+    val snapshot = new BlockAndTileSnapshot(world, x, y, z, block, metadata, tileEntity)
     world.setBlockToAir(x, y, z)
     snapshot
   }
-
-  def applySnapshot(s: BlockAndTileSnapshot): Unit = applySnapshot(s, s.world, s.x, s.y, s.z)
 
   def applySnapshot(s: BlockAndTileSnapshot, destWorld: World, destX: Int, destY: Int, destZ: Int): Unit = {
     if (s == null) return
@@ -91,5 +95,9 @@ object SpatialRelocation {
       newTile.blockType = s.block
       destWorld.setTileEntity(destX, destY, destZ, newTile)
     }
+    s.block.onBlockAdded(destWorld, destX, destY, destZ)
+    s.block.onPostBlockPlaced(destWorld, destX, destY, destZ, destWorld.getBlockMetadata(destX, destY, destZ))
   }
+
+  def applySnapshot(s: BlockAndTileSnapshot): Unit = applySnapshot(s, s.world, s.x, s.y, s.z)
 }
