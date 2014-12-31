@@ -160,6 +160,7 @@ tile.BlockPlasmaVent.name=Plasma Vent
 tile.BlockResearchComputer.name=Research Computer
 tile.BlockResearchConsole.name=Research Console
 tile.BlockSisyphusStabilizer.name=Sisyphus Stabilizer
+tile.BlockSpacialAlternator.name=Spacial Alternator
 tile.BlockSteamGenerator.name=Steam Generator
 tile.BlockStellaratorCore.name=Stellarator Core
 tile.BlockStellaratorFocus.name=Stellarator Focus

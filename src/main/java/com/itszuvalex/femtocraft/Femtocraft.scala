@@ -186,6 +186,7 @@ object Femtocraft {
   var fluidCooledContaminatedMoltenSalt     : Fluid                     = null
   var blockFluidCooledContaminatedMoltenSalt: BlockFluidBase            = null
   var blockPlasma                           : Block                     = null
+  var blockSpatialAlternator                : Block                     = null
   /* items */
   var itemIngotTitanium                     : Item                      = null
   var itemIngotPlatinum                     : Item                      = null
@@ -435,7 +436,7 @@ object Femtocraft {
                                                            "BlockFluidCooledContaminatedMoltenSalt")
     blockPlasma = registerBlock(new BlockPlasma(), "BlockPlasma")
 
-    registerBlock(new BlockSpatialAlternator(), "BlockSnapshotTest")
+    blockSpatialAlternator = registerBlock(new BlockSpatialAlternator(), "BlockSpacialAlternator")
 
     itemIngotTitanium = registerBaseItem("ItemIngotTitanium", { item: Item =>
       if (FemtocraftConfigs.registerTitaniumIngotInOreDictionary) {
