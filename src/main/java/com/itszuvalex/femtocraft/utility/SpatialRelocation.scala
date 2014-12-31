@@ -80,7 +80,7 @@ object SpatialRelocation {
       case _                   =>
     }
 
-    destWorld.setBlock(destX, destY, destZ, s.block, s.metadata, 2)
+    destWorld.setBlock(destX, destY, destZ, s.block, s.metadata, 3)
     if (s.te != null) {
       if (s.x != destX) s.te.setInteger("x", destX)
       if (s.y != destY) s.te.setInteger("y", destY)

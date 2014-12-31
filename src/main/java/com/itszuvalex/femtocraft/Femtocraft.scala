@@ -436,7 +436,7 @@ object Femtocraft {
                                                            "BlockFluidCooledContaminatedMoltenSalt")
     blockPlasma = registerBlock(new BlockPlasma(), "BlockPlasma")
 
-    blockSpatialAlternator = registerBlock(new BlockSpatialAlternator(), "BlockSpacialAlternator")
+    blockSpatialAlternator = registerBlock(new BlockSpatialAlternator(), "BlockSpatialAlternator")
 
     itemIngotTitanium = registerBaseItem("ItemIngotTitanium", { item: Item =>
       if (FemtocraftConfigs.registerTitaniumIngotInOreDictionary) {

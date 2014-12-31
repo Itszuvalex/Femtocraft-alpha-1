@@ -18,24 +18,50 @@ buildscript {
 apply plugin: 'scala'
 apply plugin: 'forge'
 
-compileScala {
-  sourceCompatibility = 1.7
-  targetCompatibility = 1.7
+project.ext {
+    massive = "0"
+    major = "3"
+    minor = "0"
+    mcVersion = "1.7.10"
+
+//    System.getenv().put("MASSIVE", massive)
+//    System.getenv().put("MAJOR", major)
+//    System.getenv().put("MINOR", minor)
+//    System.getenv().put("MC_VERSION", mcVersion)
+}
+version = "${project.ext.massive}.${project.ext.major}.${project.minor}"
+
+if (System.getenv().BUILD_NUMBER != null) {
+    version += "-${System.getenv().BUILD_NUMBER}"
+} else {
+    version += " - local"
 }
 
-version = ".1"
-group= "com.itszuvalex.femtocraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+compileScala {
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+}
+
+group = "com.itszuvalex.femtocraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "femtocraft"
 
 minecraft {
-    version = "1.7.10-10.13.2.1230"
+    version = "${project.ext.mcVersion}-10.13.2.1230"
     runDir = "eclipse"
+// replacing stuff in the source
+    replace '@MASSIVE@', project.massive
+    replace '@MAJOR@', project.major
+    replace '@MINOR@', project.minor
+    replace '@MC_VERSION@', version
+    if (System.getenv("BUILD_NUMBER") != null) {
+        replace '@BUILD_NUMBER@', System.getenv("BUILD_NUMBER")
+    } else {
+        replace '@BUILD_NUMBER@', 0
+    }
 }
 
 dependencies {
-  compile 'org.scala-lang:scala-library:2.11.4'
-
-
+    compile 'org.scala-lang:scala-library:2.11.4'
 
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
@@ -60,25 +86,25 @@ sourceSets {
         java {
             srcDirs = []
         }
-      }
+    }
 }
 
 processResources
-{
-    // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
+        {
+            // this will ensure that this task is redone when the versions change.
+            inputs.property "version", project.version
+            inputs.property "mcversion", project.minecraft.version
 
-    // replace stuff in mcmod.info, nothing else
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
+            // replace stuff in mcmod.info, nothing else
+            from(sourceSets.main.resources.srcDirs) {
+                include 'mcmod.info'
 
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
-    }
+                // replace version and mcversion
+                expand 'version': project.version, 'mcversion': project.minecraft.version
+            }
 
-    // copy everything else, thats not the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
-}
+            // copy everything else, thats not the mcmod.info
+            from(sourceSets.main.resources.srcDirs) {
+                exclude 'mcmod.info'
+            }
+        }
