@@ -23,6 +23,7 @@
 package com.itszuvalex.femtocraft
 
 import java.io.File
+import java.util.UUID
 
 import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.blocks._
@@ -49,7 +50,8 @@ import com.itszuvalex.femtocraft.research.items.{ItemFemtoTechnology, ItemMicroT
 import com.itszuvalex.femtocraft.sound.FemtocraftSoundManager
 import com.itszuvalex.femtocraft.transport.items.blocks.BlockVacuumTube
 import com.itszuvalex.femtocraft.transport.liquids.blocks.BlockSuctionPipe
-import com.itszuvalex.femtocraft.utils.{FemtocraftFileUtils, FemtocraftUtils}
+import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils
+import com.mojang.authlib.GameProfile
 import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent, FMLServerStartingEvent}
 import cpw.mods.fml.common.network.NetworkRegistry
@@ -59,8 +61,10 @@ import cpw.mods.fml.relauncher.Side
 import net.minecraft.block.Block
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.{Item, ItemStack}
+import net.minecraft.world.WorldServer
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.config.Configuration
+import net.minecraftforge.common.util.FakePlayerFactory
 import net.minecraftforge.fluids.{BlockFluidBase, Fluid, FluidRegistry}
 import net.minecraftforge.oredict.OreDictionary
 import org.apache.logging.log4j.{Level, LogManager, Logger}
@@ -68,8 +72,7 @@ import org.apache.logging.log4j.{Level, LogManager, Logger}
 /**
  * Created by Christopher Harris (Itszuvalex) on 10/6/14.
  */
-@Mod(modid = Femtocraft.ID, name = "Femtocraft", version = Femtocraft.VERSION,
-     modLanguage = "scala")
+@Mod(modid = Femtocraft.ID, name = "Femtocraft", version = Femtocraft.VERSION, modLanguage = "scala")
 object Femtocraft {
 
   final val ID                   = "Femtocraft"
@@ -86,7 +89,8 @@ object Femtocraft {
   //  final val VACUUM_TUBE_CHANNEL       = ID + ".vtube"
   //  final val FISSION_REACTOR_CHANNEL   = ID + ".fiss"
   //  final val PHLEGETHON_TUNNEL_CHANNEL = ID + ".phleg"
-
+  val fakePlayerGameProfile                 : GameProfile               = new
+      GameProfile(UUID.fromString("b730f1c0-018b-40be-9515-48c3f4c2f745"), "[Femtocraft]")
   @SidedProxy(clientSide = "com.itszuvalex.femtocraft.proxy.ProxyClient",
               serverSide = "com.itszuvalex.femtocraft.proxy.ProxyCommon")
   var proxy                                 : ProxyCommon               = null
@@ -167,7 +171,7 @@ object Femtocraft {
   var blockStellaratorHousing               : Block                     = null
   var blockPlasmaConduit                    : Block                     = null
   var blockPlasmaVent                       : Block                     = null
-  var blockPlasmaSolenoid                    : Block                     = null
+  var blockPlasmaSolenoid                   : Block                     = null
   var blockPlasmaCondenser                  : Block                     = null
   var blockMicroCable                       : Block                     = null
   var blockNanoCable                        : Block                     = null
@@ -389,8 +393,7 @@ object Femtocraft {
     blockSuctionPipe = registerBlock(new BlockSuctionPipe, "BlockSuctionPipe")
     blockMicroChargingBase = registerBlock(new BlockAtmosphericChargingBase, "BlockBaseMicroCharging")
     blockMicroChargingCoil = registerBlock(new BlockAtmosphericChargingCoil, "BlockCoilMicroCharging")
-    blockMicroChargingCapacitor = registerBlock(new BlockAtmosphericChargingCapacitor,
-                                                "BlockCapacitorMicroCharging")
+    blockMicroChargingCapacitor = registerBlock(new BlockAtmosphericChargingCapacitor, "BlockCapacitorMicroCharging")
     blockMagneticInductionGenerator = registerBlock(new BlockMagneticInductionGenerator,
                                                     "BlockMagneticInductionGenerator")
     blockOrbitalEqualizer = registerBlock(new BlockOrbitalEqualizer, "BlockOrbitalEqualizer")
@@ -427,8 +430,11 @@ object Femtocraft {
     blockFluidCooledMoltenSalt = registerBlock(new BlockFluidCooledMoltenSalt, "BlockFluidCooledMoltenSalt")
     fluidCooledContaminatedMoltenSalt = new FluidCooledContaminatedMoltenSalt
     FluidRegistry.registerFluid(fluidCooledContaminatedMoltenSalt)
-    blockFluidCooledContaminatedMoltenSalt = registerBlock(new BlockFluidCooledContaminatedMoltenSalt, "BlockFluidCooledContaminatedMoltenSalt")
+    blockFluidCooledContaminatedMoltenSalt = registerBlock(new BlockFluidCooledContaminatedMoltenSalt,
+                                                           "BlockFluidCooledContaminatedMoltenSalt")
     blockPlasma = registerBlock(new BlockPlasma(), "BlockPlasma")
+
+    registerBlock(new BlockSnapshotTest(), "BlockSnapshotTest")
 
     itemIngotTitanium = registerBaseItem("ItemIngotTitanium", { item: Item =>
       if (FemtocraftConfigs.registerTitaniumIngotInOreDictionary) {
@@ -581,7 +587,10 @@ object Femtocraft {
     itemMicroPlating = registerBaseItem("ItemMicroPlating")
   }
 
-  private def registerBaseItem(unlocalizedName: String, fun: (ItemBase) => Unit = { a: Item =>}) = registerItem(new ItemBase(unlocalizedName), unlocalizedName, fun)
+  private def registerBaseItem(unlocalizedName: String, fun: (ItemBase) => Unit = { a: Item =>}) = registerItem(new
+                                                                                                                    ItemBase(unlocalizedName),
+                                                                                                                unlocalizedName,
+                                                                                                                fun)
 
   private def registerItem[I1 <: Item](item: I1, name: String, fun: (I1) => Unit = { a: Item =>}): I1 = {
     if (true /*register item? */ ) {
@@ -602,6 +611,8 @@ object Femtocraft {
   }
 
   def log(level: Level, msg: String) = logger.log(level, msg)
+
+  def getFakePlayer(world: WorldServer) = FakePlayerFactory.get(world, fakePlayerGameProfile)
 
   @EventHandler def load(event: FMLInitializationEvent) {
   }
