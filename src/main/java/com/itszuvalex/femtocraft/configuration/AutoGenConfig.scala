@@ -11,8 +11,7 @@ import org.apache.logging.log4j.Level
  * Created by Itszuvalex on 12/31/14.
  */
 object AutoGenConfig {
-  private val CATEGORY            = "Configuration Regeneration"
-  private val CATEGORY_VERSIONING = CATEGORY + CATEGORY_SPLITTER + "Versioning"
+  private val CATEGORY = "Configuration Regeneration"
 
   var config: Configuration = null
 
@@ -27,29 +26,29 @@ object AutoGenConfig {
 
   def shouldRegenFile(file: File) = get(config.getBoolean("Always Regenerate " + file.getName, CATEGORY + CATEGORY_SPLITTER + file.getName, false,
                                                           "Always regenerate " + file.getName + ". When true, this overrides should regenerate.")
-                                        || (get(config.getBoolean("Should Regenerate " + file.getName, CATEGORY + CATEGORY_SPLITTER + file.getName, true,
-                                                                  "Set to false to prevent regeneration for this file.")) &&
-                                            (regenOnMassiveChange && massiveVersionChanged(file)) ||
+                                        || ((regenOnMassiveChange && massiveVersionChanged(file)) ||
                                             (regenOnMajorChange && majorVersionChanged(file)) ||
                                             (regenOnMinorChange && minorVersionChanged(file)) ||
-                                            (regenOnBuildChange && buildVersionChanged(file)))
-                                        || shouldRegenAlways)
+                                            (regenOnBuildChange && buildVersionChanged(file)) &&
+                                            get(config.getBoolean("Should Regenerate " + file.getName, CATEGORY + CATEGORY_SPLITTER + file.getName, true,
+                                                                  "Set to false to prevent regeneration for this file."))) ||
+                                        shouldRegenAlways)
 
   def shouldRegenAlways = get(config.getBoolean("Always Regenerate Configs", CATEGORY, false,
                                                 "When true, will always regenerate all files in the autogen folder on startup." +
                                                 "Overrides ALL per-file regeneration settings.")
                              )
 
-  def regenOnMassiveChange = get(config.getBoolean("Massive", CATEGORY_VERSIONING, true, "Regenerate when Massive version is different.")
+  def regenOnMassiveChange = get(config.getBoolean("Massive", CATEGORY, true, "Regenerate when Massive version is different.")
                                  || shouldRegenAlways)
 
-  def regenOnMajorChange = get(config.getBoolean("Major", CATEGORY_VERSIONING, true, "Regenerate when Major version is different.")
+  def regenOnMajorChange = get(config.getBoolean("Major", CATEGORY, true, "Regenerate when Major version is different.")
                                || shouldRegenAlways)
 
-  def regenOnMinorChange = get(config.getBoolean("Minor", CATEGORY_VERSIONING, true, "Regenerate when Minor version is different.")
+  def regenOnMinorChange = get(config.getBoolean("Minor", CATEGORY, true, "Regenerate when Minor version is different.")
                                || shouldRegenAlways)
 
-  def regenOnBuildChange = get(config.getBoolean("Build", CATEGORY_VERSIONING, false, "Regenerate when Build version is different.")
+  def regenOnBuildChange = get(config.getBoolean("Build", CATEGORY, false, "Regenerate when Build version is different.")
                                || shouldRegenAlways)
 
   def markFileRegenerated(file: File) = {
