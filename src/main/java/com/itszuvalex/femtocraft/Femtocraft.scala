@@ -28,7 +28,7 @@ import java.util.UUID
 import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.blocks._
 import com.itszuvalex.femtocraft.command.{CommandBase, CommandFemtocraft}
-import com.itszuvalex.femtocraft.configuration.{FemtocraftAssemblerConfig, FemtocraftConfigs}
+import com.itszuvalex.femtocraft.configuration.{AutoGenConfig, FemtocraftAssemblerConfig, FemtocraftConfigs}
 import com.itszuvalex.femtocraft.core.MagnetRegistry
 import com.itszuvalex.femtocraft.core.fluids._
 import com.itszuvalex.femtocraft.core.items.{ItemBase, ItemFemtoInterfaceDevice, ItemMicroInterfaceDevice, ItemNanoInterfaceDevice}
@@ -292,10 +292,13 @@ object Femtocraft {
     researchManager = new ManagerResearch
     assistantManager = new ManagerAssistant
     femtocraftServerCommand = new CommandFemtocraft
+
+    AutoGenConfig.init(new Configuration(new File(FemtocraftFileUtils.configFolder, "AutoGenConfig.cfg")))
+
     config = new Configuration(new File(FemtocraftFileUtils.configFolder, ID + ".cfg"))
     FemtocraftConfigs.load(config)
-    technologyConfigFile = new File(FemtocraftFileUtils.configFolder, TECH_CONFIG_APPEND + ".xml")
-    recipeConfigFile = new File(FemtocraftFileUtils.configFolder, RECIPE_CONFIG_APPEND + ".cfg")
+    technologyConfigFile = new File(FemtocraftFileUtils.autogenConfigPath, TECH_CONFIG_APPEND + ".xml")
+    recipeConfigFile = new File(FemtocraftFileUtils.autogenConfigPath, RECIPE_CONFIG_APPEND + ".cfg")
     recipeConfig = new Configuration(recipeConfigFile)
 
     FemtocraftPacketHandler.init()

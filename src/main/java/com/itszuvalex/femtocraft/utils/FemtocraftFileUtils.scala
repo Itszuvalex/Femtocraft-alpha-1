@@ -55,7 +55,9 @@ object FemtocraftFileUtils {
     f
   }
 
-  def customConfigPath = configPath +  "custom/"
+  def customConfigPath = configPath + "custom/"
+
+  def autogenConfigPath = configPath + "autogen/"
 
   def configPath = if (FMLCommonHandler.instance.getEffectiveSide == Side.SERVER) {
     MinecraftServer.getServer.getFile("/config/" + Femtocraft.ID + "/").getPath + "/"

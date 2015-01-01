@@ -26,7 +26,7 @@ import java.util
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.research.ITechnology
 import com.itszuvalex.femtocraft.api.{DimensionalRecipe, EnumTechLevel}
-import com.itszuvalex.femtocraft.configuration.{DimensionalXMLLoader, XMLDimensionalRecipes}
+import com.itszuvalex.femtocraft.configuration.{AutoGenConfig, DimensionalXMLLoader, XMLDimensionalRecipes}
 import com.itszuvalex.femtocraft.managers.assembler.ComparatorItemStack
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
 import com.itszuvalex.femtocraft.utils.{FemtocraftFileUtils, FemtocraftUtils}
@@ -52,24 +52,6 @@ class ManagerDimensionalRecipe {
     recipesToOutput.get(getDimensionalKey(input, configurators))
   }
 
-  private def getDimensionalKey(input: ItemStack, configurators: Array[ItemStack]): DimensionalKey = {
-    if (input == null) return null
-    val ninput = input.copy
-    ninput.stackSize = 1
-    val configs = new Array[ItemStack](configurators.length)
-    if (configs != null) {
-      for (i <- 0 until configs.length) {
-
-        if (configurators(i) != null) {
-          configs(i) = configurators(i).copy
-          configs(i).stackSize = 1
-        }
-      }
-
-    }
-    new DimensionalKey(ninput, configs)
-  }
-
   def getRecipe(output: ItemStack): DimensionalRecipe = {
     outputToRecipes.get(output)
   }
@@ -88,14 +70,15 @@ class ManagerDimensionalRecipe {
     val customRecipes = new DimensionalXMLLoader(new File(FemtocraftFileUtils.customConfigPath + "Dimensional/")).loadItems()
     customRecipes.view.foreach(addRecipe)
 
-    val recipes = new XMLDimensionalRecipes(new File(FemtocraftFileUtils.configFolder, "DimensionalRecipes.xml"))
-    if (recipes.initialized) {
+    val recipes = new XMLDimensionalRecipes(new File(FemtocraftFileUtils.autogenConfigPath, "DimensionalRecipes.xml"))
+    if (!AutoGenConfig.shouldRegenFile(recipes.file) && recipes.initialized) {
       recipes.loadCustomRecipes().view.foreach(addRecipe)
     }
     else {
       val defaults = getDefaultRecipes
       recipes.seedInitialRecipes(defaults)
       defaults.view.foreach(addRecipe)
+      AutoGenConfig.markFileRegenerated(recipes.file)
     }
   }
 
@@ -103,6 +86,24 @@ class ManagerDimensionalRecipe {
     recipesToOutput.put(getDimensionalKey(recipe.input, recipe.configurators), recipe)
     outputToRecipes.put(recipe.output, recipe)
     recipes += recipe
+  }
+
+  private def getDimensionalKey(input: ItemStack, configurators: Array[ItemStack]): DimensionalKey = {
+    if (input == null) return null
+    val ninput = input.copy
+    ninput.stackSize = 1
+    val configs = new Array[ItemStack](configurators.length)
+    if (configs != null) {
+      for (i <- 0 until configs.length) {
+
+        if (configurators(i) != null) {
+          configs(i) = configurators(i).copy
+          configs(i).stackSize = 1
+        }
+      }
+
+    }
+    new DimensionalKey(ninput, configs)
   }
 
   private def getDefaultRecipes: ArrayBuffer[DimensionalRecipe] = {

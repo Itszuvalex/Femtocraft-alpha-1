@@ -5,7 +5,7 @@ import java.util
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.core.Configurable
-import com.itszuvalex.femtocraft.configuration.{MagnetismXMLLoader, XMLMagnetismMappings}
+import com.itszuvalex.femtocraft.configuration.{AutoGenConfig, MagnetismXMLLoader, XMLMagnetismMappings}
 import com.itszuvalex.femtocraft.implicits.IDImplicits._
 import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils
 import net.minecraft.block.Block
@@ -51,17 +51,17 @@ import scala.collection.mutable.ArrayBuffer
 
   def getMagnetStrength(item: ItemStack): Int = if (item == null) 0 else getMagnetStrength(item.itemID)
 
-  def getMagnetStrength(id: Int): Int = idToStrengthMap.get(id)
-
   def getMagnetStrength(item: Item): Int = if (item == null) 0 else getMagnetStrength(item.itemID)
+
+  def getMagnetStrength(id: Int): Int = idToStrengthMap.get(id)
 
   def isMagnet(block: Block): Boolean = block != null && isMagnet(new ItemStack(block))
 
   def isMagnet(item: ItemStack): Boolean = item != null && isMagnet(item.itemID)
 
-  def isMagnet(item: Item): Boolean = item != null && isMagnet(item.itemID)
-
   def isMagnet(id: Int): Boolean = idToStrengthMap.containsKey(id)
+
+  def isMagnet(item: Item): Boolean = item != null && isMagnet(item.itemID)
 
   private def registerMagnetTree() {
     Femtocraft.log(Level.INFO, "Registering all magnets.")
@@ -70,7 +70,7 @@ import scala.collection.mutable.ArrayBuffer
     var depth = 0
     while (changed && depth < MAXIMUM_DEPTH) {
       changed = false
-      recipes.view.foreach{recipe =>
+      recipes.view.foreach { recipe =>
         val prevStrength = if (isMagnet(recipe.output)) getMagnetStrength(recipe.output) else 0
         var strength = 0
         for (input <- recipe.input) {
@@ -82,7 +82,7 @@ import scala.collection.mutable.ArrayBuffer
             changed = true
           }
         }
-      }
+                           }
       depth += 1
     }
     Femtocraft.log(Level.INFO, "Finished registering magnets.  Total depth was " + depth + ".")
@@ -92,14 +92,15 @@ import scala.collection.mutable.ArrayBuffer
     val customMappings = new MagnetismXMLLoader(new File(FemtocraftFileUtils.customConfigPath + "Magnetism/")).loadItems()
     customMappings.view.foreach(registerMapping)
 
-    val recipes = new XMLMagnetismMappings(new File(FemtocraftFileUtils.configFolder, "MagnetismMappings.xml"))
-    if (recipes.initialized) {
+    val recipes = new XMLMagnetismMappings(new File(FemtocraftFileUtils.autogenConfigPath, "MagnetismMappings.xml"))
+    if (!AutoGenConfig.shouldRegenFile(recipes.file) && recipes.initialized) {
       recipes.loadCustomRecipes().view.foreach(registerMapping)
     }
     else {
       val defaults = getMagnetDefaults
       recipes.seedInitialRecipes(defaults)
       defaults.view.foreach(registerMapping)
+      AutoGenConfig.markFileRegenerated(recipes.file)
     }
   }
 

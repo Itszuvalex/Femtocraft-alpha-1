@@ -26,7 +26,7 @@ import java.util
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.research.ITechnology
 import com.itszuvalex.femtocraft.api.{EnumTechLevel, TemporalRecipe}
-import com.itszuvalex.femtocraft.configuration.{TemporalXMLLoader, XMLTemporalRecipes}
+import com.itszuvalex.femtocraft.configuration.{AutoGenConfig, TemporalXMLLoader, XMLTemporalRecipes}
 import com.itszuvalex.femtocraft.managers.assembler.ComparatorItemStack
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
 import com.itszuvalex.femtocraft.utils.{FemtocraftFileUtils, FemtocraftUtils}
@@ -53,14 +53,15 @@ class ManagerTemporalRecipe {
     val customRecipes = new TemporalXMLLoader(new File(FemtocraftFileUtils.customConfigPath + "Temporal/")).loadItems()
     customRecipes.view.foreach(addRecipe)
 
-    val recipes = new XMLTemporalRecipes(new File(FemtocraftFileUtils.configFolder, "TemporalRecipes.xml"))
-    if (recipes.initialized) {
+    val recipes = new XMLTemporalRecipes(new File(FemtocraftFileUtils.autogenConfigPath, "TemporalRecipes.xml"))
+    if (!AutoGenConfig.shouldRegenFile(recipes.file) && recipes.initialized) {
       recipes.loadCustomRecipes().view.foreach(addRecipe)
     }
     else {
       val defaults = getDefaultRecipes
       recipes.seedInitialRecipes(defaults)
       defaults.view.foreach(addRecipe)
+      AutoGenConfig.markFileRegenerated(recipes.file)
     }
   }
 
@@ -77,13 +78,6 @@ class ManagerTemporalRecipe {
     recipes += recipe
   }
 
-  def getRecipes = recipes
-
-  def getRecipe(input: ItemStack, configurators: Array[ItemStack]): TemporalRecipe = {
-    if (input == null) return null
-    recipesToOutput.get(getTemporalKey(input, configurators))
-  }
-
   private def getTemporalKey(input: ItemStack, configurators: Array[ItemStack]): TemporalKey = {
     if (input == null) return null
     val ninput = input.copy
@@ -97,6 +91,13 @@ class ManagerTemporalRecipe {
     }
 
     new TemporalKey(ninput, configs)
+  }
+
+  def getRecipes = recipes
+
+  def getRecipe(input: ItemStack, configurators: Array[ItemStack]): TemporalRecipe = {
+    if (input == null) return null
+    recipesToOutput.get(getTemporalKey(input, configurators))
   }
 
   def getRecipe(output: ItemStack): TemporalRecipe = {

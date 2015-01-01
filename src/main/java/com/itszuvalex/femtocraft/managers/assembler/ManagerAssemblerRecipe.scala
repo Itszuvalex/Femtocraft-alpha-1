@@ -26,7 +26,7 @@ import java.util
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.events.EventAssemblerRegister
 import com.itszuvalex.femtocraft.api.{AssemblerRecipe, EnumTechLevel}
-import com.itszuvalex.femtocraft.configuration.{AssemblerXMLLoader, XMLAssemblerRecipes}
+import com.itszuvalex.femtocraft.configuration.{AssemblerXMLLoader, AutoGenConfig, XMLAssemblerRecipes}
 import com.itszuvalex.femtocraft.implicits.IDImplicits._
 import com.itszuvalex.femtocraft.managers.research.Technology
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
@@ -334,8 +334,8 @@ class ManagerAssemblerRecipe {
 
     val defaults = new ArrayBuffer[AssemblerRecipe]()
 
-    val femtocraftRecipes = new XMLAssemblerRecipes(new File(FemtocraftFileUtils.configFolder, "AssemblerRecipes.xml"))
-    if (femtocraftRecipes.initialized) {
+    val femtocraftRecipes = new XMLAssemblerRecipes(new File(FemtocraftFileUtils.autogenConfigPath, "AssemblerRecipes.xml"))
+    if (!AutoGenConfig.shouldRegenFile(femtocraftRecipes.file) && femtocraftRecipes.initialized) {
       defaults ++= femtocraftRecipes.loadCustomRecipes()
       defaults.view.foreach(addRecipe)
     } else {
@@ -350,12 +350,13 @@ class ManagerAssemblerRecipe {
       Femtocraft.log(Level.INFO, "Saving Femtocraft default recipes to file.")
       femtocraftRecipes.seedInitialRecipes(defaults)
       Femtocraft.log(Level.INFO, "Finished saving Femtocraft default recipes.")
+      AutoGenConfig.markFileRegenerated(femtocraftRecipes.file)
     }
     Femtocraft.log(Level.INFO, "Finished registering Femtocraft assembler recipes.")
 
-    val database = new XMLAssemblerRecipes(new File(FemtocraftFileUtils.configFolder, "ScrapedAssemblerRecipes.xml"))
+    val database = new XMLAssemblerRecipes(new File(FemtocraftFileUtils.autogenConfigPath, "ScrapedAssemblerRecipes.xml"))
     Femtocraft.log(Level.INFO, "Scraping Minecraft recipe registries for assembler recipe mappings.")
-    if (database.initialized) {
+    if (!AutoGenConfig.shouldRegenFile(database.file) && database.initialized) {
       Femtocraft.log(Level.INFO, "Scraped Recipes Database already exists.  Loading from file.")
       database.loadCustomRecipes().view.foreach(addRecipe)
     }
@@ -375,6 +376,7 @@ class ManagerAssemblerRecipe {
       Femtocraft.log(Level.INFO, "Saving scraped recipes to file.")
       database.seedInitialRecipes(getAllRecipes -- customRecipes -- defaults)
       Femtocraft.log(Level.INFO, "Finished saving scraped recipes.")
+      AutoGenConfig.markFileRegenerated(database.file)
     }
   }
 

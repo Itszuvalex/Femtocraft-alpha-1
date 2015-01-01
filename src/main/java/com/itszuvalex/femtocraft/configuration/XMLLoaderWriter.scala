@@ -8,7 +8,7 @@ import scala.xml.{PrettyPrinter, XML}
 /**
  * Created by Chris on 12/5/2014.
  */
-abstract class XMLLoaderWriter[Type](file: File) {
+abstract class XMLLoaderWriter[Type](val file: File) {
   val initialized: Boolean = file.exists
   if (!initialized) {
     XML.save(file.getPath, <xml></xml>)
