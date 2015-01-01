@@ -26,10 +26,10 @@ object AutoGenConfig {
 
   def shouldRegenFile(file: File) = get(config.getBoolean("Always Regenerate " + file.getName, CATEGORY + CATEGORY_SPLITTER + file.getName, false,
                                                           "Always regenerate " + file.getName + ". When true, this overrides should regenerate.")
-                                        || ((regenOnMassiveChange && massiveVersionChanged(file)) ||
-                                            (regenOnMajorChange && majorVersionChanged(file)) ||
-                                            (regenOnMinorChange && minorVersionChanged(file)) ||
-                                            (regenOnBuildChange && buildVersionChanged(file)) &&
+                                        || (((regenOnMassiveChange && massiveVersionChanged(file)) ||
+                                             (regenOnMajorChange && majorVersionChanged(file)) ||
+                                             (regenOnMinorChange && minorVersionChanged(file)) ||
+                                             (regenOnBuildChange && buildVersionChanged(file))) &&
                                             get(config.getBoolean("Should Regenerate " + file.getName, CATEGORY + CATEGORY_SPLITTER + file.getName, true,
                                                                   "Set to false to prevent regeneration for this file."))) ||
                                         shouldRegenAlways)
