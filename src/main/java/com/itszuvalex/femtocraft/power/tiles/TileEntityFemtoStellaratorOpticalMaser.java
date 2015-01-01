@@ -32,6 +32,7 @@ import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent;
 import com.itszuvalex.femtocraft.utils.WorldLocation;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -64,8 +65,20 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
     @Saveable(desc = true)
     private MultiBlockInfo info;
     private IFusionReactorCore core;
+
+    @Override
+    public boolean onSideActivate(EntityPlayer par5EntityPlayer, int side) {
+        if (isValidMultiBlock() && core != null && (!core.isIgniting() || !core.isSelfSustaining())) {
+            core.beginIgnitionProcess(core);
+            core.contributeCoreEnergy(45000000);
+            return true;
+        }
+        return super.onSideActivate(par5EntityPlayer, side);
+    }
+
     @Saveable
     private WorldLocation coreLocation;
+
     public TileEntityFemtoStellaratorOpticalMaser() {
         super();
         info = new MultiBlockInfo();

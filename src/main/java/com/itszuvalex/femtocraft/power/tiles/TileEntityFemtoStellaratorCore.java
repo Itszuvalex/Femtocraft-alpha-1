@@ -115,8 +115,6 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
         if (info.formMultiBlock(world, x, y, z)) {
             setModified();
             setUpdate();
-            beginIgnitionProcess(core);
-            core.contributeCoreEnergy(45000000);
             return true;
         }
         return false;

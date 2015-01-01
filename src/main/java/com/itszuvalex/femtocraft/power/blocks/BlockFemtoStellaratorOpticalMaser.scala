@@ -28,6 +28,7 @@ import com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoStellaratorOpticalMa
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.IIcon
 import net.minecraft.world.{IBlockAccess, World}
@@ -58,6 +59,8 @@ class BlockFemtoStellaratorOpticalMaser extends TileContainer(Material.iron) {
     super.onNeighborBlockChange(par1World, par2, par3, par4, par5)
   }
 
+  override def onBlockActivated(par1World: World, par2: Int, par3: Int, par4: Int, par5EntityPlayer: EntityPlayer, par6: Int, par7: Float, par8: Float, par9: Float): Boolean = super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9)
+
   override def breakBlock(par1World: World, par2: Int, par3: Int, par4: Int, par5: Block, par6: Int) {
     par1World.getTileEntity(par2, par3, par4) match {
       case maser: TileEntityFemtoStellaratorOpticalMaser =>
@@ -68,9 +71,7 @@ class BlockFemtoStellaratorOpticalMaser extends TileContainer(Material.iron) {
     super.breakBlock(par1World, par2, par3, par4, par5, par6)
   }
 
-  override def createNewTileEntity(world: World, metadata: Int): TileEntity = {
-    return new TileEntityFemtoStellaratorOpticalMaser
-  }
+  override def createNewTileEntity(world: World, metadata: Int) = new TileEntityFemtoStellaratorOpticalMaser
 
   override def canPlaceBlockAt(par1World: World, par2: Int, par3: Int, par4: Int) = canBlockStay(par1World, par2, par3, par4)
 

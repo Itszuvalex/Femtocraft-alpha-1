@@ -23,13 +23,9 @@ project.ext {
     major = "3"
     minor = "0"
     mcVersion = "1.7.10"
-
-//    System.getenv().put("MASSIVE", massive)
-//    System.getenv().put("MAJOR", major)
-//    System.getenv().put("MINOR", minor)
-//    System.getenv().put("MC_VERSION", mcVersion)
 }
-version = "${project.ext.massive}.${project.ext.major}.${project.minor}"
+
+version = "${project.ext.mcVersion}-${project.ext.massive}.${project.ext.major}.${project.minor}"
 
 if (System.getenv().BUILD_NUMBER != null) {
     version += "-${System.getenv().BUILD_NUMBER}"
