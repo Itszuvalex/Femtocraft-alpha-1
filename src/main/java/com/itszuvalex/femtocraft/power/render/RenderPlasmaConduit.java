@@ -167,6 +167,8 @@ public class RenderPlasmaConduit implements ISimpleBlockRenderingHandler {
                 quad.maxU = outputIcon.getInterpolatedU(2f);
                 quad.minV = outputIcon.getInterpolatedV(2f);
                 quad.maxV = outputIcon.getInterpolatedV(14f);
+                quad.flipU();
+                quad.flipV();
             }
             output_model.draw();
         }
