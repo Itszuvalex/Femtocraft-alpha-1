@@ -101,9 +101,9 @@ public class ItemAssemblySchematic extends ItemBase implements IAssemblerSchemat
 
         try {
             String outputLine = String.format(EnumChatFormatting.YELLOW + "Output:"
-                                              + recipe.enumTechLevel.getTooltipEnum() + " %d"
+                                              + recipe.enumTechLevel().getTooltipEnum() + " %d"
                                               + EnumChatFormatting.GRAY + "x" + EnumChatFormatting.RESET
-                                              + "%s" + EnumChatFormatting.RESET, recipe.output.stackSize,
+                                              + "%s" + EnumChatFormatting.RESET, recipe.output().stackSize,
                     recipe.getRecipeName()
             );
             par3List.add(outputLine);
@@ -117,7 +117,7 @@ public class ItemAssemblySchematic extends ItemBase implements IAssemblerSchemat
         par3List.add("");
 
         for (int i = 0; i < 9; ++i) {
-            ItemStack item = recipe.input[i];
+            ItemStack item = recipe.input()[i];
             String inputString;
             if (item == null) {
                 inputString = "empty";
@@ -138,17 +138,17 @@ public class ItemAssemblySchematic extends ItemBase implements IAssemblerSchemat
 
         String massLine = String.format(EnumChatFormatting.YELLOW + "Mass:"
                                         + EnumChatFormatting.DARK_PURPLE + " %d"
-                                        + EnumChatFormatting.RESET, recipe.mass);
+                                        + EnumChatFormatting.RESET, recipe.mass());
         par3List.add(massLine);
 
         String techLevelLine = String.format(EnumChatFormatting.YELLOW
-                                             + "TechLevel:" + recipe.enumTechLevel.getTooltipEnum() + " %s"
+                                             + "TechLevel:" + recipe.enumTechLevel().getTooltipEnum() + " %s"
                                              + EnumChatFormatting.RESET,
-                FemtocraftUtils.capitalize(recipe.enumTechLevel.key)
+                FemtocraftUtils.capitalize(recipe.enumTechLevel().key)
         );
         par3List.add(techLevelLine);
 
-        ITechnology tech = Femtocraft.researchManager().getTechnology(recipe.tech);
+        ITechnology tech = Femtocraft.researchManager().getTechnology(recipe.tech());
         EnumChatFormatting formatting;
         String techString;
         if (tech == null) {
@@ -223,7 +223,7 @@ public class ItemAssemblySchematic extends ItemBase implements IAssemblerSchemat
     public int massRequired(AssemblerRecipe recipe) {
         float amount = getMaxDamage();
         amount = amount == -1 ? infiniteUseMassMultiplier : amount;
-        return (int) (recipe.enumTechLevel.tier * amount);
+        return (int) (recipe.enumTechLevel().tier * amount);
     }
 
     @Override

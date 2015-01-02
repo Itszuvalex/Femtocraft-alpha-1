@@ -21,7 +21,6 @@
 package com.itszuvalex.femtocraft.industry.gui.graph
 
 import java.util
-
 import com.itszuvalex.femtocraft.api.AssemblerRecipe
 import com.itszuvalex.femtocraft.graph.{IGraphNode, MapGraph}
 import com.itszuvalex.femtocraft.implicits.IDImplicits._

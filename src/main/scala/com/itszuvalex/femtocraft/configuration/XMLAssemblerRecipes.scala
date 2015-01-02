@@ -2,7 +2,6 @@ package com.itszuvalex.femtocraft.configuration
 
 import java.io.File
 import java.util
-
 import com.itszuvalex.femtocraft.api.AssemblerRecipe
 import com.itszuvalex.femtocraft.configuration.XMLSerializable._
 

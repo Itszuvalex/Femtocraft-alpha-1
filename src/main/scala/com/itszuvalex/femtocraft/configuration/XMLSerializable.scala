@@ -1,6 +1,6 @@
 package com.itszuvalex.femtocraft.configuration
 
-import com.itszuvalex.femtocraft.api.{AssemblerRecipe, DimensionalRecipe, EnumTechLevel, TemporalRecipe}
+import com.itszuvalex.femtocraft.api._
 import com.itszuvalex.femtocraft.managers.research.Technology
 import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils
 import net.minecraft.item.ItemStack
@@ -136,7 +136,7 @@ object XMLSerializable {
       recipe.output = node.getItemStack("output")
       recipe.enumTechLevel = EnumTechLevel.getTech(node.getString("techLevel"))
       recipe.tech = node.getString("technology")
-      recipe.`type` = AssemblerRecipe.RecipeType.valueOf(node.getString("type"))
+      recipe.`type` = AssemblerRecipeType.valueOf(node.getString("type"))
       recipe
     }
 

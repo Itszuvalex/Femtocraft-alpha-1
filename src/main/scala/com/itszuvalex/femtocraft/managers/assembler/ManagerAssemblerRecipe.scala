@@ -25,7 +25,7 @@ import java.util
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.events.EventAssemblerRegister
-import com.itszuvalex.femtocraft.api.{AssemblerRecipe, EnumTechLevel}
+import com.itszuvalex.femtocraft.api.{AssemblerRecipeType, AssemblerRecipe, EnumTechLevel}
 import com.itszuvalex.femtocraft.configuration.{AssemblerXMLLoader, AutoGenConfig, XMLAssemblerRecipes}
 import com.itszuvalex.femtocraft.implicits.IDImplicits._
 import com.itszuvalex.femtocraft.managers.research.Technology
@@ -85,9 +85,9 @@ object ManagerAssemblerRecipe {
   def addRecipe(recipe: AssemblerRecipe): Boolean =
     try {
       val result = recipe.`type` match {
-        case AssemblerRecipe.RecipeType.Reversible    => addReversableRecipe(recipe)
-        case AssemblerRecipe.RecipeType.Decomposition => addDecompositionRecipe(recipe)
-        case AssemblerRecipe.RecipeType.Recomposition => addRecompositionRecipe(recipe)
+        case AssemblerRecipeType.Reversible    => addReversableRecipe(recipe)
+        case AssemblerRecipeType.Decomposition => addDecompositionRecipe(recipe)
+        case AssemblerRecipeType.Recomposition => addRecompositionRecipe(recipe)
       }
       if (result) Femtocraft.log(Level.INFO, "Added assembler recipe for " + recipe.getRecipeName)
       result

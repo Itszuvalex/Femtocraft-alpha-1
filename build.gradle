@@ -1,3 +1,5 @@
+task debug << { println configurations.compile.findAll { it.name.startsWith("scala") } }
+
 buildscript {
     repositories {
         mavenCentral()
@@ -30,7 +32,11 @@ version = "${project.ext.mcVersion}-${project.ext.massive}.${project.ext.major}.
 if (System.getenv().BUILD_NUMBER != null) {
     version += "-${System.getenv().BUILD_NUMBER}"
 } else {
-    version += " - local"
+    version += "-local"
+}
+
+if (System.getenv().JOB_NAME != null && System.getenv().JOB_NAME.equalsIgnoreCase("Femtocraft-1.7.10-Dev")) {
+    version += "-dev"
 }
 
 compileScala {
@@ -57,7 +63,7 @@ minecraft {
 }
 
 dependencies {
-    compile 'org.scala-lang:scala-library:2.11.4'
+
 
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
@@ -74,6 +80,7 @@ dependencies {
 
 }
 
+
 sourceSets {
     main {
         scala {
@@ -81,6 +88,11 @@ sourceSets {
         }
         java {
             srcDirs = []
+        }
+    }
+    api {
+        java {
+            srcDir 'api'
         }
     }
 }
@@ -104,3 +116,18 @@ processResources
                 exclude 'mcmod.info'
             }
         }
+
+//Begin I don't know what I'm doing
+
+//Create API library jar
+task apiJar(type: org.gradle.api.tasks.bundling.Jar) {
+    baseName = 'femtocraft-api'
+    dependsOn assemble
+
+    from(sourceSets.main.output) {
+        include 'com/itszuvalex/femtocraft/api/**'
+    }
+}
+
+build.dependsOn apiJar
+

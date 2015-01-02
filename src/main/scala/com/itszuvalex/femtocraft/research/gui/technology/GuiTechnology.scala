@@ -24,8 +24,7 @@ import java.util
 import java.util.{ArrayList, List}
 
 import com.itszuvalex.femtocraft.Femtocraft
-import com.itszuvalex.femtocraft.api.AssemblerRecipe.RecipeType
-import com.itszuvalex.femtocraft.api.{AssemblerRecipe, DimensionalRecipe, TemporalRecipe}
+import com.itszuvalex.femtocraft.api.{AssemblerRecipe, AssemblerRecipeType, DimensionalRecipe, TemporalRecipe}
 import com.itszuvalex.femtocraft.managers.research.ResearchStatus
 import com.itszuvalex.femtocraft.research.gui.GuiResearch
 import com.itszuvalex.femtocraft.research.gui.technology.GuiTechnology._
@@ -44,12 +43,17 @@ import scala.collection.JavaConversions._
 object GuiTechnology {
   val descriptionWidth : Int = 238
   val descriptionHeight: Int = 117
-  private val texture: ResourceLocation = new ResourceLocation(Femtocraft.ID.toLowerCase, "textures/guis/GuiTechnology.png")
+  private val texture: ResourceLocation = new
+      ResourceLocation(Femtocraft.ID.toLowerCase, "textures/guis/GuiTechnology.png")
 }
 
 class GuiTechnology(private val guiResearch: GuiResearch, private val status: ResearchStatus) extends GuiScreen {
   private val tech                  = Femtocraft.researchManager.getTechnology(status.tech)
-  private val renderer              = new GuiTechnologyRenderer(this, if (status.researched) tech.getResearchedDescription else tech.getDiscoveredDescription)
+  private val renderer              = new GuiTechnologyRenderer(this, if (status.researched) {
+    tech.getResearchedDescription
+  } else {
+    tech.getDiscoveredDescription
+  })
   private val xSize                 = 256
   private val ySize                 = 202
   private val backButtonX           = 8
@@ -99,35 +103,87 @@ class GuiTechnology(private val guiResearch: GuiResearch, private val status: Re
     val s: String = status.tech
     val width: Int = 188 - (66 + 16 + 2)
     val top: Int = if (fontRendererObj.getStringWidth(s) > width) 12 else 17
-    fontRendererObj.drawSplitString(EnumChatFormatting.WHITE + s + EnumChatFormatting.RESET, k + 84, l + top, width, 27 - top)
+    fontRendererObj
+    .drawSplitString(EnumChatFormatting.WHITE + s + EnumChatFormatting.RESET, k + 84, l + top, width, 27 - top)
     if ((par1 >= (k + backButtonX)) && (par1 <= (k + backButtonX + backButtonWidth)) && (par2 >= (l + backButtonY)) && (par2 <= (l + backButtonY + backButtonHeight))) {
-      this.drawGradientRect(k + backButtonX, l + backButtonY, k + backButtonWidth + backButtonX, l + backButtonY + backButtonHeight, FemtocraftUtils.colorFromARGB(60, 45, 0, 110), FemtocraftUtils.colorFromARGB(60, 45, 0, 110))
+      this
+      .drawGradientRect(k + backButtonX,
+                        l + backButtonY,
+                        k + backButtonWidth + backButtonX,
+                        l + backButtonY + backButtonHeight,
+                        FemtocraftUtils.colorFromARGB(60, 45, 0, 110),
+                        FemtocraftUtils.colorFromARGB(60, 45, 0, 110))
     }
-    this.fontRendererObj.drawString("Back", k + backButtonX + backButtonWidth / 2 - this.fontRendererObj.getStringWidth("Back") / 2, l + backButtonY + (backButtonHeight - this.fontRendererObj.FONT_HEIGHT) / 2, FemtocraftUtils.colorFromARGB(255, 255, 255, 255))
+    this
+    .fontRendererObj
+    .drawString("Back",
+                k + backButtonX + backButtonWidth / 2 - this.fontRendererObj.getStringWidth("Back") / 2,
+                l + backButtonY + (backButtonHeight - this.fontRendererObj.FONT_HEIGHT) / 2,
+                FemtocraftUtils.colorFromARGB(255, 255, 255, 255))
     var color: Int = FemtocraftUtils.colorFromARGB(60, 45, 0, 110)
     if (displayPage > 1) {
       if ((par1 >= (k + pageLeftButtonX)) && (par1 <= (k + pageLeftButtonX + pageLeftButtonWidth)) && (par2 >= (l + pageLeftButtonY)) && (par2 <= (l + pageLeftButtonY + pageLeftButtonHeight))) {
-        this.drawGradientRect(k + pageLeftButtonX, l + pageLeftButtonY, k + pageLeftButtonX + pageLeftButtonWidth, l + pageLeftButtonY + pageLeftButtonHeight, color, color)
+        this
+        .drawGradientRect(k + pageLeftButtonX,
+                          l + pageLeftButtonY,
+                          k + pageLeftButtonX + pageLeftButtonWidth,
+                          l + pageLeftButtonY + pageLeftButtonHeight,
+                          color,
+                          color)
       }
-      this.fontRendererObj.drawString("<-", k + pageLeftButtonX + pageLeftButtonWidth / 2 - this.fontRendererObj.getStringWidth("<-") / 2, l + pageLeftButtonY + (pageLeftButtonHeight - this.fontRendererObj.FONT_HEIGHT) / 2 + 1, FemtocraftUtils.colorFromARGB(255, 255, 255, 255))
-    }
-    else {
+      this
+      .fontRendererObj
+      .drawString("<-",
+                  k + pageLeftButtonX + pageLeftButtonWidth / 2 - this.fontRendererObj.getStringWidth("<-") / 2,
+                  l + pageLeftButtonY + (pageLeftButtonHeight - this.fontRendererObj.FONT_HEIGHT) / 2 + 1,
+                  FemtocraftUtils.colorFromARGB(255, 255, 255, 255))
+    } else {
       color = FemtocraftUtils.colorFromARGB(60, 0, 0, 0)
-      this.drawGradientRect(k + pageLeftButtonX, l + pageLeftButtonY, k + pageLeftButtonX + pageLeftButtonWidth, l + pageLeftButtonY + pageLeftButtonHeight, color, color)
+      this
+      .drawGradientRect(k + pageLeftButtonX,
+                        l + pageLeftButtonY,
+                        k + pageLeftButtonX + pageLeftButtonWidth,
+                        l + pageLeftButtonY + pageLeftButtonHeight,
+                        color,
+                        color)
     }
     color = FemtocraftUtils.colorFromARGB(60, 45, 0, 110)
     if (displayPage < getNumPages(status.researched)) {
       if ((par1 >= (k + pageRightButtonX)) && (par1 <= (k + pageRightButtonX + pageRightButtonWidth)) && (par2 >= (l + pageRightButtonY)) && (par2 <= (l + pageRightButtonY + pageRightButtonHeight))) {
-        this.drawGradientRect(k + pageRightButtonX, l + pageRightButtonY, k + pageRightButtonX + pageRightButtonWidth, l + pageRightButtonY + pageRightButtonHeight, color, color)
+        this
+        .drawGradientRect(k + pageRightButtonX,
+                          l + pageRightButtonY,
+                          k + pageRightButtonX + pageRightButtonWidth,
+                          l + pageRightButtonY + pageRightButtonHeight,
+                          color,
+                          color)
       }
-      this.fontRendererObj.drawString("->", k + pageRightButtonX + pageRightButtonWidth / 2 - this.fontRendererObj.getStringWidth("->") / 2, l + pageRightButtonY + (pageRightButtonHeight - this.fontRendererObj.FONT_HEIGHT) / 2 + 1, FemtocraftUtils.colorFromARGB(255, 255, 255, 255))
-    }
-    else {
+      this
+      .fontRendererObj
+      .drawString("->",
+                  k + pageRightButtonX + pageRightButtonWidth / 2 - this.fontRendererObj.getStringWidth("->") / 2,
+                  l + pageRightButtonY + (pageRightButtonHeight - this.fontRendererObj.FONT_HEIGHT) / 2 + 1,
+                  FemtocraftUtils.colorFromARGB(255, 255, 255, 255))
+    } else {
       color = FemtocraftUtils.colorFromARGB(60, 0, 0, 0)
-      this.drawGradientRect(k + pageRightButtonX, l + pageRightButtonY, k + pageRightButtonX + pageRightButtonWidth, l + pageRightButtonY + pageRightButtonHeight, color, color)
+      this
+      .drawGradientRect(k + pageRightButtonX,
+                        l + pageRightButtonY,
+                        k + pageRightButtonX + pageRightButtonWidth,
+                        l + pageRightButtonY + pageRightButtonHeight,
+                        color,
+                        color)
     }
     val pageString = "Page %s/%s".format(displayPage, getNumPages(status.researched))
-    this.fontRendererObj.drawString(pageString, k + pageLeftButtonX + (pageLeftButtonWidth + pageRightButtonX - pageLeftButtonX) / 2 - this.fontRendererObj.getStringWidth(pageString) / 2, l + pageLeftButtonY + (pageLeftButtonHeight - this.fontRendererObj.FONT_HEIGHT) / 2 + 1, FemtocraftUtils.colorFromARGB(255, 255, 255, 255))
+    this
+    .fontRendererObj
+    .drawString(pageString,
+                k + pageLeftButtonX + (pageLeftButtonWidth + pageRightButtonX - pageLeftButtonX) / 2 - this
+                                                                                                       .fontRendererObj
+                                                                                                       .getStringWidth(
+                                                                                                           pageString) / 2,
+                l + pageLeftButtonY + (pageLeftButtonHeight - this.fontRendererObj.FONT_HEIGHT) / 2 + 1,
+                FemtocraftUtils.colorFromARGB(255, 255, 255, 255))
     this.zLevel = 0
     val renderitem = new RenderItem
     GL11.glDisable(GL11.GL_LIGHTING)
@@ -136,7 +192,12 @@ class GuiTechnology(private val guiResearch: GuiResearch, private val status: Re
     RenderHelper.enableGUIStandardItemLighting()
     GL11.glEnable(GL12.GL_RESCALE_NORMAL)
     GL11.glEnable(GL11.GL_COLOR_MATERIAL)
-    renderitem.renderItemAndEffectIntoGUI(Minecraft.getMinecraft.fontRenderer, Minecraft.getMinecraft.getTextureManager, tech.getDisplayItem, k + 66, l + 12)
+    renderitem
+    .renderItemAndEffectIntoGUI(Minecraft.getMinecraft.fontRenderer,
+                                Minecraft.getMinecraft.getTextureManager,
+                                tech.getDisplayItem,
+                                k + 66,
+                                l + 12)
     RenderHelper.disableStandardItemLighting()
     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
     GL11.glDisable(GL11.GL_LIGHTING)
@@ -206,58 +267,12 @@ class GuiTechnology(private val guiResearch: GuiResearch, private val status: Re
    * @param mouseY
    * @param isResearched
    */
-  protected def renderInformation(x: Int, y: Int, width: Int, height: Int, pageNum: Int, mouseX: Int, mouseY: Int, tooltip: List[_], isResearched: Boolean) {
+  protected def renderInformation(x: Int, y: Int, width: Int, height: Int, pageNum: Int, mouseX: Int, mouseY: Int,
+                                  tooltip: List[_], isResearched: Boolean) {
     renderer.render(x, y, width, height, pageNum, mouseX, mouseY, tooltip, isResearched)
   }
 
-  protected override def keyTyped(par1: Char, par2: Int) {
-    if (par2 == this.mc.gameSettings.keyBindInventory.getKeyCode) {
-      this.mc.displayGuiScreen(guiResearch)
-    }
-    else {
-      super.keyTyped(par1, par2)
-    }
-  }
-
-  protected override def mouseClicked(par1: Int, par2: Int, par3: Int) {
-    if (par3 == 0) {
-      val k: Int = (this.width - this.xSize) / 2
-      val l: Int = (this.height - this.ySize) / 2
-      if ((par1 >= (k + backButtonX)) && (par1 <= (k + backButtonX + backButtonWidth)) && (par2 >= (l + backButtonY)) && (par2 <= (l + backButtonY + backButtonHeight))) {
-        FemtocraftSoundUtils.playClickSound()
-        this.mc.displayGuiScreen(guiResearch)
-      }
-      if ((displayPage > 1) && (par1 >= (k + pageLeftButtonX)) && (par1 <= (k + pageLeftButtonX + pageLeftButtonWidth)) && (par2 >= (l + pageLeftButtonY)) && (par2 <= (l + pageLeftButtonY + pageLeftButtonHeight))) {
-        FemtocraftSoundUtils.playClickSound()
-        displayPage -= 1
-      }
-      if ((displayPage < getNumPages(status.researched)) && (par1 >= (k + pageRightButtonX)) && (par1 <= (k + pageRightButtonX + pageRightButtonWidth)) && (par2 >= (l + pageRightButtonY)) && (par2 <= (l + pageRightButtonY + pageRightButtonHeight))) {
-        FemtocraftSoundUtils.playClickSound()
-        displayPage += 1
-      }
-    }
-    super.mouseClicked(par1, par2, par3)
-  }
-
   def getNumPages(researched: Boolean) = renderer.getPageCount
-
-  /**
-   * Height must be greater than 54. Width must be MUCH greater than 54, to allow room for the info string to be
-   * drawn.
-   *
-   * @param x
-   * @param y
-   * @param width
-   * @param height
-   * @param items
-   * @param info
-   */
-  private[technology] def renderCraftingGridWithInfo(x: Int, y: Int, width: Int, height: Int, items: Array[ItemStack], mouseX: Int, mouseY: Int, tooltip: List[_], info: String) {
-    val padding: Int = 2
-    renderCraftingGrid(x, y, items, mouseX, mouseY, tooltip)
-    val format = EnumChatFormatting.WHITE + info + EnumChatFormatting.RESET
-    this.fontRendererObj.drawSplitString(format, x + 54 + padding, y + padding, width - 54 - 2 * padding, height - 2 * padding)
-  }
 
   /**
    * 54 width and height
@@ -266,7 +281,8 @@ class GuiTechnology(private val guiResearch: GuiResearch, private val status: Re
    * @param y     Y of Top Left
    * @param items Up to 9 items to render into the crafting grid
    */
-  private[technology] def renderCraftingGrid(x: Int, y: Int, items: Array[ItemStack], mouseX: Int, mouseY: Int, tooltip: List[_]) {
+  private[technology] def renderCraftingGrid(x: Int, y: Int, items: Array[ItemStack], mouseX: Int, mouseY: Int,
+                                             tooltip: List[_]) {
     val ir: Array[ItemStack] = if (items != null) items else new Array[ItemStack](9)
     val renderitem = new RenderItem
 
@@ -279,7 +295,8 @@ class GuiTechnology(private val guiResearch: GuiResearch, private val status: Re
 
   }
 
-  private[technology] def renderItemSlot(x: Int, y: Int, item: ItemStack, renderitem: RenderItem, mouseX: Int, mouseY: Int, tooltip: List[_]) {
+  private[technology] def renderItemSlot(x: Int, y: Int, item: ItemStack, renderitem: RenderItem, mouseX: Int,
+                                         mouseY: Int, tooltip: List[_]) {
     GL11.glColor4f(1f, 1f, 1f, 1f)
     Minecraft.getMinecraft.renderEngine.bindTexture(texture)
     drawTexturedModalRect(x, y, 194, 11, 18, 18)
@@ -303,47 +320,129 @@ class GuiTechnology(private val guiResearch: GuiResearch, private val status: Re
     }
     val xr: Int = x + 1
     val yr: Int = y + 1
-    renderitem.renderItemAndEffectIntoGUI(Minecraft.getMinecraft.fontRenderer, Minecraft.getMinecraft.getTextureManager, item, xr, yr)
+    renderitem
+    .renderItemAndEffectIntoGUI(Minecraft.getMinecraft.fontRenderer,
+                                Minecraft.getMinecraft.getTextureManager,
+                                item,
+                                xr,
+                                yr)
     //    renderitem.renderItemIntoGUI(Minecraft.getMinecraft.fontRenderer, Minecraft.getMinecraft.getTextureManager, item, xr, yr, true)
-    renderitem.renderItemOverlayIntoGUI(Minecraft.getMinecraft.fontRenderer, Minecraft.getMinecraft.getTextureManager, item, xr, yr)
+    renderitem
+    .renderItemOverlayIntoGUI(Minecraft.getMinecraft.fontRenderer,
+                              Minecraft.getMinecraft.getTextureManager,
+                              item,
+                              xr,
+                              yr)
     RenderHelper.disableStandardItemLighting()
     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
     GL11.glEnable(GL11.GL_BLEND)
     GL11.glDisable(GL11.GL_LIGHTING)
     if (mouseX > x && mouseX < x + 17 && mouseY > y && mouseY < y + 17) {
-      tooltip.asInstanceOf[util.List[String]].addAll(item.getTooltip(Minecraft.getMinecraft.thePlayer, Minecraft.getMinecraft.gameSettings.advancedItemTooltips).asInstanceOf[util.List[String]])
+      tooltip.asInstanceOf[util.List[String]]
+      .addAll(item
+              .getTooltip(Minecraft.getMinecraft.thePlayer, Minecraft.getMinecraft.gameSettings.advancedItemTooltips)
+              .asInstanceOf[util.List[String]])
     }
   }
 
-  private[technology] def renderTemporalRecipeWithInfo(x: Int, y: Int, width: Int, height: Int, recipe: TemporalRecipe, mouseX: Int, mouseY: Int, tooltip: List[_], info: String) {
+  protected override def keyTyped(par1: Char, par2: Int) {
+    if (par2 == this.mc.gameSettings.keyBindInventory.getKeyCode) {
+      this.mc.displayGuiScreen(guiResearch)
+    } else {
+      super.keyTyped(par1, par2)
+    }
+  }
+
+  protected override def mouseClicked(par1: Int, par2: Int, par3: Int) {
+    if (par3 == 0) {
+      val k: Int = (this.width - this.xSize) / 2
+      val l: Int = (this.height - this.ySize) / 2
+      if ((par1 >= (k + backButtonX)) && (par1 <= (k + backButtonX + backButtonWidth)) && (par2 >= (l + backButtonY)) && (par2 <= (l + backButtonY + backButtonHeight))) {
+        FemtocraftSoundUtils.playClickSound()
+        this.mc.displayGuiScreen(guiResearch)
+      }
+      if ((displayPage > 1) && (par1 >= (k + pageLeftButtonX)) && (par1 <= (k + pageLeftButtonX + pageLeftButtonWidth)) && (par2 >= (l + pageLeftButtonY)) && (par2 <= (l + pageLeftButtonY + pageLeftButtonHeight))) {
+        FemtocraftSoundUtils.playClickSound()
+        displayPage -= 1
+      }
+      if ((displayPage < getNumPages(status
+                                     .researched)) && (par1 >= (k + pageRightButtonX)) && (par1 <= (k + pageRightButtonX + pageRightButtonWidth)) && (par2 >= (l + pageRightButtonY)) && (par2 <= (l + pageRightButtonY + pageRightButtonHeight))) {
+        FemtocraftSoundUtils.playClickSound()
+        displayPage += 1
+      }
+    }
+    super.mouseClicked(par1, par2, par3)
+  }
+
+  /**
+   * Height must be greater than 54. Width must be MUCH greater than 54, to allow room for the info string to be
+   * drawn.
+   *
+   * @param x
+   * @param y
+   * @param width
+   * @param height
+   * @param items
+   * @param info
+   */
+  private[technology] def renderCraftingGridWithInfo(x: Int, y: Int, width: Int, height: Int, items: Array[ItemStack],
+                                                     mouseX: Int, mouseY: Int, tooltip: List[_], info: String) {
+    val padding: Int = 2
+    renderCraftingGrid(x, y, items, mouseX, mouseY, tooltip)
+    val format = EnumChatFormatting.WHITE + info + EnumChatFormatting.RESET
+    this
+    .fontRendererObj
+    .drawSplitString(format, x + 54 + padding, y + padding, width - 54 - 2 * padding, height - 2 * padding)
+  }
+
+  private[technology] def renderTemporalRecipeWithInfo(x: Int, y: Int, width: Int, height: Int, recipe: TemporalRecipe,
+                                                       mouseX: Int, mouseY: Int, tooltip: List[_], info: String) {
     val padding: Int = 2
     renderTemporalRecipe(x, y, width, height, recipe, mouseX, mouseY, tooltip)
     val format = EnumChatFormatting.WHITE + info + EnumChatFormatting.RESET
-    fontRendererObj.drawSplitString(format, x + 90 + 2 * padding, y + 2 * padding, width - 2 * padding - 72, height - 2 * padding)
+    fontRendererObj
+    .drawSplitString(format, x + 90 + 2 * padding, y + 2 * padding, width - 2 * padding - 72, height - 2 * padding)
   }
 
-  private[technology] def renderTemporalRecipe(x: Int, y: Int, width: Int, height: Int, recipe: TemporalRecipe, mouseX: Int, mouseY: Int, tooltip: List[_]) {
+  private[technology] def renderTemporalRecipe(x: Int, y: Int, width: Int, height: Int, recipe: TemporalRecipe,
+                                               mouseX: Int, mouseY: Int, tooltip: List[_]) {
     if (recipe == null) return
     val recipeDir: String = recipe.techLevel.getTooltipEnum + "----->" + EnumChatFormatting.RESET
     renderItemSlot(x, y + 18, recipe.input, new RenderItem, mouseX, mouseY, tooltip)
 
     for (i <- 0 until recipe.configurators.length) {
-      renderItemSlot(x + 18 + 18 * (i % 3), y + 36 * Math.floor(i / 3).toInt, recipe.configurators(i), new RenderItem, mouseX, mouseY, tooltip)
+      renderItemSlot(x + 18 + 18 * (i % 3),
+                     y + 36 * Math.floor(i / 3).toInt,
+                     recipe.configurators(i),
+                     new RenderItem,
+                     mouseX,
+                     mouseY,
+                     tooltip)
     }
 
     GL11.glColor4f(1f, 1f, 1f, 1f)
-    fontRendererObj.drawSplitString(recipeDir, x + 18 + (54 - fontRendererObj.getStringWidth(recipeDir)) / 2 + 1, y + (54 - fontRendererObj.FONT_HEIGHT) / 2, fontRendererObj.getStringWidth(recipeDir) + 2, fontRendererObj.FONT_HEIGHT)
+    fontRendererObj
+    .drawSplitString(recipeDir,
+                     x + 18 + (54 - fontRendererObj.getStringWidth(recipeDir)) / 2 + 1,
+                     y + (54 - fontRendererObj.FONT_HEIGHT) / 2,
+                     fontRendererObj.getStringWidth(recipeDir) + 2,
+                     fontRendererObj.FONT_HEIGHT)
     renderItemSlot(x + 72 + 2, y + 18, recipe.output, new RenderItem, mouseX, mouseY, tooltip)
   }
 
-  private[technology] def renderDimensionalRecipeWithInfo(x: Int, y: Int, width: Int, height: Int, recipe: DimensionalRecipe, mouseX: Int, mouseY: Int, tooltip: List[_], info: String) {
+  private[technology] def renderDimensionalRecipeWithInfo(x: Int, y: Int, width: Int, height: Int,
+                                                          recipe: DimensionalRecipe, mouseX: Int, mouseY: Int,
+                                                          tooltip: List[_], info: String) {
     val padding: Int = 2
     renderDimensionalRecipe(x, y, width, height, recipe, mouseX, mouseY, tooltip)
     val format = EnumChatFormatting.WHITE + info + EnumChatFormatting.RESET
-    this.fontRendererObj.drawSplitString(format, x + 90 + padding, y + padding, width - 90 - 2 * padding, height - 2 * padding)
+    this
+    .fontRendererObj
+    .drawSplitString(format, x + 90 + padding, y + padding, width - 90 - 2 * padding, height - 2 * padding)
   }
 
-  private[technology] def renderDimensionalRecipe(x: Int, y: Int, width: Int, height: Int, recipe: DimensionalRecipe, mouseX: Int, mouseY: Int, tooltip: List[_]) {
+  private[technology] def renderDimensionalRecipe(x: Int, y: Int, width: Int, height: Int, recipe: DimensionalRecipe,
+                                                  mouseX: Int, mouseY: Int, tooltip: List[_]) {
     if (recipe == null) return
     val recipeDir: String = recipe.techLevel.getTooltipEnum + "->" + EnumChatFormatting.RESET
     val ri: RenderItem = new RenderItem
@@ -382,39 +481,116 @@ class GuiTechnology(private val guiResearch: GuiResearch, private val status: Re
         return
     }
     GL11.glColor4f(1f, 1f, 1f, 1f)
-    fontRendererObj.drawSplitString(recipeDir, x + r_width + 1, y + (r_height - fontRendererObj.FONT_HEIGHT) / 2, fontRendererObj.getStringWidth(recipeDir) + 2, fontRendererObj.FONT_HEIGHT)
-    renderItemSlot(x + r_width + fontRendererObj.getStringWidth(recipeDir) + 2, y + r_height / 2 - 9, recipe.output, new RenderItem, mouseX, mouseY, tooltip)
+    fontRendererObj
+    .drawSplitString(recipeDir,
+                     x + r_width + 1,
+                     y + (r_height - fontRendererObj.FONT_HEIGHT) / 2,
+                     fontRendererObj.getStringWidth(recipeDir) + 2,
+                     fontRendererObj.FONT_HEIGHT)
+    renderItemSlot(x + r_width + fontRendererObj.getStringWidth(recipeDir) + 2,
+                   y + r_height / 2 - 9,
+                   recipe.output,
+                   new RenderItem,
+                   mouseX,
+                   mouseY,
+                   tooltip)
   }
 
-  private[technology] def renderAssemblerRecipeWithInfo(x: Int, y: Int, width: Int, height: Int, recipe: AssemblerRecipe, mouseX: Int, mouseY: Int, tooltip: util.List[_], info: String) {
+  private[technology] def renderAssemblerRecipeWithInfo(x: Int, y: Int, width: Int, height: Int,
+                                                        recipe: AssemblerRecipe, mouseX: Int, mouseY: Int,
+                                                        tooltip: util.List[_], info: String) {
     val padding: Int = 2
     renderAssemblerRecipe(x, y, width, height, recipe, mouseX, mouseY, tooltip)
-    val direction = if (recipe == null) "" else (if (recipe.`type` != RecipeType.Recomposition) "<" else "") + "-" + (if (recipe.`type` != RecipeType.Decomposition) ">" else "")
+    val direction = if (recipe == null) {
+      ""
+    } else {
+      (if (recipe.`type` != AssemblerRecipeType.Recomposition) {
+        "<"
+      } else {
+        ""
+      }) + "-" + (if (recipe.`type` != AssemblerRecipeType.Decomposition) {
+        ">"
+      } else {
+        ""
+      })
+    }
     val format = EnumChatFormatting.WHITE + info + EnumChatFormatting.RESET
-    fontRendererObj.drawSplitString(format, x + 54 + fontRendererObj.getStringWidth(direction) + 18 + 2 * padding, y + 2 * padding, width - 2 * padding - fontRendererObj.getStringWidth(direction) - 54 - 18, height - 2 * padding)
+    fontRendererObj
+    .drawSplitString(format,
+                     x + 54 + fontRendererObj.getStringWidth(direction) + 18 + 2 * padding,
+                     y + 2 * padding,
+                     width - 2 * padding - fontRendererObj.getStringWidth(direction) - 54 - 18,
+                     height - 2 * padding)
   }
 
-  private[technology] def renderAssemblerRecipe(x: Int, y: Int, width: Int, height: Int, recipe: AssemblerRecipe, mouseX: Int, mouseY: Int, tooltip: util.List[_]) {
-    val direction = if (recipe == null) "" else (if (recipe.`type` != RecipeType.Recomposition) "<" else "") + "-" + (if (recipe.`type` != RecipeType.Decomposition) ">" else "")
-    val recipeDir: String = (if (recipe == null) "" + EnumChatFormatting.WHITE else recipe.enumTechLevel.getTooltipEnum) + direction + EnumChatFormatting.RESET
+  private[technology] def renderAssemblerRecipe(x: Int, y: Int, width: Int, height: Int, recipe: AssemblerRecipe,
+                                                mouseX: Int, mouseY: Int, tooltip: util.List[_]) {
+    val direction = if (recipe == null) {
+      ""
+    } else {
+      (if (recipe.`type` != AssemblerRecipeType.Recomposition) {
+        "<"
+      } else {
+        ""
+      }) + "-" + (if (recipe.`type` != AssemblerRecipeType.Decomposition) {
+        ">"
+      } else {
+        ""
+      })
+    }
+    val recipeDir: String = (if (recipe == null) {
+      "" + EnumChatFormatting.WHITE
+    } else {
+      recipe.enumTechLevel.getTooltipEnum
+    }) + direction + EnumChatFormatting.RESET
     renderCraftingGrid(x, y, if (recipe == null) null else recipe.input, mouseX, mouseY, tooltip)
     GL11.glColor4f(1f, 1f, 1f, 1f)
-    fontRendererObj.drawSplitString(recipeDir, x + 54 + 1, y + (54 - fontRendererObj.FONT_HEIGHT) / 2, fontRendererObj.getStringWidth(recipeDir) + 2, fontRendererObj.FONT_HEIGHT)
-    renderItemSlot(x + 54 + fontRendererObj.getStringWidth(recipeDir) + 2, y + 18, if (recipe == null) null else recipe.output, new RenderItem, mouseX, mouseY, tooltip)
+    fontRendererObj
+    .drawSplitString(recipeDir,
+                     x + 54 + 1,
+                     y + (54 - fontRendererObj.FONT_HEIGHT) / 2,
+                     fontRendererObj.getStringWidth(recipeDir) + 2,
+                     fontRendererObj.FONT_HEIGHT)
+    renderItemSlot(x + 54 + fontRendererObj.getStringWidth(recipeDir) + 2,
+                   y + 18,
+                   if (recipe == null) null else recipe.output,
+                   new RenderItem,
+                   mouseX,
+                   mouseY,
+                   tooltip)
   }
 
-  private[technology] def renderCraftingRecipeWithInfo(x: Int, y: Int, width: Int, height: Int, input: Array[ItemStack], output: ItemStack, mouseX: Int, mouseY: Int, tooltip: List[_], info: String) {
+  private[technology] def renderCraftingRecipeWithInfo(x: Int, y: Int, width: Int, height: Int, input: Array[ItemStack],
+                                                       output: ItemStack, mouseX: Int, mouseY: Int, tooltip: List[_],
+                                                       info: String) {
     val padding: Int = 2
     renderCraftingRecipe(x, y, width, height, input, output, mouseX, mouseY, tooltip)
     val format = EnumChatFormatting.WHITE + info + EnumChatFormatting.RESET
-    fontRendererObj.drawSplitString(format, x + 54 + fontRendererObj.getStringWidth("->") + 18 + 2 * padding, y + 2 * padding, width - 2 * padding - fontRendererObj.getStringWidth("->") - 54 - 18, height - 2 * padding)
+    fontRendererObj
+    .drawSplitString(format,
+                     x + 54 + fontRendererObj.getStringWidth("->") + 18 + 2 * padding,
+                     y + 2 * padding,
+                     width - 2 * padding - fontRendererObj.getStringWidth("->") - 54 - 18,
+                     height - 2 * padding)
   }
 
-  private[technology] def renderCraftingRecipe(x: Int, y: Int, width: Int, height: Int, input: Array[ItemStack], output: ItemStack, mouseX: Int, mouseY: Int, tooltip: List[_]) {
+  private[technology] def renderCraftingRecipe(x: Int, y: Int, width: Int, height: Int, input: Array[ItemStack],
+                                               output: ItemStack, mouseX: Int, mouseY: Int, tooltip: List[_]) {
     val recipeDir: String = EnumChatFormatting.WHITE + "->" + EnumChatFormatting.RESET
     renderCraftingGrid(x, y, input, mouseX, mouseY, tooltip)
     GL11.glColor4f(1f, 1f, 1f, 1f)
-    fontRendererObj.drawSplitString(recipeDir, x + 54 + 1, y + (54 - fontRendererObj.FONT_HEIGHT) / 2, fontRendererObj.getStringWidth(recipeDir) + 2, fontRendererObj.FONT_HEIGHT)
-    renderItemSlot(x + 54 + fontRendererObj.getStringWidth(recipeDir) + 2, y + 18, output, new RenderItem, mouseX, mouseY, tooltip)
+    fontRendererObj
+    .drawSplitString(recipeDir,
+                     x + 54 + 1,
+                     y + (54 - fontRendererObj.FONT_HEIGHT) / 2,
+                     fontRendererObj.getStringWidth(recipeDir) + 2,
+                     fontRendererObj.FONT_HEIGHT)
+    renderItemSlot(x + 54 + fontRendererObj.getStringWidth(recipeDir) + 2,
+                   y + 18,
+                   output,
+                   new RenderItem,
+                   mouseX,
+                   mouseY,
+                   tooltip)
   }
 }

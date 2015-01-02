@@ -48,7 +48,7 @@ public class GuiTechnologyCraftingRenderer implements ITechnologyElementRenderer
                        boolean isResearched) {
         if (recipe != null) {
             gui.renderCraftingRecipeWithInfo(x,
-                    y + getY(), width, height, recipe.input, recipe.output, mouseX, mouseY, tooltip, text);
+                    y + getY(), width, height, recipe.input(), recipe.output(), mouseX, mouseY, tooltip, text);
         }
     }
 
