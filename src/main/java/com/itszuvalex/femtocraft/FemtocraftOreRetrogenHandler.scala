@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft
 import java.io.{File, FileInputStream, FileOutputStream}
 import java.util.Random
 
+import com.itszuvalex.femtocraft.FemtocraftOreRetrogenHandler._
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs
 import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
@@ -35,8 +36,8 @@ import org.apache.logging.log4j.Level
  * Created by Christopher Harris (Itszuvalex) on 7/26/14.
  */
 object FemtocraftOreRetrogenHandler {
-  private val DIRECTORY    = "Retrogen"
-  private var RetroGenning = false
+  private val DIRECTORY      = "Retrogen"
+  private var isRetroGenning = false
 }
 
 class FemtocraftOreRetrogenHandler {
@@ -46,8 +47,8 @@ class FemtocraftOreRetrogenHandler {
     if (event.world.isRemote) return
     if (event.isCanceled) return
     if (!FemtocraftConfigs.retroGen) return
-    if (FemtocraftOreRetrogenHandler.RetroGenning) return
-    FemtocraftOreRetrogenHandler.RetroGenning = true
+    if (isRetroGenning) return
+    isRetroGenning = true
     val regionX = event.getChunk.xPosition >> 5
     val regionZ = event.getChunk.zPosition >> 5
     var regionCompound = getRetroGenFile(event.world, regionX, regionZ)
@@ -69,12 +70,12 @@ class FemtocraftOreRetrogenHandler {
       }
       saveRetroGenFile(event.world, regionX, regionZ, regionCompound)
     }
-    FemtocraftOreRetrogenHandler.RetroGenning = false
+    isRetroGenning = false
   }
 
   private def saveRetroGenFile(world: World, regionX: Int, regionZ: Int, regionCompound: NBTTagCompound): Boolean = {
     try {
-      val folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), FemtocraftOreRetrogenHandler.DIRECTORY)
+      val folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), DIRECTORY)
       if (!folder.exists) {
         folder.mkdir
       }
@@ -101,7 +102,7 @@ class FemtocraftOreRetrogenHandler {
     }
     catch {
       case e: Exception =>
-        Femtocraft.log(Level.ERROR, "Failed to create folder " + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator + FemtocraftOreRetrogenHandler.DIRECTORY + ".")
+        Femtocraft.log(Level.ERROR, "Failed to create folder " + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator + DIRECTORY + ".")
         e.printStackTrace()
         return false
     }
@@ -110,10 +111,10 @@ class FemtocraftOreRetrogenHandler {
 
   private def getRetroGenFile(world: World, regionX: Int, regionZ: Int): NBTTagCompound = {
     try {
-      val folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), FemtocraftOreRetrogenHandler.DIRECTORY)
+      val folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), DIRECTORY)
       if (!folder.exists) {
         if (FemtocraftConfigs.retrogenAlerts) {
-          Femtocraft.log(Level.WARN, "No " + FemtocraftOreRetrogenHandler.DIRECTORY + " folder found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
+          Femtocraft.log(Level.WARN, "No " + DIRECTORY + " folder found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
         }
         return null
       }
@@ -126,7 +127,7 @@ class FemtocraftOreRetrogenHandler {
       }
       val filename = getRegionFileName(regionX, regionZ)
       try {
-        val regionFile: File = new File(worldFolder.getPath, filename)
+        val regionFile = new File(worldFolder.getPath, filename)
         if (!regionFile.exists) return null
         val fileinputstream: FileInputStream = new FileInputStream(regionFile)
         val data = CompressedStreamTools.readCompressed(fileinputstream)
@@ -141,7 +142,7 @@ class FemtocraftOreRetrogenHandler {
     }
     catch {
       case exception: Exception =>
-        Femtocraft.log(Level.ERROR, "Failed to load data from folder " + FemtocraftOreRetrogenHandler.DIRECTORY + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
+        Femtocraft.log(Level.ERROR, "Failed to load data from folder " + DIRECTORY + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
         exception.printStackTrace()
         return null
     }

@@ -2,7 +2,7 @@ package com.itszuvalex.femtocraft.power.traits
 
 import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.api.core.Saveable
-import com.itszuvalex.femtocraft.api.power.{IPowerTileContainer, NBTPowerContainerWrapper, PowerContainer}
+import com.itszuvalex.femtocraft.api.power.{IPowerTileContainer, PowerNBTWrapper, PowerContainer}
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.power.FemtocraftPowerUtils
 import net.minecraft.nbt.NBTTagCompound
@@ -110,12 +110,12 @@ trait PowerTileContainer extends TileEntityBase with IPowerTileContainer {
 
   override def loadInfoFromItemNBT(compound: NBTTagCompound): Unit = {
     super.loadInfoFromItemNBT(compound)
-    val wrapper = NBTPowerContainerWrapper.wrapperFromNBT(compound)
+    val wrapper = PowerNBTWrapper.wrapperFromNBT(compound)
     if (wrapper.hasPowerData) wrapper.copyToPowerContainer(container)
   }
 
   override def saveInfoToItemNBT(compound: NBTTagCompound) {
     super.saveInfoToItemNBT(compound)
-    NBTPowerContainerWrapper.wrapperFromNBT(compound).copyFromPowerContainer(container)
+    PowerNBTWrapper.wrapperFromNBT(compound).copyFromPowerContainer(container)
   }
 }

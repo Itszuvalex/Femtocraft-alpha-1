@@ -14,18 +14,27 @@ public class EventAssemblerRegister extends Event {
     }
 
     @Cancelable
-    public static class AssemblerDecompositionRegisterEvent extends
+    public static class Decomposition extends
             EventAssemblerRegister {
-        public AssemblerDecompositionRegisterEvent(
+        public Decomposition(
                 AssemblerRecipe recipe) {
             super(recipe);
         }
     }
 
     @Cancelable
-    public static class AssemblerRecompositionRegisterEvent extends
+    public static class Recomposition extends
             EventAssemblerRegister {
-        public AssemblerRecompositionRegisterEvent(
+        public Recomposition(
+                AssemblerRecipe recipe) {
+            super(recipe);
+        }
+    }
+
+    @Cancelable
+    public static class Reversable extends
+            EventAssemblerRegister {
+        public Reversable(
                 AssemblerRecipe recipe) {
             super(recipe);
         }

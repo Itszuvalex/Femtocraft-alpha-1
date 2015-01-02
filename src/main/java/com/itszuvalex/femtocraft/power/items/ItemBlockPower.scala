@@ -22,7 +22,7 @@ package com.itszuvalex.femtocraft.power.items
 
 import java.util
 
-import com.itszuvalex.femtocraft.api.power.{ItemStackPowerContainerWrapper, PowerContainer}
+import com.itszuvalex.femtocraft.api.power.{PowerStackWrapper, PowerContainer}
 import com.itszuvalex.femtocraft.core.items.CoreItemBlock
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.block.Block
@@ -35,7 +35,7 @@ abstract class ItemBlockPower(block: Block) extends CoreItemBlock(block) {
   @SideOnly(Side.CLIENT) override def addInformation(par1ItemStack: ItemStack, par2EntityPlayer: EntityPlayer,
                                                      par3List: util.List[_], par4: Boolean) {
     super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4)
-    val wrapper = ItemStackPowerContainerWrapper.getWrapperForStack(par1ItemStack, false)
+    val wrapper = PowerStackWrapper.getWrapperForStack(par1ItemStack, false)
     if (wrapper.hasPowerData) {
       wrapper.addInformationToTooltip(par3List)
     } else {
@@ -47,7 +47,7 @@ abstract class ItemBlockPower(block: Block) extends CoreItemBlock(block) {
 
   override def onCreated(par1ItemStack: ItemStack, par2World: World, par3EntityPlayer: EntityPlayer) {
     super.onCreated(par1ItemStack, par2World, par3EntityPlayer)
-    val wrapper = ItemStackPowerContainerWrapper.getWrapperForStack(par1ItemStack)
+    val wrapper = PowerStackWrapper.getWrapperForStack(par1ItemStack)
     wrapper.copyFromPowerContainer(getDefaultContainer)
   }
 }

@@ -58,7 +58,7 @@ object ManagerAssemblerRecipe {
   val shapelessPermuteTimeMillis: Long = 100
 }
 
-class ManagerAssemblerRecipe {
+object ManagerAssemblerRecipe {
   private val assemblerRecipeList = new ArrayBuffer[AssemblerRecipe]
   private val assemblerRecompTree = new util.TreeMap[RecompositionKey, AssemblerRecipe]
   private val assemblerDecompTree = new util.TreeMap[DecompositionKey, AssemblerRecipe]
@@ -381,7 +381,7 @@ class ManagerAssemblerRecipe {
   }
 
   private def registerRecomposition(recipe: AssemblerRecipe): Boolean = {
-    val event = new EventAssemblerRegister.AssemblerRecompositionRegisterEvent(recipe)
+    val event = new EventAssemblerRegister.Recomposition(recipe)
     Femtocraft.assemblerConfigs.loadAssemblerRecipe(recipe)
     if (!MinecraftForge.EVENT_BUS.post(event)) {
       assemblerRecompTree.put(new RecompositionKey(recipe), recipe)
@@ -392,7 +392,7 @@ class ManagerAssemblerRecipe {
   }
 
   private def registerDecomposition(recipe: AssemblerRecipe): Boolean = {
-    val event = new EventAssemblerRegister.AssemblerDecompositionRegisterEvent(recipe)
+    val event = new EventAssemblerRegister.Decomposition(recipe)
     Femtocraft.assemblerConfigs.loadAssemblerRecipe(recipe)
     if (!MinecraftForge.EVENT_BUS.post(event)) {
       assemblerDecompTree.put(new DecompositionKey(recipe), recipe)

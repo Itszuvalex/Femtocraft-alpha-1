@@ -40,7 +40,7 @@ import scala.collection.mutable.ArrayBuffer
 /**
  * Created by Christopher Harris (Itszuvalex) on 4/27/14.
  */
-class ManagerDimensionalRecipe {
+object ManagerDimensionalRecipe {
   private val recipesToOutput = new util.TreeMap[DimensionalKey, DimensionalRecipe]
   private val outputToRecipes = new util.TreeMap[ItemStack, DimensionalRecipe](new ComparatorItemStack)
   private val recipes         = new ArrayBuffer[DimensionalRecipe]()

@@ -8,19 +8,19 @@ import java.util.List;
 /**
  * Created by Chris on 12/30/2014.
  */
-public class ItemStackPowerContainerWrapper implements IPowerContainer {
+public class PowerStackWrapper implements IPowerContainer {
     public final ItemStack itemStack;
-    public final NBTPowerContainerWrapper nbtPowerContainerWrapper;
+    public final PowerNBTWrapper nbtPowerContainerWrapper;
 
-    public static ItemStackPowerContainerWrapper getWrapperForStack(ItemStack stack) {
+    public static PowerStackWrapper getWrapperForStack(ItemStack stack) {
         return getWrapperForStack(stack, true);
     }
 
-    public static ItemStackPowerContainerWrapper getWrapperForStack(ItemStack stack, boolean forceNBT) {
-        return stack == null ? null : new ItemStackPowerContainerWrapper(stack, forceNBT);
+    public static PowerStackWrapper getWrapperForStack(ItemStack stack, boolean forceNBT) {
+        return stack == null ? null : new PowerStackWrapper(stack, forceNBT);
     }
 
-    public ItemStackPowerContainerWrapper(ItemStack stack) throws IllegalArgumentException {
+    public PowerStackWrapper(ItemStack stack) throws IllegalArgumentException {
         this(stack, true);
     }
 
@@ -29,10 +29,10 @@ public class ItemStackPowerContainerWrapper implements IPowerContainer {
      * @param forceNBT If true, will generate the nbt data structure on the item when it is attempted to be accessed and
      *                 not found.  Otherwise, will return empty values in its stead.
      */
-    public ItemStackPowerContainerWrapper(ItemStack stack, boolean forceNBT) {
+    public PowerStackWrapper(ItemStack stack, boolean forceNBT) {
         if (stack == null) throw new IllegalArgumentException("ItemStack cannot be null.");
         itemStack = stack;
-        this.nbtPowerContainerWrapper = NBTPowerContainerWrapper.wrapperFromNBT(stack.getTagCompound(), forceNBT);
+        this.nbtPowerContainerWrapper = PowerNBTWrapper.wrapperFromNBT(stack.getTagCompound(), forceNBT);
     }
 
     @Override

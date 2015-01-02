@@ -34,10 +34,10 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.{CraftingManager, IRecipe}
 import net.minecraftforge.oredict.ShapedOreRecipe
 
-class ManagerRecipe {
-  var assemblyRecipes    = new ManagerAssemblerRecipe
-  var temporalRecipes    = new ManagerTemporalRecipe
-  var dimensionalRecipes = new ManagerDimensionalRecipe
+object ManagerRecipe {
+  var assemblyRecipes    = ManagerAssemblerRecipe
+  var temporalRecipes    = ManagerTemporalRecipe
+  var dimensionalRecipes = ManagerDimensionalRecipe
 
   def init() {
     temporalRecipes.init()

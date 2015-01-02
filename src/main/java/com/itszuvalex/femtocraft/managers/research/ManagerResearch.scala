@@ -28,7 +28,6 @@ import com.itszuvalex.femtocraft.api.core.Configurable
 import com.itszuvalex.femtocraft.api.events.EventTechnology
 import com.itszuvalex.femtocraft.api.research.ITechnology
 import com.itszuvalex.femtocraft.configuration.{AutoGenConfig, TechnologyXMLLoader, XMLTechnology}
-import com.itszuvalex.femtocraft.managers.research.ManagerResearch._
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
 import com.itszuvalex.femtocraft.research.gui.graph.{TechNode, TechnologyGraph}
 import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils
@@ -41,16 +40,13 @@ import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
 import scala.collection.mutable
 
-object ManagerResearch {
-  private val playerDataKey = "playerData"
-  private val dataKey       = "data"
-  private val userKey       = "username"
+@Configurable object ManagerResearch {
+  private val playerDataKey                    = "playerData"
+  private val dataKey                          = "data"
+  private val userKey                          = "username"
   @Configurable(comment = "Set to true to have all technologies researched by default.")
-  private val debug         = false
-  private val DIRECTORY     = "Research"
-}
-
-@Configurable class ManagerResearch {
+  private val debug                            = false
+  private val DIRECTORY                        = "Research"
   private val technologies                     = new mutable.HashMap[String, ITechnology]
   private val playerData                       = new mutable.HashMap[String, PlayerResearch]
   private var graph          : TechnologyGraph = null

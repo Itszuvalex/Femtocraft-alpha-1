@@ -95,7 +95,7 @@ public interface IPlasmaFlow {
 
     /**
      * @param container Container containing this flow.
-     * @return Volatility event that occurs when the Flow fails to move down the circuit do to no #IPlasmaContainer
+     * @return Volatility event that occurs when the Flow fails to move down the circuit due to #IPlasmaContainer
      * getOutput returning null;
      */
     IVolatilityEvent onIncompleteCircuit(IPlasmaContainer container);

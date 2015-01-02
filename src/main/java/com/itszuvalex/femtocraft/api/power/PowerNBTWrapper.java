@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Chris on 12/30/2014.
  */
-public class NBTPowerContainerWrapper implements IPowerContainer {
+public class PowerNBTWrapper implements IPowerContainer {
     public final NBTTagCompound parent;
     public final boolean forceNBT;
     public static final String powerCompoundTag = "FemtocraftPower";
@@ -17,17 +17,17 @@ public class NBTPowerContainerWrapper implements IPowerContainer {
     public static final String powerMaximumTag = "MaximumPower";
     public static final String powerLevelTag = "PowerLevel";
 
-    public static NBTPowerContainerWrapper wrapperFromNBT(NBTTagCompound parent) {return wrapperFromNBT(parent, true);}
+    public static PowerNBTWrapper wrapperFromNBT(NBTTagCompound parent) {return wrapperFromNBT(parent, true);}
 
-    public static NBTPowerContainerWrapper wrapperFromNBT(NBTTagCompound parent, boolean forceNBT) {
-        return parent == null ? null : new NBTPowerContainerWrapper(parent, forceNBT);
+    public static PowerNBTWrapper wrapperFromNBT(NBTTagCompound parent, boolean forceNBT) {
+        return parent == null ? null : new PowerNBTWrapper(parent, forceNBT);
     }
 
-    public NBTPowerContainerWrapper(NBTTagCompound parent) {
+    public PowerNBTWrapper(NBTTagCompound parent) {
         this(parent, true);
     }
 
-    public NBTPowerContainerWrapper(NBTTagCompound parent, boolean forceNBT) {
+    public PowerNBTWrapper(NBTTagCompound parent, boolean forceNBT) {
         this.parent = parent;
         this.forceNBT = forceNBT;
     }
@@ -143,7 +143,7 @@ public class NBTPowerContainerWrapper implements IPowerContainer {
 
     public PowerContainer toContainer() {
         PowerContainer container = new PowerContainer();
-        copyFromPowerContainer(container);
+        copyToPowerContainer(container);
         return container;
     }
 

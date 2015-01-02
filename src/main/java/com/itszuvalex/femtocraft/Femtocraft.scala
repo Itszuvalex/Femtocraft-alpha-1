@@ -91,26 +91,26 @@ object Femtocraft {
   //  final val VACUUM_TUBE_CHANNEL       = ID + ".vtube"
   //  final val FISSION_REACTOR_CHANNEL   = ID + ".fiss"
   //  final val PHLEGETHON_TUNNEL_CHANNEL = ID + ".phleg"
-  val fakePlayerGameProfile                 : GameProfile               = new
-      GameProfile(UUID.fromString("b730f1c0-018b-40be-9515-48c3f4c2f745"), "[Femtocraft]")
+  val fakePlayerGameProfile                                             =
+    new GameProfile(UUID.fromString("b730f1c0-018b-40be-9515-48c3f4c2f745"), "[" + ID + "]")
   @SidedProxy(clientSide = "com.itszuvalex.femtocraft.proxy.ProxyClient",
               serverSide = "com.itszuvalex.femtocraft.proxy.ProxyCommon")
   var proxy                                 : ProxyCommon               = null
   @SidedProxy(clientSide = "com.itszuvalex.femtocraft.proxy.ProxyGuiClient",
               serverSide = "com.itszuvalex.femtocraft.proxy.ProxyGuiCommon")
   var guiProxy                              : ProxyGuiCommon            = null
-  var femtocraftTab                         : CreativeTabs              = new FemtocraftCreativeTab("Femtocraft")
+  var femtocraftTab                         : CreativeTabs              = new FemtocraftCreativeTab(ID)
   var config                                : Configuration             = null
-  var logger                                : Logger                    = LogManager.getLogger("Femtocraft")
+  var logger                                : Logger                    = LogManager.getLogger(ID)
   var technologyConfigFile                  : File                      = null
   var recipeConfigFile                      : File                      = null
   var recipeConfig                          : Configuration             = null
   var assemblerConfigs                      : FemtocraftAssemblerConfig = null
-  var recipeManager                         : ManagerRecipe             = null
-  var researchManager                       : ManagerResearch           = null
-  var assistantManager                      : ManagerAssistant          = null
+  var recipeManager                                                     = ManagerRecipe
+  var researchManager                                                   = ManagerResearch
+  var assistantManager                                                  = ManagerAssistant
   var soundManager                          : FemtocraftSoundManager    = null
-  var femtocraftServerCommand               : CommandBase               = null
+  var femtocraftServerCommand               : CommandBase               = new CommandFemtocraft
   /*blocks*/
   var blockOreTitanium                      : Block                     = null
   var blockOrePlatinum                      : Block                     = null
@@ -290,11 +290,6 @@ object Femtocraft {
   var itemPocketPocket                      : Item                      = null
 
   @EventHandler def preInit(event: FMLPreInitializationEvent) {
-    recipeManager = new ManagerRecipe
-    researchManager = new ManagerResearch
-    assistantManager = new ManagerAssistant
-    femtocraftServerCommand = new CommandFemtocraft
-
     AutoGenConfig.init(new Configuration(new File(FemtocraftFileUtils.configFolder, "AutoGenConfig.cfg")))
 
     config = new Configuration(new File(FemtocraftFileUtils.configFolder, ID + ".cfg"))
@@ -309,13 +304,17 @@ object Femtocraft {
     proxy.registerRendering()
     proxy.registerBlockRenderers()
     proxy.registerTickHandlers()
-    if (event.getSide eq Side.CLIENT) {
+    if (event.getSide == Side.CLIENT) {
       soundManager = new FemtocraftSoundManager
     }
+
+    //Event Handlers
     NetworkRegistry.INSTANCE.registerGuiHandler(this, guiProxy)
     FMLCommonHandler.instance().bus().register(new FemtocraftPlayerTracker)
     MinecraftForge.EVENT_BUS.register(new FemtocraftEventHookContainer)
     MinecraftForge.EVENT_BUS.register(new FemtocraftOreRetrogenHandler)
+
+    //World Generation
 
     if (FemtocraftConfigs.worldGen) {
       GameRegistry.registerWorldGenerator(new FemtocraftOreGenerator, FemtocraftConfigs.GENERATION_WEIGHT)

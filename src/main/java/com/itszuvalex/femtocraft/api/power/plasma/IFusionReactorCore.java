@@ -19,7 +19,7 @@ import java.util.Collection;
 public interface IFusionReactorCore extends IFusionReactorComponent {
 
     /**
-     * Stops the currently running reaction.  Does nothing is no reaction going.
+     * Stops the currently running reaction.  Does nothing if no reaction going.
      */
     void stopReaction();
 
@@ -72,7 +72,7 @@ public interface IFusionReactorCore extends IFusionReactorComponent {
 
     /**
      * @param component Component to add to this core
-     * @return True if component successfully added.  False otherwise (I.E. duplicates
+     * @return True if component successfully added.  False otherwise (I.E. duplicates)
      */
     boolean addComponent(IFusionReactorComponent component);
 

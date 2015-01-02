@@ -13,8 +13,8 @@ import java.util.Collection;
  */
 public interface ITechnology {
     /**
-     * This is what will be used to indirectly reference this tech in locations such as other tech's prereqruisites,
-     * etc.  As such, this should be considered unique.
+     * This is what will be used to indirectly reference this tech in locations such as other tech's prerequisites, etc.
+     * As such, this should be considered unique.
      *
      * @return The name of the technology itself.
      */
