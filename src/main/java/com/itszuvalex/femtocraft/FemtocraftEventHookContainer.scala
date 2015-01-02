@@ -23,8 +23,10 @@ package com.itszuvalex.femtocraft
 import com.itszuvalex.femtocraft.api.items.ItemAssemblySchematic
 import com.itszuvalex.femtocraft.common.gui.DisplaySlot
 import com.itszuvalex.femtocraft.core.MagnetRegistry
+import com.itszuvalex.femtocraft.core.traits.block.SpatialReactions
 import com.itszuvalex.femtocraft.managers.assembler.ComponentRegistry
 import com.itszuvalex.femtocraft.player.PlayerProperties
+import com.itszuvalex.femtocraft.utility.EventSpatialRelocation
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.relauncher.{Side, SideOnly}
@@ -95,6 +97,19 @@ class FemtocraftEventHookContainer {
           event.toolTip.add(EnumChatFormatting.DARK_PURPLE + "Mass: " + EnumChatFormatting.RESET + FemtocraftUtils.formatIntegerToString(mass))
       }
     }
+  }
 
+  @SubscribeEvent def onSpatialPickup(event: EventSpatialRelocation.Pickup): Unit = {
+    event.world.getBlock(event.x, event.y, event.z) match {
+      case b: SpatialReactions => b.onPickup(event.world, event.x, event.y, event.z)
+      case _                   =>
+    }
+  }
+
+  @SubscribeEvent def onSpatialPlacement(event: EventSpatialRelocation.Placement): Unit = {
+    event.world.getBlock(event.x, event.y, event.z) match {
+      case b: SpatialReactions => b.onPlacement(event.world, event.x, event.y, event.z)
+      case _                   =>
+    }
   }
 }

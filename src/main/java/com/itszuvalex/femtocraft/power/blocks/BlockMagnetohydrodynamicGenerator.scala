@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft.power.blocks
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
+import com.itszuvalex.femtocraft.core.traits.block.MultiBlockSpatialReactions
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockMagnetohydrodynamicGenerator
 import com.itszuvalex.femtocraft.power.tiles.TileEntityMagnetohydrodynamicGenerator
 import cpw.mods.fml.relauncher.{Side, SideOnly}
@@ -37,7 +38,7 @@ import net.minecraftforge.common.util.ForgeDirection._
 /**
  * Created by Christopher Harris (Itszuvalex) on 8/25/14.
  */
-class BlockMagnetohydrodynamicGenerator extends TileContainer(Material.iron) {
+class BlockMagnetohydrodynamicGenerator extends TileContainer(Material.iron) with MultiBlockSpatialReactions {
   private val formedSides = new Array[Array[IIcon]](3)
   for (i <- 0 until formedSides.length) {
     formedSides(i) = new Array[IIcon](3)
@@ -100,4 +101,6 @@ class BlockMagnetohydrodynamicGenerator extends TileContainer(Material.iron) {
     }
     super.breakBlock(par1World, par2, par3, par4, par5, par6)
   }
+
+  override def getMultiBlock = MultiBlockMagnetohydrodynamicGenerator
 }

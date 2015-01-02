@@ -51,6 +51,7 @@ import com.itszuvalex.femtocraft.sound.FemtocraftSoundManager
 import com.itszuvalex.femtocraft.transport.items.blocks.BlockVacuumTube
 import com.itszuvalex.femtocraft.transport.liquids.blocks.BlockSuctionPipe
 import com.itszuvalex.femtocraft.utility.blocks.BlockSpatialAlternator
+import com.itszuvalex.femtocraft.utility.items.ItemPocketPocket
 import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils
 import com.mojang.authlib.GameProfile
 import cpw.mods.fml.common.Mod.EventHandler
@@ -590,6 +591,8 @@ object Femtocraft {
     itemOrganometallicPlate = registerBaseItem("ItemOrganometallicPlate")
     ComponentRegistry.registerComponent(itemOrganometallicPlate, EnumTechLevel.MICRO)
     itemMicroPlating = registerBaseItem("ItemMicroPlating")
+
+    registerItem(new ItemPocketPocket("ItemPocketPocket"), "ItemPocketPocket")
   }
 
   private def registerBaseItem(unlocalizedName: String, fun: (ItemBase) => Unit = { a: Item =>}) = registerItem(new

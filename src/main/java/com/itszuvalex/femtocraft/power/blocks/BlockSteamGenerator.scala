@@ -22,6 +22,7 @@ package com.itszuvalex.femtocraft.power.blocks
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
+import com.itszuvalex.femtocraft.core.traits.block.MultiBlockSpatialReactions
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockMagnetohydrodynamicGenerator
 import com.itszuvalex.femtocraft.power.tiles.TileEntitySteamGenerator
 import net.minecraft.block.Block
@@ -32,7 +33,7 @@ import net.minecraft.world.World
 /**
  * Created by Christopher Harris (Itszuvalex) on 8/25/14.
  */
-class BlockSteamGenerator extends TileContainer(Material.iron) {
+class BlockSteamGenerator extends TileContainer(Material.iron) with MultiBlockSpatialReactions {
   setCreativeTab(Femtocraft.femtocraftTab)
   setBlockName("BlockSteamGenerator")
 
@@ -56,4 +57,6 @@ class BlockSteamGenerator extends TileContainer(Material.iron) {
     }
     super.breakBlock(par1World, par2, par3, par4, par5, par6)
   }
+
+  override def getMultiBlock = MultiBlockMagnetohydrodynamicGenerator
 }

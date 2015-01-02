@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft.power.blocks
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
+import com.itszuvalex.femtocraft.core.traits.block.MultiBlockSpatialReactions
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockPhlegethonTunnel
 import com.itszuvalex.femtocraft.power.tiles.TileEntitySisyphusStabilizer
 import cpw.mods.fml.relauncher.{Side, SideOnly}
@@ -34,7 +35,7 @@ import net.minecraft.world.World
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/12/14.
  */
-class BlockSisyphusStabilizer extends TileContainer(Material.iron) {
+class BlockSisyphusStabilizer extends TileContainer(Material.iron) with MultiBlockSpatialReactions {
   setCreativeTab(Femtocraft.femtocraftTab)
   setBlockName("BlockSisyphusStabilizer")
 
@@ -58,4 +59,6 @@ class BlockSisyphusStabilizer extends TileContainer(Material.iron) {
     }
     super.breakBlock(par1World, par2, par3, par4, par5, par6)
   }
+
+  override def getMultiBlock = MultiBlockPhlegethonTunnel
 }

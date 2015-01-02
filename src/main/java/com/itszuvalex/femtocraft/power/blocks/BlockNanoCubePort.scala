@@ -24,6 +24,7 @@ import java.util.Random
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
+import com.itszuvalex.femtocraft.core.traits.block.MultiBlockSpatialReactions
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockNanoCube
 import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoCubePort
 import com.itszuvalex.femtocraft.render.RenderUtils
@@ -34,7 +35,7 @@ import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.util.IIcon
 import net.minecraft.world.{IBlockAccess, World}
 
-class BlockNanoCubePort extends TileContainer(Material.iron) {
+class BlockNanoCubePort extends TileContainer(Material.iron) with MultiBlockSpatialReactions {
   var portInput : IIcon = null
   var portOutput: IIcon = null
 
@@ -79,4 +80,6 @@ class BlockNanoCubePort extends TileContainer(Material.iron) {
     }
     super.breakBlock(par1World, par2, par3, par4, par5, par6)
   }
+
+  override def getMultiBlock = MultiBlockNanoCube
 }

@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft.power.blocks
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
+import com.itszuvalex.femtocraft.core.traits.block.MultiBlockSpatialReactions
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockFemtoStellarator
 import com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoStellaratorCore
 import com.itszuvalex.femtocraft.proxy.ProxyClient
@@ -33,7 +34,7 @@ import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.util.IIcon
 import net.minecraft.world.World
 
-class BlockFemtoStellaratorCore extends TileContainer(Material.iron) {
+class BlockFemtoStellaratorCore extends TileContainer(Material.iron) with MultiBlockSpatialReactions {
   var outsideIcon: IIcon = null
   var insideIcon : IIcon = null
   var coreIcon   : IIcon = null
@@ -69,4 +70,6 @@ class BlockFemtoStellaratorCore extends TileContainer(Material.iron) {
   }
 
   override def createNewTileEntity(world: World, metadata: Int) = new TileEntityFemtoStellaratorCore
+
+  override def getMultiBlock = MultiBlockFemtoStellarator
 }

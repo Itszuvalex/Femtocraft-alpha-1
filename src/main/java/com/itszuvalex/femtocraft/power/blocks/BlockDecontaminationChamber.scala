@@ -23,8 +23,9 @@ package com.itszuvalex.femtocraft.power.blocks
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
+import com.itszuvalex.femtocraft.core.traits.block.MultiBlockSpatialReactions
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockDecontaminationChamber
-import com.itszuvalex.femtocraft.power.tiles.{TileEntityDecontaminationChamber, TileEntityMagnetohydrodynamicGenerator}
+import com.itszuvalex.femtocraft.power.tiles.TileEntityDecontaminationChamber
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
@@ -37,7 +38,7 @@ import net.minecraftforge.common.util.ForgeDirection._
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/9/14.
  */
-class BlockDecontaminationChamber extends TileContainer(Material.iron) {
+class BlockDecontaminationChamber extends TileContainer(Material.iron) with MultiBlockSpatialReactions {
   private val formedSides = new Array[Array[IIcon]](2)
   for (i <- 0 until formedSides.length) {
     formedSides(i) = new Array[IIcon](2)
@@ -75,15 +76,6 @@ class BlockDecontaminationChamber extends TileContainer(Material.iron) {
     }
   }
 
-  override def registerBlockIcons(par1IconRegister: IIconRegister) {
-    blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "BlockDecontaminationChamber_unformed")
-    for (i <- 0 until formedSides.length) {
-      for (j <- 0 until formedSides(i).length) {
-        formedSides(i)(j) = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "BlockDecontaminationChamber_" + i + "_" + j)
-      }
-    }
-  }
-
   private def iconFromGrid(xdif: Int, ydif: Int): IIcon = try {
     val xindex = xdif % formedSides.length
     val yindex = ydif % formedSides(xindex).length
@@ -91,6 +83,15 @@ class BlockDecontaminationChamber extends TileContainer(Material.iron) {
   }
   catch {
     case ignored: IndexOutOfBoundsException => blockIcon
+  }
+
+  override def registerBlockIcons(par1IconRegister: IIconRegister) {
+    blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "BlockDecontaminationChamber_unformed")
+    for (i <- 0 until formedSides.length) {
+      for (j <- 0 until formedSides(i).length) {
+        formedSides(i)(j) = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "BlockDecontaminationChamber_" + i + "_" + j)
+      }
+    }
   }
 
   override def onPostBlockPlaced(par1World: World, par2: Int, par3: Int, par4: Int, par5: Int) {
@@ -107,4 +108,6 @@ class BlockDecontaminationChamber extends TileContainer(Material.iron) {
     }
     super.breakBlock(par1World, par2, par3, par4, par5, par6)
   }
+
+  override def getMultiBlock = MultiBlockDecontaminationChamber
 }

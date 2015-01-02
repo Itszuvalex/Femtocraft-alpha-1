@@ -2,6 +2,7 @@ package com.itszuvalex.femtocraft.utility
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
+import net.minecraft.init.Blocks
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.world.{World, WorldServer}
 import net.minecraftforge.common.MinecraftForge
@@ -47,22 +48,24 @@ object SpatialRelocation {
         }
       case _                   =>
     }
+    if (MinecraftForge.EVENT_BUS.post(new EventSpatialRelocation.Pickup(world, x, y, z))) return null
     val tileEntity = world.getTileEntity(x, y, z)
     val block = world.getBlock(x, y, z)
     val metadata = world.getBlockMetadata(x, y, z)
-    if (block != null) {
-      TileContainer.shouldDrop = false
-      block.breakBlock(world, x, y, z, block, metadata)
-      TileContainer.shouldDrop = true
-    }
     val snapshot = new BlockAndTileSnapshot(world, x, y, z, block, metadata, tileEntity)
-    world.setBlockToAir(x, y, z)
+    //    world.setBlockToAir(x, y, z)
+    world.removeTileEntity(x, y, z)
+    TileContainer.shouldDrop = false
+    world.setBlock(x, y, z, Blocks.air, 0, 2)
+    TileContainer.shouldDrop = true
     snapshot
   }
 
-  def applySnapshot(s: BlockAndTileSnapshot, destWorld: World, destX: Int, destY: Int, destZ: Int): Unit = {
-    if (s == null) return
-    if (!s.block.canPlaceBlockAt(destWorld, destX, destY, destZ)) return
+  def applySnapshot(s: BlockAndTileSnapshot): Unit = applySnapshot(s, s.world, s.x, s.y, s.z): Boolean
+
+  def applySnapshot(s: BlockAndTileSnapshot, destWorld: World, destX: Int, destY: Int, destZ: Int): Boolean = {
+    if (s == null) return false
+    if (!s.block.canPlaceBlockAt(destWorld, destX, destY, destZ)) return false
     destWorld match {
       case world1: WorldServer =>
         if (MinecraftForge
@@ -75,11 +78,11 @@ object SpatialRelocation {
                                                    destWorld.getBlockMetadata(destX, destY, destZ)),
                                  destWorld.getBlock(destX, destY, destZ),
                                  Femtocraft.getFakePlayer(world1)))) {
-          return
+          return false
         }
       case _                   =>
     }
-
+    if (MinecraftForge.EVENT_BUS.post(new EventSpatialRelocation.Placement(destWorld, destX, destY, destZ, s.block))) return false
     destWorld.setBlock(destX, destY, destZ, s.block, s.metadata, 3)
     if (s.te != null) {
       if (s.x != destX) s.te.setInteger("x", destX)
@@ -97,7 +100,6 @@ object SpatialRelocation {
     }
     s.block.onBlockAdded(destWorld, destX, destY, destZ)
     s.block.onPostBlockPlaced(destWorld, destX, destY, destZ, destWorld.getBlockMetadata(destX, destY, destZ))
+    true
   }
-
-  def applySnapshot(s: BlockAndTileSnapshot): Unit = applySnapshot(s, s.world, s.x, s.y, s.z)
 }

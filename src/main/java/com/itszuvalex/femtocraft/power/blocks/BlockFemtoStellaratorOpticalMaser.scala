@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft.power.blocks
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
+import com.itszuvalex.femtocraft.core.traits.block.MultiBlockSpatialReactions
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockFemtoStellarator
 import com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoStellaratorOpticalMaser
 import net.minecraft.block.Block
@@ -34,7 +35,7 @@ import net.minecraft.util.IIcon
 import net.minecraft.world.{IBlockAccess, World}
 import net.minecraftforge.common.util.ForgeDirection
 
-class BlockFemtoStellaratorOpticalMaser extends TileContainer(Material.iron) {
+class BlockFemtoStellaratorOpticalMaser extends TileContainer(Material.iron) with MultiBlockSpatialReactions {
   var activeIcon: IIcon = null
 
   setBlockName("BlockStellaratorOpticalMaser")
@@ -59,8 +60,6 @@ class BlockFemtoStellaratorOpticalMaser extends TileContainer(Material.iron) {
     super.onNeighborBlockChange(par1World, par2, par3, par4, par5)
   }
 
-  override def onBlockActivated(par1World: World, par2: Int, par3: Int, par4: Int, par5EntityPlayer: EntityPlayer, par6: Int, par7: Float, par8: Float, par9: Float): Boolean = super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9)
-
   override def breakBlock(par1World: World, par2: Int, par3: Int, par4: Int, par5: Block, par6: Int) {
     par1World.getTileEntity(par2, par3, par4) match {
       case maser: TileEntityFemtoStellaratorOpticalMaser =>
@@ -70,6 +69,8 @@ class BlockFemtoStellaratorOpticalMaser extends TileContainer(Material.iron) {
     }
     super.breakBlock(par1World, par2, par3, par4, par5, par6)
   }
+
+  override def onBlockActivated(par1World: World, par2: Int, par3: Int, par4: Int, par5EntityPlayer: EntityPlayer, par6: Int, par7: Float, par8: Float, par9: Float): Boolean = super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9)
 
   override def createNewTileEntity(world: World, metadata: Int) = new TileEntityFemtoStellaratorOpticalMaser
 
@@ -98,4 +99,6 @@ class BlockFemtoStellaratorOpticalMaser extends TileContainer(Material.iron) {
     blockIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "BlockFemtoStellaratorOpticalMaser")
     activeIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "BlockFemtoStellaratorOpticalMaser_active")
   }
+
+  override def getMultiBlock = MultiBlockFemtoStellarator
 }

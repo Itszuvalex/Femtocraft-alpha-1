@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft.power.blocks
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
+import com.itszuvalex.femtocraft.core.traits.block.MultiBlockSpatialReactions
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockPhlegethonTunnel
 import com.itszuvalex.femtocraft.power.tiles.{TileEntityPhlegethonTunnelCore, TileEntityPhlegethonTunnelFrame}
 import cpw.mods.fml.relauncher.{Side, SideOnly}
@@ -37,7 +38,7 @@ import net.minecraftforge.common.util.ForgeDirection._
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/12/14.
  */
-class BlockPhlegethonTunnelFrame extends TileContainer(Material.iron) {
+class BlockPhlegethonTunnelFrame extends TileContainer(Material.iron) with MultiBlockSpatialReactions {
   private val sideIcons_inactive = makeEmptyIconArray
   private val topIcons_inactive  = makeEmptyIconArray
   private val botIcons_inactive  = makeEmptyIconArray
@@ -120,6 +121,8 @@ class BlockPhlegethonTunnelFrame extends TileContainer(Material.iron) {
     }
     super.breakBlock(par1World, par2, par3, par4, par5, par6)
   }
+
+  override def getMultiBlock = MultiBlockPhlegethonTunnel
 
   private def makeEmptyIconArray: Array[Array[IIcon]] = {
     val newArray = new Array[Array[IIcon]](3)

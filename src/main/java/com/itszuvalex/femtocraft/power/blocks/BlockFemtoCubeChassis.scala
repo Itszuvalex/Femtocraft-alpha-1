@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft.power.blocks
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
+import com.itszuvalex.femtocraft.core.traits.block.MultiBlockSpatialReactions
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockFemtoCube
 import com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoCubeChassis
 import cpw.mods.fml.relauncher.{Side, SideOnly}
@@ -34,7 +35,7 @@ import net.minecraft.world.{IBlockAccess, World}
 import net.minecraftforge.common.util.ForgeDirection
 import net.minecraftforge.common.util.ForgeDirection._
 
-class BlockFemtoCubeChassis extends TileContainer(Material.iron) {
+class BlockFemtoCubeChassis extends TileContainer(Material.iron) with MultiBlockSpatialReactions {
   val icons = new Array[Array[IIcon]](3)
   for (i <- 0 until icons.length) {
     icons(i) = new Array[IIcon](3)
@@ -104,4 +105,6 @@ class BlockFemtoCubeChassis extends TileContainer(Material.iron) {
     }
     super.breakBlock(par1World, par2, par3, par4, par5, par6)
   }
+
+  override def getMultiBlock = MultiBlockFemtoCube
 }

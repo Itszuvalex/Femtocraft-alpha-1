@@ -22,7 +22,7 @@ package com.itszuvalex.femtocraft.power.blocks
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
-import com.itszuvalex.femtocraft.core.traits.block.DroppableInventory
+import com.itszuvalex.femtocraft.core.traits.block.{DroppableInventory, MultiBlockSpatialReactions}
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockNanoFissionReactor
 import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoFissionReactorCore
 import cpw.mods.fml.relauncher.{Side, SideOnly}
@@ -34,7 +34,7 @@ import net.minecraft.world.World
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/6/14.
  */
-class BlockNanoFissionReactorCore extends TileContainer(Material.iron) with DroppableInventory {
+class BlockNanoFissionReactorCore extends TileContainer(Material.iron) with DroppableInventory with MultiBlockSpatialReactions {
   setCreativeTab(Femtocraft.femtocraftTab)
   setBlockName("BlockNanoFissionReactorCore")
 
@@ -58,4 +58,6 @@ class BlockNanoFissionReactorCore extends TileContainer(Material.iron) with Drop
     MultiBlockNanoFissionReactor.formMultiBlockWithBlock(par1World, par2, par3, par4)
     super.onPostBlockPlaced(par1World, par2, par3, par4, par5)
   }
+
+  override def getMultiBlock = MultiBlockNanoFissionReactor
 }

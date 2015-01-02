@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft.power.blocks
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
+import com.itszuvalex.femtocraft.core.traits.block.MultiBlockSpatialReactions
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockNanoCube
 import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoCubeFrame
 import cpw.mods.fml.relauncher.{Side, SideOnly}
@@ -34,7 +35,7 @@ import net.minecraft.world.{IBlockAccess, World}
 import net.minecraftforge.common.util.ForgeDirection
 import net.minecraftforge.common.util.ForgeDirection._
 
-class BlockNanoCubeFrame extends TileContainer(Material.iron) {
+class BlockNanoCubeFrame extends TileContainer(Material.iron) with MultiBlockSpatialReactions {
   val formedCorners = new Array[IIcon](4)
   val formedSides   = new Array[IIcon](4)
 
@@ -126,4 +127,6 @@ class BlockNanoCubeFrame extends TileContainer(Material.iron) {
     }
     super.breakBlock(par1World, par2, par3, par4, par5, par6)
   }
+
+  override def getMultiBlock = MultiBlockNanoCube
 }
