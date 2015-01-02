@@ -287,6 +287,7 @@ object Femtocraft {
   var itemMorphicChannel                    : Item                      = null
   var itemSynthesizedFiber                  : Item                      = null
   var itemOrganometallicPlate               : Item                      = null
+  var itemPocketPocket                      : Item                      = null
 
   @EventHandler def preInit(event: FMLPreInitializationEvent) {
     recipeManager = new ManagerRecipe
@@ -542,6 +543,8 @@ object Femtocraft {
     itemInterfaceDeviceMicro = registerItem(new ItemMicroInterfaceDevice, "ItemInterfaceDeviceMicro")
     itemInterfaceDeviceNano = registerItem(new ItemNanoInterfaceDevice, "ItemInterfaceDeviceNano")
     itemInterfaceDeviceFemto = registerItem(new ItemFemtoInterfaceDevice, "ItemInterfaceDeviceFemto")
+    itemPocketPocket = registerItem(new ItemPocketPocket, "ItemPocketPocket")
+    //Decomposition Items
     itemCubit = registerBaseItem("ItemCubit")
     ComponentRegistry.registerComponent(itemCubit, EnumTechLevel.FEMTO)
     itemRectangulon = registerBaseItem("ItemRectangulon")
@@ -591,8 +594,6 @@ object Femtocraft {
     itemOrganometallicPlate = registerBaseItem("ItemOrganometallicPlate")
     ComponentRegistry.registerComponent(itemOrganometallicPlate, EnumTechLevel.MICRO)
     itemMicroPlating = registerBaseItem("ItemMicroPlating")
-
-    registerItem(new ItemPocketPocket("ItemPocketPocket"), "ItemPocketPocket")
   }
 
   private def registerBaseItem(unlocalizedName: String, fun: (ItemBase) => Unit = { a: Item =>}) = registerItem(new

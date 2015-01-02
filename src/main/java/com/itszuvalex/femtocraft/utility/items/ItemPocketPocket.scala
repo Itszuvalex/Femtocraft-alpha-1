@@ -20,7 +20,7 @@ object ItemPocketPocket {
   val NBTStoredSnapshotBlockNameTag = "BlockSnapshotName"
 }
 
-class ItemPocketPocket(unlocalizedName: String) extends ItemBase(unlocalizedName) {
+class ItemPocketPocket extends ItemBase("ItemPocketPocket") {
   setMaxStackSize(1)
 
   override def onItemUse(itemStack: ItemStack, player: EntityPlayer, world: World, x: Int, y: Int, z: Int, facing: Int, hitX: Float, hitY: Float, hitZ: Float): Boolean = {
