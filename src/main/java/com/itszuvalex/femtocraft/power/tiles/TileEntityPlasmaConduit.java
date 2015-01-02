@@ -104,9 +104,10 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
         super.femtocraftServerUpdate();
 
 
-        boolean prev = hasFlows();
-        update(worldObj, xCoord, yCoord, zCoord);
-        if (prev != hasFlows()) {
+        boolean prev = containsPlasma;
+        update(this, worldObj, xCoord, yCoord, zCoord);
+        containsPlasma = hasFlows();
+        if (prev != containsPlasma) {
             setUpdate();
         }
     }
@@ -127,11 +128,11 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
         super.saveToDescriptionCompound(compound);
         compound.setInteger("input", getInputDir().ordinal());
         compound.setInteger("output", getOutputDir().ordinal());
-        compound.setBoolean("contain", hasFlows());
+        compound.setBoolean("contain", containsPlasma);
     }
 
     public boolean hasFlows() {
-        return worldObj.isRemote ? containsPlasma : getFlows() != null && getFlows().size() > 0;
+        return worldObj.isRemote ? containsPlasma : getFlows() != null && !getFlows().isEmpty();
     }
 
     public void searchForConnections() {
@@ -307,8 +308,8 @@ public class TileEntityPlasmaConduit extends TileEntityBase implements IPlasmaCo
     }
 
     @Override
-    public void update(World world, int x, int y, int z) {
-        plasma.update(world, x, y, z);
+    public void update(IPlasmaContainer container, World world, int x, int y, int z) {
+        plasma.update(container, world, x, y, z);
         setModified();
     }
 

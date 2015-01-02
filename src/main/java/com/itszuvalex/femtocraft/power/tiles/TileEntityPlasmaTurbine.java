@@ -204,7 +204,7 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
     @Override
     public void femtocraftServerUpdate() {
         super.femtocraftServerUpdate();
-        update(worldObj, xCoord, yCoord, zCoord);
+        update(this, worldObj, xCoord, yCoord, zCoord);
     }
 
     @Override
@@ -298,8 +298,8 @@ public class TileEntityPlasmaTurbine extends TileEntityPowerProducer implements
     }
 
     @Override
-    public void update(World world, int x, int y, int z) {
-        plasma.update(world, x, y, z);
+    public void update(IPlasmaContainer container, World world, int x, int y, int z) {
+        plasma.update(this, world, x, y, z);
         setModified();
     }
 

@@ -97,12 +97,12 @@ public interface IPlasmaContainer {
     /**
      * Update, which by proxy updates everything inside of it
      *
-     * @param world World containing the core
-     * @param x     x coordinate of the core
-     * @param y     y coordinate of the core
-     * @param z     z coordinate of the core
+     * @param container World containing the core
+     * @param world     World containing the core
+     * @param x         x coordinate of the core
+     * @param y         y coordinate of the core
      */
-    void update(World world, int x, int y, int z);
+    void update(IPlasmaContainer container, World world, int x, int y, int z);
 
     /**
      * @param event Called when a volatility event occurs.

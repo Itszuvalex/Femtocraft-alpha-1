@@ -58,6 +58,7 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
     private boolean selfSustaining = false;
     @Saveable(desc = true)
     private boolean igniting = false;
+
     public TileEntityFemtoStellaratorCore() {
         super();
         core = new FusionReactorCore(maxContainedFlows, stability, temperatureRating, ignitionProcessWindow,
@@ -72,7 +73,7 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
         super.femtocraftServerUpdate();
         boolean igniting = isIgniting();
         boolean sustaining = isSelfSustaining();
-        update(worldObj, xCoord, yCoord, zCoord);
+        update(this, worldObj, xCoord, yCoord, zCoord);
         if (igniting != isIgniting()) {
             setModified();
             setUpdate();
@@ -322,8 +323,8 @@ public class TileEntityFemtoStellaratorCore extends TileEntityBase implements
     }
 
     @Override
-    public void update(World world, int x, int y, int z) {
-        core.update(world, x, y, z);
+    public void update(IPlasmaContainer container, World world, int x, int y, int z) {
+        core.update(container, world, x, y, z);
         setModified();
     }
 

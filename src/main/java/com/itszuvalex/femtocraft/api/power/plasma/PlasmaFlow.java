@@ -40,7 +40,7 @@ import java.util.Random;
 public class PlasmaFlow implements IPlasmaFlow, ISaveable {
     public static final float temperatureDecayMin = .9f;
     public static final float temperatureDecayMax = .99f;
-    public static final int frequencyMin = 5;
+    public static final int frequencyMin = 20;
     public static final int frequencyMax = 200;
     public static final double unstableMultiplier = 1.25;
     /**
@@ -129,6 +129,7 @@ public class PlasmaFlow implements IPlasmaFlow, ISaveable {
                         onIncompleteCircuit(container), world, x, y, z);
             } else {
                 if (container.getOutput().addFlow(this)) {
+                    setContainer(container.getOutput());
                     container.removeFlow(this);
                 } else {
                     FemtocraftPlasmaUtils.applyEventToContainer(container,

@@ -75,60 +75,60 @@ class FusionReactorCore(maxContainedFlows: Int, stability: Int, temperatureRatin
 
   def contributeCoreEnergy(energy: Long) = reaction.contributeReactionEnergy(energy)
 
-  def getComponents: util.Collection[IFusionReactorComponent] = components
+  override def getComponents: util.Collection[IFusionReactorComponent] = components
 
-  def addComponent(component: IFusionReactorComponent) = !components.contains(component) && components.add(component)
+  override def addComponent(component: IFusionReactorComponent) = !components.contains(component) && components.add(component)
 
-  def removeComponent(component: IFusionReactorComponent) = components.contains(component) && components.remove(component)
+  override def removeComponent(component: IFusionReactorComponent) = components.contains(component) && components.remove(component)
 
-  def beginIgnitionProcess(core: IFusionReactorCore) {
+  override def beginIgnitionProcess(core: IFusionReactorCore) {
     reaction.beginIgnitionProcess()
   }
 
-  def getCore = this
+  override def getCore = this
 
-  def getInput = plasmaContainer.getInput
+  override def getInput = plasmaContainer.getInput
 
-  def getOutput = plasmaContainer.getOutput
+  override def getOutput = plasmaContainer.getOutput
 
-  def setInput(container: IPlasmaContainer, dir: ForgeDirection) = plasmaContainer.setInput(container, dir)
+  override def setInput(container: IPlasmaContainer, dir: ForgeDirection) = plasmaContainer.setInput(container, dir)
 
-  def setOutput(container: IPlasmaContainer, dir: ForgeDirection) = plasmaContainer.setOutput(container, dir)
+  override def setOutput(container: IPlasmaContainer, dir: ForgeDirection) = plasmaContainer.setOutput(container, dir)
 
-  def getInputDir = plasmaContainer.getInputDir
+  override def getInputDir = plasmaContainer.getInputDir
 
-  def getOutputDir = plasmaContainer.getOutputDir
+  override def getOutputDir = plasmaContainer.getOutputDir
 
-  def addFlow(flow: IPlasmaFlow) = plasmaContainer.addFlow(flow)
+  override def addFlow(flow: IPlasmaFlow) = plasmaContainer.addFlow(flow)
 
-  def getFlows: util.Collection[IPlasmaFlow] = plasmaContainer.getFlows
+  override def getFlows: util.Collection[IPlasmaFlow] = plasmaContainer.getFlows
 
-  def removeFlow(flow: IPlasmaFlow) = plasmaContainer.removeFlow(flow)
+  override def removeFlow(flow: IPlasmaFlow) = plasmaContainer.removeFlow(flow)
 
-  def getMaxFlows = plasmaContainer.getMaxFlows
+  override def getMaxFlows = plasmaContainer.getMaxFlows
 
-  def update(world: World, x: Int, y: Int, z: Int) {
-    reaction.update(this, world, x, y, z)
-    plasmaContainer.update(world, x, y, z)
+  override def update(container: IPlasmaContainer, world: World, x: Int, y: Int, z: Int) {
+    reaction.update(container.asInstanceOf[IFusionReactorCore], world, x, y, z)
+    plasmaContainer.update(container, world, x, y, z)
   }
 
-  def onVolatilityEvent(event: IVolatilityEvent) {
+  override def onVolatilityEvent(event: IVolatilityEvent) {
     plasmaContainer.onVolatilityEvent(event)
   }
 
-  def onPostVolatilityEvent(event: IVolatilityEvent) {
+  override def onPostVolatilityEvent(event: IVolatilityEvent) {
     plasmaContainer.onPostVolatilityEvent(event)
   }
 
-  def getTemperatureRating = plasmaContainer.getTemperatureRating
+  override def getTemperatureRating = plasmaContainer.getTemperatureRating
 
-  def getStabilityRating = plasmaContainer.getStabilityRating
+  override def getStabilityRating = plasmaContainer.getStabilityRating
 
-  def saveToNBT(compound: NBTTagCompound) {
+  override def saveToNBT(compound: NBTTagCompound) {
     FemtocraftDataUtils.saveObjectToNBT(compound, this, FemtocraftDataUtils.EnumSaveType.WORLD)
   }
 
-  def loadFromNBT(compound: NBTTagCompound) {
+  override def loadFromNBT(compound: NBTTagCompound) {
     FemtocraftDataUtils.loadObjectFromNBT(compound, this, FemtocraftDataUtils.EnumSaveType.WORLD)
     reaction.setCore(this)
   }

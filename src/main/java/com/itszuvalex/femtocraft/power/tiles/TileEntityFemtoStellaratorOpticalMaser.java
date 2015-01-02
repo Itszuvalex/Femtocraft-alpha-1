@@ -260,7 +260,7 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
     }
 
     @Override
-    public void update(World world, int x, int y, int z) {
+    public void update(IPlasmaContainer container, World world, int x, int y, int z) {
 
     }
 

@@ -31,8 +31,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/2/14.
@@ -110,15 +108,16 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
             return false;
         } else {
             flows.add(flow);
-            flow.setContainer(this);
             return true;
         }
     }
 
     @Override
     public Collection<IPlasmaFlow> getFlows() {
-        List<IPlasmaFlow> ret = new ArrayList<IPlasmaFlow>();
-        Collections.copy(flows, ret);
+        ArrayList<IPlasmaFlow> ret = new ArrayList<>();
+        for (IPlasmaFlow flow : flows) {
+            ret.add(flow);
+        }
         ret.removeAll(pendingRemove);
         return ret;
     }
@@ -141,9 +140,9 @@ public class PlasmaContainer implements IPlasmaContainer, ISaveable {
     }
 
     @Override
-    public void update(World world, int x, int y, int z) {
+    public void update(IPlasmaContainer container, World world, int x, int y, int z) {
         for (IPlasmaFlow flow : flows) {
-            flow.update(this, world, x, y, z);
+            flow.update(container, world, x, y, z);
         }
         if (pendingRemove.size() > 0) {
             flows.removeAll(pendingRemove);

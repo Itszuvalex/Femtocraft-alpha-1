@@ -41,10 +41,10 @@ public class FemtocraftPlasmaUtils {
     public static final int temperatureToEnergy = 10000;
     public static final double energyToTemperature = 1.d / temperatureToEnergy;
 
-    public static final void applyEventToContainer(IPlasmaContainer container,
-                                                   IVolatilityEvent event,
-                                                   World world, int x, int y,
-                                                   int z) {
+    public static void applyEventToContainer(IPlasmaContainer container,
+                                             IVolatilityEvent event,
+                                             World world, int x, int y,
+                                             int z) {
         if (event == null) {
             return;
         }
