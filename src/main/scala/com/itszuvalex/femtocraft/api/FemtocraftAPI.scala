@@ -51,16 +51,19 @@ object FemtocraftAPI {
    * @return True if hooking successful, false otherwise.
    */
   def hookFemtocraft(): Boolean = {
+    apiLogger.log(Level.INFO, "Attempting to hook Femtocraft.")
     try {
       femtocraft
       researchManager
       powerAlgorithm
       assistantManager
+      apiLogger.log(Level.INFO, "Successfully hooked Femtocraft!")
       true
     }
     catch {
-      case e: ClassNotFoundException =>
+      case e: Throwable =>
         apiLogger.log(Level.ERROR, "Failed to hook Femtocraft classes.")
+        e.printStackTrace()
         false
     }
   }
@@ -68,19 +71,9 @@ object FemtocraftAPI {
   private def getFemtocraft = try femtocraft
   catch {case _: Throwable => apiLogger.log(Level.ERROR, "Failed to hook Femtocraft."); null}
 
-  private def getFemtocraftField[F >: Null](getter: String): F = {
-    try {
-      if (femtocraft == null) return null
-      val method = femtocraft.getMethod(getter, Array[Class[_]](null): _*)
-      method.invoke(null, Array(null): _*).asInstanceOf[F]
-    }
-    catch {
-      case e: Throwable =>
-        apiLogger.log(Level.ERROR, "Failed to hook " + getter)
-        e.printStackTrace()
-        null
-    }
-  }
+  private def getFemtocraftField[F >: Null](getter: String): F =
+    femtocraft.getMethod(getter, Array[Class[_]](): _*).invoke(null, Array(): _*).asInstanceOf[F]
+
 
   private def attemptHookFemtocraft(): Class[_] = {
     try {

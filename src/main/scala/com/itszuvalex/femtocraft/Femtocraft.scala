@@ -3,7 +3,7 @@ package com.itszuvalex.femtocraft
 import java.io.File
 import java.util.UUID
 
-import com.itszuvalex.femtocraft.api.EnumTechLevel
+import com.itszuvalex.femtocraft.api.{FemtocraftAPI, EnumTechLevel}
 import com.itszuvalex.femtocraft.blocks.{BlockFemtoStone, BlockMicroStone, BlockNanoStone, BlockUnidentifiedAlloy}
 import com.itszuvalex.femtocraft.command.{CommandBase, CommandFemtocraft}
 import com.itszuvalex.femtocraft.configuration.{AutoGenConfig, FemtocraftAssemblerConfig, FemtocraftConfigs}
