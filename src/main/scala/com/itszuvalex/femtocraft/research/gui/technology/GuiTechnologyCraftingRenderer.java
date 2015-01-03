@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.research.gui.technology;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.api.AssemblerRecipe;
+import com.itszuvalex.femtocraft.api.industry.AssemblerRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 

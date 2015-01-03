@@ -25,7 +25,8 @@ import java.util
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.events.EventAssemblerRegister
-import com.itszuvalex.femtocraft.api.{AssemblerRecipeType, AssemblerRecipe, EnumTechLevel}
+import com.itszuvalex.femtocraft.api.industry.{AssemblerRecipeType, AssemblerRecipe}
+import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.configuration.{AssemblerXMLLoader, AutoGenConfig, XMLAssemblerRecipes}
 import com.itszuvalex.femtocraft.implicits.IDImplicits._
 import com.itszuvalex.femtocraft.managers.research.Technology

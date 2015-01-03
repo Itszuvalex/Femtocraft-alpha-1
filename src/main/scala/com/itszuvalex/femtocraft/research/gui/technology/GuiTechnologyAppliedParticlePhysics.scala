@@ -23,7 +23,7 @@ package com.itszuvalex.femtocraft.research.gui.technology
 import java.util.List
 
 import com.itszuvalex.femtocraft.Femtocraft
-import com.itszuvalex.femtocraft.api.AssemblerRecipe
+import com.itszuvalex.femtocraft.api.industry.AssemblerRecipe
 import com.itszuvalex.femtocraft.managers.research.ResearchStatus
 import com.itszuvalex.femtocraft.research.gui.GuiResearch
 

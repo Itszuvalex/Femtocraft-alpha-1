@@ -2,6 +2,7 @@ package com.itszuvalex.femtocraft.managers.assembler
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api._
+import com.itszuvalex.femtocraft.api.industry.{AssemblerRecipeType, AssemblerRecipe}
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
 import net.minecraft.init.{Blocks, Items}
 import net.minecraft.item.ItemStack

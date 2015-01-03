@@ -4,7 +4,7 @@ import java.util
 import java.util.Random
 
 import com.itszuvalex.femtocraft.Femtocraft
-import com.itszuvalex.femtocraft.api.AssemblerRecipe
+import com.itszuvalex.femtocraft.api.industry.AssemblerRecipe
 import com.itszuvalex.femtocraft.api.items.IAssemblerSchematic._
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils
 import cpw.mods.fml.relauncher.{Side, SideOnly}

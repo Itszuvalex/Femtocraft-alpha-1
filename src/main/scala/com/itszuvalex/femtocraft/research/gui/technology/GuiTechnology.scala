@@ -24,7 +24,8 @@ import java.util
 import java.util.{ArrayList, List}
 
 import com.itszuvalex.femtocraft.Femtocraft
-import com.itszuvalex.femtocraft.api.{AssemblerRecipe, AssemblerRecipeType, DimensionalRecipe, TemporalRecipe}
+import com.itszuvalex.femtocraft.api.industry.{AssemblerRecipe, AssemblerRecipeType}
+import com.itszuvalex.femtocraft.api.{DimensionalRecipe, TemporalRecipe}
 import com.itszuvalex.femtocraft.managers.research.ResearchStatus
 import com.itszuvalex.femtocraft.research.gui.GuiResearch
 import com.itszuvalex.femtocraft.research.gui.technology.GuiTechnology._

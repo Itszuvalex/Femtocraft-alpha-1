@@ -1,7 +1,7 @@
 package com.itszuvalex.femtocraft.configuration
 
 import java.io.File
-import com.itszuvalex.femtocraft.api.AssemblerRecipe
+import com.itszuvalex.femtocraft.api.industry.AssemblerRecipe
 import com.itszuvalex.femtocraft.configuration.XMLSerializable._
 
 import scala.collection.mutable.ArrayBuffer

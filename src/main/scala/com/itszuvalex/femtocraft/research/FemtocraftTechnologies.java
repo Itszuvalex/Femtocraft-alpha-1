@@ -1,7 +1,7 @@
 //package com.itszuvalex.femtocraft.research;
 //
 //import com.itszuvalex.femtocraft.Femtocraft;
-//import com.itszuvalex.femtocraft.api.AssemblerRecipe;
+//import com.itszuvalex.femtocraft.api.industry.AssemblerRecipe;
 //import com.itszuvalex.femtocraft.api.EnumTechLevel;
 //import ITechnology;
 //import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs;

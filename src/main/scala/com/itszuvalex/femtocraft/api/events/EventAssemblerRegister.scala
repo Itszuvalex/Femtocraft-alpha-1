@@ -1,6 +1,6 @@
 package com.itszuvalex.femtocraft.api.events
 
-import com.itszuvalex.femtocraft.api.AssemblerRecipe
+import com.itszuvalex.femtocraft.api.industry.AssemblerRecipe
 import cpw.mods.fml.common.eventhandler.{Cancelable, Event}
 
 import scala.beans.BeanProperty

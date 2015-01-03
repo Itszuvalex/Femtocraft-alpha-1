@@ -1,6 +1,6 @@
 package com.itszuvalex.femtocraft.api.industry;
 
-import com.itszuvalex.femtocraft.api.AssemblerRecipe;
+import com.itszuvalex.femtocraft.api.industry.AssemblerRecipe;
 import com.itszuvalex.femtocraft.api.items.IAssemblerSchematic;
 import net.minecraft.item.ItemStack;
 

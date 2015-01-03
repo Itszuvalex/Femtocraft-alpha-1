@@ -21,7 +21,7 @@
 package com.itszuvalex.femtocraft.configuration
 
 import java.util
-import com.itszuvalex.femtocraft.api.AssemblerRecipe
+import com.itszuvalex.femtocraft.api.industry.AssemblerRecipe
 import net.minecraftforge.common.config.Configuration
 
 import scala.collection.JavaConversions._

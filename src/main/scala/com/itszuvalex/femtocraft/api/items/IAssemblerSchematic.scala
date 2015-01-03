@@ -1,7 +1,7 @@
 package com.itszuvalex.femtocraft.api.items
 
-import com.itszuvalex.femtocraft.api.AssemblerRecipe
 import com.itszuvalex.femtocraft.api.core.Configurable
+import com.itszuvalex.femtocraft.api.industry.AssemblerRecipe
 import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.util.IIcon
 

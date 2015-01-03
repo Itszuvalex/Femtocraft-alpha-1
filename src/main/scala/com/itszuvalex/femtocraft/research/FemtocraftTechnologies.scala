@@ -4,8 +4,9 @@ import java.util
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.core.RecipeType
+import com.itszuvalex.femtocraft.api.industry.AssemblerRecipe
 import com.itszuvalex.femtocraft.api.research.ITechnology
-import com.itszuvalex.femtocraft.api.{AssemblerRecipe, EnumTechLevel}
+import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs
 import com.itszuvalex.femtocraft.implicits.StringImplicits._
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityNanoInnervator

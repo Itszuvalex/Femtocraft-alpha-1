@@ -1,6 +1,7 @@
 package com.itszuvalex.femtocraft.configuration
 
 import com.itszuvalex.femtocraft.api._
+import com.itszuvalex.femtocraft.api.industry.{AssemblerRecipeType, AssemblerRecipe}
 import com.itszuvalex.femtocraft.managers.research.Technology
 import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils
 import net.minecraft.item.ItemStack
