@@ -26,8 +26,8 @@
 //import com.itszuvalex.femtocraft.Femtocraft
 //import ITechnology
 //import com.itszuvalex.femtocraft.api.{AssemblerRecipe, EnumTechLevel}
-//import com.itszuvalex.femtocraft.implicits.IDImplicits._
-//import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils
+//import com.itszuvalex.femtocraft.api.implicits.IDImplicits._
+//import com.itszuvalex.femtocraft.api.utils.FemtocraftFileUtils
 //import net.minecraft.item.ItemStack
 //import net.minecraft.nbt.CompressedStreamTools
 //import org.apache.logging.log4j.Level

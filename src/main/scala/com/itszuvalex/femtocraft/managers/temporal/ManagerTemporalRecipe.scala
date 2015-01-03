@@ -24,12 +24,13 @@ import java.io.File
 import java.util
 
 import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.api.industry.TemporalRecipe
 import com.itszuvalex.femtocraft.api.research.ITechnology
-import com.itszuvalex.femtocraft.api.{EnumTechLevel, TemporalRecipe}
+import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.configuration.{AutoGenConfig, TemporalXMLLoader, XMLTemporalRecipes}
 import com.itszuvalex.femtocraft.managers.assembler.ComparatorItemStack
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
-import com.itszuvalex.femtocraft.utils.{FemtocraftFileUtils, FemtocraftUtils}
+import com.itszuvalex.femtocraft.api.utils.{FemtocraftFileUtils, FemtocraftUtils}
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 

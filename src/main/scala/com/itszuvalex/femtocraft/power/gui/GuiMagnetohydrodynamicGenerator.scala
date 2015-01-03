@@ -26,7 +26,7 @@ import com.itszuvalex.femtocraft.power.containers.ContainerMagnetoHydrodynamicGe
 import com.itszuvalex.femtocraft.power.gui.GuiMagnetohydrodynamicGenerator._
 import com.itszuvalex.femtocraft.power.tiles.TileEntityMagnetohydrodynamicGenerator
 import com.itszuvalex.femtocraft.render.RenderUtils
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import net.minecraft.client.Minecraft
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fluids.{FluidRegistry, FluidStack, IFluidTank}

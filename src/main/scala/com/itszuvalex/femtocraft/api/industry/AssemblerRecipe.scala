@@ -1,9 +1,9 @@
 package com.itszuvalex.femtocraft.api.industry
 
-import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.api.core.ISaveable
 import com.itszuvalex.femtocraft.api.research.ITechnology
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.api.{EnumTechLevel, FemtocraftAPI}
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.{NBTTagCompound, NBTTagList}
 import org.apache.logging.log4j.{Level, LogManager}
@@ -114,7 +114,9 @@ class AssemblerRecipe(@BeanProperty var input: Array[ItemStack], @BeanProperty v
       val itemCompound = inputList.getCompoundTagAt(i)
       val slot: Byte = itemCompound.getByte("Slot")
       if (slot != i.toByte) {
-        LogManager.getLogger("Femtocraft").log(Level.WARN, "Slot mismatch occurred while loading AssemblerRecipe.")
+        LogManager
+        .getLogger(FemtocraftAPI.FemtocraftID)
+        .log(Level.WARN, "Slot mismatch occurred while loading AssemblerRecipe.")
       }
       if (itemCompound.hasKey("item")) {
         input(i) = ItemStack.loadItemStackFromNBT(itemCompound.getTag("item").asInstanceOf[NBTTagCompound])

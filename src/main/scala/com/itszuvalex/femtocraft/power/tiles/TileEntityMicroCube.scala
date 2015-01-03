@@ -30,7 +30,7 @@ import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.power.tiles.TileEntityMicroCube._
 import com.itszuvalex.femtocraft.power.traits.PowerTileContainer
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.common.util.ForgeDirection
@@ -49,18 +49,18 @@ object TileEntityMicroCube {
 
   override def defaultContainer = TileEntityMicroCube.getDefaultContainer
 
-  override def getFillPercentageForCharging(from: ForgeDirection): Float = if (outputs(FemtocraftUtils.indexOfForgeDirection(from))) 1f else 0f
+  override def getFillPercentageForCharging(from: ForgeDirection): Float = if (outputs(from.ordinal)) 1f else 0f
 
   override def charge(from: ForgeDirection, amount: Int): Int = {
-    if (!outputs(FemtocraftUtils.indexOfForgeDirection(from))) {
+    if (!outputs(from.ordinal)) {
       return super.charge(from, amount)
     }
     0
   }
 
-  override def getFillPercentageForOutput(to: ForgeDirection) = if (outputs(FemtocraftUtils.indexOfForgeDirection(to))) 1f else 0f
+  override def getFillPercentageForOutput(to: ForgeDirection) = if (outputs(to.ordinal)) 1f else 0f
 
-  override def canCharge(from: ForgeDirection) = !outputs(FemtocraftUtils.indexOfForgeDirection(from)) && super.canCharge(from)
+  override def canCharge(from: ForgeDirection) = !outputs(from.ordinal) && super.canCharge(from)
 
   override def handleDescriptionNBT(compound: NBTTagCompound) {
     super.handleDescriptionNBT(compound)
@@ -88,7 +88,7 @@ object TileEntityMicroCube {
       if (par5EntityPlayer.isSneaking) {
         dir = dir.getOpposite
       }
-      val s = FemtocraftUtils.indexOfForgeDirection(dir)
+      val s = dir.ordinal
       outputs(s) = !outputs(s)
       setUpdate()
       return true

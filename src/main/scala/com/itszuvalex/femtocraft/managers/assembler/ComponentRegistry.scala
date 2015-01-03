@@ -3,8 +3,8 @@ package com.itszuvalex.femtocraft.managers.assembler
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.api.core.Configurable
-import com.itszuvalex.femtocraft.implicits.ItemStackImplicits._
-import com.itszuvalex.femtocraft.implicits.StringImplicits._
+import com.itszuvalex.femtocraft.api.implicits.ItemStackImplicits._
+import com.itszuvalex.femtocraft.api.implicits.StringImplicits._
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
 import net.minecraft.item.{Item, ItemStack}
 

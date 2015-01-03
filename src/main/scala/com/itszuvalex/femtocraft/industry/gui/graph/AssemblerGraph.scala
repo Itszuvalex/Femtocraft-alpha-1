@@ -23,7 +23,7 @@ package com.itszuvalex.femtocraft.industry.gui.graph
 import java.util
 import com.itszuvalex.femtocraft.api.industry.AssemblerRecipe
 import com.itszuvalex.femtocraft.graph.{IGraphNode, MapGraph}
-import com.itszuvalex.femtocraft.implicits.IDImplicits._
+import com.itszuvalex.femtocraft.api.implicits.IDImplicits._
 import net.minecraft.item.ItemStack
 
 import scala.collection.JavaConversions._

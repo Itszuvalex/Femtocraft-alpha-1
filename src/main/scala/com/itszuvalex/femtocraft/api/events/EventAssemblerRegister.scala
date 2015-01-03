@@ -7,12 +7,13 @@ import scala.beans.BeanProperty
 
 object EventAssemblerRegister {
 
-  @Cancelable class Decomposition(@BeanProperty val recipe: AssemblerRecipe) extends Event with EventAssemblerRegister
+  @Cancelable class Decomposition(recipe: AssemblerRecipe) extends EventAssemblerRegister(recipe)
 
-  @Cancelable class Recomposition(@BeanProperty val recipe: AssemblerRecipe) extends Event with EventAssemblerRegister
+  @Cancelable class Recomposition(recipe: AssemblerRecipe) extends EventAssemblerRegister(recipe)
 
-  @Cancelable class Reversible(@BeanProperty val recipe: AssemblerRecipe) extends Event with EventAssemblerRegister
+  @Cancelable class Reversible(recipe: AssemblerRecipe) extends EventAssemblerRegister(recipe)
 
 }
 
-trait EventAssemblerRegister
+@Cancelable
+abstract class EventAssemblerRegister(@BeanProperty val recipe: AssemblerRecipe) extends Event

@@ -28,7 +28,7 @@ import com.itszuvalex.femtocraft.network.messages.MessageResearchConsoleStart;
 import com.itszuvalex.femtocraft.research.containers.ContainerResearchConsole;
 import com.itszuvalex.femtocraft.research.tiles.TileEntityResearchConsole;
 import com.itszuvalex.femtocraft.sound.FemtocraftSoundUtils;
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;

@@ -23,10 +23,10 @@ package com.itszuvalex.femtocraft.power.plasma
 import java.util.Random
 
 import com.itszuvalex.femtocraft.api.core.{Configurable, ISaveable, Saveable}
-import com.itszuvalex.femtocraft.api.power.plasma.{IFusionReaction, IFusionReactorCore, PlasmaFlow}
+import com.itszuvalex.femtocraft.api.power.plasma.{IFusionReaction, IFusionReactorCore}
 import com.itszuvalex.femtocraft.power.plasma.FusionReaction._
 import com.itszuvalex.femtocraft.power.plasma.volatility.VolatilityEventMagneticFluctuation
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftDataUtils
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.world.World
 
@@ -67,7 +67,7 @@ object FusionReaction {
       }
       if (getReactionInstability > core.getStabilityRating) {
         val eventEnergy: Long = (random.nextFloat * this.energy * .25d).toLong
-        FemtocraftPlasmaUtils.applyEventToContainer(core, new VolatilityEventMagneticFluctuation(null, getReactionInstability - core.getStabilityRating, eventEnergy), world, x, y, z)
+        FemtocraftPlasmaManager.applyEventToContainer(core, new VolatilityEventMagneticFluctuation(null, getReactionInstability - core.getStabilityRating, eventEnergy), world, x, y, z)
         energy -= eventEnergy
       }
       if (energy < getReactionFailureThreshold) {

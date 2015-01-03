@@ -33,7 +33,7 @@ import com.itszuvalex.femtocraft.research.gui.graph.DummyTechNode;
 import com.itszuvalex.femtocraft.research.gui.graph.TechNode;
 import com.itszuvalex.femtocraft.research.gui.technology.GuiTechnology;
 import com.itszuvalex.femtocraft.sound.FemtocraftSoundUtils;
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;

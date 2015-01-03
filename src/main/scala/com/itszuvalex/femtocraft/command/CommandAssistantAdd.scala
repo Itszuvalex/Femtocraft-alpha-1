@@ -23,7 +23,7 @@ package com.itszuvalex.femtocraft.command
 import java.util
 
 import com.itszuvalex.femtocraft.Femtocraft
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import net.minecraft.command.{ICommandSender, WrongUsageException}
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.server.MinecraftServer

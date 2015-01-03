@@ -24,13 +24,12 @@ import java.util
 import java.util.{ArrayList, List}
 
 import com.itszuvalex.femtocraft.Femtocraft
-import com.itszuvalex.femtocraft.api.industry.{AssemblerRecipe, AssemblerRecipeType}
-import com.itszuvalex.femtocraft.api.{DimensionalRecipe, TemporalRecipe}
+import com.itszuvalex.femtocraft.api.industry.{DimensionalRecipe, TemporalRecipe, AssemblerRecipe, AssemblerRecipeType}
 import com.itszuvalex.femtocraft.managers.research.ResearchStatus
 import com.itszuvalex.femtocraft.research.gui.GuiResearch
 import com.itszuvalex.femtocraft.research.gui.technology.GuiTechnology._
 import com.itszuvalex.femtocraft.sound.FemtocraftSoundUtils
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.{FontRenderer, GuiScreen}
 import net.minecraft.client.renderer.RenderHelper

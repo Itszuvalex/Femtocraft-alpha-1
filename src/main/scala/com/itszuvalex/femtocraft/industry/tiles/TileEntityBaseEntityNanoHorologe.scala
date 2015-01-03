@@ -23,14 +23,15 @@ package com.itszuvalex.femtocraft.industry.tiles
 import java.util
 
 import com.itszuvalex.femtocraft.api.core.{Configurable, Saveable}
+import com.itszuvalex.femtocraft.api.industry.TemporalRecipe
 import com.itszuvalex.femtocraft.api.power.PowerContainer
-import com.itszuvalex.femtocraft.api.{EnumTechLevel, TemporalRecipe}
+import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.core.traits.tile.Inventory
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityNanoHorologe._
 import com.itszuvalex.femtocraft.industry.traits.IndustryBehavior
 import com.itszuvalex.femtocraft.power.traits.PowerConsumer
-import com.itszuvalex.femtocraft.utils.{BaseInventory, FemtocraftUtils}
+import com.itszuvalex.femtocraft.api.utils.{BaseInventory, FemtocraftUtils}
 import com.itszuvalex.femtocraft.{Femtocraft, FemtocraftGuiConstants}
 import net.minecraft.item.ItemStack
 import net.minecraftforge.common.util.ForgeDirection

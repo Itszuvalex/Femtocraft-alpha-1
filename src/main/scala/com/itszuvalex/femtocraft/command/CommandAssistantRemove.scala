@@ -23,7 +23,7 @@ package com.itszuvalex.femtocraft.command
 import java.util
 
 import com.itszuvalex.femtocraft.Femtocraft
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import net.minecraft.command.{ICommandSender, WrongUsageException}
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.server.MinecraftServer
@@ -40,7 +40,7 @@ class CommandAssistantRemove extends CommandBase("remove", null) {
     if (icommandsender.isInstanceOf[EntityPlayer]) {
       val assistants = Femtocraft.assistantManager.getPlayerAssistants(icommandsender.getCommandSenderName)
       if (assistants == null) return new util.ArrayList[String]()
-      return assistants.keySet.toList
+      return assistants.toList
     }
     MinecraftServer.getServer.getAllUsernames.toList
   }

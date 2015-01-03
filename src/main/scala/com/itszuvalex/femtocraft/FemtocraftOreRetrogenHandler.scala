@@ -25,7 +25,7 @@ import java.util.Random
 
 import com.itszuvalex.femtocraft.FemtocraftOreRetrogenHandler._
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs
-import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftFileUtils
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import net.minecraft.nbt.{CompressedStreamTools, NBTTagCompound}
 import net.minecraft.world.World

@@ -23,7 +23,7 @@ package com.itszuvalex.femtocraft.core.tiles
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.core.Saveable
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs
-import com.itszuvalex.femtocraft.utils.{FemtocraftDataUtils, FemtocraftUtils}
+import com.itszuvalex.femtocraft.api.utils.{FemtocraftDataUtils, FemtocraftUtils}
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity

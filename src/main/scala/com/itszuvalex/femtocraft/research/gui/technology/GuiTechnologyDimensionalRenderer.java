@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.research.gui.technology;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.api.DimensionalRecipe;
+import com.itszuvalex.femtocraft.api.industry.DimensionalRecipe;
 import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
@@ -57,8 +57,8 @@ public class GuiTechnologyDimensionalRenderer implements ITechnologyElementRende
 
     @Override
     public int getHeight() {
-        return Math.max(recipe == null ? 0 : recipe.techLevel == EnumTechLevel.NANO ?
-                18 * 3 + 2 : recipe.techLevel == EnumTechLevel.FEMTO ? 18 * 4 + 2 : 0,
+        return Math.max(recipe == null ? 0 : recipe.techLevel() == EnumTechLevel.NANO ?
+                18 * 3 + 2 : recipe.techLevel() == EnumTechLevel.FEMTO ? 18 * 4 + 2 : 0,
                 Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT *
                 Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(text, getWidth()).size());
     }

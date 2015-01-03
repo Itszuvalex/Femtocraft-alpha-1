@@ -26,7 +26,7 @@ import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.VolatilityEvent;
-import com.itszuvalex.femtocraft.power.plasma.FemtocraftPlasmaUtils;
+import com.itszuvalex.femtocraft.power.plasma.FemtocraftPlasmaManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -52,8 +52,8 @@ public class VolatilityEventMagneticFluctuation extends
 
     @Override
     public void interact(IFusionReactorCore core, World world, int x, int y, int z) {
-        double radius = volatilityLevel / volatilityToRadiusDividend * coreMultiplier;
-        double force = volatilityEnergy / volatilityEnergyToVelocityDividend
+        double radius = volatilityLevel() / volatilityToRadiusDividend * coreMultiplier;
+        double force = volatilityEnergy() / volatilityEnergyToVelocityDividend
                        * coreMultiplier;
 
         scrambleEntities(world, x, y, z, radius, force);
@@ -66,22 +66,22 @@ public class VolatilityEventMagneticFluctuation extends
 
     @Override
     public void interact(IPlasmaContainer container, World world, int x, int y, int z) {
-        double radius = volatilityLevel / volatilityToRadiusDividend;
-        double force = volatilityEnergy / volatilityEnergyToVelocityDividend;
+        double radius = volatilityLevel() / volatilityToRadiusDividend;
+        double force = volatilityEnergy() / volatilityEnergyToVelocityDividend;
 
         scrambleEntities(world, x, y, z, radius, force);
     }
 
     @Override
     public void interact(IPlasmaFlow flow, World world, int x, int y, int z) {
-        int volatilityDif = volatilityLevel - flow.getVolatility();
+        int volatilityDif = volatilityLevel() - flow.getVolatility();
         //If this flow is more volatile than that flow
         if (volatilityDif > 0) {
             //% chance of the time, where % is volatilityEnergy/flow's
             // energy, make that flow unstable.
             if (
-                    random.nextInt((int) (flow.getTemperature() * FemtocraftPlasmaUtils
-                            .temperatureToEnergy)) < volatilityEnergy) {
+                    random.nextInt((int) (flow.getTemperature() * FemtocraftPlasmaManager
+                            .temperatureToEnergy())) < volatilityEnergy()) {
                 flow.setUnstable(true);
             }
         }

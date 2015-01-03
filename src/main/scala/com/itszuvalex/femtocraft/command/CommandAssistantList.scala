@@ -21,7 +21,7 @@
 package com.itszuvalex.femtocraft.command
 
 import com.itszuvalex.femtocraft.Femtocraft
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import net.minecraft.command.ICommandSender
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumChatFormatting
@@ -46,7 +46,7 @@ class CommandAssistantList extends CommandBase("list", null) {
           str.append("None.")
         }
         else {
-          for (assistant <- assist.keySet) {
+          for (assistant <- assist) {
             str.append(assistant).append("\n")
           }
         }

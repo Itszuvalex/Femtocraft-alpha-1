@@ -12,15 +12,13 @@ import scala.beans.BeanProperty
 object EventSpatialRelocation {
 
   @Cancelable
-  class Pickup(@BeanProperty val world: World, @BeanProperty val x: Int, @BeanProperty val y: Int,
-               @BeanProperty val z: Int)
-    extends Event with EventSpatialRelocation
+  class Pickup(world: World, x: Int, y: Int, z: Int) extends EventSpatialRelocation(world, x, y, z)
 
   @Cancelable
-  class Placement(@BeanProperty val world: World, @BeanProperty val x: Int, @BeanProperty val y: Int,
-                  @BeanProperty val z: Int, @BeanProperty val block: Block)
-    extends Event with EventSpatialRelocation
+  class Placement(world: World, x: Int, y: Int, z: Int, @BeanProperty val block: Block)
+    extends EventSpatialRelocation(world, x, y, z)
 
 }
 
-trait EventSpatialRelocation
+@Cancelable abstract class EventSpatialRelocation(@BeanProperty val world: World, @BeanProperty val x: Int,
+                                                  @BeanProperty val y: Int, @BeanProperty val z: Int) extends Event

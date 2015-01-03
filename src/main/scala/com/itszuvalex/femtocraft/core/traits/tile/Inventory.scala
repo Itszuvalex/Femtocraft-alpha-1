@@ -2,7 +2,7 @@ package com.itszuvalex.femtocraft.core.traits.tile
 
 import com.itszuvalex.femtocraft.api.core.Saveable
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
-import com.itszuvalex.femtocraft.utils.BaseInventory
+import com.itszuvalex.femtocraft.api.utils.BaseInventory
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.ISidedInventory
 import net.minecraft.item.ItemStack

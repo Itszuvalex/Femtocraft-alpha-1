@@ -26,7 +26,7 @@ import com.itszuvalex.femtocraft.power.containers.ContainerDecontaminationChambe
 import com.itszuvalex.femtocraft.power.gui.GuiDecontaminationChamber._
 import com.itszuvalex.femtocraft.power.tiles.TileEntityDecontaminationChamber
 import com.itszuvalex.femtocraft.render.RenderUtils
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import net.minecraft.client.Minecraft
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fluids.{FluidRegistry, FluidStack, IFluidTank}

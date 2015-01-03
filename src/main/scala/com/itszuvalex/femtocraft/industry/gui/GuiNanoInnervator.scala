@@ -24,7 +24,7 @@ import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.core.gui.GuiBase
 import com.itszuvalex.femtocraft.industry.containers.ContainerNanoInnervator
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityNanoInnervator
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.{EntityPlayer, InventoryPlayer}

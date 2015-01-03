@@ -26,7 +26,7 @@ import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.VolatilityEvent;
-import com.itszuvalex.femtocraft.power.plasma.FemtocraftPlasmaUtils;
+import com.itszuvalex.femtocraft.power.plasma.FemtocraftPlasmaManager;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -47,9 +47,9 @@ public class VolatilityEventPlasmaLeak extends VolatilityEvent {
 
     @Override
     public void interact(IFusionReactorCore core, World world, int x, int y, int z) {
-        core.removeFlow(creator);
-        FemtocraftPlasmaUtils.extractFlowsAndPurge(core, volatilityEnergy,
-                volatilityLevel,
+        core.removeFlow(triggeringFlow());
+        FemtocraftPlasmaManager.extractFlowsAndPurge(core, volatilityEnergy(),
+                volatilityLevel(),
                 energyToSegmentsDividend,
                 plasmaDuration,
                 world, x, y, z);
@@ -57,9 +57,9 @@ public class VolatilityEventPlasmaLeak extends VolatilityEvent {
 
     @Override
     public void interact(IFusionReactorComponent component, World world, int x, int y, int z) {
-        component.removeFlow(creator);
-        FemtocraftPlasmaUtils.extractFlowsAndPurge(component, volatilityEnergy,
-                volatilityLevel,
+        component.removeFlow(triggeringFlow());
+        FemtocraftPlasmaManager.extractFlowsAndPurge(component, volatilityEnergy(),
+                volatilityLevel(),
                 energyToSegmentsDividend,
                 plasmaDuration,
                 world, x, y, z);
@@ -67,9 +67,9 @@ public class VolatilityEventPlasmaLeak extends VolatilityEvent {
 
     @Override
     public void interact(IPlasmaContainer container, World world, int x, int y, int z) {
-        container.removeFlow(creator);
-        FemtocraftPlasmaUtils.extractFlowsAndPurge(container, volatilityEnergy,
-                volatilityLevel,
+        container.removeFlow(triggeringFlow());
+        FemtocraftPlasmaManager.extractFlowsAndPurge(container, volatilityEnergy(),
+                volatilityLevel(),
                 energyToSegmentsDividend,
                 plasmaDuration,
                 world, x, y, z);

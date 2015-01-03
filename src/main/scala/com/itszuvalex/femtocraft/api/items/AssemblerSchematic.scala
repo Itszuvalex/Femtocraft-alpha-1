@@ -3,10 +3,10 @@ package com.itszuvalex.femtocraft.api.items
 import java.util
 import java.util.Random
 
-import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.api.FemtocraftAPI
 import com.itszuvalex.femtocraft.api.industry.AssemblerRecipe
 import com.itszuvalex.femtocraft.api.items.IAssemblerSchematic._
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
@@ -84,7 +84,7 @@ trait AssemblerSchematic extends IAssemblerSchematic {
                 recipe.mass + EnumChatFormatting.RESET)
     tooltip.add(EnumChatFormatting.YELLOW + "TechLevel:" + recipe.enumTechLevel.getTooltipEnum + " "
                 + FemtocraftUtils.capitalize(recipe.enumTechLevel.key) + EnumChatFormatting.RESET)
-    val tech = Femtocraft.researchManager.getTechnology(recipe.tech)
+    val tech = FemtocraftAPI.getResearchManager.getTechnology(recipe.tech)
     val (formatting, techString) = if (tech == null) {
       (EnumChatFormatting.BLACK, "none")
     } else {

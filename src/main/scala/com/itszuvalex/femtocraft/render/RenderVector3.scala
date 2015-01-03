@@ -21,7 +21,7 @@
 package com.itszuvalex.femtocraft.render
 
 import com.itszuvalex.femtocraft.api.core.{ISaveable, Saveable}
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftDataUtils
 import net.minecraft.nbt.NBTTagCompound
 
 /**

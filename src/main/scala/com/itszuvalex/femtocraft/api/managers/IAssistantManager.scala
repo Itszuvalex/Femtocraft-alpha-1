@@ -2,8 +2,6 @@ package com.itszuvalex.femtocraft.api.managers
 
 import java.util
 
-import com.itszuvalex.femtocraft.managers.assistant.AssistantPermissions
-
 /**
  * Created by Chris on 1/2/2015.
  */
@@ -22,7 +20,7 @@ trait IAssistantManager {
    * @param owner
    * @return A map of assistant getCommandSenderName s to IAssistantPermissions
    */
-  def getPlayerAssistants(owner: String): util.Map[String, AssistantPermissions]
+  def getPlayerAssistants(owner: String): util.Collection[String]
 
   /**
    *

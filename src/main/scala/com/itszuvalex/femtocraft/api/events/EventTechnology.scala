@@ -15,7 +15,7 @@ object EventTechnology {
    * @param tech Technology being added to the list of all technologies.
    */
   @Cancelable
-  class Added(@BeanProperty val tech: ITechnology) extends Event with EventTechnology
+  class Added(tech: ITechnology) extends EventTechnology(tech)
 
   /**
    * Called whenever a player will discover a new technology.  Cancel to prevent him discovering it.  This will prevent it from
@@ -25,8 +25,7 @@ object EventTechnology {
    * @param tech Technology that the player will discover.
    */
   @Cancelable
-  class Discovered(@BeanProperty val username: String, @BeanProperty val tech: ITechnology)
-    extends Event with EventTechnology
+  class Discovered(@BeanProperty val username: String, tech: ITechnology) extends EventTechnology(tech)
 
   /**
    * Called whenever a player will research a new technology.  Cancel to prevent him from researching it.  In most cases, the
@@ -36,9 +35,8 @@ object EventTechnology {
    * @param tech Technology that the player will research.
    */
   @Cancelable
-  class Researched(@BeanProperty val username: String, @BeanProperty val tech: ITechnology)
-    extends Event with EventTechnology
+  class Researched(@BeanProperty val username: String, tech: ITechnology) extends EventTechnology(tech)
 
 }
 
-trait EventTechnology
+@Cancelable abstract class EventTechnology(@BeanProperty val tech: ITechnology) extends Event

@@ -3,7 +3,8 @@ package com.itszuvalex.femtocraft
 import java.io.File
 import java.util.UUID
 
-import com.itszuvalex.femtocraft.api.{FemtocraftAPI, EnumTechLevel}
+import com.itszuvalex.femtocraft.api.EnumTechLevel
+import com.itszuvalex.femtocraft.api.utils.FemtocraftFileUtils
 import com.itszuvalex.femtocraft.blocks.{BlockFemtoStone, BlockMicroStone, BlockNanoStone, BlockUnidentifiedAlloy}
 import com.itszuvalex.femtocraft.command.{CommandBase, CommandFemtocraft}
 import com.itszuvalex.femtocraft.configuration.{AutoGenConfig, FemtocraftAssemblerConfig, FemtocraftConfigs}
@@ -22,7 +23,7 @@ import com.itszuvalex.femtocraft.power.FemtocraftPowerAlgorithm
 import com.itszuvalex.femtocraft.power.blocks._
 import com.itszuvalex.femtocraft.power.fluids.{FluidCooledContaminatedMoltenSalt, FluidCooledMoltenSalt, FluidMoltenSalt}
 import com.itszuvalex.femtocraft.power.items.{ItemBlockMicroCube, ItemInhibitionCore, ItemNucleationCore}
-import com.itszuvalex.femtocraft.power.plasma.BlockPlasma
+import com.itszuvalex.femtocraft.power.plasma.{BlockPlasma, FemtocraftPlasmaManager}
 import com.itszuvalex.femtocraft.proxy.{ProxyCommon, ProxyGuiCommon}
 import com.itszuvalex.femtocraft.research.blocks.{BlockResearchComputer, BlockResearchConsole}
 import com.itszuvalex.femtocraft.research.items.{ItemFemtoTechnology, ItemMicroTechnology, ItemNanoTechnology, ItemPortableResearchComputer}
@@ -31,7 +32,6 @@ import com.itszuvalex.femtocraft.transport.items.blocks.BlockVacuumTube
 import com.itszuvalex.femtocraft.transport.liquids.blocks.BlockSuctionPipe
 import com.itszuvalex.femtocraft.utility.blocks.BlockSpatialAlternator
 import com.itszuvalex.femtocraft.utility.items.ItemPocketPocket
-import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils
 import com.mojang.authlib.GameProfile
 import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent, FMLServerStartingEvent}
@@ -55,12 +55,12 @@ import org.apache.logging.log4j.{Level, LogManager, Logger}
  */
 @Mod(modid = Femtocraft.ID, name = "Femtocraft", version = Femtocraft.VERSION, modLanguage = "scala")
 object Femtocraft {
-
+  
   final val ID                   = "Femtocraft"
   final val VERSION              = "0.1.0"
   final val TECH_CONFIG_APPEND   = "Technology"
   final val RECIPE_CONFIG_APPEND = "AssemblerRecipes"
-
+  
   //  /* Packet Channels */
   //  final val GUI_CHANNEL               = ID + ".gui"
   //  final val SOUND_CHANNEL             = ID + ".snd"
@@ -89,6 +89,7 @@ object Femtocraft {
   var researchManager                                                   = ManagerResearch
   var assistantManager                                                  = ManagerAssistant
   var powerAlgorithm                                                    = FemtocraftPowerAlgorithm
+  var plasmaManager                                                     = FemtocraftPlasmaManager
   var soundManager                          : FemtocraftSoundManager    = null
   var femtocraftServerCommand               : CommandBase               = new CommandFemtocraft
   /*blocks*/
@@ -268,18 +269,18 @@ object Femtocraft {
   var itemSynthesizedFiber                  : Item                      = null
   var itemOrganometallicPlate               : Item                      = null
   var itemPocketPocket                      : Item                      = null
-
+  
   @EventHandler def preInit(event: FMLPreInitializationEvent) {
     AutoGenConfig.init(new Configuration(new File(FemtocraftFileUtils.configFolder, "AutoGenConfig.cfg")))
-
+    
     config = new Configuration(new File(FemtocraftFileUtils.configFolder, ID + ".cfg"))
     FemtocraftConfigs.load(config)
     technologyConfigFile = new File(FemtocraftFileUtils.autogenConfigPath, TECH_CONFIG_APPEND + ".xml")
     recipeConfigFile = new File(FemtocraftFileUtils.autogenConfigPath, RECIPE_CONFIG_APPEND + ".cfg")
     recipeConfig = new Configuration(recipeConfigFile)
-
+    
     FemtocraftPacketHandler.init()
-
+    
     proxy.registerTileEntities()
     proxy.registerRendering()
     proxy.registerBlockRenderers()
@@ -287,19 +288,19 @@ object Femtocraft {
     if (event.getSide == Side.CLIENT) {
       soundManager = new FemtocraftSoundManager
     }
-
+    
     //Event Handlers
     NetworkRegistry.INSTANCE.registerGuiHandler(this, guiProxy)
     FMLCommonHandler.instance().bus().register(new FemtocraftPlayerTracker)
     MinecraftForge.EVENT_BUS.register(new FemtocraftEventHookContainer)
     MinecraftForge.EVENT_BUS.register(new FemtocraftOreRetrogenHandler)
-
+    
     //World Generation
-
+    
     if (FemtocraftConfigs.worldGen) {
       GameRegistry.registerWorldGenerator(new FemtocraftOreGenerator, FemtocraftConfigs.GENERATION_WEIGHT)
     }
-
+    
     blockOreTitanium = registerBlock(new BlockOreTitanium(), "BlockOreTitanium", { block: Block =>
       block.setHarvestLevel("pickaxe", 2)
       if (FemtocraftConfigs.registerTitaniumOreInOreDictionary) {
@@ -318,28 +319,28 @@ object Femtocraft {
         OreDictionary.registerOre("oreThorium", new ItemStack(block))
       }
     })
-
+    
     blockOreFarenite = registerBlock(new BlockOreFarenite(), "BlockOreFarenite", { block: Block =>
       block.setHarvestLevel("pickaxe", 2)
       if (FemtocraftConfigs.registerFareniteOreInOreDictionary) {
         OreDictionary.registerOre("oreFarenite", new ItemStack(block))
       }
     })
-
+    
     blockOreMalenite = registerBlock(new BlockOreMalenite(), "BlockOreMalenite", { block: Block =>
       block.setHarvestLevel("pickaxe", 3)
       if (FemtocraftConfigs.registerMaleniteOreInOreDictionary) {
         OreDictionary.registerOre("oreMalenite", new ItemStack(block))
       }
     })
-
+    
     blockOreLodestone = registerBlock(new BlockOreLodestone(), "BlockOreLodestone", { block: Block =>
       block.setHarvestLevel("pickaxe", 2)
       if (FemtocraftConfigs.registerLodestoneOreInOreDictionary) {
         OreDictionary.registerOre("oreLodestone", new ItemStack(block))
       }
     })
-
+    
     nanoStone = registerBlock(new BlockNanoStone, "BlockNanoStone")
     microStone = registerBlock(new BlockMicroStone, "BlockMicroStone")
     femtoStone = registerBlock(new BlockFemtoStone, "BlockFemtoStone")
@@ -419,27 +420,27 @@ object Femtocraft {
     blockFluidCooledContaminatedMoltenSalt = registerBlock(new BlockFluidCooledContaminatedMoltenSalt,
                                                            "BlockFluidCooledContaminatedMoltenSalt")
     blockPlasma = registerBlock(new BlockPlasma(), "BlockPlasma")
-
+    
     blockSpatialAlternator = registerBlock(new BlockSpatialAlternator(), "BlockSpatialAlternator")
-
+    
     itemIngotTitanium = registerBaseItem("ItemIngotTitanium", { item: Item =>
       if (FemtocraftConfigs.registerTitaniumIngotInOreDictionary) {
         OreDictionary.registerOre("ingotTitanium", new ItemStack(item))
       }
     })
-
+    
     itemIngotPlatinum = registerBaseItem("ItemIngotPlatinum", { item: Item =>
       if (FemtocraftConfigs.registerPlatinumIngotInOreDictionary) {
         OreDictionary.registerOre("ingotPlatinum", new ItemStack(item))
       }
     })
-
+    
     itemIngotThorium = registerBaseItem("ItemIngotThorium", { item: Item =>
       if (FemtocraftConfigs.registerThoriumIngotInOreDictionary) {
         OreDictionary.registerOre("ingotThorium", new ItemStack(item))
       }
     })
-
+    
     itemDustFarenite = registerBaseItem("ItemDustFarenite", { item: Item =>
       OreDictionary.registerOre("dustFarenite", new ItemStack(item))
     })
@@ -574,12 +575,12 @@ object Femtocraft {
     ComponentRegistry.registerComponent(itemOrganometallicPlate, EnumTechLevel.MICRO)
     itemMicroPlating = registerBaseItem("ItemMicroPlating")
   }
-
+  
   private def registerBaseItem(unlocalizedName: String, fun: (ItemBase) => Unit = { a: Item =>}) = registerItem(new
                                                                                                                     ItemBase(unlocalizedName),
                                                                                                                 unlocalizedName,
                                                                                                                 fun)
-
+  
   private def registerItem[I1 <: Item](item: I1, name: String, fun: (I1) => Unit = { a: Item =>}): I1 = {
     if (true /*register item? */ ) {
       item.setUnlocalizedName(name)
@@ -588,7 +589,7 @@ object Femtocraft {
     }
     item
   }
-
+  
   private def registerBlock[B1 <: Block](block: B1, name: String, fun: (B1) => Unit = { b: Block =>}): B1 = {
     if (true /*register block? */ ) {
       block.setBlockName(name)
@@ -597,14 +598,14 @@ object Femtocraft {
     }
     block
   }
-
+  
   def log(level: Level, msg: String) = logger.log(level, msg)
-
+  
   def getFakePlayer(world: WorldServer) = FakePlayerFactory.get(world, fakePlayerGameProfile)
-
+  
   @EventHandler def load(event: FMLInitializationEvent) {
   }
-
+  
   @EventHandler def postInit(event: FMLPostInitializationEvent) {
     assemblerConfigs = new FemtocraftAssemblerConfig(recipeConfig)
     recipeManager.init()
@@ -614,7 +615,7 @@ object Femtocraft {
       researchManager.calculateGraph()
     }
   }
-
+  
   @EventHandler def serverLoad(event: FMLServerStartingEvent) {
     event.registerServerCommand(femtocraftServerCommand)
   }

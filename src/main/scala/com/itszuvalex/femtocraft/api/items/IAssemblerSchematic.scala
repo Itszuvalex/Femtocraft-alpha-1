@@ -8,6 +8,9 @@ import net.minecraft.util.IIcon
 
 @Configurable object IAssemblerSchematic {
   val INFINITE_USE_DAMAGE      : Int   = -1
+  /**
+   * Set to the correct value by Femtocraft as it loads.
+   */
   var placeholderIcon          : IIcon = null
   @Configurable(comment = "How many uses does an infinite use schematic count for when calculating mass costs? " + "(This is a float to allow finer tuning - it will be cast to integer where it matters.")
   var infiniteUseMassMultiplier: Float = 200

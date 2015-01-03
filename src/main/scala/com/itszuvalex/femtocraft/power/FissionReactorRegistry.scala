@@ -1,7 +1,7 @@
 package com.itszuvalex.femtocraft.power
 
 import com.itszuvalex.femtocraft.Femtocraft
-import com.itszuvalex.femtocraft.implicits.IDImplicits._
+import com.itszuvalex.femtocraft.api.implicits.IDImplicits._
 import net.minecraft.init.{Blocks, Items}
 import net.minecraft.item.ItemStack
 

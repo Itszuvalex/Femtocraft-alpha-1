@@ -6,8 +6,8 @@ import java.util
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.core.Configurable
 import com.itszuvalex.femtocraft.configuration.{AutoGenConfig, MagnetismXMLLoader, XMLMagnetismMappings}
-import com.itszuvalex.femtocraft.implicits.IDImplicits._
-import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils
+import com.itszuvalex.femtocraft.api.implicits.IDImplicits._
+import com.itszuvalex.femtocraft.api.utils.FemtocraftFileUtils
 import net.minecraft.block.Block
 import net.minecraft.init.{Blocks, Items}
 import net.minecraft.item.{Item, ItemStack}

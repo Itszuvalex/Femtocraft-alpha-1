@@ -1,8 +1,7 @@
 package com.itszuvalex.femtocraft.configuration
 
 import java.io.File
-
-import com.itszuvalex.femtocraft.api.TemporalRecipe
+import com.itszuvalex.femtocraft.api.industry.TemporalRecipe
 import com.itszuvalex.femtocraft.configuration.XMLSerializable._
 
 import scala.collection.mutable.ArrayBuffer

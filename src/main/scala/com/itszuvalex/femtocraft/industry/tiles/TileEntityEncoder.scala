@@ -32,7 +32,7 @@ import com.itszuvalex.femtocraft.core.traits.tile.{Inventory, MassTank}
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityEncoder._
 import com.itszuvalex.femtocraft.industry.traits.IndustryBehavior
 import com.itszuvalex.femtocraft.power.traits.PowerConsumer
-import com.itszuvalex.femtocraft.utils.BaseInventory
+import com.itszuvalex.femtocraft.api.utils.BaseInventory
 import com.itszuvalex.femtocraft.{Femtocraft, FemtocraftGuiConstants}
 import net.minecraft.item.ItemStack
 import net.minecraftforge.fluids._

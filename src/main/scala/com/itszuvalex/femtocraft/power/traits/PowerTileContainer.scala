@@ -84,7 +84,7 @@ trait PowerTileContainer extends TileEntityBase with IPowerTileContainer {
     setModified()
   }
 
-  override def canAcceptPowerOfLevel(level: EnumTechLevel, from: ForgeDirection) = container.getTechLevel equals level
+  override def canAcceptPowerOfLevel(level: EnumTechLevel, from: ForgeDirection) = container.getTechLevel == level
 
   override def consume(amount: Int) = {
     setModified()

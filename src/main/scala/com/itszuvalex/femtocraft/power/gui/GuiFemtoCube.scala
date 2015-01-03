@@ -24,7 +24,7 @@ import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.core.gui.GuiBase
 import com.itszuvalex.femtocraft.power.containers.ContainerFemtoCube
 import com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoCubePort
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import net.minecraft.client.Minecraft
 import net.minecraft.util.ResourceLocation
 import org.lwjgl.opengl.GL11

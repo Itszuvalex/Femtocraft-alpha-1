@@ -25,7 +25,7 @@ import com.itszuvalex.femtocraft.core.gui.GuiBase
 import com.itszuvalex.femtocraft.industry.containers.ContainerFemtoChronoshifter
 import com.itszuvalex.femtocraft.industry.gui.GuiFemtoChronoshifter._
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityFemtoChronoshifter
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.{EntityPlayer, InventoryPlayer}
 import net.minecraft.util.{ResourceLocation, StatCollector}

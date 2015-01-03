@@ -27,7 +27,7 @@ import com.itszuvalex.femtocraft.industry.containers.ContainerFemtoCoagulator
 import com.itszuvalex.femtocraft.industry.gui.GuiFemtoCoagulator._
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityFemtoCoagulator
 import com.itszuvalex.femtocraft.render.RenderUtils
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.{EntityPlayer, InventoryPlayer}

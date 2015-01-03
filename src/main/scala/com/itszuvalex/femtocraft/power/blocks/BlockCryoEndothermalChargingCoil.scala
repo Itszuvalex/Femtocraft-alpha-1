@@ -21,7 +21,7 @@
 package com.itszuvalex.femtocraft.power.blocks
 
 import com.itszuvalex.femtocraft.Femtocraft
-import com.itszuvalex.femtocraft.api.power.{ICryoEndothermalChargingBase, ICryoEndothermalChargingAddon}
+import com.itszuvalex.femtocraft.api.power.{ICryoEndothermalChargingAddon, ICryoEndothermalChargingBase}
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
 import com.itszuvalex.femtocraft.power.tiles.TileEntityCryoEndothermalChargingCoil
 import com.itszuvalex.femtocraft.proxy.ProxyClient
@@ -44,8 +44,13 @@ class BlockCryoEndothermalChargingCoil extends TileContainer(Material.iron) {
   setBlockBounds(4f / 16f, 0, 4f / 16f, 12f / 16f, 1, 12f / 16f)
 
   @SideOnly(Side.CLIENT) override def registerBlockIcons(par1IconRegister: IIconRegister) {
-    blockIcon = {coilConnector = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "BlockCryoEndothermalChargingCoil_connector"); coilConnector}
-    coilConnectorTop = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "BlockCryoEndothermalChargingCoil_connector_top")
+    blockIcon = {coilConnector = par1IconRegister
+                                 .registerIcon(Femtocraft
+                                               .ID
+                                               .toLowerCase + ":" + "BlockCryoEndothermalChargingCoil_connector"); coilConnector
+    }
+    coilConnectorTop = par1IconRegister
+                       .registerIcon(Femtocraft.ID.toLowerCase + ":" + "BlockCryoEndothermalChargingCoil_connector_top")
   }
 
   override def renderAsNormalBlock = false
@@ -65,19 +70,22 @@ class BlockCryoEndothermalChargingCoil extends TileContainer(Material.iron) {
     }
   }
 
+  override def canPlaceBlockAt(par1World: World, par2: Int, par3: Int, par4: Int) = canBlockStay(par1World,
+                                                                                                 par2,
+                                                                                                 par3,
+                                                                                                 par4)
+
   override def canBlockStay(world: World, x: Int, y: Int, z: Int): Boolean = {
-    val block = world.getBlock(x, y , z)
+    val block = world.getBlock(x, y, z)
 
     for (height <- y + 1 until 256) {
-       world.getTileEntity(x, height, z) match {
-         case addon: ICryoEndothermalChargingAddon =>
-         case base: ICryoEndothermalChargingBase if base.maximumDepthSupported() >= (height - y) => return true
-         case _ => return false
-       }
+      world.getTileEntity(x, height, z) match {
+        case addon: ICryoEndothermalChargingAddon                                             =>
+        case base: ICryoEndothermalChargingBase if base.maximumDepthSupported >= (height - y) => return true
+        case _                                                                                => return false
+      }
     }
 
     true
   }
-
-  override def canPlaceBlockAt(par1World: World, par2: Int, par3: Int, par4: Int) = canBlockStay(par1World, par2, par3, par4)
 }

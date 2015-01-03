@@ -27,10 +27,10 @@ import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.api.core.{Configurable, RecipeType}
 import com.itszuvalex.femtocraft.api.research.ITechnology
-import com.itszuvalex.femtocraft.implicits.ItemStackImplicits._
+import com.itszuvalex.femtocraft.api.implicits.ItemStackImplicits._
 import com.itszuvalex.femtocraft.research.gui.GuiResearch
 import com.itszuvalex.femtocraft.research.gui.technology.{GuiTechnology, GuiTechnologyDefault}
-import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftStringUtils
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.item.ItemStack
 import org.apache.logging.log4j.Level

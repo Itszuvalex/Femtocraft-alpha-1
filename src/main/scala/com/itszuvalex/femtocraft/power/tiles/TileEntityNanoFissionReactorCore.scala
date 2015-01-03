@@ -28,7 +28,7 @@ import com.itszuvalex.femtocraft.network.messages.MessageFissionReactorCore
 import com.itszuvalex.femtocraft.power.FissionReactorRegistry
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockNanoFissionReactor
 import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoFissionReactorCore._
-import com.itszuvalex.femtocraft.utils.BaseInventory
+import com.itszuvalex.femtocraft.api.utils.BaseInventory
 import com.itszuvalex.femtocraft.{Femtocraft, FemtocraftGuiConstants}
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack

@@ -26,7 +26,7 @@ import com.itszuvalex.femtocraft.power.containers.ContainerPhlegethonTunnel
 import com.itszuvalex.femtocraft.power.gui.GuiPhlegethonTunnel._
 import com.itszuvalex.femtocraft.power.tiles.TileEntityPhlegethonTunnelCore
 import com.itszuvalex.femtocraft.sound.FemtocraftSoundUtils
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.{EntityPlayer, InventoryPlayer}
 import net.minecraft.util.{EnumChatFormatting, ResourceLocation, StatCollector}

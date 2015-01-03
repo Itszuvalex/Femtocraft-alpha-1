@@ -26,7 +26,7 @@ import java.util.ArrayList
 import com.itszuvalex.femtocraft.api.core.{ISaveable, Saveable}
 import com.itszuvalex.femtocraft.api.power.plasma._
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.IVolatilityEvent
-import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftDataUtils
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.world.World
 import net.minecraftforge.common.util.ForgeDirection
@@ -67,7 +67,7 @@ class FusionReactorCore(maxContainedFlows: Int, stability: Int, temperatureRatin
 
   def getReactionInstability = reaction.getReactionInstability
 
-  def getReactionTemperature = (reaction.getReactionEnergy * FemtocraftPlasmaUtils.energyToTemperature).toLong
+  def getReactionTemperature = (reaction.getReactionEnergy * FemtocraftPlasmaManager.energyToTemperature).toLong
 
   def getCoreEnergy = reaction.getReactionEnergy
 

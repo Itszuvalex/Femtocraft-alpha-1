@@ -31,7 +31,7 @@ import com.itszuvalex.femtocraft.api.research.ITechnology
 import com.itszuvalex.femtocraft.configuration.{AutoGenConfig, TechnologyXMLLoader, XMLTechnology}
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
 import com.itszuvalex.femtocraft.research.gui.graph.{TechNode, TechnologyGraph}
-import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftFileUtils
 import net.minecraft.nbt.{CompressedStreamTools, NBTTagCompound, NBTTagList}
 import net.minecraft.world.World
 import net.minecraftforge.common.MinecraftForge

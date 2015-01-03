@@ -2,7 +2,7 @@ package com.itszuvalex.femtocraft.api
 
 
 import com.itszuvalex.femtocraft.api.managers.research.IResearchManager
-import com.itszuvalex.femtocraft.api.managers.{IAssistantManager, IPowerAlgorithm}
+import com.itszuvalex.femtocraft.api.managers.{IAssistantManager, IPlasmaManager, IPowerAlgorithm}
 import org.apache.logging.log4j.{Level, LogManager}
 
 /**
@@ -16,12 +16,15 @@ object FemtocraftAPI {
   private lazy val powerAlgorithm   = getFemtocraftField[IPowerAlgorithm](powerAlgorithmGetter)
   private lazy val researchManager  = getFemtocraftField[IResearchManager](researchManagerGetter)
   private lazy val assistantManager = getFemtocraftField[IAssistantManager](assistantManagerGetter)
+  private lazy val plasmaManager    = getFemtocraftField[IPlasmaManager](plasmaManagerGetter)
   private lazy val femtocraft       = attemptHookFemtocraft()
-  val apiLogger   = LogManager.getLogger("FemtocraftAPI")
-  val femtoLogger = LogManager.getLogger("Femtocraft")
+  val FemtocraftID = "Femtocraft"
+  val apiLogger    = LogManager.getLogger(FemtocraftID + "API")
+  val femtoLogger  = LogManager.getLogger(FemtocraftID)
   private val powerAlgorithmGetter   = "powerAlgorithm"
   private val researchManagerGetter  = "researchManager"
   private val assistantManagerGetter = "assistantManager"
+  private val plasmaManagerGetter    = "plasmaManager"
   private val femtocraftClasspath    = "com.itszuvalex.femtocraft.Femtocraft"
 
   /**
@@ -46,6 +49,13 @@ object FemtocraftAPI {
   catch {case _: Throwable => apiLogger.log(Level.ERROR, "Failed to hook Femtocraft Assistant Manager"); null}
 
   /**
+   *
+   * @return AssistantManager singleton responsbie for storing, saving, and loading assistant information for all players.
+   */
+  def getPlasmaManager = try plasmaManager
+  catch {case _: Throwable => apiLogger.log(Level.ERROR, "Failed to hook Femtocraft Plasma Manager"); null}
+
+  /**
    * Tell the API to attempt to search for Femtocraft now.  Otherwise, will attempt to hook classes as they're needed.
    *
    * @return True if hooking successful, false otherwise.
@@ -57,6 +67,7 @@ object FemtocraftAPI {
       researchManager
       powerAlgorithm
       assistantManager
+      plasmaManager
       apiLogger.log(Level.INFO, "Successfully hooked Femtocraft!")
       true
     }

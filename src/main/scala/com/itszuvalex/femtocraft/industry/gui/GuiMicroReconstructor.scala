@@ -26,7 +26,7 @@ import com.itszuvalex.femtocraft.industry.containers.ContainerMicroReconstructor
 import com.itszuvalex.femtocraft.industry.gui.GuiMicroReconstructor._
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor
 import com.itszuvalex.femtocraft.render.RenderUtils
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.{EntityPlayer, InventoryPlayer}

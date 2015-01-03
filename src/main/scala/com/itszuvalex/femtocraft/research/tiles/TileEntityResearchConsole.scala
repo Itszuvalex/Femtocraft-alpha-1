@@ -26,7 +26,7 @@ import com.itszuvalex.femtocraft.api.items.ITechnologyCarrier
 import com.itszuvalex.femtocraft.api.research.ITechnology
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.core.traits.tile.Inventory
-import com.itszuvalex.femtocraft.utils.BaseInventory
+import com.itszuvalex.femtocraft.api.utils.BaseInventory
 import com.itszuvalex.femtocraft.{Femtocraft, FemtocraftGuiConstants}
 import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.nbt.NBTTagCompound

@@ -21,7 +21,7 @@
 
 package com.itszuvalex.femtocraft.managers.assembler;
 
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils;
 import net.minecraft.item.ItemStack;
 
 import java.util.Comparator;

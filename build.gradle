@@ -113,6 +113,7 @@ processResources
             // copy everything else, thats not the mcmod.info
             from(sourceSets.main.resources.srcDirs) {
                 exclude 'mcmod.info'
+                exclude 'api-readme.txt'
             }
         }
 
@@ -127,11 +128,13 @@ task apiJar(type: org.gradle.api.tasks.bundling.Jar) {
     from(sourceSets.main.output) {
         include 'com/itszuvalex/femtocraft/api/**'
     }
+    from(sourceSets.main.resources.srcDirs) {
+        include 'api-readme.txt'
+    }
 }
 
 task apiScalaDoc(type:  org.gradle.api.tasks.scala.ScalaDoc) {
-    include 'com/itszuvalex/femtocraft/api/**'
-    exclude '**.java'
+    include 'com/itszuvalex/femtocraft/api/**.scala'
 }
 
 task jarApiScalaDoc(type:  org.gradle.api.tasks.bundling.Jar) {

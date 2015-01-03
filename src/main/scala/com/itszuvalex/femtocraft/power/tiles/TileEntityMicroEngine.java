@@ -24,8 +24,8 @@
 //import com.itszuvalex.femtocraft.FemtocraftGuiHandler;
 //import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityIndustry;
 //import com.itszuvalex.femtocraft.api.EnumTechLevel;
-//import com.itszuvalex.femtocraft.utils.BaseInventory;
-//import com.itszuvalex.femtocraft.utils.FemtocraftDataUtils;
+//import com.itszuvalex.femtocraft.api.utils.BaseInventory;
+//import com.itszuvalex.femtocraft.api.utils.FemtocraftDataUtils;
 //import cpw.mods.fml.common.registry.GameRegistry;
 //import net.minecraft.entity.player.EntityPlayer;
 //import net.minecraft.inventory.ISidedInventory;

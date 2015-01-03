@@ -29,7 +29,7 @@ import com.itszuvalex.femtocraft.core.traits.tile.{Inventory, MassTank}
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityMicroDeconstructor._
 import com.itszuvalex.femtocraft.industry.traits.IndustryBehavior
 import com.itszuvalex.femtocraft.power.traits.PowerConsumer
-import com.itszuvalex.femtocraft.utils.{BaseInventory, FemtocraftUtils}
+import com.itszuvalex.femtocraft.api.utils.{BaseInventory, FemtocraftUtils}
 import com.itszuvalex.femtocraft.{Femtocraft, FemtocraftGuiConstants}
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.item.ItemStack

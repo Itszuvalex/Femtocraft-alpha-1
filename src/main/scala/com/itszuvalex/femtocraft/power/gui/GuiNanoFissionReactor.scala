@@ -27,7 +27,7 @@ import com.itszuvalex.femtocraft.power.gui.GuiNanoFissionReactor._
 import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoFissionReactorCore
 import com.itszuvalex.femtocraft.render.RenderUtils
 import com.itszuvalex.femtocraft.sound.FemtocraftSoundUtils
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.{EntityPlayer, InventoryPlayer}
 import net.minecraft.util.{IIcon, ResourceLocation, StatCollector}

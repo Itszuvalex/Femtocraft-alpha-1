@@ -4,7 +4,7 @@ import java.io.{ByteArrayInputStream, IOException}
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.player.PlayerProperties
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import cpw.mods.fml.common.network.simpleimpl.{IMessage, IMessageHandler, MessageContext}
 import io.netty.buffer.ByteBuf
 import net.minecraft.nbt.{CompressedStreamTools, NBTTagCompound}

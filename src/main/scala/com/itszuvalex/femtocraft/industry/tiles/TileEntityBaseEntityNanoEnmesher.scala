@@ -22,15 +22,16 @@ package com.itszuvalex.femtocraft.industry.tiles
 
 import java.util
 
+import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.api.core.{Configurable, Saveable}
+import com.itszuvalex.femtocraft.api.industry.DimensionalRecipe
 import com.itszuvalex.femtocraft.api.power.PowerContainer
-import com.itszuvalex.femtocraft.api.{DimensionalRecipe, EnumTechLevel}
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.core.traits.tile.Inventory
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityNanoEnmesher._
 import com.itszuvalex.femtocraft.industry.traits.IndustryBehavior
 import com.itszuvalex.femtocraft.power.traits.PowerConsumer
-import com.itszuvalex.femtocraft.utils.{BaseInventory, FemtocraftUtils}
+import com.itszuvalex.femtocraft.api.utils.{BaseInventory, FemtocraftUtils}
 import com.itszuvalex.femtocraft.{Femtocraft, FemtocraftGuiConstants}
 import net.minecraft.item.ItemStack
 import net.minecraftforge.common.util.ForgeDirection
@@ -51,7 +52,8 @@ import net.minecraftforge.common.util.ForgeDirection
   val TICKS_TO_COOK_MULTIPLIER = 1f
 }
 
-@Configurable class TileEntityBaseEntityNanoEnmesher extends TileEntityBase with IndustryBehavior with Inventory with PowerConsumer {
+@Configurable class TileEntityBaseEntityNanoEnmesher
+  extends TileEntityBase with IndustryBehavior with Inventory with PowerConsumer {
   @Saveable var meshConfigStacks: Array[ItemStack] = null
   @Saveable var meshStack       : ItemStack        = null
   @Saveable private var cookTime   : Int = 0
@@ -72,7 +74,12 @@ import net.minecraftforge.common.util.ForgeDirection
     (cookTime * i) / ticksToCook
   }
 
-  override def getAccessibleSlotsFromSide(var1: Int): Array[Int] = if (ForgeDirection.getOrientation(var1) eq ForgeDirection.UP) Array[Int](inputSlot) else Array[Int](getOutputSlotIndex)
+  override def getAccessibleSlotsFromSide(var1: Int): Array[Int] = if (ForgeDirection
+                                                                       .getOrientation(var1) eq ForgeDirection.UP) {
+    Array[Int](inputSlot)
+  } else {
+    Array[Int](getOutputSlotIndex)
+  }
 
   override def canInsertItem(i: Int, itemstack: ItemStack, j: Int) = i != getOutputSlotIndex
 
@@ -97,7 +104,10 @@ import net.minecraftforge.common.util.ForgeDirection
     if (getCurrentPower < getPowerToCook) {
       return false
     }
-    val dr = Femtocraft.recipeManager.dimensionalRecipes.getRecipe(inventory.getStackInSlot(inputSlot), getConfigurators)
+    val dr = Femtocraft
+             .recipeManager
+             .dimensionalRecipes
+             .getRecipe(inventory.getStackInSlot(inputSlot), getConfigurators)
     if (dr == null) {
       return false
     }
@@ -126,8 +136,15 @@ import net.minecraftforge.common.util.ForgeDirection
 
   override def isWorking = meshStack != null
 
+  protected def getPowerToCook = POWER_TO_COOK
+
+  protected def getConfigurators = util.Arrays.copyOfRange(inventory.getInventory, inputSlot + 1, getOutputSlotIndex)
+
   override protected def startWork() {
-    val dr: DimensionalRecipe = Femtocraft.recipeManager.dimensionalRecipes.getRecipe(inventory.getStackInSlot(inputSlot), getConfigurators)
+    val dr: DimensionalRecipe = Femtocraft
+                                .recipeManager
+                                .dimensionalRecipes
+                                .getRecipe(inventory.getStackInSlot(inputSlot), getConfigurators)
     meshStack = inventory.decrStackSize(inputSlot, dr.input.stackSize)
     val configurators: Array[ItemStack] = getConfigurators
     meshConfigStacks = new Array[ItemStack](configurators.length)
@@ -142,12 +159,6 @@ import net.minecraftforge.common.util.ForgeDirection
   }
 
   protected def getTickMultiplier = TICKS_TO_COOK_MULTIPLIER
-
-  protected def getPowerToCook = POWER_TO_COOK
-
-  protected def getConfigurators = util.Arrays.copyOfRange(inventory.getInventory, inputSlot + 1, getOutputSlotIndex)
-
-  protected def getOutputSlotIndex = outputSlot
 
   override protected def continueWork() {
     cookTime += 1
@@ -171,4 +182,6 @@ import net.minecraftforge.common.util.ForgeDirection
     meshStack = null
     meshConfigStacks = null
   }
+
+  protected def getOutputSlotIndex = outputSlot
 }

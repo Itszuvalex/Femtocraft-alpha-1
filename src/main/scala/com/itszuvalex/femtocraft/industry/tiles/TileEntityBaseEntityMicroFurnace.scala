@@ -30,7 +30,7 @@ import com.itszuvalex.femtocraft.industry.blocks.BlockMicroFurnace
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityMicroFurnace._
 import com.itszuvalex.femtocraft.industry.traits.IndustryBehavior
 import com.itszuvalex.femtocraft.power.traits.PowerConsumer
-import com.itszuvalex.femtocraft.utils._
+import com.itszuvalex.femtocraft.api.utils._
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.FurnaceRecipes

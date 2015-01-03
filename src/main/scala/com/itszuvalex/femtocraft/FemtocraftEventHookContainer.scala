@@ -27,7 +27,7 @@ import com.itszuvalex.femtocraft.core.traits.block.SpatialReactions
 import com.itszuvalex.femtocraft.gui.DisplaySlot
 import com.itszuvalex.femtocraft.managers.assembler.ComponentRegistry
 import com.itszuvalex.femtocraft.player.PlayerProperties
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.client.Minecraft

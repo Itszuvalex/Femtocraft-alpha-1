@@ -28,10 +28,10 @@ import com.itszuvalex.femtocraft.api.events.EventAssemblerRegister
 import com.itszuvalex.femtocraft.api.industry.{AssemblerRecipeType, AssemblerRecipe}
 import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.configuration.{AssemblerXMLLoader, AutoGenConfig, XMLAssemblerRecipes}
-import com.itszuvalex.femtocraft.implicits.IDImplicits._
+import com.itszuvalex.femtocraft.api.implicits.IDImplicits._
 import com.itszuvalex.femtocraft.managers.research.Technology
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
-import com.itszuvalex.femtocraft.utils.{FemtocraftFileUtils, FemtocraftUtils}
+import com.itszuvalex.femtocraft.api.utils.{FemtocraftFileUtils, FemtocraftUtils}
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.{CraftingManager, IRecipe, ShapedRecipes, ShapelessRecipes}
 import net.minecraftforge.common.MinecraftForge

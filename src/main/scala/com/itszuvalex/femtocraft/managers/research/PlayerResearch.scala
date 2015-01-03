@@ -31,7 +31,7 @@ import com.itszuvalex.femtocraft.api.research.ITechnology
 import com.itszuvalex.femtocraft.managers.research.PlayerResearch._
 import com.itszuvalex.femtocraft.network.FemtocraftPacketHandler
 import com.itszuvalex.femtocraft.network.messages.MessageResearchPlayer
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.nbt.{NBTTagCompound, NBTTagList}
 import net.minecraft.server.MinecraftServer

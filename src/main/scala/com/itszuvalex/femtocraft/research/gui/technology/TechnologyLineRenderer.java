@@ -21,7 +21,7 @@
 
 package com.itszuvalex.femtocraft.research.gui.technology;
 
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils;
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils;
 import net.minecraft.client.Minecraft;
 
 import java.util.List;

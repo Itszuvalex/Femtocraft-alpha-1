@@ -22,8 +22,8 @@ package com.itszuvalex.femtocraft.transport.items.tiles
 
 import com.itszuvalex.femtocraft.api.core.Saveable
 import com.itszuvalex.femtocraft.api.transport.IVacuumTube
+import com.itszuvalex.femtocraft.api.utils.{BaseInventory, FemtocraftUtils}
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
-import com.itszuvalex.femtocraft.utils.{BaseInventory, FemtocraftUtils}
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.inventory.{IInventory, ISidedInventory}
 import net.minecraft.item.ItemStack
@@ -66,49 +66,6 @@ class TileEntityVacuumTube extends TileEntityBase with IVacuumTube {
     parseConnectionMask(compound.getByte(TileEntityVacuumTube.CONNECTION_MASK_KEY))
   }
 
-  def parseConnectionMask(mask: Byte) {
-    val input: Int = mask & 7
-    val output: Int = (mask >> 4) & 7
-    inputDir = getOrientation(input)
-    outputDir = getOrientation(output)
-    val hasInput = ((mask >> 3) & 1) == 1
-    val hasOutput = ((mask >> 7) & 1) == 1
-    if (worldObj == null) {
-      return
-    }
-    val inputTile = worldObj
-                    .getTileEntity(xCoord + inputDir.offsetX, yCoord + inputDir.offsetY, zCoord + inputDir.offsetZ)
-    if (inputTile == null) {
-      if (hasInput) {
-        needsCheckInput = true
-      }
-    } else {
-      addInput(inputDir)
-    }
-    val outputTile = worldObj
-                     .getTileEntity(xCoord + outputDir.offsetX, yCoord + outputDir.offsetY, zCoord + outputDir.offsetZ)
-    if (outputTile == null) {
-      if (hasOutput) {
-        needsCheckOutput = true
-      }
-    } else {
-      addOutput(outputDir)
-    }
-    setRenderUpdate()
-  }
-
-  def parseItemMask(mask: Byte) {
-    var temp: Byte = 0
-    for (i <- 0 until hasItem.length) {
-      temp = mask
-      hasItem(i) = ((temp >> i) & 1) == 1
-    }
-
-    temp = mask
-    overflowing = ((temp >> hasItem.length) & 1) == 1
-    setRenderUpdate()
-  }
-
   override def updateEntity() {
     loading = false
     super.updateEntity()
@@ -120,23 +77,18 @@ class TileEntityVacuumTube extends TileEntityBase with IVacuumTube {
     par1nbtTagCompound.setByte("HasItems", generateItemMask)
   }
 
-  override def getDescriptionPacket = generatePacket
-
-  private def generatePacket: S35PacketUpdateTileEntity = {
-    val compound: NBTTagCompound = new NBTTagCompound
-    compound.setByte(TileEntityVacuumTube.ITEM_MASK_KEY, generateItemMask)
-    compound.setByte(TileEntityVacuumTube.CONNECTION_MASK_KEY, generateConnectionMask)
-    new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, compound)
-  }
-
   def generateConnectionMask: Byte = {
     var output = 0
-    output += FemtocraftUtils.indexOfForgeDirection(inputDir) & 7
+    output += inputDir.ordinal() & 7
     output += (if (missingInput) {0} else {1 << 3})
-    output += (FemtocraftUtils.indexOfForgeDirection(outputDir) & 7) << 4
+    output += (outputDir.ordinal() & 7) << 4
     output += (if (missingOutput) {0} else {1 << 7})
     output.toByte
   }
+
+  def missingInput = inputTile == null && !needsCheckInput
+
+  def missingOutput = outputTile == null && !needsCheckOutput
 
   def generateItemMask: Byte = {
     var output = 0
@@ -149,6 +101,24 @@ class TileEntityVacuumTube extends TileEntityBase with IVacuumTube {
       output += 1 << hasItem.length
     }
     output.toByte
+  }
+
+  def isOverflowing: Boolean = {
+    if (worldObj.isRemote && overflowing) return true
+    outputTile match {
+      case tube: IVacuumTube => !tube.canInsertItem(null, outputDir.getOpposite)
+      case inv: IInventory   => !canFillInv && hasItem.forall(p => p) && queuedItem != null
+      case _                 => false
+    }
+  }
+
+  override def getDescriptionPacket = generatePacket
+
+  private def generatePacket: S35PacketUpdateTileEntity = {
+    val compound: NBTTagCompound = new NBTTagCompound
+    compound.setByte(TileEntityVacuumTube.ITEM_MASK_KEY, generateItemMask)
+    compound.setByte(TileEntityVacuumTube.CONNECTION_MASK_KEY, generateConnectionMask)
+    new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, compound)
   }
 
   override def femtocraftServerUpdate() {
@@ -175,7 +145,7 @@ class TileEntityVacuumTube extends TileEntityBase with IVacuumTube {
           setUpdate()
           markDirty()
         case sided: ISidedInventory if canFillInv                                                 =>
-          val side = FemtocraftUtils.indexOfForgeDirection(outputDir.getOpposite)
+          val side = outputDir.getOpposite.ordinal
           val slots = sided.getAccessibleSlotsFromSide(side)
           val invMax = sided.getInventoryStackLimit
           if (slots.exists { case slot if sided.canInsertItem(slot, items.getStackInSlot(3), side) &&
@@ -286,7 +256,7 @@ class TileEntityVacuumTube extends TileEntityBase with IVacuumTube {
     } else {
       inputTile match {
         case sided: ISidedInventory if canExtractInv =>
-          val side: Int = FemtocraftUtils.indexOfForgeDirection(inputDir.getOpposite)
+          val side: Int = inputDir.getOpposite.ordinal()
           val slots: Array[Int] = sided.getAccessibleSlotsFromSide(side)
           canExtractInv = slots.exists { case slot if {
             val stack = sided.getStackInSlot(slot)
@@ -333,19 +303,6 @@ class TileEntityVacuumTube extends TileEntityBase with IVacuumTube {
     }
   }
 
-  def missingInput = inputTile == null && !needsCheckInput
-
-  def missingOutput = outputTile == null && !needsCheckOutput
-
-  def isOverflowing: Boolean = {
-    if (worldObj.isRemote && overflowing) return true
-    outputTile match {
-      case tube: IVacuumTube => !tube.canInsertItem(null, outputDir.getOpposite)
-      case inv: IInventory   => !canFillInv && hasItem.forall(p => p) && queuedItem != null
-      case _                 => false
-    }
-  }
-
   private def ejectItem(slot: Int) {
     val dropItem = items.getStackInSlot(slot)
     ejectItemStack(dropItem)
@@ -383,13 +340,42 @@ class TileEntityVacuumTube extends TileEntityBase with IVacuumTube {
     markDirty()
   }
 
-  override def markDirty() {
-    if (!loading) {
-      super.markDirty()
-    }
+  override def readFromNBT(par1nbtTagCompound: NBTTagCompound) {
+    super.readFromNBT(par1nbtTagCompound)
+    parseConnectionMask(par1nbtTagCompound.getByte("Connections"))
+    parseItemMask(par1nbtTagCompound.getByte("HasItems"))
   }
 
-  protected def canAcceptItemStack(item: ItemStack): Boolean = true
+  def parseConnectionMask(mask: Byte) {
+    val input: Int = mask & 7
+    val output: Int = (mask >> 4) & 7
+    inputDir = getOrientation(input)
+    outputDir = getOrientation(output)
+    val hasInput = ((mask >> 3) & 1) == 1
+    val hasOutput = ((mask >> 7) & 1) == 1
+    if (worldObj == null) {
+      return
+    }
+    val inputTile = worldObj
+                    .getTileEntity(xCoord + inputDir.offsetX, yCoord + inputDir.offsetY, zCoord + inputDir.offsetZ)
+    if (inputTile == null) {
+      if (hasInput) {
+        needsCheckInput = true
+      }
+    } else {
+      addInput(inputDir)
+    }
+    val outputTile = worldObj
+                     .getTileEntity(xCoord + outputDir.offsetX, yCoord + outputDir.offsetY, zCoord + outputDir.offsetZ)
+    if (outputTile == null) {
+      if (hasOutput) {
+        needsCheckOutput = true
+      }
+    } else {
+      addOutput(outputDir)
+    }
+    setRenderUpdate()
+  }
 
   def addInput(dir: ForgeDirection): Boolean = {
     if (worldObj == null) {
@@ -494,10 +480,16 @@ class TileEntityVacuumTube extends TileEntityBase with IVacuumTube {
     setModified()
   }
 
-  override def readFromNBT(par1nbtTagCompound: NBTTagCompound) {
-    super.readFromNBT(par1nbtTagCompound)
-    parseConnectionMask(par1nbtTagCompound.getByte("Connections"))
-    parseItemMask(par1nbtTagCompound.getByte("HasItems"))
+  def parseItemMask(mask: Byte) {
+    var temp: Byte = 0
+    for (i <- 0 until hasItem.length) {
+      temp = mask
+      hasItem(i) = ((temp >> i) & 1) == 1
+    }
+
+    temp = mask
+    overflowing = ((temp >> hasItem.length) & 1) == 1
+    setRenderUpdate()
   }
 
   def canInsertItem(item: ItemStack, dir: ForgeDirection) = queuedItem == null
@@ -604,8 +596,8 @@ class TileEntityVacuumTube extends TileEntityBase with IVacuumTube {
       addOutput(temp)
       return
     }
-    var lastOutputOrientation = FemtocraftUtils.indexOfForgeDirection(outputDir)
-    var lastInputOrientation = FemtocraftUtils.indexOfForgeDirection(inputDir)
+    var lastOutputOrientation = outputDir.ordinal()
+    var lastInputOrientation = inputDir.ordinal()
     do {
       lastOutputOrientation += 1
       clearOutput()
@@ -668,6 +660,8 @@ class TileEntityVacuumTube extends TileEntityBase with IVacuumTube {
     }
   }
 
+  protected def canAcceptItemStack(item: ItemStack): Boolean = true
+
   def insertItem(item: ItemStack, dir: ForgeDirection): Boolean = {
     if (item == null) return true
     if (isOverflowing) {
@@ -685,6 +679,12 @@ class TileEntityVacuumTube extends TileEntityBase with IVacuumTube {
       return true
     }
     false
+  }
+
+  override def markDirty() {
+    if (!loading) {
+      super.markDirty()
+    }
   }
 
   def onNeighborTileChange() {

@@ -1,9 +1,9 @@
 package com.itszuvalex.femtocraft.configuration
 
 import com.itszuvalex.femtocraft.api._
-import com.itszuvalex.femtocraft.api.industry.{AssemblerRecipeType, AssemblerRecipe}
+import com.itszuvalex.femtocraft.api.industry.{DimensionalRecipe, TemporalRecipe, AssemblerRecipeType, AssemblerRecipe}
 import com.itszuvalex.femtocraft.managers.research.Technology
-import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftStringUtils
 import net.minecraft.item.ItemStack
 
 import scala.xml.Utility.escape

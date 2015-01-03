@@ -1,10 +1,11 @@
 package com.itszuvalex.femtocraft.managers.assistant
 
 import java.io.{File, FileInputStream, FileOutputStream, FilenameFilter}
+import java.util
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.managers.IAssistantManager
-import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftFileUtils
 import net.minecraft.nbt.{CompressedStreamTools, NBTTagCompound, NBTTagList}
 import net.minecraft.world.World
 import org.apache.logging.log4j.Level
@@ -17,16 +18,15 @@ object ManagerAssistant extends IAssistantManager {
   private val assistKey = "assistants"
   private val data      = new mutable.HashMap[String, mutable.HashMap[String, AssistantPermissions]]
 
-  override def isPlayerAssistant(owner: String, user: String) = getPlayerAssistants(owner).keySet.contains(user)
+  override def isPlayerAssistant(owner: String, user: String) = getPlayerAssistants(owner).contains(user)
 
-  override def getPlayerAssistants(owner: String) = data
-                                                    .getOrElseUpdate(owner,
-                                                                     new mutable.HashMap[String, AssistantPermissions])
-
-  override def addAssistantTo(owner: String, user: String): Unit = getPlayerAssistants(owner)
+  override def addAssistantTo(owner: String, user: String): Unit = getPlayerAssistantsPermissions(owner)
                                                                    .put(user, new AssistantPermissions(user))
 
   override def removeAssistantFrom(owner: String, user: String): Unit = getPlayerAssistants(owner).remove(user)
+
+  override def getPlayerAssistants(owner: String): util.Collection[String] =
+    data.getOrElseUpdate(owner, new mutable.HashMap[String, AssistantPermissions]).keySet
 
   def save(world: World): Boolean = {
     try {
@@ -42,11 +42,11 @@ object ManagerAssistant extends IAssistantManager {
           }
           val gTag = new NBTTagCompound
           val assistTag = new NBTTagList
-          getPlayerAssistants(username).values.foreach { perms =>
+          getPlayerAssistantsPermissions(username).values.foreach { perms =>
             val assistantTag = new NBTTagCompound
             perms.saveToNBT(assistantTag)
             assistTag.appendTag(assistantTag)
-                                                       }
+                                                                  }
           gTag.setTag(assistKey, assistTag)
           val fos = new FileOutputStream(userfile)
           CompressedStreamTools.writeCompressed(gTag, fos)
@@ -99,7 +99,7 @@ object ManagerAssistant extends IAssistantManager {
             val permTag = assistTag.getCompoundTagAt(j)
             val perm = new AssistantPermissions
             perm.loadFromNBT(permTag)
-            getPlayerAssistants(username).put(perm.assistant, perm)
+            getPlayerAssistantsPermissions(username).put(perm.assistant, perm)
           }
         }
         catch {
@@ -122,4 +122,7 @@ object ManagerAssistant extends IAssistantManager {
     }
     true
   }
+
+  def getPlayerAssistantsPermissions(owner: String) = data.getOrElseUpdate(owner, new
+      mutable.HashMap[String, AssistantPermissions])
 }

@@ -26,7 +26,7 @@ import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.VolatilityEvent;
-import com.itszuvalex.femtocraft.power.plasma.FemtocraftPlasmaUtils;
+import com.itszuvalex.femtocraft.power.plasma.FemtocraftPlasmaManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
@@ -53,8 +53,8 @@ public class VolatilityEventTemperatureSpike extends
 
     @Override
     public void interact(IFusionReactorCore core, World world, int x, int y, int z) {
-        double radius = volatilityLevel / volatilityToRadiusDividend * coreMultiplier;
-        int duration = (int) (volatilityEnergy / volatilityEnergyToDurationDividend
+        double radius = volatilityLevel() / volatilityToRadiusDividend * coreMultiplier;
+        int duration = (int) (volatilityEnergy() / volatilityEnergyToDurationDividend
                               * coreMultiplier);
 
         igniteEntitiesAndWorld(world, x, y, z, radius, duration);
@@ -67,21 +67,21 @@ public class VolatilityEventTemperatureSpike extends
 
     @Override
     public void interact(IPlasmaContainer container, World world, int x, int y, int z) {
-        double radius = volatilityLevel / volatilityToRadiusDividend;
-        int duration = (int) (volatilityEnergy / volatilityEnergyToDurationDividend);
+        double radius = volatilityLevel() / volatilityToRadiusDividend;
+        int duration = (int) (volatilityEnergy() / volatilityEnergyToDurationDividend);
 
         igniteEntitiesAndWorld(world, x, y, z, radius, duration);
     }
 
     @Override
     public void interact(IPlasmaFlow flow, World world, int x, int y, int z) {
-        int volatilityDif = volatilityLevel - flow.getVolatility();
+        int volatilityDif = volatilityLevel() - flow.getVolatility();
         //If this event is more volatile than that flow
         if (volatilityDif > 0) {
             //Add some proportion of this event's temperature
-            double temp = volatilityEnergy /
-                          FemtocraftPlasmaUtils
-                                  .temperatureToEnergy;
+            double temp = volatilityEnergy() /
+                          FemtocraftPlasmaManager
+                                  .temperatureToEnergy();
             if (flow.getTemperature() < temp) {
                 flow.setTemperature((long) (flow.getTemperature() + random.nextFloat() * temp));
             }

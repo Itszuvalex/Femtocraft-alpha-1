@@ -8,11 +8,11 @@ import com.itszuvalex.femtocraft.api.industry.AssemblerRecipe
 import com.itszuvalex.femtocraft.api.research.ITechnology
 import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs
-import com.itszuvalex.femtocraft.implicits.StringImplicits._
+import com.itszuvalex.femtocraft.api.implicits.StringImplicits._
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityNanoInnervator
 import com.itszuvalex.femtocraft.managers.assembler.ComponentRegistry
 import com.itszuvalex.femtocraft.managers.research.Technology
-import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftStringUtils
 import net.minecraft.init.{Blocks, Items}
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumChatFormatting

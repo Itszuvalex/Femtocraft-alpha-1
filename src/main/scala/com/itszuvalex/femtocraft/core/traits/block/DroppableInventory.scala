@@ -2,7 +2,7 @@ package com.itszuvalex.femtocraft.core.traits.block
 
 import java.util.Random
 
-import com.itszuvalex.femtocraft.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import net.minecraft.block.Block
 import net.minecraft.inventory.IInventory
 import net.minecraft.world.World

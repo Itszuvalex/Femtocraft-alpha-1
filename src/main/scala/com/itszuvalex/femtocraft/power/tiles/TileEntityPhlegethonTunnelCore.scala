@@ -30,7 +30,7 @@ import com.itszuvalex.femtocraft.network.FemtocraftPacketHandler
 import com.itszuvalex.femtocraft.network.messages.MessagePhlegethonTunnelCore
 import com.itszuvalex.femtocraft.power.tiles.TileEntityPhlegethonTunnelCore._
 import com.itszuvalex.femtocraft.power.traits.PowerProducer
-import com.itszuvalex.femtocraft.utils.BaseInventory
+import com.itszuvalex.femtocraft.api.utils.BaseInventory
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound

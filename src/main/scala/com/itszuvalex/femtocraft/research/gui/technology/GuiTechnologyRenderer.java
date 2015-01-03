@@ -21,7 +21,7 @@
 
 package com.itszuvalex.femtocraft.research.gui.technology;
 
-import com.itszuvalex.femtocraft.utils.FemtocraftStringUtils;
+import com.itszuvalex.femtocraft.api.utils.FemtocraftStringUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
