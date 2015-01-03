@@ -73,7 +73,7 @@ import scala.collection.mutable
   }
 
   override def addTechnology(tech: ITechnology): Boolean = !MinecraftForge.EVENT_BUS.post(new
-                                                                                              EventTechnology.TechnologyAddedEvent(tech)) && technologies
+                                                                                              EventTechnology.Added(tech)) && technologies
                                                                                                                                              .put(
       tech.getName,
       tech) != null

@@ -86,7 +86,7 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
       sync()
       return true
     }
-    val event = new EventTechnology.TechnologyResearchedEvent(username, rtech)
+    val event = new EventTechnology.Researched(username, rtech)
     if (!MinecraftForge.EVENT_BUS.post(event)) {
       tech.researched = true
       if (notify) {
@@ -166,7 +166,7 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
   
   override def discoverTechnology(name: String, notify: Boolean): Boolean = {
     if (techStatus.containsKey(name)) return true
-    val event = new EventTechnology.TechnologyDiscoveredEvent(username, Femtocraft.researchManager.getTechnology(name))
+    val event = new EventTechnology.Discovered(username, Femtocraft.researchManager.getTechnology(name))
     if (!MinecraftForge.EVENT_BUS.post(event)) {
       techStatus.put(name, new ResearchStatus(name))
       if (notify) {

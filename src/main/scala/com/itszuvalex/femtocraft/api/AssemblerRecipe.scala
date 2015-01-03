@@ -5,6 +5,7 @@ import com.itszuvalex.femtocraft.api.research.ITechnology
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.{NBTTagCompound, NBTTagList}
+import org.apache.logging.log4j.{Level, LogManager}
 
 import scala.beans.BeanProperty
 
@@ -112,7 +113,7 @@ class AssemblerRecipe(@BeanProperty var input: Array[ItemStack], @BeanProperty v
       val itemCompound = inputList.getCompoundTagAt(i)
       val slot: Byte = itemCompound.getByte("Slot")
       if (slot != i.toByte) {
-        System.err.print("Slot mismatch occurred while loading AssemblerRecipe.")
+        LogManager.getLogger("Femtocraft").log(Level.WARN, "Slot mismatch occurred while loading AssemblerRecipe.")
       }
       if (itemCompound.hasKey("item")) {
         input(i) = ItemStack.loadItemStackFromNBT(itemCompound.getTag("item").asInstanceOf[NBTTagCompound])
