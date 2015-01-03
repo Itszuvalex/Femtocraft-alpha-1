@@ -26,6 +26,7 @@ import java.util
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.core.Configurable
 import com.itszuvalex.femtocraft.api.events.EventTechnology
+import com.itszuvalex.femtocraft.api.managers.research.IResearchManager
 import com.itszuvalex.femtocraft.api.research.ITechnology
 import com.itszuvalex.femtocraft.configuration.{AutoGenConfig, TechnologyXMLLoader, XMLTechnology}
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
@@ -40,7 +41,7 @@ import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
 import scala.collection.mutable
 
-@Configurable object ManagerResearch {
+@Configurable object ManagerResearch extends IResearchManager {
   private val playerDataKey                    = "playerData"
   private val dataKey                          = "data"
   private val userKey                          = "username"
@@ -63,8 +64,7 @@ import scala.collection.mutable
     val techs = new XMLTechnology(new File(FemtocraftFileUtils.autogenConfigPath, "Technologies.xml"))
     if (!AutoGenConfig.shouldRegenFile(techs.file) && techs.initialized) {
       techs.loadCustomRecipes().view.foreach(addTechnology)
-    }
-    else {
+    } else {
       val defs = FemtocraftTechnologies.defaultTechnologies.asInstanceOf[util.List[Technology]]
       techs.seedInitialRecipes(defs)
       defs.view.foreach(addTechnology)
@@ -72,7 +72,11 @@ import scala.collection.mutable
     }
   }
 
-  def addTechnology(tech: ITechnology): Boolean = !MinecraftForge.EVENT_BUS.post(new EventTechnology.TechnologyAddedEvent(tech)) && technologies.put(tech.getName, tech) != null
+  override def addTechnology(tech: ITechnology): Boolean = !MinecraftForge.EVENT_BUS.post(new
+                                                                                              EventTechnology.TechnologyAddedEvent(tech)) && technologies
+                                                                                                                                             .put(
+      tech.getName,
+      tech) != null
 
   /**
    * Create and calculate the DAG for technologies.
@@ -82,9 +86,9 @@ import scala.collection.mutable
     graph.computePlacements()
   }
 
-  def getTechnologies: util.Collection[ITechnology] = technologies.values
+  override def getTechnologies: util.Collection[ITechnology] = technologies.values
 
-  def removeTechnology(tech: ITechnology) = technologies.remove(tech.getName) != null
+  override def removeTechnology(tech: ITechnology) = technologies.remove(tech.getName) != null
 
   def getTechnology(name: String) = technologies.get(name).orNull
 
@@ -92,8 +96,7 @@ import scala.collection.mutable
     val r = new PlayerResearch(username)
     if (debug) {
       addAllResearches(r)
-    }
-    else {
+    } else {
       r.discoverNewTechs(false)
     }
     playerData.put(username, r)
@@ -105,20 +108,26 @@ import scala.collection.mutable
     technologies.values.foreach { t => research.researchTechnology(t.getName, true)}
   }
 
-  def removePlayerResearch(username: String): Boolean = playerData.remove(username) != null
+  override def removePlayerResearch(username: String): Boolean = playerData.remove(username) != null
 
-  def getPlayerResearch(username: String): PlayerResearch = playerData.get(username).orNull
+  override def getPlayerResearch(username: String): PlayerResearch = playerData.get(username).orNull
 
-  def hasPlayerDiscoveredTechnology(username: String, tech: ITechnology): Boolean = tech == null || hasPlayerDiscoveredTechnology(username, tech.getName)
+  override def hasPlayerDiscoveredTechnology(username: String,
+                                             tech: ITechnology): Boolean = tech == null || hasPlayerDiscoveredTechnology(username,
+                                                                                                                         tech
+                                                                                                                         .getName)
 
-  def hasPlayerDiscoveredTechnology(username: String, tech: String): Boolean = {
+  override def hasPlayerDiscoveredTechnology(username: String, tech: String): Boolean = {
     val pr = playerData.get(username).orNull
     pr != null && pr.hasDiscoveredTechnology(tech)
   }
 
-  def hasPlayerResearchedTechnology(username: String, tech: ITechnology): Boolean = tech == null || hasPlayerResearchedTechnology(username, tech.getName)
+  override def hasPlayerResearchedTechnology(username: String,
+                                             tech: ITechnology): Boolean = tech == null || hasPlayerResearchedTechnology(username,
+                                                                                                                         tech
+                                                                                                                         .getName)
 
-  def hasPlayerResearchedTechnology(username: String, tech: String): Boolean = {
+  override def hasPlayerResearchedTechnology(username: String, tech: String): Boolean = {
     val pr = playerData.get(username).orNull
     pr != null && pr.hasResearchedTechnology(tech)
   }
@@ -129,7 +138,7 @@ import scala.collection.mutable
       val cs = new NBTTagCompound
       cs.setString(userKey, status.username)
       val data = new NBTTagCompound
-      status.saveToNBTTagCompound(data)
+      status.saveToNBT(data)
       cs.setTag(dataKey, data)
       list.appendTag(cs)
                               }
@@ -143,7 +152,7 @@ import scala.collection.mutable
       val username = cs.getString(userKey)
       val data = cs.getCompoundTag(dataKey)
       val status = new PlayerResearch(username)
-      status.loadFromNBTTagCompound(data)
+      status.loadFromNBT(data)
       playerData.put(username, status)
     }
 
@@ -164,20 +173,26 @@ import scala.collection.mutable
           }
           val fileoutputstream = new FileOutputStream(file)
           val data = new NBTTagCompound
-          pdata.saveToNBTTagCompound(data)
+          pdata.saveToNBT(data)
           CompressedStreamTools.writeCompressed(data, fileoutputstream)
           fileoutputstream.close()
         }
         catch {
           case exception: Exception =>
-            Femtocraft.log(Level.ERROR, "Failed to save data for player " + pdata.username + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
+            Femtocraft
+            .log(Level.ERROR,
+                 "Failed to save data for player " + pdata.username + " in world - " + FemtocraftFileUtils
+                                                                                       .savePathFemtocraft(world) + ".")
             exception.printStackTrace()
         }
                                 }
     }
     catch {
       case e: Exception =>
-        Femtocraft.log(Level.ERROR, "Failed to create folder " + FemtocraftFileUtils.savePathFemtocraft(world) + File.pathSeparator + DIRECTORY + ".")
+        Femtocraft
+        .log(Level.ERROR,
+             "Failed to create folder " + FemtocraftFileUtils.savePathFemtocraft(world) + File
+                                                                                          .pathSeparator + DIRECTORY + ".")
         e.printStackTrace()
         return false
     }
@@ -195,7 +210,9 @@ import scala.collection.mutable
     try {
       val folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), DIRECTORY)
       if (!folder.exists) {
-        Femtocraft.log(Level.WARN, "No " + DIRECTORY + " folder found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
+        Femtocraft
+        .log(Level.WARN,
+             "No " + DIRECTORY + " folder found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
         return false
       }
       folder.listFiles(new FilenameFilter {
@@ -206,21 +223,27 @@ import scala.collection.mutable
           val data = CompressedStreamTools.readCompressed(fileinputstream)
           val username = pdata.getName.substring(0, pdata.getName.length - 4)
           val file = new PlayerResearch(username)
-          file.loadFromNBTTagCompound(data)
+          file.loadFromNBT(data)
           fileinputstream.close()
           file.discoverNewTechs(false)
           playerData.put(username, file)
         }
         catch {
           case e: Exception =>
-            Femtocraft.log(Level.ERROR, "Failed to load data from file " + pdata.getName + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
+            Femtocraft
+            .log(Level.ERROR,
+                 "Failed to load data from file " + pdata.getName + " in world - " + FemtocraftFileUtils
+                                                                                     .savePathFemtocraft(world) + ".")
             e.printStackTrace()
         }
                  }
     }
     catch {
       case exception: Exception =>
-        Femtocraft.log(Level.ERROR, "Failed to load data from folder " + DIRECTORY + " in world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
+        Femtocraft
+        .log(Level.ERROR,
+             "Failed to load data from folder " + DIRECTORY + " in world - " + FemtocraftFileUtils
+                                                                               .savePathFemtocraft(world) + ".")
         exception.printStackTrace()
         return false
     }

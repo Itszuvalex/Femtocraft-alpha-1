@@ -22,6 +22,7 @@ package com.itszuvalex.femtocraft.power
 
 import java.util
 
+import com.itszuvalex.femtocraft.api.managers.IPowerAlgorithm
 import com.itszuvalex.femtocraft.api.power.IPowerTileContainer
 import net.minecraft.world.World
 import net.minecraftforge.common.util.ForgeDirection
@@ -32,7 +33,7 @@ import net.minecraftforge.common.util.ForgeDirection
 /**
  * Oscillating Photons
  */
-object FemtocraftPowerUtils {
+object FemtocraftPowerAlgorithm extends IPowerAlgorithm {
   val distributionBuffer = .01f
   val maxPowerPerTick    = .05f
   private val sconnections    = new Array[Boolean](6)
@@ -54,17 +55,16 @@ object FemtocraftPowerUtils {
    * @param y           Y coordinate for the algorithm to center its distribution search upon
    * @param z           Z coordinate for the algorithm to center its distribution search upon
    */
-  def distributePower(container: IPowerTileContainer, connections: Array[Boolean], world: World, x: Int, y: Int, z: Int) {
+  override def distributePower(container: IPowerTileContainer, connections: Array[Boolean], world: World, x: Int,
+                               y: Int, z: Int) {
     if (container.getCurrentPower <= 0) {
       return
     }
     if (connections == null) {
       util.Arrays.fill(sconnections, true)
-    }
-    else if (connections.length != 6) {
+    } else if (connections.length != 6) {
       return
-    }
-    else {
+    } else {
       Array.copy(connections, 0, sconnections, 0, 6)
     }
     util.Arrays.fill(sneighbors.asInstanceOf[Array[AnyRef]], null)
@@ -77,7 +77,7 @@ object FemtocraftPowerUtils {
             case container1: IPowerTileContainer =>
               sneighbors(i) = container1
               numConnections += 1
-            case _                                =>
+            case _                               =>
           }
         }
       }

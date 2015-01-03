@@ -22,14 +22,13 @@ package com.itszuvalex.femtocraft.research.items
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.EnumTechLevel
-import com.itszuvalex.femtocraft.api.research.ItemTechnologyCarrier
+import com.itszuvalex.femtocraft.api.items.ITechnologyCarrier
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.client.renderer.texture.IIconRegister
-import net.minecraft.item.ItemStack
+import net.minecraft.item.{Item, ItemStack}
 
-class ItemMicroTechnology extends ItemTechnologyCarrier("ItemMicroTechnology") {
+class ItemMicroTechnology extends Item with ITechnologyCarrier {
   setCreativeTab(Femtocraft.femtocraftTab)
-  setUnlocalizedName("itemMicroTechnology")
 
   def getTechnologyLevel(stack: ItemStack) = EnumTechLevel.MICRO
 

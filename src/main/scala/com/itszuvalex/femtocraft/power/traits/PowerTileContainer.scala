@@ -4,7 +4,7 @@ import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.api.core.Saveable
 import com.itszuvalex.femtocraft.api.power.{IPowerTileContainer, PowerNBTWrapper, PowerContainer}
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
-import com.itszuvalex.femtocraft.power.FemtocraftPowerUtils
+import com.itszuvalex.femtocraft.power.FemtocraftPowerAlgorithm
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.common.util.ForgeDirection
 
@@ -61,7 +61,7 @@ trait PowerTileContainer extends TileEntityBase with IPowerTileContainer {
 
   override def femtocraftServerUpdate(): Unit = {
     //TODO: Smart connections based on updates.
-    FemtocraftPowerUtils.distributePower(this, connections, getWorldObj, xCoord, yCoord, zCoord)
+    FemtocraftPowerAlgorithm.distributePower(this, connections, getWorldObj, xCoord, yCoord, zCoord)
     super.femtocraftServerUpdate()
   }
 

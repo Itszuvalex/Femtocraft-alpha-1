@@ -5,7 +5,7 @@
 //
 //import com.itszuvalex.femtocraft.Femtocraft
 //import com.itszuvalex.femtocraft.api.EnumTechLevel
-//import com.itszuvalex.femtocraft.api.research.ITechnology
+//import ITechnology
 //import com.itszuvalex.femtocraft.managers.research.Technology
 //import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
 //import net.minecraftforge.common.config.Configuration

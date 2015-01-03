@@ -31,6 +31,9 @@ class AssemblerRecipe(@BeanProperty var input: Array[ItemStack], @BeanProperty v
                       @BeanProperty var tech: String, @BeanProperty var `type`: AssemblerRecipeType)
   extends Comparable[AssemblerRecipe] with ISaveable {
 
+  /**
+   * AssemblerRecipeType by default is Reversible
+   */
   def this(input: Array[ItemStack], mass: Int, output: ItemStack, enumTechLevel: EnumTechLevel, techName: String) =
     this(input, mass, output, enumTechLevel, techName, AssemblerRecipeType.Reversible)
 
@@ -39,6 +42,9 @@ class AssemblerRecipe(@BeanProperty var input: Array[ItemStack], @BeanProperty v
            `type`: AssemblerRecipeType) =
     this(input, mass, output, enumTechLevel, tech.getName, `type`)
 
+  /**
+   * AssemblerRecipeType by default is Reversible
+   */
   def this(input: Array[ItemStack], mass: Int, output: ItemStack, enumTechLevel: EnumTechLevel, tech: ITechnology) =
     this(input, mass, output, enumTechLevel, tech.getName, AssemblerRecipeType.Reversible)
 
@@ -50,6 +56,10 @@ class AssemblerRecipe(@BeanProperty var input: Array[ItemStack], @BeanProperty v
     this(null, -1, null, null, "", null)
   }
 
+  /**
+   *
+   * @return Name to represent the recipe.  Null check to allow for automatically generated recipes with a null itemstack output.
+   */
   def getRecipeName = if (output == null) "null" else output.getDisplayName
 
   def compareTo(o: AssemblerRecipe): Int = {

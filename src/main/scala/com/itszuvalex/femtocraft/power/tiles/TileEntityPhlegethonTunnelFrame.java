@@ -28,7 +28,7 @@ import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo;
 import com.itszuvalex.femtocraft.api.power.IPhlegethonTunnelComponent;
 import com.itszuvalex.femtocraft.api.power.IPowerTileContainer;
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
-import com.itszuvalex.femtocraft.power.FemtocraftPowerUtils;
+import com.itszuvalex.femtocraft.power.FemtocraftPowerAlgorithm;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -65,7 +65,7 @@ public class TileEntityPhlegethonTunnelFrame extends TileEntityBase implements I
     @Override
     public void femtocraftServerUpdate() {
         super.femtocraftServerUpdate();
-        FemtocraftPowerUtils.distributePower(this, null, worldObj, xCoord, yCoord, zCoord);
+        FemtocraftPowerAlgorithm.distributePower(this, null, worldObj, xCoord, yCoord, zCoord);
     }
 
     @Override

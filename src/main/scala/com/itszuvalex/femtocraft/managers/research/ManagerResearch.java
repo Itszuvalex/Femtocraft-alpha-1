@@ -22,8 +22,8 @@
 //package com.itszuvalex.femtocraft.managers.research;
 //
 //import com.itszuvalex.femtocraft.Femtocraft;
-//import com.itszuvalex.femtocraft.api.events.EventTechnology.TechnologyAddedEvent;
-//import com.itszuvalex.femtocraft.api.research.ITechnology;
+//import EventTechnology.TechnologyAddedEvent;
+//import ITechnology;
 //import com.itszuvalex.femtocraft.research.gui.graph.TechNode;
 //import com.itszuvalex.femtocraft.research.gui.graph.TechnologyGraph;
 //import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils;

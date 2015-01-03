@@ -23,7 +23,7 @@
 //
 //import com.itszuvalex.femtocraft.Femtocraft;
 //import com.itszuvalex.femtocraft.api.EnumTechLevel;
-//import com.itszuvalex.femtocraft.api.core.Configurable;
+//import Configurable;
 //import com.itszuvalex.femtocraft.research.gui.GuiResearch;
 //import com.itszuvalex.femtocraft.research.gui.technology.GuiTechnology;
 //import com.itszuvalex.femtocraft.research.gui.technology.GuiTechnologyDefault;
@@ -37,7 +37,7 @@
 //import java.util.List;
 //import java.util.logging.Level;
 //
-//public class Technology implements com.itszuvalex.femtocraft.api.research.ITechnology {
+//public class Technology implements ITechnology {
 //    @Override
 //    public String getName() {
 //        return name;

@@ -22,7 +22,7 @@
 package com.itszuvalex.femtocraft.transport.items.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.api.IInterfaceDevice;
+import com.itszuvalex.femtocraft.api.items.IInterfaceDevice;
 import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.proxy.ProxyClient;
 import com.itszuvalex.femtocraft.transport.items.tiles.TileEntityDiscriminatingVacuumTube;

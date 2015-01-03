@@ -22,8 +22,9 @@ package com.itszuvalex.femtocraft.power.tiles
 
 import com.itszuvalex.femtocraft.FemtocraftGuiConstants
 import com.itszuvalex.femtocraft.api.core.{Configurable, Saveable}
+import com.itszuvalex.femtocraft.api.items.IInterfaceDevice
 import com.itszuvalex.femtocraft.api.power.{IPowerTileContainer, PowerContainer}
-import com.itszuvalex.femtocraft.api.{EnumTechLevel, IInterfaceDevice}
+import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.core.traits.tile.MultiBlockComponent
 import com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoCubePort._

@@ -26,7 +26,7 @@ import com.itszuvalex.femtocraft.api.core.Configurable
 import com.itszuvalex.femtocraft.api.power.{IPhlegethonTunnelAddon, IPhlegethonTunnelCore, IPowerTileContainer}
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.core.traits.tile.MultiBlockComponent
-import com.itszuvalex.femtocraft.power.FemtocraftPowerUtils
+import com.itszuvalex.femtocraft.power.FemtocraftPowerAlgorithm
 import com.itszuvalex.femtocraft.power.tiles.TileEntitySisyphusStabilizer._
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraftforge.common.util.ForgeDirection
@@ -56,7 +56,7 @@ object TileEntitySisyphusStabilizer {
 
   override def femtocraftServerUpdate() {
     super.femtocraftServerUpdate()
-    FemtocraftPowerUtils.distributePower(this, null, worldObj, xCoord, yCoord, zCoord)
+    FemtocraftPowerAlgorithm.distributePower(this, null, worldObj, xCoord, yCoord, zCoord)
   }
 
   override def onCoreActivityChange(active: Boolean) {

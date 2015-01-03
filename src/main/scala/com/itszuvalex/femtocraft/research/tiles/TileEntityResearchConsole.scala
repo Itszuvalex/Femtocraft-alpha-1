@@ -22,7 +22,8 @@ package com.itszuvalex.femtocraft.research.tiles
 
 import com.itszuvalex.femtocraft.api.EnumTechLevel._
 import com.itszuvalex.femtocraft.api.core.Saveable
-import com.itszuvalex.femtocraft.api.research.{ITechnology, ITechnologyCarrier}
+import com.itszuvalex.femtocraft.api.items.ITechnologyCarrier
+import com.itszuvalex.femtocraft.api.research.ITechnology
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.core.traits.tile.Inventory
 import com.itszuvalex.femtocraft.utils.BaseInventory
@@ -107,7 +108,7 @@ class TileEntityResearchConsole extends TileEntityBase with Inventory {
       return false
     }
     for (i <- 0 until Math.min(9, tech.getResearchMaterials.length)) {
-      if (!compareItemStack(tech.getResearchMaterials()(i), getStackInSlot(i))) {
+      if (!compareItemStack(tech.getResearchMaterials(i), getStackInSlot(i))) {
         return false
       }
     }
@@ -174,8 +175,8 @@ class TileEntityResearchConsole extends TileEntityBase with Inventory {
     progress = 0
     val tech = Femtocraft.researchManager.getTechnology(displayTech)
     for (i <- 0 until Math.min(9, tech.getResearchMaterials.length)) {
-      if (tech.getResearchMaterials()(i) != null) {
-        decrStackSize(i, tech.getResearchMaterials()(i).stackSize)
+      if (tech.getResearchMaterials(i) != null) {
+        decrStackSize(i, tech.getResearchMaterials(i).stackSize)
       }
     }
     markDirty()

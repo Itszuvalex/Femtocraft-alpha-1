@@ -64,7 +64,6 @@ minecraft {
 
 dependencies {
 
-
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"
@@ -120,14 +119,26 @@ processResources
 //Begin I don't know what I'm doing
 
 //Create API library jar
+//Must be fully qualified name or it attempts to match against scala.io Jar
 task apiJar(type: org.gradle.api.tasks.bundling.Jar) {
     baseName = 'femtocraft-api'
-    dependsOn assemble
+    dependsOn check
 
     from(sourceSets.main.output) {
         include 'com/itszuvalex/femtocraft/api/**'
     }
 }
+
+task apiScalaDoc(type:  org.gradle.api.tasks.scala.ScalaDoc) {
+    include 'com/itszuvalex/femtocraft/api/**'
+    exclude '**.java'
+}
+
+task jarApiScalaDoc(type:  org.gradle.api.tasks.bundling.Jar) {
+    baseName = 'femtocraft-api-scaladoc'
+    from apiScalaDoc
+}
+
 
 build.dependsOn apiJar
 

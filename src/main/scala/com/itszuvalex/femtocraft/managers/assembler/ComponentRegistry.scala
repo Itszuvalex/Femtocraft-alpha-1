@@ -24,28 +24,23 @@ import scala.collection.mutable.ArrayBuffer
 
   private val componentMap = new mutable.HashMap[EnumTechLevel, ArrayBuffer[Item]]
 
-  def registerComponent(item: Item, tech: EnumTechLevel) = getOrMake(tech) append item
+  def registerComponent(item: Item, tech: EnumTechLevel) = getComponents(tech) append item
+
+  def getComponents(tech: EnumTechLevel) = componentMap.getOrElseUpdate(tech, new ArrayBuffer[Item])
 
   def isItemComponent(item: Item, tech: EnumTechLevel) = componentMap.get(tech).exists(_.contains(item))
 
-  def getComponentsAssemblerRecipeDisplayString(tech: EnumTechLevel) = getComponents(tech).map(_.toAssemblerString)
+  def getComponentsAssemblerRecipeDisplayString(tech: EnumTechLevel) = getComponents(tech)
+                                                                       .map(_.toAssemblerString)
                                                                        .aggregate("")(_ + _, _ + _)
-
-  def getComponents(tech: EnumTechLevel) = getOrMake(tech)
-
-  private def getOrMake(tech: EnumTechLevel) = componentMap.get(tech) match {
-    case Some(a) => a
-    case None    => val b = new ArrayBuffer[Item]; componentMap.put(tech, b); b
-  }
 
   def getComponentsInAssemblerRecipeDisplayString(tech: EnumTechLevel) = {
     Femtocraft.recipeManager.assemblyRecipes.getAllRecipes.view.filter(p => {
       p.input match {
         case null  => false
         case input =>
-          input.exists {
-                         case i: ItemStack if i.getItem != null => getComponents(tech).contains(i.getItem)
-                         case _                                 => false
+          input.exists { case i: ItemStack if i.getItem != null => getComponents(tech).contains(i.getItem)
+          case _                                                => false
                        }
       }
     }).map(i => i.output.toAssemblerString).aggregate("")(_ + _, _ + _)

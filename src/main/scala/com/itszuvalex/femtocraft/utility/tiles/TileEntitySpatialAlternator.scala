@@ -1,7 +1,7 @@
 package com.itszuvalex.femtocraft.utility.tiles
 
-import com.itszuvalex.femtocraft.api.IInterfaceDevice
 import com.itszuvalex.femtocraft.api.core.Saveable
+import com.itszuvalex.femtocraft.api.items.IInterfaceDevice
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.utility.{BlockAndTileSnapshot, SpatialRelocation}
 import net.minecraft.entity.player.EntityPlayer

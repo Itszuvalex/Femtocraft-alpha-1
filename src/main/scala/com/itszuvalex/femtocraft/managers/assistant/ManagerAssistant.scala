@@ -3,26 +3,30 @@ package com.itszuvalex.femtocraft.managers.assistant
 import java.io.{File, FileInputStream, FileOutputStream, FilenameFilter}
 
 import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.api.managers.IAssistantManager
 import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils
 import net.minecraft.nbt.{CompressedStreamTools, NBTTagCompound, NBTTagList}
 import net.minecraft.world.World
 import org.apache.logging.log4j.Level
 
+import scala.collection.JavaConversions._
 import scala.collection.mutable
 
-object ManagerAssistant {
+object ManagerAssistant extends IAssistantManager {
   private val dir       = "Assistants"
   private val assistKey = "assistants"
   private val data      = new mutable.HashMap[String, mutable.HashMap[String, AssistantPermissions]]
 
-  def isPlayerAssistant(owner: String, user: String) = getPlayerAssistants(owner).keySet.contains(user)
+  override def isPlayerAssistant(owner: String, user: String) = getPlayerAssistants(owner).keySet.contains(user)
 
-  def getPlayerAssistants(owner: String) = data
-                                           .getOrElseUpdate(owner, new mutable.HashMap[String, AssistantPermissions])
+  override def getPlayerAssistants(owner: String) = data
+                                                    .getOrElseUpdate(owner,
+                                                                     new mutable.HashMap[String, AssistantPermissions])
 
-  def addAssistantTo(owner: String, user: String) = getPlayerAssistants(owner).put(user, new AssistantPermissions(user))
+  override def addAssistantTo(owner: String, user: String): Unit = getPlayerAssistants(owner)
+                                                                   .put(user, new AssistantPermissions(user))
 
-  def removeAssistantFrom(owner: String, user: String) = getPlayerAssistants(owner).remove(user)
+  override def removeAssistantFrom(owner: String, user: String): Unit = getPlayerAssistants(owner).remove(user)
 
   def save(world: World): Boolean = {
     try {

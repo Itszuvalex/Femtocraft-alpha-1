@@ -95,7 +95,7 @@ class PlayerProperties(protected final var player: EntityPlayer) extends IExtend
     val prop = properties.get(property)
     if (prop != null) {
       val propCompound = new NBTTagCompound
-      prop.toDescriptionPacket(propCompound)
+      prop.saveToDescriptionPacket(propCompound)
       packetCompound.setTag(property, propCompound)
     }
   }

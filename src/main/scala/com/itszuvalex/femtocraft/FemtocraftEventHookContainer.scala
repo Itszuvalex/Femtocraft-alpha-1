@@ -20,13 +20,13 @@
  */
 package com.itszuvalex.femtocraft
 
-import com.itszuvalex.femtocraft.api.items.ItemAssemblySchematic
-import com.itszuvalex.femtocraft.gui.DisplaySlot
+import com.itszuvalex.femtocraft.api.events.EventSpatialRelocation
+import com.itszuvalex.femtocraft.api.items.IAssemblerSchematic
 import com.itszuvalex.femtocraft.core.MagnetRegistry
 import com.itszuvalex.femtocraft.core.traits.block.SpatialReactions
+import com.itszuvalex.femtocraft.gui.DisplaySlot
 import com.itszuvalex.femtocraft.managers.assembler.ComponentRegistry
 import com.itszuvalex.femtocraft.player.PlayerProperties
-import com.itszuvalex.femtocraft.utility.EventSpatialRelocation
 import com.itszuvalex.femtocraft.utils.FemtocraftUtils
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.relauncher.{Side, SideOnly}
@@ -56,7 +56,9 @@ class FemtocraftEventHookContainer {
   @SideOnly(value = Side.CLIENT)
   @SubscribeEvent def preTextureStitch(event: TextureStitchEvent.Pre) {
     if (event.map.getTextureType == 1) {
-      ItemAssemblySchematic.placeholderIcon = event.map.registerIcon(Femtocraft.ID.toLowerCase + ":" + "ItemAssemblySchematic")
+      IAssemblerSchematic.placeholderIcon = event
+                                            .map
+                                            .registerIcon(Femtocraft.ID.toLowerCase + ":" + "ItemAssemblySchematic")
       DisplaySlot.noPlaceDisplayIcon = event.map.registerIcon(Femtocraft.ID.toLowerCase + ":" + "NoPlaceSlot")
     }
   }
@@ -78,23 +80,48 @@ class FemtocraftEventHookContainer {
   }
 
   @SubscribeEvent def onTooltip(event: ItemTooltipEvent) {
-    if (MagnetRegistry.showMagnetismTooltip && MagnetRegistry.isMagnet(event.itemStack) && !MagnetRegistry.magnetismTooltipIsAdvanced || (MagnetRegistry.magnetismTooltipIsAdvanced && event.showAdvancedItemTooltips)) {
-      event.toolTip.add(EnumChatFormatting.DARK_RED + "Magnet Strength: " + EnumChatFormatting.RESET + String.valueOf(MagnetRegistry.getMagnetStrength(event.itemStack)))
+    if (MagnetRegistry.showMagnetismTooltip && MagnetRegistry.isMagnet(event.itemStack) && !MagnetRegistry
+                                                                                            .magnetismTooltipIsAdvanced || (MagnetRegistry
+                                                                                                                            .magnetismTooltipIsAdvanced && event
+                                                                                                                                                           .showAdvancedItemTooltips)) {
+      event
+      .toolTip
+      .add(EnumChatFormatting.DARK_RED + "Magnet Strength: " + EnumChatFormatting.RESET + String
+                                                                                          .valueOf(MagnetRegistry
+                                                                                                   .getMagnetStrength(
+          event.itemStack)))
     }
 
 
-    if (ComponentRegistry.showComponentTooltips && (!ComponentRegistry.componentTooltipsAreAdvanced || (ComponentRegistry.componentTooltipsAreAdvanced && event.showAdvancedItemTooltips))) {
+    if (ComponentRegistry.showComponentTooltips && (!ComponentRegistry
+                                                     .componentTooltipsAreAdvanced || (ComponentRegistry
+                                                                                       .componentTooltipsAreAdvanced && event
+                                                                                                                        .showAdvancedItemTooltips))) {
       val username = Minecraft.getMinecraft.thePlayer.getCommandSenderName
       Femtocraft.recipeManager.assemblyRecipes.getDecompositionCounts(event.itemStack) match {
         case (0, 0, 0, 0)                        =>
         case (molecules, atoms, particles, mass) =>
-          if (Femtocraft.researchManager.hasPlayerResearchedTechnology(username, ComponentRegistry.microComponentTooltipTechnology))
+          if (Femtocraft
+              .researchManager
+              .hasPlayerResearchedTechnology(username, ComponentRegistry.microComponentTooltipTechnology)) {
             event.toolTip.add(FemtocraftUtils.blueify("Molecules: ") + FemtocraftUtils.formatIntegerToString(molecules))
-          if (Femtocraft.researchManager.hasPlayerResearchedTechnology(username, ComponentRegistry.nanoComponentTooltipTechnology))
+          }
+          if (Femtocraft
+              .researchManager
+              .hasPlayerResearchedTechnology(username, ComponentRegistry.nanoComponentTooltipTechnology)) {
             event.toolTip.add(FemtocraftUtils.greenify("Atoms: ") + FemtocraftUtils.formatIntegerToString(atoms))
-          if (Femtocraft.researchManager.hasPlayerResearchedTechnology(username, ComponentRegistry.femtoComponentTooltipTechnology))
-            event.toolTip.add(FemtocraftUtils.orangeify("Particles: ") + FemtocraftUtils.formatIntegerToString(particles))
-          event.toolTip.add(EnumChatFormatting.DARK_PURPLE + "Mass: " + EnumChatFormatting.RESET + FemtocraftUtils.formatIntegerToString(mass))
+          }
+          if (Femtocraft
+              .researchManager
+              .hasPlayerResearchedTechnology(username, ComponentRegistry.femtoComponentTooltipTechnology)) {
+            event
+            .toolTip
+            .add(FemtocraftUtils.orangeify("Particles: ") + FemtocraftUtils.formatIntegerToString(particles))
+          }
+          event
+          .toolTip
+          .add(EnumChatFormatting.DARK_PURPLE + "Mass: " + EnumChatFormatting.RESET + FemtocraftUtils
+                                                                                      .formatIntegerToString(mass))
       }
     }
   }

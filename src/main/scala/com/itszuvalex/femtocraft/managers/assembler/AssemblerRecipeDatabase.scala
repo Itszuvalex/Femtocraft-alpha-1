@@ -24,7 +24,7 @@
 //import java.sql._
 //
 //import com.itszuvalex.femtocraft.Femtocraft
-//import com.itszuvalex.femtocraft.api.research.ITechnology
+//import ITechnology
 //import com.itszuvalex.femtocraft.api.{AssemblerRecipe, EnumTechLevel}
 //import com.itszuvalex.femtocraft.implicits.IDImplicits._
 //import com.itszuvalex.femtocraft.utils.FemtocraftFileUtils

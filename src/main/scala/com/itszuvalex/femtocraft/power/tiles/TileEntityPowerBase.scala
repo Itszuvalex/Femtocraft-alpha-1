@@ -24,7 +24,7 @@ package com.itszuvalex.femtocraft.power.tiles
 import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.api.power.IPowerTileContainer
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
-import com.itszuvalex.femtocraft.power.FemtocraftPowerUtils
+import com.itszuvalex.femtocraft.power.FemtocraftPowerAlgorithm
 import com.itszuvalex.femtocraft.power.traits.PowerTileContainer
 import net.minecraftforge.common.util.ForgeDirection
 
@@ -54,7 +54,7 @@ abstract class TileEntityPowerBase extends TileEntityBase with PowerTileContaine
 
   override def femtocraftServerUpdate() {
     super.femtocraftServerUpdate()
-    FemtocraftPowerUtils.distributePower(this, connections, worldObj, xCoord, yCoord, zCoord)
+    FemtocraftPowerAlgorithm.distributePower(this, connections, worldObj, xCoord, yCoord, zCoord)
     setModified()
   }
 

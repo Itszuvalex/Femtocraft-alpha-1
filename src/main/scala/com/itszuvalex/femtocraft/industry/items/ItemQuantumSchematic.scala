@@ -22,20 +22,31 @@ package com.itszuvalex.femtocraft.industry.items
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.core.Configurable
-import com.itszuvalex.femtocraft.api.items.ItemAssemblySchematic
+import com.itszuvalex.femtocraft.api.items.{AssemblerSchematic, IAssemblerSchematic}
+import com.itszuvalex.femtocraft.core.items.ItemBase
 import com.itszuvalex.femtocraft.industry.items.ItemQuantumSchematic.SCHEMATIC_USES
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.client.renderer.texture.IIconRegister
+import net.minecraft.util.IIcon
 
 object ItemQuantumSchematic {
-  @Configurable(comment = "Number of uses good for.") private var SCHEMATIC_USES = ItemAssemblySchematic.INFINITE_USE_DAMAGE
+  @Configurable(comment = "Number of uses good for.") private val SCHEMATIC_USES = IAssemblerSchematic
+                                                                                   .INFINITE_USE_DAMAGE
 }
 
-@Configurable class ItemQuantumSchematic(uName: String) extends ItemAssemblySchematic(uName) {
+@Configurable class ItemQuantumSchematic(uName: String)
+  extends ItemBase(uName) with AssemblerSchematic {
   setMaxDamage(SCHEMATIC_USES)
+  var keyed: IIcon = null
+
+  @SideOnly(Side.CLIENT)
+  override def blankIcon = itemIcon
+
+  @SideOnly(Side.CLIENT)
+  override def keyedIcon = keyed
 
   @SideOnly(Side.CLIENT) override def registerIcons(par1IconRegister: IIconRegister) {
     itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "ItemQuantumSchematic")
-    keyedIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "ItemQuantumSchematicKeyed")
+    keyed = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "ItemQuantumSchematicKeyed")
   }
 }

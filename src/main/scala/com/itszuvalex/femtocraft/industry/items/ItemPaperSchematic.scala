@@ -22,20 +22,30 @@ package com.itszuvalex.femtocraft.industry.items
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.core.Configurable
-import com.itszuvalex.femtocraft.api.items.ItemAssemblySchematic
+import com.itszuvalex.femtocraft.api.items.{AssemblerSchematic, IAssemblerSchematic}
+import com.itszuvalex.femtocraft.core.items.ItemBase
 import com.itszuvalex.femtocraft.industry.items.ItemPaperSchematic.SCHEMATIC_USES
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.client.renderer.texture.IIconRegister
+import net.minecraft.util.IIcon
 
 object ItemPaperSchematic {
-  @Configurable(comment = "Number of uses good for.") private var SCHEMATIC_USES = 16
+  @Configurable(comment = "Number of uses good for.") private val SCHEMATIC_USES = 16
 }
 
-@Configurable class ItemPaperSchematic(uName: String) extends ItemAssemblySchematic(uName) {
+@Configurable class ItemPaperSchematic(uName: String)
+  extends ItemBase(uName) with AssemblerSchematic {
   setMaxDamage(SCHEMATIC_USES)
+  var keyed: IIcon = null
+
+  @SideOnly(Side.CLIENT)
+  override def blankIcon = itemIcon
+
+  @SideOnly(Side.CLIENT)
+  override def keyedIcon = keyed
 
   @SideOnly(Side.CLIENT) override def registerIcons(par1IconRegister: IIconRegister) {
     itemIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "ItemPaperSchematic")
-    keyedIcon = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "ItemPaperSchematicKeyed")
+    keyed = par1IconRegister.registerIcon(Femtocraft.ID.toLowerCase + ":" + "ItemPaperSchematicKeyed")
   }
 }

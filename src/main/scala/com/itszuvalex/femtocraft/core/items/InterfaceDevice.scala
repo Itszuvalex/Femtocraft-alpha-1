@@ -20,7 +20,8 @@
  */
 package com.itszuvalex.femtocraft.core.items
 
-import com.itszuvalex.femtocraft.api.{EnumTechLevel, IInterfaceDevice}
+import com.itszuvalex.femtocraft.api.EnumTechLevel
+import com.itszuvalex.femtocraft.api.items.IInterfaceDevice
 import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item

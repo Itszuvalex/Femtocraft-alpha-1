@@ -20,10 +20,9 @@
  */
 package com.itszuvalex.femtocraft.industry.containers
 
-import com.itszuvalex.femtocraft.api.industry.IAssemblerSchematic
-import com.itszuvalex.femtocraft.api.items.ItemAssemblySchematic
-import com.itszuvalex.femtocraft.gui.{DisplaySlot, OutputSlot}
+import com.itszuvalex.femtocraft.api.items.IAssemblerSchematic
 import com.itszuvalex.femtocraft.core.container.ContainerInv
+import com.itszuvalex.femtocraft.gui.{DisplaySlot, OutputSlot}
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityBaseEntityMicroReconstructor
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.entity.player.{EntityPlayer, InventoryPlayer}
@@ -33,7 +32,10 @@ import net.minecraft.util.IIcon
 
 import scala.collection.JavaConversions._
 
-class ContainerReconstructor[T <: TileEntityBaseEntityMicroReconstructor](player: EntityPlayer, par1InventoryPlayer: InventoryPlayer, inventory: T) extends ContainerInv[T](player, inventory, 10, 9) {
+class ContainerReconstructor[T <: TileEntityBaseEntityMicroReconstructor](player: EntityPlayer,
+                                                                          par1InventoryPlayer: InventoryPlayer,
+                                                                          inventory: T)
+  extends ContainerInv[T](player, inventory, 10, 9) {
   val schematic: Slot = new Slot(inventory, 10, 93, 54) {
     override def isItemValid(par1ItemStack: ItemStack) = par1ItemStack.getItem.isInstanceOf[IAssemblerSchematic]
   }
@@ -42,12 +44,18 @@ class ContainerReconstructor[T <: TileEntityBaseEntityMicroReconstructor](player
 
 
   private var lastMass = 0
-  schematic.setBackgroundIcon(ItemAssemblySchematic.placeholderIcon)
+  schematic.setBackgroundIcon(IAssemblerSchematic.placeholderIcon)
 
   for (y <- 0 until 3) {
     for (x <- 0 until 3) {
       addSlotToContainer(new DisplaySlot(inventory, x + y * 3, 32 + x * 18, 18 + y * 18) {
-        @SideOnly(Side.CLIENT) override def getBackgroundIconIndex: IIcon = if (this.inventory.getStackInSlot(10) != null) null else DisplaySlot.noPlaceDisplayIcon
+        @SideOnly(Side.CLIENT) override def getBackgroundIconIndex: IIcon = if (this
+                                                                                .inventory
+                                                                                .getStackInSlot(10) != null) {
+          null
+        } else {
+          DisplaySlot.noPlaceDisplayIcon
+        }
       })
     }
   }

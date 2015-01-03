@@ -6,7 +6,7 @@ import com.itszuvalex.femtocraft.api.core.Configurable
 import com.itszuvalex.femtocraft.api.power.IPowerTileContainer
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.core.traits.tile.MultiBlockComponent
-import com.itszuvalex.femtocraft.power.FemtocraftPowerUtils
+import com.itszuvalex.femtocraft.power.FemtocraftPowerAlgorithm
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraftforge.common.util.ForgeDirection
 import net.minecraftforge.common.util.ForgeDirection._
@@ -32,7 +32,7 @@ object TileEntitySteamGenerator {
 
   override def femtocraftServerUpdate() {
     super.femtocraftServerUpdate()
-    FemtocraftPowerUtils.distributePower(this, null, worldObj, xCoord, yCoord, zCoord)
+    FemtocraftPowerAlgorithm.distributePower(this, null, worldObj, xCoord, yCoord, zCoord)
   }
 
   override def canAcceptPowerOfLevel(level: EnumTechLevel, from: ForgeDirection): Boolean = {

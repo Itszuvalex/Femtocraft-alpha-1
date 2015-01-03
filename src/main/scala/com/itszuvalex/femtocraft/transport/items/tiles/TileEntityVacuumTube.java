@@ -21,8 +21,8 @@
 //
 //package com.itszuvalex.femtocraft.transport.items.tiles;
 //
-//import com.itszuvalex.femtocraft.api.core.Saveable;
-//import com.itszuvalex.femtocraft.api.transport.IVacuumTube;
+//import Saveable;
+//import IVacuumTube;
 //import com.itszuvalex.femtocraft.core.tiles.TileEntityBase;
 //import com.itszuvalex.femtocraft.utils.BaseInventory;
 //import com.itszuvalex.femtocraft.utils.FemtocraftUtils;

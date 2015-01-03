@@ -24,8 +24,9 @@ import java.util
 
 import com.itszuvalex.femtocraft.FemtocraftGuiConstants
 import com.itszuvalex.femtocraft.api.core.Configurable
+import com.itszuvalex.femtocraft.api.items.IInterfaceDevice
 import com.itszuvalex.femtocraft.api.power.PowerContainer
-import com.itszuvalex.femtocraft.api.{EnumTechLevel, IInterfaceDevice}
+import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.power.tiles.TileEntityMicroCube._
 import com.itszuvalex.femtocraft.power.traits.PowerTileContainer

@@ -3,7 +3,7 @@
 //import com.itszuvalex.femtocraft.Femtocraft;
 //import com.itszuvalex.femtocraft.api.AssemblerRecipe;
 //import com.itszuvalex.femtocraft.api.EnumTechLevel;
-//import com.itszuvalex.femtocraft.api.research.ITechnology;
+//import ITechnology;
 //import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs;
 //import com.itszuvalex.femtocraft.managers.assembler.ComponentRegistry;
 //import com.itszuvalex.femtocraft.managers.research.Technology;

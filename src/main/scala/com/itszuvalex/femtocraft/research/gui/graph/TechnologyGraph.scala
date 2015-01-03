@@ -23,8 +23,8 @@
 //import java.util
 //
 //import com.itszuvalex.femtocraft.Femtocraft
-//import com.itszuvalex.femtocraft.api.core.Configurable
-//import com.itszuvalex.femtocraft.api.research.ITechnology
+//import Configurable
+//import ITechnology
 //import com.itszuvalex.femtocraft.graph.{IGraphNode, MapGraph}
 //import com.itszuvalex.femtocraft.research.gui.GuiResearch
 //import org.apache.logging.log4j.Level

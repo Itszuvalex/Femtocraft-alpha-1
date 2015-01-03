@@ -18,6 +18,7 @@ import com.itszuvalex.femtocraft.managers.assembler.ComponentRegistry
 import com.itszuvalex.femtocraft.managers.assistant.ManagerAssistant
 import com.itszuvalex.femtocraft.managers.research.ManagerResearch
 import com.itszuvalex.femtocraft.network.FemtocraftPacketHandler
+import com.itszuvalex.femtocraft.power.FemtocraftPowerAlgorithm
 import com.itszuvalex.femtocraft.power.blocks._
 import com.itszuvalex.femtocraft.power.fluids.{FluidCooledContaminatedMoltenSalt, FluidCooledMoltenSalt, FluidMoltenSalt}
 import com.itszuvalex.femtocraft.power.items.{ItemBlockMicroCube, ItemInhibitionCore, ItemNucleationCore}
@@ -87,6 +88,7 @@ object Femtocraft {
   var recipeManager                                                     = ManagerRecipe
   var researchManager                                                   = ManagerResearch
   var assistantManager                                                  = ManagerAssistant
+  var powerAlgorithm                                                    = FemtocraftPowerAlgorithm
   var soundManager                          : FemtocraftSoundManager    = null
   var femtocraftServerCommand               : CommandBase               = new CommandFemtocraft
   /*blocks*/

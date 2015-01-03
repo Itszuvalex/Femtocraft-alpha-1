@@ -20,6 +20,8 @@
  */
 package com.itszuvalex.femtocraft.managers.research
 
+import com.itszuvalex.femtocraft.api.core.ISaveable
+import com.itszuvalex.femtocraft.api.managers.research.IResearchStatus
 import com.itszuvalex.femtocraft.managers.research.ResearchStatus._
 import net.minecraft.nbt.NBTTagCompound
 
@@ -28,19 +30,25 @@ object ResearchStatus {
   private val researchKey = "researched"
 }
 
-class ResearchStatus(var tech: String, var researched: Boolean) {
-
+class ResearchStatus(var tech: String, var researched: Boolean) extends IResearchStatus with ISaveable {
+  
   def this(name: String) = this(name, false)
 
-  def saveToNBTTagCompound(compound: NBTTagCompound) {
+  override def getTech = ManagerResearch.getTechnology(tech)
+
+  override def getTechName = tech
+
+  override def isResearched = researched
+
+  override def saveToNBT(compound: NBTTagCompound) {
     compound.setString(techKey, tech)
     compound.setBoolean(researchKey, researched)
   }
-
-  def loadFromNBTTagCompound(compound: NBTTagCompound) {
+  
+  override def loadFromNBT(compound: NBTTagCompound) {
     tech = compound.getString(techKey)
     researched = compound.getBoolean(researchKey)
   }
-
+  
   private def this() = this(null)
 }

@@ -1,6 +1,7 @@
 package com.itszuvalex.femtocraft.api.industry;
 
 import com.itszuvalex.femtocraft.api.AssemblerRecipe;
+import com.itszuvalex.femtocraft.api.items.IAssemblerSchematic;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -11,6 +12,11 @@ public class SchematicNBTWrapper implements IAssemblerSchematic {
     @Override
     public AssemblerRecipe getRecipe(ItemStack stack) {
         return null;
+    }
+
+    @Override
+    public boolean hasRecipe(ItemStack stack) {
+        return false;
     }
 
     @Override

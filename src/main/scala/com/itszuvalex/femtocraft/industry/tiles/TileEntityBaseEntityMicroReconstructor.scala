@@ -22,7 +22,7 @@ package com.itszuvalex.femtocraft.industry.tiles
 
 import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.api.core.{Configurable, Saveable}
-import com.itszuvalex.femtocraft.api.industry.IAssemblerSchematic
+import com.itszuvalex.femtocraft.api.items.IAssemblerSchematic
 import com.itszuvalex.femtocraft.api.power.PowerContainer
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.core.traits.tile.{Inventory, MassTank}

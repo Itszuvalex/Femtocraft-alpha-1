@@ -1,6 +1,7 @@
 package com.itszuvalex.femtocraft.utility
 
 import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.api.events.EventSpatialRelocation
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
 import net.minecraft.init.Blocks
 import net.minecraft.tileentity.TileEntity
@@ -82,7 +83,9 @@ object SpatialRelocation {
         }
       case _                   =>
     }
-    if (MinecraftForge.EVENT_BUS.post(new EventSpatialRelocation.Placement(destWorld, destX, destY, destZ, s.block))) return false
+    if (MinecraftForge.EVENT_BUS.post(new EventSpatialRelocation.Placement(destWorld, destX, destY, destZ, s.block))) {
+      return false
+    }
     destWorld.setBlock(destX, destY, destZ, s.block, s.metadata, 3)
     if (s.te != null) {
       if (s.x != destX) s.te.setInteger("x", destX)
