@@ -53,23 +53,14 @@ import org.apache.logging.log4j.{Level, LogManager, Logger}
 /**
  * Created by Christopher Harris (Itszuvalex) on 10/6/14.
  */
-@Mod(modid = Femtocraft.ID, name = "Femtocraft", version = Femtocraft.VERSION, modLanguage = "scala")
+@Mod(modid = Femtocraft.ID, name = Femtocraft.ID, version = Femtocraft.VERSION, modLanguage = "scala")
 object Femtocraft {
   
   final val ID                   = "Femtocraft"
-  final val VERSION              = "0.1.0"
+  final val VERSION              = Version.FULL_VERSION
   final val TECH_CONFIG_APPEND   = "Technology"
   final val RECIPE_CONFIG_APPEND = "AssemblerRecipes"
   
-  //  /* Packet Channels */
-  //  final val GUI_CHANNEL               = ID + ".gui"
-  //  final val SOUND_CHANNEL             = ID + ".snd"
-  //  final val PLAYER_PROP_CHANNEL       = ID + ".pprop"
-  //  final val RESEARCH_CHANNEL          = ID + ".rman"
-  //  final val RESEARCH_CONSOLE_CHANNEL  = ID + ".rcon"
-  //  final val VACUUM_TUBE_CHANNEL       = ID + ".vtube"
-  //  final val FISSION_REACTOR_CHANNEL   = ID + ".fiss"
-  //  final val PHLEGETHON_TUNNEL_CHANNEL = ID + ".phleg"
   val fakePlayerGameProfile                                             =
     new GameProfile(UUID.fromString("b730f1c0-018b-40be-9515-48c3f4c2f745"), "[" + ID + "]")
   @SidedProxy(clientSide = "com.itszuvalex.femtocraft.proxy.ProxyClient",
