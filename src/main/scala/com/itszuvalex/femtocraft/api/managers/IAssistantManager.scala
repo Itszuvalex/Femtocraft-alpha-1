@@ -18,7 +18,7 @@ trait IAssistantManager {
   /**
    *
    * @param owner
-   * @return A map of assistant getCommandSenderName s to IAssistantPermissions
+   * @return A collection of assistant's getCommandSenderName
    */
   def getPlayerAssistants(owner: String): util.Collection[String]
 

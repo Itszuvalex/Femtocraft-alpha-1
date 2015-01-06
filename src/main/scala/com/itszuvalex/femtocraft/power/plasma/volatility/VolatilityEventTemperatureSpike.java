@@ -26,7 +26,7 @@ import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.VolatilityEvent;
-import com.itszuvalex.femtocraft.power.plasma.FemtocraftPlasmaManager;
+import com.itszuvalex.femtocraft.power.plasma.ManagerPlasma;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
@@ -80,7 +80,7 @@ public class VolatilityEventTemperatureSpike extends
         if (volatilityDif > 0) {
             //Add some proportion of this event's temperature
             double temp = volatilityEnergy() /
-                          FemtocraftPlasmaManager
+                          ManagerPlasma
                                   .temperatureToEnergy();
             if (flow.getTemperature() < temp) {
                 flow.setTemperature((long) (flow.getTemperature() + random.nextFloat() * temp));

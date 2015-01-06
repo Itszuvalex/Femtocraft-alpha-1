@@ -25,7 +25,7 @@ import com.itszuvalex.femtocraft.api.EnumTechLevel;
 import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.items.IInterfaceDevice;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
-import com.itszuvalex.femtocraft.power.plasma.FemtocraftPlasmaManager;
+import com.itszuvalex.femtocraft.power.plasma.ManagerPlasma;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -174,8 +174,8 @@ public class TileEntityPlasmaVent extends TileEntityPlasmaConduit {
     }
 
     private void ventFlow(IPlasmaFlow flow) {
-        FemtocraftPlasmaManager.purgeFlow((long) (flow.getTemperature()
-                                                  * FemtocraftPlasmaManager
+        ManagerPlasma.purgeFlow((long) (flow.getTemperature()
+                                                  * ManagerPlasma
                         .temperatureToEnergy()), 500, flow.getVolatility() / 500,
                 worldObj, xCoord + ventDirection
                         .offsetX, yCoord + ventDirection.offsetY,

@@ -2,7 +2,7 @@ package com.itszuvalex.femtocraft.api
 
 
 import com.itszuvalex.femtocraft.api.managers.research.IResearchManager
-import com.itszuvalex.femtocraft.api.managers.{IAssistantManager, IPlasmaManager, IPowerAlgorithm}
+import com.itszuvalex.femtocraft.api.managers.{IAssemblerRecipeManager, IAssistantManager, IPlasmaManager, IPowerAlgorithm}
 import org.apache.logging.log4j.{Level, LogManager}
 
 /**
@@ -13,19 +13,21 @@ import org.apache.logging.log4j.{Level, LogManager}
  * All objects are cached once hooked.
  */
 object FemtocraftAPI {
-  private lazy val powerAlgorithm   = getFemtocraftField[IPowerAlgorithm](powerAlgorithmGetter)
-  private lazy val researchManager  = getFemtocraftField[IResearchManager](researchManagerGetter)
-  private lazy val assistantManager = getFemtocraftField[IAssistantManager](assistantManagerGetter)
-  private lazy val plasmaManager    = getFemtocraftField[IPlasmaManager](plasmaManagerGetter)
-  private lazy val femtocraft       = attemptHookFemtocraft()
+  private lazy val powerAlgorithm         = getFemtocraftField[IPowerAlgorithm](powerAlgorithmGetter)
+  private lazy val researchManager        = getFemtocraftField[IResearchManager](researchManagerGetter)
+  private lazy val assistantManager       = getFemtocraftField[IAssistantManager](assistantManagerGetter)
+  private lazy val plasmaManager          = getFemtocraftField[IPlasmaManager](plasmaManagerGetter)
+  private lazy val assemblerRecipeManager = getFemtocraftField[IAssemblerRecipeManager](assemblerRecipeManagerGetter)
+  private lazy val femtocraft             = attemptHookFemtocraft()
   val FemtocraftID = "Femtocraft"
   val apiLogger    = LogManager.getLogger(FemtocraftID + "API")
   val femtoLogger  = LogManager.getLogger(FemtocraftID)
-  private val powerAlgorithmGetter   = "powerAlgorithm"
-  private val researchManagerGetter  = "researchManager"
-  private val assistantManagerGetter = "assistantManager"
-  private val plasmaManagerGetter    = "plasmaManager"
-  private val femtocraftClasspath    = "com.itszuvalex.femtocraft.Femtocraft"
+  private val powerAlgorithmGetter         = "powerAlgorithm"
+  private val researchManagerGetter        = "researchManager"
+  private val assistantManagerGetter       = "assistantManager"
+  private val plasmaManagerGetter          = "plasmaManager"
+  private val assemblerRecipeManagerGetter = "assemblerRecipeManager"
+  private val femtocraftClasspath          = "com.itszuvalex.femtocraft.Femtocraft"
 
   /**
    *
@@ -50,10 +52,17 @@ object FemtocraftAPI {
 
   /**
    *
-   * @return AssistantManager singleton responsbie for storing, saving, and loading assistant information for all players.
+   * @return PlasmaManager singleton with helper functions for interacting with plasma.
    */
   def getPlasmaManager = try plasmaManager
   catch {case _: Throwable => apiLogger.log(Level.ERROR, "Failed to hook Femtocraft Plasma Manager"); null}
+
+  /**
+   *
+   * @return AssemblerRecipeManager singleton responsbie for storing, saving, and loading AssemblerRecipe information
+   */
+  def getAssemblerRecipeManager = try assemblerRecipeManager
+  catch {case _: Throwable => apiLogger.log(Level.ERROR, "Failed to hook Femtocraft Assembler Recipe Manager"); null}
 
   /**
    * Tell the API to attempt to search for Femtocraft now.  Otherwise, will attempt to hook classes as they're needed.

@@ -36,7 +36,7 @@ import scala.collection.JavaConversions._
 /**
  * Created by Christopher Harris (Itszuvalex) on 5/8/14.
  */
-object FemtocraftPlasmaManager extends IPlasmaManager {
+object ManagerPlasma extends IPlasmaManager {
   val _temperatureToEnergy = 10000
   val _energyToTemperature = 1d / temperatureToEnergy
 
@@ -78,7 +78,7 @@ object FemtocraftPlasmaManager extends IPlasmaManager {
     if (container.getFlows != null) {
       for (flow <- container.getFlows) {
         if (flow.isUnstable || flow.getVolatility > volatilityLevel) {
-          totalEnergy += (flow.getTemperature * FemtocraftPlasmaManager.temperatureToEnergy).toLong
+          totalEnergy += (flow.getTemperature * ManagerPlasma.temperatureToEnergy).toLong
           container.removeFlow(flow)
         }
       }

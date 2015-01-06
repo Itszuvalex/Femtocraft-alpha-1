@@ -24,9 +24,9 @@ object PlasmaFlow {
    * Kelvin
    */
   val energyRequirementMin   : Int    = 500000
-  val temperatureMin         : Int    = (energyRequirementMin / FemtocraftPlasmaManager.temperatureToEnergy).toInt
+  val temperatureMin         : Int    = (energyRequirementMin / ManagerPlasma.temperatureToEnergy).toInt
   val getEnergyRequirementMax: Int    = 1000000
-  val temperatureMax         : Int    = (getEnergyRequirementMax / FemtocraftPlasmaManager.temperatureToEnergy).toInt
+  val temperatureMax         : Int    = (getEnergyRequirementMax / ManagerPlasma.temperatureToEnergy).toInt
   private val volatilityMin: Int = 100
   private val volatilityMax: Int = 10000
 
@@ -50,21 +50,21 @@ class PlasmaFlow(reaction: IFusionReaction) extends IPlasmaFlow with ISaveable {
 
   def update(container: IPlasmaContainer, world: World, x: Int, y: Int, z: Int) {
     if (container.getStabilityRating < getVolatility) {
-      FemtocraftPlasmaManager.applyEventToContainer(container, onSpontaneousEvent(container), world, x, y, z)
+      ManagerPlasma.applyEventToContainer(container, onSpontaneousEvent(container), world, x, y, z)
     }
     if (container.getTemperatureRating < getTemperature) {
-      FemtocraftPlasmaManager.applyEventToContainer(container, onOverheat(container), world, x, y, z)
+      ManagerPlasma.applyEventToContainer(container, onOverheat(container), world, x, y, z)
     }
     if ( {freqPos -= 1; freqPos + 1} <= 0) {
       freqPos = getFrequency
       if (container.getOutput == null) {
-        FemtocraftPlasmaManager.applyEventToContainer(container, onIncompleteCircuit(container), world, x, y, z)
+        ManagerPlasma.applyEventToContainer(container, onIncompleteCircuit(container), world, x, y, z)
       } else {
         if (container.getOutput.addFlow(this)) {
           setContainer(container.getOutput)
           container.removeFlow(this)
         } else {
-          FemtocraftPlasmaManager.applyEventToContainer(container, onPlasmaOverflow(container), world, x, y, z)
+          ManagerPlasma.applyEventToContainer(container, onPlasmaOverflow(container), world, x, y, z)
         }
       }
     }
@@ -99,14 +99,14 @@ class PlasmaFlow(reaction: IFusionReaction) extends IPlasmaFlow with ISaveable {
 
   override def recharge(reaction: IFusionReaction) {
     var energy: Long = random.nextInt(getEnergyRequirementMax - energyRequirementMin) + energyRequirementMin
-    energy -= (getTemperature * FemtocraftPlasmaManager.temperatureToEnergy).toLong
+    energy -= (getTemperature * ManagerPlasma.temperatureToEnergy).toLong
     if (energy > reaction.getReactionEnergy) {
       energy = reaction.getReactionEnergy
       unstable = true
     }
     reaction.consumeReactionEnergy(energy)
     val prev: Long = temperature
-    temperature = (energy / FemtocraftPlasmaManager.temperatureToEnergy).toLong
+    temperature = (energy / ManagerPlasma.temperatureToEnergy).toLong
     updateFreqAndVolatility(prev)
   }
 
@@ -177,7 +177,7 @@ class PlasmaFlow(reaction: IFusionReaction) extends IPlasmaFlow with ISaveable {
       energy = reaction.getReactionEnergy
     }
     reaction.consumeReactionEnergy(energy)
-    temperature = (energy / FemtocraftPlasmaManager.temperatureToEnergy).toLong
+    temperature = (energy / ManagerPlasma.temperatureToEnergy).toLong
     val ratio: Double = random.nextDouble
     frequency = ((ratio * (frequencyMax - frequencyMin) + frequencyMin) * temperature / temperatureMin).toInt
     volatility = (((1 - ratio) * (volatilityMax - volatilityMin) + volatilityMin) * temperature / temperatureMin).toInt
@@ -187,6 +187,6 @@ class PlasmaFlow(reaction: IFusionReaction) extends IPlasmaFlow with ISaveable {
   private[plasma] def this() = this(null)
 
   private def getVolatilityEventTemperature: Int = {
-    (temperature * ((random.nextFloat * .5f) + .5f) * FemtocraftPlasmaManager.temperatureToEnergy).toInt
+    (temperature * ((random.nextFloat * .5f) + .5f) * ManagerPlasma.temperatureToEnergy).toInt
   }
 }

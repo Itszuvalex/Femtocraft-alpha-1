@@ -26,6 +26,8 @@ import com.itszuvalex.femtocraft.api.industry.AssemblerRecipe
 import com.itszuvalex.femtocraft.managers.research.ResearchStatus
 import com.itszuvalex.femtocraft.research.gui.GuiResearch
 
+import scala.collection.JavaConversions._
+
 class GuiTechnologyAdvancedChemistry(guiResearch: GuiResearch, status: ResearchStatus) extends GuiTechnology(guiResearch, status) {
   private final val recipes = Femtocraft.recipeManager.assemblyRecipes.getRecipesForTechnology(status.tech)
 

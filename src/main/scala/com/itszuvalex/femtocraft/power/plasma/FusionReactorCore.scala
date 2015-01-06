@@ -67,7 +67,7 @@ class FusionReactorCore(maxContainedFlows: Int, stability: Int, temperatureRatin
 
   def getReactionInstability = reaction.getReactionInstability
 
-  def getReactionTemperature = (reaction.getReactionEnergy * FemtocraftPlasmaManager.energyToTemperature).toLong
+  def getReactionTemperature = (reaction.getReactionEnergy * ManagerPlasma.energyToTemperature).toLong
 
   def getCoreEnergy = reaction.getReactionEnergy
 

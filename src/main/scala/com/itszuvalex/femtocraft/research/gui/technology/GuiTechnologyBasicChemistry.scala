@@ -21,13 +21,18 @@
 package com.itszuvalex.femtocraft.research.gui.technology
 
 import java.util.List
+
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.industry.AssemblerRecipe
 import com.itszuvalex.femtocraft.managers.research.ResearchStatus
 import com.itszuvalex.femtocraft.research.gui.GuiResearch
 
+import scala.collection.JavaConversions._
+
 class GuiTechnologyBasicChemistry(guiResearch: GuiResearch, status: ResearchStatus) extends GuiTechnology(guiResearch, status) {
   private val recipes = Femtocraft.recipeManager.assemblyRecipes.getRecipesForTechnology(status.tech)
+
+  override def getNumPages(researched: Boolean): Int = if (researched) Math.ceil(recipes.size / 2f).toInt else 1
 
   protected override def renderInformation(x: Int, y: Int, width: Int, height: Int, displayPage: Int, mouseX: Int, mouseY: Int, tooltip: List[_], isResearched: Boolean) {
     if (isResearched && recipes.size > 0) {
@@ -42,6 +47,4 @@ class GuiTechnologyBasicChemistry(guiResearch: GuiResearch, status: ResearchStat
     else {
     }
   }
-
-  override def getNumPages(researched: Boolean): Int = if (researched) Math.ceil(recipes.size / 2f).toInt else 1
 }

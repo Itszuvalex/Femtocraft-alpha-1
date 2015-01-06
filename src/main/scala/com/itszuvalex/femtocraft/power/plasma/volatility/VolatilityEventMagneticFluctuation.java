@@ -26,7 +26,7 @@ import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.VolatilityEvent;
-import com.itszuvalex.femtocraft.power.plasma.FemtocraftPlasmaManager;
+import com.itszuvalex.femtocraft.power.plasma.ManagerPlasma;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -80,7 +80,7 @@ public class VolatilityEventMagneticFluctuation extends
             //% chance of the time, where % is volatilityEnergy/flow's
             // energy, make that flow unstable.
             if (
-                    random.nextInt((int) (flow.getTemperature() * FemtocraftPlasmaManager
+                    random.nextInt((int) (flow.getTemperature() * ManagerPlasma
                             .temperatureToEnergy())) < volatilityEnergy()) {
                 flow.setUnstable(true);
             }

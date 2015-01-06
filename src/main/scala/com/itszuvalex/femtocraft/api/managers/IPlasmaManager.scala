@@ -18,7 +18,7 @@ trait IPlasmaManager {
 
   /**
    *
-   * @return Multipleir to multiply plasma flow temperature by to get energy.
+   * @return Multiplier to multiply plasma flow temperature by to get energy.
    */
   def temperatureToEnergy: Double
 

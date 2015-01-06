@@ -13,8 +13,16 @@ trait IResearchStatus {
    */
   def isResearched: Boolean
 
+  /**
+   *
+   * @return Name of the associated technology.
+   */
   def getTechName: String
 
+  /**
+   *
+   * @return Actual reference to the technology.  Piped through ResearchManager's getTech(getTechName).
+   */
   def getTech: ITechnology
 
 }

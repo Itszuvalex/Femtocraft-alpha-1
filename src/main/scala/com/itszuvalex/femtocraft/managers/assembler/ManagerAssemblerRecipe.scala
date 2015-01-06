@@ -24,14 +24,16 @@ import java.io.File
 import java.util
 
 import com.itszuvalex.femtocraft.Femtocraft
-import com.itszuvalex.femtocraft.api.events.EventAssemblerRegister
-import com.itszuvalex.femtocraft.api.industry.{AssemblerRecipeType, AssemblerRecipe}
 import com.itszuvalex.femtocraft.api.EnumTechLevel
-import com.itszuvalex.femtocraft.configuration.{AssemblerXMLLoader, AutoGenConfig, XMLAssemblerRecipes}
+import com.itszuvalex.femtocraft.api.events.registration.EventAssemblerRecipeRegister._
+import com.itszuvalex.femtocraft.api.events.registration.EventAssemblerRegistration._
 import com.itszuvalex.femtocraft.api.implicits.IDImplicits._
-import com.itszuvalex.femtocraft.managers.research.Technology
-import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
+import com.itszuvalex.femtocraft.api.industry.{AssemblerRecipe, AssemblerRecipeType}
+import com.itszuvalex.femtocraft.api.managers.IAssemblerRecipeManager
+import com.itszuvalex.femtocraft.api.research.ITechnology
 import com.itszuvalex.femtocraft.api.utils.{FemtocraftFileUtils, FemtocraftUtils}
+import com.itszuvalex.femtocraft.configuration.{AssemblerXMLLoader, AutoGenConfig, XMLAssemblerRecipes}
+import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.{CraftingManager, IRecipe, ShapedRecipes, ShapelessRecipes}
 import net.minecraftforge.common.MinecraftForge
@@ -52,8 +54,8 @@ import scala.collection.mutable.ArrayBuffer
   *         recipes are ordered according to their signature in the inventory. The entire 9 slots are used for the input
   *         signature. ItemStack stackSize does not matter for ordering. When reconstructing, items must conform to the input signature, and all 9 slots are
   *         important. Slots that are null in the recipe must not contain any items, and vice versa. This will be separately
-  *         enforced in the schematic-creating TileEntities, but it it is also stated here for reference.*/
-object ManagerAssemblerRecipe {
+  *         enforced in the schematic-creating TileEntities, but it it is also stated here for reference. */
+object ManagerAssemblerRecipe extends IAssemblerRecipeManager {
   val shapelessPermuteTimeMillis: Long = 100
   private val assemblerRecipeList = new ArrayBuffer[AssemblerRecipe]
   private val assemblerRecompTree = new util.TreeMap[RecompositionKey, AssemblerRecipe]
@@ -63,13 +65,12 @@ object ManagerAssemblerRecipe {
     registerRecipes()
   }
 
-  @throws(classOf[IllegalArgumentException])
-  def addReversableRecipe(recipe: AssemblerRecipe): Boolean = {
+  override def addReversibleRecipe(recipe: AssemblerRecipe): Boolean = {
     if (recipe.input.length != 9) {
-      throw new IllegalArgumentException("AssemblerRecipe - Invalid Input Array Length!  Must be 9!")
+      return false
     }
     if (recipe.output == null) {
-      throw new IllegalArgumentException("AssemblerRecipe - Output ItemStack cannot be null.")
+      return false
     }
     if (!checkDecomposition(recipe) || !checkRecomposition(recipe)) {
       Femtocraft.log(Level.WARN, "Assembler recipe already exists for " + recipe.getRecipeName + ".")
@@ -78,15 +79,20 @@ object ManagerAssemblerRecipe {
     registerRecomposition(recipe) && registerDecomposition(recipe)
   }
 
-  def getAllRecipes = assemblerRecipeList
+  override def getAllRecipes = assemblerRecipeList
+
+  override def getReversibleRecipes = getRecompositionRecipes.toSet union getDecompositionRecipes.toSet
+
+  override def getDecompositionRecipes = assemblerDecompTree.values
+
+  override def getRecompositionRecipes = assemblerRecompTree.values
 
   def getDecompositionCounts(i: ItemStack) = DecompositionManager.getDecompositionCounts(i)
 
-  @throws(classOf[IllegalArgumentException])
-  def addRecipe(recipe: AssemblerRecipe): Boolean =
+  override def addRecipe(recipe: AssemblerRecipe): Boolean =
     try {
       val result = recipe.`type` match {
-        case AssemblerRecipeType.Reversible    => addReversableRecipe(recipe)
+        case AssemblerRecipeType.Reversible    => addReversibleRecipe(recipe)
         case AssemblerRecipeType.Decomposition => addDecompositionRecipe(recipe)
         case AssemblerRecipeType.Recomposition => addRecompositionRecipe(recipe)
       }
@@ -97,13 +103,12 @@ object ManagerAssemblerRecipe {
       case e: Throwable => false
     }
 
-  @throws(classOf[IllegalArgumentException])
-  def addRecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
+  override def addRecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
     if (recipe.input.length != 9) {
-      throw new IllegalArgumentException("AssemblerRecipe - Invalid Input Array Length!  Must be 9!")
+      return false
     }
     if (recipe.output == null) {
-      throw new IllegalArgumentException("AssemblerRecipe - Output ItemStack cannot be null.")
+      return false
     }
     if (!checkRecomposition(recipe)) {
       Femtocraft.log(Level.WARN, "Assembler recipe already exists for " + recipe.getRecipeName + ".")
@@ -112,13 +117,12 @@ object ManagerAssemblerRecipe {
     registerRecomposition(recipe)
   }
 
-  @throws(classOf[IllegalArgumentException])
-  def addDecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
+  override def addDecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
     if (recipe.input.length != 9) {
-      throw new IllegalArgumentException("AssemblerRecipe - Invalid Input Array Length!  Must be 9!")
+      return false
     }
     if (recipe.output == null) {
-      throw new IllegalArgumentException("AssemblerRecipe - Output ItemStack cannot be null.")
+      return false
     }
     if (!checkDecomposition(recipe)) {
       Femtocraft.log(Level.WARN, "Assembler recipe already exists for " + recipe.getRecipeName + ".")
@@ -127,71 +131,45 @@ object ManagerAssemblerRecipe {
     registerDecomposition(recipe)
   }
 
-  def removeAnyRecipe(recipe: AssemblerRecipe) = { val result = removeDecompositionRecipe(recipe); removeRecompositionRecipe(recipe) || result }
+  override def removeAnyRecipe(recipe: AssemblerRecipe) = { val result = removeDecompositionRecipe(recipe); removeRecompositionRecipe(recipe) || result }
 
-  def removeDecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
+  override def removeDecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
     if (checkDecomposition(recipe)) return true
     assemblerDecompTree.remove(new DecompositionKey(recipe))
     if (checkRecomposition(recipe)) assemblerRecipeList -= recipe
     true
   }
 
-  def removeRecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
+  override def removeRecompositionRecipe(recipe: AssemblerRecipe): Boolean = {
     if (checkRecomposition(recipe)) return true
     assemblerRecompTree.remove(new RecompositionKey(recipe))
     if (checkDecomposition(recipe)) assemblerRecipeList -= recipe
     true
   }
 
-  def removeReversableRecipe(recipe: AssemblerRecipe) = removeDecompositionRecipe(recipe) && removeRecompositionRecipe(recipe)
+  override def removeReversibleRecipe(recipe: AssemblerRecipe) = removeDecompositionRecipe(recipe) && removeRecompositionRecipe(recipe)
 
-  def canCraft(input: Array[ItemStack]): Boolean = {
-    if (input.length != 9) {
-      return false
-    }
-    val recipe: AssemblerRecipe = getRecipe(input)
-    if (recipe == null) {
-      return false
-    }
-    for (i <- 0 until 9) {
-      val rec = recipe.input(i)
-      if (!(input(i) == null || rec == null)) {
-        if (input(i).stackSize < input(i).stackSize) {
-          return false
-        }
-        if (FemtocraftUtils.compareItem(rec, input(i)) != 0) {
-          return false
-        }
-      }
-    }
-    true
-  }
 
-  def getRecipe(input: Array[ItemStack]): AssemblerRecipe = {
+  override def getRecipe(input: Array[ItemStack]): AssemblerRecipe = {
     assemblerRecompTree.get(new RecompositionKey(input))
   }
 
-  def canCraft(input: ItemStack) = {
-    val recipe = getRecipe(input)
-    recipe != null && input.stackSize >= recipe.output.stackSize && FemtocraftUtils
-                                                                    .compareItem(recipe.output, input) == 0
-  }
 
-  def getRecipe(output: ItemStack): AssemblerRecipe = assemblerDecompTree.get(new DecompositionKey(output))
+  override def getRecipe(output: ItemStack): AssemblerRecipe = assemblerDecompTree.get(new DecompositionKey(output))
 
-  def getRecipesForTechLevel(level: EnumTechLevel) = assemblerRecipeList.filter(_.enumTechLevel == level)
+  override def getRecipesForTechLevel(level: EnumTechLevel) = assemblerRecipeList.filter(_.enumTechLevel == level)
 
-  def getRecipesForTechnology(tech: Technology): ArrayBuffer[AssemblerRecipe] = getRecipesForTechnology(tech.getName)
+  override def getRecipesForTechnology(tech: ITechnology) = getRecipesForTechnology(tech.getName)
 
-  def getRecipesForTechnology(techName: String): ArrayBuffer[AssemblerRecipe] = assemblerRecipeList
-                                                                                .filter(_
-                                                                                        .tech
-                                                                                        .equalsIgnoreCase(techName))
+  override def getRecipesForTechnology(techName: String) = assemblerRecipeList
+                                                           .filter(_
+                                                                   .tech
+                                                                   .equalsIgnoreCase(techName))
 
-  def hasResearchedRecipe(recipe: AssemblerRecipe, username: String) = Femtocraft
-                                                                       .researchManager
-                                                                       .hasPlayerResearchedTechnology(username,
-                                                                                                      recipe.tech)
+  override def hasResearchedRecipe(recipe: AssemblerRecipe, username: String) = Femtocraft
+                                                                                .researchManager
+                                                                                .hasPlayerResearchedTechnology(username,
+                                                                                                               recipe.tech)
 
   private def registerShapedRecipe(sr: ShapedRecipes): Boolean = {
     try {
@@ -332,18 +310,22 @@ object ManagerAssemblerRecipe {
   private def registerRecipes() {
     Femtocraft.log(Level.INFO, "Registering Femtocraft assembler recipes.")
 
+    MinecraftForge.EVENT_BUS.post(new PreRegistration(this))
+
     Femtocraft.log(Level.INFO, "Registering custom assembler recipes.")
     val customRecipes = new AssemblerXMLLoader(new File(FemtocraftFileUtils.customConfigPath + "Assembler/"))
                         .loadItems()
+    MinecraftForge.EVENT_BUS.post(new CustomRecipesLoaded(this, customRecipes))
     customRecipes.view.foreach(addRecipe)
     Femtocraft.log(Level.INFO, "Finished registering custom assembler recipes.")
 
     val defaults = new ArrayBuffer[AssemblerRecipe]()
-
+    MinecraftForge.EVENT_BUS.post(new PreFemtocraftRegistration(this))
     val femtocraftRecipes = new
         XMLAssemblerRecipes(new File(FemtocraftFileUtils.autogenConfigPath, "AssemblerRecipes.xml"))
     if (!AutoGenConfig.shouldRegenFile(femtocraftRecipes.file) && femtocraftRecipes.initialized) {
       defaults ++= femtocraftRecipes.loadCustomRecipes()
+      MinecraftForge.EVENT_BUS.post(new FemtocraftRecipesLoaded(this, defaults))
       defaults.view.foreach(addRecipe)
     } else {
       Femtocraft.assemblerConfigs.setBatchLoading(true)
@@ -352,6 +334,7 @@ object ManagerAssemblerRecipe {
       defaults ++= AssemblerDefaults.getMicroDefaults
       defaults ++= AssemblerDefaults.getMacroDefaults
       defaults ++= AssemblerDefaults.getFemtocraftDefaults
+      MinecraftForge.EVENT_BUS.post(new FemtocraftRecipesLoaded(this, defaults))
       defaults.view.foreach(addRecipe)
       Femtocraft.assemblerConfigs.setBatchLoading(false)
       Femtocraft.log(Level.INFO, "Saving Femtocraft default recipes to file.")
@@ -361,12 +344,15 @@ object ManagerAssemblerRecipe {
     }
     Femtocraft.log(Level.INFO, "Finished registering Femtocraft assembler recipes.")
 
+    MinecraftForge.EVENT_BUS.post(new PostFemtocraftRegistration(this))
+
     val database = new
         XMLAssemblerRecipes(new File(FemtocraftFileUtils.autogenConfigPath, "ScrapedAssemblerRecipes.xml"))
     Femtocraft.log(Level.INFO, "Scraping Minecraft recipe registries for assembler recipe mappings.")
     if (!AutoGenConfig.shouldRegenFile(database.file) && database.initialized) {
       Femtocraft.log(Level.INFO, "Scraped Recipes Database already exists.  Loading from file.")
-      database.loadCustomRecipes().view.foreach(addRecipe)
+      val scrapedRecipes = database.loadCustomRecipes()
+      scrapedRecipes.view.foreach(addRecipe)
     } else {
       Femtocraft
       .log(Level.WARN,
@@ -386,10 +372,11 @@ object ManagerAssemblerRecipe {
       Femtocraft.log(Level.INFO, "Finished saving scraped recipes.")
       AutoGenConfig.markFileRegenerated(database.file)
     }
+    MinecraftForge.EVENT_BUS.post(new PostRegistration(this))
   }
 
   private def registerRecomposition(recipe: AssemblerRecipe): Boolean = {
-    val event = new EventAssemblerRegister.Recomposition(recipe)
+    val event = new Recomposition(recipe)
     Femtocraft.assemblerConfigs.loadAssemblerRecipe(recipe)
     if (!MinecraftForge.EVENT_BUS.post(event)) {
       assemblerRecompTree.put(new RecompositionKey(recipe), recipe)
@@ -400,7 +387,7 @@ object ManagerAssemblerRecipe {
   }
 
   private def registerDecomposition(recipe: AssemblerRecipe): Boolean = {
-    val event = new EventAssemblerRegister.Decomposition(recipe)
+    val event = new Decomposition(recipe)
     Femtocraft.assemblerConfigs.loadAssemblerRecipe(recipe)
     if (!MinecraftForge.EVENT_BUS.post(event)) {
       assemblerDecompTree.put(new DecompositionKey(recipe), recipe)
@@ -458,7 +445,7 @@ object ManagerAssemblerRecipe {
           //          if (recipe.output.getItemDamage == OreDictionary.WILDCARD_VALUE) {
           //            recipe.output.setItemDamage(0)
           //          }
-          if (addReversableRecipe(recipe)) return true
+          if (addReversibleRecipe(recipe)) return true
         }
       }
     }
@@ -494,7 +481,7 @@ object ManagerAssemblerRecipe {
                                            recipeOutput.copy,
                                            EnumTechLevel.MACRO,
                                            FemtocraftTechnologies.MACROSCOPIC_STRUCTURES)
-          if (addReversableRecipe(recipe)) return true
+          if (addReversibleRecipe(recipe)) return true
         }
       }
     }
@@ -527,7 +514,7 @@ object ManagerAssemblerRecipe {
                }) + ".")
           return false
       }
-      case _ => null
+      case _                              => null
                       }.copyToArray(input)
       input.permutations.exists { permute =>
         val recipe = new AssemblerRecipe(permute,
@@ -542,7 +529,7 @@ object ManagerAssemblerRecipe {
         //        if ((System.currentTimeMillis - timeStart) > ManagerAssemblerRecipe.shapelessPermuteTimeMillis) {
         //          return false
         //        }
-        checkDecomposition(recipe) && checkRecomposition(recipe) && addReversableRecipe(recipe)
+        checkDecomposition(recipe) && checkRecomposition(recipe) && addReversibleRecipe(recipe)
                                 }
     }
     catch {
@@ -578,7 +565,7 @@ object ManagerAssemblerRecipe {
         //        if ((System.currentTimeMillis - timeStart) > ManagerAssemblerRecipe.shapelessPermuteTimeMillis) {
         //          return false
         //        }
-        checkDecomposition(recipe) && checkRecomposition(recipe) && addReversableRecipe(recipe)
+        checkDecomposition(recipe) && checkRecomposition(recipe) && addReversibleRecipe(recipe)
 
                                 }
     }

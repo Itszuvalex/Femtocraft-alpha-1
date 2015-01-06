@@ -8,6 +8,7 @@ import com.itszuvalex.femtocraft.api.implicits.StringImplicits._
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
 import net.minecraft.item.{Item, ItemStack}
 
+import scala.collection.JavaConversions._
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
@@ -26,13 +27,13 @@ import scala.collection.mutable.ArrayBuffer
 
   def registerComponent(item: Item, tech: EnumTechLevel) = getComponents(tech) append item
 
-  def getComponents(tech: EnumTechLevel) = componentMap.getOrElseUpdate(tech, new ArrayBuffer[Item])
-
   def isItemComponent(item: Item, tech: EnumTechLevel) = componentMap.get(tech).exists(_.contains(item))
 
   def getComponentsAssemblerRecipeDisplayString(tech: EnumTechLevel) = getComponents(tech)
                                                                        .map(_.toAssemblerString)
                                                                        .aggregate("")(_ + _, _ + _)
+
+  def getComponents(tech: EnumTechLevel) = componentMap.getOrElseUpdate(tech, new ArrayBuffer[Item])
 
   def getComponentsInAssemblerRecipeDisplayString(tech: EnumTechLevel) = {
     Femtocraft.recipeManager.assemblyRecipes.getAllRecipes.view.filter(p => {

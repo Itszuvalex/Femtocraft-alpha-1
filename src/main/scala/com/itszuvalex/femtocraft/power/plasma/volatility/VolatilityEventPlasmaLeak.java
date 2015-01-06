@@ -26,7 +26,7 @@ import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaContainer;
 import com.itszuvalex.femtocraft.api.power.plasma.IPlasmaFlow;
 import com.itszuvalex.femtocraft.api.power.plasma.volatility.VolatilityEvent;
-import com.itszuvalex.femtocraft.power.plasma.FemtocraftPlasmaManager;
+import com.itszuvalex.femtocraft.power.plasma.ManagerPlasma;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -48,7 +48,7 @@ public class VolatilityEventPlasmaLeak extends VolatilityEvent {
     @Override
     public void interact(IFusionReactorCore core, World world, int x, int y, int z) {
         core.removeFlow(triggeringFlow());
-        FemtocraftPlasmaManager.extractFlowsAndPurge(core, volatilityEnergy(),
+        ManagerPlasma.extractFlowsAndPurge(core, volatilityEnergy(),
                 volatilityLevel(),
                 energyToSegmentsDividend,
                 plasmaDuration,
@@ -58,7 +58,7 @@ public class VolatilityEventPlasmaLeak extends VolatilityEvent {
     @Override
     public void interact(IFusionReactorComponent component, World world, int x, int y, int z) {
         component.removeFlow(triggeringFlow());
-        FemtocraftPlasmaManager.extractFlowsAndPurge(component, volatilityEnergy(),
+        ManagerPlasma.extractFlowsAndPurge(component, volatilityEnergy(),
                 volatilityLevel(),
                 energyToSegmentsDividend,
                 plasmaDuration,
@@ -68,7 +68,7 @@ public class VolatilityEventPlasmaLeak extends VolatilityEvent {
     @Override
     public void interact(IPlasmaContainer container, World world, int x, int y, int z) {
         container.removeFlow(triggeringFlow());
-        FemtocraftPlasmaManager.extractFlowsAndPurge(container, volatilityEnergy(),
+        ManagerPlasma.extractFlowsAndPurge(container, volatilityEnergy(),
                 volatilityLevel(),
                 energyToSegmentsDividend,
                 plasmaDuration,

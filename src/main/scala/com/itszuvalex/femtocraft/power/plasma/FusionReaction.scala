@@ -67,7 +67,7 @@ object FusionReaction {
       }
       if (getReactionInstability > core.getStabilityRating) {
         val eventEnergy: Long = (random.nextFloat * this.energy * .25d).toLong
-        FemtocraftPlasmaManager.applyEventToContainer(core, new VolatilityEventMagneticFluctuation(null, getReactionInstability - core.getStabilityRating, eventEnergy), world, x, y, z)
+        ManagerPlasma.applyEventToContainer(core, new VolatilityEventMagneticFluctuation(null, getReactionInstability - core.getStabilityRating, eventEnergy), world, x, y, z)
         energy -= eventEnergy
       }
       if (energy < getReactionFailureThreshold) {

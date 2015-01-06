@@ -27,8 +27,12 @@ import com.itszuvalex.femtocraft.api.industry.AssemblerRecipe
 import com.itszuvalex.femtocraft.managers.research.ResearchStatus
 import com.itszuvalex.femtocraft.research.gui.GuiResearch
 
+import scala.collection.JavaConversions._
+
 class GuiTechnologyAppliedParticlePhysics(guiResearch: GuiResearch, status: ResearchStatus) extends GuiTechnology(guiResearch, status) {
   private final val recipes = Femtocraft.recipeManager.assemblyRecipes.getRecipesForTechnology(status.tech)
+
+  override def getNumPages(researched: Boolean): Int = Math.ceil(recipes.size / 2f).toInt
 
   protected override def renderInformation(x: Int, y: Int, width: Int, height: Int, displayPage: Int, mouseX: Int, mouseY: Int, tooltip: List[_], isResearched: Boolean) {
     if (isResearched && recipes.size > 0) {
@@ -43,6 +47,4 @@ class GuiTechnologyAppliedParticlePhysics(guiResearch: GuiResearch, status: Rese
     else {
     }
   }
-
-  override def getNumPages(researched: Boolean): Int = Math.ceil(recipes.size / 2f).toInt
 }
