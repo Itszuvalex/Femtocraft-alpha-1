@@ -47,18 +47,17 @@ object MultiBlockNanoCube extends IMultiBlock {
           }
         }
         if (strict) {
-          val mbc = world.getTileEntity(x + i, y, z + j).asInstanceOf[IMultiBlockComponent]
-          if (mbc == null) {
-            return false
-          }
-          if (mbc.isValidMultiBlock) {
-            return false
+          world.getTileEntity(x + i, y, z + j) match {
+            case m: IMultiBlockComponent if !m.isValidMultiBlock =>
+            case _                                               => return false
           }
         }
       }
     }
     true
   }
+
+  def isBlockInMultiBlock(world: World, x: Int, y: Int, z: Int, c_x: Int, c_y: Int, c_z: Int): Boolean = y >= c_y && y <= (c_y + 2) && x >= (c_x - 1) && x <= (c_x + 1) && z >= (c_z - 1) && z <= (c_z + 1)
 
   private def checkMidLevel(world: World, x: Int, y: Int, z: Int, strict: Boolean): Boolean = {
     if (world.getBlock(x, y + 1, z) ne Femtocraft.blockMicroCube) {
@@ -82,12 +81,9 @@ object MultiBlockNanoCube extends IMultiBlock {
             }
           }
           if (strict) {
-            val mbc = world.getTileEntity(x + i, y + 1, z + j).asInstanceOf[IMultiBlockComponent]
-            if (mbc == null) {
-              return false
-            }
-            if (mbc.isValidMultiBlock) {
-              return false
+            world.getTileEntity(x + i, y + 1, z + j) match {
+              case m: IMultiBlockComponent if !m.isValidMultiBlock =>
+              case _                                               => return false
             }
           }
         }
@@ -95,8 +91,6 @@ object MultiBlockNanoCube extends IMultiBlock {
     }
     true
   }
-
-  def isBlockInMultiBlock(world: World, x: Int, y: Int, z: Int, c_x: Int, c_y: Int, c_z: Int): Boolean = y >= c_y && y <= (c_y + 2) && x >= (c_x - 1) && x <= (c_x + 1) && z >= (c_z - 1) && z <= (c_z + 1)
 
   private def checkTopLevel(world: World, x: Int, y: Int, z: Int, strict: Boolean): Boolean = {
     for (i <- -1 to 1) {
@@ -115,12 +109,9 @@ object MultiBlockNanoCube extends IMultiBlock {
           }
         }
         if (strict) {
-          val mbc = world.getTileEntity(x + i, y + 2, z + j).asInstanceOf[IMultiBlockComponent]
-          if (mbc == null) {
-            return false
-          }
-          if (mbc.isValidMultiBlock) {
-            return false
+          world.getTileEntity(x + i, y + 2, z + j) match {
+            case m: IMultiBlockComponent if !m.isValidMultiBlock =>
+            case _                                               => return false
           }
         }
       }
