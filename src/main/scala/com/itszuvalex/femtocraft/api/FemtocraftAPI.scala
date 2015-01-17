@@ -13,11 +13,11 @@ import org.apache.logging.log4j.{Level, LogManager}
  * All objects are cached once hooked.
  */
 object FemtocraftAPI {
-  private lazy val powerAlgorithm         = getFemtocraftField[IPowerAlgorithm](powerAlgorithmGetter)
-  private lazy val researchManager        = getFemtocraftField[IResearchManager](researchManagerGetter)
-  private lazy val assistantManager       = getFemtocraftField[IAssistantManager](assistantManagerGetter)
-  private lazy val plasmaManager          = getFemtocraftField[IPlasmaManager](plasmaManagerGetter)
-  private lazy val assemblerRecipeManager = getFemtocraftField[IAssemblerRecipeManager](assemblerRecipeManagerGetter)
+  private lazy val powerAlgorithm         = getFemtocraftFieldGetter[IPowerAlgorithm](powerAlgorithmGetter)
+  private lazy val researchManager        = getFemtocraftFieldGetter[IResearchManager](researchManagerGetter)
+  private lazy val assistantManager       = getFemtocraftFieldGetter[IAssistantManager](assistantManagerGetter)
+  private lazy val plasmaManager          = getFemtocraftFieldGetter[IPlasmaManager](plasmaManagerGetter)
+  private lazy val assemblerRecipeManager = getFemtocraftFieldGetter[IAssemblerRecipeManager](assemblerRecipeManagerGetter)
   private lazy val femtocraft             = attemptHookFemtocraft()
   val FemtocraftID = "Femtocraft"
   val apiLogger    = LogManager.getLogger(FemtocraftID + "API")
@@ -45,7 +45,7 @@ object FemtocraftAPI {
 
   /**
    *
-   * @return AssistantManager singleton responsbie for storing, saving, and loading assistant information for all players.
+   * @return AssistantManager singleton responsible for storing, saving, and loading assistant information for all players.
    */
   def getAssistantManager = try assistantManager
   catch {case _: Throwable => apiLogger.log(Level.ERROR, "Failed to hook Femtocraft Assistant Manager"); null}
@@ -91,7 +91,7 @@ object FemtocraftAPI {
   private def getFemtocraft = try femtocraft
   catch {case _: Throwable => apiLogger.log(Level.ERROR, "Failed to hook Femtocraft."); null}
 
-  private def getFemtocraftField[F >: Null](getter: String): F =
+  private def getFemtocraftFieldGetter[F >: Null](getter: String): F =
     femtocraft.getMethod(getter, Array[Class[_]](): _*).invoke(null, Array(): _*).asInstanceOf[F]
 
 
