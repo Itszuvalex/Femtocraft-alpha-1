@@ -28,8 +28,29 @@ trait IResource[C, T] {
 
   /**
    *
+   * @param other
+   * @return True if this is equivalent to other, and contains >= the amount of resources of other.
+   */
+  def contains(other: IResource[C, T]): Boolean
+
+  /**
+   *
+   * @param other
+   * @return True if this is equivalent with resource.  Example, power storage with same tier, item stack with same id and damage, etc.
+   */
+  def equivalent(other: IResource[C, T]): Boolean
+
+  /**
+   *
    * @param resource Amount of this resource to use.
    * @return IResource containing this amount, if possible.
    */
-  def utilize(resource: T): this.type
+  def utilize(resource: T): IResource[C, T]
+
+  /**
+   *
+   * @param other Amount of this resource to consume.
+   * @return IResource containing the amount utilized.
+   */
+  def utilize(other: IResource[C, T]): IResource[C, T]
 }

@@ -26,6 +26,27 @@ class ResourceAssemblerSchematic(private val recipe: SchematicWrapper) extends I
 
   /**
    *
+   * @param other
+   * @return True if this is equivalent to other, and contains >= the amount of resources of other.
+   */
+  override def contains(other: IResource[SchematicWrapper, Int]): Boolean = ???
+
+  /**
+   *
+   * @param other Amount of this reource to consume.
+   * @return IResource containing the amount utilized.
+   */
+  override def utilize(other: IResource[SchematicWrapper, Int]): ResourceAssemblerSchematic = ???
+
+  /**
+   *
+   * @param other
+   * @return True if this is equivalent with resource.  Example, power storage with same tier, item stack with same id and damage, etc.
+   */
+  override def equivalent(other: IResource[SchematicWrapper, Int]): Boolean = ???
+
+  /**
+   *
    * @return List of resources required to perform this crafting job.
    */
   override def prerequisites: util.Collection[IResource] = {

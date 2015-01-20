@@ -5,7 +5,7 @@ import java.util
 /**
  * Created by Christopher on 1/19/2015.
  */
-trait IResourceGroup[T >: Class[IResource]] {
+trait IResourceGroup[T <: IResource] {
 
   def getName: String
 
