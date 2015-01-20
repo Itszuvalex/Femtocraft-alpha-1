@@ -1,4 +1,4 @@
-package com.itszuvalex.femtocraft.industry.fabrication
+package com.itszuvalex.femtocraft.industry.fabrication.traits
 
 import java.util
 
@@ -9,9 +9,9 @@ trait IResourceGroup[T >: Class[IResource]] {
 
   def getName: String
 
-  def getType: T
+  def getType = classOf[T]
 
-  def getResources: util.Collection[IResource]
+  def getResources: util.Collection[T]
 
   def getSize: Int
 

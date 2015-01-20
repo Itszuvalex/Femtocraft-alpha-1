@@ -1,4 +1,4 @@
-package com.itszuvalex.femtocraft.industry.fabrication
+package com.itszuvalex.femtocraft.industry.fabrication.traits
 
 import java.util
 
@@ -17,7 +17,7 @@ trait IProvider extends IFabricationSuiteNode {
    * @tparam T Class of resource being provided.
    * @return Map of names to Provision Groups being provided by this class.
    */
-  def provisionGroups[T >: Class[IResource]]: util.Collection[IResourceGroup[T]]
+  def provisionGroups[T <: IResource](clazz: Class[T]): util.Map[String, IResourceGroup[T]]
 
   /**
    *

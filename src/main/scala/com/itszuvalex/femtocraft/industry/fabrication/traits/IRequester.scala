@@ -1,4 +1,4 @@
-package com.itszuvalex.femtocraft.industry.fabrication
+package com.itszuvalex.femtocraft.industry.fabrication.traits
 
 import java.util
 
@@ -9,7 +9,7 @@ trait IRequester extends IFabricationSuiteNode {
 
   def getRequestTypes: util.Collection[Class[IResource]]
 
-  def getRequestGroups[T >: Class[IResource]]: util.Collection[IResourceGroup[T]]
+  def getRequestGroups[T <: IResource](clazz: Class[T]): util.Map[String, IResourceGroup[T]]
 
   def providers: util.Collection[IProvider]
 
