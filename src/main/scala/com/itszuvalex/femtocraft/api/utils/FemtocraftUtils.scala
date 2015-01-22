@@ -158,6 +158,7 @@ object FemtocraftUtils {
       return true
     }
     var amountLeftToRemove: Int = item.stackSize
+    if (amountLeftToRemove <= 0) return true
     if (restrictions != null) {
       util.Arrays.sort(restrictions)
     }
@@ -306,7 +307,11 @@ object FemtocraftUtils {
                                                                              .func_152612_a(username),
                                                                              message,
                                                                              formatting)
-  
+
+  def sendMessageToPlayer(assistant: EntityPlayer, message: String): Boolean = sendMessageToPlayer(assistant,
+                                                                                                   message,
+                                                                                                   "")
+
   /**
    *
    * Sends chat message "(GOLD)[Femtocraft](RESET): (formatting)(message)(RESET)"
@@ -333,9 +338,5 @@ object FemtocraftUtils {
     }
     false
   }
-
-  def sendMessageToPlayer(assistant: EntityPlayer, message: String): Boolean = sendMessageToPlayer(assistant,
-                                                                                                   message,
-                                                                                                   "")
 }
 

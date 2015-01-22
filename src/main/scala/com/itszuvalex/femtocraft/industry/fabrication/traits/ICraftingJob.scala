@@ -1,16 +1,15 @@
 package com.itszuvalex.femtocraft.industry.fabrication.traits
 
 import java.util
-
-import com.itszuvalex.femtocraft.api.core.ISaveable
+import java.util.UUID
 
 /**
  * Created by Itszuvalex on 1/19/15.
  */
-trait ICraftingJob extends ISaveable {
+trait ICraftingJob extends IWorkJob {
 
-  def parent: ICraftingJob
+  def parent: UUID
 
-  def children: util.Collection[ICraftingJob]
+  def children: util.Collection[UUID]
 
 }

@@ -1,6 +1,6 @@
 package com.itszuvalex.femtocraft.industry.fabrication
 
-import com.itszuvalex.femtocraft.industry.fabrication.resources.{ResourceAssemblerSchematic, ResourceFluidStack, ResourceItemStack, ResourcePower}
+import com.itszuvalex.femtocraft.industry.fabrication.resources.{ResourceAssemblerSchematics, ResourceFluid, ResourceItemStack, ResourcePower}
 import com.itszuvalex.femtocraft.industry.fabrication.traits.IResource
 
 import scala.collection.mutable
@@ -14,10 +14,10 @@ object ManagerFabricationSuite {
   def getClassName(clazz: Class[_ <: IResource]) = resourceNameMap.get(clazz)
 
   def init(): Unit = {
-    registerClassNameMapping(classOf[ResourceFluidStack], "Fluids")
+    registerClassNameMapping(classOf[ResourceFluid], "Fluids")
     registerClassNameMapping(classOf[ResourceItemStack], "Items")
     registerClassNameMapping(classOf[ResourcePower], "Power")
-    registerClassNameMapping(classOf[ResourceAssemblerSchematic], "Assembler Schematic")
+    registerClassNameMapping(classOf[ResourceAssemblerSchematics], "Assembler Schematic")
   }
 
   def registerClassNameMapping(clazz: Class[_ <: IResource], name: String) = resourceNameMap.put(clazz, name)

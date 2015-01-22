@@ -5,7 +5,7 @@ import java.util
 /**
  * Created by Itszuvalex on 1/20/15.
  */
-trait ICraftingRecipe[C, T] extends IResource[C, T] {
+trait ICraftingRecipes[C, T] extends IResource[C, T] {
 
   /**
    *

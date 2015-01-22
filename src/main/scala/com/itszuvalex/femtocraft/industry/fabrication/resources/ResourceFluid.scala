@@ -1,12 +1,14 @@
 package com.itszuvalex.femtocraft.industry.fabrication.resources
 
+import java.util.UUID
+
 import com.itszuvalex.femtocraft.industry.fabrication.traits.IResource
 import net.minecraftforge.fluids.FluidStack
 
 /**
  * Created by Itszuvalex on 1/19/15.
  */
-class ResourceFluidStack(private val fluidStack: FluidStack) extends IResource[FluidStack, Int] {
+class ResourceFluid(private val fluidStack: FluidStack) extends IResource[FluidStack, Int] {
 
   override def resourceName = if (resource == null) "Fluid" else resource.getLocalizedName
 
@@ -30,7 +32,7 @@ class ResourceFluidStack(private val fluidStack: FluidStack) extends IResource[F
   override def utilize(other: Int) = {
     val drain = Math.max(other, amount)
     resource.amount -= drain
-    new ResourceFluidStack(new FluidStack(fluidStack.getFluid, drain))
+    new ResourceFluid(new FluidStack(fluidStack.getFluid, drain))
   }
 
   override def amount = resource.amount

@@ -15,4 +15,14 @@ trait IResourceGroup[T <: IResource] {
 
   def getSize: Int
 
+
+  /**
+   * Promises resources to fulfill request using any of the available resources.
+   *
+   * @param iRequestedResource Request to fulfill.
+   * @tparam C
+   * @tparam Y
+   * @return True if request fulfilled.
+   */
+  def fulfillRequest[C, Y](iRequestedResource: IRequestedResource[C, Y]): Boolean
 }

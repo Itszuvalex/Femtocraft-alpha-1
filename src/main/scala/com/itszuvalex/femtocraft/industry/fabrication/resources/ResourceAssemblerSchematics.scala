@@ -1,9 +1,10 @@
 package com.itszuvalex.femtocraft.industry.fabrication.resources
 
 import java.util
+import java.util.UUID
 
 import com.itszuvalex.femtocraft.industry.fabrication.SchematicWrapper
-import com.itszuvalex.femtocraft.industry.fabrication.traits.{ICraftingRecipe, IResource}
+import com.itszuvalex.femtocraft.industry.fabrication.traits.{ICraftingRecipes, IProvider, IResource}
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable.ArrayBuffer
@@ -11,7 +12,7 @@ import scala.collection.mutable.ArrayBuffer
 /**
  * Created by Itszuvalex on 1/20/15.
  */
-class ResourceAssemblerSchematic(private val recipe: SchematicWrapper) extends ICraftingRecipe[SchematicWrapper, Int] {
+class ResourceAssemblerSchematics(private val recipe: Array[SchematicWrapper]) extends ICraftingRecipes[Array[SchematicWrapper], Array[Int]] {
   /**
    *
    * @return List of resources generated from this crafting node.
@@ -29,21 +30,21 @@ class ResourceAssemblerSchematic(private val recipe: SchematicWrapper) extends I
    * @param other
    * @return True if this is equivalent to other, and contains >= the amount of resources of other.
    */
-  override def contains(other: IResource[SchematicWrapper, Int]): Boolean = ???
+  override def contains(other: IResource[Array[SchematicWrapper], Array[Int]]): Boolean = ???
 
   /**
    *
    * @param other Amount of this reource to consume.
    * @return IResource containing the amount utilized.
    */
-  override def utilize(other: IResource[SchematicWrapper, Int]): ResourceAssemblerSchematic = ???
+  override def utilize(other: IResource[Array[SchematicWrapper], Array[Int]]): ResourceAssemblerSchematics = ???
 
   /**
    *
    * @param other
    * @return True if this is equivalent with resource.  Example, power storage with same tier, item stack with same id and damage, etc.
    */
-  override def equivalent(other: IResource[SchematicWrapper, Int]): Boolean = ???
+  override def equivalent(other: IResource[Array[SchematicWrapper], Array[Int]]): Boolean = ???
 
   /**
    *
@@ -62,7 +63,7 @@ class ResourceAssemblerSchematic(private val recipe: SchematicWrapper) extends I
    * @param resource Amount of this resource to use.
    * @return IResource containing this amount, if possible.
    */
-  override def utilize(resource: Int): ResourceAssemblerSchematic = ???
+  override def utilize(resource: Int): ResourceAssemblerSchematics = ???
 
   /**
    *

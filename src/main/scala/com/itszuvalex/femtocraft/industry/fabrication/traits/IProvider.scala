@@ -28,4 +28,12 @@ trait IProvider extends IFabricationSuiteNode {
   def addRequester(requester: IRequester)
 
   def removeRequester(requester: IRequester)
+
+  /**
+   * Promise resources to fulfill request using any resources available.
+   *
+   * @param iRequestedResource Resource to fulfill
+   * @return True if resource fulfilled, false if not.
+   */
+  def fulfillRequest[C, T](iRequestedResource: IRequestedResource[C, T]): Boolean
 }

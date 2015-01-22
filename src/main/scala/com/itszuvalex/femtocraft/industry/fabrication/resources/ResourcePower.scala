@@ -9,8 +9,6 @@ import com.itszuvalex.femtocraft.industry.fabrication.traits.IResource
 class ResourcePower(private val container: IPowerContainer) extends IResource[IPowerContainer, Int] {
   override def resourceName = if (resource == null) "Power" else resource.getTechLevel.key + " Power"
 
-  override def resource = container
-
   override def contains(other: IResource[IPowerContainer, Int]) =
     if (equivalent(other))
       amount >= other.amount
@@ -18,6 +16,8 @@ class ResourcePower(private val container: IPowerContainer) extends IResource[IP
       false
 
   override def amount = resource.getCurrentPower
+
+  override def resource = container
 
   /**
    *

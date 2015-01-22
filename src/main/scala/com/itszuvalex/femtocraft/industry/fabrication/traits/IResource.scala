@@ -7,12 +7,25 @@ package com.itszuvalex.femtocraft.industry.fabrication.traits
  * @tparam T Type of measurement of this resource.  I.E. Fluids, ItemStacks, Power are Int.
  */
 trait IResource[C, T] {
-
   def resourceName: String
 
   def resourceClass = classOf[C]
 
   def valueClass = classOf[T]
+
+  /**
+   *
+   * @param iProvider Provider to host this resource. Must not be null.
+   * @return A Provided resource wrapper for this resource, or null if this resource cannot be provided.
+   */
+  def asProvided(iProvider: IProvider): IProvidedResource[C, T] = null
+
+  /**
+   *
+   * @param iRequestedResource Requester to give this resource to.  Must not be null.
+   * @return A Requested resource wrapper for this resource, or null if this resource cannot be requested.
+   */
+  def asRequested(iRequestedResource: IRequester): IRequestedResource[C, T] = null
 
   /**
    *
