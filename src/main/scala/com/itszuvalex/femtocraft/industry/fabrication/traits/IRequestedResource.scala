@@ -18,11 +18,23 @@ trait IRequestedResource[C, T] extends IResource[C, T] {
 
   def amountFulfilled: T
 
+  def fulfillmentRemaining: T
+
+  /**
+   *
+   * @return True if amountFulfilled is equal to the amount required.
+   */
   def isFulfilled: Boolean
 
-  def fulfill(iProvidedResource: IProvidedResource[C, T], amount: T) = fulfillMap.put(iProvidedResource, amount)
+  /**
+   *
+   * @param iProvidedResource Resource to fulfill
+   * @param amount Amount to fulfill
+   * @return True this isFulfilled after the promise.
+   */
+  def fulfill(iProvidedResource: IProvidedResource[C, T], amount: T): Boolean
 
-  def removeFulfillment(iProvidedResource: IProvidedResource[C, T]) = fulfillMap.remove(iProvidedResource)
+  def removeFulfillment(iProvidedResource: IProvidedResource[C, T])
 
   /**
    * Commit removal of resources from all providers.

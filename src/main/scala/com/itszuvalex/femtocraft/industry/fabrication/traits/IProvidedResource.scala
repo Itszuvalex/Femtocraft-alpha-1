@@ -14,6 +14,8 @@ trait IProvidedResource[C, T] extends IResource[C, T] {
 
   def amountPromised: T
 
+  def promiseAvailable: T
+
   def promises: util.Map[IRequestedResource[C, T], T] = promiseMap
 
   /**
@@ -22,9 +24,15 @@ trait IProvidedResource[C, T] extends IResource[C, T] {
    */
   def isEmptyPromise: Boolean
 
-  def promise(iRequestedResource: IRequestedResource[C, T], amount: T) = promiseMap.put(iRequestedResource, amount)
+  /**
+   *
+   * @param iRequestedResource Resource to promise to
+   * @param amount Amount to promise
+   * @return True if resource is fulfilled after this promise.
+   */
+  def promise(iRequestedResource: IRequestedResource[C, T], amount: T): Boolean
 
-  def removePromise(iRequestedResource: IRequestedResource[C, T]) = promiseMap.remove(iRequestedResource)
+  def removePromise(iRequestedResource: IRequestedResource[C, T])
 
   /**
    *
@@ -35,5 +43,9 @@ trait IProvidedResource[C, T] extends IResource[C, T] {
    */
   def fulfillRequest(iRequestedResource: IRequestedResource[C, T]): Boolean
 
+  /**
+   *
+   * @param iRequestedResource Remove the resourceas as promised to the requestedResource
+   */
   def commit(iRequestedResource: IRequestedResource[C, T])
 }

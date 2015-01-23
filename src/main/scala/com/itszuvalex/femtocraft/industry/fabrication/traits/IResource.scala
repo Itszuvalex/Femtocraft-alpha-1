@@ -15,17 +15,27 @@ trait IResource[C, T] {
 
   /**
    *
-   * @param iProvider Provider to host this resource. Must not be null.
-   * @return A Provided resource wrapper for this resource, or null if this resource cannot be provided.
+   * @return View of this object as a provided resource.  Null if it isn't one.
    */
-  def asProvided(iProvider: IProvider): IProvidedResource[C, T] = null
+  def asProvided: IProvidedResource[C, T]
 
   /**
    *
-   * @param iRequestedResource Requester to give this resource to.  Must not be null.
-   * @return A Requested resource wrapper for this resource, or null if this resource cannot be requested.
+   * @return View of this object as a requested resource.  Null if it isn't one.
    */
-  def asRequested(iRequestedResource: IRequester): IRequestedResource[C, T] = null
+  def asRequested: IRequestedResource[C, T]
+
+  /**
+   *
+   * @return View of this object as a consumable resource.  Null if it isn't one.
+   */
+  def asConsumable: IConsumableResource[C, T]
+
+  /**
+   *
+   * @return View of this object as a renewable resource.  Null if it isn't one.
+   */
+  def asRenewable: IRenewableResource[C, T]
 
   /**
    *
@@ -52,18 +62,4 @@ trait IResource[C, T] {
    * @return True if this is equivalent with resource.  Example, power storage with same tier, item stack with same id and damage, etc.
    */
   def equivalent(other: IResource[C, T]): Boolean
-
-  /**
-   *
-   * @param resource Amount of this resource to use.
-   * @return IResource containing this amount, if possible.
-   */
-  def utilize(resource: T): IResource[C, T]
-
-  /**
-   *
-   * @param other Amount of this resource to consume.
-   * @return IResource containing the amount utilized.
-   */
-  def utilize(other: IResource[C, T]): IResource[C, T]
 }

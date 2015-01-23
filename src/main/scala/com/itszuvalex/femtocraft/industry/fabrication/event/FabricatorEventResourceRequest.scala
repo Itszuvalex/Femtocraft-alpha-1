@@ -9,7 +9,10 @@ import scala.collection.JavaConversions._
 /**
  * Created by Christopher on 1/22/2015.
  */
-class FabricatorEventResourceRequest(val requests: util.Collection[IRequestedResource]) extends IFabricationSuiteEvent {
+class FabricatorEventResourceRequest(val requests: util.Collection[IRequestedResource], val commitImmediately: Boolean = true) extends IFabricationSuiteEvent {
+  private var committed = false
+
+  def isCommitted = committed
 
   def fulfilledRequests = requests.filter(_.isFulfilled)
 
@@ -17,6 +20,6 @@ class FabricatorEventResourceRequest(val requests: util.Collection[IRequestedRes
 
   def isRequestFulfilled = requests.forall(_.isFulfilled)
 
-  def commit() = requests.foreach(commit)
+  def commit() = { requests.foreach(_.commit()); committed = true }
 
 }

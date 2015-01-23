@@ -2,6 +2,8 @@ package com.itszuvalex.femtocraft.industry.fabrication.traits
 
 import java.util
 
+import scala.collection.JavaConversions._
+
 /**
  * Created by Christopher on 1/19/2015.
  */
@@ -14,10 +16,12 @@ trait IProvider extends IFabricationSuiteNode {
 
   /**
    *
+   * Do NOT forward provision groups.  Provide only what this provider itself can give, not what any other one can.
+   *
    * @tparam T Class of resource being provided.
-   * @return Map of names to Provision Groups being provided by this class.
+   * @return Provided resources for the class.
    */
-  def provisionGroups[T <: IResource](clazz: Class[T]): util.Map[String, IResourceGroup[T]]
+  def provisionGroups[T <: IResource](clazz: Class[T]): util.Collection[T]
 
   /**
    *
@@ -35,5 +39,6 @@ trait IProvider extends IFabricationSuiteNode {
    * @param iRequestedResource Resource to fulfill
    * @return True if resource fulfilled, false if not.
    */
-  def fulfillRequest[C, T](iRequestedResource: IRequestedResource[C, T]): Boolean
+  def fulfillRequest[R <: IRequestedResource[C, T], C, T](iRequestedResource: R): Boolean =
+    provisionGroups(classOf[R]).map(_.asProvided).filterNot(_ == null).exists(_.fulfillRequest(iRequestedResource))
 }

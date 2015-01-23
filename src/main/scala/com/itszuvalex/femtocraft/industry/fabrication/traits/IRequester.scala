@@ -9,7 +9,7 @@ trait IRequester extends IFabricationSuiteNode {
 
   def getRequestTypes: util.Collection[Class[IResource]]
 
-  def getRequestGroups[T <: IResource](clazz: Class[T]): util.Map[String, IResourceGroup[T]]
+  def getRequestGroups[T <: IResource](clazz: Class[T]): util.Collection[T]
 
   def providers: util.Collection[IProvider]
 
