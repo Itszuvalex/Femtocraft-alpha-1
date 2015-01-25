@@ -6,7 +6,7 @@ import com.itszuvalex.femtocraft.industry.fabrication.traits.{IFabricationSuiteN
 import net.minecraftforge.common.util.ForgeDirection
 import net.minecraftforge.common.util.ForgeDirection._
 
-import scala.util.control.TailCalls.{TailRec, _}
+import scala.annotation.tailrec
 
 
 /**
@@ -40,6 +40,12 @@ class InformationTransmitter extends TileEntityBase with IInformationTransmitter
    */
   override def connectionB = findNext(dirB)
 
+  /**
+   *
+   * @return Node found by traversing all A connections.
+   */
+  override def connectionA = findNext(dirA)
+
   private def findNext(dir: ForgeDirection) = {
     if (dir == UNKNOWN) null
     else {
@@ -56,12 +62,6 @@ class InformationTransmitter extends TileEntityBase with IInformationTransmitter
         null
     }
   }
-
-  /**
-   *
-   * @return Node found by traversing all A connections.
-   */
-  override def connectionA = findNext(dirA)
 
   /**
    *
@@ -103,23 +103,37 @@ class InformationTransmitter extends TileEntityBase with IInformationTransmitter
    *
    * @return Node found by traversing all A connections.
    */
-  override def nodeA = traverseA(this).result
+  override def nodeA = traverseA(this, xCoord, yCoord, zCoord)
 
   /**
    *
    * @return Node found by traversing all B connections.
    */
-  override def nodeB = traverseB(this).result
+  override def nodeB = traverseB(this, xCoord, yCoord, zCoord)
 
-  @TailRec
-  private def traverseB(iInformationTransmitter: IInformationTransmitter): TailRec[IFabricationSuiteNode] = {
+  @tailrec
+  private def traverseB(iInformationTransmitter: IInformationTransmitter, x: Int, y: Int, z: Int): IFabricationSuiteNode = {
     if (iInformationTransmitter == null || iInformationTransmitter == this) return null
-    tailcall(traverseB(iInformationTransmitter.connectionB))
+    if (!worldObj.blockExists(x, y, z)) return null
+    val dir = iInformationTransmitter.directionB
+    if (dir == UNKNOWN) return null
+    worldObj.getTileEntity(x, y, z) match {
+      case i: IFabricationSuiteNode   => i
+      case l: IInformationTransmitter => traverseB(l, x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ)
+      case _                          => null
+    }
   }
 
-  @TailRec
-  private def traverseA(iInformationTransmitter: IInformationTransmitter): TailRec[IFabricationSuiteNode] = {
+  @tailrec
+  private def traverseA(iInformationTransmitter: IInformationTransmitter, x: Int, y: Int, z: Int): IFabricationSuiteNode = {
     if (iInformationTransmitter == null || iInformationTransmitter == this) return null
-    tailcall(traverseA(iInformationTransmitter.connectionB))
+    if (!worldObj.blockExists(x, y, z)) return null
+    val dir = iInformationTransmitter.directionA
+    if (dir == UNKNOWN) return null
+    worldObj.getTileEntity(x, y, z) match {
+      case i: IFabricationSuiteNode   => i
+      case l: IInformationTransmitter => traverseA(l, x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ)
+      case _                          => null
+    }
   }
 }

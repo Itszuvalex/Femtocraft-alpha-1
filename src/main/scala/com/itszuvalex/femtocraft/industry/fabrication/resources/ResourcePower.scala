@@ -50,7 +50,7 @@ class ResourcePower(private val container: IPowerContainer,
     synchronized {
                    val t = Math.min(amount, promiseAvailable)
                    promises.put(iRequestedResource, t)
-                   amountPromised += t
+                   promisedAmount += t
                    iRequestedResource.fulfill(this, t)
                  }
 
@@ -121,7 +121,7 @@ class ResourcePower(private val container: IPowerContainer,
 
   override def removeFulfillment(iProvidedResource: IProvidedResource[IPowerContainer, Int]) = 
   synchronized{
-    amountFulfilled -= fulfillers.remove(iProvidedResource)
+    fulfilledAmount -= fulfillers.remove(iProvidedResource)
               }    
   
   override def resource = container

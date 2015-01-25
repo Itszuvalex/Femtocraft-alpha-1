@@ -9,9 +9,9 @@ package com.itszuvalex.femtocraft.industry.fabrication.traits
 trait IResource[C, T] {
   def resourceName: String
 
-  def resourceClass = classOf[C]
+  def resourceClass : Class[C] = classOf[C]
 
-  def valueClass = classOf[T]
+  def valueClass : Class[T] = classOf[T]
 
   /**
    *

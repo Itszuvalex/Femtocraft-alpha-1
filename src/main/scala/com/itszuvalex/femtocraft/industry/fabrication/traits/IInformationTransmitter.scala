@@ -66,4 +66,10 @@ trait IInformationTransmitter {
    * @return (NodeA, NodeB0 found by traversing from this transmitter in both directions.
    */
   def connections: (IFabricationSuiteNode, IFabricationSuiteNode)
+
+  /**
+   *
+   * @return True if has valid non-null nodes A and B.
+   */
+  def isTransmitting : Boolean
 }
