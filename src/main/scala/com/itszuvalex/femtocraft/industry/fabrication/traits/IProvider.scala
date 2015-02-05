@@ -1,6 +1,7 @@
 package com.itszuvalex.femtocraft.industry.fabrication.traits
 
 import java.util
+import java.util.UUID
 
 import scala.collection.JavaConversions._
 
@@ -8,11 +9,15 @@ import scala.collection.JavaConversions._
  * Created by Christopher on 1/19/2015.
  */
 trait IProvider extends IFabricationSuiteNode {
+  override def onEvent(event: IFabricationSuiteEvent): Unit = ???
+
+  override def ID: UUID = ???
+
   /**
    *
    * @return Collection of classes that this Provider can provide.
    */
-  def provisionTypes: util.Collection[Class[IResource]]
+  def provisionTypes: util.Collection[Class[IResource[_,_]]]
 
   /**
    *
@@ -21,7 +26,7 @@ trait IProvider extends IFabricationSuiteNode {
    * @tparam T Class of resource being provided.
    * @return Provided resources for the class.
    */
-  def provisionGroups[T <: IResource](clazz: Class[T]): util.Collection[T]
+  def provisionGroups[T <: IResource[_,_]](clazz: Class[T]): util.Collection[T]
 
   /**
    *
@@ -39,6 +44,6 @@ trait IProvider extends IFabricationSuiteNode {
    * @param iRequestedResource Resource to fulfill
    * @return True if resource fulfilled, false if not.
    */
-  def fulfillRequest[R <: IRequestedResource[C, T], C, T](iRequestedResource: R): Boolean =
+  def fulfillRequest[R <: IRequestedResource[_, _]](iRequestedResource: R): Boolean =
     provisionGroups(classOf[R]).map(_.asProvided).filterNot(_ == null).exists(_.fulfillRequest(iRequestedResource))
 }

@@ -9,7 +9,7 @@ import scala.collection.JavaConversions._
 /**
  * Created by Christopher on 1/22/2015.
  */
-class FabricatorEventResourceRequest(val requests: util.Collection[IRequestedResource], val commitImmediately: Boolean = true) extends IFabricationSuiteEvent {
+class FabricatorEventResourceRequest(val requests: util.Collection[IRequestedResource[_,_]], val commitImmediately: Boolean = true) extends IFabricationSuiteEvent {
   private var committed = false
 
   def isCommitted = committed

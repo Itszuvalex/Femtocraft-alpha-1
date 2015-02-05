@@ -212,3 +212,4 @@ class ResourceItems(private val stacks: Array[ItemStack],
    */
   override def renew(source: Array[ItemStack], amount: Array[Int]): Array[Int] = ???
 
+}

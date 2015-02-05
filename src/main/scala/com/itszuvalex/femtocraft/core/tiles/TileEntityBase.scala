@@ -24,6 +24,8 @@ import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.core.Saveable
 import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs
 import com.itszuvalex.femtocraft.api.utils.{FemtocraftDataUtils, FemtocraftUtils}
+import cpw.mods.fml.common.FMLCommonHandler
+import cpw.mods.fml.relauncher.Side
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity
@@ -118,7 +120,7 @@ class TileEntityBase extends TileEntity {
   def getGuiID = -1
 
   def canPlayerUse(player: EntityPlayer): Boolean = {
-    player != null && (getOwner == null || (getOwner == player.getCommandSenderName) || Femtocraft.assistantManager.isPlayerAssistant(getOwner, player.getCommandSenderName) || (MinecraftServer.getServer != null && MinecraftServer.getServer.getConfigurationManager.func_152596_g(player.getGameProfile)) || player.capabilities.isCreativeMode)
+    player != null && (getOwner == null || (getOwner == player.getCommandSenderName) || (FMLCommonHandler.instance().getEffectiveSide == Side.SERVER && Femtocraft.assistantManager.isPlayerAssistant(getOwner, player.getCommandSenderName) || (MinecraftServer.getServer != null && MinecraftServer.getServer.getConfigurationManager.func_152596_g(player.getGameProfile)) || player.capabilities.isCreativeMode))
   }
 
   def getOwner = owner

@@ -2,7 +2,7 @@ package com.itszuvalex.femtocraft.industry.fabrication.resources
 
 import java.util.UUID
 
-import com.itszuvalex.femtocraft.industry.fabrication.traits.IResource
+import com.itszuvalex.femtocraft.industry.fabrication.traits._
 import net.minecraftforge.fluids.FluidStack
 
 /**
@@ -18,7 +18,29 @@ class ResourceFluid(private val fluidStack: FluidStack) extends IResource[FluidS
     else
       false
 
-  override def utilize(other: IResource[FluidStack, Int]) = if (equivalent(other)) utilize(other.amount) else utilize(0)
+  /**
+   *
+   * @return View of this object as a provided resource.  Null if it isn't one.
+   */
+  override def asProvided: IProvidedResource[FluidStack, Int] = ???
+
+  /**
+   *
+   * @return View of this object as a requested resource.  Null if it isn't one.
+   */
+  override def asRequested: IRequestedResource[FluidStack, Int] = ???
+
+  /**
+   *
+   * @return View of this object as a renewable resource.  Null if it isn't one.
+   */
+  override def asRenewable: IRenewableResource[FluidStack, Int] = ???
+
+  /**
+   *
+   * @return View of this object as a consumable resource.  Null if it isn't one.
+   */
+  override def asConsumable: IConsumableResource[FluidStack, Int] = ???
 
   override def equivalent(other: IResource[FluidStack, Int]): Boolean = {
     if (other.resource == null && resource != null) false
@@ -28,12 +50,6 @@ class ResourceFluid(private val fluidStack: FluidStack) extends IResource[FluidS
   }
 
   override def resource = fluidStack
-
-  override def utilize(other: Int) = {
-    val drain = Math.max(other, amount)
-    resource.amount -= drain
-    new ResourceFluid(new FluidStack(fluidStack.getFluid, drain))
-  }
 
   override def amount = resource.amount
 

@@ -7,9 +7,9 @@ import java.util
  */
 trait IRequester extends IFabricationSuiteNode {
 
-  def getRequestTypes: util.Collection[Class[IResource]]
+  def getRequestTypes: util.Collection[Class[IResource[_,_]]]
 
-  def getRequestGroups[T <: IResource](clazz: Class[T]): util.Collection[T]
+  def getRequestGroups[T <: IResource[_,_]](clazz: Class[T]): util.Collection[T]
 
   def providers: util.Collection[IProvider]
 
