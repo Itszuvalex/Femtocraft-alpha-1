@@ -9,6 +9,7 @@ import com.itszuvalex.femtocraft.blocks.{BlockFemtoStone, BlockMicroStone, Block
 import com.itszuvalex.femtocraft.command.{CommandBase, CommandFemtocraft}
 import com.itszuvalex.femtocraft.configuration.{AutoGenConfig, FemtocraftAssemblerConfig, FemtocraftConfigs}
 import com.itszuvalex.femtocraft.core.MagnetRegistry
+import com.itszuvalex.femtocraft.core.blocks.BlockDimensionalTear
 import com.itszuvalex.femtocraft.core.fluids.{BlockFluidMass, FluidMass}
 import com.itszuvalex.femtocraft.core.items.{ItemBase, ItemFemtoInterfaceDevice, ItemMicroInterfaceDevice, ItemNanoInterfaceDevice}
 import com.itszuvalex.femtocraft.core.ore._
@@ -414,6 +415,8 @@ object Femtocraft {
     blockPlasma = registerBlock(new BlockPlasma(), "BlockPlasma")
 
     blockSpatialAlternator = registerBlock(new BlockSpatialAlternator(), "BlockSpatialAlternator")
+
+    registerBlock(new BlockDimensionalTear, "BlockDimensionalTear")
 
     itemIngotTitanium = registerBaseItem("ItemIngotTitanium", { item: Item =>
       if (FemtocraftConfigs.registerTitaniumIngotInOreDictionary) {

@@ -20,11 +20,14 @@
  */
 package com.itszuvalex.femtocraft.proxy
 
+import com.itszuvalex.femtocraft.core.tiles.TileEntityDimensionalTear
 import com.itszuvalex.femtocraft.power.render._
 import com.itszuvalex.femtocraft.render.RenderSimpleMachine
 import com.itszuvalex.femtocraft.transport.items.render.RenderVacuumTube
 import com.itszuvalex.femtocraft.transport.liquids.render.RenderSuctionPipe
-import cpw.mods.fml.client.registry.RenderingRegistry
+import cpw.mods.fml.client.registry.{ClientRegistry, RenderingRegistry}
+import net.minecraft.client.renderer.tileentity.RenderDimensionalTear
+import net.minecraftforge.common.ForgeHooks
 
 object ProxyClient {
   var microCableRenderID                            = 0
@@ -77,5 +80,7 @@ class ProxyClient extends ProxyCommon {
     RenderingRegistry.registerBlockHandler(ProxyClient.FemtocraftSuctionPipeRenderID, new RenderSuctionPipe)
     ProxyClient.FemtocraftPlasmaConduitID = RenderingRegistry.getNextAvailableRenderId
     RenderingRegistry.registerBlockHandler(ProxyClient.FemtocraftPlasmaConduitID, new RenderPlasmaConduit)
+
+    ClientRegistry.bindTileEntitySpecialRenderer(classOf[TileEntityDimensionalTear], new RenderDimensionalTear)
   }
 }

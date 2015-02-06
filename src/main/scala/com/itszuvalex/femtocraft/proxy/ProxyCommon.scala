@@ -20,7 +20,7 @@
  */
 package com.itszuvalex.femtocraft.proxy
 
-import com.itszuvalex.femtocraft.core.tiles.TileEntityOreLodestone
+import com.itszuvalex.femtocraft.core.tiles.{TileEntityDimensionalTear, TileEntityOreLodestone}
 import com.itszuvalex.femtocraft.industry.tiles._
 import com.itszuvalex.femtocraft.power.plasma.TileEntityPlasma
 import com.itszuvalex.femtocraft.power.tiles._
@@ -85,8 +85,9 @@ class ProxyCommon {
     GameRegistry.registerTileEntity(classOf[TileEntityNullEqualizer], "TileEntityNullEqualizer")
     GameRegistry.registerTileEntity(classOf[TileEntityPlasma], "TileEntityPlasma")
     GameRegistry.registerTileEntity(classOf[TileEntityPlasmaConduit], "TileEntityPlasmaConduit")
-    
+
     GameRegistry.registerTileEntity(classOf[TileEntitySpatialAlternator], "TileEntitySpatialAlternator")
+    GameRegistry.registerTileEntity(classOf[TileEntityDimensionalTear], "TileEntityDimensionalTear")
   }
 
   def registerBlockRenderers() {
