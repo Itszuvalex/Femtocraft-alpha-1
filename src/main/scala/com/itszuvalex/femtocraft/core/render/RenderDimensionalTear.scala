@@ -25,7 +25,12 @@ import org.lwjgl.opengl.GL11
     this.renderTileEntityAt(p_147500_1_.asInstanceOf[TileEntityDimensionalTear], p_147500_2_, p_147500_4_, p_147500_6_, p_147500_8_)
   }
 
-  def renderTileEntityAt(tileEntity : TileEntityDimensionalTear, x : Double, y : Double, z : Double, p_147500_8_ : Float) {
+  def renderTileEntityAt(tileEntity: TileEntityDimensionalTear, x: Double, y: Double, z: Double, p_147500_8_ : Float) {
+
+    drawTopFace(tileEntity, x, y, z, p_147500_8_)
+  }
+
+  def drawTopFace(tileEntity: TileEntityDimensionalTear, x: Double, y: Double, z: Double, p_147500_8_ : Float): Unit = {
     val f1: Float = this.field_147501_a.field_147560_j.toFloat
     val f2: Float = this.field_147501_a.field_147561_k.toFloat
     val f3: Float = this.field_147501_a.field_147558_l.toFloat
@@ -101,6 +106,7 @@ import org.lwjgl.opengl.GL11
     GL11.glDisable(GL11.GL_TEXTURE_GEN_R)
     GL11.glDisable(GL11.GL_TEXTURE_GEN_Q)
     GL11.glEnable(GL11.GL_LIGHTING)
+
   }
 
   private def func_147525_a(p_147525_1_ : Float, p_147525_2_ : Float, p_147525_3_ : Float, p_147525_4_ : Float): FloatBuffer = {

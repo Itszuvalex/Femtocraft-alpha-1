@@ -22,16 +22,15 @@ package com.itszuvalex.femtocraft.core.tiles
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.core.Saveable
-import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs
 import com.itszuvalex.femtocraft.api.utils.{FemtocraftDataUtils, FemtocraftUtils}
+import com.itszuvalex.femtocraft.configuration.FemtocraftConfigs
+import com.itszuvalex.femtocraft.core.traits.tile.DescriptionPacket
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity
-import net.minecraft.network.{NetworkManager, Packet}
 import net.minecraft.server.MinecraftServer
 import net.minecraft.tileentity.TileEntity
 
-class TileEntityBase extends TileEntity {
+class TileEntityBase extends TileEntity with DescriptionPacket {
   @Saveable(desc = true, item = true) private var owner: String = null
 
   override def readFromNBT(par1nbtTagCompound: NBTTagCompound) {
@@ -65,29 +64,6 @@ class TileEntityBase extends TileEntity {
   def femtocraftServerUpdate() {
   }
 
-  override def getDescriptionPacket: Packet = {
-    if (!hasDescription) {
-      return null
-    }
-    val compound: NBTTagCompound = new NBTTagCompound
-    saveToDescriptionCompound(compound)
-    new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, compound)
-  }
-
-  def hasDescription = true
-
-  def saveToDescriptionCompound(compound: NBTTagCompound) {
-    FemtocraftDataUtils.saveObjectToNBT(compound, this, FemtocraftDataUtils.EnumSaveType.DESCRIPTION)
-  }
-
-  override def onDataPacket(net: NetworkManager, pkt: S35PacketUpdateTileEntity) {
-    super.onDataPacket(net, pkt)
-    handleDescriptionNBT(pkt.func_148857_g)
-  }
-
-  def handleDescriptionNBT(compound: NBTTagCompound) {
-    FemtocraftDataUtils.loadObjectFromNBT(compound, this, FemtocraftDataUtils.EnumSaveType.DESCRIPTION)
-  }
 
   def loadInfoFromItemNBT(compound: NBTTagCompound) {
     if (compound == null) {
