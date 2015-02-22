@@ -28,10 +28,10 @@ import com.itszuvalex.femtocraft.api.core.ISaveable
 import com.itszuvalex.femtocraft.api.events.EventTechnology
 import com.itszuvalex.femtocraft.api.managers.research.{IPlayerResearch, IResearchStatus}
 import com.itszuvalex.femtocraft.api.research.ITechnology
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import com.itszuvalex.femtocraft.managers.research.PlayerResearch._
 import com.itszuvalex.femtocraft.network.FemtocraftPacketHandler
 import com.itszuvalex.femtocraft.network.messages.MessageResearchPlayer
-import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.nbt.{NBTTagCompound, NBTTagList}
 import net.minecraft.server.MinecraftServer
@@ -50,9 +50,9 @@ object PlayerResearch {
 
 class PlayerResearch(val username: String) extends IPlayerResearch with ISaveable {
   private val techStatus = new mutable.HashMap[String, ResearchStatus]
-  
+
   override def getTechnologies = techStatus.values.asInstanceOf[util.Collection[IResearchStatus]]
-  
+
   /**
    * @param name  Name of researchTechnology to mark as researched
    * @param force Pass true if you want the named researchTechnology to be added if it isn't already discovered. This
@@ -60,7 +60,7 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
    * @return True if researchTechnology successfully marked as researched. False otherwise.
    */
   override def researchTechnology(name: String, force: Boolean): Boolean = researchTechnology(name, force, true)
-  
+
   override def researchTechnology(name: String, force: Boolean, notify: Boolean): Boolean = {
     val rtech = Femtocraft.researchManager.getTechnology(name)
     if (rtech == null) return true
@@ -107,21 +107,20 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
     }
     false
   }
-  
-  def discoverNewTechs(notify: Boolean) {
+
+  def discoverNewTechs(notify: Boolean): Boolean = {
     Femtocraft
     .researchManager
     .getTechnologies
     .filterNot(hasDiscoveredTechnology)
     .filterNot(hasResearchedTechnology)
-    .foreach { case t if t.isResearchedByDefault => researchTechnology(t.getName, true, notify);
-      return //End here, let recursion do its thing.
+    .foreach { case t if t.isResearchedByDefault => return researchTechnology(t.getName, true, notify)
     case t if t.isDiscoveredByDefault            => discoverTechnology(t.getName, notify)
     case t if canDiscoverTechnology(t)           => discoverTechnology(t.getName, notify)
     case _                                       =>
              }
-    
-    
+
+
     //    for (t <- Femtocraft.researchManager.getTechnologies) {
     //      if (t.getPrerequisites != null) {
     //        val ts: ResearchStatus = techStatus.get(t.getName).orNull
@@ -161,9 +160,9 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
     //      }
     //    }
   }
-  
+
   override def discoverTechnology(name: String): Boolean = discoverTechnology(name, true)
-  
+
   override def discoverTechnology(name: String, notify: Boolean): Boolean = {
     if (techStatus.containsKey(name)) return true
     val event = new EventTechnology.Discovered(username, Femtocraft.researchManager.getTechnology(name))
@@ -186,7 +185,7 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
     }
     false
   }
-  
+
   override def sync() {
     val player = MinecraftServer.getServer.getConfigurationManager.func_152612_a(username)
     if (player == null) {
@@ -194,31 +193,31 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
     }
     sync(player)
   }
-  
+
   override def sync(player: EntityPlayerMP) {
     Femtocraft.log(Level.TRACE, "Sending research data to player: " + player.getCommandSenderName)
     FemtocraftPacketHandler.INSTANCE.sendTo(new MessageResearchPlayer(this), player)
   }
-  
+
   override def getTechnology(name: String): ResearchStatus = techStatus.get(name).orNull
-  
+
   override def removeTechnology(name: String): ResearchStatus = techStatus.remove(name).orNull
-  
+
   override def canDiscoverTechnology(tech: ITechnology): Boolean = {
     if (tech.getPrerequisites == null || tech.getPrerequisites.size() == 0) {
       return true
     }
     tech.getPrerequisites.map(Femtocraft.researchManager.getTechnology).forall(hasResearchedTechnology)
   }
-  
+
   override def hasDiscoveredTechnology(tech: ITechnology): Boolean = tech == null || hasDiscoveredTechnology(tech
                                                                                                              .getName)
-  
+
   override def hasDiscoveredTechnology(tech: String): Boolean = techStatus.get(tech).orNull != null
-  
+
   override def hasResearchedTechnology(tech: ITechnology): Boolean = tech == null || hasResearchedTechnology(tech
                                                                                                              .getName)
-  
+
   override def hasResearchedTechnology(tech: String): Boolean = {
     if (tech == null || (tech == "")) {
       return true
@@ -226,7 +225,7 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
     val ts = techStatus.get(tech).orNull
     ts != null && ts.researched
   }
-  
+
   override def saveToNBT(compound: NBTTagCompound) {
     val list = new NBTTagList
     techStatus.values.foreach { status =>
@@ -239,7 +238,7 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
                               }
     compound.setTag(mapKey, list)
   }
-  
+
   override def loadFromNBT(compound: NBTTagCompound) {
     val list = compound.getTagList(mapKey, 10)
     (0 until list.tagCount).map(list.getCompoundTagAt).foreach { cs =>
