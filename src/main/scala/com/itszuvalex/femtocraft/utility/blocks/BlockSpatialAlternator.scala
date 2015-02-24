@@ -11,7 +11,7 @@ import net.minecraft.world.{IBlockAccess, World}
 /**
  * Created by Chris on 12/30/2014.
  */
-class BlockSpatialAlternator extends TileContainer(Material.ground) {
+class BlockSpatialAlternator extends TileContainer(Material.iron) {
   setCreativeTab(Femtocraft.femtocraftTab)
 
   var activeIcon      : IIcon = null

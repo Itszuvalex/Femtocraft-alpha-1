@@ -115,11 +115,11 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
     .filterNot(hasDiscoveredTechnology)
     .filterNot(hasResearchedTechnology)
     .foreach { case t if t.isResearchedByDefault => return researchTechnology(t.getName, true, notify)
-    case t if t.isDiscoveredByDefault            => discoverTechnology(t.getName, notify)
-    case t if canDiscoverTechnology(t)           => discoverTechnology(t.getName, notify)
-    case _                                       =>
+    case t if t.isDiscoveredByDefault => discoverTechnology(t.getName, notify)
+    case t if canDiscoverTechnology(t) => discoverTechnology(t.getName, notify)
+    case _ =>
              }
-
+    true
 
     //    for (t <- Femtocraft.researchManager.getTechnologies) {
     //      if (t.getPrerequisites != null) {

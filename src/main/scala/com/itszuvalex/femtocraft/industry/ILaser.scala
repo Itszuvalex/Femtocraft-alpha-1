@@ -5,7 +5,7 @@ import net.minecraftforge.common.util.ForgeDirection
 /**
  * Created by Christopher on 2/20/2015.
  */
-trait ILaser {
+trait ILaser extends ILaserInteractable {
 
   /**
    *

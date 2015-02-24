@@ -75,6 +75,7 @@ class TileEntitySpatialAlternator extends TileEntityBase {
   override def onSideActivate(par5EntityPlayer: EntityPlayer, side: Int): Boolean = {
     val itemstack = par5EntityPlayer.getCurrentEquippedItem
     if (itemstack == null) return false
+    if(worldObj.isRemote) return true
     itemstack.getItem match {
       case _: IInterfaceDevice =>
         if (par5EntityPlayer.isSneaking) {
