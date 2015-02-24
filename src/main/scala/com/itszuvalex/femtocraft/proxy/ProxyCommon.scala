@@ -21,13 +21,14 @@
 package com.itszuvalex.femtocraft.proxy
 
 import com.itszuvalex.femtocraft.core.tiles.{TileEntityDimensionalTear, TileEntityOreLodestone}
+import com.itszuvalex.femtocraft.industry.TileEntityLaser
 import com.itszuvalex.femtocraft.industry.tiles._
 import com.itszuvalex.femtocraft.power.plasma.TileEntityPlasma
 import com.itszuvalex.femtocraft.power.tiles._
 import com.itszuvalex.femtocraft.research.tiles.{TileEntityResearchComputer, TileEntityResearchConsole}
 import com.itszuvalex.femtocraft.transport.items.tiles.TileEntityVacuumTube
 import com.itszuvalex.femtocraft.transport.liquids.tiles.TileEntitySuctionPipe
-import com.itszuvalex.femtocraft.utility.tiles.TileEntitySpatialAlternator
+import com.itszuvalex.femtocraft.utility.tiles.{TileEntitySpatialAlternator, TileEntitySpatialCage}
 import cpw.mods.fml.common.registry.GameRegistry
 
 class ProxyCommon {
@@ -86,7 +87,11 @@ class ProxyCommon {
     GameRegistry.registerTileEntity(classOf[TileEntityPlasma], "TileEntityPlasma")
     GameRegistry.registerTileEntity(classOf[TileEntityPlasmaConduit], "TileEntityPlasmaConduit")
 
+    GameRegistry.registerTileEntity(classOf[TileEntityLaser], "TileEntityLaser")
+
     GameRegistry.registerTileEntity(classOf[TileEntitySpatialAlternator], "TileEntitySpatialAlternator")
+    GameRegistry.registerTileEntity(classOf[TileEntitySpatialCage], "TileEntitySpatialCage")
+
     GameRegistry.registerTileEntity(classOf[TileEntityDimensionalTear], "TileEntityDimensionalTear")
   }
 

@@ -12,13 +12,13 @@ import scala.collection.mutable
  */
 object LaserRegistry {
 
-  val laserInfoMap = new mutable.HashMap[String, LaserInfo]
+  private val laserInfoMap = new mutable.HashMap[String, LaserInfo]
 
   def getModulations: util.Collection[String] = laserInfoMap.keySet
 
   def getColor(modulation: String): Int = laserInfoMap.get(modulation) match {
     case Some(info) => info.color
-    case _          => FemtocraftUtils.colorFromARGB(255, 0, 0, 0)
+    case _ => FemtocraftUtils.colorFromARGB(255, 0, 0, 0)
   }
 
   def registerLaser(modulation: String, color: Int) = laserInfoMap(modulation) = new LaserInfo(color)

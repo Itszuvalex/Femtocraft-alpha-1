@@ -31,7 +31,7 @@ import com.itszuvalex.femtocraft.research.items.{ItemFemtoTechnology, ItemMicroT
 import com.itszuvalex.femtocraft.sound.FemtocraftSoundManager
 import com.itszuvalex.femtocraft.transport.items.blocks.BlockVacuumTube
 import com.itszuvalex.femtocraft.transport.liquids.blocks.BlockSuctionPipe
-import com.itszuvalex.femtocraft.utility.blocks.BlockSpatialAlternator
+import com.itszuvalex.femtocraft.utility.blocks.{BlockSpatialAlternator, BlockSpatialCage}
 import com.itszuvalex.femtocraft.utility.items.ItemPocketPocket
 import com.mojang.authlib.GameProfile
 import cpw.mods.fml.common.Mod.EventHandler
@@ -161,14 +161,16 @@ object Femtocraft {
   var fluidCooledContaminatedMoltenSalt     : Fluid                     = null
   var blockFluidCooledContaminatedMoltenSalt: BlockFluidBase            = null
   var blockPlasma                           : Block                     = null
+  var blockLaser                            : Block                     = null
   var blockSpatialAlternator                : Block                     = null
+  var blockSpatialCage                      : Block                     = null
   /* items */
   var itemIngotTitanium                     : Item                      = null
   var itemIngotPlatinum                     : Item                      = null
   var itemIngotThorium                      : Item                      = null
   var itemDustFarenite                      : Item                      = null
   var itemDustMalenite                      : Item                      = null
-  var itemGemAgonite                           : Item                      = null
+  var itemGemAgonite                        : Item                      = null
   var itemIngotTemperedTitanium             : Item                      = null
   var itemIngotThFaSalt                     : Item                      = null
   var itemNuggetLodestone                   : Item                      = null
@@ -415,7 +417,10 @@ object Femtocraft {
                                                            "BlockFluidCooledContaminatedMoltenSalt")
     blockPlasma = registerBlock(new BlockPlasma(), "BlockPlasma")
 
+    blockLaser = registerBlock(new BlockLaser(), "BlockLaser")
+
     blockSpatialAlternator = registerBlock(new BlockSpatialAlternator(), "BlockSpatialAlternator")
+    blockSpatialCage = registerBlock(new BlockSpatialCage(), "BlockSpatialCage")
 
     registerBlock(new BlockDimensionalTear, "BlockDimensionalTear")
 
@@ -443,8 +448,8 @@ object Femtocraft {
     itemDustMalenite = registerBaseItem("ItemDustMalenite", { item: Item =>
       OreDictionary.registerOre("dustMalenite", new ItemStack(item))
     })
-    itemGemAgonite = registerBaseItem("ItemGemAgonite", {item: Item =>
-      OreDictionary.registerOre("gemAgonite", new ItemStack(item))                                             
+    itemGemAgonite = registerBaseItem("ItemGemAgonite", { item: Item =>
+      OreDictionary.registerOre("gemAgonite", new ItemStack(item))
     })
     itemIngotTemperedTitanium = registerBaseItem("ItemIngotTemperedTitanium", { item: Item =>
       OreDictionary.registerOre("ingotTemperedTitanium", new ItemStack(item))
