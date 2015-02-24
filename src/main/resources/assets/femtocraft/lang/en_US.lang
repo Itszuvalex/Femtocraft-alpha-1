@@ -162,6 +162,8 @@ tile.BlockResearchComputer.name=Research Computer
 tile.BlockResearchConsole.name=Research Console
 tile.BlockSisyphusStabilizer.name=Sisyphus Stabilizer
 tile.BlockSpatialAlternator.name=Spatial Alternator
+tile.BlockSpatialCage.name=Spatial Cage
+tile.BlockLaser.name=Laser
 tile.BlockSteamGenerator.name=Steam Generator
 tile.BlockStellaratorCore.name=Stellarator Core
 tile.BlockStellaratorFocus.name=Stellarator Focus
@@ -170,4 +172,4 @@ tile.BlockStellaratorOpticalMaser.name=Stellarator Optical Maser
 tile.BlockSuctionPipe.name=Suction Pipe
 tile.BlockUnidentifiedAlloy.name=Unidentified Alloy
 tile.BlockVacuumTube.name=Vacuum Tube
-
+tile.BlockDimensionalTear.name=Dimensional Tear
