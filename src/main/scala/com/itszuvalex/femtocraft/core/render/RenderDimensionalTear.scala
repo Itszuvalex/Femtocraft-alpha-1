@@ -31,29 +31,29 @@ import org.lwjgl.opengl.GL11
   }
 
   def drawTopFace(tileEntity: TileEntityDimensionalTear, x: Double, y: Double, z: Double, p_147500_8_ : Float): Unit = {
-    val f1: Float = this.field_147501_a.field_147560_j.toFloat
-    val f2: Float = this.field_147501_a.field_147561_k.toFloat
-    val f3: Float = this.field_147501_a.field_147558_l.toFloat
+    val rendererDispatcherX: Float = this.field_147501_a.field_147560_j.toFloat
+    val rendererDispatcherZ: Float = this.field_147501_a.field_147561_k.toFloat
+    val rendererDispatcherY: Float = this.field_147501_a.field_147558_l.toFloat
     GL11.glDisable(GL11.GL_LIGHTING)
     random.setSeed(31100L)
     val height: Float = 1
 
     GL11.glPushMatrix()
-    var f5: Float = 16f
-    var f6: Float = 0.0625F
-    var f7: Float = 1.0F / (f5 + 1.0F)
     this.bindTexture(skyLocation)
-    f7 = 0.1F
-    f5 = 65.0F
-    f6 = 0.125F
+    val greyScaleColorAmount = 0.1F
+    val renderOffsetRatioConst = 5.0F
     GL11.glEnable(GL11.GL_BLEND)
     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
-    val f8: Float = (-(y + height.toDouble)).toFloat
-    var f9: Float = f8 + ActiveRenderInfo.objectY
-    val f10: Float = f8 + f5 + ActiveRenderInfo.objectY
-    var f11: Float = f9 / f10
-    f11 += (y + height.toDouble).toFloat
-    GL11.glTranslatef(f1, f11, f3)
+    val worldY = (-(y + height.toDouble)).toFloat
+    val renderY = worldY + ActiveRenderInfo.objectY
+    val fakeCameraY = renderY + renderOffsetRatioConst
+    var ytrans = renderY / fakeCameraY
+    ytrans += (y + height.toDouble).toFloat
+
+    /*
+     * Distance of the texture from the camera is difference in ytrans and rendererDispatcherY
+     */
+    GL11.glTranslatef(rendererDispatcherX, ytrans, rendererDispatcherZ)
     GL11.glTexGeni(GL11.GL_S, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_OBJECT_LINEAR)
     GL11.glTexGeni(GL11.GL_T, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_OBJECT_LINEAR)
     GL11.glTexGeni(GL11.GL_R, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_OBJECT_LINEAR)
@@ -70,23 +70,14 @@ import org.lwjgl.opengl.GL11
     GL11.glMatrixMode(GL11.GL_TEXTURE)
     GL11.glPushMatrix()
     GL11.glLoadIdentity()
-    GL11.glTranslatef(0.0F, (Minecraft.getSystemTime % 700000L).toFloat / 700000.0F, 0.0F)
-    GL11.glScalef(f6, f6, f6)
-    GL11.glTranslatef(0.5F, 0.5F, 0.0F)
-    GL11.glRotatef(4321F * 2.0F, 0.0F, 0.0F, 1.0F)
-    GL11.glTranslatef(-0.5F, -0.5F, 0.0F)
-    GL11.glTranslatef(-f1, -f3, -f2)
-    f9 = f8 + ActiveRenderInfo.objectY
-    GL11.glTranslatef(ActiveRenderInfo.objectX * f5 / f9, ActiveRenderInfo.objectZ * f5 / f9, -f2)
+    GL11.glTranslatef(-rendererDispatcherX, -rendererDispatcherY, -rendererDispatcherZ)
+    GL11.glTranslatef(ActiveRenderInfo.objectX * renderOffsetRatioConst / renderY, ActiveRenderInfo.objectZ * renderOffsetRatioConst / renderY, -rendererDispatcherZ)
     val tessellator = Tessellator.instance
     tessellator.startDrawingQuads()
-    f11 = random.nextFloat * 0.5F + 0.1F
-    var f12 = random.nextFloat * 0.5F + 0.4F
-    var f13 = random.nextFloat * 0.5F + 0.5F
-    f13 = 1.0F
-    f12 = 1.0F
-    f11 = 1.0F
-    tessellator.setColorRGBA_F(f11 * f7, f12 * f7, f13 * f7, 1.0F)
+    val blue = 1.0F
+    val green = 1.0F
+    val red = 1.0F
+    tessellator.setColorRGBA_F(red * greyScaleColorAmount, green * greyScaleColorAmount, blue * greyScaleColorAmount, 1.0F)
     //render top
     tessellator.addVertex(x, y + height.toDouble, z)
     tessellator.addVertex(x, y + height.toDouble, z + 1.0D)
