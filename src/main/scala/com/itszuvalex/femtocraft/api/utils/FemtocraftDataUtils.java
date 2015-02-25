@@ -24,6 +24,7 @@ package com.itszuvalex.femtocraft.api.utils;
 import com.itszuvalex.femtocraft.api.FemtocraftAPI;
 import com.itszuvalex.femtocraft.api.core.ISaveable;
 import com.itszuvalex.femtocraft.api.core.Saveable;
+import com.itszuvalex.femtocraft.utility.BlockAndTileSnapshot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -726,6 +727,36 @@ public class FemtocraftDataUtils {
                     return;
                 }
                 FluidStack stack = FluidStack.loadFluidStackFromNBT(container);
+                saveable.set(obj, stack);
+            }
+        });
+        // BlockAndTileSnapshot
+        registerSaveManager(BlockAndTileSnapshot.class, new SaveManager() {
+
+            @Override
+            public void saveToNBT(NBTTagCompound compound, Field saveable,
+                                  Object obj) throws IllegalArgumentException,
+                                                     IllegalAccessException {
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                NBTTagCompound container = new NBTTagCompound();
+                BlockAndTileSnapshot stack = (BlockAndTileSnapshot) saveable.get(obj);
+                if (stack == null) return;
+                stack.saveToNBT(container);
+                compound.setTag(anno.tag().isEmpty() ? saveable.getName() : anno.tag(), container);
+            }
+
+            @Override
+            public void readFromNBT(NBTTagCompound compound, Field saveable,
+                                    Object obj) throws IllegalArgumentException,
+                                                       IllegalAccessException {
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                NBTTagCompound container = compound.getCompoundTag(anno.tag().isEmpty() ? saveable.getName() : anno
+                        .tag());
+                if (container == null) {
+                    saveable.set(obj, null);
+                    return;
+                }
+                BlockAndTileSnapshot stack = BlockAndTileSnapshot.loadFromNBT(container);
                 saveable.set(obj, stack);
             }
         });

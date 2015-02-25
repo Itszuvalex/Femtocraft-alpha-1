@@ -119,7 +119,7 @@ class TileEntitySpatialCage extends TileEntityBase {
 
   def setSide(side: ForgeDirection) = {
     Femtocraft.log(Level.INFO, "Direction: " + side)
-    if (direction == side) direction = UNKNOWN.ordinal()
+    if (direction == side.ordinal()) direction = UNKNOWN.ordinal()
     else direction = side.ordinal()
     setModified()
     setUpdate()

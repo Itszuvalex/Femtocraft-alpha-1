@@ -66,6 +66,7 @@ object SpatialRelocation {
 
   def applySnapshot(s: BlockAndTileSnapshot, destWorld: World, destX: Int, destY: Int, destZ: Int): Boolean = {
     if (s == null) return false
+    if(s.block == null) return false
     if (!s.block.canPlaceBlockAt(destWorld, destX, destY, destZ)) return false
     destWorld match {
       case world1: WorldServer =>

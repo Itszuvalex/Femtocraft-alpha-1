@@ -1,5 +1,6 @@
 package com.itszuvalex.femtocraft.utility
 
+import com.itszuvalex.femtocraft.api.core.ISaveable
 import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.block.Block
 import net.minecraft.nbt.NBTTagCompound
@@ -26,8 +27,8 @@ object BlockAndTileSnapshot {
   }
 }
 
-class BlockAndTileSnapshot(private var _dimensionID: Int, val x: Int, val y: Int, val z: Int, val modID: String,
-                           val blockID: String, val metadata: Int, val te: NBTTagCompound) {
+class BlockAndTileSnapshot(private var _dimensionID: Int, var x: Int, var y: Int, var z: Int, var modID: String,
+                           var blockID: String, var metadata: Int, var te: NBTTagCompound) /*extends ISaveable*/{
   lazy val block = GameRegistry.findBlock(modID, blockID)
 
   def world = DimensionManager.getWorld(dimensionID)
@@ -89,5 +90,15 @@ class BlockAndTileSnapshot(private var _dimensionID: Int, val x: Int, val y: Int
   def dimensionID = _dimensionID
 
   def dimensionID_=(dim: Int) = _dimensionID = dim
-
+/*
+  override def loadFromNBT(compound: NBTTagCompound): Unit =  {
+    _dimensionID = compound.getInteger("dimension")
+    x = compound.getInteger("posX")
+    y = compound.getInteger("posY")
+    z = compound.getInteger("posZ")
+    modID = compound.getString("modID")
+    blockID = compound.getString("blockID")
+    metadata = compound.getInteger("meta")
+    te = if (compound.hasKey("nbt")) compound.getCompoundTag("nbt") else null
+  }*/
 }
