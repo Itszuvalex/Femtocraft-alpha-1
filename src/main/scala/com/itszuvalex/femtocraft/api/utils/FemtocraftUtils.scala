@@ -242,6 +242,14 @@ object FemtocraftUtils {
     r1
   }
 
+  def ARGBFromColor(color: Int): (Int, Int, Int, Int) =
+    (
+      (color & (255 << 24)) >> 24,
+      (color & (255 << 16)) >> 16,
+      (color & (255 << 8)) >> 8,
+      color & 255
+      )
+
   /**
    *
    * @return integer representation of green, used for Nano-tier things.

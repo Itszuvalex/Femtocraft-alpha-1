@@ -27,7 +27,6 @@ import com.itszuvalex.femtocraft.transport.items.render.RenderVacuumTube
 import com.itszuvalex.femtocraft.transport.liquids.render.RenderSuctionPipe
 import cpw.mods.fml.client.registry.{ClientRegistry, RenderingRegistry}
 import net.minecraft.client.renderer.tileentity.RenderDimensionalTear
-import net.minecraftforge.common.ForgeHooks
 
 object ProxyClient {
   var microCableRenderID                            = 0
@@ -45,6 +44,7 @@ object ProxyClient {
   var CuttingBoardRenderPass                        = 0
   var cuttingBoardRenderType                        = 0
   var FemtocraftCryoEndothermalChargingCoilRenderID = 0
+  var FemtocraftLaserRenderID                       = 0
 }
 
 class ProxyClient extends ProxyCommon {
@@ -80,6 +80,8 @@ class ProxyClient extends ProxyCommon {
     RenderingRegistry.registerBlockHandler(ProxyClient.FemtocraftSuctionPipeRenderID, new RenderSuctionPipe)
     ProxyClient.FemtocraftPlasmaConduitID = RenderingRegistry.getNextAvailableRenderId
     RenderingRegistry.registerBlockHandler(ProxyClient.FemtocraftPlasmaConduitID, new RenderPlasmaConduit)
+    ProxyClient.FemtocraftLaserRenderID = RenderingRegistry.getNextAvailableRenderId
+    RenderingRegistry.registerBlockHandler(ProxyClient.FemtocraftLaserRenderID, new RenderLaser)
 
     ClientRegistry.bindTileEntitySpecialRenderer(classOf[TileEntityDimensionalTear], new RenderDimensionalTear)
   }

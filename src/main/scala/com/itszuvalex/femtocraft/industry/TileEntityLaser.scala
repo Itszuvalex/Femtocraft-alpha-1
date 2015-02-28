@@ -1,6 +1,5 @@
 package com.itszuvalex.femtocraft.industry
 
-import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.core.{Configurable, Saveable}
 import com.itszuvalex.femtocraft.core.traits.tile.DescriptionPacket
 import com.itszuvalex.femtocraft.industry.TileEntityLaser._
@@ -77,20 +76,7 @@ object TileEntityLaser {
     val x = xCoord + direction.offsetX
     val y = yCoord + direction.offsetY
     val z = zCoord + direction.offsetZ
-    if (worldObj.blockExists(x, y, z)) {
-      worldObj.getTileEntity(x, y, z) match {
-        case int: ILaserInteractable =>
-          int.interact(direction, (strength.toFloat * LASER_STRENGTH_FALLOFF_MULTIPLIER).toInt, modulation, distance - 1)
-        case _ if worldObj.isAirBlock(x, y, z) =>
-          worldObj.setBlock(x, y, z, Femtocraft.blockLaser)
-          worldObj.getTileEntity(x, y, z) match {
-            case int: ILaserInteractable =>
-              int.interact(direction, (strength.toFloat * LASER_STRENGTH_FALLOFF_MULTIPLIER).toInt, modulation, distance - 1)
-            case _ =>
-          }
-        case _ =>
-      }
-    }
+    LaserRegistry.makeLaser(worldObj, x, y, z, modulation, direction,(strength.toFloat * LASER_STRENGTH_FALLOFF_MULTIPLIER).toInt, distance-1)
   }
 
 }
