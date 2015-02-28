@@ -32,11 +32,11 @@ class TileEntityDimensionalTear extends TileEntity {
 
   override def writeToNBT(p_145841_1_ : NBTTagCompound): Unit = {
     super.writeToNBT(p_145841_1_)
-    FemtocraftDataUtils.loadObjectFromNBT(p_145841_1_, this, FemtocraftDataUtils.EnumSaveType.WORLD)
+    FemtocraftDataUtils.saveObjectToNBT(p_145841_1_, this, FemtocraftDataUtils.EnumSaveType.WORLD)
   }
 
   override def readFromNBT(p_145839_1_ : NBTTagCompound): Unit = {
     super.readFromNBT(p_145839_1_)
-    FemtocraftDataUtils.saveObjectToNBT(p_145839_1_, this, FemtocraftDataUtils.EnumSaveType.WORLD)
+    FemtocraftDataUtils.loadObjectFromNBT(p_145839_1_, this, FemtocraftDataUtils.EnumSaveType.WORLD)
   }
 }
