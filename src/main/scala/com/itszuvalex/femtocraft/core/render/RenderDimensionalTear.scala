@@ -29,6 +29,9 @@ import org.lwjgl.opengl.GL11
     drawTopFace(tileEntity, x, y, z, p_147500_8_)
     drawBotFace(tileEntity, x, y, z, p_147500_8_)
     drawEastFace(tileEntity, x, y, z, p_147500_8_)
+    drawWestFace(tileEntity, x, y, z, p_147500_8_)
+    drawSouthFace(tileEntity, x, y, z, p_147500_8_)
+    drawNorthFace(tileEntity, x, y, z, p_147500_8_)
   }
 
   def drawTopFace(tileEntity: TileEntityDimensionalTear, x: Double, y: Double, z: Double, p_147500_8_ : Float): Unit = {
@@ -199,12 +202,12 @@ import org.lwjgl.opengl.GL11
      */
     GL11.glTranslatef(xtrans, rendererDispatcherY, rendererDispatcherZ)
     GL11.glTexGeni(GL11.GL_S, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_OBJECT_LINEAR)
-    GL11.glTexGeni(GL11.GL_T, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_OBJECT_LINEAR)
-    GL11.glTexGeni(GL11.GL_R, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_EYE_LINEAR)
+    GL11.glTexGeni(GL11.GL_T, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_EYE_LINEAR)
+    GL11.glTexGeni(GL11.GL_R, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_OBJECT_LINEAR)
     GL11.glTexGeni(GL11.GL_Q, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_OBJECT_LINEAR)
-    GL11.glTexGen(GL11.GL_S, GL11.GL_OBJECT_PLANE, this.func_147525_a(1.0F, 0.0F, 0.0F, 0.0F))
-    GL11.glTexGen(GL11.GL_T, GL11.GL_OBJECT_PLANE, this.func_147525_a(0.0F, 0.0F, 1.0F, 0.0F))
-    GL11.glTexGen(GL11.GL_R, GL11.GL_EYE_PLANE, this.func_147525_a(0.0F, 0.0F, 0.0F, 1.0F))
+    GL11.glTexGen(GL11.GL_S, GL11.GL_OBJECT_PLANE, this.func_147525_a(0.0F, 0.0F, 1.0F, 0.0F))
+    GL11.glTexGen(GL11.GL_T, GL11.GL_EYE_PLANE, this.func_147525_a(-1.0F, 0.0F, 0.0F, 0.0F))
+    GL11.glTexGen(GL11.GL_R, GL11.GL_OBJECT_PLANE, this.func_147525_a(0.0F, 0.0F, 0.0F, 1.0F))
     GL11.glTexGen(GL11.GL_Q, GL11.GL_OBJECT_PLANE, this.func_147525_a(0.0F, 1.0F, 0.0F, 0.0F))
     GL11.glEnable(GL11.GL_TEXTURE_GEN_S)
     GL11.glEnable(GL11.GL_TEXTURE_GEN_T)
@@ -215,7 +218,7 @@ import org.lwjgl.opengl.GL11
     GL11.glPushMatrix()
     GL11.glLoadIdentity()
     GL11.glTranslatef(-rendererDispatcherX, -rendererDispatcherY, -rendererDispatcherZ)
-    GL11.glTranslatef(-rendererDispatcherX, ActiveRenderInfo.objectZ * renderOffsetRatioConst / renderX, ActiveRenderInfo.objectY * renderOffsetRatioConst / renderX)
+    GL11.glTranslatef(ActiveRenderInfo.objectY * renderOffsetRatioConst / renderX, -rendererDispatcherY, ActiveRenderInfo.objectZ * renderOffsetRatioConst / renderX)
     val tessellator = Tessellator.instance
     tessellator.startDrawingQuads()
     val blue = 1.0F
@@ -227,6 +230,201 @@ import org.lwjgl.opengl.GL11
     tessellator.addVertex(x + offset.toDouble, y + 1.0, z)
     tessellator.addVertex(x + offset.toDouble, y + 1.0, z + 1.0D)
     tessellator.addVertex(x + offset.toDouble, y, z + 1.0)
+    tessellator.draw()
+    GL11.glPopMatrix()
+    GL11.glMatrixMode(GL11.GL_MODELVIEW)
+    GL11.glDisable(GL11.GL_BLEND)
+    GL11.glDisable(GL11.GL_TEXTURE_GEN_S)
+    GL11.glDisable(GL11.GL_TEXTURE_GEN_T)
+    GL11.glDisable(GL11.GL_TEXTURE_GEN_R)
+    GL11.glDisable(GL11.GL_TEXTURE_GEN_Q)
+    GL11.glEnable(GL11.GL_LIGHTING)
+  }
+
+
+  def drawWestFace(tileEntity: TileEntityDimensionalTear, x: Double, y: Double, z: Double, p_147500_8_ : Float): Unit = {
+    val rendererDispatcherX: Float = this.field_147501_a.field_147560_j.toFloat
+    val rendererDispatcherZ: Float = this.field_147501_a.field_147561_k.toFloat
+    val rendererDispatcherY: Float = this.field_147501_a.field_147558_l.toFloat
+    GL11.glDisable(GL11.GL_LIGHTING)
+    random.setSeed(31100L)
+    val offset: Float = 0
+
+    GL11.glPushMatrix()
+    this.bindTexture(skyLocation)
+    val greyScaleColorAmount = 0.1F
+    val renderOffsetRatioConst = 5.0F
+    GL11.glEnable(GL11.GL_BLEND)
+    GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
+    val worldX = ((x + offset.toDouble)).toFloat
+    val renderX = worldX - ActiveRenderInfo.objectX
+    val fakeCameraX = renderX + renderOffsetRatioConst
+    var xtrans = renderX / fakeCameraX
+    xtrans += (x + offset.toDouble).toFloat
+
+    /*
+     * Distance of the texture from the camera is difference in xtrans and rendererDispatcherY
+     */
+    GL11.glTranslatef(xtrans, rendererDispatcherY, rendererDispatcherZ)
+    GL11.glTexGeni(GL11.GL_S, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_OBJECT_LINEAR)
+    GL11.glTexGeni(GL11.GL_T, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_EYE_LINEAR)
+    GL11.glTexGeni(GL11.GL_R, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_OBJECT_LINEAR)
+    GL11.glTexGeni(GL11.GL_Q, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_OBJECT_LINEAR)
+    GL11.glTexGen(GL11.GL_S, GL11.GL_OBJECT_PLANE, this.func_147525_a(0.0F, 0.0F, 1.0F, 0.0F))
+    GL11.glTexGen(GL11.GL_T, GL11.GL_EYE_PLANE, this.func_147525_a(-1.0F, 0.0F, 0.0F, 0.0F))
+    GL11.glTexGen(GL11.GL_R, GL11.GL_OBJECT_PLANE, this.func_147525_a(0.0F, 0.0F, 0.0F, 1.0F))
+    GL11.glTexGen(GL11.GL_Q, GL11.GL_OBJECT_PLANE, this.func_147525_a(0.0F, 1.0F, 0.0F, 0.0F))
+    GL11.glEnable(GL11.GL_TEXTURE_GEN_S)
+    GL11.glEnable(GL11.GL_TEXTURE_GEN_T)
+    GL11.glEnable(GL11.GL_TEXTURE_GEN_R)
+    GL11.glEnable(GL11.GL_TEXTURE_GEN_Q)
+    GL11.glPopMatrix()
+    GL11.glMatrixMode(GL11.GL_TEXTURE)
+    GL11.glPushMatrix()
+    GL11.glLoadIdentity()
+    GL11.glTranslatef(-rendererDispatcherX, -rendererDispatcherY, -rendererDispatcherZ)
+    GL11.glTranslatef(ActiveRenderInfo.objectY * renderOffsetRatioConst / renderX, -rendererDispatcherY, ActiveRenderInfo.objectZ * renderOffsetRatioConst / renderX)
+    val tessellator = Tessellator.instance
+    tessellator.startDrawingQuads()
+    val blue = 1.0F
+    val green = 1.0F
+    val red = 1.0F
+    tessellator.setColorRGBA_F(red * greyScaleColorAmount, green * greyScaleColorAmount, blue * greyScaleColorAmount, 1.0F)
+    //render top
+    tessellator.addVertex(x + offset.toDouble, y, z)
+    tessellator.addVertex(x + offset.toDouble, y, z + 1.0)
+    tessellator.addVertex(x + offset.toDouble, y + 1.0, z + 1.0D)
+    tessellator.addVertex(x + offset.toDouble, y + 1.0, z)
+    tessellator.draw()
+    GL11.glPopMatrix()
+    GL11.glMatrixMode(GL11.GL_MODELVIEW)
+    GL11.glDisable(GL11.GL_BLEND)
+    GL11.glDisable(GL11.GL_TEXTURE_GEN_S)
+    GL11.glDisable(GL11.GL_TEXTURE_GEN_T)
+    GL11.glDisable(GL11.GL_TEXTURE_GEN_R)
+    GL11.glDisable(GL11.GL_TEXTURE_GEN_Q)
+    GL11.glEnable(GL11.GL_LIGHTING)
+  }
+
+
+  def drawSouthFace(tileEntity: TileEntityDimensionalTear, x: Double, y: Double, z: Double, p_147500_8_ : Float): Unit = {
+    val rendererDispatcherX: Float = this.field_147501_a.field_147560_j.toFloat
+    val rendererDispatcherZ: Float = this.field_147501_a.field_147561_k.toFloat
+    val rendererDispatcherY: Float = this.field_147501_a.field_147558_l.toFloat
+    GL11.glDisable(GL11.GL_LIGHTING)
+    random.setSeed(31100L)
+    val offset: Float = 1
+
+    GL11.glPushMatrix()
+    this.bindTexture(skyLocation)
+    val greyScaleColorAmount = 0.1F
+    val renderOffsetRatioConst = 5.0F
+    GL11.glEnable(GL11.GL_BLEND)
+    GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
+    val worldZ = (-(z + offset.toDouble)).toFloat
+    val renderZ = worldZ + ActiveRenderInfo.objectZ
+    val fakeCameraZ = renderZ + renderOffsetRatioConst
+    var ztrans = renderZ / fakeCameraZ
+    ztrans += (z + offset.toDouble).toFloat
+
+    /*
+     * Distance of the texture from the camera is difference in ztrans and rendererDispatcherY
+     */
+    GL11.glTranslatef(rendererDispatcherX, rendererDispatcherY, ztrans)
+    GL11.glTexGeni(GL11.GL_S, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_OBJECT_LINEAR)
+    GL11.glTexGeni(GL11.GL_T, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_OBJECT_LINEAR)
+    GL11.glTexGeni(GL11.GL_R, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_EYE_LINEAR)
+    GL11.glTexGeni(GL11.GL_Q, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_OBJECT_LINEAR)
+    GL11.glTexGen(GL11.GL_S, GL11.GL_OBJECT_PLANE, this.func_147525_a(1.0F, 0.0F, 0.0F, 0.0F))
+    GL11.glTexGen(GL11.GL_T, GL11.GL_OBJECT_PLANE, this.func_147525_a(0.0F, 0.0F, 0.0F, -1.0F))
+    GL11.glTexGen(GL11.GL_R, GL11.GL_EYE_PLANE, this.func_147525_a(0.0F, 0.0F, 1.0F, 0.0F))
+    GL11.glTexGen(GL11.GL_Q, GL11.GL_OBJECT_PLANE, this.func_147525_a(0.0F, 1.0F, 0.0F, 0.0F))
+    GL11.glEnable(GL11.GL_TEXTURE_GEN_S)
+    GL11.glEnable(GL11.GL_TEXTURE_GEN_T)
+    GL11.glEnable(GL11.GL_TEXTURE_GEN_R)
+    GL11.glEnable(GL11.GL_TEXTURE_GEN_Q)
+    GL11.glPopMatrix()
+    GL11.glMatrixMode(GL11.GL_TEXTURE)
+    GL11.glPushMatrix()
+    GL11.glLoadIdentity()
+    GL11.glTranslatef(-rendererDispatcherX, -rendererDispatcherY, -rendererDispatcherZ)
+    GL11.glTranslatef(ActiveRenderInfo.objectZ * renderOffsetRatioConst / renderZ, -rendererDispatcherY, ActiveRenderInfo.objectY * renderOffsetRatioConst / renderZ)
+    val tessellator = Tessellator.instance
+    tessellator.startDrawingQuads()
+    val blue = 1.0F
+    val green = 1.0F
+    val red = 1.0F
+    tessellator.setColorRGBA_F(red * greyScaleColorAmount, green * greyScaleColorAmount, blue * greyScaleColorAmount, 1.0F)
+    //render top
+    tessellator.addVertex(x, y, z + offset.toDouble)
+    tessellator.addVertex(x + 1.0, y, z + offset.toDouble)
+    tessellator.addVertex(x + 1.0, y + 1.0, z + offset.toDouble)
+    tessellator.addVertex(x, y + 1.0, z + offset.toDouble)
+    tessellator.draw()
+    GL11.glPopMatrix()
+    GL11.glMatrixMode(GL11.GL_MODELVIEW)
+    GL11.glDisable(GL11.GL_BLEND)
+    GL11.glDisable(GL11.GL_TEXTURE_GEN_S)
+    GL11.glDisable(GL11.GL_TEXTURE_GEN_T)
+    GL11.glDisable(GL11.GL_TEXTURE_GEN_R)
+    GL11.glDisable(GL11.GL_TEXTURE_GEN_Q)
+    GL11.glEnable(GL11.GL_LIGHTING)
+  }
+
+
+  def drawNorthFace(tileEntity: TileEntityDimensionalTear, x: Double, y: Double, z: Double, p_147500_8_ : Float): Unit = {
+    val rendererDispatcherX: Float = this.field_147501_a.field_147560_j.toFloat
+    val rendererDispatcherZ: Float = this.field_147501_a.field_147561_k.toFloat
+    val rendererDispatcherY: Float = this.field_147501_a.field_147558_l.toFloat
+    GL11.glDisable(GL11.GL_LIGHTING)
+    random.setSeed(31100L)
+    val offset: Float = 0
+
+    GL11.glPushMatrix()
+    this.bindTexture(skyLocation)
+    val greyScaleColorAmount = 0.1F
+    val renderOffsetRatioConst = 5.0F
+    GL11.glEnable(GL11.GL_BLEND)
+    GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
+    val worldZ = ((z + offset.toDouble)).toFloat
+    val renderZ = worldZ - ActiveRenderInfo.objectZ
+    val fakeCameraZ = renderZ + renderOffsetRatioConst
+    var ztrans = renderZ / fakeCameraZ
+    ztrans += (z + offset.toDouble).toFloat
+
+    /*
+     * Distance of the texture from the camera is difference in ztrans and rendererDispatcherY
+     */
+    GL11.glTranslatef(rendererDispatcherX, rendererDispatcherY, ztrans)
+    GL11.glTexGeni(GL11.GL_S, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_OBJECT_LINEAR)
+    GL11.glTexGeni(GL11.GL_T, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_OBJECT_LINEAR)
+    GL11.glTexGeni(GL11.GL_R, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_EYE_LINEAR)
+    GL11.glTexGeni(GL11.GL_Q, GL11.GL_TEXTURE_GEN_MODE, GL11.GL_OBJECT_LINEAR)
+    GL11.glTexGen(GL11.GL_S, GL11.GL_OBJECT_PLANE, this.func_147525_a(1.0F, 0.0F, 0.0F, 0.0F))
+    GL11.glTexGen(GL11.GL_T, GL11.GL_OBJECT_PLANE, this.func_147525_a(0.0F, 0.0F, 0.0F, -1.0F))
+    GL11.glTexGen(GL11.GL_R, GL11.GL_EYE_PLANE, this.func_147525_a(0.0F, 0.0F, 1.0F, 0.0F))
+    GL11.glTexGen(GL11.GL_Q, GL11.GL_OBJECT_PLANE, this.func_147525_a(0.0F, 1.0F, 0.0F, 0.0F))
+    GL11.glEnable(GL11.GL_TEXTURE_GEN_S)
+    GL11.glEnable(GL11.GL_TEXTURE_GEN_T)
+    GL11.glEnable(GL11.GL_TEXTURE_GEN_R)
+    GL11.glEnable(GL11.GL_TEXTURE_GEN_Q)
+    GL11.glPopMatrix()
+    GL11.glMatrixMode(GL11.GL_TEXTURE)
+    GL11.glPushMatrix()
+    GL11.glLoadIdentity()
+    GL11.glTranslatef(-rendererDispatcherX, -rendererDispatcherY, -rendererDispatcherZ)
+    GL11.glTranslatef(ActiveRenderInfo.objectZ * renderOffsetRatioConst / renderZ, -rendererDispatcherY, ActiveRenderInfo.objectY * renderOffsetRatioConst / renderZ)
+    val tessellator = Tessellator.instance
+    tessellator.startDrawingQuads()
+    val blue = 1.0F
+    val green = 1.0F
+    val red = 1.0F
+    tessellator.setColorRGBA_F(red * greyScaleColorAmount, green * greyScaleColorAmount, blue * greyScaleColorAmount, 1.0F)
+    //render top
+    tessellator.addVertex(x, y, z + offset.toDouble)
+    tessellator.addVertex(x, y + 1.0, z + offset.toDouble)
+    tessellator.addVertex(x + 1.0, y + 1.0, z + offset.toDouble)
+    tessellator.addVertex(x + 1.0, y, z + offset.toDouble)
     tessellator.draw()
     GL11.glPopMatrix()
     GL11.glMatrixMode(GL11.GL_MODELVIEW)
