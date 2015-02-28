@@ -14,11 +14,9 @@ class BlockLaser extends BlockContainer(Material.fire) {
   setCreativeTab(Femtocraft.femtocraftTab)
   setBlockUnbreakable()
 
-  override def getBlocksMovement(p_149655_1_ : IBlockAccess, p_149655_2_ : Int, p_149655_3_ : Int, p_149655_4_ : Int): Boolean = {
-    super.getBlocksMovement(p_149655_1_, p_149655_2_, p_149655_3_, p_149655_4_)
-  }
+  override def getBlocksMovement(p_149655_1_ : IBlockAccess, p_149655_2_ : Int, p_149655_3_ : Int, p_149655_4_ : Int): Boolean = false
 
-  override def renderAsNormalBlock()=  false
+  override def renderAsNormalBlock() = false
 
   override def getRenderType: Int = {
     super.getRenderType
