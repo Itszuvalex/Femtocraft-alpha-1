@@ -76,10 +76,12 @@ class TileEntityModulationLensMount extends TileEntityBase with Inventory with I
    * @param distance Distance of laser at this block.
    */
   override def interact(dir: ForgeDirection, strength: Int, modulation: String, distance: Int) = {
-    sustained = true
-    this.dir = dir.ordinal()
-    this.strength = strength
-    this.distance = distance
-    this.modulation = modulation
+    if (this.dir == dir.ordinal() || (this.dir != dir.ordinal() && strength > this.strength)) {
+      sustained = true
+      this.dir = dir.ordinal()
+      this.strength = strength
+      this.distance = distance
+      this.modulation = modulation
+    }
   }
 }

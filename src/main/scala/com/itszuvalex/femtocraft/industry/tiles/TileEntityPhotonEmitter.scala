@@ -23,6 +23,7 @@ object TileEntityPhotonEmitter {
   @Configurable val DEFAULT_DISTANCE         = 8
   @Configurable val MAX_CHAMBERS             = 6
   @Configurable val MINIMUM_ACTIVATION_POWER = 2000
+  @Configurable val INTERACTION_TIER         = EnumTechLevel.NANO
 }
 
 @Configurable class TileEntityPhotonEmitter extends TileEntityBase with PowerConsumer {
@@ -81,7 +82,7 @@ object TileEntityPhotonEmitter {
     if (itemstack == null) return false
     if (worldObj.isRemote) return true
     itemstack.getItem match {
-      case inter: IInterfaceDevice if inter.getInterfaceLevel.tier >= EnumTechLevel.NANO.tier =>
+      case inter: IInterfaceDevice if inter.getInterfaceLevel.tier >= INTERACTION_TIER.tier =>
         if (par5EntityPlayer.isSneaking) {
           extensionDirection = ForgeDirection.getOrientation(side).ordinal()
           if (extensionDirection == emitterDirection) emitterDirection = ForgeDirection.UNKNOWN.ordinal()

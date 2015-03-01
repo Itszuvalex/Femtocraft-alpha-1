@@ -35,7 +35,7 @@ import com.itszuvalex.femtocraft.utility.blocks.{BlockSpatialAlternator, BlockSp
 import com.itszuvalex.femtocraft.utility.items.ItemPocketPocket
 import com.mojang.authlib.GameProfile
 import cpw.mods.fml.common.Mod.EventHandler
-import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent, FMLServerStartingEvent}
+import cpw.mods.fml.common.event.{FMLServerStartingEvent, FMLPostInitializationEvent, FMLInitializationEvent, FMLPreInitializationEvent}
 import cpw.mods.fml.common.network.NetworkRegistry
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.common.{FMLCommonHandler, Mod, SidedProxy}
@@ -165,6 +165,7 @@ object Femtocraft {
   var blockPhotonEmitter                    : Block                     = null
   var blockReflectorChamber                 : Block                     = null
   var blockModulationLensMount              : Block                     = null
+  var blockLaserReflector                   : Block                     = null
   var blockSpatialAlternator                : Block                     = null
   var blockSpatialCage                      : Block                     = null
   /* items */
@@ -425,6 +426,7 @@ object Femtocraft {
     blockPhotonEmitter = registerBlock(new BlockPhotonEmitter, "BlockPhotonEmitter")
     blockReflectorChamber = registerBlock(new BlockReflectorChamber, "BlockReflectorChamber")
     blockModulationLensMount = registerBlock(new BlockModulationLensMount, "BlockModulationLensMount")
+    blockLaserReflector = registerBlock(new BlockLaserReflector, "BlockLaserReflector")
 
     blockSpatialAlternator = registerBlock(new BlockSpatialAlternator(), "BlockSpatialAlternator")
     blockSpatialCage = registerBlock(new BlockSpatialCage(), "BlockSpatialCage")

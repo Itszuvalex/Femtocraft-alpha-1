@@ -90,6 +90,7 @@ class ProxyCommon {
     GameRegistry.registerTileEntity(classOf[TileEntityPhotonEmitter], "TileEntityPhotonEmitter")
     GameRegistry.registerTileEntity(classOf[TileEntityReflectorChamber], "TileEntityReflectorChamber")
     GameRegistry.registerTileEntity(classOf[TileEntityModulationLensMount], "TileEntityModulationLensMount")
+    GameRegistry.registerTileEntity(classOf[TileEntityLaserReflector], "TileEntityLaserReflector")
 
     GameRegistry.registerTileEntity(classOf[TileEntitySpatialAlternator], "TileEntitySpatialAlternator")
     GameRegistry.registerTileEntity(classOf[TileEntitySpatialCage], "TileEntitySpatialCage")
