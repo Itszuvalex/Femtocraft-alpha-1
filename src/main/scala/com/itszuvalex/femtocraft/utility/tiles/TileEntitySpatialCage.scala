@@ -1,6 +1,5 @@
 package com.itszuvalex.femtocraft.utility.tiles
 
-import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.core.Saveable
 import com.itszuvalex.femtocraft.api.items.IInterfaceDevice
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
@@ -9,7 +8,6 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.common.util.ForgeDirection
 import net.minecraftforge.common.util.ForgeDirection._
-import org.apache.logging.log4j.Level
 
 import scala.util.Random
 
@@ -93,7 +91,6 @@ class TileEntitySpatialCage extends TileEntityBase {
 
   override def handleDescriptionNBT(compound: NBTTagCompound): Unit = {
     super.handleDescriptionNBT(compound)
-    Femtocraft.log(Level.INFO, "received Direction: " + direction)
     setRenderUpdate()
   }
 
@@ -118,7 +115,6 @@ class TileEntitySpatialCage extends TileEntityBase {
   def isSideActive(side: Int) = if (direction == UNKNOWN.ordinal()) false else side == direction
 
   def setSide(side: ForgeDirection) = {
-    Femtocraft.log(Level.INFO, "Direction: " + side)
     if (direction == side.ordinal()) direction = UNKNOWN.ordinal()
     else direction = side.ordinal()
     setModified()

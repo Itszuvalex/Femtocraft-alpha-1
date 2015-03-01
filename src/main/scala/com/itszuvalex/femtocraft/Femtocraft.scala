@@ -162,6 +162,7 @@ object Femtocraft {
   var blockFluidCooledContaminatedMoltenSalt: BlockFluidBase            = null
   var blockPlasma                           : Block                     = null
   var blockLaser                            : Block                     = null
+  var blockPhotonEmitter                    : Block                     = null
   var blockSpatialAlternator                : Block                     = null
   var blockSpatialCage                      : Block                     = null
   /* items */
@@ -418,6 +419,7 @@ object Femtocraft {
     blockPlasma = registerBlock(new BlockPlasma(), "BlockPlasma")
 
     blockLaser = registerBlock(new BlockLaser(), "BlockLaser")
+    blockPhotonEmitter = registerBlock(new BlockPhotonEmitter, "BlockPhotonEmitter")
 
     blockSpatialAlternator = registerBlock(new BlockSpatialAlternator(), "BlockSpatialAlternator")
     blockSpatialCage = registerBlock(new BlockSpatialCage(), "BlockSpatialCage")

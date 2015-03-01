@@ -21,7 +21,6 @@
 package com.itszuvalex.femtocraft.proxy
 
 import com.itszuvalex.femtocraft.core.tiles.{TileEntityDimensionalTear, TileEntityOreLodestone}
-import com.itszuvalex.femtocraft.industry.TileEntityLaser
 import com.itszuvalex.femtocraft.industry.tiles._
 import com.itszuvalex.femtocraft.power.plasma.TileEntityPlasma
 import com.itszuvalex.femtocraft.power.tiles._
@@ -88,6 +87,7 @@ class ProxyCommon {
     GameRegistry.registerTileEntity(classOf[TileEntityPlasmaConduit], "TileEntityPlasmaConduit")
 
     GameRegistry.registerTileEntity(classOf[TileEntityLaser], "TileEntityLaser")
+    GameRegistry.registerTileEntity(classOf[TileEntityPhotonEmitter], "TileEntityPhotonEmitter")
 
     GameRegistry.registerTileEntity(classOf[TileEntitySpatialAlternator], "TileEntitySpatialAlternator")
     GameRegistry.registerTileEntity(classOf[TileEntitySpatialCage], "TileEntitySpatialCage")

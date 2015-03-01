@@ -1,7 +1,7 @@
 package com.itszuvalex.femtocraft.industry.blocks
 
 import com.itszuvalex.femtocraft.Femtocraft
-import com.itszuvalex.femtocraft.industry.TileEntityLaser
+import com.itszuvalex.femtocraft.industry.tiles.TileEntityLaser
 import com.itszuvalex.femtocraft.proxy.ProxyClient
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.material.Material
@@ -23,6 +23,8 @@ class BlockLaser extends BlockContainer(Material.fire) {
   override def getBlocksMovement(p_149655_1_ : IBlockAccess, p_149655_2_ : Int, p_149655_3_ : Int, p_149655_4_ : Int): Boolean = false
 
   override def renderAsNormalBlock() = false
+
+  override def isReplaceable(world: IBlockAccess, x: Int, y: Int, z: Int) =  true
 
   override def isOpaqueCube = false
 

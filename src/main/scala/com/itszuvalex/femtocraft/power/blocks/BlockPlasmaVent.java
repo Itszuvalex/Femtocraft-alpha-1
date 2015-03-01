@@ -22,20 +22,28 @@
 package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
-import com.itszuvalex.femtocraft.core.blocks.BlockBase;
+import com.itszuvalex.femtocraft.core.blocks.TileContainer;
+import com.itszuvalex.femtocraft.power.tiles.TileEntityPlasmaVent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 7/6/14.
  */
-public class BlockPlasmaVent extends BlockBase {
+public class BlockPlasmaVent extends TileContainer {
     public BlockPlasmaVent() {
         super(Material.iron);
         setCreativeTab(Femtocraft.femtocraftTab());
         setBlockName("BlockPlasmaVent");
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+        return new TileEntityPlasmaVent();
     }
 
     @Override

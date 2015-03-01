@@ -21,8 +21,9 @@
 package com.itszuvalex.femtocraft.power.render
 
 import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.industry.LaserRegistry
 import com.itszuvalex.femtocraft.industry.blocks.BlockLaser
-import com.itszuvalex.femtocraft.industry.{LaserRegistry, TileEntityLaser}
+import com.itszuvalex.femtocraft.industry.tiles.TileEntityLaser
 import com.itszuvalex.femtocraft.proxy.ProxyClient
 import com.itszuvalex.femtocraft.render.{RenderModel, RenderPoint, RenderQuad}
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler
@@ -111,8 +112,8 @@ class RenderLaser extends ISimpleBlockRenderingHandler {
     segmentUpDown.addQuad(top)
     segmentUpDown.addQuad(bot)
 
-    segmentNorthSouth = segmentUpDown.rotatedOnXAxis(90d, .5f, .5f)
-    segmentEastWest = segmentNorthSouth.rotatedOnZAxis(90d, .5f, .5f)
+    segmentNorthSouth = segmentUpDown.rotatedOnXAxis(90d * Math.PI / 180d, .5f, .5f)
+    segmentEastWest = segmentUpDown.rotatedOnZAxis(90d * Math.PI / 180d, .5f, .5f)
 
   }
 }

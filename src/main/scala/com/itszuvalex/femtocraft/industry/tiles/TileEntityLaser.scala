@@ -1,8 +1,10 @@
-package com.itszuvalex.femtocraft.industry
+package com.itszuvalex.femtocraft.industry.tiles
 
 import com.itszuvalex.femtocraft.api.core.{Configurable, Saveable}
 import com.itszuvalex.femtocraft.core.traits.tile.DescriptionPacket
-import com.itszuvalex.femtocraft.industry.TileEntityLaser._
+import com.itszuvalex.femtocraft.industry.tiles.TileEntityLaser._
+import com.itszuvalex.femtocraft.industry.{ILaser, LaserRegistry}
+import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
 import net.minecraftforge.common.util.ForgeDirection
 import net.minecraftforge.common.util.ForgeDirection._
@@ -16,7 +18,7 @@ object TileEntityLaser {
 
 @Configurable class TileEntityLaser extends TileEntity with ILaser with DescriptionPacket {
 
-  @Saveable(desc = true) var direction     = UNKNOWN
+  @Saveable(desc = true) var direction     = UNKNOWN.ordinal()
   @Saveable(desc = true) var modulation    = "Unmodulated"
                          var strength: Int = 0
                          var distance: Int = 0
@@ -32,7 +34,7 @@ object TileEntityLaser {
    *
    * @return Direction of laser propagation.
    */
-  override def getDirection = direction
+  override def getDirection = ForgeDirection.getOrientation(direction)
 
   /**
    *
@@ -48,20 +50,25 @@ object TileEntityLaser {
    * @param distance Distance of laser at this block.
    */
   override def interact(dir: ForgeDirection, strength: Int, modulation: String, distance: Int): Unit = {
-    if (dir != direction && strength > this.strength) {
-      direction = dir
+    if (dir != getDirection && strength > this.strength) {
+      direction = dir.ordinal()
       this.strength = strength
       this.modulation = modulation
       this.distance = distance
       worldObj.markBlockForUpdate(xCoord, yCoord, zCoord)
       sustained = true
     }
-    else if (dir == direction) {
+    else if (dir == getDirection) {
       this.strength = strength
       this.modulation = modulation
       this.distance = distance
       sustained = true
     }
+  }
+
+  override def handleDescriptionNBT(compound: NBTTagCompound): Unit = {
+    super.handleDescriptionNBT(compound)
+    worldObj.markBlockRangeForRenderUpdate(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord)
   }
 
   override def updateEntity(): Unit = {
@@ -73,10 +80,10 @@ object TileEntityLaser {
 
     if (distance <= 0) return
 
-    val x = xCoord + direction.offsetX
-    val y = yCoord + direction.offsetY
-    val z = zCoord + direction.offsetZ
-    LaserRegistry.makeLaser(worldObj, x, y, z, modulation, direction,(strength.toFloat * LASER_STRENGTH_FALLOFF_MULTIPLIER).toInt, distance-1)
+    val x = xCoord + getDirection.offsetX
+    val y = yCoord + getDirection.offsetY
+    val z = zCoord + getDirection.offsetZ
+    LaserRegistry.makeLaser(worldObj, x, y, z, modulation, getDirection, (strength.toFloat * LASER_STRENGTH_FALLOFF_MULTIPLIER).toInt, distance - 1)
   }
 
 }

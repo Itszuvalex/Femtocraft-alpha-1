@@ -114,6 +114,7 @@ public class TileEntityPlasmaVent extends TileEntityPlasmaConduit {
     @Override
     public void femtocraftServerUpdate() {
         super.femtocraftServerUpdate();
+
         if (ventDuration > 0 || ventDirection == ForgeDirection.UNKNOWN) {
             return;
         }
