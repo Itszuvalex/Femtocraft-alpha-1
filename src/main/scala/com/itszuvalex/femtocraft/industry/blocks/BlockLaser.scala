@@ -7,7 +7,7 @@ import net.minecraft.block.BlockContainer
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.Entity
-import net.minecraft.util.IIcon
+import net.minecraft.util.{AxisAlignedBB, IIcon}
 import net.minecraft.world.{IBlockAccess, World}
 
 /**
@@ -22,9 +22,11 @@ class BlockLaser extends BlockContainer(Material.fire) {
 
   override def getBlocksMovement(p_149655_1_ : IBlockAccess, p_149655_2_ : Int, p_149655_3_ : Int, p_149655_4_ : Int): Boolean = false
 
+  override def getCollisionBoundingBoxFromPool(p_149668_1_ : World, p_149668_2_ : Int, p_149668_3_ : Int, p_149668_4_ : Int): AxisAlignedBB = null
+
   override def renderAsNormalBlock() = false
 
-  override def isReplaceable(world: IBlockAccess, x: Int, y: Int, z: Int) =  true
+  override def isReplaceable(world: IBlockAccess, x: Int, y: Int, z: Int) = true
 
   override def isOpaqueCube = false
 

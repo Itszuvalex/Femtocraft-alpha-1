@@ -59,6 +59,8 @@ object TileEntityLaser {
       sustained = true
     }
     else if (dir == getDirection) {
+      if (this.modulation != modulation) worldObj.markBlockForUpdate(xCoord, yCoord, zCoord)
+
       this.strength = strength
       this.modulation = modulation
       this.distance = distance

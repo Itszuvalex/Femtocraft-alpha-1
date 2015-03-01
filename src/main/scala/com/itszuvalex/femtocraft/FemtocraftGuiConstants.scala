@@ -20,6 +20,7 @@ object FemtocraftGuiConstants {
   val FemtoCoagulatorGuiID                  = 15
   val FemtoChronoshifterGuiID               = 16
   val FemtoEntanglerGuiID                   = 17
+  val ModulationLensMountGuiID              = 25
   val MicroCubeGuiID                        = 30
   val MicroEngineGuiID                      = 31
   val NanoCubeGuiID                         = 35

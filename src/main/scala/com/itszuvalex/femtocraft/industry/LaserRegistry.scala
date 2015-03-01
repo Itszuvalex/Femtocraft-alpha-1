@@ -17,17 +17,35 @@ object LaserRegistry {
 
   private val laserInfoMap = new mutable.HashMap[String, LaserInfo]
 
-  val MODULATION_DEFAULT = "Default"
+  val MODULATION_DEFAULT   = "Default"
+  val MODULATION_CUTTING   = "Cutting"
+  val MODULATION_THERMAL   = "Thermal"
+  val MODULATION_ENGRAVING = "Engraving"
 
   registerLaser(MODULATION_DEFAULT, FemtocraftUtils.colorFromARGB(1, 1, 1, 1))
+  registerLaser(MODULATION_CUTTING, FemtocraftUtils.colorFromARGB(1, 0, 0, 1))
+  registerLaser(MODULATION_THERMAL, FemtocraftUtils.colorFromARGB(1, 1, 0, 0))
+  registerLaser(MODULATION_ENGRAVING, FemtocraftUtils.colorFromARGB(1, 0, 1, 0))
 
   def getModulations: util.Collection[String] = laserInfoMap.keySet
 
+  /**
+   * Color returned in ARGB 1-byte format, with A as most significant byte down to B as least, little endian.
+   *
+   * @param modulation
+   * @return
+   */
   def getColor(modulation: String): Int = laserInfoMap.get(modulation) match {
     case Some(info) => info.color
     case _ => FemtocraftUtils.colorFromARGB(255, 1, 1, 1)
   }
 
+  /**
+   * Color is ARGB 1-byte format, with A as most significant byte and B as least, little endian.
+   *
+   * @param modulation
+   * @param color
+   */
   def registerLaser(modulation: String, color: Int) = laserInfoMap(modulation) = new LaserInfo(color)
 
   /**
@@ -49,7 +67,7 @@ object LaserRegistry {
    */
   def makeLaser(world: World, x: Int, y: Int, z: Int, modulation: String, direction: ForgeDirection, strength: Int, distance: Int): Unit = {
     if (distance == 0) return
-    if(!getModulations.contains(modulation)) return
+    if (!getModulations.contains(modulation)) return
     if (world.blockExists(x, y, z)) {
       world.getTileEntity(x, y, z) match {
         case int: ILaserInteractable =>

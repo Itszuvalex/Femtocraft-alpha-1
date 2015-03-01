@@ -14,7 +14,7 @@ import com.itszuvalex.femtocraft.core.fluids.{BlockFluidMass, FluidMass}
 import com.itszuvalex.femtocraft.core.items.{ItemBase, ItemFemtoInterfaceDevice, ItemMicroInterfaceDevice, ItemNanoInterfaceDevice}
 import com.itszuvalex.femtocraft.core.ore._
 import com.itszuvalex.femtocraft.industry.blocks._
-import com.itszuvalex.femtocraft.industry.items.{ItemDigitalSchematic, ItemPaperSchematic, ItemQuantumSchematic}
+import com.itszuvalex.femtocraft.industry.items._
 import com.itszuvalex.femtocraft.managers.ManagerRecipe
 import com.itszuvalex.femtocraft.managers.assembler.{ComponentRegistry, ManagerAssemblerRecipe}
 import com.itszuvalex.femtocraft.managers.assistant.ManagerAssistant
@@ -23,7 +23,7 @@ import com.itszuvalex.femtocraft.network.FemtocraftPacketHandler
 import com.itszuvalex.femtocraft.power.FemtocraftPowerAlgorithm
 import com.itszuvalex.femtocraft.power.blocks._
 import com.itszuvalex.femtocraft.power.fluids.{FluidCooledContaminatedMoltenSalt, FluidCooledMoltenSalt, FluidMoltenSalt}
-import com.itszuvalex.femtocraft.power.items.{ItemBlockMicroCube, ItemInhibitionCore, ItemNucleationCore}
+import com.itszuvalex.femtocraft.power.items.ItemBlockMicroCube
 import com.itszuvalex.femtocraft.power.plasma.{BlockPlasma, ManagerPlasma}
 import com.itszuvalex.femtocraft.proxy.{ProxyCommon, ProxyGuiCommon}
 import com.itszuvalex.femtocraft.research.blocks.{BlockResearchComputer, BlockResearchConsole}
@@ -163,6 +163,8 @@ object Femtocraft {
   var blockPlasma                           : Block                     = null
   var blockLaser                            : Block                     = null
   var blockPhotonEmitter                    : Block                     = null
+  var blockReflectorChamber                 : Block                     = null
+  var blockModulationLensMount              : Block                     = null
   var blockSpatialAlternator                : Block                     = null
   var blockSpatialCage                      : Block                     = null
   /* items */
@@ -194,8 +196,6 @@ object Femtocraft {
   var itemDissassemblyArray                 : Item                      = null
   var itemAssemblyArray                     : Item                      = null
   var itemVacuumCore                        : Item                      = null
-  var itemNucleationCore                    : Item                      = null
-  var itemInhibitionCore                    : Item                      = null
   var itemPortableResearchComputer          : Item                      = null
   var itemMicroTechnology                   : Item                      = null
   var itemNanoTechnology                    : Item                      = null
@@ -266,6 +266,9 @@ object Femtocraft {
   var itemSynthesizedFiber                  : Item                      = null
   var itemOrganometallicPlate               : Item                      = null
   var itemPocketPocket                      : Item                      = null
+  var itemAgoniteLens                       : Item                      = null
+  var itemDiamondLens                       : Item                      = null
+  var itemEmeraldLens                       : Item                      = null
 
   @EventHandler def preInit(event: FMLPreInitializationEvent) {
     AutoGenConfig.init(new Configuration(new File(FemtocraftFileUtils.configFolder, "AutoGenConfig.cfg")))
@@ -420,6 +423,8 @@ object Femtocraft {
 
     blockLaser = registerBlock(new BlockLaser(), "BlockLaser")
     blockPhotonEmitter = registerBlock(new BlockPhotonEmitter, "BlockPhotonEmitter")
+    blockReflectorChamber = registerBlock(new BlockReflectorChamber, "BlockReflectorChamber")
+    blockModulationLensMount = registerBlock(new BlockModulationLensMount, "BlockModulationLensMount")
 
     blockSpatialAlternator = registerBlock(new BlockSpatialAlternator(), "BlockSpatialAlternator")
     blockSpatialCage = registerBlock(new BlockSpatialCage(), "BlockSpatialCage")
@@ -519,8 +524,6 @@ object Femtocraft {
     itemStellaratorPlating = registerBaseItem("ItemStellaratorPlating")
     itemInfinitelyRecursiveALU = registerBaseItem("ItemInfinitelyRecursiveALU")
     itemInfiniteVolumePolychora = registerBaseItem("ItemInfiniteVolumePolychora")
-    itemNucleationCore = registerItem(new ItemNucleationCore("ItemNucleationCore"), "ItemNucleationCore")
-    itemInhibitionCore = registerItem(new ItemInhibitionCore("ItemInhibitionCore"), "ItemInhibitionCore")
     itemQuantumSchematic = registerItem(new ItemQuantumSchematic("ItemQuantumSchematic"), "ItemQuantumSchematic")
     itemMicroTechnology = registerItem(new ItemMicroTechnology, "ItemMicroTechnology")
     itemNanoTechnology = registerItem(new ItemNanoTechnology, "ItemNanoTechnology")
@@ -530,6 +533,9 @@ object Femtocraft {
     itemInterfaceDeviceNano = registerItem(new ItemNanoInterfaceDevice, "ItemInterfaceDeviceNano")
     itemInterfaceDeviceFemto = registerItem(new ItemFemtoInterfaceDevice, "ItemInterfaceDeviceFemto")
     itemPocketPocket = registerItem(new ItemPocketPocket, "ItemPocketPocket")
+    itemAgoniteLens = registerItem(new ItemAgoniteLens, "ItemAgoniteLens")
+    itemDiamondLens = registerItem(new ItemDiamondLens, "ItemDiamondLens")
+    itemEmeraldLens = registerItem(new ItemEmeraldLens, "ItemEmeraldLens")
     //Decomposition Items
     itemCubit = registerBaseItem("ItemCubit")
     ComponentRegistry.registerComponent(itemCubit, EnumTechLevel.FEMTO)
