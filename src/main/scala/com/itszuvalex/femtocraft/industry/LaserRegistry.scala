@@ -23,10 +23,10 @@ object LaserRegistry {
   val MODULATION_THERMAL   = "Thermal"
   val MODULATION_ENGRAVING = "Engraving"
 
-  registerLaser(MODULATION_DEFAULT, FemtocraftUtils.colorFromARGB(255, 255, 255, 255))
-  registerLaser(MODULATION_CUTTING, FemtocraftUtils.colorFromARGB(255, 0, 0, 255))
-  registerLaser(MODULATION_THERMAL, FemtocraftUtils.colorFromARGB(255, 255, 0, 0))
-  registerLaser(MODULATION_ENGRAVING, FemtocraftUtils.colorFromARGB(255, 0, 255, 0))
+  registerLaser(MODULATION_DEFAULT, FemtocraftUtils.colorFromARGB((255 * .8f).toInt, 255, 255, 255))
+  registerLaser(MODULATION_CUTTING, FemtocraftUtils.colorFromARGB((255 * .8f).toInt, 0, 0, 255))
+  registerLaser(MODULATION_THERMAL, FemtocraftUtils.colorFromARGB((255 * .8f).toInt, 255, 0, 0))
+  registerLaser(MODULATION_ENGRAVING, FemtocraftUtils.colorFromARGB((255 * .8f).toInt, 0, 255, 0))
 
   def getModulations: util.Collection[String] = laserInfoMap.keySet
 
@@ -38,7 +38,7 @@ object LaserRegistry {
    */
   def getColor(modulation: String): Int = laserInfoMap.get(modulation) match {
     case Some(info) => info.color
-    case _ => FemtocraftUtils.colorFromARGB(255, 1, 1, 1)
+    case _ => FemtocraftUtils.colorFromARGB(255, 255, 255, 255)
   }
 
   /**

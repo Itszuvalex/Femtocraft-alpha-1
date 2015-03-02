@@ -22,6 +22,8 @@ class BlockLaser extends BlockContainer(Material.fire) {
   setBlockUnbreakable()
   setBlockBounds()
 
+  override def getRenderBlockPass: Int = 1
+
   def setBlockBounds() {
     this.minX = {this.minY = {this.minZ = 7.0D / 16.0D; this.minZ}; this.minY}
     this.maxX = {this.maxY = {this.maxZ = 9.0D / 16.0D; this.maxZ}; this.maxY}
@@ -39,7 +41,9 @@ class BlockLaser extends BlockContainer(Material.fire) {
 
   override def getRenderType = ProxyClient.FemtocraftLaserRenderID
 
-  override def onEntityCollidedWithBlock(p_149670_1_ : World, p_149670_2_ : Int, p_149670_3_ : Int, p_149670_4_ : Int, p_149670_5_ : Entity): Unit = super.onEntityCollidedWithBlock(p_149670_1_, p_149670_2_, p_149670_3_, p_149670_4_, p_149670_5_)
+  override def onEntityCollidedWithBlock(p_149670_1_ : World, p_149670_2_ : Int, p_149670_3_ : Int, p_149670_4_ : Int, p_149670_5_ : Entity): Unit = {
+    p_149670_5_.setFire(2)
+  }
 
   override def createNewTileEntity(p_149915_1_ : World, p_149915_2_ : Int) = new TileEntityLaser
 

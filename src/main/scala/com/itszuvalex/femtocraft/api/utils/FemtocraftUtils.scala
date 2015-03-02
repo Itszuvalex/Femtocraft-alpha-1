@@ -223,7 +223,7 @@ object FemtocraftUtils {
    *
    * @return integer representation of blue, used for Micro-tier things.
    */
-  def blueColor = colorFromARGB(0, 0, 0, 255)
+  def blueColor = colorFromARGB(255, 0, 0, 255)
 
   /**
    *
@@ -244,7 +244,7 @@ object FemtocraftUtils {
 
   def ARGBFromColor(color: Int): (Int, Int, Int, Int) =
     (
-      (color & (255 << 24)) >> 24,
+      ((color & (255 << 24)) >> 24) & 255,
       (color & (255 << 16)) >> 16,
       (color & (255 << 8)) >> 8,
       color & 255
@@ -254,13 +254,13 @@ object FemtocraftUtils {
    *
    * @return integer representation of green, used for Nano-tier things.
    */
-  def greenColor = colorFromARGB(0, 0, 255, 0)
+  def greenColor = colorFromARGB(255, 0, 255, 0)
 
   /**
    *
    * @return integer representation of orange, used for Femto-tier things.
    */
-  def orangeColor = colorFromARGB(0, 255, 140, 0)
+  def orangeColor = colorFromARGB(255, 255, 140, 0)
 
   /**
    *

@@ -61,8 +61,8 @@ class RenderLaser extends ISimpleBlockRenderingHandler {
             val tessellator: Tessellator = Tessellator.instance
             tessellator.setBrightness(15 << 20 | 15 << 4)
             val (a, r, g, b) = FemtocraftUtils.ARGBFromColor(LaserRegistry.getColor(laserTile.getModulation))
-//            tessellator.setColorRGBA(r, g, b, a)
-            tessellator.setColorOpaque(r, g, b)
+            tessellator.setColorRGBA(r, g, b, a)
+//            tessellator.setColorOpaque(r, g, b)
             renderLaser(laser, x, y, z, laserTile.getDirection)
             true
           case _ => false
