@@ -2,8 +2,8 @@ package com.itszuvalex.femtocraft.industry.tiles
 
 import com.itszuvalex.femtocraft.api.core.Configurable
 import com.itszuvalex.femtocraft.api.industry.IPhotonEmitterReflectionChamber
+import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityReflectorChamber._
-import net.minecraft.tileentity.TileEntity
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 3/1/15.
@@ -14,7 +14,7 @@ object TileEntityReflectorChamber {
   @Configurable val POWER_REQUIREMENT = 4
 }
 
-@Configurable class TileEntityReflectorChamber extends TileEntity with IPhotonEmitterReflectionChamber {
+@Configurable class TileEntityReflectorChamber extends TileEntityBase with IPhotonEmitterReflectionChamber {
   override def canUpdate: Boolean = false
 
   /**

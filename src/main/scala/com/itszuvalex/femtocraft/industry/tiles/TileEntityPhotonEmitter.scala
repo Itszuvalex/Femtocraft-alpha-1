@@ -6,8 +6,8 @@ import com.itszuvalex.femtocraft.api.industry.IPhotonEmitterReflectionChamber
 import com.itszuvalex.femtocraft.api.items.IInterfaceDevice
 import com.itszuvalex.femtocraft.api.power.PowerContainer
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
-import com.itszuvalex.femtocraft.industry.tiles.TileEntityPhotonEmitter._
 import com.itszuvalex.femtocraft.industry.LaserRegistry
+import com.itszuvalex.femtocraft.industry.tiles.TileEntityPhotonEmitter._
 import com.itszuvalex.femtocraft.power.traits.PowerConsumer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.nbt.NBTTagCompound
@@ -92,6 +92,7 @@ object TileEntityPhotonEmitter {
           if (extensionDirection == emitterDirection) extensionDirection = ForgeDirection.UNKNOWN.ordinal()
         }
         setUpdate()
+        setModified()
         true
       case _ => false
     }

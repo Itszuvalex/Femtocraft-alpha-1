@@ -15,7 +15,7 @@ import scala.util.Random
  * Created by Chris on 12/31/2014.
  */
 class TileEntitySpatialCage extends TileEntityBase {
-  @Saveable(desc = true, tag = "direction")
+  @Saveable(desc = true)
   var direction                      = UNKNOWN.ordinal()
   @Saveable
   var powered                        = false
@@ -32,23 +32,34 @@ class TileEntitySpatialCage extends TileEntityBase {
   }
 
   def pickUp(): Unit = {
-    if (direction == UNKNOWN.ordinal()) return
     val dir = ForgeDirection.getOrientation(direction)
+    if (dir == UNKNOWN) return
     if (!worldObj.isRemote) {
-      if (snapshot != null) return
+      if (snapshot != null) {
+        filled = true
+        setUpdate()
+        return
+      }
 
-      snapshot = SpatialRelocation
-                 .extractBlock(worldObj, xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ)
-      worldObj.playSoundEffect(xCoord, yCoord, zCoord, "mob.endermen.portal", 1.0F, 1.0F)
-      filled = true
-      setUpdate()
+      val x = xCoord + dir.offsetX
+      val y = yCoord + dir.offsetY
+      val z = zCoord + dir.offsetZ
+      if (worldObj.blockExists(x, y, z)) {
+        snapshot = SpatialRelocation.extractBlock(worldObj, x, y, z)
+        if (snapshot != null) {
+          worldObj.playSoundEffect(x, y, z, "mob.endermen.portal", 1.0F, 1.0F)
+          filled = true
+          setModified()
+          setUpdate()
+        }
+      }
     } else {
       (0 until 8).foreach { i =>
         worldObj
         .spawnParticle("portal",
-                       xCoord + dir.offsetX + (Random.nextDouble - 0.5D),
-                       yCoord + dir.offsetY + Random.nextDouble - 0.25D,
-                       zCoord + dir.offsetZ + (Random.nextDouble - 0.5D),
+                       xCoord + dir.offsetX + Random.nextDouble,
+                       yCoord + dir.offsetY + Random.nextDouble,
+                       zCoord + dir.offsetZ + Random.nextDouble,
                        (Random.nextDouble - 0.5D) * 2.0D,
                        -Random.nextDouble,
                        (Random.nextDouble - 0.5D) * 2.0D)
@@ -57,10 +68,14 @@ class TileEntitySpatialCage extends TileEntityBase {
   }
 
   def putDown(): Unit = {
-    if (direction == UNKNOWN.ordinal()) return
     val dir = ForgeDirection.getOrientation(direction)
+    if (dir == UNKNOWN) return
     if (!worldObj.isRemote) {
-      if (snapshot == null) return
+      if (snapshot == null) {
+        filled = false
+        setUpdate()
+        return
+      }
       val x = xCoord + dir.offsetX
       val y = yCoord + dir.offsetY
       val z = zCoord + dir.offsetZ
@@ -71,17 +86,18 @@ class TileEntitySpatialCage extends TileEntityBase {
                                         y,
                                         z)
         snapshot = null
-        worldObj.playSoundEffect(xCoord, yCoord, zCoord, "mob.endermen.portal", 1.0F, 1.0F)
+        worldObj.playSoundEffect(x, y, z, "mob.endermen.portal", 1.0F, 1.0F)
         filled = false
+        setModified()
         setUpdate()
       }
     } else {
       (0 until 8).foreach { i =>
         worldObj
         .spawnParticle("portal",
-                       xCoord + dir.offsetX + (Random.nextDouble - 0.5D),
-                       yCoord + dir.offsetY + Random.nextDouble - 0.25D,
-                       zCoord + dir.offsetZ + (Random.nextDouble - 0.5D),
+                       xCoord + dir.offsetX + Random.nextDouble,
+                       yCoord + dir.offsetY + Random.nextDouble,
+                       zCoord + dir.offsetZ + Random.nextDouble,
                        (Random.nextDouble - 0.5D) * 2.0D,
                        -Random.nextDouble,
                        (Random.nextDouble - 0.5D) * 2.0D)

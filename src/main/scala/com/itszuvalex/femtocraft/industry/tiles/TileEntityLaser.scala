@@ -3,8 +3,8 @@ package com.itszuvalex.femtocraft.industry.tiles
 import com.itszuvalex.femtocraft.api.core.{Configurable, Saveable}
 import com.itszuvalex.femtocraft.api.industry.ILaser
 import com.itszuvalex.femtocraft.core.traits.tile.DescriptionPacket
-import com.itszuvalex.femtocraft.industry.tiles.TileEntityLaser._
 import com.itszuvalex.femtocraft.industry.LaserRegistry
+import com.itszuvalex.femtocraft.industry.tiles.TileEntityLaser._
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
 import net.minecraftforge.common.util.ForgeDirection
@@ -67,6 +67,7 @@ object TileEntityLaser {
       this.distance = distance
       sustained = true
     }
+    worldObj.markTileEntityChunkModified(xCoord, yCoord, zCoord, this)
   }
 
   override def handleDescriptionNBT(compound: NBTTagCompound): Unit = {

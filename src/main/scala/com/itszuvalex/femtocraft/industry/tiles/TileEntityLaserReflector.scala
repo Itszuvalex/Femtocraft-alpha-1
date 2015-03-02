@@ -5,8 +5,8 @@ import com.itszuvalex.femtocraft.api.core.{Configurable, Saveable}
 import com.itszuvalex.femtocraft.api.industry.ILaserInteractable
 import com.itszuvalex.femtocraft.api.items.IInterfaceDevice
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
-import com.itszuvalex.femtocraft.industry.tiles.TileEntityLaserReflector._
 import com.itszuvalex.femtocraft.industry.LaserRegistry
+import com.itszuvalex.femtocraft.industry.tiles.TileEntityLaserReflector._
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.common.util.ForgeDirection
@@ -74,6 +74,7 @@ object TileEntityLaserReflector {
           if (dirOne == dirTwo) dirTwo = ForgeDirection.UNKNOWN.ordinal()
         }
         setUpdate()
+        setModified()
         true
       case _ => false
     }

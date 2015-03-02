@@ -720,12 +720,12 @@ public class FemtocraftDataUtils {
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
                 Saveable anno = saveable.getAnnotation(Saveable.class);
-                NBTTagCompound container = compound.getCompoundTag(anno.tag().isEmpty() ? saveable.getName() : anno
-                        .tag());
-                if (container == null) {
+                if (!compound.hasKey(anno.tag().isEmpty() ? saveable.getName() : anno.tag())) {
                     saveable.set(obj, null);
                     return;
                 }
+                NBTTagCompound container = compound.getCompoundTag(anno.tag().isEmpty() ? saveable.getName() : anno
+                        .tag());
                 FluidStack stack = FluidStack.loadFluidStackFromNBT(container);
                 saveable.set(obj, stack);
             }
@@ -750,12 +750,12 @@ public class FemtocraftDataUtils {
                                     Object obj) throws IllegalArgumentException,
                                                        IllegalAccessException {
                 Saveable anno = saveable.getAnnotation(Saveable.class);
-                NBTTagCompound container = compound.getCompoundTag(anno.tag().isEmpty() ? saveable.getName() : anno
-                        .tag());
-                if (container == null) {
+                if (!compound.hasKey(anno.tag().isEmpty() ? saveable.getName() : anno.tag())) {
                     saveable.set(obj, null);
                     return;
                 }
+                NBTTagCompound container = compound.getCompoundTag(anno.tag().isEmpty() ? saveable.getName() : anno
+                        .tag());
                 BlockAndTileSnapshot stack = BlockAndTileSnapshot.loadFromNBT(container);
                 saveable.set(obj, stack);
             }
