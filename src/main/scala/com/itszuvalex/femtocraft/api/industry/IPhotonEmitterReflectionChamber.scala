@@ -1,4 +1,4 @@
-package com.itszuvalex.femtocraft.industry
+package com.itszuvalex.femtocraft.api.industry
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 2/28/15.

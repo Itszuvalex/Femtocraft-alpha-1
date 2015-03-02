@@ -3,6 +3,7 @@ package com.itszuvalex.femtocraft.industry
 import java.util
 
 import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.api.industry.ILaserInteractable
 import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import net.minecraft.world.World
 import net.minecraftforge.common.util.ForgeDirection
@@ -22,10 +23,10 @@ object LaserRegistry {
   val MODULATION_THERMAL   = "Thermal"
   val MODULATION_ENGRAVING = "Engraving"
 
-  registerLaser(MODULATION_DEFAULT, FemtocraftUtils.colorFromARGB(1, 1, 1, 1))
-  registerLaser(MODULATION_CUTTING, FemtocraftUtils.colorFromARGB(1, 0, 0, 1))
-  registerLaser(MODULATION_THERMAL, FemtocraftUtils.colorFromARGB(1, 1, 0, 0))
-  registerLaser(MODULATION_ENGRAVING, FemtocraftUtils.colorFromARGB(1, 0, 1, 0))
+  registerLaser(MODULATION_DEFAULT, FemtocraftUtils.colorFromARGB(255, 255, 255, 255))
+  registerLaser(MODULATION_CUTTING, FemtocraftUtils.colorFromARGB(255, 0, 0, 255))
+  registerLaser(MODULATION_THERMAL, FemtocraftUtils.colorFromARGB(255, 255, 0, 0))
+  registerLaser(MODULATION_ENGRAVING, FemtocraftUtils.colorFromARGB(255, 0, 255, 0))
 
   def getModulations: util.Collection[String] = laserInfoMap.keySet
 

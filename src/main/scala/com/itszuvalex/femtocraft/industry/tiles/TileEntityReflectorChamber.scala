@@ -1,7 +1,7 @@
 package com.itszuvalex.femtocraft.industry.tiles
 
 import com.itszuvalex.femtocraft.api.core.Configurable
-import com.itszuvalex.femtocraft.industry.IPhotonEmitterReflectionChamber
+import com.itszuvalex.femtocraft.api.industry.IPhotonEmitterReflectionChamber
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityReflectorChamber._
 import net.minecraft.tileentity.TileEntity
 
@@ -15,6 +15,8 @@ object TileEntityReflectorChamber {
 }
 
 @Configurable class TileEntityReflectorChamber extends TileEntity with IPhotonEmitterReflectionChamber {
+  override def canUpdate: Boolean = false
+
   /**
    *
    * @return Additional length added to the laser.

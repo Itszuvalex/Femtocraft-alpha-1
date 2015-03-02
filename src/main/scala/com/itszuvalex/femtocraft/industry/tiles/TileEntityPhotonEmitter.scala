@@ -2,11 +2,12 @@ package com.itszuvalex.femtocraft.industry.tiles
 
 import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.api.core.{Configurable, Saveable}
+import com.itszuvalex.femtocraft.api.industry.IPhotonEmitterReflectionChamber
 import com.itszuvalex.femtocraft.api.items.IInterfaceDevice
 import com.itszuvalex.femtocraft.api.power.PowerContainer
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityPhotonEmitter._
-import com.itszuvalex.femtocraft.industry.{IPhotonEmitterReflectionChamber, LaserRegistry}
+import com.itszuvalex.femtocraft.industry.LaserRegistry
 import com.itszuvalex.femtocraft.power.traits.PowerConsumer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.nbt.NBTTagCompound

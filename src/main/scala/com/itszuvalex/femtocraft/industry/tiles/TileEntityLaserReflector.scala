@@ -2,10 +2,11 @@ package com.itszuvalex.femtocraft.industry.tiles
 
 import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.api.core.{Configurable, Saveable}
+import com.itszuvalex.femtocraft.api.industry.ILaserInteractable
 import com.itszuvalex.femtocraft.api.items.IInterfaceDevice
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityLaserReflector._
-import com.itszuvalex.femtocraft.industry.{ILaserInteractable, LaserRegistry}
+import com.itszuvalex.femtocraft.industry.LaserRegistry
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.common.util.ForgeDirection

@@ -1,9 +1,10 @@
 package com.itszuvalex.femtocraft.industry.items
 
 import com.itszuvalex.femtocraft.api.core.Configurable
+import com.itszuvalex.femtocraft.api.industry.ILaserModulator
 import com.itszuvalex.femtocraft.core.items.ItemBase
 import com.itszuvalex.femtocraft.industry.items.ItemDiamondLens._
-import com.itszuvalex.femtocraft.industry.{ILaserModulator, LaserRegistry}
+import com.itszuvalex.femtocraft.industry.LaserRegistry
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 3/1/15.

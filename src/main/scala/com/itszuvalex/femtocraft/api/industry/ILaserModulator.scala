@@ -1,4 +1,4 @@
-package com.itszuvalex.femtocraft.industry
+package com.itszuvalex.femtocraft.api.industry
 
 import net.minecraft.item.Item
 

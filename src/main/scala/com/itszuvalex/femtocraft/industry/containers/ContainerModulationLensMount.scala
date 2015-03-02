@@ -20,8 +20,8 @@
  */
 package com.itszuvalex.femtocraft.industry.containers
 
+import com.itszuvalex.femtocraft.api.industry.ILaserModulator
 import com.itszuvalex.femtocraft.core.container.ContainerInv
-import com.itszuvalex.femtocraft.industry.ILaserModulator
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityModulationLensMount
 import net.minecraft.entity.player.{EntityPlayer, InventoryPlayer}
 import net.minecraft.inventory.Slot

@@ -2,10 +2,11 @@ package com.itszuvalex.femtocraft.industry.tiles
 
 import com.itszuvalex.femtocraft.FemtocraftGuiConstants
 import com.itszuvalex.femtocraft.api.core.Saveable
+import com.itszuvalex.femtocraft.api.industry.{ILaserModulator, ILaserInteractable}
 import com.itszuvalex.femtocraft.api.utils.BaseInventory
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import com.itszuvalex.femtocraft.core.traits.tile.Inventory
-import com.itszuvalex.femtocraft.industry.{ILaserInteractable, ILaserModulator, LaserRegistry}
+import com.itszuvalex.femtocraft.industry.LaserRegistry
 import net.minecraft.item.ItemStack
 import net.minecraftforge.common.util.ForgeDirection
 
