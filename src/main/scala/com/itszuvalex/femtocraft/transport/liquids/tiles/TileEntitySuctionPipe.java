@@ -43,9 +43,9 @@ class TileEntitySuctionPipe extends TileEntityBase implements
         ISuctionPipe {
     static final int renderLength = 20;
     @Configurable
-    private final float TRANSFER_RATIO = .1f;
+    static private final float TRANSFER_RATIO = .1f;
     @Configurable
-    private final int CAPACITY = 2000;
+    static private final int CAPACITY = 2000;
     public
     @Saveable
     boolean[] tankconnections;
