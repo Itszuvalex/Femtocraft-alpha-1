@@ -166,6 +166,7 @@ object Femtocraft {
   var blockReflectorChamber                 : Block                     = null
   var blockModulationLensMount              : Block                     = null
   var blockLaserReflector                   : Block                     = null
+  var blockLaserSplitter                    : Block                     = null
   var blockSpatialAlternator                : Block                     = null
   var blockSpatialCage                      : Block                     = null
   /* items */
@@ -427,6 +428,7 @@ object Femtocraft {
     blockReflectorChamber = registerBlock(new BlockReflectorChamber, "BlockReflectorChamber")
     blockModulationLensMount = registerBlock(new BlockModulationLensMount, "BlockModulationLensMount")
     blockLaserReflector = registerBlock(new BlockLaserReflector, "BlockLaserReflector")
+    blockLaserSplitter = registerBlock(new BlockLaserSplitter, "BlockLaserSplitter")
 
     blockSpatialAlternator = registerBlock(new BlockSpatialAlternator(), "BlockSpatialAlternator")
     blockSpatialCage = registerBlock(new BlockSpatialCage(), "BlockSpatialCage")

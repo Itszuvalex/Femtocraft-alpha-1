@@ -109,7 +109,7 @@ import scala.collection.mutable.ArrayBuffer
   private def getMagnetDefaults: ArrayBuffer[(ItemStack, Int)] = {
     val ret = new ArrayBuffer[(ItemStack, Int)]()
     ret.append((new ItemStack(Blocks.iron_ore), ORE_IRON))
-    ret append ((new ItemStack(Items.iron_ingot), INGOT_IRON))
+    ret append((new ItemStack(Items.iron_ingot), INGOT_IRON))
     ret.append((new ItemStack(Femtocraft.blockOreLodestone), ORE_LODESTONE))
     ret.append((new ItemStack(Femtocraft.itemNuggetLodestone), NUGGET_LODESTONE))
     ret.append((new ItemStack(Femtocraft.itemChunkLodestone), CHUNK_LODESTONE))

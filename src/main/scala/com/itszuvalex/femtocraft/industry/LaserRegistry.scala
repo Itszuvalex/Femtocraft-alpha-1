@@ -15,8 +15,17 @@ import scala.collection.mutable
  * Created by Christopher on 2/20/2015.
  */
 object LaserRegistry {
+  /**
+   *
+   * @param mod1
+   * @param mod2
+   * @return Returns modulation combination of mod1 and mod2.
+   */
+  def mergeModulations(mod1: String, mod2: String): String = if (mod1.equalsIgnoreCase(mod2)) mod1 else laserModMergeMap.getOrElse((mod1, mod2), MODULATION_DEFAULT)
 
-  private val laserInfoMap = new mutable.HashMap[String, LaserInfo]
+
+  private val laserInfoMap     = new mutable.HashMap[String, LaserInfo]
+  private val laserModMergeMap = new mutable.HashMap[(String, String), String]
 
   val MODULATION_DEFAULT   = "Default"
   val MODULATION_CUTTING   = "Cutting"
@@ -27,6 +36,10 @@ object LaserRegistry {
   registerLaser(MODULATION_CUTTING, FemtocraftUtils.colorFromARGB((255 * .8f).toInt, 0, 0, 255))
   registerLaser(MODULATION_THERMAL, FemtocraftUtils.colorFromARGB((255 * .8f).toInt, 255, 0, 0))
   registerLaser(MODULATION_ENGRAVING, FemtocraftUtils.colorFromARGB((255 * .8f).toInt, 0, 255, 0))
+
+  registerModulationMerge(MODULATION_DEFAULT, MODULATION_CUTTING, MODULATION_CUTTING)
+  registerModulationMerge(MODULATION_DEFAULT, MODULATION_ENGRAVING, MODULATION_ENGRAVING)
+  registerModulationMerge(MODULATION_DEFAULT, MODULATION_THERMAL, MODULATION_THERMAL)
 
   def getModulations: util.Collection[String] = laserInfoMap.keySet
 
@@ -48,6 +61,12 @@ object LaserRegistry {
    * @param color
    */
   def registerLaser(modulation: String, color: Int) = laserInfoMap(modulation) = new LaserInfo(color)
+
+  def registerModulationMerge(mod1: String, mod2: String, output: String): Unit = {
+    if (!(getModulations.contains(mod1) && getModulations.contains(mod2) && getModulations.contains(output))) return
+    laserModMergeMap((mod1, mod2)) = output
+    laserModMergeMap((mod2, mod1)) = output
+  }
 
   /**
    * Utility function for spawning laser blocks in the world.  If the block where the laser is being attempted to spawn is a

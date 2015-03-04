@@ -40,8 +40,27 @@ object TileEntityLaserReflector {
    * update.
    */
   override def femtocraftServerUpdate(): Unit = {
-    if (!(sustainedOne || sustainedTwo)) return
-    else {sustainedOne = false; sustainedTwo = false}
+    val laserOne = sustainedOne
+    val laserTwo = sustainedTwo
+
+
+    if (!(laserOne || laserTwo)) return
+
+    if (laserOne)
+      sustainedOne = false
+    else {
+      strengthOne = 0
+      distanceOne = 0
+      modulationOne = LaserRegistry.MODULATION_DEFAULT
+    }
+
+    if (laserTwo)
+      sustainedTwo = false
+    else {
+      strengthTwo = 0
+      distanceTwo = 0
+      modulationTwo = LaserRegistry.MODULATION_DEFAULT
+    }
 
     if (strengthOne > strengthTwo) {
       if (distanceOne <= 0) return
