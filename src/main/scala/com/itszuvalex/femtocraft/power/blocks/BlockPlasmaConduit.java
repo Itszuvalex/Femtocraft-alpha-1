@@ -22,9 +22,9 @@
 package com.itszuvalex.femtocraft.power.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.RenderConstants;
 import com.itszuvalex.femtocraft.core.blocks.TileContainer;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityPlasmaConduit;
-import com.itszuvalex.femtocraft.proxy.ProxyClient;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -99,7 +99,7 @@ public class BlockPlasmaConduit extends TileContainer {
 
     @Override
     public int getRenderType() {
-        return ProxyClient.FemtocraftPlasmaConduitID();
+        return RenderConstants.FemtocraftPlasmaConduitID();
     }
 
     @Override

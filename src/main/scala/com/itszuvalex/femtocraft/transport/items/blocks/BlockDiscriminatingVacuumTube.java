@@ -22,9 +22,9 @@
 package com.itszuvalex.femtocraft.transport.items.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.RenderConstants;
 import com.itszuvalex.femtocraft.api.items.IInterfaceDevice;
 import com.itszuvalex.femtocraft.core.blocks.TileContainer;
-import com.itszuvalex.femtocraft.proxy.ProxyClient;
 import com.itszuvalex.femtocraft.transport.items.tiles.TileEntityDiscriminatingVacuumTube;
 import com.itszuvalex.femtocraft.transport.items.tiles.TileEntityVacuumTube;
 import cpw.mods.fml.relauncher.Side;
@@ -191,7 +191,7 @@ public class BlockDiscriminatingVacuumTube extends TileContainer {
 
     @Override
     public int getRenderType() {
-        return ProxyClient.FemtocraftVacuumTubeRenderID();
+        return RenderConstants.FemtocraftVacuumTubeRenderID();
     }
 
     @Override

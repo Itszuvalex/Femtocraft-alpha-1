@@ -20,13 +20,12 @@
  */
 package com.itszuvalex.femtocraft.power.blocks
 
-import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.{RenderConstants, Femtocraft}
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
 import com.itszuvalex.femtocraft.core.traits.block.MultiBlockSpatialReactions
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockFemtoStellarator
 import com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoStellaratorCore
-import com.itszuvalex.femtocraft.proxy.ProxyClient
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
@@ -44,7 +43,7 @@ class BlockFemtoStellaratorCore extends TileContainer(Material.iron) with MultiB
 
   override def renderAsNormalBlock = false
 
-  override def getRenderType = ProxyClient.FemtocraftStellaratorCoreRenderID
+  override def getRenderType = RenderConstants.FemtocraftStellaratorCoreRenderID
 
   override def isOpaqueCube = false
 

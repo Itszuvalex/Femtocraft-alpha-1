@@ -21,8 +21,8 @@
 
 package com.itszuvalex.femtocraft.power.render;
 
+import com.itszuvalex.femtocraft.RenderConstants;
 import com.itszuvalex.femtocraft.power.blocks.BlockCryoEndothermalChargingCoil;
-import com.itszuvalex.femtocraft.proxy.ProxyClient;
 import com.itszuvalex.femtocraft.render.RenderModel;
 import com.itszuvalex.femtocraft.render.RenderPoint;
 import com.itszuvalex.femtocraft.render.RenderQuad;
@@ -85,7 +85,7 @@ public class RenderCryoEndothermalChargingCoil implements
 
     @Override
     public int getRenderId() {
-        return ProxyClient.FemtocraftCryoEndothermalChargingCoilRenderID();
+        return RenderConstants.FemtocraftCryoEndothermalChargingCoilRenderID();
     }
 
     private void renderCoil(BlockCryoEndothermalChargingCoil coil, int x, int y, int z) {

@@ -1,8 +1,7 @@
 package com.itszuvalex.femtocraft.industry.blocks
 
-import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.{RenderConstants, Femtocraft}
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityLaser
-import com.itszuvalex.femtocraft.proxy.ProxyClient
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
@@ -39,7 +38,7 @@ class BlockLaser extends BlockContainer(Material.fire) {
 
   override def isOpaqueCube = false
 
-  override def getRenderType = ProxyClient.FemtocraftLaserRenderID
+  override def getRenderType = RenderConstants.FemtocraftLaserRenderID
 
   override def onEntityCollidedWithBlock(p_149670_1_ : World, p_149670_2_ : Int, p_149670_3_ : Int, p_149670_4_ : Int, p_149670_5_ : Entity): Unit = {
     p_149670_5_.setFire(2)

@@ -21,8 +21,8 @@
 
 package com.itszuvalex.femtocraft.power.render;
 
+import com.itszuvalex.femtocraft.RenderConstants;
 import com.itszuvalex.femtocraft.power.blocks.BlockFemtoStellaratorFocus;
-import com.itszuvalex.femtocraft.proxy.ProxyClient;
 import com.itszuvalex.femtocraft.render.RenderModel;
 import com.itszuvalex.femtocraft.render.RenderPoint;
 import com.itszuvalex.femtocraft.render.RenderUtils;
@@ -159,6 +159,6 @@ public class RenderStellaratorFocus implements ISimpleBlockRenderingHandler {
 
     @Override
     public int getRenderId() {
-        return ProxyClient.FemtocraftStellaratorFocusRenderID();
+        return RenderConstants.FemtocraftStellaratorFocusRenderID();
     }
 }

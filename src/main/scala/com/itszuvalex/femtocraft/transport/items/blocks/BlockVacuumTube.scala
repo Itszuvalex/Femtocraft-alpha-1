@@ -22,10 +22,9 @@ package com.itszuvalex.femtocraft.transport.items.blocks
 
 import java.util
 
-import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.{RenderConstants, Femtocraft}
 import com.itszuvalex.femtocraft.api.items.IInterfaceDevice
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
-import com.itszuvalex.femtocraft.proxy.ProxyClient
 import com.itszuvalex.femtocraft.transport.items.tiles.TileEntityVacuumTube
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.block.Block
@@ -97,7 +96,7 @@ class BlockVacuumTube extends TileContainer(Material.iron) {
 
   override def renderAsNormalBlock = false
 
-  override def getRenderType = ProxyClient.FemtocraftVacuumTubeRenderID
+  override def getRenderType = RenderConstants.FemtocraftVacuumTubeRenderID
 
   override def addCollisionBoxesToList(par1World: World, x: Int, y: Int, z: Int, par5AxisAlignedBB: AxisAlignedBB,
                                        par6List: util.List[_], par7Entity: Entity) {

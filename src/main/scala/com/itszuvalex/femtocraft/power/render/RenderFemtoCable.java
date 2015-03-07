@@ -24,9 +24,9 @@
  */
 package com.itszuvalex.femtocraft.power.render;
 
+import com.itszuvalex.femtocraft.RenderConstants;
 import com.itszuvalex.femtocraft.power.blocks.BlockFemtoCable;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityMicroCable;
-import com.itszuvalex.femtocraft.proxy.ProxyClient;
 import com.itszuvalex.femtocraft.render.RenderModel;
 import com.itszuvalex.femtocraft.render.RenderPoint;
 import com.itszuvalex.femtocraft.render.RenderQuad;
@@ -116,7 +116,7 @@ public class RenderFemtoCable implements ISimpleBlockRenderingHandler {
 
     @Override
     public int getRenderId() {
-        return ProxyClient.microCableRenderID();
+        return RenderConstants.microCableRenderID();
     }
 
     private boolean renderCable(BlockFemtoCable cable, float x, float y, float z, boolean[] connections) {

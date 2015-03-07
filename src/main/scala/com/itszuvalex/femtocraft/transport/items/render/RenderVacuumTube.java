@@ -21,7 +21,7 @@
 
 package com.itszuvalex.femtocraft.transport.items.render;
 
-import com.itszuvalex.femtocraft.proxy.ProxyClient;
+import com.itszuvalex.femtocraft.RenderConstants;
 import com.itszuvalex.femtocraft.render.RenderModel;
 import com.itszuvalex.femtocraft.render.RenderPoint;
 import com.itszuvalex.femtocraft.render.RenderQuad;
@@ -149,7 +149,7 @@ public class RenderVacuumTube implements ISimpleBlockRenderingHandler {
 
     @Override
     public int getRenderId() {
-        return ProxyClient.FemtocraftVacuumTubeRenderID();
+        return RenderConstants.FemtocraftVacuumTubeRenderID();
     }
 
     private void renderTube(BlockVacuumTube tube, int x, int y, int z,

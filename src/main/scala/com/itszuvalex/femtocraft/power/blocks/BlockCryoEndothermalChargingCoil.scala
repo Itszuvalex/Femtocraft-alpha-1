@@ -20,11 +20,10 @@
  */
 package com.itszuvalex.femtocraft.power.blocks
 
-import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.{RenderConstants, Femtocraft}
 import com.itszuvalex.femtocraft.api.power.{ICryoEndothermalChargingAddon, ICryoEndothermalChargingBase}
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
 import com.itszuvalex.femtocraft.power.tiles.TileEntityCryoEndothermalChargingCoil
-import com.itszuvalex.femtocraft.proxy.ProxyClient
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
@@ -55,7 +54,7 @@ class BlockCryoEndothermalChargingCoil extends TileContainer(Material.iron) {
 
   override def renderAsNormalBlock = false
 
-  override def getRenderType = ProxyClient.FemtocraftCryoEndothermalChargingCoilRenderID
+  override def getRenderType = RenderConstants.FemtocraftCryoEndothermalChargingCoilRenderID
 
   override def isBlockSolid(par1iBlockAccess: IBlockAccess, par2: Int, par3: Int, par4: Int, par5: Int) = false
 

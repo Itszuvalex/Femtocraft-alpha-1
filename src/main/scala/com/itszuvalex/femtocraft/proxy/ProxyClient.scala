@@ -20,6 +20,7 @@
  */
 package com.itszuvalex.femtocraft.proxy
 
+import com.itszuvalex.femtocraft.RenderConstants
 import com.itszuvalex.femtocraft.core.tiles.TileEntityDimensionalTear
 import com.itszuvalex.femtocraft.power.render._
 import com.itszuvalex.femtocraft.render.RenderSimpleMachine
@@ -28,24 +29,7 @@ import com.itszuvalex.femtocraft.transport.liquids.render.RenderSuctionPipe
 import cpw.mods.fml.client.registry.{ClientRegistry, RenderingRegistry}
 import net.minecraft.client.renderer.tileentity.RenderDimensionalTear
 
-object ProxyClient {
-  var microCableRenderID                            = 0
-  var nanoCableRenderID                             = 0
-  var femtoCableRenderID                            = 0
-  var FemtopowerMicroCubeRenderID                   = 0
-  var FemtocraftVacuumTubeRenderID                  = 0
-  var FemtocraftChargingBaseRenderID                = 0
-  var FemtocraftChargingCoilRenderID                = 0
-  var FemtocraftChargingCapacitorRenderID           = 0
-  var FemtocraftStellaratorCoreRenderID             = 0
-  var FemtocraftStellaratorFocusRenderID            = 0
-  var FemtocraftSuctionPipeRenderID                 = 0
-  var FemtocraftPlasmaConduitID                     = 0
-  var CuttingBoardRenderPass                        = 0
-  var cuttingBoardRenderType                        = 0
-  var FemtocraftCryoEndothermalChargingCoilRenderID = 0
-  var FemtocraftLaserRenderID                       = 0
-}
+
 
 class ProxyClient extends ProxyCommon {
   override def registerRendering() {
@@ -56,32 +40,32 @@ class ProxyClient extends ProxyCommon {
     super.registerBlockRenderers()
     RenderSimpleMachine.renderID = RenderingRegistry.getNextAvailableRenderId
     RenderingRegistry.registerBlockHandler(RenderSimpleMachine.renderID, new RenderSimpleMachine)
-    ProxyClient.microCableRenderID = RenderingRegistry.getNextAvailableRenderId
-    RenderingRegistry.registerBlockHandler(ProxyClient.microCableRenderID, new RenderMicroCable)
-    ProxyClient.nanoCableRenderID = RenderingRegistry.getNextAvailableRenderId
-    RenderingRegistry.registerBlockHandler(ProxyClient.nanoCableRenderID, new RenderNanoCable)
-    ProxyClient.femtoCableRenderID = RenderingRegistry.getNextAvailableRenderId
-    RenderingRegistry.registerBlockHandler(ProxyClient.femtoCableRenderID, new RenderFemtoCable)
-    ProxyClient.FemtocraftVacuumTubeRenderID = RenderingRegistry.getNextAvailableRenderId
-    RenderingRegistry.registerBlockHandler(ProxyClient.FemtocraftVacuumTubeRenderID, new RenderVacuumTube)
-    ProxyClient.FemtocraftChargingBaseRenderID = RenderingRegistry.getNextAvailableRenderId
-    RenderingRegistry.registerBlockHandler(ProxyClient.FemtocraftChargingBaseRenderID, new RenderChargingBase)
-    ProxyClient.FemtocraftChargingCoilRenderID = RenderingRegistry.getNextAvailableRenderId
-    RenderingRegistry.registerBlockHandler(ProxyClient.FemtocraftChargingCoilRenderID, new RenderChargingCoil)
-    ProxyClient.FemtocraftChargingCapacitorRenderID = RenderingRegistry.getNextAvailableRenderId
-    RenderingRegistry.registerBlockHandler(ProxyClient.FemtocraftChargingCapacitorRenderID, new RenderChargingCapacitor)
-    ProxyClient.FemtocraftCryoEndothermalChargingCoilRenderID = RenderingRegistry.getNextAvailableRenderId
-    RenderingRegistry.registerBlockHandler(ProxyClient.FemtocraftCryoEndothermalChargingCoilRenderID, new RenderCryoEndothermalChargingCoil)
-    ProxyClient.FemtocraftStellaratorCoreRenderID = RenderingRegistry.getNextAvailableRenderId
-    RenderingRegistry.registerBlockHandler(ProxyClient.FemtocraftStellaratorCoreRenderID, new RenderStellaratorCore)
-    ProxyClient.FemtocraftStellaratorFocusRenderID = RenderingRegistry.getNextAvailableRenderId
-    RenderingRegistry.registerBlockHandler(ProxyClient.FemtocraftStellaratorFocusRenderID, new RenderStellaratorFocus)
-    ProxyClient.FemtocraftSuctionPipeRenderID = RenderingRegistry.getNextAvailableRenderId
-    RenderingRegistry.registerBlockHandler(ProxyClient.FemtocraftSuctionPipeRenderID, new RenderSuctionPipe)
-    ProxyClient.FemtocraftPlasmaConduitID = RenderingRegistry.getNextAvailableRenderId
-    RenderingRegistry.registerBlockHandler(ProxyClient.FemtocraftPlasmaConduitID, new RenderPlasmaConduit)
-    ProxyClient.FemtocraftLaserRenderID = RenderingRegistry.getNextAvailableRenderId
-    RenderingRegistry.registerBlockHandler(ProxyClient.FemtocraftLaserRenderID, new RenderLaser)
+    RenderConstants.microCableRenderID = RenderingRegistry.getNextAvailableRenderId
+    RenderingRegistry.registerBlockHandler(RenderConstants.microCableRenderID, new RenderMicroCable)
+    RenderConstants.nanoCableRenderID = RenderingRegistry.getNextAvailableRenderId
+    RenderingRegistry.registerBlockHandler(RenderConstants.nanoCableRenderID, new RenderNanoCable)
+    RenderConstants.femtoCableRenderID = RenderingRegistry.getNextAvailableRenderId
+    RenderingRegistry.registerBlockHandler(RenderConstants.femtoCableRenderID, new RenderFemtoCable)
+    RenderConstants.FemtocraftVacuumTubeRenderID = RenderingRegistry.getNextAvailableRenderId
+    RenderingRegistry.registerBlockHandler(RenderConstants.FemtocraftVacuumTubeRenderID, new RenderVacuumTube)
+    RenderConstants.FemtocraftChargingBaseRenderID = RenderingRegistry.getNextAvailableRenderId
+    RenderingRegistry.registerBlockHandler(RenderConstants.FemtocraftChargingBaseRenderID, new RenderChargingBase)
+    RenderConstants.FemtocraftChargingCoilRenderID = RenderingRegistry.getNextAvailableRenderId
+    RenderingRegistry.registerBlockHandler(RenderConstants.FemtocraftChargingCoilRenderID, new RenderChargingCoil)
+    RenderConstants.FemtocraftChargingCapacitorRenderID = RenderingRegistry.getNextAvailableRenderId
+    RenderingRegistry.registerBlockHandler(RenderConstants.FemtocraftChargingCapacitorRenderID, new RenderChargingCapacitor)
+    RenderConstants.FemtocraftCryoEndothermalChargingCoilRenderID = RenderingRegistry.getNextAvailableRenderId
+    RenderingRegistry.registerBlockHandler(RenderConstants.FemtocraftCryoEndothermalChargingCoilRenderID, new RenderCryoEndothermalChargingCoil)
+    RenderConstants.FemtocraftStellaratorCoreRenderID = RenderingRegistry.getNextAvailableRenderId
+    RenderingRegistry.registerBlockHandler(RenderConstants.FemtocraftStellaratorCoreRenderID, new RenderStellaratorCore)
+    RenderConstants.FemtocraftStellaratorFocusRenderID = RenderingRegistry.getNextAvailableRenderId
+    RenderingRegistry.registerBlockHandler(RenderConstants.FemtocraftStellaratorFocusRenderID, new RenderStellaratorFocus)
+    RenderConstants.FemtocraftSuctionPipeRenderID = RenderingRegistry.getNextAvailableRenderId
+    RenderingRegistry.registerBlockHandler(RenderConstants.FemtocraftSuctionPipeRenderID, new RenderSuctionPipe)
+    RenderConstants.FemtocraftPlasmaConduitID = RenderingRegistry.getNextAvailableRenderId
+    RenderingRegistry.registerBlockHandler(RenderConstants.FemtocraftPlasmaConduitID, new RenderPlasmaConduit)
+    RenderConstants.FemtocraftLaserRenderID = RenderingRegistry.getNextAvailableRenderId
+    RenderingRegistry.registerBlockHandler(RenderConstants.FemtocraftLaserRenderID, new RenderLaser)
 
     ClientRegistry.bindTileEntitySpecialRenderer(classOf[TileEntityDimensionalTear], new RenderDimensionalTear)
   }

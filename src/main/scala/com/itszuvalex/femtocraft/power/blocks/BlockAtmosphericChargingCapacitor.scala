@@ -22,13 +22,12 @@ package com.itszuvalex.femtocraft.power.blocks
 
 import java.util.Random
 
-import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.{RenderConstants, Femtocraft}
 import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.api.core.Configurable
 import com.itszuvalex.femtocraft.api.power.{IAtmosphericChargingAddon, IAtmosphericChargingBase}
 import com.itszuvalex.femtocraft.core.blocks.BlockBase
 import com.itszuvalex.femtocraft.power.blocks.BlockAtmosphericChargingCapacitor._
-import com.itszuvalex.femtocraft.proxy.ProxyClient
 import com.itszuvalex.femtocraft.render.RenderUtils
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.block.Block
@@ -66,7 +65,7 @@ object BlockAtmosphericChargingCapacitor {
 
   override def renderAsNormalBlock = false
 
-  override def getRenderType = ProxyClient.FemtocraftChargingCapacitorRenderID
+  override def getRenderType = RenderConstants.FemtocraftChargingCapacitorRenderID
 
   override def isBlockSolid(par1iBlockAccess: IBlockAccess, par2: Int, par3: Int, par4: Int, par5: Int) = false
 

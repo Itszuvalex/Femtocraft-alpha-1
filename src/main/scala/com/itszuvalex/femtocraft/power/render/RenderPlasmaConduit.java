@@ -21,9 +21,9 @@
 
 package com.itszuvalex.femtocraft.power.render;
 
+import com.itszuvalex.femtocraft.RenderConstants;
 import com.itszuvalex.femtocraft.power.blocks.BlockPlasmaConduit;
 import com.itszuvalex.femtocraft.power.tiles.TileEntityPlasmaConduit;
-import com.itszuvalex.femtocraft.proxy.ProxyClient;
 import com.itszuvalex.femtocraft.render.RenderModel;
 import com.itszuvalex.femtocraft.render.RenderPoint;
 import com.itszuvalex.femtocraft.render.RenderQuad;
@@ -341,6 +341,6 @@ public class RenderPlasmaConduit implements ISimpleBlockRenderingHandler {
 
     @Override
     public int getRenderId() {
-        return ProxyClient.FemtocraftPlasmaConduitID();
+        return RenderConstants.FemtocraftPlasmaConduitID();
     }
 }

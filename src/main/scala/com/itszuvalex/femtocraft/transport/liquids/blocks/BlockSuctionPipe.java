@@ -22,8 +22,8 @@
 package com.itszuvalex.femtocraft.transport.liquids.blocks;
 
 import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.RenderConstants;
 import com.itszuvalex.femtocraft.core.blocks.TileContainer;
-import com.itszuvalex.femtocraft.proxy.ProxyClient;
 import com.itszuvalex.femtocraft.transport.liquids.tiles.TileEntitySuctionPipe;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -65,7 +65,7 @@ public class BlockSuctionPipe extends TileContainer {
 
     @Override
     public int getRenderType() {
-        return ProxyClient.FemtocraftSuctionPipeRenderID();
+        return RenderConstants.FemtocraftSuctionPipeRenderID();
     }
 
     @Override

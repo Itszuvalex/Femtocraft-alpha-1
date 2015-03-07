@@ -22,7 +22,7 @@ apply plugin: 'forge'
 
 project.ext {
     massive = "0"
-    major = "3"
+    major = "4"
     minor = "0"
     mcVersion = "1.7.10"
 }

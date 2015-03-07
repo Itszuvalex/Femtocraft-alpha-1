@@ -20,11 +20,10 @@
  */
 package com.itszuvalex.femtocraft.power.blocks
 
-import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.{RenderConstants, Femtocraft}
 import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.api.power.IAtmosphericChargingBase
 import com.itszuvalex.femtocraft.power.tiles.TileEntityAtmosphericChargingBase
-import com.itszuvalex.femtocraft.proxy.ProxyClient
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
@@ -52,7 +51,7 @@ class BlockAtmosphericChargingBase extends BlockPowerContainer(Material.iron) wi
 
   override def createNewTileEntity(world: World, metadata: Int): TileEntity = new TileEntityAtmosphericChargingBase
 
-  override def getRenderType = ProxyClient.FemtocraftChargingBaseRenderID
+  override def getRenderType = RenderConstants.FemtocraftChargingBaseRenderID
 
   override def isOpaqueCube = false
 

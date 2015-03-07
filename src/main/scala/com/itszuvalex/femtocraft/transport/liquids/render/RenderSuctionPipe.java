@@ -21,7 +21,7 @@
 
 package com.itszuvalex.femtocraft.transport.liquids.render;
 
-import com.itszuvalex.femtocraft.proxy.ProxyClient;
+import com.itszuvalex.femtocraft.RenderConstants;
 import com.itszuvalex.femtocraft.render.RenderModel;
 import com.itszuvalex.femtocraft.render.RenderPoint;
 import com.itszuvalex.femtocraft.render.RenderQuad;
@@ -118,7 +118,7 @@ public class RenderSuctionPipe implements ISimpleBlockRenderingHandler {
 
     @Override
     public int getRenderId() {
-        return ProxyClient.FemtocraftSuctionPipeRenderID();
+        return RenderConstants.FemtocraftSuctionPipeRenderID();
     }
 
     @SuppressWarnings("incomplete-switch")

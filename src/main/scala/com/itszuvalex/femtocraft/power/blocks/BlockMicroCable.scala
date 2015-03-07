@@ -23,9 +23,8 @@ package com.itszuvalex.femtocraft.power.blocks
 import java.util
 import java.util.Random
 
-import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.{RenderConstants, Femtocraft}
 import com.itszuvalex.femtocraft.power.tiles.TileEntityMicroCable
-import com.itszuvalex.femtocraft.proxy.ProxyClient
 import com.itszuvalex.femtocraft.render.RenderUtils
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.block.Block
@@ -68,7 +67,7 @@ class BlockMicroCable() extends BlockPowerContainer(Material.iron) {
 
   override def renderAsNormalBlock = false
 
-  override def getRenderType = ProxyClient.microCableRenderID
+  override def getRenderType = RenderConstants.microCableRenderID
 
   override def addCollisionBoxesToList(par1World: World, x: Int, y: Int, z: Int, par5AxisAlignedBB: AxisAlignedBB, par6List: util.List[_], par7Entity: Entity) {
     super.addCollisionBoxesToList(par1World, x, y, z, par5AxisAlignedBB, par6List, par7Entity)

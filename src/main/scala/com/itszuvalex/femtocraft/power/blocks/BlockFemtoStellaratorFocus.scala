@@ -20,14 +20,13 @@
  */
 package com.itszuvalex.femtocraft.power.blocks
 
-import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.{RenderConstants, Femtocraft}
 import com.itszuvalex.femtocraft.api.multiblock.MultiBlockInfo
 import com.itszuvalex.femtocraft.api.power.plasma.IFusionReactorCore
 import com.itszuvalex.femtocraft.core.blocks.TileContainer
 import com.itszuvalex.femtocraft.core.traits.block.MultiBlockSpatialReactions
 import com.itszuvalex.femtocraft.power.multiblock.MultiBlockFemtoStellarator
 import com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoStellaratorFocus
-import com.itszuvalex.femtocraft.proxy.ProxyClient
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
@@ -44,7 +43,7 @@ class BlockFemtoStellaratorFocus extends TileContainer(Material.iron) with Multi
 
   override def renderAsNormalBlock = false
 
-  override def getRenderType = ProxyClient.FemtocraftStellaratorFocusRenderID
+  override def getRenderType = RenderConstants.FemtocraftStellaratorFocusRenderID
 
   override def isOpaqueCube = false
 

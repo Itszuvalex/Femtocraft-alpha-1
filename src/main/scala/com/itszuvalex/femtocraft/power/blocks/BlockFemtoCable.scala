@@ -22,9 +22,8 @@ package com.itszuvalex.femtocraft.power.blocks
 
 import java.util.Random
 
-import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.{RenderConstants, Femtocraft}
 import com.itszuvalex.femtocraft.power.tiles.TileEntityFemtoCable
-import com.itszuvalex.femtocraft.proxy.ProxyClient
 import com.itszuvalex.femtocraft.render.RenderUtils
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.block.Block
@@ -53,7 +52,7 @@ class BlockFemtoCable() extends BlockMicroCable() {
     RenderUtils.spawnParticle(par1World, RenderUtils.FEMTO_POWER_PARTICLE, spawnX, spawnY, spawnZ)
   }
 
-  override def getRenderType = ProxyClient.femtoCableRenderID
+  override def getRenderType = RenderConstants.femtoCableRenderID
 
   override def createNewTileEntity(world: World, metadata: Int): TileEntity = new TileEntityFemtoCable
 

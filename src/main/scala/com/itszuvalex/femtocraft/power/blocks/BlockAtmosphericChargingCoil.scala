@@ -22,11 +22,10 @@ package com.itszuvalex.femtocraft.power.blocks
 
 import java.util.Random
 
-import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.{RenderConstants, Femtocraft}
 import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.api.power.{IAtmosphericChargingAddon, IAtmosphericChargingBase}
 import com.itszuvalex.femtocraft.core.blocks.BlockBase
-import com.itszuvalex.femtocraft.proxy.ProxyClient
 import com.itszuvalex.femtocraft.render.RenderUtils
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.block.Block
@@ -55,7 +54,7 @@ class BlockAtmosphericChargingCoil extends BlockBase(Material.iron) with IAtmosp
 
   override def renderAsNormalBlock = false
 
-  override def getRenderType = ProxyClient.FemtocraftChargingCoilRenderID
+  override def getRenderType = RenderConstants.FemtocraftChargingCoilRenderID
 
   override def isBlockSolid(par1iBlockAccess: IBlockAccess, par2: Int, par3: Int, par4: Int, par5: Int) = false
 

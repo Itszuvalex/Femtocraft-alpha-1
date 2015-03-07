@@ -20,11 +20,11 @@
  */
 package com.itszuvalex.femtocraft.power.render
 
+import com.itszuvalex.femtocraft.RenderConstants
 import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import com.itszuvalex.femtocraft.industry.LaserRegistry
 import com.itszuvalex.femtocraft.industry.blocks.BlockLaser
 import com.itszuvalex.femtocraft.industry.tiles.TileEntityLaser
-import com.itszuvalex.femtocraft.proxy.ProxyClient
 import com.itszuvalex.femtocraft.render.{RenderModel, RenderPoint, RenderQuad}
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler
 import net.minecraft.block.Block
@@ -72,7 +72,7 @@ class RenderLaser extends ISimpleBlockRenderingHandler {
 
   override def shouldRender3DInInventory(modelID: Int) = true
 
-  override def getRenderId = ProxyClient.FemtocraftLaserRenderID
+  override def getRenderId = RenderConstants.FemtocraftLaserRenderID
 
   private def renderLaser(coil: BlockLaser, x: Int, y: Int, z: Int, dir: ForgeDirection) {
     if (segmentUpDown == null) {

@@ -22,9 +22,8 @@ package com.itszuvalex.femtocraft.power.blocks
 
 import java.util.Random
 
-import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.{RenderConstants, Femtocraft}
 import com.itszuvalex.femtocraft.power.tiles.TileEntityNanoCable
-import com.itszuvalex.femtocraft.proxy.ProxyClient
 import com.itszuvalex.femtocraft.render.RenderUtils
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.block.Block
@@ -47,7 +46,7 @@ class BlockNanoCable() extends BlockMicroCable() {
     RenderUtils.spawnParticle(par1World, RenderUtils.NANO_POWER_PARTICLE, spawnX, spawnY, spawnZ)
   }
 
-  override def getRenderType = ProxyClient.nanoCableRenderID
+  override def getRenderType = RenderConstants.nanoCableRenderID
 
   override def setBlockBounds() {
     this.minX = {this.minY = {this.minZ = 4.0D / 16.0D; this.minZ}; this.minY}
