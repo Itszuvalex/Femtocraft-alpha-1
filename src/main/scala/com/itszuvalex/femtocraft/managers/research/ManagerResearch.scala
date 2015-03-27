@@ -20,7 +20,7 @@
  */
 package com.itszuvalex.femtocraft.managers.research
 
-import java.io.{File, FileInputStream, FileOutputStream, FilenameFilter}
+import java.io.{File, FilenameFilter}
 import java.util
 
 import com.itszuvalex.femtocraft.Femtocraft
@@ -28,11 +28,11 @@ import com.itszuvalex.femtocraft.api.core.Configurable
 import com.itszuvalex.femtocraft.api.events.EventTechnology
 import com.itszuvalex.femtocraft.api.managers.research.IResearchManager
 import com.itszuvalex.femtocraft.api.research.ITechnology
+import com.itszuvalex.femtocraft.api.utils.FemtocraftFileUtils
 import com.itszuvalex.femtocraft.configuration.{AutoGenConfig, TechnologyXMLLoader, XMLTechnology}
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
 import com.itszuvalex.femtocraft.research.gui.graph.{TechNode, TechnologyGraph}
-import com.itszuvalex.femtocraft.api.utils.FemtocraftFileUtils
-import net.minecraft.nbt.{CompressedStreamTools, NBTTagCompound, NBTTagList}
+import net.minecraft.nbt.{NBTTagCompound, NBTTagList}
 import net.minecraft.world.World
 import net.minecraftforge.common.MinecraftForge
 import org.apache.logging.log4j.Level
@@ -42,16 +42,18 @@ import scala.collection.JavaConverters._
 import scala.collection.mutable
 
 @Configurable object ManagerResearch extends IResearchManager {
-  private val playerDataKey                    = "playerData"
-  private val dataKey                          = "data"
-  private val userKey                          = "username"
+  private val playerDataKey              = "playerData"
+  private val dataKey                    = "data"
+  private val userKey                    = "username"
   @Configurable(comment = "Set to true to have all technologies researched by default.")
-  private val debug                            = false
-  private val DIRECTORY                        = "Research"
-  private val technologies                     = new mutable.HashMap[String, ITechnology]
-  private val playerData                       = new mutable.HashMap[String, PlayerResearch]
-  private var graph          : TechnologyGraph = null
-  private var lastWorldLoaded: String          = ""
+  private val debug                      = false
+  private val DIRECTORY                  = "Research"
+  private val technologies               = new mutable.HashMap[String, ITechnology]
+  private val playerData                 = new mutable.HashMap[String, PlayerResearch]
+  private var graph    : TechnologyGraph = null
+  private var lastWorld: World           = null
+  @Configurable
+  private val debugMessages              = false
 
   def init() {
     registerTechnologies()
@@ -74,7 +76,7 @@ import scala.collection.mutable
 
   override def addTechnology(tech: ITechnology): Boolean = !MinecraftForge.EVENT_BUS.post(new
                                                                                               EventTechnology.Added(tech)) && technologies
-                                                                                                                                             .put(
+                                                                                                                              .put(
       tech.getName,
       tech) != null
 
@@ -106,9 +108,16 @@ import scala.collection.mutable
 
   private def addAllResearches(research: PlayerResearch) {
     technologies.values.foreach { t => research.researchTechnology(t.getName, true)}
+    research.save()
   }
 
-  override def removePlayerResearch(username: String): Boolean = playerData.remove(username) != null
+  override def removePlayerResearch(username: String): Boolean = {
+    playerData.remove(username) match {
+      case Some(p) => p.save()
+      case None =>
+    }
+    true
+  }
 
   override def getPlayerResearch(username: String): PlayerResearch = playerData.get(username).orNull
 
@@ -158,6 +167,8 @@ import scala.collection.mutable
 
   }
 
+  def save: Boolean = if (lastWorld == null) false else save(lastWorld)
+
   def save(world: World): Boolean = {
     if (world.isRemote) return true
     try {
@@ -168,14 +179,7 @@ import scala.collection.mutable
       playerData.values.foreach { pdata =>
         try {
           val file: File = new File(folder, pdata.username + ".dat")
-          if (!file.exists) {
-            file.createNewFile
-          }
-          val fileoutputstream = new FileOutputStream(file)
-          val data = new NBTTagCompound
-          pdata.saveToNBT(data)
-          CompressedStreamTools.writeCompressed(data, fileoutputstream)
-          fileoutputstream.close()
+          pdata.save(file)
         }
         catch {
           case exception: Exception =>
@@ -196,16 +200,14 @@ import scala.collection.mutable
         e.printStackTrace()
         return false
     }
+    if (debugMessages) Femtocraft.log(Level.INFO, "Saving Research data for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
     true
   }
 
   def load(world: World): Boolean = {
     if (world.isRemote) return true
-    val worldName = world.getWorldInfo.getWorldName
-    if (lastWorldLoaded == worldName) {
-      return false
-    }
-    lastWorldLoaded = worldName
+    save
+    lastWorld = world
     playerData.clear()
     try {
       val folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), DIRECTORY)
@@ -215,17 +217,16 @@ import scala.collection.mutable
              "No " + DIRECTORY + " folder found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
         return false
       }
+      else {
+        if (debugMessages) Femtocraft.log(Level.INFO, "Loading Research data for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
+      }
       folder.listFiles(new FilenameFilter {
         def accept(dir: File, name: String) = name.endsWith(".dat")
       }).foreach { pdata =>
         try {
-          val fileinputstream = new FileInputStream(pdata)
-          val data = CompressedStreamTools.readCompressed(fileinputstream)
           val username = pdata.getName.substring(0, pdata.getName.length - 4)
           val file = new PlayerResearch(username)
-          file.loadFromNBT(data)
-          fileinputstream.close()
-          file.discoverNewTechs(false)
+          file.load(pdata)
           playerData.put(username, file)
         }
         catch {

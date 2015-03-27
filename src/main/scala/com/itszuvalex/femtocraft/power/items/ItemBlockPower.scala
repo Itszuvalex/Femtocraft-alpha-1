@@ -22,7 +22,8 @@ package com.itszuvalex.femtocraft.power.items
 
 import java.util
 
-import com.itszuvalex.femtocraft.api.power.{PowerStackWrapper, PowerContainer}
+import com.itszuvalex.femtocraft.api.implicits.SugarImplicits._
+import com.itszuvalex.femtocraft.api.power.{PowerContainer, PowerStackWrapper}
 import com.itszuvalex.femtocraft.core.items.CoreItemBlock
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.block.Block
@@ -48,6 +49,6 @@ abstract class ItemBlockPower(block: Block) extends CoreItemBlock(block) {
   override def onCreated(par1ItemStack: ItemStack, par2World: World, par3EntityPlayer: EntityPlayer) {
     super.onCreated(par1ItemStack, par2World, par3EntityPlayer)
     val wrapper = PowerStackWrapper.getWrapperForStack(par1ItemStack)
-    wrapper.copyFromPowerContainer(getDefaultContainer)
+    wrapper IfNotNull wrapper.copyFromPowerContainer(getDefaultContainer)
   }
 }

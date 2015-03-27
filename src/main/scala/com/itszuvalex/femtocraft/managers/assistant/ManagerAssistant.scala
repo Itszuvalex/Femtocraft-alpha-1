@@ -1,9 +1,10 @@
 package com.itszuvalex.femtocraft.managers.assistant
 
-import java.io.{File, FileInputStream, FileOutputStream, FilenameFilter}
+import java.io.{FilenameFilter, File, FileInputStream, FileOutputStream}
 import java.util
 
 import com.itszuvalex.femtocraft.Femtocraft
+import com.itszuvalex.femtocraft.api.core.Configurable
 import com.itszuvalex.femtocraft.api.managers.IAssistantManager
 import com.itszuvalex.femtocraft.api.utils.FemtocraftFileUtils
 import net.minecraft.nbt.{CompressedStreamTools, NBTTagCompound, NBTTagList}
@@ -13,20 +14,30 @@ import org.apache.logging.log4j.Level
 import scala.collection.JavaConversions._
 import scala.collection.mutable
 
-object ManagerAssistant extends IAssistantManager {
-  private val dir       = "Assistants"
-  private val assistKey = "assistants"
-  private val data      = new mutable.HashMap[String, mutable.HashMap[String, AssistantPermissions]]
+@Configurable object ManagerAssistant extends IAssistantManager {
+  private               val dir              = "Assistants"
+  private               val assistKey        = "assistants"
+  private               val data             = new mutable.HashMap[String, mutable.HashMap[String, AssistantPermissions]]
+  private               var lastWorld: World = null
+  @Configurable private val debugMessages    = false
+
 
   override def isPlayerAssistant(owner: String, user: String) = getPlayerAssistants(owner).contains(user)
 
-  override def addAssistantTo(owner: String, user: String): Unit = getPlayerAssistantsPermissions(owner)
-                                                                   .put(user, new AssistantPermissions(user))
+  override def addAssistantTo(owner: String, user: String): Unit = {
+    getPlayerAssistantsPermissions(owner).put(user, new AssistantPermissions(user))
+    save()
+  }
 
-  override def removeAssistantFrom(owner: String, user: String): Unit = getPlayerAssistants(owner).remove(user)
+  override def removeAssistantFrom(owner: String, user: String): Unit = {
+    getPlayerAssistants(owner).remove(user)
+    save()
+  }
 
   override def getPlayerAssistants(owner: String): util.Collection[String] =
     data.getOrElseUpdate(owner, new mutable.HashMap[String, AssistantPermissions]).keySet
+
+  def save(): Boolean = if (lastWorld == null) false else save(lastWorld)
 
   def save(world: World): Boolean = {
     try {
@@ -70,10 +81,13 @@ object ManagerAssistant extends IAssistantManager {
         e.printStackTrace()
         return false
     }
+    if (debugMessages) Femtocraft.log(Level.INFO, "Saving Assistant data for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
     true
   }
 
   def load(world: World): Boolean = {
+    save()
+    lastWorld = world
     try {
       val file = new File(FemtocraftFileUtils.savePathFemtocraft(world), dir)
       if (!file.exists) {
@@ -81,6 +95,9 @@ object ManagerAssistant extends IAssistantManager {
         .log(Level.WARN,
              "No assistant data" + " found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
         return false
+      }
+      else {
+        if (debugMessages) Femtocraft.log(Level.INFO, "Loading Assistant data for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
       }
       data.clear()
       for (pfile <- file.listFiles(new FilenameFilter() {

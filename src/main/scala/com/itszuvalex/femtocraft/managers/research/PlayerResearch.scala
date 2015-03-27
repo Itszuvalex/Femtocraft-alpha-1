@@ -21,6 +21,7 @@
 package com.itszuvalex.femtocraft.managers.research
 
 
+import java.io.{File, FileInputStream, FileOutputStream}
 import java.util
 
 import com.itszuvalex.femtocraft.Femtocraft
@@ -33,7 +34,7 @@ import com.itszuvalex.femtocraft.managers.research.PlayerResearch._
 import com.itszuvalex.femtocraft.network.FemtocraftPacketHandler
 import com.itszuvalex.femtocraft.network.messages.MessageResearchPlayer
 import net.minecraft.entity.player.EntityPlayerMP
-import net.minecraft.nbt.{NBTTagCompound, NBTTagList}
+import net.minecraft.nbt.{CompressedStreamTools, NBTTagCompound, NBTTagList}
 import net.minecraft.server.MinecraftServer
 import net.minecraft.util.EnumChatFormatting
 import net.minecraftforge.common.MinecraftForge
@@ -49,7 +50,8 @@ object PlayerResearch {
 }
 
 class PlayerResearch(val username: String) extends IPlayerResearch with ISaveable {
-  private val techStatus = new mutable.HashMap[String, ResearchStatus]
+  private val techStatus     = new mutable.HashMap[String, ResearchStatus]
+  private var lastFile: File = null
 
   override def getTechnologies = techStatus.values.asInstanceOf[util.Collection[IResearchStatus]]
 
@@ -83,6 +85,7 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
         }
       }
       discoverNewTechs(false)
+      save()
       sync()
       return true
     }
@@ -102,6 +105,7 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
         }
       }
       discoverNewTechs(true)
+      save()
       sync()
       return true
     }
@@ -109,11 +113,7 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
   }
 
   def discoverNewTechs(notify: Boolean): Boolean = {
-    Femtocraft
-    .researchManager
-    .getTechnologies
-    .filterNot(hasDiscoveredTechnology)
-    .filterNot(hasResearchedTechnology)
+    Femtocraft.researchManager.getTechnologies.filterNot(hasDiscoveredTechnology).filterNot(hasResearchedTechnology)
     .foreach { case t if t.isResearchedByDefault => return researchTechnology(t.getName, true, notify)
     case t if t.isDiscoveredByDefault => discoverTechnology(t.getName, notify)
     case t if canDiscoverTechnology(t) => discoverTechnology(t.getName, notify)
@@ -180,6 +180,7 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
           }
         }
       }
+      save()
       sync()
       return true
     }
@@ -248,6 +249,33 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
       status.loadFromNBT(data)
       techStatus.put(techname, status)
                                                                }
+  }
+
+  def save(): Unit = if (lastFile != null) save(lastFile)
+
+  def save(file: File): Unit = {
+    if (!file.exists) {
+      file.createNewFile
+    }
+    val fileoutputstream = new FileOutputStream(file)
+    val data = new NBTTagCompound
+    saveToNBT(data)
+    CompressedStreamTools.writeCompressed(data, fileoutputstream)
+    fileoutputstream.close()
+    Femtocraft.log(Level.TRACE, "Saving " + username + "'s research data to " + file.getPath + ".")
+  }
+
+  def load(): Unit = if (lastFile != null) load(lastFile)
+
+  def load(file: File): Unit = {
+    save()
+    lastFile = file
+    val fileinputstream = new FileInputStream(file)
+    val data = CompressedStreamTools.readCompressed(fileinputstream)
+    loadFromNBT(data)
+    fileinputstream.close()
+    discoverNewTechs(false)
+    Femtocraft.log(Level.TRACE, "Loading " + username + "'s research data from " + file.getPath + ".")
   }
 
   /**
