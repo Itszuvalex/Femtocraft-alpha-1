@@ -21,13 +21,13 @@
 package com.itszuvalex.femtocraft.api.utils
 
 import java.util
-import java.util.Random
+import java.util.{Random, UUID}
 
 import com.itszuvalex.femtocraft.api.implicits.IDImplicits._
 import com.itszuvalex.femtocraft.api.{EnumTechLevel, FemtocraftAPI}
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.item.EntityItem
-import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.entity.player.{EntityPlayer, EntityPlayerMP}
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.server.MinecraftServer
@@ -60,7 +60,11 @@ object FemtocraftUtils {
    * @param username
    * @return The player entity of the player with username.
    */
-  def getPlayer(username: String) = Minecraft.getMinecraft.theWorld.getPlayerEntityByName(username)
+  def getLocalPlayer(username: String): EntityPlayer = Minecraft.getMinecraft.theWorld.getPlayerEntityByName(username)
+
+  def getServerPlayer(username: String): EntityPlayerMP = MinecraftServer.getServer.getConfigurationManager.func_152612_a(username)
+
+  def getServerPlayer(uuid: UUID): EntityPlayerMP = MinecraftServer.getServer.getConfigurationManager.playerEntityList.collectFirst { case player: EntityPlayerMP if player.getUniqueID.equals(uuid) => player}.orNull
 
   /**
    *

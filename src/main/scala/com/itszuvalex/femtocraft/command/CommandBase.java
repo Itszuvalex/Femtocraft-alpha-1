@@ -67,14 +67,16 @@ public abstract class CommandBase implements ICommand {
         StringBuilder output = new StringBuilder();
         output.append(EnumChatFormatting.YELLOW);
         output.append(getCommandName());
-        output.append('\n');
-        output.append(EnumChatFormatting.BOLD).append("aliases\n").append(EnumChatFormatting.RESET).append
+        output.append(System.lineSeparator());
+        output.append(EnumChatFormatting.BOLD).append(
+                "aliases").append(System.lineSeparator()).append(EnumChatFormatting.RESET).append
                 (EnumChatFormatting.YELLOW);
         for (String alias : aliases) {
             output.append(alias);
-            output.append('\n');
+            output.append(System.lineSeparator());
         }
-        output.append(EnumChatFormatting.BOLD).append("subcommands\n").append(EnumChatFormatting.RESET).append
+        output.append(EnumChatFormatting.BOLD).append(
+                "subcommands").append(System.lineSeparator()).append(EnumChatFormatting.RESET).append
                 (EnumChatFormatting.YELLOW);
         for (String subcommand : subcmds.keySet()) {
             ICommand com = getSubCommand(subcommand);
@@ -87,7 +89,7 @@ public abstract class CommandBase implements ICommand {
                 output.append(EnumChatFormatting.WHITE).append(" - ").append(((CommandBase) com).getDescription())
                         .append(EnumChatFormatting.YELLOW);
             }
-            output.append('\n');
+            output.append(System.lineSeparator());
         }
         output.deleteCharAt(output.length() - 1);
         output.append(EnumChatFormatting.RESET);
@@ -138,7 +140,6 @@ public abstract class CommandBase implements ICommand {
         }
         return false;
     }
-
 
 
     ICommand getSubCommand(String name) {

@@ -32,9 +32,11 @@ import com.itszuvalex.femtocraft.api.utils.FemtocraftFileUtils
 import com.itszuvalex.femtocraft.configuration.{AutoGenConfig, TechnologyXMLLoader, XMLTechnology}
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
 import com.itszuvalex.femtocraft.research.gui.graph.{TechNode, TechnologyGraph}
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.nbt.{NBTTagCompound, NBTTagList}
 import net.minecraft.world.World
 import net.minecraftforge.common.MinecraftForge
+import net.minecraftforge.event.entity.player.PlayerEvent
 import org.apache.logging.log4j.Level
 
 import scala.collection.JavaConversions._
@@ -57,6 +59,13 @@ import scala.collection.mutable
 
   def init() {
     registerTechnologies()
+  }
+
+  def onPlayerLoadFromFile(event: PlayerEvent.LoadFromFile): Unit = {
+  }
+
+  def onPlayerSaveToFile(event: PlayerEvent.SaveToFile): Unit = {
+
   }
 
   private def registerTechnologies(): Unit = {
@@ -120,6 +129,8 @@ import scala.collection.mutable
   }
 
   override def getPlayerResearch(username: String): PlayerResearch = playerData.get(username).orNull
+
+  override def getPlayerResearch(player: EntityPlayer): PlayerResearch = playerData.get(player.getCommandSenderName).orNull
 
   override def hasPlayerDiscoveredTechnology(username: String,
                                              tech: ITechnology): Boolean = tech == null || hasPlayerDiscoveredTechnology(username,

@@ -12,7 +12,7 @@ import scala.collection.JavaConverters._
 /**
  * Created by Chris on 12/5/2014.
  */
-class XMLDimensionalRecipes(file: File) extends XMLLoaderWriter[DimensionalRecipe](file) {
+class XMLDimensionalRecipes(file: File) extends XMLRecipeLoaderWriter[DimensionalRecipe](file) {
   def loadCustomRecipes(): util.Collection[DimensionalRecipe] = {
     val recipes = xml \ XMLSerializable.dimensionalRecipeTag
     recipes.view.map(_.getDimensionalRecipe).asJavaCollection

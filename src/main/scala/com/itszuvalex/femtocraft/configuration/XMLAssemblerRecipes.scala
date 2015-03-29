@@ -11,7 +11,7 @@ import scala.collection.JavaConverters._
 /**
  * Created by Chris on 12/5/2014.
  */
-class XMLAssemblerRecipes(file: File) extends XMLLoaderWriter[AssemblerRecipe](file) {
+class XMLAssemblerRecipes(file: File) extends XMLRecipeLoaderWriter[AssemblerRecipe](file) {
   def loadCustomRecipes(): util.Collection[AssemblerRecipe] = {
     val recipes = xml \ XMLSerializable.assemblerRecipeTag
     recipes.view.map(_.getAssemblerRecipe).asJavaCollection

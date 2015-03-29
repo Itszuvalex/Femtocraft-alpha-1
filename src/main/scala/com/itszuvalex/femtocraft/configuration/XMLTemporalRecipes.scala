@@ -12,7 +12,7 @@ import scala.collection.JavaConverters._
 /**
  * Created by Chris on 12/5/2014.
  */
-class XMLTemporalRecipes(file: File) extends XMLLoaderWriter[TemporalRecipe](file) {
+class XMLTemporalRecipes(file: File) extends XMLRecipeLoaderWriter[TemporalRecipe](file) {
   def loadCustomRecipes(): util.Collection[TemporalRecipe] = {
     val recipes = xml \ XMLSerializable.temporalRecipeTag
     recipes.view.map(_.getTemporalRecipe).asJavaCollection

@@ -3,6 +3,7 @@ package com.itszuvalex.femtocraft.api.managers.research
 import java.util
 
 import com.itszuvalex.femtocraft.api.research.ITechnology
+import net.minecraft.entity.player.EntityPlayer
 
 /**
  * Created by Chris on 1/2/2015.
@@ -80,8 +81,10 @@ trait IResearchManager {
   /**
    *
    * @param username
-   * @return Get the accompanying plaerResearch data structure for the player.
+   * @return Get the accompanying playerResearch data structure for the player.
    */
   def getPlayerResearch(username: String): IPlayerResearch
+
+  def getPlayerResearch(player: EntityPlayer): IPlayerResearch
 
 }

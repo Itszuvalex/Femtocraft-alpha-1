@@ -53,8 +53,6 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
   private val techStatus     = new mutable.HashMap[String, ResearchStatus]
   private var lastFile: File = null
 
-  override def getTechnologies = techStatus.values.asInstanceOf[util.Collection[IResearchStatus]]
-
   /**
    * @param name  Name of researchTechnology to mark as researched
    * @param force Pass true if you want the named researchTechnology to be added if it isn't already discovered. This
@@ -200,8 +198,6 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
     FemtocraftPacketHandler.INSTANCE.sendTo(new MessageResearchPlayer(this), player)
   }
 
-  override def getTechnology(name: String): ResearchStatus = techStatus.get(name).orNull
-
   override def removeTechnology(name: String): ResearchStatus = techStatus.remove(name).orNull
 
   override def canDiscoverTechnology(tech: ITechnology): Boolean = {
@@ -283,4 +279,17 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
    * @return Username of the player associated with this research.
    */
   override def getUsername = username
+
+  /**
+   *
+   * @return All research statuses mapped for this player.
+   */
+  override def getTechnologies: util.Collection[IResearchStatus] = techStatus.values
+
+  /**
+   *
+   * @param name
+   * @return Returns the IResearchStatus struct from this object for the given technology.
+   */
+  override def getTechnology(name: String): ResearchStatus = techStatus.get(name).orNull
 }

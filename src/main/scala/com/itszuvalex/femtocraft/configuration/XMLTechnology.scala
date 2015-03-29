@@ -13,7 +13,7 @@ import scala.collection.JavaConverters._
 /**
  * Created by Chris on 12/5/2014.
  */
-class XMLTechnology(file: File) extends XMLLoaderWriter[Technology](file) {
+class XMLTechnology(file: File) extends XMLRecipeLoaderWriter[Technology](file) {
   def loadCustomRecipes(): util.Collection[Technology] = {
     val recipes = xml \ XMLSerializable.technologyTag
     recipes.view.map(_.getTechnology).asJavaCollection

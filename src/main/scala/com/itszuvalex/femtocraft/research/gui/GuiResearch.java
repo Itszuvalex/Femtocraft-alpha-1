@@ -212,8 +212,7 @@ public class GuiResearch extends GuiScreen {
         if (par3 == 0) {
             for (ITechnology rt : Femtocraft.researchManager()
                     .getTechnologies()) {
-                ResearchStatus ts = researchStatus
-                        .getTechnology(rt.getName());
+                ResearchStatus ts = researchStatus.getTechnology(rt.getName());
                 if (ts != null) {
                     int k = MathHelper.floor_double(field_74117_m
                                                     + (guiMapX - field_74117_m)

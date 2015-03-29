@@ -13,7 +13,7 @@ import scala.collection.JavaConverters._
 /**
  * Created by Chris on 12/5/2014.
  */
-class XMLMagnetismMappings(file: File) extends XMLLoaderWriter[(ItemStack, Int)](file) {
+class XMLMagnetismMappings(file: File) extends XMLRecipeLoaderWriter[(ItemStack, Int)](file) {
   def loadCustomRecipes(): util.Collection[(ItemStack, Int)] = {
     val recipes = xml \ XMLSerializable.magnetismMappingTag
     recipes.view.map(_.getMagnetismMapping).asJavaCollection

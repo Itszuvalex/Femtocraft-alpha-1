@@ -20,36 +20,35 @@
  */
 package com.itszuvalex.femtocraft
 
+import java.io.File
+
 import com.itszuvalex.femtocraft.api.events.EventSpatialRelocation
 import com.itszuvalex.femtocraft.api.items.IAssemblerSchematic
+import com.itszuvalex.femtocraft.api.utils.{FemtocraftFileUtils, FemtocraftUtils}
 import com.itszuvalex.femtocraft.core.MagnetRegistry
 import com.itszuvalex.femtocraft.core.traits.block.SpatialReactions
 import com.itszuvalex.femtocraft.gui.DisplaySlot
 import com.itszuvalex.femtocraft.managers.assembler.ComponentRegistry
 import com.itszuvalex.femtocraft.player.PlayerProperties
-import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumChatFormatting
 import net.minecraftforge.client.event.TextureStitchEvent
-import net.minecraftforge.event.entity.player.ItemTooltipEvent
+import net.minecraftforge.event.entity.player.{ItemTooltipEvent, PlayerEvent}
 import net.minecraftforge.event.entity.{EntityEvent, EntityJoinWorldEvent}
 import net.minecraftforge.event.world.WorldEvent
 
 class FemtocraftEventHookContainer {
   @SubscribeEvent def load(event: WorldEvent.Load) {
     if (event.world.isRemote) return
-
-    Femtocraft.researchManager.load(event.world)
     Femtocraft.assistantManager.load(event.world)
+    Femtocraft.uuidManager.setFile(new File(FemtocraftFileUtils.savePathFemtocraft(event.world), "UUIDMappings.xml"))
   }
 
   @SubscribeEvent def save(event: WorldEvent.Save) {
     if (event.world.isRemote) return
-
-    Femtocraft.researchManager.save(event.world)
     Femtocraft.assistantManager.save(event.world)
   }
 
@@ -67,7 +66,7 @@ class FemtocraftEventHookContainer {
     event.entity match {
       case player: EntityPlayer if event.entity.getExtendedProperties(PlayerProperties.PROP_TAG) == null =>
         PlayerProperties.register(player)
-      case _                                                                                             =>
+      case _ =>
     }
   }
 
@@ -75,8 +74,16 @@ class FemtocraftEventHookContainer {
     event.entity match {
       case player: EntityPlayer if !event.entity.worldObj.isRemote =>
         PlayerProperties.get(player).sync()
-      case _                                                       =>
+      case _ =>
     }
+  }
+
+  @SubscribeEvent def onPlayerLoadFromFile(event: PlayerEvent.LoadFromFile): Unit = {
+    Femtocraft.researchManager.onPlayerLoadFromFile(event)
+  }
+
+  @SubscribeEvent def onPlayerSaveToFile(event: PlayerEvent.SaveToFile): Unit = {
+    Femtocraft.researchManager.onPlayerSaveToFile(event)
   }
 
   @SubscribeEvent def onTooltip(event: ItemTooltipEvent) {
@@ -99,7 +106,7 @@ class FemtocraftEventHookContainer {
                                                                                                                         .showAdvancedItemTooltips))) {
       val username = Minecraft.getMinecraft.thePlayer.getCommandSenderName
       Femtocraft.recipeManager.assemblyRecipes.getDecompositionCounts(event.itemStack) match {
-        case (0, 0, 0, 0)                        =>
+        case (0, 0, 0, 0) =>
         case (molecules, atoms, particles, mass) =>
           if (Femtocraft
               .researchManager
@@ -129,14 +136,14 @@ class FemtocraftEventHookContainer {
   @SubscribeEvent def onSpatialPickup(event: EventSpatialRelocation.Pickup): Unit = {
     event.world.getBlock(event.x, event.y, event.z) match {
       case b: SpatialReactions => b.onPickup(event.world, event.x, event.y, event.z)
-      case _                   =>
+      case _ =>
     }
   }
 
   @SubscribeEvent def onSpatialPlacement(event: EventSpatialRelocation.Placement): Unit = {
     event.world.getBlock(event.x, event.y, event.z) match {
       case b: SpatialReactions => b.onPlacement(event.world, event.x, event.y, event.z)
-      case _                   =>
+      case _ =>
     }
   }
 }

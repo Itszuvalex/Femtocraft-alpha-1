@@ -52,7 +52,7 @@ class MessagePlayerProperty(private var username: String, private var data: NBTT
   }
 
   override def onMessage(message: MessagePlayerProperty, ctx: MessageContext): IMessage = {
-    val player = FemtocraftUtils.getPlayer(message.username)
+    val player = FemtocraftUtils.getLocalPlayer(message.username)
     if (player != null)
       PlayerProperties.get(player).handlePacket(message.data)
     null

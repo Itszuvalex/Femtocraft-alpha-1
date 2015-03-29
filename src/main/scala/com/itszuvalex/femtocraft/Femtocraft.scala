@@ -15,10 +15,10 @@ import com.itszuvalex.femtocraft.core.items.{ItemBase, ItemFemtoInterfaceDevice,
 import com.itszuvalex.femtocraft.core.ore._
 import com.itszuvalex.femtocraft.industry.blocks._
 import com.itszuvalex.femtocraft.industry.items._
-import com.itszuvalex.femtocraft.managers.ManagerRecipe
 import com.itszuvalex.femtocraft.managers.assembler.{ComponentRegistry, ManagerAssemblerRecipe}
 import com.itszuvalex.femtocraft.managers.assistant.ManagerAssistant
 import com.itszuvalex.femtocraft.managers.research.ManagerResearch
+import com.itszuvalex.femtocraft.managers.{ManagerPlayerUUIDs, ManagerRecipe}
 import com.itszuvalex.femtocraft.network.FemtocraftPacketHandler
 import com.itszuvalex.femtocraft.power.FemtocraftPowerAlgorithm
 import com.itszuvalex.femtocraft.power.blocks._
@@ -35,7 +35,7 @@ import com.itszuvalex.femtocraft.utility.blocks.{BlockSpatialAlternator, BlockSp
 import com.itszuvalex.femtocraft.utility.items.ItemPocketPocket
 import com.mojang.authlib.GameProfile
 import cpw.mods.fml.common.Mod.EventHandler
-import cpw.mods.fml.common.event.{FMLServerStartingEvent, FMLPostInitializationEvent, FMLInitializationEvent, FMLPreInitializationEvent}
+import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent, FMLServerStartingEvent}
 import cpw.mods.fml.common.network.NetworkRegistry
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.common.{FMLCommonHandler, Mod, SidedProxy}
@@ -83,6 +83,7 @@ object Femtocraft {
   var powerAlgorithm                                                    = FemtocraftPowerAlgorithm
   var plasmaManager                                                     = ManagerPlasma
   var assemblerRecipeManager                                            = ManagerAssemblerRecipe
+  var uuidManager                                                       = ManagerPlayerUUIDs
   var soundManager                          : FemtocraftSoundManager    = null
   var femtocraftServerCommand               : CommandBase               = new CommandFemtocraft
   /*blocks*/
