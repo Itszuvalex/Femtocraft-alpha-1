@@ -18,6 +18,12 @@ trait IPlayerResearch extends ISaveable {
 
   /**
    *
+   * @return Return uuid of the player associated with this research.
+   */
+  def getUUID: String
+
+  /**
+   *
    * @return All research statuses mapped for this player.
    */
   def getTechnologies: util.Collection[IResearchStatus]

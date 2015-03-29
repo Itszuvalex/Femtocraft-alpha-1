@@ -166,9 +166,9 @@ object ManagerAssemblerRecipe extends IAssemblerRecipeManager {
                                                                    .tech
                                                                    .equalsIgnoreCase(techName))
 
-  override def hasResearchedRecipe(recipe: AssemblerRecipe, username: String) = Femtocraft
+  override def hasResearchedRecipe(recipe: AssemblerRecipe, uuid: String) = Femtocraft
                                                                                 .researchManager
-                                                                                .hasPlayerResearchedTechnology(username,
+                                                                                .hasPlayerResearchedTechnology(uuid,
                                                                                                                recipe.tech)
 
   private def registerShapedRecipe(sr: ShapedRecipes): Boolean = {

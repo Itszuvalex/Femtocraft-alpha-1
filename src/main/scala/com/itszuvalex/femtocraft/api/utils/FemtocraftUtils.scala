@@ -62,7 +62,7 @@ object FemtocraftUtils {
    */
   def getLocalPlayer(username: String): EntityPlayer = Minecraft.getMinecraft.theWorld.getPlayerEntityByName(username)
 
-  def getServerPlayer(username: String): EntityPlayerMP = MinecraftServer.getServer.getConfigurationManager.func_152612_a(username)
+//  def getServerPlayer(username: String): EntityPlayerMP = MinecraftServer.getServer.getConfigurationManager.func_152612_a(username)
 
   def getServerPlayer(uuid: UUID): EntityPlayerMP = MinecraftServer.getServer.getConfigurationManager.playerEntityList.collectFirst { case player: EntityPlayerMP if player.getUniqueID.equals(uuid) => player}.orNull
 

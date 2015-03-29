@@ -20,18 +20,29 @@
  */
 package com.itszuvalex.femtocraft.managers.research
 
-import com.itszuvalex.femtocraft.api.core.ISaveable
+import com.itszuvalex.femtocraft.api.core.{ISaveable, XMLSaveable}
 import com.itszuvalex.femtocraft.api.managers.research.IResearchStatus
 import com.itszuvalex.femtocraft.managers.research.ResearchStatus._
 import net.minecraft.nbt.NBTTagCompound
 
+import scala.xml.{Attribute, Node, Null, Text}
+
 object ResearchStatus {
+  val XMLTag = "Status"
   private val techKey     = "tech"
   private val researchKey = "researched"
+
+  def apply(node: Node) = fromNode(node)
+
+  def fromNode(node: Node) = {
+    val ret = new ResearchStatus()
+    ret.loadFromNode(node)
+    ret
+  }
 }
 
-class ResearchStatus(var tech: String, var researched: Boolean) extends IResearchStatus with ISaveable {
-  
+class ResearchStatus(var tech: String, var researched: Boolean) extends IResearchStatus with ISaveable with XMLSaveable {
+
   def this(name: String) = this(name, false)
 
   override def getTech = ManagerResearch.getTechnology(tech)
@@ -44,11 +55,18 @@ class ResearchStatus(var tech: String, var researched: Boolean) extends IResearc
     compound.setString(techKey, tech)
     compound.setBoolean(researchKey, researched)
   }
-  
+
   override def loadFromNBT(compound: NBTTagCompound) {
     tech = compound.getString(techKey)
     researched = compound.getBoolean(researchKey)
   }
-  
+
   private def this() = this(null)
+
+  override def loadFromNode(node: Node): Unit = {
+    tech = node \@ techKey
+    researched = (node \@ researchKey).toBoolean
+  }
+
+  override def saveAsNode: Node = <xml/>.copy(label = ResearchStatus.XMLTag) % Attribute(None, techKey, Text(tech), Null) % Attribute(None, researchKey, Text(researched.toString), Null)
 }

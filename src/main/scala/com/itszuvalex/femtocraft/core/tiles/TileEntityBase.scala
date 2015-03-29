@@ -94,12 +94,14 @@ class TileEntityBase extends TileEntity with DescriptionPacket {
   def getGuiID = -1
 
   def canPlayerUse(player: EntityPlayer): Boolean = {
-    player != null && (getOwner == null || (getOwner == player.getCommandSenderName) || Femtocraft.assistantManager.isPlayerAssistant(getOwner, player.getCommandSenderName) || (MinecraftServer.getServer != null && MinecraftServer.getServer.getConfigurationManager.func_152596_g(player.getGameProfile)) || player.capabilities.isCreativeMode)
+    player != null && (getOwnerUUID == null || (getOwnerUUID == player.getUniqueID.toString) || Femtocraft.assistantManager.isPlayerAssistant(getOwnerUUID, player.getUniqueID.toString) || (MinecraftServer.getServer != null && MinecraftServer.getServer.getConfigurationManager.func_152596_g(player.getGameProfile)) || player.capabilities.isCreativeMode)
   }
 
-  def getOwner = owner
+  def getOwnerUUID = owner
 
-  def setOwner(newOwner: String) = owner = newOwner
+  def getOwner = Femtocraft.uuidManager.getUsername(owner)
+
+  def setOwnerUUID(newOwner: String) = owner = newOwner
 
   @Deprecated def onInventoryChanged() = setModified()
 

@@ -60,7 +60,7 @@ object FemtocraftFileUtils {
   def autogenConfigPath = configPath + "autogen/"
 
   def configPath = if (FMLCommonHandler.instance.getEffectiveSide == Side.SERVER) {
-    MinecraftServer.getServer.getFile("/config/" + FemtocraftAPI.FemtocraftID + "/").getPath + "/"
+    MinecraftServer.getServer.getFile( MinecraftServer.getServer.getFolderName + "/config/" + FemtocraftAPI.FemtocraftID + "/").getPath + "/"
   } else {Minecraft.getMinecraft.mcDataDir + "/config/" + FemtocraftAPI.FemtocraftID + "/"}
 }
 

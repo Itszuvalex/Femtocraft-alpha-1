@@ -10,7 +10,7 @@ import scala.collection.mutable
  * Created by Christopher Harris (Itszuvalex) on 3/29/15.
  */
 object ManagerPlayerUUIDs {
-  var xml: XMLLoaderWriter = null
+  private var xml: XMLLoaderWriter = null
 
   def setFile(file: File): Unit = {
     xml = new XMLLoaderWriter(file)
@@ -18,12 +18,17 @@ object ManagerPlayerUUIDs {
   }
 
   val UUIDToUsername = new mutable.HashMap[String, String]()
+  val UsernameToUUID = new mutable.HashMap[String, String]()
 
-  def getUsername(string: String) = UUIDToUsername.get(string)
+
+  def getUsername(string: String) = UUIDToUsername.getOrElse(string, "")
+
+  def getUUID(string: String) = UsernameToUUID.getOrElse(string, "")
 
   def addMapping(uuid: String, username: String) = {
     if (UUIDToUsername.get(uuid).orNull != username) {
       UUIDToUsername(uuid) = username
+      UsernameToUUID(username) = uuid
       save()
     }
   }

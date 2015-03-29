@@ -104,7 +104,7 @@ import net.minecraftforge.common.util.ForgeDirection
     if (tr.techLevel.tier > getTechLevel.tier) {
       return false
     }
-    if (!Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner, tr.getTechnology)) {
+    if (!Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwnerUUID, tr.getTechnology)) {
       return false
     }
     if (inventory.getStackInSlot(inputSlot).stackSize < tr.input.stackSize) {

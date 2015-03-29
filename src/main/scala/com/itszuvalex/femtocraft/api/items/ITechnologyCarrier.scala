@@ -33,7 +33,7 @@ trait ITechnologyCarrier extends Item {
                                 par3EntityPlayer: EntityPlayer): ItemStack = {
     val rm = FemtocraftAPI.getResearchManager
     if (rm != null) {
-      val pr = rm.getPlayerResearch(par3EntityPlayer.getCommandSenderName)
+      val pr = rm.getPlayerResearch(par3EntityPlayer.getUniqueID.toString)
       val tech: String = getTechnology(par1ItemStack)
       if (!(tech == null || tech.isEmpty)) {
         if (!par2World.isRemote) {

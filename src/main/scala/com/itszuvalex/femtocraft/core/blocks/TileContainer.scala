@@ -22,12 +22,13 @@ package com.itszuvalex.femtocraft.core.blocks
 
 import java.util.Random
 
+import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.core.items.CoreItemBlock
 import com.itszuvalex.femtocraft.core.tiles.TileEntityBase
 import net.minecraft.block.material.Material
 import net.minecraft.block.{Block, BlockContainer}
 import net.minecraft.entity.item.EntityItem
-import net.minecraft.entity.player.{EntityPlayer, EntityPlayerMP}
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.{Entity, EntityLivingBase}
 import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.nbt.NBTTagCompound
@@ -75,7 +76,7 @@ class TileContainer(material: Material) extends BlockContainer(material) {
         if (base.canPlayerUse(par5EntityPlayer)) {
           return base.onSideActivate(par5EntityPlayer, par6)
         } else {
-          par5EntityPlayer.addChatMessage(new ChatComponentText(base.getOwner + " is the owner of this block."))
+          par5EntityPlayer.addChatMessage(new ChatComponentText(Femtocraft.uuidManager.getUsername(base.getOwnerUUID) + " is the owner of this block."))
           return true
         }
       case _                    =>
@@ -91,15 +92,15 @@ class TileContainer(material: Material) extends BlockContainer(material) {
           if (par5EntityLivingBase == null) {
             return
           }
-          if (par5EntityLivingBase.isInstanceOf[EntityPlayerMP]) {
+          if (par5EntityLivingBase.isInstanceOf[EntityPlayer]) {
             val item: Item = par6ItemStack.getItem
             item match {
               case block: CoreItemBlock if block.hasItemNBT =>
                 base.loadInfoFromItemNBT(par6ItemStack.stackTagCompound)
               case _                                        =>
             }
-            if (base.getOwner == null || base.getOwner.isEmpty) {
-              base.setOwner(par5EntityLivingBase.getCommandSenderName)
+            if (base.getOwnerUUID == null || base.getOwnerUUID.isEmpty) {
+              base.setOwnerUUID(par5EntityLivingBase.getUniqueID.toString)
             }
           }
         case _                    =>
@@ -114,7 +115,7 @@ class TileContainer(material: Material) extends BlockContainer(material) {
     te match {
       case base: TileEntityBase =>
         if (!base.canPlayerUse(player)) {
-          player.addChatMessage(new ChatComponentText(base.getOwner + " is the owner of this block."))
+          player.addChatMessage(new ChatComponentText(Femtocraft.uuidManager.getUsername(base.getOwnerUUID) + " is the owner of this block."))
           return false
         }
       case _                    =>

@@ -45,6 +45,7 @@ class FemtocraftEventHookContainer {
     if (event.world.isRemote) return
     Femtocraft.assistantManager.load(event.world)
     Femtocraft.uuidManager.setFile(new File(FemtocraftFileUtils.savePathFemtocraft(event.world), "UUIDMappings.xml"))
+    Femtocraft.researchManager.setLastWorld(event.world)
   }
 
   @SubscribeEvent def save(event: WorldEvent.Save) {
@@ -104,23 +105,23 @@ class FemtocraftEventHookContainer {
                                                      .componentTooltipsAreAdvanced || (ComponentRegistry
                                                                                        .componentTooltipsAreAdvanced && event
                                                                                                                         .showAdvancedItemTooltips))) {
-      val username = Minecraft.getMinecraft.thePlayer.getCommandSenderName
+      val uuid = Minecraft.getMinecraft.thePlayer.getUniqueID.toString
       Femtocraft.recipeManager.assemblyRecipes.getDecompositionCounts(event.itemStack) match {
         case (0, 0, 0, 0) =>
         case (molecules, atoms, particles, mass) =>
           if (Femtocraft
               .researchManager
-              .hasPlayerResearchedTechnology(username, ComponentRegistry.microComponentTooltipTechnology)) {
+              .hasPlayerResearchedTechnology(uuid, ComponentRegistry.microComponentTooltipTechnology)) {
             event.toolTip.add(FemtocraftUtils.blueify("Molecules: ") + FemtocraftUtils.formatIntegerToString(molecules))
           }
           if (Femtocraft
               .researchManager
-              .hasPlayerResearchedTechnology(username, ComponentRegistry.nanoComponentTooltipTechnology)) {
+              .hasPlayerResearchedTechnology(uuid, ComponentRegistry.nanoComponentTooltipTechnology)) {
             event.toolTip.add(FemtocraftUtils.greenify("Atoms: ") + FemtocraftUtils.formatIntegerToString(atoms))
           }
           if (Femtocraft
               .researchManager
-              .hasPlayerResearchedTechnology(username, ComponentRegistry.femtoComponentTooltipTechnology)) {
+              .hasPlayerResearchedTechnology(uuid, ComponentRegistry.femtoComponentTooltipTechnology)) {
             event
             .toolTip
             .add(FemtocraftUtils.orangeify("Particles: ") + FemtocraftUtils.formatIntegerToString(particles))

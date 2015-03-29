@@ -20,10 +20,10 @@
  */
 package com.itszuvalex.femtocraft.managers.research
 
-import java.io.{File, FilenameFilter}
+import java.io.File
 import java.util
+import java.util.UUID
 
-import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.core.Configurable
 import com.itszuvalex.femtocraft.api.events.EventTechnology
 import com.itszuvalex.femtocraft.api.managers.research.IResearchManager
@@ -33,20 +33,15 @@ import com.itszuvalex.femtocraft.configuration.{AutoGenConfig, TechnologyXMLLoad
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
 import com.itszuvalex.femtocraft.research.gui.graph.{TechNode, TechnologyGraph}
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.nbt.{NBTTagCompound, NBTTagList}
 import net.minecraft.world.World
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.player.PlayerEvent
-import org.apache.logging.log4j.Level
 
 import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
 import scala.collection.mutable
 
 @Configurable object ManagerResearch extends IResearchManager {
-  private val playerDataKey              = "playerData"
-  private val dataKey                    = "data"
-  private val userKey                    = "username"
   @Configurable(comment = "Set to true to have all technologies researched by default.")
   private val debug                      = false
   private val DIRECTORY                  = "Research"
@@ -61,7 +56,44 @@ import scala.collection.mutable
     registerTechnologies()
   }
 
+  def setLastWorld(world: World) = {
+    if (lastWorld == null || (lastWorld.getProviderName != world.getProviderName)) {
+      playerData.clear()
+      lastWorld = world
+    }
+  }
+
+  def playerSavePath(uuid: String, world: World): File = new File(FemtocraftFileUtils.savePathFemtocraft(world) +File.separatorChar + DIRECTORY, uuid + ".xml")
+
+  def playerSavePath(uuid: String): File = playerSavePath(uuid, lastWorld)
+
+  def playerSavePath(uuid: UUID, world: World): File = playerSavePath(uuid.toString, world)
+
+  def playerSavePath(uuid: UUID): File = playerSavePath(uuid.toString, lastWorld)
+
+  def playerSavePath(player: EntityPlayer, world: World): File = playerSavePath(player.getUniqueID, world)
+
+  def playerSavePath(player: EntityPlayer): File = playerSavePath(player.getUniqueID, lastWorld)
+
+  def onPlayerLogin(player: EntityPlayer): Unit = {
+    getOrMake(player.getUniqueID).sync()
+  }
+
+  private def getOrMake(uuid: String): PlayerResearch = {
+    playerData.getOrElseUpdate(uuid, {
+      val research = new PlayerResearch(uuid)
+      research.setFile(playerSavePath(uuid))
+      if (debug) addAllResearches(research)
+      else
+        research.discoverNewTechs(false)
+      research
+    })
+  }
+
+  private def getOrMake(uuid: UUID): PlayerResearch = getOrMake(uuid.toString)
+
   def onPlayerLoadFromFile(event: PlayerEvent.LoadFromFile): Unit = {
+
   }
 
   def onPlayerSaveToFile(event: PlayerEvent.SaveToFile): Unit = {
@@ -103,14 +135,14 @@ import scala.collection.mutable
 
   def getTechnology(name: String) = technologies.get(name).orNull
 
-  def addPlayerResearch(username: String): PlayerResearch = playerData.getOrElse(username, {
-    val r = new PlayerResearch(username)
+  def addPlayerResearch(uuid: String): PlayerResearch = playerData.getOrElse(uuid, {
+    val r = new PlayerResearch(uuid)
     if (debug) {
       addAllResearches(r)
     } else {
       r.discoverNewTechs(false)
     }
-    playerData.put(username, r)
+    playerData.put(uuid, r)
     r
   })
 
@@ -128,143 +160,32 @@ import scala.collection.mutable
     true
   }
 
-  override def getPlayerResearch(username: String): PlayerResearch = playerData.get(username).orNull
+  override def getPlayerResearch(uuid: String): PlayerResearch = playerData.get(uuid).orNull
 
-  override def getPlayerResearch(player: EntityPlayer): PlayerResearch = playerData.get(player.getCommandSenderName).orNull
+  override def getPlayerResearch(player: EntityPlayer): PlayerResearch = playerData.get(player.getUniqueID.toString).orNull
 
-  override def hasPlayerDiscoveredTechnology(username: String,
-                                             tech: ITechnology): Boolean = tech == null || hasPlayerDiscoveredTechnology(username,
+  override def hasPlayerDiscoveredTechnology(uuid: String,
+                                             tech: ITechnology): Boolean = tech == null || hasPlayerDiscoveredTechnology(uuid,
                                                                                                                          tech
                                                                                                                          .getName)
 
-  override def hasPlayerDiscoveredTechnology(username: String, tech: String): Boolean = {
-    val pr = playerData.get(username).orNull
+  override def hasPlayerDiscoveredTechnology(uuid: String, tech: String): Boolean = {
+    val pr = playerData.get(uuid).orNull
     pr != null && pr.hasDiscoveredTechnology(tech)
   }
 
-  override def hasPlayerResearchedTechnology(username: String,
-                                             tech: ITechnology): Boolean = tech == null || hasPlayerResearchedTechnology(username,
+  override def hasPlayerResearchedTechnology(uuid: String,
+                                             tech: ITechnology): Boolean = tech == null || hasPlayerResearchedTechnology(uuid,
                                                                                                                          tech
                                                                                                                          .getName)
 
-  override def hasPlayerResearchedTechnology(username: String, tech: String): Boolean = {
-    val pr = playerData.get(username).orNull
+  override def hasPlayerResearchedTechnology(uuid: String, tech: String): Boolean = {
+    val pr = playerData.get(uuid).orNull
     pr != null && pr.hasResearchedTechnology(tech)
   }
 
-  def saveToNBTTagCompound(compound: NBTTagCompound) {
-    val list: NBTTagList = new NBTTagList
-    playerData.values.foreach { status =>
-      val cs = new NBTTagCompound
-      cs.setString(userKey, status.username)
-      val data = new NBTTagCompound
-      status.saveToNBT(data)
-      cs.setTag(dataKey, data)
-      list.appendTag(cs)
-                              }
-    compound.setTag(playerDataKey, list)
-  }
-
-  def loadFromNBTTagCompound(compound: NBTTagCompound) {
-    val list = compound.getTagList(playerDataKey, 10)
-    for (i <- 0 until list.tagCount) {
-      val cs = list.getCompoundTagAt(i)
-      val username = cs.getString(userKey)
-      val data = cs.getCompoundTag(dataKey)
-      val status = new PlayerResearch(username)
-      status.loadFromNBT(data)
-      playerData.put(username, status)
-    }
-
-  }
-
-  def save: Boolean = if (lastWorld == null) false else save(lastWorld)
-
-  def save(world: World): Boolean = {
-    if (world.isRemote) return true
-    try {
-      val folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), DIRECTORY)
-      if (!folder.exists) {
-        folder.mkdirs
-      }
-      playerData.values.foreach { pdata =>
-        try {
-          val file: File = new File(folder, pdata.username + ".dat")
-          pdata.save(file)
-        }
-        catch {
-          case exception: Exception =>
-            Femtocraft
-            .log(Level.ERROR,
-                 "Failed to save data for player " + pdata.username + " in world - " + FemtocraftFileUtils
-                                                                                       .savePathFemtocraft(world) + ".")
-            exception.printStackTrace()
-        }
-                                }
-    }
-    catch {
-      case e: Exception =>
-        Femtocraft
-        .log(Level.ERROR,
-             "Failed to create folder " + FemtocraftFileUtils.savePathFemtocraft(world) + File
-                                                                                          .pathSeparator + DIRECTORY + ".")
-        e.printStackTrace()
-        return false
-    }
-    if (debugMessages) Femtocraft.log(Level.INFO, "Saving Research data for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
-    true
-  }
-
-  def load(world: World): Boolean = {
-    if (world.isRemote) return true
-    save
-    lastWorld = world
-    playerData.clear()
-    try {
-      val folder = new File(FemtocraftFileUtils.savePathFemtocraft(world), DIRECTORY)
-      if (!folder.exists) {
-        Femtocraft
-        .log(Level.WARN,
-             "No " + DIRECTORY + " folder found for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
-        return false
-      }
-      else {
-        if (debugMessages) Femtocraft.log(Level.INFO, "Loading Research data for world - " + FemtocraftFileUtils.savePathFemtocraft(world) + ".")
-      }
-      folder.listFiles(new FilenameFilter {
-        def accept(dir: File, name: String) = name.endsWith(".dat")
-      }).foreach { pdata =>
-        try {
-          val username = pdata.getName.substring(0, pdata.getName.length - 4)
-          val file = new PlayerResearch(username)
-          file.load(pdata)
-          playerData.put(username, file)
-        }
-        catch {
-          case e: Exception =>
-            Femtocraft
-            .log(Level.ERROR,
-                 "Failed to load data from file " + pdata.getName + " in world - " + FemtocraftFileUtils
-                                                                                     .savePathFemtocraft(world) + ".")
-            e.printStackTrace()
-        }
-                 }
-    }
-    catch {
-      case exception: Exception =>
-        Femtocraft
-        .log(Level.ERROR,
-             "Failed to load data from folder " + DIRECTORY + " in world - " + FemtocraftFileUtils
-                                                                               .savePathFemtocraft(world) + ".")
-        exception.printStackTrace()
-        return false
-    }
-    true
-  }
-
-  def syncResearch(rp: PlayerResearch) {
-    Femtocraft.log(Level.TRACE, "Syncing research for player: " + rp.username)
-    playerData.put(rp.username, rp)
+  def syncLocal(pr: PlayerResearch): Unit = {
+    playerData.put(pr.getUUID, pr)
   }
 
   def getNode(pr: ITechnology): TechNode = getNode(pr.getName)

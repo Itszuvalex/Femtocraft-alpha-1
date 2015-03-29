@@ -10,6 +10,8 @@ import scala.xml.{PrettyPrinter, XML}
 class XMLLoaderWriter(val file: File) {
   val initialized: Boolean = file.exists
   if (!initialized) {
+    file.getParentFile.mkdirs()
+    file.createNewFile()
     XML.save(file.getPath, <xml></xml>)
   }
   var xml = load()

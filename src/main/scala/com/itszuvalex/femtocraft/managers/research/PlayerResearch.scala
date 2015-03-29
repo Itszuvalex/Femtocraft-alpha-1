@@ -21,21 +21,23 @@
 package com.itszuvalex.femtocraft.managers.research
 
 
-import java.io.{File, FileInputStream, FileOutputStream}
+import java.io.File
 import java.util
+import java.util.UUID
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.core.ISaveable
 import com.itszuvalex.femtocraft.api.events.EventTechnology
+import com.itszuvalex.femtocraft.api.implicits.SugarImplicits._
 import com.itszuvalex.femtocraft.api.managers.research.{IPlayerResearch, IResearchStatus}
 import com.itszuvalex.femtocraft.api.research.ITechnology
 import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils
+import com.itszuvalex.femtocraft.configuration.XMLLoaderWriter
 import com.itszuvalex.femtocraft.managers.research.PlayerResearch._
 import com.itszuvalex.femtocraft.network.FemtocraftPacketHandler
 import com.itszuvalex.femtocraft.network.messages.MessageResearchPlayer
 import net.minecraft.entity.player.EntityPlayerMP
-import net.minecraft.nbt.{CompressedStreamTools, NBTTagCompound, NBTTagList}
-import net.minecraft.server.MinecraftServer
+import net.minecraft.nbt.{NBTTagCompound, NBTTagList}
 import net.minecraft.util.EnumChatFormatting
 import net.minecraftforge.common.MinecraftForge
 import org.apache.logging.log4j.Level
@@ -49,9 +51,14 @@ object PlayerResearch {
   private val dataKey     = "data"
 }
 
-class PlayerResearch(val username: String) extends IPlayerResearch with ISaveable {
-  private val techStatus     = new mutable.HashMap[String, ResearchStatus]
-  private var lastFile: File = null
+class PlayerResearch(private val uuid: String) extends IPlayerResearch with ISaveable {
+  private val techStatus           = new mutable.HashMap[String, ResearchStatus]
+  private var xml: XMLLoaderWriter = null
+
+  def setFile(file: File): Unit = {
+    xml = new XMLLoaderWriter(file)
+    load()
+  }
 
   /**
    * @param name  Name of researchTechnology to mark as researched
@@ -71,7 +78,7 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
     if (tech == null) {
       techStatus.put(name, new ResearchStatus(name, true))
       if (notify) {
-        val player = MinecraftServer.getServer.getConfigurationManager.func_152612_a(username)
+        val player = FemtocraftUtils.getServerPlayer(UUID.fromString(uuid))
         if (player != null) {
           val techno = Femtocraft.researchManager.getTechnology(name)
           if (techno != null) {
@@ -87,11 +94,11 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
       sync()
       return true
     }
-    val event = new EventTechnology.Researched(username, rtech)
+    val event = new EventTechnology.Researched(uuid, rtech)
     if (!MinecraftForge.EVENT_BUS.post(event)) {
       tech.researched = true
       if (notify) {
-        val player = MinecraftServer.getServer.getConfigurationManager.func_152612_a(username)
+        val player = FemtocraftUtils.getServerPlayer(UUID.fromString(uuid))
         if (player != null) {
           val techno = Femtocraft.researchManager.getTechnology(name)
           if (techno != null) {
@@ -118,56 +125,17 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
     case _ =>
              }
     true
-
-    //    for (t <- Femtocraft.researchManager.getTechnologies) {
-    //      if (t.getPrerequisites != null) {
-    //        val ts: ResearchStatus = techStatus.get(t.getName).orNull
-    //        if (ts != null && ts.researched) {
-    //          continue //todo: continue is not supported
-    //        }
-    //        var discovererPrereq: Boolean = false
-    //        var shouldDiscover: Boolean = true
-    //        for (st <- t.getPrerequisites) {
-    //          val pt: ITechnology = Femtocraft.researchManager.getTechnology(st)
-    //          if (pt eq discoverer || discoverer == null) {
-    //            discovererPrereq = true
-    //          }
-    //          if (pt == null) continue //todo: continue is not supported
-    //          val rts: ResearchStatus = techStatus.get(pt.getName)
-    //          if (rts == null) {
-    //            shouldDiscover = false
-    //            break //todo: break is not supported
-    //          }
-    //          if (!rts.researched) {
-    //            shouldDiscover = false
-    //            break //todo: break is not supported
-    //          }
-    //        }
-    //        if (shouldDiscover && discovererPrereq) {
-    //          discoverTechnology(t.getName)
-    //          if (notify) {
-    //            val player: EntityPlayerMP = MinecraftServer.getServer.getConfigurationManager.func_152612_a(username)
-    //            if (player != null) {
-    //              val techno: ITechnology = Femtocraft.researchManager.getTechnology(t.getName)
-    //              if (techno != null) {
-    //                FemtocraftUtils.sendMessageToPlayer(player, "New technology " + techno.getLevel.getTooltipEnum + t.getName + EnumChatFormatting.RESET + " discovered.")
-    //              }
-    //            }
-    //          }
-    //        }
-    //      }
-    //    }
   }
 
   override def discoverTechnology(name: String): Boolean = discoverTechnology(name, true)
 
   override def discoverTechnology(name: String, notify: Boolean): Boolean = {
     if (techStatus.containsKey(name)) return true
-    val event = new EventTechnology.Discovered(username, Femtocraft.researchManager.getTechnology(name))
+    val event = new EventTechnology.Discovered(uuid, Femtocraft.researchManager.getTechnology(name))
     if (!MinecraftForge.EVENT_BUS.post(event)) {
       techStatus.put(name, new ResearchStatus(name))
       if (notify) {
-        val player = MinecraftServer.getServer.getConfigurationManager.func_152612_a(username)
+        val player = FemtocraftUtils.getServerPlayer(UUID.fromString(uuid))
         if (player != null) {
           val techno = Femtocraft.researchManager.getTechnology(name)
           if (techno != null) {
@@ -185,12 +153,9 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
     false
   }
 
-  override def sync() {
-    val player = MinecraftServer.getServer.getConfigurationManager.func_152612_a(username)
-    if (player == null) {
-      return
-    }
-    sync(player)
+  override def sync() = {
+    val player = FemtocraftUtils.getServerPlayer(UUID.fromString(uuid))
+    player IfNotNull sync(player)
   }
 
   override def sync(player: EntityPlayerMP) {
@@ -236,7 +201,9 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
     compound.setTag(mapKey, list)
   }
 
-  override def loadFromNBT(compound: NBTTagCompound) {
+  override def loadFromNBT(compound: NBTTagCompound): Unit = {
+    techStatus.clear()
+
     val list = compound.getTagList(mapKey, 10)
     (0 until list.tagCount).map(list.getCompoundTagAt).foreach { cs =>
       val techname = cs.getString(techNameKey)
@@ -247,38 +214,33 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
                                                                }
   }
 
-  def save(): Unit = if (lastFile != null) save(lastFile)
-
-  def save(file: File): Unit = {
-    if (!file.exists) {
-      file.createNewFile
-    }
-    val fileoutputstream = new FileOutputStream(file)
-    val data = new NBTTagCompound
-    saveToNBT(data)
-    CompressedStreamTools.writeCompressed(data, fileoutputstream)
-    fileoutputstream.close()
-    Femtocraft.log(Level.TRACE, "Saving " + username + "'s research data to " + file.getPath + ".")
+  def save(): Unit = {
+    if (xml == null) return
+    xml.xml = <xml>
+      {for (techStatus <- techStatus) yield techStatus._2.saveAsNode}
+    </xml>
+    xml.save()
+    Femtocraft.log(Level.TRACE, "Saving " + uuid + "'s research data to " + xml.file.getPath + ".")
   }
 
-  def load(): Unit = if (lastFile != null) load(lastFile)
-
-  def load(file: File): Unit = {
-    save()
-    lastFile = file
-    val fileinputstream = new FileInputStream(file)
-    val data = CompressedStreamTools.readCompressed(fileinputstream)
-    loadFromNBT(data)
-    fileinputstream.close()
+  def load(): Unit = {
+    if (xml == null) return
+    techStatus.clear()
+    xml.load()
+    (xml.xml \ ResearchStatus.XMLTag).foreach(node => {
+      val status = ResearchStatus(node)
+      techStatus.put(status.getTechName, status)
+    })
     discoverNewTechs(false)
-    Femtocraft.log(Level.TRACE, "Loading " + username + "'s research data from " + file.getPath + ".")
+    sync()
+    Femtocraft.log(Level.TRACE, "Loading " + uuid + "'s research data from " + xml.file.getPath + ".")
   }
 
   /**
    *
    * @return Username of the player associated with this research.
    */
-  override def getUsername = username
+  override def getUsername = Femtocraft.uuidManager.getUsername(uuid)
 
   /**
    *
@@ -292,4 +254,10 @@ class PlayerResearch(val username: String) extends IPlayerResearch with ISaveabl
    * @return Returns the IResearchStatus struct from this object for the given technology.
    */
   override def getTechnology(name: String): ResearchStatus = techStatus.get(name).orNull
+
+  /**
+   *
+   * @return Return uuid of the player associated with this research.
+   */
+  override def getUUID: String = uuid
 }

@@ -15,20 +15,20 @@ import org.apache.logging.log4j.Level
  */
 class MessageResearchPlayer() extends IMessage with IMessageHandler[MessageResearchPlayer, IMessage] {
   private var researchData: NBTTagCompound = null
-  private var playerName  : String         = null
+  private var playerUUID  : String         = null
 
   def this(rp: PlayerResearch) {
     this()
     researchData = new NBTTagCompound
     rp.saveToNBT(researchData)
-    playerName = rp.username
+    playerUUID = rp.getUUID
   }
 
   def fromBytes(buf: ByteBuf) {
     val nlength = buf.readInt
     val name = new Array[Byte](nlength)
     buf.readBytes(name)
-    playerName = new String(name)
+    playerUUID = new String(name)
     val dlength = buf.readInt
     val data = new Array[Byte](dlength)
     buf.readBytes(data)
@@ -54,17 +54,17 @@ class MessageResearchPlayer() extends IMessage with IMessageHandler[MessageResea
         Femtocraft.log(Level.ERROR, "Error compressing " + " research data.  No data will be sent")
         return
     }
-    buf.writeInt(playerName.getBytes.length)
-    buf.writeBytes(playerName.getBytes)
+    buf.writeInt(playerUUID.getBytes.length)
+    buf.writeBytes(playerUUID.getBytes)
     buf.writeInt(rdata.length)
     buf.writeBytes(rdata)
   }
 
   def onMessage(message: MessageResearchPlayer, ctx: MessageContext): IMessage = {
-    if (message.playerName.equalsIgnoreCase(Minecraft.getMinecraft.thePlayer.getCommandSenderName)) {
-      val rp = new PlayerResearch(message.playerName)
+    if (message.playerUUID.equalsIgnoreCase(Minecraft.getMinecraft.thePlayer.getCommandSenderName)) {
+      val rp = new PlayerResearch(message.playerUUID)
       rp.loadFromNBT(message.researchData)
-      Femtocraft.researchManager.syncResearch(rp)
+      Femtocraft.researchManager.syncLocal(rp)
     }
     null
   }

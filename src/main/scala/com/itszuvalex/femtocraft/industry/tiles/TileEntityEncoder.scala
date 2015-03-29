@@ -115,7 +115,7 @@ object TileEntityEncoder {
     if (recipe == null) {
       return null
     }
-    val researched = Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner, recipe.tech)
+    val researched = Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwnerUUID, recipe.tech)
     if (researched) recipe else null
   }
 

@@ -157,7 +157,7 @@ object TileEntityBaseEntityMicroDeconstructor {
     val recipe = getAssemblerRecipe
     if (recipe == null) return null
     if (recipe.enumTechLevel.tier > getAssemblerTech.tier) return null
-    if (!Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner, recipe.tech)) return null
+    if (!Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwnerUUID, recipe.tech)) return null
     recipe
   }
 

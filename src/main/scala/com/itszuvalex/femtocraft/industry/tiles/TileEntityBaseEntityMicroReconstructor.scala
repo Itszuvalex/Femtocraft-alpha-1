@@ -147,7 +147,7 @@ object TileEntityBaseEntityMicroReconstructor {
       if (recipe == null) {
         return false
       }
-      if (!Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner, recipe.tech)) {
+      if (!Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwnerUUID, recipe.tech)) {
         return false
       }
       if (!hasItems(recipe.input)) {

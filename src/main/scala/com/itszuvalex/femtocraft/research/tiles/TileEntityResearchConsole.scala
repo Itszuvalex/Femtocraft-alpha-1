@@ -85,8 +85,8 @@ class TileEntityResearchConsole extends TileEntityBase with Inventory {
     val hadTech = displayTech != null
     displayTech = null
     Femtocraft.researchManager.getTechnologies.
-    filter(Femtocraft.researchManager.hasPlayerDiscoveredTechnology(getOwner, _)).
-    filterNot(Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner, _)).
+    filter(Femtocraft.researchManager.hasPlayerDiscoveredTechnology(getOwnerUUID, _)).
+    filterNot(Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwnerUUID, _)).
     filter(matchesTechnology).
     foreach { tech =>
       displayTech = tech.getName

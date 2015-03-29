@@ -24,6 +24,7 @@ package com.itszuvalex.femtocraft.research.gui;
 import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.api.core.Configurable;
 import com.itszuvalex.femtocraft.api.research.ITechnology;
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils;
 import com.itszuvalex.femtocraft.graph.IGraphNode;
 import com.itszuvalex.femtocraft.managers.research.PlayerResearch;
 import com.itszuvalex.femtocraft.managers.research.ResearchStatus;
@@ -33,7 +34,6 @@ import com.itszuvalex.femtocraft.research.gui.graph.DummyTechNode;
 import com.itszuvalex.femtocraft.research.gui.graph.TechNode;
 import com.itszuvalex.femtocraft.research.gui.technology.GuiTechnology;
 import com.itszuvalex.femtocraft.sound.FemtocraftSoundUtils;
-import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -112,9 +112,9 @@ public class GuiResearch extends GuiScreen {
      */
     private int isMouseButtonDown;
 
-    public GuiResearch(String username) {
-        this.username = username;
-        researchStatus = Femtocraft.researchManager().getPlayerResearch(username);
+    public GuiResearch(String uuid) {
+        this.username = uuid;
+        researchStatus = Femtocraft.researchManager().getPlayerResearch(uuid);
         short short1 = 141;
         short short2 = 141;
         double x =
@@ -419,19 +419,46 @@ public class GuiResearch extends GuiScreen {
 
         for (ITechnology tech : Femtocraft.researchManager()
                 .getTechnologies()) {
-            ResearchStatus rs = researchStatus
-                    .getTechnology(tech.getName());
-            if (rs == null) {
-                continue;
-            }
-            if (tech.getPrerequisites() != null) {
-                for (String cr : tech.getPrerequisites()) {
-                    TechNode node = Femtocraft.researchManager().getNode(tech);
+            if (researchStatus != null) {
+                ResearchStatus rs = researchStatus
+                        .getTechnology(tech.getName());
+                if (rs == null) {
+                    continue;
+                }
+                if (tech.getPrerequisites() != null) {
+                    for (String cr : tech.getPrerequisites()) {
+                        TechNode node = Femtocraft.researchManager().getNode(tech);
 
-                    for (IGraphNode parent : node.getParents()) {
-                        IGraphNode next = parent;
-                        IGraphNode prev = node;
-                        while (next instanceof DummyTechNode) {
+                        for (IGraphNode parent : node.getParents()) {
+                            IGraphNode next = parent;
+                            IGraphNode prev = node;
+                            while (next instanceof DummyTechNode) {
+                                k3 = prev.getDisplayX() * 24 - k + 11 + k1;
+                                j3 = prev.getDisplayY() * 24 - l + 11 + l1 - 11;
+                                j4 = next.getDisplayX() * 24 - k + 11 + k1;
+                                l3 = next.getDisplayY() * 24 - l + 11 + l1 + 11;
+                                boolean flag6 = !rs.researched();
+                                i4 = Math
+                                             .sin((double) (Minecraft.getSystemTime() % 600L)
+                                                  / 600.0D * Math.PI * 2.0D) > 0.6D ? 255
+                                        : 130;
+                                int color = tech.getLevel().getColor();
+                                if (flag6) {
+                                    color += (i4 << 24);
+                                } else {
+                                    color += (255 << 24);
+                                }
+
+                                // this.drawHorizontalLine(k3, j4, j3, color);
+                                // this.drawVerticalLine(j4, j3, l3, color);
+                                RenderUtils.drawLine(k3, j4, j3, l3, 1, color);
+                                RenderUtils.drawLine(j4, j4, l3 - 22, l3, 1, color);
+
+                                // Dummy nodes should only have 1 parent
+                                prev = next;
+                                next = next.getParents().get(0);
+                            }
+
                             k3 = prev.getDisplayX() * 24 - k + 11 + k1;
                             j3 = prev.getDisplayY() * 24 - l + 11 + l1 - 11;
                             j4 = next.getDisplayX() * 24 - k + 11 + k1;
@@ -451,32 +478,7 @@ public class GuiResearch extends GuiScreen {
                             // this.drawHorizontalLine(k3, j4, j3, color);
                             // this.drawVerticalLine(j4, j3, l3, color);
                             RenderUtils.drawLine(k3, j4, j3, l3, 1, color);
-                            RenderUtils.drawLine(j4, j4, l3 - 22, l3, 1, color);
-
-                            // Dummy nodes should only have 1 parent
-                            prev = next;
-                            next = next.getParents().get(0);
                         }
-
-                        k3 = prev.getDisplayX() * 24 - k + 11 + k1;
-                        j3 = prev.getDisplayY() * 24 - l + 11 + l1 - 11;
-                        j4 = next.getDisplayX() * 24 - k + 11 + k1;
-                        l3 = next.getDisplayY() * 24 - l + 11 + l1 + 11;
-                        boolean flag6 = !rs.researched();
-                        i4 = Math
-                                     .sin((double) (Minecraft.getSystemTime() % 600L)
-                                          / 600.0D * Math.PI * 2.0D) > 0.6D ? 255
-                                : 130;
-                        int color = tech.getLevel().getColor();
-                        if (flag6) {
-                            color += (i4 << 24);
-                        } else {
-                            color += (255 << 24);
-                        }
-
-                        // this.drawHorizontalLine(k3, j4, j3, color);
-                        // this.drawVerticalLine(j4, j3, l3, color);
-                        RenderUtils.drawLine(k3, j4, j3, l3, 1, color);
                     }
                 }
             }
@@ -493,91 +495,92 @@ public class GuiResearch extends GuiScreen {
 
         for (ITechnology tech : Femtocraft.researchManager()
                 .getTechnologies()) {
-            ResearchStatus ts = researchStatus
-                    .getTechnology(tech.getName());
-            if (ts == null) {
-                continue;
-            }
-            TechNode node = Femtocraft.researchManager().getNode(tech);
-            j4 = node.getDisplayX() * 24 - k;
-            l3 = node.getDisplayY() * 24 - l;
-
-            if (j4 >= -24 && l3 >= -24 && j4 <= 224 && l3 <= 155) {
-                float f2;
-
-                if (ts.researched()) {
-                    f2 = 1.0F;
-                    GL11.glColor4f(f2, f2, f2, 1.0F);
-                } else {
-                    f2 = Math.sin((double) (Minecraft.getSystemTime() % 600L)
-                                  / 600.0D * Math.PI * 2.0D) < 0.6D ? 0.6F : 0.8F;
-                    GL11.glColor4f(f2, f2, f2, 1.0F);
+            if (researchStatus != null) {
+                ResearchStatus ts = researchStatus
+                        .getTechnology(tech.getName());
+                if (ts == null) {
+                    continue;
                 }
-                // else {
-                // f2 = 0.3F;
-                // GL11.glColor4f(f2, f2, f2, 1.0F);
-                // }
+                TechNode node = Femtocraft.researchManager().getNode(tech);
+                j4 = node.getDisplayX() * 24 - k;
+                l3 = node.getDisplayY() * 24 - l;
 
-                Minecraft.getMinecraft().getTextureManager()
-                        .bindTexture(achievementTextures);
-                i5 = k1 + j4;
-                l4 = l1 + l3;
+                if (j4 >= -24 && l3 >= -24 && j4 <= 224 && l3 <= 155) {
+                    float f2;
 
-                GL11.glEnable(GL11.GL_BLEND);// Forge: Specifically enable blend because it is needed here. And we
-                // fix Generic RenderItem's leakage of it.
-                if (tech.isKeystone()) {
-                    this.drawTexturedModalRect(i5 - 2, l4 - 2, 26, 202, 26, 26);
-                } else {
-                    this.drawTexturedModalRect(i5 - 2, l4 - 2, 0, 202, 26, 26);
-                }
-                GL11.glDisable(GL11.GL_BLEND); //Forge: Cleanup states we set.
-                //
-                // if (!this.statFileWriter.canUnlockAchievement(achievement2))
-                // {
-                // float f3 = 0.1F;
-                // GL11.glColor4f(f3, f3, f3, 1.0F);
-                // renderitem.renderWithColor = false;
-                // }
+                    if (ts.researched()) {
+                        f2 = 1.0F;
+                        GL11.glColor4f(f2, f2, f2, 1.0F);
+                    } else {
+                        f2 = Math.sin((double) (Minecraft.getSystemTime() % 600L)
+                                      / 600.0D * Math.PI * 2.0D) < 0.6D ? 0.6F : 0.8F;
+                        GL11.glColor4f(f2, f2, f2, 1.0F);
+                    }
+                    // else {
+                    // f2 = 0.3F;
+                    // GL11.glColor4f(f2, f2, f2, 1.0F);
+                    // }
 
-                GL11.glDisable(GL11.GL_LIGHTING); //Forge: Make sure Lighting is disabled. Fixes MC-33065
-                GL11.glEnable(GL11.GL_CULL_FACE);
+                    Minecraft.getMinecraft().getTextureManager()
+                            .bindTexture(achievementTextures);
+                    i5 = k1 + j4;
+                    l4 = l1 + l3;
 
-                RenderHelper.enableGUIStandardItemLighting();
+                    GL11.glEnable(GL11.GL_BLEND);// Forge: Specifically enable blend because it is needed here. And we
+                    // fix Generic RenderItem's leakage of it.
+                    if (tech.isKeystone()) {
+                        this.drawTexturedModalRect(i5 - 2, l4 - 2, 26, 202, 26, 26);
+                    } else {
+                        this.drawTexturedModalRect(i5 - 2, l4 - 2, 0, 202, 26, 26);
+                    }
+                    GL11.glDisable(GL11.GL_BLEND); //Forge: Cleanup states we set.
+                    //
+                    // if (!this.statFileWriter.canUnlockAchievement(achievement2))
+                    // {
+                    // float f3 = 0.1F;
+                    // GL11.glColor4f(f3, f3, f3, 1.0F);
+                    // renderitem.renderWithColor = false;
+                    // }
+
+                    GL11.glDisable(GL11.GL_LIGHTING); //Forge: Make sure Lighting is disabled. Fixes MC-33065
+                    GL11.glEnable(GL11.GL_CULL_FACE);
+
+                    RenderHelper.enableGUIStandardItemLighting();
 //                GL11.glDisable(GL11.GL_LIGHTING);
 //                GL11.glBlendFunc(GL11.GL_DST_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 //                GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 //                GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 //                GL11.glEnable(GL11.GL_LIGHTING);
 //                GL11.glEnable(GL11.GL_CULL_FACE);
-                renderitem.renderItemAndEffectIntoGUI(
-                        Minecraft.getMinecraft().fontRenderer, Minecraft
-                                .getMinecraft().getTextureManager(),
-                        tech.getDisplayItem(), i5 + 3, l4 + 3
-                );
-                RenderHelper.disableStandardItemLighting();
+                    renderitem.renderItemAndEffectIntoGUI(
+                            Minecraft.getMinecraft().fontRenderer, Minecraft
+                                    .getMinecraft().getTextureManager(),
+                            tech.getDisplayItem(), i5 + 3, l4 + 3
+                    );
+                    RenderHelper.disableStandardItemLighting();
 //                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 //                GL11.glDisable(GL11.GL_LIGHTING);
 //                GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 
 
-                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-                GL11.glDisable(GL11.GL_LIGHTING);
+                    GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                    GL11.glDisable(GL11.GL_LIGHTING);
 
-                // if (!this.statFileWriter.canUnlockAchievement(achievement2))
-                // {
-                // renderitem.renderWithColor = true;
-                // }
+                    // if (!this.statFileWriter.canUnlockAchievement(achievement2))
+                    // {
+                    // renderitem.renderWithColor = true;
+                    // }
 
-                GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+                    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-                if (par1 >= k1 && par2 >= l1 && par1 < k1 + 224
-                    && par2 < l1 + 155 && par1 >= i5 && par1 <= i5 + 22
-                    && par2 >= l4 && par2 <= l4 + 22) {
-                    tooltipTech = tech;
+                    if (par1 >= k1 && par2 >= l1 && par1 < k1 + 224
+                        && par2 < l1 + 155 && par1 >= i5 && par1 <= i5 + 22
+                        && par2 >= l4 && par2 <= l4 + 22) {
+                        tooltipTech = tech;
+                    }
                 }
             }
         }
-
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glPopMatrix();
@@ -594,52 +597,52 @@ public class GuiResearch extends GuiScreen {
         super.drawScreen(par1, par2, par3);
 
         if (tooltipTech != null) {
+            if (researchStatus != null) {
+                ResearchStatus status = researchStatus
+                        .getTechnology(tooltipTech.getName());
+                String s = tooltipTech.getName();
+                String s1 = tooltipTech.getShortDescription();
+                j4 = par1 + 12;
+                l3 = par2 - 4;
 
-            ResearchStatus status = researchStatus
-                    .getTechnology(tooltipTech.getName());
-            String s = tooltipTech.getName();
-            String s1 = tooltipTech.getShortDescription();
-            j4 = par1 + 12;
-            l3 = par2 - 4;
+                i5 = Math.max(this.fontRendererObj.getStringWidth(s), 120);
+                l4 = this.fontRendererObj.splitStringWidth(s1, i5);
 
-            i5 = Math.max(this.fontRendererObj.getStringWidth(s), 120);
-            l4 = this.fontRendererObj.splitStringWidth(s1, i5);
+                if (status.researched()) {
+                    l4 += 12;
+                }
 
-            if (status.researched()) {
-                l4 += 12;
+                this.drawGradientRect(j4 - 3, l3 - 3, j4 + i5 + 3, l3 + l4 + 3
+                                                                   + 12, -1073741824, -1073741824);
+                this.fontRendererObj
+                        .drawSplitString(s1, j4, l3 + 12, i5, -6250336);
+
+                if (status.researched()) {
+                    this.fontRendererObj.drawStringWithShadow("Researched!", j4,
+                            l3 + l4 + 4, -7302913);
+                }
+
+                // Keep Commented
+
+                // else {
+                // i5 = Math.max(this.fontRenderer.getStringWidth(s), 120);
+                // String s2 = I18n.getStringParams("achievement.requires",
+                // new Object[] { I18n
+                // .getString(tooltipTech.parentAchievement
+                // .getName()) });
+                // i4 = this.fontRenderer.splitStringWidth(s2, i5);
+                // this.drawGradientRect(j4 - 3, l3 - 3, j4 + i5 + 3, l3 + i4 + 12
+                // + 3, -1073741824, -1073741824);
+                // this.fontRenderer
+                // .drawSplitString(s2, j4, l3 + 12, i5, -9416624);
+                // }
+
+                this.fontRendererObj.drawStringWithShadow(s, j4, l3,
+                        status.researched() ? (tooltipTech.isKeystone() ? -128 : -1)
+                                : (tooltipTech.isKeystone() ? -8355776 : -8355712)
+                );
             }
-
-            this.drawGradientRect(j4 - 3, l3 - 3, j4 + i5 + 3, l3 + l4 + 3
-                                                               + 12, -1073741824, -1073741824);
-            this.fontRendererObj
-                    .drawSplitString(s1, j4, l3 + 12, i5, -6250336);
-
-            if (status.researched()) {
-                this.fontRendererObj.drawStringWithShadow("Researched!", j4,
-                        l3 + l4 + 4, -7302913);
-            }
-
-            // Keep Commented
-
-            // else {
-            // i5 = Math.max(this.fontRenderer.getStringWidth(s), 120);
-            // String s2 = I18n.getStringParams("achievement.requires",
-            // new Object[] { I18n
-            // .getString(tooltipTech.parentAchievement
-            // .getName()) });
-            // i4 = this.fontRenderer.splitStringWidth(s2, i5);
-            // this.drawGradientRect(j4 - 3, l3 - 3, j4 + i5 + 3, l3 + i4 + 12
-            // + 3, -1073741824, -1073741824);
-            // this.fontRenderer
-            // .drawSplitString(s2, j4, l3 + 12, i5, -9416624);
-            // }
-
-            this.fontRendererObj.drawStringWithShadow(s, j4, l3,
-                    status.researched() ? (tooltipTech.isKeystone() ? -128 : -1)
-                            : (tooltipTech.isKeystone() ? -8355776 : -8355712)
-            );
         }
-
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glEnable(GL11.GL_LIGHTING);
         RenderHelper.disableStandardItemLighting();

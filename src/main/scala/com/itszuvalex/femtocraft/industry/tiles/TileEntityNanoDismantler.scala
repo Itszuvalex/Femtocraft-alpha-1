@@ -47,11 +47,11 @@ object TileEntityNanoDismantler {
 
   override def getGuiID = FemtocraftGuiConstants.NanoDismantlerGuiID
 
-  protected override def getTicksToCook = if (Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner, TICKS_TO_COOK_UPGRADE)) TICKS_TO_COOK_POST else TICKS_TO_COOK_PRE
+  protected override def getTicksToCook = if (Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwnerUUID, TICKS_TO_COOK_UPGRADE)) TICKS_TO_COOK_POST else TICKS_TO_COOK_PRE
 
-  protected override def getPowerToCook = if (Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner, POWER_TO_COOK_UPGRADE)) POWER_TO_COOK_POST else POWER_TO_COOK_PRE
+  protected override def getPowerToCook = if (Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwnerUUID, POWER_TO_COOK_UPGRADE)) POWER_TO_COOK_POST else POWER_TO_COOK_PRE
 
   protected override def getAssemblerTech = ASSEMBLER_TECH_LEVEL
 
-  protected override def getMaxSimultaneousSmelt = if (Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwner, MAX_SMELT_UPGRADE)) MAX_SMELT_POST else MAX_SMELT_PRE
+  protected override def getMaxSimultaneousSmelt = if (Femtocraft.researchManager.hasPlayerResearchedTechnology(getOwnerUUID, MAX_SMELT_UPGRADE)) MAX_SMELT_POST else MAX_SMELT_PRE
 }

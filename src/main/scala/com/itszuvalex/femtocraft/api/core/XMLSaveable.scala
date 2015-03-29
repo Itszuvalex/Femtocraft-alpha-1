@@ -7,7 +7,7 @@ import scala.xml.Node
  */
 trait XMLSaveable {
 
-  def saveToNode(node: Node): Unit
+  def saveAsNode: Node
 
   def loadFromNode(node: Node): Unit
 
