@@ -24,6 +24,7 @@ import java.io.File
 import java.util
 import java.util.UUID
 
+import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.core.Configurable
 import com.itszuvalex.femtocraft.api.events.EventTechnology
 import com.itszuvalex.femtocraft.api.managers.research.IResearchManager
@@ -36,21 +37,25 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.world.World
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.player.PlayerEvent
+import org.apache.logging.log4j.Level
 
 import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
 import scala.collection.mutable
 
 @Configurable object ManagerResearch extends IResearchManager {
+
   @Configurable(comment = "Set to true to have all technologies researched by default.")
   private val debug                      = false
   private val DIRECTORY                  = "Research"
   private val technologies               = new mutable.HashMap[String, ITechnology]
-  private val playerData                 = new mutable.HashMap[String, PlayerResearch]
+  private val playerData                 = new mutable.HashMap[UUID, PlayerResearch]
   private var graph    : TechnologyGraph = null
   private var lastWorld: World           = null
   @Configurable
-  private val debugMessages              = false
+  val debugMessages            = false
+  @Configurable
+  val flushResearchOnWorldSave = false
 
   def init() {
     registerTechnologies()
@@ -58,12 +63,24 @@ import scala.collection.mutable
 
   def setLastWorld(world: World) = {
     if (lastWorld == null || (lastWorld.getProviderName != world.getProviderName)) {
-      playerData.clear()
+      flushPlayerFiles()
       lastWorld = world
     }
   }
 
-  def playerSavePath(uuid: String, world: World): File = new File(FemtocraftFileUtils.savePathFemtocraft(world) +File.separatorChar + DIRECTORY, uuid + ".xml")
+  def onWorldSave(world: World): Unit = {
+    if (flushResearchOnWorldSave && lastWorld != null && lastWorld.getProviderName == world.getProviderName) {
+      flushPlayerFiles()
+    }
+  }
+
+  def flushPlayerFiles(): Unit = {
+    if (debugMessages) Femtocraft.log(Level.INFO, "Flushing player research files to disc.")
+    playerData.values.foreach(_.save())
+    playerData.clear()
+  }
+
+  def playerSavePath(uuid: String, world: World): File = new File(FemtocraftFileUtils.savePathFemtocraft(world) + File.separatorChar + DIRECTORY, uuid + ".xml")
 
   def playerSavePath(uuid: String): File = playerSavePath(uuid, lastWorld)
 
@@ -79,7 +96,7 @@ import scala.collection.mutable
     getOrMake(player.getUniqueID).sync()
   }
 
-  private def getOrMake(uuid: String): PlayerResearch = {
+  private def getOrMake(uuid: UUID): PlayerResearch = {
     playerData.getOrElseUpdate(uuid, {
       val research = new PlayerResearch(uuid)
       research.setFile(playerSavePath(uuid))
@@ -89,8 +106,6 @@ import scala.collection.mutable
       research
     })
   }
-
-  private def getOrMake(uuid: UUID): PlayerResearch = getOrMake(uuid.toString)
 
   def onPlayerLoadFromFile(event: PlayerEvent.LoadFromFile): Unit = {
 
@@ -135,51 +150,40 @@ import scala.collection.mutable
 
   def getTechnology(name: String) = technologies.get(name).orNull
 
-  def addPlayerResearch(uuid: String): PlayerResearch = playerData.getOrElse(uuid, {
-    val r = new PlayerResearch(uuid)
-    if (debug) {
-      addAllResearches(r)
-    } else {
-      r.discoverNewTechs(false)
-    }
-    playerData.put(uuid, r)
-    r
-  })
-
 
   private def addAllResearches(research: PlayerResearch) {
     technologies.values.foreach { t => research.researchTechnology(t.getName, true)}
     research.save()
   }
 
-  override def removePlayerResearch(username: String): Boolean = {
-    playerData.remove(username) match {
+  override def removePlayerResearch(uuid: UUID): Boolean = {
+    playerData.remove(uuid) match {
       case Some(p) => p.save()
       case None =>
     }
     true
   }
 
-  override def getPlayerResearch(uuid: String): PlayerResearch = playerData.get(uuid).orNull
+  override def getPlayerResearch(uuid: UUID): PlayerResearch = playerData.get(uuid).orNull
 
-  override def getPlayerResearch(player: EntityPlayer): PlayerResearch = playerData.get(player.getUniqueID.toString).orNull
+  override def getPlayerResearch(player: EntityPlayer): PlayerResearch = playerData.get(player.getUniqueID).orNull
 
-  override def hasPlayerDiscoveredTechnology(uuid: String,
+  override def hasPlayerDiscoveredTechnology(uuid: UUID,
                                              tech: ITechnology): Boolean = tech == null || hasPlayerDiscoveredTechnology(uuid,
                                                                                                                          tech
                                                                                                                          .getName)
 
-  override def hasPlayerDiscoveredTechnology(uuid: String, tech: String): Boolean = {
+  override def hasPlayerDiscoveredTechnology(uuid: UUID, tech: String): Boolean = {
     val pr = playerData.get(uuid).orNull
     pr != null && pr.hasDiscoveredTechnology(tech)
   }
 
-  override def hasPlayerResearchedTechnology(uuid: String,
+  override def hasPlayerResearchedTechnology(uuid: UUID,
                                              tech: ITechnology): Boolean = tech == null || hasPlayerResearchedTechnology(uuid,
                                                                                                                          tech
                                                                                                                          .getName)
 
-  override def hasPlayerResearchedTechnology(uuid: String, tech: String): Boolean = {
+  override def hasPlayerResearchedTechnology(uuid: UUID, tech: String): Boolean = {
     val pr = playerData.get(uuid).orNull
     pr != null && pr.hasResearchedTechnology(tech)
   }

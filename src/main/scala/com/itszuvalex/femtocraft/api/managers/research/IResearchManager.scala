@@ -1,6 +1,7 @@
 package com.itszuvalex.femtocraft.api.managers.research
 
 import java.util
+import java.util.UUID
 
 import com.itszuvalex.femtocraft.api.research.ITechnology
 import net.minecraft.entity.player.EntityPlayer
@@ -40,50 +41,50 @@ trait IResearchManager {
 
   /**
    *
-   * @param username
+   * @param uuid
    * @param tech
    * @return True if the player file found from username has the technology discovered
    */
-  def hasPlayerDiscoveredTechnology(username: String, tech: ITechnology): Boolean
+  def hasPlayerDiscoveredTechnology(uuid: UUID, tech: ITechnology): Boolean
 
   /**
    *
-   * @param username
+   * @param uuid
    * @param tech
    * @return True if the player file found from username has the technology discovered
    */
-  def hasPlayerDiscoveredTechnology(username: String, tech: String): Boolean
+  def hasPlayerDiscoveredTechnology(uuid: UUID, tech: String): Boolean
 
   /**
    *
-   * @param username
+   * @param uuid
    * @param tech
    * @return True if the player file found from username has the technology researched
    */
-  def hasPlayerResearchedTechnology(username: String, tech: ITechnology): Boolean
+  def hasPlayerResearchedTechnology(uuid: UUID, tech: ITechnology): Boolean
 
   /**
    *
-   * @param username
+   * @param uuid
    * @param tech
    * @return True if the player file found from username has the technology researched
    */
-  def hasPlayerResearchedTechnology(username: String, tech: String): Boolean
+  def hasPlayerResearchedTechnology(uuid: UUID, tech: String): Boolean
 
   /**
    * Use at risk.  Does not delete the player file from disc, so it will be reloaded on next server startup.
    *
-   * @param username
+   * @param uuid
    * @return Removes all research for the player with the given name.
    */
-  def removePlayerResearch(username: String): Boolean
+  def removePlayerResearch(uuid: UUID): Boolean
 
   /**
    *
-   * @param username
+   * @param uuid
    * @return Get the accompanying playerResearch data structure for the player.
    */
-  def getPlayerResearch(username: String): IPlayerResearch
+  def getPlayerResearch(uuid: UUID): IPlayerResearch
 
   def getPlayerResearch(player: EntityPlayer): IPlayerResearch
 

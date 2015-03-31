@@ -23,6 +23,7 @@ package com.itszuvalex.femtocraft.api.utils
 import java.util
 import java.util.{Random, UUID}
 
+import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.implicits.IDImplicits._
 import com.itszuvalex.femtocraft.api.{EnumTechLevel, FemtocraftAPI}
 import net.minecraft.client.Minecraft
@@ -40,13 +41,14 @@ import scala.collection.JavaConversions._
 object FemtocraftUtils {
   /**
    *
-   * @param username
+   * @param uuid
    * @return True if any of the assistants of the given player are seen as online.
    */
-  def isPlayerAssistantsOnline(username: String) = FemtocraftAPI
-                                                   .getAssistantManager
-                                                   .getPlayerAssistants(username)
-                                                   .exists(isPlayerOnline)
+  def isPlayerAssistantsOnline(uuid: UUID) = FemtocraftAPI
+                                             .getAssistantManager
+                                             .getPlayerAssistants(uuid)
+                                             .map(Femtocraft.uuidManager.getUsername)
+                                             .exists(isPlayerOnline)
 
   /**
    *
@@ -62,7 +64,7 @@ object FemtocraftUtils {
    */
   def getLocalPlayer(username: String): EntityPlayer = Minecraft.getMinecraft.theWorld.getPlayerEntityByName(username)
 
-//  def getServerPlayer(username: String): EntityPlayerMP = MinecraftServer.getServer.getConfigurationManager.func_152612_a(username)
+  //  def getServerPlayer(username: String): EntityPlayerMP = MinecraftServer.getServer.getConfigurationManager.func_152612_a(username)
 
   def getServerPlayer(uuid: UUID): EntityPlayerMP = MinecraftServer.getServer.getConfigurationManager.playerEntityList.collectFirst { case player: EntityPlayerMP if player.getUniqueID.equals(uuid) => player}.orNull
 

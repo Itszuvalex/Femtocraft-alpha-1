@@ -51,7 +51,7 @@ object PlayerResearch {
   private val dataKey     = "data"
 }
 
-class PlayerResearch(private val uuid: String) extends IPlayerResearch with ISaveable {
+class PlayerResearch(private val uuid: UUID) extends IPlayerResearch with ISaveable {
   private val techStatus           = new mutable.HashMap[String, ResearchStatus]
   private var xml: XMLLoaderWriter = null
 
@@ -78,7 +78,7 @@ class PlayerResearch(private val uuid: String) extends IPlayerResearch with ISav
     if (tech == null) {
       techStatus.put(name, new ResearchStatus(name, true))
       if (notify) {
-        val player = FemtocraftUtils.getServerPlayer(UUID.fromString(uuid))
+        val player = FemtocraftUtils.getServerPlayer(uuid)
         if (player != null) {
           val techno = Femtocraft.researchManager.getTechnology(name)
           if (techno != null) {
@@ -98,7 +98,7 @@ class PlayerResearch(private val uuid: String) extends IPlayerResearch with ISav
     if (!MinecraftForge.EVENT_BUS.post(event)) {
       tech.researched = true
       if (notify) {
-        val player = FemtocraftUtils.getServerPlayer(UUID.fromString(uuid))
+        val player = FemtocraftUtils.getServerPlayer(uuid)
         if (player != null) {
           val techno = Femtocraft.researchManager.getTechnology(name)
           if (techno != null) {
@@ -135,7 +135,7 @@ class PlayerResearch(private val uuid: String) extends IPlayerResearch with ISav
     if (!MinecraftForge.EVENT_BUS.post(event)) {
       techStatus.put(name, new ResearchStatus(name))
       if (notify) {
-        val player = FemtocraftUtils.getServerPlayer(UUID.fromString(uuid))
+        val player = FemtocraftUtils.getServerPlayer(uuid)
         if (player != null) {
           val techno = Femtocraft.researchManager.getTechnology(name)
           if (techno != null) {
@@ -154,12 +154,12 @@ class PlayerResearch(private val uuid: String) extends IPlayerResearch with ISav
   }
 
   override def sync() = {
-    val player = FemtocraftUtils.getServerPlayer(UUID.fromString(uuid))
+    val player = FemtocraftUtils.getServerPlayer(uuid)
     player IfNotNull sync(player)
   }
 
   override def sync(player: EntityPlayerMP) {
-    Femtocraft.log(Level.TRACE, "Sending research data to player: " + player.getCommandSenderName)
+    if (ManagerResearch.debugMessages) Femtocraft.log(Level.INFO, "Sending research data to player: " + player.getCommandSenderName)
     FemtocraftPacketHandler.INSTANCE.sendTo(new MessageResearchPlayer(this), player)
   }
 
@@ -215,16 +215,23 @@ class PlayerResearch(private val uuid: String) extends IPlayerResearch with ISav
   }
 
   def save(): Unit = {
-    if (xml == null) return
+    if (xml == null) {
+      if (ManagerResearch.debugMessages) Femtocraft.log(Level.INFO, "No xml loader found when attempting to save.")
+      return
+    }
     xml.xml = <xml>
       {for (techStatus <- techStatus) yield techStatus._2.saveAsNode}
     </xml>
     xml.save()
-    Femtocraft.log(Level.TRACE, "Saving " + uuid + "'s research data to " + xml.file.getPath + ".")
+    if (ManagerResearch.debugMessages) Femtocraft.log(Level.INFO, "Saving " + uuid + "'s research data to " + xml.file.getPath + ".")
   }
 
   def load(): Unit = {
-    if (xml == null) return
+    if (xml == null) {
+      if (ManagerResearch.debugMessages) Femtocraft.log(Level.INFO, "No xml loader found when attempting to load.")
+      return
+    }
+    if (ManagerResearch.debugMessages) Femtocraft.log(Level.INFO, "Loading " + uuid + "'s research data from " + xml.file.getPath + ".")
     techStatus.clear()
     xml.load()
     (xml.xml \ ResearchStatus.XMLTag).foreach(node => {
@@ -233,7 +240,6 @@ class PlayerResearch(private val uuid: String) extends IPlayerResearch with ISav
     })
     discoverNewTechs(false)
     sync()
-    Femtocraft.log(Level.TRACE, "Loading " + uuid + "'s research data from " + xml.file.getPath + ".")
   }
 
   /**
@@ -259,5 +265,5 @@ class PlayerResearch(private val uuid: String) extends IPlayerResearch with ISav
    *
    * @return Return uuid of the player associated with this research.
    */
-  override def getUUID: String = uuid
+  override def getUUID: UUID = uuid
 }

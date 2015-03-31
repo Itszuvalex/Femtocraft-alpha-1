@@ -1,7 +1,8 @@
 package com.itszuvalex.femtocraft.managers.assistant
 
-import java.io.{FilenameFilter, File, FileInputStream, FileOutputStream}
+import java.io.{File, FileInputStream, FileOutputStream, FilenameFilter}
 import java.util
+import java.util.UUID
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.core.Configurable
@@ -17,25 +18,29 @@ import scala.collection.mutable
 @Configurable object ManagerAssistant extends IAssistantManager {
   private               val dir              = "Assistants"
   private               val assistKey        = "assistants"
-  private               val data             = new mutable.HashMap[String, mutable.HashMap[String, AssistantPermissions]]
+  private               val data             = new mutable.HashMap[UUID, mutable.HashMap[UUID, AssistantPermissions]]
   private               var lastWorld: World = null
   @Configurable private val debugMessages    = false
 
 
-  override def isPlayerAssistant(owner: String, user: String) = getPlayerAssistants(owner).contains(user)
+  override def isPlayerAssistant(owner: UUID, user: UUID) = getPlayerAssistants(owner).contains(user)
 
-  override def addAssistantTo(owner: String, user: String): Unit = {
+  override def addAssistantTo(owner: UUID, user: UUID): Unit = {
     getPlayerAssistantsPermissions(owner).put(user, new AssistantPermissions(user))
     save()
   }
 
-  override def removeAssistantFrom(owner: String, user: String): Unit = {
-    getPlayerAssistants(owner).remove(user)
+  override def removeAssistantFrom(owner: UUID, user: UUID): Unit = {
+    data.get(owner) match {
+      case None =>
+      case Some(a) =>
+        a -= user
+    }
     save()
   }
 
-  override def getPlayerAssistants(owner: String): util.Collection[String] =
-    data.getOrElseUpdate(owner, new mutable.HashMap[String, AssistantPermissions]).keySet
+  override def getPlayerAssistants(owner: UUID): util.Collection[UUID] =
+    data.getOrElseUpdate(owner, new mutable.HashMap[UUID, AssistantPermissions]).keySet
 
   def save(): Boolean = if (lastWorld == null) false else save(lastWorld)
 
@@ -116,7 +121,7 @@ import scala.collection.mutable
             val permTag = assistTag.getCompoundTagAt(j)
             val perm = new AssistantPermissions
             perm.loadFromNBT(permTag)
-            getPlayerAssistantsPermissions(username).put(perm.assistant, perm)
+            getPlayerAssistantsPermissions(UUID.fromString(username)).put(perm.assistant, perm)
           }
         }
         catch {
@@ -140,6 +145,6 @@ import scala.collection.mutable
     true
   }
 
-  def getPlayerAssistantsPermissions(owner: String) = data.getOrElseUpdate(owner, new
-      mutable.HashMap[String, AssistantPermissions])
+  def getPlayerAssistantsPermissions(owner: UUID) = data.getOrElseUpdate(owner, new
+      mutable.HashMap[UUID, AssistantPermissions])
 }

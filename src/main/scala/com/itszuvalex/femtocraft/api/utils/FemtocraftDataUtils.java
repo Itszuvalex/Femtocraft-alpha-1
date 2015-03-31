@@ -21,6 +21,7 @@
 
 package com.itszuvalex.femtocraft.api.utils;
 
+import com.itszuvalex.femtocraft.Femtocraft;
 import com.itszuvalex.femtocraft.api.FemtocraftAPI;
 import com.itszuvalex.femtocraft.api.core.ISaveable;
 import com.itszuvalex.femtocraft.api.core.Saveable;
@@ -38,6 +39,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.UUID;
 
 public class FemtocraftDataUtils {
     private static HashMap<Class<?>, SaveManager> managerMap = new HashMap<Class<?>, SaveManager>();
@@ -447,6 +449,42 @@ public class FemtocraftDataUtils {
                     return;
                 }
                 saveable.set(obj, compound.getString(anno.tag().isEmpty() ? saveable.getName() : anno.tag()));
+            }
+        });
+
+        // UUID
+        registerSaveManager(UUID.class, new SaveManager() {
+
+            @Override
+            public void saveToNBT(NBTTagCompound compound, Field saveable,
+                                  Object obj) throws IllegalArgumentException,
+                                                     IllegalAccessException {
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                UUID str = (UUID) saveable.get(obj);
+                if (str == null) {
+                    return;
+                }
+                compound.setString(anno.tag().isEmpty() ? saveable.getName() : anno.tag(), str.toString());
+            }
+
+            @Override
+            public void readFromNBT(NBTTagCompound compound, Field saveable,
+                                    Object obj) throws IllegalArgumentException,
+                                                       IllegalAccessException {
+                Saveable anno = saveable.getAnnotation(Saveable.class);
+                if (!compound.hasKey(anno.tag().isEmpty() ? saveable.getName() : anno.tag())) {
+                    saveable.set(obj, null);
+                    return;
+                }
+                String stored =compound.getString(anno.tag().isEmpty() ? saveable.getName() : anno.tag());
+                UUID id;
+                try {
+                    id = UUID.fromString(stored);
+                } catch (IllegalArgumentException e) {
+                    /*Try and get a match, if this was player username*/
+                    id = Femtocraft.uuidManager().getUUID(stored);
+                }
+                saveable.set(obj, id);
             }
         });
 

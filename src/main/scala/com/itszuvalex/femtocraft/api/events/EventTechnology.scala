@@ -1,5 +1,7 @@
 package com.itszuvalex.femtocraft.api.events
 
+import java.util.UUID
+
 import com.itszuvalex.femtocraft.api.research.ITechnology
 import cpw.mods.fml.common.eventhandler.{Cancelable, Event}
 
@@ -21,21 +23,21 @@ object EventTechnology {
    * Posted whenever a player will discover a new technology.  Cancel to prevent him discovering it.  This will prevent it from
    * being put in the player's IResearchPlayer store.
    *
-   * @param username getCommandSenderName of the player who will discover this technology.
+   * @param uuid getCommandSenderName of the player who will discover this technology.
    * @param tech Technology that the player will discover.
    */
   @Cancelable
-  class Discovered(@BeanProperty val username: String, tech: ITechnology) extends EventTechnology(tech)
+  class Discovered(@BeanProperty val uuid: UUID, tech: ITechnology) extends EventTechnology(tech)
 
   /**
    * Posted whenever a player will research a new technology.  Cancel to prevent him from researching it.  In most cases, the
    * research will have first already been discovered by the player.
    *
-   * @param username getCommandSenderName of the player who will research this technology.
+   * @param uuid getCommandSenderName of the player who will research this technology.
    * @param tech Technology that the player will research.
    */
   @Cancelable
-  class Researched(@BeanProperty val username: String, tech: ITechnology) extends EventTechnology(tech)
+  class Researched(@BeanProperty val uuid: UUID, tech: ITechnology) extends EventTechnology(tech)
 
 }
 

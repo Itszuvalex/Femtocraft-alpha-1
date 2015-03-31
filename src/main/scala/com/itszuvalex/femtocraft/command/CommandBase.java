@@ -21,10 +21,14 @@
 
 package com.itszuvalex.femtocraft.command;
 
+import com.itszuvalex.femtocraft.Femtocraft;
+import com.itszuvalex.femtocraft.api.utils.FemtocraftUtils;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumChatFormatting;
+import org.apache.logging.log4j.Level;
 
 import java.util.*;
 
@@ -63,22 +67,30 @@ public abstract class CommandBase implements ICommand {
     }
 
     @Override
-    public String getCommandUsage(ICommandSender icommandsender) {
+    public String getCommandUsage(ICommandSender sender) {
+        if (!(sender instanceof EntityPlayer)) return "";
+        EntityPlayer player = (EntityPlayer) sender;
         StringBuilder output = new StringBuilder();
         output.append(EnumChatFormatting.YELLOW);
         output.append(getCommandName());
-        output.append(System.lineSeparator());
-        output.append(EnumChatFormatting.BOLD).append(
-                "aliases").append(System.lineSeparator()).append(EnumChatFormatting.RESET).append
-                (EnumChatFormatting.YELLOW);
+        FemtocraftUtils.sendMessageToPlayer(player, output.toString());
+        output.setLength(0);
+
+        output.append(EnumChatFormatting.BOLD).append("aliases").append(EnumChatFormatting.RESET);
+        FemtocraftUtils.sendMessageToPlayer(player, output.toString());
+        output.setLength(0);
+
         for (String alias : aliases) {
-            output.append(alias);
-            output.append(System.lineSeparator());
+            FemtocraftUtils.sendMessageToPlayer(player, EnumChatFormatting.YELLOW + alias);
         }
-        output.append(EnumChatFormatting.BOLD).append(
-                "subcommands").append(System.lineSeparator()).append(EnumChatFormatting.RESET).append
-                (EnumChatFormatting.YELLOW);
+
+
+        output.append(EnumChatFormatting.BOLD).append("subcommands").append(EnumChatFormatting.RESET);
+        FemtocraftUtils.sendMessageToPlayer(player, output.toString());
+        output.setLength(0);
+
         for (String subcommand : subcmds.keySet()) {
+            output.append(EnumChatFormatting.YELLOW);
             ICommand com = getSubCommand(subcommand);
             output.append(EnumChatFormatting.RED).append(subcommand).append(EnumChatFormatting.YELLOW);
             for (Object alias : com.getCommandAliases()) {
@@ -89,11 +101,10 @@ public abstract class CommandBase implements ICommand {
                 output.append(EnumChatFormatting.WHITE).append(" - ").append(((CommandBase) com).getDescription())
                         .append(EnumChatFormatting.YELLOW);
             }
-            output.append(System.lineSeparator());
+            FemtocraftUtils.sendMessageToPlayer(player, output.toString());
+            output.setLength(0);
         }
-        output.deleteCharAt(output.length() - 1);
-        output.append(EnumChatFormatting.RESET);
-        return output.toString();
+        return "";
     }
 
     @Override
@@ -103,6 +114,10 @@ public abstract class CommandBase implements ICommand {
 
     @Override
     public void processCommand(ICommandSender icommandsender, String[] astring) {
+        if (icommandsender.getEntityWorld().isRemote) {
+            Femtocraft.log(Level.WARN, "Not processing commands Client-side");
+            return;
+        }
         if (astring.length > 0) {
             ICommand subcommand = getSubCommand(astring[0]);
             if (subcommand != null) {

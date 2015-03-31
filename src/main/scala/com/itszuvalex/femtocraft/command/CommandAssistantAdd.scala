@@ -47,19 +47,26 @@ class CommandAssistantAdd extends CommandBase("add", null) {
   override def getDescription = "Add a player as an assistant"
 
   override def processCommand(icommandsender: ICommandSender, astring: Array[String]) {
-    if (icommandsender.isInstanceOf[EntityPlayer]) {
-      if (astring.length != 1) {
-        throw new WrongUsageException(getCommandUsage(icommandsender))
-      }
-      val username = icommandsender.getCommandSenderName
-      Femtocraft.assistantManager.addAssistantTo(username, astring(0))
-      if (Femtocraft.assistantManager.isPlayerAssistant(username, astring(0))) {
-        FemtocraftUtils.sendMessageToPlayer(username, astring(0) + " successfully added as assistant!")
-        FemtocraftUtils.sendMessageToPlayer(astring(0), username + " just added you as an assistant!")
-      } else {
-        FemtocraftUtils
-        .sendMessageToPlayer(username, EnumChatFormatting.RED + "Error adding " + astring(0) + " as assistant!")
-      }
+    icommandsender match {
+      case player: EntityPlayer =>
+        if (astring.length != 1) {
+          throw new WrongUsageException(getCommandUsage(icommandsender))
+        }
+        val uuid = player.getUniqueID
+        val UUID = Femtocraft.uuidManager.getUUID(astring(0))
+        if (UUID == null) {
+          FemtocraftUtils.sendMessageToPlayer(player, "Player: " + astring(0) + " not found.")
+          return
+        }
+        Femtocraft.assistantManager.addAssistantTo(uuid, UUID)
+        if (Femtocraft.assistantManager.isPlayerAssistant(uuid, UUID)) {
+          FemtocraftUtils.sendMessageToPlayer(player, astring(0) + " successfully added as assistant!")
+          FemtocraftUtils.sendMessageToPlayer(astring(0), player.getCommandSenderName + " just added you as an assistant!")
+        } else {
+          FemtocraftUtils
+          .sendMessageToPlayer(player, EnumChatFormatting.RED + "Error adding " + astring(0) + " as assistant!")
+        }
+      case _ =>
     }
   }
 

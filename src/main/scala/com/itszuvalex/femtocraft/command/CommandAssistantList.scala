@@ -27,7 +27,6 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.EnumChatFormatting
 
 import scala.collection.JavaConversions._
-import scala.collection.mutable
 
 /**
  * Created by Christopher Harris (Itszuvalex) on 8/10/14.
@@ -38,21 +37,19 @@ class CommandAssistantList extends CommandBase("list", null) {
 
   override def processCommand(icommandsender: ICommandSender, astring: Array[String]) {
     icommandsender match {
-      case assistant1: EntityPlayer =>
-        val username = icommandsender.getCommandSenderName
-        val str = new mutable.StringBuilder(EnumChatFormatting.YELLOW + "Assistants:\n")
-        val assist = Femtocraft.assistantManager.getPlayerAssistants(username)
+      case player: EntityPlayer =>
+        val uuid = player.getUniqueID
+        FemtocraftUtils.sendMessageToPlayer(player, EnumChatFormatting.YELLOW + "Assistants:")
+        val assist = Femtocraft.assistantManager.getPlayerAssistants(uuid)
         if (assist == null || assist.isEmpty) {
-          str.append("None.")
+          FemtocraftUtils.sendMessageToPlayer(player, "None.")
         }
         else {
           for (assistant <- assist) {
-            str.append(assistant).append("\n")
+            FemtocraftUtils.sendMessageToPlayer(player, Femtocraft.uuidManager.getUsername(assistant))
           }
         }
-        str.append(EnumChatFormatting.RESET)
-        FemtocraftUtils.sendMessageToPlayer(assistant1, str.toString())
-      case _                        =>
+      case _ =>
     }
   }
 }

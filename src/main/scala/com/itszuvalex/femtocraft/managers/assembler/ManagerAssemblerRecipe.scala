@@ -22,6 +22,7 @@ package com.itszuvalex.femtocraft.managers.assembler
 
 import java.io.File
 import java.util
+import java.util.UUID
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.EnumTechLevel
@@ -166,7 +167,7 @@ object ManagerAssemblerRecipe extends IAssemblerRecipeManager {
                                                                    .tech
                                                                    .equalsIgnoreCase(techName))
 
-  override def hasResearchedRecipe(recipe: AssemblerRecipe, uuid: String) = Femtocraft
+  override def hasResearchedRecipe(recipe: AssemblerRecipe, uuid: UUID) = Femtocraft
                                                                                 .researchManager
                                                                                 .hasPlayerResearchedTechnology(uuid,
                                                                                                                recipe.tech)

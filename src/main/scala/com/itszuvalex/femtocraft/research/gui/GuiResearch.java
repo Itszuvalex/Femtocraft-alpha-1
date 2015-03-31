@@ -51,6 +51,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import java.util.Random;
+import java.util.UUID;
 
 @SideOnly(Side.CLIENT)
 public class GuiResearch extends GuiScreen {
@@ -79,7 +80,7 @@ public class GuiResearch extends GuiScreen {
      * The right y coordinate of the achievement map
      */
     private static int guiMapRight = maxDisplayRow * 24 + 112;
-    private final String username;
+    private final UUID uuid;
     private final PlayerResearch researchStatus;
     protected int researchPaneWidth = 256;
     protected int researchPaneHeight = 202;
@@ -112,8 +113,8 @@ public class GuiResearch extends GuiScreen {
      */
     private int isMouseButtonDown;
 
-    public GuiResearch(String uuid) {
-        this.username = uuid;
+    public GuiResearch(UUID uuid) {
+        this.uuid = uuid;
         researchStatus = Femtocraft.researchManager().getPlayerResearch(uuid);
         short short1 = 141;
         short short2 = 141;

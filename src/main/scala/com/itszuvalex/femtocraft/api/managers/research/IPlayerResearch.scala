@@ -1,6 +1,7 @@
 package com.itszuvalex.femtocraft.api.managers.research
 
 import java.util
+import java.util.UUID
 
 import com.itszuvalex.femtocraft.api.core.ISaveable
 import com.itszuvalex.femtocraft.api.research.ITechnology
@@ -20,7 +21,7 @@ trait IPlayerResearch extends ISaveable {
    *
    * @return Return uuid of the player associated with this research.
    */
-  def getUUID: String
+  def getUUID: UUID
 
   /**
    *

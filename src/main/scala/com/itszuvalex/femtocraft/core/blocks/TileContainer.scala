@@ -99,7 +99,7 @@ class TileContainer(material: Material) extends BlockContainer(material) {
                 base.loadInfoFromItemNBT(par6ItemStack.stackTagCompound)
               case _                                        =>
             }
-            if (base.getOwnerUUID == null || base.getOwnerUUID.isEmpty) {
+            if (base.getOwnerUUID == null || base.getOwnerUUID == null) {
               base.setOwnerUUID(par5EntityLivingBase.getUniqueID.toString)
             }
           }

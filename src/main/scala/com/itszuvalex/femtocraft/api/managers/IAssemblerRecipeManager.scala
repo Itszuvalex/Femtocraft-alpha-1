@@ -1,6 +1,7 @@
 package com.itszuvalex.femtocraft.api.managers
 
 import java.util
+import java.util.UUID
 
 import com.itszuvalex.femtocraft.api.EnumTechLevel
 import com.itszuvalex.femtocraft.api.industry.AssemblerRecipe
@@ -142,9 +143,9 @@ trait IAssemblerRecipeManager {
   /**
    *
    * @param recipe
-   * @param username
+   * @param uuid
    * @return Helper function to compare the given recipe's technology
    *         to the player's research status.
    */
-  def hasResearchedRecipe(recipe: AssemblerRecipe, username: String): Boolean
+  def hasResearchedRecipe(recipe: AssemblerRecipe, uuid: UUID): Boolean
 }

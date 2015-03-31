@@ -10,7 +10,7 @@ class FemtocraftPlayerTracker {
 
   @SubscribeEvent
   def onPlayerLogin(event: PlayerLoggedInEvent) = {
-    Femtocraft.uuidManager.addMapping(event.player.getUniqueID.toString, event.player.getCommandSenderName)
+    Femtocraft.uuidManager.addMapping(event.player.getUniqueID, event.player.getCommandSenderName)
     Femtocraft.researchManager.onPlayerLogin(event.player)
   }
 

@@ -37,10 +37,12 @@ import scala.collection.JavaConversions._
 class CommandAssistantRemove extends CommandBase("remove", null) {
 
   override def addTabCompletionOptions(icommandsender: ICommandSender, astring: Array[String]): util.List[_] = {
-    if (icommandsender.isInstanceOf[EntityPlayer]) {
-      val assistants = Femtocraft.assistantManager.getPlayerAssistants(icommandsender.getCommandSenderName)
-      if (assistants == null) return new util.ArrayList[String]()
-      return assistants.toList
+    icommandsender match {
+      case player: EntityPlayer =>
+        val assistants = Femtocraft.assistantManager.getPlayerAssistants(player.getUniqueID)
+        if (assistants == null) return new util.ArrayList[String]()
+        return assistants.toList.map(Femtocraft.uuidManager.getUsername)
+      case _ =>
     }
     MinecraftServer.getServer.getAllUsernames.toList
   }
@@ -48,19 +50,26 @@ class CommandAssistantRemove extends CommandBase("remove", null) {
   override def getDescription = "Remove a player as an assistant."
 
   override def processCommand(icommandsender: ICommandSender, astring: Array[String]) {
-    if (icommandsender.isInstanceOf[EntityPlayer]) {
-      if (astring.length != 1) {
-        throw new WrongUsageException(getCommandUsage(icommandsender))
-      }
-      val username = icommandsender.getCommandSenderName
-      Femtocraft.assistantManager.removeAssistantFrom(username, astring(0))
-      if (!Femtocraft.assistantManager.isPlayerAssistant(username, astring(0))) {
-        FemtocraftUtils.sendMessageToPlayer(username, astring(0) + " successfully removed as assistant!")
-        FemtocraftUtils.sendMessageToPlayer(astring(0), username + " just removed you as his assistant!")
-      } else {
-        FemtocraftUtils
-        .sendMessageToPlayer(username, EnumChatFormatting.RED + "Error removing " + astring(0) + " as assistant!")
-      }
+    icommandsender match {
+      case player: EntityPlayer =>
+        if (astring.length != 1) {
+          throw new WrongUsageException(getCommandUsage(icommandsender))
+        }
+        val uuid = player.getUniqueID
+        val UUID = Femtocraft.uuidManager.getUUID(astring(0))
+        if (UUID == null) {
+          FemtocraftUtils.sendMessageToPlayer(player, "Player: " + astring(0) + " not found.")
+          return
+        }
+        Femtocraft.assistantManager.removeAssistantFrom(uuid, UUID)
+        if (!Femtocraft.assistantManager.isPlayerAssistant(uuid, UUID)) {
+          FemtocraftUtils.sendMessageToPlayer(player, astring(0) + " successfully removed as assistant!")
+          FemtocraftUtils.sendMessageToPlayer(astring(0), player.getCommandSenderName + " just removed you as his assistant!")
+        } else {
+          FemtocraftUtils
+          .sendMessageToPlayer(player, EnumChatFormatting.RED + "Error removing " + astring(0) + " as assistant!")
+        }
+      case _ =>
     }
   }
 

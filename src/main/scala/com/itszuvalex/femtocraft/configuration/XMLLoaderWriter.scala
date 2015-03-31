@@ -9,17 +9,18 @@ import scala.xml.{PrettyPrinter, XML}
  */
 class XMLLoaderWriter(val file: File) {
   val initialized: Boolean = file.exists
+  var xml                  = <xml></xml>
   if (!initialized) {
     file.getParentFile.mkdirs()
     file.createNewFile()
-    XML.save(file.getPath, <xml></xml>)
+    save()
   }
-  var xml = load()
+  else load()
 
   def save(): Unit = {
     val pp = new PrettyPrinter(80, 2)
     XML.save(file.getPath, XML.loadString(pp.format(xml)), "UTF-8", true, null)
   }
 
-  def load() = XML.loadFile(file)
+  def load() = xml = XML.loadFile(file)
 }

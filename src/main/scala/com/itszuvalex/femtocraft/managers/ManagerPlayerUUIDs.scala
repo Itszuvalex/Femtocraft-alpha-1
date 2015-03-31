@@ -1,6 +1,7 @@
 package com.itszuvalex.femtocraft.managers
 
 import java.io.File
+import java.util.UUID
 
 import com.itszuvalex.femtocraft.configuration.XMLLoaderWriter
 
@@ -17,15 +18,15 @@ object ManagerPlayerUUIDs {
     load()
   }
 
-  val UUIDToUsername = new mutable.HashMap[String, String]()
-  val UsernameToUUID = new mutable.HashMap[String, String]()
+  val UUIDToUsername = new mutable.HashMap[UUID, String]()
+  val UsernameToUUID = new mutable.HashMap[String, UUID]()
 
 
-  def getUsername(string: String) = UUIDToUsername.getOrElse(string, "")
+  def getUsername(uuid: UUID) = UUIDToUsername.getOrElse(uuid, "")
 
-  def getUUID(string: String) = UsernameToUUID.getOrElse(string, "")
+  def getUUID(string: String) = UsernameToUUID.getOrElse(string, null)
 
-  def addMapping(uuid: String, username: String) = {
+  def addMapping(uuid: UUID, username: String) = {
     if (UUIDToUsername.get(uuid).orNull != username) {
       UUIDToUsername(uuid) = username
       UsernameToUUID(username) = uuid
@@ -35,7 +36,7 @@ object ManagerPlayerUUIDs {
 
   def save() = {
     xml.xml = <xml>
-      {for (mapping <- UUIDToUsername) yield <Mapping uuid={mapping._1} username={mapping._2}/>}
+      {for (mapping <- UUIDToUsername) yield <Mapping uuid={mapping._1.toString} username={mapping._2}/>}
     </xml>
     xml.save()
   }
@@ -43,7 +44,7 @@ object ManagerPlayerUUIDs {
   def load() = {
     UUIDToUsername.clear()
     xml.load()
-    (xml.xml \ "Mapping").foreach(node => addMapping(node \@ "uuid", node \@ "username"))
+    (xml.xml \ "Mapping").foreach(node => try addMapping(UUID.fromString(node \@ "uuid"), node \@ "username") catch {case _: Throwable =>})
   }
 
 }

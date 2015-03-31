@@ -1,6 +1,7 @@
 package com.itszuvalex.femtocraft.network.messages
 
 import java.io.{ByteArrayInputStream, IOException}
+import java.util.UUID
 
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.managers.research.PlayerResearch
@@ -15,7 +16,7 @@ import org.apache.logging.log4j.Level
  */
 class MessageResearchPlayer() extends IMessage with IMessageHandler[MessageResearchPlayer, IMessage] {
   private var researchData: NBTTagCompound = null
-  private var playerUUID  : String         = null
+  private var playerUUID  : UUID         = null
 
   def this(rp: PlayerResearch) {
     this()
@@ -28,7 +29,7 @@ class MessageResearchPlayer() extends IMessage with IMessageHandler[MessageResea
     val nlength = buf.readInt
     val name = new Array[Byte](nlength)
     buf.readBytes(name)
-    playerUUID = new String(name)
+    playerUUID = UUID.fromString(new String(name))
     val dlength = buf.readInt
     val data = new Array[Byte](dlength)
     buf.readBytes(data)
@@ -54,14 +55,14 @@ class MessageResearchPlayer() extends IMessage with IMessageHandler[MessageResea
         Femtocraft.log(Level.ERROR, "Error compressing " + " research data.  No data will be sent")
         return
     }
-    buf.writeInt(playerUUID.getBytes.length)
-    buf.writeBytes(playerUUID.getBytes)
+    buf.writeInt(playerUUID.toString.getBytes.length)
+    buf.writeBytes(playerUUID.toString.getBytes)
     buf.writeInt(rdata.length)
     buf.writeBytes(rdata)
   }
 
   def onMessage(message: MessageResearchPlayer, ctx: MessageContext): IMessage = {
-    if (message.playerUUID.equalsIgnoreCase(Minecraft.getMinecraft.thePlayer.getCommandSenderName)) {
+    if (message.playerUUID.equals(Minecraft.getMinecraft.thePlayer.getUniqueID)) {
       val rp = new PlayerResearch(message.playerUUID)
       rp.loadFromNBT(message.researchData)
       Femtocraft.researchManager.syncLocal(rp)

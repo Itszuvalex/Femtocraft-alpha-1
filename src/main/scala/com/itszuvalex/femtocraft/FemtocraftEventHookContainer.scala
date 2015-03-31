@@ -51,6 +51,7 @@ class FemtocraftEventHookContainer {
   @SubscribeEvent def save(event: WorldEvent.Save) {
     if (event.world.isRemote) return
     Femtocraft.assistantManager.save(event.world)
+    Femtocraft.researchManager.onWorldSave(event.world)
   }
 
   @SideOnly(value = Side.CLIENT)
@@ -105,7 +106,7 @@ class FemtocraftEventHookContainer {
                                                      .componentTooltipsAreAdvanced || (ComponentRegistry
                                                                                        .componentTooltipsAreAdvanced && event
                                                                                                                         .showAdvancedItemTooltips))) {
-      val uuid = Minecraft.getMinecraft.thePlayer.getUniqueID.toString
+      val uuid = Minecraft.getMinecraft.thePlayer.getUniqueID
       Femtocraft.recipeManager.assemblyRecipes.getDecompositionCounts(event.itemStack) match {
         case (0, 0, 0, 0) =>
         case (molecules, atoms, particles, mass) =>

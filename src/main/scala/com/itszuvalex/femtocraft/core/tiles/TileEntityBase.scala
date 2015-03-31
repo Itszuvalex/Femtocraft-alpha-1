@@ -20,6 +20,8 @@
  */
 package com.itszuvalex.femtocraft.core.tiles
 
+import java.util.UUID
+
 import com.itszuvalex.femtocraft.Femtocraft
 import com.itszuvalex.femtocraft.api.core.Saveable
 import com.itszuvalex.femtocraft.api.utils.{FemtocraftDataUtils, FemtocraftUtils}
@@ -94,12 +96,12 @@ class TileEntityBase extends TileEntity with DescriptionPacket {
   def getGuiID = -1
 
   def canPlayerUse(player: EntityPlayer): Boolean = {
-    player != null && (getOwnerUUID == null || (getOwnerUUID == player.getUniqueID.toString) || Femtocraft.assistantManager.isPlayerAssistant(getOwnerUUID, player.getUniqueID.toString) || (MinecraftServer.getServer != null && MinecraftServer.getServer.getConfigurationManager.func_152596_g(player.getGameProfile)) || player.capabilities.isCreativeMode)
+    player != null && (getOwnerUUID == null || (getOwnerUUID == player.getUniqueID) || Femtocraft.assistantManager.isPlayerAssistant(getOwnerUUID, player.getUniqueID) || (MinecraftServer.getServer != null && MinecraftServer.getServer.getConfigurationManager.func_152596_g(player.getGameProfile)) || player.capabilities.isCreativeMode)
   }
 
-  def getOwnerUUID = owner
+  def getOwnerUUID = try UUID.fromString(owner) catch {case _:Throwable => Femtocraft.uuidManager.getUUID(owner)}
 
-  def getOwner = Femtocraft.uuidManager.getUsername(owner)
+  def getOwner = Femtocraft.uuidManager.getUsername(getOwnerUUID)
 
   def setOwnerUUID(newOwner: String) = owner = newOwner
 

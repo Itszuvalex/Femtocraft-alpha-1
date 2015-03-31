@@ -26,18 +26,20 @@ import com.itszuvalex.femtocraft.api.core.Saveable;
 import com.itszuvalex.femtocraft.api.utils.FemtocraftDataUtils;
 import net.minecraft.nbt.NBTTagCompound;
 
+import java.util.UUID;
+
 /**
  * Created by Christopher Harris (Itszuvalex) on 8/10/14.
  */
 public class AssistantPermissions implements ISaveable, Comparable<AssistantPermissions> {
     @Saveable
-    public String assistant;
+    public UUID assistant;
 
     public AssistantPermissions() {
 
     }
 
-    public AssistantPermissions(String assistantName) {
+    public AssistantPermissions(UUID assistantName) {
         assistant = assistantName;
     }
 
