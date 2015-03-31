@@ -34,6 +34,7 @@ import com.itszuvalex.femtocraft.configuration.{AutoGenConfig, TechnologyXMLLoad
 import com.itszuvalex.femtocraft.research.FemtocraftTechnologies
 import com.itszuvalex.femtocraft.research.gui.graph.{TechNode, TechnologyGraph}
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.world.World
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.entity.player.PlayerEvent
@@ -188,9 +189,15 @@ import scala.collection.mutable
     pr != null && pr.hasResearchedTechnology(tech)
   }
 
-  def syncLocal(pr: PlayerResearch): Unit = {
-    playerData.put(pr.getUUID, pr)
-  }
+  def syncLocal(pr: PlayerResearch): Unit =
+    playerData.get(pr.getUUID) match {
+      case None => playerData.put(pr.getUUID, pr)
+      case Some(a) =>
+        val c = new NBTTagCompound
+        pr.saveToNBT(c)
+        a.loadFromNBT(c)
+    }
+
 
   def getNode(pr: ITechnology): TechNode = getNode(pr.getName)
 
