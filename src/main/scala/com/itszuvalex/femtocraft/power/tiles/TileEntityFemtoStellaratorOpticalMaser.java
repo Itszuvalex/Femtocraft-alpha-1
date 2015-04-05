@@ -105,7 +105,7 @@ public class TileEntityFemtoStellaratorOpticalMaser extends
     public void femtocraftServerUpdate() {
         super.femtocraftServerUpdate();
         if (core == null && isValidMultiBlock()) {
-            TileEntity te = coreLocation.getTileEntity();
+            TileEntity te = coreLocation.getTileEntity().get();
             if (te instanceof IFusionReactorCore) {
                 core = (IFusionReactorCore) te;
                 addToCore();

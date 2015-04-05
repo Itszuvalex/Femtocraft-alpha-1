@@ -155,7 +155,7 @@ class PlayerResearch(private val uuid: UUID) extends IPlayerResearch with ISavea
 
   override def sync() = {
     val player = FemtocraftUtils.getServerPlayer(uuid)
-    player IfNotNull sync(player)
+    player DoIfNotNull sync(player)
   }
 
   override def sync(player: EntityPlayerMP) {

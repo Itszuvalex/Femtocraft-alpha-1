@@ -2,21 +2,31 @@ package com.itszuvalex.femtocraft.logistics
 
 import java.util
 
+import io.netty.buffer.ByteBuf
+
 /**
  * Created by Christopher on 4/5/2015.
  */
-trait INetwork[T] {
+trait INetwork[C <: INetworkComponent[T], T <: INetwork[C, T]] {
 
   def ID: Int
 
-  def getNodes: util.Collection[T]
+  def create(nodes: util.Collection[C]): T
 
-  def addNode(node: T): Unit
+  def getNodes: util.Collection[C]
 
-  def removeNode(node: T): Unit
+  def addNode(node: C): Unit
 
-  def split(pivot: T): Unit
+  def removeNode(node: C): Unit
 
-  def merge(iNetwork: INetwork[T]): Unit
+  def clear(): Unit
+
+  def refresh(): Unit
+
+  def split(pivot: C): Unit
+
+  def merge(iNetwork: INetwork[C, T]): Unit
+
+  def handlePacketData(data: ByteBuf): Unit
 
 }

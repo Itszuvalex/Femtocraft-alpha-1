@@ -74,7 +74,7 @@ public class TileEntityFemtoStellaratorHousing extends TileEntityBase
     public void femtocraftServerUpdate() {
         super.femtocraftServerUpdate();
         if (core == null && isValidMultiBlock()) {
-            TileEntity te = coreLocation.getTileEntity();
+            TileEntity te = coreLocation.getTileEntity().get();
             if (te instanceof IFusionReactorCore) {
                 core = (IFusionReactorCore) te;
                 core.addComponent(this);

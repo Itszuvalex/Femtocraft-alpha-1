@@ -5,7 +5,10 @@ package com.itszuvalex.femtocraft.api.implicits
  */
 object SugarImplicits {
 
-  implicit class AnyRefImplicits(a:AnyRef) {
-    def IfNotNull[R](f: => R) : Unit = if(a != null) f
+  implicit class AnyRefImplicits[A <: AnyRef](a: A) {
+    def DoIfNotNull[R](f: => R): Unit = if (a != null) f
+
+    def IfNotNull[U](f: (A) => U): scala.Unit = if (a != null) f(a)
   }
+
 }

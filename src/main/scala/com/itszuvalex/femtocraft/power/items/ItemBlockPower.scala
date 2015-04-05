@@ -49,6 +49,6 @@ abstract class ItemBlockPower(block: Block) extends CoreItemBlock(block) {
   override def onCreated(par1ItemStack: ItemStack, par2World: World, par3EntityPlayer: EntityPlayer) {
     super.onCreated(par1ItemStack, par2World, par3EntityPlayer)
     val wrapper = PowerStackWrapper.getWrapperForStack(par1ItemStack)
-    wrapper IfNotNull wrapper.copyFromPowerContainer(getDefaultContainer)
+    wrapper DoIfNotNull wrapper.copyFromPowerContainer(getDefaultContainer)
   }
 }

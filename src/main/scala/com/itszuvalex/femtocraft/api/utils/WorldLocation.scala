@@ -21,7 +21,10 @@
 package com.itszuvalex.femtocraft.api.utils
 
 import com.itszuvalex.femtocraft.api.core.ISaveable
+import com.itszuvalex.femtocraft.api.implicits.SugarImplicits._
+import net.minecraft.block.Block
 import net.minecraft.nbt.NBTTagCompound
+import net.minecraft.tileentity.TileEntity
 import net.minecraft.world.World
 import net.minecraftforge.common.DimensionManager
 
@@ -68,9 +71,15 @@ class WorldLocation(var world: World, var x: Int, var y: Int, var z: Int) extend
     world = DimensionManager.getWorld(compound.getInteger("dim"))
   }
 
-  def getTileEntity = if (world == null) null else world.getTileEntity(x, y, z)
+  def getTileEntity: Option[TileEntity] = {
+    world.IfNotNull(a => return Option(a.getTileEntity(x, y, z)))
+    None
+  }
 
-  def getBlock = if (world == null) null else world.getBlock(x, y, z)
+  def getBlock: Option[Block] = {
+    world.IfNotNull(a => return Option(a.getBlock(x, y, z)))
+    None
+  }
 
   def compareTo(o: WorldLocation): Int = {
     if (x < o.x) return -1
